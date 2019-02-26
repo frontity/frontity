@@ -1,0 +1,22 @@
+{
+  "name": "@frontity/core",
+  "version": "0.1.0",
+  "description": "main package with server & webpack & others",
+  "keywords": [
+    "frontity"
+  ],
+  "author": "David <darensr@gmail.com>",
+  "homepage": "https://github.com/frontity/frontity",
+  "license": "Apache-2.0",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontity/frontity.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  }
+}

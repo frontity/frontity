@@ -1,0 +1,26 @@
+{
+  "name": "frontity",
+  "version": "0.1.0",
+  "description": "cli and entry point to other packages",
+  "keywords": [
+    "frontity"
+  ],
+  "author": "David <darensr@gmail.com>",
+  "homepage": "https://github.com/frontity/frontity",
+  "license": "Apache-2.0",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontity/frontity.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
+  "dependencies": {
+    "@frontity/core": "^0.1.0"
+  }
+}
