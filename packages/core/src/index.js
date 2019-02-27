@@ -1,3 +1,3 @@
 module.exports = {
-  func: str => `>> ${str}`,
+  func: str => `» ${str}`,
 };
