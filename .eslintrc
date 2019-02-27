@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:jest/recommended",
+    "plugin:node/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["jest", "node", "prettier"],
+  "globals": { "window": true },
+  "rules": {
+    "import/no-extraneous-dependencies": 0,
+    "react/jsx-filename-extension": 0,
+    "no-param-reassign": 0
+  },
+  "env": { "jest/globals": true }
+}
