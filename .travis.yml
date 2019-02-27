@@ -1,0 +1,17 @@
+language: node_js
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
+install:
+  - npm i -g npm@6
+  - npm ci
+node_js:
+  - lts/*
+after_success:
+  - npm run release
+script:
+  - npm run test:ci
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
