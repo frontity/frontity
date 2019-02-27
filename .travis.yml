@@ -8,10 +8,11 @@ install:
   - npm ci
 node_js:
   - lts/*
-after_success:
-  - npm run release
 script:
   - npm run test:ci
+after_success:
+  - git checkout ${TRAVIS_BRANCH}
+  - npm run release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
