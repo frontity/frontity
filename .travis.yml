@@ -12,7 +12,7 @@ script:
   - npm run test:ci
 after_success:
   - git checkout ${TRAVIS_BRANCH}
-  - npm run release
+  - npm run release -- --yes
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
