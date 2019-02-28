@@ -1,16 +1,19 @@
 {
-  "extends": [
-    "airbnb-base",
-    "plugin:jest/recommended",
-    "plugin:node/recommended",
-    "plugin:prettier/recommended"
+  "plugins": [
+    "eslint-plugin-import",
+    "eslint-plugin-react",
+    "eslint-plugin-jsx-a11y",
+    "eslint-plugin-jest"
   ],
-  "plugins": ["jest", "node", "prettier"],
-  "globals": { "window": true },
-  "rules": {
-    "import/no-extraneous-dependencies": 0,
-    "react/jsx-filename-extension": 0,
-    "no-param-reassign": 0
-  },
-  "env": { "jest/globals": true }
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:jest/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  }
 }
