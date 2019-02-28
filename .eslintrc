@@ -1,17 +1,23 @@
 {
+  "parser": "@typescript-eslint/parser",
   "plugins": [
     "eslint-plugin-import",
     "eslint-plugin-react",
     "eslint-plugin-jsx-a11y",
-    "eslint-plugin-jest"
+    "eslint-plugin-jest",
+    "@typescript-eslint/eslint-plugin"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:import/recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
+  "rules": {
+    "@typescript-eslint/indent": "off"
+  },
   "env": {
     "browser": true,
     "node": true
