@@ -27,13 +27,13 @@ const targets = {
 export default (mode: Mode): BabelConfigs => {
   const getConfig = (env: Env): TransformOptions => {
     const presets = [
-      "typescript",
-      ["env", { useBuiltIns: "usage", targets: targets[env] }],
-      "react"
+      "@babel/preset-typescript",
+      ["@babel/preset-env", { useBuiltIns: "usage", targets: targets[env] }],
+      "@babel/preset-react"
     ];
     const plugins = [
-      "transform-object-rest-spread",
-      "transform-class-properties"
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties"
     ];
     if (mode === "development" && env === "module")
       plugins.push("react-hot-loader/babel");

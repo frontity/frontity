@@ -4,13 +4,13 @@ exports[`Babel returns for development 1`] = `
 Object {
   "es5": Object {
     "plugins": Array [
-      "transform-object-rest-spread",
-      "transform-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
     ],
     "presets": Array [
-      "typescript",
+      "@babel/preset-typescript",
       Array [
-        "env",
+        "@babel/preset-env",
         Object {
           "targets": Object {
             "browsers": Array [
@@ -33,19 +33,19 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "react",
+      "@babel/preset-react",
     ],
   },
   "module": Object {
     "plugins": Array [
-      "transform-object-rest-spread",
-      "transform-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
       "react-hot-loader/babel",
     ],
     "presets": Array [
-      "typescript",
+      "@babel/preset-typescript",
       Array [
-        "env",
+        "@babel/preset-env",
         Object {
           "targets": Object {
             "esmodules": true,
@@ -53,18 +53,18 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "react",
+      "@babel/preset-react",
     ],
   },
   "node": Object {
     "plugins": Array [
-      "transform-object-rest-spread",
-      "transform-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
     ],
     "presets": Array [
-      "typescript",
+      "@babel/preset-typescript",
       Array [
-        "env",
+        "@babel/preset-env",
         Object {
           "targets": Object {
             "node": "8.10",
@@ -72,7 +72,7 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "react",
+      "@babel/preset-react",
     ],
   },
 }
@@ -82,13 +82,13 @@ exports[`Babel returns for production 1`] = `
 Object {
   "es5": Object {
     "plugins": Array [
-      "transform-object-rest-spread",
-      "transform-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
     ],
     "presets": Array [
-      "typescript",
+      "@babel/preset-typescript",
       Array [
-        "env",
+        "@babel/preset-env",
         Object {
           "targets": Object {
             "browsers": Array [
@@ -111,18 +111,18 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "react",
+      "@babel/preset-react",
     ],
   },
   "module": Object {
     "plugins": Array [
-      "transform-object-rest-spread",
-      "transform-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
     ],
     "presets": Array [
-      "typescript",
+      "@babel/preset-typescript",
       Array [
-        "env",
+        "@babel/preset-env",
         Object {
           "targets": Object {
             "esmodules": true,
@@ -130,18 +130,18 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "react",
+      "@babel/preset-react",
     ],
   },
   "node": Object {
     "plugins": Array [
-      "transform-object-rest-spread",
-      "transform-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
     ],
     "presets": Array [
-      "typescript",
+      "@babel/preset-typescript",
       Array [
-        "env",
+        "@babel/preset-env",
         Object {
           "targets": Object {
             "node": "8.10",
@@ -149,7 +149,7 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "react",
+      "@babel/preset-react",
     ],
   },
 }
