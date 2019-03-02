@@ -20,7 +20,5 @@
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
   },
-  "dependencies": {
-    "@frontity/core": "^0.1.2"
-  }
+  "dependencies": {}
 }
