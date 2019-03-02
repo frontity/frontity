@@ -14,9 +14,17 @@
     "url": "git+https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "dev": "tsc src/scripts/dev.ts --outDir dist && node dist/dev.js"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "typescript": "^3.3.3333"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^5.0.5",
+    "@types/node": "^11.10.4"
   }
 }
