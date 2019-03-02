@@ -2,7 +2,7 @@
   "name": "frontity-monorepo",
   "private": true,
   "scripts": {
-    "test": "jest  --watch --silent",
+    "test": "jest  --watch",
     "test:ci": "jest --silent --testPathPattern=core --no-cache",
     "test:debug": "node --inspect node_modules/.bin/jest --watch",
     "cz": "git-cz",
@@ -11,6 +11,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "@types/jest": "^24.0.9",
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
     "commitizen": "^3.0.7",
@@ -24,6 +25,8 @@
     "jest": "^24.1.0",
     "lerna": "^3.13.0",
     "lint-staged": "^8.1.4",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3333"
   }
 }
