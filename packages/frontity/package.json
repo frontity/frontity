@@ -13,10 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/frontity/frontity.git"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "start": "node src/index.js"
-  },
+  "scripts": {},
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
   },
