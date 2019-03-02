@@ -14,12 +14,14 @@
     "url": "git+https://github.com/frontity/frontity.git"
   },
   "scripts": {
+    "test": "cd ../.. && npm test",
     "dev": "tsc src/scripts/dev.ts --outDir dist && node dist/dev.js"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
+    "@babel/preset-typescript": "^7.3.3",
     "fs-extra": "^7.0.1",
     "typescript": "^3.3.3333"
   },
