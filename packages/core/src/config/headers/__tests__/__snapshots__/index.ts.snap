@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Babel returns for development 1`] = `
+Object {
+  "dynamic": Object {
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Origin, X-Requested-With, Content-Type": "Accept",
+  },
+  "static": Object {
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Origin, X-Requested-With, Content-Type": "Accept",
+  },
+}
+`;
+
+exports[`Babel returns for production 1`] = `
+Object {
+  "dynamic": Object {
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "public, max-age=0, s-maxage=120, stale-while-revalidate=31536000, stale-if-error=31536000",
+    "Origin, X-Requested-With, Content-Type": "Accept",
+  },
+  "static": Object {
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "public, max-age=31536000, s-maxage=31536000, immutable",
+    "Origin, X-Requested-With, Content-Type": "Accept",
+  },
+}
+`;
