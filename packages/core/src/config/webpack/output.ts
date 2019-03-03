@@ -1,12 +1,12 @@
 import { resolve } from "path";
 import { Configuration } from "webpack";
-import { Env, Mode } from "../types";
+import { Target, Mode } from "../types";
 
 export default ({
-  env,
+  target,
   mode
 }: {
-  env: Env;
+  target: Target;
   mode: Mode;
 }): Configuration["output"] => {
   const filenames = {
@@ -39,10 +39,10 @@ export default ({
     }
   };
   const config: Configuration["output"] = {
-    filename: filenames[env][mode],
-    path: resolve(__dirname, `../../build/${paths[env]}`)
+    filename: filenames[target][mode],
+    path: resolve(__dirname, `../../build/${paths[target]}`)
   };
-  if (env === "node") config.libraryTarget = "commonjs2";
-  if (env !== "node") config.chunkFilename = chunkFilenames[env][mode];
+  if (target === "node") config.libraryTarget = "commonjs2";
+  if (target !== "node") config.chunkFilename = chunkFilenames[target][mode];
   return config;
 };

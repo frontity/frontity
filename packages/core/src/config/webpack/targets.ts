@@ -7,11 +7,6 @@ export default ({
 }: {
   target: Target;
   mode: Mode;
-}): Configuration["name"] => {
-  const config = {
-    module: "client",
-    es5: "es5",
-    node: "server"
-  };
-  return config[target];
+}): Configuration["target"] => {
+  return target === "node" ? "node" : "web";
 };

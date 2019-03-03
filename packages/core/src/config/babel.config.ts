@@ -1,5 +1,5 @@
 import { TransformOptions } from "babel-core";
-import { Env, Mode, BabelConfigs } from "./types";
+import { Target, Mode, BabelConfigs } from "./types";
 
 const targets = {
   module: { esmodules: true },
@@ -25,17 +25,17 @@ const targets = {
 };
 
 export default (mode: Mode): BabelConfigs => {
-  const getConfig = (env: Env): TransformOptions => {
+  const getConfig = (target: Target): TransformOptions => {
     const presets = [
       "@babel/preset-typescript",
-      ["@babel/preset-env", { useBuiltIns: "usage", targets: targets[env] }],
+      ["@babel/preset-env", { useBuiltIns: "usage", targets: targets[target] }],
       "@babel/preset-react"
     ];
     const plugins = [
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties"
     ];
-    if (mode === "development" && env === "module")
+    if (mode === "development" && target === "module")
       plugins.push("react-hot-loader/babel");
     return {
       presets,

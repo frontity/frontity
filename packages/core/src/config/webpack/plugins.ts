@@ -1,17 +1,19 @@
-import { HotModuleReplacementPlugin, Configuration } from "webpack";
+import { HotModuleReplacementPlugin, Configuration, optimize } from "webpack";
 import LoadablePlugin from "@loadable/webpack-plugin";
-import { Env, Mode } from "../types";
+import { Target, Mode } from "../types";
 
 export default ({
-  env,
+  target,
   mode
 }: {
-  env: Env;
+  target: Target;
   mode: Mode;
 }): Configuration["plugins"] => {
   const config: Configuration["plugins"] = [];
-  if (env !== "es5") config.push(new LoadablePlugin());
-  if (env === "module" && mode === "development")
+  if (target !== "es5") config.push(new LoadablePlugin());
+  if (target === "module" && mode === "development")
     config.push(new HotModuleReplacementPlugin());
+  if (target === "node")
+    config.push(new optimize.LimitChunkCountPlugin({ maxChunks: 1 }));
   return config;
 };

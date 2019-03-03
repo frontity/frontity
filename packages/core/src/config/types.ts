@@ -1,8 +1,8 @@
-import { TransformOptions } from 'babel-core';
-import { Configuration } from 'webpack';
+import { TransformOptions } from "babel-core";
+import { Configuration } from "webpack";
 
-export type Mode = 'development' | 'production';
-export type Env = 'module' | 'es5' | 'node';
+export type Mode = "development" | "production";
+export type Target = "module" | "es5" | "node";
 
 export interface BabelConfigs {
   module: TransformOptions;

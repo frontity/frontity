@@ -1,14 +1,14 @@
 import { Configuration } from "webpack";
-import { Env, Mode } from "../types";
+import { Target, Mode } from "../types";
 
 export default ({
-  env,
+  target,
   mode
 }: {
-  env: Env;
+  target: Target;
   mode: Mode;
 }): Configuration["devtool"] => {
-  if (mode === "development" && (env === "module" || env === "node"))
+  if (mode === "development" && (target === "module" || target === "node"))
     return "cheap-module-eval-source-map";
   return false;
 };
