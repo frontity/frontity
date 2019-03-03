@@ -13,11 +13,14 @@ export default ({
   const config: Configuration["module"] = {
     rules: [
       {
+        // Support for js, jsx, ts and tsx files.
         test: /\.(j|t)sx?$/,
         use: {
           loader: "babel-loader",
           options: {
+            // Don't use the babelrc file of the root.
             babelrc: false,
+            // Instead, use the babel options directly from our babel object.
             ...babel[target]
           }
         }

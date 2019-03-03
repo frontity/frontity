@@ -2,7 +2,10 @@ import { TransformOptions } from "babel-core";
 import { Target, Mode, BabelConfigs } from "../../types";
 
 const targets = {
+  // Browsers with <script type="module"></script> support.
   module: { esmodules: true },
+  // Browsers with Proxy support, which is needed by Overmind.
+  // For older browsers (ie8-11) we support AMP fallback.
   es5: {
     browsers: [
       "and_chr >= 67",
@@ -21,20 +24,25 @@ const targets = {
       "samsung >= 5"
     ]
   },
+  // Node version used by AWS Lambda.
   node: { node: "8.10" }
 };
 
 export default ({ mode }: { mode: Mode }): BabelConfigs => {
   const getConfig = (target: Target): TransformOptions => {
     const presets = [
+      // Instead of using a TS transpiler, this removes the typescript code.
       "@babel/preset-typescript",
       ["@babel/preset-env", { useBuiltIns: "usage", targets: targets[target] }],
       "@babel/preset-react"
     ];
     const plugins = [
+      // Support for the rest spread: { ...obj }
       "@babel/plugin-proposal-object-rest-spread",
+      // Support for the class props: class MyClass { myProp = 'hi there' }
       "@babel/plugin-proposal-class-properties"
     ];
+    // This is needed by HMR.
     if (mode === "development" && target === "module")
       plugins.push("react-hot-loader/babel");
     return {

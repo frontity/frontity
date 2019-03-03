@@ -9,7 +9,8 @@ export default ({
   mode: Mode;
 }): Configuration["resolve"] => {
   const config: Configuration["resolve"] = {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"]
+    // Automatically resolve extensions for js, jsx, ts and tsx files.
+    extensions: [".js", ".jsx", ".ts", ".tsx"]
   };
   return config;
 };

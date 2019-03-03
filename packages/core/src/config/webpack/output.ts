@@ -9,6 +9,8 @@ export default ({
   target: Target;
   mode: Mode;
 }): Configuration["output"] => {
+  // Use hashes only in production and distinguish between es5 and module
+  // files using their filenames.
   const filenames = {
     module: {
       development: "main.module.js",
@@ -28,6 +30,7 @@ export default ({
     es5: "static",
     node: "dynamic"
   };
+  // Same with chunks, only hashes in production and es5/module in the filename.
   const chunkFilenames = {
     module: {
       development: "[name].module.js",
@@ -42,6 +45,7 @@ export default ({
     filename: filenames[target][mode],
     path: resolve(__dirname, `../../build/${paths[target]}`)
   };
+  // Node still needs CJS.
   if (target === "node") config.libraryTarget = "commonjs2";
   if (target !== "node") config.chunkFilename = chunkFilenames[target][mode];
   return config;
