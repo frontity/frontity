@@ -1,29 +1,18 @@
-import { TransformOptions } from 'babel-core';
-import { Configuration } from 'webpack';
-import { Mode } from './types';
+import { Mode, FrontityConfig } from "./types";
+import getHeaders from "./headers";
+import getBabel from "./babel";
+import getWebpack from "./webpack";
+import getRobots from "./robots";
 
-export interface Headers {
-  [key: string]: string;
-}
-
-export type Robots = string;
-
-export interface FrontityConfig {
-  headers: {
-    static: Headers;
-    dynamic: Headers;
+export default ({ mode }: { mode: Mode }): FrontityConfig => {
+  const headers = getHeaders({ mode });
+  const babel = getBabel({ mode });
+  const webpack = getWebpack({ mode, babel });
+  const robots = getRobots({ mode });
+  return {
+    headers,
+    babel,
+    webpack,
+    robots
   };
-  robots: Robots;
-  babel: {
-    module: TransformOptions;
-    es5: TransformOptions;
-    node: TransformOptions;
-  };
-  webpack: {
-    module: Configuration;
-    es5: Configuration;
-    node: Configuration;
-  };
-}
-
-export default ({ mode }: { mode: Mode }) => {};
+};
