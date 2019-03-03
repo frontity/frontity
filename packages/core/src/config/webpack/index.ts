@@ -1,6 +1,4 @@
-import path from "path";
-import webpack, { Configuration } from "webpack";
-import WriteFilePlugin from "write-file-webpack-plugin";
+import { Configuration } from "webpack";
 import { Target, Mode, WebpackConfigs } from "../types";
 import name from "./name";
 import targets from "./targets";

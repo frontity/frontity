@@ -10,7 +10,7 @@ export default ({
   mode: Mode;
 }): Configuration["entry"] => {
   const name: "server" | "client" = target === "node" ? "server" : "client";
-  const config: Configuration["entry"] = [resolve(__dirname, `../${name}`)];
+  const config: Configuration["entry"] = [resolve(__dirname, `../../${name}`)];
   if (target === "module" && mode === "development") {
     config.unshift("webpack-hot-middleware/client");
   }

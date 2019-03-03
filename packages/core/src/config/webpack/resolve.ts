@@ -9,7 +9,7 @@ export default ({
   mode: Mode;
 }): Configuration["resolve"] => {
   const config: Configuration["resolve"] = {
-    extensions: [".js", ".jsx", ".ts", "tsx", ".json"]
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"]
   };
   return config;
 };
