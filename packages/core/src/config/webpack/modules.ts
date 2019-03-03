@@ -1,12 +1,14 @@
 import { Configuration } from "webpack";
-import { Target, Mode } from "../types";
+import { Target, Mode, BabelConfigs } from "../types";
 
 export default ({
   target,
-  mode
+  mode,
+  babel
 }: {
   target: Target;
   mode: Mode;
+  babel: BabelConfigs;
 }): Configuration["module"] => {
   const config: Configuration["module"] = {
     rules: [
@@ -15,7 +17,8 @@ export default ({
         use: {
           loader: "babel-loader",
           options: {
-            babelrc: false
+            babelrc: false,
+            ...babel[target]
           }
         }
       }

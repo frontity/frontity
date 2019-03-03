@@ -24,7 +24,7 @@ const targets = {
   node: { node: "8.10" }
 };
 
-export default (mode: Mode): BabelConfigs => {
+export default ({ mode }: { mode: Mode }): BabelConfigs => {
   const getConfig = (target: Target): TransformOptions => {
     const presets = [
       "@babel/preset-typescript",

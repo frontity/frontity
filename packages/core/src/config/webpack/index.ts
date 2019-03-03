@@ -1,5 +1,5 @@
 import { Configuration } from "webpack";
-import { Target, Mode, WebpackConfigs } from "../types";
+import { Target, Mode, WebpackConfigs, BabelConfigs } from "../types";
 import name from "./name";
 import targets from "./targets";
 import devtool from "./devtool";
@@ -9,7 +9,13 @@ import modules from "./modules";
 import resolve from "./resolve";
 import plugins from "./plugins";
 
-export default (mode: Mode): WebpackConfigs => {
+export default ({
+  mode,
+  babel
+}: {
+  mode: Mode;
+  babel: BabelConfigs;
+}): WebpackConfigs => {
   const getConfig = (target: Target): Configuration => {
     const config: Configuration = {
       name: name({ target, mode }),
@@ -17,7 +23,7 @@ export default (mode: Mode): WebpackConfigs => {
       devtool: devtool({ target, mode }),
       entry: entry({ target, mode }),
       output: output({ target, mode }),
-      module: modules({ target, mode }),
+      module: modules({ target, mode, babel }),
       resolve: resolve({ target, mode }),
       plugins: plugins({ target, mode })
     };
