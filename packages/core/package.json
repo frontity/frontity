@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "cd ../.. && npm test",
-    "dev": "tsc src/scripts/dev.ts --outDir dist && node dist/dev.js"
+    "dev": "tsc src/scripts/dev.ts --outDir dist && node dist/scripts/dev.js"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
