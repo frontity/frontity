@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { Configuration } from "webpack";
-import { Target, Mode } from "../types";
+import { Target, Mode } from "../../types";
 
 export default ({
   target,

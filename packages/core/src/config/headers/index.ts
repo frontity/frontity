@@ -1,4 +1,4 @@
-import { Mode, HeaderConfig } from "../types";
+import { Mode, HeaderConfig } from "../../types";
 
 export default ({ mode }: { mode: Mode }): HeaderConfig => {
   const commonHeaders = {

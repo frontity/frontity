@@ -1,6 +1,6 @@
 import { HotModuleReplacementPlugin, Configuration, optimize } from "webpack";
 import LoadablePlugin from "@loadable/webpack-plugin";
-import { Target, Mode } from "../types";
+import { Target, Mode } from "../../types";
 
 export default ({
   target,

@@ -1,5 +1,5 @@
 import { Configuration } from "webpack";
-import { Target, Mode, WebpackConfigs, BabelConfigs } from "../types";
+import { Target, Mode, WebpackConfigs, BabelConfigs } from "../../types";
 import name from "./name";
 import targets from "./targets";
 import devtool from "./devtool";

@@ -1,4 +1,4 @@
-import { Mode, FrontityConfig } from "./types";
+import { Mode, FrontityConfig } from "../types";
 import getHeaders from "./headers";
 import getBabel from "./babel";
 import getWebpack from "./webpack";

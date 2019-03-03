@@ -1,5 +1,5 @@
 import { Configuration } from "webpack";
-import { Target, Mode, BabelConfigs } from "../types";
+import { Target, Mode, BabelConfigs } from "../../types";
 
 export default ({
   target,
