@@ -31,7 +31,33 @@ Object {
       "filename": "main.es5.js",
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
-    "plugins": Array [],
+    "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "info",
+            "warn",
+            "error",
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "info",
+          "openAnalyzer": false,
+          "reportFilename": "../../build/analyze/es5-development.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
+    ],
     "resolve": Object {
       "extensions": Array [
         ".js",
@@ -73,6 +99,31 @@ Object {
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "info",
+            "warn",
+            "error",
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "info",
+          "openAnalyzer": false,
+          "reportFilename": "../../build/analyze/module-development.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -131,6 +182,31 @@ Object {
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
     },
     "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "info",
+            "warn",
+            "error",
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "info",
+          "openAnalyzer": false,
+          "reportFilename": "../../build/analyze/node-development.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -192,7 +268,33 @@ Object {
       "filename": "main.es5.[chunkhash].js",
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
-    "plugins": Array [],
+    "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "info",
+            "warn",
+            "error",
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "info",
+          "openAnalyzer": false,
+          "reportFilename": "../../build/analyze/es5-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
+    ],
     "resolve": Object {
       "extensions": Array [
         ".js",
@@ -233,6 +335,31 @@ Object {
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "info",
+            "warn",
+            "error",
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "info",
+          "openAnalyzer": false,
+          "reportFilename": "../../build/analyze/module-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -285,6 +412,31 @@ Object {
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
     },
     "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "info",
+            "warn",
+            "error",
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "info",
+          "openAnalyzer": false,
+          "reportFilename": "../../build/analyze/node-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],

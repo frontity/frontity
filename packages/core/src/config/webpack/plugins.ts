@@ -1,5 +1,6 @@
 import { HotModuleReplacementPlugin, Configuration, optimize } from "webpack";
 import LoadablePlugin from "@loadable/webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Target, Mode } from "../../types";
 
 export default ({
@@ -9,7 +10,13 @@ export default ({
   target: Target;
   mode: Mode;
 }): Configuration["plugins"] => {
-  const config: Configuration["plugins"] = [];
+  const config: Configuration["plugins"] = [
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      reportFilename: `../../build/analyze/${target}-${mode}.html`,
+      openAnalyzer: false
+    })
+  ];
   // Needed for code splitting.
   if (target !== "es5") config.push(new LoadablePlugin());
   // Support HMR in development.
