@@ -29,7 +29,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].es5.js",
       "filename": "main.es5.js",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/src/build/static",
+      "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -70,7 +70,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].module.js",
       "filename": "main.module.js",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/src/build/static",
+      "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -128,7 +128,7 @@ Object {
     "output": Object {
       "filename": "main.js",
       "libraryTarget": "commonjs2",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/src/build/dynamic",
+      "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -190,7 +190,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
       "filename": "main.es5.[chunkhash].js",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/src/build/static",
+      "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [],
     "resolve": Object {
@@ -230,7 +230,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].module.[chunkhash].js",
       "filename": "main.module.[chunkhash].js",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/src/build/static",
+      "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -282,7 +282,7 @@ Object {
     "output": Object {
       "filename": "main.js",
       "libraryTarget": "commonjs2",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/src/build/dynamic",
+      "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
     },
     "plugins": Array [
       LoadablePlugin {
