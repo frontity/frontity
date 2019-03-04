@@ -18,7 +18,7 @@ const createServer = async ({
     const options: https.ServerOptions = { key, cert };
     return https.createServer(options, app);
   }
-  return http.createServer({}, app);
+  return http.createServer(app);
 };
 
 // Add headers from frontity.config.js.
