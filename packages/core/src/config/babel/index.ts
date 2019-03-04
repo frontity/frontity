@@ -42,9 +42,6 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       // Support for the class props: class MyClass { myProp = 'hi there' }
       "@babel/plugin-proposal-class-properties"
     ];
-    // This is needed by HMR.
-    if (mode === "development" && target !== "node")
-      plugins.push("react-hot-loader/babel");
     return {
       presets,
       plugins

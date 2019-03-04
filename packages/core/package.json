@@ -36,7 +36,6 @@
     "fs-extra": "^7.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-hot-loader": "^4.5.3",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
