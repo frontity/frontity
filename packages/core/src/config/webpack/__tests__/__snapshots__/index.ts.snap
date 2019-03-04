@@ -6,7 +6,7 @@ Object {
     "devtool": "cheap-module-eval-source-map",
     "entry": Array [
       "webpack-hot-middleware/client",
-      "/Users/luisherranz/Code/frontity/packages/core/src/client",
+      "../../../src/client",
     ],
     "mode": "development",
     "module": Object {
@@ -30,7 +30,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].es5.js",
       "filename": "main.es5.js",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
+      "path": "../../../build/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -90,7 +90,7 @@ Object {
     "devtool": "cheap-module-eval-source-map",
     "entry": Array [
       "webpack-hot-middleware/client",
-      "/Users/luisherranz/Code/frontity/packages/core/src/client",
+      "../../../src/client",
     ],
     "mode": "development",
     "module": Object {
@@ -114,7 +114,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].module.js",
       "filename": "main.module.js",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
+      "path": "../../../build/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -173,7 +173,7 @@ Object {
   "node": Object {
     "devtool": "cheap-module-eval-source-map",
     "entry": Array [
-      "/Users/luisherranz/Code/frontity/packages/core/src/server",
+      "../../../src/server",
     ],
     "mode": "development",
     "module": Object {
@@ -197,7 +197,7 @@ Object {
     "output": Object {
       "filename": "main.node.js",
       "libraryTarget": "commonjs2",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
+      "path": "../../../build/dynamic",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -260,7 +260,7 @@ Object {
   "es5": Object {
     "devtool": false,
     "entry": Array [
-      "/Users/luisherranz/Code/frontity/packages/core/src/client",
+      "../../../src/client",
     ],
     "mode": "production",
     "module": Object {
@@ -284,7 +284,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
       "filename": "main.es5.[chunkhash].js",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
+      "path": "../../../build/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -337,7 +337,7 @@ Object {
   "module": Object {
     "devtool": false,
     "entry": Array [
-      "/Users/luisherranz/Code/frontity/packages/core/src/client",
+      "../../../src/client",
     ],
     "mode": "production",
     "module": Object {
@@ -361,7 +361,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].module.[chunkhash].js",
       "filename": "main.module.[chunkhash].js",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
+      "path": "../../../build/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -414,7 +414,7 @@ Object {
   "node": Object {
     "devtool": false,
     "entry": Array [
-      "/Users/luisherranz/Code/frontity/packages/core/src/server",
+      "../../../src/server",
     ],
     "mode": "production",
     "module": Object {
@@ -438,7 +438,7 @@ Object {
     "output": Object {
       "filename": "main.node.js",
       "libraryTarget": "commonjs2",
-      "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
+      "path": "../../../build/dynamic",
     },
     "plugins": Array [
       LoadablePlugin {

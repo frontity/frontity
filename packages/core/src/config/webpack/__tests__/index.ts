@@ -1,4 +1,10 @@
+import * as path from 'path'
 import getWebpack from "../";
+import { existsSync } from 'fs';
+
+jest.mock('path');
+const resolve: jest.Mock<typeof path.resolve> = path.resolve as any;
+resolve.mockImplementation((_, dir) => dir);
 
 const babel = {
   development: {
