@@ -12,6 +12,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": "commonjs",
           "targets": Object {
             "browsers": Array [
               "and_chr >= 67",
@@ -46,6 +47,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": "commonjs",
           "targets": Object {
             "esmodules": true,
           },
@@ -65,6 +67,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": "commonjs",
           "targets": Object {
             "node": "8.10",
           },
@@ -89,6 +92,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": "commonjs",
           "targets": Object {
             "browsers": Array [
               "and_chr >= 67",
@@ -123,6 +127,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": "commonjs",
           "targets": Object {
             "esmodules": true,
           },
@@ -142,6 +147,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": "commonjs",
           "targets": Object {
             "node": "8.10",
           },
