@@ -21,8 +21,8 @@ export default ({
       production: "main.es5.[chunkhash].js"
     },
     node: {
-      development: "main.js",
-      production: "main.js"
+      development: "main.node.js",
+      production: "main.node.js"
     }
   };
   const paths = {

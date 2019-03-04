@@ -177,7 +177,7 @@ Object {
     },
     "name": "server",
     "output": Object {
-      "filename": "main.js",
+      "filename": "main.node.js",
       "libraryTarget": "commonjs2",
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
     },
@@ -407,7 +407,7 @@ Object {
     },
     "name": "server",
     "output": Object {
-      "filename": "main.js",
+      "filename": "main.node.js",
       "libraryTarget": "commonjs2",
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
     },
