@@ -14,8 +14,8 @@ export default ({
   const config: Configuration["entry"] = [
     resolve(__dirname, `../../../src/${name}`)
   ];
-  // This is needed for HMR but only in module when we are in development.
-  if (target === "module" && mode === "development") {
+  // This is needed for HMR in the client but only when we are in development.
+  if (target !== "node" && mode === "development") {
     config.unshift("webpack-hot-middleware/client");
   }
   return config;

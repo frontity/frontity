@@ -6,6 +6,7 @@ Object {
     "plugins": Array [
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "react-hot-loader/babel",
     ],
     "presets": Array [
       "@babel/preset-typescript",

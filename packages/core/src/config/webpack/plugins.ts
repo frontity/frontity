@@ -11,16 +11,18 @@ export default ({
   mode: Mode;
 }): Configuration["plugins"] => {
   const config: Configuration["plugins"] = [
+    // Needed for code splitting.
+    new LoadablePlugin(),
+    // Create HTML files for bundle analyzing.
     new BundleAnalyzerPlugin({
       analyzerMode: "static",
       reportFilename: `../../build/analyze/${target}-${mode}.html`,
       openAnalyzer: false
     })
   ];
-  // Needed for code splitting.
-  if (target !== "es5") config.push(new LoadablePlugin());
-  // Support HMR in development.
-  if (target === "module" && mode === "development")
+  config.push();
+  // Support HMR in development. Only needed in client.
+  if (target !== "node" && mode === "development")
     config.push(new HotModuleReplacementPlugin());
   // Avoid code splitting in node.
   if (target === "node")

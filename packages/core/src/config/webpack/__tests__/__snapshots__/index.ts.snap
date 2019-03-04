@@ -3,8 +3,9 @@
 exports[`Babel returns for development 1`] = `
 Object {
   "es5": Object {
-    "devtool": false,
+    "devtool": "cheap-module-eval-source-map",
     "entry": Array [
+      "webpack-hot-middleware/client",
       "/Users/luisherranz/Code/frontity/packages/core/src/client",
     ],
     "mode": "development",
@@ -25,13 +26,24 @@ Object {
         },
       ],
     },
-    "name": "es5",
+    "name": "client",
     "output": Object {
       "chunkFilename": "[name].es5.js",
       "filename": "main.es5.js",
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -56,6 +68,12 @@ Object {
           "statsOptions": null,
         },
         "server": null,
+      },
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": undefined,
+        "options": Object {},
+        "requestTimeout": 10000,
       },
     ],
     "resolve": Object {
@@ -99,6 +117,17 @@ Object {
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -123,17 +152,6 @@ Object {
           "statsOptions": null,
         },
         "server": null,
-      },
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
       },
       HotModuleReplacementPlugin {
         "fullBuildTimeout": 200,
@@ -182,6 +200,17 @@ Object {
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
     },
     "plugins": Array [
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -206,17 +235,6 @@ Object {
           "statsOptions": null,
         },
         "server": null,
-      },
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
       },
       LimitChunkCountPlugin {
         "options": Object {
@@ -262,13 +280,24 @@ Object {
         },
       ],
     },
-    "name": "es5",
+    "name": "client",
     "output": Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
       "filename": "main.es5.[chunkhash].js",
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -335,6 +364,17 @@ Object {
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/static",
     },
     "plugins": Array [
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -359,17 +399,6 @@ Object {
           "statsOptions": null,
         },
         "server": null,
-      },
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
       },
     ],
     "resolve": Object {
@@ -412,6 +441,17 @@ Object {
       "path": "/Users/luisherranz/Code/frontity/packages/core/build/dynamic",
     },
     "plugins": Array [
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -436,17 +476,6 @@ Object {
           "statsOptions": null,
         },
         "server": null,
-      },
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
       },
       LimitChunkCountPlugin {
         "options": Object {
