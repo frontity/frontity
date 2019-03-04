@@ -43,7 +43,7 @@ export default ({
   };
   const config: Configuration["output"] = {
     filename: filenames[target][mode],
-    path: resolve(__dirname, `../../build/${paths[target]}`)
+    path: resolve(__dirname, `../../../build/${paths[target]}`)
   };
   // Node still needs CJS.
   if (target === "node") config.libraryTarget = "commonjs2";
