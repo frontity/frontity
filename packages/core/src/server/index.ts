@@ -1,1 +1,19 @@
-console.log("hi from server");
+import Koa from "koa";
+
+const app = new Koa();
+
+app.use(async ctx => {
+  ctx.body = "Hello World";
+});
+
+export default () => app.callback();
+
+// import express from "express";
+
+// const app = express();
+
+// app.use((req, res) => {
+//   res.send("hi");
+// });
+
+// export default () => app;

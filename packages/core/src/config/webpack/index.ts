@@ -7,6 +7,7 @@ import entry from "./entry";
 import output from "./output";
 import modules from "./modules";
 import resolve from "./resolve";
+import externals from "./externals";
 import plugins from "./plugins";
 
 export default ({
@@ -26,6 +27,7 @@ export default ({
       output: output({ target, mode }),
       module: modules({ target, mode, babel }),
       resolve: resolve({ target, mode }),
+      externals: externals({ target, mode }),
       plugins: plugins({ target, mode })
     };
     return config;

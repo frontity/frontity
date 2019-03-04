@@ -8,6 +8,7 @@ Object {
       "webpack-hot-middleware/client",
       "../../../src/client",
     ],
+    "externals": Object {},
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -92,6 +93,7 @@ Object {
       "webpack-hot-middleware/client",
       "../../../src/client",
     ],
+    "externals": Object {},
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -175,6 +177,9 @@ Object {
     "entry": Array [
       "../../../src/server",
     ],
+    "externals": Object {
+      "any-promise": "promise-monofill",
+    },
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -262,6 +267,7 @@ Object {
     "entry": Array [
       "../../../src/client",
     ],
+    "externals": Object {},
     "mode": "production",
     "module": Object {
       "rules": Array [
@@ -339,6 +345,7 @@ Object {
     "entry": Array [
       "../../../src/client",
     ],
+    "externals": Object {},
     "mode": "production",
     "module": Object {
       "rules": Array [
@@ -416,6 +423,9 @@ Object {
     "entry": Array [
       "../../../src/server",
     ],
+    "externals": Object {
+      "any-promise": "promise-monofill",
+    },
     "mode": "production",
     "module": Object {
       "rules": Array [
