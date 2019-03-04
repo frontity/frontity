@@ -44,10 +44,12 @@ const dev = async ({
     es5 ? frontityConfig.webpack.es5 : frontityConfig.webpack.module,
     frontityConfig.webpack.node
   ]);
-  app.use(webpackDevMiddleware(compiler, {
-    stats: { colors: true, progress: true },
-    writeToDisk: true
-  }));
+  app.use(
+    webpackDevMiddleware(compiler, {
+      stats: { colors: true, progress: true },
+      writeToDisk: true
+    })
+  );
   app.use(webpackHotMiddleware(compiler.compilers[0]));
   app.use(webpackHotServerMiddleware(compiler));
   compiler.plugin("done", done);
