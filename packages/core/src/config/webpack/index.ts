@@ -18,6 +18,7 @@ export default ({
 }): WebpackConfigs => {
   const getConfig = (target: Target): Configuration => {
     const config: Configuration = {
+      mode,
       name: name({ target, mode }),
       target: targets({ target, mode }),
       devtool: devtool({ target, mode }),
