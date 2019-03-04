@@ -1,3 +1,4 @@
+import * as Argv from "minimist";
 import { ensureDir, emptyDir } from "fs-extra";
 import * as webpack from "webpack";
 import * as webpackDevMiddleware from "webpack-dev-middleware";
@@ -8,20 +9,23 @@ import { Mode } from "../types";
 import { createApp } from "./express";
 
 const buildDir = "build";
+const argv = Argv(process.argv.slice(2));
 
 // Disable Webpack deprecation warning:
 // (node:33456) DeprecationWarning: Tapable.plugin is deprecated. Use new API on `.hooks` instead
 // @ts-ignore
-process.noDeprecation = true;
+// process.noDeprecation = true;
 
 const dev = async ({
   isHttps,
   mode,
-  port
+  port,
+  es5
 }: {
   port: number;
   isHttps: boolean;
   mode: Mode;
+  es5: boolean;
 }): Promise<void> => {
   // Create the build directory if it doesn't exist.
   await ensureDir(buildDir);
@@ -37,7 +41,7 @@ const dev = async ({
 
   // Start a custom webpack-dev-server.
   const compiler = webpack([
-    frontityConfig.webpack.module,
+    es5 ? frontityConfig.webpack.es5 : frontityConfig.webpack.module,
     frontityConfig.webpack.node
   ]);
   const clientCompiler = compiler.compilers[0];
@@ -57,9 +61,10 @@ process.on("unhandledRejection", (error: Error) => {
 });
 
 dev({
-  mode: "development",
-  port: 3000,
-  isHttps: false
+  mode: !!argv.p || argv.production ? "production" : "development",
+  port: argv.port || 3000,
+  isHttps: !!argv.h || !!argv.https,
+  es5: !!argv.es5
 });
 
 export default dev;
