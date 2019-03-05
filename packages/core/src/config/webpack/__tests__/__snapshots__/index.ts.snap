@@ -35,17 +35,6 @@ Object {
       "publicPath": "/static",
     },
     "plugins": Array [
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
-      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -76,6 +65,17 @@ Object {
         "multiStep": undefined,
         "options": Object {},
         "requestTimeout": 10000,
+      },
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
       },
     ],
     "resolve": Object {
@@ -121,17 +121,6 @@ Object {
       "publicPath": "/static",
     },
     "plugins": Array [
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
-      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -162,6 +151,17 @@ Object {
         "multiStep": undefined,
         "options": Object {},
         "requestTimeout": 10000,
+      },
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
       },
     ],
     "resolve": Object {
@@ -207,17 +207,6 @@ Object {
       "path": "../../../build/dynamic",
     },
     "plugins": Array [
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
-      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -296,17 +285,6 @@ Object {
       "publicPath": "/static",
     },
     "plugins": Array [
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
-      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -331,6 +309,17 @@ Object {
           "statsOptions": null,
         },
         "server": null,
+      },
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
       },
     ],
     "resolve": Object {
@@ -375,17 +364,6 @@ Object {
       "publicPath": "/static",
     },
     "plugins": Array [
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
-      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
@@ -410,6 +388,17 @@ Object {
           "statsOptions": null,
         },
         "server": null,
+      },
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "loadable-stats.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
       },
     ],
     "resolve": Object {
@@ -455,17 +444,6 @@ Object {
       "path": "../../../build/dynamic",
     },
     "plugins": Array [
-      LoadablePlugin {
-        "compiler": null,
-        "handleEmit": [Function],
-        "opts": Object {
-          "filename": "loadable-stats.json",
-          "outputAsset": true,
-          "path": undefined,
-          "writeToDisk": undefined,
-        },
-        "writeAssetsFile": [Function],
-      },
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
