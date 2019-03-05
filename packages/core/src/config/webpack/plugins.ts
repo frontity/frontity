@@ -1,5 +1,5 @@
-import { HotModuleReplacementPlugin, Configuration, optimize } from "webpack";
 import LoadablePlugin from "@loadable/webpack-plugin";
+import { HotModuleReplacementPlugin, Configuration, optimize } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Target, Mode } from "../../types";
 

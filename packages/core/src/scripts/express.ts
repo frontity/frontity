@@ -1,6 +1,6 @@
 import { readFile } from "fs-extra";
-import * as express from "express";
-import { Headers, Robots, Mode } from "../types";
+import express from "express";
+import { Mode } from "../types";
 import * as http from "http";
 import * as https from "https";
 
@@ -21,47 +21,14 @@ const createServer = async ({
   return http.createServer(app);
 };
 
-// Add headers from frontity.config.js.
-export const headers = ({ headers }: { headers: Headers }) => (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-) => {
-  Object.entries(headers).forEach(([key, value]) => {
-    res.header(key, value);
-  });
-  next();
-};
-
-// Return robots from frontity.config.js.
-export const robots = ({ robots }: { robots: Robots }): express.Router => {
-  const router: express.Router = express.Router();
-  router.get("/robots.txt", function(req, res) {
-    res.type("text/plain");
-    res.send(robots);
-  });
-  return router;
-};
-
 // Serve static files and set the headers for them.
 export const staticFiles = ({
-  buildDir,
-  staticHeaders = {}
+  buildDir
 }: {
   buildDir: string;
-  staticHeaders: Headers;
 }): express.Router => {
   const router: express.Router = express.Router();
-  router.get(
-    "/static",
-    express.static(`${buildDir}/static/`, {
-      setHeaders: res => {
-        Object.entries(staticHeaders).forEach(([key, value]) => {
-          res.header(key, value);
-        });
-      }
-    })
-  );
+  router.get("/static", express.static(`${buildDir}/static/`));
   return router;
 };
 
@@ -75,7 +42,7 @@ export const createApp = async ({
   isHttps: boolean;
 }): Promise<{
   app: express.Express;
-  done: () => http.Server | https.Server;
+  done: () => false | http.Server | https.Server;
 }> => {
   // Create the server.
   const app = express();

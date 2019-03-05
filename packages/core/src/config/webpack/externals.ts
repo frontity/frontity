@@ -1,6 +1,4 @@
 import { Configuration } from "webpack";
-import LoadablePlugin from "@loadable/webpack-plugin";
-import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Target, Mode } from "../../types";
 
 export default ({

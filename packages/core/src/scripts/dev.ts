@@ -1,9 +1,9 @@
-import * as Argv from "minimist";
+import Argv from "minimist";
 import { ensureDir, emptyDir } from "fs-extra";
-import * as webpack from "webpack";
-import * as webpackDevMiddleware from "webpack-dev-middleware";
-import * as webpackHotMiddleware from "webpack-hot-middleware";
-import webpackHotServerMiddleware = require("webpack-hot-server-middleware");
+import webpack from "webpack";
+import webpackDevMiddleware from "webpack-dev-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
+import webpackHotServerMiddleware from "webpack-hot-server-middleware";
 import getConfig from "../config";
 import { Mode } from "../types";
 import { createApp } from "./express";
@@ -40,13 +40,17 @@ const dev = async ({
   const frontityConfig = getConfig({ mode });
 
   // Start a custom webpack-dev-server.
-  const compiler = webpack([
-    es5 ? frontityConfig.webpack.es5 : frontityConfig.webpack.module,
-    frontityConfig.webpack.node
-  ]);
+  const clientWebpack = es5
+    ? frontityConfig.webpack.es5
+    : frontityConfig.webpack.module;
+  const clientCompiler = webpack(clientWebpack);
+  await new Promise(resolve => clientCompiler.run(resolve));
+
+  const compiler = webpack([clientWebpack, frontityConfig.webpack.node]);
+
   app.use(
     webpackDevMiddleware(compiler, {
-      stats: { colors: true, progress: true },
+      publicPath: "/static",
       writeToDisk: true
     })
   );
@@ -55,7 +59,7 @@ const dev = async ({
   compiler.plugin("done", done);
 };
 
-process.on("unhandledRejection", (error: Error) => {
+(process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
   console.error(error);
   process.exit(1);
 });

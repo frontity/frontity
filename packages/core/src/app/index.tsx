@@ -3,7 +3,7 @@ import loadable from "@loadable/component";
 
 const Dynamic = loadable(() => import("./dynamic"));
 
-const App = () => {
+const App: React.FunctionComponent = () => {
   const [counter, setCounter] = useState(0);
   return (
     <>
