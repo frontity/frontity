@@ -1,10 +1,14 @@
-import * as path from 'path'
+import hash from "hash-it";
+import * as path from "path";
 import getWebpack from "../";
-import { existsSync } from 'fs';
+import { existsSync } from "fs";
 
-jest.mock('path');
+jest.mock("path");
 const resolve: jest.Mock<typeof path.resolve> = path.resolve as any;
 resolve.mockImplementation((_, dir) => dir);
+
+jest.mock("hash-it");
+hash.mockImplementation(() => 123);
 
 const babel = {
   development: {

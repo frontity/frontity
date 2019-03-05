@@ -18,6 +18,8 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": 123,
               "plugins": Array [],
               "presets": Array [
                 "es5-development",
@@ -104,6 +106,8 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": 123,
               "plugins": Array [],
               "presets": Array [
                 "module-development",
@@ -191,6 +195,8 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": 123,
               "plugins": Array [],
               "presets": Array [
                 "node-development",
@@ -268,6 +274,8 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": 123,
               "plugins": Array [],
               "presets": Array [
                 "es5-production",
@@ -347,6 +355,8 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": 123,
               "plugins": Array [],
               "presets": Array [
                 "module-production",
@@ -428,6 +438,8 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": 123,
               "plugins": Array [],
               "presets": Array [
                 "node-production",
