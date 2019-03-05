@@ -5,6 +5,7 @@ Object {
   "es5": Object {
     "plugins": Array [
       "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -41,6 +42,7 @@ Object {
   "module": Object {
     "plugins": Array [
       "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -62,6 +64,7 @@ Object {
   "node": Object {
     "plugins": Array [
       "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -88,6 +91,7 @@ Object {
   "es5": Object {
     "plugins": Array [
       "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -124,6 +128,7 @@ Object {
   "module": Object {
     "plugins": Array [
       "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -145,6 +150,7 @@ Object {
   "node": Object {
     "plugins": Array [
       "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],

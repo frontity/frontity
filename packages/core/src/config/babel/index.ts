@@ -51,6 +51,8 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
     const plugins = [
       // Support for dynamic imports: import("./my-file")
       "@babel/plugin-syntax-dynamic-import",
+      // Needed for loadable-component SSR.
+      "@loadable/babel-plugin",
       // Support for the rest spread: { ...obj }
       "@babel/plugin-proposal-object-rest-spread",
       // Support for the class props: class MyClass { myProp = 'hi there' }
