@@ -6,12 +6,12 @@ import { renderToString } from "react-dom/server";
 import template from "./template";
 import App from "../app";
 import { ChunkExtractor } from "@loadable/server";
+// @ts-ignore
+import stats from "../../build/static/loadable-stats.json";
 
 const app = new Koa();
 
 app.use(async (ctx, next) => {
-  // @ts-ignore
-  const stats = await import("../../build/static/loadable-stats.json");
   const extractor = new ChunkExtractor({ stats });
   const jsx = extractor.collectChunks(<App />);
   const html = renderToString(jsx);

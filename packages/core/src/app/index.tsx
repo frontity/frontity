@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import loadable from "@loadable/component";
+
+const Dynamic = loadable(() => import("./dynamic"));
 
 const App = () => {
   const [counter, setCounter] = useState(0);
@@ -6,6 +9,7 @@ const App = () => {
     <>
       <div>Hello World from React: {counter}</div>
       <button onClick={() => setCounter(counter + 1)}>click</button>
+      <Dynamic />
     </>
   );
 };
