@@ -47,6 +47,9 @@ export default ({
   };
   // Node still needs CJS.
   if (target === "node") config.libraryTarget = "commonjs2";
-  if (target !== "node") config.chunkFilename = chunkFilenames[target][mode];
+  if (target !== "node") {
+    config.chunkFilename = chunkFilenames[target][mode];
+    config.publicPath = "/static";
+  }
   return config;
 };

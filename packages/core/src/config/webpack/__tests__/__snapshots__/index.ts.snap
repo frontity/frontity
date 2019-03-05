@@ -32,6 +32,7 @@ Object {
       "chunkFilename": "[name].es5.js",
       "filename": "main.es5.js",
       "path": "../../../build/static",
+      "publicPath": "/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -117,6 +118,7 @@ Object {
       "chunkFilename": "[name].module.js",
       "filename": "main.module.js",
       "path": "../../../build/static",
+      "publicPath": "/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -291,6 +293,7 @@ Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
       "filename": "main.es5.[chunkhash].js",
       "path": "../../../build/static",
+      "publicPath": "/static",
     },
     "plugins": Array [
       LoadablePlugin {
@@ -369,6 +372,7 @@ Object {
       "chunkFilename": "[name].module.[chunkhash].js",
       "filename": "main.module.[chunkhash].js",
       "path": "../../../build/static",
+      "publicPath": "/static",
     },
     "plugins": Array [
       LoadablePlugin {
