@@ -49,6 +49,8 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       "@babel/preset-react"
     ];
     const plugins = [
+      // Support for dynamic imports: import("./my-file")
+      "@babel/plugin-syntax-dynamic-import",
       // Support for the rest spread: { ...obj }
       "@babel/plugin-proposal-object-rest-spread",
       // Support for the class props: class MyClass { myProp = 'hi there' }

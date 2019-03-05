@@ -4,6 +4,7 @@ exports[`Babel returns for development 1`] = `
 Object {
   "es5": Object {
     "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -39,6 +40,7 @@ Object {
   },
   "module": Object {
     "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -59,6 +61,7 @@ Object {
   },
   "node": Object {
     "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -84,6 +87,7 @@ exports[`Babel returns for production 1`] = `
 Object {
   "es5": Object {
     "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -119,6 +123,7 @@ Object {
   },
   "module": Object {
     "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
@@ -139,6 +144,7 @@ Object {
   },
   "node": Object {
     "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
     ],
