@@ -6,6 +6,7 @@
     "test:ci": "jest --silent --testPathPattern=core --no-cache",
     "test:debug": "node --inspect node_modules/.bin/jest --watch",
     "cz": "git-cz",
+    "prepare": "lerna bootstrap --hoist",
     "release": "lerna version"
   },
   "devDependencies": {
