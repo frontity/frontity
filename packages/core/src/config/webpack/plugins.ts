@@ -1,5 +1,10 @@
 import LoadablePlugin from "@loadable/webpack-plugin";
-import { HotModuleReplacementPlugin, Configuration, optimize } from "webpack";
+import {
+  HotModuleReplacementPlugin,
+  Configuration,
+  optimize,
+  WatchIgnorePlugin
+} from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Target, Mode } from "../../types";
 
@@ -17,7 +22,9 @@ export default ({
       reportFilename: `../../build/analyze/${target}-${mode}.html`,
       openAnalyzer: false,
       logLevel: "silent"
-    })
+    }),
+    // Don't rebuild on changes of the build folder.
+    new WatchIgnorePlugin([/build/])
   ];
 
   // Support HMR in development. Only needed in client.

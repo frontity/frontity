@@ -59,6 +59,11 @@ Object {
         },
         "server": null,
       },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
       HotModuleReplacementPlugin {
         "fullBuildTimeout": 200,
         "multiStep": undefined,
@@ -143,6 +148,11 @@ Object {
           "statsOptions": null,
         },
         "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
       },
       HotModuleReplacementPlugin {
         "fullBuildTimeout": 200,
@@ -229,6 +239,11 @@ Object {
         },
         "server": null,
       },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
       LimitChunkCountPlugin {
         "options": Object {
           "maxChunks": 1,
@@ -305,6 +320,11 @@ Object {
           "statsOptions": null,
         },
         "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
       },
       LoadablePlugin {
         "compiler": null,
@@ -384,6 +404,11 @@ Object {
         },
         "server": null,
       },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -462,6 +487,11 @@ Object {
           "statsOptions": null,
         },
         "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
       },
       LimitChunkCountPlugin {
         "options": Object {
