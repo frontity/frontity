@@ -46,7 +46,19 @@ const dev = async ({
   // Start a custom webpack-dev-server.
   const compiler = webpack([clientWebpack, frontityConfig.webpack.node]);
   app.use(
-    webpackDevMiddleware(compiler, { publicPath: "/static", writeToDisk: true })
+    webpackDevMiddleware(compiler, {
+      publicPath: "/static",
+      writeToDisk: true,
+      stats: {
+        all: false,
+        hash: false,
+        assets: true,
+        colors: true,
+        errors: true,
+        warnings: true,
+        errorDetails: true
+      }
+    })
   );
   app.use(webpackHotMiddleware(compiler.compilers[0]));
   app.use(webpackHotServerMiddleware(compiler));
