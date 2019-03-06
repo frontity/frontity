@@ -3,6 +3,7 @@ import express from "express";
 import { Mode } from "../types";
 import * as http from "http";
 import * as https from "https";
+import webpack = require("webpack");
 
 // Create HTTP or HTTPS server using a self-signed certificate.
 const createServer = async ({
@@ -34,30 +35,55 @@ export const staticFiles = ({
 
 export const createApp = async ({
   mode,
-  port = 3000,
-  isHttps = false
+  port,
+  isHttps,
+  es5
 }: {
   mode: Mode;
   port: number;
   isHttps: boolean;
+  es5: boolean;
 }): Promise<{
   app: express.Express;
-  done: () => false | http.Server | https.Server;
+  done: (compiler: webpack.MultiCompiler) => void;
 }> => {
   // Create the server.
   const app = express();
   // Create a function to start listening after webpack has finished.
-  let isBuilt = false;
   const server = await createServer({ app, isHttps });
-  const done = () =>
-    !isBuilt &&
-    server.listen(port, () => {
-      isBuilt = true;
-      console.log(
-        `\nSERVER STARTED (${mode}) -- Listening @ ${
-          isHttps ? "https" : "http"
-        }://localhost:${port}`
-      );
-    });
+  let clientFinished = false;
+  let serverFinished = false;
+  const start = () => {
+    if (clientFinished && serverFinished) {
+      server.listen(port, () => {
+        console.log(
+          `\n\nSERVER STARTED -- Listening @ ${
+            isHttps ? "https" : "http"
+          }://localhost:${port}\n  - mode: ${mode}\n  - modules: ${
+            es5 ? "es5" : "esModules"
+          }`
+        );
+      });
+    }
+  };
+  const done = (compiler: webpack.MultiCompiler) => {
+    compiler.compilers[0].hooks.done.tapAsync(
+      "frontity-dev-server",
+      (_, cb) => {
+        clientFinished = true;
+        start();
+        cb();
+      }
+    );
+    compiler.compilers[1].hooks.done.tapAsync(
+      "frontity-dev-server",
+      (_, cb) => {
+        serverFinished = true;
+        start();
+        cb();
+      }
+    );
+  };
+
   return { app, done };
 };

@@ -11,11 +11,6 @@ import { createApp } from "./express";
 const buildDir = "build";
 const argv = Argv(process.argv.slice(2));
 
-// Disable Webpack deprecation warning:
-// (node:33456) DeprecationWarning: Tapable.plugin is deprecated. Use new API on `.hooks` instead
-// @ts-ignore
-// process.noDeprecation = true;
-
 const dev = async ({
   isHttps,
   mode,
@@ -34,29 +29,30 @@ const dev = async ({
   await emptyDir(buildDir);
 
   // Start dev using webpack dev server with express.
-  const { app, done } = await createApp({ mode, port, isHttps });
+  const { app, done } = await createApp({ mode, port, isHttps, es5 });
 
   // Get FrontityConfig for webpack.
   const frontityConfig = getConfig({ mode });
 
-  // Start a custom webpack-dev-server.
+  // Build and wait until webpack finished the client first.
+  // We need to do this because the server bundle needs to import
+  // the client loadable-stats, which are created by the client webpack.
   const clientWebpack = es5
     ? frontityConfig.webpack.es5
     : frontityConfig.webpack.module;
   const clientCompiler = webpack(clientWebpack);
   await new Promise(resolve => clientCompiler.run(resolve));
 
+  // Start a custom webpack-dev-server.
   const compiler = webpack([clientWebpack, frontityConfig.webpack.node]);
-
   app.use(
-    webpackDevMiddleware(compiler, {
-      publicPath: "/static",
-      writeToDisk: true
-    })
+    webpackDevMiddleware(compiler, { publicPath: "/static", writeToDisk: true })
   );
   app.use(webpackHotMiddleware(compiler.compilers[0]));
   app.use(webpackHotServerMiddleware(compiler));
-  compiler.plugin("done", done);
+
+  // Start listening once webpack finishes.
+  done(compiler);
 };
 
 (process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
