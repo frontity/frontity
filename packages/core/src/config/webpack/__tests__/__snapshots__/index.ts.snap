@@ -40,9 +40,6 @@ Object {
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
-            "info",
-            "warn",
-            "error",
             "silent",
           },
         },
@@ -53,7 +50,7 @@ Object {
           "defaultSizes": "parsed",
           "excludeAssets": null,
           "generateStatsFile": false,
-          "logLevel": "info",
+          "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../../build/analyze/es5-development.html",
           "startAnalyzer": true,
@@ -128,9 +125,6 @@ Object {
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
-            "info",
-            "warn",
-            "error",
             "silent",
           },
         },
@@ -141,7 +135,7 @@ Object {
           "defaultSizes": "parsed",
           "excludeAssets": null,
           "generateStatsFile": false,
-          "logLevel": "info",
+          "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../../build/analyze/module-development.html",
           "startAnalyzer": true,
@@ -216,9 +210,6 @@ Object {
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
-            "info",
-            "warn",
-            "error",
             "silent",
           },
         },
@@ -229,7 +220,7 @@ Object {
           "defaultSizes": "parsed",
           "excludeAssets": null,
           "generateStatsFile": false,
-          "logLevel": "info",
+          "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../../build/analyze/node-development.html",
           "startAnalyzer": true,
@@ -296,9 +287,6 @@ Object {
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
-            "info",
-            "warn",
-            "error",
             "silent",
           },
         },
@@ -309,7 +297,7 @@ Object {
           "defaultSizes": "parsed",
           "excludeAssets": null,
           "generateStatsFile": false,
-          "logLevel": "info",
+          "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../../build/analyze/es5-production.html",
           "startAnalyzer": true,
@@ -377,9 +365,6 @@ Object {
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
-            "info",
-            "warn",
-            "error",
             "silent",
           },
         },
@@ -390,7 +375,7 @@ Object {
           "defaultSizes": "parsed",
           "excludeAssets": null,
           "generateStatsFile": false,
-          "logLevel": "info",
+          "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../../build/analyze/module-production.html",
           "startAnalyzer": true,
@@ -459,9 +444,6 @@ Object {
       BundleAnalyzerPlugin {
         "logger": Logger {
           "activeLevels": Set {
-            "info",
-            "warn",
-            "error",
             "silent",
           },
         },
@@ -472,7 +454,7 @@ Object {
           "defaultSizes": "parsed",
           "excludeAssets": null,
           "generateStatsFile": false,
-          "logLevel": "info",
+          "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../../build/analyze/node-production.html",
           "startAnalyzer": true,

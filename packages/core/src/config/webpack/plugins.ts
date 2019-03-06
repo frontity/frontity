@@ -15,7 +15,8 @@ export default ({
     new BundleAnalyzerPlugin({
       analyzerMode: "static",
       reportFilename: `../../build/analyze/${target}-${mode}.html`,
-      openAnalyzer: false
+      openAnalyzer: false,
+      logLevel: "silent"
     })
   ];
 
