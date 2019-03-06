@@ -15,8 +15,7 @@ after_success:
   - git config user.email "${GIT_COMMITTER_EMAIL}"
   - git config user.name "${GIT_COMMITTER_NAME}"
   - git remote set-url origin https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-  - git checkout ${TRAVIS_BRANCH}
-  - npm run release -- --yes
+  - test "${TRAVIS_PULL_REQUEST}" = "false" && git checkout ${TRAVIS_BRANCH} && npm run release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
