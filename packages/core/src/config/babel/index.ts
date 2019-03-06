@@ -36,14 +36,13 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       [
         "@babel/preset-env",
         {
-          useBuiltIns: "usage",
-          targets: targets[target],
+          targets: targets[target]
           // esModules and CJS don't work well together so this is here
           // to be able to parse node_modules, where there are many modules
           // still using CJS. It will probably break tree shaking, so we need
           // to check that later. Another option would be the opposite:
           // https://www.npmjs.com/package/babel-plugin-transform-commonjs-es2015-modules
-          modules: "commonjs"
+          // modules: target !== "node" ? "false" : "commonjs"
         }
       ],
       "@babel/preset-react"

@@ -14,7 +14,6 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "modules": "commonjs",
           "targets": Object {
             "browsers": Array [
               "and_chr >= 67",
@@ -33,7 +32,6 @@ Object {
               "samsung >= 5",
             ],
           },
-          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
@@ -51,11 +49,9 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "modules": "commonjs",
           "targets": Object {
             "esmodules": true,
           },
-          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
@@ -73,11 +69,9 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "modules": "commonjs",
           "targets": Object {
             "node": "8.10",
           },
-          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
@@ -100,7 +94,6 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "modules": "commonjs",
           "targets": Object {
             "browsers": Array [
               "and_chr >= 67",
@@ -119,7 +112,6 @@ Object {
               "samsung >= 5",
             ],
           },
-          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
@@ -137,11 +129,9 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "modules": "commonjs",
           "targets": Object {
             "esmodules": true,
           },
-          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
@@ -159,11 +149,9 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "modules": "commonjs",
           "targets": Object {
             "node": "8.10",
           },
-          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
