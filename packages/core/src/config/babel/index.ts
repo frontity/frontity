@@ -55,7 +55,9 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       // Support for the rest spread: { ...obj }
       "@babel/plugin-proposal-object-rest-spread",
       // Support for the class props: class MyClass { myProp = 'hi there' }
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties",
+      // Transform lodash imports to cherry-pick: import add from 'lodash/add'
+      "babel-plugin-lodash"
     ];
     return {
       presets,

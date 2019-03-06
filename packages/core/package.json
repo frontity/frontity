@@ -34,6 +34,7 @@
     "@loadable/server": "^5.6.1",
     "@loadable/webpack-plugin": "^5.5.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-lodash": "^3.3.4",
     "express": "^4.16.4",
     "fs-extra": "^7.0.1",
     "hash-it": "^4.0.4",

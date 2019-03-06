@@ -8,6 +8,7 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -43,6 +44,7 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -63,6 +65,7 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -88,6 +91,7 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -123,6 +127,7 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -143,6 +148,7 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
     ],
     "presets": Array [
       "@babel/preset-typescript",
