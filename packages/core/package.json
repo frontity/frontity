@@ -14,7 +14,8 @@
     "url": "git+https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "test": "cd ../.. && npm test",
+    "test:ci": "jest",
+    "test": "jest --watch",
     "dev": "ts-node src/scripts/dev.ts",
     "dev:inspect": "node --inspect -r ts-node/register src/scripts/dev.ts"
   },
@@ -38,12 +39,14 @@
     "express": "^4.16.4",
     "fs-extra": "^7.0.1",
     "hash-it": "^4.0.4",
+    "jest": "^24.1.0",
     "koa": "^2.7.0",
     "koa-route": "^3.2.0",
     "minimist": "^1.2.0",
     "promise-monofill": "^1.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "ts-jest": "^24.0.0",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
