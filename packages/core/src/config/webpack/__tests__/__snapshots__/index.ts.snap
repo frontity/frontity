@@ -19,7 +19,7 @@ Object {
             "options": Object {
               "babelrc": false,
               "cacheDirectory": true,
-              "cacheIdentifier": 123,
+              "cacheIdentifier": "123",
               "plugins": Array [],
               "presets": Array [
                 "es5-development",
@@ -109,7 +109,7 @@ Object {
             "options": Object {
               "babelrc": false,
               "cacheDirectory": true,
-              "cacheIdentifier": 123,
+              "cacheIdentifier": "123",
               "plugins": Array [],
               "presets": Array [
                 "module-development",
@@ -200,7 +200,7 @@ Object {
             "options": Object {
               "babelrc": false,
               "cacheDirectory": true,
-              "cacheIdentifier": 123,
+              "cacheIdentifier": "123",
               "plugins": Array [],
               "presets": Array [
                 "node-development",
@@ -281,7 +281,7 @@ Object {
             "options": Object {
               "babelrc": false,
               "cacheDirectory": true,
-              "cacheIdentifier": 123,
+              "cacheIdentifier": "123",
               "plugins": Array [],
               "presets": Array [
                 "es5-production",
@@ -364,7 +364,7 @@ Object {
             "options": Object {
               "babelrc": false,
               "cacheDirectory": true,
-              "cacheIdentifier": 123,
+              "cacheIdentifier": "123",
               "plugins": Array [],
               "presets": Array [
                 "module-production",
@@ -449,7 +449,7 @@ Object {
             "options": Object {
               "babelrc": false,
               "cacheDirectory": true,
-              "cacheIdentifier": 123,
+              "cacheIdentifier": "123",
               "plugins": Array [],
               "presets": Array [
                 "node-production",
