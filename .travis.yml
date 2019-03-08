@@ -5,9 +5,10 @@ cache:
     - ~/.npm
     - ~/.cache
 install:
+  - npm i -g npm@6
   - npm ci
 node_js:
-  - 8.10
+  - 8.10.0
 script:
   - npm test
 after_success:
