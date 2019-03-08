@@ -1,0 +1,513 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Babel returns for development 1`] = `
+Object {
+  "es5": Object {
+    "devtool": "cheap-module-eval-source-map",
+    "entry": Array [
+      "webpack-hot-middleware/client",
+      "../../../src/client",
+    ],
+    "externals": Object {},
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": "123",
+              "plugins": Array [],
+              "presets": Array [
+                "es5-development",
+              ],
+            },
+          },
+        },
+      ],
+    },
+    "name": "client",
+    "output": Object {
+      "chunkFilename": "[name].es5.js",
+      "filename": "main.es5.js",
+      "path": "../../../build/static",
+      "publicPath": "/static",
+    },
+    "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "../../analyze/es5-development.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": undefined,
+        "options": Object {},
+        "requestTimeout": 10000,
+      },
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "client-chunks.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
+    ],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+      ],
+    },
+    "target": "web",
+  },
+  "module": Object {
+    "devtool": "cheap-module-eval-source-map",
+    "entry": Array [
+      "webpack-hot-middleware/client",
+      "../../../src/client",
+    ],
+    "externals": Object {},
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": "123",
+              "plugins": Array [],
+              "presets": Array [
+                "module-development",
+              ],
+            },
+          },
+        },
+      ],
+    },
+    "name": "client",
+    "output": Object {
+      "chunkFilename": "[name].module.js",
+      "filename": "main.module.js",
+      "path": "../../../build/static",
+      "publicPath": "/static",
+    },
+    "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "../../analyze/module-development.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
+      HotModuleReplacementPlugin {
+        "fullBuildTimeout": 200,
+        "multiStep": undefined,
+        "options": Object {},
+        "requestTimeout": 10000,
+      },
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "client-chunks.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
+    ],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+      ],
+    },
+    "target": "web",
+  },
+  "server": Object {
+    "devtool": "cheap-module-eval-source-map",
+    "entry": Array [
+      "../../../src/server",
+    ],
+    "externals": Object {
+      "any-promise": "promise-monofill",
+    },
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": "123",
+              "plugins": Array [],
+              "presets": Array [
+                "server-development",
+              ],
+            },
+          },
+        },
+      ],
+    },
+    "name": "server",
+    "output": Object {
+      "filename": "server.js",
+      "libraryTarget": "commonjs2",
+      "path": "../../../build/",
+    },
+    "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "../analyze/server-development.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
+      LimitChunkCountPlugin {
+        "options": Object {
+          "maxChunks": 1,
+        },
+      },
+    ],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+      ],
+    },
+    "target": "node",
+  },
+}
+`;
+
+exports[`Babel returns for production 1`] = `
+Object {
+  "es5": Object {
+    "devtool": false,
+    "entry": Array [
+      "../../../src/client",
+    ],
+    "externals": Object {},
+    "mode": "production",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": "123",
+              "plugins": Array [],
+              "presets": Array [
+                "es5-production",
+              ],
+            },
+          },
+        },
+      ],
+    },
+    "name": "client",
+    "output": Object {
+      "chunkFilename": "[name].es5.[chunkhash].js",
+      "filename": "main.es5.[chunkhash].js",
+      "path": "../../../build/static",
+      "publicPath": "/static",
+    },
+    "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "../../analyze/es5-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "client-chunks.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
+    ],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+      ],
+    },
+    "target": "web",
+  },
+  "module": Object {
+    "devtool": false,
+    "entry": Array [
+      "../../../src/client",
+    ],
+    "externals": Object {},
+    "mode": "production",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": "123",
+              "plugins": Array [],
+              "presets": Array [
+                "module-production",
+              ],
+            },
+          },
+        },
+      ],
+    },
+    "name": "client",
+    "output": Object {
+      "chunkFilename": "[name].module.[chunkhash].js",
+      "filename": "main.module.[chunkhash].js",
+      "path": "../../../build/static",
+      "publicPath": "/static",
+    },
+    "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "../../analyze/module-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
+      LoadablePlugin {
+        "compiler": null,
+        "handleEmit": [Function],
+        "opts": Object {
+          "filename": "client-chunks.json",
+          "outputAsset": true,
+          "path": undefined,
+          "writeToDisk": undefined,
+        },
+        "writeAssetsFile": [Function],
+      },
+    ],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+      ],
+    },
+    "target": "web",
+  },
+  "server": Object {
+    "devtool": false,
+    "entry": Array [
+      "../../../src/server",
+    ],
+    "externals": Object {
+      "any-promise": "promise-monofill",
+    },
+    "mode": "production",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
+          "use": Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": true,
+              "cacheIdentifier": "123",
+              "plugins": Array [],
+              "presets": Array [
+                "server-production",
+              ],
+            },
+          },
+        },
+      ],
+    },
+    "name": "server",
+    "output": Object {
+      "filename": "server.js",
+      "libraryTarget": "commonjs2",
+      "path": "../../../build/",
+    },
+    "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "../analyze/server-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
+      LimitChunkCountPlugin {
+        "options": Object {
+          "maxChunks": 1,
+        },
+      },
+    ],
+    "resolve": Object {
+      "extensions": Array [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+      ],
+    },
+    "target": "node",
+  },
+}
+`;

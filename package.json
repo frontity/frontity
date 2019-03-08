@@ -2,11 +2,10 @@
   "name": "frontity-monorepo",
   "private": true,
   "scripts": {
-    "test": "jest  --watch --silent",
-    "test:ci": "jest --silent --testPathPattern=core --no-cache",
-    "test:debug": "node --inspect node_modules/.bin/jest --watch",
+    "test": "lerna run test:ci --stream",
     "cz": "git-cz",
-    "release": "lerna version"
+    "prepare": "lerna bootstrap",
+    "release": "lerna version --yes"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
@@ -21,9 +20,10 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "husky": "^1.3.1",
-    "jest": "^24.1.0",
     "lerna": "^3.13.0",
     "lint-staged": "^8.1.4",
-    "prettier": "^1.16.4"
-  }
+    "prettier": "^1.16.4",
+    "typescript": "^3.3.3333"
+  },
+  "prettier": {}
 }

@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Babel returns for development 1`] = `
+Object {
+  "es5": Object {
+    "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
+    ],
+    "presets": Array [
+      "@babel/preset-typescript",
+      Array [
+        "@babel/preset-env",
+        Object {
+          "targets": Object {
+            "browsers": Array [
+              "and_chr >= 67",
+              "and_ff >= 18",
+              "and_uc >= 11.8",
+              "android >= 67",
+              "not android <= 4.4.4",
+              "chrome >= 49",
+              "edge >= 12",
+              "firefox >= 18",
+              "ios_saf >= 10",
+              "not op_mini all",
+              "op_mob >= 46",
+              "opera >= 36",
+              "safari >= 10",
+              "samsung >= 5",
+            ],
+          },
+        },
+      ],
+      "@babel/preset-react",
+    ],
+  },
+  "module": Object {
+    "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
+    ],
+    "presets": Array [
+      "@babel/preset-typescript",
+      Array [
+        "@babel/preset-env",
+        Object {
+          "targets": Object {
+            "esmodules": true,
+          },
+        },
+      ],
+      "@babel/preset-react",
+    ],
+  },
+  "server": Object {
+    "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
+    ],
+    "presets": Array [
+      "@babel/preset-typescript",
+      Array [
+        "@babel/preset-env",
+        Object {
+          "targets": Object {
+            "node": "8.10",
+          },
+        },
+      ],
+      "@babel/preset-react",
+    ],
+  },
+}
+`;
+
+exports[`Babel returns for production 1`] = `
+Object {
+  "es5": Object {
+    "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
+    ],
+    "presets": Array [
+      "@babel/preset-typescript",
+      Array [
+        "@babel/preset-env",
+        Object {
+          "targets": Object {
+            "browsers": Array [
+              "and_chr >= 67",
+              "and_ff >= 18",
+              "and_uc >= 11.8",
+              "android >= 67",
+              "not android <= 4.4.4",
+              "chrome >= 49",
+              "edge >= 12",
+              "firefox >= 18",
+              "ios_saf >= 10",
+              "not op_mini all",
+              "op_mob >= 46",
+              "opera >= 36",
+              "safari >= 10",
+              "samsung >= 5",
+            ],
+          },
+        },
+      ],
+      "@babel/preset-react",
+    ],
+  },
+  "module": Object {
+    "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
+    ],
+    "presets": Array [
+      "@babel/preset-typescript",
+      Array [
+        "@babel/preset-env",
+        Object {
+          "targets": Object {
+            "esmodules": true,
+          },
+        },
+      ],
+      "@babel/preset-react",
+    ],
+  },
+  "server": Object {
+    "plugins": Array [
+      "@babel/plugin-syntax-dynamic-import",
+      "@loadable/babel-plugin",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
+    ],
+    "presets": Array [
+      "@babel/preset-typescript",
+      Array [
+        "@babel/preset-env",
+        Object {
+          "targets": Object {
+            "node": "8.10",
+          },
+        },
+      ],
+      "@babel/preset-react",
+    ],
+  },
+}
+`;

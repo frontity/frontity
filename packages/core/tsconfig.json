@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // Target latest version of ECMAScript.
+    "target": "es2017",
+    // Search under node_modules for non-relative imports.
+    "moduleResolution": "node",
+    // commonjs modules.
+    "module": "commonjs",
+    // Allow default imports from modules with no default export.
+    "allowSyntheticDefaultImports": true,
+    // Don't emit; allow Babel to transform files.
+    "noEmit": true,
+    // Disallow features that require cross-file information for emit.
+    "isolatedModules": true,
+    // Import non-ES modules as default imports.
+    "esModuleInterop": true,
+    // Resolve JSON files.
+    "resolveJsonModule": true,
+    // Support for JSX.
+    "jsx": "preserve"
+  }
+}
