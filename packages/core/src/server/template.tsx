@@ -6,7 +6,7 @@ export default ({
   html: string;
   scriptTags: string;
   linkTags: string;
-}) => `<!doctype html>
+}): string => `<!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
