@@ -11,7 +11,15 @@ export default ({
 }): Configuration["output"] => {
   // Use hashes only in production and distinguish between es5 and module
   // files using their filenames.
-  const filenames = {
+  type filenames = {
+    development: string;
+    production: string;
+  };
+  const filenames: {
+    module: filenames;
+    es5: filenames;
+    server: filenames;
+  } = {
     module: {
       development: "main.module.js",
       production: "main.module.[chunkhash].js"
@@ -20,18 +28,25 @@ export default ({
       development: "main.es5.js",
       production: "main.es5.[chunkhash].js"
     },
-    node: {
-      development: "main.node.js",
-      production: "main.node.js"
+    server: {
+      development: "server.js",
+      production: "server.js"
     }
   };
-  const paths = {
+  const paths: {
+    module: string;
+    es5: string;
+    server: string;
+  } = {
     module: "static",
     es5: "static",
-    node: "dynamic"
+    server: ""
   };
   // Same with chunks, only hashes in production and es5/module in the filename.
-  const chunkFilenames = {
+  const chunkFilenames: {
+    module: filenames;
+    es5: filenames;
+  } = {
     module: {
       development: "[name].module.js",
       production: "[name].module.[chunkhash].js"
@@ -46,8 +61,8 @@ export default ({
     path: resolve(__dirname, `../../../build/${paths[target]}`)
   };
   // Node still needs CJS.
-  if (target === "node") config.libraryTarget = "commonjs2";
-  if (target !== "node") {
+  if (target === "server") config.libraryTarget = "commonjs2";
+  if (target !== "server") {
     config.chunkFilename = chunkFilenames[target][mode];
     config.publicPath = "/static";
   }

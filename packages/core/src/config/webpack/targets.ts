@@ -8,5 +8,5 @@ export default ({
   target: Target;
   mode: Mode;
 }): Configuration["target"] => {
-  return target === "node" ? "node" : "web";
+  return target === "server" ? "node" : "web";
 };

@@ -15,12 +15,12 @@ const babel = {
   development: {
     es5: { presets: ["es5-development"], plugins: [] },
     module: { presets: ["module-development"], plugins: [] },
-    node: { presets: ["node-development"], plugins: [] }
+    server: { presets: ["server-development"], plugins: [] }
   },
   production: {
     es5: { presets: ["es5-production"], plugins: [] },
     module: { presets: ["module-production"], plugins: [] },
-    node: { presets: ["node-production"], plugins: [] }
+    server: { presets: ["server-production"], plugins: [] }
   }
 };
 

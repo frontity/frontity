@@ -9,7 +9,7 @@ export default ({
   mode: Mode;
 }): Configuration["externals"] => {
   const config: Configuration["externals"] = {};
-  if (target === "node") {
+  if (target === "server") {
     config["any-promise"] = "promise-monofill";
   }
   return config;

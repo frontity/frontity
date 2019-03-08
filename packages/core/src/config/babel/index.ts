@@ -1,7 +1,11 @@
 import { TransformOptions } from "babel-core";
 import { Target, Mode, BabelConfigs } from "../../types";
 
-const targets = {
+const targets: {
+  module: {};
+  es5: {};
+  server: {};
+} = {
   // Browsers with <script type="module"></script> support.
   module: { esmodules: true },
   // Browsers with Proxy support, which is needed by Overmind.
@@ -25,7 +29,7 @@ const targets = {
     ]
   },
   // Node version used by AWS Lambda.
-  node: { node: "8.10" }
+  server: { node: "8.10" }
 };
 
 export default ({ mode }: { mode: Mode }): BabelConfigs => {
@@ -62,6 +66,6 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
   return {
     module: getConfig("module"),
     es5: getConfig("es5"),
-    node: getConfig("node")
+    server: getConfig("server")
   };
 };

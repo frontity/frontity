@@ -7,7 +7,7 @@ import template from "./template";
 import App from "../app";
 import { ChunkExtractor } from "@loadable/server";
 // @ts-ignore
-import stats from "../../build/static/loadable-stats.json";
+import stats from "../../build/static/client-chunks.json";
 
 const app = new Koa();
 

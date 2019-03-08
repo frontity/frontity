@@ -2,18 +2,18 @@ import { TransformOptions } from "babel-core";
 import { Configuration } from "webpack";
 
 export type Mode = "development" | "production";
-export type Target = "module" | "es5" | "node";
+export type Target = "module" | "es5" | "server";
 
 export interface BabelConfigs {
   module: TransformOptions;
   es5: TransformOptions;
-  node: TransformOptions;
+  server: TransformOptions;
 }
 
 export interface WebpackConfigs {
   module: Configuration;
   es5: Configuration;
-  node: Configuration;
+  server: Configuration;
 }
 
 export interface FrontityConfig {

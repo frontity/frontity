@@ -9,4 +9,4 @@ export default ({
 }: {
   target: Target;
   mode: Mode;
-}): Configuration["name"] => (target === "node" ? "server" : "client");
+}): Configuration["name"] => (target === "server" ? "server" : "client");

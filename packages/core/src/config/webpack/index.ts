@@ -36,6 +36,6 @@ export default ({
   return {
     module: getConfig("module"),
     es5: getConfig("es5"),
-    node: getConfig("node")
+    server: getConfig("server")
   };
 };

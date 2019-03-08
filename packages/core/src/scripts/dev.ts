@@ -9,6 +9,7 @@ import { Mode } from "../types";
 import { createApp } from "./express";
 
 const buildDir = "build";
+const analyzeDir = "analyze";
 const argv = Argv(process.argv.slice(2));
 
 const dev = async ({
@@ -22,11 +23,13 @@ const dev = async ({
   mode: Mode;
   es5: boolean;
 }): Promise<void> => {
-  // Create the build directory if it doesn't exist.
+  // Create the directories if they don't exist.
   await ensureDir(buildDir);
+  await ensureDir(analyzeDir);
 
-  // Remove all the files inside the build directory.
+  // Remove all the files inside the directories.
   await emptyDir(buildDir);
+  await emptyDir(analyzeDir);
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, es5 });
@@ -44,7 +47,7 @@ const dev = async ({
   await new Promise(resolve => clientCompiler.run(resolve));
 
   // Start a custom webpack-dev-server.
-  const compiler = webpack([clientWebpack, frontityConfig.webpack.node]);
+  const compiler = webpack([clientWebpack, frontityConfig.webpack.server]);
   app.use(
     webpackDevMiddleware(compiler, {
       publicPath: "/static",

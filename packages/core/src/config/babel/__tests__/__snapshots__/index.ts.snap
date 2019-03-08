@@ -59,7 +59,7 @@ Object {
       "@babel/preset-react",
     ],
   },
-  "node": Object {
+  "server": Object {
     "plugins": Array [
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
@@ -142,7 +142,7 @@ Object {
       "@babel/preset-react",
     ],
   },
-  "node": Object {
+  "server": Object {
     "plugins": Array [
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",

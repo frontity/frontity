@@ -19,7 +19,9 @@ export default ({
     // Create HTML files for bundle analyzing.
     new BundleAnalyzerPlugin({
       analyzerMode: "static",
-      reportFilename: `../../build/analyze/${target}-${mode}.html`,
+      reportFilename: `../${
+        target !== "server" ? "../" : ""
+      }analyze/${target}-${mode}.html`,
       openAnalyzer: false,
       logLevel: "silent"
     }),
@@ -28,14 +30,19 @@ export default ({
   ];
 
   // Support HMR in development. Only needed in client.
-  if (target !== "node" && mode === "development")
+  if (target !== "server" && mode === "development")
     config.push(new HotModuleReplacementPlugin());
 
   // Needed for code splitting in client.
-  if (target !== "node") config.push(new LoadablePlugin());
+  if (target !== "server")
+    config.push(
+      new LoadablePlugin({
+        filename: "client-chunks.json"
+      })
+    );
 
-  // Avoid code splitting in node.
-  if (target === "node")
+  // Avoid code splitting in server.
+  if (target === "server")
     config.push(new optimize.LimitChunkCountPlugin({ maxChunks: 1 }));
   return config;
 };
