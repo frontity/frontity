@@ -5,12 +5,11 @@ cache:
     - ~/.npm
     - ~/.cache
 install:
-  - npm i -g npm@6
   - npm ci
 node_js:
-  - lts/*
+  - 8.10
 script:
-  - npm run test:ci
+  - npm test
 after_success:
   - git config user.email "${GIT_COMMITTER_EMAIL}"
   - git config user.name "${GIT_COMMITTER_NAME}"
