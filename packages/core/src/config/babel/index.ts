@@ -6,7 +6,14 @@ const targets: {
   es5: {};
   server: {};
 } = {
-  // Browsers with <script type="module"></script> support.
+  // Browsers with <script type="module"></script> support. This is the list:
+  // "edge": "16",
+  // "firefox": "60",
+  // "chrome": "61",
+  // "safari": "10.1",
+  // "opera": "48",
+  // "ios_saf": "10.3",
+  // "and_ff": "60"
   module: { esmodules: true },
   // Browsers with Proxy support, which is needed by Overmind.
   // For older browsers (ie8-11) we support AMP fallback.
