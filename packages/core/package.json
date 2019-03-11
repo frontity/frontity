@@ -17,7 +17,7 @@
     "test:ci": "jest",
     "test": "jest --watch",
     "dev": "ts-node src/scripts/dev.ts",
-    "dev:inspect": "node --inspect -r ts-node/register src/scripts/dev.ts"
+    "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
