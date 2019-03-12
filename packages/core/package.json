@@ -17,6 +17,7 @@
     "test:ci": "jest",
     "test": "jest --watch",
     "dev": "ts-node src/scripts/dev.ts",
+    "build": "ts-node src/scripts/build.ts",
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts"
   },
   "bugs": {
