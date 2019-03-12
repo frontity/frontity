@@ -1,6 +1,6 @@
 import path from "path";
 import { RequestHandler } from "express";
-import { MultiCompiler } from "webpack";
+import { MultiCompiler, compilation } from "webpack";
 import requireFromString from "require-from-string";
 import sourceMapSupport from "source-map-support";
 
@@ -75,8 +75,13 @@ const createConnectHandler = (error, serverRenderer) => (req, res, next) => {
   serverRenderer(req, res, next);
 };
 
+interface MultiCompilerWithHooks extends MultiCompiler {
+  // It looks like the webpack folks forgot to include hooks in the multicompiler.
+  hooks: compilation.CompilerHooks;
+}
+
 function webpackHotServerMiddleware(
-  multiCompiler: MultiCompiler
+  multiCompiler: MultiCompilerWithHooks
 ): RequestHandler {
   if (!isMultiCompiler(multiCompiler)) {
     throw new Error(
@@ -137,15 +142,5 @@ function webpackHotServerMiddleware(
     return createConnectHandler(error, serverRenderer).apply(null, arguments);
   };
 }
-
-type Options<T = Record<string, any>> = Partial<{
-  /** The name of the server entry point, defaults to 'main'. */
-  chunkName: string;
-
-  /** object Mixed in with clientStats & serverStats and passed to the serverRenderer. */
-  serverRendererOptions: T;
-
-  createHandler(error: boolean, serverRenderer: RequestHandler): RequestHandler;
-}>;
 
 export default webpackHotServerMiddleware;

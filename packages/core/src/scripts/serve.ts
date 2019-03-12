@@ -1,5 +1,5 @@
 import Argv from "minimist";
-import { createServer } from "./utils";
+import createServer from "./utils/create-server";
 import app from "../../build/server";
 
 const argv = Argv(process.argv.slice(2));
