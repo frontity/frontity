@@ -59,7 +59,7 @@ export const createApp = async ({
         console.log(
           `\n\nSERVER STARTED -- Listening @ ${
             isHttps ? "https" : "http"
-          }://localhost:${port}\n  - mode: ${mode}\n  - modules: ${
+          }://localhost:${port}\n  - mode: ${mode}\n  - client: ${
             es5 ? "es5" : "esModules"
           }`
         );
