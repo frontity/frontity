@@ -1,15 +1,19 @@
-import { resolve } from "path";
 import Koa from "koa";
 import { get } from "koa-route";
+import serve from "koa-static";
+import mount from "koa-mount";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import template from "./template";
 import App from "../app";
 import { ChunkExtractor } from "@loadable/server";
-// @ts-ignore
+// @ts-ignore - This is a dynamic generated file that cannot be analyzed by TS.
 import stats from "../../build/static/client-chunks.json";
 
 const app = new Koa();
+
+// Serve static files
+app.use(mount("/static", serve("./build/static")));
 
 app.use(async (ctx, next) => {
   const extractor = new ChunkExtractor({ stats });
