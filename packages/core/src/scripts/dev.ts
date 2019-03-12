@@ -3,10 +3,10 @@ import { ensureDir, emptyDir } from "fs-extra";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
-import webpackHotServerMiddleware from "./webpack-hot-server-middleware";
+import webpackHotServerMiddleware from "./hot-server";
 import getConfig from "../config";
 import { Mode } from "../types";
-import { createApp } from "./express";
+import { createApp } from "./utils";
 
 const buildDir = "build";
 const analyzeDir = "analyze";
