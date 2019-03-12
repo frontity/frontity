@@ -24,4 +24,4 @@ app.use(async (ctx, next) => {
 
 app.use(get("/robots.txt", ctx => (ctx.body = "Disallow")));
 
-export default () => app.callback();
+export default app.callback();
