@@ -17,11 +17,16 @@ app.use(async (ctx, next) => {
   const html = renderToString(jsx);
   const scriptTags = extractor.getScriptTags();
   const linkTags = extractor.getLinkTags();
-  const styleTags = extractor.getStyleTags();
   ctx.body = template({ html, scriptTags, linkTags });
   next();
 });
 
-app.use(get("/robots.txt", ctx => (ctx.body = "Disallow")));
+// Default robots.txt.
+app.use(
+  get("/robots.txt", ctx => {
+    ctx.type = "text/plain";
+    ctx.body = "User-agent: *\nDisallow:";
+  })
+);
 
 export default app.callback();
