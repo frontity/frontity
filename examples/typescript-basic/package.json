@@ -4,7 +4,9 @@
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
   "main": "src/index.ts",
-  "scripts": {},
+  "scripts": {
+    "dev": "ts-node --project ./node_modules/@frontity/core/tsconfig.json ./node_modules/@frontity/core/src/scripts/dev.ts "
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frontity/frontity.git"
@@ -14,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
   },
-  "homepage": "https://github.com/frontity/frontity#readme"
+  "homepage": "https://github.com/frontity/frontity#readme",
+  "dependencies": {
+    "@frontity/core": "0.1.2"
+  },
+  "devDependencies": {
+    "ts-node": "^8.0.3"
+  }
 }
