@@ -77,7 +77,7 @@ const createConnectHandler = (error, serverRenderer) => (req, res, next) => {
 
 interface MultiCompilerWithHooks extends MultiCompiler {
   // It looks like the webpack folks forgot to include hooks in the multicompiler.
-  hooks: compilation.CompilerHooks;
+  hooks?: compilation.CompilerHooks;
 }
 
 function webpackHotServerMiddleware(
