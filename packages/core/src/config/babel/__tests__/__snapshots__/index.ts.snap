@@ -33,6 +33,7 @@ Object {
               "samsung >= 5",
             ],
           },
+          "useBuiltIns": "entry",
         },
       ],
       "@babel/preset-react",
@@ -54,6 +55,7 @@ Object {
           "targets": Object {
             "esmodules": true,
           },
+          "useBuiltIns": false,
         },
       ],
       "@babel/preset-react",
@@ -75,6 +77,7 @@ Object {
           "targets": Object {
             "node": "8.10",
           },
+          "useBuiltIns": false,
         },
       ],
       "@babel/preset-react",
@@ -116,6 +119,7 @@ Object {
               "samsung >= 5",
             ],
           },
+          "useBuiltIns": "entry",
         },
       ],
       "@babel/preset-react",
@@ -137,6 +141,7 @@ Object {
           "targets": Object {
             "esmodules": true,
           },
+          "useBuiltIns": false,
         },
       ],
       "@babel/preset-react",
@@ -158,6 +163,7 @@ Object {
           "targets": Object {
             "node": "8.10",
           },
+          "useBuiltIns": false,
         },
       ],
       "@babel/preset-react",
