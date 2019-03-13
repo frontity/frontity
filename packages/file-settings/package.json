@@ -1,5 +1,5 @@
 {
-  "name": "file-settings",
+  "name": "@frontity/file-settings",
   "version": "0.0.1",
   "description": "file settings package",
   "author": "Eduardo Campaña <asrielo@gmail.com>",
@@ -19,7 +19,6 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "fs-extra": "^7.0.1",
     "typescript": "^3.3.3333"
   },
   "devDependencies": {

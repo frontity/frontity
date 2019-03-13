@@ -1,32 +1,22 @@
-type MainSettings = {
-  url?: string;
-  title?: string;
-  timezone?: number;
-  language?: string;
-};
+import { Settings } from "./types";
+import { importSettingsFromFile } from "./utils";
 
-type Package = {
+export default async ({
+  name,
+  url
+}: {
   name: string;
-  active?: boolean;
-  namespaces?: string | string[];
-  settings?: object;
-};
+  url: string;
+}): Promise<Settings> => {
+  const allSettings = await importSettingsFromFile();
 
-type Settings = {
-  name?: string;
-  match?: string;
-  settings?: MainSettings;
-  packages: Package[];
-};
+  let settings: Settings;
 
-export default ({ name, url }: { name: string; url: string }): Settings => {
-  const settings = {
-    packages: [
-      {
-        name: "@frontity/frontity"
-      }
-    ]
-  };
+  if (Array.isArray(allSettings)) {
+    settings = allSettings[0];
+  } else {
+    settings = allSettings;
+  }
 
   return settings;
 };
