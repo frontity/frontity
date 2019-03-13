@@ -13,6 +13,7 @@ const buildDir = "build";
 const analyzeDir = "analyze";
 const argv = Argv(process.argv.slice(2));
 
+// Create an express app ready to be used with webpack-dev-middleware.
 const createApp = async ({
   mode,
   port,
@@ -27,10 +28,11 @@ const createApp = async ({
   app: express.Express;
   done: (compiler: webpack.MultiCompiler) => void;
 }> => {
-  // Create the server.
+  // Create the app.
   const app = express();
-  // Create a function to start listening after webpack has finished.
+  // Use the http or https modules to create the server.
   const server = await createServer({ app, isHttps });
+  // Start listening once webpack has finished.
   let clientFinished = false;
   let serverFinished = false;
   const start = () => {
@@ -46,6 +48,7 @@ const createApp = async ({
       });
     }
   };
+  // Check if webpack has finished (both the client and server bundles).
   const done = (compiler: webpack.MultiCompiler) => {
     compiler.compilers[0].hooks.done.tapAsync(
       "frontity-dev-server",
@@ -64,10 +67,10 @@ const createApp = async ({
       }
     );
   };
-
   return { app, done };
 };
 
+// Start Frontity development environment.
 const dev = async ({
   isHttps,
   mode,
