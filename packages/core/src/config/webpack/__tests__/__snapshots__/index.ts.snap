@@ -74,7 +74,7 @@ Object {
         "compiler": null,
         "handleEmit": [Function],
         "opts": Object {
-          "filename": "../client-chunks.json",
+          "filename": "../bundling/client-chunks.json",
           "outputAsset": true,
           "path": undefined,
           "writeToDisk": undefined,
@@ -167,7 +167,7 @@ Object {
         "compiler": null,
         "handleEmit": [Function],
         "opts": Object {
-          "filename": "../client-chunks.json",
+          "filename": "../bundling/client-chunks.json",
           "outputAsset": true,
           "path": undefined,
           "writeToDisk": undefined,
@@ -339,7 +339,7 @@ Object {
         "compiler": null,
         "handleEmit": [Function],
         "opts": Object {
-          "filename": "../client-chunks.json",
+          "filename": "../bundling/client-chunks.json",
           "outputAsset": true,
           "path": undefined,
           "writeToDisk": undefined,
@@ -425,7 +425,7 @@ Object {
         "compiler": null,
         "handleEmit": [Function],
         "opts": Object {
-          "filename": "../client-chunks.json",
+          "filename": "../bundling/client-chunks.json",
           "outputAsset": true,
           "path": undefined,
           "writeToDisk": undefined,

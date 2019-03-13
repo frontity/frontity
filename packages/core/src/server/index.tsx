@@ -8,7 +8,7 @@ import template from "./template";
 import App from "../app";
 import { ChunkExtractor } from "@loadable/server";
 // @ts-ignore - This is a dynamic generated file that cannot be analyzed by TS.
-import stats from "build/client-chunks.json";
+import stats from "build/bundling/client-chunks.json";
 
 const app = new Koa();
 

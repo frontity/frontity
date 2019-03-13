@@ -10,6 +10,7 @@ import { Target, Mode } from "../../types";
 
 const buildDir = "build";
 const analyzeDir = "analyze";
+const bundlingDir = "bundling";
 
 export default ({
   target,
@@ -40,7 +41,7 @@ export default ({
   if (target !== "server")
     config.push(
       new LoadablePlugin({
-        filename: "../client-chunks.json"
+        filename: `../${bundlingDir}/client-chunks.json`
       })
     );
 
