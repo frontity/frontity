@@ -1,11 +1,12 @@
 import Argv from "minimist";
-import { ensureDir, emptyDir } from "fs-extra";
+import { join } from "path";
+import { ensureDir, emptyDir, remove } from "fs-extra";
 import webpack from "webpack";
 import getConfig from "../config";
 import { Mode } from "../types";
 
 const buildDir = "build";
-const analyzeDir = "analyze";
+const bundlingDir = "bundling";
 const argv = Argv(process.argv.slice(2));
 
 const webpackAsync = (config: webpack.Configuration): Promise<void> =>
@@ -21,11 +22,9 @@ const build = async ({ mode }: { mode: Mode }): Promise<void> => {
 
   // Create the directories if they don't exist.
   await ensureDir(buildDir);
-  await ensureDir(analyzeDir);
 
   // Remove all the files inside the directories.
   await emptyDir(buildDir);
-  await emptyDir(analyzeDir);
 
   // Get FrontityConfig for webpack.
   const frontityConfig = getConfig({ mode });
@@ -40,6 +39,10 @@ const build = async ({ mode }: { mode: Mode }): Promise<void> => {
   console.log("Building server bundle");
   await webpackAsync(frontityConfig.webpack.server);
   console.log();
+
+  // Remove the bundling folder after the build in production because
+  // it is not needed anymore.
+  if (mode === "production") await remove(join(buildDir, bundlingDir));
 };
 
 (process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
