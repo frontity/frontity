@@ -19,20 +19,19 @@ export default ({
   target: Target;
   mode: Mode;
 }): Configuration["plugins"] => {
-  const config: Configuration["plugins"] = [];
+  const config: Configuration["plugins"] = [
+    // Create HTML files for bundle analyzing.
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      reportFilename: `${
+        target !== "server" ? `../` : ""
+      }${analyzeDir}/${target}-${mode}.html`,
+      openAnalyzer: false,
+      logLevel: "silent"
+    })
+  ];
 
   if (mode === "development") {
-    // Create HTML files for bundle analyzing.
-    config.push(
-      new BundleAnalyzerPlugin({
-        analyzerMode: "static",
-        reportFilename: `${
-          target !== "server" ? `../` : ""
-        }${analyzeDir}/${target}-${mode}.html`,
-        openAnalyzer: false,
-        logLevel: "silent"
-      })
-    );
     // Don't rebuild on changes of the build folder.
     config.push(new WatchIgnorePlugin([new RegExp(buildDir)]));
   }

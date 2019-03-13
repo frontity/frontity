@@ -308,6 +308,28 @@ Object {
       "publicPath": "/static",
     },
     "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "../analyze/es5-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -367,6 +389,28 @@ Object {
       "publicPath": "/static",
     },
     "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "../analyze/module-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -427,6 +471,28 @@ Object {
       "path": "build/",
     },
     "plugins": Array [
+      BundleAnalyzerPlugin {
+        "logger": Logger {
+          "activeLevels": Set {
+            "silent",
+          },
+        },
+        "opts": Object {
+          "analyzerHost": "127.0.0.1",
+          "analyzerMode": "static",
+          "analyzerPort": 8888,
+          "defaultSizes": "parsed",
+          "excludeAssets": null,
+          "generateStatsFile": false,
+          "logLevel": "silent",
+          "openAnalyzer": false,
+          "reportFilename": "analyze/server-production.html",
+          "startAnalyzer": true,
+          "statsFilename": "stats.json",
+          "statsOptions": null,
+        },
+        "server": null,
+      },
       LimitChunkCountPlugin {
         "options": Object {
           "maxChunks": 1,
