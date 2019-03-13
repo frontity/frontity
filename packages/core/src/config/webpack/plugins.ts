@@ -19,19 +19,23 @@ export default ({
   target: Target;
   mode: Mode;
 }): Configuration["plugins"] => {
-  const config: Configuration["plugins"] = [
+  const config: Configuration["plugins"] = [];
+
+  if (mode === "development") {
     // Create HTML files for bundle analyzing.
-    new BundleAnalyzerPlugin({
-      analyzerMode: "static",
-      reportFilename: `../${
-        target !== "server" ? `../` : ""
-      }${analyzeDir}/${target}-${mode}.html`,
-      openAnalyzer: false,
-      logLevel: "silent"
-    }),
+    config.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        reportFilename: `${
+          target !== "server" ? `../` : ""
+        }${analyzeDir}/${target}-${mode}.html`,
+        openAnalyzer: false,
+        logLevel: "silent"
+      })
+    );
     // Don't rebuild on changes of the build folder.
-    new WatchIgnorePlugin([new RegExp(buildDir)])
-  ];
+    config.push(new WatchIgnorePlugin([new RegExp(buildDir)]));
+  }
 
   // Support HMR in development. Only needed in client.
   if (target !== "server" && mode === "development")

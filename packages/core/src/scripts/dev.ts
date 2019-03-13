@@ -10,7 +10,6 @@ import getConfig from "../config";
 import { Mode } from "../types";
 
 const buildDir = "build";
-const analyzeDir = "analyze";
 const argv = Argv(process.argv.slice(2));
 
 // Create an express app ready to be used with webpack-dev-middleware.
@@ -84,11 +83,9 @@ const dev = async ({
 }): Promise<void> => {
   // Create the directories if they don't exist.
   await ensureDir(buildDir);
-  await ensureDir(analyzeDir);
 
   // Remove all the files inside the directories.
   await emptyDir(buildDir);
-  await emptyDir(analyzeDir);
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, es5 });
