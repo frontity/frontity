@@ -5,7 +5,7 @@ import { existsSync } from "fs";
 
 jest.mock("path");
 const mockedPath = path as jest.Mocked<typeof path>;
-mockedPath.resolve.mockImplementation((_, dir) => dir);
+mockedPath.resolve.mockImplementation((_, ...dirs) => dirs.join("/"));
 
 jest.mock("hash-it");
 const mockedHash = hash as jest.Mocked<typeof hash>;
