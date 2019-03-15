@@ -56,6 +56,8 @@ There are others, like [Next.js](https://nextjs.org/) or [GatbsyJS](https://www.
 
 ## Why Frontity?
 
+## Whos's behind?
+
 ### Fully Decoupled React Themes
 
 It uses NodeJS (and not PHP) to create the final server rendered HTML.
