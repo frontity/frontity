@@ -1,9 +1,8 @@
-<div style="display: flex; align-items: center; justify-content: center;">
+<div align="center">
   <img
-    src="https://uploads.frontity.org/images/logo/icono-frontity-negro.png"
-    width="50px"
+    src="https://uploads.frontity.org/images/logo/frontity-letters-black-transparent-background.png"
+    width="300px"
   />
-  <h1 align="center" style="font-size: 2.7rem; font-weight: 800">Frontity</h1>
 </div>
 <h2 align="center">
   Create amazing sites using WordPress & React
