@@ -11,7 +11,7 @@
 >
 > - Alpha Release Date: **April 20, 2019**
 > - Beta Release Date: **May 20, 2019**
-> - Final v1.0 Release Date: **June 20, 2019**
+> - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
 >
 > #### Join the alpha test list at Frontity.org!
 
@@ -40,13 +40,20 @@ One of those possibilities is to create WordPress themes using React. That's whe
 
 ## 2. A React framework to create WordPress themes
 
-[**React**](https://reactjs.org/) is a super powerful JavaScript library for building user interfaces. It was created by **Facebook** and is taking over front-end development.
+[**React**](https://reactjs.org/) is a super powerful library for building user interfaces. It was created by **Facebook** and is taking over front-end development.
 
-But, in spite of how amazing it is, **React** is just a UI library. If you want to create a WordPress theme you still need to configure a lots of things: _bundling, transpiling, routing, state management, server rendering, linting, testing..._ **There is a reason React frameworks exist :)**
+But, in spite of how amazing it is, React is just **a JavaScript library, not a framework**. It does not assume anything about the other parts in any full solution. It focuses on just one thing, and on doing that thing very well.
 
-There are others, like [Next.js](https://nextjs.org/) or [GatbsyJS](https://www.gatsbyjs.org/). Both are amazing tools and they _can_ work with WordPress, but there's still a lot configuration needed.
+In order to create a WordPress theme with React developers need to learn and configure a lots of different things: _bundling, transpiling, routing, server rendering, retrieving data from WordPress, managing state, managing css, linting, testing..._
 
-[**Frontity**](https://frontity.org), on the other hand, it is **focused in WordPress**. This means everything is already patched and working so you can start creating your new amazing WordPress theme with React, right away! 🎉
+**There is a reason React frameworks exist**. For example, [Next.js](https://nextjs.org/) and [GatbsyJS](https://www.gatsbyjs.org/) are two amazing React frameworks. Both _can_ work with WordPress, but are not focused on WordPress. Therefore, there's still some configuration and additional tooling left to the developer.
+
+[**Frontity**](https://frontity.org), on the other hand, is an **opinionated React framework focused on WordPress**:
+
+- **Opinionated framework:** developers don't need to figure out what tools to use for things like css or state management.
+- **Focused on WordPress:** each part of the framework has been simplified and optimized to be used with WordPress.
+
+This means everything is already patched and working so you can start creating your new amazing WordPress theme with React right away! 🎉🚀
 
 # » How does it work?
 
