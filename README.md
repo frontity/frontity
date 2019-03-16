@@ -1,7 +1,13 @@
-<p align="center">
-  <h1 align="center" style="font-size: 2.7rem;">» Frontity</h1>
-</p>
-<p align="center" style="font-size: 1.5rem;">Create amazing sites using WordPress & React</p>
+<div style="display: flex; align-items: center; justify-content: center;">
+  <img
+    src="https://uploads.frontity.org/images/logo/icono-frontity-negro.png"
+    width="50px"
+  />
+  <h1 align="center" style="font-size: 2.7rem; font-weight: 800">Frontity</h1>
+</div>
+<h2 align="center">
+  Create amazing sites using WordPress & React
+</h2>
 
 ---
 
@@ -57,6 +63,14 @@ This means everything is already patched and working so you can start creating y
 
 # » How does it work?
 
+With **Frontity**, WordPress become a **Headless CMS**.
+
+> _A [Headless CMS](https://css-tricks.com/what-is-a-headless-cms/) is a content management system that makes the content accessible via an API._
+
+Editors can keep creating their content in the WordPress dashboard, but the front-end (the theme) is rendered by Frontity in an external Node.js server:
+
+![Frontity & WordPress explanation](https://uploads.frontity.org/images/github/frontity-wordpress-explanation.png)
+
 ## Why a Node.js server?
 
 ## Why React?
@@ -64,6 +78,8 @@ This means everything is already patched and working so you can start creating y
 ## Why Frontity?
 
 ## Whos's behind?
+
+We are a small team of people who
 
 ### Fully Decoupled React Themes
 
