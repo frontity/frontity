@@ -4,9 +4,9 @@
     width="300px"
   />
 </div>
-<h2 align="center">
+<h1 align="center">
   Create amazing sites using WordPress & React
-</h2>
+</h1>
 
 ---
 
@@ -18,7 +18,7 @@
 > - Beta Release Date: **May 20, 2019**
 > - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
 >
-> #### Join the alpha test list at Frontity.org!
+> #### Join the alpha test list at [Frontity.org](https://frontity.org)!
 
 ---
 
@@ -60,17 +60,31 @@ In order to create a WordPress theme with React developers need to learn and con
 
 This means everything is already patched and working so you can start creating your new amazing WordPress theme with React right away! 🎉🚀
 
-# » How does it work?
+# » How does Frontity work?
+
+**Frontity** is a separate service from WordPress.
+
+- It lives in **Node.js** and resembles a regular React app but with some additional goodness that make the integration with WordPress a breeze.
+- It uses the WP API to retrieve the content it needs to generate the final HTML.
+- It has an optional WordPress.org plugin that enhances some aspects of the WP API.
+
+<div align="center"><img alt="Frontity & WordPress explanation" src="https://uploads.frontity.org/images/github/frontity-wordpress-explanation.png" width="600px"></div>
+
+Remember, React is a JavaScript library. In order to create an HTML in the server to send to the visitors (or Google!) the server needs to be able to run JavaScript as well.
+
+By the way, Frontity works with serverless services like AWS Lambda, Now, Netlify and so on.
+
+> _Serverless..._
+
+> _In theory the PHP server could send an empty HTML with the JavaScript files and the visitor would see the page after the JavaScript has loaded, but it is not recommended if your site needs to rank in Google._
 
 With **Frontity**, WordPress become a **Headless CMS**.
 
 > _A [Headless CMS](https://css-tricks.com/what-is-a-headless-cms/) is a content management system that makes the content accessible via an API._
 
-Editors can keep creating their content in the WordPress dashboard, but the front-end (the theme) is rendered by Frontity in an external Node.js server:
+Editors create their content in the WordPress dashboard, but the theme (the HTML) is rendered by Frontity in an external Node.js server:
 
-![Frontity & WordPress explanation](https://uploads.frontity.org/images/github/frontity-wordpress-explanation.png)
-
-## Why a Node.js server?
+## Why a different Node.js server?
 
 ## Why React?
 
