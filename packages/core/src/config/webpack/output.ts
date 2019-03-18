@@ -2,6 +2,10 @@ import { resolve } from "path";
 import { Configuration } from "webpack";
 import { Target, Mode } from "../../types";
 
+const buildDir = "build";
+// Get the root path of the directory where the script was started.
+const rootPath = process.cwd();
+
 export default ({
   target,
   mode
@@ -58,7 +62,7 @@ export default ({
   };
   const config: Configuration["output"] = {
     filename: filenames[target][mode],
-    path: resolve(__dirname, `../../../build/${paths[target]}`)
+    path: resolve(rootPath, buildDir, paths[target])
   };
   // Node still needs CJS.
   if (target === "server") config.libraryTarget = "commonjs2";

@@ -19,7 +19,8 @@
     "dev": "ts-node src/scripts/dev.ts",
     "build": "ts-node src/scripts/build.ts",
     "serve": "ts-node src/scripts/serve.ts",
-    "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts"
+    "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
+    "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"

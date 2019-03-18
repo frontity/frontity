@@ -4,7 +4,7 @@
   "scripts": {
     "test": "lerna run test:ci --stream",
     "cz": "git-cz",
-    "prepare": "lerna bootstrap",
+    "prepare": "lerna bootstrap --hoist",
     "release": "lerna version --yes"
   },
   "devDependencies": {

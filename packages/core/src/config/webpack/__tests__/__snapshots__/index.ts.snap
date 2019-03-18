@@ -33,7 +33,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].es5.js",
       "filename": "main.es5.js",
-      "path": "../../../build/static",
+      "path": "build/static",
       "publicPath": "/static",
     },
     "plugins": Array [
@@ -52,7 +52,7 @@ Object {
           "generateStatsFile": false,
           "logLevel": "silent",
           "openAnalyzer": false,
-          "reportFilename": "../../analyze/es5-development.html",
+          "reportFilename": "../analyze/es5-development.html",
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -74,7 +74,7 @@ Object {
         "compiler": null,
         "handleEmit": [Function],
         "opts": Object {
-          "filename": "client-chunks.json",
+          "filename": "../bundling/client-chunks.json",
           "outputAsset": true,
           "path": undefined,
           "writeToDisk": undefined,
@@ -83,6 +83,9 @@ Object {
       },
     ],
     "resolve": Object {
+      "alias": Object {
+        "build": "build",
+      },
       "extensions": Array [
         ".js",
         ".jsx",
@@ -123,7 +126,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].module.js",
       "filename": "main.module.js",
-      "path": "../../../build/static",
+      "path": "build/static",
       "publicPath": "/static",
     },
     "plugins": Array [
@@ -142,7 +145,7 @@ Object {
           "generateStatsFile": false,
           "logLevel": "silent",
           "openAnalyzer": false,
-          "reportFilename": "../../analyze/module-development.html",
+          "reportFilename": "../analyze/module-development.html",
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -164,7 +167,7 @@ Object {
         "compiler": null,
         "handleEmit": [Function],
         "opts": Object {
-          "filename": "client-chunks.json",
+          "filename": "../bundling/client-chunks.json",
           "outputAsset": true,
           "path": undefined,
           "writeToDisk": undefined,
@@ -173,6 +176,9 @@ Object {
       },
     ],
     "resolve": Object {
+      "alias": Object {
+        "build": "build",
+      },
       "extensions": Array [
         ".js",
         ".jsx",
@@ -214,7 +220,7 @@ Object {
     "output": Object {
       "filename": "server.js",
       "libraryTarget": "commonjs2",
-      "path": "../../../build/",
+      "path": "build/",
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -232,7 +238,7 @@ Object {
           "generateStatsFile": false,
           "logLevel": "silent",
           "openAnalyzer": false,
-          "reportFilename": "../analyze/server-development.html",
+          "reportFilename": "analyze/server-development.html",
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -251,6 +257,9 @@ Object {
       },
     ],
     "resolve": Object {
+      "alias": Object {
+        "build": "build",
+      },
       "extensions": Array [
         ".js",
         ".jsx",
@@ -295,7 +304,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
       "filename": "main.es5.[chunkhash].js",
-      "path": "../../../build/static",
+      "path": "build/static",
       "publicPath": "/static",
     },
     "plugins": Array [
@@ -314,23 +323,18 @@ Object {
           "generateStatsFile": false,
           "logLevel": "silent",
           "openAnalyzer": false,
-          "reportFilename": "../../analyze/es5-production.html",
+          "reportFilename": "../analyze/es5-production.html",
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
         },
         "server": null,
       },
-      WatchIgnorePlugin {
-        "paths": Array [
-          /build/,
-        ],
-      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
         "opts": Object {
-          "filename": "client-chunks.json",
+          "filename": "../bundling/client-chunks.json",
           "outputAsset": true,
           "path": undefined,
           "writeToDisk": undefined,
@@ -339,6 +343,9 @@ Object {
       },
     ],
     "resolve": Object {
+      "alias": Object {
+        "build": "build",
+      },
       "extensions": Array [
         ".js",
         ".jsx",
@@ -378,7 +385,7 @@ Object {
     "output": Object {
       "chunkFilename": "[name].module.[chunkhash].js",
       "filename": "main.module.[chunkhash].js",
-      "path": "../../../build/static",
+      "path": "build/static",
       "publicPath": "/static",
     },
     "plugins": Array [
@@ -397,23 +404,18 @@ Object {
           "generateStatsFile": false,
           "logLevel": "silent",
           "openAnalyzer": false,
-          "reportFilename": "../../analyze/module-production.html",
+          "reportFilename": "../analyze/module-production.html",
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
         },
         "server": null,
       },
-      WatchIgnorePlugin {
-        "paths": Array [
-          /build/,
-        ],
-      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
         "opts": Object {
-          "filename": "client-chunks.json",
+          "filename": "../bundling/client-chunks.json",
           "outputAsset": true,
           "path": undefined,
           "writeToDisk": undefined,
@@ -422,6 +424,9 @@ Object {
       },
     ],
     "resolve": Object {
+      "alias": Object {
+        "build": "build",
+      },
       "extensions": Array [
         ".js",
         ".jsx",
@@ -463,7 +468,7 @@ Object {
     "output": Object {
       "filename": "server.js",
       "libraryTarget": "commonjs2",
-      "path": "../../../build/",
+      "path": "build/",
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -481,17 +486,12 @@ Object {
           "generateStatsFile": false,
           "logLevel": "silent",
           "openAnalyzer": false,
-          "reportFilename": "../analyze/server-production.html",
+          "reportFilename": "analyze/server-production.html",
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
         },
         "server": null,
-      },
-      WatchIgnorePlugin {
-        "paths": Array [
-          /build/,
-        ],
       },
       LimitChunkCountPlugin {
         "options": Object {
@@ -500,6 +500,9 @@ Object {
       },
     ],
     "resolve": Object {
+      "alias": Object {
+        "build": "build",
+      },
       "extensions": Array [
         ".js",
         ".jsx",

@@ -47,7 +47,8 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       [
         "@babel/preset-env",
         {
-          targets: targets[target]
+          targets: targets[target],
+          useBuiltIns: target === "es5" && "entry"
         }
       ],
       "@babel/preset-react"
