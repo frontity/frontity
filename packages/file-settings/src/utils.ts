@@ -1,42 +1,20 @@
 import fs from "fs";
 import path from "path";
 import { AllSettings } from "./types";
+import defaultSettings from "../frontity.settings";
 
 // This function imports the available settings, either custom or default.
 export const importSettingsFromFile = async (): Promise<AllSettings> => {
-  // Path to the custom settings file.
-  const customSettingsPath: string = process.cwd();
-  // Path to the default settings file.
-  const defaultSettingsPath: string = path.resolve(
-    process.cwd(),
-    "node_modules/@frontity/file-settings"
-  );
+  // Define custom settings file path.
+  const settingsFile: string = path.resolve(process.cwd(), "frontity.settings");
 
-  // Possible settings files and its priorities:
-  // 1. Custom settings in TypeScript.
-  // 2. Custom settings in JavaScript.
-  // 3. Default settings in TypeScript.
-  // 4. Default settings in JavaScript.
-  const settingsPaths: string[] = [
-    path.resolve(customSettingsPath, "frontity.settings.ts"),
-    path.resolve(customSettingsPath, "frontity.settings.js"),
-    path.resolve(defaultSettingsPath, "frontity.settings.ts"),
-    path.resolve(defaultSettingsPath, "frontity.settings.js")
-  ];
+  // Check if the custom settings file exists.
+  const fileExists: boolean =
+    fs.existsSync(settingsFile + ".ts") || fs.existsSync(settingsFile + ".js");
 
-  // Available settings file.
-  let settingsFile: string;
+  // Return custom settings if possible.
+  if (fileExists) return (await import(settingsFile)).default;
 
-  // Loop over the possible settings files until one is available.
-  for (let settingsPath of settingsPaths) {
-    const fileExists: boolean = fs.existsSync(settingsPath);
-
-    if (fileExists) {
-      settingsFile = settingsPath;
-      break;
-    }
-  }
-
-  // Return the settings imported from the available file.
-  return (await import(settingsFile)).default;
+  // Return default settings otherwise.
+  return defaultSettings;
 };
