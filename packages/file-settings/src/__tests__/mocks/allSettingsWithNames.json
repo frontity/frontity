@@ -1,0 +1,10 @@
+[
+  {
+    "name": "settings-one",
+    "packages": ["@frontity/theme"]
+  },
+  {
+    "name": "settings-two",
+    "packages": ["@frontity/theme"]
+  }
+]

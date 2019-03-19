@@ -1,0 +1,11 @@
+[
+  {
+    "name": "settings-without-match",
+    "packages": []
+  },
+  {
+    "name": "settings-with-match",
+    "matches": ["https://frontity.org.*/amp/?$"],
+    "packages": []
+  }
+]

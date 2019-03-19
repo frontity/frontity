@@ -1,0 +1,6 @@
+[
+  {
+    "name": "allsettings-length-one",
+    "packages": ["@frontity/theme"]
+  }
+]

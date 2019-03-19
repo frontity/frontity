@@ -1,6 +1,6 @@
 export type Settings<T = Package> = {
   name?: string; // Default: undefined
-  match?: string | string[]; // Default: undefined
+  matches?: string[]; // Default: undefined
   mode?: string; // Default: "html"
   settings?: {
     url?: string; // Default: undefined
