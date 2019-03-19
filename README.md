@@ -62,21 +62,24 @@ This means everything is already patched and working so you can start creating y
 
 # » How does Frontity work?
 
-**Frontity** is a separate service from WordPress.
+**Frontity** is a React app that lives in Node.js, separated from WordPress.
 
-- It lives in **Node.js** and resembles a regular React app but with some additional goodness that make the integration with WordPress a breeze.
-- It uses the WP API to retrieve the content it needs to generate the final HTML.
-- It has an optional WordPress.org plugin that enhances some aspects of the WP API.
+- It uses the WP API to retrieve content and generate the final HTML.
+- It is also capable to generate AMP pages with the same React code and CSS.
 
 <div align="center"><img alt="Frontity & WordPress explanation" src="https://uploads.frontity.org/images/github/frontity-wordpress-explanation.png" width="600px"></div>
 
-Remember, React is a JavaScript library. In order to create an HTML in the server to send to the visitors (or Google!) the server needs to be able to run JavaScript as well.
+### Why a different Node.js server?
 
-By the way, Frontity works with serverless services like AWS Lambda, Now, Netlify and so on.
+React is a JavaScript library. In order to generate HTML for the visitors or Google, the server needs to be able to run JavaScript as well.
+
+> _In theory a PHP server can send an empty HTML with the JavaScript files and the visitor will see the page after the JavaScript has loaded, but it is not a good user experience and certainly not recommended if your site needs to rank in Google._
+
+**Frontity** is also prepared to be hosted in serverless services like [AWS Lambda](https://aws.amazon.com/lambda), [Now](https://zeit.co/now), [Netlify](https://www.netlify.com/), [Google Functions](https://cloud.google.com/functions/) and so on. That makes it super cheap and infinitely scalable.
 
 > _Serverless..._
 
-> _In theory the PHP server could send an empty HTML with the JavaScript files and the visitor would see the page after the JavaScript has loaded, but it is not recommended if your site needs to rank in Google._
+- It has an optional WordPress.org plugin that enhances some aspects of the WP API.
 
 With **Frontity**, WordPress become a **Headless CMS**.
 
