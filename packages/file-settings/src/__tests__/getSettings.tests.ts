@@ -1,38 +1,36 @@
 import getSettings from "../getSettings";
-import * as utils from "../utils";
+import * as importSettings from "../importSettings";
 import allSettingsNotArray from "./mocks/allSettingsNotArray.json";
 import allSettingsLengthOne from "./mocks/allSettingsLengthOne.json";
 import allSettingsWithNames from "./mocks/allSettingsWithNames.json";
 import allSettingsOneMatch from "./mocks/allSettingsOneMatch.json";
 import allSettingsManyMatches from "./mocks/allSettingsManyMatches.json";
 
-jest.mock("../utils");
+jest.mock("../importSettings");
 
 describe("`getSettings` should return the right settings when:", () => {
-  const mockedUtils = utils as jest.Mocked<typeof utils>;
+  const mockedImportSettings = importSettings as jest.Mocked<
+    typeof importSettings
+  >;
 
   afterEach(() => {
-    mockedUtils.importSettingsFromFile.mockReset();
+    mockedImportSettings.default.mockReset();
   });
 
   test("`allSettings` is not an array", async () => {
-    mockedUtils.importSettingsFromFile.mockResolvedValueOnce(
-      allSettingsNotArray
-    );
+    mockedImportSettings.default.mockResolvedValueOnce(allSettingsNotArray);
     const settings = await getSettings({ url: "https://frontity.org" });
     expect(settings.name).toBe("allsettings-not-array");
   });
 
   test("`allSettings` is an array of length 1", async () => {
-    mockedUtils.importSettingsFromFile.mockResolvedValueOnce(
-      allSettingsLengthOne
-    );
+    mockedImportSettings.default.mockResolvedValueOnce(allSettingsLengthOne);
     const settings = await getSettings({ url: "https://frontity.org" });
     expect(settings.name).toBe("allsettings-length-one");
   });
 
   test("`name` is passed as a param", async () => {
-    mockedUtils.importSettingsFromFile.mockResolvedValue(allSettingsWithNames);
+    mockedImportSettings.default.mockResolvedValue(allSettingsWithNames);
     const settings = [
       await getSettings({
         name: "settings-one",
@@ -48,7 +46,7 @@ describe("`getSettings` should return the right settings when:", () => {
   });
 
   test("one of the settings matches `url`", async () => {
-    mockedUtils.importSettingsFromFile.mockResolvedValue(allSettingsOneMatch);
+    mockedImportSettings.default.mockResolvedValue(allSettingsOneMatch);
     const settings = await getSettings({
       url: "https://frontity.org/amp/"
     });
@@ -56,9 +54,7 @@ describe("`getSettings` should return the right settings when:", () => {
   });
 
   test("more than one of the settings matches `url`", async () => {
-    mockedUtils.importSettingsFromFile.mockResolvedValue(
-      allSettingsManyMatches
-    );
+    mockedImportSettings.default.mockResolvedValue(allSettingsManyMatches);
     const settings = await getSettings({
       url: "https://frontity.org/page/about-us"
     });
@@ -66,16 +62,14 @@ describe("`getSettings` should return the right settings when:", () => {
   });
 
   test("none of the settings matches `url` but one settings doesn't have `matches` defined", async () => {
-    mockedUtils.importSettingsFromFile.mockResolvedValue(allSettingsOneMatch);
+    mockedImportSettings.default.mockResolvedValue(allSettingsOneMatch);
     const settings = await getSettings({
       url: "https://frontity.org"
     });
     expect(settings.name).toBe("settings-without-match");
   });
   test("none of the settings matches `url` and all settings have `matches` defined", async () => {
-    mockedUtils.importSettingsFromFile.mockResolvedValue(
-      allSettingsManyMatches
-    );
+    mockedImportSettings.default.mockResolvedValue(allSettingsManyMatches);
     const settings = await getSettings({
       url: "https://not.frontity.org"
     });

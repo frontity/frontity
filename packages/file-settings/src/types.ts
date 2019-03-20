@@ -1,4 +1,15 @@
-export type Settings<T = Package> = {
+export type Package = {
+  name: string; // Default: undefined
+  active?: boolean; // Default: true
+  namespaces?: string | string[]; // Default: undefined;
+  settings?: object; // Default: undefined
+};
+
+export type Packages = {
+  [key: string]: string[];
+};
+
+export type UniqueSettings<T = Package> = {
   name?: string; // Default: undefined
   matches?: string[]; // Default: undefined
   mode?: string; // Default: "html"
@@ -8,16 +19,11 @@ export type Settings<T = Package> = {
     timezone?: number; // Default: 0
     language?: string; // Default: "en"
   };
-  packages: T[];
+  packages: (string | T)[];
 };
 
-export type Package =
-  | string
-  | {
-      name: string;
-      active?: boolean; // Default: true
-      namespaces?: string | string[]; // Default: ["all"; "available"; "namespaces"];
-      settings?: object;
-    };
+export type MultiSettings<T = Package> = UniqueSettings<T> & {
+  name: string; // Default: undefined
+};
 
-export type AllSettings<T = Package> = Settings<T> | Settings<T>[];
+export type Settings<T = Package> = UniqueSettings<T> | MultiSettings<T>[];

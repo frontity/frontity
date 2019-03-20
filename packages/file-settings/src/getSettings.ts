@@ -1,5 +1,5 @@
-import { AllSettings, Settings } from "./types";
-import { importSettingsFromFile } from "./utils";
+import { Settings, UniqueSettings, MultiSettings } from "./types";
+import importSettings from "./importSettings";
 
 // This function returns the settings required by
 // the `core` package.
@@ -9,9 +9,9 @@ export default async ({
 }: {
   name?: string;
   url: string;
-}): Promise<Settings> => {
-  // Import the custom or default settings from a file.
-  const allSettings: AllSettings = await importSettingsFromFile();
+}): Promise<UniqueSettings | MultiSettings> => {
+  // Import the settings from a file.
+  const allSettings: Settings = await importSettings();
 
   // 1. Return settings when `allSettings` is an object.
   if (!Array.isArray(allSettings)) return allSettings;
@@ -25,6 +25,10 @@ export default async ({
   if (name) {
     const settings = allSettings.find(s => s.name === name);
     if (settings) return settings;
+    else {
+      // TODO
+      // throw an error because the settings name was wrong.
+    }
   }
 
   // 4. Return settings when `matches` match the param `url`.
