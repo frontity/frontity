@@ -8,14 +8,16 @@ export type Settings<T = Package> = {
     timezone?: number; // Default: 0
     language?: string; // Default: "en"
   };
-  packages: (string | T)[];
+  packages: T[];
 };
 
-export type Package = {
-  name: string;
-  active?: boolean; // Default: true
-  namespaces?: string | string[]; // Default: ["all"; "available"; "namespaces"];
-  settings?: object;
-};
+export type Package =
+  | string
+  | {
+      name: string;
+      active?: boolean; // Default: true
+      namespaces?: string | string[]; // Default: ["all"; "available"; "namespaces"];
+      settings?: object;
+    };
 
 export type AllSettings<T = Package> = Settings<T> | Settings<T>[];

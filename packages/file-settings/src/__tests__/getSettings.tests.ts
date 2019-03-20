@@ -1,4 +1,4 @@
-import getSettings from "../settings";
+import getSettings from "../getSettings";
 import * as utils from "../utils";
 import allSettingsNotArray from "./mocks/allSettingsNotArray.json";
 import allSettingsLengthOne from "./mocks/allSettingsLengthOne.json";
@@ -8,7 +8,7 @@ import allSettingsManyMatches from "./mocks/allSettingsManyMatches.json";
 
 jest.mock("../utils");
 
-describe("Settings › `getSettings` should return the right settings when:", () => {
+describe("`getSettings` should return the right settings when:", () => {
   const mockedUtils = utils as jest.Mocked<typeof utils>;
 
   afterEach(() => {
@@ -65,7 +65,7 @@ describe("Settings › `getSettings` should return the right settings when:", ()
     expect(settings.name).toBe("settings-with-large-match");
   });
 
-  test("none of the settings matches `url` and one settings doesn't have `matches` defined", async () => {
+  test("none of the settings matches `url` but one settings doesn't have `matches` defined", async () => {
     mockedUtils.importSettingsFromFile.mockResolvedValue(allSettingsOneMatch);
     const settings = await getSettings({
       url: "https://frontity.org"

@@ -1,6 +1,5 @@
 import { AllSettings, Settings } from "./types";
 import { importSettingsFromFile } from "./utils";
-import settings from "../frontity.settings";
 
 // This function returns the settings required by
 // the `core` package.

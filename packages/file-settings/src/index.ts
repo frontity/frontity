@@ -1,4 +1,4 @@
-import getSettings from "./settings";
-import getPackages from "./packages";
+import getSettings from "./getSettings";
+import getPackages from "./getPackages";
 
 export { getPackages, getSettings };

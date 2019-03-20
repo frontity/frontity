@@ -1,0 +1,10 @@
+{
+  "packages": [
+    {
+      "name": "@frontity/theme"
+    },
+    {
+      "name": "@frontity/wp-source"
+    }
+  ]
+}
