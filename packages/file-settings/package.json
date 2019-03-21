@@ -19,8 +19,8 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.123",
-    "lodash": "^4.17.11",
+    "@types/ramda": "^0.26.3",
+    "ramda": "^0.26.1",
     "typescript": "^3.3.3333"
   },
   "devDependencies": {

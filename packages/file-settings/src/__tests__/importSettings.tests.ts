@@ -12,7 +12,7 @@ describe("`importSettings` should return the settings when", () => {
 
   test("settings are defined in a TS file", async () => {
     mockedPath.resolve.mockImplementation(
-      (cwd, file) => `${cwd}/src/__tests__/mocks/ts/${file}`
+      (cwd, file) => `${cwd}/src/__tests__/mocks/importSettings/ts/${file}`
     );
     const result = (await importSettings()) as UniqueSettings;
     expect(result.name).toBe("custom-settings-ts");
@@ -20,7 +20,7 @@ describe("`importSettings` should return the settings when", () => {
 
   test("settings are defined in a JS file", async () => {
     mockedPath.resolve.mockImplementation(
-      (cwd, file) => `${cwd}/src/__tests__/mocks/js/${file}`
+      (cwd, file) => `${cwd}/src/__tests__/mocks/importSettings/js/${file}`
     );
     const result = (await importSettings()) as UniqueSettings;
     expect(result.name).toBe("custom-settings-js");
