@@ -58,7 +58,7 @@ In order to create a WordPress theme with React developers need to learn and con
 - **Opinionated framework:** developers don't need to figure out what tools to use for things like css or state management.
 - **Focused on WordPress:** each part of the framework has been simplified and optimized to be used with WordPress.
 
-This means everything is already patched and working so you can start creating your new amazing WordPress theme with React right away! 🎉🚀
+This means everything is ready so you can jump in and create a new amazing WordPress theme with React right now! 🎉🚀
 
 # » How does Frontity work?
 
@@ -75,42 +75,26 @@ React is a JavaScript library. In order to generate HTML for the visitors or Goo
 
 > _In theory a PHP server can send an empty HTML with the JavaScript files and the visitor will see the page after the JavaScript has loaded, but it is not a good user experience and certainly not recommended if your site needs to rank in Google._
 
-**Frontity** is also prepared to be hosted in serverless services like [AWS Lambda](https://aws.amazon.com/lambda), [Now](https://zeit.co/now), [Netlify](https://www.netlify.com/), [Google Functions](https://cloud.google.com/functions/) and so on. That makes it super cheap and infinitely scalable.
+**Frontity** is also prepared to be hosted in **serverless** services like [AWS Lambda](https://aws.amazon.com/lambda), [Now](https://zeit.co/now), [Netlify](https://www.netlify.com/), [Google Functions](https://cloud.google.com/functions/) and so on. That makes it super cheap and infinitely scalable.
 
-> _Serverless..._
+**Frontity** is **extensible**. Right now we have extensions like _Disqus comments, OneSignal notifications, Adsense, Doubleclick, SmartAds, Google Analytics, Google Tag Manager, Custom CSS or Custom HTML_. This means, your Frontity Theme won't have to reinvent the wheel each time including stuff than can be outsourced to extensions.
 
-- It has an optional WordPress.org plugin that enhances some aspects of the WP API.
+# » Why Frontity?
 
-With **Frontity**, WordPress become a **Headless CMS**.
+These are some of the benefits of Frontity.
 
-> _A [Headless CMS](https://css-tricks.com/what-is-a-headless-cms/) is a content management system that makes the content accessible via an API._
+### 🚀 Lightning Fast
 
-Editors create their content in the WordPress dashboard, but the theme (the HTML) is rendered by Frontity in an external Node.js server:
+**Frontity** is really fast. It loads in less than 1 second.
 
-## Why a different Node.js server?
+### ⚡️ Google AMP
 
-## Why React?
+The same React code and CSS can be used for AMP pages.
 
-## Why Frontity?
+### Zero setup
 
-## Whos's behind?
+Everything is already wired up it works with any WordPress installation, either self-hosted or from wordpress.com.
 
-We are a small team of people who
+# » Get involved 🤗
 
-### Fully Decoupled React Themes
-
-It uses NodeJS (and not PHP) to create the final server rendered HTML.
-
-### WP Rest API
-
-- **Frontity** is **extensible**. Right now we have extensions like _Disqus comments, OneSignal notifications, Adsense, Doubleclick, SmartAds, Google Analytics, Google Tag Manager, Custom CSS or Custom HTML_. This means, your Frontity Theme won't have to reinvent the wheel each time including stuff than can be outsourced to extensions.
-
-## » The Features «
-
-### 🚀 It is Lightning Fast
-
-The Frontity's render engine also supports **AMP** html. This means you can reuse your React and CSS code to create your AMP pages.
-
-## » Get involved 🤗 «
-
-Do you love WordPress and React? ❤️
+Do you love WordPress and React? Come join us! ❤️
