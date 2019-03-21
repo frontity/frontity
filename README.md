@@ -55,10 +55,10 @@ In order to create a WordPress theme with React developers need to learn and con
 
 [**Frontity**](https://frontity.org), on the other hand, is an **opinionated React framework focused on WordPress**:
 
-- **Opinionated framework:** developers don't need to figure out what tools to use for things like css or state management.
 - **Focused on WordPress:** each part of the framework has been simplified and optimized to be used with WordPress.
+- **Opinionated framework:** developers don't need to figure out what tools to use for things like css or state management.
 
-This means everything is ready so you can jump in and create a new amazing WordPress theme with React right now! 🎉🚀
+This means everything is ready so you can jump in and create a new amazing WordPress theme using React right away! 🎉🚀
 
 # » How does Frontity work?
 
@@ -75,26 +75,14 @@ React is a JavaScript library. In order to generate HTML for the visitors or Goo
 
 > _In theory a PHP server can send an empty HTML with the JavaScript files and the visitor will see the page after the JavaScript has loaded, but it is not a good user experience and certainly not recommended if your site needs to rank in Google._
 
-**Frontity** is also prepared to be hosted in **serverless** services like [AWS Lambda](https://aws.amazon.com/lambda), [Now](https://zeit.co/now), [Netlify](https://www.netlify.com/), [Google Functions](https://cloud.google.com/functions/) and so on. That makes it super cheap and infinitely scalable.
+**Frontity** is prepared to be hosted either in a regular Node.js server or in **serverless** services like [AWS Lambda](https://aws.amazon.com/lambda), [Now](https://zeit.co/now), [Netlify](https://www.netlify.com/), [Google Functions](https://cloud.google.com/functions/) and so on. That makes it super cheap and infinitely scalable.
 
-**Frontity** is **extensible**. Right now we have extensions like _Disqus comments, OneSignal notifications, Adsense, Doubleclick, SmartAds, Google Analytics, Google Tag Manager, Custom CSS or Custom HTML_. This means, your Frontity Theme won't have to reinvent the wheel each time including stuff than can be outsourced to extensions.
+Oh, and by the way, **Frontity is extensible**. Right now we have extensions like _Disqus comments, OneSignal notifications, Adsense, Doubleclick, SmartAds, Google Analytics, Google Tag Manager, Custom CSS or Custom HTML_. This means, Frontity Themes won't have to reinvent the wheel and include the same functionalities over and over.
 
-# » Why Frontity?
+# » Open source
 
-These are some of the benefits of Frontity.
-
-### 🚀 Lightning Fast
-
-**Frontity** is really fast. It loads in less than 1 second.
-
-### ⚡️ Google AMP
-
-The same React code and CSS can be used for AMP pages.
-
-### Zero setup
-
-Everything is already wired up it works with any WordPress installation, either self-hosted or from wordpress.com.
+Frontity is licensed under the terms of the [Apache 2.0](https://github.com/frontity/frontity/blob/master/LICENSE) license.
 
 # » Get involved 🤗
 
-Do you love WordPress and React? Come join us! ❤️
+Do you love WordPress and React? Come join us at our [community forums](https://community.frontity.org)! ❤️
