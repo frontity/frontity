@@ -7,8 +7,8 @@ export default async (): Promise<Packages> => {
   // Import the settings from a file.
   const allSettings: Settings = await importSettings();
 
-  // If settings are unique return the packages in an object
-  // with `default` key.
+  // If mono settings settings return the packages in an object
+  // with the `default` key.
   if (!Array.isArray(allSettings)) {
     const packages: string[] = allSettings.packages
       .filter((pkg: Package) => pkg.active)
@@ -18,6 +18,7 @@ export default async (): Promise<Packages> => {
       default: packages
     };
   }
+
   // Map the packages to an array of only package names.
   // return packages.map(pkg => (typeof pkg === "string" ? pkg : pkg.name));
   return {};

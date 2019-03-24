@@ -1,5 +1,12 @@
 import { mergeDeepRight as merge } from "ramda";
-import { Settings, UniqueSettings, MultiSettings } from "./types";
+import {
+  ImportedMono,
+  ImportedMulti,
+  ImportedSettings,
+  NormalizedMono,
+  NormalizedMulti,
+  Settings
+} from "./types";
 
 const defaultSettings = {
   mode: "html",
@@ -9,11 +16,14 @@ const defaultSettings = {
   }
 };
 
-const mergeSettings = <T extends UniqueSettings | MultiSettings>({
+function mergeSettings(s: ImportedMulti): NormalizedMulti;
+function mergeSettings(s: ImportedMono): NormalizedMono;
+
+function mergeSettings({
   packages,
   ...settings
-}: T): T =>
-  merge(
+}: ImportedMulti | ImportedMono): NormalizedMulti | NormalizedMono {
+  return merge(
     {
       ...defaultSettings,
       packages: packages.map(pkg =>
@@ -21,16 +31,17 @@ const mergeSettings = <T extends UniqueSettings | MultiSettings>({
       )
     },
     settings
-  ) as T;
+  );
+}
 
-const normalizeSettings = (settings: Settings): Settings => {
+function normalizeSettings(settings: ImportedSettings): Settings {
   if (!Array.isArray(settings)) return mergeSettings(settings);
   return settings.map(s => mergeSettings(s));
   // TODO
   // Throw errors if multisettings is missing a name
   // or names are repeated.
   // Throw errors if packages is missing or is an empty array.
-};
+}
 
 export default normalizeSettings;
 export { mergeSettings };
