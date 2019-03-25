@@ -12,13 +12,13 @@
 
 > **IMPORTANT NOTE!**
 >
-> We are working on the alpha version.
+> We are working on the beta version.
 >
-> - Alpha Release Date: **April 20, 2019**
-> - Beta Release Date: **May 20, 2019**
+> - Beta Release Date: **April 20, 2019**
+> - Release Candidate Date: **May 20, 2019**
 > - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
 >
-> #### Join the alpha test list at [Frontity.org](https://frontity.org)!
+> #### Join the beta test list at [Frontity.org](https://frontity.org)!
 
 ---
 
