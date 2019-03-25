@@ -1,4 +1,4 @@
-import { Settings, UniqueSettings, MultiSettings } from "./types";
+import { Settings, NormalizedMono, NormalizedMulti } from "./types";
 import importSettings from "./importSettings";
 
 // This function returns the settings required by
@@ -9,7 +9,7 @@ export default async ({
 }: {
   name?: string;
   url: string;
-}): Promise<UniqueSettings | MultiSettings> => {
+}): Promise<NormalizedMono | NormalizedMulti> => {
   // Import the settings from a file.
   const allSettings: Settings = await importSettings();
 

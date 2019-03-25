@@ -1,11 +1,19 @@
 [
   {
     "name": "settings-with-short-match",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
     "matches": ["https://frontity.org.*"],
     "packages": []
   },
   {
     "name": "settings-with-large-match",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
     "matches": ["https://frontity.org/page/.*"],
     "packages": []
   }

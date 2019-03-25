@@ -1,4 +1,8 @@
 {
-  "name": "allsettings-not-array",
-  "packages": ["@frontity/theme"]
+  "name": "mono-settings",
+  "settings": {
+    "timezone": 0,
+    "language": "en"
+  },
+  "packages": [{ "name": "@frontity/theme", "active": true }]
 }

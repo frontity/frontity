@@ -1,6 +1,10 @@
 [
   {
-    "name": "allsettings-length-one",
-    "packages": ["@frontity/theme"]
+    "name": "settings-with-length-one",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
+    "packages": []
   }
 ]

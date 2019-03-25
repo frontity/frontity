@@ -1,0 +1,38 @@
+[
+  {
+    "name": "settings-html",
+    "mode": "html",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
+    "packages": [
+      {
+        "name": "@frontity/theme-html",
+        "active": true
+      },
+      {
+        "name": "@frontity/wp-source-html",
+        "active": true
+      }
+    ]
+  },
+  {
+    "name": "settings-amp",
+    "mode": "amp",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
+    "packages": [
+      {
+        "name": "@frontity/theme-amp",
+        "active": true
+      },
+      {
+        "name": "@frontity/wp-source-amp",
+        "active": true
+      }
+    ]
+  }
+]

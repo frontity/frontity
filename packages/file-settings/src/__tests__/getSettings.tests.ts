@@ -20,7 +20,7 @@ describe("getSettings", () => {
   test("should work when `allSettings` is not an array", async () => {
     mockedImportSettings.default.mockResolvedValueOnce(mockedMonoSettings);
     const settings = await getSettings({ url: "https://frontity.org" });
-    expect(settings.name).toBe("allsettings-not-array");
+    expect(settings.name).toBe("mono-settings");
   });
 
   test("should work when `allSettings` is an array of length 1", async () => {
@@ -28,7 +28,7 @@ describe("getSettings", () => {
       mockedSettingsWithLengthOne
     );
     const settings = await getSettings({ url: "https://frontity.org" });
-    expect(settings.name).toBe("allsettings-length-one");
+    expect(settings.name).toBe("settings-with-length-one");
   });
 
   test("should work when `name` is passed as a param", async () => {

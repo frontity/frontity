@@ -1,38 +1,32 @@
 import path from "path";
 import importSettings from "../importSettings";
-import { UniqueSettings } from "../types";
+import { NormalizedMono } from "../types";
 
 jest.mock("path");
 const mockedPath = path as jest.Mocked<typeof path>;
 
-describe("`importSettings` should return the settings when", () => {
+describe("importSettings", () => {
   afterEach(() => {
     mockedPath.resolve.mockReset();
   });
 
-  test("settings are defined in a TS file", async () => {
+  test("should work when settings are defined in a TS file", async () => {
     mockedPath.resolve.mockImplementation(
       (cwd, file) => `${cwd}/src/__tests__/mocks/importSettings/ts/${file}`
     );
-    const result = (await importSettings()) as UniqueSettings;
+    const result = (await importSettings()) as NormalizedMono;
     expect(result.name).toBe("custom-settings-ts");
   });
 
-  test("settings are defined in a JS file", async () => {
+  test("should work when settings are defined in a JS file", async () => {
     mockedPath.resolve.mockImplementation(
       (cwd, file) => `${cwd}/src/__tests__/mocks/importSettings/js/${file}`
     );
-    const result = (await importSettings()) as UniqueSettings;
+    const result = (await importSettings()) as NormalizedMono;
     expect(result.name).toBe("custom-settings-js");
   });
-});
 
-describe("`importSettings` should throw an error when", () => {
-  afterEach(() => {
-    mockedPath.resolve.mockReset();
-  });
-
-  test("a settings file doesn't exist", async () => {
+  test("should throw when it doesn't exist a settings file", async () => {
     mockedPath.resolve.mockImplementation(
       (cwd, file) => `${cwd}/non/existet/path/${file}`
     );

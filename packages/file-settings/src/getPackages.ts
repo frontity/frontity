@@ -1,5 +1,9 @@
 import importSettings from "./importSettings";
-import { Settings, Packages, Package } from "./types";
+import { Settings, Package } from "./types";
+
+type Packages = {
+  [key: string]: string[];
+};
 
 // This function returns an array package names from the
 // selected settings.
@@ -7,7 +11,7 @@ export default async (): Promise<Packages> => {
   // Import the settings from a file.
   const allSettings: Settings = await importSettings();
 
-  // If mono settings settings return the packages in an object
+  // If mono settings return the packages in an object
   // with the `default` key.
   if (!Array.isArray(allSettings)) {
     const packages: string[] = allSettings.packages
@@ -19,7 +23,14 @@ export default async (): Promise<Packages> => {
     };
   }
 
-  // Map the packages to an array of only package names.
-  // return packages.map(pkg => (typeof pkg === "string" ? pkg : pkg.name));
-  return {};
+  // If multi settings return the packages in an object with
+  // each settings name as a key and a value of its packages
+  // as a string array.
+  return allSettings.reduce((final, current) => {
+    final[current.name] = current.packages
+      .filter(pkg => pkg.active)
+      .map(pkg => pkg.name);
+
+    return final;
+  }, {});
 };
