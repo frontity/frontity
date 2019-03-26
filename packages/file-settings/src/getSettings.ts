@@ -26,8 +26,7 @@ export default async ({
     const settings = allSettings.find(s => s.name === name);
     if (settings) return settings;
     else {
-      // TODO
-      // throw an error because the settings name was wrong.
+      throw new Error(`Do not exist any settings named '${name}'.`);
     }
   }
 

@@ -47,6 +47,13 @@ describe("getSettings", () => {
     expect(settings[1].name).toBe("settings-two");
   });
 
+  test("should throw when an unexistent `name` is passed as a param", async () => {
+    mockedImportSettings.default.mockResolvedValue(mockedSettingsWithNames);
+    await expect(
+      getSettings({ name: "fake-name", url: "https://frontity.org" })
+    ).rejects.toThrow("Do not exist any settings named 'fake-name'.");
+  });
+
   test("should work when one of the settings matches `url`", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithOneMatch);
     const settings = await getSettings({
@@ -70,6 +77,7 @@ describe("getSettings", () => {
     });
     expect(settings.name).toBe("settings-without-match");
   });
+
   test("should work when none of the settings matches `url` and all have `matches` defined", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithMatches);
     const settings = await getSettings({
