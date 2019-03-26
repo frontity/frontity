@@ -2,6 +2,7 @@ import getPackages from "../getPackages";
 import * as importSettings from "../importSettings";
 import mockedMonoSettings from "./mocks/getPackages/monoSettings.json";
 import mockedMultiSettings from "./mocks/getPackages/multiSettings.json";
+import mockedDeactivatedPackage from "./mocks/getPackages/deactivatedPackage.json";
 
 jest.mock("../importSettings");
 
@@ -28,6 +29,14 @@ describe("getPackages", () => {
     expect(result).toEqual({
       "settings-html": ["@frontity/theme-html", "@frontity/wp-source-html"],
       "settings-amp": ["@frontity/theme-amp", "@frontity/wp-source-amp"]
+    });
+  });
+
+  test("should filter out inactive packages", async () => {
+    mockedImportSettings.default.mockResolvedValue(mockedDeactivatedPackage);
+    const result = await getPackages();
+    expect(result).toEqual({
+      default: ["@frontity/theme"]
     });
   });
 });

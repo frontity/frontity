@@ -1,11 +1,12 @@
 import { mergeDeepRight as merge } from "ramda";
+import validateSettings from "./validateSettings";
 import {
-  ImportedMono,
-  ImportedMulti,
   ImportedSettings,
-  NormalizedMono,
+  Settings,
+  ImportedMulti,
+  ImportedMono,
   NormalizedMulti,
-  Settings
+  NormalizedMono
 } from "./types";
 
 const defaultSettings = {
@@ -16,32 +17,41 @@ const defaultSettings = {
   }
 };
 
-function mergeSettings(s: ImportedMulti): NormalizedMulti;
-function mergeSettings(s: ImportedMono): NormalizedMono;
+const defaultPackage = {
+  active: true
+};
 
-function mergeSettings({
-  packages,
-  ...settings
-}: ImportedMulti | ImportedMono): NormalizedMulti | NormalizedMono {
-  return merge(
-    {
-      ...defaultSettings,
-      packages: packages.map(pkg =>
-        merge({ active: true }, typeof pkg === "string" ? { name: pkg } : pkg)
-      )
-    },
-    settings
-  );
-}
-
+// This function normalizes the imported settings.
 function normalizeSettings(settings: ImportedSettings): Settings {
-  if (!Array.isArray(settings)) return mergeSettings(settings);
-  return settings.map(s => mergeSettings(s));
+  // This function merges the imported settings with
+  // the default settings.
+  function mergeSettings(s: ImportedMulti): NormalizedMulti;
+  function mergeSettings(s: ImportedMono): NormalizedMono;
+  function mergeSettings({
+    packages,
+    ...settings
+  }: ImportedMulti | ImportedMono): NormalizedMulti | NormalizedMono {
+    return merge(
+      {
+        ...defaultSettings,
+        packages: packages.map(pkg =>
+          merge(defaultPackage, typeof pkg === "string" ? { name: pkg } : pkg)
+        )
+      },
+      settings
+    );
+  }
+
   // TODO
-  // Throw errors if multisettings is missing a name
-  // or names are repeated.
-  // Throw errors if packages is missing or is an empty array.
+  // Default settings and validator from packages
+  // should be imported and used with each package.
+
+  // Validate settings before the merge.
+  validateSettings(settings);
+  // Merge mono settings.
+  if (!Array.isArray(settings)) return mergeSettings(settings);
+  // Merge multi settings.
+  return settings.map(s => mergeSettings(s));
 }
 
 export default normalizeSettings;
-export { mergeSettings };

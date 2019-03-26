@@ -1,9 +1,3 @@
-// There are for types of settings:
-// 1.a. Imported mono settings.
-// 1.b. Imported multi settings.
-// 2.a. Normalized mono settings.
-// 2.b. Normalized multi settings.
-
 type Base = {
   matches?: string[]; // Default: undefined
   mode?: string; // Default: "html"
@@ -35,6 +29,11 @@ type Imported<T> = Base & {
 };
 
 type Normalized<T> = Base & {
+  mode: string;
+  settings: {
+    timezone: number;
+    language: string;
+  };
   packages: T[];
 };
 

@@ -1,5 +1,6 @@
 {
   "name": "mono-settings",
+  "mode": "html",
   "settings": {
     "timezone": 0,
     "language": "en"

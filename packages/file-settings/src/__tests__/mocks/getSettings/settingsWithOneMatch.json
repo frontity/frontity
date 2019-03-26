@@ -1,6 +1,7 @@
 [
   {
     "name": "settings-without-match",
+    "mode": "html",
     "settings": {
       "timezone": 0,
       "language": "en"
@@ -9,6 +10,7 @@
   },
   {
     "name": "settings-with-match",
+    "mode": "html",
     "matches": ["https://frontity.org.*/amp/?$"],
     "settings": {
       "timezone": 0,

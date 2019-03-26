@@ -1,6 +1,7 @@
 [
   {
     "name": "settings-with-length-one",
+    "mode": "html",
     "settings": {
       "timezone": 0,
       "language": "en"
