@@ -1,0 +1,20 @@
+[
+  {
+    "name": "settings-one",
+    "mode": "html",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
+    "packages": []
+  },
+  {
+    "name": "settings-two",
+    "mode": "html",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
+    "packages": []
+  }
+]

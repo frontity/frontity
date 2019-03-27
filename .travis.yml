@@ -8,15 +8,19 @@ install:
   - npm i -g npm@6
   - npm ci
 node_js:
-  - lts/*
+  - 8.10.0
 script:
-  - npm run test:ci
+  - npm test
 after_success:
   - git config user.email "${GIT_COMMITTER_EMAIL}"
   - git config user.name "${GIT_COMMITTER_NAME}"
   - git remote set-url origin https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-  - git checkout ${TRAVIS_BRANCH}
-  - npm run release -- --yes
+  - |
+    if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then
+      git checkout ${TRAVIS_BRANCH}
+      printf "//registry.npmjs.org/:_authToken=$NPM_TOKEN\n" > ~/.npmrc
+      npm run release
+    fi
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
