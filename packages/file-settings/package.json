@@ -19,14 +19,14 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "ramda": "^0.26.1",
-    "typescript": "^3.3.3333"
+    "ramda": "^0.26.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
     "@types/ramda": "^0.26.3",
     "jest": "^24.3.1",
     "ts-jest": "^24.0.0",
-    "ts-node": "^8.0.3"
+    "ts-node": "^8.0.3",
+    "typescript": "^3.3.3333"
   }
 }
