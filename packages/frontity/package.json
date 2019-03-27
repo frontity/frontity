@@ -1,6 +1,6 @@
 {
   "name": "frontity",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "cli and entry point to other packages",
   "keywords": [
     "frontity"
@@ -16,6 +16,5 @@
   "scripts": {},
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
-  },
-  "dependencies": {}
+  }
 }

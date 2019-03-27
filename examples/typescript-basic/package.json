@@ -1,6 +1,6 @@
 {
   "name": "typescript-basic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
   "main": "src/index.ts",
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/frontity/frontity#readme",
   "dependencies": {
-    "@frontity/core": "0.1.2"
+    "@frontity/core": "^0.2.0"
   },
   "devDependencies": {
     "ts-node": "^8.0.3"
