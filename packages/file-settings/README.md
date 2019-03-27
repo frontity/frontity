@@ -79,6 +79,7 @@ The settings exported can be **mono settings**:
 ```ts
 {
   name?: string;
+  matches?: string[];
   mode?: string; // Default: "html"
   settings?: {
     url?: string;
@@ -105,12 +106,14 @@ Or **multi settings**:
 [
   {
     name: string; // This time the name is mandatory and must be unique.
+    matches?: string[];
     mode?: string; // Default: "html"
     settings?: { ... },
     packages: [ ... ]
   },
   {
     name: string; // This time the name is mandatory and must be unique.
+    matches?: string[];
     mode?: string; // Default: "html"
     settings?: { ... },
     packages: [ ... ]
