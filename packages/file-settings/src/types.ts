@@ -12,7 +12,7 @@ type Base = {
 export type Package = {
   name: string; // Default: undefined
   active?: boolean; // Default: true
-  namespaces?: string | string[]; // Default: undefined
+  namespaces?: string[]; // Default: undefined
   settings?: object; // Default: undefined
 };
 
