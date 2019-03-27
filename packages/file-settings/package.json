@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/frontity/frontity.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test:ci": "jest",
     "test": "jest --watch",
