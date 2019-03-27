@@ -2,7 +2,7 @@
   "packages": ["packages/*", "examples/*"],
   "version": "independent",
   "command": {
-    "version": {
+    "publish": {
       "allowBranch": "master",
       "conventionalCommits": true,
       "githubRelease": true,

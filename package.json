@@ -5,7 +5,7 @@
     "test": "lerna run test:ci --stream",
     "cz": "git-cz",
     "prepare": "lerna bootstrap --hoist",
-    "release": "lerna version --yes"
+    "release": "lerna publish --yes"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
