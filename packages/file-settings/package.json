@@ -5,7 +5,8 @@
   "author": "Eduardo Campaña <asrielo@gmail.com>",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frontity/frontity.git"
@@ -16,7 +17,8 @@
   "scripts": {
     "test:ci": "jest",
     "test": "jest --watch",
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "prepublish": "tsc"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
