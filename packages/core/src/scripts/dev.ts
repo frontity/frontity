@@ -4,13 +4,17 @@ import express from "express";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
+import { getPackages } from "@frontity/file-settings";
 import createServer from "./utils/create-server";
-import webpackHotServerMiddleware from "./utils/hot-server";
+import HotServer from "./utils/hot-server";
+import { generateServerFile } from "./utils/import-files";
 import getConfig from "../config";
 import { Mode } from "../types";
 
-const buildDir = "build";
-const argv = Argv(process.argv.slice(2));
+const argv = Argv(process.argv.slice(2), {
+  boolean: ["p", "h", "es5", "https"],
+  string: ["outDir", "mode", "port"]
+});
 
 // Create an express app ready to be used with webpack-dev-middleware.
 const createApp = async ({
@@ -74,18 +78,26 @@ const dev = async ({
   isHttps,
   mode,
   port,
-  es5
+  es5,
+  outDir
 }: {
   port: number;
   isHttps: boolean;
   mode: Mode;
   es5: boolean;
+  outDir: string;
 }): Promise<void> => {
   // Create the directories if they don't exist.
-  await ensureDir(buildDir);
+  await ensureDir(`${outDir}/bundling`);
 
   // Remove all the files inside the directories.
-  await emptyDir(buildDir);
+  await emptyDir(outDir);
+
+  // Get all packages.
+  const packages = await getPackages();
+
+  // Generate the bundles. One for the server.
+  await generateServerFile({ packages });
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, es5 });
@@ -120,7 +132,7 @@ const dev = async ({
     })
   );
   app.use(webpackHotMiddleware(compiler.compilers[0]));
-  app.use(webpackHotServerMiddleware(compiler));
+  app.use(HotServer(compiler));
 
   // Start listening once webpack finishes.
   done(compiler);
@@ -135,7 +147,8 @@ dev({
   mode: !!argv.p || argv.production ? "production" : "development",
   port: argv.port || 3000,
   isHttps: !!argv.h || !!argv.https,
-  es5: !!argv.es5
+  es5: !!argv.es5,
+  outDir: argv.outDir || "build"
 });
 
 export default dev;

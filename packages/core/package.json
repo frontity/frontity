@@ -50,12 +50,12 @@
     "promise-monofill": "^1.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "ts-node": "^8.0.3",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-dev-middleware": "^3.6.0",
-    "webpack-hot-middleware": "^2.24.3",
-    "ts-node": "^8.0.3"
+    "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
     "@types/babel-core": "^6.25.6",
