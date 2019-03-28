@@ -1,24 +1,54 @@
 import { Settings, Package } from "@frontity/file-settings";
 
-interface ExtensionExample extends Package {
-  name: "@frontity/extension-example";
+interface ExtensionExample1 extends Package {
+  name: "@frontity/extension-example1";
   settings: {
-    thing: string;
+    example1: string;
   };
 }
 
-const settings: Settings<ExtensionExample> = {
+interface ExtensionExample2 extends Package {
+  name: "@frontity/extension-example2";
   settings: {
-    url: "https://test.frontity.io"
-  },
-  packages: [
-    {
-      name: "@frontity/extension-example",
-      settings: {
-        thing: ""
+    example2: string;
+  };
+}
+
+const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
+  {
+    name: "site-1",
+    settings: {
+      url: "https://test.frontity.io"
+    },
+    packages: [
+      {
+        name: "@frontity/extension-example1",
+        settings: {
+          example1: ""
+        }
+      },
+      {
+        name: "@frontity/extension-example2",
+        settings: {
+          example2: ""
+        }
       }
-    }
-  ]
-};
+    ]
+  },
+  {
+    name: "site-2",
+    settings: {
+      url: "https://test.frontity.io"
+    },
+    packages: [
+      {
+        name: "@frontity/extension-example2",
+        settings: {
+          example2: ""
+        }
+      }
+    ]
+  }
+];
 
 module.exports = settings;
