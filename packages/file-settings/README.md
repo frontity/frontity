@@ -126,20 +126,16 @@ Or **multi settings**:
 Some [TS types](src/types.ts) are exposed to be used in development. They can be accessed like this:
 
 ```js
-import { types } from "@frontity/file-settings";
+import { Settings } from "@frontity/file-settings";
 
-const settings: types.ImportedSettings = { ... };
+const settings: Settings = { ... };
 ```
 
 The following are probably the only types you will need during development:
 
-### `ImportedSettings<T = Package>`
-
-Types for the imported settings object from the settings file. You'll want to use them on your `frontity.settings.ts` file.
-
 ### `Settings<T = Package>`
 
-Types for the settings object after it has been merged with the default settings and normalized.
+Types for the imported settings object from the settings file. You'll want to use them on your `frontity.settings.ts` file.
 
 ### `Package`
 
