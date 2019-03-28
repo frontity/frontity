@@ -1,5 +1,5 @@
 import { uniq, uniqBy } from "ramda";
-import { ImportedSettings, Package } from "./types";
+import { Settings, Package } from "./types";
 
 // This function validates the packages.
 const validatePackages = (packages: (string | Package)[]): void => {
@@ -15,7 +15,7 @@ const validatePackages = (packages: (string | Package)[]): void => {
 };
 
 // This function is used to validate the imported settings.
-export default (settings: ImportedSettings): void => {
+export default (settings: Settings): void => {
   if (!Array.isArray(settings)) {
     // Validate packages in mono settings.
     validatePackages(settings.packages);

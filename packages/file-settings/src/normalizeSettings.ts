@@ -1,10 +1,10 @@
 import { mergeDeepRight as merge } from "ramda";
 import validateSettings from "./validateSettings";
 import {
-  ImportedSettings,
   Settings,
-  ImportedMulti,
-  ImportedMono,
+  NormalizedSettings,
+  MultiSettings,
+  MonoSettings,
   NormalizedMulti,
   NormalizedMono
 } from "./types";
@@ -23,12 +23,12 @@ const defaultPackage = {
 
 // This function merges the imported settings with
 // the default settings.
-function mergeSettings(s: ImportedMulti): NormalizedMulti;
-function mergeSettings(s: ImportedMono): NormalizedMono;
+function mergeSettings(s: MultiSettings): NormalizedMulti;
+function mergeSettings(s: MonoSettings): NormalizedMono;
 function mergeSettings({
   packages,
   ...settings
-}: ImportedMulti | ImportedMono): NormalizedMulti | NormalizedMono {
+}: MultiSettings | MonoSettings): NormalizedMulti | NormalizedMono {
   return merge(
     {
       ...defaultSettings,
@@ -41,7 +41,7 @@ function mergeSettings({
 }
 
 // This function normalizes the imported settings.
-function normalizeSettings(settings: ImportedSettings): Settings {
+function normalizeSettings(settings: Settings): NormalizedSettings {
   // TODO
   // Default settings and validator from packages
   // should be imported and used with each package.

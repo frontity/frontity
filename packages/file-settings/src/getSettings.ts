@@ -1,4 +1,4 @@
-import { Settings, NormalizedMono, NormalizedMulti } from "./types";
+import { NormalizedSettings, NormalizedMono, NormalizedMulti } from "./types";
 import importSettings from "./importSettings";
 
 // This function returns the settings required by
@@ -11,7 +11,7 @@ export default async ({
   url: string;
 }): Promise<NormalizedMono | NormalizedMulti> => {
   // Import the settings from a file.
-  const allSettings: Settings = await importSettings();
+  const allSettings: NormalizedSettings = await importSettings();
 
   // 1. Return settings when `allSettings` is an object.
   if (!Array.isArray(allSettings)) return allSettings;

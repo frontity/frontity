@@ -1,5 +1,3 @@
-import getSettings from "./getSettings";
-import getPackages from "./getPackages";
-import * as types from "./types";
-
-export { getPackages, getSettings, types };
+export { default as getSettings } from "./getSettings";
+export { default as getPackages } from "./getPackages";
+export * from "./types";

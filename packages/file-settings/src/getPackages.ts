@@ -1,5 +1,5 @@
 import importSettings from "./importSettings";
-import { Settings, Package } from "./types";
+import { NormalizedSettings, Package } from "./types";
 
 type Packages = {
   [key: string]: string[];
@@ -9,7 +9,7 @@ type Packages = {
 // selected settings.
 export default async (): Promise<Packages> => {
   // Import the settings from a file.
-  const allSettings: Settings = await importSettings();
+  const allSettings: NormalizedSettings = await importSettings();
 
   // If mono settings return the packages in an object
   // with the `default` key.
