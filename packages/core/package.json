@@ -1,17 +1,19 @@
 {
   "name": "@frontity/core",
   "version": "0.2.0",
-  "description": "main package with server & webpack & others",
+  "description": "Main Frontity package",
   "keywords": [
     "frontity"
   ],
-  "author": "David <darensr@gmail.com>",
-  "homepage": "https://github.com/frontity/frontity",
+  "homepage": "https://frontity.org",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frontity/frontity.git"
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "bugs": {
+    "url": "https://community.frontity.org"
   },
   "scripts": {
     "test:ci": "jest",
@@ -22,9 +24,6 @@
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
     "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts"
   },
-  "bugs": {
-    "url": "https://github.com/frontity/frontity/issues"
-  },
   "dependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
@@ -33,6 +32,7 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "@frontity/file-settings": "^0.0.1",
     "@loadable/babel-plugin": "^5.6.0",
     "@loadable/component": "^5.6.1",
     "@loadable/server": "^5.6.1",

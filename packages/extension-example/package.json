@@ -1,7 +1,8 @@
 {
-  "name": "frontity",
-  "version": "0.1.4",
-  "description": "Frontity cli and entry point to other packages",
+  "name": "@frontity/extension-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "This is an empty extensions only for testing purposes",
   "keywords": [
     "frontity"
   ],
@@ -15,5 +16,7 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "scripts": {}
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
