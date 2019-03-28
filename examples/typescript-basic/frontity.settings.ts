@@ -1,4 +1,4 @@
-import { ImportedSettings, Package } from "@frontity/file-settings";
+import { Settings, Package } from "@frontity/file-settings";
 
 interface ExtensionExample extends Package {
   name: "@frontity/extension-example";
@@ -7,7 +7,7 @@ interface ExtensionExample extends Package {
   };
 }
 
-const settings: ImportedSettings<ExtensionExample> = {
+const settings: Settings<ExtensionExample> = {
   settings: {
     url: "https://test.frontity.io"
   },
