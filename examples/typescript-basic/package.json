@@ -3,24 +3,15 @@
   "version": "1.0.1",
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
-  "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node --project ./node_modules/@frontity/core/tsconfig.json ./node_modules/@frontity/core/src/scripts/dev.ts",
     "build": "ts-node --project ./node_modules/@frontity/core/tsconfig.json ./node_modules/@frontity/core/src/scripts/build.ts",
     "serve": "ts-node --project ./node_modules/@frontity/core/tsconfig.json ./node_modules/@frontity/core/src/scripts/serve.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/frontity/frontity.git"
-  },
-  "author": "@luisherranz",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/frontity/frontity/issues"
-  },
-  "homepage": "https://github.com/frontity/frontity#readme",
   "dependencies": {
-    "@frontity/core": "^0.2.0"
+    "@frontity/core": "^0.2.0",
+    "@frontity/file-settings": "^0.0.1"
   },
   "devDependencies": {
     "ts-node": "^8.0.3"
