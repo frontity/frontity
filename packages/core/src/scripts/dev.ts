@@ -7,7 +7,7 @@ import webpackHotMiddleware from "webpack-hot-middleware";
 import { getPackages } from "@frontity/file-settings";
 import createServer from "./utils/create-server";
 import HotServer from "./utils/hot-server";
-import { generateServerFile } from "./utils/import-files";
+import { generateServerFile, generateClientFiles } from "./utils/import-files";
 import getConfig from "../config";
 import { Mode } from "../types";
 
@@ -90,13 +90,14 @@ const dev = async ({
   // Create the directories if they don't exist.
   await ensureDir(outDir);
   await emptyDir(outDir);
-  await ensureDir(`${outDir}/bundling`);
+  await ensureDir(`${outDir}/bundling/imports`);
 
   // Get all packages.
   const packages = await getPackages();
 
   // Generate the bundles. One for the server.
-  await generateServerFile({ packages });
+  await generateServerFile({ packages, outDir });
+  await generateClientFiles({ packages, outDir });
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, es5 });

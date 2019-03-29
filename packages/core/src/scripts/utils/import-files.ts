@@ -7,10 +7,12 @@ const variable = (pkg: string): string => {
 
 const generateFile = async ({
   filename,
-  packages
+  packages,
+  outDir
 }: {
   filename: string;
   packages: string[];
+  outDir: string;
 }): Promise<void> => {
   let template = "";
   packages.forEach(
@@ -19,16 +21,40 @@ const generateFile = async ({
   template += "\nexport {\n";
   packages.forEach(pkg => (template += `  ${variable(pkg)},\n`));
   template += "};";
-  await writeFile(`build/bundling/${filename}.js`, template, "utf8");
+  await writeFile(
+    `${outDir}/bundling/imports/${filename}.js`,
+    template,
+    "utf8"
+  );
 };
 
 export const generateServerFile = async ({
-  packages
+  packages,
+  outDir
 }: {
   packages: {
     [key: string]: string[];
   };
+  outDir: string;
 }): Promise<void> => {
   const pkgs = uniq(flatten(Object.values(packages)));
-  await generateFile({ packages: pkgs, filename: "server" });
+  await generateFile({ packages: pkgs, filename: "server", outDir });
+};
+
+export const generateClientFiles = async ({
+  packages,
+  outDir
+}: {
+  packages: {
+    [key: string]: string[];
+  };
+  outDir: string;
+}): Promise<void> => {
+  Object.entries(packages).forEach(([site, pkgs]) => {
+    const template = generateFile({
+      packages: uniq(pkgs),
+      filename: site,
+      outDir
+    });
+  });
 };
