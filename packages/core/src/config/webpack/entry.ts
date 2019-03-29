@@ -2,21 +2,42 @@ import { resolve } from "path";
 import { Configuration } from "webpack";
 import { Target, Mode } from "../../types";
 
+// Get the root path of the directory where the script was started.
+const rootPath = process.cwd();
+
 export default ({
   target,
-  mode
+  mode,
+  packages,
+  outDir
 }: {
   target: Target;
   mode: Mode;
+  packages: {
+    [key: string]: string[];
+  };
+  outDir: string;
 }): Configuration["entry"] => {
   // Use /client for both es5 and modules and /server for node.
   const name: "server" | "client" = target === "server" ? "server" : "client";
-  const config: Configuration["entry"] = [
-    resolve(__dirname, `../../../src/${name}`)
-  ];
+
+  let config: Configuration["entry"] = {};
+
+  if (target === "server") {
+    config = resolve(rootPath, outDir, "bundling/entry-points/server");
+  } else {
+    for (const site in packages) {
+      config[site] = [
+        resolve(rootPath, outDir, `bundling/entry-points/${site}`)
+      ];
+    }
+  }
   // This is needed for HMR in the client but only when we are in development.
   if (target !== "server" && mode === "development") {
-    config.unshift("webpack-hot-middleware/client");
+    Object.values(config).forEach(entry => {
+      // @ts-ignore
+      entry.unshift("webpack-hot-middleware/client");
+    });
   }
   return config;
 };

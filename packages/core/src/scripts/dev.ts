@@ -7,7 +7,10 @@ import webpackHotMiddleware from "webpack-hot-middleware";
 import { getPackages } from "@frontity/file-settings";
 import createServer from "./utils/create-server";
 import HotServer from "./utils/hot-server";
-import { generateServerFile, generateClientFiles } from "./utils/import-files";
+import {
+  generateServerEntryPoint,
+  generateClientEntryPoints
+} from "./utils/entry-points";
 import getConfig from "../config";
 import { Mode } from "../types";
 
@@ -90,20 +93,20 @@ const dev = async ({
   // Create the directories if they don't exist.
   await ensureDir(outDir);
   await emptyDir(outDir);
-  await ensureDir(`${outDir}/bundling/imports`);
+  await ensureDir(`${outDir}/bundling/entry-points`);
 
   // Get all packages.
   const packages = await getPackages();
 
   // Generate the bundles. One for the server.
-  await generateServerFile({ packages, outDir });
-  await generateClientFiles({ packages, outDir });
+  await generateServerEntryPoint({ packages, outDir });
+  await generateClientEntryPoints({ packages, outDir });
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, es5 });
 
   // Get FrontityConfig for webpack.
-  const frontityConfig = getConfig({ mode });
+  const frontityConfig = getConfig({ mode, packages, outDir });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import

@@ -8,27 +8,34 @@ const variable = (pkg: string): string => {
 const generateFile = async ({
   filename,
   packages,
-  outDir
+  outDir,
+  mode,
+  type
 }: {
   filename: string;
   packages: string[];
   outDir: string;
+  mode: string;
+  type: "client" | "server" | "inline";
 }): Promise<void> => {
   let template = "";
   packages.forEach(
-    pkg => (template += `import * as ${variable(pkg)} from "${pkg}";\n`)
+    pkg =>
+      (template += `import * as ${variable(
+        pkg
+      )} from "${pkg}/src/${mode}/${type}";\n`)
   );
   template += "\nexport {\n";
   packages.forEach(pkg => (template += `  ${variable(pkg)},\n`));
   template += "};";
   await writeFile(
-    `${outDir}/bundling/imports/${filename}.js`,
+    `${outDir}/bundling/entry-points/${filename}.js`,
     template,
     "utf8"
   );
 };
 
-export const generateServerFile = async ({
+export const generateServerEntryPoint = async ({
   packages,
   outDir
 }: {
@@ -41,7 +48,7 @@ export const generateServerFile = async ({
   await generateFile({ packages: pkgs, filename: "server", outDir });
 };
 
-export const generateClientFiles = async ({
+export const generateClientEntryPoints = async ({
   packages,
   outDir
 }: {
