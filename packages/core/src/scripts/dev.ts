@@ -88,10 +88,9 @@ const dev = async ({
   outDir: string;
 }): Promise<void> => {
   // Create the directories if they don't exist.
-  await ensureDir(`${outDir}/bundling`);
-
-  // Remove all the files inside the directories.
+  await ensureDir(outDir);
   await emptyDir(outDir);
+  await ensureDir(`${outDir}/bundling`);
 
   // Get all packages.
   const packages = await getPackages();
