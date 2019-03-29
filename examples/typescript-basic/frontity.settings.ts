@@ -1,14 +1,14 @@
 import { Settings, Package } from "@frontity/file-settings";
 
 interface ExtensionExample1 extends Package {
-  name: "@frontity/extension-example1";
+  name: "@frontity/extension-example-1";
   settings: {
     example1: string;
   };
 }
 
 interface ExtensionExample2 extends Package {
-  name: "@frontity/extension-example2";
+  name: "@frontity/extension-example-2";
   settings: {
     example2: string;
   };
@@ -22,13 +22,13 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
     },
     packages: [
       {
-        name: "@frontity/extension-example1",
+        name: "@frontity/extension-example-1",
         settings: {
           example1: ""
         }
       },
       {
-        name: "@frontity/extension-example2",
+        name: "@frontity/extension-example-2",
         settings: {
           example2: ""
         }
@@ -42,7 +42,7 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
     },
     packages: [
       {
-        name: "@frontity/extension-example2",
+        name: "@frontity/extension-example-2",
         settings: {
           example2: ""
         }
