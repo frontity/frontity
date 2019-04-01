@@ -6,17 +6,13 @@ import getWebpack from "./webpack";
 // we will add here logic to inject the frontity.config.js of each package.
 export default ({
   mode,
-  packages,
   outDir
 }: {
   mode: Mode;
-  packages: {
-    [key: string]: string[];
-  };
   outDir: string;
 }): FrontityConfig => {
   const babel = getBabel({ mode });
-  const webpack = getWebpack({ mode, babel, packages, outDir });
+  const webpack = getWebpack({ mode, babel, outDir });
   return {
     babel,
     webpack

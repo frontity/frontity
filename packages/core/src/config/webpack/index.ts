@@ -13,14 +13,10 @@ import plugins from "./plugins";
 export default ({
   mode,
   babel,
-  packages,
   outDir
 }: {
   mode: Mode;
   babel: BabelConfigs;
-  packages: {
-    [key: string]: string[];
-  };
   outDir: string;
 }): WebpackConfigs => {
   const getConfig = (target: Target): Configuration => {
@@ -29,7 +25,7 @@ export default ({
       name: name({ target, mode }),
       target: targets({ target, mode }),
       devtool: devtool({ target, mode }),
-      entry: entry({ target, mode, packages, outDir }),
+      entry: entry({ target, mode, outDir }),
       output: output({ target, mode }),
       module: modules({ target, mode, babel }),
       resolve: resolve({ target, mode }),

@@ -8,14 +8,10 @@ const rootPath = process.cwd();
 export default ({
   target,
   mode,
-  packages,
   outDir
 }: {
   target: Target;
   mode: Mode;
-  packages: {
-    [key: string]: string[];
-  };
   outDir: string;
 }): Configuration["entry"] => {
   // Use /client for both es5 and modules and /server for node.
@@ -26,11 +22,11 @@ export default ({
   if (target === "server") {
     config = resolve(rootPath, outDir, "bundling/entry-points/server");
   } else {
-    for (const site in packages) {
-      config[site] = [
-        resolve(rootPath, outDir, `bundling/entry-points/${site}`)
-      ];
-    }
+    // for (const site in packages) {
+    //   config[site] = [
+    //     resolve(rootPath, outDir, `bundling/entry-points/${site}`)
+    //   ];
+    // }
   }
   // This is needed for HMR in the client but only when we are in development.
   if (target !== "server" && mode === "development") {

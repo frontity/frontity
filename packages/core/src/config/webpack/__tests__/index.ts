@@ -1,7 +1,6 @@
 import * as hash from "hash-it";
 import * as path from "path";
 import getWebpack from "../";
-import { existsSync } from "fs";
 
 jest.mock("path");
 const mockedPath = path as jest.Mocked<typeof path>;
@@ -26,12 +25,20 @@ const babel = {
 
 test("Babel returns for development", () => {
   expect(
-    getWebpack({ mode: "development", babel: babel["development"] })
+    getWebpack({
+      mode: "development",
+      babel: babel["development"],
+      outDir: "/build"
+    })
   ).toMatchSnapshot();
 });
 
 test("Babel returns for production", () => {
   expect(
-    getWebpack({ mode: "production", babel: babel["production"] })
+    getWebpack({
+      mode: "production",
+      babel: babel["production"],
+      outDir: "/build"
+    })
   ).toMatchSnapshot();
 });
