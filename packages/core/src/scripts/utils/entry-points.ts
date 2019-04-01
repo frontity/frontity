@@ -1,4 +1,4 @@
-import { writeFile } from "fs-extra";
+import { writeFile, ensureDir } from "fs-extra";
 import { flatten, uniqBy, uniq } from "lodash";
 
 const variable = (pkg: string): string => {
@@ -63,10 +63,12 @@ export const generateClientEntryPoints = async ({
       template += "\nexport {\n";
       uniqPackages.forEach(pkg => (template += `  ${variable(pkg)},\n`));
       template += "};";
-      return writeFile(
-        `${outDir}/bundling/entry-points/${name}.js`,
-        template,
-        "utf8"
+      return ensureDir(`${outDir}/bundling/entry-points/${name}`).then(() =>
+        writeFile(
+          `${outDir}/bundling/entry-points/${name}/client.js`,
+          template,
+          "utf8"
+        )
       );
     })
   );

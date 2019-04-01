@@ -34,10 +34,13 @@ const sites = [
 
 beforeEach(() => {
   mockedFsExtra.writeFile.mockReset();
+  mockedFsExtra.ensureDir.mockReset();
+  mockedFsExtra.ensureDir.mockResolvedValue(<never>"never");
 });
 
 test("it should write one client entry point", async () => {
   await generateClientEntryPoints({ sites: site, outDir: "/build" });
+  expect(mockedFsExtra.ensureDir.mock.calls[0]).toMatchSnapshot();
   expect({
     in: site,
     out: mockedFsExtra.writeFile.mock.calls[0]
@@ -46,6 +49,7 @@ test("it should write one client entry point", async () => {
 
 test("it should write multiple client entry points", async () => {
   await generateClientEntryPoints({ sites, outDir: "/build" });
+  expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
   expect({
     in: sites,
     out: mockedFsExtra.writeFile.mock.calls

@@ -1,6 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it should write multiple client entry points 1`] = `
+Array [
+  Array [
+    "/build/bundling/entry-points/site-html",
+  ],
+  Array [
+    "/build/bundling/entry-points/site-amp",
+  ],
+  Array [
+    "/build/bundling/entry-points/site-2",
+  ],
+]
+`;
+
+exports[`it should write multiple client entry points 2`] = `
 Object {
   "in": Array [
     Object {
@@ -30,7 +44,7 @@ Object {
   ],
   "out": Array [
     Array [
-      "/build/bundling/entry-points/site-html.js",
+      "/build/bundling/entry-points/site-html/client.js",
       "import * as package1 from \\"package1/src/html/client\\";
 import * as package2 from \\"package2/src/html/client\\";
 
@@ -41,7 +55,7 @@ export {
       "utf8",
     ],
     Array [
-      "/build/bundling/entry-points/site-amp.js",
+      "/build/bundling/entry-points/site-amp/client.js",
       "import * as package1 from \\"package1/src/amp/client\\";
 import * as package3 from \\"package3/src/amp/client\\";
 
@@ -52,7 +66,7 @@ export {
       "utf8",
     ],
     Array [
-      "/build/bundling/entry-points/site-2.js",
+      "/build/bundling/entry-points/site-2/client.js",
       "import * as package1 from \\"package1/src/html/client\\";
 
 export {
@@ -65,6 +79,12 @@ export {
 `;
 
 exports[`it should write one client entry point 1`] = `
+Array [
+  "/build/bundling/entry-points/site-1",
+]
+`;
+
+exports[`it should write one client entry point 2`] = `
 Object {
   "in": Array [
     Object {
@@ -77,7 +97,7 @@ Object {
     },
   ],
   "out": Array [
-    "/build/bundling/entry-points/site-1.js",
+    "/build/bundling/entry-points/site-1/client.js",
     "import * as package1 from \\"package1/src/html/client\\";
 import * as package2 from \\"package2/src/html/client\\";
 
