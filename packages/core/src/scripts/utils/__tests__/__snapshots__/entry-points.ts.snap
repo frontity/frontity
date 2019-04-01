@@ -9,6 +9,7 @@ Object {
       "packages": Array [
         "package1",
         "package2",
+        "package2",
       ],
     },
     Object {
@@ -19,10 +20,17 @@ Object {
         "package3",
       ],
     },
+    Object {
+      "mode": "html",
+      "name": "site-2",
+      "packages": Array [
+        "package1",
+      ],
+    },
   ],
   "out": Array [
     Array [
-      "/build/bundling/entry-points/site-1-html.js",
+      "/build/bundling/entry-points/site-html.js",
       "import * as package1 from \\"package1/src/html/client\\";
 import * as package2 from \\"package2/src/html/client\\";
 
@@ -33,24 +41,22 @@ export {
       "utf8",
     ],
     Array [
-      "/build/bundling/entry-points/site-html-html.js",
-      "import * as package1 from \\"package1/src/html/client\\";
-import * as package2 from \\"package2/src/html/client\\";
-
-export {
-  package1,
-  package2,
-};",
-      "utf8",
-    ],
-    Array [
-      "/build/bundling/entry-points/site-amp-amp.js",
+      "/build/bundling/entry-points/site-amp.js",
       "import * as package1 from \\"package1/src/amp/client\\";
 import * as package3 from \\"package3/src/amp/client\\";
 
 export {
   package1,
   package3,
+};",
+      "utf8",
+    ],
+    Array [
+      "/build/bundling/entry-points/site-2.js",
+      "import * as package1 from \\"package1/src/html/client\\";
+
+export {
+  package1,
 };",
       "utf8",
     ],
@@ -71,9 +77,83 @@ Object {
     },
   ],
   "out": Array [
-    "/build/bundling/entry-points/site-1-html.js",
+    "/build/bundling/entry-points/site-1.js",
     "import * as package1 from \\"package1/src/html/client\\";
 import * as package2 from \\"package2/src/html/client\\";
+
+export {
+  package1,
+  package2,
+};",
+    "utf8",
+  ],
+}
+`;
+
+exports[`it should write one server entry point for multiple sites 1`] = `
+Object {
+  "in": Array [
+    Object {
+      "mode": "html",
+      "name": "site-html",
+      "packages": Array [
+        "package1",
+        "package2",
+        "package2",
+      ],
+    },
+    Object {
+      "mode": "amp",
+      "name": "site-amp",
+      "packages": Array [
+        "package1",
+        "package3",
+      ],
+    },
+    Object {
+      "mode": "html",
+      "name": "site-2",
+      "packages": Array [
+        "package1",
+      ],
+    },
+  ],
+  "out": Array [
+    Array [
+      "/build/bundling/entry-points/server.js",
+      "import * as package1 from \\"package1/src/html/server\\";
+import * as package2 from \\"package2/src/html/server\\";
+import * as package1 from \\"package1/src/amp/server\\";
+import * as package3 from \\"package3/src/amp/server\\";
+
+export {
+  package1,
+  package2,
+  package1,
+  package3,
+};",
+      "utf8",
+    ],
+  ],
+}
+`;
+
+exports[`it should write one server entry point for one site 1`] = `
+Object {
+  "in": Array [
+    Object {
+      "mode": "html",
+      "name": "site-1",
+      "packages": Array [
+        "package1",
+        "package2",
+      ],
+    },
+  ],
+  "out": Array [
+    "/build/bundling/entry-points/server.js",
+    "import * as package1 from \\"package1/src/html/server\\";
+import * as package2 from \\"package2/src/html/server\\";
 
 export {
   package1,

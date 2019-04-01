@@ -1,8 +1,42 @@
 import { writeFile } from "fs-extra";
-import { flatten, uniq } from "lodash";
+import { flatten, uniqBy, uniq } from "lodash";
 
 const variable = (pkg: string): string => {
   return pkg.replace(/(@|\/|-|\.)/g, "");
+};
+
+export const generateServerEntryPoint = async ({
+  sites,
+  outDir
+}: {
+  sites: {
+    name: string;
+    mode: string;
+    packages: string[];
+  }[];
+  outDir: string;
+}): Promise<void> => {
+  const packagesWithMode = uniqBy(
+    flatten(
+      sites.map(site => site.packages.map(pkg => ({ mode: site.mode, pkg })))
+    ),
+    ({ mode, pkg }) => `${mode}${pkg}`
+  );
+  let template = "";
+  packagesWithMode.forEach(
+    ({ pkg, mode }) =>
+      (template += `import * as ${variable(
+        pkg
+      )} from "${pkg}/src/${mode}/server";\n`)
+  );
+  template += "\nexport {\n";
+  packagesWithMode.forEach(({ pkg }) => (template += `  ${variable(pkg)},\n`));
+  template += "};";
+  await writeFile(
+    `${outDir}/bundling/entry-points/server.js`,
+    template,
+    "utf8"
+  );
 };
 
 export const generateClientEntryPoints = async ({
@@ -19,17 +53,18 @@ export const generateClientEntryPoints = async ({
   await Promise.all(
     sites.map(({ name, mode, packages }) => {
       let template = "";
-      packages.map(
+      const uniqPackages = uniq(packages);
+      uniqPackages.map(
         pkg =>
           (template += `import * as ${variable(
             pkg
           )} from "${pkg}/src/${mode}/client";\n`)
       );
       template += "\nexport {\n";
-      packages.forEach(pkg => (template += `  ${variable(pkg)},\n`));
+      uniqPackages.forEach(pkg => (template += `  ${variable(pkg)},\n`));
       template += "};";
       return writeFile(
-        `${outDir}/bundling/entry-points/${name}-${mode}.js`,
+        `${outDir}/bundling/entry-points/${name}.js`,
         template,
         "utf8"
       );
