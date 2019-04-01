@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should write multiple client entry points 1`] = `
+Object {
+  "in": Array [
+    Object {
+      "mode": "html",
+      "name": "site-html",
+      "packages": Array [
+        "package1",
+        "package2",
+      ],
+    },
+    Object {
+      "mode": "amp",
+      "name": "site-amp",
+      "packages": Array [
+        "package1",
+        "package3",
+      ],
+    },
+  ],
+  "out": Array [
+    Array [
+      "/build/bundling/entry-points/site-1-html.js",
+      "import * as package1 from \\"package1/src/html/client\\";
+import * as package2 from \\"package2/src/html/client\\";
+
+export {
+  package1,
+  package2,
+};",
+      "utf8",
+    ],
+    Array [
+      "/build/bundling/entry-points/site-html-html.js",
+      "import * as package1 from \\"package1/src/html/client\\";
+import * as package2 from \\"package2/src/html/client\\";
+
+export {
+  package1,
+  package2,
+};",
+      "utf8",
+    ],
+    Array [
+      "/build/bundling/entry-points/site-amp-amp.js",
+      "import * as package1 from \\"package1/src/amp/client\\";
+import * as package3 from \\"package3/src/amp/client\\";
+
+export {
+  package1,
+  package3,
+};",
+      "utf8",
+    ],
+  ],
+}
+`;
+
+exports[`it should write one client entry point 1`] = `
+Object {
+  "in": Array [
+    Object {
+      "mode": "html",
+      "name": "site-1",
+      "packages": Array [
+        "package1",
+        "package2",
+      ],
+    },
+  ],
+  "out": Array [
+    "/build/bundling/entry-points/site-1-html.js",
+    "import * as package1 from \\"package1/src/html/client\\";
+import * as package2 from \\"package2/src/html/client\\";
+
+export {
+  package1,
+  package2,
+};",
+    "utf8",
+  ],
+}
+`;
