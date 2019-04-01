@@ -17,8 +17,9 @@
   "scripts": {
     "test:ci": "jest",
     "test": "jest --watch",
+    "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "dev": "ts-node src/index.ts",
-    "prepublish": "tsc"
+    "prepublish": "tsc --project ./tsconfig.build.json"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
