@@ -1,18 +1,20 @@
-{
-  "name": "mono-settings",
-  "mode": "amp",
-  "settings": {
-    "timezone": 0,
-    "language": "es"
-  },
-  "packages": [
-    {
-      "name": "@frontity/theme",
-      "active": true
+[
+  {
+    "name": "mono-settings",
+    "mode": "amp",
+    "settings": {
+      "timezone": 0,
+      "language": "es"
     },
-    {
-      "name": "@frontity/wp-source",
-      "active": true
-    }
-  ]
-}
+    "packages": [
+      {
+        "name": "@frontity/theme",
+        "active": true
+      },
+      {
+        "name": "@frontity/wp-source",
+        "active": true
+      }
+    ]
+  }
+]

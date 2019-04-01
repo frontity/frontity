@@ -1,6 +1,5 @@
 import path from "path";
 import importSettings from "../importSettings";
-import { NormalizedMono } from "../types";
 
 jest.mock("path");
 const mockedPath = path as jest.Mocked<typeof path>;
@@ -14,16 +13,16 @@ describe("importSettings", () => {
     mockedPath.resolve.mockImplementation(
       (cwd, file) => `${cwd}/src/__tests__/mocks/importSettings/ts/${file}`
     );
-    const result = (await importSettings()) as NormalizedMono;
-    expect(result.name).toBe("custom-settings-ts");
+    const result = await importSettings();
+    expect(result[0].name).toBe("custom-settings-ts");
   });
 
   test("should work when settings are defined in a JS file", async () => {
     mockedPath.resolve.mockImplementation(
       (cwd, file) => `${cwd}/src/__tests__/mocks/importSettings/js/${file}`
     );
-    const result = (await importSettings()) as NormalizedMono;
-    expect(result.name).toBe("custom-settings-js");
+    const result = await importSettings();
+    expect(result[0].name).toBe("custom-settings-js");
   });
 
   test("should throw when it doesn't exist a settings file", async () => {

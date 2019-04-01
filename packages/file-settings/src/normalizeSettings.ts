@@ -4,12 +4,11 @@ import {
   Settings,
   NormalizedSettings,
   MultiSettings,
-  MonoSettings,
-  NormalizedMulti,
-  NormalizedMono
+  MonoSettings
 } from "./types";
 
 const defaultSettings = {
+  name: "default",
   mode: "html",
   settings: {
     timezone: 0,
@@ -23,12 +22,10 @@ const defaultPackage = {
 
 // This function merges the imported settings with
 // the default settings.
-function mergeSettings(s: MultiSettings): NormalizedMulti;
-function mergeSettings(s: MonoSettings): NormalizedMono;
 function mergeSettings({
   packages,
   ...settings
-}: MultiSettings | MonoSettings): NormalizedMulti | NormalizedMono {
+}: MultiSettings | MonoSettings): NormalizedSettings {
   return merge(
     {
       ...defaultSettings,
@@ -41,7 +38,7 @@ function mergeSettings({
 }
 
 // This function normalizes the imported settings.
-function normalizeSettings(settings: Settings): NormalizedSettings {
+function normalizeSettings(settings: Settings): NormalizedSettings[] {
   // TODO
   // Default settings and validator from packages
   // should be imported and used with each package.
@@ -49,7 +46,7 @@ function normalizeSettings(settings: Settings): NormalizedSettings {
   // Validate settings before the merge.
   validateSettings(settings);
   // Merge mono settings.
-  if (!Array.isArray(settings)) return mergeSettings(settings);
+  if (!Array.isArray(settings)) return [mergeSettings(settings)];
   // Merge multi settings.
   return settings.map(s => mergeSettings(s));
 }

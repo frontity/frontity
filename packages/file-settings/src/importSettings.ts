@@ -4,7 +4,7 @@ import normalizeSettings from "./normalizeSettings";
 import { NormalizedSettings } from "./types";
 
 // This function imports the the settings from a file.
-export default async (): Promise<NormalizedSettings> => {
+export default async (): Promise<NormalizedSettings[]> => {
   // Define settings file path.
   const settingsFile: string = path.resolve(process.cwd(), "frontity.settings");
 
