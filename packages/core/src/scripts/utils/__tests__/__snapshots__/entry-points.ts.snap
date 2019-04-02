@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`it should avoid creating the client file at all if packages have no entry points 1`] = `Array []`;
+
 exports[`it should write multiple client entry points 1`] = `
 Array [
   Array [
@@ -78,6 +80,23 @@ export {
 }
 `;
 
+exports[`it should write multiple client entry points 3`] = `
+Array [
+  Object {
+    "name": "site-html",
+    "path": "/build/bundling/entry-points/site-html/client.js",
+  },
+  Object {
+    "name": "site-amp",
+    "path": "/build/bundling/entry-points/site-amp/client.js",
+  },
+  Object {
+    "name": "site-2",
+    "path": "/build/bundling/entry-points/site-2/client.js",
+  },
+]
+`;
+
 exports[`it should write one client entry point 1`] = `
 Array [
   "/build/bundling/entry-points/site-1",
@@ -108,6 +127,15 @@ export {
     "utf8",
   ],
 }
+`;
+
+exports[`it should write one client entry point 3`] = `
+Array [
+  Object {
+    "name": "site-1",
+    "path": "/build/bundling/entry-points/site-1/client.js",
+  },
+]
 `;
 
 exports[`it should write one server entry point for multiple sites 1`] = `
@@ -158,6 +186,13 @@ export {
 }
 `;
 
+exports[`it should write one server entry point for multiple sites 2`] = `
+Object {
+  "name": "server",
+  "path": "/build/bundling/entry-points/server.js",
+}
+`;
+
 exports[`it should write one server entry point for one site 1`] = `
 Object {
   "in": Array [
@@ -181,5 +216,12 @@ export {
 };",
     "utf8",
   ],
+}
+`;
+
+exports[`it should write one server entry point for one site 2`] = `
+Object {
+  "name": "server",
+  "path": "/build/bundling/entry-points/server.js",
 }
 `;

@@ -43,42 +43,56 @@ beforeEach(() => {
 
 test("it should avoid creating the client file at all if packages have no entry points", async () => {
   mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
-  await generateClientEntryPoints({ sites: site, outDir: "/build" });
+  const bundles = await generateClientEntryPoints({
+    sites: site,
+    outDir: "/build"
+  });
   expect(mockedFsExtra.writeFile.mock.calls.length).toBe(0);
+  expect(bundles).toMatchSnapshot();
 });
 
 test("it should write one client entry point", async () => {
-  await generateClientEntryPoints({ sites: site, outDir: "/build" });
+  const bundles = await generateClientEntryPoints({
+    sites: site,
+    outDir: "/build"
+  });
   expect(mockedFsExtra.ensureDir.mock.calls[0]).toMatchSnapshot();
   expect({
     in: site,
     out: mockedFsExtra.writeFile.mock.calls[0]
   }).toMatchSnapshot();
+  expect(bundles).toMatchSnapshot();
 });
 
 test("it should write multiple client entry points", async () => {
-  await generateClientEntryPoints({ sites, outDir: "/build" });
+  const bundles = await generateClientEntryPoints({ sites, outDir: "/build" });
   expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
   expect({
     in: sites,
     out: mockedFsExtra.writeFile.mock.calls
   }).toMatchSnapshot();
+  expect(bundles).toMatchSnapshot();
 });
 
 test("it should write one server entry point for one site", async () => {
-  await generateServerEntryPoint({ sites: site, outDir: "/build" });
+  const bundles = await generateServerEntryPoint({
+    sites: site,
+    outDir: "/build"
+  });
   expect({
     in: site,
     out: mockedFsExtra.writeFile.mock.calls[0]
   }).toMatchSnapshot();
+  expect(bundles).toMatchSnapshot();
 });
 
 test("it should write one server entry point for multiple sites", async () => {
-  await generateServerEntryPoint({ sites, outDir: "/build" });
+  const bundles = await generateServerEntryPoint({ sites, outDir: "/build" });
   expect({
     in: sites,
     out: mockedFsExtra.writeFile.mock.calls
   }).toMatchSnapshot();
+  expect(bundles).toMatchSnapshot();
 });
 
 test("it should not throw if all packages are found", async () => {
