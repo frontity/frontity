@@ -1,4 +1,4 @@
-import { Mode, FrontityConfig, Bundle } from "../types";
+import { Mode, FrontityConfig, EntryPoints } from "../types";
 import getBabel from "./babel";
 import getWebpack from "./webpack";
 
@@ -7,14 +7,14 @@ import getWebpack from "./webpack";
 export default ({
   mode,
   outDir,
-  bundles
+  entryPoints
 }: {
   mode: Mode;
   outDir: string;
-  bundles: Bundle[];
+  entryPoints: EntryPoints[];
 }): FrontityConfig => {
   const babel = getBabel({ mode });
-  const webpack = getWebpack({ mode, babel, outDir, bundles });
+  const webpack = getWebpack({ mode, babel, outDir, entryPoints });
   return {
     babel,
     webpack

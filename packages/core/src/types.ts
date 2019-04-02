@@ -21,7 +21,7 @@ export interface FrontityConfig {
   webpack: WebpackConfigs;
 }
 
-export interface Bundle {
+export interface EntryPoints {
   name: string;
   path: string;
 }

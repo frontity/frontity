@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { writeFile, ensureDir, pathExists } from "fs-extra";
 import { flatten, uniqBy, uniq } from "lodash";
-import { Bundle } from "../../types";
+import { EntryPoints } from "../../types";
 
 type Sites = {
   name: string;
@@ -73,7 +73,7 @@ export const generateServerEntryPoint = async ({
 }: {
   sites: Sites;
   outDir: string;
-}): Promise<Bundle> => {
+}): Promise<EntryPoints> => {
   const packages = await getPackagesList({ sites, type: "server" });
   let template = "";
   // Create the "import" part of the file.
@@ -100,7 +100,7 @@ export const generateClientEntryPoints = async ({
 }: {
   sites: Sites;
   outDir: string;
-}): Promise<Bundle[]> => {
+}): Promise<EntryPoints[]> => {
   return (await Promise.all(
     // Iterate over the sites
     sites.map(async site => {

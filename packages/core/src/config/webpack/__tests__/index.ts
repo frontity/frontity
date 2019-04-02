@@ -23,7 +23,7 @@ const babel = {
   }
 };
 
-const bundles = [
+const entryPoints = [
   {
     name: "server",
     path: "./build/bundling/entry-points/server.js"
@@ -44,7 +44,7 @@ test("Babel returns for development", () => {
       mode: "development",
       babel: babel["development"],
       outDir: "/build",
-      bundles
+      entryPoints
     })
   ).toMatchSnapshot();
 });
@@ -55,7 +55,7 @@ test("Babel returns for production", () => {
       mode: "production",
       babel: babel["production"],
       outDir: "/build",
-      bundles
+      entryPoints
     })
   ).toMatchSnapshot();
 });

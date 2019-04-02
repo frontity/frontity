@@ -4,7 +4,7 @@ import {
   Mode,
   WebpackConfigs,
   BabelConfigs,
-  Bundle
+  EntryPoints
 } from "../../types";
 import name from "./name";
 import targets from "./targets";
@@ -20,12 +20,12 @@ export default ({
   mode,
   babel,
   outDir,
-  bundles
+  entryPoints
 }: {
   mode: Mode;
   babel: BabelConfigs;
   outDir: string;
-  bundles: Bundle[];
+  entryPoints: EntryPoints[];
 }): WebpackConfigs => {
   const getConfig = (target: Target): Configuration => {
     const config: Configuration = {
@@ -33,7 +33,7 @@ export default ({
       name: name({ target, mode }),
       target: targets({ target, mode }),
       devtool: devtool({ target, mode }),
-      entry: entry({ target, mode, outDir, bundles }),
+      entry: entry({ target, mode, outDir, entryPoints }),
       output: output({ target, mode }),
       module: modules({ target, mode, babel }),
       resolve: resolve({ target, mode }),
