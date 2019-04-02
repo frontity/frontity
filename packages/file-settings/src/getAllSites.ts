@@ -1,23 +1,17 @@
 import importSettings from "./importSettings";
 import { NormalizedSettings } from "./types";
 
-type Packages = {
+type Sites = {
   name: string;
   mode: string;
   packages: string[];
 };
 
-// This function returns an array package names from the
-// selected settings.
-export default async (): Promise<Packages[]> => {
-  // debugger;
-
+export default async (): Promise<Sites[]> => {
   // Import the settings from a file.
   const allSettings: NormalizedSettings[] = await importSettings();
 
-  // Return the packages in an object with
-  // each settings name as a key and a value of its packages
-  // as a string array.
+  // Return only name, mode and packages in an array of sites.
   return allSettings.map(({ name, mode, packages }) => ({
     name,
     mode,
