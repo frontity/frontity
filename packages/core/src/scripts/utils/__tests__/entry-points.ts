@@ -1,4 +1,4 @@
-import fsExtra from "fs-extra";
+import * as fsExtra from "fs-extra";
 import {
   generateClientEntryPoints,
   generateServerEntryPoint
@@ -35,7 +35,9 @@ const sites = [
 beforeEach(() => {
   mockedFsExtra.writeFile.mockReset();
   mockedFsExtra.ensureDir.mockReset();
-  mockedFsExtra.ensureDir.mockResolvedValue(<never>"never");
+  mockedFsExtra.ensureDir.mockImplementation(() => {});
+  mockedFsExtra.pathExists.mockReset();
+  mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
 });
 
 test("it should write one client entry point", async () => {

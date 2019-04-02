@@ -32,10 +32,9 @@ const getPackagesList = async ({
   );
   return (await Promise.all(
     packagesWithMode.map(async ({ pkg, mode }) => {
-      // const exists = await pathExists(
-      //   resolve(process.cwd(), "node_modules", `${pkg}/src/${mode}/${type}`)
-      // );
-      const exists = true;
+      const exists = await pathExists(
+        resolve(process.cwd(), "node_modules", `${pkg}/src/${mode}/${type}`)
+      );
       return { pkg, mode, exists };
     })
   )).filter(({ exists }) => exists);
