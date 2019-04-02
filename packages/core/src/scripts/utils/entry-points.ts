@@ -51,7 +51,7 @@ export const generateClientEntryPoints = async ({
   outDir: string;
 }): Promise<void> => {
   await Promise.all(
-    sites.map(({ name, mode, packages }) => {
+    sites.map(async ({ name, mode, packages }) => {
       let template = "";
       const uniqPackages = uniq(packages);
       uniqPackages.map(
@@ -63,12 +63,11 @@ export const generateClientEntryPoints = async ({
       template += "\nexport {\n";
       uniqPackages.forEach(pkg => (template += `  ${variable(pkg)},\n`));
       template += "};";
-      return ensureDir(`${outDir}/bundling/entry-points/${name}`).then(() =>
-        writeFile(
-          `${outDir}/bundling/entry-points/${name}/client.js`,
-          template,
-          "utf8"
-        )
+      await ensureDir(`${outDir}/bundling/entry-points/${name}`);
+      return writeFile(
+        `${outDir}/bundling/entry-points/${name}/client.js`,
+        template,
+        "utf8"
       );
     })
   );
