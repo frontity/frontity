@@ -1,7 +1,8 @@
 import * as fsExtra from "fs-extra";
 import {
   generateClientEntryPoints,
-  generateServerEntryPoint
+  generateServerEntryPoint,
+  checkForPackages
 } from "../entry-points";
 
 jest.mock("fs-extra");
@@ -78,4 +79,15 @@ test("it should write one server entry point for multiple sites", async () => {
     in: sites,
     out: mockedFsExtra.writeFile.mock.calls
   }).toMatchSnapshot();
+});
+
+test("it should not throw if all packages are found", async () => {
+  await expect(checkForPackages({ sites: site })).resolves.toBe(undefined);
+});
+
+test("it should throw if one package is not found", async () => {
+  mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
+  await expect(checkForPackages({ sites: site })).rejects.toThrow(
+    'The package "package1" doesn\'t seem to be installed. Make sure you did "npm install package1"'
+  );
 });

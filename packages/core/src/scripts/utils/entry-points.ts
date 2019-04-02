@@ -12,6 +12,21 @@ const variable = (pkg: string): string => {
   return pkg.replace(/(@|\/|-|\.)/g, "");
 };
 
+export const checkForPackages = async ({ sites }: { sites: Sites }) => {
+  const packages = uniq(flatten(sites.map(site => site.packages)));
+  await Promise.all(
+    packages.map(async pkg => {
+      const exists = await pathExists(
+        resolve(process.cwd(), "node_modules", pkg)
+      );
+      if (!exists)
+        throw new Error(
+          `The package "${pkg}" doesn't seem to be installed. Make sure you did "npm install ${pkg}"`
+        );
+    })
+  );
+};
+
 const getPackagesList = async ({
   sites,
   type

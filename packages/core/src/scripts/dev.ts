@@ -9,7 +9,8 @@ import createServer from "./utils/create-server";
 import HotServer from "./utils/hot-server";
 import {
   generateServerEntryPoint,
-  generateClientEntryPoints
+  generateClientEntryPoints,
+  checkForPackages
 } from "./utils/entry-points";
 import getConfig from "../config";
 import { Mode } from "../types";
@@ -97,6 +98,9 @@ const dev = async ({
 
   // Get all packages.
   const sites = await getAllSites();
+
+  // Check if all the packages are installed.
+  await checkForPackages({ sites });
 
   // Generate the bundles. One for the server.
   await generateServerEntryPoint({ sites, outDir });
