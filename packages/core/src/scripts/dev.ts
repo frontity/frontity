@@ -103,14 +103,15 @@ const dev = async ({
   await checkForPackages({ sites });
 
   // Generate the bundles. One for the server.
-  await generateServerEntryPoint({ sites, outDir });
-  await generateClientEntryPoints({ sites, outDir });
+  const serverEntryPoints = await generateServerEntryPoint({ sites, outDir });
+  const clientEntryPoints = await generateClientEntryPoints({ sites, outDir });
+  const entryPoints = [...clientEntryPoints, serverEntryPoints];
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, es5 });
 
   // Get FrontityConfig for webpack.
-  const frontityConfig = getConfig({ mode, outDir });
+  const frontityConfig = getConfig({ mode, outDir, entryPoints });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import
