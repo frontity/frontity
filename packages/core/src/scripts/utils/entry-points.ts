@@ -13,14 +13,19 @@ type Bundle = {
   path: string;
 };
 
+// Remove some characters present in the npm package name to turn it into a variable name.
 const variable = (pkg: string): string => {
   return pkg.replace(/(@|\/|-|\.)/g, "");
 };
 
+// Throw if any of the packages is not installed.
 export const checkForPackages = async ({ sites }: { sites: Sites }) => {
+  // Turn the list into an array of package names.
   const packages = uniq(flatten(sites.map(site => site.packages)));
   await Promise.all(
+    // Iterate over the packages.
     packages.map(async pkg => {
+      // Check if the folder exists.
       const exists = await pathExists(
         resolve(process.cwd(), "node_modules", pkg)
       );
@@ -32,6 +37,7 @@ export const checkForPackages = async ({ sites }: { sites: Sites }) => {
   );
 };
 
+// Turn a list of sites into a list of packages that can be used to create the templates.
 const getPackagesList = async ({
   sites,
   type
@@ -44,22 +50,27 @@ const getPackagesList = async ({
     mode: string;
   }[]
 > => {
-  const packagesWithMode = uniqBy(
+  // Get a flat array of unique packages and its modes.
+  const packages = uniqBy(
     flatten(
       sites.map(site => site.packages.map(pkg => ({ mode: site.mode, pkg })))
     ),
     ({ mode, pkg }) => `${mode}${pkg}`
   );
   return (await Promise.all(
-    packagesWithMode.map(async ({ pkg, mode }) => {
+    // Iterate over the packages.
+    packages.map(async ({ pkg, mode }) => {
+      // Check if the entry point of that mode exists.
       const exists = await pathExists(
         resolve(process.cwd(), "node_modules", `${pkg}/src/${mode}/${type}`)
       );
       return { pkg, mode, exists };
     })
+    // Remove the packages where the entry point doesn't exist.
   )).filter(({ exists }) => exists);
 };
 
+// Create an entry-point file for the server and return the bundle name and path.
 export const generateServerEntryPoint = async ({
   sites,
   outDir
@@ -69,20 +80,24 @@ export const generateServerEntryPoint = async ({
 }): Promise<Bundle> => {
   const packages = await getPackagesList({ sites, type: "server" });
   let template = "";
+  // Create the "import" part of the file.
   packages.forEach(
     ({ pkg, mode }) =>
       (template += `import * as ${variable(
         pkg
       )} from "${pkg}/src/${mode}/server";\n`)
   );
+  // Create the "export" part of the file.
   template += "\nexport {\n";
   packages.forEach(({ pkg }) => (template += `  ${variable(pkg)},\n`));
   template += "};";
+  // Write the file and return the bundle.
   const path = `${outDir}/bundling/entry-points/server.js`;
   await writeFile(path, template, "utf8");
   return { name: "server", path };
 };
 
+// Create entry-point files for the client and return all the bundle names and pathes.
 export const generateClientEntryPoints = async ({
   sites,
   outDir
@@ -91,29 +106,35 @@ export const generateClientEntryPoints = async ({
   outDir: string;
 }): Promise<Bundle[]> => {
   return (await Promise.all(
-    sites.map(async ({ name, mode, packages }) => {
-      const packagesWithMode = await getPackagesList({
-        sites: [{ name, mode, packages }],
+    // Iterate over the sites
+    sites.map(async site => {
+      // Get list of packages with mode for this site.
+      const packages = await getPackagesList({
+        sites: [{ name: site.name, mode: site.mode, packages: site.packages }],
         type: "client"
       });
-      if (packagesWithMode.length > 0) {
+      // Don't generate entry-points if there are no packages.
+      if (packages.length > 0) {
         let template = "";
-        packagesWithMode.forEach(
+        // Create the "import" part of the file.
+        packages.forEach(
           ({ pkg }) =>
-            (template += `import * as ${variable(
-              pkg
-            )} from "${pkg}/src/${mode}/client";\n`)
+            (template += `import * as ${variable(pkg)} from "${pkg}/src/${
+              site.mode
+            }/client";\n`)
         );
+        // Create the "export" part of the file.
         template += "\nexport {\n";
-        packagesWithMode.forEach(
-          ({ pkg }) => (template += `  ${variable(pkg)},\n`)
-        );
+        packages.forEach(({ pkg }) => (template += `  ${variable(pkg)},\n`));
         template += "};";
-        await ensureDir(`${outDir}/bundling/entry-points/${name}`);
-        const path = `${outDir}/bundling/entry-points/${name}/client.js`;
+        // Create sub-folder for site.
+        await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
+        // Write the file and return the bundle.
+        const path = `${outDir}/bundling/entry-points/${site.name}/client.js`;
         await writeFile(path, template, "utf8");
-        return { name, path };
+        return { name: site.name, path };
       }
     })
+    // Filter non-existent bundles.
   )).filter(bundle => bundle);
 };
