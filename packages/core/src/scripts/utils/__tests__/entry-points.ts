@@ -40,6 +40,12 @@ beforeEach(() => {
   mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
 });
 
+test("it should avoid creating the client file at all if packages have no entry points", async () => {
+  mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
+  await generateClientEntryPoints({ sites: site, outDir: "/build" });
+  expect(mockedFsExtra.writeFile.mock.calls.length).toBe(0);
+});
+
 test("it should write one client entry point", async () => {
   await generateClientEntryPoints({ sites: site, outDir: "/build" });
   expect(mockedFsExtra.ensureDir.mock.calls[0]).toMatchSnapshot();

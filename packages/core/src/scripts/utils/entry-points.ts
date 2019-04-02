@@ -78,24 +78,26 @@ export const generateClientEntryPoints = async ({
         sites: [{ name, mode, packages }],
         type: "client"
       });
-      let template = "";
-      packagesWithMode.forEach(
-        ({ pkg }) =>
-          (template += `import * as ${variable(
-            pkg
-          )} from "${pkg}/src/${mode}/client";\n`)
-      );
-      template += "\nexport {\n";
-      packagesWithMode.forEach(
-        ({ pkg }) => (template += `  ${variable(pkg)},\n`)
-      );
-      template += "};";
-      await ensureDir(`${outDir}/bundling/entry-points/${name}`);
-      return writeFile(
-        `${outDir}/bundling/entry-points/${name}/client.js`,
-        template,
-        "utf8"
-      );
+      if (packagesWithMode.length > 0) {
+        let template = "";
+        packagesWithMode.forEach(
+          ({ pkg }) =>
+            (template += `import * as ${variable(
+              pkg
+            )} from "${pkg}/src/${mode}/client";\n`)
+        );
+        template += "\nexport {\n";
+        packagesWithMode.forEach(
+          ({ pkg }) => (template += `  ${variable(pkg)},\n`)
+        );
+        template += "};";
+        await ensureDir(`${outDir}/bundling/entry-points/${name}`);
+        return writeFile(
+          `${outDir}/bundling/entry-points/${name}/client.js`,
+          template,
+          "utf8"
+        );
+      }
     })
   );
 };
