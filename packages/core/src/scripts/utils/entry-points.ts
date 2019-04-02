@@ -1,17 +1,13 @@
 import { resolve } from "path";
 import { writeFile, ensureDir, pathExists } from "fs-extra";
 import { flatten, uniqBy, uniq } from "lodash";
+import { Bundle } from "../../types";
 
 type Sites = {
   name: string;
   mode: string;
   packages: string[];
 }[];
-
-type Bundle = {
-  name: string;
-  path: string;
-};
 
 // Remove some characters present in the npm package name to turn it into a variable name.
 const variable = (pkg: string): string => {

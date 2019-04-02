@@ -20,3 +20,8 @@ export interface FrontityConfig {
   babel: BabelConfigs;
   webpack: WebpackConfigs;
 }
+
+export interface Bundle {
+  name: string;
+  path: string;
+}
