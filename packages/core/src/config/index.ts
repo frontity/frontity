@@ -1,4 +1,4 @@
-import { Mode, FrontityConfig } from "../types";
+import { Mode, FrontityConfig, Bundle } from "../types";
 import getBabel from "./babel";
 import getWebpack from "./webpack";
 
@@ -6,13 +6,15 @@ import getWebpack from "./webpack";
 // we will add here logic to inject the frontity.config.js of each package.
 export default ({
   mode,
-  outDir
+  outDir,
+  bundles
 }: {
   mode: Mode;
   outDir: string;
+  bundles: Bundle[];
 }): FrontityConfig => {
   const babel = getBabel({ mode });
-  const webpack = getWebpack({ mode, babel, outDir });
+  const webpack = getWebpack({ mode, babel, outDir, bundles });
   return {
     babel,
     webpack

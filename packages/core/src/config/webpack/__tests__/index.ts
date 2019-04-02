@@ -23,12 +23,28 @@ const babel = {
   }
 };
 
+const bundles = [
+  {
+    name: "server",
+    path: "./build/bundling/entry-points/server.js"
+  },
+  {
+    name: "site-1",
+    path: "./build/bundling/entry-points/site-1/client.js"
+  },
+  {
+    name: "site-2",
+    path: "./build/bundling/entry-points/site-1/client.js"
+  }
+];
+
 test("Babel returns for development", () => {
   expect(
     getWebpack({
       mode: "development",
       babel: babel["development"],
-      outDir: "/build"
+      outDir: "/build",
+      bundles
     })
   ).toMatchSnapshot();
 });
@@ -38,7 +54,8 @@ test("Babel returns for production", () => {
     getWebpack({
       mode: "production",
       babel: babel["production"],
-      outDir: "/build"
+      outDir: "/build",
+      bundles
     })
   ).toMatchSnapshot();
 });

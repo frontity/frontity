@@ -4,7 +4,16 @@ exports[`Babel returns for development 1`] = `
 Object {
   "es5": Object {
     "devtool": "cheap-module-eval-source-map",
-    "entry": Object {},
+    "entry": Object {
+      "site-1": Array [
+        "webpack-hot-middleware/client",
+        "./build/bundling/entry-points/site-1/client.js",
+      ],
+      "site-2": Array [
+        "webpack-hot-middleware/client",
+        "./build/bundling/entry-points/site-1/client.js",
+      ],
+    },
     "externals": Object {},
     "mode": "development",
     "module": Object {
@@ -94,7 +103,16 @@ Object {
   },
   "module": Object {
     "devtool": "cheap-module-eval-source-map",
-    "entry": Object {},
+    "entry": Object {
+      "site-1": Array [
+        "webpack-hot-middleware/client",
+        "./build/bundling/entry-points/site-1/client.js",
+      ],
+      "site-2": Array [
+        "webpack-hot-middleware/client",
+        "./build/bundling/entry-points/site-1/client.js",
+      ],
+    },
     "externals": Object {},
     "mode": "development",
     "module": Object {
@@ -184,7 +202,7 @@ Object {
   },
   "server": Object {
     "devtool": "cheap-module-eval-source-map",
-    "entry": "/build/bundling/entry-points/server",
+    "entry": "./build/bundling/entry-points/server.js",
     "externals": Object {
       "any-promise": "promise-monofill",
     },
@@ -268,7 +286,14 @@ exports[`Babel returns for production 1`] = `
 Object {
   "es5": Object {
     "devtool": false,
-    "entry": Object {},
+    "entry": Object {
+      "site-1": Array [
+        "./build/bundling/entry-points/site-1/client.js",
+      ],
+      "site-2": Array [
+        "./build/bundling/entry-points/site-1/client.js",
+      ],
+    },
     "externals": Object {},
     "mode": "production",
     "module": Object {
@@ -347,7 +372,14 @@ Object {
   },
   "module": Object {
     "devtool": false,
-    "entry": Object {},
+    "entry": Object {
+      "site-1": Array [
+        "./build/bundling/entry-points/site-1/client.js",
+      ],
+      "site-2": Array [
+        "./build/bundling/entry-points/site-1/client.js",
+      ],
+    },
     "externals": Object {},
     "mode": "production",
     "module": Object {
@@ -426,7 +458,7 @@ Object {
   },
   "server": Object {
     "devtool": false,
-    "entry": "/build/bundling/entry-points/server",
+    "entry": "./build/bundling/entry-points/server.js",
     "externals": Object {
       "any-promise": "promise-monofill",
     },
