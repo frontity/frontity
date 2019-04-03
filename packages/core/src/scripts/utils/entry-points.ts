@@ -12,8 +12,12 @@ type Sites = {
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 // Remove some characters present in the npm package name to turn it into a variable name.
-const variable = (pkg: string): string => {
-  return pkg.replace(/(@|\/|-|\.)/g, "");
+export const getVariable = (pkg: string) => {
+  return pkg
+    .replace(/^@/, "")
+    .replace(/-/g, "_")
+    .replace(/\//g, "__")
+    .replace(/\./g, "___");
 };
 
 // Check if the entry point exists using all the possible extensions.
@@ -103,13 +107,13 @@ export const generateServerEntryPoint = async ({
   // Create the "import" part of the file.
   packages.forEach(
     ({ pkg, mode }) =>
-      (template += `import * as ${variable(
+      (template += `import * as ${getVariable(
         pkg
       )} from "${pkg}/src/${mode}/server";\n`)
   );
   // Create the "export" part of the file.
   template += "\nexport {\n";
-  packages.forEach(({ pkg }) => (template += `  ${variable(pkg)},\n`));
+  packages.forEach(({ pkg }) => (template += `  ${getVariable(pkg)},\n`));
   template += "};";
   // Write the file and return the bundle.
   const path = `${outDir}/bundling/entry-points/server.js`;
@@ -139,13 +143,13 @@ export const generateClientEntryPoints = async ({
         // Create the "import" part of the file.
         packages.forEach(
           ({ pkg }) =>
-            (template += `import * as ${variable(pkg)} from "${pkg}/src/${
+            (template += `import * as ${getVariable(pkg)} from "${pkg}/src/${
               site.mode
             }/client";\n`)
         );
         // Create the "export" part of the file.
         template += "\nexport {\n";
-        packages.forEach(({ pkg }) => (template += `  ${variable(pkg)},\n`));
+        packages.forEach(({ pkg }) => (template += `  ${getVariable(pkg)},\n`));
         template += "};";
         // Create sub-folder for site.
         await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`it should avoid creating the client file at all if packages have no entry points 1`] = `Array []`;
+exports[`generateClientEntryPoints should avoid creating the client file at all if packages have no entry points 1`] = `Array []`;
 
-exports[`it should write multiple client entry points 1`] = `
+exports[`generateClientEntryPoints should write multiple client entry points 1`] = `
 Array [
   Array [
     "/build/bundling/entry-points/site-html",
@@ -16,7 +16,7 @@ Array [
 ]
 `;
 
-exports[`it should write multiple client entry points 2`] = `
+exports[`generateClientEntryPoints should write multiple client entry points 2`] = `
 Object {
   "in": Array [
     Object {
@@ -80,7 +80,7 @@ export {
 }
 `;
 
-exports[`it should write multiple client entry points 3`] = `
+exports[`generateClientEntryPoints should write multiple client entry points 3`] = `
 Array [
   Object {
     "name": "site-html",
@@ -97,13 +97,13 @@ Array [
 ]
 `;
 
-exports[`it should write one client entry point 1`] = `
+exports[`generateClientEntryPoints should write one client entry point 1`] = `
 Array [
   "/build/bundling/entry-points/site-1",
 ]
 `;
 
-exports[`it should write one client entry point 2`] = `
+exports[`generateClientEntryPoints should write one client entry point 2`] = `
 Object {
   "in": Array [
     Object {
@@ -129,7 +129,7 @@ export {
 }
 `;
 
-exports[`it should write one client entry point 3`] = `
+exports[`generateClientEntryPoints should write one client entry point 3`] = `
 Array [
   Object {
     "name": "site-1",
@@ -138,7 +138,7 @@ Array [
 ]
 `;
 
-exports[`it should write one server entry point for multiple sites 1`] = `
+exports[`generateServerEntryPoint should write one server entry point for multiple sites 1`] = `
 Object {
   "in": Array [
     Object {
@@ -186,14 +186,14 @@ export {
 }
 `;
 
-exports[`it should write one server entry point for multiple sites 2`] = `
+exports[`generateServerEntryPoint should write one server entry point for multiple sites 2`] = `
 Object {
   "name": "server",
   "path": "/build/bundling/entry-points/server.js",
 }
 `;
 
-exports[`it should write one server entry point for one site 1`] = `
+exports[`generateServerEntryPoint should write one server entry point for one site 1`] = `
 Object {
   "in": Array [
     Object {
@@ -219,7 +219,7 @@ export {
 }
 `;
 
-exports[`it should write one server entry point for one site 2`] = `
+exports[`generateServerEntryPoint should write one server entry point for one site 2`] = `
 Object {
   "name": "server",
   "path": "/build/bundling/entry-points/server.js",

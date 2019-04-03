@@ -2,7 +2,8 @@ import * as fsExtra from "fs-extra";
 import {
   generateClientEntryPoints,
   generateServerEntryPoint,
-  checkForPackages
+  checkForPackages,
+  getVariable
 } from "../entry-points";
 
 jest.mock("fs-extra");
@@ -41,67 +42,84 @@ beforeEach(() => {
   mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
 });
 
-test("it should avoid creating the client file at all if packages have no entry points", async () => {
-  mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
-  const bundles = await generateClientEntryPoints({
-    sites: site,
-    outDir: "/build"
+describe("generateClientEntryPoints", () => {
+  test("should avoid creating the client file at all if packages have no entry points", async () => {
+    mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
+    const bundles = await generateClientEntryPoints({
+      sites: site,
+      outDir: "/build"
+    });
+    expect(mockedFsExtra.writeFile.mock.calls.length).toBe(0);
+    expect(bundles).toMatchSnapshot();
   });
-  expect(mockedFsExtra.writeFile.mock.calls.length).toBe(0);
-  expect(bundles).toMatchSnapshot();
-});
 
-test("it should write one client entry point", async () => {
-  const bundles = await generateClientEntryPoints({
-    sites: site,
-    outDir: "/build"
+  test("should write one client entry point", async () => {
+    const bundles = await generateClientEntryPoints({
+      sites: site,
+      outDir: "/build"
+    });
+    expect(mockedFsExtra.ensureDir.mock.calls[0]).toMatchSnapshot();
+    expect({
+      in: site,
+      out: mockedFsExtra.writeFile.mock.calls[0]
+    }).toMatchSnapshot();
+    expect(bundles).toMatchSnapshot();
   });
-  expect(mockedFsExtra.ensureDir.mock.calls[0]).toMatchSnapshot();
-  expect({
-    in: site,
-    out: mockedFsExtra.writeFile.mock.calls[0]
-  }).toMatchSnapshot();
-  expect(bundles).toMatchSnapshot();
-});
 
-test("it should write multiple client entry points", async () => {
-  const bundles = await generateClientEntryPoints({ sites, outDir: "/build" });
-  expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
-  expect({
-    in: sites,
-    out: mockedFsExtra.writeFile.mock.calls
-  }).toMatchSnapshot();
-  expect(bundles).toMatchSnapshot();
-});
-
-test("it should write one server entry point for one site", async () => {
-  const bundles = await generateServerEntryPoint({
-    sites: site,
-    outDir: "/build"
+  test("should write multiple client entry points", async () => {
+    const bundles = await generateClientEntryPoints({
+      sites,
+      outDir: "/build"
+    });
+    expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
+    expect({
+      in: sites,
+      out: mockedFsExtra.writeFile.mock.calls
+    }).toMatchSnapshot();
+    expect(bundles).toMatchSnapshot();
   });
-  expect({
-    in: site,
-    out: mockedFsExtra.writeFile.mock.calls[0]
-  }).toMatchSnapshot();
-  expect(bundles).toMatchSnapshot();
 });
 
-test("it should write one server entry point for multiple sites", async () => {
-  const bundles = await generateServerEntryPoint({ sites, outDir: "/build" });
-  expect({
-    in: sites,
-    out: mockedFsExtra.writeFile.mock.calls
-  }).toMatchSnapshot();
-  expect(bundles).toMatchSnapshot();
+describe("generateServerEntryPoint", () => {
+  test("should write one server entry point for one site", async () => {
+    const bundles = await generateServerEntryPoint({
+      sites: site,
+      outDir: "/build"
+    });
+    expect({
+      in: site,
+      out: mockedFsExtra.writeFile.mock.calls[0]
+    }).toMatchSnapshot();
+    expect(bundles).toMatchSnapshot();
+  });
+
+  test("should write one server entry point for multiple sites", async () => {
+    const bundles = await generateServerEntryPoint({ sites, outDir: "/build" });
+    expect({
+      in: sites,
+      out: mockedFsExtra.writeFile.mock.calls
+    }).toMatchSnapshot();
+    expect(bundles).toMatchSnapshot();
+  });
 });
 
-test("it should not throw if all packages are found", async () => {
-  await expect(checkForPackages({ sites: site })).resolves.toBe(undefined);
+describe("checkForPackages", () => {
+  test("should not throw if all packages are found", async () => {
+    await expect(checkForPackages({ sites: site })).resolves.toBe(undefined);
+  });
+
+  test("should throw if one package is not found", async () => {
+    mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
+    await expect(checkForPackages({ sites: site })).rejects.toThrow(
+      'The package "package1" doesn\'t seem to be installed. Make sure you did "npm install package1"'
+    );
+  });
 });
 
-test("it should throw if one package is not found", async () => {
-  mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
-  await expect(checkForPackages({ sites: site })).rejects.toThrow(
-    'The package "package1" doesn\'t seem to be installed. Make sure you did "npm install package1"'
-  );
+describe("getVariable", () => {
+  test("should generate different variable names for different packages", () => {
+    expect(getVariable("@org/package")).not.toBe(getVariable("org-package"));
+    expect(getVariable("@org/package")).not.toBe(getVariable("org.package"));
+    expect(getVariable("org-package")).not.toBe(getVariable("org.package"));
+  });
 });
