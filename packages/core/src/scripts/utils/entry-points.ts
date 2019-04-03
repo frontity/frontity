@@ -12,12 +12,14 @@ type Sites = {
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 // Remove some characters present in the npm package name to turn it into a variable name.
-export const getVariable = (pkg: string) => {
-  return pkg
-    .replace(/^@/, "")
-    .replace(/-/g, "_")
-    .replace(/\//g, "__")
-    .replace(/\./g, "___");
+export const getVariable = (pkg: string, mode: string) => {
+  return (
+    pkg
+      .replace(/^@/, "")
+      .replace(/-/g, "_")
+      .replace(/\//g, "__")
+      .replace(/\./g, "___") + `_${mode}`
+  );
 };
 
 // Check if the entry point exists using all the possible extensions.
@@ -108,12 +110,15 @@ export const generateServerEntryPoint = async ({
   packages.forEach(
     ({ pkg, mode }) =>
       (template += `import * as ${getVariable(
-        pkg
+        pkg,
+        mode
       )} from "${pkg}/src/${mode}/server";\n`)
   );
   // Create the "export" part of the file.
   template += "\nexport {\n";
-  packages.forEach(({ pkg }) => (template += `  ${getVariable(pkg)},\n`));
+  packages.forEach(
+    ({ pkg, mode }) => (template += `  ${getVariable(pkg, mode)},\n`)
+  );
   template += "};";
   // Write the file and return the bundle.
   const path = `${outDir}/bundling/entry-points/server.js`;
@@ -142,14 +147,17 @@ export const generateClientEntryPoints = async ({
         let template = "";
         // Create the "import" part of the file.
         packages.forEach(
-          ({ pkg }) =>
-            (template += `import * as ${getVariable(pkg)} from "${pkg}/src/${
-              site.mode
-            }/client";\n`)
+          ({ pkg, mode }) =>
+            (template += `import * as ${getVariable(
+              pkg,
+              mode
+            )} from "${pkg}/src/${site.mode}/client";\n`)
         );
         // Create the "export" part of the file.
         template += "\nexport {\n";
-        packages.forEach(({ pkg }) => (template += `  ${getVariable(pkg)},\n`));
+        packages.forEach(
+          ({ pkg, mode }) => (template += `  ${getVariable(pkg, mode)},\n`)
+        );
         template += "};";
         // Create sub-folder for site.
         await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);

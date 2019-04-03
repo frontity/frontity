@@ -47,32 +47,32 @@ Object {
   "out": Array [
     Array [
       "/build/bundling/entry-points/site-html/client.js",
-      "import * as package1 from \\"package1/src/html/client\\";
-import * as package2 from \\"package2/src/html/client\\";
+      "import * as package1_html from \\"package1/src/html/client\\";
+import * as package2_html from \\"package2/src/html/client\\";
 
 export {
-  package1,
-  package2,
+  package1_html,
+  package2_html,
 };",
       "utf8",
     ],
     Array [
       "/build/bundling/entry-points/site-amp/client.js",
-      "import * as package1 from \\"package1/src/amp/client\\";
-import * as package3 from \\"package3/src/amp/client\\";
+      "import * as package1_amp from \\"package1/src/amp/client\\";
+import * as package3_amp from \\"package3/src/amp/client\\";
 
 export {
-  package1,
-  package3,
+  package1_amp,
+  package3_amp,
 };",
       "utf8",
     ],
     Array [
       "/build/bundling/entry-points/site-2/client.js",
-      "import * as package1 from \\"package1/src/html/client\\";
+      "import * as package1_html from \\"package1/src/html/client\\";
 
 export {
-  package1,
+  package1_html,
 };",
       "utf8",
     ],
@@ -117,12 +117,12 @@ Object {
   ],
   "out": Array [
     "/build/bundling/entry-points/site-1/client.js",
-    "import * as package1 from \\"package1/src/html/client\\";
-import * as package2 from \\"package2/src/html/client\\";
+    "import * as package1_html from \\"package1/src/html/client\\";
+import * as package2_html from \\"package2/src/html/client\\";
 
 export {
-  package1,
-  package2,
+  package1_html,
+  package2_html,
 };",
     "utf8",
   ],
@@ -169,16 +169,16 @@ Object {
   "out": Array [
     Array [
       "/build/bundling/entry-points/server.js",
-      "import * as package1 from \\"package1/src/html/server\\";
-import * as package2 from \\"package2/src/html/server\\";
-import * as package1 from \\"package1/src/amp/server\\";
-import * as package3 from \\"package3/src/amp/server\\";
+      "import * as package1_html from \\"package1/src/html/server\\";
+import * as package2_html from \\"package2/src/html/server\\";
+import * as package1_amp from \\"package1/src/amp/server\\";
+import * as package3_amp from \\"package3/src/amp/server\\";
 
 export {
-  package1,
-  package2,
-  package1,
-  package3,
+  package1_html,
+  package2_html,
+  package1_amp,
+  package3_amp,
 };",
       "utf8",
     ],
@@ -207,12 +207,12 @@ Object {
   ],
   "out": Array [
     "/build/bundling/entry-points/server.js",
-    "import * as package1 from \\"package1/src/html/server\\";
-import * as package2 from \\"package2/src/html/server\\";
+    "import * as package1_html from \\"package1/src/html/server\\";
+import * as package2_html from \\"package2/src/html/server\\";
 
 export {
-  package1,
-  package2,
+  package1_html,
+  package2_html,
 };",
     "utf8",
   ],
