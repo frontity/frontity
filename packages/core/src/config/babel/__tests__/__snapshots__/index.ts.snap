@@ -9,6 +9,14 @@ Object {
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
       "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -46,6 +54,14 @@ Object {
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
       "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -68,6 +84,14 @@ Object {
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
       "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -95,6 +119,14 @@ Object {
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
       "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -132,6 +164,14 @@ Object {
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
       "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -154,6 +194,14 @@ Object {
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
       "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",

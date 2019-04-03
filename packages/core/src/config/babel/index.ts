@@ -63,7 +63,14 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       // Support for the class props: class MyClass { myProp = 'hi there' }
       "@babel/plugin-proposal-class-properties",
       // Transform lodash imports to cherry-pick: import add from 'lodash/add'
-      "babel-plugin-lodash"
+      "babel-plugin-lodash",
+      // Transform inline environment variables (for process.env.CWD)
+      [
+        "babel-plugin-transform-inline-environment-variables",
+        {
+          include: ["CWD"]
+        }
+      ]
     ];
     return {
       presets,
