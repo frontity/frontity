@@ -1,84 +1,20 @@
-import "./utils/env";
+import defaults from "./utils/env-and-defaults";
 import Argv from "minimist";
-import { ensureDir, emptyDir } from "fs-extra";
-import express from "express";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 import { getAllSites } from "@frontity/file-settings";
-import createServer from "./utils/create-server";
+import createApp from "./utils/create-app";
 import HotServer from "./utils/hot-server";
-import {
-  generateServerEntryPoint,
-  generateClientEntryPoints,
-  checkForPackages
-} from "./utils/entry-points";
+import generateEntryPoints from "./utils/entry-points";
 import getConfig from "../config";
 import { Mode } from "../types";
+import cleanBuildFolders from "./utils/clean-build-folders";
 
 const argv = Argv(process.argv.slice(2), {
   boolean: ["p", "h", "es5", "https"],
   string: ["outDir", "mode", "port"]
 });
-
-process.env.CWD = process.cwd();
-
-// Create an express app ready to be used with webpack-dev-middleware.
-const createApp = async ({
-  mode,
-  port,
-  isHttps,
-  es5
-}: {
-  mode: Mode;
-  port: number;
-  isHttps: boolean;
-  es5: boolean;
-}): Promise<{
-  app: express.Express;
-  done: (compiler: webpack.MultiCompiler) => void;
-}> => {
-  // Create the app.
-  const app = express();
-  // Use the http or https modules to create the server.
-  const server = await createServer({ app, isHttps });
-  // Start listening once webpack has finished.
-  let clientFinished = false;
-  let serverFinished = false;
-  const start = () => {
-    if (clientFinished && serverFinished) {
-      server.listen(port, () => {
-        console.log(
-          `\n\nSERVER STARTED -- Listening @ ${
-            isHttps ? "https" : "http"
-          }://localhost:${port}\n  - mode: ${mode}\n  - client: ${
-            es5 ? "es5" : "esModules"
-          }`
-        );
-      });
-    }
-  };
-  // Check if webpack has finished (both the client and server bundles).
-  const done = (compiler: webpack.MultiCompiler) => {
-    compiler.compilers[0].hooks.done.tapAsync(
-      "frontity-dev-server",
-      (_, cb) => {
-        clientFinished = true;
-        start();
-        cb();
-      }
-    );
-    compiler.compilers[1].hooks.done.tapAsync(
-      "frontity-dev-server",
-      (_, cb) => {
-        serverFinished = true;
-        start();
-        cb();
-      }
-    );
-  };
-  return { app, done };
-};
 
 // Start Frontity development environment.
 const dev = async ({
@@ -95,20 +31,13 @@ const dev = async ({
   outDir: string;
 }): Promise<void> => {
   // Create the directories if they don't exist.
-  await ensureDir(outDir);
-  await emptyDir(outDir);
-  await ensureDir(`${outDir}/bundling/entry-points`);
+  await cleanBuildFolders({ outDir });
 
   // Get all packages.
   const sites = await getAllSites();
 
-  // Check if all the packages are installed.
-  await checkForPackages({ sites });
-
   // Generate the bundles. One for the server.
-  const serverEntryPoints = await generateServerEntryPoint({ sites, outDir });
-  const clientEntryPoints = await generateClientEntryPoints({ sites, outDir });
-  const entryPoints = [...clientEntryPoints, serverEntryPoints];
+  const entryPoints = await generateEntryPoints({ sites, outDir });
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, es5 });
@@ -159,7 +88,7 @@ dev({
   port: argv.port || 3000,
   isHttps: !!argv.h || !!argv.https,
   es5: !!argv.es5,
-  outDir: argv.outDir || "build"
+  outDir: argv.outDir || defaults.outDir
 });
 
 export default dev;

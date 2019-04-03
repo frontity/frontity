@@ -1,11 +1,10 @@
-import "./utils/env";
+import "./utils/env-and-defaults";
 import { resolve } from "path";
 import Argv from "minimist";
 import createServer from "./utils/create-server";
 
 const argv = Argv(process.argv.slice(2));
-const rootPath = process.cwd();
-const appDir = resolve(rootPath, "build/server.js");
+const appDir = resolve(process.env.CWD, "build/server.js");
 
 const serve = async ({
   isHttps,

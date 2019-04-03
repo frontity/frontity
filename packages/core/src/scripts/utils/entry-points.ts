@@ -172,3 +172,14 @@ export const generateClientEntryPoints = async ({
     // Filter non-existent bundles.
   )).filter(bundle => bundle);
 };
+
+export default async ({ sites, outDir }) => {
+  // Check if all the packages are installed.
+  await checkForPackages({ sites });
+
+  // Generate the bundles. One for the server.
+  const serverEntryPoints = await generateServerEntryPoint({ sites, outDir });
+  const clientEntryPoints = await generateClientEntryPoints({ sites, outDir });
+
+  return [...clientEntryPoints, serverEntryPoints];
+};

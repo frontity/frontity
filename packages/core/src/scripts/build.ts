@@ -1,12 +1,14 @@
-import "./utils/env";
+import defaults from "./utils/env-and-defaults";
 import Argv from "minimist";
 import { join } from "path";
 import { ensureDir, emptyDir, remove } from "fs-extra";
 import webpack from "webpack";
+import { getAllSites } from "@frontity/file-settings";
+import generateEntryPoints from "./utils/entry-points";
 import getConfig from "../config";
 import { Mode } from "../types";
+import cleanBuildFolders from "./utils/clean-build-folders";
 
-const buildDir = "build";
 const bundlingDir = "bundling";
 const argv = Argv(process.argv.slice(2));
 
@@ -18,17 +20,26 @@ const webpackAsync = (config: webpack.Configuration): Promise<void> =>
     });
   });
 
-const build = async ({ mode }: { mode: Mode }): Promise<void> => {
+const build = async ({
+  mode,
+  outDir
+}: {
+  mode: Mode;
+  outDir: string;
+}): Promise<void> => {
   console.log(`mode: ${mode}\n`);
 
   // Create the directories if they don't exist.
-  await ensureDir(buildDir);
+  await cleanBuildFolders({ outDir });
 
-  // Remove all the files inside the directories.
-  await emptyDir(buildDir);
+  // Get all packages.
+  const sites = await getAllSites();
+
+  // Generate the bundles. One for the server.
+  const entryPoints = await generateEntryPoints({ sites, outDir });
 
   // Get FrontityConfig for webpack.
-  const frontityConfig = getConfig({ mode });
+  const frontityConfig = getConfig({ mode, outDir, entryPoints });
 
   // Build and wait until webpack finished the clients first.
   // We need to do this because the server bundle needs to import
@@ -43,7 +54,7 @@ const build = async ({ mode }: { mode: Mode }): Promise<void> => {
 
   // Remove the bundling folder after the build in production because
   // it is not needed anymore.
-  if (mode === "production") await remove(join(buildDir, bundlingDir));
+  // if (mode === "production") await remove(join(outDir, bundlingDir));
 };
 
 (process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
@@ -52,7 +63,8 @@ const build = async ({ mode }: { mode: Mode }): Promise<void> => {
 });
 
 build({
-  mode: !!argv.p || argv.production ? "production" : "development"
+  mode: !!argv.p || argv.production ? "production" : "development",
+  outDir: argv.outDir || defaults.outDir
 });
 
 export default build;
