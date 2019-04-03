@@ -9,9 +9,35 @@ type Sites = {
   packages: string[];
 }[];
 
+const extensions = [".js", ".jsx", ".ts", ".tsx"];
+
 // Remove some characters present in the npm package name to turn it into a variable name.
 const variable = (pkg: string): string => {
   return pkg.replace(/(@|\/|-|\.)/g, "");
+};
+
+// Check if the entry point exists using all the possible extensions.
+const entryExists = async ({
+  pkg,
+  mode,
+  type
+}: {
+  pkg: string;
+  mode: string;
+  type: string;
+}) => {
+  const allExist = await Promise.all(
+    extensions.map(async extension => {
+      return await pathExists(
+        resolve(
+          process.cwd(),
+          "node_modules",
+          `${pkg}/src/${mode}/${type}${extension}`
+        )
+      );
+    })
+  );
+  return allExist.reduce((prev, curr) => prev || curr, false);
 };
 
 // Throw if any of the packages is not installed.
@@ -57,9 +83,7 @@ const getPackagesList = async ({
     // Iterate over the packages.
     packages.map(async ({ pkg, mode }) => {
       // Check if the entry point of that mode exists.
-      const exists = await pathExists(
-        resolve(process.cwd(), "node_modules", `${pkg}/src/${mode}/${type}`)
-      );
+      const exists = await entryExists({ pkg, mode, type });
       return { pkg, mode, exists };
     })
     // Remove the packages where the entry point doesn't exist.
