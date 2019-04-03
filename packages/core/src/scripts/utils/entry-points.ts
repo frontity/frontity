@@ -145,7 +145,7 @@ export const generateClientEntryPoints = async ({
       });
       // Don't generate entry-points if there are no packages.
       if (packages.length > 0) {
-        let template = "";
+        let template = 'import client from "@frontity/core/src/client";\n';
         // Create the "import" part of the file.
         packages.forEach(
           ({ pkg, mode }) =>
@@ -155,11 +155,12 @@ export const generateClientEntryPoints = async ({
             )} from "${pkg}/src/${site.mode}/client";\n`)
         );
         // Create the "export" part of the file.
-        template += "\nexport {\n";
+        template += "\nconst packages = {\n";
         packages.forEach(
           ({ pkg, mode }) => (template += `  ${getVariable(pkg, mode)},\n`)
         );
-        template += "};";
+        template += "};\n\n";
+        template += "export default client({ packages });";
         // Create sub-folder for site.
         await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
         // Write the file and return the bundle.

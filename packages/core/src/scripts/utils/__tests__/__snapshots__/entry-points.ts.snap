@@ -47,33 +47,42 @@ Object {
   "out": Array [
     Array [
       "/build/bundling/entry-points/site-html/client.ts",
-      "import * as package1_html from \\"package1/src/html/client\\";
+      "import client from \\"@frontity/core/src/client\\";
+import * as package1_html from \\"package1/src/html/client\\";
 import * as package2_html from \\"package2/src/html/client\\";
 
-export {
+const packages = {
   package1_html,
   package2_html,
-};",
+};
+
+export default client({ packages });",
       "utf8",
     ],
     Array [
       "/build/bundling/entry-points/site-amp/client.ts",
-      "import * as package1_amp from \\"package1/src/amp/client\\";
+      "import client from \\"@frontity/core/src/client\\";
+import * as package1_amp from \\"package1/src/amp/client\\";
 import * as package3_amp from \\"package3/src/amp/client\\";
 
-export {
+const packages = {
   package1_amp,
   package3_amp,
-};",
+};
+
+export default client({ packages });",
       "utf8",
     ],
     Array [
       "/build/bundling/entry-points/site-2/client.ts",
-      "import * as package1_html from \\"package1/src/html/client\\";
+      "import client from \\"@frontity/core/src/client\\";
+import * as package1_html from \\"package1/src/html/client\\";
 
-export {
+const packages = {
   package1_html,
-};",
+};
+
+export default client({ packages });",
       "utf8",
     ],
   ],
@@ -117,13 +126,16 @@ Object {
   ],
   "out": Array [
     "/build/bundling/entry-points/site-1/client.ts",
-    "import * as package1_html from \\"package1/src/html/client\\";
+    "import client from \\"@frontity/core/src/client\\";
+import * as package1_html from \\"package1/src/html/client\\";
 import * as package2_html from \\"package2/src/html/client\\";
 
-export {
+const packages = {
   package1_html,
   package2_html,
-};",
+};
+
+export default client({ packages });",
     "utf8",
   ],
 }
