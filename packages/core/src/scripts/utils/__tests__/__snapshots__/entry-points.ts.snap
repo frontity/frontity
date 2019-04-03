@@ -169,17 +169,20 @@ Object {
   "out": Array [
     Array [
       "/build/bundling/entry-points/server.ts",
-      "import * as package1_html from \\"package1/src/html/server\\";
+      "import server from \\"@frontity/core/src/server\\";
+import * as package1_html from \\"package1/src/html/server\\";
 import * as package2_html from \\"package2/src/html/server\\";
 import * as package1_amp from \\"package1/src/amp/server\\";
 import * as package3_amp from \\"package3/src/amp/server\\";
 
-export {
+const packages = {
   package1_html,
   package2_html,
   package1_amp,
   package3_amp,
-};",
+};
+
+export default server({ packages });",
       "utf8",
     ],
   ],
@@ -207,13 +210,16 @@ Object {
   ],
   "out": Array [
     "/build/bundling/entry-points/server.ts",
-    "import * as package1_html from \\"package1/src/html/server\\";
+    "import server from \\"@frontity/core/src/server\\";
+import * as package1_html from \\"package1/src/html/server\\";
 import * as package2_html from \\"package2/src/html/server\\";
 
-export {
+const packages = {
   package1_html,
   package2_html,
-};",
+};
+
+export default server({ packages });",
     "utf8",
   ],
 }

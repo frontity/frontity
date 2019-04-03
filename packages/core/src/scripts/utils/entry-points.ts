@@ -105,7 +105,7 @@ export const generateServerEntryPoint = async ({
   outDir: string;
 }): Promise<EntryPoints> => {
   const packages = await getPackagesList({ sites, type: "server" });
-  let template = "";
+  let template = 'import server from "@frontity/core/src/server";\n';
   // Create the "import" part of the file.
   packages.forEach(
     ({ pkg, mode }) =>
@@ -114,12 +114,13 @@ export const generateServerEntryPoint = async ({
         mode
       )} from "${pkg}/src/${mode}/server";\n`)
   );
-  // Create the "export" part of the file.
-  template += "\nexport {\n";
+  // Create the "const packages = {...}" part of the file.
+  template += "\nconst packages = {\n";
   packages.forEach(
     ({ pkg, mode }) => (template += `  ${getVariable(pkg, mode)},\n`)
   );
-  template += "};";
+  template += "};\n\n";
+  template += "export default server({ packages });";
   // Write the file and return the bundle.
   const path = `${outDir}/bundling/entry-points/server.ts`;
   await writeFile(path, template, "utf8");
