@@ -7,6 +7,7 @@ import { renderToString } from "react-dom/server";
 import template from "./template";
 import App from "../app";
 import { ChunkExtractor } from "@loadable/server";
+import { getSettings } from "@frontity/file-settings";
 // @ts-ignore - This is a dynamic generated file that cannot be analyzed by TS.
 import stats from "build/bundling/client-chunks.json";
 
@@ -18,7 +19,13 @@ export default ({ packages }) => {
 
   // Frontity server rendering.
   app.use(async (ctx, next) => {
-    const extractor = new ChunkExtractor({ stats });
+    // Get settings
+    const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
+
+    const extractor = new ChunkExtractor({
+      stats,
+      entrypoints: [settings.name]
+    });
     const jsx = extractor.collectChunks(<App />);
     const html = renderToString(jsx);
     const scriptTags = extractor.getScriptTags();
