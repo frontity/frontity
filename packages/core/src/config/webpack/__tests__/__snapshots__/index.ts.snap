@@ -38,7 +38,7 @@ Object {
     "name": "client",
     "output": Object {
       "chunkFilename": "[name].es5.js",
-      "filename": "main.es5.js",
+      "filename": "[name].es5.js",
       "path": "build/static",
       "publicPath": "/static",
     },
@@ -137,7 +137,7 @@ Object {
     "name": "client",
     "output": Object {
       "chunkFilename": "[name].module.js",
-      "filename": "main.module.js",
+      "filename": "[name].module.js",
       "path": "build/static",
       "publicPath": "/static",
     },
@@ -318,7 +318,7 @@ Object {
     "name": "client",
     "output": Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
-      "filename": "main.es5.[chunkhash].js",
+      "filename": "[name].es5.[chunkhash].js",
       "path": "build/static",
       "publicPath": "/static",
     },
@@ -404,7 +404,7 @@ Object {
     "name": "client",
     "output": Object {
       "chunkFilename": "[name].module.[chunkhash].js",
-      "filename": "main.module.[chunkhash].js",
+      "filename": "[name].module.[chunkhash].js",
       "path": "build/static",
       "publicPath": "/static",
     },

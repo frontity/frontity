@@ -25,12 +25,12 @@ export default ({
     server: filenames;
   } = {
     module: {
-      development: "main.module.js",
-      production: "main.module.[chunkhash].js"
+      development: "[name].module.js",
+      production: "[name].module.[chunkhash].js"
     },
     es5: {
-      development: "main.es5.js",
-      production: "main.es5.[chunkhash].js"
+      development: "[name].es5.js",
+      production: "[name].es5.[chunkhash].js"
     },
     server: {
       development: "server.js",
