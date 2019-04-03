@@ -18,6 +18,7 @@
   "scripts": {
     "test:ci": "jest",
     "test": "jest --watch",
+    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand",
     "dev": "ts-node src/scripts/dev.ts",
     "build": "ts-node src/scripts/build.ts",
     "serve": "ts-node src/scripts/serve.ts",
