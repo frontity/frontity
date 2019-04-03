@@ -1,3 +1,4 @@
+import "./utils/env";
 import { resolve } from "path";
 import Argv from "minimist";
 import createServer from "./utils/create-server";

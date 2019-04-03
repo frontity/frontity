@@ -1,3 +1,4 @@
+import "./utils/env";
 import Argv from "minimist";
 import { join } from "path";
 import { ensureDir, emptyDir, remove } from "fs-extra";

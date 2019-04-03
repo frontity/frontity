@@ -1,3 +1,4 @@
+import "./utils/env";
 import Argv from "minimist";
 import { ensureDir, emptyDir } from "fs-extra";
 import express from "express";
@@ -19,6 +20,8 @@ const argv = Argv(process.argv.slice(2), {
   boolean: ["p", "h", "es5", "https"],
   string: ["outDir", "mode", "port"]
 });
+
+process.env.CWD = process.cwd();
 
 // Create an express app ready to be used with webpack-dev-middleware.
 const createApp = async ({
