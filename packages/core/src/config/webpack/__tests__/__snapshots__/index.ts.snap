@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Babel returns for development 1`] = `
+exports[`Webpack returns for development 1`] = `
 Object {
   "es5": Object {
     "devtool": "cheap-module-eval-source-map",
@@ -282,7 +282,7 @@ Object {
 }
 `;
 
-exports[`Babel returns for production 1`] = `
+exports[`Webpack returns for production 1`] = `
 Object {
   "es5": Object {
     "devtool": false,

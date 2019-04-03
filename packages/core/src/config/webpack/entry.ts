@@ -8,12 +8,10 @@ const rootPath = process.cwd();
 export default ({
   target,
   mode,
-  outDir,
   entryPoints
 }: {
   target: Target;
   mode: Mode;
-  outDir: string;
   entryPoints: EntryPoints[];
 }): Configuration["entry"] => {
   // Use /client for both es5 and modules and /server for node.

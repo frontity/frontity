@@ -38,23 +38,23 @@ const entryPoints = [
   }
 ];
 
-test("Babel returns for development", () => {
+test("Webpack returns for development", () => {
   expect(
     getWebpack({
       mode: "development",
       babel: babel["development"],
-      outDir: "/build",
+      outDir: "build",
       entryPoints
     })
   ).toMatchSnapshot();
 });
 
-test("Babel returns for production", () => {
+test("Webpack returns for production", () => {
   expect(
     getWebpack({
       mode: "production",
       babel: babel["production"],
-      outDir: "/build",
+      outDir: "build",
       entryPoints
     })
   ).toMatchSnapshot();

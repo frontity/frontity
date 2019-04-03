@@ -8,16 +8,14 @@ import {
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Target, Mode } from "../../types";
 
-const buildDir = "build";
-const analyzeDir = "analyze";
-const bundlingDir = "bundling";
-
 export default ({
   target,
-  mode
+  mode,
+  outDir
 }: {
   target: Target;
   mode: Mode;
+  outDir: string;
 }): Configuration["plugins"] => {
   const config: Configuration["plugins"] = [
     // Create HTML files for bundle analyzing.
@@ -25,7 +23,7 @@ export default ({
       analyzerMode: "static",
       reportFilename: `${
         target !== "server" ? `../` : ""
-      }${analyzeDir}/${target}-${mode}.html`,
+      }analyze/${target}-${mode}.html`,
       openAnalyzer: false,
       logLevel: "silent"
     })
@@ -33,7 +31,7 @@ export default ({
 
   if (mode === "development") {
     // Don't rebuild on changes of the build folder.
-    config.push(new WatchIgnorePlugin([new RegExp(buildDir)]));
+    config.push(new WatchIgnorePlugin([new RegExp(outDir)]));
   }
 
   // Support HMR in development. Only needed in client.
@@ -44,7 +42,7 @@ export default ({
   if (target !== "server")
     config.push(
       new LoadablePlugin({
-        filename: `../${bundlingDir}/client-chunks.json`
+        filename: `../bundling/client-chunks.json`
       })
     );
 

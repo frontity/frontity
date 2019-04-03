@@ -30,15 +30,15 @@ export default ({
   const getConfig = (target: Target): Configuration => {
     const config: Configuration = {
       mode,
-      name: name({ target, mode }),
-      target: targets({ target, mode }),
-      devtool: devtool({ target, mode }),
-      entry: entry({ target, mode, outDir, entryPoints }),
-      output: output({ target, mode }),
-      module: modules({ target, mode, babel }),
-      resolve: resolve({ target, mode }),
-      externals: externals({ target, mode }),
-      plugins: plugins({ target, mode })
+      name: name({ target }),
+      target: targets({ target }),
+      devtool: devtool({ mode }),
+      entry: entry({ target, mode, entryPoints }),
+      output: output({ target, mode, outDir }),
+      module: modules({ target, babel }),
+      resolve: resolve(),
+      externals: externals({ target }),
+      plugins: plugins({ target, mode, outDir })
     };
     return config;
   };
