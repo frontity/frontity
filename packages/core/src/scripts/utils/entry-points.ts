@@ -121,7 +121,7 @@ export const generateServerEntryPoint = async ({
   );
   template += "};";
   // Write the file and return the bundle.
-  const path = `${outDir}/bundling/entry-points/server.js`;
+  const path = `${outDir}/bundling/entry-points/server.ts`;
   await writeFile(path, template, "utf8");
   return { name: "server", path };
 };
@@ -162,7 +162,7 @@ export const generateClientEntryPoints = async ({
         // Create sub-folder for site.
         await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
         // Write the file and return the bundle.
-        const path = `${outDir}/bundling/entry-points/${site.name}/client.js`;
+        const path = `${outDir}/bundling/entry-points/${site.name}/client.ts`;
         await writeFile(path, template, "utf8");
         return { name: site.name, path };
       }
