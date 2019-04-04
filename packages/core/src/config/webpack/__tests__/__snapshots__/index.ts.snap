@@ -205,6 +205,8 @@ Object {
     "entry": "./build/bundling/entry-points/server.js",
     "externals": Object {
       "any-promise": "promise-monofill",
+      "lodash": "lodash-es",
+      "ramda": "ramda/es",
     },
     "mode": "development",
     "module": Object {
@@ -471,6 +473,8 @@ Object {
     "entry": "./build/bundling/entry-points/server.js",
     "externals": Object {
       "any-promise": "promise-monofill",
+      "lodash": "lodash-es",
+      "ramda": "ramda/es",
     },
     "mode": "production",
     "module": Object {

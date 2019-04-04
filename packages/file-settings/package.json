@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "module": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frontity/frontity.git"
