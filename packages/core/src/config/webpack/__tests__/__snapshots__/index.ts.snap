@@ -345,6 +345,11 @@ Object {
         },
         "server": null,
       },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -431,6 +436,11 @@ Object {
         },
         "server": null,
       },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -510,6 +520,11 @@ Object {
           "statsOptions": null,
         },
         "server": null,
+      },
+      WatchIgnorePlugin {
+        "paths": Array [
+          /build/,
+        ],
       },
       LimitChunkCountPlugin {
         "options": Object {

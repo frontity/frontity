@@ -26,13 +26,9 @@ export default ({
       }analyze/${target}-${mode}.html`,
       openAnalyzer: false,
       logLevel: "silent"
-    })
+    }),
+    new WatchIgnorePlugin([new RegExp(outDir)])
   ];
-
-  if (mode === "development") {
-    // Don't rebuild on changes of the build folder.
-    config.push(new WatchIgnorePlugin([new RegExp(outDir)]));
-  }
 
   // Support HMR in development. Only needed in client.
   if (target !== "server" && mode === "development")
