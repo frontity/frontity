@@ -67,7 +67,8 @@ const dev = async ({
         colors: true,
         errors: true,
         warnings: true,
-        errorDetails: true
+        errorDetails: true,
+        excludeAssets: "client-chunks.json"
       }
     })
   );
