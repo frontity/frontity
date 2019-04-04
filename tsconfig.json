@@ -5,7 +5,7 @@
     // Search under node_modules for non-relative imports.
     "moduleResolution": "node",
     // commonjs modules.
-    "module": "commonjs",
+    "module": "esnext",
     // Allow default imports from modules with no default export.
     "allowSyntheticDefaultImports": true,
     // Don't emit; allow Babel to transform files.

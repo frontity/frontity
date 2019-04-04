@@ -23,7 +23,8 @@
     "build": "ts-node src/scripts/build.ts",
     "serve": "ts-node src/scripts/serve.ts",
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
-    "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts"
+    "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts",
+    "prepublish": "tsc --project ./tsconfig.build.json"
   },
   "dependencies": {
     "@babel/core": "^7.3.4",
@@ -72,13 +73,13 @@
     "@types/loadable__server": "^5.2.1",
     "@types/lodash": "^4.14.123",
     "@types/minimist": "^1.2.0",
-    "@types/node": "^11.10.4",
+    "@types/node": "^11.13.0",
     "@types/react": "^16.8.6",
     "@types/react-dom": "^16.8.2",
     "@types/webpack": "^4.4.25",
     "@types/webpack-bundle-analyzer": "^2.13.1",
     "@types/webpack-dev-middleware": "^2.0.2",
-    "@types/webpack-env": "^1.13.8",
+    "@types/webpack-env": "^1.13.9",
     "@types/webpack-hot-middleware": "^2.16.5",
     "jest": "^24.3.1",
     "ts-jest": "^24.0.0"

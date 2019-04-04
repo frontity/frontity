@@ -10,7 +10,13 @@ export default (): Configuration["resolve"] => {
     // Alias the build folder to get access to it directly, without relying on were
     // the node_module folder is. Useful for things like import "build/client-stats.json".
     alias: {
-      build: resolve(rootPath, "build")
+      build: resolve(rootPath, "build"),
+      // Force lodash to be the esModule version to support tree-shaking.
+      lodash: "lodash-es",
+      // Force ramda to be the esModule version to support tree-shaking.
+      ramda: "ramda/es",
+      // Avoid dynamic imports with Koa require.
+      "any-promise": "promise-monofill"
     }
   };
   return config;
