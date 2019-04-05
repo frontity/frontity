@@ -18,6 +18,7 @@ describe("actions", () => {
       }
     });
 
-    await store.actions.source.fetch("/pathname", 2);
+    await store.actions.source.fetch({ name: "/pathname", page: 2 });
+    expect(store.state.source.isPopulated).toBe(true);
   });
 });
