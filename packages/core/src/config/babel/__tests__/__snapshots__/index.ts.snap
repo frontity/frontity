@@ -22,6 +22,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": "3",
           "modules": false,
           "targets": Object {
             "browsers": Array [
@@ -67,6 +68,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": false,
           "modules": false,
           "targets": Object {
             "esmodules": true,
@@ -97,6 +99,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": false,
           "modules": false,
           "targets": Object {
             "node": "8.10",
@@ -132,6 +135,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": "3",
           "modules": false,
           "targets": Object {
             "browsers": Array [
@@ -177,6 +181,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": false,
           "modules": false,
           "targets": Object {
             "esmodules": true,
@@ -207,6 +212,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": false,
           "modules": false,
           "targets": Object {
             "node": "8.10",

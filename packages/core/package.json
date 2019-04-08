@@ -40,6 +40,7 @@
     "@loadable/webpack-plugin": "^5.5.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "core-js": "^3.0.1",
     "express": "^4.16.4",
     "fs-extra": "^7.0.1",
     "hash-it": "^4.0.4",

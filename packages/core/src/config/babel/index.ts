@@ -49,6 +49,7 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
         {
           targets: targets[target],
           useBuiltIns: target === "es5" && "entry",
+          corejs: target === "es5" && "3",
           modules: false
         }
       ],
