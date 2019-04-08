@@ -4,10 +4,10 @@
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
   "scripts": {
-    "dev": "node ./node_modules/@frontity/core/dist/scripts/dev.js",
-    "dev:inspect": "node --inspect ./node_modules/@frontity/core/dist/scripts/dev.js",
-    "build": "node ./node_modules/@frontity/core/dist/scripts/build.js",
-    "serve": "node ./node_modules/@frontity/core/dist/scripts/serve.js"
+    "dev": "ts-node ./node_modules/@frontity/core/src/scripts/dev.ts",
+    "dev:inspect": "node --inspect -r ts-node/register ./node_modules/@frontity/core/src/scripts/dev.ts",
+    "build": "ts-node ./node_modules/@frontity/core/src/scripts/build.ts",
+    "serve": "ts-node ./node_modules/@frontity/core/src/scripts/serve.ts"
   },
   "license": "Apache-2.0",
   "dependencies": {
