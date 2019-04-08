@@ -14,7 +14,7 @@ export default (): Configuration["resolve"] => {
       // Force lodash to be the esModule version to support tree-shaking.
       lodash: "lodash-es",
       // Force ramda to be the esModule version to support tree-shaking.
-      ramda: "ramda/es",
+      "ramda/src": "ramda/es",
       // Avoid dynamic imports with Koa require.
       "any-promise": "promise-monofill"
     }

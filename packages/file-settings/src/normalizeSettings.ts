@@ -1,4 +1,4 @@
-import { mergeDeepRight as merge } from "ramda";
+import merge from "ramda/src/mergeDeepRight";
 import validateSettings from "./validateSettings";
 import {
   Settings,

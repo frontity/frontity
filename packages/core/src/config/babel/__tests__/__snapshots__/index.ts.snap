@@ -22,6 +22,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": false,
           "targets": Object {
             "browsers": Array [
               "and_chr >= 67",
@@ -66,6 +67,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": false,
           "targets": Object {
             "esmodules": true,
           },
@@ -95,6 +97,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": false,
           "targets": Object {
             "node": "8.10",
           },
@@ -129,6 +132,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": false,
           "targets": Object {
             "browsers": Array [
               "and_chr >= 67",
@@ -173,6 +177,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": false,
           "targets": Object {
             "esmodules": true,
           },
@@ -202,6 +207,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "modules": false,
           "targets": Object {
             "node": "8.10",
           },
