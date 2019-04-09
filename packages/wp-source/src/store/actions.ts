@@ -1,4 +1,4 @@
-import { Fetch, Register } from "./types";
+import { Fetch, Register, Get, Populate, Entity } from "./types";
 
 export const fetch: Fetch = async (store, { name, page = 1 }) => {
   // Find the handler function that matches the name
@@ -14,6 +14,21 @@ export const register: Register = ({ effects }, { pattern, handler }) => {
   resolver.add(pattern, handler);
 };
 
-export const populate = ({ state }) => {
-  state.source.isPopulated = true;
+export const get: Get = async ({ state, effects }, { endpoint, params }) => {
+  const { siteUrl, isWpCom } = state.settings.packages["wp-source"];
+  return effects.source.api.get({ endpoint, params, siteUrl, isWpCom });
+};
+
+export const populate: Populate = ({ state }, { name, entities, page }) => {
+  // Init instance if it doesn't exist yet
+  state.source.name[name] = state.source.name[name] || {};
+
+  if (entities instanceof Array) {
+    entities.forEach((entity: Entity) => {
+      // Get name from link property
+      const name = new URL(entity.link).pathname;
+      // const type = entity.type || entity.taxonomy;
+      const id = entity.id;
+    })
+  }
 };
