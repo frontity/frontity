@@ -1,5 +1,10 @@
-import { Command } from "commander";
+type Options = {
+  name?: string;
+  typescript?: boolean;
+  packages?: string[];
+};
 
-export default (name: string, _command: Command) => {
-  console.log("My new app name is:", name);
+export default (options: Options) => {
+  console.log("name:", options.name);
+  console.log("cwd:", process.cwd());
 };

@@ -10,7 +10,12 @@ program.version(version).description("Frontity CLI");
 // - Creates a new Frontity app.
 program
   .command("create [name]")
+  .option("-ts, --typescript", "Adds support for TypeScript")
   .description("Creates a new Frontity app.")
-  .action(create);
+  .action((name, _command) => {
+    create({
+      name
+    });
+  });
 
 program.parse(process.argv);
