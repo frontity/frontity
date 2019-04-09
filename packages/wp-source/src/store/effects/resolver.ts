@@ -5,7 +5,7 @@ const initResolver = () : Resolver => ({
   // Array containing all registered patterns with their handlers
   registered: [],
 
-  // Adds a handler to registered, using the pattern as key
+  // Adds a handler to registered
   add(this: Resolver, pattern, handler) {
     const keys = [];
     const regexp = pathToRegexp(pattern, keys);
