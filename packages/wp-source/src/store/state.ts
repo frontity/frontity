@@ -1,1 +1,10 @@
-export const state = {};
+export const state = {
+  name: {},
+  taxonomy: {},
+  category: {},
+  tag: {},
+  type: {},
+  post: {},
+  page: {},
+  author: {}
+};
