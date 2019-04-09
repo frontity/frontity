@@ -46,7 +46,7 @@ export type Get = Action<{
 
 export type Populate = Action<{
   name: string;
-  entities: Object[] | Object;
+  entities: any[] | any;
   page?: number;
 }>;
 
@@ -126,5 +126,41 @@ type Post = {
   tags: number[];
 };
 
+type Page = {
+  id: number;
+  date: string;
+  date_gmt: string;
+  guid: {
+    rendered: string;
+  };
+  modified: string;
+  modified_gmt: string;
+  slug: string;
+  status: "publish" | "draft";
+  type: "page";
+  link: string;
+  title: {
+    rendered: string;
+  };
+  content: {
+    rendered: string;
+    protected: boolean;
+  };
+  excerpt: {
+    rendered: string;
+    protected: boolean;
+  };
+  author: number;
+  featured_media: number;
+  parent: number;
+  menu_order: number;
+  comment_status: "open" | "closed";
+  ping_status: "open" | "closed";
+  template: string;
+  meta: [];
+};
 
-export type Entity = Post | Author;
+
+
+// export type Entity = Post | Page | Author;
+export type Entity = any; // mock up entity type
