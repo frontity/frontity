@@ -8,6 +8,9 @@
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
   "main": "src/index.js",
+  "bin": {
+    "frontity": "build/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
@@ -15,5 +18,17 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "scripts": {}
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.2",
+    "jest": "^24.7.1",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.4.2"
+  },
+  "dependencies": {
+    "commander": "^2.20.0"
+  }
 }
