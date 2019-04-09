@@ -1,3 +1,3 @@
 export { default as getSettings } from "./getSettings";
-export { default as getPackages } from "./getPackages";
+export { default as getAllSites } from "./getAllSites";
 export * from "./types";

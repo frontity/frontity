@@ -1,5 +1,11 @@
 import { Configuration } from "webpack";
-import { Target, Mode, WebpackConfigs, BabelConfigs } from "../../types";
+import {
+  Target,
+  Mode,
+  WebpackConfigs,
+  BabelConfigs,
+  EntryPoints
+} from "../../types";
 import name from "./name";
 import targets from "./targets";
 import devtool from "./devtool";
@@ -12,23 +18,27 @@ import plugins from "./plugins";
 
 export default ({
   mode,
-  babel
+  babel,
+  outDir,
+  entryPoints
 }: {
   mode: Mode;
   babel: BabelConfigs;
+  outDir: string;
+  entryPoints: EntryPoints[];
 }): WebpackConfigs => {
   const getConfig = (target: Target): Configuration => {
     const config: Configuration = {
       mode,
-      name: name({ target, mode }),
-      target: targets({ target, mode }),
-      devtool: devtool({ target, mode }),
-      entry: entry({ target, mode }),
-      output: output({ target, mode }),
-      module: modules({ target, mode, babel }),
-      resolve: resolve({ target, mode }),
-      externals: externals({ target, mode }),
-      plugins: plugins({ target, mode })
+      name: name({ target }),
+      target: targets({ target }),
+      devtool: devtool({ mode }),
+      entry: entry({ target, mode, entryPoints }),
+      output: output({ target, mode, outDir }),
+      module: modules({ target, babel }),
+      resolve: resolve(),
+      externals: externals({ target }),
+      plugins: plugins({ target, mode, outDir })
     };
     return config;
   };

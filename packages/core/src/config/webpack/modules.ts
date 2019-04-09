@@ -2,15 +2,13 @@ import hash from "hash-it";
 import { Configuration } from "webpack";
 import babelCore from "@babel/core/package.json";
 import babelLoader from "babel-loader/package.json";
-import { Target, Mode, BabelConfigs } from "../../types";
+import { Target, BabelConfigs } from "../../types";
 
 export default ({
   target,
-  mode,
   babel
 }: {
   target: Target;
-  mode: Mode;
   babel: BabelConfigs;
 }): Configuration["module"] => {
   const config: Configuration["module"] = {

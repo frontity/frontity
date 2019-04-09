@@ -1,4 +1,4 @@
-import { NormalizedSettings, NormalizedMono, NormalizedMulti } from "./types";
+import { NormalizedSettings } from "./types";
 import importSettings from "./importSettings";
 
 // This function returns the settings required by
@@ -9,18 +9,15 @@ export default async ({
 }: {
   name?: string;
   url: string;
-}): Promise<NormalizedMono | NormalizedMulti> => {
+}): Promise<NormalizedSettings> => {
   // Import the settings from a file.
-  const allSettings: NormalizedSettings = await importSettings();
+  const allSettings: NormalizedSettings[] = await importSettings();
 
-  // 1. Return settings when `allSettings` is an object.
-  if (!Array.isArray(allSettings)) return allSettings;
-
-  // 2. Return settings when `allSettings` is an array of only
+  // 1. Return settings when `allSettings` is an array of only
   // one element.
   if (allSettings.length === 1) return allSettings[0];
 
-  // 3. Return settings when `name` param is passed and exist
+  // 2. Return settings when `name` param is passed and exist
   // settings with that name.
   if (name) {
     const settings = allSettings.find(s => s.name === name);
@@ -30,7 +27,7 @@ export default async ({
     }
   }
 
-  // 4. Return settings when `matches` match the param `url`.
+  // 3. Return settings when `matches` match the param `url`.
   const validMatch = allSettings
     // Get all matches in one array.
     .reduce((final, current) => {
@@ -47,7 +44,7 @@ export default async ({
       settings => settings.matches && settings.matches.includes(validMatch)
     );
 
-  // 5. Return the first settings without a match defined or,
+  // 4. Return the first settings without a match defined or,
   // if all of them have matches, the first settings in the array.
   return allSettings.filter(settings => !settings.matches)[0] || allSettings[0];
 };

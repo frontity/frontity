@@ -8,13 +8,22 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
-      "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": "3",
+          "modules": false,
           "targets": Object {
             "browsers": Array [
               "and_chr >= 67",
@@ -45,13 +54,22 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
-      "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": false,
+          "modules": false,
           "targets": Object {
             "esmodules": true,
           },
@@ -67,13 +85,22 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
-      "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": false,
+          "modules": false,
           "targets": Object {
             "node": "8.10",
           },
@@ -94,13 +121,22 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
-      "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": "3",
+          "modules": false,
           "targets": Object {
             "browsers": Array [
               "and_chr >= 67",
@@ -131,13 +167,22 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
-      "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": false,
+          "modules": false,
           "targets": Object {
             "esmodules": true,
           },
@@ -153,13 +198,22 @@ Object {
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
-      "babel-plugin-lodash",
+      Array [
+        "babel-plugin-transform-inline-environment-variables",
+        Object {
+          "include": Array [
+            "CWD",
+          ],
+        },
+      ],
     ],
     "presets": Array [
       "@babel/preset-typescript",
       Array [
         "@babel/preset-env",
         Object {
+          "corejs": false,
+          "modules": false,
           "targets": Object {
             "node": "8.10",
           },

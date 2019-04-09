@@ -1,9 +1,7 @@
 import { readFile } from "fs-extra";
 import express from "express";
-import { Mode } from "../../types";
 import * as http from "http";
 import * as https from "https";
-import webpack = require("webpack");
 
 // Create HTTP or HTTPS server using a self-signed certificate.
 export default async ({

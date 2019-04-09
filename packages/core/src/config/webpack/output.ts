@@ -2,16 +2,17 @@ import { resolve } from "path";
 import { Configuration } from "webpack";
 import { Target, Mode } from "../../types";
 
-const buildDir = "build";
 // Get the root path of the directory where the script was started.
 const rootPath = process.cwd();
 
 export default ({
   target,
-  mode
+  mode,
+  outDir
 }: {
   target: Target;
   mode: Mode;
+  outDir: string;
 }): Configuration["output"] => {
   // Use hashes only in production and distinguish between es5 and module
   // files using their filenames.
@@ -25,12 +26,12 @@ export default ({
     server: filenames;
   } = {
     module: {
-      development: "main.module.js",
-      production: "main.module.[chunkhash].js"
+      development: "[name].module.js",
+      production: "[name].module.[chunkhash].js"
     },
     es5: {
-      development: "main.es5.js",
-      production: "main.es5.[chunkhash].js"
+      development: "[name].es5.js",
+      production: "[name].es5.[chunkhash].js"
     },
     server: {
       development: "server.js",
@@ -62,7 +63,7 @@ export default ({
   };
   const config: Configuration["output"] = {
     filename: filenames[target][mode],
-    path: resolve(rootPath, buildDir, paths[target])
+    path: resolve(rootPath, outDir, paths[target])
   };
   // Node still needs CJS.
   if (target === "server") config.libraryTarget = "commonjs2";

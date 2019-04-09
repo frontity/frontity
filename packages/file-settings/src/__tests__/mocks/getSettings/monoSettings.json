@@ -1,9 +1,11 @@
-{
-  "name": "mono-settings",
-  "mode": "html",
-  "settings": {
-    "timezone": 0,
-    "language": "en"
-  },
-  "packages": [{ "name": "@frontity/theme", "active": true }]
-}
+[
+  {
+    "name": "mono-settings",
+    "mode": "html",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
+    "packages": [{ "name": "@frontity/theme", "active": true }]
+  }
+]

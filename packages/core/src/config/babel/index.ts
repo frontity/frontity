@@ -48,7 +48,9 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
         "@babel/preset-env",
         {
           targets: targets[target],
-          useBuiltIns: target === "es5" && "entry"
+          useBuiltIns: target === "es5" && "entry",
+          corejs: target === "es5" && "3",
+          modules: false
         }
       ],
       "@babel/preset-react"
@@ -62,8 +64,13 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       "@babel/plugin-proposal-object-rest-spread",
       // Support for the class props: class MyClass { myProp = 'hi there' }
       "@babel/plugin-proposal-class-properties",
-      // Transform lodash imports to cherry-pick: import add from 'lodash/add'
-      "babel-plugin-lodash"
+      // Transform inline environment variables (for process.env.CWD)
+      [
+        "babel-plugin-transform-inline-environment-variables",
+        {
+          include: ["CWD"]
+        }
+      ]
     ];
     return {
       presets,

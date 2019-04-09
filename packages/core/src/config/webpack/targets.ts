@@ -1,12 +1,6 @@
 import { Configuration } from "webpack";
-import { Target, Mode } from "../../types";
+import { Target } from "../../types";
 
-export default ({
-  target,
-  mode
-}: {
-  target: Target;
-  mode: Mode;
-}): Configuration["target"] => {
+export default ({ target }: { target: Target }): Configuration["target"] => {
   return target === "server" ? "node" : "web";
 };

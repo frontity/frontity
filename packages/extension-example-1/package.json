@@ -1,0 +1,21 @@
+{
+  "name": "@frontity/extension-example-1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "This is an empty extensions only for testing purposes",
+  "keywords": [
+    "frontity"
+  ],
+  "homepage": "https://frontity.org",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "bugs": {
+    "url": "https://community.frontity.org"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

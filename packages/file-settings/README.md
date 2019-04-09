@@ -44,30 +44,33 @@ Used to match the right set of settings when there is more than one.
 **`settings`** : `Settings`\
 An object with type `Settings` containing a set of settings.
 
-### `async getPackages() => packages`
+### `async getAllSites() => sites`
 
-Used to retrieve a list of names of the packages used in each settings set.
+Used to retrieve all the sites with its name, mode and packages.
 
 #### Return
 
-**`packages`** : `{ [key: string]: string[] }`\
-An object with a key for each set of settings populated with an array of packages names from that set.
-
-If the settings file exports only one set of settings (or _mono settings_), `packages` will have only one key named `default`:
+**Sites**: `{ name: string; mode: string; packages: string[]; }[]`\
+An array of sites containing name, mode and packages.
 
 ```js
-{
- default: [ "theme-package", "source-package" ]
-}
-```
-
-If the settings file exports various sets of settings (or _multi settings_), `packages` will have one key per set of settings named like them.
-
-```js
-{
-  "settings-one": [ "theme-one", "source-one" ],
-  "settings-two": [ "theme-two", "source-one" ]
-}
+[
+  {
+    name: "my-site-1",
+    mode: "html",
+    packages: ["package-1", "package-2"]
+  },
+  {
+    name: "my-site-1-amp",
+    mode: "amp",
+    packages: ["package-1", "package-3"]
+  },
+  {
+    name: "my-site-2",
+    mode: "html",
+    packages: ["package-1", "package-2"]
+  }
+];
 ```
 
 ## Settings File

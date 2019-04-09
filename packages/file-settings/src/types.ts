@@ -41,12 +41,6 @@ export type MonoSettings<T = Package> = Imported<T> & Mono;
 
 export type MultiSettings<T = Package> = Imported<T> & Multi;
 
-export type NormalizedMono<T = Package> = Normalized<T> & Mono;
-
-export type NormalizedMulti<T = Package> = Normalized<T> & Multi;
+export type NormalizedSettings<T = Package> = Normalized<T> & Multi;
 
 export type Settings<T = Package> = MonoSettings<T> | MultiSettings<T>[];
-
-export type NormalizedSettings<T = Package> =
-  | NormalizedMono<T>
-  | NormalizedMulti<T>[];

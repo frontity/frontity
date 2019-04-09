@@ -1,4 +1,5 @@
-import { uniq, uniqBy } from "ramda";
+import uniq from "ramda/src/uniq";
+import uniqBy from "ramda/src/uniqBy";
 import { Settings, Package } from "./types";
 
 // This function validates the packages.
