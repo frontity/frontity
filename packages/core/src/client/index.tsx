@@ -1,5 +1,6 @@
 import React from "react";
 import { hydrate } from "react-dom";
+import { loadableReady } from "@loadable/component";
 import App from "../app";
 
 export default ({ packages }) => {
@@ -14,5 +15,5 @@ export default ({ packages }) => {
     });
   }
 
-  render(App);
+  loadableReady(() => render(App));
 };
