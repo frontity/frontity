@@ -1,4 +1,4 @@
-import api from "../api";
+import { api } from "../effects";
 import fetch from "node-fetch";
 
 jest.mock("node-fetch");

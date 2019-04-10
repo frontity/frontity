@@ -1,5 +1,33 @@
-import * as pathToRegexp from 'path-to-regexp';
-import { Resolver } from "../types";
+import pathToRegexp from 'path-to-regexp';
+import fetch from "node-fetch";
+import { Api, Resolver } from "./types";
+
+const wpComBase = "https://public-api.wordpress.com/wp/v2/sites/";
+
+const api: Api = {
+  get: ({ endpoint, params, siteUrl, isWpCom }) => {
+    // Build the base URL depending on whether it is WP.com or WP.org
+    const baseUrl = isWpCom
+      ? `${wpComBase}${siteUrl.replace(/^https?:\/\//, "")}/`
+      : `${siteUrl}/wp-json`;
+
+    // Add the REST path depending on whether it should start
+    // with "/wp/v2" or not
+    const requestUrl = isWpCom || endpoint.startsWith("/")
+      ? `${baseUrl}${endpoint}`
+      : `${baseUrl}/wp/v2/${endpoint}`;
+
+    // Add query parameters
+    const query = params
+      ? `?${Object.entries(params)
+          .map(([key, value]) => `${key}=${value}`)
+          .join("&")}`
+      : "";
+
+    // Send request and return promise
+    return fetch(`${requestUrl}${query}`);
+  }
+};
 
 const initResolver = () : Resolver => ({
   // Array containing all registered patterns with their handlers
@@ -50,4 +78,6 @@ const initResolver = () : Resolver => ({
   },
 })
 
-export default initResolver();
+const resolver = initResolver();
+
+export { api, resolver };
