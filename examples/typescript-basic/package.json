@@ -8,7 +8,8 @@
     "dev:inspect": "node --inspect -r ts-node/register ./node_modules/@frontity/core/src/scripts/dev.ts",
     "build": "ts-node ./node_modules/@frontity/core/src/scripts/build.ts",
     "build:inspect": "node --inspect -r ts-node/register ./node_modules/@frontity/core/src/scripts/build.ts",
-    "serve": "ts-node ./node_modules/@frontity/core/src/scripts/serve.ts"
+    "serve": "ts-node ./node_modules/@frontity/core/src/scripts/serve.ts",
+    "serve:inspect": "node --inspect -r ts-node/register ./node_modules/@frontity/core/src/scripts/serve.ts"
   },
   "license": "Apache-2.0",
   "dependencies": {
