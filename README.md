@@ -18,7 +18,7 @@
 > - Release Candidate Date: **May 20, 2019**
 > - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
 >
-> #### Join the beta test list at [Frontity.org](https://frontity.org)!
+> #### Get notified of beta at [Frontity.org](https://frontity.org)!
 
 ---
 
