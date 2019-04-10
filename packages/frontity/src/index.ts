@@ -1,4 +1,4 @@
-import * as program from "commander";
+import program from "commander";
 import create from "./create";
 import { version } from "../package.json";
 
@@ -12,10 +12,8 @@ program
   .command("create [name]")
   .option("-ts, --typescript", "Adds support for TypeScript")
   .description("Creates a new Frontity app.")
-  .action((name, _command) => {
-    create({
-      name
-    });
+  .action((name: string, _command) => {
+    create({ name });
   });
 
 program.parse(process.argv);
