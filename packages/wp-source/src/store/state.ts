@@ -6,5 +6,6 @@ export const state = {
   type: {},
   post: {},
   page: {},
-  author: {}
+  author: {},
+  attachment: {}
 };

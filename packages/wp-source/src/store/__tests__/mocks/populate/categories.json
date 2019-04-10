@@ -1,0 +1,448 @@
+[
+  {
+    "id": 12,
+    "count": 0,
+    "description": "Exercitationem nesciunt in sint illum ipsa est eum qui mollitia et minima expedita corrupti nisi placeat reprehenderit consectetur est impedit quo quam et",
+    "link": "http://frontity.test/category/assumenda-illum-ab-quos-quia-eveniet-sapiente-quo/",
+    "name": "Assumenda illum ab quos quia eveniet sapiente quo",
+    "slug": "assumenda-illum-ab-quos-quia-eveniet-sapiente-quo",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/12"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=12"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "count": 1,
+    "description": "Id sint iusto suscipit sit officia cupiditate rerum saepe et quis corporis nemo itaque aut quaerat consequatur voluptatem saepe a aut fugiat aut",
+    "link": "http://frontity.test/category/aut-vel-dolores-exercitationem-cupiditate-et-quis-aperiam/",
+    "name": "Aut vel dolores exercitationem cupiditate et quis aperiam",
+    "slug": "aut-vel-dolores-exercitationem-cupiditate-et-quis-aperiam",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/4"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=4"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "count": 1,
+    "description": "Necessitatibus eos architecto aut qui cupiditate velit",
+    "link": "http://frontity.test/category/beatae-numquam-tempore-ut-aut-architecto-dolor-adipisci-asperiores-distinctio-facere-perferendis/",
+    "name": "Beatae numquam tempore ut aut architecto dolor adipisci asperiores distinctio facere perferendis",
+    "slug": "beatae-numquam-tempore-ut-aut-architecto-dolor-adipisci-asperiores-distinctio-facere-perferendis",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/7"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=7"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "count": 0,
+    "description": "",
+    "link": "http://frontity.test/category/lorem-ipsum/dolor-sit-amet/",
+    "name": "Dolor Sit Amet",
+    "slug": "dolor-sit-amet",
+    "taxonomy": "category",
+    "parent": 2,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/3"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "http://frontity.test/wp-json/wp/v2/categories/2"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=3"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "up": [
+        {
+          "id": 2,
+          "link": "http://frontity.test/category/lorem-ipsum/",
+          "name": "Lorem Ipsum",
+          "slug": "lorem-ipsum",
+          "taxonomy": "category",
+          "_links": {
+            "self": [
+              {
+                "href": "http://frontity.test/wp-json/wp/v2/categories/2"
+              }
+            ],
+            "collection": [
+              {
+                "href": "http://frontity.test/wp-json/wp/v2/categories"
+              }
+            ],
+            "about": [
+              {
+                "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+              }
+            ],
+            "wp:post_type": [
+              {
+                "href": "http://frontity.test/wp-json/wp/v2/posts?categories=2"
+              }
+            ],
+            "curies": [
+              {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "count": 1,
+    "description": "Recusandae voluptate voluptatum magnam ut sed porro optio omnis vitae non et labore ea illo cumque at est sequi dolore in voluptate porro totam voluptatem rem",
+    "link": "http://frontity.test/category/dolorem-ut-ea-sit-quidem-et-quia-id-qui-provident/",
+    "name": "Dolorem ut ea sit quidem et quia id qui provident",
+    "slug": "dolorem-ut-ea-sit-quidem-et-quia-id-qui-provident",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/15"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=15"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "count": 0,
+    "description": "Autem hic praesentium unde inventore id pariatur qui porro veritatis repellat nam exercitationem molestias beatae quia nesciunt asperiores sed et est harum dicta ex blanditiis aut vitae",
+    "link": "http://frontity.test/category/et-magnam-incidunt-ut-autem-et-quidem-sit-et/",
+    "name": "Et magnam incidunt ut autem et quidem sit et",
+    "slug": "et-magnam-incidunt-ut-autem-et-quidem-sit-et",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/11"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=11"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "count": 1,
+    "description": "Velit nostrum ad qui et sunt nobis aut consequatur rerum aperiam quia",
+    "link": "http://frontity.test/category/et-modi-distinctio-voluptatem-quia-cupiditate-labore-corrupti-perferendis-ut-autem/",
+    "name": "Et modi distinctio voluptatem quia cupiditate labore corrupti perferendis ut autem",
+    "slug": "et-modi-distinctio-voluptatem-quia-cupiditate-labore-corrupti-perferendis-ut-autem",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/6"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=6"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "count": 0,
+    "description": "Explicabo velit error illum est nihil ut aut ea quia et",
+    "link": "http://frontity.test/category/et-quia-provident-fuga-eos-aut-nisi-modi/",
+    "name": "Et quia provident fuga eos aut nisi modi",
+    "slug": "et-quia-provident-fuga-eos-aut-nisi-modi",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/5"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=5"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "count": 0,
+    "description": "Sed est commodi qui labore ratione reprehenderit",
+    "link": "http://frontity.test/category/excepturi-nostrum-consequatur-fuga-et-ex-rem-quaerat-et-iure/",
+    "name": "Excepturi nostrum consequatur fuga et ex rem quaerat et iure",
+    "slug": "excepturi-nostrum-consequatur-fuga-et-ex-rem-quaerat-et-iure",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/8"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=8"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "count": 0,
+    "description": "",
+    "link": "http://frontity.test/category/lorem-ipsum/",
+    "name": "Lorem Ipsum",
+    "slug": "lorem-ipsum",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories/2"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "http://frontity.test/wp-json/wp/v2/posts?categories=2"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]

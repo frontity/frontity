@@ -1,0 +1,28 @@
+[
+  {
+      "id": 1,
+      "name": "admin",
+      "url": "",
+      "description": "",
+      "link": "http://frontity.test/author/admin/",
+      "slug": "admin",
+      "avatar_urls": {
+          "24": "http://0.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+          "48": "http://0.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+          "96": "http://0.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+      },
+      "meta": [],
+      "_links": {
+          "self": [
+              {
+                  "href": "http://frontity.test/wp-json/wp/v2/users/1"
+              }
+          ],
+          "collection": [
+              {
+                  "href": "http://frontity.test/wp-json/wp/v2/users"
+              }
+          ]
+      }
+  }
+]
