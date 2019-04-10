@@ -1,12 +1,6 @@
-export default ({
-  html,
-  scriptTags,
-  linkTags
-}: {
-  html: string;
-  scriptTags: string;
-  linkTags: string;
-}): string => `<!doctype html>
+import { Template } from "../../types";
+
+const template: Template = ({ html, scriptTags, linkTags }) => `<!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
@@ -19,3 +13,5 @@ export default ({
         ${scriptTags}
       </body>
     </html>`;
+
+export default template;

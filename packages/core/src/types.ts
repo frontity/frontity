@@ -25,3 +25,13 @@ export interface EntryPoints {
   name: string;
   path: string;
 }
+
+export type Template = ({
+  html,
+  scriptTags,
+  linkTags
+}: {
+  html: string;
+  scriptTags?: string;
+  linkTags?: string;
+}) => string;

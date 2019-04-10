@@ -59,7 +59,7 @@ const build = async ({
 
   // Remove the bundling folder after the build in production because
   // it is not needed anymore.
-  if (mode === "production") await remove(join(outDir, "bundling"));
+  // if (mode === "production") await remove(join(outDir, "bundling"));
 };
 
 (process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
