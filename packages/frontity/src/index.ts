@@ -1,5 +1,5 @@
 import program from "commander";
-import create from "./create";
+import create from "./commands/create";
 import { version } from "../package.json";
 
 // Sets the version and the description of the program.
