@@ -22,11 +22,11 @@ const webpackAsync = (config: webpack.Configuration): Promise<void> =>
 const build = async ({
   mode,
   outDir,
-  es5
+  target
 }: {
   mode: Mode;
   outDir: string;
-  es5: boolean;
+  target: "both" | "es5" | "module";
 }): Promise<void> => {
   console.log(`mode: ${mode}\n`);
 
@@ -45,11 +45,14 @@ const build = async ({
   // Build and wait until webpack finished the clients first.
   // We need to do this because the server bundle needs to import
   // the client loadable-stats, which are created by the clients.
-  console.log("Building es5 bundle");
-  await webpackAsync(frontityConfig.webpack.es5);
-  // In es5 mode we don't build module to make sure the scripts
-  // used in the html are es5 scripts.
-  if (!es5) {
+  //
+  // If target is both or es5, build the es5 bundle.
+  if (target !== "module") {
+    console.log("Building es5 bundle");
+    await webpackAsync(frontityConfig.webpack.es5);
+  }
+  // If target is both or module, build the module bundle.
+  if (target !== "es5") {
     console.log("Building module bundle");
     await webpackAsync(frontityConfig.webpack.module);
   }
@@ -68,9 +71,9 @@ const build = async ({
 });
 
 build({
-  mode: !!argv.p || argv.production ? "production" : "development",
+  mode: !!argv.d || argv.development ? "development" : "production",
   outDir: argv.outDir || defaults.outDir,
-  es5: !!argv.es5
+  target: argv.target || "both"
 });
 
 export default build;

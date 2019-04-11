@@ -38,23 +38,32 @@ export const getBothScriptTags = ({
   moduleStats: Stats;
   es5Stats: Stats;
 }): string => {
-  // Get array of assets. This is an internal API but I am going to open
+  // Get array of assets. This is an non-documented public API but I am going to open
   // an issue to see if they want to export a function that returns the
   // assets in an array.
-  (extractor as any).getMainAssets("script").map(chunk => chunk.chunk);
+  const publicPath = (extractor as any).publicPath;
+  const assets = (extractor as any)
+    .getMainAssets("script")
+    .map(chunk => chunk.chunk) as string[];
 
-  // Get module with type="module".
+  const moduleTags = assets.map(
+    chunk =>
+      `<script async type="module" data-chunk="${chunk}" src="${publicPath}/${
+        moduleStats.assetsByChunkName[chunk]
+      }"></script>`
+  );
+  const es5Tags = assets.map(
+    chunk =>
+      `<script async nomodule data-chunk="${chunk}" src="${publicPath}/${
+        es5Stats.assetsByChunkName[chunk]
+      }"></script>`
+  );
 
-  const moduleTags = extractor
-    .getScriptTags()
-    .replace(/async/g, 'async type="module"');
+  // Get the tag of a application/json script for loadable. It is a non-public API
+  // so I am going to open an issue to see if they want to export a function for this.
+  const requiredChunksTag = (extractor as any).getRequiredChunksScriptTag({});
 
-  // Get es5 with "nomodule".
-  const es5Tags = extractor
-    .getScriptTags()
-    .replace(/\.module\./g, ".es5.")
-    .replace(/async/g, "async nomodule")
-    .replace(/<script id.*?<\/script>\n/, "");
+  debugger;
 
-  return `${moduleTags}\n${es5Tags}`;
+  return [requiredChunksTag, ...moduleTags, ...es5Tags].join("\n        ");
 };

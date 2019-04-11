@@ -11,23 +11,20 @@ import getConfig from "../config";
 import { Mode } from "../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 
-const argv = Argv(process.argv.slice(2), {
-  boolean: ["p", "h", "es5", "https"],
-  string: ["outDir", "mode", "port"]
-});
+const argv = Argv(process.argv.slice(2));
 
 // Start Frontity development environment.
 const dev = async ({
   isHttps,
   mode,
   port,
-  es5,
+  target,
   outDir
 }: {
   port: number;
   isHttps: boolean;
   mode: Mode;
-  es5: boolean;
+  target: "both" | "es5" | "module";
   outDir: string;
 }): Promise<void> => {
   // Create the directories if they don't exist.
@@ -40,7 +37,7 @@ const dev = async ({
   const entryPoints = await generateEntryPoints({ sites, outDir });
 
   // Start dev using webpack dev server with express.
-  const { app, done } = await createApp({ mode, port, isHttps, es5 });
+  const { app, done } = await createApp({ mode, port, isHttps, target });
 
   // Get FrontityConfig for webpack.
   const frontityConfig = getConfig({ mode, outDir, entryPoints });
@@ -48,9 +45,10 @@ const dev = async ({
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import
   // the client loadable-stats, which are created by the client webpack.
-  const clientWebpack = es5
-    ? frontityConfig.webpack.es5
-    : frontityConfig.webpack.module;
+  const clientWebpack =
+    target === "es5"
+      ? frontityConfig.webpack.es5
+      : frontityConfig.webpack.module;
   const clientCompiler = webpack(clientWebpack);
   await new Promise(resolve => clientCompiler.run(resolve));
 
@@ -58,7 +56,7 @@ const dev = async ({
   const compiler = webpack([clientWebpack, frontityConfig.webpack.server]);
   app.use(
     webpackDevMiddleware(compiler, {
-      publicPath: "/static",
+      publicPath: clientWebpack.output.publicPath,
       writeToDisk: true,
       stats: {
         all: false,
@@ -68,7 +66,7 @@ const dev = async ({
         errors: true,
         warnings: true,
         errorDetails: true,
-        excludeAssets: "client-chunks.json"
+        excludeAssets: /chunks\..*?\.json/
       }
     })
   );
@@ -88,7 +86,7 @@ dev({
   mode: !!argv.p || argv.production ? "production" : "development",
   port: argv.port || 3000,
   isHttps: !!argv.h || !!argv.https,
-  es5: !!argv.es5,
+  target: argv.target || "both",
   outDir: argv.outDir || defaults.outDir
 });
 

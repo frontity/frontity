@@ -21,9 +21,9 @@ export default ({ packages }) => {
     // Get settings.
     const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
 
-    // @ts-ignore – Get module chunk stats.
+    // Get module chunk stats.
     const moduleStats = await getStats({ target: "module" });
-    // @ts-ignore – Get es5 chunk stats.
+    // Get es5 chunk stats.
     const es5Stats = await getStats({ target: "es5" });
     // If present, module is the main chunk. This means that we can only
     // use es5 for HMR if module is not present.
@@ -43,10 +43,10 @@ export default ({ packages }) => {
       const jsx = extractor.collectChunks(<App />);
       const html = renderToString(jsx);
 
-      debugger;
-
-      // Get the linkTags.
-      const linkTags = extractor.getLinkTags();
+      // Get the linkTags. Crossorigin needed for type="module".
+      const crossorigin = moduleStats && es5Stats ? { crossorigin: "" } : {};
+      // @ts-ignore
+      const linkTags = extractor.getLinkTags(crossorigin);
 
       // If we have both module and es5, do the type="module" dance:
       // https://jakearchibald.com/2017/es-modules-in-browsers/
