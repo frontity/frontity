@@ -24,7 +24,7 @@ const dev = async ({
   port: number;
   isHttps: boolean;
   mode: Mode;
-  target: "both" | "es5" | "module";
+  target: "es5" | "module";
   outDir: string;
 }): Promise<void> => {
   // Create the directories if they don't exist.
@@ -86,7 +86,7 @@ dev({
   mode: !!argv.p || argv.production ? "production" : "development",
   port: argv.port || 3000,
   isHttps: !!argv.h || !!argv.https,
-  target: argv.target || "both",
+  target: argv.target || "module",
   outDir: argv.outDir || defaults.outDir
 });
 
