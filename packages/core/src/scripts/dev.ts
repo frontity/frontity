@@ -10,6 +10,7 @@ import generateEntryPoints from "./utils/entry-points";
 import getConfig from "../config";
 import { Mode } from "../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
+import { webpackAsync } from "./utils/webpack";
 
 const argv = Argv(process.argv.slice(2));
 
@@ -27,30 +28,29 @@ const dev = async ({
   target: "es5" | "module";
   outDir: string;
 }): Promise<void> => {
-  // Create the directories if they don't exist.
+  // Create the directories if they don't exist, clean them if they do.
   await cleanBuildFolders({ outDir });
 
-  // Get all packages.
+  // Get all sites configured in frontity.settings.js with their packages.
   const sites = await getAllSites();
 
-  // Generate the bundles. One for the server.
+  // Generate the bundles. One for the server, one for each client site.
   const entryPoints = await generateEntryPoints({ sites, outDir });
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, target });
 
-  // Get FrontityConfig for webpack.
+  // Get FrontityConfig for Webpack.
   const frontityConfig = getConfig({ mode, outDir, entryPoints });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import
-  // the client loadable-stats, which are created by the client webpack.
+  // the client loadable-stats, which are created by the client Webpack.
   const clientWebpack =
     target === "es5"
       ? frontityConfig.webpack.es5
       : frontityConfig.webpack.module;
-  const clientCompiler = webpack(clientWebpack);
-  await new Promise(resolve => clientCompiler.run(resolve));
+  await webpackAsync(clientWebpack);
 
   // Start a custom webpack-dev-server.
   const compiler = webpack([clientWebpack, frontityConfig.webpack.server]);

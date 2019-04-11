@@ -2,22 +2,14 @@ import defaults from "./utils/env-and-defaults";
 import Argv from "minimist";
 import { join } from "path";
 import { remove } from "fs-extra";
-import webpack from "webpack";
 import { getAllSites } from "@frontity/file-settings";
 import generateEntryPoints from "./utils/entry-points";
 import getConfig from "../config";
 import { Mode } from "../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
+import { webpackAsync } from "./utils/webpack";
 
 const argv = Argv(process.argv.slice(2));
-
-const webpackAsync = (config: webpack.Configuration): Promise<void> =>
-  new Promise((resolve, reject) => {
-    webpack(config).run(err => {
-      if (err) reject(err);
-      else resolve();
-    });
-  });
 
 const build = async ({
   mode,
@@ -30,16 +22,16 @@ const build = async ({
 }): Promise<void> => {
   console.log(`mode: ${mode}\n`);
 
-  // Create the directories if they don't exist.
+  // Create the directories if they don't exist. Clean them if they do.
   await cleanBuildFolders({ outDir });
 
-  // Get all packages.
+  // Get all sites configured in frontity.settings.js with their packages.
   const sites = await getAllSites();
 
-  // Generate the bundles. One for the server.
+  // Generate the bundles. One for the server, one for each client site.
   const entryPoints = await generateEntryPoints({ sites, outDir });
 
-  // Get FrontityConfig for webpack.
+  // Get FrontityConfig for Webpack.
   const frontityConfig = getConfig({ mode, outDir, entryPoints });
 
   // Build and wait until webpack finished the clients first.
@@ -62,7 +54,7 @@ const build = async ({
 
   // Remove the bundling folder after the build in production because
   // it is not needed anymore.
-  // if (mode === "production") await remove(join(outDir, "bundling"));
+  if (mode === "production") await remove(join(outDir, "bundling"));
 };
 
 (process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
