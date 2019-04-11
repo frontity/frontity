@@ -1,4 +1,4 @@
-import pathToRegexp from 'path-to-regexp';
+import pathToRegexp from "path-to-regexp";
 import fetch from "node-fetch";
 import { Api, Resolver } from "./types";
 
@@ -13,9 +13,10 @@ const api: Api = {
 
     // Add the REST path depending on whether it should start
     // with "/wp/v2" or not
-    const requestUrl = isWpCom || endpoint.startsWith("/")
-      ? `${baseUrl}${endpoint}`
-      : `${baseUrl}/wp/v2/${endpoint}`;
+    const requestUrl =
+      isWpCom || endpoint.startsWith("/")
+        ? `${baseUrl}${endpoint}`
+        : `${baseUrl}/wp/v2/${endpoint}`;
 
     // Add query parameters
     const query = params
@@ -29,7 +30,7 @@ const api: Api = {
   }
 };
 
-const initResolver = () : Resolver => ({
+const initResolver = (): Resolver => ({
   // Array containing all registered patterns with their handlers
   registered: [],
 
@@ -41,15 +42,15 @@ const initResolver = () : Resolver => ({
   },
 
   // Gets the appropriate handler and params after a match
-  match(this: Resolver, name) {
+  async match(this: Resolver, ctx, { name, page }) {
     let handler;
     let params = {};
 
     // Parse query if it exists
-    const [path, query] = name.split('?');
+    const [path, query] = name.split("?");
     const queryParams = query
-      ? query.split('&').reduce((result, param) => {
-          const [k, v] = param.split('=');
+      ? query.split("&").reduce((result, param) => {
+          const [k, v] = param.split("=");
           result[k] = v;
           return result;
         }, {})
@@ -57,26 +58,25 @@ const initResolver = () : Resolver => ({
 
     // Then process the path
     const found = this.registered.find(({ regexp }) => regexp.test(path));
-    if (found) {
-      const { regexp, keys } = found;
-      const pathParams = path
-        .match(regexp)
-        .slice(1)
-        .reduce((result, value, index) => {
-          result[keys[index].name] = value;
-          return result;
-        }, {});
+    const { regexp, keys } = found;
+    const pathParams = path
+      .match(regexp)
+      .slice(1)
+      .reduce((result, value, index) => {
+        result[keys[index].name] = value;
+        return result;
+      }, {});
 
-      // Set handler
-      handler = found.handler;
+    // Set handler
+    handler = found.handler;
 
-      // Merge all params
-      params = Object.assign(pathParams, queryParams);
-    }
+    // Merge all params
+    params = Object.assign(pathParams, queryParams);
 
-    return { handler, params };
-  },
-})
+    // Execute handler
+    await handler(ctx, { name, params, page });
+  }
+});
 
 const resolver = initResolver();
 

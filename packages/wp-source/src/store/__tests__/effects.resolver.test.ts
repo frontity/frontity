@@ -1,5 +1,5 @@
 import { resolver } from "../effects";
-import { Handler } from "../types";
+import { Handler, Context } from "../types";
 
 const patterns = {
   postArchive: "/",
@@ -20,7 +20,7 @@ Object.keys(patterns).forEach(
   type =>
     (routes[type] = {
       pattern: patterns[type],
-      handler: async () => {}
+      handler: jest.fn(() => Promise.resolve())
     })
 );
 
@@ -29,61 +29,71 @@ Object.values(routes).forEach(({ pattern, handler }) => {
   resolver.add(pattern, handler);
 });
 
-// Test the returned 'handler' and 'params' are correct
-const testMatch = (type, name, params) => {
-  const match = resolver.match(name);
-  expect(match.handler).toBe(routes[type].handler);
-  expect(match.params).toEqual(params);
+// Test 'handler' is executed with the correct params
+const testMatch = async (type, name, params, page = 1) => {
+  const ctx = {};
+  await resolver.match(ctx as Context, { name, page });
+  expect(routes[type].handler).toHaveBeenCalledWith(ctx, {
+    name,
+    params,
+    page
+  });
 };
 
 describe("resolver", () => {
-  test("match different routes", () => {
-    testMatch("postArchive", "/", {});
-    testMatch("postArchive", "/?s=nature", { s: "nature" });
-    testMatch("category", "/category/nature", { slug: "nature" });
-    testMatch("category", "/category/nature?s=canyon", {
-      slug: "nature",
-      s: "canyon"
-    });
-    testMatch("tag", "/tag/japan", { slug: "japan" });
-    testMatch("tag", "/tag/japan?s=garden", {
-      slug: "japan",
-      s: "garden"
-    });
-    testMatch("author", "/author/alan", { name: "alan" });
-    testMatch("author", "/author/alan?s=travel", {
-      name: "alan",
-      s: "travel"
-    });
-    testMatch("date", "/2019", { year: "2019" });
-    testMatch("date", "/2019?s=frontity", {
-      year: "2019",
-      s: "frontity"
-    });
-    testMatch("date", "/2019/04", { year: "2019", month: "04" });
-    testMatch("date", "/2019/04?s=frontity", {
-      year: "2019",
-      month: "04",
-      s: "frontity"
-    });
-    testMatch("date", "/2019/04/20", { year: "2019", month: "04", day: "20" });
-    testMatch("date", "/2019/04/20?s=frontity", {
-      year: "2019",
-      month: "04",
-      day: "20",
-      s: "frontity"
-    });
-    testMatch("postOrPage", "/the-beauties-of-gullfoss", {
-      slug: "the-beauties-of-gullfoss"
-    });
-    testMatch("postOrPage", "/about-us", { slug: "about-us" });
-    testMatch("attachment", "/2019/the-beauties-of-gullfoss/waterfall", {
-      year: "2019",
-      postSlug: "the-beauties-of-gullfoss",
-      attachmentSlug: "waterfall"
-    });
-    testMatch("customList", "custom-list", {});
-    testMatch("carousel", "carousel-60", { postId: "60" });
-    testMatch("anyName", "whatever", { name: "whatever"});
+  test("match different routes", async () => {
+    await Promise.all([
+      testMatch("postArchive", "/", {}),
+      testMatch("postArchive", "/?s=nature", { s: "nature" }),
+      testMatch("category", "/category/nature", { slug: "nature" }),
+      testMatch("category", "/category/nature?s=canyon", {
+        slug: "nature",
+        s: "canyon"
+      }),
+      testMatch("tag", "/tag/japan", { slug: "japan" }),
+      testMatch("tag", "/tag/japan?s=garden", {
+        slug: "japan",
+        s: "garden"
+      }),
+      testMatch("author", "/author/alan", { name: "alan" }),
+      testMatch("author", "/author/alan?s=travel", {
+        name: "alan",
+        s: "travel"
+      }),
+      testMatch("date", "/2019", { year: "2019" }),
+      testMatch("date", "/2019?s=frontity", {
+        year: "2019",
+        s: "frontity"
+      }),
+      testMatch("date", "/2019/04", { year: "2019", month: "04" }),
+      testMatch("date", "/2019/04?s=frontity", {
+        year: "2019",
+        month: "04",
+        s: "frontity"
+      }),
+      testMatch("date", "/2019/04/20", {
+        year: "2019",
+        month: "04",
+        day: "20"
+      }),
+      testMatch("date", "/2019/04/20?s=frontity", {
+        year: "2019",
+        month: "04",
+        day: "20",
+        s: "frontity"
+      }),
+      testMatch("postOrPage", "/the-beauties-of-gullfoss", {
+        slug: "the-beauties-of-gullfoss"
+      }),
+      testMatch("postOrPage", "/about-us", { slug: "about-us" }),
+      testMatch("attachment", "/2019/the-beauties-of-gullfoss/waterfall", {
+        year: "2019",
+        postSlug: "the-beauties-of-gullfoss",
+        attachmentSlug: "waterfall"
+      }),
+      testMatch("customList", "custom-list", {}),
+      testMatch("carousel", "carousel-60", { postId: "60" }),
+      testMatch("anyName", "whatever", { name: "whatever" })
+    ]);
   });
 });

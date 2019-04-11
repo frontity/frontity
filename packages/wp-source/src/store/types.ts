@@ -69,7 +69,10 @@ export type Registered = {
 
 export type Add = (pattern: string, handler: Handler) => void;
 
-export type Match = (name: string) => { handler?: Handler; params: Params };
+export type Match = (ctx: Context, params: {
+  name: string;
+  page: number;
+}) => Promise<void>;
 
 export type Resolver = {
   registered: Registered;

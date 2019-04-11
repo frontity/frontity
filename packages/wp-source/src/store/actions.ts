@@ -1,12 +1,15 @@
 import { Fetch, Register, Get, Populate, Entity } from "./types";
 
-export const fetch: Fetch = async (store, { name, page = 1 }) => {
-  // Find the handler function that matches the name
-  const { resolver } = store.effects.source;
-  const { handler, params } = resolver.match(name);
+export const fetch: Fetch = async (ctx, { name, page = 1 }) => {
+  const { data } = ctx.state.source;
+  const { resolver } = ctx.effects.source;
 
-  // Then executes the matching handler
-  if (handler) await handler(store, { name, params, page });
+  if (data[name]) return;
+  // init data
+  const nameData: any = data[name] = {};
+  nameData.isFetching = true;
+  await resolver.match(ctx, { name, page });
+  nameData.isFetching = false;
 };
 
 export const register: Register = ({ effects }, { pattern, handler }) => {
