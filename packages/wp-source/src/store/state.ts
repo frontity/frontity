@@ -1,5 +1,5 @@
 export const state = {
-  name: {},
+  data: {},
   taxonomy: {},
   category: {},
   tag: {},

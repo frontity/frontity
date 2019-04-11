@@ -24,7 +24,7 @@ export const populate: Populate = async (
   { name, entities, page }
 ) => {
   if (entities instanceof Array) {
-    state.source.name[name].pages[page] = [];
+    state.source.data[name].pages[page] = [];
 
     await Promise.all(
       entities.map((entity: Entity) =>
@@ -44,7 +44,7 @@ export const populate: Populate = async (
     type = type || taxonomy || "author";
 
     // Asociate name with type and id
-    state.source.name[name] = { type, id };
+    state.source.data[name] = { type, id };
 
     // Add entity to state.source[type][id]
     if (type === "post_tag") state.source.tag[id] = entity;

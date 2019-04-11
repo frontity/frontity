@@ -9,7 +9,7 @@ let state;
 beforeEach(() => {
   // empty state
   state = {
-    name: {},
+    data: {},
     taxonomy: {},
     category: {},
     tag: {},
@@ -24,7 +24,7 @@ beforeEach(() => {
 describe("actions", () => {
   test("populate list of posts", async () => {
     // add name object as the fetch function should do
-    state.name["/"] = {
+    state.data["/"] = {
       items: [],
       pages: []
     };
