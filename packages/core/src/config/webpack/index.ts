@@ -4,7 +4,8 @@ import {
   Mode,
   WebpackConfigs,
   BabelConfigs,
-  EntryPoints
+  EntryPoints,
+  FrontityConfig
 } from "../../types";
 import name from "./name";
 import targets from "./targets";
@@ -19,12 +20,12 @@ import plugins from "./plugins";
 export default ({
   mode,
   babel,
-  outDir,
+  frontity,
   entryPoints
 }: {
   mode: Mode;
   babel: BabelConfigs;
-  outDir: string;
+  frontity: FrontityConfig;
   entryPoints: EntryPoints[];
 }): WebpackConfigs => {
   const getConfig = (target: Target): Configuration => {
@@ -34,11 +35,11 @@ export default ({
       target: targets({ target }),
       devtool: devtool({ mode }),
       entry: entry({ target, mode, entryPoints }),
-      output: output({ target, mode, outDir }),
+      output: output({ target, mode, outDir: frontity.outDir }),
       module: modules({ target, babel }),
       resolve: resolve(),
       externals: externals({ target }),
-      plugins: plugins({ target, mode, outDir })
+      plugins: plugins({ target, mode, outDir: frontity.outDir })
     };
     return config;
   };

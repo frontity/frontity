@@ -17,8 +17,13 @@ export interface WebpackConfigs {
 }
 
 export interface FrontityConfig {
+  outDir: string;
+}
+
+export interface Config {
   babel: BabelConfigs;
   webpack: WebpackConfigs;
+  frontity: FrontityConfig;
 }
 
 export interface EntryPoints {

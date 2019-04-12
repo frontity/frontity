@@ -1,4 +1,4 @@
-import defaults from "./utils/env-and-defaults";
+import "./utils/env-and-defaults";
 import Argv from "minimist";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
@@ -8,6 +8,7 @@ import createApp from "./utils/create-app";
 import HotServer from "./utils/hot-server";
 import generateEntryPoints from "./utils/entry-points";
 import getConfig from "../config";
+import getFrontity from "../config/frontity";
 import { Mode } from "../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
@@ -19,15 +20,17 @@ const dev = async ({
   isHttps,
   mode,
   port,
-  target,
-  outDir
+  target
 }: {
   port: number;
   isHttps: boolean;
   mode: Mode;
   target: "es5" | "module";
-  outDir: string;
 }): Promise<void> => {
+  // Get config from frontity.config.js files.
+  const frontityConfig = getFrontity();
+  const { outDir } = frontityConfig;
+
   // Create the directories if they don't exist, clean them if they do.
   await cleanBuildFolders({ outDir });
 
@@ -35,25 +38,26 @@ const dev = async ({
   const sites = await getAllSites();
 
   // Generate the bundles. One for the server, one for each client site.
-  const entryPoints = await generateEntryPoints({ sites, outDir });
+  const entryPoints = await generateEntryPoints({
+    sites,
+    outDir
+  });
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, target });
 
-  // Get FrontityConfig for Webpack.
-  const frontityConfig = getConfig({ mode, outDir, entryPoints });
+  // Get config for webpack, babel and frontity.
+  const config = getConfig({ mode, entryPoints });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import
   // the client loadable-stats, which are created by the client Webpack.
   const clientWebpack =
-    target === "es5"
-      ? frontityConfig.webpack.es5
-      : frontityConfig.webpack.module;
+    target === "es5" ? config.webpack.es5 : config.webpack.module;
   await webpackAsync(clientWebpack);
 
   // Start a custom webpack-dev-server.
-  const compiler = webpack([clientWebpack, frontityConfig.webpack.server]);
+  const compiler = webpack([clientWebpack, config.webpack.server]);
   app.use(
     webpackDevMiddleware(compiler, {
       publicPath: clientWebpack.output.publicPath,
@@ -86,8 +90,7 @@ dev({
   mode: !!argv.p || argv.production ? "production" : "development",
   port: argv.port || 3000,
   isHttps: !!argv.h || !!argv.https,
-  target: argv.target || "module",
-  outDir: argv.outDir || defaults.outDir
+  target: argv.target || "module"
 });
 
 export default dev;

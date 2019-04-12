@@ -23,6 +23,10 @@ const babel = {
   }
 };
 
+const frontity = {
+  outDir: "build"
+};
+
 const entryPoints = [
   {
     name: "server",
@@ -43,7 +47,7 @@ test("Webpack returns for development", () => {
     getWebpack({
       mode: "development",
       babel: babel["development"],
-      outDir: "build",
+      frontity,
       entryPoints
     })
   ).toMatchSnapshot();
@@ -54,7 +58,7 @@ test("Webpack returns for production", () => {
     getWebpack({
       mode: "production",
       babel: babel["production"],
-      outDir: "build",
+      frontity,
       entryPoints
     })
   ).toMatchSnapshot();
