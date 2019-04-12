@@ -1,6 +1,9 @@
 import program from "commander";
 import create from "./commands/create";
+import emitter from "./emitter";
 import { version } from "../package.json";
+
+export { create, emitter };
 
 // Sets the version and the description of the program.
 program.version(version).description("Frontity CLI");

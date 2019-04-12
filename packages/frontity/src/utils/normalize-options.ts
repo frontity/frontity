@@ -6,6 +6,7 @@ const defaultOptions: CreateOptions = {
   useCwd: false,
   typescript: false,
   packages: [
+    "frontity",
     "@frontity/file-settings",
     "@frontity/wp-source",
     "@frontity/simple-router"
