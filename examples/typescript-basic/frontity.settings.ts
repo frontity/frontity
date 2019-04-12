@@ -48,6 +48,21 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
         }
       }
     ]
+  },
+  {
+    name: "site-3",
+    mode: "amp",
+    settings: {
+      url: "https://test.frontity.io"
+    },
+    packages: [
+      {
+        name: "@frontity/extension-example-2",
+        settings: {
+          example2: ""
+        }
+      }
+    ]
   }
 ];
 
