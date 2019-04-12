@@ -45,7 +45,6 @@ export default ({ packages }) => {
 
       // Get the linkTags. Crossorigin needed for type="module".
       const crossorigin = moduleStats && es5Stats ? { crossorigin: "" } : {};
-      // @ts-ignore
       const linkTags = extractor.getLinkTags(crossorigin);
 
       // If we have both module and es5, do the type="module" dance:

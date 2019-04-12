@@ -70,7 +70,7 @@
     "@types/koa-route": "^3.2.4",
     "@types/koa-static": "^4.0.1",
     "@types/loadable__component": "^5.6.0",
-    "@types/loadable__server": "^5.2.1",
+    "@types/loadable__server": "^5.8.0",
     "@types/lodash-es": "^4.17.3",
     "@types/minimist": "^1.2.0",
     "@types/node": "^11.13.0",
