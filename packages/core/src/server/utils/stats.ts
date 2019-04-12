@@ -1,7 +1,11 @@
-import { ChunkExtractor } from "@loadable/server";
-
-interface Stats {
+export interface Stats {
   assetsByChunkName: { [key: string]: string };
+}
+
+export interface Extractor {
+  publicPath: string;
+  getMainAssets: (type: string) => { chunk: string }[];
+  getRequiredChunksScriptTag: (obj: {}) => string;
 }
 
 export const getStats = async ({
@@ -25,24 +29,20 @@ export const hasEntryPoint = ({
   stats: Stats;
 }): boolean => !!stats.assetsByChunkName[site];
 
-export const getScriptArray = ({ tags }: { tags: string }) => {
-  tags.match(/data-chunk="((.*?))"/g).map(str => /"(.*?)"/.exec(str)[1]);
-};
-
+// Get our script tags using non public APIs from extractor. Trying to change that in:
+// https://github.com/smooth-code/loadable-components/pull/239#issuecomment-482501467
 export const getBothScriptTags = ({
   extractor,
   moduleStats,
   es5Stats
 }: {
-  extractor: ChunkExtractor;
+  extractor: Extractor;
   moduleStats: Stats;
   es5Stats: Stats;
 }): string => {
-  // Get array of assets. This is an non-documented public API but I am going to open
-  // an issue to see if they want to export a function that returns the
-  // assets in an array.
-  const publicPath = (extractor as any).publicPath;
-  const assets = (extractor as any)
+  const publicPath = extractor.publicPath;
+
+  const assets = extractor
     .getMainAssets("script")
     .map(chunk => chunk.chunk) as string[];
 
@@ -59,11 +59,7 @@ export const getBothScriptTags = ({
       }"></script>`
   );
 
-  // Get the tag of a application/json script for loadable. It is a non-public API
-  // so I am going to open an issue to see if they want to export a function for this.
-  const requiredChunksTag = (extractor as any).getRequiredChunksScriptTag({});
-
-  debugger;
+  const requiredChunksTag = extractor.getRequiredChunksScriptTag({});
 
   return [requiredChunksTag, ...moduleTags, ...es5Tags].join("\n        ");
 };

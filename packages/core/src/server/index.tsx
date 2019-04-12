@@ -7,7 +7,12 @@ import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { getSettings } from "@frontity/file-settings";
 import { ChunkExtractor } from "@loadable/server";
 import getTemplate from "./templates";
-import { getStats, hasEntryPoint, getBothScriptTags } from "./utils/stats";
+import {
+  getStats,
+  hasEntryPoint,
+  getBothScriptTags,
+  Extractor
+} from "./utils/stats";
 import App from "../app";
 
 export default ({ packages }) => {
@@ -49,9 +54,17 @@ export default ({ packages }) => {
 
       // If we have both module and es5, do the type="module" dance:
       // https://jakearchibald.com/2017/es-modules-in-browsers/
+      //
+      // @ts-ignore – Ignore Typescript until we have a proper public API:
+      // https://github.com/smooth-code/loadable-components/pull/239#issuecomment-482501467
+      const customExtractor = extractor as Extractor;
       const scriptTags =
         moduleStats && es5Stats
-          ? getBothScriptTags({ extractor, moduleStats, es5Stats })
+          ? getBothScriptTags({
+              extractor: customExtractor,
+              moduleStats,
+              es5Stats
+            })
           : extractor.getScriptTags();
 
       // Write the template to body.
