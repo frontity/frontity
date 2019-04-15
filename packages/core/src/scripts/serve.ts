@@ -1,11 +1,12 @@
-import "./utils/env-and-defaults";
+import "./utils/envs";
 import { resolve } from "path";
 import Argv from "minimist";
 import createServer from "./utils/create-server";
 
 const argv = Argv(process.argv.slice(2));
-const appDir = resolve(process.env.CWD, "build/server.js");
+const appDir = resolve(process.cwd(), "build/server.js");
 
+// Creates a node server and runs the server.js bundle.
 const serve = async ({
   isHttps,
   port

@@ -17,11 +17,26 @@ export interface WebpackConfigs {
 }
 
 export interface FrontityConfig {
+  outDir: string;
+}
+
+export interface Config {
   babel: BabelConfigs;
   webpack: WebpackConfigs;
+  frontity: FrontityConfig;
 }
 
 export interface EntryPoints {
   name: string;
   path: string;
 }
+
+export type Template = ({
+  html,
+  scriptTags,
+  linkTags
+}: {
+  html: string;
+  scriptTags?: string;
+  linkTags?: string;
+}) => string;

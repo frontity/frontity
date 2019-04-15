@@ -8,12 +8,12 @@ export default async ({
   mode,
   port,
   isHttps,
-  es5
+  target
 }: {
   mode: Mode;
   port: number;
   isHttps: boolean;
-  es5: boolean;
+  target: "es5" | "module";
 }): Promise<{
   app: express.Express;
   done: (compiler: MultiCompiler) => void;
@@ -31,9 +31,7 @@ export default async ({
         console.log(
           `\n\nSERVER STARTED -- Listening @ ${
             isHttps ? "https" : "http"
-          }://localhost:${port}\n  - mode: ${mode}\n  - client: ${
-            es5 ? "es5" : "esModules"
-          }`
+          }://localhost:${port}\n  - mode: ${mode}\n  - target: ${target}`
         );
       });
     }

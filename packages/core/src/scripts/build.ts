@@ -1,54 +1,58 @@
-import defaults from "./utils/env-and-defaults";
+import "./utils/envs";
 import Argv from "minimist";
 import { join } from "path";
 import { remove } from "fs-extra";
-import webpack from "webpack";
 import { getAllSites } from "@frontity/file-settings";
 import generateEntryPoints from "./utils/entry-points";
 import getConfig from "../config";
+import getFrontity from "../config/frontity";
 import { Mode } from "../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
+import { webpackAsync } from "./utils/webpack";
 
 const argv = Argv(process.argv.slice(2));
 
-const webpackAsync = (config: webpack.Configuration): Promise<void> =>
-  new Promise((resolve, reject) => {
-    webpack(config).run(err => {
-      if (err) reject(err);
-      else resolve();
-    });
-  });
-
 const build = async ({
   mode,
-  outDir
+  target
 }: {
   mode: Mode;
-  outDir: string;
+  target: "both" | "es5" | "module";
 }): Promise<void> => {
   console.log(`mode: ${mode}\n`);
 
-  // Create the directories if they don't exist.
+  // Get config from frontity.config.js files.
+  const frontityConfig = getFrontity();
+  const { outDir } = frontityConfig;
+
+  // Create the directories if they don't exist. Clean them if they do.
   await cleanBuildFolders({ outDir });
 
-  // Get all packages.
+  // Get all sites configured in frontity.settings.js with their packages.
   const sites = await getAllSites();
 
-  // Generate the bundles. One for the server.
+  // Generate the bundles. One for the server, one for each client site.
   const entryPoints = await generateEntryPoints({ sites, outDir });
 
-  // Get FrontityConfig for webpack.
-  const frontityConfig = getConfig({ mode, outDir, entryPoints });
+  // Get FrontityConfig for Webpack.
+  const config = getConfig({ mode, entryPoints });
 
   // Build and wait until webpack finished the clients first.
   // We need to do this because the server bundle needs to import
-  // the client loadable-stats, which are created by the clients.
-  console.log("Building es5 bundle");
-  await webpackAsync(frontityConfig.webpack.es5);
-  console.log("Building module bundle");
-  await webpackAsync(frontityConfig.webpack.module);
+  // the client chunks.x.json, which are created by the clients.
+  //
+  // If target is both or es5, build the es5 bundle.
+  if (target !== "module") {
+    console.log("Building es5 bundle");
+    await webpackAsync(config.webpack.es5);
+  }
+  // If target is both or module, build the module bundle.
+  if (target !== "es5") {
+    console.log("Building module bundle");
+    await webpackAsync(config.webpack.module);
+  }
   console.log("Building server bundle");
-  await webpackAsync(frontityConfig.webpack.server);
+  await webpackAsync(config.webpack.server);
   console.log();
 
   // Remove the bundling folder after the build in production because
@@ -62,8 +66,8 @@ const build = async ({
 });
 
 build({
-  mode: !!argv.p || argv.production ? "production" : "development",
-  outDir: argv.outDir || defaults.outDir
+  mode: !!argv.d || argv.development ? "development" : "production",
+  target: argv.target || "both"
 });
 
 export default build;

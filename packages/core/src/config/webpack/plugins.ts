@@ -38,7 +38,7 @@ export default ({
   if (target !== "server")
     config.push(
       new LoadablePlugin({
-        filename: `../bundling/client-chunks.json`
+        filename: `../bundling/chunks.${target}.json`
       })
     );
 
