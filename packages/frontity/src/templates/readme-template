@@ -1,0 +1,43 @@
+# $project_name$
+
+This is a new Frontity project. You can make any changes you want modifying the `frontity.settings.js` to make it work with your own WordPress.
+
+You can start editing the theme modifying the files inside `packages/starter-theme`.
+
+You can also use the following commands:
+
+## Start
+
+```text
+frontity dev
+```
+
+or
+
+```text
+npm run dev
+```
+
+## Build
+
+```text
+frontity build
+```
+
+or
+
+```text
+npm run build
+```
+
+## Serve
+
+```text
+frontity serve
+```
+
+or
+
+```text
+npm run serve
+```

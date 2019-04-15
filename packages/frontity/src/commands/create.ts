@@ -1,13 +1,15 @@
 import { EOL } from "os";
+import { resolve } from "path";
 import {
   ensureDirSync,
-  readdirSync,
-  removeSync,
-  writeFileSync
+  readdirSync as readDirSync,
+  readFileSync,
+  writeFileSync,
+  removeSync
 } from "fs-extra";
 import { exec } from "shelljs";
 import { extract } from "tar";
-import { isEmptyDir, normalizeOptions } from "../utils";
+import { isEmptyDir, isGitRepository, normalizeOptions } from "../utils";
 import { CreateOptions, PackageJson } from "../types";
 import emitter from "../emitter";
 
@@ -30,6 +32,10 @@ export default (passedOptions?: CreateOptions) => {
   // 3. Initiates Git repository.
   {
     emit("Initiating Git repository");
+    if (!isGitRepository(path)) {
+      const command = "git init";
+      exec(command, { silent: true });
+    }
   }
 
   // 4. Generates `package.json`.
@@ -67,11 +73,27 @@ export default (passedOptions?: CreateOptions) => {
   // 6. Generates `.gitignore`.
   {
     emit("Generating .gitignore");
+    const gitIgnore = readFileSync(
+      resolve(__dirname, "../templates/gitignore-template"),
+      { encoding: "utf8" }
+    );
+    const fileName = ".gitignore";
+    const fileData = `${gitIgnore}${EOL}`;
+    writeFileSync(fileName, fileData);
   }
 
   // 7. Generates `README.md`.
   {
     emit("Generating README.md");
+    const readme = readFileSync(
+      resolve(__dirname, "../templates/readme-template"),
+      { encoding: "utf8" }
+    );
+    const fileName = "README.md";
+    const fileData = `${readme.replace(/\$(\w+)\$/g, (_match, key) => {
+      if (key === "project_name") return name;
+    })}${EOL}`;
+    writeFileSync(fileName, fileData);
   }
 
   // 8. Installs Frontity packages.
@@ -89,13 +111,16 @@ export default (passedOptions?: CreateOptions) => {
     process.chdir(path);
     const command = "npm pack @frontity/h2r";
     exec(command, { silent: true });
-    const tarball = readdirSync("./").find(file => /\.tgz$/.test(file));
+    const tarball = readDirSync("./").find(file => /\.tgz$/.test(file));
     extract({ file: tarball, sync: true, strip: 1 });
     removeSync(tarball);
+    process.chdir("../..");
   }
 
   // 10. Commit changes to Git.
   {
     emit("Commiting changes");
+    const command = 'git add . && git commit -m "Setup Frontity"';
+    exec(command, { silent: true });
   }
 };
