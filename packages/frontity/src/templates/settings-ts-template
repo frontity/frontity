@@ -1,0 +1,5 @@
+import { Settings } from "@frontity/file-settings";
+
+const settings: Settings = $settings$;
+
+module.exports = settings;

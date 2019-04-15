@@ -18,7 +18,7 @@ const emit = (message: string) => emitter.emit("create", message);
 export default (passedOptions?: CreateOptions) => {
   // 1. Parses and validates options.
   emit("Parsing and validating options");
-  const { name, path, packages } = normalizeOptions(passedOptions);
+  const { name, path, packages, typescript } = normalizeOptions(passedOptions);
 
   // 2. Ensures that the directory exists and is empty.
   {
@@ -59,14 +59,17 @@ export default (passedOptions?: CreateOptions) => {
 
   // 5. Generates `frontity.settings.js`.
   {
-    emit("Generating frontity.settings.js");
+    const fileExtension = typescript ? "ts" : "js";
+    emit(`Generating frontity.settings.${fileExtension}`);
     const frontitySettings = { name, packages };
-    const fileName = "frontity.settings.js";
-    const fileData = `module.exports = ${JSON.stringify(
-      frontitySettings,
-      null,
-      2
-    )}${EOL}`;
+    const fileTemplate = readFileSync(
+      resolve(__dirname, `../templates/settings-${fileExtension}-template`),
+      { encoding: "utf8" }
+    );
+    const fileName = `frontity.settings.${fileExtension}`;
+    const fileData = `${fileTemplate.replace(/\$([\w-]+)\$/g, (_match, key) => {
+      if (key === "settings") return JSON.stringify(frontitySettings, null, 2);
+    })}${EOL}`;
     writeFileSync(fileName, fileData);
   }
 
@@ -90,8 +93,8 @@ export default (passedOptions?: CreateOptions) => {
       { encoding: "utf8" }
     );
     const fileName = "README.md";
-    const fileData = `${readme.replace(/\$(\w+)\$/g, (_match, key) => {
-      if (key === "project_name") return name;
+    const fileData = `${readme.replace(/\$([\w-]+)\$/g, (_match, key) => {
+      if (key === "name") return name;
     })}${EOL}`;
     writeFileSync(fileName, fileData);
   }
@@ -117,7 +120,7 @@ export default (passedOptions?: CreateOptions) => {
     process.chdir("../..");
   }
 
-  // 10. Commit changes to Git.
+  // 10. Commits changes to Git.
   {
     emit("Commiting changes");
     const command = 'git add . && git commit -m "Setup Frontity"';

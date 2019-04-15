@@ -1,0 +1,3 @@
+const settings = $settings$;
+
+module.exports = settings;

@@ -22,7 +22,8 @@ export default (passedOptions: CreateOptions): CreateOptions => {
 
   // Normalize and valiidate `name` option.
   options.name = normalizeName(options.name);
-  if (!/^[\w-]+$/.test(options.name))
+  const nameConventionMatch = /^(?:@[\w-]+\/)?[\w-]+$/;
+  if (!nameConventionMatch.test(options.name))
     throw new Error(
       "The name of the package is not valid. Please enter a valid one (only letters and dashes)."
     );
