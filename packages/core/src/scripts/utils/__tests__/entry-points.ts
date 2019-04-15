@@ -2,8 +2,7 @@ import * as fsExtra from "fs-extra";
 import {
   generateClientEntryPoints,
   generateServerEntryPoint,
-  checkForPackages,
-  getVariable
+  checkForPackages
 } from "../entry-points";
 
 jest.mock("fs-extra");
@@ -112,23 +111,6 @@ describe("checkForPackages", () => {
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
     await expect(checkForPackages({ sites: site })).rejects.toThrow(
       'The package "package1" doesn\'t seem to be installed. Make sure you did "npm install package1"'
-    );
-  });
-});
-
-describe("getVariable", () => {
-  test("should generate different variable names for different packages", () => {
-    expect(getVariable("@org/package", "mode")).not.toBe(
-      getVariable("org-package", "mode")
-    );
-    expect(getVariable("@org/package", "mode")).not.toBe(
-      getVariable("org.package", "mode")
-    );
-    expect(getVariable("org-package", "mode")).not.toBe(
-      getVariable("org.package", "mode")
-    );
-    expect(getVariable("@org/package", "html")).not.toBe(
-      getVariable("@org/package", "amp")
     );
   });
 });

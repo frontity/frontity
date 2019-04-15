@@ -2,6 +2,7 @@ import { resolve } from "path";
 import { writeFile, ensureDir, pathExists } from "fs-extra";
 import { flatten, uniqBy, uniq } from "lodash";
 import { EntryPoints } from "../../types";
+import { getVariable } from "../../utils/packages";
 
 type Sites = {
   name: string;
@@ -10,17 +11,6 @@ type Sites = {
 }[];
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
-
-// Remove some characters present in the npm package name to turn it into a variable name.
-export const getVariable = (pkg: string, mode: string) => {
-  return (
-    pkg
-      .replace(/^@/, "")
-      .replace(/-/g, "_")
-      .replace(/\//g, "__")
-      .replace(/\./g, "___") + `_${mode}`
-  );
-};
 
 // Check if the entry point exists using all the possible extensions.
 const entryExists = async ({
