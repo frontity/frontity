@@ -1,4 +1,4 @@
-import "./utils/env-and-defaults";
+import "./utils/envs";
 import Argv from "minimist";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
