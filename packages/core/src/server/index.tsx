@@ -13,6 +13,7 @@ import {
   getBothScriptTags,
   Extractor
 } from "./utils/stats";
+import { getNamespaces } from "./utils/namespaces";
 import App from "../app";
 
 export default ({ packages }) => {
@@ -25,6 +26,8 @@ export default ({ packages }) => {
   app.use(async (ctx, next) => {
     // Get settings.
     const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
+
+    const namespaces = getNamespaces({ packages, settings });
 
     // Get module chunk stats.
     const moduleStats = await getStats({ target: "module" });
