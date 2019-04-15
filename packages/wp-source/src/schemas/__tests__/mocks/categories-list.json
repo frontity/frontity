@@ -1,0 +1,180 @@
+[
+  {
+    "id": 5,
+    "count": 3,
+    "description": "",
+    "link": "https://demo.worona.org/wp-cat/cities/architecture/",
+    "name": "Architecture",
+    "slug": "architecture",
+    "taxonomy": "category",
+    "parent": 4,
+    "meta": {},
+    "yoast_meta": {
+      "title": "Architecture Archives - Demo Worona"
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories/5"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "up": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories/4"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=5"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "up": [
+        {
+          "id": 4,
+          "link": "https://demo.worona.org/wp-cat/cities/",
+          "name": "Cities",
+          "slug": "cities",
+          "taxonomy": "category",
+          "yoast_meta": {
+            "title": "Cities Archives - Demo Worona"
+          },
+          "_links": {
+            "self": [
+              {
+                "href": "https://demo.worona.org/wp-json/wp/v2/categories/4"
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://demo.worona.org/wp-json/wp/v2/categories"
+              }
+            ],
+            "about": [
+              {
+                "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category"
+              }
+            ],
+            "wp:post_type": [
+              {
+                "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=4"
+              }
+            ],
+            "curies": [
+              {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "count": 6,
+    "description": "",
+    "link": "https://demo.worona.org/wp-cat/cities/",
+    "name": "Cities",
+    "slug": "cities",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": {},
+    "yoast_meta": {
+      "title": "Cities Archives - Demo Worona"
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories/4"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=4"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "count": 4,
+    "description": "",
+    "link": "https://demo.worona.org/wp-cat/culture/",
+    "name": "Culture",
+    "slug": "culture",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": {},
+    "yoast_meta": {
+      "title": "Culture Archives - Demo Worona"
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories/6"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=6"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]

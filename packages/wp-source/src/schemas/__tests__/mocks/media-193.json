@@ -1,0 +1,119 @@
+{
+  "id": 193,
+  "date": "2017-03-27T15:23:51",
+  "date_gmt": "2017-03-27T15:23:51",
+  "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png" },
+  "modified": "2017-03-27T15:23:58",
+  "modified_gmt": "2017-03-27T15:23:58",
+  "slug": "road-trip",
+  "type": "attachment",
+  "link": "https://demo.worona.org/audio-test/about-us/road-trip/",
+  "title": { "rendered": "road-trip" },
+  "author": 2,
+  "comment_status": "open",
+  "ping_status": "closed",
+  "meta": {},
+  "latest": ["attachment"],
+  "yoast_meta": { "title": "road-trip - Demo Worona" },
+  "alt_text": "road-trip",
+  "caption": "",
+  "description": "",
+  "media_type": "image",
+  "mime_type": "image/png",
+  "media_details": {
+    "width": 700,
+    "height": 467,
+    "file": "2017/03/road-trip.png",
+    "sizes": {
+      "thumbnail": {
+        "file": "road-trip-150x150.png",
+        "width": 150,
+        "height": 150,
+        "mime_type": "image/png",
+        "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip-150x150.png"
+      },
+      "medium": {
+        "file": "road-trip-300x200.png",
+        "width": 300,
+        "height": 200,
+        "mime_type": "image/png",
+        "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip-300x200.png"
+      },
+      "full": {
+        "file": "road-trip.png",
+        "width": 700,
+        "height": 467,
+        "mime_type": "image/png",
+        "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png"
+      }
+    },
+    "image_meta": {
+      "aperture": "0",
+      "credit": "",
+      "camera": "",
+      "caption": "",
+      "created_timestamp": "0",
+      "copyright": "",
+      "focal_length": "0",
+      "iso": "0",
+      "shutter_speed": "0",
+      "title": "",
+      "orientation": "0",
+      "keywords": []
+    }
+  },
+  "post": 184,
+  "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png",
+  "_links": {
+    "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/193" }],
+    "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
+    "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
+    "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+    "replies": [
+      { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=193" }
+    ],
+    "wp:term": [
+      {
+        "taxonomy": "latest",
+        "embeddable": true,
+        "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=193"
+      }
+    ],
+    "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+  },
+  "_embedded": {
+    "author": [
+      {
+        "id": 2,
+        "name": "Reyes Martinez",
+        "url": "http://www.worona.org",
+        "description":
+          "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+        "link": "https://demo.worona.org/author/reyes/",
+        "slug": "reyes",
+        "avatar_urls": {
+          "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+          "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+          "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+        },
+        "_links": {
+          "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+          "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+        }
+      }
+    ],
+    "wp:term": [
+      [
+        {
+          "id": "attachment",
+          "link": false,
+          "count": 0,
+          "name": "Media",
+          "slug": "attachment",
+          "taxonomy": "latest",
+          "yoast_meta": { "title": "attachment" }
+        }
+      ]
+    ]
+  }
+}

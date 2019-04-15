@@ -28,6 +28,7 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
+    "normalizr": "^3.3.0",
     "overmind": "^17.0.0",
     "path-to-regexp": "^3.0.0"
   }

@@ -1,0 +1,134 @@
+[
+  {
+    "id": 7,
+    "count": 10,
+    "description": "",
+    "link": "https://demo.worona.org/wp-cat/nature/",
+    "name": "Nature",
+    "slug": "nature",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": {},
+    "yoast_meta": {
+      "yoast_wpseo_title": "Nature Archives - Demo Worona",
+      "yoast_wpseo_metadesc": ""
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories/7"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=7"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "count": 6,
+    "description": "",
+    "link": "https://demo.worona.org/wp-cat/photography/",
+    "name": "Photography",
+    "slug": "photography",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": {},
+    "yoast_meta": {
+      "yoast_wpseo_title": "Photography Archives - Demo Worona",
+      "yoast_wpseo_metadesc": ""
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories/3"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=3"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "count": 7,
+    "description": "",
+    "link": "https://demo.worona.org/wp-cat/travel/",
+    "name": "Travel",
+    "slug": "travel",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": {},
+    "yoast_meta": {
+      "yoast_wpseo_title": "Travel Archives - Demo Worona",
+      "yoast_wpseo_metadesc": ""
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories/8"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=8"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]

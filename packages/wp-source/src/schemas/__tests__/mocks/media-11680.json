@@ -1,0 +1,126 @@
+{
+  "id": 11680,
+  "date": "2018-04-13T19:56:01",
+  "date_gmt": "2018-04-13T17:56:01",
+  "guid": {
+    "rendered": "https://thewing.es/wp-content/uploads/2018/04/WNBA-PO-explicación.bmp"
+  },
+  "modified": "2018-04-13T19:56:45",
+  "modified_gmt": "2018-04-13T17:56:45",
+  "slug": "wnba-po-explicacion",
+  "status": "inherit",
+  "type": "attachment",
+  "link": "https://thewing.es/playoffs-nba-conferencias/wnba-po-explicacion/",
+  "title": {
+    "rendered": "WNBA Playoffs",
+    "text": "WNBA Playoffs"
+  },
+  "author": 5,
+  "comment_status": "open",
+  "ping_status": "closed",
+  "template": "",
+  "meta": [],
+  "yst_prominent_words": [],
+  "latest": [
+    "attachment"
+  ],
+  "excerpt": {
+    "text": ""
+  },
+  "content_media": [],
+  "description": {
+    "rendered": "<p class=\"attachment\"><a href='https://thewing.es/wp-content/uploads/2018/04/WNBA-PO-explicación.bmp'><img data-attachment-id=\"0\" width=\"300\" height=\"167\" src=\"https://thewing.es/wp-content/uploads/2018/04/WNBA-PO-explicación.bmp\" class=\"attachment-medium size-medium\" alt=\"WNBA Playoffs NBA\" /></a></p>\n<p><iframe width=\"1000\" height=\"563\" src=\"https://www.youtube.com/embed/3aA_MDPa1EU?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe></p>\n<span class=\"et_bloom_bottom_trigger\"></span>"
+  },
+  "caption": {
+    "rendered": "<p>Captura de Youtube &#8211; WNBA Channel</p>\n"
+  },
+  "alt_text": "WNBA Playoffs NBA",
+  "media_type": "image",
+  "mime_type": "image/bmp",
+  "media_details": {
+    "width": 855,
+    "height": 476,
+    "file": "2018/04/WNBA-PO-explicación.bmp",
+    "image_meta": {
+      "aperture": "0",
+      "credit": "",
+      "camera": "",
+      "caption": "",
+      "created_timestamp": "0",
+      "copyright": "",
+      "focal_length": "0",
+      "iso": "0",
+      "shutter_speed": "0",
+      "title": "",
+      "orientation": "0",
+      "keywords": []
+    },
+    "sizes": {}
+  },
+  "post": 11679,
+  "source_url": "https://thewing.es/wp-content/uploads/2018/04/WNBA-PO-explicación.bmp",
+  "_links": {
+    "self": [
+      {
+        "attributes": [],
+        "href": "https://thewing.es/wp-json/wp/v2/media/11680"
+      }
+    ],
+    "collection": [
+      {
+        "attributes": [],
+        "href": "https://thewing.es/wp-json/wp/v2/media"
+      }
+    ],
+    "about": [
+      {
+        "attributes": [],
+        "href": "https://thewing.es/wp-json/wp/v2/types/attachment"
+      }
+    ],
+    "author": [
+      {
+        "attributes": {
+          "embeddable": true
+        },
+        "href": "https://thewing.es/wp-json/wp/v2/users/5"
+      }
+    ],
+    "replies": [
+      {
+        "attributes": {
+          "embeddable": true
+        },
+        "href": "https://thewing.es/wp-json/wp/v2/comments?post=11680"
+      }
+    ],
+    "wp:term": [
+      {
+        "attributes": {
+          "taxonomy": "yst_prominent_words",
+          "embeddable": true
+        },
+        "href": "https://thewing.es/wp-json/wp/v2/yst_prominent_words?post=11680"
+      },
+      {
+        "attributes": {
+          "taxonomy": "latest",
+          "embeddable": true
+        },
+        "href": "https://thewing.es/wp-json/wp/v2/latest?attachment=11680"
+      },
+      {
+        "taxonomy": "latest",
+        "embeddable": true,
+        "href": "https://thewing.es/wp-json/wp/v2/latest?attachment=11680"
+      }
+    ],
+    "curies": [
+      {
+        "name": "wp",
+        "href": "https://api.w.org/{rel}",
+        "templated": true
+      }
+    ]
+  }
+}
