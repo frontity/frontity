@@ -45,9 +45,7 @@ export type Get = Action<{
 }>;
 
 export type Populate = Action<{
-  name: string;
-  entities: any[] | any;
-  page?: number;
+  response: any[] | any;
 }>;
 
 // Effects types
@@ -69,10 +67,13 @@ export type Registered = {
 
 export type Add = (pattern: string, handler: Handler) => void;
 
-export type Match = (ctx: Context, params: {
-  name: string;
-  page: number;
-}) => Promise<void>;
+export type Match = (
+  ctx: Context,
+  params: {
+    name: string;
+    page: number;
+  }
+) => Promise<void>;
 
 export type Resolver = {
   registered: Registered;
@@ -162,8 +163,6 @@ type Page = {
   template: string;
   meta: [];
 };
-
-
 
 // export type Entity = Post | Page | Author;
 export type Entity = any; // mock up entity type

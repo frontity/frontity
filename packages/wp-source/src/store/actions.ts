@@ -1,12 +1,18 @@
+import { normalize } from "normalizr";
 import { Fetch, Register, Get, Populate, Entity } from "./types";
+import * as schemas from "../schemas";
 
-export const fetch: Fetch = async (ctx, { name, page = 1 }) => {
+export const fetch: Fetch = async (ctx, { name, page }) => {
   const { data } = ctx.state.source;
   const { resolver } = ctx.effects.source;
 
-  if (data[name]) return;
+  if (!page && data[name]) return;
+  if (page && data[name] && data[name].page[page]) return;
+
   // init data
-  const nameData: any = data[name] = {};
+  const nameData: any = data[name] || {};
+  data[name] = nameData; // asign it back
+
   nameData.isFetching = true;
   await resolver.match(ctx, { name, page });
   nameData.isFetching = false;
@@ -22,68 +28,22 @@ export const get: Get = async ({ state, effects }, { endpoint, params }) => {
   return effects.source.api.get({ endpoint, params, siteUrl, isWpCom });
 };
 
-export const populate: Populate = async (
-  { state, actions },
-  { name, entities, page }
-) => {
-  if (entities instanceof Array) {
-    state.source.data[name].pages[page] = [];
+export const populate: Populate = async ({ state, actions }, { response }) => {
+  const result = normalize(
+    response,
+    response instanceof Array ? schemas.list : schemas.entity
+  );
 
-    await Promise.all(
-      entities.map((entity: Entity) =>
-        actions.source.populate({
-          name: new URL(entity.link).pathname,
-          entities: entity
+  await Promise.all(
+    Object.entries(result.entities).map(([, single]) =>
+      Promise.all(
+        Object.entries(single).map(async ([, entity]) => {
+          const { type, id, link } = entity;
+          const name = new URL(link).pathname;
+          state.source[type][id] = entity;
+          await actions.source.fetch({ name });
         })
       )
-    );
-
-  } else {
-    // Separate entity from embedded
-    const { _embedded: embedded, ...entity } = entities;
-
-    // Get props from entity
-    let { taxonomy, type, id } = entity;
-    type = type || taxonomy || "author";
-
-    // Asociate name with type and id
-    state.source.data[name] = { type, id };
-
-    // Add entity to state.source[type][id]
-    if (type === "post_tag") state.source.tag[id] = entity;
-    else if (type) state.source[type][id] = entity;
-    else state.source.author[id] = entity;
-
-    // Process embedded
-    if (embedded) {
-      // Populate author
-      const [author] = embedded.author;
-      await actions.source.populate({
-        name: new URL(author.link).pathname,
-        entities: author
-      });
-
-      // Populate featured media (if it exists)
-      if (embedded["wp:featuredmedia"]) {
-        const [featured] = embedded["wp:featuredmedia"];
-        await actions.source.populate({
-          name: new URL(featured.link).pathname,
-          entities: featured
-        });
-      }
-
-      // Populate categories and tags
-      if (embedded["wp:term"]) {
-        const terms = embedded["wp:term"].reduce((all, termList) => all.concat(termList));
-        await Promise.all(
-          terms.map((term: Entity) =>
-            actions.source.populate({
-              name: new URL(term.link).pathname,
-              entities: term
-            })
-          )
-        );
-      }
-    }
-  }
+    )
+  );
 };
