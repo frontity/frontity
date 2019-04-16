@@ -1,11 +1,43 @@
+import fetch from "cross-fetch";
+import { normalize } from "normalizr";
 import pathToRegexp from "path-to-regexp";
-import fetch from "node-fetch";
-import { Api, Resolver } from "./types";
+import { Key } from "path-to-regexp";
+import { Context, Handler } from "./types";
+import * as schemas from "../schemas";
 
 const wpComBase = "https://public-api.wordpress.com/wp/v2/sites/";
 
-const api: Api = {
-  get: ({ endpoint, params, siteUrl, isWpCom }) => {
+class Api {
+  siteUrl = "";
+  isWpCom = false;
+
+  init(
+    this: Api,
+    { siteUrl, isWpCom = false }: { siteUrl: string; isWpCom?: boolean }
+  ) {
+    this.siteUrl = siteUrl;
+    this.isWpCom = isWpCom;
+  }
+
+  async get(
+    this: Api,
+    {
+      endpoint,
+      params,
+      siteUrl = this.siteUrl,
+      isWpCom = this.isWpCom
+    }: {
+      endpoint: string;
+      params?: { [param: string]: any };
+      siteUrl?: string;
+      isWpCom?: boolean;
+    }
+  ): Promise<{
+    isOk: boolean;
+    entities?: any;
+    total?: number;
+    totalPages?: number;
+  }> {
     // Build the base URL depending on whether it is WP.com or WP.org
     const baseUrl = isWpCom
       ? `${wpComBase}${siteUrl.replace(/^https?:\/\//, "")}/`
@@ -21,28 +53,66 @@ const api: Api = {
     // Add query parameters
     const query = params
       ? `?${Object.entries(params)
+          .filter(([key, value]) => value)
           .map(([key, value]) => `${key}=${value}`)
           .join("&")}`
       : "";
 
-    // Send request and return promise
-    return fetch(`${requestUrl}${query}`);
-  }
-};
+    // Send request
+    let response: Response;
 
-const initResolver = (): Resolver => ({
+    try {
+      // TODO: Handle redirects and stuff in the near future
+      response = await fetch(`${requestUrl}${query}`);
+      const json = await response.json();
+      const isOk = response.ok;
+      const total = response.headers.get("X-WP-Total");
+      const totalPages = response.headers.get("X-WP-TotalPages");
+
+      // Normalize response
+      const { entities } = normalize(
+        json,
+        json instanceof Array ? schemas.list : schemas.entity
+      );
+
+      return {
+        isOk,
+        entities,
+        total: total && parseInt(total),
+        totalPages: totalPages && parseInt(totalPages)
+      };
+    } catch (e) {
+      return { isOk: false };
+    }
+  }
+}
+
+class Resolver {
   // Array containing all registered patterns with their handlers
-  registered: [],
+  registered: {
+    pattern: string;
+    handler: Handler;
+    regexp: RegExp;
+    keys: Key[];
+  }[] = [];
+
+  init(this: Resolver) {
+    this.registered = [];
+  }
 
   // Adds a handler to registered
-  add(this: Resolver, pattern, handler) {
+  add(this: Resolver, pattern: string, handler: Handler): void {
     const keys = [];
     const regexp = pathToRegexp(pattern, keys);
     this.registered.push({ pattern, handler, regexp, keys });
-  },
+  }
 
   // Gets the appropriate handler and params after a match
-  async match(this: Resolver, ctx, { name, page }) {
+  match(
+    this: Resolver,
+    ctx: Context,
+    { name, page }: { name: string; page?: number }
+  ): { handler: Handler; params: { [param: string]: any } } {
     let handler;
     let params = {};
 
@@ -73,11 +143,10 @@ const initResolver = (): Resolver => ({
     // Merge all params
     params = Object.assign(pathParams, queryParams);
 
-    // Execute handler
-    await handler(ctx, { name, params, page });
+    // Return handler and params
+    return { handler, params };
   }
-});
+}
 
-const resolver = initResolver();
-
-export { api, resolver };
+export const api = new Api();
+export const resolver = new Resolver();

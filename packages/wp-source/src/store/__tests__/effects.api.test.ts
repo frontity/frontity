@@ -1,14 +1,13 @@
 import { api } from "../effects";
-import fetch from "node-fetch";
+import fetch from "cross-fetch";
 
-jest.mock("node-fetch");
-const mockedFetch = fetch as jest.Mocked<typeof fetch>;
+jest.mock("cross-fetch");
+const mockedFetch = fetch as jest.Mock<typeof fetch>;
 
 describe("api", () => {
   test("get from WP.org without params", () => {
-    const endpoint = "posts";
-    const siteUrl = "https://test.frontity.org";
-    api.get({ endpoint, siteUrl });
+    api.init({ siteUrl: "https://test.frontity.org" })
+    api.get({ endpoint: "posts" });
     const [[fetchCall]] = mockedFetch.mock.calls.slice(-1);
     expect(fetchCall).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
   });

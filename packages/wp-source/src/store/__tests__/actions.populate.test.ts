@@ -36,7 +36,7 @@ beforeEach(() => {
 describe("actions", () => {
   test("populate list of posts", async () => {
     // add entities to store
-    await store.actions.source.populate({ response: posts });
+    await store.actions.source.populate({ entities: posts });
 
     // Check that posts and embedded entities are populated
     expect(store.state.source.post).toMatchSnapshot();
@@ -48,7 +48,7 @@ describe("actions", () => {
 
   test("populate pages", async () => {
     // add entities to store
-    await store.actions.source.populate({ response: pages });
+    await store.actions.source.populate({ entities: pages });
 
     // check that pages are populated
     expect(store.state.source.post).toMatchSnapshot();
