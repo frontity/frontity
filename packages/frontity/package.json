@@ -19,9 +19,11 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "dev": "ts-node src/index.ts",
     "test": "jest --watch --config jest.config.json",
-    "test:ci": "jest --config jest.config.json"
+    "test:ci": "jest --config jest.config.json",
+    "build": "tsc --project ./tsconfig.build.json",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.5",
