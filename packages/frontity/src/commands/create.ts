@@ -30,13 +30,13 @@ export default (passedOptions?: CreateOptions) => {
   }
 
   // 3. Initiates Git repository.
-  {
-    emit("Initiating Git repository");
-    if (!isGitRepository(path)) {
-      const command = "git init";
-      exec(command, { silent: true });
-    }
-  }
+  // {
+  //   emit("Initiating Git repository");
+  //   if (!isGitRepository(path)) {
+  //     const command = "git init";
+  //     exec(command, { silent: true });
+  //   }
+  // }
 
   // 4. Generates `package.json`.
   {
@@ -74,30 +74,30 @@ export default (passedOptions?: CreateOptions) => {
   }
 
   // 6. Generates `.gitignore`.
-  {
-    emit("Generating .gitignore");
-    const gitIgnore = readFileSync(
-      resolve(__dirname, "../templates/gitignore-template"),
-      { encoding: "utf8" }
-    );
-    const fileName = ".gitignore";
-    const fileData = `${gitIgnore}${EOL}`;
-    writeFileSync(fileName, fileData);
-  }
+  // {
+  //   emit("Generating .gitignore");
+  //   const gitIgnore = readFileSync(
+  //     resolve(__dirname, "../templates/gitignore-template"),
+  //     { encoding: "utf8" }
+  //   );
+  //   const fileName = ".gitignore";
+  //   const fileData = `${gitIgnore}${EOL}`;
+  //   writeFileSync(fileName, fileData);
+  // }
 
   // 7. Generates `README.md`.
-  {
-    emit("Generating README.md");
-    const readme = readFileSync(
-      resolve(__dirname, "../templates/readme-template"),
-      { encoding: "utf8" }
-    );
-    const fileName = "README.md";
-    const fileData = `${readme.replace(/\$([\w-]+)\$/g, (_match, key) => {
-      if (key === "name") return name;
-    })}${EOL}`;
-    writeFileSync(fileName, fileData);
-  }
+  // {
+  //   emit("Generating README.md");
+  //   const readme = readFileSync(
+  //     resolve(__dirname, "../templates/readme-template"),
+  //     { encoding: "utf8" }
+  //   );
+  //   const fileName = "README.md";
+  //   const fileData = `${readme.replace(/\$([\w-]+)\$/g, (_match, key) => {
+  //     if (key === "name") return name;
+  //   })}${EOL}`;
+  //   writeFileSync(fileName, fileData);
+  // }
 
   // 8. Installs Frontity packages.
   {
@@ -121,9 +121,9 @@ export default (passedOptions?: CreateOptions) => {
   }
 
   // 10. Commits changes to Git.
-  {
-    emit("Commiting changes");
-    const command = 'git add . && git commit -m "Setup Frontity"';
-    exec(command, { silent: true });
-  }
+  // {
+  //   emit("Commiting changes");
+  //   const command = 'git add . && git commit -m "Setup Frontity"';
+  //   exec(command, { silent: true });
+  // }
 };

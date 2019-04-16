@@ -3,7 +3,6 @@ import { mergeRight } from "ramda";
 
 const defaultOptions: CreateOptions = {
   path: process.cwd(),
-  useCwd: false,
   typescript: false,
   packages: [
     "frontity",
@@ -14,7 +13,7 @@ const defaultOptions: CreateOptions = {
 };
 
 export const normalizeName = (name: string): string =>
-  name.replace(/[\s_-]+/, "-").toLowerCase();
+  name.replace(/[\s_-]+/g, "-").toLowerCase();
 
 // This function normalizes and validates options.
 export default (passedOptions: CreateOptions): CreateOptions => {

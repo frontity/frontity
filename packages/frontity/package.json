@@ -21,11 +21,11 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "test": "jest --watch --config jest.config.json",
-    "test:ci": "jest --config jest.config.json",
-    "dev": "rm -rf random-name && ts-node dev.ts"
+    "test:ci": "jest --config jest.config.json"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.5",
+    "@types/inquirer": "^6.0.0",
     "@types/jest": "^24.0.11",
     "@types/node": "^11.13.2",
     "@types/ramda": "^0.26.6",
