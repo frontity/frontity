@@ -9,7 +9,7 @@ import {
 } from "fs-extra";
 import { exec } from "shelljs";
 import { extract } from "tar";
-import { isEmptyDir, isGitRepository, normalizeOptions } from "../utils";
+import { isEmptyDir, normalizeOptions } from "../utils";
 import { CreateOptions, PackageJson } from "../types";
 import emitter from "../emitter";
 

@@ -1,10 +1,6 @@
 import program from "commander";
-import { cursorTo } from "readline";
-import { prompt, Question } from "inquirer";
-import { resolve } from "path";
-import create from "./commands/create";
+import { create, createPackage, dev, build, serve } from "./actions";
 import emitter from "./emitter";
-import { CreateOptions } from "./types";
 import { version } from "../package.json";
 
 export { create, emitter };
@@ -20,41 +16,27 @@ program
   .option("-t, --typescript", "Adds support for TypeScript")
   .option("-c, --use-cwd", "Generates the project in the current directory.")
   .description("Creates a new Frontity project.")
-  .action(async (name: string, { typescript, useCwd }) => {
-    const options: CreateOptions = {};
+  .action(create);
 
-    if (!name) {
-      const questions: Question[] = [
-        {
-          name: "name",
-          type: "input",
-          message: "Enter a name for the project:",
-          filter: (input: string) =>
-            input.replace(/[\s_-]+/g, "-").toLowerCase()
-        },
-        {
-          name: "packages",
-          type: "input",
-          message: "Enter a list of Frontity packages to install:",
-          default: "frontity, @frontity/file-settings",
-          filter: (input: string) => input.split(/[\s,]+/)
-        }
-      ];
-      const answers = await prompt(questions);
-      options.name = answers.name;
-      options.packages = answers.packages;
-    } else {
-      options.name = name;
-    }
+program
+  .command("create-package [name]")
+  .description("Creates a new Frontity package.")
+  .action(createPackage);
 
-    options.typescript = typescript;
-    options.path = useCwd
-      ? process.cwd()
-      : resolve(process.cwd(), options.name);
+program
+  .command("dev")
+  .description("Starts the project in development mode.")
+  .action(dev);
 
-    emitter.on("create", console.log);
+program
+  .command("build")
+  .description("Builds the project for production.")
+  .action(build);
 
-    create(options);
-  });
+program
+  .command("serve")
+  .description("Starts a server in production mode.")
+  .action(serve);
 
+// Parses the parameters and adds them to the `command` object.
 program.parse(process.argv);
