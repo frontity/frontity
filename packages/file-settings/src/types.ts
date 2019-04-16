@@ -44,3 +44,12 @@ export type MultiSettings<T = Package> = Imported<T> & Multi;
 export type NormalizedSettings<T = Package> = Normalized<T> & Multi;
 
 export type Settings<T = Package> = MonoSettings<T> | MultiSettings<T>[];
+
+export type Site = {
+  name: string;
+  mode: string;
+  packages: {
+    name: string;
+    namespaces: string[];
+  }[];
+};
