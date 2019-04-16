@@ -89,7 +89,7 @@ const dev = async ({
 dev({
   mode: !!argv.p || argv.production ? "production" : "development",
   port: argv.port || 3000,
-  isHttps: !!argv.h || !!argv.https,
+  isHttps: !!argv.s || !!argv.https,
   target: argv.target || "module"
 });
 
