@@ -12,24 +12,34 @@ const site = [
   {
     name: "site-1",
     mode: "html",
-    packages: ["package1", "package2"]
+    packages: [
+      { name: "package1", namespaces: [] },
+      { name: "package2", namespaces: [] }
+    ]
   }
 ];
 const sites = [
   {
     name: "site-html",
     mode: "html",
-    packages: ["package1", "package2", "package2"]
+    packages: [
+      { name: "package1", namespaces: [] },
+      { name: "package2", namespaces: [] },
+      { name: "package2", namespaces: [] }
+    ]
   },
   {
     name: "site-amp",
     mode: "amp",
-    packages: ["package1", "package3"]
+    packages: [
+      { name: "package1", namespaces: [] },
+      { name: "package3", namespaces: [] }
+    ]
   },
   {
     name: "site-2",
     mode: "html",
-    packages: ["package1"]
+    packages: [{ name: "package1", namespaces: [] }]
   }
 ];
 

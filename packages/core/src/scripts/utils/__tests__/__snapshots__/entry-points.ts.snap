@@ -23,24 +23,42 @@ Object {
       "mode": "html",
       "name": "site-html",
       "packages": Array [
-        "package1",
-        "package2",
-        "package2",
+        Object {
+          "name": "package1",
+          "namespaces": Array [],
+        },
+        Object {
+          "name": "package2",
+          "namespaces": Array [],
+        },
+        Object {
+          "name": "package2",
+          "namespaces": Array [],
+        },
       ],
     },
     Object {
       "mode": "amp",
       "name": "site-amp",
       "packages": Array [
-        "package1",
-        "package3",
+        Object {
+          "name": "package1",
+          "namespaces": Array [],
+        },
+        Object {
+          "name": "package3",
+          "namespaces": Array [],
+        },
       ],
     },
     Object {
       "mode": "html",
       "name": "site-2",
       "packages": Array [
-        "package1",
+        Object {
+          "name": "package1",
+          "namespaces": Array [],
+        },
       ],
     },
   ],
@@ -119,8 +137,14 @@ Object {
       "mode": "html",
       "name": "site-1",
       "packages": Array [
-        "package1",
-        "package2",
+        Object {
+          "name": "package1",
+          "namespaces": Array [],
+        },
+        Object {
+          "name": "package2",
+          "namespaces": Array [],
+        },
       ],
     },
   ],
@@ -157,24 +181,42 @@ Object {
       "mode": "html",
       "name": "site-html",
       "packages": Array [
-        "package1",
-        "package2",
-        "package2",
+        Object {
+          "name": "package1",
+          "namespaces": Array [],
+        },
+        Object {
+          "name": "package2",
+          "namespaces": Array [],
+        },
+        Object {
+          "name": "package2",
+          "namespaces": Array [],
+        },
       ],
     },
     Object {
       "mode": "amp",
       "name": "site-amp",
       "packages": Array [
-        "package1",
-        "package3",
+        Object {
+          "name": "package1",
+          "namespaces": Array [],
+        },
+        Object {
+          "name": "package3",
+          "namespaces": Array [],
+        },
       ],
     },
     Object {
       "mode": "html",
       "name": "site-2",
       "packages": Array [
-        "package1",
+        Object {
+          "name": "package1",
+          "namespaces": Array [],
+        },
       ],
     },
   ],
@@ -215,8 +257,14 @@ Object {
       "mode": "html",
       "name": "site-1",
       "packages": Array [
-        "package1",
-        "package2",
+        Object {
+          "name": "package1",
+          "namespaces": Array [],
+        },
+        Object {
+          "name": "package2",
+          "namespaces": Array [],
+        },
       ],
     },
   ],
