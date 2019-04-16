@@ -69,12 +69,12 @@ Object {
 import * as package1_html from \\"package1/src/html/client\\";
 import * as package2_html from \\"package2/src/html/client\\";
 
-const packages = {
-  package1_html,
-  package2_html,
+const namespaces = {
+  ...package1_html,
+  ...package2_html,
 };
 
-export default client({ packages });",
+export default client({ namespaces });",
       "utf8",
     ],
     Array [
@@ -83,12 +83,12 @@ export default client({ packages });",
 import * as package1_amp from \\"package1/src/amp/client\\";
 import * as package3_amp from \\"package3/src/amp/client\\";
 
-const packages = {
-  package1_amp,
-  package3_amp,
+const namespaces = {
+  ...package1_amp,
+  ...package3_amp,
 };
 
-export default client({ packages });",
+export default client({ namespaces });",
       "utf8",
     ],
     Array [
@@ -96,11 +96,11 @@ export default client({ packages });",
       "import client from \\"@frontity/core/src/client\\";
 import * as package1_html from \\"package1/src/html/client\\";
 
-const packages = {
-  package1_html,
+const namespaces = {
+  ...package1_html,
 };
 
-export default client({ packages });",
+export default client({ namespaces });",
       "utf8",
     ],
   ],
@@ -143,7 +143,10 @@ Object {
         },
         Object {
           "name": "package2",
-          "namespaces": Array [],
+          "namespaces": Array [
+            "ns1",
+            "ns2",
+          ],
         },
       ],
     },
@@ -152,14 +155,15 @@ Object {
     "/build/bundling/entry-points/site-1/client.ts",
     "import client from \\"@frontity/core/src/client\\";
 import * as package1_html from \\"package1/src/html/client\\";
-import * as package2_html from \\"package2/src/html/client\\";
+import { ns1, ns2 } from \\"package2/src/html/client\\";
 
-const packages = {
-  package1_html,
-  package2_html,
+const namespaces = {
+  ...package1_html,
+   ns1,
+    ns2,
 };
 
-export default client({ packages });",
+export default client({ namespaces });",
     "utf8",
   ],
 }
@@ -263,7 +267,10 @@ Object {
         },
         Object {
           "name": "package2",
-          "namespaces": Array [],
+          "namespaces": Array [
+            "ns1",
+            "ns2",
+          ],
         },
       ],
     },

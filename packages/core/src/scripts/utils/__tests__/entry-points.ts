@@ -14,7 +14,7 @@ const site = [
     mode: "html",
     packages: [
       { name: "package1", namespaces: [] },
-      { name: "package2", namespaces: [] }
+      { name: "package2", namespaces: ["ns1", "ns2"] }
     ]
   }
 ];

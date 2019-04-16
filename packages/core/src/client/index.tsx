@@ -14,6 +14,6 @@ if (process.env.NODE_ENV === "development" && module["hot"]) {
   });
 }
 
-export default ({ packages }) => {
+export default ({ namespaces }) => {
   loadableReady(() => render(App));
 };

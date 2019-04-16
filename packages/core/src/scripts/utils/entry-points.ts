@@ -64,6 +64,7 @@ const getPackagesList = async ({
 }): Promise<
   {
     name: string;
+    namespaces: string[];
     mode: string;
   }[]
 > => {
@@ -76,10 +77,10 @@ const getPackagesList = async ({
   );
   return (await Promise.all(
     // Iterate over the packages.
-    packages.map(async ({ pkg: { name }, mode }) => {
+    packages.map(async ({ pkg: { name, namespaces }, mode }) => {
       // Check if the entry point of that mode exists.
       const exists = await entryExists({ name, mode, type });
-      return { name, mode, exists };
+      return { name, namespaces, mode, exists };
     })
     // Remove the packages where the entry point doesn't exist.
   )).filter(({ exists }) => exists);
@@ -136,20 +137,25 @@ export const generateClientEntryPoints = async ({
       if (packages.length > 0) {
         let template = 'import client from "@frontity/core/src/client";\n';
         // Create the "import" part of the file.
-        packages.forEach(
-          ({ name, mode }) =>
-            (template += `import * as ${getVariable(
-              name,
-              mode
-            )} from "${name}/src/${site.mode}/client";\n`)
-        );
+        packages.forEach(({ name, namespaces, mode }) => {
+          return namespaces.length > 0
+            ? (template += `import { ${namespaces.join(
+                ", "
+              )} } from "${name}/src/${site.mode}/client";\n`)
+            : (template += `import * as ${getVariable(
+                name,
+                mode
+              )} from "${name}/src/${site.mode}/client";\n`);
+        });
         // Create the "export" part of the file.
-        template += "\nconst packages = {\n";
-        packages.forEach(
-          ({ name, mode }) => (template += `  ${getVariable(name, mode)},\n`)
-        );
+        template += "\nconst namespaces = {\n";
+        packages.forEach(({ name, namespaces, mode }) => {
+          return namespaces.length > 0
+            ? (template += namespaces.map(ns => `   ${ns},\n`).join(" "))
+            : (template += `  ...${getVariable(name, mode)},\n`);
+        });
         template += "};\n\n";
-        template += "export default client({ packages });";
+        template += "export default client({ namespaces });";
         // Create sub-folder for site.
         await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
         // Write the file and return the bundle.
