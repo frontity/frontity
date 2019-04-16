@@ -7,9 +7,10 @@
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
-    "frontity": "build/index.js"
+    "frontity": "dist/commands.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
+    "start": "node dist/commands.js",
     "dev": "ts-node src/index.ts",
     "test": "jest --watch --config jest.config.json",
     "test:ci": "jest --config jest.config.json",
