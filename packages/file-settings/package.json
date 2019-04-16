@@ -20,7 +20,8 @@
     "test": "jest --watch",
     "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "dev": "ts-node src/index.ts",
-    "prepublish": "tsc --project ./tsconfig.build.json"
+    "build": "tsc --project ./tsconfig.build.json",
+    "prepublish": "npm run build"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
