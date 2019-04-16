@@ -1,14 +1,14 @@
 import { NormalizedSettings } from "@frontity/file-settings";
 import { getVariable } from "../../utils/packages";
-import flatten from "lodash-es/flatten";
+import flatten from "lodash/flatten";
 
 type Namespace = {
   Root?: React.Component;
   Fills?: React.Component;
 };
 
-type Packages = {
-  [key: string]: Namespace;
+export type Packages = {
+  [key: string]: { [key: string]: Namespace };
 };
 
 export const getNamespaces = ({
@@ -21,15 +21,18 @@ export const getNamespaces = ({
   const namespaces = flatten(
     settings.packages.map(pkg => {
       const pkgName = getVariable(pkg.name, settings.mode);
-      return Object.entries(packages[pkgName]);
+      const namespaces = Object.entries(packages[pkgName]);
+      return !pkg.namespaces
+        ? namespaces
+        : namespaces.filter(ns => pkg.namespaces.includes(ns[0]));
     })
   ).reduce((namespaces, [namespace, module]) => {
     if (namespaces[namespace])
       throw new Error(
-        `You have two packages for the "${namespace}" namespace. Please remove one of them.`
+        `You have two packages that use the "${namespace}" namespace. Please remove one of them.`
       );
     namespaces[namespace] = module;
     return namespaces;
   }, {});
-  debugger;
+  return namespaces;
 };
