@@ -1,0 +1,24 @@
+{
+  "name": "@frontity/starter-theme",
+  "version": "0.1.0",
+  "description": "This is an empty extensions only for testing purposes",
+  "keywords": [
+    "frontity"
+  ],
+  "homepage": "https://frontity.org",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "bugs": {
+    "url": "https://community.frontity.org"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
