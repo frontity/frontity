@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Main Frontity package",
   "keywords": [
     "frontity"
@@ -33,7 +33,7 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
-    "@frontity/file-settings": "^0.1.0",
+    "@frontity/file-settings": "^0.1.1",
     "@loadable/babel-plugin": "^5.8.0",
     "@loadable/component": "^5.7.0",
     "@loadable/server": "^5.8.0",
