@@ -4,7 +4,10 @@ import { NormalizedSettings } from "./types";
 type Sites = {
   name: string;
   mode: string;
-  packages: string[];
+  packages: {
+    name: string;
+    namespaces: string[];
+  }[];
 };
 
 export default async (): Promise<Sites[]> => {
@@ -15,6 +18,11 @@ export default async (): Promise<Sites[]> => {
   return allSettings.map(({ name, mode, packages }) => ({
     name,
     mode,
-    packages: packages.map(pkg => pkg.name)
+    packages: packages
+      .filter(pkg => pkg.active)
+      .map(pkg => ({
+        name: pkg.name,
+        namespaces: pkg.namespaces || []
+      }))
   }));
 };

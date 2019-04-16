@@ -1,0 +1,22 @@
+[
+  {
+    "name": "mono-settings",
+    "mode": "html",
+    "settings": {
+      "timezone": 0,
+      "language": "en"
+    },
+    "packages": [
+      {
+        "name": "@frontity/theme",
+        "active": true,
+        "namespaces": ["ns1", "ns2"]
+      },
+      {
+        "name": "@frontity/wp-source",
+        "active": true,
+        "namespaces": []
+      }
+    ]
+  }
+]
