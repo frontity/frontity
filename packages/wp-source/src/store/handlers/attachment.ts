@@ -1,5 +1,5 @@
 import { Handler } from "../types";
-import { action } from "overmind";
+import { normalize } from "./utils";
 
 const attachmentHandler: Handler = async (ctx, { name, params }) => {
   const state = ctx.state.source;
@@ -15,12 +15,13 @@ const attachmentHandler: Handler = async (ctx, { name, params }) => {
 
   // If none is found
   if (!attachment) {
-    const { isOk, entities } = await effects.api.get({
+    const response = await effects.api.get({
       endpoint: "media",
       params: { slug, _embed: true }
     });
 
-    attachment = entities[0];
+    const entities = await normalize(response);
+    [attachment] = entities;
     actions.populate({ entities });
   }
 

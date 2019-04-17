@@ -1,4 +1,4 @@
-import { IConfig, IContext, IAction } from "overmind";
+import { IConfig, IContext, IAction, IOnInitialize } from "overmind";
 import { namespaced } from "overmind/config";
 import * as source from ".";
 
@@ -6,7 +6,9 @@ const settings = {
   actions: {},
   effects: {},
   state: {
-    packages: {}
+    packages: {
+      source: {} as Settings
+    }
   }
 };
 
@@ -24,3 +26,10 @@ export type Handler = (
     page: number;
   }
 ) => Promise<void>;
+
+export type OnInitialize = IOnInitialize<Config>;
+
+export type Settings = {
+  apiUrl: string;
+  isCom: boolean;
+};

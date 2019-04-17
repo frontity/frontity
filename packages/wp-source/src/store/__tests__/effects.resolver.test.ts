@@ -32,12 +32,9 @@ Object.values(routes).forEach(({ pattern, handler }) => {
 // Test 'handler' is executed with the correct params
 const testMatch = async (type, name, params, page = 1) => {
   const ctx = {};
-  await resolver.match(ctx as Context, { name, page });
-  expect(routes[type].handler).toHaveBeenCalledWith(ctx, {
-    name,
-    params,
-    page
-  });
+  const match = await resolver.match(ctx as Context, { name, page });
+  expect(match.handler).toBe(routes[type].handler);
+  expect(match.params).toEqual(params);
 };
 
 describe("resolver", () => {

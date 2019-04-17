@@ -2,54 +2,86 @@ import { api } from "../effects";
 import fetch from "cross-fetch";
 
 jest.mock("cross-fetch");
-const mockedFetch = fetch as jest.Mock<typeof fetch>;
+const mockedFetch = fetch as jest.Mock;
+
+const lastFetch = () => mockedFetch.mock.calls.slice(-1)[0][0];
 
 describe("api", () => {
-  test("get from WP.org without params", () => {
-    api.init({ siteUrl: "https://test.frontity.org" })
-    api.get({ endpoint: "posts" });
-    const [[fetchCall]] = mockedFetch.mock.calls.slice(-1);
-    expect(fetchCall).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
+  test("get from WP.org without params", async () => {
+    api.get({
+      apiUrl: "https://test.frontity.org",
+      endpoint: "posts"
+    });
+    expect(lastFetch()).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
   });
 
   test("get from WP.org without params 2", () => {
-    const endpoint = "posts/12";
-    const siteUrl = "https://test.frontity.org";
-    api.get({ endpoint, siteUrl });
-    const [[fetchCall]] = mockedFetch.mock.calls.slice(-1);
-    expect(fetchCall).toBe("https://test.frontity.org/wp-json/wp/v2/posts/12");
+    api.get({
+      apiUrl: "https://test.frontity.org",
+      endpoint: "posts/12"
+    });
+    expect(lastFetch()).toBe(
+      "https://test.frontity.org/wp-json/wp/v2/posts/12"
+    );
   });
 
   test("get from WP.org with params", () => {
-    const endpoint = "posts";
-    const siteUrl = "https://test.frontity.org";
-    const params = { _embed: true, include: "12,13,14" };
-    api.get({ endpoint, params, siteUrl });
-    const [[fetchCall]] = mockedFetch.mock.calls.slice(-1);
-    expect(fetchCall).toBe(
+    api.get({
+      apiUrl: "https://test.frontity.org",
+      endpoint: "posts",
+      params: { _embed: true, include: "12,13,14" }
+    });
+    expect(lastFetch()).toBe(
       "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&include=12,13,14"
     );
   });
 
+  test("get from WP.org and a different namespace", () => {
+    api.get({
+      apiUrl: "https://test.frontity.org",
+      endpoint: "/discovery/v1",
+      params: { link: "/the-beauties-of-gullfoss" }
+    });
+    expect(lastFetch()).toBe(
+      "https://test.frontity.org/wp-json/discovery/v1?link=/the-beauties-of-gullfoss"
+    );
+  });
+
   test("get from WP.com without params", () => {
-    const endpoint = "posts";
-    const siteUrl = "https://test.frontity.org";
-    const isWpCom = true;
-    api.get({ endpoint, siteUrl, isWpCom });
-    const [[fetchCall]] = mockedFetch.mock.calls.slice(-1);
-    expect(fetchCall).toBe(
+    api.get({
+      apiUrl: "https://test.frontity.org",
+      endpoint: "posts",
+      isCom: true
+    });
+    expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts"
     );
   });
 
   test("get from WP.com with params", () => {
     const endpoint = "posts";
-    const siteUrl = "https://test.frontity.org";
-    const isWpCom = true;
+    const apiUrl = "https://test.frontity.org";
+    const isCom = true;
     const params = { _embed: true, include: "12,13,14" };
-    api.get({ endpoint, params, siteUrl, isWpCom });
-    const [[fetchCall]] = mockedFetch.mock.calls.slice(-1);
-    expect(fetchCall).toBe(
+    api.get({ endpoint, params, apiUrl, isCom });
+    expect(lastFetch()).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts?_embed=true&include=12,13,14"
+    );
+  });
+
+  test("get from apiUrl specified with the init function", () => {
+    api.init({ apiUrl: "https://test.frontity.org", isCom: true });
+    api.get({
+      endpoint: "posts"
+    });
+    expect(lastFetch()).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts"
+    );
+    api.get({
+      endpoint: "posts",
+      params: { _embed: true, include: "12,13,14" }
+    });
+    expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts?_embed=true&include=12,13,14"
     );
   });

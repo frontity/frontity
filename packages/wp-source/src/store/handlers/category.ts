@@ -1,5 +1,11 @@
 import { Handler } from "../types";
-import { getIdBySlug } from "./utils";
+import {
+  getIdBySlug,
+  normalize,
+  getTotal,
+  getTotalPages,
+  addPage
+} from "./utils";
 
 // 1. category isn't in "source.category"
 //    !source.category[catId]
@@ -13,25 +19,30 @@ const categoryHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const actions = ctx.actions.source;
   const effects = ctx.effects.source;
 
-  const catId = await getIdBySlug(ctx, 'category', params.slug);
+  const catId = await getIdBySlug(ctx, "category", params.slug);
+
+  const data = state.data[name];
 
   const doesNotExist = !state.category[catId];
   const hasNotPage =
-    doesNotExist || !(state.data[name].page && state.data[name].page[page]);
+    doesNotExist || !(data.page && data.page[page]);
 
-  let isOk: boolean;
   let entities: any;
   let total: number;
   let totalPages: number;
 
   if (doesNotExist || hasNotPage) {
-    ({ isOk, entities, total, totalPages } = await effects.api.get({
+    const response = await effects.api.get({
       endpoint: "posts",
       params: { categories: catId, search: params.s, page }
-    }));
+    });
 
     // Throw an error if the request has failed
-    if (!isOk) throw new Error();
+    if (!response.ok) throw new Error();
+
+    entities = await normalize(response);
+    total = getTotal(response);
+    totalPages = getTotalPages(response);
 
     // Add entities to the state
     actions.populate({ entities });
@@ -40,7 +51,7 @@ const categoryHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   // Init the category if it doesn't exist
   if (doesNotExist) {
     const { link } = state.category[catId];
-    Object.assign(state.data[name], {
+    Object.assign(data, {
       type: "category",
       id: catId,
       link,
@@ -53,14 +64,7 @@ const categoryHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   }
 
   // Add the page if it doesn't exist
-  if (hasNotPage) {
-    state.data[name].page = state.data[name].page || [];
-    state.data[name].page[page || 1] = entities.map(({ type, id, link }) => ({
-      type,
-      id,
-      link
-    }));
-  }
+  if (hasNotPage) addPage(data, page, entities);
 };
 
 export default categoryHandler;

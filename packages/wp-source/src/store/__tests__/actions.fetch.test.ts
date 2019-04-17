@@ -3,7 +3,7 @@ import { namespaced } from "overmind/config";
 import { actions, effects } from "..";
 
 let store;
-let resolver: { match: jest.Mock<Promise<void>> };
+let resolver: { match: jest.Mock };
 beforeEach(() => {
   const state = { data: {} };
   // mock 'resolver.match' function

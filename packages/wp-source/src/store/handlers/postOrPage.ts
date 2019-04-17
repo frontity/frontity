@@ -1,4 +1,5 @@
 import { Handler } from "../types";
+import { normalize } from "./utils";
 
 const postOrPageHandler: Handler = async (ctx, { name, params }) => {
   const state = ctx.state.source;
@@ -28,21 +29,24 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
       })
     ]);
 
+    const postEntities = await normalize(postResponse);
+    const pageEntities = await normalize(pageResponse);
+
     // Add entities to the state
-    isPost = !!postResponse.entities.length;
-    isPage = !!pageResponse.entities.length;
+    isPost = !!postEntities.length;
+    isPage = !!pageEntities.length;
 
     if (isPost) {
-      post = postResponse.entities[0];
+      [post] = postEntities;
       actions.populate({ entities: post });
     } else if (isPage) {
-      page = pageResponse.entities[0];
+      [page] = pageEntities;
       actions.populate({ entities: page });
     }
   }
 
   // Init data
-  if (isPost || isPage) {
+  if (post || page) {
     const { type, id, link } = post || page;
     Object.assign(state.data[name], {
       type,

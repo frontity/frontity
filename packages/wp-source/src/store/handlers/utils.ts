@@ -1,3 +1,5 @@
+import { normalize as norm } from "normalizr";
+import * as schemas from "../../schemas";
 import { Context } from "../types";
 
 const typesToEndpoints = {
@@ -26,10 +28,39 @@ export const getIdBySlug = async (
   if (entity) return entity.id;
 
   // Not found: get it from the WP REST API
-  ({ entities: entity } = await effects.api.get({
-    endpoint: typesToEndpoints[type] || '',
+  const response = await effects.api.get({
+    endpoint: typesToEndpoints[type] || "",
     params: { slug }
-  }));
+  });
+
+  [entity] = await response.json();
 
   return entity && entity.id;
+};
+
+// TODO - Promise must not return "any"
+export const normalize = async (response: Response): Promise<any> => {
+  const json = await response.json();
+  // Normalize response
+  const { entities } = norm(
+    json,
+    json instanceof Array ? schemas.list : schemas.entity
+  );
+  // Return just the attribute 'entities'
+  return entities;
+};
+
+export const getTotal = (response: Response): number =>
+  parseInt(response.headers.get("X-WP-Total"));
+
+export const getTotalPages = (response: Response): number =>
+  parseInt(response.headers.get("X-WP-TotalPages"));
+
+export const addPage = (data: any, page: number, entities: any[]) => {
+  data.page = data.page || [];
+  data.page[page || 1] = entities.map(({ type, id, link }) => ({
+    type,
+    id,
+    link
+  }));
 };

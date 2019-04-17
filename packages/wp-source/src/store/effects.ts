@@ -8,45 +8,40 @@ import * as schemas from "../schemas";
 const wpComBase = "https://public-api.wordpress.com/wp/v2/sites/";
 
 class Api {
-  siteUrl = "";
-  isWpCom = false;
+  apiUrl = "";
+  isCom = false;
 
   init(
     this: Api,
-    { siteUrl, isWpCom = false }: { siteUrl: string; isWpCom?: boolean }
+    { apiUrl, isCom = false }: { apiUrl: string; isCom?: boolean }
   ) {
-    this.siteUrl = siteUrl;
-    this.isWpCom = isWpCom;
+    this.apiUrl = apiUrl;
+    this.isCom = isCom;
   }
 
-  async get(
+  get(
     this: Api,
     {
       endpoint,
       params,
-      siteUrl = this.siteUrl,
-      isWpCom = this.isWpCom
+      apiUrl = this.apiUrl,
+      isCom = this.isCom
     }: {
       endpoint: string;
       params?: { [param: string]: any };
-      siteUrl?: string;
-      isWpCom?: boolean;
+      apiUrl?: string;
+      isCom?: boolean;
     }
-  ): Promise<{
-    isOk: boolean;
-    entities?: any;
-    total?: number;
-    totalPages?: number;
-  }> {
+  ): Promise<Response> {
     // Build the base URL depending on whether it is WP.com or WP.org
-    const baseUrl = isWpCom
-      ? `${wpComBase}${siteUrl.replace(/^https?:\/\//, "")}/`
-      : `${siteUrl}/wp-json`;
+    const baseUrl = isCom
+      ? `${wpComBase}${apiUrl.replace(/^https?:\/\//, "")}/`
+      : `${apiUrl}/wp-json`;
 
     // Add the REST path depending on whether it should start
     // with "/wp/v2" or not
     const requestUrl =
-      isWpCom || endpoint.startsWith("/")
+      isCom || endpoint.startsWith("/")
         ? `${baseUrl}${endpoint}`
         : `${baseUrl}/wp/v2/${endpoint}`;
 
@@ -59,31 +54,7 @@ class Api {
       : "";
 
     // Send request
-    let response: Response;
-
-    try {
-      // TODO: Handle redirects and stuff in the near future
-      response = await fetch(`${requestUrl}${query}`);
-      const json = await response.json();
-      const isOk = response.ok;
-      const total = response.headers.get("X-WP-Total");
-      const totalPages = response.headers.get("X-WP-TotalPages");
-
-      // Normalize response
-      const { entities } = normalize(
-        json,
-        json instanceof Array ? schemas.list : schemas.entity
-      );
-
-      return {
-        isOk,
-        entities,
-        total: total && parseInt(total),
-        totalPages: totalPages && parseInt(totalPages)
-      };
-    } catch (e) {
-      return { isOk: false };
-    }
+    return fetch(`${requestUrl}${query}`);
   }
 }
 

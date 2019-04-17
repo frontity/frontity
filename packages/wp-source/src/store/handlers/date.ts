@@ -1,4 +1,5 @@
 import { Handler } from "../types";
+import { normalize, getTotal, getTotalPages, addPage } from "./utils";
 
 const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const state = ctx.state.source;
@@ -9,45 +10,39 @@ const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const { year, month = "01", day = "01" } = params;
   const date = `${year}-${month}-${day}T00:00:00`;
 
-  const hasNotPage =
-    !(state.data[name].page && state.data[name].page[page]);
+  const data = state.data[name];
 
-  let isOk: boolean;
+  const hasNotPage = !(data.page && data.page[page]);
+
   let entities: any;
   let total: number;
   let totalPages: number;
 
   if (hasNotPage) {
-    ({ isOk, entities, total, totalPages } = await effects.api.get({
+    const response = await effects.api.get({
       endpoint: "posts",
       params: { after: date, search: params.s, page }
-    }));
+    });
 
-    // Throw an error if the request has failed
-    if (!isOk) throw new Error();
+    entities = await normalize(response);
+    total = getTotal(response);
+    totalPages = getTotalPages(response);
 
     // Add entities to the state
     actions.populate({ entities });
+
+    // Add the page if it doesn't exist
+    addPage(data, page, entities);
   }
 
   // Init the date
-  Object.assign(state.data[name], {
+  Object.assign(data, {
     date,
     isArchive: true,
     isDate: true,
     total,
     totalPages
   });
-
-  // Add the page if it doesn't exist
-  if (hasNotPage) {
-    state.data[name].page = state.data[name].page || [];
-    state.data[name].page[page || 1] = entities.map(({ type, id, link }) => ({
-      type,
-      id,
-      link
-    }));
-  }
 };
 
 export default dateHandler;
