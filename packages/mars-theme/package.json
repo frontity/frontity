@@ -1,9 +1,10 @@
 {
-  "name": "@frontity/starter-theme",
-  "version": "0.1.1",
-  "description": "This is an empty extensions only for testing purposes",
+  "name": "@frontity/mars-theme",
+  "version": "0.1.0",
+  "description": "A starter theme for Frontity",
   "keywords": [
-    "frontity"
+    "frontity",
+    "frontity-theme"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
