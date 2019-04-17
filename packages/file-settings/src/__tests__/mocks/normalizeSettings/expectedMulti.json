@@ -9,11 +9,15 @@
     "packages": [
       {
         "name": "@frontity/theme-html",
-        "active": true
+        "active": true,
+        "namespaces": [],
+        "settings": {}
       },
       {
         "name": "@frontity/wp-source",
-        "active": true
+        "active": true,
+        "namespaces": [],
+        "settings": {}
       }
     ]
   },
@@ -27,11 +31,15 @@
     "packages": [
       {
         "name": "@frontity/theme-amp",
-        "active": true
+        "active": true,
+        "namespaces": [],
+        "settings": {}
       },
       {
         "name": "@frontity/wp-source",
-        "active": false
+        "active": false,
+        "namespaces": [],
+        "settings": {}
       }
     ]
   }

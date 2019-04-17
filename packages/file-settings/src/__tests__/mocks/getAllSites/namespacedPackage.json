@@ -10,12 +10,14 @@
       {
         "name": "@frontity/theme",
         "active": true,
-        "namespaces": ["ns1", "ns2"]
+        "namespaces": ["ns1", "ns2"],
+        "settings": {}
       },
       {
         "name": "@frontity/wp-source",
         "active": true,
-        "namespaces": []
+        "namespaces": [],
+        "settings": {}
       }
     ]
   }

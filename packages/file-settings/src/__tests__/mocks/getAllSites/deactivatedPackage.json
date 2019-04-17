@@ -9,11 +9,15 @@
     "packages": [
       {
         "name": "@frontity/theme",
-        "active": true
+        "active": true,
+        "namespaces": [],
+        "settings": {}
       },
       {
         "name": "@frontity/wp-source",
-        "active": false
+        "active": false,
+        "namespaces": [],
+        "settings": {}
       }
     ]
   }
