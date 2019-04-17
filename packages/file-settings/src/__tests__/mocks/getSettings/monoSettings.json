@@ -6,6 +6,13 @@
       "timezone": 0,
       "language": "en"
     },
-    "packages": [{ "name": "@frontity/theme", "active": true }]
+    "packages": [
+      {
+        "name": "@frontity/theme",
+        "active": true,
+        "namespaces": [],
+        "settings": {}
+      }
+    ]
   }
 ]
