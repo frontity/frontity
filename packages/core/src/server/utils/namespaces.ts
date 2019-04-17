@@ -3,8 +3,12 @@ import { Namespace } from "@frontity/types/namespace";
 import flatten from "lodash/flatten";
 import { getVariable } from "../../utils/packages";
 
-export type Packages = {
+type Packages = {
   [key: string]: { [key: string]: Namespace };
+};
+
+type Namespaces = {
+  [key: string]: Namespace;
 };
 
 // Get the correct namespaces for the server, depending on the site loaded.
@@ -14,7 +18,7 @@ export const getNamespaces = ({
 }: {
   packages: Packages;
   settings: NormalizedSettings;
-}) => {
+}): Namespaces => {
   const namespaces = flatten(
     // Iterate over each package.
     settings.packages.map(pkg => {

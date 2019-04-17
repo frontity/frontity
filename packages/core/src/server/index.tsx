@@ -22,14 +22,23 @@ export default ({ packages }) => {
   // Serve static files.
   app.use(mount("/static", serve("./build/static")));
 
+  // Default robots.txt.
+  app.use(
+    get("/robots.txt", ctx => {
+      ctx.type = "text/plain";
+      ctx.body = "User-agent: *\nDisallow:";
+    })
+  );
+
+  // Return 404 for favicon.ico.
+  app.use(
+    get("/favicon.ico", ctx => {
+      ctx.throw(404);
+    })
+  );
+
   // Frontity server rendering.
   app.use(async (ctx, next) => {
-    // Get settings.
-    const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
-
-    // Get the correct namespaces for this site.
-    const namespaces = getNamespaces({ packages, settings });
-
     // Get module chunk stats.
     const moduleStats = await getStats({ target: "module" });
     // Get es5 chunk stats.
@@ -38,8 +47,14 @@ export default ({ packages }) => {
     // use es5 for HMR if module is not present.
     const stats = moduleStats || es5Stats;
 
+    // Get settings.
+    const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
+
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
+
+    // Get the correct namespaces for this site.
+    const namespaces = getNamespaces({ packages, settings });
 
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.
@@ -49,7 +64,7 @@ export default ({ packages }) => {
         stats,
         entrypoints: [settings.name]
       });
-      const jsx = extractor.collectChunks(<App />);
+      const jsx = extractor.collectChunks(<App namespaces={namespaces} />);
       const html = renderToString(jsx);
 
       // Get the linkTags. Crossorigin needed for type="module".
@@ -76,19 +91,11 @@ export default ({ packages }) => {
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.
-      const html = renderToStaticMarkup(<App />);
+      const html = renderToStaticMarkup(<App namespaces={namespaces} />);
       ctx.body = template({ html });
     }
-
     next();
   });
 
-  // Default robots.txt.
-  app.use(
-    get("/robots.txt", ctx => {
-      ctx.type = "text/plain";
-      ctx.body = "User-agent: *\nDisallow:";
-    })
-  );
   return app.callback();
 };

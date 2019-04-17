@@ -1,3 +1,4 @@
+import React from "react";
 import { Namespace } from "@frontity/types/namespace";
 
 const ThemeStore = {

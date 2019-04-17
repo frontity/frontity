@@ -1,3 +1,4 @@
+import React from "react";
 import { Namespace } from "@frontity/types/namespace";
 
 const ThemeStore = {
@@ -13,7 +14,7 @@ const CommentsStore = {
 };
 
 export const theme: Namespace = {
-  Root: () => <div>Hi from Extension example 2!</div>,
+  Root: () => <div>Hi from AMP in extension example 2!</div>,
   Fills: () => <div>I am a fill of extension example 2</div>,
   Store: ThemeStore
 };

@@ -3,10 +3,10 @@ export interface Store {
 }
 
 export interface Namespace {
-  Root?: React.Component | React.FunctionComponent;
-  Fills?: React.Component | React.FunctionComponent;
+  Root?: React.ReactType;
+  Fills?: React.ReactType;
   Components?: {
-    [key: string]: React.Component | React.FunctionComponent;
+    [key: string]: React.ReactType;
   };
   Store: Store;
 }
