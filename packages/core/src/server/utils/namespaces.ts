@@ -20,11 +20,11 @@ export const getNamespaces = ({
 }) => {
   const namespaces = flatten(
     settings.packages.map(pkg => {
-      const pkgName = getVariable(pkg.name, settings.mode);
-      const namespaces = Object.entries(packages[pkgName]);
-      return !pkg.namespaces
-        ? namespaces
-        : namespaces.filter(ns => pkg.namespaces.includes(ns[0]));
+      const pkgVariable = getVariable(pkg.name, settings.mode);
+      const namespaces = Object.entries(packages[pkgVariable]);
+      return pkg.namespaces.length > 0
+        ? namespaces.filter(ns => pkg.namespaces.includes(ns[0]))
+        : namespaces;
     })
   ).reduce((namespaces, [namespace, module]) => {
     if (namespaces[namespace])

@@ -18,11 +18,13 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
   {
     name: "site-1",
     settings: {
-      url: "https://test.frontity.io"
+      url: "https://test.frontity.io",
+      random: 1
     },
     packages: [
       {
         name: "@frontity/extension-example-1",
+        namespaces: ["extension1"],
         settings: {
           example1: ""
         }
