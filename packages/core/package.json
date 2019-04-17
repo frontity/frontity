@@ -81,6 +81,7 @@
     "@types/webpack-dev-middleware": "^2.0.2",
     "@types/webpack-env": "^1.13.9",
     "@types/webpack-hot-middleware": "^2.16.5",
+    "@frontity/types": "^1.0.0",
     "jest": "^24.3.1",
     "ts-jest": "^24.0.0"
   }

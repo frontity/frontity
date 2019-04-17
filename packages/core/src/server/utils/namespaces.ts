@@ -1,11 +1,7 @@
 import { NormalizedSettings } from "@frontity/file-settings";
-import { getVariable } from "../../utils/packages";
+import { Namespace } from "@frontity/types/namespace";
 import flatten from "lodash/flatten";
-
-type Namespace = {
-  Root?: React.Component;
-  Fills?: React.Component;
-};
+import { getVariable } from "../../utils/packages";
 
 export type Packages = {
   [key: string]: { [key: string]: Namespace };
