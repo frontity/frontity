@@ -27,6 +27,7 @@ export default ({ packages }) => {
     // Get settings.
     const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
 
+    // Get the correct namespaces for this site.
     const namespaces = getNamespaces({ packages, settings });
 
     // Get module chunk stats.
