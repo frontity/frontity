@@ -14,7 +14,13 @@ export default async (name: string, { typescript, useCwd }) => {
         name: "name",
         type: "input",
         message: "Enter a name for the project:",
-        filter: (input: string) => input.replace(/[\s_-]+/g, "-").toLowerCase()
+        default: "my-frontity-project"
+      },
+      {
+        name: "theme",
+        type: "input",
+        message: "Enter a starter theme to clone:",
+        default: "@frontity/mars-theme"
       },
       {
         name: "packages",
@@ -24,9 +30,12 @@ export default async (name: string, { typescript, useCwd }) => {
         filter: (input: string) => input.split(/[\s,]+/)
       }
     ];
+
     const answers = await prompt(questions);
     options.name = answers.name;
     options.packages = answers.packages;
+    options.theme = answers.theme;
+    console.log();
   } else {
     options.name = name;
   }
@@ -35,11 +44,8 @@ export default async (name: string, { typescript, useCwd }) => {
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
   options.emitter = new EventEmitter();
 
-  const spinner = ora();
-
-  options.emitter.on("create", (message, usesSpinner) => {
-    if (spinner.isSpinning) spinner.succeed();
-    if (usesSpinner) spinner.start(message);
+  options.emitter.on("create", (message, action) => {
+    if (action) ora.promise(action, message);
     else console.log(message);
   });
 
