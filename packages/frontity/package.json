@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "node dist/commands.js",
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node src/commands.ts",
     "test": "jest --watch --config jest.config.json",
     "test:ci": "jest --config jest.config.json",
     "build": "tsc --project ./tsconfig.build.json",
@@ -45,6 +45,7 @@
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "fs-extra": "^7.0.1",
+    "ora": "^3.4.0",
     "ramda": "^0.26.1",
     "shelljs": "^0.8.3",
     "stack-trace": "0.0.10",

@@ -1,3 +1,5 @@
+import { EventEmitter } from "events";
+
 // Options passed to the `create` function.
 export type CreateOptions = {
   // Name of the app.
@@ -10,6 +12,8 @@ export type CreateOptions = {
   typescript?: boolean;
   // Frontity packages that need to be installed.
   packages?: string[];
+  // Emitter used to send the process messages.
+  emitter?: EventEmitter;
 };
 
 // Settings generated in `createPackageJson` function

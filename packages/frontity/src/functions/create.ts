@@ -1,4 +1,5 @@
 import { EOL } from "os";
+import ora from "ora";
 import { resolve } from "path";
 import {
   ensureDirSync,
@@ -9,38 +10,43 @@ import {
 } from "fs-extra";
 import { exec } from "shelljs";
 import { extract } from "tar";
+import chalk from "chalk";
 import { isEmptyDir, normalizeOptions } from "../utils";
 import { CreateOptions, PackageJson } from "../types";
-import emitter from "../emitter";
 
-const emit = (message: string) => emitter.emit("create", message);
-
-export default (passedOptions?: CreateOptions) => {
+export default async (passedOptions?: CreateOptions) => {
   // 1. Parses and validates options.
-  emit("Parsing and validating options");
-  const { name, path, packages, typescript } = normalizeOptions(passedOptions);
+  const { name, path, packages, typescript, emitter } = normalizeOptions(
+    passedOptions
+  );
+  if (emitter) {
+    emitter.emit("create", chalk.bold.underline("Frontity Create"));
+  }
 
   // 2. Ensures that the directory exists and is empty.
   {
-    emit(`Creating project in ${path}`);
+    if (emitter) {
+      emitter.emit(
+        "create",
+        `Creating ${chalk.green(name)} project in ${chalk.yellow(path)}`,
+        true
+      );
+    }
     ensureDirSync(path);
     process.chdir(path);
     if (!isEmptyDir(path))
       throw new Error("The directory passed to `create` function is not empty");
   }
 
-  // 3. Initiates Git repository.
-  // {
-  //   emit("Initiating Git repository");
-  //   if (!isGitRepository(path)) {
-  //     const command = "git init";
-  //     exec(command, { silent: true });
-  //   }
-  // }
-
-  // 4. Generates `package.json`.
+  // 3. Generates `package.json`.
   {
-    emit("Generating package.json");
+    if (emitter) {
+      emitter.emit(
+        "create",
+        `Generating ${chalk.yellow("package.json")}`,
+        true
+      );
+    }
     const packageJson: PackageJson = {
       name,
       version: "0.1.0",
@@ -57,73 +63,75 @@ export default (passedOptions?: CreateOptions) => {
     writeFileSync(fileName, fileData);
   }
 
-  // 5. Generates `frontity.settings.js`.
+  // 4. Generates `frontity.settings.js`.
   {
     const fileExtension = typescript ? "ts" : "js";
-    emit(`Generating frontity.settings.${fileExtension}`);
+    if (emitter) {
+      emitter.emit(
+        "create",
+        `Generating ${chalk.yellow(`frontity.settings.${fileExtension}`)}`,
+        true
+      );
+    }
     const frontitySettings = { name, packages };
     const fileTemplate = readFileSync(
       resolve(__dirname, `../templates/settings-${fileExtension}-template`),
       { encoding: "utf8" }
     );
     const fileName = `frontity.settings.${fileExtension}`;
-    const fileData = `${fileTemplate.replace(/\$([\w-]+)\$/g, (_match, key) => {
+    const fileData = fileTemplate.replace(/\$([\w-]+)\$/g, (_match, key) => {
       if (key === "settings") return JSON.stringify(frontitySettings, null, 2);
-    })}${EOL}`;
+    });
     writeFileSync(fileName, fileData);
   }
 
-  // 6. Generates `.gitignore`.
-  // {
-  //   emit("Generating .gitignore");
-  //   const gitIgnore = readFileSync(
-  //     resolve(__dirname, "../templates/gitignore-template"),
-  //     { encoding: "utf8" }
-  //   );
-  //   const fileName = ".gitignore";
-  //   const fileData = `${gitIgnore}${EOL}`;
-  //   writeFileSync(fileName, fileData);
-  // }
-
-  // 7. Generates `README.md`.
-  // {
-  //   emit("Generating README.md");
-  //   const readme = readFileSync(
-  //     resolve(__dirname, "../templates/readme-template"),
-  //     { encoding: "utf8" }
-  //   );
-  //   const fileName = "README.md";
-  //   const fileData = `${readme.replace(/\$([\w-]+)\$/g, (_match, key) => {
-  //     if (key === "name") return name;
-  //   })}${EOL}`;
-  //   writeFileSync(fileName, fileData);
-  // }
-
-  // 8. Installs Frontity packages.
+  // 5. Installs Frontity packages.
   {
-    emit(`Installing ${packages.join(", ")}`);
+    if (emitter) {
+      emitter.emit(
+        "create",
+        `Installing ${packages.map(pkg => chalk.green(pkg)).join(", ")}`,
+        true
+      );
+    }
     const command = `npm i ${packages.join(" ")}`;
-    exec(command, { silent: true });
+    await new Promise(resolve =>
+      exec(command, { silent: true }, () => resolve())
+    );
   }
 
-  // 9. Clones `@frontity/starter-theme` inside `packages`.
+  // 6. Clones `@frontity/mars-theme` inside `packages`.
   {
-    emit("Cloning @frontity/starter-theme");
-    const path = "packages/starter-theme";
+    if (emitter) {
+      emitter.emit(
+        "create",
+        `Cloning ${chalk.green("@frontity/mars-theme")}`,
+        true
+      );
+    }
+    const path = "packages/mars-theme";
     ensureDirSync(path);
     process.chdir(path);
-    const command = "npm pack @frontity/h2r";
-    exec(command, { silent: true });
+    const command = "npm pack @frontity/mars-theme";
+    await new Promise(resolve =>
+      exec(command, { silent: true }, () => resolve())
+    );
     const tarball = readDirSync("./").find(file => /\.tgz$/.test(file));
     extract({ file: tarball, sync: true, strip: 1 });
     removeSync(tarball);
     process.chdir("../..");
   }
 
-  // 10. Commits changes to Git.
-  // {
-  //   emit("Commiting changes");
-  //   const command = 'git add . && git commit -m "Setup Frontity"';
-  //   exec(command, { silent: true });
-  // }
+  if (emitter) {
+    emitter.emit(
+      "create",
+      `${chalk.bold(
+        "Frontity project created"
+      )}\n\nYou can start development with ${chalk.bold.green(
+        "frontity dev"
+      )}\nFor documentation visit ${chalk.underline.magenta(
+        "https://docs.frontity.org/"
+      )}\n`
+    );
+  }
 };

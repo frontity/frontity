@@ -4,12 +4,7 @@ import { mergeRight } from "ramda";
 const defaultOptions: CreateOptions = {
   path: process.cwd(),
   typescript: false,
-  packages: [
-    "frontity",
-    "@frontity/file-settings",
-    "@frontity/wp-source",
-    "@frontity/simple-router"
-  ]
+  packages: ["frontity", "@frontity/file-settings"]
 };
 
 export const normalizeName = (name: string): string =>

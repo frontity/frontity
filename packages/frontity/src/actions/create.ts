@@ -1,7 +1,8 @@
 import { resolve } from "path";
+import ora from "ora";
 import { prompt, Question } from "inquirer";
 import create from "../functions/create";
-import emitter from "../emitter";
+import { EventEmitter } from "events";
 import { CreateOptions } from "../types";
 
 export default async (name: string, { typescript, useCwd }) => {
@@ -32,8 +33,15 @@ export default async (name: string, { typescript, useCwd }) => {
 
   options.typescript = typescript;
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
+  options.emitter = new EventEmitter();
 
-  emitter.on("create", console.log);
+  const spinner = ora();
 
-  create(options);
+  options.emitter.on("create", (message, usesSpinner) => {
+    if (spinner.isSpinning) spinner.succeed();
+    if (usesSpinner) spinner.start(message);
+    else console.log(message);
+  });
+
+  await create(options);
 };
