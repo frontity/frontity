@@ -56,7 +56,8 @@ describe("generateClientEntryPoints", () => {
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
     const bundles = await generateClientEntryPoints({
       sites: site,
-      outDir: "/build"
+      outDir: "/build",
+      mode: "production"
     });
     expect(mockedFsExtra.writeFile.mock.calls.length).toBe(0);
     expect(bundles).toMatchSnapshot();
@@ -65,7 +66,8 @@ describe("generateClientEntryPoints", () => {
   test("should write one client entry point", async () => {
     const bundles = await generateClientEntryPoints({
       sites: site,
-      outDir: "/build"
+      outDir: "/build",
+      mode: "production"
     });
     expect(mockedFsExtra.ensureDir.mock.calls[0]).toMatchSnapshot();
     expect({
@@ -78,7 +80,8 @@ describe("generateClientEntryPoints", () => {
   test("should write multiple client entry points", async () => {
     const bundles = await generateClientEntryPoints({
       sites,
-      outDir: "/build"
+      outDir: "/build",
+      mode: "production"
     });
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
     expect({
@@ -86,6 +89,15 @@ describe("generateClientEntryPoints", () => {
       out: mockedFsExtra.writeFile.mock.calls
     }).toMatchSnapshot();
     expect(bundles).toMatchSnapshot();
+  });
+
+  test("should write HMR code if in development", async () => {
+    const bundles = await generateClientEntryPoints({
+      sites: site,
+      outDir: "/build",
+      mode: "development"
+    });
+    expect(mockedFsExtra.writeFile.mock.calls[0][1]).toMatchSnapshot();
   });
 });
 

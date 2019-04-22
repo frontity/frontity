@@ -2,6 +2,40 @@
 
 exports[`generateClientEntryPoints should avoid creating the client file at all if packages have no entry points 1`] = `Array []`;
 
+exports[`generateClientEntryPoints should write HMR code if in development 1`] = `
+"import client from \\"@frontity/core/src/client\\";
+import * as package1_html from \\"package1/src/html/client\\";
+import { ns1, ns2 } from \\"package2/src/html/client\\";
+
+const namespaces = {
+  ...package1_html,
+   ns1,
+    ns2,
+}
+client({ namespaces });
+
+if (module[\\"hot\\"]) {
+  module[\\"hot\\"].accept(
+    [
+      \\"@frontity/core/src/client\\",
+      \\"package1/src/html/client\\",
+      \\"package2/src/html/client\\",
+    ],
+    () => {
+      const client = require(\\"@frontity/core/src/client\\").default;
+      const package1_html = require(\\"package1/src/html/client\\");
+      const { ns1, ns2 } = require(\\"package2/src/html/client\\");
+      const namespaces = {
+        ...package1_html,
+        ns1,
+         ns2,
+      };
+      client({ namespaces });
+    }
+  );
+}"
+`;
+
 exports[`generateClientEntryPoints should write multiple client entry points 1`] = `
 Array [
   Array [
@@ -72,9 +106,10 @@ import * as package2_html from \\"package2/src/html/client\\";
 const namespaces = {
   ...package1_html,
   ...package2_html,
-};
+}
+client({ namespaces });
 
-export default client({ namespaces });",
+",
       "utf8",
     ],
     Array [
@@ -86,9 +121,10 @@ import * as package3_amp from \\"package3/src/amp/client\\";
 const namespaces = {
   ...package1_amp,
   ...package3_amp,
-};
+}
+client({ namespaces });
 
-export default client({ namespaces });",
+",
       "utf8",
     ],
     Array [
@@ -98,9 +134,10 @@ import * as package1_html from \\"package1/src/html/client\\";
 
 const namespaces = {
   ...package1_html,
-};
+}
+client({ namespaces });
 
-export default client({ namespaces });",
+",
       "utf8",
     ],
   ],
@@ -161,9 +198,10 @@ const namespaces = {
   ...package1_html,
    ns1,
     ns2,
-};
+}
+client({ namespaces });
 
-export default client({ namespaces });",
+",
     "utf8",
   ],
 }

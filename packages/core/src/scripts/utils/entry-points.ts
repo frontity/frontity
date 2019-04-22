@@ -2,7 +2,7 @@ import { resolve } from "path";
 import { writeFile, ensureDir, pathExists } from "fs-extra";
 import { flatten, uniqBy, uniq } from "lodash";
 import { Site } from "@frontity/file-settings";
-import { EntryPoints } from "../../types";
+import { EntryPoints, Mode } from "../../types";
 import { getVariable } from "../../utils/packages";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
@@ -120,10 +120,12 @@ export const generateServerEntryPoint = async ({
 // Create entry-point files for the client and return all the bundle names and pathes.
 export const generateClientEntryPoints = async ({
   sites,
-  outDir
+  outDir,
+  mode
 }: {
   sites: Site[];
   outDir: string;
+  mode: Mode;
 }): Promise<EntryPoints[]> => {
   return (await Promise.all(
     // Iterate over the sites
@@ -154,8 +156,39 @@ export const generateClientEntryPoints = async ({
             ? (template += namespaces.map(ns => `   ${ns},\n`).join(" "))
             : (template += `  ...${getVariable(name, mode)},\n`);
         });
-        template += "};\n\n";
-        template += "export default client({ namespaces });";
+        template += "}\nclient({ namespaces });\n\n";
+
+        // If development, insert the HMR code:
+        if (mode === "development") {
+          template += `if (module["hot"]) {
+  module["hot"].accept(
+    [
+      "@frontity/core/src/client",\n`;
+          packages.forEach(({ name, namespaces, mode }) => {
+            template += `      "${name}/src/${site.mode}/client",\n`;
+          });
+          template += `    ],
+    () => {
+      const client = require("@frontity/core/src/client").default;\n`;
+          packages.forEach(({ name, namespaces, mode }) => {
+            return namespaces.length > 0
+              ? (template += `      const { ${namespaces.join(
+                  ", "
+                )} } = require("${name}/src/${site.mode}/client");\n`)
+              : (template += `      const ${getVariable(
+                  name,
+                  mode
+                )} = require("${name}/src/${site.mode}/client");\n`);
+          });
+          template += "      const namespaces = {\n";
+          packages.forEach(({ name, namespaces, mode }) => {
+            return namespaces.length > 0
+              ? (template += namespaces.map(ns => `        ${ns},\n`).join(" "))
+              : (template += `        ...${getVariable(name, mode)},\n`);
+          });
+          template += "      };\n      client({ namespaces });\n    }\n  );\n}";
+        }
+
         // Create sub-folder for site.
         await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
         // Write the file and return the bundle.
@@ -168,13 +201,25 @@ export const generateClientEntryPoints = async ({
   )).filter(bundle => bundle);
 };
 
-export default async ({ sites, outDir }) => {
+export default async ({
+  sites,
+  outDir,
+  mode
+}: {
+  sites: Site[];
+  outDir: string;
+  mode: Mode;
+}) => {
   // Check if all the packages are installed.
   await checkForPackages({ sites });
 
   // Generate the bundles. One for the server.
   const serverEntryPoints = await generateServerEntryPoint({ sites, outDir });
-  const clientEntryPoints = await generateClientEntryPoints({ sites, outDir });
+  const clientEntryPoints = await generateClientEntryPoints({
+    sites,
+    outDir,
+    mode
+  });
 
   return [...clientEntryPoints, serverEntryPoints];
 };

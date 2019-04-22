@@ -12,12 +12,4 @@ export default ({ namespaces }) => {
     const Component = () => <App namespaces={namespaces} />;
     render(Component);
   });
-
-  if (process.env.NODE_ENV === "development" && module["hot"]) {
-    module["hot"].accept(["../app"], () => {
-      const App = require("../app").default;
-      const Component = () => <App namespaces={namespaces} />;
-      render(Component);
-    });
-  }
 };
