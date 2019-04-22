@@ -3,10 +3,10 @@ import ora from "ora";
 import { prompt, Question } from "inquirer";
 import create from "../functions/create";
 import { EventEmitter } from "events";
-import { CreateOptions } from "../types";
+import { Options } from "../functions/create/types";
 
 export default async (name: string, { typescript, useCwd }) => {
-  const options: CreateOptions = {};
+  const options: Options = {};
 
   if (!name) {
     const questions: Question[] = [

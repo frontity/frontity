@@ -9,22 +9,17 @@ import {
 } from "fs-extra";
 import { exec } from "shelljs";
 import { extract } from "tar";
-import chalk from "chalk";
-import { mergeRight } from "ramda";
 import p from "phin";
-import { CreateOptions, PackageJson } from "../types";
+import { mergeRight } from "ramda";
+import { Options, PackageJson } from "./types";
 
 let dirExisted: boolean = false;
 
-const defaultOptions: CreateOptions = {
-  path: process.cwd(),
-  typescript: false,
-  packages: ["frontity", "@frontity/file-settings"],
-  theme: "@frontity/mars-theme"
-};
-
 // This function normalizes and validates options.
-const normalizeOptions = (passedOptions: CreateOptions): CreateOptions => {
+export const normalizeOptions = (
+  defaultOptions: Options,
+  passedOptions: Options
+): Options => {
   const options = mergeRight(defaultOptions, passedOptions);
 
   // Normalize and validate `name` option.
@@ -39,7 +34,7 @@ const normalizeOptions = (passedOptions: CreateOptions): CreateOptions => {
 };
 
 // This function ensures that the directory exists and is empty.
-const ensureAppDir = async ({ path }: CreateOptions) => {
+export const ensureProjectDir = async ({ path }: Options) => {
   await ensureDir(path);
   process.chdir(path);
   const dirContent = await readDir("./");
@@ -60,7 +55,7 @@ const ensureAppDir = async ({ path }: CreateOptions) => {
 };
 
 // This function creates a `package.json` file.
-const createPackageJson = async ({ name, packages, theme }: CreateOptions) => {
+export const createPackageJson = async ({ name, packages, theme }: Options) => {
   // Add Frontity packages to the dependencies.
   const dependencies = (await Promise.all(
     packages.map(async pkg => {
@@ -100,17 +95,17 @@ const createPackageJson = async ({ name, packages, theme }: CreateOptions) => {
 };
 
 // This function creates a `frontity.settings` file.
-const createFrontitySettings = async (
-  fileExtension: string,
-  { name, path, packages }: CreateOptions
+export const createFrontitySettings = async (
+  extension: string,
+  { name, path, packages }: Options
 ) => {
   process.chdir(path);
   const frontitySettings = { name, packages };
   const fileTemplate = await readFile(
-    resolve(__dirname, `../templates/settings-${fileExtension}-template`),
+    resolve(__dirname, `../../templates/settings-${extension}-template`),
     { encoding: "utf8" }
   );
-  const fileName = `frontity.settings.${fileExtension}`;
+  const fileName = `frontity.settings.${extension}`;
   const fileData = fileTemplate.replace(/\$([\w-]+)\$/g, (_match, key) => {
     if (key === "settings") return JSON.stringify(frontitySettings, null, 2);
   });
@@ -118,7 +113,7 @@ const createFrontitySettings = async (
 };
 
 // This functions clones the starter theme.
-const cloneStarterTheme = async ({ path, theme }: CreateOptions) => {
+export const cloneStarterTheme = async ({ path, theme }: Options) => {
   process.chdir(path);
   const themePath = JSON.parse(
     await readFile("./package.json", { encoding: "utf8" })
@@ -135,7 +130,7 @@ const cloneStarterTheme = async ({ path, theme }: CreateOptions) => {
 };
 
 // This function installs the Frontity packages.
-const installDependencies = async ({ path }: CreateOptions) => {
+export const installDependencies = async ({ path }: Options) => {
   process.chdir(path);
   const command = `npm install`;
   await new Promise(resolve =>
@@ -145,7 +140,7 @@ const installDependencies = async ({ path }: CreateOptions) => {
 
 // This function removes the files and directories created
 // with `frontity create`.
-const revertProgress = async ({ path }: CreateOptions) => {
+export const revertProgress = async ({ path }: Options) => {
   process.chdir(path);
   if (dirExisted) {
     const removableContent = [
@@ -160,87 +155,5 @@ const revertProgress = async ({ path }: CreateOptions) => {
     for (const content of removableContent) await remove(content);
   } else {
     await remove(path);
-  }
-};
-
-export default async (passedOptions?: CreateOptions) => {
-  // 1. Parses and validates options.
-  const { emitter, ...options } = normalizeOptions(passedOptions);
-
-  let step: Promise<void>;
-
-  try {
-    // 2. Ensures that the app dir exists and is empty.
-    step = ensureAppDir(options);
-    if (emitter) {
-      emitter.emit(
-        "create",
-        `Ensuring ${chalk.yellow(options.path)} directory.`,
-        step
-      );
-    }
-    await step;
-
-    // This nested try catch avoids removing the directory
-    // if it existed before running frontity.
-    try {
-      // 3. Creates `package.json`.
-      step = createPackageJson(options);
-      if (emitter) {
-        emitter.emit(
-          "create",
-          `Creating ${chalk.yellow("package.json")}.`,
-          step
-        );
-      }
-      await step;
-
-      // 4. Creates `frontity.settings`.
-      const fileExtension = options.typescript ? "ts" : "js";
-      step = createFrontitySettings(fileExtension, options);
-      if (emitter) {
-        emitter.emit(
-          "create",
-          `Creating ${chalk.yellow(`frontity.settings.${fileExtension}`)}.`,
-          step
-        );
-      }
-      await step;
-
-      // 5. Clones `@frontity/mars-theme` inside `packages`.
-      step = cloneStarterTheme(options);
-      if (emitter) {
-        emitter.emit("create", `Cloning ${chalk.green(options.theme)}.`, step);
-      }
-      await step;
-
-      // 6. Installs dependencies.
-      step = installDependencies(options);
-      if (emitter) {
-        emitter.emit("create", `Installing dependencies.`, step);
-      }
-      await step;
-
-      if (emitter) {
-        emitter.emit(
-          "create",
-          `${chalk.bold(
-            "\nFrontity project created"
-          )}\n\nYou can start development with ${chalk.bold.green(
-            "frontity dev"
-          )}\nFor documentation visit ${chalk.underline.magenta(
-            "https://docs.frontity.org/"
-          )}\n`
-        );
-      }
-    } catch (error) {
-      await revertProgress(options);
-      throw error;
-    }
-  } catch (error) {
-    const message = `${chalk.bold.red("Error: ")}${chalk.red(error.message)}`;
-
-    if (emitter) emitter.emit("create", message);
-    else console.error(message);
   }
 };

@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
 
 // Options passed to the `create` function.
-export type CreateOptions = {
+export type Options = {
   // Name of the app.
   name?: string;
   // Path where the app should be created.
