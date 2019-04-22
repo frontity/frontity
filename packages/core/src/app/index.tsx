@@ -18,6 +18,9 @@ const App: React.FunctionComponent<Props> = ({ namespaces }) => {
       {Object.entries(namespaces).map(
         ([name, { Root }]) => Root && <Root key={name} />
       )}
+      {Object.entries(namespaces).map(
+        ([name, { Fills }]) => Fills && <Fills key={name} />
+      )}
     </>
   );
 };
