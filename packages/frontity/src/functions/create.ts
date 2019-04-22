@@ -11,6 +11,7 @@ import { exec } from "shelljs";
 import { extract } from "tar";
 import chalk from "chalk";
 import { mergeRight } from "ramda";
+import p from "phin";
 import { CreateOptions, PackageJson } from "../types";
 
 let dirExisted: boolean = false;
@@ -22,15 +23,12 @@ const defaultOptions: CreateOptions = {
   theme: "@frontity/mars-theme"
 };
 
-export const normalizeName = (name: string): string =>
-  name.replace(/[\s_-]+/g, "-").toLowerCase();
-
 // This function normalizes and validates options.
 const normalizeOptions = (passedOptions: CreateOptions): CreateOptions => {
   const options = mergeRight(defaultOptions, passedOptions);
 
-  // Normalize and valiidate `name` option.
-  options.name = normalizeName(options.name);
+  // Normalize and validate `name` option.
+  options.name = options.name.replace(/[\s_-]+/g, "-").toLowerCase();
   const nameConventionMatch = /^(?:@[\w-]+\/)?[\w-]+$/;
   if (!nameConventionMatch.test(options.name))
     throw new Error(
@@ -62,7 +60,27 @@ const ensureAppDir = async ({ path }: CreateOptions) => {
 };
 
 // This function creates a `package.json` file.
-const createPackageJson = async ({ name }: CreateOptions) => {
+const createPackageJson = async ({ name, packages, theme }: CreateOptions) => {
+  // Add Frontity packages to the dependencies.
+  const dependencies = (await Promise.all(
+    packages.map(async pkg => {
+      // Get the version of each package.
+      const version = (await p({
+        url: `https://registry.npmjs.com/${pkg}`,
+        parse: "json"
+      })).body["dist-tags"].latest;
+      return [pkg, `^${version}`];
+    })
+  )).reduce((final, current) => {
+    // Reduce the packages into a dependecies object.
+    final[current[0]] = current[1];
+    return final;
+  }, {});
+
+  // Add the starter theme to the dependencies.
+  const themeName = (theme.match(/\/?([\w-]+)$/) || [, ""])[1];
+  dependencies[theme] = `./packages/${themeName}`;
+
   const packageJson: PackageJson = {
     name,
     version: "0.1.0",
@@ -72,8 +90,10 @@ const createPackageJson = async ({ name }: CreateOptions) => {
       dev: "frontity dev",
       build: "frontity build",
       serve: "frontity serve"
-    }
+    },
+    dependencies
   };
+
   const fileName = "package.json";
   const fileData = `${JSON.stringify(packageJson, null, 2)}${EOL}`;
   await writeFile(fileName, fileData);
@@ -82,8 +102,9 @@ const createPackageJson = async ({ name }: CreateOptions) => {
 // This function creates a `frontity.settings` file.
 const createFrontitySettings = async (
   fileExtension: string,
-  { name, packages }: CreateOptions
+  { name, path, packages }: CreateOptions
 ) => {
+  process.chdir(path);
   const frontitySettings = { name, packages };
   const fileTemplate = await readFile(
     resolve(__dirname, `../templates/settings-${fileExtension}-template`),
@@ -96,19 +117,14 @@ const createFrontitySettings = async (
   await writeFile(fileName, fileData);
 };
 
-// This function installs the Frontity packages.
-const installFrontityPackages = async ({ packages }: CreateOptions) => {
-  const command = `npm install ${packages.join(" ")}`;
-  await new Promise(resolve =>
-    exec(command, { silent: true }, () => resolve())
-  );
-};
-
 // This functions clones the starter theme.
-const cloneStarterTheme = async ({ theme }: CreateOptions) => {
-  const path = "packages/starter-theme";
-  await ensureDir(path);
+const cloneStarterTheme = async ({ path, theme }: CreateOptions) => {
   process.chdir(path);
+  const themePath = JSON.parse(
+    await readFile("./package.json", { encoding: "utf8" })
+  ).dependencies[theme];
+  await ensureDir(themePath);
+  process.chdir(themePath);
   const command = `npm pack ${theme}`;
   await new Promise(resolve =>
     exec(command, { silent: true }, () => resolve())
@@ -116,7 +132,15 @@ const cloneStarterTheme = async ({ theme }: CreateOptions) => {
   const tarball = (await readDir("./")).find(file => /\.tgz$/.test(file));
   await extract({ file: tarball, strip: 1 });
   await remove(tarball);
-  process.chdir("../..");
+};
+
+// This function installs the Frontity packages.
+const installDependencies = async ({ path }: CreateOptions) => {
+  process.chdir(path);
+  const command = `npm install`;
+  await new Promise(resolve =>
+    exec(command, { silent: true }, () => resolve())
+  );
 };
 
 // This function removes the files and directories created
@@ -128,6 +152,7 @@ const revertProgress = async ({ path }: CreateOptions) => {
       "node_modules",
       "frontity.settings.js",
       "frontity.settings.ts",
+      "tsconfig.json",
       "package.json",
       "package-lock.json",
       "packages"
@@ -164,7 +189,7 @@ export default async (passedOptions?: CreateOptions) => {
       if (emitter) {
         emitter.emit(
           "create",
-          `Creating ${chalk.yellow("package.json")}`,
+          `Creating ${chalk.yellow("package.json")}.`,
           step
         );
       }
@@ -176,29 +201,23 @@ export default async (passedOptions?: CreateOptions) => {
       if (emitter) {
         emitter.emit(
           "create",
-          `Creating ${chalk.yellow(`frontity.settings.${fileExtension}`)}`,
+          `Creating ${chalk.yellow(`frontity.settings.${fileExtension}`)}.`,
           step
         );
       }
       await step;
 
-      // 5. Installs Frontity packages.
-      step = installFrontityPackages(options);
-      if (emitter) {
-        emitter.emit(
-          "create",
-          `Installing ${options.packages
-            .map(pkg => chalk.green(pkg))
-            .join(", ")}`,
-          step
-        );
-      }
-      await step;
-
-      // 6. Clones `@frontity/mars-theme` inside `packages`.
+      // 5. Clones `@frontity/mars-theme` inside `packages`.
       step = cloneStarterTheme(options);
       if (emitter) {
-        emitter.emit("create", `Cloning ${chalk.green(options.theme)}`, step);
+        emitter.emit("create", `Cloning ${chalk.green(options.theme)}.`, step);
+      }
+      await step;
+
+      // 6. Installs dependencies.
+      step = installDependencies(options);
+      if (emitter) {
+        emitter.emit("create", `Installing dependencies.`, step);
       }
       await step;
 

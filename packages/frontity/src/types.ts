@@ -28,4 +28,7 @@ export type PackageJson = {
     build: string;
     serve: string;
   };
+  dependencies: {
+    [key: string]: string;
+  };
 };
