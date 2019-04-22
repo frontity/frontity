@@ -2,8 +2,7 @@ import * as fsExtra from "fs-extra";
 import {
   generateClientEntryPoints,
   generateServerEntryPoint,
-  checkForPackages,
-  getVariable
+  checkForPackages
 } from "../entry-points";
 
 jest.mock("fs-extra");
@@ -13,24 +12,34 @@ const site = [
   {
     name: "site-1",
     mode: "html",
-    packages: ["package1", "package2"]
+    packages: [
+      { name: "package1", namespaces: [] },
+      { name: "package2", namespaces: ["ns1", "ns2"] }
+    ]
   }
 ];
 const sites = [
   {
     name: "site-html",
     mode: "html",
-    packages: ["package1", "package2", "package2"]
+    packages: [
+      { name: "package1", namespaces: [] },
+      { name: "package2", namespaces: [] },
+      { name: "package2", namespaces: [] }
+    ]
   },
   {
     name: "site-amp",
     mode: "amp",
-    packages: ["package1", "package3"]
+    packages: [
+      { name: "package1", namespaces: [] },
+      { name: "package3", namespaces: [] }
+    ]
   },
   {
     name: "site-2",
     mode: "html",
-    packages: ["package1"]
+    packages: [{ name: "package1", namespaces: [] }]
   }
 ];
 
@@ -47,7 +56,8 @@ describe("generateClientEntryPoints", () => {
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
     const bundles = await generateClientEntryPoints({
       sites: site,
-      outDir: "/build"
+      outDir: "/build",
+      mode: "production"
     });
     expect(mockedFsExtra.writeFile.mock.calls.length).toBe(0);
     expect(bundles).toMatchSnapshot();
@@ -56,7 +66,8 @@ describe("generateClientEntryPoints", () => {
   test("should write one client entry point", async () => {
     const bundles = await generateClientEntryPoints({
       sites: site,
-      outDir: "/build"
+      outDir: "/build",
+      mode: "production"
     });
     expect(mockedFsExtra.ensureDir.mock.calls[0]).toMatchSnapshot();
     expect({
@@ -69,7 +80,8 @@ describe("generateClientEntryPoints", () => {
   test("should write multiple client entry points", async () => {
     const bundles = await generateClientEntryPoints({
       sites,
-      outDir: "/build"
+      outDir: "/build",
+      mode: "production"
     });
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
     expect({
@@ -77,6 +89,15 @@ describe("generateClientEntryPoints", () => {
       out: mockedFsExtra.writeFile.mock.calls
     }).toMatchSnapshot();
     expect(bundles).toMatchSnapshot();
+  });
+
+  test("should write HMR code if in development", async () => {
+    const bundles = await generateClientEntryPoints({
+      sites: site,
+      outDir: "/build",
+      mode: "development"
+    });
+    expect(mockedFsExtra.writeFile.mock.calls[0][1]).toMatchSnapshot();
   });
 });
 
@@ -112,23 +133,6 @@ describe("checkForPackages", () => {
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
     await expect(checkForPackages({ sites: site })).rejects.toThrow(
       'The package "package1" doesn\'t seem to be installed. Make sure you did "npm install package1"'
-    );
-  });
-});
-
-describe("getVariable", () => {
-  test("should generate different variable names for different packages", () => {
-    expect(getVariable("@org/package", "mode")).not.toBe(
-      getVariable("org-package", "mode")
-    );
-    expect(getVariable("@org/package", "mode")).not.toBe(
-      getVariable("org.package", "mode")
-    );
-    expect(getVariable("org-package", "mode")).not.toBe(
-      getVariable("org.package", "mode")
-    );
-    expect(getVariable("@org/package", "html")).not.toBe(
-      getVariable("@org/package", "amp")
     );
   });
 });

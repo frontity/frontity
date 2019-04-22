@@ -32,7 +32,7 @@ const build = async ({
   const sites = await getAllSites();
 
   // Generate the bundles. One for the server, one for each client site.
-  const entryPoints = await generateEntryPoints({ sites, outDir });
+  const entryPoints = await generateEntryPoints({ sites, outDir, mode });
 
   // Get FrontityConfig for Webpack.
   const config = getConfig({ mode, entryPoints });

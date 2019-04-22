@@ -16,29 +16,37 @@ const defaultSettings = {
   }
 };
 
-const defaultPackage = {
-  active: true
+const defaultPackage: {
+  active: boolean;
+  namespaces: string[];
+  settings: object;
+} = {
+  active: true,
+  namespaces: [],
+  settings: {}
 };
 
-// This function merges the imported settings with
-// the default settings.
-function mergeSettings({
+// This function merges the imported settings with the default settings.
+const mergeSettings = ({
   packages,
   ...settings
-}: MultiSettings | MonoSettings): NormalizedSettings {
-  return merge(
-    {
-      ...defaultSettings,
-      packages: packages.map(pkg =>
-        merge(defaultPackage, typeof pkg === "string" ? { name: pkg } : pkg)
-      )
-    },
-    settings
-  );
-}
+}: MultiSettings | MonoSettings): NormalizedSettings => ({
+  ...merge(defaultSettings, settings),
+  packages: packages.map(pkg =>
+    typeof pkg === "string"
+      ? {
+          ...defaultPackage,
+          name: pkg
+        }
+      : {
+          ...defaultPackage,
+          ...pkg
+        }
+  )
+});
 
 // This function normalizes the imported settings.
-function normalizeSettings(settings: Settings): NormalizedSettings[] {
+const normalizeSettings = (settings: Settings): NormalizedSettings[] => {
   // TODO
   // Default settings and validator from packages
   // should be imported and used with each package.
@@ -49,6 +57,6 @@ function normalizeSettings(settings: Settings): NormalizedSettings[] {
   if (!Array.isArray(settings)) return [mergeSettings(settings)];
   // Merge multi settings.
   return settings.map(s => mergeSettings(s));
-}
+};
 
 export default normalizeSettings;

@@ -1,16 +1,16 @@
 [
   {
     "name": "mono-settings",
-    "mode": "amp",
+    "mode": "html",
     "settings": {
       "timezone": 0,
-      "language": "es"
+      "language": "en"
     },
     "packages": [
       {
         "name": "@frontity/theme",
         "active": true,
-        "namespaces": [],
+        "namespaces": ["ns1", "ns2"],
         "settings": {}
       },
       {

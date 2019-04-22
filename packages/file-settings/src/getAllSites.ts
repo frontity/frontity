@@ -1,20 +1,19 @@
 import importSettings from "./importSettings";
-import { NormalizedSettings } from "./types";
+import { Site } from "./types";
 
-type Sites = {
-  name: string;
-  mode: string;
-  packages: string[];
-};
-
-export default async (): Promise<Sites[]> => {
+export default async (): Promise<Site[]> => {
   // Import the settings from a file.
-  const allSettings: NormalizedSettings[] = await importSettings();
+  const allSettings = await importSettings();
 
   // Return only name, mode and packages in an array of sites.
   return allSettings.map(({ name, mode, packages }) => ({
     name,
     mode,
-    packages: packages.map(pkg => pkg.name)
+    packages: packages
+      .filter(pkg => pkg.active)
+      .map(pkg => ({
+        name: pkg.name,
+        namespaces: pkg.namespaces
+      }))
   }));
 };

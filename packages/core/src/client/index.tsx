@@ -3,17 +3,13 @@ import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import App from "../app";
 
-const render = (Component: React.FunctionComponent): void => {
+const render = (Component: React.ReactType): void => {
   hydrate(<Component />, window.document.getElementById("root"));
 };
 
-if (process.env.NODE_ENV === "development" && module["hot"]) {
-  module["hot"].accept("../app", () => {
-    const App = require("../app").default;
-    render(App);
+export default ({ namespaces }) => {
+  loadableReady(() => {
+    const Component = () => <App namespaces={namespaces} />;
+    render(Component);
   });
-}
-
-export default ({ packages }) => {
-  loadableReady(() => render(App));
 };

@@ -1,34 +1,19 @@
 import { resolve } from "path";
 import { writeFile, ensureDir, pathExists } from "fs-extra";
 import { flatten, uniqBy, uniq } from "lodash";
-import { EntryPoints } from "../../types";
-
-type Sites = {
-  name: string;
-  mode: string;
-  packages: string[];
-}[];
+import { Site } from "@frontity/file-settings";
+import { EntryPoints, Mode } from "../../types";
+import { getVariable } from "../../utils/packages";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
-// Remove some characters present in the npm package name to turn it into a variable name.
-export const getVariable = (pkg: string, mode: string) => {
-  return (
-    pkg
-      .replace(/^@/, "")
-      .replace(/-/g, "_")
-      .replace(/\//g, "__")
-      .replace(/\./g, "___") + `_${mode}`
-  );
-};
-
 // Check if the entry point exists using all the possible extensions.
 const entryExists = async ({
-  pkg,
+  name,
   mode,
   type
 }: {
-  pkg: string;
+  name: string;
   mode: string;
   type: string;
 }) => {
@@ -38,7 +23,7 @@ const entryExists = async ({
         resolve(
           process.cwd(),
           "node_modules",
-          `${pkg}/src/${mode}/${type}${extension}`
+          `${name}/src/${mode}/${type}${extension}`
         )
       );
     })
@@ -47,7 +32,7 @@ const entryExists = async ({
 };
 
 // Throw if any of the packages is not installed.
-export const checkForPackages = async ({ sites }: { sites: Sites }) => {
+export const checkForPackages = async ({ sites }: { sites: Site[] }) => {
   // Turn the list into an array of package names.
   const packages = uniq(flatten(sites.map(site => site.packages)));
   await Promise.all(
@@ -55,11 +40,15 @@ export const checkForPackages = async ({ sites }: { sites: Sites }) => {
     packages.map(async pkg => {
       // Check if the folder exists.
       const exists = await pathExists(
-        resolve(process.cwd(), "node_modules", pkg)
+        resolve(process.cwd(), "node_modules", pkg.name)
       );
       if (!exists)
         throw new Error(
-          `The package "${pkg}" doesn't seem to be installed. Make sure you did "npm install ${pkg}"`
+          `The package "${
+            pkg.name
+          }" doesn't seem to be installed. Make sure you did "npm install ${
+            pkg.name
+          }"`
         );
     })
   );
@@ -70,11 +59,12 @@ const getPackagesList = async ({
   sites,
   type
 }: {
-  sites: Sites;
+  sites: Site[];
   type: "client" | "server";
 }): Promise<
   {
-    pkg: string;
+    name: string;
+    namespaces: string[];
     mode: string;
   }[]
 > => {
@@ -83,14 +73,14 @@ const getPackagesList = async ({
     flatten(
       sites.map(site => site.packages.map(pkg => ({ mode: site.mode, pkg })))
     ),
-    ({ mode, pkg }) => `${mode}${pkg}`
+    ({ mode, pkg: { name } }) => `${mode}${name}`
   );
   return (await Promise.all(
     // Iterate over the packages.
-    packages.map(async ({ pkg, mode }) => {
+    packages.map(async ({ pkg: { name, namespaces }, mode }) => {
       // Check if the entry point of that mode exists.
-      const exists = await entryExists({ pkg, mode, type });
-      return { pkg, mode, exists };
+      const exists = await entryExists({ name, mode, type });
+      return { name, namespaces, mode, exists };
     })
     // Remove the packages where the entry point doesn't exist.
   )).filter(({ exists }) => exists);
@@ -101,23 +91,23 @@ export const generateServerEntryPoint = async ({
   sites,
   outDir
 }: {
-  sites: Sites;
+  sites: Site[];
   outDir: string;
 }): Promise<EntryPoints> => {
   const packages = await getPackagesList({ sites, type: "server" });
   let template = 'import server from "@frontity/core/src/server";\n';
   // Create the "import" part of the file.
   packages.forEach(
-    ({ pkg, mode }) =>
+    ({ name, mode }) =>
       (template += `import * as ${getVariable(
-        pkg,
+        name,
         mode
-      )} from "${pkg}/src/${mode}/server";\n`)
+      )} from "${name}/src/${mode}/server";\n`)
   );
   // Create the "const packages = {...}" part of the file.
   template += "\nconst packages = {\n";
   packages.forEach(
-    ({ pkg, mode }) => (template += `  ${getVariable(pkg, mode)},\n`)
+    ({ name, mode }) => (template += `  ${getVariable(name, mode)},\n`)
   );
   template += "};\n\n";
   template += "export default server({ packages });";
@@ -130,10 +120,12 @@ export const generateServerEntryPoint = async ({
 // Create entry-point files for the client and return all the bundle names and pathes.
 export const generateClientEntryPoints = async ({
   sites,
-  outDir
+  outDir,
+  mode
 }: {
-  sites: Sites;
+  sites: Site[];
   outDir: string;
+  mode: Mode;
 }): Promise<EntryPoints[]> => {
   return (await Promise.all(
     // Iterate over the sites
@@ -147,20 +139,56 @@ export const generateClientEntryPoints = async ({
       if (packages.length > 0) {
         let template = 'import client from "@frontity/core/src/client";\n';
         // Create the "import" part of the file.
-        packages.forEach(
-          ({ pkg, mode }) =>
-            (template += `import * as ${getVariable(
-              pkg,
-              mode
-            )} from "${pkg}/src/${site.mode}/client";\n`)
-        );
+        packages.forEach(({ name, namespaces, mode }) => {
+          return namespaces.length > 0
+            ? (template += `import { ${namespaces.join(
+                ", "
+              )} } from "${name}/src/${site.mode}/client";\n`)
+            : (template += `import * as ${getVariable(
+                name,
+                mode
+              )} from "${name}/src/${site.mode}/client";\n`);
+        });
         // Create the "export" part of the file.
-        template += "\nconst packages = {\n";
-        packages.forEach(
-          ({ pkg, mode }) => (template += `  ${getVariable(pkg, mode)},\n`)
-        );
-        template += "};\n\n";
-        template += "export default client({ packages });";
+        template += "\nconst namespaces = {\n";
+        packages.forEach(({ name, namespaces, mode }) => {
+          return namespaces.length > 0
+            ? (template += namespaces.map(ns => `   ${ns},\n`).join(" "))
+            : (template += `  ...${getVariable(name, mode)},\n`);
+        });
+        template += "}\nclient({ namespaces });\n\n";
+
+        // If development, insert the HMR code:
+        if (mode === "development") {
+          template += `if (module["hot"]) {
+  module["hot"].accept(
+    [
+      "@frontity/core/src/client",\n`;
+          packages.forEach(({ name, namespaces, mode }) => {
+            template += `      "${name}/src/${site.mode}/client",\n`;
+          });
+          template += `    ],
+    () => {
+      const client = require("@frontity/core/src/client").default;\n`;
+          packages.forEach(({ name, namespaces, mode }) => {
+            return namespaces.length > 0
+              ? (template += `      const { ${namespaces.join(
+                  ", "
+                )} } = require("${name}/src/${site.mode}/client");\n`)
+              : (template += `      const ${getVariable(
+                  name,
+                  mode
+                )} = require("${name}/src/${site.mode}/client");\n`);
+          });
+          template += "      const namespaces = {\n";
+          packages.forEach(({ name, namespaces, mode }) => {
+            return namespaces.length > 0
+              ? (template += namespaces.map(ns => `        ${ns},\n`).join(" "))
+              : (template += `        ...${getVariable(name, mode)},\n`);
+          });
+          template += "      };\n      client({ namespaces });\n    }\n  );\n}";
+        }
+
         // Create sub-folder for site.
         await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
         // Write the file and return the bundle.
@@ -173,13 +201,25 @@ export const generateClientEntryPoints = async ({
   )).filter(bundle => bundle);
 };
 
-export default async ({ sites, outDir }) => {
+export default async ({
+  sites,
+  outDir,
+  mode
+}: {
+  sites: Site[];
+  outDir: string;
+  mode: Mode;
+}) => {
   // Check if all the packages are installed.
   await checkForPackages({ sites });
 
   // Generate the bundles. One for the server.
   const serverEntryPoints = await generateServerEntryPoint({ sites, outDir });
-  const clientEntryPoints = await generateClientEntryPoints({ sites, outDir });
+  const clientEntryPoints = await generateClientEntryPoints({
+    sites,
+    outDir,
+    mode
+  });
 
   return [...clientEntryPoints, serverEntryPoints];
 };

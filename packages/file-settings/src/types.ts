@@ -16,6 +16,12 @@ export type Package = {
   settings?: object; // Default: undefined
 };
 
+export type NormalizedPackage = Package & {
+  active: boolean; // Default: true
+  namespaces: string[]; // Default: undefined
+  settings: object; // Default: undefined
+};
+
 type Mono = Base & {
   name?: string;
 };
@@ -41,6 +47,15 @@ export type MonoSettings<T = Package> = Imported<T> & Mono;
 
 export type MultiSettings<T = Package> = Imported<T> & Multi;
 
-export type NormalizedSettings<T = Package> = Normalized<T> & Multi;
-
 export type Settings<T = Package> = MonoSettings<T> | MultiSettings<T>[];
+
+export type NormalizedSettings<T = NormalizedPackage> = Normalized<T> & Multi;
+
+export type Site = {
+  name: string;
+  mode: string;
+  packages: {
+    name: string;
+    namespaces: string[];
+  }[];
+};

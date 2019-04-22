@@ -1,4 +1,4 @@
-import "./utils/env-and-defaults";
+import "./utils/envs";
 import Argv from "minimist";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
@@ -38,10 +38,7 @@ const dev = async ({
   const sites = await getAllSites();
 
   // Generate the bundles. One for the server, one for each client site.
-  const entryPoints = await generateEntryPoints({
-    sites,
-    outDir
-  });
+  const entryPoints = await generateEntryPoints({ sites, outDir, mode });
 
   // Start dev using webpack dev server with express.
   const { app, done } = await createApp({ mode, port, isHttps, target });
