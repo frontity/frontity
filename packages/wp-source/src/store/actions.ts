@@ -1,4 +1,4 @@
-import { Action } from "./types";
+import { Action, DataArchive, Data } from "./types";
 
 export const fetch: Action<{
   name: string;
@@ -9,13 +9,15 @@ export const fetch: Action<{
 
   // return if the data that it's about to be fetched already exists
   if (!page && state.data[name]) return;
-  if (page && state.data[name] && state.data[name].page[page]) return;
+  if (page && state.data[name] && (<DataArchive>state.data[name]).page[page])
+    return;
 
   // init data
-  const nameData: any = state.data[name] || {};
+  const nameData: Data = state.data[name] || {
+    isFetching: true
+  };
   state.data[name] = nameData; // asign it back
 
-  nameData.isFetching = true;
   const { handler, params } = effects.resolver.match(ctx, { name, page });
   handler(ctx, { name, params, page });
   nameData.isFetching = false;

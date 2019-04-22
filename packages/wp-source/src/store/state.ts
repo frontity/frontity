@@ -1,5 +1,7 @@
+import { DataMap } from "./types";
+
 export const state = {
-  data: {},
+  data: {} as DataMap,
   taxonomy: {},
   category: {},
   tag: {},
