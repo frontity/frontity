@@ -3,7 +3,7 @@ import { Namespace } from "@frontity/types/namespace";
 import flatten from "lodash/flatten";
 import { getVariable } from "../../utils/packages";
 
-type Packages = {
+export type Packages = {
   [key: string]: { [key: string]: Namespace };
 };
 

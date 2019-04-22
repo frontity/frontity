@@ -8,5 +8,5 @@ export interface Namespace {
   Components?: {
     [key: string]: React.ReactType;
   };
-  Store: Store;
+  Store?: Store;
 }
