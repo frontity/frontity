@@ -1,5 +1,8 @@
 import React from "react";
 import { Namespace } from "@frontity/types/namespace";
+import loadable from "@loadable/component";
+
+const Dynamic = loadable(() => import("./dynamic2"));
 
 const ThemeStore = {
   state: {
@@ -14,7 +17,12 @@ const CommentsStore = {
 };
 
 export const theme: Namespace = {
-  Root: () => <div>Hi from Extension example 2!</div>,
+  Root: () => (
+    <>
+      <div>Hi from Extension example 2!</div>
+      <Dynamic />
+    </>
+  ),
   Fills: () => <div>I am a fill of extension example 2</div>,
   Store: ThemeStore
 };
