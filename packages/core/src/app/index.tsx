@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import loadable from "@loadable/component";
 import { Namespace } from "@frontity/types/namespace";
 import Hemlet from "react-helmet";
+import { cache } from "emotion";
+import { CacheProvider } from "@emotion/core";
 
 const Dynamic = loadable(() => import("./dynamic"));
 
@@ -12,7 +14,7 @@ type Props = {
 const App: React.FunctionComponent<Props> = ({ namespaces }) => {
   const [counter, setCounter] = useState(0);
   return (
-    <>
+    <CacheProvider value={cache}>
       <Hemlet>
         <title>Frontity</title>
       </Hemlet>
@@ -25,7 +27,7 @@ const App: React.FunctionComponent<Props> = ({ namespaces }) => {
       {Object.entries(namespaces).map(
         ([name, { Fills }]) => Fills && <Fills key={name} />
       )}
-    </>
+    </CacheProvider>
   );
 };
 

@@ -34,6 +34,7 @@ export interface EntryPoints {
 export type FrontityTags = {
   script?: string;
   link?: string;
+  style?: string;
 };
 
 export type HeadTags = {

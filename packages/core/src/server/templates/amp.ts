@@ -1,6 +1,6 @@
 import { Template } from "../../types";
 
-const template: Template = ({ html, head }) => `<!doctype html>
+const template: Template = ({ html, frontity, head }) => `<!doctype html>
 <html amp>
   <head>
     <meta charset="utf-8">
@@ -12,6 +12,7 @@ const template: Template = ({ html, head }) => `<!doctype html>
     ${head.meta}
     ${head.link}
     ${head.script}
+    ${frontity.style}
   </head>
   <body ${head.bodyAttributes}>
     ${html}

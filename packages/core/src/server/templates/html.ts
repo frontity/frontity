@@ -12,6 +12,7 @@ const template: Template = ({ html, frontity, head }) => `<!doctype html>
         ${head.script}
         ${head.style}
         ${frontity.link}
+        ${frontity.style}
       </head>
       <body ${head.bodyAttributes}>
         <div id="root">${html}</div>
