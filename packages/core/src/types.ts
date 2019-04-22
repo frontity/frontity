@@ -31,12 +31,29 @@ export interface EntryPoints {
   path: string;
 }
 
+export type FrontityTags = {
+  script?: string;
+  link?: string;
+};
+
+export type HeadTags = {
+  link: string;
+  base: string;
+  bodyAttributes: string;
+  htmlAttributes: string;
+  meta: string;
+  noscript: string;
+  script: string;
+  style: string;
+  title: string;
+};
+
 export type Template = ({
   html,
-  scriptTags,
-  linkTags
+  frontity,
+  head
 }: {
   html: string;
-  scriptTags?: string;
-  linkTags?: string;
+  frontity: FrontityTags;
+  head: HeadTags;
 }) => string;

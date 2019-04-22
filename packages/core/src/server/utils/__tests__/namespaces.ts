@@ -1,5 +1,5 @@
 import { NormalizedSettings } from "@frontity/file-settings";
-import { getNamespaces, Packages } from "../namespaces";
+import getNamespaces, { Packages } from "../namespaces";
 import { getVariable } from "../../../utils/packages";
 
 const defaultSettings = {

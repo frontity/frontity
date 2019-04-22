@@ -53,6 +53,7 @@
     "promise-monofill": "^1.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-helmet": "^5.2.0",
     "ts-node": "^8.0.3",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.6",
@@ -61,6 +62,7 @@
     "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
+    "@frontity/types": "^1.0.0",
     "@types/babel-core": "^6.25.6",
     "@types/express": "^4.16.1",
     "@types/fs-extra": "^5.0.5",
@@ -76,12 +78,12 @@
     "@types/node": "^11.13.0",
     "@types/react": "^16.8.6",
     "@types/react-dom": "^16.8.2",
+    "@types/react-helmet": "^5.0.8",
     "@types/webpack": "^4.4.25",
     "@types/webpack-bundle-analyzer": "^2.13.1",
     "@types/webpack-dev-middleware": "^2.0.2",
     "@types/webpack-env": "^1.13.9",
     "@types/webpack-hot-middleware": "^2.16.5",
-    "@frontity/types": "^1.0.0",
     "jest": "^24.3.1",
     "ts-jest": "^24.0.0"
   }

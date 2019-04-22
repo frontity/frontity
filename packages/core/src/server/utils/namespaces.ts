@@ -12,7 +12,7 @@ type Namespaces = {
 };
 
 // Get the correct namespaces for the server, depending on the site loaded.
-export const getNamespaces = ({
+export default ({
   packages,
   settings
 }: {
