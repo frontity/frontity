@@ -1,4 +1,4 @@
-import { Action, DataArchive, Data } from "./types";
+import { Action, DataArchive, Data } from "../types";
 
 export const fetch: Action<{
   name: string;
@@ -19,25 +19,25 @@ export const fetch: Action<{
   state.data[name] = nameData; // asign it back
 
   const { handler, params } = effects.resolver.match(ctx, { name, page });
-  handler(ctx, { name, params, page });
+  await handler(ctx, { name, params, page });
   nameData.isFetching = false;
 };
 
 export const populate: Action<{
-  entities: any[] | any;
-}> = ({ state, actions }, { entities }) =>
-  Promise.all(
-    Object.entries(entities).map(([, single]) =>
-      Promise.all(
-        Object.entries(single).map(async ([, entity]) => {
-          const { type, id, link } = entity;
-          const name = new URL(link).pathname;
-          state.source[type][id] = entity;
-          await actions.source.fetch({ name });
-        })
-      )
-    )
-  );
+  entities: any;
+}> = async (ctx, { entities }) => {
+  const { state, actions } = ctx;
+  await actions.source.fetch({ name: "fuck" });
+
+  for (let [, single] of Object.entries(entities)) {
+    for (let [, entity] of Object.entries(single)) {
+      const { type, id, link } = entity;
+      const name = new URL(link).pathname;
+      state.source[type][id] = entity;
+      await fetch(ctx, { name });
+    }
+  }
+};
 
 // // I'm not sure this should be an action anymore
 // export const register: Action<{

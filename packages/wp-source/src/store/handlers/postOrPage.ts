@@ -1,4 +1,4 @@
-import { Handler } from "../types";
+import { Handler } from "../../types";
 import { normalize } from "./utils";
 
 const postOrPageHandler: Handler = async (ctx, { name, params }) => {

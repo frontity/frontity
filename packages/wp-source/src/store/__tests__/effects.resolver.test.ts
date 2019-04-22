@@ -1,5 +1,5 @@
 import { resolver } from "../effects";
-import { Handler, Context } from "../types";
+import { Handler, Context } from "../../types";
 
 const patterns = {
   postArchive: "/",

@@ -1,4 +1,4 @@
-import { Handler } from "../types";
+import { Handler } from "../../types";
 import { normalize, getTotal, getTotalPages, addPage } from "./utils";
 
 const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {

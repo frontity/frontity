@@ -1,8 +1,7 @@
-import { OnInitialize } from "./types";
+// import { OnInitialize } from "../types";
 
-const onInitialize: OnInitialize = async ({
+const onInitialize = async ({
   state,
-  actions,
   effects
 }) => {
   // get API default values from settins

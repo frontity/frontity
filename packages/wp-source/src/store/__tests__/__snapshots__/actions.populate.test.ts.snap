@@ -1,808 +1,622 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`actions populate list of posts 1`] = `
-Object {
-  "1": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "replies": Array [
-        Array [
-          Object {
-            "author": 0,
-            "author_avatar_urls": Object {
-              "24": "http://1.gravatar.com/avatar/?s=24&d=mm&r=g",
-              "48": "http://1.gravatar.com/avatar/?s=48&d=mm&r=g",
-              "96": "http://1.gravatar.com/avatar/?s=96&d=mm&r=g",
-            },
-            "author_name": "A WordPress Commenter",
-            "author_url": "https://wordpress.org/",
-            "content": Object {
-              "rendered": "<p>Hi, this is a comment.<br />
+Array [
+  Object {
+    "args": Array [
+      Object {
+        "avatar_urls": Object {
+          "24": "http://0.gravatar.com/avatar/?s=24&d=mm&r=g",
+          "48": "http://0.gravatar.com/avatar/?s=48&d=mm&r=g",
+          "96": "http://0.gravatar.com/avatar/?s=96&d=mm&r=g",
+        },
+        "description": "",
+        "id": 1,
+        "link": "http://frontity.test/author/admin/",
+        "name": "admin",
+        "slug": "admin",
+        "type": "author",
+        "url": "",
+      },
+    ],
+    "method": "set",
+    "path": "source.author.1",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./author/admin/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 1,
+        "link": "http://frontity.test/category/uncategorized/",
+        "name": "Uncategorized",
+        "slug": "uncategorized",
+        "taxonomy": "category",
+        "type": "category",
+      },
+    ],
+    "method": "set",
+    "path": "source.category.1",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./category/uncategorized/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 4,
+        "link": "http://frontity.test/category/aut-vel-dolores-exercitationem-cupiditate-et-quis-aperiam/",
+        "name": "Aut vel dolores exercitationem cupiditate et quis aperiam",
+        "slug": "aut-vel-dolores-exercitationem-cupiditate-et-quis-aperiam",
+        "taxonomy": "category",
+        "type": "category",
+      },
+    ],
+    "method": "set",
+    "path": "source.category.4",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./category/aut-vel-dolores-exercitationem-cupiditate-et-quis-aperiam/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 6,
+        "link": "http://frontity.test/category/et-modi-distinctio-voluptatem-quia-cupiditate-labore-corrupti-perferendis-ut-autem/",
+        "name": "Et modi distinctio voluptatem quia cupiditate labore corrupti perferendis ut autem",
+        "slug": "et-modi-distinctio-voluptatem-quia-cupiditate-labore-corrupti-perferendis-ut-autem",
+        "taxonomy": "category",
+        "type": "category",
+      },
+    ],
+    "method": "set",
+    "path": "source.category.6",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./category/et-modi-distinctio-voluptatem-quia-cupiditate-labore-corrupti-perferendis-ut-autem/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 7,
+        "link": "http://frontity.test/category/beatae-numquam-tempore-ut-aut-architecto-dolor-adipisci-asperiores-distinctio-facere-perferendis/",
+        "name": "Beatae numquam tempore ut aut architecto dolor adipisci asperiores distinctio facere perferendis",
+        "slug": "beatae-numquam-tempore-ut-aut-architecto-dolor-adipisci-asperiores-distinctio-facere-perferendis",
+        "taxonomy": "category",
+        "type": "category",
+      },
+    ],
+    "method": "set",
+    "path": "source.category.7",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./category/beatae-numquam-tempore-ut-aut-architecto-dolor-adipisci-asperiores-distinctio-facere-perferendis/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 9,
+        "link": "http://frontity.test/category/odio-distinctio-odit-numquam-asperiores-neque-eos-sed/",
+        "name": "Odio distinctio odit numquam asperiores neque eos sed",
+        "slug": "odio-distinctio-odit-numquam-asperiores-neque-eos-sed",
+        "taxonomy": "category",
+        "type": "category",
+      },
+    ],
+    "method": "set",
+    "path": "source.category.9",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./category/odio-distinctio-odit-numquam-asperiores-neque-eos-sed/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 13,
+        "link": "http://frontity.test/tag/est-velit-earum-ut-nam-voluptates-asperiores-odio-alias-nihil-eum-ratione-et-repudiandae/",
+        "name": "Est velit earum ut nam voluptates asperiores odio alias nihil eum ratione et repudiandae",
+        "slug": "est-velit-earum-ut-nam-voluptates-asperiores-odio-alias-nihil-eum-ratione-et-repudiandae",
+        "taxonomy": "tag",
+        "type": "tag",
+      },
+    ],
+    "method": "set",
+    "path": "source.tag.13",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./tag/est-velit-earum-ut-nam-voluptates-asperiores-odio-alias-nihil-eum-ratione-et-repudiandae/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 15,
+        "link": "http://frontity.test/category/dolorem-ut-ea-sit-quidem-et-quia-id-qui-provident/",
+        "name": "Dolorem ut ea sit quidem et quia id qui provident",
+        "slug": "dolorem-ut-ea-sit-quidem-et-quia-id-qui-provident",
+        "taxonomy": "category",
+        "type": "category",
+      },
+    ],
+    "method": "set",
+    "path": "source.category.15",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./category/dolorem-ut-ea-sit-quidem-et-quia-id-qui-provident/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 16,
+        "link": "http://frontity.test/category/sit-ut-vero-illo-consequatur-hic-ut-voluptate-qui/",
+        "name": "Sit ut vero illo consequatur hic ut voluptate qui",
+        "slug": "sit-ut-vero-illo-consequatur-hic-ut-voluptate-qui",
+        "taxonomy": "category",
+        "type": "category",
+      },
+    ],
+    "method": "set",
+    "path": "source.category.16",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./category/sit-ut-vero-illo-consequatur-hic-ut-voluptate-qui/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 17,
+        "link": "http://frontity.test/tag/a-id-autem-et-esse-id-adipisci/",
+        "name": "A id autem et esse id adipisci",
+        "slug": "a-id-autem-et-esse-id-adipisci",
+        "taxonomy": "tag",
+        "type": "tag",
+      },
+    ],
+    "method": "set",
+    "path": "source.tag.17",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./tag/a-id-autem-et-esse-id-adipisci/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "id": 19,
+        "link": "http://frontity.test/tag/possimus-minima-amet-eum-alias-quo-magni-quas-a-est-amet-et-sunt/",
+        "name": "Possimus minima amet eum alias quo magni quas a est amet et sunt",
+        "slug": "possimus-minima-amet-eum-alias-quo-magni-quas-a-est-amet-et-sunt",
+        "taxonomy": "tag",
+        "type": "tag",
+      },
+    ],
+    "method": "set",
+    "path": "source.tag.19",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./tag/possimus-minima-amet-eum-alias-quo-magni-quas-a-est-amet-et-sunt/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "_embedded": Object {
+          "author": Array [
+            1,
+          ],
+          "replies": Array [
+            Array [
+              Object {
+                "author": 0,
+                "author_avatar_urls": Object {
+                  "24": "http://1.gravatar.com/avatar/?s=24&d=mm&r=g",
+                  "48": "http://1.gravatar.com/avatar/?s=48&d=mm&r=g",
+                  "96": "http://1.gravatar.com/avatar/?s=96&d=mm&r=g",
+                },
+                "author_name": "A WordPress Commenter",
+                "author_url": "https://wordpress.org/",
+                "content": Object {
+                  "rendered": "<p>Hi, this is a comment.<br />
 To get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br />
 Commenter avatars come from <a href=\\"https://gravatar.com\\">Gravatar</a>.</p>
 ",
-            },
-            "date": "2019-03-11T11:46:53",
-            "id": 1,
-            "link": "http://frontity.test/hello-world/#comment-1",
-            "parent": 0,
-            "type": "comment",
-          },
-        ],
-      ],
-      "wp:term": Array [
-        Array [
+                },
+                "date": "2019-03-11T11:46:53",
+                "id": 1,
+                "link": "http://frontity.test/hello-world/#comment-1",
+                "parent": 0,
+                "type": "comment",
+              },
+            ],
+          ],
+          "wp:term": Array [
+            Array [
+              1,
+            ],
+            Array [],
+            Array [],
+          ],
+        },
+        "author": 1,
+        "categories": Array [
           1,
         ],
-        Array [],
-        Array [],
-      ],
-    },
-    "author": 1,
-    "categories": Array [
-      1,
-    ],
-    "comment_status": "open",
-    "content": Object {
-      "protected": false,
-      "rendered": "
+        "comment_status": "open",
+        "content": Object {
+          "protected": false,
+          "rendered": "
 <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
 ",
-    },
-    "date": "2019-03-11T11:46:53",
-    "date_gmt": "2019-03-11T11:46:53",
-    "excerpt": Object {
-      "protected": false,
-      "rendered": "<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
+        },
+        "date": "2019-03-11T11:46:53",
+        "date_gmt": "2019-03-11T11:46:53",
+        "excerpt": Object {
+          "protected": false,
+          "rendered": "<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
 ",
-    },
-    "featured_media": 0,
-    "format": "standard",
-    "guid": Object {
-      "rendered": "http://frontity.test/?p=1",
-    },
-    "id": 1,
-    "link": "http://frontity.test/hello-world/",
-    "meta": Array [],
-    "modified": "2019-03-11T11:46:53",
-    "modified_gmt": "2019-03-11T11:46:53",
-    "news": Array [],
-    "ping_status": "open",
-    "slug": "hello-world",
-    "status": "publish",
-    "sticky": false,
-    "tags": Array [],
-    "taxonomiesMap": Object {
-      "category": Array [
-        1,
-      ],
-    },
-    "template": "",
-    "title": Object {
-      "rendered": "Hello world!",
-    },
-    "type": "post",
+        },
+        "featured_media": 0,
+        "format": "standard",
+        "guid": Object {
+          "rendered": "http://frontity.test/?p=1",
+        },
+        "id": 1,
+        "link": "http://frontity.test/hello-world/",
+        "meta": Array [],
+        "modified": "2019-03-11T11:46:53",
+        "modified_gmt": "2019-03-11T11:46:53",
+        "news": Array [],
+        "ping_status": "open",
+        "slug": "hello-world",
+        "status": "publish",
+        "sticky": false,
+        "tags": Array [],
+        "taxonomiesMap": Object {
+          "category": Array [
+            1,
+          ],
+        },
+        "template": "",
+        "title": Object {
+          "rendered": "Hello world!",
+        },
+        "type": "post",
+      },
+    ],
+    "method": "set",
+    "path": "source.post.1",
   },
-  "112": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        113,
-      ],
-      "wp:term": Array [
-        Array [
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./hello-world/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "_embedded": Object {
+          "author": Array [
+            1,
+          ],
+          "wp:featuredmedia": Array [
+            84,
+          ],
+          "wp:term": Array [
+            Array [
+              7,
+              16,
+              1,
+            ],
+            Array [
+              17,
+              13,
+              19,
+            ],
+            Array [],
+          ],
+        },
+        "author": 1,
+        "categories": Array [
+          7,
+          16,
+          1,
+        ],
+        "comment_status": "open",
+        "content": Object {
+          "protected": false,
+          "rendered": "<blockquote><p>Odio tenetur qui veniam. Facere eaque voluptate enim facilis. Nemo omnis sed rerum velit.</p></blockquote>
+",
+        },
+        "date": "2019-02-13T15:37:00",
+        "date_gmt": "2019-02-13T15:37:00",
+        "excerpt": Object {
+          "protected": false,
+          "rendered": "<p>Odio tenetur qui veniam. Facere eaque voluptate enim facilis. Nemo omnis sed rerum velit.</p>
+",
+        },
+        "featured_media": 84,
+        "format": "standard",
+        "guid": Object {
+          "rendered": "http://frontity.test/veniam-reiciendis-esse-aliquid/",
+        },
+        "id": 83,
+        "link": "http://frontity.test/veniam-reiciendis-esse-aliquid/",
+        "meta": Array [],
+        "modified": "2019-02-13T15:37:00",
+        "modified_gmt": "2019-02-13T15:37:00",
+        "news": Array [],
+        "ping_status": "open",
+        "slug": "veniam-reiciendis-esse-aliquid",
+        "status": "publish",
+        "sticky": false,
+        "tags": Array [
+          17,
+          13,
+          19,
+        ],
+        "taxonomiesMap": Object {
+          "category": Array [
+            7,
+            16,
+            1,
+          ],
+          "tag": Array [
+            17,
+            13,
+            19,
+          ],
+        },
+        "template": "",
+        "title": Object {
+          "rendered": "Veniam reiciendis esse aliquid",
+        },
+        "type": "post",
+      },
+    ],
+    "method": "set",
+    "path": "source.post.83",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./veniam-reiciendis-esse-aliquid/",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "_embedded": Object {
+          "author": Array [
+            1,
+          ],
+          "wp:featuredmedia": Array [
+            113,
+          ],
+          "wp:term": Array [
+            Array [
+              4,
+              15,
+              6,
+              9,
+            ],
+            Array [
+              17,
+              13,
+              19,
+            ],
+            Array [],
+          ],
+        },
+        "author": 1,
+        "categories": Array [
           4,
           15,
           6,
           9,
         ],
-        Array [
+        "comment_status": "open",
+        "content": Object {
+          "protected": false,
+          "rendered": "<h1>Mollitia debitis commodi dolor suscipit voluptas voluptatem dolor. Voluptate eligendi suscipit voluptates in. Velit perferendis saepe consequuntur rem animi</h1>
+",
+        },
+        "date": "2019-01-09T13:14:41",
+        "date_gmt": "2019-01-09T13:14:41",
+        "excerpt": Object {
+          "protected": false,
+          "rendered": "<p>Mollitia debitis commodi dolor suscipit voluptas voluptatem dolor. Voluptate eligendi suscipit voluptates in. Velit perferendis saepe consequuntur rem animi</p>
+",
+        },
+        "featured_media": 113,
+        "format": "standard",
+        "guid": Object {
+          "rendered": "http://frontity.test/eum-ipsum-eos-sit-sed-sint/",
+        },
+        "id": 112,
+        "link": "http://frontity.test/eum-ipsum-eos-sit-sed-sint/",
+        "meta": Array [],
+        "modified": "2019-01-09T13:14:41",
+        "modified_gmt": "2019-01-09T13:14:41",
+        "news": Array [],
+        "ping_status": "closed",
+        "slug": "eum-ipsum-eos-sit-sed-sint",
+        "status": "publish",
+        "sticky": false,
+        "tags": Array [
           17,
           13,
           19,
         ],
-        Array [],
-      ],
-    },
-    "author": 1,
-    "categories": Array [
-      4,
-      15,
-      6,
-      9,
-    ],
-    "comment_status": "open",
-    "content": Object {
-      "protected": false,
-      "rendered": "<h1>Mollitia debitis commodi dolor suscipit voluptas voluptatem dolor. Voluptate eligendi suscipit voluptates in. Velit perferendis saepe consequuntur rem animi</h1>
-",
-    },
-    "date": "2019-01-09T13:14:41",
-    "date_gmt": "2019-01-09T13:14:41",
-    "excerpt": Object {
-      "protected": false,
-      "rendered": "<p>Mollitia debitis commodi dolor suscipit voluptas voluptatem dolor. Voluptate eligendi suscipit voluptates in. Velit perferendis saepe consequuntur rem animi</p>
-",
-    },
-    "featured_media": 113,
-    "format": "standard",
-    "guid": Object {
-      "rendered": "http://frontity.test/eum-ipsum-eos-sit-sed-sint/",
-    },
-    "id": 112,
-    "link": "http://frontity.test/eum-ipsum-eos-sit-sed-sint/",
-    "meta": Array [],
-    "modified": "2019-01-09T13:14:41",
-    "modified_gmt": "2019-01-09T13:14:41",
-    "news": Array [],
-    "ping_status": "closed",
-    "slug": "eum-ipsum-eos-sit-sed-sint",
-    "status": "publish",
-    "sticky": false,
-    "tags": Array [
-      17,
-      13,
-      19,
-    ],
-    "taxonomiesMap": Object {
-      "category": Array [
-        4,
-        15,
-        6,
-        9,
-      ],
-      "tag": Array [
-        17,
-        13,
-        19,
-      ],
-    },
-    "template": "",
-    "title": Object {
-      "rendered": "Eum ipsum eos sit sed sint",
-    },
-    "type": "post",
-  },
-  "83": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        84,
-      ],
-      "wp:term": Array [
-        Array [
-          7,
-          16,
-          1,
-        ],
-        Array [
-          17,
-          13,
-          19,
-        ],
-        Array [],
-      ],
-    },
-    "author": 1,
-    "categories": Array [
-      7,
-      16,
-      1,
-    ],
-    "comment_status": "open",
-    "content": Object {
-      "protected": false,
-      "rendered": "<blockquote><p>Odio tenetur qui veniam. Facere eaque voluptate enim facilis. Nemo omnis sed rerum velit.</p></blockquote>
-",
-    },
-    "date": "2019-02-13T15:37:00",
-    "date_gmt": "2019-02-13T15:37:00",
-    "excerpt": Object {
-      "protected": false,
-      "rendered": "<p>Odio tenetur qui veniam. Facere eaque voluptate enim facilis. Nemo omnis sed rerum velit.</p>
-",
-    },
-    "featured_media": 84,
-    "format": "standard",
-    "guid": Object {
-      "rendered": "http://frontity.test/veniam-reiciendis-esse-aliquid/",
-    },
-    "id": 83,
-    "link": "http://frontity.test/veniam-reiciendis-esse-aliquid/",
-    "meta": Array [],
-    "modified": "2019-02-13T15:37:00",
-    "modified_gmt": "2019-02-13T15:37:00",
-    "news": Array [],
-    "ping_status": "open",
-    "slug": "veniam-reiciendis-esse-aliquid",
-    "status": "publish",
-    "sticky": false,
-    "tags": Array [
-      17,
-      13,
-      19,
-    ],
-    "taxonomiesMap": Object {
-      "category": Array [
-        7,
-        16,
-        1,
-      ],
-      "tag": Array [
-        17,
-        13,
-        19,
-      ],
-    },
-    "template": "",
-    "title": Object {
-      "rendered": "Veniam reiciendis esse aliquid",
-    },
-    "type": "post",
-  },
-}
-`;
-
-exports[`actions populate list of posts 2`] = `
-Object {
-  "1": Object {
-    "id": 1,
-    "link": "http://frontity.test/category/uncategorized/",
-    "name": "Uncategorized",
-    "slug": "uncategorized",
-    "taxonomy": "category",
-    "type": "category",
-  },
-  "15": Object {
-    "id": 15,
-    "link": "http://frontity.test/category/dolorem-ut-ea-sit-quidem-et-quia-id-qui-provident/",
-    "name": "Dolorem ut ea sit quidem et quia id qui provident",
-    "slug": "dolorem-ut-ea-sit-quidem-et-quia-id-qui-provident",
-    "taxonomy": "category",
-    "type": "category",
-  },
-  "16": Object {
-    "id": 16,
-    "link": "http://frontity.test/category/sit-ut-vero-illo-consequatur-hic-ut-voluptate-qui/",
-    "name": "Sit ut vero illo consequatur hic ut voluptate qui",
-    "slug": "sit-ut-vero-illo-consequatur-hic-ut-voluptate-qui",
-    "taxonomy": "category",
-    "type": "category",
-  },
-  "4": Object {
-    "id": 4,
-    "link": "http://frontity.test/category/aut-vel-dolores-exercitationem-cupiditate-et-quis-aperiam/",
-    "name": "Aut vel dolores exercitationem cupiditate et quis aperiam",
-    "slug": "aut-vel-dolores-exercitationem-cupiditate-et-quis-aperiam",
-    "taxonomy": "category",
-    "type": "category",
-  },
-  "6": Object {
-    "id": 6,
-    "link": "http://frontity.test/category/et-modi-distinctio-voluptatem-quia-cupiditate-labore-corrupti-perferendis-ut-autem/",
-    "name": "Et modi distinctio voluptatem quia cupiditate labore corrupti perferendis ut autem",
-    "slug": "et-modi-distinctio-voluptatem-quia-cupiditate-labore-corrupti-perferendis-ut-autem",
-    "taxonomy": "category",
-    "type": "category",
-  },
-  "7": Object {
-    "id": 7,
-    "link": "http://frontity.test/category/beatae-numquam-tempore-ut-aut-architecto-dolor-adipisci-asperiores-distinctio-facere-perferendis/",
-    "name": "Beatae numquam tempore ut aut architecto dolor adipisci asperiores distinctio facere perferendis",
-    "slug": "beatae-numquam-tempore-ut-aut-architecto-dolor-adipisci-asperiores-distinctio-facere-perferendis",
-    "taxonomy": "category",
-    "type": "category",
-  },
-  "9": Object {
-    "id": 9,
-    "link": "http://frontity.test/category/odio-distinctio-odit-numquam-asperiores-neque-eos-sed/",
-    "name": "Odio distinctio odit numquam asperiores neque eos sed",
-    "slug": "odio-distinctio-odit-numquam-asperiores-neque-eos-sed",
-    "taxonomy": "category",
-    "type": "category",
-  },
-}
-`;
-
-exports[`actions populate list of posts 3`] = `
-Object {
-  "13": Object {
-    "id": 13,
-    "link": "http://frontity.test/tag/est-velit-earum-ut-nam-voluptates-asperiores-odio-alias-nihil-eum-ratione-et-repudiandae/",
-    "name": "Est velit earum ut nam voluptates asperiores odio alias nihil eum ratione et repudiandae",
-    "slug": "est-velit-earum-ut-nam-voluptates-asperiores-odio-alias-nihil-eum-ratione-et-repudiandae",
-    "taxonomy": "tag",
-    "type": "tag",
-  },
-  "17": Object {
-    "id": 17,
-    "link": "http://frontity.test/tag/a-id-autem-et-esse-id-adipisci/",
-    "name": "A id autem et esse id adipisci",
-    "slug": "a-id-autem-et-esse-id-adipisci",
-    "taxonomy": "tag",
-    "type": "tag",
-  },
-  "19": Object {
-    "id": 19,
-    "link": "http://frontity.test/tag/possimus-minima-amet-eum-alias-quo-magni-quas-a-est-amet-et-sunt/",
-    "name": "Possimus minima amet eum alias quo magni quas a est amet et sunt",
-    "slug": "possimus-minima-amet-eum-alias-quo-magni-quas-a-est-amet-et-sunt",
-    "taxonomy": "tag",
-    "type": "tag",
-  },
-}
-`;
-
-exports[`actions populate list of posts 4`] = `
-Object {
-  "113": Object {
-    "alt_text": "",
-    "author": 1,
-    "caption": Object {
-      "rendered": "",
-    },
-    "date": "2019-04-10T09:47:34",
-    "id": 113,
-    "link": "http://frontity.test/113/",
-    "media_details": Object {},
-    "media_type": "image",
-    "mime_type": "image/jpeg",
-    "slug": "113",
-    "source_url": "http://frontity.test/wp-content/uploads/2019/04/9ee08884-e986-37bb-9e3e-6c742af8ff9c.jpg",
-    "title": Object {
-      "rendered": "",
-    },
-    "type": "attachment",
-  },
-  "84": Object {
-    "alt_text": "",
-    "author": 1,
-    "caption": Object {
-      "rendered": "",
-    },
-    "date": "2019-04-10T09:47:02",
-    "id": 84,
-    "link": "http://frontity.test/84/",
-    "media_details": Object {},
-    "media_type": "image",
-    "mime_type": "image/jpeg",
-    "slug": "84",
-    "source_url": "http://frontity.test/wp-content/uploads/2019/04/f561cebe-f042-37cc-ba31-cf202fb98a1b.jpg",
-    "title": Object {
-      "rendered": "",
-    },
-    "type": "attachment",
-  },
-}
-`;
-
-exports[`actions populate list of posts 5`] = `
-Object {
-  "1": Object {
-    "avatar_urls": Object {
-      "24": "http://0.gravatar.com/avatar/?s=24&d=mm&r=g",
-      "48": "http://0.gravatar.com/avatar/?s=48&d=mm&r=g",
-      "96": "http://0.gravatar.com/avatar/?s=96&d=mm&r=g",
-    },
-    "description": "",
-    "id": 1,
-    "link": "http://frontity.test/author/admin/",
-    "name": "admin",
-    "slug": "admin",
-    "type": "author",
-    "url": "",
-  },
-}
-`;
-
-exports[`actions populate pages 1`] = `Object {}`;
-
-exports[`actions populate pages 2`] = `Object {}`;
-
-exports[`actions populate pages 3`] = `Object {}`;
-
-exports[`actions populate pages 4`] = `
-Object {
-  "105": Object {
-    "_links": Object {
-      "about": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/types/attachment",
+        "taxonomiesMap": Object {
+          "category": Array [
+            4,
+            15,
+            6,
+            9,
+          ],
+          "tag": Array [
+            17,
+            13,
+            19,
+          ],
         },
-      ],
-      "author": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/users/1",
+        "template": "",
+        "title": Object {
+          "rendered": "Eum ipsum eos sit sed sint",
         },
-      ],
-      "collection": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media",
-        },
-      ],
-      "replies": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/comments?post=105",
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media/105",
-        },
-      ],
-    },
-    "alt_text": "",
-    "author": 1,
-    "caption": Object {
-      "rendered": "",
-    },
-    "date": "2019-04-10T09:47:22",
-    "id": 105,
-    "link": "http://frontity.test/voluptatem-eligendi-impedit-necessitatibus-iusto/attachment/105/",
-    "media_details": Object {
-      "file": "2019/04/dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253.jpg",
-      "height": 3456,
-      "image_meta": Object {
-        "aperture": "0",
-        "camera": "",
-        "caption": "",
-        "copyright": "",
-        "created_timestamp": "0",
-        "credit": "",
-        "focal_length": "0",
-        "iso": "0",
-        "keywords": Array [],
-        "orientation": "0",
-        "shutter_speed": "0",
-        "title": "",
+        "type": "post",
       },
-      "sizes": Object {
-        "full": Object {
-          "file": "dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253.jpg",
-          "height": 3456,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253.jpg",
-          "width": 5184,
-        },
-        "large": Object {
-          "file": "dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-1024x683.jpg",
-          "height": 683,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-1024x683.jpg",
-          "width": 1024,
-        },
-        "medium": Object {
-          "file": "dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-300x200.jpg",
-          "height": 200,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-300x200.jpg",
-          "width": 300,
-        },
-        "medium_large": Object {
-          "file": "dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-768x512.jpg",
-          "height": 512,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-768x512.jpg",
-          "width": 768,
-        },
-        "post-thumbnail": Object {
-          "file": "dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-1568x1045.jpg",
-          "height": 1045,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-1568x1045.jpg",
-          "width": 1568,
-        },
-        "thumbnail": Object {
-          "file": "dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-150x150.jpg",
-          "height": 150,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253-150x150.jpg",
-          "width": 150,
-        },
+    ],
+    "method": "set",
+    "path": "source.post.112",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
       },
-      "width": 5184,
-    },
-    "media_type": "image",
-    "mime_type": "image/jpeg",
-    "slug": "105",
-    "source_url": "http://frontity.test/wp-content/uploads/2019/04/dd9c4323-7a95-31fb-a4ee-d8c3f3ba8253.jpg",
-    "title": Object {
-      "rendered": "",
-    },
-    "type": "attachment",
+    ],
+    "method": "set",
+    "path": "source.data./eum-ipsum-eos-sit-sed-sint/",
   },
-  "123": Object {
-    "_links": Object {
-      "about": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/types/attachment",
+  Object {
+    "args": Array [
+      Object {
+        "alt_text": "",
+        "author": 1,
+        "caption": Object {
+          "rendered": "",
         },
-      ],
-      "author": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/users/1",
+        "date": "2019-04-10T09:47:02",
+        "id": 84,
+        "link": "http://frontity.test/84/",
+        "media_details": Object {},
+        "media_type": "image",
+        "mime_type": "image/jpeg",
+        "slug": "84",
+        "source_url": "http://frontity.test/wp-content/uploads/2019/04/f561cebe-f042-37cc-ba31-cf202fb98a1b.jpg",
+        "title": Object {
+          "rendered": "",
         },
-      ],
-      "collection": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media",
-        },
-      ],
-      "replies": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/comments?post=123",
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media/123",
-        },
-      ],
-    },
-    "alt_text": "",
-    "author": 1,
-    "caption": Object {
-      "rendered": "",
-    },
-    "date": "2019-04-10T09:47:41",
-    "id": 123,
-    "link": "http://frontity.test/rerum-velit-omnis-et-laborum-natus-consequatur/attachment/123/",
-    "media_details": Object {},
-    "media_type": "image",
-    "mime_type": "image/jpeg",
-    "slug": "123",
-    "source_url": "http://frontity.test/wp-content/uploads/2019/04/7ea0a31f-d3a5-3d0f-b51c-f2cbd1ddb059.jpg",
-    "title": Object {
-      "rendered": "",
-    },
-    "type": "attachment",
-  },
-  "125": Object {
-    "_links": Object {
-      "about": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/types/attachment",
-        },
-      ],
-      "author": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/users/1",
-        },
-      ],
-      "collection": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media",
-        },
-      ],
-      "replies": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/comments?post=125",
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media/125",
-        },
-      ],
-    },
-    "alt_text": "",
-    "author": 1,
-    "caption": Object {
-      "rendered": "",
-    },
-    "date": "2019-04-10T09:47:42",
-    "id": 125,
-    "link": "http://frontity.test/consequatur-deserunt-neque-delectus-tempora-iusto/attachment/125/",
-    "media_details": Object {},
-    "media_type": "image",
-    "mime_type": "image/jpeg",
-    "slug": "125",
-    "source_url": "http://frontity.test/wp-content/uploads/2019/04/b895953f-777d-3447-9fa9-b3fbd14677d6.jpg",
-    "title": Object {
-      "rendered": "",
-    },
-    "type": "attachment",
-  },
-  "86": Object {
-    "_links": Object {
-      "about": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/types/attachment",
-        },
-      ],
-      "author": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/users/1",
-        },
-      ],
-      "collection": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media",
-        },
-      ],
-      "replies": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/comments?post=86",
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media/86",
-        },
-      ],
-    },
-    "alt_text": "",
-    "author": 1,
-    "caption": Object {
-      "rendered": "",
-    },
-    "date": "2019-04-10T09:47:03",
-    "id": 86,
-    "link": "http://frontity.test/quo-et-dolorem-quisquam-quidem-esse-rerum/attachment/86/",
-    "media_details": Object {},
-    "media_type": "image",
-    "mime_type": "image/jpeg",
-    "slug": "86",
-    "source_url": "http://frontity.test/wp-content/uploads/2019/04/4c748519-287f-37b4-a58a-1152a99ecf60.jpg",
-    "title": Object {
-      "rendered": "",
-    },
-    "type": "attachment",
-  },
-  "88": Object {
-    "_links": Object {
-      "about": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/types/attachment",
-        },
-      ],
-      "author": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/users/1",
-        },
-      ],
-      "collection": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media",
-        },
-      ],
-      "replies": Array [
-        Object {
-          "embeddable": true,
-          "href": "http://frontity.test/wp-json/wp/v2/comments?post=88",
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/media/88",
-        },
-      ],
-    },
-    "alt_text": "",
-    "author": 1,
-    "caption": Object {
-      "rendered": "",
-    },
-    "date": "2019-04-10T09:47:04",
-    "id": 88,
-    "link": "http://frontity.test/magni-dolorem-ut-et/attachment/88/",
-    "media_details": Object {
-      "file": "2019/04/3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609.jpg",
-      "height": 3622,
-      "image_meta": Object {
-        "aperture": "0",
-        "camera": "",
-        "caption": "",
-        "copyright": "",
-        "created_timestamp": "0",
-        "credit": "",
-        "focal_length": "0",
-        "iso": "0",
-        "keywords": Array [],
-        "orientation": "0",
-        "shutter_speed": "0",
-        "title": "",
+        "type": "attachment",
       },
-      "sizes": Object {
-        "full": Object {
-          "file": "3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609.jpg",
-          "height": 3622,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609.jpg",
-          "width": 2758,
-        },
-        "large": Object {
-          "file": "3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-780x1024.jpg",
-          "height": 1024,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-780x1024.jpg",
-          "width": 780,
-        },
-        "medium": Object {
-          "file": "3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-228x300.jpg",
-          "height": 300,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-228x300.jpg",
-          "width": 228,
-        },
-        "medium_large": Object {
-          "file": "3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-768x1009.jpg",
-          "height": 1009,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-768x1009.jpg",
-          "width": 768,
-        },
-        "post-thumbnail": Object {
-          "file": "3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-1568x2059.jpg",
-          "height": 2059,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-1568x2059.jpg",
-          "width": 1568,
-        },
-        "thumbnail": Object {
-          "file": "3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-150x150.jpg",
-          "height": 150,
-          "mime_type": "image/jpeg",
-          "source_url": "http://frontity.test/wp-content/uploads/2019/04/3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609-150x150.jpg",
-          "width": 150,
-        },
+    ],
+    "method": "set",
+    "path": "source.attachment.84",
+  },
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
       },
-      "width": 2758,
-    },
-    "media_type": "image",
-    "mime_type": "image/jpeg",
-    "slug": "88",
-    "source_url": "http://frontity.test/wp-content/uploads/2019/04/3f2c4de3-0b20-3c3e-b8c6-d1c8190e1609.jpg",
-    "title": Object {
-      "rendered": "",
-    },
-    "type": "attachment",
+    ],
+    "method": "set",
+    "path": "source.data./84/",
   },
-}
-`;
-
-exports[`actions populate pages 5`] = `
-Object {
-  "1": Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/users",
+  Object {
+    "args": Array [
+      Object {
+        "alt_text": "",
+        "author": 1,
+        "caption": Object {
+          "rendered": "",
         },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://frontity.test/wp-json/wp/v2/users/1",
+        "date": "2019-04-10T09:47:34",
+        "id": 113,
+        "link": "http://frontity.test/113/",
+        "media_details": Object {},
+        "media_type": "image",
+        "mime_type": "image/jpeg",
+        "slug": "113",
+        "source_url": "http://frontity.test/wp-content/uploads/2019/04/9ee08884-e986-37bb-9e3e-6c742af8ff9c.jpg",
+        "title": Object {
+          "rendered": "",
         },
-      ],
-    },
-    "avatar_urls": Object {
-      "24": "http://0.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
-      "48": "http://0.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
-      "96": "http://0.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g",
-    },
-    "description": "",
-    "id": 1,
-    "link": "http://frontity.test/author/admin/",
-    "name": "admin",
-    "slug": "admin",
-    "type": "author",
-    "url": "",
+        "type": "attachment",
+      },
+    ],
+    "method": "set",
+    "path": "source.attachment.113",
   },
-}
+  Object {
+    "args": Array [
+      Object {
+        "isFetching": false,
+      },
+    ],
+    "method": "set",
+    "path": "source.data./113/",
+  },
+]
 `;

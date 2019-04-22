@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions › fetch adds data if that name doesn't exist yet 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {
+        "id": 12,
+        "isArchive": true,
+        "isCategory": true,
+        "isFetching": false,
+        "isTaxonomy": true,
+        "page": Array [],
+        "type": "category",
+      },
+    ],
+    "method": "set",
+    "path": "source.data./category/nature",
+  },
+  Object {
+    "args": Array [
+      "category",
+    ],
+    "method": "set",
+    "path": "source.data./category/nature.type",
+  },
+  Object {
+    "args": Array [
+      12,
+    ],
+    "method": "set",
+    "path": "source.data./category/nature.id",
+  },
+  Object {
+    "args": Array [
+      true,
+    ],
+    "method": "set",
+    "path": "source.data./category/nature.isArchive",
+  },
+  Object {
+    "args": Array [
+      true,
+    ],
+    "method": "set",
+    "path": "source.data./category/nature.isTaxonomy",
+  },
+  Object {
+    "args": Array [
+      true,
+    ],
+    "method": "set",
+    "path": "source.data./category/nature.isCategory",
+  },
+  Object {
+    "args": Array [
+      true,
+    ],
+    "method": "set",
+    "path": "source.data./category/nature.isFetching",
+  },
+  Object {
+    "args": Array [
+      Array [],
+    ],
+    "method": "set",
+    "path": "source.data./category/nature.page",
+  },
+]
+`;

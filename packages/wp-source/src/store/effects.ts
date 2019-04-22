@@ -1,9 +1,7 @@
 import fetch from "cross-fetch";
-import { normalize } from "normalizr";
 import pathToRegexp from "path-to-regexp";
 import { Key } from "path-to-regexp";
-import { Context, Handler } from "./types";
-import * as schemas from "../schemas";
+import { Context, Handler } from "../types";
 
 const wpComBase = "https://public-api.wordpress.com/wp/v2/sites/";
 

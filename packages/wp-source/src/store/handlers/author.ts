@@ -1,4 +1,4 @@
-import { Handler } from "../types";
+import { Handler, DataAuthor } from "../../types";
 import {
   getIdBySlug,
   normalize,
@@ -21,7 +21,7 @@ const authorHandler: Handler = async (ctx, { name, params, page = 1 }) => {
 
   const authorId = await getIdBySlug(ctx, "author", params.slug);
 
-  const data = state.data[name];
+  const data = <DataAuthor>state.data[name];
 
   const doesNotExist = !state.author[authorId];
   const hasNotPage = doesNotExist || !(data.page && data.page[page]);
@@ -50,6 +50,7 @@ const authorHandler: Handler = async (ctx, { name, params, page = 1 }) => {
     Object.assign(data, {
       type: "author",
       id: authorId,
+      otherProps: 2,
       link,
       isAuthor: true,
       total,

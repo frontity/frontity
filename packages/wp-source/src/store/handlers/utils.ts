@@ -1,6 +1,6 @@
 import { normalize as norm } from "normalizr";
 import * as schemas from "../../schemas";
-import { Context } from "../types";
+import { Context } from "../../types";
 
 const typesToEndpoints = {
   author: "users",
