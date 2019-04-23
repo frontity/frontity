@@ -77,6 +77,6 @@ export default async (passedOptions?: Options) => {
   } catch (error) {
     const message = `${chalk.bold.red("Error: ")}${chalk.red(error.message)}`;
     if (options.emitter) emit(message);
-    else console.error(message);
+    else throw error;
   }
 };
