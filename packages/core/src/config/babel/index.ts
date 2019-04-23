@@ -53,7 +53,9 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
           modules: false
         }
       ],
-      "@babel/preset-react"
+      "@babel/preset-react",
+      // Babel plugin for Emotion CSS property and other goodness.
+      "@emotion/babel-preset-css-prop"
     ];
     const plugins = [
       // Support for dynamic imports: import("./my-file")
