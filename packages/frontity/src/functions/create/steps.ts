@@ -1,5 +1,7 @@
 import { EOL } from "os";
 import { resolve } from "path";
+import { promisify } from "util";
+import { exec } from "child_process";
 import {
   ensureDir,
   readdir as readDir,
@@ -7,13 +9,10 @@ import {
   writeFile,
   remove
 } from "fs-extra";
-import { exec } from "shelljs";
 import { extract } from "tar";
 import p from "phin";
 import { mergeRight } from "ramda";
 import { Options, PackageJson } from "./types";
-
-let dirExisted: boolean = false;
 
 // This function normalizes and validates options.
 export const normalizeOptions = (
@@ -34,7 +33,7 @@ export const normalizeOptions = (
 };
 
 // This function ensures that the directory exists and is empty.
-export const ensureProjectDir = async ({ path }: Options) => {
+export const ensureProjectDir = async ({ path }: Options): Promise<boolean> => {
   await ensureDir(path);
   process.chdir(path);
   const dirContent = await readDir("./");
@@ -45,13 +44,16 @@ export const ensureProjectDir = async ({ path }: Options) => {
     const notAllowedContent = dirContent.filter(
       content => !allowedContent.includes(content.toLowerCase())
     );
+
     // If it's not an empty repository.
     if (notAllowedContent.length) {
       throw new Error("The directory passed to `create` function is not empty");
-    } else {
-      dirExisted = true;
     }
+
+    return true;
   }
+
+  return false;
 };
 
 // This function creates a `package.json` file.
@@ -120,10 +122,7 @@ export const cloneStarterTheme = async ({ path, theme }: Options) => {
   ).dependencies[theme];
   await ensureDir(themePath);
   process.chdir(themePath);
-  const command = `npm pack ${theme}`;
-  await new Promise(resolve =>
-    exec(command, { silent: true }, () => resolve())
-  );
+  await promisify(exec)(`npm pack ${theme}`);
   const tarball = (await readDir("./")).find(file => /\.tgz$/.test(file));
   await extract({ file: tarball, strip: 1 });
   await remove(tarball);
@@ -132,15 +131,15 @@ export const cloneStarterTheme = async ({ path, theme }: Options) => {
 // This function installs the Frontity packages.
 export const installDependencies = async ({ path }: Options) => {
   process.chdir(path);
-  const command = `npm install`;
-  await new Promise(resolve =>
-    exec(command, { silent: true }, () => resolve())
-  );
+  await promisify(exec)("npm install");
 };
 
 // This function removes the files and directories created
 // with `frontity create`.
-export const revertProgress = async ({ path }: Options) => {
+export const revertProgress = async (
+  dirExisted: boolean,
+  { path }: Options
+) => {
   process.chdir(path);
   if (dirExisted) {
     const removableContent = [

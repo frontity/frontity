@@ -26,13 +26,14 @@ export default async (passedOptions?: Options) => {
     if (options.emitter) options.emitter.emit("create", message, step);
   };
 
-  let step: Promise<void>;
+  let step: Promise<any>;
+  let dirExisted: boolean;
 
   try {
     // 2. Ensures that the project dir exists and is empty.
     step = ensureProjectDir(options);
     emit(`Ensuring ${chalk.yellow(options.path)} directory.`, step);
-    await step;
+    dirExisted = await step;
 
     try {
       // This nested try catch avoids removing the directory
@@ -70,7 +71,7 @@ export default async (passedOptions?: Options) => {
       );
     } catch (error) {
       // Remove all files generated.
-      await revertProgress(options);
+      await revertProgress(dirExisted, options);
       throw error;
     }
   } catch (error) {

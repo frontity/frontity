@@ -1,5 +1,139 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`cloneStarterTheme works as expected 1`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+  Array [
+    "./packages/mars-theme",
+  ],
+]
+`;
+
+exports[`cloneStarterTheme works as expected 2`] = `
+Array [
+  Array [
+    "./package.json",
+    Object {
+      "encoding": "utf8",
+    },
+  ],
+]
+`;
+
+exports[`cloneStarterTheme works as expected 3`] = `
+Array [
+  Array [
+    "./packages/mars-theme",
+  ],
+]
+`;
+
+exports[`cloneStarterTheme works as expected 4`] = `
+Array [
+  Array [
+    "npm pack @frontity/mars-theme",
+    [Function],
+  ],
+]
+`;
+
+exports[`cloneStarterTheme works as expected 5`] = `
+Array [
+  Array [
+    "./",
+  ],
+]
+`;
+
+exports[`cloneStarterTheme works as expected 6`] = `
+Array [
+  Array [
+    Object {
+      "file": "file.tgz",
+      "strip": 1,
+    },
+  ],
+]
+`;
+
+exports[`cloneStarterTheme works as expected 7`] = `
+Array [
+  Array [
+    "file.tgz",
+  ],
+]
+`;
+
+exports[`createFrontitySettings works when extension is \`js\` 1`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`createFrontitySettings works when extension is \`js\` 2`] = `
+Array [
+  Array [
+    "/Users/orballo/Frontity/frontity/packages/frontity/src/templates/settings-js-template",
+    Object {
+      "encoding": "utf8",
+    },
+  ],
+]
+`;
+
+exports[`createFrontitySettings works when extension is \`js\` 3`] = `
+Array [
+  Array [
+    "frontity.settings.js",
+    "{
+  \\"name\\": \\"random-name\\",
+  \\"packages\\": [
+    \\"frontity\\",
+    \\"@frontity/file-settings\\"
+  ]
+}",
+  ],
+]
+`;
+
+exports[`createFrontitySettings works when extension is \`ts\` 1`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`createFrontitySettings works when extension is \`ts\` 2`] = `
+Array [
+  Array [
+    "/Users/orballo/Frontity/frontity/packages/frontity/src/templates/settings-ts-template",
+    Object {
+      "encoding": "utf8",
+    },
+  ],
+]
+`;
+
+exports[`createFrontitySettings works when extension is \`ts\` 3`] = `
+Array [
+  Array [
+    "frontity.settings.ts",
+    "{
+  \\"name\\": \\"random-name\\",
+  \\"packages\\": [
+    \\"frontity\\",
+    \\"@frontity/file-settings\\"
+  ]
+}",
+  ],
+]
+`;
+
 exports[`createPackageJson works with a theme like "@frontity/mars-theme" 1`] = `
 Array [
   Array [
@@ -132,6 +266,73 @@ exports[`ensureProjectDir works when passing an existent path with an empty repo
 Array [
   Array [
     "./",
+  ],
+]
+`;
+
+exports[`installDependencies works as expected 1`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`installDependencies works as expected 2`] = `
+Array [
+  Array [
+    "npm install",
+    [Function],
+  ],
+]
+`;
+
+exports[`revertProgress works if the project directory didn't exist 1`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`revertProgress works if the project directory didn't exist 2`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`revertProgress works if the project directory existed 1`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`revertProgress works if the project directory existed 2`] = `
+Array [
+  Array [
+    "node_modules",
+  ],
+  Array [
+    "frontity.settings.js",
+  ],
+  Array [
+    "frontity.settings.ts",
+  ],
+  Array [
+    "tsconfig.json",
+  ],
+  Array [
+    "package.json",
+  ],
+  Array [
+    "package-lock.json",
+  ],
+  Array [
+    "packages",
   ],
 ]
 `;
