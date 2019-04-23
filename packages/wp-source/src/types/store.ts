@@ -34,7 +34,8 @@ export type Handler = (
   payload: {
     name: string;
     params: { [param: string]: any };
-    page: number;
+    page?: number;
+    isPopulated?: boolean;
   }
 ) => Promise<void>;
 

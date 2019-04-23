@@ -8,7 +8,10 @@ import { getIdBySlug, populate, getTotal, getTotalPages } from "./utils";
 // 3. category exists but not the page (!source.data[name].page[page])
 //    !source.data[name].page[page]
 
-const categoryHandler: Handler = async (ctx, { name, params, page = 1 }) => {
+const categoryHandler: Handler = async (
+  ctx,
+  { name, params, page = 1, isPopulated }
+) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
@@ -20,7 +23,7 @@ const categoryHandler: Handler = async (ctx, { name, params, page = 1 }) => {
 
   let response: Response;
 
-  if (doesNotExist || hasNotPage) {
+  if (!isPopulated && (doesNotExist || hasNotPage)) {
     // Fetch data from the WP REST API
     response = await effects.api.get({
       endpoint: "posts",
@@ -28,11 +31,7 @@ const categoryHandler: Handler = async (ctx, { name, params, page = 1 }) => {
     });
 
     // Add entities to the state
-    const dataPage = await populate(ctx, response);
-
-    // Add the received page of entities
-    data.page = data.page || [];
-    data.page[page - 1] = dataPage; // transform page number to index!!
+    await populate(ctx, { response, name, page });
   }
 
   // Init the category if it doesn't exist

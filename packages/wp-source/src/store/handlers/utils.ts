@@ -1,6 +1,6 @@
 import { normalize } from "normalizr";
 import * as schemas from "../../schemas";
-import { Context, DataPage } from "../../types";
+import { Context, ArchiveData, DataPage } from "../../types";
 import { fetch } from "../actions";
 
 const typesToEndpoints = {
@@ -47,18 +47,40 @@ export const getTotalPages = (response: Response): number =>
 
 export const populate = async (
   ctx: Context,
-  response: Response
+  {
+    response,
+    name,
+    page
+  }: {
+    response: Response;
+    name: string;
+    page?: number;
+  }
 ): Promise<DataPage> => {
   const { state } = ctx;
 
   // Normalize response
   const json = await response.json();
-
   const isList = json instanceof Array;
   const { entities, result } = normalize(
     json,
     isList ? schemas.list : schemas.entity
   );
+
+  // type, id and link of added entities
+  const entityList: DataPage = (isList ? result : [result]).map(
+    ({ id: entityId, schema }) => {
+      const { type, id, link } = entities[schema][entityId];
+      return { type, id, link };
+    }
+  );
+
+  if (page && isList) {
+    // Add the received page of entities
+    const data = <ArchiveData>state.source.data[name];
+    data.page = data.page || [];
+    data.page[page - 1] = entityList; // transform page number to index!!
+  }
 
   // add entities to state
   for (let [, single] of Object.entries(entities)) {
@@ -66,13 +88,9 @@ export const populate = async (
       const { type, id, link } = entity;
       const name = new URL(link).pathname;
       state.source[type][id] = entity;
-      await fetch(ctx, { name });
+      await fetch(ctx, { name, isPopulated: true });
     }
   }
 
-  // return type, id and link of added entities
-  return (isList ? result : [result]).map(({ id: entityId, schema }) => {
-    const { type, id, link } = entities[schema][entityId];
-    return { type, id, link };
-  });
+  return entityList;
 };

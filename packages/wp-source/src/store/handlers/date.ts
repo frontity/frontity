@@ -21,11 +21,7 @@ const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {
       params: { after: date, search: params.s, page }
     });
 
-    const dataPage = await populate(ctx, response);
-
-    // Add the received page of entities
-    data.page = data.page || [];
-    data.page[page - 1] = dataPage; // transform page number to index!!
+    await populate(ctx, { response, name, page });
   }
 
   // Init the date

@@ -8,7 +8,10 @@ import { getIdBySlug, getTotal, getTotalPages, populate } from "./utils";
 // 3. author exists but not the page (!source.data[name].page[page])
 //    !source.data[name].page[page]
 
-const authorHandler: Handler = async (ctx, { name, params, page = 1 }) => {
+const authorHandler: Handler = async (
+  ctx,
+  { name, params, page = 1, isPopulated }
+) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
@@ -21,17 +24,13 @@ const authorHandler: Handler = async (ctx, { name, params, page = 1 }) => {
 
   let response: Response;
 
-  if (doesNotExist || hasNotPage) {
+  if (!isPopulated && (doesNotExist || hasNotPage)) {
     response = await effects.api.get({
       endpoint: "posts",
       params: { author: authorId, search: params.s, page, _embed: true }
     });
 
-    const dataPage = await populate(ctx, response);
-
-    // Add the received page of entities
-    data.page = data.page || [];
-    data.page[page - 1] = dataPage; // transform page number to index!!
+    await populate(ctx, { response, name, page });
   }
 
   // Init the author if it doesn't exist
@@ -43,7 +42,7 @@ const authorHandler: Handler = async (ctx, { name, params, page = 1 }) => {
       link,
       isAuthor: true,
       total: getTotal(response),
-      totalPages: getTotalPages(response),
+      totalPages: getTotalPages(response)
     });
   }
 };

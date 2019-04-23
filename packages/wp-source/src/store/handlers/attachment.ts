@@ -8,7 +8,7 @@ const attachmentHandler: Handler = async (ctx, { name, params }) => {
   const { id } = params;
 
   // First, search attachment with the given slug
-  let attachment: EntityData = state.post[id];
+  let attachment: EntityData = state.attachment[id];
 
   // If none is found
   if (!attachment) {
@@ -17,7 +17,7 @@ const attachmentHandler: Handler = async (ctx, { name, params }) => {
       params: { include: id, _embed: true }
     });
 
-    [attachment] = await populate(ctx, response);
+    [attachment] = await populate(ctx, { response, name });
   }
 
   // Init data

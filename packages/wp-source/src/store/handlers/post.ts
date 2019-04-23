@@ -20,7 +20,7 @@ const postHandler: Handler = async (ctx, { name, params }) => {
       params: { slug, _embed: true }
     });
 
-    [post] = await populate(ctx, response);
+    [post] = await populate(ctx, { response, name });
   }
 
   // Init data

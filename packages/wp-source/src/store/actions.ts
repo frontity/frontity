@@ -3,7 +3,8 @@ import { Action, ArchiveData, Data } from "../types";
 export const fetch: Action<{
   name: string;
   page?: number;
-}> = async (ctx, { name, page }) => {
+  isPopulated?: boolean;
+}> = async (ctx, { name, page, isPopulated }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
@@ -21,7 +22,7 @@ export const fetch: Action<{
   const { handler, params } = effects.resolver.match(ctx, { name, page });
 
   try {
-    await handler(ctx, { name, params, page });
+    await handler(ctx, { name, params, page, isPopulated });
   } catch (e) {
     console.warn(`an error ocurred fetching '${name}'`, e);
     Object.assign(state.data[name], {

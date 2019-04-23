@@ -19,11 +19,7 @@ const postArchiveHandler: Handler = async (ctx, { name, params, page = 1 }) => {
     });
 
     // Add entities to the state
-    const dataPage = await populate(ctx, response);
-
-    // Add the received page of entities
-    data.page = data.page || [];
-    data.page[page - 1] = dataPage; // transform page number to index!!
+    await populate(ctx, { response, name, page });
 
     // Init data
     Object.assign(data, {

@@ -20,7 +20,7 @@ const pageHandler: Handler = async (ctx, { name, params }) => {
       params: { slug, _embed: true }
     });
 
-    [page] = await populate(ctx, response);
+    [page] = await populate(ctx, { response, name });
   }
 
   // Init data
