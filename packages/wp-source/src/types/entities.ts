@@ -1,6 +1,6 @@
 // ENTITIES
 
-export type Entity = {};
+export type Entity = Single | Attachment | Taxonomy | Author;
 
 export type Href = {
   href: string;

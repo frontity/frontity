@@ -1,6 +1,7 @@
-import { normalize as norm } from "normalizr";
+import { normalize } from "normalizr";
 import * as schemas from "../../schemas";
-import { Context } from "../../types";
+import { Context, DataPage } from "../../types";
+import { fetch } from "../actions";
 
 const typesToEndpoints = {
   author: "users",
@@ -38,29 +39,40 @@ export const getIdBySlug = async (
   return entity && entity.id;
 };
 
-// TODO - Promise must not return "any"
-export const normalize = async (response: Response): Promise<any> => {
-  const json = await response.json();
-  // Normalize response
-  const { entities } = norm(
-    json,
-    json instanceof Array ? schemas.list : schemas.entity
-  );
-  // Return just the attribute 'entities'
-  return entities;
-};
-
 export const getTotal = (response: Response): number =>
   parseInt(response.headers.get("X-WP-Total"));
 
 export const getTotalPages = (response: Response): number =>
   parseInt(response.headers.get("X-WP-TotalPages"));
 
-export const addPage = (data: any, page: number, entities: any[]) => {
-  data.page = data.page || [];
-  data.page[page || 1] = entities.map(({ type, id, link }) => ({
-    type,
-    id,
-    link
-  }));
+export const populate = async (
+  ctx: Context,
+  response: Response
+): Promise<DataPage> => {
+  const { state } = ctx;
+
+  // Normalize response
+  const json = await response.json();
+
+  const isList = json instanceof Array;
+  const { entities, result } = normalize(
+    json,
+    isList ? schemas.list : schemas.entity
+  );
+
+  // add entities to state
+  for (let [, single] of Object.entries(entities)) {
+    for (let [, entity] of Object.entries(single)) {
+      const { type, id, link } = entity;
+      const name = new URL(link).pathname;
+      state.source[type][id] = entity;
+      await fetch(ctx, { name });
+    }
+  }
+
+  // return type, id and link of added entities
+  return (isList ? result : [result]).map(({ id: entityId, schema }) => {
+    const { type, id, link } = entities[schema][entityId];
+    return { type, id, link };
+  });
 };

@@ -1,4 +1,4 @@
-import { Action, DataArchive, Data } from "../types";
+import { Action, ArchiveData, Data } from "../types";
 
 export const fetch: Action<{
   name: string;
@@ -9,7 +9,7 @@ export const fetch: Action<{
 
   // return if the data that it's about to be fetched already exists
   if (!page && state.data[name]) return;
-  if (page && state.data[name] && (<DataArchive>state.data[name]).page[page])
+  if (page && state.data[name] && (<ArchiveData>state.data[name]).page[page])
     return;
 
   // init data
@@ -22,37 +22,3 @@ export const fetch: Action<{
   await handler(ctx, { name, params, page });
   nameData.isFetching = false;
 };
-
-export const populate: Action<{
-  entities: any;
-}> = async (ctx, { entities }) => {
-  const { state, actions } = ctx;
-
-  for (let [, single] of Object.entries(entities)) {
-    for (let [, entity] of Object.entries(single)) {
-      const { type, id, link } = entity;
-      const name = new URL(link).pathname;
-      state.source[type][id] = entity;
-      await fetch(ctx, { name });
-    }
-  }
-};
-
-// for (let [, single] of Object.entries(entities)) {
-//   for (let [, entity] of Object.entries(single)) {
-//     const { type, id, link } = entity;
-//     const name = new URL(link).pathname;
-//     state.source[type][id] = entity;
-//     await actions.source.fetch({ name });
-//   }
-// }
-
-// // I'm not sure this should be an action anymore
-// export const register: Action<{
-//   pattern: string;
-//   handler: Handler;
-// }> = (ctx, { pattern, handler }) => {
-//   const effects = ctx.effects.source;
-//   // or just the effect right below
-//   effects.resolver.add(pattern, handler);
-// };

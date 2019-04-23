@@ -2,99 +2,91 @@ export type DataMap = {
   [name: string]: Data;
 };
 
+export type EntityData = {
+  type: string;
+  id: number;
+  link: string;
+};
+
+export type DataPage = EntityData[];
+
 export type Data =
-  | DataFetching
-  | DataArchive
-  | DataTaxonomy
-  | DataCategory
-  | DataTag
-  | DataAuthor
-  | DataPostTypeArchive
-  | DataPostArchive
-  | DataDate
-  | DataPostType
-  | DataPost
-  | DataPage
-  | DataAttachment
-  | Data404;
+  | FetchingData
+  | ArchiveData
+  | TaxonomyData
+  | CategoryData
+  | TagData
+  | AuthorData
+  | PostTypeArchiveData
+  | PostArchiveData
+  | DateData
+  | PostTypeData
+  | NotFoundData;
 
-// DATA FETCHING
+//  FETCHINGDATA
 
-export type DataFetching = {
+export type FetchingData = {
   isFetching: boolean;
   isReady?: boolean;
 };
 
 // ARCHIVES
 
-export type DataArchive = DataFetching & {
+export type ArchiveData = FetchingData & {
   isArchive: true;
-  page: {
-    type: string;
-    id: number;
-    link: string;
-  }[][];
+  page: DataPage[];
 };
 
-export type DataTaxonomy = DataArchive & {
+export type TaxonomyData = ArchiveData & {
   type: string;
   id: number;
   isTaxonomy: true;
 };
 
-export type DataCategory = DataTaxonomy & {
+export type CategoryData = TaxonomyData & {
   isCategory: true;
 };
 
-export type DataTag = DataTaxonomy & {
+export type TagData = TaxonomyData & {
   isTag: true;
 };
 
-export type DataAuthor = DataArchive & {
+export type AuthorData = ArchiveData & {
   id: number;
   isAuthor: true;
 };
 
-export type DataPostTypeArchive = DataFetching & {
+export type PostTypeArchiveData = FetchingData & {
   type: string;
   isPostTypeArchive: true;
 };
 
-export type DataPostArchive = DataPostTypeArchive & {
+export type PostArchiveData = PostTypeArchiveData & {
   isPostArchive: true;
   isHome: boolean;
   isFrontPage?: boolean;
 };
 
-export type DataDate = DataFetching & {
+export type DateData = FetchingData & {
   date: string;
   isDate: true;
 };
 
 // POST TYPES
 
-export type DataPostType = DataFetching & {
+export type PostTypeData = FetchingData & {
   type: string;
   id: number;
   isPostType: true;
-};
-
-export type DataPost = DataPostType & {
-  isPost: true;
-};
-
-export type DataPage = DataPostType & {
-  isPage: true;
+  isPost?: boolean;
+  isPage?: boolean;
   isFrontPage?: boolean;
-};
-
-export type DataAttachment = DataPostType & {
-  isAttachment: true;
-  isMedia: true;
+  isAttachment?: boolean;
+  isMedia?: boolean;
 };
 
 // NOT FOUND (OR ERROR)
 
-export type Data404 = DataFetching & {
+export type NotFoundData = FetchingData & {
   is404: true;
 };
