@@ -23,7 +23,7 @@
     "start": "node dist/commands.js",
     "dev": "ts-node src/commands.ts",
     "test": "jest --watch --config jest.config.json",
-    "test:ci": "jest --config jest.config.json",
+    "test:ci": "jest --config jest.config.json --colors",
     "build": "tsc --project ./tsconfig.build.json",
     "prepublish": "npm run build"
   },
