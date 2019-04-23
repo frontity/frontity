@@ -1,46 +1,41 @@
-import { Handler } from "../../types";
-import { addPage, normalize, getTotal, getTotalPages } from "./utils";
+import { Handler, PostArchiveData } from "../../types";
+import { populate, getTotal, getTotalPages } from "./utils";
 
 const postArchiveHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const state = ctx.state.source;
   const actions = ctx.actions.source;
   const effects = ctx.effects.source;
 
-  const data = state.data[name];
+  const data = <PostArchiveData>state.data[name];
 
   const hasNotPage = !(data.page && data.page[page]);
 
-  let entities: any;
-  let total: number;
-  let totalPages: number;
+  let response: Response;
 
   if (hasNotPage) {
-    const response = await effects.api.get({
+    response = await effects.api.get({
       endpoint: "posts",
-      params: { search: params.s, page }
+      params: { search: params.s, page, _embed: true }
     });
 
-    entities = await normalize(response);
-    total = getTotal(response);
-    totalPages = getTotalPages(response);
-
     // Add entities to the state
-    actions.populate({ entities });
+    const dataPage = await populate(ctx, response);
 
-    // Add the page if it doesn't exist
-    addPage(data, page, entities);
+    // Add the received page of entities
+    data.page = data.page || [];
+    data.page[page - 1] = dataPage; // transform page number to index!!
+
+    // Init data
+    Object.assign(data, {
+      type: "post",
+      isArchive: true,
+      isPostTypeArchive: true,
+      isPostArchive: true,
+      isHome: true,
+      total: getTotal(response),
+      totalPages: getTotalPages(response)
+    });
   }
-
-  // Init data
-  Object.assign(data, {
-    type: "post",
-    isArchive: true,
-    isPostTypeArchive: true,
-    isPostArchive: true,
-    isHome: true,
-    total,
-    totalPages
-  });
 };
 
 export default postArchiveHandler;

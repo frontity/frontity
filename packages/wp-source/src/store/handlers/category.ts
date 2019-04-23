@@ -1,11 +1,5 @@
-import { Handler } from "../../types";
-import {
-  getIdBySlug,
-  normalize,
-  getTotal,
-  getTotalPages,
-  addPage
-} from "./utils";
+import { Handler, CategoryData } from "../../types";
+import { getIdBySlug, populate, getTotal, getTotalPages } from "./utils";
 
 // 1. category isn't in "source.category"
 //    !source.category[catId]
@@ -16,41 +10,35 @@ import {
 
 const categoryHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const state = ctx.state.source;
-  const actions = ctx.actions.source;
   const effects = ctx.effects.source;
 
   const catId = await getIdBySlug(ctx, "category", params.slug);
-
-  const data = state.data[name];
+  const data = <CategoryData>state.data[name];
 
   const doesNotExist = !state.category[catId];
-  const hasNotPage =
-    doesNotExist || !(data.page && data.page[page]);
+  const hasNotPage = doesNotExist || !(data.page && data.page[page]);
 
-  let entities: any;
-  let total: number;
-  let totalPages: number;
+  let response: Response;
 
   if (doesNotExist || hasNotPage) {
-    const response = await effects.api.get({
+    // Fetch data from the WP REST API
+    response = await effects.api.get({
       endpoint: "posts",
-      params: { categories: catId, search: params.s, page }
+      params: { categories: catId, search: params.s, page, _embed: true }
     });
 
-    // Throw an error if the request has failed
-    if (!response.ok) throw new Error();
-
-    entities = await normalize(response);
-    total = getTotal(response);
-    totalPages = getTotalPages(response);
-
     // Add entities to the state
-    actions.populate({ entities });
+    const dataPage = await populate(ctx, response);
+
+    // Add the received page of entities
+    data.page = data.page || [];
+    data.page[page - 1] = dataPage; // transform page number to index!!
   }
 
   // Init the category if it doesn't exist
   if (doesNotExist) {
     const { link } = state.category[catId];
+
     Object.assign(data, {
       type: "category",
       id: catId,
@@ -58,13 +46,10 @@ const categoryHandler: Handler = async (ctx, { name, params, page = 1 }) => {
       isArchive: true,
       isTaxonomy: true,
       isCategory: true,
-      total,
-      totalPages
+      total: getTotal(response),
+      totalPages: getTotalPages(response)
     });
   }
-
-  // Add the page if it doesn't exist
-  if (hasNotPage) addPage(data, page, entities);
 };
 
 export default categoryHandler;

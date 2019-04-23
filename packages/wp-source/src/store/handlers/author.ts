@@ -1,11 +1,5 @@
-import { Handler, DataAuthor } from "../../types";
-import {
-  getIdBySlug,
-  normalize,
-  getTotal,
-  getTotalPages,
-  addPage
-} from "./utils";
+import { Handler, AuthorData } from "../../types";
+import { getIdBySlug, getTotal, getTotalPages, populate } from "./utils";
 
 // 1. author isn't in "source.author"
 //    !source.author[authorId]
@@ -16,32 +10,28 @@ import {
 
 const authorHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const state = ctx.state.source;
-  const actions = ctx.actions.source;
   const effects = ctx.effects.source;
 
   const authorId = await getIdBySlug(ctx, "author", params.slug);
 
-  const data = <DataAuthor>state.data[name];
+  const data = <AuthorData>state.data[name];
 
   const doesNotExist = !state.author[authorId];
   const hasNotPage = doesNotExist || !(data.page && data.page[page]);
 
-  let entities: any;
-  let total: number;
-  let totalPages: number;
+  let response: Response;
 
   if (doesNotExist || hasNotPage) {
-    const response = await effects.api.get({
+    response = await effects.api.get({
       endpoint: "posts",
-      params: { author: authorId, search: params.s, page }
+      params: { author: authorId, search: params.s, page, _embed: true }
     });
 
-    entities = await normalize(response);
-    total = getTotal(response);
-    totalPages = getTotalPages(response);
+    const dataPage = await populate(ctx, response);
 
-    // Add entities to the state
-    actions.populate({ entities });
+    // Add the received page of entities
+    data.page = data.page || [];
+    data.page[page - 1] = dataPage; // transform page number to index!!
   }
 
   // Init the author if it doesn't exist
@@ -50,16 +40,12 @@ const authorHandler: Handler = async (ctx, { name, params, page = 1 }) => {
     Object.assign(data, {
       type: "author",
       id: authorId,
-      otherProps: 2,
       link,
       isAuthor: true,
-      total,
-      totalPages
+      total: getTotal(response),
+      totalPages: getTotalPages(response),
     });
   }
-
-  // Add the page if it doesn't exist
-  if (hasNotPage) addPage(data, page, entities);
 };
 
 export default authorHandler;

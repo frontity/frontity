@@ -1,20 +1,16 @@
-import { Handler } from "../../types";
-import { normalize } from "./utils";
+import { Handler, PostTypeData, EntityData } from "../../types";
+import { populate } from "./utils";
 
 const postOrPageHandler: Handler = async (ctx, { name, params }) => {
   const state = ctx.state.source;
-  const actions = ctx.actions.source;
   const effects = ctx.effects.source;
 
   const { slug } = params;
 
-  let isPost: boolean;
-  let isPage: boolean;
-
   // First, search post and page with the given slug
   const sameSlug = (p: any) => p.slug === slug;
-  let post: any = Object.values(state.post).find(sameSlug);
-  let page: any = Object.values(state.page).find(sameSlug);
+  let post: EntityData = Object.values(state.post).find(sameSlug);
+  let page: EntityData = Object.values(state.page).find(sameSlug);
 
   // If none is found
   if (!(post || page)) {
@@ -29,20 +25,9 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
       })
     ]);
 
-    const postEntities = await normalize(postResponse);
-    const pageEntities = await normalize(pageResponse);
-
     // Add entities to the state
-    isPost = !!postEntities.length;
-    isPage = !!pageEntities.length;
-
-    if (isPost) {
-      [post] = postEntities;
-      actions.populate({ entities: post });
-    } else if (isPage) {
-      [page] = pageEntities;
-      actions.populate({ entities: page });
-    }
+    [post] = await populate(ctx, postResponse);
+    [page] = await populate(ctx, pageResponse);
   }
 
   // Init data
@@ -53,8 +38,8 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
       id,
       link,
       isPostType: true,
-      isPost,
-      isPage
+      isPost: !!post,
+      isPage: !!page
     });
   } else {
     Object.assign(state.data[name], {

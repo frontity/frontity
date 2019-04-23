@@ -1,66 +1,55 @@
-import { Handler } from "../../types";
-import {
-  getIdBySlug,
-  normalize,
-  getTotal,
-  getTotalPages,
-  addPage
-} from "./utils";
+import { Handler, TagData } from "../../types";
+import { getIdBySlug, populate, getTotal, getTotalPages } from "./utils";
 
 // 1. tag isn't in "source.tag"
-//    !source.tag[tagId]
+//    !source.tag[catId]
 // 2. tag exists in "source.tag"
-//     source.tag[tagId]
+//     source.tag[catId]
 // 3. tag exists but not the page (!source.data[name].page[page])
 //    !source.data[name].page[page]
 
 const tagHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const state = ctx.state.source;
-  const actions = ctx.actions.source;
   const effects = ctx.effects.source;
 
-  const tagId = await getIdBySlug(ctx, "tag", params.slug);
+  const catId = await getIdBySlug(ctx, "tag", params.slug);
+  const data = <TagData>state.data[name];
 
-  const data = state.data[name];
-
-  const doesNotExist = !state.tag[tagId];
+  const doesNotExist = !state.tag[catId];
   const hasNotPage = doesNotExist || !(data.page && data.page[page]);
 
-  let entities: any;
-  let total: number;
-  let totalPages: number;
+  let response: Response;
 
   if (doesNotExist || hasNotPage) {
-    const response = await effects.api.get({
+    // Fetch data from the WP REST API
+    response = await effects.api.get({
       endpoint: "posts",
-      params: { categories: tagId, search: params.s, page }
+      params: { categories: catId, search: params.s, page, _embed: true }
     });
 
-    entities = await normalize(response);
-    total = getTotal(response);
-    totalPages = getTotalPages(response);
-
     // Add entities to the state
-    actions.populate({ entities });
+    const dataPage = await populate(ctx, response);
+
+    // Add the received page of entities
+    data.page = data.page || [];
+    data.page[page - 1] = dataPage; // transform page number to index!!
   }
 
   // Init the tag if it doesn't exist
   if (doesNotExist) {
-    const { link } = state.tag[tagId];
+    const { link } = state.tag[catId];
+
     Object.assign(data, {
       type: "tag",
-      id: tagId,
+      id: catId,
       link,
       isArchive: true,
       isTaxonomy: true,
       isTag: true,
-      total,
-      totalPages
+      total: getTotal(response),
+      totalPages: getTotalPages(response)
     });
   }
-
-  // Add the page if it doesn't exist
-  if (hasNotPage) addPage(data, page, entities);
 };
 
 export default tagHandler;

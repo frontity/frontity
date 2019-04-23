@@ -1,17 +1,21 @@
-import attachmentHandler from "./attachment";
-import postOrPageHandler from "./postOrPage";
-import authorHandler from "./author";
-import categoryHandler from "./category";
-import tagHandler from "./tag";
-import postArchiveHandler from "./postArchive";
-import dateHandler from "./date";
+import attachment from "./attachment";
+import postOrPage from "./postOrPage";
+import post from "./post";
+import page from "./page";
+import author from "./author";
+import category from "./category";
+import tag from "./tag";
+import postArchive from "./postArchive";
+import date from "./date";
 
 export {
-  attachmentHandler,
-  postOrPageHandler,
-  authorHandler,
-  categoryHandler,
-  tagHandler,
-  postArchiveHandler,
-  dateHandler
+  attachment,
+  postOrPage,
+  post,
+  page,
+  author,
+  category,
+  tag,
+  postArchive,
+  date
 };

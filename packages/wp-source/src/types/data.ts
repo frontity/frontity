@@ -56,7 +56,7 @@ export type AuthorData = ArchiveData & {
   isAuthor: true;
 };
 
-export type PostTypeArchiveData = FetchingData & {
+export type PostTypeArchiveData = ArchiveData & {
   type: string;
   isPostTypeArchive: true;
 };
@@ -67,7 +67,7 @@ export type PostArchiveData = PostTypeArchiveData & {
   isFrontPage?: boolean;
 };
 
-export type DateData = FetchingData & {
+export type DateData = ArchiveData & {
   date: string;
   isDate: true;
 };

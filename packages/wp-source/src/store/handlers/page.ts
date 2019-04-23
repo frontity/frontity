@@ -1,14 +1,17 @@
-import { Handler } from "../../types";
-import { normalize } from "./utils";
+import { Handler, PostTypeData, EntityData } from "../../types";
+import { populate } from "./utils";
 
 const pageHandler: Handler = async (ctx, { name, params }) => {
   const state = ctx.state.source;
-  const actions = ctx.actions.source;
   const effects = ctx.effects.source;
 
   const { slug } = params;
 
-  let page: any = Object.values(state.page).find((p: any) => p.slug === slug);
+  let page: EntityData = Object.values(state.page).find(
+    (p: any) => p.slug === slug
+  );
+
+  const data = <PostTypeData>state.data[name];
 
   // If not found
   if (!page) {
@@ -17,14 +20,12 @@ const pageHandler: Handler = async (ctx, { name, params }) => {
       params: { slug, _embed: true }
     });
 
-    const entities = await normalize(response);
-    [page] = entities;
-    actions.populate({ entities });
+    [page] = await populate(ctx, response);
   }
 
   // Init data
   const { type, id, link } = page;
-  Object.assign(state.data[name], {
+  Object.assign(data, {
     type,
     id,
     link,

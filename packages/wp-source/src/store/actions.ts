@@ -19,6 +19,15 @@ export const fetch: Action<{
   state.data[name] = nameData; // asign it back
 
   const { handler, params } = effects.resolver.match(ctx, { name, page });
-  await handler(ctx, { name, params, page });
+
+  try {
+    await handler(ctx, { name, params, page });
+  } catch (e) {
+    console.warn(`an error ocurred fetching '${name}'`, e);
+    Object.assign(state.data[name], {
+      is404: true
+    });
+  }
+
   nameData.isFetching = false;
 };
