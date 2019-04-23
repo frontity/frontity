@@ -1,6 +1,6 @@
-// import { OnInitialize } from "../types";
+import { OnInitialize } from "../types";
 
-const onInitialize = async ({
+const onInitialize: OnInitialize = async ({
   state,
   effects
 }) => {

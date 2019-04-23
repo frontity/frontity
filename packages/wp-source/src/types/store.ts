@@ -1,5 +1,4 @@
 import { IConfig, IContext, IAction, IOnInitialize } from "overmind";
-// import { namespaced } from "overmind/config";
 import * as source from "../store";
 
 const settings = {
@@ -11,12 +10,6 @@ const settings = {
     }
   }
 };
-
-// const config = namespaced({ source, settings })
-
-// type TConfig = typeof config;
-
-// export type Config = IConfig<TConfig>;
 
 export type Config = IConfig<{
   state: {
@@ -45,7 +38,7 @@ export type Handler = (
   }
 ) => Promise<void>;
 
-// export type OnInitialize = IOnInitialize<Config>;
+export type OnInitialize = IOnInitialize<Config>;
 
 export type Settings = {
   apiUrl: string;
