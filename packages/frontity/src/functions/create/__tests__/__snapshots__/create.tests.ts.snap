@@ -120,7 +120,8 @@ exports[`create uses the emitter passed in options to log the errors 1`] = `
 Array [
   Array [
     "create",
-    "[1m[31mError: [39m[22m[31mMocked Error[39m",
+    "[1m[31mError: [39m[22m[31mMocked Error[39m
+",
     undefined,
   ],
 ]
