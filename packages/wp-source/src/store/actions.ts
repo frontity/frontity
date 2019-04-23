@@ -27,7 +27,6 @@ export const populate: Action<{
   entities: any;
 }> = async (ctx, { entities }) => {
   const { state, actions } = ctx;
-  await actions.source.fetch({ name: "fuck" });
 
   for (let [, single] of Object.entries(entities)) {
     for (let [, entity] of Object.entries(single)) {
@@ -38,6 +37,15 @@ export const populate: Action<{
     }
   }
 };
+
+// for (let [, single] of Object.entries(entities)) {
+//   for (let [, entity] of Object.entries(single)) {
+//     const { type, id, link } = entity;
+//     const name = new URL(link).pathname;
+//     state.source[type][id] = entity;
+//     await actions.source.fetch({ name });
+//   }
+// }
 
 // // I'm not sure this should be an action anymore
 // export const register: Action<{
