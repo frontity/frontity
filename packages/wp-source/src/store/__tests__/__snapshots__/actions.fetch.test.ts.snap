@@ -248,6 +248,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./author/admin/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -418,6 +425,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./harum-et-distinctio-necessitatibus-ut-est-ipsam/attachment/74/.isAttachment",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./harum-et-distinctio-necessitatibus-ut-est-ipsam/attachment/74/.isFetching",
   },
   Object {
     "args": Array [
@@ -594,6 +608,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./delectus-perspiciatis-quia-ut-sit/attachment/77/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -767,6 +788,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./velit-alias-molestiae-aspernatur-ipsam/attachment/79/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -875,6 +903,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./sint-culpa-est-esse/attachment/81/.isAttachment",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./sint-culpa-est-esse/attachment/81/.isFetching",
   },
   Object {
     "args": Array [
@@ -1051,6 +1086,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./sint-provident-ut-ut/attachment/83/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -1159,6 +1201,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./ducimus-accusamus-voluptatem-dignissimos/attachment/85/.isAttachment",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./ducimus-accusamus-voluptatem-dignissimos/attachment/85/.isFetching",
   },
   Object {
     "args": Array [
@@ -1335,6 +1384,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./optio-esse-sed-veniam-et-architecto/attachment/87/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -1446,6 +1502,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./ullam-non-enim-totam-eos-ad/attachment/90/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -1554,6 +1617,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./pariatur-quidem-aliquid-ipsa-consequuntur-ipsum-nihil-eos/attachment/93/.isAttachment",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./pariatur-quidem-aliquid-ipsa-consequuntur-ipsum-nihil-eos/attachment/93/.isFetching",
   },
   Object {
     "args": Array [
@@ -1730,6 +1800,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./facere-aut-blanditiis-possimus-quasi-quis/attachment/95/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -1779,6 +1856,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./category/uncategorized/",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./category/uncategorized/.isFetching",
   },
   Object {
     "args": Array [
@@ -1834,6 +1918,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./tag/japan/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -1883,6 +1974,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./category/ducimus-quibusdam-quisquam-ratione-voluptate-illo-numquam/",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./category/ducimus-quibusdam-quisquam-ratione-voluptate-illo-numquam/.isFetching",
   },
   Object {
     "args": Array [
@@ -1938,6 +2036,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./category/non-iste-sint-est-exercitationem-labore-laborum/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -1987,6 +2092,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./tag/porro-neque-molestias-et-provident/",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./tag/porro-neque-molestias-et-provident/.isFetching",
   },
   Object {
     "args": Array [
@@ -2042,6 +2154,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./tag/qui-enim-nemo-et-omnis-provident-expedita/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_links": Object {
           "about": Array [
@@ -2091,6 +2210,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./category/mollitia-ipsum-autem-omnis/",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./category/mollitia-ipsum-autem-omnis/.isFetching",
   },
   Object {
     "args": Array [
@@ -4350,6 +4476,13 @@ Eum fuga debitis minus quis harum. Modi commodi nam et non</h5>
     ],
     "method": "set",
     "path": "source.data./facere-aut-blanditiis-possimus-quasi-quis/.isPage",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./facere-aut-blanditiis-possimus-quasi-quis/.isFetching",
   },
   Object {
     "args": Array [
