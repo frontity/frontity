@@ -11,7 +11,8 @@ export type EntityData = {
 export type DataPage = EntityData[];
 
 export type Data =
-  | FetchingData
+  | BaseData
+  | NotFoundData
   | ArchiveData
   | TaxonomyData
   | CategoryData
@@ -21,72 +22,94 @@ export type Data =
   | PostArchiveData
   | DateData
   | PostTypeData
-  | NotFoundData;
+  | PostData
+  | PageData
+  | AttachmentData;
 
-//  FETCHINGDATA
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-export type FetchingData = {
+export type BaseData = {
   isFetching: boolean;
   isReady?: boolean;
+  is404?: false;
+  isArchive?: false;
+  isTaxonomy?: false;
+  isCategory?: false;
+  isTag?: false;
+  isAuthor?: false;
+  isPostTypeArchive?: false;
+  isPostArchive?: false;
+  isDate?: false;
+  isPostType?: false;
+  isPost?: false;
+  isPage?: false;
+  isAttachment?: false;
+};
+
+// NOT FOUND
+
+export type NotFoundData = Omit<BaseData, "is404"> & {
+  is404: true;
 };
 
 // ARCHIVES
 
-export type ArchiveData = FetchingData & {
+export type ArchiveData = Omit<BaseData, "isArchive"> & {
   isArchive: true;
   page: DataPage[];
 };
 
-export type TaxonomyData = ArchiveData & {
+export type TaxonomyData = Omit<ArchiveData, "isTaxonomy"> & {
+  isTaxonomy: true;
   type: string;
   id: number;
-  isTaxonomy: true;
 };
 
-export type CategoryData = TaxonomyData & {
+export type CategoryData = Omit<TaxonomyData, "isCategory"> & {
   isCategory: true;
 };
-
-export type TagData = TaxonomyData & {
+export type TagData = Omit<TaxonomyData, "isTag"> & {
   isTag: true;
 };
 
-export type AuthorData = ArchiveData & {
-  id: number;
+export type AuthorData = Omit<ArchiveData, "isAuthor"> & {
   isAuthor: true;
+  id: number;
 };
 
-export type PostTypeArchiveData = ArchiveData & {
-  type: string;
+export type PostTypeArchiveData = Omit<ArchiveData, "isPostTypeArchive"> & {
   isPostTypeArchive: true;
+  type: string;
 };
 
-export type PostArchiveData = PostTypeArchiveData & {
+export type PostArchiveData = Omit<PostTypeArchiveData, "isPostArchive"> & {
   isPostArchive: true;
   isHome: boolean;
   isFrontPage?: boolean;
 };
 
-export type DateData = ArchiveData & {
-  date: string;
+export type DateData = Omit<ArchiveData, "isDate"> & {
   isDate: true;
+  date: string;
 };
 
 // POST TYPES
 
-export type PostTypeData = FetchingData & {
+export type PostTypeData = Omit<BaseData, "isPostType"> & {
+  isPostType: true;
   type: string;
   id: number;
-  isPostType: true;
-  isPost?: boolean;
-  isPage?: boolean;
-  isFrontPage?: boolean;
-  isAttachment?: boolean;
-  isMedia?: boolean;
 };
 
-// NOT FOUND (OR ERROR)
+export type PostData = Omit<PostTypeData, "isPost"> & {
+  isPost: true;
+};
 
-export type NotFoundData = FetchingData & {
-  is404: true;
+export type PageData = Omit<PostTypeData, "isPage"> & {
+  isPage: true;
+  isFrontPage?: boolean;
+};
+
+export type AttachmentData = Omit<PostTypeData, "isAttachment"> & {
+  isAttachment: true;
 };
