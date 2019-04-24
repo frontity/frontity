@@ -28,6 +28,7 @@
     "prepublish": "npm run build"
   },
   "devDependencies": {
+    "@frontity/core": "^0.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
     "@types/jest": "^24.0.11",

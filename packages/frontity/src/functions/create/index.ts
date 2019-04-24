@@ -65,8 +65,10 @@ export default async (passedOptions?: Options) => {
           "\nFrontity project created."
         )}\n\nYou can start development with ${chalk.bold.green(
           "frontity dev"
-        )}.\nFor documentation visit ${chalk.underline.magenta(
+        )}.\nFor documentation please visit ${chalk.underline.magenta(
           "https://docs.frontity.org/"
+        )}.\nIf you need help please visit ${chalk.underline.magenta(
+          "https://community.frontity.org/"
         )}.\n`
       );
     } catch (error) {
@@ -75,8 +77,7 @@ export default async (passedOptions?: Options) => {
       throw error;
     }
   } catch (error) {
-    const message = `${chalk.bold.red("Error: ")}${chalk.red(error.message)}`;
-    if (options.emitter) emit(`${message}\n`);
+    if (options.emitter) options.emitter.emit("error", error);
     else throw error;
   }
 };

@@ -26,18 +26,26 @@ program
 
 program
   .command("dev")
-  .description("Starts the project in development mode.")
+  .option("-p, --production", "Builds the project for production.")
+  .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
+  .option("-s, --https", "Runs the server using https.")
+  .option("--target <target>")
+  .description("Starts a server in development mode.")
   .action(dev);
 
 program
   .command("build")
+  .option("-d, --development", "Builds the project for development.")
+  .option("--target <target>")
   .description("Builds the project for production.")
   .action(build);
 
 program
   .command("serve")
+  .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
+  .option("-s, --https", "Runs the server using https.")
   .description("Starts a server in production mode.")
   .action(serve);
 
-// Parses the parameters and adds them to the `command` object.
+// Parses the arguments and adds them to the `command` object.
 program.parse(process.argv);

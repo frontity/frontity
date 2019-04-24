@@ -2,6 +2,7 @@ import { resolve } from "path";
 import ora from "ora";
 import { prompt, Question } from "inquirer";
 import create from "../functions/create";
+import errorLogger from "../utils/error";
 import { EventEmitter } from "events";
 import { Options } from "../functions/create/types";
 
@@ -47,6 +48,10 @@ export default async (name: string, { typescript, useCwd }) => {
   options.emitter.on("create", (message, action) => {
     if (action) ora.promise(action, message);
     else console.log(message);
+  });
+
+  options.emitter.on("error", error => {
+    errorLogger(error);
   });
 
   await create(options);

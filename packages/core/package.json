@@ -7,7 +7,7 @@
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
-  "main": "src/index.js",
+  "main": "dist/scripts/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
@@ -19,11 +19,10 @@
     "test:ci": "jest",
     "test": "jest --watch",
     "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand",
-    "dev": "ts-node src/scripts/dev.ts",
-    "build": "ts-node src/scripts/build.ts",
-    "serve": "ts-node src/scripts/serve.ts",
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
-    "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts"
+    "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts",
+    "build": "tsc --project ./tsconfig.build.json",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "@babel/core": "^7.3.4",

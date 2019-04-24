@@ -1,5 +1,5 @@
 import "./utils/envs";
-import Argv from "minimist";
+// import Argv from "minimist";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
@@ -13,10 +13,10 @@ import { Mode } from "../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
 
-const argv = Argv(process.argv.slice(2));
+// const argv = Argv(process.argv.slice(2));
 
 // Start Frontity development environment.
-const dev = async ({
+export default async ({
   isHttps,
   mode,
   port,
@@ -78,16 +78,14 @@ const dev = async ({
   done(compiler);
 };
 
-(process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
-  console.error(error);
-  process.exit(1);
-});
+// (process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
+//   console.error(error);
+//   process.exit(1);
+// });
 
-dev({
-  mode: !!argv.p || argv.production ? "production" : "development",
-  port: argv.port || 3000,
-  isHttps: !!argv.s || !!argv.https,
-  target: argv.target || "module"
-});
-
-export default dev;
+// dev({
+//   mode: !!argv.p || argv.production ? "production" : "development",
+//   port: argv.port || 3000,
+//   isHttps: !!argv.s || !!argv.https,
+//   target: argv.target || "module"
+// });
