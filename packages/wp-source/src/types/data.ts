@@ -27,6 +27,7 @@ export type Data =
   | AttachmentData;
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
 export type BaseData = {
   isFetching: boolean;
@@ -48,68 +49,108 @@ export type BaseData = {
 
 // NOT FOUND
 
-export type NotFoundData = Omit<BaseData, "is404"> & {
-  is404: true;
-};
+export type NotFoundData = Merge<
+  BaseData,
+  {
+    is404: true;
+  }
+>;
 
 // ARCHIVES
 
-export type ArchiveData = Omit<BaseData, "isArchive"> & {
-  isArchive: true;
-  page: DataPage[];
-};
+export type ArchiveData = Merge<
+  BaseData,
+  {
+    isArchive: true;
+    page: DataPage[];
+  }
+>;
 
-export type TaxonomyData = Omit<ArchiveData, "isTaxonomy"> & {
-  isTaxonomy: true;
-  type: string;
-  id: number;
-};
+export type TaxonomyData = Merge<
+  ArchiveData,
+  {
+    isTaxonomy: true;
+    type: string;
+    id: number;
+  }
+>;
 
-export type CategoryData = Omit<TaxonomyData, "isCategory"> & {
-  isCategory: true;
-};
-export type TagData = Omit<TaxonomyData, "isTag"> & {
-  isTag: true;
-};
+export type CategoryData = Merge<
+  TaxonomyData,
+  {
+    isCategory: true;
+  }
+>;
 
-export type AuthorData = Omit<ArchiveData, "isAuthor"> & {
-  isAuthor: true;
-  id: number;
-};
+export type TagData = Merge<
+  TaxonomyData,
+  {
+    isTag: true;
+  }
+>;
 
-export type PostTypeArchiveData = Omit<ArchiveData, "isPostTypeArchive"> & {
-  isPostTypeArchive: true;
-  type: string;
-};
+export type AuthorData = Merge<
+  ArchiveData,
+  {
+    isAuthor: true;
+    id: number;
+  }
+>;
 
-export type PostArchiveData = Omit<PostTypeArchiveData, "isPostArchive"> & {
-  isPostArchive: true;
-  isHome: boolean;
-  isFrontPage?: boolean;
-};
+export type PostTypeArchiveData = Merge<
+  ArchiveData,
+  {
+    isPostTypeArchive: true;
+    type: string;
+  }
+>;
 
-export type DateData = Omit<ArchiveData, "isDate"> & {
-  isDate: true;
-  date: string;
-};
+export type PostArchiveData = Merge<
+  PostTypeArchiveData,
+  {
+    isPostArchive: true;
+    isHome: boolean;
+    isFrontPage?: boolean;
+  }
+>;
+
+export type DateData = Merge<
+  ArchiveData,
+  {
+    isDate: true;
+    date: string;
+  }
+>;
 
 // POST TYPES
 
-export type PostTypeData = Omit<BaseData, "isPostType"> & {
-  isPostType: true;
-  type: string;
-  id: number;
-};
+export type PostTypeData = Merge<
+  BaseData,
+  {
+    isPostType: true;
+    type: string;
+    id: number;
+  }
+>;
 
-export type PostData = Omit<PostTypeData, "isPost"> & {
-  isPost: true;
-};
+export type PostData = Merge<
+  PostTypeData,
+  {
+    isPost: true;
+  }
+>;
 
-export type PageData = Omit<PostTypeData, "isPage"> & {
-  isPage: true;
-  isFrontPage?: boolean;
-};
+export type PageData = Merge<
+  PostTypeData,
+  {
+    isPage: true;
+    isFrontPage?: boolean;
+  }
+>;
 
-export type AttachmentData = Omit<PostTypeData, "isAttachment"> & {
-  isAttachment: true;
-};
+export type AttachmentData = Merge<
+  PostTypeData,
+  {
+    isAttachment: true;
+  }
+>;
