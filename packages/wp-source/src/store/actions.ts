@@ -7,17 +7,17 @@ export const fetch: Action<{
 }> = async (ctx, { name, page, isPopulated }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
+  
+  let data = state.data[name];
 
   // return if the data that it's about to be fetched already exists
-  if (!page && state.data[name]) return;
-  if (page && state.data[name] && (<ArchiveData>state.data[name]).page[page])
-    return;
+  if (data && !page) return;
+  if (data && page && data.isArchive && data.page[page]) return;
 
   // init data
-  const nameData: Data = state.data[name] || {
+  state.data[name] = data || {
     isFetching: true
   };
-  state.data[name] = nameData; // asign it back
 
   const { handler, params } = effects.resolver.match(ctx, { name, page });
 
@@ -30,5 +30,5 @@ export const fetch: Action<{
     });
   }
 
-  nameData.isFetching = false;
+  state.data[name].isFetching = false;
 };

@@ -2303,6 +2303,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./harum-et-distinctio-necessitatibus-ut-est-ipsam/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_embedded": Object {
           "author": Array [
@@ -2522,6 +2529,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./delectus-perspiciatis-quia-ut-sit/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_embedded": Object {
           "author": Array [
@@ -2711,6 +2725,13 @@ Array [
     ],
     "method": "set",
     "path": "source.data./velit-alias-molestiae-aspernatur-ipsam/.isPage",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./velit-alias-molestiae-aspernatur-ipsam/.isFetching",
   },
   Object {
     "args": Array [
@@ -2958,6 +2979,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./sint-culpa-est-esse/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_embedded": Object {
           "author": Array [
@@ -3187,6 +3215,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./sint-provident-ut-ut/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_embedded": Object {
           "author": Array [
@@ -3396,6 +3431,13 @@ Array [
   },
   Object {
     "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./ducimus-accusamus-voluptatem-dignissimos/.isFetching",
+  },
+  Object {
+    "args": Array [
       Object {
         "_embedded": Object {
           "author": Array [
@@ -3596,6 +3638,13 @@ Eum fuga debitis minus quis harum. Modi commodi nam et non</h5>
     ],
     "method": "set",
     "path": "source.data./optio-esse-sed-veniam-et-architecto/.isPage",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./optio-esse-sed-veniam-et-architecto/.isFetching",
   },
   Object {
     "args": Array [
@@ -3818,6 +3867,13 @@ Eum fuga debitis minus quis harum. Modi commodi nam et non</h5>
     ],
     "method": "set",
     "path": "source.data./ullam-non-enim-totam-eos-ad/.isPage",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./ullam-non-enim-totam-eos-ad/.isFetching",
   },
   Object {
     "args": Array [
@@ -4055,6 +4111,13 @@ Eum fuga debitis minus quis harum. Modi commodi nam et non</h5>
     ],
     "method": "set",
     "path": "source.data./pariatur-quidem-aliquid-ipsa-consequuntur-ipsum-nihil-eos/.isPage",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./pariatur-quidem-aliquid-ipsa-consequuntur-ipsum-nihil-eos/.isFetching",
   },
   Object {
     "args": Array [
@@ -4336,6 +4399,13 @@ Eum fuga debitis minus quis harum. Modi commodi nam et non</h5>
     ],
     "method": "set",
     "path": "source.data./.totalPages",
+  },
+  Object {
+    "args": Array [
+      false,
+    ],
+    "method": "set",
+    "path": "source.data./.isFetching",
   },
 ]
 `;
