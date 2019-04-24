@@ -7,6 +7,11 @@ const Dynamic = loadable(() => import("./dynamic2"));
 const ThemeStore = {
   state: {
     themeExample: 2
+  },
+  actions: {
+    beforeSSR: ({ state }) => {
+      state.theme.themeExample = 3;
+    }
   }
 };
 

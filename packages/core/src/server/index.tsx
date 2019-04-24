@@ -19,7 +19,7 @@ import getNamespaces from "./utils/namespaces";
 import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
-import createStores from "../stores";
+import createStores from "../stores/server";
 
 export default ({ packages }) => {
   const app = new Koa();
@@ -66,10 +66,13 @@ export default ({ packages }) => {
     const frontity: FrontityTags = {};
 
     // Create the stores.
-    const stores = createStores({ namespaces, name: settings.name });
+    const stores = createStores({ namespaces });
 
     // Wait until the store has been initialized. This waits for the onIntilize actions.
     await stores.initialized;
+
+    // Run beforeSSR actions.
+    stores.actions;
 
     const Component = <App namespaces={namespaces} stores={stores} />;
 

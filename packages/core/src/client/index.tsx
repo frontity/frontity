@@ -3,7 +3,7 @@ import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import { hydrate as hydrateEmotion } from "emotion";
 import App from "../app";
-import createStores from "../stores";
+import createStores from "../stores/client";
 
 export default async ({ namespaces }) => {
   const ids = document.getElementById("__EMOTION_HYDRATATION_IDS__");
