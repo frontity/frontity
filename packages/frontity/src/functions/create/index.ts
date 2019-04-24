@@ -13,7 +13,10 @@ import {
 const defaultOptions: Options = {
   path: process.cwd(),
   typescript: false,
-  packages: ["frontity", "@frontity/file-settings"],
+  packages: [
+    // "@frontity/wp-source",
+    // "@frontity/tiny-router"
+  ],
   theme: "@frontity/mars-theme"
 };
 

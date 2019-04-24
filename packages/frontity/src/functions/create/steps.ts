@@ -11,7 +11,7 @@ import {
 } from "fs-extra";
 import { extract } from "tar";
 import p from "phin";
-import { mergeRight } from "ramda";
+import { mergeRight, uniq } from "ramda";
 import { Options, PackageJson } from "./types";
 
 // This function normalizes and validates options.
@@ -58,9 +58,15 @@ export const ensureProjectDir = async ({ path }: Options): Promise<boolean> => {
 
 // This function creates a `package.json` file.
 export const createPackageJson = async ({ name, packages, theme }: Options) => {
+  const mandatoryPackages = [
+    "frontity"
+    // "@frontity/core",
+  ];
+  const finalPackages = uniq(mandatoryPackages.concat(packages));
+
   // Add Frontity packages to the dependencies.
   const dependencies = (await Promise.all(
-    packages.map(async pkg => {
+    finalPackages.map(async pkg => {
       // Get the version of each package.
       const version = (await p({
         url: `https://registry.npmjs.com/${pkg}`,

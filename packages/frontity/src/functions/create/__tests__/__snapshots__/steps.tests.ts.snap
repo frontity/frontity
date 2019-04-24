@@ -145,7 +145,7 @@ Array [
   Array [
     Object {
       "parse": "json",
-      "url": "https://registry.npmjs.com/@frontity/file-settings",
+      "url": "https://registry.npmjs.com/@frontity/wp-source",
     },
   ],
 ]
@@ -169,7 +169,7 @@ Array [
   },
   \\"dependencies\\": {
     \\"frontity\\": \\"^1.0.0\\",
-    \\"@frontity/file-settings\\": \\"^0.1.1\\",
+    \\"@frontity/wp-source\\": \\"^0.1.1\\",
     \\"@frontity/mars-theme\\": \\"./packages/mars-theme\\"
   }
 }
@@ -189,7 +189,7 @@ Array [
   Array [
     Object {
       "parse": "json",
-      "url": "https://registry.npmjs.com/@frontity/file-settings",
+      "url": "https://registry.npmjs.com/@frontity/wp-source",
     },
   ],
 ]
@@ -213,7 +213,7 @@ Array [
   },
   \\"dependencies\\": {
     \\"frontity\\": \\"^1.0.0\\",
-    \\"@frontity/file-settings\\": \\"^0.1.1\\",
+    \\"@frontity/wp-source\\": \\"^0.1.1\\",
     \\"random-theme\\": \\"./packages/random-theme\\"
   }
 }

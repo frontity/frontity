@@ -27,8 +27,8 @@ export default async (name: string, { typescript, useCwd }) => {
         name: "packages",
         type: "input",
         message: "Enter a list of Frontity packages to install:",
-        default: "frontity, @frontity/file-settings",
-        filter: (input: string) => input.split(/[\s,]+/)
+        // default: "@frontity/wp-source, @frontity/tiny-router",
+        filter: (input: string) => input.split(/[\s,]+/).filter(pkg => !!pkg)
       }
     ];
 

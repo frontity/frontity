@@ -121,7 +121,7 @@ describe("createPackageJson", () => {
   test('works with a theme like "@frontity/mars-theme"', async () => {
     const options = {
       name: "random-name",
-      packages: ["frontity", "@frontity/file-settings"],
+      packages: ["@frontity/wp-source"],
       theme: "@frontity/mars-theme"
     };
     await createPackageJson(options);
@@ -132,7 +132,7 @@ describe("createPackageJson", () => {
   test('works with a theme like "mars-theme"', async () => {
     const options = {
       name: "random-name",
-      packages: ["frontity", "@frontity/file-settings"],
+      packages: ["@frontity/wp-source"],
       theme: "random-theme"
     };
     await createPackageJson(options);
