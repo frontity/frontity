@@ -35,12 +35,10 @@ describe("getSettings", () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithNames);
     const settings = [
       await getSettings({
-        name: "settings-one",
-        url: "https://frontity.org"
+        name: "settings-one"
       }),
       await getSettings({
-        name: "settings-two",
-        url: "https://frontity.org"
+        name: "settings-two"
       })
     ];
     expect(settings[0].name).toBe("settings-one");

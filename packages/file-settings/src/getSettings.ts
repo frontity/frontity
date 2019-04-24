@@ -1,15 +1,14 @@
 import { NormalizedSettings } from "./types";
 import importSettings from "./importSettings";
 
+type Props =
+  | { name: string; url: string }
+  | { name: string; url?: string }
+  | { name?: string; url: string };
+
 // This function returns the settings required by
 // the `core` package.
-export default async ({
-  name,
-  url
-}: {
-  name?: string;
-  url: string;
-}): Promise<NormalizedSettings> => {
+export default async ({ name, url }: Props): Promise<NormalizedSettings> => {
   // Import the settings from a file.
   const allSettings: NormalizedSettings[] = await importSettings();
 
