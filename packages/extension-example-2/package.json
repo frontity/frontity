@@ -20,5 +20,8 @@
   },
   "dependencies": {
     "frontity": "^0.1.0"
+  },
+  "devDependencies": {
+    "@frontity/core": "^0.2.0"
   }
 }

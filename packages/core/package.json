@@ -55,6 +55,8 @@
     "koa-static": "^5.0.0",
     "lodash-es": "^4.17.11",
     "minimist": "^1.2.0",
+    "overmind": "^17.1.0",
+    "overmind-react": "^18.1.0",
     "promise-monofill": "^1.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",

@@ -19,6 +19,7 @@ import getNamespaces from "./utils/namespaces";
 import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
+import createStores from "../stores";
 
 export default ({ packages }) => {
   const app = new Koa();
@@ -64,6 +65,14 @@ export default ({ packages }) => {
     let html = "";
     const frontity: FrontityTags = {};
 
+    // Create the stores.
+    const stores = createStores({ namespaces, name: settings.name });
+
+    // Wait until the store has been initialized. This waits for the onIntilize actions.
+    await stores.initialized;
+
+    const Component = <App namespaces={namespaces} stores={stores} />;
+
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.
     if (stats && hasEntryPoint({ stats, site: settings.name })) {
@@ -72,7 +81,7 @@ export default ({ packages }) => {
         stats,
         entrypoints: [settings.name]
       });
-      const jsx = extractor.collectChunks(<App namespaces={namespaces} />);
+      const jsx = extractor.collectChunks(Component);
       html = renderToString(jsx);
 
       // Get the linkTags. Crossorigin needed for type="module".
@@ -96,7 +105,7 @@ export default ({ packages }) => {
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.
-      html = renderToStaticMarkup(<App namespaces={namespaces} />);
+      html = renderToStaticMarkup(Component);
     }
 
     // Emotion get CSS and IDs:
