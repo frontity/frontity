@@ -9,8 +9,8 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
 
   // First, search post and page with the given slug
   const sameSlug = (p: any) => p.slug === slug;
-  let post: EntityData = Object.values(state.post).find(sameSlug);
-  let page: EntityData = Object.values(state.page).find(sameSlug);
+  let post = <EntityData>Object.values(state.post).find(sameSlug);
+  let page = <EntityData>Object.values(state.page).find(sameSlug);
 
   // If none is found
   if (!(post || page)) {
@@ -26,8 +26,8 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
     ]);
 
     // Add entities to the state
-    [post] = await populate(ctx, postResponse);
-    [page] = await populate(ctx, pageResponse);
+    [post] = await populate(ctx, { response: postResponse, name });
+    [page] = await populate(ctx, { response: pageResponse, name });
   }
 
   // Init data
