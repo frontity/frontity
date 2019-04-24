@@ -77,17 +77,6 @@ Array [
 exports[`createFrontitySettings works when extension is \`js\` 2`] = `
 Array [
   Array [
-    "/Users/orballo/Frontity/frontity/packages/frontity/src/templates/settings-js-template",
-    Object {
-      "encoding": "utf8",
-    },
-  ],
-]
-`;
-
-exports[`createFrontitySettings works when extension is \`js\` 3`] = `
-Array [
-  Array [
     "frontity.settings.js",
     "{
   \\"name\\": \\"random-name\\",
@@ -109,17 +98,6 @@ Array [
 `;
 
 exports[`createFrontitySettings works when extension is \`ts\` 2`] = `
-Array [
-  Array [
-    "/Users/orballo/Frontity/frontity/packages/frontity/src/templates/settings-ts-template",
-    Object {
-      "encoding": "utf8",
-    },
-  ],
-]
-`;
-
-exports[`createFrontitySettings works when extension is \`ts\` 3`] = `
 Array [
   Array [
     "frontity.settings.ts",

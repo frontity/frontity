@@ -25,7 +25,7 @@ describe("create", () => {
       path: "/path/to/project"
     };
     await create(options);
-    expect(mockedSteps.normalizeOptions.mock.calls).toMatchSnapshot();
+    expect(mockedSteps.normalizeOptions.mock.calls[0][1]).toMatchSnapshot();
     expect(mockedSteps.ensureProjectDir.mock.calls).toMatchSnapshot();
     expect(mockedSteps.createPackageJson.mock.calls).toMatchSnapshot();
     expect(mockedSteps.createFrontitySettings.mock.calls).toMatchSnapshot();

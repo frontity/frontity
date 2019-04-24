@@ -1,20 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`create goes throw all steps 1`] = `
-Array [
-  Array [
-    Object {
-      "packages": Array [],
-      "path": "/Users/orballo/Frontity/frontity/packages/frontity",
-      "theme": "@frontity/mars-theme",
-      "typescript": false,
-    },
-    Object {
-      "name": "random-name",
-      "path": "/path/to/project",
-    },
-  ],
-]
+Object {
+  "name": "random-name",
+  "path": "/path/to/project",
+}
 `;
 
 exports[`create goes throw all steps 2`] = `

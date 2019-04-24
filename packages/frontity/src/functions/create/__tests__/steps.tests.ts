@@ -158,7 +158,7 @@ describe("createFrontitySettings", () => {
     const extension = "js";
     await createFrontitySettings(extension, options);
     expect(mockedChDir.mock.calls).toMatchSnapshot();
-    expect(mockedFsExtra.readFile.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 
@@ -171,7 +171,7 @@ describe("createFrontitySettings", () => {
     const extension = "ts";
     await createFrontitySettings(extension, options);
     expect(mockedChDir.mock.calls).toMatchSnapshot();
-    expect(mockedFsExtra.readFile.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 });
