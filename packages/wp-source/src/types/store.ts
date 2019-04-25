@@ -1,4 +1,11 @@
-import { IConfig, IContext, IAction, IOnInitialize } from "overmind";
+import {
+  IConfig,
+  IContext,
+  IAction,
+  IOnInitialize,
+  IDerive,
+  IState
+} from "overmind";
 import * as source from "../store";
 
 const settings = {
@@ -11,23 +18,30 @@ const settings = {
   }
 };
 
-export type Config = IConfig<{
-  state: {
-    source: typeof source.state;
-    settings: typeof settings.state;
-  };
-  actions: {
-    source: typeof source.actions;
-    settings: typeof settings.actions;
-  };
-  effects: {
-    source: typeof source.effects;
-    settings: typeof settings.effects;
-  };
-}>;
+export interface Config
+  extends IConfig<{
+    state: {
+      source: typeof source.state;
+      settings: typeof settings.state;
+    };
+    actions: {
+      source: typeof source.actions;
+      settings: typeof settings.actions;
+    };
+    effects: {
+      source: typeof source.effects;
+      settings: typeof settings.effects;
+    };
+  }> {}
 
-export type Context = IContext<Config>;
-export type Action<Input = void> = IAction<Config, Input>;
+export interface Action<Input = void> extends IAction<Config, Input> {}
+
+export interface OnInitialize extends IOnInitialize<Config> {}
+
+export interface Derive<Parent extends IState, Output>
+  extends IDerive<Config, Parent, Output> {}
+
+export interface Context extends IContext<Config> {}
 
 export type Handler = (
   context: Context,
@@ -38,8 +52,6 @@ export type Handler = (
     isPopulated?: boolean;
   }
 ) => Promise<void>;
-
-export type OnInitialize = IOnInitialize<Config>;
 
 export type Settings = {
   apiUrl: string;
