@@ -1,5 +1,4 @@
 import "./utils/envs";
-import Argv from "minimist";
 import { join } from "path";
 import { remove } from "fs-extra";
 import { getAllSites } from "@frontity/file-settings";
@@ -10,9 +9,7 @@ import { Mode } from "../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
 
-const argv = Argv(process.argv.slice(2));
-
-const build = async ({
+export default async ({
   mode,
   target
 }: {
@@ -59,15 +56,3 @@ const build = async ({
   // it is not needed anymore.
   if (mode === "production") await remove(join(outDir, "bundling"));
 };
-
-(process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
-  console.error(error);
-  process.exit(1);
-});
-
-build({
-  mode: !!argv.d || argv.development ? "development" : "production",
-  target: argv.target || "both"
-});
-
-export default build;

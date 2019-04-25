@@ -1,13 +1,11 @@
 import "./utils/envs";
 import { resolve } from "path";
-import Argv from "minimist";
 import createServer from "./utils/create-server";
 
-const argv = Argv(process.argv.slice(2));
 const appDir = resolve(process.cwd(), "build/server.js");
 
 // Creates a node server and runs the server.js bundle.
-const serve = async ({
+export default async ({
   isHttps,
   port
 }: {
@@ -18,10 +16,9 @@ const serve = async ({
   try {
     app = require(appDir).default;
   } catch (error) {
-    console.log(
-      'Something went wrong. Did you forget to run "frontity build"?\n'
+    throw new Error(
+      'Something went wrong. Did you forget to run "frontity build"?'
     );
-    process.exit(1);
   }
   const server = await createServer({ app, isHttps });
   server.listen(port);
@@ -31,15 +28,3 @@ const serve = async ({
     }://localhost:${port}\n`
   );
 };
-
-(process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
-  console.error(error);
-  process.exit(1);
-});
-
-serve({
-  port: argv.port || 3000,
-  isHttps: !!argv.h || !!argv.https
-});
-
-export default serve;
