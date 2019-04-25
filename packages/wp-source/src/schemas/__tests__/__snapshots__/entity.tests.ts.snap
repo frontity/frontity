@@ -25,7 +25,6 @@ Object {
   "meta": Object {},
   "name": "Alan Martin",
   "slug": "alan",
-  "type": "author",
   "url": "",
 }
 `;
@@ -70,7 +69,6 @@ Object {
   "parent": 0,
   "slug": "nature",
   "taxonomy": "category",
-  "type": "category",
   "yoast_meta": Object {
     "title": "Nature Archives - Demo Worona",
   },
@@ -85,7 +83,6 @@ Object {
   "name": "Movies",
   "slug": "movie",
   "taxonomy": "latest",
-  "type": "latest",
   "yoast_meta": Object {
     "title": "Movies aarchivesss | Demo Worona",
   },
@@ -289,11 +286,6 @@ Object {
   "parent": 211,
   "ping_status": "closed",
   "slug": "about-us",
-  "taxonomiesMap": Object {
-    "latest": Array [
-      "page",
-    ],
-  },
   "template": "",
   "title": Object {
     "rendered": "About us",
@@ -344,7 +336,6 @@ Object {
   "name": "Gullfoss",
   "slug": "gullfoss",
   "taxonomy": "tag",
-  "type": "tag",
   "yoast_meta": Object {
     "title": "Gullfoss Archives - Demo Worona",
   },
@@ -699,21 +690,6 @@ Object {
     13,
     11,
   ],
-  "taxonomiesMap": Object {
-    "category": Array [
-      3,
-      8,
-    ],
-    "latest": Array [
-      "post",
-    ],
-    "tag": Array [
-      10,
-      9,
-      13,
-      11,
-    ],
-  },
   "title": Object {
     "rendered": "The Beauties of Gullfoss",
   },
@@ -891,7 +867,6 @@ Object {
   "name": "Photography",
   "slug": "photography",
   "taxonomy": "category",
-  "type": "category",
   "yoast_meta": Object {
     "title": "Photography Archives - Demo Worona",
   },
@@ -934,7 +909,6 @@ Object {
   "name": "Gullfoss",
   "slug": "gullfoss",
   "taxonomy": "tag",
-  "type": "tag",
   "yoast_meta": Object {
     "title": "Gullfoss Archives - Demo Worona",
   },
@@ -965,7 +939,6 @@ Object {
   "link": "https://demo.worona.org/author/alan/",
   "name": "Alan Martin",
   "slug": "alan",
-  "type": "author",
   "url": "",
 }
 `;
@@ -978,7 +951,6 @@ Object {
   "name": "Demo Worona",
   "slug": "post",
   "taxonomy": "latest",
-  "type": "latest",
   "yoast_meta": Object {
     "title": "Demo Worona - Just another WordPress site",
   },

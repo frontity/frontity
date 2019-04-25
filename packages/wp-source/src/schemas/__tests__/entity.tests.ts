@@ -17,7 +17,7 @@ import { entity } from "../";
 
 test("Convert post using entity", () => {
   const { entities } = normalize(post60, entity);
-  expect(entities.single[60]).toMatchSnapshot();
+  expect(entities.postType[60]).toMatchSnapshot();
   expect(entities.attachment[62]).toMatchSnapshot();
   expect(entities.taxonomy[3]).toMatchSnapshot();
   expect(entities.taxonomy[10]).toMatchSnapshot();
@@ -47,8 +47,8 @@ test("Convert an attachment using entity", () => {
 
 test("Convert a page using entity and ignore subpages", () => {
   const { entities } = normalize(page184, entity);
-  expect(entities.single[184]).toMatchSnapshot();
-  expect(entities.single[211]).toBe(undefined);
+  expect(entities.postType[184]).toMatchSnapshot();
+  expect(entities.postType[211]).toBe(undefined);
 });
 
 test("Convert a latest taxonomy using entity", () => {

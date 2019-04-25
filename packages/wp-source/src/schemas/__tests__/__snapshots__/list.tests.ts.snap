@@ -27,7 +27,6 @@ Object {
       "meta": Object {},
       "name": "worona",
       "slug": "worona",
-      "type": "author",
       "url": "",
     },
     "2": Object {
@@ -56,7 +55,6 @@ You can find her on Twitter as @r_martinezduque.",
       "meta": Object {},
       "name": "Reyes Martinez",
       "slug": "reyes",
-      "type": "author",
       "url": "http://www.worona.org",
     },
     "3": Object {
@@ -83,7 +81,6 @@ You can find her on Twitter as @r_martinezduque.",
       "meta": Object {},
       "name": "Luis Herranz",
       "slug": "luis",
-      "type": "author",
       "url": "http://www.worona.org",
     },
     "4": Object {
@@ -110,7 +107,6 @@ You can find her on Twitter as @r_martinezduque.",
       "meta": Object {},
       "name": "Alan Martin",
       "slug": "alan",
-      "type": "author",
       "url": "",
     },
     "6": Object {
@@ -137,7 +133,6 @@ You can find her on Twitter as @r_martinezduque.",
       "meta": Object {},
       "name": "David Arenas",
       "slug": "david",
-      "type": "author",
       "url": "http://worona.org",
     },
   },
@@ -186,7 +181,6 @@ Object {
       "parent": 0,
       "slug": "cities",
       "taxonomy": "category",
-      "type": "category",
       "yoast_meta": Object {
         "title": "Cities Archives - Demo Worona",
       },
@@ -279,7 +273,6 @@ Object {
       "parent": 4,
       "slug": "architecture",
       "taxonomy": "category",
-      "type": "category",
       "yoast_meta": Object {
         "title": "Architecture Archives - Demo Worona",
       },
@@ -323,7 +316,6 @@ Object {
       "parent": 0,
       "slug": "culture",
       "taxonomy": "category",
-      "type": "category",
       "yoast_meta": Object {
         "title": "Culture Archives - Demo Worona",
       },
@@ -1854,7 +1846,6 @@ You can find her on Twitter as @r_martinezduque.",
       "link": "https://demo.worona.org/author/reyes/",
       "name": "Reyes Martinez",
       "slug": "reyes",
-      "type": "author",
       "url": "http://www.worona.org",
     },
     "6": Object {
@@ -1880,7 +1871,6 @@ You can find her on Twitter as @r_martinezduque.",
       "link": "https://demo.worona.org/author/david/",
       "name": "David Arenas",
       "slug": "david",
-      "type": "author",
       "url": "http://worona.org",
     },
   },
@@ -1928,7 +1918,6 @@ Object {
       "name": "Antelope Canyon",
       "slug": "antelope-canyon",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Antelope Canyon Archives - Demo Worona",
       },
@@ -1971,7 +1960,6 @@ Object {
       "name": "Arizona",
       "slug": "arizona",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Arizona Archives - Demo Worona",
       },
@@ -2014,7 +2002,6 @@ Object {
       "name": "America",
       "slug": "america",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "America Archives - Demo Worona",
       },
@@ -2057,7 +2044,6 @@ Object {
       "name": "Culture",
       "slug": "culture",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Culture Archives - Demo Worona",
       },
@@ -2100,7 +2086,6 @@ Object {
       "name": "Canada",
       "slug": "canada",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Canada Archives - Demo Worona",
       },
@@ -2143,7 +2128,6 @@ Object {
       "name": "Al Hajar Mountains",
       "slug": "al-hajar-mountains",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Al Hajar Mountains Archives - Demo Worona",
       },
@@ -2186,7 +2170,6 @@ Object {
       "name": "Animals",
       "slug": "animals",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Animals Archives - Demo Worona",
       },
@@ -2229,7 +2212,6 @@ Object {
       "name": "Alps",
       "slug": "alps",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Alps Archives - Demo Worona",
       },
@@ -2272,7 +2254,6 @@ Object {
       "name": "Agra",
       "slug": "agra",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Agra Archives - Demo Worona",
       },
@@ -2315,7 +2296,6 @@ Object {
       "name": "Cities",
       "slug": "cities",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Cities Archives - Demo Worona",
       },
@@ -2989,7 +2969,6 @@ You can find her on Twitter as @r_martinezduque.",
       "link": "https://demo.worona.org/author/reyes/",
       "name": "Reyes Martinez",
       "slug": "reyes",
-      "type": "author",
       "url": "http://www.worona.org",
     },
     "3": Object {
@@ -3015,7 +2994,6 @@ You can find her on Twitter as @r_martinezduque.",
       "link": "https://demo.worona.org/author/luis/",
       "name": "Luis Herranz",
       "slug": "luis",
-      "type": "author",
       "url": "http://www.worona.org",
     },
     "4": Object {
@@ -3041,11 +3019,10 @@ You can find her on Twitter as @r_martinezduque.",
       "link": "https://demo.worona.org/author/alan/",
       "name": "Alan Martin",
       "slug": "alan",
-      "type": "author",
       "url": "",
     },
   },
-  "single": Object {
+  "postType": Object {
     "33": Object {
       "_embedded": Object {
         "author": Array [
@@ -3186,21 +3163,6 @@ You can find her on Twitter as @r_martinezduque.",
         35,
         36,
       ],
-      "taxonomiesMap": Object {
-        "category": Array [
-          6,
-          7,
-          8,
-        ],
-        "latest": Array [
-          "post",
-        ],
-        "tag": Array [
-          34,
-          35,
-          36,
-        ],
-      },
       "title": Object {
         "rendered": "The Al Hajar Mountains",
       },
@@ -3346,20 +3308,6 @@ You can find her on Twitter as @r_martinezduque.",
         31,
         33,
       ],
-      "taxonomiesMap": Object {
-        "category": Array [
-          7,
-          3,
-        ],
-        "latest": Array [
-          "post",
-        ],
-        "tag": Array [
-          32,
-          31,
-          33,
-        ],
-      },
       "title": Object {
         "rendered": "Banff National Park",
       },
@@ -3510,21 +3458,6 @@ You can find her on Twitter as @r_martinezduque.",
         23,
         28,
       ],
-      "taxonomiesMap": Object {
-        "category": Array [
-          4,
-          7,
-        ],
-        "latest": Array [
-          "post",
-        ],
-        "tag": Array [
-          30,
-          29,
-          23,
-          28,
-        ],
-      },
       "title": Object {
         "rendered": "Kebumen City",
       },
@@ -3675,21 +3608,6 @@ You can find her on Twitter as @r_martinezduque.",
         19,
         13,
       ],
-      "taxonomiesMap": Object {
-        "category": Array [
-          7,
-          3,
-          8,
-        ],
-        "latest": Array [
-          "post",
-        ],
-        "tag": Array [
-          18,
-          19,
-          13,
-        ],
-      },
       "title": Object {
         "rendered": "Antelope Canyon",
       },
@@ -3840,20 +3758,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         16,
         14,
       ],
-      "taxonomiesMap": Object {
-        "category": Array [
-          7,
-          3,
-        ],
-        "latest": Array [
-          "post",
-        ],
-        "tag": Array [
-          15,
-          16,
-          14,
-        ],
-      },
       "title": Object {
         "rendered": "Shinjuku Gyoen National Garden",
       },
@@ -3899,7 +3803,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Nature",
       "slug": "nature",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Nature Archives - Demo Worona",
       },
@@ -3939,7 +3842,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Tokyo",
       "slug": "tokyo",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Tokyo Archives - Demo Worona",
       },
@@ -3979,7 +3881,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Japan",
       "slug": "japan",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Japan Archives - Demo Worona",
       },
@@ -4019,7 +3920,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "National Garden",
       "slug": "national-garden",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "National Garden Archives - Demo Worona",
       },
@@ -4059,7 +3959,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Antelope Canyon",
       "slug": "antelope-canyon",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Antelope Canyon Archives - Demo Worona",
       },
@@ -4099,7 +3998,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Arizona",
       "slug": "arizona",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Arizona Archives - Demo Worona",
       },
@@ -4139,7 +4037,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Island",
       "slug": "island",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Island Archives - Demo Worona",
       },
@@ -4179,7 +4076,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Java",
       "slug": "java",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Java Archives - Demo Worona",
       },
@@ -4219,7 +4115,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Indonesia",
       "slug": "indonesia",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Indonesia Archives - Demo Worona",
       },
@@ -4259,7 +4154,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Photography",
       "slug": "photography",
       "taxonomy": "category",
-      "type": "category",
       "yoast_meta": Object {
         "title": "Photography Archives - Demo Worona",
       },
@@ -4299,7 +4193,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Culture",
       "slug": "culture",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Culture Archives - Demo Worona",
       },
@@ -4339,7 +4232,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "National Park",
       "slug": "national-park",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "National Park Archives - Demo Worona",
       },
@@ -4379,7 +4271,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Canada",
       "slug": "canada",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Canada Archives - Demo Worona",
       },
@@ -4419,7 +4310,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Rocky Mountains",
       "slug": "rocky-mountains",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Rocky Mountains Archives - Demo Worona",
       },
@@ -4459,7 +4349,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Al Hajar Mountains",
       "slug": "al-hajar-mountains",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Al Hajar Mountains Archives - Demo Worona",
       },
@@ -4499,7 +4388,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Oman",
       "slug": "oman",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "Oman Archives - Demo Worona",
       },
@@ -4539,7 +4427,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "United Arab Emirates",
       "slug": "united-arab-emirates",
       "taxonomy": "tag",
-      "type": "tag",
       "yoast_meta": Object {
         "title": "United Arab Emirates Archives - Demo Worona",
       },
@@ -4579,7 +4466,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Cities",
       "slug": "cities",
       "taxonomy": "category",
-      "type": "category",
       "yoast_meta": Object {
         "title": "Cities Archives - Demo Worona",
       },
@@ -4619,7 +4505,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Culture",
       "slug": "culture",
       "taxonomy": "category",
-      "type": "category",
       "yoast_meta": Object {
         "title": "Culture Archives - Demo Worona",
       },
@@ -4659,7 +4544,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Nature",
       "slug": "nature",
       "taxonomy": "category",
-      "type": "category",
       "yoast_meta": Object {
         "title": "Nature Archives - Demo Worona",
       },
@@ -4699,7 +4583,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Travel",
       "slug": "travel",
       "taxonomy": "category",
-      "type": "category",
       "yoast_meta": Object {
         "title": "Travel Archives - Demo Worona",
       },
@@ -4711,7 +4594,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "name": "Posts",
       "slug": "post",
       "taxonomy": "latest",
-      "type": "latest",
       "yoast_meta": Object {
         "title": "Demo Worona - Just another WordPress site",
       },
