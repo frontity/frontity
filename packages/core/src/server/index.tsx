@@ -35,11 +35,7 @@ export default ({ packages }) => {
   );
 
   // Return 404 for favicon.ico.
-  app.use(
-    get("/favicon.ico", ctx => {
-      ctx.throw(404);
-    })
-  );
+  app.use(get("/favicon.ico", serve("./favicon.ico")));
 
   // Frontity server rendering.
   app.use(async (ctx, next) => {
