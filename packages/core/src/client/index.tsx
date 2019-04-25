@@ -2,10 +2,12 @@ import React from "react";
 import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import { hydrate as hydrateEmotion } from "emotion";
+import { rehydrate } from "overmind";
 import App from "../app";
 import createStores from "../stores/client";
 
 export default async ({ namespaces }) => {
+  // Hydrate Emotion.
   const ids = document.getElementById("__EMOTION_HYDRATATION_IDS__");
   if (ids) hydrateEmotion(JSON.parse(ids.innerHTML));
   else
@@ -15,7 +17,6 @@ export default async ({ namespaces }) => {
 
   // Create the stores.
   const stores = createStores({ namespaces });
-
   // Wait until the store has been initialized. This waits for the onIntilize actions.
   await stores.initialized;
 

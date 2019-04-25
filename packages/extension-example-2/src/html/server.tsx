@@ -9,7 +9,7 @@ const ThemeStore = {
     themeExample: 2
   },
   actions: {
-    beforeSSR: ({ state }) => {
+    beforeSSR: (_, { state }) => {
       state.theme.themeExample = 3;
     }
   }

@@ -8,5 +8,5 @@ export default ({
   namespaces: { [key: string]: Namespace };
 }) => {
   const config = getConfig({ namespaces });
-  return createOvermind(config, { name: "Frontity" });
+  return createOvermind(config);
 };

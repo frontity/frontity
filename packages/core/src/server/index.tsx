@@ -66,13 +66,17 @@ export default ({ packages }) => {
     const frontity: FrontityTags = {};
 
     // Create the stores.
-    const stores = createStores({ namespaces });
+    const { stores, mutationTree } = createStores({ namespaces });
 
     // Wait until the store has been initialized. This waits for the onIntilize actions.
     await stores.initialized;
 
     // Run beforeSSR actions.
-    stores.actions;
+    Object.values(stores.actions).forEach(
+      (namespace: { beforeSSR?: (state) => {} }) => {
+        if (namespace.beforeSSR) namespace.beforeSSR(stores);
+      }
+    );
 
     const Component = <App namespaces={namespaces} stores={stores} />;
 
@@ -105,6 +109,11 @@ export default ({ packages }) => {
               es5Stats
             })
           : extractor.getScriptTags();
+
+      // Add mutations to our scripts.
+      frontity.script = `<script id="__OVERMIND_MUTATIONS__" type="application/json">${JSON.stringify(
+        stores.hydrate()
+      )}</script>\n${frontity.script}`;
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.
