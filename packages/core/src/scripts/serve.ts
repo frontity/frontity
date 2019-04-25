@@ -1,9 +1,7 @@
 import "./utils/envs";
 import { resolve } from "path";
-// import Argv from "minimist";
 import createServer from "./utils/create-server";
 
-// const argv = Argv(process.argv.slice(2));
 const appDir = resolve(process.cwd(), "build/server.js");
 
 // Creates a node server and runs the server.js bundle.
@@ -30,13 +28,3 @@ export default async ({
     }://localhost:${port}\n`
   );
 };
-
-// (process as NodeJS.EventEmitter).on("unhandledRejection", (error: Error) => {
-//   console.error(error);
-//   process.exit(1);
-// });
-
-// serve({
-//   port: argv.port || 3000,
-//   isHttps: !!argv.h || !!argv.https
-// });
