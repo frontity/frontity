@@ -3,11 +3,14 @@ import {
   TaxonomyMap,
   SingleMap,
   AttachmentMap,
-  AuthorMap
+  AuthorMap,
+  Derive,
+  Data
 } from "../types";
 
 type State = {
-  data: DataMap;
+  data: Derive<State, (nameOrLink: string) => Data>;
+  dataMap: DataMap;
   category: TaxonomyMap;
   tag: TaxonomyMap;
   post: SingleMap;
@@ -17,7 +20,8 @@ type State = {
 };
 
 export const state: State = {
-  data: {},
+  data: state => nameOrLink => state.dataMap[nameOrLink],
+  dataMap: {},
   // taxonomy: {},
   category: {},
   tag: {},
