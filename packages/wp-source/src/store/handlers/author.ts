@@ -18,7 +18,7 @@ const tagHandler: Handler = async (
   // 1. init data if it isn't already
   if (!data.isAuthor) {
     // Search id in state or get it from WP REST API
-    const id = await getIdBySlug(ctx, "tag", params.slug);
+    const id = await getIdBySlug(ctx, "author", params.slug);
 
     data = {
       id,

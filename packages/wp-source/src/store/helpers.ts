@@ -71,12 +71,27 @@ export const populate = async (
   );
 
   // add entities to state
-  for (let [, postType] of Object.entries(entities)) {
-    for (let [, entity] of Object.entries(postType)) {
-      const { type, id, link } = entity;
+  // mirar aquí la estructura de entity y arreglar esto
+  for (let [entityType, entityMap] of Object.entries(entities)) {
+    for (let [, entity] of Object.entries(entityMap)) {
+      const { id, link } = entity;
       const name = new URL(link).pathname;
+
+      let type: string;
+
+      if (entityType === "postType" || entityType === "attachment")
+        type = entity.type;
+      else if (entityType === "taxonomy") type = entity.taxonomy;
+      else if (entityType === "author") type = "author";
+
+      // Hack to prevent errors trying to populate taxonomy "latest"
+      if (!state.source[type]) state.source[type] = {};
+
       state.source[type][id] = entity;
-      await fetch(ctx, { name, isPopulating: true });
+
+      // Do not fetch attachments at this moment
+      if (entityType !== "attachment")
+        await fetch(ctx, { name, isPopulating: true });
     }
   }
 

@@ -81,7 +81,7 @@ class Resolver {
     this: Resolver,
     ctx: Context,
     { name, page }: { name: string; page?: number }
-  ): { handler: Handler; params: { [param: string]: any } } {
+  ): { handler: Handler; params: { [param: string]: any } } | null {
     let handler;
     let params = {};
 
@@ -97,6 +97,9 @@ class Resolver {
 
     // Then process the path
     const found = this.registered.find(({ regexp }) => regexp.test(path));
+
+    if (!found) return null;
+
     const { regexp, keys } = found;
     const pathParams = path
       .match(regexp)

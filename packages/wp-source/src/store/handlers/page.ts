@@ -15,6 +15,7 @@ const pageHandler: Handler = async (ctx, { name, params }) => {
 
   // If not found
   if (!page) {
+    console.log(name);
     const response = await effects.api.get({
       endpoint: "pages",
       params: { slug, _embed: true }

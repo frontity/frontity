@@ -1,4 +1,4 @@
-import { Handler, PostArchiveData } from "../../types";
+import { Handler } from "../../types";
 import { populate, getTotal, getTotalPages } from "../helpers";
 
 const postArchiveHandler: Handler = async (ctx, { name, params, page = 1 }) => {

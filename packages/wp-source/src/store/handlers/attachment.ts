@@ -5,14 +5,34 @@ const attachmentHandler: Handler = async (ctx, { name, params }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
+  const { id, slug } = params;
+
+  let attachment: EntityData;
+  let getParams:
+    | {
+        slug?: string;
+      }
+    | {
+        include?: string;
+      };
+
   // First, search attachment with the given slug
-  let attachment: EntityData = state.attachment[params.id];
+  if (id) {
+    attachment = state.attachment[params.id];
+    getParams = { include: id };
+  } else if (slug) {
+    attachment = Object.values(state.attachment).find(a => a.slug === slug);
+    getParams = { slug };
+  } else {
+    state.dataMap[name].is404 = true;
+    return;
+  }
 
   // If none is found
   if (!attachment) {
     const response = await effects.api.get({
       endpoint: "media",
-      params: { include: params.id, _embed: true }
+      params: { ...getParams, _embed: true }
     });
 
     [attachment] = await populate(ctx, response);

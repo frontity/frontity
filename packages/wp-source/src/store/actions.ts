@@ -22,13 +22,13 @@ export const fetch: Action<{
   data = state.dataMap[name] = data || {};
   data.isFetching = true;
 
-  // get and execute the corresponding handler based on name
-  const { handler, params } = effects.resolver.match(ctx, { name, page });
   try {
+    // get and execute the corresponding handler based on name
+    const { handler, params } = effects.resolver.match(ctx, { name, page });
     await handler(ctx, { name, params, page, isPopulating });
     data.isReady = true;
   } catch (e) {
-    console.warn(`an error ocurred fetching '${name}'`, e);
+    console.warn(`An error ocurred fetching '${name}:'\n`, e);
     data.is404 = true;
   }
 

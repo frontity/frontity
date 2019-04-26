@@ -13,7 +13,7 @@ const categoryHandler: Handler = async (
   const effects = ctx.effects.source;
   
   // 0. Get data from store
-  let data = state.data(name);
+  let data = state.dataMap[name];
 
   // 1. init data if it isn't already
   if (!data.isCategory) {
