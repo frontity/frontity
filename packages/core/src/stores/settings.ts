@@ -9,7 +9,11 @@ export default {
       state.settings.frontity = settings.settings;
       state.settings.frontity.name = settings.name;
       state.settings.frontity.mode = settings.mode;
-      settings.packages.forEach(pkg => {});
+      settings.packages.forEach(pkg => {
+        Object.entries(pkg.settings).forEach(([namespace, settings]) => {
+          state.settings[namespace] = settings;
+        });
+      });
     }
   }
 };
