@@ -32,12 +32,20 @@ const patterns: {
     handler: handlers.date
   },
   {
-    pattern: "/:slug",
-    handler: handlers.postOrPage
+    pattern: "/:year(\\d+)/:slug",
+    handler: handlers.post
   },
   {
-    pattern: "/:postSlug/attachment/:id",
+    pattern: "/:year(\\d+)/:postSlug/:slug",
     handler: handlers.attachment
+  },
+  {
+    pattern: "/:slug",
+    handler: handlers.page
+  },
+  {
+    pattern: "/(.*)/:slug", // subpages
+    handler: handlers.page
   }
 ];
 
@@ -70,6 +78,7 @@ describe("fetch", () => {
 
     const mutations = await store.actions.source.fetch({ name: "/" });
     expect(api.get.mock.calls).toMatchSnapshot();
+    expect(api.get).toBeCalledTimes(1);
     expect(mutations).toMatchSnapshot();
   });
 });
