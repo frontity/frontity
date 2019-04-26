@@ -1,6 +1,6 @@
-import { state } from "./state";
-import * as actions from "./actions";
+import state from "./state";
+import actions from "./actions";
 import * as effects from "./effects";
 import onInitialize from "./onInitialize";
 
-export { state, actions, effects, onInitialize };
+export default { state, actions, effects, onInitialize };

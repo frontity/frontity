@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions set 1`] = `
+Array [
+  Object {
+    "args": Array [
+      "/some-post",
+    ],
+    "method": "set",
+    "path": "path",
+  },
+  Object {
+    "args": Array [
+      null,
+    ],
+    "method": "set",
+    "path": "page",
+  },
+]
+`;
