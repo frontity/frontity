@@ -1,9 +1,9 @@
-// TODO: File left out of Typescript until we change it with our state manager.
+// TODO: Typescript not finished until we change it with our state manager.
+import state from "./state";
+import { Settings } from "./types";
 
-export default {
-  state: {
-    frontity: {}
-  },
+const settings: Settings = {
+  state,
   actions: {
     addSettings: (_, { state, settings }) => {
       state.settings.frontity = settings.settings;
@@ -17,3 +17,5 @@ export default {
     }
   }
 };
+
+export default settings;

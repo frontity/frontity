@@ -1,8 +1,14 @@
 import { Namespace } from "@frontity/types/namespace";
 import { namespaced } from "overmind/config";
-import settings from "./settings";
+import { Settings } from "./settings/types";
 
-export default ({ namespaces }: { namespaces: { [key: string]: Namespace } }) =>
+export default ({
+  namespaces,
+  settings
+}: {
+  namespaces: { [key: string]: Namespace };
+  settings: Settings;
+}) =>
   namespaced(
     Object.entries(namespaces).reduce(
       (config, [namespace, module]) => {

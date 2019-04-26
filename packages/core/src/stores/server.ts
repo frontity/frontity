@@ -1,6 +1,7 @@
 // TODO: File left out of Typescript until we change it with our state manager.
 import { createOvermind } from "overmind";
 import { Namespace } from "@frontity/types/namespace";
+import settings from "./settings/server";
 import getConfig from "./config";
 
 export default ({
@@ -8,9 +9,8 @@ export default ({
 }: {
   namespaces: { [key: string]: Namespace };
 }) => {
-  const config = getConfig({ namespaces });
+  const config = getConfig({ namespaces, settings });
   const stores = createOvermind(config, {
-    name: "Frontity Server",
     devtools: false
   }) as any;
   const mutationTree = stores.proxyStateTree.getMutationTree();

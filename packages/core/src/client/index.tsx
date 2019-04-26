@@ -2,7 +2,6 @@ import React from "react";
 import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import { hydrate as hydrateEmotion } from "emotion";
-import { rehydrate } from "overmind";
 import App from "../app";
 import createStores from "../stores/client";
 
