@@ -1,11 +1,10 @@
 import merge from "ramda/src/mergeDeepRight";
 import validateSettings from "./validateSettings";
-import {
-  Settings,
-  NormalizedSettings,
+import { NormalizedSettings } from "./types";
+import Settings, {
   MultiSettings,
   MonoSettings
-} from "./types";
+} from "@frontity/types/settings";
 
 const defaultSettings = {
   name: "default",
