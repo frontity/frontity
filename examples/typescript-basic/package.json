@@ -20,6 +20,7 @@
     "@frontity/extension-example-2": "^1.0.0"
   },
   "devDependencies": {
-    "ts-node": "^8.0.3"
+    "ts-node": "^8.0.3",
+    "@frontity/types": "^1.0.0"
   }
 }
