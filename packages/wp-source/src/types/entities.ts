@@ -58,7 +58,7 @@ export type Taxonomy = {
   link: string;
   meta: any;
   name: string;
-  parent: 0;
+  parent: number;
   slug: string;
   taxonomy: string;
   type: string;
@@ -98,7 +98,7 @@ export type Attachment = {
   id: number;
   link: string;
   media_details: {
-    file: "2017/03/road-trip.png";
+    file: string;
     height: number;
     image_meta: {
       aperture: string;
@@ -140,8 +140,11 @@ export type Attachment = {
 };
 
 export type Single = {
-  _links: Links;
+  type: string;
+  id: number;
+  link: string;
   author: number;
+  _links: Links;
   categories: number[];
   comment_status: "open" | "closed";
   content: {
@@ -159,9 +162,7 @@ export type Single = {
   guid: {
     rendered: string;
   };
-  id: 60;
   format: string;
-  link: string;
   meta: any;
   modified: string;
   modified_gmt: string;
@@ -176,7 +177,6 @@ export type Single = {
   title: {
     rendered: string;
   };
-  type: string;
   _embedded: Embedded;
   [other: string]: any; // is this necessary?
 };

@@ -30,7 +30,7 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
 export type BaseData = {
-  isFetching: boolean;
+  isFetching?: boolean;
   isReady?: boolean;
   is404?: false;
   isArchive?: false;
@@ -62,7 +62,9 @@ export type ArchiveData = Merge<
   BaseData,
   {
     isArchive: true;
-    page: DataPage[];
+    pages: DataPage[];
+    total?: number;
+    totalPages?: number;
   }
 >;
 
@@ -70,7 +72,7 @@ export type TaxonomyData = Merge<
   ArchiveData,
   {
     isTaxonomy: true;
-    type: string;
+    taxonomy: string;
     id: number;
   }
 >;

@@ -1,5 +1,5 @@
 import { Handler, DateData } from "../../types";
-import { populate, getTotal, getTotalPages } from "./utils";
+import { populate, getTotal, getTotalPages } from "../helpers";
 
 const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const state = ctx.state.source;

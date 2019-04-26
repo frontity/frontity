@@ -1,5 +1,5 @@
 import { Handler, PostTypeData, EntityData } from "../../types";
-import { populate } from "./utils";
+import { populate } from "../helpers";
 
 const postHandler: Handler = async (ctx, { name, params }) => {
   const state = ctx.state.source;

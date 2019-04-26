@@ -1,34 +1,37 @@
-import { Action, ArchiveData, Data } from "../types";
+import { Action } from "../types";
+import { normalizeName } from "./helpers";
 
 export const fetch: Action<{
   name: string;
   page?: number;
-  isPopulated?: boolean;
-}> = async (ctx, { name, page, isPopulated }) => {
+  isPopulating?: boolean;
+}> = async (ctx, { name, page, isPopulating }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
+
+  // transform links to names
+  name = normalizeName(name)
   
-  let data = state.data[name];
+  let data = state.data(name);
 
   // return if the data that it's about to be fetched already exists
   if (data && !page) return;
-  if (data && page && data.isArchive && data.page[page]) return;
+  if (data && page && data.isArchive && data.pages[page]) return;
 
   // init data
-  state.data[name] = data || {
-    isFetching: true
-  };
+  data = state.dataMap[name] = data || {};
+  data.isFetching = true;
 
+  // get and execute the corresponding handler based on name
   const { handler, params } = effects.resolver.match(ctx, { name, page });
-
   try {
-    await handler(ctx, { name, params, page, isPopulated });
+    await handler(ctx, { name, params, page, isPopulating });
+    data.isReady = true;
   } catch (e) {
     console.warn(`an error ocurred fetching '${name}'`, e);
-    Object.assign(state.data[name], {
-      is404: true
-    });
+    data.is404 = true;
   }
 
-  state.data[name].isFetching = false;
+  // end fetching
+  data.isFetching = false;
 };

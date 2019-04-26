@@ -1,7 +1,7 @@
 import { normalize } from "normalizr";
-import * as schemas from "../../schemas";
-import { Context, ArchiveData, DataPage } from "../../types";
-import { fetch } from "../actions";
+import * as schemas from "../schemas";
+import { Context, ArchiveData, DataPage } from "../types";
+import { fetch } from "./actions";
 
 const typesToEndpoints = {
   author: "users",
@@ -36,6 +36,9 @@ export const getIdBySlug = async (
 
   [entity] = await response.json();
 
+  if (!entity)
+    throw new Error(`Entity of type ${type} with slug ${slug} not found`);
+
   return entity && entity.id;
 };
 
@@ -47,15 +50,7 @@ export const getTotalPages = (response: Response): number =>
 
 export const populate = async (
   ctx: Context,
-  {
-    response,
-    name,
-    page
-  }: {
-    response: Response;
-    name: string;
-    page?: number;
-  }
+  response: Response
 ): Promise<DataPage> => {
   const { state } = ctx;
 
@@ -75,22 +70,24 @@ export const populate = async (
     }
   );
 
-  if (page && isList) {
-    // Add the received page of entities
-    const data = <ArchiveData>state.source.data[name];
-    data.page = data.page || [];
-    data.page[page - 1] = entityList; // transform page number to index!!
-  }
-
   // add entities to state
-  for (let [, single] of Object.entries(entities)) {
-    for (let [, entity] of Object.entries(single)) {
+  for (let [, postType] of Object.entries(entities)) {
+    for (let [, entity] of Object.entries(postType)) {
       const { type, id, link } = entity;
       const name = new URL(link).pathname;
       state.source[type][id] = entity;
-      await fetch(ctx, { name, isPopulated: true });
+      await fetch(ctx, { name, isPopulating: true });
     }
   }
 
   return entityList;
+};
+
+export const normalizeName = (nameOrLink: string): string => {
+  try {
+    return new URL(nameOrLink).pathname;
+  } catch (e) {
+    // is not a URL
+    return nameOrLink;
+  }
 };

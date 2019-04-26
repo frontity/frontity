@@ -1,5 +1,5 @@
 import { Handler, PostTypeData, EntityData } from "../../types";
-import { populate } from "./utils";
+import { populate } from "../helpers";
 
 const postOrPageHandler: Handler = async (ctx, { name, params }) => {
   const state = ctx.state.source;
@@ -26,8 +26,8 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
     ]);
 
     // Add entities to the state
-    [post] = await populate(ctx, { response: postResponse, name });
-    [page] = await populate(ctx, { response: pageResponse, name });
+    [post] = await populate(ctx, postResponse);
+    [page] = await populate(ctx, pageResponse);
   }
 
   // Init data

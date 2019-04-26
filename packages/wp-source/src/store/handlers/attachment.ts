@@ -1,5 +1,5 @@
 import { Handler, EntityData } from "../../types";
-import { populate } from "./utils";
+import { populate } from "../helpers";
 
 const attachmentHandler: Handler = async (ctx, { name, params }) => {
   const state = ctx.state.source;
@@ -17,7 +17,7 @@ const attachmentHandler: Handler = async (ctx, { name, params }) => {
       params: { include: id, _embed: true }
     });
 
-    [attachment] = await populate(ctx, { response, name });
+    [attachment] = await populate(ctx, response);
   }
 
   // Init data
