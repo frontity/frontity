@@ -1,6 +1,6 @@
 import { createOvermind } from "overmind";
 import { Namespace } from "@frontity/types/namespace";
-import getConfig from "./utils/config";
+import getConfig from "./config";
 
 export default ({
   namespaces

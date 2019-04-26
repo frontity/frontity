@@ -20,6 +20,7 @@ import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
 import createStores from "../stores/server";
+import { sortedLastIndex } from "lodash-es";
 
 export default ({ packages }) => {
   const app = new Koa();
@@ -66,14 +67,18 @@ export default ({ packages }) => {
     const frontity: FrontityTags = {};
 
     // Create the stores.
-    const { stores, mutationTree } = createStores({ namespaces });
+    const { stores } = createStores({ namespaces });
 
     // Wait until the store has been initialized. This waits for the onIntilize actions.
     await stores.initialized;
 
+    // Add settings.
+    stores.settings = settings;
+    stores.actions.settings.addSettings(stores);
+
     // Run beforeSSR actions.
     Object.values(stores.actions).forEach(
-      (namespace: { beforeSSR?: (state) => {} }) => {
+      (namespace: { beforeSSR?: (stores) => {} }) => {
         if (namespace.beforeSSR) namespace.beforeSSR(stores);
       }
     );
