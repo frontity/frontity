@@ -9,29 +9,32 @@ const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const { year, month = "01", day = "01" } = params;
   const date = `${year}-${month}-${day}T00:00:00`;
 
-  const data = <DateData>state.data[name];
+  // 0. Get data from store
+  let data = state.data(name);
 
-  const hasNotPage = !(data.page && data.page[page]);
-
-  let response: Response;
-
-  if (hasNotPage) {
-    response = await effects.api.get({
+  // 1. init data if it isn't already
+  if (!data.isDate) {
+    data = {
+      date,
+      pages: [],
+      isArchive: true,
+      isDate: true,
+      isFetching: true,
+    };
+    state.dataMap[name] = data;
+  }
+  
+  if (!data.pages[page - 1]) {
+    const response = await effects.api.get({
       endpoint: "posts",
       params: { after: date, search: params.s, page }
     });
-
-    await populate(ctx, { response, name, page });
+    // populate response and add page to data
+    data.pages[page - 1] = await populate(ctx, response);
+    // and assign total and totalPages values
+    data.total = getTotal(response);
+    data.totalPages = getTotalPages(response);
   }
-
-  // Init the date
-  Object.assign(data, {
-    date,
-    isArchive: true,
-    isDate: true,
-    total: getTotal(response),
-    totalPages: getTotalPages(response),
-  });
 };
 
 export default dateHandler;

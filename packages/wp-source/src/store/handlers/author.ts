@@ -27,6 +27,8 @@ const tagHandler: Handler = async (
       isAuthor: true,
       isFetching: true,
     };
+
+    state.dataMap[name] = data;
   }
 
   // 2. If data is a Tag, then all data is populated

@@ -20,6 +20,8 @@ const postArchiveHandler: Handler = async (ctx, { name, params, page = 1 }) => {
       isHome: true,
       isFetching: true,
     };
+
+    state.dataMap[name] = data;
   }
   
   if (!data.pages[page - 1]) {

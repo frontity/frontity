@@ -9,7 +9,7 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
 
   // First, search post and page with the given slug
   const sameSlug = (p: any) => p.slug === slug;
-  let post = <EntityData>Object.values(state.post).find(sameSlug);
+  let post =<EntityData>Object.values(state.page).find(sameSlug);
   let page = <EntityData>Object.values(state.page).find(sameSlug);
 
   // If none is found
@@ -31,21 +31,18 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
   }
 
   // Init data
+  const { type, id } = post || page;
   if (post || page) {
-    const { type, id, link } = post || page;
-    Object.assign(state.data[name], {
+    state.dataMap[name] = {
       type,
       id,
-      link,
       isPostType: true,
-      isPost: !!post,
-      isPage: !!page
-    });
-  } else {
-    Object.assign(state.data[name], {
-      is404: true
-    });
+      isFetching: true
+    };
   }
+
+  if (post) state.dataMap[name].isPost = true;
+  else if (page) state.dataMap[name].isPage = true;
 };
 
 export default postOrPageHandler;

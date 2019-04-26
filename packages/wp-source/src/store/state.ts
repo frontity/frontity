@@ -2,7 +2,7 @@ import { normalizeName } from "./helpers";
 import {
   DataMap,
   TaxonomyMap,
-  SingleMap,
+  PostTypeMap,
   AttachmentMap,
   AuthorMap,
   Derive,
@@ -14,8 +14,8 @@ type State = {
   dataMap: DataMap;
   category: TaxonomyMap;
   tag: TaxonomyMap;
-  post: SingleMap;
-  page: SingleMap;
+  post: PostTypeMap;
+  page: PostTypeMap;
   author: AuthorMap;
   attachment: AttachmentMap;
 };

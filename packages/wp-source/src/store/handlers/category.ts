@@ -30,6 +30,8 @@ const categoryHandler: Handler = async (
       isCategory: true,
       isFetching: true,
     };
+
+    state.dataMap[name] = data;
   }
 
   // 2. If data is a Tag, then all data is populated

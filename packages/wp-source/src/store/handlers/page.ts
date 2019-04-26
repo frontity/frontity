@@ -11,7 +11,7 @@ const pageHandler: Handler = async (ctx, { name, params }) => {
     (p: any) => p.slug === slug
   );
 
-  const data = <PostTypeData>state.data[name];
+  let data = state.data(name);
 
   // If not found
   if (!page) {
@@ -20,18 +20,20 @@ const pageHandler: Handler = async (ctx, { name, params }) => {
       params: { slug, _embed: true }
     });
 
-    [page] = await populate(ctx, { response, name });
+    [page] = await populate(ctx, response);
   }
 
   // Init data
-  const { type, id, link } = page;
-  Object.assign(data, {
+  const { type, id } = page;
+  data = {
     type,
     id,
-    link,
     isPostType: true,
-    isPage: true
-  });
+    isPage: true,
+    isFetching: true
+  };
+
+  state.dataMap[name] = data;
 };
 
 export default pageHandler;

@@ -7,7 +7,7 @@ const postHandler: Handler = async (ctx, { name, params }) => {
 
   const { slug } = params;
 
-  const data = <PostTypeData>state.data[name];
+  let data = state.data(name);
 
   let post: EntityData = Object.values(state.post).find(
     (p: any) => p.slug === slug
@@ -20,18 +20,18 @@ const postHandler: Handler = async (ctx, { name, params }) => {
       params: { slug, _embed: true }
     });
 
-    [post] = await populate(ctx, { response, name });
+    [post] = await populate(ctx, response);
   }
 
   // Init data
-  const { type, id, link } = post;
-  Object.assign(data, {
+  const { type, id } = post;
+  data = {
     type,
     id,
-    link,
     isPostType: true,
     isPost: true
-  });
+  };
+  state.dataMap[name] = data;
 };
 
 export default postHandler;

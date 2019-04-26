@@ -1,6 +1,6 @@
 // ENTITIES
 
-export type Entity = Single | Attachment | Taxonomy | Author;
+export type Entity = PostType | Attachment | Taxonomy | Author;
 
 export type Href = {
   href: string;
@@ -139,7 +139,7 @@ export type Attachment = {
   };
 };
 
-export type Single = {
+export type PostType = {
   type: string;
   id: number;
   link: string;
@@ -185,8 +185,8 @@ export type TaxonomyMap = {
   [name: string]: Taxonomy;
 };
 
-export type SingleMap = {
-  [name: string]: Single;
+export type PostTypeMap = {
+  [name: string]: PostType;
 };
 
 export type AttachmentMap = {
