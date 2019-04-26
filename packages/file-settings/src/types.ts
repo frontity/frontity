@@ -13,13 +13,17 @@ export type Package = {
   name: string; // Default: undefined
   active?: boolean; // Default: true
   namespaces?: string[]; // Default: undefined
-  settings?: object; // Default: undefined
+  settings?: {
+    [namespace: string]: object;
+  };
 };
 
 export type NormalizedPackage = Package & {
-  active: boolean; // Default: true
-  namespaces: string[]; // Default: undefined
-  settings: object; // Default: undefined
+  active: boolean;
+  namespaces: string[];
+  settings: {
+    [namespace: string]: object;
+  };
 };
 
 type Mono = Base & {

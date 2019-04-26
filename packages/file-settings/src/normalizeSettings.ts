@@ -19,7 +19,7 @@ const defaultSettings = {
 const defaultPackage: {
   active: boolean;
   namespaces: string[];
-  settings: object;
+  settings: { [namespace: string]: object };
 } = {
   active: true,
   namespaces: [],
