@@ -1,7 +1,7 @@
 import { normalize } from "normalizr";
-import * as schemas from "../schemas";
-import { Context, ArchiveData, DataPage } from "../types";
-import { fetch } from "./actions";
+import * as schemas from "../../schemas";
+import { Context, DataPage } from "../../types";
+import { fetch } from "../actions";
 
 const typesToEndpoints = {
   author: "users",
@@ -37,7 +37,7 @@ export const getIdBySlug = async (
   [entity] = await response.json();
 
   if (!entity)
-    throw new Error(`Entity of type ${type} with slug ${slug} not found`);
+    throw new Error(`Entity of type '${type}' with slug '${slug}' not found`);
 
   return entity && entity.id;
 };
@@ -85,9 +85,11 @@ export const populate = async (
       else if (entityType === "author") type = "author";
 
       // Hack to prevent errors trying to populate taxonomy "latest"
-      if (!state.source[type]) state.source[type] = {};
+      if (type === "latest") break;
 
       state.source[type][id] = entity;
+
+      if (name === '/') console.log(name);
 
       // Do not fetch attachments at this moment
       if (entityType !== "attachment")
