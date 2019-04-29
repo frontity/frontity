@@ -1,6 +1,11 @@
 import chalk from "chalk";
 
-export default (error: Error, message?: string) => {
+export const isPackageNameValid = (name: string): boolean => {
+  const nameConventionMatch = /^(?:@[\w-]+\/)?[\w-]+$/;
+  return nameConventionMatch.test(name);
+};
+
+export const errorLogger = (error: Error, message?: string) => {
   console.error(
     chalk.bold.red("\nError: ") +
       chalk.red(error.message) +

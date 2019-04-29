@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import errorLogger from "../utils/error";
+import { errorLogger } from "../utils";
 
 export default async ({ port, https }) => {
   let serve: Function;

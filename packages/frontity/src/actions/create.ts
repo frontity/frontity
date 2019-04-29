@@ -2,7 +2,7 @@ import { resolve } from "path";
 import ora from "ora";
 import { prompt, Question } from "inquirer";
 import create from "../functions/create";
-import errorLogger from "../utils/error";
+import { errorLogger } from "../utils";
 import { EventEmitter } from "events";
 import { Options } from "../functions/create/types";
 
@@ -22,13 +22,6 @@ export default async (name: string, { typescript, useCwd }) => {
         type: "input",
         message: "Enter a starter theme to clone:",
         default: "@frontity/mars-theme"
-      },
-      {
-        name: "packages",
-        type: "input",
-        message: "Enter a list of Frontity packages to install:",
-        // default: "@frontity/wp-source, @frontity/tiny-router",
-        filter: (input: string) => input.split(/[\s,]+/).filter(pkg => !!pkg)
       }
     ];
 
@@ -43,16 +36,14 @@ export default async (name: string, { typescript, useCwd }) => {
 
   options.typescript = typescript;
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
-  options.emitter = new EventEmitter();
 
-  options.emitter.on("create", (message, action) => {
+  const emitter = new EventEmitter();
+
+  emitter.on("error", errorLogger);
+  emitter.on("create", (message, action) => {
     if (action) ora.promise(action, message);
     else console.log(message);
   });
 
-  options.emitter.on("error", error => {
-    errorLogger(error);
-  });
-
-  await create(options);
+  await create(options, emitter);
 };

@@ -97,28 +97,26 @@ describe("create", () => {
     expect(mockedSteps.revertProgress).not.toHaveBeenCalled();
   });
 
-  test("uses the emitter passed in options to log messages", async () => {
-    const emit = jest.fn();
+  test("uses the emitter passed to log messages", async () => {
+    const emitter = { emit: jest.fn() };
     const options = {
       name: "random-name",
-      path: "/path/to/project",
-      emitter: { emit }
+      path: "/path/to/project"
     };
-    await create(options as any);
-    expect(emit.mock.calls).toMatchSnapshot();
+    await create(options, emitter as any);
+    expect(emitter.emit.mock.calls).toMatchSnapshot();
   });
 
-  test("uses the emitter passed in options to log the errors", async () => {
-    const emit = jest.fn();
+  test("uses the emitter passed to log the errors", async () => {
+    const emitter = { emit: jest.fn() };
     const options = {
       name: "random-name",
-      path: "/path/to/project",
-      emitter: { emit }
+      path: "/path/to/project"
     };
     mockedSteps.ensureProjectDir.mockImplementation(() => {
       throw new Error("Mocked Error");
     });
-    await create(options as any);
-    expect(emit.mock.calls).toMatchSnapshot();
+    await create(options, emitter as any);
+    expect(emitter.emit.mock.calls).toMatchSnapshot();
   });
 });

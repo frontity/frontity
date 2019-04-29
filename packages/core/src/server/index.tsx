@@ -34,7 +34,7 @@ export default ({ packages }) => {
     })
   );
 
-  // Return 404 for favicon.ico.
+  // Return Frontity favicon for favicon.ico.
   app.use(get("/favicon.ico", serve("./favicon.ico")));
 
   // Frontity server rendering.

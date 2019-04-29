@@ -3,18 +3,7 @@
 exports[`cloneStarterTheme works as expected 1`] = `
 Array [
   Array [
-    "/path/to/project",
-  ],
-  Array [
-    "./packages/mars-theme",
-  ],
-]
-`;
-
-exports[`cloneStarterTheme works as expected 2`] = `
-Array [
-  Array [
-    "./package.json",
+    "/path/to/project/package.json",
     Object {
       "encoding": "utf8",
     },
@@ -22,10 +11,18 @@ Array [
 ]
 `;
 
+exports[`cloneStarterTheme works as expected 2`] = `
+Array [
+  Array [
+    "/path/to/project/packages/mars-theme",
+  ],
+]
+`;
+
 exports[`cloneStarterTheme works as expected 3`] = `
 Array [
   Array [
-    "./packages/mars-theme",
+    "@frontity/mars-theme",
   ],
 ]
 `;
@@ -34,6 +31,9 @@ exports[`cloneStarterTheme works as expected 4`] = `
 Array [
   Array [
     "npm pack @frontity/mars-theme",
+    Object {
+      "cwd": "/path/to/project/packages/mars-theme",
+    },
     [Function],
   ],
 ]
@@ -42,7 +42,7 @@ Array [
 exports[`cloneStarterTheme works as expected 5`] = `
 Array [
   Array [
-    "./",
+    "/path/to/project/packages/mars-theme",
   ],
 ]
 `;
@@ -51,7 +51,8 @@ exports[`cloneStarterTheme works as expected 6`] = `
 Array [
   Array [
     Object {
-      "file": "file.tgz",
+      "cwd": "/path/to/project/packages/mars-theme",
+      "file": "/path/to/project/packages/mars-theme/file.tgz",
       "strip": 1,
     },
   ],
@@ -61,7 +62,7 @@ Array [
 exports[`cloneStarterTheme works as expected 7`] = `
 Array [
   Array [
-    "file.tgz",
+    "/path/to/project/packages/mars-theme/file.tgz",
   ],
 ]
 `;
@@ -69,15 +70,7 @@ Array [
 exports[`createFrontitySettings works when extension is \`js\` 1`] = `
 Array [
   Array [
-    "/path/to/project",
-  ],
-]
-`;
-
-exports[`createFrontitySettings works when extension is \`js\` 2`] = `
-Array [
-  Array [
-    "frontity.settings.js",
+    "/path/to/project/frontity.settings.js",
     "{
   \\"name\\": \\"random-name\\",
   \\"packages\\": [
@@ -92,15 +85,7 @@ Array [
 exports[`createFrontitySettings works when extension is \`ts\` 1`] = `
 Array [
   Array [
-    "/path/to/project",
-  ],
-]
-`;
-
-exports[`createFrontitySettings works when extension is \`ts\` 2`] = `
-Array [
-  Array [
-    "frontity.settings.ts",
+    "/path/to/project/frontity.settings.ts",
     "{
   \\"name\\": \\"random-name\\",
   \\"packages\\": [
@@ -115,16 +100,10 @@ Array [
 exports[`createPackageJson works with a theme like "@frontity/mars-theme" 1`] = `
 Array [
   Array [
-    Object {
-      "parse": "json",
-      "url": "https://registry.npmjs.com/frontity",
-    },
+    "https://registry.npmjs.com/frontity",
   ],
   Array [
-    Object {
-      "parse": "json",
-      "url": "https://registry.npmjs.com/@frontity/wp-source",
-    },
+    "https://registry.npmjs.com/@frontity/wp-source",
   ],
 ]
 `;
@@ -132,7 +111,7 @@ Array [
 exports[`createPackageJson works with a theme like "@frontity/mars-theme" 2`] = `
 Array [
   Array [
-    "package.json",
+    "/path/to/project/package.json",
     "{
   \\"name\\": \\"random-name\\",
   \\"version\\": \\"0.1.0\\",
@@ -159,16 +138,10 @@ Array [
 exports[`createPackageJson works with a theme like "mars-theme" 1`] = `
 Array [
   Array [
-    Object {
-      "parse": "json",
-      "url": "https://registry.npmjs.com/frontity",
-    },
+    "https://registry.npmjs.com/frontity",
   ],
   Array [
-    Object {
-      "parse": "json",
-      "url": "https://registry.npmjs.com/@frontity/wp-source",
-    },
+    "https://registry.npmjs.com/@frontity/wp-source",
   ],
 ]
 `;
@@ -176,7 +149,7 @@ Array [
 exports[`createPackageJson works with a theme like "mars-theme" 2`] = `
 Array [
   Array [
-    "package.json",
+    "/path/to/project/package.json",
     "{
   \\"name\\": \\"random-name\\",
   \\"version\\": \\"0.1.0\\",
@@ -216,14 +189,6 @@ Array [
 ]
 `;
 
-exports[`ensureProjectDir works when passing a non existent path 3`] = `
-Array [
-  Array [
-    "./",
-  ],
-]
-`;
-
 exports[`ensureProjectDir works when passing an existent path with an empty repo 1`] = `
 Array [
   Array [
@@ -240,40 +205,19 @@ Array [
 ]
 `;
 
-exports[`ensureProjectDir works when passing an existent path with an empty repo 3`] = `
-Array [
-  Array [
-    "./",
-  ],
-]
-`;
-
 exports[`installDependencies works as expected 1`] = `
 Array [
   Array [
-    "/path/to/project",
-  ],
-]
-`;
-
-exports[`installDependencies works as expected 2`] = `
-Array [
-  Array [
     "npm install",
+    Object {
+      "cwd": "/path/to/project",
+    },
     [Function],
   ],
 ]
 `;
 
 exports[`revertProgress works if the project directory didn't exist 1`] = `
-Array [
-  Array [
-    "/path/to/project",
-  ],
-]
-`;
-
-exports[`revertProgress works if the project directory didn't exist 2`] = `
 Array [
   Array [
     "/path/to/project",
@@ -292,25 +236,22 @@ Array [
 exports[`revertProgress works if the project directory existed 2`] = `
 Array [
   Array [
-    "node_modules",
+    "/path/to/project/frontity.settings.js",
   ],
   Array [
-    "frontity.settings.js",
+    "/path/to/project/package.json",
   ],
   Array [
-    "frontity.settings.ts",
+    "/path/to/project/packages",
   ],
   Array [
-    "tsconfig.json",
+    "/path/to/project/favicon.ico",
   ],
   Array [
-    "package.json",
+    "/path/to/project/node_modules",
   ],
   Array [
-    "package-lock.json",
-  ],
-  Array [
-    "packages",
+    "/path/to/project/package-lock.json",
   ],
 ]
 `;
