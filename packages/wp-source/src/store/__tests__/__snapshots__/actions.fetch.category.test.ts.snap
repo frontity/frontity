@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fetch get category 1`] = `
+exports[`fetch category for the first time 1`] = `
 Array [
   Array [
     Object {
@@ -24,7 +24,7 @@ Array [
 ]
 `;
 
-exports[`fetch get category 2`] = `
+exports[`fetch category for the first time 2`] = `
 Object {
   "/2016/banff-national-park/": Object {
     "id": 36,
