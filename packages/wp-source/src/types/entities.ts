@@ -51,20 +51,16 @@ export type Author = {
 };
 
 export type Taxonomy = {
-  _links: Links;
-  count: number;
-  description: string;
+  _links?: Links;
+  count?: number;
+  description?: string;
   id: number;
   link: string;
-  meta: any;
-  name: string;
-  parent: number;
+  meta?: any;
+  name?: string;
+  parent?: number;
   slug: string;
   taxonomy: string;
-  type: string;
-  yoast_meta?: {
-    title: string;
-  };
 };
 
 export type Embedded = {

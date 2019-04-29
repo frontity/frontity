@@ -55,23 +55,15 @@ describe("fetch", () => {
     });
     // Mock get responses
     const api = {
-      get: jest
-        .fn()
-        .mockResolvedValueOnce(
-          mockResponse(categoryJson, {
-            "X-WP-Total": 1,
-            "X-WP-TotalPages": 1
-          })
-        )
-        .mockResolvedValueOnce(
-          mockResponse(postsFromCategoryJson, {
-            "X-WP-Total": 10,
-            "X-WP-TotalPages": 1
-          })
-        )
+      get: jest.fn().mockResolvedValueOnce(
+        mockResponse(postsFromCategoryJson, {
+          "X-WP-Total": 10,
+          "X-WP-TotalPages": 1
+        })
+      )
     };
-    const onInitialize: OnInitialize = ctx => {
-      ctx.state.source.dataMap["/category/nature/"] = {
+    const dataMap = {
+      ["/category/nature/"]: {
         id: 7,
         isArchive: true,
         isCategory: true,
@@ -82,16 +74,27 @@ describe("fetch", () => {
         taxonomy: "category",
         total: 10,
         totalPages: 1
-      };
+      }
     };
+
+    const categories = {
+      [7]: {
+        taxonomy: "category",
+        id: 7,
+        slug: "nature",
+        link: "https://test.frontity.io/category/nature/"
+      }
+    };
+
     const config = namespaced({
-      source: { actions, state, effects, onInitialize }
+      source: { actions, state: { ...state, dataMap, categories }, effects }
     });
     const store = createOvermindMock(config, {
       source: { resolver, api }
     });
-    await store.actions.source.fetch({ name: "/category/nature/" });
-    expect(api.get).toHaveBeenCalledTimes(2);
+    await store.actions.source.fetch({ name: "/category/nature/", page: 1 });
+    expect(api.get).toHaveBeenCalledTimes(1);
+    expect(store.state.source.dataMap).toMatchSnapshot();
   });
 
   test("try to get a category that doesn't exist", async () => {
