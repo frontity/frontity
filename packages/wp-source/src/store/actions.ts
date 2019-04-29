@@ -18,8 +18,8 @@ export const fetch: Action<{
   if (data && !page) return;
   if (data && page && data.isArchive && data.pages[page]) return;
 
-  // init data
-  state.dataMap[name] = data || {};
+  // init data if needed
+  if (!data) state.dataMap[name] = {};
 
   try {
     // get and execute the corresponding handler based on name
