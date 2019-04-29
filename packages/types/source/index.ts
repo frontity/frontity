@@ -3,14 +3,6 @@ import Store from "../store";
 import { DataMap, Data } from "./data";
 import { TaxonomyMap, PostTypeMap, AuthorMap, AttachmentMap } from "./entities";
 
-type Action<S extends Store, I = null> = [I] extends [null]
-  ? (state: S["state"]) => void
-  : (state: S["state"]) => (input: I) => void;
-
-type Derived<S extends Store, IorO, O = null> = [O] extends [null]
-  ? (state: S["state"]) => IorO
-  : (state: S["state"]) => (input: IorO) => O;
-
 type PathOrObj = string | { path: string; page: number };
 
 export interface Package extends PackageBase {
