@@ -173,6 +173,22 @@ Array [
 ]
 `;
 
+exports[`downloadFavicon works as expected 1`] = `
+Array [
+  Array [
+    "https://faviconfrontityorg-orballo.frontity.now.sh/",
+  ],
+]
+`;
+
+exports[`downloadFavicon works as expected 2`] = `
+Array [
+  Array [
+    "/path/to/project/favicon.ico",
+  ],
+]
+`;
+
 exports[`ensureProjectDir works when passing a non existent path 1`] = `
 Array [
   Array [

@@ -5,6 +5,7 @@ import {
   createFrontitySettings,
   cloneStarterTheme,
   installDependencies,
+  downloadFavicon,
   revertProgress
 } from "../steps";
 import * as utils from "../../../utils";
@@ -230,6 +231,30 @@ describe("cloneStarterTheme", () => {
     await expect(cloneStarterTheme(options)).rejects.toThrow(
       "The name of the theme is not a valid npm package name."
     );
+  });
+});
+
+describe("downloadFavicon", () => {
+  beforeEach(() => {
+    mockedFetch.default.mockReset();
+    (mockedFetch as any).default.mockResolvedValue({
+      body: {
+        pipe: jest.fn()
+      }
+    });
+    mockedFsExtra.createWriteStream.mockReset();
+    (mockedFsExtra as any).createWriteStream.mockReturnValue({
+      on: jest.fn((_event, callback) => callback())
+    });
+  });
+
+  test("works as expected", async () => {
+    const options = {
+      path: "/path/to/project"
+    };
+    await downloadFavicon(options);
+    expect(mockedFetch.default.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.createWriteStream.mock.calls).toMatchSnapshot();
   });
 });
 

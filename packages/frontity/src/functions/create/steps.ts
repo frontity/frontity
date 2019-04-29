@@ -18,6 +18,7 @@ import { isPackageNameValid } from "../../utils";
 import { Options, PackageJson } from "./types";
 
 const allowedExistingContent = ["readme.md", "license", ".git", ".gitignore"];
+const faviconUrl = "https://faviconfrontityorg-orballo.frontity.now.sh/";
 
 // This function normalizes and validates options.
 export const normalizeOptions = (
@@ -150,9 +151,7 @@ export const installDependencies = async ({ path }: Options) => {
 export const downloadFavicon = async ({ path }: Options) => {
   await new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(
-        "https://faviconfrontityorg-orballo.frontity.now.sh/"
-      );
+      const response = await fetch(faviconUrl);
       const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
       response.body.pipe(fileStream);
       fileStream.on("finish", resolve);
