@@ -12,26 +12,25 @@ export const fetch: Action<{
   // transform links to names
   name = normalizeName(name)
   
-  let data = state.data(name);
+  const data = state.data(name);
 
   // return if the data that it's about to be fetched already exists
   if (data && !page) return;
   if (data && page && data.isArchive && data.pages[page]) return;
 
   // init data
-  data = state.dataMap[name] = data || {};
-  data.isFetching = true;
+  state.dataMap[name] = data || {};
 
   try {
     // get and execute the corresponding handler based on name
     const { handler, params } = effects.resolver.match(ctx, { name, page });
     await handler(ctx, { name, params, page, isPopulating });
-    data.isReady = true;
+    state.dataMap[name].isReady = true;
   } catch (e) {
     console.warn(`An error ocurred fetching '${name}:'\n`, e);
-    data.is404 = true;
+    state.dataMap[name].is404 = true;
   }
 
   // end fetching
-  data.isFetching = false;
+  state.dataMap[name].isFetching = false;
 };
