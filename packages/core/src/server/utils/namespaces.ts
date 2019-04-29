@@ -1,14 +1,14 @@
 import { NormalizedSettings } from "@frontity/file-settings";
-import { Namespace } from "@frontity/types/namespace";
+import { Package } from "@frontity/types";
 import flatten from "lodash/flatten";
 import { getVariable } from "../../utils/packages";
 
 export type Packages = {
-  [key: string]: { [key: string]: Namespace };
+  [key: string]: { [key: string]: Package };
 };
 
 type Namespaces = {
-  [key: string]: Namespace;
+  [key: string]: Package;
 };
 
 // Get the correct namespaces for the server, depending on the site loaded.

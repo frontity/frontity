@@ -1,4 +1,4 @@
-import Settings from "../settings";
+import { Settings } from "../";
 
 // Settings
 {
@@ -64,7 +64,7 @@ import Settings from "../settings";
         active: true,
         namespaces: ["namespace1", "namespace2"],
         settings: {
-          namespace1: {
+          namespace3: {
             someSetting: "some setting of namespace 1"
           },
           namespace2: {

@@ -1,11 +1,18 @@
-import Settings from "../settings";
-import Package from "../package";
+import { Settings, Package } from "../";
 
 // Package
 {
   // 1. Custom package extending from Package.
   interface Package1 extends Package {
     name: "package-1";
+    namespaces: "namespace1"[];
+    state: {
+      settings: {
+        namespace1: {
+          prop1: string;
+        };
+      };
+    };
   }
 
   const package1: Settings<Package1> = {
@@ -19,10 +26,16 @@ import Package from "../package";
   // 2. Two different packages extending from Package.
   interface Package2 extends Package {
     name: "package-2";
-    settings: {
-      namespace1: {
-        someSetting: string;
-        optionalSetting?: boolean;
+    namespaces: ("namespace2" | "namespace3")[];
+    state: {
+      settings: {
+        namespace2: {
+          prop2: string;
+          prop3?: number;
+        };
+        namespace3: {
+          prop4: boolean;
+        };
       };
     };
   }
@@ -30,13 +43,20 @@ import Package from "../package";
   const package2: Settings<Package1 | Package2> = {
     packages: [
       {
-        name: "package-1"
+        name: "package-1",
+        namespaces: ["namespace1"],
+        settings: {
+          namespace1: {
+            prop1: ""
+          }
+        }
       },
       {
         name: "package-2",
+        namespaces: ["namespace2"],
         settings: {
-          namespace1: {
-            someSetting: "some setting"
+          namespace2: {
+            prop2: ""
           }
         }
       }
