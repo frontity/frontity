@@ -11,10 +11,10 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
     packages: [
       {
         name: "@frontity/extension-example-1",
-        namespaces: ["extension1"],
+        excludedNamespaces: ["extension1"],
         settings: {
           extension1: {
-            example1: ""
+            setting1: "1"
           }
         }
       },
@@ -22,7 +22,7 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
         name: "@frontity/extension-example-2",
         settings: {
           theme: {
-            example2: ""
+            setting1: "1"
           }
         }
       }
@@ -38,7 +38,7 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
         name: "@frontity/extension-example-2",
         settings: {
           theme: {
-            example2: ""
+            setting1: "1"
           }
         }
       }
@@ -55,7 +55,7 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
         name: "@frontity/extension-example-2",
         settings: {
           theme: {
-            example2: ""
+            setting1: "1"
           }
         }
       }
