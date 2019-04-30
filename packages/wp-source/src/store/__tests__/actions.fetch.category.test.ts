@@ -43,7 +43,7 @@ describe("fetch", () => {
     const store = createOvermindMock(config, {
       source: { resolver, api }
     });
-    await store.actions.source.fetch({ path: "/category/nature/" });
+    await store.actions.source.fetch("/category/nature/");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source.dataMap).toMatchSnapshot();
   });
@@ -115,7 +115,7 @@ describe("fetch", () => {
     const store = createOvermindMock(config, {
       source: { resolver, api }
     });
-    await store.actions.source.fetch({ path: "/category/not-a-category/" });
+    await store.actions.source.fetch("/category/not-a-category/");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source.dataMap).toMatchSnapshot();
   });
@@ -146,8 +146,8 @@ describe("fetch", () => {
     const store = createOvermindMock(config, {
       source: { resolver, api }
     });
-    await store.actions.source.fetch({ path: "/category/nature/" });
-    await store.actions.source.fetch({ path: "/category/nature/" });
+    await store.actions.source.fetch("/category/nature/");
+    await store.actions.source.fetch("/category/nature/");
     expect(api.get).toBeCalledTimes(2);
   });
 });
