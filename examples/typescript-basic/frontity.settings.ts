@@ -1,18 +1,6 @@
-import { Settings, Package } from "@frontity/file-settings";
-
-interface ExtensionExample1 extends Package {
-  name: "@frontity/extension-example-1";
-  settings: {
-    example1: string;
-  };
-}
-
-interface ExtensionExample2 extends Package {
-  name: "@frontity/extension-example-2";
-  settings: {
-    example2: string;
-  };
-}
+import { Settings } from "@frontity/types";
+import ExtensionExample1 from "@frontity/extension-example-1/type";
+import ExtensionExample2 from "@frontity/extension-example-2/type";
 
 const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
   {

@@ -44,6 +44,7 @@
     "typescript": "^3.4.2"
   },
   "dependencies": {
+    "@frontity/types": "^0.1.0",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "fs-extra": "^7.0.1",
