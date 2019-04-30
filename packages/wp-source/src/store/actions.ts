@@ -1,18 +1,25 @@
 import { Action } from "../types";
 import { normalizePath } from "./helpers";
 
-export const fetch: Action<{
+type Path = string;
+type Params = {
   path: string;
   page?: number;
   isPopulating?: boolean;
-}> = async (ctx, { path, page, isPopulating }) => {
+};
+
+export const fetch: Action<Path | Params> = async (ctx, pathOrParams) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
+  let { path, page = 1, isPopulating = false } =
+    typeof pathOrParams === "object" ? pathOrParams : { path: pathOrParams };
+
   // transform links to paths
-  path = normalizePath(path)
-  
-  const data = state.data(path);
+  path = normalizePath(path);
+
+  // Get current data object
+  const data = state.dataMap[path];
 
   // return if the data that it's about to be fetched already exists
   if (data && !page) return;
