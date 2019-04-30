@@ -1,6 +1,6 @@
 import program from "commander";
 import { readFileSync } from "fs-extra";
-import { create, createPackage, dev, build, serve } from "./actions";
+import { create, createPackage, dev, build, serve, subscribe } from "./actions";
 
 const { version } = JSON.parse(
   readFileSync("./package.json", { encoding: "utf8" })
@@ -46,6 +46,11 @@ program
   .option("-s, --https", "Runs the server using https.")
   .description("Starts a server in production mode.")
   .action(serve);
+
+program
+  .command("subscribe <email>")
+  .description("Subscribe to Frontity newsletter.")
+  .action(subscribe);
 
 // Parses the arguments and adds them to the `command` object.
 program.parse(process.argv);
