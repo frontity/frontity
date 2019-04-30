@@ -1,4 +1,4 @@
-import { Package, Derived, Action } from "../";
+import { Package, Derived, Action } from "..";
 import { DataMap, Data } from "./data";
 import { TaxonomyMap, PostTypeMap, AuthorMap, AttachmentMap } from "./entities";
 

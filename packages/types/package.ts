@@ -1,5 +1,3 @@
-import { MonoSettings, MultiSettings } from "./settings";
-
 export interface Package {
   name?: string;
   namespaces?: string[];
@@ -47,16 +45,4 @@ export interface Package {
   // };
 }
 
-export type Settings<Pkg = Package> = [Pkg] extends [never]
-  ? never
-  : MonoSettings<Pkg> | MultiSettings<Pkg>[];
-
-export type Action<Pkg extends Package, Input = null> = [Input] extends [null]
-  ? (state: Pkg["state"]) => void
-  : (state: Pkg["state"]) => (input: Input) => void;
-
-export type Derived<Pkg extends Package, InputOrOutput, Output = null> = [
-  Output
-] extends [null]
-  ? (state: Pkg["state"]) => InputOrOutput
-  : (state: Pkg["state"]) => (input: InputOrOutput) => Output;
+export default Package;

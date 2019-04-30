@@ -1,6 +1,6 @@
 {
   "name": "@frontity/types",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Types for the different Frontity APIs",
   "keywords": [
     "frontity",
@@ -25,6 +25,6 @@
     "@types/jest": "^24.0.11",
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.2"
   }
 }

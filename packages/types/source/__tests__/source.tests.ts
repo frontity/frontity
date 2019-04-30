@@ -1,11 +1,12 @@
 import { Action, Settings } from "../..";
-import Source from "..";
+import Source from "../../source";
 
 // Source.
 const source1 = (libraries: Source["libraries"]): Source => {
   const myInternalArray = [];
 
   return {
+    namespaces: ["source"],
     state: {
       source: {
         data: state => pathOrObj => state.source.dataMap[""],
@@ -35,8 +36,8 @@ const source1 = (libraries: Source["libraries"]): Source => {
 
 // Extended Source.
 interface MySource extends Source {
-  name?: "my-source-package";
-  namespaces?: ("source" | "other")[];
+  name: "my-source-package";
+  namespaces: ("source" | "other")[];
   state: {
     // Add some settings.
     settings: {
@@ -58,6 +59,8 @@ interface MySource extends Source {
 }
 
 const source2: MySource = {
+  name: "my-source-package",
+  namespaces: ["source", "other"],
   state: {
     settings: {
       source: {

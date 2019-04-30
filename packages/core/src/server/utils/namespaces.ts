@@ -1,5 +1,5 @@
 import { NormalizedSettings } from "@frontity/file-settings";
-import { Package } from "@frontity/types";
+import Package from "@frontity/types/package";
 import flatten from "lodash/flatten";
 import { getVariable } from "../../utils/packages";
 
