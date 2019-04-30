@@ -1,7 +1,7 @@
 import { Handler, PostTypeData, EntityData } from "../../types";
 import { populate } from "../helpers";
 
-const pageHandler: Handler = async (ctx, { name, params }) => {
+const pageHandler: Handler = async (ctx, { path, params }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
@@ -11,11 +11,11 @@ const pageHandler: Handler = async (ctx, { name, params }) => {
     (p: any) => p.slug === slug
   );
 
-  let data = state.data(name);
+  let data = state.data(path);
 
   // If not found
   if (!page) {
-    console.log(name);
+    console.log(path);
     const response = await effects.api.get({
       endpoint: "pages",
       params: { slug, _embed: true }
@@ -34,7 +34,7 @@ const pageHandler: Handler = async (ctx, { name, params }) => {
     isFetching: true
   };
 
-  state.dataMap[name] = data;
+  state.dataMap[path] = data;
 };
 
 export default pageHandler;

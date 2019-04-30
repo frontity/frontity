@@ -25,7 +25,7 @@ class Resolver {
   match(
     this: Resolver,
     ctx: Context,
-    { name, page }: { name: string; page?: number }
+    name: string
   ): { handler: Handler; params: { [param: string]: any } } | null {
     let handler;
     let params = {};

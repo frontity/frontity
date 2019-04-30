@@ -75,7 +75,7 @@ export const populate = async (
   for (let [entityType, entityMap] of Object.entries(entities)) {
     for (let [, entity] of Object.entries(entityMap)) {
       const { id, link } = entity;
-      const name = new URL(link).pathname;
+      const path = new URL(link).pathname;
 
       let type: string;
 
@@ -89,22 +89,20 @@ export const populate = async (
 
       state.source[type][id] = entity;
 
-      if (name === '/') console.log(name);
-
       // Do not fetch attachments at this moment
       if (entityType !== "attachment")
-        await fetch(ctx, { name, isPopulating: true });
+        await fetch(ctx, { path, isPopulating: true });
     }
   }
 
   return entityList;
 };
 
-export const normalizeName = (nameOrLink: string): string => {
+export const normalizePath = (pathOrLink: string): string => {
   try {
-    return new URL(nameOrLink).pathname;
+    return new URL(pathOrLink).pathname;
   } catch (e) {
     // is not a URL
-    return nameOrLink;
+    return pathOrLink;
   }
 };

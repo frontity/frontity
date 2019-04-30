@@ -1,13 +1,13 @@
 import { Handler, PostTypeData, EntityData } from "../../types";
 import { populate } from "../helpers";
 
-const postHandler: Handler = async (ctx, { name, params }) => {
+const postHandler: Handler = async (ctx, { path, params }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
   const { slug } = params;
 
-  let data = state.data(name);
+  let data = state.data(path);
 
   let post: EntityData = Object.values(state.post).find(
     (p: any) => p.slug === slug
@@ -31,7 +31,7 @@ const postHandler: Handler = async (ctx, { name, params }) => {
     isPostType: true,
     isPost: true
   };
-  state.dataMap[name] = data;
+  state.dataMap[path] = data;
 };
 
 export default postHandler;

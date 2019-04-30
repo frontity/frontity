@@ -33,7 +33,7 @@ describe("fetch", () => {
     const store = createOvermindMock(config, {
       source: { resolver, api }
     });
-    await store.actions.source.fetch({ name: "/" });
+    await store.actions.source.fetch({ path: "/" });
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(api.get).toBeCalledTimes(1);
     expect(store.state.source.dataMap).toMatchSnapshot();
@@ -56,8 +56,8 @@ describe("fetch", () => {
     const store = createOvermindMock(config, {
       source: { resolver, api }
     });
-    await store.actions.source.fetch({ name: "/" });
-    await store.actions.source.fetch({ name: "/" });
+    await store.actions.source.fetch({ path: "/" });
+    await store.actions.source.fetch({ path: "/" });
     expect(api.get).toBeCalledTimes(1);
   });
 
@@ -83,8 +83,8 @@ describe("fetch", () => {
     const store = createOvermindMock(config, {
       source: { resolver, api }
     });
-    await store.actions.source.fetch({ name: "/" });
-    await store.actions.source.fetch({ name: "/", page: 2 });
+    await store.actions.source.fetch({ path: "/" });
+    await store.actions.source.fetch({ path: "/", page: 2 });
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(api.get).toBeCalledTimes(2);
     expect(store.state.source.dataMap).toMatchSnapshot();

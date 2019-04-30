@@ -1,12 +1,12 @@
 import { Handler } from "../../types";
 import { populate, getTotal, getTotalPages } from "../helpers";
 
-const postArchiveHandler: Handler = async (ctx, { name, params, page = 1 }) => {
+const postArchiveHandler: Handler = async (ctx, { path, params, page = 1 }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
   // 0. Get data from store
-  let data = state.data(name);
+  let data = state.data(path);
 
   // 1. init data if it isn't already
   if (!data.isPostArchive) {
@@ -21,7 +21,7 @@ const postArchiveHandler: Handler = async (ctx, { name, params, page = 1 }) => {
       isFetching: true,
     };
 
-    state.dataMap[name] = data;
+    state.dataMap[path] = data;
   }
   
   if (!data.pages[page - 1]) {

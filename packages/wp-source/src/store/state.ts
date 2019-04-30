@@ -1,4 +1,4 @@
-import { normalizeName } from "./helpers";
+import { normalizePath } from "./helpers";
 import {
   DataMap,
   TaxonomyMap,
@@ -21,7 +21,7 @@ type State = {
 };
 
 export const state: State = {
-  data: state => nameOrLink => state.dataMap[normalizeName(nameOrLink)],
+  data: state => nameOrLink => state.dataMap[normalizePath(nameOrLink)],
   dataMap: {},
   // taxonomy: {},
   // type: {},

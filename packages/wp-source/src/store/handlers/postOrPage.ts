@@ -1,7 +1,7 @@
 import { Handler, PostTypeData, EntityData } from "../../types";
 import { populate } from "../helpers";
 
-const postOrPageHandler: Handler = async (ctx, { name, params }) => {
+const postOrPageHandler: Handler = async (ctx, { path, params }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
@@ -33,7 +33,7 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
   // Init data
   const { type, id } = post || page;
   if (post || page) {
-    state.dataMap[name] = {
+    state.dataMap[path] = {
       type,
       id,
       isPostType: true,
@@ -41,8 +41,8 @@ const postOrPageHandler: Handler = async (ctx, { name, params }) => {
     };
   }
 
-  if (post) state.dataMap[name].isPost = true;
-  else if (page) state.dataMap[name].isPage = true;
+  if (post) state.dataMap[path].isPost = true;
+  else if (page) state.dataMap[path].isPage = true;
 };
 
 export default postOrPageHandler;

@@ -7,13 +7,13 @@ import { getIdBySlug, populate, getTotal, getTotalPages } from "../helpers";
 
 const categoryHandler: Handler = async (
   ctx,
-  { name, params, page = 1, isPopulating }
+  { path, params, page = 1, isPopulating }
 ) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
   
   // 0. Get data from store
-  let data = state.dataMap[name];
+  let data = state.dataMap[path];
 
   // 1. init data if it isn't already
   if (!data.isCategory) {
@@ -31,7 +31,7 @@ const categoryHandler: Handler = async (
       isFetching: true,
     };
 
-    state.dataMap[name] = data;
+    state.dataMap[path] = data;
   }
 
   // 2. If data is a Tag, then all data is populated

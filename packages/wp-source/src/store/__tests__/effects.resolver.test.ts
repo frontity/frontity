@@ -30,9 +30,9 @@ Object.values(routes).forEach(({ pattern, handler }) => {
 });
 
 // Test 'handler' is executed with the correct params
-const testMatch = (type, name, params, page = 1) => {
+const testMatch = (type, name, params) => {
   const ctx = {};
-  const match = resolver.match(ctx as Context, { name, page });
+  const match = resolver.match(ctx as Context, name);
   expect(match.handler).toBe(routes[type].handler);
   expect(match.params).toEqual(params);
 };

@@ -46,7 +46,7 @@ export interface Context extends IContext<Config> {}
 export type Handler = (
   context: Context,
   payload: {
-    name: string;
+    path: string;
     params: { [param: string]: any };
     page?: number;
     isPopulating?: boolean;

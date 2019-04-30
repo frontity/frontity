@@ -1,7 +1,7 @@
 import { Handler, DateData } from "../../types";
 import { populate, getTotal, getTotalPages } from "../helpers";
 
-const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {
+const dateHandler: Handler = async (ctx, { path, params, page = 1 }) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
@@ -10,7 +10,7 @@ const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {
   const date = `${year}-${month}-${day}T00:00:00`;
 
   // 0. Get data from store
-  let data = state.data(name);
+  let data = state.data(path);
 
   // 1. init data if it isn't already
   if (!data.isDate) {
@@ -21,7 +21,7 @@ const dateHandler: Handler = async (ctx, { name, params, page = 1 }) => {
       isDate: true,
       isFetching: true,
     };
-    state.dataMap[name] = data;
+    state.dataMap[path] = data;
   }
   
   if (!data.pages[page - 1]) {
