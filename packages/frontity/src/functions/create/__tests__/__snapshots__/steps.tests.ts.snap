@@ -176,7 +176,7 @@ Array [
 exports[`downloadFavicon works as expected 1`] = `
 Array [
   Array [
-    "https://faviconfrontityorg-orballo.frontity.now.sh/",
+    "https://favicon.frontity.org/",
   ],
 ]
 `;
