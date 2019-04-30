@@ -20,7 +20,6 @@ import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
 import createStores from "../stores/server";
-import { sortedLastIndex } from "lodash-es";
 
 export default ({ packages }) => {
   const app = new Koa();
