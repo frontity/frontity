@@ -51,6 +51,18 @@ class Api {
     // Send request
     return fetch(`${requestUrl}${query}`);
   }
+
+  async getIdBySlug(endpoint: string, slug: string) {
+    const response = await this.get({ endpoint, params: { slug } });
+    const [entity] = await response.json();
+
+    if (!entity)
+      throw new Error(
+        `Entity of from endpoint '${endpoint}' with slug '${slug}' not found`
+      );
+
+    return entity.id;
+  }
 }
 
 export const api = new Api();

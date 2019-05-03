@@ -6,6 +6,9 @@ import {
   IDerive,
   IState
 } from "overmind";
+
+import { Data, DataMap } from "./data";
+import { TaxonomyMap, PostTypeMap, AttachmentMap, AuthorMap } from "./entities";
 import * as source from "../store";
 
 const settings = {
@@ -16,6 +19,17 @@ const settings = {
       source: {} as Settings
     }
   }
+};
+
+export type State = {
+  data: Derive<State, (pathOrLink: string) => Data>;
+  dataMap: DataMap;
+  category: TaxonomyMap;
+  tag: TaxonomyMap;
+  post: PostTypeMap;
+  page: PostTypeMap;
+  author: AuthorMap;
+  attachment: AttachmentMap;
 };
 
 export interface Config

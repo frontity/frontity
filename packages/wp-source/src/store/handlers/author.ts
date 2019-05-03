@@ -1,31 +1,33 @@
 import { Handler } from "../../types";
-import { getIdBySlug, populate, getTotal, getTotalPages } from "../helpers";
+import { getIdBySlug, getTotal, getTotalPages } from "../helpers";
 
 // CASES:
 // 1. !data.isAuthor
 // 2. !isPopulating && data.isAuthor && !data.pages[page - 1]
 
-const tagHandler: Handler = async (
+const authorHandler: Handler = async (
   ctx,
   { path, params, page = 1, isPopulating }
 ) => {
   const state = ctx.state.source;
-  const effects = ctx.effects.source;
-  
+  const { api, populate } = ctx.effects.source;
+
   // 0. Get data from store
-  let data = state.data(path);
+  let data = state.dataMap[path];
 
   // 1. init data if it isn't already
   if (!data.isAuthor) {
     // Search id in state or get it from WP REST API
-    const id = await getIdBySlug(ctx, "author", params.slug);
+    const { slug } = params;
+    const id =
+      getIdBySlug(state.author, slug) || (await api.getIdBySlug("users", slug));
 
     data = {
       id,
       pages: [],
       isArchive: true,
       isAuthor: true,
-      isFetching: true,
+      isFetching: true
     };
 
     state.dataMap[path] = data;
@@ -37,12 +39,12 @@ const tagHandler: Handler = async (
     const { id } = data;
     // and we don't need to init data
     // just get the page we are requesting
-    const response = await effects.api.get({
+    const response = await api.get({
       endpoint: "posts",
       params: { author: id, search: params.s, page, _embed: true }
     });
     // populate response and add page to data
-    data.pages[page - 1] = await populate(ctx, response);
+    data.pages[page - 1] = await populate(state, response);
     // and assign total and totalPages values
     data.total = getTotal(response);
     data.totalPages = getTotalPages(response);
@@ -52,4 +54,4 @@ const tagHandler: Handler = async (
   data.isReady = true;
 };
 
-export default tagHandler;
+export default authorHandler;

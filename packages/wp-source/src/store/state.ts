@@ -1,27 +1,8 @@
 import { normalizePath } from "./helpers";
-import {
-  DataMap,
-  TaxonomyMap,
-  PostTypeMap,
-  AttachmentMap,
-  AuthorMap,
-  Derive,
-  Data
-} from "../types";
-
-type State = {
-  data: Derive<State, (nameOrLink: string) => Data>;
-  dataMap: DataMap;
-  category: TaxonomyMap;
-  tag: TaxonomyMap;
-  post: PostTypeMap;
-  page: PostTypeMap;
-  author: AuthorMap;
-  attachment: AttachmentMap;
-};
+import { State } from "../types";
 
 export const state: State = {
-  data: state => nameOrLink => state.dataMap[normalizePath(nameOrLink)],
+  data: state => pathOrLink => state.dataMap[normalizePath(pathOrLink)],
   dataMap: {},
   // taxonomy: {},
   // type: {},

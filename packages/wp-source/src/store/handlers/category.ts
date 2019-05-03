@@ -1,5 +1,5 @@
 import { Handler } from "../../types";
-import { getIdBySlug, populate, getTotal, getTotalPages } from "../helpers";
+import { getIdBySlug, getTotal, getTotalPages } from "../helpers";
 
 // CASES:
 // 1. !data.isCategory
@@ -10,25 +10,27 @@ const categoryHandler: Handler = async (
   { path, params, page = 1, isPopulating }
 ) => {
   const state = ctx.state.source;
-  const effects = ctx.effects.source;
-  
+  const { api, populate } = ctx.effects.source;
+
   // 0. Get data from store
   let data = state.dataMap[path];
 
   // 1. init data if it isn't already
   if (!data.isCategory) {
-    // Search id in state of get it from WP REST API
-    const taxonomy = "category"
-    const id = await getIdBySlug(ctx, "category", params.slug);
+    // Search id in state or get it from WP REST API
+    const { slug } = params;
+    const id =
+      getIdBySlug(state.category, slug) ||
+      (await api.getIdBySlug("categories", slug));
 
     data = {
-      taxonomy,
       id,
+      taxonomy: "category",
       pages: [],
       isArchive: true,
       isTaxonomy: true,
       isCategory: true,
-      isFetching: true,
+      isFetching: true
     };
 
     state.dataMap[path] = data;
@@ -40,12 +42,12 @@ const categoryHandler: Handler = async (
     const { id } = data;
     // and we don't need to init data
     // just get the page we are requesting
-    const response = await effects.api.get({
+    const response = await api.get({
       endpoint: "posts",
       params: { categories: id, search: params.s, page, _embed: true }
     });
     // populate response and add page to data
-    data.pages[page - 1] = await populate(ctx, response);
+    data.pages[page - 1] = await populate(state, response);
     // and assign total and totalPages values
     data.total = getTotal(response);
     data.totalPages = getTotalPages(response);

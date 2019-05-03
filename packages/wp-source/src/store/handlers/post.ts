@@ -1,37 +1,32 @@
-import { Handler, PostTypeData, EntityData } from "../../types";
-import { populate } from "../helpers";
+import { Handler } from "../../types";
+import { getIdBySlug } from "../helpers";
 
 const postHandler: Handler = async (ctx, { path, params }) => {
   const state = ctx.state.source;
-  const effects = ctx.effects.source;
+  const { api, populate } = ctx.effects.source;
 
   const { slug } = params;
+  let id = getIdBySlug(state.post, slug);
 
-  let data = state.data(path);
-
-  let post: EntityData = Object.values(state.post).find(
-    (p: any) => p.slug === slug
-  );
-
-  // If not found
-  if (!post) {
-    const response = await effects.api.get({
+  // Get post from REST API if not found
+  if (!id) {
+    const response = await api.get({
       endpoint: "posts",
       params: { slug, _embed: true }
     });
 
-    [post] = await populate(ctx, response);
+    // the next line will fail if post with id doesn't exist
+    [{ id }] = await populate(state, response);
   }
 
   // Init data
-  const { type, id } = post;
-  data = {
-    type,
+  state.dataMap[path] = {
     id,
+    type: "post",
     isPostType: true,
-    isPost: true
+    isPost: true,
+    isFetching: true,
   };
-  state.dataMap[path] = data;
 };
 
 export default postHandler;
