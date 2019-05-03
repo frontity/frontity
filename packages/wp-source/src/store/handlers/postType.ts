@@ -1,9 +1,10 @@
 import { Handler } from "../../types";
-import postHandler from "./post";
-import pageHandler from "./page";
+import post from "./post";
+import page from "./page";
+import attachment from "./attachment";
 
 const postOrPageHandler: Handler = async (ctx, { path, params }) => {
-  for (let handler of [postHandler, pageHandler]) {
+  for (let handler of [post, page, attachment]) {
     try {
       await handler(ctx, { path, params });
       break;

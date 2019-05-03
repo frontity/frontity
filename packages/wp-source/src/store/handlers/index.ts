@@ -1,5 +1,5 @@
 import attachment from "./attachment";
-import postOrPage from "./postOrPage";
+import postType from "./postType";
 import post from "./post";
 import page from "./page";
 import author from "./author";
@@ -10,7 +10,7 @@ import date from "./date";
 
 export {
   attachment,
-  postOrPage,
+  postType,
   post,
   page,
   author,
