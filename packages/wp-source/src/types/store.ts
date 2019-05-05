@@ -63,7 +63,6 @@ export type Handler = (
     path: string;
     params: { [param: string]: any };
     page?: number;
-    isPopulating?: boolean;
   }
 ) => Promise<void>;
 

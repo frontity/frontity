@@ -1,14 +1,7 @@
 import { Handler } from "../../types";
 import { getIdBySlug, getTotal, getTotalPages } from "../helpers";
 
-// CASES:
-// 1. !data.isCategory
-// 2. !isPopulating && data.isCategory && !data.pages[page - 1]
-
-const categoryHandler: Handler = async (
-  ctx,
-  { path, params, page = 1, isPopulating }
-) => {
+const categoryHandler: Handler = async (ctx, { path, params, page = 1 }) => {
   const state = ctx.state.source;
   const { api, populate } = ctx.effects.source;
 
@@ -36,8 +29,8 @@ const categoryHandler: Handler = async (
     state.dataMap[path] = data;
   }
 
-  // 2. If data is a Tag, then all data is populated
-  if (!isPopulating && data.isCategory && !data.pages[page - 1]) {
+  // 2. fetch the specified page if necessary
+  if (!data.pages[page - 1]) {
     // here we know the id!!
     const { id } = data;
     // and we don't need to init data
@@ -52,9 +45,6 @@ const categoryHandler: Handler = async (
     data.total = getTotal(response);
     data.totalPages = getTotalPages(response);
   }
-
-  // 3. At this point, data is ready to be consumed
-  data.isReady = true;
 };
 
 export default categoryHandler;

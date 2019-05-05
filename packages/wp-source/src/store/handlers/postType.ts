@@ -3,7 +3,7 @@ import post from "./post";
 import page from "./page";
 import attachment from "./attachment";
 
-const postOrPageHandler: Handler = async (ctx, { path, params }) => {
+const postType: Handler = async (ctx, { path, params }) => {
   for (let handler of [post, page, attachment]) {
     try {
       await handler(ctx, { path, params });
@@ -15,4 +15,4 @@ const postOrPageHandler: Handler = async (ctx, { path, params }) => {
   }
 };
 
-export default postOrPageHandler;
+export default postType;

@@ -24,6 +24,7 @@ const dateHandler: Handler = async (ctx, { path, params, page = 1 }) => {
     state.dataMap[path] = data;
   }
 
+  // 2. fetch the specified page if necessary
   if (!data.pages[page - 1]) {
     const response = await api.get({
       endpoint: "posts",

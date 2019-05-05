@@ -1,17 +1,18 @@
 import { Action } from "../types";
 import { normalizePath } from "./helpers";
 
-type PathOrObj = string | {
-  path: string;
-  page?: number;
-  isPopulating?: boolean;
-};
+type PathOrObj =
+  | string
+  | {
+      path: string;
+      page?: number;
+    };
 
 export const fetch: Action<PathOrObj> = async (ctx, pathOrObj) => {
   const state = ctx.state.source;
   const effects = ctx.effects.source;
 
-  let { path, page = 1, isPopulating = false } =
+  let { path, page = 1 } =
     typeof pathOrObj === "object" ? pathOrObj : { path: pathOrObj };
 
   // transform whole links to paths
@@ -29,7 +30,7 @@ export const fetch: Action<PathOrObj> = async (ctx, pathOrObj) => {
   // get and execute the corresponding handler based on path
   try {
     const { handler, params } = effects.resolver.match(ctx, path);
-    await handler(ctx, { path, params, page, isPopulating });
+    await handler(ctx, { path, params, page });
     state.dataMap[path].isReady = true;
   } catch (e) {
     console.warn(`An error ocurred fetching '${path}:'\n`, e);
