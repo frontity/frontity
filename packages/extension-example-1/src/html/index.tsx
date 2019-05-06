@@ -1,8 +1,7 @@
 import React from "react";
-import ExtensionExample1 from "../../type";
-import { Namespaces } from "@frontity/types";
+import Package from "../../type";
 
-const ExtensionExample1: ExtensionExample1 = {
+const ExtensionExample1: Package = {
   name: "@frontity/extension-example-1",
   namespaces: ["extension1", "comments"],
   state: {
