@@ -13,7 +13,7 @@ export default async (): Promise<Site[]> => {
       .filter(pkg => pkg.active)
       .map(pkg => ({
         name: pkg.name,
-        namespaces: pkg.namespaces
+        exclude: pkg.exclude
       }))
   }));
 };

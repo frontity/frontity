@@ -5,7 +5,7 @@ import { DeepPartial } from "./utils";
 type PackageForSettings<Pkg extends Package> = {
   name: Required<Pkg["name"]>;
   active?: boolean;
-  excludedNamespaces?: Pkg["namespaces"];
+  exclude?: Pkg["namespaces"];
   settings?: DeepPartial<Pkg["state"]["settings"]>;
 };
 

@@ -6,6 +6,7 @@ const Dynamic = loadable(() => import("./dynamic2"));
 
 const ExtensionExample2: ExtensionExample2 = {
   name: "@frontity/extension-example-2",
+  namespaces: ["theme", "comments"],
   state: {
     settings: {
       theme: {

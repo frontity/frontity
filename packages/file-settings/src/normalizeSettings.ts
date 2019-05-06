@@ -17,11 +17,11 @@ const defaultSettings = {
 
 const defaultPackage: {
   active: boolean;
-  namespaces: string[];
+  exclude: string[];
   settings: { [namespace: string]: object };
 } = {
   active: true,
-  namespaces: [],
+  exclude: [],
   settings: {}
 };
 

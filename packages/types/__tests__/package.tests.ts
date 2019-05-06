@@ -105,7 +105,7 @@ const package3: Settings<Package1 | Package2> = {
   packages: [
     {
       name: "package-1",
-      excludedNamespaces: ["namespace1"],
+      exclude: ["namespace1"],
       settings: {
         namespace1: {
           prop1: ""
@@ -114,7 +114,7 @@ const package3: Settings<Package1 | Package2> = {
     },
     {
       name: "package-2",
-      excludedNamespaces: ["namespace2", "namespace3"],
+      exclude: ["namespace2", "namespace3"],
       settings: {
         namespace2: {
           prop2: ""
