@@ -3,8 +3,23 @@ import { namespaced } from "overmind/config";
 import { state, actions, effects } from "../../";
 import handler from "../post";
 
-import { mockResponse, expectEntities } from "./mocks/helpers";
-import post60 from "./mocks/post60.json";
+import { mockResponse } from "./mocks/helpers";
+
+const post60 = {
+  id: 60,
+  date: "2016-11-25T18:31:11",
+  slug: "the-beauties-of-gullfoss",
+  type: "post",
+  link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
+  title: {},
+  content: {},
+  excerpt: {},
+  author: 4,
+  featured_media: 62,
+  meta: [],
+  categories: [57, 59, 56, 3, 8, 58],
+  tags: [10, 9, 13, 11]
+};
 
 let mocks;
 beforeEach(() => {
@@ -18,7 +33,7 @@ beforeEach(() => {
     },
     // Mock api
     api: {
-      get: jest.fn().mockResolvedValue(mockResponse(post60))
+      get: jest.fn().mockResolvedValue(mockResponse([post60]))
     },
     // Populate
     populate: jest.fn().mockResolvedValue([
@@ -39,7 +54,6 @@ describe("post", () => {
     await store.actions.source.fetch("/the-beauties-of-gullfoss/");
 
     expect(store.state.source.dataMap).toMatchSnapshot();
-    // expectEntities(store.state.source);
   });
 
   test("exists in source.post", async () => {
@@ -48,23 +62,7 @@ describe("post", () => {
         actions,
         state: {
           ...state,
-          post: {
-            60: {
-              id: 60,
-              date: "2016-11-25T18:31:11",
-              slug: "the-beauties-of-gullfoss",
-              type: "post",
-              link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
-              title: {},
-              content: {},
-              excerpt: {},
-              author: 4,
-              featured_media: 62,
-              meta: [],
-              categories: [57, 59, 56, 3, 8, 58],
-              tags: [10, 9, 13, 11]
-            }
-          }
+          post: { 60: post60 }
         },
         effects
       }
@@ -75,7 +73,6 @@ describe("post", () => {
 
     expect(mocks.api.get).not.toBeCalled();
     expect(store.state.source.dataMap).toMatchSnapshot();
-    // expectEntities(store.state.source);
   });
 
   test("throws an error if it doesn't exist", async () => {
@@ -88,6 +85,5 @@ describe("post", () => {
     await store.actions.source.fetch("/the-beauties-of-gullfoss/");
 
     expect(store.state.source.dataMap).toMatchSnapshot();
-    // expectEntities(store.state.source);
   });
 });
