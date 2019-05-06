@@ -13,8 +13,8 @@ const site = [
     name: "site-1",
     mode: "html",
     packages: [
-      { name: "package1", namespaces: [] },
-      { name: "package2", namespaces: ["ns1", "ns2"] }
+      { name: "package1", exclude: [] },
+      { name: "package2", exclude: ["ns1", "ns2"] }
     ]
   }
 ];
@@ -23,23 +23,23 @@ const sites = [
     name: "site-html",
     mode: "html",
     packages: [
-      { name: "package1", namespaces: [] },
-      { name: "package2", namespaces: [] },
-      { name: "package2", namespaces: [] }
+      { name: "package1", exclude: [] },
+      { name: "package2", exclude: [] },
+      { name: "package2", exclude: [] }
     ]
   },
   {
     name: "site-amp",
     mode: "amp",
     packages: [
-      { name: "package1", namespaces: [] },
-      { name: "package3", namespaces: [] }
+      { name: "package1", exclude: [] },
+      { name: "package3", exclude: [] }
     ]
   },
   {
     name: "site-2",
     mode: "html",
-    packages: [{ name: "package1", namespaces: [] }]
+    packages: [{ name: "package1", exclude: [] }]
   }
 ];
 
