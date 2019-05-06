@@ -226,19 +226,6 @@ describe("observe", () => {
     expect(dummy).toEqual(undefined);
   });
 
-  it("should observe function valued properties", () => {
-    const oldFunc = () => {};
-    const newFunc = () => {};
-
-    let dummy;
-    const obj = observable({ func: oldFunc });
-    observe(() => (dummy = obj.func));
-
-    expect(dummy).toEqual(oldFunc);
-    obj.func = newFunc;
-    expect(dummy).toEqual(newFunc);
-  });
-
   it("should not observe set operations without a value change", () => {
     let hasDummy, getDummy;
     const obj = observable({ prop: "value" });

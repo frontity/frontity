@@ -41,15 +41,47 @@ describe("observable", () => {
     expect(dummy).toEqual(12);
   });
 
-  it("should never let observables leak into the underlying raw object", () => {
+  it("should convert to observables on the fly", () => {
     const obj = {};
     const obs = observable(obj);
     obs.nested1 = {};
     obs.nested2 = observable();
     expect(isObservable(obj.nested1)).toEqual(false);
     expect(isObservable(obj.nested2)).toEqual(false);
-    expect(isObservable(obs.nested1)).toEqual(false);
+    expect(isObservable(obs.nested1)).toEqual(true);
     expect(isObservable(obs.nested2)).toEqual(true);
+  });
+
+  it("should run a function with the root observable as argument", () => {
+    const obj = {
+      prop1: 1,
+      prop2: obj => obj.prop1 + 1,
+      nested1: {
+        prop3: obj => obj.prop1 + 2,
+        prop4: obj => obj.prop2 + obj.nested1.prop3
+      }
+    };
+    const obs = observable(obj);
+    expect(obs.prop1).toEqual(1);
+    expect(obs.prop2).toEqual(2);
+    expect(obs.nested1.prop3).toEqual(3);
+    expect(obs.nested1.prop4).toEqual(5);
+  });
+
+  it("should be able to return functions from root functions", () => {
+    const obj = {
+      prop1: 1,
+      prop2: obj => num => obj.prop1 + num,
+      nested1: {
+        prop3: obj => num => obj.prop1 + num,
+        prop4: obj => num => obj.prop2(num) + obj.nested1.prop3(num) + num
+      }
+    };
+    const obs = observable(obj);
+    expect(obs.prop1).toEqual(1);
+    expect(obs.prop2(2)).toEqual(3);
+    expect(obs.nested1.prop3(3)).toEqual(4);
+    expect(obs.nested1.prop4(2)).toEqual(8);
   });
 });
 

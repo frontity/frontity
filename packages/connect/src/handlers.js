@@ -1,9 +1,8 @@
 import { observable } from "./observable";
-import { proxyToRaw, rawToProxy } from "./internals";
+import { proxyToRaw, rawToProxy, rawToRoot } from "./internals";
 import {
   registerRunningReactionForOperation,
-  queueReactionsForOperation,
-  hasRunningReaction
+  queueReactionsForOperation
 } from "./reactionRunner";
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -15,7 +14,15 @@ const wellKnownSymbols = new Set(
 
 // intercept get operations on observables to know which reaction uses their properties
 function get(target, key, receiver) {
-  const result = Reflect.get(target, key, receiver);
+  // get the root of that target.
+  const root = rawToRoot.get(target);
+
+  const result =
+    !Array.isArray(target) && typeof target[key] === "function"
+      ? // if it's a function, return the result of that function run with the root.
+        target[key](rawToProxy.get(root))
+      : // if it's not, return the real result.
+        Reflect.get(target, key, receiver);
   // do not register (observable.prop -> reaction) pairs for well known symbols
   // these symbols are frequently retrieved in low level JavaScript under the hood
   if (typeof key === "symbol" && wellKnownSymbols.has(key)) {
@@ -26,7 +33,7 @@ function get(target, key, receiver) {
   // if we are inside a reaction and observable.prop is an object wrap it in an observable too
   // this is needed to intercept property access on that object too (dynamic observable tree)
   const observableResult = rawToProxy.get(result);
-  if (hasRunningReaction() && typeof result === "object" && result !== null) {
+  if (typeof result === "object" && result !== null) {
     if (observableResult) {
       return observableResult;
     }
@@ -37,7 +44,7 @@ function get(target, key, receiver) {
       !descriptor ||
       !(descriptor.writable === false && descriptor.configurable === false)
     ) {
-      return observable(result);
+      return observable(result, root);
     }
   }
   // otherwise return the observable wrapper if it is already created and cached or the raw object
