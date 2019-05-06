@@ -5,7 +5,7 @@ import { hydrate as hydrateEmotion } from "emotion";
 import App from "../app";
 import createStores from "../stores/client";
 
-export default async ({ namespaces }) => {
+export default async ({ packages }) => {
   // Hydrate Emotion.
   const ids = document.getElementById("__EMOTION_HYDRATATION_IDS__");
   if (ids) hydrateEmotion(JSON.parse(ids.innerHTML));

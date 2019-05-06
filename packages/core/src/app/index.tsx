@@ -6,8 +6,8 @@ import { Overmind } from "overmind";
 import { Provider } from "overmind-react";
 
 type Props = {
-  namespaces: { [key: string]: Namespace };
-  stores: Overmind<{}>;
+  // namespaces: { [key: string]: Namespace };
+  // stores: Overmind<{}>;
 };
 
 const App: React.FunctionComponent<Props> = ({ namespaces, stores }) => (

@@ -15,7 +15,6 @@ import {
   getBothScriptTags,
   Extractor
 } from "./utils/stats";
-import getNamespaces from "./utils/namespaces";
 import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
@@ -58,31 +57,28 @@ export default ({ packages }) => {
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
 
-    // Get the correct namespaces for this site.
-    const namespaces = getNamespaces({ packages, settings });
-
     // Init variables.
     let html = "";
     const frontity: FrontityTags = {};
 
     // Create the stores.
-    const { stores } = createStores({ namespaces });
+    // const { stores } = createStores({ namespaces });
 
     // Wait until the store has been initialized. This waits for the onIntilize actions.
-    await stores.initialized;
+    // await stores.initialized;
 
-    // Add settings.
-    stores.settings = settings;
-    stores.actions.settings.addSettings(stores);
+    // // Add settings.
+    // stores.settings = settings;
+    // stores.actions.settings.addSettings(stores);
 
     // Run beforeSSR actions.
-    Object.values(stores.actions).forEach(
-      (namespace: { beforeSSR?: (stores) => {} }) => {
-        if (namespace.beforeSSR) namespace.beforeSSR(stores);
-      }
-    );
+    // Object.values(stores.actions).forEach(
+    //   (namespace: { beforeSSR?: (stores) => {} }) => {
+    //     if (namespace.beforeSSR) namespace.beforeSSR(stores);
+    //   }
+    // );
 
-    const Component = <App namespaces={namespaces} stores={stores} />;
+    const Component = <App />;
 
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.
@@ -115,9 +111,9 @@ export default ({ packages }) => {
           : extractor.getScriptTags();
 
       // Add mutations to our scripts.
-      frontity.script = `<script id="__OVERMIND_MUTATIONS__" type="application/json">${JSON.stringify(
-        stores.hydrate()
-      )}</script>\n${frontity.script}`;
+      // frontity.script = `<script id="__OVERMIND_MUTATIONS__" type="application/json">${JSON.stringify(
+      //   stores.hydrate()
+      // )}</script>\n${frontity.script}`;
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.
