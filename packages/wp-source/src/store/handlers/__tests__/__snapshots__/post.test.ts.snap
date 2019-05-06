@@ -13,39 +13,6 @@ Object {
 }
 `;
 
-exports[`post doesn't exist in source.post 2`] = `
-Object {
-  "attachment": Array [
-    13,
-    62,
-    70,
-    84,
-    95,
-    118,
-  ],
-  "author": Array [
-    4,
-  ],
-  "category": Array [
-    3,
-    8,
-    56,
-    57,
-    58,
-    59,
-  ],
-  "post": Array [
-    60,
-  ],
-  "tag": Array [
-    9,
-    10,
-    11,
-    13,
-  ],
-}
-`;
-
 exports[`post exists in source.post 1`] = `
 Object {
   "/the-beauties-of-gullfoss/": Object {
@@ -59,33 +26,11 @@ Object {
 }
 `;
 
-exports[`post exists in source.post 2`] = `
-Object {
-  "attachment": Array [],
-  "author": Array [],
-  "category": Array [],
-  "post": Array [
-    60,
-  ],
-  "tag": Array [],
-}
-`;
-
 exports[`post throws an error if it doesn't exist 1`] = `
 Object {
   "/the-beauties-of-gullfoss/": Object {
     "is404": true,
     "isFetching": false,
   },
-}
-`;
-
-exports[`post throws an error if it doesn't exist 2`] = `
-Object {
-  "attachment": Array [],
-  "author": Array [],
-  "category": Array [],
-  "post": Array [],
-  "tag": Array [],
 }
 `;
