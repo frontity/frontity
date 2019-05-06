@@ -1,5 +1,5 @@
 type Base = {
-  matches?: string[]; // Default: undefined
+  match?: string[]; // Default: undefined
   mode?: string; // Default: "html"
   settings?: {
     url?: string; // Default: undefined

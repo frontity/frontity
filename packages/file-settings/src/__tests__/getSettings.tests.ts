@@ -68,7 +68,7 @@ describe("getSettings", () => {
     expect(settings.name).toBe("settings-with-large-match");
   });
 
-  test("should work when none of the settings matches `url` but one doesn't have `matches` defined", async () => {
+  test("should work when none of the settings matches `url` but one doesn't have `match` defined", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithOneMatch);
     const settings = await getSettings({
       url: "https://frontity.org"
@@ -76,7 +76,7 @@ describe("getSettings", () => {
     expect(settings.name).toBe("settings-without-match");
   });
 
-  test("should work when none of the settings matches `url` and all have `matches` defined", async () => {
+  test("should work when none of the settings matches `url` and all have `match` defined", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithMatches);
     const settings = await getSettings({
       url: "https://not.frontity.org"

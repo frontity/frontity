@@ -11,7 +11,7 @@ type PackageForSettings<Pkg extends Package> = {
 
 export interface MonoSettings<Pkg extends Package = Package> {
   name?: string;
-  matches?: string[];
+  match?: string[];
   mode?: string;
   settings?: {
     url?: string;
