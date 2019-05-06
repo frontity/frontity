@@ -10,7 +10,7 @@ beforeEach(() => {
         prop2: 2,
         prop3: state => state.prop1 + state.nested1.prop2,
         prop4: state => num => state.nested1.prop3 + num,
-        prop5: null
+        prop5: 0
       }
     },
     actions: {
@@ -29,6 +29,9 @@ beforeEach(() => {
           },
           action4: state => {
             state.nested1.prop5 = state.nested1.prop4(2);
+          },
+          action5: state => num => {
+            state.nested1.prop5 = state.nested1.prop4(num);
           }
         }
       }
@@ -73,5 +76,11 @@ describe("createStore actions", () => {
     const store = createStore(config);
     store.actions.nested2.nested3.action4();
     expect(store.state.nested1.prop5).toBe(5);
+  });
+
+  it("should accept parameters", () => {
+    const store = createStore(config);
+    store.actions.nested2.nested3.action5(3);
+    expect(store.state.nested1.prop5).toBe(6);
   });
 });
