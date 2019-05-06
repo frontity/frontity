@@ -4,42 +4,104 @@ import { state, actions, effects } from "../../";
 import handler from "../category";
 
 import { mockResponse, expectEntities } from "./mocks/helpers";
-import posts from "../../__tests__/mocks/postsFromCategory.json";
+import posts from "./mocks/postsCat7.json";
 
-
-describe("category", () => {
-  test("doesn't exist in source.category", async () => {
-    const path = "/category/nature/";
-    const slug = "nature";
-
+let mocks;
+beforeEach(() => {
+  mocks = {
     // Mock resolver
-    const resolver = {
-      match: jest.fn().mockReturnValue({ handler, params: { slug } })
-    };
-    // Mock get responses
-    const api = {
+    resolver: {
+      match: jest.fn().mockReturnValue({ handler, params: { slug: "nature" } })
+    },
+    // Mock api
+    api: {
       getIdBySlug: jest.fn().mockResolvedValue(7),
       get: jest.fn().mockResolvedValue(
         mockResponse(posts, {
           "X-WP-Total": 10,
-          "X-WP-TotalPages": 1
+          "X-WP-TotalPages": 5
         })
       )
-    };
+    },
+    // Populate
+    populate: effects.populate
+  };
+});
+
+describe("category", () => {
+  test("doesn't exist in source.category", async () => {
     const config = namespaced({ source: { actions, state, effects } });
-    const store = createOvermindMock(config, {
-      source: { resolver, api, populate: effects.populate }
-    });
+    const store = createOvermindMock(config, { source: mocks });
 
-    await store.actions.source.fetch(path);
-    expect(api.get.mock.calls).toMatchSnapshot();
+    await store.actions.source.fetch("/category/nature/");
+
     expect(store.state.source.dataMap).toMatchSnapshot();
-
-    // Check that all entities are being populated
     expectEntities(store.state.source);
   });
 
-  test("exists in source.category but not in source.data", () => {});
-  test("exists in source.data but doesn't have page", () => {});
-  test("throws an error if it doesn't exist", () => {});
+  test("exists in source.category but not in source.data", async () => {
+    const config = namespaced({
+      source: {
+        actions,
+        state: {
+          ...state,
+          category: {
+            7: {
+              id: 7,
+              count: 10,
+              description: "",
+              link: "https://test.frontity.io/category/nature/",
+              name: "Nature",
+              slug: "nature",
+              taxonomy: "category",
+              parent: 0,
+              meta: []
+            }
+          }
+        },
+        effects
+      }
+    });
+    const store = createOvermindMock(config, { source: mocks });
+
+    await store.actions.source.fetch("/category/nature/");
+
+    expect(mocks.api.getIdBySlug).not.toBeCalled();
+    expect(store.state.source.dataMap).toMatchSnapshot();
+    expectEntities(store.state.source);
+  });
+
+  test("exists in source.data but doesn't have page", async () => {
+    const config = namespaced({
+      source: {
+        actions,
+        state: {
+          ...state,
+          dataMap: {
+            "/category/nature/": {
+              id: 7,
+              isArchive: true,
+              isCategory: true,
+              isFetching: false,
+              isReady: true,
+              isTaxonomy: true,
+              pages: [],
+              taxonomy: "category",
+              total: 10,
+              totalPages: 1
+            }
+          }
+        },
+        effects
+      }
+    });
+
+    const store = createOvermindMock(config, { source: mocks });
+
+    await store.actions.source.fetch("/category/nature/");
+
+    expect(mocks.api.getIdBySlug).not.toBeCalled();
+    expect(store.state.source.dataMap).toMatchSnapshot();
+    expectEntities(store.state.source);
+  });
 });

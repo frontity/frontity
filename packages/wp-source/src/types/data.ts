@@ -120,7 +120,9 @@ export type DateData = Merge<
   ArchiveData,
   {
     isDate: true;
-    date: string;
+    year: number;
+    month?: number;
+    day?: number;
   }
 >;
 

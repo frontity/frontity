@@ -1,6 +1,6 @@
 import { Response, Headers } from "cross-fetch";
 
-export const mockResponse = (body, headers) =>
+export const mockResponse = (body, headers?) =>
   new Response(
     JSON.stringify(body),
     headers && {

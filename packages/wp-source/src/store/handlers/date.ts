@@ -6,8 +6,16 @@ const dateHandler: Handler = async (ctx, { path, params, page = 1 }) => {
   const { api, populate } = ctx.effects.source;
 
   // Build date property
-  const { year, month = "01", day = "01" } = params;
-  const date = `${year}-${month}-${day}T00:00:00`;
+  const year = parseInt(params.year);
+  const month = params.month && parseInt(params.month) - 1;
+  const day = params.day && parseInt(params.day);
+
+  const after = new Date(`${params.year}-${params.month || "01"}-${params.day || "01"}`);
+  const before = new Date(after);
+
+  if (!month) before.setFullYear(year + 1);
+  else if (!day) before.setMonth(month + 1);
+  else before.setDate(day + 1);
 
   // 0. Get data from store
   let data = state.dataMap[path];
@@ -15,7 +23,9 @@ const dateHandler: Handler = async (ctx, { path, params, page = 1 }) => {
   // 1. init data if it isn't already
   if (!data.isDate) {
     data = {
-      date,
+      year,
+      month,
+      day,
       pages: [],
       isArchive: true,
       isDate: true,
@@ -28,7 +38,12 @@ const dateHandler: Handler = async (ctx, { path, params, page = 1 }) => {
   if (!data.pages[page - 1]) {
     const response = await api.get({
       endpoint: "posts",
-      params: { after: date, search: params.s, page }
+      params: {
+        after: after.toISOString(),
+        before: before.toISOString(),
+        search: params.s,
+        page
+      }
     });
     // populate response and add page to data
     data.pages[page - 1] = await populate(state, response);
