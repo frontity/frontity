@@ -1,5 +1,6 @@
 import { EventEmitter } from "events";
 import ora from "ora";
+import chalk from "chalk";
 import subscribe from "../functions/subscribe";
 import { errorLogger } from "../utils";
 
@@ -13,4 +14,9 @@ export default async (email: string) => {
   });
 
   await subscribe(email, emitter);
+
+  console.log(`${chalk.bold("\nThanks for subscribing to our newsletter!")}
+      \nYou can also be part of our community at ${chalk.underline.magenta(
+        "https://community.frontity.org/"
+      )}.\n`);
 };

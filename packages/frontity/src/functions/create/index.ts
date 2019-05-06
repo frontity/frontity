@@ -76,10 +76,6 @@ export default async (passedOptions?: Options, emitter?: EventEmitter) => {
         "\nFrontity project created."
       )}\n\nYou can start development with ${chalk.bold.green(
         "frontity dev"
-      )}.\nFor documentation please visit ${chalk.underline.magenta(
-        "https://docs.frontity.org/"
-      )}.\nIf you need help please visit ${chalk.underline.magenta(
-        "https://community.frontity.org/"
       )}.\n`
     );
   } catch (error) {

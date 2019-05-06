@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import { EventEmitter } from "events";
-import chalk from "chalk";
 
 const isEmailValid = (email: string): boolean =>
   /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i.test(email);
@@ -29,13 +28,6 @@ export default async (email: string, emitter?: EventEmitter) => {
     );
     emit("Subscribing to Frontity", step);
     await step;
-
-    emit(
-      `${chalk.bold("\nThanks for subscribing to our newsletter!")}
-      \nYou can also visit our community at ${chalk.underline.magenta(
-        "https://community.frontity.org/"
-      )}.\n`
-    );
   } catch (error) {
     if (emitter) emitter.emit("error", error);
     else throw error;
