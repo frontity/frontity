@@ -87,7 +87,7 @@ export default async (name: string, { typescript, useCwd }) => {
   console.log(
     `You can find docs at ${chalk.underline.magenta(
       "https://docs.frontity.org/"
-    )}.\nYou can also be part of our community at ${chalk.underline.magenta(
+    )}.\nIf you have any doubts, join our community at ${chalk.underline.magenta(
       "https://community.frontity.org/"
     )}.\n`
   );

@@ -16,7 +16,7 @@ export default async (email: string) => {
   await subscribe(email, emitter);
 
   console.log(`${chalk.bold("\nThanks for subscribing to our newsletter!")}
-      \nYou can also be part of our community at ${chalk.underline.magenta(
+      \nIf you have any doubts, join our community at ${chalk.underline.magenta(
         "https://community.frontity.org/"
       )}.\n`);
 };
