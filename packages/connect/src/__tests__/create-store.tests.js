@@ -84,3 +84,12 @@ describe("createStore actions", () => {
     expect(store.state.nested1.prop5).toBe(6);
   });
 });
+
+describe("createStore getSnapshot", () => {
+  it("should be able retrieve a serializable snapshot", () => {
+    const store = createStore(config);
+    expect(store.getSnapshot()).toMatchSnapshot();
+    store.actions.nested2.nested3.action5(3);
+    expect(store.getSnapshot()).toMatchSnapshot();
+  });
+});

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createStore getSnapshot should be able retrieve a serializable snapshot 1`] = `
+Object {
+  "nested1": Object {
+    "prop2": 2,
+    "prop5": 0,
+  },
+  "prop1": 1,
+}
+`;
+
+exports[`createStore getSnapshot should be able retrieve a serializable snapshot 2`] = `
+Object {
+  "nested1": Object {
+    "prop2": 2,
+    "prop5": 6,
+  },
+  "prop1": 1,
+}
+`;

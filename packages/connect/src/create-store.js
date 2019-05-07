@@ -8,6 +8,25 @@ const convertToAction = (fn, state) => (...args) => {
   }
 };
 
+function getSnapshot(obj) {
+  if (typeof obj === "function") return;
+  if (typeof obj !== "object" || obj === null) return obj;
+  if (obj instanceof Date) return new Date(obj.getTime());
+  if (obj instanceof Array) {
+    return obj.reduce((arr, item, i) => {
+      arr[i] = getSnapshot(item);
+      return arr;
+    }, []);
+  }
+  if (obj instanceof Object) {
+    return Object.keys(obj).reduce((newObj, key) => {
+      const res = getSnapshot(obj[key]);
+      if (res !== undefined) newObj[key] = res;
+      return newObj;
+    }, {});
+  }
+}
+
 export const createStore = ({ state, actions }) => {
   const observableState = observable(state);
 
@@ -27,6 +46,7 @@ export const createStore = ({ state, actions }) => {
 
   return {
     state: observableState,
-    actions: convertedActions
+    actions: convertedActions,
+    getSnapshot: () => getSnapshot(state)
   };
 };
