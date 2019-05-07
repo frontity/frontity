@@ -44,6 +44,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "core-js": "^3.0.1",
+    "deepmerge": "^3.2.0",
     "emotion": "^10.0.9",
     "emotion-server": "^10.0.9",
     "express": "^4.16.4",

@@ -18,7 +18,7 @@ import {
 import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
-import createStores from "../stores/server";
+import { getMerged } from "../utils/packages";
 
 export default ({ packages }) => {
   const app = new Koa();
@@ -54,6 +54,9 @@ export default ({ packages }) => {
     // Get settings.
     const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
 
+    // Get a merged object with roots, fills, state, actions...
+    const merged = getMerged({ packages, settings });
+
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
 
@@ -78,7 +81,7 @@ export default ({ packages }) => {
     //   }
     // );
 
-    const Component = <App />;
+    const Component = <App merged={merged} />;
 
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.

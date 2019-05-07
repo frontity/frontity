@@ -58,3 +58,17 @@ export type Template = ({
   frontity: FrontityTags;
   head: HeadTags;
 }) => string;
+
+export interface MergedPackages {
+  roots: {
+    name: string;
+    Root: React.ReactType;
+  }[];
+  fills: {
+    name: string;
+    Fill: React.ReactType;
+  }[];
+  state: {
+    [namespace: string]: any;
+  };
+}

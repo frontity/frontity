@@ -1,25 +1,20 @@
 import React, { useState } from "react";
-import { Namespace } from "@frontity/types/namespace";
 import { cache } from "emotion";
 import { CacheProvider } from "@emotion/core";
-import { Overmind } from "overmind";
-import { Provider } from "overmind-react";
+import { MergedPackages } from "../types";
 
 type Props = {
-  // namespaces: { [key: string]: Namespace };
-  // stores: Overmind<{}>;
+  merged: MergedPackages;
 };
 
-const App: React.FunctionComponent<Props> = ({ namespaces, stores }) => (
+const App: React.FunctionComponent<Props> = ({ merged }) => (
   <CacheProvider value={cache}>
-    <Provider value={stores}>
-      {Object.entries(namespaces).map(
-        ([name, { Root }]) => Root && <Root key={name} />
-      )}
-      {Object.entries(namespaces).map(
-        ([name, { Fills }]) => Fills && <Fills key={name} />
-      )}
-    </Provider>
+    {merged.roots.map(({ Root, name }) => (
+      <Root name={name} />
+    ))}
+    {merged.fills.map(({ Fill, name }) => (
+      <Fill name={name} />
+    ))}
   </CacheProvider>
 );
 

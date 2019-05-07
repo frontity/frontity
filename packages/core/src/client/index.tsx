@@ -3,7 +3,6 @@ import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import { hydrate as hydrateEmotion } from "emotion";
 import App from "../app";
-import createStores from "../stores/client";
 
 export default async ({ packages }) => {
   // Hydrate Emotion.
@@ -14,14 +13,9 @@ export default async ({ packages }) => {
       "Emotion ids for hydratation not found. If you need help please visit https://community.frontity.org."
     );
 
-  // Create the stores.
-  const stores = createStores({ namespaces });
-  // Wait until the store has been initialized. This waits for the onIntilize actions.
-  await stores.initialized;
-
   loadableReady(() => {
     hydrate(
-      <App namespaces={namespaces} stores={stores} />,
+      <App merged={{ roots: [], fills: [], state: {} }} />,
       window.document.getElementById("root")
     );
   });
