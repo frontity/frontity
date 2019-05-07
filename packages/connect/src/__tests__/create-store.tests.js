@@ -57,6 +57,11 @@ describe("createStore", () => {
     const store = createStore(config);
     expect(isObservable(store.actions)).toBe(false);
   });
+
+  it("should include arbitrary properties", () => {
+    const store = createStore({ ...config, something: "else" });
+    expect(store.something).toBe("else");
+  });
 });
 
 describe("createStore actions", () => {

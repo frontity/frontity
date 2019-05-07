@@ -36,11 +36,12 @@ const convertedActions = (obj, state) => {
   }
 };
 
-export const createStore = ({ state, actions }) => {
-  const observableState = observable(state);
+export const createStore = store => {
+  const observableState = observable(store.state);
   return {
+    ...store,
     state: observableState,
-    actions: convertedActions(actions, observableState),
-    getSnapshot: () => getSnapshot(state)
+    actions: convertedActions(store.actions, observableState),
+    getSnapshot: () => getSnapshot(store.state)
   };
 };
