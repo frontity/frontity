@@ -1,5 +1,6 @@
 import { NormalizedSettings } from "@frontity/file-settings";
 import Package from "@frontity/types/package";
+import deepmerge from "deepmerge";
 import { MergedPackages } from "../types";
 
 // Remove some characters present in the npm package name to turn it into a variable name.
@@ -32,26 +33,56 @@ export const getMerged = ({
   settings: NormalizedSettings;
 }): MergedPackages => {
   const iterate = settings.packages.map(pkg => ({
-    name: getVariable(pkg.name, settings.mode),
+    name: pkg.name,
     exclude: pkg.exclude
   }));
   const config: MergedPackages = {
     roots: [],
     fills: [],
-    state: {}
+    state: {
+      settings: {
+        frontity: {
+          packages: iterate
+        }
+      }
+    },
+    actions: {}
   };
   iterate.forEach(pkg => {
-    if (packages[pkg.name].roots) {
-      Object.entries(packages[pkg.name].roots).forEach(([namespace, Root]) => {
+    const name = getVariable(pkg.name, settings.mode);
+    if (packages[name].roots) {
+      Object.entries(packages[name].roots).forEach(([namespace, Root]) => {
         if (pkg.exclude.indexOf(namespace) === -1) {
-          config.roots.push({ name: pkg.name, Root });
+          config.roots.push({ name: name, Root });
         }
       });
     }
-    if (packages[pkg.name].fills) {
-      Object.entries(packages[pkg.name].fills).forEach(([namespace, Fill]) => {
+    if (packages[name].fills) {
+      Object.entries(packages[name].fills).forEach(([namespace, Fill]) => {
         if (pkg.exclude.indexOf(namespace) === -1) {
-          config.fills.push({ name: pkg.name, Fill });
+          config.fills.push({ name: name, Fill });
+        }
+      });
+    }
+    if (packages[name].state) {
+      Object.entries(packages[name].state).forEach(([namespace, state]) => {
+        if (pkg.exclude.indexOf(namespace) === -1) {
+          config.state = deepmerge(
+            config.state,
+            { [namespace]: state },
+            { clone: false }
+          );
+        }
+      });
+    }
+    if (packages[name].actions) {
+      Object.entries(packages[name].actions).forEach(([namespace, actions]) => {
+        if (pkg.exclude.indexOf(namespace) === -1) {
+          config.actions = deepmerge(
+            config.actions,
+            { [namespace]: actions },
+            { clone: false }
+          );
         }
       });
     }

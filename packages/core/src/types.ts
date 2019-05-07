@@ -71,4 +71,7 @@ export interface MergedPackages {
   state: {
     [namespace: string]: any;
   };
+  actions: {
+    [namespace: string]: any;
+  };
 }

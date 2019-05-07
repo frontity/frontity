@@ -19,6 +19,7 @@ import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
 import { getMerged } from "../utils/packages";
+import createStore from "../store/server";
 
 export default ({ packages }) => {
   const app = new Koa();
@@ -64,22 +65,18 @@ export default ({ packages }) => {
     let html = "";
     const frontity: FrontityTags = {};
 
-    // Create the stores.
-    // const { stores } = createStores({ namespaces });
+    // Create the store.
+    const store = createStore({ merged, settings });
 
-    // Wait until the store has been initialized. This waits for the onIntilize actions.
-    // await stores.initialized;
-
-    // // Add settings.
-    // stores.settings = settings;
-    // stores.actions.settings.addSettings(stores);
+    // Run init actions.
+    Object.values(store.actions).forEach(({ init }) => {
+      if (init) init();
+    });
 
     // Run beforeSSR actions.
-    // Object.values(stores.actions).forEach(
-    //   (namespace: { beforeSSR?: (stores) => {} }) => {
-    //     if (namespace.beforeSSR) namespace.beforeSSR(stores);
-    //   }
-    // );
+    Object.values(store.actions).forEach(({ beforeSSR }) => {
+      if (beforeSSR) beforeSSR();
+    });
 
     const Component = <App merged={merged} />;
 

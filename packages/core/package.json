@@ -36,6 +36,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.9",
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.10",
+    "@frontity/connect": "^0.1.0",
     "@frontity/file-settings": "^0.1.0",
     "@loadable/babel-plugin": "^5.8.0",
     "@loadable/component": "^5.7.0",
