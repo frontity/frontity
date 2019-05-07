@@ -95,15 +95,6 @@ Array [
     "Downloading [33mfavicon.ico[39m.",
     undefined,
   ],
-  Array [
-    "create",
-    "[1m[22m
-[1mFrontity project created.[22m
-
-You can start development with [1m[32mfrontity dev[39m[22m.
-",
-    undefined,
-  ],
 ]
 `;
 

@@ -115,7 +115,7 @@ export const createFrontitySettings = async (
 ) => {
   const frontitySettings = { name, packages };
   const fileTemplate = await readFile(
-    resolvePath(__dirname, `../../templates/settings-${extension}-template`),
+    resolvePath(__dirname, `../../../templates/settings-${extension}-template`),
     { encoding: "utf8" }
   );
   const filePath = resolvePath(path, `frontity.settings.${extension}`);

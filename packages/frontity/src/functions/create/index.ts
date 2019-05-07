@@ -70,14 +70,6 @@ export default async (passedOptions?: Options, emitter?: EventEmitter) => {
     step = downloadFavicon(options);
     emit(`Downloading ${chalk.yellow("favicon.ico")}.`, step);
     await step;
-
-    emit(
-      `${chalk.bold(
-        "\nFrontity project created."
-      )}\n\nYou can start development with ${chalk.bold.green(
-        "frontity dev"
-      )}.\n`
-    );
   } catch (error) {
     if (typeof dirExisted !== "undefined")
       await revertProgress(dirExisted, options);

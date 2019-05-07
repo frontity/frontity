@@ -29,7 +29,6 @@ export default async (name: string, { typescript, useCwd }) => {
 
     const answers = await prompt(questions);
     options.name = answers.name;
-    options.packages = answers.packages;
     options.theme = answers.theme;
     console.log();
   } else {
@@ -48,6 +47,8 @@ export default async (name: string, { typescript, useCwd }) => {
   });
 
   await create(options, emitter);
+
+  console.log(chalk.bold("\nFrontity project created.\n"));
 
   const subscribeQuestions: Question[] = [
     {
@@ -75,17 +76,19 @@ export default async (name: string, { typescript, useCwd }) => {
 
     await subscribe(answers.email, emitter);
 
-    console.log("\nThanks for subscribing! 😃\n");
+    console.log("\nThanks for subscribing! 😃");
   } else {
     console.log(
       `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
         "frontity subscribe <email>"
-      )}.\n`
+      )}.`
     );
   }
 
   console.log(
-    `You can find docs at ${chalk.underline.magenta(
+    `\nRun ${chalk.bold.green(
+      `cd ${options.name} && frontity dev`
+    )} and have fun! 🎉\n\nYou can find docs at ${chalk.underline.magenta(
       "https://docs.frontity.org/"
     )}.\nIf you have any doubts, join our community at ${chalk.underline.magenta(
       "https://community.frontity.org/"
