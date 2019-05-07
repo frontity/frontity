@@ -1,11 +1,10 @@
 import { normalize } from "normalizr";
-import * as schemas from "../../schemas";
-import { Context, DataPage } from "../../types";
+import * as schemas from "./schemas";
+import { State } from "../types";
+import { EntityData } from "../types/data";
 
-export const populate = async (
-  state: Context["state"]["source"],
-  response: Response
-): Promise<DataPage> => {
+
+const populate = async(state: State["source"], response: Response) => {
   // Normalize response
   const json = await response.json();
   const isList = json instanceof Array;
@@ -15,7 +14,7 @@ export const populate = async (
   );
 
   // type, id and link of added entities
-  const entityList: DataPage = (isList ? result : [result]).map(
+  const entityList: EntityData[] = (isList ? result : [result]).map(
     ({ id: entityId, schema }) => {
       const { type, id, link } = entities[schema][entityId];
       return { type, id, link };
@@ -37,3 +36,5 @@ export const populate = async (
 
   return entityList;
 };
+
+export default populate;

@@ -1,16 +1,21 @@
 import { Handler } from "../../types";
-import { getTotal, getTotalPages } from "../helpers";
+import getTotal from "./utils/get-total";
+import getTotalPages from "./utils/get-total-pages";
 
-const dateHandler: Handler = async (ctx, { path, params, page = 1 }) => {
-  const state = ctx.state.source;
-  const { api, populate } = ctx.effects.source;
+const dateHandler: Handler = async (
+  state,
+  { path, params, page = 1, libraries }
+) => {
+  const { api, populate } = libraries.source;
 
   // Build date property
   const year = parseInt(params.year);
   const month = params.month && parseInt(params.month) - 1;
   const day = params.day && parseInt(params.day);
 
-  const after = new Date(`${params.year}-${params.month || "01"}-${params.day || "01"}`);
+  const after = new Date(
+    `${params.year}-${params.month || "01"}-${params.day || "01"}`
+  );
   const before = new Date(after);
 
   if (!month) before.setFullYear(year + 1);

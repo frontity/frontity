@@ -1,12 +1,14 @@
 import { Handler } from "../../types";
 
-const attachmentHandler: Handler = async (ctx, { path, params }) => {
-  const state = ctx.state.source;
-  const { api, populate} = ctx.effects.source;
+const attachmentHandler: Handler = async (
+  state,
+  { path, params, libraries }
+) => {
+  const { api, populate } = libraries.source;
 
   let { id, slug } = params;
 
-  // Search attachment in store 
+  // Search attachment in store
   let attachment = id
     ? state.attachment[id]
     : Object.values(state.attachment).find(a => a.slug === slug);

@@ -1,9 +1,8 @@
 import { Handler } from "../../types";
-import { getIdBySlug } from "../helpers";
+import getIdBySlug from "./utils/get-id-by-slug";
 
-const pageHandler: Handler = async (ctx, { path, params }) => {
-  const state = ctx.state.source;
-  const { api, populate } = ctx.effects.source;
+const pageHandler: Handler = async (state, { path, params, libraries }) => {
+  const { api, populate } = libraries.source;
 
   const { slug } = params;
   let id = getIdBySlug(state.page, slug);

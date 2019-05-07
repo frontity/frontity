@@ -1,4 +1,4 @@
-import { fetch } from "../actions";
+import action from "../actions";
 
 describe("fetch action", () => {
   test.todo("should fetch if data doesn't exist");

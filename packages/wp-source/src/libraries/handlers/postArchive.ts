@@ -1,9 +1,12 @@
 import { Handler } from "../../types";
-import { getTotal, getTotalPages } from "../helpers";
+import getTotal from "./utils/get-total";
+import getTotalPages from "./utils/get-total-pages";
 
-const postArchiveHandler: Handler = async (ctx, { path, params, page = 1 }) => {
-  const state = ctx.state.source;
-  const { api, populate } = ctx.effects.source;
+const postArchiveHandler: Handler = async (
+  state,
+  { path, params, page = 1, libraries }
+) => {
+  const { api, populate } = libraries.source;
 
   // 0. Get data from store
   let data = state.dataMap[path];

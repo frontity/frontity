@@ -1,25 +1,32 @@
 import { Handler } from "../../types";
-import { getIdBySlug, getTotal, getTotalPages } from "../helpers";
+import getIdBySlug from "./utils/get-id-by-slug";
+import getTotal from "./utils/get-total";
+import getTotalPages from "./utils/get-total-pages";
 
-const authorHandler: Handler = async (ctx, { path, params, page = 1 }) => {
-  const state = ctx.state.source;
-  const { api, populate } = ctx.effects.source;
+const categoryHandler: Handler = async (
+  state,
+  { path, params, page = 1, libraries }
+) => {
+  const { api, populate } = libraries.source;
 
   // 0. Get data from store
   let data = state.dataMap[path];
 
   // 1. init data if it isn't already
-  if (!data.isAuthor) {
+  if (!data.isCategory) {
     // Search id in state or get it from WP REST API
     const { slug } = params;
     const id =
-      getIdBySlug(state.author, slug) || (await api.getIdBySlug("users", slug));
+      getIdBySlug(state.category, slug) ||
+      (await api.getIdBySlug("categories", slug));
 
     data = {
       id,
+      taxonomy: "category",
       pages: [],
       isArchive: true,
-      isAuthor: true,
+      isTaxonomy: true,
+      isCategory: true,
       isFetching: true
     };
 
@@ -34,7 +41,7 @@ const authorHandler: Handler = async (ctx, { path, params, page = 1 }) => {
     // just get the page we are requesting
     const response = await api.get({
       endpoint: "posts",
-      params: { author: id, search: params.s, page, _embed: true }
+      params: { categories: id, search: params.s, page, _embed: true }
     });
     // populate response and add page to data
     data.pages[page - 1] = await populate(state, response);
@@ -44,4 +51,4 @@ const authorHandler: Handler = async (ctx, { path, params, page = 1 }) => {
   }
 };
 
-export default authorHandler;
+export default categoryHandler;

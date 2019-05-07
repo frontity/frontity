@@ -1,22 +1,31 @@
-import { state, actions, effects } from "../store";
+import state from "../source/state";
+import * as actions from "../source/actions";
 
-const WpSource =  {
+import Api from "../libraries/api";
+import Resolver from "../libraries/resolver";
+import populate from "../libraries/populate";
+
+import WpSource from "../types";
+
+const wpSource: WpSource = {
   name: "@frontity/wp-source",
   state: {
     settings: {
       source: {
         apiUrl: "https://test.frontity.io",
-        isCom: false,
-      },
+        isCom: false
+      }
     },
-    source: state,
+    source: state
   },
   actions: {
-    source: actions,
+    source: actions
   },
   libraries: {
-    source: effects,
-  },
-}
+    api: new Api(),
+    resolver: new Resolver(),
+    populate
+  }
+};
 
-export default WpSource;
+export default wpSource;

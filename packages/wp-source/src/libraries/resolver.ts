@@ -1,5 +1,5 @@
 import pathToRegexp, { Key } from "path-to-regexp";
-import { Context, Handler } from "../../types";
+import { Handler } from "../types";
 
 class Resolver {
   // Array containing all registered patterns with their handlers
@@ -64,4 +64,4 @@ class Resolver {
   }
 }
 
-export const resolver = new Resolver();
+export default Resolver;

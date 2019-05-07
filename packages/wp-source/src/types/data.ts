@@ -1,14 +1,8 @@
-export type DataMap = {
-  [name: string]: Data;
-};
-
 export type EntityData = {
   type: string;
   id: number;
   link: string;
 };
-
-export type DataPage = EntityData[];
 
 export type Data =
   | BaseData
@@ -62,7 +56,7 @@ export type ArchiveData = Merge<
   BaseData,
   {
     isArchive: true;
-    pages: DataPage[];
+    pages: EntityData[][];
     total?: number;
     totalPages?: number;
   }
