@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`connect should pass state to class components 1`] = `
+<div>
+  prop1
+</div>
+`;
+
+exports[`connect should pass state to functional components 1`] = `
+<div>
+  prop1
+</div>
+`;
