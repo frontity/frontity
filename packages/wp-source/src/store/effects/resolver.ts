@@ -24,7 +24,6 @@ class Resolver {
   // Gets the appropriate handler and params after a match
   match(
     this: Resolver,
-    ctx: Context,
     name: string
   ): { handler: Handler; params: { [param: string]: any } } | null {
     let handler;

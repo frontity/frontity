@@ -29,7 +29,7 @@ export const fetch: Action<PathOrObj> = async (ctx, pathOrObj) => {
 
   // get and execute the corresponding handler based on path
   try {
-    const { handler, params } = effects.resolver.match(ctx, path);
+    const { handler, params } = effects.resolver.match(path);
     await handler(ctx, { path, params, page });
     state.dataMap[path].isReady = true;
   } catch (e) {
