@@ -14,7 +14,8 @@ const ExtensionExample1: Package = {
       prop1: 1
     },
     comments: {
-      prop2: 2
+      prop2: 2,
+      prop3: state => state.comments.prop2 + 1
     }
   },
   roots: {

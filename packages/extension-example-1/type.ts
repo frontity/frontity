@@ -1,5 +1,4 @@
-import Package from "@frontity/types/package";
-import Namespaces from "@frontity/types/namespaces";
+import { Package, Namespaces, Derived } from "@frontity/types";
 
 interface ExtensionExample1 extends Package {
   name: "@frontity/extension-example-1";
@@ -15,6 +14,7 @@ interface ExtensionExample1 extends Package {
     };
     comments: {
       prop2: number;
+      prop3: Derived<ExtensionExample1, number>;
     };
   };
   roots: {
