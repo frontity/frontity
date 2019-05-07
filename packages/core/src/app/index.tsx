@@ -10,10 +10,10 @@ type Props = {
 const App: React.FunctionComponent<Props> = ({ merged }) => (
   <CacheProvider value={cache}>
     {merged.roots.map(({ Root, name }) => (
-      <Root name={name} />
+      <Root key={name} />
     ))}
     {merged.fills.map(({ Fill, name }) => (
-      <Fill name={name} />
+      <Fill key={name} />
     ))}
   </CacheProvider>
 );

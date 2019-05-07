@@ -2,7 +2,9 @@ import React from "react";
 import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import { hydrate as hydrateEmotion } from "emotion";
+import { getMergedClient } from "../utils/packages";
 import App from "../app";
+import createStore from "../store/client";
 
 export default async ({ packages }) => {
   // Hydrate Emotion.
@@ -13,10 +15,19 @@ export default async ({ packages }) => {
       "Emotion ids for hydratation not found. If you need help please visit https://community.frontity.org."
     );
 
-  loadableReady(() => {
-    hydrate(
-      <App merged={{ roots: [], fills: [], state: {} }} />,
-      window.document.getElementById("root")
+  // Hydrate Connect state.
+  const stateElement = document.getElementById("__FRONTITY_CONNECT_STATE__");
+  if (stateElement) {
+    const state = JSON.parse(stateElement.innerHTML);
+    // Get a merged object with roots, fills, state, actions...
+    const merged = getMergedClient({ packages, state });
+    const store = createStore({ merged });
+    window["store"] = store;
+    loadableReady(() => {
+      hydrate(<App merged={merged} />, window.document.getElementById("root"));
+    });
+  } else
+    console.warn(
+      "State for Frontity Connect hydratation not found. If you need help please visit https://community.frontity.org."
     );
-  });
 };

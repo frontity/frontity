@@ -1,13 +1,9 @@
-import { createOvermind } from "overmind";
-import { Namespace } from "@frontity/types/namespace";
-import getConfig from "./config";
-import settings from "./settings/client";
+import { createStore } from "@frontity/connect";
+import { MergedPackages } from "../types";
+import { NormalizedSettings } from "@frontity/file-settings";
+import deepmerge from "deepmerge";
 
-export default ({
-  namespaces
-}: {
-  namespaces: { [key: string]: Namespace };
-}) => {
-  const config = getConfig({ namespaces, settings });
-  return createOvermind(config, { name: "Frontity" });
+export default ({ merged }: { merged: MergedPackages }) => {
+  const store = createStore(merged);
+  return store;
 };

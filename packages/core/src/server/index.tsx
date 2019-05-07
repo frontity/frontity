@@ -18,7 +18,7 @@ import {
 import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
-import { getMerged } from "../utils/packages";
+import { getMergedServer } from "../utils/packages";
 import createStore from "../store/server";
 
 export default ({ packages }) => {
@@ -56,7 +56,7 @@ export default ({ packages }) => {
     const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
 
     // Get a merged object with roots, fills, state, actions...
-    const merged = getMerged({ packages, settings });
+    const merged = getMergedServer({ packages, settings });
 
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
@@ -111,9 +111,9 @@ export default ({ packages }) => {
           : extractor.getScriptTags();
 
       // Add mutations to our scripts.
-      // frontity.script = `<script id="__OVERMIND_MUTATIONS__" type="application/json">${JSON.stringify(
-      //   stores.hydrate()
-      // )}</script>\n${frontity.script}`;
+      frontity.script = `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${JSON.stringify(
+        store.state
+      )}</script>\n${frontity.script}`;
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.

@@ -14,16 +14,24 @@ export const getVariable = (pkg: string, mode: string) => {
   );
 };
 
-export const isNotExcluded = (options: {
-  settings: NormalizedSettings;
-  package: string;
-  namespace: string;
-}): boolean => {
-  const { settings, package: pkg, namespace } = options;
-  return false;
-};
+interface PackageExclude {
+  name: string;
+  variable: string;
+  exclude: string[];
+}
 
-export const getMerged = ({
+export const getPackageExcludes = ({
+  settings
+}: {
+  settings: NormalizedSettings;
+}): PackageExclude[] =>
+  settings.packages.map(pkg => ({
+    name: pkg.name,
+    variable: getVariable(pkg.name, settings.mode),
+    exclude: pkg.exclude
+  }));
+
+export const getMergedServer = ({
   packages,
   settings
 }: {
@@ -32,59 +40,121 @@ export const getMerged = ({
   };
   settings: NormalizedSettings;
 }): MergedPackages => {
-  const iterate = settings.packages.map(pkg => ({
-    name: pkg.name,
-    exclude: pkg.exclude
-  }));
+  const packageExcludes = getPackageExcludes({ settings });
   const config: MergedPackages = {
     roots: [],
     fills: [],
     state: {
       settings: {
         frontity: {
-          packages: iterate
+          packages: packageExcludes
         }
       }
     },
     actions: {}
   };
-  iterate.forEach(pkg => {
-    const name = getVariable(pkg.name, settings.mode);
-    if (packages[name].roots) {
-      Object.entries(packages[name].roots).forEach(([namespace, Root]) => {
-        if (pkg.exclude.indexOf(namespace) === -1) {
-          config.roots.push({ name: name, Root });
+  packageExcludes.forEach(pkg => {
+    if (packages[pkg.variable].roots) {
+      Object.entries(packages[pkg.variable].roots).forEach(
+        ([namespace, Root]) => {
+          if (pkg.exclude.indexOf(namespace) === -1) {
+            config.roots.push({ name: pkg.variable, Root });
+          }
         }
-      });
+      );
     }
-    if (packages[name].fills) {
-      Object.entries(packages[name].fills).forEach(([namespace, Fill]) => {
-        if (pkg.exclude.indexOf(namespace) === -1) {
-          config.fills.push({ name: name, Fill });
+    if (packages[pkg.variable].fills) {
+      Object.entries(packages[pkg.variable].fills).forEach(
+        ([namespace, Fill]) => {
+          if (pkg.exclude.indexOf(namespace) === -1) {
+            config.fills.push({ name: pkg.variable, Fill });
+          }
         }
-      });
+      );
     }
-    if (packages[name].state) {
-      Object.entries(packages[name].state).forEach(([namespace, state]) => {
-        if (pkg.exclude.indexOf(namespace) === -1) {
-          config.state = deepmerge(
-            config.state,
-            { [namespace]: state },
-            { clone: false }
-          );
+    if (packages[pkg.variable].state) {
+      Object.entries(packages[pkg.variable].state).forEach(
+        ([namespace, state]) => {
+          if (pkg.exclude.indexOf(namespace) === -1) {
+            config.state = deepmerge(
+              config.state,
+              { [namespace]: state },
+              { clone: false }
+            );
+          }
         }
-      });
+      );
     }
-    if (packages[name].actions) {
-      Object.entries(packages[name].actions).forEach(([namespace, actions]) => {
-        if (pkg.exclude.indexOf(namespace) === -1) {
-          config.actions = deepmerge(
-            config.actions,
-            { [namespace]: actions },
-            { clone: false }
-          );
+    if (packages[pkg.variable].actions) {
+      Object.entries(packages[pkg.variable].actions).forEach(
+        ([namespace, actions]) => {
+          if (pkg.exclude.indexOf(namespace) === -1) {
+            config.actions = deepmerge(
+              config.actions,
+              { [namespace]: actions },
+              { clone: false }
+            );
+          }
         }
-      });
+      );
+    }
+  });
+  return config;
+};
+
+export const getMergedClient = ({
+  packages,
+  state
+}: {
+  packages: {
+    [name: string]: Package;
+  };
+  state: {
+    settings: {
+      frontity: {
+        packages: PackageExclude[];
+      };
+    };
+  };
+}): MergedPackages => {
+  const packageExcludes = state.settings.frontity.packages;
+  const config: MergedPackages = {
+    roots: [],
+    fills: [],
+    state,
+    actions: {}
+  };
+  packageExcludes.forEach(pkg => {
+    if (packages[pkg.variable].roots) {
+      Object.entries(packages[pkg.variable].roots).forEach(
+        ([namespace, Root]) => {
+          if (pkg.exclude.indexOf(namespace) === -1) {
+            config.roots.push({ name: name, Root });
+          }
+        }
+      );
+    }
+    if (packages[pkg.variable].fills) {
+      Object.entries(packages[pkg.variable].fills).forEach(
+        ([namespace, Fill]) => {
+          if (pkg.exclude.indexOf(namespace) === -1) {
+            config.fills.push({ name: name, Fill });
+          }
+        }
+      );
+    }
+    if (packages[pkg.variable].actions) {
+      Object.entries(packages[pkg.variable].actions).forEach(
+        ([namespace, actions]) => {
+          if (pkg.exclude.indexOf(namespace) === -1) {
+            config.actions = deepmerge(
+              config.actions,
+              { [namespace]: actions },
+              { clone: false }
+            );
+          }
+        }
+      );
     }
   });
   return config;
