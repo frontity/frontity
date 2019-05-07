@@ -1,7 +1,7 @@
 import { NormalizedSettings } from "@frontity/file-settings";
 import Package from "@frontity/types/package";
 import deepmerge from "deepmerge";
-import { MergedPackages } from "../types";
+import { MergedPackages, PackageList } from "../types";
 
 // Remove some characters present in the npm package name to turn it into a variable name.
 export const getVariable = (pkg: string, mode: string) => {
@@ -14,45 +14,39 @@ export const getVariable = (pkg: string, mode: string) => {
   );
 };
 
-interface PackageExclude {
-  name: string;
-  variable: string;
-  exclude: string[];
-}
-
-export const getPackageExcludes = ({
+export const packageList = ({
   settings
 }: {
   settings: NormalizedSettings;
-}): PackageExclude[] =>
+}): PackageList =>
   settings.packages.map(pkg => ({
     name: pkg.name,
     variable: getVariable(pkg.name, settings.mode),
     exclude: pkg.exclude
   }));
 
-export const getMergedServer = ({
+export const mergePackages = ({
   packages,
-  settings
+  state
 }: {
   packages: {
     [name: string]: Package;
   };
-  settings: NormalizedSettings;
+  state: {
+    settings: {
+      frontity: {
+        packages: PackageList;
+      };
+    };
+  };
 }): MergedPackages => {
-  const packageExcludes = getPackageExcludes({ settings });
   const config: MergedPackages = {
     roots: [],
     fills: [],
-    state: {
-      settings: {
-        frontity: {
-          packages: packageExcludes
-        }
-      }
-    },
+    state: {},
     actions: {}
   };
+  const packageExcludes = state.settings.frontity.packages;
   packageExcludes.forEach(pkg => {
     if (packages[pkg.variable].roots) {
       Object.entries(packages[pkg.variable].roots).forEach(
@@ -72,6 +66,19 @@ export const getMergedServer = ({
         }
       );
     }
+    if (packages[pkg.variable].actions) {
+      Object.entries(packages[pkg.variable].actions).forEach(
+        ([namespace, actions]) => {
+          if (pkg.exclude.indexOf(namespace) === -1) {
+            config.actions = deepmerge(
+              config.actions,
+              { [namespace]: actions },
+              { clone: false }
+            );
+          }
+        }
+      );
+    }
     if (packages[pkg.variable].state) {
       Object.entries(packages[pkg.variable].state).forEach(
         ([namespace, state]) => {
@@ -85,77 +92,7 @@ export const getMergedServer = ({
         }
       );
     }
-    if (packages[pkg.variable].actions) {
-      Object.entries(packages[pkg.variable].actions).forEach(
-        ([namespace, actions]) => {
-          if (pkg.exclude.indexOf(namespace) === -1) {
-            config.actions = deepmerge(
-              config.actions,
-              { [namespace]: actions },
-              { clone: false }
-            );
-          }
-        }
-      );
-    }
   });
-  return config;
-};
-
-export const getMergedClient = ({
-  packages,
-  state
-}: {
-  packages: {
-    [name: string]: Package;
-  };
-  state: {
-    settings: {
-      frontity: {
-        packages: PackageExclude[];
-      };
-    };
-  };
-}): MergedPackages => {
-  const packageExcludes = state.settings.frontity.packages;
-  const config: MergedPackages = {
-    roots: [],
-    fills: [],
-    state,
-    actions: {}
-  };
-  packageExcludes.forEach(pkg => {
-    if (packages[pkg.variable].roots) {
-      Object.entries(packages[pkg.variable].roots).forEach(
-        ([namespace, Root]) => {
-          if (pkg.exclude.indexOf(namespace) === -1) {
-            config.roots.push({ name: name, Root });
-          }
-        }
-      );
-    }
-    if (packages[pkg.variable].fills) {
-      Object.entries(packages[pkg.variable].fills).forEach(
-        ([namespace, Fill]) => {
-          if (pkg.exclude.indexOf(namespace) === -1) {
-            config.fills.push({ name: name, Fill });
-          }
-        }
-      );
-    }
-    if (packages[pkg.variable].actions) {
-      Object.entries(packages[pkg.variable].actions).forEach(
-        ([namespace, actions]) => {
-          if (pkg.exclude.indexOf(namespace) === -1) {
-            config.actions = deepmerge(
-              config.actions,
-              { [namespace]: actions },
-              { clone: false }
-            );
-          }
-        }
-      );
-    }
-  });
+  config.state = deepmerge(config.state, state);
   return config;
 };

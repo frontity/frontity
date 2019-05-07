@@ -75,3 +75,9 @@ export interface MergedPackages {
     [namespace: string]: any;
   };
 }
+
+export type PackageList = {
+  name: string;
+  variable: string;
+  exclude: string[];
+}[];

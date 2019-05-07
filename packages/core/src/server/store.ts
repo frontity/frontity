@@ -1,13 +1,15 @@
 import { createStore } from "@frontity/connect";
-import { MergedPackages } from "../types";
+import Package from "@frontity/types/package";
 import { NormalizedSettings } from "@frontity/file-settings";
-import deepmerge from "deepmerge";
+import { mergePackages, packageList } from "../utils/packages";
 
 export default ({
-  merged,
+  packages,
   settings
 }: {
-  merged: MergedPackages;
+  packages: {
+    [name: string]: Package;
+  };
   settings: NormalizedSettings;
 }) => {
   const state = {
@@ -15,10 +17,12 @@ export default ({
       frontity: {
         ...settings.settings,
         name: settings.name,
-        mode: settings.mode
+        mode: settings.mode,
+        packages: packageList({ settings })
       }
     }
   };
-  const store = createStore(deepmerge(merged, { state }));
+  const merged = mergePackages({ packages, state });
+  const store = createStore(merged);
   return store;
 };

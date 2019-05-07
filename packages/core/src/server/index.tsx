@@ -18,8 +18,7 @@ import {
 import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
-import { getMergedServer } from "../utils/packages";
-import createStore from "../store/server";
+import createStore from "./store";
 
 export default ({ packages }) => {
   const app = new Koa();
@@ -55,9 +54,6 @@ export default ({ packages }) => {
     // Get settings.
     const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
 
-    // Get a merged object with roots, fills, state, actions...
-    const merged = getMergedServer({ packages, settings });
-
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
 
@@ -66,7 +62,7 @@ export default ({ packages }) => {
     const frontity: FrontityTags = {};
 
     // Create the store.
-    const store = createStore({ merged, settings });
+    const store = createStore({ settings, packages });
 
     // Run init actions.
     Object.values(store.actions).forEach(({ init }) => {
@@ -78,7 +74,7 @@ export default ({ packages }) => {
       if (beforeSSR) beforeSSR();
     });
 
-    const Component = <App merged={merged} />;
+    const Component = <App store={store} />;
 
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.
@@ -112,7 +108,7 @@ export default ({ packages }) => {
 
       // Add mutations to our scripts.
       frontity.script = `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${JSON.stringify(
-        store.state
+        store.getSnapshot()
       )}</script>\n${frontity.script}`;
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
