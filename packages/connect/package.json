@@ -8,6 +8,8 @@
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
