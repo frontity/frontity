@@ -106,7 +106,7 @@ const settings2: Settings<MySource> = {
   packages: [
     {
       name: "my-source-package",
-      excludedNamespaces: ["source"]
+      exclude: ["source"]
     }
   ]
 };
@@ -115,7 +115,7 @@ const settings3: Settings<MySource> = {
   packages: [
     {
       name: "my-source-package",
-      excludedNamespaces: ["source", "other"],
+      exclude: ["source", "other"],
       settings: {
         source: {
           api: "1"
