@@ -1,13 +1,111 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`connect should pass actions and react to changes 1`] = `
+Array [
+  <button
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <div>
+    1
+  </div>,
+]
+`;
+
+exports[`connect should pass actions and react to changes 2`] = `
+Array [
+  <button
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <div>
+    2
+  </div>,
+]
+`;
+
+exports[`connect should pass actions and react to derived changes 1`] = `
+Array [
+  <button
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <div>
+    2
+  </div>,
+]
+`;
+
+exports[`connect should pass actions and react to derived changes 2`] = `
+Array [
+  <button
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <div>
+    3
+  </div>,
+]
+`;
+
+exports[`connect should pass actions with params and react to changes 1`] = `
+Array [
+  <button
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <div>
+    1
+  </div>,
+]
+`;
+
+exports[`connect should pass actions with params and react to changes 2`] = `
+Array [
+  <button
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <div>
+    4
+  </div>,
+]
+`;
+
+exports[`connect should pass derived state 1`] = `
+<div>
+  2
+</div>
+`;
+
+exports[`connect should pass derived state functions 1`] = `
+<div>
+  3
+</div>
+`;
+
+exports[`connect should pass other props passed to store 1`] = `
+<div>
+  <div>
+    component from library
+  </div>
+</div>
+`;
+
 exports[`connect should pass state to class components 1`] = `
 <div>
-  prop1
+  1
 </div>
 `;
 
 exports[`connect should pass state to functional components 1`] = `
 <div>
-  prop1
+  1
 </div>
 `;

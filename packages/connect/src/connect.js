@@ -1,7 +1,6 @@
 import { Component, createContext, createElement } from "react";
 import { observe, unobserve, raw, isObservable } from ".";
 
-export let isInsideFunctionComponent = false;
 const COMPONENT = Symbol("owner component");
 
 const context = createContext();

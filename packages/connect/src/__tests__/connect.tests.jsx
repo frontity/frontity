@@ -5,10 +5,25 @@ import connect, { Provider, createStore } from "..";
 
 let store;
 
+const Component = () => <div>component from library</div>;
+
 beforeEach(() => {
   store = createStore({
     state: {
-      prop1: "prop1"
+      prop1: 1,
+      prop2: state => state.prop1 + 1,
+      prop3: state => num => state.prop1 + num
+    },
+    actions: {
+      action1: state => {
+        state.prop1 = 2;
+      },
+      action2: state => num => {
+        state.prop1 = num;
+      }
+    },
+    libraries: {
+      Component
     }
   });
 });
@@ -31,6 +46,106 @@ describe("connect", () => {
         return <div>{this.props.state.prop1}</div>;
       }
     }
+    const Connected = connect(Comp);
+    const app = create(
+      <Provider value={store}>
+        <Connected />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+  });
+
+  it("should pass derived state", () => {
+    const Comp = ({ state }) => <div>{state.prop2}</div>;
+    const Connected = connect(Comp);
+    const app = create(
+      <Provider value={store}>
+        <Connected />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+  });
+
+  it("should pass derived state functions", () => {
+    const Comp = ({ state }) => <div>{state.prop3(2)}</div>;
+    const Connected = connect(Comp);
+    const app = create(
+      <Provider value={store}>
+        <Connected />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+  });
+
+  it("should pass actions and react to changes", () => {
+    const Comp1 = ({ actions }) => (
+      <button onClick={actions.action1}>change prop1</button>
+    );
+    const Comp2 = ({ state }) => <div>{state.prop1}</div>;
+    const Connected1 = connect(Comp1);
+    const Connected2 = connect(Comp2);
+    const app = create(
+      <Provider value={store}>
+        <Connected1 />
+        <Connected2 />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+    const rootInstance = app.root;
+    const button = rootInstance.findByType("button");
+    button.props.onClick();
+    expect(app).toMatchSnapshot();
+  });
+
+  it("should pass actions and react to derived changes", () => {
+    const Comp1 = ({ actions }) => (
+      <button onClick={actions.action1}>change prop1</button>
+    );
+    const Comp2 = ({ state }) => <div>{state.prop2}</div>;
+    const Connected1 = connect(Comp1);
+    const Connected2 = connect(Comp2);
+    const app = create(
+      <Provider value={store}>
+        <Connected1 />
+        <Connected2 />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+    const rootInstance = app.root;
+    const button = rootInstance.findByType("button");
+    button.props.onClick();
+    expect(app).toMatchSnapshot();
+  });
+
+  it("should pass actions with params and react to changes", () => {
+    const Comp1 = ({ actions }) => (
+      <button onClick={() => actions.action2(4)}>change prop1</button>
+    );
+    const Comp2 = ({ state }) => <div>{state.prop1}</div>;
+    const Connected1 = connect(Comp1);
+    const Connected2 = connect(Comp2);
+    const app = create(
+      <Provider value={store}>
+        <Connected1 />
+        <Connected2 />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+    const rootInstance = app.root;
+    const button = rootInstance.findByType("button");
+    button.props.onClick();
+    expect(app).toMatchSnapshot();
+  });
+
+  it("should pass other props passed to store", () => {
+    const Comp = ({ libraries }) => {
+      const Component = libraries.Component;
+      return (
+        <div>
+          <Component />
+        </div>
+      );
+    };
     const Connected = connect(Comp);
     const app = create(
       <Provider value={store}>
