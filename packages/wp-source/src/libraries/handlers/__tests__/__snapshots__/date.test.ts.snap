@@ -18,12 +18,11 @@ Array [
 
 exports[`date doesn't exist in dataMap (2016/10) 2`] = `
 Object {
-  "/category/nature/": Object {
+  "/2016/10/": Object {
     "day": undefined,
     "isArchive": true,
     "isDate": true,
-    "isFetching": false,
-    "isReady": true,
+    "isFetching": true,
     "month": 9,
     "pages": Array [
       Array [
@@ -99,12 +98,11 @@ Array [
 
 exports[`date doesn't exist in dataMap (2016/10/25) 2`] = `
 Object {
-  "/category/nature/": Object {
+  "/2016/10/25/": Object {
     "day": 25,
     "isArchive": true,
     "isDate": true,
-    "isFetching": false,
-    "isReady": true,
+    "isFetching": true,
     "month": 9,
     "pages": Array [
       Array [
@@ -180,12 +178,11 @@ Array [
 
 exports[`date get two pages of year 2016 2`] = `
 Object {
-  "/category/nature/": Object {
+  "/2016/": Object {
     "day": undefined,
     "isArchive": true,
     "isDate": true,
-    "isFetching": false,
-    "isReady": true,
+    "isFetching": true,
     "month": undefined,
     "pages": Array [
       Array [
@@ -277,12 +274,11 @@ Array [
 
 exports[`date get two pages of year 2016 5`] = `
 Object {
-  "/category/nature/": Object {
+  "/2016/": Object {
     "day": undefined,
     "isArchive": true,
     "isDate": true,
-    "isFetching": false,
-    "isReady": true,
+    "isFetching": true,
     "month": undefined,
     "pages": Array [
       Array [

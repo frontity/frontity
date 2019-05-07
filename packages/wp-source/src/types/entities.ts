@@ -139,56 +139,36 @@ export type PostType = {
   type: string;
   id: number;
   link: string;
-  author: number;
-  _links: Links;
-  categories: number[];
-  comment_status: "open" | "closed";
-  content: {
+  author?: number;
+  _links?: Links;
+  categories?: number[];
+  comment_status?: "open" | "closed";
+  content?: {
     protected: boolean;
     rendered: string;
   };
-  content_media: number[];
-  date: string;
-  date_gmt: string;
-  excerpt: {
+  content_media?: number[];
+  date?: string;
+  date_gmt?: string;
+  excerpt?: {
     protected: false;
     rendered: string;
   };
-  featured_media: number;
-  guid: {
+  featured_media?: number;
+  guid?: {
     rendered: string;
   };
-  format: string;
-  meta: any;
-  modified: string;
-  modified_gmt: string;
-  ping_status: "open" | "closed";
+  format?: string;
+  meta?: any;
+  modified?: string;
+  modified_gmt?: string;
+  ping_status?: "open" | "closed";
   slug: string;
-  sticky: boolean;
-  tags: number[];
-  taxonomiesMap: {
-    category: number[];
-    tag: number[];
-  };
-  title: {
+  sticky?: boolean;
+  tags?: number[];
+  title?: {
     rendered: string;
   };
-  _embedded: Embedded;
-  [other: string]: any; // is this necessary?
-};
-
-export type TaxonomyMap = {
-  [name: string]: Taxonomy;
-};
-
-export type PostTypeMap = {
-  [name: string]: PostType;
-};
-
-export type AttachmentMap = {
-  [name: string]: Attachment;
-};
-
-export type AuthorMap = {
-  [name: string]: Author;
+  _embedded?: Embedded;
+  [other: string]: any;
 };

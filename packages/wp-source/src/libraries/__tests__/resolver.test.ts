@@ -1,5 +1,5 @@
-import { resolver } from "../effects";
-import { Handler, Context } from "../../types";
+import Resolver from "../resolver";
+import { Handler } from "../../types";
 
 const patterns = {
   postArchive: "/",
@@ -25,6 +25,7 @@ Object.keys(patterns).forEach(
 );
 
 // Add handlers
+const resolver = new Resolver();
 Object.values(routes).forEach(({ pattern, handler }) => {
   resolver.add(pattern, handler);
 });

@@ -1,10 +1,11 @@
-import { api } from "../effects";
+import Api from "../api";
 import fetch from "cross-fetch";
 
 jest.mock("cross-fetch");
 const mockedFetch = fetch as jest.Mock;
 
 const lastFetch = () => mockedFetch.mock.calls.slice(-1)[0][0];
+const api = new Api();
 
 describe("api", () => {
   test("get from WP.org without params", async () => {

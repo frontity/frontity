@@ -14,8 +14,12 @@ const postHandler: Handler = async (state, { path, params, libraries }) => {
       params: { slug, _embed: true }
     });
 
-    // the next line will fail if post with id doesn't exist
-    [{ id }] = await populate(state, response);
+    const populated = await populate(state, response);
+
+    if (!populated.length)
+      throw new Error(`Post with slug "${slug}" not found.`);
+
+    [{ id }] = populated;
   }
 
   // Init data
@@ -24,7 +28,7 @@ const postHandler: Handler = async (state, { path, params, libraries }) => {
     type: "post",
     isPostType: true,
     isPost: true,
-    isFetching: true,
+    isFetching: true
   };
 };
 

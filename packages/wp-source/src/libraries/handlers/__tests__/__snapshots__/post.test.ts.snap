@@ -4,10 +4,9 @@ exports[`post doesn't exist in source.post 1`] = `
 Object {
   "/the-beauties-of-gullfoss/": Object {
     "id": 60,
-    "isFetching": false,
+    "isFetching": true,
     "isPost": true,
     "isPostType": true,
-    "isReady": true,
     "type": "post",
   },
 }
@@ -17,20 +16,10 @@ exports[`post exists in source.post 1`] = `
 Object {
   "/the-beauties-of-gullfoss/": Object {
     "id": 60,
-    "isFetching": false,
+    "isFetching": true,
     "isPost": true,
     "isPostType": true,
-    "isReady": true,
     "type": "post",
-  },
-}
-`;
-
-exports[`post throws an error if it doesn't exist 1`] = `
-Object {
-  "/the-beauties-of-gullfoss/": Object {
-    "is404": true,
-    "isFetching": false,
   },
 }
 `;

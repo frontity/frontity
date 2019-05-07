@@ -1,6 +1,4 @@
-import { createOvermindMock } from "overmind";
-import { namespaced } from "overmind/config";
-import { state, actions, effects } from "../../";
+import { State, Libraries } from "../../../types";
 import handler from "../post";
 
 import { mockResponse } from "./mocks/helpers";
@@ -11,9 +9,6 @@ const post60 = {
   slug: "the-beauties-of-gullfoss",
   type: "post",
   link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
-  title: {},
-  content: {},
-  excerpt: {},
   author: 4,
   featured_media: 62,
   meta: [],
@@ -21,69 +16,92 @@ const post60 = {
   tags: [10, 9, 13, 11]
 };
 
-let mocks;
+let state: State["source"];
+let libraries: Libraries;
+
 beforeEach(() => {
-  mocks = {
-    // Mock resolver
-    resolver: {
-      match: jest.fn().mockReturnValue({
-        handler,
-        params: { slug: "the-beauties-of-gullfoss" }
-      })
-    },
-    // Mock api
-    api: {
-      get: jest.fn().mockResolvedValue(mockResponse([post60]))
-    },
-    // Populate
-    populate: jest.fn().mockResolvedValue([
-      {
-        id: 60,
-        slug: "the-beauties-of-gullfoss",
-        link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/"
-      }
-    ])
+  // mock state
+  state = {
+    data: () => ({}),
+    dataMap: {},
+    category: {},
+    tag: {},
+    post: {},
+    page: {},
+    author: {},
+    attachment: {}
+  };
+  // mock libraries
+  libraries = {
+    source: {
+      resolver: {
+        registered: [],
+        init: jest.fn(),
+        add: jest.fn(),
+        match: jest.fn()
+      },
+      api: {
+        apiUrl: "https://test.frontity.io",
+        isCom: false,
+        init: jest.fn(),
+        getIdBySlug: jest.fn(),
+        get: jest.fn().mockResolvedValue(mockResponse([post60]))
+      },
+      populate: jest.fn().mockResolvedValue([
+        {
+          id: 60,
+          slug: "the-beauties-of-gullfoss",
+          link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/"
+        }
+      ])
+    }
   };
 });
 
 describe("post", () => {
   test("doesn't exist in source.post", async () => {
-    const config = namespaced({ source: { actions, state, effects } });
-    const store = createOvermindMock(config, { source: mocks });
+    // source.fetch("/the-beauties-of-gullfoss/")
+    await handler(state, {
+      path: "/the-beauties-of-gullfoss/",
+      params: { slug: "the-beauties-of-gullfoss" },
+      libraries
+    });
 
-    await store.actions.source.fetch("/the-beauties-of-gullfoss/");
-
-    expect(store.state.source.dataMap).toMatchSnapshot();
+    expect(state.dataMap).toMatchSnapshot();
   });
 
   test("exists in source.post", async () => {
-    const config = namespaced({
-      source: {
-        actions,
-        state: {
-          ...state,
-          post: { 60: post60 }
-        },
-        effects
-      }
+    const get = libraries.source.api.get as jest.Mock;
+
+    state.post[60] = post60;
+
+    // source.fetch("/the-beauties-of-gullfoss/")
+    await handler(state, {
+      path: "/the-beauties-of-gullfoss/",
+      params: { slug: "the-beauties-of-gullfoss" },
+      libraries
     });
-    const store = createOvermindMock(config, { source: mocks });
 
-    await store.actions.source.fetch("/the-beauties-of-gullfoss/");
-
-    expect(mocks.api.get).not.toBeCalled();
-    expect(store.state.source.dataMap).toMatchSnapshot();
+    expect(get).not.toBeCalled();
+    expect(state.dataMap).toMatchSnapshot();
   });
 
   test("throws an error if it doesn't exist", async () => {
-    mocks.api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
-    mocks.populate = jest.fn().mockResolvedValueOnce(mockResponse([]));
+    libraries.source.api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]));
 
-    const config = namespaced({ source: { actions, state, effects } });
-    const store = createOvermindMock(config, { source: mocks });
+    libraries.source.populate = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]));
 
-    await store.actions.source.fetch("/the-beauties-of-gullfoss/");
-
-    expect(store.state.source.dataMap).toMatchSnapshot();
+    // source.fetch("/the-beauties-of-gullfoss/")
+    const promise = handler(state, {
+      path: "/the-beauties-of-gullfoss/",
+      params: { slug: "the-beauties-of-gullfoss" },
+      libraries
+    });
+    
+    expect(promise).rejects.toThrowError();
   });
 });
