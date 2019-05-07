@@ -1,4 +1,6 @@
 declare module "@frontity/connect" {
+  import { ComponentType } from "react";
+
   function observable<Observable extends object>(obj?: Observable): Observable;
   function isObservable(obj: object): boolean;
   function raw<Observable extends object>(obj: Observable): Observable;
@@ -34,4 +36,10 @@ declare module "@frontity/connect" {
     state: S;
     actions: A;
   }): { state: S; actions: A; getSnapshot: () => S };
+
+  function connect<Comp extends ComponentType<any>>(comp: Comp): Comp;
+
+  const Provider: React.ProviderExoticComponent<React.ProviderProps<any>>;
+
+  export = connect;
 }
