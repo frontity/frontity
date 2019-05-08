@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mergePackages should a list of packages with its excludes 1`] = `
+exports[`mergePackages should output a list of packages with its excludes 1`] = `
 Object {
   "actions": Object {},
   "fills": Array [],
@@ -16,10 +16,10 @@ Object {
   ],
   "state": Object {
     "namespace2": Object {
-      "prop2": 2,
+      "prop2": "This should be included",
     },
     "namespace3": Object {
-      "prop3": 3,
+      "prop3": "This should be included",
     },
     "settings": Object {
       "frontity": Object {
@@ -38,12 +38,18 @@ Object {
           },
         ],
       },
+      "namespace2": Object {
+        "settings2": "This should be included",
+      },
+      "namespace3": Object {
+        "settings3": "This should be included",
+      },
     },
   },
 }
 `;
 
-exports[`packageList should a list of packages with its excludes 1`] = `
+exports[`packageList should output a list of packages with its excludes 1`] = `
 Array [
   Object {
     "exclude": Array [

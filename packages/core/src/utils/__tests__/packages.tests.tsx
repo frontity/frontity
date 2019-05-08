@@ -3,7 +3,7 @@ import { getVariable, packageList, mergePackages } from "../packages";
 import { NormalizedSettings } from "@frontity/file-settings/src";
 
 describe("getVariable", () => {
-  test("should generate different variable names for different packages", () => {
+  it("should generate different variable names for different packages", () => {
     expect(getVariable("@org/package", "mode")).not.toBe(
       getVariable("org-package", "mode")
     );
@@ -42,7 +42,7 @@ describe("packageList", () => {
       }
     ]
   };
-  test("should a list of packages with its excludes", () => {
+  it("should output a list of packages with its excludes", () => {
     expect(packageList({ settings })).toMatchSnapshot();
   });
 });
@@ -73,11 +73,19 @@ describe("mergePackages", () => {
         namespace2: () => <div>"namespace2"</div>
       },
       state: {
+        settings: {
+          namespace1: {
+            setting1: "This should NOT be included"
+          },
+          namespace2: {
+            settings2: "This should be included"
+          }
+        },
         namespace1: {
-          prop1: 1
+          prop1: "This should NOT be included"
         },
         namespace2: {
-          prop2: 2
+          prop2: "This should be included"
         }
       }
     },
@@ -86,13 +94,19 @@ describe("mergePackages", () => {
         namespace3: () => <div>"namespace3"</div>
       },
       state: {
+        settings: {
+          namespace3: {
+            settings3: "This should be included"
+          }
+        },
         namespace3: {
-          prop3: 3
+          prop3: "This should be included"
         }
       }
     }
   };
-  test("should a list of packages with its excludes", () => {
+
+  it("should output a list of packages with its excludes", () => {
     expect(mergePackages({ packages, state })).toMatchSnapshot();
   });
 });

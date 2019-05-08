@@ -43,7 +43,9 @@ export const mergePackages = ({
   const config: MergedPackages = {
     roots: [],
     fills: [],
-    state: {},
+    state: {
+      settings: {}
+    },
     actions: {}
   };
   const packageExcludes = state.settings.frontity.packages;
@@ -82,7 +84,19 @@ export const mergePackages = ({
     if (packages[pkg.variable].state) {
       Object.entries(packages[pkg.variable].state).forEach(
         ([namespace, state]) => {
-          if (pkg.exclude.indexOf(namespace) === -1) {
+          if (namespace === "settings") {
+            Object.entries(state).forEach(
+              ([settingsNamespace, settingsState]) => {
+                if (pkg.exclude.indexOf(settingsNamespace) === -1) {
+                  config.state.settings = deepmerge(
+                    config.state.settings,
+                    { [settingsNamespace]: settingsState },
+                    { clone: false }
+                  );
+                }
+              }
+            );
+          } else if (pkg.exclude.indexOf(namespace) === -1) {
             config.state = deepmerge(
               config.state,
               { [namespace]: state },
