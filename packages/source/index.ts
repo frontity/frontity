@@ -41,7 +41,9 @@ interface WpSource extends Package {
     };
   };
   libraries: {
-    populate: Function;
+    source: {
+      populate: Function;
+    }
   };
 }
 
