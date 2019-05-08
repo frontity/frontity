@@ -15,3 +15,6 @@ export type DeepPartial<T> = T extends Array<infer U>
   : T extends object
   ? DeepPartialObject<T>
   : T;
+
+// Omits any property found in the passed object.
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
