@@ -5,7 +5,6 @@ import {
   author,
   date,
   post,
-  attachment,
   page
 } from "../handlers";
 

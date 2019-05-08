@@ -1,4 +1,4 @@
-import { Handler } from "../../types";
+import { Handler } from "../../type";
 import getIdBySlug from "./utils/get-id-by-slug";
 
 const postHandler: Handler = async (state, { path, params, libraries }) => {

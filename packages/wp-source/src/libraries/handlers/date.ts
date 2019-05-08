@@ -1,4 +1,4 @@
-import { Handler } from "../../types";
+import { Handler } from "../../type";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 

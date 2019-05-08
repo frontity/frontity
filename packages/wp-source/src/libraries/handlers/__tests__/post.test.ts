@@ -1,4 +1,4 @@
-import { State, Libraries } from "../../../types";
+import { State, Libraries } from "../../../type";
 import handler from "../post";
 
 import { mockResponse } from "./mocks/helpers";

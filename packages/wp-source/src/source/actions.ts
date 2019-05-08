@@ -1,4 +1,4 @@
-import { State, PathOrObj, Libraries } from "../types";
+import { State, PathOrObj, Libraries } from "../type";
 import normalizePath from "./utils/normalize-path";
 import wpOrg from "../libraries/patterns/wp-org";
 import wpCom from "../libraries/patterns/wp-com";

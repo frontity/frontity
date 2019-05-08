@@ -1,4 +1,4 @@
-import { State, Libraries } from "../../../types";
+import { State, Libraries } from "../../../type";
 import populate from "../../populate";
 import handler from "../category";
 

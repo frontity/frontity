@@ -1,8 +1,6 @@
 import { normalize } from "normalizr";
 import * as schemas from "./schemas";
-import { State } from "../types";
-import { EntityData } from "../types/data";
-
+import { State } from "../type";
 
 const populate = async(state: State["source"], response: Response) => {
   // Normalize response
@@ -14,7 +12,7 @@ const populate = async(state: State["source"], response: Response) => {
   );
 
   // type, id and link of added entities
-  const entityList: EntityData[] = (isList ? result : [result]).map(
+  const entityList = (isList ? result : [result]).map(
     ({ id: entityId, schema }) => {
       const { type, id, link } = entities[schema][entityId];
       return { type, id, link };
