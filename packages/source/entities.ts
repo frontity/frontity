@@ -2,8 +2,9 @@ interface BaseEntity {
   id: number;
   slug: string;
   link: string;
-  description?: string;
+  description?: string | { rendered: string };
   meta?: any;
+  _links?: any;
 }
 
 interface BasePostType extends BaseEntity {
@@ -19,9 +20,12 @@ interface BasePostType extends BaseEntity {
   guid?: {
     rendered?: string;
   };
-  status?: "publish" | "future" | "draft" | "pending" | "private"
+  status?: "publish" | "future" | "draft" | "pending" | "private" | "inherit";
   comment_status?: "open" | "closed";
   ping_status?: "open" | "closed";
+  custom_fields?: any;
+  template?: string;
+  _embedded?: any;
 }
 
 export interface Author extends BaseEntity {
@@ -32,23 +36,24 @@ export interface Author extends BaseEntity {
     "48"?: string;
     "96"?: string;
   };
-};
+}
 
 export interface Taxonomy extends BaseEntity {
   taxonomy: string;
   name?: string;
   parent?: number;
   count?: number;
-};
+}
 
 export interface Attachment extends BasePostType {
   source_url?: string;
-  caption?: string;
+  caption?: string | { rendered: string };
   alt_text?: string;
   post?: number;
   media_details?: any;
   media_type?: string;
   mime_type?: string;
+  // todo: add "media_details"
 }
 
 export interface PostType extends BasePostType {
@@ -66,4 +71,4 @@ export interface PostType extends BasePostType {
   content_media?: number[];
   format?: string;
   sticky?: boolean;
-};
+}
