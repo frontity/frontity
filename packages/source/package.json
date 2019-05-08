@@ -1,0 +1,32 @@
+{
+  "name": "@frontity/source",
+  "version": "0.1.0",
+  "description": "Types for the Frontity Source API",
+  "keywords": [
+    "frontity",
+    "source",
+    "types",
+    "typescript"
+  ],
+  "homepage": "https://frontity.org",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "bugs": {
+    "url": "https://community.frontity.org"
+  },
+  "scripts": {
+    "test:ci": "jest",
+    "test": "jest --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@frontity/types": "^0.1.0",
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.2"
+  }
+}
