@@ -19,6 +19,10 @@ export default [
     handler: category
   },
   {
+    pattern: "/category/(.*)/:slug", // subcategories
+    handler: page
+  },
+  {
     pattern: "/tag/:slug",
     handler: tag
   },
