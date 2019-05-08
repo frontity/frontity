@@ -11,7 +11,7 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
     packages: [
       {
         name: "@frontity/extension-example-1",
-        exclude: ["extension1"],
+        exclude: [],
         settings: {
           extension1: {
             setting1: "1"

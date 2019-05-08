@@ -19,6 +19,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "frontity": "^0.1.0"
+    "frontity": "^0.1.0",
+    "@frontity/connect": "^0.1.0"
   }
 }
