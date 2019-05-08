@@ -4,23 +4,22 @@
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
   "scripts": {
-    "dev": "ts-node ./node_modules/frontity/src/commands.ts dev",
-    "dev:inspect": "node --inspect -r ts-node/register ./node_modules/frontity/src/commands.ts dev",
-    "build": "ts-node ./node_modules/frontity/src/commands.ts build",
-    "build:inspect": "node --inspect -r ts-node/register ./node_modules/frontity/src/commands.ts build",
-    "serve": "ts-node ./node_modules/frontity/src/commands.ts serve",
-    "serve:inspect": "node --inspect -r ts-node/register ./node_modules/frontity/src/commands.ts serve"
+    "dev": "frontity dev",
+    "dev:inspect": "node -r ts-node/register/transpile-only --inspect ./node_modules/.bin/frontity dev",
+    "build": "frontity build",
+    "build:inspect": "node -r ts-node/register/transpile-only --inspect ./node_modules/.bin/frontity build",
+    "serve": "frontity serve",
+    "serve:inspect": "node -r ts-node/register/transpile-only --inspect ./node_modules/.bin/frontity serve"
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "frontity": "^0.1.0",
     "@frontity/core": "^0.2.0",
     "@frontity/file-settings": "^0.1.0",
     "@frontity/extension-example-1": "^1.0.0",
-    "@frontity/extension-example-2": "^1.0.0",
-    "frontity": "^0.1.4"
+    "@frontity/extension-example-2": "^1.0.0"
   },
   "devDependencies": {
+    "frontity": "^0.1.4",
     "ts-node": "^8.0.3",
     "@frontity/types": "^0.1.0"
   }

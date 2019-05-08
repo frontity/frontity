@@ -1,3 +1,4 @@
+#! /usr/bin/env node -r ts-node/register/transpile-only
 import program from "commander";
 import { readFileSync } from "fs-extra";
 import { create, createPackage, dev, build, serve, subscribe } from "./actions";
