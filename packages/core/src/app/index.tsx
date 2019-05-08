@@ -1,6 +1,7 @@
 import React from "react";
 import { cache } from "emotion";
-import { CacheProvider } from "@emotion/core";
+import { CacheProvider as EmotionProvider } from "@emotion/core";
+import { Provider as ConnectProvider } from "@frontity/connect";
 import { MergedPackages } from "../types";
 
 type Props = {
@@ -9,14 +10,16 @@ type Props = {
 
 const App: React.FunctionComponent<Props> = ({ store }) => {
   return (
-    <CacheProvider value={cache}>
-      {store.roots.map(({ Root, name }) => (
-        <Root key={name} />
-      ))}
-      {store.fills.map(({ Fill, name }) => (
-        <Fill key={name} />
-      ))}
-    </CacheProvider>
+    <EmotionProvider value={cache}>
+      <ConnectProvider value={store}>
+        {store.roots.map(({ Root, name }) => (
+          <Root key={name} />
+        ))}
+        {store.fills.map(({ Fill, name }) => (
+          <Fill key={name} />
+        ))}
+      </ConnectProvider>
+    </EmotionProvider>
   );
 };
 
