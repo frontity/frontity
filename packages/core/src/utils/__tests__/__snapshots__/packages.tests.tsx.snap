@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergePackages should a list of packages with its excludes 1`] = `
+Object {
+  "actions": Object {},
+  "fills": Array [],
+  "roots": Array [
+    Object {
+      "Root": [Function],
+      "name": "package_1",
+    },
+    Object {
+      "Root": [Function],
+      "name": "package_2",
+    },
+  ],
+  "state": Object {
+    "namespace2": Object {
+      "prop2": 2,
+    },
+    "namespace3": Object {
+      "prop3": 3,
+    },
+    "settings": Object {
+      "frontity": Object {
+        "packages": Array [
+          Object {
+            "exclude": Array [
+              "namespace1",
+            ],
+            "name": "package-1",
+            "variable": "package_1",
+          },
+          Object {
+            "exclude": Array [],
+            "name": "package-2",
+            "variable": "package_2",
+          },
+        ],
+      },
+    },
+  },
+}
+`;
+
+exports[`packageList should a list of packages with its excludes 1`] = `
+Array [
+  Object {
+    "exclude": Array [
+      "namespace1",
+      "namespace2",
+    ],
+    "name": "package1",
+    "variable": "package1_html",
+  },
+  Object {
+    "exclude": Array [
+      "namespace3",
+      "namespace4",
+    ],
+    "name": "package2",
+    "variable": "package2_html",
+  },
+]
+`;

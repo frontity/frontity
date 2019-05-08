@@ -1,6 +1,8 @@
+import Namespaces from "./namespaces";
+
 export interface Package {
   name?: string;
-  namespaces?: string[];
+  namespaces?: Namespaces;
   roots?: {
     [namespace: string]: React.ReactType;
   };

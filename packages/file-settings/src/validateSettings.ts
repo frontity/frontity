@@ -1,6 +1,7 @@
 import uniq from "ramda/src/uniq";
 import uniqBy from "ramda/src/uniqBy";
-import { Settings, Package } from "./types";
+import Settings from "@frontity/types/settings";
+import { Package } from "./types";
 
 // This function validates the packages.
 const validatePackages = (packages: (string | Package)[]): void => {

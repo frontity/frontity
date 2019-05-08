@@ -33,5 +33,5 @@ declare module "@frontity/connect" {
   }: {
     state: S;
     actions: A;
-  }): { state: S; actions: A };
+  }): { state: S; actions: A; getSnapshot: () => S };
 }

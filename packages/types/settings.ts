@@ -5,13 +5,13 @@ import { DeepPartial } from "./utils";
 type PackageForSettings<Pkg extends Package> = {
   name: Required<Pkg["name"]>;
   active?: boolean;
-  namespaces?: Pkg["namespaces"];
+  exclude?: Pkg["namespaces"];
   settings?: DeepPartial<Pkg["state"]["settings"]>;
 };
 
 export interface MonoSettings<Pkg extends Package = Package> {
   name?: string;
-  matches?: string[];
+  match?: string[];
   mode?: string;
   settings?: {
     url?: string;

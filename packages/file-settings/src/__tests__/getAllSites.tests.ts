@@ -24,8 +24,8 @@ describe("getAllSites", () => {
         name: "mono-settings",
         mode: "html",
         packages: [
-          { name: "@frontity/theme", namespaces: [] },
-          { name: "@frontity/wp-source", namespaces: [] }
+          { name: "@frontity/theme", exclude: [] },
+          { name: "@frontity/wp-source", exclude: [] }
         ]
       }
     ]);
@@ -39,16 +39,16 @@ describe("getAllSites", () => {
         name: "settings-html",
         mode: "html",
         packages: [
-          { name: "@frontity/theme-html", namespaces: [] },
-          { name: "@frontity/wp-source-html", namespaces: [] }
+          { name: "@frontity/theme-html", exclude: [] },
+          { name: "@frontity/wp-source-html", exclude: [] }
         ]
       },
       {
         name: "settings-amp",
         mode: "amp",
         packages: [
-          { name: "@frontity/theme-amp", namespaces: [] },
-          { name: "@frontity/wp-source-amp", namespaces: [] }
+          { name: "@frontity/theme-amp", exclude: [] },
+          { name: "@frontity/wp-source-amp", exclude: [] }
         ]
       }
     ]);
@@ -61,12 +61,12 @@ describe("getAllSites", () => {
       {
         name: "mono-settings",
         mode: "html",
-        packages: [{ name: "@frontity/theme", namespaces: [] }]
+        packages: [{ name: "@frontity/theme", exclude: [] }]
       }
     ]);
   });
 
-  test("should pass on correct namespaces", async () => {
+  test("should pass on correct exclude", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedNamespacedPackage);
     const result = await getAllSites();
     expect(result).toEqual([
@@ -74,8 +74,8 @@ describe("getAllSites", () => {
         name: "mono-settings",
         mode: "html",
         packages: [
-          { name: "@frontity/theme", namespaces: ["ns1", "ns2"] },
-          { name: "@frontity/wp-source", namespaces: [] }
+          { name: "@frontity/theme", exclude: ["ns1", "ns2"] },
+          { name: "@frontity/wp-source", exclude: [] }
         ]
       }
     ]);

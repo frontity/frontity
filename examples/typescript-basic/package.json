@@ -4,12 +4,12 @@
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
   "scripts": {
-    "dev": "ts-node ./node_modules/@frontity/core/src/scripts/dev.ts",
-    "dev:inspect": "node --inspect -r ts-node/register ./node_modules/@frontity/core/src/scripts/dev.ts",
-    "build": "ts-node ./node_modules/@frontity/core/src/scripts/build.ts",
-    "build:inspect": "node --inspect -r ts-node/register ./node_modules/@frontity/core/src/scripts/build.ts",
-    "serve": "ts-node ./node_modules/@frontity/core/src/scripts/serve.ts",
-    "serve:inspect": "node --inspect -r ts-node/register ./node_modules/@frontity/core/src/scripts/serve.ts"
+    "dev": "ts-node ./node_modules/frontity/src/commands.ts dev",
+    "dev:inspect": "node --inspect -r ts-node/register ./node_modules/frontity/src/commands.ts dev",
+    "build": "ts-node ./node_modules/frontity/src/commands.ts build",
+    "build:inspect": "node --inspect -r ts-node/register ./node_modules/frontity/src/commands.ts build",
+    "serve": "ts-node ./node_modules/frontity/src/commands.ts serve",
+    "serve:inspect": "node --inspect -r ts-node/register ./node_modules/frontity/src/commands.ts serve"
   },
   "license": "Apache-2.0",
   "dependencies": {
@@ -20,6 +20,7 @@
     "@frontity/extension-example-2": "^1.0.0"
   },
   "devDependencies": {
-    "ts-node": "^8.0.3"
+    "ts-node": "^8.0.3",
+    "@frontity/types": "^0.1.0"
   }
 }

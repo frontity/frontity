@@ -1,15 +1,14 @@
 import { NormalizedSettings } from "./types";
 import importSettings from "./importSettings";
 
+type Props =
+  | { name: string; url: string }
+  | { name: string; url?: string }
+  | { name?: string; url: string };
+
 // This function returns the settings required by
 // the `core` package.
-export default async ({
-  name,
-  url
-}: {
-  name?: string;
-  url: string;
-}): Promise<NormalizedSettings> => {
+export default async ({ name, url }: Props): Promise<NormalizedSettings> => {
   // Import the settings from a file.
   const allSettings: NormalizedSettings[] = await importSettings();
 
@@ -27,11 +26,11 @@ export default async ({
     }
   }
 
-  // 3. Return settings when `matches` match the param `url`.
+  // 3. Return settings when `match` match the param `url`.
   const validMatch = allSettings
-    // Get all matches in one array.
+    // Get all match in one array.
     .reduce((final, current) => {
-      if (current.matches) final = final.concat(current.matches);
+      if (current.match) final = final.concat(current.match);
       return final;
     }, [])
     // Filter them to get only the ones that match the `url`
@@ -41,10 +40,10 @@ export default async ({
   // If a valid match was found return those settings.
   if (validMatch)
     return allSettings.find(
-      settings => settings.matches && settings.matches.includes(validMatch)
+      settings => settings.match && settings.match.includes(validMatch)
     );
 
   // 4. Return the first settings without a match defined or,
-  // if all of them have matches, the first settings in the array.
-  return allSettings.filter(settings => !settings.matches)[0] || allSettings[0];
+  // if all of them have match, the first settings in the array.
+  return allSettings.filter(settings => !settings.match)[0] || allSettings[0];
 };

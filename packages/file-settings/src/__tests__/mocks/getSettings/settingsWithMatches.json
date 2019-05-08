@@ -6,7 +6,7 @@
       "timezone": 0,
       "language": "en"
     },
-    "matches": ["https://frontity.org.*"],
+    "match": ["https://frontity.org.*"],
     "packages": []
   },
   {
@@ -16,7 +16,7 @@
       "timezone": 0,
       "language": "en"
     },
-    "matches": ["https://frontity.org/page/.*"],
+    "match": ["https://frontity.org/page/.*"],
     "packages": []
   }
 ]

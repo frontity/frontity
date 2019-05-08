@@ -4,15 +4,15 @@ exports[`generateClientEntryPoints should avoid creating the client file at all 
 
 exports[`generateClientEntryPoints should write HMR code if in development 1`] = `
 "import client from \\"@frontity/core/src/client\\";
-import * as package1_html from \\"package1/src/html/client\\";
-import { ns1, ns2 } from \\"package2/src/html/client\\";
+import package1_html from \\"package1/src/html/client\\";
+import package2_html from \\"package2/src/html/client\\";
 
-const namespaces = {
-  ...package1_html,
-   ns1,
-    ns2,
-}
-client({ namespaces });
+const packages = {
+  package1_html,
+  package2_html,
+};
+
+export default client({ packages });
 
 if (module[\\"hot\\"]) {
   module[\\"hot\\"].accept(
@@ -23,14 +23,13 @@ if (module[\\"hot\\"]) {
     ],
     () => {
       const client = require(\\"@frontity/core/src/client\\").default;
-      const package1_html = require(\\"package1/src/html/client\\");
-      const { ns1, ns2 } = require(\\"package2/src/html/client\\");
-      const namespaces = {
-        ...package1_html,
-        ns1,
-         ns2,
+      const package1_html = require(\\"package1/src/html/client\\").default;
+      const package2_html = require(\\"package2/src/html/client\\").default;
+      const packages = {
+        package1_html,
+        package2_html,
       };
-      client({ namespaces });
+      client({ packages });
     }
   );
 }"
@@ -58,16 +57,16 @@ Object {
       "name": "site-html",
       "packages": Array [
         Object {
+          "exclude": Array [],
           "name": "package1",
-          "namespaces": Array [],
         },
         Object {
+          "exclude": Array [],
           "name": "package2",
-          "namespaces": Array [],
         },
         Object {
+          "exclude": Array [],
           "name": "package2",
-          "namespaces": Array [],
         },
       ],
     },
@@ -76,12 +75,12 @@ Object {
       "name": "site-amp",
       "packages": Array [
         Object {
+          "exclude": Array [],
           "name": "package1",
-          "namespaces": Array [],
         },
         Object {
+          "exclude": Array [],
           "name": "package3",
-          "namespaces": Array [],
         },
       ],
     },
@@ -90,8 +89,8 @@ Object {
       "name": "site-2",
       "packages": Array [
         Object {
+          "exclude": Array [],
           "name": "package1",
-          "namespaces": Array [],
         },
       ],
     },
@@ -100,14 +99,15 @@ Object {
     Array [
       "/build/bundling/entry-points/site-html/client.ts",
       "import client from \\"@frontity/core/src/client\\";
-import * as package1_html from \\"package1/src/html/client\\";
-import * as package2_html from \\"package2/src/html/client\\";
+import package1_html from \\"package1/src/html/client\\";
+import package2_html from \\"package2/src/html/client\\";
 
-const namespaces = {
-  ...package1_html,
-  ...package2_html,
-}
-client({ namespaces });
+const packages = {
+  package1_html,
+  package2_html,
+};
+
+export default client({ packages });
 
 ",
       "utf8",
@@ -115,14 +115,15 @@ client({ namespaces });
     Array [
       "/build/bundling/entry-points/site-amp/client.ts",
       "import client from \\"@frontity/core/src/client\\";
-import * as package1_amp from \\"package1/src/amp/client\\";
-import * as package3_amp from \\"package3/src/amp/client\\";
+import package1_amp from \\"package1/src/amp/client\\";
+import package3_amp from \\"package3/src/amp/client\\";
 
-const namespaces = {
-  ...package1_amp,
-  ...package3_amp,
-}
-client({ namespaces });
+const packages = {
+  package1_amp,
+  package3_amp,
+};
+
+export default client({ packages });
 
 ",
       "utf8",
@@ -130,12 +131,13 @@ client({ namespaces });
     Array [
       "/build/bundling/entry-points/site-2/client.ts",
       "import client from \\"@frontity/core/src/client\\";
-import * as package1_html from \\"package1/src/html/client\\";
+import package1_html from \\"package1/src/html/client\\";
 
-const namespaces = {
-  ...package1_html,
-}
-client({ namespaces });
+const packages = {
+  package1_html,
+};
+
+export default client({ packages });
 
 ",
       "utf8",
@@ -175,15 +177,15 @@ Object {
       "name": "site-1",
       "packages": Array [
         Object {
+          "exclude": Array [],
           "name": "package1",
-          "namespaces": Array [],
         },
         Object {
-          "name": "package2",
-          "namespaces": Array [
+          "exclude": Array [
             "ns1",
             "ns2",
           ],
+          "name": "package2",
         },
       ],
     },
@@ -191,15 +193,15 @@ Object {
   "out": Array [
     "/build/bundling/entry-points/site-1/client.ts",
     "import client from \\"@frontity/core/src/client\\";
-import * as package1_html from \\"package1/src/html/client\\";
-import { ns1, ns2 } from \\"package2/src/html/client\\";
+import package1_html from \\"package1/src/html/client\\";
+import package2_html from \\"package2/src/html/client\\";
 
-const namespaces = {
-  ...package1_html,
-   ns1,
-    ns2,
-}
-client({ namespaces });
+const packages = {
+  package1_html,
+  package2_html,
+};
+
+export default client({ packages });
 
 ",
     "utf8",
@@ -224,16 +226,16 @@ Object {
       "name": "site-html",
       "packages": Array [
         Object {
+          "exclude": Array [],
           "name": "package1",
-          "namespaces": Array [],
         },
         Object {
+          "exclude": Array [],
           "name": "package2",
-          "namespaces": Array [],
         },
         Object {
+          "exclude": Array [],
           "name": "package2",
-          "namespaces": Array [],
         },
       ],
     },
@@ -242,12 +244,12 @@ Object {
       "name": "site-amp",
       "packages": Array [
         Object {
+          "exclude": Array [],
           "name": "package1",
-          "namespaces": Array [],
         },
         Object {
+          "exclude": Array [],
           "name": "package3",
-          "namespaces": Array [],
         },
       ],
     },
@@ -256,8 +258,8 @@ Object {
       "name": "site-2",
       "packages": Array [
         Object {
+          "exclude": Array [],
           "name": "package1",
-          "namespaces": Array [],
         },
       ],
     },
@@ -266,10 +268,10 @@ Object {
     Array [
       "/build/bundling/entry-points/server.ts",
       "import server from \\"@frontity/core/src/server\\";
-import * as package1_html from \\"package1/src/html/server\\";
-import * as package2_html from \\"package2/src/html/server\\";
-import * as package1_amp from \\"package1/src/amp/server\\";
-import * as package3_amp from \\"package3/src/amp/server\\";
+import package1_html from \\"package1/src/html/server\\";
+import package2_html from \\"package2/src/html/server\\";
+import package1_amp from \\"package1/src/amp/server\\";
+import package3_amp from \\"package3/src/amp/server\\";
 
 const packages = {
   package1_html,
@@ -278,7 +280,9 @@ const packages = {
   package3_amp,
 };
 
-export default server({ packages });",
+export default server({ packages });
+
+",
       "utf8",
     ],
   ],
@@ -300,15 +304,15 @@ Object {
       "name": "site-1",
       "packages": Array [
         Object {
+          "exclude": Array [],
           "name": "package1",
-          "namespaces": Array [],
         },
         Object {
-          "name": "package2",
-          "namespaces": Array [
+          "exclude": Array [
             "ns1",
             "ns2",
           ],
+          "name": "package2",
         },
       ],
     },
@@ -316,15 +320,17 @@ Object {
   "out": Array [
     "/build/bundling/entry-points/server.ts",
     "import server from \\"@frontity/core/src/server\\";
-import * as package1_html from \\"package1/src/html/server\\";
-import * as package2_html from \\"package2/src/html/server\\";
+import package1_html from \\"package1/src/html/server\\";
+import package2_html from \\"package2/src/html/server\\";
 
 const packages = {
   package1_html,
   package2_html,
 };
 
-export default server({ packages });",
+export default server({ packages });
+
+",
     "utf8",
   ],
 }

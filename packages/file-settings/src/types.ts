@@ -1,5 +1,5 @@
 type Base = {
-  matches?: string[]; // Default: undefined
+  match?: string[]; // Default: undefined
   mode?: string; // Default: "html"
   settings?: {
     url?: string; // Default: undefined
@@ -12,13 +12,13 @@ type Base = {
 export type Package = {
   name: string; // Default: undefined
   active?: boolean; // Default: true
-  namespaces?: string[]; // Default: undefined
+  exclude?: string[]; // Default: undefined
   settings?: object; // Default: undefined
 };
 
 export type NormalizedPackage = Package & {
   active: boolean; // Default: true
-  namespaces: string[]; // Default: undefined
+  exclude: string[]; // Default: undefined
   settings: object; // Default: undefined
 };
 
@@ -56,6 +56,6 @@ export type Site = {
   mode: string;
   packages: {
     name: string;
-    namespaces: string[];
+    exclude: string[];
   }[];
 };

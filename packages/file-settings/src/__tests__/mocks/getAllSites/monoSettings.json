@@ -10,13 +10,13 @@
       {
         "name": "@frontity/theme",
         "active": true,
-        "namespaces": [],
+        "exclude": [],
         "settings": {}
       },
       {
         "name": "@frontity/wp-source",
         "active": true,
-        "namespaces": [],
+        "exclude": [],
         "settings": {}
       }
     ]

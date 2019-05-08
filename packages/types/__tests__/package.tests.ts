@@ -2,11 +2,12 @@ import Settings from "../settings";
 import Package from "../package";
 import Action from "../action";
 import Derived from "../derived";
+import Namespaces from "../namespaces";
 
 // Custom package extending from Package.
 interface Package1 extends Package {
   name: "package-1";
-  namespaces: ("namespace1" | "namespace2")[];
+  namespaces?: Namespaces<"namespace1" | "namespace2">;
   state: {
     settings: {
       namespace1: {
@@ -41,7 +42,6 @@ interface Package1 extends Package {
 // Package1 implementation.
 const package1: Package1 = {
   name: "package-1",
-  namespaces: ["namespace1", "namespace2"],
   state: {
     settings: {
       namespace1: {
@@ -87,7 +87,7 @@ const package2: Settings<Package1> = {
 // Two different settings extending from Package.
 interface Package2 extends Package {
   name: "package-2";
-  namespaces: ("namespace2" | "namespace3")[];
+  namespaces?: Namespaces<"namespace2" | "namespace3">;
   state: {
     settings: {
       namespace2: {
@@ -105,7 +105,7 @@ const package3: Settings<Package1 | Package2> = {
   packages: [
     {
       name: "package-1",
-      namespaces: ["namespace1"],
+      exclude: ["namespace1"],
       settings: {
         namespace1: {
           prop1: ""
@@ -114,7 +114,7 @@ const package3: Settings<Package1 | Package2> = {
     },
     {
       name: "package-2",
-      namespaces: ["namespace2"],
+      exclude: ["namespace2", "namespace3"],
       settings: {
         namespace2: {
           prop2: ""

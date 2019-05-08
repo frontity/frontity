@@ -15,10 +15,10 @@ import {
   getBothScriptTags,
   Extractor
 } from "./utils/stats";
-import getNamespaces from "./utils/namespaces";
 import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../types";
+import createStore from "./store";
 
 export default ({ packages }) => {
   const app = new Koa();
@@ -57,12 +57,24 @@ export default ({ packages }) => {
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
 
-    // Get the correct namespaces for this site.
-    const namespaces = getNamespaces({ packages, settings });
-
     // Init variables.
     let html = "";
     const frontity: FrontityTags = {};
+
+    // Create the store.
+    const store = createStore({ settings, packages });
+
+    // Run init actions.
+    Object.values(store.actions).forEach(({ init }) => {
+      if (init) init();
+    });
+
+    // Run beforeSSR actions.
+    Object.values(store.actions).forEach(({ beforeSSR }) => {
+      if (beforeSSR) beforeSSR();
+    });
+
+    const Component = <App store={store} />;
 
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.
@@ -72,7 +84,7 @@ export default ({ packages }) => {
         stats,
         entrypoints: [settings.name]
       });
-      const jsx = extractor.collectChunks(<App namespaces={namespaces} />);
+      const jsx = extractor.collectChunks(Component);
       html = renderToString(jsx);
 
       // Get the linkTags. Crossorigin needed for type="module".
@@ -93,10 +105,15 @@ export default ({ packages }) => {
               es5Stats
             })
           : extractor.getScriptTags();
+
+      // Add mutations to our scripts.
+      frontity.script = `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${JSON.stringify(
+        store.getSnapshot()
+      )}</script>\n${frontity.script}`;
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.
-      html = renderToStaticMarkup(<App namespaces={namespaces} />);
+      html = renderToStaticMarkup(Component);
     }
 
     // Emotion get CSS and IDs:

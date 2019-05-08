@@ -22,9 +22,7 @@
     "test": "jest --watch",
     "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand"
   },
-  "dependencies": {
-    "recursive-iterator": "^3.3.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",

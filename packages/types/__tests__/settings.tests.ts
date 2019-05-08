@@ -61,7 +61,7 @@ const settings7: Settings = {
     {
       name: "package-1",
       active: true,
-      namespaces: ["namespace1", "namespace2"],
+      exclude: ["namespace1", "namespace2"],
       settings: {
         namespace3: {
           someSetting: "some setting of namespace 1"

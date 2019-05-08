@@ -10,7 +10,7 @@
       {
         "name": "@frontity/theme",
         "active": true,
-        "namespaces": [],
+        "exclude": [],
         "settings": {}
       }
     ]

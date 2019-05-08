@@ -7,6 +7,12 @@ import { getVariable } from "../../utils/packages";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
+type Package = {
+  name: string;
+  exclude: string[];
+  mode: string;
+};
+
 // Check if the entry point exists using all the possible extensions.
 const entryExists = async ({
   name,
@@ -61,13 +67,7 @@ const getPackagesList = async ({
 }: {
   sites: Site[];
   type: "client" | "server";
-}): Promise<
-  {
-    name: string;
-    namespaces: string[];
-    mode: string;
-  }[]
-> => {
+}): Promise<Package[]> => {
   // Get a flat array of unique packages and its modes.
   const packages = uniqBy(
     flatten(
@@ -77,13 +77,71 @@ const getPackagesList = async ({
   );
   return (await Promise.all(
     // Iterate over the packages.
-    packages.map(async ({ pkg: { name, namespaces }, mode }) => {
+    packages.map(async ({ pkg: { name, exclude }, mode }) => {
       // Check if the entry point of that mode exists.
       const exists = await entryExists({ name, mode, type });
-      return { name, namespaces, mode, exists };
+      return { name, exclude, mode, exists };
     })
     // Remove the packages where the entry point doesn't exist.
   )).filter(({ exists }) => exists);
+};
+
+const generateImportsTemplate = ({
+  packages,
+  type
+}: {
+  packages: Package[];
+  type: "server" | "client";
+}): string => {
+  let template = `import ${type} from "@frontity/core/src/${type}";\n`;
+  // Create the "import" part of the file.
+  packages.forEach(
+    ({ name, mode }) =>
+      (template += `import ${getVariable(
+        name,
+        mode
+      )} from "${name}/src/${mode}/${type}";\n`)
+  );
+  // Create the "const packages = {...}" part of the file.
+  template += "\nconst packages = {\n";
+  packages.forEach(
+    ({ name, mode }) => (template += `  ${getVariable(name, mode)},\n`)
+  );
+  template += "};\n\n";
+  template += `export default ${type}({ packages });\n\n`;
+  return template;
+};
+
+const generateHotModuleTemplate = ({
+  packages,
+  template
+}: {
+  packages: Package[];
+  template: string;
+}): string => {
+  template += `if (module["hot"]) {
+  module["hot"].accept(
+    [
+      "@frontity/core/src/client",\n`;
+  packages.forEach(({ name, mode }) => {
+    template += `      "${name}/src/${mode}/client",\n`;
+  });
+  template += `    ],
+    () => {
+      const client = require("@frontity/core/src/client").default;\n`;
+  packages.forEach(
+    ({ name, mode }) =>
+      (template += `      const ${getVariable(
+        name,
+        mode
+      )} = require("${name}/src/${mode}/client").default;\n`)
+  );
+  template += "      const packages = {\n";
+  packages.forEach(
+    ({ name, mode }) => (template += `        ${getVariable(name, mode)},\n`)
+  );
+  template += "      };\n      client({ packages });\n    }\n  );\n}";
+  return template;
 };
 
 // Create an entry-point file for the server and return the bundle name and path.
@@ -95,22 +153,7 @@ export const generateServerEntryPoint = async ({
   outDir: string;
 }): Promise<EntryPoints> => {
   const packages = await getPackagesList({ sites, type: "server" });
-  let template = 'import server from "@frontity/core/src/server";\n';
-  // Create the "import" part of the file.
-  packages.forEach(
-    ({ name, mode }) =>
-      (template += `import * as ${getVariable(
-        name,
-        mode
-      )} from "${name}/src/${mode}/server";\n`)
-  );
-  // Create the "const packages = {...}" part of the file.
-  template += "\nconst packages = {\n";
-  packages.forEach(
-    ({ name, mode }) => (template += `  ${getVariable(name, mode)},\n`)
-  );
-  template += "};\n\n";
-  template += "export default server({ packages });";
+  const template = generateImportsTemplate({ packages, type: "server" });
   // Write the file and return the bundle.
   const path = `${outDir}/bundling/entry-points/server.ts`;
   await writeFile(path, template, "utf8");
@@ -130,72 +173,21 @@ export const generateClientEntryPoints = async ({
   return (await Promise.all(
     // Iterate over the sites
     sites.map(async site => {
-      // Get list of packages with mode for this site.
-      const packages = await getPackagesList({
-        sites: [{ name: site.name, mode: site.mode, packages: site.packages }],
+      const packages = await getPackagesList({ sites: [site], type: "client" });
+      if (packages.length === 0) return;
+      let template = generateImportsTemplate({
+        packages,
         type: "client"
       });
-      // Don't generate entry-points if there are no packages.
-      if (packages.length > 0) {
-        let template = 'import client from "@frontity/core/src/client";\n';
-        // Create the "import" part of the file.
-        packages.forEach(({ name, namespaces, mode }) => {
-          return namespaces.length > 0
-            ? (template += `import { ${namespaces.join(
-                ", "
-              )} } from "${name}/src/${site.mode}/client";\n`)
-            : (template += `import * as ${getVariable(
-                name,
-                mode
-              )} from "${name}/src/${site.mode}/client";\n`);
-        });
-        // Create the "export" part of the file.
-        template += "\nconst namespaces = {\n";
-        packages.forEach(({ name, namespaces, mode }) => {
-          return namespaces.length > 0
-            ? (template += namespaces.map(ns => `   ${ns},\n`).join(" "))
-            : (template += `  ...${getVariable(name, mode)},\n`);
-        });
-        template += "}\nclient({ namespaces });\n\n";
-
-        // If development, insert the HMR code:
-        if (mode === "development") {
-          template += `if (module["hot"]) {
-  module["hot"].accept(
-    [
-      "@frontity/core/src/client",\n`;
-          packages.forEach(({ name, namespaces, mode }) => {
-            template += `      "${name}/src/${site.mode}/client",\n`;
-          });
-          template += `    ],
-    () => {
-      const client = require("@frontity/core/src/client").default;\n`;
-          packages.forEach(({ name, namespaces, mode }) => {
-            return namespaces.length > 0
-              ? (template += `      const { ${namespaces.join(
-                  ", "
-                )} } = require("${name}/src/${site.mode}/client");\n`)
-              : (template += `      const ${getVariable(
-                  name,
-                  mode
-                )} = require("${name}/src/${site.mode}/client");\n`);
-          });
-          template += "      const namespaces = {\n";
-          packages.forEach(({ name, namespaces, mode }) => {
-            return namespaces.length > 0
-              ? (template += namespaces.map(ns => `        ${ns},\n`).join(" "))
-              : (template += `        ...${getVariable(name, mode)},\n`);
-          });
-          template += "      };\n      client({ namespaces });\n    }\n  );\n}";
-        }
-
-        // Create sub-folder for site.
-        await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
-        // Write the file and return the bundle.
-        const path = `${outDir}/bundling/entry-points/${site.name}/client.ts`;
-        await writeFile(path, template, "utf8");
-        return { name: site.name, path };
+      if (mode === "development") {
+        template = generateHotModuleTemplate({ template, packages });
       }
+      // Create sub-folder for site.
+      await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
+      // Write the file and return the bundle.
+      const path = `${outDir}/bundling/entry-points/${site.name}/client.ts`;
+      await writeFile(path, template, "utf8");
+      return { name: site.name, path };
     })
     // Filter non-existent bundles.
   )).filter(bundle => bundle);
