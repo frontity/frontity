@@ -3,7 +3,6 @@ import Action from "@frontity/types/action";
 import Derived from "@frontity/types/derived";
 import Namespaces from "@frontity/types/namespaces";
 
-import { MapOf } from "./utils";
 import { Data } from "./data";
 import { Taxonomy, PostType, Attachment, Author } from "./entities";
 
@@ -26,13 +25,13 @@ interface WpSource extends Package {
     };
     source: {
       data: Derived<WpSource, (pathOrLink: string) => Data>;
-      dataMap: MapOf<Data>;
-      category: MapOf<Taxonomy>;
-      tag: MapOf<Taxonomy>;
-      post: MapOf<PostType>;
-      page: MapOf<PostType>;
-      author: MapOf<Author>;
-      attachment: MapOf<Attachment>;
+      dataMap: Record<string, Data>;
+      category: Record<string, Taxonomy>;
+      tag: Record<string, Taxonomy>;
+      post: Record<string, PostType>;
+      page: Record<string, PostType>;
+      author: Record<string, Author>;
+      attachment: Record<string, Attachment>;
     };
   };
   actions: {
