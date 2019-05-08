@@ -7,6 +7,7 @@ module.exports = {
           node: "8.10"
         }
       }
-    ]
+    ],
+    "@babel/preset-react"
   ]
 };
