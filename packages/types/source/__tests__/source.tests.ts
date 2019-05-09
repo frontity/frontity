@@ -6,7 +6,6 @@ const source1 = (libraries: Source["libraries"]): Source => {
   const myInternalArray = [];
 
   return {
-    namespaces: ["source"],
     state: {
       source: {
         data: state => pathOrObj => state.source.dataMap[""],
@@ -37,16 +36,10 @@ const source1 = (libraries: Source["libraries"]): Source => {
 // Extended Source.
 interface MySource extends Source {
   name: "my-source-package";
-  namespaces: ("source" | "other")[];
   state: {
-    // Add some settings.
-    settings: {
-      source: {
-        api: string;
-      };
-    };
     source: Source["state"]["source"] & {
       // And other props.
+      api: string;
       myOwnProp: string;
     };
   };
@@ -60,14 +53,9 @@ interface MySource extends Source {
 
 const source2: MySource = {
   name: "my-source-package",
-  namespaces: ["source", "other"],
   state: {
-    settings: {
-      source: {
-        api: "https://site.com/api"
-      }
-    },
     source: {
+      api: "https://site.com/api",
       data: state => pathOrObj => state.source.dataMap[""],
       dataMap: {},
       category: {},
@@ -105,8 +93,7 @@ const settings1: Settings<MySource> = {
 const settings2: Settings<MySource> = {
   packages: [
     {
-      name: "my-source-package",
-      exclude: ["source"]
+      name: "my-source-package"
     }
   ]
 };
@@ -115,8 +102,7 @@ const settings3: Settings<MySource> = {
   packages: [
     {
       name: "my-source-package",
-      exclude: ["source", "other"],
-      settings: {
+      state: {
         source: {
           api: "1"
         }
