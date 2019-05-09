@@ -13,18 +13,12 @@ export type PathOrObj =
       page?: number;
     };
 
-interface WpSource extends Package {
+interface Source extends Package {
   name: "@frontity/wp-source";
   namespaces: Namespaces<"source">;
   state: {
-    settings: {
-      source: {
-        apiUrl: string;
-        isCom: boolean;
-      };
-    };
     source: {
-      data: Derived<WpSource, (pathOrLink: string) => Data>;
+      data: Derived<Source, (pathOrLink: string) => Data>;
       dataMap: Record<string, Data>;
       category: Record<string, Taxonomy>;
       tag: Record<string, Taxonomy>;
@@ -36,8 +30,8 @@ interface WpSource extends Package {
   };
   actions: {
     source: {
-      fetch: Action<WpSource, PathOrObj>;
-      init?: Action<WpSource>;
+      fetch: Action<Source, PathOrObj>;
+      init?: Action<Source>;
     };
   };
   libraries: {
@@ -47,4 +41,4 @@ interface WpSource extends Package {
   };
 }
 
-export default WpSource;
+export default Source;
