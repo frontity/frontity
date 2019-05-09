@@ -11,7 +11,7 @@ const tinyRouter: TinyRouter = {
         const baseUrl = state.frontity.url;
         const { path, page } = state.router;
         return `${new URL(
-          page > 1 ? path.replace(/\/?$/, `/page/${page}`) : path,
+          page > 1 ? path.replace(/\/?$/, `/page/${page}/`) : path,
           baseUrl
         )}`;
       }
