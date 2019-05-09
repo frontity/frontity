@@ -1,9 +1,10 @@
-import { State } from "./types";
+import { State } from "../../type";
 
-const state: State = {
+const state = {
   path: "/",
   page: null,
-  url: (_, state) => state.settings.frontity.url + state.router.path
+  url: (state: State): string =>
+    `${new URL(state.frontity.url, state.router.path)}`
 };
 
 export default state;

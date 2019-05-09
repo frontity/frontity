@@ -1,20 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`actions set 1`] = `
-Array [
-  Object {
-    "args": Array [
-      "/some-post",
-    ],
-    "method": "set",
-    "path": "path",
+exports[`actions set set() should work just with a path 1`] = `
+Object {
+  "frontity": Object {
+    "url": "https://example.com",
   },
-  Object {
-    "args": Array [
-      null,
-    ],
-    "method": "set",
-    "path": "page",
+  "router": Object {
+    "page": null,
+    "path": "/some-post",
+    "url": "https://example.com",
   },
-]
+}
+`;
+
+exports[`actions set set() should work with path and page 1`] = `
+Object {
+  "frontity": Object {
+    "url": "https://example.com",
+  },
+  "router": Object {
+    "page": 2,
+    "path": "/category/some-category",
+    "url": "https://example.com",
+  },
+}
 `;
