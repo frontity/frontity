@@ -1,5 +1,5 @@
-import normalizePath from "./utils/normalize-path";
 import WpSource from "../type";
+import normalizePath from "./utils/normalize-path";
 
 const state: WpSource["state"]["source"] = {
   data: state => pathOrLink => state.source.dataMap[normalizePath(pathOrLink)],

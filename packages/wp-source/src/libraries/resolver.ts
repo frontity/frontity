@@ -1,5 +1,5 @@
-import pathToRegexp, { Key } from "path-to-regexp";
 import { Handler } from "../type";
+import pathToRegexp, { Key } from "path-to-regexp";
 
 class Resolver {
   // Array containing all registered patterns with their handlers

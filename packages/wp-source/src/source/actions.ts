@@ -1,10 +1,13 @@
-import { State, PathOrObj, Libraries } from "../type";
-import normalizePath from "./utils/normalize-path";
-import wpOrg from "../libraries/patterns/wp-org";
-import wpCom from "../libraries/patterns/wp-com";
+import WpSource, { Libraries } from "../type";
+import { normalizePath } from "./utils";
+import { wpOrg, wpCom } from "../libraries/patterns/";
 
-const actions = ({ libraries }: { libraries: Libraries }) => ({
-  fetch: (state: State) => async (pathOrObj: PathOrObj) => {
+const actions = ({
+  libraries
+}: {
+  libraries: Libraries;
+}): WpSource["actions"]["source"] => ({
+  fetch: state => async pathOrObj => {
     const { source } = state;
     const { resolver } = libraries.source;
 
@@ -18,7 +21,7 @@ const actions = ({ libraries }: { libraries: Libraries }) => ({
     const data = source.dataMap[path];
 
     // return if the data that it's about to be fetched already exists
-    if (data && page && data.isArchive && data.pages[page]) return;
+    if (data && data.isArchive && data.pages[page]) return;
 
     // init data if needed
     if (!data) source.dataMap[path] = {};
@@ -37,7 +40,7 @@ const actions = ({ libraries }: { libraries: Libraries }) => ({
     source.dataMap[path].isFetching = false;
   },
 
-  init: (state: State) => {
+  init: state => {
     const { apiUrl, isCom } = state.source;
     const { api, resolver } = libraries.source;
 

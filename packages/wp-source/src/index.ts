@@ -1,11 +1,8 @@
-import state from "../source/state";
-import actions from "../source/actions";
+import WpSource from "./type";
+import state from "./source/state";
+import actions from "./source/actions";
 
-import Api from "../libraries/api";
-import Resolver from "../libraries/resolver";
-import populate from "../libraries/populate";
-
-import WpSource from "../type";
+import { Api, Resolver, populate } from "./libraries";
 
 const wpSource = ({ libraries }): WpSource => ({
   name: "@frontity/wp-source",

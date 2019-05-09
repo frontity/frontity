@@ -1,6 +1,6 @@
+import { State } from "../type";
 import { normalize } from "normalizr";
 import * as schemas from "./schemas";
-import { State } from "../type";
 
 const populate = async(state: State["source"], response: Response) => {
   // Normalize response

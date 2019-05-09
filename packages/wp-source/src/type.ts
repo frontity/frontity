@@ -1,18 +1,8 @@
-import Source from "@frontity/source";
-import { EntityData } from "@frontity/source/data";
-
 import Action from "@frontity/types/action";
 import { ResolveState } from "@frontity/types/utils";
-
-import Api from "./libraries/api";
-import Resolver from "./libraries/resolver";
-
-export type PathOrObj =
-  | string
-  | {
-      path: string;
-      page?: number;
-    };
+import Source, { PathOrObj } from "@frontity/source";
+import { EntityData } from "@frontity/source/data";
+import { Api, Resolver } from "./libraries";
 
 export type State = ResolveState<WpSource["state"]>;
 
@@ -47,7 +37,7 @@ interface WpSource extends Source {
   };
   actions: {
     source: {
-      fetch: Source["actions"]["source"]["fetch"];
+      fetch: Action<WpSource, PathOrObj>;
       init: Action<WpSource>;
       beforeSSR?: Action<WpSource>;
       beforeCSR?: Action<WpSource>;
