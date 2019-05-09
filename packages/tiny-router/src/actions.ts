@@ -14,6 +14,12 @@ export const set: TinyRouter["actions"]["router"]["set"] = state => pathOrObj =>
 
 export const init: TinyRouter["actions"]["router"]["init"] = state => {
   if (typeof window !== "undefined") {
+    const { path, page } = state.router;
+
+    // init first state
+    window.history.replaceState({ path, page }, "");
+
+    // listen to changes in history
     window.addEventListener("popstate", ({ state: { path, page } }) =>
       set(state)({ path, page })
     );
