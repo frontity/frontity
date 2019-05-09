@@ -1,15 +1,20 @@
-import { set, init } from "../actions";
 import { createStore } from "@frontity/connect";
+import { init, set } from "../actions";
+import tinyRouter from "..";
 
 const config = {
+  name: "@frontity/tiny-router",
   state: {
-    router: {},
+    router: tinyRouter.state.router,
     frontity: {
-      url: "https://example.com"
+      url: "https://test.frontity.io"
     }
   },
   actions: {
-    router: { set, init }
+    router: {
+      init,
+      set
+    }
   }
 };
 
@@ -18,31 +23,35 @@ beforeEach(() => {
   store = createStore(config);
 });
 
-const stateMock = {
-  router: {
-    path: "",
-    page: null,
-    url: "https://example.com"
-  },
-  frontity: {
-    url: "https://example.com"
-  }
-};
-
 describe("state", () => {
-  test.todo("url without page should work");
-  test.todo("url with page = 1 should work");
-  test.todo("url with page > 1 should work");
+  test("url without page should work", () => {
+    store.actions.router.set("/some-post");
+    expect(store.state.router.url).toBe("https://test.frontity.io/some-post");
+  });
+  test("url with page = 1 should work", () => {
+    store.actions.router.set({ path: "/category/nature", page: 1 });
+    expect(store.state.router.url).toBe(
+      "https://test.frontity.io/category/nature"
+    );
+  });
+  test("url with page > 1 should work", () => {
+    store.actions.router.set({ path: "/category/nature", page: 2 });
+    expect(store.state.router.url).toBe(
+      "https://test.frontity.io/category/nature/page/2"
+    );
+  });
 });
 
 describe("actions", () => {
   test("set() should work just with a path", () => {
-    set(stateMock)("/some-post");
-    expect(stateMock).toMatchSnapshot();
+    store.actions.router.set("/some-post");
+    const snapshot = store.getSnapshot();
+    expect(snapshot).toMatchSnapshot();
   });
   test("set() should work with path and page", () => {
-    set(stateMock)({ path: "/category/some-category", page: 2 });
-    expect(stateMock).toMatchSnapshot();
+    store.actions.router.set({ path: "/category/some-category", page: 2 });
+    const snapshot = store.getSnapshot();
+    expect(snapshot).toMatchSnapshot();
   });
   test.todo("init() should add event listener to handle popstate events");
 });

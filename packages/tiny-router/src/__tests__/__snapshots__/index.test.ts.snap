@@ -3,12 +3,11 @@
 exports[`actions set() should work just with a path 1`] = `
 Object {
   "frontity": Object {
-    "url": "https://example.com",
+    "url": "https://test.frontity.io",
   },
   "router": Object {
     "page": null,
     "path": "/some-post",
-    "url": "https://example.com",
   },
 }
 `;
@@ -16,12 +15,11 @@ Object {
 exports[`actions set() should work with path and page 1`] = `
 Object {
   "frontity": Object {
-    "url": "https://example.com",
+    "url": "https://test.frontity.io",
   },
   "router": Object {
     "page": 2,
     "path": "/category/some-category",
-    "url": "https://example.com",
   },
 }
 `;
