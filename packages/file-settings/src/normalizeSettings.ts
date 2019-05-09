@@ -9,20 +9,15 @@ import Settings, {
 const defaultSettings = {
   name: "default",
   mode: "html",
-  settings: {
-    timezone: 0,
-    language: "en"
-  }
+  state: {}
 };
 
 const defaultPackage: {
   active: boolean;
-  exclude: string[];
-  settings: { [namespace: string]: object };
+  state: object;
 } = {
   active: true,
-  exclude: [],
-  settings: {}
+  state: {}
 };
 
 // This function merges the imported settings with the default settings.

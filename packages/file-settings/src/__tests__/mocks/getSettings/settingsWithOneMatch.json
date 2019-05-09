@@ -2,20 +2,14 @@
   {
     "name": "settings-without-match",
     "mode": "html",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "packages": []
   },
   {
     "name": "settings-with-match",
     "mode": "html",
     "match": ["https://frontity.org.*/amp/?$"],
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "packages": []
   }
 ]

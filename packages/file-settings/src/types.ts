@@ -1,25 +1,18 @@
 type Base = {
-  match?: string[]; // Default: undefined
-  mode?: string; // Default: "html"
-  settings?: {
-    url?: string; // Default: undefined
-    title?: string; // Default: undefined
-    timezone?: number; // Default: 0
-    language?: string; // Default: "en"
-  };
+  match?: string[];
+  mode?: string;
+  state?: {};
 };
 
 export type Package = {
-  name: string; // Default: undefined
-  active?: boolean; // Default: true
-  exclude?: string[]; // Default: undefined
-  settings?: object; // Default: undefined
+  name: string;
+  active?: boolean;
+  state?: object;
 };
 
 export type NormalizedPackage = Package & {
   active: boolean; // Default: true
-  exclude: string[]; // Default: undefined
-  settings: object; // Default: undefined
+  state: object; // Default: {}
 };
 
 type Mono = Base & {
@@ -35,11 +28,8 @@ type Imported<T> = Base & {
 };
 
 type Normalized<T> = Base & {
-  mode: string;
-  settings: {
-    timezone: number;
-    language: string;
-  };
+  mode: string; // Default: html
+  state: object; // Default: {}
   packages: T[];
 };
 
@@ -54,8 +44,5 @@ export type NormalizedSettings<T = NormalizedPackage> = Normalized<T> & Multi;
 export type Site = {
   name: string;
   mode: string;
-  packages: {
-    name: string;
-    exclude: string[];
-  }[];
+  packages: string[];
 };

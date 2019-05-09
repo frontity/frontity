@@ -2,22 +2,17 @@
   {
     "name": "mono-settings",
     "mode": "html",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "packages": [
       {
         "name": "@frontity/theme",
         "active": true,
-        "exclude": [],
-        "settings": {}
+        "state": {}
       },
       {
         "name": "@frontity/wp-source",
         "active": false,
-        "exclude": [],
-        "settings": {}
+        "state": {}
       }
     ]
   }

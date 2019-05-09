@@ -2,9 +2,7 @@
   {
     "name": "mono-settings",
     "mode": "amp",
-    "settings": {
-      "language": "es"
-    },
+    "state": {},
     "packages": [
       "@frontity/theme",
       {

@@ -2,20 +2,14 @@
   {
     "name": "settings-with-short-match",
     "mode": "html",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "match": ["https://frontity.org.*"],
     "packages": []
   },
   {
     "name": "settings-with-large-match",
     "mode": "html",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "match": ["https://frontity.org/page/.*"],
     "packages": []
   }

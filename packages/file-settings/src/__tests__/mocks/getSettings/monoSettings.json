@@ -2,16 +2,12 @@
   {
     "name": "mono-settings",
     "mode": "html",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "packages": [
       {
         "name": "@frontity/theme",
         "active": true,
-        "exclude": [],
-        "settings": {}
+        "state": {}
       }
     ]
   }
