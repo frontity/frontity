@@ -20,7 +20,7 @@ describe("getVariable", () => {
 });
 
 describe("packageList", () => {
-  const state: NormalizedSettings = {
+  const settings: NormalizedSettings = {
     name: "site",
     mode: "html",
     state: {},
@@ -38,7 +38,7 @@ describe("packageList", () => {
     ]
   };
   it("should output a list of packages", () => {
-    expect(packageList({ state })).toMatchSnapshot();
+    expect(packageList({ settings })).toMatchSnapshot();
   });
 });
 

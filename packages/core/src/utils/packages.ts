@@ -15,13 +15,13 @@ export const getVariable = (pkg: string, mode: string) => {
 };
 
 export const packageList = ({
-  state
+  settings
 }: {
-  state: NormalizedSettings;
+  settings: NormalizedSettings;
 }): PackageList =>
-  state.packages.map(pkg => ({
+  settings.packages.map(pkg => ({
     name: pkg.name,
-    variable: getVariable(pkg.name, state.mode)
+    variable: getVariable(pkg.name, settings.mode)
   }));
 
 export const mergePackages = ({
