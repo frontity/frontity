@@ -1,4 +1,4 @@
-import { createStore } from "@frontity/connect";
+import { createStore, observe } from "@frontity/connect";
 import { init, set } from "../actions";
 import tinyRouter from "..";
 
@@ -70,6 +70,11 @@ describe("actions", () => {
     });
 
     // check reactions to "popstate" events
+    let currentPath = store.state.router.path
+    observe(() => {
+      currentPath = store.state.router.path;
+    });
+
     window.dispatchEvent(
       new PopStateEvent("popstate", {
         state: {
@@ -78,6 +83,8 @@ describe("actions", () => {
         }
       })
     );
+
+    expect(currentPath).toBe("/tag/japan");
     expect(store.state.router.path).toBe("/tag/japan");
     expect(store.state.router.page).toBe(3);
   });
