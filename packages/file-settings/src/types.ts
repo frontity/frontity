@@ -1,7 +1,7 @@
 type Base = {
   match?: string[];
   mode?: string;
-  state?: {};
+  state?: object;
 };
 
 export type Package = {
