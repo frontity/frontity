@@ -63,7 +63,7 @@ Array [
 ]
 `;
 
-exports[`create uses the emitter passed in options to log messages 1`] = `
+exports[`create uses the emitter passed to log messages 1`] = `
 Array [
   Array [
     "create",
@@ -92,19 +92,13 @@ Array [
   ],
   Array [
     "create",
-    "[1m[22m
-[1mFrontity project created.[22m
-
-You can start development with [1m[32mfrontity dev[39m[22m.
-For documentation please visit [4m[35mhttps://docs.frontity.org/[39m[24m.
-If you need help please visit [4m[35mhttps://community.frontity.org/[39m[24m.
-",
+    "Downloading [33mfavicon.ico[39m.",
     undefined,
   ],
 ]
 `;
 
-exports[`create uses the emitter passed in options to log the errors 1`] = `
+exports[`create uses the emitter passed to log the errors 1`] = `
 Array [
   Array [
     "error",

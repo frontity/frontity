@@ -5,26 +5,32 @@ import {
   createFrontitySettings,
   cloneStarterTheme,
   installDependencies,
+  downloadFavicon,
   revertProgress
 } from "../steps";
+import * as utils from "../../../utils";
 import * as fsExtra from "fs-extra";
-import * as phin from "phin";
+import * as fetch from "node-fetch";
 import * as childProcess from "child_process";
 import * as tar from "tar";
 
+jest.mock("../../../utils");
 jest.mock("fs-extra");
-jest.mock("phin");
+jest.mock("node-fetch");
 jest.mock("child_process");
 jest.mock("tar");
 
+const mockedUtils = utils as jest.Mocked<typeof utils>;
 const mockedFsExtra = fsExtra as jest.Mocked<typeof fsExtra>;
-const mockedPhin = phin as jest.Mocked<typeof phin>;
+const mockedFetch = fetch as jest.Mocked<typeof fetch>;
 const mockedChildProcess = childProcess as jest.Mocked<typeof childProcess>;
 const mockedTar = tar as jest.Mocked<typeof tar>;
-const mockedChDir = jest.fn();
-process.chdir = mockedChDir;
 
 describe("normalizeOptions", () => {
+  beforeEach(() => {
+    mockedUtils.isPackageNameValid.mockReset();
+  });
+
   test("returns merged options", () => {
     const defaultOptions = {
       path: "/default/path/to/project",
@@ -44,6 +50,7 @@ describe("normalizeOptions", () => {
       packages: defaultOptions.packages,
       theme: passedOptions.theme
     };
+    mockedUtils.isPackageNameValid.mockReturnValue(true);
     const result = normalizeOptions(defaultOptions, passedOptions);
     expect(result).toEqual(expectedOptions);
   });
@@ -58,6 +65,7 @@ describe("normalizeOptions", () => {
     const passedOptions = {
       name: "Some, Random Name"
     };
+    mockedUtils.isPackageNameValid.mockReturnValue(false);
     expect(() => normalizeOptions(defaultOptions, passedOptions)).toThrow(
       "The name of the package is not valid. Please enter a valid one (only letters and dashes)."
     );
@@ -66,19 +74,19 @@ describe("normalizeOptions", () => {
 
 describe("ensureProjectDir", () => {
   beforeEach(() => {
-    mockedChDir.mockReset();
     mockedFsExtra.ensureDir.mockReset();
     mockedFsExtra.readdir.mockReset();
+    mockedFsExtra.pathExists.mockReset();
   });
 
   test("works when passing a non existent path", async () => {
     const path = "/path/to/project";
-    mockedFsExtra.readdir.mockResolvedValue([]);
+    mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
     const dirExisted = await ensureProjectDir({ path });
     expect(dirExisted).toBe(false);
+    expect(mockedFsExtra.pathExists.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
-    expect(mockedChDir.mock.calls).toMatchSnapshot();
-    expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.readdir).not.toHaveBeenCalled();
   });
 
   test("works when passing an existent path with an empty repo", async () => {
@@ -89,15 +97,17 @@ describe("ensureProjectDir", () => {
       ".gitignore",
       "LICENSE"
     ]);
+    mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
     const dirExisted = await ensureProjectDir({ path });
     expect(dirExisted).toBe(true);
-    expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
-    expect(mockedChDir.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.pathExists.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.ensureDir).not.toHaveBeenCalled();
   });
 
   test("throws when passing an non-empty path", async () => {
     const path = "/path/to/project";
+    mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
     mockedFsExtra.readdir.mockResolvedValue(["file-that-should-not-exist"]);
     await expect(ensureProjectDir({ path })).rejects.toThrow(
       "The directory passed to `create` function is not empty"
@@ -107,13 +117,12 @@ describe("ensureProjectDir", () => {
 
 describe("createPackageJson", () => {
   beforeEach(() => {
-    mockedChDir.mockReset();
-    mockedPhin.default.mockReset();
-    mockedPhin.default.mockResolvedValueOnce({
-      body: { "dist-tags": { latest: "1.0.0" } }
+    mockedFetch.default.mockReset();
+    mockedFetch.default.mockResolvedValueOnce({
+      json: () => Promise.resolve({ "dist-tags": { latest: "1.0.0" } })
     } as any);
-    mockedPhin.default.mockResolvedValueOnce({
-      body: { "dist-tags": { latest: "0.1.1" } }
+    mockedFetch.default.mockResolvedValueOnce({
+      json: () => Promise.resolve({ "dist-tags": { latest: "0.1.1" } })
     } as any);
     mockedFsExtra.writeFile.mockReset();
   });
@@ -122,10 +131,11 @@ describe("createPackageJson", () => {
     const options = {
       name: "random-name",
       packages: ["@frontity/wp-source"],
-      theme: "@frontity/mars-theme"
+      theme: "@frontity/mars-theme",
+      path: "/path/to/project"
     };
     await createPackageJson(options);
-    expect(mockedPhin.default.mock.calls).toMatchSnapshot();
+    expect(mockedFetch.default.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 
@@ -133,17 +143,17 @@ describe("createPackageJson", () => {
     const options = {
       name: "random-name",
       packages: ["@frontity/wp-source"],
-      theme: "random-theme"
+      theme: "random-theme",
+      path: "/path/to/project"
     };
     await createPackageJson(options);
-    expect(mockedPhin.default.mock.calls).toMatchSnapshot();
+    expect(mockedFetch.default.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 });
 
 describe("createFrontitySettings", () => {
   beforeEach(() => {
-    mockedChDir.mockReset();
     mockedFsExtra.readFile.mockReset();
     mockedFsExtra.readFile.mockResolvedValueOnce("$settings$" as any);
     mockedFsExtra.writeFile.mockReset();
@@ -157,7 +167,6 @@ describe("createFrontitySettings", () => {
     };
     const extension = "js";
     await createFrontitySettings(extension, options);
-    expect(mockedChDir.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
@@ -170,7 +179,6 @@ describe("createFrontitySettings", () => {
     };
     const extension = "ts";
     await createFrontitySettings(extension, options);
-    expect(mockedChDir.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
@@ -178,7 +186,6 @@ describe("createFrontitySettings", () => {
 
 describe("cloneStarterTheme", () => {
   beforeEach(() => {
-    mockedChDir.mockReset();
     mockedFsExtra.readFile.mockReset();
     mockedFsExtra.readFile.mockResolvedValueOnce(JSON.stringify({
       dependencies: {
@@ -186,12 +193,13 @@ describe("cloneStarterTheme", () => {
       }
     }) as any);
     mockedFsExtra.ensureDir.mockReset();
+    mockedUtils.isPackageNameValid.mockReset();
     mockedFsExtra.readdir.mockReset();
     mockedFsExtra.readdir.mockResolvedValueOnce(["file.tgz"]);
     mockedFsExtra.remove.mockReset();
     mockedChildProcess.exec.mockReset();
     (mockedChildProcess as any).exec.mockImplementation(
-      (_command: string, resolve: Function) => {
+      (_command: string, _options: object, resolve: Function) => {
         resolve();
       }
     );
@@ -203,23 +211,58 @@ describe("cloneStarterTheme", () => {
       path: "/path/to/project",
       theme: "@frontity/mars-theme"
     };
+    mockedUtils.isPackageNameValid.mockReturnValue(true);
     await cloneStarterTheme(options);
-    expect(mockedChDir.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.readFile.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
+    expect(mockedUtils.isPackageNameValid.mock.calls).toMatchSnapshot();
     expect(mockedChildProcess.exec.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
     expect(mockedTar.extract.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.remove.mock.calls).toMatchSnapshot();
   });
+
+  test("throws if the theme name is not valid", async () => {
+    const options = {
+      path: "/path/to/project",
+      theme: "@frontity/mars-theme"
+    };
+    mockedUtils.isPackageNameValid.mockReturnValue(false);
+    await expect(cloneStarterTheme(options)).rejects.toThrow(
+      "The name of the theme is not a valid npm package name."
+    );
+  });
+});
+
+describe("downloadFavicon", () => {
+  beforeEach(() => {
+    mockedFetch.default.mockReset();
+    (mockedFetch as any).default.mockResolvedValue({
+      body: {
+        pipe: jest.fn()
+      }
+    });
+    mockedFsExtra.createWriteStream.mockReset();
+    (mockedFsExtra as any).createWriteStream.mockReturnValue({
+      on: jest.fn((_event, callback) => callback())
+    });
+  });
+
+  test("works as expected", async () => {
+    const options = {
+      path: "/path/to/project"
+    };
+    await downloadFavicon(options);
+    expect(mockedFetch.default.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.createWriteStream.mock.calls).toMatchSnapshot();
+  });
 });
 
 describe("installDependencies", () => {
   beforeEach(() => {
-    mockedChDir.mockReset();
     mockedChildProcess.exec.mockReset();
     (mockedChildProcess as any).exec.mockImplementation(
-      (_command: string, resolve: Function) => {
+      (_command: string, _options: object, resolve: Function) => {
         resolve();
       }
     );
@@ -230,14 +273,13 @@ describe("installDependencies", () => {
       path: "/path/to/project"
     };
     await installDependencies(options);
-    expect(mockedChDir.mock.calls).toMatchSnapshot();
     expect(mockedChildProcess.exec.mock.calls).toMatchSnapshot();
   });
 });
 
 describe("revertProgress", () => {
   beforeEach(() => {
-    mockedChDir.mockReset();
+    mockedFsExtra.readdir.mockReset();
     mockedFsExtra.remove.mockReset();
   });
 
@@ -246,8 +288,16 @@ describe("revertProgress", () => {
     const options = {
       path: "/path/to/project"
     };
+    mockedFsExtra.readdir.mockResolvedValue([
+      "frontity.settings.js",
+      "package.json",
+      "packages",
+      "favicon.ico",
+      "node_modules",
+      "package-lock.json"
+    ]);
     await revertProgress(dirExisted, options);
-    expect(mockedChDir.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.remove.mock.calls).toMatchSnapshot();
   });
 
@@ -257,7 +307,6 @@ describe("revertProgress", () => {
       path: "/path/to/project"
     };
     await revertProgress(dirExisted, options);
-    expect(mockedChDir.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.remove.mock.calls).toMatchSnapshot();
   });
 });

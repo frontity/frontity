@@ -1,18 +1,24 @@
 import { EOL } from "os";
-import { resolve } from "path";
-import { promisify } from "util";
+import { resolve as resolvePath } from "path";
 import { exec } from "child_process";
+import { promisify } from "util";
 import {
   ensureDir,
   readdir as readDir,
   readFile,
   writeFile,
-  remove
+  createWriteStream,
+  remove,
+  pathExists
 } from "fs-extra";
 import { extract } from "tar";
-import p from "phin";
+import fetch from "node-fetch";
 import { mergeRight, uniq } from "ramda";
+import { isPackageNameValid } from "../../utils";
 import { Options, PackageJson } from "./types";
+
+const allowedExistingContent = ["readme.md", "license", ".git", ".gitignore"];
+const faviconUrl = "https://favicon.frontity.org/";
 
 // This function normalizes and validates options.
 export const normalizeOptions = (
@@ -23,8 +29,8 @@ export const normalizeOptions = (
 
   // Normalize and validate `name` option.
   options.name = options.name.replace(/[\s_-]+/g, "-").toLowerCase();
-  const nameConventionMatch = /^(?:@[\w-]+\/)?[\w-]+$/;
-  if (!nameConventionMatch.test(options.name))
+
+  if (!isPackageNameValid(options.name))
     throw new Error(
       "The name of the package is not valid. Please enter a valid one (only letters and dashes)."
     );
@@ -32,46 +38,48 @@ export const normalizeOptions = (
   return options;
 };
 
-// This function ensures that the directory exists and is empty.
+// This function ensures the path and checks if it's empty or it's a new repo.
+// Also returns a boolean indicating if the dir existed already.
 export const ensureProjectDir = async ({ path }: Options): Promise<boolean> => {
-  await ensureDir(path);
-  process.chdir(path);
-  const dirContent = await readDir("./");
+  const dirExisted = await pathExists(path);
 
-  // If the directory is not empty check if it's an empty repository.
-  if (dirContent.length) {
-    const allowedContent = ["readme.md", "license", ".gitignore", ".git"];
+  if (dirExisted) {
+    // Check if the directory is a new repo.
+    const dirContent = await readDir(path);
     const notAllowedContent = dirContent.filter(
-      content => !allowedContent.includes(content.toLowerCase())
+      content => !allowedExistingContent.includes(content.toLowerCase())
     );
-
-    // If it's not an empty repository.
+    // If it's not, throw.
     if (notAllowedContent.length) {
       throw new Error("The directory passed to `create` function is not empty");
     }
-
-    return true;
+  } else {
+    await ensureDir(path);
   }
 
-  return false;
+  return dirExisted;
 };
 
 // This function creates a `package.json` file.
-export const createPackageJson = async ({ name, packages, theme }: Options) => {
+export const createPackageJson = async ({
+  name,
+  packages: selectedPackages,
+  theme,
+  path
+}: Options) => {
   const mandatoryPackages = [
     "frontity"
     // "@frontity/core",
   ];
-  const finalPackages = uniq(mandatoryPackages.concat(packages));
+  const packages = uniq(mandatoryPackages.concat(selectedPackages));
 
   // Add Frontity packages to the dependencies.
   const dependencies = (await Promise.all(
-    finalPackages.map(async pkg => {
+    packages.map(async pkg => {
       // Get the version of each package.
-      const version = (await p({
-        url: `https://registry.npmjs.com/${pkg}`,
-        parse: "json"
-      })).body["dist-tags"].latest;
+      const response = await fetch(`https://registry.npmjs.com/${pkg}`);
+      const data = await response.json();
+      const version = data["dist-tags"].latest;
       return [pkg, `^${version}`];
     })
   )).reduce((final, current) => {
@@ -83,7 +91,6 @@ export const createPackageJson = async ({ name, packages, theme }: Options) => {
   // Add the starter theme to the dependencies.
   const themeName = (theme.match(/\/?([\w-]+)$/) || [, ""])[1];
   dependencies[theme] = `./packages/${themeName}`;
-
   const packageJson: PackageJson = {
     name,
     version: "0.1.0",
@@ -96,48 +103,62 @@ export const createPackageJson = async ({ name, packages, theme }: Options) => {
     },
     dependencies
   };
-
-  const fileName = "package.json";
+  const filePath = resolvePath(path, "package.json");
   const fileData = `${JSON.stringify(packageJson, null, 2)}${EOL}`;
-  await writeFile(fileName, fileData);
+  await writeFile(filePath, fileData);
 };
 
 // This function creates a `frontity.settings` file.
 export const createFrontitySettings = async (
   extension: string,
-  { name, path, packages }: Options
+  { name, packages, path }: Options
 ) => {
-  process.chdir(path);
   const frontitySettings = { name, packages };
   const fileTemplate = await readFile(
-    resolve(__dirname, `../../templates/settings-${extension}-template`),
+    resolvePath(__dirname, `../../../templates/settings-${extension}-template`),
     { encoding: "utf8" }
   );
-  const fileName = `frontity.settings.${extension}`;
+  const filePath = resolvePath(path, `frontity.settings.${extension}`);
   const fileData = fileTemplate.replace(/\$([\w-]+)\$/g, (_match, key) => {
     if (key === "settings") return JSON.stringify(frontitySettings, null, 2);
   });
-  await writeFile(fileName, fileData);
+  await writeFile(filePath, fileData);
 };
 
 // This functions clones the starter theme.
-export const cloneStarterTheme = async ({ path, theme }: Options) => {
-  process.chdir(path);
-  const themePath = JSON.parse(
-    await readFile("./package.json", { encoding: "utf8" })
-  ).dependencies[theme];
+export const cloneStarterTheme = async ({ theme, path }: Options) => {
+  const packageJsonPath = resolvePath(path, "./package.json");
+  const packageJson = JSON.parse(
+    await readFile(packageJsonPath, { encoding: "utf8" })
+  );
+  const themePath = resolvePath(path, packageJson.dependencies[theme]);
   await ensureDir(themePath);
-  process.chdir(themePath);
-  await promisify(exec)(`npm pack ${theme}`);
-  const tarball = (await readDir("./")).find(file => /\.tgz$/.test(file));
-  await extract({ file: tarball, strip: 1 });
-  await remove(tarball);
+  if (!isPackageNameValid(theme))
+    throw new Error("The name of the theme is not a valid npm package name.");
+  await promisify(exec)(`npm pack ${theme}`, { cwd: themePath });
+  const tarball = (await readDir(themePath)).find(file => /\.tgz$/.test(file));
+  const tarballPath = resolvePath(themePath, tarball);
+  await extract({ cwd: themePath, file: tarballPath, strip: 1 });
+  await remove(tarballPath);
 };
 
 // This function installs the Frontity packages.
 export const installDependencies = async ({ path }: Options) => {
-  process.chdir(path);
-  await promisify(exec)("npm install");
+  await promisify(exec)("npm install", { cwd: path });
+};
+
+// This function downlaods the favicon file.
+export const downloadFavicon = async ({ path }: Options) => {
+  await new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(faviconUrl);
+      const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
+      response.body.pipe(fileStream);
+      fileStream.on("finish", resolve);
+    } catch (error) {
+      reject(error);
+    }
+  });
 };
 
 // This function removes the files and directories created
@@ -146,17 +167,11 @@ export const revertProgress = async (
   dirExisted: boolean,
   { path }: Options
 ) => {
-  process.chdir(path);
   if (dirExisted) {
-    const removableContent = [
-      "node_modules",
-      "frontity.settings.js",
-      "frontity.settings.ts",
-      "tsconfig.json",
-      "package.json",
-      "package-lock.json",
-      "packages"
-    ];
+    const content = await readDir(path);
+    const removableContent = content
+      .filter(item => !allowedExistingContent.includes(item.toLowerCase()))
+      .map(item => resolvePath(path, item));
     for (const content of removableContent) await remove(content);
   } else {
     await remove(path);

@@ -22,6 +22,7 @@
   "scripts": {
     "start": "node dist/commands.js",
     "dev": "ts-node src/commands.ts",
+    "ts": "ts-node",
     "test": "jest --watch --config jest.config.json",
     "test:ci": "jest --config jest.config.json --colors",
     "build": "tsc --project ./tsconfig.build.json",
@@ -33,6 +34,7 @@
     "@types/inquirer": "^6.0.0",
     "@types/jest": "^24.0.11",
     "@types/node": "^11.13.2",
+    "@types/node-fetch": "^2.3.3",
     "@types/phin": "^3.3.0",
     "@types/ramda": "^0.26.6",
     "@types/shelljs": "^0.8.4",
@@ -48,8 +50,8 @@
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "fs-extra": "^7.0.1",
+    "node-fetch": "^2.4.1",
     "ora": "^3.4.0",
-    "phin": "^3.3.0",
     "ramda": "^0.26.1",
     "tar": "^4.4.8"
   }
