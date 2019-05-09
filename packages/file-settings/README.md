@@ -122,15 +122,13 @@ Or **multi settings**:
 
 ## Typescript
 
-Some [TS types](src/types.ts) are exposed to be used in development. They can be accessed like this:
+The `Settings` interface is exposed to be used in development. It can be accessed like this:
 
 ```js
 import { Settings } from "@frontity/file-settings";
 
 const settings: Settings = { ... };
 ```
-
-The following are probably the only type you will need during development:
 
 ### `Settings<T = Package>`
 
