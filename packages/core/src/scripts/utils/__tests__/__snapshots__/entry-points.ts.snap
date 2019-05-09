@@ -56,42 +56,24 @@ Object {
       "mode": "html",
       "name": "site-html",
       "packages": Array [
-        Object {
-          "exclude": Array [],
-          "name": "package1",
-        },
-        Object {
-          "exclude": Array [],
-          "name": "package2",
-        },
-        Object {
-          "exclude": Array [],
-          "name": "package2",
-        },
+        "package1",
+        "package2",
+        "package2",
       ],
     },
     Object {
       "mode": "amp",
       "name": "site-amp",
       "packages": Array [
-        Object {
-          "exclude": Array [],
-          "name": "package1",
-        },
-        Object {
-          "exclude": Array [],
-          "name": "package3",
-        },
+        "package1",
+        "package3",
       ],
     },
     Object {
       "mode": "html",
       "name": "site-2",
       "packages": Array [
-        Object {
-          "exclude": Array [],
-          "name": "package1",
-        },
+        "package1",
       ],
     },
   ],
@@ -176,17 +158,8 @@ Object {
       "mode": "html",
       "name": "site-1",
       "packages": Array [
-        Object {
-          "exclude": Array [],
-          "name": "package1",
-        },
-        Object {
-          "exclude": Array [
-            "ns1",
-            "ns2",
-          ],
-          "name": "package2",
-        },
+        "package1",
+        "package2",
       ],
     },
   ],
@@ -225,42 +198,24 @@ Object {
       "mode": "html",
       "name": "site-html",
       "packages": Array [
-        Object {
-          "exclude": Array [],
-          "name": "package1",
-        },
-        Object {
-          "exclude": Array [],
-          "name": "package2",
-        },
-        Object {
-          "exclude": Array [],
-          "name": "package2",
-        },
+        "package1",
+        "package2",
+        "package2",
       ],
     },
     Object {
       "mode": "amp",
       "name": "site-amp",
       "packages": Array [
-        Object {
-          "exclude": Array [],
-          "name": "package1",
-        },
-        Object {
-          "exclude": Array [],
-          "name": "package3",
-        },
+        "package1",
+        "package3",
       ],
     },
     Object {
       "mode": "html",
       "name": "site-2",
       "packages": Array [
-        Object {
-          "exclude": Array [],
-          "name": "package1",
-        },
+        "package1",
       ],
     },
   ],
@@ -303,17 +258,8 @@ Object {
       "mode": "html",
       "name": "site-1",
       "packages": Array [
-        Object {
-          "exclude": Array [],
-          "name": "package1",
-        },
-        Object {
-          "exclude": Array [
-            "ns1",
-            "ns2",
-          ],
-          "name": "package2",
-        },
+        "package1",
+        "package2",
       ],
     },
   ],

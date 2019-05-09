@@ -9,7 +9,6 @@ const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 type Package = {
   name: string;
-  exclude: string[];
   mode: string;
 };
 
@@ -43,18 +42,14 @@ export const checkForPackages = async ({ sites }: { sites: Site[] }) => {
   const packages = uniq(flatten(sites.map(site => site.packages)));
   await Promise.all(
     // Iterate over the packages.
-    packages.map(async pkg => {
+    packages.map(async name => {
       // Check if the folder exists.
       const exists = await pathExists(
-        resolve(process.cwd(), "node_modules", pkg.name)
+        resolve(process.cwd(), "node_modules", name)
       );
       if (!exists)
         throw new Error(
-          `The package "${
-            pkg.name
-          }" doesn't seem to be installed. Make sure you did "npm install ${
-            pkg.name
-          }"`
+          `The package "${name}" doesn't seem to be installed. Make sure you did "npm install ${name}"`
         );
     })
   );
@@ -71,16 +66,16 @@ const getPackagesList = async ({
   // Get a flat array of unique packages and its modes.
   const packages = uniqBy(
     flatten(
-      sites.map(site => site.packages.map(pkg => ({ mode: site.mode, pkg })))
+      sites.map(site => site.packages.map(name => ({ mode: site.mode, name })))
     ),
-    ({ mode, pkg: { name } }) => `${mode}${name}`
+    ({ mode, name }) => `${mode}${name}`
   );
   return (await Promise.all(
     // Iterate over the packages.
-    packages.map(async ({ pkg: { name, exclude }, mode }) => {
+    packages.map(async ({ name, mode }) => {
       // Check if the entry point of that mode exists.
       const exists = await entryExists({ name, mode, type });
-      return { name, exclude, mode, exists };
+      return { name, mode, exists };
     })
     // Remove the packages where the entry point doesn't exist.
   )).filter(({ exists }) => exists);
