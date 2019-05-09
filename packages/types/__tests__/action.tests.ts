@@ -1,11 +1,9 @@
 import Action from "../action";
 import Package from "../package";
 import Derived from "../derived";
-import Namespaces from "../namespaces";
 
 interface Package1 extends Package {
   name: "package-1";
-  namespaces: Namespaces<"namespace1" | "namespace2">;
   state: {
     namespace1: {
       prop1: string;
@@ -36,7 +34,6 @@ interface Package1 extends Package {
 
 const package1: Package1 = {
   name: "package-1",
-  namespaces: ["namespace1", "namespace2"],
   state: {
     namespace1: {
       prop1: "prop1",

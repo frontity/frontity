@@ -2,19 +2,13 @@ import Settings from "../settings";
 import Package from "../package";
 import Action from "../action";
 import Derived from "../derived";
-import Namespaces from "../namespaces";
 
 // Custom package extending from Package.
 interface Package1 extends Package {
   name: "package-1";
-  namespaces?: Namespaces<"namespace1" | "namespace2">;
   state: {
-    settings: {
-      namespace1: {
-        prop1: string;
-      };
-    };
     namespace1: {
+      prop1: string;
       prop2: Derived<Package1, string>;
     };
     namespace2: {
@@ -43,12 +37,8 @@ interface Package1 extends Package {
 const package1: Package1 = {
   name: "package-1",
   state: {
-    settings: {
-      namespace1: {
-        prop1: "prop1"
-      }
-    },
     namespace1: {
+      prop1: "prop1",
       prop2: state => ""
     },
     namespace2: {
@@ -87,16 +77,13 @@ const package2: Settings<Package1> = {
 // Two different settings extending from Package.
 interface Package2 extends Package {
   name: "package-2";
-  namespaces?: Namespaces<"namespace2" | "namespace3">;
   state: {
-    settings: {
-      namespace2: {
-        prop2: string;
-        prop3?: number;
-      };
-      namespace3: {
-        prop4: boolean;
-      };
+    namespace2: {
+      prop2: string;
+      prop3?: number;
+    };
+    namespace3: {
+      prop4: boolean;
     };
   };
 }
@@ -105,8 +92,7 @@ const package3: Settings<Package1 | Package2> = {
   packages: [
     {
       name: "package-1",
-      exclude: ["namespace1"],
-      settings: {
+      state: {
         namespace1: {
           prop1: ""
         }
@@ -114,8 +100,7 @@ const package3: Settings<Package1 | Package2> = {
     },
     {
       name: "package-2",
-      exclude: ["namespace2", "namespace3"],
-      settings: {
+      state: {
         namespace2: {
           prop2: ""
         }

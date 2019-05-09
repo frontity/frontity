@@ -29,11 +29,9 @@ const settings4: Settings = {
   name: "site",
   mode: "html",
   state: {
-    url: "https://mysite.com",
-    timezone: 1,
-    title: "My Site",
-    language: "en",
-    otherSetting: "other setting" // Extra setting
+    frontity: {
+      url: "https://mysite.com"
+    }
   },
   packages: []
 };
