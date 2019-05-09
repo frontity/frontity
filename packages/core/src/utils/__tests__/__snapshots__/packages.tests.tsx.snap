@@ -1,69 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mergePackages should output a list of packages with its excludes 1`] = `
+exports[`mergePackages should output a merged packages 1`] = `
 Object {
   "actions": Object {},
-  "fills": Array [],
-  "roots": Array [
-    Object {
-      "Root": [Function],
-      "name": "package_1",
-    },
-    Object {
-      "Root": [Function],
-      "name": "package_2",
-    },
-  ],
+  "fills": Object {},
+  "roots": Object {
+    "namespace1": [Function],
+    "namespace2": [Function],
+    "namespace3": [Function],
+  },
   "state": Object {
+    "frontity": Object {
+      "packages": Array [
+        Object {
+          "name": "package-1",
+          "variable": "package_1",
+        },
+        Object {
+          "name": "package-2",
+          "variable": "package_2",
+        },
+      ],
+    },
+    "namespace1": Object {
+      "prop1": "prop1",
+    },
     "namespace2": Object {
-      "prop2": "This should be included",
+      "prop2": "prop2",
     },
     "namespace3": Object {
-      "prop3": "This should be included",
-    },
-    "settings": Object {
-      "frontity": Object {
-        "packages": Array [
-          Object {
-            "exclude": Array [
-              "namespace1",
-            ],
-            "name": "package-1",
-            "variable": "package_1",
-          },
-          Object {
-            "exclude": Array [],
-            "name": "package-2",
-            "variable": "package_2",
-          },
-        ],
-      },
-      "namespace2": Object {
-        "settings2": "This should be included",
-      },
-      "namespace3": Object {
-        "settings3": "This should be included",
-      },
+      "prop3": "prop3",
     },
   },
 }
 `;
 
-exports[`packageList should output a list of packages with its excludes 1`] = `
+exports[`packageList should output a list of packages 1`] = `
 Array [
   Object {
-    "exclude": Array [
-      "namespace1",
-      "namespace2",
-    ],
     "name": "package1",
     "variable": "package1_html",
   },
   Object {
-    "exclude": Array [
-      "namespace3",
-      "namespace4",
-    ],
     "name": "package2",
     "variable": "package2_html",
   },

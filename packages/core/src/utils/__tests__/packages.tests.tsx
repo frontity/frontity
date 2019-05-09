@@ -20,50 +20,41 @@ describe("getVariable", () => {
 });
 
 describe("packageList", () => {
-  const settings: NormalizedSettings = {
+  const state: NormalizedSettings = {
     name: "site",
     mode: "html",
-    settings: {
-      language: "en",
-      timezone: 1
-    },
+    state: {},
     packages: [
       {
         name: "package1",
         active: true,
-        exclude: ["namespace1", "namespace2"],
-        settings: {}
+        state: {}
       },
       {
         name: "package2",
         active: true,
-        exclude: ["namespace3", "namespace4"],
-        settings: {}
+        state: {}
       }
     ]
   };
-  it("should output a list of packages with its excludes", () => {
-    expect(packageList({ settings })).toMatchSnapshot();
+  it("should output a list of packages", () => {
+    expect(packageList({ state })).toMatchSnapshot();
   });
 });
 
 describe("mergePackages", () => {
   const state = {
-    settings: {
-      frontity: {
-        packages: [
-          {
-            name: "package-1",
-            variable: "package_1",
-            exclude: ["namespace1"]
-          },
-          {
-            name: "package-2",
-            variable: "package_2",
-            exclude: []
-          }
-        ]
-      }
+    frontity: {
+      packages: [
+        {
+          name: "package-1",
+          variable: "package_1"
+        },
+        {
+          name: "package-2",
+          variable: "package_2"
+        }
+      ]
     }
   };
   const packages = {
@@ -73,19 +64,11 @@ describe("mergePackages", () => {
         namespace2: () => <div>"namespace2"</div>
       },
       state: {
-        settings: {
-          namespace1: {
-            setting1: "This should NOT be included"
-          },
-          namespace2: {
-            settings2: "This should be included"
-          }
-        },
         namespace1: {
-          prop1: "This should NOT be included"
+          prop1: "prop1"
         },
         namespace2: {
-          prop2: "This should be included"
+          prop2: "prop2"
         }
       }
     },
@@ -94,19 +77,14 @@ describe("mergePackages", () => {
         namespace3: () => <div>"namespace3"</div>
       },
       state: {
-        settings: {
-          namespace3: {
-            settings3: "This should be included"
-          }
-        },
         namespace3: {
-          prop3: "This should be included"
+          prop3: "prop3"
         }
       }
     }
   };
 
-  it("should output a list of packages with its excludes", () => {
+  it("should output a merged packages", () => {
     expect(mergePackages({ packages, state })).toMatchSnapshot();
   });
 });

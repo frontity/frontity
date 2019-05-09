@@ -10,11 +10,6 @@ export interface Package {
     [namespace: string]: React.ReactType;
   };
   state?: {
-    settings?: {
-      [namespace: string]: {
-        [key: string]: any;
-      };
-    };
     [namespace: string]: {
       [key: string]: any;
     };
