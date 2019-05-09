@@ -40,13 +40,10 @@ export type Handler = (
 interface WpSource extends Source {
   name: "@frontity/wp-source";
   state: {
-    settings: {
-      source: {
-        apiUrl: string;
-        isCom: boolean;
-      };
-    };
-    source: Source["state"]["source"]
+    source: Source["state"]["source"] & {
+      apiUrl: string;
+      isCom: boolean;
+    }
   };
   actions: {
     source: {

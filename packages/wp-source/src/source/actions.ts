@@ -38,7 +38,7 @@ const actions = ({ libraries }: { libraries: Libraries }) => ({
   },
 
   init: (state: State) => {
-    const { apiUrl, isCom } = state.settings.source;
+    const { apiUrl, isCom } = state.source;
     const { api, resolver } = libraries.source;
 
     api.init({ apiUrl, isCom });

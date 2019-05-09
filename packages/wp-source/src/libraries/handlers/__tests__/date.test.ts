@@ -20,7 +20,9 @@ beforeEach(() => {
     post: {},
     page: {},
     author: {},
-    attachment: {}
+    attachment: {},
+    apiUrl: "https://test.frontity.io",
+    isCom: false
   };
   // mock libraries
   libraries = {
