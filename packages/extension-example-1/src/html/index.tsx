@@ -17,13 +17,7 @@ const Extension1: React.FC<Props> = ({ state, actions, prop, roots }) => (
 
 const ExtensionExample1: Package = {
   name: "@frontity/extension-example-1",
-  namespaces: ["extension1", "comments"],
   state: {
-    settings: {
-      extension1: {
-        setting1: "1"
-      }
-    },
     extension1: {
       prop1: 1
     },

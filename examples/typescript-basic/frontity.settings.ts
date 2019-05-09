@@ -5,24 +5,25 @@ import ExtensionExample2 from "@frontity/extension-example-2/type";
 const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
   {
     name: "site-1",
-    settings: {
-      url: "https://test.frontity.io"
+    state: {
+      frontity: {
+        url: "https://test.frontity.io"
+      }
     },
     packages: [
       {
         name: "@frontity/extension-example-1",
-        exclude: [],
-        settings: {
-          extension1: {
-            setting1: "1"
+        state: {
+          comments: {
+            prop2: 2
           }
         }
       },
       {
         name: "@frontity/extension-example-2",
-        settings: {
+        state: {
           theme: {
-            setting1: "1"
+            prop1: 1
           }
         }
       }
@@ -30,15 +31,17 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
   },
   {
     name: "site-2",
-    settings: {
-      url: "https://test.frontity.io"
+    state: {
+      frontity: {
+        url: "https://test.frontity.io"
+      }
     },
     packages: [
       {
         name: "@frontity/extension-example-2",
-        settings: {
+        state: {
           theme: {
-            setting1: "1"
+            prop1: 1
           }
         }
       }
@@ -47,15 +50,17 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
   {
     name: "site-3",
     mode: "amp",
-    settings: {
-      url: "https://test.frontity.io"
+    state: {
+      frontity: {
+        url: "https://test.frontity.io"
+      }
     },
     packages: [
       {
         name: "@frontity/extension-example-2",
-        settings: {
+        state: {
           theme: {
-            setting1: "1"
+            prop1: 1
           }
         }
       }
