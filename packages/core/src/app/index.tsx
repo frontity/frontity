@@ -2,21 +2,21 @@ import React from "react";
 import { cache } from "emotion";
 import { CacheProvider as EmotionProvider } from "@emotion/core";
 import { Provider as ConnectProvider } from "@frontity/connect";
-import { MergedPackages } from "../types";
+import { Package } from "@frontity/types";
 
 type Props = {
-  store: MergedPackages;
+  store: Package;
 };
 
 const App: React.FunctionComponent<Props> = ({ store }) => {
   return (
     <EmotionProvider value={cache}>
       <ConnectProvider value={store}>
-        {store.roots.map(({ Root, name }) => (
-          <Root key={name} />
+        {Object.entries(store.roots).map(([namespace, Root]) => (
+          <Root key={namespace} />
         ))}
-        {store.fills.map(({ Fill, name }) => (
-          <Fill key={name} />
+        {Object.entries(store.fills).map(([namespace, Fill]) => (
+          <Fill key={namespace} />
         ))}
       </ConnectProvider>
     </EmotionProvider>

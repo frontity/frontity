@@ -35,8 +35,8 @@ declare module "@frontity/connect" {
     state,
     actions
   }: {
-    state: S;
-    actions: A;
+    state?: S;
+    actions?: A;
   }): { state: S; actions: A; getSnapshot: () => S };
 
   export const Provider: React.ProviderExoticComponent<

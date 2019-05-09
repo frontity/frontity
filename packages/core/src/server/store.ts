@@ -13,13 +13,11 @@ export default ({
   settings: NormalizedSettings;
 }) => {
   const state = {
-    settings: {
-      frontity: {
-        ...settings.settings,
-        name: settings.name,
-        mode: settings.mode,
-        packages: packageList({ settings })
-      }
+    frontity: {
+      ...settings.state,
+      name: settings.name,
+      mode: settings.mode,
+      packages: packageList({ settings })
     }
   };
   const merged = mergePackages({ packages, state });
