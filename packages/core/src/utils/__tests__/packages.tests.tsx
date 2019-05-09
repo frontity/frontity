@@ -77,6 +77,9 @@ describe("mergePackages", () => {
         namespace3: () => <div>"namespace3"</div>
       },
       state: {
+        namespace1: {
+          prop1: "prop1 overwritten by package_2"
+        },
         namespace3: {
           prop3: "prop3"
         }

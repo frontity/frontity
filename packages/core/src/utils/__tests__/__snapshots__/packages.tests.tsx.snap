@@ -23,7 +23,7 @@ Object {
       ],
     },
     "namespace1": Object {
-      "prop1": "prop1",
+      "prop1": "prop1 overwritten by package_2",
     },
     "namespace2": Object {
       "prop2": "prop2",
