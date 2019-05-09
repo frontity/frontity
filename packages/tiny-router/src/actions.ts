@@ -1,6 +1,6 @@
-import { State, PathOrObj } from "../../type";
+import TinyRouter from "../type";
 
-const set = (state: State) => (pathOrObj: PathOrObj) => {
+export const set: TinyRouter["actions"]["router"]["set"] = state => pathOrObj => {
   const path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
   const page = typeof pathOrObj === "string" ? null : pathOrObj.page;
 
@@ -12,12 +12,10 @@ const set = (state: State) => (pathOrObj: PathOrObj) => {
   }
 };
 
-const init = (state: State) => {
+export const init: TinyRouter["actions"]["router"]["init"] = state => {
   if (typeof window !== "undefined") {
     window.addEventListener("popstate", ({ state: { path, page } }) =>
       set(state)({ path, page })
     );
   }
 };
-
-export default { set, init };
