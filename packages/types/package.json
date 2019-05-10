@@ -2,6 +2,7 @@
   "name": "@frontity/types",
   "version": "0.1.0",
   "description": "Types for the different Frontity APIs",
+  "main": "src/index.ts",
   "keywords": [
     "frontity",
     "types",
