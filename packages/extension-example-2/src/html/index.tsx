@@ -1,5 +1,5 @@
 import React from "react";
-import loadable from "@loadable/component";
+import { loadable } from "frontity";
 import Package from "../../type";
 
 const Dynamic = loadable(() => import("./dynamic2"));
