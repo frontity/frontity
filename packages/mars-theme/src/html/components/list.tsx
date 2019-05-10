@@ -32,14 +32,19 @@ const List: React.FC<Connect<MarsTheme>> = () => {
   );
 };
 
-const Item: React.FC<{
-  item: { id: number; title: string; excerpt: string };
-}> = ({ item }) => (
-  <ItemContainer>
+const Item: React.FC<
+  Connect<
+    MarsTheme,
+    {
+      item: { id: number; title: string; excerpt: string };
+    }
+  >
+> = connect(({ actions, item }) => (
+  <ItemContainer onClick={() => actions.router.set("/something")}>
     <Title>{item.title}</Title>
     <Excerpt>{item.excerpt}</Excerpt>
   </ItemContainer>
-);
+));
 
 export default connect(List);
 

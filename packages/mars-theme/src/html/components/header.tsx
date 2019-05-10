@@ -4,7 +4,7 @@ import Connect from "@frontity/types/connect";
 import MarsTheme from "../../../type";
 import styled from "@emotion/styled";
 
-const Header: React.FC<Connect<MarsTheme>> = () => {
+const Header: React.FC<Connect<MarsTheme>> = ({ state }) => {
   return (
     <Container>
       <Title>This is a site title.</Title>

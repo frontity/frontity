@@ -1,10 +1,13 @@
-import { Package, Namespaces } from "@frontity/types";
+import { Package } from "@frontity/types";
+import Router from "@frontity/router";
 
 interface MarsTheme extends Package {
   name: "@frontity/mars-theme";
-  namespaces: Namespaces<"theme">;
   roots: {
     theme: React.ReactType;
+  };
+  state: {
+    router: Router["state"]["router"];
   };
 }
 

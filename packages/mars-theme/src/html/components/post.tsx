@@ -4,16 +4,18 @@ import Connect from "@frontity/types/connect";
 import MarsTheme from "../../../type";
 import styled from "@emotion/styled";
 
-const Post: React.FC<
-  Connect<MarsTheme, { title: string; author: string; content: string }>
-> = ({ title, author, content }) => {
+const Post: React.FC<Connect<MarsTheme>> = () => {
   return (
     <Container>
       <Head>
-        <Title>{title}</Title>
-        <Author>By {author}</Author>
+        <Title>Post Title</Title>
+        <Author>By John Doe</Author>
       </Head>
-      <Body dangerouslySetInnerHTML={{ __html: content }} />
+      <Body
+        dangerouslySetInnerHTML={{
+          __html: "<p>this is a paragrah of content</p>"
+        }}
+      />
     </Container>
   );
 };
