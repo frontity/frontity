@@ -1,0 +1,1 @@
+test("Types are fine!", () => {});

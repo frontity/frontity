@@ -1,4 +1,5 @@
-import Connect, { ExternalProps } from "../connect";
+import Connect from "../connect";
+import { FilterInjectedProps } from "../utils";
 import Action from "../action";
 import Package from "../package";
 import Derived from "../derived";
@@ -83,7 +84,7 @@ const internalProps: Connect<Package1, OwnProps> = {
   name: "nameProp"
 };
 
-const externalProps: ExternalProps<Connect<Package1, OwnProps>> = {
+const externalProps: FilterInjectedProps<Connect<Package1, OwnProps>> = {
   ownProp1: "ownProp1",
   name: "nameProp"
 };
