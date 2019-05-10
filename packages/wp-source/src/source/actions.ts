@@ -11,8 +11,9 @@ const actions = ({
     const { source } = state;
     const { resolver } = libraries.source;
 
-    let { path, page = 1 } =
-      typeof pathOrObj === "object" ? pathOrObj : { path: pathOrObj };
+    let path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
+    let page = typeof pathOrObj === "string" ? 1 : pathOrObj.page;
+    if (!page) page = 1;
 
     // transform whole links to paths
     path = normalizePath(path);
