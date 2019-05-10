@@ -1,14 +1,8 @@
-import { Package, Namespaces, Derived, Action } from "@frontity/types";
+import { Package, Derived, Action } from "@frontity/types";
 
 interface ExtensionExample1 extends Package {
   name: "@frontity/extension-example-1";
-  namespaces: Namespaces<"extension1" | "comments">;
   state: {
-    settings: {
-      extension1: {
-        setting1: string;
-      };
-    };
     extension1: {
       prop1: number;
     };

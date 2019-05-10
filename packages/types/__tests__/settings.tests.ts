@@ -18,7 +18,7 @@ const settings2: Settings = [
 const settings3: Settings = {
   name: "site",
   mode: "html",
-  settings: {
+  state: {
     url: "https://mysite.com"
   },
   packages: []
@@ -28,12 +28,10 @@ const settings3: Settings = {
 const settings4: Settings = {
   name: "site",
   mode: "html",
-  settings: {
-    url: "https://mysite.com",
-    timezone: 1,
-    title: "My Site",
-    language: "en",
-    otherSetting: "other setting" // Extra setting
+  state: {
+    frontity: {
+      url: "https://mysite.com"
+    }
   },
   packages: []
 };
@@ -61,8 +59,7 @@ const settings7: Settings = {
     {
       name: "package-1",
       active: true,
-      exclude: ["namespace1", "namespace2"],
-      settings: {
+      state: {
         namespace3: {
           someSetting: "some setting of namespace 1"
         },

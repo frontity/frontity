@@ -2,19 +2,13 @@
   {
     "name": "settings-one",
     "mode": "html",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "packages": []
   },
   {
     "name": "settings-two",
     "mode": "html",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "packages": []
   }
 ]

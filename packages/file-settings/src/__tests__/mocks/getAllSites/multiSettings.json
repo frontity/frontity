@@ -2,44 +2,34 @@
   {
     "name": "settings-html",
     "mode": "html",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "packages": [
       {
         "name": "@frontity/theme-html",
         "active": true,
-        "exclude": [],
-        "settings": {}
+        "state": {}
       },
       {
         "name": "@frontity/wp-source-html",
         "active": true,
-        "exclude": [],
-        "settings": {}
+        "state": {}
       }
     ]
   },
   {
     "name": "settings-amp",
     "mode": "amp",
-    "settings": {
-      "timezone": 0,
-      "language": "en"
-    },
+    "state": {},
     "packages": [
       {
         "name": "@frontity/theme-amp",
         "active": true,
-        "exclude": [],
-        "settings": {}
+        "state": {}
       },
       {
         "name": "@frontity/wp-source-amp",
         "active": true,
-        "exclude": [],
-        "settings": {}
+        "state": {}
       }
     ]
   }

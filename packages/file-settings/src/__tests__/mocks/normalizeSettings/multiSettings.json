@@ -1,6 +1,6 @@
 [
   {
-    "name": "mmulti-settings-html",
+    "name": "multi-settings-html",
     "packages": [
       "@frontity/theme-html",
       {

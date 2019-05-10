@@ -14,7 +14,7 @@ export type ResolveActions<Actions extends Package["state"]> = {
 
 export type Connect<S extends Package, Props extends object = {}> = Omit<
   S,
-  "state" | "actions" | "name" | "namespaces"
+  "state" | "actions" | "name"
 > & {
   state: ResolveState<S["state"]>;
   actions: ResolveActions<S["actions"]>;

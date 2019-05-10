@@ -1,8 +1,10 @@
 # File Settings
 
-This package is used to import the Frontity settings from a local file.
+### _This is an internal package used by @frontity/core._
 
 ## Usage
+
+This package is used to import the Frontity settings from a local file.
 
 You can install it with `npm`:
 
@@ -82,21 +84,15 @@ The settings exported can be **mono settings** (only one):
 ```ts
 {
   name?: string;
-  matches?: string[];
+  match?: string[];
   mode?: string; // Default: "html"
-  settings?: {
-    url?: string;
-    title?: string;
-    timezone?: number; // Default: 0
-    language?: string; // Default; "en"
-  },
+  state?: object,
   packages: [
     string,
     {
       name: string;
       active?: boolean; // Default: true
-      namespaces?: string[];
-      settings?: object;
+      state?: object;
     }
   ]
 }
@@ -108,17 +104,17 @@ Or **multi settings**:
 // An array of more than one set of settings.
 [
   {
-    name: string; // This time the name is mandatory and must be unique.
-    matches?: string[];
+    name: string; // Here name is mandatory and must be unique.
+    match?: string[];
     mode?: string; // Default: "html"
-    settings?: { ... },
+    state?: { ... },
     packages: [ ... ]
   },
   {
-    name: string; // This time the name is mandatory and must be unique.
-    matches?: string[];
+    name: string; // Here name is mandatory and must be unique.
+    match?: string[];
     mode?: string; // Default: "html"
-    settings?: { ... },
+    state?: { ... },
     packages: [ ... ]
   }
 ]
@@ -126,7 +122,7 @@ Or **multi settings**:
 
 ## Typescript
 
-Some [TS types](src/types.ts) are exposed to be used in development. They can be accessed like this:
+The `Settings` interface is exposed to be used in development. It can be accessed like this:
 
 ```js
 import { Settings } from "@frontity/file-settings";
@@ -134,12 +130,6 @@ import { Settings } from "@frontity/file-settings";
 const settings: Settings = { ... };
 ```
 
-The following are probably the only types you will need during development:
-
 ### `Settings<T = Package>`
 
 Types for the imported settings object from the settings file. You'll want to use them on your `frontity.settings.ts` file.
-
-### `Package`
-
-Types for each package within a settings object.

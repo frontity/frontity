@@ -59,25 +59,7 @@ export type Template = ({
   head: HeadTags;
 }) => string;
 
-export interface MergedPackages {
-  roots: {
-    name: string;
-    Root: React.ReactType;
-  }[];
-  fills: {
-    name: string;
-    Fill: React.ReactType;
-  }[];
-  state: {
-    [namespace: string]: any;
-  };
-  actions: {
-    [namespace: string]: any;
-  };
-}
-
 export type PackageList = {
   name: string;
   variable: string;
-  exclude: string[];
 }[];

@@ -2,11 +2,9 @@ import Connect from "../connect";
 import Action from "../action";
 import Package from "../package";
 import Derived from "../derived";
-import Namespaces from "../namespaces";
 
 interface Package1 extends Package {
   name: "package-1";
-  namespaces: Namespaces<"namespace1" | "namespace2">;
   state: {
     namespace1: {
       prop1: string;

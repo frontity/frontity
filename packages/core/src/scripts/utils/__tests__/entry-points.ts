@@ -12,34 +12,24 @@ const site = [
   {
     name: "site-1",
     mode: "html",
-    packages: [
-      { name: "package1", exclude: [] },
-      { name: "package2", exclude: ["ns1", "ns2"] }
-    ]
+    packages: ["package1", "package2"]
   }
 ];
 const sites = [
   {
     name: "site-html",
     mode: "html",
-    packages: [
-      { name: "package1", exclude: [] },
-      { name: "package2", exclude: [] },
-      { name: "package2", exclude: [] }
-    ]
+    packages: ["package1", "package2", "package2"]
   },
   {
     name: "site-amp",
     mode: "amp",
-    packages: [
-      { name: "package1", exclude: [] },
-      { name: "package3", exclude: [] }
-    ]
+    packages: ["package1", "package3"]
   },
   {
     name: "site-2",
     mode: "html",
-    packages: [{ name: "package1", exclude: [] }]
+    packages: ["package1"]
   }
 ];
 
