@@ -1,0 +1,366 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`date doesn't exist in dataMap (2016/10) 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "after": "2016-10-01T00:00:00.000Z",
+        "before": "2016-11-01T01:00:00.000Z",
+        "page": 1,
+        "search": undefined,
+      },
+    },
+  ],
+]
+`;
+
+exports[`date doesn't exist in dataMap (2016/10) 2`] = `
+Object {
+  "/2016/10/": Object {
+    "day": undefined,
+    "isArchive": true,
+    "isDate": true,
+    "isFetching": true,
+    "month": 9,
+    "pages": Array [
+      Array [
+        Object {
+          "id": 57,
+          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+          "type": "post",
+        },
+        Object {
+          "id": 54,
+          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+          "type": "post",
+        },
+      ],
+    ],
+    "total": 2,
+    "totalPages": 1,
+    "year": 2016,
+  },
+}
+`;
+
+exports[`date doesn't exist in dataMap (2016/10) 3`] = `
+Object {
+  "attachment": Array [
+    55,
+    77,
+    80,
+  ],
+  "author": Array [
+    1,
+    2,
+  ],
+  "category": Array [
+    3,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    54,
+    57,
+  ],
+  "tag": Array [
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+  ],
+}
+`;
+
+exports[`date doesn't exist in dataMap (2016/10/25) 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "after": "2016-10-25T00:00:00.000Z",
+        "before": "2016-10-26T00:00:00.000Z",
+        "page": 1,
+        "search": undefined,
+      },
+    },
+  ],
+]
+`;
+
+exports[`date doesn't exist in dataMap (2016/10/25) 2`] = `
+Object {
+  "/2016/10/25/": Object {
+    "day": 25,
+    "isArchive": true,
+    "isDate": true,
+    "isFetching": true,
+    "month": 9,
+    "pages": Array [
+      Array [
+        Object {
+          "id": 57,
+          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+          "type": "post",
+        },
+        Object {
+          "id": 54,
+          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+          "type": "post",
+        },
+      ],
+    ],
+    "total": 2,
+    "totalPages": 1,
+    "year": 2016,
+  },
+}
+`;
+
+exports[`date doesn't exist in dataMap (2016/10/25) 3`] = `
+Object {
+  "attachment": Array [
+    55,
+    77,
+    80,
+  ],
+  "author": Array [
+    1,
+    2,
+  ],
+  "category": Array [
+    3,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    54,
+    57,
+  ],
+  "tag": Array [
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+  ],
+}
+`;
+
+exports[`date get two pages of year 2016 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "after": "2016-01-01T00:00:00.000Z",
+        "before": "2017-01-01T00:00:00.000Z",
+        "page": 1,
+        "search": undefined,
+      },
+    },
+  ],
+]
+`;
+
+exports[`date get two pages of year 2016 2`] = `
+Object {
+  "/2016/": Object {
+    "day": undefined,
+    "isArchive": true,
+    "isDate": true,
+    "isFetching": true,
+    "month": undefined,
+    "pages": Array [
+      Array [
+        Object {
+          "id": 60,
+          "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
+          "type": "post",
+        },
+        Object {
+          "id": 57,
+          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+          "type": "post",
+        },
+      ],
+    ],
+    "total": 15,
+    "totalPages": 8,
+    "year": 2016,
+  },
+}
+`;
+
+exports[`date get two pages of year 2016 3`] = `
+Object {
+  "attachment": Array [
+    13,
+    62,
+    70,
+    77,
+    84,
+    95,
+    118,
+  ],
+  "author": Array [
+    2,
+    4,
+  ],
+  "category": Array [
+    3,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    57,
+    60,
+  ],
+  "tag": Array [
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+  ],
+}
+`;
+
+exports[`date get two pages of year 2016 4`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "after": "2016-01-01T00:00:00.000Z",
+        "before": "2017-01-01T00:00:00.000Z",
+        "page": 1,
+        "search": undefined,
+      },
+    },
+  ],
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "after": "2016-01-01T00:00:00.000Z",
+        "before": "2017-01-01T00:00:00.000Z",
+        "page": 2,
+        "search": undefined,
+      },
+    },
+  ],
+]
+`;
+
+exports[`date get two pages of year 2016 5`] = `
+Object {
+  "/2016/": Object {
+    "day": undefined,
+    "isArchive": true,
+    "isDate": true,
+    "isFetching": true,
+    "month": undefined,
+    "pages": Array [
+      Array [
+        Object {
+          "id": 60,
+          "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
+          "type": "post",
+        },
+        Object {
+          "id": 57,
+          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+          "type": "post",
+        },
+      ],
+      Array [
+        Object {
+          "id": 54,
+          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+          "type": "post",
+        },
+        Object {
+          "id": 51,
+          "link": "https://test.frontity.io/2016/sunrise-at-phu-quoc-island/",
+          "type": "post",
+        },
+      ],
+    ],
+    "total": 15,
+    "totalPages": 8,
+    "year": 2016,
+  },
+}
+`;
+
+exports[`date get two pages of year 2016 6`] = `
+Object {
+  "attachment": Array [
+    13,
+    52,
+    55,
+    62,
+    70,
+    77,
+    80,
+    84,
+    95,
+    118,
+  ],
+  "author": Array [
+    1,
+    2,
+    4,
+  ],
+  "category": Array [
+    3,
+    6,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    51,
+    54,
+    57,
+    60,
+  ],
+  "tag": Array [
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+    22,
+    23,
+    24,
+  ],
+}
+`;

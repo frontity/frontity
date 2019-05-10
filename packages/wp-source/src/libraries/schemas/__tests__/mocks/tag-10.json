@@ -1,0 +1,18 @@
+{
+  "id": 10,
+  "count": 1,
+  "description": "",
+  "link": "https://demo.worona.org/tag/gullfoss/",
+  "name": "Gullfoss",
+  "slug": "gullfoss",
+  "taxonomy": "post_tag",
+  "meta": {},
+  "yoast_meta": { "title": "Gullfoss Archives - Demo Worona" },
+  "_links": {
+    "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/tags/10" }],
+    "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/tags" }],
+    "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/post_tag" }],
+    "wp:post_type": [{ "href": "https://demo.worona.org/wp-json/wp/v2/posts?tags=10" }],
+    "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+  }
+}

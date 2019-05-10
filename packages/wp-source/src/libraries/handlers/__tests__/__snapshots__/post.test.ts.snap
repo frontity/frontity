@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`post doesn't exist in source.post 1`] = `
+Object {
+  "/the-beauties-of-gullfoss/": Object {
+    "id": 60,
+    "isFetching": true,
+    "isPost": true,
+    "isPostType": true,
+    "type": "post",
+  },
+}
+`;
+
+exports[`post exists in source.post 1`] = `
+Object {
+  "/the-beauties-of-gullfoss/": Object {
+    "id": 60,
+    "isFetching": true,
+    "isPost": true,
+    "isPostType": true,
+    "type": "post",
+  },
+}
+`;

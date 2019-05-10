@@ -1,0 +1,9 @@
+{
+  "id": "movie",
+  "link": "https://demo.worona.test/aaa/?post_type=movie",
+  "count": 1,
+  "name": "Movies",
+  "slug": "movie",
+  "taxonomy": "latest",
+  "yoast_meta": { "title": "Movies aarchivesss | Demo Worona" }
+}

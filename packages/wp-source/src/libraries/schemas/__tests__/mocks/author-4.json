@@ -1,0 +1,18 @@
+{
+  "id": 4,
+  "name": "Alan Martin",
+  "url": "",
+  "description": "Alan is a WordPress enthusiast who enjoys travelling, music and pizza.",
+  "link": "https://demo.worona.org/author/alan/",
+  "slug": "alan",
+  "avatar_urls": {
+    "24": "https://secure.gravatar.com/avatar/eebc7d67bdc645559fd6634e0335a42b?s=24&d=mm&r=g",
+    "48": "https://secure.gravatar.com/avatar/eebc7d67bdc645559fd6634e0335a42b?s=48&d=mm&r=g",
+    "96": "https://secure.gravatar.com/avatar/eebc7d67bdc645559fd6634e0335a42b?s=96&d=mm&r=g"
+  },
+  "meta": {},
+  "_links": {
+    "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/4" }],
+    "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+  }
+}

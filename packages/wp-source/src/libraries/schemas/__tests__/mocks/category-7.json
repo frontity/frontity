@@ -1,0 +1,19 @@
+{
+  "id": 7,
+  "count": 10,
+  "description": "",
+  "link": "https://demo.worona.org/wp-cat/nature/",
+  "name": "Nature",
+  "slug": "nature",
+  "taxonomy": "category",
+  "parent": 0,
+  "meta": {},
+  "yoast_meta": { "title": "Nature Archives - Demo Worona" },
+  "_links": {
+    "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/categories/7" }],
+    "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/categories" }],
+    "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category" }],
+    "wp:post_type": [{ "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=7" }],
+    "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+  }
+}
