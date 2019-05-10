@@ -46,13 +46,18 @@
     "typescript": "^3.4.2"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.11",
+    "@frontity/connect": "^0.1.0",
     "@frontity/types": "^0.1.0",
+    "@loadable/component": "^5.9.0",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "fs-extra": "^7.0.1",
     "node-fetch": "^2.4.1",
     "ora": "^3.4.0",
     "ramda": "^0.26.1",
+    "react-helmet": "^5.2.0",
     "tar": "^4.4.8"
   }
 }

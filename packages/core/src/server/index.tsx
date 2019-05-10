@@ -124,8 +124,7 @@ export default ({ packages }) => {
     )}</script>\n${frontity.script}`;
 
     // Get static head strings.
-    const helmet = Helmet.renderStatic();
-    const head = getHeadTags(helmet);
+    const head = getHeadTags(Helmet.renderStatic());
 
     // Write the template to body.
     ctx.body = template({ html, frontity, head });

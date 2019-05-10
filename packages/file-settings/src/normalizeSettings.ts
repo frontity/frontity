@@ -4,7 +4,7 @@ import { NormalizedSettings } from "./types";
 import Settings, {
   MultiSettings,
   MonoSettings
-} from "@frontity/types/settings";
+} from "@frontity/types/src/settings";
 
 const defaultSettings = {
   name: "default",

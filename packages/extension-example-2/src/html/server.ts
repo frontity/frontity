@@ -1,7 +1,10 @@
+import Type from "../../type";
 import ExtensionExample2 from "./";
 
-ExtensionExample2.actions.theme.beforeSSR = state => {
+const beforeSSR: Type["actions"]["theme"]["beforeSSR"] = state => {
   state.theme.prop1 = 2;
 };
+
+ExtensionExample2.actions.theme.beforeSSR = beforeSSR;
 
 export default ExtensionExample2;

@@ -1,18 +1,12 @@
 import React from "react";
-import loadable from "@loadable/component";
+import { loadable } from "frontity";
 import Package from "../../type";
 
 const Dynamic = loadable(() => import("./dynamic2"));
 
 const ExtensionExample2: Package = {
   name: "@frontity/extension-example-2",
-  namespaces: ["theme", "comments"],
   state: {
-    settings: {
-      theme: {
-        setting1: "1"
-      }
-    },
     theme: {
       prop1: 1
     },

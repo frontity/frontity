@@ -1,6 +1,6 @@
 import uniq from "ramda/src/uniq";
 import uniqBy from "ramda/src/uniqBy";
-import Settings from "@frontity/types/settings";
+import { Settings } from "@frontity/types";
 import { Package } from "./types";
 
 // This function validates the packages.
