@@ -7,7 +7,7 @@ import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { getSettings } from "@frontity/file-settings";
 import { ChunkExtractor } from "@loadable/server";
 import { extractCritical } from "emotion-server";
-import { Helmet } from "react-helmet";
+import { Head } from "frontity";
 import getTemplate from "./templates";
 import {
   getStats,
@@ -124,8 +124,7 @@ export default ({ packages }) => {
     )}</script>\n${frontity.script}`;
 
     // Get static head strings.
-    const helmet = Helmet.renderStatic();
-    const head = getHeadTags(helmet);
+    const head = getHeadTags(Head.renderStatic());
 
     // Write the template to body.
     ctx.body = template({ html, frontity, head });

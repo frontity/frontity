@@ -1,12 +1,16 @@
 import React from "react";
 import Package from "../../type";
 import connect from "@frontity/connect";
-import Connect from "@frontity/types/connect";
+import { Connect } from "@frontity/types";
+import { Head } from "frontity";
 
 type Props = Connect<Package, { prop: string }>;
 
 const Extension1: React.FC<Props> = ({ state, actions, prop, roots }) => (
   <>
+    <Head>
+      <title>Frontity</title>
+    </Head>
     <div>
       I am the root of extension example 1! State is: {state.extension1.prop1}
     </div>
