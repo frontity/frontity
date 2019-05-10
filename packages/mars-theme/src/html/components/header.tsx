@@ -16,24 +16,19 @@ const Header: React.FC<Connect<MarsTheme>> = () => {
 export default connect(Header);
 
 const Container = styled.div`
-  width: 100%;
-  height: 120px;
-  background: steelblue;
-  color: white;
-  padding: 24px 72px;
-  box-sizing: border-box;
+  width: 800px;
+  height: 80px;
+  padding: 24px;
+  color: #f0e7e7;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
 `;
 
 const Title = styled.h2`
-  width: 800px;
   margin: 0;
 `;
 
 const Description = styled.p`
-  width: 800px;
   margin: 0;
 `;
