@@ -5,6 +5,8 @@
   "compilerOptions": {
     "outDir": "./dist",
     "declaration": true,
-    "noEmit": false
+    "noEmit": false,
+    "allowJs": false,
+    "isolatedModules": false
   }
 }
