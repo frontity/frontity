@@ -20,7 +20,19 @@ export default async ({ packages }) => {
     const state = JSON.parse(stateElement.innerHTML);
     // Get a merged object with roots, fills, state, actions...
     const store = createStore({ state, packages });
+
+    // Run init actions.
+    Object.values(store.actions).forEach(({ init }) => {
+      if (init) init();
+    });
+
+    // Run beforeCSR actions.
+    Object.values(store.actions).forEach(({ beforeCSR }) => {
+      if (beforeCSR) beforeCSR();
+    });
+
     window["store"] = store;
+
     loadableReady(() => {
       hydrate(<App store={store} />, window.document.getElementById("root"));
     });
