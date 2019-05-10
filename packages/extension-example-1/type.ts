@@ -1,4 +1,4 @@
-import { Package, Derived, Action } from "@frontity/types";
+import { Package, Derived, Action } from "frontity/types";
 
 interface ExtensionExample1 extends Package {
   name: "@frontity/extension-example-1";

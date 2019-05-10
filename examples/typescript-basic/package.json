@@ -13,14 +13,9 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "frontity": "^0.1.4",
     "@frontity/core": "^0.2.0",
-    "@frontity/file-settings": "^0.1.0",
     "@frontity/extension-example-1": "^1.0.0",
     "@frontity/extension-example-2": "^1.0.0"
-  },
-  "devDependencies": {
-    "frontity": "^0.1.4",
-    "ts-node": "^8.0.3",
-    "@frontity/types": "^0.1.0"
   }
 }

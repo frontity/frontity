@@ -1,6 +1,6 @@
 import React from "react";
 import Package from "../../type";
-import { Connect } from "@frontity/types";
+import { Connect } from "frontity/types";
 import { Head, connect } from "frontity";
 
 type Props = Connect<Package, { prop: string }>;

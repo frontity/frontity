@@ -1,5 +1,4 @@
-import { Package } from "@frontity/types";
-import { Action } from "@frontity/types";
+import { Package, Action } from "frontity/types";
 
 interface ExtensionExample2 extends Package {
   name: "@frontity/extension-example-2";
