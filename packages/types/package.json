@@ -17,8 +17,8 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch"
+    "test:ci": "jest --clearCache && jest",
+    "test": "npm run test:ci"
   },
   "dependencies": {},
   "devDependencies": {
