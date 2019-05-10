@@ -8,8 +8,6 @@
   Create amazing sites using WordPress & React
 </h1>
 
----
-
 <p align="center">
   <a href="https://frontity.org">frontity.org</a> |
   <a href="https://docs.frontity.org/getting-started">Get Started</a> |
@@ -135,6 +133,8 @@ Frontity also welcomes contributions. Plus, you can get free swag! You can contr
 # » Open source
 
 Frontity is licensed under the terms of the [Apache 2.0](https://github.com/frontity/frontity/blob/master/LICENSE) license.
+<br />
+<br />
 
 ---
 
