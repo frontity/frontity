@@ -1,5 +1,5 @@
-import { Action, Settings } from "../..";
-import Source from "../../source";
+import { Action, Settings } from "../../../types/src";
+import Source from "..";
 
 // Source.
 const source1 = (libraries: Source["libraries"]): Source => {
