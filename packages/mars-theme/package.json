@@ -15,7 +15,6 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "main": "src/index.js",
   "publishConfig": {
     "access": "public"
   },
@@ -23,6 +22,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "frontity": "^0.1.0"
+    "frontity": "^0.1.0",
+    "@frontity/connect": "^0.1.0",
+    "@frontity/types": "^0.1.0"
   }
 }

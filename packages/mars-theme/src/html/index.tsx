@@ -1,9 +1,7 @@
-import React from "react";
-
-const theme = () => <div>Hello from Mars Theme! 🐙</div>;
+import Theme from "./components/layout";
 
 export default {
   roots: {
-    theme
+    theme: Theme
   }
 };
