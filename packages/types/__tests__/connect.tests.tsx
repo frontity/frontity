@@ -1,4 +1,4 @@
-import Connect from "../connect";
+import Connect, { ExternalProps } from "../connect";
 import Action from "../action";
 import Package from "../package";
 import Derived from "../derived";
@@ -40,9 +40,10 @@ interface Package1 extends Package {
 
 interface OwnProps {
   ownProp1: string;
+  name: string;
 }
 
-const props: Connect<Package1, OwnProps> = {
+const internalProps: Connect<Package1, OwnProps> = {
   state: {
     namespace1: {
       prop1: "prop1",
@@ -78,7 +79,13 @@ const props: Connect<Package1, OwnProps> = {
       library1: () => {}
     }
   },
-  ownProp1: "ownProp1"
+  ownProp1: "ownProp1",
+  name: "nameProp"
+};
+
+const externalProps: ExternalProps<Connect<Package1, OwnProps>> = {
+  ownProp1: "ownProp1",
+  name: "nameProp"
 };
 
 test("Types are fine!", () => {});

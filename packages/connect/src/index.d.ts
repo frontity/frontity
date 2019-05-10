@@ -1,5 +1,5 @@
 declare module "@frontity/connect" {
-  import { ComponentType } from "react";
+  import { ComponentType, ComponentProps } from "react";
 
   export function observable<Observable extends object>(
     obj?: Observable
@@ -43,7 +43,20 @@ declare module "@frontity/connect" {
     React.ProviderProps<any>
   >;
 
-  function connect<Comp extends ComponentType<any>>(comp: Comp): Comp;
+  type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+  interface Store {
+    [key: string]: object;
+  }
+
+  export type ExternalProps<T extends Store> = Omit<
+    T,
+    "state" | "actions" | "libraries" | "roots" | "fills"
+  >;
+
+  function connect<Comp extends ComponentType<any>>(
+    comp: Comp
+  ): ComponentType<ExternalProps<ComponentProps<Comp>>>;
 
   export default connect;
 }
