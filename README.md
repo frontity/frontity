@@ -23,7 +23,8 @@
 >
 > Frontity is already in **BETA** :rocket: You can now use it and give feedback! It is pretty functional, and it is really easy to configure your web.
 >
-> <a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a>
+> <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
+> <br />
 >
 > During the next months, Frontity will keep improving, will be tested, and new features will be added progressively.
 >
