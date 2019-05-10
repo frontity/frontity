@@ -23,8 +23,8 @@ export type Handler = (
     path: string;
     params: { [param: string]: any };
     page?: number;
-    libraries: Libraries
-  },
+    libraries: Libraries;
+  }
 ) => Promise<void>;
 
 interface WpSource extends Source {
@@ -33,7 +33,7 @@ interface WpSource extends Source {
     source: Source["state"]["source"] & {
       apiUrl: string;
       isCom: boolean;
-    }
+    };
   };
   actions: {
     source: {
