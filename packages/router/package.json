@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test:ci": "jest",
-    "test": "jest --watch"
+    "test": "jest --clearCache && jest"
   },
   "dependencies": {},
   "devDependencies": {
