@@ -6,38 +6,44 @@ import App from "../app";
 import createStore from "./store";
 
 export default async ({ packages }) => {
-  // Hydrate Emotion.
-  const ids = document.getElementById("__EMOTION_HYDRATATION_IDS__");
-  if (ids) hydrateEmotion(JSON.parse(ids.innerHTML));
-  else
+  if (typeof window !== "undefined" && window["Proxy"]) {
+    // Hydrate Emotion.
+    const ids = document.getElementById("__EMOTION_HYDRATATION_IDS__");
+    if (ids) hydrateEmotion(JSON.parse(ids.innerHTML));
+    else
+      console.warn(
+        "Emotion ids for hydratation not found. If you need help please visit https://community.frontity.org."
+      );
+
+    // Hydrate Connect state.
+    const stateElement = document.getElementById("__FRONTITY_CONNECT_STATE__");
+    if (stateElement) {
+      const state = JSON.parse(stateElement.innerHTML);
+      // Get a merged object with roots, fills, state, actions...
+      const store = createStore({ state, packages });
+
+      // Run init actions.
+      Object.values(store.actions).forEach(({ init }) => {
+        if (init) init();
+      });
+
+      // Run beforeCSR actions.
+      Object.values(store.actions).forEach(({ beforeCSR }) => {
+        if (beforeCSR) beforeCSR();
+      });
+
+      window["store"] = store;
+
+      loadableReady(() => {
+        hydrate(<App store={store} />, window.document.getElementById("root"));
+      });
+    } else
+      console.warn(
+        "State for Frontity Connect hydratation not found. If you need help please visit https://community.frontity.org."
+      );
+  } else {
     console.warn(
-      "Emotion ids for hydratation not found. If you need help please visit https://community.frontity.org."
+      "Frontity scripts not loaded because Proxy is not supported in this browser. If you need help please visit https://community.frontity.org."
     );
-
-  // Hydrate Connect state.
-  const stateElement = document.getElementById("__FRONTITY_CONNECT_STATE__");
-  if (stateElement) {
-    const state = JSON.parse(stateElement.innerHTML);
-    // Get a merged object with roots, fills, state, actions...
-    const store = createStore({ state, packages });
-
-    // Run init actions.
-    Object.values(store.actions).forEach(({ init }) => {
-      if (init) init();
-    });
-
-    // Run beforeCSR actions.
-    Object.values(store.actions).forEach(({ beforeCSR }) => {
-      if (beforeCSR) beforeCSR();
-    });
-
-    window["store"] = store;
-
-    loadableReady(() => {
-      hydrate(<App store={store} />, window.document.getElementById("root"));
-    });
-  } else
-    console.warn(
-      "State for Frontity Connect hydratation not found. If you need help please visit https://community.frontity.org."
-    );
+  }
 };
