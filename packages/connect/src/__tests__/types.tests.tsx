@@ -1,6 +1,8 @@
 import React from "react";
 import connect, { createStore, Action, Derived, Connect } from "..";
 
+const delay = () => new Promise(resolve => setTimeout(resolve, 100));
+
 interface Config {
   state: {
     prop1: number;
@@ -23,6 +25,8 @@ interface Config {
         action5: Action<Config, number>;
       };
     };
+    action6: Action<Config>;
+    action7: Action<Config, number>;
   };
   extra?: {
     prop6: number;
@@ -60,6 +64,14 @@ const config: Config = {
           state.nested1.prop5 = state.nested1.prop4(num);
         }
       }
+    },
+    action6: async state => {
+      await delay();
+      state.prop1 = 6;
+    },
+    action7: state => async num => {
+      await delay();
+      state.prop1 = num;
     }
   },
   extra: {
@@ -82,6 +94,11 @@ test("After creating a store all derived state and actions are fine", () => {
   store.actions.nested2.nested3.action3();
   store.actions.nested2.nested3.action4();
   store.actions.nested2.nested3.action5(1);
+
+  const asyncFn = async () => {
+    await store.actions.action6();
+    await store.actions.action7(7);
+  };
 });
 
 type Props = Connect<
