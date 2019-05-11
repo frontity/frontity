@@ -1,9 +1,9 @@
 import { NormalizedSettings } from "@frontity/file-settings";
 import { Package } from "@frontity/types";
 import deepmerge from "deepmerge";
-import { PackageList } from "../types";
 
-// Remove some characters present in the npm package name to turn it into a variable name.
+// Remove some characters present in the npm package name to
+// turn it into a variable name.
 export const getVariable = (pkg: string, mode: string) => {
   return (
     pkg
@@ -14,16 +14,8 @@ export const getVariable = (pkg: string, mode: string) => {
   );
 };
 
-export const packageList = ({
-  settings
-}: {
-  settings: NormalizedSettings;
-}): PackageList =>
-  settings.packages.map(pkg => ({
-    name: pkg.name,
-    variable: getVariable(pkg.name, settings.mode)
-  }));
-
+// Merge all packages together in a single config that can be passed
+// to createStore.
 export const mergePackages = ({
   packages,
   state
@@ -33,7 +25,8 @@ export const mergePackages = ({
   };
   state: {
     frontity: {
-      packages: PackageList;
+      mode: string;
+      packages: string[];
     };
   };
 }): Package => {
@@ -44,8 +37,9 @@ export const mergePackages = ({
     actions: {}
   };
   const packageExcludes = state.frontity.packages;
-  packageExcludes.forEach(pkg => {
-    config = deepmerge(config, packages[pkg.variable], { clone: false });
+  packageExcludes.forEach(name => {
+    const variable = getVariable(name, state.frontity.mode);
+    config = deepmerge(config, packages[variable], { clone: false });
   });
   config.state = deepmerge(config.state, state);
   return config;

@@ -58,8 +58,3 @@ export type Template = ({
   frontity: FrontityTags;
   head: HeadTags;
 }) => string;
-
-export type PackageList = {
-  name: string;
-  variable: string;
-}[];

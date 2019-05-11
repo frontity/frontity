@@ -11,15 +11,10 @@ Object {
   },
   "state": Object {
     "frontity": Object {
+      "mode": "html",
       "packages": Array [
-        Object {
-          "name": "package-1",
-          "variable": "package_1",
-        },
-        Object {
-          "name": "package-2",
-          "variable": "package_2",
-        },
+        "package-1",
+        "package-2",
       ],
     },
     "namespace1": Object {
@@ -33,17 +28,4 @@ Object {
     },
   },
 }
-`;
-
-exports[`packageList should output a list of packages 1`] = `
-Array [
-  Object {
-    "name": "package1",
-    "variable": "package1_html",
-  },
-  Object {
-    "name": "package2",
-    "variable": "package2_html",
-  },
-]
 `;

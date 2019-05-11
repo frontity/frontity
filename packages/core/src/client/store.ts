@@ -1,7 +1,6 @@
 import { createStore } from "@frontity/connect";
-import Package from "@frontity/types/package";
+import { Package } from "@frontity/types";
 import { mergePackages } from "../utils/packages";
-import { PackageList } from "../types";
 
 export default ({
   packages,
@@ -11,10 +10,9 @@ export default ({
     [name: string]: Package;
   };
   state: {
-    settings: {
-      frontity: {
-        packages: PackageList;
-      };
+    frontity: {
+      mode: string;
+      packages: string[];
     };
   };
 }) => {
