@@ -1,10 +1,12 @@
-import { Package, Derived, Action } from "@frontity/types";
+import { Package, Action, Derived } from "@frontity/types";
 
 export type PathOrObj = string | { path: string; page: number };
 
 interface Router extends Package {
-  name: "@frontity/tiny-router";
   state: {
+    frontity?: {
+      url: string;
+    };
     router: {
       path: string;
       page: null | number;
@@ -13,7 +15,6 @@ interface Router extends Package {
   };
   actions: {
     router: {
-      init?: Action<Router>;
       set: Action<Router, PathOrObj>;
     };
   };

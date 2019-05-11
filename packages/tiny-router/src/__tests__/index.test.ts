@@ -1,10 +1,12 @@
-import { createStore, observe } from "@frontity/connect";
+import { createStore, observe } from "frontity";
 import { init, set } from "../actions";
 import tinyRouter from "..";
+import TinyRouter from "../../type";
 
-let store;
+let config: TinyRouter;
+
 beforeEach(() => {
-  const config = {
+  config = {
     name: "@frontity/tiny-router",
     state: {
       router: { ...tinyRouter.state.router },
@@ -19,16 +21,17 @@ beforeEach(() => {
       }
     }
   };
-  store = createStore(config);
 });
 
 describe("state", () => {
   test("url without page should work", () => {
+    const store = createStore(config);
     store.actions.router.set("/some-post/");
     expect(store.state.router.url).toBe("https://test.frontity.io/some-post/");
   });
 
   test("url with page = 1 should work", () => {
+    const store = createStore(config);
     store.actions.router.set({ path: "/category/nature/", page: 1 });
     expect(store.state.router.url).toBe(
       "https://test.frontity.io/category/nature/"
@@ -36,6 +39,7 @@ describe("state", () => {
   });
 
   test("url with page > 1 should work", () => {
+    const store = createStore(config);
     store.actions.router.set({ path: "/category/nature/", page: 2 });
     expect(store.state.router.url).toBe(
       "https://test.frontity.io/category/nature/page/2/"
@@ -45,32 +49,35 @@ describe("state", () => {
 
 describe("actions", () => {
   test("set() should work just with a path", () => {
+    const store = createStore(config);
     store.actions.router.set("/some-post/");
     expect(store.state.router).toMatchObject({
-      "page": null,
-      "path": "/some-post/",
+      page: null,
+      path: "/some-post/"
     });
   });
 
   test("set() should work with path and page", () => {
+    const store = createStore(config);
     store.actions.router.set({ path: "/category/some-category/", page: 2 });
     expect(store.state.router).toMatchObject({
-      "page": 2,
-      "path": "/category/some-category/",
+      page: 2,
+      path: "/category/some-category/"
     });
   });
 
   test("init() should add event listener to handle popstate events", () => {
+    const store = createStore(config);
     store.actions.router.init();
 
     // check that first state is correct
     expect(window.history.state).toMatchObject({
-      "page": null,
-      "path": "/",
+      page: null,
+      path: "/"
     });
 
     // check reactions to "popstate" events
-    let currentPath = store.state.router.path
+    let currentPath = store.state.router.path;
     observe(() => {
       currentPath = store.state.router.path;
     });

@@ -9,9 +9,10 @@ const tinyRouter: TinyRouter = {
       page: null,
       url: state => {
         const baseUrl = state.frontity.url;
-        const { path, page } = state.router;
         return `${new URL(
-          page > 1 ? path.replace(/\/?$/, `/page/${page}/`) : path,
+          state.router.page > 1
+            ? state.router.path.replace(/\/?$/, `/page/${state.router.page}/`)
+            : state.router.path,
           baseUrl
         )}`;
       }
