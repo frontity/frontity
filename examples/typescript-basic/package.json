@@ -16,6 +16,7 @@
     "frontity": "^0.1.4",
     "@frontity/core": "^0.2.0",
     "@frontity/extension-example-1": "^1.0.0",
-    "@frontity/extension-example-2": "^1.0.0"
+    "@frontity/extension-example-2": "^1.0.0",
+    "@frontity/tiny-router": "^0.1.0"
   }
 }
