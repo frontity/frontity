@@ -9,7 +9,7 @@ import {
 
 export type Connect<Pkg extends Package, Props extends object = {}> = Omit<
   Pkg,
-  "state" | "actions" | "name"
+  "state" | "actions" | "name" | "roots" | "fills"
 > & {
   state: ResolveState<Pkg["state"]>;
   actions: ResolveActions<Pkg["actions"]>;
