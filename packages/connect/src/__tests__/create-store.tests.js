@@ -2,6 +2,8 @@ import { createStore, isObservable } from "..";
 
 let config = {};
 
+const delay = () => new Promise(resolve => setTimeout(resolve, 100));
+
 beforeEach(() => {
   config = {
     state: {
@@ -34,6 +36,14 @@ beforeEach(() => {
             state.nested1.prop5 = state.nested1.prop4(num);
           }
         }
+      },
+      action6: async state => {
+        await delay();
+        state.prop1 = "action6";
+      },
+      action7: state => async num => {
+        await delay();
+        state.prop1 = num;
       }
     }
   };
@@ -83,10 +93,26 @@ describe("createStore actions", () => {
     expect(store.state.nested1.prop5).toBe(5);
   });
 
-  it("should accept parameters", () => {
+  it("should accept parameters", async () => {
     const store = createStore(config);
     store.actions.nested2.nested3.action5(3);
     expect(store.state.nested1.prop5).toBe(6);
+  });
+
+  it("should return a promise that can be awaited", done => {
+    const store = createStore(config);
+    store.actions.action6().then(() => {
+      expect(store.state.prop1).toBe("action6");
+      done();
+    });
+  });
+
+  it("should return a promise that can be awaited even with params", done => {
+    const store = createStore(config);
+    store.actions.action7(7).then(() => {
+      expect(store.state.prop1).toBe(7);
+      done();
+    });
   });
 });
 

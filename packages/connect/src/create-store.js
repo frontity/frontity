@@ -20,9 +20,11 @@ const getSnapshot = obj => {
 };
 
 const convertToAction = (fn, state) => (...args) => {
-  const res = fn(state);
-  if (typeof res === "function") {
-    res(...args);
+  const first = fn(state);
+  if (first instanceof Promise) return first;
+  if (typeof first === "function") {
+    const second = first(...args);
+    if (second instanceof Promise) return second;
   }
 };
 
