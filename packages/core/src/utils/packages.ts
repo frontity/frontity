@@ -26,6 +26,7 @@ export const mergePackages = ({
     frontity: {
       mode: string;
       packages: string[];
+      [key: string]: any;
     };
   };
 }): Package => {
