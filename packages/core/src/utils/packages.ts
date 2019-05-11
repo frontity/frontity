@@ -1,4 +1,3 @@
-import { NormalizedSettings } from "@frontity/file-settings";
 import { Package } from "@frontity/types";
 import deepmerge from "deepmerge";
 
