@@ -5,7 +5,7 @@ import { Head, connect } from "frontity";
 
 type Props = Connect<Package, { prop: string }>;
 
-const Extension1: React.FC<Props> = ({ state, actions, prop, roots }) => (
+const Extension1: React.FC<Props> = ({ state, actions, prop }) => (
   <>
     <Head>
       <title>Frontity</title>
