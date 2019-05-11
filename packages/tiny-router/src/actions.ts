@@ -1,5 +1,7 @@
 import TinyRouter from "../type";
 
+let isPopState = false;
+
 export const set: TinyRouter["actions"]["router"]["set"] = state => pathOrObj => {
   const path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
   const page = typeof pathOrObj === "string" ? null : pathOrObj.page;
@@ -7,8 +9,10 @@ export const set: TinyRouter["actions"]["router"]["set"] = state => pathOrObj =>
   state.router.path = path;
   state.router.page = page;
 
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined" && !isPopState) {
     window.history.pushState({ path, page }, "", path);
+  } else {
+    isPopState = false;
   }
 };
 
@@ -20,8 +24,9 @@ export const init: TinyRouter["actions"]["router"]["init"] = state => {
     window.history.replaceState({ path, page }, "");
 
     // listen to changes in history
-    window.addEventListener("popstate", ({ state: { path, page } }) =>
-      set(state)({ path, page })
-    );
+    window.addEventListener("popstate", ({ state: { path, page } }) => {
+      isPopState = true;
+      set(state)({ path, page });
+    });
   }
 };
