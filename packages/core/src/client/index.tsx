@@ -32,7 +32,7 @@ export default async ({ packages }) => {
         if (beforeCSR) beforeCSR();
       });
 
-      window["store"] = store;
+      window["frontity"] = store;
 
       loadableReady(() => {
         hydrate(<App store={store} />, window.document.getElementById("root"));
