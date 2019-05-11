@@ -5,15 +5,11 @@ const router: Router = {
   state: {
     router: {
       path: "/some-path",
-      page: 2,
-      url: state => state.router.path
+      page: 2
     }
   },
   actions: {
     router: {
-      init: state => {
-        /* do something */
-      },
       set: state => pathOrObj => {
         /* do something */
       }
