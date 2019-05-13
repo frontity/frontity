@@ -1,5 +1,5 @@
-import { Action, Settings } from "../../../types/src";
-import Source from "..";
+import { Action, Settings } from "@frontity/types";
+import Source from "../../";
 
 // Source.
 const source1 = (libraries: Source["libraries"]): Source => {
@@ -20,9 +20,7 @@ const source1 = (libraries: Source["libraries"]): Source => {
     },
     actions: {
       source: {
-        fetch: state => pathOrObj => {
-          libraries.router.myAction();
-        }
+        fetch: state => pathOrObj => {}
       }
     },
     libraries: {

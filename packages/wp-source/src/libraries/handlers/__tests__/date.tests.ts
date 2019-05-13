@@ -1,14 +1,14 @@
-import { State, Libraries } from "../../../type";
+import { State } from "@frontity/types";
+import WpSource from "../../../..";
 import populate from "../../populate";
 import handler from "../date";
-
 import { mockResponse, expectEntities } from "./mocks/helpers";
 import posts2016 from "./mocks/posts2016.json";
 import posts2016p2 from "./mocks/posts2016p2.json";
 import posts20161025 from "./mocks/posts2016-10-25.json";
 
-let state: State["source"];
-let libraries: Libraries;
+let state: State<WpSource>["source"];
+let libraries: WpSource["libraries"];
 
 beforeEach(() => {
   // mock state

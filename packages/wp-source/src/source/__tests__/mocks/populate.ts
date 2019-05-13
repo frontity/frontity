@@ -1,5 +1,5 @@
-import { Libraries } from "../../../type";
+import WpSource from "../../../../";
 
-type Populate = Libraries["source"]["populate"]
+type Populate = WpSource["libraries"]["source"]["populate"];
 
 export default jest.fn<Populate, Parameters<Populate>>();

@@ -1,8 +1,11 @@
-import { State } from "../type";
+import WpSource from "../../";
 import { normalize } from "normalizr";
 import * as schemas from "./schemas";
 
-const populate = async(state: State["source"], response: Response) => {
+const populate: WpSource["libraries"]["source"]["populate"] = async (
+  source,
+  response
+) => {
   // Normalize response
   const json = await response.json();
   const isList = json instanceof Array;
@@ -19,15 +22,16 @@ const populate = async(state: State["source"], response: Response) => {
     }
   );
 
-  // add entities to state
+  // add entities to source
   Object.entries(entities).forEach(([schema, entityMap]) => {
     Object.entries(entityMap).forEach(([, entity]) => {
       if (schema === "postType" || schema === "attachment") {
-        if (state[entity.type]) state[entity.type][entity.id] = entity;
+        if (source[entity.type]) source[entity.type][entity.id] = entity;
       } else if (schema === "taxonomy") {
-        if (state[entity.taxonomy]) state[entity.taxonomy][entity.id] = entity;
+        if (source[entity.taxonomy])
+          source[entity.taxonomy][entity.id] = entity;
       } else if (schema === "author") {
-        state.author[entity.id] = entity;
+        source.author[entity.id] = entity;
       }
     });
   });

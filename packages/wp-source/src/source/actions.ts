@@ -1,11 +1,11 @@
-import WpSource, { Libraries } from "../type";
+import WpSource from "../../";
 import { normalizePath } from "./utils";
 import { wpOrg, wpCom } from "../libraries/patterns/";
 
 const actions = ({
   libraries
 }: {
-  libraries: Libraries;
+  libraries: WpSource["libraries"];
 }): WpSource["actions"]["source"] => ({
   fetch: state => async pathOrObj => {
     const { source } = state;

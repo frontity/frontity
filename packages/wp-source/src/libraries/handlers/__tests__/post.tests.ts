@@ -1,6 +1,6 @@
-import { State, Libraries } from "../../../type";
+import { State } from "@frontity/types";
+import WpSource from "../../../..";
 import handler from "../post";
-
 import { mockResponse } from "./mocks/helpers";
 
 const post60 = {
@@ -16,8 +16,8 @@ const post60 = {
   tags: [10, 9, 13, 11]
 };
 
-let state: State["source"];
-let libraries: Libraries;
+let state: State<WpSource>["source"];
+let libraries: WpSource["libraries"];
 
 beforeEach(() => {
   // mock state
@@ -103,7 +103,7 @@ describe("post", () => {
       params: { slug: "the-beauties-of-gullfoss" },
       libraries
     });
-    
+
     expect(promise).rejects.toThrowError();
   });
 });

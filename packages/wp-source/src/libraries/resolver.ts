@@ -1,4 +1,4 @@
-import { Handler } from "../type";
+import { Handler } from "../../";
 import pathToRegexp, { Key } from "path-to-regexp";
 
 class Resolver {

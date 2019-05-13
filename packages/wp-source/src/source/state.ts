@@ -1,4 +1,4 @@
-import WpSource from "../type";
+import WpSource from "../../";
 import normalizePath from "./utils/normalize-path";
 
 const state: WpSource["state"]["source"] = {

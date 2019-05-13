@@ -1,10 +1,7 @@
-import Package from "@frontity/types/package";
-import Action from "@frontity/types/action";
-import Derived from "@frontity/types/derived";
-import Namespaces from "@frontity/types/namespaces";
+import { Package, Action, Derived } from "@frontity/types";
 
-import { Data } from "./data";
-import { Taxonomy, PostType, Attachment, Author } from "./entities";
+import { Data } from "./src/data";
+import { Taxonomy, PostType, Attachment, Author } from "./src/entities";
 
 export type PathOrObj =
   | string
@@ -13,12 +10,12 @@ export type PathOrObj =
       page?: number;
     };
 
-interface Source extends Package {
-  name: "@frontity/wp-source";
-  namespaces: Namespaces<"source">;
+export type Data = Data;
+
+interface Source<T = null> extends Package {
   state: {
     source: {
-      data: Derived<Source, (pathOrLink: string) => Data>;
+      data: Derived<T extends null ? Source : T, (pathOrLink: string) => Data>;
       dataMap: Record<string, Data>;
       category: Record<string, Taxonomy>;
       tag: Record<string, Taxonomy>;
@@ -30,14 +27,14 @@ interface Source extends Package {
   };
   actions: {
     source: {
-      fetch: Action<Source, PathOrObj>;
-      init?: Action<Source>;
+      fetch: Action<T extends null ? Source : T, PathOrObj>;
+      init?: Action<T extends null ? Source : T>;
     };
   };
   libraries: {
     source: {
       populate: Function;
-    }
+    };
   };
 }
 

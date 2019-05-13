@@ -1,4 +1,4 @@
-import { Handler } from "../../type";
+import { Handler } from "../../../";
 
 const attachmentHandler: Handler = async (
   state,
