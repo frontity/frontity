@@ -1,41 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import connect from "@frontity/connect";
-import { Connect } from "@frontity/types";
+import { Connect } from "frontity/types";
 import MarsTheme from "../../..";
 import styled from "@emotion/styled";
 import Link from "./link";
 
-const List: React.FC<Connect<MarsTheme>> = ({ state, actions }) => {
-  const items = [
-    {
-      id: 1,
-      title: "Post number one",
-      excerpt: "This is a excerpt for post number one..."
-    },
-    {
-      id: 2,
-      title: "Post number two",
-      excerpt: "This is a excerpt for post number two..."
-    },
-    {
-      id: 3,
-      title: "Post number three",
-      excerpt: "This is a excerpt for post number three..."
-    }
-  ];
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     await actions.source.fetch("/");
-  //     console.log("data:", state.source.data);
-  //   };
-
-  //   fetch();
-  // }, []);
-
+const List: React.FC<Connect<MarsTheme>> = ({ state }) => {
+  const { type }: { type?: string } =
+    state.source.data(state.router.path) || {};
   return (
     <Container>
-      {items.map(item => (
+      {Object.values(type ? state.source[type] : {}).map(item => (
         <Item key={item.id} item={item} />
       ))}
     </Container>
@@ -46,16 +21,15 @@ const Item: React.FC<
   Connect<
     MarsTheme,
     {
-      key: number;
       item: { id: number; title: string; excerpt: string };
     }
   >
-> = connect(({ actions, item }) => (
+> = connect(({ item }) => (
   <ItemContainer>
-    <Link href="/something">
-      <Title>{item.title}</Title>
+    <Link href={item.link}>
+      <Title>{item.title.rendered}</Title>
     </Link>
-    <Excerpt>{item.excerpt}</Excerpt>
+    <Excerpt>{item.excerpt.text}</Excerpt>
   </ItemContainer>
 ));
 

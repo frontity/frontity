@@ -1,19 +1,24 @@
 import React from "react";
 import connect from "@frontity/connect";
-import { Connect } from "@frontity/types";
+import { Connect } from "frontity/types";
 import MarsTheme from "../../..";
 import styled from "@emotion/styled";
 
-const Post: React.FC<Connect<MarsTheme>> = () => {
+const Post: React.FC<Connect<MarsTheme>> = ({ state }) => {
+  const { type, id }: { type?: string; id?: number } =
+    state.source.data(state.router.path) || {};
+  const post = state.source[type][id];
+  const author = state.source.author[post.author];
+
   return (
     <Container>
       <Head>
-        <Title>Post Title</Title>
-        <Author>By John Doe</Author>
+        <Title>{post.title.rendered}</Title>
+        <Author>By {author.name}</Author>
       </Head>
       <Body
         dangerouslySetInnerHTML={{
-          __html: "<p>this is a paragrah of content</p>"
+          __html: post.content.rendered
         }}
       />
     </Container>
