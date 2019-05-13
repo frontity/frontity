@@ -21,17 +21,17 @@
 
 > **IMPORTANT NOTE!**
 >
-> Frontity is already in **BETA** :rocket: You can now use it and give feedback! It is pretty functional, and it is really easy to configure your web.
+> Frontity framework is in **beta** :rocket: This is a **fully functional beta**, you can now use it to easily create a WordPress theme based on React JS.
 >
 > <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
 > <br />
 >
-> During the next months, Frontity will keep improving, will be tested, and new features will be added progressively.
+> During the next months, Frontity will continue to be tested and improved, and new features will be added progressively.
 >
 > - Release Candidate Date: **June 10, 2019**
 > - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
 >
-> #### Do you want to receive latest framework updates and news? You can subscribe [here](https://frontity.org/#newsletter)!
+> #### Do you want to receive latest framework updates and news? Subscribe to [our newsletter](https://frontity.org/#newsletter)!
 
 ---
 
@@ -128,7 +128,7 @@ Github is where magic happens, but there are more channels where you can find in
 
 Do you love WordPress and React? Do you have any doubts or feedback? Come join our [community forum](https://community.frontity.org)! ❤️
 
-Frontity also welcomes contributions. Plus, you can get free swag! You can contribute coding, but there are many other ways to support the project and get involved >> [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute)
+Frontity also welcomes contributions. There are many ways to support the project, get involved, and get free swag! If you don't know where to start this guide might help >> [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute).
 
 
 # » Open source
@@ -139,6 +139,6 @@ Frontity is licensed under the terms of the [Apache 2.0](https://github.com/fron
 
 ---
 
-Do you miss any information? You can check [Frontity docs](https://docs.frontity.org/getting-started) or ask about it to [our community](https://community.frontity.org)
+Do you miss any important information? Check out [our docs](https://docs.frontity.org/getting-started) or ask us about it at [our community forum](https://community.frontity.org).
 
 ---
