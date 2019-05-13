@@ -1,4 +1,4 @@
-import TinyRouter from "../type";
+import TinyRouter from "..";
 import { set, init } from "./actions";
 
 const tinyRouter: TinyRouter = {
@@ -6,7 +6,7 @@ const tinyRouter: TinyRouter = {
   state: {
     router: {
       path: "/",
-      page: null,
+      page: 1,
       location: state => {
         return new URL(
           state.router.page > 1

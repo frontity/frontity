@@ -1,7 +1,7 @@
 import { createStore, observe } from "frontity";
 import { init, set } from "../actions";
 import tinyRouter from "..";
-import TinyRouter from "../../type";
+import TinyRouter from "../..";
 
 let config: TinyRouter;
 
@@ -54,7 +54,7 @@ describe("actions", () => {
     const store = createStore(config);
     store.actions.router.set("/some-post/");
     expect(store.state.router).toMatchObject({
-      page: null,
+      page: 1,
       path: "/some-post/"
     });
   });
@@ -74,7 +74,7 @@ describe("actions", () => {
 
     // check that first state is correct
     expect(window.history.state).toMatchObject({
-      page: null,
+      page: 1,
       path: "/"
     });
 

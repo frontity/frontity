@@ -7,6 +7,16 @@ export interface Package {
     [namespace: string]: React.ReactType;
   };
   state?: {
+    frontity?: {
+      name?: string;
+      mode?: string;
+      initial?: {
+        path: string;
+        page: number;
+      };
+      packages?: string[];
+      url?: string;
+    };
     [namespace: string]: {
       [key: string]: any;
     };

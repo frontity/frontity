@@ -4,12 +4,10 @@ export type PathOrObj = string | { path: string; page: number };
 
 interface Router extends Package {
   state: {
-    frontity?: {
-      url: string;
-    };
+    frontity?: Package["state"]["frontity"];
     router: {
       path: string;
-      page: null | number;
+      page: number;
       location: Derived<Router, URL>;
     };
   };

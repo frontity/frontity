@@ -1,10 +1,10 @@
-import TinyRouter from "../type";
+import TinyRouter from "..";
 
 let isPopState = false;
 
 export const set: TinyRouter["actions"]["router"]["set"] = state => pathOrObj => {
   const path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
-  const page = typeof pathOrObj === "string" ? null : pathOrObj.page;
+  const page = typeof pathOrObj === "string" ? 1 : pathOrObj.page;
 
   state.router.path = path;
   state.router.page = page;
