@@ -17,7 +17,7 @@
     "@frontity/core": "^0.2.0",
     "@frontity/file-settings": "^0.1.0",
     "@frontity/mars-theme": "^0.1.0",
-    "@frontity/tiny-router": "^1.0.0",
+    "@frontity/tiny-router": "^0.1.0",
     "@frontity/wp-source": "^0.1.0"
   },
   "devDependencies": {

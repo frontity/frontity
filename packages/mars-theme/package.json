@@ -24,7 +24,6 @@
   "devDependencies": {
     "frontity": "^0.1.0",
     "@frontity/connect": "^0.1.0",
-    "@frontity/types": "^0.1.0",
     "@frontity/router": "^0.1.0",
     "@frontity/source": "^0.1.0"
   }

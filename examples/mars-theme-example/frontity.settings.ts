@@ -1,6 +1,6 @@
-import Settings from "@frontity/types/settings";
-import MarsTheme from "@frontity/mars-theme/type";
-import TinyRouter from "@frontity/tiny-router/type";
+import { Settings } from "frontity/types";
+import MarsTheme from "@frontity/mars-theme";
+import TinyRouter from "@frontity/tiny-router";
 import WpSource from "@frontity/wp-source/src/type";
 
 const settings: Settings<MarsTheme | TinyRouter | WpSource> = {
@@ -10,8 +10,10 @@ const settings: Settings<MarsTheme | TinyRouter | WpSource> = {
     "@frontity/tiny-router",
     {
       name: "@frontity/wp-source",
-      settings: {
-        apiUrl: "https://test.frontity.io/wp-json/wp/v2/"
+      state: {
+        source: {
+          apiUrl: "https://test.frontity.io/wp-json/wp/v2/"
+        }
       }
     }
   ]

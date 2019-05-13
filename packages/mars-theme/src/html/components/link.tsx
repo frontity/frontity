@@ -1,7 +1,7 @@
 import React from "react";
 import connect from "@frontity/connect";
 import { Connect } from "@frontity/types";
-import MarsTheme from "../../../type";
+import MarsTheme from "../../..";
 
 const Link: React.FC<
   Connect<MarsTheme, { href: string; className?: string }>

@@ -1,4 +1,4 @@
-import { Package } from "@frontity/types";
+import { Package } from "frontity/types";
 import Router from "@frontity/router";
 import Source from "@frontity/source";
 
@@ -8,12 +8,12 @@ interface MarsTheme extends Package {
     theme: React.ReactType;
   };
   state: {
-    router: Router["state"]["router"];
-    source: Source["state"]["source"];
+    router?: Router["state"]["router"];
+    source?: Source["state"]["source"];
   };
   actions: {
-    router: Router["actions"]["router"];
-    source: Source["actions"]["source"];
+    router?: Router["actions"]["router"];
+    source?: Source["actions"]["source"];
   };
 }
 

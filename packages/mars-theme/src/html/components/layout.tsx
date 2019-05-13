@@ -2,7 +2,7 @@ import React from "react";
 import { Global, css } from "@emotion/core";
 import connect from "@frontity/connect";
 import { Connect } from "@frontity/types";
-import MarsTheme from "../../../type";
+import MarsTheme from "../../..";
 import styled from "@emotion/styled";
 import Header from "./header";
 import List from "./list";
