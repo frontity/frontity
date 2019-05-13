@@ -1,6 +1,6 @@
 import React from "react";
 import connect from "@frontity/connect";
-import Connect from "@frontity/types/connect";
+import { Connect } from "@frontity/types";
 import MarsTheme from "../../../type";
 import styled from "@emotion/styled";
 
@@ -22,13 +22,18 @@ const Post: React.FC<Connect<MarsTheme>> = () => {
 
 export default connect(Post);
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 800px;
+  margin: 0;
+  list-style: none;
+  padding: 24px;
+`;
 
 const Head = styled.div``;
 
 const Title = styled.h1`
-  display: flex;
-  width: 800px;
+  margin: 0;
+  color: #451804;
 `;
 
 const Author = styled.p``;

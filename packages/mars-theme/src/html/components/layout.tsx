@@ -1,7 +1,7 @@
 import React from "react";
 import { Global, css } from "@emotion/core";
 import connect from "@frontity/connect";
-import Connect from "@frontity/types/connect";
+import { Connect } from "@frontity/types";
 import MarsTheme from "../../../type";
 import styled from "@emotion/styled";
 import Header from "./header";
@@ -9,7 +9,6 @@ import List from "./list";
 import Post from "./post";
 
 const Theme: React.FC<Connect<MarsTheme>> = ({ state }) => {
-  console.log("state:", state);
   return (
     <>
       <Global styles={globalStyles} />
@@ -31,6 +30,11 @@ const globalStyles = css`
   body {
     margin: 0;
     background: #f0e7e7;
+  }
+
+  a,
+  a:visited {
+    color: inherit;
   }
 `;
 

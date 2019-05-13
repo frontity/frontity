@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import connect from "@frontity/connect";
-import Connect from "@frontity/types/connect";
+import { Connect } from "@frontity/types";
 import MarsTheme from "../../../type";
 import styled from "@emotion/styled";
+import Link from "./link";
 
-const List: React.FC<Connect<MarsTheme>> = () => {
+const List: React.FC<Connect<MarsTheme>> = ({ state, actions }) => {
   const items = [
     {
       id: 1,
@@ -23,6 +24,15 @@ const List: React.FC<Connect<MarsTheme>> = () => {
     }
   ];
 
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     await actions.source.fetch("/");
+  //     console.log("data:", state.source.data);
+  //   };
+
+  //   fetch();
+  // }, []);
+
   return (
     <Container>
       {items.map(item => (
@@ -36,12 +46,15 @@ const Item: React.FC<
   Connect<
     MarsTheme,
     {
+      key: number;
       item: { id: number; title: string; excerpt: string };
     }
   >
 > = connect(({ actions, item }) => (
-  <ItemContainer onClick={() => actions.router.set("/something")}>
-    <Title>{item.title}</Title>
+  <ItemContainer>
+    <Link href="/something">
+      <Title>{item.title}</Title>
+    </Link>
     <Excerpt>{item.excerpt}</Excerpt>
   </ItemContainer>
 ));

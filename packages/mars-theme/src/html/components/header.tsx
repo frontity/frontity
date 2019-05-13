@@ -1,13 +1,16 @@
 import React from "react";
 import connect from "@frontity/connect";
-import Connect from "@frontity/types/connect";
+import { Connect } from "@frontity/types";
 import MarsTheme from "../../../type";
 import styled from "@emotion/styled";
+import Link from "./link";
 
 const Header: React.FC<Connect<MarsTheme>> = ({ state }) => {
   return (
     <Container>
-      <Title>This is a site title.</Title>
+      <StyledLink href="/">
+        <Title>This is a site title.</Title>
+      </StyledLink>
       <Description>This is a site description.</Description>
     </Container>
   );
@@ -31,4 +34,8 @@ const Title = styled.h2`
 
 const Description = styled.p`
   margin: 0;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
