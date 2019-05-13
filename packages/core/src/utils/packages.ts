@@ -13,6 +13,12 @@ export const getVariable = (pkg: string, mode: string) => {
   );
 };
 
+type PackageFunction = ({
+  libraries
+}: {
+  libraries: Package["libraries"];
+}) => Package;
+
 // Merge all packages together in a single config that can be passed
 // to createStore.
 export const mergePackages = ({
@@ -20,7 +26,7 @@ export const mergePackages = ({
   state
 }: {
   packages: {
-    [name: string]: Package;
+    [name: string]: Package | PackageFunction;
   };
   state: {
     frontity: {
@@ -36,11 +42,22 @@ export const mergePackages = ({
     state: {},
     actions: {}
   };
+  const args: {
+    libraries: Package["libraries"];
+  } = {
+    libraries: {}
+  };
   const packageExcludes = state.frontity.packages;
   packageExcludes.forEach(name => {
     const variable = getVariable(name, state.frontity.mode);
-    config = deepmerge(config, packages[variable], { clone: false });
+    const module = packages[variable];
+    const pkg = typeof module === "function" ? module(args) : module;
+    config = deepmerge(config, pkg, { clone: false });
   });
   config.state = deepmerge(config.state, state);
+  if (config.libraries)
+    Object.keys(config.libraries).forEach(namespace => {
+      args.libraries[namespace] = config.libraries[namespace];
+    });
   return config;
 };

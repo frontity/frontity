@@ -22,7 +22,7 @@ describe("mergePackages", () => {
   const state = {
     frontity: {
       mode: "html",
-      packages: ["package-1", "package-2"]
+      packages: ["package-1", "package-2", "package-3"]
     }
   };
   const packages = {
@@ -51,11 +51,33 @@ describe("mergePackages", () => {
         namespace3: {
           prop3: "prop3"
         }
+      },
+      libraries: {
+        namespace3: {
+          lib1: "lib1"
+        }
       }
-    }
+    },
+    package_3_html: ({ libraries }) => ({
+      roots: {
+        namespace4: () => <div>"namespace4"</div>
+      },
+      state: {
+        namespace4: {
+          prop4: "prop4",
+          prop5: () => libraries.namespace3.lib1
+        }
+      }
+    })
   };
 
   it("should output a merged packages", () => {
-    expect(mergePackages({ packages, state })).toMatchSnapshot();
+    const merged = mergePackages({ packages, state });
+    expect(merged).toMatchSnapshot();
+  });
+
+  it("should get access to libraries", () => {
+    const merged = mergePackages({ packages, state });
+    expect(merged.state.namespace4.prop5()).toBe("lib1");
   });
 });
