@@ -1,9 +1,19 @@
 import TinyRouter from "..";
 
+const normalizePath = (pathOrLink: string): string => {
+  try {
+    return new URL(pathOrLink).pathname;
+  } catch (e) {
+    // is not a URL
+    return pathOrLink;
+  }
+};
+
 let isPopState = false;
 
 export const set: TinyRouter["actions"]["router"]["set"] = state => pathOrObj => {
-  const path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
+  const path =
+    typeof pathOrObj === "string" ? normalizePath(pathOrObj) : pathOrObj.path;
   const page = typeof pathOrObj === "string" ? 1 : pathOrObj.page;
 
   state.router.path = path;
@@ -32,8 +42,5 @@ export const init: TinyRouter["actions"]["router"]["init"] = state => {
       isPopState = true;
       set(state)({ path, page });
     });
-  }
-
-  if (typeof window !== "undefined") {
   }
 };
