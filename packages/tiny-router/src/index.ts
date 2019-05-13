@@ -1,4 +1,4 @@
-import TinyRouter from "../type";
+import TinyRouter from "..";
 import { set, init } from "./actions";
 
 const tinyRouter: TinyRouter = {
@@ -6,14 +6,14 @@ const tinyRouter: TinyRouter = {
   state: {
     router: {
       path: "/",
-      page: null,
-      url: state => {
-        const baseUrl = state.frontity.url;
-        const { path, page } = state.router;
-        return `${new URL(
-          page > 1 ? path.replace(/\/?$/, `/page/${page}/`) : path,
-          baseUrl
-        )}`;
+      page: 1,
+      location: state => {
+        return new URL(
+          state.router.page > 1
+            ? state.router.path.replace(/\/?$/, `/page/${state.router.page}/`)
+            : state.router.path,
+          state.frontity.url
+        );
       }
     }
   },

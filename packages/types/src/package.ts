@@ -7,6 +7,19 @@ export interface Package {
     [namespace: string]: React.ReactType;
   };
   state?: {
+    frontity?: {
+      // Automatically populated:
+      name?: string;
+      mode?: string;
+      initial?: {
+        path: string;
+        page: number;
+      };
+      packages?: string[];
+      platform?: "client" | "server";
+      // Populated by the user:
+      url?: string;
+    };
     [namespace: string]: {
       [key: string]: any;
     };

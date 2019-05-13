@@ -1,25 +1,21 @@
 import { createStore } from "@frontity/connect";
-import Package from "@frontity/types/package";
+import { Package } from "@frontity/types";
 import { NormalizedSettings } from "@frontity/file-settings";
-import { mergePackages, packageList } from "../utils/packages";
+import { mergePackages } from "../utils/packages";
+import initialState from "./utils/initial-state";
 
 export default ({
   packages,
-  settings
+  settings,
+  url
 }: {
   packages: {
     [name: string]: Package;
   };
   settings: NormalizedSettings;
+  url: URL;
 }) => {
-  const state = {
-    frontity: {
-      ...settings.state,
-      name: settings.name,
-      mode: settings.mode,
-      packages: packageList({ settings })
-    }
-  };
+  const state = initialState({ settings, url });
   const merged = mergePackages({ packages, state });
   const store = createStore(merged);
   return store;

@@ -11,10 +11,11 @@ const Extension1: React.FC<Props> = ({ state, actions, prop }) => (
       <title>Frontity</title>
     </Head>
     <div>
-      I am the root of extension example 1! State is: {state.extension1.prop1}
+      I am the root of extension example 1! Path is: {state.router.path}
     </div>
-    <button onClick={() => actions.extension1.action1()}>2</button>
-    <button onClick={() => actions.extension1.action2(3)}>3</button>
+    <button onClick={() => actions.router.set("/")}>home</button>
+    <button onClick={() => actions.router.set("/page1")}>page1</button>
+    <button onClick={() => actions.router.set("/page2")}>page2</button>
   </>
 );
 

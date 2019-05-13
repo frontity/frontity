@@ -1,4 +1,5 @@
 import { Package, Derived, Action } from "frontity/types";
+import Router from "@frontity/router";
 
 interface ExtensionExample1 extends Package {
   name: "@frontity/extension-example-1";
@@ -10,12 +11,14 @@ interface ExtensionExample1 extends Package {
       prop2: number;
       prop3: Derived<ExtensionExample1, number>;
     };
+    router?: Router["state"]["router"];
   };
   actions: {
     extension1: {
       action1: Action<ExtensionExample1>;
       action2: Action<ExtensionExample1, number>;
     };
+    router?: Router["actions"]["router"];
   };
   roots: {
     extension1: React.ReactType;

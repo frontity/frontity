@@ -4,22 +4,24 @@ exports[`mergePackages should output a merged packages 1`] = `
 Object {
   "actions": Object {},
   "fills": Object {},
+  "libraries": Object {
+    "namespace3": Object {
+      "lib1": "lib1",
+    },
+  },
   "roots": Object {
     "namespace1": [Function],
     "namespace2": [Function],
     "namespace3": [Function],
+    "namespace4": [Function],
   },
   "state": Object {
     "frontity": Object {
+      "mode": "html",
       "packages": Array [
-        Object {
-          "name": "package-1",
-          "variable": "package_1",
-        },
-        Object {
-          "name": "package-2",
-          "variable": "package_2",
-        },
+        "package-1",
+        "package-2",
+        "package-3",
       ],
     },
     "namespace1": Object {
@@ -31,19 +33,10 @@ Object {
     "namespace3": Object {
       "prop3": "prop3",
     },
+    "namespace4": Object {
+      "prop4": "prop4",
+      "prop5": [Function],
+    },
   },
 }
-`;
-
-exports[`packageList should output a list of packages 1`] = `
-Array [
-  Object {
-    "name": "package1",
-    "variable": "package1_html",
-  },
-  Object {
-    "name": "package2",
-    "variable": "package2_html",
-  },
-]
 `;

@@ -17,5 +17,8 @@
   },
   "dependencies": {
     "frontity": "^0.1.0"
+  },
+  "devDependencies": {
+    "@frontity/router": "^0.1.0"
   }
 }
