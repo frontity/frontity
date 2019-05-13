@@ -28,13 +28,7 @@ export const mergePackages = ({
   packages: {
     [name: string]: Package | PackageFunction;
   };
-  state: {
-    frontity: {
-      mode: string;
-      packages: string[];
-      [key: string]: any;
-    };
-  };
+  state: Package["state"];
 }): Package => {
   let config: Package = {
     roots: {},

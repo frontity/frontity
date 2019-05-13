@@ -9,13 +9,9 @@ export default ({
   packages: {
     [name: string]: Package;
   };
-  state: {
-    frontity: {
-      mode: string;
-      packages: string[];
-    };
-  };
+  state: Package["state"];
 }) => {
+  state.frontity.platform = "client";
   const merged = mergePackages({ packages, state });
   const store = createStore(merged);
   return store;

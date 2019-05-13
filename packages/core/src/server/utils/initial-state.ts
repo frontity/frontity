@@ -1,5 +1,6 @@
 import deepmerge from "deepmerge";
 import { NormalizedSettings } from "@frontity/file-settings";
+import { Package } from "@frontity/types";
 
 export default ({
   settings,
@@ -7,11 +8,12 @@ export default ({
 }: {
   settings: NormalizedSettings;
   url: URL;
-}) =>
-  deepmerge(settings.state, {
+}) => {
+  const state: Package["state"] = {
     frontity: {
       name: settings.name,
       mode: settings.mode,
+      platform: "server",
       initial: {
         path: (/^(.*)\/page\//.exec(url.pathname) || [null, url.pathname])[1],
         page: parseInt(
@@ -21,4 +23,6 @@ export default ({
       },
       packages: settings.packages.map(pkg => pkg.name)
     }
-  });
+  };
+  return deepmerge(settings.state, state);
+};

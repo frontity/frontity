@@ -13,6 +13,7 @@ Object {
       "package1",
       "package2",
     ],
+    "platform": "server",
     "url": "https://site.com",
   },
 }
@@ -31,6 +32,7 @@ Object {
       "package1",
       "package2",
     ],
+    "platform": "server",
     "url": "https://site.com",
   },
 }

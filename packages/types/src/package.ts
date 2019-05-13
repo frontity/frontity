@@ -8,6 +8,7 @@ export interface Package {
   };
   state?: {
     frontity?: {
+      // Automatically populated:
       name?: string;
       mode?: string;
       initial?: {
@@ -15,6 +16,8 @@ export interface Package {
         page: number;
       };
       packages?: string[];
+      platform?: "client" | "server";
+      // Populated by the user:
       url?: string;
     };
     [namespace: string]: {
