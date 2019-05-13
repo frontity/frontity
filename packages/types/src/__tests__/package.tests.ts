@@ -50,7 +50,7 @@ const package1: Package1 = {
   },
   actions: {
     namespace1: {
-      action1: state => {}
+      action1: (state, actions, libraries) => {}
     },
     namespace2: {
       action2: state => str => {

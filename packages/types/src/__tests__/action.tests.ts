@@ -30,6 +30,11 @@ interface Package1 extends Package {
       action4: Action<Package1, number>;
     };
   };
+  libraries: {
+    namespace1: {
+      lib1: string;
+    };
+  };
 }
 
 const package1: Package1 = {
@@ -53,7 +58,7 @@ const package1: Package1 = {
   actions: {
     namespace1: {
       // Action without params.
-      action1: state => {
+      action1: (state, actions, libraries) => {
         state.namespace1.prop1 = "newProp";
         state.namespace1.prop2 = 3;
 
@@ -76,14 +81,23 @@ const package1: Package1 = {
 
         // Check that nested arrays are fine.
         state.namespace1.nested1.array2.map((item: number): number => item + 1);
+
+        // Check that actions are accesible.
+        actions.namespace1.action2();
+        actions.namespace2.action3("123");
+
+        // Check that libraries are accesible.
+        const str3: string = libraries.namespace1.lib1;
       },
       // Async Action without params.
-      action2: async state => {
+      action2: async (state, actions) => {
         state.namespace1.prop1 = "newProp";
         await Promise.resolve();
         const str1: string = state.namespace1.prop3;
         await Promise.resolve();
         const num1: number = state.namespace1.prop4("123");
+        actions.namespace2.action3("123");
+        await actions.namespace2.action4(123);
       }
     },
     namespace2: {
@@ -101,6 +115,11 @@ const package1: Package1 = {
         await Promise.resolve();
         const num2: number = state.namespace1.nested1.prop5("123") + num;
       }
+    }
+  },
+  libraries: {
+    namespace1: {
+      lib1: "lib1"
     }
   }
 };

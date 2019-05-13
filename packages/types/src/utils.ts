@@ -10,10 +10,12 @@ export type ResolveState<State extends Package["state"]> = {
 // Resolve actions to its final form.
 export type ResolveActions<Actions extends Package["state"]> = {
   [P in keyof Actions]: Actions[P] extends (
-    ...a: any
-  ) => (arg: infer Arg) => void // Turns "state => args => {}" into "args => {}"
-    ? (arg: Arg) => void // Turns "state => {}" into "() => {}"
-    : Actions[P] extends (state: Package["state"]) => any
+    state?: any,
+    actions?: any,
+    libraries?: any
+  ) => (arg: infer Arg) => void
+    ? (arg: Arg) => void
+    : Actions[P] extends (state?: any, actions?: any, libraries?: any) => any
     ? () => void
     : ResolveActions<Actions[P]>
 };

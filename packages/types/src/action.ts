@@ -1,8 +1,16 @@
 import Package from "./package";
-import { ResolveState } from "./utils";
+import { ResolveState, ResolveActions } from "./utils";
 
 export type Action<Pkg extends Package, Input = null> = [Input] extends [null]
-  ? (state: ResolveState<Pkg["state"]>) => void
-  : (state: ResolveState<Pkg["state"]>) => (input: Input) => void;
+  ? (
+      state?: ResolveState<Pkg["state"]>,
+      actions?: ResolveActions<Pkg["actions"]>,
+      libraries?: Pkg["libraries"]
+    ) => void
+  : (
+      state?: ResolveState<Pkg["state"]>,
+      actions?: ResolveActions<Pkg["actions"]>,
+      libraries?: Pkg["libraries"]
+    ) => (args: Input) => void;
 
 export default Action;
