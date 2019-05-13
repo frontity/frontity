@@ -1,11 +1,11 @@
-import { Handler } from "../../type";
+import { Handler } from "../../..";
 import getIdBySlug from "./utils/get-id-by-slug";
 
-const postHandler: Handler = async (state, { path, params, libraries }) => {
+const postHandler: Handler = async (source, { path, params, libraries }) => {
   const { api, populate } = libraries.source;
 
   const { slug } = params;
-  let id = getIdBySlug(state.post, slug);
+  let id = getIdBySlug(source.post, slug);
 
   // Get post from REST API if not found
   if (!id) {
@@ -14,7 +14,7 @@ const postHandler: Handler = async (state, { path, params, libraries }) => {
       params: { slug, _embed: true }
     });
 
-    const populated = await populate(state, response);
+    const populated = await populate(source, response);
 
     if (!populated.length)
       throw new Error(`Post with slug "${slug}" not found.`);
@@ -23,7 +23,7 @@ const postHandler: Handler = async (state, { path, params, libraries }) => {
   }
 
   // Init data
-  state.dataMap[path] = {
+  source.dataMap[path] = {
     id,
     type: "post",
     isPostType: true,

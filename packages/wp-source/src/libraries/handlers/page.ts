@@ -1,4 +1,4 @@
-import { Handler } from "../../type";
+import { Handler } from "../../../";
 import getIdBySlug from "./utils/get-id-by-slug";
 
 const pageHandler: Handler = async (state, { path, params, libraries }) => {
@@ -24,7 +24,7 @@ const pageHandler: Handler = async (state, { path, params, libraries }) => {
     type: "page",
     isPostType: true,
     isPage: true,
-    isFetching: true,
+    isFetching: true
   };
 };
 
