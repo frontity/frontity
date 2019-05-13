@@ -10,7 +10,7 @@ interface Router extends Package {
     router: {
       path: string;
       page: null | number;
-      url: Derived<Router, string>;
+      location: Derived<Router, URL>;
     };
   };
   actions: {

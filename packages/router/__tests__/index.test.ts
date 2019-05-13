@@ -5,7 +5,8 @@ const router: Router = {
   state: {
     router: {
       path: "/some-path",
-      page: 2
+      page: 2,
+      location: state => new URL(state.router.path)
     }
   },
   actions: {

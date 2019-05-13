@@ -7,14 +7,13 @@ const tinyRouter: TinyRouter = {
     router: {
       path: "/",
       page: null,
-      url: state => {
-        const baseUrl = state.frontity.url;
-        return `${new URL(
+      location: state => {
+        return new URL(
           state.router.page > 1
             ? state.router.path.replace(/\/?$/, `/page/${state.router.page}/`)
             : state.router.path,
-          baseUrl
-        )}`;
+          state.frontity.url
+        );
       }
     }
   },
