@@ -2,24 +2,20 @@ import { createStore } from "@frontity/connect";
 import { Package } from "@frontity/types";
 import { NormalizedSettings } from "@frontity/file-settings";
 import { mergePackages } from "../utils/packages";
-import deepmerge from "deepmerge";
+import initialState from "./utils/initial-state";
 
 export default ({
   packages,
-  settings
+  settings,
+  url
 }: {
   packages: {
     [name: string]: Package;
   };
   settings: NormalizedSettings;
+  url: URL;
 }) => {
-  const state = deepmerge(settings.state, {
-    frontity: {
-      name: settings.name,
-      mode: settings.mode,
-      packages: settings.packages.map(pkg => pkg.name)
-    }
-  });
+  const state = initialState({ settings, url });
   const merged = mergePackages({ packages, state });
   const store = createStore(merged);
   return store;

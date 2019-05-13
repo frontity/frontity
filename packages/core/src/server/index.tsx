@@ -58,7 +58,7 @@ export default ({ packages }) => {
     const frontity: FrontityTags = {};
 
     // Create the store.
-    const store = createStore({ settings, packages });
+    const store = createStore({ settings, packages, url: ctx.URL });
 
     // Run init actions.
     Object.values(store.actions).forEach(({ init }) => {
