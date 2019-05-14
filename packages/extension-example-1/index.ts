@@ -15,6 +15,11 @@ interface ExtensionExample1 extends Package {
   };
   actions: {
     extension1: {
+      init: Action<ExtensionExample1>;
+      beforeSSR: Action<ExtensionExample1>;
+      beforeCSR: Action<ExtensionExample1>;
+      afterSSR: Action<ExtensionExample1>;
+      afterCSR: Action<ExtensionExample1>;
       action1: Action<ExtensionExample1>;
       action2: Action<ExtensionExample1, number>;
     };

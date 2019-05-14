@@ -1,5 +1,5 @@
 import React from "react";
-import Package from "../../type";
+import Package from "../..";
 import { Connect } from "frontity/types";
 import { Head, connect } from "frontity";
 
@@ -32,6 +32,21 @@ const ExtensionExample1: Package = {
   },
   actions: {
     extension1: {
+      init: ({ state }) => {
+        console.log("init");
+      },
+      beforeSSR: ({ state }) => {
+        console.log("beforeSSR");
+      },
+      afterSSR: ({ state }) => {
+        console.log("afterSSR");
+      },
+      beforeCSR: ({ state }) => {
+        console.log("beforeCSR");
+      },
+      afterCSR: ({ state }) => {
+        console.log("afterCSR");
+      },
       action1: ({ state }) => {
         state.extension1.prop1 = 2;
       },
