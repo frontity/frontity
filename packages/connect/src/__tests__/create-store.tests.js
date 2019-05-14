@@ -10,40 +10,50 @@ beforeEach(() => {
       prop1: 1,
       nested1: {
         prop2: 2,
-        prop3: state => state.prop1 + state.nested1.prop2,
-        prop4: state => num => state.nested1.prop3 + num,
+        prop3: ({ state }) => state.prop1 + state.nested1.prop2,
+        prop4: ({ state }) => num => state.nested1.prop3 + num,
         prop5: 0
       }
     },
     actions: {
-      action1: state => {
+      action1: ({ state }) => {
         state.prop1 = "action1";
       },
       nested1: {
-        action2: state => {
+        action2: ({ state }) => {
           state.prop1 = "action2";
+          return state.prop1;
         }
       },
       nested2: {
         nested3: {
-          action3: state => {
+          action3: ({ state }) => {
             state.nested1.prop5 = state.nested1.prop3;
           },
-          action4: state => {
+          action4: ({ state }) => {
             state.nested1.prop5 = state.nested1.prop4(2);
           },
-          action5: state => num => {
+          action5: ({ state }) => num => {
             state.nested1.prop5 = state.nested1.prop4(num);
           }
         }
       },
-      action6: async state => {
+      action6: async ({ state }) => {
         await delay();
         state.prop1 = "action6";
+        return state.prop1;
       },
-      action7: state => async num => {
+      action7: ({ state }) => async num => {
         await delay();
         state.prop1 = num;
+      },
+      action8: ({ actions }) => {
+        actions.action1();
+      },
+      action9: async ({ state, actions }) => {
+        const prop1 = state.prop1;
+        await actions.action7(3);
+        state.prop1 = `${state.prop1} ${prop1}`;
       }
     }
   };
@@ -113,6 +123,29 @@ describe("createStore actions", () => {
       expect(store.state.prop1).toBe(7);
       done();
     });
+  });
+
+  it("should run other actions", () => {
+    const store = createStore(config);
+    store.actions.action8();
+    expect(store.state.prop1).toBe("action1");
+  });
+
+  it("should be able to wait for other actions", async () => {
+    const store = createStore(config);
+    await store.actions.action9();
+    expect(store.state.prop1).toBe("3 1");
+  });
+
+  it("should not return anything", () => {
+    const store = createStore(config);
+    expect(store.actions.nested1.action2()).toBe(undefined);
+  });
+
+  it("should not return anything even with promises", async () => {
+    const store = createStore(config);
+    const res = await store.actions.action6();
+    expect(res).toBe(undefined);
   });
 });
 

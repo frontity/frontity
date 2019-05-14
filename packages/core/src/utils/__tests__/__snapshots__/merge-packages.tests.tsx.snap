@@ -2,11 +2,19 @@
 
 exports[`mergePackages should output a merged packages 1`] = `
 Object {
-  "actions": Object {},
+  "actions": Object {
+    "namespace1": Object {
+      "action1": [Function],
+      "action2": [Function],
+    },
+  },
   "fills": Object {},
   "libraries": Object {
     "namespace3": Object {
       "lib1": "lib1",
+    },
+    "namespace4": Object {
+      "lib2": "lib2",
     },
   },
   "roots": Object {
@@ -35,7 +43,6 @@ Object {
     },
     "namespace4": Object {
       "prop4": "prop4",
-      "prop5": [Function],
     },
   },
 }

@@ -61,14 +61,18 @@ export default ({ packages }) => {
     const store = createStore({ settings, packages, url: ctx.URL });
 
     // Run init actions.
-    Object.values(store.actions).forEach(({ init }) => {
-      if (init) init();
-    });
+    await Promise.all(
+      Object.values(store.actions).map(({ init }) => {
+        if (init) return init();
+      })
+    );
 
     // Run beforeSSR actions.
-    Object.values(store.actions).forEach(({ beforeSSR }) => {
-      if (beforeSSR) beforeSSR();
-    });
+    await Promise.all(
+      Object.values(store.actions).map(({ beforeSSR }) => {
+        if (beforeSSR) return beforeSSR();
+      })
+    );
 
     const Component = <App store={store} />;
 
@@ -129,6 +133,11 @@ export default ({ packages }) => {
     // Write the template to body.
     ctx.body = template({ html, frontity, head });
     next();
+
+    // Run afterSSR actions.
+    Object.values(store.actions).forEach(({ afterSSR }) => {
+      if (afterSSR) afterSSR();
+    });
   });
 
   return app.callback();

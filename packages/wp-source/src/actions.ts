@@ -1,13 +1,9 @@
-import WpSource from "../../";
-import { normalizePath } from "./utils";
-import { wpOrg, wpCom } from "../libraries/patterns/";
+import WpSource from "../";
+import normalizePath from "./utils/normalize-path";
+import { wpOrg, wpCom } from "./libraries/patterns";
 
-const actions = ({
-  libraries
-}: {
-  libraries: WpSource["libraries"];
-}): WpSource["actions"]["source"] => ({
-  fetch: state => async pathOrObj => {
+const actions: WpSource["actions"]["source"] = {
+  fetch: ({ state, libraries }) => async pathOrObj => {
     const { source } = state;
     const { resolver } = libraries.source;
 
@@ -41,7 +37,7 @@ const actions = ({
     source.dataMap[path].isFetching = false;
   },
 
-  init: state => {
+  init: ({ state, libraries }) => {
     const { apiUrl, isCom } = state.source;
     const { api, resolver } = libraries.source;
 
@@ -50,6 +46,6 @@ const actions = ({
     const patterns = isCom ? wpCom : wpOrg;
     patterns.forEach(({ pattern, handler }) => resolver.add(pattern, handler));
   }
-});
+};
 
 export default actions;

@@ -1,4 +1,4 @@
-import Api from "../../../libraries/api";
+import Api from "../../libraries/api";
 
 function mockFn<F extends (...args: any) => any>() {
   return jest.fn<ReturnType<F>, Parameters<F>>();
@@ -14,7 +14,7 @@ const mock = jest.fn<Api, []>().mockImplementation(() => {
     isCom: false,
     init: mockInit,
     get: mockGet,
-    getIdBySlug: mockGetIdBySlug,
+    getIdBySlug: mockGetIdBySlug
   };
 });
 

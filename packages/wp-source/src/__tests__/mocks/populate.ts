@@ -1,4 +1,4 @@
-import WpSource from "../../../../";
+import WpSource from "../../..";
 
 type Populate = WpSource["libraries"]["source"]["populate"];
 

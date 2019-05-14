@@ -1,7 +1,7 @@
 import { createStore } from "@frontity/connect";
 import { Package } from "@frontity/types";
 import { NormalizedSettings } from "@frontity/file-settings";
-import { mergePackages } from "../utils/packages";
+import mergePackages from "../utils/merge-packages";
 import initialState from "./utils/initial-state";
 
 export default ({

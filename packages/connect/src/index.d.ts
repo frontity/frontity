@@ -37,14 +37,28 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 type FilterInjectedProps<T extends Store> = Omit<T, "state" | "actions">;
 
 export type Action<St extends Store, Input = null> = [Input] extends [null]
-  ? (state: ResolveState<St["state"]>) => void
-  : (state: ResolveState<St["state"]>) => (input: Input) => void;
+  ? (
+      store: Omit<St, "state" | "actions"> & {
+        state: ResolveState<St["state"]>;
+        actions: ResolveActions<St["actions"]>;
+      }
+    ) => void
+  : (
+      store: Omit<St, "state" | "actions"> & {
+        state: ResolveState<St["state"]>;
+        actions: ResolveActions<St["actions"]>;
+      }
+    ) => (input: Input) => void;
 
 export type Derived<St extends Store, InputOrOutput, Output = null> = [
   Output
 ] extends [null]
-  ? (state: ResolveState<St["state"]>) => InputOrOutput
-  : (state: ResolveState<St["state"]>) => (input: InputOrOutput) => Output;
+  ? ({ state }: { state: ResolveState<St["state"]> }) => InputOrOutput
+  : ({
+      state
+    }: {
+      state: ResolveState<St["state"]>;
+    }) => (input: InputOrOutput) => Output;
 
 export type Connect<St extends Store, Props extends object = {}> = Omit<
   St,

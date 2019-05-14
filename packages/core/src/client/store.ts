@@ -1,6 +1,6 @@
 import { createStore } from "@frontity/connect";
 import { Package } from "@frontity/types";
-import { mergePackages } from "../utils/packages";
+import mergePackages from "../utils/merge-packages";
 
 export default ({
   packages,

@@ -3,7 +3,7 @@ import { writeFile, ensureDir, pathExists } from "fs-extra";
 import { flatten, uniqBy, uniq } from "lodash";
 import { Site } from "@frontity/file-settings";
 import { EntryPoints, Mode } from "../../types";
-import { getVariable } from "../../utils/packages";
+import getVariable from "../../utils/get-variable";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 

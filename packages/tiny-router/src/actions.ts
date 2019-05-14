@@ -3,7 +3,7 @@ import { parsePath } from "./utils";
 
 let isPopState = false;
 
-export const set: TinyRouter["actions"]["router"]["set"] = state => pathOrObj => {
+export const set: TinyRouter["actions"]["router"]["set"] = ({ state }) => pathOrObj => {
   let path: string;
   let page: number;
 
@@ -23,7 +23,10 @@ export const set: TinyRouter["actions"]["router"]["set"] = state => pathOrObj =>
   }
 };
 
-export const init: TinyRouter["actions"]["router"]["init"] = state => {
+export const init: TinyRouter["actions"]["router"]["init"] = ({
+  state,
+  actions
+}) => {
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
     state.router.path = state.frontity.initial.path;
@@ -37,7 +40,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = state => {
     // Listen to changes in history.
     window.addEventListener("popstate", ({ state: { path, page } }) => {
       isPopState = true;
-      set(state)({ path, page });
+      actions.router.set({ path, page });
     });
   }
 };

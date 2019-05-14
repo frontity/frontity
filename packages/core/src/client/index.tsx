@@ -23,19 +23,28 @@ export default async ({ packages }) => {
       const store = createStore({ state, packages });
 
       // Run init actions.
-      Object.values(store.actions).forEach(({ init }) => {
-        if (init) init();
-      });
+      await Promise.all(
+        Object.values(store.actions).map(({ init }) => {
+          if (init) return init();
+        })
+      );
 
       // Run beforeCSR actions.
-      Object.values(store.actions).forEach(({ beforeCSR }) => {
-        if (beforeCSR) beforeCSR();
-      });
+      await Promise.all(
+        Object.values(store.actions).map(({ beforeCSR }) => {
+          if (beforeCSR) return beforeCSR();
+        })
+      );
 
       window["frontity"] = store;
 
       loadableReady(() => {
         hydrate(<App store={store} />, window.document.getElementById("root"));
+
+        // Run afterCSR actions.
+        Object.values(store.actions).forEach(({ afterCSR }) => {
+          if (afterCSR) afterCSR();
+        });
       });
     } else
       console.warn(

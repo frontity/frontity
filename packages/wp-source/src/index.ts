@@ -1,16 +1,15 @@
 import WpSource from "..";
-import state from "./source/state";
-import actions from "./source/actions";
-
+import state from "./state";
+import actions from "./actions";
 import { Api, Resolver, populate } from "./libraries";
 
-const wpSource = ({ libraries }): WpSource => ({
+const wpSource: WpSource = {
   name: "@frontity/wp-source",
   state: {
     source: state
   },
   actions: {
-    source: actions({ libraries })
+    source: actions
   },
   libraries: {
     source: {
@@ -19,6 +18,6 @@ const wpSource = ({ libraries }): WpSource => ({
       populate
     }
   }
-});
+};
 
 export default wpSource;

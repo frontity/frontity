@@ -24,15 +24,15 @@ const package1: Package1 = {
       prop1: "prop1",
       prop2: 2,
       // Check that prop3 is a string (and not a function).
-      prop3: state => state.namespace1.prop3,
+      prop3: ({ state }) => state.namespace1.prop3,
       // Check that prop4 returns a number (and not a function).
-      prop4: state => str => state.namespace1.nested1.prop5(str),
+      prop4: ({ state }) => str => state.namespace1.nested1.prop5(str),
       nested1: {
         // Check that nested derived state functions are processed correctly.
-        prop5: state => str => state.namespace1.prop4(str),
+        prop5: ({ state }) => str => state.namespace1.prop4(str),
         nested2: {
           // Check that nested nested derived state is processed correctly.
-          prop6: state => state.namespace1.prop1.toLowerCase()
+          prop6: ({ state }) => state.namespace1.prop1.toLowerCase()
         }
       }
     }

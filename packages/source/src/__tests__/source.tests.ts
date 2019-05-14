@@ -8,7 +8,7 @@ const source1 = (libraries: Source["libraries"]): Source => {
   return {
     state: {
       source: {
-        data: state => pathOrObj => state.source.dataMap[""],
+        data: ({ state }) => pathOrObj => state.source.dataMap[""],
         dataMap: {},
         category: {},
         tag: {},
@@ -20,7 +20,7 @@ const source1 = (libraries: Source["libraries"]): Source => {
     },
     actions: {
       source: {
-        fetch: state => pathOrObj => {}
+        fetch: ({ state }) => pathOrObj => {}
       }
     },
     libraries: {
@@ -54,7 +54,7 @@ const source2: MySource = {
   state: {
     source: {
       api: "https://site.com/api",
-      data: state => pathOrObj => state.source.dataMap[""],
+      data: ({ state }) => pathOrObj => state.source.dataMap[""],
       dataMap: {},
       category: {},
       tag: {},
@@ -67,8 +67,8 @@ const source2: MySource = {
   },
   actions: {
     source: {
-      fetch: state => pathOrObj => {},
-      myOwnAction: state => {}
+      fetch: ({ state }) => pathOrObj => {},
+      myOwnAction: ({ state }) => {}
     }
   },
   libraries: {

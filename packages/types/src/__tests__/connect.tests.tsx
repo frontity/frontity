@@ -84,6 +84,11 @@ const internalProps: Connect<Package1, OwnProps> = {
   name: "nameProp"
 };
 
+internalProps.actions.namespace1.action1();
+internalProps.actions.namespace1.action2();
+internalProps.actions.namespace2.action3("123");
+internalProps.actions.namespace2.action4(123);
+
 const externalProps: FilterInjectedProps<Connect<Package1, OwnProps>> = {
   ownProp1: "ownProp1",
   name: "nameProp"

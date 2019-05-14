@@ -1,4 +1,4 @@
-import Resolver from "../../../libraries/resolver";
+import Resolver from "../../libraries/resolver";
 
 export const mockInit = jest.fn();
 export const mockAdd = jest.fn();

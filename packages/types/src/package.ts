@@ -1,3 +1,5 @@
+import { ResolveState, ResolveActions } from "./utils";
+
 export interface Package {
   name?: string;
   roots?: {
@@ -27,8 +29,24 @@ export interface Package {
   actions?: {
     [namespace: string]: {
       [action: string]:
-        | ((state: Package["state"]) => void)
-        | ((state: Package["state"]) => (input: any) => void);
+        | (({
+            state,
+            actions,
+            libraries
+          }: {
+            state: ResolveState<Package["state"]>;
+            actions: ResolveActions<Package["actions"]>;
+            libraries: Package["libraries"];
+          }) => void)
+        | (({
+            state,
+            actions,
+            libraries
+          }: {
+            state: ResolveState<Package["state"]>;
+            actions: ResolveActions<Package["actions"]>;
+            libraries: Package["libraries"];
+          }) => (input: any) => void);
     };
   };
   libraries?: {
