@@ -31,7 +31,7 @@ const actions: WpSource["actions"]["source"] = {
       await handler(source, { path, params, page, libraries });
       source.dataMap[path].isReady = true;
     } catch (e) {
-      console.warn(`An error ocurred fetching '${path}:'\n`, e);
+      console.warn(`An error ocurred fetching '${path}':\n`, e);
       source.dataMap[path].is404 = true;
     }
 
