@@ -1,22 +1,5 @@
 import React from "react";
-import { getVariable, mergePackages } from "../packages";
-
-describe("getVariable", () => {
-  it("should generate different variable names for different packages", () => {
-    expect(getVariable("@org/package", "mode")).not.toBe(
-      getVariable("org-package", "mode")
-    );
-    expect(getVariable("@org/package", "mode")).not.toBe(
-      getVariable("org.package", "mode")
-    );
-    expect(getVariable("org-package", "mode")).not.toBe(
-      getVariable("org.package", "mode")
-    );
-    expect(getVariable("@org/package", "html")).not.toBe(
-      getVariable("@org/package", "amp")
-    );
-  });
-});
+import mergePackages from "../merge-packages";
 
 describe("mergePackages", () => {
   const state = {
