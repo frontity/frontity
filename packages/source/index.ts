@@ -1,5 +1,4 @@
 import { Package, Action, Derived } from "@frontity/types";
-
 import { Data } from "./src/data";
 import { Taxonomy, PostType, Attachment, Author } from "./src/entities";
 
@@ -28,7 +27,7 @@ interface Source<T = null> extends Package {
   actions: {
     source: {
       fetch: Action<T extends null ? Source : T, PathOrObj>;
-      init?: Action<T extends null ? Source : T>;
+      init?: Action<Source>;
     };
   };
   libraries: {
