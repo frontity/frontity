@@ -2,13 +2,13 @@ import React from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
 
-const Header = () => {
+const Header = ({ state }) => {
   return (
     <Container>
       <StyledLink href="/">
-        <Title>This is a site title.</Title>
+        <Title>{state.frontity.title}</Title>
       </StyledLink>
-      <Description>This is a site description.</Description>
+      <Description>{state.frontity.description}</Description>
     </Container>
   );
 };

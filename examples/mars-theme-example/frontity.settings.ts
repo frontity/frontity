@@ -5,6 +5,13 @@ import WpSource from "@frontity/wp-source";
 
 const settings: Settings<MarsTheme | TinyRouter | WpSource> = {
   name: "mars-theme-example",
+  state: {
+    frontity: {
+      url: "https://test.frontity.io",
+      title: "Test Frontity Blog",
+      description: "Useful content for Frontity development"
+    }
+  },
   packages: [
     "@frontity/mars-theme",
     "@frontity/tiny-router",
@@ -12,7 +19,7 @@ const settings: Settings<MarsTheme | TinyRouter | WpSource> = {
       name: "@frontity/wp-source",
       state: {
         source: {
-          apiUrl: "https://test.frontity.io/wp-json/wp/v2/"
+          apiUrl: "https://test.frontity.io/wp-json/"
         }
       }
     }
