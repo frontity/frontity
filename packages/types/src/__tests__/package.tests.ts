@@ -39,21 +39,21 @@ const package1: Package1 = {
   state: {
     namespace1: {
       prop1: "prop1",
-      prop2: state => ""
+      prop2: ({ state }) => ""
     },
     namespace2: {
       prop3: "prop3",
       nested1: {
-        prop4: state => str => 1
+        prop4: ({ state }) => str => 1
       }
     }
   },
   actions: {
     namespace1: {
-      action1: (state, actions, libraries) => {}
+      action1: ({ state, actions, libraries }) => {}
     },
     namespace2: {
-      action2: state => str => {
+      action2: ({ state }) => str => {
         str.startsWith("");
       }
     }

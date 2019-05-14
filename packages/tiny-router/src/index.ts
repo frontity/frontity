@@ -7,7 +7,7 @@ const tinyRouter: TinyRouter = {
     router: {
       path: "/",
       page: 1,
-      location: state => {
+      location: ({ state }) => {
         return new URL(
           state.router.page > 1
             ? state.router.path.replace(/\/?$/, `/page/${state.router.page}/`)

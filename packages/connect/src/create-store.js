@@ -19,8 +19,8 @@ const getSnapshot = obj => {
   }
 };
 
-const convertToAction = (fn, state) => (...args) => {
-  const first = fn(state);
+const convertToAction = (fn, instance) => (...args) => {
+  const first = fn(instance);
   if (first instanceof Promise) return first;
   if (typeof first === "function") {
     const second = first(...args);
@@ -28,11 +28,11 @@ const convertToAction = (fn, state) => (...args) => {
   }
 };
 
-const convertedActions = (obj, state) => {
-  if (typeof obj === "function") return convertToAction(obj, state);
+const convertedActions = (obj, instance) => {
+  if (typeof obj === "function") return convertToAction(obj, instance);
   else if (obj instanceof Object) {
     return Object.keys(obj).reduce((newObj, key) => {
-      newObj[key] = convertedActions(obj[key], state);
+      newObj[key] = convertedActions(obj[key], instance);
       return newObj;
     }, {});
   }
@@ -40,10 +40,13 @@ const convertedActions = (obj, state) => {
 
 export const createStore = store => {
   const observableState = observable(store.state);
-  return {
+  const instance = {
     ...store,
     state: observableState,
-    actions: convertedActions(store.actions, observableState),
+    actions: {},
     getSnapshot: () => getSnapshot(store.state)
   };
+  const newActions = convertedActions(store.actions, instance);
+  Object.assign(instance.actions, newActions);
+  return instance;
 };

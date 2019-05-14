@@ -29,16 +29,24 @@ export interface Package {
   actions?: {
     [namespace: string]: {
       [action: string]:
-        | ((
-            state?: ResolveState<Package["state"]>,
-            actions?: ResolveActions<Package["actions"]>,
-            libraries?: Package["libraries"]
-          ) => void)
-        | ((
-            state?: ResolveState<Package["state"]>,
-            actions?: ResolveActions<Package["actions"]>,
-            libraries?: Package["libraries"]
-          ) => (input: any) => void);
+        | (({
+            state,
+            actions,
+            libraries
+          }: {
+            state: ResolveState<Package["state"]>;
+            actions: ResolveActions<Package["actions"]>;
+            libraries: Package["libraries"];
+          }) => void)
+        | (({
+            state,
+            actions,
+            libraries
+          }: {
+            state: ResolveState<Package["state"]>;
+            actions: ResolveActions<Package["actions"]>;
+            libraries: Package["libraries"];
+          }) => (input: any) => void);
     };
   };
   libraries?: {

@@ -55,10 +55,10 @@ describe("observable", () => {
   it("should run a function with the root observable as argument", () => {
     const obj = {
       prop1: 1,
-      prop2: obj => obj.prop1 + 1,
+      prop2: ({ state }) => state.prop1 + 1,
       nested1: {
-        prop3: obj => obj.prop1 + 2,
-        prop4: obj => obj.prop2 + obj.nested1.prop3
+        prop3: ({ state }) => state.prop1 + 2,
+        prop4: ({ state }) => state.prop2 + state.nested1.prop3
       }
     };
     const obs = observable(obj);
@@ -71,10 +71,11 @@ describe("observable", () => {
   it("should be able to return functions from root functions", () => {
     const obj = {
       prop1: 1,
-      prop2: obj => num => obj.prop1 + num,
+      prop2: ({ state }) => num => state.prop1 + num,
       nested1: {
-        prop3: obj => num => obj.prop1 + num,
-        prop4: obj => num => obj.prop2(num) + obj.nested1.prop3(num) + num
+        prop3: ({ state }) => num => state.prop1 + num,
+        prop4: ({ state }) => num =>
+          state.prop2(num) + state.nested1.prop3(num) + num
       }
     };
     const obs = observable(obj);

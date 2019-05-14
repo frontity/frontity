@@ -20,7 +20,7 @@ function get(target, key, receiver) {
   const result =
     !Array.isArray(target) && typeof target[key] === "function"
       ? // if it's a function, return the result of that function run with the root.
-        target[key](rawToProxy.get(root))
+        target[key]({ state: rawToProxy.get(root) })
       : // if it's not, return the real result.
         Reflect.get(target, key, receiver);
   // do not register (observable.prop -> reaction) pairs for well known symbols

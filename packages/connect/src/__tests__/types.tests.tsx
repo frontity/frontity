@@ -38,38 +38,40 @@ const config: Config = {
     prop1: 1,
     nested1: {
       prop2: 2,
-      prop3: state => state.prop1 + state.nested1.prop2,
-      prop4: state => num => state.nested1.prop3 + num,
+      prop3: ({ state }) => state.prop1 + state.nested1.prop2,
+      prop4: ({ state }) => num => state.nested1.prop3 + num,
       prop5: 5
     }
   },
   actions: {
-    action1: state => {
+    action1: ({ state }) => {
       state.prop1 = 11;
     },
     nested1: {
-      action2: state => {
+      action2: ({ state }) => {
         state.prop1 = 12;
       }
     },
     nested2: {
       nested3: {
-        action3: state => {
+        action3: ({ state, actions }) => {
+          actions.action1();
+          actions.nested2.nested3.action5(1);
           state.nested1.prop5 = state.nested1.prop3;
         },
-        action4: state => {
+        action4: ({ state }) => {
           state.nested1.prop5 = state.nested1.prop4(4);
         },
-        action5: state => num => {
+        action5: ({ state }) => num => {
           state.nested1.prop5 = state.nested1.prop4(num);
         }
       }
     },
-    action6: async state => {
+    action6: async ({ state }) => {
       await delay();
       state.prop1 = 6;
     },
-    action7: state => async num => {
+    action7: ({ state }) => async num => {
       await delay();
       state.prop1 = num;
     }

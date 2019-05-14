@@ -43,14 +43,14 @@ const package1: Package1 = {
     namespace1: {
       prop1: "prop1",
       prop2: 2,
-      prop3: state => state.namespace1.prop1,
-      prop4: state => str => str.length + state.namespace1.prop2,
+      prop3: ({ state }) => state.namespace1.prop1,
+      prop4: ({ state }) => str => str.length + state.namespace1.prop2,
       array1: ["item1", "item2"],
       nested1: {
-        prop5: state => str => str.length + state.namespace1.prop2,
+        prop5: ({ state }) => str => str.length + state.namespace1.prop2,
         array2: [3, 4],
         nested2: {
-          prop6: state => state.namespace1.prop1
+          prop6: ({ state }) => state.namespace1.prop1
         }
       }
     }
@@ -58,7 +58,7 @@ const package1: Package1 = {
   actions: {
     namespace1: {
       // Action without params.
-      action1: (state, actions, libraries) => {
+      action1: ({ state, actions, libraries }) => {
         state.namespace1.prop1 = "newProp";
         state.namespace1.prop2 = 3;
 
@@ -90,7 +90,7 @@ const package1: Package1 = {
         const str3: string = libraries.namespace1.lib1;
       },
       // Async Action without params.
-      action2: async (state, actions) => {
+      action2: async ({ state, actions }) => {
         state.namespace1.prop1 = "newProp";
         await Promise.resolve();
         const str1: string = state.namespace1.prop3;
@@ -102,13 +102,13 @@ const package1: Package1 = {
     },
     namespace2: {
       // Action with params.
-      action3: state => str => {
+      action3: ({ state }) => str => {
         state.namespace1.prop1 = str;
         const str1: string = state.namespace1.prop3 + str;
         const num1: number = state.namespace1.prop4(str);
       },
       // Async Action with params.
-      action4: state => async num => {
+      action4: ({ state }) => async num => {
         state.namespace1.prop2 = num;
         await Promise.resolve();
         const num1: number = state.namespace1.prop4("123") + num;
