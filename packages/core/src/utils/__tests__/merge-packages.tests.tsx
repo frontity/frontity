@@ -21,6 +21,11 @@ describe("mergePackages", () => {
         namespace2: {
           prop2: "prop2"
         }
+      },
+      actions: {
+        namespace1: {
+          action1: () => {}
+        }
       }
     },
     package_2_html: {
@@ -35,20 +40,29 @@ describe("mergePackages", () => {
           prop3: "prop3"
         }
       },
+      actions: {
+        namespace1: {
+          action2: () => () => {}
+        }
+      },
       libraries: {
         namespace3: {
           lib1: "lib1"
         }
       }
     },
-    package_3_html: ({ libraries }) => ({
+    package_3_html: () => ({
       roots: {
         namespace4: () => <div>"namespace4"</div>
       },
       state: {
         namespace4: {
-          prop4: "prop4",
-          prop5: () => libraries.namespace3.lib1
+          prop4: "prop4"
+        }
+      },
+      libraries: {
+        namespace4: {
+          lib2: "lib2"
         }
       }
     })
@@ -57,10 +71,5 @@ describe("mergePackages", () => {
   it("should output a merged packages", () => {
     const merged = mergePackages({ packages, state });
     expect(merged).toMatchSnapshot();
-  });
-
-  it("should get access to libraries", () => {
-    const merged = mergePackages({ packages, state });
-    expect(merged.state.namespace4.prop5()).toBe("lib1");
   });
 });

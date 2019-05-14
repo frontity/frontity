@@ -2,11 +2,7 @@ import { Package } from "@frontity/types";
 import deepmerge from "deepmerge";
 import getVariable from "./get-variable";
 
-type PackageFunction = ({
-  libraries
-}: {
-  libraries: Package["libraries"];
-}) => Package;
+type PackageFunction = () => Package;
 
 // Merge all packages together in a single config that can be passed
 // to createStore.
@@ -23,24 +19,15 @@ export default ({
     roots: {},
     fills: {},
     state: {},
-    actions: {}
-  };
-  const args: {
-    libraries: Package["libraries"];
-  } = {
+    actions: {},
     libraries: {}
   };
-  const packageExcludes = state.frontity.packages;
-  packageExcludes.forEach(name => {
+  state.frontity.packages.forEach(name => {
     const variable = getVariable(name, state.frontity.mode);
     const module = packages[variable];
-    const pkg = typeof module === "function" ? module(args) : module;
+    const pkg = typeof module === "function" ? module() : module;
     config = deepmerge(config, pkg, { clone: false });
   });
   config.state = deepmerge(config.state, state);
-  if (config.libraries)
-    Object.keys(config.libraries).forEach(namespace => {
-      args.libraries[namespace] = config.libraries[namespace];
-    });
   return config;
 };
