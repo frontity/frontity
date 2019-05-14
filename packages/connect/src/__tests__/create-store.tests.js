@@ -22,6 +22,7 @@ beforeEach(() => {
       nested1: {
         action2: ({ state }) => {
           state.prop1 = "action2";
+          return state.prop1;
         }
       },
       nested2: {
@@ -40,6 +41,7 @@ beforeEach(() => {
       action6: async ({ state }) => {
         await delay();
         state.prop1 = "action6";
+        return state.prop1;
       },
       action7: ({ state }) => async num => {
         await delay();
@@ -133,6 +135,17 @@ describe("createStore actions", () => {
     const store = createStore(config);
     await store.actions.action9();
     expect(store.state.prop1).toBe("3 1");
+  });
+
+  it("should not return anything", () => {
+    const store = createStore(config);
+    expect(store.actions.nested1.action2()).toBe(undefined);
+  });
+
+  it("should not return anything even with promises", async () => {
+    const store = createStore(config);
+    const res = await store.actions.action6();
+    expect(res).toBe(undefined);
   });
 });
 

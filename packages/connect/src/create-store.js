@@ -21,10 +21,12 @@ const getSnapshot = obj => {
 
 const convertToAction = (fn, instance) => (...args) => {
   const first = fn(instance);
-  if (first instanceof Promise) return first;
+  if (first instanceof Promise)
+    return new Promise(resolve => first.then(() => resolve()));
   if (typeof first === "function") {
     const second = first(...args);
-    if (second instanceof Promise) return second;
+    if (second instanceof Promise)
+      return new Promise(resolve => second.then(() => resolve()));
   }
 };
 
