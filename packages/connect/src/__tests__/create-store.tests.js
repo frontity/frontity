@@ -44,6 +44,14 @@ beforeEach(() => {
       action7: ({ state }) => async num => {
         await delay();
         state.prop1 = num;
+      },
+      action8: ({ actions }) => {
+        actions.action1();
+      },
+      action9: async ({ state, actions }) => {
+        const prop1 = state.prop1;
+        await actions.action7(3);
+        state.prop1 = `${state.prop1} ${prop1}`;
       }
     }
   };
@@ -113,6 +121,18 @@ describe("createStore actions", () => {
       expect(store.state.prop1).toBe(7);
       done();
     });
+  });
+
+  it("should run other actions", () => {
+    const store = createStore(config);
+    store.actions.action8();
+    expect(store.state.prop1).toBe("action1");
+  });
+
+  it("should be able to wait for other actions", async () => {
+    const store = createStore(config);
+    await store.actions.action9();
+    expect(store.state.prop1).toBe("3 1");
   });
 });
 
