@@ -27,15 +27,15 @@ const ExtensionExample1: Package = {
     },
     comments: {
       prop2: 2,
-      prop3: state => state.comments.prop2 + 1
+      prop3: ({ state }) => state.comments.prop2 + 1
     }
   },
   actions: {
     extension1: {
-      action1: state => {
+      action1: ({ state }) => {
         state.extension1.prop1 = 2;
       },
-      action2: state => num => {
+      action2: ({ state }) => num => {
         state.extension1.prop1 = num;
       }
     }
