@@ -6,13 +6,17 @@ import styled from "@emotion/styled";
 import Link from "./link";
 
 const List: React.FC<Connect<MarsTheme>> = ({ state }) => {
-  const { type }: { type?: string } =
-    state.source.data(state.router.path) || {};
+  // There is a problem with the types here.
+  const data: any = state.source.data(state.router.path);
+
+  console.log("still trying to render a list");
+
   return (
     <Container>
-      {Object.values(type ? state.source[type] : {}).map(item => (
-        <Item key={item.id} item={item} />
-      ))}
+      {/* {data.pages[state.router.page - 1].map((itemData: any) => {
+        const item = state.source[itemData.type][itemData.id];
+        return <Item key={item.id} item={item} />;
+      })} */}
     </Container>
   );
 };
@@ -27,9 +31,9 @@ const Item: React.FC<
 > = connect(({ item }) => (
   <ItemContainer>
     <Link href={item.link}>
-      <Title>{item.title.rendered}</Title>
+      <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
     </Link>
-    <Excerpt>{item.excerpt.rendered}</Excerpt>
+    <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
   </ItemContainer>
 ));
 

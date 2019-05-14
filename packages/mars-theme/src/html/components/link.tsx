@@ -8,6 +8,7 @@ const Link: React.FC<
 > = ({ actions, children, href, className }) => {
   const onClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    actions.source.fetch(href);
     actions.router.set(href);
   };
 
