@@ -7,12 +7,20 @@ import Post from "./post";
 const globalStyles = css`
   body {
     margin: 0;
-    background: #f0e7e7;
+    background-image: linear-gradient(
+      180deg,
+      rgba(66, 174, 228, 0.1),
+      rgba(66, 174, 228, 0)
+    );
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   a,
   a:visited {
     color: inherit;
+    text-decoration: none;
   }
 `;
 
@@ -34,7 +42,7 @@ export default connect(Theme);
 const Head = styled.div`
   display: flex;
   justify-content: center;
-  background-color: #c1440e;
+  background-color: #1f38c5;
 `;
 
 const Body = styled.div`

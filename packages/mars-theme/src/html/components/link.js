@@ -1,5 +1,10 @@
 import React from "react";
-import { connect } from "frontity";
+import { connect, styled } from "frontity";
+
+const A = styled.a`
+  color: rgb(31, 56, 197);
+  text-decoration: underline;
+`;
 
 const Link = ({ actions, children, href, className }) => {
   const onClick = event => {

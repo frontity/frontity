@@ -24,7 +24,7 @@ const Post = ({ state }) => {
 export default connect(Post);
 
 const Container = styled.div`
-  width: 800px;
+  max-width: 800px;
   margin: 0;
   list-style: none;
   padding: 24px;
