@@ -1,4 +1,4 @@
-import Type from "../../type";
+import Type from "../..";
 import ExtensionExample2 from "./";
 
 const beforeSSR: Type["actions"]["theme"]["beforeSSR"] = ({ state }) => {
