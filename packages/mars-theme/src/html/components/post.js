@@ -25,16 +25,18 @@ export default connect(Post);
 
 const Container = styled.div`
   max-width: 800px;
+  width: 100vw;
+  padding: 24px;
+  box-sizing: border-box;
   margin: 0;
   list-style: none;
-  padding: 24px;
 `;
 
 const Head = styled.div``;
 
 const Title = styled.h1`
   margin: 0;
-  color: #451804;
+  color: rgba(12, 17, 43);
 `;
 
 const Author = styled.p``;
