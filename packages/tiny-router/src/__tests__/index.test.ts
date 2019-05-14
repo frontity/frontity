@@ -75,7 +75,7 @@ describe("actions", () => {
     );
     expect(store.state.router).toMatchObject({
       page: 3,
-      path: "/category/some-category"
+      path: "/category/some-category/"
     });
   });
 
@@ -84,7 +84,34 @@ describe("actions", () => {
     store.actions.router.set("/category/some-category/page/4");
     expect(store.state.router).toMatchObject({
       page: 4,
-      path: "/category/some-category"
+      path: "/category/some-category/"
+    });
+  });
+
+  test("set() should work with a path of only page", () => {
+    const store = createStore(config);
+    store.actions.router.set("/page/2");
+    expect(store.state.router).toMatchObject({
+      page: 2,
+      path: "/"
+    });
+  });
+
+  test("set() should work with a url of only page", () => {
+    const store = createStore(config);
+    store.actions.router.set("https://frontity.org/page/3");
+    expect(store.state.router).toMatchObject({
+      page: 3,
+      path: "/"
+    });
+  });
+
+  test("set() should work with a path that contains `page` on it", () => {
+    const store = createStore(config);
+    store.actions.router.set("/this-path-contains-page/");
+    expect(store.state.router).toMatchObject({
+      page: 1,
+      path: "/this-path-contains-page/"
     });
   });
 

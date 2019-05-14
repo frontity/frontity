@@ -1,5 +1,5 @@
 import WpSource from "../";
-import normalizePath from "./utils/normalize-path";
+import parsePath from "./utils/parse-path";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
@@ -7,12 +7,14 @@ const actions: WpSource["actions"]["source"] = {
     const { source } = state;
     const { resolver } = libraries.source;
 
-    let path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
-    let page = typeof pathOrObj === "string" ? 1 : pathOrObj.page;
-    if (!page) page = 1;
+    let path: string;
+    let page: number;
 
-    // transform whole links to paths
-    path = normalizePath(path);
+    if (typeof pathOrObj === "string") {
+      ({ path, page } = parsePath(pathOrObj));
+    } else {
+      ({ path, page } = pathOrObj);
+    }
 
     // Get current data object
     const data = source.dataMap[path];

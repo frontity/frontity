@@ -24,7 +24,45 @@ Object {
   "frontity": Object {
     "initial": Object {
       "page": 2,
-      "path": "/category/nature",
+      "path": "/category/nature/",
+    },
+    "mode": "html",
+    "name": "site",
+    "packages": Array [
+      "package1",
+      "package2",
+    ],
+    "platform": "server",
+    "url": "https://site.com",
+  },
+}
+`;
+
+exports[`initialState should return a valid path and page with home 1`] = `
+Object {
+  "frontity": Object {
+    "initial": Object {
+      "page": 1,
+      "path": "/",
+    },
+    "mode": "html",
+    "name": "site",
+    "packages": Array [
+      "package1",
+      "package2",
+    ],
+    "platform": "server",
+    "url": "https://site.com",
+  },
+}
+`;
+
+exports[`initialState should return a valid path and page with paginated home 1`] = `
+Object {
+  "frontity": Object {
+    "initial": Object {
+      "page": 2,
+      "path": "/",
     },
     "mode": "html",
     "name": "site",
