@@ -71,9 +71,10 @@ const config: Config = {
       await delay();
       state.prop1 = 6;
     },
-    action7: ({ state }) => async num => {
+    action7: ({ state, extra }) => async num => {
       await delay();
       state.prop1 = num;
+      const n: number = extra.prop6;
     }
   },
   extra: {
