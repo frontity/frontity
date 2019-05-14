@@ -1,11 +1,8 @@
 import React from "react";
-import connect from "@frontity/connect";
-import { Connect } from "frontity/types";
-import MarsTheme from "../../..";
-import styled from "@emotion/styled";
+import { connect, styled } from "frontity";
 import Link from "./link";
 
-const Header: React.FC<Connect<MarsTheme>> = ({ state }) => {
+const Header = () => {
   return (
     <Container>
       <StyledLink href="/">

@@ -1,7 +1,6 @@
-import Theme from "./components/layout";
-import MarsTheme from "../../";
+import Theme from "./components/theme";
 
-const marsTheme: MarsTheme = {
+const marsTheme = {
   name: "@frontity/mars-theme",
   roots: {
     theme: Theme

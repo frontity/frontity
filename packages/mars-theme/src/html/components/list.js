@@ -1,41 +1,30 @@
 import React from "react";
-import connect from "@frontity/connect";
-import { Connect } from "frontity/types";
-import MarsTheme from "../../..";
-import styled from "@emotion/styled";
+import { connect, styled } from "frontity";
 import Link from "./link";
 
-const List: React.FC<Connect<MarsTheme>> = ({ state }) => {
-  // There is a problem with the types here.
-  const data: any = state.source.data(state.router.path);
+const List = ({ state }) => {
+  const data = state.source.data(state.router.path);
 
-  console.log("still trying to render a list");
+  // console.log("still trying to render a list");
 
   return (
     <Container>
-      {/* {data.pages[state.router.page - 1].map((itemData: any) => {
+      {data.pages[state.router.page - 1].map(itemData => {
         const item = state.source[itemData.type][itemData.id];
         return <Item key={item.id} item={item} />;
-      })} */}
+      })}
     </Container>
   );
 };
 
-const Item: React.FC<
-  Connect<
-    MarsTheme,
-    {
-      item: { id: number; title: string; excerpt: string };
-    }
-  >
-> = connect(({ item }) => (
+const Item = ({ item }) => (
   <ItemContainer>
     <Link href={item.link}>
       <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
     </Link>
     <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
   </ItemContainer>
-));
+);
 
 export default connect(List);
 

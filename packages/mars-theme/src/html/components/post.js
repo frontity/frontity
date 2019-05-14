@@ -1,16 +1,12 @@
 import React from "react";
-import connect from "@frontity/connect";
-import { Connect } from "frontity/types";
-import MarsTheme from "../../..";
-import styled from "@emotion/styled";
+import { connect, styled } from "frontity";
 
-const Post: React.FC<Connect<MarsTheme>> = ({ state }) => {
-  const { type, id }: { type?: string; id?: number } =
-    state.source.data(state.router.path) || {};
+const Post = ({ state }) => {
+  const { isReady, type, id } = state.source.data(state.router.path);
   const post = state.source[type][id];
   const author = state.source.author[post.author];
 
-  return (
+  return isReady ? (
     <Container>
       <Head>
         <Title>{post.title.rendered}</Title>
@@ -22,7 +18,7 @@ const Post: React.FC<Connect<MarsTheme>> = ({ state }) => {
         }}
       />
     </Container>
-  );
+  ) : null;
 };
 
 export default connect(Post);
