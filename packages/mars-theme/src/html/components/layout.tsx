@@ -15,8 +15,8 @@ const Theme: React.FC<Connect<MarsTheme>> = ({ state }) => (
       <Header />
     </Head>
     <Body>
-      {(state.source.data(state.router.path) || {}).isArchive && <List />}
-      {(state.source.data(state.router.path) || {}).isPost && <Post />}
+      {state.source.data(state.router.path).isArchive && <List />}
+      {state.source.data(state.router.path).isPost && <Post />}
     </Body>
   </>
 );
