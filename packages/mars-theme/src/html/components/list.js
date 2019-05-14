@@ -40,12 +40,10 @@ const ItemContainer = styled.li`
 `;
 
 const Title = styled.h1`
-  margin: 0;
   color: rgba(12, 17, 43);
 `;
 
-const Excerpt = styled.p`
-  margin: 0;
+const Excerpt = styled.div`
   line-height: 1.6em;
   color: rgba(12, 17, 43, 0.8);
 `;
