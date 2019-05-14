@@ -29,7 +29,7 @@ const Item: React.FC<
     <Link href={item.link}>
       <Title>{item.title.rendered}</Title>
     </Link>
-    <Excerpt>{item.excerpt.text}</Excerpt>
+    <Excerpt>{item.excerpt.rendered}</Excerpt>
   </ItemContainer>
 ));
 

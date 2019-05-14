@@ -3,6 +3,7 @@ import { get } from "koa-route";
 import serve from "koa-static";
 import mount from "koa-mount";
 import React from "react";
+import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { getSettings } from "@frontity/file-settings";
 import { ChunkExtractor } from "@loadable/server";
@@ -107,7 +108,7 @@ export default ({ packages }) => {
           : extractor.getScriptTags();
 
       // Add mutations to our scripts.
-      frontity.script = `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${JSON.stringify(
+      frontity.script = `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${htmlescape(
         store.getSnapshot()
       )}</script>\n${frontity.script}`;
     } else {
