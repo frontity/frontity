@@ -1,7 +1,7 @@
 import { Settings } from "frontity/types";
 import MarsTheme from "@frontity/mars-theme";
 import TinyRouter from "@frontity/tiny-router";
-import WpSource from "@frontity/wp-source/src/type";
+import WpSource from "@frontity/wp-source";
 
 const settings: Settings<MarsTheme | TinyRouter | WpSource> = {
   name: "mars-theme-example",
