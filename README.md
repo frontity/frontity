@@ -26,7 +26,7 @@
 > <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
 > <br />
 >
-> During the next months, Frontity will continue to be tested and improved, and new features will be added progressively.
+> Frontity will continue to be tested and improved during the next months, and new features will be added progressively.
 >
 > - Release Candidate Date: **June 10, 2019**
 > - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
@@ -83,7 +83,7 @@ This means everything is ready so you can jump in and create a new amazing WordP
 
 ---
 
-#### Curious? Learn how to start building your website with Frontity in a few minutes** >> [Get Started!](https://docs.frontity.org/getting-started)
+#### Curious? Learn how to start building your website with Frontity in a few minutes >> [Get Started!](https://docs.frontity.org/getting-started)
 
 ---
 
@@ -108,13 +108,13 @@ Oh, and by the way, **Frontity is extensible**. Right now we have extensions lik
 
 ---
 
-Discover all features here >> [Frontity features](https://docs.frontity.org/frontity-features).
+Discover all features here >> **[Frontity features](https://docs.frontity.org/frontity-features)**.
 
 ---
 
 # » How is Frontity organized?
 
-GitHub is where magic happens, but there are more channels where you can find information about the project, discuss about it and/or get involved:
+GitHub is where magic happens, but there are more channels where you can find information about the project, discuss about it and get involved:
 
 <ul>
   <li>📖 <strong>Docs</strong>: this is the place to learn how to build amazing sites with Frontity. <a href="https://docs.frontity.org/getting-started">Get started!</a></li>
