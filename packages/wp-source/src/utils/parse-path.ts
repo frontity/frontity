@@ -1,6 +1,4 @@
-export const parsePath = (
-  pathOrLink: string
-): { path: string; page: number } => {
+export default (pathOrLink: string): { path: string; page: number } => {
   let fullPath: string;
 
   try {
