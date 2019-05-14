@@ -68,6 +68,26 @@ describe("actions", () => {
     });
   });
 
+  test("set() should work with a full url", () => {
+    const store = createStore(config);
+    store.actions.router.set(
+      "https://frontity.org/category/some-category/page/3"
+    );
+    expect(store.state.router).toMatchObject({
+      page: 3,
+      path: "/category/some-category"
+    });
+  });
+
+  test("set() should work with a path with page", () => {
+    const store = createStore(config);
+    store.actions.router.set("/category/some-category/page/4");
+    expect(store.state.router).toMatchObject({
+      page: 4,
+      path: "/category/some-category"
+    });
+  });
+
   test("init() should add event listener to handle popstate events", () => {
     const store = createStore(config);
     store.actions.router.init();

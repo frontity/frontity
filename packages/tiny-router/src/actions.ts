@@ -1,12 +1,17 @@
 import TinyRouter from "..";
+import { parsePath } from "./utils";
 
 let isPopState = false;
 
-export const set: TinyRouter["actions"]["router"]["set"] = ({
-  state
-}) => pathOrObj => {
-  const path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
-  const page = typeof pathOrObj === "string" ? 1 : pathOrObj.page;
+export const set: TinyRouter["actions"]["router"]["set"] = ({ state }) => pathOrObj => {
+  let path: string;
+  let page: number;
+
+  if (typeof pathOrObj === "string") {
+    ({ path, page } = parsePath(pathOrObj));
+  } else {
+    ({ path, page } = pathOrObj);
+  }
 
   state.router.path = path;
   state.router.page = page;
@@ -37,8 +42,5 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       isPopState = true;
       actions.router.set({ path, page });
     });
-  }
-
-  if (typeof window !== "undefined") {
   }
 };
