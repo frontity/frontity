@@ -10,7 +10,6 @@ const globalStyles = css`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-
   a,
   a:visited {
     color: inherit;

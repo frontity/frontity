@@ -1,15 +1,12 @@
 import React from "react";
-import { connect, styled } from "frontity";
-
-const A = styled.a`
-  color: rgb(31, 56, 197);
-  text-decoration: underline;
-`;
+import { connect } from "frontity";
 
 const Link = ({ actions, children, href, className }) => {
   const onClick = event => {
     event.preventDefault();
+    // Fetch the data if it's not already fetched.
     actions.source.fetch(href);
+    // Set the router to the new url.
     actions.router.set(href);
   };
 

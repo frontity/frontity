@@ -1,16 +1,23 @@
 import React from "react";
 import { connect, styled } from "frontity";
 
-const Post = ({ state }) => {
-  const { isReady, type, id, isPost } = state.source.data(state.router.path);
-  const post = state.source[type][id];
+const Post = ({ state, actions }) => {
+  // Get info of current post.
+  const data = state.source.data(state.router.path);
+  // Get the the post.
+  const post = state.source[data.type][data.id];
+  // Get the author.
   const author = state.source.author[post.author];
 
-  return isReady ? (
+  // Prefetch home posts if they are not fetched yet.
+  actions.source.fetch("/");
+
+  return (
     <Container>
       <Head>
         <Title>{post.title.rendered}</Title>
-        {isPost && <Author>By {author.name}</Author>}
+        {/* Only output the author name if it's a post. */}
+        {data.isPost && <Author>By {author.name}</Author>}
       </Head>
       <Body
         dangerouslySetInnerHTML={{
@@ -18,7 +25,7 @@ const Post = ({ state }) => {
         }}
       />
     </Container>
-  ) : null;
+  );
 };
 
 export default connect(Post);
