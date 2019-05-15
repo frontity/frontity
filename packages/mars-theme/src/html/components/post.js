@@ -24,21 +24,42 @@ const Post = ({ state }) => {
 export default connect(Post);
 
 const Container = styled.div`
-  max-width: 800px;
-  width: 100vw;
-  padding: 24px;
-  box-sizing: border-box;
+  width: 840px;
   margin: 0;
-  list-style: none;
+  padding: 24px;
 `;
 
 const Head = styled.div``;
 
 const Title = styled.h1`
   margin: 0;
+  margin-top: 24px;
   color: rgba(12, 17, 43);
 `;
 
 const Author = styled.p``;
 
-const Body = styled.div``;
+const Body = styled.div`
+  line-height: 1.6em;
+  color: rgba(12, 17, 43, 0.8);
+
+  * {
+    max-width: 100%;
+  }
+
+  figure {
+    margin: 24px 0;
+    /* next line overrides an inline style of the figure element. */
+    width: 100% !important;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    figcaption {
+      font-size: 0.7em;
+    }
+  }
+`;

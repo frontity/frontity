@@ -7,12 +7,6 @@ import Post from "./post";
 const globalStyles = css`
   body {
     margin: 0;
-    background-image: linear-gradient(
-      180deg,
-      rgba(66, 174, 228, 0.1),
-      rgba(66, 174, 228, 0)
-    );
-    height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
@@ -32,7 +26,7 @@ const Theme = ({ state }) => (
     </Head>
     <Body>
       {state.source.data(state.router.path).isArchive && <List />}
-      {state.source.data(state.router.path).isPost && <Post />}
+      {state.source.data(state.router.path).isPostType && <Post />}
     </Body>
   </>
 );
@@ -48,4 +42,9 @@ const Head = styled.div`
 const Body = styled.div`
   display: flex;
   justify-content: center;
+  background-image: linear-gradient(
+    180deg,
+    rgba(66, 174, 228, 0.1),
+    rgba(66, 174, 228, 0)
+  );
 `;

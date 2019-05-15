@@ -5,8 +5,6 @@ import Link from "./link";
 const List = ({ state }) => {
   const data = state.source.data(state.router.path);
 
-  // console.log("still trying to render a list");
-
   return (
     <Container>
       {data.pages[state.router.page - 1].map(itemData => {
@@ -29,10 +27,10 @@ const Item = ({ item }) => (
 export default connect(List);
 
 const Container = styled.ul`
-  width: 800px;
+  width: 840px;
   margin: 0;
-  list-style: none;
   padding: 24px;
+  list-style: none;
 `;
 
 const ItemContainer = styled.li`
@@ -41,6 +39,8 @@ const ItemContainer = styled.li`
 
 const Title = styled.h1`
   color: rgba(12, 17, 43);
+  margin: 0;
+  margin-top: 24px;
 `;
 
 const Excerpt = styled.div`

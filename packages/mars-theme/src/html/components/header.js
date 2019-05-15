@@ -16,7 +16,7 @@ const Header = ({ state }) => {
 export default connect(Header);
 
 const Container = styled.div`
-  width: 800px;
+  width: 840px;
   height: 80px;
   padding: 24px;
   color: #fff;
