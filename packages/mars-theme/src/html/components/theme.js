@@ -1,5 +1,5 @@
 import React from "react";
-import { Global, css, connect, styled } from "frontity";
+import { Global, css, connect, styled, Head } from "frontity";
 import Header from "./header";
 import List from "./list";
 import Post from "./post";
@@ -19,10 +19,14 @@ const globalStyles = css`
 
 const Theme = ({ state }) => (
   <>
-    <Global styles={globalStyles} />
     <Head>
-      <Header />
+      <title>{state.frontity.title}</title>
+      <html lang="en" />
     </Head>
+    <Global styles={globalStyles} />
+    <HeadContainer>
+      <Header />
+    </HeadContainer>
     <Body>
       {state.source.data(state.router.path).isArchive && <List />}
       {state.source.data(state.router.path).isPostType && <Post />}
@@ -32,7 +36,7 @@ const Theme = ({ state }) => (
 
 export default connect(Theme);
 
-const Head = styled.div`
+const HeadContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: #1f38c5;
