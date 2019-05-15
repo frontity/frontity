@@ -2,7 +2,7 @@
   "name": "frontity-monorepo",
   "private": true,
   "scripts": {
-    "test": "jest --clearCache && lerna run test:ci --stream",
+    "test": "jest --clearCache && lerna run test:ci --parallel",
     "cz": "git-cz",
     "prepare": "lerna bootstrap --hoist",
     "release": "lerna publish --yes",
