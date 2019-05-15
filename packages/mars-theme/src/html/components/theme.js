@@ -32,7 +32,7 @@ const Theme = ({ state }) => (
     </Head>
     <Body>
       {state.source.data(state.router.path).isArchive && <List />}
-      {state.source.data(state.router.path).isPost && <Post />}
+      {state.source.data(state.router.path).isPostType && <Post />}
     </Body>
   </>
 );
