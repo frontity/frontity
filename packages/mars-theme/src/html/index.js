@@ -8,7 +8,8 @@ const marsTheme = {
   actions: {
     theme: {
       beforeSSR: async ({ state, actions }) => {
-        await actions.source.fetch(state.router.path);
+        const { path, page } = state.router;
+        await actions.source.fetch({ path, page });
       }
     }
   }
