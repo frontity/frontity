@@ -3,7 +3,9 @@ import { parsePath } from "./utils";
 
 let isPopState = false;
 
-export const set: TinyRouter["actions"]["router"]["set"] = ({ state }) => pathOrObj => {
+export const set: TinyRouter["actions"]["router"]["set"] = ({
+  state
+}) => pathOrObj => {
   let path: string;
   let page: number;
 

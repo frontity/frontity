@@ -1,9 +1,9 @@
 import WpSource from "..";
-import normalizePath from "./utils/normalize-path";
+import parsePath from "./utils/parse-path";
 
 const state: WpSource["state"]["source"] = {
   data: ({ state }) => pathOrLink =>
-    state.source.dataMap[normalizePath(pathOrLink)],
+    state.source.dataMap[parsePath(pathOrLink).path] || {},
   dataMap: {},
   category: {},
   tag: {},

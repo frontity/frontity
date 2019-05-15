@@ -33,9 +33,11 @@ export function connect(Comp) {
       this.state = this.state || {};
       this.state[COMPONENT] = this;
 
+      this._isMounted = true;
+
       // create a reactive render for the component
       this.render = observe(this.render, {
-        scheduler: () => this.setState({}),
+        scheduler: () => this._isMounted && this.setState({}),
         lazy: true
       });
     }
@@ -91,8 +93,10 @@ export function connect(Comp) {
       if (super.componentWillUnmount) {
         super.componentWillUnmount();
       }
-      // clean up memory used by Easy State
+      // clean up memory used
       unobserve(this.render);
+      // don't use setState if it's unmounted.
+      this._isMounted = false;
     }
   }
 

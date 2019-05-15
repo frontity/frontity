@@ -15,11 +15,16 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "publishConfig": {
-    "access": "public"
+  "devDependencies": {
+    "frontity": "^0.1.0",
+    "@frontity/connect": "^0.1.0",
+    "@frontity/router": "^0.1.0",
+    "@frontity/source": "^0.1.0"
   }
 }

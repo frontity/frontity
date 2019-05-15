@@ -1,5 +1,3 @@
-import { ResolveState, ResolveActions } from "./utils";
-
 export interface Package {
   name?: string;
   roots?: {
@@ -34,18 +32,38 @@ export interface Package {
             actions,
             libraries
           }: {
-            state: ResolveState<Package["state"]>;
-            actions: ResolveActions<Package["actions"]>;
-            libraries: Package["libraries"];
+            state: {
+              [namespace: string]: {
+                [state: string]: any;
+              };
+            };
+            actions: {
+              [key: string]: {
+                [action: string]: any;
+              };
+            };
+            libraries: {
+              [key: string]: any;
+            };
           }) => void)
         | (({
             state,
             actions,
             libraries
           }: {
-            state: ResolveState<Package["state"]>;
-            actions: ResolveActions<Package["actions"]>;
-            libraries: Package["libraries"];
+            state: {
+              [namespace: string]: {
+                [state: string]: any;
+              };
+            };
+            actions: {
+              [key: string]: {
+                [action: string]: any;
+              };
+            };
+            libraries: {
+              [key: string]: any;
+            };
           }) => (input: any) => void);
     };
   };
@@ -59,13 +77,6 @@ export interface Package {
   // filters: {
   //   [namespace: string]: {
   //     [filter: string]: any;
-  //   };
-  // };
-  //
-  // Sagas are not supported yet.
-  // sagas: {
-  //   [namespace: string]: {
-  //     [saga: string]: any;
   //   };
   // };
 }

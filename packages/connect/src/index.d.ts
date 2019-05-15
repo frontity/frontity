@@ -1,4 +1,9 @@
-import { ComponentType, ComponentProps } from "react";
+import {
+  ComponentType,
+  ComponentProps,
+  FunctionComponent,
+  Component
+} from "react";
 
 interface Scheduler {
   add: Function;
@@ -91,9 +96,9 @@ export function createStore<St extends Store>(
   getSnapshot: () => St["state"];
 };
 
-declare function connect<Comp extends ComponentType<any>>(
-  comp: Comp
-): ComponentType<FilterInjectedProps<ComponentProps<Comp>>>;
+declare function connect<Props extends object>(
+  Component: React.ComponentType<Props>
+): FunctionComponent<FilterInjectedProps<Props>>;
 
 export const Provider: React.ProviderExoticComponent<React.ProviderProps<any>>;
 

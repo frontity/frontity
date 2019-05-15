@@ -5,7 +5,8 @@
     "test": "jest --clearCache && lerna run test:ci --stream",
     "cz": "git-cz",
     "prepare": "lerna bootstrap --hoist",
-    "release": "lerna publish --yes"
+    "release": "lerna publish --yes",
+    "reinstall": "lerna clean --yes && npm run prepare"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",

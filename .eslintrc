@@ -9,7 +9,8 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "@typescript-eslint/indent": "off"
+    "@typescript-eslint/indent": "off",
+    "react/prop-types": "off"
   },
   "env": {
     "browser": true,
