@@ -1,17 +1,23 @@
 import React from "react";
 import { connect, styled } from "frontity";
 
-const Post = ({ state }) => {
-  const { isReady, type, id, isPost } = state.source.data(state.router.path);
-  const post = state.source[type][id];
+const Post = ({ state, actions }) => {
+  // Get info of current post.
+  const data = state.source.data(state.router.path);
+  // Get the the post.
+  const post = state.source[data.type][data.id];
+  // Get the author.
   const author = state.source.author[post.author];
   const date = new Date(post.date);
 
-  return isReady ? (
+  // Prefetch home posts if they are not fetched yet.
+  actions.source.fetch("/");
+
+  return data.isReady ? (
     <Container>
       <Head>
         <Title>{post.title.rendered}</Title>
-        {isPost && (
+        {data.isPost && (
           <>
             <Author>
               By <b>{author.name}</b>

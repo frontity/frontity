@@ -3,12 +3,16 @@ import { connect, styled } from "frontity";
 import Link from "./link";
 
 const List = ({ state }) => {
-  const { isReady, pages } = state.source.data(state.router.path);
+  // Get the data of the current list.
+  const data = state.source.data(state.router.path);
+  // Get the items of the current page.
+  const items = data.pages[state.router.page - 1];
 
-  return isReady ? (
+  return data.isReady ? (
     <Container>
-      {pages[state.router.page - 1].map(itemData => {
-        const item = state.source[itemData.type][itemData.id];
+      {items.map(({ type, id }) => {
+        const item = state.source[type][id];
+        // Render one Item for each one.
         return <Item key={item.id} item={item} />;
       })}
     </Container>
