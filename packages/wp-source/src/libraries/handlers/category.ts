@@ -29,8 +29,6 @@ const categoryHandler: Handler = async (
       isCategory: true,
       isFetching: true
     };
-
-    state.dataMap[path] = data;
   }
 
   // 2. fetch the specified page if necessary
@@ -49,6 +47,8 @@ const categoryHandler: Handler = async (
     data.total = getTotal(response);
     data.totalPages = getTotalPages(response);
   }
+
+  state.dataMap[path] = data;
 };
 
 export default categoryHandler;
