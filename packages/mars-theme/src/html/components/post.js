@@ -2,7 +2,7 @@ import React from "react";
 import { connect, styled } from "frontity";
 
 const Post = ({ state }) => {
-  const { isReady, type, id } = state.source.data(state.router.path);
+  const { isReady, type, id, isPost } = state.source.data(state.router.path);
   const post = state.source[type][id];
   const author = state.source.author[post.author];
 
@@ -10,7 +10,7 @@ const Post = ({ state }) => {
     <Container>
       <Head>
         <Title>{post.title.rendered}</Title>
-        <Author>By {author.name}</Author>
+        {isPost && <Author>By {author.name}</Author>}
       </Head>
       <Body
         dangerouslySetInnerHTML={{

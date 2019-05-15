@@ -36,7 +36,6 @@ const dateHandler: Handler = async (
       isDate: true,
       isFetching: true
     };
-    state.dataMap[path] = data;
   }
 
   // 2. fetch the specified page if necessary
@@ -56,6 +55,8 @@ const dateHandler: Handler = async (
     data.total = getTotal(response);
     data.totalPages = getTotalPages(response);
   }
+
+  state.dataMap[path] = data;
 };
 
 export default dateHandler;

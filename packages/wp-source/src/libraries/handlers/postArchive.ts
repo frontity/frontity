@@ -23,8 +23,6 @@ const postArchiveHandler: Handler = async (
       isHome: true,
       isFetching: true
     };
-
-    state.dataMap[path] = data;
   }
 
   if (!data.pages[page - 1]) {
@@ -38,6 +36,8 @@ const postArchiveHandler: Handler = async (
     data.total = getTotal(response);
     data.totalPages = getTotalPages(response);
   }
+
+  state.dataMap[path] = data;
 };
 
 export default postArchiveHandler;
