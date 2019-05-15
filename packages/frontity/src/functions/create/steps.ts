@@ -13,7 +13,7 @@ import {
 } from "fs-extra";
 import { extract } from "tar";
 import fetch from "node-fetch";
-import { mergeRight, uniq } from "ramda";
+import { mergeRight } from "ramda";
 import { isPackageNameValid } from "../../utils";
 import { Options, PackageJson } from "./types";
 
@@ -61,17 +61,14 @@ export const ensureProjectDir = async ({ path }: Options): Promise<boolean> => {
 };
 
 // This function creates a `package.json` file.
-export const createPackageJson = async ({
-  name,
-  packages: selectedPackages,
-  theme,
-  path
-}: Options) => {
-  const mandatoryPackages = [
-    "frontity"
-    // "@frontity/core",
+export const createPackageJson = async ({ name, theme, path }: Options) => {
+  const packages = [
+    "frontity",
+    "@frontity/core",
+    "@frontity/file-settings",
+    "@frontity/wp-source",
+    "@frontity/tiny-router"
   ];
-  const packages = uniq(mandatoryPackages.concat(selectedPackages));
 
   // Add Frontity packages to the dependencies.
   const dependencies = (await Promise.all(
@@ -111,9 +108,30 @@ export const createPackageJson = async ({
 // This function creates a `frontity.settings` file.
 export const createFrontitySettings = async (
   extension: string,
-  { name, packages, path }: Options
+  { name, path }: Options
 ) => {
-  const frontitySettings = { name, packages };
+  const frontitySettings = {
+    name,
+    state: {
+      frontity: {
+        url: "https://test.frontity.io",
+        title: "Test Frontity Blog",
+        description: "Useful content for Frontity development"
+      }
+    },
+    packages: [
+      "@frontity/tiny-router",
+      "@frontity/mars-theme",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            apiUrl: "https://test.frontity.io/wp-json"
+          }
+        }
+      }
+    ]
+  };
   const fileTemplate = await readFile(
     resolvePath(__dirname, `../../../templates/settings-${extension}-template`),
     { encoding: "utf8" }
