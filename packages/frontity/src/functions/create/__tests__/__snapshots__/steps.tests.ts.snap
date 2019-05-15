@@ -73,9 +73,24 @@ Array [
     "/path/to/project/frontity.settings.js",
     "{
   \\"name\\": \\"random-name\\",
+  \\"state\\": {
+    \\"frontity\\": {
+      \\"url\\": \\"https://test.frontity.io\\",
+      \\"title\\": \\"Test Frontity Blog\\",
+      \\"description\\": \\"Useful content for Frontity development\\"
+    }
+  },
   \\"packages\\": [
-    \\"frontity\\",
-    \\"@frontity/file-settings\\"
+    \\"@frontity/tiny-router\\",
+    \\"@frontity/mars-theme\\",
+    {
+      \\"name\\": \\"@frontity/wp-source\\",
+      \\"state\\": {
+        \\"source\\": {
+          \\"apiUrl\\": \\"https://test.frontity.io/wp-json\\"
+        }
+      }
+    }
   ]
 }",
   ],
@@ -88,9 +103,24 @@ Array [
     "/path/to/project/frontity.settings.ts",
     "{
   \\"name\\": \\"random-name\\",
+  \\"state\\": {
+    \\"frontity\\": {
+      \\"url\\": \\"https://test.frontity.io\\",
+      \\"title\\": \\"Test Frontity Blog\\",
+      \\"description\\": \\"Useful content for Frontity development\\"
+    }
+  },
   \\"packages\\": [
-    \\"frontity\\",
-    \\"@frontity/file-settings\\"
+    \\"@frontity/tiny-router\\",
+    \\"@frontity/mars-theme\\",
+    {
+      \\"name\\": \\"@frontity/wp-source\\",
+      \\"state\\": {
+        \\"source\\": {
+          \\"apiUrl\\": \\"https://test.frontity.io/wp-json\\"
+        }
+      }
+    }
   ]
 }",
   ],
@@ -103,7 +133,16 @@ Array [
     "https://registry.npmjs.com/frontity",
   ],
   Array [
+    "https://registry.npmjs.com/@frontity/core",
+  ],
+  Array [
+    "https://registry.npmjs.com/@frontity/file-settings",
+  ],
+  Array [
     "https://registry.npmjs.com/@frontity/wp-source",
+  ],
+  Array [
+    "https://registry.npmjs.com/@frontity/tiny-router",
   ],
 ]
 `;
@@ -126,7 +165,10 @@ Array [
   },
   \\"dependencies\\": {
     \\"frontity\\": \\"^1.0.0\\",
-    \\"@frontity/wp-source\\": \\"^0.1.1\\",
+    \\"@frontity/core\\": \\"^1.0.0\\",
+    \\"@frontity/file-settings\\": \\"^1.0.0\\",
+    \\"@frontity/wp-source\\": \\"^1.0.0\\",
+    \\"@frontity/tiny-router\\": \\"^1.0.0\\",
     \\"@frontity/mars-theme\\": \\"./packages/mars-theme\\"
   }
 }
@@ -141,7 +183,16 @@ Array [
     "https://registry.npmjs.com/frontity",
   ],
   Array [
+    "https://registry.npmjs.com/@frontity/core",
+  ],
+  Array [
+    "https://registry.npmjs.com/@frontity/file-settings",
+  ],
+  Array [
     "https://registry.npmjs.com/@frontity/wp-source",
+  ],
+  Array [
+    "https://registry.npmjs.com/@frontity/tiny-router",
   ],
 ]
 `;
@@ -164,7 +215,10 @@ Array [
   },
   \\"dependencies\\": {
     \\"frontity\\": \\"^1.0.0\\",
-    \\"@frontity/wp-source\\": \\"^0.1.1\\",
+    \\"@frontity/core\\": \\"^1.0.0\\",
+    \\"@frontity/file-settings\\": \\"^1.0.0\\",
+    \\"@frontity/wp-source\\": \\"^1.0.0\\",
+    \\"@frontity/tiny-router\\": \\"^1.0.0\\",
     \\"random-theme\\": \\"./packages/random-theme\\"
   }
 }

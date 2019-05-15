@@ -118,11 +118,8 @@ describe("ensureProjectDir", () => {
 describe("createPackageJson", () => {
   beforeEach(() => {
     mockedFetch.default.mockReset();
-    mockedFetch.default.mockResolvedValueOnce({
+    mockedFetch.default.mockResolvedValue({
       json: () => Promise.resolve({ "dist-tags": { latest: "1.0.0" } })
-    } as any);
-    mockedFetch.default.mockResolvedValueOnce({
-      json: () => Promise.resolve({ "dist-tags": { latest: "0.1.1" } })
     } as any);
     mockedFsExtra.writeFile.mockReset();
   });
@@ -130,7 +127,6 @@ describe("createPackageJson", () => {
   test('works with a theme like "@frontity/mars-theme"', async () => {
     const options = {
       name: "random-name",
-      packages: ["@frontity/wp-source"],
       theme: "@frontity/mars-theme",
       path: "/path/to/project"
     };
@@ -142,7 +138,6 @@ describe("createPackageJson", () => {
   test('works with a theme like "mars-theme"', async () => {
     const options = {
       name: "random-name",
-      packages: ["@frontity/wp-source"],
       theme: "random-theme",
       path: "/path/to/project"
     };
