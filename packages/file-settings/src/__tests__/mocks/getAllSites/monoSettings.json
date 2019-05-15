@@ -1,0 +1,19 @@
+[
+  {
+    "name": "mono-settings",
+    "mode": "html",
+    "state": {},
+    "packages": [
+      {
+        "name": "@frontity/theme",
+        "active": true,
+        "state": {}
+      },
+      {
+        "name": "@frontity/wp-source",
+        "active": true,
+        "state": {}
+      }
+    ]
+  }
+]

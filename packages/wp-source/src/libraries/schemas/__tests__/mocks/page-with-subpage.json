@@ -1,0 +1,130 @@
+{
+  "id": 184,
+  "date": "2017-03-27T15:09:22",
+  "date_gmt": "2017-03-27T15:09:22",
+  "guid": { "rendered": "https://demo.worona.org/?page_id=184" },
+  "modified": "2018-03-23T15:35:51",
+  "modified_gmt": "2018-03-23T15:35:51",
+  "slug": "about-us",
+  "type": "page",
+  "link": "https://demo.worona.org/audio-test/about-us/",
+  "title": { "rendered": "About us" },
+  "content": {
+    "rendered":
+      "<h5>If you are just curious about our story you&#8217;re in the right spot \ud83d\ude42</h5>\n<p>This site features articles on cities in Europe and around the world. We\u2019re passionate about travelling\u2014 doing something fun, seeing cool things, and meeting different people.</p>\n<blockquote><p>\u201cTwenty years from now you will be more disappointed by the things you didn\u2019t do than by the ones you did do.\u201d \u2013 Mark Twain</p></blockquote>\n<p><img class=\"alignnone size-full wp-image-185\" src=\"https://demo.worona.org/wp-content/uploads/2017/03/pexels-photo-297755.png\" alt=\"about-us-team\" width=\"700\" height=\"458\" srcset=\"https://demo.worona.org/wp-content/uploads/2017/03/pexels-photo-297755.png 700w, https://demo.worona.org/wp-content/uploads/2017/03/pexels-photo-297755-300x196.png 300w\" sizes=\"(max-width: 700px) 85vw, 700px\" /></p>\n<h6><em>Alan Martin</em></h6>\n<p>Alan is a blogger and WordPress enthusiast. He loves\u00a0travelling, music and pizza.\u00a0Check out his latest post about\u00a0<a href=\"https://demo.worona.org/sunrise-at-phu-quoc-island/\">Ph\u00fa Qu\u1ed1c Island (Vietnam)</a>.</p>\n<h6><em>Reyes Mart\u00ednez</em></h6>\n<p>Reyes loves travelling, photography and\u00a0writing. Don&#8217;t miss her latest post about the amazing <a href=\"https://demo.worona.org/small-and-picturesque-french-villages/\">Picturesque French Villages</a>.</p>\n<h6><em>Luis Herranz</em></h6>\n<p>Luis is an entrepreneur that enjoys travelling and reading. In his latest post, he writes about India and The <a href=\"https://demo.worona.org/latest-trip-to-india/\">Taj Mahal</a>,\u00a0one of the universally admired masterpieces of the world\u2019s heritage.</p>\n<p><img class=\"alignnone size-full wp-image-193\" src=\"https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png\" alt=\"road-trip\" width=\"700\" height=\"467\" srcset=\"https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png 700w, https://demo.worona.org/wp-content/uploads/2017/03/road-trip-300x200.png 300w\" sizes=\"(max-width: 700px) 85vw, 700px\" /></p>\n<p>This is just a demo blog, but you might want to check out some of the really good travel bloggers out there:</p>\n<ul>\n<li><strong>Nomadic Matt</strong>. Each month over 1.000.000 people use his advice to travel better, cheaper, and longer.</li>\n<li><strong>Expert Vagabond</strong> by Matt &#8211; adventure travel photographer and professional blogger.</li>\n<li><strong>The Aussie Nomad</strong>\u00a0by Chris. He has been living abroad as an expat and exploring the world since the beginning of 2010.</li>\n</ul>\n<p>You can see the\u00a0full list of top travel blogs\u00a0<a href=\"http://www.theexpeditioner.com/the-top-50-travel-blogs/\">here</a>.</p>\n<h4>See you down the road!</h4>\n<p><iframe style=\"border: 0;\" src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31758.896101501236!2d13.36989231715827!3d52.510655459236325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84e373f035901%3A0x42120465b5e3b70!2sBerl%C3%ADn%2C+Alemania!5e0!3m2!1ses!2ses!4v1490629160374\" width=\"600\" height=\"450\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\"></iframe></p>\n",
+    "protected": false
+  },
+  "excerpt": {
+    "rendered":
+      "<p>If you are just curious about our story you&#8217;re in the right spot \ud83d\ude42 This site features articles on cities in Europe and around the world. We\u2019re passionate about travelling\u2014 doing something fun, seeing cool things, and meeting different people. \u201cTwenty years from now you will be more disappointed by the things you didn\u2019t do &hellip; <a href=\"https://demo.worona.org/audio-test/about-us/\" class=\"more-link\">Continue reading<span class=\"screen-reader-text\"> &#8220;About us&#8221;</span></a></p>\n",
+    "protected": false
+  },
+  "author": 1,
+  "featured_media": 0,
+  "parent": 211,
+  "menu_order": 0,
+  "comment_status": "closed",
+  "ping_status": "closed",
+  "template": "",
+  "meta": {},
+  "latest": ["page"],
+  "yoast_meta": { "title": "About us - Demo Worona" },
+  "_links": {
+    "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/pages/184" }],
+    "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/pages" }],
+    "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/page" }],
+    "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/1" }],
+    "replies": [
+      { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=184" }
+    ],
+    "version-history": [{ "href": "https://demo.worona.org/wp-json/wp/v2/pages/184/revisions" }],
+    "up": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/pages/211" }],
+    "wp:attachment": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media?parent=184" }],
+    "wp:term": [
+      {
+        "taxonomy": "latest",
+        "embeddable": true,
+        "href": "https://demo.worona.org/wp-json/wp/v2/latest?page=184"
+      }
+    ],
+    "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+  },
+  "_embedded": {
+    "author": [
+      {
+        "id": 1,
+        "name": "worona",
+        "url": "",
+        "description": "",
+        "link": "https://demo.worona.org/author/worona/",
+        "slug": "worona",
+        "avatar_urls": {
+          "24": "https://secure.gravatar.com/avatar/21b1a51669ce7b7111d18c7dc2616a7d?s=24&d=mm&r=g",
+          "48": "https://secure.gravatar.com/avatar/21b1a51669ce7b7111d18c7dc2616a7d?s=48&d=mm&r=g",
+          "96": "https://secure.gravatar.com/avatar/21b1a51669ce7b7111d18c7dc2616a7d?s=96&d=mm&r=g"
+        },
+        "_links": {
+          "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/1" }],
+          "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+        }
+      }
+    ],
+    "up": [
+      {
+        "id": 211,
+        "date": "2017-06-27T10:10:25",
+        "slug": "audio-test",
+        "type": "page",
+        "link": "https://demo.worona.org/audio-test/",
+        "title": { "rendered": "Audio TEST" },
+        "excerpt": {
+          "rendered":
+            "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. &nbsp;</p>\n",
+          "protected": false
+        },
+        "author": 6,
+        "latest": ["page"],
+        "yoast_meta": { "title": "Audio TEST - Demo Worona" },
+        "_links": {
+          "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/pages/211" }],
+          "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/pages" }],
+          "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/page" }],
+          "author": [
+            { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/6" }
+          ],
+          "replies": [
+            {
+              "embeddable": true,
+              "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=211"
+            }
+          ],
+          "version-history": [
+            { "href": "https://demo.worona.org/wp-json/wp/v2/pages/211/revisions" }
+          ],
+          "wp:attachment": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media?parent=211" }],
+          "wp:term": [
+            {
+              "taxonomy": "latest",
+              "embeddable": true,
+              "href": "https://demo.worona.org/wp-json/wp/v2/latest?page=211"
+            }
+          ],
+          "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+        }
+      }
+    ],
+    "wp:term": [
+      [
+        {
+          "id": "page",
+          "link": false,
+          "count": 4,
+          "name": "Pages",
+          "slug": "page",
+          "taxonomy": "latest",
+          "yoast_meta": { "title": "page" }
+        }
+      ]
+    ]
+  }
+}

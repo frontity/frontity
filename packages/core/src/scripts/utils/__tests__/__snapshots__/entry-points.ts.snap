@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateClientEntryPoints should avoid creating the client file at all if packages have no entry points 1`] = `Array []`;
+
+exports[`generateClientEntryPoints should write HMR code if in development 1`] = `
+"import client from \\"@frontity/core/src/client\\";
+import package1_html from \\"package1/src/html/client\\";
+import package2_html from \\"package2/src/html/client\\";
+
+const packages = {
+  package1_html,
+  package2_html,
+};
+
+export default client({ packages });
+
+if (module[\\"hot\\"]) {
+  module[\\"hot\\"].accept(
+    [
+      \\"@frontity/core/src/client\\",
+      \\"package1/src/html/client\\",
+      \\"package2/src/html/client\\",
+    ],
+    () => {
+      const client = require(\\"@frontity/core/src/client\\").default;
+      const package1_html = require(\\"package1/src/html/client\\").default;
+      const package2_html = require(\\"package2/src/html/client\\").default;
+      const packages = {
+        package1_html,
+        package2_html,
+      };
+      client({ packages });
+    }
+  );
+}"
+`;
+
+exports[`generateClientEntryPoints should write multiple client entry points 1`] = `
+Array [
+  Array [
+    "/build/bundling/entry-points/site-html",
+  ],
+  Array [
+    "/build/bundling/entry-points/site-amp",
+  ],
+  Array [
+    "/build/bundling/entry-points/site-2",
+  ],
+]
+`;
+
+exports[`generateClientEntryPoints should write multiple client entry points 2`] = `
+Object {
+  "in": Array [
+    Object {
+      "mode": "html",
+      "name": "site-html",
+      "packages": Array [
+        "package1",
+        "package2",
+        "package2",
+      ],
+    },
+    Object {
+      "mode": "amp",
+      "name": "site-amp",
+      "packages": Array [
+        "package1",
+        "package3",
+      ],
+    },
+    Object {
+      "mode": "html",
+      "name": "site-2",
+      "packages": Array [
+        "package1",
+      ],
+    },
+  ],
+  "out": Array [
+    Array [
+      "/build/bundling/entry-points/site-html/client.ts",
+      "import client from \\"@frontity/core/src/client\\";
+import package1_html from \\"package1/src/html/client\\";
+import package2_html from \\"package2/src/html/client\\";
+
+const packages = {
+  package1_html,
+  package2_html,
+};
+
+export default client({ packages });
+
+",
+      "utf8",
+    ],
+    Array [
+      "/build/bundling/entry-points/site-amp/client.ts",
+      "import client from \\"@frontity/core/src/client\\";
+import package1_amp from \\"package1/src/amp/client\\";
+import package3_amp from \\"package3/src/amp/client\\";
+
+const packages = {
+  package1_amp,
+  package3_amp,
+};
+
+export default client({ packages });
+
+",
+      "utf8",
+    ],
+    Array [
+      "/build/bundling/entry-points/site-2/client.ts",
+      "import client from \\"@frontity/core/src/client\\";
+import package1_html from \\"package1/src/html/client\\";
+
+const packages = {
+  package1_html,
+};
+
+export default client({ packages });
+
+",
+      "utf8",
+    ],
+  ],
+}
+`;
+
+exports[`generateClientEntryPoints should write multiple client entry points 3`] = `
+Array [
+  Object {
+    "name": "site-html",
+    "path": "/build/bundling/entry-points/site-html/client.ts",
+  },
+  Object {
+    "name": "site-amp",
+    "path": "/build/bundling/entry-points/site-amp/client.ts",
+  },
+  Object {
+    "name": "site-2",
+    "path": "/build/bundling/entry-points/site-2/client.ts",
+  },
+]
+`;
+
+exports[`generateClientEntryPoints should write one client entry point 1`] = `
+Array [
+  "/build/bundling/entry-points/site-1",
+]
+`;
+
+exports[`generateClientEntryPoints should write one client entry point 2`] = `
+Object {
+  "in": Array [
+    Object {
+      "mode": "html",
+      "name": "site-1",
+      "packages": Array [
+        "package1",
+        "package2",
+      ],
+    },
+  ],
+  "out": Array [
+    "/build/bundling/entry-points/site-1/client.ts",
+    "import client from \\"@frontity/core/src/client\\";
+import package1_html from \\"package1/src/html/client\\";
+import package2_html from \\"package2/src/html/client\\";
+
+const packages = {
+  package1_html,
+  package2_html,
+};
+
+export default client({ packages });
+
+",
+    "utf8",
+  ],
+}
+`;
+
+exports[`generateClientEntryPoints should write one client entry point 3`] = `
+Array [
+  Object {
+    "name": "site-1",
+    "path": "/build/bundling/entry-points/site-1/client.ts",
+  },
+]
+`;
+
+exports[`generateServerEntryPoint should write one server entry point for multiple sites 1`] = `
+Object {
+  "in": Array [
+    Object {
+      "mode": "html",
+      "name": "site-html",
+      "packages": Array [
+        "package1",
+        "package2",
+        "package2",
+      ],
+    },
+    Object {
+      "mode": "amp",
+      "name": "site-amp",
+      "packages": Array [
+        "package1",
+        "package3",
+      ],
+    },
+    Object {
+      "mode": "html",
+      "name": "site-2",
+      "packages": Array [
+        "package1",
+      ],
+    },
+  ],
+  "out": Array [
+    Array [
+      "/build/bundling/entry-points/server.ts",
+      "import server from \\"@frontity/core/src/server\\";
+import package1_html from \\"package1/src/html/server\\";
+import package2_html from \\"package2/src/html/server\\";
+import package1_amp from \\"package1/src/amp/server\\";
+import package3_amp from \\"package3/src/amp/server\\";
+
+const packages = {
+  package1_html,
+  package2_html,
+  package1_amp,
+  package3_amp,
+};
+
+export default server({ packages });
+
+",
+      "utf8",
+    ],
+  ],
+}
+`;
+
+exports[`generateServerEntryPoint should write one server entry point for multiple sites 2`] = `
+Object {
+  "name": "server",
+  "path": "/build/bundling/entry-points/server.ts",
+}
+`;
+
+exports[`generateServerEntryPoint should write one server entry point for one site 1`] = `
+Object {
+  "in": Array [
+    Object {
+      "mode": "html",
+      "name": "site-1",
+      "packages": Array [
+        "package1",
+        "package2",
+      ],
+    },
+  ],
+  "out": Array [
+    "/build/bundling/entry-points/server.ts",
+    "import server from \\"@frontity/core/src/server\\";
+import package1_html from \\"package1/src/html/server\\";
+import package2_html from \\"package2/src/html/server\\";
+
+const packages = {
+  package1_html,
+  package2_html,
+};
+
+export default server({ packages });
+
+",
+    "utf8",
+  ],
+}
+`;
+
+exports[`generateServerEntryPoint should write one server entry point for one site 2`] = `
+Object {
+  "name": "server",
+  "path": "/build/bundling/entry-points/server.ts",
+}
+`;

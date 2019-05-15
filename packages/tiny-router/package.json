@@ -1,0 +1,32 @@
+{
+  "name": "@frontity/tiny-router",
+  "version": "0.1.0",
+  "description": "Tiny Router for » Frontity projects",
+  "homepage": "https://github.com/frontity/frontity",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontity/frontity.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test:ci": "jest",
+    "test": "jest --watch",
+    "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+  },
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
+  "dependencies": {
+    "frontity": "^0.1.0"
+  },
+  "devDependencies": {
+    "@frontity/router": "^0.1.0",
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.2"
+  }
+}

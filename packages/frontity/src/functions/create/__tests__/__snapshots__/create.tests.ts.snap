@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create goes throw all steps 1`] = `
+Object {
+  "name": "random-name",
+  "path": "/path/to/project",
+}
+`;
+
+exports[`create goes throw all steps 2`] = `
+Array [
+  Array [
+    Object {
+      "name": "random-name",
+      "path": "/path/to/project",
+    },
+  ],
+]
+`;
+
+exports[`create goes throw all steps 3`] = `
+Array [
+  Array [
+    Object {
+      "name": "random-name",
+      "path": "/path/to/project",
+    },
+  ],
+]
+`;
+
+exports[`create goes throw all steps 4`] = `
+Array [
+  Array [
+    "js",
+    Object {
+      "name": "random-name",
+      "path": "/path/to/project",
+    },
+  ],
+]
+`;
+
+exports[`create goes throw all steps 5`] = `
+Array [
+  Array [
+    Object {
+      "name": "random-name",
+      "path": "/path/to/project",
+    },
+  ],
+]
+`;
+
+exports[`create goes throw all steps 6`] = `
+Array [
+  Array [
+    Object {
+      "name": "random-name",
+      "path": "/path/to/project",
+    },
+  ],
+]
+`;
+
+exports[`create uses the emitter passed to log messages 1`] = `
+Array [
+  Array [
+    "create",
+    "Ensuring [33m/path/to/project[39m directory.",
+    undefined,
+  ],
+  Array [
+    "create",
+    "Creating [33mpackage.json[39m.",
+    undefined,
+  ],
+  Array [
+    "create",
+    "Creating [33mfrontity.settings.js[39m.",
+    undefined,
+  ],
+  Array [
+    "create",
+    "Cloning [32mundefined[39m.",
+    undefined,
+  ],
+  Array [
+    "create",
+    "Installing dependencies.",
+    undefined,
+  ],
+  Array [
+    "create",
+    "Downloading [33mfavicon.ico[39m.",
+    undefined,
+  ],
+]
+`;
+
+exports[`create uses the emitter passed to log the errors 1`] = `
+Array [
+  Array [
+    "error",
+    [Error: Mocked Error],
+  ],
+]
+`;

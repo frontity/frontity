@@ -1,0 +1,85 @@
+{
+  "id": 211,
+  "date": "2017-06-27T10:10:25",
+  "date_gmt": "2017-06-27T10:10:25",
+  "guid": { "rendered": "https://demo.worona.org/?page_id=211" },
+  "modified": "2017-06-27T11:30:13",
+  "modified_gmt": "2017-06-27T11:30:13",
+  "slug": "audio-test",
+  "type": "page",
+  "link": "https://demo.worona.org/audio-test/",
+  "title": { "rendered": "Audio TEST" },
+  "content": {
+    "rendered":
+      "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>\n<!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->\n<audio class=\"wp-audio-shortcode\" id=\"audio-211-1\" preload=\"none\" style=\"width: 100%;\" controls=\"controls\"><source type=\"audio/mpeg\" src=\"https://demo.worona.org/wp-content/uploads/2017/06/Peter-Griffin-TADA.mp3?_=1\" /><a href=\"https://demo.worona.org/wp-content/uploads/2017/06/Peter-Griffin-TADA.mp3\">https://demo.worona.org/wp-content/uploads/2017/06/Peter-Griffin-TADA.mp3</a></audio>\n<p>&nbsp;</p>\n",
+    "protected": false
+  },
+  "excerpt": {
+    "rendered":
+      "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. &nbsp;</p>\n",
+    "protected": false
+  },
+  "author": 6,
+  "featured_media": 0,
+  "parent": 0,
+  "menu_order": 0,
+  "comment_status": "closed",
+  "ping_status": "closed",
+  "template": "",
+  "meta": {},
+  "latest": ["page"],
+  "yoast_meta": { "title": "Audio TEST - Demo Worona" },
+  "_links": {
+    "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/pages/211" }],
+    "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/pages" }],
+    "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/page" }],
+    "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/6" }],
+    "replies": [
+      { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=211" }
+    ],
+    "version-history": [{ "href": "https://demo.worona.org/wp-json/wp/v2/pages/211/revisions" }],
+    "wp:attachment": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media?parent=211" }],
+    "wp:term": [
+      {
+        "taxonomy": "latest",
+        "embeddable": true,
+        "href": "https://demo.worona.org/wp-json/wp/v2/latest?page=211"
+      }
+    ],
+    "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+  },
+  "_embedded": {
+    "author": [
+      {
+        "id": 6,
+        "name": "David Arenas",
+        "url": "http://worona.org",
+        "description": "",
+        "link": "https://demo.worona.org/author/david/",
+        "slug": "david",
+        "avatar_urls": {
+          "24": "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=24&d=mm&r=g",
+          "48": "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=48&d=mm&r=g",
+          "96": "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=96&d=mm&r=g"
+        },
+        "_links": {
+          "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/6" }],
+          "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+        }
+      }
+    ],
+    "wp:term": [
+      [
+        {
+          "id": "page",
+          "link": false,
+          "count": 4,
+          "name": "Pages",
+          "slug": "page",
+          "taxonomy": "latest",
+          "yoast_meta": { "title": "page" }
+        }
+      ]
+    ]
+  }
+}

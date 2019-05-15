@@ -1,0 +1,14 @@
+[
+  {
+    "name": "settings-one",
+    "mode": "html",
+    "state": {},
+    "packages": []
+  },
+  {
+    "name": "settings-two",
+    "mode": "html",
+    "state": {},
+    "packages": []
+  }
+]

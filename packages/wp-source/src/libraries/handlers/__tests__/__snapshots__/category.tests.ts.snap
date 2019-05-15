@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`category doesn't exist in source.category 1`] = `
+Object {
+  "/category/nature/": Object {
+    "id": 7,
+    "isArchive": true,
+    "isCategory": true,
+    "isFetching": true,
+    "isTaxonomy": true,
+    "pages": Array [
+      Array [
+        Object {
+          "id": 57,
+          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+          "type": "post",
+        },
+        Object {
+          "id": 54,
+          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+          "type": "post",
+        },
+      ],
+    ],
+    "taxonomy": "category",
+    "total": 10,
+    "totalPages": 5,
+  },
+}
+`;
+
+exports[`category doesn't exist in source.category 2`] = `
+Object {
+  "attachment": Array [
+    55,
+    77,
+    80,
+  ],
+  "author": Array [
+    1,
+    2,
+  ],
+  "category": Array [
+    3,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    54,
+    57,
+  ],
+  "tag": Array [
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+  ],
+}
+`;
+
+exports[`category exists in source.category but not in source.data 1`] = `
+Object {
+  "/category/nature/": Object {
+    "id": 7,
+    "isArchive": true,
+    "isCategory": true,
+    "isFetching": true,
+    "isTaxonomy": true,
+    "pages": Array [
+      Array [
+        Object {
+          "id": 57,
+          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+          "type": "post",
+        },
+        Object {
+          "id": 54,
+          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+          "type": "post",
+        },
+      ],
+    ],
+    "taxonomy": "category",
+    "total": 10,
+    "totalPages": 5,
+  },
+}
+`;
+
+exports[`category exists in source.category but not in source.data 2`] = `
+Object {
+  "attachment": Array [
+    55,
+    77,
+    80,
+  ],
+  "author": Array [
+    1,
+    2,
+  ],
+  "category": Array [
+    3,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    54,
+    57,
+  ],
+  "tag": Array [
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+  ],
+}
+`;
+
+exports[`category exists in source.data but doesn't have page 1`] = `
+Object {
+  "/category/nature/": Object {
+    "id": 7,
+    "isArchive": true,
+    "isCategory": true,
+    "isFetching": false,
+    "isReady": true,
+    "isTaxonomy": true,
+    "pages": Array [
+      Array [
+        Object {
+          "id": 57,
+          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+          "type": "post",
+        },
+        Object {
+          "id": 54,
+          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+          "type": "post",
+        },
+      ],
+    ],
+    "taxonomy": "category",
+    "total": 10,
+    "totalPages": 5,
+  },
+}
+`;
+
+exports[`category exists in source.data but doesn't have page 2`] = `
+Object {
+  "attachment": Array [
+    55,
+    77,
+    80,
+  ],
+  "author": Array [
+    1,
+    2,
+  ],
+  "category": Array [
+    3,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    54,
+    57,
+  ],
+  "tag": Array [
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+  ],
+}
+`;

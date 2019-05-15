@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src/scripts"],
+  "exclude": ["node_modules", "**/__tests__/*"],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "declaration": true,
+    "noEmit": false,
+    "allowJs": false,
+    "isolatedModules": false
+  }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "name": "settings-with-short-match",
+    "mode": "html",
+    "state": {},
+    "match": ["https://frontity.org.*"],
+    "packages": []
+  },
+  {
+    "name": "settings-with-large-match",
+    "mode": "html",
+    "state": {},
+    "match": ["https://frontity.org/page/.*"],
+    "packages": []
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "name": "multi-settings-html",
+    "mode": "html",
+    "state": {},
+    "packages": [
+      {
+        "name": "@frontity/theme-html",
+        "active": true,
+        "state": {}
+      },
+      {
+        "name": "@frontity/wp-source",
+        "active": true,
+        "state": {}
+      }
+    ]
+  },
+  {
+    "name": "unique-settings-amp",
+    "mode": "amp",
+    "state": {},
+    "packages": [
+      {
+        "name": "@frontity/theme-amp",
+        "active": true,
+        "state": {}
+      },
+      {
+        "name": "@frontity/wp-source",
+        "active": false,
+        "state": {}
+      }
+    ]
+  }
+]
