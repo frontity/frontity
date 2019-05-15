@@ -2,16 +2,14 @@ import React from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
 
-const Header = ({ state }) => {
-  return (
-    <Container>
-      <StyledLink href="/">
-        <Title>{state.frontity.title}</Title>
-      </StyledLink>
-      <Description>{state.frontity.description}</Description>
-    </Container>
-  );
-};
+const Header = ({ state }) => (
+  <Container>
+    <StyledLink href="/">
+      <Title>{state.frontity.title}</Title>
+    </StyledLink>
+    <Description>{state.frontity.description}</Description>
+  </Container>
+);
 
 export default connect(Header);
 

@@ -3,26 +3,38 @@ import { connect, styled } from "frontity";
 import Link from "./link";
 
 const List = ({ state }) => {
-  const data = state.source.data(state.router.path);
+  const { isReady, pages } = state.source.data(state.router.path);
 
-  return (
+  return isReady ? (
     <Container>
-      {data.pages[state.router.page - 1].map(itemData => {
+      {pages[state.router.page - 1].map(itemData => {
         const item = state.source[itemData.type][itemData.id];
         return <Item key={item.id} item={item} />;
       })}
     </Container>
-  );
+  ) : null;
 };
 
-const Item = ({ item }) => (
-  <ItemContainer>
-    <Link href={item.link}>
-      <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
-    </Link>
-    <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
-  </ItemContainer>
-);
+const Item = connect(({ state, item }) => {
+  const author = state.source.author[item.author];
+  const date = new Date(item.date);
+
+  return (
+    <ItemContainer>
+      <Link href={item.link}>
+        <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
+      </Link>
+      <Author>
+        By <b>{author.name}</b>
+      </Author>
+      <Fecha>
+        {" "}
+        on <b>{date.toDateString()}</b>
+      </Fecha>
+      <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
+    </ItemContainer>
+  );
+});
 
 export default connect(List);
 
@@ -41,6 +53,19 @@ const Title = styled.h1`
   color: rgba(12, 17, 43);
   margin: 0;
   margin-top: 24px;
+  margin-bottom: 8px;
+`;
+
+const Author = styled.p`
+  color: rgba(12, 17, 43, 0.9);
+  font-size: 0.9em;
+  display: inline;
+`;
+
+const Fecha = styled.p`
+  color: rgba(12, 17, 43, 0.9);
+  font-size: 0.9em;
+  display: inline;
 `;
 
 const Excerpt = styled.div`

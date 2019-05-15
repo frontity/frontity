@@ -1,16 +1,12 @@
 import React from "react";
-import { connect, styled } from "frontity";
-
-const A = styled.a`
-  color: rgb(31, 56, 197);
-  text-decoration: underline;
-`;
+import { connect } from "frontity";
 
 const Link = ({ actions, children, href, className }) => {
   const onClick = event => {
     event.preventDefault();
     actions.source.fetch(href);
     actions.router.set(href);
+    window.scrollTo(0, 0);
   };
 
   return (
