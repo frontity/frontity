@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test:ci": "jest",
     "test": "jest --clearCache && jest"

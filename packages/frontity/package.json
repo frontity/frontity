@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "node dist/commands.js",
     "dev": "ts-node src/commands.ts",

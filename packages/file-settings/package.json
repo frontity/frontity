@@ -15,6 +15,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
   "scripts": {
     "test:ci": "jest",
     "test": "jest --watch",
@@ -22,9 +25,6 @@
     "dev": "ts-node src/index.ts",
     "build": "tsc --project ./tsconfig.build.json",
     "prepublish": "npm run build"
-  },
-  "bugs": {
-    "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
     "ramda": "^0.26.1"
