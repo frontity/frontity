@@ -19,7 +19,11 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   state.router.page = page;
 
   if (state.frontity.platform === "client" && !isPopState) {
-    window.history.pushState({ path, page }, "", path);
+    const href =
+      state.router.page > 1
+        ? state.router.path.replace(/\/?$/, `/page/${state.router.page}/`)
+        : state.router.path;
+    window.history.pushState({ path, page }, "", href);
   } else {
     isPopState = false;
   }
