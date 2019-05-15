@@ -1,6 +1,6 @@
 {
   "name": "@frontity/connect",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A state manager that's easy to use and hackable at the same time.",
   "keywords": [
     "frontity",
@@ -22,7 +22,6 @@
     "test": "jest --watch",
     "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^24.0.11",
     "jest": "^24.7.1",

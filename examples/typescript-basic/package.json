@@ -1,6 +1,6 @@
 {
   "name": "typescript-basic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
   "scripts": {
@@ -13,10 +13,10 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "frontity": "^0.1.4",
-    "@frontity/core": "^0.2.0",
-    "@frontity/extension-example-1": "^1.0.0",
-    "@frontity/extension-example-2": "^1.0.0",
-    "@frontity/tiny-router": "^0.1.0"
+    "@frontity/core": "^0.3.0",
+    "@frontity/extension-example-1": "^1.0.1",
+    "@frontity/extension-example-2": "^1.0.1",
+    "@frontity/tiny-router": "^0.2.0",
+    "frontity": "^0.2.0"
   }
 }

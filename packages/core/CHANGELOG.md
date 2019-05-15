@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/frontity/frontity/compare/@frontity/core@0.2.0...@frontity/core@0.3.0) (2019-05-15)
+
+
+### Bug Fixes
+
+* **client:** do not load scripts if Proxy is not present ([55e4ca8](https://github.com/frontity/frontity/commit/55e4ca8))
+* **tsconfig-build:**  set 'allowJs' and 'isoltatedModules' to false ([cd8a26d](https://github.com/frontity/frontity/commit/cd8a26d))
+
+
+### Features
+
+* **client:** run init and beforeCSR actions on client ([#50](https://github.com/frontity/frontity/issues/50)) ([5b69984](https://github.com/frontity/frontity/commit/5b69984))
+
+
+
+
+
 # [0.2.0](https://github.com/frontity/frontity/compare/@frontity/core@0.1.2...@frontity/core@0.2.0) (2019-03-27)
 
 
