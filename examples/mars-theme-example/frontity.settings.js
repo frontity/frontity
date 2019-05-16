@@ -21,7 +21,8 @@ const settings = {
       name: "@frontity/wp-source",
       state: {
         source: {
-          apiUrl: "https://blog.com/wp-json/"
+          apiUrl: "https://test.frontity.io/",
+          isWPCom: false
         }
       }
     }
