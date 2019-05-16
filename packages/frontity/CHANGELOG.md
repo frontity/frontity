@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.8](https://github.com/frontity/frontity/compare/frontity@0.2.7...frontity@0.2.8) (2019-05-16)
+
+
+### Bug Fixes
+
+* **webpack:** fix bug with publicPath and dynamic imports ([#63](https://github.com/frontity/frontity/issues/63)) ([c6e99f5](https://github.com/frontity/frontity/commit/c6e99f5))
+
+
+
+
+
 ## [0.2.7](https://github.com/frontity/frontity/compare/frontity@0.2.6...frontity@0.2.7) (2019-05-16)
 
 

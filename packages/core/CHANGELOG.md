@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://github.com/frontity/frontity/compare/@frontity/core@0.3.3...@frontity/core@0.3.4) (2019-05-16)
+
+
+### Bug Fixes
+
+* **initial-state:** fix merge of package state ([262c75e](https://github.com/frontity/frontity/commit/262c75e))
+* **initial-state:** fix merge of package state ([#71](https://github.com/frontity/frontity/issues/71)) ([8c9771e](https://github.com/frontity/frontity/commit/8c9771e))
+* **initial-state:** overwrite arrays instead of merge ([31db03c](https://github.com/frontity/frontity/commit/31db03c))
+* **merge-packages:** don't clone to allow complex objects ([b1b127a](https://github.com/frontity/frontity/commit/b1b127a))
+* **webpack:** fix bug with publicPath and dynamic imports ([#63](https://github.com/frontity/frontity/issues/63)) ([c6e99f5](https://github.com/frontity/frontity/commit/c6e99f5))
+
+
+
+
+
 ## [0.3.3](https://github.com/frontity/frontity/compare/@frontity/core@0.3.2...@frontity/core@0.3.3) (2019-05-16)
 
 
