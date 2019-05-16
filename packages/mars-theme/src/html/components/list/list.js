@@ -1,6 +1,6 @@
 import React from "react";
 import { connect, styled } from "frontity";
-import Link from "./link";
+import Link from "../link";
 
 const List = ({ state }) => {
   // Get the data of the current list.

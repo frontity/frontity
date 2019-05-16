@@ -1,5 +1,6 @@
 import React from "react";
 import { connect, styled } from "frontity";
+import List from "./list";
 
 const Post = ({ state, actions }) => {
   // Get info of current post.
@@ -10,8 +11,9 @@ const Post = ({ state, actions }) => {
   const author = state.source.author[post.author];
   const date = new Date(post.date);
 
-  // Prefetch home posts if they are not fetched yet.
+  // Prefetch home posts and the list component.
   actions.source.fetch("/");
+  List.preload();
 
   return data.isReady ? (
     <Container>
