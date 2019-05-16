@@ -1,6 +1,6 @@
 {
   "name": "frontity",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Frontity cli and entry point to other packages",
   "keywords": [
     "frontity"
