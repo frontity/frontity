@@ -18,26 +18,23 @@ const globalStyles = css`
   }
 `;
 
-const Theme = ({ state }) => {
-  // console.log("data = ", state.source.data(state.router.path));
-  return (
-    <>
-      <Head>
-        <title>{state.frontity.title}</title>
-        <html lang="en" />
-      </Head>
-      <Global styles={globalStyles} />
-      <HeadContainer>
-        <Header />
-      </HeadContainer>
-      <Body>
-        {state.source.data(state.router.path).isArchive && <List />}
-        {state.source.data(state.router.path).isPostType && <Post />}
-        {state.source.data(state.router.path).is404 && <Page404 />}
-      </Body>
-    </>
-  );
-};
+const Theme = ({ state }) => (
+  <>
+    <Head>
+      <title>{state.frontity.title}</title>
+      <html lang="en" />
+    </Head>
+    <Global styles={globalStyles} />
+    <HeadContainer>
+      <Header />
+    </HeadContainer>
+    <Body>
+      {state.source.data(state.router.path).isArchive && <List />}
+      {state.source.data(state.router.path).isPostType && <Post />}
+      {state.source.data(state.router.path).is404 && <Page404 />}
+    </Body>
+  </>
+);
 
 export default connect(Theme);
 

@@ -26,6 +26,7 @@ Object {
     "isFetching": true,
     "month": 9,
     "pages": Array [
+      undefined,
       Array [
         Object {
           "id": 57,
@@ -107,6 +108,7 @@ Object {
     "isFetching": true,
     "month": undefined,
     "pages": Array [
+      undefined,
       Array [
         Object {
           "id": 60,
@@ -205,6 +207,7 @@ Object {
     "isFetching": true,
     "month": undefined,
     "pages": Array [
+      undefined,
       Array [
         Object {
           "id": 60,
