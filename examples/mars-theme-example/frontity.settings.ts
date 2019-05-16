@@ -9,7 +9,14 @@ const settings: Settings<MarsTheme | TinyRouter | WpSource> = {
     frontity: {
       url: "https://test.frontity.io",
       title: "Test Frontity Blog",
-      description: "Useful content for Frontity development"
+      description: "Useful content for Frontity development",
+      navbar: [
+        ["Home", "/"],
+        ["Nature", "/category/nature/"],
+        ["Travel", "/category/travel/"],
+        ["Japan", "/tag/japan/"],
+        ["About Us", "/about-us/"]
+      ]
     }
   },
   packages: [

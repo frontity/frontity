@@ -45,7 +45,7 @@ const Item = connect(({ state, item }) => {
 export default connect(List);
 
 const Container = styled.ul`
-  width: 840px;
+  width: 800px;
   margin: 0;
   padding: 24px;
   list-style: none;
