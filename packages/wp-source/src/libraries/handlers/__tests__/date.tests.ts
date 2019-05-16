@@ -22,7 +22,7 @@ beforeEach(() => {
     author: {},
     attachment: {},
     apiUrl: "https://test.frontity.io",
-    isCom: false
+    isWPCom: false
   };
   // mock libraries
   libraries = {
@@ -35,7 +35,7 @@ beforeEach(() => {
       },
       api: {
         apiUrl: "https://test.frontity.io",
-        isCom: false,
+        isWPCom: false,
         init: jest.fn(),
         getIdBySlug: jest.fn(),
         get: jest.fn()

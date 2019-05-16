@@ -18,7 +18,7 @@ interface WpSource extends Source {
   state: {
     source: Source<WpSource>["state"]["source"] & {
       apiUrl: string;
-      isCom: boolean;
+      isWPCom: boolean;
     };
   };
   actions: {
