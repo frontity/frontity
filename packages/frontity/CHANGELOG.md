@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/frontity/frontity/compare/frontity@0.2.6...frontity@0.2.7) (2019-05-16)
+
+
+### Bug Fixes
+
+* **core-scripts:** fixes texts and core dependencies ([faf8761](https://github.com/frontity/frontity/commit/faf8761))
+
+
+
+
+
 ## [0.2.6](https://github.com/frontity/frontity/compare/frontity@0.2.5...frontity@0.2.6) (2019-05-16)
 
 
