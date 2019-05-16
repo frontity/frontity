@@ -8,19 +8,40 @@
   Create amazing sites using WordPress & React
 </h1>
 
+<p align="center">
+  <a href="https://frontity.org">frontity.org</a> |
+  <a href="https://docs.frontity.org/getting-started">Get Started</a> |
+  <a href="https://docs.frontity.org/frontity-features">Features</a> |
+  <a href="https://docs.frontity.org/getting-started">Docs</a> |
+  <a href="https://community.frontity.org/">Community</a> |
+  <a href="https://twitter.com/frontity">Twitter</a>
+</p>
+
 ---
 
 > **IMPORTANT NOTE!**
 >
-> We are working on the beta version.
+> Frontity framework is in **beta**. It allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this phase.
 >
-> - Beta Release Date: **May 10, 2019**
-> - Release Candidate Date: **May 31, 2019**
+> <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
+> <br />
+>
+> Frontity will continue to be tested and improved during the next months, and new features will be added progressively.
+>
+> - Release Candidate Date: **June 10, 2019**
 > - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
 >
-> #### Get notified when beta is released at [Frontity.org](https://frontity.org)!
+> #### Do you want to receive the latest framework updates and news? [Subscribe to our newsletter](https://frontity.org/#newsletter)!
 
 ---
+
+<ul>
+  <li><a href="#-what-is-frontity">What is Frontity?</a></li>
+  <li><a href="#-how-does-frontity-work">How does Frontity work?</a></li>
+  <li><a href="#-how-is-frontity-organized">How is Frontity organized?</a></li>
+  <li><a href="#-get-involved-">Get involved 🤗</a></li>
+  <li><a href="#-open-source">Open Source</a></li>
+</ul>
 
 # » What is Frontity?
 
@@ -60,9 +81,15 @@ In order to create a WordPress theme with React, developers need to learn and co
 
 This means everything is ready so you can jump in and create a new amazing WordPress theme using React right away! 🎉🚀
 
+---
+
+#### Curious? Learn how to start building your website with Frontity in a few minutes >> [Get Started!](https://docs.frontity.org/getting-started)
+
+---
+
 # » How does Frontity work?
 
-**Frontity** is a React app that lives in Node.js, separated from WordPress.
+**Frontity** apps live in Node.js, separated from WordPress.
 
 - It uses the WP API to retrieve content and generate the final HTML.
 - It is also capable to generate AMP pages with the same React code and CSS.
@@ -79,10 +106,39 @@ React is a JavaScript library. In order to generate HTML for the visitors or Goo
 
 Oh, and by the way, **Frontity is extensible**. Right now we have extensions like _Disqus comments, OneSignal notifications, Adsense, Doubleclick, SmartAds, Google Analytics, Google Tag Manager, Custom CSS or Custom HTML_. This means, Frontity Themes won't have to reinvent the wheel and include the same functionalities over and over.
 
-# » Open source
+---
 
-Frontity is licensed under the terms of the [Apache 2.0](https://github.com/frontity/frontity/blob/master/LICENSE) license.
+Discover all features here >> **[Frontity features](https://docs.frontity.org/frontity-features)**.
+
+---
+
+# » How is Frontity organized?
+
+GitHub is where magic happens, but there are more channels where you can find information about the project, discuss about it and get involved:
+
+<ul>
+  <li>📖 <strong>Docs</strong>: this is the place to learn how to build amazing sites with Frontity. <a href="https://docs.frontity.org/getting-started">Get started!</a></li>
+  <li>:family_man_woman_girl_boy: <strong>Community</strong>: use our forum to share any doubts, feedback and meet great people. This is your place too to share <a href="https://community.frontity.org/c/dev-talk-questions">how are you planning to use Frontity!</a></li>
+  <li>🐞 <strong>GitHub</strong>: we use GitHub for bugs and pull requests, doubts are solved at the community forum.</li>
+  <li>🗣 <strong>Social media</strong>: a more informal place to interact with Frontity users, reach out to us on <a href="https://twitter.com/frontity">Twitter.</a></li>
+  <li>💌 <strong>Newsletter</strong>: do you want to receive the latest framework updates and news? Subscribe <a href="https://twitter.com/frontity">here.</a></li>
+</ul>
 
 # » Get involved 🤗
 
-Do you love WordPress and React? Come join us at our [community forums](https://community.frontity.org)! ❤️
+Do you love WordPress and React? Got questions or feedback? We'd love to hear from you. Come join our [community forum](https://community.frontity.org)! ❤️ 
+
+Frontity also welcomes contributions. There are many ways to support the project (and get free swag)! If you don't know where to start, this guide might help >> [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute).
+
+
+# » Open source
+
+Frontity is licensed under the terms of the [Apache 2.0](https://github.com/frontity/frontity/blob/master/LICENSE) license.
+<br />
+<br />
+
+---
+
+Do you miss any important information? Check out [our docs](https://docs.frontity.org/getting-started) or [let us know](https://community.frontity.org/c/docs-and-tutorials).
+
+---

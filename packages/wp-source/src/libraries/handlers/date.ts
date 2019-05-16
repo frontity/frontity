@@ -39,10 +39,11 @@ const dateHandler: Handler = async (
   }
 
   // 2. fetch the specified page if necessary
-  if (!data.pages[page - 1]) {
+  if (!data.pages[page]) {
     const response = await api.get({
       endpoint: "posts",
       params: {
+        _embed: true,
         after: after.toISOString(),
         before: before.toISOString(),
         search: params.s,
@@ -50,7 +51,7 @@ const dateHandler: Handler = async (
       }
     });
     // populate response and add page to data
-    data.pages[page - 1] = await populate(state, response);
+    data.pages[page] = await populate(state, response);
     // and assign total and totalPages values
     data.total = getTotal(response);
     data.totalPages = getTotalPages(response);

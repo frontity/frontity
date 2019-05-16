@@ -12,6 +12,7 @@ Object {
   "libraries": Object {
     "namespace3": Object {
       "lib1": "lib1",
+      "lib2": MyLib {},
     },
     "namespace4": Object {
       "lib2": "lib2",

@@ -5,6 +5,11 @@ const marsTheme = {
   roots: {
     theme: Theme
   },
+  state: {
+    theme: {
+      menu: [["Home", "/"]]
+    }
+  },
   actions: {
     theme: {
       beforeSSR: async ({ state, actions }) => {

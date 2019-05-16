@@ -19,7 +19,7 @@ export default [
   },
   {
     pattern: "/category/(.*)/:slug", // subcategories
-    handler: page
+    handler: category
   },
   {
     pattern: "/tag/:slug",

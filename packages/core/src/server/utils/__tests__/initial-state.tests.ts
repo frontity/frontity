@@ -5,19 +5,36 @@ const settings = {
   mode: "html",
   state: {
     frontity: {
-      url: "https://site.com"
+      url: "https://site.com",
+      prop1: "prop1",
+      menu1: ["Home"]
     }
   },
   packages: [
     {
       name: "package1",
       active: true,
-      state: {}
+      state: {
+        frontity: {
+          prop1: "overwritten by package1",
+          menu1: ["Overwrrite by pacakge1", "With a second item"]
+        },
+        package1: {
+          prop2: "prop2"
+        }
+      }
     },
     {
       name: "package2",
       active: true,
-      state: {}
+      state: {
+        frontity: {
+          prop1: "overwritten by package2"
+        },
+        package2: {
+          prop3: "prop2"
+        }
+      }
     }
   ]
 };

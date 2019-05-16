@@ -12,7 +12,7 @@ const state: WpSource["state"]["source"] = {
   author: {},
   attachment: {},
   apiUrl: "https://test.frontity.io",
-  isCom: false
+  isWPCom: false
 };
 
 export default state;

@@ -16,15 +16,15 @@ const Pages = ({ state, actions }) => {
 
   return (
     <div>
-      {isPreviousPage && (
-        <Link path={state.router.path} page={state.router.page - 1}>
-          Previous
+      {isNextPage && (
+        <Link path={state.router.path} page={state.router.page + 1}>
+          <em>← Older posts</em>
         </Link>
       )}
       {isPreviousPage && isNextPage && " - "}
-      {isNextPage && (
-        <Link path={state.router.path} page={state.router.page + 1}>
-          Next
+      {isPreviousPage && (
+        <Link path={state.router.path} page={state.router.page - 1}>
+          <em>Newer posts →</em>
         </Link>
       )}
     </div>

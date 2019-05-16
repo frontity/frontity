@@ -4,14 +4,14 @@ const wpComBase = "https://public-api.wordpress.com/wp/v2/sites/";
 
 class Api {
   apiUrl = "";
-  isCom = false;
+  isWPCom = false;
 
   init(
     this: Api,
-    { apiUrl, isCom = false }: { apiUrl: string; isCom?: boolean }
+    { apiUrl, isWPCom = false }: { apiUrl: string; isWPCom?: boolean }
   ) {
     this.apiUrl = apiUrl;
-    this.isCom = isCom;
+    this.isWPCom = isWPCom;
   }
 
   get(
@@ -20,25 +20,23 @@ class Api {
       endpoint,
       params,
       apiUrl = this.apiUrl,
-      isCom = this.isCom
+      isWPCom = this.isWPCom
     }: {
       endpoint: string;
       params?: { [param: string]: any };
       apiUrl?: string;
-      isCom?: boolean;
+      isWPCom?: boolean;
     }
   ): Promise<Response> {
-    // Build the base URL depending on whether it is WP.com or WP.org
-    const baseUrl = isCom
-      ? `${wpComBase}${apiUrl.replace(/^https?:\/\//, "")}/`
-      : `${apiUrl}/wp-json`;
+    // Ensure there is a final slash
+    const baseUrl = apiUrl.replace(/\/?$/, "/");
 
     // Add the REST path depending on whether it should start
     // with "/wp/v2" or not
     const requestUrl =
-      isCom || endpoint.startsWith("/")
-        ? `${baseUrl}${endpoint}`
-        : `${baseUrl}/wp/v2/${endpoint}`;
+      isWPCom || endpoint.startsWith("/")
+        ? `${baseUrl}${endpoint.replace(/^\//, "")}`
+        : `${baseUrl}wp/v2/${endpoint}`;
 
     // Add query parameters
     const query = params
