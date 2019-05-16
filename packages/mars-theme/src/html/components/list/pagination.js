@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "frontity";
-import Link from "./link";
+import Link from "../link";
 
 const Pages = ({ state, actions }) => {
   const { totalPages } = state.source.data(state.router.path);
