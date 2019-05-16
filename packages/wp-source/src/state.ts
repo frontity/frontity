@@ -1,5 +1,5 @@
 import WpSource from "..";
-import parsePath from "./utils/parse-path";
+import { parsePath } from "./utils/parse-path";
 
 const state: WpSource["state"]["source"] = {
   data: ({ state }) => pathOrLink =>
