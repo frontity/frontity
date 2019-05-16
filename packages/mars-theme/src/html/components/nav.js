@@ -4,7 +4,7 @@ import Link from "./link";
 
 const Nav = ({ state }) => (
   <Container>
-    {state.frontity.navbar.map(item => (
+    {state.theme.menu.map(item => (
       <Item key={item[0]} isSelected={state.router.path === item[1]}>
         <Link path={item[1]}>{item[0]}</Link>
       </Item>
