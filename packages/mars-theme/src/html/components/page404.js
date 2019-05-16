@@ -16,7 +16,7 @@ const Page404 = () => (
 export default Page404;
 
 const Container = styled.div`
-  width: 840px;
+  width: 800px;
   margin: 0;
   padding: 24px;
   text-align: center;

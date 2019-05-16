@@ -9,6 +9,7 @@ Object {
     "isFetching": true,
     "isTaxonomy": true,
     "pages": Array [
+      undefined,
       Array [
         Object {
           "id": 57,
@@ -73,6 +74,7 @@ Object {
     "isFetching": true,
     "isTaxonomy": true,
     "pages": Array [
+      undefined,
       Array [
         Object {
           "id": 57,
@@ -138,6 +140,7 @@ Object {
     "isReady": true,
     "isTaxonomy": true,
     "pages": Array [
+      undefined,
       Array [
         Object {
           "id": 57,

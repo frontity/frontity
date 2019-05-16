@@ -40,7 +40,8 @@ export default connect(Theme);
 
 const HeadContainer = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: #1f38c5;
 `;
 
