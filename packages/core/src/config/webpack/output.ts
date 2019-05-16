@@ -63,13 +63,13 @@ export default ({
   };
   const config: Configuration["output"] = {
     filename: filenames[target][mode],
-    path: resolve(rootPath, outDir, paths[target])
+    path: resolve(rootPath, outDir, paths[target]),
+    publicPath: "/static/"
   };
   // Node still needs CJS.
   if (target === "server") config.libraryTarget = "commonjs2";
   if (target !== "server") {
     config.chunkFilename = chunkFilenames[target][mode];
-    config.publicPath = "/static";
   }
   return config;
 };
