@@ -1,4 +1,10 @@
-#! /usr/bin/env node -r ts-node/register/transpile-only
+#! /usr/bin/env node
+import * as tsNode from "ts-node";
+
+tsNode.register({
+  transpileOnly: true
+});
+
 import program from "commander";
 import { readFileSync } from "fs-extra";
 import { create, createPackage, dev, build, serve, subscribe } from "./actions";
