@@ -26,8 +26,10 @@ export default ({
     const variable = getVariable(name, state.frontity.mode);
     const module = packages[variable];
     const pkg = typeof module === "function" ? module() : module;
-    config = deepmerge(config, pkg, { clone: false });
+    config = deepmerge(config, pkg, { arrayMerge: (dest, source) => source });
   });
-  config.state = deepmerge(config.state, state);
+  config.state = deepmerge(config.state, state, {
+    arrayMerge: (dest, source) => source
+  });
   return config;
 };

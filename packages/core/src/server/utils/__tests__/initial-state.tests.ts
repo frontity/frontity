@@ -6,7 +6,8 @@ const settings = {
   state: {
     frontity: {
       url: "https://site.com",
-      prop1: "prop1"
+      prop1: "prop1",
+      menu1: ["Home"]
     }
   },
   packages: [
@@ -15,7 +16,8 @@ const settings = {
       active: true,
       state: {
         frontity: {
-          prop1: "overwritten by package1"
+          prop1: "overwritten by package1",
+          menu1: ["Overwrrite by pacakge1", "With a second item"]
         },
         package1: {
           prop2: "prop2"

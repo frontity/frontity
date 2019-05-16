@@ -7,6 +7,10 @@ Object {
       "page": 1,
       "path": "/post",
     },
+    "menu1": Array [
+      "Overwrrite by pacakge1",
+      "With a second item",
+    ],
     "mode": "html",
     "name": "site",
     "packages": Array [
@@ -33,6 +37,10 @@ Object {
       "page": 2,
       "path": "/category/nature/",
     },
+    "menu1": Array [
+      "Overwrrite by pacakge1",
+      "With a second item",
+    ],
     "mode": "html",
     "name": "site",
     "packages": Array [
@@ -59,6 +67,10 @@ Object {
       "page": 1,
       "path": "/",
     },
+    "menu1": Array [
+      "Overwrrite by pacakge1",
+      "With a second item",
+    ],
     "mode": "html",
     "name": "site",
     "packages": Array [
@@ -85,6 +97,10 @@ Object {
       "page": 2,
       "path": "/",
     },
+    "menu1": Array [
+      "Overwrrite by pacakge1",
+      "With a second item",
+    ],
     "mode": "html",
     "name": "site",
     "packages": Array [
