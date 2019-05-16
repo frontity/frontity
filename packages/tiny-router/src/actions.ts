@@ -1,5 +1,5 @@
 import TinyRouter from "..";
-import { parsePath } from "./utils";
+import { parsePath, addFinalSlash } from "./utils";
 
 let isPopState = false;
 
@@ -12,7 +12,8 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   if (typeof pathOrObj === "string") {
     ({ path, page } = parsePath(pathOrObj));
   } else {
-    ({ path, page } = pathOrObj);
+    ({ path, page } = parsePath(pathOrObj.path));
+    if (pathOrObj.page) page = pathOrObj.page;
   }
 
   state.router.path = path;
@@ -35,7 +36,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 }) => {
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
-    state.router.path = state.frontity.initial.path;
+    state.router.path = addFinalSlash(state.frontity.initial.path);
     state.router.page = state.frontity.initial.page;
   } else {
     // Replace the current url with the same one but with state.
