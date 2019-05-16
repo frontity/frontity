@@ -75,6 +75,7 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       ]
     ];
     return {
+      compact: true,
       presets,
       plugins
     };
