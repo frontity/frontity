@@ -14,7 +14,14 @@ Object {
       "package2",
     ],
     "platform": "server",
+    "prop1": "overwritten by package2",
     "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
   },
 }
 `;
@@ -33,7 +40,14 @@ Object {
       "package2",
     ],
     "platform": "server",
+    "prop1": "overwritten by package2",
     "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
   },
 }
 `;
@@ -52,7 +66,14 @@ Object {
       "package2",
     ],
     "platform": "server",
+    "prop1": "overwritten by package2",
     "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
   },
 }
 `;
@@ -71,7 +92,14 @@ Object {
       "package2",
     ],
     "platform": "server",
+    "prop1": "overwritten by package2",
     "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
   },
 }
 `;

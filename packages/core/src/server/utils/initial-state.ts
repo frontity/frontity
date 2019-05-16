@@ -9,7 +9,7 @@ export default ({
   settings: NormalizedSettings;
   url: URL;
 }) => {
-  const state: Package["state"] = {
+  let state: Package["state"] = {
     frontity: {
       name: settings.name,
       mode: settings.mode,
@@ -27,5 +27,14 @@ export default ({
       packages: settings.packages.map(pkg => pkg.name)
     }
   };
-  return deepmerge(settings.state, state);
+
+  // Merge the initial state with the general state of settings.
+  state = deepmerge(settings.state, state);
+
+  // Merge the state with each package state, in order.
+  settings.packages.forEach(pkg => {
+    state = deepmerge(state, pkg.state);
+  });
+
+  return state;
 };
