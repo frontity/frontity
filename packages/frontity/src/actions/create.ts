@@ -80,14 +80,14 @@ export default async (name: string, { typescript, useCwd }) => {
   } else {
     console.log(
       `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
-        "frontity subscribe <email>"
+        "npx frontity subscribe <email>"
       )}.`
     );
   }
 
   console.log(
     `\nRun ${chalk.bold.green(
-      `cd ${options.name} && frontity dev`
+      `cd ${options.name} && npx frontity dev`
     )} and have fun! 🎉\n\nYou can find docs at ${chalk.underline.magenta(
       "https://docs.frontity.org/"
     )}.\nIf you have any doubts, join our community at ${chalk.underline.magenta(
