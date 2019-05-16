@@ -6,6 +6,7 @@ Array [
     Object {
       "endpoint": "posts",
       "params": Object {
+        "_embed": true,
         "after": "2016-10-25T00:00:00.000Z",
         "before": "2016-10-26T00:00:00.000Z",
         "page": 1,
@@ -86,6 +87,7 @@ Array [
     Object {
       "endpoint": "posts",
       "params": Object {
+        "_embed": true,
         "after": "2016-01-01T00:00:00.000Z",
         "before": "2017-01-01T00:00:00.000Z",
         "page": 1,
@@ -171,6 +173,7 @@ Array [
     Object {
       "endpoint": "posts",
       "params": Object {
+        "_embed": true,
         "after": "2016-01-01T00:00:00.000Z",
         "before": "2017-01-01T00:00:00.000Z",
         "page": 1,
@@ -182,6 +185,7 @@ Array [
     Object {
       "endpoint": "posts",
       "params": Object {
+        "_embed": true,
         "after": "2016-01-01T00:00:00.000Z",
         "before": "2017-01-01T00:00:00.000Z",
         "page": 2,

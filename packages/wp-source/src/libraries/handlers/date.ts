@@ -43,6 +43,7 @@ const dateHandler: Handler = async (
     const response = await api.get({
       endpoint: "posts",
       params: {
+        _embed: true,
         after: after.toISOString(),
         before: before.toISOString(),
         search: params.s,
