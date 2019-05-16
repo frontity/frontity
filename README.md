@@ -21,7 +21,7 @@
 
 > **IMPORTANT NOTE!**
 >
-> Frontity framework is in **beta**. However, this is a **fully functional beta** - you can already use it to create a WordPress theme based on React JS. :rocket:
+> Frontity framework is in **beta**. Feel free to try it out to create a WordPress theme based on React JS and let us know how it goes. Your feedback is extremely valuable in this phase.
 >
 > <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
 > <br />
