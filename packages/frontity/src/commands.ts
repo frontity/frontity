@@ -7,10 +7,11 @@ tsNode.register({
 
 import program from "commander";
 import { readFileSync } from "fs-extra";
+import { resolve } from "path";
 import { create, createPackage, dev, build, serve, subscribe } from "./actions";
 
 const { version } = JSON.parse(
-  readFileSync("./package.json", { encoding: "utf8" })
+  readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
 );
 
 // Sets the version and the description of the program.
