@@ -1,6 +1,6 @@
 {
   "name": "@frontity/router",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Types for the Frontity Router API",
   "keywords": [
     "frontity",

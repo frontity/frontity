@@ -1,6 +1,6 @@
 {
   "name": "@frontity/extension-example-1",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "private": true,
   "description": "This is an empty extension only for testing purposes",
   "keywords": [
@@ -19,6 +19,6 @@
     "frontity": "^0.2.7"
   },
   "devDependencies": {
-    "@frontity/router": "^0.1.2"
+    "@frontity/router": "^0.1.3"
   }
 }

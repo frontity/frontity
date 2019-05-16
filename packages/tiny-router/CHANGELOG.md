@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/frontity/frontity/compare/@frontity/tiny-router@0.2.7...@frontity/tiny-router@0.3.0) (2019-05-16)
+
+
+### Bug Fixes
+
+* **tiny-router:** accept any type of url in the path parameter ([6ba2c3c](https://github.com/frontity/frontity/commit/6ba2c3c))
+* **tiny-router:** push correct href to history when page is present ([556964a](https://github.com/frontity/frontity/commit/556964a))
+
+
+### Features
+
+* **list:** adds pagination to mars-theme ([58a3c3e](https://github.com/frontity/frontity/commit/58a3c3e))
+
+
+
+
+
 ## [0.2.7](https://github.com/frontity/frontity/compare/@frontity/tiny-router@0.2.6...@frontity/tiny-router@0.2.7) (2019-05-16)
 
 **Note:** Version bump only for package @frontity/tiny-router
