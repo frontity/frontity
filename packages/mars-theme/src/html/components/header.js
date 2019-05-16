@@ -4,7 +4,7 @@ import Link from "./link";
 
 const Header = ({ state }) => (
   <Container>
-    <StyledLink href="/">
+    <StyledLink path="/">
       <Title>{state.frontity.title}</Title>
     </StyledLink>
     <Description>{state.frontity.description}</Description>

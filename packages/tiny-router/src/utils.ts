@@ -17,5 +17,8 @@ export const parsePath = (
     "1"
   ];
 
-  return { path, page: parseInt(page, 10) };
+  return { path: addFinalSlash(path), page: parseInt(page, 10) };
 };
+
+export const addFinalSlash = (path: string): string =>
+  path.replace(/\/?$/, "/");

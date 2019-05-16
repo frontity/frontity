@@ -1,4 +1,6 @@
-export default (pathOrLink: string): { path: string; page: number } => {
+export const parsePath = (
+  pathOrLink: string
+): { path: string; page: number } => {
   let fullPath: string;
 
   try {
@@ -15,5 +17,8 @@ export default (pathOrLink: string): { path: string; page: number } => {
     "1"
   ];
 
-  return { path, page: parseInt(page, 10) };
+  return { path: addFinalSlash(path), page: parseInt(page, 10) };
 };
+
+export const addFinalSlash = (path: string): string =>
+  path.replace(/\/?$/, "/");

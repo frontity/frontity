@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, styled } from "frontity";
 import Link from "../link";
+import Pagination from "./pagination";
 
 const List = ({ state }) => {
   // Get the data of the current list.
@@ -8,13 +9,14 @@ const List = ({ state }) => {
   // Get the items of the current page.
   const items = data.pages[state.router.page - 1];
 
-  return data.isReady ? (
+  return items ? (
     <Container>
       {items.map(({ type, id }) => {
         const item = state.source[type][id];
         // Render one Item for each one.
         return <Item key={item.id} item={item} />;
       })}
+      <Pagination />
     </Container>
   ) : null;
 };
@@ -25,7 +27,7 @@ const Item = connect(({ state, item }) => {
 
   return (
     <ItemContainer>
-      <Link href={item.link}>
+      <Link path={item.link}>
         <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
       </Link>
       <Author>

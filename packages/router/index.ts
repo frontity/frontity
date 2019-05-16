@@ -1,6 +1,6 @@
 import { Package, Action, Derived } from "@frontity/types";
 
-export type PathOrObj = string | { path: string; page: number };
+export type PathOrObj = string | { path: string; page?: number };
 
 interface Router extends Package {
   state: {

@@ -1,5 +1,5 @@
 import WpSource from "../";
-import parsePath from "./utils/parse-path";
+import { parsePath } from "./utils/parse-path";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
@@ -13,7 +13,8 @@ const actions: WpSource["actions"]["source"] = {
     if (typeof pathOrObj === "string") {
       ({ path, page } = parsePath(pathOrObj));
     } else {
-      ({ path, page } = pathOrObj);
+      ({ path, page } = parsePath(pathOrObj.path));
+      if (pathOrObj.page) page = pathOrObj.page;
     }
 
     // Get current data object
