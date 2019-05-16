@@ -116,12 +116,25 @@ export const createFrontitySettings = async (
       frontity: {
         url: "https://test.frontity.io",
         title: "Test Frontity Blog",
-        description: "Useful content for Frontity development"
+        description: "WordPress installation for Frontity development"
       }
     },
     packages: [
       "@frontity/tiny-router",
-      "@frontity/mars-theme",
+      {
+        name: "@frontity/mars-theme",
+        state: {
+          theme: {
+            menu: [
+              ["Home", "/"],
+              ["Nature", "/category/nature/"],
+              ["Travel", "/category/travel/"],
+              ["Japan", "/tag/japan/"],
+              ["About Us", "/about-us/"]
+            ]
+          }
+        }
+      },
       {
         name: "@frontity/wp-source",
         state: {
