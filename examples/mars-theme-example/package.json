@@ -1,6 +1,6 @@
 {
   "name": "mars-theme",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
   "scripts": {
@@ -13,12 +13,12 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@frontity/core": "^0.3.4",
+    "@frontity/core": "^0.3.5",
     "@frontity/file-settings": "^0.2.2",
-    "@frontity/mars-theme": "^0.3.1",
-    "@frontity/tiny-router": "^0.3.1",
+    "@frontity/mars-theme": "^0.3.2",
+    "@frontity/tiny-router": "^0.3.2",
     "@frontity/wp-source": "^0.1.5",
-    "frontity": "^0.2.8"
+    "frontity": "^0.2.9"
   },
   "devDependencies": {
     "ts-node": "^8.0.3"
