@@ -3,6 +3,7 @@ import { Global, css, connect, styled, Head } from "frontity";
 import Header from "./header";
 import List from "./list";
 import Post from "./post";
+import Page404 from "./page404.js";
 
 const globalStyles = css`
   body {
@@ -30,6 +31,7 @@ const Theme = ({ state }) => (
     <Body>
       {state.source.data(state.router.path).isArchive && <List />}
       {state.source.data(state.router.path).isPostType && <Post />}
+      {state.source.data(state.router.path).is404 && <Page404 />}
     </Body>
   </>
 );
