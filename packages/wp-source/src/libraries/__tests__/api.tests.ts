@@ -10,7 +10,7 @@ const api = new Api();
 describe("api", () => {
   test("get from WP.org without params", async () => {
     api.get({
-      apiUrl: "https://test.frontity.org",
+      apiUrl: "https://test.frontity.org/wp-json",
       endpoint: "posts"
     });
     expect(lastFetch()).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
@@ -18,7 +18,7 @@ describe("api", () => {
 
   test("get from WP.org without params 2", () => {
     api.get({
-      apiUrl: "https://test.frontity.org",
+      apiUrl: "https://test.frontity.org/wp-json/",
       endpoint: "posts/12"
     });
     expect(lastFetch()).toBe(
@@ -28,7 +28,7 @@ describe("api", () => {
 
   test("get from WP.org with params", () => {
     api.get({
-      apiUrl: "https://test.frontity.org",
+      apiUrl: "https://test.frontity.org/wp-json/",
       endpoint: "posts",
       params: { _embed: true, include: "12,13,14" }
     });
@@ -39,7 +39,7 @@ describe("api", () => {
 
   test("get from WP.org and a different namespace", () => {
     api.get({
-      apiUrl: "https://test.frontity.org",
+      apiUrl: "https://test.frontity.org/wp-json/",
       endpoint: "/discovery/v1",
       params: { link: "/the-beauties-of-gullfoss" }
     });
@@ -50,9 +50,9 @@ describe("api", () => {
 
   test("get from WP.com without params", () => {
     api.get({
-      apiUrl: "https://test.frontity.org",
+      apiUrl: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
       endpoint: "posts",
-      isCom: true
+      isWPCom: true
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts"
@@ -61,17 +61,21 @@ describe("api", () => {
 
   test("get from WP.com with params", () => {
     const endpoint = "posts";
-    const apiUrl = "https://test.frontity.org";
-    const isCom = true;
+    const apiUrl =
+      "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/";
+    const isWPCom = true;
     const params = { _embed: true, include: "12,13,14" };
-    api.get({ endpoint, params, apiUrl, isCom });
+    api.get({ endpoint, params, apiUrl, isWPCom });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts?_embed=true&include=12,13,14"
     );
   });
 
   test("get from apiUrl specified with the init function", () => {
-    api.init({ apiUrl: "https://test.frontity.org", isCom: true });
+    api.init({
+      apiUrl: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
+      isWPCom: true
+    });
     api.get({
       endpoint: "posts"
     });
