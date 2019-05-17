@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.6](https://github.com/frontity/frontity/compare/@frontity/core@0.3.5...@frontity/core@0.3.6) (2019-05-17)
+
+
+### Bug Fixes
+
+* **core:** fix wrong public path in scripts ([a1f328b](https://github.com/frontity/frontity/commit/a1f328b))
+
+
+
+
+
 ## [0.3.5](https://github.com/frontity/frontity/compare/@frontity/core@0.3.4...@frontity/core@0.3.5) (2019-05-16)
 
 **Note:** Version bump only for package @frontity/core
