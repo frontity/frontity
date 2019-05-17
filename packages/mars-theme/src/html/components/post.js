@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import List from "./list";
 
@@ -12,8 +12,10 @@ const Post = ({ state, actions }) => {
   const date = new Date(post.date);
 
   // Prefetch home posts and the list component.
-  actions.source.fetch("/");
-  List.preload();
+  useEffect(() => {
+    actions.source.fetch("/");
+    List.preload();
+  }, []);
 
   return data.isReady ? (
     <Container>

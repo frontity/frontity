@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { create } from "react-test-renderer";
+import { create, act } from "react-test-renderer";
 import connect, { Provider, createStore } from "..";
 
 let store;
@@ -93,7 +93,7 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
     const rootInstance = app.root;
     const button = rootInstance.findByType("button");
-    button.props.onClick();
+    act(() => button.props.onClick());
     expect(app).toMatchSnapshot();
   });
 
@@ -113,7 +113,7 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
     const rootInstance = app.root;
     const button = rootInstance.findByType("button");
-    button.props.onClick();
+    act(() => button.props.onClick());
     expect(app).toMatchSnapshot();
   });
 
@@ -133,7 +133,7 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
     const rootInstance = app.root;
     const button = rootInstance.findByType("button");
-    button.props.onClick();
+    act(() => button.props.onClick());
     expect(app).toMatchSnapshot();
   });
 
