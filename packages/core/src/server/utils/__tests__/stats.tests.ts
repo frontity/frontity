@@ -26,7 +26,7 @@ describe("getBothScriptTags", () => {
       }
     };
     const extractor = {
-      publicPath: "/public-path",
+      publicPath: "/public-path/",
       getMainAssets: () => [{ chunk: "site-1" }, { chunk: "site-2" }],
       getRequiredChunksScriptTag: (arg: {}) =>
         !!arg && "<script>REQ-CHUNK-SCRIPT-TAG</script>"
