@@ -48,13 +48,13 @@ export const getBothScriptTags = ({
 
   const moduleTags = assets.map(
     chunk =>
-      `<script async type="module" data-chunk="${chunk}" src="${publicPath}/${
+      `<script async type="module" data-chunk="${chunk}" src="${publicPath}${
         moduleStats.assetsByChunkName[chunk]
       }"></script>`
   );
   const es5Tags = assets.map(
     chunk =>
-      `<script async nomodule data-chunk="${chunk}" src="${publicPath}/${
+      `<script async nomodule data-chunk="${chunk}" src="${publicPath}${
         es5Stats.assetsByChunkName[chunk]
       }"></script>`
   );
