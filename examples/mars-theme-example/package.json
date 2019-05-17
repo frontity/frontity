@@ -1,8 +1,8 @@
 {
-  "name": "mars-theme",
-  "version": "0.1.12",
+  "name": "mars-theme-example",
+  "version": "1.0.0",
   "private": true,
-  "description": "The minimum setup for Frontity using TypeScript",
+  "description": "Example of a project using mars-theme.",
   "scripts": {
     "dev": "frontity dev",
     "dev:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity dev",
@@ -14,7 +14,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@frontity/core": "^0.3.6",
-    "@frontity/file-settings": "^0.2.2",
     "@frontity/mars-theme": "^0.3.3",
     "@frontity/tiny-router": "^0.3.3",
     "@frontity/wp-source": "^0.1.5",
