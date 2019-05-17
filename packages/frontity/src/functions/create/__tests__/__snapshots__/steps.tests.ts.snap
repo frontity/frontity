@@ -192,9 +192,6 @@ Array [
     "https://registry.npmjs.com/@frontity/core",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/file-settings",
-  ],
-  Array [
     "https://registry.npmjs.com/@frontity/wp-source",
   ],
   Array [
@@ -209,7 +206,7 @@ Array [
     "/path/to/project/package.json",
     "{
   \\"name\\": \\"random-name\\",
-  \\"version\\": \\"0.1.0\\",
+  \\"version\\": \\"1.0.0\\",
   \\"description\\": \\"Frontity project\\",
   \\"keywords\\": [
     \\"frontity\\"
@@ -222,7 +219,6 @@ Array [
   \\"dependencies\\": {
     \\"frontity\\": \\"^1.0.0\\",
     \\"@frontity/core\\": \\"^1.0.0\\",
-    \\"@frontity/file-settings\\": \\"^1.0.0\\",
     \\"@frontity/wp-source\\": \\"^1.0.0\\",
     \\"@frontity/tiny-router\\": \\"^1.0.0\\",
     \\"@frontity/mars-theme\\": \\"./packages/mars-theme\\"
@@ -242,9 +238,6 @@ Array [
     "https://registry.npmjs.com/@frontity/core",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/file-settings",
-  ],
-  Array [
     "https://registry.npmjs.com/@frontity/wp-source",
   ],
   Array [
@@ -259,7 +252,7 @@ Array [
     "/path/to/project/package.json",
     "{
   \\"name\\": \\"random-name\\",
-  \\"version\\": \\"0.1.0\\",
+  \\"version\\": \\"1.0.0\\",
   \\"description\\": \\"Frontity project\\",
   \\"keywords\\": [
     \\"frontity\\"
@@ -272,7 +265,6 @@ Array [
   \\"dependencies\\": {
     \\"frontity\\": \\"^1.0.0\\",
     \\"@frontity/core\\": \\"^1.0.0\\",
-    \\"@frontity/file-settings\\": \\"^1.0.0\\",
     \\"@frontity/wp-source\\": \\"^1.0.0\\",
     \\"@frontity/tiny-router\\": \\"^1.0.0\\",
     \\"random-theme\\": \\"./packages/random-theme\\"

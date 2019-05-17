@@ -65,7 +65,6 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
   const packages = [
     "frontity",
     "@frontity/core",
-    "@frontity/file-settings",
     "@frontity/wp-source",
     "@frontity/tiny-router"
   ];
@@ -90,7 +89,7 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
   dependencies[theme] = `./packages/${themeName}`;
   const packageJson: PackageJson = {
     name,
-    version: "0.1.0",
+    version: "1.0.0",
     description: "Frontity project",
     keywords: ["frontity"],
     scripts: {
