@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "frontity";
 import Link from "../link";
 
@@ -8,11 +8,13 @@ const Pages = ({ state, actions }) => {
   const isPreviousPage = state.router.page > 1;
 
   // Fetch the next page if it hasn't been fetched yet.
-  if (state.router.page < totalPages)
-    actions.source.fetch({
-      path: state.router.path,
-      page: state.router.page + 1
-    });
+  useEffect(() => {
+    if (state.router.page < totalPages)
+      actions.source.fetch({
+        path: state.router.path,
+        page: state.router.page + 1
+      });
+  }, []);
 
   return (
     <div>
