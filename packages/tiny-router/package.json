@@ -1,6 +1,6 @@
 {
   "name": "@frontity/tiny-router",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Tiny Router for » Frontity projects",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -20,7 +20,7 @@
     "access": "public"
   },
   "dependencies": {
-    "frontity": "^0.2.10"
+    "frontity": "^0.2.11"
   },
   "devDependencies": {
     "@frontity/router": "^0.1.3",
