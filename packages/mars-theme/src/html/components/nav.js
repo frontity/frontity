@@ -22,7 +22,7 @@ const Container = styled.ul`
   box-sizing: border-box;
   padding: 0 24px;
   margin: 0;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
 
 const Item = styled.li`
