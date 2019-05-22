@@ -10,6 +10,13 @@ interface MarsTheme extends Package {
   state?: {
     router?: Router["state"]["router"];
     source?: Source["state"]["source"];
+    theme: {
+      menu: [string, string][];
+      featured: {
+        showOnList: boolean;
+        showOnPost: boolean;
+      };
+    };
   };
   actions: {
     router?: Router["actions"]["router"];
