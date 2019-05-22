@@ -19,7 +19,11 @@ const settings = {
             ["Travel", "/category/travel/"],
             ["Japan", "/tag/japan/"],
             ["About Us", "/about-us/"]
-          ]
+          ],
+          featured: {
+            showOnList: false,
+            showOnPost: false
+          }
         }
       }
     },
