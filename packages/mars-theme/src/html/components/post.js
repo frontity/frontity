@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import List from "./list";
+import FeaturedMedia from "./featured-media";
 
 const Post = ({ state, actions }) => {
   // Get info of current post.
@@ -33,6 +34,9 @@ const Post = ({ state, actions }) => {
           </>
         )}
       </Head>
+      {state.theme.featured.showOnPost && (
+        <FeaturedMedia id={post.featured_media} />
+      )}
       <Body
         dangerouslySetInnerHTML={{
           __html: post.content.rendered
