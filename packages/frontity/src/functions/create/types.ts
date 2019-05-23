@@ -21,6 +21,7 @@ export type Options = {
 export type PackageJson = {
   name: string;
   version: string;
+  private: boolean;
   description: string;
   keywords: string[];
   scripts: {

@@ -90,6 +90,7 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
   const packageJson: PackageJson = {
     name,
     version: "1.0.0",
+    private: true,
     description: "Frontity project",
     keywords: ["frontity"],
     scripts: {
