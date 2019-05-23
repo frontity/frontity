@@ -107,7 +107,11 @@ Array [
               \\"About Us\\",
               \\"/about-us/\\"
             ]
-          ]
+          ],
+          \\"featured\\": {
+            \\"showOnList\\": false,
+            \\"showOnPost\\": false
+          }
         }
       }
     },
@@ -165,7 +169,11 @@ Array [
               \\"About Us\\",
               \\"/about-us/\\"
             ]
-          ]
+          ],
+          \\"featured\\": {
+            \\"showOnList\\": false,
+            \\"showOnPost\\": false
+          }
         }
       }
     },
