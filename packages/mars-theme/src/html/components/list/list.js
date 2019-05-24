@@ -12,9 +12,12 @@ const List = ({ state }) => {
   return items ? (
     <Container>
       {data.isTaxonomy && (
-        <Taxonomy>
+        <Header>
           {data.taxonomy}: {state.source[data.taxonomy][data.id].name}
-        </Taxonomy>
+        </Header>
+      )}
+      {data.isAuthor && (
+        <Header>Author: {state.source.author[data.id].name}</Header>
       )}
       {items.map(({ type, id }) => {
         const item = state.source[type][id];
@@ -35,7 +38,7 @@ const Container = styled.ul`
   list-style: none;
 `;
 
-const Taxonomy = styled.h3`
+const Header = styled.h3`
   font-weight: 300;
   text-transform: capitalize;
   color: rgba(12, 17, 43, 0.9);

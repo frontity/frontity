@@ -12,9 +12,11 @@ const Item = ({ state, item }) => {
       <Link path={item.link}>
         <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
       </Link>
-      <Author>
-        By <b>{author.name}</b>
-      </Author>
+      <Link path={author.link}>
+        <Author>
+          By <b>{author.name}</b>
+        </Author>
+      </Link>
       <Fecha>
         {" "}
         on <b>{date.toDateString()}</b>

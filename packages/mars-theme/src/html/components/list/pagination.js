@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "frontity";
 import Link from "../link";
 
-const Pages = ({ state, actions }) => {
+const Pagination = ({ state, actions }) => {
   const { totalPages } = state.source.data(state.router.path);
-  const isNextPage = state.router.page < totalPages;
-  const isPreviousPage = state.router.page > 1;
+  const isThereNextPage = state.router.page < totalPages;
+  const isTherePreviousPage = state.router.page > 1;
 
   // Fetch the next page if it hasn't been fetched yet.
   useEffect(() => {
-    if (state.router.page < totalPages)
+    if (isThereNextPage)
       actions.source.fetch({
         path: state.router.path,
         page: state.router.page + 1
@@ -18,13 +18,13 @@ const Pages = ({ state, actions }) => {
 
   return (
     <div>
-      {isNextPage && (
+      {isThereNextPage && (
         <Link path={state.router.path} page={state.router.page + 1}>
           <em>← Older posts</em>
         </Link>
       )}
-      {isPreviousPage && isNextPage && " - "}
-      {isPreviousPage && (
+      {isTherePreviousPage && isThereNextPage && " - "}
+      {isTherePreviousPage && (
         <Link path={state.router.path} page={state.router.page - 1}>
           <em>Newer posts →</em>
         </Link>
@@ -33,4 +33,4 @@ const Pages = ({ state, actions }) => {
   );
 };
 
-export default connect(Pages);
+export default connect(Pagination);
