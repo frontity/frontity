@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.12](https://github.com/frontity/frontity/compare/frontity@0.2.11...frontity@0.2.12) (2019-05-27)
+
+
+### Bug Fixes
+
+* **frontity:** add missing settings and other stuff ([#91](https://github.com/frontity/frontity/issues/91)) ([159e5f7](https://github.com/frontity/frontity/commit/159e5f7))
+
+
+
+
+
 ## [0.2.11](https://github.com/frontity/frontity/compare/frontity@0.2.10...frontity@0.2.11) (2019-05-17)
 
 **Note:** Version bump only for package frontity
