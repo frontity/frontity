@@ -33,6 +33,19 @@ Object {
             },
           },
         },
+        Object {
+          "test": /\\\\\\.\\(png\\|jpe\\?g\\|gif\\|svg\\)\\$/,
+          "use": Array [
+            Object {
+              "loader": "file-loader",
+              "options": Object {
+                "emitFile": true,
+                "name": [Function],
+                "outputPath": "images",
+              },
+            },
+          ],
+        },
       ],
     },
     "name": "client",
@@ -135,6 +148,19 @@ Object {
             },
           },
         },
+        Object {
+          "test": /\\\\\\.\\(png\\|jpe\\?g\\|gif\\|svg\\)\\$/,
+          "use": Array [
+            Object {
+              "loader": "file-loader",
+              "options": Object {
+                "emitFile": true,
+                "name": [Function],
+                "outputPath": "images",
+              },
+            },
+          ],
+        },
       ],
     },
     "name": "client",
@@ -228,6 +254,19 @@ Object {
             },
           },
         },
+        Object {
+          "test": /\\\\\\.\\(png\\|jpe\\?g\\|gif\\|svg\\)\\$/,
+          "use": Array [
+            Object {
+              "loader": "file-loader",
+              "options": Object {
+                "emitFile": false,
+                "name": [Function],
+                "outputPath": "images",
+              },
+            },
+          ],
+        },
       ],
     },
     "name": "server",
@@ -320,6 +359,19 @@ Object {
               ],
             },
           },
+        },
+        Object {
+          "test": /\\\\\\.\\(png\\|jpe\\?g\\|gif\\|svg\\)\\$/,
+          "use": Array [
+            Object {
+              "loader": "file-loader",
+              "options": Object {
+                "emitFile": true,
+                "name": [Function],
+                "outputPath": "images",
+              },
+            },
+          ],
         },
       ],
     },
@@ -415,6 +467,19 @@ Object {
             },
           },
         },
+        Object {
+          "test": /\\\\\\.\\(png\\|jpe\\?g\\|gif\\|svg\\)\\$/,
+          "use": Array [
+            Object {
+              "loader": "file-loader",
+              "options": Object {
+                "emitFile": true,
+                "name": [Function],
+                "outputPath": "images",
+              },
+            },
+          ],
+        },
       ],
     },
     "name": "client",
@@ -501,6 +566,19 @@ Object {
               ],
             },
           },
+        },
+        Object {
+          "test": /\\\\\\.\\(png\\|jpe\\?g\\|gif\\|svg\\)\\$/,
+          "use": Array [
+            Object {
+              "loader": "file-loader",
+              "options": Object {
+                "emitFile": false,
+                "name": [Function],
+                "outputPath": "images",
+              },
+            },
+          ],
         },
       ],
     },
