@@ -4,6 +4,7 @@ import Header from "./header";
 import List from "./list";
 import Post from "./post";
 import Page404 from "./page404.js";
+import Loading from "./loading";
 
 const globalStyles = css`
   body {
@@ -18,23 +19,30 @@ const globalStyles = css`
   }
 `;
 
-const Theme = ({ state }) => (
-  <>
-    <Head>
-      <title>{state.frontity.title}</title>
-      <html lang="en" />
-    </Head>
-    <Global styles={globalStyles} />
-    <HeadContainer>
-      <Header />
-    </HeadContainer>
-    <Body>
-      {state.source.data(state.router.path).isArchive && <List />}
-      {state.source.data(state.router.path).isPostType && <Post />}
-      {state.source.data(state.router.path).is404 && <Page404 />}
-    </Body>
-  </>
-);
+const Theme = ({ state }) => {
+  const data = state.source.data(state.router.path);
+
+  let Content;
+
+  if (data.isFetching) Content = <Loading />;
+  else if (data.isArchive) Content = <List />;
+  else if (data.isPostType) Content = <Post />;
+  else if (data.is404) Content = <Page404 />;
+
+  return (
+    <>
+      <Head>
+        <title>{state.frontity.title}</title>
+        <html lang="en" />
+      </Head>
+      <Global styles={globalStyles} />
+      <HeadContainer>
+        <Header />
+      </HeadContainer>
+      <Body>{Content}</Body>
+    </>
+  );
+};
 
 export default connect(Theme);
 

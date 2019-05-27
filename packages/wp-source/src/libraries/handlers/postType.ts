@@ -4,13 +4,19 @@ import page from "./page";
 import attachment from "./attachment";
 
 const postType: Handler = async (ctx, { path, params, libraries }) => {
-  for (let handler of [post, page, attachment]) {
+  const handlers = [post, page, attachment];
+
+  let failedHandlers = 0;
+
+  for (let handler of handlers) {
     try {
       await handler(ctx, { path, params, libraries });
       break;
     } catch (e) {
-      // Assume `handler` failed because no entity was found.
-      // Continue and try the next handler.
+      failedHandlers += 1;
+
+      if (failedHandlers === handlers.length)
+        throw new Error("Entity not found by handler `postType`.");
     }
   }
 };
