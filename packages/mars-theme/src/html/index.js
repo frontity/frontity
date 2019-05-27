@@ -7,7 +7,11 @@ const marsTheme = {
   },
   state: {
     theme: {
-      menu: [["Home", "/"]]
+      menu: [["Home", "/"]],
+      featured: {
+        showOnList: false,
+        showOnPost: false
+      }
     }
   },
   actions: {

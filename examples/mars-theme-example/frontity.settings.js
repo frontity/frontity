@@ -1,4 +1,4 @@
-const settings = {
+export default {
   name: "mars-theme-example",
   state: {
     frontity: {
@@ -19,7 +19,11 @@ const settings = {
             ["Travel", "/category/travel/"],
             ["Japan", "/tag/japan/"],
             ["About Us", "/about-us/"]
-          ]
+          ],
+          featured: {
+            showOnList: false,
+            showOnPost: false
+          }
         }
       }
     },
@@ -34,5 +38,3 @@ const settings = {
     }
   ]
 };
-
-module.exports = settings;

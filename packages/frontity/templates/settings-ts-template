@@ -1,5 +1,5 @@
-import { Settings } from "@frontity/file-settings";
+import { Settings } from "frontity/types";
 
 const settings: Settings = $settings$;
 
-module.exports = settings;
+export default settings;
