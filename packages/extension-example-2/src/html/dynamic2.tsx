@@ -1,5 +1,6 @@
 import React from "react";
 import { css } from "frontity";
+import frontity from "./frontity.png";
 
 const Dynamic = () => (
   <div
@@ -7,7 +8,8 @@ const Dynamic = () => (
       color: green;
     `}
   >
-    I am dynamic from extension!!
+    <img src={frontity} width="150px" />
+    <div>I am dynamic from extension!!</div>
   </div>
 );
 
