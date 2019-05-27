@@ -36,7 +36,7 @@ export default ({
       devtool: devtool({ mode }),
       entry: entry({ target, mode, entryPoints }),
       output: output({ target, mode, outDir: frontity.outDir }),
-      module: modules({ target, babel }),
+      module: modules({ target, babel, mode }),
       resolve: resolve(),
       externals: externals({ target }),
       plugins: plugins({ target, mode, outDir: frontity.outDir })

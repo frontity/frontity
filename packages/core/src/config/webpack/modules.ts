@@ -3,13 +3,16 @@ import { Configuration } from "webpack";
 import babelCore from "@babel/core/package.json";
 import babelLoader from "babel-loader/package.json";
 import { Target, BabelConfigs } from "../../types";
+import { Mode } from "../../types";
 
 export default ({
   target,
-  babel
+  babel,
+  mode
 }: {
   target: Target;
   babel: BabelConfigs;
+  mode: Mode;
 }): Configuration["module"] => {
   const config: Configuration["module"] = {
     rules: [
@@ -36,6 +39,26 @@ export default ({
             ...babel[target]
           }
         }
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name(file) {
+                const filename = /([^\/]+)\.(?:png|jpe?g|gif|svg)$/.exec(
+                  file
+                ) || [, "image"];
+                return mode === "development"
+                  ? `${filename[1]}.[ext]`
+                  : `${filename[1]}-[hash].[ext]`;
+              },
+              outputPath: "images",
+              emitFile: target !== "server"
+            }
+          }
+        ]
       }
     ]
   };
