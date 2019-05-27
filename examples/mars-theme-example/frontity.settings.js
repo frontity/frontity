@@ -1,4 +1,4 @@
-const settings = {
+export default {
   name: "mars-theme-example",
   state: {
     frontity: {
@@ -38,5 +38,3 @@ const settings = {
     }
   ]
 };
-
-module.exports = settings;

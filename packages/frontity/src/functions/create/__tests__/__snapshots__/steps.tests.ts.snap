@@ -107,7 +107,11 @@ Array [
               \\"About Us\\",
               \\"/about-us/\\"
             ]
-          ]
+          ],
+          \\"featured\\": {
+            \\"showOnList\\": false,
+            \\"showOnPost\\": false
+          }
         }
       }
     },
@@ -165,7 +169,11 @@ Array [
               \\"About Us\\",
               \\"/about-us/\\"
             ]
-          ]
+          ],
+          \\"featured\\": {
+            \\"showOnList\\": false,
+            \\"showOnPost\\": false
+          }
         }
       }
     },
@@ -207,6 +215,7 @@ Array [
     "{
   \\"name\\": \\"random-name\\",
   \\"version\\": \\"1.0.0\\",
+  \\"private\\": true,
   \\"description\\": \\"Frontity project\\",
   \\"keywords\\": [
     \\"frontity\\"
@@ -253,6 +262,7 @@ Array [
     "{
   \\"name\\": \\"random-name\\",
   \\"version\\": \\"1.0.0\\",
+  \\"private\\": true,
   \\"description\\": \\"Frontity project\\",
   \\"keywords\\": [
     \\"frontity\\"
