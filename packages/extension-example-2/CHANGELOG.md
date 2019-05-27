@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/frontity/frontity/compare/@frontity/extension-example-2@1.0.13...@frontity/extension-example-2@1.1.0) (2019-05-27)
+
+
+### Features
+
+* **webpack:** add support for images (png, jpg, gif and svg) ([fadbe29](https://github.com/frontity/frontity/commit/fadbe29))
+
+
+
+
+
 ## [1.0.13](https://github.com/frontity/frontity/compare/@frontity/extension-example-2@1.0.12...@frontity/extension-example-2@1.0.13) (2019-05-27)
 
 **Note:** Version bump only for package @frontity/extension-example-2

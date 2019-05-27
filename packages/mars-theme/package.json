@@ -1,6 +1,6 @@
 {
   "name": "@frontity/mars-theme",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "A starter theme for Frontity",
   "keywords": [
     "frontity",
@@ -21,6 +21,6 @@
   "devDependencies": {
     "@frontity/router": "^0.1.3",
     "@frontity/source": "^0.1.2",
-    "frontity": "^0.2.12"
+    "frontity": "^0.2.13"
   }
 }

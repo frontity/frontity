@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/frontity/frontity/compare/@frontity/core@0.3.7...@frontity/core@0.4.0) (2019-05-27)
+
+
+### Features
+
+* **webpack:** add support for images (png, jpg, gif and svg) ([fadbe29](https://github.com/frontity/frontity/commit/fadbe29))
+
+
+
+
+
 ## [0.3.7](https://github.com/frontity/frontity/compare/@frontity/core@0.3.6...@frontity/core@0.3.7) (2019-05-17)
 
 **Note:** Version bump only for package @frontity/core

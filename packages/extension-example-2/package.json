@@ -1,6 +1,6 @@
 {
   "name": "@frontity/extension-example-2",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "private": true,
   "description": "This is an empty extension only for testing purposes",
   "keywords": [
@@ -16,6 +16,6 @@
     "url": "https://community.frontity.org"
   },
   "dependencies": {
-    "frontity": "^0.2.12"
+    "frontity": "^0.2.13"
   }
 }
