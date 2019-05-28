@@ -1,13 +1,13 @@
 [
   {
     "name": "settings-without-match",
-    "mode": "html",
+    "mode": "default",
     "state": {},
     "packages": []
   },
   {
     "name": "settings-with-match",
-    "mode": "html",
+    "mode": "default",
     "match": ["https://frontity.org.*/amp/?$"],
     "state": {},
     "packages": []

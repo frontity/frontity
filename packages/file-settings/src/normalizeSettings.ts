@@ -8,7 +8,7 @@ import Settings, {
 
 const defaultSettings = {
   name: "default",
-  mode: "html",
+  mode: "default",
   state: {}
 };
 

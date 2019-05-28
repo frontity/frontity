@@ -1,15 +1,15 @@
 [
   {
-    "name": "multi-settings-html",
+    "name": "multi-settings-default",
     "packages": [
-      "@frontity/theme-html",
+      "@frontity/theme-default",
       {
         "name": "@frontity/wp-source"
       }
     ]
   },
   {
-    "name": "multi-settings-html",
+    "name": "multi-settings-default",
     "mode": "amp",
     "packages": [
       "@frontity/theme-amp",

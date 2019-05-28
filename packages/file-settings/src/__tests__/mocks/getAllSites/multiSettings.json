@@ -1,16 +1,16 @@
 [
   {
-    "name": "settings-html",
-    "mode": "html",
+    "name": "settings-default",
+    "mode": "default",
     "state": {},
     "packages": [
       {
-        "name": "@frontity/theme-html",
+        "name": "@frontity/theme-default",
         "active": true,
         "state": {}
       },
       {
-        "name": "@frontity/wp-source-html",
+        "name": "@frontity/wp-source-default",
         "active": true,
         "state": {}
       }

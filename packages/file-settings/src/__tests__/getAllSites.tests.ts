@@ -21,7 +21,7 @@ describe("getAllSites", () => {
     expect(result).toEqual([
       {
         name: "mono-settings",
-        mode: "html",
+        mode: "default",
         packages: ["@frontity/theme", "@frontity/wp-source"]
       }
     ]);
@@ -32,9 +32,9 @@ describe("getAllSites", () => {
     const result = await getAllSites();
     expect(result).toEqual([
       {
-        name: "settings-html",
-        mode: "html",
-        packages: ["@frontity/theme-html", "@frontity/wp-source-html"]
+        name: "settings-default",
+        mode: "default",
+        packages: ["@frontity/theme-default", "@frontity/wp-source-default"]
       },
       {
         name: "settings-amp",
@@ -50,7 +50,7 @@ describe("getAllSites", () => {
     expect(result).toEqual([
       {
         name: "mono-settings",
-        mode: "html",
+        mode: "default",
         packages: ["@frontity/theme"]
       }
     ]);
