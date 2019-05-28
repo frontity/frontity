@@ -4,8 +4,8 @@ exports[`generateClientEntryPoints should avoid creating the client file at all 
 
 exports[`generateClientEntryPoints should write HMR code if in development 1`] = `
 "import client from \\"@frontity/core/src/client\\";
-import package1_default from \\"package1/index\\";
-import package2_default from \\"package2/client\\";
+import package1_default from \\"package1/src/index\\";
+import package2_default from \\"package2/src/client\\";
 
 const packages = {
   package1_default,
@@ -18,13 +18,13 @@ if (module[\\"hot\\"]) {
   module[\\"hot\\"].accept(
     [
       \\"@frontity/core/src/client\\",
-      \\"package1/index\\",
-      \\"package2/client\\",
+      \\"package1/src/index\\",
+      \\"package2/src/client\\",
     ],
     () => {
       const client = require(\\"@frontity/core/src/client\\").default;
-      const package1_default = require(\\"package1/index\\").default;
-      const package2_default = require(\\"package2/client\\").default;
+      const package1_default = require(\\"package1/src/index\\").default;
+      const package2_default = require(\\"package2/src/client\\").default;
       const packages = {
         package1_default,
         package2_default,
@@ -81,8 +81,8 @@ Object {
     Array [
       "/build/bundling/entry-points/site-html/client.ts",
       "import client from \\"@frontity/core/src/client\\";
-import package1_default from \\"package1/index\\";
-import package2_default from \\"package2/client\\";
+import package1_default from \\"package1/src/index\\";
+import package2_default from \\"package2/src/client\\";
 
 const packages = {
   package1_default,
@@ -97,7 +97,7 @@ export default client({ packages });
     Array [
       "/build/bundling/entry-points/site-2/client.ts",
       "import client from \\"@frontity/core/src/client\\";
-import package1_default from \\"package1/index\\";
+import package1_default from \\"package1/src/index\\";
 
 const packages = {
   package1_default,
@@ -111,8 +111,8 @@ export default client({ packages });
     Array [
       "/build/bundling/entry-points/site-amp/client.ts",
       "import client from \\"@frontity/core/src/client\\";
-import package1_amp from \\"package1/index\\";
-import package3_amp from \\"package3/amp/client/index\\";
+import package1_amp from \\"package1/src/index\\";
+import package3_amp from \\"package3/src/amp/client/index\\";
 
 const packages = {
   package1_amp,
@@ -166,8 +166,8 @@ Object {
   "out": Array [
     "/build/bundling/entry-points/site-1/client.ts",
     "import client from \\"@frontity/core/src/client\\";
-import package1_default from \\"package1/index\\";
-import package2_default from \\"package2/client\\";
+import package1_default from \\"package1/src/index\\";
+import package2_default from \\"package2/src/client\\";
 
 const packages = {
   package1_default,
@@ -223,10 +223,10 @@ Object {
     Array [
       "/build/bundling/entry-points/server.ts",
       "import server from \\"@frontity/core/src/server\\";
-import package1_default from \\"package1/index\\";
-import package2_default from \\"package2/server\\";
-import package1_amp from \\"package1/index\\";
-import package3_amp from \\"package3/amp/server\\";
+import package1_default from \\"package1/src/index\\";
+import package2_default from \\"package2/src/server\\";
+import package1_amp from \\"package1/src/index\\";
+import package3_amp from \\"package3/src/amp/server\\";
 
 const packages = {
   package1_default,
@@ -266,8 +266,8 @@ Object {
   "out": Array [
     "/build/bundling/entry-points/server.ts",
     "import server from \\"@frontity/core/src/server\\";
-import package1_default from \\"package1/index\\";
-import package2_default from \\"package2/server\\";
+import package1_default from \\"package1/src/index\\";
+import package2_default from \\"package2/src/server\\";
 
 const packages = {
   package1_default,

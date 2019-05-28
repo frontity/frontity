@@ -26,35 +26,35 @@ export const entryPoint = async ({
   let extension: string | false = false;
   if (mode !== "default") {
     // Check first inside the mode and in the type.
-    extension = await entryExists(`${name}/${mode}/${type}`);
-    if (extension) return `${name}/${mode}/${type}`;
+    extension = await entryExists(`${name}/src/${mode}/${type}`);
+    if (extension) return `${name}/src/${mode}/${type}`;
     // Check first inside the mode and in the type but in a folder.
-    extension = await entryExists(`${name}/${mode}/${type}/index`);
-    if (extension) return `${name}/${mode}/${type}/index`;
+    extension = await entryExists(`${name}/src/${mode}/${type}/index`);
+    if (extension) return `${name}/src/${mode}/${type}/index`;
     // If it's client or server, check on index as well.
     if (type === "client" || type === "server") {
       // Check if it's a file.
-      extension = await entryExists(`${name}/${mode}`);
+      extension = await entryExists(`${name}/src/${mode}`);
       if (extension) {
-        return `${name}/${mode}`;
+        return `${name}/src/${mode}`;
       }
       // Check if it's a folder.
-      extension = await entryExists(`${name}/${mode}/index`);
+      extension = await entryExists(`${name}/src/${mode}/index`);
       if (extension) {
-        return `${name}/${mode}/index`;
+        return `${name}/src/${mode}/index`;
       }
     }
   }
   // Check now outside of the mode for the specific type.
-  extension = await entryExists(`${name}/${type}`);
-  if (extension) return `${name}/${type}`;
+  extension = await entryExists(`${name}/src/${type}`);
+  if (extension) return `${name}/src/${type}`;
   // Check now outside of the mode for the specific type but in a folder.
-  extension = await entryExists(`${name}/${type}/index`);
-  if (extension) return `${name}/${type}/index`;
+  extension = await entryExists(`${name}/src/${type}/index`);
+  if (extension) return `${name}/src/${type}/index`;
   // And finally, if it's client or server, check on index as well.
-  extension = await entryExists(`${name}/index`);
+  extension = await entryExists(`${name}/src/index`);
   if ((type === "client" || type === "server") && extension) {
-    return `${name}/index`;
+    return `${name}/src/index`;
   }
   // Don't return path if no entry point is found.
   return "";
