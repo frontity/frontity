@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
+import Link from "./link";
 import List from "./list";
 import FeaturedMedia from "./featured-media";
 
@@ -10,6 +11,7 @@ const Post = ({ state, actions }) => {
   const post = state.source[data.type][data.id];
   // Get the author.
   const author = state.source.author[post.author];
+  // Get a date for humans.
   const date = new Date(post.date);
 
   // Prefetch home posts and the list component.
@@ -20,20 +22,22 @@ const Post = ({ state, actions }) => {
 
   return data.isReady ? (
     <Container>
-      <Head>
+      <div>
         <Title>{post.title.rendered}</Title>
         {data.isPost && (
           <>
-            <Author>
-              By <b>{author.name}</b>
-            </Author>
+            <Link path={author.link}>
+              <Author>
+                By <b>{author.name}</b>
+              </Author>
+            </Link>
             <Fecha>
               {" "}
               on <b>{date.toDateString()}</b>
             </Fecha>
           </>
         )}
-      </Head>
+      </div>
       {state.theme.featured.showOnPost && (
         <FeaturedMedia id={post.featured_media} />
       )}
@@ -53,8 +57,6 @@ const Container = styled.div`
   margin: 0;
   padding: 24px;
 `;
-
-const Head = styled.div``;
 
 const Title = styled.h1`
   margin: 0;
