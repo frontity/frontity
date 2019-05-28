@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.5](https://github.com/frontity/frontity/compare/mars-theme-example@1.0.4...mars-theme-example@1.0.5) (2019-05-28)
+
+
+### Bug Fixes
+
+* **frontity:** add compiler options for ts-node in the register function ([#96](https://github.com/frontity/frontity/issues/96)) ([9960e7e](https://github.com/frontity/frontity/commit/9960e7e))
+
+
+
+
+
 ## [1.0.4](https://github.com/frontity/frontity/compare/mars-theme-example@1.0.3...mars-theme-example@1.0.4) (2019-05-27)
 
 **Note:** Version bump only for package mars-theme-example

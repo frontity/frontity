@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/frontity/frontity/compare/@frontity/mars-theme@0.3.7...@frontity/mars-theme@0.4.0) (2019-05-28)
+
+
+### Features
+
+* **list:** adds support for author lists ([#93](https://github.com/frontity/frontity/issues/93)) ([85586ee](https://github.com/frontity/frontity/commit/85586ee))
+
+
+
+
+
 ## [0.3.7](https://github.com/frontity/frontity/compare/@frontity/mars-theme@0.3.6...@frontity/mars-theme@0.3.7) (2019-05-27)
 
 **Note:** Version bump only for package @frontity/mars-theme

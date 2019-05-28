@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.14](https://github.com/frontity/frontity/compare/frontity@0.2.13...frontity@0.2.14) (2019-05-28)
+
+
+### Bug Fixes
+
+* **frontity:** add compiler options for ts-node in the register function ([#96](https://github.com/frontity/frontity/issues/96)) ([9960e7e](https://github.com/frontity/frontity/commit/9960e7e))
+
+
+
+
+
 ## [0.2.13](https://github.com/frontity/frontity/compare/frontity@0.2.12...frontity@0.2.13) (2019-05-27)
 
 **Note:** Version bump only for package frontity
