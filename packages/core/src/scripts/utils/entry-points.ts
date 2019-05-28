@@ -23,26 +23,38 @@ export const entryPoint = async ({
   mode: string;
   type: Type;
 }): Promise<string> => {
+  let extension: string | false = false;
   if (mode !== "default") {
     // Check first inside the mode and in the type.
-    if (await entryExists(`${name}/${mode}/${type}`))
-      return `${name}/${mode}/${type}`;
+    extension = await entryExists(`${name}/${mode}/${type}`);
+    if (extension) return `${name}/${mode}/${type}`;
+    // Check first inside the mode and in the type but in a folder.
+    extension = await entryExists(`${name}/${mode}/${type}/index`);
+    if (extension) return `${name}/${mode}/${type}/index`;
     // If it's client or server, check on index as well.
-    if (
-      (type === "client" || type === "server") &&
-      (await entryExists(`${name}/${mode}`))
-    ) {
-      return `${name}/${mode}`;
+    if (type === "client" || type === "server") {
+      // Check if it's a file.
+      extension = await entryExists(`${name}/${mode}`);
+      if (extension) {
+        return `${name}/${mode}`;
+      }
+      // Check if it's a folder.
+      extension = await entryExists(`${name}/${mode}/index`);
+      if (extension) {
+        return `${name}/${mode}/index`;
+      }
     }
   }
   // Check now outside of the mode for the specific type.
-  if (await entryExists(`${name}/${type}`)) return `${name}/${type}`;
+  extension = await entryExists(`${name}/${type}`);
+  if (extension) return `${name}/${type}`;
+  // Check now outside of the mode for the specific type but in a folder.
+  extension = await entryExists(`${name}/${type}/index`);
+  if (extension) return `${name}/${type}/index`;
   // And finally, if it's client or server, check on index as well.
-  if (
-    (type === "client" || type === "server") &&
-    (await entryExists(`${name}`))
-  ) {
-    return `${name}`;
+  extension = await entryExists(`${name}/index`);
+  if ((type === "client" || type === "server") && extension) {
+    return `${name}/index`;
   }
   // Don't return path if no entry point is found.
   return "";
