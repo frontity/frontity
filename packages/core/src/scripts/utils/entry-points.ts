@@ -4,36 +4,48 @@ import { flatten, uniqBy, uniq } from "lodash";
 import { Site } from "@frontity/file-settings";
 import { EntryPoints, Mode } from "../../types";
 import getVariable from "../../utils/get-variable";
-
-const extensions = [".js", ".jsx", ".ts", ".tsx"];
+import entryExists from "./entry-exists";
 
 type Package = {
   name: string;
   mode: string;
+  path: string;
 };
 
-// Check if the entry point exists using all the possible extensions.
-const entryExists = async ({
+type Type = "client" | "server" | "inline";
+
+export const entryPoint = async ({
   name,
   mode,
   type
 }: {
   name: string;
   mode: string;
-  type: string;
-}) => {
-  const allExist = await Promise.all(
-    extensions.map(async extension => {
-      return await pathExists(
-        resolve(
-          process.cwd(),
-          "node_modules",
-          `${name}/src/${mode}/${type}${extension}`
-        )
-      );
-    })
-  );
-  return allExist.reduce((prev, curr) => prev || curr, false);
+  type: Type;
+}): Promise<string> => {
+  if (mode !== "default") {
+    // Check first inside the mode and in the type.
+    if (await entryExists(`${name}/${mode}/${type}`))
+      return `${name}/${mode}/${type}`;
+    // If it's client or server, check on index as well.
+    if (
+      (type === "client" || type === "server") &&
+      (await entryExists(`${name}/${mode}`))
+    ) {
+      return `${name}/${mode}`;
+    }
+  }
+  // Check now outside of the mode for the specific type.
+  if (await entryExists(`${name}/${type}`)) return `${name}/${type}`;
+  // And finally, if it's client or server, check on index as well.
+  if (
+    (type === "client" || type === "server") &&
+    (await entryExists(`${name}`))
+  ) {
+    return `${name}`;
+  }
+  // Don't return path if no entry point is found.
+  return "";
 };
 
 // Throw if any of the packages is not installed.
@@ -61,7 +73,7 @@ const getPackagesList = async ({
   type
 }: {
   sites: Site[];
-  type: "client" | "server";
+  type: Type;
 }): Promise<Package[]> => {
   // Get a flat array of unique packages and its modes.
   const packages = uniqBy(
@@ -74,11 +86,11 @@ const getPackagesList = async ({
     // Iterate over the packages.
     packages.map(async ({ name, mode }) => {
       // Check if the entry point of that mode exists.
-      const exists = await entryExists({ name, mode, type });
-      return { name, mode, exists };
+      const path = await entryPoint({ name, mode, type });
+      return { name, mode, path };
     })
     // Remove the packages where the entry point doesn't exist.
-  )).filter(({ exists }) => exists);
+  )).filter(({ path }) => path !== "");
 };
 
 const generateImportsTemplate = ({
@@ -86,16 +98,13 @@ const generateImportsTemplate = ({
   type
 }: {
   packages: Package[];
-  type: "server" | "client";
+  type: Type;
 }): string => {
   let template = `import ${type} from "@frontity/core/src/${type}";\n`;
   // Create the "import" part of the file.
   packages.forEach(
-    ({ name, mode }) =>
-      (template += `import ${getVariable(
-        name,
-        mode
-      )} from "${name}/src/${mode}/${type}";\n`)
+    ({ name, mode, path }) =>
+      (template += `import ${getVariable(name, mode)} from "${path}";\n`)
   );
   // Create the "const packages = {...}" part of the file.
   template += "\nconst packages = {\n";
@@ -118,18 +127,18 @@ const generateHotModuleTemplate = ({
   module["hot"].accept(
     [
       "@frontity/core/src/client",\n`;
-  packages.forEach(({ name, mode }) => {
-    template += `      "${name}/src/${mode}/client",\n`;
+  packages.forEach(({ path }) => {
+    template += `      "${path}",\n`;
   });
   template += `    ],
     () => {
       const client = require("@frontity/core/src/client").default;\n`;
   packages.forEach(
-    ({ name, mode }) =>
+    ({ name, mode, path }) =>
       (template += `      const ${getVariable(
         name,
         mode
-      )} = require("${name}/src/${mode}/client").default;\n`)
+      )} = require("${path}").default;\n`)
   );
   template += "      const packages = {\n";
   packages.forEach(
