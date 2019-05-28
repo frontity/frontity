@@ -1,9 +1,8 @@
 import { Settings } from "frontity/types";
 import ExtensionExample1 from "@frontity/extension-example-1";
 import ExtensionExample2 from "@frontity/extension-example-2";
-import TinyRouter from "@frontity/tiny-router";
 
-const settings: Settings<ExtensionExample1 | ExtensionExample2 | TinyRouter> = [
+const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
   {
     name: "site-1",
     state: {
