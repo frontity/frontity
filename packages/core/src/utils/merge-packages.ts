@@ -32,7 +32,7 @@ export default ({
     });
   });
   config.state = deepmerge(config.state, state, {
-    clone: false,
+    clone: true,
     arrayMerge: (dest, source) => source
   });
   return config;

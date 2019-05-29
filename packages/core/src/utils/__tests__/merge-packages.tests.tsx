@@ -84,4 +84,12 @@ describe("mergePackages", () => {
     const merged = mergePackages({ packages, state });
     expect(merged.libraries.namespace3.lib2.init()).toBe("initialized");
   });
+
+  it("should deep clone state", () => {
+    const merged = mergePackages({ packages, state });
+    expect(state.frontity).not.toBe(merged.state.frontity);
+    expect(packages.package_2_html.state.namespace3).not.toBe(
+      merged.state.namespace3
+    );
+  });
 });
