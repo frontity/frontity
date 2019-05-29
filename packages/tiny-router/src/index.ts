@@ -6,15 +6,7 @@ const tinyRouter: TinyRouter = {
   state: {
     router: {
       path: "/",
-      page: 1,
-      location: ({ state }) => {
-        return new URL(
-          state.router.page > 1
-            ? state.router.path.replace(/\/?$/, `/page/${state.router.page}/`)
-            : state.router.path,
-          state.frontity.url
-        );
-      }
+      page: 1
     }
   },
   actions: {

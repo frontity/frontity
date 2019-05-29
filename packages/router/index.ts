@@ -1,4 +1,4 @@
-import { Package, Action, Derived } from "@frontity/types";
+import { Package, Action } from "frontity/types";
 
 export type PathOrObj = string | { path: string; page?: number };
 
@@ -8,7 +8,6 @@ interface Router extends Package {
     router: {
       path: string;
       page: number;
-      location: Derived<Router, URL>;
     };
   };
   actions: {

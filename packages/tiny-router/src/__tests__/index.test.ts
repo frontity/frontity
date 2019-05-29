@@ -9,10 +9,10 @@ beforeEach(() => {
   config = {
     name: "@frontity/tiny-router",
     state: {
-      router: { ...tinyRouter.state.router },
       frontity: {
-        url: "https://test.frontity.io"
-      }
+        platform: "server"
+      },
+      router: { ...tinyRouter.state.router }
     },
     actions: {
       router: {
@@ -21,32 +21,6 @@ beforeEach(() => {
       }
     }
   };
-});
-
-describe("state", () => {
-  test("location without page should work", () => {
-    const store = createStore(config);
-    store.actions.router.set("/some-post/");
-    expect(store.state.router.location.href).toBe(
-      "https://test.frontity.io/some-post/"
-    );
-  });
-
-  test("location with page = 1 should work", () => {
-    const store = createStore(config);
-    store.actions.router.set({ path: "/category/nature/", page: 1 });
-    expect(store.state.router.location.href).toBe(
-      "https://test.frontity.io/category/nature/"
-    );
-  });
-
-  test("location with page > 1 should work", () => {
-    const store = createStore(config);
-    store.actions.router.set({ path: "/category/nature/", page: 2 });
-    expect(store.state.router.location.href).toBe(
-      "https://test.frontity.io/category/nature/page/2/"
-    );
-  });
 });
 
 describe("actions", () => {
@@ -193,6 +167,7 @@ describe("actions", () => {
   });
 
   test("init() should add event listener to handle popstate events", () => {
+    config.state.frontity.platform = "client";
     const store = createStore(config);
     store.actions.router.init();
 

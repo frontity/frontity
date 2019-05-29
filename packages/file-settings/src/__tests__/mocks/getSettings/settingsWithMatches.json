@@ -1,14 +1,14 @@
 [
   {
     "name": "settings-with-short-match",
-    "mode": "html",
+    "mode": "default",
     "state": {},
     "match": ["https://frontity.org.*"],
     "packages": []
   },
   {
     "name": "settings-with-large-match",
-    "mode": "html",
+    "mode": "default",
     "state": {},
     "match": ["https://frontity.org/page/.*"],
     "packages": []

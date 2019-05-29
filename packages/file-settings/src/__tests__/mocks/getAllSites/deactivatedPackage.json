@@ -1,7 +1,7 @@
 [
   {
     "name": "mono-settings",
-    "mode": "html",
+    "mode": "default",
     "state": {},
     "packages": [
       {

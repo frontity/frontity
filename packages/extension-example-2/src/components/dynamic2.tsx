@@ -1,6 +1,6 @@
 import React from "react";
 import { css } from "frontity";
-import frontity from "./frontity.png";
+import frontity from "../assets/frontity.png";
 
 const Dynamic = () => (
   <div

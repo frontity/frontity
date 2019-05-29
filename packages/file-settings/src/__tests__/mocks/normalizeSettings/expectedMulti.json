@@ -1,11 +1,11 @@
 [
   {
-    "name": "multi-settings-html",
-    "mode": "html",
+    "name": "multi-settings-default",
+    "mode": "default",
     "state": {},
     "packages": [
       {
-        "name": "@frontity/theme-html",
+        "name": "@frontity/theme-default",
         "active": true,
         "state": {}
       },

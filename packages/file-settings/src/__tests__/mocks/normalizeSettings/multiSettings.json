@@ -1,8 +1,8 @@
 [
   {
-    "name": "multi-settings-html",
+    "name": "multi-settings-default",
     "packages": [
-      "@frontity/theme-html",
+      "@frontity/theme-default",
       {
         "name": "@frontity/wp-source"
       }

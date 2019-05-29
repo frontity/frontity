@@ -1,8 +1,8 @@
 import React from "react";
 import { loadable } from "frontity";
-import Package from "../..";
+import Package from "../";
 
-const Dynamic = loadable(() => import("./dynamic2"));
+const Dynamic = loadable(() => import("./components/dynamic2"));
 
 const ExtensionExample2: Package = {
   name: "@frontity/extension-example-2",

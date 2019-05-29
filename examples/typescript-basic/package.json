@@ -5,7 +5,7 @@
   "description": "The minimum setup for Frontity using TypeScript",
   "scripts": {
     "dev": "frontity dev",
-    "dev:inspect": "node -r ts-node/register/transpile-only --inspect ./node_modules/.bin/frontity dev",
+    "dev:inspect": "node -r ts-node/register/transpile-only --inspect ./node_modules/frontity/src/commands.ts dev",
     "build": "frontity build",
     "build:inspect": "node -r ts-node/register/transpile-only --inspect ./node_modules/.bin/frontity build",
     "serve": "frontity serve",
