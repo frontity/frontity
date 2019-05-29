@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Main Frontity package",
   "keywords": [
     "frontity"

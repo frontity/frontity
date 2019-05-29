@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.15](https://github.com/frontity/frontity/compare/frontity@0.2.14...frontity@0.2.15) (2019-05-29)
+
+**Note:** Version bump only for package frontity
+
+
+
+
+
 ## [0.2.14](https://github.com/frontity/frontity/compare/frontity@0.2.13...frontity@0.2.14) (2019-05-28)
 
 

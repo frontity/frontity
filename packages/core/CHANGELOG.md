@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/frontity/frontity/compare/@frontity/core@0.4.0...@frontity/core@0.4.1) (2019-05-29)
+
+
+### Bug Fixes
+
+* **core:** deep clone state on each SSR to avoid bugs ([#104](https://github.com/frontity/frontity/issues/104)) ([0059eab](https://github.com/frontity/frontity/commit/0059eab)), closes [#101](https://github.com/frontity/frontity/issues/101)
+
+
+
+
+
 # [0.4.0](https://github.com/frontity/frontity/compare/@frontity/core@0.3.7...@frontity/core@0.4.0) (2019-05-27)
 
 
