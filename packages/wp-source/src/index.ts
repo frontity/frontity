@@ -3,7 +3,7 @@ import state from "./state";
 import actions from "./actions";
 import { Api, Resolver, populate, routeUtils } from "./libraries";
 
-const wpSource: WpSource = {
+const wpSource = (): WpSource => ({
   name: "@frontity/wp-source",
   state: {
     source: state
@@ -19,6 +19,6 @@ const wpSource: WpSource = {
       routeUtils
     }
   }
-};
+});
 
 export default wpSource;
