@@ -1,4 +1,10 @@
-import Connect from "../connect";
+import React, {
+  ComponentType,
+  FunctionComponent,
+  ClassicComponent,
+  ComponentClass
+} from "react";
+import Connect, { ConnectFunction } from "../connect";
 import { FilterInjectedProps } from "../utils";
 import Action from "../action";
 import Package from "../package";
@@ -35,6 +41,8 @@ interface Package1 extends Package {
   libraries: {
     namespace3: {
       library1: () => void;
+      Component1: React.FC<{ html: string }>;
+      Component2: React.ComponentClass<{ html: string }>;
     };
   };
 }
@@ -43,6 +51,32 @@ interface OwnProps {
   ownProp1: string;
   name: string;
 }
+
+const Component1: React.FC<Connect<Package1, { html: string }>> = ({
+  state,
+  actions,
+  libraries,
+  html
+}) => {
+  state;
+  actions;
+  libraries;
+  return <div>{html}</div>;
+};
+
+class Component2 extends React.Component<Connect<Package1, { html: string }>> {
+  render() {
+    this.props.state;
+    this.props.actions;
+    this.props.libraries;
+    return <div>{this.props.html}</div>;
+  }
+}
+
+const connect: ConnectFunction = comp => comp;
+
+const ConnectedComponent1 = connect(Component1);
+const ConnectedComponent2 = connect(Component2);
 
 const internalProps: Connect<Package1, OwnProps> = {
   state: {
@@ -77,7 +111,9 @@ const internalProps: Connect<Package1, OwnProps> = {
   },
   libraries: {
     namespace3: {
-      library1: () => {}
+      library1: () => {},
+      Component1: ConnectedComponent1,
+      Component2: ConnectedComponent2
     }
   },
   ownProp1: "ownProp1",
