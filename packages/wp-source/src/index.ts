@@ -1,7 +1,7 @@
 import WpSource from "..";
 import state from "./state";
 import actions from "./actions";
-import { Api, Resolver, populate } from "./libraries";
+import { Api, Resolver, populate, routeUtils } from "./libraries";
 
 const wpSource: WpSource = {
   name: "@frontity/wp-source",
@@ -15,7 +15,8 @@ const wpSource: WpSource = {
     source: {
       api: new Api(),
       resolver: new Resolver(),
-      populate
+      populate,
+      routeUtils
     }
   }
 };

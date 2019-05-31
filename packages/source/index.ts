@@ -7,6 +7,7 @@ export type PathOrObj =
   | {
       path: string;
       page?: number;
+      query?: Record<string, any>;
     };
 
 export type Data = Data;

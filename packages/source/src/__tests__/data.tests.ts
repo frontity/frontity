@@ -23,21 +23,17 @@ const notFound: NotFoundData = {
 
 const archive: ArchiveData = {
   isArchive: true,
-  pages: [
-    [
-      {
-        id: 60,
-        type: "post",
-        link: "https://test.frontity.io/2016/the-beauties-of-gullfoss"
-      }
-    ],
-    [
-      {
-        id: 57,
-        type: "post",
-        link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/"
-      }
-    ]
+  items: [
+    {
+      id: 60,
+      type: "post",
+      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss"
+    },
+    {
+      id: 57,
+      type: "post",
+      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/"
+    }
   ],
   isReady: true,
   isFetching: false,
@@ -50,7 +46,7 @@ const taxonomy: TaxonomyData = {
   isTaxonomy: true,
   taxonomy: "taxonomy",
   id: 7,
-  pages: [],
+  items: [],
   isReady: true,
   isFetching: false
 };
@@ -61,7 +57,7 @@ const category: CategoryData = {
   isCategory: true,
   taxonomy: "category",
   id: 7,
-  pages: [],
+  items: [],
   isReady: true,
   isFetching: false,
   total: 13,
@@ -74,7 +70,7 @@ const tag: TagData = {
   isTag: true,
   taxonomy: "tag",
   id: 7,
-  pages: [],
+  items: [],
   isReady: true,
   isFetching: false
 };
@@ -83,7 +79,7 @@ const author: AuthorData = {
   isArchive: true,
   isAuthor: true,
   id: 7,
-  pages: [],
+  items: [],
   isReady: true,
   isFetching: false
 };
@@ -92,7 +88,7 @@ const postTypeArchive: PostTypeArchiveData = {
   isArchive: true,
   isPostTypeArchive: true,
   type: "post",
-  pages: [],
+  items: [],
   isReady: true,
   isFetching: false
 };
@@ -104,7 +100,7 @@ const postArchive: PostArchiveData = {
   isHome: true,
   isFrontPage: true,
   type: "post",
-  pages: [],
+  items: [],
   isReady: true,
   isFetching: false
 };
@@ -115,7 +111,7 @@ const dateArchive: DateData = {
   year: 2016,
   month: 0,
   day: 31,
-  pages: [],
+  items: [],
   isReady: true,
   isFetching: false
 };

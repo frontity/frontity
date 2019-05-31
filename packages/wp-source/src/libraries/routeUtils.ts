@@ -1,7 +1,7 @@
 type RouteParams = {
   path: string;
   page?: number;
-  query?: string | Record<string, any>;
+  query?: Record<string, any>;
 };
 
 const removeDomain = (input: string): string => {
@@ -11,10 +11,21 @@ const removeDomain = (input: string): string => {
 
 const addFinalSlash = (path: string): string => path.replace(/\/?$/, "/");
 
-const objToQuery = (obj: Record<string, any>) =>
-  `?${Object.entries(obj)
-    .map(([key, value]) => `${key}=${value}`)
-    .join("&")}`;
+const objToQuery = (obj: Record<string, any>) => {
+  const entries = Object.entries(obj);
+  return entries.length
+    ? `?${entries.map(([key, value]) => `${key}=${value}`).join("&")}`
+    : "";
+};
+
+const queryToObj = (query: string = "") =>
+  query && query.includes("=")
+    ? query.split("&").reduce((result, param) => {
+        const [k, v] = param.split("=");
+        result[k] = v;
+        return result;
+      }, {})
+    : {};
 
 export const routeToParams = (route: string): RouteParams => {
   route = removeDomain(route);
@@ -29,22 +40,22 @@ export const routeToParams = (route: string): RouteParams => {
   return {
     path: addFinalSlash(path),
     page: parseInt(page, 10),
-    query: query ? `?${query}` : ""
+    query: queryToObj(query)
   };
 };
 
 export const paramsToRoute = ({
   path = "/",
   page = 1,
-  query = ""
+  query = {}
 }: RouteParams): string => {
   // correct path
   path = addFinalSlash(path);
 
   const pathAndPage = page > 1 ? `${path}page/${page}/` : path;
-  const queryStr = typeof query === "string" ? query : objToQuery(query);
+  const queryStr = objToQuery(query);
 
-  return `${page > 1 ? `${path}page/${page}/` : path}${queryStr}`;
+  return `${pathAndPage}${queryStr}`;
 };
 
 export const normalize = (route: string): string =>

@@ -1,5 +1,5 @@
 import WpSource from "../";
-import { routeToParams } from "./libraries/routeUtils";
+import { routeToParams, paramsToRoute } from "./libraries/routeUtils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
@@ -7,37 +7,39 @@ const actions: WpSource["actions"]["source"] = {
     const { source } = state;
     const { resolver } = libraries.source;
 
-    let path: string;
-    let page: number;
+    // Get params
+    const routeParams =
+      typeof routeOrParams === "string"
+        ? routeToParams(routeOrParams)
+        : routeOrParams;
 
-    if (typeof routeOrParams === "string") {
-      ({ path, page } = routeToParams(routeOrParams));
-    } else {
-      ({ path, page } = routeToParams(routeOrParams.path));
-      if (routeOrParams.page) page = routeOrParams.page;
-    }
+    // Get route from params
+    const route = paramsToRoute(routeParams);
 
     // Get current data object
-    const data = source.data[path];
+    const data = source.data[route];
 
     // return if the data that it's about to be fetched already exists
-    if (data && data.isArchive && data.pages[page]) return;
+    if (data) return;
 
-    // init data if needed
-    if (!data) source.data[path] = {};
+    // init data
+    source.data[route] = {
+      isReady: false,
+      isFetching: true
+    };
 
     // get and execute the corresponding handler based on path
     try {
-      const { handler, params } = resolver.match(path);
-      await handler(source, { path, params, page, libraries });
-      source.data[path].isReady = true;
+      const { handler, params } = resolver.match(routeParams.path);
+      await handler(source, { route, params, libraries });
+      source.data[route].isReady = true;
     } catch (e) {
-      console.warn(`An error ocurred fetching '${path}':\n`, e);
-      source.data[path].is404 = true;
+      console.warn(`An error ocurred fetching '${route}':\n`, e);
+      source.data[route].is404 = true;
     }
 
     // end fetching
-    source.data[path].isFetching = false;
+    source.data[route].isFetching = false;
   },
 
   init: ({ state, libraries }) => {

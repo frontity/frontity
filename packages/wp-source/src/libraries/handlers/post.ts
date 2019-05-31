@@ -1,7 +1,7 @@
 import { Handler } from "../../..";
 import getIdBySlug from "./utils/get-id-by-slug";
 
-const postHandler: Handler = async (source, { path, params, libraries }) => {
+const postHandler: Handler = async (source, { route, params, libraries }) => {
   const { api, populate } = libraries.source;
 
   const { slug } = params;
@@ -23,7 +23,7 @@ const postHandler: Handler = async (source, { path, params, libraries }) => {
   }
 
   // Init data
-  source.data[path] = {
+  source.data[route] = {
     id,
     type: "post",
     isPostType: true,

@@ -33,7 +33,10 @@ describe("route utils - routeToParams", () => {
     expect(routeToParams("/some/path/page/2?k1=v1&k2=v2")).toMatchObject({
       path: "/some/path/",
       page: 2,
-      query: "?k1=v1&k2=v2"
+      query: {
+        k1: "v1",
+        k2: "v2"
+      }
     });
   });
   test("extracts params (w/ domain)", () => {
@@ -42,7 +45,10 @@ describe("route utils - routeToParams", () => {
     ).toMatchObject({
       path: "/some/path/",
       page: 2,
-      query: "?k1=v1&k2=v2"
+      query: {
+        k1: "v1",
+        k2: "v2"
+      }
     });
   });
 });
@@ -67,7 +73,10 @@ describe("route utils - paramsToRoute", () => {
     expect(
       paramsToRoute({
         path: "/some/path/",
-        query: "?k1=v1&k2=v2"
+        query: {
+          k1: "v1",
+          k2: "v2"
+        }
       })
     ).toBe("/some/path/?k1=v1&k2=v2");
   });
@@ -76,7 +85,10 @@ describe("route utils - paramsToRoute", () => {
       paramsToRoute({
         path: "/some/path/",
         page: 2,
-        query: "?k1=v1&k2=v2"
+        query: {
+          k1: "v1",
+          k2: "v2"
+        }
       })
     ).toBe("/some/path/page/2/?k1=v1&k2=v2");
   });

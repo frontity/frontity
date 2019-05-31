@@ -3,19 +3,29 @@ import getIdBySlug from "./utils/get-id-by-slug";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
-const authorHandler: Handler = async (source, { route, params, libraries }) => {
+const taxonomyHandler = ({
+  taxonomy,
+  postType,
+  truths = {}
+}: {
+  taxonomy: { type: string; endpoint: string };
+  postType: { endpoint: string; param: string };
+  props?: Record<string, string>;
+  truths?: Record<string, true>;
+}): Handler => async (source, { route, params, libraries }) => {
   const { api, populate, routeUtils } = libraries.source;
-  const { page, query } = routeUtils.routeToParams(route);
+  const { page } = routeUtils.routeToParams(route);
 
   // 1. search id in state or get it from WP REST API
   const { slug } = params;
   const id =
-    getIdBySlug(source.author, slug) || (await api.getIdBySlug("users", slug));
+    getIdBySlug(source[taxonomy.type], slug) ||
+    (await api.getIdBySlug(taxonomy.endpoint, slug));
 
   // 2. fetch the specified page
   const response = await api.get({
-    endpoint: "posts",
-    params: { author: id, search: query.s, page, _embed: true }
+    endpoint: postType.endpoint,
+    params: { [postType.param]: id, search: params.s, page, _embed: true }
   });
 
   // 3. throw an error if page is out of range
@@ -28,14 +38,16 @@ const authorHandler: Handler = async (source, { route, params, libraries }) => {
 
   // 5. add data to source
   source.data[route] = {
+    taxonomy: taxonomy.type,
     id,
     items,
     total,
     totalPages,
     isArchive: true,
-    isAuthor: true,
-    isFetching: true
+    isTaxonomy: true,
+    isFetching: true,
+    ...truths
   };
 };
 
-export default authorHandler;
+export default taxonomyHandler;

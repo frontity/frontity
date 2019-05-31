@@ -2,6 +2,7 @@ import { State } from "@frontity/types";
 import WpSource from "../../../..";
 import handler from "../post";
 import { mockResponse } from "./mocks/helpers";
+import routeUtils from "../../routeUtils";
 
 const post60 = {
   id: 60,
@@ -55,7 +56,8 @@ beforeEach(() => {
           slug: "the-beauties-of-gullfoss",
           link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/"
         }
-      ])
+      ]),
+      routeUtils
     }
   };
 });
@@ -64,7 +66,7 @@ describe("post", () => {
   test("doesn't exist in source.post", async () => {
     // source.fetch("/the-beauties-of-gullfoss/")
     await handler(state, {
-      path: "/the-beauties-of-gullfoss/",
+      route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
       libraries
     });
@@ -79,7 +81,7 @@ describe("post", () => {
 
     // source.fetch("/the-beauties-of-gullfoss/")
     await handler(state, {
-      path: "/the-beauties-of-gullfoss/",
+      route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
       libraries
     });
@@ -99,7 +101,7 @@ describe("post", () => {
 
     // source.fetch("/the-beauties-of-gullfoss/")
     const promise = handler(state, {
-      path: "/the-beauties-of-gullfoss/",
+      route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
       libraries
     });

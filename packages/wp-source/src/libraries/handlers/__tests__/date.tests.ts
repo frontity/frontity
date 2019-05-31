@@ -6,6 +6,7 @@ import { mockResponse, expectEntities } from "./mocks/helpers";
 import posts2016 from "./mocks/posts2016.json";
 import posts2016p2 from "./mocks/posts2016p2.json";
 import posts20161025 from "./mocks/posts2016-10-25.json";
+import routeUtils from "../../routeUtils";
 
 let state: State<WpSource>["source"];
 let libraries: WpSource["libraries"];
@@ -40,7 +41,8 @@ beforeEach(() => {
         getIdBySlug: jest.fn(),
         get: jest.fn()
       },
-      populate
+      populate,
+      routeUtils
     }
   };
 });
@@ -60,7 +62,7 @@ describe("date", () => {
     state.data["/2016/"] = { isFetching: true };
 
     await handler(state, {
-      path: "/2016/",
+      route: "/2016/",
       params: { year: "2016" },
       libraries
     });
@@ -77,11 +79,10 @@ describe("date", () => {
     );
 
     // source.fetch({ path: "/2016/", page: 2 })
-    state.data["/2016/"].isFetching = true;
+    state.data["/2016/page/2/"] = { isFetching: true };
 
     await handler(state, {
-      path: "/2016/",
-      page: 2,
+      route: "/2016/page/2/",
       params: { year: "2016" },
       libraries
     });
@@ -106,7 +107,7 @@ describe("date", () => {
     state.data["/2016/10/"] = { isFetching: true };
 
     await handler(state, {
-      path: "/2016/10/",
+      route: "/2016/10/",
       params: { year: "2016", month: "10" },
       libraries
     });
@@ -130,7 +131,7 @@ describe("date", () => {
     state.data["/2016/10/25/"] = { isFetching: true };
 
     await handler(state, {
-      path: "/2016/10/25/",
+      route: "/2016/10/25/",
       params: { year: "2016", month: "10", day: "25" },
       libraries
     });

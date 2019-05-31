@@ -1,14 +1,13 @@
 import { Action, State } from "@frontity/types";
 import Source from "@frontity/source";
 import { EntityData } from "@frontity/source/src/data";
-import { Api, Resolver } from "./src/libraries";
+import { Api, Resolver, routeUtils } from "./src/libraries";
 
 export type Handler = (
   state: State<WpSource>["source"],
   payload: {
-    path: string;
+    route: string;
     params: { [param: string]: any };
-    page?: number;
     libraries: WpSource["libraries"];
   }
 ) => Promise<void>;
@@ -35,6 +34,7 @@ interface WpSource extends Source {
         state: State<WpSource>["source"],
         response: Response
       ) => Promise<EntityData[]>;
+      routeUtils: typeof routeUtils;
     };
   };
 }

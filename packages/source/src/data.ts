@@ -55,7 +55,7 @@ export type ArchiveData = Merge<
   BaseData,
   {
     isArchive: true;
-    pages: EntityData[][];
+    items: EntityData[];
     total?: number;
     totalPages?: number;
   }
