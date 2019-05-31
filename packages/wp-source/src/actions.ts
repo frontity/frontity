@@ -1,20 +1,20 @@
 import WpSource from "../";
-import { parsePath } from "./utils/parse-path";
+import { routeToParams } from "./libraries/routeUtils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries }) => async pathOrObj => {
+  fetch: ({ state, libraries }) => async routeOrParams => {
     const { source } = state;
     const { resolver } = libraries.source;
 
     let path: string;
     let page: number;
 
-    if (typeof pathOrObj === "string") {
-      ({ path, page } = parsePath(pathOrObj));
+    if (typeof routeOrParams === "string") {
+      ({ path, page } = routeToParams(routeOrParams));
     } else {
-      ({ path, page } = parsePath(pathOrObj.path));
-      if (pathOrObj.page) page = pathOrObj.page;
+      ({ path, page } = routeToParams(routeOrParams.path));
+      if (routeOrParams.page) page = routeOrParams.page;
     }
 
     // Get current data object
