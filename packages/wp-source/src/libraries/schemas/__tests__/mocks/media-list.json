@@ -49,10 +49,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/212" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/6" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/6"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=212" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=212"
+        }
       ],
       "wp:term": [
         {
@@ -61,7 +71,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=212"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -73,31 +85,19 @@
           "link": "https://demo.worona.org/author/david/",
           "slug": "david",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/a9ee5b4447a92a82d062bead478b1363?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/6" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/6" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -105,7 +105,9 @@
     "id": 193,
     "date": "2017-03-27T15:23:51",
     "date_gmt": "2017-03-27T15:23:51",
-    "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png" },
+    "guid": {
+      "rendered": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png"
+    },
     "modified": "2017-03-27T15:23:58",
     "modified_gmt": "2017-03-27T15:23:58",
     "slug": "road-trip",
@@ -170,10 +172,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/193" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=193" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=193"
+        }
       ],
       "wp:term": [
         {
@@ -182,7 +194,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=193"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -190,36 +204,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -257,32 +258,28 @@
           "width": 150,
           "height": 150,
           "mime_type": "image/png",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2017/03/amanda-sandlin-10508-2-150x150.png"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/amanda-sandlin-10508-2-150x150.png"
         },
         "medium": {
           "file": "amanda-sandlin-10508-2-300x200.png",
           "width": 300,
           "height": 200,
           "mime_type": "image/png",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2017/03/amanda-sandlin-10508-2-300x200.png"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/amanda-sandlin-10508-2-300x200.png"
         },
         "medium_large": {
           "file": "amanda-sandlin-10508-2-768x513.png",
           "width": 768,
           "height": 513,
           "mime_type": "image/png",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2017/03/amanda-sandlin-10508-2-768x513.png"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/amanda-sandlin-10508-2-768x513.png"
         },
         "full": {
           "file": "amanda-sandlin-10508-2.png",
           "width": 800,
           "height": 534,
           "mime_type": "image/png",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2017/03/amanda-sandlin-10508-2.png"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/amanda-sandlin-10508-2.png"
         }
       },
       "image_meta": {
@@ -305,10 +302,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/188" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=188" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=188"
+        }
       ],
       "wp:term": [
         {
@@ -317,7 +324,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=188"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -325,36 +334,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -392,16 +388,14 @@
           "width": 150,
           "height": 150,
           "mime_type": "image/png",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2017/03/pexels-photo-297755-150x150.png"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/pexels-photo-297755-150x150.png"
         },
         "medium": {
           "file": "pexels-photo-297755-300x196.png",
           "width": 300,
           "height": 196,
           "mime_type": "image/png",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2017/03/pexels-photo-297755-300x196.png"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2017/03/pexels-photo-297755-300x196.png"
         },
         "full": {
           "file": "pexels-photo-297755.png",
@@ -431,10 +425,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/185" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=185" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=185"
+        }
       ],
       "wp:term": [
         {
@@ -443,7 +447,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=185"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -451,36 +457,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -488,7 +481,9 @@
     "id": 134,
     "date": "2017-01-12T19:24:27",
     "date_gmt": "2017-01-12T19:24:27",
-    "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/iceland2.jpg" },
+    "guid": {
+      "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/iceland2.jpg"
+    },
     "modified": "2017-01-12T19:24:27",
     "modified_gmt": "2017-01-12T19:24:27",
     "slug": "iceland2",
@@ -574,10 +569,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/134" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=134" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=134"
+        }
       ],
       "wp:term": [
         {
@@ -586,7 +591,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=134"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -594,36 +601,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -631,7 +625,9 @@
     "id": 133,
     "date": "2017-01-12T19:23:55",
     "date_gmt": "2017-01-12T19:23:55",
-    "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/iceland3.jpg" },
+    "guid": {
+      "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/iceland3.jpg"
+    },
     "modified": "2017-01-12T19:23:55",
     "modified_gmt": "2017-01-12T19:23:55",
     "slug": "iceland3",
@@ -717,10 +713,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/133" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=133" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=133"
+        }
       ],
       "wp:term": [
         {
@@ -729,7 +735,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=133"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -737,36 +745,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -774,7 +769,9 @@
     "id": 132,
     "date": "2017-01-12T19:23:18",
     "date_gmt": "2017-01-12T19:23:18",
-    "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/iceland1.jpg" },
+    "guid": {
+      "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/iceland1.jpg"
+    },
     "modified": "2017-01-12T19:23:18",
     "modified_gmt": "2017-01-12T19:23:18",
     "slug": "iceland1",
@@ -860,10 +857,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/132" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=132" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=132"
+        }
       ],
       "wp:term": [
         {
@@ -872,7 +879,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=132"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -880,36 +889,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -917,7 +913,9 @@
     "id": 129,
     "date": "2017-01-12T16:20:42",
     "date_gmt": "2017-01-12T16:20:42",
-    "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral.jpg" },
+    "guid": {
+      "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral.jpg"
+    },
     "modified": "2017-01-12T16:20:52",
     "modified_gmt": "2017-01-12T16:20:52",
     "slug": "pariscathedral",
@@ -945,40 +943,35 @@
           "width": 150,
           "height": 150,
           "mime_type": "image/jpeg",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-150x150.jpg"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-150x150.jpg"
         },
         "medium": {
           "file": "pariscathedral-300x134.jpg",
           "width": 300,
           "height": 134,
           "mime_type": "image/jpeg",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-300x134.jpg"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-300x134.jpg"
         },
         "medium_large": {
           "file": "pariscathedral-768x343.jpg",
           "width": 768,
           "height": 343,
           "mime_type": "image/jpeg",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-768x343.jpg"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-768x343.jpg"
         },
         "large": {
           "file": "pariscathedral-1024x457.jpg",
           "width": 1024,
           "height": 457,
           "mime_type": "image/jpeg",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-1024x457.jpg"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-1024x457.jpg"
         },
         "post-thumbnail": {
           "file": "pariscathedral-1200x535.jpg",
           "width": 1200,
           "height": 535,
           "mime_type": "image/jpeg",
-          "source_url":
-            "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-1200x535.jpg"
+          "source_url": "https://demo.worona.org/wp-content/uploads/2016/11/pariscathedral-1200x535.jpg"
         },
         "full": {
           "file": "pariscathedral.jpg",
@@ -1008,10 +1001,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/129" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=129" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=129"
+        }
       ],
       "wp:term": [
         {
@@ -1020,7 +1023,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=129"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -1028,36 +1033,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -1065,7 +1057,9 @@
     "id": 126,
     "date": "2017-01-12T16:15:29",
     "date_gmt": "2017-01-12T16:15:29",
-    "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/forest.jpg" },
+    "guid": {
+      "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/forest.jpg"
+    },
     "modified": "2017-01-12T16:15:36",
     "modified_gmt": "2017-01-12T16:15:36",
     "slug": "forest",
@@ -1151,10 +1145,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/126" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=126" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=126"
+        }
       ],
       "wp:term": [
         {
@@ -1163,7 +1167,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=126"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -1171,36 +1177,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   },
@@ -1208,7 +1201,9 @@
     "id": 122,
     "date": "2017-01-12T16:08:16",
     "date_gmt": "2017-01-12T16:08:16",
-    "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/tajmahal.jpg" },
+    "guid": {
+      "rendered": "https://demo.worona.org/wp-content/uploads/2016/11/tajmahal.jpg"
+    },
     "modified": "2017-01-12T16:08:23",
     "modified_gmt": "2017-01-12T16:08:23",
     "slug": "tajmahal",
@@ -1294,10 +1289,20 @@
     "_links": {
       "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/122" }],
       "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-      "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-      "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+      "about": [
+        { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+        }
+      ],
       "replies": [
-        { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=122" }
+        {
+          "embeddable": true,
+          "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=122"
+        }
       ],
       "wp:term": [
         {
@@ -1306,7 +1311,9 @@
           "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=122"
         }
       ],
-      "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
     },
     "_embedded": {
       "author": [
@@ -1314,36 +1321,23 @@
           "id": 2,
           "name": "Reyes Martinez",
           "url": "http://www.worona.org",
-          "description":
-            "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+          "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
           "link": "https://demo.worona.org/author/reyes/",
           "slug": "reyes",
           "avatar_urls": {
-            "24":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96":
-              "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
+            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g"
           },
           "_links": {
-            "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-            "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+            "self": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }
+            ],
+            "collection": [
+              { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+            ]
           }
         }
-      ],
-      "wp:term": [
-        [
-          {
-            "id": "attachment",
-            "link": false,
-            "count": 0,
-            "name": "Media",
-            "slug": "attachment",
-            "taxonomy": "latest",
-            "yoast_meta": { "title": "attachment" }
-          }
-        ]
       ]
     }
   }

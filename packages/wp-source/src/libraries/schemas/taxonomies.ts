@@ -1,4 +1,5 @@
 import { schema } from "normalizr";
+import { removeDomain } from "./utils";
 
 export const taxonomy = new schema.Entity(
   "taxonomy",
@@ -6,6 +7,7 @@ export const taxonomy = new schema.Entity(
   {
     processStrategy(entity) {
       const result = { ...entity };
+      result.link = removeDomain(result.link);
       result.taxonomy =
         result.taxonomy === "post_tag" ? "tag" : result.taxonomy;
       return result;

@@ -23,7 +23,7 @@ Object {
       },
       "description": "",
       "id": 1,
-      "link": "https://demo.worona.org/author/worona/",
+      "link": "/author/worona/",
       "meta": Object {},
       "name": "worona",
       "slug": "worona",
@@ -51,7 +51,7 @@ Object {
 
 You can find her on Twitter as @r_martinezduque.",
       "id": 2,
-      "link": "https://demo.worona.org/author/reyes/",
+      "link": "/author/reyes/",
       "meta": Object {},
       "name": "Reyes Martinez",
       "slug": "reyes",
@@ -77,7 +77,7 @@ You can find her on Twitter as @r_martinezduque.",
       },
       "description": "Software engineer and entrepreneur who builds stuff like TrainYourEars, Hertz Lovers or Worona.",
       "id": 3,
-      "link": "https://demo.worona.org/author/luis/",
+      "link": "/author/luis/",
       "meta": Object {},
       "name": "Luis Herranz",
       "slug": "luis",
@@ -103,7 +103,7 @@ You can find her on Twitter as @r_martinezduque.",
       },
       "description": "Alan is a WordPress enthusiast who enjoys travelling, music and pizza.",
       "id": 4,
-      "link": "https://demo.worona.org/author/alan/",
+      "link": "/author/alan/",
       "meta": Object {},
       "name": "Alan Martin",
       "slug": "alan",
@@ -129,7 +129,7 @@ You can find her on Twitter as @r_martinezduque.",
       },
       "description": "",
       "id": 6,
-      "link": "https://demo.worona.org/author/david/",
+      "link": "/author/david/",
       "meta": Object {},
       "name": "David Arenas",
       "slug": "david",
@@ -175,7 +175,7 @@ Object {
       "count": 6,
       "description": "",
       "id": 4,
-      "link": "https://demo.worona.org/wp-cat/cities/",
+      "link": "/wp-cat/cities/",
       "meta": Object {},
       "name": "Cities",
       "parent": 0,
@@ -267,7 +267,7 @@ Object {
       "count": 3,
       "description": "",
       "id": 5,
-      "link": "https://demo.worona.org/wp-cat/cities/architecture/",
+      "link": "/wp-cat/cities/architecture/",
       "meta": Object {},
       "name": "Architecture",
       "parent": 4,
@@ -310,7 +310,7 @@ Object {
       "count": 4,
       "description": "",
       "id": 6,
-      "link": "https://demo.worona.org/wp-cat/culture/",
+      "link": "/wp-cat/culture/",
       "meta": Object {},
       "name": "Culture",
       "parent": 0,
@@ -331,21 +331,6 @@ Object {
       "_embedded": Object {
         "author": Array [
           2,
-        ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
         ],
       },
       "_links": Object {
@@ -405,7 +390,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/latest-trip-to-india/tajmahal/",
+      "link": "/latest-trip-to-india/tajmahal/",
       "media_details": Object {
         "file": "2016/11/tajmahal.jpg",
         "height": 3729,
@@ -491,21 +476,6 @@ Object {
         "author": Array [
           2,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -564,7 +534,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/somewhere-in-romania/forest/",
+      "link": "/somewhere-in-romania/forest/",
       "media_details": Object {
         "file": "2016/11/forest.jpg",
         "height": 2667,
@@ -650,21 +620,6 @@ Object {
         "author": Array [
           2,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -723,7 +678,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/paris-city-of-light/pariscathedral/",
+      "link": "/paris-city-of-light/pariscathedral/",
       "media_details": Object {
         "file": "2016/11/pariscathedral.jpg",
         "height": 2000,
@@ -809,21 +764,6 @@ Object {
         "author": Array [
           2,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -882,7 +822,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/iceland/iceland1/",
+      "link": "/iceland/iceland1/",
       "media_details": Object {
         "file": "2016/11/iceland1.jpg",
         "height": 2642,
@@ -968,21 +908,6 @@ Object {
         "author": Array [
           2,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -1041,7 +966,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/iceland/iceland3/",
+      "link": "/iceland/iceland3/",
       "media_details": Object {
         "file": "2016/11/iceland3.jpg",
         "height": 3264,
@@ -1127,21 +1052,6 @@ Object {
         "author": Array [
           2,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -1200,7 +1110,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/iceland/iceland2/",
+      "link": "/iceland/iceland2/",
       "media_details": Object {
         "file": "2016/11/iceland2.jpg",
         "height": 2667,
@@ -1286,21 +1196,6 @@ Object {
         "author": Array [
           2,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -1359,7 +1254,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/about-us/pexels-photo-297755/",
+      "link": "/about-us/pexels-photo-297755/",
       "media_details": Object {
         "file": "2017/03/pexels-photo-297755.png",
         "height": 458,
@@ -1424,21 +1319,6 @@ Object {
         "author": Array [
           2,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -1497,7 +1377,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/about-us/amanda-sandlin-10508-2/",
+      "link": "/about-us/amanda-sandlin-10508-2/",
       "media_details": Object {
         "file": "2017/03/amanda-sandlin-10508-2.png",
         "height": 534,
@@ -1569,21 +1449,6 @@ Object {
         "author": Array [
           2,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -1642,7 +1507,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/about-us/road-trip/",
+      "link": "/about-us/road-trip/",
       "media_details": Object {
         "file": "2017/03/road-trip.png",
         "height": 467,
@@ -1707,21 +1572,6 @@ Object {
         "author": Array [
           6,
         ],
-        "wp:term": Array [
-          Array [
-            Object {
-              "count": 0,
-              "id": "attachment",
-              "link": false,
-              "name": "Media",
-              "slug": "attachment",
-              "taxonomy": "latest",
-              "yoast_meta": Object {
-                "title": "attachment",
-              },
-            },
-          ],
-        ],
       },
       "_links": Object {
         "about": Array [
@@ -1780,7 +1630,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/audio-test/peter-griffin-tada/",
+      "link": "/audio-test/peter-griffin-tada/",
       "media_details": Object {
         "album": "",
         "artist": "",
@@ -1843,7 +1693,7 @@ Object {
 
 You can find her on Twitter as @r_martinezduque.",
       "id": 2,
-      "link": "https://demo.worona.org/author/reyes/",
+      "link": "/author/reyes/",
       "name": "Reyes Martinez",
       "slug": "reyes",
       "url": "http://www.worona.org",
@@ -1868,7 +1718,7 @@ You can find her on Twitter as @r_martinezduque.",
       },
       "description": "",
       "id": 6,
-      "link": "https://demo.worona.org/author/david/",
+      "link": "/author/david/",
       "name": "David Arenas",
       "slug": "david",
       "url": "http://worona.org",
@@ -1913,7 +1763,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 18,
-      "link": "https://demo.worona.org/tag/antelope-canyon/",
+      "link": "/tag/antelope-canyon/",
       "meta": Object {},
       "name": "Antelope Canyon",
       "slug": "antelope-canyon",
@@ -1955,7 +1805,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 19,
-      "link": "https://demo.worona.org/tag/arizona/",
+      "link": "/tag/arizona/",
       "meta": Object {},
       "name": "Arizona",
       "slug": "arizona",
@@ -1997,7 +1847,7 @@ Object {
       "count": 0,
       "description": "",
       "id": 21,
-      "link": "https://demo.worona.org/tag/america/",
+      "link": "/tag/america/",
       "meta": Object {},
       "name": "America",
       "slug": "america",
@@ -2039,7 +1889,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 30,
-      "link": "https://demo.worona.org/tag/culture/",
+      "link": "/tag/culture/",
       "meta": Object {},
       "name": "Culture",
       "slug": "culture",
@@ -2081,7 +1931,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 32,
-      "link": "https://demo.worona.org/tag/canada/",
+      "link": "/tag/canada/",
       "meta": Object {},
       "name": "Canada",
       "slug": "canada",
@@ -2123,7 +1973,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 34,
-      "link": "https://demo.worona.org/tag/al-hajar-mountains/",
+      "link": "/tag/al-hajar-mountains/",
       "meta": Object {},
       "name": "Al Hajar Mountains",
       "slug": "al-hajar-mountains",
@@ -2165,7 +2015,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 40,
-      "link": "https://demo.worona.org/tag/animals/",
+      "link": "/tag/animals/",
       "meta": Object {},
       "name": "Animals",
       "slug": "animals",
@@ -2207,7 +2057,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 41,
-      "link": "https://demo.worona.org/tag/alps/",
+      "link": "/tag/alps/",
       "meta": Object {},
       "name": "Alps",
       "slug": "alps",
@@ -2249,7 +2099,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 46,
-      "link": "https://demo.worona.org/tag/agra/",
+      "link": "/tag/agra/",
       "meta": Object {},
       "name": "Agra",
       "slug": "agra",
@@ -2291,7 +2141,7 @@ Object {
       "count": 1,
       "description": "",
       "id": 52,
-      "link": "https://demo.worona.org/tag/cities/",
+      "link": "/tag/cities/",
       "meta": Object {},
       "name": "Cities",
       "slug": "cities",
@@ -2358,7 +2208,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/the-al-hajar-mountains/unitedarabemirates/",
+      "link": "/the-al-hajar-mountains/unitedarabemirates/",
       "media_details": Object {
         "file": "2016/11/UnitedArabEmirates.jpg",
         "height": 3840,
@@ -2485,7 +2335,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/banff-national-park/canada/",
+      "link": "/banff-national-park/canada/",
       "media_details": Object {
         "file": "2016/11/Canada.jpg",
         "height": 3840,
@@ -2612,7 +2462,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/kebumen/kebumenindonesia/",
+      "link": "/kebumen/kebumenindonesia/",
       "media_details": Object {
         "file": "2016/11/KebumenIndonesia.jpg",
         "height": 2916,
@@ -2739,7 +2589,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/lower-antelope-canyon/canyon/",
+      "link": "/lower-antelope-canyon/canyon/",
       "media_details": Object {
         "file": "2016/11/canyon.jpg",
         "height": 2048,
@@ -2866,7 +2716,7 @@ Object {
       "latest": Array [
         "attachment",
       ],
-      "link": "https://demo.worona.org/shinjuku-gyoen-national-garden/japan/",
+      "link": "/shinjuku-gyoen-national-garden/japan/",
       "media_details": Object {
         "file": "2016/11/japan.jpg",
         "height": 2782,
@@ -2966,7 +2816,7 @@ Object {
 
 You can find her on Twitter as @r_martinezduque.",
       "id": 2,
-      "link": "https://demo.worona.org/author/reyes/",
+      "link": "/author/reyes/",
       "name": "Reyes Martinez",
       "slug": "reyes",
       "url": "http://www.worona.org",
@@ -2991,7 +2841,7 @@ You can find her on Twitter as @r_martinezduque.",
       },
       "description": "Software engineer and entrepreneur who builds stuff like TrainYourEars, Hertz Lovers or Worona.",
       "id": 3,
-      "link": "https://demo.worona.org/author/luis/",
+      "link": "/author/luis/",
       "name": "Luis Herranz",
       "slug": "luis",
       "url": "http://www.worona.org",
@@ -3016,7 +2866,7 @@ You can find her on Twitter as @r_martinezduque.",
       },
       "description": "Alan is a WordPress enthusiast who enjoys travelling, music and pizza.",
       "id": 4,
-      "link": "https://demo.worona.org/author/alan/",
+      "link": "/author/alan/",
       "name": "Alan Martin",
       "slug": "alan",
       "url": "",
@@ -3151,7 +3001,7 @@ You can find her on Twitter as @r_martinezduque.",
       "latest": Array [
         "post",
       ],
-      "link": "https://demo.worona.org/the-al-hajar-mountains/",
+      "link": "/the-al-hajar-mountains/",
       "meta": Object {},
       "modified": "2017-01-18T12:14:52",
       "modified_gmt": "2017-01-18T12:14:52",
@@ -3296,7 +3146,7 @@ You can find her on Twitter as @r_martinezduque.",
       "latest": Array [
         "post",
       ],
-      "link": "https://demo.worona.org/banff-national-park/",
+      "link": "/banff-national-park/",
       "meta": Object {},
       "modified": "2017-01-18T12:14:47",
       "modified_gmt": "2017-01-18T12:14:47",
@@ -3445,7 +3295,7 @@ You can find her on Twitter as @r_martinezduque.",
       "latest": Array [
         "post",
       ],
-      "link": "https://demo.worona.org/kebumen/",
+      "link": "/kebumen/",
       "meta": Object {},
       "modified": "2017-01-18T12:14:39",
       "modified_gmt": "2017-01-18T12:14:39",
@@ -3596,7 +3446,7 @@ You can find her on Twitter as @r_martinezduque.",
       "latest": Array [
         "post",
       ],
-      "link": "https://demo.worona.org/lower-antelope-canyon/",
+      "link": "/lower-antelope-canyon/",
       "meta": Object {},
       "modified": "2017-01-18T12:13:58",
       "modified_gmt": "2017-01-18T12:13:58",
@@ -3746,7 +3596,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       "latest": Array [
         "post",
       ],
-      "link": "https://demo.worona.org/shinjuku-gyoen-national-garden/",
+      "link": "/shinjuku-gyoen-national-garden/",
       "meta": Object {},
       "modified": "2017-06-07T12:11:37",
       "modified_gmt": "2017-06-07T12:11:37",
@@ -3799,7 +3649,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 13,
-      "link": "https://demo.worona.org/tag/nature/",
+      "link": "/tag/nature/",
       "name": "Nature",
       "slug": "nature",
       "taxonomy": "tag",
@@ -3838,7 +3688,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 14,
-      "link": "https://demo.worona.org/tag/tokyo/",
+      "link": "/tag/tokyo/",
       "name": "Tokyo",
       "slug": "tokyo",
       "taxonomy": "tag",
@@ -3877,7 +3727,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 15,
-      "link": "https://demo.worona.org/tag/japan/",
+      "link": "/tag/japan/",
       "name": "Japan",
       "slug": "japan",
       "taxonomy": "tag",
@@ -3916,7 +3766,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 16,
-      "link": "https://demo.worona.org/tag/national-garden/",
+      "link": "/tag/national-garden/",
       "name": "National Garden",
       "slug": "national-garden",
       "taxonomy": "tag",
@@ -3955,7 +3805,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 18,
-      "link": "https://demo.worona.org/tag/antelope-canyon/",
+      "link": "/tag/antelope-canyon/",
       "name": "Antelope Canyon",
       "slug": "antelope-canyon",
       "taxonomy": "tag",
@@ -3994,7 +3844,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 19,
-      "link": "https://demo.worona.org/tag/arizona/",
+      "link": "/tag/arizona/",
       "name": "Arizona",
       "slug": "arizona",
       "taxonomy": "tag",
@@ -4033,7 +3883,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 23,
-      "link": "https://demo.worona.org/tag/island/",
+      "link": "/tag/island/",
       "name": "Island",
       "slug": "island",
       "taxonomy": "tag",
@@ -4072,7 +3922,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 28,
-      "link": "https://demo.worona.org/tag/java/",
+      "link": "/tag/java/",
       "name": "Java",
       "slug": "java",
       "taxonomy": "tag",
@@ -4111,7 +3961,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 29,
-      "link": "https://demo.worona.org/tag/indonesia/",
+      "link": "/tag/indonesia/",
       "name": "Indonesia",
       "slug": "indonesia",
       "taxonomy": "tag",
@@ -4150,7 +4000,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 3,
-      "link": "https://demo.worona.org/wp-cat/photography/",
+      "link": "/wp-cat/photography/",
       "name": "Photography",
       "slug": "photography",
       "taxonomy": "category",
@@ -4189,7 +4039,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 30,
-      "link": "https://demo.worona.org/tag/culture/",
+      "link": "/tag/culture/",
       "name": "Culture",
       "slug": "culture",
       "taxonomy": "tag",
@@ -4228,7 +4078,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 31,
-      "link": "https://demo.worona.org/tag/national-park/",
+      "link": "/tag/national-park/",
       "name": "National Park",
       "slug": "national-park",
       "taxonomy": "tag",
@@ -4267,7 +4117,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 32,
-      "link": "https://demo.worona.org/tag/canada/",
+      "link": "/tag/canada/",
       "name": "Canada",
       "slug": "canada",
       "taxonomy": "tag",
@@ -4306,7 +4156,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 33,
-      "link": "https://demo.worona.org/tag/rocky-mountains/",
+      "link": "/tag/rocky-mountains/",
       "name": "Rocky Mountains",
       "slug": "rocky-mountains",
       "taxonomy": "tag",
@@ -4345,7 +4195,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 34,
-      "link": "https://demo.worona.org/tag/al-hajar-mountains/",
+      "link": "/tag/al-hajar-mountains/",
       "name": "Al Hajar Mountains",
       "slug": "al-hajar-mountains",
       "taxonomy": "tag",
@@ -4384,7 +4234,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 35,
-      "link": "https://demo.worona.org/tag/oman/",
+      "link": "/tag/oman/",
       "name": "Oman",
       "slug": "oman",
       "taxonomy": "tag",
@@ -4423,7 +4273,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 36,
-      "link": "https://demo.worona.org/tag/united-arab-emirates/",
+      "link": "/tag/united-arab-emirates/",
       "name": "United Arab Emirates",
       "slug": "united-arab-emirates",
       "taxonomy": "tag",
@@ -4462,7 +4312,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 4,
-      "link": "https://demo.worona.org/wp-cat/cities/",
+      "link": "/wp-cat/cities/",
       "name": "Cities",
       "slug": "cities",
       "taxonomy": "category",
@@ -4501,7 +4351,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 6,
-      "link": "https://demo.worona.org/wp-cat/culture/",
+      "link": "/wp-cat/culture/",
       "name": "Culture",
       "slug": "culture",
       "taxonomy": "category",
@@ -4540,7 +4390,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 7,
-      "link": "https://demo.worona.org/wp-cat/nature/",
+      "link": "/wp-cat/nature/",
       "name": "Nature",
       "slug": "nature",
       "taxonomy": "category",
@@ -4579,7 +4429,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         ],
       },
       "id": 8,
-      "link": "https://demo.worona.org/wp-cat/travel/",
+      "link": "/wp-cat/travel/",
       "name": "Travel",
       "slug": "travel",
       "taxonomy": "category",
@@ -4590,7 +4440,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
     "post": Object {
       "count": 15,
       "id": "post",
-      "link": "https://demo.worona.org",
+      "link": "/",
       "name": "Posts",
       "slug": "post",
       "taxonomy": "latest",

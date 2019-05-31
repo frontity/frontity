@@ -27,12 +27,12 @@ Object {
     "items": Array [
       Object {
         "id": 57,
-        "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+        "link": "/2016/shinjuku-gyoen-national-garden/",
         "type": "post",
       },
       Object {
         "id": 54,
-        "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+        "link": "/2016/lower-antelope-canyon/",
         "type": "post",
       },
     ],
@@ -106,12 +106,12 @@ Object {
     "items": Array [
       Object {
         "id": 60,
-        "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
+        "link": "/2016/the-beauties-of-gullfoss/",
         "type": "post",
       },
       Object {
         "id": 57,
-        "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+        "link": "/2016/shinjuku-gyoen-national-garden/",
         "type": "post",
       },
     ],
@@ -202,12 +202,12 @@ Object {
     "items": Array [
       Object {
         "id": 60,
-        "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
+        "link": "/2016/the-beauties-of-gullfoss/",
         "type": "post",
       },
       Object {
         "id": 57,
-        "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+        "link": "/2016/shinjuku-gyoen-national-garden/",
         "type": "post",
       },
     ],
@@ -224,12 +224,12 @@ Object {
     "items": Array [
       Object {
         "id": 54,
-        "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+        "link": "/2016/lower-antelope-canyon/",
         "type": "post",
       },
       Object {
         "id": 51,
-        "link": "https://test.frontity.io/2016/sunrise-at-phu-quoc-island/",
+        "link": "/2016/sunrise-at-phu-quoc-island/",
         "type": "post",
       },
     ],

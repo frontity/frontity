@@ -2,7 +2,9 @@
   "id": 193,
   "date": "2017-03-27T15:23:51",
   "date_gmt": "2017-03-27T15:23:51",
-  "guid": { "rendered": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png" },
+  "guid": {
+    "rendered": "https://demo.worona.org/wp-content/uploads/2017/03/road-trip.png"
+  },
   "modified": "2017-03-27T15:23:58",
   "modified_gmt": "2017-03-27T15:23:58",
   "slug": "road-trip",
@@ -67,10 +69,20 @@
   "_links": {
     "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media/193" }],
     "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/media" }],
-    "about": [{ "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }],
-    "author": [{ "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
+    "about": [
+      { "href": "https://demo.worona.org/wp-json/wp/v2/types/attachment" }
+    ],
+    "author": [
+      {
+        "embeddable": true,
+        "href": "https://demo.worona.org/wp-json/wp/v2/users/2"
+      }
+    ],
     "replies": [
-      { "embeddable": true, "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=193" }
+      {
+        "embeddable": true,
+        "href": "https://demo.worona.org/wp-json/wp/v2/comments?post=193"
+      }
     ],
     "wp:term": [
       {
@@ -79,7 +91,9 @@
         "href": "https://demo.worona.org/wp-json/wp/v2/latest?attachment=193"
       }
     ],
-    "curies": [{ "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }]
+    "curies": [
+      { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+    ]
   },
   "_embedded": {
     "author": [
@@ -87,8 +101,7 @@
         "id": 2,
         "name": "Reyes Martinez",
         "url": "http://www.worona.org",
-        "description":
-          "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
+        "description": "Reyes loves travelling, photography and all things WordPress.\r\n\r\nYou can find her on Twitter as @r_martinezduque.",
         "link": "https://demo.worona.org/author/reyes/",
         "slug": "reyes",
         "avatar_urls": {
@@ -98,22 +111,11 @@
         },
         "_links": {
           "self": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users/2" }],
-          "collection": [{ "href": "https://demo.worona.org/wp-json/wp/v2/users" }]
+          "collection": [
+            { "href": "https://demo.worona.org/wp-json/wp/v2/users" }
+          ]
         }
       }
-    ],
-    "wp:term": [
-      [
-        {
-          "id": "attachment",
-          "link": false,
-          "count": 0,
-          "name": "Media",
-          "slug": "attachment",
-          "taxonomy": "latest",
-          "yoast_meta": { "title": "attachment" }
-        }
-      ]
     ]
   }
 }

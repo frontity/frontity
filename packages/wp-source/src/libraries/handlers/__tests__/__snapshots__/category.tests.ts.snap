@@ -11,12 +11,12 @@ Object {
     "items": Array [
       Object {
         "id": 57,
-        "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+        "link": "/2016/shinjuku-gyoen-national-garden/",
         "type": "post",
       },
       Object {
         "id": 54,
-        "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+        "link": "/2016/lower-antelope-canyon/",
         "type": "post",
       },
     ],
@@ -73,12 +73,12 @@ Object {
     "items": Array [
       Object {
         "id": 57,
-        "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+        "link": "/2016/shinjuku-gyoen-national-garden/",
         "type": "post",
       },
       Object {
         "id": 54,
-        "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+        "link": "/2016/lower-antelope-canyon/",
         "type": "post",
       },
     ],
@@ -135,12 +135,12 @@ Object {
     "items": Array [
       Object {
         "id": 57,
-        "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+        "link": "/2016/shinjuku-gyoen-national-garden/",
         "type": "post",
       },
       Object {
         "id": 54,
-        "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
+        "link": "/2016/lower-antelope-canyon/",
         "type": "post",
       },
     ],
