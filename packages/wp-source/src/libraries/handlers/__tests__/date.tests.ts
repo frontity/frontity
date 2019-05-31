@@ -13,8 +13,8 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    data: () => ({}),
-    dataMap: {},
+    get: () => ({}),
+    data: {},
     category: {},
     tag: {},
     post: {},
@@ -57,7 +57,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/")
-    state.dataMap["/2016/"] = { isFetching: true };
+    state.data["/2016/"] = { isFetching: true };
 
     await handler(state, {
       path: "/2016/",
@@ -66,7 +66,7 @@ describe("date", () => {
     });
 
     expect(get.mock.calls).toMatchSnapshot();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
 
     get.mockResolvedValueOnce(
@@ -77,7 +77,7 @@ describe("date", () => {
     );
 
     // source.fetch({ path: "/2016/", page: 2 })
-    state.dataMap["/2016/"].isFetching = true;
+    state.data["/2016/"].isFetching = true;
 
     await handler(state, {
       path: "/2016/",
@@ -87,7 +87,7 @@ describe("date", () => {
     });
 
     expect(get.mock.calls).toMatchSnapshot();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 
@@ -103,7 +103,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/10/")
-    state.dataMap["/2016/10/"] = { isFetching: true };
+    state.data["/2016/10/"] = { isFetching: true };
 
     await handler(state, {
       path: "/2016/10/",
@@ -112,7 +112,7 @@ describe("date", () => {
     });
 
     expect(get.mock.calls).toMatchSnapshot();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 
@@ -127,7 +127,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/10/25/")
-    state.dataMap["/2016/10/25/"] = { isFetching: true };
+    state.data["/2016/10/25/"] = { isFetching: true };
 
     await handler(state, {
       path: "/2016/10/25/",
@@ -136,7 +136,7 @@ describe("date", () => {
     });
 
     expect(get.mock.calls).toMatchSnapshot();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 });

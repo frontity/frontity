@@ -9,7 +9,7 @@ const postArchiveHandler: Handler = async (
   const { api, populate } = libraries.source;
 
   // 0. Get data from store
-  let data = state.dataMap[path];
+  let data = state.data[path];
 
   // 1. init data if it isn't already
   if (!data.isPostArchive) {
@@ -37,7 +37,7 @@ const postArchiveHandler: Handler = async (
     data.totalPages = getTotalPages(response);
   }
 
-  state.dataMap[path] = data;
+  state.data[path] = data;
 };
 
 export default postArchiveHandler;

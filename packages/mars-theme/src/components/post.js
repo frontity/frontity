@@ -6,7 +6,7 @@ import FeaturedMedia from "./featured-media";
 
 const Post = ({ state, actions }) => {
   // Get info of current post.
-  const data = state.source.data(state.router.path);
+  const data = state.source.get(state.router.path);
   // Get the the post.
   const post = state.source[data.type][data.id];
   // Get the author.

@@ -2,9 +2,9 @@ import WpSource from "..";
 import { parsePath } from "./utils/parse-path";
 
 const state: WpSource["state"]["source"] = {
-  data: ({ state }) => pathOrLink =>
-    state.source.dataMap[parsePath(pathOrLink).path] || {},
-  dataMap: {},
+  get: ({ state }) => pathOrLink =>
+    state.source.data[parsePath(pathOrLink).path] || {},
+  data: {},
   category: {},
   tag: {},
   post: {},

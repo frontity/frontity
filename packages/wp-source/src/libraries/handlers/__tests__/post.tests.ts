@@ -22,8 +22,8 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    data: () => ({}),
-    dataMap: {},
+    get: () => ({}),
+    data: {},
     category: {},
     tag: {},
     post: {},
@@ -69,7 +69,7 @@ describe("post", () => {
       libraries
     });
 
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
   });
 
   test("exists in source.post", async () => {
@@ -85,7 +85,7 @@ describe("post", () => {
     });
 
     expect(get).not.toBeCalled();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
   });
 
   test("throws an error if it doesn't exist", async () => {

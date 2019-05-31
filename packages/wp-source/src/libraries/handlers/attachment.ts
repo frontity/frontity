@@ -24,7 +24,7 @@ const attachmentHandler: Handler = async (
   }
 
   // Init data
-  state.dataMap[path] = {
+  state.data[path] = {
     id,
     type: "attachment",
     isPostType: true,

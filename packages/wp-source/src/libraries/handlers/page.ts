@@ -19,7 +19,7 @@ const pageHandler: Handler = async (state, { path, params, libraries }) => {
   }
 
   // Init data
-  state.dataMap[path] = {
+  state.data[path] = {
     id,
     type: "page",
     isPostType: true,

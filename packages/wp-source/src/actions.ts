@@ -18,26 +18,26 @@ const actions: WpSource["actions"]["source"] = {
     }
 
     // Get current data object
-    const data = source.dataMap[path];
+    const data = source.data[path];
 
     // return if the data that it's about to be fetched already exists
     if (data && data.isArchive && data.pages[page]) return;
 
     // init data if needed
-    if (!data) source.dataMap[path] = {};
+    if (!data) source.data[path] = {};
 
     // get and execute the corresponding handler based on path
     try {
       const { handler, params } = resolver.match(path);
       await handler(source, { path, params, page, libraries });
-      source.dataMap[path].isReady = true;
+      source.data[path].isReady = true;
     } catch (e) {
       console.warn(`An error ocurred fetching '${path}':\n`, e);
-      source.dataMap[path].is404 = true;
+      source.data[path].is404 = true;
     }
 
     // end fetching
-    source.dataMap[path].isFetching = false;
+    source.data[path].isFetching = false;
   },
 
   init: ({ state, libraries }) => {

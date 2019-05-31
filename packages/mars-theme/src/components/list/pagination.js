@@ -3,7 +3,7 @@ import { connect } from "frontity";
 import Link from "../link";
 
 const Pagination = ({ state, actions }) => {
-  const { totalPages } = state.source.data(state.router.path);
+  const { totalPages } = state.source.get(state.router.path);
   const isThereNextPage = state.router.page < totalPages;
   const isTherePreviousPage = state.router.page > 1;
 

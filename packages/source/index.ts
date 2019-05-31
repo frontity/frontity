@@ -14,8 +14,8 @@ export type Data = Data;
 interface Source<T = null> extends Package {
   state: {
     source: {
-      data: Derived<T extends null ? Source : T, (pathOrLink: string) => Data>;
-      dataMap: Record<string, Data>;
+      get: Derived<T extends null ? Source : T, (pathOrLink: string) => Data>;
+      data: Record<string, Data>;
       category: Record<string, Taxonomy>;
       tag: Record<string, Taxonomy>;
       post: Record<string, PostType>;

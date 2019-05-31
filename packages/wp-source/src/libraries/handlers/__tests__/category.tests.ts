@@ -11,8 +11,8 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    data: () => ({}),
-    dataMap: {},
+    get: () => ({}),
+    data: {},
     category: {},
     tag: {},
     post: {},
@@ -53,7 +53,7 @@ beforeEach(() => {
 describe("category", () => {
   test("doesn't exist in source.category", async () => {
     // source.fetch("/category/nature/")
-    state.dataMap["/category/nature/"] = { isFetching: true };
+    state.data["/category/nature/"] = { isFetching: true };
 
     await handler(state, {
       path: "/category/nature/",
@@ -61,7 +61,7 @@ describe("category", () => {
       libraries
     });
 
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 
@@ -79,7 +79,7 @@ describe("category", () => {
     };
 
     // source.fetch("/category/nature/")
-    state.dataMap["/category/nature/"] = { isFetching: true };
+    state.data["/category/nature/"] = { isFetching: true };
 
     await handler(state, {
       path: "/category/nature/",
@@ -88,14 +88,14 @@ describe("category", () => {
     });
 
     expect(libraries.source.api.getIdBySlug).not.toBeCalled();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 
   test("exists in source.data but doesn't have page", async () => {
     const getIdBySlug = libraries.source.api.getIdBySlug as jest.Mock;
 
-    state.dataMap["/category/nature/"] = {
+    state.data["/category/nature/"] = {
       id: 7,
       isArchive: true,
       isCategory: true,
@@ -116,7 +116,7 @@ describe("category", () => {
     });
 
     expect(getIdBySlug).not.toBeCalled();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 });

@@ -23,7 +23,7 @@ const postHandler: Handler = async (source, { path, params, libraries }) => {
   }
 
   // Init data
-  source.dataMap[path] = {
+  source.data[path] = {
     id,
     type: "post",
     isPostType: true,
