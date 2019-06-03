@@ -8,15 +8,15 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   libraries
 }) => routeOrParams => {
   const { getParams, getRoute } = libraries.source;
-  const params = getParams(routeOrParams);
+  const { path, page, query } = getParams(routeOrParams);
   const route = getRoute(routeOrParams);
 
-  state.router.path = params.path;
-  state.router.page = params.page;
-  state.router.query = params.query;
+  state.router.path = path;
+  state.router.page = page;
+  state.router.query = query;
 
   if (state.frontity.platform === "client" && !isPopState) {
-    window.history.pushState(params, "", route);
+    window.history.pushState({ path, page, query: { ...query } }, "", route);
   } else {
     isPopState = false;
   }
@@ -36,7 +36,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   } else {
     // Replace the current url with the same one but with state.
     const { path, page, query } = state.router;
-    window.history.replaceState({ path, page, query }, "");
+    window.history.replaceState({ path, page, query: { ...query } }, "");
     // Listen to changes in history.
     window.addEventListener("popstate", ({ state: params }) => {
       isPopState = true;
