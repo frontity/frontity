@@ -1,4 +1,4 @@
-import { getParams, getRoute } from "../routeUtils";
+import { getParams, getRoute } from "../route-utils";
 
 describe("route utils - getParams", () => {
   test("from params (fixes path)", () => {

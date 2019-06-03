@@ -1,7 +1,7 @@
 import { State } from "@frontity/types";
 import WpSource from "../../../..";
 import populate from "../../populate";
-import routeUtils from "../../routeUtils";
+import routeUtils from "../../route-utils";
 import handler from "../category";
 import { mockResponse, expectEntities } from "./mocks/helpers";
 import posts from "./mocks/postsCat7.json";

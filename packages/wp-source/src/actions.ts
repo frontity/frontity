@@ -1,5 +1,5 @@
 import WpSource from "../";
-import { getParams, getRoute } from "./libraries/routeUtils";
+import { getParams, getRoute } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {

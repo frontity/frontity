@@ -2,7 +2,7 @@ import { State } from "@frontity/types";
 import WpSource from "../../../..";
 import handler from "../post";
 import { mockResponse } from "./mocks/helpers";
-import routeUtils from "../../routeUtils";
+import routeUtils from "../../route-utils";
 
 const post60 = {
   id: 60,

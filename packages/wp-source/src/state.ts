@@ -1,5 +1,5 @@
 import WpSource from "..";
-import { getRoute } from "./libraries/routeUtils";
+import { getRoute } from "./libraries/route-utils";
 
 const state: WpSource["state"]["source"] = {
   get: ({ state }) => routeOrParams =>
