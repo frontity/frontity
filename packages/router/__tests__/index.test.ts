@@ -4,12 +4,15 @@ const router: Router = {
   state: {
     router: {
       path: "/some-path",
-      page: 2
+      page: 2,
+      query: {
+        k1: "v1"
+      }
     }
   },
   actions: {
     router: {
-      set: state => pathOrObj => {
+      set: state => routeOrParams => {
         /* do something */
       }
     }

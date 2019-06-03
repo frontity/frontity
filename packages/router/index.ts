@@ -1,18 +1,25 @@
 import { Package, Action } from "frontity/types";
 
-export type PathOrObj = string | { path: string; page?: number };
+export type RouteOrParams =
+  | string
+  | {
+      path: string;
+      page?: number;
+      query?: Record<string, any>;
+    };
 
-interface Router extends Package {
+interface Router<T = null> extends Package {
   state: {
     frontity?: Package["state"]["frontity"];
     router: {
       path: string;
       page: number;
+      query: Record<string, any>;
     };
   };
   actions: {
     router: {
-      set: Action<Router, PathOrObj>;
+      set: Action<T extends null ? Router : T, RouteOrParams>;
     };
   };
 }
