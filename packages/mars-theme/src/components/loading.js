@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "frontity";
-import { ScaleLoader as Loader } from "react-spinners";
+import Loader from "react-spinners/ScaleLoader";
 
 const Loading = () => (
   <Container>
