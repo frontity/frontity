@@ -8,6 +8,13 @@ describe("route utils - getParams", () => {
       query: {}
     });
   });
+  test("from params (path is a name)", () => {
+    expect(getParams({ path: "custom-list" })).toEqual({
+      path: "custom-list/",
+      page: 1,
+      query: {}
+    });
+  });
   test("from params (path, page)", () => {
     expect(getParams({ path: "/some/path/", page: 2 })).toEqual({
       path: "/some/path/",
@@ -87,11 +94,28 @@ describe("route utils - getParams", () => {
       }
     });
   });
+  test("from name", () => {
+    expect(getParams("custom-list")).toEqual({
+      path: "custom-list/",
+      page: 1,
+      query: {}
+    });
+  });
+  test("from name (page)", () => {
+    expect(getParams("custom-list/page/2")).toEqual({
+      path: "custom-list/",
+      page: 2,
+      query: {}
+    });
+  });
 });
 
 describe("route utils - getRoute", () => {
   test("from params (fixes path)", () => {
     expect(getRoute({ path: "/some/path" })).toBe("/some/path/");
+  });
+  test("from params (path is a name)", () => {
+    expect(getRoute({ path: "custom-list" })).toBe("custom-list/");
   });
   test("from params (path, page)", () => {
     expect(getRoute({ path: "/some/path/", page: 2 })).toBe(
@@ -131,5 +155,11 @@ describe("route utils - getRoute", () => {
     expect(
       getRoute("https://test.frontity.org/some/path/page/2?k1=v1&k2=v2")
     ).toBe("/some/path/page/2/?k1=v1&k2=v2");
+  });
+  test("from name", () => {
+    expect(getRoute("custom-list")).toBe("custom-list/");
+  });
+  test("from name (page)", () => {
+    expect(getRoute("custom-list/page/2/")).toBe("custom-list/page/2/");
   });
 });

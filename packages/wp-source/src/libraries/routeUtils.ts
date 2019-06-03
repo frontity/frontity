@@ -54,7 +54,7 @@ const normalize = (route: string): string =>
   paramsToRoute(routeToParams(route));
 
 const removeDomain = (input: string): string => {
-  const [, result] = /^(?:https?:\/\/[^\/]*)?(\/.*)$/.exec(input);
+  const [, result] = /^(?:https?:\/\/[^\/]*)?(\/?.*)$/.exec(input);
   return result;
 };
 
