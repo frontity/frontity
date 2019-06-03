@@ -1,6 +1,5 @@
 import { Handler } from "../../";
 import pathToRegexp, { Key } from "path-to-regexp";
-import { routeToParams } from "./routeUtils";
 
 class Resolver {
   // Array containing all registered patterns with their handlers

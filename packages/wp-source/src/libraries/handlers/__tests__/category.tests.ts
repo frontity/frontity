@@ -47,7 +47,7 @@ beforeEach(() => {
         )
       },
       populate,
-      routeUtils
+      ...routeUtils
     }
   };
 });

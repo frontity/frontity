@@ -1,5 +1,5 @@
 import WpSource from "../";
-import { routeToParams, paramsToRoute } from "./libraries/routeUtils";
+import { getParams, getRoute } from "./libraries/routeUtils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
@@ -7,14 +7,9 @@ const actions: WpSource["actions"]["source"] = {
     const { source } = state;
     const { resolver } = libraries.source;
 
-    // Get params
-    const routeParams =
-      typeof routeOrParams === "string"
-        ? routeToParams(routeOrParams)
-        : routeOrParams;
-
-    // Get route from params
-    const route = paramsToRoute(routeParams);
+    // Get route and route params
+    const route = getRoute(routeOrParams);
+    const routeParams = getParams(routeOrParams);
 
     // Get current data object
     const data = source.data[route];

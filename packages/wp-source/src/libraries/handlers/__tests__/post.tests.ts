@@ -57,7 +57,7 @@ beforeEach(() => {
           link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/"
         }
       ]),
-      routeUtils
+      ...routeUtils
     }
   };
 });

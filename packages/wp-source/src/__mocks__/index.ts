@@ -40,7 +40,7 @@ const wpSource = (): WpSource => ({
         get: jest.fn()
       },
       populate: jest.fn(),
-      routeUtils
+      ...routeUtils
     }
   }
 });

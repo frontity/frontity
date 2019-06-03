@@ -16,7 +16,7 @@ const wpSource = (): WpSource => ({
       api: new Api(),
       resolver: new Resolver(),
       populate,
-      routeUtils
+      ...routeUtils
     }
   }
 });

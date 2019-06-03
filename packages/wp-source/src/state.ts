@@ -1,15 +1,9 @@
 import WpSource from "..";
-import { normalize, paramsToRoute } from "./libraries/routeUtils";
+import { getRoute } from "./libraries/routeUtils";
 
 const state: WpSource["state"]["source"] = {
-  get: ({ state }) => routeOrObj => {
-    const dataPath =
-      typeof routeOrObj === "string"
-        ? normalize(routeOrObj)
-        : paramsToRoute(routeOrObj);
-
-    return state.source.data[dataPath] || {};
-  },
+  get: ({ state }) => routeOrParams =>
+    state.source.data[getRoute(routeOrParams)] || {},
   data: {},
   category: {},
   tag: {},

@@ -42,7 +42,7 @@ beforeEach(() => {
         get: jest.fn()
       },
       populate,
-      routeUtils
+      ...routeUtils
     }
   };
 });

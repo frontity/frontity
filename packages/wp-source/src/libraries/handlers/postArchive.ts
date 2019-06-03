@@ -3,8 +3,8 @@ import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
 const postArchiveHandler: Handler = async (source, { route, libraries }) => {
-  const { api, populate, routeUtils } = libraries.source;
-  const { page, query } = routeUtils.routeToParams(route);
+  const { api, populate, getParams } = libraries.source;
+  const { page, query } = getParams(route);
 
   // 2. fetch the specified page
   const response = await api.get({

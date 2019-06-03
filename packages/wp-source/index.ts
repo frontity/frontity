@@ -12,6 +12,12 @@ export type Handler = (
   }
 ) => Promise<void>;
 
+export type RouteParams = {
+  path: string;
+  page?: number;
+  query?: Record<string, any>;
+};
+
 interface WpSource extends Source {
   name: "@frontity/wp-source";
   state: {
@@ -34,7 +40,8 @@ interface WpSource extends Source {
         state: State<WpSource>["source"],
         response: Response
       ) => Promise<EntityData[]>;
-      routeUtils: typeof routeUtils;
+      getParams: Source<WpSource>["libraries"]["source"]["getParams"];
+      getRoute: Source<WpSource>["libraries"]["source"]["getRoute"];
     };
   };
 }

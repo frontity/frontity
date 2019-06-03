@@ -13,8 +13,8 @@ const taxonomyHandler = ({
   props?: Record<string, string>;
   truths?: Record<string, true>;
 }): Handler => async (source, { route, params, libraries }) => {
-  const { api, populate, routeUtils } = libraries.source;
-  const { page } = routeUtils.routeToParams(route);
+  const { api, populate, getParams } = libraries.source;
+  const { page } = getParams(route);
 
   // 1. search id in state or get it from WP REST API
   const { slug } = params;

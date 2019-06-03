@@ -2,13 +2,11 @@ import { Package, Action, Derived } from "@frontity/types";
 import { Data } from "./src/data";
 import { Taxonomy, PostType, Attachment, Author } from "./src/entities";
 
-export type PathOrObj =
-  | string
-  | {
-      path: string;
-      page?: number;
-      query?: Record<string, any>;
-    };
+export type RouteParams = {
+  path: string;
+  page?: number;
+  query?: Record<string, any>;
+};
 
 export type Data = Data;
 
@@ -27,13 +25,15 @@ interface Source<T = null> extends Package {
   };
   actions: {
     source: {
-      fetch: Action<T extends null ? Source : T, PathOrObj>;
+      fetch: Action<T extends null ? Source : T, string | RouteParams>;
       init?: Action<T extends null ? Source : T>;
     };
   };
   libraries: {
     source: {
       populate: Function;
+      getParams: (routeOrParams: string | RouteParams) => RouteParams;
+      getRoute: (routeOrParams: string | RouteParams) => string;
     };
   };
 }
