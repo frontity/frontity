@@ -1,5 +1,4 @@
 import TinyRouter from "..";
-import { parsePath, addFinalSlash } from "./utils";
 
 let isPopState = false;
 
