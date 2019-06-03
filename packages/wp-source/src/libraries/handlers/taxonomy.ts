@@ -31,7 +31,7 @@ const taxonomyHandler = ({
   // 3. throw an error if page is out of range
   const total = getTotal(response);
   const totalPages = getTotalPages(response);
-  if (page >= totalPages) throw new Error("Page doesn't exist.");
+  if (page > totalPages) throw new Error("Page doesn't exist.");
 
   // 4. populate response and add page to data
   const items = await populate(source, response);
