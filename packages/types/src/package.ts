@@ -14,6 +14,7 @@ export interface Package {
       initial?: {
         path: string;
         page: number;
+        query?: Record<string, any>;
       };
       packages?: string[];
       platform?: "client" | "server";
