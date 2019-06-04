@@ -2,7 +2,7 @@ import { schema } from "normalizr";
 import { taxonomy } from "./taxonomies";
 import { author } from "./authors";
 import { attachment } from "./attachments";
-import { removeDomain } from "./utils";
+import { removeDomain } from "../route-utils";
 
 const taxonomies = new schema.Array(new schema.Array(taxonomy));
 

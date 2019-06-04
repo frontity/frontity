@@ -55,7 +55,7 @@ export const normalize = (route: string): string =>
 
 export const removeDomain = (input: string): string => {
   const [, result] = /^(?:https?:\/\/[^\/]*)?(\/?.*)$/.exec(input);
-  return result;
+  return result || "/";
 };
 
 export const addFinalSlash = (path: string): string =>

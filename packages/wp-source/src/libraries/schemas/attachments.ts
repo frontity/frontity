@@ -1,6 +1,6 @@
 import { schema } from "normalizr";
 import { author } from "./authors";
-import { removeDomain } from "./utils";
+import { removeDomain } from "../route-utils";
 
 export const attachment = new schema.Entity(
   "attachment",

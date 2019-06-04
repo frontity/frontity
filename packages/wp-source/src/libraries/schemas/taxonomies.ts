@@ -1,5 +1,5 @@
 import { schema } from "normalizr";
-import { removeDomain } from "./utils";
+import { removeDomain } from "../route-utils";
 
 export const taxonomy = new schema.Entity(
   "taxonomy",
