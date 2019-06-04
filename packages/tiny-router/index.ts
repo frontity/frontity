@@ -4,9 +4,17 @@ import { Action } from "frontity/types";
 
 interface TinyRouter extends Router {
   name: "@frontity/tiny-router";
+  state: Router<TinyRouter>["state"] & {
+    router: {
+      autoFetch?: boolean;
+    };
+  };
   actions: Router<TinyRouter>["actions"] & {
     router: {
       init: Action<TinyRouter>;
+    };
+    source?: {
+      fetch: Source["actions"]["source"]["fetch"];
     };
   };
   libraries: {

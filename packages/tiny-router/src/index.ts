@@ -7,7 +7,8 @@ const tinyRouter: TinyRouter = {
     router: {
       path: "/",
       page: 1,
-      query: {}
+      query: {},
+      autoFetch: true
     }
   },
   actions: {
