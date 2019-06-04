@@ -19,7 +19,7 @@ export default { getParams, getRoute };
 
 // UTILS
 
-const routeToParams = (route: string): RouteParams => {
+export const routeToParams = (route: string): RouteParams => {
   route = removeDomain(route);
 
   const [fullPath, query] = route.split("?");
@@ -36,7 +36,7 @@ const routeToParams = (route: string): RouteParams => {
   };
 };
 
-const paramsToRoute = ({
+export const paramsToRoute = ({
   path = "/",
   page = 1,
   query = {}
@@ -50,24 +50,25 @@ const paramsToRoute = ({
   return `${pathAndPage}${queryStr}`;
 };
 
-const normalize = (route: string): string =>
+export const normalize = (route: string): string =>
   paramsToRoute(routeToParams(route));
 
-const removeDomain = (input: string): string => {
+export const removeDomain = (input: string): string => {
   const [, result] = /^(?:https?:\/\/[^\/]*)?(\/?.*)$/.exec(input);
   return result;
 };
 
-const addFinalSlash = (path: string): string => path.replace(/\/?$/, "/");
+export const addFinalSlash = (path: string): string =>
+  path.replace(/\/?$/, "/");
 
-const objToQuery = (obj: Record<string, any>) => {
+export const objToQuery = (obj: Record<string, any>) => {
   const entries = Object.entries(obj);
   return entries.length
     ? `?${entries.map(([key, value]) => `${key}=${value}`).join("&")}`
     : "";
 };
 
-const queryToObj = (query: string = "") =>
+export const queryToObj = (query: string = "") =>
   query && query.includes("=")
     ? query.split("&").reduce((result, param) => {
         const [k, v] = param.split("=");
