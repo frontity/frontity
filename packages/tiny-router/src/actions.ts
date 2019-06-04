@@ -4,6 +4,7 @@ let isPopState = false;
 
 export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
+  actions,
   libraries
 }) => routeOrParams => {
   const { getParams, getRoute } = libraries.source;
@@ -16,6 +17,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
 
   if (state.frontity.platform === "client" && !isPopState) {
     window.history.pushState({ path, page, query: { ...query } }, "", route);
+    if (state.router.autoFetch) actions.source.fetch({ path, page, query });
   } else {
     isPopState = false;
   }
@@ -42,4 +44,11 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       actions.router.set(params);
     });
   }
+};
+
+export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = async ({
+  state,
+  actions
+}) => {
+  if (state.router.autoFetch) await actions.source.fetch(state.router);
 };

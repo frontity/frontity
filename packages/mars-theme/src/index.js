@@ -13,14 +13,6 @@ const marsTheme = {
         showOnPost: false
       }
     }
-  },
-  actions: {
-    theme: {
-      beforeSSR: async ({ state, actions }) => {
-        const { path, page } = state.router;
-        await actions.source.fetch({ path, page });
-      }
-    }
   }
 };
 
