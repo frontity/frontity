@@ -21,9 +21,6 @@ interface MarsTheme extends Package {
   actions: {
     router?: Router["actions"]["router"];
     source?: Source["actions"]["source"];
-    theme: {
-      beforeSSR: Action<MarsTheme>;
-    };
   };
 }
 
