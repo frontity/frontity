@@ -1,8 +1,8 @@
 import { Handler } from "../../../";
 
 const attachmentHandler: Handler = async (
-  state,
-  { path, params, libraries }
+  source,
+  { route, params, libraries }
 ) => {
   const { api, populate } = libraries.source;
 
@@ -10,8 +10,8 @@ const attachmentHandler: Handler = async (
 
   // Search attachment in store
   let attachment = id
-    ? state.attachment[id]
-    : Object.values(state.attachment).find(a => a.slug === slug);
+    ? source.attachment[id]
+    : Object.values(source.attachment).find(a => a.slug === slug);
 
   // Get from REST API if no attachment was found
   if (!attachment) {
@@ -20,11 +20,11 @@ const attachmentHandler: Handler = async (
       params: { ...(id ? { include: id } : { slug }), _embed: true }
     });
 
-    [{ id }] = await populate(state, response);
+    [{ id }] = await populate(source, response);
   }
 
   // Init data
-  state.dataMap[path] = {
+  source.data[route] = {
     id,
     type: "attachment",
     isPostType: true,

@@ -24,20 +24,9 @@ class Resolver {
   // Gets the appropriate handler and params after a match
   match(
     this: Resolver,
-    name: string
+    path: string
   ): { handler: Handler; params: { [param: string]: any } } | null {
     let handler;
-    let params = {};
-
-    // Parse query if it exists
-    const [path, query] = name.split("?");
-    const queryParams = query
-      ? query.split("&").reduce((result, param) => {
-          const [k, v] = param.split("=");
-          result[k] = v;
-          return result;
-        }, {})
-      : {};
 
     // Then process the path
     const found = this.registered.find(({ regexp }) => regexp.test(path));
@@ -45,7 +34,7 @@ class Resolver {
     if (!found) return null;
 
     const { regexp, keys } = found;
-    const pathParams = path
+    const params = path
       .match(regexp)
       .slice(1)
       .reduce((result, value, index) => {
@@ -55,9 +44,6 @@ class Resolver {
 
     // Set handler
     handler = found.handler;
-
-    // Merge all params
-    params = Object.assign(pathParams, queryParams);
 
     // Return handler and params
     return { handler, params };

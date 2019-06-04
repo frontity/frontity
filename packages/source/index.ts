@@ -2,20 +2,19 @@ import { Package, Action, Derived } from "@frontity/types";
 import { Data } from "./src/data";
 import { Taxonomy, PostType, Attachment, Author } from "./src/entities";
 
-export type PathOrObj =
-  | string
-  | {
-      path: string;
-      page?: number;
-    };
+export type RouteParams = {
+  path: string;
+  page?: number;
+  query?: Record<string, any>;
+};
 
 export type Data = Data;
 
 interface Source<T = null> extends Package {
   state: {
     source: {
-      data: Derived<T extends null ? Source : T, (pathOrLink: string) => Data>;
-      dataMap: Record<string, Data>;
+      get: Derived<T extends null ? Source : T, (pathOrLink: string) => Data>;
+      data: Record<string, Data>;
       category: Record<string, Taxonomy>;
       tag: Record<string, Taxonomy>;
       post: Record<string, PostType>;
@@ -26,13 +25,15 @@ interface Source<T = null> extends Package {
   };
   actions: {
     source: {
-      fetch: Action<T extends null ? Source : T, PathOrObj>;
+      fetch: Action<T extends null ? Source : T, string | RouteParams>;
       init?: Action<T extends null ? Source : T>;
     };
   };
   libraries: {
     source: {
       populate: Function;
+      getParams: (routeOrParams: string | RouteParams) => RouteParams;
+      getRoute: (routeOrParams: string | RouteParams) => string;
     };
   };
 }

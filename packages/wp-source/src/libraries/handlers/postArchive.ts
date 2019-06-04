@@ -2,42 +2,36 @@ import { Handler } from "../../../";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
-const postArchiveHandler: Handler = async (
-  state,
-  { path, params, page = 1, libraries }
-) => {
-  const { api, populate } = libraries.source;
+const postArchiveHandler: Handler = async (source, { route, libraries }) => {
+  const { api, populate, getParams } = libraries.source;
+  const { page, query } = getParams(route);
 
-  // 0. Get data from store
-  let data = state.dataMap[path];
+  // 2. fetch the specified page
+  const response = await api.get({
+    endpoint: "posts",
+    params: { search: query.s, page, _embed: true }
+  });
 
-  // 1. init data if it isn't already
-  if (!data.isPostArchive) {
-    // Init data
-    data = {
-      type: "post",
-      pages: [],
-      isArchive: true,
-      isPostTypeArchive: true,
-      isPostArchive: true,
-      isHome: true,
-      isFetching: true
-    };
-  }
+  // 3. throw an error if page is out of range
+  const total = getTotal(response);
+  const totalPages = getTotalPages(response);
+  if (page > totalPages) throw new Error("Page doesn't exist.");
 
-  if (!data.pages[page]) {
-    const response = await api.get({
-      endpoint: "posts",
-      params: { search: params.s, page, _embed: true }
-    });
-    // populate response and add page to data
-    data.pages[page] = await populate(state, response);
-    // and assign total and totalPages values
-    data.total = getTotal(response);
-    data.totalPages = getTotalPages(response);
-  }
+  // 4. populate response and add page to data
+  const items = await populate(source, response);
 
-  state.dataMap[path] = data;
+  // 5. add data to source
+  source.data[route] = {
+    type: "post",
+    items,
+    total,
+    totalPages,
+    isArchive: true,
+    isPostTypeArchive: true,
+    isPostArchive: true,
+    isHome: true,
+    isFetching: true
+  };
 };
 
 export default postArchiveHandler;

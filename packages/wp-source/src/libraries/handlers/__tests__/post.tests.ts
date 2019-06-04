@@ -2,6 +2,7 @@ import { State } from "@frontity/types";
 import WpSource from "../../../..";
 import handler from "../post";
 import { mockResponse } from "./mocks/helpers";
+import routeUtils from "../../route-utils";
 
 const post60 = {
   id: 60,
@@ -22,8 +23,8 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    data: () => ({}),
-    dataMap: {},
+    get: () => ({}),
+    data: {},
     category: {},
     tag: {},
     post: {},
@@ -55,7 +56,8 @@ beforeEach(() => {
           slug: "the-beauties-of-gullfoss",
           link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/"
         }
-      ])
+      ]),
+      ...routeUtils
     }
   };
 });
@@ -64,12 +66,12 @@ describe("post", () => {
   test("doesn't exist in source.post", async () => {
     // source.fetch("/the-beauties-of-gullfoss/")
     await handler(state, {
-      path: "/the-beauties-of-gullfoss/",
+      route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
       libraries
     });
 
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
   });
 
   test("exists in source.post", async () => {
@@ -79,13 +81,13 @@ describe("post", () => {
 
     // source.fetch("/the-beauties-of-gullfoss/")
     await handler(state, {
-      path: "/the-beauties-of-gullfoss/",
+      route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
       libraries
     });
 
     expect(get).not.toBeCalled();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
   });
 
   test("throws an error if it doesn't exist", async () => {
@@ -99,7 +101,7 @@ describe("post", () => {
 
     // source.fetch("/the-beauties-of-gullfoss/")
     const promise = handler(state, {
-      path: "/the-beauties-of-gullfoss/",
+      route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
       libraries
     });

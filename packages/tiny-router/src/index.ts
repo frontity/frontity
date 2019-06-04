@@ -6,7 +6,8 @@ const tinyRouter: TinyRouter = {
   state: {
     router: {
       path: "/",
-      page: 1
+      page: 1,
+      query: {}
     }
   },
   actions: {
@@ -14,7 +15,8 @@ const tinyRouter: TinyRouter = {
       init,
       set
     }
-  }
+  },
+  libraries: {}
 };
 
 export default tinyRouter;

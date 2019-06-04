@@ -20,7 +20,7 @@ const globalStyles = css`
 `;
 
 const Theme = ({ state }) => {
-  const data = state.source.data(state.router.path);
+  const data = state.source.get(state.router);
 
   let Content = <Loading />;
 

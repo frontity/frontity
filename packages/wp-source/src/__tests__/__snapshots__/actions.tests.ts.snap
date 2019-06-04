@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetch does nothing if data exists 1`] = `
+Object {
+  "/some/route/": Object {
+    "id": 1,
+    "isFetching": false,
+    "isPostType": true,
+    "isReady": true,
+    "type": "example",
+  },
+}
+`;
+
+exports[`fetch return 404 is fetch fails 1`] = `
+Object {
+  "/some/route/": Object {
+    "is404": true,
+    "isFetching": false,
+    "isReady": false,
+  },
+}
+`;
+
+exports[`fetch should work if data doesn't exist 1`] = `
+Object {
+  "/some/route/": Object {
+    "id": 1,
+    "isFetching": false,
+    "isPostType": true,
+    "isReady": true,
+    "type": "example",
+  },
+}
+`;

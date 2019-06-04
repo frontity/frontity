@@ -8,8 +8,8 @@ const source1 = (libraries: Source["libraries"]): Source => {
   return {
     state: {
       source: {
-        data: ({ state }) => pathOrObj => state.source.dataMap[""],
-        dataMap: {},
+        get: ({ state }) => pathOrObj => state.source.data[""],
+        data: {},
         category: {},
         tag: {},
         post: {},
@@ -25,7 +25,9 @@ const source1 = (libraries: Source["libraries"]): Source => {
     },
     libraries: {
       source: {
-        populate: () => {}
+        populate: () => {},
+        getParams: () => ({ path: "" }),
+        getRoute: () => "/route/"
       }
     }
   };
@@ -54,8 +56,8 @@ const source2: MySource = {
   state: {
     source: {
       api: "https://site.com/api",
-      data: ({ state }) => pathOrObj => state.source.dataMap[""],
-      dataMap: {},
+      get: ({ state }) => pathOrObj => state.source.data[""],
+      data: {},
       category: {},
       tag: {},
       post: {},
@@ -73,7 +75,9 @@ const source2: MySource = {
   },
   libraries: {
     source: {
-      populate: () => {}
+      populate: () => {},
+      getParams: () => ({ path: "" }),
+      getRoute: () => "/route/"
     }
   }
 };

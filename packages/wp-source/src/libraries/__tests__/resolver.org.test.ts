@@ -28,12 +28,6 @@ describe("resolver (wp.org patterns)", () => {
     expect(params).toMatchObject({});
   });
 
-  test("post archive with search params", () => {
-    const { handler, params } = resolver.match("/?s=some-search");
-    expect(handler).toBe(handlers.postArchive);
-    expect(params).toMatchObject({ s: "some-search" });
-  });
-
   // pattern: "/category/:slug",
   // handler: category
   test("category", () => {
@@ -76,10 +70,10 @@ describe("resolver (wp.org patterns)", () => {
     expect(params).toMatchObject({ year: "2016" });
   });
 
-  test("date (year & search)", () => {
-    const { handler, params } = resolver.match("/2016?s=some-search");
+  test("date (year)", () => {
+    const { handler, params } = resolver.match("/2016/");
     expect(handler).toBe(handlers.date);
-    expect(params).toMatchObject({ year: "2016", s: "some-search" });
+    expect(params).toMatchObject({ year: "2016" });
   });
 
   test("date (year/month)", () => {
