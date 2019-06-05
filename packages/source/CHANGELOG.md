@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/frontity/frontity/compare/@frontity/source@1.0.0...@frontity/source@1.0.1) (2019-06-05)
+
+
+### Bug Fixes
+
+* **all:** update typscript and fix some keywords ([1fe5fec](https://github.com/frontity/frontity/commit/1fe5fec))
+
+
+
+
+
 # [1.0.0](https://github.com/frontity/frontity/compare/@frontity/source@0.1.2...@frontity/source@1.0.0) (2019-06-05)
 
 

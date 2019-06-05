@@ -1,6 +1,6 @@
 {
   "name": "@frontity/connect",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "A state manager that's easy to use and hackable at the same time.",
   "keywords": [
     "frontity",

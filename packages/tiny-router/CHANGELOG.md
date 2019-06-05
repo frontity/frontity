@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/frontity/frontity/compare/@frontity/tiny-router@1.0.0...@frontity/tiny-router@1.0.1) (2019-06-05)
+
+
+### Bug Fixes
+
+* **all:** update typscript and fix some keywords ([1fe5fec](https://github.com/frontity/frontity/commit/1fe5fec))
+
+
+
+
+
 # [1.0.0](https://github.com/frontity/frontity/compare/@frontity/tiny-router@0.3.8...@frontity/tiny-router@1.0.0) (2019-06-05)
 
 

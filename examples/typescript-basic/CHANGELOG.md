@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/frontity/frontity/compare/typescript-basic@0.2.0...typescript-basic@0.2.1) (2019-06-05)
+
+**Note:** Version bump only for package typescript-basic
+
+
+
+
+
 # [0.2.0](https://github.com/frontity/frontity/compare/typescript-basic@0.1.17...typescript-basic@0.2.0) (2019-06-05)
 
 

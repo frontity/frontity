@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.17](https://github.com/frontity/frontity/compare/frontity@0.2.16...frontity@0.2.17) (2019-06-05)
+
+
+### Bug Fixes
+
+* **all:** update typscript and fix some keywords ([1fe5fec](https://github.com/frontity/frontity/commit/1fe5fec))
+* **wp-source:** change apiUrl for api ([26947e7](https://github.com/frontity/frontity/commit/26947e7))
+
+
+
+
+
 ## [0.2.16](https://github.com/frontity/frontity/compare/frontity@0.2.15...frontity@0.2.16) (2019-06-05)
 
 
