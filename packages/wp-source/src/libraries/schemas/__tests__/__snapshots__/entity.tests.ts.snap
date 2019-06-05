@@ -21,7 +21,7 @@ Object {
   },
   "description": "Alan is a WordPress enthusiast who enjoys travelling, music and pizza.",
   "id": 4,
-  "link": "https://demo.worona.org/author/alan/",
+  "link": "/author/alan/",
   "meta": Object {},
   "name": "Alan Martin",
   "slug": "alan",
@@ -63,7 +63,7 @@ Object {
   "count": 10,
   "description": "",
   "id": 7,
-  "link": "https://demo.worona.org/wp-cat/nature/",
+  "link": "/wp-cat/nature/",
   "meta": Object {},
   "name": "Nature",
   "parent": 0,
@@ -79,7 +79,7 @@ exports[`Convert a latest taxonomy using entity 1`] = `
 Object {
   "count": 1,
   "id": "movie",
-  "link": "https://demo.worona.test/aaa/?post_type=movie",
+  "link": "/aaa/?post_type=movie",
   "name": "Movies",
   "slug": "movie",
   "taxonomy": "latest",
@@ -171,11 +171,6 @@ Object {
           "title": "Audio TEST - Demo Worona",
         },
       },
-    ],
-    "wp:term": Array [
-      Array [
-        "page",
-      ],
     ],
   },
   "_links": Object {
@@ -278,7 +273,7 @@ Object {
   "latest": Array [
     "page",
   ],
-  "link": "https://demo.worona.org/audio-test/about-us/",
+  "link": "/audio-test/about-us/",
   "menu_order": 0,
   "meta": Object {},
   "modified": "2018-03-23T15:35:51",
@@ -331,7 +326,7 @@ Object {
   "count": 1,
   "description": "",
   "id": 10,
-  "link": "https://demo.worona.org/tag/gullfoss/",
+  "link": "/tag/gullfoss/",
   "meta": Object {},
   "name": "Gullfoss",
   "slug": "gullfoss",
@@ -347,21 +342,6 @@ Object {
   "_embedded": Object {
     "author": Array [
       2,
-    ],
-    "wp:term": Array [
-      Array [
-        Object {
-          "count": 0,
-          "id": "attachment",
-          "link": false,
-          "name": "Media",
-          "slug": "attachment",
-          "taxonomy": "latest",
-          "yoast_meta": Object {
-            "title": "attachment",
-          },
-        },
-      ],
     ],
   },
   "_links": Object {
@@ -421,7 +401,7 @@ Object {
   "latest": Array [
     "attachment",
   ],
-  "link": "https://demo.worona.org/audio-test/about-us/road-trip/",
+  "link": "/audio-test/about-us/road-trip/",
   "media_details": Object {
     "file": "2017/03/road-trip.png",
     "height": 467,
@@ -675,7 +655,7 @@ Object {
   "latest": Array [
     "post",
   ],
-  "link": "https://demo.worona.org/the-beauties-of-gullfoss/",
+  "link": "/the-beauties-of-gullfoss/",
   "meta": Object {
     "custom_field": "test value",
   },
@@ -753,7 +733,7 @@ Object {
   "latest": Array [
     "attachment",
   ],
-  "link": "https://demo.worona.org/the-beauties-of-gullfoss/iceland-test/",
+  "link": "/the-beauties-of-gullfoss/iceland-test/",
   "media_details": Object {
     "file": "2016/11/Iceland-test.jpg",
     "height": 3025,
@@ -863,7 +843,7 @@ Object {
     ],
   },
   "id": 3,
-  "link": "https://demo.worona.org/wp-cat/photography/",
+  "link": "/wp-cat/photography/",
   "name": "Photography",
   "slug": "photography",
   "taxonomy": "category",
@@ -905,7 +885,7 @@ Object {
     ],
   },
   "id": 10,
-  "link": "https://demo.worona.org/tag/gullfoss/",
+  "link": "/tag/gullfoss/",
   "name": "Gullfoss",
   "slug": "gullfoss",
   "taxonomy": "tag",
@@ -936,7 +916,7 @@ Object {
   },
   "description": "Alan is a WordPress enthusiast who enjoys travelling, music and pizza.",
   "id": 4,
-  "link": "https://demo.worona.org/author/alan/",
+  "link": "/author/alan/",
   "name": "Alan Martin",
   "slug": "alan",
   "url": "",
@@ -947,7 +927,7 @@ exports[`Convert post using entity 6`] = `
 Object {
   "count": 15,
   "id": "post",
-  "link": "https://demo.worona.org",
+  "link": "/",
   "name": "Demo Worona",
   "slug": "post",
   "taxonomy": "latest",

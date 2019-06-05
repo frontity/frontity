@@ -1,11 +1,27 @@
 import Router from "@frontity/router";
+import Source from "@frontity/source";
 import { Action } from "frontity/types";
 
 interface TinyRouter extends Router {
   name: "@frontity/tiny-router";
-  actions: Router["actions"] & {
+  state: Router<TinyRouter>["state"] & {
+    router: {
+      autoFetch?: boolean;
+    };
+  };
+  actions: Router<TinyRouter>["actions"] & {
     router: {
       init: Action<TinyRouter>;
+      beforeSSR?: Action<TinyRouter>;
+    };
+    source?: {
+      fetch: Source["actions"]["source"]["fetch"];
+    };
+  };
+  libraries: {
+    source?: {
+      getParams: Source["libraries"]["source"]["getParams"];
+      getRoute: Source["libraries"]["source"]["getRoute"];
     };
   };
 }

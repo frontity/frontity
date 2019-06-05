@@ -2,7 +2,7 @@ export { css, Global, keyframes } from "@emotion/core";
 export { default as styled } from "@emotion/styled";
 export { Helmet as Head } from "react-helmet";
 export { default as loadable } from "@loadable/component";
-export { observe } from "@frontity/connect";
+export { observe, batch } from "@frontity/connect";
 
 import { ConnectFunction, CreateStore } from "@frontity/types/src/connect";
 import originalConnect, {

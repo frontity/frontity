@@ -2,15 +2,13 @@ import { Handler } from "../../../";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
-const dateHandler: Handler = async (
-  state,
-  { path, params, page = 1, libraries }
-) => {
-  const { api, populate } = libraries.source;
+const dateHandler: Handler = async (source, { route, params, libraries }) => {
+  const { api, populate, getParams } = libraries.source;
+  const { page, query } = getParams(route);
 
-  // Build date property
+  // 1. build date properties
   const year = parseInt(params.year);
-  const month = params.month && parseInt(params.month) - 1;
+  const month = params.month && parseInt(params.month);
   const day = params.day && parseInt(params.day);
 
   const after = new Date(
@@ -19,45 +17,41 @@ const dateHandler: Handler = async (
   const before = new Date(after);
 
   if (!month) before.setFullYear(year + 1);
-  else if (!day) before.setMonth(month + 1);
+  else if (!day) before.setMonth(month);
   else before.setDate(day + 1);
 
-  // 0. Get data from store
-  let data = state.dataMap[path];
+  // 2. fetch the specified page
+  const response = await api.get({
+    endpoint: "posts",
+    params: {
+      _embed: true,
+      after: after.toISOString(),
+      before: before.toISOString(),
+      search: query.s,
+      page
+    }
+  });
 
-  // 1. init data if it isn't already
-  if (!data.isDate) {
-    data = {
-      year,
-      month,
-      day,
-      pages: [],
-      isArchive: true,
-      isDate: true,
-      isFetching: true
-    };
-  }
+  // 3. throw an error if page is out of range
+  const total = getTotal(response);
+  const totalPages = getTotalPages(response);
+  if (page > totalPages) throw new Error("Page doesn't exist.");
 
-  // 2. fetch the specified page if necessary
-  if (!data.pages[page]) {
-    const response = await api.get({
-      endpoint: "posts",
-      params: {
-        _embed: true,
-        after: after.toISOString(),
-        before: before.toISOString(),
-        search: params.s,
-        page
-      }
-    });
-    // populate response and add page to data
-    data.pages[page] = await populate(state, response);
-    // and assign total and totalPages values
-    data.total = getTotal(response);
-    data.totalPages = getTotalPages(response);
-  }
+  // 4. populate response and add page to data
+  const items = await populate(source, response);
 
-  state.dataMap[path] = data;
+  // 5. add data to source
+  source.data[route] = {
+    year,
+    month,
+    day,
+    items,
+    total,
+    totalPages,
+    isArchive: true,
+    isDate: true,
+    isFetching: true
+  };
 };
 
 export default dateHandler;

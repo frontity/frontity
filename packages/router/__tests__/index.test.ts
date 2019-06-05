@@ -1,17 +1,18 @@
 import Router from "..";
 
 const router: Router = {
-  name: "@frontity/tiny-router",
   state: {
     router: {
       path: "/some-path",
       page: 2,
-      location: ({ state }) => new URL(state.router.path)
+      query: {
+        k1: "v1"
+      }
     }
   },
   actions: {
     router: {
-      set: state => pathOrObj => {
+      set: state => routeOrParams => {
         /* do something */
       }
     }

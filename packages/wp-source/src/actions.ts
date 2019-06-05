@@ -1,43 +1,40 @@
 import WpSource from "../";
-import { parsePath } from "./utils/parse-path";
+import { getParams, getRoute } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries }) => async pathOrObj => {
+  fetch: ({ state, libraries }) => async routeOrParams => {
     const { source } = state;
     const { resolver } = libraries.source;
 
-    let path: string;
-    let page: number;
-
-    if (typeof pathOrObj === "string") {
-      ({ path, page } = parsePath(pathOrObj));
-    } else {
-      ({ path, page } = parsePath(pathOrObj.path));
-      if (pathOrObj.page) page = pathOrObj.page;
-    }
+    // Get route and route params
+    const route = getRoute(routeOrParams);
+    const routeParams = getParams(routeOrParams);
 
     // Get current data object
-    const data = source.dataMap[path];
+    const data = source.data[route];
 
     // return if the data that it's about to be fetched already exists
-    if (data && data.isArchive && data.pages[page]) return;
+    if (data) return;
 
-    // init data if needed
-    if (!data) source.dataMap[path] = {};
+    // init data
+    source.data[route] = {
+      isReady: false,
+      isFetching: true
+    };
 
     // get and execute the corresponding handler based on path
     try {
-      const { handler, params } = resolver.match(path);
-      await handler(source, { path, params, page, libraries });
-      source.dataMap[path].isReady = true;
+      const { handler, params } = resolver.match(routeParams.path);
+      await handler(source, { route, params, libraries });
+      source.data[route].isReady = true;
     } catch (e) {
-      console.warn(`An error ocurred fetching '${path}':\n`, e);
-      source.dataMap[path].is404 = true;
+      console.warn(`An error ocurred fetching '${route}':\n`, e);
+      source.data[route].is404 = true;
     }
 
     // end fetching
-    source.dataMap[path].isFetching = false;
+    source.data[route].isFetching = false;
   },
 
   init: ({ state, libraries }) => {

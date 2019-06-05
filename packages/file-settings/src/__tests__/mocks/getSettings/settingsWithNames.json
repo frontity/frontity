@@ -1,13 +1,13 @@
 [
   {
     "name": "settings-one",
-    "mode": "html",
+    "mode": "default",
     "state": {},
     "packages": []
   },
   {
     "name": "settings-two",
-    "mode": "html",
+    "mode": "default",
     "state": {},
     "packages": []
   }

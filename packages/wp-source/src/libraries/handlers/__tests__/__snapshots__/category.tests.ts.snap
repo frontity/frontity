@@ -8,20 +8,17 @@ Object {
     "isCategory": true,
     "isFetching": true,
     "isTaxonomy": true,
-    "pages": Array [
-      undefined,
-      Array [
-        Object {
-          "id": 57,
-          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
-          "type": "post",
-        },
-        Object {
-          "id": 54,
-          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
-          "type": "post",
-        },
-      ],
+    "items": Array [
+      Object {
+        "id": 57,
+        "link": "/2016/shinjuku-gyoen-national-garden/",
+        "type": "post",
+      },
+      Object {
+        "id": 54,
+        "link": "/2016/lower-antelope-canyon/",
+        "type": "post",
+      },
     ],
     "taxonomy": "category",
     "total": 10,
@@ -73,20 +70,17 @@ Object {
     "isCategory": true,
     "isFetching": true,
     "isTaxonomy": true,
-    "pages": Array [
-      undefined,
-      Array [
-        Object {
-          "id": 57,
-          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
-          "type": "post",
-        },
-        Object {
-          "id": 54,
-          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
-          "type": "post",
-        },
-      ],
+    "items": Array [
+      Object {
+        "id": 57,
+        "link": "/2016/shinjuku-gyoen-national-garden/",
+        "type": "post",
+      },
+      Object {
+        "id": 54,
+        "link": "/2016/lower-antelope-canyon/",
+        "type": "post",
+      },
     ],
     "taxonomy": "category",
     "total": 10,
@@ -130,38 +124,37 @@ Object {
 }
 `;
 
-exports[`category exists in source.data but doesn't have page 1`] = `
+exports[`category works with pagination 1`] = `
 Object {
   "/category/nature/": Object {
     "id": 7,
     "isArchive": true,
     "isCategory": true,
-    "isFetching": false,
-    "isReady": true,
+    "isFetching": true,
     "isTaxonomy": true,
-    "pages": Array [
-      undefined,
-      Array [
-        Object {
-          "id": 57,
-          "link": "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
-          "type": "post",
-        },
-        Object {
-          "id": 54,
-          "link": "https://test.frontity.io/2016/lower-antelope-canyon/",
-          "type": "post",
-        },
-      ],
+    "items": Array [
+      Object {
+        "id": 57,
+        "link": "/2016/shinjuku-gyoen-national-garden/",
+        "type": "post",
+      },
+      Object {
+        "id": 54,
+        "link": "/2016/lower-antelope-canyon/",
+        "type": "post",
+      },
     ],
     "taxonomy": "category",
     "total": 10,
     "totalPages": 5,
   },
+  "/category/nature/page/2/": Object {
+    "isFetching": true,
+  },
 }
 `;
 
-exports[`category exists in source.data but doesn't have page 2`] = `
+exports[`category works with pagination 2`] = `
 Object {
   "attachment": Array [
     55,

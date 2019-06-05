@@ -1,5 +1,5 @@
 import React from "react";
-import Package from "../..";
+import Package from "..";
 import { Connect } from "frontity/types";
 import { Head, connect } from "frontity";
 

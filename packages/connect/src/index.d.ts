@@ -88,6 +88,12 @@ export function observe<Reaction extends Function>(
 
 export function unobserve(func: Function): void;
 
+export function batch<T = any>(
+  fn: (...args: any[]) => T,
+  ctx?: any,
+  args?: any[]
+): T;
+
 export function createStore<St extends Store>(
   store: St
 ): Omit<St, "state" | "actions"> & {

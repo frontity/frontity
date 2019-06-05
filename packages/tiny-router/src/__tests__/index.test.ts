@@ -4,197 +4,86 @@ import tinyRouter from "..";
 import TinyRouter from "../..";
 
 let config: TinyRouter;
+let getParams: jest.Mock;
+let getRoute: jest.Mock;
 
 beforeEach(() => {
+  getParams = jest.fn();
+  getRoute = jest.fn();
+
   config = {
     name: "@frontity/tiny-router",
     state: {
-      router: { ...tinyRouter.state.router },
       frontity: {
-        url: "https://test.frontity.io"
-      }
+        platform: "server"
+      },
+      router: { ...tinyRouter.state.router }
     },
     actions: {
       router: {
         init,
         set
       }
+    },
+    libraries: {
+      source: {
+        getParams,
+        getRoute
+      }
     }
   };
 });
 
-describe("state", () => {
-  test("location without page should work", () => {
-    const store = createStore(config);
-    store.actions.router.set("/some-post/");
-    expect(store.state.router.location.href).toBe(
-      "https://test.frontity.io/some-post/"
-    );
-  });
-
-  test("location with page = 1 should work", () => {
-    const store = createStore(config);
-    store.actions.router.set({ path: "/category/nature/", page: 1 });
-    expect(store.state.router.location.href).toBe(
-      "https://test.frontity.io/category/nature/"
-    );
-  });
-
-  test("location with page > 1 should work", () => {
-    const store = createStore(config);
-    store.actions.router.set({ path: "/category/nature/", page: 2 });
-    expect(store.state.router.location.href).toBe(
-      "https://test.frontity.io/category/nature/page/2/"
-    );
-  });
-});
-
 describe("actions", () => {
-  test("set() should work just with a path passed as string", () => {
+  test("set() should work just with a route passed as string", () => {
     const store = createStore(config);
-    store.actions.router.set("/some-post/");
-    expect(store.state.router).toMatchObject({
-      page: 1,
-      path: "/some-post/"
-    });
+
+    const routeOrParams = "/some-post/";
+
+    const route = "/some-post/";
+    const params = { path: "/some-post/", page: 1, query: {} };
+
+    getRoute.mockReturnValue(route);
+    getParams.mockReturnValue(params);
+
+    store.actions.router.set(routeOrParams);
+    expect(getRoute).toHaveBeenCalledWith(routeOrParams);
+    expect(getParams).toHaveBeenCalledWith(routeOrParams);
+    expect(store.state.router).toMatchObject(params);
   });
 
-  test("set() should work with path passed as path", () => {
+  test("set() should work with route passed as params", () => {
     const store = createStore(config);
-    store.actions.router.set({ path: "/some-post/" });
-    expect(store.state.router).toMatchObject({
-      page: 1,
-      path: "/some-post/"
-    });
-  });
 
-  test("set() should work with path and page", () => {
-    const store = createStore(config);
-    store.actions.router.set({ path: "/category/some-category/", page: 2 });
-    expect(store.state.router).toMatchObject({
-      page: 2,
-      path: "/category/some-category/"
-    });
-  });
-
-  test("set() should respect a different page if passed via page", () => {
-    const store = createStore(config);
-    store.actions.router.set({
-      path: "/category/some-category/page/3",
-      page: 4
-    });
-    expect(store.state.router).toMatchObject({
+    const routeOrParams = {
       path: "/category/some-category/",
-      page: 4
-    });
-  });
-
-  test("set() should work with a full url", () => {
-    const store = createStore(config);
-    store.actions.router.set(
-      "https://frontity.org/category/some-category/page/3"
-    );
-    expect(store.state.router).toMatchObject({
-      page: 3,
-      path: "/category/some-category/"
-    });
-  });
-
-  test("set() should work with a full url passed via path", () => {
-    const store = createStore(config);
-    store.actions.router.set({
-      path: "https://frontity.org/category/some-category/page/3"
-    });
-    expect(store.state.router).toMatchObject({
-      page: 3,
-      path: "/category/some-category/"
-    });
-  });
-
-  test("set() should work with a path with page", () => {
-    const store = createStore(config);
-    store.actions.router.set("/category/some-category/page/4");
-    expect(store.state.router).toMatchObject({
-      page: 4,
-      path: "/category/some-category/"
-    });
-  });
-
-  test("set() should work with a path of only page", () => {
-    const store = createStore(config);
-    store.actions.router.set("/page/2");
-    expect(store.state.router).toMatchObject({
       page: 2,
-      path: "/"
-    });
-  });
+      query: { s: "nature" }
+    };
 
-  test("set() should work with a full url without path", () => {
-    const store = createStore(config);
-    store.actions.router.set("https://frontity.org");
-    expect(store.state.router).toMatchObject({
-      page: 1,
-      path: "/"
-    });
-  });
+    const route = "/category/some-category/page/2/?s=nature";
+    const params = {
+      path: "/category/some-category/",
+      page: 2,
+      query: { s: "nature" }
+    };
 
-  test("set() should work with a url of only page", () => {
-    const store = createStore(config);
-    store.actions.router.set("https://frontity.org/page/3");
-    expect(store.state.router).toMatchObject({
-      page: 3,
-      path: "/"
-    });
-  });
+    getRoute.mockReturnValue(route);
+    getParams.mockReturnValue(params);
 
-  test("set() should add final slash if missing", () => {
-    const store = createStore(config);
-    store.actions.router.set("/some-post");
-    expect(store.state.router).toMatchObject({
-      page: 1,
-      path: "/some-post/"
-    });
-  });
-
-  test("set() should add final slash if missing in full url", () => {
-    const store = createStore(config);
-    store.actions.router.set("https://frontity.org/some-post");
-    expect(store.state.router).toMatchObject({
-      page: 1,
-      path: "/some-post/"
-    });
-  });
-
-  test("set() should add final slash if missing in path", () => {
-    const store = createStore(config);
-    store.actions.router.set({ path: "https://frontity.org/some-post" });
-    expect(store.state.router).toMatchObject({
-      page: 1,
-      path: "/some-post/"
-    });
-  });
-
-  test("set() should add final slash if missing in path with full url", () => {
-    const store = createStore(config);
-    store.actions.router.set({ path: "https://frontity.org/some-post" });
-    expect(store.state.router).toMatchObject({
-      page: 1,
-      path: "/some-post/"
-    });
-  });
-
-  test("set() should work with a path that contains `page` on it", () => {
-    const store = createStore(config);
-    store.actions.router.set("/this-path-contains-page/");
-    expect(store.state.router).toMatchObject({
-      page: 1,
-      path: "/this-path-contains-page/"
-    });
+    store.actions.router.set(routeOrParams);
+    expect(getRoute).toHaveBeenCalledWith(routeOrParams);
+    expect(getParams).toHaveBeenCalledWith(routeOrParams);
+    expect(store.state.router).toMatchObject(params);
   });
 
   test("init() should add event listener to handle popstate events", () => {
+    config.state.frontity.platform = "client";
     const store = createStore(config);
     store.actions.router.init();
+
+    getRoute.mockReturnValueOnce("/tag/japan/page/3/");
+    getParams.mockReturnValueOnce({ path: "/tag/japan/", page: 3, query: {} });
 
     // check that first state is correct
     expect(window.history.state).toMatchObject({

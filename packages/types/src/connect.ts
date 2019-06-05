@@ -1,4 +1,4 @@
-import { ComponentType, ComponentProps } from "react";
+import { ComponentProps, FunctionComponent, ComponentClass } from "react";
 import Package from "./package";
 import {
   ResolveState,
@@ -16,7 +16,10 @@ export type Connect<Pkg extends Package, Props extends object = {}> = Omit<
 } & Props;
 
 export interface ConnectFunction {
-  <Comp extends ComponentType<any>>(comp: Comp): ComponentType<
+  <Comp extends FunctionComponent<any>>(comp: Comp): FunctionComponent<
+    FilterInjectedProps<ComponentProps<Comp>>
+  >;
+  <Comp extends ComponentClass<any>>(comp: Comp): ComponentClass<
     FilterInjectedProps<ComponentProps<Comp>>
   >;
 }

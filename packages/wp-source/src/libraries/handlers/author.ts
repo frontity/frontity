@@ -3,49 +3,39 @@ import getIdBySlug from "./utils/get-id-by-slug";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
-const authorHandler: Handler = async (
-  state,
-  { path, params, page = 1, libraries }
-) => {
-  const { api, populate } = libraries.source;
+const authorHandler: Handler = async (source, { route, params, libraries }) => {
+  const { api, populate, getParams } = libraries.source;
+  const { page, query } = getParams(route);
 
-  // 0. Get data from store
-  let data = state.dataMap[path];
+  // 1. search id in state or get it from WP REST API
+  const { slug } = params;
+  const id =
+    getIdBySlug(source.author, slug) || (await api.getIdBySlug("users", slug));
 
-  // 1. init data if it isn't already
-  if (!data.isAuthor) {
-    // Search id in state or get it from WP REST API
-    const { slug } = params;
-    const id =
-      getIdBySlug(state.author, slug) || (await api.getIdBySlug("users", slug));
+  // 2. fetch the specified page
+  const response = await api.get({
+    endpoint: "posts",
+    params: { author: id, search: query.s, page, _embed: true }
+  });
 
-    data = {
-      id,
-      pages: [],
-      isArchive: true,
-      isAuthor: true,
-      isFetching: true
-    };
-  }
+  // 3. throw an error if page is out of range
+  const total = getTotal(response);
+  const totalPages = getTotalPages(response);
+  if (page > totalPages) throw new Error("Page doesn't exist.");
 
-  // 2. fetch the specified page if necessary
-  if (!data.pages[page]) {
-    // here we know the id!!
-    const { id } = data;
-    // and we don't need to init data
-    // just get the page we are requesting
-    const response = await api.get({
-      endpoint: "posts",
-      params: { author: id, search: params.s, page, _embed: true }
-    });
-    // populate response and add page to data
-    data.pages[page] = await populate(state, response);
-    // and assign total and totalPages values
-    data.total = getTotal(response);
-    data.totalPages = getTotalPages(response);
-  }
+  // 4. populate response and add page to data
+  const items = await populate(source, response);
 
-  state.dataMap[path] = data;
+  // 5. add data to source
+  source.data[route] = {
+    id,
+    items,
+    total,
+    totalPages,
+    isArchive: true,
+    isAuthor: true,
+    isFetching: true
+  };
 };
 
 export default authorHandler;

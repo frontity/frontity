@@ -1,6 +1,7 @@
 import { State } from "@frontity/types";
 import WpSource from "../../../..";
 import populate from "../../populate";
+import routeUtils from "../../route-utils";
 import handler from "../category";
 import { mockResponse, expectEntities } from "./mocks/helpers";
 import posts from "./mocks/postsCat7.json";
@@ -11,8 +12,8 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    data: () => ({}),
-    dataMap: {},
+    get: () => ({}),
+    data: {},
     category: {},
     tag: {},
     post: {},
@@ -45,7 +46,8 @@ beforeEach(() => {
           })
         )
       },
-      populate
+      populate,
+      ...routeUtils
     }
   };
 });
@@ -53,15 +55,15 @@ beforeEach(() => {
 describe("category", () => {
   test("doesn't exist in source.category", async () => {
     // source.fetch("/category/nature/")
-    state.dataMap["/category/nature/"] = { isFetching: true };
+    state.data["/category/nature/"] = { isFetching: true };
 
     await handler(state, {
-      path: "/category/nature/",
+      route: "/category/nature/",
       params: { slug: "nature" },
       libraries
     });
 
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 
@@ -79,44 +81,30 @@ describe("category", () => {
     };
 
     // source.fetch("/category/nature/")
-    state.dataMap["/category/nature/"] = { isFetching: true };
+    state.data["/category/nature/"] = { isFetching: true };
 
     await handler(state, {
-      path: "/category/nature/",
+      route: "/category/nature/",
       params: { slug: "nature" },
       libraries
     });
 
     expect(libraries.source.api.getIdBySlug).not.toBeCalled();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 
-  test("exists in source.data but doesn't have page", async () => {
-    const getIdBySlug = libraries.source.api.getIdBySlug as jest.Mock;
-
-    state.dataMap["/category/nature/"] = {
-      id: 7,
-      isArchive: true,
-      isCategory: true,
-      isFetching: false,
-      isReady: true,
-      isTaxonomy: true,
-      pages: [],
-      taxonomy: "category",
-      total: 10,
-      totalPages: 1
-    };
-
+  test("works with pagination", async () => {
     // source.fetch("/category/nature/")
+    state.data["/category/nature/page/2/"] = { isFetching: true };
+
     await handler(state, {
-      path: "/category/nature/",
+      route: "/category/nature/",
       params: { slug: "nature" },
       libraries
     });
 
-    expect(getIdBySlug).not.toBeCalled();
-    expect(state.dataMap).toMatchSnapshot();
+    expect(state.data).toMatchSnapshot();
     expectEntities(state);
   });
 });

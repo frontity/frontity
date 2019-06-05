@@ -1,5 +1,5 @@
 import TinyRouter from "..";
-import { set, init } from "./actions";
+import { set, init, beforeSSR } from "./actions";
 
 const tinyRouter: TinyRouter = {
   name: "@frontity/tiny-router",
@@ -7,22 +7,18 @@ const tinyRouter: TinyRouter = {
     router: {
       path: "/",
       page: 1,
-      location: ({ state }) => {
-        return new URL(
-          state.router.page > 1
-            ? state.router.path.replace(/\/?$/, `/page/${state.router.page}/`)
-            : state.router.path,
-          state.frontity.url
-        );
-      }
+      query: {},
+      autoFetch: true
     }
   },
   actions: {
     router: {
       init,
-      set
+      set,
+      beforeSSR
     }
-  }
+  },
+  libraries: {}
 };
 
 export default tinyRouter;

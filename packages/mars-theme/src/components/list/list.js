@@ -5,11 +5,10 @@ import Pagination from "./pagination";
 
 const List = ({ state }) => {
   // Get the data of the current list.
-  const data = state.source.data(state.router.path);
-  // Get the items of the current page.
-  const items = data.pages[state.router.page];
+  const { path, page } = state.router;
+  const data = state.source.get({ path, page });
 
-  return items ? (
+  return (
     <Container>
       {data.isTaxonomy && (
         <Header>
@@ -19,14 +18,14 @@ const List = ({ state }) => {
       {data.isAuthor && (
         <Header>Author: {state.source.author[data.id].name}</Header>
       )}
-      {items.map(({ type, id }) => {
+      {data.items.map(({ type, id }) => {
         const item = state.source[type][id];
         // Render one Item for each one.
         return <Item key={item.id} item={item} />;
       })}
       <Pagination />
     </Container>
-  ) : null;
+  );
 };
 
 export default connect(List);

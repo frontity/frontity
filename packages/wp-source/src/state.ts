@@ -1,10 +1,10 @@
 import WpSource from "..";
-import { parsePath } from "./utils/parse-path";
+import { getRoute } from "./libraries/route-utils";
 
 const state: WpSource["state"]["source"] = {
-  data: ({ state }) => pathOrLink =>
-    state.source.dataMap[parsePath(pathOrLink).path] || {},
-  dataMap: {},
+  get: ({ state }) => routeOrParams =>
+    state.source.data[getRoute(routeOrParams)] || {},
+  data: {},
   category: {},
   tag: {},
   post: {},
