@@ -7,7 +7,7 @@ const settings = {
     frontity: {
       url: "https://site.com",
       prop1: "prop1",
-      menu1: ["Home"]
+      menu1: ["item1"]
     }
   },
   packages: [
@@ -17,7 +17,7 @@ const settings = {
       state: {
         frontity: {
           prop1: "overwritten by package1",
-          menu1: ["Overwrrite by pacakge1", "With a second item"]
+          menu1: ["item2", "item3"]
         },
         package1: {
           prop2: "prop2"
@@ -45,18 +45,28 @@ describe("initialState", () => {
     expect(initialState({ settings, url })).toMatchSnapshot();
   });
 
-  it("should return a valid path and page", () => {
+  it("should return a valid initial link", () => {
     const url = new URL("https://site.com/category/nature/page/2");
     expect(initialState({ settings, url })).toMatchSnapshot();
   });
 
-  it("should return a valid path and page with home", () => {
+  it("should return a valid initial link with home", () => {
     const url = new URL("https://site.com");
     expect(initialState({ settings, url })).toMatchSnapshot();
   });
 
-  it("should return a valid path and page with paginated home", () => {
-    const url = new URL("https://site.com/page/2");
+  it("should return a valid initial link with query", () => {
+    const url = new URL("https://site.com/page/2?some=query");
+    expect(initialState({ settings, url })).toMatchSnapshot();
+  });
+
+  it("should return a valid initial link with hash", () => {
+    const url = new URL("https://site.com/page/2#some-hash");
+    expect(initialState({ settings, url })).toMatchSnapshot();
+  });
+
+  it("should return a valid initial link with query and hash", () => {
+    const url = new URL("https://site.com/page/2?some=query#some-hash");
     expect(initialState({ settings, url })).toMatchSnapshot();
   });
 });

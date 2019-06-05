@@ -1,28 +1,28 @@
 import { RouteParams } from "@frontity/source";
 import WpSource from "../../";
 
-export const getParams: WpSource["libraries"]["source"]["getParams"] = routeOrParams =>
-  typeof routeOrParams === "string"
-    ? routeToParams(routeOrParams)
-    : {
-        path: addFinalSlash(routeOrParams.path),
-        page: routeOrParams.page || 1,
-        query: routeOrParams.query || {}
-      };
+export const parse: WpSource["libraries"]["source"]["parse"] = route =>
+  routeToParams(route);
 
-export const getRoute: WpSource["libraries"]["source"]["getRoute"] = routeOrParams =>
-  typeof routeOrParams === "string"
-    ? normalize(routeOrParams)
-    : paramsToRoute(routeOrParams);
+export const stringify: WpSource["libraries"]["source"]["stringify"] = routeParams =>
+  paramsToRoute(routeParams);
 
-export default { getParams, getRoute };
+export const normalize = (route: string): string =>
+  paramsToRoute(routeToParams(route));
+
+export default { parse, stringify, normalize };
 
 // UTILS
 
 export const routeToParams = (route: string): RouteParams => {
-  route = removeDomain(route);
-
-  const [fullPath, query] = route.split("?");
+  const [
+    ,
+    fullPath,
+    query,
+    hash
+  ] = /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)(?:\?([^#]*))?(#.*)?/.exec(
+    route
+  );
   const [, path, page] = /^(.*)page\/(\d+)\/?(\?.*)?$/.exec(fullPath) || [
     null,
     fullPath,
@@ -32,14 +32,16 @@ export const routeToParams = (route: string): RouteParams => {
   return {
     path: addFinalSlash(path),
     page: parseInt(page, 10),
-    query: queryToObj(query)
+    query: queryToObj(query),
+    hash
   };
 };
 
 export const paramsToRoute = ({
   path = "/",
   page = 1,
-  query = {}
+  query = {},
+  hash = ""
 }: RouteParams): string => {
   // correct path
   path = addFinalSlash(path);
@@ -47,15 +49,7 @@ export const paramsToRoute = ({
   const pathAndPage = page > 1 ? `${path}page/${page}/` : path;
   const queryStr = objToQuery(query);
 
-  return `${pathAndPage}${queryStr}`;
-};
-
-export const normalize = (route: string): string =>
-  paramsToRoute(routeToParams(route));
-
-export const removeDomain = (input: string): string => {
-  const [, result] = /^(?:https?:\/\/[^\/]*)?(\/?.*)$/.exec(input);
-  return result || "/";
+  return `${pathAndPage}${queryStr}${hash}`;
 };
 
 export const addFinalSlash = (path: string): string =>

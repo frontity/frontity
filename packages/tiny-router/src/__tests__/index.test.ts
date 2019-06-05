@@ -4,18 +4,17 @@ import tinyRouter from "..";
 import TinyRouter from "../..";
 
 let config: TinyRouter;
-let getParams: jest.Mock;
-let getRoute: jest.Mock;
+let normalize: jest.Mock;
 
 beforeEach(() => {
-  getParams = jest.fn();
-  getRoute = jest.fn();
+  normalize = jest.fn();
 
   config = {
     name: "@frontity/tiny-router",
     state: {
       frontity: {
-        platform: "server"
+        platform: "server",
+        initialLink: "/initial/link/"
       },
       router: { ...tinyRouter.state.router }
     },
@@ -27,54 +26,50 @@ beforeEach(() => {
     },
     libraries: {
       source: {
-        getParams,
-        getRoute
+        normalize
       }
     }
   };
 });
 
 describe("actions", () => {
-  test("set() should work just with a route passed as string", () => {
+  test("set() should work just with links", () => {
     const store = createStore(config);
 
-    const routeOrParams = "/some-post/";
+    const link = "/some-post/";
+    const normalized = "/some-post/";
 
-    const route = "/some-post/";
-    const params = { path: "/some-post/", page: 1, query: {} };
+    normalize.mockReturnValue(normalized);
 
-    getRoute.mockReturnValue(route);
-    getParams.mockReturnValue(params);
-
-    store.actions.router.set(routeOrParams);
-    expect(getRoute).toHaveBeenCalledWith(routeOrParams);
-    expect(getParams).toHaveBeenCalledWith(routeOrParams);
-    expect(store.state.router).toMatchObject(params);
+    store.actions.router.set(link);
+    expect(normalize).toHaveBeenCalledWith(link);
+    expect(store.state.router.link).toBe(normalized);
   });
 
-  test("set() should work with route passed as params", () => {
+  test("set() should work with full URLs", () => {
     const store = createStore(config);
 
-    const routeOrParams = {
-      path: "/category/some-category/",
-      page: 2,
-      query: { s: "nature" }
-    };
+    const link = "https://blog.example/some-post/page/3/?some=query";
+    const normalized = "/some-post/page/3/?some=query";
 
-    const route = "/category/some-category/page/2/?s=nature";
-    const params = {
-      path: "/category/some-category/",
-      page: 2,
-      query: { s: "nature" }
-    };
+    normalize.mockReturnValue(normalized);
 
-    getRoute.mockReturnValue(route);
-    getParams.mockReturnValue(params);
+    store.actions.router.set(link);
+    expect(normalize).toHaveBeenCalledWith(link);
+    expect(store.state.router.link).toBe(normalized);
+  });
 
-    store.actions.router.set(routeOrParams);
-    expect(getRoute).toHaveBeenCalledWith(routeOrParams);
-    expect(getParams).toHaveBeenCalledWith(routeOrParams);
-    expect(store.state.router).toMatchObject(params);
+  test("init() should populate the initial link", () => {
+    const store = createStore(config);
+
+    normalize.mockReturnValue("/initial/link/");
+
+    store.actions.router.init();
+
+    // check that first state is correct
+    expect(normalize).toHaveBeenCalledTimes(1);
+    expect(normalize).toHaveBeenCalledWith("/initial/link/");
+    expect(store.state.router.link).toBe("/initial/link/");
   });
 
   test("init() should add event listener to handle popstate events", () => {
@@ -82,32 +77,24 @@ describe("actions", () => {
     const store = createStore(config);
     store.actions.router.init();
 
-    getRoute.mockReturnValueOnce("/tag/japan/page/3/");
-    getParams.mockReturnValueOnce({ path: "/tag/japan/", page: 3, query: {} });
+    normalize.mockReturnValueOnce("/tag/japan/page/3/");
 
     // check that first state is correct
-    expect(window.history.state).toMatchObject({
-      page: 1,
-      path: "/"
-    });
+    expect(window.history.state).toMatchObject({ link: "/" });
 
     // check reactions to "popstate" events
-    let currentPath = store.state.router.path;
+    let currentLink = store.state.router.link;
     observe(() => {
-      currentPath = store.state.router.path;
+      currentLink = store.state.router.link;
     });
 
     window.dispatchEvent(
       new PopStateEvent("popstate", {
-        state: {
-          path: "/tag/japan",
-          page: 3
-        }
+        state: { link: "/tag/japan/page/3/" }
       })
     );
 
-    expect(currentPath).toBe("/tag/japan/");
-    expect(store.state.router.path).toBe("/tag/japan/");
-    expect(store.state.router.page).toBe(3);
+    expect(currentLink).toBe("/tag/japan/page/3/");
+    expect(store.state.router.link).toBe("/tag/japan/page/3/");
   });
 });

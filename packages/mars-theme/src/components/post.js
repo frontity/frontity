@@ -6,7 +6,7 @@ import FeaturedMedia from "./featured-media";
 
 const Post = ({ state, actions }) => {
   // Get info of current post.
-  const data = state.source.get(state.router.path);
+  const data = state.source.get(state.router.link);
   // Get the the post.
   const post = state.source[data.type][data.id];
   // Get the author.
@@ -26,7 +26,7 @@ const Post = ({ state, actions }) => {
         <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
         {data.isPost && (
           <>
-            <Link path={author.link}>
+            <Link link={author.link}>
               <Author>
                 By <b>{author.name}</b>
               </Author>

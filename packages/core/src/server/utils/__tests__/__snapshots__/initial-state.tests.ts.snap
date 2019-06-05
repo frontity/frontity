@@ -1,105 +1,153 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`initialState should return a valid initial link 1`] = `
+Object {
+  "frontity": Object {
+    "initialLink": "/category/nature/page/2",
+    "menu1": Array [
+      "item1",
+      "item2",
+      "item3",
+    ],
+    "mode": "html",
+    "name": "site",
+    "packages": Array [
+      "package1",
+      "package2",
+    ],
+    "platform": "server",
+    "prop1": "overwritten by package2",
+    "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
+  },
+}
+`;
+
+exports[`initialState should return a valid initial link with hash 1`] = `
+Object {
+  "frontity": Object {
+    "initialLink": "/page/2#some-hash",
+    "menu1": Array [
+      "item1",
+      "item2",
+      "item3",
+    ],
+    "mode": "html",
+    "name": "site",
+    "packages": Array [
+      "package1",
+      "package2",
+    ],
+    "platform": "server",
+    "prop1": "overwritten by package2",
+    "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
+  },
+}
+`;
+
+exports[`initialState should return a valid initial link with home 1`] = `
+Object {
+  "frontity": Object {
+    "initialLink": "/",
+    "menu1": Array [
+      "item1",
+      "item2",
+      "item3",
+    ],
+    "mode": "html",
+    "name": "site",
+    "packages": Array [
+      "package1",
+      "package2",
+    ],
+    "platform": "server",
+    "prop1": "overwritten by package2",
+    "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
+  },
+}
+`;
+
+exports[`initialState should return a valid initial link with query 1`] = `
+Object {
+  "frontity": Object {
+    "initialLink": "/page/2?some=query",
+    "menu1": Array [
+      "item1",
+      "item2",
+      "item3",
+    ],
+    "mode": "html",
+    "name": "site",
+    "packages": Array [
+      "package1",
+      "package2",
+    ],
+    "platform": "server",
+    "prop1": "overwritten by package2",
+    "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
+  },
+}
+`;
+
+exports[`initialState should return a valid initial link with query and hash 1`] = `
+Object {
+  "frontity": Object {
+    "initialLink": "/page/2?some=query#some-hash",
+    "menu1": Array [
+      "item1",
+      "item2",
+      "item3",
+    ],
+    "mode": "html",
+    "name": "site",
+    "packages": Array [
+      "package1",
+      "package2",
+    ],
+    "platform": "server",
+    "prop1": "overwritten by package2",
+    "url": "https://site.com",
+  },
+  "package1": Object {
+    "prop2": "prop2",
+  },
+  "package2": Object {
+    "prop3": "prop2",
+  },
+}
+`;
+
 exports[`initialState should return a valid initial state 1`] = `
 Object {
   "frontity": Object {
-    "initial": Object {
-      "page": 1,
-      "path": "/post",
-    },
+    "initialLink": "/post",
     "menu1": Array [
-      "Overwrrite by pacakge1",
-      "With a second item",
-    ],
-    "mode": "html",
-    "name": "site",
-    "packages": Array [
-      "package1",
-      "package2",
-    ],
-    "platform": "server",
-    "prop1": "overwritten by package2",
-    "url": "https://site.com",
-  },
-  "package1": Object {
-    "prop2": "prop2",
-  },
-  "package2": Object {
-    "prop3": "prop2",
-  },
-}
-`;
-
-exports[`initialState should return a valid path and page 1`] = `
-Object {
-  "frontity": Object {
-    "initial": Object {
-      "page": 2,
-      "path": "/category/nature/",
-    },
-    "menu1": Array [
-      "Overwrrite by pacakge1",
-      "With a second item",
-    ],
-    "mode": "html",
-    "name": "site",
-    "packages": Array [
-      "package1",
-      "package2",
-    ],
-    "platform": "server",
-    "prop1": "overwritten by package2",
-    "url": "https://site.com",
-  },
-  "package1": Object {
-    "prop2": "prop2",
-  },
-  "package2": Object {
-    "prop3": "prop2",
-  },
-}
-`;
-
-exports[`initialState should return a valid path and page with home 1`] = `
-Object {
-  "frontity": Object {
-    "initial": Object {
-      "page": 1,
-      "path": "/",
-    },
-    "menu1": Array [
-      "Overwrrite by pacakge1",
-      "With a second item",
-    ],
-    "mode": "html",
-    "name": "site",
-    "packages": Array [
-      "package1",
-      "package2",
-    ],
-    "platform": "server",
-    "prop1": "overwritten by package2",
-    "url": "https://site.com",
-  },
-  "package1": Object {
-    "prop2": "prop2",
-  },
-  "package2": Object {
-    "prop3": "prop2",
-  },
-}
-`;
-
-exports[`initialState should return a valid path and page with paginated home 1`] = `
-Object {
-  "frontity": Object {
-    "initial": Object {
-      "page": 2,
-      "path": "/",
-    },
-    "menu1": Array [
-      "Overwrrite by pacakge1",
-      "With a second item",
+      "item1",
+      "item2",
+      "item3",
     ],
     "mode": "html",
     "name": "site",

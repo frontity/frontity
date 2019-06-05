@@ -34,6 +34,11 @@ Object {
       ],
     },
     "namespace1": Object {
+      "array1": Array [
+        "item1",
+        "item2",
+        "item3",
+      ],
       "prop1": "prop1 overwritten by package_2",
     },
     "namespace2": Object {
