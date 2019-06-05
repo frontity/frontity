@@ -4,7 +4,8 @@
   "description": "A starter theme for Frontity",
   "keywords": [
     "frontity",
-    "frontity-theme"
+    "frontity-theme",
+    "frontity-amp"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",

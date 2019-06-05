@@ -31,7 +31,7 @@ export default {
       name: "@frontity/wp-source",
       state: {
         source: {
-          apiUrl: "https://test.frontity.io/wp-json",
+          api: "https://test.frontity.io/wp-json",
           isWPCom: false
         }
       }

@@ -8,6 +8,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "src/index.js",
+  "keywords": [
+    "frontity",
+    "frontity-settings"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
@@ -36,6 +40,6 @@
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.0.3",
-    "typescript": "^3.4.2"
+    "typescript": "^3.4.5"
   }
 }

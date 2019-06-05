@@ -1,6 +1,6 @@
 {
   "hooks": {
     "pre-commit": "lint-staged && npm run test",
-    "pre-push": "npm run test:clear-cache"
+    "pre-push": "npm run test:push"
   }
 }

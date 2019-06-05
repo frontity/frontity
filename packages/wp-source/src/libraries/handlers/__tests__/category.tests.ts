@@ -20,7 +20,7 @@ beforeEach(() => {
     page: {},
     author: {},
     attachment: {},
-    apiUrl: "https://test.frontity.io",
+    api: "https://test.frontity.io",
     isWPCom: false
   };
   // mock libraries
@@ -35,7 +35,7 @@ beforeEach(() => {
           .mockReturnValue({ handler, params: { slug: "nature" } })
       },
       api: {
-        apiUrl: "https://test.frontity.io",
+        api: "https://test.frontity.io",
         isWPCom: false,
         init: jest.fn(),
         getIdBySlug: jest.fn().mockResolvedValue(7),
