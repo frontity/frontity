@@ -25,7 +25,7 @@
     "test": "jest --clearCache && jest"
   },
   "dependencies": {
-    "@frontity/types": "^1.0.1"
+    "frontity": "^1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
