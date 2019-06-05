@@ -14,7 +14,7 @@ const wpSource = (): WpSource => ({
       page: {},
       author: {},
       attachment: {},
-      apiUrl: "https://test.frontity.io",
+      api: "https://test.frontity.io",
       isWPCom: false
     }
   },
@@ -33,7 +33,7 @@ const wpSource = (): WpSource => ({
         match: jest.fn()
       },
       api: {
-        apiUrl: "https://test.frontity.io",
+        api: "https://test.frontity.io",
         isWPCom: false,
         init: jest.fn(),
         getIdBySlug: jest.fn(),

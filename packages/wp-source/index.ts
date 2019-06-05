@@ -22,7 +22,7 @@ interface WpSource extends Source {
   name: "@frontity/wp-source";
   state: {
     source: Source<WpSource>["state"]["source"] & {
-      apiUrl: string;
+      api: string;
       isWPCom: boolean;
     };
   };
