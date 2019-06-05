@@ -29,7 +29,6 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
     state.router.link = libraries.source.normalize(state.frontity.initialLink);
-    console.log(state.frontity.initialLink, state.router.link);
   } else {
     // Replace the current url with the same one but with state.
     window.history.replaceState({ link: state.router.link }, "");
