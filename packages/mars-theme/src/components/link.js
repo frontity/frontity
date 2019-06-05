@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "frontity";
 
-const Link = ({ actions, libraries, link, className, children }) => {
-  // normalizes link
-  link = libraries.source.stringify(link);
-
+const Link = ({ actions, link, className, children }) => {
   const onClick = event => {
     event.preventDefault();
     // Set the router to the new url.
