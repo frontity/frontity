@@ -45,7 +45,7 @@
     "node-fetch": "^2.4.1",
     "ora": "^3.4.0",
     "ramda": "^0.26.1",
-    "react-helmet": "^5.2.0",
+    "react-helmet": "^5.2.1",
     "tar": "^4.4.8",
     "ts-node": "^8.0.3",
     "typescript": "^3.4.5"
