@@ -3,16 +3,12 @@ import Router from "..";
 const router: Router = {
   state: {
     router: {
-      path: "/some-path",
-      page: 2,
-      query: {
-        k1: "v1"
-      }
+      link: "/some-path/page/2/?k1=v1"
     }
   },
   actions: {
     router: {
-      set: state => routeOrParams => {
+      set: state => link => {
         /* do something */
       }
     }
