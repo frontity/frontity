@@ -1,4 +1,4 @@
-import { Package, Action, Derived } from "@frontity/types";
+import { Package, Action, Derived } from "frontity/types";
 import { Data } from "./src/data";
 import { Taxonomy, PostType, Attachment, Author } from "./src/entities";
 
