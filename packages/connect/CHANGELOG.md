@@ -3,17 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.1.4](https://github.com/frontity/frontity/compare/@frontity/connect@0.1.3...@frontity/connect@0.1.4) (2019-06-05)
-
-
-### Bug Fixes
-
-* **connect:** include scheduler to fix batching in async events ([b4aa340](https://github.com/frontity/frontity/commit/b4aa340))
-
-
-
-
-
 ## [0.1.3](https://github.com/frontity/frontity/compare/@frontity/connect@0.1.2...@frontity/connect@0.1.3) (2019-05-17)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "0.5.0",
+  "version": "0.4.1",
   "description": "Main Frontity package",
   "keywords": [
     "frontity"
@@ -38,8 +38,8 @@
     "@babel/preset-typescript": "^7.3.3",
     "@emotion/babel-preset-css-prop": "^10.0.9",
     "@emotion/core": "^10.0.10",
-    "@frontity/connect": "^0.1.4",
-    "@frontity/file-settings": "^0.3.0",
+    "@frontity/connect": "^0.1.3",
+    "@frontity/file-settings": "^0.2.2",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/component": "^5.10.1",
     "@loadable/server": "^5.9.0",
@@ -73,7 +73,7 @@
     "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
-    "@frontity/types": "^0.1.3",
+    "@frontity/types": "^0.1.2",
     "@types/babel-core": "^6.25.6",
     "@types/express": "^4.16.1",
     "@types/fs-extra": "^5.0.5",

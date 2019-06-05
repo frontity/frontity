@@ -3,17 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.2.0](https://github.com/frontity/frontity/compare/@frontity/extension-example-2@1.1.2...@frontity/extension-example-2@1.2.0) (2019-06-05)
-
-
-### Features
-
-* **core:** refactor entry-points for new modes and files ([#98](https://github.com/frontity/frontity/issues/98)) ([1713522](https://github.com/frontity/frontity/commit/1713522))
-
-
-
-
-
 ## [1.1.2](https://github.com/frontity/frontity/compare/@frontity/extension-example-2@1.1.1...@frontity/extension-example-2@1.1.2) (2019-05-29)
 
 **Note:** Version bump only for package @frontity/extension-example-2

@@ -3,23 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.4.0](https://github.com/frontity/frontity/compare/@frontity/tiny-router@0.3.8...@frontity/tiny-router@0.4.0) (2019-06-05)
-
-
-### Bug Fixes
-
-* **tiny-router:** avoid 'An object could not be cloned' error ([997e4fd](https://github.com/frontity/frontity/commit/997e4fd))
-
-
-### Features
-
-* **core:** refactor entry-points for new modes and files ([#98](https://github.com/frontity/frontity/issues/98)) ([1713522](https://github.com/frontity/frontity/commit/1713522))
-* **tiny-router:** implement auto fetching ([#113](https://github.com/frontity/frontity/issues/113)) ([3865c6b](https://github.com/frontity/frontity/commit/3865c6b))
-
-
-
-
-
 ## [0.3.8](https://github.com/frontity/frontity/compare/@frontity/tiny-router@0.3.7...@frontity/tiny-router@0.3.8) (2019-05-29)
 
 **Note:** Version bump only for package @frontity/tiny-router
