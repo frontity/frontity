@@ -6,18 +6,16 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
   actions,
   libraries
-}) => routeOrParams => {
-  const { getParams, getRoute } = libraries.source;
-  const { path, page, query } = getParams(routeOrParams);
-  const route = getRoute(routeOrParams);
+}) => link => {
+  const { normalize } = libraries.source;
+  // normalizes link
+  link = normalize(link);
 
-  state.router.path = path;
-  state.router.page = page;
-  state.router.query = query;
+  state.router.link = link;
 
   if (state.frontity.platform === "client" && !isPopState) {
-    window.history.pushState({ path, page, query: { ...query } }, "", route);
-    if (state.router.autoFetch) actions.source.fetch({ path, page, query });
+    window.history.pushState({ link }, "", link);
+    if (state.router.autoFetch) actions.source.fetch(link);
   } else {
     isPopState = false;
   }
@@ -30,18 +28,15 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 }) => {
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
-    const params = libraries.source.getParams(state.frontity.initial);
-    state.router.path = params.path;
-    state.router.page = params.page;
-    state.router.query = params.query;
+    state.router.link = libraries.source.normalize(state.frontity.initialLink);
+    console.log(state.frontity.initialLink, state.router.link);
   } else {
     // Replace the current url with the same one but with state.
-    const { path, page, query } = state.router;
-    window.history.replaceState({ path, page, query: { ...query } }, "");
+    window.history.replaceState({ link: state.router.link }, "");
     // Listen to changes in history.
-    window.addEventListener("popstate", ({ state: params }) => {
+    window.addEventListener("popstate", ({ state }) => {
       isPopState = true;
-      actions.router.set(params);
+      actions.router.set(state.link);
     });
   }
 };
@@ -50,5 +45,5 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = async ({
   state,
   actions
 }) => {
-  if (state.router.autoFetch) await actions.source.fetch(state.router);
+  if (state.router.autoFetch) await actions.source.fetch(state.router.link);
 };

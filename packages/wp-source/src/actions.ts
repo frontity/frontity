@@ -1,15 +1,15 @@
 import WpSource from "../";
-import { getParams, getRoute } from "./libraries/route-utils";
+import { parse, normalize } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries }) => async routeOrParams => {
+  fetch: ({ state, libraries }) => async link => {
     const { source } = state;
     const { resolver } = libraries.source;
 
     // Get route and route params
-    const route = getRoute(routeOrParams);
-    const routeParams = getParams(routeOrParams);
+    const route = normalize(link);
+    const routeParams = parse(link);
 
     // Get current data object
     const data = source.data[route];

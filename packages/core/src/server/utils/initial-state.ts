@@ -14,16 +14,7 @@ export default ({
       name: settings.name,
       mode: settings.mode,
       platform: "server",
-      initial: {
-        path: (/^(.*)page\/\d+\/?$/.exec(url.pathname) || [
-          null,
-          url.pathname
-        ])[1],
-        page: parseInt(
-          (/^.*page\/(\d+)\/?$/.exec(url.pathname) || [null, "1"])[1],
-          10
-        )
-      },
+      initialLink: `${url.pathname}${url.search}${url.hash}`,
       packages: settings.packages.map(pkg => pkg.name)
     }
   };

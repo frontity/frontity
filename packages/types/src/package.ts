@@ -11,11 +11,7 @@ export interface Package {
       // Automatically populated:
       name?: string;
       mode?: string;
-      initial?: {
-        path: string;
-        page: number;
-        query?: Record<string, any>;
-      };
+      initialLink?: string;
       packages?: string[];
       platform?: "client" | "server";
       // Populated by the user:

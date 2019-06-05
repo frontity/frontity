@@ -2,7 +2,7 @@ import { schema } from "normalizr";
 import { taxonomy } from "./taxonomies";
 import { author } from "./authors";
 import { attachment } from "./attachments";
-import { removeDomain } from "../route-utils";
+import { normalize } from "../route-utils";
 
 const taxonomies = new schema.Array(new schema.Array(taxonomy));
 
@@ -12,7 +12,7 @@ export const postType = new schema.Entity(
   {
     processStrategy(entity) {
       const result = { ...entity };
-      result.link = removeDomain(result.link);
+      result.link = normalize(result.link);
       return result;
     }
   }

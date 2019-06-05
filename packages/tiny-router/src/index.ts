@@ -5,9 +5,7 @@ const tinyRouter: TinyRouter = {
   name: "@frontity/tiny-router",
   state: {
     router: {
-      path: "/",
-      page: 1,
-      query: {},
+      link: "/",
       autoFetch: true
     }
   },

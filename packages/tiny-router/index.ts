@@ -20,8 +20,7 @@ interface TinyRouter extends Router {
   };
   libraries: {
     source?: {
-      getParams: Source["libraries"]["source"]["getParams"];
-      getRoute: Source["libraries"]["source"]["getRoute"];
+      normalize: Source["libraries"]["source"]["normalize"];
     };
   };
 }

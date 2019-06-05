@@ -3,8 +3,8 @@ import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
 const dateHandler: Handler = async (source, { route, params, libraries }) => {
-  const { api, populate, getParams } = libraries.source;
-  const { page, query } = getParams(route);
+  const { api, populate, parse } = libraries.source;
+  const { page, query } = parse(route);
 
   // 1. build date properties
   const year = parseInt(params.year);

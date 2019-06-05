@@ -9,10 +9,10 @@ const Item = ({ state, item }) => {
 
   return (
     <Container>
-      <Link path={item.link}>
+      <Link link={item.link}>
         <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
       </Link>
-      <Link path={author.link}>
+      <Link link={author.link}>
         <Author>
           By <b>{author.name}</b>
         </Author>
