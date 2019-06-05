@@ -27,7 +27,8 @@ const source1 = (libraries: Source["libraries"]): Source => {
       source: {
         populate: () => {},
         parse: () => ({ path: "" }),
-        stringify: () => "/route/"
+        stringify: () => "/route/",
+        normalize: () => "/route/"
       }
     }
   };
@@ -77,7 +78,8 @@ const source2: MySource = {
     source: {
       populate: () => {},
       parse: () => ({ path: "" }),
-      stringify: () => "/route/"
+      stringify: () => "/route/",
+      normalize: () => "/route/"
     }
   }
 };
