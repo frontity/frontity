@@ -3,13 +3,13 @@ import { parse, stringify } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries }) => async routeOrParams => {
+  fetch: ({ state, libraries }) => async link => {
     const { source } = state;
     const { resolver } = libraries.source;
 
     // Get route and route params
-    const route = stringify(routeOrParams);
-    const routeParams = parse(routeOrParams);
+    const route = stringify(link);
+    const routeParams = parse(link);
 
     // Get current data object
     const data = source.data[route];

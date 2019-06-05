@@ -2,8 +2,7 @@ import WpSource from "..";
 import { stringify } from "./libraries/route-utils";
 
 const state: WpSource["state"]["source"] = {
-  get: ({ state }) => routeOrParams =>
-    state.source.data[stringify(routeOrParams)] || {},
+  get: ({ state }) => link => state.source.data[stringify(link)] || {},
   data: {},
   category: {},
   tag: {},
