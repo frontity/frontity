@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/frontity/frontity/compare/@frontity/mars-theme@0.4.1...@frontity/mars-theme@1.0.0) (2019-06-05)
+
+
+### Bug Fixes
+
+* **mars:** fix package.json dependencies ([5f412e1](https://github.com/frontity/frontity/commit/5f412e1))
+* **mars:** removes html folder ([53f9334](https://github.com/frontity/frontity/commit/53f9334))
+* **mars-theme:** addapt to new mode ([0759bdc](https://github.com/frontity/frontity/commit/0759bdc))
+* **mars-theme:** use all router params in Theme ([1c2e073](https://github.com/frontity/frontity/commit/1c2e073))
+* **spinne:** fixes import to reduce bundle ([84278b2](https://github.com/frontity/frontity/commit/84278b2))
+
+
+### Features
+
+* **core:** merge arrays found in state instead of overwriting them ([#117](https://github.com/frontity/frontity/issues/117)) ([45dcacb](https://github.com/frontity/frontity/commit/45dcacb))
+* **mars-theme:** adapt to router and source changes ([39b22a9](https://github.com/frontity/frontity/commit/39b22a9))
+* **source:** change 'data' to 'get' and 'dataMap' to 'data' ([f32be1a](https://github.com/frontity/frontity/commit/f32be1a))
+* **tiny-router:** implement auto fetching ([#113](https://github.com/frontity/frontity/issues/113)) ([3865c6b](https://github.com/frontity/frontity/commit/3865c6b))
+
+
+### BREAKING CHANGES
+
+* **core:** Arrays found in state are merged instead of overwritten
+* **source:** changes source API ("data" by  "get")
+
+
+
+
+
 ## [0.4.1](https://github.com/frontity/frontity/compare/@frontity/mars-theme@0.4.0...@frontity/mars-theme@0.4.1) (2019-05-29)
 
 **Note:** Version bump only for package @frontity/mars-theme

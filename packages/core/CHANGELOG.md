@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/frontity/frontity/compare/@frontity/core@0.4.1...@frontity/core@1.0.0) (2019-06-05)
+
+
+### Features
+
+* **core:** merge arrays found in state instead of overwriting them ([#117](https://github.com/frontity/frontity/issues/117)) ([45dcacb](https://github.com/frontity/frontity/commit/45dcacb))
+* **core:** refactor entry-points for new modes and files ([#98](https://github.com/frontity/frontity/issues/98)) ([1713522](https://github.com/frontity/frontity/commit/1713522))
+* **core:** rename 'initial' to 'initialLink' and convert to a string ([b7bac1e](https://github.com/frontity/frontity/commit/b7bac1e))
+
+
+### BREAKING CHANGES
+
+* **core:** Arrays found in state are merged instead of overwritten
+* **core:** 'initial' is now 'initialLink' and it's an string instead of an object.
+
+
+
+
+
 ## [0.4.1](https://github.com/frontity/frontity/compare/@frontity/core@0.4.0...@frontity/core@0.4.1) (2019-05-29)
 
 

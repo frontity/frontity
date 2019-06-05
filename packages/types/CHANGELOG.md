@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/frontity/frontity/compare/@frontity/types@0.1.2...@frontity/types@1.0.0) (2019-06-05)
+
+
+### Bug Fixes
+
+* **types:** improve connect types with overloads ([#106](https://github.com/frontity/frontity/issues/106)) ([1c5d8e8](https://github.com/frontity/frontity/commit/1c5d8e8))
+
+
+### Features
+
+* **core:** rename 'initial' to 'initialLink' and convert to a string ([b7bac1e](https://github.com/frontity/frontity/commit/b7bac1e))
+
+
+### BREAKING CHANGES
+
+* **core:** 'initial' is now 'initialLink' and it's an string instead of an object.
+
+
+
+
+
 ## [0.1.2](https://github.com/frontity/frontity/compare/@frontity/types@0.1.1...@frontity/types@0.1.2) (2019-05-15)
 
 **Note:** Version bump only for package @frontity/types
