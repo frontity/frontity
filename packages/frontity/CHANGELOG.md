@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/frontity/frontity/compare/frontity@0.2.17...frontity@1.0.0) (2019-06-05)
+
+
+### Features
+
+* **frontity:** push to 1.0.0 ([97d6a0b](https://github.com/frontity/frontity/commit/97d6a0b))
+
+
+### BREAKING CHANGES
+
+* **frontity:** push frontity package to 1.0.0
+
+
+
+
+
 ## [0.2.17](https://github.com/frontity/frontity/compare/frontity@0.2.16...frontity@0.2.17) (2019-06-05)
 
 
