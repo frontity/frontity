@@ -5,8 +5,9 @@ Object {
   "frontity": Object {
     "initialLink": "/category/nature/page/2",
     "menu1": Array [
-      "Overwrrite by pacakge1",
-      "With a second item",
+      "item1",
+      "item2",
+      "item3",
     ],
     "mode": "html",
     "name": "site",
@@ -116,8 +117,9 @@ Object {
   "frontity": Object {
     "initialLink": "/page/2?some=query#some-hash",
     "menu1": Array [
-      "Overwrrite by pacakge1",
-      "With a second item",
+      "item1",
+      "item2",
+      "item3",
     ],
     "mode": "html",
     "name": "site",
