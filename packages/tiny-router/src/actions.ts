@@ -7,9 +7,9 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   actions,
   libraries
 }) => link => {
-  const { stringify } = libraries.source;
+  const { normalize } = libraries.source;
   // normalizes link
-  link = stringify(link);
+  link = normalize(link);
 
   state.router.link = link;
 
@@ -28,7 +28,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 }) => {
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
-    state.router.link = libraries.source.stringify(state.frontity.initialLink);
+    state.router.link = libraries.source.normalize(state.frontity.initialLink);
     console.log(state.frontity.initialLink, state.router.link);
   } else {
     // Replace the current url with the same one but with state.

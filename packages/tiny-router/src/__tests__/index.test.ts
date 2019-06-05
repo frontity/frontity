@@ -4,10 +4,10 @@ import tinyRouter from "..";
 import TinyRouter from "../..";
 
 let config: TinyRouter;
-let stringify: jest.Mock;
+let normalize: jest.Mock;
 
 beforeEach(() => {
-  stringify = jest.fn();
+  normalize = jest.fn();
 
   config = {
     name: "@frontity/tiny-router",
@@ -26,7 +26,7 @@ beforeEach(() => {
     },
     libraries: {
       source: {
-        stringify
+        normalize
       }
     }
   };
@@ -37,38 +37,38 @@ describe("actions", () => {
     const store = createStore(config);
 
     const link = "/some-post/";
-    const stringified = "/some-post/";
+    const normalized = "/some-post/";
 
-    stringify.mockReturnValue(stringified);
+    normalize.mockReturnValue(normalized);
 
     store.actions.router.set(link);
-    expect(stringify).toHaveBeenCalledWith(link);
-    expect(store.state.router.link).toBe(stringified);
+    expect(normalize).toHaveBeenCalledWith(link);
+    expect(store.state.router.link).toBe(normalized);
   });
 
   test("set() should work with full URLs", () => {
     const store = createStore(config);
 
     const link = "https://blog.example/some-post/page/3/?some=query";
-    const stringified = "/some-post/page/3/?some=query";
+    const normalized = "/some-post/page/3/?some=query";
 
-    stringify.mockReturnValue(stringified);
+    normalize.mockReturnValue(normalized);
 
     store.actions.router.set(link);
-    expect(stringify).toHaveBeenCalledWith(link);
-    expect(store.state.router.link).toBe(stringified);
+    expect(normalize).toHaveBeenCalledWith(link);
+    expect(store.state.router.link).toBe(normalized);
   });
 
   test("init() should populate the initial link", () => {
     const store = createStore(config);
 
-    stringify.mockReturnValue("/initial/link/");
+    normalize.mockReturnValue("/initial/link/");
 
     store.actions.router.init();
 
     // check that first state is correct
-    expect(stringify).toHaveBeenCalledTimes(1);
-    expect(stringify).toHaveBeenCalledWith("/initial/link/");
+    expect(normalize).toHaveBeenCalledTimes(1);
+    expect(normalize).toHaveBeenCalledWith("/initial/link/");
     expect(store.state.router.link).toBe("/initial/link/");
   });
 
@@ -77,7 +77,7 @@ describe("actions", () => {
     const store = createStore(config);
     store.actions.router.init();
 
-    stringify.mockReturnValueOnce("/tag/japan/page/3/");
+    normalize.mockReturnValueOnce("/tag/japan/page/3/");
 
     // check that first state is correct
     expect(window.history.state).toMatchObject({ link: "/" });
