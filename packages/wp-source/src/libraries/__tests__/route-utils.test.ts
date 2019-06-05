@@ -1,65 +1,6 @@
-import { parse, stringify } from "../route-utils";
+import { parse, stringify, normalize } from "../route-utils";
 
 describe("route utils - parse", () => {
-  test("from params (fixes path)", () => {
-    expect(parse({ path: "/some/path" })).toEqual({
-      path: "/some/path/",
-      page: 1,
-      query: {}
-    });
-  });
-  test("from params (path is a name)", () => {
-    expect(parse({ path: "custom-list" })).toEqual({
-      path: "custom-list/",
-      page: 1,
-      query: {}
-    });
-  });
-  test("from params (path, page)", () => {
-    expect(parse({ path: "/some/path/", page: 2 })).toEqual({
-      path: "/some/path/",
-      page: 2,
-      query: {}
-    });
-  });
-  test("from params (path, page, query)", () => {
-    expect(
-      parse({
-        path: "/some/path",
-        page: 2,
-        query: {
-          k1: "v1",
-          k2: "v2"
-        }
-      })
-    ).toEqual({
-      path: "/some/path/",
-      page: 2,
-      query: {
-        k1: "v1",
-        k2: "v2"
-      }
-    });
-  });
-  test("from params (root, page, query)", () => {
-    expect(
-      parse({
-        path: "/",
-        page: 2,
-        query: {
-          k1: "v1",
-          k2: "v2"
-        }
-      })
-    ).toEqual({
-      path: "/",
-      page: 2,
-      query: {
-        k1: "v1",
-        k2: "v2"
-      }
-    });
-  });
   test("from path", () => {
     expect(parse("/some/path/")).toEqual({
       path: "/some/path/",
@@ -194,47 +135,53 @@ describe("route utils - stringify", () => {
       })
     ).toBe("/page/2/?k1=v1&k2=v2");
   });
+});
+
+describe("route utils - normalize", () => {
   test("from path", () => {
-    expect(stringify("/some/path/")).toBe("/some/path/");
+    expect(normalize("/some/path/")).toBe("/some/path/");
   });
   test("from path (contains 'page')", () => {
-    expect(stringify("/some-page/")).toBe("/some-page/");
+    expect(normalize("/some-page/")).toBe("/some-page/");
   });
   test("from path (fixes path)", () => {
-    expect(stringify("/some/path")).toBe("/some/path/");
+    expect(normalize("/some/path")).toBe("/some/path/");
   });
   test("from path and page", () => {
-    expect(stringify("/some/path/page/2/")).toBe("/some/path/page/2/");
+    expect(normalize("/some/path/page/2")).toBe("/some/path/page/2/");
   });
   test("from path and query", () => {
-    expect(stringify("/some/path/?k1=v1&k2=v2")).toBe(
-      "/some/path/?k1=v1&k2=v2"
-    );
+    expect(normalize("/some/path?k1=v1&k2=v2")).toBe("/some/path/?k1=v1&k2=v2");
   });
   test("from path, page and query", () => {
-    expect(stringify("/some/path/page/2?k1=v1&k2=v2")).toBe(
+    expect(normalize("/some/path/page/2?k1=v1&k2=v2")).toBe(
       "/some/path/page/2/?k1=v1&k2=v2"
     );
   });
 
   test("from root path", () => {
-    expect(stringify("/")).toEqual("/");
+    expect(normalize("/")).toEqual("/");
   });
   test("from root path and page", () => {
-    expect(stringify("/page/2")).toEqual("/page/2/");
+    expect(normalize("/page/2")).toEqual("/page/2/");
   });
   test("from root path, page and query", () => {
-    expect(stringify("/page/2?k1=v1&k2=v2")).toEqual("/page/2/?k1=v1&k2=v2");
+    expect(normalize("/page/2?k1=v1&k2=v2")).toEqual("/page/2/?k1=v1&k2=v2");
   });
   test("from full URL", () => {
     expect(
-      stringify("https://test.frontity.org/some/path/page/2?k1=v1&k2=v2")
+      normalize("https://test.frontity.org/some/path/page/2?k1=v1&k2=v2")
     ).toBe("/some/path/page/2/?k1=v1&k2=v2");
   });
+  test("from root URL", () => {
+    expect(normalize("https://test.frontity.org?k1=v1&k2=v2")).toBe(
+      "/?k1=v1&k2=v2"
+    );
+  });
   test("from name", () => {
-    expect(stringify("custom-list")).toBe("custom-list/");
+    expect(normalize("custom-list")).toBe("custom-list/");
   });
   test("from name (page)", () => {
-    expect(stringify("custom-list/page/2/")).toBe("custom-list/page/2/");
+    expect(normalize("custom-list/page/2/")).toBe("custom-list/page/2/");
   });
 });

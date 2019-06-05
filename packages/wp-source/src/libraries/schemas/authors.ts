@@ -1,5 +1,5 @@
 import { schema } from "normalizr";
-import { removeDomain } from "../route-utils";
+import { normalize } from "../route-utils";
 
 export const author = new schema.Entity(
   "author",
@@ -7,7 +7,7 @@ export const author = new schema.Entity(
   {
     processStrategy(entity) {
       const result = { ...entity };
-      result.link = removeDomain(result.link);
+      result.link = normalize(result.link);
       return result;
     }
   }

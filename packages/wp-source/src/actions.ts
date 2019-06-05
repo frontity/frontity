@@ -1,5 +1,5 @@
 import WpSource from "../";
-import { parse, stringify } from "./libraries/route-utils";
+import { parse, normalize } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
@@ -8,7 +8,7 @@ const actions: WpSource["actions"]["source"] = {
     const { resolver } = libraries.source;
 
     // Get route and route params
-    const route = stringify(link);
+    const route = normalize(link);
     const routeParams = parse(link);
 
     // Get current data object

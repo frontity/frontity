@@ -42,6 +42,7 @@ interface WpSource extends Source {
       ) => Promise<EntityData[]>;
       parse: Source<WpSource>["libraries"]["source"]["parse"];
       stringify: Source<WpSource>["libraries"]["source"]["stringify"];
+      normalize: Source<WpSource>["libraries"]["source"]["normalize"];
     };
   };
 }
