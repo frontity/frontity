@@ -1,7 +1,7 @@
 import { RouteParams } from "@frontity/source";
 import WpSource from "../../";
 
-export const getParams: WpSource["libraries"]["source"]["getParams"] = routeOrParams =>
+export const parse: WpSource["libraries"]["source"]["parse"] = routeOrParams =>
   typeof routeOrParams === "string"
     ? routeToParams(routeOrParams)
     : {
@@ -10,12 +10,12 @@ export const getParams: WpSource["libraries"]["source"]["getParams"] = routeOrPa
         query: routeOrParams.query || {}
       };
 
-export const getRoute: WpSource["libraries"]["source"]["getRoute"] = routeOrParams =>
+export const stringify: WpSource["libraries"]["source"]["stringify"] = routeOrParams =>
   typeof routeOrParams === "string"
     ? normalize(routeOrParams)
     : paramsToRoute(routeOrParams);
 
-export default { getParams, getRoute };
+export default { parse, stringify };
 
 // UTILS
 

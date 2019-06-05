@@ -32,8 +32,8 @@ interface Source<T = null> extends Package {
   libraries: {
     source: {
       populate: Function;
-      getParams: (routeOrParams: string | RouteParams) => RouteParams;
-      getRoute: (routeOrParams: string | RouteParams) => string;
+      parse: (routeOrParams: string | RouteParams) => RouteParams;
+      stringify: (routeOrParams: string | RouteParams) => string;
     };
   };
 }

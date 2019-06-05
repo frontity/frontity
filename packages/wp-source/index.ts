@@ -40,8 +40,8 @@ interface WpSource extends Source {
         state: State<WpSource>["source"],
         response: Response
       ) => Promise<EntityData[]>;
-      getParams: Source<WpSource>["libraries"]["source"]["getParams"];
-      getRoute: Source<WpSource>["libraries"]["source"]["getRoute"];
+      parse: Source<WpSource>["libraries"]["source"]["parse"];
+      stringify: Source<WpSource>["libraries"]["source"]["stringify"];
     };
   };
 }
