@@ -1,4 +1,4 @@
-import { State } from "@frontity/types";
+import { State } from "frontity/types";
 import WpSource from "../../../..";
 import handler from "../post";
 import { mockResponse } from "./mocks/helpers";

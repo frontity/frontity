@@ -1,10 +1,10 @@
-import { Action, State } from "@frontity/types";
+import { Action, State } from "frontity/types";
 import Source from "@frontity/source";
 import { EntityData } from "@frontity/source/src/data";
 import { Api, Resolver } from "./src/libraries";
 
 export type Handler = (
-  state: State<WpSource>["source"],
+  source: State<WpSource>["source"],
   payload: {
     route: string;
     params: { [param: string]: any };

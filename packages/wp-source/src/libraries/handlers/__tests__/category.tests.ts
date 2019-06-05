@@ -1,4 +1,4 @@
-import { State } from "@frontity/types";
+import { State } from "frontity/types";
 import WpSource from "../../../..";
 import populate from "../../populate";
 import routeUtils from "../../route-utils";

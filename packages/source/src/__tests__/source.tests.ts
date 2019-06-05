@@ -1,4 +1,4 @@
-import { Action, Settings } from "@frontity/types";
+import { Action, Settings } from "frontity/types";
 import Source from "../../";
 
 // Source.
