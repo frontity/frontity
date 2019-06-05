@@ -1,10 +1,5 @@
 import { parse as himalaya } from "himalaya";
-import {
-  HimalayaElement,
-  HimalayaText,
-  HimalayaComment,
-  HimalayaNode
-} from "../../../himalaya/types";
+import { HimalayaNode } from "../../../himalaya/types";
 import he from "he";
 import htmlMap from "./html-map";
 import svgMap from "./svg-map";
@@ -12,14 +7,6 @@ import svgMap from "./svg-map";
 // Adapts the Himalaya AST Specification v1
 // (see https://github.com/andrejewski/himalaya/blob/v1.0.1/text/ast-spec-v1.md)
 // to our format, with the following structure:
-//
-// {
-//   type: 'element',
-//   component: 'p',
-//   props: {},
-//   children: [],
-//   parent: Element,
-// }
 
 interface Element {
   type: "element";
@@ -72,11 +59,10 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
     };
 
     node.children = element.children.reduce(
-      (final: Node[], child: any): Node[] => {
+      (tree: Node[], child: any): Node[] => {
         const childAdapted = adaptNode(child, node as Element);
-        // ignore null children
-        if (childAdapted) final.push(childAdapted);
-        return final;
+        if (childAdapted) tree.push(childAdapted);
+        return tree;
       },
       []
     );
@@ -112,10 +98,10 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
 // Parse HTML code using Himalaya's parse function first, and then
 // adapting each node to our format.
 const parse = (html: string): Node[] =>
-  himalaya(html).reduce((htmlTree: Node[], element) => {
+  himalaya(html).reduce((tree: Node[], element) => {
     const adapted = adaptNode(element);
-    if (adapted) htmlTree.push(adapted);
-    return htmlTree;
+    if (adapted) tree.push(adapted);
+    return tree;
   }, []);
 
 export default parse;
