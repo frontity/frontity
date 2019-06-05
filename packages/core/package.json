@@ -66,7 +66,7 @@
     "react-dom": "^16.8.3",
     "require-from-string": "^2.0.2",
     "ts-node": "^8.0.3",
-    "typescript": "^3.4.2",
+    "typescript": "^3.4.5",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-dev-middleware": "^3.6.0",
