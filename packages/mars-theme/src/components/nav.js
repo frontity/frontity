@@ -4,9 +4,9 @@ import Link from "./link";
 
 const Nav = ({ state }) => (
   <Container>
-    {state.theme.menu.map(item => (
-      <Item key={item[0]} isSelected={state.router.path === item[1]}>
-        <Link path={item[1]}>{item[0]}</Link>
+    {state.theme.menu.map(([name, link]) => (
+      <Item key={name} isSelected={state.router.link === link}>
+        <Link link={link}>{name}</Link>
       </Item>
     ))}
   </Container>
