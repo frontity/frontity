@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/frontity/frontity/compare/frontity@1.0.0...frontity@1.0.1) (2019-06-05)
+
+
+### Bug Fixes
+
+* **frontity:** update react helmet ([2e6bb9d](https://github.com/frontity/frontity/commit/2e6bb9d))
+
+
+
+
+
 # [1.0.0](https://github.com/frontity/frontity/compare/frontity@0.2.17...frontity@1.0.0) (2019-06-05)
 
 

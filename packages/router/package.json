@@ -1,6 +1,6 @@
 {
   "name": "@frontity/router",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Types for the Frontity Router API",
   "keywords": [
     "frontity",
@@ -25,7 +25,7 @@
     "test": "jest --clearCache && jest"
   },
   "dependencies": {
-    "frontity": "^1.0.0"
+    "frontity": "^1.0.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
