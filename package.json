@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test": "lerna run test:ci --stream",
-    "test:clear-cache": "jest --clearCache && lerna run test:ci --stream",
+    "test:push": "jest --clearCache && lerna run test:ci --stream",
     "prepare": "lerna bootstrap --hoist",
     "release": "lerna publish --yes",
     "reinstall": "lerna clean --yes && npm run prepare"
