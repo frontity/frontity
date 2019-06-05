@@ -3,7 +3,8 @@
   "version": "0.2.17",
   "description": "Frontity cli and entry point to other packages",
   "keywords": [
-    "frontity"
+    "frontity",
+    "cli"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
