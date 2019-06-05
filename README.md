@@ -21,14 +21,14 @@
 
 > **IMPORTANT NOTE!**
 >
-> Frontity framework is in **beta**. It allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this phase.
+> Frontity framework is in **release candidate**. It allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this phase.
 >
 > <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
 > <br />
 >
 > Frontity will continue to be tested and improved during the next months, and new features will be added progressively.
 >
-> - Release Candidate Date: **June 10, 2019**
+> - Release Candidate Date: **June 5, 2019**
 > - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
 >
 > #### Do you want to receive the latest framework updates and news? [Subscribe to our newsletter](https://frontity.org/#newsletter)!
@@ -126,10 +126,9 @@ GitHub is where magic happens, but there are more channels where you can find in
 
 # » Get involved 🤗
 
-Do you love WordPress and React? Got questions or feedback? We'd love to hear from you. Come join our [community forum](https://community.frontity.org)! ❤️ 
+Do you love WordPress and React? Got questions or feedback? We'd love to hear from you. Come join our [community forum](https://community.frontity.org)! ❤️
 
 Frontity also welcomes contributions. There are many ways to support the project (and get free swag)! If you don't know where to start, this guide might help >> [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute).
-
 
 # » Open source
 
