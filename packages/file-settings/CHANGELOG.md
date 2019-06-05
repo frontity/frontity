@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/frontity/frontity/compare/@frontity/file-settings@0.2.2...@frontity/file-settings@0.3.0) (2019-06-05)
+
+
+### Features
+
+* **core:** refactor entry-points for new modes and files ([#98](https://github.com/frontity/frontity/issues/98)) ([1713522](https://github.com/frontity/frontity/commit/1713522))
+
+
+
+
+
 ## [0.2.2](https://github.com/frontity/frontity/compare/@frontity/file-settings@0.2.1...@frontity/file-settings@0.2.2) (2019-05-15)
 
 **Note:** Version bump only for package @frontity/file-settings
