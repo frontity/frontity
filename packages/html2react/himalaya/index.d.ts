@@ -1,8 +1,8 @@
 declare module "himalaya" {
-  type HimalayaNode = import("./types").HimalayaNode;
+  type Node = import("./types").Node;
 
   export function parse(
     str: string,
     options?: { [key: string]: string }
-  ): HimalayaNode[];
+  ): Node[];
 }

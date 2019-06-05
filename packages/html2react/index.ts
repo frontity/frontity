@@ -6,7 +6,7 @@ interface Html2React extends Package {
     html2react: {
       add?: Function;
       parse: Function;
-      processors?: Function;
+      processors?: [];
       Component: React.FunctionComponent<{ html: string }>;
     };
   };

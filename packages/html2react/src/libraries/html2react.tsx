@@ -2,46 +2,36 @@ import React from "react";
 import { connect } from "frontity";
 import { Connect } from "frontity/types";
 import Html2React from "../..";
+import { Node } from "./parse";
 
 function applyProcessors({
   node,
-  htmlTree,
+  tree,
   processors
 }: {
-  node: any;
-  htmlTree: any;
+  node: Node;
+  tree: Node[];
   processors: any;
-}) {
-  for (let i = 0; i < processors.length; i += 1) {
-    const { options, test, process } = processors[i];
+}): boolean {
+  for (let processor of processors) {
+    const { test, process } = processor;
 
-    const payload = {
-      htmlTree,
-      ...options
-    };
-
-    // Test processor function
     let isMatch = false;
-    try {
-      isMatch = test(node, payload);
-    } catch (e) {
-      // ignore error
-    }
 
-    // Apply processor function
+    // Test processor.
+    try {
+      isMatch = test(node);
+    } catch (e) {}
+
+    // Apply processor.
     if (isMatch) {
       try {
-        const processed = process(node, payload);
-
-        // Return true if was removed
+        const processed = process(node, tree);
+        // Return true if node was removed.
         if (!processed) return true;
-
-        // Do a shallow merge if node is different
-        if (node !== processed) {
-          Object.assign(node, processed);
-        }
+        // Do a shallow merge if node is different.
+        if (node !== processed) Object.assign(node, processed);
       } catch (e) {
-        // Show error message and continue processing
         console.error(e);
       }
     }
@@ -51,52 +41,50 @@ function applyProcessors({
   return false;
 }
 
-function handleNodes({
-  nodes,
-  htmlTree,
-  processors
-}: {
-  nodes: any;
-  htmlTree?: any;
-  processors: any;
-}) {
-  if (!nodes) return null;
-
-  const handled = nodes.map((node: any, index: number) =>
-    handleNode({ node: node, index, htmlTree, processors })
-  );
-
-  const compacted = handled.filter(node => node);
-  if (compacted.length > 1) return compacted;
-  if (compacted.length === 1) return compacted[0];
-  return null;
-}
-
 function handleNode({
   node,
-  index,
-  htmlTree,
-  processors
+  payload,
+  index
 }: {
-  node: any;
-  htmlTree: any;
-  index: any;
-  processors: any;
-}) {
-  const isRemoved = false; //applyProcessors({ node, htmlTree, processors });
+  node: Node;
+  payload: {
+    tree: Node[];
+    processors: any;
+  };
+  index: number;
+}): React.ReactNode {
+  // `applyProcessors` returns true if node was removed.
+  if (applyProcessors({ node, ...payload })) return null;
 
-  // Return nothing for 'comment' nodes
-  if (isRemoved || node.type === "comment") return null;
-
-  // Return the content of 'text' nodes
+  if (node.type === "comment") return null;
   if (node.type === "text") return node.content;
+  if (node.type === "element")
+    return (
+      <node.component {...{ key: index, ...node.props }}>
+        {node.children ? handleNodes({ nodes: node.children, payload }) : null}
+      </node.component>
+    );
+}
 
-  // Convert 'element' nodes to React
-  return (
-    <node.component {...node.props} key={index}>
-      {handleNodes({ nodes: node.children, htmlTree, processors })}
-    </node.component>
-  );
+function handleNodes({
+  nodes,
+  payload
+}: {
+  nodes: Node[];
+  payload: {
+    tree: Node[];
+    processors: any;
+  };
+}): React.ReactNode {
+  const handled = nodes.reduce((final: React.ReactNodeArray, node, index) => {
+    const handledNode = handleNode({ node, index, payload });
+    if (handledNode) final.push(handledNode);
+    return final;
+  }, []);
+
+  if (handled.length > 1) return handled;
+  if (handled.length === 1) return handled[0];
+  return null;
 }
 
 const Component: React.FC<Connect<Html2React, { html: string }>> = ({
@@ -105,11 +93,12 @@ const Component: React.FC<Connect<Html2React, { html: string }>> = ({
 }) => {
   const { processors, parse } = libraries.html2react;
 
-  const htmlTree = parse(html);
+  const tree = parse(html);
 
-  console.log("tree:", htmlTree);
-
-  return handleNodes({ nodes: htmlTree, processors });
+  return handleNodes({
+    nodes: tree,
+    payload: { tree, processors }
+  }) as React.ReactElement;
 };
 
 export default connect(Component);

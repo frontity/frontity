@@ -1,20 +1,20 @@
-export interface HimalayaElement {
+export interface Element {
   type: "element";
   tagName: string;
-  children: HimalayaNode[];
-  attributes: HimalayaAttribute[];
+  children: Node[];
+  attributes: Attribute[];
 }
 
-export interface HimalayaComment {
+export interface Comment {
   type: "comment";
   content: string;
 }
 
-export interface HimalayaText {
+export interface Text {
   type: "text";
   content: string;
 }
 
-export type HimalayaAttribute = { key: string; value?: string };
+export type Attribute = { key: string; value?: string };
 
-export type HimalayaNode = HimalayaElement | HimalayaComment | HimalayaText;
+export type Node = Element | Comment | Text;

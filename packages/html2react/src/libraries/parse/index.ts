@@ -1,5 +1,5 @@
 import { parse as himalaya } from "himalaya";
-import { HimalayaNode } from "../../../himalaya/types";
+import { Node as HimalayaNode } from "../../../himalaya/types";
 import he from "he";
 import htmlMap from "./html-map";
 import svgMap from "./svg-map";
@@ -11,7 +11,7 @@ import svgMap from "./svg-map";
 interface Element {
   type: "element";
   component: string;
-  props: { [key: string]: string | boolean };
+  props: { [key: string]: string | number | boolean };
   children?: Node[];
   parent?: Element;
 }
@@ -28,7 +28,7 @@ interface Comment {
   parent?: Element;
 }
 
-type Node = Element | Text | Comment;
+export type Node = Element | Text | Comment;
 
 // Map of lowercased HTML and SVG attributes to get their camelCase version.
 const attrMap = { ...htmlMap, ...svgMap };
@@ -58,14 +58,11 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
       )
     };
 
-    node.children = element.children.reduce(
-      (tree: Node[], child: any): Node[] => {
-        const childAdapted = adaptNode(child, node as Element);
-        if (childAdapted) tree.push(childAdapted);
-        return tree;
-      },
-      []
-    );
+    node.children = element.children.reduce((tree: Node[], child): Node[] => {
+      const childAdapted = adaptNode(child, node as Element);
+      if (childAdapted) tree.push(childAdapted);
+      return tree;
+    }, []);
   }
 
   if (element.type === "text") {
@@ -74,7 +71,7 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
     if (content.trim().length) {
       node = {
         type: element.type,
-        content: element.content
+        content: content
       };
     } else return null;
   }
@@ -85,7 +82,7 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
     if (content.trim().length) {
       node = {
         type: element.type,
-        content: element.content
+        content: content
       };
     } else return null;
   }

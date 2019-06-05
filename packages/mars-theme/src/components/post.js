@@ -41,11 +41,7 @@ const Post = ({ state, actions, libraries }) => {
       {state.theme.featured.showOnPost && (
         <FeaturedMedia id={post.featured_media} />
       )}
-      <Body
-      // dangerouslySetInnerHTML={{
-      //   __html: post.content.rendered
-      // }}
-      >
+      <Body>
         <libraries.html2react.Component html={post.content.rendered} />
       </Body>
     </Container>
