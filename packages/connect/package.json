@@ -4,7 +4,8 @@
   "description": "A state manager that's easy to use and hackable at the same time.",
   "keywords": [
     "frontity",
-    "connect"
+    "connect",
+    "state-manager"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",

@@ -8,6 +8,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "src/index.js",
+  "keywords": [
+    "frontity",
+    "frontity-settings"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
