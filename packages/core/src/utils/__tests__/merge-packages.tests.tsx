@@ -21,7 +21,8 @@ const packages = {
     },
     state: {
       namespace1: {
-        prop1: "prop1"
+        prop1: "prop1",
+        array1: ["item1"]
       },
       namespace2: {
         prop2: "prop2"
@@ -39,7 +40,8 @@ const packages = {
     },
     state: {
       namespace1: {
-        prop1: "prop1 overwritten by package_2"
+        prop1: "prop1 overwritten by package_2",
+        array1: ["item2", "item3"]
       },
       namespace3: {
         prop3: "prop3"

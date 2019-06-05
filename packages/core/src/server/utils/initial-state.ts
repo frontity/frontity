@@ -30,15 +30,13 @@ export default ({
 
   // Merge the initial state with the general state of settings.
   state = deepmerge(settings.state, state, {
-    clone: false,
-    arrayMerge: (dest, source) => source
+    clone: false
   });
 
   // Merge the state with each package state, in order.
   settings.packages.forEach(pkg => {
     state = deepmerge(state, pkg.state, {
-      clone: false,
-      arrayMerge: (dest, source) => source
+      clone: false
     });
   });
 

@@ -7,7 +7,7 @@ const marsTheme = {
   },
   state: {
     theme: {
-      menu: [["Home", "/"]],
+      menu: [],
       featured: {
         showOnList: false,
         showOnPost: false
