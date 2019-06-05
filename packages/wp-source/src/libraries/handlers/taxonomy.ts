@@ -14,7 +14,7 @@ const taxonomyHandler = ({
   truths?: Record<string, true>;
 }): Handler => async (source, { route, params, libraries }) => {
   const { api, populate, parse } = libraries.source;
-  const { page } = parse(route);
+  const { page, query } = parse(route);
 
   // 1. search id in state or get it from WP REST API
   const { slug } = params;
@@ -25,7 +25,7 @@ const taxonomyHandler = ({
   // 2. fetch the specified page
   const response = await api.get({
     endpoint: postType.endpoint,
-    params: { [postType.param]: id, search: params.s, page, _embed: true }
+    params: { [postType.param]: id, search: query.s, page, _embed: true }
   });
 
   // 3. throw an error if page is out of range
