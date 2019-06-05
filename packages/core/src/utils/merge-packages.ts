@@ -27,13 +27,11 @@ export default ({
     const module = packages[variable];
     const pkg = typeof module === "function" ? module() : module;
     config = deepmerge(config, pkg, {
-      clone: false,
-      arrayMerge: (dest, source) => source
+      clone: false
     });
   });
   config.state = deepmerge(config.state, state, {
-    clone: true,
-    arrayMerge: (dest, source) => source
+    clone: true
   });
   return config;
 };
