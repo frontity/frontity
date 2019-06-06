@@ -2,17 +2,14 @@ import React from "react";
 import { connect } from "frontity";
 import { Connect } from "frontity/types";
 import Html2React from "../..";
-import { Node } from "./parse";
+import {
+  Component,
+  HandleNodes,
+  HandleNode,
+  ApplyProcessors
+} from "../../types";
 
-function applyProcessors({
-  node,
-  tree,
-  processors
-}: {
-  node: Node;
-  tree: Node[];
-  processors: any;
-}): boolean {
+const applyProcessors: ApplyProcessors = ({ node, tree, processors }) => {
   for (let processor of processors) {
     const { test, process } = processor;
 
@@ -29,7 +26,7 @@ function applyProcessors({
         const processed = process(node, tree);
         // Return true if node was removed.
         if (!processed) return true;
-        // Do a shallow merge if node is different.
+        // Merge the nodes if the processor has applyed changes.
         if (node !== processed) Object.assign(node, processed);
       } catch (e) {
         console.error(e);
@@ -39,20 +36,9 @@ function applyProcessors({
 
   // Return false if node was not removed
   return false;
-}
+};
 
-function handleNode({
-  node,
-  payload,
-  index
-}: {
-  node: Node;
-  payload: {
-    tree: Node[];
-    processors: any;
-  };
-  index: number;
-}): React.ReactNode {
+const handleNode: HandleNode = ({ node, payload, index }) => {
   // `applyProcessors` returns true if node was removed.
   if (applyProcessors({ node, ...payload })) return null;
 
@@ -64,18 +50,9 @@ function handleNode({
         {node.children ? handleNodes({ nodes: node.children, payload }) : null}
       </node.component>
     );
-}
+};
 
-function handleNodes({
-  nodes,
-  payload
-}: {
-  nodes: Node[];
-  payload: {
-    tree: Node[];
-    processors: any;
-  };
-}): React.ReactNode {
+const handleNodes: HandleNodes = ({ nodes, payload }) => {
   const handled = nodes.reduce((final: React.ReactNodeArray, node, index) => {
     const handledNode = handleNode({ node, index, payload });
     if (handledNode) final.push(handledNode);
@@ -85,9 +62,9 @@ function handleNodes({
   if (handled.length > 1) return handled;
   if (handled.length === 1) return handled[0];
   return null;
-}
+};
 
-const Component: React.FC<Connect<Html2React, { html: string }>> = ({
+const H2R: Component<Connect<Html2React, { html: string }>> = ({
   html,
   libraries
 }) => {
@@ -101,4 +78,4 @@ const Component: React.FC<Connect<Html2React, { html: string }>> = ({
   }) as React.ReactElement;
 };
 
-export default connect(Component);
+export default connect(H2R);

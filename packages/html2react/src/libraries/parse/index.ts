@@ -1,5 +1,6 @@
 import { parse as himalaya } from "himalaya";
 import { Node as HimalayaNode } from "../../../himalaya/types";
+import { Element, Node, Parse, Attributes } from "../../../types";
 import he from "he";
 import htmlMap from "./html-map";
 import svgMap from "./svg-map";
@@ -8,30 +9,8 @@ import svgMap from "./svg-map";
 // (see https://github.com/andrejewski/himalaya/blob/v1.0.1/text/ast-spec-v1.md)
 // to our format, with the following structure:
 
-interface Element {
-  type: "element";
-  component: string;
-  props: { [key: string]: string | number | boolean };
-  children?: Node[];
-  parent?: Element;
-}
-
-interface Text {
-  type: "text";
-  content: string;
-  parent?: Element;
-}
-
-interface Comment {
-  type: "comment";
-  content: string;
-  parent?: Element;
-}
-
-export type Node = Element | Text | Comment;
-
 // Map of lowercased HTML and SVG attributes to get their camelCase version.
-const attrMap = { ...htmlMap, ...svgMap };
+const attrMap: Attributes = { ...htmlMap, ...svgMap };
 
 function adaptNode(element: HimalayaNode, parent?: Element): Node {
   let node: Node;
@@ -92,9 +71,7 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
   return node;
 }
 
-// Parse HTML code using Himalaya's parse function first, and then
-// adapting each node to our format.
-const parse = (html: string): Node[] =>
+const parse: Parse = html =>
   himalaya(html).reduce((tree: Node[], element) => {
     const adapted = adaptNode(element);
     if (adapted) tree.push(adapted);

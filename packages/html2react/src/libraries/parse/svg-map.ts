@@ -1,4 +1,4 @@
-const attributes: { [key: string]: string } = [
+export default [
   "accentHeight",
   "alignmentBaseline",
   "allowReorder",
@@ -147,5 +147,3 @@ const attributes: { [key: string]: string } = [
   map[value.toLowerCase()] = value;
   return map;
 }, {});
-
-export default attributes;
