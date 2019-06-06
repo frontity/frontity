@@ -2,52 +2,82 @@ import { Handler } from "../../";
 import pathToRegexp, { Key } from "path-to-regexp";
 
 class Resolver {
-  // Array containing all registered patterns with their handlers
-  registered: {
-    pattern: string;
-    handler: Handler;
-    regexp: RegExp;
-    keys: Key[];
-  }[] = [];
+  private handlers: Pattern<Handler>[] = [];
+
+  private redirects: Pattern<(params: Record<string, string>) => string>[] = [];
 
   init(this: Resolver) {
-    this.registered = [];
+    this.handlers = [];
+    this.redirects = [];
   }
 
-  // Adds a handler to registered
-  add(this: Resolver, pattern: string, handler: Handler): void {
+  // Adds a handler to handlers
+  add(this: Resolver, pattern: string, func: Handler): void {
     const keys = [];
     const regexp = pathToRegexp(pattern, keys);
-    this.registered.push({ pattern, handler, regexp, keys });
+    this.handlers.push({ pattern, regexp, keys, func });
+  }
+
+  // Adds a redirect to redirects
+  addRedirect(
+    this: Resolver,
+    pattern: string,
+    func: (params: Record<string, any>) => string
+  ): void {
+    const keys = [];
+    const regexp = pathToRegexp(pattern, keys);
+    this.redirects.push({ pattern, regexp, keys, func });
+  }
+
+  // redirects a path to a different one
+  redirect(this: Resolver, path: string): string {
+    const match = getMatch(path, this.redirects);
+    if (!match) return path;
+
+    const params = execMatch(path, match);
+    return match.func(params);
   }
 
   // Gets the appropriate handler and params after a match
   match(
     this: Resolver,
     path: string
-  ): { handler: Handler; params: { [param: string]: any } } | null {
-    let handler;
+  ): { handler: Handler; params: Record<string, string> } | null {
+    path = this.redirects.length ? this.redirect(path) : path;
 
-    // Then process the path
-    const found = this.registered.find(({ regexp }) => regexp.test(path));
-
+    const found = getMatch(path, this.handlers);
     if (!found) return null;
 
-    const { regexp, keys } = found;
-    const params = path
-      .match(regexp)
-      .slice(1)
-      .reduce((result, value, index) => {
-        result[keys[index].name] = value;
-        return result;
-      }, {});
-
-    // Set handler
-    handler = found.handler;
-
-    // Return handler and params
-    return { handler, params };
+    return {
+      handler: found.func,
+      params: execMatch(path, found)
+    };
   }
 }
 
 export default Resolver;
+
+// Utils
+
+type Pattern<Func extends Function = (...args: any[]) => any> = {
+  pattern: string;
+  regexp: RegExp;
+  keys: Key[];
+  func: Func;
+};
+
+type GetMatch = <T extends Pattern>(path: string, list: T[]) => T;
+
+type ExecMatch = (path: string, match: Pattern) => Record<string, string>;
+
+const getMatch: GetMatch = (path, list) =>
+  list.find(({ regexp }) => regexp.test(path));
+
+const execMatch: ExecMatch = (path, { regexp, keys }) =>
+  path
+    .match(regexp)
+    .slice(1)
+    .reduce((result, value, index) => {
+      result[keys[index].name] = value;
+      return result;
+    }, {});
