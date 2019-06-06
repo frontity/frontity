@@ -1,6 +1,11 @@
 import WpSource from "../..";
 import state from "../state";
 import { routeUtils } from "../libraries";
+import Resolver from "../libraries/resolver";
+import Api from "../libraries/api";
+
+jest.mock("../libraries/resolver");
+jest.mock("../libraries/api");
 
 const wpSource = (): WpSource => ({
   name: "@frontity/wp-source",
@@ -26,19 +31,8 @@ const wpSource = (): WpSource => ({
   },
   libraries: {
     source: {
-      resolver: {
-        registered: [],
-        init: jest.fn(),
-        add: jest.fn(),
-        match: jest.fn()
-      },
-      api: {
-        api: "https://test.frontity.io",
-        isWPCom: false,
-        init: jest.fn(),
-        getIdBySlug: jest.fn(),
-        get: jest.fn()
-      },
+      resolver: new Resolver(),
+      api: new Api(),
       populate: jest.fn(),
       ...routeUtils
     }

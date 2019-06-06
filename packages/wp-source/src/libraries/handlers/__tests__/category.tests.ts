@@ -6,10 +6,32 @@ import handler from "../category";
 import { mockResponse, expectEntities } from "./mocks/helpers";
 import posts from "./mocks/postsCat7.json";
 
+import Resolver from "../../resolver";
+import Api from "../../api";
+
+jest.mock("../../resolver");
+jest.mock("../../api");
+
 let state: State<WpSource>["source"];
 let libraries: WpSource["libraries"];
 
 beforeEach(() => {
+  // mock resolver
+  const resolver = new Resolver();
+  resolver.match = jest
+    .fn()
+    .mockReturnValue({ handler, params: { slug: "nature" } });
+
+  // mock api
+  const api = new Api();
+  api.getIdBySlug = jest.fn().mockResolvedValue(7);
+  api.get = jest.fn().mockResolvedValue(
+    mockResponse(posts, {
+      "X-WP-Total": 10,
+      "X-WP-TotalPages": 5
+    })
+  );
+
   // mock state
   state = {
     get: () => ({ isReady: false, isFetching: false }),
@@ -26,26 +48,8 @@ beforeEach(() => {
   // mock libraries
   libraries = {
     source: {
-      resolver: {
-        registered: [],
-        init: jest.fn(),
-        add: jest.fn(),
-        match: jest
-          .fn()
-          .mockReturnValue({ handler, params: { slug: "nature" } })
-      },
-      api: {
-        api: "https://test.frontity.io",
-        isWPCom: false,
-        init: jest.fn(),
-        getIdBySlug: jest.fn().mockResolvedValue(7),
-        get: jest.fn().mockResolvedValue(
-          mockResponse(posts, {
-            "X-WP-Total": 10,
-            "X-WP-TotalPages": 5
-          })
-        )
-      },
+      resolver,
+      api,
       populate,
       ...routeUtils
     }

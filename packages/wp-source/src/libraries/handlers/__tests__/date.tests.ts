@@ -8,6 +8,12 @@ import posts2016p2 from "./mocks/posts2016p2.json";
 import posts20161025 from "./mocks/posts2016-10-25.json";
 import routeUtils from "../../route-utils";
 
+import Resolver from "../../resolver";
+import Api from "../../api";
+
+jest.mock("../../resolver");
+jest.mock("../../api");
+
 let state: State<WpSource>["source"];
 let libraries: WpSource["libraries"];
 
@@ -28,19 +34,8 @@ beforeEach(() => {
   // mock libraries
   libraries = {
     source: {
-      resolver: {
-        registered: [],
-        init: jest.fn(),
-        add: jest.fn(),
-        match: jest.fn()
-      },
-      api: {
-        api: "https://test.frontity.io",
-        isWPCom: false,
-        init: jest.fn(),
-        getIdBySlug: jest.fn(),
-        get: jest.fn()
-      },
+      resolver: new Resolver(),
+      api: new Api(),
       populate,
       ...routeUtils
     }

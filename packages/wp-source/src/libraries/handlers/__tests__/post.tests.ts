@@ -4,6 +4,12 @@ import handler from "../post";
 import { mockResponse } from "./mocks/helpers";
 import routeUtils from "../../route-utils";
 
+import Resolver from "../../resolver";
+import Api from "../../api";
+
+jest.mock("../../resolver");
+jest.mock("../../api");
+
 const post60 = {
   id: 60,
   date: "2016-11-25T18:31:11",
@@ -21,6 +27,22 @@ let state: State<WpSource>["source"];
 let libraries: WpSource["libraries"];
 
 beforeEach(() => {
+  // mock resolver
+  const resolver = new Resolver();
+
+  // mock api
+  const api = new Api();
+  api.get = jest.fn().mockResolvedValue(mockResponse([post60]));
+
+  // mock populate
+  const populate = jest.fn().mockResolvedValue([
+    {
+      id: 60,
+      slug: "the-beauties-of-gullfoss",
+      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/"
+    }
+  ]);
+
   // mock state
   state = {
     get: () => ({ isReady: false, isFetching: false }),
@@ -34,29 +56,13 @@ beforeEach(() => {
     api: "https://test.frontity.io",
     isWPCom: false
   };
+
   // mock libraries
   libraries = {
     source: {
-      resolver: {
-        registered: [],
-        init: jest.fn(),
-        add: jest.fn(),
-        match: jest.fn()
-      },
-      api: {
-        api: "https://test.frontity.io",
-        isWPCom: false,
-        init: jest.fn(),
-        getIdBySlug: jest.fn(),
-        get: jest.fn().mockResolvedValue(mockResponse([post60]))
-      },
-      populate: jest.fn().mockResolvedValue([
-        {
-          id: 60,
-          slug: "the-beauties-of-gullfoss",
-          link: "https://test.frontity.io/2016/the-beauties-of-gullfoss/"
-        }
-      ]),
+      resolver,
+      api,
+      populate,
       ...routeUtils
     }
   };
