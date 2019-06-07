@@ -52,7 +52,59 @@ const actions: WpSource["actions"]["source"] = {
     patterns.forEach(({ pattern, handler }) =>
       libraries.source.resolver.add(pattern, handler)
     );
+
+    // redirections:
+
+    const { resolver } = libraries.source;
+    const {
+      wpDirectory,
+      homepage,
+      postsPage,
+      categoryBase,
+      tagBase
+    } = state.source;
+
+    console.log(wpDirectory);
+
+    if (homepage) {
+      const pattern = buildPath(wpDirectory);
+      resolver.addRedirect(pattern, () => buildPath(homepage));
+    }
+
+    if (postsPage) {
+      const pattern = buildPath(wpDirectory, postsPage);
+      resolver.addRedirect(pattern, () => "/");
+    }
+
+    if (categoryBase) {
+      // add new direction
+      const pattern = buildPath(wpDirectory, categoryBase, "/:subpath+");
+      resolver.addRedirect(pattern, ({ subpath }) => `/category/${subpath}`);
+      // remove old direction
+      resolver.addRedirect(buildPath(wpDirectory, "/category/(.*)/"), () => "");
+    }
+
+    if (tagBase) {
+      // add new direction
+      const pattern = buildPath(wpDirectory, tagBase, "/:subpath+");
+      resolver.addRedirect(pattern, ({ subpath }) => `/tag/${subpath}`);
+      // remove old direction
+      resolver.addRedirect(buildPath(wpDirectory, "/tag/(.*)/"), () => "");
+    }
+
+    if (wpDirectory) {
+      // add new direction
+      const pattern = buildPath(wpDirectory, "/:subpath+");
+      resolver.addRedirect(pattern, ({ subpath }) => `/${subpath}`);
+      // remove old direction
+      resolver.addRedirect("/(.*)", () => "");
+    }
   }
 };
+
+const buildPath = (...paths: string[]) =>
+  [""]
+    .concat(...paths.map(path => path.split("/").filter(p => p)), "")
+    .join("/");
 
 export default actions;

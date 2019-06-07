@@ -24,6 +24,11 @@ interface WpSource extends Source {
     source: Source<WpSource>["state"]["source"] & {
       api: string;
       isWPCom: boolean;
+      wpDirectory: string;
+      categoryBase: string;
+      tagBase: string;
+      homepage: string;
+      postsPage: string;
     };
   };
   actions: {
