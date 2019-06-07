@@ -1,7 +1,5 @@
 import { parse as himalaya } from "himalaya";
-import { Node as HimalayaNode } from "../../../himalaya/types";
-import { Element, Node, Parse, Attributes } from "../../../types";
-import he from "he";
+import { Element, Node, Parse, Attributes, AdaptNode } from "../../../types";
 import htmlAttributes from "./attributes/html.json";
 import svgAttributes from "./attributes/svg.json";
 
@@ -17,14 +15,14 @@ const attributesMap: Attributes = htmlAttributes
     return map;
   }, {});
 
-function adaptNode(element: HimalayaNode, parent?: Element): Node {
+const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
   let node: Node;
 
-  if (element.type === "element") {
+  if (himalayaNode.type === "element") {
     node = {
-      type: element.type,
-      component: element.tagName,
-      props: element.attributes.reduce(
+      type: himalayaNode.type,
+      component: himalayaNode.tagName,
+      props: himalayaNode.attributes.reduce(
         (props: Element["props"], { key, value }) => {
           if (key === "class") {
             props.className = value;
@@ -42,30 +40,33 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
       )
     };
 
-    node.children = element.children.reduce((tree: Node[], child): Node[] => {
-      const childAdapted = adaptNode(child, node as Element);
-      if (childAdapted) tree.push(childAdapted);
-      return tree;
-    }, []);
+    node.children = himalayaNode.children.reduce(
+      (tree: Node[], child): Node[] => {
+        const childAdapted = adaptNode(child, decode, node as Element);
+        if (childAdapted) tree.push(childAdapted);
+        return tree;
+      },
+      []
+    );
   }
 
-  if (element.type === "text") {
-    const content = he.decode(element.content);
+  if (himalayaNode.type === "text") {
+    const content = decode(himalayaNode.content);
 
     if (content.trim().length) {
       node = {
-        type: element.type,
+        type: himalayaNode.type,
         content: content
       };
     } else return null;
   }
 
-  if (element.type === "comment") {
-    const content = he.decode(element.content);
+  if (himalayaNode.type === "comment") {
+    const content = decode(himalayaNode.content);
 
     if (content.trim().length) {
       node = {
-        type: element.type,
+        type: himalayaNode.type,
         content: content
       };
     } else return null;
@@ -74,11 +75,11 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
   if (parent) node.parent = parent;
 
   return node;
-}
+};
 
-const parse: Parse = html =>
+const parse: Parse = (html, decode) =>
   himalaya(html).reduce((tree: Node[], element) => {
-    const adapted = adaptNode(element);
+    const adapted = adaptNode(element, decode);
     if (adapted) tree.push(adapted);
     return tree;
   }, []);

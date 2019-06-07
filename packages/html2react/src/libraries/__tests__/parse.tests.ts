@@ -17,7 +17,7 @@ describe("parse", () => {
   `;
 
   test("should return the right HTML tree", () => {
-    const result = parse(html);
+    const result = parse(html, (text: string): string => text);
     expect(result).toMatchSnapshot();
   });
 });

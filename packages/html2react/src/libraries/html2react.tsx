@@ -65,8 +65,8 @@ const H2R: Component<Connect<Html2React, { html: string }>> = ({
   html,
   libraries
 }) => {
-  const { processors, parse } = libraries.html2react;
-  const tree = parse(html);
+  const { processors, parse, decode } = libraries.html2react;
+  const tree = parse(html, decode);
   return handleNodes({
     nodes: tree,
     payload: {

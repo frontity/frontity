@@ -1,3 +1,11 @@
+import { Node as HiamalayaNode } from "./himalaya/types";
+
+// Decode
+
+export interface Decode {
+  (text: string): string;
+}
+
 // Parse
 
 export interface Element {
@@ -30,7 +38,11 @@ export interface Attributes {
 }
 
 export interface Parse {
-  (html: string): Node[];
+  (html: string, decode: Function): Node[];
+}
+
+export interface AdaptNode {
+  (himalayaNode: HiamalayaNode, decode: Function, parent?: Element): Node;
 }
 
 // Processors
