@@ -1,4 +1,4 @@
-export default [
+[
   "acceptCharset",
   "accessKey",
   "allowFullScreen",
@@ -44,7 +44,4 @@ export default [
   "srcSet",
   "tabIndex",
   "useMap"
-].reduce((map, value) => {
-  map[value.toLowerCase()] = value;
-  return map;
-}, {});
+]

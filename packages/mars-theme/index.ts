@@ -22,10 +22,13 @@ interface MarsTheme extends Package {
   actions: {
     router?: Router["actions"]["router"];
     source?: Source["actions"]["source"];
+    theme: {
+      beforeSSR: Action<MarsTheme>;
+    };
   };
   libraries: {
-    html2react?: Html2React["libraries"]["html2react"]
-  }
+    html2react?: Html2React["libraries"]["html2react"];
+  };
 }
 
 export default MarsTheme;

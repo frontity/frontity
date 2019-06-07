@@ -2,15 +2,20 @@ import { parse as himalaya } from "himalaya";
 import { Node as HimalayaNode } from "../../../himalaya/types";
 import { Element, Node, Parse, Attributes } from "../../../types";
 import he from "he";
-import htmlMap from "./html-map";
-import svgMap from "./svg-map";
+import htmlAttributes from "./attributes/html.json";
+import svgAttributes from "./attributes/svg.json";
 
 // Adapts the Himalaya AST Specification v1
 // (see https://github.com/andrejewski/himalaya/blob/v1.0.1/text/ast-spec-v1.md)
 // to our format, with the following structure:
 
 // Map of lowercased HTML and SVG attributes to get their camelCase version.
-const attrMap: Attributes = { ...htmlMap, ...svgMap };
+const attributesMap: Attributes = htmlAttributes
+  .concat(svgAttributes)
+  .reduce((map, value) => {
+    map[value.toLowerCase()] = value;
+    return map;
+  }, {});
 
 function adaptNode(element: HimalayaNode, parent?: Element): Node {
   let node: Node;
@@ -26,7 +31,7 @@ function adaptNode(element: HimalayaNode, parent?: Element): Node {
           } else if (key === "style") {
             props["data-style"] = value;
           } else if (!/^on/.test(key)) {
-            const camelCaseKey = attrMap[key.toLowerCase()];
+            const camelCaseKey = attributesMap[key.toLowerCase()];
             // Map keys with no value to `true` booleans.
             props[camelCaseKey || key] = value === null ? true : value;
           }
