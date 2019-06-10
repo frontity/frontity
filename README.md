@@ -92,7 +92,7 @@ This means everything is ready so you can jump in and create a new amazing WordP
 **Frontity** apps live in Node.js, separated from WordPress.
 
 - It uses the WP API to retrieve content and generate the final HTML.
-- It is also capable to generate AMP pages with the same React code and CSS.
+- It is also capable of generating AMP pages with the same React code and CSS.
 
 <div align="center"><img alt="Frontity & WordPress explanation" src="https://uploads.frontity.org/images/github/frontity-wordpress-explanation.png" width="600px"></div>
 
