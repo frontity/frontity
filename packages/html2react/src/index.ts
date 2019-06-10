@@ -1,5 +1,5 @@
 import Html2React from "../types";
-import Component from "./libraries/html2react";
+import Component from "./libraries/component";
 import parse from "./libraries/parse";
 
 const html2react: Html2React = {
