@@ -1,4 +1,19 @@
+import { Package } from "frontity/types";
 import { Node as HiamalayaNode } from "./himalaya/types";
+
+interface Html2React extends Package {
+  name: "@frontity/html2react";
+  libraries: {
+    html2react: {
+      parse: Parse;
+      decode: Decode;
+      processors: Processor[];
+      Component: Component;
+    };
+  };
+}
+
+export default Html2React;
 
 // Decode
 
@@ -52,7 +67,7 @@ interface Test {
 }
 
 interface Process {
-  (node: Node, tree: Node[]): Node;
+  (node: Node, payload: { root: Node[] }): Node;
 }
 
 export interface Processor {
@@ -65,7 +80,7 @@ export interface Processor {
 // Component
 
 export interface Payload {
-  tree: Node[];
+  root: Node[];
   processors: Processor[];
 }
 
@@ -80,7 +95,7 @@ export interface HandleNode {
 export interface ApplyProcessors {
   (params: {
     node: Node;
-    tree: Payload["tree"];
+    root: Payload["root"];
     processors: Payload["processors"];
   }): boolean;
 }

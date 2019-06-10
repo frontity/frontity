@@ -1,4 +1,4 @@
-import Html2React from "..";
+import Html2React from "../types";
 import Component from "./libraries/html2react";
 import parse from "./libraries/parse";
 

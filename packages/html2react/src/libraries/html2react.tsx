@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "frontity";
 import { Connect } from "frontity/types";
-import Html2React from "../..";
+import Html2React from "../../types";
 import {
   Component,
   HandleNodes,
@@ -9,7 +9,7 @@ import {
   ApplyProcessors
 } from "../../types";
 
-const applyProcessors: ApplyProcessors = ({ node, tree, processors }) => {
+const applyProcessors: ApplyProcessors = ({ node, root, processors }) => {
   for (let processor of processors) {
     const { test, process } = processor;
     let isMatch = false;
@@ -22,7 +22,7 @@ const applyProcessors: ApplyProcessors = ({ node, tree, processors }) => {
 
     // Apply processor.
     try {
-      const processed = process(node, tree);
+      const processed = process(node, { root });
       // Return true if node was removed.
       if (!processed) return true;
       // Merge the nodes if the processor has applied changes.
@@ -66,14 +66,17 @@ const H2R: Component<Connect<Html2React, { html: string }>> = ({
   libraries
 }) => {
   const { processors, parse, decode } = libraries.html2react;
-  const tree = parse(html, decode);
+  const root = parse(html, decode);
+
+  libraries.html2react.processors = processors.sort(
+    (a, b) => (a.priority || 10) - (b.priority || 10)
+  );
+
   return handleNodes({
-    nodes: tree,
+    nodes: root,
     payload: {
-      tree,
-      processors: processors.sort(
-        (a, b) => (a.priority || 10) - (b.priority || 10)
-      )
+      root,
+      processors
     }
   }) as React.ReactElement;
 };

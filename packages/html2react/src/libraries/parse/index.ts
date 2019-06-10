@@ -3,10 +3,6 @@ import { Element, Node, Parse, Attributes, AdaptNode } from "../../../types";
 import htmlAttributes from "./attributes/html.json";
 import svgAttributes from "./attributes/svg.json";
 
-// Adapts the Himalaya AST Specification v1
-// (see https://github.com/andrejewski/himalaya/blob/v1.0.1/text/ast-spec-v1.md)
-// to our format, with the following structure:
-
 // Map of lowercased HTML and SVG attributes to get their camelCase version.
 const attributesMap: Attributes = htmlAttributes
   .concat(svgAttributes)
@@ -15,6 +11,7 @@ const attributesMap: Attributes = htmlAttributes
     return map;
   }, {});
 
+// Adapts the Himalaya AST Specification v1 to our format.
 const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
   let node: Node;
 
