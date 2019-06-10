@@ -1,4 +1,6 @@
 import { State } from "frontity/types";
+import { createStore } from "@frontity/connect";
+
 import WpSource from "../../../..";
 import populate from "../../populate";
 import handler from "../date";
@@ -6,40 +8,19 @@ import { mockResponse, expectEntities } from "./mocks/helpers";
 import posts2016 from "./mocks/posts2016.json";
 import posts2016p2 from "./mocks/posts2016p2.json";
 import posts20161025 from "./mocks/posts2016-10-25.json";
-import routeUtils from "../../route-utils";
 
-import Resolver from "../../resolver";
-import Api from "../../api";
+import wpSource from "../../../";
+jest.mock("../../../");
 
-jest.mock("../../resolver");
-jest.mock("../../api");
-
-let state: State<WpSource>["source"];
+let state: State<WpSource>;
 let libraries: WpSource["libraries"];
 
 beforeEach(() => {
   // mock state
-  state = {
-    get: () => ({ isReady: false, isFetching: false }),
-    data: {},
-    category: {},
-    tag: {},
-    post: {},
-    page: {},
-    author: {},
-    attachment: {},
-    api: "https://test.frontity.io",
-    isWPCom: false
-  };
-  // mock libraries
-  libraries = {
-    source: {
-      resolver: new Resolver(),
-      api: new Api(),
-      populate,
-      ...routeUtils
-    }
-  };
+  const config = wpSource();
+  // use populate implementation
+  (config.libraries.source.populate as jest.Mock).mockImplementation(populate);
+  ({ state, libraries } = createStore(config));
 });
 
 describe("date", () => {
@@ -54,17 +35,18 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/")
-    state.data["/2016/"] = { isFetching: true, isReady: false };
+    state.source.data["/2016/"] = { isFetching: true, isReady: true };
 
-    await handler(state, {
+    await handler({
       route: "/2016/",
       params: { year: "2016" },
+      state,
       libraries
     });
 
     expect(get.mock.calls).toMatchSnapshot();
-    expect(state.data).toMatchSnapshot();
-    expectEntities(state);
+    expect(state.source.data).toMatchSnapshot();
+    expectEntities(state.source);
 
     get.mockResolvedValueOnce(
       mockResponse(posts2016p2, {
@@ -74,17 +56,18 @@ describe("date", () => {
     );
 
     // source.fetch({ path: "/2016/", page: 2 })
-    state.data["/2016/page/2/"] = { isFetching: true, isReady: false };
+    state.source.data["/2016/page/2/"] = { isFetching: true, isReady: true };
 
-    await handler(state, {
+    await handler({
       route: "/2016/page/2/",
       params: { year: "2016" },
+      state,
       libraries
     });
 
     expect(get.mock.calls).toMatchSnapshot();
-    expect(state.data).toMatchSnapshot();
-    expectEntities(state);
+    expect(state.source.data).toMatchSnapshot();
+    expectEntities(state.source);
   });
 
   // THIS TEST IS FAILING IN TRAVIS BUT PASSING IN LOCAL.
@@ -99,17 +82,18 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/10/")
-    state.data["/2016/10/"] = { isFetching: true, isReady: false };
+    state.source.data["/2016/10/"] = { isFetching: true, isReady: true };
 
-    await handler(state, {
+    await handler({
       route: "/2016/10/",
       params: { year: "2016", month: "10" },
+      state,
       libraries
     });
 
     expect(get.mock.calls).toMatchSnapshot();
-    expect(state.data).toMatchSnapshot();
-    expectEntities(state);
+    expect(state.source.data).toMatchSnapshot();
+    expectEntities(state.source);
   });
 
   test("doesn't exist in dataMap (2016/10/25)", async () => {
@@ -123,16 +107,17 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/10/25/")
-    state.data["/2016/10/25/"] = { isFetching: true, isReady: false };
+    state.source.data["/2016/10/25/"] = { isFetching: true, isReady: true };
 
-    await handler(state, {
+    await handler({
       route: "/2016/10/25/",
       params: { year: "2016", month: "10", day: "25" },
+      state,
       libraries
     });
 
     expect(get.mock.calls).toMatchSnapshot();
-    expect(state.data).toMatchSnapshot();
-    expectEntities(state);
+    expect(state.source.data).toMatchSnapshot();
+    expectEntities(state.source);
   });
 });

@@ -1,9 +1,12 @@
 import { Handler } from "../../../";
 
-const attachmentHandler: Handler = async (
-  source,
-  { route, params, libraries }
-) => {
+const attachmentHandler: Handler = async ({
+  route,
+  params,
+  state,
+  libraries
+}) => {
+  const { source } = state;
   const { api, populate } = libraries.source;
 
   let { id, slug } = params;

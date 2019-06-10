@@ -1,14 +1,11 @@
 import { State } from "frontity/types";
+import { createStore } from "@frontity/connect";
 import WpSource from "../../../..";
 import handler from "../post";
 import { mockResponse } from "./mocks/helpers";
-import routeUtils from "../../route-utils";
 
-import Resolver from "../../resolver";
-import Api from "../../api";
-
-jest.mock("../../resolver");
-jest.mock("../../api");
+import wpSource from "../../../";
+jest.mock("../../../");
 
 const post60 = {
   id: 60,
@@ -23,19 +20,18 @@ const post60 = {
   tags: [10, 9, 13, 11]
 };
 
-let state: State<WpSource>["source"];
+let state: State<WpSource>;
 let libraries: WpSource["libraries"];
 
 beforeEach(() => {
-  // mock resolver
-  const resolver = new Resolver();
+  const config = wpSource();
+  const { api, populate } = config.libraries.source;
 
   // mock api
-  const api = new Api();
-  api.get = jest.fn().mockResolvedValue(mockResponse([post60]));
+  (api.get as jest.Mock).mockResolvedValue(mockResponse([post60]));
 
   // mock populate
-  const populate = jest.fn().mockResolvedValue([
+  (populate as jest.Mock).mockResolvedValue([
     {
       id: 60,
       slug: "the-beauties-of-gullfoss",
@@ -43,67 +39,37 @@ beforeEach(() => {
     }
   ]);
 
-  // mock state
-  state = {
-    get: () => ({ isReady: false, isFetching: false }),
-    data: {},
-    category: {},
-    tag: {},
-    post: {},
-    page: {},
-    author: {},
-    attachment: {},
-    api: "https://test.frontity.io",
-    isWPCom: false
-  };
-
-  // mock libraries
-  libraries = {
-    source: {
-      resolver,
-      api,
-      populate,
-      ...routeUtils
-    }
-  };
+  ({ state, libraries } = createStore(config));
 });
 
 describe("post", () => {
   test("doesn't exist in source.post", async () => {
     // source.fetch("/the-beauties-of-gullfoss/")
-    state.data["/the-beauties-of-gullfoss/"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await handler(state, {
+    await handler({
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
+      state,
       libraries
     });
 
-    expect(state.data).toMatchSnapshot();
+    expect(state.source.data).toMatchSnapshot();
   });
 
   test("exists in source.post", async () => {
     const get = libraries.source.api.get as jest.Mock;
 
-    state.post[60] = post60;
+    state.source.post[60] = post60;
 
     // source.fetch("/the-beauties-of-gullfoss/")
-    state.data["/the-beauties-of-gullfoss/"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await handler(state, {
+    await handler({
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
+      state,
       libraries
     });
 
     expect(get).not.toBeCalled();
-    expect(state.data).toMatchSnapshot();
+    expect(state.source.data).toMatchSnapshot();
   });
 
   test("throws an error if it doesn't exist", async () => {
@@ -116,14 +82,10 @@ describe("post", () => {
       .mockResolvedValueOnce(mockResponse([]));
 
     // source.fetch("/the-beauties-of-gullfoss/")
-    state.data["/the-beauties-of-gullfoss/"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    const promise = handler(state, {
+    const promise = handler({
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
+      state,
       libraries
     });
 

@@ -3,7 +3,8 @@ import getIdBySlug from "./utils/get-id-by-slug";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
-const authorHandler: Handler = async (source, { route, params, libraries }) => {
+const authorHandler: Handler = async ({ route, params, state, libraries }) => {
+  const { source } = state;
   const { api, populate, parse } = libraries.source;
   const { page, query } = parse(route);
 

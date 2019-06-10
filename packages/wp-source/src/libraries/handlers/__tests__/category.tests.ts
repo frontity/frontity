@@ -1,29 +1,28 @@
 import { State } from "frontity/types";
+import { createStore } from "@frontity/connect";
+
 import WpSource from "../../../..";
 import populate from "../../populate";
-import routeUtils from "../../route-utils";
 import handler from "../category";
 import { mockResponse, expectEntities } from "./mocks/helpers";
 import posts from "./mocks/postsCat7.json";
 
-import Resolver from "../../resolver";
-import Api from "../../api";
+import wpSource from "../../../";
+jest.mock("../../../");
 
-jest.mock("../../resolver");
-jest.mock("../../api");
-
-let state: State<WpSource>["source"];
+let state: State<WpSource>;
 let libraries: WpSource["libraries"];
 
 beforeEach(() => {
+  const config = wpSource();
+  const { source } = config.libraries;
+  const { resolver, api } = source;
   // mock resolver
-  const resolver = new Resolver();
   resolver.match = jest
     .fn()
     .mockReturnValue({ handler, params: { slug: "nature" } });
 
   // mock api
-  const api = new Api();
   api.getIdBySlug = jest.fn().mockResolvedValue(7);
   api.get = jest.fn().mockResolvedValue(
     mockResponse(posts, {
@@ -31,48 +30,33 @@ beforeEach(() => {
       "X-WP-TotalPages": 5
     })
   );
+  // use populate implementation
+  (source.populate as jest.Mock).mockImplementation(populate);
 
-  // mock state
-  state = {
-    get: () => ({ isReady: false, isFetching: false }),
-    data: {},
-    category: {},
-    tag: {},
-    post: {},
-    page: {},
-    author: {},
-    attachment: {},
-    api: "https://test.frontity.io",
-    isWPCom: false
-  };
-  // mock libraries
-  libraries = {
-    source: {
-      resolver,
-      api,
-      populate,
-      ...routeUtils
-    }
-  };
+  ({ state, libraries } = createStore(config));
 });
 
 describe("category", () => {
   test("doesn't exist in source.category", async () => {
     // source.fetch("/category/nature/")
-    state.data["/category/nature/"] = { isFetching: true, isReady: false };
+    state.source.data["/category/nature/"] = {
+      isFetching: true,
+      isReady: false
+    };
 
-    await handler(state, {
+    await handler({
       route: "/category/nature/",
       params: { slug: "nature" },
+      state,
       libraries
     });
 
-    expect(state.data).toMatchSnapshot();
-    expectEntities(state);
+    expect(state.source.data).toMatchSnapshot();
+    expectEntities(state.source);
   });
 
   test("exists in source.category but not in source.data", async () => {
-    state.category[7] = {
+    state.source.category[7] = {
       id: 7,
       count: 10,
       description: "",
@@ -85,33 +69,38 @@ describe("category", () => {
     };
 
     // source.fetch("/category/nature/")
-    state.data["/category/nature/"] = { isFetching: true, isReady: false };
-
-    await handler(state, {
-      route: "/category/nature/",
-      params: { slug: "nature" },
-      libraries
-    });
-
-    expect(libraries.source.api.getIdBySlug).not.toBeCalled();
-    expect(state.data).toMatchSnapshot();
-    expectEntities(state);
-  });
-
-  test("works with pagination", async () => {
-    // source.fetch("/category/nature/2/")
-    state.data["/category/nature/page/2/"] = {
+    state.source.data["/category/nature/"] = {
       isFetching: true,
       isReady: false
     };
 
-    await handler(state, {
-      route: "/category/nature/page/2/",
+    await handler({
+      route: "/category/nature/",
       params: { slug: "nature" },
+      state,
       libraries
     });
 
-    expect(state.data).toMatchSnapshot();
-    expectEntities(state);
+    expect(libraries.source.api.getIdBySlug).not.toBeCalled();
+    expect(state.source.data).toMatchSnapshot();
+    expectEntities(state.source);
+  });
+
+  test("works with pagination", async () => {
+    // source.fetch("/category/nature/")
+    state.source.data["/category/nature/page/2/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await handler({
+      route: "/category/nature/",
+      params: { slug: "nature" },
+      state,
+      libraries
+    });
+
+    expect(state.source.data).toMatchSnapshot();
+    expectEntities(state.source);
   });
 });

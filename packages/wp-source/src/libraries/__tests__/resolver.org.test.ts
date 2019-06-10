@@ -16,7 +16,7 @@ Object.keys(patterns).forEach(
 // Add handlers
 const resolver = new Resolver();
 patterns.forEach(({ pattern, handler }) => {
-  resolver.add(pattern, handler);
+  resolver.addHandler({ pattern, handler });
 });
 
 describe("resolver (wp.org patterns)", () => {

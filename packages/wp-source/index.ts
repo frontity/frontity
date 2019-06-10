@@ -3,14 +3,12 @@ import Source from "@frontity/source";
 import { EntityData } from "@frontity/source/src/data";
 import { Api, Resolver } from "./src/libraries";
 
-export type Handler = (
-  source: State<WpSource>["source"],
-  payload: {
-    route: string;
-    params: { [param: string]: any };
-    libraries: WpSource["libraries"];
-  }
-) => Promise<void>;
+export type Handler = (args: {
+  route: string;
+  params: { [param: string]: any };
+  state: State<WpSource>;
+  libraries: WpSource["libraries"];
+}) => Promise<void>;
 
 export type RouteParams = {
   path: string;

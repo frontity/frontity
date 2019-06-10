@@ -26,7 +26,7 @@ const actions: WpSource["actions"]["source"] = {
     // get and execute the corresponding handler based on path
     try {
       const { handler, params } = resolver.match(routeParams.path);
-      await handler(source, { route, params, libraries });
+      await handler({ route, params, state, libraries });
       // everything OK
       source.data[route] = {
         ...source.data[route],
@@ -50,7 +50,7 @@ const actions: WpSource["actions"]["source"] = {
 
     const patterns = isWPCom ? wpCom : wpOrg;
     patterns.forEach(({ pattern, handler }) =>
-      libraries.source.resolver.add(pattern, handler)
+      libraries.source.resolver.addHandler({ pattern, handler })
     );
 
     // redirections:
@@ -68,36 +68,51 @@ const actions: WpSource["actions"]["source"] = {
 
     if (homepage) {
       const pattern = buildPath(wpDirectory);
-      resolver.addRedirect(pattern, () => buildPath(homepage));
+      resolver.addRedirect({ pattern, redirect: () => buildPath(homepage) });
     }
 
     if (postsPage) {
       const pattern = buildPath(wpDirectory, postsPage);
-      resolver.addRedirect(pattern, () => "/");
+      resolver.addRedirect({ pattern, redirect: () => "/" });
     }
 
     if (categoryBase) {
       // add new direction
       const pattern = buildPath(wpDirectory, categoryBase, "/:subpath+");
-      resolver.addRedirect(pattern, ({ subpath }) => `/category/${subpath}`);
+      resolver.addRedirect({
+        pattern,
+        redirect: ({ subpath }) => `/category/${subpath}`
+      });
       // remove old direction
-      resolver.addRedirect(buildPath(wpDirectory, "/category/(.*)/"), () => "");
+      resolver.addRedirect({
+        pattern: buildPath(wpDirectory, "/category/(.*)/"),
+        redirect: () => ""
+      });
     }
 
     if (tagBase) {
       // add new direction
       const pattern = buildPath(wpDirectory, tagBase, "/:subpath+");
-      resolver.addRedirect(pattern, ({ subpath }) => `/tag/${subpath}`);
+      resolver.addRedirect({
+        pattern,
+        redirect: ({ subpath }) => `/tag/${subpath}`
+      });
       // remove old direction
-      resolver.addRedirect(buildPath(wpDirectory, "/tag/(.*)/"), () => "");
+      resolver.addRedirect({
+        pattern: buildPath(wpDirectory, "/tag/(.*)/"),
+        redirect: () => ""
+      });
     }
 
     if (wpDirectory) {
       // add new direction
       const pattern = buildPath(wpDirectory, "/:subpath+");
-      resolver.addRedirect(pattern, ({ subpath }) => `/${subpath}`);
+      resolver.addRedirect({
+        pattern,
+        redirect: ({ subpath }) => `/${subpath}`
+      });
       // remove old direction
-      resolver.addRedirect("/(.*)", () => "");
+      resolver.addRedirect({ pattern: "/(.*)", redirect: () => "" });
     }
   }
 };

@@ -20,7 +20,12 @@ const wpSource = (): WpSource => ({
       author: {},
       attachment: {},
       api: "https://test.frontity.io",
-      isWPCom: false
+      isWPCom: false,
+      wpDirectory: "",
+      homepage: "",
+      postsPage: "",
+      categoryBase: "",
+      tagBase: ""
     }
   },
   actions: {

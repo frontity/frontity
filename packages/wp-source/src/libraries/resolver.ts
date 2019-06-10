@@ -12,21 +12,29 @@ class Resolver {
   }
 
   // Adds a handler to handlers
-  add(this: Resolver, pattern: string, func: Handler): void {
+  addHandler(
+    this: Resolver,
+    { pattern, handler }: { pattern: string; handler: Handler }
+  ): void {
     const keys = [];
     const regexp = pathToRegexp(pattern, keys);
-    this.handlers.push({ pattern, regexp, keys, func });
+    this.handlers.push({ pattern, regexp, keys, func: handler });
   }
 
   // Adds a redirect to redirects
   addRedirect(
     this: Resolver,
-    pattern: string,
-    func: (params: Record<string, any>) => string
+    {
+      pattern,
+      redirect
+    }: {
+      pattern: string;
+      redirect: (params: Record<string, any>) => string;
+    }
   ): void {
     const keys = [];
     const regexp = pathToRegexp(pattern, keys);
-    this.redirects.push({ pattern, regexp, keys, func });
+    this.redirects.push({ pattern, regexp, keys, func: redirect });
   }
 
   // redirects a path to a different one

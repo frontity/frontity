@@ -27,7 +27,7 @@ Object.keys(patterns).forEach(
 // Add handlers
 const resolver = new Resolver();
 Object.values(routes).forEach(({ pattern, handler }) => {
-  resolver.add(pattern, handler);
+  resolver.addHandler({ pattern, handler });
 });
 
 // Test 'handler' is executed with the correct params

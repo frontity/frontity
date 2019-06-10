@@ -2,7 +2,8 @@ import { Handler } from "../../../";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
-const postArchiveHandler: Handler = async (source, { route, libraries }) => {
+const postArchiveHandler: Handler = async ({ route, state, libraries }) => {
+  const { source } = state;
   const { api, populate, parse } = libraries.source;
   const { page, query } = parse(route);
 

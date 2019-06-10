@@ -1,7 +1,8 @@
 import { Handler } from "../../../";
 import getIdBySlug from "./utils/get-id-by-slug";
 
-const pageHandler: Handler = async (source, { route, params, libraries }) => {
+const pageHandler: Handler = async ({ route, params, state, libraries }) => {
+  const { source } = state;
   const { api, populate } = libraries.source;
 
   const { slug } = params;

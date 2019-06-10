@@ -12,7 +12,8 @@ const taxonomyHandler = ({
   postType: { endpoint: string; param: string };
   props?: Record<string, string>;
   truths?: Record<string, true>;
-}): Handler => async (source, { route, params, libraries }) => {
+}): Handler => async ({ route, params, state, libraries }) => {
+  const { source } = state;
   const { api, populate, parse } = libraries.source;
   const { page, query } = parse(route);
 
