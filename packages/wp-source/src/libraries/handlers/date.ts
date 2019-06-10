@@ -50,7 +50,8 @@ const dateHandler: Handler = async (source, { route, params, libraries }) => {
     totalPages,
     isArchive: true,
     isDate: true,
-    isFetching: true
+    isFetching: true,
+    isReady: false
   };
 };
 

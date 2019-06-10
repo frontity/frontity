@@ -29,7 +29,8 @@ const attachmentHandler: Handler = async (
     type: "attachment",
     isPostType: true,
     isAttachment: true,
-    isFetching: true
+    isFetching: true,
+    isReady: false
   };
 };
 

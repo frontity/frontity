@@ -34,7 +34,8 @@ const authorHandler: Handler = async (source, { route, params, libraries }) => {
     totalPages,
     isArchive: true,
     isAuthor: true,
-    isFetching: true
+    isFetching: true,
+    isReady: false
   };
 };
 

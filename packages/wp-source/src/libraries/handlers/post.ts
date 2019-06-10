@@ -28,7 +28,8 @@ const postHandler: Handler = async (source, { route, params, libraries }) => {
     type: "post",
     isPostType: true,
     isPost: true,
-    isFetching: true
+    isFetching: true,
+    isReady: false
   };
 };
 

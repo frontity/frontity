@@ -23,7 +23,7 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    get: () => ({}),
+    get: () => ({ isReady: false, isFetching: false }),
     data: {},
     category: {},
     tag: {},

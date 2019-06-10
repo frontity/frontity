@@ -30,7 +30,8 @@ const postArchiveHandler: Handler = async (source, { route, libraries }) => {
     isPostTypeArchive: true,
     isPostArchive: true,
     isHome: true,
-    isFetching: true
+    isFetching: true,
+    isReady: false
   };
 };
 

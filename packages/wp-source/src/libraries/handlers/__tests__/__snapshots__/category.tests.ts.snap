@@ -7,6 +7,7 @@ Object {
     "isArchive": true,
     "isCategory": true,
     "isFetching": true,
+    "isReady": false,
     "isTaxonomy": true,
     "items": Array [
       Object {
@@ -69,6 +70,7 @@ Object {
     "isArchive": true,
     "isCategory": true,
     "isFetching": true,
+    "isReady": false,
     "isTaxonomy": true,
     "items": Array [
       Object {
@@ -131,6 +133,7 @@ Object {
     "isArchive": true,
     "isCategory": true,
     "isFetching": true,
+    "isReady": false,
     "isTaxonomy": true,
     "items": Array [
       Object {
@@ -150,6 +153,7 @@ Object {
   },
   "/category/nature/page/2/": Object {
     "isFetching": true,
+    "isReady": false,
   },
 }
 `;

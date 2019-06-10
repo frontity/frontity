@@ -14,7 +14,7 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    get: () => ({}),
+    get: () => ({ isReady: false, isFetching: false }),
     data: {},
     category: {},
     tag: {},
@@ -59,7 +59,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/")
-    state.data["/2016/"] = { isFetching: true };
+    state.data["/2016/"] = { isFetching: true, isReady: false };
 
     await handler(state, {
       route: "/2016/",
@@ -79,7 +79,7 @@ describe("date", () => {
     );
 
     // source.fetch({ path: "/2016/", page: 2 })
-    state.data["/2016/page/2/"] = { isFetching: true };
+    state.data["/2016/page/2/"] = { isFetching: true, isReady: false };
 
     await handler(state, {
       route: "/2016/page/2/",
@@ -104,7 +104,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/10/")
-    state.data["/2016/10/"] = { isFetching: true };
+    state.data["/2016/10/"] = { isFetching: true, isReady: false };
 
     await handler(state, {
       route: "/2016/10/",
@@ -128,7 +128,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/10/25/")
-    state.data["/2016/10/25/"] = { isFetching: true };
+    state.data["/2016/10/25/"] = { isFetching: true, isReady: false };
 
     await handler(state, {
       route: "/2016/10/25/",

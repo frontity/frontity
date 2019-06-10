@@ -12,7 +12,7 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    get: () => ({}),
+    get: () => ({ isReady: false, isFetching: false }),
     data: {},
     category: {},
     tag: {},
@@ -55,7 +55,7 @@ beforeEach(() => {
 describe("category", () => {
   test("doesn't exist in source.category", async () => {
     // source.fetch("/category/nature/")
-    state.data["/category/nature/"] = { isFetching: true };
+    state.data["/category/nature/"] = { isFetching: true, isReady: false };
 
     await handler(state, {
       route: "/category/nature/",
@@ -81,7 +81,7 @@ describe("category", () => {
     };
 
     // source.fetch("/category/nature/")
-    state.data["/category/nature/"] = { isFetching: true };
+    state.data["/category/nature/"] = { isFetching: true, isReady: false };
 
     await handler(state, {
       route: "/category/nature/",
@@ -96,7 +96,10 @@ describe("category", () => {
 
   test("works with pagination", async () => {
     // source.fetch("/category/nature/")
-    state.data["/category/nature/page/2/"] = { isFetching: true };
+    state.data["/category/nature/page/2/"] = {
+      isFetching: true,
+      isReady: false
+    };
 
     await handler(state, {
       route: "/category/nature/",

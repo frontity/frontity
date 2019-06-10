@@ -24,7 +24,8 @@ const pageHandler: Handler = async (source, { route, params, libraries }) => {
     type: "page",
     isPostType: true,
     isPage: true,
-    isFetching: true
+    isFetching: true,
+    isReady: false
   };
 };
 

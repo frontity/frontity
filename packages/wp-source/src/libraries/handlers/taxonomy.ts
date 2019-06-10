@@ -46,6 +46,7 @@ const taxonomyHandler = ({
     isArchive: true,
     isTaxonomy: true,
     isFetching: true,
+    isReady: false,
     ...truths
   };
 };
