@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: 🐞 Bug report
 about: I think something is not working as it should
 
 ---
