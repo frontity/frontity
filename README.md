@@ -17,11 +17,11 @@
   <a href="https://twitter.com/frontity">Twitter</a>
 </p>
 
----
+--- 
 
 > **IMPORTANT NOTE!**
 >
-> Frontity framework is in **release candidate**. It allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this phase.
+> Frontity v1 **Release Candidate** is now available. Frontity allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this phase. Bug reports will be also highly appreciated.
 >
 > <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
 > <br />
