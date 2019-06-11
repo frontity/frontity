@@ -20,7 +20,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@frontity/html2react": "0.1.0",
+    "@frontity/html2react": "^1.0.0",
     "@frontity/router": "^1.0.3",
     "@frontity/source": "^1.0.2",
     "frontity": "^1.0.1"
