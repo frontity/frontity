@@ -1,3 +1,4 @@
+import open from "open";
 import { MultiCompiler } from "webpack";
 import express from "express";
 import createServer from "./create-server";
@@ -34,6 +35,7 @@ export default async ({
           }://localhost:${port}\n  - mode: ${mode}\n  - target: ${target}`
         );
       });
+      open(`${isHttps ? "https" : "http"}://localhost:${port}`);
     }
   };
   // Check if webpack has finished (both the client and server bundles).
