@@ -11,7 +11,6 @@ about: I think something is not working as it should
 * [ ] I've searched for existing issues
 * [ ] I've checked documentation: https://docs.frontity.org
 * [ ] I've checked community forum: https://community.frontity.org
-* [ ] Fork [this](https://codesandbox.io/s/y64pzxj01) code sandbox or another minimal reproduction. 
 
 **Sandbox link or minimal reproduction code**
 <!-- link to your sandbox or alternatively minimal reproduction code-->
