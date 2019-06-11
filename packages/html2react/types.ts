@@ -1,4 +1,5 @@
 import { Package } from "frontity/types";
+import { SerializedStyles } from "@emotion/core";
 import { Node as HiamalayaNode } from "./himalaya/types";
 
 interface Html2React extends Package {
@@ -26,7 +27,11 @@ export interface Decode {
 export interface Element {
   type: "element";
   component: string | React.ComponentType;
-  props: { [key: string]: string | number | boolean };
+  props: {
+    css?: SerializedStyles;
+  } & {
+    [key: string]: string | number | boolean;
+  };
   children?: Node[];
   parent?: Element;
   ignore?: boolean;

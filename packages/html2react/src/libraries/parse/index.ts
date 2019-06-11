@@ -1,3 +1,4 @@
+import { css } from "frontity";
 import { parse as himalaya } from "himalaya";
 import { Element, Node, Parse, Attributes, AdaptNode } from "../../../types";
 import htmlAttributes from "./attributes/html.json";
@@ -24,7 +25,8 @@ const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
           if (key === "class") {
             props.className = value;
           } else if (key === "style") {
-            props["data-style"] = value;
+            // Add inline styles to the component with `emotion`.
+            props.css = css(value);
           } else if (!/^on/.test(key)) {
             const camelCaseKey = attributesMap[key.toLowerCase()];
             // Map keys with no value to `true` booleans.

@@ -57,6 +57,12 @@ Array [
     "component": "div",
     "props": Object {
       "className": "hello",
+      "css": Object {
+        "map": undefined,
+        "name": "12gt2kf",
+        "next": undefined,
+        "styles": "width: 180px;",
+      },
     },
     "type": "element",
   },

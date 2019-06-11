@@ -13,6 +13,14 @@ Array [
   </p>,
   <div
     className="hello"
+    css={
+      Object {
+        "map": undefined,
+        "name": "12gt2kf",
+        "next": undefined,
+        "styles": "width: 180px;",
+      }
+    }
   >
     <img
       src="http://example.com/img.jpg"

@@ -3,24 +3,10 @@ import TestRenderer from "react-test-renderer";
 import Component from "../component";
 import parse from "../parse";
 import decode from "../decode/client";
+import htmlMock from "./mocks/html";
 
 describe("Component", () => {
   test("works just fine", () => {
-    const html = `
-      <!-- This is a comment -->
-      <p id="paragraph">This is an html <span>example</span> for testing purposes.</p>
-
-      <!-- [class] attribute -->
-      <div class="hello">
-        <img src="http://example.com/img.jpg">
-      </div>
-      
-      <!-- [autoplay] standalone attribute ([key/value] should be [autoPlay/true] -->
-      <audio autoplay>
-        <source src="example.ogg" type="audio/ogg">
-      </div>
-    `;
-
     const processors = [
       {
         name: "priority-15",
@@ -52,7 +38,7 @@ describe("Component", () => {
 
     const AnyComponent = Component as any;
     const result = TestRenderer.create(
-      <AnyComponent html={html} libraries={libraries} />
+      <AnyComponent html={htmlMock} libraries={libraries} />
     ).toJSON();
 
     expect(libraries.html2react.processors[0].name).toBe("priority-5");
