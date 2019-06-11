@@ -27,13 +27,20 @@ const actions: WpSource["actions"]["source"] = {
     try {
       const { handler, params } = resolver.match(routeParams.path);
       await handler(source, { route, params, libraries });
-      source.data[route].isReady = true;
+      // everything OK
+      source.data[route] = {
+        ...source.data[route],
+        isFetching: false,
+        isReady: true
+      };
     } catch (e) {
-      source.data[route].is404 = true;
+      // an error happened
+      source.data[route] = {
+        is404: true,
+        isFetching: false,
+        isReady: false
+      };
     }
-
-    // end fetching
-    source.data[route].isFetching = false;
   },
 
   init: ({ state, libraries }) => {
