@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://frontity.org">frontity.org</a> |
-  <a href="https://docs.frontity.org/getting-started">Get Started</a> |
+  <a href="https://docs.frontity.org/getting-started?utm_source=github-readme&utm_medium=get-started-link">Get Started</a> |
   <a href="https://docs.frontity.org/frontity-features">Features</a> |
   <a href="https://docs.frontity.org/getting-started">Docs</a> |
   <a href="https://community.frontity.org/">Community</a> |
@@ -23,7 +23,7 @@
 >
 > Frontity v1 **Release Candidate** is now available. Frontity allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this phase. Bug reports will be also highly appreciated.
 >
-> <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
+> <div align="center"><a href="https://docs.frontity.org/getting-started?utm_source=github-readme&utm_medium=get-started-link"><strong>GET STARTED!</strong></a></div>
 > <br />
 >
 > Frontity will continue to be tested and improved during the next months, and new features will be added progressively.
