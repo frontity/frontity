@@ -1,11 +1,5 @@
 <!--
-Thanks for your pull request 😊.
-
-To help us merge your PR, make sure to follow the instructions below:
-- Create or update the documentation.
-- Create or update the tests.
-- Refer to the issue you are closing in the PR description - fix #issue
-- Specify if the PR is in WIP (work in progress) state or ready to be merged
+Thanks for your pull request 😊. Note that not following the template might result in your issue being closed
 -->
 
 #### Description of what you did:
