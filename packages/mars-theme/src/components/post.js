@@ -4,7 +4,7 @@ import Link from "./link";
 import List from "./list";
 import FeaturedMedia from "./featured-media";
 
-const Post = ({ state, actions }) => {
+const Post = ({ state, actions, libraries }) => {
   // Get info of current post.
   const data = state.source.get(state.router.link);
   // Get the the post.
@@ -41,11 +41,9 @@ const Post = ({ state, actions }) => {
       {state.theme.featured.showOnPost && (
         <FeaturedMedia id={post.featured_media} />
       )}
-      <Body
-        dangerouslySetInnerHTML={{
-          __html: post.content.rendered
-        }}
-      />
+      <Body>
+        <libraries.html2react.Component html={post.content.rendered} />
+      </Body>
     </Container>
   ) : null;
 };

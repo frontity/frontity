@@ -1,6 +1,7 @@
 import { Action, Package } from "frontity/types";
 import Router from "@frontity/router";
 import Source from "@frontity/source";
+import Html2React from "@frontity/html2react/types";
 
 interface MarsTheme extends Package {
   name: "@frontity/mars-theme";
@@ -21,6 +22,12 @@ interface MarsTheme extends Package {
   actions: {
     router?: Router["actions"]["router"];
     source?: Source["actions"]["source"];
+    theme: {
+      beforeSSR: Action<MarsTheme>;
+    };
+  };
+  libraries: {
+    html2react?: Html2React["libraries"]["html2react"];
   };
 }
 
