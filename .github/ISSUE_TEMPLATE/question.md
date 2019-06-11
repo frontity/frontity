@@ -4,8 +4,4 @@ about: I have a doubt about Frontity
 
 ---
 
-<!-- Hello 👋
-
-We are using our community forum to ask and solve doubts.
-
-You can check if it has been solved, or ask it here: https://community.frontity.org/c/dev-talk-questions -->
+<!-- Please, if you have any questions ask it at https://community.frontity.org. Note that questions opened at Github might result in your issue being closed without further notice-->
