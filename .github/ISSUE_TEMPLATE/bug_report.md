@@ -12,9 +12,6 @@ about: I think something is not working as it should
 * [ ] I've checked documentation: https://docs.frontity.org
 * [ ] I've checked community forum: https://community.frontity.org
 
-**Sandbox link or minimal reproduction code**
-<!-- link to your sandbox or alternatively minimal reproduction code-->
-
 **Describe the expected behavior**
 <!-- What should happen? -->
 
