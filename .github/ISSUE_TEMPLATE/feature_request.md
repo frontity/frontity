@@ -4,8 +4,4 @@ about: I want to suggest and improvement
 
 ---
 
-<!-- Hello 👋 Thank you for suggesting improvements!
-
-We are using our community forum to manage feature requests.
-
-You can submit your feature request here: https://community.frontity.org/c/dev-talk-questions -->
+<!-- Please, for suggesting feature requests go to https://community.frontity.org/c/dev-talk-questions. Note that feature requests opened at Github might result in your issue being closed -->
