@@ -29,7 +29,6 @@ const actions: WpSource["actions"]["source"] = {
       await handler(source, { route, params, libraries });
       source.data[route].isReady = true;
     } catch (e) {
-      console.warn(`An error ocurred fetching '${route}':\n`, e);
       source.data[route].is404 = true;
     }
 
