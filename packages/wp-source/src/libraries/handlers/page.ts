@@ -19,14 +19,12 @@ const pageHandler: Handler = async (source, { route, params, libraries }) => {
   }
 
   // Init data
-  source.data[route] = {
+  Object.assign(source.data[route], {
     id,
     type: "page",
     isPostType: true,
-    isPage: true,
-    isFetching: true,
-    isReady: false
-  };
+    isPage: true
+  });
 };
 
 export default pageHandler;

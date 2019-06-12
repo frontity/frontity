@@ -23,14 +23,12 @@ const postHandler: Handler = async (source, { route, params, libraries }) => {
   }
 
   // Init data
-  source.data[route] = {
+  Object.assign(source.data[route], {
     id,
     type: "post",
     isPostType: true,
-    isPost: true,
-    isFetching: true,
-    isReady: false
-  };
+    isPost: true
+  });
 };
 
 export default postHandler;

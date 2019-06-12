@@ -8,13 +8,13 @@ let handler: jest.Mock;
 const initStore = (data = {}) => {
   handler = jest.fn(async (source, { route }) => {
     await Promise.resolve();
-    source.data[route] = {
+    Object.assign(source.data[route], {
       type: "example",
       id: 1,
       isPostType: true,
       isFetching: true,
       isReady: false
-    };
+    });
   });
   const config = wpSource();
   // replace data by the one passed as argument

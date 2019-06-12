@@ -27,16 +27,14 @@ const authorHandler: Handler = async (source, { route, params, libraries }) => {
   const items = await populate(source, response);
 
   // 5. add data to source
-  source.data[route] = {
+  Object.assign(source.data[route], {
     id,
     items,
     total,
     totalPages,
     isArchive: true,
-    isAuthor: true,
-    isFetching: true,
-    isReady: false
-  };
+    isAuthor: true
+  });
 };
 
 export default authorHandler;

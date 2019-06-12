@@ -37,7 +37,7 @@ const taxonomyHandler = ({
   const items = await populate(source, response);
 
   // 5. add data to source
-  source.data[route] = {
+  Object.assign(source.data[route], {
     taxonomy: taxonomy.type,
     id,
     items,
@@ -45,10 +45,8 @@ const taxonomyHandler = ({
     totalPages,
     isArchive: true,
     isTaxonomy: true,
-    isFetching: true,
-    isReady: false,
     ...truths
-  };
+  });
 };
 
 export default taxonomyHandler;

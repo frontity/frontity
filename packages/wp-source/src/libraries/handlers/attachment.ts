@@ -24,14 +24,12 @@ const attachmentHandler: Handler = async (
   }
 
   // Init data
-  source.data[route] = {
+  Object.assign(source.data[route], {
     id,
     type: "attachment",
     isPostType: true,
-    isAttachment: true,
-    isFetching: true,
-    isReady: false
-  };
+    isAttachment: true
+  });
 };
 
 export default attachmentHandler;

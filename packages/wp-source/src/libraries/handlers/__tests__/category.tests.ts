@@ -95,14 +95,14 @@ describe("category", () => {
   });
 
   test("works with pagination", async () => {
-    // source.fetch("/category/nature/")
+    // source.fetch("/category/nature/2/")
     state.data["/category/nature/page/2/"] = {
       isFetching: true,
       isReady: false
     };
 
     await handler(state, {
-      route: "/category/nature/",
+      route: "/category/nature/page/2/",
       params: { slug: "nature" },
       libraries
     });
