@@ -1,4 +1,4 @@
-import { createStore } from "@frontity/connect";
+import { createStore, observe } from "@frontity/connect";
 import wpSource from "../";
 import actions from "../actions";
 
@@ -7,11 +7,13 @@ jest.mock("../");
 let handler: jest.Mock;
 const initStore = (data = {}) => {
   handler = jest.fn(async (source, { route }) => {
-    await (source.data[route] = {
+    await Promise.resolve();
+    Object.assign(source.data[route], {
       type: "example",
       id: 1,
       isPostType: true,
-      isFetching: true
+      isFetching: true,
+      isReady: false
     });
   });
   const config = wpSource();
@@ -49,10 +51,30 @@ describe("fetch", () => {
     expect(store.state.source.data).toMatchSnapshot();
   });
 
-  test("return 404 is fetch fails", async () => {
+  test("returns 404 is fetch fails", async () => {
     const store = initStore();
     handler.mockRejectedValue("Some error");
     await store.actions.source.fetch("/some/route/");
     expect(store.state.source.data).toMatchSnapshot();
+  });
+
+  test("should allow to observe 'isReady' properly", done => {
+    const { state, actions } = initStore();
+    expect(state.source.get("/").isReady).toBe(false);
+    observe(() => {
+      if (state.source.get("/").isReady) done();
+    });
+    actions.source.fetch("/");
+  });
+
+  test("should allow to observe 'isFetching' properly", done => {
+    const { state, actions } = initStore();
+    expect(state.source.get("/").isFetching).toBe(false);
+    actions.source.fetch("/");
+    expect(state.source.get("/").isFetching).toBe(true);
+    observe(() => {
+      const { isFetching } = state.source.get("/");
+      if (!isFetching) done();
+    });
   });
 });

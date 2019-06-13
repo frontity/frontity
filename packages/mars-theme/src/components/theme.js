@@ -22,12 +22,6 @@ const globalStyles = css`
 const Theme = ({ state }) => {
   const data = state.source.get(state.router.link);
 
-  let Content = <Loading />;
-
-  if (data.isArchive) Content = <List />;
-  if (data.isPostType) Content = <Post />;
-  if (data.is404) Content = <Page404 />;
-
   return (
     <>
       <Head>
@@ -38,7 +32,12 @@ const Theme = ({ state }) => {
       <HeadContainer>
         <Header />
       </HeadContainer>
-      <Body>{Content}</Body>
+      <Body>
+        {data.isFetching && <Loading />}
+        {data.isArchive && <List />}
+        {data.isPostType && <Post />}
+        {data.is404 && <Page404 />}
+      </Body>
     </>
   );
 };

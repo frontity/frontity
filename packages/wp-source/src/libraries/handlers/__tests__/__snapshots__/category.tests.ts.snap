@@ -7,6 +7,7 @@ Object {
     "isArchive": true,
     "isCategory": true,
     "isFetching": true,
+    "isReady": false,
     "isTaxonomy": true,
     "items": Array [
       Object {
@@ -69,6 +70,7 @@ Object {
     "isArchive": true,
     "isCategory": true,
     "isFetching": true,
+    "isReady": false,
     "isTaxonomy": true,
     "items": Array [
       Object {
@@ -126,11 +128,12 @@ Object {
 
 exports[`category works with pagination 1`] = `
 Object {
-  "/category/nature/": Object {
+  "/category/nature/page/2/": Object {
     "id": 7,
     "isArchive": true,
     "isCategory": true,
     "isFetching": true,
+    "isReady": false,
     "isTaxonomy": true,
     "items": Array [
       Object {
@@ -147,9 +150,6 @@ Object {
     "taxonomy": "category",
     "total": 10,
     "totalPages": 5,
-  },
-  "/category/nature/page/2/": Object {
-    "isFetching": true,
   },
 }
 `;

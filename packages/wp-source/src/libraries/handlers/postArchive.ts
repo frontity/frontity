@@ -21,7 +21,7 @@ const postArchiveHandler: Handler = async (source, { route, libraries }) => {
   const items = await populate(source, response);
 
   // 5. add data to source
-  source.data[route] = {
+  Object.assign(source.data[route], {
     type: "post",
     items,
     total,
@@ -29,9 +29,8 @@ const postArchiveHandler: Handler = async (source, { route, libraries }) => {
     isArchive: true,
     isPostTypeArchive: true,
     isPostArchive: true,
-    isHome: true,
-    isFetching: true
-  };
+    isHome: true
+  });
 };
 
 export default postArchiveHandler;

@@ -23,8 +23,8 @@ export type Data =
   | AttachmentData;
 
 export type BaseData = {
-  isFetching?: boolean;
-  isReady?: boolean;
+  isFetching: boolean;
+  isReady: boolean;
   is404?: false;
   isArchive?: false;
   isTaxonomy?: false;

@@ -24,6 +24,7 @@ Object {
     "isArchive": true,
     "isDate": true,
     "isFetching": true,
+    "isReady": false,
     "items": Array [
       Object {
         "id": 57,
@@ -103,6 +104,7 @@ Object {
     "isArchive": true,
     "isDate": true,
     "isFetching": true,
+    "isReady": false,
     "items": Array [
       Object {
         "id": 60,
@@ -199,6 +201,7 @@ Object {
     "isArchive": true,
     "isDate": true,
     "isFetching": true,
+    "isReady": false,
     "items": Array [
       Object {
         "id": 60,
@@ -221,6 +224,7 @@ Object {
     "isArchive": true,
     "isDate": true,
     "isFetching": true,
+    "isReady": false,
     "items": Array [
       Object {
         "id": 54,
