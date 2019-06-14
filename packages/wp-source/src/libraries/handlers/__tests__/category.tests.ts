@@ -94,7 +94,7 @@ describe("category", () => {
     };
 
     await handler({
-      route: "/category/nature/",
+      route: "/category/nature/page/2/",
       params: { slug: "nature" },
       state,
       libraries

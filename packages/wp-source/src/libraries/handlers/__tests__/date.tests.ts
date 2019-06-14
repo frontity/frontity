@@ -35,7 +35,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/")
-    state.source.data["/2016/"] = { isFetching: true, isReady: true };
+    state.source.data["/2016/"] = { isFetching: true, isReady: false };
 
     await handler({
       route: "/2016/",
@@ -56,7 +56,7 @@ describe("date", () => {
     );
 
     // source.fetch({ path: "/2016/", page: 2 })
-    state.source.data["/2016/page/2/"] = { isFetching: true, isReady: true };
+    state.source.data["/2016/page/2/"] = { isFetching: true, isReady: false };
 
     await handler({
       route: "/2016/page/2/",
@@ -82,7 +82,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/10/")
-    state.source.data["/2016/10/"] = { isFetching: true, isReady: true };
+    state.source.data["/2016/10/"] = { isFetching: true, isReady: false };
 
     await handler({
       route: "/2016/10/",
@@ -107,7 +107,7 @@ describe("date", () => {
     );
 
     // source.fetch("/2016/10/25/")
-    state.source.data["/2016/10/25/"] = { isFetching: true, isReady: true };
+    state.source.data["/2016/10/25/"] = { isFetching: true, isReady: false };
 
     await handler({
       route: "/2016/10/25/",

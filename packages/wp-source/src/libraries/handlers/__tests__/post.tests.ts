@@ -45,6 +45,11 @@ beforeEach(() => {
 describe("post", () => {
   test("doesn't exist in source.post", async () => {
     // source.fetch("/the-beauties-of-gullfoss/")
+    state.source.data["/the-beauties-of-gullfoss/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
     await handler({
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
@@ -61,6 +66,11 @@ describe("post", () => {
     state.source.post[60] = post60;
 
     // source.fetch("/the-beauties-of-gullfoss/")
+    state.source.data["/the-beauties-of-gullfoss/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
     await handler({
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
@@ -82,6 +92,11 @@ describe("post", () => {
       .mockResolvedValueOnce(mockResponse([]));
 
     // source.fetch("/the-beauties-of-gullfoss/")
+    state.source.data["/the-beauties-of-gullfoss/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
     const promise = handler({
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
