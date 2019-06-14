@@ -22,8 +22,8 @@ export default {
             ["About Us", "/about-us/"]
           ],
           featured: {
-            showOnList: false,
-            showOnPost: false
+            showOnList: true,
+            showOnPost: true
           }
         }
       }
