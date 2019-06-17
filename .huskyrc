@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "pre-commit": "lint-staged && npm run test",
-    "pre-push": "npm run test:push"
+    "pre-commit": "lint-staged && NODE_ENV=test npm run test",
+    "pre-push": "NODE_ENV=test npm run test:push"
   }
 }
