@@ -1,11 +1,19 @@
 import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 
-interface IntersectionObserverCallbak {
+interface IntersectionObserverCallback {
   (entries: IntersectionObserverEntry[]);
+}
+interface IntersectionObserverCallbackCreator {
+  (options: { onlyOnce: boolean }): IntersectionObserverCallback;
+}
+
+interface Options {
+  rootMargin?: string;
+  onlyOnce?: boolean;
 }
 
 interface UseInView {
-  (rootMargin?: string): [boolean, React.MutableRefObject<undefined>];
+  (options?: Options): [boolean, React.MutableRefObject<undefined>];
 }
 
 // This is an array with all the `setIntersected` functions
@@ -22,26 +30,33 @@ let observer: IntersectionObserver;
 // This callback can be called with more than one entry,
 // so we need to filter them and call the corresponding
 // `setIntersected` function for each changed entry.
-let callback: IntersectionObserverCallbak = entries => {
-  const changed = entries.filter(entry => entry.isIntersecting);
-  changed.forEach(entry => {
-    const setFunction = setFunctions.find(
-      set => set[1].current === entry.target
-    );
+let callbackCreator: IntersectionObserverCallbackCreator = options => {
+  return entries => {
+    const changed = entries.filter(entry => entry.isIntersecting);
+    changed.forEach(entry => {
+      const setFunction = setFunctions.find(
+        set => set[1].current === entry.target
+      );
 
-    // This is the `setIntersected` function.
-    setFunction[0](true);
+      // This is the `setIntersected` function.
+      setFunction[0](true);
 
-    observer.unobserve(entry.target);
-    setFunctions.splice(setFunctions.indexOf(setFunction), 1);
-  });
+      if (options.onlyOnce) {
+        observer.unobserve(entry.target);
+        setFunctions.splice(setFunctions.indexOf(setFunction), 1);
+      }
+    });
+  };
 };
 
-const useInView: UseInView = rootMargin => {
+const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
   const [hasIntersected, setIntersected] = useState(false);
   const ref = useRef();
 
-  if (!observer) observer = new IntersectionObserver(callback, { rootMargin });
+  if (!observer)
+    observer = new IntersectionObserver(callbackCreator({ onlyOnce }), {
+      rootMargin
+    });
 
   useEffect(() => {
     if (ref.current) {

@@ -1,6 +1,6 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
-import Image from "../image";
+import Image from "../components/image";
 
 describe("Image", () => {
   test("works just fine", () => {
