@@ -23,7 +23,7 @@ const attachmentHandler: Handler = async ({
       params: { ...(id ? { include: id } : { slug }), _embed: true }
     });
 
-    [{ id }] = await populate(source, response);
+    [{ id }] = await populate({ response, state });
   }
 
   // Init data

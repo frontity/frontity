@@ -38,10 +38,11 @@ interface WpSource extends Source {
     source: {
       api: Api;
       resolver: Resolver;
-      populate: (
-        state: State<WpSource>["source"],
-        response: Response
-      ) => Promise<EntityData[]>;
+      populate: (args: {
+        state: State<WpSource>;
+        response: Response;
+        subdirectory?: string;
+      }) => Promise<EntityData[]>;
       parse: Source<WpSource>["libraries"]["source"]["parse"];
       stringify: Source<WpSource>["libraries"]["source"]["stringify"];
       normalize: Source<WpSource>["libraries"]["source"]["normalize"];

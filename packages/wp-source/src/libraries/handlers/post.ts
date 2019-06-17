@@ -15,7 +15,7 @@ const postHandler: Handler = async ({ route, params, state, libraries }) => {
       params: { slug, _embed: true }
     });
 
-    const populated = await populate(source, response);
+    const populated = await populate({ response, state });
 
     if (!populated.length)
       throw new Error(`Post with slug "${slug}" not found.`);

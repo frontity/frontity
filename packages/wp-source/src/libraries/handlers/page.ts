@@ -16,7 +16,7 @@ const pageHandler: Handler = async ({ route, params, state, libraries }) => {
     });
 
     // the next line will fail if page with id doesn't exist
-    [{ id }] = await populate(source, response);
+    [{ id }] = await populate({ response, state });
   }
 
   // Init data

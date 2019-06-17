@@ -25,7 +25,7 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
   if (page > totalPages) throw new Error("Page doesn't exist.");
 
   // 4. populate response and add page to data
-  const items = await populate(source, response);
+  const items = await populate({ response, state });
 
   // 5. add data to source
   Object.assign(source.data[route], {
