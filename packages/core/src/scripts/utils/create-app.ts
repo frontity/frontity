@@ -26,8 +26,10 @@ export default async ({
   // Start listening once webpack has finished.
   let clientFinished = false;
   let serverFinished = false;
+  let isListening = false;
   const start = () => {
-    if (clientFinished && serverFinished) {
+    if (clientFinished && serverFinished && !isListening) {
+      isListening = true;
       server.listen(port, () => {
         console.log(
           `\n\nSERVER STARTED -- Listening @ ${
