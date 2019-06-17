@@ -1,7 +1,7 @@
 import chalk from "chalk";
 
 export const isPackageNameValid = (name: string): boolean => {
-  const nameConventionMatch = /^(?:@[\w-]+\/)?[\w-]+$/;
+  const nameConventionMatch = /^(?:@[\w-]+\/)?[\w.-]+$/;
   return nameConventionMatch.test(name);
 };
 
