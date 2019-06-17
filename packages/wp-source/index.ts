@@ -1,4 +1,4 @@
-import { Action, State } from "frontity/types";
+import { Action, State, Derived } from "frontity/types";
 import Source from "@frontity/source";
 import { EntityData } from "@frontity/source/src/data";
 import { Api, Resolver } from "./src/libraries";
@@ -21,8 +21,8 @@ interface WpSource extends Source {
   state: {
     source: Source<WpSource>["state"]["source"] & {
       api: string;
-      isWPCom: boolean;
-      wpDirectory: string;
+      isWPCom: Derived<WpSource, boolean>;
+      subdirectory: string;
       categoryBase: string;
       tagBase: string;
       homepage: string;

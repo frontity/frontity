@@ -1,5 +1,5 @@
 import WpSource from "../";
-import { parse, normalize } from "./libraries/route-utils";
+import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 
 const actions: WpSource["actions"]["source"] = {
@@ -57,69 +57,64 @@ const actions: WpSource["actions"]["source"] = {
 
     const { resolver } = libraries.source;
     const {
-      wpDirectory,
+      subdirectory,
       homepage,
       postsPage,
       categoryBase,
       tagBase
     } = state.source;
 
-    console.log(wpDirectory);
+    console.log(subdirectory);
 
     if (homepage) {
-      const pattern = buildPath(wpDirectory);
-      resolver.addRedirect({ pattern, redirect: () => buildPath(homepage) });
+      const pattern = concatPath(subdirectory);
+      resolver.addRedirect({ pattern, redirect: () => concatPath(homepage) });
     }
 
     if (postsPage) {
-      const pattern = buildPath(wpDirectory, postsPage);
+      const pattern = concatPath(subdirectory, postsPage);
       resolver.addRedirect({ pattern, redirect: () => "/" });
     }
 
     if (categoryBase) {
       // add new direction
-      const pattern = buildPath(wpDirectory, categoryBase, "/:subpath+");
+      const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
       resolver.addRedirect({
         pattern,
         redirect: ({ subpath }) => `/category/${subpath}`
       });
       // remove old direction
       resolver.addRedirect({
-        pattern: buildPath(wpDirectory, "/category/(.*)/"),
+        pattern: concatPath(subdirectory, "/category/(.*)/"),
         redirect: () => ""
       });
     }
 
     if (tagBase) {
       // add new direction
-      const pattern = buildPath(wpDirectory, tagBase, "/:subpath+");
+      const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
       resolver.addRedirect({
         pattern,
         redirect: ({ subpath }) => `/tag/${subpath}`
       });
       // remove old direction
       resolver.addRedirect({
-        pattern: buildPath(wpDirectory, "/tag/(.*)/"),
+        pattern: concatPath(subdirectory, "/tag/(.*)/"),
         redirect: () => ""
       });
     }
 
-    if (wpDirectory) {
+    if (subdirectory) {
       // add new direction
-      const pattern = buildPath(wpDirectory, "/:subpath+");
+      const pattern = concatPath(subdirectory, "/:subpath*");
+      console.log(pattern);
       resolver.addRedirect({
         pattern,
-        redirect: ({ subpath }) => `/${subpath}`
+        redirect: ({ subpath = "" }) => `/${subpath}`
       });
       // remove old direction
       resolver.addRedirect({ pattern: "/(.*)", redirect: () => "" });
     }
   }
 };
-
-const buildPath = (...paths: string[]) =>
-  [""]
-    .concat(...paths.map(path => path.split("/").filter(p => p)), "")
-    .join("/");
-
 export default actions;

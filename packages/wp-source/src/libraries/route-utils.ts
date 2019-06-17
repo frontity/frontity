@@ -70,3 +70,8 @@ export const queryToObj = (query: string = "") =>
         return result;
       }, {})
     : {};
+
+export const concatPath = (...paths: string[]) =>
+  [""]
+    .concat(...paths.map(path => path.split("/").filter(p => p)), "")
+    .join("/");

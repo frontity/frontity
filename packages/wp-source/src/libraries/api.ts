@@ -1,7 +1,5 @@
 import fetch from "cross-fetch";
 
-const wpComBase = "https://public-api.wordpress.com/wp/v2/sites/";
-
 class Api {
   api = "";
   isWPCom = false;
