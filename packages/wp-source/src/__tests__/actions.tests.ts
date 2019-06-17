@@ -8,7 +8,7 @@ let handler: jest.Mock;
 const initStore = (data = {}) => {
   handler = jest.fn(async ({ route, state }) => {
     await Promise.resolve();
-    Object.assign(source.data[route], {
+    Object.assign(state.source.data[route], {
       type: "example",
       id: 1,
       isPostType: true,
