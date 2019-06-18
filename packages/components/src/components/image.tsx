@@ -3,27 +3,19 @@ import { connect, Head } from "frontity";
 import { Connect, Package } from "frontity/types";
 import useInView from "../hooks/in-view";
 
-// Removes the .no-js class from <html> when JS is enabled.
-const noJsScript = `
-  document.documentElement.classList.remove("no-js");
-  if (!document.documentElement.classList.length) {
-    document.documentElement.removeAttribute("class");
-  }
-`;
-
 // Hides any image rendered by this component that is not
 // inside a <noscript> when JS is disabled.
 const noJsStyles = `
-  .no-js :not(noscript) > .frontity-lazy-image {
+  :not(noscript) > .frontity-lazy-image {
     display: none;
   }
 `;
 
 // Finds all the images rendered by this component and maps
 // their `data-src` and `data-srcset` attributes to `src` and `srcset`
-// when the browser doesn't support Proxy.
+// when the browser doesn't support Proxy or IntersectionObserver.
 const noProxyScript = `
-  if (typeof window !== "undefined" && !("Proxy" in window)) {
+  if (typeof window !== "undefined" && (!("Proxy" in window) || !("IntersectionObserver" in window))) {
     document.addEventListener("DOMContentLoaded", () => {
       const images = document.querySelectorAll("img.frontity-lazy-image");
       for (image of images) {
@@ -44,6 +36,7 @@ interface Props {
   className?: string;
   loading?: "auto" | "lazy" | "eager";
 }
+
 type Image = React.FC<Connect<Package, Props>>;
 
 interface Attributes extends Props {
@@ -54,14 +47,22 @@ interface Attributes extends Props {
 
 type NoScriptImage = React.FC<Attributes>;
 
-const NoScriptImage: NoScriptImage = props => {
-  const attributes = { ...props };
+interface ChangeAttributes {
+  (props: Attributes);
+}
 
+const changeAttributes: ChangeAttributes = attributes => {
   attributes.src = attributes["data-src"];
   attributes.srcSet = attributes["data-srcset"];
   delete attributes["data-src"];
   delete attributes["data-srcset"];
-  delete attributes.style;
+  delete attributes["style"];
+};
+
+const NoScriptImage: NoScriptImage = props => {
+  const attributes = { ...props };
+
+  changeAttributes(attributes);
 
   return (
     <noscript>
@@ -80,54 +81,42 @@ const Image: Image = ({ src, srcSet, alt, loading, className }) => {
     style: { visibility: "hidden" }
   };
 
-  if (typeof window !== "undefined" && "loading" in HTMLImageElement.prototype)
-    return <img {...attributes} />;
-
-  if (typeof window !== "undefined" && "IntersectionObserver" in window) {
-    const [onScreen, ref] = useInView({ onlyOnce: true });
-
-    if (onScreen) {
-      attributes.src = attributes["data-src"];
-      delete attributes["data-src"];
-      attributes.srcSet = attributes["data-srcset"];
-      delete attributes["data-srcset"];
-      delete attributes.style;
+  if (typeof window !== "undefined") {
+    if (typeof (HTMLImageElement as any).prototype.loading !== "undefined") {
+      changeAttributes(attributes);
+      return <img {...attributes} />;
     }
 
-    return (
-      <>
-        <NoScriptImage {...attributes} />
-        <img ref={ref} {...attributes} />
-      </>
-    );
+    if (typeof IntersectionObserver !== "undefined") {
+      const [onScreen, ref] = useInView({ onlyOnce: true });
+      if (onScreen) changeAttributes(attributes);
+      return (
+        <>
+          <NoScriptImage {...attributes} />
+          <img ref={ref} {...attributes} />
+        </>
+      );
+    }
   }
 
   return (
     <>
       <Head
-        htmlAttributes={{ class: "no-js" }}
         script={[
-          {
-            id: "frontity-no-js-images-script",
-            type: "text/javascript",
-            innerHTML: noJsScript
-          },
           {
             id: "frontity-no-proxy-images",
             type: "text/javascript",
             innerHTML: noProxyScript
           }
         ]}
-        style={[
+        noscript={[
           {
-            id: "frontity-no-js-images-styles",
-            type: "text/css",
-            cssText: noJsStyles
+            innerHTML: `<style id="frontity-no-js-images" type="text/css">${noJsStyles}</style>`
           }
         ]}
       />
       <NoScriptImage {...attributes} />
-      <img {...attributes} />
+      <img {...attributes} suppressHydrationWarning={true} />
     </>
   );
 };

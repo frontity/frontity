@@ -1,9 +1,14 @@
+/**
+ * @jest-environment node
+ */
+
 import React from "react";
 import TestRenderer from "react-test-renderer";
+import { Head } from "frontity";
 import Image from "../components/image";
 
 describe("Image", () => {
-  test("works just fine", () => {
+  test("works on server", () => {
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
@@ -12,7 +17,11 @@ describe("Image", () => {
       className: "fake-class-name"
     };
 
-    const result = TestRenderer.create(<Image {...props} />).toJSON();
-    expect(result).toMatchSnapshot();
+    const image = TestRenderer.create(<Image {...props} />).toJSON();
+    const head = Head.peek();
+
+    expect(image).toMatchSnapshot();
+    expect(head.script.toString()).toMatchSnapshot();
+    expect(head.noscript.toString()).toMatchSnapshot();
   });
 });

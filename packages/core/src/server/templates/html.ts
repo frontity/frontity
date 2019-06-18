@@ -10,6 +10,7 @@ const template: Template = ({ html, frontity, head }) => `<!doctype html>
         ${head.meta}
         ${head.link}
         ${head.script}
+        ${head.noscript}
         ${head.style}
         ${frontity.link}
         ${frontity.style}
