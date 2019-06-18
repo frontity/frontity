@@ -17,10 +17,13 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
     isList ? schemas.list : schemas.entity
   );
 
-  // add entities to source
+  // Add entities to source
   Object.entries(entities).forEach(([schema, entityMap]) => {
     Object.entries(entityMap).forEach(([, entity]) => {
+      // Fix links that come from the REST API
+      // to match the Frontity server location.
       transformLink({ entity, state, subdirectory });
+
       if (schema === "postType" || schema === "attachment") {
         if (state.source[entity.type])
           state.source[entity.type][entity.id] = entity;
@@ -33,15 +36,11 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
     });
   });
 
-  // type, id and link of added entities
-  const entityList = (isList ? result : [result]).map(
-    ({ id: entityId, schema }) => {
-      const { type, id, link } = entities[schema][entityId];
-      return { type, id, link };
-    }
-  );
-
-  return entityList;
+  // Return type, id and link of added entities
+  return (isList ? result : [result]).map(({ id: entityId, schema }) => {
+    const { type, id, link } = entities[schema][entityId];
+    return { type, id, link };
+  });
 };
 
 export default populate;
@@ -59,9 +58,9 @@ const transformLink = ({
   if (options.subdirectory) subdirectory = options.subdirectory;
 
   // get API subdirectory
-  const path = isWPCom
-    ? ""
-    : new URL(api).pathname.replace(/\/wp-json\/?$/, "/");
+  const path = !isWPCom
+    ? new URL(api).pathname.replace(/\/wp-json\/?$/, "/")
+    : "";
 
   // remove API subdirectory
   let { link } = entity;
