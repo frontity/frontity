@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Image It's a normal image if loading === "eager" 1`] = `
+<img
+  alt="Some fake alt text"
+  className="fake-class-name"
+  loading="eager"
+  src="https://fake-src.com/fake-image.jpg"
+  srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+/>
+`;
+
 exports[`Image works with \`IntersectionObserver\` 1`] = `
 Array [
   <noscript>

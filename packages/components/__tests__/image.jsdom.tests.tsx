@@ -19,6 +19,21 @@ describe("Image", () => {
     });
   });
 
+  test('It\'s a normal image if loading === "eager"', () => {
+    const loading: "lazy" | "eager" | "auto" = "eager";
+    const props = {
+      alt: "Some fake alt text",
+      src: "https://fake-src.com/fake-image.jpg",
+      srcSet:
+        "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
+      className: "fake-class-name",
+      loading
+    };
+
+    const result = TestRenderer.create(<Image {...props} />).toJSON();
+    expect(result).toMatchSnapshot();
+  });
+
   test("works with native lazy load", () => {
     const props = {
       alt: "Some fake alt text",

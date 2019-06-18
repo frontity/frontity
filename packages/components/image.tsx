@@ -70,13 +70,19 @@ const NoScriptImage: NoScriptImage = props => {
   );
 };
 
-const Image: Image = ({ src, srcSet, alt, loading, className }) => {
+const Image: Image = props => {
+  if (props.loading === "eager") {
+    return <img {...props} />;
+  }
+
   const attributes: Attributes = {
-    alt,
-    "data-src": src,
-    "data-srcset": srcSet,
-    className: "frontity-lazy-image".concat(className ? ` ${className}` : ""),
-    loading: loading || "auto",
+    alt: props.alt,
+    "data-src": props.src,
+    "data-srcset": props.srcSet,
+    className: "frontity-lazy-image".concat(
+      props.className ? ` ${props.className}` : ""
+    ),
+    loading: props.loading || "auto",
     style: { visibility: "hidden" }
   };
 
