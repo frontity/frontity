@@ -17,10 +17,7 @@
   "scripts": {
     "test:ci": "jest --passWithNoTests",
     "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
-    "dev": "ts-node src/index.ts",
-    "build": "tsc --project ./tsconfig.build.json",
-    "prepublish": "npm run build"
+    "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
   "publishConfig": {
     "access": "public"
