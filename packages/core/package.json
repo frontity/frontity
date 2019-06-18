@@ -63,6 +63,7 @@
     "minimist": "^1.2.0",
     "open": "^6.3.0",
     "promise-monofill": "^1.0.1",
+    "raw-loader": "^3.0.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "require-from-string": "^2.0.2",

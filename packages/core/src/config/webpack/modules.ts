@@ -59,6 +59,10 @@ export default ({
             }
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: "raw-loader"
       }
     ]
   };
