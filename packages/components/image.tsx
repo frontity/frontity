@@ -1,6 +1,5 @@
 import React from "react";
-import { connect, Head } from "frontity";
-import { Connect, Package } from "frontity/types";
+import { Head } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
 
 // Hides any image rendered by this component that is not
@@ -38,7 +37,7 @@ interface Props {
   loading?: "auto" | "lazy" | "eager";
 }
 
-type Image = React.FC<Connect<Package, Props>>;
+type Image = React.FC<Props>;
 
 interface Attributes extends Props {
   "data-src"?: string;
@@ -49,7 +48,7 @@ interface Attributes extends Props {
 type NoScriptImage = React.FC<Attributes>;
 
 interface ChangeAttributes {
-  (props: Attributes);
+  (attributes: Attributes);
 }
 
 const changeAttributes: ChangeAttributes = attributes => {
@@ -71,10 +70,6 @@ const NoScriptImage: NoScriptImage = props => {
 };
 
 const Image: Image = props => {
-  if (props.loading === "eager") {
-    return <img {...props} />;
-  }
-
   const attributes: Attributes = {
     alt: props.alt,
     "data-src": props.src,
@@ -85,6 +80,11 @@ const Image: Image = props => {
     loading: props.loading || "auto",
     style: { visibility: "hidden" }
   };
+
+  if (props.loading === "eager") {
+    changeAttributes(attributes);
+    return <img {...attributes} />;
+  }
 
   if (typeof window !== "undefined") {
     if (typeof (HTMLImageElement as any).prototype.loading !== "undefined") {
@@ -126,4 +126,4 @@ const Image: Image = props => {
   );
 };
 
-export default connect(Image);
+export default Image;

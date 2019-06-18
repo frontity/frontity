@@ -32,16 +32,15 @@ let observer: IntersectionObserver;
 // `setIntersected` function for each changed entry.
 let createCallback: IntersectionObserverCallbackCreator = options => {
   return entries => {
-    const changed = entries.filter(entry => entry.isIntersecting);
-    changed.forEach(entry => {
+    entries.forEach(entry => {
       const setFunction = setFunctions.find(
         set => set[1].current === entry.target
       );
 
       // This is the `setIntersected` function.
-      setFunction[0](true);
+      setFunction[0](entry.isIntersecting);
 
-      if (options.onlyOnce) {
+      if (entry.isIntersecting && options.onlyOnce) {
         observer.unobserve(entry.target);
         setFunctions.splice(setFunctions.indexOf(setFunction), 1);
       }
@@ -50,7 +49,7 @@ let createCallback: IntersectionObserverCallbackCreator = options => {
 };
 
 const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
-  const [hasIntersected, setIntersected] = useState(false);
+  const [isIntersecting, setIntersecting] = useState(false);
   const ref = useRef();
 
   if (!observer)
@@ -60,7 +59,7 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
 
   useEffect(() => {
     if (ref.current) {
-      setFunctions.push([setIntersected, ref]);
+      setFunctions.push([setIntersecting, ref]);
       observer.observe(ref.current);
     }
 
@@ -73,7 +72,7 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
     };
   }, []);
 
-  return [hasIntersected, ref];
+  return [isIntersecting, ref];
 };
 
 export default useInView;
