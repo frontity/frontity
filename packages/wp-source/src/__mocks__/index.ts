@@ -20,7 +20,7 @@ const wpSource = (): WpSource => ({
       author: {},
       attachment: {},
       api: "https://test.frontity.io",
-      isWPCom: () => false,
+      isWpCom: () => false,
       subdirectory: "",
       homepage: "",
       postsPage: "",

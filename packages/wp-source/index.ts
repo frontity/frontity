@@ -21,7 +21,7 @@ interface WpSource extends Source {
   state: {
     source: Source<WpSource>["state"]["source"] & {
       api: string;
-      isWPCom: Derived<WpSource, boolean>;
+      isWpCom: Derived<WpSource, boolean>;
       subdirectory: string;
       categoryBase: string;
       tagBase: string;

@@ -44,11 +44,11 @@ const actions: WpSource["actions"]["source"] = {
   },
 
   init: ({ state, libraries }) => {
-    const { api, isWPCom } = state.source;
+    const { api, isWpCom } = state.source;
 
-    libraries.source.api.init({ api, isWPCom });
+    libraries.source.api.init({ api, isWpCom });
 
-    const patterns = isWPCom ? wpCom : wpOrg;
+    const patterns = isWpCom ? wpCom : wpOrg;
     patterns.forEach(({ pattern, handler }) =>
       libraries.source.resolver.addHandler({ pattern, handler })
     );

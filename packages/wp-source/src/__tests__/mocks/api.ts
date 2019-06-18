@@ -11,7 +11,7 @@ export const mockGet = mockFn<Api["get"]>();
 const mock = jest.fn<Api, []>().mockImplementation(() => {
   return {
     api: "https://test.frontity.io",
-    isWPCom: false,
+    isWpCom: false,
     init: mockInit,
     get: mockGet,
     getIdBySlug: mockGetIdBySlug

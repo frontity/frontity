@@ -2,14 +2,14 @@ import fetch from "cross-fetch";
 
 class Api {
   api = "";
-  isWPCom = false;
+  isWpCom = false;
 
   init(
     this: Api,
-    { api, isWPCom = false }: { api: string; isWPCom?: boolean }
+    { api, isWpCom = false }: { api: string; isWpCom?: boolean }
   ) {
     this.api = api;
-    this.isWPCom = isWPCom;
+    this.isWpCom = isWpCom;
   }
 
   get(
@@ -18,12 +18,12 @@ class Api {
       endpoint,
       params,
       api = this.api,
-      isWPCom = this.isWPCom
+      isWpCom = this.isWpCom
     }: {
       endpoint: string;
       params?: { [param: string]: any };
       api?: string;
-      isWPCom?: boolean;
+      isWpCom?: boolean;
     }
   ): Promise<Response> {
     // Ensure there is a final slash
@@ -32,7 +32,7 @@ class Api {
     // Add the REST path depending on whether it should start
     // with "/wp/v2" or not
     const requestUrl =
-      isWPCom || endpoint.startsWith("/")
+      isWpCom || endpoint.startsWith("/")
         ? `${baseUrl}${endpoint.replace(/^\//, "")}`
         : `${baseUrl}wp/v2/${endpoint}`;
 

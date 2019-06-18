@@ -54,11 +54,11 @@ const transformLink = ({
   state: State<WpSource>;
   subdirectory?: string;
 }) => {
-  let { isWPCom, api, subdirectory } = state.source;
+  let { isWpCom, api, subdirectory } = state.source;
   if (options.subdirectory) subdirectory = options.subdirectory;
 
   // get API subdirectory
-  const path = !isWPCom
+  const path = !isWpCom
     ? new URL(api).pathname.replace(/\/wp-json\/?$/, "/")
     : "";
 

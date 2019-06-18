@@ -52,7 +52,7 @@ describe("api", () => {
     api.get({
       api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
       endpoint: "posts",
-      isWPCom: true
+      isWpCom: true
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts"
@@ -61,13 +61,13 @@ describe("api", () => {
 
   test("get from WP.com with params", () => {
     const endpoint = "posts";
-    const isWPCom = true;
+    const isWpCom = true;
     const params = { _embed: true, include: "12,13,14" };
     api.get({
       endpoint,
       params,
       api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/",
-      isWPCom
+      isWpCom
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts?_embed=true&include=12,13,14"
@@ -77,7 +77,7 @@ describe("api", () => {
   test("get from api specified with the init function", () => {
     api.init({
       api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
-      isWPCom: true
+      isWpCom: true
     });
     api.get({
       endpoint: "posts"
