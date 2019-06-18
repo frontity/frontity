@@ -1,7 +1,6 @@
 import { createStore, observe } from "@frontity/connect";
 import wpSource from "../";
 import actions from "../actions";
-import { wpOrg, wpCom } from "../libraries/patterns";
 
 jest.mock("../");
 

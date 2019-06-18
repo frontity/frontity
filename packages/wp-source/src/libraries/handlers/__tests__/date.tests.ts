@@ -5,9 +5,9 @@ import WpSource from "../../../..";
 import populate from "../../populate";
 import handler from "../date";
 import { mockResponse, expectEntities } from "./mocks/helpers";
-import posts2016 from "./mocks/posts2016.json";
-import posts2016p2 from "./mocks/posts2016p2.json";
-import posts20161025 from "./mocks/posts2016-10-25.json";
+import posts2016 from "./mocks/posts-2016.json";
+import posts2016p2 from "./mocks/posts-2016-page-2.json";
+import posts20161025 from "./mocks/posts-2016-10-25.json";
 
 import wpSource from "../../../";
 jest.mock("../../../");

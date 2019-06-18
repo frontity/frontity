@@ -5,7 +5,7 @@ import WpSource from "../../../..";
 import populate from "../../populate";
 import handler from "../category";
 import { mockResponse, expectEntities } from "./mocks/helpers";
-import posts from "./mocks/postsCat7.json";
+import posts from "./mocks/posts-cat-7.json";
 
 import wpSource from "../../../";
 jest.mock("../../../");
