@@ -16,9 +16,10 @@ const noJsStyles = `
 // when the browser doesn't support Proxy or IntersectionObserver.
 const noProxyScript = `
   if (typeof window !== "undefined" && (!("Proxy" in window) || !("IntersectionObserver" in window))) {
-    document.addEventListener("DOMContentLoaded", () => {
-      const images = document.querySelectorAll("img.frontity-lazy-image");
-      for (image of images) {
+    document.addEventListener("DOMContentLoaded", function() {
+      var images = document.querySelectorAll("img.frontity-lazy-image");
+      for (i = 0; i < images.length; ++i) {
+        var image = images[i];
         image.setAttribute("src", image.getAttribute("data-src"));
         image.setAttribute("srcset", image.getAttribute("data-srcset"));
         image.removeAttribute("data-src");
