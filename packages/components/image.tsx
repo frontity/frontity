@@ -1,7 +1,7 @@
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect, Package } from "frontity/types";
-import useInView from "../hooks/in-view";
+import useInView from "@frontity/hooks/use-in-view";
 
 // Hides any image rendered by this component that is not
 // inside a <noscript> when JS is disabled.
@@ -61,9 +61,7 @@ const changeAttributes: ChangeAttributes = attributes => {
 
 const NoScriptImage: NoScriptImage = props => {
   const attributes = { ...props };
-
   changeAttributes(attributes);
-
   return (
     <noscript>
       <img {...attributes} />

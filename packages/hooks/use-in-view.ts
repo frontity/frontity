@@ -30,7 +30,7 @@ let observer: IntersectionObserver;
 // This callback can be called with more than one entry,
 // so we need to filter them and call the corresponding
 // `setIntersected` function for each changed entry.
-let callbackCreator: IntersectionObserverCallbackCreator = options => {
+let createCallback: IntersectionObserverCallbackCreator = options => {
   return entries => {
     const changed = entries.filter(entry => entry.isIntersecting);
     changed.forEach(entry => {
@@ -54,7 +54,7 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
   const ref = useRef();
 
   if (!observer)
-    observer = new IntersectionObserver(callbackCreator({ onlyOnce }), {
+    observer = new IntersectionObserver(createCallback({ onlyOnce }), {
       rootMargin
     });
 

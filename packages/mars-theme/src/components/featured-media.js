@@ -1,6 +1,6 @@
 import React from "react";
 import { connect, styled } from "frontity";
-import Image from "@frontity/components/src/components/image.tsx";
+import Image from "@frontity/components/image";
 
 const FeaturedMedia = ({ state, id }) => {
   const media = state.source.attachment[id];

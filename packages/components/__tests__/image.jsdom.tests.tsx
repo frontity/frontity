@@ -5,7 +5,7 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { Head } from "frontity";
-import Image from "../components/image";
+import Image from "../image";
 
 describe("Image", () => {
   beforeEach(() => {
