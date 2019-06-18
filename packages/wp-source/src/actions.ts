@@ -64,8 +64,6 @@ const actions: WpSource["actions"]["source"] = {
       tagBase
     } = state.source;
 
-    console.log(subdirectory);
-
     if (homepage) {
       const pattern = concatPath(subdirectory);
       resolver.addRedirect({ pattern, redirect: () => concatPath(homepage) });
@@ -107,7 +105,6 @@ const actions: WpSource["actions"]["source"] = {
     if (subdirectory) {
       // add new direction
       const pattern = concatPath(subdirectory, "/:subpath*");
-      console.log(pattern);
       resolver.addRedirect({
         pattern,
         redirect: ({ subpath = "" }) => `/${subpath}`

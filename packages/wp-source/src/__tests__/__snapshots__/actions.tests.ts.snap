@@ -33,3 +33,40 @@ Object {
   },
 }
 `;
+
+exports[`init should add redirect if 'subirectory' is present 1`] = `
+Array [
+  Object {
+    "pattern": "/blog/",
+    "result": "/about-us/",
+  },
+  Object {
+    "pattern": "/blog/all-posts/",
+    "result": "/",
+  },
+  Object {
+    "pattern": "/blog/wp-cat/:subpath+/",
+    "result": "/category/subpath",
+  },
+  Object {
+    "pattern": "/blog/category/(.*)/",
+    "result": "",
+  },
+  Object {
+    "pattern": "/blog/wp-tag/:subpath+/",
+    "result": "/tag/subpath",
+  },
+  Object {
+    "pattern": "/blog/tag/(.*)/",
+    "result": "",
+  },
+  Object {
+    "pattern": "/blog/:subpath*/",
+    "result": "/subpath",
+  },
+  Object {
+    "pattern": "/(.*)",
+    "result": "",
+  },
+]
+`;
