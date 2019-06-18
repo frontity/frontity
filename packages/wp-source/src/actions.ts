@@ -79,7 +79,7 @@ const actions: WpSource["actions"]["source"] = {
       const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
       resolver.addRedirect({
         pattern,
-        redirect: ({ subpath }) => `/category/${subpath}`
+        redirect: ({ subpath }) => `/category/${subpath}/`
       });
       // remove old direction
       resolver.addRedirect({
@@ -93,7 +93,7 @@ const actions: WpSource["actions"]["source"] = {
       const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
       resolver.addRedirect({
         pattern,
-        redirect: ({ subpath }) => `/tag/${subpath}`
+        redirect: ({ subpath }) => `/tag/${subpath}/`
       });
       // remove old direction
       resolver.addRedirect({
@@ -107,7 +107,7 @@ const actions: WpSource["actions"]["source"] = {
       const pattern = concatPath(subdirectory, "/:subpath*");
       resolver.addRedirect({
         pattern,
-        redirect: ({ subpath = "" }) => `/${subpath}`
+        redirect: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
       });
       // remove old direction
       resolver.addRedirect({ pattern: "/(.*)", redirect: () => "" });

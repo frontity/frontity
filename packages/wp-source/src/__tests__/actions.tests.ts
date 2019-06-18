@@ -120,7 +120,7 @@ describe("init", () => {
 
     expect(newBase.pattern).toBe("/wp-cat/:subpath+/");
     expect(newBase.redirect({ subpath: "some-cat" })).toBe(
-      "/category/some-cat"
+      "/category/some-cat/"
     );
 
     expect(oldBase.pattern).toBe("/category/(.*)/");
@@ -138,7 +138,7 @@ describe("init", () => {
     const [[newBase], [oldBase]] = addRedirect.mock.calls;
 
     expect(newBase.pattern).toBe("/wp-tag/:subpath+/");
-    expect(newBase.redirect({ subpath: "some-tag" })).toBe("/tag/some-tag");
+    expect(newBase.redirect({ subpath: "some-tag" })).toBe("/tag/some-tag/");
 
     expect(oldBase.pattern).toBe("/tag/(.*)/");
     expect(oldBase.redirect()).toBe("");
