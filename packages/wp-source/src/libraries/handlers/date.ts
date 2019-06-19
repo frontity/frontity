@@ -2,7 +2,8 @@ import { Handler } from "../../../";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
-const dateHandler: Handler = async (source, { route, params, libraries }) => {
+const dateHandler: Handler = async ({ route, params, state, libraries }) => {
+  const { source } = state;
   const { api, populate, parse } = libraries.source;
   const { page, query } = parse(route);
 
@@ -38,7 +39,7 @@ const dateHandler: Handler = async (source, { route, params, libraries }) => {
   if (page > totalPages) throw new Error("Page doesn't exist.");
 
   // 4. populate response and add page to data
-  const items = await populate(source, response);
+  const items = await populate({ response, state });
 
   // 5. add data to source
   Object.assign(source.data[route], {

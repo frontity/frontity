@@ -1,10 +1,9 @@
-import Theme from "./components/theme";
-import processors from "./processors";
+import Theme from "./components";
+import image from "@frontity/html2react/processors/image";
 
 const before = ({ libraries }) => {
-  libraries.html2react.processors = libraries.html2react.processors.concat(
-    processors
-  );
+  // We use html2react to process the <img> tags inside the content HTML.
+  libraries.html2react.processors.push(image);
 };
 
 const marsTheme = {

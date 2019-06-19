@@ -15,7 +15,15 @@ const state: WpSource["state"]["source"] = {
   author: {},
   attachment: {},
   api: "https://test.frontity.io",
-  isWPCom: false
+  isWpCom: ({ state }) =>
+    state.source.api.startsWith(
+      "https://public-api.wordpress.com/wp/v2/sites/"
+    ),
+  subdirectory: "",
+  homepage: "",
+  postsPage: "",
+  categoryBase: "",
+  tagBase: ""
 };
 
 export default state;

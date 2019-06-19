@@ -6,66 +6,92 @@ import {
   date,
   post,
   attachment,
-  page,
   postType
 } from "../handlers";
 
 export default [
   {
+    name: "post archive",
+    priority: 10,
     pattern: "/",
-    handler: postArchive
+    func: postArchive
   },
   {
+    name: "category",
+    priority: 20,
     pattern: "/category/:slug",
-    handler: category
+    func: category
   },
   {
+    name: "subcategory",
+    priority: 20,
     pattern: "/category/(.*)/:slug", // subcategories
-    handler: category
+    func: category
   },
   {
+    name: "tag",
+    priority: 20,
     pattern: "/tag/:slug",
-    handler: tag
+    func: tag
   },
   {
+    name: "author",
+    priority: 20,
     pattern: "/author/:slug",
-    handler: author
+    func: author
   },
   {
+    name: "date",
+    priority: 20,
     pattern: "/:year(\\d+)/:month(\\d+)?/:day(\\d+)?",
-    handler: date
+    func: date
   },
-  // plain (NOT SUPPORTED YET)
   {
+    name: "post by day",
+    priority: 30,
     pattern: "/:year(\\d+)/:month(\\d+)/:day(\\d+)/:slug", // day & name
-    handler: post
+    func: post
   },
   {
+    name: "post by month",
+    priority: 40,
     pattern: "/:year(\\d+)/:month(\\d+)/:slug", // month & name
-    handler: post
+    func: post
   },
   {
+    name: "post by id",
+    priority: 50,
     pattern: "/archives/:id", // numeric
-    handler: post
+    func: post
   },
   {
+    name: "attachment from post by day",
+    priority: 60,
     pattern: "/:year(\\d+)/:month(\\d+)/:day(\\d+)/:postSlug/:slug", // day & name
-    handler: attachment
+    func: attachment
   },
   {
+    name: "attachment from post by month",
+    priority: 70,
     pattern: "/:year(\\d+)/:month(\\d+)/:postSlug/:slug", // month & name
-    handler: attachment
+    func: attachment
   },
   {
+    name: "attachment from post by id",
+    priority: 80,
     pattern: "/archives/:postId/:slug", // numeric
-    handler: attachment
+    func: attachment
   },
   {
+    name: "post type",
+    priority: 90,
     pattern: "/:slug", // post or page or attachment
-    handler: postType
+    func: postType
   },
   {
+    name: "sub post type",
+    priority: 90,
     pattern: "/(.*)/:slug", // page or attachment
-    handler: postType
+    func: postType
   }
 ];

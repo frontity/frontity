@@ -29,6 +29,7 @@ export type PackageJson = {
     build: string;
     serve: string;
   };
+  prettier: object;
   dependencies: {
     [key: string]: string;
   };

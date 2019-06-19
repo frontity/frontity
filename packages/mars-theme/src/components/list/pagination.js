@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "frontity";
+import { connect, styled } from "frontity";
 import Link from "../link";
 
 const Pagination = ({ state, actions, libraries }) => {
@@ -30,13 +30,13 @@ const Pagination = ({ state, actions, libraries }) => {
     <div>
       {isThereNextPage && (
         <Link link={nextPageLink}>
-          <em>← Older posts</em>
+          <Text>← Older posts</Text>
         </Link>
       )}
       {isTherePreviousPage && isThereNextPage && " - "}
       {isTherePreviousPage && (
         <Link link={prevPageLink}>
-          <em>Newer posts →</em>
+          <Text>Newer posts →</Text>
         </Link>
       )}
     </div>
@@ -44,3 +44,8 @@ const Pagination = ({ state, actions, libraries }) => {
 };
 
 export default connect(Pagination);
+
+const Text = styled.em`
+  display: inline-block;
+  margin-top: 16px;
+`;

@@ -1,7 +1,8 @@
 import { Handler } from "../../..";
 import getIdBySlug from "./utils/get-id-by-slug";
 
-const postHandler: Handler = async (source, { route, params, libraries }) => {
+const postHandler: Handler = async ({ route, params, state, libraries }) => {
+  const { source } = state;
   const { api, populate } = libraries.source;
 
   const { slug } = params;
@@ -14,7 +15,7 @@ const postHandler: Handler = async (source, { route, params, libraries }) => {
       params: { slug, _embed: true }
     });
 
-    const populated = await populate(source, response);
+    const populated = await populate({ response, state });
 
     if (!populated.length)
       throw new Error(`Post with slug "${slug}" not found.`);

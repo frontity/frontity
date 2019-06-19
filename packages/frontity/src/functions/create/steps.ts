@@ -66,7 +66,8 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
     "frontity",
     "@frontity/core",
     "@frontity/wp-source",
-    "@frontity/tiny-router"
+    "@frontity/tiny-router",
+    "@frontity/html2react"
   ];
 
   // Add Frontity packages to the dependencies.
@@ -98,6 +99,7 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
       build: "frontity build",
       serve: "frontity serve"
     },
+    prettier: {},
     dependencies
   };
   const filePath = resolvePath(path, "package.json");
@@ -120,7 +122,6 @@ export const createFrontitySettings = async (
       }
     },
     packages: [
-      "@frontity/tiny-router",
       {
         name: "@frontity/mars-theme",
         state: {
@@ -146,7 +147,9 @@ export const createFrontitySettings = async (
             api: "https://test.frontity.io/wp-json"
           }
         }
-      }
+      },
+      "@frontity/tiny-router",
+      "@frontity/html2react"
     ]
   };
   const fileTemplate = await readFile(

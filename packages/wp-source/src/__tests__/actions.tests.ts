@@ -5,10 +5,10 @@ import actions from "../actions";
 jest.mock("../");
 
 let handler: jest.Mock;
-const initStore = (data = {}) => {
-  handler = jest.fn(async (source, { route }) => {
+const initStore = () => {
+  handler = jest.fn(async ({ route, state }) => {
     await Promise.resolve();
-    Object.assign(source.data[route], {
+    Object.assign(state.source.data[route], {
       type: "example",
       id: 1,
       isPostType: true,
@@ -17,14 +17,19 @@ const initStore = (data = {}) => {
     });
   });
   const config = wpSource();
-  // replace data by the one passed as argument
-  config.state.source.data = data;
+
+  // add a handler for tests
+  config.libraries.source.handlers.push({
+    name: "always",
+    priority: 0,
+    pattern: "/(.*)",
+    func: handler
+  });
+
   // replace the mocked fetch by the real one we want to test
   config.actions.source.fetch = actions.fetch;
-  // modify "resolver.match" implementation
-  config.libraries.source.resolver.match = jest
-    .fn()
-    .mockReturnValue({ handler, params: {} });
+  // replace the mocked init by the real one we want to test
+  config.actions.source.init = actions.init;
   return createStore(config);
 };
 
@@ -37,15 +42,15 @@ describe("fetch", () => {
   });
 
   test("does nothing if data exists", async () => {
-    const store = initStore({
-      "/some/route/": {
-        type: "example",
-        id: 1,
-        isPostType: true,
-        isFetching: false,
-        isReady: true
-      }
-    });
+    const store = initStore();
+    store.state.source.data["/some/route/"] = {
+      type: "example",
+      id: 1,
+      isPostType: true,
+      isFetching: false,
+      isReady: true
+    };
+
     await store.actions.source.fetch("/some/route/");
     expect(handler).not.toBeCalled();
     expect(store.state.source.data).toMatchSnapshot();
@@ -76,5 +81,46 @@ describe("fetch", () => {
       const { isFetching } = state.source.get("/");
       if (!isFetching) done();
     });
+  });
+});
+
+describe("init", () => {
+  test("should add redirect for the specified homepage", async () => {
+    const store = initStore();
+    store.state.source.homepage = "/about-us/";
+    await store.actions.source.init();
+    expect(store.libraries.source.redirections).toMatchSnapshot();
+  });
+
+  test("should add redirect for the specified posts page", async () => {
+    const store = initStore();
+    store.state.source.postsPage = "/all-posts/";
+    await store.actions.source.init();
+    expect(store.libraries.source.redirections).toMatchSnapshot();
+  });
+
+  test("should add redirect for categories if 'categoryBase' is set", async () => {
+    const store = initStore();
+    store.state.source.categoryBase = "wp-cat";
+    await store.actions.source.init();
+    expect(store.libraries.source.redirections).toMatchSnapshot();
+  });
+
+  test("should add redirect for tags if 'tagBase' is set", async () => {
+    const store = initStore();
+    store.state.source.tagBase = "wp-tag";
+    await store.actions.source.init();
+    expect(store.libraries.source.redirections).toMatchSnapshot();
+  });
+
+  test("should add redirect if 'subirectory' is present", async () => {
+    const store = initStore();
+    store.state.source.homepage = "/about-us/";
+    store.state.source.postsPage = "/all-posts/";
+    store.state.source.categoryBase = "wp-cat";
+    store.state.source.tagBase = "wp-tag";
+    store.state.source.subdirectory = "blog";
+    await store.actions.source.init();
+    expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 });
