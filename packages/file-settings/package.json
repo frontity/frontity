@@ -26,7 +26,6 @@
     "test:ci": "jest",
     "test": "jest --watch",
     "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand",
-    "dev": "ts-node src/index.ts",
     "build": "tsc --project ./tsconfig.build.json",
     "prepublish": "npm run build"
   },
@@ -39,7 +38,6 @@
     "@types/ramda": "^0.26.6",
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
-    "ts-node": "^8.0.3",
     "typescript": "^3.4.5"
   }
 }

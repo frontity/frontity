@@ -26,6 +26,7 @@
     "frontity": "^1.0.1"
   },
   "dependencies": {
+    "@frontity/components": "^1.0.0",
     "react-spinners": "^0.5.4"
   }
 }

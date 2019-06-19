@@ -1,10 +1,9 @@
 {
-  "name": "@frontity/html2react",
+  "name": "@frontity/components",
   "version": "1.0.0",
-  "description": "HTML to React converter for »Frontity",
+  "description": "Collection of React components for »Frontity",
   "keywords": [
-    "frontity",
-    "frontity-package"
+    "frontity"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
@@ -24,16 +23,14 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/he": "^1.1.0",
     "@types/react-test-renderer": "^16.8.1",
     "frontity": "^1.0.1",
     "jest": "^24.7.1",
     "react-test-renderer": "^16.8.6",
-    "ts-jest": "^24.0.2"
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
   },
   "dependencies": {
-    "@frontity/components": "^1.0.0",
-    "he": "^1.2.0",
-    "himalaya": "^1.1.0"
+    "@frontity/hooks": "^1.0.0"
   }
 }

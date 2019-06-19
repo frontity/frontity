@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image It's a normal image if loading === "eager" 1`] = `
+<img
+  alt="Some fake alt text"
+  className="frontity-lazy-image fake-class-name"
+  loading="eager"
+  src="https://fake-src.com/fake-image.jpg"
+  srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+/>
+`;
+
+exports[`Image works on server 1`] = `
+Array [
+  <noscript>
+    <img
+      alt="Some fake alt text"
+      className="frontity-lazy-image fake-class-name"
+      loading="auto"
+      src="https://fake-src.com/fake-image.jpg"
+      srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    />
+  </noscript>,
+  <img
+    alt="Some fake alt text"
+    className="frontity-lazy-image fake-class-name"
+    data-src="https://fake-src.com/fake-image.jpg"
+    data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    loading="auto"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+    suppressHydrationWarning={true}
+  />,
+]
+`;
+
+exports[`Image works on server 2`] = `
+"<script data-react-helmet=\\"true\\" id=\\"frontity-no-proxy-images\\" type=\\"text/javascript\\">
+  if (typeof window !== \\"undefined\\" && (!(\\"Proxy\\" in window) || !(\\"IntersectionObserver\\" in window))) {
+    document.addEventListener(\\"DOMContentLoaded\\", function() {
+      var images = document.querySelectorAll(\\"img.frontity-lazy-image\\");
+      for (i = 0; i < images.length; ++i) {
+        var image = images[i];
+        image.setAttribute(\\"src\\", image.getAttribute(\\"data-src\\"));
+        image.setAttribute(\\"srcset\\", image.getAttribute(\\"data-srcset\\"));
+        image.removeAttribute(\\"data-src\\");
+        image.removeAttribute(\\"data-srcset\\");
+        image.removeAttribute(\\"style\\");
+      }
+    });
+  }
+</script>"
+`;
+
+exports[`Image works on server 3`] = `
+"<noscript data-react-helmet=\\"true\\" ><style id=\\"frontity-no-js-images\\" type=\\"text/css\\">
+  :not(noscript) > .frontity-lazy-image {
+    display: none;
+  }
+</style></noscript>"
+`;
