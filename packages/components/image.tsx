@@ -32,6 +32,7 @@ const noProxyScript = `
 interface Props {
   src?: string;
   srcSet?: string;
+  sizes?: string;
   alt?: string;
   className?: string;
   loading?: "auto" | "lazy" | "eager";
@@ -74,6 +75,7 @@ const Image: Image = props => {
     alt: props.alt,
     "data-src": props.src,
     "data-srcset": props.srcSet,
+    sizes: props.sizes,
     className: "frontity-lazy-image".concat(
       props.className ? ` ${props.className}` : ""
     ),

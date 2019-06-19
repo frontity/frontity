@@ -32,6 +32,7 @@
     "ts-jest": "^24.0.2"
   },
   "dependencies": {
+    "@frontity/components": "^1.0.0",
     "he": "^1.2.0",
     "himalaya": "^1.1.0"
   }
