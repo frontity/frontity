@@ -14,7 +14,7 @@ const Nav = ({ state }) => (
 
 export default connect(Nav);
 
-const Container = styled.ul`
+const Container = styled.nav`
   list-style: none;
   display: flex;
   width: 848px;
@@ -25,7 +25,7 @@ const Container = styled.ul`
   overflow-x: auto;
 `;
 
-const Item = styled.li`
+const Item = styled.div`
   padding: 0;
   margin: 0 16px;
   color: #fff;

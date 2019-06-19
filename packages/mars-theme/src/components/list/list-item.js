@@ -8,50 +8,52 @@ const Item = ({ state, item }) => {
   const date = new Date(item.date);
 
   return (
-    <Container>
+    <article>
       <Link link={item.link}>
         <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
       </Link>
-      <Link link={author.link}>
-        <Author>
-          By <b>{author.name}</b>
-        </Author>
-      </Link>
-      <Fecha>
-        {" "}
-        on <b>{date.toDateString()}</b>
-      </Fecha>
+      <div>
+        <StyledLink link={author.link}>
+          <Author>
+            By <b>{author.name}</b>
+          </Author>
+        </StyledLink>
+        <Fecha>
+          {" "}
+          on <b>{date.toDateString()}</b>
+        </Fecha>
+      </div>
       {state.theme.featured.showOnList && (
         <FeaturedMedia id={item.featured_media} />
       )}
       <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
-    </Container>
+    </article>
   );
 };
 
 export default connect(Item);
 
-const Container = styled.li`
-  margin-bottom: 24px;
-`;
-
 const Title = styled.h1`
+  font-size: 2rem;
   color: rgba(12, 17, 43);
   margin: 0;
-  margin-top: 24px;
-  margin-bottom: 8px;
+  padding-top: 24px;
+  padding-bottom: 8px;
+  box-sizing: border-box;
 `;
 
-const Author = styled.p`
+const Author = styled.span`
   color: rgba(12, 17, 43, 0.9);
   font-size: 0.9em;
-  display: inline;
 `;
 
-const Fecha = styled.p`
+const StyledLink = styled(Link)`
+  padding: 15px 0;
+`;
+
+const Fecha = styled.span`
   color: rgba(12, 17, 43, 0.9);
   font-size: 0.9em;
-  display: inline;
 `;
 
 const Excerpt = styled.div`
