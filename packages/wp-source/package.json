@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-source",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Source package of Frontity for self-hosted WordPress and WordPress.com sites",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -24,10 +24,10 @@
     "access": "public"
   },
   "devDependencies": {
-    "@frontity/connect": "^1.0.0",
-    "@frontity/source": "^1.0.2",
+    "@frontity/connect": "^1.0.1",
+    "@frontity/source": "^1.0.3",
     "@types/jest": "^24.0.11",
-    "frontity": "^1.0.1",
+    "frontity": "^1.0.2",
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.5"

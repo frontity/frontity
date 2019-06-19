@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/frontity/frontity/compare/@frontity/core@1.0.1...@frontity/core@1.1.0) (2019-06-19)
+
+
+### Bug Fixes
+
+* **connect:** add babel-polyfill to the es5 bundles ([9ee75fb](https://github.com/frontity/frontity/commit/9ee75fb))
+* **core:** fix cert import when using https mode ([ea2ad4e](https://github.com/frontity/frontity/commit/ea2ad4e))
+* **core:** fixes webpack MultiCompiler types ([ffaf853](https://github.com/frontity/frontity/commit/ffaf853))
+
+
+### Features
+
+* **core:** add HMR to the Connect store ([bde0186](https://github.com/frontity/frontity/commit/bde0186))
+* **core:** open browser in "frontity dev" command ([f81d054](https://github.com/frontity/frontity/commit/f81d054))
+* **packages:** creates packages @frontity/components, @frontity/hooks, and adds image processor to @frontity/html2react ([#130](https://github.com/frontity/frontity/issues/130)) ([6af4aa1](https://github.com/frontity/frontity/commit/6af4aa1))
+* **webpack:** use raw-loader to import css files ([#133](https://github.com/frontity/frontity/issues/133)) ([5c5f7dd](https://github.com/frontity/frontity/commit/5c5f7dd))
+
+
+
+
+
 ## [1.0.1](https://github.com/frontity/frontity/compare/@frontity/core@1.0.0...@frontity/core@1.0.1) (2019-06-05)
 
 

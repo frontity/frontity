@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/frontity/frontity/compare/@frontity/connect@1.0.0...@frontity/connect@1.0.1) (2019-06-19)
+
+
+### Bug Fixes
+
+* **connect:** only run batchMethods if Proxy exists ([fa07e8e](https://github.com/frontity/frontity/commit/fa07e8e))
+
+
+
+
+
 # [1.0.0](https://github.com/frontity/frontity/compare/@frontity/connect@0.1.4...@frontity/connect@1.0.0) (2019-06-05)
 
 

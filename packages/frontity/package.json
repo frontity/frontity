@@ -1,6 +1,6 @@
 {
   "name": "frontity",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Frontity cli and entry point to other packages",
   "keywords": [
     "frontity",
@@ -35,7 +35,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.11",
-    "@frontity/connect": "^1.0.0",
+    "@frontity/connect": "^1.0.1",
     "@frontity/types": "^1.0.1",
     "@loadable/component": "^5.10.1",
     "chalk": "^2.4.2",
@@ -51,7 +51,7 @@
     "typescript": "^3.4.5"
   },
   "devDependencies": {
-    "@frontity/core": "^1.0.1",
+    "@frontity/core": "^1.1.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
     "@types/jest": "^24.0.11",

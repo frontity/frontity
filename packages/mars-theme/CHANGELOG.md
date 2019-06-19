@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/frontity/frontity/compare/@frontity/mars-theme@1.0.3...@frontity/mars-theme@1.1.0) (2019-06-19)
+
+
+### Bug Fixes
+
+* **source-get:** make isFetching and isReady properties to be always present ([#122](https://github.com/frontity/frontity/issues/122)) ([6d2e485](https://github.com/frontity/frontity/commit/6d2e485))
+
+
+### Features
+
+* **html2react:** first implementation of Html2React ([#116](https://github.com/frontity/frontity/issues/116)) ([aa2b6f6](https://github.com/frontity/frontity/commit/aa2b6f6))
+* **packages:** creates packages @frontity/components, @frontity/hooks, and adds image processor to @frontity/html2react ([#130](https://github.com/frontity/frontity/issues/130)) ([6af4aa1](https://github.com/frontity/frontity/commit/6af4aa1))
+
+
+
+
+
 ## [1.0.3](https://github.com/frontity/frontity/compare/@frontity/mars-theme@1.0.2...@frontity/mars-theme@1.0.3) (2019-06-05)
 
 **Note:** Version bump only for package @frontity/mars-theme
