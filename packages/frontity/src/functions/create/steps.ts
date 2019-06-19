@@ -121,7 +121,6 @@ export const createFrontitySettings = async (
       }
     },
     packages: [
-      "@frontity/tiny-router",
       {
         name: "@frontity/mars-theme",
         state: {
@@ -148,6 +147,7 @@ export const createFrontitySettings = async (
           }
         }
       },
+      "@frontity/tiny-router",
       "@frontity/html2react"
     ]
   };
