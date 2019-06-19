@@ -82,13 +82,12 @@ describe("fetch", () => {
 describe("init", () => {
   test("should add redirect for the specified homepage", async () => {
     const store = initStore();
-    const addRedirect = store.libraries.source.resolver
-      .addRedirect as jest.Mock;
+    const { redirections } = store.libraries.source;
 
     store.state.source.homepage = "/about-us/";
     await store.actions.source.init();
 
-    const [[{ pattern, func }]] = addRedirect.mock.calls;
+    const [{ pattern, func }] = redirections;
 
     expect(pattern).toBe("/");
     expect(func()).toBe("/about-us/");

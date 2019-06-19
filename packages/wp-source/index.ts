@@ -1,7 +1,14 @@
 import { Action, State, Derived } from "frontity/types";
 import Source from "@frontity/source";
 import { EntityData } from "@frontity/source/src/data";
-import { Api, Resolver } from "./src/libraries";
+import { Api } from "./src/libraries";
+
+export type Pattern<F extends Function = (params: any) => any> = {
+  name: string;
+  priority: number;
+  pattern: string;
+  func: F;
+};
 
 export type Handler = (args: {
   route: string;
@@ -9,6 +16,8 @@ export type Handler = (args: {
   state: State<WpSource>;
   libraries: WpSource["libraries"];
 }) => Promise<void>;
+
+export type Redirection = (params: Record<string, string>) => string;
 
 export type RouteParams = {
   path: string;
@@ -37,12 +46,13 @@ interface WpSource extends Source {
   libraries: {
     source: {
       api: Api;
-      resolver: Resolver;
       populate: (args: {
         state: State<WpSource>;
         response: Response;
         subdirectory?: string;
       }) => Promise<EntityData[]>;
+      handlers: Pattern<Handler>[];
+      redirections: Pattern<Redirection>[];
       parse: Source<WpSource>["libraries"]["source"]["parse"];
       stringify: Source<WpSource>["libraries"]["source"]["stringify"];
       normalize: Source<WpSource>["libraries"]["source"]["normalize"];

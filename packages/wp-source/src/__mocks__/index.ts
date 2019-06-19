@@ -1,7 +1,6 @@
 import WpSource from "../..";
 import state from "../state";
 import { routeUtils } from "../libraries";
-import Resolver from "../libraries/resolver";
 import Api from "../libraries/api";
 
 jest.mock("../libraries/resolver");
@@ -36,8 +35,9 @@ const wpSource = (): WpSource => ({
   },
   libraries: {
     source: {
-      resolver: new Resolver(),
       api: new Api(),
+      handlers: [],
+      redirections: [],
       populate: jest.fn(),
       ...routeUtils
     }
