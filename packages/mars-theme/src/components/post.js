@@ -25,17 +25,17 @@ const Post = ({ state, actions, libraries }) => {
       <div>
         <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
         {data.isPost && (
-          <>
-            <Link link={author.link}>
+          <div>
+            <StyledLink link={author.link}>
               <Author>
                 By <b>{author.name}</b>
               </Author>
-            </Link>
+            </StyledLink>
             <Fecha>
               {" "}
               on <b>{date.toDateString()}</b>
             </Fecha>
-          </>
+          </div>
         )}
       </div>
       {state.theme.featured.showOnPost && (
@@ -61,6 +61,10 @@ const Title = styled.h1`
   margin-top: 24px;
   margin-bottom: 8px;
   color: rgba(12, 17, 43);
+`;
+
+const StyledLink = styled(Link)`
+  padding: 15px 0;
 `;
 
 const Author = styled.p`
