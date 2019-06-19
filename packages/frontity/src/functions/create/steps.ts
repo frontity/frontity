@@ -99,6 +99,7 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
       build: "frontity build",
       serve: "frontity serve"
     },
+    prettier: {},
     dependencies
   };
   const filePath = resolvePath(path, "package.json");

@@ -230,6 +230,7 @@ Array [
     \\"build\\": \\"frontity build\\",
     \\"serve\\": \\"frontity serve\\"
   },
+  \\"prettier\\": {},
   \\"dependencies\\": {
     \\"frontity\\": \\"^1.0.0\\",
     \\"@frontity/core\\": \\"^1.0.0\\",
@@ -281,6 +282,7 @@ Array [
     \\"build\\": \\"frontity build\\",
     \\"serve\\": \\"frontity serve\\"
   },
+  \\"prettier\\": {},
   \\"dependencies\\": {
     \\"frontity\\": \\"^1.0.0\\",
     \\"@frontity/core\\": \\"^1.0.0\\",
