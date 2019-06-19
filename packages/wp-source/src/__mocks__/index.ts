@@ -1,6 +1,9 @@
 import WpSource from "../..";
 import state from "../state";
 import { routeUtils } from "../libraries";
+import Api from "../libraries/api";
+
+jest.mock("../libraries/api");
 
 const wpSource = (): WpSource => ({
   name: "@frontity/wp-source",
@@ -15,7 +18,12 @@ const wpSource = (): WpSource => ({
       author: {},
       attachment: {},
       api: "https://test.frontity.io",
-      isWPCom: false
+      isWpCom: () => false,
+      subdirectory: "",
+      homepage: "",
+      postsPage: "",
+      categoryBase: "",
+      tagBase: ""
     }
   },
   actions: {
@@ -26,19 +34,9 @@ const wpSource = (): WpSource => ({
   },
   libraries: {
     source: {
-      resolver: {
-        registered: [],
-        init: jest.fn(),
-        add: jest.fn(),
-        match: jest.fn()
-      },
-      api: {
-        api: "https://test.frontity.io",
-        isWPCom: false,
-        init: jest.fn(),
-        getIdBySlug: jest.fn(),
-        get: jest.fn()
-      },
+      api: new Api(),
+      handlers: [],
+      redirections: [],
       populate: jest.fn(),
       ...routeUtils
     }

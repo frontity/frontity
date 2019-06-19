@@ -10,39 +10,57 @@ import {
 
 export default [
   {
+    name: "post archive",
+    priority: 10,
     pattern: "/",
-    handler: postArchive
+    func: postArchive
   },
   {
+    name: "category",
+    priority: 10,
     pattern: "/category/:slug",
-    handler: category
+    func: category
   },
   {
+    name: "subcategory",
+    priority: 10,
     pattern: "/category/(.*)/:slug", // subcategories
-    handler: category
+    func: category
   },
   {
+    name: "tag",
+    priority: 10,
     pattern: "/tag/:slug",
-    handler: tag
+    func: tag
   },
   {
+    name: "author",
+    priority: 10,
     pattern: "/author/:slug",
-    handler: author
+    func: author
   },
   {
+    name: "date",
+    priority: 10,
     pattern: "/:year(\\d+)/:month(\\d+)?/:day(\\d+)?",
-    handler: date
+    func: date
   },
   {
+    name: "post",
+    priority: 10,
     pattern: "/:year(\\d+)/:month(\\d+)/:day(\\d+)/:slug",
-    handler: post
+    func: post
   },
   {
+    name: "page",
+    priority: 10,
     pattern: "/:slug",
-    handler: page
+    func: page
   },
   {
+    name: "subpage",
+    priority: 10,
     pattern: "/(.*)/:slug", // subpages
-    handler: page
+    func: page
   }
 ];

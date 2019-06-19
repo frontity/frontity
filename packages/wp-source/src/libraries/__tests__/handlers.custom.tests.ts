@@ -1,5 +1,4 @@
-import Resolver from "../resolver";
-import { Handler } from "../../..";
+import { getMatch } from "../get-match";
 
 const patterns = {
   postArchive: "/",
@@ -15,29 +14,21 @@ const patterns = {
 };
 
 // Mock handlers from patterns
-const routes: { [type: string]: { pattern: string; handler: Handler } } = {};
-Object.keys(patterns).forEach(
-  type =>
-    (routes[type] = {
-      pattern: patterns[type],
-      handler: jest.fn(() => Promise.resolve())
-    })
-);
-
-// Add handlers
-const resolver = new Resolver();
-Object.values(routes).forEach(({ pattern, handler }) => {
-  resolver.add(pattern, handler);
-});
+const handlers = Object.keys(patterns).map(name => ({
+  name: name,
+  priority: 10,
+  pattern: patterns[name],
+  func: jest.fn(() => Promise.resolve())
+}));
 
 // Test 'handler' is executed with the correct params
-const testMatch = (type, path, params) => {
-  const match = resolver.match(path);
-  expect(match.handler).toBe(routes[type].handler);
+const testMatch = (name, path, params) => {
+  const match = getMatch(path, handlers);
+  expect(match.func).toEqual(handlers.find(p => p.name === name).func);
   expect(match.params).toEqual(params);
 };
 
-describe("resolver", () => {
+describe("getMatch", () => {
   test("match different routes", async () => {
     testMatch("postArchive", "/", {});
     testMatch("category", "/category/nature", { slug: "nature" });
