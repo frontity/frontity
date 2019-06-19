@@ -7,10 +7,12 @@ Object {
     "entry": Object {
       "site-1": Array [
         "webpack-hot-middleware/client",
+        "babel-polyfill",
         "./build/bundling/entry-points/site-1/client.js",
       ],
       "site-2": Array [
         "webpack-hot-middleware/client",
+        "babel-polyfill",
         "./build/bundling/entry-points/site-1/client.js",
       ],
     },
@@ -45,6 +47,10 @@ Object {
               },
             },
           ],
+        },
+        Object {
+          "test": /\\\\\\.css\\$/,
+          "use": "raw-loader",
         },
       ],
     },
@@ -161,6 +167,10 @@ Object {
             },
           ],
         },
+        Object {
+          "test": /\\\\\\.css\\$/,
+          "use": "raw-loader",
+        },
       ],
     },
     "name": "client",
@@ -267,6 +277,10 @@ Object {
             },
           ],
         },
+        Object {
+          "test": /\\\\\\.css\\$/,
+          "use": "raw-loader",
+        },
       ],
     },
     "name": "server",
@@ -335,9 +349,11 @@ Object {
     "devtool": false,
     "entry": Object {
       "site-1": Array [
+        "babel-polyfill",
         "./build/bundling/entry-points/site-1/client.js",
       ],
       "site-2": Array [
+        "babel-polyfill",
         "./build/bundling/entry-points/site-1/client.js",
       ],
     },
@@ -372,6 +388,10 @@ Object {
               },
             },
           ],
+        },
+        Object {
+          "test": /\\\\\\.css\\$/,
+          "use": "raw-loader",
         },
       ],
     },
@@ -480,6 +500,10 @@ Object {
             },
           ],
         },
+        Object {
+          "test": /\\\\\\.css\\$/,
+          "use": "raw-loader",
+        },
       ],
     },
     "name": "client",
@@ -579,6 +603,10 @@ Object {
               },
             },
           ],
+        },
+        Object {
+          "test": /\\\\\\.css\\$/,
+          "use": "raw-loader",
         },
       ],
     },

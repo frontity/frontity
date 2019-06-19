@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component works just fine 1`] = `
+Array [
+  <p
+    id="paragraph"
+  >
+    This is an html 
+    <span>
+      example
+    </span>
+     for testing purposes.
+  </p>,
+  <div
+    className="hello"
+    css={
+      Object {
+        "map": undefined,
+        "name": "12gt2kf",
+        "next": undefined,
+        "styles": "width: 180px;",
+      }
+    }
+  >
+    <img
+      src="http://example.com/img.jpg"
+    />
+  </div>,
+  <audio
+    autoPlay={true}
+  >
+    <source
+      src="example.ogg"
+      type="audio/ogg"
+    />
+  </audio>,
+]
+`;

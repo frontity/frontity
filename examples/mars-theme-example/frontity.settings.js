@@ -9,6 +9,7 @@ export default {
   },
   packages: [
     "@frontity/tiny-router",
+    "@frontity/html2react",
     {
       name: "@frontity/mars-theme",
       state: {
@@ -21,8 +22,8 @@ export default {
             ["About Us", "/about-us/"]
           ],
           featured: {
-            showOnList: false,
-            showOnPost: false
+            showOnList: true,
+            showOnPost: true
           }
         }
       }

@@ -10,25 +10,25 @@
 
 <p align="center">
   <a href="https://frontity.org">frontity.org</a> |
-  <a href="https://docs.frontity.org/getting-started">Get Started</a> |
+  <a href="https://docs.frontity.org/getting-started?utm_source=github-readme&utm_medium=get-started-link">Get Started</a> |
   <a href="https://docs.frontity.org/frontity-features">Features</a> |
   <a href="https://docs.frontity.org/getting-started">Docs</a> |
   <a href="https://community.frontity.org/">Community</a> |
   <a href="https://twitter.com/frontity">Twitter</a>
 </p>
 
----
+--- 
 
 > **IMPORTANT NOTE!**
 >
-> Frontity framework is in **beta**. It allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this phase.
+> Frontity v1 **Release Candidate** is now available. Frontity allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this phase. Bug reports will be also highly appreciated.
 >
-> <div align="center"><a href="https://docs.frontity.org/getting-started"><strong>GET STARTED!</strong></a></div>
+> <div align="center"><a href="https://docs.frontity.org/getting-started?utm_source=github-readme&utm_medium=get-started-link"><strong>GET STARTED!</strong></a></div>
 > <br />
 >
 > Frontity will continue to be tested and improved during the next months, and new features will be added progressively.
 >
-> - Release Candidate Date: **June 10, 2019**
+> - Release Candidate Date: **June 5, 2019**
 > - Final v1.0 Release Date: **June 20, 2019** _– yes, that's the WordCamp EU_ 😍
 >
 > #### Do you want to receive the latest framework updates and news? [Subscribe to our newsletter](https://frontity.org/#newsletter)!
@@ -92,7 +92,7 @@ This means everything is ready so you can jump in and create a new amazing WordP
 **Frontity** apps live in Node.js, separated from WordPress.
 
 - It uses the WP API to retrieve content and generate the final HTML.
-- It is also capable to generate AMP pages with the same React code and CSS.
+- It is also capable of generating AMP pages with the same React code and CSS.
 
 <div align="center"><img alt="Frontity & WordPress explanation" src="https://uploads.frontity.org/images/github/frontity-wordpress-explanation.png" width="600px"></div>
 
@@ -126,10 +126,9 @@ GitHub is where magic happens, but there are more channels where you can find in
 
 # » Get involved 🤗
 
-Do you love WordPress and React? Got questions or feedback? We'd love to hear from you. Come join our [community forum](https://community.frontity.org)! ❤️ 
+Do you love WordPress and React? Got questions or feedback? We'd love to hear from you. Come join our [community forum](https://community.frontity.org)! ❤️
 
 Frontity also welcomes contributions. There are many ways to support the project (and get free swag)! If you don't know where to start, this guide might help >> [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute).
-
 
 # » Open source
 

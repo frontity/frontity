@@ -27,7 +27,6 @@ interface Source<T = null> extends Package {
   actions: {
     source: {
       fetch: Action<T extends null ? Source : T, string>;
-      init?: Action<T extends null ? Source : T>;
     };
   };
   libraries: {

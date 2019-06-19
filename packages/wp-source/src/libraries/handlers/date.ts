@@ -41,7 +41,7 @@ const dateHandler: Handler = async (source, { route, params, libraries }) => {
   const items = await populate(source, response);
 
   // 5. add data to source
-  source.data[route] = {
+  Object.assign(source.data[route], {
     year,
     month,
     day,
@@ -49,9 +49,8 @@ const dateHandler: Handler = async (source, { route, params, libraries }) => {
     total,
     totalPages,
     isArchive: true,
-    isDate: true,
-    isFetching: true
-  };
+    isDate: true
+  });
 };
 
 export default dateHandler;

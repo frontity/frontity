@@ -12,8 +12,12 @@ export default async ({
   isHttps: boolean;
 }): Promise<http.Server | https.Server> => {
   if (isHttps) {
-    const key = await readFile("src/certs/localhost.key");
-    const cert = await readFile("src/certs/localhost.cert");
+    const key = await readFile(
+      "./node_modules/@frontity/core/certs/localhost.key"
+    );
+    const cert = await readFile(
+      "./node_modules/@frontity/core/certs/localhost.cert"
+    );
     const options: https.ServerOptions = { key, cert };
     return https.createServer(options, app);
   }

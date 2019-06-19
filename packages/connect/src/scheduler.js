@@ -69,32 +69,34 @@ function batchMethods(obj, methods) {
 // do a sync batching for the most common task sources
 // this should be removed when React's own batching is improved in the future
 
-// batch timer functions
-batchMethodsCallbacks(globalObj, [
-  "setTimeout",
-  "setInterval",
-  "requestAnimationFrame",
-  "requestIdleCallback"
-]);
-
-if (globalObj.Promise) {
-  batchMethodsCallbacks(Promise.prototype, ["then", "catch"]);
-}
-
-// batch addEventListener calls
-if (globalObj.EventTarget) {
-  batchMethodsCallbacks(EventTarget.prototype, [
-    "addEventListener",
-    "removeEventListener"
+if (typeof window !== "undefined" && window["Proxy"]) {
+  // batch timer functions
+  batchMethodsCallbacks(globalObj, [
+    "setTimeout",
+    "setInterval",
+    "requestAnimationFrame",
+    "requestIdleCallback"
   ]);
-}
 
-// this batches websocket event handlers
-if (globalObj.WebSocket) {
-  batchMethods(WebSocket.prototype, [
-    "onopen",
-    "onmessage",
-    "onerror",
-    "onclose"
-  ]);
+  if (globalObj.Promise) {
+    batchMethodsCallbacks(Promise.prototype, ["then", "catch"]);
+  }
+
+  // batch addEventListener calls
+  if (globalObj.EventTarget) {
+    batchMethodsCallbacks(EventTarget.prototype, [
+      "addEventListener",
+      "removeEventListener"
+    ]);
+  }
+
+  // this batches websocket event handlers
+  if (globalObj.WebSocket) {
+    batchMethods(WebSocket.prototype, [
+      "onopen",
+      "onmessage",
+      "onerror",
+      "onclose"
+    ]);
+  }
 }

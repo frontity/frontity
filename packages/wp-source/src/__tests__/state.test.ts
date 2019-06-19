@@ -11,9 +11,12 @@ const initStore = (data = {}) => {
 };
 
 describe("state - source.get", () => {
-  test("returns an empty object if not found", () => {
+  test("returns an object with isReady/isFetching = false if not found", () => {
     const store = initStore();
-    expect(store.state.source.get("/some-post/")).toEqual({});
+    expect(store.state.source.get("/some-post/")).toEqual({
+      isFetching: false,
+      isReady: false
+    });
   });
 
   test("returns the correct object (path)", () => {

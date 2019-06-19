@@ -12,7 +12,7 @@ Object {
 }
 `;
 
-exports[`fetch return 404 is fetch fails 1`] = `
+exports[`fetch returns 404 is fetch fails 1`] = `
 Object {
   "/some/route/": Object {
     "is404": true,

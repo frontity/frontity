@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parse should return the right HTML tree 1`] = `
+Array [
+  Object {
+    "content": " This is a comment ",
+    "type": "comment",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "content": "This is an html ",
+        "parent": [Circular],
+        "type": "text",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "content": "example",
+            "parent": [Circular],
+            "type": "text",
+          },
+        ],
+        "component": "span",
+        "parent": [Circular],
+        "props": Object {},
+        "type": "element",
+      },
+      Object {
+        "content": " for testing purposes.",
+        "parent": [Circular],
+        "type": "text",
+      },
+    ],
+    "component": "p",
+    "props": Object {
+      "id": "paragraph",
+    },
+    "type": "element",
+  },
+  Object {
+    "content": " [class] attribute ",
+    "type": "comment",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "component": "img",
+        "parent": [Circular],
+        "props": Object {
+          "src": "http://example.com/img.jpg",
+        },
+        "type": "element",
+      },
+    ],
+    "component": "div",
+    "props": Object {
+      "className": "hello",
+      "css": Object {
+        "map": undefined,
+        "name": "12gt2kf",
+        "next": undefined,
+        "styles": "width: 180px;",
+      },
+    },
+    "type": "element",
+  },
+  Object {
+    "content": " [autoplay] standalone attribute ([key/value] should be [autoPlay/true] ",
+    "type": "comment",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "component": "source",
+        "parent": [Circular],
+        "props": Object {
+          "src": "example.ogg",
+          "type": "audio/ogg",
+        },
+        "type": "element",
+      },
+    ],
+    "component": "audio",
+    "props": Object {
+      "autoPlay": true,
+    },
+    "type": "element",
+  },
+]
+`;

@@ -23,7 +23,7 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   // mock state
   state = {
-    get: () => ({}),
+    get: () => ({ isReady: false, isFetching: false }),
     data: {},
     category: {},
     tag: {},
@@ -65,6 +65,11 @@ beforeEach(() => {
 describe("post", () => {
   test("doesn't exist in source.post", async () => {
     // source.fetch("/the-beauties-of-gullfoss/")
+    state.data["/the-beauties-of-gullfoss/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
     await handler(state, {
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
@@ -80,6 +85,11 @@ describe("post", () => {
     state.post[60] = post60;
 
     // source.fetch("/the-beauties-of-gullfoss/")
+    state.data["/the-beauties-of-gullfoss/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
     await handler(state, {
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },
@@ -100,6 +110,11 @@ describe("post", () => {
       .mockResolvedValueOnce(mockResponse([]));
 
     // source.fetch("/the-beauties-of-gullfoss/")
+    state.data["/the-beauties-of-gullfoss/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
     const promise = handler(state, {
       route: "/the-beauties-of-gullfoss/",
       params: { slug: "the-beauties-of-gullfoss" },

@@ -1,3 +1,4 @@
+import open from "open";
 import { MultiCompiler } from "webpack";
 import express from "express";
 import createServer from "./create-server";
@@ -25,8 +26,10 @@ export default async ({
   // Start listening once webpack has finished.
   let clientFinished = false;
   let serverFinished = false;
+  let isListening = false;
   const start = () => {
-    if (clientFinished && serverFinished) {
+    if (clientFinished && serverFinished && !isListening) {
+      isListening = true;
       server.listen(port, () => {
         console.log(
           `\n\nSERVER STARTED -- Listening @ ${
@@ -34,6 +37,7 @@ export default async ({
           }://localhost:${port}\n  - mode: ${mode}\n  - target: ${target}`
         );
       });
+      open(`${isHttps ? "https" : "http"}://localhost:${port}`);
     }
   };
   // Check if webpack has finished (both the client and server bundles).

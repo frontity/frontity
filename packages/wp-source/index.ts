@@ -28,8 +28,7 @@ interface WpSource extends Source {
   };
   actions: {
     source: Source<WpSource>["actions"]["source"] & {
-      beforeSSR?: Action<WpSource>;
-      beforeCSR?: Action<WpSource>;
+      init: Action<WpSource>;
     };
   };
   libraries: {
