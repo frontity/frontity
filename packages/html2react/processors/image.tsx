@@ -6,7 +6,16 @@ import { Processor, Element } from "../types";
 const image: Processor = {
   test: node => node.type === "element" && node.component === "img",
   process: (node: Element) => {
+    if (node.parent.component === "noscript") return null;
+
+    if (node.props["data-src"]) {
+      node.props.src = node.props["data-src"];
+    }
+    if (node.props["data-srcset"]) {
+      node.props.srcSet = node.props["data-srcset"];
+    }
     node.component = ContentImage;
+
     return node;
   }
 };
@@ -34,5 +43,6 @@ const Container = styled.span`
   noscript > img,
   img {
     position: absolute;
+    height: 100%;
   }
 `;
