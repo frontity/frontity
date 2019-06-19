@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/frontity/frontity/compare/@frontity/mars-theme@1.1.0...@frontity/mars-theme@1.1.1) (2019-06-19)
+
+
+### Bug Fixes
+
+* **mars-theme:** add meta description and fix title font size ([d9e4f16](https://github.com/frontity/frontity/commit/d9e4f16))
+* **mars-theme:** add padding to solve Tap target not sized appropriately ([e0c3e1d](https://github.com/frontity/frontity/commit/e0c3e1d))
+* **mars-theme:** change some HTML tags to improve accessibility ([2a73db4](https://github.com/frontity/frontity/commit/2a73db4))
+
+
+
+
+
 # [1.1.0](https://github.com/frontity/frontity/compare/@frontity/mars-theme@1.0.3...@frontity/mars-theme@1.1.0) (2019-06-19)
 
 
