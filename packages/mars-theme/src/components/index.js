@@ -26,6 +26,7 @@ const Theme = ({ state }) => {
     <>
       <Head>
         <title>{state.frontity.title}</title>
+        <meta name="description" content={state.frontity.description} />
         <html lang="en" />
       </Head>
       <Global styles={globalStyles} />
