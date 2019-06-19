@@ -66,7 +66,8 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
     "frontity",
     "@frontity/core",
     "@frontity/wp-source",
-    "@frontity/tiny-router"
+    "@frontity/tiny-router",
+    "@frontity/html2react"
   ];
 
   // Add Frontity packages to the dependencies.
@@ -146,7 +147,8 @@ export const createFrontitySettings = async (
             api: "https://test.frontity.io/wp-json"
           }
         }
-      }
+      },
+      "@frontity/html2react"
     ]
   };
   const fileTemplate = await readFile(
