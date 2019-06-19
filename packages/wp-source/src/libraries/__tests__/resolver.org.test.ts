@@ -15,8 +15,8 @@ Object.keys(patterns).forEach(
 
 // Add handlers
 const resolver = new Resolver();
-patterns.forEach(({ pattern, handler }) => {
-  resolver.addHandler({ pattern, handler });
+patterns.forEach(patternObj => {
+  resolver.addHandler(patternObj);
 });
 
 describe("resolver (wp.org patterns)", () => {
@@ -87,8 +87,6 @@ describe("resolver (wp.org patterns)", () => {
     expect(handler).toBe(handlers.date);
     expect(params).toMatchObject({ year: "2016", month: "10", day: "25" });
   });
-
-  // // plain (NOT SUPPORTED YET)
 
   // pattern: "/:year(\\d+)/:month(\\d+)/:day(\\d+)/:slug", // day & name
   // handler: post

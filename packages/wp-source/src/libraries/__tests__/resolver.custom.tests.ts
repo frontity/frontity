@@ -15,25 +15,34 @@ const patterns = {
 };
 
 // Mock handlers from patterns
-const routes: { [type: string]: { pattern: string; handler: Handler } } = {};
+const routes: {
+  [type: string]: {
+    name: string;
+    priority: number;
+    pattern: string;
+    func: Handler;
+  };
+} = {};
 Object.keys(patterns).forEach(
   type =>
     (routes[type] = {
+      name: type,
+      priority: 10,
       pattern: patterns[type],
-      handler: jest.fn(() => Promise.resolve())
+      func: jest.fn(() => Promise.resolve())
     })
 );
 
 // Add handlers
 const resolver = new Resolver();
-Object.values(routes).forEach(({ pattern, handler }) => {
-  resolver.addHandler({ pattern, handler });
+Object.values(routes).forEach(patternObj => {
+  resolver.addHandler(patternObj);
 });
 
 // Test 'handler' is executed with the correct params
 const testMatch = (type, path, params) => {
   const match = resolver.match(path);
-  expect(match.handler).toBe(routes[type].handler);
+  expect(match.handler).toBe(routes[type].func);
   expect(match.params).toEqual(params);
 };
 

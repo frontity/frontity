@@ -88,10 +88,10 @@ describe("init", () => {
     store.state.source.homepage = "/about-us/";
     await store.actions.source.init();
 
-    const [[{ pattern, redirect }]] = addRedirect.mock.calls;
+    const [[{ pattern, func }]] = addRedirect.mock.calls;
 
     expect(pattern).toBe("/");
-    expect(redirect()).toBe("/about-us/");
+    expect(func()).toBe("/about-us/");
   });
 
   test("should add redirect for the specified posts page", async () => {
@@ -102,10 +102,10 @@ describe("init", () => {
     store.state.source.postsPage = "/all-posts/";
     await store.actions.source.init();
 
-    const [[{ pattern, redirect }]] = addRedirect.mock.calls;
+    const [[{ pattern, func }]] = addRedirect.mock.calls;
 
     expect(pattern).toBe("/all-posts/");
-    expect(redirect()).toBe("/");
+    expect(func()).toBe("/");
   });
 
   test("should add redirect for categories if 'categoryBase' is set", async () => {
@@ -119,12 +119,10 @@ describe("init", () => {
     const [[newBase], [oldBase]] = addRedirect.mock.calls;
 
     expect(newBase.pattern).toBe("/wp-cat/:subpath+/");
-    expect(newBase.redirect({ subpath: "some-cat" })).toBe(
-      "/category/some-cat/"
-    );
+    expect(newBase.func({ subpath: "some-cat" })).toBe("/category/some-cat/");
 
     expect(oldBase.pattern).toBe("/category/(.*)/");
-    expect(oldBase.redirect()).toBe("");
+    expect(oldBase.func()).toBe("");
   });
 
   test("should add redirect for tags if 'tagBase' is set", async () => {
@@ -138,10 +136,10 @@ describe("init", () => {
     const [[newBase], [oldBase]] = addRedirect.mock.calls;
 
     expect(newBase.pattern).toBe("/wp-tag/:subpath+/");
-    expect(newBase.redirect({ subpath: "some-tag" })).toBe("/tag/some-tag/");
+    expect(newBase.func({ subpath: "some-tag" })).toBe("/tag/some-tag/");
 
     expect(oldBase.pattern).toBe("/tag/(.*)/");
-    expect(oldBase.redirect()).toBe("");
+    expect(oldBase.func()).toBe("");
   });
 
   test("should add redirect if 'subirectory' is present", async () => {
@@ -158,9 +156,9 @@ describe("init", () => {
     await store.actions.source.init();
 
     const redirects = [].concat(...addRedirect.mock.calls);
-    const results = redirects.map(({ pattern, redirect }) => ({
+    const results = redirects.map(({ pattern, func }) => ({
       pattern,
-      result: redirect({ subpath: "subpath" })
+      result: func({ subpath: "subpath" })
     }));
     expect(results).toMatchSnapshot();
   });

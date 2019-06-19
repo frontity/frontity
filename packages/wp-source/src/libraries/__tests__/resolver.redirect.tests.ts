@@ -1,33 +1,48 @@
 import Resolver from "../resolver";
 
 // Some redirections
-const redirects = [
+const redirects: {
+  name: string;
+  priority: number;
+  pattern: string;
+  func: (params: Record<string, string>) => string;
+}[] = [
   {
+    name: "",
+    priority: 10,
     pattern: "/",
-    redirect: () => "/about-us/"
+    func: () => "/about-us/"
   },
   {
+    name: "",
+    priority: 10,
     pattern: "/posts/",
-    redirect: () => "/"
+    func: () => "/"
   },
   {
+    name: "",
+    priority: 10,
     pattern: "/wp-cat/:subpath+",
-    redirect: ({ subpath }) => `/category/${subpath}/`
+    func: ({ subpath }) => `/category/${subpath}/`
   },
   {
+    name: "",
+    priority: 10,
     pattern: "/category/(.*)",
-    redirect: () => ""
+    func: () => ""
   },
   {
+    name: "",
+    priority: 10,
     pattern: "/blog/:subpath*/",
-    redirect: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
+    func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
   }
 ];
 
 // Add redirects
 const resolver = new Resolver();
-redirects.forEach(({ pattern, redirect }) => {
-  resolver.addRedirect({ pattern, redirect });
+redirects.forEach(patternObj => {
+  resolver.addRedirect(patternObj);
 });
 
 describe("resolver", () => {

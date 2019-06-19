@@ -3,8 +3,7 @@ import pathToRegexp, { Key } from "path-to-regexp";
 
 class Resolver {
   private handlers: Pattern<Handler>[] = [];
-
-  private redirects: Pattern<(params: Record<string, string>) => string>[] = [];
+  private redirects: Pattern<Redirect>[] = [];
 
   init(this: Resolver) {
     this.handlers = [];
@@ -14,27 +13,27 @@ class Resolver {
   // Adds a handler to handlers
   addHandler(
     this: Resolver,
-    { pattern, handler }: { pattern: string; handler: Handler }
+    props: { name: string; priority: number; pattern: string; func: Handler }
   ): void {
-    const keys = [];
-    const regexp = pathToRegexp(pattern, keys);
-    this.handlers.push({ pattern, regexp, keys, func: handler });
+    add<Handler>(this.handlers, props);
   }
 
   // Adds a redirect to redirects
   addRedirect(
     this: Resolver,
-    {
-      pattern,
-      redirect
-    }: {
-      pattern: string;
-      redirect: (params: Record<string, any>) => string;
-    }
+    props: { name: string; priority: number; pattern: string; func: Redirect }
   ): void {
-    const keys = [];
-    const regexp = pathToRegexp(pattern, keys);
-    this.redirects.push({ pattern, regexp, keys, func: redirect });
+    add<Redirect>(this.redirects, props);
+  }
+
+  // Removes a handler from handlers
+  removeHandler(this: Resolver, props: { name: string }): void {
+    remove(this.handlers, props);
+  }
+
+  // Removes a redirect from redirects
+  removeRedirect(this: Resolver, props: { name: string }): void {
+    remove(this.redirects, props);
   }
 
   // redirects a path to a different one
@@ -65,18 +64,44 @@ class Resolver {
 
 export default Resolver;
 
-// Utils
+// Types
+
+type Redirect = (params: Record<string, string>) => string;
 
 type Pattern<Func extends Function = (...args: any[]) => any> = {
+  name: string;
+  priority: number;
   pattern: string;
   regexp: RegExp;
   keys: Key[];
   func: Func;
 };
 
+type Add = <F extends Function>(
+  list: Pattern<F>[],
+  props: { name: string; priority: number; pattern: string; func: F }
+) => void;
+
+type Remove = (list: Pattern[], props: { name: string }) => void;
+
 type GetMatch = <T extends Pattern>(path: string, list: T[]) => T;
 
 type ExecMatch = (path: string, match: Pattern) => Record<string, string>;
+
+// Functions
+
+const add: Add = (list, props) => {
+  const { name, priority, pattern, func } = props;
+  const keys = [];
+  const regexp = pathToRegexp(pattern, keys);
+  list.push({ name, priority, pattern, regexp, keys, func });
+  list.sort(({ priority: p1 }, { priority: p2 }) => p1 - p2);
+};
+
+const remove: Remove = (list, props) => {
+  const index = list.findIndex(({ name }) => props.name === name);
+  list.splice(index, 1);
+};
 
 const getMatch: GetMatch = (path, list) =>
   list.find(({ regexp }) => regexp.test(path));

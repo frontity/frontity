@@ -49,8 +49,8 @@ const actions: WpSource["actions"]["source"] = {
     libraries.source.api.init({ api, isWpCom });
 
     const patterns = isWpCom ? wpCom : wpOrg;
-    patterns.forEach(({ pattern, handler }) =>
-      libraries.source.resolver.addHandler({ pattern, handler })
+    patterns.forEach(patternObj =>
+      libraries.source.resolver.addHandler(patternObj)
     );
 
     // redirections:
@@ -66,25 +66,39 @@ const actions: WpSource["actions"]["source"] = {
 
     if (homepage) {
       const pattern = concatPath(subdirectory);
-      resolver.addRedirect({ pattern, redirect: () => concatPath(homepage) });
+      resolver.addRedirect({
+        name: "homepage",
+        priority: 10,
+        pattern,
+        func: () => concatPath(homepage)
+      });
     }
 
     if (postsPage) {
       const pattern = concatPath(subdirectory, postsPage);
-      resolver.addRedirect({ pattern, redirect: () => "/" });
+      resolver.addRedirect({
+        name: "posts page",
+        priority: 10,
+        pattern,
+        func: () => "/"
+      });
     }
 
     if (categoryBase) {
       // add new direction
       const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
       resolver.addRedirect({
+        name: "category base",
+        priority: 10,
         pattern,
-        redirect: ({ subpath }) => `/category/${subpath}/`
+        func: ({ subpath }) => `/category/${subpath}/`
       });
       // remove old direction
       resolver.addRedirect({
+        name: "category base (reverse)",
+        priority: 10,
         pattern: concatPath(subdirectory, "/category/(.*)/"),
-        redirect: () => ""
+        func: () => ""
       });
     }
 
@@ -92,13 +106,17 @@ const actions: WpSource["actions"]["source"] = {
       // add new direction
       const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
       resolver.addRedirect({
+        name: "tag base",
+        priority: 10,
         pattern,
-        redirect: ({ subpath }) => `/tag/${subpath}/`
+        func: ({ subpath }) => `/tag/${subpath}/`
       });
       // remove old direction
       resolver.addRedirect({
+        name: "tag base (reverse)",
+        priority: 10,
         pattern: concatPath(subdirectory, "/tag/(.*)/"),
-        redirect: () => ""
+        func: () => ""
       });
     }
 
@@ -106,11 +124,18 @@ const actions: WpSource["actions"]["source"] = {
       // add new direction
       const pattern = concatPath(subdirectory, "/:subpath*");
       resolver.addRedirect({
+        name: "subdirectory",
+        priority: 10,
         pattern,
-        redirect: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
+        func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
       });
       // remove old direction
-      resolver.addRedirect({ pattern: "/(.*)", redirect: () => "" });
+      resolver.addRedirect({
+        name: "subdirectory (reverse)",
+        priority: 10,
+        pattern: "/(.*)",
+        func: () => ""
+      });
     }
   }
 };
