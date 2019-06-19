@@ -34,39 +34,111 @@ Object {
 }
 `;
 
+exports[`init should add redirect for categories if 'categoryBase' is set 1`] = `
+Array [
+  Object {
+    "func": [Function],
+    "name": "category base",
+    "pattern": "/wp-cat/:subpath+/",
+    "priority": 10,
+  },
+  Object {
+    "func": [Function],
+    "name": "category base (reverse)",
+    "pattern": "/category/(.*)/",
+    "priority": 10,
+  },
+]
+`;
+
+exports[`init should add redirect for tags if 'tagBase' is set 1`] = `
+Array [
+  Object {
+    "func": [Function],
+    "name": "tag base",
+    "pattern": "/wp-tag/:subpath+/",
+    "priority": 10,
+  },
+  Object {
+    "func": [Function],
+    "name": "tag base (reverse)",
+    "pattern": "/tag/(.*)/",
+    "priority": 10,
+  },
+]
+`;
+
+exports[`init should add redirect for the specified homepage 1`] = `
+Array [
+  Object {
+    "func": [Function],
+    "name": "homepage",
+    "pattern": "/",
+    "priority": 10,
+  },
+]
+`;
+
+exports[`init should add redirect for the specified posts page 1`] = `
+Array [
+  Object {
+    "func": [Function],
+    "name": "posts page",
+    "pattern": "/all-posts/",
+    "priority": 10,
+  },
+]
+`;
+
 exports[`init should add redirect if 'subirectory' is present 1`] = `
 Array [
   Object {
+    "func": [Function],
+    "name": "homepage",
     "pattern": "/blog/",
-    "result": "/about-us/",
+    "priority": 10,
   },
   Object {
+    "func": [Function],
+    "name": "posts page",
     "pattern": "/blog/all-posts/",
-    "result": "/",
+    "priority": 10,
   },
   Object {
+    "func": [Function],
+    "name": "category base",
     "pattern": "/blog/wp-cat/:subpath+/",
-    "result": "/category/subpath/",
+    "priority": 10,
   },
   Object {
+    "func": [Function],
+    "name": "category base (reverse)",
     "pattern": "/blog/category/(.*)/",
-    "result": "",
+    "priority": 10,
   },
   Object {
+    "func": [Function],
+    "name": "tag base",
     "pattern": "/blog/wp-tag/:subpath+/",
-    "result": "/tag/subpath/",
+    "priority": 10,
   },
   Object {
+    "func": [Function],
+    "name": "tag base (reverse)",
     "pattern": "/blog/tag/(.*)/",
-    "result": "",
+    "priority": 10,
   },
   Object {
+    "func": [Function],
+    "name": "subdirectory",
     "pattern": "/blog/:subpath*/",
-    "result": "/subpath/",
+    "priority": 10,
   },
   Object {
+    "func": [Function],
+    "name": "subdirectory (reverse)",
     "pattern": "/(.*)",
-    "result": "",
+    "priority": 10,
   },
 ]
 `;

@@ -17,7 +17,7 @@ export type Handler = (args: {
   libraries: WpSource["libraries"];
 }) => Promise<void>;
 
-export type Redirection = (params: Record<string, string>) => string;
+export type Redirection = (params?: Record<string, string>) => string;
 
 export type RouteParams = {
   path: string;

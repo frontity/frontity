@@ -16,11 +16,7 @@ let libraries: WpSource["libraries"];
 beforeEach(() => {
   const config = wpSource();
   const { source } = config.libraries;
-  const { resolver, api } = source;
-  // mock resolver
-  resolver.match = jest
-    .fn()
-    .mockReturnValue({ handler, params: { slug: "nature" } });
+  const { api } = source;
 
   // mock api
   api.getIdBySlug = jest.fn().mockResolvedValue(7);

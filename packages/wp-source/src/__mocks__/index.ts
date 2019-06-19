@@ -3,7 +3,6 @@ import state from "../state";
 import { routeUtils } from "../libraries";
 import Api from "../libraries/api";
 
-jest.mock("../libraries/resolver");
 jest.mock("../libraries/api");
 
 const wpSource = (): WpSource => ({

@@ -1,5 +1,4 @@
-import Resolver from "../resolver";
-import { Handler } from "../../..";
+import { getMatch } from "../get-match";
 
 const patterns = {
   postArchive: "/",
@@ -15,38 +14,21 @@ const patterns = {
 };
 
 // Mock handlers from patterns
-const routes: {
-  [type: string]: {
-    name: string;
-    priority: number;
-    pattern: string;
-    func: Handler;
-  };
-} = {};
-Object.keys(patterns).forEach(
-  type =>
-    (routes[type] = {
-      name: type,
-      priority: 10,
-      pattern: patterns[type],
-      func: jest.fn(() => Promise.resolve())
-    })
-);
-
-// Add handlers
-const resolver = new Resolver();
-Object.values(routes).forEach(patternObj => {
-  resolver.addHandler(patternObj);
-});
+const handlers = Object.keys(patterns).map(name => ({
+  name: name,
+  priority: 10,
+  pattern: patterns[name],
+  func: jest.fn(() => Promise.resolve())
+}));
 
 // Test 'handler' is executed with the correct params
-const testMatch = (type, path, params) => {
-  const match = resolver.match(path);
-  expect(match.handler).toBe(routes[type].func);
+const testMatch = (name, path, params) => {
+  const match = getMatch(path, handlers);
+  expect(match.func).toEqual(handlers.find(p => p.name === name).func);
   expect(match.params).toEqual(params);
 };
 
-describe("resolver", () => {
+describe("getMatch", () => {
   test("match different routes", async () => {
     testMatch("postArchive", "/", {});
     testMatch("category", "/category/nature", { slug: "nature" });

@@ -17,14 +17,19 @@ const initStore = () => {
     });
   });
   const config = wpSource();
+
+  // add a handler for tests
+  config.libraries.source.handlers.push({
+    name: "always",
+    priority: 0,
+    pattern: "/(.*)",
+    func: handler
+  });
+
   // replace the mocked fetch by the real one we want to test
   config.actions.source.fetch = actions.fetch;
   // replace the mocked init by the real one we want to test
   config.actions.source.init = actions.init;
-  // modify "resolver.match" implementation
-  config.libraries.source.resolver.match = jest
-    .fn()
-    .mockReturnValue({ handler, params: {} });
   return createStore(config);
 };
 
@@ -82,83 +87,40 @@ describe("fetch", () => {
 describe("init", () => {
   test("should add redirect for the specified homepage", async () => {
     const store = initStore();
-    const { redirections } = store.libraries.source;
-
     store.state.source.homepage = "/about-us/";
     await store.actions.source.init();
-
-    const [{ pattern, func }] = redirections;
-
-    expect(pattern).toBe("/");
-    expect(func()).toBe("/about-us/");
+    expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 
   test("should add redirect for the specified posts page", async () => {
     const store = initStore();
-    const addRedirect = store.libraries.source.resolver
-      .addRedirect as jest.Mock;
-
     store.state.source.postsPage = "/all-posts/";
     await store.actions.source.init();
-
-    const [[{ pattern, func }]] = addRedirect.mock.calls;
-
-    expect(pattern).toBe("/all-posts/");
-    expect(func()).toBe("/");
+    expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 
   test("should add redirect for categories if 'categoryBase' is set", async () => {
     const store = initStore();
-    const addRedirect = store.libraries.source.resolver
-      .addRedirect as jest.Mock;
-
     store.state.source.categoryBase = "wp-cat";
     await store.actions.source.init();
-
-    const [[newBase], [oldBase]] = addRedirect.mock.calls;
-
-    expect(newBase.pattern).toBe("/wp-cat/:subpath+/");
-    expect(newBase.func({ subpath: "some-cat" })).toBe("/category/some-cat/");
-
-    expect(oldBase.pattern).toBe("/category/(.*)/");
-    expect(oldBase.func()).toBe("");
+    expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 
   test("should add redirect for tags if 'tagBase' is set", async () => {
     const store = initStore();
-    const addRedirect = store.libraries.source.resolver
-      .addRedirect as jest.Mock;
-
     store.state.source.tagBase = "wp-tag";
     await store.actions.source.init();
-
-    const [[newBase], [oldBase]] = addRedirect.mock.calls;
-
-    expect(newBase.pattern).toBe("/wp-tag/:subpath+/");
-    expect(newBase.func({ subpath: "some-tag" })).toBe("/tag/some-tag/");
-
-    expect(oldBase.pattern).toBe("/tag/(.*)/");
-    expect(oldBase.func()).toBe("");
+    expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 
   test("should add redirect if 'subirectory' is present", async () => {
     const store = initStore();
-    const addRedirect = store.libraries.source.resolver
-      .addRedirect as jest.Mock;
-
     store.state.source.homepage = "/about-us/";
     store.state.source.postsPage = "/all-posts/";
     store.state.source.categoryBase = "wp-cat";
     store.state.source.tagBase = "wp-tag";
     store.state.source.subdirectory = "blog";
-
     await store.actions.source.init();
-
-    const redirects = [].concat(...addRedirect.mock.calls);
-    const results = redirects.map(({ pattern, func }) => ({
-      pattern,
-      result: func({ subpath: "subpath" })
-    }));
-    expect(results).toMatchSnapshot();
+    expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 });

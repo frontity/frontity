@@ -1,7 +1,7 @@
-import Resolver from "../resolver";
+import { getMatch } from "../get-match";
 
 // Some redirections
-const redirects: {
+const redirections: {
   name: string;
   priority: number;
   pattern: string;
@@ -39,23 +39,24 @@ const redirects: {
   }
 ];
 
-// Add redirects
-const resolver = new Resolver();
-redirects.forEach(patternObj => {
-  resolver.addRedirect(patternObj);
-});
+const redirect = (path, redirections) => {
+  const match = getMatch(path, redirections);
+  if (!match) return path;
+  return match.func(match.params);
+};
 
-describe("resolver", () => {
+// Add redirects
+describe("getMatch", () => {
   test("redirects different routes", async () => {
-    expect(resolver.redirect("/")).toBe("/about-us/");
-    expect(resolver.redirect("/about-us/")).toBe("/about-us/");
-    expect(resolver.redirect("/posts/")).toBe("/");
-    expect(resolver.redirect("/wp-cat/nature/")).toBe("/category/nature/");
-    expect(resolver.redirect("/wp-cat/nature/forests")).toBe(
+    expect(redirect("/", redirections)).toBe("/about-us/");
+    expect(redirect("/about-us/", redirections)).toBe("/about-us/");
+    expect(redirect("/posts/", redirections)).toBe("/");
+    expect(redirect("/wp-cat/nature/", redirections)).toBe("/category/nature/");
+    expect(redirect("/wp-cat/nature/forests", redirections)).toBe(
       "/category/nature/forests/"
     );
-    expect(resolver.redirect("/category/nature")).toBe("");
-    expect(resolver.redirect("/blog/")).toBe("/");
-    expect(resolver.redirect("/blog/some-post/")).toBe("/some-post/");
+    expect(redirect("/category/nature", redirections)).toBe("");
+    expect(redirect("/blog/", redirections)).toBe("/");
+    expect(redirect("/blog/some-post/", redirections)).toBe("/some-post/");
   });
 });
