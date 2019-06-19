@@ -14,18 +14,23 @@ export default { parse, stringify, normalize };
 
 // UTILS
 
-export const routeToParams = (route: string): RouteParams => {
+export const decomposeRoute = (route: string) => {
   const [
     ,
-    fullPath,
+    pathname,
     query,
     hash
   ] = /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)(?:\?([^#]*))?(#.*)?/.exec(
     route
   );
-  const [, path, page] = /^(.*)page\/(\d+)\/?(\?.*)?$/.exec(fullPath) || [
+  return { pathname, query, hash };
+};
+
+export const routeToParams = (route: string): RouteParams => {
+  const { pathname, query, hash } = decomposeRoute(route);
+  const [, path, page] = /^(.*)page\/(\d+)\/?(\?.*)?$/.exec(pathname) || [
     null,
-    fullPath,
+    pathname,
     "1"
   ];
 

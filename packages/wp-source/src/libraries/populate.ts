@@ -2,7 +2,7 @@ import { State } from "frontity/types";
 import WpSource from "../../";
 import { normalize } from "normalizr";
 import * as schemas from "./schemas";
-import { concatPath } from "./route-utils";
+import { concatPath, decomposeRoute } from "./route-utils";
 
 const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
@@ -59,7 +59,7 @@ const transformLink = ({
 
   // get API subdirectory
   const path = !isWpCom
-    ? new URL(api).pathname.replace(/\/wp-json\/?$/, "/")
+    ? decomposeRoute(api).pathname.replace(/\/wp-json\/?$/, "/")
     : "";
 
   // remove API subdirectory
