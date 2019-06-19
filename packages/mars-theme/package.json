@@ -19,14 +19,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {
-    "@frontity/html2react": "^1.1.0",
-    "@frontity/router": "^1.0.4",
-    "@frontity/source": "^1.0.3",
-    "frontity": "^1.0.2"
-  },
   "dependencies": {
     "@frontity/components": "^1.1.0",
+    "frontity": "^1.0.2",
     "react-spinners": "^0.5.4"
   }
 }
