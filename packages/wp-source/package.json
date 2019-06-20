@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-source",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Source package of Frontity for self-hosted WordPress and WordPress.com sites",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
