@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/frontity/frontity/compare/frontity@1.0.3...frontity@1.0.4) (2019-06-20)
+
+
+### Bug Fixes
+
+* **frontity:** fix package name validation ([fb26305](https://github.com/frontity/frontity/commit/fb26305))
+
+
+
+
+
 ## [1.0.3](https://github.com/frontity/frontity/compare/frontity@1.0.2...frontity@1.0.3) (2019-06-19)
 
 
