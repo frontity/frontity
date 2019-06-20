@@ -9,6 +9,11 @@ export const isPackageNameValid = (name: string): boolean => {
   return nameConventionMatch.test(name);
 };
 
+export const isThemeNameValid = (name: string): boolean => {
+  const nameConventionMatch = /^(?:@[\w-]+\/)?[\w-]+$/;
+  return nameConventionMatch.test(name);
+};
+
 export const errorLogger = (error: Error, message?: string) => {
   console.error(
     chalk.bold.red("\nError: ") +

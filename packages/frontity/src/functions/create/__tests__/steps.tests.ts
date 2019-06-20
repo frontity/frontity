@@ -188,7 +188,7 @@ describe("cloneStarterTheme", () => {
       }
     }) as any);
     mockedFsExtra.ensureDir.mockReset();
-    mockedUtils.isPackageNameValid.mockReset();
+    mockedUtils.isThemeNameValid.mockReset();
     mockedFsExtra.readdir.mockReset();
     mockedFsExtra.readdir.mockResolvedValueOnce(["file.tgz"]);
     mockedFsExtra.remove.mockReset();
@@ -206,11 +206,11 @@ describe("cloneStarterTheme", () => {
       path: "/path/to/project",
       theme: "@frontity/mars-theme"
     };
-    mockedUtils.isPackageNameValid.mockReturnValue(true);
+    mockedUtils.isThemeNameValid.mockReturnValue(true);
     await cloneStarterTheme(options);
     expect(mockedFsExtra.readFile.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
-    expect(mockedUtils.isPackageNameValid.mock.calls).toMatchSnapshot();
+    expect(mockedUtils.isThemeNameValid.mock.calls).toMatchSnapshot();
     expect(mockedChildProcess.exec.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
     expect(mockedTar.extract.mock.calls).toMatchSnapshot();
@@ -222,7 +222,7 @@ describe("cloneStarterTheme", () => {
       path: "/path/to/project",
       theme: "@frontity/mars-theme"
     };
-    mockedUtils.isPackageNameValid.mockReturnValue(false);
+    mockedUtils.isThemeNameValid.mockReturnValue(false);
     await expect(cloneStarterTheme(options)).rejects.toThrow(
       "The name of the theme is not a valid npm package name."
     );

@@ -14,7 +14,7 @@ import {
 import { extract } from "tar";
 import fetch from "node-fetch";
 import { mergeRight } from "ramda";
-import { isPackageNameValid } from "../../utils";
+import { isPackageNameValid, isThemeNameValid } from "../../utils";
 import { Options, PackageJson } from "./types";
 
 const allowedExistingContent = ["readme.md", "license", ".git", ".gitignore"];
@@ -171,7 +171,7 @@ export const cloneStarterTheme = async ({ theme, path }: Options) => {
   );
   const themePath = resolvePath(path, packageJson.dependencies[theme]);
   await ensureDir(themePath);
-  if (!isPackageNameValid(theme))
+  if (!isThemeNameValid(theme))
     throw new Error("The name of the theme is not a valid npm package name.");
   await promisify(exec)(`npm pack ${theme}`, { cwd: themePath });
   const tarball = (await readDir(themePath)).find(file => /\.tgz$/.test(file));
