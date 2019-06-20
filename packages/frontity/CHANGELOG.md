@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://github.com/frontity/frontity/compare/frontity@1.0.5...frontity@1.0.6) (2019-06-20)
+
+
+### Bug Fixes
+
+* **create:** finally fixing the create command from berlin ([f9e650d](https://github.com/frontity/frontity/commit/f9e650d))
+
+
+
+
+
 ## [1.0.5](https://github.com/frontity/frontity/compare/frontity@1.0.4...frontity@1.0.5) (2019-06-20)
 
 
