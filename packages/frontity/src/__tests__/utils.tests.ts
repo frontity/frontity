@@ -26,7 +26,7 @@ describe("isPackageNameValid", () => {
     test("The name can’t contain any non-URL-safe characters", () => {
       // Unsafe characters extracted from this site:
       // https://perishablepress.com/stop-using-unsafe-characters-in-urls/
-      const unsafeChars = "$-_.+!*'(),;?:=&@/";
+      const unsafeChars = "$+!*'(),;?:=&@/";
       unsafeChars.split("").map(char => {
         expect(isPackageNameValid(`a${char}a`)).toBe(false);
       });
@@ -40,6 +40,28 @@ describe("isPackageNameValid", () => {
       unsafeChars.split("").map(char => {
         expect(isPackageNameValid(`a${char}a`)).toBe(false);
       });
+    });
+  });
+  describe("Use a valid package", () => {
+    test("A plain name is working", () => {
+      // Unsafe characters extracted from this question:
+      // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
+      expect(isPackageNameValid('frontity')).toBe(true);
+    });
+    test("A name with dots is working", () => {
+      // Unsafe characters extracted from this question:
+      // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
+      expect(isPackageNameValid('frontity.org.cool')).toBe(true);
+    });
+    test("A name with dots and dashes is working", () => {
+      // Unsafe characters extracted from this question:
+      // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
+      expect(isPackageNameValid('frontity-org.cool')).toBe(true);
+    });
+    test("A name with more than one dash is working", () => {
+      // Unsafe characters extracted from this question:
+      // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
+      expect(isPackageNameValid('frontity-org-cool')).toBe(true);
     });
   });
 });
