@@ -1,7 +1,11 @@
 import chalk from "chalk";
 
 export const isPackageNameValid = (name: string): boolean => {
-  const nameConventionMatch = /^(?:@[\w-]+\/)?[\w.-]+$/;
+  if (name.length >= 214) return false;
+  if ("._".includes(name[0])) return false;
+  const specialCharacters = /^[^/:*?"<>|]+$/;
+  if (specialCharacters.test(name)) return false;
+  const nameConventionMatch = /^(?:@[a-z0-9_.-]+\/)?[a-z0-9_.-]+$/;
   return nameConventionMatch.test(name);
 };
 
