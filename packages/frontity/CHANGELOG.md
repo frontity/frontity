@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.5](https://github.com/frontity/frontity/compare/frontity@1.0.4...frontity@1.0.5) (2019-06-20)
+
+
+### Bug Fixes
+
+* **frontity:** add positive tests, fix special chars ([13f9412](https://github.com/frontity/frontity/commit/13f9412))
+
+
+
+
+
 ## [1.0.4](https://github.com/frontity/frontity/compare/frontity@1.0.3...frontity@1.0.4) (2019-06-20)
 
 
