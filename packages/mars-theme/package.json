@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@frontity/components": "^1.1.4",
+    "@frontity/html2react": "^1.0.0",
     "frontity": "^1.0.6",
     "react-spinners": "^0.5.4"
   }
