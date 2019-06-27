@@ -35,7 +35,7 @@ export default ({ packages }) => {
     })
   );
 
-  // Ignore HRM if not in dev mode or old browser open.
+  // Ignore HMR if not in dev mode or old browser open.
   app.use(
     get("/__webpack_hmr", ctx => {
       ctx.status = 404;
