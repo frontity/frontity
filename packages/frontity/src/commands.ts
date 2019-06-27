@@ -59,11 +59,6 @@ program
   .action(create);
 
 program
-  .command("create-package [name]")
-  .description("Creates a new Frontity package.")
-  .action(createPackage);
-
-program
   .command("dev")
   .option("-p, --production", "Builds the project for production.")
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
