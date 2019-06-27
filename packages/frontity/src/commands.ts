@@ -28,7 +28,15 @@ tsNode.register({
 import program from "commander";
 import { readFileSync } from "fs-extra";
 import { resolve } from "path";
-import { create, createPackage, dev, build, serve, subscribe } from "./actions";
+import {
+  create,
+  createPackage,
+  dev,
+  build,
+  serve,
+  subscribe,
+  info
+} from "./actions";
 
 const { version } = JSON.parse(
   readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
@@ -79,6 +87,11 @@ program
   .command("subscribe <email>")
   .description("Subscribe to Frontity newsletter.")
   .action(subscribe);
+
+program
+  .command("info")
+  .description("Get environment information for debugging and issue reporting.")
+  .action(info);
 
 // Parses the arguments and adds them to the `command` object.
 program.parse(process.argv);
