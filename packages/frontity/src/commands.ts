@@ -44,7 +44,9 @@ const { version } = JSON.parse(
 );
 
 // Sets the version and the description of the program.
-program.version(version).description("Frontity CLI");
+program.version(version)
+	.usage('<command> [options]')
+	.description("Frontity CLI");
 
 // Registers a `create` command that takes an optional
 // parameter called `name`. It also accepts the following
