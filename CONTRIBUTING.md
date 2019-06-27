@@ -4,7 +4,9 @@ We really appreciate your interest to contribute to Frontity! Any kind of contri
 
 ## Coding Contributions
 
-There is a detailed guide about how to contribute coding at our docs: [Code Contributions](https://docs.frontity.org/contributing/code-contributions), but if you are looking for a quick guide, these are the main steps.
+There is a detailed guide about how to contribute coding at our docs: [Code Contributions](https://docs.frontity.org/contributing/code-contributions), but if you are looking for a quick guide, these are the main steps:
+
+**Prerequisites:** Node 10 installed in your computer.
 
 1. Fork this [repository](https://github.com/frontity/frontity) clone your fork.
 2. Run ```npm install``` in the root folder.
