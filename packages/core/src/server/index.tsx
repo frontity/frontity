@@ -35,6 +35,14 @@ export default ({ packages }) => {
     })
   );
 
+  // Ignore HRM if not in dev mode or old browser open.
+  app.use(
+    get("/__webpack_hmr", ctx => {
+      ctx.status = 404;
+      ctx.body = "";
+    })
+  );
+
   // Return Frontity favicon for favicon.ico.
   app.use(get("/favicon.ico", serve("./")));
 
