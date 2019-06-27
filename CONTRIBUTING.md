@@ -8,17 +8,17 @@ There is a detailed guide about how to contribute coding at our docs: [Code Cont
 
 **Prerequisites:** Node 10 installed in your computer.
 
-1. Fork this [repository](https://github.com/frontity/frontity) clone your fork.
+1. Fork this [repository](https://github.com/frontity/frontity) and clone your fork.
 2. Run ```npm install``` in the root folder.
-3. Run ```cd examples/mars-theme-example/``` to go to the example directory
-4. Run ```npx frontity dev``` to start Frontity with mars-theme on [localhost:3000](http://localhost:3000/)
+3. Run ```cd examples/mars-theme-example/``` to go to the example directory.
+4. Run ```npx frontity dev``` to start Frontity with mars-theme on [localhost:3000](http://localhost:3000/).
 5. Make any changes you consider to the packages.
->***WARNING: After adding/removing dependencies to a package, go back to the root and do ```npm install``` again***
+>***WARNING: After adding/removing dependencies to a package, go back to the root and do ```npm install``` again.***
 6. Run ```npm test``` in the root to check if the commit is acceptable.
 7. Commit and push to your fork.
 8. Open a Pull Request detailing the changes.
 
-If you get stuck on any of these steps, you should check the [Code Contributions guide](https://docs.frontity.org/contributing/code-contributions)
+If you get stuck on any of these steps, you should check the [Code Contributions guide](https://docs.frontity.org/contributing/code-contributions).
 
 ## Other types of contributions
 
