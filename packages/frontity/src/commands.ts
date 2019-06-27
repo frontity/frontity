@@ -93,5 +93,11 @@ program
   .description("Get environment information for debugging and issue reporting.")
   .action(info);
 
+program
+  .on("command:*", () => {
+    console.log(`Unknown command ${program.args.join(' ')}`);
+    program.help();
+  });
+
 // Parses the arguments and adds them to the `command` object.
 program.parse(process.argv);
