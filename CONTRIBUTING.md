@@ -6,7 +6,7 @@ We really appreciate your interest to contribute to Frontity! Any kind of contri
 
 There is a detailed guide about how to contribute coding at our docs: [Code Contributions](https://docs.frontity.org/contributing/code-contributions), but if you are looking for a quick guide, these are the main steps:
 
-**Prerequisites:** Node 10 installed in your computer.
+**Prerequisites:** Node 10 (or newer) installed in your computer.
 
 1. Fork this [repository](https://github.com/frontity/frontity) and clone your fork.
 2. Run ```npm install``` in the root folder.
@@ -17,6 +17,8 @@ There is a detailed guide about how to contribute coding at our docs: [Code Cont
 6. Run ```npm test``` in the root to check if the commit is acceptable.
 7. Commit and push to your fork.
 8. Open a Pull Request detailing the changes.
+
+>***WARNING: `npm test` will be run automatically each time your commit or push, so it may take a while. If it fails, it won't let you commit/push. Fix the tests and try again.***
 
 If you get stuck on any of these steps, you should check the [Code Contributions guide](https://docs.frontity.org/contributing/code-contributions).
 
