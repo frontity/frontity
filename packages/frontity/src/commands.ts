@@ -28,23 +28,17 @@ tsNode.register({
 import program from "commander";
 import { readFileSync } from "fs-extra";
 import { resolve } from "path";
-import {
-  create,
-  createPackage,
-  dev,
-  build,
-  serve,
-  subscribe,
-  info,
-  unknown
-} from "./actions";
+import { create, dev, build, serve, subscribe, info, unknown } from "./actions";
 
 const { version } = JSON.parse(
   readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
 );
 
 // Sets the version and the description of the program.
-program.version(version).description("Frontity CLI");
+program
+  .version(version)
+  .usage("<command> [options]")
+  .description("Frontity CLI");
 
 // Registers a `create` command that takes an optional
 // parameter called `name`. It also accepts the following
@@ -55,11 +49,6 @@ program
   .option("-c, --use-cwd", "Generates the project in the current directory.")
   .description("Creates a new Frontity project.")
   .action(create);
-
-program
-  .command("create-package [name]")
-  .description("Creates a new Frontity package.")
-  .action(createPackage);
 
 program
   .command("dev")
