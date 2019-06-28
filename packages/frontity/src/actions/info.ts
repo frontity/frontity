@@ -8,7 +8,7 @@ export default async () => {
       Binaries: ["Node", "npm"],
       Browsers: ["Chrome", "Edge", "Internet Explorer", "Firefox", "Safari"],
       npmPackages: true,
-      npmGlobalPackages: ["frontity"]
+      npmGlobalPackages: ["frontity", "npx"]
     },
     { markdown: true, showNotFound: true, duplicates: true }
   );
