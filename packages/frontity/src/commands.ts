@@ -35,7 +35,8 @@ import {
   build,
   serve,
   subscribe,
-  info
+  info,
+  unknown
 } from "./actions";
 
 const { version } = JSON.parse(
@@ -92,6 +93,8 @@ program
   .command("info")
   .description("Get environment information for debugging and issue reporting.")
   .action(info);
+
+program.on("command:*", (command: string) => unknown(command, program));
 
 // Parses the arguments and adds them to the `command` object.
 program.parse(process.argv);
