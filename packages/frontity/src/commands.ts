@@ -99,6 +99,4 @@ program.on("command:*", (command: string) => unknown(command, program));
 // Parses the arguments and adds them to the `command` object.
 program.parse(process.argv);
 
-if (!program.args.length) {
-	program.help();
-}
+if (!program.args.length) program.help();
