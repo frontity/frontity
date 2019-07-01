@@ -8,6 +8,7 @@ export type Pattern<F extends Function = (params: any) => any> = {
   priority: number;
   pattern: string;
   func: F;
+  isRequired?: boolean;
 };
 
 export type Handler = (args: {

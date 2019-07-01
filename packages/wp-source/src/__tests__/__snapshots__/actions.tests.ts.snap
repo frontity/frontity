@@ -40,13 +40,13 @@ Array [
     "func": [Function],
     "name": "category base",
     "pattern": "/wp-cat/:subpath+/",
-    "priority": 10,
+    "priority": 20,
   },
   Object {
     "func": [Function],
-    "name": "category base (reverse)",
+    "name": "ignore default category base",
     "pattern": "/category/(.*)/",
-    "priority": 10,
+    "priority": 20,
   },
 ]
 `;
@@ -57,13 +57,13 @@ Array [
     "func": [Function],
     "name": "tag base",
     "pattern": "/wp-tag/:subpath+/",
-    "priority": 10,
+    "priority": 20,
   },
   Object {
     "func": [Function],
-    "name": "tag base (reverse)",
+    "name": "ignore default tag base",
     "pattern": "/tag/(.*)/",
-    "priority": 10,
+    "priority": 20,
   },
 ]
 `;
@@ -74,7 +74,7 @@ Array [
     "func": [Function],
     "name": "homepage",
     "pattern": "/",
-    "priority": 10,
+    "priority": 20,
   },
 ]
 `;
@@ -85,7 +85,7 @@ Array [
     "func": [Function],
     "name": "posts page",
     "pattern": "/all-posts/",
-    "priority": 10,
+    "priority": 20,
   },
 ]
 `;
@@ -94,51 +94,51 @@ exports[`init should add redirect if 'subirectory' is present 1`] = `
 Array [
   Object {
     "func": [Function],
-    "name": "homepage",
-    "pattern": "/blog/",
-    "priority": 10,
-  },
-  Object {
-    "func": [Function],
-    "name": "posts page",
-    "pattern": "/blog/all-posts/",
-    "priority": 10,
-  },
-  Object {
-    "func": [Function],
-    "name": "category base",
-    "pattern": "/blog/wp-cat/:subpath+/",
-    "priority": 10,
-  },
-  Object {
-    "func": [Function],
-    "name": "category base (reverse)",
-    "pattern": "/blog/category/(.*)/",
-    "priority": 10,
-  },
-  Object {
-    "func": [Function],
-    "name": "tag base",
-    "pattern": "/blog/wp-tag/:subpath+/",
-    "priority": 10,
-  },
-  Object {
-    "func": [Function],
-    "name": "tag base (reverse)",
-    "pattern": "/blog/tag/(.*)/",
-    "priority": 10,
-  },
-  Object {
-    "func": [Function],
     "name": "subdirectory",
     "pattern": "/blog/:subpath*/",
     "priority": 10,
   },
   Object {
     "func": [Function],
-    "name": "subdirectory (reverse)",
+    "name": "ignore root",
     "pattern": "/(.*)",
     "priority": 10,
+  },
+  Object {
+    "func": [Function],
+    "name": "homepage",
+    "pattern": "/",
+    "priority": 20,
+  },
+  Object {
+    "func": [Function],
+    "name": "posts page",
+    "pattern": "/all-posts/",
+    "priority": 20,
+  },
+  Object {
+    "func": [Function],
+    "name": "category base",
+    "pattern": "/wp-cat/:subpath+/",
+    "priority": 20,
+  },
+  Object {
+    "func": [Function],
+    "name": "ignore default category base",
+    "pattern": "/category/(.*)/",
+    "priority": 20,
+  },
+  Object {
+    "func": [Function],
+    "name": "tag base",
+    "pattern": "/wp-tag/:subpath+/",
+    "priority": 20,
+  },
+  Object {
+    "func": [Function],
+    "name": "ignore default tag base",
+    "pattern": "/tag/(.*)/",
+    "priority": 20,
   },
 ]
 `;

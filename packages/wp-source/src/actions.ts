@@ -2,6 +2,7 @@ import WpSource from "../";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
+import { redirect } from "./libraries/redirect";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async link => {
@@ -29,11 +30,12 @@ const actions: WpSource["actions"]["source"] = {
     try {
       // transform path if there is some redirection
       let { path } = routeParams;
-      const redirection = getMatch(path, redirections);
-      if (redirection) path = redirection.func(redirection.params);
+      path = redirect(path, redirections);
 
       // get the handler for this path
       const handler = getMatch(path, handlers);
+      if (!handler) throw new Error(`No matching handler for route "${route}"`);
+
       await handler.func({ route, params: handler.params, state, libraries });
       // everything OK
       source.data[route] = {
@@ -71,21 +73,37 @@ const actions: WpSource["actions"]["source"] = {
       tagBase
     } = state.source;
 
+    if (subdirectory) {
+      const pattern = concatPath(subdirectory, "/:subpath*");
+      redirections.push({
+        name: "subdirectory",
+        priority: 10,
+        pattern,
+        func: ({ subpath }) => (subpath ? `/${subpath}/` : "/")
+      });
+      redirections.push({
+        name: "ignore root",
+        priority: 10,
+        pattern: "/(.*)",
+        func: () => ""
+      });
+    }
+
     if (homepage) {
-      const pattern = concatPath(subdirectory);
+      const pattern = "/";
       redirections.push({
         name: "homepage",
-        priority: 10,
+        priority: 20,
         pattern,
         func: () => concatPath(homepage)
       });
     }
 
     if (postsPage) {
-      const pattern = concatPath(subdirectory, postsPage);
+      const pattern = concatPath(postsPage);
       redirections.push({
         name: "posts page",
-        priority: 10,
+        priority: 20,
         pattern,
         func: () => "/"
       });
@@ -93,54 +111,36 @@ const actions: WpSource["actions"]["source"] = {
 
     if (categoryBase) {
       // add new direction
-      const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
+      const pattern = concatPath(categoryBase, "/:subpath+");
       redirections.push({
         name: "category base",
-        priority: 10,
+        priority: 20,
         pattern,
         func: ({ subpath }) => `/category/${subpath}/`
       });
       // remove old direction
       redirections.push({
-        name: "category base (reverse)",
-        priority: 10,
-        pattern: concatPath(subdirectory, "/category/(.*)/"),
+        name: "ignore default category base",
+        priority: 20,
+        pattern: concatPath("/category/(.*)/"),
         func: () => ""
       });
     }
 
     if (tagBase) {
       // add new direction
-      const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
+      const pattern = concatPath(tagBase, "/:subpath+");
       redirections.push({
         name: "tag base",
-        priority: 10,
+        priority: 20,
         pattern,
         func: ({ subpath }) => `/tag/${subpath}/`
       });
       // remove old direction
       redirections.push({
-        name: "tag base (reverse)",
-        priority: 10,
-        pattern: concatPath(subdirectory, "/tag/(.*)/"),
-        func: () => ""
-      });
-    }
-
-    if (subdirectory) {
-      // add new direction
-      const pattern = concatPath(subdirectory, "/:subpath*");
-      redirections.push({
-        name: "subdirectory",
-        priority: 10,
-        pattern,
-        func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
-      });
-      // remove old direction
-      redirections.push({
-        name: "subdirectory (reverse)",
-        priority: 10,
-        pattern: "/(.*)",
+        name: "ignore default tag base",
+        priority: 20,
+        pattern: concatPath("/tag/(.*)/"),
         func: () => ""
       });
     }

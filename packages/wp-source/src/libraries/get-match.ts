@@ -3,7 +3,7 @@ import pathToRegexp, { Key } from "path-to-regexp";
 
 type GetMatch = <T extends Pattern>(
   path: string,
-  list: T[]
+  patternOrList: T | T[]
 ) => {
   params: Record<string, string>;
   func: T["func"];
@@ -14,7 +14,8 @@ type ExecMatch = (
   match: { regexp: RegExp; keys: Key[] }
 ) => Record<string, string>;
 
-export const getMatch: GetMatch = (path, list) => {
+export const getMatch: GetMatch = (path, patternOrList) => {
+  const list = patternOrList instanceof Array ? patternOrList : [patternOrList];
   const result = list
     .sort(({ priority: p1 }, { priority: p2 }) => p1 - p2)
     .map(({ name, priority, pattern, func }) => {
