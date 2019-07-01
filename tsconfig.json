@@ -18,5 +18,7 @@
     "jsx": "react",
     // Transpile JS as well.
     "allowJs": true
-  }
+  },
+  "exclude": ["**/node_modules/*", "**/dist/*", "**/build/*"],
+  "include": ["packages", "examples"]
 }

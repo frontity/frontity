@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "es6"
+  },
+  "exclude": ["**/node_modules/*", "**/dist/*", "**/build/*"],
+  "include": ["packages", "examples"]
+}
