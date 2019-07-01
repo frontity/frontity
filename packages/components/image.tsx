@@ -35,6 +35,7 @@ interface Props {
   sizes?: string;
   alt?: string;
   className?: string;
+  rootMargin?: string;
   loading?: "auto" | "lazy" | "eager";
 }
 
@@ -95,7 +96,7 @@ const Image: Image = props => {
     }
 
     if (typeof IntersectionObserver !== "undefined") {
-      const [onScreen, ref] = useInView({ onlyOnce: true });
+      const [onScreen, ref] = useInView({ rootMargin: props.rootMargin, onlyOnce: true });
       if (onScreen) changeAttributes(attributes);
       return (
         <>
