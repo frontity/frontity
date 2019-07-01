@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/frontity/frontity/compare/@frontity/core@1.1.1...@frontity/core@1.1.2) (2019-07-01)
+
+
+### Bug Fixes
+
+* **core:** return 404 if HMR endpoint gets through Webpack to Frontity ([#144](https://github.com/frontity/frontity/issues/144)) ([b86627a](https://github.com/frontity/frontity/commit/b86627a))
+
+
+
+
+
 ## [1.1.1](https://github.com/frontity/frontity/compare/@frontity/core@1.1.0...@frontity/core@1.1.1) (2019-06-19)
 
 

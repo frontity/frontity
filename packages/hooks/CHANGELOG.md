@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.4...@frontity/hooks@1.1.5) (2019-07-01)
+
+**Note:** Version bump only for package @frontity/hooks
+
+
+
+
+
 ## [1.1.4](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.3...@frontity/hooks@1.1.4) (2019-06-20)
 
 **Note:** Version bump only for package @frontity/hooks

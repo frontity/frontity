@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/frontity/frontity/compare/frontity@1.0.6...frontity@1.1.0) (2019-07-01)
+
+
+### Bug Fixes
+
+* **cli:** fixes misleading usage message ([#149](https://github.com/frontity/frontity/issues/149)) ([386c0cc](https://github.com/frontity/frontity/commit/386c0cc)), closes [#148](https://github.com/frontity/frontity/issues/148)
+* **frontity-cli:** show npx version in the environment info ([#152](https://github.com/frontity/frontity/issues/152)) ([4a7e269](https://github.com/frontity/frontity/commit/4a7e269))
+
+
+### Features
+
+* **cli:** shows up help if no arguments were provided ([#150](https://github.com/frontity/frontity/issues/150)) ([6a6eabb](https://github.com/frontity/frontity/commit/6a6eabb)), closes [#146](https://github.com/frontity/frontity/issues/146)
+* **cli:** warn the user on providing unknown commands ([#151](https://github.com/frontity/frontity/issues/151)) ([8d0d753](https://github.com/frontity/frontity/commit/8d0d753)), closes [#147](https://github.com/frontity/frontity/issues/147)
+* **frontity-cli:** add command to get environment information ([#143](https://github.com/frontity/frontity/issues/143)) ([1795f1d](https://github.com/frontity/frontity/commit/1795f1d))
+
+
+
+
+
 ## [1.0.6](https://github.com/frontity/frontity/compare/frontity@1.0.5...frontity@1.0.6) (2019-06-20)
 
 
