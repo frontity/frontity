@@ -9,7 +9,7 @@ export const redirect = (
   redirections.sort(({ priority: p1 }, { priority: p2 }) => p1 - p2);
 
   // apply redirections in order
-  let lastPriority = 0;
+  let lastPriority = -1;
   for (let redirect of redirections) {
     const match = getMatch(path, redirect);
     if (match && redirect.priority > lastPriority) {
