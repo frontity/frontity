@@ -2,6 +2,7 @@ import WpSource from "../";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
+import * as handlerFuncs from "./libraries/handlers";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async link => {
@@ -53,12 +54,32 @@ const actions: WpSource["actions"]["source"] = {
   },
 
   init: ({ state, libraries }) => {
-    const { api, isWpCom } = state.source;
+    const { api, isWpCom, postTypes, taxonomies } = state.source;
 
     libraries.source.api.init({ api, isWpCom });
 
     // handlers & redirections:
     const { handlers, redirections } = libraries.source;
+
+    // CPT and Custom Taxonomies
+    postTypes.forEach(({ slug, endpoint, archive }) => {
+      // add cpt to state
+      state.source[slug] = {};
+      // cpt handler
+      handlers.push({
+        name: `cpt-${slug}`,
+        priority: 10,
+        pattern: `/movie/:slug`,
+        func: handlerFuncs.postType({ type: slug, endpoint })
+      });
+      // cpt archive handler
+      // handlers.push({
+      //   name: `cpt-archive-${slug}`,
+      //   priority: 10,
+      //   pattern: `/movies/`,
+      //   func: handlerFuncs.({ type: slug, endpoint })
+      // });
+    });
 
     const patterns = isWpCom ? wpCom : wpOrg;
     handlers.push(...patterns);

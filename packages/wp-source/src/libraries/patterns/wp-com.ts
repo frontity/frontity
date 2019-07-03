@@ -1,3 +1,4 @@
+import WpSource from "../../..";
 import {
   postArchive,
   category,
@@ -8,7 +9,7 @@ import {
   page
 } from "../handlers";
 
-export default [
+const wpComHandlers: WpSource["libraries"]["source"]["handlers"] = [
   {
     name: "post archive",
     priority: 10,
@@ -64,3 +65,5 @@ export default [
     func: page
   }
 ];
+
+export default wpComHandlers;

@@ -36,6 +36,15 @@ interface WpSource extends Source {
       tagBase: string;
       homepage: string;
       postsPage: string;
+      postTypes: {
+        slug: string;
+        endpoint: string;
+        archive: string;
+      }[];
+      taxonomies: {
+        slug: string;
+        endpoint: string;
+      }[];
     };
   };
   actions: {

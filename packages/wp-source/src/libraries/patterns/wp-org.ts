@@ -1,3 +1,4 @@
+import WpSource from "../../..";
 import {
   postArchive,
   category,
@@ -6,10 +7,10 @@ import {
   date,
   post,
   attachment,
-  postType
+  postTypes
 } from "../handlers";
 
-export default [
+const wpOrgHandlers: WpSource["libraries"]["source"]["handlers"] = [
   {
     name: "post archive",
     priority: 10,
@@ -86,12 +87,14 @@ export default [
     name: "post type",
     priority: 90,
     pattern: "/:slug", // post or page or attachment
-    func: postType
+    func: postTypes
   },
   {
     name: "sub post type",
     priority: 90,
     pattern: "/(.*)/:slug", // page or attachment
-    func: postType
+    func: postTypes
   }
 ];
+
+export default wpOrgHandlers;

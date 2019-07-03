@@ -1,21 +1,42 @@
-import { Handler } from "../../../";
-import post from "./post";
-import page from "./page";
-import attachment from "./attachment";
+import { Handler } from "../../..";
+import getIdBySlug from "./utils/get-id-by-slug";
 
-const postType: Handler = async ({ route, params, state, libraries }) => {
-  const handlers = [post, page, attachment];
+const postTypeHandler = ({
+  type,
+  endpoint,
+  truths = {}
+}: {
+  type: string;
+  endpoint: string;
+  truths?: Record<string, true>;
+}): Handler => async ({ route, params, state, libraries }) => {
+  const { source } = state;
+  const { api, populate } = libraries.source;
 
-  let tries = 0;
+  const { slug } = params;
+  let id = getIdBySlug(source[type], slug);
 
-  for (let handler of handlers) {
-    try {
-      await handler({ route, params, state, libraries });
-      break;
-    } catch (e) {
-      if (++tries === handlers.length) throw e;
-    }
+  // Get post type from REST API if not found
+  if (!id) {
+    const response = await api.get({
+      endpoint,
+      params: { slug, _embed: true }
+    });
+    const populated = await populate({ response, state });
+
+    if (!populated.length)
+      throw new Error(`Post of type "${type}" with slug "${slug}" not found.`);
+
+    [{ id }] = populated;
   }
+
+  // Init data
+  Object.assign(source.data[route], {
+    id,
+    type,
+    isPostType: true,
+    ...truths
+  });
 };
 
-export default postType;
+export default postTypeHandler;
