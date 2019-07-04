@@ -55,14 +55,20 @@ program
   .option("-p, --production", "Builds the project for production.")
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
   .option("-s, --https", "Runs the server using https.")
-  .option("--target <target>")
+  .option(
+    "--target <target>",
+    'create bundles with "es5" or "module". Default target is "module".'
+  )
   .description("Starts a server in development mode.")
   .action(dev);
 
 program
   .command("build")
   .option("-d, --development", "Builds the project for development.")
-  .option("--target <target>")
+  .option(
+    "--target <target>",
+    'create bundles with "es5" or "module". Default target is "module".'
+  )
   .description("Builds the project for production.")
   .action(build);
 
@@ -83,7 +89,7 @@ program
   .description("Get environment information for debugging and issue reporting.")
   .action(info);
 
-program.on("command:*", (command: string) => unknown(command, program));
+program.on("command:*", ([command]: string[]) => unknown(command, program));
 
 // Parses the arguments and adds them to the `command` object.
 program.parse(process.argv);
