@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.6](https://github.com/frontity/frontity/compare/@frontity/mars-theme@1.1.5...@frontity/mars-theme@1.1.6) (2019-07-04)
+
+
+### Bug Fixes
+
+* **mars-theme:** support external links in Link component ([#157](https://github.com/frontity/frontity/issues/157)) ([ff3c761](https://github.com/frontity/frontity/commit/ff3c761))
+
+
+
+
+
 ## [1.1.5](https://github.com/frontity/frontity/compare/@frontity/mars-theme@1.1.4...@frontity/mars-theme@1.1.5) (2019-07-01)
 
 **Note:** Version bump only for package @frontity/mars-theme

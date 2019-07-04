@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/frontity/frontity/compare/frontity@1.1.0...frontity@1.2.0) (2019-07-04)
+
+
+### Bug Fixes
+
+* **cli:** add description to target option ([#154](https://github.com/frontity/frontity/issues/154)) ([f8fa4cd](https://github.com/frontity/frontity/commit/f8fa4cd))
+
+
+### Features
+
+* **cli:** suggest matching commands if the user mistypes ([#155](https://github.com/frontity/frontity/issues/155)) ([7f3c24b](https://github.com/frontity/frontity/commit/7f3c24b))
+
+
+
+
+
 # [1.1.0](https://github.com/frontity/frontity/compare/frontity@1.0.6...frontity@1.1.0) (2019-07-01)
 
 

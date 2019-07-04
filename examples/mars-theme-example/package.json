@@ -1,6 +1,6 @@
 {
   "name": "mars-theme-example",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "private": true,
   "description": "Example of a project using mars-theme.",
   "scripts": {
@@ -14,10 +14,10 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@frontity/core": "^1.1.2",
-    "@frontity/html2react": "^1.1.5",
-    "@frontity/mars-theme": "^1.1.5",
-    "@frontity/tiny-router": "^1.0.9",
-    "@frontity/wp-source": "^1.1.5",
-    "frontity": "^1.1.0"
+    "@frontity/html2react": "^1.1.6",
+    "@frontity/mars-theme": "^1.1.6",
+    "@frontity/tiny-router": "^1.0.10",
+    "@frontity/wp-source": "^1.1.6",
+    "frontity": "^1.2.0"
   }
 }
