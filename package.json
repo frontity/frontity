@@ -9,7 +9,6 @@
     "reinstall": "lerna clean --yes && npm run prepare"
   },
   "devDependencies": {
-    "@types/didyoumean": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
     "eslint": "^5.14.1",
@@ -23,8 +22,5 @@
     "prettier": "^1.16.4",
     "typescript": "^3.4.5"
   },
-  "prettier": {},
-  "dependencies": {
-    "didyoumean": "^1.2.1"
-  }
+  "prettier": {}
 }
