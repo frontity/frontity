@@ -1,2 +1,4 @@
-export { default as wpOrg } from "./wp-org";
-export { default as wpCom } from "./wp-com";
+import { default as wpOrg } from "./wp-org";
+import { default as wpCom } from "./wp-com";
+
+export { wpOrg, wpCom };
