@@ -22,8 +22,8 @@ const state: WpSource["state"]["source"] = {
   subdirectory: "",
   homepage: "",
   postsPage: "",
-  categoryBase: "",
-  tagBase: ""
+  categoryBase: "category",
+  tagBase: "tag"
 };
 
 export default state;

@@ -53,17 +53,9 @@ const actions: WpSource["actions"]["source"] = {
   },
 
   init: ({ state, libraries }) => {
-    const { api, isWpCom } = state.source;
-
-    libraries.source.api.init({ api, isWpCom });
-
-    // handlers & redirections:
-    const { handlers, redirections } = libraries.source;
-
-    const patterns = isWpCom ? wpCom : wpOrg;
-    handlers.push(...patterns);
-
     const {
+      api,
+      isWpCom,
       subdirectory,
       homepage,
       postsPage,
@@ -71,79 +63,89 @@ const actions: WpSource["actions"]["source"] = {
       tagBase
     } = state.source;
 
-    if (homepage) {
-      const pattern = concatPath(subdirectory);
-      redirections.push({
-        name: "homepage",
-        priority: 10,
-        pattern,
-        func: () => concatPath(homepage)
-      });
-    }
+    libraries.source.api.init({ api, isWpCom });
 
-    if (postsPage) {
-      const pattern = concatPath(subdirectory, postsPage);
-      redirections.push({
-        name: "posts page",
-        priority: 10,
-        pattern,
-        func: () => "/"
-      });
-    }
+    // handlers & redirections:
+    const { handlers, redirections } = libraries.source;
 
-    if (categoryBase) {
-      // add new direction
-      const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
-      redirections.push({
-        name: "category base",
-        priority: 10,
-        pattern,
-        func: ({ subpath }) => `/category/${subpath}/`
-      });
-      // remove old direction
-      redirections.push({
-        name: "category base (reverse)",
-        priority: 10,
-        pattern: concatPath(subdirectory, "/category/(.*)/"),
-        func: () => ""
-      });
-    }
+    const patterns = isWpCom
+      ? wpCom
+      : wpOrg({ subdirectory, homepage, postsPage, categoryBase, tagBase });
+    handlers.push(...patterns);
 
-    if (tagBase) {
-      // add new direction
-      const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
-      redirections.push({
-        name: "tag base",
-        priority: 10,
-        pattern,
-        func: ({ subpath }) => `/tag/${subpath}/`
-      });
-      // remove old direction
-      redirections.push({
-        name: "tag base (reverse)",
-        priority: 10,
-        pattern: concatPath(subdirectory, "/tag/(.*)/"),
-        func: () => ""
-      });
-    }
+    // if (homepage) {
+    //   const pattern = concatPath(subdirectory);
+    //   redirections.push({
+    //     name: "homepage",
+    //     priority: 10,
+    //     pattern,
+    //     func: () => concatPath(homepage)
+    //   });
+    // }
 
-    if (subdirectory) {
-      // add new direction
-      const pattern = concatPath(subdirectory, "/:subpath*");
-      redirections.push({
-        name: "subdirectory",
-        priority: 10,
-        pattern,
-        func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
-      });
-      // remove old direction
-      redirections.push({
-        name: "subdirectory (reverse)",
-        priority: 10,
-        pattern: "/(.*)",
-        func: () => ""
-      });
-    }
+    // if (postsPage) {
+    //   const pattern = concatPath(subdirectory, postsPage);
+    //   redirections.push({
+    //     name: "posts page",
+    //     priority: 10,
+    //     pattern,
+    //     func: () => "/"
+    //   });
+    // }
+
+    // if (categoryBase) {
+    //   // add new direction
+    //   const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
+    //   redirections.push({
+    //     name: "category base",
+    //     priority: 10,
+    //     pattern,
+    //     func: ({ subpath }) => `/category/${subpath}/`
+    //   });
+    //   // remove old direction
+    //   redirections.push({
+    //     name: "category base (reverse)",
+    //     priority: 10,
+    //     pattern: concatPath(subdirectory, "/category/(.*)/"),
+    //     func: () => ""
+    //   });
+    // }
+
+    // if (tagBase) {
+    //   // add new direction
+    //   const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
+    //   redirections.push({
+    //     name: "tag base",
+    //     priority: 10,
+    //     pattern,
+    //     func: ({ subpath }) => `/tag/${subpath}/`
+    //   });
+    //   // remove old direction
+    //   redirections.push({
+    //     name: "tag base (reverse)",
+    //     priority: 10,
+    //     pattern: concatPath(subdirectory, "/tag/(.*)/"),
+    //     func: () => ""
+    //   });
+    // }
+
+    // if (subdirectory) {
+    //   // add new direction
+    //   const pattern = concatPath(subdirectory, "/:subpath*");
+    //   redirections.push({
+    //     name: "subdirectory",
+    //     priority: 10,
+    //     pattern,
+    //     func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
+    //   });
+    //   // remove old direction
+    //   redirections.push({
+    //     name: "subdirectory (reverse)",
+    //     priority: 10,
+    //     pattern: "/(.*)",
+    //     func: () => ""
+    //   });
+    // }
   }
 };
 export default actions;
