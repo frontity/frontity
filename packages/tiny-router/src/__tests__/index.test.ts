@@ -1,7 +1,7 @@
 import { createStore, observe } from "frontity";
 import { init, set } from "../actions";
 import tinyRouter from "..";
-import TinyRouter from "../..";
+import TinyRouter from "../../types";
 
 let config: TinyRouter;
 let normalize: jest.Mock;
