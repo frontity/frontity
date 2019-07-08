@@ -1,6 +1,6 @@
 import merge from "ramda/src/mergeDeepRight";
 import validateSettings from "./validateSettings";
-import { NormalizedSettings } from "./types";
+import { NormalizedSettings } from "../types";
 import Settings, {
   MultiSettings,
   MonoSettings
