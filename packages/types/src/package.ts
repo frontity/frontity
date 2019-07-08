@@ -15,6 +15,8 @@ export interface Package {
       packages?: string[];
       platform?: "client" | "server";
       // Populated by the user:
+      title?: string;
+      description?: string;
       url?: string;
     };
     [namespace: string]: {
