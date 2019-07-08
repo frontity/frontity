@@ -1,4 +1,4 @@
-import WpSource from "..";
+import WpSource from "../types";
 import { normalize } from "./libraries/route-utils";
 
 const state: WpSource["state"]["source"] = {

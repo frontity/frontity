@@ -1,4 +1,4 @@
-import { Handler } from "../../../";
+import { Handler } from "../../../types";
 import getIdBySlug from "./utils/get-id-by-slug";
 import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";

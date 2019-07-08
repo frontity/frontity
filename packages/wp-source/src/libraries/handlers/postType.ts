@@ -1,4 +1,4 @@
-import { Handler } from "../../../";
+import { Handler } from "../../../types";
 import post from "./post";
 import page from "./page";
 import attachment from "./attachment";

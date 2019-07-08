@@ -1,7 +1,7 @@
 import { State } from "frontity/types";
 import { createStore } from "@frontity/connect";
 
-import WpSource from "../../../..";
+import WpSource from "../../../../types";
 import populate from "../../populate";
 import handler from "../date";
 import { mockResponse, expectEntities } from "./mocks/helpers";

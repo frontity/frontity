@@ -1,5 +1,5 @@
 import { RouteParams } from "@frontity/source";
-import WpSource from "../../";
+import WpSource from "../../types";
 
 export const parse: WpSource["libraries"]["source"]["parse"] = route =>
   routeToParams(route);
