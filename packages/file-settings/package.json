@@ -6,7 +6,7 @@
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
   "main": "dist/src/index.js",
-  "types": "dist/types.d.ts",
+  "types": "dist/src/index.d.ts",
   "module": "src/index.js",
   "keywords": [
     "frontity",
