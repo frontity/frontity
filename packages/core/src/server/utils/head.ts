@@ -1,5 +1,5 @@
 import { HelmetData } from "react-helmet";
-import { HeadTags } from "../../types";
+import { HeadTags } from "../../../types";
 
 export default (helmet: HelmetData): HeadTags => {
   return {

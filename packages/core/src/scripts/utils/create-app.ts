@@ -2,7 +2,7 @@ import open from "open";
 import { MultiCompiler } from "webpack";
 import express from "express";
 import createServer from "./create-server";
-import { Mode } from "../../types";
+import { Mode } from "../../../types";
 
 // Create an express app ready to be used with webpack-dev-middleware.
 export default async ({

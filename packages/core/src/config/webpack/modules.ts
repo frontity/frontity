@@ -2,8 +2,8 @@ import hash from "hash-it";
 import { Configuration } from "webpack";
 import babelCore from "@babel/core/package.json";
 import babelLoader from "babel-loader/package.json";
-import { Target, BabelConfigs } from "../../types";
-import { Mode } from "../../types";
+import { Target, BabelConfigs } from "../../../types";
+import { Mode } from "../../../types";
 
 export default ({
   target,
