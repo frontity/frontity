@@ -6,7 +6,7 @@ import {
   WatchIgnorePlugin
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import { Target, Mode } from "../../types";
+import { Target, Mode } from "../../../types";
 
 export default ({
   target,

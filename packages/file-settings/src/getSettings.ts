@@ -1,4 +1,4 @@
-import { NormalizedSettings } from "./types";
+import { NormalizedSettings } from "../types";
 import importSettings from "./importSettings";
 
 type Props =

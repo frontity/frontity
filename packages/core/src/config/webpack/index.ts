@@ -6,7 +6,7 @@ import {
   BabelConfigs,
   EntryPoints,
   FrontityConfig
-} from "../../types";
+} from "../../../types";
 import name from "./name";
 import targets from "./targets";
 import devtool from "./devtool";

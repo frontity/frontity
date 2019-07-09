@@ -1,4 +1,4 @@
-import { Handler } from "../../../";
+import { Handler } from "../../../types";
 import getIdBySlug from "./utils/get-id-by-slug";
 
 const pageHandler: Handler = async ({ route, params, state, libraries }) => {

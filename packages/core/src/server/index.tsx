@@ -18,7 +18,7 @@ import {
 } from "./utils/stats";
 import getHeadTags from "./utils/head";
 import App from "../app";
-import { FrontityTags } from "../types";
+import { FrontityTags } from "../../types";
 import createStore from "./store";
 
 export default ({ packages }) => {

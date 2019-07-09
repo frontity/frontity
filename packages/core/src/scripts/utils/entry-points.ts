@@ -2,7 +2,7 @@ import { resolve } from "path";
 import { writeFile, ensureDir, pathExists } from "fs-extra";
 import { flatten, uniqBy, uniq } from "lodash";
 import { Site } from "@frontity/file-settings";
-import { EntryPoints, Mode } from "../../types";
+import { EntryPoints, Mode } from "../../../types";
 import getVariable from "../../utils/get-variable";
 import entryExists from "./entry-exists";
 

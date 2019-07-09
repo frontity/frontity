@@ -1,5 +1,5 @@
 import normalizeSettings from "./normalizeSettings";
-import { NormalizedSettings } from "./types";
+import { NormalizedSettings } from "../types";
 
 // This function imports the the settings from a file.
 export default async (): Promise<NormalizedSettings[]> => {

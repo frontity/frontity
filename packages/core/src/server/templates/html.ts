@@ -1,4 +1,4 @@
-import { Template } from "../../types";
+import { Template } from "../../../types";
 
 const template: Template = ({ html, frontity, head }) => `<!doctype html>
     <html ${head.htmlAttributes}>

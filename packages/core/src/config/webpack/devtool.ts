@@ -1,5 +1,5 @@
 import { Configuration } from "webpack";
-import { Mode } from "../../types";
+import { Mode } from "../../../types";
 
 // Use "cheap-module-eval-source-map" because it was recommended somewhere
 // but we should do some tests to figure out the best option ourselves.

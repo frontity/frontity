@@ -1,4 +1,4 @@
-import { Mode, Config, EntryPoints } from "../types";
+import { Mode, Config, EntryPoints } from "../../types";
 import getBabel from "./babel";
 import getWebpack from "./webpack";
 import getFrontity from "./frontity";

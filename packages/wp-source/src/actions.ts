@@ -1,4 +1,4 @@
-import WpSource from "../";
+import WpSource from "../types";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
