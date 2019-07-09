@@ -7,8 +7,8 @@
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
-  "main": "dist/scripts/index.js",
-  "types": "dist/scripts/index.d.ts",
+  "main": "dist/src/scripts/index.js",
+  "types": "dist/src/scripts/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
