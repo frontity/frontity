@@ -33,6 +33,8 @@ export const getSocialDefaults = ({ state }): YoastSocialDefaults => {
 
   if (type && id)
     return state.source[type][id].yoast_meta.yoast_wpseo_social_defaults;
+
+  return {};
 };
 
 export const getPage = route => {

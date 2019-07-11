@@ -31,7 +31,7 @@ const Facebook: React.FC<Connect<Yoast>> = ({ state }) => {
           content={state.yoast.facebook.description || state.yoast.description}
         />
         <meta property="og:url" content={state.yoast.canonical} />
-        <meta property="og:site_name" content={state.frontity.name} />
+        <meta property="og:site_name" content={state.frontity.title} />
       </Head>
       {data.isPost && (
         <Head>

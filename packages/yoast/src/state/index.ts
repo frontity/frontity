@@ -3,6 +3,7 @@ import { getEntity, getSocialDefaults } from "./utils";
 import {
   homeTitle,
   entityTitle,
+  authorTitle,
   dateTitle,
   postArchiveTitle,
   notFoundTitle
@@ -20,9 +21,11 @@ const state: Yoast["state"]["yoast"] = {
     // Homepage
     if (data.isHome) return homeTitle({ data, state });
 
-    // Routes with a main entity (taxonomies, authors, posts)
-    if (data.isTaxonomy || data.isAuthor || data.isPostType)
-      return entityTitle({ data, state });
+    // Routes with a main entity (taxonomies, posts)
+    if (data.isTaxonomy || data.isPostType) return entityTitle({ data, state });
+
+    // Authors
+    if (data.isAuthor) return authorTitle({ data, state });
 
     // Date Archives
     if (data.isDate) return dateTitle({ data, state });
@@ -106,10 +109,12 @@ const state: Yoast["state"]["yoast"] = {
    */
   facebook: ({ state }) => {
     const { opengraph } = getSocialDefaults({ state });
+    if (!opengraph) return null;
+
     const data = state.source.get(state.router.link);
     const entity = getEntity({ data, state });
 
-    if (entity && opengraph) {
+    if (entity && entity.yoast_meta) {
       const {
         yoast_wpseo_facebook_title: title,
         yoast_wpseo_facebook_description: description,
@@ -130,10 +135,12 @@ const state: Yoast["state"]["yoast"] = {
    */
   twitter: ({ state }) => {
     const { twitter } = getSocialDefaults({ state });
+    if (!twitter) return null;
+
     const data = state.source.get(state.router.link);
     const entity = getEntity({ data, state });
 
-    if (entity && twitter) {
+    if (entity && entity.yoast_meta && twitter) {
       const {
         yoast_wpseo_twitter_title: title,
         yoast_wpseo_twitter_description: description,

@@ -1,7 +1,7 @@
 import { State } from "frontity/types";
-import { Data } from "@frontity/source";
+import { Data, Author } from "@frontity/source";
 import humanize from "string-humanize";
-import Yoast from "../../types";
+import Yoast, { YoastMeta } from "../../types";
 import { getEntity, appendPage, getPage, hasName } from "./utils";
 
 export const dateTitle = ({
@@ -91,3 +91,23 @@ export const homeTitle = ({
 
 export const notFoundTitle = ({ state }: { state: State<Yoast> }) =>
   `Page not found - ${state.frontity.title}`;
+
+export const authorTitle = ({
+  data,
+  state
+}: {
+  data: Data;
+  state: State<Yoast>;
+}) => {
+  // Do nothing if data is not an Author object
+  if (!data.isAuthor) return;
+
+  const entity = getEntity({ data, state }) as Author;
+  const { name } = entity;
+
+  const title = `${name}, Author at ${state.frontity.title}`;
+
+  const page = getPage(state.router.link);
+  const { totalPages } = data;
+  return appendPage({ title, page, totalPages });
+};

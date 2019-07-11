@@ -18,7 +18,7 @@ const Root: React.FC<Connect<Yoast>> = ({ state }) => (
           "@type": "WebSite",
           "@id": "#website",
           url: state.frontity.url,
-          name: state.frontity.name,
+          name: state.frontity.title,
           potentialAction: {
             "@type": "SearchAction",
             target: `${state.frontity.url}/?s={search_term_string}`,
