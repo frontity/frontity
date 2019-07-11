@@ -38,6 +38,7 @@ export type BaseData = {
   isPost?: false;
   isPage?: false;
   isAttachment?: false;
+  isHome?: boolean;
 };
 
 // NOT FOUND
@@ -106,8 +107,6 @@ export type PostArchiveData = Merge<
   PostTypeArchiveData,
   {
     isPostArchive: true;
-    isHome: boolean;
-    isFrontPage?: boolean;
   }
 >;
 
@@ -145,7 +144,6 @@ export type PageData = Merge<
   {
     type: "page";
     isPage: true;
-    isFrontPage?: boolean;
   }
 >;
 

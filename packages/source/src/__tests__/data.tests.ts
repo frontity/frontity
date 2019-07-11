@@ -98,7 +98,6 @@ const postArchive: PostArchiveData = {
   isPostTypeArchive: true,
   isPostArchive: true,
   isHome: true,
-  isFrontPage: true,
   type: "post",
   items: [],
   isReady: true,
@@ -138,7 +137,6 @@ const page: PageData = {
   isPage: true,
   type: "page",
   id: 11,
-  isFrontPage: false,
   isReady: true,
   isFetching: false
 };
