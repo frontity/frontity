@@ -27,8 +27,10 @@ const actions: WpSource["actions"]["source"] = {
 
     // get and execute the corresponding handler based on path
     try {
-      // transform path if there is some redirection
       let { path } = routeParams;
+      // check if this is the homepage URL
+      const isHome = path === normalize(state.source.subdirectory || "/");
+      // transform path if there is some redirection
       const redirection = getMatch(path, redirections);
       if (redirection) path = redirection.func(redirection.params);
 
@@ -41,6 +43,8 @@ const actions: WpSource["actions"]["source"] = {
         isFetching: false,
         isReady: true
       };
+      // set isHome value if it's true
+      if (isHome) source.data[route].isHome = true;
     } catch (e) {
       console.log(e);
       // an error happened
