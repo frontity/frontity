@@ -1,4 +1,4 @@
-import { Pattern } from "../../";
+import { Pattern } from "../../types";
 import pathToRegexp, { Key } from "path-to-regexp";
 
 type GetMatch = <T extends Pattern>(

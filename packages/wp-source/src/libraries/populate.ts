@@ -1,5 +1,5 @@
 import { State } from "frontity/types";
-import WpSource from "../../";
+import WpSource from "../../types";
 import { normalize } from "normalizr";
 import * as schemas from "./schemas";
 import { concatPath, decomposeRoute } from "./route-utils";

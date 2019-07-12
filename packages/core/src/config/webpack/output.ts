@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { Configuration } from "webpack";
-import { Target, Mode } from "../../types";
+import { Target, Mode } from "../../../types";
 
 // Get the root path of the directory where the script was started.
 const rootPath = process.cwd();

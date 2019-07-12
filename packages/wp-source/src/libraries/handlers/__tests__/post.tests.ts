@@ -1,6 +1,6 @@
 import { State } from "frontity/types";
 import { createStore } from "@frontity/connect";
-import WpSource from "../../../..";
+import WpSource from "../../../../types";
 import handler from "../post";
 import { mockResponse } from "./mocks/helpers";
 

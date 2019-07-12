@@ -11,6 +11,11 @@ export type RouteParams = {
 
 export type Data = Data;
 
+export type Taxonomy = Taxonomy;
+export type PostType = PostType;
+export type Attachment = Attachment;
+export type Author = Author;
+
 interface Source<T = null> extends Package {
   state: {
     source: {

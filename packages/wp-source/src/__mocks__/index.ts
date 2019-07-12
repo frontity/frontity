@@ -1,4 +1,4 @@
-import WpSource from "../..";
+import WpSource from "../../types";
 import state from "../state";
 import { routeUtils } from "../libraries";
 import Api from "../libraries/api";

@@ -1,4 +1,4 @@
-import TinyRouter from "..";
+import TinyRouter from "../types";
 
 let isPopState = false;
 

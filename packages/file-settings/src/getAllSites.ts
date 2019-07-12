@@ -1,5 +1,5 @@
 import importSettings from "./importSettings";
-import { Site } from "./types";
+import { Site } from "../types";
 
 export default async (): Promise<Site[]> => {
   // Import the settings from a file.

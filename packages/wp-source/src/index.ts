@@ -1,4 +1,4 @@
-import WpSource from "..";
+import WpSource from "../types";
 import state from "./state";
 import actions from "./actions";
 import { Api, populate, routeUtils } from "./libraries";
