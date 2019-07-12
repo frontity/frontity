@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.11](https://github.com/frontity/frontity/compare/@frontity/source@1.0.10...@frontity/source@1.0.11) (2019-07-12)
+
+
+### Bug Fixes
+
+* **source:** export entity types ([6f2e369](https://github.com/frontity/frontity/commit/6f2e369))
+* **source:** set isHome value for the home data object ([9af88b4](https://github.com/frontity/frontity/commit/9af88b4))
+
+
+
+
+
 ## [1.0.10](https://github.com/frontity/frontity/compare/@frontity/source@1.0.9...@frontity/source@1.0.10) (2019-07-04)
 
 **Note:** Version bump only for package @frontity/source
