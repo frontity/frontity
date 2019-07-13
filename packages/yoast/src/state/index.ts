@@ -1,5 +1,5 @@
 import Yoast from "../../types";
-import { getEntity, getSocialDefaults } from "./utils";
+import { getEntity, getSocialDefaults, getPathname } from "./utils";
 import {
   homeTitle,
   entityTitle,
@@ -71,24 +71,13 @@ const state: Yoast["state"]["yoast"] = {
    * @param state Frontity state
    * @returns Current route's canonical link
    */
-  canonical: ({ state }) => {
-    const data = state.source.get(state.router.link);
-    const entity = getEntity({ state, data });
-
-    const defaultCanonical = `${state.frontity.url}${state.router.link}`;
-
-    if (!entity) return defaultCanonical;
-
-    const yoastCanonical =
-      entity.yoast_meta && entity.yoast_meta.yoast_wpseo_canonical;
-
-    return yoastCanonical || defaultCanonical;
-  },
+  canonical: ({ state }) =>
+    `${state.frontity.url}${getPathname(state.router.link)}`,
 
   /**
    * Derived value that shows the featured image's URL (if link is a post)
    * @param state Frontity state
-   * @returns Current route's canonical link
+   * @returns Current route's featured image URL
    */
   image: ({ state }) => {
     const data = state.source.get(state.router.link);
