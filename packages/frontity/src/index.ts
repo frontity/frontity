@@ -11,3 +11,8 @@ import originalConnect, {
 
 export const connect = originalConnect as ConnectFunction;
 export const createStore = originalCreateStore as CreateStore;
+
+import nodeFetch from "node-fetch";
+export const fetch = nodeFetch;
+
+export { URL } from "url";
