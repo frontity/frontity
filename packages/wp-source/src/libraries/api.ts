@@ -1,4 +1,5 @@
 import { fetch } from "frontity";
+
 class Api {
   api = "";
   isWpCom = false;
