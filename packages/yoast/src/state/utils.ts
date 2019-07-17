@@ -31,8 +31,14 @@ export const getSocialDefaults = ({ state }): YoastSocialDefaults => {
   if (data.isArchive) ({ type, id } = data.items[0]);
   if (data.isPostType) ({ type, id } = data);
 
-  if (type && id)
+  if (type && id) {
+    if (!state.source[type][id].yoast_meta) {
+      throw new Error(
+        `https://github.com/maru3l/wp-api-yoast-meta plugin is missing from WordPress installation`
+      );
+    }
     return state.source[type][id].yoast_meta.yoast_wpseo_social_defaults;
+  }
 
   return {};
 };
