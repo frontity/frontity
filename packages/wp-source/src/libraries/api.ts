@@ -1,5 +1,4 @@
-import fetch from "cross-fetch";
-
+import { fetch } from "frontity";
 class Api {
   api = "";
   isWpCom = false;
