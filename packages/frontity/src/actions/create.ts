@@ -90,7 +90,7 @@ export default async (name: string, { typescript, useCwd }) => {
       `cd ${options.name} && npx frontity dev`
     )} and have fun! 🎉\n\nYou can find docs at ${chalk.underline.magenta(
       "https://docs.frontity.org/"
-    )}.\nIf you have any doubts, join our community at ${chalk.underline.magenta(
+    )}.\nIf you have any questions, join our community at ${chalk.underline.magenta(
       "https://community.frontity.org/"
     )}.\n`
   );

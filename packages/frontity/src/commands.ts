@@ -28,7 +28,16 @@ tsNode.register({
 import program from "commander";
 import { readFileSync } from "fs-extra";
 import { resolve } from "path";
-import { create, dev, build, serve, subscribe, info, unknown } from "./actions";
+import {
+  create,
+  dev,
+  build,
+  serve,
+  subscribe,
+  info,
+  unknown,
+  installPackage
+} from "./actions";
 
 const { version } = JSON.parse(
   readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
@@ -88,6 +97,11 @@ program
   .command("info")
   .description("Get environment information for debugging and issue reporting.")
   .action(info);
+
+program
+  .command("install-package [name]")
+  .description("Install a local copy of a Frontity package from npm.")
+  .action(installPackage);
 
 program.on("command:*", ([command]: string[]) => unknown(command, program));
 
