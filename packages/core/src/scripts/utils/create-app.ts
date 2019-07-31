@@ -21,15 +21,17 @@ export default async ({
 }> => {
   // Create the app.
   const app = express();
+
   // Use the http or https modules to create the server.
   const server = await createServer({ app, isHttps });
+
   // Start listening once webpack has finished.
   let clientFinished = false;
   let serverFinished = false;
   let isListening = false;
-
   const url = `${isHttps ? "https" : "http"}://localhost:${port}`;
 
+  // Do not return a response until webpack has finished loading.
   app.use((_, ___, next) => {
     if (!isListening) {
       const interval = setInterval(() => {
@@ -43,26 +45,25 @@ export default async ({
     }
   });
 
+  // Start listening.
   server.listen(port, () => {
     console.log(
       `\n\nSERVER STARTED -- Listening @ ${url}\n  - mode: ${mode}\n  - target: ${target}\n\n`
     );
   });
 
-  open(`${isHttps ? "https" : "http"}://localhost:${port}`);
+  // Open localhost on the local browser.
+  open(url);
 
-  const start = () => {
-    if (clientFinished && serverFinished && !isListening) {
-      isListening = true;
-    }
-  };
   // Check if webpack has finished (both the client and server bundles).
   const done = (compiler: MultiCompiler) => {
     compiler.compilers[0].hooks.done.tapAsync(
       "frontity-dev-server",
       (_, cb) => {
         clientFinished = true;
-        start();
+        if (clientFinished && serverFinished && !isListening) {
+          isListening = true;
+        }
         cb();
       }
     );
@@ -70,7 +71,9 @@ export default async ({
       "frontity-dev-server",
       (_, cb) => {
         serverFinished = true;
-        start();
+        if (clientFinished && serverFinished && !isListening) {
+          isListening = true;
+        }
         cb();
       }
     );
