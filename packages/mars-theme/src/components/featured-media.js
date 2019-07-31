@@ -34,13 +34,12 @@ const FeaturedMedia = ({ state, id }) => {
 export default connect(FeaturedMedia);
 
 const Container = styled.div`
-  position: relative;
   margin-top: 16px;
   height: 300px;
 `;
 
 const StyledImage = styled(Image)`
-  position: absolute;
+  display: block;
   height: 100%;
   width: 100%;
   object-fit: cover;
