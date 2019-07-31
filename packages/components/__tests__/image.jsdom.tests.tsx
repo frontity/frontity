@@ -16,13 +16,10 @@ describe("Image", () => {
   const mockedUseDidMount = useDidMount as jest.Mocked<typeof useDidMount>;
 
   beforeEach(() => {
+    delete (HTMLImageElement as any).prototype.loading;
     Object.defineProperty(window, "IntersectionObserver", {
       writable: true,
       value: jest.fn()
-    });
-    Object.defineProperty(HTMLImageElement.prototype, "loading", {
-      writable: true,
-      value: undefined
     });
   });
 
@@ -48,6 +45,7 @@ describe("Image", () => {
 
   test("works with native lazy load and component did not mount", () => {
     mockedUseDidMount.default.mockReturnValue(false);
+    (HTMLImageElement as any).prototype.loading = true;
 
     const props = {
       alt: "Some fake alt text",
@@ -57,8 +55,6 @@ describe("Image", () => {
       className: "fake-class-name",
       loading: "lazy" as "lazy"
     };
-
-    (HTMLImageElement as any).prototype.loading = "loading";
 
     let result = TestRenderer.create(<Image {...props} />);
     expect(result.toJSON()).toMatchSnapshot();
@@ -66,6 +62,7 @@ describe("Image", () => {
 
   test("works with native lazy load and component did mount", () => {
     mockedUseDidMount.default.mockReturnValue(true);
+    (HTMLImageElement as any).prototype.loading = true;
 
     const props = {
       alt: "Some fake alt text",
@@ -75,8 +72,6 @@ describe("Image", () => {
       className: "fake-class-name",
       loading: "lazy" as "lazy"
     };
-
-    (HTMLImageElement as any).prototype.loading = "loading";
 
     let result = TestRenderer.create(<Image {...props} />);
     expect(result.toJSON()).toMatchSnapshot();

@@ -106,7 +106,7 @@ const Image: Image = props => {
     // Renders an image in client that will use IntersectionObserver to lazy load
     // if the native lazy load is not available.
     if (
-      typeof (HTMLImageElement as any).prototype.loading === "undefined" &&
+      !("loading" in HTMLImageElement.prototype) &&
       typeof IntersectionObserver !== "undefined"
     ) {
       const [onScreen, ref] = useInView({
