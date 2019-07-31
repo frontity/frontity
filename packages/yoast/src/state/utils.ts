@@ -37,17 +37,18 @@ export const getSocialDefaults = ({ state }): YoastSocialDefaults => {
   return {};
 };
 
-export const getPage = route => {
-  // get pathname from route
+export const getPathname = route => {
   const [, pathname] = /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)/.exec(
     route
   );
+  return pathname;
+};
 
-  const [, page] = /^(?:.*)page\/(\d+)\/?(\?.*)?$/.exec(pathname) || [
+export const getPage = route => {
+  const [, page] = /^(?:.*)page\/(\d+)\/?(\?.*)?$/.exec(getPathname(route)) || [
     null,
     "1"
   ];
-
   return parseInt(page, 10);
 };
 
