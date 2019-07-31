@@ -27,17 +27,33 @@ export default async ({
   let clientFinished = false;
   let serverFinished = false;
   let isListening = false;
+
+  const url = `${isHttps ? "https" : "http"}://localhost:${port}`;
+
+  app.use((_, ___, next) => {
+    if (!isListening) {
+      const interval = setInterval(() => {
+        if (isListening) {
+          clearInterval(interval);
+          next();
+        }
+      }, 1000);
+    } else {
+      next();
+    }
+  });
+
+  server.listen(port, () => {
+    console.log(
+      `\n\nSERVER STARTED -- Listening @ ${url}\n  - mode: ${mode}\n  - target: ${target}\n\n`
+    );
+  });
+
+  open(`${isHttps ? "https" : "http"}://localhost:${port}`);
+
   const start = () => {
     if (clientFinished && serverFinished && !isListening) {
       isListening = true;
-      server.listen(port, () => {
-        console.log(
-          `\n\nSERVER STARTED -- Listening @ ${
-            isHttps ? "https" : "http"
-          }://localhost:${port}\n  - mode: ${mode}\n  - target: ${target}`
-        );
-      });
-      open(`${isHttps ? "https" : "http"}://localhost:${port}`);
     }
   };
   // Check if webpack has finished (both the client and server bundles).
