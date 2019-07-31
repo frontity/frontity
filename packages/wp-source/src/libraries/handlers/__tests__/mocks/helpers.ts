@@ -1,4 +1,4 @@
-import { Response, Headers } from "cross-fetch";
+import { Response, Headers } from "node-fetch";
 
 export const mockResponse = (body, headers?) =>
   new Response(

@@ -16,7 +16,10 @@ Object {
         "./build/bundling/entry-points/site-1/client.js",
       ],
     },
-    "externals": Object {},
+    "externals": Object {
+      "node-fetch": "window.fetch",
+      "url": "{ URL: window.URL }",
+    },
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -135,7 +138,10 @@ Object {
         "./build/bundling/entry-points/site-1/client.js",
       ],
     },
-    "externals": Object {},
+    "externals": Object {
+      "node-fetch": "window.fetch",
+      "url": "{ URL: window.URL }",
+    },
     "mode": "development",
     "module": Object {
       "rules": Array [
@@ -357,7 +363,10 @@ Object {
         "./build/bundling/entry-points/site-1/client.js",
       ],
     },
-    "externals": Object {},
+    "externals": Object {
+      "node-fetch": "window.fetch",
+      "url": "{ URL: window.URL }",
+    },
     "mode": "production",
     "module": Object {
       "rules": Array [
@@ -468,7 +477,10 @@ Object {
         "./build/bundling/entry-points/site-1/client.js",
       ],
     },
-    "externals": Object {},
+    "externals": Object {
+      "node-fetch": "window.fetch",
+      "url": "{ URL: window.URL }",
+    },
     "mode": "production",
     "module": Object {
       "rules": Array [
