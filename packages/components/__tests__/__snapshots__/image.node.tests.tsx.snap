@@ -32,7 +32,6 @@ Array [
         "visibility": "hidden",
       }
     }
-    suppressHydrationWarning={true}
   />,
 ]
 `;
