@@ -47,26 +47,44 @@ describe("initialState", () => {
 
   it("should return a valid initial link", () => {
     const url = new URL("https://site.com/category/nature/page/2");
-    expect(initialState({ settings, url })).toMatchSnapshot();
+    expect(initialState({ settings, url }).frontity.initialLink).toBe(
+      "/category/nature/page/2"
+    );
   });
 
   it("should return a valid initial link with home", () => {
     const url = new URL("https://site.com");
-    expect(initialState({ settings, url })).toMatchSnapshot();
+    expect(initialState({ settings, url }).frontity.initialLink).toBe("/");
   });
 
   it("should return a valid initial link with query", () => {
     const url = new URL("https://site.com/page/2?some=query");
-    expect(initialState({ settings, url })).toMatchSnapshot();
+    expect(initialState({ settings, url }).frontity.initialLink).toBe(
+      "/page/2?some=query"
+    );
   });
 
   it("should return a valid initial link with hash", () => {
     const url = new URL("https://site.com/page/2#some-hash");
-    expect(initialState({ settings, url })).toMatchSnapshot();
+    expect(initialState({ settings, url }).frontity.initialLink).toBe(
+      "/page/2#some-hash"
+    );
   });
 
   it("should return a valid initial link with query and hash", () => {
     const url = new URL("https://site.com/page/2?some=query#some-hash");
-    expect(initialState({ settings, url })).toMatchSnapshot();
+    expect(initialState({ settings, url }).frontity.initialLink).toBe(
+      "/page/2?some=query#some-hash"
+    );
+  });
+
+  it("should return a ssr rendering on the server", () => {
+    const url = new URL("https://site.com/page/2?some=query#some-hash");
+    expect(initialState({ settings, url }).frontity.rendering).toBe("ssr");
+  });
+
+  it("should return a server platform on the server", () => {
+    const url = new URL("https://site.com/page/2?some=query#some-hash");
+    expect(initialState({ settings, url }).frontity.platform).toBe("server");
   });
 });

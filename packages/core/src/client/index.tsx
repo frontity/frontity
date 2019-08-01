@@ -52,6 +52,9 @@ export default async ({ packages }) => {
       loadableReady(() => {
         hydrate(<App store={store} />, window.document.getElementById("root"));
 
+        // Switch to CSR mode.
+        store.state.frontity.rendering = "csr";
+
         // Run afterCSR actions only if we are not in a HMR reload.
         if (!window["frontity"]) {
           Object.values(store.actions).forEach(({ afterCSR }) => {

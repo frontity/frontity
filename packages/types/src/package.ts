@@ -14,6 +14,7 @@ export interface Package {
       initialLink?: string;
       packages?: string[];
       platform?: "client" | "server";
+      rendering?: "ssr" | "csr";
       // Populated by the user:
       title?: string;
       description?: string;
