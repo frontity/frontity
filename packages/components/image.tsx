@@ -1,7 +1,7 @@
 import React from "react";
-import { Head } from "frontity";
+import { Head, connect } from "frontity";
+import { Connect, Package } from "frontity/types";
 import useInView from "@frontity/hooks/use-in-view";
-import useDidMount from "@frontity/hooks/use-did-mount";
 
 // Hides any image rendered by this component that is not
 // inside a <noscript> when JS is disabled.
@@ -40,7 +40,7 @@ interface Props {
   loading?: "auto" | "lazy" | "eager";
 }
 
-type Image = React.FC<Props>;
+type Image = React.FC<Connect<Package, Props>>;
 
 interface Attributes extends Props {
   "data-src"?: string;
@@ -76,29 +76,32 @@ const NoScriptImage: NoScriptImage = props => {
   );
 };
 
-const Image: Image = props => {
+const Image: Image = ({
+  state,
+  alt,
+  src,
+  srcSet,
+  sizes,
+  className,
+  loading,
+  rootMargin
+}) => {
   // These are the attributes for the image when it's waiting to be loaded.
   const lazyAttributes: Attributes = {
-    alt: props.alt,
-    "data-src": props.src,
-    "data-srcset": props.srcSet,
-    sizes: props.sizes,
-    className: "frontity-lazy-image".concat(
-      props.className ? ` ${props.className}` : ""
-    ),
-    loading: props.loading || "auto",
+    alt,
+    "data-src": src,
+    "data-srcset": srcSet,
+    sizes,
+    className: "frontity-lazy-image".concat(className ? ` ${className}` : ""),
+    loading: loading || "auto",
     style: { visibility: "hidden" }
   };
   // These are the attributes for the image when it's loaded.
   const eagerAttributes = changeAttributes(lazyAttributes);
 
-  // Necessary to avoid hydration errors when not using IntersectionObserver,
-  // and using native lazy load instead.
-  const didMount = useDidMount();
-
   // Renders a simple image, either in server or client, without
   // lazyload, if the loading attribute is set to `eager`.
-  if (props.loading === "eager") {
+  if (loading === "eager") {
     return <img {...eagerAttributes} />;
   }
 
@@ -110,7 +113,7 @@ const Image: Image = props => {
       typeof IntersectionObserver !== "undefined"
     ) {
       const [onScreen, ref] = useInView({
-        rootMargin: props.rootMargin,
+        rootMargin: rootMargin,
         onlyOnce: true
       });
       return (
@@ -127,7 +130,9 @@ const Image: Image = props => {
       <>
         <NoScriptImage {...eagerAttributes} />
         <img
-          {...(didMount ? eagerAttributes : lazyAttributes)}
+          {...(state.frontity.rendering === "csr"
+            ? eagerAttributes
+            : lazyAttributes)}
           suppressHydrationWarning
         />
       </>
@@ -158,4 +163,4 @@ const Image: Image = props => {
   );
 };
 
-export default Image;
+export default connect(Image);

@@ -5,15 +5,12 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import * as useInView from "@frontity/hooks/use-in-view";
-import * as useDidMount from "@frontity/hooks/use-did-mount";
 import Image from "../image";
 
 jest.mock("@frontity/hooks/use-in-view");
-jest.mock("@frontity/hooks/use-did-mount");
 
 describe("Image", () => {
   const mockedUseInView = useInView as jest.Mocked<typeof useInView>;
-  const mockedUseDidMount = useDidMount as jest.Mocked<typeof useDidMount>;
 
   beforeEach(() => {
     delete (HTMLImageElement as any).prototype.loading;
@@ -25,7 +22,6 @@ describe("Image", () => {
 
   afterEach(() => {
     mockedUseInView.default.mockReset();
-    mockedUseDidMount.default.mockReset();
   });
 
   test('works when loading === "eager"', () => {
@@ -44,7 +40,6 @@ describe("Image", () => {
   });
 
   test("works with native lazy load and component did not mount", () => {
-    mockedUseDidMount.default.mockReturnValue(false);
     (HTMLImageElement as any).prototype.loading = true;
 
     const props = {
@@ -53,7 +48,8 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading: "lazy" as "lazy"
+      loading: "lazy" as "lazy",
+      state: { frontity: { rendering: "ssr" } }
     };
 
     let result = TestRenderer.create(<Image {...props} />);
@@ -61,7 +57,6 @@ describe("Image", () => {
   });
 
   test("works with native lazy load and component did mount", () => {
-    mockedUseDidMount.default.mockReturnValue(true);
     (HTMLImageElement as any).prototype.loading = true;
 
     const props = {
@@ -70,7 +65,8 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading: "lazy" as "lazy"
+      loading: "lazy" as "lazy",
+      state: { frontity: { rendering: "csr" } }
     };
 
     let result = TestRenderer.create(<Image {...props} />);
@@ -106,14 +102,13 @@ describe("Image", () => {
   });
 
   test("works without `IntersectionObserver` and component did not mount", () => {
-    mockedUseDidMount.default.mockReturnValue(false);
-
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
-      className: "fake-class-name"
+      className: "fake-class-name",
+      state: { frontity: { rendering: "ssr" } }
     };
 
     IntersectionObserver = undefined;
@@ -123,14 +118,13 @@ describe("Image", () => {
   });
 
   test("works without `IntersectionObserver` and component did mount", () => {
-    mockedUseDidMount.default.mockReturnValue(true);
-
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
-      className: "fake-class-name"
+      className: "fake-class-name",
+      state: { frontity: { rendering: "csr" } }
     };
 
     IntersectionObserver = undefined;
