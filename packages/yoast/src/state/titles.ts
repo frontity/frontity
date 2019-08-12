@@ -1,7 +1,7 @@
 import { State } from "frontity/types";
 import { Data, Author } from "@frontity/source";
 import humanize from "string-humanize";
-import Yoast, { YoastMeta } from "../../types";
+import Yoast from "../../types";
 import { getEntity, appendPage, getPage, hasName } from "./utils";
 
 export const dateTitle = ({

@@ -1,8 +1,8 @@
 import Api from "../api";
-import fetch from "cross-fetch";
+import { fetch } from "frontity";
 
-jest.mock("cross-fetch");
-const mockedFetch = fetch as jest.Mock;
+jest.mock("frontity");
+const mockedFetch = (fetch as any) as jest.Mock;
 
 const lastFetch = () => mockedFetch.mock.calls.slice(-1)[0][0];
 const api = new Api();

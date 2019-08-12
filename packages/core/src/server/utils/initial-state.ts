@@ -14,6 +14,7 @@ export default ({
       name: settings.name,
       mode: settings.mode,
       platform: "server",
+      rendering: "ssr",
       initialLink: `${url.pathname}${url.search}${url.hash}`,
       packages: settings.packages.map(pkg => pkg.name)
     }

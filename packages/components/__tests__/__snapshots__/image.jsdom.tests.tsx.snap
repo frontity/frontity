@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Image It's a normal image if loading === "eager" 1`] = `
+exports[`Image works when loading === "eager" 1`] = `
 <img
   alt="Some fake alt text"
   className="frontity-lazy-image fake-class-name"
@@ -10,7 +10,28 @@ exports[`Image It's a normal image if loading === "eager" 1`] = `
 />
 `;
 
-exports[`Image works with \`IntersectionObserver\` 1`] = `
+exports[`Image works with \`IntersectionObserver\` and is in view 1`] = `
+Array [
+  <noscript>
+    <img
+      alt="Some fake alt text"
+      className="frontity-lazy-image fake-class-name"
+      loading="auto"
+      src="https://fake-src.com/fake-image.jpg"
+      srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    />
+  </noscript>,
+  <img
+    alt="Some fake alt text"
+    className="frontity-lazy-image fake-class-name"
+    loading="auto"
+    src="https://fake-src.com/fake-image.jpg"
+    srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+  />,
+]
+`;
+
+exports[`Image works with \`IntersectionObserver\` and is out of view 1`] = `
 Array [
   <noscript>
     <img
@@ -36,17 +57,78 @@ Array [
 ]
 `;
 
-exports[`Image works with native lazy load 1`] = `
-<img
-  alt="Some fake alt text"
-  className="frontity-lazy-image fake-class-name"
-  loading="lazy"
-  src="https://fake-src.com/fake-image.jpg"
-  srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
-/>
+exports[`Image works with native lazy load and component did mount 1`] = `
+Array [
+  <noscript>
+    <img
+      alt="Some fake alt text"
+      className="frontity-lazy-image fake-class-name"
+      loading="lazy"
+      src="https://fake-src.com/fake-image.jpg"
+      srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    />
+  </noscript>,
+  <img
+    alt="Some fake alt text"
+    className="frontity-lazy-image fake-class-name"
+    loading="lazy"
+    src="https://fake-src.com/fake-image.jpg"
+    srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    suppressHydrationWarning={true}
+  />,
+]
 `;
 
-exports[`Image works without \`IntersectionObserver\` 1`] = `
+exports[`Image works with native lazy load and component did not mount 1`] = `
+Array [
+  <noscript>
+    <img
+      alt="Some fake alt text"
+      className="frontity-lazy-image fake-class-name"
+      loading="lazy"
+      src="https://fake-src.com/fake-image.jpg"
+      srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    />
+  </noscript>,
+  <img
+    alt="Some fake alt text"
+    className="frontity-lazy-image fake-class-name"
+    data-src="https://fake-src.com/fake-image.jpg"
+    data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    loading="lazy"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+    suppressHydrationWarning={true}
+  />,
+]
+`;
+
+exports[`Image works without \`IntersectionObserver\` and component did mount 1`] = `
+Array [
+  <noscript>
+    <img
+      alt="Some fake alt text"
+      className="frontity-lazy-image fake-class-name"
+      loading="auto"
+      src="https://fake-src.com/fake-image.jpg"
+      srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    />
+  </noscript>,
+  <img
+    alt="Some fake alt text"
+    className="frontity-lazy-image fake-class-name"
+    loading="auto"
+    src="https://fake-src.com/fake-image.jpg"
+    srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    suppressHydrationWarning={true}
+  />,
+]
+`;
+
+exports[`Image works without \`IntersectionObserver\` and component did not mount 1`] = `
 Array [
   <noscript>
     <img
@@ -70,41 +152,5 @@ Array [
     }
     suppressHydrationWarning={true}
   />,
-]
-`;
-
-exports[`Image works without \`IntersectionObserver\` 2`] = `
-Array [
-  Object {
-    "id": "frontity-no-proxy-images",
-    "innerHTML": "
-  if (typeof window !== \\"undefined\\" && (!(\\"Proxy\\" in window) || !(\\"IntersectionObserver\\" in window))) {
-    document.addEventListener(\\"DOMContentLoaded\\", function() {
-      var images = document.querySelectorAll(\\"img.frontity-lazy-image\\");
-      for (i = 0; i < images.length; ++i) {
-        var image = images[i];
-        image.setAttribute(\\"src\\", image.getAttribute(\\"data-src\\"));
-        image.setAttribute(\\"srcset\\", image.getAttribute(\\"data-srcset\\"));
-        image.removeAttribute(\\"data-src\\");
-        image.removeAttribute(\\"data-srcset\\");
-        image.removeAttribute(\\"style\\");
-      }
-    });
-  }
-",
-    "type": "text/javascript",
-  },
-]
-`;
-
-exports[`Image works without \`IntersectionObserver\` 3`] = `
-Array [
-  Object {
-    "innerHTML": "<style id=\\"frontity-no-js-images\\" type=\\"text/css\\">
-  :not(noscript) > .frontity-lazy-image {
-    display: none;
-  }
-</style>",
-  },
 ]
 `;

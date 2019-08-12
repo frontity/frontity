@@ -17,9 +17,8 @@
   <a href="https://twitter.com/frontity">Twitter</a>
 </p>
 
---- 
+---
 
->
 > **Frontity v1 is now available**. Frontity allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this early phase. Bug reports will be also highly appreciated.
 >
 > <div align="center"><a href="https://docs.frontity.org/getting-started?utm_source=github-readme&utm_medium=get-started-link"><strong>GET STARTED!</strong></a></div>
@@ -137,3 +136,7 @@ Frontity is licensed under the terms of the [Apache 2.0](https://github.com/fron
 Do you miss any important information? Check out [our docs](https://docs.frontity.org/getting-started) or [let us know](https://community.frontity.org/c/docs-and-tutorials).
 
 ---
+
+## » Testing tools
+
+<a href="https://crossbrowsertesting.com" target="_blank"><img alt="Frontity & WordPress explanation" src="assets/CBT_OS-logo_Black-H.png" width="400px"></a>
