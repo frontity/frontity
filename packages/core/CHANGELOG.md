@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/frontity/frontity/compare/@frontity/core@1.1.3...@frontity/core@1.2.0) (2019-08-12)
+
+
+### Features
+
+* **core:** add state.frontity.rendering with either ssr or csr ([707b80f](https://github.com/frontity/frontity/commit/707b80f))
+* **core:** make localhost wait for webpack to avoid returning an error ([#174](https://github.com/frontity/frontity/issues/174)) ([51847d2](https://github.com/frontity/frontity/commit/51847d2))
+* **frontity:** expose fetch and URL from frontity package ([#168](https://github.com/frontity/frontity/issues/168)) ([235c465](https://github.com/frontity/frontity/commit/235c465))
+
+
+
+
+
 ## [1.1.3](https://github.com/frontity/frontity/compare/@frontity/core@1.1.2...@frontity/core@1.1.3) (2019-07-12)
 
 **Note:** Version bump only for package @frontity/core

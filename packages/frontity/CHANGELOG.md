@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/frontity/frontity/compare/frontity@1.2.2...frontity@1.3.0) (2019-08-12)
+
+
+### Features
+
+* **frontity:** expose fetch and URL from frontity package ([#168](https://github.com/frontity/frontity/issues/168)) ([235c465](https://github.com/frontity/frontity/commit/235c465))
+
+
+
+
+
 ## [1.2.2](https://github.com/frontity/frontity/compare/frontity@1.2.1...frontity@1.2.2) (2019-07-12)
 
 **Note:** Version bump only for package frontity
