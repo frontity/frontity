@@ -93,7 +93,7 @@ const Image: Image = ({
     "data-srcset": srcSet,
     sizes,
     className: "frontity-lazy-image".concat(className ? ` ${className}` : ""),
-    loading: loading || "auto",
+    loading: loading || "lazy",
     style: { visibility: "hidden" }
   };
   // These are the attributes for the image when it's loaded.
