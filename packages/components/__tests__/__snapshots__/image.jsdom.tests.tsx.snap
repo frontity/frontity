@@ -16,7 +16,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
-      loading="auto"
+      loading="lazy"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
@@ -24,7 +24,7 @@ Array [
   <img
     alt="Some fake alt text"
     className="frontity-lazy-image fake-class-name"
-    loading="auto"
+    loading="lazy"
     src="https://fake-src.com/fake-image.jpg"
     srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
   />,
@@ -37,7 +37,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
-      loading="auto"
+      loading="lazy"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
@@ -47,7 +47,7 @@ Array [
     className="frontity-lazy-image fake-class-name"
     data-src="https://fake-src.com/fake-image.jpg"
     data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
-    loading="auto"
+    loading="lazy"
     style={
       Object {
         "visibility": "hidden",
@@ -112,7 +112,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
-      loading="auto"
+      loading="lazy"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
@@ -120,7 +120,7 @@ Array [
   <img
     alt="Some fake alt text"
     className="frontity-lazy-image fake-class-name"
-    loading="auto"
+    loading="lazy"
     src="https://fake-src.com/fake-image.jpg"
     srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     suppressHydrationWarning={true}
@@ -134,7 +134,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
-      loading="auto"
+      loading="lazy"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
@@ -144,7 +144,7 @@ Array [
     className="frontity-lazy-image fake-class-name"
     data-src="https://fake-src.com/fake-image.jpg"
     data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
-    loading="auto"
+    loading="lazy"
     style={
       Object {
         "visibility": "hidden",
