@@ -19,6 +19,10 @@ about: I think something is not working as it should
 
 <!-- What happens instead? -->
 
-**Descriped the steps involved to reproduce the problem**
+**Describe the steps involved to reproduce the problem**
 
 <!-- Start from the `npx frontity create` command -->
+
+**Add info about your system**
+
+<!-- Run `npx frontity info` in your Frontity root folder and paste the result here -->
