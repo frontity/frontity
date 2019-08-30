@@ -4,6 +4,33 @@ import { normalize } from "normalizr";
 import * as schemas from "./schemas";
 import { concatPath, decomposeRoute } from "./route-utils";
 
+const transformLink = ({
+  entity,
+  state,
+  ...options
+}: {
+  entity: {
+    link: string;
+  };
+  state: State<WpSource>;
+  subdirectory?: string;
+}): void => {
+  let { subdirectory } = state.source;
+  if (options.subdirectory) subdirectory = options.subdirectory;
+
+  // get API subdirectory
+  const path = !state.source.isWpCom
+    ? decomposeRoute(state.source.api).pathname.replace(/\/wp-json\/?$/, "/")
+    : "";
+
+  // remove API subdirectory
+  let { link } = entity;
+  if (path && link.startsWith(path)) link = link.replace(path, "/");
+
+  // add subdirectory if it exists
+  entity.link = subdirectory ? concatPath(subdirectory, link) : link;
+};
+
 const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
   state,
@@ -44,28 +71,3 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
 };
 
 export default populate;
-
-const transformLink = ({
-  entity,
-  state,
-  ...options
-}: {
-  entity: any;
-  state: State<WpSource>;
-  subdirectory?: string;
-}) => {
-  let { isWpCom, api, subdirectory } = state.source;
-  if (options.subdirectory) subdirectory = options.subdirectory;
-
-  // get API subdirectory
-  const path = !isWpCom
-    ? decomposeRoute(api).pathname.replace(/\/wp-json\/?$/, "/")
-    : "";
-
-  // remove API subdirectory
-  let { link } = entity;
-  if (path && link.startsWith(path)) link = link.replace(path, "/");
-
-  // add subdirectory if it exists
-  entity.link = subdirectory ? concatPath(subdirectory, link) : link;
-};
