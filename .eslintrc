@@ -9,7 +9,8 @@
   ],
   "rules": {
     "@typescript-eslint/indent": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/named": "off"
   },
   "env": {
     "browser": true,
