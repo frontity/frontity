@@ -35,7 +35,7 @@ describe("getMatch (wp.org patterns)", () => {
 
   // pattern: "/tag/:slug",
   // handler: tag
-  test("category", () => {
+  test("tag", () => {
     const { func, params } = getMatch("/tag/japan", wpOrgHandlers);
     expect(func).toBe(handlers.tag);
     expect(params).toMatchObject({ slug: "japan" });
@@ -57,7 +57,7 @@ describe("getMatch (wp.org patterns)", () => {
     expect(params).toMatchObject({ year: "2016" });
   });
 
-  test("date (year)", () => {
+  test("date (year) with slash", () => {
     const { func, params } = getMatch("/2016/", wpOrgHandlers);
     expect(func).toBe(handlers.date);
     expect(params).toMatchObject({ year: "2016" });
@@ -82,7 +82,7 @@ describe("getMatch (wp.org patterns)", () => {
       "/2016/10/25/the-beauties-of-gullfoss",
       wpOrgHandlers
     );
-    expect(func).toBe(handlers.post);
+    expect(func).toBe(handlers.postType);
     expect(params).toMatchObject({ slug: "the-beauties-of-gullfoss" });
   });
 
@@ -93,7 +93,7 @@ describe("getMatch (wp.org patterns)", () => {
       "/2016/10/the-beauties-of-gullfoss",
       wpOrgHandlers
     );
-    expect(func).toBe(handlers.post);
+    expect(func).toBe(handlers.postType);
     expect(params).toMatchObject({ slug: "the-beauties-of-gullfoss" });
   });
 

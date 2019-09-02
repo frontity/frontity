@@ -22,7 +22,7 @@ const handlers = Object.keys(patterns).map(name => ({
 }));
 
 // Test 'handler' is executed with the correct params
-const testMatch = (name, path, params) => {
+const testMatch = (name, path, params): void => {
   const match = getMatch(path, handlers);
   expect(match.func).toEqual(handlers.find(p => p.name === name).func);
   expect(match.params).toEqual(params);
