@@ -52,11 +52,11 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
       transformLink({ entity, state, subdirectory });
 
       if (schema === "postType" || schema === "attachment") {
-        if (state.source[entity.type])
-          state.source[entity.type][entity.id] = entity;
+        if (!state.source[entity.type]) state.source[entity.type] = {};
+        state.source[entity.type][entity.id] = entity;
       } else if (schema === "taxonomy") {
-        if (state.source[entity.taxonomy])
-          state.source[entity.taxonomy][entity.id] = entity;
+        if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
+        state.source[entity.taxonomy][entity.id] = entity;
       } else if (schema === "author") {
         state.source.author[entity.id] = entity;
       }

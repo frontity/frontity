@@ -1,5 +1,185 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`populate add new custom post types & taxonomies to the state 1`] = `
+Array [
+  Object {
+    "id": 461,
+    "link": "/movies/terminator/",
+    "type": "movies",
+  },
+]
+`;
+
+exports[`populate add new custom post types & taxonomies to the state 2`] = `
+Object {
+  "actors": Object {
+    "255": Object {
+      "_links": Object {
+        "about": Array [
+          Object {
+            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/actors",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://test.frontity.io/wp-json/wp/v2/actor",
+          },
+        ],
+        "curies": Array [
+          Object {
+            "href": "https://api.w.org/{rel}",
+            "name": "wp",
+            "templated": true,
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://test.frontity.io/wp-json/wp/v2/actor/255",
+          },
+        ],
+        "wp:post_type": Array [
+          Object {
+            "href": "https://test.frontity.io/wp-json/wp/v2/movies?actor=255",
+          },
+        ],
+      },
+      "id": 255,
+      "link": "/actors/sarah-connor/",
+      "name": "Sarah Connor",
+      "slug": "sarah-connor",
+      "taxonomy": "actors",
+    },
+  },
+  "api": "https://test.frontity.io",
+  "attachment": Object {},
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {},
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "movies": Object {
+    "461": Object {
+      "_embedded": Object {
+        "wp:term": Array [
+          Array [
+            255,
+          ],
+        ],
+      },
+      "_links": Object {
+        "about": Array [
+          Object {
+            "href": "https://test.frontity.io/wp-json/wp/v2/types/movies",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://test.frontity.io/wp-json/wp/v2/movies",
+          },
+        ],
+        "curies": Array [
+          Object {
+            "href": "https://api.w.org/{rel}",
+            "name": "wp",
+            "templated": true,
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://test.frontity.io/wp-json/wp/v2/movies/461",
+          },
+        ],
+        "wp:attachment": Array [
+          Object {
+            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=461",
+          },
+        ],
+        "wp:term": Array [
+          Object {
+            "embeddable": true,
+            "href": "https://test.frontity.io/wp-json/wp/v2/actor?post=461",
+            "taxonomy": "actors",
+          },
+        ],
+      },
+      "actor": Array [
+        255,
+      ],
+      "content": Object {
+        "protected": false,
+        "rendered": "",
+      },
+      "date": "2019-03-27T19:31:27",
+      "date_gmt": "2019-03-27T17:31:27",
+      "featured_media": 0,
+      "guid": Object {
+        "rendered": "https://test.frontity.io/?post_type=movies&#038;p=461",
+      },
+      "id": 461,
+      "link": "/movies/terminator/",
+      "modified": "2019-09-02T10:33:59",
+      "modified_gmt": "2019-09-02T08:33:59",
+      "slug": "terminator",
+      "status": "publish",
+      "template": "",
+      "title": Object {
+        "rendered": "Terminator",
+      },
+      "type": "movies",
+      "yoast_meta": Object {
+        "yoast_wpseo_canonical": "https://test.frontity.io/movies/terminator/",
+        "yoast_wpseo_company_logo": "",
+        "yoast_wpseo_company_name": "",
+        "yoast_wpseo_company_or_person": "company",
+        "yoast_wpseo_facebook_description": "",
+        "yoast_wpseo_facebook_image": "",
+        "yoast_wpseo_facebook_title": "",
+        "yoast_wpseo_facebook_type": "movies",
+        "yoast_wpseo_metadesc": "",
+        "yoast_wpseo_person_name": "",
+        "yoast_wpseo_social_defaults": Object {
+          "facebook_site": "",
+          "fbadminapp": "",
+          "google_plus_url": "",
+          "instagram_url": "",
+          "linkedin_url": "",
+          "myspace_url": "",
+          "og_default_image": "",
+          "og_default_image_id": "",
+          "og_frontpage_desc": "",
+          "og_frontpage_image": "",
+          "og_frontpage_image_id": "",
+          "og_frontpage_title": "",
+          "opengraph": true,
+          "pinterest_url": "",
+          "pinterestverify": "",
+          "plus-publisher": "",
+          "twitter": true,
+          "twitter_card_type": "summary_large_image",
+          "twitter_site": "",
+          "wikipedia_url": "",
+          "youtube_url": "",
+        },
+        "yoast_wpseo_social_url": "https://test.frontity.io/movies/terminator/",
+        "yoast_wpseo_title": "Terminator - Frontity Test - WP Title",
+        "yoast_wpseo_twitter_description": "",
+        "yoast_wpseo_twitter_image": "",
+        "yoast_wpseo_twitter_title": "",
+        "yoast_wpseo_website_name": "",
+      },
+    },
+  },
+  "page": Object {},
+  "post": Object {},
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+}
+`;
+
 exports[`populate adds posts and embedded into state 1`] = `
 Array [
   Object {
@@ -783,6 +963,22 @@ Object {
   "get": [Function],
   "homepage": "",
   "isWpCom": false,
+  "latest": Object {
+    "post": Object {
+      "count": 64,
+      "custom_analytics": Object {
+        "dimension6": "Test",
+      },
+      "id": "post",
+      "link": "/",
+      "name": "Frontity Test - Just wanted to make the title longer",
+      "slug": "post",
+      "taxonomy": "latest",
+      "yoast_meta": Object {
+        "title": "Frontity Test - Just wanted to make the title longer - Not just another Wordpress site. This is a place to test development and check possible bugs. Are we writing to make this description longer? Yes, we are writing to make this description longer to test :)",
+      },
+    },
+  },
   "page": Object {},
   "post": Object {
     "54": Object {
@@ -2213,6 +2409,22 @@ Object {
   "get": [Function],
   "homepage": "",
   "isWpCom": false,
+  "latest": Object {
+    "post": Object {
+      "count": 64,
+      "custom_analytics": Object {
+        "dimension6": "Test",
+      },
+      "id": "post",
+      "link": "/",
+      "name": "Frontity Test - Just wanted to make the title longer",
+      "slug": "post",
+      "taxonomy": "latest",
+      "yoast_meta": Object {
+        "title": "Frontity Test - Just wanted to make the title longer - Not just another Wordpress site. This is a place to test development and check possible bugs. Are we writing to make this description longer? Yes, we are writing to make this description longer to test :)",
+      },
+    },
+  },
   "page": Object {},
   "post": Object {
     "54": Object {
@@ -3643,6 +3855,22 @@ Object {
   "get": [Function],
   "homepage": "",
   "isWpCom": false,
+  "latest": Object {
+    "post": Object {
+      "count": 64,
+      "custom_analytics": Object {
+        "dimension6": "Test",
+      },
+      "id": "post",
+      "link": "/blog/",
+      "name": "Frontity Test - Just wanted to make the title longer",
+      "slug": "post",
+      "taxonomy": "latest",
+      "yoast_meta": Object {
+        "title": "Frontity Test - Just wanted to make the title longer - Not just another Wordpress site. This is a place to test development and check possible bugs. Are we writing to make this description longer? Yes, we are writing to make this description longer to test :)",
+      },
+    },
+  },
   "page": Object {},
   "post": Object {
     "54": Object {
