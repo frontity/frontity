@@ -1,0 +1,122 @@
+[
+  {
+    "id": 461,
+    "date": "2019-03-27T19:31:27",
+    "date_gmt": "2019-03-27T17:31:27",
+    "guid": {
+      "rendered": "https://test.frontity.io/?post_type=movies&#038;p=461"
+    },
+    "modified": "2019-09-02T10:33:59",
+    "modified_gmt": "2019-09-02T08:33:59",
+    "slug": "terminator",
+    "status": "publish",
+    "type": "movies",
+    "link": "https://test.frontity.io/movies/terminator/",
+    "title": { "rendered": "Terminator" },
+    "content": { "rendered": "", "protected": false },
+    "featured_media": 0,
+    "template": "",
+    "actor": [255],
+    "yoast_meta": {
+      "yoast_wpseo_title": "Terminator - Frontity Test - WP Title",
+      "yoast_wpseo_metadesc": "",
+      "yoast_wpseo_canonical": "https://test.frontity.io/movies/terminator/",
+      "yoast_wpseo_facebook_title": "",
+      "yoast_wpseo_facebook_description": "",
+      "yoast_wpseo_facebook_type": "movies",
+      "yoast_wpseo_facebook_image": "",
+      "yoast_wpseo_twitter_title": "",
+      "yoast_wpseo_twitter_description": "",
+      "yoast_wpseo_twitter_image": "",
+      "yoast_wpseo_social_url": "https://test.frontity.io/movies/terminator/",
+      "yoast_wpseo_company_or_person": "company",
+      "yoast_wpseo_person_name": "",
+      "yoast_wpseo_company_name": "",
+      "yoast_wpseo_company_logo": "",
+      "yoast_wpseo_website_name": "",
+      "yoast_wpseo_social_defaults": {
+        "facebook_site": "",
+        "instagram_url": "",
+        "linkedin_url": "",
+        "myspace_url": "",
+        "og_default_image": "",
+        "og_default_image_id": "",
+        "og_frontpage_title": "",
+        "og_frontpage_desc": "",
+        "og_frontpage_image": "",
+        "og_frontpage_image_id": "",
+        "opengraph": true,
+        "pinterest_url": "",
+        "pinterestverify": "",
+        "twitter": true,
+        "twitter_site": "",
+        "twitter_card_type": "summary_large_image",
+        "youtube_url": "",
+        "wikipedia_url": "",
+        "fbadminapp": "",
+        "plus-publisher": "",
+        "google_plus_url": ""
+      }
+    },
+    "_links": {
+      "self": [{ "href": "https://test.frontity.io/wp-json/wp/v2/movies/461" }],
+      "collection": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/movies" }
+      ],
+      "about": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/types/movies" }
+      ],
+      "wp:attachment": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=461" }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "actors",
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/actor?post=461"
+        }
+      ],
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
+    },
+    "_embedded": {
+      "wp:term": [
+        [
+          {
+            "id": 255,
+            "link": "https://test.frontity.io/actors/sarah-connor/",
+            "name": "Sarah Connor",
+            "slug": "sarah-connor",
+            "taxonomy": "actors",
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/actor/255" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/actor" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/actors"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/movies?actor=255"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  }
+]

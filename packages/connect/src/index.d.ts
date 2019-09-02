@@ -16,10 +16,10 @@ interface ObserveOptions {
   lazy?: boolean;
 }
 
-interface Store {
+type Store = {
   state?: object;
   actions?: object;
-}
+};
 
 type ResolveState<State> = {
   [P in keyof State]: State[P] extends (state: object) => any
@@ -94,13 +94,16 @@ export function batch<T = any>(
   args?: any[]
 ): T;
 
-export function createStore<St extends Store>(
-  store: St
-): Omit<St, "state" | "actions"> & {
+export type InitializedStore<St extends Store> = Omit<
+  St,
+  "state" | "actions"
+> & {
   state: ResolveState<St["state"]>;
   actions: ResolveActions<St["actions"]>;
   getSnapshot: () => St["state"];
 };
+
+export function createStore<St extends Store>(store: St): InitializedStore<St>;
 
 declare function connect<Props extends object>(
   Component: React.ComponentType<Props>
