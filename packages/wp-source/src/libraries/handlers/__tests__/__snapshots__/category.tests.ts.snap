@@ -126,6 +126,26 @@ Object {
 }
 `;
 
+exports[`category fetchs from a different endpoint with extra params 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "multiple-post-type",
+      "params": Object {
+        "_embed": true,
+        "categories": 7,
+        "page": 1,
+        "search": undefined,
+        "type": Array [
+          "post",
+          "travel",
+        ],
+      },
+    },
+  ],
+]
+`;
+
 exports[`category works with pagination 1`] = `
 Object {
   "/category/nature/page/2/": Object {

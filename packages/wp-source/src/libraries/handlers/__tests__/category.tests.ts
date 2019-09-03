@@ -1,6 +1,5 @@
-import { State } from "frontity/types";
-import { createStore } from "@frontity/connect";
-
+import { createStore, InitializedStore } from "@frontity/connect";
+import clone from "clone-deep";
 import WpSource from "../../../../types";
 import populate from "../../populate";
 import handler from "../category";
@@ -10,15 +9,15 @@ import posts from "./mocks/posts-cat-7.json";
 import wpSource from "../../../";
 jest.mock("../../../");
 
-let state: State<WpSource>;
-let libraries: WpSource["libraries"];
+let store: InitializedStore<WpSource>;
 
 beforeEach(() => {
+  // First, get a mocked instance of wpSource
   const config = wpSource();
-  const { source } = config.libraries;
-  const { api } = source;
+  config.state = clone(config.state);
 
-  // mock api
+  // Then, replaces the mocked implementation of Api
+  const { api } = config.libraries.source;
   api.getIdBySlug = jest.fn().mockResolvedValue(7);
   api.get = jest.fn().mockResolvedValue(
     mockResponse(posts, {
@@ -26,16 +25,18 @@ beforeEach(() => {
       "X-WP-TotalPages": 5
     })
   );
-  // use populate implementation
-  (source.populate as jest.Mock).mockImplementation(populate);
 
-  ({ state, libraries } = createStore(config));
+  // And add the original implementation of populate
+  config.libraries.source.populate = jest.fn().mockImplementation(populate);
+
+  // Instantiate the store
+  store = createStore(config);
 });
 
 describe("category", () => {
   test("doesn't exist in source.category", async () => {
     // source.fetch("/category/nature/")
-    state.source.data["/category/nature/"] = {
+    store.state.source.data["/category/nature/"] = {
       isFetching: true,
       isReady: false
     };
@@ -43,16 +44,15 @@ describe("category", () => {
     await handler({
       route: "/category/nature/",
       params: { slug: "nature" },
-      state,
-      libraries
+      ...store
     });
 
-    expect(state.source.data).toMatchSnapshot();
-    expectEntities(state.source);
+    expect(store.state.source.data).toMatchSnapshot();
+    expectEntities(store.state.source);
   });
 
   test("exists in source.category but not in source.data", async () => {
-    state.source.category[7] = {
+    store.state.source.category[7] = {
       id: 7,
       count: 10,
       description: "",
@@ -65,7 +65,7 @@ describe("category", () => {
     };
 
     // source.fetch("/category/nature/")
-    state.source.data["/category/nature/"] = {
+    store.state.source.data["/category/nature/"] = {
       isFetching: true,
       isReady: false
     };
@@ -73,18 +73,17 @@ describe("category", () => {
     await handler({
       route: "/category/nature/",
       params: { slug: "nature" },
-      state,
-      libraries
+      ...store
     });
 
-    expect(libraries.source.api.getIdBySlug).not.toBeCalled();
-    expect(state.source.data).toMatchSnapshot();
-    expectEntities(state.source);
+    expect(store.libraries.source.api.getIdBySlug).not.toBeCalled();
+    expect(store.state.source.data).toMatchSnapshot();
+    expectEntities(store.state.source);
   });
 
   test("works with pagination", async () => {
     // source.fetch("/category/nature/")
-    state.source.data["/category/nature/page/2/"] = {
+    store.state.source.data["/category/nature/page/2/"] = {
       isFetching: true,
       isReady: false
     };
@@ -92,11 +91,29 @@ describe("category", () => {
     await handler({
       route: "/category/nature/page/2/",
       params: { slug: "nature" },
-      state,
-      libraries
+      ...store
     });
 
-    expect(state.source.data).toMatchSnapshot();
-    expectEntities(state.source);
+    expect(store.state.source.data).toMatchSnapshot();
+    expectEntities(store.state.source);
+  });
+
+  test("fetchs from a different endpoint with extra params", async () => {
+    store.state.source.postEndpoint = "multiple-post-type";
+    store.state.source.params = { type: ["post", "travel"] };
+    // source.fetch("/category/nature/")
+    store.state.source.data["/category/nature/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await handler({
+      route: "/category/nature/",
+      params: { slug: "nature" },
+      ...store
+    });
+
+    const apiGet = jest.spyOn(store.libraries.source.api, "get");
+    expect(apiGet.mock.calls).toMatchSnapshot();
   });
 });
