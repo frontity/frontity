@@ -9,7 +9,7 @@ const postHandler: Handler = async ({ route, params, state, libraries }) => {
   if (!id) {
     const response = await libraries.source.api.get({
       endpoint: state.source.postEndpoint,
-      params: { slug, _embed: true }
+      params: { slug, _embed: true, ...state.source.params }
     });
 
     const populated = await libraries.source.populate({ response, state });
