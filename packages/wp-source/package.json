@@ -36,6 +36,7 @@
     "@frontity/connect": "^1.0.1",
     "@frontity/source": "^1.0.12",
     "normalizr": "^3.3.0",
-    "path-to-regexp": "^3.0.0"
+    "path-to-regexp": "^3.0.0",
+    "query-string": "^6.8.3"
   }
 }

@@ -1,4 +1,5 @@
 import { fetch } from "frontity";
+import { stringify } from "query-string";
 
 class Api {
   api = "";
@@ -21,7 +22,7 @@ class Api {
       isWpCom = this.isWpCom
     }: {
       endpoint: string;
-      params?: { [param: string]: any };
+      params?: Record<string, any>;
       api?: string;
       isWpCom?: boolean;
     }
@@ -37,15 +38,10 @@ class Api {
         : `${baseUrl}wp/v2/${endpoint}`;
 
     // Add query parameters
-    const query = params
-      ? `?${Object.entries(params)
-          .filter(([key, value]) => value)
-          .map(([key, value]) => `${key}=${value}`)
-          .join("&")}`
-      : "";
+    const query = stringify(params, { arrayFormat: "bracket", encode: false });
 
     // Send request
-    return fetch(`${requestUrl}${query}`);
+    return fetch(`${requestUrl}${query && "?"}${query}`);
   }
 
   async getIdBySlug(endpoint: string, slug: string) {
