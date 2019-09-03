@@ -7,12 +7,22 @@ type GetMatch = <T extends Pattern>(
 ) => {
   params: Record<string, string>;
   func: T["func"];
+  name: string;
 } | null;
 
 type ExecMatch = (
   path: string,
   match: { regexp: RegExp; keys: Key[] }
 ) => Record<string, string>;
+
+export const execMatch: ExecMatch = (path, { regexp, keys }) =>
+  path
+    .match(regexp)
+    .slice(1)
+    .reduce((result, value, index) => {
+      result[keys[index].name] = value;
+      return result;
+    }, {});
 
 export const getMatch: GetMatch = (path, list) => {
   const result = list
@@ -27,16 +37,8 @@ export const getMatch: GetMatch = (path, list) => {
   return result
     ? {
         func: result.func,
-        params: execMatch(path, result)
+        params: execMatch(path, result),
+        name: result.name
       }
     : null;
 };
-
-export const execMatch: ExecMatch = (path, { regexp, keys }) =>
-  path
-    .match(regexp)
-    .slice(1)
-    .reduce((result, value, index) => {
-      result[keys[index].name] = value;
-      return result;
-    }, {});

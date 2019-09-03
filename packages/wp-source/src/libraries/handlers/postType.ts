@@ -8,12 +8,13 @@ const postType: Handler = async ({ route, params, state, libraries }) => {
 
   let tries = 0;
 
-  for (let handler of handlers) {
+  for (const handler of handlers) {
     try {
       await handler({ route, params, state, libraries });
       break;
     } catch (e) {
-      if (++tries === handlers.length) throw e;
+      tries += 1;
+      if (tries === handlers.length) throw e;
     }
   }
 };

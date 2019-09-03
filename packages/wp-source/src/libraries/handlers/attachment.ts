@@ -9,10 +9,11 @@ const attachmentHandler: Handler = async ({
   const { source } = state;
   const { api, populate } = libraries.source;
 
-  let { id, slug } = params;
+  let { id } = params;
+  const { slug } = params;
 
   // Search attachment in store
-  let attachment = id
+  const attachment = id
     ? source.attachment[id]
     : Object.values(source.attachment).find(a => a.slug === slug);
 
