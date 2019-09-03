@@ -109,6 +109,15 @@ describe("api", () => {
     );
   });
 
+  test("ignore params with 'undefined' value", () => {
+    api.get({
+      api: "https://test.frontity.org/wp-json/",
+      endpoint: "posts",
+      params: { ignoreMe: undefined }
+    });
+    expect(lastFetch()).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
+  });
+
   test("get from api specified with the init function", () => {
     api.init({
       api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
