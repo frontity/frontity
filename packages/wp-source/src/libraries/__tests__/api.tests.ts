@@ -37,6 +37,29 @@ describe("api", () => {
     );
   });
 
+  test("get from WP.org with empty params", () => {
+    api.get({
+      api: "https://test.frontity.org/wp-json/",
+      endpoint: "posts",
+      params: {}
+    });
+    expect(lastFetch()).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
+  });
+
+  test("get from WP.org with an array in params", () => {
+    api.get({
+      api: "https://test.frontity.org/wp-json/",
+      endpoint: "posts",
+      params: {
+        _embed: true,
+        type: ["post", "page"]
+      }
+    });
+    expect(lastFetch()).toBe(
+      "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&type[]=post&type[]=page"
+    );
+  });
+
   test("get from WP.org and a different namespace", () => {
     api.get({
       api: "https://test.frontity.org/wp-json/",
@@ -71,6 +94,18 @@ describe("api", () => {
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts?_embed=true&include=12,13,14"
+    );
+  });
+
+  test("get from WP.com with empty params", () => {
+    api.get({
+      api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
+      endpoint: "posts",
+      isWpCom: true,
+      params: {}
+    });
+    expect(lastFetch()).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts"
     );
   });
 
