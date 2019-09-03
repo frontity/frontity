@@ -1,5 +1,4 @@
 import { createStore, InitializedStore } from "@frontity/connect";
-import clone from "clone-deep";
 import WpSource from "../../../../types";
 import populate from "../../populate";
 import handler from "../category";
@@ -14,7 +13,6 @@ let store: InitializedStore<WpSource>;
 beforeEach(() => {
   // First, get a mocked instance of wpSource
   const config = wpSource();
-  config.state = clone(config.state);
 
   // Then, replaces the mocked implementation of Api
   const { api } = config.libraries.source;

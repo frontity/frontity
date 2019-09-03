@@ -1,5 +1,4 @@
 import { createStore, InitializedStore } from "@frontity/connect";
-import clone from "clone-deep";
 import WpSource from "../../../../types";
 import populate from "../../populate";
 import handler from "../date";
@@ -16,7 +15,6 @@ let store: InitializedStore<WpSource>;
 beforeEach(() => {
   // mock state
   const config = wpSource();
-  config.state = clone(config.state);
 
   // use populate implementation
   config.libraries.source.populate = jest.fn().mockImplementation(populate);
