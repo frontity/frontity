@@ -2,6 +2,6 @@ import taxonomy from "./taxonomy";
 
 export default taxonomy({
   taxonomy: { type: "category", endpoint: "categories" },
-  postType: { endpoint: "posts", param: "categories" },
+  postType: { param: "categories" },
   truths: { isCategory: true }
 });
