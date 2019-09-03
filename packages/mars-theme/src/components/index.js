@@ -5,6 +5,7 @@ import List from "./list";
 import Post from "./post";
 import Page404 from "./page404.js";
 import Loading from "./loading";
+import Title from "./title";
 
 const globalStyles = css`
   body {
@@ -25,10 +26,10 @@ const Theme = ({ state }) => {
   return (
     <>
       <Head>
-        <title>{state.frontity.title}</title>
         <meta name="description" content={state.frontity.description} />
         <html lang="en" />
       </Head>
+      <Title />
       <Global styles={globalStyles} />
       <HeadContainer>
         <Header />
