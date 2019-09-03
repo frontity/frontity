@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tag doesn't exist in source.tag 1`] = `
+Object {
+  "/tag/iceland/": Object {
+    "id": 9,
+    "isArchive": true,
+    "isFetching": true,
+    "isReady": false,
+    "isTag": true,
+    "isTaxonomy": true,
+    "items": Array [
+      Object {
+        "id": 60,
+        "link": "/2016/the-beauties-of-gullfoss/",
+        "type": "post",
+      },
+      Object {
+        "id": 26,
+        "link": "/2016/discovering-iceland/",
+        "type": "post",
+      },
+      Object {
+        "id": 1,
+        "link": "/2016/iceland/",
+        "type": "post",
+      },
+    ],
+    "taxonomy": "tag",
+    "total": 3,
+    "totalPages": 1,
+  },
+}
+`;
+
+exports[`tag doesn't exist in source.tag 2`] = `
+Object {
+  "attachment": Array [
+    6,
+    27,
+    62,
+  ],
+  "author": Array [
+    3,
+    4,
+  ],
+  "category": Array [
+    3,
+    4,
+    6,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+    108,
+  ],
+  "post": Array [
+    1,
+    26,
+    60,
+  ],
+  "tag": Array [
+    9,
+    10,
+    11,
+    13,
+    40,
+    47,
+  ],
+}
+`;
+
+exports[`tag exists in source.tag but not in source.data 1`] = `
+Object {
+  "/tag/iceland/": Object {
+    "id": 9,
+    "isArchive": true,
+    "isFetching": true,
+    "isReady": false,
+    "isTag": true,
+    "isTaxonomy": true,
+    "items": Array [
+      Object {
+        "id": 60,
+        "link": "/2016/the-beauties-of-gullfoss/",
+        "type": "post",
+      },
+      Object {
+        "id": 26,
+        "link": "/2016/discovering-iceland/",
+        "type": "post",
+      },
+      Object {
+        "id": 1,
+        "link": "/2016/iceland/",
+        "type": "post",
+      },
+    ],
+    "taxonomy": "tag",
+    "total": 3,
+    "totalPages": 1,
+  },
+}
+`;
+
+exports[`tag exists in source.tag but not in source.data 2`] = `
+Object {
+  "attachment": Array [
+    6,
+    27,
+    62,
+  ],
+  "author": Array [
+    3,
+    4,
+  ],
+  "category": Array [
+    3,
+    4,
+    6,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+    108,
+  ],
+  "post": Array [
+    1,
+    26,
+    60,
+  ],
+  "tag": Array [
+    9,
+    10,
+    11,
+    13,
+    40,
+    47,
+  ],
+}
+`;
+
+exports[`tag fetchs from a different endpoint with extra params 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "multiple-post-type",
+      "params": Object {
+        "_embed": true,
+        "page": 1,
+        "search": undefined,
+        "tags": 9,
+        "type": Array [
+          "post",
+          "travel",
+        ],
+      },
+    },
+  ],
+]
+`;
