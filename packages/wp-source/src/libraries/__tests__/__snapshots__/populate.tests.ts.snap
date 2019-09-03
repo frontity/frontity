@@ -172,7 +172,9 @@ Object {
     },
   },
   "page": Object {},
+  "params": Object {},
   "post": Object {},
+  "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -980,6 +982,7 @@ Object {
     },
   },
   "page": Object {},
+  "params": Object {},
   "post": Object {
     "54": Object {
       "_embedded": Object {
@@ -1384,6 +1387,7 @@ Continue reading “Antelope Canyon”
       },
     },
   },
+  "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -2426,6 +2430,7 @@ Object {
     },
   },
   "page": Object {},
+  "params": Object {},
   "post": Object {
     "54": Object {
       "_embedded": Object {
@@ -2830,6 +2835,7 @@ Continue reading “Antelope Canyon”
       },
     },
   },
+  "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -3872,6 +3878,7 @@ Object {
     },
   },
   "page": Object {},
+  "params": Object {},
   "post": Object {
     "54": Object {
       "_embedded": Object {
@@ -4276,6 +4283,7 @@ Continue reading “Antelope Canyon”
       },
     },
   },
+  "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {

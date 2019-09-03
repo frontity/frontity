@@ -36,6 +36,8 @@ interface WpSource extends Source {
       tagBase: string;
       homepage: string;
       postsPage: string;
+      postEndpoint: string;
+      params: Record<string, any>;
     };
   };
   actions: {

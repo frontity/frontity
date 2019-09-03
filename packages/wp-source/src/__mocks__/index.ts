@@ -23,7 +23,9 @@ const wpSource = (): WpSource => ({
       homepage: "",
       postsPage: "",
       categoryBase: "",
-      tagBase: ""
+      tagBase: "",
+      postEndpoint: "posts",
+      params: {}
     }
   },
   actions: {
