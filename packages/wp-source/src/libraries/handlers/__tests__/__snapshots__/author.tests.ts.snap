@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`author doesn't exist in source.author 1`] = `
+Object {
+  "/author/mario": Object {
+    "id": 2,
+    "isArchive": true,
+    "isAuthor": true,
+    "isFetching": true,
+    "isReady": false,
+    "items": Array [
+      Object {
+        "id": 57,
+        "link": "/2016/shinjuku-gyoen-national-garden/",
+        "type": "post",
+      },
+      Object {
+        "id": 46,
+        "link": "/2016/small-and-picturesque-french-villages/",
+        "type": "post",
+      },
+      Object {
+        "id": 33,
+        "link": "/2016/the-al-hajar-mountains/",
+        "type": "post",
+      },
+      Object {
+        "id": 23,
+        "link": "/2016/switzerlands-mountains/",
+        "type": "post",
+      },
+      Object {
+        "id": 8,
+        "link": "/2016/paris-city-of-light/",
+        "type": "post",
+      },
+    ],
+    "total": 5,
+    "totalPages": 1,
+  },
+}
+`;
+
+exports[`author doesn't exist in source.author 2`] = `
+Object {
+  "attachment": Array [
+    9,
+    24,
+    34,
+    47,
+    76,
+  ],
+  "author": Array [
+    2,
+  ],
+  "category": Array [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    8,
+    23,
+    33,
+    46,
+    57,
+  ],
+  "tag": Array [
+    14,
+    15,
+    16,
+    25,
+    26,
+    27,
+    34,
+    35,
+    36,
+    41,
+    42,
+    43,
+    51,
+    52,
+    53,
+  ],
+}
+`;
+
+exports[`author exists in source.author but not in source.data 1`] = `
+Object {
+  "/author/mario": Object {
+    "id": 7,
+    "isArchive": true,
+    "isAuthor": true,
+    "isFetching": true,
+    "isReady": false,
+    "items": Array [
+      Object {
+        "id": 57,
+        "link": "/2016/shinjuku-gyoen-national-garden/",
+        "type": "post",
+      },
+      Object {
+        "id": 46,
+        "link": "/2016/small-and-picturesque-french-villages/",
+        "type": "post",
+      },
+      Object {
+        "id": 33,
+        "link": "/2016/the-al-hajar-mountains/",
+        "type": "post",
+      },
+      Object {
+        "id": 23,
+        "link": "/2016/switzerlands-mountains/",
+        "type": "post",
+      },
+      Object {
+        "id": 8,
+        "link": "/2016/paris-city-of-light/",
+        "type": "post",
+      },
+    ],
+    "total": 5,
+    "totalPages": 1,
+  },
+}
+`;
+
+exports[`author exists in source.author but not in source.data 2`] = `
+Object {
+  "attachment": Array [
+    9,
+    24,
+    34,
+    47,
+    76,
+  ],
+  "author": Array [
+    2,
+    7,
+  ],
+  "category": Array [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    56,
+    57,
+    58,
+    59,
+  ],
+  "post": Array [
+    8,
+    23,
+    33,
+    46,
+    57,
+  ],
+  "tag": Array [
+    14,
+    15,
+    16,
+    25,
+    26,
+    27,
+    34,
+    35,
+    36,
+    41,
+    42,
+    43,
+    51,
+    52,
+    53,
+  ],
+}
+`;
+
+exports[`author fetchs from a different endpoint with extra params 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "multiple-post-type",
+      "params": Object {
+        "_embed": true,
+        "author": 2,
+        "page": 1,
+        "search": undefined,
+        "type": Array [
+          "post",
+          "travel",
+        ],
+      },
+    },
+  ],
+]
+`;

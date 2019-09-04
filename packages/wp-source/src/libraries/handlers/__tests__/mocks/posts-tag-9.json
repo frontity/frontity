@@ -1,0 +1,3129 @@
+[
+  {
+    "id": 60,
+    "date": "2016-11-25T18:31:11",
+    "date_gmt": "2016-11-25T16:31:11",
+    "guid": { "rendered": "https://test.frontity.io/?p=60" },
+    "modified": "2019-09-02T12:41:23",
+    "modified_gmt": "2019-09-02T10:41:23",
+    "slug": "the-beauties-of-gullfoss",
+    "status": "publish",
+    "type": "post",
+    "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
+    "title": { "rendered": "The Beauties of Gullfoss" },
+    "content": {
+      "rendered": "<p>Gullfoss is a waterfall located in the canyon of the Hv\u00edt\u00e1 river, in southwest Iceland.<!--more--></p>\n<p><a href=\"https://en.wikipedia.org/wiki/Gullfoss\" target=\"_blank\" rel=\"noopener\">Gullfoss</a> is one of the most popular <a href=\"/iceland/\">tourist attractions in Iceland</a>. The wide Hv\u00edt\u00e1 rushes southward, and about a kilometre above the falls it turns sharply to the right and flows down into a wide curved three-step &#8220;staircase&#8221; and then abruptly plunges in two stages (11 metres or 36 feet, and 21 metres or 69 feet) into a crevice 32 metres (105 ft) deep. The crevice, about 20 metres (66 ft) wide and 2.5 kilometres (1.6 mi) in length, extends perpendicular to the flow of the river. The average amount of water running down the waterfall is 140 cubic metres (4,900 cu ft) per second in the summer and 80 cubic metres (2,800 cu ft) per second in the winter. The <a href=\"/sample-page/\">highest flood</a> measured was 2,000 cubic metres (71,000 cu ft) per second.</p>\n<h3>An iconic waterfall of Iceland</h3>\n<figure id=\"attachment_70\" style=\"width: 840px\" class=\"wp-caption alignnone\"><a href=\"https://test.frontity.io/2016/the-beauties-of-gullfoss/gullfoss/\"><img class=\"wp-image-70\" src=\"https://test.frontity.io/wp-content/uploads/2016/11/Gullfoss-1024x577.jpg\" alt=\"gullfoss\" width=\"840\" height=\"473\" srcset=\"https://test.frontity.io/wp-content/uploads/2016/11/Gullfoss-1024x577.jpg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/Gullfoss-300x169.jpg 300w, https://test.frontity.io/wp-content/uploads/2016/11/Gullfoss-768x433.jpg 768w, https://test.frontity.io/wp-content/uploads/2016/11/Gullfoss-1200x676.jpg 1200w\" sizes=\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\" /></a><figcaption class=\"wp-caption-text\">Gullfoss, an iconic waterfall of Iceland.</figcaption></figure>\n<div class=\"4\">During the first half of the 20th century and some years into the late 20th century, there was much speculation about using Gullfoss to generate electricity. During this period, the waterfall was rented indirectly by its owners, T\u00f3mas T\u00f3masson and Halld\u00f3r Halld\u00f3rsson, to foreign investors. However, the investors&#8217; attempts were unsuccessful, partly due to lack of money. The waterfall was later sold to the state of Iceland, and is now protected.</div>\n<blockquote>\n<p style=\"text-align: left;\">Iceland is not a destination. It\u2019s an adventure set in stunning scenery.</p>\n</blockquote>\n<p>Sigr\u00ed\u00f0ur T\u00f3masd\u00f3ttir, the daughter of T\u00f3mas T\u00f3masson, was determined to preserve the waterfall&#8217;s condition and even threatened to throw herself down. Although it is widely believed, the very popular story that Sigr\u00ed\u00f0ur saved the waterfall from exploitation is untrue. <a href=\"http://www.nat.is/travelguideeng/gullfoss_sigridur_tomasdottir.htm\" target=\"_blank\" rel=\"noopener\">A stone memorial to Sigri\u00f0ur</a>, located above the falls, depicts her profile.</p>\n<p>Source: <a href=\"https://en.wikipedia.org/wiki/Gullfoss\">Gullfoss</a>.<br />\nCategory: <a href=\"/category/travel/\">Travel</a></p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>Gullfoss is a waterfall located in the canyon of the Hv\u00edt\u00e1 river, in southwest Iceland.</p>\n",
+      "protected": false
+    },
+    "author": 4,
+    "featured_media": 62,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [57, 59, 56, 3, 108, 8, 58],
+    "tags": [10, 9, 13, 11],
+    "yoast_meta": {
+      "yoast_wpseo_title": "The Beauties of Gullfoss - Frontity Test - WP Title",
+      "yoast_wpseo_metadesc": "",
+      "yoast_wpseo_canonical": "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
+      "yoast_wpseo_facebook_title": "fb title",
+      "yoast_wpseo_facebook_description": "",
+      "yoast_wpseo_facebook_type": "post",
+      "yoast_wpseo_facebook_image": "",
+      "yoast_wpseo_twitter_title": "",
+      "yoast_wpseo_twitter_description": "",
+      "yoast_wpseo_twitter_image": "",
+      "yoast_wpseo_social_url": "https://test.frontity.io/2016/the-beauties-of-gullfoss/",
+      "yoast_wpseo_company_or_person": "company",
+      "yoast_wpseo_person_name": "",
+      "yoast_wpseo_company_name": "",
+      "yoast_wpseo_company_logo": "",
+      "yoast_wpseo_website_name": "",
+      "yoast_wpseo_social_defaults": {
+        "facebook_site": "",
+        "instagram_url": "",
+        "linkedin_url": "",
+        "myspace_url": "",
+        "og_default_image": "",
+        "og_default_image_id": "",
+        "og_frontpage_title": "",
+        "og_frontpage_desc": "",
+        "og_frontpage_image": "",
+        "og_frontpage_image_id": "",
+        "opengraph": true,
+        "pinterest_url": "",
+        "pinterestverify": "",
+        "twitter": true,
+        "twitter_site": "",
+        "twitter_card_type": "summary_large_image",
+        "youtube_url": "",
+        "wikipedia_url": "",
+        "fbadminapp": "",
+        "plus-publisher": "",
+        "google_plus_url": ""
+      }
+    },
+    "_links": {
+      "self": [{ "href": "https://test.frontity.io/wp-json/wp/v2/posts/60" }],
+      "collection": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/posts" }
+      ],
+      "about": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/types/post" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/users/4"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=60"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 74,
+          "href": "https://test.frontity.io/wp-json/wp/v2/posts/60/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 1921,
+          "href": "https://test.frontity.io/wp-json/wp/v2/posts/60/revisions/1921"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/media/62"
+        }
+      ],
+      "wp:attachment": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=60" }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=60"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=60"
+        }
+      ],
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
+    },
+    "_embedded": {
+      "author": [
+        {
+          "id": 4,
+          "name": "David Arenas",
+          "url": "",
+          "description": "",
+          "link": "https://test.frontity.io/author/davidarenas/",
+          "slug": "davidarenas",
+          "avatar_urls": {
+            "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+          },
+          "_links": {
+            "self": [
+              { "href": "https://test.frontity.io/wp-json/wp/v2/users/4" }
+            ],
+            "collection": [
+              { "href": "https://test.frontity.io/wp-json/wp/v2/users" }
+            ]
+          }
+        }
+      ],
+      "replies": [
+        [
+          {
+            "id": 138,
+            "parent": 0,
+            "author": 0,
+            "author_name": "David",
+            "author_url": "",
+            "date": "2019-02-11T13:16:56",
+            "content": {
+              "rendered": "<p>Seems to be working now \ud83d\udc4d</p>\n"
+            },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-138",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/138"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ]
+            }
+          },
+          {
+            "id": 137,
+            "parent": 133,
+            "author": 0,
+            "author_name": "David",
+            "author_url": "",
+            "date": "2019-02-11T13:11:34",
+            "content": {
+              "rendered": "<p>A lot of comments here \ud83d\ude35</p>\n"
+            },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-137",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/137"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "in-reply-to": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/133"
+                }
+              ]
+            }
+          },
+          {
+            "id": 136,
+            "parent": 134,
+            "author": 0,
+            "author_name": "David",
+            "author_url": "",
+            "date": "2019-02-11T13:06:33",
+            "content": { "rendered": "<p>Reeeeeeeeeeeeeeeply again!</p>\n" },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-136",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/136"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "in-reply-to": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/134"
+                }
+              ]
+            }
+          },
+          {
+            "id": 135,
+            "parent": 134,
+            "author": 0,
+            "author_name": "David",
+            "author_url": "",
+            "date": "2019-02-11T12:59:29",
+            "content": { "rendered": "<p>Reeeeeeeeeeeeeeeply!</p>\n" },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-135",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/135"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "in-reply-to": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/134"
+                }
+              ]
+            }
+          },
+          {
+            "id": 134,
+            "parent": 133,
+            "author": 0,
+            "author_name": "David",
+            "author_url": "",
+            "date": "2019-02-11T12:46:50",
+            "content": { "rendered": "<p>Another reply</p>\n" },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-134",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/134"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "in-reply-to": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/133"
+                }
+              ],
+              "children": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments?parent=134"
+                }
+              ]
+            }
+          },
+          {
+            "id": 133,
+            "parent": 132,
+            "author": 0,
+            "author_name": "David",
+            "author_url": "",
+            "date": "2019-02-11T12:13:09",
+            "content": { "rendered": "<p>Reply again and again</p>\n" },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-133",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/133"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "in-reply-to": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/132"
+                }
+              ],
+              "children": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments?parent=133"
+                }
+              ]
+            }
+          },
+          {
+            "id": 132,
+            "parent": 131,
+            "author": 4,
+            "author_name": "David Arenas",
+            "author_url": "",
+            "date": "2019-02-09T02:12:28",
+            "content": { "rendered": "<p>Reply again</p>\n" },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-132",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/132"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "author": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/users/4"
+                }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "in-reply-to": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/131"
+                }
+              ],
+              "children": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments?parent=132"
+                }
+              ]
+            }
+          },
+          {
+            "id": 131,
+            "parent": 130,
+            "author": 4,
+            "author_name": "David Arenas",
+            "author_url": "",
+            "date": "2019-02-09T00:49:18",
+            "content": {
+              "rendered": "<p>Esto era un reply y no ha funcionado</p>\n"
+            },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-131",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/131"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "author": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/users/4"
+                }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "in-reply-to": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/130"
+                }
+              ],
+              "children": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments?parent=131"
+                }
+              ]
+            }
+          },
+          {
+            "id": 130,
+            "parent": 0,
+            "author": 4,
+            "author_name": "David Arenas",
+            "author_url": "",
+            "date": "2019-02-09T00:47:20",
+            "content": { "rendered": "<p>Hola Reyes</p>\n" },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-130",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/130"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "author": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/users/4"
+                }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "children": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments?parent=130"
+                }
+              ]
+            }
+          },
+          {
+            "id": 129,
+            "parent": 124,
+            "author": 4,
+            "author_name": "David Arenas",
+            "author_url": "",
+            "date": "2019-02-08T17:28:33",
+            "content": { "rendered": "<p>Hola Mario</p>\n" },
+            "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/comment-page-1/#comment-129",
+            "type": "comment",
+            "author_avatar_urls": {
+              "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+              "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+              "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/129"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/comments" }
+              ],
+              "author": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/users/4"
+                }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "post_type": "post",
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts/60"
+                }
+              ],
+              "in-reply-to": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/comments/124"
+                }
+              ]
+            }
+          }
+        ]
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 62,
+          "date": "2016-11-25T18:33:33",
+          "slug": "iceland-test",
+          "type": "attachment",
+          "link": "https://test.frontity.io/2016/the-beauties-of-gullfoss/iceland-test/",
+          "title": { "rendered": "iceland" },
+          "author": 2,
+          "caption": { "rendered": "" },
+          "alt_text": "iceland",
+          "media_type": "image",
+          "mime_type": "image/jpeg",
+          "media_details": {
+            "width": 5000,
+            "height": 3025,
+            "file": "2016/11/Iceland-test.jpg",
+            "sizes": {
+              "thumbnail": {
+                "file": "Iceland-test-150x150.jpg",
+                "width": 150,
+                "height": 150,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland-test-150x150.jpg"
+              },
+              "medium": {
+                "file": "Iceland-test-300x182.jpg",
+                "width": 300,
+                "height": 182,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland-test-300x182.jpg"
+              },
+              "medium_large": {
+                "file": "Iceland-test-768x465.jpg",
+                "width": 768,
+                "height": 465,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland-test-768x465.jpg"
+              },
+              "large": {
+                "file": "Iceland-test-1024x620.jpg",
+                "width": 1024,
+                "height": 620,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland-test-1024x620.jpg"
+              },
+              "post-thumbnail": {
+                "file": "Iceland-test-1200x726.jpg",
+                "width": 1200,
+                "height": 726,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland-test-1200x726.jpg"
+              },
+              "full": {
+                "file": "Iceland-test.jpg",
+                "width": 5000,
+                "height": 3025,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland-test.jpg"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": []
+            }
+          },
+          "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland-test.jpg",
+          "_links": {
+            "self": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/media/62"
+              }
+            ],
+            "collection": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "attributes": { "embeddable": true },
+                "href": "https://test.frontity.io/wp-json/wp/v2/users/2"
+              }
+            ],
+            "replies": [
+              {
+                "attributes": { "embeddable": true },
+                "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=62"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 57,
+            "link": "https://test.frontity.io/category/inspiring-stories/",
+            "name": "Inspiring Stories",
+            "slug": "inspiring-stories",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Inspiring Stories Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/57"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=57"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 59,
+            "link": "https://test.frontity.io/category/lifestyle/",
+            "name": "Lifestyle",
+            "slug": "lifestyle",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Lifestyle Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/59"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=59"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 56,
+            "link": "https://test.frontity.io/category/news/",
+            "name": "News",
+            "slug": "news",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "News Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/56"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=56"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 3,
+            "link": "https://test.frontity.io/category/photography/",
+            "name": "Photography",
+            "slug": "photography",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Photography Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/3"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=3"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 108,
+            "link": "https://test.frontity.io/category/aciform/sub/",
+            "name": "sub",
+            "slug": "sub",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "sub Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/108"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "up": [
+                {
+                  "embeddable": true,
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/62"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=108"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 8,
+            "link": "https://test.frontity.io/category/travel/",
+            "name": "Travel",
+            "slug": "travel",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Travel Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/8"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=8"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 58,
+            "link": "https://test.frontity.io/category/voices-and-views/",
+            "name": "Voices and Views",
+            "slug": "voices-and-views",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Voices and Views Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/58"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=58"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ],
+        [
+          {
+            "id": 10,
+            "link": "https://test.frontity.io/tag/gullfoss/",
+            "name": "Gullfoss",
+            "slug": "gullfoss",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Gullfoss Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/10" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=10"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 9,
+            "link": "https://test.frontity.io/tag/iceland/",
+            "name": "Iceland",
+            "slug": "iceland",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Iceland Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/9" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=9"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 13,
+            "link": "https://test.frontity.io/tag/nature/",
+            "name": "Nature",
+            "slug": "nature",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Nature Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/13" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=13"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 11,
+            "link": "https://test.frontity.io/tag/waterfall/",
+            "name": "Waterfall",
+            "slug": "waterfall",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Waterfall Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/11" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=11"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "id": 26,
+    "date": "2016-07-25T15:19:41",
+    "date_gmt": "2016-07-25T13:19:41",
+    "guid": { "rendered": "https://test.frontity.io/?p=26" },
+    "modified": "2019-05-17T10:32:18",
+    "modified_gmt": "2019-05-17T08:32:18",
+    "slug": "discovering-iceland",
+    "status": "publish",
+    "type": "post",
+    "link": "https://test.frontity.io/2016/discovering-iceland/",
+    "title": { "rendered": "Discovering Iceland" },
+    "content": {
+      "rendered": "<p>There are around <strong>1,300 known species</strong> of insects in <a href=\"/iceland/\" target=\"_blank\" rel=\"noopener\">Iceland</a>, which is low compared with other countries (over one million species have been described worldwide).<!--more--> The only native land mammal when humans arrived was the Arctic fox, which came to the island at the end of the ice age, walking over the frozen sea.</p>\n<p>On rare occasions, bats have been carried to the island with the winds, but they are not able to breed there. <strong>Polar bears</strong> occasionally come over from <a href=\"https://en.wikipedia.org/wiki/Greenland\" target=\"_blank\" rel=\"noopener\">Greenland</a>, but they are just visitors, and no Icelandic populations exist. There are no native or free-living reptiles or amphibians on the island.</p>\n<h2>The forests</h2>\n<p>When the island was first settled, it was extensively forested. Permanent human settlement greatly disturbed the isolated ecosystem of thin, volcanic soils and limited species diversity. The forests were heavily exploited over the centuries for firewood and timber. Deforestation, climatic deterioration during the Little Ice Age and overgrazing by sheep imported by settlers caused a loss of critical topsoil due to erosion. Today, many farms have been abandoned.</p>\n<p><img class=\"alignnone wp-image-113 size-large\" src=\"https://test.frontity.io/wp-content/uploads/2016/11/iceland-1024x683.jpg\" alt=\"iceland\" width=\"840\" height=\"560\" srcset=\"https://test.frontity.io/wp-content/uploads/2016/11/iceland-1024x683.jpg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/iceland-300x200.jpg 300w, https://test.frontity.io/wp-content/uploads/2016/11/iceland-768x512.jpg 768w, https://test.frontity.io/wp-content/uploads/2016/11/iceland-1200x800.jpg 1200w\" sizes=\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\" /></p>\n<h2>The animals</h2>\n<p>The animals of Iceland include the Icelandic sheep, cattle, chickens, goats, the sturdy Icelandic horse, and the Icelandic Sheepdog, all descendants of animals imported by Europeans. Wild mammals include the Arctic fox, mink, mice, rats, rabbits and reindeer. Polar bears occasionally visit the island, travelling on icebergs from Greenland. In June 2008, two polar bears arrived in the same month. Marine mammals include the grey seal and harbor seal.</p>\n<p>Many species of fish live in the ocean waters surrounding Iceland, and the fishing industry is a major part of Iceland&#8217;s economy, accounting for approximately half of the country&#8217;s total exports. Birds, especially seabirds, are an important part of Iceland&#8217;s animal life. Puffins, skuas, and kittiwakes nest on its sea cliffs.</p>\n<p>Source: <a href=\"https://en.wikipedia.org/wiki/Iceland#Biodiversity\">Iceland</a>.</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>There are around 1,300 known species of insects in Iceland, which is low compared with other countries (over one million species have been described worldwide).</p>\n",
+      "protected": false
+    },
+    "author": 4,
+    "featured_media": 27,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [4, 57, 59, 7, 56, 58],
+    "tags": [40, 9, 13],
+    "yoast_meta": {
+      "yoast_wpseo_title": "Discovering Iceland - Frontity Test - WP Title",
+      "yoast_wpseo_metadesc": "",
+      "yoast_wpseo_canonical": "https://test.frontity.io/2016/discovering-iceland/",
+      "yoast_wpseo_facebook_title": "",
+      "yoast_wpseo_facebook_description": "",
+      "yoast_wpseo_facebook_type": "post",
+      "yoast_wpseo_facebook_image": "",
+      "yoast_wpseo_twitter_title": "",
+      "yoast_wpseo_twitter_description": "",
+      "yoast_wpseo_twitter_image": "",
+      "yoast_wpseo_social_url": "https://test.frontity.io/2016/discovering-iceland/",
+      "yoast_wpseo_company_or_person": "company",
+      "yoast_wpseo_person_name": "",
+      "yoast_wpseo_company_name": "",
+      "yoast_wpseo_company_logo": "",
+      "yoast_wpseo_website_name": "",
+      "yoast_wpseo_social_defaults": {
+        "facebook_site": "",
+        "instagram_url": "",
+        "linkedin_url": "",
+        "myspace_url": "",
+        "og_default_image": "",
+        "og_default_image_id": "",
+        "og_frontpage_title": "",
+        "og_frontpage_desc": "",
+        "og_frontpage_image": "",
+        "og_frontpage_image_id": "",
+        "opengraph": true,
+        "pinterest_url": "",
+        "pinterestverify": "",
+        "twitter": true,
+        "twitter_site": "",
+        "twitter_card_type": "summary_large_image",
+        "youtube_url": "",
+        "wikipedia_url": "",
+        "fbadminapp": "",
+        "plus-publisher": "",
+        "google_plus_url": ""
+      }
+    },
+    "_links": {
+      "self": [{ "href": "https://test.frontity.io/wp-json/wp/v2/posts/26" }],
+      "collection": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/posts" }
+      ],
+      "about": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/types/post" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/users/4"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=26"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 5,
+          "href": "https://test.frontity.io/wp-json/wp/v2/posts/26/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 1887,
+          "href": "https://test.frontity.io/wp-json/wp/v2/posts/26/revisions/1887"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/media/27"
+        }
+      ],
+      "wp:attachment": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=26" }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=26"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=26"
+        }
+      ],
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
+    },
+    "_embedded": {
+      "author": [
+        {
+          "id": 4,
+          "name": "David Arenas",
+          "url": "",
+          "description": "",
+          "link": "https://test.frontity.io/author/davidarenas/",
+          "slug": "davidarenas",
+          "avatar_urls": {
+            "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g"
+          },
+          "_links": {
+            "self": [
+              { "href": "https://test.frontity.io/wp-json/wp/v2/users/4" }
+            ],
+            "collection": [
+              { "href": "https://test.frontity.io/wp-json/wp/v2/users" }
+            ]
+          }
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 27,
+          "date": "2016-11-25T15:18:03",
+          "slug": "iceland5",
+          "type": "attachment",
+          "link": "https://test.frontity.io/2016/discovering-iceland/iceland5/",
+          "title": { "rendered": "iceland5" },
+          "author": 2,
+          "caption": { "rendered": "" },
+          "alt_text": "iceland",
+          "media_type": "image",
+          "mime_type": "image/jpeg",
+          "media_details": {
+            "width": 5184,
+            "height": 3456,
+            "file": "2016/11/Iceland5.jpg",
+            "sizes": {
+              "thumbnail": {
+                "file": "Iceland5-150x150.jpg",
+                "width": 150,
+                "height": 150,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland5-150x150.jpg"
+              },
+              "medium": {
+                "file": "Iceland5-300x200.jpg",
+                "width": 300,
+                "height": 200,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland5-300x200.jpg"
+              },
+              "medium_large": {
+                "file": "Iceland5-768x512.jpg",
+                "width": 768,
+                "height": 512,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland5-768x512.jpg"
+              },
+              "large": {
+                "file": "Iceland5-1024x683.jpg",
+                "width": 1024,
+                "height": 683,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland5-1024x683.jpg"
+              },
+              "post-thumbnail": {
+                "file": "Iceland5-1200x800.jpg",
+                "width": 1200,
+                "height": 800,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland5-1200x800.jpg"
+              },
+              "full": {
+                "file": "Iceland5.jpg",
+                "width": 5184,
+                "height": 3456,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland5.jpg"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": []
+            }
+          },
+          "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Iceland5.jpg",
+          "_links": {
+            "self": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/media/27"
+              }
+            ],
+            "collection": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "attributes": { "embeddable": true },
+                "href": "https://test.frontity.io/wp-json/wp/v2/users/2"
+              }
+            ],
+            "replies": [
+              {
+                "attributes": { "embeddable": true },
+                "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=27"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 4,
+            "link": "https://test.frontity.io/category/cities/",
+            "name": "Cities",
+            "slug": "cities",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Cities Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/4"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=4"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 57,
+            "link": "https://test.frontity.io/category/inspiring-stories/",
+            "name": "Inspiring Stories",
+            "slug": "inspiring-stories",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Inspiring Stories Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/57"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=57"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 59,
+            "link": "https://test.frontity.io/category/lifestyle/",
+            "name": "Lifestyle",
+            "slug": "lifestyle",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Lifestyle Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/59"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=59"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 7,
+            "link": "https://test.frontity.io/category/nature/",
+            "name": "Nature",
+            "slug": "nature",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Nature Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/7"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=7"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 56,
+            "link": "https://test.frontity.io/category/news/",
+            "name": "News",
+            "slug": "news",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "News Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/56"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=56"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 58,
+            "link": "https://test.frontity.io/category/voices-and-views/",
+            "name": "Voices and Views",
+            "slug": "voices-and-views",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Voices and Views Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/58"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=58"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ],
+        [
+          {
+            "id": 40,
+            "link": "https://test.frontity.io/tag/animals/",
+            "name": "Animals",
+            "slug": "animals",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Animals Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/40" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=40"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 9,
+            "link": "https://test.frontity.io/tag/iceland/",
+            "name": "Iceland",
+            "slug": "iceland",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Iceland Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/9" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=9"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 13,
+            "link": "https://test.frontity.io/tag/nature/",
+            "name": "Nature",
+            "slug": "nature",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Nature Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/13" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=13"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "id": 1,
+    "date": "2016-03-16T13:11:06",
+    "date_gmt": "2016-03-16T11:11:06",
+    "guid": { "rendered": "https://test.frontity.io/?p=1" },
+    "modified": "2019-05-17T10:33:42",
+    "modified_gmt": "2019-05-17T08:33:42",
+    "slug": "iceland",
+    "status": "publish",
+    "type": "post",
+    "link": "https://test.frontity.io/2016/iceland/",
+    "title": { "rendered": "The Land of Fire &#038; Ice" },
+    "content": {
+      "rendered": "<p>Iceland is\u00a0located in the North Atlantic Ocean between continental Europe and Greenland. It is considered part of Northern Europe and is the least populous of the Nordic countries.<!--more--></p>\n<p><img class=\"alignnone size-large wp-image-132\" src=\"https://test.frontity.io/wp-content/uploads/2016/11/iceland1-1024x683.jpg\" alt=\"iceland1\" width=\"840\" height=\"560\" srcset=\"https://test.frontity.io/wp-content/uploads/2016/11/iceland1-1024x683.jpg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/iceland1-300x200.jpg 300w, https://test.frontity.io/wp-content/uploads/2016/11/iceland1-768x512.jpg 768w, https://test.frontity.io/wp-content/uploads/2016/11/iceland1-1200x800.jpg 1200w\" sizes=\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\" /></p>\n<p>Iceland is volcanically and geologically active on a large scale; this defines the landscape in various ways. The interior mainly consists of a plateau characterized by sand fields, mountains and glaciers, while many big glacial rivers flow to the sea through the lowlands. Warmed by the <a href=\"https://en.wikipedia.org/wiki/Gulf_Stream\" target=\"_blank\" rel=\"noopener\">Gulf Stream</a>, Iceland has a temperate climate relative to its latitude and provides a habitable environment and nature.</p>\n<h6>Get to know Iceland</h6>\n<p><img class=\"alignnone size-large wp-image-133\" src=\"https://test.frontity.io/wp-content/uploads/2016/11/iceland3-1024x683.jpg\" alt=\"iceland3\" width=\"840\" height=\"560\" srcset=\"https://test.frontity.io/wp-content/uploads/2016/11/iceland3-1024x683.jpg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/iceland3-300x200.jpg 300w, https://test.frontity.io/wp-content/uploads/2016/11/iceland3-768x512.jpg 768w, https://test.frontity.io/wp-content/uploads/2016/11/iceland3-1200x800.jpg 1200w\" sizes=\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\" /></p>\n<p>The volcanic eruption of Laki in 1783\u20131784 caused a famine that killed nearly a quarter of the island&#8217;s population. In addition, the eruption caused dust clouds and haze to appear over most of Europe and parts of Asia and Africa for several months afterward, and affected climates in other areas.</p>\n<p><img class=\"alignnone size-large wp-image-134\" src=\"https://test.frontity.io/wp-content/uploads/2016/11/iceland2-1024x683.jpg\" alt=\"iceland2\" width=\"840\" height=\"560\" srcset=\"https://test.frontity.io/wp-content/uploads/2016/11/iceland2-1024x683.jpg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/iceland2-300x200.jpg 300w, https://test.frontity.io/wp-content/uploads/2016/11/iceland2-768x512.jpg 768w, https://test.frontity.io/wp-content/uploads/2016/11/iceland2-1200x800.jpg 1200w\" sizes=\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\" /></p>\n<p>Iceland has many geysers, including <a href=\"https://en.wikipedia.org/wiki/Geysir\" target=\"_blank\" rel=\"noopener\">Geysir</a>, from which the English word is derived, and the famous Strokkur, which erupts every 8\u201310 minutes. After a phase of inactivity, Geysir started erupting again after a series of earthquakes in 2000. Geysir has since grown quieter and does not erupt often.</p>\n<p>You may also like our post about\u00a0<strong><a href=\"/discovering-iceland/\">Wildlife and Animals in Iceland</a>.</strong></p>\n<p>Sources:</p>\n<p><a href=\"https://en.wikipedia.org/wiki/Iceland#Geology\">Iceland<br />\n</a><a href=\"https://en.wikipedia.org/wiki/Outline_of_Iceland\">Outline of Iceland</a></p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>Iceland is\u00a0located in the North Atlantic Ocean between continental Europe and Greenland. It is considered part of Northern Europe and is the least populous of the Nordic countries.</p>\n",
+      "protected": false
+    },
+    "author": 3,
+    "featured_media": 6,
+    "comment_status": "closed",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [6, 57, 59, 7, 56, 3, 8, 58],
+    "tags": [9, 47, 13],
+    "yoast_meta": {
+      "yoast_wpseo_title": "The Land of Fire & Ice - Frontity Test - WP Title",
+      "yoast_wpseo_metadesc": "",
+      "yoast_wpseo_canonical": "https://test.frontity.io/2016/iceland/",
+      "yoast_wpseo_facebook_title": "",
+      "yoast_wpseo_facebook_description": "",
+      "yoast_wpseo_facebook_type": "post",
+      "yoast_wpseo_facebook_image": "",
+      "yoast_wpseo_twitter_title": "",
+      "yoast_wpseo_twitter_description": "",
+      "yoast_wpseo_twitter_image": "",
+      "yoast_wpseo_social_url": "https://test.frontity.io/2016/iceland/",
+      "yoast_wpseo_company_or_person": "company",
+      "yoast_wpseo_person_name": "",
+      "yoast_wpseo_company_name": "",
+      "yoast_wpseo_company_logo": "",
+      "yoast_wpseo_website_name": "",
+      "yoast_wpseo_social_defaults": {
+        "facebook_site": "",
+        "instagram_url": "",
+        "linkedin_url": "",
+        "myspace_url": "",
+        "og_default_image": "",
+        "og_default_image_id": "",
+        "og_frontpage_title": "",
+        "og_frontpage_desc": "",
+        "og_frontpage_image": "",
+        "og_frontpage_image_id": "",
+        "opengraph": true,
+        "pinterest_url": "",
+        "pinterestverify": "",
+        "twitter": true,
+        "twitter_site": "",
+        "twitter_card_type": "summary_large_image",
+        "youtube_url": "",
+        "wikipedia_url": "",
+        "fbadminapp": "",
+        "plus-publisher": "",
+        "google_plus_url": ""
+      }
+    },
+    "_links": {
+      "self": [{ "href": "https://test.frontity.io/wp-json/wp/v2/posts/1" }],
+      "collection": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/posts" }
+      ],
+      "about": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/types/post" }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/users/3"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=1"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 12,
+          "href": "https://test.frontity.io/wp-json/wp/v2/posts/1/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 1891,
+          "href": "https://test.frontity.io/wp-json/wp/v2/posts/1/revisions/1891"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/media/6"
+        }
+      ],
+      "wp:attachment": [
+        { "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=1" }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=1"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=1"
+        }
+      ],
+      "curies": [
+        { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+      ]
+    },
+    "_embedded": {
+      "author": [
+        {
+          "id": 3,
+          "name": "Eduardo",
+          "url": "",
+          "description": "",
+          "link": "https://test.frontity.io/author/orballo/",
+          "slug": "orballo",
+          "avatar_urls": {
+            "24": "https://secure.gravatar.com/avatar/93ac87b570f7dac9c91b2125094fc89a?s=24&d=mm&r=g",
+            "48": "https://secure.gravatar.com/avatar/93ac87b570f7dac9c91b2125094fc89a?s=48&d=mm&r=g",
+            "96": "https://secure.gravatar.com/avatar/93ac87b570f7dac9c91b2125094fc89a?s=96&d=mm&r=g"
+          },
+          "_links": {
+            "self": [
+              { "href": "https://test.frontity.io/wp-json/wp/v2/users/3" }
+            ],
+            "collection": [
+              { "href": "https://test.frontity.io/wp-json/wp/v2/users" }
+            ]
+          }
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 6,
+          "date": "2016-11-24T17:20:25",
+          "slug": "travel",
+          "type": "attachment",
+          "link": "https://test.frontity.io/2016/iceland/travel/",
+          "title": { "rendered": "northern-lights-iceland" },
+          "author": 2,
+          "caption": { "rendered": "" },
+          "alt_text": "northern-lights-iceland",
+          "media_type": "image",
+          "mime_type": "image/jpeg",
+          "media_details": {
+            "width": 6000,
+            "height": 4004,
+            "file": "2016/11/Travel.jpg",
+            "sizes": {
+              "thumbnail": {
+                "file": "Travel-150x150.jpg",
+                "width": 150,
+                "height": 150,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Travel-150x150.jpg"
+              },
+              "medium": {
+                "file": "Travel-300x200.jpg",
+                "width": 300,
+                "height": 200,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Travel-300x200.jpg"
+              },
+              "medium_large": {
+                "file": "Travel-768x513.jpg",
+                "width": 768,
+                "height": 513,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Travel-768x513.jpg"
+              },
+              "large": {
+                "file": "Travel-1024x683.jpg",
+                "width": 1024,
+                "height": 683,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Travel-1024x683.jpg"
+              },
+              "post-thumbnail": {
+                "file": "Travel-1200x801.jpg",
+                "width": 1200,
+                "height": 801,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Travel-1200x801.jpg"
+              },
+              "full": {
+                "file": "Travel.jpg",
+                "width": 6000,
+                "height": 4004,
+                "mime_type": "image/jpeg",
+                "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Travel.jpg"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": []
+            }
+          },
+          "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/Travel.jpg",
+          "_links": {
+            "self": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/media/6"
+              }
+            ],
+            "collection": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "attributes": [],
+                "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "attributes": { "embeddable": true },
+                "href": "https://test.frontity.io/wp-json/wp/v2/users/2"
+              }
+            ],
+            "replies": [
+              {
+                "attributes": { "embeddable": true },
+                "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=6"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 6,
+            "link": "https://test.frontity.io/category/culture/",
+            "name": "Culture",
+            "slug": "culture",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Culture Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/6"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=6"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 57,
+            "link": "https://test.frontity.io/category/inspiring-stories/",
+            "name": "Inspiring Stories",
+            "slug": "inspiring-stories",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Inspiring Stories Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/57"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=57"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 59,
+            "link": "https://test.frontity.io/category/lifestyle/",
+            "name": "Lifestyle",
+            "slug": "lifestyle",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Lifestyle Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/59"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=59"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 7,
+            "link": "https://test.frontity.io/category/nature/",
+            "name": "Nature",
+            "slug": "nature",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Nature Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/7"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=7"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 56,
+            "link": "https://test.frontity.io/category/news/",
+            "name": "News",
+            "slug": "news",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "News Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/56"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=56"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 3,
+            "link": "https://test.frontity.io/category/photography/",
+            "name": "Photography",
+            "slug": "photography",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Photography Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/3"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=3"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 8,
+            "link": "https://test.frontity.io/category/travel/",
+            "name": "Travel",
+            "slug": "travel",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Travel Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/8"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=8"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 58,
+            "link": "https://test.frontity.io/category/voices-and-views/",
+            "name": "Voices and Views",
+            "slug": "voices-and-views",
+            "taxonomy": "category",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Voices and Views Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/categories/58"
+                }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/categories" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=58"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ],
+        [
+          {
+            "id": 9,
+            "link": "https://test.frontity.io/tag/iceland/",
+            "name": "Iceland",
+            "slug": "iceland",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Iceland Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/9" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=9"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 47,
+            "link": "https://test.frontity.io/tag/landscape/",
+            "name": "Landscape",
+            "slug": "landscape",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Landscape Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/47" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=47"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 13,
+            "link": "https://test.frontity.io/tag/nature/",
+            "name": "Nature",
+            "slug": "nature",
+            "taxonomy": "post_tag",
+            "yoast_meta": {
+              "yoast_wpseo_title": "Nature Archives - Frontity Test - WP Title",
+              "yoast_wpseo_metadesc": "",
+              "yoast_wpseo_social_defaults": {
+                "facebook_site": "",
+                "instagram_url": "",
+                "linkedin_url": "",
+                "myspace_url": "",
+                "og_default_image": "",
+                "og_default_image_id": "",
+                "og_frontpage_title": "",
+                "og_frontpage_desc": "",
+                "og_frontpage_image": "",
+                "og_frontpage_image_id": "",
+                "opengraph": true,
+                "pinterest_url": "",
+                "pinterestverify": "",
+                "twitter": true,
+                "twitter_site": "",
+                "twitter_card_type": "summary_large_image",
+                "youtube_url": "",
+                "wikipedia_url": "",
+                "fbadminapp": "",
+                "plus-publisher": "",
+                "google_plus_url": ""
+              }
+            },
+            "_links": {
+              "self": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags/13" }
+              ],
+              "collection": [
+                { "href": "https://test.frontity.io/wp-json/wp/v2/tags" }
+              ],
+              "about": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=13"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  }
+]

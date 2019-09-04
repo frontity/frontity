@@ -1,9 +1,9 @@
 import { createStore, InitializedStore } from "@frontity/connect";
 import WpSource from "../../../../types";
 import populate from "../../populate";
-import handler from "../category";
+import handler from "../author";
 import { mockResponse, expectEntities } from "./mocks/helpers";
-import posts from "./mocks/posts-cat-7.json";
+import posts from "./mocks/posts-author-2.json";
 
 import wpSource from "../../../";
 jest.mock("../../../");
@@ -16,11 +16,11 @@ beforeEach(() => {
 
   // Then, replaces the mocked implementation of Api
   const { api } = config.libraries.source;
-  api.getIdBySlug = jest.fn().mockResolvedValue(7);
+  api.getIdBySlug = jest.fn().mockResolvedValue(2);
   api.get = jest.fn().mockResolvedValue(
     mockResponse(posts, {
-      "X-WP-Total": 10,
-      "X-WP-TotalPages": 5
+      "X-WP-Total": 5,
+      "X-WP-TotalPages": 1
     })
   );
 
@@ -31,17 +31,17 @@ beforeEach(() => {
   store = createStore(config);
 });
 
-describe("category", () => {
-  test("doesn't exist in source.category", async () => {
-    // source.fetch("/category/nature/")
-    store.state.source.data["/category/nature/"] = {
+describe("author", () => {
+  test("doesn't exist in source.author", async () => {
+    // source.fetch("/author/mario")
+    store.state.source.data["/author/mario"] = {
       isFetching: true,
       isReady: false
     };
 
     await handler({
-      route: "/category/nature/",
-      params: { slug: "nature" },
+      route: "/author/mario",
+      params: { slug: "mario" },
       ...store
     });
 
@@ -49,28 +49,31 @@ describe("category", () => {
     expectEntities(store.state.source);
   });
 
-  test("exists in source.category but not in source.data", async () => {
-    store.state.source.category[7] = {
+  test("exists in source.author but not in source.data", async () => {
+    store.state.source.author[7] = {
       id: 7,
-      count: 10,
       description: "",
-      link: "https://test.frontity.io/category/nature/",
-      name: "Nature",
-      slug: "nature",
-      taxonomy: "category",
-      parent: 0,
+      link: "https://test.frontity.io/author/mario",
+      name: "Mario Santos",
+      slug: "mario",
+      url: "",
+      avatar_urls: {
+        "24": "",
+        "48": "",
+        "96": ""
+      },
       meta: []
     };
 
-    // source.fetch("/category/nature/")
-    store.state.source.data["/category/nature/"] = {
+    // source.fetch("/author/mario")
+    store.state.source.data["/author/mario"] = {
       isFetching: true,
       isReady: false
     };
 
     await handler({
-      route: "/category/nature/",
-      params: { slug: "nature" },
+      route: "/author/mario",
+      params: { slug: "mario" },
       ...store
     });
 
@@ -79,35 +82,18 @@ describe("category", () => {
     expectEntities(store.state.source);
   });
 
-  test("works with pagination", async () => {
-    // source.fetch("/category/nature/")
-    store.state.source.data["/category/nature/page/2/"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await handler({
-      route: "/category/nature/page/2/",
-      params: { slug: "nature" },
-      ...store
-    });
-
-    expect(store.state.source.data).toMatchSnapshot();
-    expectEntities(store.state.source);
-  });
-
   test("fetchs from a different endpoint with extra params", async () => {
     store.state.source.postEndpoint = "multiple-post-type";
     store.state.source.params = { type: ["post", "travel"] };
-    // source.fetch("/category/nature/")
-    store.state.source.data["/category/nature/"] = {
+    // source.fetch("/author/mario")
+    store.state.source.data["/author/mario"] = {
       isFetching: true,
       isReady: false
     };
 
     await handler({
-      route: "/category/nature/",
-      params: { slug: "nature" },
+      route: "/author/mario",
+      params: { slug: "mario" },
       ...store
     });
 

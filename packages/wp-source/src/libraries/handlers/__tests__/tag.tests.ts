@@ -1,9 +1,9 @@
 import { createStore, InitializedStore } from "@frontity/connect";
 import WpSource from "../../../../types";
 import populate from "../../populate";
-import handler from "../category";
+import handler from "../tag";
 import { mockResponse, expectEntities } from "./mocks/helpers";
-import posts from "./mocks/posts-cat-7.json";
+import posts from "./mocks/posts-tag-9.json";
 
 import wpSource from "../../../";
 jest.mock("../../../");
@@ -16,11 +16,11 @@ beforeEach(() => {
 
   // Then, replaces the mocked implementation of Api
   const { api } = config.libraries.source;
-  api.getIdBySlug = jest.fn().mockResolvedValue(7);
+  api.getIdBySlug = jest.fn().mockResolvedValue(9);
   api.get = jest.fn().mockResolvedValue(
     mockResponse(posts, {
-      "X-WP-Total": 10,
-      "X-WP-TotalPages": 5
+      "X-WP-Total": 3,
+      "X-WP-TotalPages": 1
     })
   );
 
@@ -31,17 +31,17 @@ beforeEach(() => {
   store = createStore(config);
 });
 
-describe("category", () => {
-  test("doesn't exist in source.category", async () => {
-    // source.fetch("/category/nature/")
-    store.state.source.data["/category/nature/"] = {
+describe("tag", () => {
+  test("doesn't exist in source.tag", async () => {
+    // source.fetch("/tag/iceland/")
+    store.state.source.data["/tag/iceland/"] = {
       isFetching: true,
       isReady: false
     };
 
     await handler({
-      route: "/category/nature/",
-      params: { slug: "nature" },
+      route: "/tag/iceland/",
+      params: { slug: "iceland" },
       ...store
     });
 
@@ -49,28 +49,27 @@ describe("category", () => {
     expectEntities(store.state.source);
   });
 
-  test("exists in source.category but not in source.data", async () => {
-    store.state.source.category[7] = {
-      id: 7,
-      count: 10,
+  test("exists in source.tag but not in source.data", async () => {
+    store.state.source.tag[9] = {
+      id: 9,
+      count: 3,
       description: "",
-      link: "https://test.frontity.io/category/nature/",
-      name: "Nature",
-      slug: "nature",
-      taxonomy: "category",
-      parent: 0,
+      link: "https://test.frontity.io/tag/iceland/",
+      name: "Iceland",
+      slug: "iceland",
+      taxonomy: "tag",
       meta: []
     };
 
-    // source.fetch("/category/nature/")
-    store.state.source.data["/category/nature/"] = {
+    // source.fetch("/tag/iceland/")
+    store.state.source.data["/tag/iceland/"] = {
       isFetching: true,
       isReady: false
     };
 
     await handler({
-      route: "/category/nature/",
-      params: { slug: "nature" },
+      route: "/tag/iceland/",
+      params: { slug: "iceland" },
       ...store
     });
 
@@ -79,35 +78,18 @@ describe("category", () => {
     expectEntities(store.state.source);
   });
 
-  test("works with pagination", async () => {
-    // source.fetch("/category/nature/")
-    store.state.source.data["/category/nature/page/2/"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await handler({
-      route: "/category/nature/page/2/",
-      params: { slug: "nature" },
-      ...store
-    });
-
-    expect(store.state.source.data).toMatchSnapshot();
-    expectEntities(store.state.source);
-  });
-
   test("fetchs from a different endpoint with extra params", async () => {
     store.state.source.postEndpoint = "multiple-post-type";
     store.state.source.params = { type: ["post", "travel"] };
-    // source.fetch("/category/nature/")
-    store.state.source.data["/category/nature/"] = {
+    // source.fetch("/tag/iceland/")
+    store.state.source.data["/tag/iceland/"] = {
       isFetching: true,
       isReady: false
     };
 
     await handler({
-      route: "/category/nature/",
-      params: { slug: "nature" },
+      route: "/tag/iceland/",
+      params: { slug: "iceland" },
       ...store
     });
 

@@ -25,3 +25,21 @@ Object {
   },
 }
 `;
+
+exports[`post fetchs from a different endpoint with extra params 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "multiple-post-type",
+      "params": Object {
+        "_embed": true,
+        "slug": "the-beauties-of-gullfoss",
+        "type": Array [
+          "post",
+          "travel",
+        ],
+      },
+    },
+  ],
+]
+`;

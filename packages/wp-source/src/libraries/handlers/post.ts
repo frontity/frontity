@@ -2,20 +2,17 @@ import { Handler } from "../../../types";
 import getIdBySlug from "./utils/get-id-by-slug";
 
 const postHandler: Handler = async ({ route, params, state, libraries }) => {
-  const { source } = state;
-  const { api, populate } = libraries.source;
-
   const { slug } = params;
-  let id = getIdBySlug(source.post, slug);
+  let id = getIdBySlug(state.source.post, slug);
 
   // Get post from REST API if not found
   if (!id) {
-    const response = await api.get({
-      endpoint: "posts",
-      params: { slug, _embed: true }
+    const response = await libraries.source.api.get({
+      endpoint: state.source.postEndpoint,
+      params: { slug, _embed: true, ...state.source.params }
     });
 
-    const populated = await populate({ response, state });
+    const populated = await libraries.source.populate({ response, state });
 
     if (!populated.length)
       throw new Error(`Post with slug "${slug}" not found.`);
@@ -24,7 +21,7 @@ const postHandler: Handler = async ({ route, params, state, libraries }) => {
   }
 
   // Init data
-  Object.assign(source.data[route], {
+  Object.assign(state.source.data[route], {
     id,
     type: "post",
     isPostType: true,

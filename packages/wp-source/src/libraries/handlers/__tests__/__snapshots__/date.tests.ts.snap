@@ -80,6 +80,27 @@ Object {
 }
 `;
 
+exports[`date fetchs from a different endpoint with extra params 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "multiple-post-type",
+      "params": Object {
+        "_embed": true,
+        "after": "2016-10-25T00:00:00.000Z",
+        "before": "2016-10-26T00:00:00.000Z",
+        "page": 1,
+        "search": undefined,
+        "type": Array [
+          "post",
+          "travel",
+        ],
+      },
+    },
+  ],
+]
+`;
+
 exports[`date get two pages of year 2016 1`] = `
 Array [
   Array [

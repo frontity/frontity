@@ -3,7 +3,6 @@ import getTotal from "./utils/get-total";
 import getTotalPages from "./utils/get-total-pages";
 
 const dateHandler: Handler = async ({ route, params, state, libraries }) => {
-  const { source } = state;
   const { api, populate, parse } = libraries.source;
   const { page, query } = parse(route);
 
@@ -23,13 +22,14 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
 
   // 2. fetch the specified page
   const response = await api.get({
-    endpoint: "posts",
+    endpoint: state.source.postEndpoint,
     params: {
       _embed: true,
       after: after.toISOString(),
       before: before.toISOString(),
       search: query.s,
-      page
+      page,
+      ...state.source.params
     }
   });
 
@@ -42,7 +42,7 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
   const items = await populate({ response, state });
 
   // 5. add data to source
-  Object.assign(source.data[route], {
+  Object.assign(state.source.data[route], {
     year,
     month,
     day,
