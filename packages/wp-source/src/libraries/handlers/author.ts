@@ -1,10 +1,8 @@
 import { Handler } from "../../../types";
 import getIdBySlug from "./utils/get-id-by-slug";
-import getTotal from "./utils/get-total";
-import getTotalPages from "./utils/get-total-pages";
 
 const authorHandler: Handler = async ({ route, params, state, libraries }) => {
-  const { api, populate, parse } = libraries.source;
+  const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { page, query } = parse(route);
 
   // 1. search id in state or get it from WP REST API

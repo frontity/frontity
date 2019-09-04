@@ -1,9 +1,7 @@
 import { Handler } from "../../../types";
-import getTotal from "./utils/get-total";
-import getTotalPages from "./utils/get-total-pages";
 
 const dateHandler: Handler = async ({ route, params, state, libraries }) => {
-  const { api, populate, parse } = libraries.source;
+  const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { page, query } = parse(route);
 
   // 1. build date properties

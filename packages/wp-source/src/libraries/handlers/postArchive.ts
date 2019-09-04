@@ -1,6 +1,4 @@
 import { Handler } from "../../../types";
-import getTotal from "./utils/get-total";
-import getTotalPages from "./utils/get-total-pages";
 
 const postArchiveHandler: Handler = async ({ route, state, libraries }) => {
   const { page, query } = libraries.source.parse(route);
@@ -12,8 +10,8 @@ const postArchiveHandler: Handler = async ({ route, state, libraries }) => {
   });
 
   // 3. throw an error if page is out of range
-  const total = getTotal(response);
-  const totalPages = getTotalPages(response);
+  const total = libraries.source.getTotal(response);
+  const totalPages = libraries.source.getTotalPages(response);
   if (page > totalPages) throw new Error("Page doesn't exist.");
 
   // 4. populate response and add page to data
