@@ -2,186 +2,267 @@
 
 exports[`author doesn't exist in source.author 1`] = `
 Object {
-  "/author/mario": Object {
-    "id": 2,
+  "/author/author-1/": Object {
+    "id": 1,
     "isArchive": true,
     "isAuthor": true,
-    "isFetching": true,
-    "isReady": false,
+    "isFetching": false,
+    "isReady": true,
     "items": Array [
       Object {
-        "id": 57,
-        "link": "/2016/shinjuku-gyoen-national-garden/",
+        "id": 1,
+        "link": "/post-1/",
         "type": "post",
       },
       Object {
-        "id": 46,
-        "link": "/2016/small-and-picturesque-french-villages/",
+        "id": 2,
+        "link": "/post-2/",
         "type": "post",
       },
       Object {
-        "id": 33,
-        "link": "/2016/the-al-hajar-mountains/",
-        "type": "post",
-      },
-      Object {
-        "id": 23,
-        "link": "/2016/switzerlands-mountains/",
-        "type": "post",
-      },
-      Object {
-        "id": 8,
-        "link": "/2016/paris-city-of-light/",
+        "id": 3,
+        "link": "/post-3/",
         "type": "post",
       },
     ],
     "total": 5,
-    "totalPages": 1,
+    "totalPages": 2,
   },
 }
 `;
 
 exports[`author doesn't exist in source.author 2`] = `
 Object {
-  "attachment": Array [
-    9,
-    24,
-    34,
-    47,
-    76,
-  ],
-  "author": Array [
-    2,
-  ],
-  "category": Array [
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    56,
-    57,
-    58,
-    59,
-  ],
-  "post": Array [
-    8,
-    23,
-    33,
-    46,
-    57,
-  ],
-  "tag": Array [
-    14,
-    15,
-    16,
-    25,
-    26,
-    27,
-    34,
-    35,
-    36,
-    41,
-    42,
-    43,
-    51,
-    52,
-    53,
-  ],
+  "1": Object {
+    "id": 1,
+    "link": "/author/author-1/",
+    "name": "Author 1",
+    "slug": "author-1",
+  },
 }
 `;
 
-exports[`author exists in source.author but not in source.data 1`] = `
+exports[`author doesn't exist in source.author 3`] = `
 Object {
-  "/author/mario": Object {
-    "id": 7,
+  "1": Object {
+    "author": 1,
+    "id": 1,
+    "link": "/post-1/media-1/",
+    "slug": "media-1",
+    "type": "attachment",
+  },
+  "2": Object {
+    "author": 1,
+    "id": 2,
+    "link": "/post-2/media-2/",
+    "slug": "media-2",
+    "type": "attachment",
+  },
+  "3": Object {
+    "author": 1,
+    "id": 3,
+    "link": "/post-3/media-3/",
+    "slug": "media-3",
+    "type": "attachment",
+  },
+}
+`;
+
+exports[`author doesn't exist in source.author 4`] = `
+Object {
+  "1": Object {
+    "_embedded": Object {
+      "author": Array [
+        1,
+      ],
+      "wp:featuredmedia": Array [
+        1,
+      ],
+    },
+    "author": 1,
+    "categories": Array [],
+    "featured_media": 1,
+    "id": 1,
+    "link": "/post-1/",
+    "slug": "post-1",
+    "tags": Array [],
+    "type": "post",
+  },
+  "2": Object {
+    "_embedded": Object {
+      "author": Array [
+        1,
+      ],
+      "wp:featuredmedia": Array [
+        2,
+      ],
+    },
+    "author": 1,
+    "categories": Array [],
+    "featured_media": 2,
+    "id": 2,
+    "link": "/post-2/",
+    "slug": "post-2",
+    "tags": Array [],
+    "type": "post",
+  },
+  "3": Object {
+    "_embedded": Object {
+      "author": Array [
+        1,
+      ],
+      "wp:featuredmedia": Array [
+        3,
+      ],
+    },
+    "author": 1,
+    "categories": Array [],
+    "featured_media": 3,
+    "id": 3,
+    "link": "/post-3/",
+    "slug": "post-3",
+    "tags": Array [],
+    "type": "post",
+  },
+}
+`;
+
+exports[`author doesn't return 404 if the first page is empty (no headers) 1`] = `
+Object {
+  "/author/author-1/": Object {
+    "id": 1,
     "isArchive": true,
     "isAuthor": true,
-    "isFetching": true,
-    "isReady": false,
+    "isFetching": false,
+    "isReady": true,
+    "items": Array [],
+    "total": NaN,
+    "totalPages": NaN,
+  },
+}
+`;
+
+exports[`author doesn't return 404 if the first page is empty (no headers) 2`] = `Object {}`;
+
+exports[`author doesn't return 404 if the first page is empty (no headers) 3`] = `Object {}`;
+
+exports[`author doesn't return 404 if the first page is empty (no headers) 4`] = `Object {}`;
+
+exports[`author doesn't return 404 if the first page is empty 1`] = `
+Object {
+  "/author/author-1/": Object {
+    "id": 1,
+    "isArchive": true,
+    "isAuthor": true,
+    "isFetching": false,
+    "isReady": true,
+    "items": Array [],
+    "total": 0,
+    "totalPages": 0,
+  },
+}
+`;
+
+exports[`author doesn't return 404 if the first page is empty 2`] = `Object {}`;
+
+exports[`author doesn't return 404 if the first page is empty 3`] = `Object {}`;
+
+exports[`author doesn't return 404 if the first page is empty 4`] = `Object {}`;
+
+exports[`author exists in source.author but not in source.data 1`] = `
+Object {
+  "/author/author-1/page/2/": Object {
+    "id": 1,
+    "isArchive": true,
+    "isAuthor": true,
+    "isFetching": false,
+    "isReady": true,
     "items": Array [
       Object {
-        "id": 57,
-        "link": "/2016/shinjuku-gyoen-national-garden/",
+        "id": 4,
+        "link": "/post-4/",
         "type": "post",
       },
       Object {
-        "id": 46,
-        "link": "/2016/small-and-picturesque-french-villages/",
-        "type": "post",
-      },
-      Object {
-        "id": 33,
-        "link": "/2016/the-al-hajar-mountains/",
-        "type": "post",
-      },
-      Object {
-        "id": 23,
-        "link": "/2016/switzerlands-mountains/",
-        "type": "post",
-      },
-      Object {
-        "id": 8,
-        "link": "/2016/paris-city-of-light/",
+        "id": 5,
+        "link": "/post-5/",
         "type": "post",
       },
     ],
     "total": 5,
-    "totalPages": 1,
+    "totalPages": 2,
   },
 }
 `;
 
 exports[`author exists in source.author but not in source.data 2`] = `
 Object {
-  "attachment": Array [
-    9,
-    24,
-    34,
-    47,
-    76,
-  ],
-  "author": Array [
-    2,
-    7,
-  ],
-  "category": Array [
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    56,
-    57,
-    58,
-    59,
-  ],
-  "post": Array [
-    8,
-    23,
-    33,
-    46,
-    57,
-  ],
-  "tag": Array [
-    14,
-    15,
-    16,
-    25,
-    26,
-    27,
-    34,
-    35,
-    36,
-    41,
-    42,
-    43,
-    51,
-    52,
-    53,
-  ],
+  "1": Object {
+    "id": 1,
+    "link": "/author/author-1/",
+    "name": "Author 1",
+    "slug": "author-1",
+  },
+}
+`;
+
+exports[`author exists in source.author but not in source.data 3`] = `
+Object {
+  "4": Object {
+    "author": 1,
+    "id": 4,
+    "link": "/post-4/media-4/",
+    "slug": "media-4",
+    "type": "attachment",
+  },
+  "5": Object {
+    "author": 1,
+    "id": 5,
+    "link": "/post-5/media-5/",
+    "slug": "media-5",
+    "type": "attachment",
+  },
+}
+`;
+
+exports[`author exists in source.author but not in source.data 4`] = `
+Object {
+  "4": Object {
+    "_embedded": Object {
+      "author": Array [
+        1,
+      ],
+      "wp:featuredmedia": Array [
+        4,
+      ],
+    },
+    "author": 1,
+    "categories": Array [],
+    "featured_media": 4,
+    "id": 4,
+    "link": "/post-4/",
+    "slug": "post-4",
+    "tags": Array [],
+    "type": "post",
+  },
+  "5": Object {
+    "_embedded": Object {
+      "author": Array [
+        1,
+      ],
+      "wp:featuredmedia": Array [
+        5,
+      ],
+    },
+    "author": 1,
+    "categories": Array [],
+    "featured_media": 5,
+    "id": 5,
+    "link": "/post-5/",
+    "slug": "post-5",
+    "tags": Array [],
+    "type": "post",
+  },
 }
 `;
 
@@ -189,15 +270,23 @@ exports[`author fetchs from a different endpoint with extra params 1`] = `
 Array [
   Array [
     Object {
+      "endpoint": "users",
+      "params": Object {
+        "slug": "author-1",
+      },
+    },
+  ],
+  Array [
+    Object {
       "endpoint": "multiple-post-type",
       "params": Object {
         "_embed": true,
-        "author": 2,
+        "author": 1,
         "page": 1,
         "search": undefined,
         "type": Array [
           "post",
-          "travel",
+          "cpt",
         ],
       },
     },
@@ -205,4 +294,166 @@ Array [
 ]
 `;
 
-exports[`author throws an error if the page fetched is out of range 1`] = `"author \\"mario\\" doesn't have page 2"`;
+exports[`author fetchs from a different endpoint with extra params 2`] = `
+Object {
+  "/author/author-1/": Object {
+    "id": 1,
+    "isArchive": true,
+    "isAuthor": true,
+    "isFetching": false,
+    "isReady": true,
+    "items": Array [
+      Object {
+        "id": 1,
+        "link": "/post-1/",
+        "type": "post",
+      },
+      Object {
+        "id": 11,
+        "link": "/cpt/cpt-11/",
+        "type": "cpt",
+      },
+      Object {
+        "id": 2,
+        "link": "/post-2/",
+        "type": "post",
+      },
+    ],
+    "total": 5,
+    "totalPages": 2,
+  },
+}
+`;
+
+exports[`author fetchs from a different endpoint with extra params 3`] = `
+Object {
+  "1": Object {
+    "id": 1,
+    "link": "/author/author-1/",
+    "name": "Author 1",
+    "slug": "author-1",
+  },
+}
+`;
+
+exports[`author fetchs from a different endpoint with extra params 4`] = `
+Object {
+  "1": Object {
+    "author": 1,
+    "id": 1,
+    "link": "/post-1/media-1/",
+    "slug": "media-1",
+    "type": "attachment",
+  },
+  "12": Object {
+    "author": 1,
+    "id": 12,
+    "link": "/cpt/cpt-11/media-cpt-11/",
+    "slug": "media-cpt-11",
+    "type": "attachment",
+  },
+  "2": Object {
+    "author": 1,
+    "id": 2,
+    "link": "/post-2/media-2/",
+    "slug": "media-2",
+    "type": "attachment",
+  },
+}
+`;
+
+exports[`author fetchs from a different endpoint with extra params 5`] = `
+Object {
+  "1": Object {
+    "_embedded": Object {
+      "author": Array [
+        1,
+      ],
+      "wp:featuredmedia": Array [
+        1,
+      ],
+    },
+    "author": 1,
+    "categories": Array [],
+    "featured_media": 1,
+    "id": 1,
+    "link": "/post-1/",
+    "slug": "post-1",
+    "tags": Array [],
+    "type": "post",
+  },
+  "2": Object {
+    "_embedded": Object {
+      "author": Array [
+        1,
+      ],
+      "wp:featuredmedia": Array [
+        2,
+      ],
+    },
+    "author": 1,
+    "categories": Array [],
+    "featured_media": 2,
+    "id": 2,
+    "link": "/post-2/",
+    "slug": "post-2",
+    "tags": Array [],
+    "type": "post",
+  },
+}
+`;
+
+exports[`author fetchs from a different endpoint with extra params 6`] = `
+Object {
+  "11": Object {
+    "_embedded": Object {
+      "author": Array [
+        1,
+      ],
+      "wp:featuredmedia": Array [
+        12,
+      ],
+    },
+    "author": 1,
+    "categories": Array [],
+    "featured_media": 12,
+    "id": 11,
+    "link": "/cpt/cpt-11/",
+    "slug": "cpt-11",
+    "tags": Array [],
+    "type": "cpt",
+  },
+}
+`;
+
+exports[`author returns 404 if author doesn't exist in WP 1`] = `
+Object {
+  "/author/non-existent/": Object {
+    "is404": true,
+    "isFetching": false,
+    "isReady": false,
+  },
+}
+`;
+
+exports[`author returns 404 if author doesn't exist in WP 2`] = `Object {}`;
+
+exports[`author returns 404 if author doesn't exist in WP 3`] = `Object {}`;
+
+exports[`author returns 404 if author doesn't exist in WP 4`] = `Object {}`;
+
+exports[`author returns 404 if the page fetched is out of range 1`] = `
+Object {
+  "/author/author-1/page/3/": Object {
+    "is404": true,
+    "isFetching": false,
+    "isReady": false,
+  },
+}
+`;
+
+exports[`author returns 404 if the page fetched is out of range 2`] = `Object {}`;
+
+exports[`author returns 404 if the page fetched is out of range 3`] = `Object {}`;
+
+exports[`author returns 404 if the page fetched is out of range 4`] = `Object {}`;

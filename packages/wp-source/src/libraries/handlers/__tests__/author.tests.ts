@@ -1,170 +1,142 @@
 import { createStore, InitializedStore } from "@frontity/connect";
-import WpSource from "../../../../types";
-import populate from "../../populate";
-import handler from "../author";
-import { mockResponse, expectEntities } from "./mocks/helpers";
-import posts from "./mocks/posts-author-2.json";
-
 import wpSource from "../../../";
-jest.mock("../../../");
+import WpSource from "../../../../types";
+import Api from "../../api";
+// JSON mocks
+import { mockResponse } from "./mocks/helpers";
+import author1 from "./mocks/author/author-1.json";
+import author1Posts from "./mocks/author/author-1-posts.json";
+import author1PostsPage2 from "./mocks/author/author-1-posts-page-2.json";
+import author1PostsCpt from "./mocks/author/author-1-posts-cpt.json";
 
 let store: InitializedStore<WpSource>;
-
+let api: jest.Mocked<Api>;
 beforeEach(() => {
-  // First, get a mocked instance of wpSource
-  const config = wpSource();
-
-  // Then, replaces the mocked implementation of Api
-  const { api } = config.libraries.source;
-  api.getIdBySlug = jest.fn().mockResolvedValue(2);
-  api.get = jest.fn().mockResolvedValue(
-    mockResponse(posts, {
-      "X-WP-Total": 5,
-      "X-WP-TotalPages": 1
-    })
-  );
-
-  // And add the original implementation of populate
-  config.libraries.source.populate = jest.fn().mockImplementation(populate);
-
-  // Instantiate the store
-  store = createStore(config);
+  store = createStore(wpSource());
+  store.actions.source.init();
+  api = store.libraries.source.api as jest.Mocked<Api>;
 });
 
 describe("author", () => {
   test("doesn't exist in source.author", async () => {
-    // source.fetch("/author/mario")
-    store.state.source.data["/author/mario"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await handler({
-      route: "/author/mario",
-      params: { slug: "mario" },
-      ...store
-    });
-
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([author1]))
+      .mockResolvedValueOnce(
+        mockResponse(author1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch Author page
+    await store.actions.source.fetch("/author/author-1/");
     expect(store.state.source.data).toMatchSnapshot();
-    expectEntities(store.state.source);
+    expect(store.state.source.author).toMatchSnapshot();
+    expect(store.state.source.attachment).toMatchSnapshot();
+    expect(store.state.source.post).toMatchSnapshot();
   });
 
   test("exists in source.author but not in source.data", async () => {
-    store.state.source.author[7] = {
-      id: 7,
-      description: "",
-      link: "https://test.frontity.io/author/mario",
-      name: "Mario Santos",
-      slug: "mario",
-      url: "",
-      avatar_urls: {
-        "24": "",
-        "48": "",
-        "96": ""
-      },
-      meta: []
-    };
-
-    // source.fetch("/author/mario")
-    store.state.source.data["/author/mario"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await handler({
-      route: "/author/mario",
-      params: { slug: "mario" },
-      ...store
-    });
-
-    expect(store.libraries.source.api.getIdBySlug).not.toBeCalled();
+    // Add author to the store
+    store.state.source.author[1] = author1;
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(
+      mockResponse(author1PostsPage2, {
+        "X-WP-Total": "5",
+        "X-WP-TotalPages": "2"
+      })
+    );
+    // Fetch Author page
+    await store.actions.source.fetch("/author/author-1/page/2/");
+    expect(api.get).toBeCalledTimes(1);
     expect(store.state.source.data).toMatchSnapshot();
-    expectEntities(store.state.source);
+    expect(store.state.source.author).toMatchSnapshot();
+    expect(store.state.source.attachment).toMatchSnapshot();
+    expect(store.state.source.post).toMatchSnapshot();
   });
 
   test("fetchs from a different endpoint with extra params", async () => {
     store.state.source.postEndpoint = "multiple-post-type";
-    store.state.source.params = { type: ["post", "travel"] };
-    // source.fetch("/author/mario")
-    store.state.source.data["/author/mario"] = {
-      isFetching: true,
-      isReady: false
-    };
+    store.state.source.params = { type: ["post", "cpt"] };
 
-    await handler({
-      route: "/author/mario",
-      params: { slug: "mario" },
-      ...store
-    });
-
-    const apiGet = jest.spyOn(store.libraries.source.api, "get");
-    expect(apiGet.mock.calls).toMatchSnapshot();
-  });
-
-  test("throws an error if author doesn't exist in WP", async () => {
-    const notFoundError = new Error("Not found");
-    store.libraries.source.api.getIdBySlug = jest
+    // Mock Api responses
+    api.get = jest
       .fn()
-      .mockRejectedValueOnce(notFoundError);
-
-    // source.fetch("/author/mario")
-    store.state.source.data["/author/mario"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await expect(
-      handler({
-        route: "/author/mario",
-        params: { slug: "mario" },
-        ...store
-      })
-    ).rejects.toThrow(notFoundError);
+      .mockResolvedValueOnce(mockResponse([author1]))
+      .mockResolvedValueOnce(
+        mockResponse(author1PostsCpt, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch Author page
+    await store.actions.source.fetch("/author/author-1/");
+    expect(api.get.mock.calls).toMatchSnapshot();
+    expect(store.state.source.data).toMatchSnapshot();
+    expect(store.state.source.author).toMatchSnapshot();
+    expect(store.state.source.attachment).toMatchSnapshot();
+    expect(store.state.source.post).toMatchSnapshot();
+    expect((store.state.source as any).cpt).toMatchSnapshot();
   });
 
-  test("throws an error if the page fetched is out of range", async () => {
-    store.libraries.source.api.get = jest.fn().mockResolvedValue(
-      mockResponse([], {
-        "X-WP-Total": 5,
-        "X-WP-TotalPages": 1
-      })
-    );
+  test("returns 404 if author doesn't exist in WP", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValue(mockResponse([]));
 
-    // source.fetch("/author/mario/page/2/")
-    store.state.source.data["/author/mario/page/2/"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await expect(
-      handler({
-        route: "/author/mario/page/2/",
-        params: { slug: "mario" },
-        ...store
-      })
-    ).rejects.toThrowErrorMatchingSnapshot();
+    // Fetch Author page
+    await store.actions.source.fetch("/author/non-existent/");
+    expect(api.get).toBeCalledTimes(1);
+    expect(store.state.source.data).toMatchSnapshot();
+    expect(store.state.source.author).toMatchSnapshot();
+    expect(store.state.source.attachment).toMatchSnapshot();
+    expect(store.state.source.post).toMatchSnapshot();
   });
 
-  test("doesn't throw an error if the first page is empty", async () => {
-    store.libraries.source.api.get = jest.fn().mockResolvedValue(
-      mockResponse([], {
-        "X-WP-Total": 5,
-        "X-WP-TotalPages": 1
-      })
-    );
+  test("returns 404 if the page fetched is out of range", async () => {
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([author1]))
+      .mockResolvedValueOnce(mockResponse([]));
 
-    // source.fetch("/author/mario/")
-    store.state.source.data["/author/mario/"] = {
-      isFetching: true,
-      isReady: false
-    };
+    // Fetch Author page
+    await store.actions.source.fetch("/author/author-1/page/3");
+    expect(store.state.source.data).toMatchSnapshot();
+    expect(store.state.source.author).toMatchSnapshot();
+    expect(store.state.source.attachment).toMatchSnapshot();
+    expect(store.state.source.post).toMatchSnapshot();
+  });
 
-    await expect(
-      handler({
-        route: "/author/mario/",
-        params: { slug: "mario" },
-        ...store
-      })
-    ).resolves.toBe(undefined);
+  test("doesn't return 404 if the first page is empty", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([author1]))
+      .mockResolvedValueOnce(
+        mockResponse([], {
+          "X-WP-Total": "0",
+          "X-WP-TotalPages": "0"
+        })
+      );
+    // Fetch Author page
+    await store.actions.source.fetch("/author/author-1/");
+    expect(store.state.source.data).toMatchSnapshot();
+    expect(store.state.source.author).toMatchSnapshot();
+    expect(store.state.source.attachment).toMatchSnapshot();
+    expect(store.state.source.post).toMatchSnapshot();
+  });
+
+  test("doesn't return 404 if the first page is empty (no headers)", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([author1]))
+      .mockResolvedValueOnce(mockResponse([], {}));
+    // Fetch Author page
+    await store.actions.source.fetch("/author/author-1/");
+    expect(store.state.source.data).toMatchSnapshot();
+    expect(store.state.source.author).toMatchSnapshot();
+    expect(store.state.source.attachment).toMatchSnapshot();
+    expect(store.state.source.post).toMatchSnapshot();
   });
 });
