@@ -31,10 +31,7 @@ describe("author", () => {
       );
     // Fetch Author page
     await store.actions.source.fetch("/author/author-1/");
-    expect(store.state.source.data).toMatchSnapshot();
-    expect(store.state.source.author).toMatchSnapshot();
-    expect(store.state.source.attachment).toMatchSnapshot();
-    expect(store.state.source.post).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
   });
 
   test("exists in source.author but not in source.data", async () => {
@@ -50,10 +47,7 @@ describe("author", () => {
     // Fetch Author page
     await store.actions.source.fetch("/author/author-1/page/2/");
     expect(api.get).toBeCalledTimes(1);
-    expect(store.state.source.data).toMatchSnapshot();
-    expect(store.state.source.author).toMatchSnapshot();
-    expect(store.state.source.attachment).toMatchSnapshot();
-    expect(store.state.source.post).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
   });
 
   test("fetchs from a different endpoint with extra params", async () => {
@@ -73,11 +67,7 @@ describe("author", () => {
     // Fetch Author page
     await store.actions.source.fetch("/author/author-1/");
     expect(api.get.mock.calls).toMatchSnapshot();
-    expect(store.state.source.data).toMatchSnapshot();
-    expect(store.state.source.author).toMatchSnapshot();
-    expect(store.state.source.attachment).toMatchSnapshot();
-    expect(store.state.source.post).toMatchSnapshot();
-    expect((store.state.source as any).cpt).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
   });
 
   test("returns 404 if author doesn't exist in WP", async () => {
@@ -86,10 +76,7 @@ describe("author", () => {
     // Fetch Author page
     await store.actions.source.fetch("/author/non-existent/");
     expect(api.get).toBeCalledTimes(1);
-    expect(store.state.source.data).toMatchSnapshot();
-    expect(store.state.source.author).toMatchSnapshot();
-    expect(store.state.source.attachment).toMatchSnapshot();
-    expect(store.state.source.post).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
   });
 
   test("returns 404 if the page fetched is out of range", async () => {
@@ -100,10 +87,7 @@ describe("author", () => {
       .mockResolvedValueOnce(mockResponse([]));
     // Fetch Author page
     await store.actions.source.fetch("/author/author-1/page/3");
-    expect(store.state.source.data).toMatchSnapshot();
-    expect(store.state.source.author).toMatchSnapshot();
-    expect(store.state.source.attachment).toMatchSnapshot();
-    expect(store.state.source.post).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
   });
 
   test("doesn't return 404 if the first page is empty", async () => {
@@ -119,10 +103,7 @@ describe("author", () => {
       );
     // Fetch Author page
     await store.actions.source.fetch("/author/author-1/");
-    expect(store.state.source.data).toMatchSnapshot();
-    expect(store.state.source.author).toMatchSnapshot();
-    expect(store.state.source.attachment).toMatchSnapshot();
-    expect(store.state.source.post).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
   });
 
   test("doesn't return 404 if the first page is empty (no headers)", async () => {
@@ -133,9 +114,6 @@ describe("author", () => {
       .mockResolvedValueOnce(mockResponse([], {}));
     // Fetch Author page
     await store.actions.source.fetch("/author/author-1/");
-    expect(store.state.source.data).toMatchSnapshot();
-    expect(store.state.source.author).toMatchSnapshot();
-    expect(store.state.source.attachment).toMatchSnapshot();
-    expect(store.state.source.post).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
   });
 });

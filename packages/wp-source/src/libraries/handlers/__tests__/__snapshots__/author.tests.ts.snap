@@ -2,267 +2,303 @@
 
 exports[`author doesn't exist in source.author 1`] = `
 Object {
-  "/author/author-1/": Object {
-    "id": 1,
-    "isArchive": true,
-    "isAuthor": true,
-    "isFetching": false,
-    "isReady": true,
-    "items": Array [
-      Object {
-        "id": 1,
-        "link": "/post-1/",
-        "type": "post",
-      },
-      Object {
-        "id": 2,
-        "link": "/post-2/",
-        "type": "post",
-      },
-      Object {
-        "id": 3,
-        "link": "/post-3/",
-        "type": "post",
-      },
-    ],
-    "total": 5,
-    "totalPages": 2,
-  },
-}
-`;
-
-exports[`author doesn't exist in source.author 2`] = `
-Object {
-  "1": Object {
-    "id": 1,
-    "link": "/author/author-1/",
-    "name": "Author 1",
-    "slug": "author-1",
-  },
-}
-`;
-
-exports[`author doesn't exist in source.author 3`] = `
-Object {
-  "1": Object {
-    "author": 1,
-    "id": 1,
-    "link": "/post-1/media-1/",
-    "slug": "media-1",
-    "type": "attachment",
-  },
-  "2": Object {
-    "author": 1,
-    "id": 2,
-    "link": "/post-2/media-2/",
-    "slug": "media-2",
-    "type": "attachment",
-  },
-  "3": Object {
-    "author": 1,
-    "id": 3,
-    "link": "/post-3/media-3/",
-    "slug": "media-3",
-    "type": "attachment",
-  },
-}
-`;
-
-exports[`author doesn't exist in source.author 4`] = `
-Object {
-  "1": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        1,
-      ],
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/media-1/",
+      "slug": "media-1",
+      "type": "attachment",
     },
-    "author": 1,
-    "categories": Array [],
-    "featured_media": 1,
-    "id": 1,
-    "link": "/post-1/",
-    "slug": "post-1",
-    "tags": Array [],
-    "type": "post",
-  },
-  "2": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        2,
-      ],
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/post-2/media-2/",
+      "slug": "media-2",
+      "type": "attachment",
     },
-    "author": 1,
-    "categories": Array [],
-    "featured_media": 2,
-    "id": 2,
-    "link": "/post-2/",
-    "slug": "post-2",
-    "tags": Array [],
-    "type": "post",
-  },
-  "3": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        3,
-      ],
+    "3": Object {
+      "author": 1,
+      "id": 3,
+      "link": "/post-3/media-3/",
+      "slug": "media-3",
+      "type": "attachment",
     },
-    "author": 1,
-    "categories": Array [],
-    "featured_media": 3,
-    "id": 3,
-    "link": "/post-3/",
-    "slug": "post-3",
-    "tags": Array [],
-    "type": "post",
   },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isArchive": true,
+      "isAuthor": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 1,
+          "link": "/post-1/",
+          "type": "post",
+        },
+        Object {
+          "id": 2,
+          "link": "/post-2/",
+          "type": "post",
+        },
+        Object {
+          "id": 3,
+          "link": "/post-3/",
+          "type": "post",
+        },
+      ],
+      "total": 5,
+      "totalPages": 2,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+      },
+      "author": 1,
+      "categories": Array [],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
+      "type": "post",
+    },
+    "2": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          2,
+        ],
+      },
+      "author": 1,
+      "categories": Array [],
+      "featured_media": 2,
+      "id": 2,
+      "link": "/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
+      "type": "post",
+    },
+    "3": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          3,
+        ],
+      },
+      "author": 1,
+      "categories": Array [],
+      "featured_media": 3,
+      "id": 3,
+      "link": "/post-3/",
+      "slug": "post-3",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
 
 exports[`author doesn't return 404 if the first page is empty (no headers) 1`] = `
 Object {
-  "/author/author-1/": Object {
-    "id": 1,
-    "isArchive": true,
-    "isAuthor": true,
-    "isFetching": false,
-    "isReady": true,
-    "items": Array [],
-    "total": NaN,
-    "totalPages": NaN,
+  "api": "https://test.frontity.io",
+  "attachment": Object {},
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isArchive": true,
+      "isAuthor": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [],
+      "total": NaN,
+      "totalPages": NaN,
+    },
   },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
-
-exports[`author doesn't return 404 if the first page is empty (no headers) 2`] = `Object {}`;
-
-exports[`author doesn't return 404 if the first page is empty (no headers) 3`] = `Object {}`;
-
-exports[`author doesn't return 404 if the first page is empty (no headers) 4`] = `Object {}`;
 
 exports[`author doesn't return 404 if the first page is empty 1`] = `
 Object {
-  "/author/author-1/": Object {
-    "id": 1,
-    "isArchive": true,
-    "isAuthor": true,
-    "isFetching": false,
-    "isReady": true,
-    "items": Array [],
-    "total": 0,
-    "totalPages": 0,
+  "api": "https://test.frontity.io",
+  "attachment": Object {},
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isArchive": true,
+      "isAuthor": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [],
+      "total": 0,
+      "totalPages": 0,
+    },
   },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
-
-exports[`author doesn't return 404 if the first page is empty 2`] = `Object {}`;
-
-exports[`author doesn't return 404 if the first page is empty 3`] = `Object {}`;
-
-exports[`author doesn't return 404 if the first page is empty 4`] = `Object {}`;
 
 exports[`author exists in source.author but not in source.data 1`] = `
 Object {
-  "/author/author-1/page/2/": Object {
-    "id": 1,
-    "isArchive": true,
-    "isAuthor": true,
-    "isFetching": false,
-    "isReady": true,
-    "items": Array [
-      Object {
-        "id": 4,
-        "link": "/post-4/",
-        "type": "post",
-      },
-      Object {
-        "id": 5,
-        "link": "/post-5/",
-        "type": "post",
-      },
-    ],
-    "total": 5,
-    "totalPages": 2,
-  },
-}
-`;
-
-exports[`author exists in source.author but not in source.data 2`] = `
-Object {
-  "1": Object {
-    "id": 1,
-    "link": "/author/author-1/",
-    "name": "Author 1",
-    "slug": "author-1",
-  },
-}
-`;
-
-exports[`author exists in source.author but not in source.data 3`] = `
-Object {
-  "4": Object {
-    "author": 1,
-    "id": 4,
-    "link": "/post-4/media-4/",
-    "slug": "media-4",
-    "type": "attachment",
-  },
-  "5": Object {
-    "author": 1,
-    "id": 5,
-    "link": "/post-5/media-5/",
-    "slug": "media-5",
-    "type": "attachment",
-  },
-}
-`;
-
-exports[`author exists in source.author but not in source.data 4`] = `
-Object {
-  "4": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        4,
-      ],
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "4": Object {
+      "author": 1,
+      "id": 4,
+      "link": "/post-4/media-4/",
+      "slug": "media-4",
+      "type": "attachment",
     },
-    "author": 1,
-    "categories": Array [],
-    "featured_media": 4,
-    "id": 4,
-    "link": "/post-4/",
-    "slug": "post-4",
-    "tags": Array [],
-    "type": "post",
-  },
-  "5": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        5,
-      ],
+    "5": Object {
+      "author": 1,
+      "id": 5,
+      "link": "/post-5/media-5/",
+      "slug": "media-5",
+      "type": "attachment",
     },
-    "author": 1,
-    "categories": Array [],
-    "featured_media": 5,
-    "id": 5,
-    "link": "/post-5/",
-    "slug": "post-5",
-    "tags": Array [],
-    "type": "post",
   },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/page/2/": Object {
+      "id": 1,
+      "isArchive": true,
+      "isAuthor": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 4,
+          "link": "/post-4/",
+          "type": "post",
+        },
+        Object {
+          "id": 5,
+          "link": "/post-5/",
+          "type": "post",
+        },
+      ],
+      "total": 5,
+      "totalPages": 2,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "4": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          4,
+        ],
+      },
+      "author": 1,
+      "categories": Array [],
+      "featured_media": 4,
+      "id": 4,
+      "link": "/post-4/",
+      "slug": "post-4",
+      "tags": Array [],
+      "type": "post",
+    },
+    "5": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          5,
+        ],
+      },
+      "author": 1,
+      "categories": Array [],
+      "featured_media": 5,
+      "id": 5,
+      "link": "/post-5/",
+      "slug": "post-5",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
 
@@ -296,164 +332,196 @@ Array [
 
 exports[`author fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "/author/author-1/": Object {
-    "id": 1,
-    "isArchive": true,
-    "isAuthor": true,
-    "isFetching": false,
-    "isReady": true,
-    "items": Array [
-      Object {
-        "id": 1,
-        "link": "/post-1/",
-        "type": "post",
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/media-1/",
+      "slug": "media-1",
+      "type": "attachment",
+    },
+    "12": Object {
+      "author": 1,
+      "id": 12,
+      "link": "/cpt/cpt-11/media-cpt-11/",
+      "slug": "media-cpt-11",
+      "type": "attachment",
+    },
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/post-2/media-2/",
+      "slug": "media-2",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {},
+  "categoryBase": "",
+  "cpt": Object {
+    "11": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          12,
+        ],
       },
-      Object {
-        "id": 11,
-        "link": "/cpt/cpt-11/",
-        "type": "cpt",
-      },
-      Object {
-        "id": 2,
-        "link": "/post-2/",
-        "type": "post",
-      },
+      "author": 1,
+      "categories": Array [],
+      "featured_media": 12,
+      "id": 11,
+      "link": "/cpt/cpt-11/",
+      "slug": "cpt-11",
+      "tags": Array [],
+      "type": "cpt",
+    },
+  },
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isArchive": true,
+      "isAuthor": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 1,
+          "link": "/post-1/",
+          "type": "post",
+        },
+        Object {
+          "id": 11,
+          "link": "/cpt/cpt-11/",
+          "type": "cpt",
+        },
+        Object {
+          "id": 2,
+          "link": "/post-2/",
+          "type": "post",
+        },
+      ],
+      "total": 5,
+      "totalPages": 2,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {
+    "type": Array [
+      "post",
+      "cpt",
     ],
-    "total": 5,
-    "totalPages": 2,
   },
-}
-`;
-
-exports[`author fetchs from a different endpoint with extra params 3`] = `
-Object {
-  "1": Object {
-    "id": 1,
-    "link": "/author/author-1/",
-    "name": "Author 1",
-    "slug": "author-1",
-  },
-}
-`;
-
-exports[`author fetchs from a different endpoint with extra params 4`] = `
-Object {
-  "1": Object {
-    "author": 1,
-    "id": 1,
-    "link": "/post-1/media-1/",
-    "slug": "media-1",
-    "type": "attachment",
-  },
-  "12": Object {
-    "author": 1,
-    "id": 12,
-    "link": "/cpt/cpt-11/media-cpt-11/",
-    "slug": "media-cpt-11",
-    "type": "attachment",
-  },
-  "2": Object {
-    "author": 1,
-    "id": 2,
-    "link": "/post-2/media-2/",
-    "slug": "media-2",
-    "type": "attachment",
-  },
-}
-`;
-
-exports[`author fetchs from a different endpoint with extra params 5`] = `
-Object {
-  "1": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        1,
-      ],
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+      },
+      "author": 1,
+      "categories": Array [],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
+      "type": "post",
     },
-    "author": 1,
-    "categories": Array [],
-    "featured_media": 1,
-    "id": 1,
-    "link": "/post-1/",
-    "slug": "post-1",
-    "tags": Array [],
-    "type": "post",
-  },
-  "2": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        2,
-      ],
+    "2": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          2,
+        ],
+      },
+      "author": 1,
+      "categories": Array [],
+      "featured_media": 2,
+      "id": 2,
+      "link": "/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
+      "type": "post",
     },
-    "author": 1,
-    "categories": Array [],
-    "featured_media": 2,
-    "id": 2,
-    "link": "/post-2/",
-    "slug": "post-2",
-    "tags": Array [],
-    "type": "post",
   },
-}
-`;
-
-exports[`author fetchs from a different endpoint with extra params 6`] = `
-Object {
-  "11": Object {
-    "_embedded": Object {
-      "author": Array [
-        1,
-      ],
-      "wp:featuredmedia": Array [
-        12,
-      ],
-    },
-    "author": 1,
-    "categories": Array [],
-    "featured_media": 12,
-    "id": 11,
-    "link": "/cpt/cpt-11/",
-    "slug": "cpt-11",
-    "tags": Array [],
-    "type": "cpt",
-  },
+  "postEndpoint": "multiple-post-type",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
 
 exports[`author returns 404 if author doesn't exist in WP 1`] = `
 Object {
-  "/author/non-existent/": Object {
-    "is404": true,
-    "isFetching": false,
-    "isReady": false,
+  "api": "https://test.frontity.io",
+  "attachment": Object {},
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/non-existent/": Object {
+      "is404": true,
+      "isFetching": false,
+      "isReady": false,
+    },
   },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
-
-exports[`author returns 404 if author doesn't exist in WP 2`] = `Object {}`;
-
-exports[`author returns 404 if author doesn't exist in WP 3`] = `Object {}`;
-
-exports[`author returns 404 if author doesn't exist in WP 4`] = `Object {}`;
 
 exports[`author returns 404 if the page fetched is out of range 1`] = `
 Object {
-  "/author/author-1/page/3/": Object {
-    "is404": true,
-    "isFetching": false,
-    "isReady": false,
+  "api": "https://test.frontity.io",
+  "attachment": Object {},
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/page/3/": Object {
+      "is404": true,
+      "isFetching": false,
+      "isReady": false,
+    },
   },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
-
-exports[`author returns 404 if the page fetched is out of range 2`] = `Object {}`;
-
-exports[`author returns 404 if the page fetched is out of range 3`] = `Object {}`;
-
-exports[`author returns 404 if the page fetched is out of range 4`] = `Object {}`;
