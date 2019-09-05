@@ -32,13 +32,13 @@ const taxonomyHandler = ({
     }
   });
 
-  // 3. throw an error if page is out of range
+  // 3. populate response and add page to data
+  const items = await populate({ response, state });
+  if (page > 0 && !items.length) throw new Error("Page doesn't exist.");
+
+  // 4. get posts and pages count
   const total = getTotal(response);
   const totalPages = getTotalPages(response);
-  if (page > totalPages) throw new Error("Page doesn't exist.");
-
-  // 4. populate response and add page to data
-  const items = await populate({ response, state });
 
   // 5. add data to source
   Object.assign(state.source.data[route], {
