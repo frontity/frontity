@@ -24,7 +24,14 @@ const attachmentHandler: Handler = async ({
       params: { ...(id ? { include: id } : { slug }), _embed: true }
     });
 
-    [{ id }] = await populate({ response, state });
+    const populated = await populate({ response, state });
+
+    if (populated.length === 0)
+      throw new Error(
+        `attachment with ${slug ? `slug "${slug}"` : `id "${id}"`} not found`
+      );
+
+    [{ id }] = populated;
   }
 
   // Init data

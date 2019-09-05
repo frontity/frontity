@@ -150,4 +150,44 @@ describe("date", () => {
     const apiGet = jest.spyOn(store.libraries.source.api, "get");
     expect(apiGet.mock.calls).toMatchSnapshot();
   });
+
+  test("throws an error if the page fetched doesn't exist", async () => {
+    // First page
+    store.libraries.source.api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]));
+
+    // source.fetch("/2016/10/25/")
+    store.state.source.data["/2016/10/25/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await expect(
+      handler({
+        route: "/2016/10/25/",
+        params: { year: "2016", month: "10", day: "25" },
+        ...store
+      })
+    ).rejects.toThrowErrorMatchingSnapshot();
+
+    // Other pages
+    store.libraries.source.api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]));
+
+    // source.fetch("/2016/10/25/page/11")
+    store.state.source.data["/2016/10/25/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await expect(
+      handler({
+        route: "/2016/10/25/page/11/",
+        params: { year: "2016", month: "10", day: "25" },
+        ...store
+      })
+    ).rejects.toThrowErrorMatchingSnapshot();
+  });
 });

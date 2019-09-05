@@ -204,3 +204,5 @@ Array [
   ],
 ]
 `;
+
+exports[`author throws an error if the page fetched is out of range 1`] = `"author \\"mario\\" doesn't have page 2"`;

@@ -317,3 +317,7 @@ Object {
   ],
 }
 `;
+
+exports[`date throws an error if the page fetched doesn't exist 1`] = `"date \\"/2016/10/25/\\" doesn't have page 1"`;
+
+exports[`date throws an error if the page fetched doesn't exist 2`] = `"date \\"/2016/10/25/\\" doesn't have page 11"`;

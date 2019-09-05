@@ -50,7 +50,7 @@ class Api {
 
     if (!entity)
       throw new Error(
-        `Entity of from endpoint '${endpoint}' with slug '${slug}' not found`
+        `entity from endpoint '${endpoint}' with slug '${slug}' not found`
       );
 
     return entity.id;

@@ -100,4 +100,71 @@ describe("author", () => {
     const apiGet = jest.spyOn(store.libraries.source.api, "get");
     expect(apiGet.mock.calls).toMatchSnapshot();
   });
+
+  test("throws an error if author doesn't exist in WP", async () => {
+    const notFoundError = new Error("Not found");
+    store.libraries.source.api.getIdBySlug = jest
+      .fn()
+      .mockRejectedValueOnce(notFoundError);
+
+    // source.fetch("/author/mario")
+    store.state.source.data["/author/mario"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await expect(
+      handler({
+        route: "/author/mario",
+        params: { slug: "mario" },
+        ...store
+      })
+    ).rejects.toThrow(notFoundError);
+  });
+
+  test("throws an error if the page fetched is out of range", async () => {
+    store.libraries.source.api.get = jest.fn().mockResolvedValue(
+      mockResponse([], {
+        "X-WP-Total": 5,
+        "X-WP-TotalPages": 1
+      })
+    );
+
+    // source.fetch("/author/mario/page/2/")
+    store.state.source.data["/author/mario/page/2/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await expect(
+      handler({
+        route: "/author/mario/page/2/",
+        params: { slug: "mario" },
+        ...store
+      })
+    ).rejects.toThrowErrorMatchingSnapshot();
+  });
+
+  test("doesn't throw an error if the first page is empty", async () => {
+    store.libraries.source.api.get = jest.fn().mockResolvedValue(
+      mockResponse([], {
+        "X-WP-Total": 5,
+        "X-WP-TotalPages": 1
+      })
+    );
+
+    // source.fetch("/author/mario/")
+    store.state.source.data["/author/mario/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await expect(
+      handler({
+        route: "/author/mario/",
+        params: { slug: "mario" },
+        ...store
+      })
+    ).resolves.toBe(undefined);
+  });
 });

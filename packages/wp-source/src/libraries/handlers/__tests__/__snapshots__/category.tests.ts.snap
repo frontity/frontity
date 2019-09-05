@@ -146,6 +146,8 @@ Array [
 ]
 `;
 
+exports[`category throws an error if the page fetched is out of range 1`] = `"category with slug \\"nature\\" doesn't have page 2"`;
+
 exports[`category works with pagination 1`] = `
 Object {
   "/category/nature/page/2/": Object {

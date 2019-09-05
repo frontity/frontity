@@ -114,4 +114,71 @@ describe("category", () => {
     const apiGet = jest.spyOn(store.libraries.source.api, "get");
     expect(apiGet.mock.calls).toMatchSnapshot();
   });
+
+  test("throws an error if author doesn't exist in WP", async () => {
+    const notFoundError = new Error("Not found");
+    store.libraries.source.api.getIdBySlug = jest
+      .fn()
+      .mockRejectedValueOnce(notFoundError);
+
+    // source.fetch("/category/nature")
+    store.state.source.data["/category/nature"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await expect(
+      handler({
+        route: "/category/nature",
+        params: { slug: "nature" },
+        ...store
+      })
+    ).rejects.toThrow(notFoundError);
+  });
+
+  test("throws an error if the page fetched is out of range", async () => {
+    store.libraries.source.api.get = jest.fn().mockResolvedValue(
+      mockResponse([], {
+        "X-WP-Total": 5,
+        "X-WP-TotalPages": 1
+      })
+    );
+
+    // source.fetch("/category/nature/page/2/")
+    store.state.source.data["/category/nature/page/2/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await expect(
+      handler({
+        route: "/category/nature/page/2/",
+        params: { slug: "nature" },
+        ...store
+      })
+    ).rejects.toThrowErrorMatchingSnapshot();
+  });
+
+  test("doesn't throw an error if the first page is empty", async () => {
+    store.libraries.source.api.get = jest.fn().mockResolvedValue(
+      mockResponse([], {
+        "X-WP-Total": 5,
+        "X-WP-TotalPages": 1
+      })
+    );
+
+    // source.fetch("/category/nature/")
+    store.state.source.data["/category/nature/"] = {
+      isFetching: true,
+      isReady: false
+    };
+
+    await expect(
+      handler({
+        route: "/category/nature/",
+        params: { slug: "nature" },
+        ...store
+      })
+    ).resolves.toBe(undefined);
+  });
 });

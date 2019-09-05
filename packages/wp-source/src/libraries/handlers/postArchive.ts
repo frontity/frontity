@@ -12,7 +12,8 @@ const postArchiveHandler: Handler = async ({ route, state, libraries }) => {
 
   // 3. populate response and add page to data
   const items = await populate({ response, state });
-  if (page > 0 && !items.length) throw new Error("Page doesn't exist.");
+  if (page > 1 && items.length === 0)
+    throw new Error(`post archive doesn't have page ${page}`);
 
   // 4. get posts and pages count
   const total = getTotal(response);
