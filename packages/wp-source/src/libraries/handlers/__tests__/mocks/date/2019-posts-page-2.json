@@ -1,0 +1,84 @@
+[
+  {
+    "id": 4,
+    "slug": "post-4",
+    "type": "post",
+    "link": "https://test.frontity.io/post-4/",
+    "author": 1,
+    "featured_media": 4,
+    "categories": [1],
+    "tags": [],
+    "_embedded": {
+      "author": [
+        {
+          "id": 1,
+          "name": "Author 1",
+          "link": "https://test.frontity.io/author/author-1/",
+          "slug": "author-1"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 4,
+          "slug": "media-4",
+          "type": "attachment",
+          "link": "https://test.frontity.io/post-4/media-4/",
+          "author": 1
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 1,
+            "count": 5,
+            "link": "https://test.frontity.io/category/cat-1/",
+            "slug": "cat-1",
+            "taxonomy": "category",
+            "parent": 0
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "slug": "post-5",
+    "type": "post",
+    "link": "https://test.frontity.io/post-5/",
+    "author": 1,
+    "featured_media": 5,
+    "categories": [1],
+    "tags": [],
+    "_embedded": {
+      "author": [
+        {
+          "id": 1,
+          "name": "Author 1",
+          "link": "https://test.frontity.io/author/author-1/",
+          "slug": "author-1"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 5,
+          "slug": "media-5",
+          "type": "attachment",
+          "link": "https://test.frontity.io/post-5/media-5/",
+          "author": 1
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 1,
+            "count": 5,
+            "link": "https://test.frontity.io/category/cat-1/",
+            "slug": "cat-1",
+            "taxonomy": "category",
+            "parent": 0
+          }
+        ]
+      ]
+    }
+  }
+]

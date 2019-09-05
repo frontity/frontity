@@ -1,85 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`date doesn't exist in dataMap (2016/10/25) 1`] = `
-Array [
-  Array [
-    Object {
-      "endpoint": "posts",
-      "params": Object {
-        "_embed": true,
-        "after": "2016-10-25T00:00:00.000Z",
-        "before": "2016-10-26T00:00:00.000Z",
-        "page": 1,
-        "search": undefined,
-      },
-    },
-  ],
-]
-`;
-
-exports[`date doesn't exist in dataMap (2016/10/25) 2`] = `
-Object {
-  "/2016/10/25/": Object {
-    "day": 25,
-    "isArchive": true,
-    "isDate": true,
-    "isFetching": true,
-    "isReady": false,
-    "items": Array [
-      Object {
-        "id": 57,
-        "link": "/2016/shinjuku-gyoen-national-garden/",
-        "type": "post",
-      },
-      Object {
-        "id": 54,
-        "link": "/2016/lower-antelope-canyon/",
-        "type": "post",
-      },
-    ],
-    "month": 10,
-    "total": 2,
-    "totalPages": 1,
-    "year": 2016,
-  },
-}
-`;
-
-exports[`date doesn't exist in dataMap (2016/10/25) 3`] = `
-Object {
-  "attachment": Array [
-    55,
-    77,
-    80,
-  ],
-  "author": Array [
-    1,
-    2,
-  ],
-  "category": Array [
-    3,
-    7,
-    8,
-    56,
-    57,
-    58,
-    59,
-  ],
-  "post": Array [
-    54,
-    57,
-  ],
-  "tag": Array [
-    13,
-    14,
-    15,
-    16,
-    18,
-    19,
-  ],
-}
-`;
-
 exports[`date fetchs from a different endpoint with extra params 1`] = `
 Array [
   Array [
@@ -87,13 +7,13 @@ Array [
       "endpoint": "multiple-post-type",
       "params": Object {
         "_embed": true,
-        "after": "2016-10-25T00:00:00.000Z",
-        "before": "2016-10-26T00:00:00.000Z",
+        "after": "2019-01-01T00:00:00.000Z",
+        "before": "2019-01-02T00:00:00.000Z",
         "page": 1,
         "search": undefined,
         "type": Array [
           "post",
-          "travel",
+          "cpt",
         ],
       },
     },
@@ -101,15 +21,150 @@ Array [
 ]
 `;
 
-exports[`date get two pages of year 2016 1`] = `
+exports[`date fetchs from a different endpoint with extra params 2`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/media-1/",
+      "slug": "media-1",
+      "type": "attachment",
+    },
+    "12": Object {
+      "author": 1,
+      "id": 12,
+      "link": "/cpt/cpt-11/media-cpt-11/",
+      "slug": "media-cpt-11",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
+  "categoryBase": "",
+  "cpt": Object {
+    "11": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          12,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 12,
+      "id": 11,
+      "link": "/cpt/cpt-11/",
+      "slug": "cpt-11",
+      "tags": Array [],
+      "type": "cpt",
+    },
+  },
+  "data": Object {
+    "/2019/01/01/": Object {
+      "day": 1,
+      "isArchive": true,
+      "isDate": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 1,
+          "link": "/post-1/",
+          "type": "post",
+        },
+        Object {
+          "id": 11,
+          "link": "/cpt/cpt-11/",
+          "type": "cpt",
+        },
+      ],
+      "month": 1,
+      "total": 2,
+      "totalPages": 1,
+      "year": 2019,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {
+    "type": Array [
+      "post",
+      "cpt",
+    ],
+  },
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "multiple-post-type",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+}
+`;
+
+exports[`date get January 1, 2019 1`] = `
 Array [
   Array [
     Object {
       "endpoint": "posts",
       "params": Object {
         "_embed": true,
-        "after": "2016-01-01T00:00:00.000Z",
-        "before": "2017-01-01T00:00:00.000Z",
+        "after": "2019-01-01T00:00:00.000Z",
+        "before": "2019-01-02T00:00:00.000Z",
         "page": 1,
         "search": undefined,
       },
@@ -118,83 +173,251 @@ Array [
 ]
 `;
 
-exports[`date get two pages of year 2016 2`] = `
+exports[`date get January 1, 2019 2`] = `
 Object {
-  "/2016/": Object {
-    "day": undefined,
-    "isArchive": true,
-    "isDate": true,
-    "isFetching": true,
-    "isReady": false,
-    "items": Array [
-      Object {
-        "id": 60,
-        "link": "/2016/the-beauties-of-gullfoss/",
-        "type": "post",
-      },
-      Object {
-        "id": 57,
-        "link": "/2016/shinjuku-gyoen-national-garden/",
-        "type": "post",
-      },
-    ],
-    "month": undefined,
-    "total": 15,
-    "totalPages": 8,
-    "year": 2016,
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/media-1/",
+      "slug": "media-1",
+      "type": "attachment",
+    },
   },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
+  "categoryBase": "",
+  "data": Object {
+    "/2019/01/01/": Object {
+      "day": 1,
+      "isArchive": true,
+      "isDate": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 1,
+          "link": "/post-1/",
+          "type": "post",
+        },
+      ],
+      "month": 1,
+      "total": 1,
+      "totalPages": 1,
+      "year": 2019,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
 
-exports[`date get two pages of year 2016 3`] = `
-Object {
-  "attachment": Array [
-    13,
-    62,
-    70,
-    77,
-    84,
-    95,
-    118,
-  ],
-  "author": Array [
-    2,
-    4,
-  ],
-  "category": Array [
-    3,
-    7,
-    8,
-    56,
-    57,
-    58,
-    59,
-  ],
-  "post": Array [
-    57,
-    60,
-  ],
-  "tag": Array [
-    9,
-    10,
-    11,
-    13,
-    14,
-    15,
-    16,
-  ],
-}
-`;
-
-exports[`date get two pages of year 2016 4`] = `
+exports[`date get January, 2019 1`] = `
 Array [
   Array [
     Object {
       "endpoint": "posts",
       "params": Object {
         "_embed": true,
-        "after": "2016-01-01T00:00:00.000Z",
-        "before": "2017-01-01T00:00:00.000Z",
+        "after": "2019-01-01T00:00:00.000Z",
+        "before": "2019-02-01T00:00:00.000Z",
+        "page": 1,
+        "search": undefined,
+      },
+    },
+  ],
+]
+`;
+
+exports[`date get January, 2019 2`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/media-1/",
+      "slug": "media-1",
+      "type": "attachment",
+    },
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/post-2/media-2/",
+      "slug": "media-2",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
+  "categoryBase": "",
+  "data": Object {
+    "/2019/01/": Object {
+      "day": undefined,
+      "isArchive": true,
+      "isDate": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 1,
+          "link": "/post-1/",
+          "type": "post",
+        },
+        Object {
+          "id": 2,
+          "link": "/post-2/",
+          "type": "post",
+        },
+      ],
+      "month": 1,
+      "total": 2,
+      "totalPages": 1,
+      "year": 2019,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
+      "type": "post",
+    },
+    "2": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          2,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 2,
+      "id": 2,
+      "link": "/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+}
+`;
+
+exports[`date get two pages of year 2019 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "_embed": true,
+        "after": "2019-01-01T00:00:00.000Z",
+        "before": "2020-01-01T00:00:00.000Z",
         "page": 1,
         "search": undefined,
       },
@@ -205,8 +428,8 @@ Array [
       "endpoint": "posts",
       "params": Object {
         "_embed": true,
-        "after": "2016-01-01T00:00:00.000Z",
-        "before": "2017-01-01T00:00:00.000Z",
+        "after": "2019-01-01T00:00:00.000Z",
+        "before": "2020-01-01T00:00:00.000Z",
         "page": 2,
         "search": undefined,
       },
@@ -215,109 +438,299 @@ Array [
 ]
 `;
 
-exports[`date get two pages of year 2016 5`] = `
+exports[`date get two pages of year 2019 2`] = `
 Object {
-  "/2016/": Object {
-    "day": undefined,
-    "isArchive": true,
-    "isDate": true,
-    "isFetching": true,
-    "isReady": false,
-    "items": Array [
-      Object {
-        "id": 60,
-        "link": "/2016/the-beauties-of-gullfoss/",
-        "type": "post",
-      },
-      Object {
-        "id": 57,
-        "link": "/2016/shinjuku-gyoen-national-garden/",
-        "type": "post",
-      },
-    ],
-    "month": undefined,
-    "total": 15,
-    "totalPages": 8,
-    "year": 2016,
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/media-1/",
+      "slug": "media-1",
+      "type": "attachment",
+    },
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/post-2/media-2/",
+      "slug": "media-2",
+      "type": "attachment",
+    },
+    "3": Object {
+      "author": 1,
+      "id": 3,
+      "link": "/post-3/media-3/",
+      "slug": "media-3",
+      "type": "attachment",
+    },
+    "4": Object {
+      "author": 1,
+      "id": 4,
+      "link": "/post-4/media-4/",
+      "slug": "media-4",
+      "type": "attachment",
+    },
+    "5": Object {
+      "author": 1,
+      "id": 5,
+      "link": "/post-5/media-5/",
+      "slug": "media-5",
+      "type": "attachment",
+    },
   },
-  "/2016/page/2/": Object {
-    "day": undefined,
-    "isArchive": true,
-    "isDate": true,
-    "isFetching": true,
-    "isReady": false,
-    "items": Array [
-      Object {
-        "id": 54,
-        "link": "/2016/lower-antelope-canyon/",
-        "type": "post",
-      },
-      Object {
-        "id": 51,
-        "link": "/2016/sunrise-at-phu-quoc-island/",
-        "type": "post",
-      },
-    ],
-    "month": undefined,
-    "total": 15,
-    "totalPages": 8,
-    "year": 2016,
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
   },
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
+  "categoryBase": "",
+  "data": Object {
+    "/2019/": Object {
+      "day": undefined,
+      "isArchive": true,
+      "isDate": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 1,
+          "link": "/post-1/",
+          "type": "post",
+        },
+        Object {
+          "id": 2,
+          "link": "/post-2/",
+          "type": "post",
+        },
+        Object {
+          "id": 3,
+          "link": "/post-3/",
+          "type": "post",
+        },
+      ],
+      "month": undefined,
+      "total": 5,
+      "totalPages": 2,
+      "year": 2019,
+    },
+    "/2019/page/2/": Object {
+      "day": undefined,
+      "isArchive": true,
+      "isDate": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 4,
+          "link": "/post-4/",
+          "type": "post",
+        },
+        Object {
+          "id": 5,
+          "link": "/post-5/",
+          "type": "post",
+        },
+      ],
+      "month": undefined,
+      "total": 5,
+      "totalPages": 2,
+      "year": 2019,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
+      "type": "post",
+    },
+    "2": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          2,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 2,
+      "id": 2,
+      "link": "/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
+      "type": "post",
+    },
+    "3": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          3,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 3,
+      "id": 3,
+      "link": "/post-3/",
+      "slug": "post-3",
+      "tags": Array [],
+      "type": "post",
+    },
+    "4": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          4,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 4,
+      "id": 4,
+      "link": "/post-4/",
+      "slug": "post-4",
+      "tags": Array [],
+      "type": "post",
+    },
+    "5": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          5,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 5,
+      "id": 5,
+      "link": "/post-5/",
+      "slug": "post-5",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
 }
 `;
 
-exports[`date get two pages of year 2016 6`] = `
-Object {
-  "attachment": Array [
-    13,
-    52,
-    55,
-    62,
-    70,
-    77,
-    80,
-    84,
-    95,
-    118,
+exports[`date returns 404 if the page fetched is empty 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "_embed": true,
+        "after": "2020-01-01T00:00:00.000Z",
+        "before": "2021-01-01T00:00:00.000Z",
+        "page": 1,
+        "search": undefined,
+      },
+    },
   ],
-  "author": Array [
-    1,
-    2,
-    4,
-  ],
-  "category": Array [
-    3,
-    6,
-    7,
-    8,
-    56,
-    57,
-    58,
-    59,
-  ],
-  "post": Array [
-    51,
-    54,
-    57,
-    60,
-  ],
-  "tag": Array [
-    9,
-    10,
-    11,
-    13,
-    14,
-    15,
-    16,
-    18,
-    19,
-    22,
-    23,
-    24,
-  ],
-}
+]
 `;
 
-exports[`date throws an error if the page fetched doesn't exist 1`] = `"date \\"/2016/10/25/\\" doesn't have page 1"`;
-
-exports[`date throws an error if the page fetched doesn't exist 2`] = `"date \\"/2016/10/25/\\" doesn't have page 11"`;
+exports[`date returns 404 if the page fetched is empty 2`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {},
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/2020/": Object {
+      "is404": true,
+      "isFetching": false,
+      "isReady": false,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+}
+`;
