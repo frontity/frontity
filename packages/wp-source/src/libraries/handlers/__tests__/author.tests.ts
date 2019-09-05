@@ -57,9 +57,9 @@ describe("author", () => {
   });
 
   test("fetchs from a different endpoint with extra params", async () => {
+    // Add custom post endpoint and params
     store.state.source.postEndpoint = "multiple-post-type";
     store.state.source.params = { type: ["post", "cpt"] };
-
     // Mock Api responses
     api.get = jest
       .fn()
@@ -83,7 +83,6 @@ describe("author", () => {
   test("returns 404 if author doesn't exist in WP", async () => {
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
-
     // Fetch Author page
     await store.actions.source.fetch("/author/non-existent/");
     expect(api.get).toBeCalledTimes(1);
@@ -94,11 +93,11 @@ describe("author", () => {
   });
 
   test("returns 404 if the page fetched is out of range", async () => {
+    // Mock Api responses
     api.get = jest
       .fn()
       .mockResolvedValueOnce(mockResponse([author1]))
       .mockResolvedValueOnce(mockResponse([]));
-
     // Fetch Author page
     await store.actions.source.fetch("/author/author-1/page/3");
     expect(store.state.source.data).toMatchSnapshot();
