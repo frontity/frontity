@@ -35,8 +35,11 @@ describe("tag", () => {
   });
 
   test("exists in source.tag but not in source.data", async () => {
-    // Add author to the store
-    store.state.source.tag[1] = tag1;
+    // Add tag to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(tag1)
+    });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(tag1PostsPage2, {

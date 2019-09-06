@@ -36,7 +36,10 @@ describe("author", () => {
 
   test("exists in source.author but not in source.data", async () => {
     // Add author to the store
-    store.state.source.author[1] = author1;
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(author1)
+    });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(author1PostsPage2, {

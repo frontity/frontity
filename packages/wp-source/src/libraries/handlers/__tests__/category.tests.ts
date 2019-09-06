@@ -35,8 +35,11 @@ describe("category", () => {
   });
 
   test("exists in source.category but not in source.data", async () => {
-    // Add author to the store
-    store.state.source.category[1] = cat1;
+    // Add category to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(cat1)
+    });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(cat1PostsPage2, {

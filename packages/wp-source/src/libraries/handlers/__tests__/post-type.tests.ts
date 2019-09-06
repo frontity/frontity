@@ -38,7 +38,10 @@ describe("post", () => {
 
   test("exists in source.post", async () => {
     // Add post to the store
-    store.state.source.post[1] = post1;
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(post1)
+    });
     // Mock Api responses
     api.get = jest.fn();
     // Fetch entities
@@ -74,7 +77,10 @@ describe("page", () => {
 
   test("exists in source.page", async () => {
     // Add page to the store
-    store.state.source.page[1] = page1;
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(page1)
+    });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
     // Fetch entities
@@ -98,7 +104,10 @@ describe("attachment", () => {
 
   test("exists in source.attachment", async () => {
     // Add attachment to the store
-    store.state.source.attachment[1] = attachment1;
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(attachment1)
+    });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
     // Fetch entities

@@ -46,7 +46,7 @@ Object {
     "1": Object {
       "author": 1,
       "id": 1,
-      "link": "https://test.frontity.io/post-1/attachment-1/",
+      "link": "/post-1/attachment-1/",
       "slug": "attachment-1",
       "type": "attachment",
     },
@@ -134,7 +134,14 @@ exports[`page exists in source.page 1`] = `
 Object {
   "api": "https://test.frontity.io",
   "attachment": Object {},
-  "author": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -154,18 +161,13 @@ Object {
     "1": Object {
       "_embedded": Object {
         "author": Array [
-          Object {
-            "id": 1,
-            "link": "https://test.frontity.io/author/author-1/",
-            "name": "Author 1",
-            "slug": "author-1",
-          },
+          1,
         ],
       },
       "author": 1,
       "featured_media": 1,
       "id": 1,
-      "link": "https://test.frontity.io/page-1/",
+      "link": "/page-1/",
       "slug": "page-1",
       "type": "page",
     },
@@ -269,8 +271,23 @@ Object {
 exports[`post exists in source.post 1`] = `
 Object {
   "api": "https://test.frontity.io",
-  "attachment": Object {},
-  "author": Object {},
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/media-1/",
+      "slug": "media-1",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -292,42 +309,17 @@ Object {
     "1": Object {
       "_embedded": Object {
         "author": Array [
-          Object {
-            "id": 1,
-            "link": "https://test.frontity.io/author/author-1/",
-            "name": "Author 1",
-            "slug": "author-1",
-          },
+          1,
         ],
         "wp:featuredmedia": Array [
-          Object {
-            "author": 1,
-            "id": 1,
-            "link": "https://test.frontity.io/post-1/media-1/",
-            "slug": "media-1",
-            "type": "attachment",
-          },
+          1,
         ],
         "wp:term": Array [
           Array [
-            Object {
-              "count": 5,
-              "id": 1,
-              "link": "https://test.frontity.io/category/cat-1/",
-              "parent": 0,
-              "slug": "cat-1",
-              "taxonomy": "category",
-            },
+            1,
           ],
           Array [
-            Object {
-              "count": 5,
-              "id": 1,
-              "link": "https://test.frontity.io/tag/tag-1/",
-              "parent": 0,
-              "slug": "tag-1",
-              "taxonomy": "tag",
-            },
+            1,
           ],
         ],
       },
@@ -337,7 +329,7 @@ Object {
       ],
       "featured_media": 1,
       "id": 1,
-      "link": "https://test.frontity.io/post-1/",
+      "link": "/post-1/",
       "slug": "post-1",
       "tags": Array [
         1,
@@ -348,7 +340,16 @@ Object {
   "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
-  "tag": Object {},
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
   "tagBase": "",
 }
 `;
