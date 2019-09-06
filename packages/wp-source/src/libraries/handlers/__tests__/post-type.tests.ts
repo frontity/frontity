@@ -17,6 +17,16 @@ beforeEach(() => {
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
 
+describe("postType", () => {
+  test("returns 404 if not found", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/non-existent/");
+    expect(store.state.source).toMatchSnapshot();
+  });
+});
+
 describe("post", () => {
   test("doesn't exist in source.post", async () => {
     // Mock Api responses
@@ -26,75 +36,74 @@ describe("post", () => {
     expect(store.state.source).toMatchSnapshot();
   });
 
-  // test("exists in source.post", async () => {
-  //   const get = store.libraries.source.api.get as jest.Mock;
+  test("exists in source.post", async () => {
+    // Add post to the store
+    store.state.source.post[1] = post1;
+    // Mock Api responses
+    api.get = jest.fn();
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/");
+    expect(api.get).not.toBeCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
 
-  //   store.state.source.post[60] = post60;
-
-  //   // source.fetch("/the-beauties-of-gullfoss/")
-  //   store.state.source.data["/the-beauties-of-gullfoss/"] = {
-  //     isFetching: true,
-  //     isReady: false
-  //   };
-
-  //   await handler({
-  //     route: "/the-beauties-of-gullfoss/",
-  //     params: { slug: "the-beauties-of-gullfoss" },
-  //     ...store
-  //   });
-
-  //   expect(get).not.toBeCalled();
-  //   expect(store.state.source.data).toMatchSnapshot();
-  // });
-
-  // test("throws an error if it doesn't exist", async () => {
-  //   store.libraries.source.api.get = jest
-  //     .fn()
-  //     .mockResolvedValueOnce(mockResponse([]));
-
-  //   store.libraries.source.populate = jest
-  //     .fn()
-  //     .mockResolvedValueOnce(mockResponse([]));
-
-  //   // source.fetch("/the-beauties-of-gullfoss/")
-  //   store.state.source.data["/the-beauties-of-gullfoss/"] = {
-  //     isFetching: true,
-  //     isReady: false
-  //   };
-
-  //   const promise = handler({
-  //     route: "/the-beauties-of-gullfoss/",
-  //     params: { slug: "the-beauties-of-gullfoss" },
-  //     ...store
-  //   });
-
-  //   expect(promise).rejects.toThrowError();
-  // });
-
-  // test("fetchs from a different endpoint with extra params", async () => {
-  //   // change the default post endpoint and params
-  //   store.state.source.postEndpoint = "multiple-post-type";
-  //   store.state.source.params = { type: ["post", "travel"] };
-
-  //   // source.fetch("/the-beauties-of-gullfoss/")
-  //   store.state.source.data["/the-beauties-of-gullfoss/"] = {
-  //     isFetching: true,
-  //     isReady: false
-  //   };
-
-  //   await handler({
-  //     route: "/the-beauties-of-gullfoss/",
-  //     params: { slug: "the-beauties-of-gullfoss" },
-  //     ...store
-  //   });
-
-  //   const apiGet = jest.spyOn(store.libraries.source.api, "get");
-  //   expect(apiGet.mock.calls).toMatchSnapshot();
-  // });
+  test("fetchs from a different endpoint with extra params", async () => {
+    // Add custom post endpoint and params
+    store.state.source.postEndpoint = "multiple-post-type";
+    store.state.source.params = { type: ["post", "cpt"] };
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11");
+    expect(api.get.mock.calls).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
+  });
 });
 
-describe("page", () => {});
+describe("page", () => {
+  test("doesn't exist in source.page", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]))
+      .mockResolvedValueOnce(mockResponse([page1]));
+    // Fetch entities
+    await store.actions.source.fetch("/page-1/");
+    expect(store.state.source).toMatchSnapshot();
+  });
 
-describe("attachment", () => {});
+  test("exists in source.page", async () => {
+    // Add page to the store
+    store.state.source.page[1] = page1;
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/page-1/");
+    expect(api.get).toBeCalledTimes(1);
+    expect(store.state.source).toMatchSnapshot();
+  });
+});
 
-describe("cpt", () => {});
+describe("attachment", () => {
+  test("doesn't exist in source.attachment", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]))
+      .mockResolvedValueOnce(mockResponse([attachment1]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/attachment-1/");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("exists in source.attachment", async () => {
+    // Add attachment to the store
+    store.state.source.attachment[1] = attachment1;
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/attachment-1/");
+    expect(api.get).toBeCalledTimes(2);
+    expect(store.state.source).toMatchSnapshot();
+  });
+});
