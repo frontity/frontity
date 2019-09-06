@@ -35,7 +35,7 @@ describe("date", () => {
           "X-WP-TotalPages": "2"
         })
       );
-    // Fetch routes
+    // Fetch entities
     await store.actions.source.fetch("/2019/");
     await store.actions.source.fetch("/2019/page/2/");
     expect(api.get.mock.calls).toMatchSnapshot();
@@ -50,7 +50,7 @@ describe("date", () => {
         "X-WP-TotalPages": "1"
       })
     );
-    // Fetch routes
+    // Fetch entities
     await store.actions.source.fetch("/2019/01/");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();
@@ -64,7 +64,7 @@ describe("date", () => {
         "X-WP-TotalPages": "1"
       })
     );
-    // Fetch routes
+    // Fetch entities
     await store.actions.source.fetch("/2019/01/01");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();
@@ -81,7 +81,7 @@ describe("date", () => {
         "X-WP-TotalPages": "1"
       })
     );
-    // Fetch routes
+    // Fetch entities
     await store.actions.source.fetch("/2019/01/01");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();
@@ -90,7 +90,7 @@ describe("date", () => {
   test("returns 404 if the page fetched is empty", async () => {
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
-    // Fetch Author page
+    // Fetch entities
     await store.actions.source.fetch("/2020/");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();

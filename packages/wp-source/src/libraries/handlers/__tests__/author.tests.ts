@@ -29,7 +29,7 @@ describe("author", () => {
           "X-WP-TotalPages": "2"
         })
       );
-    // Fetch Author page
+    // Fetch entities
     await store.actions.source.fetch("/author/author-1/");
     expect(store.state.source).toMatchSnapshot();
   });
@@ -44,7 +44,7 @@ describe("author", () => {
         "X-WP-TotalPages": "2"
       })
     );
-    // Fetch Author page
+    // Fetch entities
     await store.actions.source.fetch("/author/author-1/page/2/");
     expect(api.get).toBeCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
@@ -64,7 +64,7 @@ describe("author", () => {
           "X-WP-TotalPages": "2"
         })
       );
-    // Fetch Author page
+    // Fetch entities
     await store.actions.source.fetch("/author/author-1/");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();
@@ -73,7 +73,7 @@ describe("author", () => {
   test("returns 404 if author doesn't exist in WP", async () => {
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
-    // Fetch Author page
+    // Fetch entities
     await store.actions.source.fetch("/author/non-existent/");
     expect(api.get).toBeCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
@@ -85,7 +85,7 @@ describe("author", () => {
       .fn()
       .mockResolvedValueOnce(mockResponse([author1]))
       .mockResolvedValueOnce(mockResponse([]));
-    // Fetch Author page
+    // Fetch entities
     await store.actions.source.fetch("/author/author-1/page/3");
     expect(store.state.source).toMatchSnapshot();
   });
@@ -101,7 +101,7 @@ describe("author", () => {
           "X-WP-TotalPages": "0"
         })
       );
-    // Fetch Author page
+    // Fetch entities
     await store.actions.source.fetch("/author/author-1/");
     expect(store.state.source).toMatchSnapshot();
   });
@@ -112,7 +112,7 @@ describe("author", () => {
       .fn()
       .mockResolvedValueOnce(mockResponse([author1]))
       .mockResolvedValueOnce(mockResponse([], {}));
-    // Fetch Author page
+    // Fetch entities
     await store.actions.source.fetch("/author/author-1/");
     expect(store.state.source).toMatchSnapshot();
   });

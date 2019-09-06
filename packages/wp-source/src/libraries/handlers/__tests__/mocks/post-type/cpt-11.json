@@ -1,0 +1,51 @@
+{
+  "id": 11,
+  "slug": "cpt-11",
+  "type": "cpt",
+  "link": "https://test.frontity.io/cpt/cpt-11/",
+  "author": 1,
+  "featured_media": 12,
+  "categories": [1],
+  "tags": [1],
+  "_embedded": {
+    "author": [
+      {
+        "id": 1,
+        "name": "Author 1",
+        "link": "https://test.frontity.io/author/author-1/",
+        "slug": "author-1"
+      }
+    ],
+    "wp:featuredmedia": [
+      {
+        "id": 12,
+        "slug": "media-cpt-11",
+        "type": "attachment",
+        "link": "https://test.frontity.io/cpt/cpt-11/media-cpt-11/",
+        "author": 1
+      }
+    ],
+    "wp:term": [
+      [
+        {
+          "id": 1,
+          "count": 5,
+          "link": "https://test.frontity.io/category/cat-1/",
+          "slug": "cat-1",
+          "taxonomy": "category",
+          "parent": 0
+        }
+      ],
+      [
+        {
+          "id": 1,
+          "count": 5,
+          "link": "https://test.frontity.io/tag/tag-1/",
+          "slug": "tag-1",
+          "taxonomy": "tag",
+          "parent": 0
+        }
+      ]
+    ]
+  }
+}

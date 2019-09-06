@@ -29,7 +29,7 @@ describe("tag", () => {
           "X-WP-TotalPages": "2"
         })
       );
-    // Fetch Tag page
+    // Fetch entities
     await store.actions.source.fetch("/tag/tag-1/");
     expect(store.state.source).toMatchSnapshot();
   });
@@ -44,7 +44,7 @@ describe("tag", () => {
         "X-WP-TotalPages": "2"
       })
     );
-    // Fetch Tag page 2
+    // Fetch entities
     await store.actions.source.fetch("/tag/tag-1/page/2/");
     expect(api.get).toBeCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
@@ -64,7 +64,7 @@ describe("tag", () => {
           "X-WP-TotalPages": "2"
         })
       );
-    // Fetch Tag page
+    // Fetch entities
     await store.actions.source.fetch("/tag/tag-1/");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();
@@ -73,7 +73,7 @@ describe("tag", () => {
   test("returns 404 if tag doesn't exist in WP", async () => {
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
-    // Fetch Tag page
+    // Fetch entities
     await store.actions.source.fetch("/tag/non-existent/");
     expect(api.get).toBeCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
@@ -85,7 +85,7 @@ describe("tag", () => {
       .fn()
       .mockResolvedValueOnce(mockResponse([tag1]))
       .mockResolvedValueOnce(mockResponse([]));
-    // Fetch Tag page
+    // Fetch entities
     await store.actions.source.fetch("/tag/tag-1/page/3");
     expect(store.state.source).toMatchSnapshot();
   });
@@ -101,7 +101,7 @@ describe("tag", () => {
           "X-WP-TotalPages": "0"
         })
       );
-    // Fetch Tag page
+    // Fetch entities
     await store.actions.source.fetch("/tag/tag-1/");
     expect(store.state.source).toMatchSnapshot();
   });
@@ -112,7 +112,7 @@ describe("tag", () => {
       .fn()
       .mockResolvedValueOnce(mockResponse([tag1]))
       .mockResolvedValueOnce(mockResponse([], {}));
-    // Fetch Tag page
+    // Fetch entities
     await store.actions.source.fetch("/tag/tag-1/");
     expect(store.state.source).toMatchSnapshot();
   });
