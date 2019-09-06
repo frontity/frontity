@@ -20,9 +20,9 @@
       "wp:featuredmedia": [
         {
           "id": 1,
-          "slug": "media-1",
+          "slug": "attachment-1",
           "type": "attachment",
-          "link": "https://test.frontity.io/post-1/media-1/",
+          "link": "https://test.frontity.io/post-1/attachment-1/",
           "author": 1
         }
       ],
@@ -61,9 +61,9 @@
       "wp:featuredmedia": [
         {
           "id": 2,
-          "slug": "media-2",
+          "slug": "attachment-2",
           "type": "attachment",
-          "link": "https://test.frontity.io/post-2/media-2/",
+          "link": "https://test.frontity.io/post-2/attachment-2/",
           "author": 1
         }
       ],

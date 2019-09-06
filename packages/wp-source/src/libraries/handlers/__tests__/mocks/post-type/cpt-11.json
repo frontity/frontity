@@ -19,9 +19,9 @@
     "wp:featuredmedia": [
       {
         "id": 12,
-        "slug": "media-cpt-11",
+        "slug": "attachment-cpt-11",
         "type": "attachment",
-        "link": "https://test.frontity.io/cpt/cpt-11/media-cpt-11/",
+        "link": "https://test.frontity.io/cpt/cpt-11/attachment-cpt-11/",
         "author": 1
       }
     ],
