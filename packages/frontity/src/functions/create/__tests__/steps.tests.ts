@@ -11,11 +11,13 @@ import {
 import * as utils from "../../../utils";
 import * as fsExtra from "fs-extra";
 import * as fetch from "node-fetch";
+import * as path from "path";
 import * as childProcess from "child_process";
 import * as tar from "tar";
 
 jest.mock("../../../utils");
 jest.mock("fs-extra");
+jest.mock("path");
 jest.mock("node-fetch");
 jest.mock("child_process");
 jest.mock("tar");
@@ -23,8 +25,13 @@ jest.mock("tar");
 const mockedUtils = utils as jest.Mocked<typeof utils>;
 const mockedFsExtra = fsExtra as jest.Mocked<typeof fsExtra>;
 const mockedFetch = fetch as jest.Mocked<typeof fetch>;
+const mockedPath = path as jest.Mocked<typeof path>;
 const mockedChildProcess = childProcess as jest.Mocked<typeof childProcess>;
 const mockedTar = tar as jest.Mocked<typeof tar>;
+
+beforeEach(() => {
+  mockedPath.resolve.mockImplementation((...dirs) => dirs.join("/").replace("./", ""));
+})
 
 describe("normalizeOptions", () => {
   beforeEach(() => {
