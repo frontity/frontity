@@ -1,4 +1,4 @@
-import { createStore } from "@frontity/connect";
+import { createStore, InitializedStore } from "@frontity/connect";
 import { Package } from "@frontity/types";
 import { NormalizedSettings } from "@frontity/file-settings";
 import mergePackages from "../utils/merge-packages";
@@ -14,7 +14,7 @@ export default ({
   };
   settings: NormalizedSettings;
   url: URL;
-}) => {
+}): InitializedStore => {
   const state = initialState({ settings, url });
   const merged = mergePackages({ packages, state });
   const store = createStore(merged);

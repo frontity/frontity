@@ -1,4 +1,4 @@
-import { HelmetData } from "react-helmet";
+import { HelmetData } from "@frontity/types";
 import { HeadTags } from "../../../types";
 
 export default (helmet: HelmetData): HeadTags => {
