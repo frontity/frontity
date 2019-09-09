@@ -11,7 +11,9 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "cypress": "^3.4.1",
     "eslint": "^6.2.2",
+    "eslint-plugin-cypress": "^2.6.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.15.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
