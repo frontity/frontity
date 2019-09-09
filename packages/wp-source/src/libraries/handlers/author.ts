@@ -7,9 +7,19 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
 
   // 1. search id in state or get it from WP REST API
   const { slug } = params;
-  const id =
-    getIdBySlug(state.source.author, slug) ||
-    (await api.getIdBySlug("users", slug));
+  let id = getIdBySlug(state.source.author, slug);
+  if (!id) {
+    // Request author from WP
+    const response = await api.get({ endpoint: "users", params: { slug } });
+    const [author] = await response.clone().json();
+    if (!author)
+      throw new Error(
+        `entity from endpoint 'users' with slug '${slug}' not found`
+      );
+    id = author.id;
+    // Populate author
+    await populate({ response, state });
+  }
 
   // 2. fetch the specified page
   const response = await api.get({

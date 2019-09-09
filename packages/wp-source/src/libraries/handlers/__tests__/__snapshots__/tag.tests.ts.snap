@@ -195,7 +195,16 @@ Object {
   "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
-  "tag": Object {},
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
   "tagBase": "",
 }
 `;
@@ -230,7 +239,16 @@ Object {
   "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
-  "tag": Object {},
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
   "tagBase": "",
 }
 `;
@@ -614,7 +632,16 @@ Object {
   "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
-  "tag": Object {},
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
   "tagBase": "",
 }
 `;

@@ -16,9 +16,20 @@ const taxonomyHandler = ({
 
   // 1. search id in state or get it from WP REST API
   const { slug } = params;
-  const id =
-    getIdBySlug(state.source[taxonomy.type], slug) ||
-    (await api.getIdBySlug(taxonomy.endpoint, slug));
+  let id = getIdBySlug(state.source[taxonomy.type], slug);
+  if (!id) {
+    // Request entity from WP
+    const { endpoint } = taxonomy;
+    const response = await api.get({ endpoint, params: { slug } });
+    const [entity] = await response.clone().json();
+    if (!entity)
+      throw new Error(
+        `entity from endpoint '${endpoint}' with slug '${slug}' not found`
+      );
+    id = entity.id;
+    // Populate entity
+    await populate({ response, state });
+  }
 
   // 2. fetch the specified page
   const response = await api.get({

@@ -137,7 +137,14 @@ exports[`author doesn't return 404 if the first page is empty (no headers) 1`] =
 Object {
   "api": "https://test.frontity.io",
   "attachment": Object {},
-  "author": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -170,7 +177,14 @@ exports[`author doesn't return 404 if the first page is empty 1`] = `
 Object {
   "api": "https://test.frontity.io",
   "attachment": Object {},
-  "author": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -502,7 +516,14 @@ exports[`author returns 404 if the page fetched is out of range 1`] = `
 Object {
   "api": "https://test.frontity.io",
   "attachment": Object {},
-  "author": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
   "category": Object {},
   "categoryBase": "",
   "data": Object {

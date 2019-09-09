@@ -170,7 +170,16 @@ Object {
   "api": "https://test.frontity.io",
   "attachment": Object {},
   "author": Object {},
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/category/cat-1/": Object {
@@ -205,7 +214,16 @@ Object {
   "api": "https://test.frontity.io",
   "attachment": Object {},
   "author": Object {},
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/category/cat-1/": Object {
@@ -596,7 +614,16 @@ Object {
   "api": "https://test.frontity.io",
   "attachment": Object {},
   "author": Object {},
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/category/cat-1/page/3/": Object {
