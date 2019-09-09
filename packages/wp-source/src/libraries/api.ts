@@ -46,7 +46,7 @@ class Api {
 
   async getIdBySlug(endpoint: string, slug: string) {
     const response = await this.get({ endpoint, params: { slug } });
-    const [entity] = await response.json();
+    const [entity] = await response.clone().json();
 
     if (!entity)
       throw new Error(
