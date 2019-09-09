@@ -85,7 +85,7 @@ describe("page", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/page-1/");
-    expect(api.get).toBeCalledTimes(1);
+    expect(api.get).toBeCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -112,7 +112,7 @@ describe("attachment", () => {
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/attachment-1/");
-    expect(api.get).toBeCalledTimes(2);
+    expect(api.get).toBeCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
 });

@@ -46,6 +46,11 @@ Object {
   },
   "categoryBase": "",
   "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
     "/category/cat-1/": Object {
       "id": 1,
       "isArchive": true,
@@ -73,6 +78,42 @@ Object {
       "taxonomy": "category",
       "total": 5,
       "totalPages": 2,
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-2/": Object {
+      "id": 2,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-2/attachment-2/": Object {
+      "id": 2,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-3/": Object {
+      "id": 3,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-3/attachment-3/": Object {
+      "id": 3,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
     },
   },
   "get": [Function],
@@ -253,134 +294,6 @@ Object {
 }
 `;
 
-exports[`category exists in source.category but not in source.data 1`] = `
-Object {
-  "api": "https://test.frontity.io",
-  "attachment": Object {
-    "4": Object {
-      "author": 1,
-      "id": 4,
-      "link": "/post-4/attachment-4/",
-      "slug": "attachment-4",
-      "type": "attachment",
-    },
-    "5": Object {
-      "author": 1,
-      "id": 5,
-      "link": "/post-5/attachment-5/",
-      "slug": "attachment-5",
-      "type": "attachment",
-    },
-  },
-  "author": Object {
-    "1": Object {
-      "id": 1,
-      "link": "/author/author-1/",
-      "name": "Author 1",
-      "slug": "author-1",
-    },
-  },
-  "category": Object {
-    "1": Object {
-      "count": 5,
-      "id": 1,
-      "link": "/category/cat-1/",
-      "parent": 0,
-      "slug": "cat-1",
-      "taxonomy": "category",
-    },
-  },
-  "categoryBase": "",
-  "data": Object {
-    "/category/cat-1/page/2/": Object {
-      "id": 1,
-      "isArchive": true,
-      "isCategory": true,
-      "isFetching": false,
-      "isReady": true,
-      "isTaxonomy": true,
-      "items": Array [
-        Object {
-          "id": 4,
-          "link": "/post-4/",
-          "type": "post",
-        },
-        Object {
-          "id": 5,
-          "link": "/post-5/",
-          "type": "post",
-        },
-      ],
-      "taxonomy": "category",
-      "total": 5,
-      "totalPages": 2,
-    },
-  },
-  "get": [Function],
-  "homepage": "",
-  "isWpCom": false,
-  "page": Object {},
-  "params": Object {},
-  "post": Object {
-    "4": Object {
-      "_embedded": Object {
-        "author": Array [
-          1,
-        ],
-        "wp:featuredmedia": Array [
-          4,
-        ],
-        "wp:term": Array [
-          Array [
-            1,
-          ],
-        ],
-      },
-      "author": 1,
-      "categories": Array [
-        1,
-      ],
-      "featured_media": 4,
-      "id": 4,
-      "link": "/post-4/",
-      "slug": "post-4",
-      "tags": Array [],
-      "type": "post",
-    },
-    "5": Object {
-      "_embedded": Object {
-        "author": Array [
-          1,
-        ],
-        "wp:featuredmedia": Array [
-          5,
-        ],
-        "wp:term": Array [
-          Array [
-            1,
-          ],
-        ],
-      },
-      "author": 1,
-      "categories": Array [
-        1,
-      ],
-      "featured_media": 5,
-      "id": 5,
-      "link": "/post-5/",
-      "slug": "post-5",
-      "tags": Array [],
-      "type": "post",
-    },
-  },
-  "postEndpoint": "posts",
-  "postsPage": "",
-  "subdirectory": "",
-  "tag": Object {},
-  "tagBase": "",
-}
-`;
-
 exports[`category fetchs from a different endpoint with extra params 1`] = `
 Array [
   Array [
@@ -482,6 +395,11 @@ Object {
     },
   },
   "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
     "/category/cat-1/": Object {
       "id": 1,
       "isArchive": true,
@@ -509,6 +427,42 @@ Object {
       "taxonomy": "category",
       "total": 5,
       "totalPages": 2,
+    },
+    "/cpt/cpt-11/": Object {
+      "id": 11,
+      "isFetching": false,
+      "isReady": false,
+      "type": "cpt",
+    },
+    "/cpt/cpt-11/attachment-cpt-11/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-2/": Object {
+      "id": 2,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-2/attachment-2/": Object {
+      "id": 2,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
     },
   },
   "get": [Function],
@@ -626,6 +580,12 @@ Object {
   },
   "categoryBase": "",
   "data": Object {
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "category",
+    },
     "/category/cat-1/page/3/": Object {
       "is404": true,
       "isFetching": false,
@@ -638,6 +598,169 @@ Object {
   "page": Object {},
   "params": Object {},
   "post": Object {},
+  "postEndpoint": "posts",
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+}
+`;
+
+exports[`category was populated but not accessed 1`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "4": Object {
+      "author": 1,
+      "id": 4,
+      "link": "/post-4/attachment-4/",
+      "slug": "attachment-4",
+      "type": "attachment",
+    },
+    "5": Object {
+      "author": 1,
+      "id": 5,
+      "link": "/post-5/attachment-5/",
+      "slug": "attachment-5",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "category",
+    },
+    "/category/cat-1/page/2/": Object {
+      "id": 1,
+      "isArchive": true,
+      "isCategory": true,
+      "isFetching": false,
+      "isReady": true,
+      "isTaxonomy": true,
+      "items": Array [
+        Object {
+          "id": 4,
+          "link": "/post-4/",
+          "type": "post",
+        },
+        Object {
+          "id": 5,
+          "link": "/post-5/",
+          "type": "post",
+        },
+      ],
+      "taxonomy": "category",
+      "total": 5,
+      "totalPages": 2,
+    },
+    "/post-4/": Object {
+      "id": 4,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-4/attachment-4/": Object {
+      "id": 4,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-5/": Object {
+      "id": 5,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-5/attachment-5/": Object {
+      "id": 5,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "4": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          4,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 4,
+      "id": 4,
+      "link": "/post-4/",
+      "slug": "post-4",
+      "tags": Array [],
+      "type": "post",
+    },
+    "5": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          5,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 5,
+      "id": 5,
+      "link": "/post-5/",
+      "slug": "post-5",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
   "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",

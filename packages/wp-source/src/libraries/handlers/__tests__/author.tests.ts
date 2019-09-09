@@ -34,7 +34,7 @@ describe("author", () => {
     expect(store.state.source).toMatchSnapshot();
   });
 
-  test("exists in source.author but not in source.data", async () => {
+  test("was populated but not accessed", async () => {
     // Add author to the store
     await store.libraries.source.populate({
       state: store.state,

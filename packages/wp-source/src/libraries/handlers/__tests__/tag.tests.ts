@@ -34,11 +34,11 @@ describe("tag", () => {
     expect(store.state.source).toMatchSnapshot();
   });
 
-  test("exists in source.tag but not in source.data", async () => {
+  test("was populated but not accessed", async () => {
     // Add tag to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(tag1)
+      response: mockResponse([tag1])
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(

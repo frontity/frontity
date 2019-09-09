@@ -1,30 +1,28 @@
 import { Handler } from "../../../types";
-import getIdBySlug from "./utils/get-id-by-slug";
+import capitalize from "./utils/capitalize";
 
 const taxonomyHandler = ({
   taxonomy,
-  postType,
-  truths = {}
+  postType
 }: {
   taxonomy: { type: string; endpoint: string };
   postType: { endpoint?: string; param: string };
   props?: Record<string, string>;
-  truths?: Record<string, true>;
 }): Handler => async ({ route, params, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { page, query } = parse(route);
+  const { path, page, query } = parse(route);
 
   // 1. search id in state or get it from WP REST API
-  const { slug } = params;
-  let id = getIdBySlug(state.source[taxonomy.type], slug);
+  let { id } = state.source.get(path);
   if (!id) {
+    const { slug } = params;
     // Request entity from WP
     const { endpoint } = taxonomy;
     const response = await api.get({ endpoint, params: { slug } });
     const [entity] = await populate({ response, state });
     if (!entity)
       throw new Error(
-        `entity from endpoint '${endpoint}' with slug '${slug}' not found`
+        `entity from endpoint "${endpoint}" with slug "${slug}" not found`
       );
     id = entity.id;
   }
@@ -45,7 +43,7 @@ const taxonomyHandler = ({
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
     throw new Error(
-      `${taxonomy.type} with slug "${slug}" doesn't have page ${page}`
+      `${taxonomy.type} with slug "${params.slug}" doesn't have page ${page}`
     );
 
   // 4. get posts and pages count
@@ -53,15 +51,18 @@ const taxonomyHandler = ({
   const totalPages = getTotalPages(response);
 
   // 5. add data to source
-  Object.assign(state.source.data[route], {
-    taxonomy: taxonomy.type,
-    id,
+  const currentPageData = state.source.data[route];
+  const firstPageData = state.source.data[path];
+
+  Object.assign(currentPageData, {
+    id: firstPageData.id,
+    taxonomy: firstPageData.taxonomy,
     items,
     total,
     totalPages,
     isArchive: true,
     isTaxonomy: true,
-    ...truths
+    [`is${capitalize(firstPageData.taxonomy)}`]: true
   });
 };
 

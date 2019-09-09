@@ -34,11 +34,11 @@ describe("category", () => {
     expect(store.state.source).toMatchSnapshot();
   });
 
-  test("exists in source.category but not in source.data", async () => {
+  test("was populated but not accessed", async () => {
     // Add category to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(cat1)
+      response: mockResponse([cat1])
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(

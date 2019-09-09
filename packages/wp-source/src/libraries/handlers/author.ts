@@ -1,20 +1,19 @@
 import { Handler } from "../../../types";
-import getIdBySlug from "./utils/get-id-by-slug";
 
 const authorHandler: Handler = async ({ route, params, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { page, query } = parse(route);
+  const { path, page, query } = parse(route);
+  const { slug } = params;
 
   // 1. search id in state or get it from WP REST API
-  const { slug } = params;
-  let id = getIdBySlug(state.source.author, slug);
+  let { id } = state.source.get(path);
   if (!id) {
     // Request author from WP
     const response = await api.get({ endpoint: "users", params: { slug } });
     const [entity] = await populate({ response, state });
     if (!entity)
       throw new Error(
-        `entity from endpoint 'users' with slug '${slug}' not found`
+        `entity from endpoint "users" with slug "${slug}" not found`
       );
     id = entity.id;
     // Populate author
@@ -42,8 +41,7 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
   const totalPages = getTotalPages(response);
 
   // 5. add data to source
-  Object.assign(state.source.data[route], {
-    id,
+  Object.assign(state.source.data[route], state.source.data[path], {
     items,
     total,
     totalPages,
