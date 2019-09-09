@@ -1,99 +1,122 @@
 import { createStore, InitializedStore } from "@frontity/connect";
-import WpSource from "../../../../types";
-import populate from "../../populate";
-import handler from "../tag";
-import { mockResponse, expectEntities } from "./mocks/helpers";
-import posts from "./mocks/posts-tag-9.json";
-
 import wpSource from "../../../";
-jest.mock("../../../");
+import WpSource from "../../../../types";
+import Api from "../../api";
+// JSON mocks
+import { mockResponse } from "./mocks/helpers";
+import tag1 from "./mocks/tag/tag-1.json";
+import tag1Posts from "./mocks/tag/tag-1-posts.json";
+import tag1PostsPage2 from "./mocks/tag/tag-1-posts-page-2.json";
+import tag1PostsCpt from "./mocks/tag/tag-1-posts-cpt.json";
 
 let store: InitializedStore<WpSource>;
-
+let api: jest.Mocked<Api>;
 beforeEach(() => {
-  // First, get a mocked instance of wpSource
-  const config = wpSource();
-
-  // Then, replaces the mocked implementation of Api
-  const { api } = config.libraries.source;
-  api.getIdBySlug = jest.fn().mockResolvedValue(9);
-  api.get = jest.fn().mockResolvedValue(
-    mockResponse(posts, {
-      "X-WP-Total": 3,
-      "X-WP-TotalPages": 1
-    })
-  );
-
-  // And add the original implementation of populate
-  config.libraries.source.populate = jest.fn().mockImplementation(populate);
-
-  // Instantiate the store
-  store = createStore(config);
+  store = createStore(wpSource());
+  store.actions.source.init();
+  api = store.libraries.source.api as jest.Mocked<Api>;
 });
 
 describe("tag", () => {
   test("doesn't exist in source.tag", async () => {
-    // source.fetch("/tag/iceland/")
-    store.state.source.data["/tag/iceland/"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await handler({
-      route: "/tag/iceland/",
-      params: { slug: "iceland" },
-      ...store
-    });
-
-    expect(store.state.source.data).toMatchSnapshot();
-    expectEntities(store.state.source);
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([tag1]))
+      .mockResolvedValueOnce(
+        mockResponse(tag1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/");
+    expect(store.state.source).toMatchSnapshot();
   });
 
   test("exists in source.tag but not in source.data", async () => {
-    store.state.source.tag[9] = {
-      id: 9,
-      count: 3,
-      description: "",
-      link: "https://test.frontity.io/tag/iceland/",
-      name: "Iceland",
-      slug: "iceland",
-      taxonomy: "tag",
-      meta: []
-    };
-
-    // source.fetch("/tag/iceland/")
-    store.state.source.data["/tag/iceland/"] = {
-      isFetching: true,
-      isReady: false
-    };
-
-    await handler({
-      route: "/tag/iceland/",
-      params: { slug: "iceland" },
-      ...store
+    // Add tag to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(tag1)
     });
-
-    expect(store.libraries.source.api.getIdBySlug).not.toBeCalled();
-    expect(store.state.source.data).toMatchSnapshot();
-    expectEntities(store.state.source);
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(
+      mockResponse(tag1PostsPage2, {
+        "X-WP-Total": "5",
+        "X-WP-TotalPages": "2"
+      })
+    );
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/page/2/");
+    expect(api.get).toBeCalledTimes(1);
+    expect(store.state.source).toMatchSnapshot();
   });
 
   test("fetchs from a different endpoint with extra params", async () => {
+    // Add custom post endpoint and params
     store.state.source.postEndpoint = "multiple-post-type";
-    store.state.source.params = { type: ["post", "travel"] };
-    // source.fetch("/tag/iceland/")
-    store.state.source.data["/tag/iceland/"] = {
-      isFetching: true,
-      isReady: false
-    };
+    store.state.source.params = { type: ["post", "cpt"] };
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([tag1]))
+      .mockResolvedValueOnce(
+        mockResponse(tag1PostsCpt, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/");
+    expect(api.get.mock.calls).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
+  });
 
-    await handler({
-      route: "/tag/iceland/",
-      params: { slug: "iceland" },
-      ...store
-    });
+  test("returns 404 if tag doesn't exist in WP", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/tag/non-existent/");
+    expect(api.get).toBeCalledTimes(1);
+    expect(store.state.source).toMatchSnapshot();
+  });
 
-    const apiGet = jest.spyOn(store.libraries.source.api, "get");
-    expect(apiGet.mock.calls).toMatchSnapshot();
+  test("returns 404 if the page fetched is out of range", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([tag1]))
+      .mockResolvedValueOnce(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/page/3");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("doesn't return 404 if the first page is empty", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([tag1]))
+      .mockResolvedValueOnce(
+        mockResponse([], {
+          "X-WP-Total": "0",
+          "X-WP-TotalPages": "0"
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("doesn't return 404 if the first page is empty (no headers)", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([tag1]))
+      .mockResolvedValueOnce(mockResponse([], {}));
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/");
+    expect(store.state.source).toMatchSnapshot();
   });
 });
