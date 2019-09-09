@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore, require-atomic-updates */
 import Koa from "koa";
 import { get } from "koa-route";
 import serve from "koa-static";
@@ -8,7 +9,7 @@ import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { getSettings } from "@frontity/file-settings";
 import { ChunkExtractor } from "@loadable/server";
 import { extractCritical } from "emotion-server";
-import { Helmet } from "react-helmet";
+import { HelmetContext } from "@frontity/types";
 import getTemplate from "./templates";
 import {
   getStats,
@@ -21,7 +22,7 @@ import App from "../app";
 import { FrontityTags } from "../../types";
 import createStore from "./store";
 
-export default ({ packages }) => {
+export default ({ packages }): ReturnType<Koa["callback"]> => {
   const app = new Koa();
 
   // Serve static files.
@@ -83,7 +84,10 @@ export default ({ packages }) => {
       })
     );
 
-    const Component = <App store={store} />;
+    // Pass a context to HelmetProvider which will hold our state specific to each request.
+    const helmetContext: HelmetContext = {};
+
+    const Component = <App store={store} helmetContext={helmetContext} />;
 
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.
@@ -137,7 +141,7 @@ export default ({ packages }) => {
     )}</script>\n${frontity.script}`;
 
     // Get static head strings.
-    const head = getHeadTags(Helmet.renderStatic());
+    const head = getHeadTags(helmetContext.helmet);
 
     // Write the template to body.
     ctx.body = template({ html, frontity, head });

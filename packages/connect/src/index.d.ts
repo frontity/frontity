@@ -94,7 +94,7 @@ export function batch<T = any>(
   args?: any[]
 ): T;
 
-export type InitializedStore<St extends Store> = Omit<
+export type InitializedStore<St extends Store = Store> = Omit<
   St,
   "state" | "actions"
 > & {

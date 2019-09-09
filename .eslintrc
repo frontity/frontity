@@ -5,7 +5,8 @@
     "plugin:import/recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:cypress/recommended"
   ],
   "rules": {
     "@typescript-eslint/indent": "off",
@@ -15,7 +16,8 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "cypress/globals": true
   },
   "settings": {
     "import/resolver": {

@@ -37,7 +37,7 @@ Array [
 `;
 
 exports[`Image works on server 2`] = `
-"<script data-react-helmet=\\"true\\" id=\\"frontity-no-proxy-images\\" type=\\"text/javascript\\">
+"<script data-rh=\\"true\\" id=\\"frontity-no-proxy-images\\" type=\\"text/javascript\\">
   if (typeof window !== \\"undefined\\" && (!(\\"Proxy\\" in window) || !(\\"IntersectionObserver\\" in window))) {
     document.addEventListener(\\"DOMContentLoaded\\", function() {
       var images = document.querySelectorAll(\\"img.frontity-lazy-image\\");
@@ -55,7 +55,7 @@ exports[`Image works on server 2`] = `
 `;
 
 exports[`Image works on server 3`] = `
-"<noscript data-react-helmet=\\"true\\" ><style id=\\"frontity-no-js-images\\" type=\\"text/css\\">
+"<noscript data-rh=\\"true\\" ><style id=\\"frontity-no-js-images\\" type=\\"text/css\\">
   :not(noscript) > .frontity-lazy-image {
     display: none;
   }
