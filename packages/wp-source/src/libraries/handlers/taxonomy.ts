@@ -21,14 +21,12 @@ const taxonomyHandler = ({
     // Request entity from WP
     const { endpoint } = taxonomy;
     const response = await api.get({ endpoint, params: { slug } });
-    const [entity] = await response.clone().json();
+    const [entity] = await populate({ response, state });
     if (!entity)
       throw new Error(
         `entity from endpoint '${endpoint}' with slug '${slug}' not found`
       );
     id = entity.id;
-    // Populate entity
-    await populate({ response, state });
   }
 
   // 2. fetch the specified page

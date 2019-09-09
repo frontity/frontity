@@ -37,7 +37,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
   subdirectory
 }) => {
   // Normalize response
-  const json = await response.clone().json();
+  const json = await response.json();
   const isList = json instanceof Array;
   const { entities, result } = normalize(
     json,
