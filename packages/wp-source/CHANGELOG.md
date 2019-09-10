@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/frontity/frontity/compare/@frontity/wp-source@1.3.0...@frontity/wp-source@1.3.1) (2019-09-10)
+
+
+### Bug Fixes
+
+* **wp-source:** move clone-deep from code to tests ([4cd6787](https://github.com/frontity/frontity/commit/4cd6787))
+
+
+
+
+
 # [1.3.0](https://github.com/frontity/frontity/compare/@frontity/wp-source@1.2.0...@frontity/wp-source@1.3.0) (2019-09-10)
 
 

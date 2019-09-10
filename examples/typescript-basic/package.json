@@ -1,6 +1,6 @@
 {
   "name": "typescript-basic",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",
   "scripts": {
@@ -17,7 +17,7 @@
     "@frontity/extension-example-1": "^1.1.14",
     "@frontity/extension-example-2": "^1.2.14",
     "@frontity/tiny-router": "^1.0.14",
-    "@frontity/wp-source": "^1.3.0",
+    "@frontity/wp-source": "^1.3.1",
     "frontity": "^1.3.1"
   }
 }
