@@ -1,3 +1,4 @@
+/* eslint-disable no-global-assign */
 /**
  * @jest-environment jsdom
  */
@@ -52,7 +53,7 @@ describe("Image", () => {
       state: { frontity: { rendering: "ssr" } }
     };
 
-    let result = TestRenderer.create(<Image {...props} />);
+    const result = TestRenderer.create(<Image {...props} />);
     expect(result.toJSON()).toMatchSnapshot();
   });
 
@@ -69,7 +70,7 @@ describe("Image", () => {
       state: { frontity: { rendering: "csr" } }
     };
 
-    let result = TestRenderer.create(<Image {...props} />);
+    const result = TestRenderer.create(<Image {...props} />);
     expect(result.toJSON()).toMatchSnapshot();
   });
 

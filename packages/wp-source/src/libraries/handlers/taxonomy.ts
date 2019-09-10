@@ -1,52 +1,68 @@
 import { Handler } from "../../../types";
-import getIdBySlug from "./utils/get-id-by-slug";
-import getTotal from "./utils/get-total";
-import getTotalPages from "./utils/get-total-pages";
+import capitalize from "./utils/capitalize";
 
 const taxonomyHandler = ({
   taxonomy,
-  postType,
-  truths = {}
+  postType
 }: {
   taxonomy: { type: string; endpoint: string };
-  postType: { endpoint: string; param: string };
+  postType: { endpoint?: string; param: string };
   props?: Record<string, string>;
-  truths?: Record<string, true>;
 }): Handler => async ({ route, params, state, libraries }) => {
-  const { source } = state;
-  const { api, populate, parse } = libraries.source;
-  const { page, query } = parse(route);
+  const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
+  const { path, page, query } = parse(route);
 
   // 1. search id in state or get it from WP REST API
-  const { slug } = params;
-  const id =
-    getIdBySlug(source[taxonomy.type], slug) ||
-    (await api.getIdBySlug(taxonomy.endpoint, slug));
+  let { id } = state.source.get(path);
+  if (!id) {
+    const { slug } = params;
+    // Request entity from WP
+    const { endpoint } = taxonomy;
+    const response = await api.get({ endpoint, params: { slug } });
+    const [entity] = await populate({ response, state });
+    if (!entity)
+      throw new Error(
+        `entity from endpoint "${endpoint}" with slug "${slug}" not found`
+      );
+    id = entity.id;
+  }
 
   // 2. fetch the specified page
   const response = await api.get({
-    endpoint: postType.endpoint,
-    params: { [postType.param]: id, search: query.s, page, _embed: true }
+    endpoint: postType.endpoint || state.source.postEndpoint,
+    params: {
+      [postType.param]: id,
+      search: query.s,
+      page,
+      _embed: true,
+      ...state.source.params
+    }
   });
 
-  // 3. throw an error if page is out of range
+  // 3. populate response and add page to data
+  const items = await populate({ response, state });
+  if (page > 1 && items.length === 0)
+    throw new Error(
+      `${taxonomy.type} with slug "${params.slug}" doesn't have page ${page}`
+    );
+
+  // 4. get posts and pages count
   const total = getTotal(response);
   const totalPages = getTotalPages(response);
-  if (page > totalPages) throw new Error("Page doesn't exist.");
-
-  // 4. populate response and add page to data
-  const items = await populate({ response, state });
 
   // 5. add data to source
-  Object.assign(source.data[route], {
-    taxonomy: taxonomy.type,
-    id,
+  const currentPageData = state.source.data[route];
+  const firstPageData = state.source.data[path];
+
+  Object.assign(currentPageData, {
+    id: firstPageData.id,
+    taxonomy: firstPageData.taxonomy,
     items,
     total,
     totalPages,
     isArchive: true,
     isTaxonomy: true,
-    ...truths
+    [`is${capitalize(firstPageData.taxonomy)}`]: true
   });
 };
 

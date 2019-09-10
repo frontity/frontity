@@ -1,11 +1,8 @@
 import { Handler } from "../../../types";
-import getTotal from "./utils/get-total";
-import getTotalPages from "./utils/get-total-pages";
 
 const dateHandler: Handler = async ({ route, params, state, libraries }) => {
-  const { source } = state;
-  const { api, populate, parse } = libraries.source;
-  const { page, query } = parse(route);
+  const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
+  const { path, page, query } = parse(route);
 
   // 1. build date properties
   const year = parseInt(params.year);
@@ -23,26 +20,28 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
 
   // 2. fetch the specified page
   const response = await api.get({
-    endpoint: "posts",
+    endpoint: state.source.postEndpoint,
     params: {
       _embed: true,
       after: after.toISOString(),
       before: before.toISOString(),
       search: query.s,
-      page
+      page,
+      ...state.source.params
     }
   });
 
-  // 3. throw an error if page is out of range
+  // 3. populate response and add page to data
+  const items = await populate({ response, state });
+  if (items.length === 0)
+    throw new Error(`date "${path}" doesn't have page ${page}`);
+
+  // 4. get posts and pages count
   const total = getTotal(response);
   const totalPages = getTotalPages(response);
-  if (page > totalPages) throw new Error("Page doesn't exist.");
-
-  // 4. populate response and add page to data
-  const items = await populate({ response, state });
 
   // 5. add data to source
-  Object.assign(source.data[route], {
+  Object.assign(state.source.data[route], {
     year,
     month,
     day,

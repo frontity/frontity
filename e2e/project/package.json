@@ -1,0 +1,19 @@
+{
+  "name": "project-for-e2e-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A project to start sites for e2e testing",
+  "scripts": {
+    "dev": "frontity dev",
+    "dev:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity dev",
+    "build": "frontity build",
+    "build:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity build",
+    "serve": "frontity serve",
+    "serve:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity serve"
+  },
+  "dependencies": {
+    "@frontity/core": "^1.2.0",
+    "frontity": "^1.3.0",
+    "head": "^1.0.0"
+  }
+}

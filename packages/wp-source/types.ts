@@ -36,6 +36,8 @@ interface WpSource extends Source {
       tagBase: string;
       homepage: string;
       postsPage: string;
+      postEndpoint: string;
+      params: Record<string, any>;
     };
   };
   actions: {
@@ -56,6 +58,8 @@ interface WpSource extends Source {
       parse: Source<WpSource>["libraries"]["source"]["parse"];
       stringify: Source<WpSource>["libraries"]["source"]["stringify"];
       normalize: Source<WpSource>["libraries"]["source"]["normalize"];
+      getTotal: (Response) => number;
+      getTotalPages: (Response) => number;
     };
   };
 }

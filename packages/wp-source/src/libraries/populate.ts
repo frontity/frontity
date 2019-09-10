@@ -4,6 +4,33 @@ import { normalize } from "normalizr";
 import * as schemas from "./schemas";
 import { concatPath, decomposeRoute } from "./route-utils";
 
+const transformLink = ({
+  entity,
+  state,
+  ...options
+}: {
+  entity: {
+    link: string;
+  };
+  state: State<WpSource>;
+  subdirectory?: string;
+}): void => {
+  let { subdirectory } = state.source;
+  if (options.subdirectory) subdirectory = options.subdirectory;
+
+  // get API subdirectory
+  const path = !state.source.isWpCom
+    ? decomposeRoute(state.source.api).pathname.replace(/\/wp-json\/?$/, "/")
+    : "";
+
+  // remove API subdirectory
+  let { link } = entity;
+  if (path && link.startsWith(path)) link = link.replace(path, "/");
+
+  // add subdirectory if it exists
+  entity.link = subdirectory ? concatPath(subdirectory, link) : link;
+};
+
 const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
   state,
@@ -24,14 +51,34 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
       // to match the Frontity server location.
       transformLink({ entity, state, subdirectory });
 
+      // Get or init data using the transformed link
+      const { data } = state.source;
+      const entityData =
+        data[entity.link] ||
+        (data[entity.link] = {
+          isReady: false,
+          isFetching: false
+        });
+
       if (schema === "postType" || schema === "attachment") {
-        if (state.source[entity.type])
-          state.source[entity.type][entity.id] = entity;
+        if (!state.source[entity.type]) state.source[entity.type] = {};
+        state.source[entity.type][entity.id] = entity;
+        Object.assign(entityData, {
+          type: entity.type,
+          id: entity.id
+        });
       } else if (schema === "taxonomy") {
-        if (state.source[entity.taxonomy])
-          state.source[entity.taxonomy][entity.id] = entity;
+        if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
+        state.source[entity.taxonomy][entity.id] = entity;
+        Object.assign(entityData, {
+          taxonomy: entity.taxonomy,
+          id: entity.id
+        });
       } else if (schema === "author") {
         state.source.author[entity.id] = entity;
+        Object.assign(entityData, {
+          id: entity.id
+        });
       }
     });
   });
@@ -44,28 +91,3 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
 };
 
 export default populate;
-
-const transformLink = ({
-  entity,
-  state,
-  ...options
-}: {
-  entity: any;
-  state: State<WpSource>;
-  subdirectory?: string;
-}) => {
-  let { isWpCom, api, subdirectory } = state.source;
-  if (options.subdirectory) subdirectory = options.subdirectory;
-
-  // get API subdirectory
-  const path = !isWpCom
-    ? decomposeRoute(api).pathname.replace(/\/wp-json\/?$/, "/")
-    : "";
-
-  // remove API subdirectory
-  let { link } = entity;
-  if (path && link.startsWith(path)) link = link.replace(path, "/");
-
-  // add subdirectory if it exists
-  entity.link = subdirectory ? concatPath(subdirectory, link) : link;
-};

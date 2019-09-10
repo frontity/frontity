@@ -1,12 +1,12 @@
-import { Response, Headers } from "node-fetch";
+import * as nodeFetch from "node-fetch";
 
-export const mockResponse = (body, headers?) =>
-  new Response(
+export const mockResponse = (body, headers?): Response =>
+  (new nodeFetch.Response(
     JSON.stringify(body),
     headers && {
-      headers: new Headers(headers)
+      headers: new nodeFetch.Headers(headers)
     }
-  );
+  ) as unknown) as Response;
 
 export const expectEntities = sourceState => {
   const ids = {};

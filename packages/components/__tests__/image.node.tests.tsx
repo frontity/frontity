@@ -4,7 +4,8 @@
 
 import React from "react";
 import TestRenderer from "react-test-renderer";
-import { Head } from "frontity";
+import { HelmetProvider } from "frontity";
+import { HelmetContext } from "frontity/types";
 import Image from "../image";
 
 describe("Image", () => {
@@ -33,8 +34,13 @@ describe("Image", () => {
       className: "fake-class-name"
     };
 
-    const image = TestRenderer.create(<Image {...props} />).toJSON();
-    const head = Head.peek();
+    const helmetContext: HelmetContext = {};
+    const image = TestRenderer.create(
+      <HelmetProvider context={helmetContext}>
+        <Image {...props} />
+      </HelmetProvider>
+    ).toJSON();
+    const head = helmetContext.helmet;
 
     expect(image).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();

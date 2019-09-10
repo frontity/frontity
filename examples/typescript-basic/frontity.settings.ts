@@ -12,6 +12,7 @@ const settings: Settings<ExtensionExample1 | ExtensionExample2> = [
     },
     packages: [
       "@frontity/tiny-router",
+      "@frontity/wp-source",
       {
         name: "@frontity/extension-example-1",
         state: {

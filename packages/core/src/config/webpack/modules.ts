@@ -47,7 +47,7 @@ export default ({
             loader: "file-loader",
             options: {
               name(file) {
-                const filename = /([^\/]+)\.(?:png|jpe?g|gif|svg)$/.exec(
+                const filename = /([^\/\\]+)\.(?:png|jpe?g|gif|svg)$/.exec(
                   file
                 ) || [, "image"];
                 return mode === "development"

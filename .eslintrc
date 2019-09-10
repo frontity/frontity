@@ -6,16 +6,18 @@
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:jest/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:cypress/recommended"
   ],
   "rules": {
     "@typescript-eslint/indent": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/named": "off"
   },
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "cypress/globals": true
   },
   "settings": {
     "import/resolver": {
@@ -23,5 +25,17 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/indent": "off"
+      }
+    }
+  ]
 }
