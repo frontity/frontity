@@ -1,4 +1,4 @@
-import { createStore, InitializedStore } from "@frontity/connect";
+import { createStore, InitializedStore, observe } from "@frontity/connect";
 import wpSource from "../../../";
 import WpSource from "../../../../types";
 import Api from "../../api";
@@ -47,10 +47,25 @@ describe("tag", () => {
         "X-WP-TotalPages": "2"
       })
     );
+    // Observe changes in isFetching and isReady properties
+    const dataState = [];
+    observe(() => {
+      const { isFetching, isReady } = store.state.source.get(
+        "/tag/tag-1/page/2/"
+      );
+      dataState.push({ isFetching, isReady });
+    });
     // Fetch entities
     await store.actions.source.fetch("/tag/tag-1/page/2/");
     expect(api.get).toBeCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
+    // Values history of isFetching and isReady
+    expect(dataState).toEqual([
+      { isFetching: false, isReady: false }, // first values are from a different object
+      { isFetching: false, isReady: false }, // initial values from the data object
+      { isFetching: true, isReady: false }, // fetch starts
+      { isFetching: false, isReady: true } // fetch ends
+    ]);
   });
 
   test("fetchs from a different endpoint with extra params", async () => {

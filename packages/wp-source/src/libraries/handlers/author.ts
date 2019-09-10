@@ -41,7 +41,11 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
   const totalPages = getTotalPages(response);
 
   // 5. add data to source
-  Object.assign(state.source.data[route], state.source.data[path], {
+  const currentPageData = state.source.data[route];
+  const firstPageData = state.source.data[path];
+
+  Object.assign(currentPageData, {
+    id: firstPageData.id,
     items,
     total,
     totalPages,
