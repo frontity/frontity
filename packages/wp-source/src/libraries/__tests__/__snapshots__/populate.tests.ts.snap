@@ -3,187 +3,160 @@
 exports[`populate add new custom post types & taxonomies to the state 1`] = `
 Array [
   Object {
-    "id": 461,
-    "link": "/movies/terminator/",
-    "type": "movies",
+    "id": 11,
+    "link": "/cpt/cpt-11/",
+    "type": "cpt",
+  },
+  Object {
+    "id": 12,
+    "link": "/cpt/cpt-12/",
+    "type": "cpt",
+  },
+  Object {
+    "id": 12,
+    "link": "/cpt/cpt-12/",
+    "type": "cpt",
   },
 ]
 `;
 
 exports[`populate add new custom post types & taxonomies to the state 2`] = `
 Object {
-  "actors": Object {
-    "255": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/actors",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/actor",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/actor/255",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/movies?actor=255",
-          },
-        ],
-      },
-      "id": 255,
-      "link": "/actors/sarah-connor/",
-      "name": "Sarah Connor",
-      "slug": "sarah-connor",
-      "taxonomy": "actors",
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "11": Object {
+      "author": 1,
+      "id": 11,
+      "link": "/post-11/attachment-11/",
+      "slug": "attachment-11",
+      "type": "attachment",
+    },
+    "12": Object {
+      "author": 1,
+      "id": 12,
+      "link": "/post-12/attachment-12/",
+      "slug": "attachment-12",
+      "type": "attachment",
     },
   },
-  "api": "https://test.frontity.io",
-  "attachment": Object {},
-  "author": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
   "category": Object {},
   "categoryBase": "",
-  "data": Object {
-    "/actors/sarah-connor/": Object {
-      "id": 255,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "actors",
+  "cpt": Object {
+    "11": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          11,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "custom-taxonomy": Array [
+        1,
+      ],
+      "featured_media": 2,
+      "id": 11,
+      "link": "/cpt/cpt-11/",
+      "slug": "cpt-11",
+      "tags": Array [],
+      "type": "cpt",
     },
-    "/movies/terminator/": Object {
-      "id": 461,
+    "12": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          12,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "custom-taxonomy": Array [
+        1,
+      ],
+      "featured_media": 2,
+      "id": 12,
+      "link": "/cpt/cpt-12/",
+      "slug": "cpt-12",
+      "tags": Array [],
+      "type": "cpt",
+    },
+  },
+  "custom-taxonomy": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/custom-taxonomy/ct-1/",
+      "parent": 0,
+      "slug": "ct-1",
+      "taxonomy": "custom-taxonomy",
+    },
+  },
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
       "isFetching": false,
       "isReady": false,
-      "type": "movies",
+    },
+    "/cpt/cpt-11/": Object {
+      "id": 11,
+      "isFetching": false,
+      "isReady": false,
+      "type": "cpt",
+    },
+    "/cpt/cpt-12/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "type": "cpt",
+    },
+    "/custom-taxonomy/ct-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "custom-taxonomy",
+    },
+    "/post-11/attachment-11/": Object {
+      "id": 11,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-12/attachment-12/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
     },
   },
   "get": [Function],
   "homepage": "",
   "isWpCom": false,
-  "movies": Object {
-    "461": Object {
-      "_embedded": Object {
-        "wp:term": Array [
-          Array [
-            255,
-          ],
-        ],
-      },
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/movies",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/movies",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/movies/461",
-          },
-        ],
-        "wp:attachment": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=461",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/actor?post=461",
-            "taxonomy": "actors",
-          },
-        ],
-      },
-      "actor": Array [
-        255,
-      ],
-      "content": Object {
-        "protected": false,
-        "rendered": "",
-      },
-      "date": "2019-03-27T19:31:27",
-      "date_gmt": "2019-03-27T17:31:27",
-      "featured_media": 0,
-      "guid": Object {
-        "rendered": "https://test.frontity.io/?post_type=movies&#038;p=461",
-      },
-      "id": 461,
-      "link": "/movies/terminator/",
-      "modified": "2019-09-02T10:33:59",
-      "modified_gmt": "2019-09-02T08:33:59",
-      "slug": "terminator",
-      "status": "publish",
-      "template": "",
-      "title": Object {
-        "rendered": "Terminator",
-      },
-      "type": "movies",
-      "yoast_meta": Object {
-        "yoast_wpseo_canonical": "https://test.frontity.io/movies/terminator/",
-        "yoast_wpseo_company_logo": "",
-        "yoast_wpseo_company_name": "",
-        "yoast_wpseo_company_or_person": "company",
-        "yoast_wpseo_facebook_description": "",
-        "yoast_wpseo_facebook_image": "",
-        "yoast_wpseo_facebook_title": "",
-        "yoast_wpseo_facebook_type": "movies",
-        "yoast_wpseo_metadesc": "",
-        "yoast_wpseo_person_name": "",
-        "yoast_wpseo_social_defaults": Object {
-          "facebook_site": "",
-          "fbadminapp": "",
-          "google_plus_url": "",
-          "instagram_url": "",
-          "linkedin_url": "",
-          "myspace_url": "",
-          "og_default_image": "",
-          "og_default_image_id": "",
-          "og_frontpage_desc": "",
-          "og_frontpage_image": "",
-          "og_frontpage_image_id": "",
-          "og_frontpage_title": "",
-          "opengraph": true,
-          "pinterest_url": "",
-          "pinterestverify": "",
-          "plus-publisher": "",
-          "twitter": true,
-          "twitter_card_type": "summary_large_image",
-          "twitter_site": "",
-          "wikipedia_url": "",
-          "youtube_url": "",
-        },
-        "yoast_wpseo_social_url": "https://test.frontity.io/movies/terminator/",
-        "yoast_wpseo_title": "Terminator - Frontity Test - WP Title",
-        "yoast_wpseo_twitter_description": "",
-        "yoast_wpseo_twitter_image": "",
-        "yoast_wpseo_twitter_title": "",
-        "yoast_wpseo_website_name": "",
-      },
-    },
-  },
   "page": Object {},
   "params": Object {},
   "post": Object {},
@@ -198,13 +171,18 @@ Object {
 exports[`populate adds posts and embedded into state 1`] = `
 Array [
   Object {
-    "id": 57,
-    "link": "/2016/shinjuku-gyoen-national-garden/",
+    "id": 1,
+    "link": "/post-1/",
     "type": "post",
   },
   Object {
-    "id": 54,
-    "link": "/2016/lower-antelope-canyon/",
+    "id": 2,
+    "link": "/post-2/",
+    "type": "post",
+  },
+  Object {
+    "id": 3,
+    "link": "/post-3/",
     "type": "post",
   },
 ]
@@ -214,1556 +192,182 @@ exports[`populate adds posts and embedded into state 2`] = `
 Object {
   "api": "https://test.frontity.io",
   "attachment": Object {
-    "55": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=55",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/55",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=55",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=55",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "canyon",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2016-11-25T18:14:19",
-      "id": 55,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/2016/lower-antelope-canyon/canyon/",
-      "media_details": Object {
-        "file": "2016/11/canyon.jpg",
-        "height": 2048,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "canyon.jpg",
-            "height": 2048,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon.jpg",
-            "width": 3072,
-          },
-          "large": Object {
-            "file": "canyon-1024x683.jpg",
-            "height": 683,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-1024x683.jpg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "canyon-300x200.jpg",
-            "height": 200,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-300x200.jpg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "canyon-768x512.jpg",
-            "height": 512,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-768x512.jpg",
-            "width": 768,
-          },
-          "post-thumbnail": Object {
-            "file": "canyon-1200x800.jpg",
-            "height": 800,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-1200x800.jpg",
-            "width": 1200,
-          },
-          "thumbnail": Object {
-            "file": "canyon-150x150.jpg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-150x150.jpg",
-            "width": 150,
-          },
-        },
-        "width": 3072,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "canyon",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon.jpg",
-      "title": Object {
-        "rendered": "canyon",
-        "text": "canyon",
-      },
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/attachment-1/",
+      "slug": "attachment-1",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "77": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=77",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/77",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=77",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=77",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "Shinjuku Gyoen",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2017-01-11T17:28:38",
-      "id": 77,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/2016/shinjuku-gyoen-national-garden/shinjukugyoen/",
-      "media_details": Object {
-        "file": "2016/11/ShinjukuGyoen.jpg",
-        "height": 680,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "ShinjukuGyoen.jpg",
-            "height": 680,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg",
-            "width": 1024,
-          },
-          "large": Object {
-            "file": "ShinjukuGyoen-1024x680.jpg",
-            "height": 680,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-1024x680.jpg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "ShinjukuGyoen-300x199.jpg",
-            "height": 199,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-300x199.jpg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "ShinjukuGyoen-768x510.jpg",
-            "height": 510,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-768x510.jpg",
-            "width": 768,
-          },
-          "thumbnail": Object {
-            "file": "ShinjukuGyoen-150x150.jpg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-150x150.jpg",
-            "width": 150,
-          },
-        },
-        "width": 1024,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "shinjukugyoen",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg",
-      "title": Object {
-        "rendered": "shinjukugyoen",
-        "text": "shinjukugyoen",
-      },
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/post-2/attachment-2/",
+      "slug": "attachment-2",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "shinjukugyoen - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "80": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=80",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/80",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=80",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=80",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "canyon",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2017-01-11T17:43:21",
-      "id": 80,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/2016/lower-antelope-canyon/pexels-photo-94807/",
-      "media_details": Object {
-        "file": "2016/11/pexels-photo-94807.jpeg",
-        "height": 853,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "pexels-photo-94807.jpeg",
-            "height": 853,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg",
-            "width": 1280,
-          },
-          "large": Object {
-            "file": "pexels-photo-94807-1024x682.jpeg",
-            "height": 682,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "pexels-photo-94807-300x200.jpeg",
-            "height": 200,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-300x200.jpeg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "pexels-photo-94807-768x512.jpeg",
-            "height": 512,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-768x512.jpeg",
-            "width": 768,
-          },
-          "post-thumbnail": Object {
-            "file": "pexels-photo-94807-1200x800.jpeg",
-            "height": 800,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1200x800.jpeg",
-            "width": 1200,
-          },
-          "thumbnail": Object {
-            "file": "pexels-photo-94807-150x150.jpeg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-150x150.jpeg",
-            "width": 150,
-          },
-        },
-        "width": 1280,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "pexels-photo-94807",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg",
-      "title": Object {
-        "rendered": "canyon",
-        "text": "canyon",
-      },
+    "3": Object {
+      "author": 1,
+      "id": 3,
+      "link": "/post-3/attachment-3/",
+      "slug": "attachment-3",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
   },
   "author": Object {
     "1": Object {
-      "_links": Object {
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/1",
-          },
-        ],
-      },
-      "avatar_urls": Object {
-        "24": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=24&d=mm&r=g",
-        "48": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=48&d=mm&r=g",
-        "96": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
-      },
-      "description": "",
       "id": 1,
-      "link": "/author/luisherranz/",
-      "name": "luisherranz",
-      "slug": "luisherranz",
-      "url": "",
-    },
-    "2": Object {
-      "_links": Object {
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-      },
-      "avatar_urls": Object {
-        "24": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=24&d=mm&r=g",
-        "48": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=48&d=mm&r=g",
-        "96": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=96&d=mm&r=g",
-      },
-      "description": "",
-      "id": 2,
-      "link": "/author/mario/",
-      "name": "Mario Santos",
-      "slug": "mario",
-      "url": "",
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
     },
   },
   "category": Object {
-    "3": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/3",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=3",
-          },
-        ],
-      },
-      "id": 3,
-      "link": "/category/photography/",
-      "name": "Photography",
-      "slug": "photography",
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
       "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "56": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/56",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=56",
-          },
-        ],
-      },
-      "id": 56,
-      "link": "/category/news/",
-      "name": "News",
-      "slug": "news",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "57": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/57",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=57",
-          },
-        ],
-      },
-      "id": 57,
-      "link": "/category/inspiring-stories/",
-      "name": "Inspiring Stories",
-      "slug": "inspiring-stories",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "58": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/58",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=58",
-          },
-        ],
-      },
-      "id": 58,
-      "link": "/category/voices-and-views/",
-      "name": "Voices and Views",
-      "slug": "voices-and-views",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "59": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/59",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=59",
-          },
-        ],
-      },
-      "id": 59,
-      "link": "/category/lifestyle/",
-      "name": "Lifestyle",
-      "slug": "lifestyle",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "7": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/7",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=7",
-          },
-        ],
-      },
-      "id": 7,
-      "link": "/category/nature/",
-      "name": "Nature",
-      "slug": "nature",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "8": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/8",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=8",
-          },
-        ],
-      },
-      "id": 8,
-      "link": "/category/travel/",
-      "name": "Travel",
-      "slug": "travel",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
     },
   },
   "categoryBase": "",
   "data": Object {
-    "/": Object {
-      "id": "post",
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "latest",
-    },
-    "/2016/lower-antelope-canyon/": Object {
-      "id": 54,
-      "isFetching": false,
-      "isReady": false,
-      "type": "post",
-    },
-    "/2016/lower-antelope-canyon/canyon/": Object {
-      "id": 55,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/2016/lower-antelope-canyon/pexels-photo-94807/": Object {
-      "id": 80,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/2016/shinjuku-gyoen-national-garden/": Object {
-      "id": 57,
-      "isFetching": false,
-      "isReady": false,
-      "type": "post",
-    },
-    "/2016/shinjuku-gyoen-national-garden/shinjukugyoen/": Object {
-      "id": 77,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/author/luisherranz/": Object {
+    "/author/author-1/": Object {
       "id": 1,
       "isFetching": false,
       "isReady": false,
     },
-    "/author/mario/": Object {
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "category",
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-2/": Object {
       "id": 2,
       "isFetching": false,
       "isReady": false,
+      "type": "post",
     },
-    "/category/inspiring-stories/": Object {
-      "id": 57,
+    "/post-2/attachment-2/": Object {
+      "id": 2,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
+      "type": "attachment",
     },
-    "/category/lifestyle/": Object {
-      "id": 59,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/category/nature/": Object {
-      "id": 7,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/category/news/": Object {
-      "id": 56,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/category/photography/": Object {
+    "/post-3/": Object {
       "id": 3,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
+      "type": "post",
     },
-    "/category/travel/": Object {
-      "id": 8,
+    "/post-3/attachment-3/": Object {
+      "id": 3,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
-    },
-    "/category/voices-and-views/": Object {
-      "id": 58,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/tag/antelope-canyon/": Object {
-      "id": 18,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/arizona/": Object {
-      "id": 19,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/japan/": Object {
-      "id": 15,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/national-garden/": Object {
-      "id": 16,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/nature/": Object {
-      "id": 13,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/tokyo/": Object {
-      "id": 14,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
+      "type": "attachment",
     },
   },
   "get": [Function],
   "homepage": "",
   "isWpCom": false,
-  "latest": Object {
-    "post": Object {
-      "count": 64,
-      "custom_analytics": Object {
-        "dimension6": "Test",
-      },
-      "id": "post",
-      "link": "/",
-      "name": "Frontity Test - Just wanted to make the title longer",
-      "slug": "post",
-      "taxonomy": "latest",
-      "yoast_meta": Object {
-        "title": "Frontity Test - Just wanted to make the title longer - Not just another Wordpress site. This is a place to test development and check possible bugs. Are we writing to make this description longer? Yes, we are writing to make this description longer to test :)",
-      },
-    },
-  },
   "page": Object {},
   "params": Object {},
   "post": Object {
-    "54": Object {
+    "1": Object {
       "_embedded": Object {
         "author": Array [
           1,
         ],
-        "wp:contentmedia": Array [
-          Array [
-            80,
-          ],
-        ],
         "wp:featuredmedia": Array [
-          55,
+          1,
         ],
         "wp:term": Array [
           Array [
-            57,
-            59,
-            7,
-            56,
-            3,
-            8,
-            58,
+            1,
           ],
-          Array [
-            18,
-            19,
-            13,
-          ],
-          Array [
-            "post",
-          ],
-        ],
-      },
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
-          },
-        ],
-        "author": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/1",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "predecessor-version": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54/revisions/324",
-            "id": 324,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=54",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54",
-          },
-        ],
-        "version-history": Array [
-          Object {
-            "count": 6,
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54/revisions",
-          },
-        ],
-        "wp:attachment": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=54",
-          },
-        ],
-        "wp:contentmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?include=80&per_page=1",
-          },
-        ],
-        "wp:featuredmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/55",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=54",
-            "taxonomy": "category",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=54",
-            "taxonomy": "post_tag",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?post=54",
-            "taxonomy": "latest",
-          },
         ],
       },
       "author": 1,
       "categories": Array [
-        57,
-        59,
-        7,
-        56,
-        3,
-        8,
-        58,
+        1,
       ],
-      "comment_status": "open",
-      "content": Object {
-        "protected": false,
-        "rendered": "<blockquote><p>“Travel is the only thing you buy that makes you richer.” – Anonymous</p></blockquote> <p>Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes <strong>two separate, scenic slot canyon sections</strong>, referred to individually as “<a href=\\"https://en.wikipedia.org/wiki/Antelope_Canyon#Upper_Antelope_Canyon\\" rel=\\"noopener\\">Upper Antelope Canyon</a>” or “The Crack”; and “Antelope Canyon” or “The Corkscrew”.</p>  <p>The Navajo name for Upper Antelope Canyon is Tsé bighánílíní, which means <strong><em>“the place where water runs through rocks.”</em></strong> Lower Antelope Canyon is Hazdistazí (advertised as “Hasdestwazi” by the Navajo Parks and Recreation Department), or “spiral rock arches.” Both are located within the LeChee Chapter of the Navajo Nation</p> <h3><strong>Lower Antelope Canyon</strong></h3> <p>Lower Antelope Canyon, called Hazdistazí, or “spiral rock arches” by the Navajo Indians, are located a few miles away. Prior to the installation of metal stairways, visiting the canyon required climbing along pre-installed ladders in certain areas. Even following the installation of stairways, it is a more difficult hike than Upper Antelope. It is longer, narrower in spots, and even footing is not available in all areas. At the end, the climb out requires several flights of stairs.</p>  <p><img class=\\"alignnone wp-image-80 size-large\\" src=\\"https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg\\" alt=\\"canyon\\" width=\\"840\\" height=\\"559\\" srcset=\\"https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-300x200.jpeg 300w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-768x512.jpeg 768w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1200x800.jpeg 1200w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg 1280w\\" sizes=\\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\\" data-attachment-id=\\"80\\" data-attachment-id-source=\\"wp-image-class\\"></p> <p>Despite these limitations, Lower Antelope Canyon draws a considerable number of photographers, though casual sightseers are much less common there than in Upper.</p> <p>The lower canyon is in the shape of a “V” and shallower than the Upper Antelope. Lighting is better in the early hours and late morning.</p> <p>Source: <a href=\\"https://en.wikipedia.org/wiki/Antelope_Canyon\\">Antelope Canyon</a>.</p> <a>aaa</a>",
-      },
-      "content_media": Array [
-        80,
-      ],
-      "custom_fields": Object {
-        "_adinserter_block_exceptions": Array [
-          "",
-        ],
-        "_edit_last": Array [
-          "2",
-        ],
-        "_edit_lock": Array [
-          "1544623939:1",
-        ],
-        "_encloseme": Array [
-          "1",
-        ],
-        "_pingme": Array [
-          "1",
-        ],
-        "_thumbnail_id": Array [
-          "55",
-        ],
-        "_yoast_wpseo_content_score": Array [
-          "60",
-        ],
-        "_yoast_wpseo_primary_category": Array [
-          "",
-        ],
-        "onesignal_meta_box_present": Array [
-          "1",
-        ],
-        "onesignal_send_notification": Array [
-          "",
-        ],
-      },
-      "date": "2016-10-25T18:14:29",
-      "date_gmt": "2016-10-25T16:14:29",
-      "excerpt": Object {
-        "protected": false,
-        "rendered": "<p>“Travel is the only thing you buy that makes you richer.” – Anonymous Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes two separate, scenic slot canyon sections, referred to individually as &#8220;Upper Antelope Canyon&#8221; or &#8220;The Crack&#8221;; and &#8220;Antelope Canyon&#8221; &hellip; </p>
-<p class=\\"link-more\\"><a href=\\"https://test.frontity.io/2016/lower-antelope-canyon/\\" class=\\"more-link\\">Continue reading<span class=\\"screen-reader-text\\"> &#8220;Antelope Canyon&#8221;</span></a></p>
-",
-        "text": "“Travel is the only thing you buy that makes you richer.” – Anonymous Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes two separate, scenic slot canyon sections, referred to individually as “Upper Antelope Canyon” or “The Crack”; and “Antelope Canyon” … 
-Continue reading “Antelope Canyon”
-",
-      },
-      "featured_media": 55,
-      "format": "standard",
-      "guid": Object {
-        "rendered": "https://test.frontity.io/?p=54",
-      },
-      "id": 54,
-      "latest": Array [
-        "post",
-      ],
-      "link": "/2016/lower-antelope-canyon/",
-      "meta": Array [],
-      "modified": "2018-11-23T14:45:11",
-      "modified_gmt": "2018-11-23T12:45:11",
-      "ping_status": "open",
-      "slug": "lower-antelope-canyon",
-      "status": "publish",
-      "sticky": false,
-      "tags": Array [
-        18,
-        19,
-        13,
-      ],
-      "template": "",
-      "title": Object {
-        "rendered": "Antelope Canyon",
-        "text": "Antelope Canyon",
-      },
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
       "type": "post",
-      "yoast_meta": Object {
-        "title": "Antelope Canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "57": Object {
+    "2": Object {
       "_embedded": Object {
         "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
           2,
         ],
-        "wp:contentmedia": Array [
-          Array [
-            77,
-          ],
-        ],
         "wp:term": Array [
           Array [
-            57,
-            59,
-            7,
-            56,
-            3,
-            58,
-          ],
-          Array [
-            15,
-            16,
-            14,
-          ],
-          Array [
-            "post",
+            1,
           ],
         ],
       },
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
-          },
-        ],
-        "author": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "predecessor-version": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57/revisions/207",
-            "id": 207,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=57",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57",
-          },
-        ],
-        "version-history": Array [
-          Object {
-            "count": 8,
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57/revisions",
-          },
-        ],
-        "wp:attachment": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=57",
-          },
-        ],
-        "wp:contentmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?include=77&per_page=1",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=57",
-            "taxonomy": "category",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=57",
-            "taxonomy": "post_tag",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?post=57",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "author": 2,
+      "author": 1,
       "categories": Array [
-        57,
-        59,
-        7,
-        56,
-        3,
-        58,
+        1,
       ],
-      "comment_status": "open",
-      "content": Object {
-        "protected": false,
-        "rendered": "<p>Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan. It is now a park under the jurisdiction of the national Ministry of the Environment.</p> <p>The shogun bequeathed this land to Lord Naitō (daimyo) of Tsuruga in the Edo period who completed a garden here in 1772. After the <a href=\\"https://en.wikipedia.org/wiki/Meiji_Restoration\\">Meiji Restoration</a> the house and its grounds were converted into an experimental agricultural centre. It then became a botanical garden before becoming an imperial garden in 1879. The current configuration of the garden was completed in 1906. <strong>Most of the garden was destroyed</strong> by air raids in 1945, during the later stages of World War II. The garden was rebuilt after the war.</p> <h2>More than 20,000 trees</h2> <figure id=\\"attachment_77\\" style=\\"width:840px;\\" class=\\"wp-caption alignnone\\"><a href=\\"https://flic.kr/p/5H2sDW\\"><img class=\\"wp-image-77 size-large\\" src=\\"https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-1024x680.jpg\\" alt=\\"Shinjuku Gyoen\\" width=\\"840\\" height=\\"558\\" srcset=\\"https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-300x199.jpg 300w, https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-768x510.jpg 768w\\" sizes=\\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\\" data-attachment-id=\\"77\\" data-attachment-id-source=\\"wp-image-class\\"></a><figcaption class=\\"wp-caption-text\\">Shinjuku Gyoen National Garden by Hiroshiykw.</figcaption></figure>  <p>The garden has more than 20,000 trees, including approximately 1,500 cherry trees which bloom from late March (Shidare or Weeping Cherry), to early April (Somei or Tokyo Cherry), and on to late April (Kanzan Cherry). Other trees found here include the majestic <strong>Himalayan cedars</strong>, which soar above the rest of the trees in the park, tulip trees, cypresses, and plane trees, which were first planted in Japan in the Imperial Gardens.</p> <p>Horticulture work has been going on in the greenhouses in the garden since 1892. The present greenhouse, built in the 1950s has a stock of over 1,700 tropical and subtropical plant species on permanent display.</p> <p>You may also like our <a href=\\"https://test.frontity.io/banff-national-park/\\">post about the Banff National Park</a> in Canada.</p> <p>Source: <a href=\\"https://en.wikipedia.org/wiki/Shinjuku_Gyoen\\">Shinjuku Gyoen</a>. Photo: Shinjuku Gyoen National Garden by <a href=\\"https://flic.kr/p/5H2sDW\\">Hiroshiykw</a>. Tags: <a href=\\"https://test.frontity.io/tag/japan\\">Japan</a>, <a href=\\"https://test.frontity.io/tag/tokyo/\\">Tokyo</a>, <a href=\\"https://test.frontity.io/tag/national-garden/\\">National Garden</a></p> <p><a href=\\"https://test.frontity.io/about-us/\\">About us</a>.</p> <a>aaa</a>",
-      },
-      "content_media": Array [
-        77,
-      ],
-      "custom_fields": Object {
-        "_adinserter_block_exceptions": Array [
-          "",
-        ],
-        "_edit_last": Array [
-          "2",
-        ],
-        "_edit_lock": Array [
-          "1549550575:4",
-        ],
-        "_encloseme": Array [
-          "1",
-          "1",
-        ],
-        "_pingme": Array [
-          "1",
-          "1",
-        ],
-        "_yoast_wpseo_content_score": Array [
-          "60",
-        ],
-        "_yoast_wpseo_primary_category": Array [
-          "",
-        ],
-        "onesignal_meta_box_present": Array [
-          "1",
-        ],
-        "onesignal_send_notification": Array [
-          "",
-        ],
-      },
-      "date": "2016-10-25T18:25:24",
-      "date_gmt": "2016-10-25T16:25:24",
-      "excerpt": Object {
-        "protected": false,
-        "rendered": "<p>Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan.</p>
-",
-        "text": "Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan.
-",
-      },
-      "featured_media": 0,
-      "format": "standard",
-      "guid": Object {
-        "rendered": "https://test.frontity.io/?p=57",
-      },
-      "id": 57,
-      "latest": Array [
-        "post",
-      ],
-      "link": "/2016/shinjuku-gyoen-national-garden/",
-      "meta": Array [],
-      "modified": "2018-11-23T14:45:04",
-      "modified_gmt": "2018-11-23T12:45:04",
-      "ping_status": "open",
-      "slug": "shinjuku-gyoen-national-garden",
-      "status": "publish",
-      "sticky": false,
-      "tags": Array [
-        15,
-        16,
-        14,
-      ],
-      "template": "",
-      "title": Object {
-        "rendered": "Shinjuku Gyoen National Garden",
-        "text": "Shinjuku Gyoen National Garden",
-      },
+      "featured_media": 2,
+      "id": 2,
+      "link": "/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
       "type": "post",
-      "yoast_meta": Object {
-        "title": "Shinjuku Gyoen National Garden - Frontity Test - Just wanted to make the title longer",
+    },
+    "3": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          3,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
       },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 3,
+      "id": 3,
+      "link": "/post-3/",
+      "slug": "post-3",
+      "tags": Array [],
+      "type": "post",
     },
   },
   "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
-  "tag": Object {
-    "13": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/13",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=13",
-          },
-        ],
-      },
-      "id": 13,
-      "link": "/tag/nature/",
-      "name": "Nature",
-      "slug": "nature",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Nature Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "14": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/14",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=14",
-          },
-        ],
-      },
-      "id": 14,
-      "link": "/tag/tokyo/",
-      "name": "Tokyo",
-      "slug": "tokyo",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Tokyo Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "15": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/15",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=15",
-          },
-        ],
-      },
-      "id": 15,
-      "link": "/tag/japan/",
-      "name": "Japan",
-      "slug": "japan",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Japan Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "16": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/16",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=16",
-          },
-        ],
-      },
-      "id": 16,
-      "link": "/tag/national-garden/",
-      "name": "National Garden",
-      "slug": "national-garden",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "National Garden Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "18": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/18",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=18",
-          },
-        ],
-      },
-      "id": 18,
-      "link": "/tag/antelope-canyon/",
-      "name": "Antelope Canyon",
-      "slug": "antelope-canyon",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Antelope Canyon Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "19": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/19",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=19",
-          },
-        ],
-      },
-      "id": 19,
-      "link": "/tag/arizona/",
-      "name": "Arizona",
-      "slug": "arizona",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Arizona Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-  },
+  "tag": Object {},
   "tagBase": "",
 }
 `;
@@ -1771,13 +375,18 @@ Continue reading “Antelope Canyon”
 exports[`populate removes WP API path from links 1`] = `
 Array [
   Object {
-    "id": 57,
-    "link": "/2016/shinjuku-gyoen-national-garden/",
+    "id": 1,
+    "link": "/post-1/",
     "type": "post",
   },
   Object {
-    "id": 54,
-    "link": "/2016/lower-antelope-canyon/",
+    "id": 2,
+    "link": "/post-2/",
+    "type": "post",
+  },
+  Object {
+    "id": 3,
+    "link": "/post-3/",
     "type": "post",
   },
 ]
@@ -1787,1556 +396,182 @@ exports[`populate removes WP API path from links 2`] = `
 Object {
   "api": "https://test.frontity.io/subdirectory/wp-json",
   "attachment": Object {
-    "55": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=55",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/55",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=55",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=55",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "canyon",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2016-11-25T18:14:19",
-      "id": 55,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/2016/lower-antelope-canyon/canyon/",
-      "media_details": Object {
-        "file": "2016/11/canyon.jpg",
-        "height": 2048,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "canyon.jpg",
-            "height": 2048,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon.jpg",
-            "width": 3072,
-          },
-          "large": Object {
-            "file": "canyon-1024x683.jpg",
-            "height": 683,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-1024x683.jpg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "canyon-300x200.jpg",
-            "height": 200,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-300x200.jpg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "canyon-768x512.jpg",
-            "height": 512,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-768x512.jpg",
-            "width": 768,
-          },
-          "post-thumbnail": Object {
-            "file": "canyon-1200x800.jpg",
-            "height": 800,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-1200x800.jpg",
-            "width": 1200,
-          },
-          "thumbnail": Object {
-            "file": "canyon-150x150.jpg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-150x150.jpg",
-            "width": 150,
-          },
-        },
-        "width": 3072,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "canyon",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon.jpg",
-      "title": Object {
-        "rendered": "canyon",
-        "text": "canyon",
-      },
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/attachment-1/",
+      "slug": "attachment-1",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "77": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=77",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/77",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=77",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=77",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "Shinjuku Gyoen",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2017-01-11T17:28:38",
-      "id": 77,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/2016/shinjuku-gyoen-national-garden/shinjukugyoen/",
-      "media_details": Object {
-        "file": "2016/11/ShinjukuGyoen.jpg",
-        "height": 680,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "ShinjukuGyoen.jpg",
-            "height": 680,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg",
-            "width": 1024,
-          },
-          "large": Object {
-            "file": "ShinjukuGyoen-1024x680.jpg",
-            "height": 680,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-1024x680.jpg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "ShinjukuGyoen-300x199.jpg",
-            "height": 199,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-300x199.jpg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "ShinjukuGyoen-768x510.jpg",
-            "height": 510,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-768x510.jpg",
-            "width": 768,
-          },
-          "thumbnail": Object {
-            "file": "ShinjukuGyoen-150x150.jpg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-150x150.jpg",
-            "width": 150,
-          },
-        },
-        "width": 1024,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "shinjukugyoen",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg",
-      "title": Object {
-        "rendered": "shinjukugyoen",
-        "text": "shinjukugyoen",
-      },
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/post-2/attachment-2/",
+      "slug": "attachment-2",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "shinjukugyoen - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "80": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=80",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/80",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=80",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=80",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "canyon",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2017-01-11T17:43:21",
-      "id": 80,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/2016/lower-antelope-canyon/pexels-photo-94807/",
-      "media_details": Object {
-        "file": "2016/11/pexels-photo-94807.jpeg",
-        "height": 853,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "pexels-photo-94807.jpeg",
-            "height": 853,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg",
-            "width": 1280,
-          },
-          "large": Object {
-            "file": "pexels-photo-94807-1024x682.jpeg",
-            "height": 682,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "pexels-photo-94807-300x200.jpeg",
-            "height": 200,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-300x200.jpeg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "pexels-photo-94807-768x512.jpeg",
-            "height": 512,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-768x512.jpeg",
-            "width": 768,
-          },
-          "post-thumbnail": Object {
-            "file": "pexels-photo-94807-1200x800.jpeg",
-            "height": 800,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1200x800.jpeg",
-            "width": 1200,
-          },
-          "thumbnail": Object {
-            "file": "pexels-photo-94807-150x150.jpeg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-150x150.jpeg",
-            "width": 150,
-          },
-        },
-        "width": 1280,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "pexels-photo-94807",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg",
-      "title": Object {
-        "rendered": "canyon",
-        "text": "canyon",
-      },
+    "3": Object {
+      "author": 1,
+      "id": 3,
+      "link": "/post-3/attachment-3/",
+      "slug": "attachment-3",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
   },
   "author": Object {
     "1": Object {
-      "_links": Object {
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/1",
-          },
-        ],
-      },
-      "avatar_urls": Object {
-        "24": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=24&d=mm&r=g",
-        "48": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=48&d=mm&r=g",
-        "96": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
-      },
-      "description": "",
       "id": 1,
-      "link": "/author/luisherranz/",
-      "name": "luisherranz",
-      "slug": "luisherranz",
-      "url": "",
-    },
-    "2": Object {
-      "_links": Object {
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-      },
-      "avatar_urls": Object {
-        "24": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=24&d=mm&r=g",
-        "48": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=48&d=mm&r=g",
-        "96": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=96&d=mm&r=g",
-      },
-      "description": "",
-      "id": 2,
-      "link": "/author/mario/",
-      "name": "Mario Santos",
-      "slug": "mario",
-      "url": "",
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
     },
   },
   "category": Object {
-    "3": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/3",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=3",
-          },
-        ],
-      },
-      "id": 3,
-      "link": "/category/photography/",
-      "name": "Photography",
-      "slug": "photography",
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
       "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "56": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/56",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=56",
-          },
-        ],
-      },
-      "id": 56,
-      "link": "/category/news/",
-      "name": "News",
-      "slug": "news",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "57": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/57",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=57",
-          },
-        ],
-      },
-      "id": 57,
-      "link": "/category/inspiring-stories/",
-      "name": "Inspiring Stories",
-      "slug": "inspiring-stories",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "58": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/58",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=58",
-          },
-        ],
-      },
-      "id": 58,
-      "link": "/category/voices-and-views/",
-      "name": "Voices and Views",
-      "slug": "voices-and-views",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "59": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/59",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=59",
-          },
-        ],
-      },
-      "id": 59,
-      "link": "/category/lifestyle/",
-      "name": "Lifestyle",
-      "slug": "lifestyle",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "7": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/7",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=7",
-          },
-        ],
-      },
-      "id": 7,
-      "link": "/category/nature/",
-      "name": "Nature",
-      "slug": "nature",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "8": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/8",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=8",
-          },
-        ],
-      },
-      "id": 8,
-      "link": "/category/travel/",
-      "name": "Travel",
-      "slug": "travel",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
     },
   },
   "categoryBase": "",
   "data": Object {
-    "/": Object {
-      "id": "post",
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "latest",
-    },
-    "/2016/lower-antelope-canyon/": Object {
-      "id": 54,
-      "isFetching": false,
-      "isReady": false,
-      "type": "post",
-    },
-    "/2016/lower-antelope-canyon/canyon/": Object {
-      "id": 55,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/2016/lower-antelope-canyon/pexels-photo-94807/": Object {
-      "id": 80,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/2016/shinjuku-gyoen-national-garden/": Object {
-      "id": 57,
-      "isFetching": false,
-      "isReady": false,
-      "type": "post",
-    },
-    "/2016/shinjuku-gyoen-national-garden/shinjukugyoen/": Object {
-      "id": 77,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/author/luisherranz/": Object {
+    "/author/author-1/": Object {
       "id": 1,
       "isFetching": false,
       "isReady": false,
     },
-    "/author/mario/": Object {
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "category",
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-2/": Object {
       "id": 2,
       "isFetching": false,
       "isReady": false,
+      "type": "post",
     },
-    "/category/inspiring-stories/": Object {
-      "id": 57,
+    "/post-2/attachment-2/": Object {
+      "id": 2,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
+      "type": "attachment",
     },
-    "/category/lifestyle/": Object {
-      "id": 59,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/category/nature/": Object {
-      "id": 7,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/category/news/": Object {
-      "id": 56,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/category/photography/": Object {
+    "/post-3/": Object {
       "id": 3,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
+      "type": "post",
     },
-    "/category/travel/": Object {
-      "id": 8,
+    "/post-3/attachment-3/": Object {
+      "id": 3,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
-    },
-    "/category/voices-and-views/": Object {
-      "id": 58,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/tag/antelope-canyon/": Object {
-      "id": 18,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/arizona/": Object {
-      "id": 19,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/japan/": Object {
-      "id": 15,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/national-garden/": Object {
-      "id": 16,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/nature/": Object {
-      "id": 13,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/tag/tokyo/": Object {
-      "id": 14,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
+      "type": "attachment",
     },
   },
   "get": [Function],
   "homepage": "",
   "isWpCom": false,
-  "latest": Object {
-    "post": Object {
-      "count": 64,
-      "custom_analytics": Object {
-        "dimension6": "Test",
-      },
-      "id": "post",
-      "link": "/",
-      "name": "Frontity Test - Just wanted to make the title longer",
-      "slug": "post",
-      "taxonomy": "latest",
-      "yoast_meta": Object {
-        "title": "Frontity Test - Just wanted to make the title longer - Not just another Wordpress site. This is a place to test development and check possible bugs. Are we writing to make this description longer? Yes, we are writing to make this description longer to test :)",
-      },
-    },
-  },
   "page": Object {},
   "params": Object {},
   "post": Object {
-    "54": Object {
+    "1": Object {
       "_embedded": Object {
         "author": Array [
           1,
         ],
-        "wp:contentmedia": Array [
-          Array [
-            80,
-          ],
-        ],
         "wp:featuredmedia": Array [
-          55,
+          1,
         ],
         "wp:term": Array [
           Array [
-            57,
-            59,
-            7,
-            56,
-            3,
-            8,
-            58,
+            1,
           ],
-          Array [
-            18,
-            19,
-            13,
-          ],
-          Array [
-            "post",
-          ],
-        ],
-      },
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
-          },
-        ],
-        "author": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/1",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "predecessor-version": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54/revisions/324",
-            "id": 324,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=54",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54",
-          },
-        ],
-        "version-history": Array [
-          Object {
-            "count": 6,
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54/revisions",
-          },
-        ],
-        "wp:attachment": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=54",
-          },
-        ],
-        "wp:contentmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?include=80&per_page=1",
-          },
-        ],
-        "wp:featuredmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/55",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=54",
-            "taxonomy": "category",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=54",
-            "taxonomy": "post_tag",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?post=54",
-            "taxonomy": "latest",
-          },
         ],
       },
       "author": 1,
       "categories": Array [
-        57,
-        59,
-        7,
-        56,
-        3,
-        8,
-        58,
+        1,
       ],
-      "comment_status": "open",
-      "content": Object {
-        "protected": false,
-        "rendered": "<blockquote><p>“Travel is the only thing you buy that makes you richer.” – Anonymous</p></blockquote> <p>Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes <strong>two separate, scenic slot canyon sections</strong>, referred to individually as “<a href=\\"https://en.wikipedia.org/wiki/Antelope_Canyon#Upper_Antelope_Canyon\\" rel=\\"noopener\\">Upper Antelope Canyon</a>” or “The Crack”; and “Antelope Canyon” or “The Corkscrew”.</p>  <p>The Navajo name for Upper Antelope Canyon is Tsé bighánílíní, which means <strong><em>“the place where water runs through rocks.”</em></strong> Lower Antelope Canyon is Hazdistazí (advertised as “Hasdestwazi” by the Navajo Parks and Recreation Department), or “spiral rock arches.” Both are located within the LeChee Chapter of the Navajo Nation</p> <h3><strong>Lower Antelope Canyon</strong></h3> <p>Lower Antelope Canyon, called Hazdistazí, or “spiral rock arches” by the Navajo Indians, are located a few miles away. Prior to the installation of metal stairways, visiting the canyon required climbing along pre-installed ladders in certain areas. Even following the installation of stairways, it is a more difficult hike than Upper Antelope. It is longer, narrower in spots, and even footing is not available in all areas. At the end, the climb out requires several flights of stairs.</p>  <p><img class=\\"alignnone wp-image-80 size-large\\" src=\\"https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg\\" alt=\\"canyon\\" width=\\"840\\" height=\\"559\\" srcset=\\"https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-300x200.jpeg 300w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-768x512.jpeg 768w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1200x800.jpeg 1200w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg 1280w\\" sizes=\\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\\" data-attachment-id=\\"80\\" data-attachment-id-source=\\"wp-image-class\\"></p> <p>Despite these limitations, Lower Antelope Canyon draws a considerable number of photographers, though casual sightseers are much less common there than in Upper.</p> <p>The lower canyon is in the shape of a “V” and shallower than the Upper Antelope. Lighting is better in the early hours and late morning.</p> <p>Source: <a href=\\"https://en.wikipedia.org/wiki/Antelope_Canyon\\">Antelope Canyon</a>.</p> <a>aaa</a>",
-      },
-      "content_media": Array [
-        80,
-      ],
-      "custom_fields": Object {
-        "_adinserter_block_exceptions": Array [
-          "",
-        ],
-        "_edit_last": Array [
-          "2",
-        ],
-        "_edit_lock": Array [
-          "1544623939:1",
-        ],
-        "_encloseme": Array [
-          "1",
-        ],
-        "_pingme": Array [
-          "1",
-        ],
-        "_thumbnail_id": Array [
-          "55",
-        ],
-        "_yoast_wpseo_content_score": Array [
-          "60",
-        ],
-        "_yoast_wpseo_primary_category": Array [
-          "",
-        ],
-        "onesignal_meta_box_present": Array [
-          "1",
-        ],
-        "onesignal_send_notification": Array [
-          "",
-        ],
-      },
-      "date": "2016-10-25T18:14:29",
-      "date_gmt": "2016-10-25T16:14:29",
-      "excerpt": Object {
-        "protected": false,
-        "rendered": "<p>“Travel is the only thing you buy that makes you richer.” – Anonymous Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes two separate, scenic slot canyon sections, referred to individually as &#8220;Upper Antelope Canyon&#8221; or &#8220;The Crack&#8221;; and &#8220;Antelope Canyon&#8221; &hellip; </p>
-<p class=\\"link-more\\"><a href=\\"https://test.frontity.io/2016/lower-antelope-canyon/\\" class=\\"more-link\\">Continue reading<span class=\\"screen-reader-text\\"> &#8220;Antelope Canyon&#8221;</span></a></p>
-",
-        "text": "“Travel is the only thing you buy that makes you richer.” – Anonymous Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes two separate, scenic slot canyon sections, referred to individually as “Upper Antelope Canyon” or “The Crack”; and “Antelope Canyon” … 
-Continue reading “Antelope Canyon”
-",
-      },
-      "featured_media": 55,
-      "format": "standard",
-      "guid": Object {
-        "rendered": "https://test.frontity.io/?p=54",
-      },
-      "id": 54,
-      "latest": Array [
-        "post",
-      ],
-      "link": "/2016/lower-antelope-canyon/",
-      "meta": Array [],
-      "modified": "2018-11-23T14:45:11",
-      "modified_gmt": "2018-11-23T12:45:11",
-      "ping_status": "open",
-      "slug": "lower-antelope-canyon",
-      "status": "publish",
-      "sticky": false,
-      "tags": Array [
-        18,
-        19,
-        13,
-      ],
-      "template": "",
-      "title": Object {
-        "rendered": "Antelope Canyon",
-        "text": "Antelope Canyon",
-      },
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
       "type": "post",
-      "yoast_meta": Object {
-        "title": "Antelope Canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "57": Object {
+    "2": Object {
       "_embedded": Object {
         "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
           2,
         ],
-        "wp:contentmedia": Array [
-          Array [
-            77,
-          ],
-        ],
         "wp:term": Array [
           Array [
-            57,
-            59,
-            7,
-            56,
-            3,
-            58,
-          ],
-          Array [
-            15,
-            16,
-            14,
-          ],
-          Array [
-            "post",
+            1,
           ],
         ],
       },
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
-          },
-        ],
-        "author": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "predecessor-version": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57/revisions/207",
-            "id": 207,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=57",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57",
-          },
-        ],
-        "version-history": Array [
-          Object {
-            "count": 8,
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57/revisions",
-          },
-        ],
-        "wp:attachment": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=57",
-          },
-        ],
-        "wp:contentmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?include=77&per_page=1",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=57",
-            "taxonomy": "category",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=57",
-            "taxonomy": "post_tag",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?post=57",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "author": 2,
+      "author": 1,
       "categories": Array [
-        57,
-        59,
-        7,
-        56,
-        3,
-        58,
+        1,
       ],
-      "comment_status": "open",
-      "content": Object {
-        "protected": false,
-        "rendered": "<p>Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan. It is now a park under the jurisdiction of the national Ministry of the Environment.</p> <p>The shogun bequeathed this land to Lord Naitō (daimyo) of Tsuruga in the Edo period who completed a garden here in 1772. After the <a href=\\"https://en.wikipedia.org/wiki/Meiji_Restoration\\">Meiji Restoration</a> the house and its grounds were converted into an experimental agricultural centre. It then became a botanical garden before becoming an imperial garden in 1879. The current configuration of the garden was completed in 1906. <strong>Most of the garden was destroyed</strong> by air raids in 1945, during the later stages of World War II. The garden was rebuilt after the war.</p> <h2>More than 20,000 trees</h2> <figure id=\\"attachment_77\\" style=\\"width:840px;\\" class=\\"wp-caption alignnone\\"><a href=\\"https://flic.kr/p/5H2sDW\\"><img class=\\"wp-image-77 size-large\\" src=\\"https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-1024x680.jpg\\" alt=\\"Shinjuku Gyoen\\" width=\\"840\\" height=\\"558\\" srcset=\\"https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-300x199.jpg 300w, https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-768x510.jpg 768w\\" sizes=\\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\\" data-attachment-id=\\"77\\" data-attachment-id-source=\\"wp-image-class\\"></a><figcaption class=\\"wp-caption-text\\">Shinjuku Gyoen National Garden by Hiroshiykw.</figcaption></figure>  <p>The garden has more than 20,000 trees, including approximately 1,500 cherry trees which bloom from late March (Shidare or Weeping Cherry), to early April (Somei or Tokyo Cherry), and on to late April (Kanzan Cherry). Other trees found here include the majestic <strong>Himalayan cedars</strong>, which soar above the rest of the trees in the park, tulip trees, cypresses, and plane trees, which were first planted in Japan in the Imperial Gardens.</p> <p>Horticulture work has been going on in the greenhouses in the garden since 1892. The present greenhouse, built in the 1950s has a stock of over 1,700 tropical and subtropical plant species on permanent display.</p> <p>You may also like our <a href=\\"https://test.frontity.io/banff-national-park/\\">post about the Banff National Park</a> in Canada.</p> <p>Source: <a href=\\"https://en.wikipedia.org/wiki/Shinjuku_Gyoen\\">Shinjuku Gyoen</a>. Photo: Shinjuku Gyoen National Garden by <a href=\\"https://flic.kr/p/5H2sDW\\">Hiroshiykw</a>. Tags: <a href=\\"https://test.frontity.io/tag/japan\\">Japan</a>, <a href=\\"https://test.frontity.io/tag/tokyo/\\">Tokyo</a>, <a href=\\"https://test.frontity.io/tag/national-garden/\\">National Garden</a></p> <p><a href=\\"https://test.frontity.io/about-us/\\">About us</a>.</p> <a>aaa</a>",
-      },
-      "content_media": Array [
-        77,
-      ],
-      "custom_fields": Object {
-        "_adinserter_block_exceptions": Array [
-          "",
-        ],
-        "_edit_last": Array [
-          "2",
-        ],
-        "_edit_lock": Array [
-          "1549550575:4",
-        ],
-        "_encloseme": Array [
-          "1",
-          "1",
-        ],
-        "_pingme": Array [
-          "1",
-          "1",
-        ],
-        "_yoast_wpseo_content_score": Array [
-          "60",
-        ],
-        "_yoast_wpseo_primary_category": Array [
-          "",
-        ],
-        "onesignal_meta_box_present": Array [
-          "1",
-        ],
-        "onesignal_send_notification": Array [
-          "",
-        ],
-      },
-      "date": "2016-10-25T18:25:24",
-      "date_gmt": "2016-10-25T16:25:24",
-      "excerpt": Object {
-        "protected": false,
-        "rendered": "<p>Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan.</p>
-",
-        "text": "Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan.
-",
-      },
-      "featured_media": 0,
-      "format": "standard",
-      "guid": Object {
-        "rendered": "https://test.frontity.io/?p=57",
-      },
-      "id": 57,
-      "latest": Array [
-        "post",
-      ],
-      "link": "/2016/shinjuku-gyoen-national-garden/",
-      "meta": Array [],
-      "modified": "2018-11-23T14:45:04",
-      "modified_gmt": "2018-11-23T12:45:04",
-      "ping_status": "open",
-      "slug": "shinjuku-gyoen-national-garden",
-      "status": "publish",
-      "sticky": false,
-      "tags": Array [
-        15,
-        16,
-        14,
-      ],
-      "template": "",
-      "title": Object {
-        "rendered": "Shinjuku Gyoen National Garden",
-        "text": "Shinjuku Gyoen National Garden",
-      },
+      "featured_media": 2,
+      "id": 2,
+      "link": "/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
       "type": "post",
-      "yoast_meta": Object {
-        "title": "Shinjuku Gyoen National Garden - Frontity Test - Just wanted to make the title longer",
+    },
+    "3": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          3,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
       },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 3,
+      "id": 3,
+      "link": "/post-3/",
+      "slug": "post-3",
+      "tags": Array [],
+      "type": "post",
     },
   },
   "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
-  "tag": Object {
-    "13": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/13",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=13",
-          },
-        ],
-      },
-      "id": 13,
-      "link": "/tag/nature/",
-      "name": "Nature",
-      "slug": "nature",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Nature Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "14": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/14",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=14",
-          },
-        ],
-      },
-      "id": 14,
-      "link": "/tag/tokyo/",
-      "name": "Tokyo",
-      "slug": "tokyo",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Tokyo Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "15": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/15",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=15",
-          },
-        ],
-      },
-      "id": 15,
-      "link": "/tag/japan/",
-      "name": "Japan",
-      "slug": "japan",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Japan Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "16": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/16",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=16",
-          },
-        ],
-      },
-      "id": 16,
-      "link": "/tag/national-garden/",
-      "name": "National Garden",
-      "slug": "national-garden",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "National Garden Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "18": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/18",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=18",
-          },
-        ],
-      },
-      "id": 18,
-      "link": "/tag/antelope-canyon/",
-      "name": "Antelope Canyon",
-      "slug": "antelope-canyon",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Antelope Canyon Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "19": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/19",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=19",
-          },
-        ],
-      },
-      "id": 19,
-      "link": "/tag/arizona/",
-      "name": "Arizona",
-      "slug": "arizona",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Arizona Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-  },
+  "tag": Object {},
   "tagBase": "",
 }
 `;
@@ -3344,13 +579,18 @@ Continue reading “Antelope Canyon”
 exports[`populate transforms links if subdirectory is specified 1`] = `
 Array [
   Object {
-    "id": 57,
-    "link": "/blog/2016/shinjuku-gyoen-national-garden/",
+    "id": 1,
+    "link": "/blog/post-1/",
     "type": "post",
   },
   Object {
-    "id": 54,
-    "link": "/blog/2016/lower-antelope-canyon/",
+    "id": 2,
+    "link": "/blog/post-2/",
+    "type": "post",
+  },
+  Object {
+    "id": 3,
+    "link": "/blog/post-3/",
     "type": "post",
   },
 ]
@@ -3360,1556 +600,182 @@ exports[`populate transforms links if subdirectory is specified 2`] = `
 Object {
   "api": "https://test.frontity.io/subdirectory/wp-json",
   "attachment": Object {
-    "55": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=55",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/55",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=55",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=55",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "canyon",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2016-11-25T18:14:19",
-      "id": 55,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/blog/2016/lower-antelope-canyon/canyon/",
-      "media_details": Object {
-        "file": "2016/11/canyon.jpg",
-        "height": 2048,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "canyon.jpg",
-            "height": 2048,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon.jpg",
-            "width": 3072,
-          },
-          "large": Object {
-            "file": "canyon-1024x683.jpg",
-            "height": 683,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-1024x683.jpg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "canyon-300x200.jpg",
-            "height": 200,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-300x200.jpg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "canyon-768x512.jpg",
-            "height": 512,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-768x512.jpg",
-            "width": 768,
-          },
-          "post-thumbnail": Object {
-            "file": "canyon-1200x800.jpg",
-            "height": 800,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-1200x800.jpg",
-            "width": 1200,
-          },
-          "thumbnail": Object {
-            "file": "canyon-150x150.jpg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-150x150.jpg",
-            "width": 150,
-          },
-        },
-        "width": 3072,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "canyon",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon.jpg",
-      "title": Object {
-        "rendered": "canyon",
-        "text": "canyon",
-      },
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/blog/post-1/attachment-1/",
+      "slug": "attachment-1",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "77": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=77",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/77",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=77",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=77",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "Shinjuku Gyoen",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2017-01-11T17:28:38",
-      "id": 77,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/blog/2016/shinjuku-gyoen-national-garden/shinjukugyoen/",
-      "media_details": Object {
-        "file": "2016/11/ShinjukuGyoen.jpg",
-        "height": 680,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "ShinjukuGyoen.jpg",
-            "height": 680,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg",
-            "width": 1024,
-          },
-          "large": Object {
-            "file": "ShinjukuGyoen-1024x680.jpg",
-            "height": 680,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-1024x680.jpg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "ShinjukuGyoen-300x199.jpg",
-            "height": 199,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-300x199.jpg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "ShinjukuGyoen-768x510.jpg",
-            "height": 510,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-768x510.jpg",
-            "width": 768,
-          },
-          "thumbnail": Object {
-            "file": "ShinjukuGyoen-150x150.jpg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-150x150.jpg",
-            "width": 150,
-          },
-        },
-        "width": 1024,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "shinjukugyoen",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg",
-      "title": Object {
-        "rendered": "shinjukugyoen",
-        "text": "shinjukugyoen",
-      },
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/blog/post-2/attachment-2/",
+      "slug": "attachment-2",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "shinjukugyoen - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "80": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
-          },
-        ],
-        "author": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=80",
-          },
-        ],
-        "self": Array [
-          Object {
-            "attributes": Array [],
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/80",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "attributes": Object {
-              "embeddable": true,
-              "taxonomy": "latest",
-            },
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=80",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?attachment=80",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "alt_text": "canyon",
-      "author": 2,
-      "caption": Object {
-        "rendered": "",
-      },
-      "content_media": Array [],
-      "date": "2017-01-11T17:43:21",
-      "id": 80,
-      "latest": Array [
-        "attachment",
-      ],
-      "link": "/blog/2016/lower-antelope-canyon/pexels-photo-94807/",
-      "media_details": Object {
-        "file": "2016/11/pexels-photo-94807.jpeg",
-        "height": 853,
-        "image_meta": Object {
-          "aperture": "0",
-          "camera": "",
-          "caption": "",
-          "copyright": "",
-          "created_timestamp": "0",
-          "credit": "",
-          "focal_length": "0",
-          "iso": "0",
-          "keywords": Array [],
-          "orientation": "0",
-          "shutter_speed": "0",
-          "title": "",
-        },
-        "sizes": Object {
-          "full": Object {
-            "file": "pexels-photo-94807.jpeg",
-            "height": 853,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg",
-            "width": 1280,
-          },
-          "large": Object {
-            "file": "pexels-photo-94807-1024x682.jpeg",
-            "height": 682,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg",
-            "width": 1024,
-          },
-          "medium": Object {
-            "file": "pexels-photo-94807-300x200.jpeg",
-            "height": 200,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-300x200.jpeg",
-            "width": 300,
-          },
-          "medium_large": Object {
-            "file": "pexels-photo-94807-768x512.jpeg",
-            "height": 512,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-768x512.jpeg",
-            "width": 768,
-          },
-          "post-thumbnail": Object {
-            "file": "pexels-photo-94807-1200x800.jpeg",
-            "height": 800,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1200x800.jpeg",
-            "width": 1200,
-          },
-          "thumbnail": Object {
-            "file": "pexels-photo-94807-150x150.jpeg",
-            "height": 150,
-            "mime_type": "image/jpeg",
-            "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-150x150.jpeg",
-            "width": 150,
-          },
-        },
-        "width": 1280,
-      },
-      "media_type": "image",
-      "mime_type": "image/jpeg",
-      "slug": "pexels-photo-94807",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg",
-      "title": Object {
-        "rendered": "canyon",
-        "text": "canyon",
-      },
+    "3": Object {
+      "author": 1,
+      "id": 3,
+      "link": "/blog/post-3/attachment-3/",
+      "slug": "attachment-3",
       "type": "attachment",
-      "yoast_meta": Object {
-        "title": "canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
   },
   "author": Object {
     "1": Object {
-      "_links": Object {
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/1",
-          },
-        ],
-      },
-      "avatar_urls": Object {
-        "24": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=24&d=mm&r=g",
-        "48": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=48&d=mm&r=g",
-        "96": "https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
-      },
-      "description": "",
       "id": 1,
-      "link": "/blog/author/luisherranz/",
-      "name": "luisherranz",
-      "slug": "luisherranz",
-      "url": "",
-    },
-    "2": Object {
-      "_links": Object {
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-      },
-      "avatar_urls": Object {
-        "24": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=24&d=mm&r=g",
-        "48": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=48&d=mm&r=g",
-        "96": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=96&d=mm&r=g",
-      },
-      "description": "",
-      "id": 2,
-      "link": "/blog/author/mario/",
-      "name": "Mario Santos",
-      "slug": "mario",
-      "url": "",
+      "link": "/blog/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
     },
   },
   "category": Object {
-    "3": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/3",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=3",
-          },
-        ],
-      },
-      "id": 3,
-      "link": "/blog/category/photography/",
-      "name": "Photography",
-      "slug": "photography",
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/blog/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
       "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "56": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/56",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=56",
-          },
-        ],
-      },
-      "id": 56,
-      "link": "/blog/category/news/",
-      "name": "News",
-      "slug": "news",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "57": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/57",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=57",
-          },
-        ],
-      },
-      "id": 57,
-      "link": "/blog/category/inspiring-stories/",
-      "name": "Inspiring Stories",
-      "slug": "inspiring-stories",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "58": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/58",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=58",
-          },
-        ],
-      },
-      "id": 58,
-      "link": "/blog/category/voices-and-views/",
-      "name": "Voices and Views",
-      "slug": "voices-and-views",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "59": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/59",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=59",
-          },
-        ],
-      },
-      "id": 59,
-      "link": "/blog/category/lifestyle/",
-      "name": "Lifestyle",
-      "slug": "lifestyle",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "7": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/7",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=7",
-          },
-        ],
-      },
-      "id": 7,
-      "link": "/blog/category/nature/",
-      "name": "Nature",
-      "slug": "nature",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
-    },
-    "8": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/8",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=8",
-          },
-        ],
-      },
-      "id": 8,
-      "link": "/blog/category/travel/",
-      "name": "Travel",
-      "slug": "travel",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "",
-      },
     },
   },
   "categoryBase": "",
   "data": Object {
-    "/blog/": Object {
-      "id": "post",
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "latest",
-    },
-    "/blog/2016/lower-antelope-canyon/": Object {
-      "id": 54,
-      "isFetching": false,
-      "isReady": false,
-      "type": "post",
-    },
-    "/blog/2016/lower-antelope-canyon/canyon/": Object {
-      "id": 55,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/blog/2016/lower-antelope-canyon/pexels-photo-94807/": Object {
-      "id": 80,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/blog/2016/shinjuku-gyoen-national-garden/": Object {
-      "id": 57,
-      "isFetching": false,
-      "isReady": false,
-      "type": "post",
-    },
-    "/blog/2016/shinjuku-gyoen-national-garden/shinjukugyoen/": Object {
-      "id": 77,
-      "isFetching": false,
-      "isReady": false,
-      "type": "attachment",
-    },
-    "/blog/author/luisherranz/": Object {
+    "/blog/author/author-1/": Object {
       "id": 1,
       "isFetching": false,
       "isReady": false,
     },
-    "/blog/author/mario/": Object {
+    "/blog/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "category",
+    },
+    "/blog/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/blog/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/blog/post-2/": Object {
       "id": 2,
       "isFetching": false,
       "isReady": false,
+      "type": "post",
     },
-    "/blog/category/inspiring-stories/": Object {
-      "id": 57,
+    "/blog/post-2/attachment-2/": Object {
+      "id": 2,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
+      "type": "attachment",
     },
-    "/blog/category/lifestyle/": Object {
-      "id": 59,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/blog/category/nature/": Object {
-      "id": 7,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/blog/category/news/": Object {
-      "id": 56,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/blog/category/photography/": Object {
+    "/blog/post-3/": Object {
       "id": 3,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
+      "type": "post",
     },
-    "/blog/category/travel/": Object {
-      "id": 8,
+    "/blog/post-3/attachment-3/": Object {
+      "id": 3,
       "isFetching": false,
       "isReady": false,
-      "taxonomy": "category",
-    },
-    "/blog/category/voices-and-views/": Object {
-      "id": 58,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "category",
-    },
-    "/blog/tag/antelope-canyon/": Object {
-      "id": 18,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/blog/tag/arizona/": Object {
-      "id": 19,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/blog/tag/japan/": Object {
-      "id": 15,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/blog/tag/national-garden/": Object {
-      "id": 16,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/blog/tag/nature/": Object {
-      "id": 13,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
-    },
-    "/blog/tag/tokyo/": Object {
-      "id": 14,
-      "isFetching": false,
-      "isReady": false,
-      "taxonomy": "tag",
+      "type": "attachment",
     },
   },
   "get": [Function],
   "homepage": "",
   "isWpCom": false,
-  "latest": Object {
-    "post": Object {
-      "count": 64,
-      "custom_analytics": Object {
-        "dimension6": "Test",
-      },
-      "id": "post",
-      "link": "/blog/",
-      "name": "Frontity Test - Just wanted to make the title longer",
-      "slug": "post",
-      "taxonomy": "latest",
-      "yoast_meta": Object {
-        "title": "Frontity Test - Just wanted to make the title longer - Not just another Wordpress site. This is a place to test development and check possible bugs. Are we writing to make this description longer? Yes, we are writing to make this description longer to test :)",
-      },
-    },
-  },
   "page": Object {},
   "params": Object {},
   "post": Object {
-    "54": Object {
+    "1": Object {
       "_embedded": Object {
         "author": Array [
           1,
         ],
-        "wp:contentmedia": Array [
-          Array [
-            80,
-          ],
-        ],
         "wp:featuredmedia": Array [
-          55,
+          1,
         ],
         "wp:term": Array [
           Array [
-            57,
-            59,
-            7,
-            56,
-            3,
-            8,
-            58,
+            1,
           ],
-          Array [
-            18,
-            19,
-            13,
-          ],
-          Array [
-            "post",
-          ],
-        ],
-      },
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
-          },
-        ],
-        "author": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/1",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "predecessor-version": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54/revisions/324",
-            "id": 324,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=54",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54",
-          },
-        ],
-        "version-history": Array [
-          Object {
-            "count": 6,
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54/revisions",
-          },
-        ],
-        "wp:attachment": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=54",
-          },
-        ],
-        "wp:contentmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?include=80&per_page=1",
-          },
-        ],
-        "wp:featuredmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/55",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=54",
-            "taxonomy": "category",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=54",
-            "taxonomy": "post_tag",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?post=54",
-            "taxonomy": "latest",
-          },
         ],
       },
       "author": 1,
       "categories": Array [
-        57,
-        59,
-        7,
-        56,
-        3,
-        8,
-        58,
+        1,
       ],
-      "comment_status": "open",
-      "content": Object {
-        "protected": false,
-        "rendered": "<blockquote><p>“Travel is the only thing you buy that makes you richer.” – Anonymous</p></blockquote> <p>Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes <strong>two separate, scenic slot canyon sections</strong>, referred to individually as “<a href=\\"https://en.wikipedia.org/wiki/Antelope_Canyon#Upper_Antelope_Canyon\\" rel=\\"noopener\\">Upper Antelope Canyon</a>” or “The Crack”; and “Antelope Canyon” or “The Corkscrew”.</p>  <p>The Navajo name for Upper Antelope Canyon is Tsé bighánílíní, which means <strong><em>“the place where water runs through rocks.”</em></strong> Lower Antelope Canyon is Hazdistazí (advertised as “Hasdestwazi” by the Navajo Parks and Recreation Department), or “spiral rock arches.” Both are located within the LeChee Chapter of the Navajo Nation</p> <h3><strong>Lower Antelope Canyon</strong></h3> <p>Lower Antelope Canyon, called Hazdistazí, or “spiral rock arches” by the Navajo Indians, are located a few miles away. Prior to the installation of metal stairways, visiting the canyon required climbing along pre-installed ladders in certain areas. Even following the installation of stairways, it is a more difficult hike than Upper Antelope. It is longer, narrower in spots, and even footing is not available in all areas. At the end, the climb out requires several flights of stairs.</p>  <p><img class=\\"alignnone wp-image-80 size-large\\" src=\\"https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg\\" alt=\\"canyon\\" width=\\"840\\" height=\\"559\\" srcset=\\"https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1024x682.jpeg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-300x200.jpeg 300w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-768x512.jpeg 768w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807-1200x800.jpeg 1200w, https://test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg 1280w\\" sizes=\\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\\" data-attachment-id=\\"80\\" data-attachment-id-source=\\"wp-image-class\\"></p> <p>Despite these limitations, Lower Antelope Canyon draws a considerable number of photographers, though casual sightseers are much less common there than in Upper.</p> <p>The lower canyon is in the shape of a “V” and shallower than the Upper Antelope. Lighting is better in the early hours and late morning.</p> <p>Source: <a href=\\"https://en.wikipedia.org/wiki/Antelope_Canyon\\">Antelope Canyon</a>.</p> <a>aaa</a>",
-      },
-      "content_media": Array [
-        80,
-      ],
-      "custom_fields": Object {
-        "_adinserter_block_exceptions": Array [
-          "",
-        ],
-        "_edit_last": Array [
-          "2",
-        ],
-        "_edit_lock": Array [
-          "1544623939:1",
-        ],
-        "_encloseme": Array [
-          "1",
-        ],
-        "_pingme": Array [
-          "1",
-        ],
-        "_thumbnail_id": Array [
-          "55",
-        ],
-        "_yoast_wpseo_content_score": Array [
-          "60",
-        ],
-        "_yoast_wpseo_primary_category": Array [
-          "",
-        ],
-        "onesignal_meta_box_present": Array [
-          "1",
-        ],
-        "onesignal_send_notification": Array [
-          "",
-        ],
-      },
-      "date": "2016-10-25T18:14:29",
-      "date_gmt": "2016-10-25T16:14:29",
-      "excerpt": Object {
-        "protected": false,
-        "rendered": "<p>“Travel is the only thing you buy that makes you richer.” – Anonymous Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes two separate, scenic slot canyon sections, referred to individually as &#8220;Upper Antelope Canyon&#8221; or &#8220;The Crack&#8221;; and &#8220;Antelope Canyon&#8221; &hellip; </p>
-<p class=\\"link-more\\"><a href=\\"https://test.frontity.io/2016/lower-antelope-canyon/\\" class=\\"more-link\\">Continue reading<span class=\\"screen-reader-text\\"> &#8220;Antelope Canyon&#8221;</span></a></p>
-",
-        "text": "“Travel is the only thing you buy that makes you richer.” – Anonymous Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes two separate, scenic slot canyon sections, referred to individually as “Upper Antelope Canyon” or “The Crack”; and “Antelope Canyon” … 
-Continue reading “Antelope Canyon”
-",
-      },
-      "featured_media": 55,
-      "format": "standard",
-      "guid": Object {
-        "rendered": "https://test.frontity.io/?p=54",
-      },
-      "id": 54,
-      "latest": Array [
-        "post",
-      ],
-      "link": "/blog/2016/lower-antelope-canyon/",
-      "meta": Array [],
-      "modified": "2018-11-23T14:45:11",
-      "modified_gmt": "2018-11-23T12:45:11",
-      "ping_status": "open",
-      "slug": "lower-antelope-canyon",
-      "status": "publish",
-      "sticky": false,
-      "tags": Array [
-        18,
-        19,
-        13,
-      ],
-      "template": "",
-      "title": Object {
-        "rendered": "Antelope Canyon",
-        "text": "Antelope Canyon",
-      },
+      "featured_media": 1,
+      "id": 1,
+      "link": "/blog/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
       "type": "post",
-      "yoast_meta": Object {
-        "title": "Antelope Canyon - Frontity Test - Just wanted to make the title longer",
-      },
     },
-    "57": Object {
+    "2": Object {
       "_embedded": Object {
         "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
           2,
         ],
-        "wp:contentmedia": Array [
-          Array [
-            77,
-          ],
-        ],
         "wp:term": Array [
           Array [
-            57,
-            59,
-            7,
-            56,
-            3,
-            58,
-          ],
-          Array [
-            15,
-            16,
-            14,
-          ],
-          Array [
-            "post",
+            1,
           ],
         ],
       },
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
-          },
-        ],
-        "author": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "predecessor-version": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57/revisions/207",
-            "id": 207,
-          },
-        ],
-        "replies": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=57",
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57",
-          },
-        ],
-        "version-history": Array [
-          Object {
-            "count": 8,
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/57/revisions",
-          },
-        ],
-        "wp:attachment": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=57",
-          },
-        ],
-        "wp:contentmedia": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?include=77&per_page=1",
-          },
-        ],
-        "wp:term": Array [
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=57",
-            "taxonomy": "category",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=57",
-            "taxonomy": "post_tag",
-          },
-          Object {
-            "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/latest?post=57",
-            "taxonomy": "latest",
-          },
-        ],
-      },
-      "author": 2,
+      "author": 1,
       "categories": Array [
-        57,
-        59,
-        7,
-        56,
-        3,
-        58,
+        1,
       ],
-      "comment_status": "open",
-      "content": Object {
-        "protected": false,
-        "rendered": "<p>Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan. It is now a park under the jurisdiction of the national Ministry of the Environment.</p> <p>The shogun bequeathed this land to Lord Naitō (daimyo) of Tsuruga in the Edo period who completed a garden here in 1772. After the <a href=\\"https://en.wikipedia.org/wiki/Meiji_Restoration\\">Meiji Restoration</a> the house and its grounds were converted into an experimental agricultural centre. It then became a botanical garden before becoming an imperial garden in 1879. The current configuration of the garden was completed in 1906. <strong>Most of the garden was destroyed</strong> by air raids in 1945, during the later stages of World War II. The garden was rebuilt after the war.</p> <h2>More than 20,000 trees</h2> <figure id=\\"attachment_77\\" style=\\"width:840px;\\" class=\\"wp-caption alignnone\\"><a href=\\"https://flic.kr/p/5H2sDW\\"><img class=\\"wp-image-77 size-large\\" src=\\"https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-1024x680.jpg\\" alt=\\"Shinjuku Gyoen\\" width=\\"840\\" height=\\"558\\" srcset=\\"https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen.jpg 1024w, https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-300x199.jpg 300w, https://test.frontity.io/wp-content/uploads/2016/11/ShinjukuGyoen-768x510.jpg 768w\\" sizes=\\"(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px\\" data-attachment-id=\\"77\\" data-attachment-id-source=\\"wp-image-class\\"></a><figcaption class=\\"wp-caption-text\\">Shinjuku Gyoen National Garden by Hiroshiykw.</figcaption></figure>  <p>The garden has more than 20,000 trees, including approximately 1,500 cherry trees which bloom from late March (Shidare or Weeping Cherry), to early April (Somei or Tokyo Cherry), and on to late April (Kanzan Cherry). Other trees found here include the majestic <strong>Himalayan cedars</strong>, which soar above the rest of the trees in the park, tulip trees, cypresses, and plane trees, which were first planted in Japan in the Imperial Gardens.</p> <p>Horticulture work has been going on in the greenhouses in the garden since 1892. The present greenhouse, built in the 1950s has a stock of over 1,700 tropical and subtropical plant species on permanent display.</p> <p>You may also like our <a href=\\"https://test.frontity.io/banff-national-park/\\">post about the Banff National Park</a> in Canada.</p> <p>Source: <a href=\\"https://en.wikipedia.org/wiki/Shinjuku_Gyoen\\">Shinjuku Gyoen</a>. Photo: Shinjuku Gyoen National Garden by <a href=\\"https://flic.kr/p/5H2sDW\\">Hiroshiykw</a>. Tags: <a href=\\"https://test.frontity.io/tag/japan\\">Japan</a>, <a href=\\"https://test.frontity.io/tag/tokyo/\\">Tokyo</a>, <a href=\\"https://test.frontity.io/tag/national-garden/\\">National Garden</a></p> <p><a href=\\"https://test.frontity.io/about-us/\\">About us</a>.</p> <a>aaa</a>",
-      },
-      "content_media": Array [
-        77,
-      ],
-      "custom_fields": Object {
-        "_adinserter_block_exceptions": Array [
-          "",
-        ],
-        "_edit_last": Array [
-          "2",
-        ],
-        "_edit_lock": Array [
-          "1549550575:4",
-        ],
-        "_encloseme": Array [
-          "1",
-          "1",
-        ],
-        "_pingme": Array [
-          "1",
-          "1",
-        ],
-        "_yoast_wpseo_content_score": Array [
-          "60",
-        ],
-        "_yoast_wpseo_primary_category": Array [
-          "",
-        ],
-        "onesignal_meta_box_present": Array [
-          "1",
-        ],
-        "onesignal_send_notification": Array [
-          "",
-        ],
-      },
-      "date": "2016-10-25T18:25:24",
-      "date_gmt": "2016-10-25T16:25:24",
-      "excerpt": Object {
-        "protected": false,
-        "rendered": "<p>Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan.</p>
-",
-        "text": "Shinjuku Gyoen National Garden (新宿御苑 Shinjuku Gyoen) is a large park with an eminent garden in Shinjuku and Shibuya, Tokyo, Japan. It was originally a residence of the Naitō family in the Edo period. Afterwards, it became a garden under the management of the Imperial Household Agency of Japan.
-",
-      },
-      "featured_media": 0,
-      "format": "standard",
-      "guid": Object {
-        "rendered": "https://test.frontity.io/?p=57",
-      },
-      "id": 57,
-      "latest": Array [
-        "post",
-      ],
-      "link": "/blog/2016/shinjuku-gyoen-national-garden/",
-      "meta": Array [],
-      "modified": "2018-11-23T14:45:04",
-      "modified_gmt": "2018-11-23T12:45:04",
-      "ping_status": "open",
-      "slug": "shinjuku-gyoen-national-garden",
-      "status": "publish",
-      "sticky": false,
-      "tags": Array [
-        15,
-        16,
-        14,
-      ],
-      "template": "",
-      "title": Object {
-        "rendered": "Shinjuku Gyoen National Garden",
-        "text": "Shinjuku Gyoen National Garden",
-      },
+      "featured_media": 2,
+      "id": 2,
+      "link": "/blog/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
       "type": "post",
-      "yoast_meta": Object {
-        "title": "Shinjuku Gyoen National Garden - Frontity Test - Just wanted to make the title longer",
+    },
+    "3": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          3,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
       },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 3,
+      "id": 3,
+      "link": "/blog/post-3/",
+      "slug": "post-3",
+      "tags": Array [],
+      "type": "post",
     },
   },
   "postEndpoint": "posts",
   "postsPage": "",
   "subdirectory": "",
-  "tag": Object {
-    "13": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/13",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=13",
-          },
-        ],
-      },
-      "id": 13,
-      "link": "/blog/tag/nature/",
-      "name": "Nature",
-      "slug": "nature",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Nature Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "14": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/14",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=14",
-          },
-        ],
-      },
-      "id": 14,
-      "link": "/blog/tag/tokyo/",
-      "name": "Tokyo",
-      "slug": "tokyo",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Tokyo Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "15": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/15",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=15",
-          },
-        ],
-      },
-      "id": 15,
-      "link": "/blog/tag/japan/",
-      "name": "Japan",
-      "slug": "japan",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Japan Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "16": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/16",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=16",
-          },
-        ],
-      },
-      "id": 16,
-      "link": "/blog/tag/national-garden/",
-      "name": "National Garden",
-      "slug": "national-garden",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "National Garden Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "18": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/18",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=18",
-          },
-        ],
-      },
-      "id": 18,
-      "link": "/blog/tag/antelope-canyon/",
-      "name": "Antelope Canyon",
-      "slug": "antelope-canyon",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Antelope Canyon Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-    "19": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/19",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=19",
-          },
-        ],
-      },
-      "id": 19,
-      "link": "/blog/tag/arizona/",
-      "name": "Arizona",
-      "slug": "arizona",
-      "taxonomy": "tag",
-      "yoast_meta": Object {
-        "title": "Arizona Archives - Frontity Test - Just wanted to make the title longer",
-      },
-    },
-  },
+  "tag": Object {},
   "tagBase": "",
 }
 `;
