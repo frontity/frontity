@@ -16,14 +16,16 @@ const actions: WpSource["actions"]["source"] = {
     // Get current data object
     const data = source.data[route];
 
-    // return if the data that it's about to be fetched already exists
-    if (data) return;
+    if (!data) {
+      source.data[route] = {
+        isReady: false,
+        isFetching: false
+      };
+    } else if (data.isReady || data.isFetching || data.is404) {
+      return;
+    }
 
-    // init data
-    source.data[route] = {
-      isReady: false,
-      isFetching: true
-    };
+    source.data[route].isFetching = true;
 
     // get and execute the corresponding handler based on path
     try {

@@ -23,6 +23,9 @@ export type Data =
   | AttachmentData;
 
 export type BaseData = {
+  type?: string;
+  id?: number;
+  taxonomy?: string;
   isFetching: boolean;
   isReady: boolean;
   is404?: false;

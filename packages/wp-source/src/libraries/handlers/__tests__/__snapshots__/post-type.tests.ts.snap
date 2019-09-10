@@ -18,11 +18,11 @@ Object {
   "data": Object {
     "/post-1/attachment-1/": Object {
       "id": 1,
+      "isAttachment": true,
       "isFetching": false,
-      "isPage": true,
       "isPostType": true,
       "isReady": true,
-      "type": "page",
+      "type": "attachment",
     },
   },
   "get": [Function],
@@ -56,7 +56,7 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/post-1/attachment-1/": Object {
-      "id": undefined,
+      "id": 1,
       "isAttachment": true,
       "isFetching": false,
       "isPostType": true,
@@ -93,6 +93,11 @@ Object {
   "category": Object {},
   "categoryBase": "",
   "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
     "/page-1/": Object {
       "id": 1,
       "isFetching": false,
@@ -145,6 +150,11 @@ Object {
   "category": Object {},
   "categoryBase": "",
   "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
     "/page-1/": Object {
       "id": 1,
       "isFetching": false,
@@ -205,6 +215,11 @@ Object {
   "category": Object {},
   "categoryBase": "",
   "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
     "/post-1/": Object {
       "id": 1,
       "isFetching": false,
@@ -212,6 +227,18 @@ Object {
       "isPostType": true,
       "isReady": true,
       "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "tag",
     },
   },
   "get": [Function],
@@ -291,6 +318,11 @@ Object {
   "category": Object {},
   "categoryBase": "",
   "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
     "/post-1/": Object {
       "id": 1,
       "isFetching": false,
@@ -298,6 +330,18 @@ Object {
       "isPostType": true,
       "isReady": true,
       "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "tag",
     },
   },
   "get": [Function],
@@ -427,13 +471,30 @@ Object {
     },
   },
   "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
     "/cpt/cpt-11/": Object {
       "id": 11,
+      "isCpt": true,
       "isFetching": false,
-      "isPost": true,
       "isPostType": true,
       "isReady": true,
-      "type": "post",
+      "type": "cpt",
+    },
+    "/cpt/cpt-11/attachment-cpt-11/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "tag",
     },
   },
   "get": [Function],
