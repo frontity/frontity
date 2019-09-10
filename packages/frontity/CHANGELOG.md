@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/frontity/frontity/compare/frontity@1.3.0...frontity@1.3.1) (2019-09-10)
+
+
+### Bug Fixes
+
+* **core:** remove componentWillMount warning with react-helmet-async ([0ea885b](https://github.com/frontity/frontity/commit/0ea885b))
+* **webpack:** add support for images in Windows ([#196](https://github.com/frontity/frontity/issues/196)) ([00aa4e1](https://github.com/frontity/frontity/commit/00aa4e1))
+
+
+
+
+
 # [1.3.0](https://github.com/frontity/frontity/compare/frontity@1.2.2...frontity@1.3.0) (2019-08-12)
 
 

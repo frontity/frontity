@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/frontity/frontity/compare/@frontity/connect@1.0.1...@frontity/connect@1.0.2) (2019-09-10)
+
+
+### Bug Fixes
+
+* **core:** remove componentWillMount warning with react-helmet-async ([0ea885b](https://github.com/frontity/frontity/commit/0ea885b))
+* **wp-source:** properly populate custom post types and taxonomies ([857f803](https://github.com/frontity/frontity/commit/857f803))
+
+
+
+
+
 ## [1.0.1](https://github.com/frontity/frontity/compare/@frontity/connect@1.0.0...@frontity/connect@1.0.1) (2019-06-19)
 
 

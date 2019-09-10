@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.14](https://github.com/frontity/frontity/compare/@frontity/extension-example-1@1.1.13...@frontity/extension-example-1@1.1.14) (2019-09-10)
+
+**Note:** Version bump only for package @frontity/extension-example-1
+
+
+
+
+
 ## [1.1.13](https://github.com/frontity/frontity/compare/@frontity/extension-example-1@1.1.12...@frontity/extension-example-1@1.1.13) (2019-08-12)
 
 **Note:** Version bump only for package @frontity/extension-example-1

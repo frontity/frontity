@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/frontity/frontity/compare/@frontity/components@1.1.10...@frontity/components@1.1.11) (2019-09-10)
+
+
+### Bug Fixes
+
+* **core:** remove componentWillMount warning with react-helmet-async ([0ea885b](https://github.com/frontity/frontity/commit/0ea885b))
+
+
+
+
+
 ## [1.1.10](https://github.com/frontity/frontity/compare/@frontity/components@1.1.9...@frontity/components@1.1.10) (2019-08-14)
 
 
