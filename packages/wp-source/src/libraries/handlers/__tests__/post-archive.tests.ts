@@ -1,4 +1,5 @@
 import { createStore, InitializedStore } from "@frontity/connect";
+import clone from "clone-deep";
 import wpSource from "../../../";
 import WpSource from "../../../../types";
 import Api from "../../api";
@@ -11,7 +12,7 @@ import postsCpt from "./mocks/post-archive/posts-cpt.json";
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(wpSource());
+  store = createStore(clone(wpSource()));
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
