@@ -2,6 +2,7 @@
   "integrationFolder": "e2e/integration",
   "fixturesFolder": "e2e/fixtures",
   "pluginsFile": "e2e/plugins/index.js",
+  "fixturesFolder": "e2e/fixtures",
   "screenshotsFolder": "e2e/screenshots",
   "supportFile": "e2e/support/index.js",
   "videosFolder": "e2e/videos",
