@@ -2,11 +2,11 @@ import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 
 const taxonomyHandler = ({
-  type,
+  taxonomy,
   endpoint,
   postTypeEndpoint
 }: {
-  type: string;
+  taxonomy: string;
   endpoint: string;
   postTypeEndpoint?: string;
 }): Handler => async ({ route, params, state, libraries }) => {
@@ -43,7 +43,7 @@ const taxonomyHandler = ({
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
     throw new Error(
-      `${type} with slug "${params.slug}" doesn't have page ${page}`
+      `${taxonomy} with slug "${params.slug}" doesn't have page ${page}`
     );
 
   // 4. get posts and pages count

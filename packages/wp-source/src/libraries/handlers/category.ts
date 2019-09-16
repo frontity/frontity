@@ -1,6 +1,6 @@
-import taxonomy from "./taxonomy";
+import taxonomyHandler from "./taxonomy";
 
-export default taxonomy({
-  type: "category",
+export default taxonomyHandler({
+  taxonomy: "category",
   endpoint: "categories"
 });

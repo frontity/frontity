@@ -1,6 +1,6 @@
-import taxonomy from "./taxonomy";
+import taxonomyHandler from "./taxonomy";
 
-export default taxonomy({
-  type: "tag",
+export default taxonomyHandler({
+  taxonomy: "tag",
   endpoint: "tags"
 });
