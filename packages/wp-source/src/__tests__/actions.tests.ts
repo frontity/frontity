@@ -1,8 +1,7 @@
 import { createStore, observe } from "@frontity/connect";
+import clone from "clone-deep";
 import wpSource from "../";
 import actions from "../actions";
-
-jest.mock("../");
 
 let handler: jest.Mock;
 const initStore = () => {
@@ -16,7 +15,8 @@ const initStore = () => {
       isReady: false
     });
   });
-  const config = wpSource();
+
+  const config = clone(wpSource());
 
   // add a handler for tests
   config.libraries.source.handlers.push({

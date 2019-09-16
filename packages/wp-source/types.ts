@@ -38,6 +38,16 @@ interface WpSource extends Source {
       postsPage: string;
       postEndpoint: string;
       params: Record<string, any>;
+      postTypes: {
+        type: string;
+        endpoint: string;
+        archive?: string;
+      }[];
+      taxonomies: {
+        taxonomy: string;
+        endpoint: string;
+        postTypeEndpoint?: string;
+      }[];
     };
   };
   actions: {
