@@ -4,8 +4,8 @@ import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
 import {
   postTypeHandler,
-  postTypeArchive,
-  taxonomy as taxonomyHandler
+  postTypeArchiveHandler,
+  taxonomyHandler
 } from "./libraries/handlers";
 
 const actions: WpSource["actions"]["source"] = {
@@ -89,7 +89,7 @@ const actions: WpSource["actions"]["source"] = {
           name: type,
           priority: 10,
           pattern: concatPath(archive),
-          func: postTypeArchive({ type, endpoint })
+          func: postTypeArchiveHandler({ type, endpoint })
         });
     });
 

@@ -1,9 +1,12 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 
-export const postTypeHandler = ({
-  endpoints = ["posts", "pages", "media"]
-}): Handler => async ({ route, params, state, libraries }) => {
+export default ({ endpoints }: { endpoints: string[] }): Handler => async ({
+  route,
+  params,
+  state,
+  libraries
+}) => {
   // Get post from REST API if not found
   if (!state.source.get(route).id) {
     const { slug } = params;
@@ -39,5 +42,3 @@ export const postTypeHandler = ({
     [`is${capitalize(data.type)}`]: true
   });
 };
-
-export default postTypeHandler({});

@@ -1,26 +1,32 @@
-import attachment from "./attachment";
-import postType, { postTypeHandler } from "./postType";
-import post from "./post";
-import page from "./page";
 import author from "./author";
-import category from "./category";
-import tag from "./tag";
-import postArchive from "./postArchive";
-import postTypeArchive from "./postTypeArchive";
 import date from "./date";
-import taxonomy from "./taxonomy";
+import taxonomyHandler from "./taxonomy";
+import postTypeHandler from "./postType";
+import postTypeArchiveHandler from "./postTypeArchive";
 
-export {
-  attachment,
-  postType,
-  postTypeHandler,
-  post,
-  page,
-  author,
-  category,
-  tag,
-  postArchive,
-  postTypeArchive,
-  date,
-  taxonomy
-};
+// Post Types
+export const post = postTypeHandler({ endpoints: ["posts"] });
+export const page = postTypeHandler({ endpoints: ["pages"] });
+export const attachment = postTypeHandler({ endpoints: ["media"] });
+export const postType = postTypeHandler({
+  endpoints: ["posts", "pages", "media"]
+});
+
+// Taxonomies
+export const tag = taxonomyHandler({ taxonomy: "tag", endpoint: "tags" });
+export const category = taxonomyHandler({
+  taxonomy: "category",
+  endpoint: "categories"
+});
+
+// Post Type Archive
+export const postArchive = postTypeArchiveHandler({
+  type: "post",
+  endpoint: "posts"
+});
+
+// Other handlers
+export { author, date };
+
+// Handlers generators
+export { taxonomyHandler, postTypeHandler, postTypeArchiveHandler };
