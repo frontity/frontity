@@ -86,7 +86,7 @@ const actions: WpSource["actions"]["source"] = {
       // Archive
       if (archive)
         handlers.push({
-          name: type,
+          name: `${type} archive`,
           priority: 10,
           pattern: concatPath(archive),
           func: postTypeArchiveHandler({ type, endpoint })
