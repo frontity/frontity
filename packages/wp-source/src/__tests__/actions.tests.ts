@@ -1,48 +1,57 @@
-import { createStore, observe } from "@frontity/connect";
+import { createStore, observe, InitializedStore } from "@frontity/connect";
 import clone from "clone-deep";
 import wpSource from "../";
-import actions from "../actions";
+import WpSource, { Pattern, Handler } from "../../types";
+import * as handlers from "../libraries/handlers";
 
-let handler: jest.Mock;
-const initStore = () => {
-  handler = jest.fn(async ({ route, state }) => {
-    await Promise.resolve();
-    Object.assign(state.source.data[route], {
-      type: "example",
-      id: 1,
-      isPostType: true,
-      isFetching: true,
-      isReady: false
-    });
-  });
+// Create mock for handler generators
+jest.mock("../libraries/handlers");
 
-  const config = clone(wpSource());
+const handlerMocks = handlers as jest.Mocked<typeof handlers>;
+handlerMocks.taxonomyHandler.mockReturnValue(jest.fn());
+handlerMocks.postTypeHandler.mockReturnValue(jest.fn());
+handlerMocks.postTypeArchiveHandler.mockReturnValue(jest.fn());
 
-  // add a handler for tests
-  config.libraries.source.handlers.push({
+let handler: jest.Mocked<Pattern<Handler>>;
+let store: InitializedStore<WpSource>;
+
+beforeEach(() => {
+  // Reset mocks
+  handlerMocks.taxonomyHandler.mockClear();
+  handlerMocks.postTypeHandler.mockClear();
+  handlerMocks.postTypeArchiveHandler.mockClear();
+  // Create a mock handler
+  handler = {
     name: "always",
     priority: 0,
     pattern: "/(.*)",
-    func: handler
-  });
+    func: jest.fn(async ({ route, state }) => {
+      await Promise.resolve();
+      Object.assign(state.source.data[route], {
+        type: "example",
+        id: 1,
+        isPostType: true,
+        isFetching: true,
+        isReady: false
+      });
+    })
+  };
 
-  // replace the mocked fetch by the real one we want to test
-  config.actions.source.fetch = actions.fetch;
-  // replace the mocked init by the real one we want to test
-  config.actions.source.init = actions.init;
-  return createStore(config);
-};
+  // Initialize the store
+  store = createStore(clone(wpSource()));
+
+  // Add mock handler to the store
+  store.libraries.source.handlers.push(handler);
+});
 
 describe("fetch", () => {
   test("should work if data doesn't exist", async () => {
-    const store = initStore();
     await store.actions.source.fetch("/some/route/");
-    expect(handler).toBeCalledTimes(1);
+    expect(handler.func).toBeCalledTimes(1);
     expect(store.state.source.data).toMatchSnapshot();
   });
 
   test("does nothing if data exists", async () => {
-    const store = initStore();
     store.state.source.data["/some/route/"] = {
       type: "example",
       id: 1,
@@ -52,33 +61,30 @@ describe("fetch", () => {
     };
 
     await store.actions.source.fetch("/some/route/");
-    expect(handler).not.toBeCalled();
+    expect(handler.func).not.toBeCalled();
     expect(store.state.source.data).toMatchSnapshot();
   });
 
   test("returns 404 is fetch fails", async () => {
-    const store = initStore();
-    handler.mockRejectedValue("Some error");
+    handler.func.mockRejectedValue("Some error");
     await store.actions.source.fetch("/some/route/");
     expect(store.state.source.data).toMatchSnapshot();
   });
 
   test("should allow to observe 'isReady' properly", done => {
-    const { state, actions } = initStore();
-    expect(state.source.get("/").isReady).toBe(false);
+    expect(store.state.source.get("/").isReady).toBe(false);
     observe(() => {
-      if (state.source.get("/").isReady) done();
+      if (store.state.source.get("/").isReady) done();
     });
-    actions.source.fetch("/");
+    store.actions.source.fetch("/");
   });
 
   test("should allow to observe 'isFetching' properly", done => {
-    const { state, actions } = initStore();
-    expect(state.source.get("/").isFetching).toBe(false);
-    actions.source.fetch("/");
-    expect(state.source.get("/").isFetching).toBe(true);
+    expect(store.state.source.get("/").isFetching).toBe(false);
+    store.actions.source.fetch("/");
+    expect(store.state.source.get("/").isFetching).toBe(true);
     observe(() => {
-      const { isFetching } = state.source.get("/");
+      const { isFetching } = store.state.source.get("/");
       if (!isFetching) done();
     });
   });
@@ -86,35 +92,30 @@ describe("fetch", () => {
 
 describe("init", () => {
   test("should add redirect for the specified homepage", async () => {
-    const store = initStore();
     store.state.source.homepage = "/about-us/";
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 
   test("should add redirect for the specified posts page", async () => {
-    const store = initStore();
     store.state.source.postsPage = "/all-posts/";
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 
   test("should add redirect for categories if 'categoryBase' is set", async () => {
-    const store = initStore();
     store.state.source.categoryBase = "wp-cat";
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 
   test("should add redirect for tags if 'tagBase' is set", async () => {
-    const store = initStore();
     store.state.source.tagBase = "wp-tag";
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
   });
 
   test("should add redirect if 'subirectory' is present", async () => {
-    const store = initStore();
     store.state.source.homepage = "/about-us/";
     store.state.source.postsPage = "/all-posts/";
     store.state.source.categoryBase = "wp-cat";
@@ -122,5 +123,52 @@ describe("init", () => {
     store.state.source.subdirectory = "blog";
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
+  });
+
+  test("should add new handlers from postTypes array", async () => {
+    store.state.source.postTypes.push(
+      {
+        type: "cpt1",
+        endpoint: "cpts1"
+      },
+      {
+        type: "cpt2",
+        endpoint: "cpts2",
+        archive: "cpt2-archive"
+      }
+    );
+
+    await store.actions.source.init();
+
+    expect(store.libraries.source.handlers).toMatchSnapshot();
+    expect(handlerMocks.postTypeHandler.mock.calls).toMatchSnapshot();
+    expect(handlerMocks.postTypeArchiveHandler.mock.calls).toMatchSnapshot();
+  });
+
+  test("should add new handlers from taxonomies array", async () => {
+    store.state.source.taxonomies.push(
+      {
+        taxonomy: "taxonomy1",
+        endpoint: "taxonomies1"
+      },
+      {
+        taxonomy: "taxonomy2",
+        endpoint: "taxonomies2",
+        postTypeEndpoint: "cpt"
+      },
+      {
+        taxonomy: "taxonomy3",
+        endpoint: "taxonomies3",
+        postTypeEndpoint: "multiple-post-type",
+        params: {
+          type: ["posts", "cpts"]
+        }
+      }
+    );
+
+    await store.actions.source.init();
+
+    expect(store.libraries.source.handlers).toMatchSnapshot();
+    expect(handlerMocks.taxonomyHandler.mock.calls).toMatchSnapshot();
   });
 });
