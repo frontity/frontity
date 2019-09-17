@@ -39,7 +39,7 @@ const taxonomyHandler = ({
     }
   });
 
-  // 3. populate response and add page to data
+  // 3. populate response
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
     throw new Error(
