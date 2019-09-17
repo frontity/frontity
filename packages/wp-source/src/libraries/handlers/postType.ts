@@ -1,12 +1,11 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 
-export default ({ endpoints }: { endpoints: string[] }): Handler => async ({
-  route,
-  params,
-  state,
-  libraries
-}) => {
+const postTypeHandler = ({
+  endpoints
+}: {
+  endpoints: string[];
+}): Handler => async ({ route, params, state, libraries }) => {
   // 1. search id in state or get the entity from WP REST API
   if (!state.source.get(route).id) {
     const { slug } = params;
@@ -47,3 +46,5 @@ export default ({ endpoints }: { endpoints: string[] }): Handler => async ({
     [`is${capitalize(data.type)}`]: true
   });
 };
+
+export default postTypeHandler;
