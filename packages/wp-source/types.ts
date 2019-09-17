@@ -47,6 +47,7 @@ interface WpSource extends Source {
         taxonomy: string;
         endpoint: string;
         postTypeEndpoint?: string;
+        params?: Record<string, any>;
       }[];
     };
   };

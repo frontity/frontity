@@ -4,11 +4,13 @@ import capitalize from "./utils/capitalize";
 const taxonomyHandler = ({
   taxonomy,
   endpoint,
-  postTypeEndpoint
+  postTypeEndpoint,
+  params: handlerParams = {}
 }: {
   taxonomy: string;
   endpoint: string;
   postTypeEndpoint?: string;
+  params?: Record<string, any>;
 }): Handler => async ({ route, params, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
@@ -35,7 +37,8 @@ const taxonomyHandler = ({
       search: query.s,
       page,
       _embed: true,
-      ...state.source.params
+      ...state.source.params,
+      ...handlerParams
     }
   });
 
