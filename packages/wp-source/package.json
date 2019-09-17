@@ -37,6 +37,7 @@
     "@frontity/source": "^1.0.13",
     "normalizr": "^3.3.0",
     "path-to-regexp": "^3.0.0",
-    "query-string": "^6.8.3"
+    "query-string": "^6.8.3",
+    "typescript": "3.5.2"
   }
 }

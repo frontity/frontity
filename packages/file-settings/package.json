@@ -29,7 +29,8 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "ramda": "^0.26.1"
+    "ramda": "^0.26.1",
+    "typescript": "3.5.2"
   },
   "devDependencies": {
     "@frontity/types": "^1.1.1",
