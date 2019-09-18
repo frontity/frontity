@@ -16,7 +16,6 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
         `entity from endpoint "users" with slug "${slug}" not found`
       );
     id = entity.id;
-    // Populate author
   }
 
   // 2. fetch the specified page
@@ -31,7 +30,7 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
     }
   });
 
-  // 3. populate response and add page to data
+  // 3. populate response
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
     throw new Error(`author "${slug}" doesn't have page ${page}`);

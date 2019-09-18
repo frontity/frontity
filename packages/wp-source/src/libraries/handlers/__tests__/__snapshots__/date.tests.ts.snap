@@ -184,10 +184,12 @@ Object {
     },
   },
   "postEndpoint": "multiple-post-type",
+  "postTypes": Array [],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
+  "taxonomies": Array [],
 }
 `;
 
@@ -315,10 +317,12 @@ Object {
     },
   },
   "postEndpoint": "posts",
+  "postTypes": Array [],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
+  "taxonomies": Array [],
 }
 `;
 
@@ -495,10 +499,12 @@ Object {
     },
   },
   "postEndpoint": "posts",
+  "postTypes": Array [],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
+  "taxonomies": Array [],
 }
 `;
 
@@ -847,10 +853,12 @@ Object {
     },
   },
   "postEndpoint": "posts",
+  "postTypes": Array [],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
+  "taxonomies": Array [],
 }
 `;
 
@@ -892,9 +900,11 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
+  "postTypes": Array [],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
+  "taxonomies": Array [],
 }
 `;

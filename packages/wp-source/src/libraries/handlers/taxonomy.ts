@@ -3,11 +3,14 @@ import capitalize from "./utils/capitalize";
 
 const taxonomyHandler = ({
   taxonomy,
-  postType
+  endpoint,
+  postTypeEndpoint,
+  params: handlerParams = {}
 }: {
-  taxonomy: { type: string; endpoint: string };
-  postType: { endpoint?: string; param: string };
-  props?: Record<string, string>;
+  taxonomy: string;
+  endpoint: string;
+  postTypeEndpoint?: string;
+  params?: Record<string, any>;
 }): Handler => async ({ route, params, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
@@ -17,7 +20,6 @@ const taxonomyHandler = ({
   if (!id) {
     const { slug } = params;
     // Request entity from WP
-    const { endpoint } = taxonomy;
     const response = await api.get({ endpoint, params: { slug } });
     const [entity] = await populate({ response, state });
     if (!entity)
@@ -29,21 +31,22 @@ const taxonomyHandler = ({
 
   // 2. fetch the specified page
   const response = await api.get({
-    endpoint: postType.endpoint || state.source.postEndpoint,
+    endpoint: postTypeEndpoint || state.source.postEndpoint,
     params: {
-      [postType.param]: id,
+      [endpoint]: id,
       search: query.s,
       page,
       _embed: true,
-      ...state.source.params
+      ...state.source.params,
+      ...handlerParams
     }
   });
 
-  // 3. populate response and add page to data
+  // 3. populate response
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
     throw new Error(
-      `${taxonomy.type} with slug "${params.slug}" doesn't have page ${page}`
+      `${taxonomy} with slug "${params.slug}" doesn't have page ${page}`
     );
 
   // 4. get posts and pages count

@@ -31,7 +31,7 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
     }
   });
 
-  // 3. populate response and add page to data
+  // 3. populate response
   const items = await populate({ response, state });
   if (items.length === 0)
     throw new Error(`date "${path}" doesn't have page ${page}`);

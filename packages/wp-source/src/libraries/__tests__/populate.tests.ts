@@ -8,11 +8,8 @@ import posts from "../handlers/__tests__/mocks/post-archive/posts.json";
 import postsSubdir from "../handlers/__tests__/mocks/post-archive/posts-subdir.json";
 import cpts from "../handlers/__tests__/mocks/cpt-archive/cpts.json";
 
-jest.mock("../");
-
 const initStore = (): InitializedStore<WpSource> => {
-  const config = wpSource();
-  config.state = clone(config.state);
+  const config = clone(wpSource());
   return createStore(config);
 };
 
