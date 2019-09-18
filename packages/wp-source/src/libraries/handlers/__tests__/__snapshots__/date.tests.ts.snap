@@ -8,7 +8,7 @@ Array [
       "params": Object {
         "_embed": true,
         "after": "2019-01-01T00:00:00.000Z",
-        "before": "2019-01-02T00:00:00.000Z",
+        "before": "2018-12-03T00:00:00.000Z",
         "page": 1,
         "search": undefined,
         "type": Array [
@@ -199,7 +199,7 @@ Array [
       "params": Object {
         "_embed": true,
         "after": "2019-01-01T00:00:00.000Z",
-        "before": "2019-01-02T00:00:00.000Z",
+        "before": "2018-12-03T00:00:00.000Z",
         "page": 1,
         "search": undefined,
       },
@@ -330,7 +330,7 @@ Array [
       "params": Object {
         "_embed": true,
         "after": "2019-01-01T00:00:00.000Z",
-        "before": "2019-02-01T00:00:00.000Z",
+        "before": "2018-03-04T00:00:00.000Z",
         "page": 1,
         "search": undefined,
       },
@@ -510,7 +510,7 @@ Array [
       "params": Object {
         "_embed": true,
         "after": "2019-01-01T00:00:00.000Z",
-        "before": "2020-01-01T00:00:00.000Z",
+        "before": "2021-01-01T00:00:00.000Z",
         "page": 1,
         "search": undefined,
       },
@@ -522,7 +522,7 @@ Array [
       "params": Object {
         "_embed": true,
         "after": "2019-01-01T00:00:00.000Z",
-        "before": "2020-01-01T00:00:00.000Z",
+        "before": "2021-01-01T00:00:00.000Z",
         "page": 2,
         "search": undefined,
       },
@@ -862,7 +862,7 @@ Array [
       "params": Object {
         "_embed": true,
         "after": "2020-01-01T00:00:00.000Z",
-        "before": "2021-01-01T00:00:00.000Z",
+        "before": "2022-01-01T00:00:00.000Z",
         "page": 1,
         "search": undefined,
       },
