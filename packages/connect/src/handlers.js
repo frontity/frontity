@@ -1,4 +1,4 @@
-import { observable } from "./observable";
+import { observable, TARGET } from "./observable";
 import { proxyToRaw, rawToProxy, rawToRoot } from "./internals";
 import {
   registerRunningReactionForOperation,
@@ -12,24 +12,31 @@ const wellKnownSymbols = new Set(
     .filter(value => typeof value === "symbol")
 );
 
+const isPrimitive = value =>
+  value == null || (typeof value !== "function" && typeof value !== "object");
+
 // intercept get operations on observables to know which reaction uses their properties
 function get(target, key, receiver) {
+
+  if (key === TARGET) return target;
+  const state = target.state;
+
   // get the root of that target.
-  const root = rawToRoot.get(target);
+  const root = rawToRoot.get(state);
 
   const result =
-    !Array.isArray(target) && typeof target[key] === "function"
+    !Array.isArray(state) && typeof state[key] === "function"
       ? // if it's a function, return the result of that function run with the root.
-        target[key]({ state: rawToProxy.get(root) })
+      state[key]({ state: rawToProxy.get(root) })
       : // if it's not, return the real result.
-        Reflect.get(target, key, receiver);
+      Reflect.get(state, key, receiver);
   // do not register (observable.prop -> reaction) pairs for well known symbols
   // these symbols are frequently retrieved in low level JavaScript under the hood
   if (typeof key === "symbol" && wellKnownSymbols.has(key)) {
     return result;
   }
   // register and save (observable.prop -> runningReaction)
-  registerRunningReactionForOperation({ target, key, receiver, type: "get" });
+  registerRunningReactionForOperation({ state, key, receiver, type: "get" });
   // if we are inside a reaction and observable.prop is an object wrap it in an observable too
   // this is needed to intercept property access on that object too (dynamic observable tree)
   const observableResult = rawToProxy.get(result);
@@ -39,12 +46,12 @@ function get(target, key, receiver) {
     }
     // do not violate the none-configurable none-writable prop get handler invariant
     // fall back to none reactive mode in this case, instead of letting the Proxy throw a TypeError
-    const descriptor = Reflect.getOwnPropertyDescriptor(target, key);
+    const descriptor = Reflect.getOwnPropertyDescriptor(state, key);
     if (
       !descriptor ||
       !(descriptor.writable === false && descriptor.configurable === false)
     ) {
-      return observable(result, root);
+      return observable(result, state.context, `${state.path}.${key}`);
     }
   }
   // otherwise return the observable wrapper if it is already created and cached or the raw object
@@ -52,40 +59,43 @@ function get(target, key, receiver) {
 }
 
 function has(target, key) {
-  const result = Reflect.has(target, key);
+  const state = target.state;
+  const result = Reflect.has(state, key);
   // register and save (observable.prop -> runningReaction)
-  registerRunningReactionForOperation({ target, key, type: "has" });
+  registerRunningReactionForOperation({ state, key, type: "has" });
   return result;
 }
 
 function ownKeys(target) {
-  registerRunningReactionForOperation({ target, type: "iterate" });
-  return Reflect.ownKeys(target);
+  const state = target.state
+  registerRunningReactionForOperation({ state, type: "iterate" });
+  return Reflect.ownKeys(state);
 }
 
 // intercept set operations on observables to know when to trigger reactions
 function set(target, key, value, receiver) {
+  const state = target.state;
   // make sure to do not pollute the raw object with observables
   if (typeof value === "object" && value !== null) {
     value = proxyToRaw.get(value) || value;
   }
   // save if the object had a descriptor for this key
-  const hadKey = hasOwnProperty.call(target, key);
+  const hadKey = hasOwnProperty.call(state, key);
   // save if the value changed because of this set operation
-  const oldValue = target[key];
+  const oldValue = state[key];
   // execute the set operation before running any reaction
-  const result = Reflect.set(target, key, value, receiver);
+  const result = Reflect.set(state, key, value, receiver);
   // do not queue reactions if the target of the operation is not the raw receiver
   // (possible because of prototypal inheritance)
-  if (target !== proxyToRaw.get(receiver)) {
+  if (state !== proxyToRaw.get(receiver)) {
     return result;
   }
   // queue a reaction if it's a new property or its value changed
   if (!hadKey) {
-    queueReactionsForOperation({ target, key, value, receiver, type: "add" });
+    queueReactionsForOperation({ state, key, value, receiver, type: "add" });
   } else if (value !== oldValue) {
     queueReactionsForOperation({
-      target,
+      state,
       key,
       value,
       oldValue,
@@ -93,18 +103,23 @@ function set(target, key, value, receiver) {
       type: "set"
     });
   }
+
+  if (!isPrimitive(value)) {
+    observable(value, target.context, `${target.path}.${key}`);
+  }
   return result;
 }
 
 function deleteProperty(target, key) {
+  const state = target.state;
   // save if the object had the key
-  const hadKey = hasOwnProperty.call(target, key);
-  const oldValue = target[key];
+  const hadKey = hasOwnProperty.call(state, key);
+  const oldValue = state[key];
   // execute the delete operation before running any reaction
-  const result = Reflect.deleteProperty(target, key);
+  const result = Reflect.deleteProperty(state, key);
   // only queue reactions for delete operations which resulted in an actual change
   if (hadKey) {
-    queueReactionsForOperation({ target, key, oldValue, type: "delete" });
+    queueReactionsForOperation({ state, key, oldValue, type: "delete" });
   }
   return result;
 }
