@@ -50,6 +50,7 @@ describe("Image", () => {
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
       loading: "lazy" as "lazy",
+      height: 300,
       state: { frontity: { rendering: "ssr" } }
     };
 
@@ -67,7 +68,25 @@ describe("Image", () => {
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
       loading: "lazy" as "lazy",
+      height: 300,
       state: { frontity: { rendering: "csr" } }
+    };
+
+    const result = TestRenderer.create(<Image {...props} />);
+    expect(result.toJSON()).toMatchSnapshot();
+  });
+
+  test("works with `IntersectionObserver if `height` prop is not specified", () => {
+    (HTMLImageElement as any).prototype.loading = true;
+    mockedUseInView.default.mockReturnValue([false, undefined]);
+
+    const props = {
+      alt: "Some fake alt text",
+      src: "https://fake-src.com/fake-image.jpg",
+      srcSet:
+        "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
+      className: "fake-class-name",
+      loading: "lazy" as "lazy"
     };
 
     const result = TestRenderer.create(<Image {...props} />);
