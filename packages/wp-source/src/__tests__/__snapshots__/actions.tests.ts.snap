@@ -235,6 +235,7 @@ Array [
   Array [
     Object {
       "endpoint": "taxonomies1",
+      "params": undefined,
       "postTypeEndpoint": undefined,
       "taxonomy": "taxonomy1",
     },
@@ -242,6 +243,7 @@ Array [
   Array [
     Object {
       "endpoint": "taxonomies2",
+      "params": undefined,
       "postTypeEndpoint": "cpt",
       "taxonomy": "taxonomy2",
     },
@@ -249,6 +251,12 @@ Array [
   Array [
     Object {
       "endpoint": "taxonomies3",
+      "params": Object {
+        "type": Array [
+          "posts",
+          "cpts",
+        ],
+      },
       "postTypeEndpoint": "multiple-post-type",
       "taxonomy": "taxonomy3",
     },

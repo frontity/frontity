@@ -95,20 +95,17 @@ const actions: WpSource["actions"]["source"] = {
 
     // Add handlers for custom taxonomies
     state.source.taxonomies.forEach(
-      ({
-        taxonomy,
-        endpoint,
-        postTypeEndpoint
-      }: {
-        taxonomy: string;
-        endpoint: string;
-        postTypeEndpoint?: string;
-      }) => {
+      ({ taxonomy, endpoint, postTypeEndpoint, params }) => {
         handlers.push({
           name: taxonomy,
           priority: 10,
           pattern: concatPath(taxonomy, "/(.*)?/:slug"),
-          func: taxonomyHandler({ taxonomy, endpoint, postTypeEndpoint })
+          func: taxonomyHandler({
+            taxonomy,
+            endpoint,
+            postTypeEndpoint,
+            params
+          })
         });
       }
     );
