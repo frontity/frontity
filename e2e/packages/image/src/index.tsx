@@ -1,4 +1,5 @@
 import React from "react";
+import { styled } from "frontity";
 import Image from "@frontity/components/image";
 import Package from "../types";
 
@@ -14,17 +15,32 @@ const props: ImageProps = {
     "https://test.frontity.io/wp-content/uploads/2016/11/Gullfoss-1024x577.jpg 1024w",
     "https://test.frontity.io/wp-content/uploads/2016/11/Gullfoss-1200x676.jpg 1200w",
     "https://test.frontity.io/wp-content/uploads/2016/11/Gullfoss.jpg 2000w"
-  ].join(", "),
-  rootMargin: "string",
-  loading: "lazy",
-  height: 300
+  ].join(", ")
 };
 
 const Root: React.FC = () => (
   <>
-    <Image className="test-image-1" {...props} />
+    <Row>
+      <StyledImg {...props} className="test-image-1" loading="lazy" />
+      <StyledImg
+        {...props}
+        className="test-image-2"
+        loading="lazy"
+        height={100}
+      />
+    </Row>
   </>
 );
+
+const StyledImg = styled(Image)`
+  height: 100%;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+`;
 
 const ImagePackage: Package = {
   name: "image",
