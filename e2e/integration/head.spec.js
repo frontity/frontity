@@ -36,7 +36,7 @@ describe("Head", () => {
   });
 
   it("should be able to have nonscripts", () => {
-    cy.get("noscript").should("contain.text", "foo.csss");
+    cy.get("noscript").should("contain.text", "foo.css");
   });
 
   it("should be able to add inline CSS", () => {
