@@ -18,6 +18,16 @@ const settings: Settings = [
       },
       "fonts"
     ]
+  },
+  {
+    name: "global",
+    packages: [
+      {
+        name: "@frontity/tiny-router",
+        state: { router: { autoFetch: false } }
+      },
+      "global"
+    ]
   }
 ];
 

@@ -15,6 +15,9 @@ const All: React.FC = () => (
   <>
     <Global
       styles={css`
+        .onlyOnAll {
+          color: red;
+        }
         @font-face {
           font-family: "Aclonica";
           font-style: normal;
@@ -126,7 +129,7 @@ const Svg: React.FC = () => (
           font-style: normal;
           font-weight: 400;
           src: local("Aclonica Regular"), local("Aclonica-Regular"),
-            url(${aclonicaSvg + "#Aclonica"}) format("svg");
+            url("${aclonicaSvg + "#Aclonica"}") format("svg");
         }
       `}
     />
