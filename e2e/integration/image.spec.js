@@ -1,48 +1,55 @@
-/* eslint-disable jest/valid-expect */
-/// <reference types="cypress" />
-
 describe("Image (with native lazy-load)", () => {
-  beforeEach(() => {
-    cy.visit("http://localhost:3000?name=image");
-  });
-
-  it("should be showing an image", () => {
-    cy.get(".test-image-1").should(([img]) => {
-      expect(img).to.be.visible;
-      expect(img).to.have.property("alt", "gullfoss");
-      expect(img).to.have.property("loading", "auto");
-    });
-
-    cy.get(".test-image-2").should(([img]) => {
-      expect(img).to.be.visible;
-      expect(img).to.have.property("alt", "gullfoss");
-      expect(img).to.have.property("loading", "lazy");
-    });
-  });
-});
-
-describe("Image (with Intersection Observer)", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000?name=image", {
       onBeforeLoad(win) {
-        // Remove the "loading" prop from the HTMLImageElement prototype
-        Object.defineProperty(win.HTMLImageElement.prototype, "loading", {});
-        delete win.HTMLImageElement.prototype.loading;
+        win.scrollTo(0, 0);
       }
     });
   });
 
-  it("should be showing an image", () => {
-    cy.get(".test-image-1").should("be.visible");
+  it("should show an image with loading=auto if it doesn't have height", () => {
+    cy.get("img:not([height])")
+      .should("be.visible")
+      .should("have.attr", "loading", "auto");
+  });
+
+  it("should show an image with loading=lazy if it has a height", () => {
+    cy.get("img[height]")
+      .should("be.visible")
+      .should("have.attr", "loading", "lazy");
   });
 });
 
-describe("Image (without lazy-load)", () => {
-  beforeEach(() => {
-    cy.visit("http://localhost:3000?name=image");
-  });
+// describe("Image (with Intersection Observer)", () => {
+//   beforeEach(() => {
+//     cy.visit("http://localhost:3000?name=image", {
+//       onBeforeLoad(win) {
+//         // Remove the "loading" prop from the HTMLImageElement prototype
+//         Object.defineProperty(win.HTMLImageElement.prototype, "loading", {});
+//         delete win.HTMLImageElement.prototype.loading;
+//       }
+//     });
+//   });
 
-  it("should be showing an image", () => {
-    cy.get(".test-image-1").should("be.visible");
-  });
-});
+//   it("should show an image with loading=auto if it doesn't have height", () => {
+//     cy.get("img:not([height])")
+//       .should("be.visible")
+//       .should("have.attr", "loading", "auto");
+//   });
+
+//   it("should show an image with loading=lazy if it has a height", () => {
+//     cy.get("img[height]")
+//       .should("be.visible")
+//       .should("have.attr", "loading", "lazy");
+//   });
+// });
+
+// describe("Image (without lazy-load)", () => {
+//   beforeEach(() => {
+//     cy.visit("http://localhost:3000?name=image");
+//   });
+
+//   it("should be showing an image", () => {
+//     cy.get(".test-image-1").should("be.visible");
+//   });
+// });
