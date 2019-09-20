@@ -143,31 +143,6 @@ describe("debugger", () => {
     ]);
   });
 
-  it("should debug clear operations", () => {
-    let dummy;
-    const rawMap = new Map();
-    rawMap.set("key", "value");
-    const map = observable(rawMap);
-    const debugSpy = jest.fn(() => {});
-    observe(() => (dummy = map.get("key")), {
-      debugger: debugSpy
-    });
-
-    expect(dummy).toEqual("value");
-    expect(debugSpy.mock.calls.length).toEqual(1);
-    const oldMap = new Map(rawMap);
-    map.clear();
-    expect(dummy).toEqual(undefined);
-    expect(debugSpy.mock.calls.length).toEqual(3);
-    expect(debugSpy.mock.calls[1]).toEqual([
-      {
-        type: "clear",
-        target: rawMap,
-        oldTarget: oldMap
-      }
-    ]);
-  });
-
   it("should not cause infinite loops", () => {
     let receiverDummy;
     const rawCounter = { num: 0 };
