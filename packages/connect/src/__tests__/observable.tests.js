@@ -84,6 +84,70 @@ describe("observable", () => {
     expect(obs.nested1.prop3(3)).toEqual(4);
     expect(obs.nested1.prop4(2)).toEqual(8);
   });
+
+  it("iterating an object", () => {
+    const obj = { a: "a", b: "b", c: "c" };
+    const obs = observable(obj);
+
+    for (let key in obs) {
+      expect(obs[key]).toEqual(obj[key]);
+    }
+  });
+
+  it("should allow making arrays observable", () => {
+    const arr = [];
+    const obs = observable(arr);
+    expect(isObservable(obs)).toEqual(true);
+  });
+
+  it("should update the observable when adding new properties", () => {
+    const arr = [];
+    const obs = observable(arr);
+
+    obs.push(1);
+    expect(obs[0]).toEqual(1);
+
+    obs.push({ name: "Jon Snow" });
+    expect(isObservable(obs[1])).toEqual(true);
+    expect(obs[1].name).toEqual("Jon Snow");
+  });
+
+  it("should allow iterating array", () => {
+    const arr = [{ name: "a" }, { name: "b" }, { name: "c" }];
+    const obs = observable(arr);
+
+    let i = 0;
+    for (let key of obs) {
+      expect(key).toEqual(arr[i]);
+      i++;
+    }
+  });
+
+  it("length works correctly", () => {
+    const arr = [];
+    const obs = observable(arr);
+
+    expect(obs.length).toEqual(0);
+
+    obs.push("hello");
+    expect(obs.length).toEqual(1);
+  });
+
+  it("state can access the property `state`", () => {
+    const obj = { state: { user: "test" } };
+    const obs = observable(obj);
+
+    expect(obs.state).toEqual(obj.state);
+  });
+
+  it("Object.keys works", () => {
+    const obj = { a: 1, b: 2 };
+    const obs = observable(obj);
+
+    const keys = Object.keys(obs);
+
+    expect(keys).toEqual(["a", "b"]);
+  });
 });
 
 describe("isObservable", () => {
