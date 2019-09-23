@@ -2,7 +2,7 @@ import React from "react";
 
 const Theme = () => (
   <div>
-    You can edit your theme in <code>src/index.js</code>
+    You can edit your theme in <code>packages/empty-theme/src/index.js</code>
   </div>
 );
 
