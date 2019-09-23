@@ -1,8 +1,8 @@
 export default {
-  name: "mars-theme-example",
+  name: "empty-theme-example",
   state: {
     frontity: {
-      url: "https://test.frontity.io",
+      url: "",
       title: "Test Frontity Blog",
       description: "Useful content for Frontity development"
     }
