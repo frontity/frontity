@@ -66,6 +66,8 @@ function deepOverwrite(a, b) {
 
       // If it's an object, we deepOverwrite it again.
     } else {
+      // We have to create a new observable every time we descend again
+      observable(a[key], a); // TODO: get the real root and store it in the Symbol
       deepOverwrite(a[key], b[key]);
     }
   });
@@ -142,6 +144,7 @@ function set(target, key, value, receiver) {
 
   // If both the old value and the new value are objects, deepOverwrite.
   if (isObject(oldValue) && isObject(value)) {
+    observable(Reflect.get(target, key, value, receiver), target);
     deepOverwrite(oldValue, value);
     // TODO: not sure if we can just return `true` here
     return true;

@@ -224,6 +224,38 @@ describe("Test object references", () => {
     expect(proxy.number).toEqual(43);
   });
 
+  test("Nested array", () => {
+    const store = observable({
+      state: {
+        type: ["a"]
+      }
+    });
+
+    const newState = { type: ["b"] };
+    store.state = newState;
+
+    expect(store.state).toEqual(newState);
+  });
+
+  test("Nested object", () => {
+    const store = observable({
+      state: {
+        type: {
+          a: 1
+        }
+      }
+    });
+
+    const newState = {
+      type: {
+        a: 2
+      }
+    };
+    store.state = newState;
+
+    expect(store.state).toEqual(newState);
+  });
+
   test("Proxies correctly reference the current state", () => {
     expect(proxy.user.surname).toBe("Snow");
 
