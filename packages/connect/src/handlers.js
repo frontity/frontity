@@ -12,6 +12,65 @@ const wellKnownSymbols = new Set(
     .filter(value => typeof value === "symbol")
 );
 
+const isObject = val => val != null && typeof val === "object";
+
+const isPrimitive = value =>
+  value == null || (typeof value !== "function" && typeof value !== "object");
+
+function deepOverwrite(a, b) {
+  // Delete the props of a that are not in b.
+  Object.keys(a).forEach(key => {
+    if (typeof b[key] === "undefined") {
+      // save the old value
+      const oldValue = a[key];
+
+      // Delete the key.
+      delete a[key];
+
+      // Trigger a delete reaction.
+      queueReactionsForOperation({
+        target: a,
+        key,
+        oldValue,
+        type: "delete"
+      });
+    }
+  });
+
+  Object.keys(b).forEach(key => {
+    // If that key doesn't exist, we add it.
+    if (typeof a[key] === "undefined") {
+      a[key] = b[key];
+      queueReactionsForOperation({
+        target: a,
+        key,
+        value: b[key],
+        type: "add"
+      });
+    } else if (isPrimitive(b[key])) {
+      // only update the value and trigger a reaction if the
+      // new value differs from the old one
+      if (a[key] !== b[key]) {
+        // save the old value
+        const oldValue = a[key];
+
+        a[key] = b[key];
+        queueReactionsForOperation({
+          target: a,
+          key,
+          value: b[key],
+          oldValue,
+          type: "set"
+        });
+      }
+
+      // If it's an object, we deepOverwrite it again.
+    } else {
+      deepOverwrite(a[key], b[key]);
+    }
+  });
+}
+
 // intercept get operations on observables to know which reaction uses their properties
 function get(target, key, receiver) {
   // get the root of that target.
@@ -73,13 +132,24 @@ function set(target, key, value, receiver) {
   const hadKey = hasOwnProperty.call(target, key);
   // save if the value changed because of this set operation
   const oldValue = target[key];
-  // execute the set operation before running any reaction
-  const result = Reflect.set(target, key, value, receiver);
+
   // do not queue reactions if the target of the operation is not the raw receiver
   // (possible because of prototypal inheritance)
   if (target !== proxyToRaw.get(receiver)) {
-    return result;
+    // execute the set operation before running any reaction
+    return Reflect.set(target, key, value, receiver);
   }
+
+  // If both the old value and the new value are objects, deepOverwrite.
+  if (isObject(oldValue) && isObject(value)) {
+    deepOverwrite(oldValue, value);
+    // TODO: not sure if we can just return `true` here
+    return true;
+  }
+
+  // if we're here, the value should not be an object, so we can set it
+  const result = Reflect.set(target, key, value, receiver);
+
   // queue a reaction if it's a new property or its value changed
   if (!hadKey) {
     queueReactionsForOperation({ target, key, value, receiver, type: "add" });

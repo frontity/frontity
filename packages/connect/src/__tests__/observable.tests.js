@@ -183,3 +183,104 @@ describe("raw", () => {
     expect(raw(12)).toEqual(12);
   });
 });
+
+describe("Test object references", () => {
+  const context = {
+    id: 1,
+    action: "action-1",
+    path: "action.action-1",
+    triggeredBy: {
+      type: "component",
+      name: "Post"
+    }
+  };
+
+  let proxy, state;
+  beforeEach(() => {
+    state = {
+      number: 41,
+      allUsers: [{ name: "Jon", surname: "Snow" }],
+      user: {
+        name: "Jon",
+        surname: "Snow",
+        location: {
+          city: "Winterfell",
+          area: "Westeros"
+        }
+      }
+    };
+    proxy = observable(state, context);
+  });
+
+  test("Simply updating the state tree leaf works", () => {
+    proxy.number = 42;
+
+    expect(state.number).toEqual(42);
+    expect(proxy.number).toEqual(42);
+
+    proxy.number = 43;
+
+    expect(state.number).toEqual(43);
+    expect(proxy.number).toEqual(43);
+  });
+
+  test("Proxies correctly reference the current state", () => {
+    expect(proxy.user.surname).toBe("Snow");
+
+    proxy.user.surname = "Targerean";
+    expect(proxy.user.surname).toBe("Targerean");
+
+    proxy.user = {
+      name: "Jon",
+      surname: "Lanister"
+    };
+    expect(proxy.user.surname).toBe("Lanister");
+  });
+
+  test("Internal references point to the current state", () => {
+    const user = proxy.user;
+    expect(user.surname).toBe("Snow");
+    // Overwrite the reference.
+    proxy.user = {
+      name: "Jon",
+      surname: "Targerean"
+    };
+    expect(user.surname).toBe("Targerean");
+  });
+
+  test("Proxy references are being preserved", () => {
+    // store internal references.
+    const user = proxy.user;
+    const location = proxy.user.location;
+
+    expect(proxy.user.surname).toBe("Snow");
+    expect(user.surname).toBe("Snow");
+
+    proxy.user = {
+      name: "Jon",
+      surname: "Targerean",
+      location: {}
+    };
+
+    expect(proxy.user.surname).toBe("Targerean");
+    expect(user.surname).toBe("Targerean");
+
+    // The references shouldn't change.
+    expect(user).toBe(proxy.user); // <- use "toBe", not "toEqual"
+    expect(location).toBe(proxy.user.location); // <- use "toBe", not "toEqual"
+  });
+
+  test("Proxies work correctly with arrays", () => {
+    expect(state.allUsers[0].name).toBe("Jon");
+    expect(proxy.allUsers[0].name).toBe("Jon");
+
+    proxy.allUsers.push({ name: "Arya", surname: "Stark" });
+    expect(state.allUsers[1].name).toBe("Arya");
+    expect(proxy.allUsers[1].name).toBe("Arya");
+  });
+
+  test("ownKeys work", () => {
+    expect(Object.keys(state)).toEqual(["number", "allUsers", "user"]);
+    expect(Object.keys(state.user)).toEqual(["name", "surname", "location"]);
+  });
+});
