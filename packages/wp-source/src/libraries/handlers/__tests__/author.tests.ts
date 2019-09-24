@@ -65,6 +65,9 @@ describe("author", () => {
       { isFetching: false, isReady: false }, // first values are from a different object
       { isFetching: false, isReady: false }, // initial values from the data object
       { isFetching: true, isReady: false }, // fetch starts
+      // This is an inconsistent state, which happens becuse we mutate the state incrementally 
+      // for each key (cannot update both `isFetching` AND `isReady` at the same time)
+      { isFetching: true, isReady: true },
       { isFetching: false, isReady: true } // fetch ends
     ]);
   });
