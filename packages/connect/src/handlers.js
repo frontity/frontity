@@ -1,5 +1,5 @@
-import { observable } from "./observable";
-import { proxyToRaw, rawToProxy, rawToRoot } from "./internals";
+import { observable, ROOT } from "./observable";
+import { proxyToRaw, rawToProxy } from "./internals";
 import {
   registerRunningReactionForOperation,
   queueReactionsForOperation
@@ -67,7 +67,7 @@ function deepOverwrite(a, b) {
       // If it's an object, we deepOverwrite it again.
     } else {
       // We have to create a new observable every time we descend again
-      observable(a[key], a); // TODO: get the real root and store it in the Symbol
+      observable(a[key], a);
       deepOverwrite(a[key], b[key]);
     }
   });
@@ -75,13 +75,18 @@ function deepOverwrite(a, b) {
 
 // intercept get operations on observables to know which reaction uses their properties
 function get(target, key, receiver) {
+  // We need a way to return the target, to be able to mutate change the
+  // reference of the state.
+  if (key === ROOT) return target[ROOT];
   // get the root of that target.
-  const root = rawToRoot.get(target);
+  const root = target[ROOT];
 
   const result =
     !Array.isArray(target) && typeof target[key] === "function"
       ? // if it's a function, return the result of that function run with the root.
-        target[key]({ state: rawToProxy.get(root) })
+        target[key]({
+          state: rawToProxy.get(root)
+        })
       : // if it's not, return the real result.
         Reflect.get(target, key, receiver);
   // do not register (observable.prop -> reaction) pairs for well known symbols
@@ -90,7 +95,12 @@ function get(target, key, receiver) {
     return result;
   }
   // register and save (observable.prop -> runningReaction)
-  registerRunningReactionForOperation({ target, key, receiver, type: "get" });
+  registerRunningReactionForOperation({
+    target,
+    key,
+    receiver,
+    type: "get"
+  });
   // if we are inside a reaction and observable.prop is an object wrap it in an observable too
   // this is needed to intercept property access on that object too (dynamic observable tree)
   const observableResult = rawToProxy.get(result);
@@ -126,10 +136,17 @@ function ownKeys(target) {
 
 // intercept set operations on observables to know when to trigger reactions
 function set(target, key, value, receiver) {
+  // We're just storing the reference to the root of the state tree
+  // This is just for internal use - no need to do anything else
+  if (key === ROOT) {
+    return Reflect.set(target, key, value, receiver);
+  }
+
   // make sure to do not pollute the raw object with observables
   if (typeof value === "object" && value !== null) {
     value = proxyToRaw.get(value) || value;
   }
+
   // save if the object had a descriptor for this key
   const hadKey = hasOwnProperty.call(target, key);
   // save if the value changed because of this set operation

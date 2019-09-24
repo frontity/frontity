@@ -1,16 +1,25 @@
-import { proxyToRaw, rawToProxy, rawToRoot } from "./internals";
+import { proxyToRaw, rawToProxy } from "./internals";
 import { storeObservable } from "./store";
 import * as builtIns from "./builtIns";
 import baseHandlers from "./handlers";
+
+export const ROOT = Symbol("ROOT");
 
 function createObservable(obj, root) {
   // if it is a complex built-in object or a normal object, wrap it
   const handlers = builtIns.getHandlers(obj) || baseHandlers;
   const observable = new Proxy(obj, handlers);
   // save these to switch between the raw object and the wrapped object with ease later
+
+  // This should only be saved the first time that we creat the store
+  // TODO: add a test case for that
+  if (!observable[ROOT]) {
+    observable[ROOT] = root;
+  }
+
   rawToProxy.set(obj, observable);
   proxyToRaw.set(observable, obj);
-  rawToRoot.set(obj, root);
+
   // init basic data structures to save and cleanup later (observable.prop -> reaction) connections
   storeObservable(obj);
   return observable;
