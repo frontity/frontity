@@ -34,23 +34,30 @@ function releaseReactionKeyConnection(reactionsForKey) {
 }
 
 export function getReactionsForOperation({ target, key, type }) {
+  // Get the reactions for this raw object.
   const reactionsForTarget = connectionStore.get(target);
-  const reactionsForKey = new Set();
 
-  if (type === "clear") {
-    reactionsForTarget.forEach((_, key) => {
+  if (reactionsForTarget) {
+    const reactionsForKey = new Set();
+
+    if (type === "clear") {
+      reactionsForTarget.forEach((_, key) => {
+        addReactionsForKey(reactionsForKey, reactionsForTarget, key);
+      });
+    } else {
       addReactionsForKey(reactionsForKey, reactionsForTarget, key);
-    });
-  } else {
-    addReactionsForKey(reactionsForKey, reactionsForTarget, key);
+    }
+
+    if (type === "add" || type === "delete" || type === "clear") {
+      const iterationKey = Array.isArray(target) ? "length" : ITERATION_KEY;
+      addReactionsForKey(reactionsForKey, reactionsForTarget, iterationKey);
+    }
+
+    return reactionsForKey;
   }
 
-  if (type === "add" || type === "delete" || type === "clear") {
-    const iterationKey = Array.isArray(target) ? "length" : ITERATION_KEY;
-    addReactionsForKey(reactionsForKey, reactionsForTarget, iterationKey);
-  }
-
-  return reactionsForKey;
+  // Return null if there are no reactions yet.
+  return null;
 }
 
 export function releaseReaction(reaction) {

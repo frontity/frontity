@@ -72,5 +72,6 @@ export function registerRunningReactionForOperation(operation) {
 
 export function queueReactionsForOperation(operation) {
   // iterate and queue every reaction, which is triggered by obj.key mutation
-  getReactionsForOperation(operation).forEach(queueReaction, operation);
+  const reactions = getReactionsForOperation(operation);
+  if (reactions) reactions.forEach(queueReaction, operation);
 }
