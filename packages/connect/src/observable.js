@@ -13,8 +13,12 @@ function createObservable(obj, root) {
 
   // This should only be saved the first time that we creat the store
   // TODO: add a test case for that
+
   if (!observable[ROOT]) {
-    observable[ROOT] = root;
+    Object.defineProperty(observable, ROOT, {
+      enumerable: false,
+      value: root
+    });
   }
 
   rawToProxy.set(obj, observable);
