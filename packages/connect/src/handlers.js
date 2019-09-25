@@ -164,9 +164,12 @@ function set(target, key, value, receiver) {
   }
 
   // If both the old value and the new value are objects OR if both are arrays, deepOverwrite.
+  // TODO: this should probably be refactored
   if (
-    isObject(oldValue) === isObject(value) ||
-    Array.isArray(oldValue) === Array.isArray(value)
+    !isPrimitive(oldValue) &&
+    !isPrimitive(value) &&
+    (isObject(oldValue) === isObject(value) ||
+      Array.isArray(oldValue) === Array.isArray(value))
   ) {
     deepOverwrite(oldValue, value);
     // TODO: not sure if we can just return `true` here
