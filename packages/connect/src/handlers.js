@@ -12,7 +12,9 @@ const wellKnownSymbols = new Set(
     .filter(value => typeof value === "symbol")
 );
 
-const isObject = val => val != null && typeof val === "object";
+// TODO: this should be more strict I think
+const isObject = val =>
+  val != null && typeof val === "object" && !Array.isArray(val);
 
 const isPrimitive = value =>
   value == null || (typeof value !== "function" && typeof value !== "object");
@@ -25,7 +27,11 @@ function deepOverwrite(a, b) {
       const oldValue = a[key];
 
       // Delete the key.
-      delete a[key];
+      if (Array.isArray(a)) {
+        a.splice(key, 1);
+      } else {
+        delete a[key];
+      }
 
       // Trigger a delete reaction.
       queueReactionsForOperation({
@@ -157,8 +163,11 @@ function set(target, key, value, receiver) {
     return Reflect.set(target, key, value, receiver);
   }
 
-  // If both the old value and the new value are objects, deepOverwrite.
-  if (isObject(oldValue) && isObject(value)) {
+  // If both the old value and the new value are objects OR if both are arrays, deepOverwrite.
+  if (
+    isObject(oldValue) === isObject(value) ||
+    Array.isArray(oldValue) === Array.isArray(value)
+  ) {
     deepOverwrite(oldValue, value);
     // TODO: not sure if we can just return `true` here
     return true;
