@@ -31,6 +31,7 @@ const ImgIceland = ({ className, styles }) => (
   <Image
     className={className}
     css={styles}
+    height={200}
     alt="iceland"
     src={iceland}
     srcSet={[

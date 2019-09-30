@@ -2,19 +2,21 @@ describe("Image lazy-loading (with native lazy-load)", () => {
   beforeEach(() => {
     cy.viewport(360, 640);
     cy.visit("http://localhost:3000?name=image");
-    cy.scrollTo("top");
   });
 
-  it("should show an image with loading=auto if it doesn't have height", () => {
+  it("should render an image with loading=auto if it doesn't have height", () => {
+    cy.scrollTo("topLeft");
     cy.get("img:not([height])")
-      .should("be.visible")
-      .should("have.attr", "loading", "auto");
+      .should("have.attr", "loading", "auto")
+      .should("not.be.visible");
+    cy.get("img:not([height])")
+      .scrollIntoView({ duration: 300 })
+      .should("be.visible");
   });
 
-  it("should show an image with loading=lazy if it has a height", () => {
-    cy.get("img[height]")
-      .should("be.visible")
-      .should("have.attr", "loading", "lazy");
+  it("should render an image with loading=lazy if it has a height", () => {
+    cy.scrollTo("topLeft");
+    cy.get("img[height]").should("have.attr", "loading", "lazy");
   });
 });
 
