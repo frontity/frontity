@@ -1,5 +1,5 @@
 import React from "react";
-import { css, styled } from "frontity";
+import { Global, css, styled } from "frontity";
 import Image from "@frontity/components/image";
 import Package from "../types";
 
@@ -27,9 +27,10 @@ import phuQuoc768x506 from "../static/images/sunrise-phu-quoc-island-ocean-768x5
 import phuQuoc1024x675 from "../static/images/sunrise-phu-quoc-island-ocean-1024x675.jpg";
 import phuQuoc1200x791 from "../static/images/sunrise-phu-quoc-island-ocean-1200x791.jpg";
 
-const ImgIceland = ({ className }) => (
+const ImgIceland = ({ className, styles }) => (
   <Image
     className={className}
+    css={styles}
     alt="iceland"
     src={iceland}
     srcSet={[
@@ -42,10 +43,10 @@ const ImgIceland = ({ className }) => (
   />
 );
 
-const ImgJapan = ({ className }) => (
+const ImgJapan = ({ className, styles }) => (
   <Image
     className={className}
-    height={200}
+    css={styles}
     alt="japan"
     src={japan}
     srcSet={[
@@ -58,9 +59,10 @@ const ImgJapan = ({ className }) => (
   />
 );
 
-const ImgCanyon = ({ className }) => (
+const ImgCanyon = ({ className, styles }) => (
   <Image
     className={className}
+    css={styles}
     height={200}
     alt="canyon"
     src={canyon}
@@ -74,9 +76,10 @@ const ImgCanyon = ({ className }) => (
   />
 );
 
-const ImgPhuQuoc = ({ className }) => (
+const ImgPhuQuoc = ({ className, styles }) => (
   <Image
     className={className}
+    css={styles}
     height={200}
     alt="phu-quoc"
     src={phuQuoc}
@@ -91,39 +94,67 @@ const ImgPhuQuoc = ({ className }) => (
 );
 
 const Root: React.FC = () => (
-  <Container>
-    <Column>
-      <ImgIceland className="top left" />
-      <VSpace />
-      <ImgJapan className="bottom left" />
-    </Column>
-    <HSpace />
-    <Column>
-      <ImgCanyon className="top right" />
-      <VSpace />
-      <ImgPhuQuoc className="bottom right" />
-    </Column>
-  </Container>
+  <>
+    <Global
+      styles={css`
+        body {
+          margin: 0;
+        }
+      `}
+    />
+    <Container>
+      <ImgIceland
+        className="top left"
+        styles={css`
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 0;
+          width: 300px;
+          height: auto;
+        `}
+      />
+      <ImgJapan
+        className="bottom left"
+        styles={css`
+          position: absolute;
+          display: block;
+          bottom: 0;
+          left: 0;
+          width: 300px;
+          height: auto;
+        `}
+      />
+      <ImgCanyon
+        className="top right"
+        styles={css`
+          position: absolute;
+          display: block;
+          top: 0;
+          right: 0;
+          width: 300px;
+          height: auto;
+        `}
+      />
+      <ImgPhuQuoc
+        className="bottom right"
+        styles={css`
+          position: absolute;
+          display: block;
+          bottom: 0;
+          right: 0;
+          width: 300px;
+          height: auto;
+        `}
+      />
+    </Container>
+  </>
 );
 
 const Container = styled.div`
-  width: 2000px;
   position: relative;
-`;
-
-const Column = styled.div`
-  display: inline-block;
-  vertical-align: top;
-`;
-
-const HSpace = styled.div`
-  display: inline-block;
-  width: 1000px;
-  vertical-align: top;
-`;
-
-const VSpace = styled.div`
-  height: 1000px;
+  width: 5000px;
+  height: 5000px;
 `;
 
 const ImagePackage: Package = {
