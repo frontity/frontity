@@ -1,35 +1,25 @@
-describe("Image lazy-loading (with native lazy-load)", () => {
-  beforeEach(() => {
-    cy.viewport(360, 640);
-    cy.visit("http://localhost:3000?name=image");
-  });
-
-  it("should render an image with loading=auto if it doesn't have height", () => {
-    cy.scrollTo("topLeft");
-    cy.get("img:not([height])")
-      .should("have.attr", "loading", "auto")
-      .should("not.be.visible");
-    cy.get("img:not([height])")
-      .scrollIntoView({ duration: 300 })
-      .should("be.visible");
-  });
-
-  it("should render an image with loading=lazy if it has a height", () => {
-    cy.scrollTo("topLeft");
-    cy.get("img[height]").should("have.attr", "loading", "lazy");
-  });
-});
-
 describe("Image lazy-loading (with Intersection Observer)", () => {
   beforeEach(() => {
     cy.viewport(360, 640);
     cy.visit("http://localhost:3000?name=image", {
       onBeforeLoad(win) {
         // Remove the "loading" prop from the HTMLImageElement prototype
-        Object.defineProperty(win.HTMLImageElement.prototype, "loading", {});
+        Object.defineProperty(win.HTMLImageElement.prototype, "loading", {
+          configurable: true,
+          writable: true
+        });
+        // win.HTMLImageElement.prototype.loading = undefined;
         delete win.HTMLImageElement.prototype.loading;
       }
     });
+  });
+
+  it("native lazy load should not exist", () => {
+    cy.window()
+      .its("HTMLImageElement")
+      .then(htmlImageElement => {
+        expect("loading" in htmlImageElement.prototype).to.eq(false);
+      });
   });
 
   it("should work scrolling from top to bottom", () => {
@@ -66,5 +56,35 @@ describe("Image lazy-loading (with Intersection Observer)", () => {
       .scrollIntoView({ duration: 300 })
       .should("be.visible");
     cy.get("img.top").should("not.be.visible");
+  });
+});
+
+describe("Image lazy-loading (with native lazy-load)", () => {
+  beforeEach(() => {
+    cy.viewport(360, 640);
+    cy.visit("http://localhost:3000?name=image");
+  });
+
+  it("native lazy load should exist", () => {
+    cy.window()
+      .its("HTMLImageElement")
+      .then(htmlImageElement => {
+        expect("loading" in htmlImageElement.prototype).to.eq(true);
+      });
+  });
+
+  it("should render an image with loading=auto if it doesn't have height", () => {
+    cy.scrollTo("topLeft");
+    cy.get("img:not([height])")
+      .should("have.attr", "loading", "auto")
+      .should("not.be.visible");
+    cy.get("img:not([height])")
+      .scrollIntoView({ duration: 300 })
+      .should("be.visible");
+  });
+
+  it("should render an image with loading=lazy if it has a height", () => {
+    cy.scrollTo("topLeft");
+    cy.get("img[height]").should("have.attr", "loading", "lazy");
   });
 });
