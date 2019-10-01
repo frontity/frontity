@@ -6,7 +6,9 @@
     "test:push": "jest --clearCache && lerna run test:ci --stream",
     "prepare": "lerna bootstrap --hoist",
     "release": "lerna publish --yes",
-    "reinstall": "lerna clean --yes && npm run prepare"
+    "reinstall": "lerna clean --yes && npm run prepare",
+    "cy:open": "cypress open --env HEADLESS=false",
+    "cy:run": "cypress run --env HEADLESS=true"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.0.0",
