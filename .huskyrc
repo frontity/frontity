@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-push": "lint-staged && cross-env NODE_ENV=test npm run test:push"
+    "pre-push": "npm run test:all"
   }
 }
