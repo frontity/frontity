@@ -56,6 +56,10 @@ program
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
   .option("-s, --https", "Runs the server using https.")
   .option(
+    "--dont-open-browser",
+    "Don't open a browser window with the localhost."
+  )
+  .option(
     "--target <target>",
     'create bundles with "es5" or "module". Default target is "module".'
   )
