@@ -1,0 +1,24 @@
+{
+  "name": "@frontity/type-declarations",
+  "version": "1.0.0",
+  "description": "Types declarations for the different Frontity APIs",
+  "types": "index.d.ts",
+  "keywords": [
+    "frontity",
+    "types",
+    "typescript"
+  ],
+  "homepage": "https://frontity.org",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "bugs": {
+    "url": "https://community.frontity.org"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {}
+}
