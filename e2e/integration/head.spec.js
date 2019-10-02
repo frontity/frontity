@@ -1,6 +1,6 @@
 describe("Head", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000?site=head");
+    cy.visit("http://localhost:3001?site=head");
   });
 
   it("should be able to have a title", () => {

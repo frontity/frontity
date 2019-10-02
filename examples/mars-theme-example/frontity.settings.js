@@ -2,7 +2,7 @@ export default {
   name: "mars-theme-example",
   state: {
     frontity: {
-      url: "https://test.frontity.io",
+      url: "https://mars.frontity.org",
       title: "Test Frontity Blog",
       description: "Useful content for Frontity development"
     }
@@ -32,8 +32,7 @@ export default {
       name: "@frontity/wp-source",
       state: {
         source: {
-          api: "https://test.frontity.io/wp-json",
-          isWPCom: false
+          api: "https://test.frontity.io/wp-json"
         }
       }
     }

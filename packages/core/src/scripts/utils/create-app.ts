@@ -9,12 +9,14 @@ export default async ({
   mode,
   port,
   isHttps,
-  target
+  target,
+  openBrowser = true
 }: {
   mode: Mode;
   port: number;
   isHttps: boolean;
   target: "es5" | "module";
+  openBrowser?: boolean;
 }): Promise<{
   app: express.Express;
   done: (compiler: MultiCompiler) => void;
@@ -53,7 +55,7 @@ export default async ({
   });
 
   // Open localhost on the local browser.
-  open(url);
+  if (openBrowser) open(url);
 
   // Check if webpack has finished (both the client and server bundles).
   const done = (compiler: MultiCompiler) => {

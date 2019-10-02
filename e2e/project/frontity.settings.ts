@@ -4,6 +4,10 @@ const settings: Settings = [
   {
     name: "head",
     packages: ["head"]
+  },
+  {
+    name: "image",
+    packages: ["image"]
   }
 ];
 

@@ -10,13 +10,13 @@ exports[`Image works when loading === "eager" 1`] = `
 />
 `;
 
-exports[`Image works with \`IntersectionObserver\` and is in view 1`] = `
+exports[`Image works with \`IntersectionObserver if \`height\` prop is not specified 1`] = `
 Array [
   <noscript>
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
-      loading="lazy"
+      loading="auto"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
@@ -24,7 +24,33 @@ Array [
   <img
     alt="Some fake alt text"
     className="frontity-lazy-image fake-class-name"
-    loading="lazy"
+    data-src="https://fake-src.com/fake-image.jpg"
+    data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    loading="auto"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  />,
+]
+`;
+
+exports[`Image works with \`IntersectionObserver\` and is in view 1`] = `
+Array [
+  <noscript>
+    <img
+      alt="Some fake alt text"
+      className="frontity-lazy-image fake-class-name"
+      loading="auto"
+      src="https://fake-src.com/fake-image.jpg"
+      srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    />
+  </noscript>,
+  <img
+    alt="Some fake alt text"
+    className="frontity-lazy-image fake-class-name"
+    loading="auto"
     src="https://fake-src.com/fake-image.jpg"
     srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
   />,
@@ -37,7 +63,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
-      loading="lazy"
+      loading="auto"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
@@ -47,7 +73,7 @@ Array [
     className="frontity-lazy-image fake-class-name"
     data-src="https://fake-src.com/fake-image.jpg"
     data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
-    loading="lazy"
+    loading="auto"
     style={
       Object {
         "visibility": "hidden",
@@ -63,6 +89,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
+      height={300}
       loading="lazy"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
@@ -71,6 +98,7 @@ Array [
   <img
     alt="Some fake alt text"
     className="frontity-lazy-image fake-class-name"
+    height={300}
     loading="lazy"
     src="https://fake-src.com/fake-image.jpg"
     srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
@@ -85,6 +113,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
+      height={300}
       loading="lazy"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
@@ -95,6 +124,7 @@ Array [
     className="frontity-lazy-image fake-class-name"
     data-src="https://fake-src.com/fake-image.jpg"
     data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+    height={300}
     loading="lazy"
     style={
       Object {
@@ -112,7 +142,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
-      loading="lazy"
+      loading="auto"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
@@ -120,7 +150,7 @@ Array [
   <img
     alt="Some fake alt text"
     className="frontity-lazy-image fake-class-name"
-    loading="lazy"
+    loading="auto"
     src="https://fake-src.com/fake-image.jpg"
     srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     suppressHydrationWarning={true}
@@ -134,7 +164,7 @@ Array [
     <img
       alt="Some fake alt text"
       className="frontity-lazy-image fake-class-name"
-      loading="lazy"
+      loading="auto"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
@@ -144,7 +174,7 @@ Array [
     className="frontity-lazy-image fake-class-name"
     data-src="https://fake-src.com/fake-image.jpg"
     data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
-    loading="lazy"
+    loading="auto"
     style={
       Object {
         "visibility": "hidden",

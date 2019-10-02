@@ -1,14 +1,15 @@
 import chalk from "chalk";
 import { errorLogger } from "../utils";
 
-export default async ({ production, port, https, target }) => {
+export default async ({ production, port, https, target, dontOpenBrowser }) => {
   let dev: Function;
 
   const options = {
     mode: production ? "production" : "development",
     port: parseInt(port, 10) || 3000,
     isHttps: !!https,
-    target: target || "module"
+    target: target || "module",
+    openBrowser: !dontOpenBrowser
   };
 
   try {

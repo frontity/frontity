@@ -25,7 +25,9 @@ const state: WpSource["state"]["source"] = {
   categoryBase: "",
   tagBase: "",
   postEndpoint: "posts",
-  params: {}
+  params: {},
+  postTypes: [],
+  taxonomies: []
 };
 
 export default state;

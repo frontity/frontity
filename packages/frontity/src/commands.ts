@@ -28,7 +28,16 @@ tsNode.register({
 import program from "commander";
 import { readFileSync } from "fs-extra";
 import { resolve } from "path";
-import { create, dev, build, serve, subscribe, info, unknown } from "./actions";
+import {
+  create,
+  dev,
+  build,
+  serve,
+  subscribe,
+  info,
+  unknown,
+  createPackage
+} from "./actions";
 
 const { version } = JSON.parse(
   readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
@@ -51,10 +60,21 @@ program
   .action(create);
 
 program
+  .command("create-package [name]")
+  .option("-n, --namespace <value>", "Sets the namespace for this package")
+  .option("-t, --typescript", "Adds support for TypeScript")
+  .description("Creates a new Frontity package in a project.")
+  .action(createPackage);
+
+program
   .command("dev")
   .option("-p, --production", "Builds the project for production.")
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
   .option("-s, --https", "Runs the server using https.")
+  .option(
+    "--dont-open-browser",
+    "Don't open a browser window with the localhost."
+  )
   .option(
     "--target <target>",
     'create bundles with "es5" or "module". Default target is "module".'

@@ -14,9 +14,9 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
   );
   const before = new Date(after);
 
-  if (!month) before.setFullYear(year + 1);
-  else if (!day) before.setMonth(month);
-  else before.setDate(day + 1);
+  if (!month) before.setUTCFullYear(year + 1);
+  else if (!day) before.setUTCMonth(month);
+  else before.setUTCDate(day + 1);
 
   // 2. fetch the specified page
   const response = await api.get({
@@ -31,7 +31,7 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
     }
   });
 
-  // 3. populate response and add page to data
+  // 3. populate response
   const items = await populate({ response, state });
   if (items.length === 0)
     throw new Error(`date "${path}" doesn't have page ${page}`);

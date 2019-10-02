@@ -12,18 +12,19 @@ import { Mode } from "../../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
 
-
 // Start Frontity development environment.
 export default async ({
   isHttps,
   mode,
   port,
-  target
+  target,
+  openBrowser = true
 }: {
   port: number;
   isHttps: boolean;
   mode: Mode;
   target: "es5" | "module";
+  openBrowser?: boolean;
 }): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
@@ -39,7 +40,13 @@ export default async ({
   const entryPoints = await generateEntryPoints({ sites, outDir, mode });
 
   // Start dev using webpack dev server with express.
-  const { app, done } = await createApp({ mode, port, isHttps, target });
+  const { app, done } = await createApp({
+    mode,
+    port,
+    isHttps,
+    target,
+    openBrowser
+  });
 
   // Get config for webpack, babel and frontity.
   const config = getConfig({ mode, entryPoints });

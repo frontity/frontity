@@ -33,5 +33,6 @@ export default ({
   config.state = deepmerge(config.state, state, {
     clone: true
   });
+  delete config.name;
   return config;
 };

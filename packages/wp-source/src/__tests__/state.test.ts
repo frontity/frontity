@@ -1,10 +1,9 @@
 import { createStore } from "@frontity/connect";
+import clone from "clone-deep";
 import wpSource from "../";
 
-jest.mock("../");
-
 const initStore = (data = {}) => {
-  const config = wpSource();
+  const config = clone(wpSource());
   // replace data by the one passed as argument
   config.state.source.data = data;
   return createStore(config);

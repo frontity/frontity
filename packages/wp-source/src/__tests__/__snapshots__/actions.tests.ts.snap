@@ -34,6 +34,236 @@ Object {
 }
 `;
 
+exports[`init should add new handlers from postTypes array 1`] = `
+Array [
+  Object {
+    "func": [MockFunction],
+    "name": "always",
+    "pattern": "/(.*)",
+    "priority": 0,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "post archive",
+    "pattern": "/",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "category",
+    "pattern": "/category/(.*)?/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "tag",
+    "pattern": "/tag/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "author",
+    "pattern": "/author/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "date",
+    "pattern": "/:year(\\\\d+)/:month(\\\\d+)?/:day(\\\\d+)?",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "attachment from post by day",
+    "pattern": "/:year(\\\\d+)/:month(\\\\d+)/:day(\\\\d+)?/:postSlug(.*\\\\D.*)/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "post by id",
+    "pattern": "/archives/:id(\\\\d+)",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "attachment from post by id",
+    "pattern": "/archives/:postId(\\\\d+)/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "post type",
+    "pattern": "/(.*)?/:slug",
+    "priority": 30,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "cpt1",
+    "pattern": "/cpt1/:slug/",
+    "priority": 10,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "cpt2",
+    "pattern": "/cpt2/:slug/",
+    "priority": 10,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "cpt2 archive",
+    "pattern": "/cpt2-archive/",
+    "priority": 10,
+  },
+]
+`;
+
+exports[`init should add new handlers from postTypes array 2`] = `
+Array [
+  Array [
+    Object {
+      "endpoints": Array [
+        "cpts1",
+      ],
+    },
+  ],
+  Array [
+    Object {
+      "endpoints": Array [
+        "cpts2",
+      ],
+    },
+  ],
+]
+`;
+
+exports[`init should add new handlers from postTypes array 3`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "cpts2",
+      "type": "cpt2",
+    },
+  ],
+]
+`;
+
+exports[`init should add new handlers from taxonomies array 1`] = `
+Array [
+  Object {
+    "func": [MockFunction],
+    "name": "always",
+    "pattern": "/(.*)",
+    "priority": 0,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "post archive",
+    "pattern": "/",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "category",
+    "pattern": "/category/(.*)?/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "tag",
+    "pattern": "/tag/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "author",
+    "pattern": "/author/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "date",
+    "pattern": "/:year(\\\\d+)/:month(\\\\d+)?/:day(\\\\d+)?",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "attachment from post by day",
+    "pattern": "/:year(\\\\d+)/:month(\\\\d+)/:day(\\\\d+)?/:postSlug(.*\\\\D.*)/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "post by id",
+    "pattern": "/archives/:id(\\\\d+)",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "attachment from post by id",
+    "pattern": "/archives/:postId(\\\\d+)/:slug",
+    "priority": 20,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "post type",
+    "pattern": "/(.*)?/:slug",
+    "priority": 30,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "taxonomy1",
+    "pattern": "/taxonomy1/(.*)?/:slug/",
+    "priority": 10,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "taxonomy2",
+    "pattern": "/taxonomy2/(.*)?/:slug/",
+    "priority": 10,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "taxonomy3",
+    "pattern": "/taxonomy3/(.*)?/:slug/",
+    "priority": 10,
+  },
+]
+`;
+
+exports[`init should add new handlers from taxonomies array 2`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "taxonomies1",
+      "params": undefined,
+      "postTypeEndpoint": undefined,
+      "taxonomy": "taxonomy1",
+    },
+  ],
+  Array [
+    Object {
+      "endpoint": "taxonomies2",
+      "params": undefined,
+      "postTypeEndpoint": "cpt",
+      "taxonomy": "taxonomy2",
+    },
+  ],
+  Array [
+    Object {
+      "endpoint": "taxonomies3",
+      "params": Object {
+        "type": Array [
+          "posts",
+          "cpts",
+        ],
+      },
+      "postTypeEndpoint": "multiple-post-type",
+      "taxonomy": "taxonomy3",
+    },
+  ],
+]
+`;
+
 exports[`init should add redirect for categories if 'categoryBase' is set 1`] = `
 Array [
   Object {

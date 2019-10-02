@@ -4,22 +4,19 @@ Thanks for your pull request 😊. Note that not following the template might re
 
 #### Description of what you did:
 
-<!--
-Replace [ ] by [x] to check these checkboxes!
--->
+<!-- Please describe everything as much as possible -->
 
 #### My PR is a:
 
-- [ ] 🐞 Bug fix
-- [ ] 🚀 New feature
-- [ ] 🔝 Improvement
+<!-- Delete the ones that don't apply -->
 
-#### Main update on the:
-
-- [ ] Documentation
-- [ ] Framework
+- 🐞 Bug fix
+- 🚀 New feature
+- 🔝 Improvement
 
 #### Is the PR ready to be merged?
 
-- [ ] Yes!
-- [ ] Work in progress
+<!-- Delete the one that don't apply -->
+
+- ✅ Yes!
+- 🚧 Work in progress

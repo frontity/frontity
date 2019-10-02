@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import { readdir as readDir } from "fs-extra";
 
 export const isPackageNameValid = (name: string): boolean => {
   if (name.length >= 214) return false;
@@ -25,4 +26,11 @@ export const errorLogger = (error: Error, message?: string) => {
       )}.\n`
   );
   process.exit(1);
+};
+
+export const isFrontityProjectRoot = async (path: string) => {
+  const dirContent = await readDir(path);
+  return dirContent.some(content =>
+    /^frontity\.settings\.(js|ts)$/i.test(content)
+  );
 };

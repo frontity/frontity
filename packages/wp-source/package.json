@@ -30,7 +30,7 @@
     "jest": "^24.7.1",
     "node-fetch": "^2.6.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.4.5"
+    "typescript": "^3.6.3"
   },
   "dependencies": {
     "@frontity/connect": "^1.0.2",

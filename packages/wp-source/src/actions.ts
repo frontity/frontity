@@ -2,6 +2,11 @@ import WpSource from "../types";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
+import {
+  postTypeHandler,
+  postTypeArchiveHandler,
+  taxonomyHandler
+} from "./libraries/handlers";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async link => {
@@ -68,6 +73,42 @@ const actions: WpSource["actions"]["source"] = {
 
     const patterns = isWpCom ? wpCom : wpOrg;
     handlers.push(...patterns);
+
+    // Add handlers for custom post types
+    state.source.postTypes.forEach(({ type, endpoint, archive }) => {
+      // Single page
+      handlers.push({
+        name: type,
+        priority: 10,
+        pattern: concatPath(type, "/:slug"),
+        func: postTypeHandler({ endpoints: [endpoint] })
+      });
+      // Archive
+      if (archive)
+        handlers.push({
+          name: `${type} archive`,
+          priority: 10,
+          pattern: concatPath(archive),
+          func: postTypeArchiveHandler({ type, endpoint })
+        });
+    });
+
+    // Add handlers for custom taxonomies
+    state.source.taxonomies.forEach(
+      ({ taxonomy, endpoint, postTypeEndpoint, params }) => {
+        handlers.push({
+          name: taxonomy,
+          priority: 10,
+          pattern: concatPath(taxonomy, "/(.*)?/:slug"),
+          func: taxonomyHandler({
+            taxonomy,
+            endpoint,
+            postTypeEndpoint,
+            params
+          })
+        });
+      }
+    );
 
     const {
       subdirectory,
