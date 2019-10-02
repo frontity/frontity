@@ -28,7 +28,16 @@ tsNode.register({
 import program from "commander";
 import { readFileSync } from "fs-extra";
 import { resolve } from "path";
-import { create, dev, build, serve, subscribe, info, unknown } from "./actions";
+import {
+  create,
+  dev,
+  build,
+  serve,
+  subscribe,
+  info,
+  unknown,
+  createPackage
+} from "./actions";
 
 const { version } = JSON.parse(
   readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
@@ -49,6 +58,13 @@ program
   .option("-c, --use-cwd", "Generates the project in the current directory.")
   .description("Creates a new Frontity project.")
   .action(create);
+
+program
+  .command("create-package [name]")
+  .option("-n, --namespace <value>", "Sets the namespace for this package")
+  .option("-t, --typescript", "Adds support for TypeScript")
+  .description("Creates a new Frontity package in a project.")
+  .action(createPackage);
 
 program
   .command("dev")
