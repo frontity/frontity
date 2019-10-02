@@ -5,13 +5,13 @@
     "test": "lerna run test:ci --stream",
     "test:clear": "jest --clearCache && lerna run test:ci --stream",
     "test:e2e": "start-server-and-test cy:project http://localhost:3001 cy:run",
-    "test:all": "lint-staged && cross-env NODE_ENV=test npm run test:clear && npm run test:e2e",
+    "test:all": "lint-staged && cross-env NODE_ENV=test npm run test:clear && cross-env NODE_ENV=test npm run test:e2e",
     "prepare": "lerna bootstrap --hoist",
     "release": "lerna publish --yes",
     "reinstall": "lerna clean --yes && npm run prepare",
     "cy:open": "cypress open --env HEADLESS=false",
     "cy:project": "cd e2e/project/ && npx frontity build && npx frontity serve --port 3001",
-    "cy:run": "cypress run --env HEADLESS=true"
+    "cy:run": "cross-env-shell DISPLAY='' && cypress run --env HEADLESS=true"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.0.0",
