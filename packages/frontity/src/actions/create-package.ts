@@ -38,7 +38,9 @@ export default async (name: string, { namespace, typescript }) => {
   if (!isFrontity) {
     emitter.emit(
       "error",
-      new Error("You must execute this command in a Frontity project")
+      new Error(
+        "You must execute this command in the root folder of a Frontity project."
+      )
     );
   }
 
