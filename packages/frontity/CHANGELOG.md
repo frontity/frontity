@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/frontity/frontity/compare/frontity@1.3.1...frontity@1.4.0) (2019-10-02)
+
+
+### Bug Fixes
+
+* **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
+
+
+### Features
+
+* **cli:** add --dont-open-browser option to dev ([6ae037c](https://github.com/frontity/frontity/commit/6ae037c))
+* **frontity:** add create-package command ([#218](https://github.com/frontity/frontity/issues/218)) ([eac88fd](https://github.com/frontity/frontity/commit/eac88fd))
+
+
+
+
+
 ## [1.3.1](https://github.com/frontity/frontity/compare/frontity@1.3.0...frontity@1.3.1) (2019-09-10)
 
 

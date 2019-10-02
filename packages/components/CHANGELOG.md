@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.12](https://github.com/frontity/frontity/compare/@frontity/components@1.1.11...@frontity/components@1.1.12) (2019-10-02)
+
+
+### Bug Fixes
+
+* **image:** add height prop and set loading=auto if no height is present ([9870414](https://github.com/frontity/frontity/commit/9870414))
+* **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
+
+
+
+
+
 ## [1.1.11](https://github.com/frontity/frontity/compare/@frontity/components@1.1.10...@frontity/components@1.1.11) (2019-09-10)
 
 

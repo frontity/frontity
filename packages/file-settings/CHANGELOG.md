@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/frontity/frontity/compare/@frontity/file-settings@1.1.3...@frontity/file-settings@1.1.4) (2019-10-02)
+
+
+### Bug Fixes
+
+* **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
+
+
+
+
+
 ## [1.1.3](https://github.com/frontity/frontity/compare/@frontity/file-settings@1.1.2...@frontity/file-settings@1.1.3) (2019-09-10)
 
 **Note:** Version bump only for package @frontity/file-settings

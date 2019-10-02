@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.14](https://github.com/frontity/frontity/compare/mars-theme-example@1.1.13...mars-theme-example@1.1.14) (2019-10-02)
+
+**Note:** Version bump only for package mars-theme-example
+
+
+
+
+
 ## [1.1.13](https://github.com/frontity/frontity/compare/mars-theme-example@1.1.12...mars-theme-example@1.1.13) (2019-09-10)
 
 **Note:** Version bump only for package mars-theme-example

@@ -1,6 +1,6 @@
 {
   "name": "@frontity/type-declarations",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Types declarations for the different Frontity APIs",
   "types": "index.d.ts",
   "keywords": [

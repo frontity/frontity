@@ -1,6 +1,6 @@
 {
   "name": "@frontity/components",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "Collection of React components for »Frontity",
   "keywords": [
     "frontity"
@@ -24,13 +24,13 @@
   },
   "devDependencies": {
     "@types/react-test-renderer": "^16.8.1",
-    "frontity": "^1.3.1",
+    "frontity": "^1.4.0",
     "jest": "^24.7.1",
     "react-test-renderer": "^16.8.6",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@frontity/hooks": "^1.1.10"
+    "@frontity/hooks": "^1.1.11"
   }
 }

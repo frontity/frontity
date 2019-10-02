@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/frontity/frontity/compare/@frontity/core@1.2.1...@frontity/core@1.3.0) (2019-10-02)
+
+
+### Bug Fixes
+
+* **core:** delete package name from merged store ([7428a90](https://github.com/frontity/frontity/commit/7428a90))
+* **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
+
+
+### Features
+
+* **cli:** add --dont-open-browser option to dev ([6ae037c](https://github.com/frontity/frontity/commit/6ae037c))
+
+
+
+
+
 ## [1.2.1](https://github.com/frontity/frontity/compare/@frontity/core@1.2.0...@frontity/core@1.2.1) (2019-09-10)
 
 

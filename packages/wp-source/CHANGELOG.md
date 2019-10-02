@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/frontity/frontity/compare/@frontity/wp-source@1.3.1...@frontity/wp-source@1.4.0) (2019-10-02)
+
+
+### Bug Fixes
+
+* **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
+
+
+### Features
+
+* **wp-source:** add postTypes and taxonomies arrays to state ([8f8fce3](https://github.com/frontity/frontity/commit/8f8fce3))
+
+
+
+
+
 ## [1.3.1](https://github.com/frontity/frontity/compare/@frontity/wp-source@1.3.0...@frontity/wp-source@1.3.1) (2019-09-10)
 
 

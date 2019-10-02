@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/frontity/frontity/compare/@frontity/types@1.1.1...@frontity/types@1.1.2) (2019-10-02)
+
+
+### Bug Fixes
+
+* **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
+
+
+
+
+
 ## [1.1.1](https://github.com/frontity/frontity/compare/@frontity/types@1.1.0...@frontity/types@1.1.1) (2019-09-10)
 
 
