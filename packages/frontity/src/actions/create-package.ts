@@ -3,11 +3,7 @@ import chalk from "chalk";
 import { normalize } from "path";
 import { prompt, Question } from "inquirer";
 import createPackage from "../functions/create-package";
-import {
-  errorLogger,
-  isPackageNameValid,
-  isFrontityProjectRoot
-} from "../utils";
+import { errorLogger, isFrontityProjectRoot, isThemeNameValid } from "../utils";
 import { EventEmitter } from "events";
 import { Options } from "../functions/create-package/types";
 
@@ -70,7 +66,7 @@ export default async (
     options.name = name;
   }
 
-  if (!isPackageNameValid(options.name)) {
+  if (!isThemeNameValid(options.name)) {
     emitter.emit(
       "error",
       new Error("The name of the package is not a valid npm package name.")
