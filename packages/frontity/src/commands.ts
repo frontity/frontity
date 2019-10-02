@@ -62,8 +62,7 @@ program
 program
   .command("create-package [name]")
   .option(
-    "-n <namespace>",
-    "--namespace <namespace>",
+    "-n <namespace>, --namespace <namespace>",
     "Sets the namespace for this package"
   )
   .option("-t, --typescript", "Adds support for TypeScript")
