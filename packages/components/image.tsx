@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+
 import React from "react";
 import { Head, connect } from "frontity";
 import { Connect, Package } from "frontity/types";
@@ -38,6 +40,7 @@ interface Props {
   className?: string;
   rootMargin?: string;
   loading?: "auto" | "lazy" | "eager";
+  height?: number;
 }
 
 type Image = React.FC<Connect<Package, Props>>;
@@ -55,7 +58,7 @@ interface ChangeAttributes {
 }
 
 const changeAttributes: ChangeAttributes = attrs => {
-  let attributes = { ...attrs };
+  const attributes = { ...attrs };
 
   attributes.src = attributes["data-src"];
   attributes.srcSet = attributes["data-srcset"];
@@ -83,8 +86,9 @@ const Image: Image = ({
   srcSet,
   sizes,
   className,
-  loading,
-  rootMargin
+  loading = "lazy",
+  rootMargin,
+  height
 }) => {
   // These are the attributes for the image when it's waiting to be loaded.
   const lazyAttributes: Attributes = {
@@ -93,8 +97,9 @@ const Image: Image = ({
     "data-srcset": srcSet,
     sizes,
     className: "frontity-lazy-image".concat(className ? ` ${className}` : ""),
-    loading: loading || "lazy",
-    style: { visibility: "hidden" }
+    loading,
+    style: { visibility: "hidden" },
+    height
   };
   // These are the attributes for the image when it's loaded.
   const eagerAttributes = changeAttributes(lazyAttributes);
@@ -105,17 +110,26 @@ const Image: Image = ({
     return <img {...eagerAttributes} />;
   }
 
+  // Changes the loading attribute to "auto" if loading is "lazy"
+  // but there is no height specified (see https://crbug.com/954323)
+  if (loading === "lazy" && !(height > 0)) {
+    eagerAttributes.loading = "auto";
+    lazyAttributes.loading = "auto";
+  }
+
   if (typeof window !== "undefined") {
     // Renders an image in client that will use IntersectionObserver to lazy load
-    // if the native lazy load is not available.
+    // if the native lazy load is not available,
+    // or `height` prop is not provided.
     if (
-      !("loading" in HTMLImageElement.prototype) &&
-      typeof IntersectionObserver !== "undefined"
+      typeof IntersectionObserver !== "undefined" &&
+      !("loading" in HTMLImageElement.prototype && height > 0)
     ) {
       const [onScreen, ref] = useInView({
         rootMargin: rootMargin,
         onlyOnce: true
       });
+
       return (
         <>
           <NoScriptImage {...eagerAttributes} />

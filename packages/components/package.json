@@ -17,7 +17,7 @@
   "scripts": {
     "test:ci": "jest",
     "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "publishConfig": {
     "access": "public"
