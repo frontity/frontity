@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-package should ask for missing name 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "default": "my-frontity-package",
+        "message": "Enter a name for the package:",
+        "name": "name",
+        "type": "input",
+      },
+    ],
+  ],
+]
+`;
+
+exports[`create-package should ask for missing namespace 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "default": "theme",
+        "message": "Enter the namespace of the package:",
+        "name": "namespace",
+        "type": "input",
+      },
+    ],
+  ],
+]
+`;
