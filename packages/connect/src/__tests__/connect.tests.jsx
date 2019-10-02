@@ -154,4 +154,23 @@ describe("connect", () => {
     );
     expect(app).toMatchSnapshot();
   });
+
+  it("should give me the context of the component inside the action", () => {
+    const Comp = ({ actions }) => (
+      <button onClick={() => actions.action1()}>change prop1</button>
+    );
+
+    const Connected = connect(Comp);
+    const app = create(
+      <Provider value={store}>
+        <Connected />
+      </Provider>
+    );
+
+    const rootInstance = app.root;
+    const button = rootInstance.findByType("button");
+    act(() => button.props.onClick());
+
+    // TODO: test that the context of Comp is attached to action1
+  });
 });
