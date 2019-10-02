@@ -4,7 +4,7 @@ import { normalize } from "path";
 import { readdir as readDir } from "fs-extra";
 import { prompt, Question } from "inquirer";
 import createPackage from "../functions/create-package";
-import { errorLogger } from "../utils";
+import { errorLogger, isPackageNameValid } from "../utils";
 import { EventEmitter } from "events";
 import { Options } from "../functions/create-package/types";
 
@@ -62,8 +62,17 @@ export default async (name: string, { namespace, typescript }) => {
     options.name = name;
   }
 
+  if (!isPackageNameValid(options.name)) {
+    emitter.emit(
+      "error",
+      new Error("The name of the package is not a valid npm package name.")
+    );
+  }
+
   // 2.1 set the package path
-  options.packagePath = normalize(`packages/${options.name}`);
+  options.packagePath = normalize(
+    `packages/${options.name.replace(/(?:@.+\/)/i, "")}`
+  );
 
   // 3. ask for the package namespace if it wasn't passed as argument
   if (!namespace) {
