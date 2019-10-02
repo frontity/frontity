@@ -1,10 +1,13 @@
 import ora from "ora";
 import chalk from "chalk";
 import { normalize } from "path";
-import { readdir as readDir } from "fs-extra";
 import { prompt, Question } from "inquirer";
 import createPackage from "../functions/create-package";
-import { errorLogger, isPackageNameValid } from "../utils";
+import {
+  errorLogger,
+  isPackageNameValid,
+  isFrontityProjectRoot
+} from "../utils";
 import { EventEmitter } from "events";
 import { Options } from "../functions/create-package/types";
 
@@ -17,7 +20,16 @@ import { Options } from "../functions/create-package/types";
 //    3. ask for the package namespace if it wasn't passed as argument
 //    4. create package
 
-export default async (name: string, { namespace, typescript }) => {
+export default async (
+  name: string,
+  {
+    namespace,
+    typescript
+  }: {
+    namespace?: string;
+    typescript?: boolean;
+  }
+) => {
   // Init options
   const options: Options = { typescript };
 
@@ -31,11 +43,7 @@ export default async (name: string, { namespace, typescript }) => {
 
   // 1. validate project location
   options.projectPath = process.cwd();
-  const dirContent = await readDir(options.projectPath);
-  const isFrontity = dirContent.some(content =>
-    /^frontity\.settings\.(js|ts)$/i.test(content)
-  );
-  if (!isFrontity) {
+  if (!isFrontityProjectRoot(options.projectPath)) {
     emitter.emit(
       "error",
       new Error(
