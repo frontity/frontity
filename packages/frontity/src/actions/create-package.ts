@@ -39,7 +39,7 @@ export default async (
 
   // 1. validate project location
   options.projectPath = process.cwd();
-  if (!isFrontityProjectRoot(options.projectPath)) {
+  if (!(await isFrontityProjectRoot(options.projectPath))) {
     emitter.emit(
       "error",
       new Error(
