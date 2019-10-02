@@ -134,9 +134,3 @@ Frontity is licensed under the terms of the [Apache 2.0](https://github.com/fron
 ---
 
 Do you miss any important information? Check out [our docs](https://docs.frontity.org/getting-started) or [let us know](https://community.frontity.org/c/docs-and-tutorials).
-
----
-
-## » Testing tools
-
-<a href="https://crossbrowsertesting.com" target="_blank"><img alt="Frontity & WordPress explanation" src="assets/CBT_OS-logo_Black-H.png" width="400px"></a>
