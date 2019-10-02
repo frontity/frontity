@@ -16,7 +16,7 @@ function createObservable(obj, root) {
   return observable;
 }
 
-export function observable(obj = {}, root = null) {
+export function observable(obj = {}, root = null, context = null) {
   // if there's no root passed this is a root observable.
   if (root === null) root = obj;
   // if it is already an observable or it should not be wrapped, return it

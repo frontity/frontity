@@ -19,8 +19,9 @@ const getSnapshot = obj => {
   }
 };
 
-const convertToAction = (fn, instance) => (...args) => {
+const convertToAction = (fn, instance, context) => (...args) => {
   const first = fn(instance);
+  observable(first, null, context);
   if (first instanceof Promise)
     return new Promise(resolve => first.then(() => resolve()));
   if (typeof first === "function") {
@@ -30,8 +31,8 @@ const convertToAction = (fn, instance) => (...args) => {
   }
 };
 
-const convertedActions = (obj, instance) => {
-  if (typeof obj === "function") return convertToAction(obj, instance);
+const convertedActions = (obj, instance, context) => {
+  if (typeof obj === "function") return convertToAction(obj, instance, context);
   else if (obj instanceof Object) {
     return Object.keys(obj).reduce((newObj, key) => {
       newObj[key] = convertedActions(obj[key], instance);
@@ -40,15 +41,15 @@ const convertedActions = (obj, instance) => {
   }
 };
 
-export const createStore = store => {
-  const observableState = observable(store.state);
+export const createStore = (store, context = "test-context") => {
+  const observableState = observable(store.state, null, context);
   const instance = {
     ...store,
     state: observableState,
     actions: {},
     getSnapshot: () => getSnapshot(store.state)
   };
-  const newActions = convertedActions(store.actions, instance);
-  Object.assign(instance.actions, newActions);
+  const actions = convertedActions(store.actions, instance, context);
+  Object.assign(instance.actions, actions);
   return instance;
 };
