@@ -15,6 +15,7 @@ const state = {
 };
 const packages = {
   package_1_html: {
+    name: "package1",
     roots: {
       namespace1: () => <div>"namespace1"</div>,
       namespace2: () => <div>"namespace2"</div>
@@ -35,6 +36,7 @@ const packages = {
     }
   },
   package_2_html: {
+    name: "package2",
     roots: {
       namespace3: () => <div>"namespace3"</div>
     },
@@ -60,6 +62,7 @@ const packages = {
     }
   },
   package_3_html: () => ({
+    name: "package3",
     roots: {
       namespace4: () => <div>"namespace4"</div>
     },
