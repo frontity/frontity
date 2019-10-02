@@ -47,9 +47,10 @@ export default async (options?: Options, emitter?: EventEmitter) => {
     step = createSrcIndexJs(options);
     emit(`Creating ${chalk.yellow("src/index.js")}.`, step);
     await step;
+
     // 4. Install package
     step = installPackage(options);
-    emit(`Installing package from ${options.packagePath}.`, step);
+    emit(`Installing package ${chalk.yellow(options.name)}.`, step);
     await step;
   } catch (error) {
     if (typeof dirExisted !== "undefined") await revertProgress(options);
