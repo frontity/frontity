@@ -40,12 +40,12 @@ export default async (options?: Options, emitter?: EventEmitter) => {
 
     // 2. Creates `package.json`.
     step = createPackageJson(options);
-    emit(`Creating ${chalk.yellow("package.json")}.`, step);
+    emit(`Adding ${chalk.yellow("package.json")}.`, step);
     await step;
 
     // 3. Creates `src/index.js`.
     step = createSrcIndexJs(options);
-    emit(`Creating ${chalk.yellow("src/index.js")}.`, step);
+    emit(`Adding ${chalk.yellow("src/index.js")}.`, step);
     await step;
 
     // 4. Install package
