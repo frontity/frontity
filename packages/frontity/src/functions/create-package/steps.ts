@@ -48,7 +48,7 @@ const Root = () => {
   return (
     <div>
       You can edit your package in:
-      <pre>packages/${name}/src/index.js</pre>
+      <pre>${packagePath}/src/index.js</pre>
     </div>
   );
 };
