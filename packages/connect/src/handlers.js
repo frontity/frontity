@@ -1,4 +1,4 @@
-import { observable } from "./observable";
+import { observable, CONTEXT } from "./observable";
 import { proxyToRaw, rawToProxy, rawToRoot } from "./internals";
 import {
   registerRunningReactionForOperation,
@@ -17,10 +17,13 @@ function get(target, key, receiver) {
   // get the root of that target.
   const root = rawToRoot.get(target);
 
+  // return the CONTEXT
+  if (key === CONTEXT) return target[key];
+
   const result =
     !Array.isArray(target) && typeof target[key] === "function"
       ? // if it's a function, return the result of that function run with the root.
-        target[key]({ state: rawToProxy.get(root) })
+        target[key]({ state: rawToProxy.get(root, target[CONTEXT]) })
       : // if it's not, return the real result.
         Reflect.get(target, key, receiver);
   // do not register (observable.prop -> reaction) pairs for well known symbols
@@ -32,7 +35,7 @@ function get(target, key, receiver) {
   registerRunningReactionForOperation({ target, key, receiver, type: "get" });
   // if we are inside a reaction and observable.prop is an object wrap it in an observable too
   // this is needed to intercept property access on that object too (dynamic observable tree)
-  const observableResult = rawToProxy.get(result);
+  const observableResult = rawToProxy.get(result, target[CONTEXT]);
   if (typeof result === "object" && result !== null) {
     if (observableResult) {
       return observableResult;
@@ -65,6 +68,10 @@ function ownKeys(target) {
 
 // intercept set operations on observables to know when to trigger reactions
 function set(target, key, value, receiver) {
+  if (key === CONTEXT) {
+    target[CONTEXT] = value;
+  }
+
   // make sure to do not pollute the raw object with observables
   if (typeof value === "object" && value !== null) {
     value = proxyToRaw.get(value) || value;
@@ -110,8 +117,7 @@ function deleteProperty(target, key) {
 }
 
 function apply(target, thisArg, argumentsList) {
-  const proxy = rawToProxy.get(target);
-  // TODO: use the context
+  const proxy = rawToProxy.get(target, target[CONTEXT]);
 
   return Reflect.apply(target, thisArg, argumentsList);
 }
