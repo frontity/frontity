@@ -1,4 +1,5 @@
 import { observable } from "./observable";
+import { isFunction, isArray, isPlainObject } from "./utils";
 
 const getSnapshot = obj => {
   if (typeof obj === "function") return;
@@ -42,6 +43,12 @@ const convertedActions = (obj, instance, context) => {
 };
 
 export const createStore = (store, context) => {
+  // TODO: onl throw in dev ?
+  if (!(isFunction(store) || isPlainObject(store) || isArray(store)))
+    throw new Error(
+      `The store must be a plain object containing only functions, arrays or other objects!`
+    );
+
   const observableState = observable(store.state, null, context);
   const instance = {
     ...store,
