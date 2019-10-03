@@ -20,8 +20,8 @@ const getSnapshot = obj => {
 };
 
 const convertToAction = (fn, instance, context) => (...args) => {
-  let first = fn(instance);
-  first = observable(first, null, context);
+  fn = observable(fn, null, context);
+  const first = fn(instance);
   if (first instanceof Promise)
     return new Promise(resolve => first.then(() => resolve()));
   if (typeof first === "function") {

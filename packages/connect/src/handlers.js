@@ -110,8 +110,7 @@ function deleteProperty(target, key) {
 }
 
 function apply(target, thisArg, argumentsList) {
-  console.log(target, thisArg, argumentsList);
-
+  const proxy = rawToProxy.get(target);
   // TODO: use the context
 
   return Reflect.apply(target, thisArg, argumentsList);

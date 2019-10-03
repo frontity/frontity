@@ -19,11 +19,9 @@ function createObservable(obj, root) {
 export function observable(obj = {}, root = null, context = null) {
   // if there's no root passed this is a root observable.
 
-  console.log(obj, context);
-
   if (root === null) root = obj;
   // if it is already an observable or it should not be wrapped, return it
-  if (proxyToRaw.has(obj) || !builtIns.shouldInstrument(obj)) {
+  if (proxyToRaw.has(obj)) {
     return obj;
   }
   // if it already has a cached observable wrapper, return it
