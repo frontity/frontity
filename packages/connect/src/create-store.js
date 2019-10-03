@@ -20,8 +20,8 @@ const getSnapshot = obj => {
 };
 
 const convertToAction = (fn, instance, context) => (...args) => {
-  const first = fn(instance);
-  observable(first, null, context);
+  let first = fn(instance);
+  first = observable(first, null, context);
   if (first instanceof Promise)
     return new Promise(resolve => first.then(() => resolve()));
   if (typeof first === "function") {
@@ -41,7 +41,7 @@ const convertedActions = (obj, instance, context) => {
   }
 };
 
-export const createStore = (store, context = "test-context") => {
+export const createStore = (store, context) => {
   const observableState = observable(store.state, null, context);
   const instance = {
     ...store,

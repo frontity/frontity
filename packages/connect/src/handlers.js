@@ -109,4 +109,12 @@ function deleteProperty(target, key) {
   return result;
 }
 
-export default { get, has, ownKeys, set, deleteProperty };
+function apply(target, thisArg, argumentsList) {
+  console.log(target, thisArg, argumentsList);
+
+  // TODO: use the context
+
+  return Reflect.apply(target, thisArg, argumentsList);
+}
+
+export default { get, has, ownKeys, set, deleteProperty, apply };

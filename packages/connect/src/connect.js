@@ -9,7 +9,7 @@ import {
   useContext,
   useRef
 } from "react";
-import { observe, unobserve, raw, isObservable } from ".";
+import { observe, unobserve, raw, isObservable, createStore } from ".";
 
 const COMPONENT = Symbol("owner component");
 
@@ -34,6 +34,7 @@ export function connect(Comp) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
 
   let ReactiveComp;
+  const componentName = Comp.displayName || Comp.name;
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
@@ -45,7 +46,10 @@ export function connect(Comp) {
       const [, setState] = useState();
 
       // get frontity from the context;
-      const frontity = useContext(context);
+      const rawStore = useContext(context);
+      const store = createStore(rawStore, {
+        name: componentName
+      });
 
       // create a memoized reactive wrapper of the original component (render)
       // at the very first run of the component function
@@ -67,7 +71,7 @@ export function connect(Comp) {
       }, []);
 
       // run the reactive render instead of the original one
-      return render({ ...props, ...frontity });
+      return render({ ...props, ...store });
     });
   } else {
     const BaseComp = isStatelessComp ? Component : Comp;
@@ -77,7 +81,10 @@ export function connect(Comp) {
       constructor(props, context) {
         super(props);
 
-        this.store = context;
+        this._rawStore = context;
+        this.store = createStore(this._rawStore, {
+          name: componentName
+        });
 
         this.state = this.state || {};
         this.state[COMPONENT] = this;
@@ -152,7 +159,7 @@ export function connect(Comp) {
     ReactiveComp = ReactiveClassComp;
   }
 
-  ReactiveComp.displayName = Comp.displayName || Comp.name;
+  ReactiveComp.displayName = componentName;
   // static props are inherited by class components,
   // but have to be copied for function components
   if (isStatelessComp) {

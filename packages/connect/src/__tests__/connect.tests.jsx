@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { create, act } from "react-test-renderer";
-import connect, { Provider, createStore } from "..";
+import connect, { Provider } from "..";
+import { proxyToRaw } from "../internals";
 
 let store;
 
 const Component = () => <div>component from library</div>;
 
 beforeEach(() => {
-  store = createStore({
+  store = {
     state: {
       prop1: 1,
       prop2: ({ state }) => state.prop1 + 1,
@@ -25,7 +26,7 @@ beforeEach(() => {
     libraries: {
       Component
     }
-  });
+  };
 });
 
 describe("connect", () => {
@@ -156,11 +157,11 @@ describe("connect", () => {
   });
 
   it("should give me the context of the component inside the action", () => {
-    const Comp = ({ actions }) => (
+    const TestComponent = ({ actions }) => (
       <button onClick={() => actions.action1()}>change prop1</button>
     );
 
-    const Connected = connect(Comp);
+    const Connected = connect(TestComponent);
     const app = create(
       <Provider value={store}>
         <Connected />
