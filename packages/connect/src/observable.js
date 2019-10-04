@@ -4,6 +4,8 @@ import handlers from "./handlers";
 
 export const CONTEXT = Symbol("context");
 
+const testContext = { name: "test context" };
+
 function createObservable(obj, root, context) {
   const observable = new Proxy(obj, handlers);
 
@@ -19,11 +21,7 @@ function createObservable(obj, root, context) {
   return observable;
 }
 
-export function observable(
-  obj = {},
-  root = null,
-  context = { name: "test context" }
-) {
+export function observable(obj = {}, root = null, context = testContext) {
   // if there's no root passed this is a root observable.
   if (root === null) root = obj;
   // if it is already an observable, return it
