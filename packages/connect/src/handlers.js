@@ -4,6 +4,7 @@ import {
   registerRunningReactionForOperation,
   queueReactionsForOperation
 } from "./reactionRunner";
+import { middlewares, compose } from "./middleware";
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 const wellKnownSymbols = new Set(
@@ -117,9 +118,16 @@ function deleteProperty(target, key) {
 }
 
 function apply(target, thisArg, argumentsList) {
-  const proxy = rawToProxy.get(target, target[CONTEXT]);
+  const state = rawToRoot.get(target);
+  const actions = state.actions;
+  const ctx = target[CONTEXT];
+  let fn = compose(middlewares);
 
-  return Reflect.apply(target, thisArg, argumentsList);
+  fn(ctx, state, actions)
+    .then(() => {
+      Reflect.apply(target, thisArg, argumentsList);
+    })
+    .catch(err => console.error(err));
 }
 
 export default { get, has, ownKeys, set, deleteProperty, apply };
