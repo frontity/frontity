@@ -1,5 +1,6 @@
 import { observable } from "./observable";
 import { isFunction, isArray, isPlainObject } from "./utils";
+import { middlewares, compose } from "./middleware";
 
 const getSnapshot = obj => {
   if (typeof obj === "function") return;
@@ -21,14 +22,20 @@ const getSnapshot = obj => {
 };
 
 const convertToAction = (fn, instance, context) => (...args) => {
-  fn = observable(fn, null, context);
-  const first = fn(instance);
-  if (first instanceof Promise)
-    return new Promise(resolve => first.then(() => resolve()));
-  if (typeof first === "function") {
-    const second = first(...args);
-    if (second instanceof Promise)
-      return new Promise(resolve => second.then(() => resolve()));
+  let action = observable(fn, null, context);
+  action = fn(instance);
+
+  let runMiddlewares = compose(middlewares);
+  runMiddlewares(context, instance, instance.actions)
+    .then(() => {})
+    .catch(err => console.error(err));
+
+  if (action instanceof Promise)
+    return new Promise(resolve => action.then(() => resolve()));
+  if (typeof action === "function") {
+    const actionWithParams = action(...args);
+    if (actionWithParams instanceof Promise)
+      return new Promise(resolve => actionWithParams.then(() => resolve()));
   }
 };
 
@@ -36,7 +43,7 @@ const convertedActions = (obj, instance, context) => {
   if (typeof obj === "function") return convertToAction(obj, instance, context);
   else if (obj instanceof Object) {
     return Object.keys(obj).reduce((newObj, key) => {
-      newObj[key] = convertedActions(obj[key], instance);
+      newObj[key] = convertedActions(obj[key], instance, context);
       return newObj;
     }, {});
   }

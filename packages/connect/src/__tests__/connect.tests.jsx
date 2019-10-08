@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { create, act } from "react-test-renderer";
-import connect, { Provider } from "..";
+import connect, { Provider, addMiddleware } from "..";
 
 let store;
 
@@ -155,7 +155,12 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
   });
 
-  it("should give me the context of the component inside the action", () => {
+  it("should give me the context of the component inside the action", done => {
+    addMiddleware(ctx => {
+      expect(ctx).toEqual({ name: "TestComponent" });
+      done();
+    });
+
     const TestComponent = ({ actions }) => (
       <button onClick={() => actions.action1()}>change prop1</button>
     );
@@ -170,7 +175,5 @@ describe("connect", () => {
     const rootInstance = app.root;
     const button = rootInstance.findByType("button");
     act(() => button.props.onClick());
-
-    // TODO: test that the context of Comp is attached to action1
   });
 });
