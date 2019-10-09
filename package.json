@@ -2,15 +2,16 @@
   "name": "frontity-monorepo",
   "private": true,
   "scripts": {
-    "test": "lerna run test:ci --stream",
-    "test:clear": "jest --clearCache && lerna run test:ci --stream",
-    "test:e2e": "start-server-and-test cy:project http://localhost:3001 cy:run",
-    "test:all": "lint-staged && cross-env NODE_ENV=test npm run test:clear && npm run test:e2e",
+    "test": "cross-env NODE_ENV=test npm run test:ci && npm run e2e:ci",
+    "test:ci": "jest --clearCache && lerna run test:ci --stream",
+    "e2e": "start-server-and-test cy:dev http://localhost:3001 cy:open",
+    "e2e:ci": "start-server-and-test cy:prod http://localhost:3001 cy:run",
     "prepare": "lerna bootstrap --hoist",
     "release": "lerna publish --yes",
     "reinstall": "lerna clean --yes && npm run prepare",
     "cy:open": "cypress open --env HEADLESS=false",
-    "cy:project": "cd e2e/project/ && npx frontity build && npx frontity serve --port 3001",
+    "cy:prod": "cd e2e/project/ && npx frontity build && npx frontity serve --port 3001",
+    "cy:dev": "cd e2e/project/ && npx frontity dev --port 3001 --dont-open-browser",
     "cy:run": "cypress run --env HEADLESS=true"
   },
   "devDependencies": {
