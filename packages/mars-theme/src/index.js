@@ -22,14 +22,13 @@ const marsTheme = {
   // Actions are functions that modify the state or deal with other parts of
   // Frontity like libraries.
   actions: {
-    theme: {
-      // Init is a special action run both in the server and the client. It is used
-      // to initilize things, usually from other packages.
-      init: ({ libraries }) => {
-        // In this case, we add a processor to html2react to process the <img> tags
-        // inside the content HTML. You can add your own processors too.
-        libraries.html2react.processors.push(image);
-      }
+    theme: {}
+  },
+  libraries: {
+    html2react: {
+      // Add a processor to html2react so it processes the <img> tags
+      // inside the content HTML. You can add your own processors too.
+      processors: [image]
     }
   }
 };
