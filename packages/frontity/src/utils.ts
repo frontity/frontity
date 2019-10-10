@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import fetch from "node-fetch";
 import { readdir as readDir } from "fs-extra";
 
 export const isPackageNameValid = (name: string): boolean => {
@@ -33,4 +34,11 @@ export const isFrontityProjectRoot = async (path: string) => {
   return dirContent.some(content =>
     /^frontity\.settings\.(js|ts)$/i.test(content)
   );
+};
+
+export const fetchPackageVersion = async (pkg: string) => {
+  const response = await fetch(`https://registry.npmjs.com/${pkg}`);
+  const data = await response.json();
+  const version = data["dist-tags"].latest;
+  return version;
 };

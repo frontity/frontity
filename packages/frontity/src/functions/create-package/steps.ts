@@ -4,6 +4,7 @@ import { ensureDir, writeFile, remove } from "fs-extra";
 import { exec } from "child_process";
 import { promisify } from "util";
 import { Options } from "./types";
+import { fetchPackageVersion } from "../../utils";
 
 // This function ensures all directories that needs a package exist.
 export const ensurePackageDir = ({ packagePath }: Options): Promise<void> => {
@@ -17,6 +18,9 @@ export const createPackageJson = async ({
   projectPath,
   packagePath
 }: Options) => {
+  // Get the latest version of Frontity from NPM registry
+  const frontityVersion = await fetchPackageVersion("frontity");
+
   const filePath = resolvePath(projectPath, packagePath, "package.json");
   const fileData = `{
   "name": "${name}",
@@ -28,7 +32,7 @@ export const createPackageJson = async ({
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "frontity": "^1.3.1"
+    "frontity": "^${frontityVersion}"
   }
 }${EOL}`;
   await writeFile(filePath, fileData);

@@ -14,7 +14,11 @@ import {
 import { extract } from "tar";
 import fetch from "node-fetch";
 import { mergeRight } from "ramda";
-import { isPackageNameValid, isThemeNameValid } from "../../utils";
+import {
+  isPackageNameValid,
+  isThemeNameValid,
+  fetchPackageVersion
+} from "../../utils";
 import { Options, PackageJson } from "./types";
 
 const allowedExistingContent = ["readme.md", "license", ".git", ".gitignore"];
@@ -74,9 +78,7 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
   const dependencies = (await Promise.all(
     packages.map(async pkg => {
       // Get the version of each package.
-      const response = await fetch(`https://registry.npmjs.com/${pkg}`);
-      const data = await response.json();
-      const version = data["dist-tags"].latest;
+      const version = await fetchPackageVersion(pkg);
       return [pkg, `^${version}`];
     })
   )).reduce((final, current) => {
