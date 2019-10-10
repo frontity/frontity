@@ -1,10 +1,15 @@
 import { EOL } from "os";
 import { resolve as resolvePath, join } from "path";
-import { ensureDir, writeFile, remove } from "fs-extra";
+import { ensureDir, writeFile, remove, pathExists } from "fs-extra";
 import { exec } from "child_process";
 import { promisify } from "util";
 import { Options } from "./types";
 import { fetchPackageVersion } from "../../utils";
+
+// This function returns true if the directory is not empty and false otherwise.
+export const isDirNotEmpty = ({ packagePath }: Options): Promise<boolean> => {
+  return pathExists(join(packagePath));
+}
 
 // This function ensures all directories that needs a package exist.
 export const ensurePackageDir = ({ packagePath }: Options): Promise<void> => {
