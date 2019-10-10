@@ -196,19 +196,19 @@ Array [
 exports[`createPackageJson works with a theme like "@frontity/mars-theme" 1`] = `
 Array [
   Array [
-    "https://registry.npmjs.com/frontity",
+    "frontity",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/core",
+    "@frontity/core",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/wp-source",
+    "@frontity/wp-source",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/tiny-router",
+    "@frontity/tiny-router",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/html2react",
+    "@frontity/html2react",
   ],
 ]
 `;
@@ -248,19 +248,19 @@ Array [
 exports[`createPackageJson works with a theme like "mars-theme" 1`] = `
 Array [
   Array [
-    "https://registry.npmjs.com/frontity",
+    "frontity",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/core",
+    "@frontity/core",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/wp-source",
+    "@frontity/wp-source",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/tiny-router",
+    "@frontity/tiny-router",
   ],
   Array [
-    "https://registry.npmjs.com/@frontity/html2react",
+    "@frontity/html2react",
   ],
 ]
 `;
