@@ -13,11 +13,13 @@ const Item = ({ state, item }) => {
         <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
       </Link>
       <div>
-        <StyledLink link={author.link}>
-          <Author>
-            By <b>{author.name}</b>
-          </Author>
-        </StyledLink>
+        {author && (
+          <StyledLink link={author.link}>
+            <Author>
+              By <b>{author.name}</b>
+            </Author>
+          </StyledLink>
+        )}
         <Fecha>
           {" "}
           on <b>{date.toDateString()}</b>
@@ -26,7 +28,9 @@ const Item = ({ state, item }) => {
       {state.theme.featured.showOnList && (
         <FeaturedMedia id={item.featured_media} />
       )}
-      <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
+      {item.excerpt && (
+        <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
+      )}
     </article>
   );
 };

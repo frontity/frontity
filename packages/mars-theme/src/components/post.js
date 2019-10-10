@@ -34,11 +34,13 @@ const Post = ({ state, actions, libraries }) => {
         {/* Only display author and date on posts */}
         {data.isPost && (
           <div>
-            <StyledLink link={author.link}>
-              <Author>
-                By <b>{author.name}</b>
-              </Author>
-            </StyledLink>
+            {author && (
+              <StyledLink link={author.link}>
+                <Author>
+                  By <b>{author.name}</b>
+                </Author>
+              </StyledLink>
+            )}
             <Fecha>
               {" "}
               on <b>{date.toDateString()}</b>
