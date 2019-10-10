@@ -1,6 +1,6 @@
 {
   "name": "@frontity/source",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Types for the Frontity Source API",
   "keywords": [
     "frontity",
@@ -25,7 +25,7 @@
     "test": "jest --clearCache && jest"
   },
   "dependencies": {
-    "frontity": "^1.4.0"
+    "frontity": "^1.4.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",

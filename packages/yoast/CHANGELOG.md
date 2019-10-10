@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/frontity/frontity/compare/@frontity/yoast@1.1.3...@frontity/yoast@1.1.4) (2019-10-10)
+
+**Note:** Version bump only for package @frontity/yoast
+
+
+
+
+
 ## [1.1.3](https://github.com/frontity/frontity/compare/@frontity/yoast@1.1.2...@frontity/yoast@1.1.3) (2019-10-02)
 
 
