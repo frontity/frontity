@@ -30,8 +30,10 @@ const mockedChildProcess = childProcess as jest.Mocked<typeof childProcess>;
 const mockedTar = tar as jest.Mocked<typeof tar>;
 
 beforeEach(() => {
-  mockedPath.resolve.mockImplementation((...dirs) => dirs.join("/").replace("./", ""));
-})
+  mockedPath.resolve.mockImplementation((...dirs) =>
+    dirs.join("/").replace("./", "")
+  );
+});
 
 describe("normalizeOptions", () => {
   beforeEach(() => {
@@ -124,11 +126,9 @@ describe("ensureProjectDir", () => {
 
 describe("createPackageJson", () => {
   beforeEach(() => {
-    mockedFetch.default.mockReset();
-    mockedFetch.default.mockResolvedValue({
-      json: () => Promise.resolve({ "dist-tags": { latest: "1.0.0" } })
-    } as any);
     mockedFsExtra.writeFile.mockReset();
+    mockedUtils.fetchPackageVersion.mockReset();
+    mockedUtils.fetchPackageVersion.mockResolvedValue("1.0.0");
   });
 
   test('works with a theme like "@frontity/mars-theme"', async () => {
@@ -138,7 +138,7 @@ describe("createPackageJson", () => {
       path: "/path/to/project"
     };
     await createPackageJson(options);
-    expect(mockedFetch.default.mock.calls).toMatchSnapshot();
+    expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 
@@ -149,7 +149,7 @@ describe("createPackageJson", () => {
       path: "/path/to/project"
     };
     await createPackageJson(options);
-    expect(mockedFetch.default.mock.calls).toMatchSnapshot();
+    expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 });

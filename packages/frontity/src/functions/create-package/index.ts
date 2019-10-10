@@ -6,7 +6,8 @@ import {
   createPackageJson,
   createSrcIndexJs,
   installPackage,
-  revertProgress
+  revertProgress,
+  isDirNotEmpty
 } from "./steps";
 
 //  Steps:
@@ -33,22 +34,28 @@ export default async (options?: Options, emitter?: EventEmitter) => {
   });
 
   try {
-    // 1.  create ./packages/[name] folder
+    // 1. Make sure ./packages/[name] folder is empty.
+    step = isDirNotEmpty(options);
+    emit(`Checking if ${chalk.yellow(options.packagePath)} is not empty.`, step);
+    const dirNotEmpty = await step;
+    if (dirNotEmpty) throw new Error(`Folder "${options.packagePath}" must be empty.`);
+
+    // 2. Create ./packages/[name] folder.
     step = ensurePackageDir(options);
-    emit(`Ensuring ${chalk.yellow(options.packagePath)} folder.`, step);
+    emit(`Creating ${chalk.yellow(options.packagePath)} folder.`, step);
     dirExisted = await step;
 
-    // 2. Creates `package.json`.
+    // 3. Creates `package.json`.
     step = createPackageJson(options);
     emit(`Adding ${chalk.yellow("package.json")}.`, step);
     await step;
 
-    // 3. Creates `src/index.js`.
+    // 4. Creates `src/index.js`.
     step = createSrcIndexJs(options);
     emit(`Adding ${chalk.yellow("src/index.js")}.`, step);
     await step;
 
-    // 4. Install package
+    // 5. Install package
     step = installPackage(options);
     emit(`Installing package ${chalk.yellow(options.name)}.`, step);
     await step;

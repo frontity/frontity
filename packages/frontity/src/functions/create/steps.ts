@@ -14,7 +14,11 @@ import {
 import { extract } from "tar";
 import fetch from "node-fetch";
 import { mergeRight } from "ramda";
-import { isPackageNameValid, isThemeNameValid } from "../../utils";
+import {
+  isPackageNameValid,
+  isThemeNameValid,
+  fetchPackageVersion
+} from "../../utils";
 import { Options, PackageJson } from "./types";
 
 const allowedExistingContent = ["readme.md", "license", ".git", ".gitignore"];
@@ -74,9 +78,7 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
   const dependencies = (await Promise.all(
     packages.map(async pkg => {
       // Get the version of each package.
-      const response = await fetch(`https://registry.npmjs.com/${pkg}`);
-      const data = await response.json();
-      const version = data["dist-tags"].latest;
+      const version = await fetchPackageVersion(pkg);
       return [pkg, `^${version}`];
     })
   )).reduce((final, current) => {
@@ -86,7 +88,7 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
   }, {});
 
   // Add the starter theme to the dependencies.
-  const themeName = (theme.match(/\/?([\w-]+)$/) || [, ""])[1];
+  const themeName = (theme.match(/\/?([\w-]+)$/) || ["", ""])[1];
   dependencies[theme] = `./packages/${themeName}`;
   const packageJson: PackageJson = {
     name,
@@ -187,16 +189,10 @@ export const installDependencies = async ({ path }: Options) => {
 
 // This function downlaods the favicon file.
 export const downloadFavicon = async ({ path }: Options) => {
-  await new Promise(async (resolve, reject) => {
-    try {
-      const response = await fetch(faviconUrl);
-      const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
-      response.body.pipe(fileStream);
-      fileStream.on("finish", resolve);
-    } catch (error) {
-      reject(error);
-    }
-  });
+  const response = await fetch(faviconUrl);
+  const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
+  response.body.pipe(fileStream);
+  await new Promise(resolve => fileStream.on("finish", resolve));
 };
 
 // This function removes the files and directories created

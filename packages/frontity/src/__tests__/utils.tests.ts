@@ -1,4 +1,5 @@
-import { isPackageNameValid } from "../utils";
+import { isPackageNameValid, fetchPackageVersion } from "../utils";
+import * as fetch from "node-fetch";
 
 describe("isPackageNameValid", () => {
   describe("package.json requirements", () => {
@@ -46,22 +47,50 @@ describe("isPackageNameValid", () => {
     test("A plain name is working", () => {
       // Unsafe characters extracted from this question:
       // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
-      expect(isPackageNameValid('frontity')).toBe(true);
+      expect(isPackageNameValid("frontity")).toBe(true);
     });
     test("A name with dots is working", () => {
       // Unsafe characters extracted from this question:
       // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
-      expect(isPackageNameValid('frontity.org.cool')).toBe(true);
+      expect(isPackageNameValid("frontity.org.cool")).toBe(true);
     });
     test("A name with dots and dashes is working", () => {
       // Unsafe characters extracted from this question:
       // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
-      expect(isPackageNameValid('frontity-org.cool')).toBe(true);
+      expect(isPackageNameValid("frontity-org.cool")).toBe(true);
     });
     test("A name with more than one dash is working", () => {
       // Unsafe characters extracted from this question:
       // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
-      expect(isPackageNameValid('frontity-org-cool')).toBe(true);
+      expect(isPackageNameValid("frontity-org-cool")).toBe(true);
     });
+  });
+});
+
+describe("fetchPackageVersion", () => {
+  const mockedFetch = jest.spyOn(fetch, "default");
+
+  beforeEach(() => {
+    mockedFetch.mockReset();
+  });
+
+  test("should return the latest version if found in the NPM registry", async () => {
+    mockedFetch.mockResolvedValueOnce(
+      new fetch.Response(`{"dist-tags":{"latest":"1.0.0"}}`)
+    );
+    await expect(fetchPackageVersion("some-package")).resolves.toBe("1.0.0");
+    expect(mockedFetch).toHaveBeenCalledWith(
+      "https://registry.npmjs.com/some-package"
+    );
+  });
+
+  test("should throw an error otherwise", async () => {
+    mockedFetch.mockResolvedValueOnce(
+      new fetch.Response(`{"error":"Not found"}`)
+    );
+    await expect(fetchPackageVersion("non-existent")).rejects.toThrow();
+    expect(mockedFetch).toHaveBeenCalledWith(
+      "https://registry.npmjs.com/non-existent"
+    );
   });
 });
