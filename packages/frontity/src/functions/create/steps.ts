@@ -88,7 +88,7 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
   }, {});
 
   // Add the starter theme to the dependencies.
-  const themeName = (theme.match(/\/?([\w-]+)$/) || [, ""])[1];
+  const themeName = (theme.match(/\/?([\w-]+)$/) || ["", ""])[1];
   dependencies[theme] = `./packages/${themeName}`;
   const packageJson: PackageJson = {
     name,
@@ -189,16 +189,10 @@ export const installDependencies = async ({ path }: Options) => {
 
 // This function downlaods the favicon file.
 export const downloadFavicon = async ({ path }: Options) => {
-  await new Promise(async (resolve, reject) => {
-    try {
-      const response = await fetch(faviconUrl);
-      const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
-      response.body.pipe(fileStream);
-      fileStream.on("finish", resolve);
-    } catch (error) {
-      reject(error);
-    }
-  });
+  const response = await fetch(faviconUrl);
+  const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
+  response.body.pipe(fileStream);
+  await new Promise(resolve => fileStream.on("finish", resolve));
 };
 
 // This function removes the files and directories created
