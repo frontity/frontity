@@ -46,10 +46,10 @@ export const createSrcIndexJs = async ({
 
 const Root = () => {
   return (
-    <div>
+    <>
       You can edit your package in:
       <pre>${join(packagePath, "src/index.js")}</pre>
-    </div>
+    </>
   );
 };
 
