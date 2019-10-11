@@ -1,8 +1,6 @@
-export const proxyToRaw = new WeakMap();
-// export const rawToProxy = new WeakMap();
-export const rawToRoot = new WeakMap();
-
 export const contexts = new WeakMap();
+
+export const proxyToRaw = new WeakMap();
 
 export const rawToProxy = {
   get: function(raw, context) {

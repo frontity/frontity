@@ -1,8 +1,9 @@
-import { proxyToRaw, rawToProxy, rawToRoot } from "./internals";
+import { proxyToRaw, rawToProxy } from "./internals";
 import { storeObservable } from "./store";
 import handlers from "./handlers";
 
 export const CONTEXT = Symbol("context");
+export const ROOT = Symbol("ROOT");
 
 const testContext = { name: "test context" };
 
@@ -12,10 +13,19 @@ function createObservable(obj, root, context) {
   // store the context so that we can access it later in the handlers
   observable[CONTEXT] = context;
 
+  // This should only be saved the first time that we creat the store
+  // TODO: add a test case for that
+  if (!observable[ROOT]) {
+    Object.defineProperty(observable, ROOT, {
+      enumerable: false,
+      value: root
+    });
+  }
+
   // save these to switch between the raw object and the wrapped object with ease later
   rawToProxy.set(obj, context, observable);
   proxyToRaw.set(observable, obj);
-  rawToRoot.set(obj, root);
+
   // init basic data structures to save and cleanup later (observable.prop -> reaction) connections
   storeObservable(obj);
   return observable;
