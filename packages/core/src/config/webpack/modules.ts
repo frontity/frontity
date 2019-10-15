@@ -2,8 +2,7 @@ import hash from "hash-it";
 import { Configuration } from "webpack";
 import babelCore from "@babel/core/package.json";
 import babelLoader from "babel-loader/package.json";
-import { Target, BabelConfigs } from "../../../types";
-import { Mode } from "../../../types";
+import { Target, BabelConfigs, Mode } from "../../../types";
 
 export default ({
   target,
@@ -46,10 +45,10 @@ export default ({
           {
             loader: "file-loader",
             options: {
-              name(file) {
-                const filename = /([^\/\\]+)\.(?:png|jpe?g|gif|svg)$/.exec(
+              name: (file: string): string => {
+                const filename = /([^/\\]+)\.(?:png|jpe?g|gif|svg)$/.exec(
                   file
-                ) || [, "image"];
+                ) || ["", "image"];
                 return mode === "development"
                   ? `${filename[1]}.[ext]`
                   : `${filename[1]}-[hash].[ext]`;
@@ -63,6 +62,25 @@ export default ({
       {
         test: /\.css$/,
         use: "raw-loader"
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            name: (file: string): string => {
+              const filename = /([^/\\]+)\.(?:woff(2)?|ttf|eot)$/.exec(
+                file
+              ) || ["", "font"];
+              return mode === "development"
+                ? `${filename[1]}.[ext]`
+                : `${filename[1]}-[hash].[ext]`;
+            },
+            outputPath: "fonts",
+            limit: 25000,
+            emitFile: target !== "server"
+          }
+        }
       }
     ]
   };
