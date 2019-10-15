@@ -6,10 +6,10 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
   actions,
   libraries
-}) => link => {
-  const { normalize } = libraries.source;
+}) => (link): void => {
   // normalizes link
-  link = normalize(link);
+  if (libraries.source && libraries.source.normalize)
+    link = libraries.source.normalize(link);
 
   state.router.link = link;
 
@@ -28,7 +28,10 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 }) => {
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
-    state.router.link = libraries.source.normalize(state.frontity.initialLink);
+    state.router.link =
+      libraries.source && libraries.source.normalize
+        ? libraries.source.normalize(state.frontity.initialLink)
+        : state.frontity.initialLink;
   } else {
     // Replace the current url with the same one but with state.
     window.history.replaceState({ link: state.router.link }, "");
@@ -44,5 +47,12 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = async ({
   state,
   actions
 }) => {
-  if (state.router.autoFetch) await actions.source.fetch(state.router.link);
+  if (state.router.autoFetch) {
+    if (actions.source && actions.source.fetch)
+      await actions.source.fetch(state.router.link);
+    else
+      console.warn(
+        "You are trying to use autoFetch but no source package is installed."
+      );
+  }
 };
