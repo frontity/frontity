@@ -49,10 +49,9 @@ const commentsHandler: Handler = async ({
 
   // 5. add data to source
   const currentPageData = state.source.data[route];
-  const firstPageData = state.source.data[path];
 
   Object.assign(currentPageData, {
-    id: firstPageData.id,
+    postId,
     items,
     total,
     totalPages,
