@@ -60,7 +60,11 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
           isFetching: false
         });
 
-      if (schema === "postType" || schema === "attachment") {
+      if (
+        schema === "postType" ||
+        schema === "attachment" ||
+        schema === "comment"
+      ) {
         if (!state.source[entity.type]) state.source[entity.type] = {};
         state.source[entity.type][entity.id] = entity;
         Object.assign(entityData, {
