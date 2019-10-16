@@ -1,4 +1,5 @@
 import author from "./author";
+import comments from "./comments";
 import date from "./date";
 import taxonomyHandler from "./taxonomy";
 import postTypeHandler from "./postType";
@@ -26,7 +27,7 @@ export const postArchive = postTypeArchiveHandler({
 });
 
 // Other handlers
-export { author, date };
+export { author, comments, date };
 
 // Handlers generators
 export { taxonomyHandler, postTypeHandler, postTypeArchiveHandler };

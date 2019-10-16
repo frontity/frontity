@@ -3,6 +3,7 @@ import {
   category,
   tag,
   author,
+  comments,
   date,
   post,
   attachment,
@@ -33,6 +34,12 @@ export default [
     priority: 20,
     pattern: "/author/:slug",
     func: author
+  },
+  {
+    name: "comments",
+    priority: 20,
+    pattern: "comments/:postId",
+    func: comments
   },
   {
     name: "date",
