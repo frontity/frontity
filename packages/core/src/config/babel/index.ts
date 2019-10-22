@@ -1,4 +1,4 @@
-import { TransformOptions } from "babel-core";
+import { TransformOptions } from "@babel/core";
 import { Target, Mode, BabelConfigs } from "../../../types";
 
 const targets: {
