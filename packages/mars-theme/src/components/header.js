@@ -2,6 +2,7 @@ import React from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
 import Nav from "./nav";
+import Button from "@material-ui/core/Button";
 
 const Header = ({ state }) => (
   <>
@@ -12,6 +13,9 @@ const Header = ({ state }) => (
       <Description>{state.frontity.description}</Description>
     </Container>
     <Nav />
+    <Button variant="contained" color="primary">
+      Hello World
+    </Button>
   </>
 );
 

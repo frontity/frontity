@@ -10,6 +10,7 @@ import { getSettings } from "@frontity/file-settings";
 import { ChunkExtractor } from "@loadable/server";
 import { extractCritical } from "emotion-server";
 import { HelmetContext } from "@frontity/types";
+import { ServerStyleSheets } from "@material-ui/core/styles";
 import getTemplate from "./templates";
 import {
   getStats,
@@ -86,6 +87,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
 
     // Pass a context to HelmetProvider which will hold our state specific to each request.
     const helmetContext: HelmetContext = {};
+    let materialCss = "";
 
     const Component = <App store={store} helmetContext={helmetContext} />;
 
@@ -98,7 +100,10 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
         entrypoints: [settings.name]
       });
       const jsx = extractor.collectChunks(Component);
-      html = renderToString(jsx);
+
+      const materialSheets = new ServerStyleSheets();
+      html = renderToString(materialSheets.collect(jsx));
+      materialCss = materialSheets.toString();
 
       // Get the linkTags. Crossorigin needed for type="module".
       const crossorigin = moduleStats && es5Stats ? { crossorigin: "" } : {};
@@ -134,7 +139,10 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     // Overwrite html with the version without styles in body.
     html = emotion.html;
     // Populate style with the CSS from Emotion.
-    frontity.style = `<style amp-custom>${emotion.css}</style>`;
+    frontity.style = `
+      <style amp-custom>${emotion.css}</style>
+      <style id="jss-server-side">${materialCss}</style>
+    `;
     // Insert the script for hydratation of Emotion in the script tags.
     frontity.script = `<script id="__EMOTION_HYDRATATION_IDS__" type="application/json">${JSON.stringify(
       emotion.ids
