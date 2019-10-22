@@ -8,7 +8,7 @@ const commentsHandler: Handler = async ({
 }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { page, query } = parse(route);
-  const { postId } = params;
+  const postId = parseInt(params.postId);
 
   // 1. fetch the specified page
   const response = await api.get({

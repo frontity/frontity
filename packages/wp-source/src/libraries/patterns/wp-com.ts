@@ -37,7 +37,7 @@ export default [
   {
     name: "comments",
     priority: 20,
-    pattern: "comments/:postId",
+    pattern: "comments/:postId(\\d+)", //numeric
     func: comments
   },
   {
