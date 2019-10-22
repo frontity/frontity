@@ -89,8 +89,8 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
 
   // Return type, id and link of added entities
   return (isList ? result : [result]).map(({ id: entityId, schema }) => {
-    const { type, id, link } = entities[schema][entityId];
-    return { type, id, link };
+    const { type, id, link, parent } = entities[schema][entityId];
+    return { type, id, link, parent };
   });
 };
 

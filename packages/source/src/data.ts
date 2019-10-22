@@ -4,6 +4,8 @@ export type EntityData = {
   type: string;
   id: number;
   link: string;
+  parent: number;
+  children: Array<Object>;
 };
 
 export type Data =
