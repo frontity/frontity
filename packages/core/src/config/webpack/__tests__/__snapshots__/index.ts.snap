@@ -3,7 +3,7 @@
 exports[`Webpack returns for development 1`] = `
 Object {
   "es5": Object {
-    "devtool": "cheap-module-eval-source-map",
+    "devtool": "source-map",
     "entry": Object {
       "site-1": Array [
         "webpack-hot-middleware/client",
@@ -127,7 +127,7 @@ Object {
     "target": "web",
   },
   "module": Object {
-    "devtool": "cheap-module-eval-source-map",
+    "devtool": "source-map",
     "entry": Object {
       "site-1": Array [
         "webpack-hot-middleware/client",
@@ -249,7 +249,7 @@ Object {
     "target": "web",
   },
   "server": Object {
-    "devtool": "cheap-module-eval-source-map",
+    "devtool": "source-map",
     "entry": "./build/bundling/entry-points/server.js",
     "externals": Object {},
     "mode": "development",
