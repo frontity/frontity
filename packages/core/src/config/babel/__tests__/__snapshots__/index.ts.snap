@@ -5,6 +5,7 @@ Object {
   "es5": Object {
     "compact": true,
     "plugins": Array [
+      "babel-plugin-frontity",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
@@ -53,6 +54,7 @@ Object {
   "module": Object {
     "compact": true,
     "plugins": Array [
+      "babel-plugin-frontity",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
@@ -86,6 +88,7 @@ Object {
   "server": Object {
     "compact": true,
     "plugins": Array [
+      "babel-plugin-frontity",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
@@ -124,6 +127,7 @@ Object {
   "es5": Object {
     "compact": true,
     "plugins": Array [
+      "babel-plugin-frontity",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
@@ -172,6 +176,7 @@ Object {
   "module": Object {
     "compact": true,
     "plugins": Array [
+      "babel-plugin-frontity",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
@@ -205,6 +210,7 @@ Object {
   "server": Object {
     "compact": true,
     "plugins": Array [
+      "babel-plugin-frontity",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",

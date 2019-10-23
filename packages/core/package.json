@@ -47,6 +47,7 @@
     "@loadable/webpack-plugin": "^5.7.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "babel-plugin-frontity": "^1.0.0",
     "babel-polyfill": "^6.26.0",
     "core-js": "^3.0.1",
     "deepmerge": "^3.2.0",

@@ -58,6 +58,8 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       "@emotion/babel-preset-css-prop"
     ];
     const plugins = [
+      //
+      "babel-plugin-frontity",
       // Support for dynamic imports: import("./my-file")
       "@babel/plugin-syntax-dynamic-import",
       // Needed for loadable-component SSR.

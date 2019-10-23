@@ -1,0 +1,39 @@
+{
+  "name": "babel-plugin-frontity",
+  "version": "1.0.0",
+  "description": "Babel Plugin for Frontity",
+  "keywords": [
+    "frontity"
+  ],
+  "homepage": "https://frontity.org",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "bugs": {
+    "url": "https://community.frontity.org"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test:ci": "jest",
+    "test": "jest --watch",
+    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand",
+    "build": "tsc --project ./tsconfig.build.json",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "@babel/types": "^7.6.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "babel-plugin-tester": "^7.0.1",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.6.3"
+  }
+}
