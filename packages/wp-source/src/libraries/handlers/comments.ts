@@ -24,12 +24,12 @@ const commentsHandler: Handler = async ({
   // 2. populate response
   const rawItems = await populate({ response, state });
   const parentItems = {};
-  rawItems.map(item => {
+  rawItems.forEach(item => {
     parentItems[item.parent] = [...(parentItems[item.parent] || []), item];
   });
   const items = parentItems[0];
   const addChildren = arr => {
-    arr.map(item => {
+    arr.forEach(item => {
       if (parentItems[item.id]) {
         item.children = parentItems[item.id];
         addChildren(item.children);
