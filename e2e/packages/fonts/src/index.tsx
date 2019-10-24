@@ -9,15 +9,13 @@ import aclonicaSvg from "./fonts/aclonica-v10-latin-regular.svg";
 
 const Div = styled.div`
   font-family: "Aclonica";
+  width: 300px;
 `;
 
 const All: React.FC = () => (
   <>
     <Global
       styles={css`
-        .onlyOnAll {
-          color: red;
-        }
         @font-face {
           font-family: "Aclonica";
           font-style: normal;
@@ -32,7 +30,7 @@ const All: React.FC = () => (
         }
       `}
     />
-    <Div data-test-id="div-with-font">Aclonica Font!</Div>
+    <Div data-test-id="div-with-font">Aclonica Font with all fonts!</Div>
   </>
 );
 
@@ -48,7 +46,7 @@ const Eot1: React.FC = () => (
         }
       `}
     />
-    <Div data-test-id="div-with-font">Aclonica Font!</Div>
+    <Div data-test-id="div-with-font">Aclonica Font with eot1!</Div>
   </>
 );
 
@@ -65,7 +63,7 @@ const Eot2: React.FC = () => (
         }
       `}
     />
-    <Div data-test-id="div-with-font">Aclonica Font!</Div>
+    <Div data-test-id="div-with-font">Aclonica Font with eot2!</Div>
   </>
 );
 
@@ -82,7 +80,7 @@ const Woff1: React.FC = () => (
         }
       `}
     />
-    <Div data-test-id="div-with-font">Aclonica Font!</Div>
+    <Div data-test-id="div-with-font">Aclonica Font with woff1!</Div>
   </>
 );
 
@@ -99,7 +97,7 @@ const Woff2: React.FC = () => (
         }
       `}
     />
-    <Div data-test-id="div-with-font">Aclonica Font!</Div>
+    <Div data-test-id="div-with-font">Aclonica Font with woff2!</Div>
   </>
 );
 
@@ -116,7 +114,7 @@ const Ttf: React.FC = () => (
         }
       `}
     />
-    <Div data-test-id="div-with-font">Aclonica Font!</Div>
+    <Div data-test-id="div-with-font">Aclonica Font with ttf!</Div>
   </>
 );
 
@@ -133,7 +131,7 @@ const Svg: React.FC = () => (
         }
       `}
     />
-    <Div data-test-id="div-with-font">Aclonica Font!</Div>
+    <Div data-test-id="div-with-font">Aclonica Font with svg!</Div>
   </>
 );
 
@@ -142,7 +140,7 @@ const Empty: React.FC = () => (
 );
 
 const Font: React.FC = connect(({ state }) => {
-  const { pathname } = new URL(state.router.link, "http://localhost:3000");
+  const { pathname } = new URL(state.router.link, "http://localhost:3001");
   if (pathname === "/") return <All />;
   if (pathname === "/eot-1") return <Eot1 />;
   if (pathname === "/eot-2") return <Eot2 />;
