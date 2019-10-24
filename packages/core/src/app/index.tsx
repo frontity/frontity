@@ -1,5 +1,5 @@
 import React from "react";
-import createCache from "@emotion/cache";
+import { EmotionCache } from "@emotion/utils/types";
 import { CacheProvider as EmotionProvider } from "@emotion/core";
 import { Provider as ConnectProvider } from "@frontity/connect";
 import { Package } from "@frontity/types";
@@ -9,13 +9,17 @@ import { HelmetContext } from "../../types";
 type Props = {
   store: Package;
   helmetContext?: HelmetContext;
+  cache: EmotionCache;
 };
 
-const App: React.FunctionComponent<Props> = ({ store, helmetContext = {} }) => {
-  const myCache = createCache();
+const App: React.FunctionComponent<Props> = ({
+  store,
+  helmetContext = {},
+  cache
+}) => {
   return (
     <HelmetProvider context={helmetContext}>
-      <EmotionProvider value={myCache}>
+      <EmotionProvider value={cache}>
         <ConnectProvider value={store}>
           {Object.entries(store.roots).map(([namespace, Root]) => (
             <Root key={namespace} />
