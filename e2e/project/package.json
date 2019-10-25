@@ -19,6 +19,6 @@
     "image": "^1.0.2",
     "@frontity/tiny-router": "^1.0.13",
     "fonts": "^1.0.0",
-    "global": "^1.0.0"
+    "emotion": "^1.0.0"
   }
 }

@@ -1,8 +1,8 @@
 import React from "react";
-import { Global, css, connect, URL } from "frontity";
+import { Global, css, connect, URL, styled } from "frontity";
 import Package from "../types";
 
-const BackgroundBlue = () => {
+const GlobalBackgroundBlue = () => {
   const [global, setGlobal] = React.useState(false);
   return (
     <>
@@ -23,7 +23,7 @@ const BackgroundBlue = () => {
   );
 };
 
-const ColorRed = () => {
+const GlobalColorRed = () => {
   const [global, setGlobal] = React.useState(false);
   return (
     <>
@@ -44,20 +44,39 @@ const ColorRed = () => {
   );
 };
 
+const Styled = styled.div`
+  color: ${({ color }) => color || "red"};
+`;
+
+const StyledPage = () => {
+  const [isBlue, setIsBlue] = React.useState(false);
+  return (
+    <>
+      <Styled color={isBlue && "blue"} data-test-id="styled-div">
+        I&apos;m styled
+      </Styled>
+      <button onClick={() => setIsBlue(!isBlue)} data-test-id="toggle-button">
+        Toggle color
+      </button>
+    </>
+  );
+};
+
 const Root = connect(({ state }) => {
-  const { pathname } = new URL(state.router.link, "http://localhost:3000");
-  if (pathname === "/background-blue") return <BackgroundBlue />;
-  if (pathname === "/color-red") return <ColorRed />;
+  const { pathname } = new URL(state.router.link, "http://localhost:3001");
+  if (pathname === "/background-blue") return <GlobalBackgroundBlue />;
+  if (pathname === "/color-red") return <GlobalColorRed />;
+  if (pathname === "/styled") return <StyledPage />;
 });
 
-const GlobalPackage: Package = {
-  name: "global",
+const EmotionPackage: Package = {
+  name: "emotion",
   state: {},
   actions: {},
   roots: {
-    global: Root
+    emotion: Root
   },
   libraries: {}
 };
 
-export default GlobalPackage;
+export default EmotionPackage;
