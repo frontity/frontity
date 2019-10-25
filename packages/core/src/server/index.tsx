@@ -8,7 +8,8 @@ import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { getSettings } from "@frontity/file-settings";
 import { ChunkExtractor } from "@loadable/server";
-import { extractCritical } from "emotion-server";
+import createCache from "@emotion/cache";
+import createEmotionServer from "create-emotion-server";
 import { HelmetContext } from "@frontity/types";
 import getTemplate from "./templates";
 import {
@@ -87,7 +88,13 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     // Pass a context to HelmetProvider which will hold our state specific to each request.
     const helmetContext: HelmetContext = {};
 
-    const Component = <App store={store} helmetContext={helmetContext} />;
+    // Create emotion server and cache.
+    const cache = createCache();
+    const { extractCritical } = createEmotionServer(cache);
+
+    const Component = (
+      <App store={store} helmetContext={helmetContext} cache={cache} />
+    );
 
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.

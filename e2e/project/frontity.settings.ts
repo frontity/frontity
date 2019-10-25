@@ -8,6 +8,26 @@ const settings: Settings = [
   {
     name: "image",
     packages: ["image"]
+  },
+  {
+    name: "fonts",
+    packages: [
+      {
+        name: "@frontity/tiny-router",
+        state: { router: { autoFetch: false } }
+      },
+      "fonts"
+    ]
+  },
+  {
+    name: "global",
+    packages: [
+      {
+        name: "@frontity/tiny-router",
+        state: { router: { autoFetch: false } }
+      },
+      "global"
+    ]
   }
 ];
 

@@ -1,0 +1,9 @@
+{
+  "name": "fonts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do e2e testing for fonts",
+  "dependencies": {
+    "frontity": "^1.3.0"
+  }
+}
