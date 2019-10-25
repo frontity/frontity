@@ -48,6 +48,17 @@ const Styled = styled.div`
   color: ${({ color }) => color || "red"};
 `;
 
+const CSS = ({ children, color }) => (
+  <div
+    data-test-id="css-div"
+    css={css`
+      color: ${color || "red"};
+    `}
+  >
+    {children}
+  </div>
+);
+
 const StyledPage = () => {
   const [isBlue, setIsBlue] = React.useState(false);
   return (
@@ -55,6 +66,7 @@ const StyledPage = () => {
       <Styled color={isBlue && "blue"} data-test-id="styled-div">
         I&apos;m styled
       </Styled>
+      <CSS color={isBlue && "blue"}>I&apos;m css</CSS>
       <button onClick={() => setIsBlue(!isBlue)} data-test-id="toggle-button">
         Toggle color
       </button>
@@ -66,7 +78,7 @@ const Root = connect(({ state }) => {
   const { pathname } = new URL(state.router.link, "http://localhost:3001");
   if (pathname === "/background-blue") return <GlobalBackgroundBlue />;
   if (pathname === "/color-red") return <GlobalColorRed />;
-  if (pathname === "/styled") return <StyledPage />;
+  if (pathname === "/styled-css") return <StyledPage />;
 });
 
 const EmotionPackage: Package = {
