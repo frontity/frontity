@@ -8,8 +8,6 @@ import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { getSettings } from "@frontity/file-settings";
 import { ChunkExtractor } from "@loadable/server";
-import createCache from "@emotion/cache";
-import createEmotionServer from "create-emotion-server";
 import { HelmetContext } from "@frontity/types";
 import getTemplate from "./templates";
 import {
@@ -88,13 +86,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     // Pass a context to HelmetProvider which will hold our state specific to each request.
     const helmetContext: HelmetContext = {};
 
-    // Create emotion server and cache.
-    const cache = createCache();
-    const { extractCritical } = createEmotionServer(cache);
-
-    const Component = (
-      <App store={store} helmetContext={helmetContext} cache={cache} />
-    );
+    const Component = <App store={store} helmetContext={helmetContext} />;
 
     // If there's no client stats or there is no client entrypoint for the site we
     // want to load, we don't extract scripts.
@@ -135,17 +127,6 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       // because no hydratation will happen in the client.
       html = renderToStaticMarkup(Component);
     }
-
-    // Emotion get CSS and IDs:
-    const emotion = extractCritical(html);
-    // Overwrite html with the version without styles in body.
-    html = emotion.html;
-    // Populate style with the CSS from Emotion.
-    frontity.style = `<style amp-custom>${emotion.css}</style>`;
-    // Insert the script for hydratation of Emotion in the script tags.
-    frontity.script = `<script id="__EMOTION_HYDRATATION_IDS__" type="application/json">${JSON.stringify(
-      emotion.ids
-    )}</script>\n${frontity.script}`;
 
     // Get static head strings.
     const head = getHeadTags(helmetContext.helmet);

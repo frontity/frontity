@@ -34,8 +34,8 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.10",
-    "@emotion/styled": "^10.0.11",
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.22",
     "@frontity/connect": "^1.0.3",
     "@frontity/type-declarations": "^1.0.1",
     "@frontity/types": "^1.1.2",

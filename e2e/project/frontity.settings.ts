@@ -20,13 +20,13 @@ const settings: Settings = [
     ]
   },
   {
-    name: "global",
+    name: "emotion",
     packages: [
       {
         name: "@frontity/tiny-router",
         state: { router: { autoFetch: false } }
       },
-      "global"
+      "emotion"
     ]
   }
 ];
