@@ -141,7 +141,8 @@ const Content = styled.div`
     text-decoration: underline;
   }
 
-  // Add input fields styles.
+  /* Input fields styles */
+
   input[type="text"],
   input[type="email"],
   input[type="url"],
@@ -160,8 +161,13 @@ const Content = styled.div`
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    outline-color: transparent;
+    transition: outline-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     margin: 8px 0 4px 0;
+
+    &:focus {
+      outline-color: #1f38c5;
+    }
   }
 
   input[type="submit"] {
