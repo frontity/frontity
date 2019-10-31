@@ -135,4 +135,20 @@ describe("tag", () => {
     await store.actions.source.fetch("/tag/tag-1/");
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("is requested with any query param", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([tag1]))
+      .mockResolvedValueOnce(
+        mockResponse(tag1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
 });

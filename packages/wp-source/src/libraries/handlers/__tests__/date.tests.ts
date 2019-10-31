@@ -43,6 +43,29 @@ describe("date", () => {
     expect(store.state.source).toMatchSnapshot();
   });
 
+  test("get two pages of year 2019 (with query params)", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(
+        mockResponse(date2019Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      )
+      .mockResolvedValueOnce(
+        mockResponse(date2019PostsPage2, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/2019/?some=param");
+    await store.actions.source.fetch("/2019/page/2/?some=param");
+    expect(api.get.mock.calls).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
   test("get January, 2019", async () => {
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(

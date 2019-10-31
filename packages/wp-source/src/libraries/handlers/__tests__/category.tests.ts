@@ -135,4 +135,20 @@ describe("category", () => {
     await store.actions.source.fetch("/category/cat-1/");
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("is requested with any query param", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([cat1]))
+      .mockResolvedValueOnce(
+        mockResponse(cat1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/category/cat-1/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
 });
