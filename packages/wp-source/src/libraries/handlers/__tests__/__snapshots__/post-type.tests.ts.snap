@@ -82,6 +82,100 @@ Object {
 }
 `;
 
+exports[`attachment works with query params (doesn't exist in source.attachment) 1`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/attachment-1/",
+      "slug": "attachment-1",
+      "type": "attachment",
+    },
+  },
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-1/attachment-1/?some=param": Object {
+      "id": 1,
+      "isAttachment": true,
+      "isFetching": false,
+      "isPostType": true,
+      "isReady": true,
+      "type": "attachment",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+}
+`;
+
+exports[`attachment works with query params (exists in source.attachment) 1`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/attachment-1/",
+      "slug": "attachment-1",
+      "type": "attachment",
+    },
+  },
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-1/attachment-1/?some=param": Object {
+      "id": 1,
+      "isAttachment": true,
+      "isFetching": false,
+      "isPostType": true,
+      "isReady": true,
+      "type": "attachment",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+}
+`;
+
 exports[`page doesn't exist in source.page 1`] = `
 Object {
   "api": "https://test.frontity.io",
@@ -162,6 +256,136 @@ Object {
       "isReady": false,
     },
     "/page-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isPage": true,
+      "isPostType": true,
+      "isReady": true,
+      "type": "page",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+      },
+      "author": 1,
+      "featured_media": 1,
+      "id": 1,
+      "link": "/page-1/",
+      "slug": "page-1",
+      "type": "page",
+    },
+  },
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+}
+`;
+
+exports[`page works with query params (doesn't exist in source.page) 1`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
+    "/page-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "page",
+    },
+    "/page-1/?some=param": Object {
+      "id": 1,
+      "isFetching": false,
+      "isPage": true,
+      "isPostType": true,
+      "isReady": true,
+      "type": "page",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+      },
+      "author": 1,
+      "featured_media": 1,
+      "id": 1,
+      "link": "/page-1/",
+      "slug": "page-1",
+      "type": "page",
+    },
+  },
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+}
+`;
+
+exports[`page works with query params (exists in source.page) 1`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
+    "/page-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "page",
+    },
+    "/page-1/?some=param": Object {
       "id": 1,
       "isFetching": false,
       "isPage": true,
@@ -521,6 +745,228 @@ Object {
   },
   "post": Object {},
   "postEndpoint": "multiple-post-type",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
+  "tagBase": "",
+  "taxonomies": Array [],
+}
+`;
+
+exports[`post works with query params (doesn't exist in source.post) 1`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/attachment-1/",
+      "slug": "attachment-1",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-1/?some=param": Object {
+      "id": 1,
+      "isFetching": false,
+      "isPost": true,
+      "isPostType": true,
+      "isReady": true,
+      "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "tag",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [
+        1,
+      ],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
+  "tagBase": "",
+  "taxonomies": Array [],
+}
+`;
+
+exports[`post works with query params (exists in source.post) 1`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/attachment-1/",
+      "slug": "attachment-1",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-1/?some=param": Object {
+      "id": 1,
+      "isFetching": false,
+      "isPost": true,
+      "isPostType": true,
+      "isReady": true,
+      "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "tag",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [
+        1,
+      ],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
   "subdirectory": "",

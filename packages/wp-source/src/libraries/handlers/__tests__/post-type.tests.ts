@@ -47,7 +47,7 @@ describe("post", () => {
     api.get = jest.fn();
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
-    expect(api.get).not.toBeCalled();
+    expect(api.get).not.toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 
@@ -60,6 +60,28 @@ describe("post", () => {
     // Fetch entities
     await store.actions.source.fetch("/cpt/cpt-11");
     expect(api.get.mock.calls).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (doesn't exist in source.post)", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (exists in source.post)", async () => {
+    // Add post to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(post1)
+    });
+    // Mock Api responses
+    api.get = jest.fn();
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/?some=param");
+    expect(api.get).not.toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -86,7 +108,32 @@ describe("page", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/page-1/");
-    expect(api.get).toBeCalledTimes(0);
+    expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (doesn't exist in source.page)", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]))
+      .mockResolvedValueOnce(mockResponse([page1]));
+    // Fetch entities
+    await store.actions.source.fetch("/page-1/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (exists in source.page)", async () => {
+    // Add page to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(page1)
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/page-1/?some=param");
+    expect(api.get).toHaveBeenCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -113,7 +160,32 @@ describe("attachment", () => {
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/attachment-1/");
-    expect(api.get).toBeCalledTimes(0);
+    expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (doesn't exist in source.attachment)", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]))
+      .mockResolvedValueOnce(mockResponse([attachment1]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/attachment-1/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (exists in source.attachment)", async () => {
+    // Add attachment to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(attachment1)
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/attachment-1/?some=param");
+    expect(api.get).toHaveBeenCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
 });
