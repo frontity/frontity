@@ -5,11 +5,11 @@ import WpSource from "../../../../types";
 import Api from "../../api";
 // JSON mocks
 import { mockResponse } from "./mocks/helpers";
-import date_2019_posts from "./mocks/date/2019-posts.json";
-import date_2019_posts_2 from "./mocks/date/2019-posts-page-2.json";
-import date_2019_01_posts from "./mocks/date/2019-01-posts.json";
-import date_2019_01_01_posts from "./mocks/date/2019-01-01-posts.json";
-import date_2019_01_01_posts_cpt from "./mocks/date/2019-01-01-posts-cpt.json";
+import date2019Posts from "./mocks/date/2019-posts.json";
+import date2019PostsPage2 from "./mocks/date/2019-posts-page-2.json";
+import date201901Posts from "./mocks/date/2019-01-posts.json";
+import date20190101Posts from "./mocks/date/2019-01-01-posts.json";
+import date20190101PostsCpt from "./mocks/date/2019-01-01-posts-cpt.json";
 
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
@@ -25,13 +25,13 @@ describe("date", () => {
     api.get = jest
       .fn()
       .mockResolvedValueOnce(
-        mockResponse(date_2019_posts, {
+        mockResponse(date2019Posts, {
           "X-WP-Total": "5",
           "X-WP-TotalPages": "2"
         })
       )
       .mockResolvedValueOnce(
-        mockResponse(date_2019_posts_2, {
+        mockResponse(date2019PostsPage2, {
           "X-WP-Total": "5",
           "X-WP-TotalPages": "2"
         })
@@ -46,7 +46,7 @@ describe("date", () => {
   test("get January, 2019", async () => {
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
-      mockResponse(date_2019_01_posts, {
+      mockResponse(date201901Posts, {
         "X-WP-Total": "2",
         "X-WP-TotalPages": "1"
       })
@@ -60,7 +60,7 @@ describe("date", () => {
   test("get January 1, 2019", async () => {
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
-      mockResponse(date_2019_01_01_posts, {
+      mockResponse(date20190101Posts, {
         "X-WP-Total": "1",
         "X-WP-TotalPages": "1"
       })
@@ -77,7 +77,7 @@ describe("date", () => {
     store.state.source.params = { type: ["post", "cpt"] };
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
-      mockResponse(date_2019_01_01_posts_cpt, {
+      mockResponse(date20190101PostsCpt, {
         "X-WP-Total": "2",
         "X-WP-TotalPages": "1"
       })
