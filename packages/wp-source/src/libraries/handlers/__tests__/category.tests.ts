@@ -58,7 +58,7 @@ describe("category", () => {
     });
     // Fetch entities
     await store.actions.source.fetch("/category/cat-1/page/2/");
-    expect(api.get).toBeCalledTimes(1);
+    expect(api.get).toHaveBeenCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
@@ -94,7 +94,7 @@ describe("category", () => {
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/category/non-existent/");
-    expect(api.get).toBeCalledTimes(1);
+    expect(api.get).toHaveBeenCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
   });
 
