@@ -21,7 +21,7 @@ export interface Package {
       url?: string;
     };
     [namespace: string]: {
-      [key: string]: any;
+      [key: string]: unknown;
     };
   };
   actions?: {
@@ -34,16 +34,16 @@ export interface Package {
           }: {
             state: {
               [namespace: string]: {
-                [state: string]: any;
+                [state: string]: unknown;
               };
             };
             actions: {
               [key: string]: {
-                [action: string]: any;
+                [action: string]: unknown;
               };
             };
             libraries: {
-              [key: string]: any;
+              [key: string]: unknown;
             };
           }) => void)
         | (({
@@ -53,32 +53,25 @@ export interface Package {
           }: {
             state: {
               [namespace: string]: {
-                [state: string]: any;
+                [state: string]: unknown;
               };
             };
             actions: {
               [key: string]: {
-                [action: string]: any;
+                [action: string]: unknown;
               };
             };
             libraries: {
-              [key: string]: any;
+              [key: string]: unknown;
             };
-          }) => (input: any) => void);
+          }) => (input: unknown) => void);
     };
   };
   libraries?: {
     [namespace: string]: {
-      [library: string]: any;
+      [library: string]: unknown;
     };
   };
-  //
-  // Filters are not supported yet.
-  // filters: {
-  //   [namespace: string]: {
-  //     [filter: string]: any;
-  //   };
-  // };
 }
 
 export default Package;
