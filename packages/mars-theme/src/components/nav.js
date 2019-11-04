@@ -2,19 +2,24 @@ import React from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
 
+/**
+ * Navigation Component
+ *
+ * It renders the navigation links
+ */
 const Nav = ({ state }) => (
-  <Container>
+  <NavContainer>
     {state.theme.menu.map(([name, link]) => (
       <Item key={name} isSelected={state.router.link === link}>
         <Link link={link}>{name}</Link>
       </Item>
     ))}
-  </Container>
+  </NavContainer>
 );
 
 export default connect(Nav);
 
-const Container = styled.nav`
+const NavContainer = styled.nav`
   list-style: none;
   display: flex;
   width: 848px;
