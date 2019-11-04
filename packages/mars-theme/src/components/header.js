@@ -3,6 +3,11 @@ import { connect, styled } from "frontity";
 import Link from "./link";
 import Nav from "./nav";
 
+/**
+ * Header Component
+ *
+ * It contains the title, description and navigation links.
+ */
 const Header = ({ state }) => (
   <>
     <Container>
