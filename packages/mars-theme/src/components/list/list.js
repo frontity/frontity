@@ -16,9 +16,11 @@ const List = ({ state }) => {
         </Header>
       )}
 
-      {/* If the list is an author, we render a title. */}
+      {/* If the list is for a specific author, we render a title. */}
       {data.isAuthor && (
-        <Header>Author: {state.source.author[data.id].name}</Header>
+        <Header>
+          Author: <b>{state.source.author[data.id].name}</b>
+        </Header>
       )}
 
       {/* Iterate over the items of the list. */}
