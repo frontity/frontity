@@ -12,7 +12,7 @@ const List = ({ state }) => {
       {/* If the list is a taxonomy, we render a title. */}
       {data.isTaxonomy && (
         <Header>
-          {data.taxonomy}: {state.source[data.taxonomy][data.id].name}
+          {data.taxonomy}: <b>{state.source[data.taxonomy][data.id].name}</b>
         </Header>
       )}
 
