@@ -508,6 +508,360 @@ Object {
 }
 `;
 
+exports[`date get two pages of year 2019 (with query params) 1`] = `
+Array [
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "_embed": true,
+        "after": "2019-01-01T00:00:00.000Z",
+        "before": "2020-01-01T00:00:00.000Z",
+        "page": 1,
+        "search": undefined,
+      },
+    },
+  ],
+  Array [
+    Object {
+      "endpoint": "posts",
+      "params": Object {
+        "_embed": true,
+        "after": "2019-01-01T00:00:00.000Z",
+        "before": "2020-01-01T00:00:00.000Z",
+        "page": 2,
+        "search": undefined,
+      },
+    },
+  ],
+]
+`;
+
+exports[`date get two pages of year 2019 (with query params) 2`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/attachment-1/",
+      "slug": "attachment-1",
+      "type": "attachment",
+    },
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/post-2/attachment-2/",
+      "slug": "attachment-2",
+      "type": "attachment",
+    },
+    "3": Object {
+      "author": 1,
+      "id": 3,
+      "link": "/post-3/attachment-3/",
+      "slug": "attachment-3",
+      "type": "attachment",
+    },
+    "4": Object {
+      "author": 1,
+      "id": 4,
+      "link": "/post-4/attachment-4/",
+      "slug": "attachment-4",
+      "type": "attachment",
+    },
+    "5": Object {
+      "author": 1,
+      "id": 5,
+      "link": "/post-5/attachment-5/",
+      "slug": "attachment-5",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
+  "categoryBase": "",
+  "data": Object {
+    "/2019/?some=param": Object {
+      "day": undefined,
+      "isArchive": true,
+      "isDate": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 1,
+          "link": "/post-1/",
+          "type": "post",
+        },
+        Object {
+          "id": 2,
+          "link": "/post-2/",
+          "type": "post",
+        },
+        Object {
+          "id": 3,
+          "link": "/post-3/",
+          "type": "post",
+        },
+      ],
+      "month": undefined,
+      "total": 5,
+      "totalPages": 2,
+      "year": 2019,
+    },
+    "/2019/page/2/?some=param": Object {
+      "day": undefined,
+      "isArchive": true,
+      "isDate": true,
+      "isFetching": false,
+      "isReady": true,
+      "items": Array [
+        Object {
+          "id": 4,
+          "link": "/post-4/",
+          "type": "post",
+        },
+        Object {
+          "id": 5,
+          "link": "/post-5/",
+          "type": "post",
+        },
+      ],
+      "month": undefined,
+      "total": 5,
+      "totalPages": 2,
+      "year": 2019,
+    },
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "category",
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-2/": Object {
+      "id": 2,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-2/attachment-2/": Object {
+      "id": 2,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-3/": Object {
+      "id": 3,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-3/attachment-3/": Object {
+      "id": 3,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-4/": Object {
+      "id": 4,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-4/attachment-4/": Object {
+      "id": 4,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/post-5/": Object {
+      "id": 5,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/post-5/attachment-5/": Object {
+      "id": 5,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
+      "type": "post",
+    },
+    "2": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          2,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 2,
+      "id": 2,
+      "link": "/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
+      "type": "post",
+    },
+    "3": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          3,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 3,
+      "id": 3,
+      "link": "/post-3/",
+      "slug": "post-3",
+      "tags": Array [],
+      "type": "post",
+    },
+    "4": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          4,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 4,
+      "id": 4,
+      "link": "/post-4/",
+      "slug": "post-4",
+      "tags": Array [],
+      "type": "post",
+    },
+    "5": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          5,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 5,
+      "id": 5,
+      "link": "/post-5/",
+      "slug": "post-5",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+}
+`;
+
 exports[`date get two pages of year 2019 1`] = `
 Array [
   Array [

@@ -18,6 +18,7 @@
     "@frontity/mars-theme": "^1.2.2",
     "@frontity/tiny-router": "^1.0.16",
     "@frontity/wp-source": "^1.4.1",
+    "babel-plugin-frontity": "^1.0.0",
     "frontity": "^1.4.1"
   }
 }

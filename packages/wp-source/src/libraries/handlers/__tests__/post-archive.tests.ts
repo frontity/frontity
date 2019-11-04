@@ -60,4 +60,30 @@ describe("post archive", () => {
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("works with query params", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(
+      mockResponse(posts, {
+        "X-WP-Total": "5",
+        "X-WP-TotalPages": "2"
+      })
+    );
+    // Fetch entities
+    await store.actions.source.fetch("/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params and pagination", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(
+      mockResponse(posts2, {
+        "X-WP-Total": "5",
+        "X-WP-TotalPages": "2"
+      })
+    );
+    // Fetch entities
+    await store.actions.source.fetch("/page/2/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
 });

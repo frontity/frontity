@@ -1,22 +1,11 @@
 import React from "react";
 import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
-import { hydrate as hydrateEmotion } from "emotion";
 import App from "../app";
 import createStore from "./store";
 
 export default async ({ packages }) => {
   if (typeof window !== "undefined" && window["Proxy"]) {
-    // Hydrate Emotion.
-    const ids = document.getElementById("__EMOTION_HYDRATATION_IDS__");
-    if (ids) {
-      hydrateEmotion(JSON.parse(ids.innerHTML));
-    } else {
-      console.warn(
-        "Emotion ids for hydratation not found. If you need help please visit https://community.frontity.org."
-      );
-    }
-
     // Hydrate Connect state.
     const stateElement = document.getElementById("__FRONTITY_CONNECT_STATE__");
     if (!stateElement) {

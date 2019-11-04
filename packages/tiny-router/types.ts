@@ -15,12 +15,12 @@ interface TinyRouter extends Router {
       beforeSSR?: Action<TinyRouter>;
     };
     source?: {
-      fetch: Source["actions"]["source"]["fetch"];
+      fetch?: Source["actions"]["source"]["fetch"];
     };
   };
   libraries: {
     source?: {
-      normalize: Source["libraries"]["source"]["normalize"];
+      normalize?: Source["libraries"]["source"]["normalize"];
     };
   };
 }

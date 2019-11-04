@@ -58,7 +58,7 @@ describe("author", () => {
     });
     // Fetch entities
     await store.actions.source.fetch("/author/author-1/page/2/");
-    expect(api.get).toBeCalledTimes(1);
+    expect(api.get).toHaveBeenCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
@@ -94,7 +94,7 @@ describe("author", () => {
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/author/non-existent/");
-    expect(api.get).toBeCalledTimes(1);
+    expect(api.get).toHaveBeenCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
   });
 
@@ -133,6 +133,22 @@ describe("author", () => {
       .mockResolvedValueOnce(mockResponse([], {}));
     // Fetch entities
     await store.actions.source.fetch("/author/author-1/");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("is requested with any query param", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([author1]))
+      .mockResolvedValueOnce(
+        mockResponse(author1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/author/author-1/?some=param");
     expect(store.state.source).toMatchSnapshot();
   });
 });

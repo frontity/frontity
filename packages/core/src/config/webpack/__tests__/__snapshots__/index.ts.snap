@@ -3,7 +3,7 @@
 exports[`Webpack returns for development 1`] = `
 Object {
   "es5": Object {
-    "devtool": "cheap-module-eval-source-map",
+    "devtool": "eval-source-map",
     "entry": Object {
       "site-1": Array [
         "webpack-hot-middleware/client",
@@ -54,6 +54,18 @@ Object {
         Object {
           "test": /\\\\\\.css\\$/,
           "use": "raw-loader",
+        },
+        Object {
+          "test": /\\\\\\.\\(woff\\(2\\)\\?\\|ttf\\|eot\\)\\(\\\\\\?v=\\\\d\\+\\\\\\.\\\\d\\+\\\\\\.\\\\d\\+\\)\\?\\$/,
+          "use": Object {
+            "loader": "url-loader",
+            "options": Object {
+              "emitFile": true,
+              "limit": 25000,
+              "name": [Function],
+              "outputPath": "fonts",
+            },
+          },
         },
       ],
     },
@@ -127,7 +139,7 @@ Object {
     "target": "web",
   },
   "module": Object {
-    "devtool": "cheap-module-eval-source-map",
+    "devtool": "eval-source-map",
     "entry": Object {
       "site-1": Array [
         "webpack-hot-middleware/client",
@@ -176,6 +188,18 @@ Object {
         Object {
           "test": /\\\\\\.css\\$/,
           "use": "raw-loader",
+        },
+        Object {
+          "test": /\\\\\\.\\(woff\\(2\\)\\?\\|ttf\\|eot\\)\\(\\\\\\?v=\\\\d\\+\\\\\\.\\\\d\\+\\\\\\.\\\\d\\+\\)\\?\\$/,
+          "use": Object {
+            "loader": "url-loader",
+            "options": Object {
+              "emitFile": true,
+              "limit": 25000,
+              "name": [Function],
+              "outputPath": "fonts",
+            },
+          },
         },
       ],
     },
@@ -249,7 +273,7 @@ Object {
     "target": "web",
   },
   "server": Object {
-    "devtool": "cheap-module-eval-source-map",
+    "devtool": "eval-source-map",
     "entry": "./build/bundling/entry-points/server.js",
     "externals": Object {},
     "mode": "development",
@@ -286,6 +310,18 @@ Object {
         Object {
           "test": /\\\\\\.css\\$/,
           "use": "raw-loader",
+        },
+        Object {
+          "test": /\\\\\\.\\(woff\\(2\\)\\?\\|ttf\\|eot\\)\\(\\\\\\?v=\\\\d\\+\\\\\\.\\\\d\\+\\\\\\.\\\\d\\+\\)\\?\\$/,
+          "use": Object {
+            "loader": "url-loader",
+            "options": Object {
+              "emitFile": false,
+              "limit": 25000,
+              "name": [Function],
+              "outputPath": "fonts",
+            },
+          },
         },
       ],
     },
@@ -402,6 +438,18 @@ Object {
           "test": /\\\\\\.css\\$/,
           "use": "raw-loader",
         },
+        Object {
+          "test": /\\\\\\.\\(woff\\(2\\)\\?\\|ttf\\|eot\\)\\(\\\\\\?v=\\\\d\\+\\\\\\.\\\\d\\+\\\\\\.\\\\d\\+\\)\\?\\$/,
+          "use": Object {
+            "loader": "url-loader",
+            "options": Object {
+              "emitFile": true,
+              "limit": 25000,
+              "name": [Function],
+              "outputPath": "fonts",
+            },
+          },
+        },
       ],
     },
     "name": "client",
@@ -516,6 +564,18 @@ Object {
           "test": /\\\\\\.css\\$/,
           "use": "raw-loader",
         },
+        Object {
+          "test": /\\\\\\.\\(woff\\(2\\)\\?\\|ttf\\|eot\\)\\(\\\\\\?v=\\\\d\\+\\\\\\.\\\\d\\+\\\\\\.\\\\d\\+\\)\\?\\$/,
+          "use": Object {
+            "loader": "url-loader",
+            "options": Object {
+              "emitFile": true,
+              "limit": 25000,
+              "name": [Function],
+              "outputPath": "fonts",
+            },
+          },
+        },
       ],
     },
     "name": "client",
@@ -619,6 +679,18 @@ Object {
         Object {
           "test": /\\\\\\.css\\$/,
           "use": "raw-loader",
+        },
+        Object {
+          "test": /\\\\\\.\\(woff\\(2\\)\\?\\|ttf\\|eot\\)\\(\\\\\\?v=\\\\d\\+\\\\\\.\\\\d\\+\\\\\\.\\\\d\\+\\)\\?\\$/,
+          "use": Object {
+            "loader": "url-loader",
+            "options": Object {
+              "emitFile": false,
+              "limit": 25000,
+              "name": [Function],
+              "outputPath": "fonts",
+            },
+          },
         },
       ],
     },

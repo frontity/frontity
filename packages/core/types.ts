@@ -1,4 +1,4 @@
-import { TransformOptions } from "babel-core";
+import { TransformOptions } from "@babel/core";
 import { Configuration } from "webpack";
 
 export type Mode = "development" | "production";
