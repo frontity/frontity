@@ -8,18 +8,24 @@ import Link from "./link";
  * It renders the navigation links
  */
 const Nav = ({ state }) => (
-  <Container>
-    {state.theme.menu.map(([name, link]) => (
-      <Item key={name} isSelected={state.router.link === link}>
-        <Link link={link}>{name}</Link>
-      </Item>
-    ))}
-  </Container>
+  <NavContainer>
+    {state.theme.menu.map(([name, link]) => {
+      // Check if the link matched the current page url
+      const isCurrentPage = state.router.link === link;
+      return (
+        <NavItem key={name}>
+          <Link link={link} aria-current={isCurrentPage ? "page" : undefined}>
+            {name}
+          </Link>
+        </NavItem>
+      );
+    })}
+  </NavContainer>
 );
 
 export default connect(Nav);
 
-const Container = styled.nav`
+const NavContainer = styled.nav`
   list-style: none;
   display: flex;
   width: 848px;
@@ -30,7 +36,7 @@ const Container = styled.nav`
   overflow-x: auto;
 `;
 
-const Item = styled.div`
+const NavItem = styled.div`
   padding: 0;
   margin: 0 16px;
   color: #fff;
@@ -41,8 +47,12 @@ const Item = styled.div`
   & > a {
     display: inline-block;
     line-height: 2em;
-    border-bottom: 2px solid
-      ${({ isSelected }) => (isSelected ? "#fff" : "transparent")};
+    border-bottom: 2px solid;
+    border-bottom-color: transparent;
+    /* Use for semantic approach to style the current link */
+    &[aria-current="page"] {
+      border-bottom-color: #fff;
+    }
   }
 
   &:first-of-type {
