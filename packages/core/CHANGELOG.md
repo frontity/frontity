@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/frontity/frontity/compare/@frontity/core@1.3.0...@frontity/core@1.4.0) (2019-11-04)
+
+
+### Bug Fixes
+
+* **core:** add labels and source maps ([#227](https://github.com/frontity/frontity/issues/227)) ([d5af653](https://github.com/frontity/frontity/commit/d5af653))
+* **emotion:** fix Global css not ending up in head ([e8c3430](https://github.com/frontity/frontity/commit/e8c3430))
+* **emotion:** fix Global leak ([baad509](https://github.com/frontity/frontity/commit/baad509))
+
+
+### Features
+
+* **webpack:** add support for fonts to webpack ([2148823](https://github.com/frontity/frontity/commit/2148823))
+
+
+
+
+
 # [1.3.0](https://github.com/frontity/frontity/compare/@frontity/core@1.2.1...@frontity/core@1.3.0) (2019-10-02)
 
 

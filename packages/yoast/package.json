@@ -1,6 +1,6 @@
 {
   "name": "@frontity/yoast",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Integrate your Frontity site with Yoast",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -27,10 +27,10 @@
   },
   "devDependencies": {
     "@frontity/connect": "^1.0.3",
-    "@frontity/router": "^1.0.16",
-    "@frontity/source": "^1.0.15",
+    "@frontity/router": "^1.0.17",
+    "@frontity/source": "^1.0.16",
     "@types/jest": "^24.0.11",
-    "frontity": "^1.4.1",
+    "frontity": "^1.4.2",
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.3"

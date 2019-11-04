@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/frontity/frontity/compare/@frontity/mars-theme@1.2.2...@frontity/mars-theme@1.2.3) (2019-11-04)
+
+
+### Bug Fixes
+
+* **styles:** add styles for form inputs ([#231](https://github.com/frontity/frontity/issues/231)) ([0d6385b](https://github.com/frontity/frontity/commit/0d6385b))
+
+
+
+
+
 ## [1.2.2](https://github.com/frontity/frontity/compare/@frontity/mars-theme@1.2.1...@frontity/mars-theme@1.2.2) (2019-10-10)
 
 **Note:** Version bump only for package @frontity/mars-theme
