@@ -64,7 +64,7 @@
     "@types/node": "^11.13.2",
     "@types/node-fetch": "^2.3.3",
     "@types/phin": "^3.3.0",
-    "@types/ramda": "^0.26.6",
+    "@types/ramda": "^0.26.33",
     "@types/shelljs": "^0.8.4",
     "@types/stack-trace": "0.0.29",
     "@types/tar": "^4.0.0",
