@@ -8,18 +8,18 @@ import Link from "./link";
  * It renders the navigation links
  */
 const Nav = ({ state }) => (
-  <NavContainer>
+  <Container>
     {state.theme.menu.map(([name, link]) => (
       <Item key={name} isSelected={state.router.link === link}>
         <Link link={link}>{name}</Link>
       </Item>
     ))}
-  </NavContainer>
+  </Container>
 );
 
 export default connect(Nav);
 
-const NavContainer = styled.nav`
+const Container = styled.nav`
   list-style: none;
   display: flex;
   width: 848px;

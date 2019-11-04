@@ -9,6 +9,8 @@ const Link = ({ actions, link, className, children }) => {
     event.preventDefault();
     // Set the router to the new url.
     actions.router.set(link);
+
+    // Scroll the page to the top
     window.scrollTo(0, 0);
   };
 

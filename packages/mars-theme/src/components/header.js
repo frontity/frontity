@@ -6,7 +6,7 @@ import Nav from "./nav";
 /**
  * Header Component
  *
- * It contains the title, description and navigation links.
+ * It renders the title, description and navigation links.
  */
 const Header = ({ state }) => (
   <>
