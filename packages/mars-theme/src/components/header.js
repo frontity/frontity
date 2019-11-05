@@ -2,27 +2,38 @@ import React from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
 import Nav from "./nav";
+import { CloseIcon, HamburgerIcon } from "./menu-icon";
 
-const Header = ({ state, actions }) => (
-  <>
-    <Container>
-      <StyledLink link="/">
-        <Title>{state.frontity.title}</Title>
-      </StyledLink>
-      <Description>{state.frontity.description}</Description>
-      <StyledButton onClick={() => actions.theme.menu.toggle()}>
-        {state.theme.menu.isOpen ? "Close" : "Open"} Menu
-      </StyledButton>
-    </Container>
-    <Nav />
-  </>
-);
+const Header = ({ state, actions }) => {
+  const isMenuOpen = state.theme.menu.isOpen;
+  return (
+    <>
+      <Container>
+        <StyledLink link="/">
+          <Title>{state.frontity.title}</Title>
+        </StyledLink>
+        <Description>{state.frontity.description}</Description>
+        <StyledButton onClick={() => actions.theme.menu.toggle()}>
+          {isMenuOpen ? (
+            <CloseIcon color="white" size="24px" />
+          ) : (
+            <HamburgerIcon color="white" size="24px" />
+          )}
+        </StyledButton>
+      </Container>
+      <Nav />
+    </>
+  );
+};
 
 export default connect(Header);
 
 const StyledButton = styled.button`
   position: absolute;
   right: 24px;
+  background: transparent;
+  border: 0;
+  color: white;
 `;
 
 const Container = styled.div`
