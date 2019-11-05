@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "frontity";
 
+// The 404 page component
 const Page404 = () => (
   <Container>
     <Title>Oops! 404</Title>

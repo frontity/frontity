@@ -3,9 +3,16 @@ import { connect, styled } from "frontity";
 import Link from "./link";
 import Nav from "./nav";
 
+/**
+ * Header Component
+ *
+ * It renders the title, description and navigation links.
+ */
 const Header = ({ state }) => (
   <>
     <Container>
+      {/* Wrapping Title in a Link to make it clickable.
+      It goes to home page when clicked*/}
       <StyledLink link="/">
         <Title>{state.frontity.title}</Title>
       </StyledLink>
@@ -15,6 +22,7 @@ const Header = ({ state }) => (
   </>
 );
 
+// Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header);
 
 const Container = styled.div`
