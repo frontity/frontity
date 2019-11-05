@@ -4,9 +4,12 @@ import Link from "./link";
 import Nav from "./nav";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
+import { useMediaQuery } from "./use-media-query";
 
 const Header = ({ state, actions }) => {
   const { isMenuOpen } = state.theme;
+  const isMobile = useMediaQuery("(max-width: 560px)");
+
   return (
     <>
       <Container>
@@ -16,18 +19,20 @@ const Header = ({ state, actions }) => {
         <Description>{state.frontity.description}</Description>
 
         {/* Show a menu toggle to activate the modal */}
-        <MenuToggle onClick={() => actions.theme.toggleMenu()}>
-          {isMenuOpen ? (
-            <CloseIcon color="white" size="24px" />
-          ) : (
-            <HamburgerIcon color="white" size="24px" />
-          )}
-        </MenuToggle>
+        {isMobile && (
+          <MenuToggle onClick={() => actions.theme.toggleMenu()}>
+            {isMenuOpen ? (
+              <CloseIcon color="white" size="24px" />
+            ) : (
+              <HamburgerIcon color="white" size="24px" />
+            )}
+          </MenuToggle>
+        )}
 
         {/* If the menu is open, render the menu modal */}
         {isMenuOpen && <MenuModal />}
       </Container>
-      <Nav />
+      {!isMobile && <Nav />}
     </>
   );
 };
