@@ -31,6 +31,9 @@ const marsTheme = {
    */
   actions: {
     theme: {
+      afterCSR: ({ state }) => {
+        console.log("Time to test CSR" + state.theme);
+      },
       toggleMenu: ({ state }) => {
         state.theme.isMenuOpen = !state.theme.isMenuOpen;
 
