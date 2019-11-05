@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const canUseDOM = typeof window != "undefined";
+export const canUseDOM = typeof window != "undefined";
 
 export const useMediaQuery = query => {
   // State update function

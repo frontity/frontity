@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "frontity";
 
 const Link = ({
+  state,
   actions,
   link,
   className,
@@ -18,6 +19,11 @@ const Link = ({
 
     // Scroll the page to the top
     window.scrollTo(0, 0);
+
+    // if the menu modal is open, close it so it doesn't block rendering
+    if (state.theme.isMenuOpen) {
+      actions.theme.closeMenu();
+    }
   };
 
   return (

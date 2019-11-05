@@ -1,5 +1,6 @@
 import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
+import { canUseDOM } from "./components/use-media-query";
 
 const marsTheme = {
   name: "@frontity/mars-theme",
@@ -34,8 +35,15 @@ const marsTheme = {
         state.theme.isMenuOpen = !state.theme.isMenuOpen;
 
         // block body scroll if menu is open (SSR friendly)
-        if (typeof window != "undefined") {
+        if (canUseDOM) {
           window.document.body.classList.toggle("menu-open");
+        }
+      },
+      closeMenu: ({ state }) => {
+        state.theme.isMenuOpen = false;
+
+        if (canUseDOM) {
+          window.document.body.classList.remove("menu-open");
         }
       }
     }

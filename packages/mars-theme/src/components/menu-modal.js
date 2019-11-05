@@ -12,7 +12,11 @@ const MenuModal = ({ state }) => {
       <MenuContent as="nav">
         {isThereLinks &&
           menu.map(([name, link]) => (
-            <MenuLink key={name} link={link}>
+            <MenuLink
+              key={name}
+              link={link}
+              aria-current={state.router.link === link ? "page" : undefined}
+            >
               {name}
             </MenuLink>
           ))}
@@ -47,6 +51,12 @@ const MenuLink = styled(Link)`
   &:hover,
   &:focus {
     background-color: rgba(0, 0, 0, 0.05);
+  }
+  /* styles for active link */
+  &[aria-current="page"] {
+    color: yellow;
+    font-weight: bold;
+    /* border-bottom: 4px solid yellow; */
   }
 `;
 

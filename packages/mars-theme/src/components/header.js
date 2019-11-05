@@ -7,7 +7,10 @@ import MenuModal from "./menu-modal";
 import { useMediaQuery } from "./use-media-query";
 
 const Header = ({ state, actions }) => {
+  // Get the menu opened state
   const { isMenuOpen } = state.theme;
+
+  // Check if the viewport is less than 560px (mobile)
   const isMobile = useMediaQuery("(max-width: 560px)");
 
   return (
@@ -18,11 +21,11 @@ const Header = ({ state, actions }) => {
         </StyledLink>
         <Description>{state.frontity.description}</Description>
 
-        {/* Show a menu toggle to activate the modal */}
+        {/* If we're on mobile viewport, show a menu toggle to activate the modal */}
         {isMobile && (
           <MenuToggle onClick={() => actions.theme.toggleMenu()}>
             {isMenuOpen ? (
-              <CloseIcon color="white" size="24px" />
+              <CloseIcon color="white" size="20px" />
             ) : (
               <HamburgerIcon color="white" size="24px" />
             )}
@@ -48,6 +51,11 @@ const MenuToggle = styled.button`
   border: 0;
   color: white;
   z-index: 5;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Container = styled.div`
