@@ -50,6 +50,10 @@ const globalStyles = css`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    &.menu-open {
+      overflow-y: hidden;
+    }
   }
   a,
   a:visited {

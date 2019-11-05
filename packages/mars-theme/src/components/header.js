@@ -3,9 +3,10 @@ import { connect, styled } from "frontity";
 import Link from "./link";
 import Nav from "./nav";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
+import MenuModal from "./menu-modal";
 
 const Header = ({ state, actions }) => {
-  const isMenuOpen = state.theme.menu.isOpen;
+  const { isMenuOpen } = state.theme;
   return (
     <>
       <Container>
@@ -13,13 +14,18 @@ const Header = ({ state, actions }) => {
           <Title>{state.frontity.title}</Title>
         </StyledLink>
         <Description>{state.frontity.description}</Description>
-        <StyledButton onClick={() => actions.theme.menu.toggle()}>
+
+        {/* Show a menu toggle to activate the modal */}
+        <MenuToggle onClick={() => actions.theme.toggleMenu()}>
           {isMenuOpen ? (
             <CloseIcon color="white" size="24px" />
           ) : (
             <HamburgerIcon color="white" size="24px" />
           )}
-        </StyledButton>
+        </MenuToggle>
+
+        {/* If the menu is open, render the menu modal */}
+        {isMenuOpen && <MenuModal />}
       </Container>
       <Nav />
     </>
@@ -28,12 +34,14 @@ const Header = ({ state, actions }) => {
 
 export default connect(Header);
 
-const StyledButton = styled.button`
+const MenuToggle = styled.button`
   position: absolute;
   right: 24px;
+  top: 24px;
   background: transparent;
   border: 0;
   color: white;
+  z-index: 5;
 `;
 
 const Container = styled.div`

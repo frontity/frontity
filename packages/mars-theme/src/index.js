@@ -12,10 +12,8 @@ const marsTheme = {
     // State is where the packages store their default settings and other
     // relevant state. It is scoped to the "theme" namespace.
     theme: {
-      menu: {
-        isOpen: false,
-        links: []
-      },
+      menu: [],
+      isMenuOpen: false,
       featured: {
         showOnList: false,
         showOnPost: false
@@ -26,9 +24,12 @@ const marsTheme = {
   // Frontity like libraries.
   actions: {
     theme: {
-      menu: {
-        toggle: ({ state }) => {
-          state.theme.menu.isOpen = !state.theme.menu.isOpen;
+      toggleMenu: ({ state }) => {
+        state.theme.isMenuOpen = !state.theme.isMenuOpen;
+
+        // block body scroll if menu is open (SSR friendly)
+        if (typeof window != "undefined") {
+          window.document.body.classList.toggle("menu-open");
         }
       }
     }
