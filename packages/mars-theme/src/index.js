@@ -12,7 +12,10 @@ const marsTheme = {
     // State is where the packages store their default settings and other
     // relevant state. It is scoped to the "theme" namespace.
     theme: {
-      menu: [],
+      menu: {
+        isOpen: false,
+        links: []
+      },
       featured: {
         showOnList: false,
         showOnPost: false
@@ -22,7 +25,13 @@ const marsTheme = {
   // Actions are functions that modify the state or deal with other parts of
   // Frontity like libraries.
   actions: {
-    theme: {}
+    theme: {
+      menu: {
+        toggle: ({ state }) => {
+          state.theme.menu.isOpen = !state.theme.menu.isOpen;
+        }
+      }
+    }
   },
   libraries: {
     html2react: {
