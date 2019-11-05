@@ -37,6 +37,7 @@ const Header = ({ state, actions }) => {
   );
 };
 
+// Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header);
 
 const MenuToggle = styled.button`

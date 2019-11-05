@@ -17,9 +17,11 @@ const Post = ({ state, actions, libraries }) => {
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
 
-  // Once the post has loaded in the DOM, prefetch both the
-  // home posts and the list component so if the user visits
-  // the home page, everything is ready and it loads instantly.
+  /**
+   * Once the post has loaded in the DOM, prefetch both the
+   * home posts and the list component so if the user visits
+   * the home page, everything is ready and it loads instantly.
+   */
   useEffect(() => {
     actions.source.fetch("/");
     List.preload();
@@ -94,8 +96,10 @@ const Fecha = styled.p`
   display: inline;
 `;
 
-// This component is the parent of the `content.rendered` HTML. We can use nested
-// selectors to style that HTML.
+/**
+ * This component is the parent of the `content.rendered` HTML. We can use nested
+ * selectors to style that HTML.
+ */
 const Content = styled.div`
   color: rgba(12, 17, 43, 0.8);
   word-break: break-word;
