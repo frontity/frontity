@@ -1,5 +1,5 @@
 import React from "react";
-import { styled, connect, Head } from "frontity";
+import { styled, connect, Global } from "frontity";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
 
@@ -10,11 +10,9 @@ function MobileMenu({ state, actions }) {
       <MenuToggle onClick={actions.theme.toggleMobileMenu}>
         {isMobileMenuOpen ? (
           <>
-            {/* Add a class to the body when menu is open,
-            so we can prevent body scroll */}
-            <Head>
-              <body className="menu-open" />
-            </Head>
+            {/* Add some style to the body when menu is open,
+            to prevent body scroll */}
+            <Global styles={{ body: { overflowY: "hidden" } }} />
             <CloseIcon color="white" size="20px" />
           </>
         ) : (
