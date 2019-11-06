@@ -29,7 +29,7 @@ const Theme = ({ state }) => {
       <Global styles={globalStyles} />
 
       {/* Add the header of the site. */}
-      <HeadContainer>
+      <HeadContainer bg="#1f38c5" color="#fff">
         <Header />
       </HeadContainer>
 
@@ -68,7 +68,8 @@ const HeadContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #1f38c5;
+  background-color: ${props => props.bg};
+  color: ${props => props.color};
 `;
 
 const Main = styled.div`

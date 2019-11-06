@@ -18,6 +18,21 @@ const marsTheme = {
      */
     theme: {
       initialColorMode: "light",
+      colors: {
+        headerBg: "#1f38c5",
+        headerText: "#ffffff",
+        bodyText: "#0c112b",
+        bodyBg: "rgba(66,174,228,0.1)",
+        // nested color modes to support multiple color modes
+        modes: {
+          dark: {
+            headerBg: "#3c4b9e",
+            headerText: "#ffffff",
+            bodyText: "rgba(255, 255, 255, 0.9)",
+            bodyBg: "rgba(0, 0, 0, 0.9)"
+          }
+        }
+      },
       menu: [],
       isMenuOpen: false,
       featured: {
