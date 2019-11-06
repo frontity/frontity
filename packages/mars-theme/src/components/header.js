@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
 import Nav from "./nav";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
 import { useMediaQuery } from "./use-media-query";
+import useLocalStorage from "./use-local-storage";
 
 const Header = ({ state, actions }) => {
   // Get the menu opened state
@@ -12,6 +13,13 @@ const Header = ({ state, actions }) => {
 
   // Check if the viewport is less than 560px (mobile)
   const isMobile = useMediaQuery("(max-width: 560px)");
+
+  // Get the current color mode from local storage
+  const [colorMode] = useLocalStorage("color-mode");
+
+  useEffect(() => {
+    console.log(colorMode);
+  }, [colorMode]);
 
   return (
     <>

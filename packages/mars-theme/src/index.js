@@ -17,6 +17,7 @@ const marsTheme = {
      * relevant state. It is scoped to the `theme` namespace.
      */
     theme: {
+      initialColorMode: "light",
       menu: [],
       isMenuOpen: false,
       featured: {
@@ -32,7 +33,15 @@ const marsTheme = {
   actions: {
     theme: {
       afterCSR: ({ state }) => {
-        console.log("Time to test CSR" + state.theme);
+        // Attempt to get the color mode stored in local storage
+        const colorMode = window.localStorage.getItem("color-mode");
+        // if color mode doesn't exists, set it to the initial mode in state
+        if (!colorMode) {
+          window.localStorage.setItem(
+            "color-mode",
+            state.theme.initialColorMode
+          );
+        }
       },
       toggleMenu: ({ state }) => {
         state.theme.isMenuOpen = !state.theme.isMenuOpen;

@@ -1,29 +1,19 @@
 import { useState } from "react";
+import { canUseDOM } from "./use-media-query";
 
-function useLocalStorage(key, initialValue) {
-  const getInitialState = () => {
-    // Get from local storage by key
-    const item = window.localStorage.getItem(key);
-    // Parse stored json or if none return initialValue
-    return item ? JSON.parse(item) : initialValue;
+function useLocalStorage(key, initialValue = "") {
+  // Get the local storage value and store it in state
+  const [value, setValue] = useState(() =>
+    canUseDOM ? localStorage.getItem(key) : initialValue
+  );
+
+  // Setter function to update state and local storage
+  const setItem = newValue => {
+    setValue(newValue);
+    window.localStorage.setItem(key, newValue);
   };
 
-  // State to store our local storage value
-  // Pass initial state function to useState so logic is only executed once
-  const [localStorageValue, setLocalStorageValue] = useState(getInitialState);
-
-  // Define state setter function for local storage value
-  const setValue = value => {
-    // Allow value to be a function so we have same API as useState
-    const valueToStore =
-      typeof value === "function" ? value(localStorageValue) : value;
-    // Save state
-    setLocalStorageValue(valueToStore);
-    // Save to local storage
-    window.localStorage.setItem(key, JSON.stringify(valueToStore));
-  };
-
-  return [localStorageValue, setValue];
+  return [value, setItem];
 }
 
 export default useLocalStorage;
