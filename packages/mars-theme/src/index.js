@@ -1,6 +1,5 @@
 import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
-import { canUseDOM } from "./components/use-media-query";
 
 const marsTheme = {
   name: "@frontity/mars-theme",
@@ -18,7 +17,7 @@ const marsTheme = {
      */
     theme: {
       menu: [],
-      isMenuOpen: false,
+      isMobileMenuOpen: false,
       featured: {
         showOnList: false,
         showOnPost: false
@@ -34,20 +33,11 @@ const marsTheme = {
       afterCSR: ({ state }) => {
         console.log("Time to test CSR" + state.theme);
       },
-      toggleMenu: ({ state }) => {
-        state.theme.isMenuOpen = !state.theme.isMenuOpen;
-
-        // block body scroll if menu is open (SSR friendly)
-        if (canUseDOM) {
-          window.document.body.classList.toggle("menu-open");
-        }
+      toggleMobileMenu: ({ state }) => {
+        state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen;
       },
-      closeMenu: ({ state }) => {
-        state.theme.isMenuOpen = false;
-
-        if (canUseDOM) {
-          window.document.body.classList.remove("menu-open");
-        }
+      closeMobileMenu: ({ state }) => {
+        state.theme.isMobileMenuOpen = false;
       }
     }
   },

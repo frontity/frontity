@@ -21,8 +21,8 @@ const Link = ({
     window.scrollTo(0, 0);
 
     // if the menu modal is open, close it so it doesn't block rendering
-    if (state.theme.isMenuOpen) {
-      actions.theme.closeMenu();
+    if (state.theme.isMobileMenuOpen) {
+      actions.theme.closeMobileMenu();
     }
   };
 
