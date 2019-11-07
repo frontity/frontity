@@ -30,9 +30,6 @@ const marsTheme = {
    */
   actions: {
     theme: {
-      afterCSR: ({ state }) => {
-        console.log("Time to test CSR" + state.theme);
-      },
       toggleMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen;
       },
