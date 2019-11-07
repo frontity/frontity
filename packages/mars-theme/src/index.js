@@ -17,6 +17,7 @@ const marsTheme = {
      */
     theme: {
       menu: [],
+      isMobileMenuOpen: false,
       featured: {
         showOnList: false,
         showOnPost: false
@@ -28,7 +29,14 @@ const marsTheme = {
    * Frontity like libraries.
    */
   actions: {
-    theme: {}
+    theme: {
+      toggleMobileMenu: ({ state }) => {
+        state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen;
+      },
+      closeMobileMenu: ({ state }) => {
+        state.theme.isMobileMenuOpen = false;
+      }
+    }
   },
   libraries: {
     html2react: {
