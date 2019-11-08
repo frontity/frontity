@@ -519,3 +519,31 @@ export type Derived<
       arg9: ArgumentOrReturnValue9,
       arg10: ArgumentOrReturnValue10
     ) => ReturnValue;
+
+/**
+ * Creates a new props object joining together the connected store and the normal props object.
+ * It's meant to be used on components that are going to be connected.
+ *
+ * Examples:
+ *  - `const Comp: React.FC<Connect<YourStore, { prop1: string }>> = ({ state, actions, libraries, prop1 }) => <div>...</div>`
+ *  - `class Comp extends React.Component<Connect<YourStore, { prop1: string }>> { render() { return <div>...</div>; }}`
+ *
+ * @param StoreType
+ * The store containing both state, actions and libraries.
+ * @param Props
+ * The normal props object of this component.
+ *
+ */
+export type Connect<StoreType extends Store, Props extends object = {}> = Omit<
+  StoreType,
+  "state" | "actions"
+> & {
+  state: State<StoreType>;
+  actions: Actions<StoreType>;
+} & Props;
+
+// This is only a helper to filter the properties of a store included in a bigger object.
+export type FilterStore<StoreType extends Store> = Omit<
+  StoreType,
+  "state" | "actions" | "libraries"
+>;
