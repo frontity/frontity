@@ -9,17 +9,13 @@ export interface Store {
 }
 
 /**
- * The context object that can be passed to a proxify function.
- */
-export interface Context {
-  type: "debug" | "action" | "component";
-  name: string;
-}
-
-/**
  * The options that can be passed to a proxify function.
  */
 export interface ProxifyOptions {
+  owner?: {
+    type: "debug" | "action" | "component" | "when";
+    name?: string;
+  };
   mode?: "development" | "production";
 }
 

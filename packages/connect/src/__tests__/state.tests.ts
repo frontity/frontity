@@ -1,6 +1,6 @@
 import { proxifyState } from "..";
-import { State, Derived, Store, Context } from "../../types";
-import { CONTEXT, PATH, RAW, ROOT, IS_STATE } from "../symbols";
+import { State, Derived, Store, ProxifyOptions } from "../../types";
+import { OWNER, PATH, RAW, ROOT, IS_STATE } from "../symbols";
 
 interface MyStore extends Store {
   state: {
@@ -147,42 +147,46 @@ describe("State", () => {
   });
 });
 
-describe("Contexts", () => {
-  it("should return different proxified states and store different contexts in development", () => {
-    const context1: Context = { type: "debug", name: "context1" };
-    const context2: Context = { type: "debug", name: "context2" };
-    const state1 = proxifyState(rawStore, context1, { mode: "development" });
-    const state2 = proxifyState(rawStore, context2, { mode: "development" });
-    expect(state1[CONTEXT]).toBe(context1);
-    expect(state1.users[CONTEXT]).toBe(context1);
-    expect(state1.users[0][CONTEXT]).toBe(context1);
-    expect(state1.users[0].profile[CONTEXT]).toBe(context1);
-    expect(state2[CONTEXT]).toBe(context2);
-    expect(state2.users[CONTEXT]).toBe(context2);
-    expect(state2.users[0][CONTEXT]).toBe(context2);
-    expect(state2.users[0].profile[CONTEXT]).toBe(context2);
+describe("State Owner", () => {
+  it("should return different proxified states and store different owner in development", () => {
+    const options1: ProxifyOptions = {
+      owner: { type: "debug", name: "options1" },
+      mode: "development"
+    };
+    const options2: ProxifyOptions = {
+      owner: { type: "debug", name: "options2" },
+      mode: "development"
+    };
+    const state1 = proxifyState(rawStore, options1);
+    const state2 = proxifyState(rawStore, options2);
+    expect(state1[OWNER]).toBe(options1.owner);
+    expect(state1.users[OWNER]).toBe(options1.owner);
+    expect(state1.users[0][OWNER]).toBe(options1.owner);
+    expect(state1.users[0].profile[OWNER]).toBe(options1.owner);
+    expect(state2[OWNER]).toBe(options2.owner);
+    expect(state2.users[OWNER]).toBe(options2.owner);
+    expect(state2.users[0][OWNER]).toBe(options2.owner);
+    expect(state2.users[0].profile[OWNER]).toBe(options2.owner);
     expect(state1).not.toBe(state2);
   });
 
-  it("should return the same proxified states without context information in production", () => {
-    const state1 = proxifyState(
-      rawStore,
-      { type: "debug", name: "context1" },
-      { mode: "production" }
-    );
-    const state2 = proxifyState(
-      rawStore,
-      { type: "debug", name: "context2" },
-      { mode: "production" }
-    );
-    expect(state1[CONTEXT]).toBe(null);
-    expect(state1.users[CONTEXT]).toBe(null);
-    expect(state1.users[0][CONTEXT]).toBe(null);
-    expect(state1.users[0].profile[CONTEXT]).toBe(null);
-    expect(state2[CONTEXT]).toBe(null);
-    expect(state2.users[CONTEXT]).toBe(null);
-    expect(state2.users[0][CONTEXT]).toBe(null);
-    expect(state2.users[0].profile[CONTEXT]).toBe(null);
+  it("should return the same proxified states without owner information in production", () => {
+    const state1 = proxifyState(rawStore, {
+      mode: "production",
+      owner: { type: "debug", name: "owner1" }
+    });
+    const state2 = proxifyState(rawStore, {
+      mode: "production",
+      owner: { type: "debug", name: "owner2" }
+    });
+    expect(state1[OWNER]).toBe(null);
+    expect(state1.users[OWNER]).toBe(null);
+    expect(state1.users[0][OWNER]).toBe(null);
+    expect(state1.users[0].profile[OWNER]).toBe(null);
+    expect(state2[OWNER]).toBe(null);
+    expect(state2.users[OWNER]).toBe(null);
+    expect(state2.users[0][OWNER]).toBe(null);
+    expect(state2.users[0].profile[OWNER]).toBe(null);
     expect(state1).toBe(state2);
   });
 });

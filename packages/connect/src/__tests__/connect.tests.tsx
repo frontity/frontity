@@ -1,8 +1,8 @@
 import React, { FC, Component } from "react";
 import { create, act } from "react-test-renderer";
-import connect, { Provider } from "..";
+import connect, { Provider, proxifyState, proxifyActions } from "..";
 import { Derived, Action, State, Connect, Store, Actions } from "../../types";
-import { CONTEXT } from "../symbols";
+import { OWNER } from "../symbols";
 
 interface MyStore extends Store {
   state: {
@@ -306,14 +306,15 @@ describe("connect", () => {
   });
 });
 
-describe("connect contexts", () => {
-  it("should create contexts for the state and actions in development", () => {
+describe("Connect Owners", () => {
+  const state = proxifyState(rawStore, { mode: "production" });
+  const actions = proxifyActions(rawStore, { mode: "production" });
+
+  it("should create owners for the state and actions in development", () => {
     let funcState: State<MyStore>;
     let classState: State<MyStore>;
     let funcActions: Actions<MyStore>;
     let classActions: Actions<MyStore>;
-
-    const context = { type: "component", name: "Comp" };
 
     const FuncComp: FC<Connect<MyStore>> = ({ state, actions }) => {
       funcState = state;
@@ -345,17 +346,33 @@ describe("connect contexts", () => {
       </Provider>
     );
 
+    expect(funcState).not.toBe(state);
+    expect(classState).not.toBe(state);
+    expect(funcActions).not.toBe(actions);
+    expect(classActions).not.toBe(actions);
     expect(funcState).toEqual(rawStore.state);
     expect(classState).toEqual(rawStore.state);
     expect(funcActions).toEqual(rawStore.actions);
     expect(classActions).toEqual(rawStore.actions);
-    expect(funcState[CONTEXT]).toEqual(context);
-    expect(classState[CONTEXT]).toEqual(context);
-    expect(funcActions[CONTEXT]).toEqual(context);
-    expect(classActions[CONTEXT]).toEqual(context);
+    expect(funcState[OWNER]).toEqual({
+      type: "component",
+      name: "FuncComp"
+    });
+    expect(classState[OWNER]).toEqual({
+      type: "component",
+      name: "ClassComp"
+    });
+    expect(funcActions[OWNER]).toEqual({
+      type: "component",
+      name: "FuncComp"
+    });
+    expect(classActions[OWNER]).toEqual({
+      type: "component",
+      name: "ClassComp"
+    });
   });
 
-  it("should not create contexts for the state and actions in production", () => {
+  it("should not create owners for the state and actions in production", () => {
     let funcState: State<MyStore>;
     let classState: State<MyStore>;
     let funcActions: Actions<MyStore>;
@@ -391,17 +408,21 @@ describe("connect contexts", () => {
       </Provider>
     );
 
+    expect(funcState).toBe(state);
+    expect(classState).toBe(state);
+    expect(funcActions).toBe(actions);
+    expect(classActions).toBe(actions);
     expect(funcState).toEqual(rawStore.state);
     expect(classState).toEqual(rawStore.state);
     expect(funcActions).toEqual(rawStore.actions);
     expect(classActions).toEqual(rawStore.actions);
-    expect(funcState[CONTEXT]).toEqual(null);
-    expect(classState[CONTEXT]).toEqual(null);
-    expect(funcActions[CONTEXT]).toEqual(null);
-    expect(classActions[CONTEXT]).toEqual(null);
+    expect(funcState[OWNER]).toEqual(null);
+    expect(classState[OWNER]).toEqual(null);
+    expect(funcActions[OWNER]).toEqual(null);
+    expect(classActions[OWNER]).toEqual(null);
   });
 
-  it("should create contexts inside the actions in development", () => {
+  it("should create owners inside the actions in development", () => {
     interface MyStore extends Store {
       actions: {
         exportActions: Action<MyStore>;
@@ -413,7 +434,7 @@ describe("connect contexts", () => {
     let internalActions: Actions<MyStore>;
     let internalState: State<MyStore>;
 
-    const context = {
+    const owner = {
       type: "action",
       name: "exportActions",
       parent: { type: "component", name: "Comp" }
@@ -449,13 +470,13 @@ describe("connect contexts", () => {
 
     expect(internalState).toEqual(rawStore.state);
     expect(internalState).not.toBe(funcState);
-    expect(internalState[CONTEXT]).toEqual(context);
+    expect(internalState[OWNER]).toEqual(owner);
     expect(internalActions).toEqual(rawStore.actions);
     expect(internalActions).not.toBe(funcActions);
-    expect(internalActions[CONTEXT]).toEqual(context);
+    expect(internalActions[OWNER]).toEqual(owner);
   });
 
-  it("should not create contexts inside the actions in production", () => {
+  it("should not create owners inside the actions in production", () => {
     interface MyStore extends Store {
       actions: {
         exportActions: Action<MyStore>;
@@ -497,9 +518,9 @@ describe("connect contexts", () => {
 
     expect(internalState).toEqual(rawStore.state);
     expect(internalState).toBe(funcState);
-    expect(internalState[CONTEXT]).toEqual(null);
+    expect(internalState[OWNER]).toEqual(null);
     expect(internalActions).toEqual(rawStore.actions);
     expect(internalActions).toBe(funcActions);
-    expect(internalActions[CONTEXT]).toEqual(null);
+    expect(internalActions[OWNER]).toEqual(null);
   });
 });

@@ -5,10 +5,10 @@ import {
   Store,
   Action,
   AsyncAction,
-  Context,
+  ProxifyOptions,
   State
 } from "../../types";
-import { CONTEXT, PATH, ROOT, IS_ACTIONS } from "../symbols";
+import { OWNER, PATH, ROOT, IS_ACTIONS } from "../symbols";
 
 interface ArrayItem {
   item: {
@@ -237,9 +237,15 @@ describe("Actions", () => {
   });
 });
 
-describe("Contexts", () => {
-  const context1: Context = { type: "debug", name: "context1" };
-  const context2: Context = { type: "debug", name: "context2" };
+describe("Action Owners", () => {
+  const options1: ProxifyOptions = {
+    owner: { type: "debug", name: "owner1" },
+    mode: "development"
+  };
+  const options2: ProxifyOptions = {
+    owner: { type: "debug", name: "owner2" },
+    mode: "development"
+  };
 
   let actions1: Actions<MyStore>;
   let actions2: Actions<MyStore>;
@@ -247,83 +253,73 @@ describe("Contexts", () => {
   beforeEach(() => {
     exposedState = null;
     exposedActions = null;
-    actions1 = proxifyActions(rawStore, context1, {
-      mode: "development"
-    });
-    actions2 = proxifyActions(rawStore, context2, {
-      mode: "development"
-    });
+    actions1 = proxifyActions(rawStore, options1);
+    actions2 = proxifyActions(rawStore, options2);
   });
 
-  it("should return different proxified actions and store different contexts in development", () => {
-    expect(actions1[CONTEXT]).toBe(context1);
-    expect(actions1.namespace[CONTEXT]).toBe(context1);
-    expect(actions2[CONTEXT]).toBe(context2);
-    expect(actions2.namespace[CONTEXT]).toBe(context2);
+  it("should return different proxified actions and store different owners in development", () => {
+    expect(actions1[OWNER]).toBe(options1.owner);
+    expect(actions1.namespace[OWNER]).toBe(options1.owner);
+    expect(actions2[OWNER]).toBe(options2.owner);
+    expect(actions2.namespace[OWNER]).toBe(options2.owner);
     expect(actions1).not.toBe(actions2);
   });
 
-  it("should return the same proxified actions without context information in production", () => {
-    const actions1 = proxifyActions(rawStore, context1, { mode: "production" });
-    const actions2 = proxifyActions(rawStore, context2, { mode: "production" });
-    expect(actions1[CONTEXT]).toBe(null);
-    expect(actions1.namespace[CONTEXT]).toBe(null);
-    expect(actions2[CONTEXT]).toBe(null);
-    expect(actions2.namespace[CONTEXT]).toBe(null);
+  it("should return the same proxified actions without owners information in production", () => {
+    const actions1 = proxifyActions(rawStore, {
+      ...options1,
+      mode: "production"
+    });
+    const actions2 = proxifyActions(rawStore, {
+      ...options2,
+      mode: "production"
+    });
+    expect(actions1[OWNER]).toBe(null);
+    expect(actions1.namespace[OWNER]).toBe(null);
+    expect(actions2[OWNER]).toBe(null);
+    expect(actions2.namespace[OWNER]).toBe(null);
     expect(actions1).toBe(actions2);
   });
 
-  it("state passed to actions should a context with parent", () => {
+  it("state passed to actions should have an owner with parent", () => {
     actions1.exports.exportState();
-    expect(exposedState[CONTEXT]).toEqual({
+    expect(exposedState[OWNER]).toEqual({
       type: "action",
       name: "exportState",
-      parent: {
-        type: "debug",
-        name: "context1"
-      }
+      parent: options1.owner
     });
     actions2.exports.exportState();
-    expect(exposedState[CONTEXT]).toEqual({
+    expect(exposedState[OWNER]).toEqual({
       type: "action",
       name: "exportState",
-      parent: {
-        type: "debug",
-        name: "context2"
-      }
+      parent: options2.owner
     });
   });
 
-  it("actions passed to actions should have a proper context", () => {
+  it("actions passed to actions should have a proper owner", () => {
     actions1.exports.exportActions();
-    expect(exposedActions[CONTEXT]).toEqual({
+    expect(exposedActions[OWNER]).toEqual({
       type: "action",
       name: "exportActions",
-      parent: {
-        type: "debug",
-        name: "context1"
-      }
+      parent: options1.owner
     });
     actions2.exports.exportActions();
-    expect(exposedActions[CONTEXT]).toEqual({
+    expect(exposedActions[OWNER]).toEqual({
       type: "action",
       name: "exportActions",
-      parent: {
-        type: "debug",
-        name: "context2"
-      }
+      parent: options2.owner
     });
   });
 
-  it("when running actions passed to actions, they should have a context in development", () => {
-    const context = (name: string, type: string) => ({
+  it("when running actions passed to actions, they should have an owner in development", () => {
+    const owner = (name: string, type: string) => ({
       type: "action",
       name: `export${type}`,
       parent: {
         type: "action",
         name: `callExport${type}`,
         parent: {
-          type: "debug",
+          ...options1,
           name
         }
       }
@@ -336,19 +332,25 @@ describe("Contexts", () => {
     actions1.exports.callExportState();
     expect(firstExposedActions).not.toBe(exposedActions);
     expect(firstExposedState).not.toBe(exposedState);
-    expect(exposedActions[CONTEXT]).toEqual(context("context1", "Actions"));
-    expect(exposedState[CONTEXT]).toEqual(context("context1", "State"));
+    expect(exposedActions[OWNER]).toEqual(owner("owner1", "Actions"));
+    expect(exposedState[OWNER]).toEqual(owner("owner1", "State"));
     actions2.exports.callExportActions();
     actions2.exports.callExportState();
     expect(firstExposedActions).not.toBe(exposedActions);
     expect(firstExposedState).not.toBe(exposedState);
-    expect(exposedActions[CONTEXT]).toEqual(context("context2", "Actions"));
-    expect(exposedState[CONTEXT]).toEqual(context("context2", "State"));
+    expect(exposedActions[OWNER]).toEqual(owner("owner2", "Actions"));
+    expect(exposedState[OWNER]).toEqual(owner("owner2", "State"));
   });
 
-  it("when running actions passed to actions, they should not have a context in production", () => {
-    const actions1 = proxifyActions(rawStore, context1, { mode: "production" });
-    const actions2 = proxifyActions(rawStore, context2, { mode: "production" });
+  it("when running actions passed to actions, they should not have an owner in production", () => {
+    const actions1 = proxifyActions(rawStore, {
+      ...options1,
+      mode: "production"
+    });
+    const actions2 = proxifyActions(rawStore, {
+      ...options2,
+      mode: "production"
+    });
     actions1.exports.exportActions();
     actions1.exports.exportState();
     const firstExposedActions = exposedActions;
@@ -357,13 +359,13 @@ describe("Contexts", () => {
     actions1.exports.callExportState();
     expect(firstExposedActions).toBe(exposedActions);
     expect(firstExposedState).toBe(exposedState);
-    expect(exposedActions[CONTEXT]).toBe(null);
-    expect(exposedState[CONTEXT]).toBe(null);
+    expect(exposedActions[OWNER]).toBe(null);
+    expect(exposedState[OWNER]).toBe(null);
     actions2.exports.callExportActions();
     actions2.exports.callExportState();
     expect(firstExposedActions).toBe(exposedActions);
     expect(firstExposedState).toBe(exposedState);
-    expect(exposedActions[CONTEXT]).toBe(null);
-    expect(exposedState[CONTEXT]).toBe(null);
+    expect(exposedActions[OWNER]).toBe(null);
+    expect(exposedState[OWNER]).toBe(null);
   });
 });

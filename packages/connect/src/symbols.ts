@@ -1,4 +1,4 @@
-export const CONTEXT = Symbol("CONTEXT");
+export const OWNER = Symbol("OWNER");
 export const PATH = Symbol("PATH");
 export const ROOT = Symbol("ROOT");
 export const RAW = Symbol("RAW");
