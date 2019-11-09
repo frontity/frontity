@@ -70,6 +70,55 @@ type IterableActions<RawActions extends object> = {
 };
 
 /**
+ * This is a helper that returns the same object but with the state and actions
+ * ready to be consumed.
+ *
+ * @param StoreType
+ * The store containing both the state and actions.
+ */
+type ProxifiedStore<StoreType extends Store> = Omit<
+  StoreType,
+  "state" | "actions"
+> & {
+  state: State<StoreType>;
+  actions: Actions<StoreType>;
+};
+
+/**
+ * When receives a function with the proxified store as a parameter, it observes both
+ * the state and actions you access and finally it returns the returned value.
+ *
+ * @param StoreType
+ * The store containing both the state and actions.
+ */
+export interface WhenObserver<StoreType extends Store> {
+  (store: ProxifiedStore<StoreType>): unknown;
+}
+
+/**
+ * When receives a function with the proxified store as a parameter, it observes both
+ * the state and actions you access and finally it returns the returned value.
+ *
+ * @param StoreType
+ * The store containing both the state and actions.
+ */
+export interface When<StoreType extends Store> {
+  (observer: WhenObserver<StoreType>): Promise<void>;
+}
+
+/**
+ * This is a helper that returns the same object but with the state and actions
+ * ready to be consumed including when.
+ * It's meant to be used inside actions.
+ *
+ * @param StoreType
+ * The store containing both the state and actions.
+ */
+type ProxifiedStoreForActions<StoreType extends Store> = ProxifiedStore<
+  StoreType
+> & { when: When<StoreType> };
+
+/**
  * It constructs an action obje based on a raw state, its optional arguments and the
  * returned value.
  *
@@ -119,20 +168,20 @@ export type Action<
   Argument9 = null,
   Argument10 = null
 > = [Argument1] extends [null]
-  ? (store: ProxifiedStore<StoreType>) => void
+  ? (store: ProxifiedStoreForActions<StoreType>) => void
   : [Argument2] extends [null]
-  ? (store: ProxifiedStore<StoreType>) => (arg1: Argument1) => void
+  ? (store: ProxifiedStoreForActions<StoreType>) => (arg1: Argument1) => void
   : [Argument3] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (arg1: Argument1, arg2: Argument2) => void
   : [Argument4] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (arg1: Argument1, arg2: Argument2, arg3: Argument3) => void
   : [Argument5] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -141,7 +190,7 @@ export type Action<
     ) => void
   : [Argument6] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -151,7 +200,7 @@ export type Action<
     ) => void
   : [Argument7] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -162,7 +211,7 @@ export type Action<
     ) => void
   : [Argument8] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -174,7 +223,7 @@ export type Action<
     ) => void
   : [Argument9] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -187,7 +236,7 @@ export type Action<
     ) => void
   : [Argument10] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -200,7 +249,7 @@ export type Action<
       arg9: Argument9
     ) => void
   : (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -213,16 +262,6 @@ export type Action<
       arg9: Argument9,
       arg10: Argument10
     ) => void;
-
-// This is a helper that returns the same object but with the state and actions
-// ready to be consumed.
-type ProxifiedStore<StoreType extends Store> = Omit<
-  StoreType,
-  "state" | "actions"
-> & {
-  state: State<StoreType>;
-  actions: Actions<StoreType>;
-};
 
 /**
  * It constructs an action obje based on a raw state, its optional arguments and the
@@ -274,20 +313,22 @@ export type AsyncAction<
   Argument9 = null,
   Argument10 = null
 > = [Argument1] extends [null]
-  ? (store: ProxifiedStore<StoreType>) => Promise<void>
+  ? (store: ProxifiedStoreForActions<StoreType>) => Promise<void>
   : [Argument2] extends [null]
-  ? (store: ProxifiedStore<StoreType>) => (arg1: Argument1) => Promise<void>
+  ? (
+      store: ProxifiedStoreForActions<StoreType>
+    ) => (arg1: Argument1) => Promise<void>
   : [Argument3] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (arg1: Argument1, arg2: Argument2) => Promise<void>
   : [Argument4] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (arg1: Argument1, arg2: Argument2, arg3: Argument3) => Promise<void>
   : [Argument5] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -296,7 +337,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument6] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -306,7 +347,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument7] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -317,7 +358,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument8] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -329,7 +370,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument9] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -342,7 +383,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument10] extends [null]
   ? (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -355,7 +396,7 @@ export type AsyncAction<
       arg9: Argument9
     ) => Promise<void>
   : (
-      store: ProxifiedStore<StoreType>
+      store: ProxifiedStoreForActions<StoreType>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
