@@ -1,4 +1,4 @@
-import { proxifyActions } from "..";
+import { executableActions } from "..";
 import {
   Actions,
   Derived,
@@ -8,7 +8,7 @@ import {
   ProxifyOptions,
   State
 } from "../../types";
-import { OWNER, PATH, ROOT, IS_ACTIONS } from "../symbols";
+import { OWNER, PATH, ROOT, EXECUTABLE_ACTIONS } from "../symbols";
 
 interface ArrayItem {
   item: {
@@ -117,20 +117,20 @@ beforeEach(() => {
       capitalize: str => str.toUpperCase()
     }
   };
-  actions = proxifyActions(rawStore);
+  actions = executableActions(rawStore);
 });
 
-describe("proxifyActions", () => {
-  it("should return proxified actions", () => {
-    expect(actions[IS_ACTIONS]).toBe(true);
+describe("executableActions", () => {
+  it("should return executable actions", () => {
+    expect(actions[EXECUTABLE_ACTIONS]).toBe(true);
     expect(actions).toBeInstanceOf(Proxy);
-    expect(actions.namespace[IS_ACTIONS]).toBe(true);
+    expect(actions.namespace[EXECUTABLE_ACTIONS]).toBe(true);
     expect(actions.namespace).toBeInstanceOf(Proxy);
   });
 
   it("should throw if rawStore doesn't contain actions", () => {
-    const store2 = { state: {}, libraries: {} /* no state */ } as Store;
-    expect(() => proxifyActions(store2)).toThrow();
+    const store2 = { state: {}, libraries: {} /* no actions */ } as Store;
+    expect(() => executableActions(store2)).toThrow();
   });
 
   it("should return the action functions", () => {
@@ -161,7 +161,7 @@ describe("proxifyActions", () => {
     expect(actions.namespace[PATH]).toBe("actions.namespace");
   });
 
-  it("should store access to the root proxified actions, proxified state and libraries", () => {
+  it("should store access to the root executable actions, proxified state and libraries", () => {
     expect(actions[ROOT].actions).toBe(actions);
     expect(actions[ROOT].state.array1).toEqual(rawStore.state.array1);
     expect(typeof actions[ROOT].state.userLength).toBe("string");
@@ -173,7 +173,7 @@ describe("proxifyActions", () => {
   });
 });
 
-describe("Actions", () => {
+describe("Executable actions", () => {
   it("without params should work", () => {
     expect(rawStore.state.array1.length).toBe(0);
     actions.namespace.addFixedItem();
@@ -253,8 +253,8 @@ describe("Action Owners", () => {
   beforeEach(() => {
     exposedState = null;
     exposedActions = null;
-    actions1 = proxifyActions(rawStore, options1);
-    actions2 = proxifyActions(rawStore, options2);
+    actions1 = executableActions(rawStore, options1);
+    actions2 = executableActions(rawStore, options2);
   });
 
   it("should return different proxified actions and store different owners in development", () => {
@@ -266,11 +266,11 @@ describe("Action Owners", () => {
   });
 
   it("should return the same proxified actions without owners information in production", () => {
-    const actions1 = proxifyActions(rawStore, {
+    const actions1 = executableActions(rawStore, {
       ...options1,
       mode: "production"
     });
-    const actions2 = proxifyActions(rawStore, {
+    const actions2 = executableActions(rawStore, {
       ...options2,
       mode: "production"
     });
@@ -343,11 +343,11 @@ describe("Action Owners", () => {
   });
 
   it("when running actions passed to actions, they should not have an owner in production", () => {
-    const actions1 = proxifyActions(rawStore, {
+    const actions1 = executableActions(rawStore, {
       ...options1,
       mode: "production"
     });
-    const actions2 = proxifyActions(rawStore, {
+    const actions2 = executableActions(rawStore, {
       ...options2,
       mode: "production"
     });

@@ -2,14 +2,28 @@
 import React, { ComponentType, FunctionComponent } from "react";
 import { Store, State, ProxifyOptions, Actions, FilterStore } from "../types";
 
-export const proxifyState = <StoreType extends Store>(
+export const observableState = <StoreType extends Store>(
   rawStore: StoreType,
   options?: ProxifyOptions
 ): State<StoreType> => {
   return rawStore.state as State<StoreType>; // Overwrite type until it's implemented.
 };
 
-export const proxifyActions = <StoreType extends Store>(
+export const mutableState = <StoreType extends Store>(
+  rawStore: StoreType,
+  options?: ProxifyOptions
+): State<StoreType> => {
+  return rawStore.state as State<StoreType>; // Overwrite type until it's implemented.
+};
+
+export const observableActions = <StoreType extends Store>(
+  rawStore: StoreType,
+  options?: ProxifyOptions
+): Actions<StoreType> => {
+  return rawStore.actions as Actions<StoreType>; // Overwrite type until it's implemented.
+};
+
+export const executableActions = <StoreType extends Store>(
   rawStore: StoreType,
   options?: ProxifyOptions
 ): Actions<StoreType> => {
