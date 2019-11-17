@@ -1,8 +1,8 @@
 /**
- * Interface of a store that contains state, actions an optionally libraries.
- * It's meant to be extended by the final store.
+ * The raw store object that contains state, actions an optionally libraries.
+ * It's meant to be extended by the final user store.
  */
-export interface Store {
+export interface StoreType {
   state: object;
   actions: object;
   libraries?: object;
@@ -41,10 +41,10 @@ type RecursiveReadonly<Type> = {
  *  - `const userLength = ({ state }) => state.users.length;` can be used like a property: `state.userLength`.
  *  - `const userName = ({ state }) => index => state.users[index].name;` can be called with only the `index` argument: `state.userName(3)`.
  *
- * @param StoreType A store object containing state, actions and libraries.
+ * @param Store A store object containing state, actions and libraries.
  */
-export type ObservableState<StoreType extends Store> = RecursiveReadonly<
-  IterableState<StoreType["state"]>
+export type ObservableState<Store extends StoreType> = RecursiveReadonly<
+  IterableState<Store["state"]>
 >;
 
 /**
@@ -57,10 +57,10 @@ export type ObservableState<StoreType extends Store> = RecursiveReadonly<
  *  - `const userLength = ({ state }) => state.users.length;` can be used like a property: `state.userLength`.
  *  - `const userName = ({ state }) => index => state.users[index].name;` can be called with only the `index` argument: `state.userName(3)`.
  *
- * @param StoreType A store object containing state, actions and libraries.
+ * @param Store A store object containing state, actions and libraries.
  */
-export type MutableState<StoreType extends Store> = IterableState<
-  StoreType["state"]
+export type MutableState<Store extends StoreType> = IterableState<
+  Store["state"]
 >;
 
 /**
@@ -84,10 +84,10 @@ type IterableState<State extends object> = {
  * TODO: Decide what to return instead of the function, maybe a boolean or an object
  * cotaining { args, name }.
  *
- * @param StoreType A store object containing state, actions and libraries.
+ * @param Store A store object containing state, actions and libraries.
  */
-export type ObservableActions<StoreType extends Store> = RecursiveReadonly<
-  IterableObservableActions<StoreType["actions"]>
+export type ObservableActions<Store extends StoreType> = RecursiveReadonly<
+  IterableObservableActions<Store["actions"]>
 >;
 
 /**
@@ -96,7 +96,7 @@ export type ObservableActions<StoreType extends Store> = RecursiveReadonly<
  * @param Actions The actions object.
  */
 type IterableObservableActions<Actions extends object> = {
-  [P in keyof Actions]: Actions[P] extends (store: Store) => unknown
+  [P in keyof Actions]: Actions[P] extends (store: StoreType) => unknown
     ? boolean
     : Actions[P] extends object
     ? IterableObservableActions<Actions[P]>
@@ -107,10 +107,10 @@ type IterableObservableActions<Actions extends object> = {
  * The executable actions of the store. It removes the need to pass the argument of the first function.
  * It's meant to be used when the actions need to be executed, like in components or other actions.
  *
- * @param StoreType A store object containing state, actions and libraries.
+ * @param Store A store object containing state, actions and libraries.
  */
-export type ExecutableActions<StoreType extends Store> = RecursiveReadonly<
-  IterableExecutableActions<StoreType["actions"]>
+export type ExecutableActions<Store extends StoreType> = RecursiveReadonly<
+  IterableExecutableActions<Store["actions"]>
 >;
 
 /**
@@ -120,12 +120,12 @@ export type ExecutableActions<StoreType extends Store> = RecursiveReadonly<
  */
 type IterableExecutableActions<Actions extends object> = {
   [P in keyof Actions]: Actions[P] extends (
-    store: Store
+    store: StoreType
   ) => (...args: infer Args) => Promise<void>
     ? (...args: Args) => Promise<void>
-    : Actions[P] extends (store: Store) => (...args: infer Args) => void
+    : Actions[P] extends (store: StoreType) => (...args: infer Args) => void
     ? (...args: Args) => void
-    : Actions[P] extends (store: Store) => void
+    : Actions[P] extends (store: StoreType) => void
     ? () => ReturnType<Actions[P]>
     : Actions[P] extends object
     ? IterableExecutableActions<Actions[P]>
@@ -135,24 +135,24 @@ type IterableExecutableActions<Actions extends object> = {
 /**
  * The store injected in the when functions.
  *
- * @param StoreType
+ * @param Store
  * The store containing the state, actions and libraries.
  */
-type WhenStore<StoreType extends Store> = {
-  state: ObservableState<StoreType>;
-  actions: ObservableActions<StoreType>;
+type WhenStore<Store extends StoreType> = {
+  state: ObservableState<Store>;
+  actions: ObservableActions<Store>;
 };
 
 /**
  * The function passed to when. It receives the observable state and actions.
  *
- * @param StoreType
+ * @param Store
  * The store containing the state, actions and libraries.
- * @param ReturnValue
+ * @param Return
  * The return value of the when function.
  */
-export interface When<StoreType extends Store, Return> {
-  (store: WhenStore<StoreType>): Return;
+export interface When<Store extends StoreType, Return> {
+  (store: WhenStore<Store>): Return;
 }
 
 /**
@@ -160,15 +160,15 @@ export interface When<StoreType extends Store, Return> {
  * libraries and the when function.
  * It's meant to be used inside actions.
  *
- * @param StoreType
+ * @param Store
  * The store containing the state, actions and libraries.
  */
-type ActionsStore<StoreType extends Store> = {
-  state: MutableState<StoreType>;
-  actions: ExecutableActions<StoreType>;
-  libraries: StoreType["libraries"];
-  when: <StoreType extends Store, Return>(
-    observer: When<StoreType, Return>
+type ActionsStore<Store extends StoreType> = {
+  state: MutableState<Store>;
+  actions: ExecutableActions<Store>;
+  libraries: Store["libraries"];
+  when: <Store extends StoreType, Return>(
+    observer: When<Store, Return>
   ) => Promise<Return>;
 };
 
@@ -182,13 +182,13 @@ type ActionsStore<StoreType extends Store> = {
  *  - `Action<YourStore, string>` ---> `({ state }) => name => { state.user = name; }`
  *  - `Action<YourStore, number, string>` ---> `({ state }) => (id, name) => { state.users[id].name = name; }`
  *
- * @param StoreType
+ * @param Store
  * The store containing the state, actions and libraries.
  * @param ArgumentX
  * The arguments of the action function. Supports up to 10 arguments.
  */
 export type Action<
-  StoreType extends Store,
+  Store extends StoreType,
   Argument1 = null,
   Argument2 = null,
   Argument3 = null,
@@ -200,20 +200,18 @@ export type Action<
   Argument9 = null,
   Argument10 = null
 > = [Argument1] extends [null]
-  ? (store: ActionsStore<StoreType>) => void
+  ? (store: ActionsStore<Store>) => void
   : [Argument2] extends [null]
-  ? (store: ActionsStore<StoreType>) => (arg1: Argument1) => void
+  ? (store: ActionsStore<Store>) => (arg1: Argument1) => void
   : [Argument3] extends [null]
-  ? (
-      store: ActionsStore<StoreType>
-    ) => (arg1: Argument1, arg2: Argument2) => void
+  ? (store: ActionsStore<Store>) => (arg1: Argument1, arg2: Argument2) => void
   : [Argument4] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (arg1: Argument1, arg2: Argument2, arg3: Argument3) => void
   : [Argument5] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -222,7 +220,7 @@ export type Action<
     ) => void
   : [Argument6] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -232,7 +230,7 @@ export type Action<
     ) => void
   : [Argument7] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -243,7 +241,7 @@ export type Action<
     ) => void
   : [Argument8] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -255,7 +253,7 @@ export type Action<
     ) => void
   : [Argument9] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -268,7 +266,7 @@ export type Action<
     ) => void
   : [Argument10] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -281,7 +279,7 @@ export type Action<
       arg9: Argument9
     ) => void
   : (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -305,13 +303,13 @@ export type Action<
  *  - `AsyncAction<YourStore, string>` ---> `({ state }) => async name => { state.user = name; }`
  *  - `AsyncAction<YourStore, number, string>` ---> `({ state }) => async (id, name) => { state.users[id].name = name; }`
  *
- * @param StoreType
+ * @param Store
  * The store containing the state, actions and libraries.
  * @param ArgumentX
  * The arguments of the action function. Supports up to 10 arguments.
  */
 export type AsyncAction<
-  StoreType extends Store,
+  Store extends StoreType,
   Argument1 = null,
   Argument2 = null,
   Argument3 = null,
@@ -323,20 +321,20 @@ export type AsyncAction<
   Argument9 = null,
   Argument10 = null
 > = [Argument1] extends [null]
-  ? (store: ActionsStore<StoreType>) => Promise<void>
+  ? (store: ActionsStore<Store>) => Promise<void>
   : [Argument2] extends [null]
-  ? (store: ActionsStore<StoreType>) => (arg1: Argument1) => Promise<void>
+  ? (store: ActionsStore<Store>) => (arg1: Argument1) => Promise<void>
   : [Argument3] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (arg1: Argument1, arg2: Argument2) => Promise<void>
   : [Argument4] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (arg1: Argument1, arg2: Argument2, arg3: Argument3) => Promise<void>
   : [Argument5] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -345,7 +343,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument6] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -355,7 +353,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument7] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -366,7 +364,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument8] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -378,7 +376,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument9] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -391,7 +389,7 @@ export type AsyncAction<
     ) => Promise<void>
   : [Argument10] extends [null]
   ? (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -404,7 +402,7 @@ export type AsyncAction<
       arg9: Argument9
     ) => Promise<void>
   : (
-      store: ActionsStore<StoreType>
+      store: ActionsStore<Store>
     ) => (
       arg1: Argument1,
       arg2: Argument2,
@@ -421,12 +419,12 @@ export type AsyncAction<
 /**
  * The store passed to derived functions, containing the observable state and the libraries.
  *
- * @param StoreType
+ * @param Store
  * The store containing the state, actions and libraries.
  */
-type DerivedStore<StoreType extends Store> = {
-  state: ObservableState<StoreType>;
-  libraries: StoreType["libraries"];
+type DerivedStore<Store extends StoreType> = {
+  state: ObservableState<Store>;
+  libraries: Store["libraries"];
 };
 
 /**
@@ -440,131 +438,128 @@ type DerivedStore<StoreType extends Store> = {
  *  - `Derived<YourStore, number, string>` ---> `({ state }) => id => state.users[id].profile.name`
  *  - `Derived<YourStore, number, string, string>` ---> `({ state }) => (id, prop) => state.users[id].profile[prop]`
  *
- * @param StoreType
+ * @param Store
  * The store containing both the state and the libraries.
- * @param ArgumentOrReturnValueX
+ * @param ArgumentOrReturnX
  * The arguments of the derived function (if it has arguments). The last one is used as returned value.
  * Supports up to 10 arguments.
- * @param ReturnValue
+ * @param Return
  * The output if the derived function has arguments.
  */
 export type Derived<
-  StoreType extends Store,
-  ArgumentOrReturnValue1,
-  ArgumentOrReturnValue2 = null,
-  ArgumentOrReturnValue3 = null,
-  ArgumentOrReturnValue4 = null,
-  ArgumentOrReturnValue5 = null,
-  ArgumentOrReturnValue6 = null,
-  ArgumentOrReturnValue7 = null,
-  ArgumentOrReturnValue8 = null,
-  ArgumentOrReturnValue9 = null,
-  ArgumentOrReturnValue10 = null,
-  ReturnValue = null
-> = [ArgumentOrReturnValue2] extends [null]
-  ? (store: DerivedStore<StoreType>) => ArgumentOrReturnValue1
-  : [ArgumentOrReturnValue3] extends [null]
+  Store extends StoreType,
+  ArgumentOrReturn1,
+  ArgumentOrReturn2 = null,
+  ArgumentOrReturn3 = null,
+  ArgumentOrReturn4 = null,
+  ArgumentOrReturn5 = null,
+  ArgumentOrReturn6 = null,
+  ArgumentOrReturn7 = null,
+  ArgumentOrReturn8 = null,
+  ArgumentOrReturn9 = null,
+  ArgumentOrReturn10 = null,
+  Return = null
+> = [ArgumentOrReturn2] extends [null]
+  ? (store: DerivedStore<Store>) => ArgumentOrReturn1
+  : [ArgumentOrReturn3] extends [null]
   ? (
-      store: DerivedStore<StoreType>
-    ) => (arg1: ArgumentOrReturnValue1) => ArgumentOrReturnValue2
-  : [ArgumentOrReturnValue4] extends [null]
+      store: DerivedStore<Store>
+    ) => (arg1: ArgumentOrReturn1) => ArgumentOrReturn2
+  : [ArgumentOrReturn4] extends [null]
   ? (
-      store: DerivedStore<StoreType>
+      store: DerivedStore<Store>
+    ) => (arg1: ArgumentOrReturn1, arg2: ArgumentOrReturn2) => ArgumentOrReturn3
+  : [ArgumentOrReturn5] extends [null]
+  ? (
+      store: DerivedStore<Store>
     ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2
-    ) => ArgumentOrReturnValue3
-  : [ArgumentOrReturnValue5] extends [null]
+      arg1: ArgumentOrReturn1,
+      arg2: ArgumentOrReturn2,
+      arg3: ArgumentOrReturn3
+    ) => ArgumentOrReturn4
+  : [ArgumentOrReturn6] extends [null]
   ? (
-      store: DerivedStore<StoreType>
+      store: DerivedStore<Store>
     ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2,
-      arg3: ArgumentOrReturnValue3
-    ) => ArgumentOrReturnValue4
-  : [ArgumentOrReturnValue6] extends [null]
+      arg1: ArgumentOrReturn1,
+      arg2: ArgumentOrReturn2,
+      arg3: ArgumentOrReturn3,
+      arg4: ArgumentOrReturn4
+    ) => ArgumentOrReturn5
+  : [ArgumentOrReturn7] extends [null]
   ? (
-      store: DerivedStore<StoreType>
+      store: DerivedStore<Store>
     ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2,
-      arg3: ArgumentOrReturnValue3,
-      arg4: ArgumentOrReturnValue4
-    ) => ArgumentOrReturnValue5
-  : [ArgumentOrReturnValue7] extends [null]
+      arg1: ArgumentOrReturn1,
+      arg2: ArgumentOrReturn2,
+      arg3: ArgumentOrReturn3,
+      arg4: ArgumentOrReturn4,
+      arg5: ArgumentOrReturn5
+    ) => ArgumentOrReturn6
+  : [ArgumentOrReturn8] extends [null]
   ? (
-      store: DerivedStore<StoreType>
+      store: DerivedStore<Store>
     ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2,
-      arg3: ArgumentOrReturnValue3,
-      arg4: ArgumentOrReturnValue4,
-      arg5: ArgumentOrReturnValue5
-    ) => ArgumentOrReturnValue6
-  : [ArgumentOrReturnValue8] extends [null]
+      arg1: ArgumentOrReturn1,
+      arg2: ArgumentOrReturn2,
+      arg3: ArgumentOrReturn3,
+      arg4: ArgumentOrReturn4,
+      arg5: ArgumentOrReturn5,
+      arg6: ArgumentOrReturn6
+    ) => ArgumentOrReturn7
+  : [ArgumentOrReturn9] extends [null]
   ? (
-      store: DerivedStore<StoreType>
+      store: DerivedStore<Store>
     ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2,
-      arg3: ArgumentOrReturnValue3,
-      arg4: ArgumentOrReturnValue4,
-      arg5: ArgumentOrReturnValue5,
-      arg6: ArgumentOrReturnValue6
-    ) => ArgumentOrReturnValue7
-  : [ArgumentOrReturnValue9] extends [null]
+      arg1: ArgumentOrReturn1,
+      arg2: ArgumentOrReturn2,
+      arg3: ArgumentOrReturn3,
+      arg4: ArgumentOrReturn4,
+      arg5: ArgumentOrReturn5,
+      arg6: ArgumentOrReturn6,
+      arg7: ArgumentOrReturn7
+    ) => ArgumentOrReturn8
+  : [ArgumentOrReturn10] extends [null]
   ? (
-      store: DerivedStore<StoreType>
+      store: DerivedStore<Store>
     ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2,
-      arg3: ArgumentOrReturnValue3,
-      arg4: ArgumentOrReturnValue4,
-      arg5: ArgumentOrReturnValue5,
-      arg6: ArgumentOrReturnValue6,
-      arg7: ArgumentOrReturnValue7
-    ) => ArgumentOrReturnValue8
-  : [ArgumentOrReturnValue10] extends [null]
+      arg1: ArgumentOrReturn1,
+      arg2: ArgumentOrReturn2,
+      arg3: ArgumentOrReturn3,
+      arg4: ArgumentOrReturn4,
+      arg5: ArgumentOrReturn5,
+      arg6: ArgumentOrReturn6,
+      arg7: ArgumentOrReturn7,
+      arg8: ArgumentOrReturn8
+    ) => ArgumentOrReturn9
+  : [Return] extends [null]
   ? (
-      store: DerivedStore<StoreType>
+      store: DerivedStore<Store>
     ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2,
-      arg3: ArgumentOrReturnValue3,
-      arg4: ArgumentOrReturnValue4,
-      arg5: ArgumentOrReturnValue5,
-      arg6: ArgumentOrReturnValue6,
-      arg7: ArgumentOrReturnValue7,
-      arg8: ArgumentOrReturnValue8
-    ) => ArgumentOrReturnValue9
-  : [ReturnValue] extends [null]
-  ? (
-      store: DerivedStore<StoreType>
-    ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2,
-      arg3: ArgumentOrReturnValue3,
-      arg4: ArgumentOrReturnValue4,
-      arg5: ArgumentOrReturnValue5,
-      arg6: ArgumentOrReturnValue6,
-      arg7: ArgumentOrReturnValue7,
-      arg8: ArgumentOrReturnValue8,
-      arg9: ArgumentOrReturnValue9
-    ) => ArgumentOrReturnValue10
+      arg1: ArgumentOrReturn1,
+      arg2: ArgumentOrReturn2,
+      arg3: ArgumentOrReturn3,
+      arg4: ArgumentOrReturn4,
+      arg5: ArgumentOrReturn5,
+      arg6: ArgumentOrReturn6,
+      arg7: ArgumentOrReturn7,
+      arg8: ArgumentOrReturn8,
+      arg9: ArgumentOrReturn9
+    ) => ArgumentOrReturn10
   : (
-      store: DerivedStore<StoreType>
+      store: DerivedStore<Store>
     ) => (
-      arg1: ArgumentOrReturnValue1,
-      arg2: ArgumentOrReturnValue2,
-      arg3: ArgumentOrReturnValue3,
-      arg4: ArgumentOrReturnValue4,
-      arg5: ArgumentOrReturnValue5,
-      arg6: ArgumentOrReturnValue6,
-      arg7: ArgumentOrReturnValue7,
-      arg8: ArgumentOrReturnValue8,
-      arg9: ArgumentOrReturnValue9,
-      arg10: ArgumentOrReturnValue10
-    ) => ReturnValue;
+      arg1: ArgumentOrReturn1,
+      arg2: ArgumentOrReturn2,
+      arg3: ArgumentOrReturn3,
+      arg4: ArgumentOrReturn4,
+      arg5: ArgumentOrReturn5,
+      arg6: ArgumentOrReturn6,
+      arg7: ArgumentOrReturn7,
+      arg8: ArgumentOrReturn8,
+      arg9: ArgumentOrReturn9,
+      arg10: ArgumentOrReturn10
+    ) => Return;
 
 /**
  * Creates a new props object joining together the connected store and the normal props object.
@@ -574,26 +569,26 @@ export type Derived<
  *  - `const Comp: React.FC<Connect<YourStore, { prop1: string }>> = ({ state, actions, libraries, prop1 }) => <div>...</div>`
  *  - `class Comp extends React.Component<Connect<YourStore, { prop1: string }>> { render() { return <div>...</div>; }}`
  *
- * @param StoreType
+ * @param Store
  * The store containing state, actions and libraries.
  * @param Props
  * The normal props object of this component.
  *
  */
-export type Connect<StoreType extends Store, Props extends object = {}> = {
-  state: ObservableState<StoreType>;
-  actions: ExecutableActions<StoreType>;
-  libraries: StoreType["libraries"];
+export type Connect<Store extends StoreType, Props extends object = {}> = {
+  state: ObservableState<Store>;
+  actions: ExecutableActions<Store>;
+  libraries: Store["libraries"];
 } & Props;
 
 /**
  * A helper to filter the properties of a store included in a bigger object, for example, when
  * the store is merged with React props.
  *
- * @param StoreType
+ * @param Store
  * The store containing state, actions and libraries.
  */
-export type FilterStore<StoreType extends Store> = Omit<
-  StoreType,
+export type FilterStore<Store extends StoreType> = Omit<
+  Store,
   "state" | "actions" | "libraries"
 >;

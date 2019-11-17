@@ -1,8 +1,8 @@
 import { observableState } from "..";
-import { State, Derived, Store, ProxifyOptions } from "../../types";
+import { ObservableState, Derived, StoreType, Options } from "../../types";
 import { OWNER, PATH, RAW, ROOT, OBSERVABLE_STATE } from "../symbols";
 
-interface MyStore extends Store {
+interface MyStore extends StoreType {
   state: {
     users: { profile: { name: string; surname: string } }[];
     usersLength: Derived<MyStore, number>;
@@ -15,7 +15,7 @@ interface MyStore extends Store {
 }
 
 let rawStore: MyStore;
-let state: State<MyStore>;
+let state: ObservableState<MyStore>;
 
 beforeEach(() => {
   rawStore = {
@@ -110,11 +110,11 @@ describe("observableState", () => {
 
 describe("observableState Owner", () => {
   it("should return different observable states and store different owner in development", () => {
-    const options1: ProxifyOptions = {
+    const options1: Options = {
       owner: { type: "debug", name: "options1" },
       mode: "development"
     };
-    const options2: ProxifyOptions = {
+    const options2: Options = {
       owner: { type: "debug", name: "options2" },
       mode: "development"
     };
