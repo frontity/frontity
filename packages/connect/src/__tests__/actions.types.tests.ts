@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Store, Derived, Action, AsyncAction } from "../../types";
+import {
+  Store,
+  Derived,
+  Action,
+  AsyncAction,
+  ObservableActions,
+  ExecutableActions
+} from "../../types";
 
 interface MyStore extends Store {
   state: {
@@ -192,6 +199,48 @@ const actions: MyStore["actions"] = {
     // Check access to actions.
     actions.namespace1.action1();
   }
+};
+
+const observableActions: ObservableActions<MyStore> = {
+  namespace1: {
+    action1: true,
+    action2: false
+  },
+  namespace2: {
+    action3: false,
+    action4: false
+  },
+  namespace3: {
+    action5: false,
+    action6: false
+  },
+  notNamespacedAction: false
+};
+
+const executableActions: ExecutableActions<MyStore> = {
+  namespace1: {
+    action1: () => {},
+    action2: async () => {}
+  },
+  namespace2: {
+    action3: str => {
+      const str1: string = str;
+    },
+    action4: async num => {
+      const num1: number = num;
+    }
+  },
+  namespace3: {
+    action5: (n1, s2, n3, s4, n5, s6, n7, s8, n9, s10) => {
+      const str1: string = s2 + s4 + s6 + s8 + s10;
+      const num1: number = n1 + n3 + n5 + n7 + n9;
+    },
+    action6: async (n1, s2, n3, s4, n5, s6, n7, s8, n9, s10) => {
+      const str1: string = s2 + s4 + s6 + s8 + s10;
+      const num1: number = n1 + n3 + n5 + n7 + n9;
+    }
+  },
+  notNamespacedAction: () => {}
 };
 
 test("Types are fine!", () => {});

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Store, State, Derived } from "../../types";
+import { Store, ObservableState, Derived } from "../../types";
 
 interface MyStore extends Store {
   state: {
@@ -81,7 +81,7 @@ const state: MyStore["state"] = {
   notNamespacedProp: "notNamespacedProp"
 };
 
-const proxifiedState: State<MyStore> = {
+const observableState: ObservableState<MyStore> = {
   namespace: {
     prop1: "prop1",
     prop2: 2,
@@ -125,5 +125,8 @@ const proxifiedState: State<MyStore> = {
   },
   notNamespacedProp: "notNamespacedProp"
 };
+
+// This type should fail.
+// observableState.namespace.prop3 = ({ state }) => state.namespace.prop1;
 
 test("Types are fine!", () => {});
