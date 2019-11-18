@@ -4,10 +4,8 @@ import {
   ObservableState,
   MutableState,
   ObservableActions,
-  ExecutableActions,
-  FilterStore
+  ExecutableActions
 } from "../types";
-import { ComponentType, FunctionComponent } from "react";
 
 interface Options {
   mode: "development" | "production";
@@ -46,15 +44,8 @@ interface ExecutableMiddleware {
   }): void;
 }
 
-interface ConnectFunction<Props extends StoreType = StoreType> {
-  (Component: ComponentType<Props>): FunctionComponent<FilterStore<Props>>;
-}
-
 class Store<Store extends StoreType> {
   rawStore: Store;
-  connect: ConnectFunction = Component => {
-    return Component as FunctionComponent<FilterStore<StoreType>>;
-  };
 
   constructor(rawStore: Store, options?: Options) {
     this.rawStore = rawStore;
@@ -65,10 +56,6 @@ class Store<Store extends StoreType> {
     // We should probably use deep-overwrite here to avoid breaking the references
     // of the proxies already created.
     this.rawStore = rawStore;
-  }
-
-  getConnect(): ConnectFunction {
-    return this.connect.bind(this);
   }
 
   createObservableState(context?: Context): ObservableState<Store> {
