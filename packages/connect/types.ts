@@ -585,7 +585,7 @@ export type FilterStore<Store extends StoreType> = Omit<
  * Options passed when creating a new Store.
  */
 export interface StoreOptions {
-  mode: "development" | "production";
+  mode?: "development" | "production";
 }
 
 /**
