@@ -4,50 +4,18 @@ import {
   ObservableState,
   MutableState,
   ObservableActions,
-  ExecutableActions
+  ExecutableActions,
+  StoreOptions,
+  Context,
+  ObservableMiddlewareCallback,
+  MutableMiddlewareCallback,
+  ExecutableMiddlewareCallback
 } from "../types";
-
-interface Options {
-  mode: "development" | "production";
-}
-
-interface Context {
-  owner: {
-    type: "debug" | "action" | "component" | "when";
-    name: string;
-  };
-}
-
-interface ObservableMiddleware {
-  (args: { path: string; target: object; key: string; context: Context }): void;
-}
-
-interface MutableMiddleware {
-  (args: {
-    path: string;
-    patch: string[];
-    target: object;
-    key: string;
-    value: unknown;
-    context: Context;
-  }): void;
-}
-
-interface ExecutableMiddleware {
-  (args: {
-    path: string;
-    target: object;
-    key: string;
-    args: unknown[];
-    abort: () => void;
-    context: Context;
-  }): void;
-}
 
 class Store<Store extends StoreType> {
   rawStore: Store;
 
-  constructor(rawStore: Store, options?: Options) {
+  constructor(rawStore: Store, options?: StoreOptions) {
     this.rawStore = rawStore;
     // Todo...
   }
@@ -78,19 +46,21 @@ class Store<Store extends StoreType> {
     return this.rawStore.state as ExecutableActions<Store>;
   }
 
-  addObservableStateMiddleware(callback: ObservableMiddleware): void {
+  addObservableStateMiddleware(callback: ObservableMiddlewareCallback): void {
     // Todo...
   }
 
-  addMutableStateMiddleware(callback: MutableMiddleware): void {
+  addMutableStateMiddleware(callback: MutableMiddlewareCallback): void {
     // Todo...
   }
 
-  addObservableActionsMiddleware(callback: ObservableMiddleware): void {
+  addObservableActionsMiddlewareCallback(
+    callback: ObservableMiddlewareCallback
+  ): void {
     // Todo...
   }
 
-  addExecutableActionsMiddleware(callback: ExecutableMiddleware): void {
+  addExecutableActionsMiddleware(callback: ExecutableMiddlewareCallback): void {
     // Todo...
   }
 }

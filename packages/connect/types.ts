@@ -9,18 +9,6 @@ export interface StoreType {
 }
 
 /**
- * Interface for the options that can be passed to a function that creates proxies,
- * like observableState, mutableState, observableActions, executableActions...
- */
-export interface Options {
-  owner?: {
-    type: "debug" | "action" | "component" | "when";
-    name?: string;
-  };
-  mode?: "development" | "production";
-}
-
-/**
  * Helper to make all properties in Type readonly recursively.
  *
  * @param Type Any type.
@@ -592,3 +580,58 @@ export type FilterStore<Store extends StoreType> = Omit<
   Store,
   "state" | "actions" | "libraries"
 >;
+
+/**
+ * Options passed when creating a new Store.
+ */
+export interface StoreOptions {
+  mode: "development" | "production";
+}
+
+/**
+ * Context that can be passed to a method that creates proxies,
+ * like store.createObservableState, store.createMutableState, store.createObservableActions,
+ * or store.createExecutableActions.
+ */
+export interface Context {
+  owner: {
+    type: "debug" | "action" | "component" | "when";
+    name: string;
+  };
+}
+
+/**
+ * Middleware callback for observable proxies, like store.createObservableState
+ * or store.createObservableActions.
+ */
+export interface ObservableMiddlewareCallback {
+  (args: { path: string; target: object; key: string; context: Context }): void;
+}
+
+/**
+ * Middleware callback for mutable proxies, like store.createMutableState.
+ */
+export interface MutableMiddlewareCallback {
+  (args: {
+    path: string;
+    patch: string[];
+    target: object;
+    key: string;
+    value: unknown;
+    context: Context;
+  }): void;
+}
+
+/**
+ * Middleware callback for exetuable proxies, like store.createExecutableActions.
+ */
+export interface ExecutableMiddlewareCallback {
+  (args: {
+    path: string;
+    target: object;
+    key: string;
+    args: unknown[];
+    abort: () => void;
+    context: Context;
+  }): void;
+}
