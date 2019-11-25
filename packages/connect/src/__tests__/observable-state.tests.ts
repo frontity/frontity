@@ -1,12 +1,6 @@
 import Store from "../store";
-import {
-  Derived,
-  StoreType,
-  ObservableState,
-  StoreOptions,
-  Context
-} from "../../types";
-import { OWNER, PATH, RAW, ROOT, OBSERVABLE_STATE } from "../symbols";
+import { Derived, StoreType, ObservableState, Owner } from "../../types";
+import { OWNER, PATH, RAW, OBSERVABLE_STATE, STORE } from "../symbols";
 
 interface MyStore extends StoreType {
   state: {
@@ -81,22 +75,15 @@ describe("observableState", () => {
     expect(state.users[0].profile[RAW]).toBe(rawStore.state.users[0].profile);
   });
 
-  it("should store access to the root observable state and libraries", () => {
-    expect(state[ROOT].state).toBe(state);
-    expect(state[ROOT].libraries).toBe(rawStore.libraries);
-    expect(state.users[ROOT].state).toBe(state);
-    expect(state.users[ROOT].libraries).toBe(rawStore.libraries);
-    expect(state.users[0][ROOT].state).toBe(state);
-    expect(state.users[0][ROOT].libraries).toBe(rawStore.libraries);
-    expect(state.users[0].profile[ROOT].state).toBe(state);
-    expect(state.users[0].profile[ROOT].libraries).toBe(rawStore.libraries);
-  });
-
-  it("should not have access to the root actions", () => {
-    expect(state[ROOT].actions).toBe(undefined);
-    expect(state.users[ROOT].actions).toBe(undefined);
-    expect(state.users[0][ROOT].actions).toBe(undefined);
-    expect(state.users[0].profile[ROOT].actions).toBe(undefined);
+  it("should store access to the store instance", () => {
+    expect(state[STORE]).toBe(store);
+    expect(state[STORE]).toBe(store);
+    expect(state.users[STORE]).toBe(store);
+    expect(state.users[STORE]).toBe(store);
+    expect(state.users[0][STORE]).toBe(store);
+    expect(state.users[0][STORE]).toBe(store);
+    expect(state.users[0].profile[STORE]).toBe(store);
+    expect(state.users[0].profile[STORE]).toBe(store);
   });
 
   it("should run the derived state functions using the root store as argument", () => {
@@ -112,45 +99,34 @@ describe("observableState", () => {
 });
 
 describe("observableState Owner", () => {
-  it("should return different observable states and store different owner in development", () => {
-    const options1: StoreOptions = {
-      mode: "development"
-    };
-    const options2: StoreOptions = {
-      mode: "development"
-    };
-    const context1: Context = {
-      owner: { type: "debug", name: "context1" }
-    };
-    const context2: Context = {
-      owner: { type: "debug", name: "context2" }
-    };
-    const store1 = new Store(rawStore, options1);
-    const store2 = new Store(rawStore, options2);
-    const state1 = store1.createObservableState(context1);
-    const state2 = store2.createObservableState(context2);
-    expect(state1[OWNER]).toBe(context1.owner);
-    expect(state1.users[OWNER]).toBe(context1.owner);
-    expect(state1.users[0][OWNER]).toBe(context1.owner);
-    expect(state1.users[0].profile[OWNER]).toBe(context1.owner);
-    expect(state2[OWNER]).toBe(context2.owner);
-    expect(state2.users[OWNER]).toBe(context2.owner);
-    expect(state2.users[0][OWNER]).toBe(context2.owner);
-    expect(state2.users[0].profile[OWNER]).toBe(context2.owner);
+  it("should return different observable states and store different owners in development", () => {
+    const owner1: Owner = { type: "debug", name: "owner1" };
+    const owner2: Owner = { type: "debug", name: "owner2" };
+    const store1 = new Store(rawStore, { mode: "development" });
+    const store2 = new Store(rawStore, { mode: "development" });
+    const state1 = store1.createObservableState(owner1);
+    const state2 = store2.createObservableState(owner2);
+    expect(state1[OWNER]).toBe(owner1);
+    expect(state1.users[OWNER]).toBe(owner1);
+    expect(state1.users[0][OWNER]).toBe(owner1);
+    expect(state1.users[0].profile[OWNER]).toBe(owner1);
+    expect(state2[OWNER]).toBe(owner2);
+    expect(state2.users[OWNER]).toBe(owner2);
+    expect(state2.users[0][OWNER]).toBe(owner2);
+    expect(state2.users[0].profile[OWNER]).toBe(owner2);
     expect(state1).not.toBe(state2);
   });
 
   it("should return the same observable states without owner information in production", () => {
-    const options: StoreOptions = {
-      mode: "production"
-    };
-    const store1 = new Store(rawStore, options);
-    const store2 = new Store(rawStore, options);
+    const store1 = new Store(rawStore, { mode: "production" });
+    const store2 = new Store(rawStore, { mode: "production" });
     const state1 = store1.createObservableState({
-      owner: { type: "debug", name: "owner1" }
+      type: "debug",
+      name: "owner1"
     });
     const state2 = store2.createObservableState({
-      owner: { type: "debug", name: "owner2" }
+      type: "debug",
+      name: "owner2"
     });
     expect(state1[OWNER]).toBe(null);
     expect(state1.users[OWNER]).toBe(null);

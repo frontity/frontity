@@ -6,7 +6,7 @@ import {
   ObservableActions,
   ExecutableActions,
   StoreOptions,
-  Context,
+  Owner,
   ObservableMiddlewareCallback,
   MutableMiddlewareCallback,
   ExecutableMiddlewareCallback
@@ -26,22 +26,22 @@ class Store<Store extends StoreType> {
     this.rawStore = rawStore;
   }
 
-  createObservableState(context?: Context): ObservableState<Store> {
+  createObservableState(owner?: Owner): ObservableState<Store> {
     // Todo...
     return this.rawStore.state as ObservableState<Store>;
   }
 
-  createMutableState(context?: Context): MutableState<Store> {
+  createMutableState(owner?: Owner): MutableState<Store> {
     // Todo...
     return this.rawStore.state as MutableState<Store>;
   }
 
-  createObservableActions(context?: Context): ObservableActions<Store> {
+  createObservableActions(owner?: Owner): ObservableActions<Store> {
     // Todo...
     return this.rawStore.state as ObservableActions<Store>;
   }
 
-  createExecutableActions(context?: Context): ExecutableActions<Store> {
+  createExecutableActions(owner?: Owner): ExecutableActions<Store> {
     // Todo...
     return this.rawStore.state as ExecutableActions<Store>;
   }

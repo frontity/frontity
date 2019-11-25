@@ -593,11 +593,10 @@ export interface StoreOptions {
  * like store.createObservableState, store.createMutableState, store.createObservableActions,
  * or store.createExecutableActions.
  */
-export interface Context {
-  owner: {
-    type: "debug" | "action" | "component" | "when";
-    name: string;
-  };
+export interface Owner {
+  type: "debug" | "action" | "component" | "when";
+  name: string;
+  parent?: Owner;
 }
 
 /**
@@ -605,7 +604,7 @@ export interface Context {
  * or store.createObservableActions.
  */
 export interface ObservableMiddlewareCallback {
-  (args: { path: string; target: object; key: string; context: Context }): void;
+  (args: { path: string; target: object; key: string; owner: Owner }): void;
 }
 
 /**
@@ -618,7 +617,7 @@ export interface MutableMiddlewareCallback {
     target: object;
     key: string;
     value: unknown;
-    context: Context;
+    owner: Owner;
   }): void;
 }
 
@@ -632,6 +631,6 @@ export interface ExecutableMiddlewareCallback {
     key: string;
     args: unknown[];
     abort: () => void;
-    context: Context;
+    owner: Owner;
   }): void;
 }
