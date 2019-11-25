@@ -96,14 +96,22 @@ describe("observableState", () => {
     expect(state.users[0].profile.name).toBe("Jon");
     expect(state.users[0].profile.surname).toBe("Snow");
   });
+
+  it("should throw if user tries to mutate state", () => {
+    expect(() => {
+      (state.users[2] as unknown) = {
+        profile: { name: "Daenerys", surname: "Targeryan" }
+      };
+    }).toThrow();
+  });
 });
 
 describe("observableState Owner", () => {
   it("should return different observable states and store different owners in development", () => {
-    const owner1: Owner = { type: "debug", name: "owner1" };
-    const owner2: Owner = { type: "debug", name: "owner2" };
     const store1 = new Store(rawStore, { mode: "development" });
     const store2 = new Store(rawStore, { mode: "development" });
+    const owner1: Owner = { type: "debug", name: "owner1" };
+    const owner2: Owner = { type: "debug", name: "owner2" };
     const state1 = store1.createObservableState(owner1);
     const state2 = store2.createObservableState(owner2);
     expect(state1[OWNER]).toBe(owner1);

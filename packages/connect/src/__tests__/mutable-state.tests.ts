@@ -1,8 +1,8 @@
-import { mutableState } from "..";
-import { State, Derived, Store, ProxifyOptions } from "../../types";
-import { OWNER, PATH, RAW, ROOT, MUTABLE_STATE } from "../symbols";
+import Store from "../store";
+import { MutableState, Derived, StoreType, Owner } from "../../types";
+import { STORE, OWNER, PATH, RAW, MUTABLE_STATE } from "../symbols";
 
-interface MyStore extends Store {
+interface MyStore extends StoreType {
   state: {
     users: { profile: { name: string; surname: string } }[];
     usersLength: Derived<MyStore, number>;
@@ -15,7 +15,8 @@ interface MyStore extends Store {
 }
 
 let rawStore: MyStore;
-let state: State<MyStore>;
+let store: Store<MyStore>;
+let state: MutableState<MyStore>;
 
 beforeEach(() => {
   rawStore = {
@@ -34,7 +35,8 @@ beforeEach(() => {
       capitalize: str => str.toUpperCase()
     }
   };
-  state = mutableState(rawStore);
+  store = new Store(rawStore);
+  state = store.createMutableState();
 });
 
 describe("mutableState", () => {
@@ -47,11 +49,6 @@ describe("mutableState", () => {
     expect(state.users[0]).toBeInstanceOf(Proxy);
     expect(state.users[0].profile[MUTABLE_STATE]).toBe(true);
     expect(state.users[0].profile).toBeInstanceOf(Proxy);
-  });
-
-  it("should throw if rawStore doesn't contain state", () => {
-    const store2 = { actions: {}, libraries: {} /* no state */ } as Store;
-    expect(() => mutableState(store2)).toThrow();
   });
 
   it("should return the own keys of the raw state", () => {
@@ -78,28 +75,28 @@ describe("mutableState", () => {
     expect(state.users[0].profile[RAW]).toBe(rawStore.state.users[0].profile);
   });
 
-  it("should store access to the root observable state and libraries", () => {
-    expect(state[ROOT].state).toBe(state);
-    expect(state[ROOT].libraries).toBe(rawStore.libraries);
-    expect(state.users[ROOT].state).toBe(state);
-    expect(state.users[ROOT].libraries).toBe(rawStore.libraries);
-    expect(state.users[0][ROOT].state).toBe(state);
-    expect(state.users[0][ROOT].libraries).toBe(rawStore.libraries);
-    expect(state.users[0].profile[ROOT].state).toBe(state);
-    expect(state.users[0].profile[ROOT].libraries).toBe(rawStore.libraries);
+  it("should store access to the store instance", () => {
+    expect(state[STORE]).toBe(store);
+    expect(state[STORE]).toBe(store);
+    expect(state.users[STORE]).toBe(store);
+    expect(state.users[STORE]).toBe(store);
+    expect(state.users[0][STORE]).toBe(store);
+    expect(state.users[0][STORE]).toBe(store);
+    expect(state.users[0].profile[STORE]).toBe(store);
+    expect(state.users[0].profile[STORE]).toBe(store);
   });
 
-  it("should not have access to the root actions", () => {
-    expect(state[ROOT].actions).toBe(undefined);
-    expect(state.users[ROOT].actions).toBe(undefined);
-    expect(state.users[0][ROOT].actions).toBe(undefined);
-    expect(state.users[0].profile[ROOT].actions).toBe(undefined);
+  it("should be able to mutate state", () => {
+    const newUser = { profile: { name: "Daenerys", surname: "Targeryan" } };
+    state.users[2] = newUser;
+    expect(rawStore.state.users[2]).toBe(newUser);
+    expect(state.users[2]).toEqual(newUser);
   });
 
   it("should change the path when objects are swapped", () => {
-    const jon = state.users[0];
+    const user0 = state.users[0];
     state.users[0] = state.users[1];
-    state.users[1] = jon;
+    state.users[1] = user0;
     expect(state.users[0][PATH]).toBe("state.users.0");
     expect(state.users[0].profile[PATH]).toBe("state.users.0.profile");
     expect(state.users[1][PATH]).toBe("state.users.1");
@@ -107,9 +104,9 @@ describe("mutableState", () => {
   });
 
   it("should change the raw state when objects are swapped", () => {
-    const jon = state.users[0];
+    const user0 = state.users[0];
     state.users[0] = state.users[1];
-    state.users[1] = jon;
+    state.users[1] = user0;
     expect(state.users[0][RAW]).toBe(rawStore.state.users[0]);
     expect(state.users[0].profile[RAW]).toBe(rawStore.state.users[0].profile);
     expect(state.users[1][RAW]).toBe(rawStore.state.users[1]);
@@ -147,35 +144,33 @@ describe("mutableState", () => {
 
 describe("mutableState Owner", () => {
   it("should return different observable states and store different owner in development", () => {
-    const options1: ProxifyOptions = {
-      owner: { type: "debug", name: "options1" },
-      mode: "development"
-    };
-    const options2: ProxifyOptions = {
-      owner: { type: "debug", name: "options2" },
-      mode: "development"
-    };
-    const state1 = mutableState(rawStore, options1);
-    const state2 = mutableState(rawStore, options2);
-    expect(state1[OWNER]).toBe(options1.owner);
-    expect(state1.users[OWNER]).toBe(options1.owner);
-    expect(state1.users[0][OWNER]).toBe(options1.owner);
-    expect(state1.users[0].profile[OWNER]).toBe(options1.owner);
-    expect(state2[OWNER]).toBe(options2.owner);
-    expect(state2.users[OWNER]).toBe(options2.owner);
-    expect(state2.users[0][OWNER]).toBe(options2.owner);
-    expect(state2.users[0].profile[OWNER]).toBe(options2.owner);
+    const store1 = new Store(rawStore, { mode: "development" });
+    const store2 = new Store(rawStore, { mode: "development" });
+    const owner1: Owner = { type: "debug", name: "owner1" };
+    const owner2: Owner = { type: "debug", name: "owner2" };
+    const state1 = store1.createMutableState(owner1);
+    const state2 = store2.createMutableState(owner2);
+    expect(state1[OWNER]).toBe(owner1);
+    expect(state1.users[OWNER]).toBe(owner1);
+    expect(state1.users[0][OWNER]).toBe(owner1);
+    expect(state1.users[0].profile[OWNER]).toBe(owner1);
+    expect(state2[OWNER]).toBe(owner2);
+    expect(state2.users[OWNER]).toBe(owner2);
+    expect(state2.users[0][OWNER]).toBe(owner2);
+    expect(state2.users[0].profile[OWNER]).toBe(owner2);
     expect(state1).not.toBe(state2);
   });
 
   it("should return the same observable states without owner information in production", () => {
-    const state1 = mutableState(rawStore, {
-      mode: "production",
-      owner: { type: "debug", name: "owner1" }
+    const store1 = new Store(rawStore, { mode: "production" });
+    const store2 = new Store(rawStore, { mode: "production" });
+    const state1 = store1.createMutableState({
+      type: "debug",
+      name: "owner1"
     });
-    const state2 = mutableState(rawStore, {
-      mode: "production",
-      owner: { type: "debug", name: "owner2" }
+    const state2 = store2.createMutableState({
+      type: "debug",
+      name: "owner2"
     });
     expect(state1[OWNER]).toBe(null);
     expect(state1.users[OWNER]).toBe(null);
