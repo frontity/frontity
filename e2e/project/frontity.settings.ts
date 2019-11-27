@@ -28,6 +28,10 @@ const settings: Settings = [
       },
       "emotion"
     ]
+  },
+  {
+    name: "loadable",
+    packages: ["loadable"]
   }
 ];
 
