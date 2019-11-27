@@ -1,9 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getBothScriptTags should return both es5 and module tags 1`] = `
+exports[`getBothScriptTags should return both es5 and module tags in development 1`] = `
 "<script>REQ-CHUNK-SCRIPT-TAG</script>
-        <script async type=\\"module\\" data-chunk=\\"site-1\\" src=\\"/public-path/site-1.module.js\\"></script>
-        <script async type=\\"module\\" data-chunk=\\"site-2\\" src=\\"/public-path/site-2.module.js\\"></script>
-        <script async nomodule data-chunk=\\"site-1\\" src=\\"/public-path/site-1.es5.js\\"></script>
-        <script async nomodule data-chunk=\\"site-2\\" src=\\"/public-path/site-2.es5.js\\"></script>"
+        <script async type=\\"module\\" data-chunk=\\"chunk-1\\" src=\\"/public-path/chunk-1.module.js\\"></script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-2\\" src=\\"/public-path/chunk-2.module.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-1\\" src=\\"/public-path/chunk-1.es5.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-2\\" src=\\"/public-path/chunk-2.es5.js\\"></script>"
+`;
+
+exports[`getBothScriptTags should return both es5 and module tags in production 1`] = `
+"<script>REQ-CHUNK-SCRIPT-TAG</script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-1\\" src=\\"/public-path/chunk-1.module.123.js\\"></script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-2\\" src=\\"/public-path/chunk-2.module.123.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-1\\" src=\\"/public-path/chunk-1.es5.456.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-2\\" src=\\"/public-path/chunk-2.es5.456.js\\"></script>"
+`;
+
+exports[`getBothScriptTags should work with secondary chunks in development 1`] = `
+"<script>REQ-CHUNK-SCRIPT-TAG</script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-1\\" src=\\"/public-path/chunk-1.module.js\\"></script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-2\\" src=\\"/public-path/chunk-2.module.js\\"></script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-1~chunk-2\\" src=\\"/public-path/chunk-1~chunk-2.module.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-1\\" src=\\"/public-path/chunk-1.es5.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-2\\" src=\\"/public-path/chunk-2.es5.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-1~chunk-2\\" src=\\"/public-path/chunk-1~chunk-2.es5.js\\"></script>"
+`;
+
+exports[`getBothScriptTags should work with secondary chunks in production 1`] = `
+"<script>REQ-CHUNK-SCRIPT-TAG</script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-1\\" src=\\"/public-path/chunk-1.module.123.js\\"></script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-2\\" src=\\"/public-path/chunk-2.module.123.js\\"></script>
+        <script async type=\\"module\\" data-chunk=\\"chunk-1~chunk-2\\" src=\\"/public-path/chunk-1~chunk-2.module.123.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-1\\" src=\\"/public-path/chunk-1.es5.456.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-2\\" src=\\"/public-path/chunk-2.es5.456.js\\"></script>
+        <script async nomodule data-chunk=\\"chunk-1~chunk-2\\" src=\\"/public-path/chunk-1~chunk-2.es5.456.js\\"></script>"
 `;
