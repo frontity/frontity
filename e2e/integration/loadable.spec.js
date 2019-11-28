@@ -3,10 +3,14 @@ describe("Loadable", () => {
     cy.visit("http://localhost:3001?name=loadable");
   });
 
-  it("should be able to render elements from dynamic component", () => {
+  it("should be able to render elements from dynamic components", () => {
     cy.get("[data-test-id='dynamic-div']").should(
       "have.text",
       "I am the Dynamic1 component"
+    );
+    cy.get("[data-test-id='dynamic2-div']").should(
+      "have.text",
+      "I am the Dynamic2 component"
     );
   });
 

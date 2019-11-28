@@ -1,5 +1,4 @@
 import React from "react";
-import Dynamic2 from "./dynamic-2";
 import Static from "./static";
 
 const Dynamic: React.FC = () => {
@@ -11,7 +10,6 @@ const Dynamic: React.FC = () => {
         Toggle
       </button>
       <div data-test-id="toggle-div">{toggle ? "ON" : "OFF"}</div>
-      <Dynamic2 />
       <Static />
     </>
   );
