@@ -35,14 +35,16 @@ const getCurrentHeadTags = ({ state }): HeadTags => {
 };
 
 const Root: React.FC<Connect<Package>> = ({ state }) => {
+  const headTags = getCurrentHeadTags({ state });
   return (
     <Head>
-      {getCurrentHeadTags({ state }).map(
-        ({ tag: Tag, content: children, attributes }, index) => {
-          const props = { children, ...attributes };
-          return <Tag key={index} {...props} />;
-        }
-      )}
+      {headTags.map(({ tag: Tag, attributes, content }, index) => {
+        return (
+          <Tag key={index} {...attributes}>
+            {content}
+          </Tag>
+        );
+      })}
     </Head>
   );
 };

@@ -3,7 +3,7 @@ import Source from "@frontity/source";
 import Router from "@frontity/router";
 
 export type HeadTags = {
-  tag: string;
+  tag: "meta" | "link" | "title" | "style" | "script" | "noscript" | "base";
   attributes?: Record<string, string>;
   content?: string;
 }[];
