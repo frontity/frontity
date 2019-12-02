@@ -34,7 +34,7 @@ const getCurrentEntity = ({ state }) => {
 // or an empty array if there is no entity nor head tags.
 const getCurrentHeadTags = ({ state }): HeadTags => {
   const entity = getCurrentEntity({ state });
-  return (entity && entity["head-tags"]) || [];
+  return (entity && entity.head_tags) || [];
 };
 
 // Render all head tags from the current entity.
