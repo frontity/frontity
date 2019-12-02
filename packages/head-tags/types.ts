@@ -1,4 +1,4 @@
-import { Package, Derived } from "frontity/types";
+import { Package } from "frontity/types";
 import Source from "@frontity/source";
 import Router from "@frontity/router";
 
@@ -16,9 +16,6 @@ interface HeadTagsPackage extends Package {
   state: {
     source?: Source["state"]["source"];
     router?: Router["state"]["router"];
-    // headTags: {
-    //   fromCurrentLink: Derived<HeadTagsPackage, HeadTags>;
-    // };
   };
 }
 

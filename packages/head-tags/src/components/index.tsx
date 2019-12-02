@@ -3,6 +3,7 @@ import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
 import Package, { HeadTags } from "../../types";
 
+// Get the entity related to the current link.
 const getCurrentEntity = ({ state }) => {
   const data = state.source.get(state.router.link);
 
@@ -18,22 +19,25 @@ const getCurrentEntity = ({ state }) => {
 
   if (data.isAuthor) {
     const { id } = data;
-    return state.source.author[id] as any;
+    return state.source.author[id] as any; // TODO: fix typing here
   }
 
   if (data.isPostTypeArchive) {
     const { type } = data;
-    return (state.source as any).type[type];
+    return (state.source as any).type[type]; // TODO: fix typing here
   }
 
   return null;
 };
 
+// Get the head tags stored in the current entity,
+// or an empty array if there is no entity nor head tags.
 const getCurrentHeadTags = ({ state }): HeadTags => {
   const entity = getCurrentEntity({ state });
-  return entity ? entity["head-tags"] : [];
+  return (entity && entity["head-tags"]) || [];
 };
 
+// Render all head tags from the current entity.
 const Root: React.FC<Connect<Package>> = ({ state }) => {
   const headTags = getCurrentHeadTags({ state });
   return (
