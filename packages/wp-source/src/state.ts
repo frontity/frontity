@@ -14,6 +14,7 @@ const state: WpSource["state"]["source"] = {
   page: {},
   author: {},
   attachment: {},
+  type: {},
   api: "https://test.frontity.io",
   isWpCom: ({ state }) =>
     state.source.api.startsWith(

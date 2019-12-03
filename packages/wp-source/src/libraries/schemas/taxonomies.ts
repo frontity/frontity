@@ -1,6 +1,8 @@
 import { schema } from "normalizr";
 import { normalize } from "../route-utils";
 
+export const taxonomyType = new schema.Entity("taxonomyType");
+
 export const taxonomy = new schema.Entity(
   "taxonomy",
   {},

@@ -49,7 +49,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
     Object.entries(entityMap).forEach(([, entity]) => {
       // Fix links that come from the REST API
       // to match the Frontity server location.
-      transformLink({ entity, state, subdirectory });
+      if (entity.link) transformLink({ entity, state, subdirectory });
 
       // Get or init data using the transformed link
       const { data } = state.source;
@@ -60,7 +60,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
           isFetching: false
         });
 
-      if (schema === "postType" || schema === "attachment") {
+      if (schema === "post" || schema === "attachment") {
         if (!state.source[entity.type]) state.source[entity.type] = {};
         state.source[entity.type][entity.id] = entity;
         Object.assign(entityData, {
@@ -79,6 +79,8 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         Object.assign(entityData, {
           id: entity.id
         });
+      } else if (schema === "postType") {
+        state.source.type[entity.slug] = entity;
       }
     });
   });

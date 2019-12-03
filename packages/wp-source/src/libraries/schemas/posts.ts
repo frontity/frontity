@@ -1,13 +1,13 @@
 import { schema } from "normalizr";
-import { taxonomy } from "./taxonomies";
+import { taxonomies } from "./taxonomies";
 import { author } from "./authors";
 import { attachment } from "./attachments";
 import { normalize } from "../route-utils";
 
-const taxonomies = new schema.Array(new schema.Array(taxonomy));
+export const postType = new schema.Entity("postType");
 
-export const postType = new schema.Entity(
-  "postType",
+export const post = new schema.Entity(
+  "post",
   {},
   {
     processStrategy(entity) {
@@ -18,13 +18,14 @@ export const postType = new schema.Entity(
   }
 );
 
-postType.define({
+post.define({
   _embedded: {
     author: [author],
+    type: [postType],
     "wp:featuredmedia": [attachment],
     "wp:contentmedia": [[attachment]],
     "wp:term": taxonomies
   }
 });
 
-export const postTypes = new schema.Array(postType);
+export const posts = new schema.Array(post);
