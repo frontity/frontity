@@ -1,6 +1,6 @@
 import { Package, Action, Derived } from "frontity/types";
 import { Data } from "./src/data";
-import { Taxonomy, PostType, Attachment, Author } from "./src/entities";
+import { Taxonomy, PostType, Attachment, Author, Type } from "./src/entities";
 
 export type RouteParams = {
   path: string;
@@ -15,6 +15,7 @@ export type Taxonomy = Taxonomy;
 export type PostType = PostType;
 export type Attachment = Attachment;
 export type Author = Author;
+export type Type = Type;
 
 interface Source<T = null> extends Package {
   state: {
@@ -27,6 +28,7 @@ interface Source<T = null> extends Package {
       page: Record<string, PostType>;
       author: Record<string, Author>;
       attachment: Record<string, Attachment>;
+      type: Record<string, Type>;
     };
   };
   actions: {

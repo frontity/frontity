@@ -72,3 +72,13 @@ export interface PostType extends BasePostType {
   format?: string;
   sticky?: boolean;
 }
+
+export interface Type {
+  description: string;
+  hierarchical: boolean;
+  name: string;
+  slug: string;
+  taxonomies: string[];
+  rest_base: string;
+  _links?: any;
+}

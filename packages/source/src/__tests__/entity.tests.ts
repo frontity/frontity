@@ -1,4 +1,5 @@
-import { Author, Taxonomy, PostType, Attachment } from "../entities";
+/* eslint-disable @typescript-eslint/camelcase */
+import { Author, Taxonomy, PostType, Attachment, Type } from "../entities";
 
 const author: Author = {
   id: 1,
@@ -324,6 +325,34 @@ const attachment: Attachment = {
         taxonomy: "latest",
         embeddable: true,
         href: "https://test.frontity.io/wp-json/wp/v2/latest?attachment=437"
+      }
+    ],
+    curies: [
+      {
+        name: "wp",
+        href: "https://api.w.org/{rel}",
+        templated: true
+      }
+    ]
+  }
+};
+
+const type: Type = {
+  description: "",
+  hierarchical: false,
+  name: "Posts",
+  slug: "post",
+  taxonomies: ["category", "post_tag"],
+  rest_base: "posts",
+  _links: {
+    collection: [
+      {
+        href: "http://test.frontity.io/wp-json/wp/v2/types"
+      }
+    ],
+    "wp:items": [
+      {
+        href: "http://test.frontity.io/wp-json/wp/v2/posts"
       }
     ],
     curies: [
