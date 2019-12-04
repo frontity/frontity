@@ -17,41 +17,41 @@ import { entity } from "../";
 
 test("Convert post using entity", () => {
   const { entities } = normalize(post60, entity);
-  expect(entities.postType[60]).toMatchSnapshot();
-  expect(entities.attachment[62]).toMatchSnapshot();
-  expect(entities.taxonomy[3]).toMatchSnapshot();
-  expect(entities.taxonomy[10]).toMatchSnapshot();
-  expect(entities.author[4]).toMatchSnapshot();
-  expect(entities.taxonomy.post).toMatchSnapshot();
+  expect(entities.postEntity[60]).toMatchSnapshot();
+  expect(entities.attachmentEntity[62]).toMatchSnapshot();
+  expect(entities.taxonomyEntity[3]).toMatchSnapshot();
+  expect(entities.taxonomyEntity[10]).toMatchSnapshot();
+  expect(entities.authorEntity[4]).toMatchSnapshot();
+  expect(entities.taxonomyEntity.post).toMatchSnapshot();
 });
 
 test("Convert a category using entity", () => {
   const { entities } = normalize(category7, entity);
-  expect(entities.taxonomy[7]).toMatchSnapshot();
+  expect(entities.taxonomyEntity[7]).toMatchSnapshot();
 });
 
 test("Convert a tag using entity", () => {
   const { entities } = normalize(tag10, entity);
-  expect(entities.taxonomy[10]).toMatchSnapshot();
+  expect(entities.taxonomyEntity[10]).toMatchSnapshot();
 });
 
 test("Convert a author using entity", () => {
   const { entities } = normalize(author4, entity);
-  expect(entities.author[4]).toMatchSnapshot();
+  expect(entities.authorEntity[4]).toMatchSnapshot();
 });
 
 test("Convert an attachment using entity", () => {
   const { entities } = normalize(media193, entity);
-  expect(entities.attachment[193]).toMatchSnapshot();
+  expect(entities.attachmentEntity[193]).toMatchSnapshot();
 });
 
 test("Convert a page using entity and ignore subpages", () => {
   const { entities } = normalize(page184, entity);
-  expect(entities.postType[184]).toMatchSnapshot();
-  expect(entities.postType[211]).toBe(undefined);
+  expect(entities.postEntity[184]).toMatchSnapshot();
+  expect(entities.postEntity[211]).toBe(undefined);
 });
 
 test("Convert a latest taxonomy using entity", () => {
   const { entities } = normalize(latestMovie, entity);
-  expect(entities.taxonomy.movie).toMatchSnapshot();
+  expect(entities.taxonomyEntity.movie).toMatchSnapshot();
 });

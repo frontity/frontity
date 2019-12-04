@@ -1,13 +1,25 @@
 import { schema } from "normalizr";
-import { taxonomies } from "./taxonomies";
-import { author } from "./authors";
-import { attachment } from "./attachments";
+import { taxonomyEntities } from "./taxonomies";
+import { authorEntity } from "./authors";
+import { attachmentEntity } from "./attachments";
 import { normalize } from "../route-utils";
 
-export const postType = new schema.Entity("postType");
+export const postType = new schema.Entity(
+  "postType",
+  {},
+  {
+    processStrategy(entity) {
+      const result = { ...entity };
+      result.taxonomies = result.taxonomies.map(slug =>
+        slug === "post_tag" ? "tag" : slug
+      );
+      return result;
+    }
+  }
+);
 
-export const post = new schema.Entity(
-  "post",
+export const postEntity = new schema.Entity(
+  "postEntity",
   {},
   {
     processStrategy(entity) {
@@ -18,14 +30,14 @@ export const post = new schema.Entity(
   }
 );
 
-post.define({
+postEntity.define({
   _embedded: {
-    author: [author],
+    author: [authorEntity],
     type: [postType],
-    "wp:featuredmedia": [attachment],
-    "wp:contentmedia": [[attachment]],
-    "wp:term": taxonomies
+    "wp:featuredmedia": [attachmentEntity],
+    "wp:contentmedia": [[attachmentEntity]],
+    "wp:term": [taxonomyEntities]
   }
 });
 
-export const posts = new schema.Array(post);
+export const postEntities = new schema.Array(postEntity);

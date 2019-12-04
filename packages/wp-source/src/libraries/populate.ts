@@ -60,27 +60,29 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
           isFetching: false
         });
 
-      if (schema === "post" || schema === "attachment") {
+      if (schema === "postEntity" || schema === "attachmentEntity") {
         if (!state.source[entity.type]) state.source[entity.type] = {};
         state.source[entity.type][entity.id] = entity;
         Object.assign(entityData, {
           type: entity.type,
           id: entity.id
         });
-      } else if (schema === "taxonomy") {
+      } else if (schema === "taxonomyEntity") {
         if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
         state.source[entity.taxonomy][entity.id] = entity;
         Object.assign(entityData, {
           taxonomy: entity.taxonomy,
           id: entity.id
         });
-      } else if (schema === "author") {
+      } else if (schema === "authorEntity") {
         state.source.author[entity.id] = entity;
         Object.assign(entityData, {
           id: entity.id
         });
       } else if (schema === "postType") {
         state.source.type[entity.slug] = entity;
+      } else if (schema === "taxonomyType") {
+        state.source.taxonomy[entity.slug] = entity;
       }
     });
   });

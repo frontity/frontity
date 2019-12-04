@@ -3,8 +3,8 @@ import { normalize } from "../route-utils";
 
 export const taxonomyType = new schema.Entity("taxonomyType");
 
-export const taxonomy = new schema.Entity(
-  "taxonomy",
+export const taxonomyEntity = new schema.Entity(
+  "taxonomyEntity",
   {},
   {
     processStrategy(entity) {
@@ -16,4 +16,4 @@ export const taxonomy = new schema.Entity(
     }
   }
 );
-export const taxonomies = new schema.Array(taxonomy);
+export const taxonomyEntities = new schema.Array(taxonomyEntity);

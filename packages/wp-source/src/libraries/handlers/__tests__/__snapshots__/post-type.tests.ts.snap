@@ -38,6 +38,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -79,6 +81,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -126,6 +130,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -173,6 +179,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -232,6 +240,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -291,6 +301,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -356,6 +368,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -421,6 +435,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -526,6 +542,8 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -631,6 +649,8 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -760,6 +780,8 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -871,6 +893,8 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -982,6 +1006,133 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+}
+`;
+
+exports[`post works with types embedded 1`] = `
+Object {
+  "api": "https://test.frontity.io",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/post-1/attachment-1/",
+      "slug": "attachment-1",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isPost": true,
+      "isPostType": true,
+      "isReady": true,
+      "type": "post",
+    },
+    "/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "taxonomy": "tag",
+    },
+    "undefined": Object {
+      "isFetching": false,
+      "isReady": false,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "type": Array [
+          undefined,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [
+        1,
+      ],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {
+    "post": Object {
+      "description": "",
+      "hierarchical": false,
+      "name": "Posts",
+      "slug": "post",
+      "taxonomies": Array [
+        "category",
+        "tag",
+      ],
+    },
+  },
 }
 `;
 
@@ -1012,5 +1163,7 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
