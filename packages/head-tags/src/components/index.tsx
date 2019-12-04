@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
+import { useFrontityLinks } from "../utils";
 import Package, { HeadTags, State, Entity } from "../../types";
 
 type GetCurrentEntity = (args: { state: State }) => Entity | null;
@@ -33,11 +34,16 @@ const getCurrentEntity: GetCurrentEntity = ({ state }) => {
   return null;
 };
 
-// Get the head tags stored in the current entity,
-// or an empty array if there is no entity or head tags.
+/**
+ * Get the head tags stored in the current entity,
+ * or an empty array if there is no entity or head tags.
+ */
 const getCurrentHeadTags: GetCurrentHeadTags = ({ state }) => {
   const entity = getCurrentEntity({ state });
-  return (entity && entity.head_tags) || [];
+  const headTags = (entity && entity.head_tags) || [];
+
+  // Changes those links that points to WordPress blog pages to Frontity links
+  return useFrontityLinks({ state, headTags });
 };
 
 // Render all head tags from the current entity.
