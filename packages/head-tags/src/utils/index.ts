@@ -1,6 +1,8 @@
 import { URL } from "frontity";
 import { HeadTags, State } from "../../types";
 
+type GetUrlPathname = (url: URL, apiUrl: URL, isWpCom: boolean) => string;
+
 type UseFrontityLinks = (args: {
   state: State;
   headTags: HeadTags;
@@ -12,7 +14,7 @@ const possibleLink = ["href", "content"];
 // Test if a path is not from a blog link.
 const isInvalid = /^\/wp-(json|admin|content)/;
 
-const getUrlPathname = (url: URL, apiUrl: URL, isWpCom: boolean): string => {
+export const getUrlPathname: GetUrlPathname = (url, apiUrl, isWpCom) => {
   // Get API subdirectory.
   const apiSubdir = isWpCom
     ? ""
