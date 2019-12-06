@@ -2,26 +2,41 @@ import React from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
 import Navigation from "./navigation";
-import MobileMenu from "./menu";
+// import MobileMenu from "./menu";
 
 const Header = ({ state }) => {
   const { title, description } = state.frontity;
   return (
     <PageHeader>
       <PageHeaderInner>
-        <SiteTitle>
-          <StyledLink link="/">{title}</StyledLink>
-        </SiteTitle>
-        <SiteDescription>{description}</SiteDescription>
-        <MobileMenu />
+        <PageTitleWrapper>
+          <SiteTitle>
+            <StyledLink link="/">{title}</StyledLink>
+          </SiteTitle>
+          <SiteDescription>{description}</SiteDescription>
+        </PageTitleWrapper>
+        <Navigation />
+        {/* <MobileMenu /> */}
       </PageHeaderInner>
-      <Navigation />
     </PageHeader>
   );
 };
 
 // Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header);
+
+const PageTitleWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 1000px) {
+    margin-right: 4rem;
+    max-width: 50%;
+    padding: 0;
+    text-align: left;
+  }
+`;
 
 const PageHeader = styled.header`
   z-index: 1;
@@ -38,6 +53,10 @@ const PageHeaderInner = styled.div`
   z-index: 100;
   margin-left: auto;
   margin-right: auto;
+
+  @media (min-width: 700px) {
+    width: calc(100% - 8rem);
+  }
 `;
 
 const SiteTitle = styled.h1`

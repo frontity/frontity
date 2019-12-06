@@ -1,0 +1,24 @@
+{
+  "name": "twenty-twenty-theme-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example of a project using mars-theme.",
+  "scripts": {
+    "dev": "frontity dev",
+    "dev:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity dev",
+    "build": "frontity build",
+    "build:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity build",
+    "serve": "frontity serve",
+    "serve:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity serve"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@frontity/core": "^1.4.0",
+    "@frontity/html2react": "^1.1.14",
+    "@frontity/twenty-twenty-theme": "^1.0.0",
+    "@frontity/tiny-router": "^1.0.17",
+    "@frontity/wp-source": "^1.4.2",
+    "babel-plugin-frontity": "^1.0.1",
+    "frontity": "^1.4.2"
+  }
+}

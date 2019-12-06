@@ -17,18 +17,18 @@ const Item = ({ state, item }) => {
 
   return (
     <article>
-      <Link link={item.link}>
-        <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
-      </Link>
+      <EntryTitleLink link={item.link}>
+        <EntryTitle dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
+      </EntryTitleLink>
 
       <div>
         {/* If the post has an author, we render a clickable author text. */}
         {author && (
-          <StyledLink link={author.link}>
+          <Link link={author.link}>
             <AuthorName>
               By <b>{author.name}</b>
             </AuthorName>
-          </StyledLink>
+          </Link>
         )}
         <PublishDate>
           {" "}
@@ -55,22 +55,27 @@ const Item = ({ state, item }) => {
 // Connect the Item to gain access to `state` as a prop
 export default connect(Item);
 
-const Title = styled.h1`
-  font-size: 2rem;
-  color: rgba(12, 17, 43);
+const EntryTitle = styled.h1`
   margin: 0;
-  padding-top: 24px;
-  padding-bottom: 8px;
-  box-sizing: border-box;
+  @media (min-width: 700px) {
+    font-size: 6.4rem;
+  }
+  @media (min-width: 1200px) {
+    font-size: 8.4rem;
+  }
+`;
+
+const EntryTitleLink = styled(Link)`
+  color: #000000;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const AuthorName = styled.span`
   color: rgba(12, 17, 43, 0.9);
   font-size: 0.9em;
-`;
-
-const StyledLink = styled(Link)`
-  padding: 15px 0;
 `;
 
 const PublishDate = styled.span`
