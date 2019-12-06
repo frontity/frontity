@@ -40,18 +40,20 @@ const Theme = ({ state, libraries }) => {
         Skip to main content
       </SkipLink>
 
-      {/* Add the header of the site. */}
-      <Header />
+      <div style={{ minHeight: "calc(100vh - 190px)" }}>
+        {/* Add the header of the site. */}
+        <Header />
 
-      {/* Add the main section. It renders a different component depending
-      on the type of URL we are in. */}
-      <Main id="main">
-        {(data.isFetching && <Loading />) ||
-          (isSearch && <SearchResults />) ||
-          (data.isArchive && <List />) ||
-          (data.isPostType && <Post />) ||
-          (data.is404 && <Page404 />)}
-      </Main>
+        {/* Add the main section. It renders a different component depending
+        on the type of URL we are in. */}
+        <Main id="main">
+          {(data.isFetching && <Loading />) ||
+            (isSearch && <SearchResults />) ||
+            (data.isArchive && <List />) ||
+            (data.isPostType && <Post />) ||
+            (data.is404 && <Page404 />)}
+        </Main>
+      </div>
 
       <Footer />
     </>

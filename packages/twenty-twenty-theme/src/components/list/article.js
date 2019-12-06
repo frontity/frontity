@@ -21,7 +21,8 @@ const Article = ({ state, item, libraries, showExcerpt, showMedia = true }) => {
    * The item's categories is an array of each category id
    * So, we'll look up the details of each category in allCategories
    */
-  const categories = item.categories.map(catId => allCategories[catId]);
+  const categories =
+    item.categories && item.categories.map(catId => allCategories[catId]);
 
   // Get all tags
   const allTags = state.source.tag;
@@ -29,7 +30,7 @@ const Article = ({ state, item, libraries, showExcerpt, showMedia = true }) => {
    * The item's categories is an array of each tag id
    * So, we'll look up the details of each tag in allTags
    */
-  const tags = item.tags.map(tagId => allTags[tagId]);
+  const tags = item.tags && item.tags.map(tagId => allTags[tagId]);
 
   const content = showExcerpt ? item.excerpt : item.content;
   const { Component: Html2React } = libraries.html2react;
