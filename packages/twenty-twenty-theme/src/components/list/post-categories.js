@@ -1,0 +1,58 @@
+import { connect, styled } from "frontity";
+import React from "react";
+import ScreenReaderText from "../screen-reader";
+import Link from "../link";
+
+const PostCategories = ({ categories }) => {
+  return (
+    <EntryCategories>
+      <ScreenReaderText>Categories</ScreenReaderText>
+
+      <EntryCategoriesInner>
+        {categories.map(category => (
+          <CategoryTag key={category.id} link={category.link}>
+            {category.name}
+          </CategoryTag>
+        ))}
+      </EntryCategoriesInner>
+    </EntryCategories>
+  );
+};
+
+export default connect(PostCategories);
+
+const EntryCategories = styled.div`
+  line-height: 1.25;
+  margin-bottom: 2rem;
+
+  @media (min-width: 700px) {
+    margin-bottom: 3rem;
+  }
+`;
+
+const EntryCategoriesInner = styled.div`
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.5rem 0 0 -1rem;
+
+  @media (min-width: 700px) {
+    margin: -1rem 0 0 -2rem;
+  }
+`;
+
+const CategoryTag = styled(Link)`
+  color: #cd2653;
+  border-bottom: 0.15rem solid currentColor;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.036666667em;
+  margin: 0.5rem 0 0 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  @media (min-width: 700px) {
+    font-size: 1.5rem;
+    margin: 1rem 0 0 2rem;
+  }
+`;
