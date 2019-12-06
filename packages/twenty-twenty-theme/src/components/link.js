@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "frontity";
 
 const Link = ({
@@ -11,9 +11,19 @@ const Link = ({
   "aria-current": ariaCurrent,
   onClick: onClickProp
 }) => {
+  // Check if the link is an external or internal link
+  const isExternal = link.startsWith("http");
+
+  // Pre-fetch the page for this link
+  useEffect(() => {
+    if (!isExternal) {
+      actions.source.fetch(link);
+    }
+  }, []);
+
   const onClick = event => {
     // Do nothing if it's an external link
-    if (link.startsWith("http")) return;
+    if (isExternal) return;
 
     event.preventDefault();
     // Set the router to the new url.

@@ -6,7 +6,10 @@ import { PostMetaList, PostMetaWrapper } from "./post-meta";
 import PostMetaItem from "./post-meta-item";
 
 const PostTags = ({ tags }) => {
-  if (tags.length === 0) {
+  // Remove empty or undefined tags
+  const postTags = tags.filter(Boolean);
+
+  if (postTags.length === 0) {
     return null;
   }
 
@@ -14,8 +17,8 @@ const PostTags = ({ tags }) => {
     <PostMetaWrapper>
       <PostMetaList style={{ justifyContent: "flex-start" }}>
         <PostMetaItem icon={TagIcon} label="Post Tags">
-          {tags.map((tag, index) => {
-            const isLastTag = index === tags.length - 1;
+          {postTags.map((tag, index) => {
+            const isLastTag = index === postTags.length - 1;
             return (
               <Fragment key={tag.id}>
                 <Link link={tag.link}>{tag.name}</Link>

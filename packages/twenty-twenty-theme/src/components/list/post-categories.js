@@ -4,7 +4,10 @@ import ScreenReaderText from "../screen-reader";
 import Link from "../link";
 
 const PostCategories = ({ categories }) => {
-  if (categories.length === 0) {
+  // Remove empty or undefined categories
+  const postCategories = categories.filter(Boolean);
+
+  if (postCategories.length === 0) {
     return null;
   }
 
@@ -13,7 +16,7 @@ const PostCategories = ({ categories }) => {
       <ScreenReaderText>Categories</ScreenReaderText>
 
       <EntryCategoriesInner>
-        {categories.map(category => (
+        {postCategories.map(category => (
           <CategoryTag key={category.id} link={category.link}>
             {category.name}
           </CategoryTag>
