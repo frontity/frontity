@@ -25,8 +25,10 @@ const BackToTop = () => {
 
 const Footer = ({ state }) => {
   const currentYear = new Date().getFullYear();
+  const { footerBg } = state.theme.colors;
+
   return (
-    <SiteFooter role="contentinfo">
+    <SiteFooter bg={footerBg} role="contentinfo">
       <SiteFooterInner>
         <Credits>
           <Copyright>
@@ -55,7 +57,7 @@ const SiteFooter = styled.footer`
   border-style: solid;
   border-width: 0;
   padding: 3rem 0;
-  background-color: #fff;
+  background-color: ${props => props.bg};
   color: #000000;
 
   @media (min-width: 700px) {

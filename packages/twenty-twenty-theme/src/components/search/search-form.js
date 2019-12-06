@@ -5,6 +5,7 @@ import ScreenReaderText from "../screen-reader";
 const SearchForm = ({ state, actions, libraries }) => {
   const parse = libraries.source.parse(state.router.link);
   const searchQuery = parse.query["s"];
+  const { primary } = state.theme.colors;
 
   const { closeSearchModal } = actions.theme;
   // Keep a reference to the input so we can grab it's value on form submission
@@ -42,7 +43,9 @@ const SearchForm = ({ state, actions, libraries }) => {
           ref={inputRef}
         />
       </Label>
-      <Button type="submit">Search</Button>
+      <Button bg={primary} type="submit">
+        Search
+      </Button>
     </Form>
   );
 };
@@ -91,7 +94,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   flex-shrink: 0;
-  background-color: #cd2653;
+  background-color: ${props => props.bg};
   font-size: 1.7rem;
   border: none;
   border-radius: 0;

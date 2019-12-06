@@ -10,8 +10,10 @@ import MobileMenuModal from "./mobile/menu-modal";
 
 const Header = ({ state }) => {
   const { title, description } = state.frontity;
+  const { headerBg } = state.theme.colors;
+
   return (
-    <PageHeader id="site-header">
+    <PageHeader bg={headerBg} id="site-header">
       <HeaderInner>
         <TitleWrapper>
           <MobileSearchButton />
@@ -70,7 +72,7 @@ const TitleWrapper = styled.div`
 
 const PageHeader = styled.header`
   z-index: 1;
-  background: #fff;
+  background: ${props => props.bg};
   position: relative;
 `;
 

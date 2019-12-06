@@ -12,6 +12,7 @@ const SearchModal = ({ state, actions, libraries }) => {
 
   const { isSearchModalOpen } = state.theme;
   const { closeSearchModal } = actions.theme;
+  const { primary } = state.theme.colors;
 
   // Keep a reference to the input so we can grab it's value on form submission
   const inputRef = useRef();
@@ -65,7 +66,7 @@ const SearchModal = ({ state, actions, libraries }) => {
               placeholder="search for:"
               name="search"
             />
-            <SearchButton>Search</SearchButton>
+            <SearchButton bg={primary}>Search</SearchButton>
           </SearchForm>
 
           <CloseButton onClick={closeSearchModal}>
@@ -222,7 +223,7 @@ const SearchButton = styled.button`
   transform: translateY(-50%);
   margin: 0 0 0.8rem 0.8rem;
   border-color: #dcd7ca;
-  background-color: #cd2653;
+  background-color: ${props => props.bg};
 
   &:focus {
     right: 0;

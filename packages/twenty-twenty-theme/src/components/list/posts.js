@@ -4,12 +4,12 @@ import Article, { SectionContainer } from "./article";
 import PostSeparator from "./post-separator";
 import Pagination from "./pagination";
 
-export const Header = ({ label, children }) => {
+export const Header = ({ label, children, labelColor }) => {
   return (
     <ArchiveHeader>
       <ArchiveHeaderInner>
         <ArchiveTitle>
-          <ColoredText>{label}: </ColoredText>
+          <ColoredText color={labelColor}>{label}: </ColoredText>
           {children}
         </ArchiveTitle>
       </ArchiveHeaderInner>
@@ -20,19 +20,20 @@ export const Header = ({ label, children }) => {
 const Posts = ({ state, showExcerpt, showMedia }) => {
   // Get the data of the current list.
   const data = state.source.get(state.router.link);
+  const { primary } = state.theme.colors;
 
   return (
     <>
       {/* If the list is a taxonomy, we render a title. */}
       {data.isTaxonomy && (
-        <Header label={data.taxonomy}>
+        <Header labelColor={primary} label={data.taxonomy}>
           <span>{state.source[data.taxonomy][data.id].name}</span>
         </Header>
       )}
 
       {/* If the list is for a specific author, we render a title. */}
       {data.isAuthor && (
-        <Header label="Author">
+        <Header labelColor={primary} label="Author">
           <b>{state.source.author[data.id].name}</b>
         </Header>
       )}
@@ -86,6 +87,6 @@ const ArchiveTitle = styled.h1`
 `;
 
 const ColoredText = styled.span`
-  color: #cd2653;
+  color: ${props => props.color};
   text-transform: capitalize;
 `;

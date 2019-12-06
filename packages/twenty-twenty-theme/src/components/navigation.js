@@ -74,7 +74,6 @@ const MenuItem = styled.li`
 `;
 
 const MenuLink = styled(Link)`
-  color: #cd2653;
   display: block;
   line-height: 1.2;
   text-decoration: none;
