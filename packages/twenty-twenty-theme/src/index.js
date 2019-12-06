@@ -16,6 +16,18 @@ const marsTheme = {
      * relevant state. It is scoped to the `theme` namespace.
      */
     theme: {
+      colors: {
+        gray: {
+          base: "#6D6D6D",
+          light: "#DCD7CA",
+          lighter: "#F5EFE0"
+        },
+        primary: "#cd2653",
+        headerBg: "#ffffff",
+        footerBg: "#ffffff",
+        bodyBg: "#f5efe0"
+      },
+      showSearchInHeader: true,
       menu: [],
       isMobileMenuOpen: false,
       isSearchModalOpen: false,

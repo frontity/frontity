@@ -42,7 +42,7 @@ const EntryCategoriesInner = styled.div`
 `;
 
 const CategoryTag = styled(Link)`
-  color: #cd2653;
+  /* color: #cd2653; */
   border-bottom: 0.15rem solid currentColor;
   font-size: 1.4rem;
   font-weight: 700;

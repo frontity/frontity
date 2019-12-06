@@ -59,13 +59,13 @@ const cssReset = css`
   }
 `;
 
-const documentSetup = css`
+const documentSetup = colors => css`
   html {
     font-size: 62.5%; /* 1rem = 10px */
   }
 
   body {
-    background: #f5efe0;
+    background: ${colors.bodyBg};
     box-sizing: border-box;
     color: #000;
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica,
@@ -77,8 +77,8 @@ const documentSetup = css`
 
   @supports (font-variation-settings: normal) {
     body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-        Helvetica, sans-serif;
+      font-family: "Inter var", -apple-system, BlinkMacSystemFont,
+        "Helvetica Neue", Helvetica, sans-serif;
     }
   }
 
@@ -102,7 +102,7 @@ const fontFace = css`
     font-weight: 100 900; /* stylelint-disable-line font-weight-notation */
     font-style: normal;
     font-display: swap;
-    src: url(./assets/fonts/inter/Inter-upright-var.woff2) format("woff2");
+    src: url("../fonts/inter/Inter-upright-var.woff2") format("woff2");
   }
 
   @font-face {
@@ -110,7 +110,7 @@ const fontFace = css`
     font-weight: 100 900; /* stylelint-disable-line font-weight-notation */
     font-style: italic;
     font-display: swap;
-    src: url(./assets/fonts/inter/Inter-italic-var.woff2) format("woff2");
+    src: url("../fonts/inter/Inter-italic-var.woff2") format("woff2");
   }
 `;
 
@@ -123,7 +123,7 @@ const accessibilitySettings = css`
   }
 `;
 
-const elementBase = css`
+const elementBase = colors => css`
   main {
     display: block;
   }
@@ -244,12 +244,12 @@ const elementBase = css`
   hr {
     border-style: solid;
     border-width: 0.1rem 0 0 0;
-    border-color: #dcd7ca;
+    border-color: ${colors.gray.light};
     margin: 4rem 0;
   }
 
   a {
-    color: #cd2653;
+    color: ${colors.primary};
     text-decoration: underline;
   }
 
@@ -328,9 +328,9 @@ const listStyle = css`
   }
 `;
 
-const quoteStyle = css`
+const quoteStyle = colors => css`
   blockquote {
-    border-color: #cd2653;
+    border-color: ${colors.primary};
     border-style: solid;
 
     /*rtl:ignore*/
@@ -344,7 +344,7 @@ const quoteStyle = css`
   }
 
   cite {
-    color: #6d6d6d;
+    color: ${colors.gray};
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 600;
@@ -361,7 +361,7 @@ const quoteStyle = css`
   }
 `;
 
-const codeStyle = css`
+const codeStyle = colors => css`
   code,
   kbd,
   pre,
@@ -379,7 +379,7 @@ const codeStyle = css`
   }
 
   pre {
-    border: 0.1rem solid #dcd7ca;
+    border: 0.1rem solid ${colors.gray.light};
     line-height: 1.5;
     margin: 4rem 0;
     overflow: auto;
@@ -393,7 +393,7 @@ const codeStyle = css`
   }
 `;
 
-const mediaStyle = css`
+const mediaStyle = colors => css`
   figure {
     display: block;
     margin: 0;
@@ -419,7 +419,7 @@ const mediaStyle = css`
 
   figcaption,
   .wp-caption-text {
-    color: #6d6d6d;
+    color: ${colors.gray.base};
     display: block;
     font-size: 1.5rem;
     font-weight: 500;
@@ -433,9 +433,9 @@ const mediaStyle = css`
   }
 `;
 
-const tableStyles = css`
+const tableStyles = colors => css`
   table {
-    border: 0.1rem solid #dcd7ca;
+    border: 0.1rem solid ${colors.gray.light};
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
@@ -456,7 +456,7 @@ const tableStyles = css`
 
   th,
   td {
-    border: 0.1rem solid #dcd7ca;
+    border: 0.1rem solid ${colors.gray.light};
     line-height: 1.4;
     margin: 0;
     overflow: visible;
@@ -464,7 +464,7 @@ const tableStyles = css`
   }
 
   caption {
-    background: #dcd7ca;
+    background: ${colors.gray.light};
     font-weight: 600;
     padding: 0.5em;
     text-align: center;
@@ -480,18 +480,18 @@ const tableStyles = css`
   }
 `;
 
-const globalStyle = css([
-  cssReset,
-  documentSetup,
-  fontFace,
-  accessibilitySettings,
-  elementBase,
-  listStyle,
-  quoteStyle,
-  codeStyle,
-  mediaStyle,
-  // inputStyles,
-  tableStyles
-]);
+const globalStyle = colors =>
+  css(
+    cssReset,
+    documentSetup(colors),
+    fontFace,
+    accessibilitySettings,
+    elementBase(colors),
+    listStyle,
+    quoteStyle(colors),
+    codeStyle(colors),
+    mediaStyle(colors),
+    tableStyles(colors)
+  );
 
 export default globalStyle;

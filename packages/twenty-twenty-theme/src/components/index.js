@@ -51,7 +51,7 @@ const Theme = ({ state, libraries }) => {
 
       {/* Add some global styles for the whole site, like body or a's. 
       Not classes here because we use CSS-in-JS. Only global HTML tags. */}
-      <Global styles={globalStyles} />
+      <Global styles={globalStyles(state.theme.colors)} />
 
       <Footer />
     </>
@@ -62,5 +62,4 @@ export default connect(Theme);
 
 const Main = styled.main`
   display: block;
-  /* overflow-x: hidden; */
 `;
