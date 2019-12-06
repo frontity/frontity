@@ -7,6 +7,8 @@ import Link from "./link";
  *
  * It renders the navigation links
  */
+
+// TODO: Remove the `reset-list-style` and use `css` prop instead
 const Navigation = ({ state }) => (
   <NavWrapper>
     <MenuNav>

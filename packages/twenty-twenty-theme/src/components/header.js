@@ -16,8 +16,10 @@ const Header = ({ state }) => {
     <PageHeader bg={headerBg} id="site-header">
       <HeaderInner>
         <TitleWrapper>
+          {/* Search button on mobile */}
           <MobileSearchButton />
 
+          {/* Heading and Description of the site */}
           <TitleGroup>
             <SiteTitle>
               <StyledLink link="/">{title}</StyledLink>
@@ -25,16 +27,20 @@ const Header = ({ state }) => {
             <SiteDescription>{description}</SiteDescription>
           </TitleGroup>
 
+          {/* Mobile menu button and modal */}
           <MobileMenuButton />
+          {/* TODO: Fix alignment on mobile */}
           <MobileMenuModal />
         </TitleWrapper>
 
         <HeaderNavigationWrapper>
+          {/* Desktop navigation links */}
           <Navigation />
+          {/* Desktop search button */}
           <SearchButton />
         </HeaderNavigationWrapper>
       </HeaderInner>
-
+      {/* Global search modal */}
       <SearchModal />
     </PageHeader>
   );

@@ -16,7 +16,6 @@ export function getCategories(state, item) {
 }
 
 // Get the name and url of all tags
-
 export function getTags(state, item) {
   const allTags = state.source.tag;
   const hasTags = item.tags.length > 0;
@@ -69,6 +68,7 @@ const Article = ({ state, item, showExcerpt, showMedia = true }) => {
       {/* If the post has an excerpt (short summary text), we render it */}
       {content && (
         <PostInner size="thin">
+          {/* TODO: Change this to HTML2React */}
           <EntryContent
             dangerouslySetInnerHTML={{ __html: content.rendered }}
           />

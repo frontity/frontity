@@ -21,6 +21,13 @@ const SearchModal = ({ state, actions, libraries }) => {
   useFocusEffect(inputRef, isSearchModalOpen);
   useFocusTrap(containerRef, isSearchModalOpen);
 
+  // Format the query to remove trailing spaces and replace space with "+"
+  const formatQuery = query =>
+    query
+      .trim()
+      .replace(" ", "+")
+      .toLowerCase();
+
   const handleSubmit = event => {
     // Prevent page navigation
     event.preventDefault();
@@ -32,7 +39,7 @@ const SearchModal = ({ state, actions, libraries }) => {
     // Better to trim write spaces as well
     if (searchString.trim().length > 0) {
       // Let's go search for blogs that match the search string
-      actions.router.set(`/?s=${searchString.toLowerCase()}`);
+      actions.router.set(`/?s=${formatQuery(searchString)}`);
 
       // Scroll the page to the top
       window.scrollTo(0, 0);
@@ -45,6 +52,7 @@ const SearchModal = ({ state, actions, libraries }) => {
   return (
     <ModalOverlay data-open={isSearchModalOpen} onClick={closeSearchModal}>
       {isSearchModalOpen && (
+        // Block scroll when modal is open
         <Global styles={{ body: { overflowY: "hidden" } }} />
       )}
       <ModalInner
