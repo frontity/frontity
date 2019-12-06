@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect, styled } from "frontity";
 import Article, { SectionContainer } from "./article";
 import PostSeparator from "./post-separator";
@@ -44,7 +44,7 @@ const Posts = ({ state, showExcerpt, showMedia }) => {
         const item = state.source[type][id];
         // Render one Item component for each one.
         return (
-          <>
+          <Fragment key={item.id}>
             <Article
               key={item.id}
               item={item}
@@ -52,7 +52,7 @@ const Posts = ({ state, showExcerpt, showMedia }) => {
               showMedia={showMedia}
             />
             {!isLastArticle && <PostSeparator />}
-          </>
+          </Fragment>
         );
       })}
       <Pagination />

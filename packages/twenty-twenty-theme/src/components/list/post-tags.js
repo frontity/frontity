@@ -1,5 +1,5 @@
 import { connect } from "frontity";
-import React from "react";
+import React, { Fragment } from "react";
 import { TagIcon } from "../icons";
 import Link from "../link";
 import { PostMetaList, PostMetaWrapper } from "./post-meta";
@@ -13,10 +13,10 @@ const PostTags = ({ tags }) => {
           {tags.map((tag, index) => {
             const isLastTag = index === tags.length - 1;
             return (
-              <>
+              <Fragment key={tag.id}>
                 <Link link={tag.link}>{tag.name}</Link>
                 {!isLastTag && <>, </>}
-              </>
+              </Fragment>
             );
           })}
         </PostMetaItem>
