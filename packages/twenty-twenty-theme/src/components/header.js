@@ -4,9 +4,9 @@ import Link from "./link";
 import Navigation from "./navigation";
 import SearchButton from "./search-button";
 import SearchModal from "./search-modal";
-import MobileSearchButton from "./mobile-search-button";
-import MobileMenuButton from "./mobile-menu-button";
-import MobileMenuModal from "./mobile-menu-modal";
+import MobileSearchButton from "./mobile/search-button";
+import MobileMenuButton from "./mobile/menu-button";
+import MobileMenuModal from "./mobile/menu-modal";
 
 const Header = ({ state }) => {
   const { title, description } = state.frontity;

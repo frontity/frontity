@@ -2,8 +2,8 @@ import { styled, connect, Global } from "frontity";
 import React, { useRef } from "react";
 import { CloseIcon } from "./icons";
 import ScreenReaderText from "./screen-reader";
-import useFocusTrap from "./use-trap-focus";
-import useFocusEffect from "./use-focus-effect";
+import useFocusTrap from "./hooks/use-trap-focus";
+import useFocusEffect from "./hooks/use-focus-effect";
 
 const SearchModal = ({ state, actions, libraries }) => {
   // Improvement: Discuss with David about making a custom hook to grab query params

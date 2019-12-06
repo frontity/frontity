@@ -1,7 +1,7 @@
 import { connect } from "frontity";
 import React from "react";
-import { ToggleIcon } from "./icons";
-import { LabeledIcon, NavToggle, ToggleWrapper } from "./nav-toggle";
+import { ToggleIcon } from "../icons";
+import { LabeledIcon, NavToggle, ToggleWrapper } from "../nav-toggle";
 
 const MobileMenuButton = ({ state, actions }) => {
   // Get Menuate of the search modal
