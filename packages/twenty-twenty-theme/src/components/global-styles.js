@@ -1,6 +1,7 @@
 import { css } from "frontity";
-import Inter from "../fonts/inter/Inter-upright-var.woff2";
-import InterItalic from "../fonts/inter/Inter-italic-var.woff2";
+import InterMedium from "../fonts/inter/Inter-Medium.woff2";
+import InterBold from "../fonts/inter/Inter-Bold.woff2";
+import InterSemiBold from "../fonts/inter/Inter-SemiBold.woff2";
 
 const cssReset = css`
   html,
@@ -70,18 +71,11 @@ const documentSetup = colors => css`
     background: ${colors.bodyBg};
     box-sizing: border-box;
     color: #000;
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica,
-      sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+      Helvetica, sans-serif;
     font-size: 1.8rem;
     letter-spacing: -0.015em;
     text-align: left;
-  }
-
-  @supports (font-variation-settings: normal) {
-    body {
-      font-family: "Inter var", -apple-system, BlinkMacSystemFont,
-        "Helvetica Neue", Helvetica, sans-serif;
-    }
   }
 
   *,
@@ -100,19 +94,27 @@ const documentSetup = colors => css`
 
 const fontFace = css`
   @font-face {
-    font-family: "Inter var";
-    font-weight: 100 900; /* stylelint-disable-line font-weight-notation */
+    font-family: "Inter";
     font-style: normal;
+    font-weight: 500;
     font-display: swap;
-    src: url(${Inter}) format("woff2");
+    src: url(${InterMedium}) format("woff2");
   }
 
   @font-face {
-    font-family: "Inter var";
-    font-weight: 100 900; /* stylelint-disable-line font-weight-notation */
-    font-style: italic;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
     font-display: swap;
-    src: url(${InterItalic}) format("woff2");
+    src: url(${InterSemiBold}) format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(${InterBold}) format("woff2");
   }
 `;
 

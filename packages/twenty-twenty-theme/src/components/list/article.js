@@ -156,11 +156,12 @@ export const EntryContent = styled.div`
     font-size: 2.1rem;
   }
 
-  > *:first-of-type {
+  /* > *:first-of-type {
     margin-top: 0;
-  }
+  } */
 
   figure {
     margin: 2em 0;
+    max-width: 100%;
   }
 `;
