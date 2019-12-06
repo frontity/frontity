@@ -8,7 +8,7 @@ import useFocusEffect from "./use-focus-effect";
 
 const MobileMenuModal = ({ state, actions }) => {
   const { menu, isMobileMenuOpen } = state.theme;
-  const { openMobileMenu } = actions.theme;
+  const { closeMobileMenu } = actions.theme;
   const isThereLinks = menu != null && menu.length > 0;
 
   // Keep a reference to the close button so we can focus on it when
@@ -30,7 +30,7 @@ const MobileMenuModal = ({ state, actions }) => {
             <CloseNavToggle
               ref={closeButtonRef}
               aria-expanded={isMobileMenuOpen}
-              onClick={openMobileMenu}
+              onClick={closeMobileMenu}
             >
               <ToggleText> Close Menu</ToggleText>
               <CloseIcon />

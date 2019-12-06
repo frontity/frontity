@@ -5,7 +5,11 @@ import ScreenReaderText from "./screen-reader";
 import useFocusTrap from "./use-trap-focus";
 import useFocusEffect from "./use-focus-effect";
 
-const SearchModal = ({ state, actions }) => {
+const SearchModal = ({ state, actions, libraries }) => {
+  // Improvement: Discuss with David about making a custom hook to grab query params
+  const parse = libraries.source.parse(state.router.link);
+  const searchQuery = parse.query["s"];
+
   const { isSearchModalOpen } = state.theme;
   const { closeSearchModal } = actions.theme;
 
@@ -57,6 +61,7 @@ const SearchModal = ({ state, actions }) => {
             <SearchInput
               ref={inputRef}
               type="search"
+              defaultValue={searchQuery || ""}
               placeholder="search for:"
               name="search"
             />
@@ -89,7 +94,6 @@ const ModalOverlay = styled.div`
 
   &[data-open="true"] {
     display: block;
-    cursor: pointer;
     opacity: 1;
     left: 0;
   }
@@ -100,6 +104,7 @@ const ModalInner = styled.div`
   transform: translateY(0);
   background: #fff;
   transition: transform 0.25s ease-in-out, box-shadow 0.1s 0.25s linear;
+  cursor: default;
 `;
 
 const SectionInner = styled.div`
@@ -143,6 +148,14 @@ const SearchInput = styled.input`
   max-width: calc(100% + 2rem);
   padding: 0 0 0 2rem;
   width: calc(100% + 2rem);
+  appearance: none;
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
 
   @media (min-width: 700px) {
     border: none;

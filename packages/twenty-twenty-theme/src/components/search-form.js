@@ -36,6 +36,7 @@ const SearchForm = ({ state, actions, libraries }) => {
       <Label>
         <ScreenReaderText>Search for:</ScreenReaderText>
         <Input
+          type="search"
           defaultValue={searchQuery}
           placeholder="Search ..."
           ref={inputRef}
@@ -79,6 +80,13 @@ const Input = styled.input`
   padding: 1.5rem 1.8rem;
   width: 100%;
   margin: 0 0 0.8rem 0.8rem;
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
 `;
 
 const Button = styled.button`
