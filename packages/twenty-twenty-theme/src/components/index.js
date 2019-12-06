@@ -6,7 +6,7 @@ import Post from "./post";
 import Page404 from "./page404.js";
 import Loading from "./loading";
 import Title from "./title";
-import SearchResults from "./search-results";
+import SearchResults from "./search/search-results";
 import globalStyles from "./global-styles";
 import Footer from "./footer";
 
