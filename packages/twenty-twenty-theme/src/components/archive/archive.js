@@ -1,14 +1,23 @@
 import { connect } from "frontity";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Article from "../post/post-item";
 import ArchiveHeader from "./archive-header";
 import Pagination from "./archive-pagination";
 import PostSeparator from "../post/post-separator";
+import Post from "../post";
 
 const Archive = ({ state, showExcerpt, showMedia }) => {
   // Get the data of the current list.
   const data = state.source.get(state.router.link);
   const { primary } = state.theme.colors;
+
+  // Whether the show the excerpt instead of the full content
+  // If passed as prop, we'll respect that. Else, we'll use the theme settings
+  const _showExcerpt = showExcerpt || state.theme.showAllContentOnArchive;
+
+  useEffect(() => {
+    Post.preload();
+  }, []);
 
   return (
     <>
@@ -36,7 +45,7 @@ const Archive = ({ state, showExcerpt, showMedia }) => {
             <Article
               key={item.id}
               item={item}
-              showExcerpt={showExcerpt}
+              showExcerpt={_showExcerpt}
               showMedia={showMedia}
             />
             {!isLastArticle && <PostSeparator />}

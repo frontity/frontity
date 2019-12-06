@@ -17,7 +17,7 @@ const Header = ({ state }) => {
       <HeaderInner>
         <TitleWrapper>
           {/* Search button on mobile */}
-          <MobileSearchButton />
+          {state.theme.showSearchInHeader && <MobileSearchButton />}
 
           {/* Heading and Description of the site */}
           <TitleGroup>
@@ -36,7 +36,7 @@ const Header = ({ state }) => {
           {/* Desktop navigation links */}
           <Navigation />
           {/* Desktop search button */}
-          <SearchButton />
+          {state.theme.showSearchInHeader && <SearchButton />}
         </HeaderNavigationWrapper>
       </HeaderInner>
       {/* Global search modal */}

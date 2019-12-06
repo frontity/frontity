@@ -26,7 +26,7 @@ const Theme = ({ state, libraries }) => {
     <>
       {/* Add some global styles for the whole site, like body or a's. 
         Not classes here because we use CSS-in-JS. Only global HTML tags. */}
-      <Global styles={globalStyles(state.theme.colors)} />
+      <Global styles={globalStyles(state.theme.colors, state.theme.fontSets)} />
 
       {/* Add some metatags to the <head> of the HTML. */}
       <MetaTitle />

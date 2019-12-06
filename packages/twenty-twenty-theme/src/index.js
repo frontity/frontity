@@ -27,15 +27,30 @@ const marsTheme = {
         footerBg: "#ffffff",
         bodyBg: "#f5efe0"
       },
+      // Whether to show the search button in page header
       showSearchInHeader: true,
+      // Menu links to display in the header
       menu: [],
+      // State for the menu on mobile
       isMobileMenuOpen: false,
+      // State for the search modal on mobile
       isSearchModalOpen: false,
-      showAllContentOnList: true,
+      // Whether to show all post content or only excerpt (summary) in archive view
+      showAllContentOnArchive: true,
+      // Settings for the featured media (image or video)
       featuredMedia: {
-        showOnList: true,
+        // Whether to show it on archive view
+        showOnArchive: true,
+        // Whether to show it on post
         showOnPost: true
-      }
+      },
+      // Whether to auto-fetch links on a page. Values can be "no" | "all" | "in-view" | "hover"
+      autoPreFetch: "no",
+      /**
+       * At the moment, we only include the ascii characters of Inter font.
+       * Values can be "us-ascii" | "latin" | "all"
+       */
+      fontSets: "us-ascii"
     }
   },
   /**

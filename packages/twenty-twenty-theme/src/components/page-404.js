@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "frontity";
-import { SectionContainer } from "./post/post-item";
 import SearchForm from "./search/search-form";
+import SectionContainer from "./styles/section-container";
 
 // The 404 page component
 const Page404 = () => (

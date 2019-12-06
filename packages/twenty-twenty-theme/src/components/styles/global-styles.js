@@ -2,6 +2,12 @@ import { css } from "frontity";
 import InterMedium from "../../fonts/inter/Inter-Medium.woff2";
 import InterBold from "../../fonts/inter/Inter-Bold.woff2";
 import InterSemiBold from "../../fonts/inter/Inter-SemiBold.woff2";
+import InterMediumUS from "../../fonts/inter/Inter-Medium-US-ASCII.woff2";
+import InterBoldUS from "../../fonts/inter/Inter-Bold-US-ASCII.woff2";
+import InterSemiBoldUS from "../../fonts/inter/Inter-SemiBold-US-ASCII.woff2";
+import InterMediumLatin from "../../fonts/inter/Inter-Medium-LATIN.woff2";
+import InterBoldLatin from "../../fonts/inter/Inter-Bold-LATIN.woff2";
+import InterSemiBoldLatin from "../../fonts/inter/Inter-SemiBold-LATIN.woff2";
 
 const cssReset = css`
   html,
@@ -92,31 +98,59 @@ const documentSetup = colors => css`
   }
 `;
 
-const fontFace = css`
-  @font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url(${InterMedium}) format("woff2");
+function getFontSrc(fontSet, fonts) {
+  const [defaultFont, asciiFont, latinFont] = fonts;
+  switch (fontSet) {
+    case "us-ascii":
+      return asciiFont;
+    case "latin":
+      return latinFont;
+    default:
+      return defaultFont;
   }
+}
 
-  @font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url(${InterSemiBold}) format("woff2");
-  }
+const fontFace = fontSet => {
+  const font500 = getFontSrc(fontSet, [
+    InterMedium,
+    InterMediumUS,
+    InterMediumLatin
+  ]);
 
-  @font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url(${InterBold}) format("woff2");
-  }
-`;
+  const font600 = getFontSrc(fontSet, [
+    InterSemiBold,
+    InterSemiBoldUS,
+    InterSemiBoldLatin
+  ]);
+
+  const font700 = getFontSrc(fontSet, [InterBold, InterBoldUS, InterBoldLatin]);
+
+  return css`
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(${font500}) format("woff2");
+    }
+
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url(${font600}) format("woff2");
+    }
+
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url(${font700}) format("woff2");
+    }
+  `;
+};
 
 const accessibilitySettings = css`
   @media (prefers-reduced-motion: reduce) {
@@ -484,11 +518,11 @@ const tableStyles = colors => css`
   }
 `;
 
-const globalStyle = colors =>
+const globalStyle = (colors, fontSets) =>
   css([
     cssReset,
     documentSetup(colors),
-    fontFace,
+    fontFace(fontSets),
     accessibilitySettings,
     elementBase(colors),
     listStyle,

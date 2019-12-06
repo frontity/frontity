@@ -1,3 +1,4 @@
+// import useInView from "@frontity/hooks";
 import React, { useEffect } from "react";
 import { connect } from "frontity";
 
@@ -11,13 +12,21 @@ const Link = ({
   "aria-current": ariaCurrent,
   onClick: onClickProp
 }) => {
+  // Prefetch the link's content only when the link is in view
+  // const [isIntersecting, ref] = useInView();
+  // useEffect(() => {
+  //   if (isIntersecting && state.theme.autoPreFetch === "in-view") {
+  //     actions.source.fetch(link);
+  //   }
+  // }, [isIntersecting, state.theme.autoPreFetch]);
+
   // Check if the link is an external or internal link
   const isExternal = link.startsWith("http");
 
-  // Pre-fetch the page for this link
+  // Prefetch the link's content when it mounts and autoPreFetch is set to `true`
   useEffect(() => {
     if (!isExternal) {
-      actions.source.fetch(link);
+      if (state.theme.autoPreFetch === "all") actions.source.fetch(link);
     }
   }, []);
 
@@ -44,11 +53,16 @@ const Link = ({
 
   return (
     <a
+      // ref={ref}
       href={link}
       onClick={onClick}
       className={className}
       aria-current={ariaCurrent}
-      rel={rel}
+      rel={isExternal ? "noopener noreferrer" : rel}
+      onMouseEnter={() => {
+        // Prefetch the link's content when the user hovers on the link
+        if (state.theme.autoPreFetch === "hover") actions.source.fetch(link);
+      }}
     >
       {children}
     </a>
