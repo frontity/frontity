@@ -1,15 +1,15 @@
 import { connect, Global, Head, styled } from "frontity";
 import React from "react";
 import Footer from "./footer";
-import globalStyles from "./global-styles";
+import globalStyles from "./styles/global-styles";
 import Header from "./header";
-import List from "./list";
+import Archive from "./archive";
 import Loading from "./loading";
-import Page404 from "./page404.js";
+import Page404 from "./page-404";
 import Post from "./post";
 import SearchResults from "./search/search-results";
-import SkipLink from "./skip-link";
-import Title from "./title";
+import SkipLink from "./styles/skip-link";
+import MetaTitle from "./page-meta-title";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -29,7 +29,7 @@ const Theme = ({ state, libraries }) => {
       <Global styles={globalStyles(state.theme.colors)} />
 
       {/* Add some metatags to the <head> of the HTML. */}
-      <Title />
+      <MetaTitle />
       <Head>
         <meta name="description" content={state.frontity.description} />
         <html lang="en" />
@@ -49,7 +49,7 @@ const Theme = ({ state, libraries }) => {
         <Main id="main">
           {(data.isFetching && <Loading />) ||
             (isSearch && <SearchResults />) ||
-            (data.isArchive && <List />) ||
+            (data.isArchive && <Archive />) ||
             (data.isPostType && <Post />) ||
             (data.is404 && <Page404 />)}
         </Main>

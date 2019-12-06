@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { styled, connect, Global } from "frontity";
 import Link from "../link";
-import { CloseNavToggle } from "../nav-toggle";
+import { CloseNavToggle } from "../navigation/nav-toggle";
 import { CloseIcon } from "../icons";
 import useFocusTrap from "../hooks/use-trap-focus";
 import useFocusEffect from "../hooks/use-focus-effect";
-import { SectionContainer } from "../list/article";
+import SectionContainer from "../styles/section-container";
 
 const MobileMenuModal = ({ state, actions }) => {
   // Get the menu state and action

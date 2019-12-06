@@ -1,6 +1,8 @@
 import { connect, styled } from "frontity";
 import React, { useRef } from "react";
-import ScreenReaderText from "../screen-reader";
+import ScreenReaderText from "../styles/screen-reader";
+import Button from "../styles/button";
+import Input from "../styles/input";
 
 const SearchForm = ({ state, actions, libraries }) => {
   const parse = libraries.source.parse(state.router.link);
@@ -36,16 +38,16 @@ const SearchForm = ({ state, actions, libraries }) => {
     <Form role="search" aria-label="404 not found" onSubmit={handleSubmit}>
       <Label>
         <ScreenReaderText>Search for:</ScreenReaderText>
-        <Input
+        <SearchInput
           type="search"
           defaultValue={searchQuery}
           placeholder="Search ..."
           ref={inputRef}
         />
       </Label>
-      <Button bg={primary} type="submit">
+      <SearchButton bg={primary} type="submit">
         Search
-      </Button>
+      </SearchButton>
     </Form>
   );
 };
@@ -69,46 +71,13 @@ const Label = styled.label`
   width: 100%;
 `;
 
-const Input = styled.input`
-  background: #fff;
-  border-radius: 0;
-  border-style: solid;
-  border-color: #dcd7ca;
-  border-width: 0.1rem;
-  box-shadow: none;
-  display: block;
-  font-size: 1.6rem;
-  letter-spacing: -0.015em;
-  max-width: 100%;
-  padding: 1.5rem 1.8rem;
-  width: 100%;
+const SearchInput = styled(Input)`
   margin: 0 0 0.8rem 0.8rem;
-
-  &::-webkit-search-decoration,
-  &::-webkit-search-cancel-button,
-  &::-webkit-search-results-button,
-  &::-webkit-search-results-decoration {
-    display: none;
-  }
 `;
 
-const Button = styled.button`
+const SearchButton = styled(Button)`
   flex-shrink: 0;
-  background-color: ${props => props.bg};
-  font-size: 1.7rem;
-  border: none;
-  border-radius: 0;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 600;
-  letter-spacing: 0.0333em;
-  line-height: 1.25;
   opacity: 1;
-  padding: 1.1em 1.44em;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
   transition: opacity 0.15s linear;
   margin: 0 0 0.8rem 0.8rem;
 `;

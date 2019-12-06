@@ -1,7 +1,7 @@
 import React from "react";
 import { styled, connect } from "frontity";
-import { SectionContainer } from "./list/article";
 import Link from "./link";
+import SectionContainer from "./styles/section-container";
 
 // Component that provides scroll to top functionality
 const BackToTop = () => {

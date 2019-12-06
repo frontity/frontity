@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "frontity";
 import Link from "../link";
-import ScreenReaderText from "../screen-reader";
+import ScreenReaderText from "../styles/screen-reader";
 
 const PostMetaItem = ({ icon: Icon, label, link, children }) => {
   return (

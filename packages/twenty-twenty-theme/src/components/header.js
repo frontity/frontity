@@ -1,7 +1,7 @@
 import React from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
-import Navigation from "./navigation";
+import Navigation from "./navigation/navigation";
 import SearchButton from "./search/search-button";
 import SearchModal from "./search/search-modal";
 import MobileSearchButton from "./mobile/search-button";

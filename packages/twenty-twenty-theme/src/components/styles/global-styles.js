@@ -1,7 +1,7 @@
 import { css } from "frontity";
-import InterMedium from "../fonts/inter/Inter-Medium.woff2";
-import InterBold from "../fonts/inter/Inter-Bold.woff2";
-import InterSemiBold from "../fonts/inter/Inter-SemiBold.woff2";
+import InterMedium from "../../fonts/inter/Inter-Medium.woff2";
+import InterBold from "../../fonts/inter/Inter-Bold.woff2";
+import InterSemiBold from "../../fonts/inter/Inter-SemiBold.woff2";
 
 const cssReset = css`
   html,

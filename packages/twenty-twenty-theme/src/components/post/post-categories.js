@@ -1,6 +1,6 @@
 import { connect, styled } from "frontity";
 import React from "react";
-import ScreenReaderText from "../screen-reader";
+import ScreenReaderText from "../styles/screen-reader";
 import Link from "../link";
 
 const PostCategories = ({ categories }) => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { connect, styled } from "frontity";
-import List from "../list";
-import { Header } from "../list/posts";
-import { SectionContainer } from "../list/article";
+import Archive from "../archive";
+import ArchiveHeader from "../archive/archive-header";
+import SectionContainer from "../styles/section-container";
 import SearchForm from "./search-form";
 
 const SearchResults = ({ state, libraries }) => {
@@ -25,7 +25,7 @@ const SearchResults = ({ state, libraries }) => {
 
   return (
     <>
-      <Header label="Search" labelColor={primary}>
+      <ArchiveHeader label="Search" labelColor={primary}>
         <span>{`“${reverseFormat(searchQuery)}”`}</span>
         <IntroText size="thin">
           {isEmpty ? (
@@ -40,13 +40,14 @@ const SearchResults = ({ state, libraries }) => {
             </Text>
           )}
         </IntroText>
-      </Header>
+      </ArchiveHeader>
+
       {isEmpty ? (
         <SearchContainer size="thin">
           <SearchForm />
         </SearchContainer>
       ) : (
-        <List showExcerpt={true} showMedia={false} />
+        <Archive showExcerpt={true} showMedia={false} />
       )}
     </>
   );

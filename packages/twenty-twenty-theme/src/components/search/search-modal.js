@@ -1,9 +1,10 @@
 import { styled, connect, Global } from "frontity";
 import React, { useRef } from "react";
 import { CloseIcon } from "../icons";
-import ScreenReaderText from "../screen-reader";
+import ScreenReaderText from "../styles/screen-reader";
 import useFocusTrap from "../hooks/use-trap-focus";
 import useFocusEffect from "../hooks/use-focus-effect";
+import Button from "../styles/button";
 
 const SearchModal = ({ state, actions, libraries }) => {
   // Improvement: Discuss with David about making a custom hook to grab query params
@@ -215,23 +216,13 @@ const CloseButton = styled.button`
   }
 `;
 
-const SearchButton = styled.button`
+const SearchButton = styled(Button)`
   position: absolute;
   right: -9999rem;
   top: 50%;
-  padding: 1.1em 1.44em;
-  text-align: center;
-  text-transform: uppercase;
-  display: inline-block;
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.0333em;
-  line-height: 1.25;
-  color: #ffffff;
   transform: translateY(-50%);
   margin: 0 0 0.8rem 0.8rem;
   border-color: #dcd7ca;
-  background-color: ${props => props.bg};
 
   &:focus {
     right: 0;

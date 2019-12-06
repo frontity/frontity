@@ -1,7 +1,7 @@
 import React from "react";
 import { connect, styled } from "frontity";
 import Link from "../link";
-import FeaturedMedia from "../featured-media";
+import FeaturedMedia from "./featured-media";
 import PostMeta from "./post-meta";
 import PostCategories from "./post-categories";
 import PostTags from "./post-tags";
@@ -14,7 +14,13 @@ import PostTags from "./post-tags";
  * - Author: name of author and published date
  * - FeaturedMedia: the featured image/video of the post
  */
-const Article = ({ state, item, libraries, showExcerpt, showMedia = true }) => {
+const PostItem = ({
+  state,
+  item,
+  libraries,
+  showExcerpt,
+  showMedia = true
+}) => {
   // Get all categories
   const allCategories = state.source.category;
   /**
@@ -79,7 +85,7 @@ const Article = ({ state, item, libraries, showExcerpt, showMedia = true }) => {
 };
 
 // Connect the Item to gain access to `state` as a prop
-export default connect(Article);
+export default connect(PostItem);
 
 // All styles :)
 

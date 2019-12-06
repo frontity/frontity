@@ -1,7 +1,7 @@
 import React from "react";
 import { connect, styled } from "frontity";
 import Img from "@frontity/components/image";
-import { SectionContainer } from "./list/article";
+import SectionContainer from "../styles/section-container";
 
 const FeaturedMedia = ({ state, id, className }) => {
   const media = state.source.attachment[id];

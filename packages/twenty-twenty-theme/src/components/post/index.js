@@ -3,15 +3,15 @@ import React, { useEffect } from "react";
 import FeaturedMedia from "./featured-media";
 import {
   EntryContent,
-  Post as ArticlePost,
+  Post as _Post,
   PostHeader,
   PostInner,
   PostTitle,
   SectionContainer
-} from "./list/article";
-import PostCategories from "./list/post-categories";
-import PostMeta from "./list/post-meta";
-import PostTags from "./list/post-tags";
+} from "./post-item";
+import PostCategories from "./post-categories";
+import PostMeta from "./post-meta";
+import PostTags from "./post-tags";
 
 const Post = ({ state, actions, libraries }) => {
   // Get information about the current URL.
@@ -50,7 +50,6 @@ const Post = ({ state, actions, libraries }) => {
    */
   useEffect(() => {
     actions.source.fetch("/");
-    // Posts.preload();
   }, []);
 
   // Load the post, but only if the data is ready.
@@ -105,7 +104,7 @@ const Header = styled(PostHeader)`
   }
 `;
 
-const PostArticle = styled(ArticlePost)`
+const PostArticle = styled(_Post)`
   padding-top: 0 !important;
 `;
 

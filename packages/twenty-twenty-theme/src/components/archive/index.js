@@ -4,5 +4,5 @@
  * Codesplit the list component so it's not included if the users
  * load a post directly.
  */
-// export default loadable(() => import("./posts"));
-export { default } from "./posts";
+// export default loadable(() => import("./archive"));
+export { default } from "./archive";
