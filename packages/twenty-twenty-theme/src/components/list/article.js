@@ -6,24 +6,6 @@ import PostMeta from "./post-meta";
 import PostCategories from "./post-categories";
 import PostTags from "./post-tags";
 
-// Get the name and url of all categories
-export function getCategories(state, item) {
-  const allCategories = state.source.category;
-  const hasCategories = item.categories.length > 0;
-  const categories = item.categories.map(id => allCategories[id]);
-
-  return { hasCategories, categories };
-}
-
-// Get the name and url of all tags
-export function getTags(state, item) {
-  const allTags = state.source.tag;
-  const hasTags = item.tags.length > 0;
-  const tags = item.tags.map(id => allTags[id]);
-
-  return { hasTags, tags };
-}
-
 /**
  * Article Component
  *
@@ -33,9 +15,22 @@ export function getTags(state, item) {
  * - FeaturedMedia: the featured image/video of the post
  */
 const Article = ({ state, item, libraries, showExcerpt, showMedia = true }) => {
-  // Get the name and url of all tags
-  const { hasTags, tags } = getTags(state, item);
-  const { hasCategories, categories } = getCategories(state, item);
+  // Get all categories
+  const allCategories = state.source.category;
+  /**
+   * The item's categories is an array of each category id
+   * So, we'll look up the details of each category in allCategories
+   */
+  const categories = item.categories.map(catId => allCategories[catId]);
+
+  // Get all tags
+  const allTags = state.source.tag;
+  /**
+   * The item's categories is an array of each tag id
+   * So, we'll look up the details of each tag in allTags
+   */
+  const tags = item.tags.map(tagId => allTags[tagId]);
+
   const content = showExcerpt ? item.excerpt : item.content;
   const { Component: Html2React } = libraries.html2react;
   return (
@@ -43,7 +38,7 @@ const Article = ({ state, item, libraries, showExcerpt, showMedia = true }) => {
       <PostHeader>
         <SectionContainer>
           {/* If the post has categories, render the categories */}
-          {hasCategories && <PostCategories categories={categories} />}
+          {item.categories && <PostCategories categories={categories} />}
 
           {/* The clickable heading for the post */}
           <PostLink link={item.link}>
@@ -75,7 +70,7 @@ const Article = ({ state, item, libraries, showExcerpt, showMedia = true }) => {
             <Html2React html={content.rendered} />
           </EntryContent>
           {/* If the post has tags, render it */}
-          {hasTags && <PostTags tags={tags} />}
+          {item.tags && <PostTags tags={tags} />}
         </PostInner>
       )}
     </Post>
@@ -156,9 +151,9 @@ export const EntryContent = styled.div`
     font-size: 2.1rem;
   }
 
-  /* > *:first-of-type {
+  > *:first-of-type {
     margin-top: 0;
-  } */
+  }
 
   figure {
     margin: 2em 0;

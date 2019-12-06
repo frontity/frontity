@@ -4,6 +4,10 @@ import ScreenReaderText from "../screen-reader";
 import Link from "../link";
 
 const PostCategories = ({ categories }) => {
+  if (categories.length === 0) {
+    return null;
+  }
+
   return (
     <EntryCategories>
       <ScreenReaderText>Categories</ScreenReaderText>

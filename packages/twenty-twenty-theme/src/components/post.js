@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import FeaturedMedia from "./featured-media";
 import {
   EntryContent,
-  getCategories,
-  getTags,
   Post as ArticlePost,
   PostHeader,
   PostInner,
@@ -28,8 +26,21 @@ const Post = ({ state, actions, libraries }) => {
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
 
-  const { hasTags, tags } = getTags(state, post);
-  const { hasCategories, categories } = getCategories(state, post);
+  // Get all categories
+  const allCategories = state.source.category;
+  /**
+   * The item's categories is an array of each category id
+   * So, we'll look up the details of each category in allCategories
+   */
+  const categories = post.categories.map(catId => allCategories[catId]);
+
+  // Get all tags
+  const allTags = state.source.tag;
+  /**
+   * The item's categories is an array of each tag id
+   * So, we'll look up the details of each tag in allTags
+   */
+  const tags = post.tags.map(tagId => allTags[tagId]);
 
   /**
    * Once the post has loaded in the DOM, prefetch both the
@@ -47,7 +58,7 @@ const Post = ({ state, actions, libraries }) => {
       <Header>
         <SectionContainer>
           {/* If the post has categories, render the categories */}
-          {hasCategories && <PostCategories categories={categories} />}
+          {post.categories && <PostCategories categories={categories} />}
 
           <PostTitle
             as="h1"
@@ -75,7 +86,7 @@ const Post = ({ state, actions, libraries }) => {
             <Html2React html={post.content.rendered} />
           </EntryContent>
           {/* If the post has tags, render it */}
-          {hasTags && <PostTags tags={tags} />}
+          {post.tags && <PostTags tags={tags} />}
         </PostInner>
       )}
     </PostArticle>

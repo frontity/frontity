@@ -6,6 +6,10 @@ import { PostMetaList, PostMetaWrapper } from "./post-meta";
 import PostMetaItem from "./post-meta-item";
 
 const PostTags = ({ tags }) => {
+  if (tags.length === 0) {
+    return null;
+  }
+
   return (
     <PostMetaWrapper>
       <PostMetaList style={{ justifyContent: "flex-start" }}>
