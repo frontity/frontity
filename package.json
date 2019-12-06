@@ -16,6 +16,7 @@
     "reinstall": "lerna clean --yes && npm run prepare"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "cross-env": "^5.2.1",
