@@ -7,20 +7,31 @@ import useFocusTrap from "../hooks/use-trap-focus";
 import useFocusEffect from "../hooks/use-focus-effect";
 
 const MobileMenuModal = ({ state, actions }) => {
+  // Get the menu state and action
   const { menu, isMobileMenuOpen } = state.theme;
   const { closeMobileMenu } = actions.theme;
+
+  // Check if there are links in the state
   const isThereLinks = menu != null && menu.length > 0;
 
-  // Keep a reference to the close button so we can focus on it when
-  // the modal opens
+  /**
+   * Keep a reference to the close button so we can focus on it when
+   * the modal opens
+   */
   const closeButtonRef = useRef();
+
+  // Keep a reference to the menu so we can trap focus within it
   const menuRef = useRef();
 
+  // Focus on the close button when the mobile menu is open
   useFocusEffect(closeButtonRef, isMobileMenuOpen);
+
+  // Trap focus within the menu when the mobile menu is open
   useFocusTrap(menuRef, isMobileMenuOpen);
 
   return (
     <Modal data-open={isMobileMenuOpen}>
+      {/* Global styles to prevent body scroll when the menu is open */}
       {isMobileMenuOpen && (
         <Global styles={{ body: { overflowY: "hidden" } }} />
       )}

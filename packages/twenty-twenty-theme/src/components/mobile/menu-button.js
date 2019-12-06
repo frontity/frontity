@@ -4,7 +4,7 @@ import { ToggleIcon } from "../icons";
 import { LabeledIcon, NavToggle, ToggleWrapper } from "../nav-toggle";
 
 const MobileMenuButton = ({ state, actions }) => {
-  // Get Menuate of the search modal
+  // Get the menu state and action
   const { isMobileMenuOpen } = state.theme;
   const { openMobileMenu } = actions.theme;
 
