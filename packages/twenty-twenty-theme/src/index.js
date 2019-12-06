@@ -18,6 +18,7 @@ const marsTheme = {
     theme: {
       menu: [],
       isMobileMenuOpen: false,
+      isSearchModalOpen: true,
       featured: {
         showOnList: false,
         showOnPost: false
@@ -35,6 +36,17 @@ const marsTheme = {
       },
       closeMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = false;
+      },
+      performSearch: searchString => ({ state }) => {
+        // const backupState = state;
+        console.log(searchString);
+        console.log(state.source);
+      },
+      openSearchModal: ({ state }) => {
+        state.theme.isSearchModalOpen = !state.theme.isSearchModalOpen;
+      },
+      closeSearchModal: ({ state }) => {
+        state.theme.isSearchModalOpen = false;
       }
     }
   },

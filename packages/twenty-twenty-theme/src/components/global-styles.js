@@ -433,6 +433,53 @@ const mediaStyle = css`
   }
 `;
 
+const tableStyles = css`
+  table {
+    border: 0.1rem solid #dcd7ca;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    font-size: 1.6rem;
+    margin: 4rem 0;
+    max-width: 100%;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .alignleft > table {
+    margin: 0;
+  }
+
+  .alignright > table {
+    margin: 0;
+  }
+
+  th,
+  td {
+    border: 0.1rem solid #dcd7ca;
+    line-height: 1.4;
+    margin: 0;
+    overflow: visible;
+    padding: 0.5em;
+  }
+
+  caption {
+    background: #dcd7ca;
+    font-weight: 600;
+    padding: 0.5em;
+    text-align: center;
+  }
+
+  thead {
+    vertical-align: bottom;
+    white-space: nowrap;
+  }
+
+  th {
+    font-weight: 700;
+  }
+`;
+
 const globalStyle = css([
   cssReset,
   documentSetup,
@@ -442,7 +489,9 @@ const globalStyle = css([
   listStyle,
   quoteStyle,
   codeStyle,
-  mediaStyle
+  mediaStyle,
+  // inputStyles,
+  tableStyles
 ]);
 
 export default globalStyle;

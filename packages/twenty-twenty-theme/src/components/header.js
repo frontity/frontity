@@ -2,24 +2,31 @@ import React from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
 import Navigation from "./navigation";
+import SearchButton from "./search-button";
+import SearchModal from "./search-modal";
 // import MobileMenu from "./menu";
 
 const Header = ({ state }) => {
   const { title, description } = state.frontity;
   return (
     <PageHeader id="site-header">
-      <PageHeaderInner>
-        <PageTitleWrapper>
-          <HeadersTitle>
+      <HeaderInner>
+        <TitleWrapper>
+          <TitleGroup>
             <SiteTitle>
               <StyledLink link="/">{title}</StyledLink>
             </SiteTitle>
             <SiteDescription>{description}</SiteDescription>
-          </HeadersTitle>
-        </PageTitleWrapper>
-        <Navigation />
+          </TitleGroup>
+        </TitleWrapper>
+        <HeaderNavigationWrapper>
+          <Navigation />
+          <SearchButton />
+        </HeaderNavigationWrapper>
         {/* <MobileMenu /> */}
-      </PageHeaderInner>
+      </HeaderInner>
+
+      <SearchModal />
     </PageHeader>
   );
 };
@@ -27,7 +34,7 @@ const Header = ({ state }) => {
 // Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header);
 
-const HeadersTitle = styled.div`
+const TitleGroup = styled.div`
   align-items: baseline;
   display: flex;
   flex-wrap: wrap;
@@ -35,7 +42,7 @@ const HeadersTitle = styled.div`
   margin: -1rem 0 0 -2.4rem;
 `;
 
-const PageTitleWrapper = styled.div`
+const TitleWrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
@@ -56,7 +63,7 @@ const PageHeader = styled.header`
   position: relative;
 `;
 
-const PageHeaderInner = styled.div`
+const HeaderInner = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -109,5 +116,14 @@ const StyledLink = styled(Link)`
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const HeaderNavigationWrapper = styled.div`
+  display: none;
+
+  @media (min-width: 1000px) {
+    align-items: center;
+    display: flex;
   }
 `;

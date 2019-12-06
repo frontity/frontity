@@ -134,6 +134,7 @@ export const PostTitle = styled.h1`
 const PostLink = styled(Link)`
   color: #000000;
   text-decoration: none;
+  display: inline-block;
   &:hover {
     text-decoration: underline;
   }

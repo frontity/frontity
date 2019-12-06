@@ -26,10 +26,6 @@ const Theme = ({ state }) => {
         <html lang="en" />
       </Head>
 
-      {/* Add some global styles for the whole site, like body or a's. 
-      Not classes here because we use CSS-in-JS. Only global HTML tags. */}
-      <Global styles={globalStyles} />
-
       {/* Add the header of the site. */}
       <Header />
 
@@ -41,6 +37,10 @@ const Theme = ({ state }) => {
           (data.isPostType && <Post />) ||
           (data.is404 && <Page404 />)}
       </Main>
+
+      {/* Add some global styles for the whole site, like body or a's. 
+      Not classes here because we use CSS-in-JS. Only global HTML tags. */}
+      <Global styles={globalStyles} />
 
       <Footer />
     </>

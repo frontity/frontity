@@ -79,10 +79,6 @@ const MenuLink = styled(Link)`
   line-height: 1.2;
   text-decoration: none;
 
-  @media (min-width: 1200px) {
-    margin: 0.8rem 0 0 2.5rem;
-  }
-
   &:hover,
   &[aria-current="page"] {
     text-decoration: underline;
