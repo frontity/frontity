@@ -143,6 +143,7 @@ export const PostInner = styled(SectionContainer)`
     padding-top: 8rem;
   }
 `;
+
 export const EntryContent = styled.div`
   line-height: 1.5;
   max-width: 58rem;

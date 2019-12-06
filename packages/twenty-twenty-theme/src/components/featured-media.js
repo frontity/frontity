@@ -3,7 +3,7 @@ import { connect, styled } from "frontity";
 import Img from "@frontity/components/image";
 import { SectionContainer } from "./list/article";
 
-const FeaturedMedia = ({ state, id }) => {
+const FeaturedMedia = ({ state, id, className }) => {
   const media = state.source.attachment[id];
 
   if (!media) return null;
@@ -22,7 +22,7 @@ const FeaturedMedia = ({ state, id }) => {
       ) || null;
 
   return (
-    <Figure>
+    <Figure className={className}>
       <SectionContainer size="medium">
         <Image
           alt={media.title.rendered}
