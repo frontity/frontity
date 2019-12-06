@@ -7,6 +7,7 @@ import Page404 from "./page404.js";
 import Loading from "./loading";
 import Title from "./title";
 import globalStyles from "./global-styles";
+import Footer from "./footer";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -40,6 +41,8 @@ const Theme = ({ state }) => {
           (data.isPostType && <Post />) ||
           (data.is404 && <Page404 />)}
       </Main>
+
+      <Footer />
     </>
   );
 };

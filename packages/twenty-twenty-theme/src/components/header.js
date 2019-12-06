@@ -7,7 +7,7 @@ import Navigation from "./navigation";
 const Header = ({ state }) => {
   const { title, description } = state.frontity;
   return (
-    <PageHeader>
+    <PageHeader id="site-header">
       <PageHeaderInner>
         <PageTitleWrapper>
           <HeadersTitle>

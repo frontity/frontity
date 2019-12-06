@@ -8,7 +8,8 @@ const Link = ({
   className,
   children,
   rel,
-  "aria-current": ariaCurrent
+  "aria-current": ariaCurrent,
+  onClick: onClickProp
 }) => {
   const onClick = event => {
     // Do nothing if it's an external link
@@ -24,6 +25,10 @@ const Link = ({
     // if the menu modal is open, close it so it doesn't block rendering
     if (state.theme.isMobileMenuOpen) {
       actions.theme.closeMobileMenu();
+    }
+
+    if (onClickProp) {
+      onClickProp(event);
     }
   };
 

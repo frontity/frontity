@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, styled } from "frontity";
-import Image from "@frontity/components/image";
+import Img from "@frontity/components/image";
+import { SectionContainer } from "./list/article";
 
 const FeaturedMedia = ({ state, id }) => {
   const media = state.source.attachment[id];
@@ -21,33 +22,33 @@ const FeaturedMedia = ({ state, id }) => {
       ) || null;
 
   return (
-    <Container>
-      <StyledImage
-        alt={media.title.rendered}
-        src={media.source_url}
-        srcSet={srcset}
-      />
-    </Container>
+    <Figure>
+      <SectionContainer size="medium">
+        <Image
+          alt={media.title.rendered}
+          src={media.source_url}
+          srcSet={srcset}
+        />
+      </SectionContainer>
+    </Figure>
   );
 };
 
 export default connect(FeaturedMedia);
 
-const Container = styled.div`
-  margin-top: 16px;
-  height: 300px;
+const Figure = styled.figure`
+  margin-top: 5rem;
+  position: relative;
+
+  @media (min-width: 700px) {
+    margin-top: 6rem;
+  }
 `;
 
-// const Figure = styled.figure`
-//   position: relative;
-//   @media (min-width: 700px) {
-//     margin-top: 6rem;
-//   }
-// `;
-
-const StyledImage = styled(Image)`
+const Image = styled(Img)`
+  margin: 0 auto;
+  max-width: 100%;
   display: block;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: 440px;
 `;

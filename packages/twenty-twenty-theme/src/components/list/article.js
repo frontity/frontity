@@ -28,7 +28,7 @@ const Article = ({ state, item }) => {
   return (
     <Post>
       <PostHeader>
-        <PostHeaderInner>
+        <SectionContainer>
           {/* If the post has categories, render the categories */}
           {hasCategories && <PostCategories categories={postCategories} />}
 
@@ -42,7 +42,7 @@ const Article = ({ state, item }) => {
 
           {/* The post's metadata like author, publish date, and comments */}
           <PostMeta item={item} />
-        </PostHeaderInner>
+        </SectionContainer>
       </PostHeader>
 
       {/*
@@ -97,7 +97,7 @@ const maxWidths = {
 
 const getMaxWidth = props => maxWidths[props.size] || maxWidths["medium"];
 
-const PostHeaderInner = styled.div`
+export const SectionContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: calc(100% - 4rem);
@@ -113,9 +113,9 @@ const PostTitle = styled.h1`
   @media (min-width: 700px) {
     font-size: 6.4rem !important;
   }
-  @media (min-width: 1200px) {
+  /* @media (min-width: 1200px) {
     font-size: 8.4rem !important;
-  }
+  } */
 `;
 
 const PostLink = styled(Link)`
@@ -126,7 +126,7 @@ const PostLink = styled(Link)`
   }
 `;
 
-const PostInner = styled(PostHeaderInner)`
+const PostInner = styled(SectionContainer)`
   padding-top: 5rem;
   @media (min-width: 700px) {
     padding-top: 8rem;
@@ -144,5 +144,9 @@ const EntryContent = styled.div`
 
   > *:first-of-type {
     margin-top: 0;
+  }
+
+  figure {
+    margin: 2em 0;
   }
 `;

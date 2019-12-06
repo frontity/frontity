@@ -5,6 +5,7 @@ const PostSeparator = styled.hr`
   margin-left: auto;
   margin-right: auto;
   width: calc(100% - 4rem);
+  opacity: 0.6;
   background: linear-gradient(
     to left,
     currentColor calc(50% - 16px),
@@ -21,7 +22,7 @@ const PostSeparator = styled.hr`
 
   @media (min-width: 700px) {
     width: calc(100% - 8rem);
-    margin: 8rem 0;
+    margin: 8rem auto;
   }
 
   &:before,
