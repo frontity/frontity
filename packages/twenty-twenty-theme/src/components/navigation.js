@@ -66,10 +66,10 @@ const MenuItem = styled.li`
   font-size: inherit;
   line-height: 1.25;
   position: relative;
-  margin: 0.8rem 0 0 1.6rem;
+  margin: 0.8rem 0 0 1.6rem !important;
 
   @media (min-width: 1220px) {
-    margin: 0.8rem 0 0 2.5rem;
+    margin: 0.8rem 0 0 2.5rem !important;
   }
 `;
 

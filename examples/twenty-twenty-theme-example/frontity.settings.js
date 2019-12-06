@@ -2,9 +2,9 @@ export default {
   name: "twenty-twenty-theme-example",
   state: {
     frontity: {
-      url: "https://mars.frontity.org",
-      title: "Test Frontity Blog",
-      description: "Useful content for Frontity development"
+      url: "https://twentytwenty.frontity.org",
+      title: "Matt Mullenberg",
+      description: "Unlucky in Cards"
     }
   },
   packages: [

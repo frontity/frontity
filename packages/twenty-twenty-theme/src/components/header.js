@@ -10,10 +10,12 @@ const Header = ({ state }) => {
     <PageHeader>
       <PageHeaderInner>
         <PageTitleWrapper>
-          <SiteTitle>
-            <StyledLink link="/">{title}</StyledLink>
-          </SiteTitle>
-          <SiteDescription>{description}</SiteDescription>
+          <HeadersTitle>
+            <SiteTitle>
+              <StyledLink link="/">{title}</StyledLink>
+            </SiteTitle>
+            <SiteDescription>{description}</SiteDescription>
+          </HeadersTitle>
         </PageTitleWrapper>
         <Navigation />
         {/* <MobileMenu /> */}
@@ -25,10 +27,20 @@ const Header = ({ state }) => {
 // Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header);
 
+const HeadersTitle = styled.div`
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: -1rem 0 0 -2.4rem;
+`;
+
 const PageTitleWrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+  padding: 0 4rem;
+  text-align: center;
 
   @media (min-width: 1000px) {
     margin-right: 4rem;
@@ -60,9 +72,9 @@ const PageHeaderInner = styled.div`
 `;
 
 const SiteTitle = styled.h1`
+  font-size: 2.1rem;
+  font-weight: 600;
   line-height: 1;
-  font-size: 2.4rem;
-  font-weight: 700;
   @media (min-width: 1000px) {
     margin: 1rem 0 0 2.4rem;
   }
@@ -73,6 +85,7 @@ const SiteTitle = styled.h1`
 `;
 
 const SiteDescription = styled.div`
+  margin-top: 1rem;
   color: #6d6d6d;
   font-size: 1.8rem;
   font-weight: 500;
