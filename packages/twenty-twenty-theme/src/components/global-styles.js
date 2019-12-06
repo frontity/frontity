@@ -1,4 +1,6 @@
 import { css } from "frontity";
+import Inter from "../fonts/inter/Inter-upright-var.woff2";
+import InterItalic from "../fonts/inter/Inter-italic-var.woff2";
 
 const cssReset = css`
   html,
@@ -102,7 +104,7 @@ const fontFace = css`
     font-weight: 100 900; /* stylelint-disable-line font-weight-notation */
     font-style: normal;
     font-display: swap;
-    src: url("../fonts/inter/Inter-upright-var.woff2") format("woff2");
+    src: url(${Inter}) format("woff2");
   }
 
   @font-face {
@@ -110,7 +112,7 @@ const fontFace = css`
     font-weight: 100 900; /* stylelint-disable-line font-weight-notation */
     font-style: italic;
     font-display: swap;
-    src: url("../fonts/inter/Inter-italic-var.woff2") format("woff2");
+    src: url(${InterItalic}) format("woff2");
   }
 `;
 
