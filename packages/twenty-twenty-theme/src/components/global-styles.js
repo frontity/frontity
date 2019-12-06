@@ -77,8 +77,8 @@ const documentSetup = css`
 
   @supports (font-variation-settings: normal) {
     body {
-      font-family: "Inter var", -apple-system, BlinkMacSystemFont,
-        "Helvetica Neue", Helvetica, sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+        Helvetica, sans-serif;
     }
   }
 

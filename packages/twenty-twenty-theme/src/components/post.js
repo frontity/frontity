@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import Link from "./link";
-import List from "./list";
+import Posts from "./list";
 import FeaturedMedia from "./featured-media";
 
 const Post = ({ state, actions, libraries }) => {
@@ -24,7 +24,7 @@ const Post = ({ state, actions, libraries }) => {
    */
   useEffect(() => {
     actions.source.fetch("/");
-    List.preload();
+    Posts.preload();
   }, []);
 
   // Load the post, but only if the data is ready.
