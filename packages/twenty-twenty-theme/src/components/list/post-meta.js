@@ -30,8 +30,6 @@ export const PostMetaList = styled.ul`
   }
 `;
 
-const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
-
 const PostMeta = ({ state, item }) => {
   const author = state.source.author[item.author];
   const date = new Date(item.date);
@@ -43,7 +41,7 @@ const PostMeta = ({ state, item }) => {
         {/* If the post has an author, we render a clickable author text. */}
         {author && (
           <PostMetaItem icon={UserIcon} label="Post Author" link={author.link}>
-            By {capitalize(author.name)}
+            By {author.name}
           </PostMetaItem>
         )}
         <PostMetaItem icon={CalendarIcon} label="Post Date">

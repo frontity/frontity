@@ -6,6 +6,7 @@ import Post from "./post";
 import Page404 from "./page404.js";
 import Loading from "./loading";
 import Title from "./title";
+import SearchResults from "./search-results";
 import globalStyles from "./global-styles";
 import Footer from "./footer";
 
@@ -19,7 +20,6 @@ const Theme = ({ state, libraries }) => {
   const parse = libraries.source.parse(state.router.link);
   // Check if the url is a search type
   const isSearch = Boolean(parse.query["s"]);
-  console.log(isSearch);
 
   return (
     <>
@@ -37,6 +37,7 @@ const Theme = ({ state, libraries }) => {
       on the type of URL we are in. */}
       <Main>
         {(data.isFetching && <Loading />) ||
+          (isSearch && <SearchResults />) ||
           (data.isArchive && <List />) ||
           (data.isPostType && <Post />) ||
           (data.is404 && <Page404 />)}
@@ -55,5 +56,5 @@ export default connect(Theme);
 
 const Main = styled.main`
   display: block;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 `;

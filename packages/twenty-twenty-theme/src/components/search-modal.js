@@ -7,7 +7,7 @@ import useFocusEffect from "./use-focus-effect";
 
 const SearchModal = ({ state, actions }) => {
   const { isSearchModalOpen } = state.theme;
-  const { performSearch, toggleSearchModal } = actions.theme;
+  const { closeSearchModal } = actions.theme;
 
   // Keep a reference to the input so we can grab it's value on form submission
   const inputRef = useRef();
@@ -27,16 +27,18 @@ const SearchModal = ({ state, actions }) => {
     // Better to trim write spaces as well
     if (searchString.trim().length > 0) {
       // Let's go search for blogs that match the search string
-      performSearch(searchString);
+      actions.router.set(`/?s=${searchString.toLowerCase()}`);
+
+      // Scroll the page to the top
+      window.scrollTo(0, 0);
+
+      // Close the search modal
+      closeSearchModal();
     }
   };
 
-  const handleClick = () => {
-    toggleSearchModal();
-  };
-
   return (
-    <ModalOverlay data-open={isSearchModalOpen} onClick={handleClick}>
+    <ModalOverlay data-open={isSearchModalOpen} onClick={closeSearchModal}>
       {isSearchModalOpen && (
         <Global styles={{ body: { overflowY: "hidden" } }} />
       )}
@@ -61,7 +63,7 @@ const SearchModal = ({ state, actions }) => {
             <SearchButton>Search</SearchButton>
           </SearchForm>
 
-          <CloseButton onClick={toggleSearchModal}>
+          <CloseButton onClick={closeSearchModal}>
             <ScreenReaderText>Close search</ScreenReaderText>
             <CloseIcon />
           </CloseButton>

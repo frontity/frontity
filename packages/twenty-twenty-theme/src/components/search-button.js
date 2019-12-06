@@ -6,14 +6,14 @@ import { BaseToggle, LabeledIcon, ToggleWrapper } from "./nav-toggle";
 const SearchButton = ({ state, actions }) => {
   // Get the state of the search modal
   const { isSearchModalOpen } = state.theme;
-  const { toggleSearchModal } = actions.theme;
+  const { openSearchModal } = actions.theme;
 
   return (
     <HeaderToggle>
       <ToggleWrapper>
         <BaseToggle
           aria-expanded={isSearchModalOpen}
-          onClick={toggleSearchModal}
+          onClick={openSearchModal}
           aria-label="Click to open search bar..."
           style={{ bottom: "0.5rem" }}
         >

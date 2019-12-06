@@ -51,6 +51,7 @@ const Post = ({ state, actions, libraries }) => {
           {hasCategories && <PostCategories categories={categories} />}
 
           <PostTitle
+            size="h1"
             className="heading-size-1"
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
           />
@@ -64,7 +65,7 @@ const Post = ({ state, actions, libraries }) => {
        * If the want to show featured media in the
        * list of featured posts, we render the media.
        */}
-      {state.theme.featured.showOnPost && (
+      {state.theme.featuredMedia.showOnPost && (
         <FeaturedMedia id={post.featured_media} />
       )}
 

@@ -6,14 +6,14 @@ import { LabeledIcon, NavToggle, ToggleWrapper } from "./nav-toggle";
 const MobileMenuButton = ({ state, actions }) => {
   // Get Menuate of the search modal
   const { isMobileMenuOpen } = state.theme;
-  const { toggleMobileMenu } = actions.theme;
+  const { openMobileMenu } = actions.theme;
 
   return (
     <ToggleWrapper>
       <NavToggle
         isMobile
         aria-expanded={isMobileMenuOpen}
-        onClick={toggleMobileMenu}
+        onClick={openMobileMenu}
         aria-label="Click to open search bar..."
       >
         <LabeledIcon icon={ToggleIcon} label="Menu" />

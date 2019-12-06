@@ -33,11 +33,11 @@ export function getTags(state, item) {
  * - Author: name of author and published date
  * - FeaturedMedia: the featured image/video of the post
  */
-const Article = ({ state, item }) => {
+const Article = ({ state, item, showExcerpt, showMedia = true }) => {
   // Get the name and url of all tags
   const { hasTags, tags } = getTags(state, item);
   const { hasCategories, categories } = getCategories(state, item);
-
+  const content = showExcerpt ? item.excerpt : item.content;
   return (
     <Post>
       <PostHeader>
@@ -62,15 +62,15 @@ const Article = ({ state, item }) => {
        * If the want to show featured media in the
        * list of featured posts, we render the media.
        */}
-      {state.theme.featured.showOnList && (
+      {state.theme.featuredMedia.showOnList && showMedia && (
         <FeaturedMedia id={item.featured_media} />
       )}
 
       {/* If the post has an excerpt (short summary text), we render it */}
-      {item.content && (
+      {content && (
         <PostInner size="thin">
           <EntryContent
-            dangerouslySetInnerHTML={{ __html: item.content.rendered }}
+            dangerouslySetInnerHTML={{ __html: content.rendered }}
           />
           {/* If the post has tags, render it */}
           {hasTags && <PostTags tags={tags} />}
@@ -126,9 +126,6 @@ export const PostTitle = styled.h1`
   @media (min-width: 700px) {
     font-size: 6.4rem !important;
   }
-  /* @media (min-width: 1200px) {
-    font-size: 8.4rem !important;
-  } */
 `;
 
 const PostLink = styled(Link)`

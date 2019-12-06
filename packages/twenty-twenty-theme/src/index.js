@@ -17,11 +17,12 @@ const marsTheme = {
      */
     theme: {
       menu: [],
-      isMobileMenuOpen: true,
+      isMobileMenuOpen: false,
       isSearchModalOpen: false,
-      featured: {
-        showOnList: false,
-        showOnPost: false
+      showAllContentOnList: true,
+      featuredMedia: {
+        showOnList: true,
+        showOnPost: true
       }
     }
   },
@@ -31,16 +32,17 @@ const marsTheme = {
    */
   actions: {
     theme: {
-      toggleMobileMenu: ({ state }) => {
-        state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen;
+      openMobileMenu: ({ state }) => {
+        state.theme.isMobileMenuOpen = true;
       },
-      performSearch: searchString => ({ state }) => {
-        // const backupState = state;
-        console.log(searchString);
-        console.log(state.source);
+      closeMobileMenu: ({ state }) => {
+        state.theme.isMobileMenuOpen = false;
       },
-      toggleSearchModal: ({ state }) => {
-        state.theme.isSearchModalOpen = !state.theme.isSearchModalOpen;
+      openSearchModal: ({ state }) => {
+        state.theme.isSearchModalOpen = true;
+      },
+      closeSearchModal: ({ state }) => {
+        state.theme.isSearchModalOpen = false;
       }
     }
   },

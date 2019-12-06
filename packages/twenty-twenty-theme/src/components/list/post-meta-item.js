@@ -38,6 +38,7 @@ const ListItem = styled.li`
   letter-spacing: -0.016875em;
   margin: 1rem 0 0 2rem;
   max-width: calc(100% - 2rem);
+  text-transform: capitalize;
 
   @media (min-width: 700px) {
     margin: 1.4rem 0 0 3rem;
