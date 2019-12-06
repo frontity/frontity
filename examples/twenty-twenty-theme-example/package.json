@@ -15,7 +15,7 @@
   "dependencies": {
     "@frontity/core": "^1.4.0",
     "@frontity/html2react": "^1.1.14",
-    "@frontity/twenty-twenty-theme": "^1.0.0",
+    "@frontity/twenty-twenty-theme": "^0.0.1",
     "@frontity/tiny-router": "^1.0.17",
     "@frontity/wp-source": "^1.4.2",
     "babel-plugin-frontity": "^1.0.1",
