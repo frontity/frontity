@@ -15,6 +15,12 @@
     "release": "lerna publish --yes",
     "reinstall": "lerna clean --yes && npm run prepare"
   },
+  "workspaces": [
+    "packages/*",
+    "examples/*",
+    "e2e/project",
+    "e2e/packages/*"
+  ],
   "devDependencies": {
     "@changesets/cli": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",

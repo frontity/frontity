@@ -1,5 +1,5 @@
 {
-  "name": "typescript-basic",
+  "name": "example-typescript-basic",
   "version": "0.2.18",
   "private": true,
   "description": "The minimum setup for Frontity using TypeScript",

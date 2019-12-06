@@ -1,5 +1,5 @@
 {
-  "name": "fonts",
+  "name": "e2e-fonts",
   "version": "1.0.1",
   "private": true,
   "description": "Package to do e2e testing for fonts",
