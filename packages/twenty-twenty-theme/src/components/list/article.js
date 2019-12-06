@@ -6,6 +6,25 @@ import PostMeta from "./post-meta";
 import PostCategories from "./post-categories";
 import PostTags from "./post-tags";
 
+// Get the name and url of all categories
+export function getCategories(state, item) {
+  const allCategories = state.source.category;
+  const hasCategories = item.categories.length > 0;
+  const categories = item.categories.map(id => allCategories[id]);
+
+  return { hasCategories, categories };
+}
+
+// Get the name and url of all tags
+
+export function getTags(state, item) {
+  const allTags = state.source.tag;
+  const hasTags = item.tags.length > 0;
+  const tags = item.tags.map(id => allTags[id]);
+
+  return { hasTags, tags };
+}
+
 /**
  * Article Component
  *
@@ -16,21 +35,15 @@ import PostTags from "./post-tags";
  */
 const Article = ({ state, item }) => {
   // Get the name and url of all tags
-  const allTags = state.source.tag;
-  const hasTags = item.tags.length > 0;
-  const postTags = item.tags.map(id => allTags[id]);
-
-  // Get the name and url of all categories
-  const allCategories = state.source.category;
-  const hasCategories = item.categories.length > 0;
-  const postCategories = item.categories.map(id => allCategories[id]);
+  const { hasTags, tags } = getTags(state, item);
+  const { hasCategories, categories } = getCategories(state, item);
 
   return (
     <Post>
       <PostHeader>
         <SectionContainer>
           {/* If the post has categories, render the categories */}
-          {hasCategories && <PostCategories categories={postCategories} />}
+          {hasCategories && <PostCategories categories={categories} />}
 
           {/* The clickable heading for the post */}
           <PostLink link={item.link}>
@@ -60,7 +73,7 @@ const Article = ({ state, item }) => {
             dangerouslySetInnerHTML={{ __html: item.content.rendered }}
           />
           {/* If the post has tags, render it */}
-          {hasTags && <PostTags tags={postTags} />}
+          {hasTags && <PostTags tags={tags} />}
         </PostInner>
       )}
     </Post>
@@ -72,7 +85,7 @@ export default connect(Article);
 
 // All styles :)
 
-const Post = styled.article`
+export const Post = styled.article`
   &:first-of-type {
     padding: 4rem 0 0;
   }
@@ -84,7 +97,7 @@ const Post = styled.article`
   }
 `;
 
-const PostHeader = styled.header`
+export const PostHeader = styled.header`
   text-align: center;
 `;
 
@@ -108,7 +121,7 @@ export const SectionContainer = styled.div`
   }
 `;
 
-const PostTitle = styled.h1`
+export const PostTitle = styled.h1`
   margin: 0;
   @media (min-width: 700px) {
     font-size: 6.4rem !important;
@@ -126,13 +139,13 @@ const PostLink = styled(Link)`
   }
 `;
 
-const PostInner = styled(SectionContainer)`
+export const PostInner = styled(SectionContainer)`
   padding-top: 5rem;
   @media (min-width: 700px) {
     padding-top: 8rem;
   }
 `;
-const EntryContent = styled.div`
+export const EntryContent = styled.div`
   line-height: 1.5;
   max-width: 58rem;
   font-family: "Hoefler Text", Garamond, "Times New Roman", serif;
