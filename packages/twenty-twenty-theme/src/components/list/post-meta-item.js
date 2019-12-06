@@ -12,7 +12,7 @@ const PostMetaItem = ({ icon: Icon, label, link, children }) => {
       </MetaIcon>
 
       <MetaText>
-        <Link link={link}>{children}</Link>
+        {link ? <Link link={link}>{children}</Link> : children}
       </MetaText>
     </ListItem>
   );
