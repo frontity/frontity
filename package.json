@@ -22,6 +22,7 @@
     "e2e/packages/*"
   ],
   "devDependencies": {
+    "@changesets/changelog-github": "^0.1.1",
     "@changesets/cli": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
