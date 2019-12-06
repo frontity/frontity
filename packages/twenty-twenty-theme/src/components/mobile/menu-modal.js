@@ -53,7 +53,7 @@ const MobileMenuModal = ({ state, actions }) => {
               role="navigation"
               aria-label="Mobile menu links"
             >
-              <MenuList className="reset-list-style">
+              <MenuList>
                 {isThereLinks &&
                   menu.map(([name, link]) => (
                     <MenuListItem key={name}>
@@ -121,6 +121,8 @@ const MenuContent = styled.nav`
 
 const MenuList = styled.ul`
   position: relative;
+  list-style: none;
+  margin: 0;
   /* left: calc(50% - 50vw);
   width: 100vw; */
 `;

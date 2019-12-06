@@ -7,12 +7,10 @@ import Link from "./link";
  *
  * It renders the navigation links
  */
-
-// TODO: Remove the `reset-list-style` and use `css` prop instead
 const Navigation = ({ state }) => (
   <NavWrapper>
     <MenuNav>
-      <Menu className="reset-list-style">
+      <Menu>
         {state.theme.menu.map(([name, link]) => {
           // Check if the link matched the current page url
           const isCurrentPage = state.router.link === link;
@@ -55,6 +53,8 @@ const Menu = styled.ul`
   letter-spacing: -0.0277em;
   flex-wrap: wrap;
   justify-content: flex-end;
+  list-style: none;
+  margin: 0;
 
   @media (min-width: 1220px) {
     margin-top: -0.8rem;
