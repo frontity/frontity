@@ -31,7 +31,7 @@ const MobileMenuModal = ({ state, actions }) => {
   useFocusTrap(menuRef, isMobileMenuOpen);
 
   return (
-    <Modal data-open={isMobileMenuOpen}>
+    <Modal data-open={isMobileMenuOpen} role="dialog" aria-modal="true">
       {/* Global styles to prevent body scroll when the menu is open */}
       {isMobileMenuOpen && (
         <Global styles={{ body: { overflowY: "hidden" } }} />

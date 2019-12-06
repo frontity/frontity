@@ -51,12 +51,18 @@ const SearchModal = ({ state, actions, libraries }) => {
   };
 
   return (
-    <ModalOverlay data-open={isSearchModalOpen} onClick={closeSearchModal}>
+    <ModalOverlay
+      role="presentation"
+      data-open={isSearchModalOpen}
+      onClick={closeSearchModal}
+    >
       {isSearchModalOpen && (
         // Block scroll when modal is open
         <Global styles={{ body: { overflowY: "hidden" } }} />
       )}
       <ModalInner
+        role="dialog"
+        aria-modal="true"
         onClick={event => {
           // prevent clicks within the content from propagating to the ModalOverlay
           event.stopPropagation();
