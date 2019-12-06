@@ -16,10 +16,9 @@ export default {
         theme: {
           menu: [
             ["Home", "/"],
-            ["Nature", "/category/nature/"],
-            ["Travel", "/category/travel/"],
-            ["Japan", "/tag/japan/"],
-            ["About Us", "/about-us/"]
+            ["About", "/about/"],
+            ["Contact", "/contact/"],
+            ["Let's Work Together", "/work"]
           ],
           featured: {
             showOnList: true,

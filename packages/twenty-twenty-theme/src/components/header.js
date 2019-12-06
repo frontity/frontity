@@ -4,7 +4,9 @@ import Link from "./link";
 import Navigation from "./navigation";
 import SearchButton from "./search-button";
 import SearchModal from "./search-modal";
-// import MobileMenu from "./menu";
+import MobileSearchButton from "./mobile-search-button";
+import MobileMenuButton from "./mobile-menu-button";
+import MobileMenuModal from "./mobile-menu-modal";
 
 const Header = ({ state }) => {
   const { title, description } = state.frontity;
@@ -12,18 +14,23 @@ const Header = ({ state }) => {
     <PageHeader id="site-header">
       <HeaderInner>
         <TitleWrapper>
+          <MobileSearchButton />
+
           <TitleGroup>
             <SiteTitle>
               <StyledLink link="/">{title}</StyledLink>
             </SiteTitle>
             <SiteDescription>{description}</SiteDescription>
           </TitleGroup>
+
+          <MobileMenuButton />
+          <MobileMenuModal />
         </TitleWrapper>
+
         <HeaderNavigationWrapper>
           <Navigation />
           <SearchButton />
         </HeaderNavigationWrapper>
-        {/* <MobileMenu /> */}
       </HeaderInner>
 
       <SearchModal />
@@ -35,11 +42,13 @@ const Header = ({ state }) => {
 export default connect(Header);
 
 const TitleGroup = styled.div`
-  align-items: baseline;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin: -1rem 0 0 -2.4rem;
+  @media (min-width: 1000px) {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: -1rem 0 0 -2.4rem;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -48,8 +57,10 @@ const TitleWrapper = styled.div`
   justify-content: center;
   padding: 0 4rem;
   text-align: center;
+  width: 100%;
 
   @media (min-width: 1000px) {
+    width: auto;
     margin-right: 4rem;
     max-width: 50%;
     padding: 0;
@@ -82,6 +93,8 @@ const SiteTitle = styled.h1`
   font-size: 2.1rem;
   font-weight: 600;
   line-height: 1;
+  margin: 0;
+
   @media (min-width: 1000px) {
     margin: 1rem 0 0 2.4rem;
   }
@@ -92,6 +105,7 @@ const SiteTitle = styled.h1`
 `;
 
 const SiteDescription = styled.div`
+  margin: 0;
   margin-top: 1rem;
   color: #6d6d6d;
   font-size: 1.8rem;

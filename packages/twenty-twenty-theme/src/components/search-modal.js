@@ -1,30 +1,20 @@
-import { styled, connect } from "frontity";
-import React, { useEffect, useRef } from "react";
+import { styled, connect, Global } from "frontity";
+import React, { useRef } from "react";
 import { CloseIcon } from "./icons";
 import ScreenReaderText from "./screen-reader";
+import useFocusTrap from "./use-trap-focus";
+import useFocusEffect from "./use-focus-effect";
 
 const SearchModal = ({ state, actions }) => {
   const { isSearchModalOpen } = state.theme;
-  const { performSearch, closeSearchModal } = actions.theme;
+  const { performSearch, toggleSearchModal } = actions.theme;
 
   // Keep a reference to the input so we can grab it's value on form submission
   const inputRef = useRef();
+  const containerRef = useRef();
 
-  // Keep a reference to the previously active element
-  // to restore focus back
-  const activeElementRef = useRef();
-
-  // Accessibility: focus on the input if the modal is open
-  useEffect(() => {
-    if (isSearchModalOpen && inputRef.current) {
-      activeElementRef.current = document.activeElement;
-      inputRef.current.focus();
-    } else {
-      if (activeElementRef.current) {
-        activeElementRef.current.focus();
-      }
-    }
-  }, [isSearchModalOpen]);
+  useFocusEffect(inputRef, isSearchModalOpen);
+  useFocusTrap(containerRef, isSearchModalOpen);
 
   const handleSubmit = event => {
     // Prevent page navigation
@@ -42,18 +32,21 @@ const SearchModal = ({ state, actions }) => {
   };
 
   const handleClick = () => {
-    closeSearchModal();
+    toggleSearchModal();
   };
 
   return (
     <ModalOverlay data-open={isSearchModalOpen} onClick={handleClick}>
+      {isSearchModalOpen && (
+        <Global styles={{ body: { overflowY: "hidden" } }} />
+      )}
       <ModalInner
         onClick={event => {
           // prevent clicks within the content from propagating to the ModalOverlay
           event.stopPropagation();
         }}
       >
-        <SectionInner>
+        <SectionInner ref={containerRef}>
           <SearchForm
             role="search"
             aria-label="Search for:"
@@ -65,9 +58,10 @@ const SearchModal = ({ state, actions }) => {
               placeholder="search for:"
               name="search"
             />
+            <SearchButton>Search</SearchButton>
           </SearchForm>
 
-          <CloseButton onClick={closeSearchModal}>
+          <CloseButton onClick={toggleSearchModal}>
             <ScreenReaderText>Close search</ScreenReaderText>
             <CloseIcon />
           </CloseButton>
@@ -194,5 +188,28 @@ const CloseButton = styled.button`
       height: 2.5rem;
       width: 2.5rem;
     }
+  }
+`;
+
+const SearchButton = styled.button`
+  position: absolute;
+  right: -9999rem;
+  top: 50%;
+  padding: 1.1em 1.44em;
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.0333em;
+  line-height: 1.25;
+  color: #ffffff;
+  transform: translateY(-50%);
+  margin: 0 0 0.8rem 0.8rem;
+  border-color: #dcd7ca;
+  background-color: #cd2653;
+
+  &:focus {
+    right: 0;
   }
 `;

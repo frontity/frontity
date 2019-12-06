@@ -17,8 +17,8 @@ const marsTheme = {
      */
     theme: {
       menu: [],
-      isMobileMenuOpen: false,
-      isSearchModalOpen: true,
+      isMobileMenuOpen: true,
+      isSearchModalOpen: false,
       featured: {
         showOnList: false,
         showOnPost: false
@@ -34,19 +34,13 @@ const marsTheme = {
       toggleMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen;
       },
-      closeMobileMenu: ({ state }) => {
-        state.theme.isMobileMenuOpen = false;
-      },
       performSearch: searchString => ({ state }) => {
         // const backupState = state;
         console.log(searchString);
         console.log(state.source);
       },
-      openSearchModal: ({ state }) => {
+      toggleSearchModal: ({ state }) => {
         state.theme.isSearchModalOpen = !state.theme.isSearchModalOpen;
-      },
-      closeSearchModal: ({ state }) => {
-        state.theme.isSearchModalOpen = false;
       }
     }
   },

@@ -13,9 +13,13 @@ import Footer from "./footer";
  * Theme is the root React component of our theme. The one we will export
  * in roots.
  */
-const Theme = ({ state }) => {
+const Theme = ({ state, libraries }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
+  const parse = libraries.source.parse(state.router.link);
+  // Check if the url is a search type
+  const isSearch = Boolean(parse.query["s"]);
+  console.log(isSearch);
 
   return (
     <>
