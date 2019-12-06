@@ -5,6 +5,7 @@ import { CloseNavToggle } from "../nav-toggle";
 import { CloseIcon } from "../icons";
 import useFocusTrap from "../hooks/use-trap-focus";
 import useFocusEffect from "../hooks/use-focus-effect";
+import { SectionContainer } from "../list/article";
 
 const MobileMenuModal = ({ state, actions }) => {
   // Get the menu state and action
@@ -106,15 +107,12 @@ const ModalInner = styled.div`
   width: 100%;
 `;
 
-const MenuWrapper = styled.div`
+const MenuWrapper = styled(SectionContainer)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 120rem;
-  width: calc(100% - 4rem);
+  width: 100%;
 `;
 
 const MenuContent = styled.nav`
@@ -123,8 +121,8 @@ const MenuContent = styled.nav`
 
 const MenuList = styled.ul`
   position: relative;
-  left: calc(50% - 50vw);
-  width: 100vw;
+  /* left: calc(50% - 50vw);
+  width: 100vw; */
 `;
 
 const ToggleText = styled.span`
@@ -160,6 +158,12 @@ const MenuLink = styled(Link)`
   padding: 2rem 2.5rem;
   text-decoration: none;
   width: 100%;
+  text-align: left;
+
+  @media (min-width: 700px) {
+    font-size: 2.4rem;
+    padding: 2.5rem 0;
+  }
 
   &:hover,
   &:focus {
