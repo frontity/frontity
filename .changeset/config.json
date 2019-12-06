@@ -1,8 +1,11 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@0.3.0/schema.json",
-  "changelog": "@changesets/cli/changelog",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "frontity/frontity" }
+  ],
   "commit": false,
   "linked": [],
-  "access": "restricted",
-  "baseBranch": "master"
+  "access": "public",
+  "baseBranch": "dev"
 }
