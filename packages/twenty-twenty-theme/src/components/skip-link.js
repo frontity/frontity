@@ -1,12 +1,14 @@
 import { styled } from "frontity";
+import ScreenReaderText from "./screen-reader";
 
-const SkipLink = styled.a`
+const SkipLink = styled(ScreenReaderText)`
   left: -9999rem;
   top: 2.5rem;
   z-index: 999999999;
   text-decoration: underline;
 
-  &:focus {
+  &:focus,
+  &:active {
     display: block;
     left: 6px;
     top: 7px;

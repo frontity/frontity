@@ -1,14 +1,15 @@
+import { connect, Global, Head, styled } from "frontity";
 import React from "react";
-import { Global, connect, styled, Head } from "frontity";
+import Footer from "./footer";
+import globalStyles from "./global-styles";
 import Header from "./header";
 import List from "./list";
-import Post from "./post";
-import Page404 from "./page404.js";
 import Loading from "./loading";
-import Title from "./title";
+import Page404 from "./page404.js";
+import Post from "./post";
 import SearchResults from "./search/search-results";
-import globalStyles from "./global-styles";
-import Footer from "./footer";
+import SkipLink from "./skip-link";
+import Title from "./title";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -30,12 +31,17 @@ const Theme = ({ state, libraries }) => {
         <html lang="en" />
       </Head>
 
+      {/* Accessibility: Provides ability to skip to main content */}
+      <SkipLink as="a" href="#main">
+        Skip to main content
+      </SkipLink>
+
       {/* Add the header of the site. */}
       <Header />
 
       {/* Add the main section. It renders a different component depending
       on the type of URL we are in. */}
-      <Main>
+      <Main id="main">
         {(data.isFetching && <Loading />) ||
           (isSearch && <SearchResults />) ||
           (data.isArchive && <List />) ||
