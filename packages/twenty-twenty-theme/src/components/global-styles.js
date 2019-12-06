@@ -481,7 +481,7 @@ const tableStyles = colors => css`
 `;
 
 const globalStyle = colors =>
-  css(
+  css([
     cssReset,
     documentSetup(colors),
     fontFace,
@@ -492,6 +492,6 @@ const globalStyle = colors =>
     codeStyle(colors),
     mediaStyle(colors),
     tableStyles(colors)
-  );
+  ]);
 
 export default globalStyle;

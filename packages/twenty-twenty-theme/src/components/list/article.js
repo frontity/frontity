@@ -32,11 +32,12 @@ export function getTags(state, item) {
  * - Author: name of author and published date
  * - FeaturedMedia: the featured image/video of the post
  */
-const Article = ({ state, item, showExcerpt, showMedia = true }) => {
+const Article = ({ state, item, libraries, showExcerpt, showMedia = true }) => {
   // Get the name and url of all tags
   const { hasTags, tags } = getTags(state, item);
   const { hasCategories, categories } = getCategories(state, item);
   const content = showExcerpt ? item.excerpt : item.content;
+  const { Component: Html2React } = libraries.html2react;
   return (
     <Post>
       <PostHeader>
@@ -69,9 +70,10 @@ const Article = ({ state, item, showExcerpt, showMedia = true }) => {
       {content && (
         <PostInner size="thin">
           {/* TODO: Change this to HTML2React */}
-          <EntryContent
-            dangerouslySetInnerHTML={{ __html: content.rendered }}
-          />
+          {/* dangerouslySetInnerHTML={{ __html: content.rendered }} */}
+          <EntryContent>
+            <Html2React html={content.rendered} />
+          </EntryContent>
           {/* If the post has tags, render it */}
           {hasTags && <PostTags tags={tags} />}
         </PostInner>

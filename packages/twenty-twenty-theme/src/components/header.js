@@ -29,7 +29,6 @@ const Header = ({ state }) => {
 
           {/* Mobile menu button and modal */}
           <MobileMenuButton />
-          {/* TODO: Fix alignment on mobile */}
           <MobileMenuModal />
         </TitleWrapper>
 
