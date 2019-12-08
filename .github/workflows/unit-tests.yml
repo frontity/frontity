@@ -29,6 +29,6 @@ jobs:
       env:
         CI: true
     - name: Run unit tests
-      run: npm test:clear
+      run: npm run test:clear
       env:
         CI: true
