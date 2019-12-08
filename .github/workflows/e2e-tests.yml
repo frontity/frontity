@@ -3,7 +3,7 @@ name: e2e tests
 on: [push]
 
 jobs:
-  e2e-run:
+  e2e-tests:
   
     runs-on: ubuntu-latest
     
