@@ -6,5 +6,9 @@
   "supportFile": "e2e/support/index.js",
   "videosFolder": "e2e/videos",
   "video": false,
-  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"]
+  "ignoreTestFiles": [
+    "**/__snapshots__/*",
+    "**/__image_snapshots__/*"
+  ],
+  "projectId": "ed7hed"
 }
