@@ -10,10 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
+
+      - name: Run e2e tests
         uses: cypress-io/github-action@v1
         with:
           start: npm run cy:prod
