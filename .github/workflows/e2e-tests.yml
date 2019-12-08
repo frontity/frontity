@@ -16,5 +16,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:
-          start: cd e2e/project/ && npx frontity build && npx frontity serve --port 3001
+          start: npm run cy:prod
           wait-on: 'http://localhost:3001'
