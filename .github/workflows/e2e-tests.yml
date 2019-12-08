@@ -19,3 +19,4 @@ jobs:
           start: npm run cy:prod
           wait-on: 'http://localhost:3001'
           wait-on-timeout: 180
+          env: HEADLESS=true
