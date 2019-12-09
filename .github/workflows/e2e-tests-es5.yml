@@ -1,0 +1,42 @@
+name: e2e tests es5
+
+on: [push]
+
+jobs:
+  e2e-tests-es5:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        containers: [1, 2, 3]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies (root)
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Run e2e tests (es5)
+        uses: cypress-io/github-action@v1
+        with:
+          record: true
+          parallel: true
+          group: "frontity/frontity:es5"
+          start: npm run start:prod:es5
+          wait-on: "http://localhost:3001"
+          wait-on-timeout: 180
+          env: HEADLESS=true
+          working-directory: e2e
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

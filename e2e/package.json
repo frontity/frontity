@@ -1,0 +1,21 @@
+{
+  "name": "e2e-tests",
+  "private": false,
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "e2e:run": "start-server-and-test start:prod http://localhost:3001 cy:run",
+    "e2e:open": "start-server-and-test start:dev http://localhost:3001 cy:open",
+    "cy:open": "cypress open --env HEADLESS=false",
+    "cy:run": "cypress run --env HEADLESS=true",
+    "start:dev": "cd project/ && npx frontity dev --port 3001 --dont-open-browser",
+    "start:prod": "cd project/ && npx frontity build && npx frontity serve --port 3001",
+    "start:prod:module": "cd project/ && npx frontity build --target module && npx frontity serve --port 3001",
+    "start:prod:es5": "cd project/ && npx frontity build --target es5 && npx frontity serve --port 3001"
+  },
+  "devDependencies": {
+    "cypress": "^3.7.0",
+    "cypress-plugin-snapshots": "^1.2.9",
+    "start-server-and-test": "^1.10.6"
+  }
+}

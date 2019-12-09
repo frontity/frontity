@@ -1,0 +1,11 @@
+{
+  "integrationFolder": "integration",
+  "fixturesFolder": "fixtures",
+  "pluginsFile": "plugins/index.js",
+  "screenshotsFolder": "screenshots",
+  "supportFile": "support/index.js",
+  "videosFolder": "videos",
+  "video": false,
+  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+  "projectId": "ed7hed"
+}

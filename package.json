@@ -27,8 +27,6 @@
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "cross-env": "^5.2.1",
-    "cypress": "^3.7.0",
-    "cypress-plugin-snapshots": "^1.2.9",
     "eslint": "^6.2.2",
     "eslint-plugin-cypress": "^2.6.1",
     "eslint-plugin-import": "^2.18.2",
@@ -39,7 +37,6 @@
     "lerna": "^3.15.0",
     "lint-staged": "^8.1.4",
     "prettier": "^1.16.4",
-    "start-server-and-test": "^1.10.2",
     "typescript": "^3.6.3"
   },
   "prettier": {}
