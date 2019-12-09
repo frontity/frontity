@@ -9,7 +9,8 @@
     "build": "frontity build",
     "build:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity build",
     "serve": "frontity serve",
-    "serve:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity serve"
+    "serve:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity serve",
+    "now": "npx frontity build && npx now --token $NOW_TOKEN"
   },
   "license": "Apache-2.0",
   "dependencies": {
