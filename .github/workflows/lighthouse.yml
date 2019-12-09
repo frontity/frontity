@@ -45,3 +45,4 @@ jobs:
             https://mars-theme-frontity.worona.now.sh/2016/the-beauties-of-gullfoss/
         env:
           LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.sha }}
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
