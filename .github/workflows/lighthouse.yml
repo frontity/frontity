@@ -39,10 +39,7 @@ jobs:
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v2
         with:
-          runs: 3
           temporaryPublicStorage: true
           urls: |
             https://mars-theme-frontity.worona.now.sh/
             https://mars-theme-frontity.worona.now.sh/2016/the-beauties-of-gullfoss/
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
