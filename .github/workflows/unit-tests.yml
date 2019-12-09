@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   unit-tests:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -12,28 +11,28 @@ jobs:
         node-version: [8.x, 10.x, 12.x]
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-      
-    - name: Setup Node ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v1
 
-    - name: Setup npm cache
-      uses: actions/cache@v1
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm ci
-      env:
-        CI: true
+      - name: Setup npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Run unit tests
-      run: npm run test:clear
-      env:
-        CI: true
+      - name: Install dependencies
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Run unit tests
+        run: npm run test:ci
+        env:
+          CI: true
