@@ -2,7 +2,7 @@
   "name": "e2e",
   "private": false,
   "scripts": {
-    "e2e:run": "start-server-and-test start:prod:module http://localhost:3001 cy:run",
+    "e2e:run": "start-server-and-test start:prod http://localhost:3001 cy:run",
     "e2e:open": "start-server-and-test start:dev http://localhost:3001 cy:open",
     "cy:open": "cypress open --env HEADLESS=false",
     "cy:run": "cypress run --env HEADLESS=true",
