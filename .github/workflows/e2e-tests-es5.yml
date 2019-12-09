@@ -33,7 +33,7 @@ jobs:
           record: true
           parallel: true
           group: "frontity/frontity:es5"
-          start: npm run start:prod:es5
+          start: npm run e2e:prod:es5
           wait-on: "http://localhost:3001"
           wait-on-timeout: 180
           env: HEADLESS=true
