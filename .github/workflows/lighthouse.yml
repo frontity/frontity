@@ -28,3 +28,5 @@ jobs:
 
       - name: Deploy to now
         run: npx lerna run now --parallel
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
