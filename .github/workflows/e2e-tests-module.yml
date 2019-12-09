@@ -31,6 +31,7 @@ jobs:
           wait-on-timeout: 180
           env: HEADLESS=true
           working-directory: e2e
+          config: videos=true,screenshotOnRunFailure=true
 
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v1

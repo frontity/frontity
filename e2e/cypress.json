@@ -5,7 +5,9 @@
   "screenshotsFolder": "screenshots",
   "supportFile": "support/index.js",
   "videosFolder": "videos",
-  "video": true,
+  "video": false,
+  "screenshotOnRunFailure": false,
+  "trashAssetsBeforeRuns": false,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "projectId": "ed7hed"
 }
