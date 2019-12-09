@@ -39,6 +39,7 @@ jobs:
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v2
         with:
+          runs: 3
           temporaryPublicStorage: true
           urls: |
             https://mars-theme-frontity.worona.now.sh/
