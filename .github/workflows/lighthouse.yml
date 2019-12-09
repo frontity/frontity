@@ -36,6 +36,9 @@ jobs:
     needs: deploy
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v2
         with:
