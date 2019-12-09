@@ -5,7 +5,7 @@
   "screenshotsFolder": "screenshots",
   "supportFile": "support/index.js",
   "videosFolder": "videos",
-  "video": false,
+  "video": true,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "projectId": "ed7hed"
 }
