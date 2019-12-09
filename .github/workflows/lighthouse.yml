@@ -41,6 +41,7 @@ jobs:
         with:
           runs: 3
           temporaryPublicStorage: true
+          configPath: ./.github/workflows/lighthouserc.json
           urls: |
             https://mars-theme-frontity.worona.now.sh/
             https://mars-theme-frontity.worona.now.sh/2016/the-beauties-of-gullfoss/
