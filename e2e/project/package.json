@@ -1,5 +1,5 @@
 {
-  "name": "project-for-e2e-tests",
+  "name": "e2e-project",
   "version": "1.0.4",
   "private": true,
   "description": "A project to start sites for e2e testing",
@@ -15,10 +15,11 @@
     "@frontity/core": "^1.4.0",
     "@frontity/tiny-router": "^1.0.17",
     "babel-plugin-frontity": "^1.0.1",
-    "emotion": "^1.0.1",
-    "fonts": "^1.0.1",
-    "frontity": "^1.4.2",
-    "head": "^1.0.4",
-    "image": "^1.0.3"
+    "e2e-emotion": "^1.0.1",
+    "e2e-fonts": "^1.0.1",
+    "e2e-head": "^1.0.4",
+    "e2e-image": "^1.0.3",
+    "e2e-loadable": "^1.0.0",
+    "frontity": "^1.4.2"
   }
 }

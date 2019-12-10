@@ -3,11 +3,11 @@ import { Settings } from "frontity/types";
 const settings: Settings = [
   {
     name: "head",
-    packages: ["head"]
+    packages: ["e2e-head"]
   },
   {
     name: "image",
-    packages: ["image"]
+    packages: ["e2e-image"]
   },
   {
     name: "fonts",
@@ -16,7 +16,7 @@ const settings: Settings = [
         name: "@frontity/tiny-router",
         state: { router: { autoFetch: false } }
       },
-      "fonts"
+      "e2e-fonts"
     ]
   },
   {
@@ -26,8 +26,12 @@ const settings: Settings = [
         name: "@frontity/tiny-router",
         state: { router: { autoFetch: false } }
       },
-      "emotion"
+      "e2e-emotion"
     ]
+  },
+  {
+    name: "loadable",
+    packages: ["e2e-loadable"]
   }
 ];
 

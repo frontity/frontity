@@ -4,7 +4,7 @@ export interface Stats {
 
 export interface Extractor {
   publicPath: string;
-  getMainAssets: (type: string) => { chunk: string }[];
+  getMainAssets: (type: string) => { filename: string }[];
   getRequiredChunksScriptTag: (obj: {}) => string;
 }
 
@@ -42,17 +42,17 @@ export const getBothScriptTags = ({
 }): string => {
   const publicPath = extractor.publicPath;
 
-  const assets = extractor
+  const chunkNames = extractor
     .getMainAssets("script")
-    .map(chunk => chunk.chunk) as string[];
+    .map(chunk => /(.+)\.module/.exec(chunk.filename)[1]) as string[];
 
-  const moduleTags = assets.map(
+  const moduleTags = chunkNames.map(
     chunk =>
       `<script async type="module" data-chunk="${chunk}" src="${publicPath}${
         moduleStats.assetsByChunkName[chunk]
       }"></script>`
   );
-  const es5Tags = assets.map(
+  const es5Tags = chunkNames.map(
     chunk =>
       `<script async nomodule data-chunk="${chunk}" src="${publicPath}${
         es5Stats.assetsByChunkName[chunk]

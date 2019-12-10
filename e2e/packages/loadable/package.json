@@ -1,0 +1,9 @@
+{
+  "name": "e2e-loadable",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do e2e testing of Frontity's loadable utility",
+  "dependencies": {
+    "frontity": "^1.4.2"
+  }
+}

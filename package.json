@@ -15,11 +15,19 @@
     "release": "lerna publish --yes",
     "reinstall": "lerna clean --yes && npm run prepare"
   },
+  "workspaces": [
+    "packages/*",
+    "examples/*",
+    "e2e/project",
+    "e2e/packages/*"
+  ],
   "devDependencies": {
+    "@changesets/changelog-github": "^0.1.1",
+    "@changesets/cli": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "cross-env": "^5.2.1",
-    "cypress": "^3.4.1",
+    "cypress": "^3.7.0",
     "cypress-plugin-snapshots": "^1.2.9",
     "eslint": "^6.2.2",
     "eslint-plugin-cypress": "^2.6.1",

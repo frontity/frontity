@@ -19,14 +19,19 @@
 
 ---
 
-> **Frontity v1 is now available**. Frontity allows you to create a WordPress theme based on React JS. Please **test it out** and let us know how it goes! Your feedback is extremely valuable in this early phase. Bug reports will be also highly appreciated.
+> Frontity is a free and open source framework to develop WordPress themes based on ReactJS. To learn more about the framework, its basic concepts and how they work together, check out our docs:
+>
+> - [About Frontity framework](https://docs.frontity.org/#about-frontity-framework)
+> - [Learning Frontity guide](https://docs.frontity.org/learning-frontity)
+>
+> If you can't wait to see what Frontity can do, head over to our [Quick Start Guide](https://docs.frontity.org/getting-started/quick-start-guide) to get up and running! Once you try it out, please [let us know](https://community.frontity.org/) how it goes! We'd love to learn more about your experience and how Frontity can help your project(s). Bug reports will be also highly appreciated.
+>
+> Frontity will continue to be improved during the next months, and new features will be added progressively.
+>
+> Feel free to [subscribe to our newsletter](https://frontity.org/#newsletter) to **get notified of the latest framework updates and news**.
 >
 > <div align="center"><a href="https://docs.frontity.org/getting-started?utm_source=github-readme&utm_medium=get-started-link"><strong>GET STARTED!</strong></a></div>
 > <br />
->
-> Frontity will continue to be tested and improved during the next months, and new features will be added progressively.
->
-> #### Do you want to receive the latest framework updates and news? [Subscribe to our newsletter](https://frontity.org/#newsletter)!
 
 ---
 
@@ -99,7 +104,7 @@ React is a JavaScript library. In order to generate HTML for the visitors or Goo
 
 **Frontity** is prepared to be hosted either in a regular Node.js server or in **serverless** services like [AWS Lambda](https://aws.amazon.com/lambda), [Now](https://zeit.co/now), [Netlify](https://www.netlify.com/), [Google Functions](https://cloud.google.com/functions/) and so on. That makes it super cheap and infinitely scalable.
 
-Oh, and by the way, **Frontity is extensible**. Right now we have extensions like _Disqus comments, OneSignal notifications, Adsense, Doubleclick, SmartAds, Google Analytics, Google Tag Manager, Custom CSS or Custom HTML_. This means, Frontity Themes won't have to reinvent the wheel and include the same functionalities over and over.
+Oh, and by the way, **Frontity is extensible**. It allows you to easily add new features to your theme via extensions and NPM packages without having to create them from scratch. Right now, we are working on extensions like _Disqus comments, OneSignal notifications, Adsense, Doubleclick, SmartAds, Google Analytics, Google Tag Manager, Custom CSS or Custom HTML_. This means, Frontity Themes won't have to reinvent the wheel and include the same functionalities over and over.
 
 ---
 
