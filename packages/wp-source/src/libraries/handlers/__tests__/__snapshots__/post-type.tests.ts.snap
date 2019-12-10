@@ -1076,7 +1076,7 @@ Object {
           1,
         ],
         "type": Array [
-          undefined,
+          "post",
         ],
         "wp:featuredmedia": Array [
           1,

@@ -8,11 +8,16 @@ export const postType = new schema.Entity(
   "postType",
   {},
   {
+    idAttribute: "slug",
     processStrategy(entity) {
       const result = { ...entity };
-      result.taxonomies = result.taxonomies.map(slug =>
-        slug === "post_tag" ? "tag" : slug
-      );
+
+      // Change "post_tag" to "tag"
+      if (result.taxonomies)
+        result.taxonomies = result.taxonomies.map(slug =>
+          slug === "post_tag" ? "tag" : slug
+        );
+
       return result;
     }
   }

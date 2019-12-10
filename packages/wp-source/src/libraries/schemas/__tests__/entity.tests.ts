@@ -13,6 +13,8 @@ import media193 from "./mocks/media-193.json";
 import page184 from "./mocks/page-with-subpage.json";
 
 import latestMovie from "./mocks/latest-movie.json";
+import postType from "./mocks/post-type.json";
+
 import { entity } from "../";
 
 test("Convert post using entity", () => {
@@ -54,4 +56,9 @@ test("Convert a page using entity and ignore subpages", () => {
 test("Convert a latest taxonomy using entity", () => {
   const { entities } = normalize(latestMovie, entity);
   expect(entities.taxonomyEntity.movie).toMatchSnapshot();
+});
+
+test("Convert a post type using entity", () => {
+  const { entities } = normalize(postType, entity);
+  expect(entities.postType.post).toMatchSnapshot();
 });
