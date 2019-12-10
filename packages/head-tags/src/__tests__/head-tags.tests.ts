@@ -3,7 +3,7 @@ import { createStore, InitializedStore } from "@frontity/connect";
 import wpSource from "@frontity/wp-source/src";
 import HeadTagsPackage, { PostTypeWithHeadTags } from "../../types";
 import headTagsPackage from "..";
-import { getCurrentHeadTags } from "../components";
+import { getCurrentHeadTags } from "../utils";
 
 // Import all mocks.
 import postType from "./mocks/post-type.json";

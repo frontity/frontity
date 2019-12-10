@@ -1,12 +1,10 @@
 import { URL } from "frontity";
-import { HeadTags, State } from "../../types";
-
-type GetUrlPathname = (url: URL, apiUrl: URL, isWpCom: boolean) => string;
-
-type UseFrontityLinks = (args: {
-  state: State;
-  headTags: HeadTags;
-}) => HeadTags;
+import {
+  HeadTags,
+  State,
+  PostTypeWithHeadTags,
+  TaxonomyWithHeadTags
+} from "../../types";
 
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
@@ -14,7 +12,7 @@ const possibleLink = ["href", "content"];
 // Test if a path is not from a blog link.
 const isInvalid = /^\/wp-(json|admin|content)/;
 
-export const getUrlPathname: GetUrlPathname = (url, apiUrl, isWpCom) => {
+export const getUrlPathname = (url: URL, apiUrl: URL, isWpCom: boolean) => {
   // Get API subdirectory.
   const apiSubdir = isWpCom
     ? ""
@@ -32,7 +30,13 @@ export const getUrlPathname: GetUrlPathname = (url, apiUrl, isWpCom) => {
   return pathname === "/" ? "" : pathname;
 };
 
-export const useFrontityLinks: UseFrontityLinks = ({ state, headTags }) => {
+export const useFrontityLinks = ({
+  state,
+  headTags
+}: {
+  state: State;
+  headTags: HeadTags;
+}) => {
   // The site URL.
   const frontityUrl = state.frontity.url.replace(/\/?$/, "");
 
@@ -69,4 +73,43 @@ export const useFrontityLinks: UseFrontityLinks = ({ state, headTags }) => {
     // Replace attributes.
     return { tag, attributes: newAttributes, content };
   });
+};
+
+// Get the entity related to the current link.
+export const getCurrentEntity = ({ state }: { state: State }) => {
+  const data = state.source.get(state.router.link);
+
+  if (data.isPostType) {
+    const { type, id } = data;
+    return state.source[type][id] as PostTypeWithHeadTags;
+  }
+
+  if (data.isTaxonomy) {
+    const { taxonomy, id } = data;
+    return state.source[taxonomy][id] as TaxonomyWithHeadTags;
+  }
+
+  if (data.isAuthor) {
+    const { id } = data;
+    return state.source.author[id];
+  }
+
+  if (data.isPostTypeArchive) {
+    const { type } = data;
+    return state.source.type[type];
+  }
+
+  return null;
+};
+
+/**
+ * Get the head tags stored in the current entity,
+ * or an empty array if there is no entity or head tags.
+ */
+export const getCurrentHeadTags = ({ state }: { state: State }) => {
+  const entity = getCurrentEntity({ state });
+  const headTags = (entity && entity.head_tags) || [];
+
+  // Changes those links that points to WordPress blog pages to Frontity links
+  return useFrontityLinks({ state, headTags });
 };
