@@ -11,24 +11,24 @@ import React from "react";
 import { render, Box } from "ink";
 import TextInput from "ink-text-input";
 
+export const Create: React.FC<{ initialName?: string }> = ({ initialName }) => {
+  const [name, setName] = React.useState(initialName || "");
+  return (
+    <>
+      <Box>Name of the app: {name}</Box>
+      <Box>
+        <Box marginRight={1}>Enter your query:</Box>
+        <TextInput value={name} onChange={setName} />
+      </Box>
+    </>
+  );
+};
+
 export default (
-  initialName: string,
+  name: string,
   { typescript, useCwd }: { typescript: boolean; useCwd: boolean }
 ) => {
-  const Create = () => {
-    const [name, setName] = React.useState(initialName);
-    return (
-      <>
-        <Box>Name of the app: {name}</Box>
-        <Box>
-          <Box marginRight={1}>Enter your query:</Box>
-          <TextInput value={name} onChange={setName} />
-        </Box>
-      </>
-    );
-  };
-
-  render(<Create />);
+  render(<Create initialName={name} />);
 };
 
 const oldCreate = async (name: string, { typescript, useCwd }) => {
