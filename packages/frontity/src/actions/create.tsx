@@ -9,12 +9,24 @@ import { EventEmitter } from "events";
 import { Options } from "../functions/create/types";
 import React from "react";
 import { render, Box } from "ink";
+import TextInput from "ink-text-input";
 
 export default (
-  name: string,
+  initialName: string,
   { typescript, useCwd }: { typescript: boolean; useCwd: boolean }
 ) => {
-  const Create = () => <Box>Creating Frontity Project in folder {name}</Box>;
+  const Create = () => {
+    const [name, setName] = React.useState(initialName);
+    return (
+      <>
+        <Box>Name of the app: {name}</Box>
+        <Box>
+          <Box marginRight={1}>Enter your query:</Box>
+          <TextInput value={name} onChange={setName} />
+        </Box>
+      </>
+    );
+  };
 
   render(<Create />);
 };
