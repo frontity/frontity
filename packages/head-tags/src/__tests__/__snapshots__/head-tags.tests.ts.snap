@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeadTags component works with post archive 1`] = `
+Array [
+  Object {
+    "content": "frontity - Just another WordPress site",
+    "tag": "title",
+  },
+  Object {
+    "attributes": Object {
+      "content": "Just another WordPress site",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/page/2/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "content": "en_US",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "website",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "frontity - Just another WordPress site",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "Just another WordPress site",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "https://mars.frontity.org",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "frontity",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "summary_large_image",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "Just another WordPress site",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "frontity - Just another WordPress site",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {},
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"frontity\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/#webpage\\",\\"url\\":\\"https://test.frontity.io/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"frontity - Just another WordPress site\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"description\\":\\"Just another WordPress site\\"}]}",
+    "tag": "script",
+  },
+  Object {
+    "attributes": Object {
+      "href": "//s.w.org",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/feed/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/comments/feed/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/xmlrpc.php?rsd",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "content": "WordPress 5.3",
+    },
+    "tag": "meta",
+  },
+]
+`;

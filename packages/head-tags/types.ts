@@ -10,11 +10,12 @@ import {
 } from "@frontity/source";
 import { Merge } from "@frontity/source/src/utils";
 
-export type HeadTags = {
+export type HeadTag = {
   tag: "meta" | "link" | "title" | "style" | "script" | "noscript" | "base";
   attributes?: Record<string, string>;
   content?: string;
-}[];
+};
+export type HeadTags = HeadTag[];
 
 export type WithHeadTags = {
   head_tags?: HeadTags;

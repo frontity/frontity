@@ -28,14 +28,14 @@
       "tag": "link",
       "attributes": {
         "rel": "canonical",
-        "href": "http://test.frontity.io/"
+        "href": "https://test.frontity.io/"
       }
     },
     {
       "tag": "link",
       "attributes": {
         "rel": "next",
-        "href": "http://test.frontity.io/page/2/"
+        "href": "https://test.frontity.io/page/2/"
       }
     },
     {
@@ -70,7 +70,7 @@
       "tag": "meta",
       "attributes": {
         "property": "og:url",
-        "content": "http://test.frontity.io/"
+        "content": "https://test.frontity.io/"
       }
     },
     {
@@ -107,7 +107,7 @@
         "type": "application/ld+json",
         "class": "yoast-schema-graph yoast-schema-graph--main"
       },
-      "content": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebSite\",\"@id\":\"http://test.frontity.io/#website\",\"url\":\"http://test.frontity.io/\",\"name\":\"frontity\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"http://test.frontity.io/?s={search_term_string}\",\"query-input\":\"required name=search_term_string\"}},{\"@type\":\"CollectionPage\",\"@id\":\"http://test.frontity.io/#webpage\",\"url\":\"http://test.frontity.io/\",\"inLanguage\":\"en-US\",\"name\":\"frontity - Just another WordPress site\",\"isPartOf\":{\"@id\":\"http://test.frontity.io/#website\"},\"description\":\"Just another WordPress site\"}]}"
+      "content": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebSite\",\"@id\":\"https://test.frontity.io/#website\",\"url\":\"https://test.frontity.io/\",\"name\":\"frontity\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://test.frontity.io/?s={search_term_string}\",\"query-input\":\"required name=search_term_string\"}},{\"@type\":\"CollectionPage\",\"@id\":\"https://test.frontity.io/#webpage\",\"url\":\"https://test.frontity.io/\",\"inLanguage\":\"en-US\",\"name\":\"frontity - Just another WordPress site\",\"isPartOf\":{\"@id\":\"https://test.frontity.io/#website\"},\"description\":\"Just another WordPress site\"}]}"
     },
     {
       "tag": "link",
@@ -122,7 +122,7 @@
         "rel": "alternate",
         "type": "application/rss+xml",
         "title": "frontity » Feed",
-        "href": "http://test.frontity.io/feed/"
+        "href": "https://test.frontity.io/feed/"
       }
     },
     {
@@ -131,14 +131,14 @@
         "rel": "alternate",
         "type": "application/rss+xml",
         "title": "frontity » Comments Feed",
-        "href": "http://test.frontity.io/comments/feed/"
+        "href": "https://test.frontity.io/comments/feed/"
       }
     },
     {
       "tag": "link",
       "attributes": {
         "rel": "https://api.w.org/",
-        "href": "http://test.frontity.io/wp-json/"
+        "href": "https://test.frontity.io/wp-json/"
       }
     },
     {
@@ -147,7 +147,7 @@
         "rel": "EditURI",
         "type": "application/rsd+xml",
         "title": "RSD",
-        "href": "http://test.frontity.io/xmlrpc.php?rsd"
+        "href": "https://test.frontity.io/xmlrpc.php?rsd"
       }
     },
     {
@@ -155,7 +155,7 @@
       "attributes": {
         "rel": "wlwmanifest",
         "type": "application/wlwmanifest+xml",
-        "href": "http://test.frontity.io/wp-includes/wlwmanifest.xml"
+        "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml"
       }
     },
     {
@@ -169,12 +169,12 @@
   "_links": {
     "collection": [
       {
-        "href": "http://test.frontity.io/wp-json/wp/v2/types"
+        "href": "https://test.frontity.io/wp-json/wp/v2/types"
       }
     ],
     "wp:items": [
       {
-        "href": "http://test.frontity.io/wp-json/wp/v2/posts"
+        "href": "https://test.frontity.io/wp-json/wp/v2/posts"
       }
     ],
     "curies": [
