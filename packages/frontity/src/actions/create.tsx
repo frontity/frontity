@@ -7,8 +7,19 @@ import subscribe from "../functions/subscribe";
 import { errorLogger } from "../utils";
 import { EventEmitter } from "events";
 import { Options } from "../functions/create/types";
+import React from "react";
+import { render, Box } from "ink";
 
-export default async (name: string, { typescript, useCwd }) => {
+export default (
+  name: string,
+  { typescript, useCwd }: { typescript: boolean; useCwd: boolean }
+) => {
+  const Create = () => <Box>Creating Frontity Project in folder {name}</Box>;
+
+  render(<Create />);
+};
+
+const oldCreate = async (name: string, { typescript, useCwd }) => {
   const options: Options = {};
 
   if (!name) {
