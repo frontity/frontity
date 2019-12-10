@@ -7,9 +7,16 @@ describe("Create", () => {
     const { lastFrame } = render(<Create initialName="test" />);
     expect(lastFrame()).toContain("Name of the app: test");
   });
+
   test("should allow to chnage the name of the app", () => {
     const { lastFrame, stdin } = render(<Create initialName="test" />);
     stdin.write("-app");
     expect(lastFrame()).toContain("Name of the app: test-app");
+  });
+
+  test("should change when name is submitted", () => {
+    const { lastFrame, stdin } = render(<Create initialName="test" />);
+    stdin.write("\r");
+    expect(lastFrame()).toContain("Submitted!");
   });
 });

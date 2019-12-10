@@ -13,13 +13,19 @@ import TextInput from "ink-text-input";
 
 export const Create: React.FC<{ initialName?: string }> = ({ initialName }) => {
   const [name, setName] = React.useState(initialName || "");
+  const [submit, setSubmit] = React.useState(false);
   return (
     <>
       <Box>Name of the app: {name}</Box>
       <Box>
         <Box marginRight={1}>Enter your query:</Box>
-        <TextInput value={name} onChange={setName} />
+        <TextInput
+          value={name}
+          onChange={setName}
+          onSubmit={() => setSubmit(true)}
+        />
       </Box>
+      {submit && <Box>Submitted!</Box>}
     </>
   );
 };
