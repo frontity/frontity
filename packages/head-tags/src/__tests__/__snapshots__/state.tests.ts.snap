@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current Head Tags - Post Entity doesn't change links that don't point to WordPress pages 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "content": "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+      "property": "og:image",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+      "name": "twitter:image",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "href": "//s.w.org",
+      "rel": "dns-prefetch",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/feed/",
+      "rel": "alternate",
+      "title": "frontity » Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/comments/feed/",
+      "rel": "alternate",
+      "title": "frontity » Comments Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/post-1/feed/",
+      "rel": "alternate",
+      "title": "frontity » Post 1 Comments Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/xmlrpc.php?rsd",
+      "rel": "EditURI",
+      "title": "RSD",
+      "type": "application/rsd+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+      "rel": "wlwmanifest",
+      "type": "application/wlwmanifest+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.io%2Fpost-1%2F",
+      "rel": "alternate",
+      "type": "application/json+oembed",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.io%2Fpost-1%2F&format=xml",
+      "rel": "alternate",
+      "type": "text/xml+oembed",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/xmlrpc.php",
+      "rel": "pingback",
+    },
+    "tag": "link",
+  },
+]
+`;
+
+exports[`Current Head Tags - Post Entity returns an empty array if \`head_tags\` is undefined 1`] = `Array []`;
+
+exports[`Current Head Tags - Post Entity returns elements without attributes (title) 1`] = `
+Array [
+  Object {
+    "content": "Post 1 - Frontity",
+    "tag": "title",
+  },
+]
+`;
+
+exports[`Current Head Tags - Post Entity returns elements without content (meta tags) 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      "name": "robots",
+    },
+    "tag": "meta",
+  },
+]
+`;
+
+exports[`Current Head Tags - Post Entity transform links inside ld+json data 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "class": "yoast-schema-graph yoast-schema-graph--main",
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://mars.frontity.org?s={search_term_string}\\"}},{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://mars.frontity.org/post-1/#primaryimage\\",\\"url\\":\\"https://test.frontity.io/wp-content/uploads/2019/12/img.jpg\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`Current Head Tags - Post Entity transforms links that point to WordPress pages 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "content": "https://mars.frontity.org/post-1/",
+      "property": "og:url",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org?p=1",
+      "rel": "shortlink",
+    },
+    "tag": "link",
+  },
+]
+`;
