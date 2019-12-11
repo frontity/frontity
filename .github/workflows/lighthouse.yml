@@ -26,8 +26,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check if it should deploy to production 
+        id: deploy
+        if: github.ref == 'refs/heads/master'
+        run: echo "::set-output name=args::--prod"
+        
       - name: Deploy to now
-        run: npx lerna run now --parallel
+        run: npx lerna run now --parallel -- -- ${{ steps.deploy.outputs.args }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
 
