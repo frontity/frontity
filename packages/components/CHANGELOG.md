@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.15](https://github.com/frontity/frontity/compare/@frontity/components@1.1.14...@frontity/components@1.1.15) (2019-12-10)
+
+**Note:** Version bump only for package @frontity/components
+
+
+
+
+
 ## [1.1.14](https://github.com/frontity/frontity/compare/@frontity/components@1.1.13...@frontity/components@1.1.14) (2019-11-04)
 
 **Note:** Version bump only for package @frontity/components
