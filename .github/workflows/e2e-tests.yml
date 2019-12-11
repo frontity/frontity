@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: false
       matrix:
         ci_node_total: [3]
         ci_node_index: ["all", "module", "es5"]
