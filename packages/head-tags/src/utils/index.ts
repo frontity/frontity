@@ -10,6 +10,16 @@ import {
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
 
+const deepTransform = (obj: object, func: Function, ...args: object[]) => {
+  for (const key in obj) {
+    if (typeof obj[key] === "string") {
+      obj[key] = func(obj[key], ...args);
+    } else if (typeof obj[key] === "object") {
+      deepTransform(obj[key], func, ...args);
+    }
+  }
+};
+
 const getWpUrl = (api: string, isWpCom: boolean): URL => {
   const apiUrl = new URL(api);
   if (isWpCom) {
@@ -59,8 +69,27 @@ export const useFrontityLinks = ({
     // Init processed head tag.
     const processed: HeadTag = { tag };
 
-    // Do not change content.
-    if (content) processed.content = content;
+    if (content) {
+      // Transform URLs inside JSON content.
+      if (
+        attributes &&
+        attributes.type &&
+        attributes.type.endsWith("ld+json")
+      ) {
+        const json = JSON.parse(content);
+        // iterate over json props.
+        deepTransform(json, (value: string) => {
+          if (isWpPageLink(value, wpUrl))
+            return getFrontityUrl(value, wpUrl, frontityUrl);
+          return value;
+        });
+        // Stringify json again.
+        processed.content = JSON.stringify(json);
+      } else {
+        // Do not change content.
+        processed.content = content;
+      }
+    }
 
     // Process Attributes.
     if (attributes) {

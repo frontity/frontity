@@ -102,7 +102,7 @@ Array [
       "class": "yoast-schema-graph yoast-schema-graph--main",
       "type": "application/ld+json",
     },
-    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"frontity\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/#webpage\\",\\"url\\":\\"https://test.frontity.io/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"frontity - Just another WordPress site\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"description\\":\\"Just another WordPress site\\"}]}",
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\",\\"name\\":\\"frontity\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://mars.frontity.org?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://mars.frontity.org#webpage\\",\\"url\\":\\"https://mars.frontity.org\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"frontity - Just another WordPress site\\",\\"isPartOf\\":{\\"@id\\":\\"https://mars.frontity.org#website\\"},\\"description\\":\\"Just another WordPress site\\"}]}",
     "tag": "script",
   },
   Object {
