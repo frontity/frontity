@@ -1,4 +1,4 @@
-import { Package } from "frontity/types";
+import { Package, Derived } from "frontity/types";
 import { InitializedStore } from "@frontity/connect";
 import Router from "@frontity/router";
 import WpSource from "@frontity/wp-source/types";
@@ -32,6 +32,9 @@ interface HeadTagsPackage extends Package {
     headTags: React.FC;
   };
   state: {
+    headTags: {
+      current: Derived<HeadTagsPackage, HeadTags>;
+    };
     frontity?: {
       url: string;
     };
