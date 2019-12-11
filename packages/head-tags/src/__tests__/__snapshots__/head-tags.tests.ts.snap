@@ -9,125 +9,155 @@ Array [
   Object {
     "attributes": Object {
       "content": "Just another WordPress site",
+      "name": "description",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      "name": "robots",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "href": "https://mars.frontity.org",
+      "rel": "canonical",
     },
     "tag": "link",
   },
   Object {
     "attributes": Object {
       "href": "https://mars.frontity.org/page/2/",
+      "rel": "next",
     },
     "tag": "link",
   },
   Object {
     "attributes": Object {
       "content": "en_US",
+      "property": "og:locale",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "website",
+      "property": "og:type",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "frontity - Just another WordPress site",
+      "property": "og:title",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "Just another WordPress site",
+      "property": "og:description",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "https://mars.frontity.org",
+      "property": "og:url",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "frontity",
+      "property": "og:site_name",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "summary_large_image",
+      "name": "twitter:card",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "Just another WordPress site",
+      "name": "twitter:description",
     },
     "tag": "meta",
   },
   Object {
     "attributes": Object {
       "content": "frontity - Just another WordPress site",
+      "name": "twitter:title",
     },
     "tag": "meta",
   },
   Object {
-    "attributes": Object {},
+    "attributes": Object {
+      "class": "yoast-schema-graph yoast-schema-graph--main",
+      "type": "application/ld+json",
+    },
     "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"frontity\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/#webpage\\",\\"url\\":\\"https://test.frontity.io/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"frontity - Just another WordPress site\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"description\\":\\"Just another WordPress site\\"}]}",
     "tag": "script",
   },
   Object {
     "attributes": Object {
       "href": "//s.w.org",
+      "rel": "dns-prefetch",
     },
     "tag": "link",
   },
   Object {
     "attributes": Object {
       "href": "https://test.frontity.io/feed/",
+      "rel": "alternate",
+      "title": "frontity » Feed",
+      "type": "application/rss+xml",
     },
     "tag": "link",
   },
   Object {
     "attributes": Object {
       "href": "https://test.frontity.io/comments/feed/",
+      "rel": "alternate",
+      "title": "frontity » Comments Feed",
+      "type": "application/rss+xml",
     },
     "tag": "link",
   },
   Object {
     "attributes": Object {
       "href": "https://test.frontity.io/wp-json/",
+      "rel": "https://api.w.org/",
     },
     "tag": "link",
   },
   Object {
     "attributes": Object {
       "href": "https://test.frontity.io/xmlrpc.php?rsd",
+      "rel": "EditURI",
+      "title": "RSD",
+      "type": "application/rsd+xml",
     },
     "tag": "link",
   },
   Object {
     "attributes": Object {
       "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+      "rel": "wlwmanifest",
+      "type": "application/wlwmanifest+xml",
     },
     "tag": "link",
   },
   Object {
     "attributes": Object {
       "content": "WordPress 5.3",
+      "name": "generator",
     },
     "tag": "meta",
   },

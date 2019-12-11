@@ -10,27 +10,34 @@ import {
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
 
-// Test if a path is not from a blog link.
-const isInvalid = /^\/(wp-(json|admin|content|includes))|feed|comments|xmlrpc/;
-
-export const getUrlPathname = (url: URL, apiUrl: URL, isWpCom: boolean) => {
-  if (url.origin !== apiUrl.origin) throw new Error("Invalid origin");
-
+const getWpUrl = (api: string, isWpCom: boolean): URL => {
+  const apiUrl = new URL(api);
+  if (isWpCom) {
+    const { pathname } = apiUrl;
+    return new URL(pathname.replace(/^\/wp\/v2\/sites\//, "https://"));
+  }
   // Get API subdirectory.
-  const apiSubdir = isWpCom
-    ? ""
-    : apiUrl.pathname.replace(/\/wp-json\/?$/, "/");
+  const apiSubdir = apiUrl.pathname.replace(/\/wp-json\/?$/, "/");
+  return new URL(apiSubdir, apiUrl);
+};
 
-  // Remove the API subdirectory.
-  let { pathname } = url;
-  if (apiSubdir && pathname.startsWith(apiSubdir))
-    pathname = pathname.replace(apiSubdir, "/");
+const isWpPageLink = (value: string, wpUrl: URL) => {
+  return (
+    value.startsWith(wpUrl.toString()) &&
+    !new RegExp(
+      `^${
+        wpUrl.pathname
+      }(wp-(json|admin|content|includes))|feed|comments|xmlrpc`
+    ).test(new URL(value).pathname)
+  );
+};
 
-  // Throw an error (to be captured by `useFrontityLinks`).
-  if (isInvalid.test(pathname)) throw new Error("Invalid pathname");
-
-  // Return the final path.
-  return pathname === "/" ? "" : pathname;
+const getFrontityUrl = (value: string, wpUrl: URL, frontityUrl: string) => {
+  const { pathname, search, hash } = new URL(value);
+  const finalPathname = pathname
+    .replace(new RegExp(`^${wpUrl.pathname}`), "/")
+    .replace(/^\/$/, "");
+  return `${frontityUrl.replace(/\/?$/, "")}${finalPathname}${search}${hash}`;
 };
 
 export const useFrontityLinks = ({
@@ -41,43 +48,35 @@ export const useFrontityLinks = ({
   headTags: HeadTags;
 }) => {
   // The site URL.
-  const frontityUrl = state.frontity.url.replace(/\/?$/, "");
+  const frontityUrl = state.frontity.url;
 
-  // The API URL.
-  const apiUrl = new URL(state.source.api);
-  const { isWpCom } = state.source;
+  // The WP URL.
+  const { api, isWpCom } = state.source;
+  const wpUrl = getWpUrl(api, isWpCom);
 
   // For each head tag...
   return headTags.map(({ tag, attributes, content }) => {
+    // Init processed head tag.
     const processed: HeadTag = { tag };
 
-    // Add content if present.
+    // Do not change content.
     if (content) processed.content = content;
 
-    // Compute new attributes changing URLs.
+    // Process Attributes.
     if (attributes) {
-      processed.attributes = Object.entries(attributes).reduce(
-        (result, [key, value]) => {
-          if (possibleLink.includes(key)) {
-            try {
-              // Transform value into a URL (if possible).
-              const url = new URL(value);
-
-              // Get the path of this URL (THROWS AN ERROR IF IS NOT A VALID ONE).
-              const pathname = getUrlPathname(url, apiUrl, isWpCom);
-
-              // Set Frontity URL.
-              const { search, hash } = url;
-              result[key] = `${frontityUrl}${pathname}${search}${hash}`;
-            } catch (e) {
-              // Don't change the value.
-              result[key] = value;
-            }
+      processed.attributes = Object.entries(attributes)
+        .map(([key, value]) => {
+          // Change value if it's a WP blog link.
+          if (possibleLink.includes(key) && isWpPageLink(value, wpUrl)) {
+            value = getFrontityUrl(value, wpUrl, frontityUrl);
           }
+          // Return the entry.
+          return [key, value];
+        })
+        .reduce((result, [key, value]) => {
+          result[key] = value;
           return result;
-        },
-        {}
-      );
+        }, {});
     }
 
     // Return processed head tag.
