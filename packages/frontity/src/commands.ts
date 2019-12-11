@@ -62,7 +62,6 @@ program
 program
   .command("create-package [name]")
   .option("-n, --namespace <value>", "Sets the namespace for this package")
-  .option("-t, --typescript", "Adds support for TypeScript")
   .description("Creates a new Frontity package in a project.")
   .action(createPackage);
 

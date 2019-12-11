@@ -10,16 +10,6 @@ import {
   isDirNotEmpty
 } from "./steps";
 
-//  Steps:
-//    1.  create /packages/[name]/src folder
-//    2.  add /packages/[name]/package.json file using template
-//    3.  if [--typescript]
-//    3.a.1  add /packages/[name]/src/index.ts file using template
-//    3.a.2  add /packages/[name]/types.ts file using template
-//    3.  else
-//    3.b    add /packages/[name]/src/index.js file using template
-//    4.  install package
-
 export default async (options?: Options, emitter?: EventEmitter) => {
   // This functions will emit an event if an emitter is passed in options.
   const emit = (message: string, step?: Promise<void>) => {
@@ -36,9 +26,13 @@ export default async (options?: Options, emitter?: EventEmitter) => {
   try {
     // 1. Make sure ./packages/[name] folder is empty.
     step = isDirNotEmpty(options);
-    emit(`Checking if ${chalk.yellow(options.packagePath)} is not empty.`, step);
+    emit(
+      `Checking if ${chalk.yellow(options.packagePath)} is not empty.`,
+      step
+    );
     const dirNotEmpty = await step;
-    if (dirNotEmpty) throw new Error(`Folder "${options.packagePath}" must be empty.`);
+    if (dirNotEmpty)
+      throw new Error(`Folder "${options.packagePath}" must be empty.`);
 
     // 2. Create ./packages/[name] folder.
     step = ensurePackageDir(options);
