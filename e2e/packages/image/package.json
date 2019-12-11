@@ -1,10 +1,10 @@
 {
   "name": "e2e-image",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "description": "Package to do e2e testing of Frontity's Image component",
   "dependencies": {
-    "@frontity/components": "^1.1.14",
-    "frontity": "1.4.2"
+    "@frontity/components": "^1.1.15",
+    "frontity": "^1.4.3"
   }
 }
