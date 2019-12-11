@@ -1,0 +1,60 @@
+name: lighthouse
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Setup npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy to now
+        run: npx lerna run now --parallel
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v2
+        with:
+          runs: 3
+          temporaryPublicStorage: true
+          configPath: ./.github/workflows/lighthouserc.json
+          budgetPath: ./.github/workflows/budget.json
+          urls: |
+            https://mars-theme-frontity.worona.now.sh/
+            https://mars-theme-frontity.worona.now.sh/2016/the-beauties-of-gullfoss/
+        env:
+          LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.sha }}
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Save results
+        uses: actions/upload-artifact@v1
+        with:
+          name: lighthouse-results
+          path: ".lighthouseci"

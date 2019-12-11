@@ -1,0 +1,53 @@
+name: e2e tests 
+
+on: [push]
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ci_node_total: [3]
+        ci_node_index: ["all", "module", "es5"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies (root)
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Run e2e tests 
+        uses: cypress-io/github-action@v1
+        with:
+          start: npm run e2e:prod:${{ matrix.ci_node_index }}
+          wait-on: "http://localhost:3001"
+          wait-on-timeout: 180
+          env: HEADLESS=true
+          working-directory: e2e
+          config: video=true,screenshotOnRunFailure=true
+
+      - name: Upload screenshots on failure
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: e2e/screenshots
+
+      - name: Upload videos
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: e2e/videos
