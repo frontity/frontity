@@ -27,7 +27,7 @@ beforeEach(() => {
   store = createStore(config);
 });
 
-describe("Current Head Tags - Post Entity", () => {
+describe("state.headTags.current (post entity)", () => {
   const setUpState = (state: State, headTags?: HeadTags) => {
     // Populate source state.
     const { post, data } = mockPostEntity(headTags);
@@ -334,7 +334,7 @@ describe("Current Head Tags - Post Entity", () => {
   });
 });
 
-describe("Current Head Tags - Post Type", () => {
+describe("state.headTags.current (post type)", () => {
   const setUpState = (state: State, headTags?: HeadTags) => {
     // Populate source state.
     const { type, data } = mockPostType(headTags);
