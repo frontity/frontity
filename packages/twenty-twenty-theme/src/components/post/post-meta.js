@@ -1,7 +1,7 @@
 import { styled, connect } from "frontity";
 import React from "react";
 import PostMetaItem from "./post-meta-item";
-import { UserIcon, CalendarIcon, ChatIcon } from "../icons";
+import { UserIcon, CalendarIcon } from "../icons";
 
 export const PostMetaWrapper = styled.div`
   margin-top: 2rem;
@@ -47,9 +47,9 @@ const PostMeta = ({ state, item }) => {
         <PostMetaItem icon={CalendarIcon} label="Post Date">
           {date.toDateString()}
         </PostMetaItem>
-        <PostMetaItem icon={ChatIcon} label="Post Comments">
+        {/* <PostMetaItem icon={ChatIcon} label="Post Comments">
           {2} Comments
-        </PostMetaItem>
+        </PostMetaItem> */}
       </PostMetaList>
     </PostMetaWrapper>
   );
