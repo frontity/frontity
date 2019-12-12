@@ -60,6 +60,8 @@ jobs:
           urls: |
             https://mars-theme-$COMMIT_SHA.now.sh/
             https://mars-theme-$COMMIT_SHA.now.sh/2016/the-beauties-of-gullfoss/
+            https://twentytwenty-theme-$COMMIT_SHA.now.sh/
+            https://twentytwenty-theme-$COMMIT_SHA.now.sh/2016/shinjuku-gyoen-national-garden/
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           COMMIT_SHA: ${{ github.sha }}
