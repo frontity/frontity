@@ -1,5 +1,6 @@
 {
-  "name": "mars-theme-frontity",
+  "name": "mars-theme",
+  "alias": "mars.frontity.org",
   "version": 2,
   "builds": [
     {

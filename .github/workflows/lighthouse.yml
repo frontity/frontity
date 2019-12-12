@@ -26,14 +26,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check if it should deploy to production 
+      - name: Check if it should deploy to production
         id: deploy
         if: github.ref == 'refs/heads/master'
         run: echo "::set-output name=args::--prod"
-        
+
       - name: Deploy to now
         run: npx lerna run now --parallel -- -- ${{ steps.deploy.outputs.args }}
         env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+
+      - name: Create alias for this deploy
+        run: npx lerna run now:alias --parallel
+        env:
+          COMMIT_SHA: ${{ github.sha }}
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
 
   lighthouse:
@@ -52,11 +58,11 @@ jobs:
           configPath: ./.github/workflows/lighthouserc.json
           budgetPath: ./.github/workflows/budget.json
           urls: |
-            https://mars-theme-frontity.worona.now.sh/
-            https://mars-theme-frontity.worona.now.sh/2016/the-beauties-of-gullfoss/
+            https://mars-theme-$COMMIT_SHA.now.sh/
+            https://mars-theme-$COMMIT_SHA.now.sh/2016/the-beauties-of-gullfoss/
         env:
-          LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.sha }}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          COMMIT_SHA: ${{ github.sha }}
 
       - name: Save results
         uses: actions/upload-artifact@v1
