@@ -136,6 +136,58 @@ Array [
 ]
 `;
 
+exports[`Current Head Tags - Post Entity transforms links appropiately when Frontity is in a subdirectory 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://frontity.org/mars/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/subdir/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://frontity.org/mars#website\\",\\"url\\":\\"https://frontity.org/mars\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`Current Head Tags - Post Entity transforms links appropiately when WP is in a subdirectory 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/subdir/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
 exports[`Current Head Tags - Post Entity transforms links that point to WordPress pages 1`] = `
 Array [
   Object {

@@ -4,7 +4,7 @@ import { createStore, InitializedStore } from "@frontity/connect";
 import wpSource from "@frontity/wp-source/src";
 import HeadTagsPackage, { State, HeadTags } from "../../types";
 import headTagsPackage from "..";
-import { mockPostEntity, mockPostType } from "./mocks/utils";
+import { mockPostEntity } from "./mocks/utils";
 
 let store: InitializedStore<HeadTagsPackage>;
 beforeEach(() => {
@@ -235,6 +235,95 @@ describe("Current Head Tags - Post Entity", () => {
     ];
     // Populate all state.
     setUpState(store.state, headTags);
+    // Test current head tags.
+    expect(store.state.headTags.current).toMatchSnapshot();
+  });
+
+  test("transforms links appropiately when WP is in a subdirectory", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://test.frontity.io/subdir/post-1/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "https://api.w.org/",
+          href: "https://test.frontity.io/subdir/wp-json/" // should not change
+        }
+      },
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              // All these links should change
+              "@type": "WebSite",
+              "@id": "https://test.frontity.io/subdir/#website",
+              url: "https://test.frontity.io/subdir/"
+            }
+          ]
+        })
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+
+    // Change API prop
+    store.state.source.api = "https://test.frontity.io/subdir/wp-json/";
+
+    // Test current head tags.
+    expect(store.state.headTags.current).toMatchSnapshot();
+  });
+
+  test("transforms links appropiately when Frontity is in a subdirectory", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://test.frontity.io/subdir/post-1/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "https://api.w.org/",
+          href: "https://test.frontity.io/subdir/wp-json/" // should not change
+        }
+      },
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              // All these links should change
+              "@type": "WebSite",
+              "@id": "https://test.frontity.io/subdir/#website",
+              url: "https://test.frontity.io/subdir/"
+            }
+          ]
+        })
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+
+    // Change API and Frontity URL prop
+    store.state.frontity.url = "https://frontity.org/mars/";
+    store.state.source.api = "https://test.frontity.io/subdir/wp-json/";
+
     // Test current head tags.
     expect(store.state.headTags.current).toMatchSnapshot();
   });
