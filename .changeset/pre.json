@@ -28,11 +28,7 @@
     "@frontity/types": "1.1.2",
     "@frontity/wp-source": "1.4.3",
     "@frontity/yoast": "1.1.6",
-    "example-twentytwenty-theme": "1.0.0",
-    "@frontity/twentytwenty-theme": "0.0.1"
+    "example-twentytwenty-theme": "1.0.0"
   },
-  "changesets": [
-    "chatty-spoons-brush",
-    "dry-dogs-prove"
-  ]
+  "changesets": ["chatty-spoons-brush", "dry-dogs-prove"]
 }
