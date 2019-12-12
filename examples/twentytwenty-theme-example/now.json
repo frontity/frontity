@@ -30,5 +30,10 @@
       "headers": { "cache-control": "s-maxage=1,stale-while-revalidate" },
       "dest": "/build/server.js"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
 }
