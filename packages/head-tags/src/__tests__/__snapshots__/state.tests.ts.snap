@@ -33,6 +33,8 @@ Array [
 ]
 `;
 
+exports[`state.headTags.current (no entity) returns an empty array if there is no entity for current link 1`] = `Array []`;
+
 exports[`state.headTags.current (post entity) doesn't change links that don't point to WordPress pages 1`] = `
 Array [
   Object {

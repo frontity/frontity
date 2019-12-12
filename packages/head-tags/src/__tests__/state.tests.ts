@@ -510,3 +510,31 @@ describe("state.headTags.current (author)", () => {
     expect(store.state.headTags.current).toMatchSnapshot();
   });
 });
+
+describe("state.headTags.current (no entity)", () => {
+  const setUpState = (state: State) => {
+    // Populate source state.
+    state.source.data = {
+      "/2019/12/": {
+        items: [],
+        isArchive: true,
+        isDate: true,
+        year: 2019,
+        month: 12,
+        day: undefined,
+        isFetching: false,
+        isReady: true
+      }
+    };
+
+    // Populate router state.
+    state.router.link = "/2019/12/";
+  };
+
+  test("returns an empty array if there is no entity for current link", () => {
+    // Populate all state.
+    setUpState(store.state);
+    // Test current head tags.
+    expect(store.state.headTags.current).toMatchSnapshot();
+  });
+});
