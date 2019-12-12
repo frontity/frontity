@@ -13,7 +13,10 @@
     },
     {
       "src": "build/server.js",
-      "use": "@now/node"
+      "use": "@now/node",
+      "config": {
+        "excludeFiles": ["package.json"]
+      }
     }
   ],
   "routes": [
