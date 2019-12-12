@@ -36,7 +36,7 @@ const marsTheme = {
       // State for the search modal on mobile
       isSearchModalOpen: false,
       // Whether to show all post content or only excerpt (summary) in archive view
-      showAllContentOnArchive: true,
+      showAllContentOnArchive: false,
       // Settings for the featured media (image or video)
       featuredMedia: {
         // Whether to show it on archive view

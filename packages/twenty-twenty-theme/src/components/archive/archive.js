@@ -13,7 +13,7 @@ const Archive = ({ state, showExcerpt, showMedia }) => {
 
   // Whether the show the excerpt instead of the full content
   // If passed as prop, we'll respect that. Else, we'll use the theme settings
-  const _showExcerpt = showExcerpt || state.theme.showAllContentOnArchive;
+  const _showExcerpt = showExcerpt || !state.theme.showAllContentOnArchive;
 
   useEffect(() => {
     Post.preload();
