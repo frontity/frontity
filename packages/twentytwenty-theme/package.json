@@ -1,24 +1,20 @@
 {
   "name": "@frontity/twentytwenty-theme",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "The WordPress Twenty Twenty starter theme for Frontity",
   "keywords": [
     "wordpress",
     "frontity",
-    "frontity-theme",
-    "frontity-amp"
+    "frontity-theme"
   ],
   "homepage": "https://frontity.org",
-  "license": "Apache-2.0",
+  "license": "GNU GPL 2",
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
   },
   "bugs": {
     "url": "https://community.frontity.org"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "dependencies": {
     "@frontity/components": "^1.1.14",

@@ -29,10 +29,11 @@
     "@frontity/wp-source": "1.4.3",
     "@frontity/yoast": "1.1.6",
     "example-twentytwenty-theme": "1.0.0",
-    "@frontity/twentytwenty-theme": "0.0.1"
+    "@frontity/twentytwenty-theme": "1.0.0-beta.0"
   },
   "changesets": [
     "chatty-spoons-brush",
+    "curvy-trees-smash",
     "dry-dogs-prove"
   ]
 }
