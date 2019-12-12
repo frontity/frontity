@@ -16,9 +16,10 @@ export default {
         theme: {
           menu: [
             ["Home", "/"],
-            ["About", "/about/"],
-            ["Contact", "/contact/"],
-            ["Let's Work Together", "/work"]
+            ["Nature", "/category/nature/"],
+            ["Travel", "/category/travel/"],
+            ["Japan", "/tag/japan/"],
+            ["About Us", "/about-us/"]
           ],
           colors: {
             primary: "#cd2653",
