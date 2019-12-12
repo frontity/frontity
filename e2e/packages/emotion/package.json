@@ -1,9 +1,9 @@
 {
-  "name": "emotion",
-  "version": "1.0.1",
+  "name": "e2e-emotion",
+  "version": "1.0.2",
   "private": true,
   "description": "Package to do e2e testing of Frontity's internal Emotion library",
   "dependencies": {
-    "frontity": "^1.4.2"
+    "frontity": "^1.4.3"
   }
 }

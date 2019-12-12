@@ -3,24 +3,25 @@
   "private": true,
   "scripts": {
     "test": "lerna run test:ci --stream",
-    "test:clear": "jest --clearCache && lerna run test:ci --stream",
-    "test:all": "cross-env NODE_ENV=test npm run test:clear && npm run e2e:run",
-    "e2e:run": "start-server-and-test cy:prod http://localhost:3001 cy:run",
-    "e2e:open": "start-server-and-test cy:dev http://localhost:3001 cy:open",
-    "cy:open": "cypress open --env HEADLESS=false",
-    "cy:dev": "cd e2e/project/ && npx frontity dev --port 3001 --dont-open-browser",
-    "cy:prod": "cd e2e/project/ && npx frontity build && npx frontity serve --port 3001",
-    "cy:run": "cypress run --env HEADLESS=true",
+    "test:ci": "jest --clearCache && lerna run test:ci --stream",
+    "e2e:prod:all": "cd e2e/project/ && npx frontity build && npx frontity serve --port 3001",
+    "e2e:prod:module": "cd e2e/project/ && npx frontity build --target module && npx frontity serve --port 3001",
+    "e2e:prod:es5": "cd e2e/project/ && npx frontity build --target es5 && npx frontity serve --port 3001",
     "prepare": "lerna bootstrap --hoist",
-    "release": "lerna publish --yes",
     "reinstall": "lerna clean --yes && npm run prepare"
   },
+  "workspaces": [
+    "packages/*",
+    "examples/*",
+    "e2e/project",
+    "e2e/packages/*"
+  ],
   "devDependencies": {
+    "@changesets/changelog-github": "^0.1.1",
+    "@changesets/cli": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "cross-env": "^5.2.1",
-    "cypress": "^3.7.0",
-    "cypress-plugin-snapshots": "^1.2.9",
     "eslint": "^6.2.2",
     "eslint-plugin-cypress": "^2.6.1",
     "eslint-plugin-import": "^2.18.2",
@@ -31,7 +32,6 @@
     "lerna": "^3.15.0",
     "lint-staged": "^8.1.4",
     "prettier": "^1.16.4",
-    "start-server-and-test": "^1.10.2",
     "typescript": "^3.6.3"
   },
   "prettier": {}

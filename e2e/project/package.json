@@ -1,6 +1,6 @@
 {
-  "name": "project-for-e2e-tests",
-  "version": "1.0.4",
+  "name": "e2e-project",
+  "version": "1.0.5",
   "private": true,
   "description": "A project to start sites for e2e testing",
   "scripts": {
@@ -12,14 +12,14 @@
     "serve:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity serve"
   },
   "dependencies": {
-    "@frontity/core": "^1.4.0",
-    "@frontity/tiny-router": "^1.0.17",
+    "@frontity/core": "^1.4.1",
+    "@frontity/tiny-router": "^1.0.18",
     "babel-plugin-frontity": "^1.0.1",
-    "emotion": "^1.0.1",
-    "fonts": "^1.0.1",
-    "frontity": "^1.4.2",
-    "head": "^1.0.4",
-    "image": "^1.0.3",
-    "loadable": "^1.0.0"
+    "e2e-emotion": "^1.0.2",
+    "e2e-fonts": "^1.0.2",
+    "e2e-head": "^1.0.5",
+    "e2e-image": "^1.0.4",
+    "e2e-loadable": "^1.0.1",
+    "frontity": "^1.4.3"
   }
 }

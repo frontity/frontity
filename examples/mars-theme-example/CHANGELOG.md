@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2019-12-10)
+
+
+### Bug Fixes
+
+* **core:** add labels and source maps ([#227](https://github.com/frontity/frontity/issues/227)) ([d5af653](https://github.com/frontity/frontity/commit/d5af653))
+* **wp-source:** change apiUrl for api ([26947e7](https://github.com/frontity/frontity/commit/26947e7))
+
+
+### Features
+
+* **html2react:** first implementation of Html2React ([#116](https://github.com/frontity/frontity/issues/116)) ([aa2b6f6](https://github.com/frontity/frontity/commit/aa2b6f6))
+* **packages:** creates packages @frontity/components, @frontity/hooks, and adds image processor to @frontity/html2react ([#130](https://github.com/frontity/frontity/issues/130)) ([6af4aa1](https://github.com/frontity/frontity/commit/6af4aa1))
+
+
+
+
+
 ## [1.1.16](https://github.com/frontity/frontity/compare/mars-theme-example@1.1.15...mars-theme-example@1.1.16) (2019-11-04)
 
 
