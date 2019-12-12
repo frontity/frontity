@@ -4,7 +4,8 @@
     "@changesets/changelog-github",
     { "repo": "frontity/frontity" }
   ],
-  "commit": false,
+  "commit": true,
+  "linked": [],
   "access": "public",
   "baseBranch": "dev"
 }

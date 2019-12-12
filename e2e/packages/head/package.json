@@ -1,9 +1,9 @@
 {
   "name": "e2e-head",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "description": "Package to do e2e testing of Frontity's Head component",
   "dependencies": {
-    "frontity": "^1.4.2"
+    "frontity": "^1.4.3"
   }
 }
