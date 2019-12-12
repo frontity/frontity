@@ -6,9 +6,9 @@ import HeadTagsPackage, { State, HeadTags } from "../../types";
 import headTagsPackage from "..";
 import {
   mockPostEntity,
-  mockPostType
-  // mockAuthor,
-  // mockTaxonomy
+  mockPostType,
+  mockTaxonomy,
+  mockAuthor
 } from "./mocks/utils";
 
 let store: InitializedStore<HeadTagsPackage>;
@@ -359,6 +359,124 @@ describe("state.headTags.current (post type)", () => {
         attributes: {
           rel: "next",
           href: "https://test.frontity.io/page/2/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "https://api.w.org/",
+          href: "https://test.frontity.io/wp-json/" // should not change
+        }
+      },
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              // All these links should change
+              "@type": "WebSite",
+              "@id": "https://test.frontity.io/#website",
+              url: "https://test.frontity.io/"
+            }
+          ]
+        })
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+    // Test current head tags.
+    expect(store.state.headTags.current).toMatchSnapshot();
+  });
+});
+
+describe("state.headTags.current (taxonomy)", () => {
+  const setUpState = (state: State, headTags?: HeadTags) => {
+    // Populate source state.
+    const { category, data } = mockTaxonomy(headTags);
+    state.source.category = category;
+    state.source.data = data;
+
+    // Populate router state.
+    state.router.link = "/category/cat-1/";
+  };
+
+  test("works with taxonomies", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://test.frontity.io/category/cat-1/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "next",
+          href: "https://test.frontity.io/category/cat-1/page/2/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "https://api.w.org/",
+          href: "https://test.frontity.io/wp-json/" // should not change
+        }
+      },
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              // All these links should change
+              "@type": "WebSite",
+              "@id": "https://test.frontity.io/#website",
+              url: "https://test.frontity.io/"
+            }
+          ]
+        })
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+    // Test current head tags.
+    expect(store.state.headTags.current).toMatchSnapshot();
+  });
+});
+
+describe("state.headTags.current (author)", () => {
+  const setUpState = (state: State, headTags?: HeadTags) => {
+    // Populate source state.
+    const { author, data } = mockAuthor(headTags);
+    state.source.author = author;
+    state.source.data = data;
+
+    // Populate router state.
+    state.router.link = "/author/author-1/";
+  };
+
+  test("works with auhors", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://test.frontity.io/author/author-1/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "next",
+          href: "https://test.frontity.io/author/author-1/page/2/" // should change
         }
       },
       {

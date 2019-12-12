@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`state.headTags.current (author) works with auhors 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/author/author-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/author/author-1/page/2/",
+      "rel": "next",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
 exports[`state.headTags.current (post entity) doesn't change links that don't point to WordPress pages 1`] = `
 Array [
   Object {
@@ -226,6 +259,39 @@ Array [
   Object {
     "attributes": Object {
       "href": "https://mars.frontity.org/page/2/",
+      "rel": "next",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.current (taxonomy) works with taxonomies 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/category/cat-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/category/cat-1/page/2/",
       "rel": "next",
     },
     "tag": "link",

@@ -70,22 +70,52 @@ export const mockPostType = (
 
 export const mockTaxonomy = (headTags: HeadTags) => {
   return {
-    id: 1,
-    count: 5,
-    link: "https://test.frontity.io/category/cat-1/",
-    slug: "cat-1",
-    taxonomy: "category",
-    parent: 0,
-    head_tags: headTags
+    category: {
+      1: {
+        id: 1,
+        count: 5,
+        link: "https://test.frontity.io/category/cat-1/",
+        slug: "cat-1",
+        taxonomy: "category",
+        parent: 0,
+        head_tags: headTags
+      }
+    },
+    data: {
+      "/category/cat-1/": {
+        taxonomy: "category" as "category",
+        id: 1,
+        items: [],
+        isArchive: true as true,
+        isTaxonomy: true as true,
+        isCategory: true as true,
+        isFetching: false as false,
+        isReady: true as true
+      }
+    }
   };
 };
 
 export const mockAuthor = (headTags: HeadTags) => {
   return {
-    id: 1,
-    name: "Author 1",
-    link: "https://test.frontity.io/author/author-1/",
-    slug: "author-1",
-    head_tags: headTags
+    author: {
+      1: {
+        id: 1,
+        name: "Author 1",
+        link: "https://test.frontity.io/author/author-1/",
+        slug: "author-1",
+        head_tags: headTags
+      }
+    },
+    data: {
+      "/author/author-1/": {
+        id: 1,
+        items: [],
+        isArchive: true as true,
+        isAuthor: true as true,
+        isFetching: false as false,
+        isReady: true as true
+      }
+    }
   };
 };
