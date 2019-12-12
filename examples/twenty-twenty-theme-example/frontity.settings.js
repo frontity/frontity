@@ -3,8 +3,8 @@ export default {
   state: {
     frontity: {
       url: "https://twentytwenty.frontity.org",
-      title: "Matt Mullenberg",
-      description: "Unlucky in Cards"
+      title: "Test Frontity Blog",
+      description: "Useful content for Frontity development"
     }
   },
   packages: [
