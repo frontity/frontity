@@ -1,7 +1,7 @@
 {
-  "name": "@frontity/twenty-twenty-theme",
+  "name": "@frontity/twentytwenty-theme",
   "version": "0.0.1",
-  "description": "The WordPress twenty-twenty starter theme for Frontity",
+  "description": "The WordPress Twenty Twenty starter theme for Frontity",
   "keywords": [
     "wordpress",
     "frontity",

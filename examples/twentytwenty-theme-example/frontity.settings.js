@@ -1,5 +1,5 @@
 export default {
-  name: "twenty-twenty-theme-example",
+  name: "twentytwenty-theme-example",
   state: {
     frontity: {
       url: "https://twentytwenty.frontity.org",
@@ -11,7 +11,7 @@ export default {
     "@frontity/tiny-router",
     "@frontity/html2react",
     {
-      name: "@frontity/twenty-twenty-theme",
+      name: "@frontity/twentytwenty-theme",
       state: {
         theme: {
           menu: [
