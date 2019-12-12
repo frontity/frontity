@@ -213,3 +213,36 @@ Array [
   },
 ]
 `;
+
+exports[`Current Head Tags - Post Type works with post types 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/page/2/",
+      "rel": "next",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "tag": "script",
+  },
+]
+`;

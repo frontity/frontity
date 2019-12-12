@@ -4,7 +4,12 @@ import { createStore, InitializedStore } from "@frontity/connect";
 import wpSource from "@frontity/wp-source/src";
 import HeadTagsPackage, { State, HeadTags } from "../../types";
 import headTagsPackage from "..";
-import { mockPostEntity } from "./mocks/utils";
+import {
+  mockPostEntity,
+  mockPostType
+  // mockAuthor,
+  // mockTaxonomy
+} from "./mocks/utils";
 
 let store: InitializedStore<HeadTagsPackage>;
 beforeEach(() => {
@@ -324,6 +329,65 @@ describe("Current Head Tags - Post Entity", () => {
     store.state.frontity.url = "https://frontity.org/mars/";
     store.state.source.api = "https://test.frontity.io/subdir/wp-json/";
 
+    // Test current head tags.
+    expect(store.state.headTags.current).toMatchSnapshot();
+  });
+});
+
+describe("Current Head Tags - Post Type", () => {
+  const setUpState = (state: State, headTags?: HeadTags) => {
+    // Populate source state.
+    const { type, data } = mockPostType(headTags);
+    state.source.type = type;
+    state.source.data = data;
+
+    // Populate router state.
+    state.router.link = "/";
+  };
+
+  test("works with post types", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://test.frontity.io/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "next",
+          href: "https://test.frontity.io/page/2/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "https://api.w.org/",
+          href: "https://test.frontity.io/wp-json/" // should not change
+        }
+      },
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              // All these links should change
+              "@type": "WebSite",
+              "@id": "https://test.frontity.io/#website",
+              url: "https://test.frontity.io/"
+            }
+          ]
+        })
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
     // Test current head tags.
     expect(store.state.headTags.current).toMatchSnapshot();
   });
