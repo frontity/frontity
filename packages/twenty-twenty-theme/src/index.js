@@ -1,7 +1,7 @@
 import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
 
-const marsTheme = {
+const twentyTwentyTheme = {
   name: "@frontity/twenty-twenty-theme",
   roots: {
     /**
@@ -84,4 +84,4 @@ const marsTheme = {
   }
 };
 
-export default marsTheme;
+export default twentyTwentyTheme;
