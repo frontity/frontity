@@ -13,10 +13,7 @@
     },
     {
       "src": "build/server.js",
-      "use": "@now/node",
-      "config": {
-        "excludeFiles": ["package.json"]
-      }
+      "use": "@now/node"
     }
   ],
   "routes": [
@@ -33,10 +30,5 @@
       "headers": { "cache-control": "s-maxage=1,stale-while-revalidate" },
       "dest": "/build/server.js"
     }
-  ],
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
+  ]
 }
