@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect, styled } from "frontity";
 import Link from "../link";
 
@@ -10,7 +10,7 @@ import Link from "../link";
  * The `state`, `actions`, `libraries` props are provided by the global context,
  * when we wrap this component in `connect(...)`
  */
-const Pagination = ({ state, actions, libraries }) => {
+const Pagination = ({ state, libraries }) => {
   // Get the total posts to be displayed based for the current link
   const { totalPages } = state.source.get(state.router.link);
   const { path, page, query } = libraries.source.parse(state.router.link);
@@ -34,11 +34,6 @@ const Pagination = ({ state, actions, libraries }) => {
     page: page - 1,
     query
   });
-
-  // Pre-fetch the the next page if it hasn't been fetched yet.
-  useEffect(() => {
-    if (isThereNextPage) actions.source.fetch(nextPageLink);
-  }, []);
 
   return (
     <div>

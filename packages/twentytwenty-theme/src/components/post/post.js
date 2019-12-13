@@ -1,5 +1,5 @@
 import { styled, connect } from "frontity";
-import React, { useEffect } from "react";
+import React from "react";
 import FeaturedMedia from "./featured-media";
 import {
   EntryContent,
@@ -13,7 +13,7 @@ import PostCategories from "./post-categories";
 import PostMeta from "./post-meta";
 import PostTags from "./post-tags";
 
-const Post = ({ state, actions, libraries }) => {
+const Post = ({ state, libraries }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
   // Get the data of the post.
@@ -42,15 +42,6 @@ const Post = ({ state, actions, libraries }) => {
    * So, we'll look up the details of each tag in allTags
    */
   const tags = post.tags && post.tags.map(tagId => allTags[tagId]);
-
-  /**
-   * Once the post has loaded in the DOM, prefetch both the
-   * home posts and the list component so if the user visits
-   * the home page, everything is ready and it loads instantly.
-   */
-  useEffect(() => {
-    actions.source.fetch("/");
-  }, []);
 
   // Load the post, but only if the data is ready.
   return data.isReady ? (
