@@ -7,7 +7,7 @@ const headTags = (): HeadTagsPackage => ({
   roots: { headTags: Component },
   state: {
     headTags: {
-      current: ({ state }) => getCurrentHeadTags({ state })
+      get: ({ state }) => link => getCurrentHeadTags({ state, link })
     }
   }
 });

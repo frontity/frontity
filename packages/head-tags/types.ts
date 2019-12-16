@@ -40,7 +40,7 @@ interface HeadTagsPackage extends Package {
   };
   state: {
     headTags: {
-      current: Derived<HeadTagsPackage, HeadTags>;
+      get: Derived<HeadTagsPackage, string, HeadTags>;
     };
     frontity?: {
       url: string;

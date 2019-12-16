@@ -114,8 +114,14 @@ export const useFrontityLinks = ({
 };
 
 // Get the entity related to the current link.
-export const getCurrentEntity = ({ state }: { state: State }) => {
-  const data = state.source.get(state.router.link);
+export const getCurrentEntity = ({
+  state,
+  link
+}: {
+  state: State;
+  link: string;
+}) => {
+  const data = state.source.get(link);
 
   if (data.isPostType) {
     const { type, id } = data;
@@ -144,8 +150,14 @@ export const getCurrentEntity = ({ state }: { state: State }) => {
  * Get the head tags stored in the current entity,
  * or an empty array if there is no entity or head tags.
  */
-export const getCurrentHeadTags = ({ state }: { state: State }) => {
-  const entity = getCurrentEntity({ state });
+export const getCurrentHeadTags = ({
+  state,
+  link
+}: {
+  state: State;
+  link: string;
+}) => {
+  const entity = getCurrentEntity({ state, link });
   const headTags = entity && entity.head_tags;
 
   // Changes those links that points to WordPress blog pages to Frontity links

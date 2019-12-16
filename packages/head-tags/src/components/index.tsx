@@ -7,15 +7,15 @@ import HeadTagsPackage from "../../types";
 const Root: React.FC<Connect<HeadTagsPackage>> = ({ state }) => {
   return (
     <Head>
-      {state.headTags.current.map(
-        ({ tag: Tag, attributes, content }, index) => {
+      {state.headTags
+        .get(state.router.link)
+        .map(({ tag: Tag, attributes, content }, index) => {
           return (
             <Tag key={index} {...attributes}>
               {content}
             </Tag>
           );
-        }
-      )}
+        })}
     </Head>
   );
 };

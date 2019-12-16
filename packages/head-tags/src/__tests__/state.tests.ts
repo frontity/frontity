@@ -27,7 +27,7 @@ beforeEach(() => {
   store = createStore(config);
 });
 
-describe("state.headTags.current (post entity)", () => {
+describe("state.headTags.get() (post entity)", () => {
   const setUpState = (state: State, headTags?: HeadTags) => {
     // Populate source state.
     const { post, data } = mockPostEntity(headTags);
@@ -43,7 +43,7 @@ describe("state.headTags.current (post entity)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toEqual([]);
   });
 
   test("returns elements without attributes (title)", () => {
@@ -51,7 +51,7 @@ describe("state.headTags.current (post entity)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 
   test("returns elements without content (meta tags)", () => {
@@ -68,7 +68,7 @@ describe("state.headTags.current (post entity)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 
   test("transforms links that point to WordPress pages", () => {
@@ -98,7 +98,7 @@ describe("state.headTags.current (post entity)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 
   test("doesn't change links that don't point to WordPress pages", () => {
@@ -204,7 +204,7 @@ describe("state.headTags.current (post entity)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 
   test("transform links inside ld+json data", () => {
@@ -241,7 +241,7 @@ describe("state.headTags.current (post entity)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 
   test("transforms links appropiately when WP is in a subdirectory", () => {
@@ -285,7 +285,7 @@ describe("state.headTags.current (post entity)", () => {
     store.state.source.api = "https://test.frontity.io/subdir/wp-json/";
 
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 
   test("transforms links appropiately when Frontity is in a subdirectory", () => {
@@ -330,11 +330,11 @@ describe("state.headTags.current (post entity)", () => {
     store.state.source.api = "https://test.frontity.io/subdir/wp-json/";
 
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 });
 
-describe("state.headTags.current (post type)", () => {
+describe("state.headTags.get() (post type)", () => {
   const setUpState = (state: State, headTags?: HeadTags) => {
     // Populate source state.
     const { type, data } = mockPostType(headTags);
@@ -389,11 +389,11 @@ describe("state.headTags.current (post type)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 });
 
-describe("state.headTags.current (taxonomy)", () => {
+describe("state.headTags.get() (taxonomy)", () => {
   const setUpState = (state: State, headTags?: HeadTags) => {
     // Populate source state.
     const { category, data } = mockTaxonomy(headTags);
@@ -448,11 +448,11 @@ describe("state.headTags.current (taxonomy)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 });
 
-describe("state.headTags.current (author)", () => {
+describe("state.headTags.get() (author)", () => {
   const setUpState = (state: State, headTags?: HeadTags) => {
     // Populate source state.
     const { author, data } = mockAuthor(headTags);
@@ -507,11 +507,11 @@ describe("state.headTags.current (author)", () => {
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 });
 
-describe("state.headTags.current (no entity)", () => {
+describe("state.headTags.get() (no entity)", () => {
   const setUpState = (state: State) => {
     // Populate source state.
     state.source.data = {
@@ -535,6 +535,6 @@ describe("state.headTags.current (no entity)", () => {
     // Populate all state.
     setUpState(store.state);
     // Test current head tags.
-    expect(store.state.headTags.current).toMatchSnapshot();
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 });
