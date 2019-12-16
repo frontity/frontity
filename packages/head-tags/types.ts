@@ -1,14 +1,21 @@
 import { Package, Derived } from "frontity/types";
 import { InitializedStore } from "@frontity/connect";
 import Router from "@frontity/router";
-import WpSource from "@frontity/wp-source/types";
-import {
+import Source, {
   TaxonomyEntity,
   PostEntity,
   AuthorEntity,
   PostType
 } from "@frontity/source";
-import { Merge } from "@frontity/source/src/utils";
+
+/**
+ * Create a new type by merging two types.
+ * The second type overrides those attributes that are present in the first one.
+ * @param M First type.
+ * @param N Second type.
+ * @return Merged types.
+ */
+export type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 
 export type HeadTag = {
   tag: "meta" | "link" | "title" | "style" | "script" | "noscript" | "base";
@@ -39,8 +46,10 @@ interface HeadTagsPackage extends Package {
       url: string;
     };
     source?: Merge<
-      WpSource["state"]["source"],
+      Source["state"]["source"],
       {
+        isWpCom?: boolean;
+        api: string;
         post: Record<string, PostEntityWithHeadTags>;
         page: Record<string, PostEntityWithHeadTags>;
         author: Record<string, AuthorEntityWithHeadTags>;
