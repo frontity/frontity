@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FrontityError should output an error message in the correct format 1`] = `
+"FrontityError: Something bad happend!
+
+If you have any doubts, join our community at https://community.frontity.org/.
+"
+`;
+
+exports[`FrontityError should output an error message in the correct format 2`] = `
+"Something bad happend!
+
+If you have any doubts, join our community at https://community.frontity.org/.
+"
+`;
