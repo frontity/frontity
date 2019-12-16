@@ -6,8 +6,8 @@ export interface BaseEntity {
   slug: string;
   link: string;
   description?: string | { rendered: string };
-  meta?: any;
-  _links?: any;
+  meta?: unknown;
+  _links?: unknown;
 }
 
 /**
@@ -34,9 +34,9 @@ export interface BasePostEntity extends BaseEntity {
   status?: "publish" | "future" | "draft" | "pending" | "private" | "inherit";
   comment_status?: "open" | "closed";
   ping_status?: "open" | "closed";
-  custom_fields?: any;
+  custom_fields?: unknown;
   template?: string;
-  _embedded?: any;
+  _embedded?: unknown;
 }
 
 /**
@@ -73,7 +73,7 @@ export interface AttachmentEntity extends BasePostEntity {
   caption?: string | { rendered: string };
   alt_text?: string;
   post?: number;
-  media_details?: any;
+  media_details?: unknown;
   media_type?: string;
   mime_type?: string;
 }
@@ -109,12 +109,12 @@ export interface BaseType {
   description: string;
   hierarchical: boolean;
   rest_base: string;
-  _links?: any;
+  _links?: unknown;
 }
 
 /**
  * Define the structure of post types.
- * Post types are `"post"`, `"page"`, `"attachment"` and any custom post type.
+ * Post types are `"post"`, `"page"`, `"attachment"` and unknown custom post type.
  * @extends BaseType
  */
 export interface PostType extends BaseType {
@@ -123,7 +123,7 @@ export interface PostType extends BaseType {
 
 /**
  * Define the structure of taxonomy types.
- * Taxonomy types are `"category"`, `"tag"` and any custom taxonomy.
+ * Taxonomy types are `"category"`, `"tag"` and unknown custom taxonomy.
  * @extends BaseType
  */
 export interface TaxonomyType extends BaseType {
