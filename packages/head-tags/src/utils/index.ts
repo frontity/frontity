@@ -146,8 +146,8 @@ export const getCurrentEntity = ({ state }: { state: State }) => {
  */
 export const getCurrentHeadTags = ({ state }: { state: State }) => {
   const entity = getCurrentEntity({ state });
-  const headTags = (entity && entity.head_tags) || [];
+  const headTags = entity && entity.head_tags;
 
   // Changes those links that points to WordPress blog pages to Frontity links
-  return useFrontityLinks({ state, headTags });
+  return headTags ? useFrontityLinks({ state, headTags }) : [];
 };
