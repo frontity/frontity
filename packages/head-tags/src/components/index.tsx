@@ -5,17 +5,22 @@ import HeadTagsPackage from "../../types";
 
 // Render all head tags from the current entity.
 const Root: React.FC<Connect<HeadTagsPackage>> = ({ state }) => {
+  // Get current link.
+  const { link } = state.router;
+
+  // Get the head tags for that link.
+  const headTags = React.useMemo(() => state.headTags.get(link), [link]);
+
+  // Render all tags inside <head>.
   return (
     <Head>
-      {state.headTags
-        .get(state.router.link)
-        .map(({ tag: Tag, attributes, content }, index) => {
-          return (
-            <Tag key={index} {...attributes}>
-              {content}
-            </Tag>
-          );
-        })}
+      {headTags.map(({ tag: Tag, attributes, content }, index) => {
+        return (
+          <Tag key={index} {...attributes}>
+            {content}
+          </Tag>
+        );
+      })}
     </Head>
   );
 };
