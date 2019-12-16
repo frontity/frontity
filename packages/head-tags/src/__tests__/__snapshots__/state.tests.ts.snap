@@ -156,6 +156,17 @@ Array [
 ]
 `;
 
+exports[`state.headTags.get() (post entity) shows a warning message if \`state.frontity.url\` is not defined 1`] = `
+Array [
+  Array [
+    [FrontityError: Property \`state.frontity.url\` is not defined. URLs will keep pointing to WordPress instead to the Frontity site.
+
+If you have any doubts, join our community at https://community.frontity.org/.
+],
+  ],
+]
+`;
+
 exports[`state.headTags.get() (post entity) transform links inside ld+json data 1`] = `
 Array [
   Object {

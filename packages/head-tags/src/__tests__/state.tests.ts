@@ -332,6 +332,32 @@ describe("state.headTags.get() (post entity)", () => {
     // Test current head tags.
     expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
+
+  test("shows a warning message if `state.frontity.url` is not defined", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://test.frontity.io/subdir/post-1/" // should change
+        }
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+
+    // Remove `state.frontity.url`.
+    delete store.state.frontity.url;
+
+    // Spy `console.warn`
+    const warn = jest.spyOn(global.console, "warn");
+
+    // Test current head tags.
+    store.state.headTags.get(store.state.router.link);
+
+    expect(warn).toHaveBeenCalled();
+    expect(warn.mock.calls).toMatchSnapshot();
+  });
 });
 
 describe("state.headTags.get() (post type)", () => {

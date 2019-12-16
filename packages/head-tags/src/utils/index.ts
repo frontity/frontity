@@ -1,4 +1,5 @@
 import { URL } from "frontity";
+import { FrontityError } from "@frontity/error";
 import {
   HeadTags,
   HeadTag,
@@ -57,6 +58,16 @@ export const useFrontityLinks = ({
   state: State;
   headTags: HeadTags;
 }) => {
+  // Show a warning message if `state.frontity.url` is not defined.
+  if (!state.frontity || !state.frontity.url) {
+    console.warn(
+      new FrontityError(
+        "Property `state.frontity.url` is not defined. URLs will keep pointing to WordPress instead to the Frontity site."
+      )
+    );
+    return headTags;
+  }
+
   // The site URL.
   const frontityUrl = state.frontity.url;
 
