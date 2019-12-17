@@ -10,28 +10,21 @@ import Post from "./post";
 import SearchResults from "./search/search-results";
 import SkipLink from "./styles/skip-link";
 import MetaTitle from "./page-meta-title";
-import posed, { PoseGroup } from "react-pose";
+import { useTransition, animated } from "react-spring";
 
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
  */
 
-const AnimContainer = posed.div({
-  enter: {
-    opacity: 1,
-    delay: 250,
-    transition: { duration: 300, ease: "easeIn" }
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 300, ease: "easeIn" }
-  }
-});
-
 const Theme = ({ state, libraries }) => {
   // Get information about the current URL.
-  const data = state.source.get(state.router.link);
+  const transitions = useTransition(state.router.link, link => link, {
+    from: { opacity: 0.2 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  });
+
   const parse = libraries.source.parse(state.router.link);
   // Check if the url is a search type
   const isSearch = Boolean(parse.query["s"]);
@@ -60,17 +53,20 @@ const Theme = ({ state, libraries }) => {
 
         {/* Add the main section. It renders a different component depending
         on the type of URL we are in. */}
-        <Main id="main">
-          <PoseGroup>
-            <AnimContainer key={state.router.link}>
-              {(data.isFetching && <Loading />) ||
-                (isSearch && <SearchResults />) ||
-                (data.isArchive && <Archive />) ||
-                (data.isPostType && <Post />) ||
-                (data.is404 && <Page404 />)}
-            </AnimContainer>
-          </PoseGroup>
-        </Main>
+        {transitions.map(({ item, props, key }) => {
+          const data = state.source.get(item);
+          return (
+            <animated.div key={key} style={props}>
+              <Main id="main">
+                {(data.isFetching && <Loading />) ||
+                  (isSearch && <SearchResults />) ||
+                  (data.isArchive && <Archive data={data} />) ||
+                  (data.isPostType && <Post data={data} />) ||
+                  (data.is404 && <Page404 />)}
+              </Main>
+            </animated.div>
+          );
+        })}
       </div>
 
       <Footer />

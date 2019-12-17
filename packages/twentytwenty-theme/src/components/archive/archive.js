@@ -6,9 +6,7 @@ import Pagination from "./archive-pagination";
 import PostSeparator from "../post/post-separator";
 import Post from "../post";
 
-const Archive = ({ state, showExcerpt, showMedia }) => {
-  // Get the data of the current list.
-  const data = state.source.get(state.router.link);
+const Archive = ({ state, showExcerpt, showMedia, data }) => {
   const { primary } = state.theme.colors;
 
   // Whether the show the excerpt instead of the full content

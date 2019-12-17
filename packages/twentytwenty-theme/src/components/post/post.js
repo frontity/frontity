@@ -13,9 +13,7 @@ import PostCategories from "./post-categories";
 import PostMeta from "./post-meta";
 import PostTags from "./post-tags";
 
-const Post = ({ state, actions, libraries }) => {
-  // Get information about the current URL.
-  const data = state.source.get(state.router.link);
+const Post = ({ state, actions, libraries, data }) => {
   // Get the data of the post.
   const post = state.source[data.type][data.id];
   // Get the data of the author.
