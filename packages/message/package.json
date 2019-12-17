@@ -1,7 +1,7 @@
 {
-  "name": "@frontity/error",
+  "name": "@frontity/message",
   "version": "0.1.0",
-  "description": "Error class that points to the »Frontity community",
+  "description": "Append an invitation to join »Frontity community",
   "keywords": [
     "frontity"
   ],

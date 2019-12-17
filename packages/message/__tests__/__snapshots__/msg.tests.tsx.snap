@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`msg should output a string in the correct format 1`] = `
+"Something bad happened!
+
+If you have any questions, join our community at https://community.frontity.org/.
+"
+`;
