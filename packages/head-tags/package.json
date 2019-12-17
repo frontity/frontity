@@ -37,6 +37,6 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@frontity/error": "^0.1.0"
+    "@frontity/message": "^0.1.0"
   }
 }

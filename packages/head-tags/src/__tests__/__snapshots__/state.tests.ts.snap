@@ -159,10 +159,10 @@ Array [
 exports[`state.headTags.get() (post entity) shows a warning message if \`state.frontity.url\` is not defined 1`] = `
 Array [
   Array [
-    [FrontityError: Property \`state.frontity.url\` is not defined. URLs will keep pointing to WordPress instead to the Frontity site.
+    "Property \`state.headTags.links.transform\` is \`true\` but \`state.frontity.url\` is not defined. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed.
 
-If you have any doubts, join our community at https://community.frontity.org/.
-],
+If you have any questions, join our community at https://community.frontity.org/.
+",
   ],
 ]
 `;

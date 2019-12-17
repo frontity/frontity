@@ -41,6 +41,12 @@ interface HeadTagsPackage extends Package {
   state: {
     headTags: {
       get: Derived<HeadTagsPackage, string, HeadTags>;
+      transformLinks:
+        | {
+            ignore: string;
+            prefix?: string;
+          }
+        | false;
     };
     frontity?: {
       url: string;

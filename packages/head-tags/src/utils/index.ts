@@ -1,5 +1,5 @@
 import { URL } from "frontity";
-import { FrontityError } from "@frontity/error";
+import msg from "@frontity/message";
 import {
   HeadTags,
   HeadTag,
@@ -32,23 +32,40 @@ const getWpUrl = (api: string, isWpCom: boolean): URL => {
   return new URL(apiSubdir, apiUrl);
 };
 
-const isWpPageLink = (value: string, wpUrl: URL) => {
+const shouldTransform = (value: string, prefix: string, ignore: string) => {
   return (
-    value.startsWith(wpUrl.toString()) &&
-    !new RegExp(
-      `^${
-        wpUrl.pathname
-      }(wp-(json|admin|content|includes))|feed|comments|xmlrpc`
-    ).test(new URL(value).pathname)
+    value.startsWith(prefix) &&
+    !new RegExp(`^${ignore}`).test(value.replace(prefix, ""))
   );
 };
 
-const getFrontityUrl = (value: string, wpUrl: URL, frontityUrl: string) => {
+const getNewLink = (value: string, oldPrefix: string, newPrefix: string) => {
   const { pathname, search, hash } = new URL(value);
   const finalPathname = pathname
-    .replace(new RegExp(`^${wpUrl.pathname}`), "/")
+    .replace(new RegExp(`^${new URL(oldPrefix).pathname}`), "/")
     .replace(/^\/$/, "");
-  return `${frontityUrl.replace(/\/?$/, "")}${finalPathname}${search}${hash}`;
+  return `${newPrefix.replace(/\/?$/, "")}${finalPathname}${search}${hash}`;
+};
+
+const getPrefixFromSource = ({ state }: { state: State }): string => {
+  const { api, isWpCom } = state.source;
+  return getWpUrl(api, isWpCom).href;
+};
+
+const transformLink = ({
+  value,
+  ignore,
+  oldPrefix,
+  newPrefix
+}: {
+  value: string;
+  ignore: string;
+  oldPrefix: string;
+  newPrefix: string;
+}) => {
+  if (shouldTransform(value, oldPrefix, ignore))
+    return getNewLink(value, oldPrefix, newPrefix);
+  return value;
 };
 
 export const useFrontityLinks = ({
@@ -58,22 +75,19 @@ export const useFrontityLinks = ({
   state: State;
   headTags: HeadTags;
 }) => {
-  // Show a warning message if `state.frontity.url` is not defined.
-  if (!state.frontity || !state.frontity.url) {
-    console.warn(
-      new FrontityError(
-        "Property `state.frontity.url` is not defined. URLs will keep pointing to WordPress instead to the Frontity site."
-      )
-    );
-    return headTags;
-  }
+  /**
+   * At this point we assume that `state.headTags.transformLinks` and
+   * `state.frontity.url` are defined.
+   */
+  if (!state.headTags.transformLinks || !state.frontity.url) return headTags;
+
+  // prefix of links to change.
+  const oldPrefix =
+    state.headTags.transformLinks.prefix || getPrefixFromSource({ state });
+  const ignore = state.headTags.transformLinks.ignore;
 
   // The site URL.
-  const frontityUrl = state.frontity.url;
-
-  // The WP URL.
-  const { api, isWpCom } = state.source;
-  const wpUrl = getWpUrl(api, isWpCom);
+  const newPrefix = state.frontity.url;
 
   // For each head tag...
   return headTags.map(({ tag, attributes, content }) => {
@@ -90,9 +104,7 @@ export const useFrontityLinks = ({
         const json = JSON.parse(content);
         // iterate over json props.
         deepTransform(json, (value: string) => {
-          if (isWpPageLink(value, wpUrl))
-            return getFrontityUrl(value, wpUrl, frontityUrl);
-          return value;
+          return transformLink({ value, ignore, oldPrefix, newPrefix });
         });
         // Stringify json again.
         processed.content = JSON.stringify(json);
@@ -107,8 +119,8 @@ export const useFrontityLinks = ({
       processed.attributes = Object.entries(attributes)
         .map(([key, value]) => {
           // Change value if it's a WP blog link.
-          if (possibleLink.includes(key) && isWpPageLink(value, wpUrl)) {
-            value = getFrontityUrl(value, wpUrl, frontityUrl);
+          if (possibleLink.includes(key)) {
+            value = transformLink({ value, ignore, oldPrefix, newPrefix });
           }
           // Return the entry.
           return [key, value];
@@ -171,6 +183,22 @@ export const getCurrentHeadTags = ({
   const entity = getCurrentEntity({ state, link });
   const headTags = entity && entity.head_tags;
 
-  // Changes those links that points to WordPress blog pages to Frontity links
-  return headTags ? useFrontityLinks({ state, headTags }) : [];
+  // Return an empty array if there is no entity or head tags.
+  if (!headTags) return [];
+
+  // Leave head tags unchanged if `transform` is set to false.
+  if (!state.headTags.transformLinks) return headTags;
+
+  // Do not change links if `state.frontity.url` is not defined.
+  if (!state.frontity || !state.frontity.url) {
+    console.warn(
+      msg(
+        "Property `state.headTags.links.transform` is defined but `state.frontity.url` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed."
+      )
+    );
+    return headTags;
+  }
+
+  // Transform links.
+  return useFrontityLinks({ state, headTags });
 };
