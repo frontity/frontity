@@ -358,6 +358,131 @@ describe("state.headTags.get() (post entity)", () => {
     expect(warn).toHaveBeenCalled();
     expect(warn.mock.calls).toMatchSnapshot();
   });
+
+  test("doesn't transform links if `state.headTags.transformLinks` = false", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://test.frontity.io/post-1/" // should not change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "https://api.w.org/",
+          href: "https://test.frontity.io/wp-json/" // should not change
+        }
+      },
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              // All these links should not change
+              "@type": "WebSite",
+              "@id": "https://test.frontity.io/#website",
+              url: "https://test.frontity.io/"
+            }
+          ]
+        })
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+
+    // Set `transformLinks` to false.
+    store.state.headTags.transformLinks = false;
+
+    // Test current head tags.
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
+  });
+
+  test("transform links using a custom `prefix` value", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://different.frontity.io/blog/post-1/" // should change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "https://api.w.org/",
+          href: "https://test.frontity.io/wp-json/" // should not change
+        }
+      },
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              // All these links should change
+              "@type": "WebSite",
+              "@id": "https://different.frontity.io/blog/#website",
+              url: "https://different.frontity.io/blog/"
+            }
+          ]
+        })
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+
+    // Set `transformLinks` to false.
+    const { transformLinks } = store.state.headTags;
+    if (transformLinks)
+      transformLinks.prefix = "https://different.frontity.io/blog/";
+
+    // Test current head tags.
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
+  });
+
+  test("transform links using a custom `ignore` value", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "meta",
+        attributes: {
+          name: "twitter:image",
+          // should change
+          content: "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg"
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "alternate",
+          type: "application/rss+xml",
+          title: "frontity » Feed",
+          // SHOULD NOT CHANGE
+          href: "https://test.frontity.io/do-not-change/me/"
+        }
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+
+    // Set `transformLinks` to false.
+    const { transformLinks } = store.state.headTags;
+    if (transformLinks) {
+      transformLinks.prefix = "https://test.frontity.io/";
+      transformLinks.ignore = "do\\-not\\-change";
+    }
+
+    // Test current head tags.
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
+  });
 });
 
 describe("state.headTags.get() (post type)", () => {

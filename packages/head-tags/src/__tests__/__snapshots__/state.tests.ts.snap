@@ -135,6 +135,32 @@ Array [
 ]
 `;
 
+exports[`state.headTags.get() (post entity) doesn't transform links if \`state.headTags.transformLinks\` = false 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
 exports[`state.headTags.get() (post entity) returns elements without attributes (title) 1`] = `
 Array [
   Object {
@@ -159,7 +185,7 @@ Array [
 exports[`state.headTags.get() (post entity) shows a warning message if \`state.frontity.url\` is not defined 1`] = `
 Array [
   Array [
-    "Property \`state.headTags.links.transform\` is \`true\` but \`state.frontity.url\` is not defined. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed.
+    "Property \`state.headTags.links.transform\` is defined but \`state.frontity.url\` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed.
 
 If you have any questions, join our community at https://community.frontity.org/.
 ",
@@ -175,6 +201,53 @@ Array [
       "type": "application/ld+json",
     },
     "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://mars.frontity.org?s={search_term_string}\\"}},{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://mars.frontity.org/post-1/#primaryimage\\",\\"url\\":\\"https://test.frontity.io/wp-content/uploads/2019/12/img.jpg\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity) transform links using a custom \`ignore\` value 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "content": "https://mars.frontity.org/wp-content/uploads/2019/12/img.jpg",
+      "name": "twitter:image",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/do-not-change/me/",
+      "rel": "alternate",
+      "title": "frontity » Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity) transform links using a custom \`prefix\` value 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
     "tag": "script",
   },
 ]
