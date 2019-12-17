@@ -27,7 +27,7 @@ Array [
     "attributes": Object {
       "type": "application/ld+json",
     },
-    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\"}]}",
     "tag": "script",
   },
 ]
@@ -226,7 +226,7 @@ Array [
       "class": "yoast-schema-graph yoast-schema-graph--main",
       "type": "application/ld+json",
     },
-    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://mars.frontity.org?s={search_term_string}\\"}},{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://mars.frontity.org/post-1/#primaryimage\\",\\"url\\":\\"https://test.frontity.io/wp-content/uploads/2019/12/img.jpg\\"}]}",
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://mars.frontity.org/?s={search_term_string}\\"}},{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://mars.frontity.org/post-1/#primaryimage\\",\\"url\\":\\"https://test.frontity.io/wp-content/uploads/2019/12/img.jpg\\"}]}",
     "tag": "script",
   },
 ]
@@ -252,7 +252,7 @@ Array [
     "attributes": Object {
       "type": "application/ld+json",
     },
-    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\"}]}",
     "tag": "script",
   },
 ]
@@ -299,7 +299,7 @@ Array [
     "attributes": Object {
       "type": "application/ld+json",
     },
-    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://frontity.org/mars#website\\",\\"url\\":\\"https://frontity.org/mars\\"}]}",
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://frontity.org/mars/#website\\",\\"url\\":\\"https://frontity.org/mars/\\"}]}",
     "tag": "script",
   },
 ]
@@ -325,7 +325,7 @@ Array [
     "attributes": Object {
       "type": "application/ld+json",
     },
-    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\"}]}",
     "tag": "script",
   },
 ]
@@ -349,7 +349,7 @@ Array [
   },
   Object {
     "attributes": Object {
-      "href": "https://mars.frontity.org?p=1",
+      "href": "https://mars.frontity.org/?p=1",
       "rel": "shortlink",
     },
     "tag": "link",
@@ -361,7 +361,7 @@ exports[`state.headTags.get() (post type) works with post types 1`] = `
 Array [
   Object {
     "attributes": Object {
-      "href": "https://mars.frontity.org",
+      "href": "https://mars.frontity.org/",
       "rel": "canonical",
     },
     "tag": "link",
@@ -384,7 +384,7 @@ Array [
     "attributes": Object {
       "type": "application/ld+json",
     },
-    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\"}]}",
     "tag": "script",
   },
 ]
@@ -417,7 +417,7 @@ Array [
     "attributes": Object {
       "type": "application/ld+json",
     },
-    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\"}]}",
     "tag": "script",
   },
 ]

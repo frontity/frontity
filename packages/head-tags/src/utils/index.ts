@@ -41,9 +41,10 @@ const shouldTransform = (value: string, prefix: string, ignore: string) => {
 
 const getNewLink = (value: string, base: string, newBase: string) => {
   const { pathname, search, hash } = new URL(value);
-  const finalPathname = pathname
-    .replace(new RegExp(`^${new URL(base).pathname}`), "/")
-    .replace(/^\/$/, "");
+  const finalPathname = pathname.replace(
+    new RegExp(`^${new URL(base).pathname}`),
+    "/"
+  );
   return `${newBase.replace(/\/?$/, "")}${finalPathname}${search}${hash}`;
 };
 
