@@ -1,5 +1,5 @@
 ---
-"@frontity/error": major
+"@frontity/message": major
 ---
 
-Create `@frontity/error` package.
+Create `@frontity/message` package.
