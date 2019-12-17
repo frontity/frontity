@@ -44,7 +44,7 @@ interface HeadTagsPackage extends Package {
       transformLinks:
         | {
             ignore: string;
-            prefix?: string;
+            base?: string;
           }
         | false;
     };

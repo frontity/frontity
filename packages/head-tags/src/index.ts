@@ -9,7 +9,7 @@ const headTags = (): HeadTagsPackage => ({
     headTags: {
       get: ({ state }) => link => getCurrentHeadTags({ state, link }),
       transformLinks: {
-        ignore: "(wp-(json|admin|content|includes))|feed|comments|xmlrpc"
+        ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc"
       }
     }
   }

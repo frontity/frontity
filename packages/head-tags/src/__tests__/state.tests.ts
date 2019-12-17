@@ -403,7 +403,51 @@ describe("state.headTags.get() (post entity)", () => {
     expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
   });
 
-  test("transform links using a custom `prefix` value", () => {
+  test("doesn't transform links if `source.api` and `frontity.url` are the same site", () => {
+    const headTags: HeadTags = [
+      {
+        tag: "link",
+        attributes: {
+          rel: "canonical",
+          href: "https://test.frontity.io/post-1/" // should not change
+        }
+      },
+      {
+        tag: "link",
+        attributes: {
+          rel: "https://api.w.org/",
+          href: "https://test.frontity.io/wp-json/" // should not change
+        }
+      },
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              // All these links should not change
+              "@type": "WebSite",
+              "@id": "https://test.frontity.io/#website",
+              url: "https://test.frontity.io/"
+            }
+          ]
+        })
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
+
+    // Set `frontity.url` to the same site.
+    store.state.frontity.url = "https://test.frontity.io/";
+
+    // Test current head tags.
+    expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
+  });
+
+  test("transform links using a custom `base` value", () => {
     const headTags: HeadTags = [
       {
         tag: "link",
@@ -443,7 +487,7 @@ describe("state.headTags.get() (post entity)", () => {
     // Set `transformLinks` to false.
     const { transformLinks } = store.state.headTags;
     if (transformLinks)
-      transformLinks.prefix = "https://different.frontity.io/blog/";
+      transformLinks.base = "https://different.frontity.io/blog/";
 
     // Test current head tags.
     expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
@@ -476,7 +520,7 @@ describe("state.headTags.get() (post entity)", () => {
     // Set `transformLinks` to false.
     const { transformLinks } = store.state.headTags;
     if (transformLinks) {
-      transformLinks.prefix = "https://test.frontity.io/";
+      transformLinks.base = "https://test.frontity.io/";
       transformLinks.ignore = "do\\-not\\-change";
     }
 

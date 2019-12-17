@@ -135,6 +135,32 @@ Array [
 ]
 `;
 
+exports[`state.headTags.get() (post entity) doesn't transform links if \`source.api\` and \`frontity.url\` are the same site 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
 exports[`state.headTags.get() (post entity) doesn't transform links if \`state.headTags.transformLinks\` = false 1`] = `
 Array [
   Object {
@@ -206,28 +232,7 @@ Array [
 ]
 `;
 
-exports[`state.headTags.get() (post entity) transform links using a custom \`ignore\` value 1`] = `
-Array [
-  Object {
-    "attributes": Object {
-      "content": "https://mars.frontity.org/wp-content/uploads/2019/12/img.jpg",
-      "name": "twitter:image",
-    },
-    "tag": "meta",
-  },
-  Object {
-    "attributes": Object {
-      "href": "https://test.frontity.io/do-not-change/me/",
-      "rel": "alternate",
-      "title": "frontity » Feed",
-      "type": "application/rss+xml",
-    },
-    "tag": "link",
-  },
-]
-`;
-
-exports[`state.headTags.get() (post entity) transform links using a custom \`prefix\` value 1`] = `
+exports[`state.headTags.get() (post entity) transform links using a custom \`base\` value 1`] = `
 Array [
   Object {
     "attributes": Object {
@@ -249,6 +254,27 @@ Array [
     },
     "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org#website\\",\\"url\\":\\"https://mars.frontity.org\\"}]}",
     "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity) transform links using a custom \`ignore\` value 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "content": "https://mars.frontity.org/wp-content/uploads/2019/12/img.jpg",
+      "name": "twitter:image",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.io/do-not-change/me/",
+      "rel": "alternate",
+      "title": "frontity » Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
   },
 ]
 `;

@@ -35,16 +35,16 @@ const getWpUrl = (api: string, isWpCom: boolean): URL => {
 const shouldTransform = (value: string, prefix: string, ignore: string) => {
   return (
     value.startsWith(prefix) &&
-    !new RegExp(`^${ignore}`).test(value.replace(prefix, ""))
+    !new RegExp(ignore).test(value.replace(prefix, ""))
   );
 };
 
-const getNewLink = (value: string, oldPrefix: string, newPrefix: string) => {
+const getNewLink = (value: string, base: string, newBase: string) => {
   const { pathname, search, hash } = new URL(value);
   const finalPathname = pathname
-    .replace(new RegExp(`^${new URL(oldPrefix).pathname}`), "/")
+    .replace(new RegExp(`^${new URL(base).pathname}`), "/")
     .replace(/^\/$/, "");
-  return `${newPrefix.replace(/\/?$/, "")}${finalPathname}${search}${hash}`;
+  return `${newBase.replace(/\/?$/, "")}${finalPathname}${search}${hash}`;
 };
 
 const getPrefixFromSource = ({ state }: { state: State }): string => {
@@ -55,16 +55,16 @@ const getPrefixFromSource = ({ state }: { state: State }): string => {
 const transformLink = ({
   value,
   ignore,
-  oldPrefix,
-  newPrefix
+  base,
+  newBase
 }: {
   value: string;
   ignore: string;
-  oldPrefix: string;
-  newPrefix: string;
+  base: string;
+  newBase: string;
 }) => {
-  if (shouldTransform(value, oldPrefix, ignore))
-    return getNewLink(value, oldPrefix, newPrefix);
+  if (shouldTransform(value, base, ignore))
+    return getNewLink(value, base, newBase);
   return value;
 };
 
@@ -82,12 +82,12 @@ export const useFrontityLinks = ({
   if (!state.headTags.transformLinks || !state.frontity.url) return headTags;
 
   // prefix of links to change.
-  const oldPrefix =
-    state.headTags.transformLinks.prefix || getPrefixFromSource({ state });
+  const base =
+    state.headTags.transformLinks.base || getPrefixFromSource({ state });
   const ignore = state.headTags.transformLinks.ignore;
 
   // The site URL.
-  const newPrefix = state.frontity.url;
+  const newBase = state.frontity.url;
 
   // For each head tag...
   return headTags.map(({ tag, attributes, content }) => {
@@ -104,7 +104,7 @@ export const useFrontityLinks = ({
         const json = JSON.parse(content);
         // iterate over json props.
         deepTransform(json, (value: string) => {
-          return transformLink({ value, ignore, oldPrefix, newPrefix });
+          return transformLink({ value, ignore, base, newBase });
         });
         // Stringify json again.
         processed.content = JSON.stringify(json);
@@ -120,7 +120,7 @@ export const useFrontityLinks = ({
         .map(([key, value]) => {
           // Change value if it's a WP blog link.
           if (possibleLink.includes(key)) {
-            value = transformLink({ value, ignore, oldPrefix, newPrefix });
+            value = transformLink({ value, ignore, base, newBase });
           }
           // Return the entry.
           return [key, value];
