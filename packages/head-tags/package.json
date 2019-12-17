@@ -35,8 +35,5 @@
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.3"
-  },
-  "dependencies": {
-    "@frontity/message": "^0.1.0"
   }
 }

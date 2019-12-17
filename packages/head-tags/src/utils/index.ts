@@ -1,5 +1,4 @@
 import { URL } from "frontity";
-import msg from "@frontity/message";
 import {
   HeadTags,
   HeadTag,
@@ -193,9 +192,10 @@ export const getCurrentHeadTags = ({
   // Do not change links if `state.frontity.url` is not defined.
   if (!state.frontity || !state.frontity.url) {
     console.warn(
-      msg(
-        "Property `state.headTags.links.transform` is defined but `state.frontity.url` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed."
-      )
+      `Property \`state.headTags.links.transform\` is defined but \`state.frontity.url\` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed.
+
+If you have any questions, join our community at https://community.frontity.org/.
+`
     );
     return headTags;
   }
