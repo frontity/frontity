@@ -7,6 +7,12 @@ import {
   TaxonomyWithHeadTags
 } from "../../types";
 
+// Return a string inviting to ask questions in the community.
+const msg = (text: string) => `${text}
+
+If you have any questions, join our community at https://community.frontity.org/.
+`;
+
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
 
@@ -95,22 +101,37 @@ export const useFrontityLinks = ({
     const processed: HeadTag = { tag };
 
     if (content) {
+      // Set initial content value.
+      processed.content = content;
+
       // Transform URLs inside JSON content.
       if (
         attributes &&
         attributes.type &&
         attributes.type.endsWith("ld+json")
       ) {
-        const json = JSON.parse(content);
-        // iterate over json props.
-        deepTransform(json, (value: string) => {
-          return transformLink({ value, ignore, base, newBase });
-        });
-        // Stringify json again.
-        processed.content = JSON.stringify(json);
-      } else {
-        // Do not change content.
-        processed.content = content;
+        // Try to parse the tag content.
+        let json: object;
+        try {
+          json = JSON.parse(content);
+        } catch (e) {
+          console.warn(
+            msg(
+              `The following content of a <script type="ld+json"> tag is not a valid JSON. Links in that tag will not be changed.
+
+${content}`
+            )
+          );
+        }
+
+        // Iterate over json props.
+        if (json) {
+          deepTransform(json, (value: string) => {
+            return transformLink({ value, ignore, base, newBase });
+          });
+          // Stringify json again.
+          processed.content = JSON.stringify(json);
+        }
       }
     }
 
@@ -192,10 +213,9 @@ export const getCurrentHeadTags = ({
   // Do not change links if `state.frontity.url` is not defined.
   if (!state.frontity || !state.frontity.url) {
     console.warn(
-      `Property \`state.headTags.links.transform\` is defined but \`state.frontity.url\` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed.
-
-If you have any questions, join our community at https://community.frontity.org/.
-`
+      msg(
+        "Property `state.headTags.links.transform` is defined but `state.frontity.url` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed."
+      )
     );
     return headTags;
   }

@@ -11,8 +11,14 @@ import {
   mockAuthor
 } from "./mocks/utils";
 
+// Spy `console.warn`
+const warn = jest.spyOn(global.console, "warn");
+
+// Mock Frontity state.
 let store: InitializedStore<HeadTagsPackage>;
 beforeEach(() => {
+  warn.mockClear();
+
   // Create store.
   const config: HeadTagsPackage = clone(headTagsPackage());
 
@@ -349,8 +355,41 @@ describe("state.headTags.get() (post entity)", () => {
     // Remove `state.frontity.url`.
     delete store.state.frontity.url;
 
-    // Spy `console.warn`
     const warn = jest.spyOn(global.console, "warn");
+
+    // Test current head tags.
+    store.state.headTags.get(store.state.router.link);
+
+    expect(warn).toHaveBeenCalled();
+    expect(warn.mock.calls).toMatchSnapshot();
+  });
+
+  test('shows a warning message if a <script type="ld+json"> could not be parsed', () => {
+    const headTags: HeadTags = [
+      {
+        tag: "script",
+        attributes: {
+          type: "application/ld+json"
+        },
+        content: `{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://test.frontity.io/wrong-title/#webpage",
+      "url": "https://test.frontity.io/wrong-title/",
+      "inLanguage": "en-US",
+      "name": "Wrong title with "quotes" - frontity",
+      "isPartOf": {
+        "@id": "https://test.frontity.io/#website"
+      }
+    }
+  ]
+}`
+      }
+    ];
+    // Populate all state.
+    setUpState(store.state, headTags);
 
     // Test current head tags.
     store.state.headTags.get(store.state.router.link);

@@ -219,6 +219,33 @@ If you have any questions, join our community at https://community.frontity.org/
 ]
 `;
 
+exports[`state.headTags.get() (post entity) shows a warning message if a <script type="ld+json"> could not be parsed 1`] = `
+Array [
+  Array [
+    "The following content of a <script type=\\"ld+json\\"> tag is not a valid JSON. Links in that tag will not be changed.
+
+{
+  \\"@context\\": \\"https://schema.org\\",
+  \\"@graph\\": [
+    {
+      \\"@type\\": \\"WebPage\\",
+      \\"@id\\": \\"https://test.frontity.io/wrong-title/#webpage\\",
+      \\"url\\": \\"https://test.frontity.io/wrong-title/\\",
+      \\"inLanguage\\": \\"en-US\\",
+      \\"name\\": \\"Wrong title with \\"quotes\\" - frontity\\",
+      \\"isPartOf\\": {
+        \\"@id\\": \\"https://test.frontity.io/#website\\"
+      }
+    }
+  ]
+}
+
+If you have any questions, join our community at https://community.frontity.org/.
+",
+  ],
+]
+`;
+
 exports[`state.headTags.get() (post entity) transform links inside ld+json data 1`] = `
 Array [
   Object {
