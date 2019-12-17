@@ -10,7 +10,7 @@ import Post from "./post";
 import SearchResults from "./search/search-results";
 import SkipLink from "./styles/skip-link";
 import MetaTitle from "./page-meta-title";
-import { useTransition, animated } from "react-spring";
+import { useTransition, animated, config } from "react-spring";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -20,9 +20,11 @@ import { useTransition, animated } from "react-spring";
 const Theme = ({ state, libraries }) => {
   // Get information about the current URL.
   const transitions = useTransition(state.router.link, link => link, {
-    from: { opacity: 0.2 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    from: { opacity: 0.1, transform: "translate3D(0, -15px, 0)" },
+    enter: { opacity: 1, transform: "translate3D(0, 0px, 0)" },
+    update: { opacity: 1, transform: "translate3D(0, 0px, 0)" },
+    leave: { opacity: 0, transform: "translate3D(0, -5px, 0)" },
+    config: config.slow
   });
 
   const parse = libraries.source.parse(state.router.link);
@@ -53,23 +55,24 @@ const Theme = ({ state, libraries }) => {
 
         {/* Add the main section. It renders a different component depending
         on the type of URL we are in. */}
-        {transitions.map(({ item, props, key }) => {
-          const data = state.source.get(item);
-          return (
-            <animated.div key={key} style={props}>
-              <Main id="main">
-                {(data.isFetching && <Loading />) ||
-                  (isSearch && <SearchResults />) ||
-                  (data.isArchive && <Archive data={data} />) ||
-                  (data.isPostType && <Post data={data} />) ||
-                  (data.is404 && <Page404 />)}
-              </Main>
-            </animated.div>
-          );
-        })}
+        <Main id="main">
+          {transitions.map(({ item, props, key }) => {
+            const data = state.source.get(item);
+            return (
+              <Absolute key={key}>
+                <animated.div key={key} style={props}>
+                  {data.isFetching && <Loading />}
+                  {isSearch && <SearchResults />}
+                  {data.isArchive && <Archive data={data} />}
+                  {data.isPostType && <Post data={data} />}
+                  {data.is404 && <Page404 />}
+                </animated.div>
+                <Footer />
+              </Absolute>
+            );
+          })}
+        </Main>
       </div>
-
-      <Footer />
     </>
   );
 };
@@ -78,4 +81,9 @@ export default connect(Theme);
 
 const Main = styled.main`
   display: block;
+`;
+
+const Absolute = styled.div`
+  position: absolute;
+  width: 100%;
 `;
