@@ -19,7 +19,7 @@ interface UseInView {
 // This is an array with all the `setIntersected` functions
 // created by `useInView`, so we can find the corresponding
 // one to each entry on the IntersectionObserver callback.
-let setFunctions: [
+const setFunctions: [
   Dispatch<SetStateAction<boolean>>,
   React.MutableRefObject<undefined>
 ][] = [];
@@ -30,15 +30,18 @@ let observer: IntersectionObserver;
 // This callback can be called with more than one entry,
 // so we need to filter them and call the corresponding
 // `setIntersected` function for each changed entry.
-let createCallback: IntersectionObserverCallbackCreator = options => {
+const createCallback: IntersectionObserverCallbackCreator = options => {
   return entries => {
     entries.forEach(entry => {
       const setFunction = setFunctions.find(
         set => set[1].current === entry.target
       );
 
-      // This is the `setIntersected` function.
-      setFunction[0](entry.isIntersecting);
+      // Check if we found the ref
+      if (setFunction) {
+        // This is the `setIntersected` function.
+        setFunction[0](entry.isIntersecting);
+      }
 
       if (entry.isIntersecting && options.onlyOnce) {
         observer.unobserve(entry.target);
