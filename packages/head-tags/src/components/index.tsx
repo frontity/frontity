@@ -7,9 +7,17 @@ import HeadTagsPackage from "../../types";
 const Root: React.FC<Connect<HeadTagsPackage>> = ({ state }) => {
   // Get current link.
   const { link } = state.router;
+  const { transformLinks } = state.headTags;
 
   // Get the head tags for that link.
-  const headTags = React.useMemo(() => state.headTags.get(link), [link]);
+  const headTags = React.useMemo(() => state.headTags.get(link), [
+    state.frontity.url,
+    state.router.link,
+    state.source.api,
+    transformLinks,
+    transformLinks && transformLinks.base,
+    transformLinks && transformLinks.ignore
+  ]);
 
   // Render all tags inside <head>.
   return (
