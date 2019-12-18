@@ -47,8 +47,8 @@ const archive: ArchiveData = {
   ],
   isReady: true,
   isFetching: false,
-  total: 13,
-  totalPages: 13,
+  total: 2,
+  totalPages: 1,
   isEmpty: false
 };
 
@@ -69,8 +69,8 @@ const archiveWithSearch: ArchiveWithSearchData = {
   ],
   isReady: true,
   isFetching: false,
-  total: 13,
-  totalPages: 13,
+  total: 2,
+  totalPages: 1,
   isSearch: true,
   isEmpty: false,
   searchQuery: "nature"
@@ -85,7 +85,9 @@ const taxonomy: TaxonomyData = {
   items: [],
   isReady: true,
   isFetching: false,
-  isEmpty: true
+  isEmpty: true,
+  total: 0,
+  totalPages: 0
 };
 
 const taxonomyWithSearch: TaxonomyWithSearchData = {
@@ -99,7 +101,9 @@ const taxonomyWithSearch: TaxonomyWithSearchData = {
   isFetching: false,
   isSearch: true,
   searchQuery: "",
-  isEmpty: true
+  isEmpty: true,
+  total: 0,
+  totalPages: 0
 };
 
 const category: CategoryData = {
@@ -112,9 +116,9 @@ const category: CategoryData = {
   items: [],
   isReady: true,
   isFetching: false,
-  total: 13,
-  totalPages: 2,
-  isEmpty: true
+  isEmpty: true,
+  total: 0,
+  totalPages: 0
 };
 
 const categoryWithSearch: CategoryWithSearchData = {
@@ -127,8 +131,8 @@ const categoryWithSearch: CategoryWithSearchData = {
   items: [],
   isReady: true,
   isFetching: false,
-  total: 13,
-  totalPages: 2,
+  total: 0,
+  totalPages: 0,
   isEmpty: true,
   isSearch: true,
   searchQuery: "nature"
@@ -144,7 +148,9 @@ const tag: TagData = {
   items: [],
   isReady: true,
   isFetching: false,
-  isEmpty: true
+  isEmpty: true,
+  total: 0,
+  totalPages: 0
 };
 
 const tagWithSearch: TagWithSearchData = {
@@ -159,7 +165,9 @@ const tagWithSearch: TagWithSearchData = {
   isFetching: false,
   isEmpty: true,
   isSearch: true,
-  searchQuery: "nature"
+  searchQuery: "nature",
+  total: 0,
+  totalPages: 0
 };
 
 const author: AuthorData = {
@@ -170,7 +178,9 @@ const author: AuthorData = {
   items: [],
   isReady: true,
   isFetching: false,
-  isEmpty: true
+  isEmpty: true,
+  total: 0,
+  totalPages: 0
 };
 
 const authorWithSearch: AuthorWithSearchData = {
@@ -183,7 +193,9 @@ const authorWithSearch: AuthorWithSearchData = {
   isFetching: false,
   isEmpty: true,
   isSearch: true,
-  searchQuery: "nature"
+  searchQuery: "nature",
+  total: 0,
+  totalPages: 0
 };
 
 const postTypeArchive: PostTypeArchiveData = {
@@ -194,7 +206,9 @@ const postTypeArchive: PostTypeArchiveData = {
   items: [],
   isReady: true,
   isFetching: false,
-  isEmpty: true
+  isEmpty: true,
+  total: 0,
+  totalPages: 0
 };
 
 const postTypeArchiveWithSearch: PostTypeArchiveWithSearchData = {
@@ -207,7 +221,9 @@ const postTypeArchiveWithSearch: PostTypeArchiveWithSearchData = {
   isFetching: false,
   isEmpty: true,
   isSearch: true,
-  searchQuery: "nature"
+  searchQuery: "nature",
+  total: 0,
+  totalPages: 0
 };
 
 const postArchive: PostArchiveData = {
@@ -220,7 +236,9 @@ const postArchive: PostArchiveData = {
   items: [],
   isReady: true,
   isFetching: false,
-  isEmpty: true
+  isEmpty: true,
+  total: 0,
+  totalPages: 0
 };
 
 const postArchiveWithSearch: PostArchiveWithSearchData = {
@@ -235,7 +253,9 @@ const postArchiveWithSearch: PostArchiveWithSearchData = {
   isFetching: false,
   isEmpty: true,
   isSearch: true,
-  searchQuery: "nature"
+  searchQuery: "nature",
+  total: 0,
+  totalPages: 0
 };
 
 const dateArchive: DateData = {
@@ -248,7 +268,9 @@ const dateArchive: DateData = {
   items: [],
   isReady: true,
   isFetching: false,
-  isEmpty: true
+  isEmpty: true,
+  total: 0,
+  totalPages: 0
 };
 
 const dateArchiveWithSearch: DateWithSearchData = {
@@ -263,7 +285,9 @@ const dateArchiveWithSearch: DateWithSearchData = {
   isFetching: false,
   isEmpty: true,
   isSearch: true,
-  searchQuery: "nature"
+  searchQuery: "nature",
+  total: 0,
+  totalPages: 0
 };
 
 const postType: PostTypeData = {

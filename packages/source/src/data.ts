@@ -72,8 +72,8 @@ export type ArchiveData = Merge<
     link: string;
     isArchive: true;
     items: EntityData[];
-    total?: number;
-    totalPages?: number;
+    total: number;
+    totalPages: number;
     isSearch?: false;
     isEmpty: boolean;
   }
