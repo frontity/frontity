@@ -70,6 +70,9 @@ export type ArchiveData = Merge<
   BaseData,
   {
     link: string;
+    next?: string;
+    previous?: string;
+    page: number;
     isArchive: true;
     items: EntityData[];
     total: number;

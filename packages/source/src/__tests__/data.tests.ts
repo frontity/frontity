@@ -31,7 +31,7 @@ const notFound: NotFoundData = {
 };
 
 const archive: ArchiveData = {
-  link: "/url",
+  link: "/url/page/2",
   isArchive: true,
   items: [
     {
@@ -47,13 +47,17 @@ const archive: ArchiveData = {
   ],
   isReady: true,
   isFetching: false,
+  next: "/url/page/3",
+  previous: "/url",
+  page: 2,
   total: 2,
-  totalPages: 1,
+  totalPages: 4,
   isEmpty: false
 };
 
 const archiveWithSearch: ArchiveWithSearchData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   items: [
     {
@@ -78,6 +82,7 @@ const archiveWithSearch: ArchiveWithSearchData = {
 
 const taxonomy: TaxonomyData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isTaxonomy: true,
   taxonomy: "taxonomy",
@@ -92,6 +97,7 @@ const taxonomy: TaxonomyData = {
 
 const taxonomyWithSearch: TaxonomyWithSearchData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isTaxonomy: true,
   taxonomy: "taxonomy",
@@ -108,6 +114,7 @@ const taxonomyWithSearch: TaxonomyWithSearchData = {
 
 const category: CategoryData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isTaxonomy: true,
   isCategory: true,
@@ -123,6 +130,7 @@ const category: CategoryData = {
 
 const categoryWithSearch: CategoryWithSearchData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isTaxonomy: true,
   isCategory: true,
@@ -140,6 +148,7 @@ const categoryWithSearch: CategoryWithSearchData = {
 
 const tag: TagData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isTaxonomy: true,
   isTag: true,
@@ -155,6 +164,7 @@ const tag: TagData = {
 
 const tagWithSearch: TagWithSearchData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isTaxonomy: true,
   isTag: true,
@@ -172,6 +182,7 @@ const tagWithSearch: TagWithSearchData = {
 
 const author: AuthorData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isAuthor: true,
   id: 7,
@@ -185,6 +196,7 @@ const author: AuthorData = {
 
 const authorWithSearch: AuthorWithSearchData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isAuthor: true,
   id: 7,
@@ -200,6 +212,7 @@ const authorWithSearch: AuthorWithSearchData = {
 
 const postTypeArchive: PostTypeArchiveData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isPostTypeArchive: true,
   type: "post",
@@ -213,6 +226,7 @@ const postTypeArchive: PostTypeArchiveData = {
 
 const postTypeArchiveWithSearch: PostTypeArchiveWithSearchData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isPostTypeArchive: true,
   type: "post",
@@ -228,6 +242,7 @@ const postTypeArchiveWithSearch: PostTypeArchiveWithSearchData = {
 
 const postArchive: PostArchiveData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isPostTypeArchive: true,
   isPostArchive: true,
@@ -243,6 +258,7 @@ const postArchive: PostArchiveData = {
 
 const postArchiveWithSearch: PostArchiveWithSearchData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isPostTypeArchive: true,
   isPostArchive: true,
@@ -260,6 +276,7 @@ const postArchiveWithSearch: PostArchiveWithSearchData = {
 
 const dateArchive: DateData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isDate: true,
   year: 2016,
@@ -275,6 +292,7 @@ const dateArchive: DateData = {
 
 const dateArchiveWithSearch: DateWithSearchData = {
   link: "/url",
+  page: 1,
   isArchive: true,
   isDate: true,
   year: 2016,
