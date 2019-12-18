@@ -24,12 +24,14 @@ import {
 } from "../data";
 
 const notFound: NotFoundData = {
+  link: "/not-found",
   is404: true,
   isReady: false,
   isFetching: false
 };
 
 const archive: ArchiveData = {
+  link: "/url",
   isArchive: true,
   items: [
     {
@@ -51,6 +53,7 @@ const archive: ArchiveData = {
 };
 
 const archiveWithSearch: ArchiveWithSearchData = {
+  link: "/url",
   isArchive: true,
   items: [
     {
@@ -74,6 +77,7 @@ const archiveWithSearch: ArchiveWithSearchData = {
 };
 
 const taxonomy: TaxonomyData = {
+  link: "/url",
   isArchive: true,
   isTaxonomy: true,
   taxonomy: "taxonomy",
@@ -85,6 +89,7 @@ const taxonomy: TaxonomyData = {
 };
 
 const taxonomyWithSearch: TaxonomyWithSearchData = {
+  link: "/url",
   isArchive: true,
   isTaxonomy: true,
   taxonomy: "taxonomy",
@@ -98,6 +103,7 @@ const taxonomyWithSearch: TaxonomyWithSearchData = {
 };
 
 const category: CategoryData = {
+  link: "/url",
   isArchive: true,
   isTaxonomy: true,
   isCategory: true,
@@ -112,6 +118,7 @@ const category: CategoryData = {
 };
 
 const categoryWithSearch: CategoryWithSearchData = {
+  link: "/url",
   isArchive: true,
   isTaxonomy: true,
   isCategory: true,
@@ -128,6 +135,7 @@ const categoryWithSearch: CategoryWithSearchData = {
 };
 
 const tag: TagData = {
+  link: "/url",
   isArchive: true,
   isTaxonomy: true,
   isTag: true,
@@ -140,6 +148,7 @@ const tag: TagData = {
 };
 
 const tagWithSearch: TagWithSearchData = {
+  link: "/url",
   isArchive: true,
   isTaxonomy: true,
   isTag: true,
@@ -154,6 +163,7 @@ const tagWithSearch: TagWithSearchData = {
 };
 
 const author: AuthorData = {
+  link: "/url",
   isArchive: true,
   isAuthor: true,
   id: 7,
@@ -164,6 +174,7 @@ const author: AuthorData = {
 };
 
 const authorWithSearch: AuthorWithSearchData = {
+  link: "/url",
   isArchive: true,
   isAuthor: true,
   id: 7,
@@ -176,6 +187,7 @@ const authorWithSearch: AuthorWithSearchData = {
 };
 
 const postTypeArchive: PostTypeArchiveData = {
+  link: "/url",
   isArchive: true,
   isPostTypeArchive: true,
   type: "post",
@@ -186,6 +198,7 @@ const postTypeArchive: PostTypeArchiveData = {
 };
 
 const postTypeArchiveWithSearch: PostTypeArchiveWithSearchData = {
+  link: "/url",
   isArchive: true,
   isPostTypeArchive: true,
   type: "post",
@@ -198,6 +211,7 @@ const postTypeArchiveWithSearch: PostTypeArchiveWithSearchData = {
 };
 
 const postArchive: PostArchiveData = {
+  link: "/url",
   isArchive: true,
   isPostTypeArchive: true,
   isPostArchive: true,
@@ -210,6 +224,7 @@ const postArchive: PostArchiveData = {
 };
 
 const postArchiveWithSearch: PostArchiveWithSearchData = {
+  link: "/url",
   isArchive: true,
   isPostTypeArchive: true,
   isPostArchive: true,
@@ -224,6 +239,7 @@ const postArchiveWithSearch: PostArchiveWithSearchData = {
 };
 
 const dateArchive: DateData = {
+  link: "/url",
   isArchive: true,
   isDate: true,
   year: 2016,
@@ -236,6 +252,7 @@ const dateArchive: DateData = {
 };
 
 const dateArchiveWithSearch: DateWithSearchData = {
+  link: "/url",
   isArchive: true,
   isDate: true,
   year: 2016,
@@ -250,6 +267,7 @@ const dateArchiveWithSearch: DateWithSearchData = {
 };
 
 const postType: PostTypeData = {
+  link: "/url",
   isPostType: true,
   type: "type",
   id: 60,
@@ -258,6 +276,7 @@ const postType: PostTypeData = {
 };
 
 const post: PostData = {
+  link: "/url",
   isPostType: true,
   isPost: true,
   type: "post",
@@ -267,6 +286,7 @@ const post: PostData = {
 };
 
 const page: PageData = {
+  link: "/url",
   isPostType: true,
   isPage: true,
   type: "page",
@@ -276,6 +296,7 @@ const page: PageData = {
 };
 
 const attachment: AttachmentData = {
+  link: "/url",
   isPostType: true,
   isAttachment: true,
   type: "attachment",
@@ -287,13 +308,21 @@ const attachment: AttachmentData = {
 const data: Data[] = [
   notFound,
   archive,
+  archiveWithSearch,
   taxonomy,
+  taxonomyWithSearch,
   category,
+  categoryWithSearch,
   tag,
+  tagWithSearch,
   author,
+  authorWithSearch,
   postTypeArchive,
+  postTypeArchiveWithSearch,
   postArchive,
+  postArchiveWithSearch,
   dateArchive,
+  dateArchiveWithSearch,
   postType,
   post,
   page,

@@ -31,6 +31,7 @@ export type Data =
   | DateWithSearchData;
 
 export type BaseData = {
+  link?: string;
   type?: string;
   id?: number;
   taxonomy?: string;
@@ -58,6 +59,7 @@ export type BaseData = {
 export type NotFoundData = Merge<
   BaseData,
   {
+    link: string;
     is404: true;
   }
 >;
@@ -67,6 +69,7 @@ export type NotFoundData = Merge<
 export type ArchiveData = Merge<
   BaseData,
   {
+    link: string;
     isArchive: true;
     items: EntityData[];
     total?: number;
@@ -155,6 +158,7 @@ export type DateWithSearchData = Merge<ArchiveWithSearchData, DateProps>;
 export type PostTypeData = Merge<
   BaseData,
   {
+    link: string;
     isPostType: true;
     type: string;
     id: number;
