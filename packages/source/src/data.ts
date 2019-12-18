@@ -78,7 +78,6 @@ export type ArchiveData = Merge<
     total: number;
     totalPages: number;
     isSearch?: false;
-    isEmpty: boolean;
   }
 >;
 
@@ -86,7 +85,6 @@ export type ArchiveWithSearchData = Merge<
   ArchiveData,
   {
     isSearch: true;
-    isEmpty: boolean;
     searchQuery: string;
   }
 >;
