@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import Link from "../link";
+import PostSeparator from "../post/post-separator";
 
 /**
  * Pagination Component
@@ -42,21 +43,23 @@ const Pagination = ({ state, actions, libraries }) => {
 
   return (
     <div>
-      {/* If there's a next page, render this link */}
-      {isThereNextPage && (
-        <Link link={nextPageLink}>
-          <Text>← Older posts</Text>
-        </Link>
-      )}
+      <PostSeparator style={{ marginBottom: `2rem` }} />
+      <Container>
+        {/* If there's a next page, render this link */}
+        {isThereNextPage && (
+          <Link link={nextPageLink}>
+            <Text>← Older posts</Text>
+          </Link>
+        )}
 
-      {isTherePreviousPage && isThereNextPage && " - "}
-
-      {/* If there's a previous page, render this link */}
-      {isTherePreviousPage && (
-        <Link link={prevPageLink}>
-          <Text>Newer posts →</Text>
-        </Link>
-      )}
+        {/* If there's a previous page, render this link */}
+        {isTherePreviousPage && (
+          <Link link={prevPageLink}>
+            <Text>Newer posts →</Text>
+          </Link>
+        )}
+      </Container>
+      <PostSeparator style={{ marginTop: `4rem` }} />
     </div>
   );
 };
@@ -70,4 +73,13 @@ export default connect(Pagination);
 const Text = styled.em`
   display: inline-block;
   margin-top: 16px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: calc(100% - 8rem);
+  margin-left: auto;
+  margin-right: auto;
 `;
