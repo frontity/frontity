@@ -27,7 +27,9 @@ const postTypeArchiveHandler = ({
   const totalPages = getTotalPages(response);
 
   // 4. add data to source
+  const currentPageData = state.source.data[route];
   Object.assign(state.source.data[route], {
+    link: route,
     type,
     items,
     total,
@@ -36,6 +38,15 @@ const postTypeArchiveHandler = ({
     isPostTypeArchive: true,
     [`is${capitalize(type)}Archive`]: true
   });
+
+  // 6. If it's a search, add the information.
+  if (query.s) {
+    currentPageData.isSearch = true;
+    if (currentPageData.isSearch) {
+      currentPageData.isEmpty = !!items.length;
+      currentPageData.searchQuery = query.s;
+    }
+  }
 };
 
 export default postTypeArchiveHandler;

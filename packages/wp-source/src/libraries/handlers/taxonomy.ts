@@ -58,6 +58,7 @@ const taxonomyHandler = ({
   const firstPageData = state.source.data[path];
 
   Object.assign(currentPageData, {
+    link: route,
     id: firstPageData.id,
     taxonomy: firstPageData.taxonomy,
     items,
@@ -67,6 +68,15 @@ const taxonomyHandler = ({
     isTaxonomy: true,
     [`is${capitalize(firstPageData.taxonomy)}`]: true
   });
+
+  // 6. If it's a search, add the information.
+  if (query.s) {
+    currentPageData.isSearch = true;
+    if (currentPageData.isSearch) {
+      currentPageData.isEmpty = !!items.length;
+      currentPageData.searchQuery = query.s;
+    }
+  }
 };
 
 export default taxonomyHandler;

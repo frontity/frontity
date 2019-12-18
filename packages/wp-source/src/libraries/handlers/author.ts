@@ -5,10 +5,10 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
   const { path, page, query } = parse(route);
   const { slug } = params;
 
-  // 1. search id in state or get it from WP REST API
+  // 1. Search id in state or get it from WP REST API.
   let { id } = state.source.get(path);
   if (!id) {
-    // Request author from WP
+    // Request author from WP.
     const response = await api.get({ endpoint: "users", params: { slug } });
     const [entity] = await populate({ response, state });
     if (!entity)
@@ -18,7 +18,7 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
     id = entity.id;
   }
 
-  // 2. fetch the specified page
+  // 2. Fetch the specified page.
   const response = await api.get({
     endpoint: state.source.postEndpoint,
     params: {
@@ -30,27 +30,37 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
     }
   });
 
-  // 3. populate response
+  // 3. Populate response.
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
     throw new Error(`author "${slug}" doesn't have page ${page}`);
 
-  // 4. get posts and pages count
-  const total = getTotal(response);
-  const totalPages = getTotalPages(response);
+  // 4. Get posts and pages count.
+  const total = getTotal(response, items.length);
+  const totalPages = getTotalPages(response, 0);
 
-  // 5. add data to source
+  // 5. Add data to source..
   const currentPageData = state.source.data[route];
   const firstPageData = state.source.data[path];
 
   Object.assign(currentPageData, {
+    link: route,
     id: firstPageData.id,
     items,
     total,
     totalPages,
-    isArchive: true,
-    isAuthor: true
+    isArchive: true as true,
+    isAuthor: true as true
   });
+
+  // 6. If it's a search, add the information.
+  if (query.s) {
+    Object.assign(currentPageData, {
+      isSearch: true,
+      isEmpty: true,
+      searchQuery: query.s
+    });
+  }
 };
 
 export default authorHandler;

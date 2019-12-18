@@ -41,7 +41,9 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
   const totalPages = getTotalPages(response);
 
   // 5. add data to source
+  const currentPageData = state.source.data[route];
   Object.assign(state.source.data[route], {
+    link: route,
     year,
     month,
     day,
@@ -51,6 +53,15 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
     isArchive: true,
     isDate: true
   });
+
+  // 6. If it's a search, add the information.
+  if (query.s) {
+    currentPageData.isSearch = true;
+    if (currentPageData.isSearch) {
+      currentPageData.isEmpty = !!items.length;
+      currentPageData.searchQuery = query.s;
+    }
+  }
 };
 
 export default dateHandler;
