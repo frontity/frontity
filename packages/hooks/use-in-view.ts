@@ -52,6 +52,13 @@ const createCallback: IntersectionObserverCallbackCreator = options => {
 };
 
 const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
+  if (
+    typeof window === "undefined" ||
+    typeof IntersectionObserver === "undefined"
+  ) {
+    return [false, null];
+  }
+
   const [isIntersecting, setIntersecting] = useState(false);
   const ref = useRef();
 

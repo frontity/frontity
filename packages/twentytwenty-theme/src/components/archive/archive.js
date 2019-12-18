@@ -2,13 +2,14 @@ import { connect } from "frontity";
 import React, { Fragment, useEffect } from "react";
 import Article from "../post/post-item";
 import ArchiveHeader from "./archive-header";
-import Pagination from "./archive-pagination";
+// import Pagination from "./archive-pagination";
 import PostSeparator from "../post/post-separator";
 import Post from "../post";
+import InfiniteScroller from "./infinite-scroll-pagination";
 
-const Archive = ({ state, showExcerpt, showMedia }) => {
+const Archive = ({ state, showExcerpt, showMedia, data }) => {
   // Get the data of the current list.
-  const data = state.source.get(state.router.link);
+  data = data || state.source.get(state.router.link);
   const { primary } = state.theme.colors;
 
   // Whether the show the excerpt instead of the full content
@@ -52,7 +53,8 @@ const Archive = ({ state, showExcerpt, showMedia }) => {
           </Fragment>
         );
       })}
-      <Pagination />
+      {/* <Pagination /> */}
+      <InfiniteScroller />
     </>
   );
 };
