@@ -20,7 +20,15 @@ export type Data =
   | PostTypeData
   | PostData
   | PageData
-  | AttachmentData;
+  | AttachmentData
+  | ArchiveWithSearchData
+  | TaxonomyWithSearchData
+  | CategoryWithSearchData
+  | TagWithSearchData
+  | AuthorWithSearchData
+  | PostTypeArchiveWithSearchData
+  | PostArchiveWithSearchData
+  | DateWithSearchData;
 
 export type BaseData = {
   type?: string;
@@ -41,6 +49,7 @@ export type BaseData = {
   isPost?: false;
   isPage?: false;
   isAttachment?: false;
+  isSearch?: false;
   isHome?: boolean;
 };
 
@@ -62,66 +71,84 @@ export type ArchiveData = Merge<
     items: EntityData[];
     total?: number;
     totalPages?: number;
+    isSearch?: false;
+    isEmpty: boolean;
   }
 >;
 
-export type TaxonomyData = Merge<
+export type ArchiveWithSearchData = Merge<
   ArchiveData,
   {
-    isTaxonomy: true;
-    taxonomy: string;
-    id: number;
+    isSearch: true;
+    isEmpty: boolean;
+    searchQuery: string;
   }
 >;
 
-export type CategoryData = Merge<
-  TaxonomyData,
-  {
-    taxonomy: "category";
-    isCategory: true;
-  }
->;
+export type TaxonomyProps = {
+  isTaxonomy: true;
+  taxonomy: string;
+  id: number;
+};
 
-export type TagData = Merge<
-  TaxonomyData,
-  {
-    taxonomy: "tag";
-    isTag: true;
-  }
->;
+export type CategoryProps = {
+  taxonomy: "category";
+  isCategory: true;
+};
 
-export type AuthorData = Merge<
-  ArchiveData,
-  {
-    isAuthor: true;
-    id: number;
-  }
->;
+export type TagProps = {
+  taxonomy: "tag";
+  isTag: true;
+};
 
-export type PostTypeArchiveData = Merge<
-  ArchiveData,
-  {
-    isPostTypeArchive: true;
-    type: string;
-  }
->;
+export type AuthorProps = {
+  isAuthor: true;
+  id: number;
+};
 
-export type PostArchiveData = Merge<
-  PostTypeArchiveData,
-  {
-    isPostArchive: true;
-  }
->;
+export type PostTypeArchiveProps = {
+  isPostTypeArchive: true;
+  type: string;
+};
 
-export type DateData = Merge<
-  ArchiveData,
-  {
-    isDate: true;
-    year: number;
-    month?: number;
-    day?: number;
-  }
+export type PostArchiveProps = {
+  isPostArchive: true;
+};
+
+export type DateProps = {
+  isDate: true;
+  year: number;
+  month?: number;
+  day?: number;
+};
+
+export type TaxonomyData = Merge<ArchiveData, TaxonomyProps>;
+export type CategoryData = Merge<TaxonomyData, CategoryProps>;
+export type TagData = Merge<TaxonomyData, TagProps>;
+export type AuthorData = Merge<ArchiveData, AuthorProps>;
+export type PostTypeArchiveData = Merge<ArchiveData, PostTypeArchiveProps>;
+export type PostArchiveData = Merge<PostTypeArchiveData, PostArchiveProps>;
+export type DateData = Merge<ArchiveData, DateProps>;
+
+export type TaxonomyWithSearchData = Merge<
+  ArchiveWithSearchData,
+  TaxonomyProps
 >;
+export type CategoryWithSearchData = Merge<
+  TaxonomyWithSearchData,
+  CategoryProps
+>;
+export type TagWithSearchData = Merge<TaxonomyWithSearchData, TagProps>;
+export type AuthorWithSearchData = Merge<ArchiveWithSearchData, AuthorProps>;
+export type PostTypeArchiveWithSearchData = Merge<
+  ArchiveWithSearchData,
+  PostTypeArchiveProps
+>;
+export type PostArchiveWithSearchData = Merge<
+  PostTypeArchiveWithSearchData,
+  PostArchiveProps
+>;
+export type DateWithSearchData = Merge<ArchiveWithSearchData, DateProps>;
 
 // POST TYPES
 

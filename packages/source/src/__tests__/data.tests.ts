@@ -12,7 +12,15 @@ import {
   PostTypeData,
   PostData,
   PageData,
-  AttachmentData
+  AttachmentData,
+  ArchiveWithSearchData,
+  TaxonomyWithSearchData,
+  CategoryWithSearchData,
+  TagWithSearchData,
+  AuthorWithSearchData,
+  PostTypeArchiveWithSearchData,
+  PostArchiveWithSearchData,
+  DateWithSearchData
 } from "../data";
 
 const notFound: NotFoundData = {
@@ -38,7 +46,31 @@ const archive: ArchiveData = {
   isReady: true,
   isFetching: false,
   total: 13,
-  totalPages: 13
+  totalPages: 13,
+  isEmpty: false
+};
+
+const archiveWithSearch: ArchiveWithSearchData = {
+  isArchive: true,
+  items: [
+    {
+      id: 60,
+      type: "post",
+      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss"
+    },
+    {
+      id: 57,
+      type: "post",
+      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/"
+    }
+  ],
+  isReady: true,
+  isFetching: false,
+  total: 13,
+  totalPages: 13,
+  isSearch: true,
+  isEmpty: false,
+  searchQuery: "nature"
 };
 
 const taxonomy: TaxonomyData = {
@@ -48,7 +80,21 @@ const taxonomy: TaxonomyData = {
   id: 7,
   items: [],
   isReady: true,
-  isFetching: false
+  isFetching: false,
+  isEmpty: true
+};
+
+const taxonomyWithSearch: TaxonomyWithSearchData = {
+  isArchive: true,
+  isTaxonomy: true,
+  taxonomy: "taxonomy",
+  id: 7,
+  items: [],
+  isReady: true,
+  isFetching: false,
+  isSearch: true,
+  searchQuery: "",
+  isEmpty: true
 };
 
 const category: CategoryData = {
@@ -61,7 +107,24 @@ const category: CategoryData = {
   isReady: true,
   isFetching: false,
   total: 13,
-  totalPages: 2
+  totalPages: 2,
+  isEmpty: true
+};
+
+const categoryWithSearch: CategoryWithSearchData = {
+  isArchive: true,
+  isTaxonomy: true,
+  isCategory: true,
+  taxonomy: "category",
+  id: 7,
+  items: [],
+  isReady: true,
+  isFetching: false,
+  total: 13,
+  totalPages: 2,
+  isEmpty: true,
+  isSearch: true,
+  searchQuery: "nature"
 };
 
 const tag: TagData = {
@@ -72,7 +135,22 @@ const tag: TagData = {
   id: 7,
   items: [],
   isReady: true,
-  isFetching: false
+  isFetching: false,
+  isEmpty: true
+};
+
+const tagWithSearch: TagWithSearchData = {
+  isArchive: true,
+  isTaxonomy: true,
+  isTag: true,
+  taxonomy: "tag",
+  id: 7,
+  items: [],
+  isReady: true,
+  isFetching: false,
+  isEmpty: true,
+  isSearch: true,
+  searchQuery: "nature"
 };
 
 const author: AuthorData = {
@@ -81,7 +159,20 @@ const author: AuthorData = {
   id: 7,
   items: [],
   isReady: true,
-  isFetching: false
+  isFetching: false,
+  isEmpty: true
+};
+
+const authorWithSearch: AuthorWithSearchData = {
+  isArchive: true,
+  isAuthor: true,
+  id: 7,
+  items: [],
+  isReady: true,
+  isFetching: false,
+  isEmpty: true,
+  isSearch: true,
+  searchQuery: "nature"
 };
 
 const postTypeArchive: PostTypeArchiveData = {
@@ -90,7 +181,20 @@ const postTypeArchive: PostTypeArchiveData = {
   type: "post",
   items: [],
   isReady: true,
-  isFetching: false
+  isFetching: false,
+  isEmpty: true
+};
+
+const postTypeArchiveWithSearch: PostTypeArchiveWithSearchData = {
+  isArchive: true,
+  isPostTypeArchive: true,
+  type: "post",
+  items: [],
+  isReady: true,
+  isFetching: false,
+  isEmpty: true,
+  isSearch: true,
+  searchQuery: "nature"
 };
 
 const postArchive: PostArchiveData = {
@@ -101,7 +205,22 @@ const postArchive: PostArchiveData = {
   type: "post",
   items: [],
   isReady: true,
-  isFetching: false
+  isFetching: false,
+  isEmpty: true
+};
+
+const postArchiveWithSearch: PostArchiveWithSearchData = {
+  isArchive: true,
+  isPostTypeArchive: true,
+  isPostArchive: true,
+  isHome: true,
+  type: "post",
+  items: [],
+  isReady: true,
+  isFetching: false,
+  isEmpty: true,
+  isSearch: true,
+  searchQuery: "nature"
 };
 
 const dateArchive: DateData = {
@@ -112,7 +231,22 @@ const dateArchive: DateData = {
   day: 31,
   items: [],
   isReady: true,
-  isFetching: false
+  isFetching: false,
+  isEmpty: true
+};
+
+const dateArchiveWithSearch: DateWithSearchData = {
+  isArchive: true,
+  isDate: true,
+  year: 2016,
+  month: 0,
+  day: 31,
+  items: [],
+  isReady: true,
+  isFetching: false,
+  isEmpty: true,
+  isSearch: true,
+  searchQuery: "nature"
 };
 
 const postType: PostTypeData = {
