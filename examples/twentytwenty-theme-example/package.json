@@ -16,6 +16,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@frontity/core": "^1.4.0",
+    "@frontity/gutenberg": "^0.1.0",
     "@frontity/html2react": "^1.1.14",
     "@frontity/twentytwenty-theme": "^1.0.0-beta.0",
     "@frontity/tiny-router": "^1.0.17",

@@ -10,6 +10,7 @@ export default {
   packages: [
     "@frontity/tiny-router",
     "@frontity/html2react",
+    "@frontity/gutenberg",
     {
       name: "@frontity/twentytwenty-theme",
       state: {
