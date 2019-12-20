@@ -32,7 +32,6 @@ let observer: IntersectionObserver;
 // `setIntersected` function for each changed entry.
 const createCallback: IntersectionObserverCallbackCreator = options => {
   return entries => {
-    console.log(setFunctions);
     entries.forEach(entry => {
       const setFunction = setFunctions.find(
         set => set[1].current === entry.target

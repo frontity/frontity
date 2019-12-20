@@ -2,14 +2,21 @@ import { connect } from "frontity";
 import React, { Fragment, useEffect } from "react";
 import Article from "../post/post-item";
 import ArchiveHeader from "./archive-header";
-// import Pagination from "./archive-pagination";
+import Pagination from "./archive-pagination";
 import PostSeparator from "../post/post-separator";
 import Post from "../post";
 import InfiniteScroller from "./infinite-scroll-pagination";
+import { useInView } from "react-intersection-observer";
 
-const Archive = ({ state, showExcerpt, showMedia, data, link }) => {
+const Archive = ({
+  state,
+  showExcerpt,
+  showMedia,
+  data,
+  link = state.router.link
+}) => {
   // Get the data of the current list.
-  data = data || state.source.get(link || state.router.link);
+  data = data || state.source.get(link);
   const { primary } = state.theme.colors;
 
   // Whether the show the excerpt instead of the full content
@@ -20,8 +27,13 @@ const Archive = ({ state, showExcerpt, showMedia, data, link }) => {
     Post.preload();
   }, []);
 
+  // Keep track of whether the Archive is visible or not.
+  // We will pass this as prop to the <InfiniteScroll /> to keep the URL
+  // in sync with whichever page number is currently visible
+  const [archiveRef, archiveIsVisible] = useInView();
+
   return (
-    <>
+    <div ref={archiveRef}>
       {/* If the list is a taxonomy, we render a title. */}
       {data.isTaxonomy && (
         <ArchiveHeader labelColor={primary} label={data.taxonomy}>
@@ -53,9 +65,15 @@ const Archive = ({ state, showExcerpt, showMedia, data, link }) => {
           </Fragment>
         );
       })}
-      {/* <Pagination /> */}
-      <InfiniteScroller />
-    </>
+      {state.theme.infiniteScrolling ? (
+        <InfiniteScroller
+          previousPageVisible={archiveIsVisible}
+          currentLink={link}
+        />
+      ) : (
+        <Pagination />
+      )}
+    </div>
   );
 };
 

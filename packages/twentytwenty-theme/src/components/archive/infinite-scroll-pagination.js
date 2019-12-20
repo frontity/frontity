@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, styled } from "frontity";
-import useInView from "@frontity/hooks/use-in-view";
+import { useInView } from "react-intersection-observer";
 
 import PostSeparator from "../post/post-separator";
 import Loading from "../loading";
 import Archive from "./archive";
 
-const InfiniteScroller = ({ state, actions, libraries }) => {
+const InfiniteScroller = ({
+  state,
+  actions,
+  libraries,
+  previousPageVisible,
+  currentLink
+}) => {
   // Get the total posts to be displayed based for the current link
-  const { totalPages } = state.source.get(state.router.link);
-  const { path, page, query } = libraries.source.parse(state.router.link);
+  const { totalPages } = state.source.get(currentLink);
+  const { path, page, query } = libraries.source.parse(currentLink);
 
   // Check if we can go to next page within the pagination
   const isThereNextPage = page < totalPages;
@@ -21,52 +27,50 @@ const InfiniteScroller = ({ state, actions, libraries }) => {
     query
   });
 
-  // Store the reference to the current URL so that when the user
-  // scrolls back up we can revert to this URL
-  const currentLink = state.router.link;
+  // Create a ref to ScrollObserver and observe it's visiblility.
+  // ScrollObserver is a "hit area" - as soon as it's visible in the viewport
+  const [scrollObserverRef, scrollObserverVisible] = useInView();
 
-  let data;
-  const [scrollObserverVisible, scrollObserverRef] = useInView();
-  const [nextPageVisible, nextPageRef] = useInView();
+  // Create a ref for the following page. We use it to keep the URL in sync with the scrolling
+  const [nextPageRef, nextPageVisible] = useInView();
+  const [nextPageData, setNextPageData] = useState({});
 
-  if (scrollObserverVisible && isThereNextPage) {
-    actions.source.fetch(nextPageLink);
-    data = state.source.get(nextPageLink);
-  }
-
+  // Fetch the data for the following page
   useEffect(() => {
-    console.log("scroll", scrollObserverVisible);
-    if (nextPageVisible) {
-      history.pushState(null, null, nextPageLink);
+    if (scrollObserverVisible && isThereNextPage) {
+      actions.source.fetch(nextPageLink).then(() => {
+        setNextPageData(state.source.get(nextPageLink));
+      });
     }
-    if (
-      scrollObserverVisible &&
-      !nextPageVisible &&
-      window.location.pathname !== currentLink
-    ) {
-      console.log("should go back here");
-    }
-  }, [nextPageVisible, scrollObserverVisible]);
+  }, [scrollObserverVisible, isThereNextPage]);
 
-  // useEffect(() => {
-  //   console.log(scrollObserverRef);
-  // }, [scrollObserverRef]);
+  // Keep the URL in sync with the pages, as the user keeps scrolling
+  useEffect(() => {
+    // The user has scrolled to the next page
+    if (nextPageVisible && !previousPageVisible) {
+      history.replaceState(null, null, nextPageLink);
+    }
+    // The user has scrolled back up
+    if (!nextPageVisible && previousPageVisible) {
+      history.replaceState(null, null, currentLink);
+    }
+  }, [nextPageVisible, previousPageVisible]);
 
   return (
-    <Container>
+    <>
       <PostSeparator />
-      <Container>
+      <div style={{ position: `relative` }}>
         <ScrollObserver ref={scrollObserverRef} />
-      </Container>
-      <ArchiveContainer>
-        {data && data.isFetching && <Loading />}
-        <ArchiveContainer ref={nextPageRef}>
-          {data && data.isArchive && (
-            <Archive data={data} link={nextPageLink} />
-          )}
-        </ArchiveContainer>
+      </div>
+
+      {nextPageData.isFetching && <Loading />}
+
+      <ArchiveContainer ref={nextPageRef}>
+        {nextPageData.isArchive && (
+          <Archive data={nextPageData} link={nextPageLink} />
+        )}
       </ArchiveContainer>
-    </Container>
+    </>
   );
 };
 
@@ -77,17 +81,11 @@ const ScrollObserver = styled.div`
   bottom: 0;
   height: 500px;
   width: 100%;
-  /* z-index: -1;
-  visibility: hidden; */
-  background: pink;
-  opacity: 0.4;
+  z-index: -1;
+  visibility: hidden;
 `;
 
 const ArchiveContainer = styled.div`
   width: auto;
   height: auto;
-`;
-
-const Container = styled.div`
-  position: relative;
 `;

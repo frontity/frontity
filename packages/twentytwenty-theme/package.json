@@ -21,6 +21,7 @@
     "@frontity/hooks": "^1.1.14",
     "@frontity/html2react": "^1.1.14",
     "frontity": "^1.4.2",
-    "react-spinners": "^0.5.4"
+    "react-spinners": "^0.5.4",
+    "react-intersection-observer": "^8.25.2"
   }
 }

@@ -44,6 +44,8 @@ const twentyTwentyTheme = {
         // Whether to show it on post
         showOnPost: true
       },
+      // Show the archive as an infinitely scrolling list instead of normal pagination
+      infiniteScrolling: true,
       // Whether to auto-fetch links on a page. Values can be "no" | "all" | "in-view" | "hover"
       autoPreFetch: "no",
       /**
