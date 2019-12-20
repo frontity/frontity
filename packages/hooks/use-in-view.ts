@@ -32,6 +32,7 @@ let observer: IntersectionObserver;
 // `setIntersected` function for each changed entry.
 const createCallback: IntersectionObserverCallbackCreator = options => {
   return entries => {
+    console.log(setFunctions);
     entries.forEach(entry => {
       const setFunction = setFunctions.find(
         set => set[1].current === entry.target
@@ -52,6 +53,7 @@ const createCallback: IntersectionObserverCallbackCreator = options => {
 };
 
 const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
+  // Necessary when running the hook on the server-side
   if (
     typeof window === "undefined" ||
     typeof IntersectionObserver === "undefined"
@@ -80,7 +82,7 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
         1
       );
     };
-  }, []);
+  }, [ref]);
 
   return [isIntersecting, ref];
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
 
@@ -21,44 +21,56 @@ const InfiniteScroller = ({ state, actions, libraries }) => {
     query
   });
 
+  // Store the reference to the current URL so that when the user
+  // scrolls back up we can revert to this URL
+  const currentLink = state.router.link;
+
   let data;
-  const [isVisible, scrollObserverRef] = useInView();
+  const [scrollObserverVisible, scrollObserverRef] = useInView();
   const [nextPageVisible, nextPageRef] = useInView();
 
-  if (isVisible && isThereNextPage) {
+  if (scrollObserverVisible && isThereNextPage) {
     actions.source.fetch(nextPageLink);
     data = state.source.get(nextPageLink);
   }
 
-  // if (nextPageVisible) {
-  //   actions.router.set(nextPageLink);
-  // }
+  useEffect(() => {
+    console.log("scroll", scrollObserverVisible);
+    if (nextPageVisible) {
+      history.pushState(null, null, nextPageLink);
+    }
+    if (
+      scrollObserverVisible &&
+      !nextPageVisible &&
+      window.location.pathname !== currentLink
+    ) {
+      console.log("should go back here");
+    }
+  }, [nextPageVisible, scrollObserverVisible]);
+
+  // useEffect(() => {
+  //   console.log(scrollObserverRef);
+  // }, [scrollObserverRef]);
 
   return (
     <Container>
       <PostSeparator />
       <Container>
         <ScrollObserver ref={scrollObserverRef} />
-        {data && data.isFetching && <Loading />}
-        <NextPage ref={nextPageRef} />
       </Container>
-
-      {data && data.isArchive && <Archive data={data} />}
+      <ArchiveContainer>
+        {data && data.isFetching && <Loading />}
+        <ArchiveContainer ref={nextPageRef}>
+          {data && data.isArchive && (
+            <Archive data={data} link={nextPageLink} />
+          )}
+        </ArchiveContainer>
+      </ArchiveContainer>
     </Container>
   );
 };
 
 export default connect(InfiniteScroller);
-
-const NextPage = styled.div`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  /* z-index: -1;
-  visibility: hidden; */
-  background: pink;
-`;
 
 const ScrollObserver = styled.div`
   position: absolute;
@@ -68,6 +80,12 @@ const ScrollObserver = styled.div`
   /* z-index: -1;
   visibility: hidden; */
   background: pink;
+  opacity: 0.4;
+`;
+
+const ArchiveContainer = styled.div`
+  width: auto;
+  height: auto;
 `;
 
 const Container = styled.div`

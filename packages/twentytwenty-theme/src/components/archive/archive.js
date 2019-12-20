@@ -7,9 +7,9 @@ import PostSeparator from "../post/post-separator";
 import Post from "../post";
 import InfiniteScroller from "./infinite-scroll-pagination";
 
-const Archive = ({ state, showExcerpt, showMedia, data }) => {
+const Archive = ({ state, showExcerpt, showMedia, data, link }) => {
   // Get the data of the current list.
-  data = data || state.source.get(state.router.link);
+  data = data || state.source.get(link || state.router.link);
   const { primary } = state.theme.colors;
 
   // Whether the show the excerpt instead of the full content
