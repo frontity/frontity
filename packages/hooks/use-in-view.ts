@@ -81,7 +81,7 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
         1
       );
     };
-  }, [ref]);
+  }, []);
 
   return [isIntersecting, ref];
 };
