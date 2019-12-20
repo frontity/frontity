@@ -112,22 +112,6 @@ const Content = styled.div`
     line-height: 1.6em;
   }
 
-  img {
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  figure {
-    margin: 24px auto;
-    /* next line overrides an inline style of the figure element. */
-    width: 100% !important;
-
-    figcaption {
-      font-size: 0.7em;
-    }
-  }
-
   iframe {
     display: block;
     margin: auto;
@@ -192,31 +176,5 @@ const Content = styled.div`
     border-radius: 4px;
     color: #fff;
     background-color: #1f38c5;
-  }
-
-  /* WordPress Core Align Classes */
-
-  @media (min-width: 420px) {
-    img.aligncenter,
-    img.alignleft,
-    img.alignright {
-      width: auto;
-    }
-
-    .aligncenter {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .alignright {
-      float: right;
-      margin-left: 24px;
-    }
-
-    .alignleft {
-      float: left;
-      margin-right: 24px;
-    }
   }
 `;
