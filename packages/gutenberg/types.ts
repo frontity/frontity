@@ -8,7 +8,8 @@ interface Gutenberg extends Package {
   state: {
     gutenberg: {
       version: string;
-      rtl: boolean;
+      direction: string;
+      theme: boolean;
     };
   };
 }

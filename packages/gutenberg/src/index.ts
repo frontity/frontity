@@ -9,7 +9,8 @@ const gutenberg: GutenbergPackage = {
   state: {
     gutenberg: {
       version: "wp-5.0",
-      rtl: false
+      direction: "ltr",
+      theme: true
     }
   }
 };
