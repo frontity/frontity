@@ -19,7 +19,8 @@ const PostItem = ({
   item,
   libraries,
   showExcerpt,
-  showMedia = true
+  showMedia = true,
+  loading
 }) => {
   // Get all categories
   const allCategories = state.source.category;
@@ -65,7 +66,7 @@ const PostItem = ({
        * list of featured posts, we render the media.
        */}
       {state.theme.featuredMedia.showOnArchive && showMedia && (
-        <FeaturedMedia id={item.featured_media} />
+        <FeaturedMedia id={item.featured_media} loading={loading} />
       )}
 
       {/* If the post has an excerpt (short summary text), we render it */}
