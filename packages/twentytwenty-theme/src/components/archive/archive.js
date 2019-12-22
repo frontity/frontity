@@ -1,6 +1,6 @@
 import { connect } from "frontity";
 import React, { Fragment, useEffect } from "react";
-import Article from "../post/post-item";
+import PostItem from "../post/post-item";
 import ArchiveHeader from "./archive-header";
 import Pagination from "./archive-pagination";
 import PostSeparator from "../post/post-separator";
@@ -42,11 +42,12 @@ const Archive = ({ state, showExcerpt, showMedia }) => {
         // Render one Item component for each one.
         return (
           <Fragment key={item.id}>
-            <Article
+            <PostItem
               key={item.id}
               item={item}
               showExcerpt={_showExcerpt}
               showMedia={showMedia}
+              loading={index === 0 ? "eager" : "lazy"}
             />
             {!isLastArticle && <PostSeparator />}
           </Fragment>
