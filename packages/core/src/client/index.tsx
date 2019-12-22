@@ -1,5 +1,5 @@
 import React from "react";
-import { hydrate } from "react-dom";
+import { hydrate, createRoot } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import App from "../app";
 import createStore from "./store";
@@ -39,7 +39,10 @@ export default async ({ packages }) => {
       }
 
       loadableReady(() => {
-        hydrate(<App store={store} />, window.document.getElementById("root"));
+        // hydrate(<App store={store} />, window.document.getElementById("root"));
+        createRoot(window.document.getElementById("root"), {
+          hydrate: true
+        }).render(<App store={store} />);
 
         // Switch to CSR mode.
         store.state.frontity.rendering = "csr";
