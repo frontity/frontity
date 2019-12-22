@@ -18,17 +18,21 @@ import { useTransition, animated, config } from "react-spring";
  */
 
 const Theme = ({ state, libraries }) => {
-  // Get information about the current URL.
+  // Create a reference to disable the animation in the first render.
+  const ref = React.useRef();
+
+  // Create transitions using the current URL as trigger.
   const transitions = useTransition(state.router.link, link => link, {
     from: { opacity: 0.1, transform: "translate3D(0, -15px, 0)" },
     enter: { opacity: 1, transform: "translate3D(0, 0px, 0)" },
     update: { opacity: 1, transform: "translate3D(0, 0px, 0)" },
     leave: { opacity: 0, transform: "translate3D(0, -5px, 0)" },
-    config: config.slow
+    config: config.slow,
+    immediate: !ref.current
   });
 
-  const parse = libraries.source.parse(state.router.link);
   // Check if the url is a search type
+  const parse = libraries.source.parse(state.router.link);
   const isSearch = Boolean(parse.query["s"]);
 
   return (
@@ -55,7 +59,7 @@ const Theme = ({ state, libraries }) => {
 
         {/* Add the main section. It renders a different component depending
         on the type of URL we are in. */}
-        <Main id="main">
+        <Main id="main" ref={ref}>
           {transitions.map(({ item, props, key }) => {
             const data = state.source.get(item);
             return (
