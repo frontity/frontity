@@ -59,11 +59,11 @@ const InfiniteScroller = ({
 
       {nextPageData.isFetching && <Loading />}
 
-      <ArchiveContainer ref={nextPageRef}>
+      <div ref={nextPageRef}>
         {nextPageData.isArchive && (
           <Archive data={nextPageData} link={nextPageLink} />
         )}
-      </ArchiveContainer>
+      </div>
     </>
   );
 };
@@ -77,9 +77,4 @@ const ScrollObserver = styled.div`
   width: 100%;
   z-index: -1;
   visibility: hidden;
-`;
-
-const ArchiveContainer = styled.div`
-  width: auto;
-  height: auto;
 `;
