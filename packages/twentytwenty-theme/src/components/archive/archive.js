@@ -67,7 +67,7 @@ const Archive = ({
       })}
       {state.theme.infiniteScrolling ? (
         <InfiniteScroller
-          previousPageVisible={archiveIsVisible}
+          currentPageVisible={archiveIsVisible}
           currentLink={link}
         />
       ) : (

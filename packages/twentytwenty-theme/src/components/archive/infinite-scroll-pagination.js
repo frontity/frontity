@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect, styled } from "frontity";
 import { useInView } from "react-intersection-observer";
 
@@ -10,7 +10,7 @@ const InfiniteScroller = ({
   state,
   actions,
   libraries,
-  previousPageVisible,
+  currentPageVisible,
   currentLink
 }) => {
   // Get the total posts to be displayed based for the current link
@@ -33,28 +33,22 @@ const InfiniteScroller = ({
 
   // Create a ref for the following page. We use it to keep the URL in sync with the scrolling
   const [nextPageRef, nextPageVisible] = useInView();
-  const [nextPageData, setNextPageData] = useState({});
+
+  const nextPageData = state.source.get(nextPageLink);
 
   // Fetch the data for the following page
   useEffect(() => {
     if (scrollObserverVisible && isThereNextPage) {
-      actions.source.fetch(nextPageLink).then(() => {
-        setNextPageData(state.source.get(nextPageLink));
-      });
+      actions.source.fetch(nextPageLink);
     }
   }, [scrollObserverVisible, isThereNextPage]);
 
   // Keep the URL in sync with the pages, as the user keeps scrolling
   useEffect(() => {
-    // The user has scrolled to the next page
-    if (nextPageVisible && !previousPageVisible) {
-      history.replaceState(null, null, nextPageLink);
-    }
-    // The user has scrolled back up
-    if (!nextPageVisible && previousPageVisible) {
+    if (!nextPageVisible && currentPageVisible) {
       history.replaceState(null, null, currentLink);
     }
-  }, [nextPageVisible, previousPageVisible]);
+  }, [nextPageVisible, currentPageVisible]);
 
   return (
     <>
