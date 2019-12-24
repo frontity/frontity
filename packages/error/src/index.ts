@@ -4,7 +4,7 @@ const prefix = "\nVisit https://community.frontity.org for help! 🙂\n";
 // Throw an error if the condition fails
 // Strip out error messages for production
 // > Not providing an inline default argument for message as the result is smaller
-export default function invariant(condition: boolean, message?: string) {
+export function error(condition: boolean, message?: string) {
   if (condition) {
     return;
   }
@@ -16,6 +16,16 @@ export default function invariant(condition: boolean, message?: string) {
   } else {
     // When not in production we allow the message to pass through
     // *This block will be removed in production builds*
-    throw new Error(`${prefix}: ${message || ""}`);
+    throw new Error(`${prefix}${message || ""}`);
+  }
+}
+
+export function warn(condition: boolean, message?: string) {
+  if (condition) {
+    return;
+  }
+
+  if (!isProduction) {
+    console.warn(`${prefix}${message || ""}`);
   }
 }
