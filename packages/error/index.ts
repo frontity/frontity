@@ -1,5 +1,5 @@
 const isProduction: boolean = process.env.NODE_ENV === "production";
-const prefix = "\nVisit https://community.frontity.org for help! 🙂\n";
+const prefix = "Visit https://community.frontity.org for help! 🙂\n\n";
 
 // Throw an error if the condition fails
 // Strip out error messages for production
@@ -20,12 +20,14 @@ export function error(condition: boolean, message?: string) {
   }
 }
 
-export function warn(condition: boolean, message?: string) {
-  if (condition) {
-    return;
-  }
-
+// Use a closure to ensure that the warning only shows up!
+export const warn = (() => {
   if (!isProduction) {
-    console.warn(`${prefix}${message || ""}`);
+    let warned = false;
+
+    return (message?: string) => {
+      if (!warned) console.warn(`${prefix}${message || ""}`);
+      warned = true;
+    };
   }
-}
+})();
