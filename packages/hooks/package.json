@@ -23,7 +23,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@frontity/errors": "^0.0.1"
+    "@frontity/error": "^0.0.1"
   },
   "devDependencies": {
     "frontity": "^1.4.3",

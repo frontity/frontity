@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
-import error from "@frontity/error";
+import { warn } from "@frontity/error";
 
 interface IntersectionObserverCallback {
   (entries: IntersectionObserverEntry[]);
@@ -56,12 +56,9 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
   const [isIntersecting, setIntersecting] = useState(false);
   const ref = useRef();
 
-  useEffect(() => {
-    error(
-      true,
-      "The @frontity/hooks package is deprecated.\nThe Frontity team recommends that you use https://github.com/thebuilder/react-intersection-observer instead."
-    );
-  }, []);
+  warn(
+    "The @frontity/hooks package is deprecated and will be removed in the future version of frontity.\nThe Frontity team recommends that you use https://github.com/thebuilder/react-intersection-observer instead."
+  );
 
   if (!observer)
     observer = new IntersectionObserver(createCallback({ onlyOnce }), {

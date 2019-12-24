@@ -74,8 +74,7 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
         {
           include: ["CWD"]
         }
-      ],
-      "babel-plugin-dev-expression"
+      ]
     ];
     return {
       compact: true,
