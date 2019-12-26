@@ -1,4 +1,3 @@
-// import useInView from "@frontity/hooks";
 import React, { useEffect } from "react";
 import { connect } from "frontity";
 
@@ -12,14 +11,6 @@ const Link = ({
   "aria-current": ariaCurrent,
   onClick: onClickProp
 }) => {
-  // Prefetch the link's content only when the link is in view
-  // const [isIntersecting, ref] = useInView();
-  // useEffect(() => {
-  //   if (isIntersecting && state.theme.autoPreFetch === "in-view") {
-  //     actions.source.fetch(link);
-  //   }
-  // }, [isIntersecting, state.theme.autoPreFetch]);
-
   // Check if the link is an external or internal link
   const isExternal = link.startsWith("http");
 
