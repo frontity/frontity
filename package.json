@@ -21,6 +21,7 @@
     "@changesets/cli": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "bundlewatch": "0.2.5",
     "cross-env": "^5.2.1",
     "eslint": "^6.2.2",
     "eslint-plugin-cypress": "^2.6.1",
@@ -33,6 +34,14 @@
     "lint-staged": "^8.1.4",
     "prettier": "^1.16.4",
     "typescript": "^3.6.3"
+  },
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "examples/mars-theme-example/build/static/mars-theme-example.*.js",
+        "compression": "none"
+      }
+    ]
   },
   "prettier": {}
 }
