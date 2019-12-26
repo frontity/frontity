@@ -6,11 +6,10 @@ This is somewhat modified from https://github.com/alexreardon/tiny-invariant and
 
 ## Usage
 
-```
-import { warn, error }  from '@frontity/error';
+```js
+import { warn, error } from "@frontity/error";
 
-error(someCondition, "The condition `someCondition` has failed!")
+error(someCondition, "The condition `someCondition` has failed!");
 
-warn("This should never happen! 😜")
-
+warn("This should never happen! 😜");
 ```
