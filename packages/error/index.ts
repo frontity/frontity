@@ -20,14 +20,15 @@ export function error(condition: boolean, message?: string) {
   }
 }
 
-// Use a closure to ensure that the warning only shows up!
+// Use a closure to ensure that the warning only shows up once!
 export const warn = (() => {
-  if (!isProduction) {
-    let warned = false;
-
-    return (message?: string) => {
-      if (!warned) console.warn(`${prefix}${message || ""}`);
-      warned = true;
-    };
+  if (isProduction) {
+    return;
   }
+  let warned = false;
+
+  return (message?: string) => {
+    if (!warned) console.warn(`${prefix}${message || ""}`);
+    warned = true;
+  };
 })();

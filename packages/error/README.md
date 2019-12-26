@@ -1,12 +1,16 @@
 # `@frontity/error`
 
-This is basically the same as https://github.com/alexreardon/tiny-invariant but in typescript.
+The Frontity warnings and errors.
+
+This is somewhat modified from https://github.com/alexreardon/tiny-invariant and with added typescript.
 
 ## Usage
 
 ```
-import invariant from '@frontity/error';
+import { warn, error }  from '@frontity/error';
 
-invariant(condition, message);
+error(someCondition, "The condition `someCondition` has failed!")
+
+warn("This should never happen! 😜")
 
 ```
