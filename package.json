@@ -39,7 +39,7 @@
     "files": [
       {
         "path": "examples/mars-theme-example/build/static/mars-theme-example.*.js",
-        "compression": "none"
+        "maxSize": "200kb"
       }
     ]
   },
