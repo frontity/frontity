@@ -23,6 +23,9 @@
     "babel-plugin-frontity": "^1.0.1",
     "frontity": "^1.4.3"
   },
+  "devDependencies": {
+    "bundlewatch": "0.2.5"
+  },
   "bundlewatch": {
     "files": [
       {
