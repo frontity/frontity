@@ -22,5 +22,13 @@
     "@frontity/wp-source": "^1.4.3",
     "babel-plugin-frontity": "^1.0.1",
     "frontity": "^1.4.3"
+  },
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "./build/static/mars-theme-example*.js",
+        "compression": "none"
+      }
+    ]
   }
 }
