@@ -56,7 +56,6 @@ jobs:
           runs: 3
           temporaryPublicStorage: true
           configPath: ./.github/workflows/lighthouserc.json
-          budgetPath: ./.github/workflows/budget.json
           urls: |
             https://mars-theme-$COMMIT_SHA.now.sh/
             https://mars-theme-$COMMIT_SHA.now.sh/2016/the-beauties-of-gullfoss/
