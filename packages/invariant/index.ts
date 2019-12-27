@@ -2,7 +2,7 @@ const isProduction: boolean = process.env.NODE_ENV === "production";
 const prefix = "Visit https://community.frontity.org for help! 🙂\n\n";
 
 // Throw an error if the condition fails
-export function error(condition: boolean, message?: string) {
+export function invariant(condition: boolean, message?: string) {
   if (condition) {
     return;
   }
@@ -16,7 +16,7 @@ export function error(condition: boolean, message?: string) {
 }
 
 // Use a closure to ensure that the warning only shows up once!
-export const warn = (() => {
+export const warning = (() => {
   if (isProduction) {
     return;
   }
