@@ -2,7 +2,7 @@ import createPackage from "../create-package";
 import inquirer from "inquirer";
 import * as utils from "../../utils";
 
-jest.mock("../../functions/create-package");
+jest.mock("../../steps/create-package");
 jest.mock("inquirer");
 jest.mock("events");
 jest.mock("../../utils");

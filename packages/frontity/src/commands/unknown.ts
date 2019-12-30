@@ -5,7 +5,7 @@ import chalk from "chalk";
 /**
  * @param {String} command - Unknown command
  * @param {CommanderStatic} program - commander instance
- * 
+ *
  * @returns {void}
  */
 
@@ -15,12 +15,11 @@ export default (command: string, program: CommanderStatic) => {
 
   const availableCommands: string[] = program.commands.map(c => c._name);
   const suggestion: string | string[] = didYouMean(command, availableCommands);
-  
+
   if (suggestion) {
-	console.log(chalk.cyan(`Did you mean '${suggestion}'?`));
-	console.log();
+    console.log(chalk.cyan(`Did you mean '${suggestion}'?`));
+    console.log();
   }
-  
+
   program.help();
 };
-

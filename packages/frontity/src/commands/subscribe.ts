@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
 import ora from "ora";
 import chalk from "chalk";
-import subscribe from "../functions/subscribe";
+import subscribe from "../steps/subscribe";
 import { errorLogger } from "../utils";
 
 export default async (email: string) => {

@@ -37,7 +37,7 @@ import {
   info,
   unknown,
   createPackage
-} from "./actions";
+} from "./commands";
 
 const { version } = JSON.parse(
   readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
