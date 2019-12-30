@@ -2,11 +2,11 @@ import { resolve } from "path";
 import ora from "ora";
 import chalk from "chalk";
 import { prompt, Question } from "inquirer";
-import create from "../functions/create";
-import subscribe from "../functions/subscribe";
+import create from "../steps/create";
+import subscribe from "../steps/subscribe";
 import { errorLogger } from "../utils";
 import { EventEmitter } from "events";
-import { Options } from "../functions/create/types";
+import { Options } from "../steps/create/types";
 
 export default async (name: string, { typescript, useCwd }) => {
   const options: Options = {};

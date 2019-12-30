@@ -2,10 +2,10 @@ import ora from "ora";
 import chalk from "chalk";
 import { normalize } from "path";
 import { prompt, Question } from "inquirer";
-import createPackage from "../functions/create-package";
+import createPackage from "../steps/create-package";
 import { errorLogger, isFrontityProjectRoot, isThemeNameValid } from "../utils";
 import { EventEmitter } from "events";
-import { Options } from "../functions/create-package/types";
+import { Options } from "../steps/create-package/types";
 
 //  Command:
 //    create-package [name] [--typescript]

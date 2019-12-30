@@ -1,3 +1,3 @@
-export { default as create } from "./functions/create";
-export { default as subscribe } from "./functions/subscribe";
+export { default as create } from "./steps/create";
+export { default as subscribe } from "./steps/subscribe";
 export * from "@frontity/core";
