@@ -1,5 +1,8 @@
 import chalk from "chalk";
 import { errorLogger } from "../utils";
+import choosePort from "../utils/choosePort";
+
+const HOST = process.env.HOST || "0.0.0.0";
 
 export default async ({ production, port, https, target, dontOpenBrowser }) => {
   let dev: Function;
@@ -26,7 +29,11 @@ export default async ({ production, port, https, target, dontOpenBrowser }) => {
   }
 
   try {
-    await dev(options);
+    const port = await choosePort(HOST, options.port);
+    if (port === null) {
+      return;
+    }
+    await dev({ ...options, port });
   } catch (error) {
     errorLogger(error);
   }
