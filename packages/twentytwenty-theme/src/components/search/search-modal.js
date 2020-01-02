@@ -1,5 +1,8 @@
-import { styled, connect, Global } from "frontity";
+
+import { styled, connect, Global, css } from "frontity";
 import React, { useRef } from "react";
+import { useTransition, animated } from "react-spring";
+
 import { CloseIcon } from "../icons";
 import ScreenReaderText from "../styles/screen-reader";
 import useFocusTrap from "../hooks/use-trap-focus";
@@ -19,6 +22,12 @@ const SearchModal = ({ state, actions, libraries }) => {
   const inputRef = useRef();
   const containerRef = useRef();
 
+
+  const transitions = useTransition(isSearchModalOpen, null, {
+    from: { transform: "translate3d(0,-100%,0)" },
+    enter: { transform: "translate3d(0,0px,0)" },
+    leave: { transform: "translate3d(0,-100%,0)" }
+  });
   useFocusEffect(inputRef, isSearchModalOpen);
   useFocusTrap(containerRef, isSearchModalOpen);
 
@@ -51,46 +60,72 @@ const SearchModal = ({ state, actions, libraries }) => {
   };
 
   return (
-    <ModalOverlay
-      role="presentation"
-      data-open={isSearchModalOpen}
-      onClick={closeSearchModal}
-    >
-      {isSearchModalOpen && (
-        // Block scroll when modal is open
-        <Global styles={{ body: { overflowY: "hidden" } }} />
-      )}
-      <ModalInner
-        role="dialog"
-        aria-modal="true"
-        onClick={event => {
-          // prevent clicks within the content from propagating to the ModalOverlay
-          event.stopPropagation();
-        }}
+    <>
+      <ModalOverlay
+        role="presentation"
+        data-open={isSearchModalOpen}
+        onClick={closeSearchModal}
+      />
+      <div
+        css={css`
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          z-index: 2000;
+        `}
       >
-        <SectionInner ref={containerRef}>
-          <SearchForm
-            role="search"
-            aria-label="Search for:"
-            onSubmit={handleSubmit}
-          >
-            <SearchInput
-              ref={inputRef}
-              type="search"
-              defaultValue={searchQuery || ""}
-              placeholder="search for:"
-              name="search"
-            />
-            <SearchButton bg={primary}>Search</SearchButton>
-          </SearchForm>
+        {transitions.map(
+          ({ item, key, props }) =>
+            item && (
+              <animated.div key={key} style={props}>
+                <Global
+                  styles={css`
+                    html {
+                      overflow-y: scroll;
+                      position: fixed;
+                      width: 100%;
+                      top: 0px;
+                      left: 0px;
+                    }
+                  `}
+                />
 
-          <CloseButton onClick={closeSearchModal}>
-            <ScreenReaderText>Close search</ScreenReaderText>
-            <CloseIcon />
-          </CloseButton>
-        </SectionInner>
-      </ModalInner>
-    </ModalOverlay>
+                <ModalInner
+                  role="dialog"
+                  aria-modal="true"
+                  onClick={event => {
+                    // prevent clicks within the content from propagating to the ModalOverlay
+                    event.stopPropagation();
+                  }}
+                >
+                  <SectionInner ref={containerRef}>
+                    <SearchForm
+                      role="search"
+                      aria-label="Search for:"
+                      onSubmit={handleSubmit}
+                    >
+                      <SearchInput
+                        ref={inputRef}
+                        type="search"
+                        defaultValue={searchQuery || ""}
+                        placeholder="search for:"
+                        name="search"
+                      />
+                      <SearchButton bg={primary}>Search</SearchButton>
+                    </SearchForm>
+
+                    <CloseButton onClick={closeSearchModal}>
+                      <ScreenReaderText>Close search</ScreenReaderText>
+                      <CloseIcon />
+                    </CloseButton>
+                  </SectionInner>
+                </ModalInner>
+              </animated.div>
+            )
+        )}
+      </div>
+    </>
   );
 };
 
