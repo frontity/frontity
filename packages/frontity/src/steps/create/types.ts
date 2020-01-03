@@ -12,8 +12,6 @@ export type Options = {
   packages?: string[];
   // Frontity starter theme to clone.
   theme?: string;
-  // Emitter used to send the process messages.
-  emitter?: EventEmitter;
 };
 
 // Settings generated in `createPackageJson` function
