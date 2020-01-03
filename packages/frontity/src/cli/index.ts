@@ -26,8 +26,6 @@ tsNode.register({
 });
 
 import program from "commander";
-import { readFileSync } from "fs-extra";
-import { resolve } from "path";
 import {
   create,
   dev,
@@ -38,14 +36,11 @@ import {
   unknown,
   createPackage
 } from "../commands";
-
-const { version } = JSON.parse(
-  readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
-);
+import packageJson from "../../package.json";
 
 // Sets the version and the description of the program.
 program
-  .version(version)
+  .version(packageJson.version)
   .usage("<command> [options]")
   .description("Frontity CLI");
 
