@@ -1,12 +1,12 @@
 import fetch from "node-fetch";
-import { EventEmitter } from "events";
+import { emitter } from "../../utils/eventEmitter";
 
 const isEmailValid = (email: string): boolean =>
   /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i.test(email);
 
-export default async (email: string, emitter?: EventEmitter) => {
+export default async (email: string) => {
   const emit = (message: string, step?: Promise<any>) => {
-    if (emitter) emitter.emit("subscribe", message, step);
+    if (emitter) emitter.emit("cli:create:subscribe", message, step);
   };
 
   let step: Promise<any>;
@@ -29,7 +29,7 @@ export default async (email: string, emitter?: EventEmitter) => {
     emit("Subscribing to Frontity", step);
     await step;
   } catch (error) {
-    if (emitter) emitter.emit("error", error);
+    if (emitter) emitter.emit("cli:create:error", error);
     else throw error;
   }
 };

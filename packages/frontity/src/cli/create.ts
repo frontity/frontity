@@ -5,7 +5,7 @@ import { prompt, Question } from "inquirer";
 import create from "../commands/create";
 import subscribe from "../steps/subscribe";
 import { errorLogger } from "../utils";
-import { EventEmitter } from "events";
+import { emitter } from "../utils/eventEmitter";
 import { Options } from "../steps/create/types";
 
 export default async ({ name, typescript, useCwd }) => {
@@ -38,15 +38,13 @@ export default async ({ name, typescript, useCwd }) => {
   options.typescript = typescript;
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
 
-  const emitter = new EventEmitter();
-
-  emitter.on("error", errorLogger);
-  emitter.on("create", (message, action) => {
+  emitter.on("cli:create:error", errorLogger);
+  emitter.on("cli:create", (message, action) => {
     if (action) ora.promise(action, message);
     else console.log(message);
   });
 
-  await create(options, emitter);
+  await create(options);
 
   console.log(chalk.bold("\nFrontity project created.\n"));
 
@@ -69,12 +67,12 @@ export default async ({ name, typescript, useCwd }) => {
   if (answers.subscribe) {
     console.log();
 
-    emitter.on("subscribe", (message, action) => {
+    emitter.on("cli:create:subscribe", (message, action) => {
       if (action) ora.promise(action, message);
       else console.log(message);
     });
 
-    await subscribe(answers.email, emitter);
+    await subscribe(answers.email);
 
     console.log("\nThanks for subscribing! 😃");
   } else {
