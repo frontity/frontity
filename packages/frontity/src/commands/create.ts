@@ -1,97 +1,80 @@
-import { resolve } from "path";
-import ora from "ora";
 import chalk from "chalk";
-import { prompt, Question } from "inquirer";
-import create from "../steps/create";
-import subscribe from "../steps/subscribe";
-import { errorLogger } from "../utils";
 import { EventEmitter } from "events";
 import { Options } from "../steps/create/types";
+import {
+  normalizeOptions,
+  ensureProjectDir,
+  createPackageJson,
+  createFrontitySettings,
+  cloneStarterTheme,
+  installDependencies,
+  downloadFavicon,
+  revertProgress
+} from "../steps/create";
 
-export default async (name: string, { typescript, useCwd }) => {
-  const options: Options = {};
+const defaultOptions: Options = {
+  path: process.cwd(),
+  typescript: false,
+  packages: [
+    // "@frontity/wp-source"
+  ],
+  theme: "@frontity/mars-theme"
+};
 
-  if (!name) {
-    const questions: Question[] = [
-      {
-        name: "name",
-        type: "input",
-        message: "Enter a name for the project:",
-        default: "my-frontity-project"
-      },
-      {
-        name: "theme",
-        type: "input",
-        message: "Enter a starter theme to clone:",
-        default: "@frontity/mars-theme"
-      }
-    ];
+export default async (passedOptions?: Options, emitter?: EventEmitter) => {
+  // This functions will emit an event if an emitter is passed in options.
+  const emit = (message: string, step?: Promise<void>) => {
+    if (emitter) emitter.emit("create", message, step);
+  };
 
-    const answers = await prompt(questions);
-    options.name = answers.name;
-    options.theme = answers.theme;
-    console.log();
-  } else {
-    options.name = name;
-  }
+  let options: Options;
+  let step: Promise<any>;
+  let dirExisted: boolean;
 
-  options.typescript = typescript;
-  options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
-
-  const emitter = new EventEmitter();
-
-  emitter.on("error", errorLogger);
-  emitter.on("create", (message, action) => {
-    if (action) ora.promise(action, message);
-    else console.log(message);
+  process.on("SIGINT", async () => {
+    if (typeof dirExisted !== "undefined")
+      await revertProgress(dirExisted, options);
   });
 
-  await create(options, emitter);
+  try {
+    // 1. Parses and validates options.
+    options = normalizeOptions(defaultOptions, passedOptions);
 
-  console.log(chalk.bold("\nFrontity project created.\n"));
+    // 2. Ensures that the project dir exists and is empty.
+    step = ensureProjectDir(options);
+    emit(`Ensuring ${chalk.yellow(options.path)} directory.`, step);
+    dirExisted = await step;
 
-  const subscribeQuestions: Question[] = [
-    {
-      name: "subscribe",
-      type: "confirm",
-      message: "Do you want to receive framework updates by email?",
-      default: false
-    },
-    {
-      name: "email",
-      type: "input",
-      message: "Please, enter your email:",
-      when: answers => answers.subscribe
-    }
-  ];
-  const answers = await prompt(subscribeQuestions);
+    // 3. Creates `package.json`.
+    step = createPackageJson(options);
+    emit(`Creating ${chalk.yellow("package.json")}.`, step);
+    await step;
 
-  if (answers.subscribe) {
-    console.log();
+    // 4. Creates `frontity.settings`.
+    const extension = options.typescript ? "ts" : "js";
+    step = createFrontitySettings(extension, options);
+    emit(`Creating ${chalk.yellow(`frontity.settings.${extension}`)}.`, step);
+    await step;
 
-    emitter.on("subscribe", (message, action) => {
-      if (action) ora.promise(action, message);
-      else console.log(message);
-    });
+    // 5. Clones `@frontity/mars-theme` inside `packages`.
+    step = cloneStarterTheme(options);
+    emit(`Cloning ${chalk.green(options.theme)}.`, step);
+    await step;
 
-    await subscribe(answers.email, emitter);
+    // 6. Installs dependencies.
+    step = installDependencies(options);
+    emit(`Installing dependencies.`, step);
+    await step;
 
-    console.log("\nThanks for subscribing! 😃");
-  } else {
-    console.log(
-      `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
-        "npx frontity subscribe <email>"
-      )}.`
-    );
+    // 7. Download favicon.
+    step = downloadFavicon(options);
+    emit(`Downloading ${chalk.yellow("favicon.ico")}.`, step);
+    await step;
+  } catch (error) {
+    if (typeof dirExisted !== "undefined")
+      await revertProgress(dirExisted, options);
+
+    if (emitter) emitter.emit("error", error);
+    else throw error;
   }
-
-  console.log(
-    `\nRun ${chalk.bold.green(
-      `cd ${options.name} && npx frontity dev`
-    )} and have fun! 🎉\n\nYou can find docs at ${chalk.underline.magenta(
-      "https://docs.frontity.org/"
-    )}.\nIf you have any doubts, join our community at ${chalk.underline.magenta(
-      "https://community.frontity.org/"
-    )}.\n`
-  );
 };

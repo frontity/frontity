@@ -37,7 +37,7 @@ import {
   info,
   unknown,
   createPackage
-} from "./commands";
+} from "../commands";
 
 const { version } = JSON.parse(
   readFileSync(resolve(__dirname, "../package.json"), { encoding: "utf8" })
@@ -57,7 +57,7 @@ program
   .option("-t, --typescript", "Adds support for TypeScript")
   .option("-c, --use-cwd", "Generates the project in the current directory.")
   .description("Creates a new Frontity project.")
-  .action(create);
+  .action((name, { ...args }) => create({ name, ...args }));
 
 program
   .command("create-package [name]")

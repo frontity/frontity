@@ -7,7 +7,7 @@ import {
   installDependencies,
   downloadFavicon,
   revertProgress
-} from "../steps";
+} from "..";
 import * as utils from "../../../utils";
 import * as fsExtra from "fs-extra";
 import * as fetch from "node-fetch";

@@ -1,7 +1,7 @@
-import create from "../index";
-import * as steps from "../steps";
+import create from "../commands/create";
+import * as steps from "../steps/create";
 
-jest.mock("../steps");
+jest.mock("../steps/create");
 
 const mockedSteps = steps as jest.Mocked<typeof steps>;
 
