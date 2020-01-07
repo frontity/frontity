@@ -4,6 +4,7 @@ import subscribe from "../steps/subscribe";
 import { errorLogger } from "../utils";
 import { emitter } from "../utils/eventEmitter";
 
+// TODO:  make param an object
 export default async (email: string) => {
   emitter.on("cli:subscribe:error", errorLogger);
   emitter.on("cli:subscribe", (message, action) => {

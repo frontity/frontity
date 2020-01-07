@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { EventEmitter } from "events";
+import { emitter } from "../utils/eventEmitter";
 import { Options } from "../steps/create/types";
 import {
   normalizeOptions,
@@ -21,10 +21,10 @@ const defaultOptions: Options = {
   theme: "@frontity/mars-theme"
 };
 
-export default async (passedOptions?: Options, emitter?: EventEmitter) => {
+export default async (passedOptions?: Options) => {
   // This functions will emit an event if an emitter is passed in options.
   const emit = (message: string, step?: Promise<void>) => {
-    if (emitter) emitter.emit("create", message, step);
+    if (emitter) emitter.emit("cli:create:message", message, step);
   };
 
   let options: Options;
@@ -74,7 +74,7 @@ export default async (passedOptions?: Options, emitter?: EventEmitter) => {
     if (typeof dirExisted !== "undefined")
       await revertProgress(dirExisted, options);
 
-    if (emitter) emitter.emit("error", error);
+    if (emitter) emitter.emit("cli:create:error", error);
     else throw error;
   }
 };
