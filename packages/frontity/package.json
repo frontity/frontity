@@ -8,10 +8,10 @@
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "bin": {
-    "frontity": "dist/cli/index.js"
+    "frontity": "dist/src/cli/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "access": "public"
   },
   "scripts": {
-    "start": "node dist/cli/index.js",
+    "start": "node dist/src/cli/index.js",
     "dev": "ts-node src/cli/index.ts",
     "ts": "ts-node",
     "test": "jest --watch",
