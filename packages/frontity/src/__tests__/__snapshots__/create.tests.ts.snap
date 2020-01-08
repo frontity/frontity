@@ -38,10 +38,8 @@ Array [
 exports[`create goes through all steps 5`] = `
 Array [
   Array [
-    Object {
-      "name": "random-name",
-      "path": "/path/to/project",
-    },
+    undefined,
+    "/path/to/project",
   ],
 ]
 `;
@@ -49,10 +47,7 @@ Array [
 exports[`create goes through all steps 6`] = `
 Array [
   Array [
-    Object {
-      "name": "random-name",
-      "path": "/path/to/project",
-    },
+    "/path/to/project",
   ],
 ]
 `;

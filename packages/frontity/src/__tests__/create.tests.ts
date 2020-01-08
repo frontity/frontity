@@ -77,7 +77,7 @@ describe("create", () => {
 
     await create(options);
     expect(emitter.emit).toHaveBeenLastCalledWith("cli:create:error", error);
-    expect(mockedSteps.revertProgress).toHaveBeenCalledWith(true, options);
+    expect(mockedSteps.revertProgress).toHaveBeenCalledWith(true, options.path);
   });
 
   test("calls removeProgress on error with dirExisted=false", async () => {
@@ -94,7 +94,10 @@ describe("create", () => {
 
     await create(options);
     expect(emitter.emit).toHaveBeenLastCalledWith("cli:create:error", error);
-    expect(mockedSteps.revertProgress).toHaveBeenCalledWith(false, options);
+    expect(mockedSteps.revertProgress).toHaveBeenCalledWith(
+      false,
+      options.path
+    );
   });
 
   test("does not call removeProgress if ensureProjectDir throws error", async () => {

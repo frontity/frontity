@@ -203,12 +203,11 @@ describe("cloneStarterTheme", () => {
   });
 
   test("works as expected", async () => {
-    const options = {
-      path: "/path/to/project",
-      theme: "@frontity/mars-theme"
-    };
+    const path = "/path/to/project";
+    const theme = "@frontity/mars-theme";
+
     mockedUtils.isThemeNameValid.mockReturnValue(true);
-    await cloneStarterTheme(options);
+    await cloneStarterTheme(theme, path);
     expect(mockedFsExtra.readFile.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
     expect(mockedUtils.isThemeNameValid.mock.calls).toMatchSnapshot();
@@ -219,12 +218,11 @@ describe("cloneStarterTheme", () => {
   });
 
   test("throws if the theme name is not valid", async () => {
-    const options = {
-      path: "/path/to/project",
-      theme: "@frontity/mars-theme"
-    };
+    const path = "/path/to/project";
+    const theme = "@frontity/mars-theme";
+
     mockedUtils.isThemeNameValid.mockReturnValue(false);
-    await expect(cloneStarterTheme(options)).rejects.toThrow(
+    await expect(cloneStarterTheme(path, theme)).rejects.toThrow(
       "The name of the theme is not a valid npm package name."
     );
   });
@@ -245,10 +243,9 @@ describe("downloadFavicon", () => {
   });
 
   test("works as expected", async () => {
-    const options = {
-      path: "/path/to/project"
-    };
-    await downloadFavicon(options);
+    const path = "/path/to/project";
+
+    await downloadFavicon(path);
     expect(mockedFetch.default.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.createWriteStream.mock.calls).toMatchSnapshot();
   });
@@ -265,10 +262,9 @@ describe("installDependencies", () => {
   });
 
   test("works as expected", async () => {
-    const options = {
-      path: "/path/to/project"
-    };
-    await installDependencies(options);
+    const path = "/path/to/project";
+
+    await installDependencies(path);
     expect(mockedChildProcess.exec.mock.calls).toMatchSnapshot();
   });
 });
@@ -281,9 +277,8 @@ describe("revertProgress", () => {
 
   test("works if the project directory existed", async () => {
     const dirExisted = true;
-    const options = {
-      path: "/path/to/project"
-    };
+    const path = "/path/to/project";
+
     mockedFsExtra.readdir.mockResolvedValue([
       "frontity.settings.js",
       "package.json",
@@ -292,17 +287,16 @@ describe("revertProgress", () => {
       "node_modules",
       "package-lock.json"
     ]);
-    await revertProgress(dirExisted, options);
+    await revertProgress(dirExisted, path);
     expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.remove.mock.calls).toMatchSnapshot();
   });
 
   test("works if the project directory didn't exist", async () => {
     const dirExisted = false;
-    const options = {
-      path: "/path/to/project"
-    };
-    await revertProgress(dirExisted, options);
+    const path = "/path/to/project";
+
+    await revertProgress(dirExisted, path);
     expect(mockedFsExtra.remove.mock.calls).toMatchSnapshot();
   });
 });

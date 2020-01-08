@@ -171,7 +171,7 @@ export const createFrontitySettings = async (
 };
 
 // This functions clones the starter theme.
-export const cloneStarterTheme = async ({ theme, path }: Options) => {
+export const cloneStarterTheme = async (theme: string, path: string) => {
   const packageJsonPath = resolvePath(path, "./package.json");
   const packageJson = JSON.parse(
     await readFile(packageJsonPath, { encoding: "utf8" })
@@ -188,12 +188,12 @@ export const cloneStarterTheme = async ({ theme, path }: Options) => {
 };
 
 // This function installs the Frontity packages.
-export const installDependencies = async ({ path }: Options) => {
+export const installDependencies = async (path: string) => {
   await promisify(exec)("npm install", { cwd: path });
 };
 
 // This function downlaods the favicon file.
-export const downloadFavicon = async ({ path }: Options) => {
+export const downloadFavicon = async (path: string) => {
   const response = await fetch(faviconUrl);
   const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
   response.body.pipe(fileStream);
@@ -202,10 +202,7 @@ export const downloadFavicon = async ({ path }: Options) => {
 
 // This function removes the files and directories created
 // with `frontity create`.
-export const revertProgress = async (
-  dirExisted: boolean,
-  { path }: Options
-) => {
+export const revertProgress = async (dirExisted: boolean, path: string) => {
   if (dirExisted) {
     const content = await readDir(path);
     const removableContent = content
