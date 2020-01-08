@@ -3,7 +3,7 @@ import ora from "ora";
 import chalk from "chalk";
 import { prompt, Question } from "inquirer";
 import create from "../commands/create";
-import subscribe from "../steps/subscribe";
+import subscribe from "../steps";
 import { errorLogger } from "../utils";
 import { emitter } from "../utils/eventEmitter";
 import { Options } from "../steps/create/types";

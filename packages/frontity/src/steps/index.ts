@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { emitter } from "../../utils/eventEmitter";
+import { emitter } from "../utils/eventEmitter";
 
 const isEmailValid = (email: string): boolean =>
   /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i.test(email);
