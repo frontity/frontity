@@ -41,7 +41,7 @@ export default async (passedOptions?: Options) => {
     options = normalizeOptions(defaultOptions, passedOptions);
 
     // 2. Ensures that the project dir exists and is empty.
-    step = ensureProjectDir(options);
+    step = ensureProjectDir({ path: options.path });
     emit(`Ensuring ${chalk.yellow(options.path)} directory.`, step);
     dirExisted = await step;
 

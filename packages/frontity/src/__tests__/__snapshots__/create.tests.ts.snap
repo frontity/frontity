@@ -11,7 +11,6 @@ exports[`create goes throw all steps 2`] = `
 Array [
   Array [
     Object {
-      "name": "random-name",
       "path": "/path/to/project",
     },
   ],

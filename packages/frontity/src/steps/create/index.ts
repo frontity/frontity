@@ -44,7 +44,11 @@ export const normalizeOptions = (
 
 // This function ensures the path and checks if it's empty or it's a new repo.
 // Also returns a boolean indicating if the dir existed already.
-export const ensureProjectDir = async ({ path }: Options): Promise<boolean> => {
+export const ensureProjectDir = async ({
+  path
+}: {
+  path: string;
+}): Promise<boolean> => {
   const dirExisted = await pathExists(path);
 
   if (dirExisted) {
