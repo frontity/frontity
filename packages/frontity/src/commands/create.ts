@@ -39,19 +39,21 @@ export default async (passedOptions?: Options) => {
     // 1. Parses and validates options.
     options = normalizeOptions(defaultOptions, passedOptions);
 
+    const { name, theme, path } = options;
+
     // 2. Ensures that the project dir exists and is empty.
-    step = ensureProjectDir({ path: options.path });
+    step = ensureProjectDir(path);
     emit(`Ensuring ${chalk.yellow(options.path)} directory.`, step);
     dirExisted = await step;
 
     // 3. Creates `package.json`.
-    step = createPackageJson(options);
+    step = createPackageJson(name, theme, path);
     emit(`Creating ${chalk.yellow("package.json")}.`, step);
     await step;
 
     // 4. Creates `frontity.settings`.
     const extension = options.typescript ? "ts" : "js";
-    step = createFrontitySettings(extension, options);
+    step = createFrontitySettings(extension, name, path);
     emit(`Creating ${chalk.yellow(`frontity.settings.${extension}`)}.`, step);
     await step;
 

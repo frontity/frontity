@@ -1,46 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`create goes throw all steps 1`] = `
+exports[`create goes through all steps 1`] = `
 Object {
   "name": "random-name",
   "path": "/path/to/project",
 }
 `;
 
-exports[`create goes throw all steps 2`] = `
+exports[`create goes through all steps 2`] = `
 Array [
   Array [
-    Object {
-      "path": "/path/to/project",
-    },
+    "/path/to/project",
   ],
 ]
 `;
 
-exports[`create goes throw all steps 3`] = `
+exports[`create goes through all steps 3`] = `
 Array [
   Array [
-    Object {
-      "name": "random-name",
-      "path": "/path/to/project",
-    },
+    "random-name",
+    undefined,
+    "/path/to/project",
   ],
 ]
 `;
 
-exports[`create goes throw all steps 4`] = `
+exports[`create goes through all steps 4`] = `
 Array [
   Array [
     "js",
-    Object {
-      "name": "random-name",
-      "path": "/path/to/project",
-    },
+    "random-name",
+    "/path/to/project",
   ],
 ]
 `;
 
-exports[`create goes throw all steps 5`] = `
+exports[`create goes through all steps 5`] = `
 Array [
   Array [
     Object {
@@ -51,7 +46,7 @@ Array [
 ]
 `;
 
-exports[`create goes throw all steps 6`] = `
+exports[`create goes through all steps 6`] = `
 Array [
   Array [
     Object {

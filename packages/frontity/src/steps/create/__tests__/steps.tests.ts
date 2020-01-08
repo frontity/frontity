@@ -91,7 +91,7 @@ describe("ensureProjectDir", () => {
   test("works when passing a non existent path", async () => {
     const path = "/path/to/project";
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(false));
-    const dirExisted = await ensureProjectDir({ path });
+    const dirExisted = await ensureProjectDir(path);
     expect(dirExisted).toBe(false);
     expect(mockedFsExtra.pathExists.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
@@ -107,7 +107,7 @@ describe("ensureProjectDir", () => {
       "LICENSE"
     ]);
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
-    const dirExisted = await ensureProjectDir({ path });
+    const dirExisted = await ensureProjectDir(path);
     expect(dirExisted).toBe(true);
     expect(mockedFsExtra.pathExists.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
@@ -118,7 +118,7 @@ describe("ensureProjectDir", () => {
     const path = "/path/to/project";
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
     mockedFsExtra.readdir.mockResolvedValue(["file-that-should-not-exist"]);
-    await expect(ensureProjectDir({ path })).rejects.toThrow(
+    await expect(ensureProjectDir(path)).rejects.toThrow(
       "The directory passed to `create` function is not empty"
     );
   });
@@ -132,23 +132,21 @@ describe("createPackageJson", () => {
   });
 
   test('works with a theme like "@frontity/mars-theme"', async () => {
-    const options = {
-      name: "random-name",
-      theme: "@frontity/mars-theme",
-      path: "/path/to/project"
-    };
-    await createPackageJson(options);
+    const name = "random-name";
+    const theme = "@frontity/mars-theme";
+    const path = "/path/to/project";
+
+    await createPackageJson(name, theme, path);
     expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 
   test('works with a theme like "mars-theme"', async () => {
-    const options = {
-      name: "random-name",
-      theme: "random-theme",
-      path: "/path/to/project"
-    };
-    await createPackageJson(options);
+    const name = "random-name";
+    const theme = "random-theme";
+    const path = "/path/to/project";
+
+    await createPackageJson(name, theme, path);
     expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
@@ -162,25 +160,21 @@ describe("createFrontitySettings", () => {
   });
 
   test("works when extension is `js`", async () => {
-    const options = {
-      name: "random-name",
-      path: "/path/to/project",
-      packages: ["frontity", "@frontity/file-settings"]
-    };
+    const name = "random-name";
+    const path = "/path/to/project";
     const extension = "js";
-    await createFrontitySettings(extension, options);
+
+    await createFrontitySettings(extension, name, path);
     expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 
   test("works when extension is `ts`", async () => {
-    const options = {
-      name: "random-name",
-      path: "/path/to/project",
-      packages: ["frontity", "@frontity/file-settings"]
-    };
+    const name = "random-name";
+    const path = "/path/to/project";
     const extension = "ts";
-    await createFrontitySettings(extension, options);
+
+    await createFrontitySettings(extension, name, path);
     expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });

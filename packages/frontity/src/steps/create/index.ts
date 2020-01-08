@@ -44,11 +44,7 @@ export const normalizeOptions = (
 
 // This function ensures the path and checks if it's empty or it's a new repo.
 // Also returns a boolean indicating if the dir existed already.
-export const ensureProjectDir = async ({
-  path
-}: {
-  path: string;
-}): Promise<boolean> => {
+export const ensureProjectDir = async (path: string): Promise<boolean> => {
   const dirExisted = await pathExists(path);
 
   if (dirExisted) {
@@ -69,7 +65,11 @@ export const ensureProjectDir = async ({
 };
 
 // This function creates a `package.json` file.
-export const createPackageJson = async ({ name, theme, path }: Options) => {
+export const createPackageJson = async (
+  name: string,
+  theme: string,
+  path: string
+) => {
   const packages = [
     "frontity",
     "@frontity/core",
@@ -116,7 +116,8 @@ export const createPackageJson = async ({ name, theme, path }: Options) => {
 // This function creates a `frontity.settings` file.
 export const createFrontitySettings = async (
   extension: string,
-  { name, path }: Options
+  name: string,
+  path: string
 ) => {
   const frontitySettings = {
     name,

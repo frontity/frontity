@@ -21,7 +21,7 @@ describe("create", () => {
     mockedSteps.revertProgress.mockReset();
   });
 
-  test("goes throw all steps", async () => {
+  test("goes through all steps", async () => {
     const options = {
       name: "random-name",
       path: "/path/to/project"
@@ -44,7 +44,8 @@ describe("create", () => {
     await create(options);
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
       "js",
-      options
+      options.name,
+      options.path
     );
   });
 
@@ -57,7 +58,8 @@ describe("create", () => {
     await create(options);
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
       "ts",
-      options
+      options.name,
+      options.path
     );
   });
 
