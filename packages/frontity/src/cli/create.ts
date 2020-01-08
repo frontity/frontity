@@ -39,7 +39,7 @@ export default async ({ name, typescript, useCwd }) => {
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
 
   emitter.on("cli:create:error", errorLogger);
-  emitter.on("cli:create", (message, action) => {
+  emitter.on("cli:create:message", (message, action) => {
     if (action) ora.promise(action, message);
     else console.log(message);
   });

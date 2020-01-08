@@ -1,7 +1,9 @@
 import create from "../commands/create";
 import * as steps from "../steps/create";
+import { emitter } from "../utils/eventEmitter";
 
 jest.mock("../steps/create");
+jest.mock("../utils/eventEmitter");
 
 const mockedSteps = steps as jest.Mocked<typeof steps>;
 
@@ -65,10 +67,14 @@ describe("create", () => {
       path: "/path/to/project"
     };
     mockedSteps.ensureProjectDir.mockResolvedValueOnce(true);
+
+    const error = new Error("Mocked Error");
     mockedSteps.createPackageJson.mockImplementation(() => {
-      throw new Error("Mocked Error");
+      throw error;
     });
-    await expect(create(options)).rejects.toThrow("Mocked Error");
+
+    await create(options);
+    expect(emitter.emit).toHaveBeenLastCalledWith("cli:create:error", error);
     expect(mockedSteps.revertProgress).toHaveBeenCalledWith(true, options);
   });
 
@@ -78,10 +84,14 @@ describe("create", () => {
       path: "/path/to/project"
     };
     mockedSteps.ensureProjectDir.mockResolvedValueOnce(false);
+
+    const error = new Error("Mocked Error");
     mockedSteps.createPackageJson.mockImplementation(() => {
-      throw new Error("Mocked Error");
+      throw error;
     });
-    await expect(create(options)).rejects.toThrow("Mocked Error");
+
+    await create(options);
+    expect(emitter.emit).toHaveBeenLastCalledWith("cli:create:error", error);
     expect(mockedSteps.revertProgress).toHaveBeenCalledWith(false, options);
   });
 
@@ -90,10 +100,14 @@ describe("create", () => {
       name: "random-name",
       path: "/path/to/project"
     };
+
+    const error = new Error("Mocked Error");
     mockedSteps.ensureProjectDir.mockImplementation(() => {
-      throw new Error("Mocked Error");
+      throw error;
     });
-    await expect(create(options)).rejects.toThrow("Mocked Error");
+
+    await create(options);
+    expect(emitter.emit).toHaveBeenLastCalledWith("cli:create:error", error);
     expect(mockedSteps.revertProgress).not.toHaveBeenCalled();
   });
 
@@ -103,7 +117,7 @@ describe("create", () => {
       name: "random-name",
       path: "/path/to/project"
     };
-    await create(options, emitter as any);
+    await create(options);
     expect(emitter.emit.mock.calls).toMatchSnapshot();
   });
 
@@ -116,7 +130,7 @@ describe("create", () => {
     mockedSteps.ensureProjectDir.mockImplementation(() => {
       throw new Error("Mocked Error");
     });
-    await create(options, emitter as any);
+    await create(options);
     expect(emitter.emit.mock.calls).toMatchSnapshot();
   });
 });
