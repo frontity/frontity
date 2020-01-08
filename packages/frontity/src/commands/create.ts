@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { emitter } from "../utils/eventEmitter";
-import { Options } from "../steps/create/types";
+import { Options } from "../steps/types";
 import {
   normalizeOptions,
   ensureProjectDir,
@@ -10,7 +10,7 @@ import {
   installDependencies,
   downloadFavicon,
   revertProgress
-} from "../steps/create";
+} from "../steps";
 
 const defaultOptions: Options = {
   path: process.cwd(),

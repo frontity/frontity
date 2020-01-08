@@ -6,7 +6,7 @@ import create from "../commands/create";
 import subscribe from "../steps";
 import { errorLogger } from "../utils";
 import { emitter } from "../utils/eventEmitter";
-import { Options } from "../steps/create/types";
+import { Options } from "../steps/types";
 
 export default async ({ name, typescript, useCwd }) => {
   const options: Options = {};

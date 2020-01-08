@@ -1,8 +1,8 @@
 import create from "../commands/create";
-import * as steps from "../steps/create";
+import * as steps from "../steps";
 import { emitter } from "../utils/eventEmitter";
 
-jest.mock("../steps/create");
+jest.mock("../steps");
 jest.mock("../utils/eventEmitter");
 
 const mockedSteps = steps as jest.Mocked<typeof steps>;

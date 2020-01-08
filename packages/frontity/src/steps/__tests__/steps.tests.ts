@@ -8,14 +8,14 @@ import {
   downloadFavicon,
   revertProgress
 } from "..";
-import * as utils from "../../../utils";
+import * as utils from "../../utils";
 import * as fsExtra from "fs-extra";
 import * as fetch from "node-fetch";
 import * as path from "path";
 import * as childProcess from "child_process";
 import * as tar from "tar";
 
-jest.mock("../../../utils");
+jest.mock("../../utils");
 jest.mock("fs-extra");
 jest.mock("path");
 jest.mock("node-fetch");

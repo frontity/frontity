@@ -1,5 +1,3 @@
-import { EventEmitter } from "events";
-
 // Options passed to the `create` function.
 export type Options = {
   // Name of the app.
