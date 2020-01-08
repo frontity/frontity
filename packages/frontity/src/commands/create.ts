@@ -21,12 +21,11 @@ const defaultOptions: Options = {
   theme: "@frontity/mars-theme"
 };
 
-export default async (passedOptions?: Options) => {
-  // This functions will emit an event if an emitter is passed in options.
-  const emit = (message: string, step?: Promise<void>) => {
-    if (emitter) emitter.emit("cli:create:message", message, step);
-  };
+const emit = (message: string, step?: Promise<void>) => {
+  emitter.emit("cli:create:message", message, step);
+};
 
+export default async (passedOptions?: Options) => {
   let options: Options;
   let step: Promise<any>;
   let dirExisted: boolean;
