@@ -5,4 +5,4 @@ export { default as serve } from "./serve";
 export { default as subscribe } from "./subscribe";
 export { default as info } from "./info";
 export { default as unknown } from "./unknown";
-export { default as createPackage } from "./create-package";
+export { default as createPackage } from "../cli/create-package";

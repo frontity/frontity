@@ -1,103 +1,61 @@
-import ora from "ora";
 import chalk from "chalk";
-import { normalize } from "path";
-import { prompt, Question } from "inquirer";
-import createPackage from "../steps/create-package";
-import { errorLogger, isFrontityProjectRoot, isThemeNameValid } from "../utils";
 import { EventEmitter } from "events";
 import { Options } from "../steps/create-package/types";
+import {
+  ensurePackageDir,
+  createPackageJson,
+  createSrcIndexJs,
+  installPackage,
+  revertProgress,
+  isDirNotEmpty
+} from "../steps/create-package/steps";
 
-//  Command:
-//    create-package [name] [--typescript]
-//
-//  Steps:
-//    1. validate project location
-//    2. ask for the package name if it wasn't passed as argument and validate
-//    3. ask for the package namespace if it wasn't passed as argument
-//    4. create package
+export default async (options?: Options, emitter?: EventEmitter) => {
+  // This functions will emit an event if an emitter is passed in options.
+  const emit = (message: string, step?: Promise<void>) => {
+    if (emitter) emitter.emit("create", message, step);
+  };
 
-export default async (
-  name: string,
-  {
-    namespace,
-    typescript
-  }: {
-    namespace?: string;
-    typescript?: boolean;
-  }
-) => {
-  // Init options
-  const options: Options = { typescript };
+  let step: Promise<any>;
+  let dirExisted: boolean;
 
-  // Init event emitter
-  const emitter = new EventEmitter();
-  emitter.on("error", errorLogger);
-  emitter.on("create", (message, action) => {
-    if (action) ora.promise(action, message);
-    else console.log(message);
+  process.on("SIGINT", async () => {
+    if (typeof dirExisted !== "undefined") await revertProgress(options);
   });
 
-  // 1. validate project location
-  options.projectPath = process.cwd();
-  if (!(await isFrontityProjectRoot(options.projectPath))) {
-    emitter.emit(
-      "error",
-      new Error(
-        "You must execute this command in the root folder of a Frontity project."
-      )
+  try {
+    // 1. Make sure ./packages/[name] folder is empty.
+    step = isDirNotEmpty(options);
+    emit(
+      `Checking if ${chalk.yellow(options.packagePath)} is not empty.`,
+      step
     );
+    const dirNotEmpty = await step;
+    if (dirNotEmpty)
+      throw new Error(`Folder "${options.packagePath}" must be empty.`);
+
+    // 2. Create ./packages/[name] folder.
+    step = ensurePackageDir(options);
+    emit(`Creating ${chalk.yellow(options.packagePath)} folder.`, step);
+    dirExisted = await step;
+
+    // 3. Creates `package.json`.
+    step = createPackageJson(options);
+    emit(`Adding ${chalk.yellow("package.json")}.`, step);
+    await step;
+
+    // 4. Creates `src/index.js`.
+    step = createSrcIndexJs(options);
+    emit(`Adding ${chalk.yellow("src/index.js")}.`, step);
+    await step;
+
+    // 5. Install package
+    step = installPackage(options);
+    emit(`Installing package ${chalk.yellow(options.name)}.`, step);
+    await step;
+  } catch (error) {
+    if (typeof dirExisted !== "undefined") await revertProgress(options);
+    if (emitter) emitter.emit("error", error);
+    else throw error;
   }
-
-  // 2. ask for the package name if it wasn't passed as argument and validate
-  if (!name) {
-    const questions: Question[] = [
-      {
-        name: "name",
-        type: "input",
-        message: "Enter a name for the package:",
-        default: "my-frontity-package"
-      }
-    ];
-
-    const answers = await prompt(questions);
-    options.name = answers.name;
-    console.log();
-  } else {
-    options.name = name;
-  }
-
-  if (!isThemeNameValid(options.name)) {
-    emitter.emit(
-      "error",
-      new Error("The name of the package is not a valid npm package name.")
-    );
-  }
-
-  // 2.1 set the package path
-  options.packagePath = normalize(
-    `packages/${options.name.replace(/(?:@.+\/)/i, "")}`
-  );
-
-  // 3. ask for the package namespace if it wasn't passed as argument
-  if (!namespace) {
-    const questions: Question[] = [
-      {
-        name: "namespace",
-        type: "input",
-        message: "Enter the namespace of the package:",
-        default: "theme"
-      }
-    ];
-
-    const answers = await prompt(questions);
-    options.namespace = answers.namespace;
-    console.log();
-  } else {
-    options.namespace = namespace;
-  }
-
-  // 4. create package
-  await createPackage(options, emitter);
-
-  console.log(chalk.bold(`\nNew package "${options.name}" created.\n`));
 };
