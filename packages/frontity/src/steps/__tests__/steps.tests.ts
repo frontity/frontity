@@ -8,6 +8,11 @@ import {
   downloadFavicon,
   revertProgress
 } from "..";
+import {
+  createPackageJson as createPackageJsonForPackage,
+  createSrcIndexJs,
+  installPackage
+} from "../create-package";
 
 import * as utils from "../../utils";
 import * as fsExtra from "fs-extra";
@@ -299,5 +304,35 @@ describe("revertProgress", () => {
 
     await revertProgress(dirExisted, path);
     expect(mockedFsExtra.remove.mock.calls).toMatchSnapshot();
+  });
+});
+
+describe("createPackageJson for create-package", () => {
+  beforeEach(() => {
+    mockedFsExtra.writeFile.mockReset();
+    mockedUtils.fetchPackageVersion.mockReset();
+    mockedUtils.fetchPackageVersion.mockResolvedValue("1.0.0");
+  });
+
+  test('works with a theme like "@frontity/mars-theme"', async () => {
+    const name = "random-name";
+    const namespace = "test";
+    const theme = "@frontity/mars-theme";
+    const path = "/path/to/project";
+
+    await createPackageJsonForPackage(name, namespace, theme, path);
+    expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
+  });
+
+  test('works with a theme like "random-theme"', async () => {
+    const name = "random-name";
+    const namespace = "test";
+    const theme = "random-theme";
+    const path = "/path/to/project";
+
+    await createPackageJsonForPackage(name, namespace, theme, path);
+    expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
 });

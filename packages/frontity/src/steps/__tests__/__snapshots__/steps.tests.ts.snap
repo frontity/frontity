@@ -193,6 +193,66 @@ Array [
 ]
 `;
 
+exports[`createPackageJson for create-package works with a theme like "@frontity/mars-theme" 1`] = `
+Array [
+  Array [
+    "frontity",
+  ],
+]
+`;
+
+exports[`createPackageJson for create-package works with a theme like "@frontity/mars-theme" 2`] = `
+Array [
+  Array [
+    "@frontity/mars-theme//path/to/project/package.json",
+    "{
+  \\"name\\": \\"random-name\\",
+  \\"version\\": \\"1.0.0\\",
+  \\"description\\": \\"Frontity package created using the Frontity CLI.\\",
+  \\"keywords\\": [
+    \\"frontity\\",
+    \\"frontity-test\\"
+  ],
+  \\"license\\": \\"Apache-2.0\\",
+  \\"dependencies\\": {
+    \\"frontity\\": \\"^1.0.0\\"
+  }
+}
+",
+  ],
+]
+`;
+
+exports[`createPackageJson for create-package works with a theme like "random-theme" 1`] = `
+Array [
+  Array [
+    "frontity",
+  ],
+]
+`;
+
+exports[`createPackageJson for create-package works with a theme like "random-theme" 2`] = `
+Array [
+  Array [
+    "random-theme//path/to/project/package.json",
+    "{
+  \\"name\\": \\"random-name\\",
+  \\"version\\": \\"1.0.0\\",
+  \\"description\\": \\"Frontity package created using the Frontity CLI.\\",
+  \\"keywords\\": [
+    \\"frontity\\",
+    \\"frontity-test\\"
+  ],
+  \\"license\\": \\"Apache-2.0\\",
+  \\"dependencies\\": {
+    \\"frontity\\": \\"^1.0.0\\"
+  }
+}
+",
+  ],
+]
+`;
+
 exports[`createPackageJson works with a theme like "@frontity/mars-theme" 1`] = `
 Array [
   Array [
