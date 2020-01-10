@@ -58,7 +58,7 @@ program
   .command("create-package [name]")
   .option("-n, --namespace <value>", "Sets the namespace for this package")
   .description("Creates a new Frontity package in a project.")
-  .action(createPackage);
+  .action((name, { ...args }) => createPackage({ name, ...args }));
 
 program
   .command("dev")

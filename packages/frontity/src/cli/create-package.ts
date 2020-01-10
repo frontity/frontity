@@ -16,14 +16,13 @@ import { Options } from "../steps/create-package";
 //    3. ask for the package namespace if it wasn't passed as argument
 //    4. create package
 
-export default async (
-  name: string,
-  {
-    namespace
-  }: {
-    namespace?: string;
-  }
-) => {
+export default async ({
+  name,
+  namespace
+}: {
+  name: string;
+  namespace?: string;
+}) => {
   // Init options
   const options: Options = {};
 

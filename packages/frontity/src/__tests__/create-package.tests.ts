@@ -24,7 +24,7 @@ describe("create-package", () => {
   test("should not ask for passed options", async () => {
     const name = "example-theme";
     const namespace = "theme";
-    await createPackage(name, { namespace });
+    await createPackage({ name, namespace });
     expect(mockedInquirer.prompt).not.toHaveBeenCalled();
   });
 
@@ -33,7 +33,7 @@ describe("create-package", () => {
 
     const name = undefined;
     const namespace = "theme";
-    await createPackage(name, { namespace });
+    await createPackage({ name, namespace });
     expect(mockedInquirer.prompt).toHaveBeenCalled();
     expect(mockedInquirer.prompt.mock.calls).toMatchSnapshot();
   });
@@ -43,7 +43,7 @@ describe("create-package", () => {
 
     const name = "example-theme";
     const namespace = undefined;
-    await createPackage(name, { namespace });
+    await createPackage({ name, namespace });
     expect(mockedInquirer.prompt).toHaveBeenCalled();
     expect(mockedInquirer.prompt.mock.calls).toMatchSnapshot();
   });
