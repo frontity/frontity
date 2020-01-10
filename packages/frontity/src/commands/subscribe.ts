@@ -1,6 +1,6 @@
 import ora from "ora";
 import chalk from "chalk";
-import subscribe from "../steps";
+import { subscribe } from "../steps";
 import { errorLogger } from "../utils";
 import { emitter } from "../utils/eventEmitter";
 

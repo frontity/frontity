@@ -5,7 +5,7 @@ import { prompt, Question } from "inquirer";
 import createPackage from "../commands/create-package";
 import { errorLogger, isFrontityProjectRoot, isThemeNameValid } from "../utils";
 import { EventEmitter } from "events";
-import { Options } from "../steps/create-package/types";
+import { Options } from "../steps/create-package";
 
 //  Command:
 //    create-package [name] [--typescript]

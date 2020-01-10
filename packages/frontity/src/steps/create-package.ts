@@ -1,19 +1,22 @@
 import { EOL } from "os";
 import { resolve as resolvePath, join } from "path";
-import { ensureDir, writeFile, remove, pathExists } from "fs-extra";
+import { writeFile } from "fs-extra";
 import { exec } from "child_process";
 import { promisify } from "util";
-import { Options } from "./types";
-import { fetchPackageVersion } from "../../utils";
+import { fetchPackageVersion } from "../utils";
 
-// This function returns true if the directory is not empty and false otherwise.
-export const isDirNotEmpty = ({ packagePath }: Options): Promise<boolean> => {
-  return pathExists(join(packagePath));
-};
-
-// This function ensures all directories that needs a package exist.
-export const ensurePackageDir = ({ packagePath }: Options): Promise<void> => {
-  return ensureDir(join(packagePath, "src"));
+// Options passed to the `create-package` function.
+export type Options = {
+  // Name of the package.
+  name?: string;
+  // Namespace of the package.
+  namespace?: string;
+  // Path of the Frontity project.
+  projectPath?: string;
+  // Path where the package should be created (relative to `projectPath`).
+  packagePath?: string;
+  // Support for TypeScript.
+  typescript?: boolean;
 };
 
 // This function creates a `package.json` file.
@@ -81,10 +84,4 @@ export default {
 // created package
 export const installPackage = async ({ projectPath, packagePath }: Options) => {
   await promisify(exec)(`npm install ${packagePath}`, { cwd: projectPath });
-};
-
-// This function removes the files and directories created
-// with `frontity create-package`.
-export const revertProgress = async ({ projectPath, packagePath }: Options) => {
-  await remove(join(projectPath, packagePath));
 };

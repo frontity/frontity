@@ -8,6 +8,7 @@ import {
   downloadFavicon,
   revertProgress
 } from "..";
+
 import * as utils from "../../utils";
 import * as fsExtra from "fs-extra";
 import * as fetch from "node-fetch";
