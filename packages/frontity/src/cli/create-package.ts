@@ -8,7 +8,7 @@ import { EventEmitter } from "events";
 import { Options } from "../steps/create-package";
 
 //  Command:
-//    create-package [name] [--typescript]
+//    create-package [name]
 //
 //  Steps:
 //    1. validate project location
@@ -19,15 +19,13 @@ import { Options } from "../steps/create-package";
 export default async (
   name: string,
   {
-    namespace,
-    typescript
+    namespace
   }: {
     namespace?: string;
-    typescript?: boolean;
   }
 ) => {
   // Init options
-  const options: Options = { typescript };
+  const options: Options = {};
 
   // Init event emitter
   const emitter = new EventEmitter();

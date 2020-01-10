@@ -15,8 +15,6 @@ export type Options = {
   projectPath?: string;
   // Path where the package should be created (relative to `projectPath`).
   packagePath?: string;
-  // Support for TypeScript.
-  typescript?: boolean;
 };
 
 // This function creates a `package.json` file.
