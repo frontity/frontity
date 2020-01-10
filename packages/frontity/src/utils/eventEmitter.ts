@@ -6,6 +6,10 @@ interface MessageEvents {
   "cli:create:subscribe": (msg: string, action: Promise<any>) => void;
   "cli:create:message": (msg: string, step: Promise<any>) => void;
 
+  "cli:create-package:error": (error: Error) => void;
+  "cli:create-package:subscribe": (msg: string, action: Promise<any>) => void;
+  "cli:create-package:message": (msg: string, step: Promise<any>) => void;
+
   "cli:subscribe": (msg: string, action: Promise<any>) => void;
   "cli:subscribe:error": (error: Error) => void;
 }

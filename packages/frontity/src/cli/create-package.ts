@@ -4,7 +4,7 @@ import { normalize } from "path";
 import { prompt, Question } from "inquirer";
 import createPackage from "../commands/create-package";
 import { errorLogger, isFrontityProjectRoot, isThemeNameValid } from "../utils";
-import { EventEmitter } from "events";
+import { emitter } from "../utils/eventEmitter";
 import { Options } from "../steps/create-package";
 
 //  Command:
@@ -27,10 +27,8 @@ export default async (
   // Init options
   const options: Options = {};
 
-  // Init event emitter
-  const emitter = new EventEmitter();
-  emitter.on("error", errorLogger);
-  emitter.on("create", (message, action) => {
+  emitter.on("cli:create-package:error", errorLogger);
+  emitter.on("cli:create-package:message", (message, action) => {
     if (action) ora.promise(action, message);
     else console.log(message);
   });
@@ -39,7 +37,7 @@ export default async (
   options.projectPath = process.cwd();
   if (!(await isFrontityProjectRoot(options.projectPath))) {
     emitter.emit(
-      "error",
+      "cli:create-package:error",
       new Error(
         "You must execute this command in the root folder of a Frontity project."
       )
@@ -66,7 +64,7 @@ export default async (
 
   if (!isThemeNameValid(options.name)) {
     emitter.emit(
-      "error",
+      "cli:create-package:error",
       new Error("The name of the package is not a valid npm package name.")
     );
   }
@@ -95,7 +93,7 @@ export default async (
   }
 
   // 4. create package
-  await createPackage(options, emitter);
+  await createPackage(options);
 
   console.log(chalk.bold(`\nNew package "${options.name}" created.\n`));
 };
