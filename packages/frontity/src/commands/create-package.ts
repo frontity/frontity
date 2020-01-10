@@ -19,7 +19,7 @@ export default async (options?: Options, emitter?: EventEmitter) => {
   let step: Promise<any>;
   let dirExisted: boolean;
 
-  const { packagePath } = options;
+  const { name, namespace, packagePath, projectPath } = options;
 
   process.on("SIGINT", async () => {
     if (typeof dirExisted !== "undefined")
@@ -33,18 +33,18 @@ export default async (options?: Options, emitter?: EventEmitter) => {
     dirExisted = await step;
 
     // 2. Creates `package.json`.
-    step = createPackageJson(options);
+    step = createPackageJson(name, namespace, projectPath, packagePath);
     emit(`Adding ${chalk.yellow("package.json")}.`, step);
     await step;
 
     // 3. Creates `src/index.js`.
-    step = createSrcIndexJs(options);
+    step = createSrcIndexJs(name, namespace, projectPath, packagePath);
     emit(`Adding ${chalk.yellow("src/index.js")}.`, step);
     await step;
 
     // 4. Install package
-    step = installPackage(options);
-    emit(`Installing package ${chalk.yellow(options.name)}.`, step);
+    step = installPackage(projectPath, packagePath);
+    emit(`Installing package ${chalk.yellow(name)}.`, step);
     await step;
   } catch (error) {
     if (typeof dirExisted !== "undefined") {

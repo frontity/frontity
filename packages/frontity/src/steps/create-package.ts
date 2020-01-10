@@ -20,12 +20,12 @@ export type Options = {
 };
 
 // This function creates a `package.json` file.
-export const createPackageJson = async ({
-  name,
-  namespace,
-  projectPath,
-  packagePath
-}: Options) => {
+export const createPackageJson = async (
+  name: string,
+  namespace: string,
+  projectPath: string,
+  packagePath: string
+) => {
   // Get the latest version of Frontity from NPM registry
   const frontityVersion = await fetchPackageVersion("frontity");
 
@@ -47,12 +47,12 @@ export const createPackageJson = async ({
 };
 
 // This function creates an `index.js` file.
-export const createSrcIndexJs = async ({
-  name,
-  namespace,
-  projectPath,
-  packagePath
-}: Options) => {
+export const createSrcIndexJs = async (
+  name: string,
+  namespace: string,
+  projectPath: string,
+  packagePath: string
+) => {
   const filePath = resolvePath(projectPath, packagePath, "src/index.js");
   const fileData = `import React from "react";
 
@@ -82,6 +82,9 @@ export default {
 
 // This function executes the `npm i` command to add the
 // created package
-export const installPackage = async ({ projectPath, packagePath }: Options) => {
+export const installPackage = async (
+  projectPath: string,
+  packagePath: string
+) => {
   await promisify(exec)(`npm install ${packagePath}`, { cwd: projectPath });
 };
