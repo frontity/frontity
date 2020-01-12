@@ -6,6 +6,7 @@ const tinyRouter: TinyRouter = {
   state: {
     router: {
       link: "/",
+      history: [],
       autoFetch: true
     }
   },
