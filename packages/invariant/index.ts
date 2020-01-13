@@ -1,29 +1,27 @@
 const isProduction: boolean = process.env.NODE_ENV === "production";
-const prefix = "Visit https://community.frontity.org for help! 🙂\n\n";
+const prefix = "Visit https://community.frontity.org for help! 🙂\n";
 
 // Throw an error if the condition fails
-export function invariant(condition: boolean, message?: string) {
-  if (condition) {
-    return;
-  }
-  // Condition not passed
-
-  if (isProduction) {
-    throw new Error(prefix);
-  } else {
-    throw new Error(`${prefix}${message || ""}`);
+export function invariant(condition: boolean, message: string | undefined) {
+  if (!condition) {
+    let error: Error;
+    if (message === undefined) {
+      error = new Error(
+        "Minified exception occurred; use the non-minified dev environment " +
+          "for the full error message and additional helpful warnings."
+      );
+    } else {
+      error = new Error(prefix + message);
+    }
+    error.name = "Invariant failed";
+    throw error;
   }
 }
 
-// Use a closure to ensure that the warning only shows up once!
-export const warning = (() => {
+export const warning = (message: string) => {
   if (isProduction) {
     return;
+  } else {
+    console.warn(`${prefix}${message || ""}`);
   }
-  let warned = false;
-
-  return (message?: string) => {
-    if (!warned) console.warn(`${prefix}${message || ""}`);
-    warned = true;
-  };
-})();
+};

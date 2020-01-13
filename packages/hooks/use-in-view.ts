@@ -56,9 +56,11 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
   const [isIntersecting, setIntersecting] = useState(false);
   const ref = useRef();
 
-  warning(
-    "The @frontity/hooks package is deprecated and will be removed in the future version of frontity.\nThe Frontity team recommends that you use https://github.com/thebuilder/react-intersection-observer instead."
-  );
+  useEffect(() => {
+    warning(
+      "The @frontity/hooks package is deprecated and will be removed in the future version of frontity.\nThe Frontity team recommends that you use https://github.com/thebuilder/react-intersection-observer instead."
+    );
+  }, []);
 
   if (!observer)
     observer = new IntersectionObserver(createCallback({ onlyOnce }), {

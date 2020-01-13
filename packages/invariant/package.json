@@ -15,7 +15,13 @@
     "url": "git+https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.6.3"
   },
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
