@@ -2,7 +2,7 @@
 
 The Frontity warnings and errors.
 
-This is somewhat modified from https://github.com/alexreardon/tiny-invariant and with added typescript.
+This is somewhat modified the facebook package and with added typescript.
 
 ## Usage
 
