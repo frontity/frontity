@@ -16,6 +16,9 @@
     "e2e/project",
     "e2e/packages/*"
   ],
+  "engines": {
+    "node": "12.x"
+  },
   "devDependencies": {
     "@changesets/changelog-github": "^0.1.1",
     "@changesets/cli": "^2.4.0",
