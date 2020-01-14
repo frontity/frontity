@@ -5,7 +5,11 @@ export type EntityData = {
   id: number;
   link: string;
 };
-
+/**
+ * Type that represents objects stored in `state.source.data`.
+ * These objects give information about data associated to a
+ * given URL in a Frontity site.
+ */
 export type Data =
   | BaseData
   | NotFoundData
@@ -22,6 +26,9 @@ export type Data =
   | PageData
   | AttachmentData;
 
+/**
+ * Base properties of objects of types `Data`.
+ */
 export type BaseData = {
   type?: string;
   id?: number;
@@ -46,6 +53,10 @@ export type BaseData = {
 
 // NOT FOUND
 
+/**
+ * Adds new properties to `BaseData` to identify not found pages.
+ * @property {true} is404
+ */
 export type NotFoundData = Merge<
   BaseData,
   {
@@ -55,6 +66,13 @@ export type NotFoundData = Merge<
 
 // ARCHIVES
 
+/**
+ * Adds properties to `BaseData` to identify archive pages.
+ * @property {true} isArchive
+ * @property {EntityData[]} items - List of items contained in this archive page.
+ * @property {number} total - Total number of post entities in the whole archive.
+ * @property {number} total - Total number of pages in the whole archive.
+ */
 export type ArchiveData = Merge<
   BaseData,
   {
@@ -65,6 +83,12 @@ export type ArchiveData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `ArchiveData` to identify taxonomy pages.
+ * @property {true} isTaxonomy
+ * @property {string} taxonomy - Taxonomy slug.
+ * @property {number} id - Taxonomy id.
+ */
 export type TaxonomyData = Merge<
   ArchiveData,
   {
@@ -74,6 +98,11 @@ export type TaxonomyData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `TaxonomyData` to identify category pages.
+ * @property {true} isCategory
+ * @property {"category"} taxonomy
+ */
 export type CategoryData = Merge<
   TaxonomyData,
   {
@@ -81,7 +110,11 @@ export type CategoryData = Merge<
     isCategory: true;
   }
 >;
-
+/**
+ * Adds properties to `TaxonomyData` to identify tag pages.
+ * @property {true} isTag
+ * @property {"tag"} taxonomy
+ */
 export type TagData = Merge<
   TaxonomyData,
   {
@@ -90,6 +123,11 @@ export type TagData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `ArchiveData` to identify author pages.
+ * @property {true} isAuthor
+ * @property {number} id - Author id.
+ */
 export type AuthorData = Merge<
   ArchiveData,
   {
@@ -98,6 +136,11 @@ export type AuthorData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `ArchiveData` to identify post type archive pages.
+ * @property {true} isPostTypeArchive
+ * @property {string} type - Post type slug.
+ */
 export type PostTypeArchiveData = Merge<
   ArchiveData,
   {
@@ -106,6 +149,10 @@ export type PostTypeArchiveData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `PostArchiveData` to identify `post` archive pages.
+ * @property {true} isPostArchive
+ */
 export type PostArchiveData = Merge<
   PostTypeArchiveData,
   {
@@ -113,6 +160,13 @@ export type PostArchiveData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `ArchiveData` to identify date archive pages.
+ * @property {true} isDate
+ * @property {number} year - The year number.
+ * @property {number} month - The month number (from 1 to 12).
+ * @property {number} day - The day number.
+ */
 export type DateData = Merge<
   ArchiveData,
   {
@@ -125,6 +179,13 @@ export type DateData = Merge<
 
 // POST TYPES
 
+/**
+ * Adds properties to `BaseData` to identify post type pages.
+ * Post type entities are posts, pages, attachments, custom post types, etc.
+ * @property {true} isPostType
+ * @property {string} type - Post type slug.
+ * @property {number} id - Entity id.
+ */
 export type PostTypeData = Merge<
   BaseData,
   {
@@ -134,6 +195,11 @@ export type PostTypeData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `PostTypeData` to identify posts.
+ * @property {true} isPost
+ * @property {"post"} type
+ */
 export type PostData = Merge<
   PostTypeData,
   {
@@ -142,6 +208,11 @@ export type PostData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `PostTypeData` to identify pages.
+ * @property {true} isPage
+ * @property {"page"} type
+ */
 export type PageData = Merge<
   PostTypeData,
   {
@@ -150,6 +221,11 @@ export type PageData = Merge<
   }
 >;
 
+/**
+ * Adds properties to `PostTypeData` to identify attachments.
+ * @property {true} isAttachment
+ * @property {"attachment"} type
+ */
 export type AttachmentData = Merge<
   PostTypeData,
   {

@@ -1,6 +1,6 @@
 import Settings from "../settings";
 import Package from "../package";
-import Action from "../action";
+import { Action, AsyncAction } from "../action";
 import Derived from "../derived";
 
 // Custom package extending from Package.
@@ -21,9 +21,11 @@ interface Package1 extends Package {
   actions: {
     namespace1: {
       action1: Action<Package1>;
+      action2: AsyncAction<Package1>;
     };
     namespace2: {
-      action2: Action<Package1, string>;
+      action3: Action<Package1, string>;
+      action4: AsyncAction<Package1, string>;
     };
   };
   libraries: {
@@ -50,10 +52,14 @@ const package1: Package1 = {
   },
   actions: {
     namespace1: {
-      action1: ({ state, actions, libraries }) => {}
+      action1: ({ state, actions, libraries }) => {},
+      action2: async ({ state, actions, libraries }) => {}
     },
     namespace2: {
-      action2: ({ state }) => str => {
+      action3: ({ state }) => str => {
+        str.startsWith("");
+      },
+      action4: ({ state }) => async str => {
         str.startsWith("");
       }
     }

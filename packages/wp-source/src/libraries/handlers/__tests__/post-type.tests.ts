@@ -8,6 +8,7 @@ import { mockResponse } from "./mocks/helpers";
 import attachment1 from "./mocks/post-type/attachment-1.json";
 import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
+import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
 
 let store: InitializedStore<WpSource>;
@@ -82,6 +83,14 @@ describe("post", () => {
     // Fetch entities
     await store.actions.source.fetch("/post-1/?some=param");
     expect(api.get).not.toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with types embedded", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1withType]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/");
     expect(store.state.source).toMatchSnapshot();
   });
 });

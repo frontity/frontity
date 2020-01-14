@@ -168,6 +168,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -210,6 +212,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -252,6 +256,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -458,6 +464,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -634,6 +642,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -664,6 +674,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -706,6 +718,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -840,5 +854,7 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;

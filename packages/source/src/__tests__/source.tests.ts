@@ -15,7 +15,9 @@ const source1 = (libraries: Source["libraries"]): Source => {
         post: {},
         page: {},
         author: {},
-        attachment: {}
+        attachment: {},
+        type: {},
+        taxonomy: {}
       }
     },
     actions: {
@@ -65,7 +67,9 @@ const source2: MySource = {
       page: {},
       author: {},
       attachment: {},
-      myOwnProp: "some value"
+      myOwnProp: "some value",
+      type: {},
+      taxonomy: {}
     }
   },
   actions: {
