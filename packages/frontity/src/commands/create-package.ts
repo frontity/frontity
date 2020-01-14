@@ -50,7 +50,6 @@ export default async (options?: Options) => {
     if (typeof dirExisted !== "undefined") {
       await revertProgress(dirExisted, packagePath);
     }
-    if (emitter) emitter.emit("cli:create-package:error", error);
-    else throw error;
+    emitter.emit("cli:create-package:error", error);
   }
 };

@@ -73,7 +73,6 @@ export default async (passedOptions?: Options) => {
     if (typeof dirExisted !== "undefined")
       await revertProgress(dirExisted, path);
 
-    if (emitter) emitter.emit("cli:create:error", error);
-    else throw error;
+    emitter.emit("cli:create:error", error);
   }
 };
