@@ -26,16 +26,11 @@ tsNode.register({
 });
 
 import program from "commander";
-import {
-  create,
-  dev,
-  build,
-  serve,
-  subscribe,
-  info,
-  unknown,
-  createPackage
-} from "../commands";
+import { dev, build, serve, subscribe, info, unknown } from "../commands";
+
+import { default as create } from "./create";
+import { default as createPackage } from "./create-package";
+
 import packageJson from "../../package.json";
 
 // Sets the version and the description of the program.

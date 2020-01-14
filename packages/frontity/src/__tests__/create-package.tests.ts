@@ -4,16 +4,15 @@ import * as utils from "../utils";
 
 jest.mock("../commands/create-package");
 jest.mock("inquirer");
-jest.mock("events");
-jest.mock("../utils");
 
 const mockedInquirer = inquirer as jest.Mocked<typeof inquirer>;
-const mockedUtils = utils as jest.Mocked<typeof utils>;
+const mockedUtils = utils as any;
 const mockedExit = jest.spyOn(process, "exit");
 
 beforeEach(() => {
   mockedInquirer.prompt.mockRestore();
-  mockedUtils.isFrontityProjectRoot.mockRestore();
+  mockedUtils.isFrontityProjectRoot = jest.fn();
+  mockedUtils.errorLogger = jest.fn();
   mockedExit.mockRestore();
   mockedExit.mockImplementation(() => {
     throw new Error();
