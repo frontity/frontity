@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import Connect, { ConnectFunction } from "../connect";
 import { FilterInjectedProps } from "../utils";
-import Action from "../action";
+import { Action, AsyncAction } from "../action";
 import Package from "../package";
 import Derived from "../derived";
 
@@ -31,11 +31,11 @@ interface Package1 extends Package {
   actions: {
     namespace1: {
       action1: Action<Package1>;
-      action2: Action<Package1>;
+      action2: AsyncAction<Package1>;
     };
     namespace2: {
       action3: Action<Package1, string>;
-      action4: Action<Package1, number>;
+      action4: AsyncAction<Package1, number>;
     };
   };
   libraries: {
@@ -98,13 +98,13 @@ const internalProps: Connect<Package1, OwnProps> = {
   actions: {
     namespace1: {
       action1: () => {},
-      action2: () => {}
+      action2: async () => {}
     },
     namespace2: {
       action3: str => {
         const str2: string = str;
       },
-      action4: num => {
+      action4: async num => {
         const num2: number = num;
       }
     }

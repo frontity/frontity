@@ -21,4 +21,24 @@ export type Action<Pkg extends Package, Input = null> = [Input] extends [null]
       libraries: Pkg["libraries"];
     }) => (args: Input) => void;
 
-export default Action;
+export type AsyncAction<Pkg extends Package, Input = null> = [Input] extends [
+  null
+]
+  ? ({
+      state,
+      actions,
+      libraries
+    }: {
+      state: ResolveState<Pkg["state"]>;
+      actions: ResolveActions<Pkg["actions"]>;
+      libraries: Pkg["libraries"];
+    }) => Promise<void>
+  : ({
+      state,
+      actions,
+      libraries
+    }: {
+      state: ResolveState<Pkg["state"]>;
+      actions: ResolveActions<Pkg["actions"]>;
+      libraries: Pkg["libraries"];
+    }) => (args: Input) => Promise<void>;
