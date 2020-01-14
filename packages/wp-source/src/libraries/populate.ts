@@ -49,7 +49,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
     Object.entries(entityMap).forEach(([, entity]) => {
       // Fix links that come from the REST API
       // to match the Frontity server location.
-      transformLink({ entity, state, subdirectory });
+      if (entity.link) transformLink({ entity, state, subdirectory });
 
       // Get or init data using the transformed link
       const { data } = state.source;
@@ -60,25 +60,29 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
           isFetching: false
         });
 
-      if (schema === "postType" || schema === "attachment") {
+      if (schema === "postEntity" || schema === "attachmentEntity") {
         if (!state.source[entity.type]) state.source[entity.type] = {};
         state.source[entity.type][entity.id] = entity;
         Object.assign(entityData, {
           type: entity.type,
           id: entity.id
         });
-      } else if (schema === "taxonomy") {
+      } else if (schema === "taxonomyEntity") {
         if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
         state.source[entity.taxonomy][entity.id] = entity;
         Object.assign(entityData, {
           taxonomy: entity.taxonomy,
           id: entity.id
         });
-      } else if (schema === "author") {
+      } else if (schema === "authorEntity") {
         state.source.author[entity.id] = entity;
         Object.assign(entityData, {
           id: entity.id
         });
+      } else if (schema === "postType") {
+        state.source.type[entity.slug] = entity;
+      } else if (schema === "taxonomyType") {
+        state.source.taxonomy[entity.slug] = entity;
       }
     });
   });
