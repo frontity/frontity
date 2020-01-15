@@ -13,10 +13,10 @@
     "now": "npx frontity build && npx now --token $NOW_TOKEN",
     "now:alias": "npx now alias --token $NOW_TOKEN twentytwenty-theme-$COMMIT_SHA.now.sh"
   },
+  "license": "Apache-2.0",
   "engines": {
     "node": "12.x"
   },
-  "license": "Apache-2.0",
   "dependencies": {
     "@frontity/core": "^1.4.0",
     "@frontity/html2react": "^1.1.14",
