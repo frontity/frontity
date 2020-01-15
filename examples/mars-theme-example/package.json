@@ -13,9 +13,6 @@
     "now": "npx frontity build && npx now --token $NOW_TOKEN",
     "now:alias": "npx now alias --token $NOW_TOKEN mars-theme-$COMMIT_SHA.now.sh"
   },
-  "engines": {
-    "node": "12.x"
-  },
   "license": "Apache-2.0",
   "engines": {
     "node": "12.x"
