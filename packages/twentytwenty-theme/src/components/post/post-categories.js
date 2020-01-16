@@ -61,4 +61,9 @@ const CategoryTag = styled(Link)`
     font-size: 1.5rem;
     margin: 1rem 0 0 2rem;
   }
+
+  transition: border-bottom-color 150ms;
+  :hover {
+    border-bottom-color: transparent;
+  }
 `;

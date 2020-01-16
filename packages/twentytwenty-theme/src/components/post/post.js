@@ -114,7 +114,6 @@ const FeaturedImage = styled(FeaturedMedia)`
 
   > div {
     position: relative;
-    width: 100vw !important;
   }
 
   &:before {
