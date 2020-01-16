@@ -1,14 +1,17 @@
+import { observe } from "frontity";
 import Analytics from "./types";
 
 type AfterCSR = Analytics["actions"]["analytics"]["afterCSR"];
 type SendPageview = Analytics["actions"]["analytics"]["sendPageview"];
 type SendEvent = Analytics["actions"]["analytics"]["sendEvent"];
 
+// Send a pageview anytime the link changes.
 export const afterCSR: AfterCSR = ({ state, actions }) => {
-  // TODO: change this, it's just an example.
-  actions.analytics.sendPageview({
-    url: state.router.link,
-    title: document.title
+  observe(() => {
+    actions.analytics.sendPageview({
+      page: state.router.link,
+      title: document.title
+    });
   });
 };
 

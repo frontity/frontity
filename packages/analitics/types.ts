@@ -1,7 +1,7 @@
 import { Package, Action } from "frontity/types";
 
 export type Pageview = {
-  url: string;
+  page: string;
   title: string;
 };
 
@@ -26,6 +26,9 @@ interface Analytics extends Package {
   state: {
     analytics: {
       namespaces: string[];
+    };
+    router?: {
+      link: string;
     };
   };
 }
