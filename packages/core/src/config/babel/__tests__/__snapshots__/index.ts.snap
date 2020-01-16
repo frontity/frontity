@@ -18,7 +18,6 @@ Object {
           ],
         },
       ],
-      "babel-plugin-dev-expression",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -68,7 +67,6 @@ Object {
           ],
         },
       ],
-      "babel-plugin-dev-expression",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -103,7 +101,6 @@ Object {
           ],
         },
       ],
-      "babel-plugin-dev-expression",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -143,7 +140,6 @@ Object {
           ],
         },
       ],
-      "babel-plugin-dev-expression",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -193,7 +189,6 @@ Object {
           ],
         },
       ],
-      "babel-plugin-dev-expression",
     ],
     "presets": Array [
       "@babel/preset-typescript",
@@ -228,7 +223,6 @@ Object {
           ],
         },
       ],
-      "babel-plugin-dev-expression",
     ],
     "presets": Array [
       "@babel/preset-typescript",

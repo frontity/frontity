@@ -22,9 +22,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@frontity/invariant": "^0.0.1"
-  },
   "devDependencies": {
     "frontity": "^1.4.3",
     "jest": "^24.7.1",

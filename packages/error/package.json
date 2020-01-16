@@ -1,5 +1,5 @@
 {
-  "name": "@frontity/invariant",
+  "name": "@frontity/error",
   "version": "0.0.1",
   "description": "Frontity errors and warnings",
   "keywords": [

@@ -74,9 +74,7 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
         {
           include: ["CWD"]
         }
-      ],
-      // Strip out the invariant error messages in production
-      "babel-plugin-dev-expression"
+      ]
     ];
     return {
       compact: true,
