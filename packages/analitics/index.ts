@@ -1,4 +1,4 @@
-import { Analytics } from "./types";
+import Analytics from "./types";
 
 type AfterCSR = Analytics["actions"]["analytics"]["afterCSR"];
 type SendPageview = Analytics["actions"]["analytics"]["sendPageview"];
@@ -13,18 +13,18 @@ export const afterCSR: AfterCSR = ({ actions }) => {
  * Get the functions for every analytics package
  * and run `sendPageview` for each one.
  */
-export const sendPageview: SendPageview = ({ libraries }) => pageview => {
-  Object.values(libraries.analytics).forEach(({ sendPageview }) =>
-    sendPageview(pageview)
-  );
+export const sendPageview: SendPageview = ({ state, actions }) => pageview => {
+  state.analytics.namespaces
+    .map(ns => actions[ns])
+    .forEach(({ sendPageview }) => sendPageview(pageview));
 };
 
 /**
  * Get the functions for every analytics package
  * and run `sendEvent` for each one.
  */
-export const sendEvent: SendEvent = ({ libraries }) => event => {
-  Object.values(libraries.analytics).forEach(({ sendEvent }) =>
-    sendEvent(event)
-  );
+export const sendEvent: SendEvent = ({ state, actions }) => event => {
+  state.analytics.namespaces
+    .map(ns => actions[ns])
+    .forEach(({ sendEvent }) => sendEvent(event));
 };

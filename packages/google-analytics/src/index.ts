@@ -1,26 +1,30 @@
 import { sendPageview, sendEvent, afterCSR } from "@frontity/analytics";
-import { Analytics } from "@frontity/analytics/types";
+import GoogleAnalytics from "../types";
 
-const googleAnalytics: Analytics = {
+const googleAnalytics: GoogleAnalytics = {
   actions: {
     analytics: {
       sendPageview,
       sendEvent,
       afterCSR
+    },
+    ga: {
+      sendPageview: ({ state }) => pageview => {
+        // Do something with that pageview.
+        console.log(state.ga.trackingId, pageview);
+      },
+      sendEvent: ({ state }) => event => {
+        // Do something with that event.
+        console.log(state.ga.trackingId, event);
+      }
     }
   },
-  libraries: {
+  state: {
     analytics: {
-      ga: {
-        sendPageview: pageview => {
-          // Do something with that pageview.
-          console.log(pageview);
-        },
-        sendEvent: event => {
-          // Do something with that event.
-          console.log(event);
-        }
-      }
+      namespaces: ["ga"]
+    },
+    ga: {
+      trackingId: ""
     }
   }
 };

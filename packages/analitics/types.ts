@@ -10,21 +10,23 @@ export type Event = {
   content: string;
 };
 
-export interface Analytics extends Package {
+interface Analytics extends Package {
   actions: {
     analytics: {
       afterCSR: Action<Analytics>;
       sendPageview: Action<Analytics, Pageview>;
       sendEvent: Action<Analytics, Event>;
     };
+    [key: string]: {
+      sendPageview: Action<Analytics, Pageview>;
+      sendEvent: Action<Analytics, Event>;
+    };
   };
-  libraries: {
-    analytics: Record<
-      string,
-      {
-        sendPageview: (p: Pageview) => void;
-        sendEvent: (e: Event) => void;
-      }
-    >;
+  state: {
+    analytics: {
+      namespaces: string[];
+    };
   };
 }
+
+export default Analytics;
