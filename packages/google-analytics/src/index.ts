@@ -1,7 +1,12 @@
 import { sendPageview, sendEvent, afterCSR } from "@frontity/analytics";
 import GoogleAnalytics from "../types";
+import Root from "./components";
+
+export const getTrackerName = (id: string) =>
+  `tracker_${id.replace(/-/g, "_")}`;
 
 const googleAnalytics: GoogleAnalytics = {
+  roots: { ga: Root },
   actions: {
     analytics: {
       sendPageview,
@@ -10,12 +15,39 @@ const googleAnalytics: GoogleAnalytics = {
     },
     ga: {
       sendPageview: ({ state }) => pageview => {
+        // Get Tracking ids from state.
+        const { trackingIds, trackingId } = state.ga;
+        const ids = trackingIds || (trackingId && [trackingId]) || [];
+
         // Do something with that pageview.
-        console.log(state.ga.trackingId, pageview);
+        console.log(ids, pageview);
+
+        // Send the pageview to the trackers.
+        ids.forEach(id =>
+          window.ga(`${getTrackerName(id)}.send`, {
+            hitType: "pageview",
+            ...pageview
+          })
+        );
       },
       sendEvent: ({ state }) => event => {
+        // Get Tracking ids from state.
+        const { trackingIds, trackingId } = state.ga;
+        const ids = trackingIds || (trackingId && [trackingId]) || [];
+
         // Do something with that event.
-        console.log(state.ga.trackingId, event);
+        console.log(ids, event);
+
+        ids
+          .map(id => getTrackerName(id))
+          .forEach(name => {
+            window.ga(`${name}.send`, {
+              hitType: "event",
+              eventCategory: event.category,
+              eventAction: event.action,
+              eventLabel: event.label
+            });
+          });
       }
     }
   },
@@ -23,9 +55,7 @@ const googleAnalytics: GoogleAnalytics = {
     analytics: {
       namespaces: ["ga"]
     },
-    ga: {
-      trackingId: ""
-    }
+    ga: {}
   }
 };
 

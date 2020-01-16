@@ -4,9 +4,12 @@ type AfterCSR = Analytics["actions"]["analytics"]["afterCSR"];
 type SendPageview = Analytics["actions"]["analytics"]["sendPageview"];
 type SendEvent = Analytics["actions"]["analytics"]["sendEvent"];
 
-export const afterCSR: AfterCSR = ({ actions }) => {
+export const afterCSR: AfterCSR = ({ state, actions }) => {
   // TODO: change this, it's just an example.
-  actions.analytics.sendPageview({ url: "", title: "" });
+  actions.analytics.sendPageview({
+    url: state.router.link,
+    title: document.title
+  });
 };
 
 /**
