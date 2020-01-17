@@ -4,7 +4,7 @@ import chalk from "chalk";
 import { prompt, Question } from "inquirer";
 import create from "../commands/create";
 import { subscribe } from "../steps";
-import { errorLogger } from "../utils";
+import { errorLogger, log } from "../utils";
 import { Options } from "../steps/types";
 
 export default async ({ name, typescript, useCwd }) => {
@@ -29,7 +29,7 @@ export default async ({ name, typescript, useCwd }) => {
     const answers = await prompt(questions);
     options.name = answers.name;
     options.theme = answers.theme;
-    console.log();
+    log();
   } else {
     options.name = name;
   }
@@ -43,12 +43,12 @@ export default async ({ name, typescript, useCwd }) => {
   emitter.on("cli:create:error", errorLogger);
   emitter.on("cli:create:message", (message, action) => {
     if (action) ora.promise(action, message);
-    else console.log(message);
+    else log(message);
   });
 
   await emitter;
 
-  console.log(chalk.bold("\nFrontity project created.\n"));
+  log(chalk.bold("\nFrontity project created.\n"));
 
   const subscribeQuestions: Question[] = [
     {
@@ -67,25 +67,25 @@ export default async ({ name, typescript, useCwd }) => {
   const answers = await prompt(subscribeQuestions);
 
   if (answers.subscribe) {
-    console.log();
+    log();
 
     emitter.on("cli:create:subscribe", (message, action) => {
       if (action) ora.promise(action, message);
-      else console.log(message);
+      else log(message);
     });
 
     await subscribe(answers.email);
 
-    console.log("\nThanks for subscribing! 😃");
+    log("\nThanks for subscribing! 😃");
   } else {
-    console.log(
+    log(
       `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
         "npx frontity subscribe <email>"
       )}.`
     );
   }
 
-  console.log(
+  log(
     `\nRun ${chalk.bold.green(
       `cd ${options.name} && npx frontity dev`
     )} and have fun! 🎉\n\nYou can find docs at ${chalk.underline.magenta(

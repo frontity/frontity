@@ -7,21 +7,21 @@ import {
   installDependencies,
   downloadFavicon,
   revertProgress
-} from "..";
+} from "../steps";
 import {
   createPackageJson as createPackageJsonForPackage,
   createSrcIndexJs,
   installPackage
-} from "../create-package";
+} from "../steps/create-package";
 
-import * as utils from "../../utils";
+import * as utils from "../utils";
 import * as fsExtra from "fs-extra";
 import * as fetch from "node-fetch";
 import * as path from "path";
 import * as childProcess from "child_process";
 import * as tar from "tar";
 
-jest.mock("../../utils");
+jest.mock("../utils");
 jest.mock("fs-extra");
 jest.mock("path");
 jest.mock("node-fetch");
