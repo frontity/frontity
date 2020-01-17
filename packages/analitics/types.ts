@@ -1,4 +1,5 @@
 import { Package, Action } from "frontity/types";
+import Source from "@frontity/source";
 
 export type Pageview = {
   page: string;
@@ -29,6 +30,9 @@ interface Analytics extends Package {
     };
     router?: {
       link: string;
+    };
+    source?: {
+      get: Source["state"]["source"]["get"];
     };
   };
 }

@@ -1,4 +1,5 @@
 import { observe } from "frontity";
+import TitleObserver from "./utils/title-observer";
 import Analytics from "./types";
 
 type AfterCSR = Analytics["actions"]["analytics"]["afterCSR"];
@@ -7,11 +8,26 @@ type SendEvent = Analytics["actions"]["analytics"]["sendEvent"];
 
 // Send a pageview anytime the link changes.
 export const afterCSR: AfterCSR = ({ state, actions }) => {
-  observe(() => {
-    actions.analytics.sendPageview({
-      page: state.router.link,
-      title: document.title
-    });
+  console.log("afterCSR");
+
+  let isFirstRender = true;
+
+  // Initializes the title observer.
+  const titleObserver = new TitleObserver();
+
+  observe(async () => {
+    console.log("observe");
+    const { link } = state.router;
+    const data = state.source.get(link);
+
+    if (data.isReady) {
+      const title = isFirstRender
+        ? document.title
+        : await titleObserver.waitForChanges();
+
+      isFirstRender = false; // eslint-disable-line require-atomic-updates
+      actions.analytics.sendPageview({ page: link, title });
+    }
   });
 };
 
