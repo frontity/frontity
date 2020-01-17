@@ -16,7 +16,7 @@ const createPackage = async (
   emit: (event: string, ...value: any[]) => void
 ) => {
   const emitMessage = (message: string, step?: Promise<void>) => {
-    emit("cli:create-package:message", message, step);
+    emit("message", message, step);
   };
 
   let step: Promise<any>;
@@ -53,11 +53,14 @@ const createPackage = async (
     if (typeof dirExisted !== "undefined") {
       await revertProgress(dirExisted, packagePath);
     }
-    emit("cli:create-package:error", error);
+    emit("error", error);
   }
 };
 
+// Thanks to this the clients will get autocomplete on `.on()`
+type EventTypes = "error" | "message";
+
 export default (options?: Options) =>
-  new EventPromised((resolve, error, emit) => {
+  new EventPromised<EventTypes>((resolve, error, emit) => {
     createPackage(options, emit).then(resolve);
   });

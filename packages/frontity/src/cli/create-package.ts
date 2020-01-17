@@ -90,8 +90,8 @@ export default async ({
   // 4. get the emitter for `create-package`
   const emitter = createPackage(options);
 
-  emitter.on("cli:create-package:error", errorLogger);
-  emitter.on("cli:create-package:message", (message, action) => {
+  emitter.on("error", errorLogger);
+  emitter.on("message", (message, action) => {
     if (action) ora.promise(action, message);
     else log(message);
   });
