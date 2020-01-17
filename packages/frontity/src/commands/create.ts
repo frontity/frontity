@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { Options } from "../steps/types";
-import { EventPromised } from "../utils/eventEmitter";
+import { EventPromised } from "../utils/eventPromised";
 import {
   normalizeOptions,
   ensureProjectDir,

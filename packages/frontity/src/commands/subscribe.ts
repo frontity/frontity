@@ -1,4 +1,4 @@
-import { EventPromised } from "../utils/eventEmitter";
+import { EventPromised } from "../utils/eventPromised";
 import { subscribe } from "../steps";
 
 // TODO:  make param an object

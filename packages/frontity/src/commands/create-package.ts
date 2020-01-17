@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { EventPromised } from "../utils/eventEmitter";
+import { EventPromised } from "../utils/eventPromised";
 import { join } from "path";
 
 import {
