@@ -44,3 +44,9 @@ export const fetchPackageVersion = async (pkg: string) => {
   const version = data["dist-tags"].latest;
   return version;
 };
+
+export const log = (msg?: any, ...optionalParams: any[]) => {
+  if (process.env.NODE_ENV !== "test") {
+    console.log(msg, ...optionalParams);
+  }
+};

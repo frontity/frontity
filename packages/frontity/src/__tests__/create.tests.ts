@@ -117,15 +117,13 @@ describe("create", () => {
     };
 
     const error = new Error("Mocked Error");
-    mockedSteps.ensureProjectDir.mockImplementation(() => {
+    mockedSteps.ensureProjectDir.mockImplementation(async () => {
       throw error;
     });
 
     const emitter = create(options);
-
     const spy = jest.fn();
     emitter.on("cli:create:error", spy);
-
     await emitter;
 
     expect(spy).toHaveBeenLastCalledWith(error);

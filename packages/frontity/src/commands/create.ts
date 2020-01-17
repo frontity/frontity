@@ -85,6 +85,5 @@ const create = async (
 export default (options?: Options) =>
   new EventPromised(async (resolve, error, emit) => {
     await create(options, emit);
-    console.log("hi");
     resolve();
   });
