@@ -5,7 +5,6 @@ import { prompt, Question } from "inquirer";
 import create from "../commands/create";
 import { subscribe } from "../steps";
 import { errorLogger } from "../utils";
-import { emitter } from "../utils/eventEmitter";
 import { Options } from "../steps/types";
 
 export default async ({ name, typescript, useCwd }) => {
@@ -38,13 +37,16 @@ export default async ({ name, typescript, useCwd }) => {
   options.typescript = typescript;
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
 
+  // Get the emitter for `create`
+  const emitter = create(options);
+
   emitter.on("cli:create:error", errorLogger);
   emitter.on("cli:create:message", (message, action) => {
     if (action) ora.promise(action, message);
     else console.log(message);
   });
 
-  await create(options);
+  await emitter;
 
   console.log(chalk.bold("\nFrontity project created.\n"));
 

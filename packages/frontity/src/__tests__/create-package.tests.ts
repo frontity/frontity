@@ -2,7 +2,6 @@ import createPackage from "../cli/create-package";
 import inquirer from "inquirer";
 import * as utils from "../utils";
 
-jest.mock("../commands/create-package");
 jest.mock("inquirer");
 
 const mockedInquirer = inquirer as jest.Mocked<typeof inquirer>;

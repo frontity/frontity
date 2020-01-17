@@ -1,9 +1,7 @@
 import create from "../commands/create";
 import * as steps from "../steps";
-import { emitter } from "../utils/eventEmitter";
 
 jest.mock("../steps");
-jest.mock("../utils/eventEmitter");
 
 const mockedSteps = steps as jest.Mocked<typeof steps>;
 
@@ -75,8 +73,14 @@ describe("create", () => {
       throw error;
     });
 
-    await create(options);
-    expect(emitter.emit).toHaveBeenLastCalledWith("cli:create:error", error);
+    const emitter = create(options);
+
+    const spy = jest.fn();
+    emitter.on("cli:create:error", spy);
+
+    await emitter;
+
+    expect(spy).toHaveBeenLastCalledWith(error);
     expect(mockedSteps.revertProgress).toHaveBeenCalledWith(true, options.path);
   });
 
@@ -92,8 +96,14 @@ describe("create", () => {
       throw error;
     });
 
-    await create(options);
-    expect(emitter.emit).toHaveBeenLastCalledWith("cli:create:error", error);
+    const emitter = create(options);
+
+    const spy = jest.fn();
+    emitter.on("cli:create:error", spy);
+
+    await emitter;
+
+    expect(spy).toHaveBeenLastCalledWith(error);
     expect(mockedSteps.revertProgress).toHaveBeenCalledWith(
       false,
       options.path
@@ -111,8 +121,14 @@ describe("create", () => {
       throw error;
     });
 
-    await create(options);
-    expect(emitter.emit).toHaveBeenLastCalledWith("cli:create:error", error);
+    const emitter = create(options);
+
+    const spy = jest.fn();
+    emitter.on("cli:create:error", spy);
+
+    await emitter;
+
+    expect(spy).toHaveBeenLastCalledWith(error);
     expect(mockedSteps.revertProgress).not.toHaveBeenCalled();
   });
 

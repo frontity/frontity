@@ -1,5 +1,7 @@
 import chalk from "chalk";
-import { emitter } from "../utils/eventEmitter";
+import { EventPromised } from "../utils/eventEmitter";
+import { join } from "path";
+
 import {
   Options,
   createPackageJson,
@@ -8,12 +10,13 @@ import {
 } from "../steps/create-package";
 
 import { ensureProjectDir, revertProgress } from "../steps";
-import { join } from "path";
 
-export default async (options?: Options) => {
-  // This functions will emit an event if an emitter is passed in options.
-  const emit = (message: string, step?: Promise<void>) => {
-    emitter.emit("cli:create-package:message", message, step);
+const createPackage = async (
+  options: Options,
+  emit: (event: string, ...value: any[]) => void
+) => {
+  const emitMessage = (message: string, step?: Promise<void>) => {
+    emit("cli:create-package:message", message, step);
   };
 
   let step: Promise<any>;
@@ -29,27 +32,35 @@ export default async (options?: Options) => {
   try {
     // 1. Create ./packages/[name] folder.
     step = ensureProjectDir(join(packagePath, "src"));
-    emit(`Creating ${chalk.yellow(packagePath)} folder.`, step);
+    emitMessage(`Creating ${chalk.yellow(packagePath)} folder.`, step);
     dirExisted = await step;
 
     // 2. Creates `package.json`.
     step = createPackageJson(name, namespace, projectPath, packagePath);
-    emit(`Adding ${chalk.yellow("package.json")}.`, step);
+    emitMessage(`Adding ${chalk.yellow("package.json")}.`, step);
     await step;
 
     // 3. Creates `src/index.js`.
     step = createSrcIndexJs(name, namespace, projectPath, packagePath);
-    emit(`Adding ${chalk.yellow("src/index.js")}.`, step);
+    emitMessage(`Adding ${chalk.yellow("src/index.js")}.`, step);
     await step;
 
     // 4. Install package
     step = installPackage(projectPath, packagePath);
-    emit(`Installing package ${chalk.yellow(name)}.`, step);
+    emitMessage(`Installing package ${chalk.yellow(name)}.`, step);
     await step;
   } catch (error) {
     if (typeof dirExisted !== "undefined") {
       await revertProgress(dirExisted, packagePath);
     }
-    emitter.emit("cli:create-package:error", error);
+    emit("cli:create-package:error", error);
   }
+};
+
+export default (options?: Options) => {
+  const eventPromised = new EventPromised((resolve, error, emit) => {
+    createPackage(options, emit).then(() => resolve(true));
+  });
+
+  return eventPromised;
 };

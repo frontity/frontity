@@ -1,21 +1,23 @@
-import ora from "ora";
-import chalk from "chalk";
+import { EventPromised } from "../utils/eventEmitter";
 import { subscribe } from "../steps";
-import { errorLogger } from "../utils";
-import { emitter } from "../utils/eventEmitter";
 
 // TODO:  make param an object
-export default async (email: string) => {
-  emitter.on("cli:subscribe:error", errorLogger);
-  emitter.on("cli:subscribe", (message, action) => {
-    if (action) ora.promise(action, message);
-    else console.log(message);
+const subscribeCommand = async (
+  email: string,
+  emit: (event: string, ...value: any[]) => void
+) => {
+  try {
+    emit("cli:subscribe:message", "Subscribing to frontity");
+    await subscribe(email);
+  } catch (error) {
+    emit("cli:subscribe:error", error);
+  }
+};
+
+export default (email: string) => {
+  const eventPromised = new EventPromised((resolve, error, emit) => {
+    subscribeCommand(email, emit).then(() => resolve(true));
   });
 
-  await subscribe(email);
-
-  console.log(`${chalk.bold("\nThanks for subscribing to our newsletter!")}
-      \nIf you have any doubts, join our community at ${chalk.underline.magenta(
-        "https://community.frontity.org/"
-      )}.\n`);
+  return eventPromised;
 };

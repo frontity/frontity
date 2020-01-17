@@ -1,6 +1,6 @@
 import chalk from "chalk";
-import { emitter } from "../utils/eventEmitter";
 import { Options } from "../steps/types";
+import { EventPromised } from "../utils/eventEmitter";
 import {
   normalizeOptions,
   ensureProjectDir,
@@ -21,13 +21,16 @@ const defaultOptions: Options = {
   theme: "@frontity/mars-theme"
 };
 
-const emit = (message: string, step?: Promise<void>) => {
-  emitter.emit("cli:create:message", message, step);
-};
-
-export default async (passedOptions?: Options) => {
+const create = async (
+  passedOptions: Options,
+  emit: (event: string, ...value: any[]) => void
+) => {
   let step: Promise<any>;
   let dirExisted: boolean;
+
+  const emitMessage = (message: string, step?: Promise<void>) => {
+    emit("cli:create:message", message, step);
+  };
 
   // 1. Parses and validates options.
   const options: Options = normalizeOptions(defaultOptions, passedOptions);
@@ -41,38 +44,47 @@ export default async (passedOptions?: Options) => {
   try {
     // 2. Ensures that the project dir exists and is empty.
     step = ensureProjectDir(path);
-    emit(`Ensuring ${chalk.yellow(path)} directory.`, step);
+    emitMessage(`Ensuring ${chalk.yellow(path)} directory.`, step);
     dirExisted = await step;
 
     // 3. Creates `package.json`.
     step = createPackageJson(name, theme, path);
-    emit(`Creating ${chalk.yellow("package.json")}.`, step);
+    emitMessage(`Creating ${chalk.yellow("package.json")}.`, step);
     await step;
 
     // 4. Creates `frontity.settings`.
     const extension = typescript ? "ts" : "js";
     step = createFrontitySettings(extension, name, path);
-    emit(`Creating ${chalk.yellow(`frontity.settings.${extension}`)}.`, step);
+    emitMessage(
+      `Creating ${chalk.yellow(`frontity.settings.${extension}`)}.`,
+      step
+    );
     await step;
 
     // 5. Clones `@frontity/mars-theme` inside `packages`.
     step = cloneStarterTheme(theme, path);
-    emit(`Cloning ${chalk.green(theme)}.`, step);
+    emitMessage(`Cloning ${chalk.green(theme)}.`, step);
     await step;
 
     // 6. Installs dependencies.
     step = installDependencies(path);
-    emit(`Installing dependencies.`, step);
+    emitMessage(`Installing dependencies.`, step);
     await step;
 
     // 7. Download favicon.
     step = downloadFavicon(path);
-    emit(`Downloading ${chalk.yellow("favicon.ico")}.`, step);
+    emitMessage(`Downloading ${chalk.yellow("favicon.ico")}.`, step);
     await step;
   } catch (error) {
     if (typeof dirExisted !== "undefined")
       await revertProgress(dirExisted, path);
-
-    emitter.emit("cli:create:error", error);
+    emit("cli:create:error", error);
   }
 };
+
+export default (options?: Options) =>
+  new EventPromised(async (resolve, error, emit) => {
+    await create(options, emit);
+    console.log("hi");
+    resolve();
+  });
