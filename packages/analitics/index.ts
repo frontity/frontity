@@ -36,7 +36,7 @@ export const afterCSR: AfterCSR = ({ state, actions }) => {
  * and run `sendPageview` for each one.
  */
 export const sendPageview: SendPageview = ({ state, actions }) => pageview => {
-  state.analytics.namespaces
+  Object.keys(state.analytics.namespaces)
     .map(ns => actions[ns])
     .forEach(({ sendPageview }) => sendPageview(pageview));
 };
@@ -46,7 +46,7 @@ export const sendPageview: SendPageview = ({ state, actions }) => pageview => {
  * and run `sendEvent` for each one.
  */
 export const sendEvent: SendEvent = ({ state, actions }) => event => {
-  state.analytics.namespaces
+  Object.keys(state.analytics.namespaces)
     .map(ns => actions[ns])
     .forEach(({ sendEvent }) => sendEvent(event));
 };

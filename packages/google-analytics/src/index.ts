@@ -53,7 +53,7 @@ const googleAnalytics: GoogleAnalytics = {
   },
   state: {
     analytics: {
-      namespaces: ["ga"]
+      namespaces: { ga: "ga" }
     },
     ga: {}
   }

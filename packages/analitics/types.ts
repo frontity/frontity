@@ -26,7 +26,7 @@ interface Analytics extends Package {
   };
   state: {
     analytics: {
-      namespaces: string[];
+      namespaces: Record<string, string>;
     };
     router?: {
       link: string;
