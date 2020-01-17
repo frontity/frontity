@@ -23,13 +23,13 @@ const defaultOptions: Options = {
 
 const create = async (
   passedOptions: Options,
-  emit: (event: string, ...value: any[]) => void
+  emit: (evtType: EventTypes, ...value: any[]) => void
 ) => {
   let step: Promise<any>;
   let dirExisted: boolean;
 
   const emitMessage = (message: string, step?: Promise<void>) => {
-    emit("cli:create:message", message, step);
+    emit("message", message, step);
   };
 
   // 1. Parses and validates options.
@@ -78,12 +78,14 @@ const create = async (
   } catch (error) {
     if (typeof dirExisted !== "undefined")
       await revertProgress(dirExisted, path);
-    emit("cli:create:error", error);
+    emit("error", error);
   }
 };
 
+// Thanks to this the clients will get autocomplete on `.on()`
+type EventTypes = "error" | "message" | "subscribe";
+
 export default (options?: Options) =>
-  new EventPromised(async (resolve, error, emit) => {
-    await create(options, emit);
-    resolve();
-  });
+  new EventPromised<EventTypes>((resolve, error, emit) =>
+    create(options, emit).then(resolve)
+  );

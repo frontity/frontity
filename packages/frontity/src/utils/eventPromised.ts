@@ -1,13 +1,13 @@
 import { EventEmitter } from "events";
 
-export class EventPromised<T> extends Promise<T> {
+export class EventPromised<Events> extends Promise<any> {
   private emitter: EventEmitter;
 
   constructor(
     executor: (
-      resolve: (value?: T | PromiseLike<T>) => void,
+      resolve: (value?: any | PromiseLike<any>) => void,
       reject: (reason?: any) => void,
-      emit: (event: string, ...value: any[]) => void
+      emit: (event: Events, ...args: any[]) => void
     ) => void,
     emitter: EventEmitter = new EventEmitter()
   ) {
@@ -28,12 +28,18 @@ export class EventPromised<T> extends Promise<T> {
     this.emitter = emitter;
   }
 
-  public on(eventName: string, onData: (...data: any[]) => void): this {
+  public on(
+    eventName: Events extends string ? Events : string | symbol,
+    onData: (...data: any[]) => void
+  ): this {
     this.emitter.on(eventName, onData);
     return this;
   }
 
-  public once(eventName: string, onData: (...data: any[]) => void): this {
+  public once(
+    eventName: Events extends string ? Events : string | symbol,
+    onData: (...data: any[]) => void
+  ): this {
     this.emitter.once(eventName, onData);
     return this;
   }

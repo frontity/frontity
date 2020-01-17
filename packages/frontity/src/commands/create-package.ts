@@ -57,10 +57,7 @@ const createPackage = async (
   }
 };
 
-export default (options?: Options) => {
-  const eventPromised = new EventPromised((resolve, error, emit) => {
-    createPackage(options, emit).then(() => resolve(true));
+export default (options?: Options) =>
+  new EventPromised((resolve, error, emit) => {
+    createPackage(options, emit).then(resolve);
   });
-
-  return eventPromised;
-};

@@ -39,9 +39,8 @@ export default async ({ name, typescript, useCwd }) => {
 
   // Get the emitter for `create`
   const emitter = create(options);
-
-  emitter.on("cli:create:error", errorLogger);
-  emitter.on("cli:create:message", (message, action) => {
+  emitter.on("error", errorLogger);
+  emitter.on("message", (message, action) => {
     if (action) ora.promise(action, message);
     else log(message);
   });
@@ -69,7 +68,7 @@ export default async ({ name, typescript, useCwd }) => {
   if (answers.subscribe) {
     log();
 
-    emitter.on("cli:create:subscribe", (message, action) => {
+    emitter.on("subscribe", (message, action) => {
       if (action) ora.promise(action, message);
       else log(message);
     });

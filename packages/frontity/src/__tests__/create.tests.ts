@@ -76,7 +76,7 @@ describe("create", () => {
     const emitter = create(options);
 
     const spy = jest.fn();
-    emitter.on("cli:create:error", spy);
+    emitter.on("error", spy);
 
     await emitter;
 
@@ -99,7 +99,7 @@ describe("create", () => {
     const emitter = create(options);
 
     const spy = jest.fn();
-    emitter.on("cli:create:error", spy);
+    emitter.on("error", spy);
 
     await emitter;
 
@@ -123,7 +123,7 @@ describe("create", () => {
 
     const emitter = create(options);
     const spy = jest.fn();
-    emitter.on("cli:create:error", spy);
+    emitter.on("error", spy);
     await emitter;
 
     expect(spy).toHaveBeenLastCalledWith(error);
@@ -136,19 +136,6 @@ describe("create", () => {
       name: "random-name",
       path: "/path/to/project"
     };
-    await create(options);
-    expect(emitter.emit.mock.calls).toMatchSnapshot();
-  });
-
-  test("uses the emitter passed to log the errors", async () => {
-    const emitter = { emit: jest.fn() };
-    const options = {
-      name: "random-name",
-      path: "/path/to/project"
-    };
-    mockedSteps.ensureProjectDir.mockImplementation(() => {
-      throw new Error("Mocked Error");
-    });
     await create(options);
     expect(emitter.emit.mock.calls).toMatchSnapshot();
   });

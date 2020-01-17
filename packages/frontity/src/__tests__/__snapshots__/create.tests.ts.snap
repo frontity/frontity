@@ -53,5 +53,3 @@ Array [
 `;
 
 exports[`create uses the emitter passed to log messages 1`] = `Array []`;
-
-exports[`create uses the emitter passed to log the errors 1`] = `Array []`;
