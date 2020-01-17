@@ -3,7 +3,12 @@ import chalk from "chalk";
 import { normalize } from "path";
 import { prompt, Question } from "inquirer";
 import createPackage from "../commands/create-package";
-import { errorLogger, isFrontityProjectRoot, isThemeNameValid } from "../utils";
+import {
+  errorLogger,
+  isFrontityProjectRoot,
+  isThemeNameValid,
+  log
+} from "../utils";
 import { Options } from "../steps/create-package";
 
 //  Command:
@@ -48,7 +53,7 @@ export default async ({
 
     const answers = await prompt(questions);
     options.name = answers.name;
-    console.log();
+    log();
   } else {
     options.name = name;
   }
@@ -77,7 +82,7 @@ export default async ({
 
     const answers = await prompt(questions);
     options.namespace = answers.namespace;
-    console.log();
+    log();
   } else {
     options.namespace = namespace;
   }
@@ -88,11 +93,11 @@ export default async ({
   emitter.on("cli:create-package:error", errorLogger);
   emitter.on("cli:create-package:message", (message, action) => {
     if (action) ora.promise(action, message);
-    else console.log(message);
+    else log(message);
   });
 
   // 5. Actually create the package
   await emitter;
 
-  console.log(chalk.bold(`\nNew package "${options.name}" created.\n`));
+  log(chalk.bold(`\nNew package "${options.name}" created.\n`));
 };
