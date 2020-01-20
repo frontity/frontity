@@ -23,8 +23,6 @@ const image: Processor = {
 export default image;
 
 const ContentImage: React.FC<any> = props => {
-  console.log(props);
-
   if (props.width && props.height) {
     return (
       <Container height={props.height} width={props.width}>
