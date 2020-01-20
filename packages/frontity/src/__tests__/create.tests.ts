@@ -139,4 +139,26 @@ describe("create", () => {
     await create(options);
     expect(emitter.emit.mock.calls).toMatchSnapshot();
   });
+
+  test.skip("Bubbling up the error fails", async () => {
+    const options = {
+      name: "random-name",
+      path: "/path/to/project"
+    };
+
+    try {
+      const error = new Error("Mocked Error");
+      mockedSteps.ensureProjectDir.mockImplementation(async () => {
+        throw error;
+      });
+
+      const emitter = create(options);
+
+      // Now the test fails but if you uncomment the next line, it works
+      // emitter.on("error", err => console.log(err.message));
+      await emitter;
+    } catch (err) {
+      expect(err.message).toBe("Mocked Error");
+    }
+  });
 });
