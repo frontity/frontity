@@ -1,7 +1,7 @@
 {
   "name": "@frontity/analytics",
   "version": "0.1.0",
-  "description": "Analytics utilities for »Frontity",
+  "description": "This package contains the base types and actions to build analytics packages for »Frontity",
   "keywords": [
     "frontity"
   ],
