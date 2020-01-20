@@ -94,7 +94,7 @@ program
 program
   .command("subscribe [email]")
   .description("Subscribe to Frontity newsletter.")
-  .action(subscribe);
+  .action(email => subscribe({ email }));
 
 program
   .command("info")

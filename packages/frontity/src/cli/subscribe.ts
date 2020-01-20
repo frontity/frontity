@@ -4,7 +4,7 @@ import { errorLogger } from "../utils";
 import subscribe from "../commands/subscribe";
 import { prompt, Question } from "inquirer";
 
-export default async (email: string) => {
+export default async ({ email }: { email: string }) => {
   while (!email) {
     const subscribeQuestion: Question[] = [
       {
