@@ -2,8 +2,21 @@ import ora from "ora";
 import chalk from "chalk";
 import { errorLogger } from "../utils";
 import subscribe from "../commands/subscribe";
+import { prompt, Question } from "inquirer";
 
-export default async ({ email }: { email: string }) => {
+export default async (email: string) => {
+  while (!email) {
+    const subscribeQuestion: Question[] = [
+      {
+        name: "email",
+        type: "input",
+        message: "Please, enter your email:"
+      }
+    ];
+    const answer = await prompt(subscribeQuestion);
+    email = answer.email;
+  }
+
   const emitter = subscribe(email);
 
   emitter.on("cli:subscribe:error", errorLogger);
