@@ -9,13 +9,13 @@ declare global {
 
 interface GoogleAnalytics extends Analytics {
   state: Analytics["state"] & {
-    ga: {
+    googleAnalytics: {
       trackingId?: string;
       trackingIds?: string[];
     };
   };
   actions: Analytics["actions"] & {
-    ga: {
+    googleAnalytics: {
       sendPageview: Action<GoogleAnalytics, Pageview>;
       sendEvent: Action<GoogleAnalytics, Event>;
     };

@@ -15,7 +15,6 @@ export type Event = {
 interface Analytics extends Package {
   actions: {
     analytics: {
-      afterCSR: Action<Analytics>;
       sendPageview: Action<Analytics, Pageview>;
       sendEvent: Action<Analytics, Event>;
     };

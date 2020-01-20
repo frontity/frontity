@@ -1,32 +1,31 @@
-import { observe } from "frontity";
+import React from "react";
+import { connect, Head } from "frontity";
+import { Connect } from "frontity/types";
 import Analytics from "./types";
 
-type AfterCSR = Analytics["actions"]["analytics"]["afterCSR"];
 type SendPageview = Analytics["actions"]["analytics"]["sendPageview"];
 type SendEvent = Analytics["actions"]["analytics"]["sendEvent"];
 
-// Send a pageview anytime the link changes.
-export const afterCSR: AfterCSR = ({ state, actions }) => {
-  console.log("afterCSR");
-
-  observe(async () => {
-    const { link } = state.router;
-
-    // Wait data to be ready.
-    if (state.source.get(link).isReady) {
-      /**
-       * Execute action in the next tick so we can
-       * ensure the title has changed by React.
-       */
-      setTimeout(() => {
-        actions.analytics.sendPageview({
-          page: link,
-          title: document.title
-        });
-      });
-    }
-  });
-};
+/**
+ * Send a pageview anytime the title changes
+ * and data.isReady === true.
+ */
+export const Root = connect<React.FC<Connect<Analytics>>>(
+  ({ state, actions }) => {
+    return (
+      <Head
+        onChangeClientState={newState => {
+          if (state.source.get(state.router.link).isReady) {
+            actions.analytics.sendPageview({
+              page: state.router.link,
+              title: newState.title
+            });
+          }
+        }}
+      />
+    );
+  }
+);
 
 /**
  * Get the functions for every analytics package
