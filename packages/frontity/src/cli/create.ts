@@ -29,7 +29,6 @@ export default async ({ name, typescript, useCwd }) => {
     const answers = await prompt(questions);
     options.name = answers.name;
     options.theme = answers.theme;
-    log();
   } else {
     options.name = name;
   }
@@ -66,8 +65,6 @@ export default async ({ name, typescript, useCwd }) => {
   const answers = await prompt(subscribeQuestions);
 
   if (answers.subscribe) {
-    log();
-
     emitter.on("subscribe", (message, action) => {
       if (action) ora.promise(action, message);
       else log(message);

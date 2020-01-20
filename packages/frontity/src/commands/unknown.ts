@@ -11,14 +11,12 @@ import chalk from "chalk";
 
 export default (command: string, program: CommanderStatic) => {
   console.log(chalk.red(`Unknown command: ${chalk.bold(command)}`));
-  console.log();
 
   const availableCommands: string[] = program.commands.map(c => c._name);
   const suggestion: string | string[] = didYouMean(command, availableCommands);
 
   if (suggestion) {
     console.log(chalk.cyan(`Did you mean '${suggestion}'?`));
-    console.log();
   }
 
   program.help();

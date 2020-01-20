@@ -53,7 +53,6 @@ export default async ({
 
     const answers = await prompt(questions);
     options.name = answers.name;
-    log();
   } else {
     options.name = name;
   }
@@ -82,7 +81,6 @@ export default async ({
 
     const answers = await prompt(questions);
     options.namespace = answers.namespace;
-    log();
   } else {
     options.namespace = namespace;
   }
