@@ -14,10 +14,8 @@ const subscribeCommand = async (
   }
 };
 
-export default (email: string) => {
-  const eventPromised = new EventPromised((resolve, error, emit) => {
+export default (email: string) =>
+  // EventPromised is a combination of EventEmitter and Promise
+  new EventPromised((resolve, error, emit) => {
     subscribeCommand(email, emit).then(() => resolve(true));
   });
-
-  return eventPromised;
-};

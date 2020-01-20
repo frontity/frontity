@@ -86,6 +86,7 @@ const create = async (
 type EventTypes = "error" | "message" | "subscribe";
 
 export default (options?: Options) =>
+  // EventPromised is a combination of EventEmitter and Promise
   new EventPromised<EventTypes>((resolve, error, emit) =>
     create(options, emit).then(resolve)
   );

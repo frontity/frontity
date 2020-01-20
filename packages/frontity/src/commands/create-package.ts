@@ -61,6 +61,7 @@ const createPackage = async (
 type EventTypes = "error" | "message";
 
 export default (options?: Options) =>
+  // EventPromised is a combination of EventEmitter and Promise
   new EventPromised<EventTypes>((resolve, error, emit) => {
     createPackage(options, emit).then(resolve);
   });
