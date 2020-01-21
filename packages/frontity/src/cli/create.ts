@@ -23,7 +23,7 @@ export default async ({
   useCwd = useCwd || !!process.env.FRONTITY_USE_CWD;
 
   if (!promptUser && !name) {
-    throw new Error("You need to provide the name for the project");
+    errorLogger(new Error("You need to provide the name for the project"));
   }
 
   const options: Options = {};

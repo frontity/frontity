@@ -22,15 +22,23 @@ import { Options } from "../steps/create-package";
 
 export default async ({
   name,
-  namespace
+  namespace,
+  prompt: promptUser
 }: {
   name: string;
   namespace?: string;
+  prompt: boolean;
 }) => {
+  name = name || process.env.FRONTITY_NAME;
+
+  if (!promptUser && !name) {
+    errorLogger(new Error("You need to provide the name for the project"));
+  }
+
   // Init options
   const options: Options = {};
 
-  // 1. validate project location
+  // Validate project location
   options.projectPath = process.cwd();
   if (!(await isFrontityProjectRoot(options.projectPath))) {
     errorLogger(
@@ -40,7 +48,7 @@ export default async ({
     );
   }
 
-  // 2. ask for the package name if it wasn't passed as argument and validate
+  // Ask for the package name if it wasn't passed as argument and validate
   if (!name) {
     const questions: Question[] = [
       {

@@ -4,12 +4,14 @@ import { EventPromised } from "../utils/eventPromised";
 import * as createCmd from "../commands/create";
 import create from "../cli/create";
 import * as inquirer from "inquirer";
+import * as utils from "../utils";
 
 jest.mock("../commands/create");
 jest.mock("inquirer");
 
 const mockedCreateCmd = createCmd as jest.Mocked<typeof createCmd>;
 const mockedInquirer = inquirer as jest.Mocked<typeof inquirer>;
+const mockedUtils = utils as any;
 
 describe("CLI create", () => {
   beforeEach(() => {
@@ -22,6 +24,7 @@ describe("CLI create", () => {
       name: "test-project",
       theme: "test-theme"
     });
+    mockedUtils.errorLogger = jest.fn();
   });
 
   test("frontity create", async done => {
