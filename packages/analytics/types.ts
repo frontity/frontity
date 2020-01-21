@@ -9,7 +9,7 @@ export type Pageview = {
 export type Event = {
   category: string;
   action: string;
-  label: string;
+  label?: string;
 };
 
 interface Analytics extends Package {
