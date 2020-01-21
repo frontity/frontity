@@ -68,20 +68,21 @@ describe("create", () => {
     };
     mockedSteps.ensureProjectDir.mockResolvedValueOnce(true);
 
-    const error = new Error("Mocked Error");
-    mockedSteps.createPackageJson.mockImplementation(() => {
-      throw error;
-    });
+    try {
+      const error = new Error("Mocked Error");
+      mockedSteps.createPackageJson.mockImplementation(() => {
+        throw error;
+      });
 
-    const emitter = create(options);
-
-    const spy = jest.fn();
-    emitter.on("error", spy);
-
-    await emitter;
-
-    expect(spy).toHaveBeenLastCalledWith(error);
-    expect(mockedSteps.revertProgress).toHaveBeenCalledWith(true, options.path);
+      const emitter = create(options);
+      await emitter;
+    } catch (err) {
+      expect(err.message).toBe("Mocked Error");
+      expect(mockedSteps.revertProgress).toHaveBeenCalledWith(
+        true,
+        options.path
+      );
+    }
   });
 
   test("calls removeProgress on error with dirExisted=false", async () => {
@@ -91,56 +92,25 @@ describe("create", () => {
     };
     mockedSteps.ensureProjectDir.mockResolvedValueOnce(false);
 
-    const error = new Error("Mocked Error");
-    mockedSteps.createPackageJson.mockImplementation(() => {
-      throw error;
-    });
+    try {
+      const error = new Error("Mocked Error");
+      mockedSteps.createPackageJson.mockImplementation(() => {
+        throw error;
+      });
 
-    const emitter = create(options);
-
-    const spy = jest.fn();
-    emitter.on("error", spy);
-
-    await emitter;
-
-    expect(spy).toHaveBeenLastCalledWith(error);
-    expect(mockedSteps.revertProgress).toHaveBeenCalledWith(
-      false,
-      options.path
-    );
+      const emitter = create(options);
+      await emitter;
+      throw new Error("This should not be reached");
+    } catch (err) {
+      expect(err.message).toBe("Mocked Error");
+      expect(mockedSteps.revertProgress).toHaveBeenCalledWith(
+        false,
+        options.path
+      );
+    }
   });
 
   test("does not call removeProgress if ensureProjectDir throws error", async () => {
-    const options = {
-      name: "random-name",
-      path: "/path/to/project"
-    };
-
-    const error = new Error("Mocked Error");
-    mockedSteps.ensureProjectDir.mockImplementation(async () => {
-      throw error;
-    });
-
-    const emitter = create(options);
-    const spy = jest.fn();
-    emitter.on("error", spy);
-    await emitter;
-
-    expect(spy).toHaveBeenLastCalledWith(error);
-    expect(mockedSteps.revertProgress).not.toHaveBeenCalled();
-  });
-
-  test("uses the emitter passed to log messages", async () => {
-    const emitter = { emit: jest.fn() };
-    const options = {
-      name: "random-name",
-      path: "/path/to/project"
-    };
-    await create(options);
-    expect(emitter.emit.mock.calls).toMatchSnapshot();
-  });
-
-  test.skip("Bubbling up the error fails", async () => {
     const options = {
       name: "random-name",
       path: "/path/to/project"
@@ -153,9 +123,37 @@ describe("create", () => {
       });
 
       const emitter = create(options);
+      await emitter;
+      throw new Error("This should never be reached");
+    } catch (err) {
+      expect(err.message).toBe("Mocked Error");
+      expect(mockedSteps.revertProgress).not.toHaveBeenCalled();
+    }
+  });
 
-      // Now the test fails but if you uncomment the next line, it works
-      // emitter.on("error", err => console.log(err.message));
+  test("uses the emitter passed to log messages", async () => {
+    const emitter = { emit: jest.fn() };
+    const options = {
+      name: "random-name",
+      path: "/path/to/project"
+    };
+    await create(options);
+    expect(emitter.emit.mock.calls).toMatchSnapshot();
+  });
+
+  test("Bubbling up the error", async () => {
+    const options = {
+      name: "random-name",
+      path: "/path/to/project"
+    };
+
+    try {
+      const error = new Error("Mocked Error");
+      mockedSteps.ensureProjectDir.mockImplementation(async () => {
+        throw error;
+      });
+
+      const emitter = create(options);
       await emitter;
     } catch (err) {
       expect(err.message).toBe("Mocked Error");

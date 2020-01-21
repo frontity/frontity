@@ -23,7 +23,8 @@ const defaultOptions: Options = {
 
 const create = async (
   passedOptions: Options,
-  emit: (evtType: EventTypes, ...value: any[]) => void
+  emit: (evtType: EventTypes, ...value: any[]) => void,
+  reject: (reason: any) => void
 ) => {
   let step: Promise<any>;
   let dirExisted: boolean;
@@ -78,7 +79,7 @@ const create = async (
   } catch (error) {
     if (typeof dirExisted !== "undefined")
       await revertProgress(dirExisted, path);
-    emit("error", error);
+    reject(error);
   }
 };
 
@@ -87,6 +88,6 @@ type EventTypes = "error" | "message" | "subscribe";
 
 export default (options?: Options) =>
   // EventPromised is a combination of EventEmitter and Promise
-  new EventPromised<EventTypes>((resolve, error, emit) =>
-    create(options, emit).then(resolve)
+  new EventPromised<EventTypes>((resolve, reject, emit) =>
+    create(options, emit, reject).then(resolve)
   );
