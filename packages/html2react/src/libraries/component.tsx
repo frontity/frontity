@@ -10,14 +10,16 @@ import {
 } from "../../types";
 
 const applyProcessors: ApplyProcessors = ({ node, root, processors }) => {
-  for (let processor of processors) {
-    const { test, process } = processor;
+  for (const processor of processors) {
+    const { test: tester, process } = processor;
     let isMatch = false;
 
     // Test processor.
     try {
-      isMatch = test(node);
-    } catch (e) {}
+      isMatch = tester(node);
+    } catch (e) {
+      console.warn(e);
+    }
     if (!isMatch) continue;
 
     // Apply processor.
