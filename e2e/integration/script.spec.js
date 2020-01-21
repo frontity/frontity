@@ -4,15 +4,19 @@ describe("Script", () => {
   });
 
   it("should load a external script from src url", () => {
-    cy.get("[data-test-id='from-src']")
-      .should("have-attr", "src", "/link-to-script.js")
-      .should("have-attr", "async", true);
+    cy.get("[id='from-src']")
+      .should(
+        "have.attr",
+        "src",
+        "https://unpkg.com/jquery@3.4.1/dist/jquery.js"
+      )
+      .should("have.attr", "async", "async");
   });
 
   it("should load inline script", () => {
-    cy.get("[data-test-id='from-children']").should("have-attr", "async", true);
-    cy.get("[date-test-id='target']").should("have.text", "OFF");
-    cy.get("[date-test-id='button']").click();
-    cy.get("[date-test-id='target']").should("have.text", "ON");
+    cy.get("[id='from-children']").should("have.attr", "async", "async");
+    cy.get("[data-test-id='target']").should("have.text", "OFF");
+    cy.get("[data-test-id='toggle']").click();
+    cy.get("[data-test-id='target']").should("have.text", "ON");
   });
 });

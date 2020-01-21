@@ -7,17 +7,19 @@ const Component: React.FC = () => (
     <p data-test-id="target">OFF</p>
     <button data-test-id="toggle">Toggle</button>
 
-    <Script data-test-id="from-src" src="/link-to-script.js" />
     <Script
-      data-test-id="from-children"
+      dataId="from-src"
+      src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"
+    />
+    <Script
+      dataId="from-children"
       code={`
-      const button = document.querySelector("[data-test-id='toggle']");
-      const target = document.querySelector("[data-test-id='target']")
-      
-      button.addEventListener('click', e => {
-          e.preventDefault();
+        const button = document.querySelector("[data-test-id='toggle']");
+        const target = document.querySelector("[data-test-id='target']");
+        
+        button.addEventListener('click', () => {
           target.innerHTML = 'ON';
-      });
+        });
     `}
     />
   </>

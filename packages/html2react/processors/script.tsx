@@ -11,6 +11,8 @@ const script: Processor = {
       node.props.src = node.props["data-src"];
     }
 
+    node.props.code = node.children.toString();
+
     node.component = Script;
 
     return node;

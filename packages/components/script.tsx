@@ -2,17 +2,22 @@ import React, { useEffect } from "react";
 import { connect } from "frontity";
 import { Connect, Package } from "frontity/types";
 
-type ScriptType = React.FC<Connect<Package, { src: string }>>;
+type ScriptType = React.FC<
+  Connect<Package, { src?: string; code?: string; dataId?: string }>
+>;
 
 const Script: ScriptType = ({ state, ...props }) => {
   let script = null;
-  const { src } = props;
+  const { src, code, dataId } = props;
 
   useEffect(() => {
     if (state.frontity.rendering === "csr") {
       script = window.document.createElement("script");
 
-      script.src = src;
+      if (src) script.src = src;
+      if (code) eval(code);
+      if (dataId) script.id = dataId;
+
       script.async = true;
       script.charset = "utf-8";
 
@@ -24,7 +29,7 @@ const Script: ScriptType = ({ state, ...props }) => {
     };
   }, []);
 
-  return <script async src={src} charSet="utf-8" />;
+  return null;
 };
 
 export default connect(Script);
