@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import React from "react";
 import { connect } from "frontity";
 import { Connect } from "frontity/types";
-import Html2React from "../../types";
-import {
+import Html2ReactType, {
   Component,
   HandleNodes,
   HandleNode,
@@ -63,10 +63,9 @@ const handleNodes: HandleNodes = ({ nodes, payload }) => {
   return null;
 };
 
-const H2R: Component<Connect<Html2React, { html: string }>> = ({
-  html,
-  libraries
-}) => {
+export const Html2React: Component<
+  Connect<Html2ReactType, { html: string }>
+> = ({ html, libraries }) => {
   const { processors, parse, decode } = libraries.html2react;
   const root = parse(html, decode);
 
@@ -83,4 +82,4 @@ const H2R: Component<Connect<Html2React, { html: string }>> = ({
   }) as React.ReactElement;
 };
 
-export default connect(H2R);
+export default connect(Html2React);
