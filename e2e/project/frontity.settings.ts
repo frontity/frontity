@@ -32,6 +32,10 @@ const settings: Settings = [
   {
     name: "loadable",
     packages: ["e2e-loadable"]
+  },
+  {
+    name: "script",
+    packages: ["e2e-script"]
   }
 ];
 
