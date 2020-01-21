@@ -7,7 +7,25 @@ import { subscribe } from "../steps";
 import { errorLogger, log } from "../utils";
 import { Options } from "../steps/types";
 
-export default async ({ name, typescript, useCwd }) => {
+export default async ({
+  name,
+  typescript,
+  useCwd,
+  prompt: promptUser
+}: {
+  name: string;
+  typescript: boolean;
+  useCwd: boolean;
+  prompt: boolean;
+}) => {
+  name = name || process.env.FRONTITY_NAME;
+  typescript = typescript || !!process.env.FRONTITY_TYPESCRIPT;
+  useCwd = useCwd || !!process.env.FRONTITY_USE_CWD;
+
+  if (!promptUser && !name) {
+    throw new Error("You need to provide the name for the project");
+  }
+
   const options: Options = {};
 
   if (!name) {
