@@ -12,13 +12,24 @@ type SendEvent = Analytics["actions"]["analytics"]["sendEvent"];
  */
 export const Root = connect<React.FC<Connect<Analytics>>>(
   ({ state, actions }) => {
+    const { isReady } = state.source.get(state.router.link);
+    const [prevTitle, setPrevTitle] = React.useState("");
     return (
       <Head
-        onChangeClientState={newState => {
-          if (state.source.get(state.router.link).isReady) {
+        /**
+         * This `titleTemplate` changes the title while
+         * `data.isReady` is `false`. This ensures a title change
+         * when `data.isReady` becomes `true` but the title hasn't changed.
+         */
+        titleTemplate={!isReady ? "%s " : ""}
+        onChangeClientState={({ title }) => {
+          if (isReady && prevTitle !== title) {
+            // Store current title.
+            setPrevTitle(title);
+            // Send pageview.
             actions.analytics.sendPageview({
               page: state.router.link,
-              title: newState.title
+              title
             });
           }
         }}
