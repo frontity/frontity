@@ -14,7 +14,6 @@ describe("Script", () => {
   });
 
   it("should load inline script", () => {
-    cy.get("[id='from-children']").should("have.attr", "async", "async");
     cy.get("[data-test-id='target']").should("have.text", "OFF");
     cy.get("[data-test-id='toggle']").click();
     cy.get("[data-test-id='target']").should("have.text", "ON");
