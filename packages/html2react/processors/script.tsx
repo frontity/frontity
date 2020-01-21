@@ -13,14 +13,20 @@ const script: Processor = {
     node.component === "script" &&
     (!node.props.type || node.props.type in validMediaTypes),
   priority: 20,
+  name: "script",
   process: (node: Element) => {
-    if (node.parent.component === "noscript") return node;
+    if (node.parent && node.parent.component === "noscript") return node;
 
     if (node.props["data-src"]) {
       node.props.src = node.props["data-src"];
     }
 
-    node.props.code = node.children.toString();
+    if (node.children.length > 0) {
+      node.props.code = node.children
+        .map(child => (child.type === "text" ? child.content : ""))
+        .join("");
+      node.children = [];
+    }
 
     node.component = Script;
 
