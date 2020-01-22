@@ -34,7 +34,9 @@ jobs:
           start: npm run e2e:prod:${{ matrix.ci_node_index }}
           wait-on: "http://localhost:3001"
           wait-on-timeout: 180
-          env: HEADLESS=true DEBUG=cypress:*
+          env:
+            HEADLESS: true
+            DEBUG: cypress:*
           working-directory: e2e
           config: video=true,screenshotOnRunFailure=true
 
