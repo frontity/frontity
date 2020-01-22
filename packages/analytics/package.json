@@ -29,6 +29,6 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@frontity/source": "^1.1.0"
+    "@frontity/source": "^1.0.17"
   }
 }
