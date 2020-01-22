@@ -1,9 +1,13 @@
 const isProduction: boolean = process.env.NODE_ENV === "production";
 const suffix = "Visit https://community.frontity.org for help! 🙂";
 
-export const error = (message: string) => {
+export const error = (message: string, doThrow = true) => {
   if (!isProduction) {
-    console.error(message + "\n" + suffix);
+    if (doThrow) throw new Error(message + suffix);
+    console.error(message + suffix);
+  } else {
+    if (doThrow) throw new Error("Minified error...");
+    console.error("Minified error...");
   }
 };
 
