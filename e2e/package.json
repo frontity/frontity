@@ -10,7 +10,7 @@
     "start:prod": "cd project/ && npx frontity build && npx frontity serve --port 3001"
   },
   "devDependencies": {
-    "cypress": "^3.7.0",
+    "cypress": "^3.8.2",
     "cypress-plugin-snapshots": "^1.2.9",
     "start-server-and-test": "^1.10.6"
   }
