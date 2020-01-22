@@ -12,8 +12,20 @@ type SendEvent = Analytics["actions"]["analytics"]["sendEvent"];
  */
 export const Root = connect<React.FC<Connect<Analytics>>>(
   ({ state, actions }) => {
-    const { isReady } = state.source.get(state.router.link);
+    const { link } = state.router;
+    const { isReady } = state.source.get(link);
+
+    // Store the previous title.
     const [prevTitle, setPrevTitle] = React.useState("");
+
+    // Store if a pageview has been sent for this link.
+    const [isPageviewSent, setIsPageviewSent] = React.useState(false);
+
+    // Every time link changes, we reset the isPageviewSent value.
+    React.useEffect(() => {
+      setIsPageviewSent(false);
+    }, [link]);
+
     return (
       <Head
         /**
@@ -23,7 +35,7 @@ export const Root = connect<React.FC<Connect<Analytics>>>(
          */
         titleTemplate={!isReady ? "%s " : ""}
         onChangeClientState={({ title }) => {
-          if (isReady && prevTitle !== title) {
+          if (isReady && !isPageviewSent && prevTitle !== title) {
             // Store current title.
             setPrevTitle(title);
             // Send pageview.
@@ -31,6 +43,8 @@ export const Root = connect<React.FC<Connect<Analytics>>>(
               page: state.router.link,
               title
             });
+            // Mark pageview as sent.
+            setIsPageviewSent(true);
           }
         }}
       />
