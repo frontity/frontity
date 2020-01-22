@@ -49,6 +49,8 @@ describe("create-package", () => {
     expect(mockedInquirer.prompt.mock.calls).toMatchSnapshot();
   });
 
+  test("should respect the --no-prompt flag", () => {});
+
   test.todo("should fail in a invalid directory");
   test.todo("should work in a valid directory");
   test.todo("should fail with an invalid name");
