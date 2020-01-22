@@ -25,9 +25,6 @@ const googleAnalytics: GoogleAnalytics = {
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
 
-        // Do something with that pageview.
-        console.log(ids, pageview);
-
         // Send the pageview to the trackers.
         ids.forEach(id =>
           window.ga(`${getTrackerName(id)}.send`, {
@@ -40,9 +37,6 @@ const googleAnalytics: GoogleAnalytics = {
         // Get Tracking ids from state.
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
-
-        // Do something with that event.
-        console.log(ids, event);
 
         ids
           .map(id => getTrackerName(id))
