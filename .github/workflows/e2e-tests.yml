@@ -34,11 +34,11 @@ jobs:
           start: npm run e2e:prod:${{ matrix.ci_node_index }}
           wait-on: "http://localhost:3001"
           wait-on-timeout: 180
-          env:
-            HEADLESS: true
-            DEBUG: cypress:*
+          env: HEADLESS=true
           working-directory: e2e
           config: video=true,screenshotOnRunFailure=true
+        env:
+          DEBUG: cypress:*
 
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v1
