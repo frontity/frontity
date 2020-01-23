@@ -61,7 +61,13 @@ describe("CLI create", () => {
     // Don't need to await because we only check the args
     // that the create command was called with
     create(options);
-    expect(mockedCreateCmd.default.mock.calls).toMatchSnapshot();
+
+    // the path will differ depending on whether we run the test locally or on
+    expect(mockedCreateCmd.default.mock.calls[0][0].name).toMatchSnapshot();
+    expect(
+      mockedCreateCmd.default.mock.calls[0][0].typescript
+    ).toMatchSnapshot();
+
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name: options.name,
       typescript: false,
@@ -80,7 +86,13 @@ describe("CLI create", () => {
     // Don't need to await because we only check the args
     // that the create command was called with
     create(options);
-    expect(mockedCreateCmd.default.mock.calls).toMatchSnapshot();
+
+    // the path will differ depending on whether we run the test locally or on
+    expect(mockedCreateCmd.default.mock.calls[0][0].name).toMatchSnapshot();
+    expect(
+      mockedCreateCmd.default.mock.calls[0][0].typescript
+    ).toMatchSnapshot();
+
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name: options.name,
       typescript: true,
@@ -117,7 +129,13 @@ describe("CLI create", () => {
     // Don't need to await because we only check the args
     // that the create command was called with
     create(options);
-    expect(mockedCreateCmd.default.mock.calls).toMatchSnapshot();
+
+    // the path will differ depending on whether we run the test locally or on
+    expect(mockedCreateCmd.default.mock.calls[0][0].name).toMatchSnapshot();
+    expect(
+      mockedCreateCmd.default.mock.calls[0][0].typescript
+    ).toMatchSnapshot();
+
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name,
       typescript: false,
@@ -138,7 +156,13 @@ describe("CLI create", () => {
     // Don't need to await because we only check the args
     // that the create command was called with
     create(options);
-    expect(mockedCreateCmd.default.mock.calls).toMatchSnapshot();
+
+    // the path will differ depending on whether we run the test locally or on
+    expect(mockedCreateCmd.default.mock.calls[0][0].name).toMatchSnapshot();
+    expect(
+      mockedCreateCmd.default.mock.calls[0][0].typescript
+    ).toMatchSnapshot();
+
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name: options.name,
       typescript: true,
