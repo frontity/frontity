@@ -37,6 +37,7 @@
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.22",
     "@frontity/connect": "^1.0.3",
+    "@frontity/error": "^0.0.1",
     "@frontity/type-declarations": "^1.0.1",
     "@frontity/types": "^1.1.2",
     "@loadable/component": "^5.10.1",

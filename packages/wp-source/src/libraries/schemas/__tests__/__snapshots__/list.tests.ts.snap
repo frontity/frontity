@@ -2,7 +2,7 @@
 
 exports[`Convert a author list 1`] = `
 Object {
-  "author": Object {
+  "authorEntity": Object {
     "1": Object {
       "_links": Object {
         "collection": Array [
@@ -141,7 +141,7 @@ You can find her on Twitter as @r_martinezduque.",
 
 exports[`Convert a category list 1`] = `
 Object {
-  "taxonomy": Object {
+  "taxonomyEntity": Object {
     "4": Object {
       "_links": Object {
         "about": Array [
@@ -326,7 +326,7 @@ Object {
 
 exports[`Convert a media list 1`] = `
 Object {
-  "attachment": Object {
+  "attachmentEntity": Object {
     "122": Object {
       "_embedded": Object {
         "author": Array [
@@ -1670,7 +1670,7 @@ Object {
       },
     },
   },
-  "author": Object {
+  "authorEntity": Object {
     "2": Object {
       "_links": Object {
         "collection": Array [
@@ -1729,7 +1729,7 @@ You can find her on Twitter as @r_martinezduque.",
 
 exports[`Convert a tag list 1`] = `
 Object {
-  "taxonomy": Object {
+  "taxonomyEntity": Object {
     "18": Object {
       "_links": Object {
         "about": Array [
@@ -2156,7 +2156,7 @@ Object {
 
 exports[`Convert list of posts using list 1`] = `
 Object {
-  "attachment": Object {
+  "attachmentEntity": Object {
     "34": Object {
       "_links": Object {
         "about": Array [
@@ -2793,7 +2793,7 @@ Object {
       },
     },
   },
-  "author": Object {
+  "authorEntity": Object {
     "2": Object {
       "_links": Object {
         "collection": Array [
@@ -2872,7 +2872,7 @@ You can find her on Twitter as @r_martinezduque.",
       "url": "",
     },
   },
-  "postType": Object {
+  "postEntity": Object {
     "33": Object {
       "_embedded": Object {
         "author": Array [
@@ -3617,7 +3617,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       },
     },
   },
-  "taxonomy": Object {
+  "taxonomyEntity": Object {
     "13": Object {
       "_links": Object {
         "about": Array [
