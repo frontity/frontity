@@ -27,13 +27,12 @@ describe("create-package", () => {
     });
   });
 
-  test("should not ask for passed options", async done => {
+  test("should not ask for passed options", async () => {
     const name = "example-theme";
     const namespace = "theme";
     const prompt = true;
     await createPackage({ name, namespace, prompt });
     expect(mockedInquirer.prompt).not.toHaveBeenCalled();
-    done();
   });
 
   test("should ask for missing name", async () => {
