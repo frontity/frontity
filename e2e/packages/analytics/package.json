@@ -4,7 +4,7 @@
   "private": true,
   "description": "Package to do e2e testing of Frontity's analytics library",
   "dependencies": {
-    "@frontity/analytics": "^0.1.0",
+    "@frontity/analytics": "^1.0.0-beta.0",
     "frontity": "^1.4.3"
   }
 }
