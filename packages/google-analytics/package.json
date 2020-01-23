@@ -1,6 +1,6 @@
 {
   "name": "@frontity/google-analytics",
-  "version": "0.1.0",
+  "version": "1.0.0-beta.0",
   "description": "Analytics package to use Google Analytics with »Frontity",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -30,6 +30,6 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@frontity/analytics": "^0.1.0"
+    "@frontity/analytics": "^1.0.0-beta.0"
   }
 }

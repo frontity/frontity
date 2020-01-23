@@ -29,11 +29,17 @@
     "@frontity/wp-source": "1.4.3",
     "@frontity/yoast": "1.1.6",
     "example-twentytwenty-theme": "1.0.0",
-    "@frontity/twentytwenty-theme": "1.0.0-beta.0"
+    "@frontity/twentytwenty-theme": "1.0.0-beta.0",
+    "e2e-analytics": "0.1.0",
+    "@frontity/analytics": "0.1.0",
+    "@frontity/google-analytics": "0.1.0",
+    "@frontity/head-tags": "1.0.0"
   },
   "changesets": [
+    "brave-avocados-leave",
     "chatty-spoons-brush",
     "curvy-trees-smash",
-    "dry-dogs-prove"
+    "dry-dogs-prove",
+    "lemon-dots-wave"
   ]
 }
