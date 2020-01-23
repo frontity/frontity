@@ -1,12 +1,14 @@
 {
-  "name": "@frontity/wp-source",
-  "version": "1.5.0",
-  "description": "Source package of Frontity for self-hosted WordPress and WordPress.com sites",
+  "name": "@frontity/head-tags",
+  "version": "1.0.0",
+  "description": "Integrate your Frontity site with REST API - Head Tags by Frontity",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
   "keywords": [
     "frontity",
-    "frontity-source"
+    "frontity-head-tags",
+    "yoast",
+    "seo"
   ],
   "repository": {
     "type": "git",
@@ -24,19 +26,17 @@
     "access": "public"
   },
   "devDependencies": {
+    "@frontity/connect": "^1.0.3",
+    "@frontity/router": "^1.0.17",
+    "@frontity/source": "^1.1.0",
+    "@frontity/wp-source": "^1.5.0",
     "@types/jest": "^24.0.11",
-    "clone-deep": "4.0.1",
-    "frontity": "^1.4.3",
+    "frontity": "^1.4.2",
     "jest": "^24.7.1",
-    "node-fetch": "^2.6.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.3"
   },
-  "dependencies": {
-    "@frontity/connect": "^1.0.3",
-    "@frontity/source": "^1.1.0",
-    "normalizr": "^3.3.0",
-    "path-to-regexp": "^3.0.0",
-    "query-string": "^6.8.3"
+  "peerDependencies": {
+    "@frontity/wp-source": "^1.5.0"
   }
 }

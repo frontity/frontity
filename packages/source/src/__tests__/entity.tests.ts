@@ -1,6 +1,14 @@
-import { Author, Taxonomy, PostType, Attachment } from "../entities";
+/* eslint-disable @typescript-eslint/camelcase */
+import {
+  TaxonomyType,
+  TaxonomyEntity,
+  PostType,
+  PostEntity,
+  AuthorEntity,
+  AttachmentEntity
+} from "../entities";
 
-const author: Author = {
+const author: AuthorEntity = {
   id: 1,
   name: "luisherranz",
   url: "",
@@ -27,7 +35,7 @@ const author: Author = {
   }
 };
 
-const taxonomy: Taxonomy = {
+const taxonomy: TaxonomyEntity = {
   id: 7,
   count: 10,
   description: "",
@@ -68,7 +76,7 @@ const taxonomy: Taxonomy = {
   }
 };
 
-const post: PostType = {
+const post: PostEntity = {
   id: 1798,
   date: "2018-11-03T12:20:00",
   date_gmt: "2018-11-03T12:20:00",
@@ -172,7 +180,7 @@ const post: PostType = {
   _embedded: {}
 };
 
-const attachment: Attachment = {
+const attachment: AttachmentEntity = {
   id: 437,
   date: "2018-11-23T14:27:38",
   date_gmt: "2018-11-23T12:27:38",
@@ -324,6 +332,62 @@ const attachment: Attachment = {
         taxonomy: "latest",
         embeddable: true,
         href: "https://test.frontity.io/wp-json/wp/v2/latest?attachment=437"
+      }
+    ],
+    curies: [
+      {
+        name: "wp",
+        href: "https://api.w.org/{rel}",
+        templated: true
+      }
+    ]
+  }
+};
+
+const taxonomyType: TaxonomyType = {
+  name: "Categories",
+  slug: "category",
+  description: "",
+  types: ["post"],
+  hierarchical: true,
+  rest_base: "categories",
+  _links: {
+    collection: [
+      {
+        href: "http://test.frontity.io/wp-json/wp/v2/types"
+      }
+    ],
+    "wp:items": [
+      {
+        href: "http://test.frontity.io/wp-json/wp/v2/posts"
+      }
+    ],
+    curies: [
+      {
+        name: "wp",
+        href: "https://api.w.org/{rel}",
+        templated: true
+      }
+    ]
+  }
+};
+
+const postType: PostType = {
+  description: "",
+  hierarchical: false,
+  name: "Posts",
+  slug: "post",
+  taxonomies: ["category", "post_tag"],
+  rest_base: "posts",
+  _links: {
+    collection: [
+      {
+        href: "http://test.frontity.io/wp-json/wp/v2/types"
+      }
+    ],
+    "wp:items": [
+      {
+        href: "http://test.frontity.io/wp-json/wp/v2/posts"
       }
     ],
     curies: [

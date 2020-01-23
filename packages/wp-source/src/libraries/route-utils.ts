@@ -1,18 +1,29 @@
 import { RouteParams } from "@frontity/source";
 import WpSource from "../../types";
 
-export const parse: WpSource["libraries"]["source"]["parse"] = route =>
-  routeToParams(route);
+export const addFinalSlash = (path: string): string =>
+  path.replace(/\/?$/, "/");
 
-export const stringify: WpSource["libraries"]["source"]["stringify"] = routeParams =>
-  paramsToRoute(routeParams);
+export const queryToObj = (query = "") =>
+  query && query.includes("=")
+    ? query.split("&").reduce((result, param) => {
+        const [k, v] = param.split("=");
+        result[k] = v;
+        return result;
+      }, {})
+    : {};
 
-export const normalize = (route: string): string =>
-  paramsToRoute(routeToParams(route));
+export const objToQuery = (obj: Record<string, any>) => {
+  const entries = Object.entries(obj);
+  return entries.length
+    ? `?${entries.map(([key, value]) => `${key}=${value}`).join("&")}`
+    : "";
+};
 
-export default { parse, stringify, normalize };
-
-// UTILS
+export const concatPath = (...paths: string[]) =>
+  [""]
+    .concat(...paths.map(path => path.split("/").filter(p => p)), "")
+    .join("/");
 
 export const decomposeRoute = (route: string) => {
   const [
@@ -57,26 +68,13 @@ export const paramsToRoute = ({
   return `${pathAndPage}${queryStr}${hash}`;
 };
 
-export const addFinalSlash = (path: string): string =>
-  path.replace(/\/?$/, "/");
+export const parse: WpSource["libraries"]["source"]["parse"] = route =>
+  routeToParams(route);
 
-export const objToQuery = (obj: Record<string, any>) => {
-  const entries = Object.entries(obj);
-  return entries.length
-    ? `?${entries.map(([key, value]) => `${key}=${value}`).join("&")}`
-    : "";
-};
+export const stringify: WpSource["libraries"]["source"]["stringify"] = routeParams =>
+  paramsToRoute(routeParams);
 
-export const queryToObj = (query: string = "") =>
-  query && query.includes("=")
-    ? query.split("&").reduce((result, param) => {
-        const [k, v] = param.split("=");
-        result[k] = v;
-        return result;
-      }, {})
-    : {};
+export const normalize = (route: string): string =>
+  paramsToRoute(routeToParams(route));
 
-export const concatPath = (...paths: string[]) =>
-  [""]
-    .concat(...paths.map(path => path.split("/").filter(p => p)), "")
-    .join("/");
+export default { parse, stringify, normalize };
