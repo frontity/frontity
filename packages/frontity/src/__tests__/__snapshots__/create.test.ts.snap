@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create goes through all steps 1`] = `
+Object {
+  "name": "random-name",
+  "path": "/path/to/project",
+}
+`;
+
+exports[`create goes through all steps 2`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create goes through all steps 3`] = `
+Array [
+  Array [
+    "random-name",
+    undefined,
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create goes through all steps 4`] = `
+Array [
+  Array [
+    "js",
+    "random-name",
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create goes through all steps 5`] = `
+Array [
+  Array [
+    undefined,
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create goes through all steps 6`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create uses the emitter passed to log messages 1`] = `Array []`;
