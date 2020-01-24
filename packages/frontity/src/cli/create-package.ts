@@ -93,17 +93,20 @@ export default async ({
     options.namespace = namespace;
   }
 
-  // 4. get the emitter for `create-package`
-  const emitter = createPackage(options);
+  try {
+    // 4. get the emitter for `create-package`
+    const emitter = createPackage(options);
 
-  emitter.on("error", errorLogger);
-  emitter.on("message", (message, action) => {
-    if (action) ora.promise(action, message);
-    else log(message);
-  });
+    emitter.on("message", (message, action) => {
+      if (action) ora.promise(action, message);
+      else log(message);
+    });
 
-  // 5. Actually create the package
-  await emitter;
+    // 5. Actually create the package
+    await emitter;
+  } catch (error) {
+    errorLogger(error);
+  }
 
   log(chalk.bold(`\nNew package "${options.name}" created.\n`));
 };

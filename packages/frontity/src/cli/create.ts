@@ -54,58 +54,61 @@ export default async ({
   options.typescript = typescript;
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
 
-  // Get the emitter for `create`
-  const emitter = create(options);
-  emitter.on("error", errorLogger);
-  emitter.on("message", (message, action) => {
-    if (action) ora.promise(action, message);
-    else log(message);
-  });
-
-  await emitter;
-
-  log(chalk.bold("\nFrontity project created.\n"));
-
-  const subscribeQuestions: Question[] = [
-    {
-      name: "subscribe",
-      type: "confirm",
-      message: "Do you want to receive framework updates by email?",
-      default: false
-    },
-    {
-      name: "email",
-      type: "input",
-      message: "Please, enter your email:",
-      when: answers => answers.subscribe
-    }
-  ];
-  const answers = await prompt(subscribeQuestions);
-
-  if (answers.subscribe) {
-    emitter.on("subscribe", (message, action) => {
+  try {
+    // Get the emitter for `create`
+    const emitter = create(options);
+    emitter.on("message", (message, action) => {
       if (action) ora.promise(action, message);
       else log(message);
     });
 
-    await subscribe(answers.email);
+    await emitter;
 
-    log("\nThanks for subscribing! 😃");
-  } else {
+    log(chalk.bold("\nFrontity project created.\n"));
+
+    const subscribeQuestions: Question[] = [
+      {
+        name: "subscribe",
+        type: "confirm",
+        message: "Do you want to receive framework updates by email?",
+        default: false
+      },
+      {
+        name: "email",
+        type: "input",
+        message: "Please, enter your email:",
+        when: answers => answers.subscribe
+      }
+    ];
+    const answers = await prompt(subscribeQuestions);
+
+    if (answers.subscribe) {
+      emitter.on("subscribe", (message, action) => {
+        if (action) ora.promise(action, message);
+        else log(message);
+      });
+
+      await subscribe(answers.email);
+
+      log("\nThanks for subscribing! 😃");
+    } else {
+      log(
+        `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
+          "npx frontity subscribe <email>"
+        )}.`
+      );
+    }
+
     log(
-      `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
-        "npx frontity subscribe <email>"
-      )}.`
+      `\nRun ${chalk.bold.green(
+        `cd ${options.name} && npx frontity dev`
+      )} and have fun! 🎉\n\nYou can find docs at ${chalk.underline.magenta(
+        "https://docs.frontity.org/"
+      )}.\nIf you have any doubts, join our community at ${chalk.underline.magenta(
+        "https://community.frontity.org/"
+      )}.\n`
     );
+  } catch (error) {
+    errorLogger(error);
   }
-
-  log(
-    `\nRun ${chalk.bold.green(
-      `cd ${options.name} && npx frontity dev`
-    )} and have fun! 🎉\n\nYou can find docs at ${chalk.underline.magenta(
-      "https://docs.frontity.org/"
-    )}.\nIf you have any doubts, join our community at ${chalk.underline.magenta(
-      "https://community.frontity.org/"
-    )}.\n`
-  );
 };

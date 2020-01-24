@@ -4,18 +4,19 @@ import { subscribe } from "../steps";
 // TODO:  make param an object
 const subscribeCommand = async (
   email: string,
-  emit: (event: string, ...value: any[]) => void
+  emit: (event: string, ...value: any[]) => void,
+  reject: (reason: any) => void
 ) => {
   try {
-    emit("cli:subscribe:message", "Subscribing to frontity");
+    emit("message", "Subscribing to frontity");
     await subscribe(email);
   } catch (error) {
-    emit("cli:subscribe:error", error);
+    reject(error);
   }
 };
 
 export default (email: string) =>
   // EventPromised is a combination of EventEmitter and Promise
-  new EventPromised((resolve, error, emit) => {
-    subscribeCommand(email, emit).then(() => resolve(true));
+  new EventPromised((resolve, reject, emit) => {
+    subscribeCommand(email, emit, reject).then(() => resolve(true));
   });

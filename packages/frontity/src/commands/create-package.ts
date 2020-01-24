@@ -10,10 +10,12 @@ import {
 } from "../steps/create-package";
 
 import { ensureProjectDir, revertProgress } from "../steps";
+import { reject } from "ramda";
 
 const createPackage = async (
   options: Options,
-  emit: (event: string, ...value: any[]) => void
+  emit: (event: string, ...value: any[]) => void,
+  reject: (reason: any) => void
 ) => {
   const emitMessage = (message: string, step?: Promise<void>) => {
     emit("message", message, step);
@@ -53,7 +55,7 @@ const createPackage = async (
     if (typeof dirExisted !== "undefined") {
       await revertProgress(dirExisted, packagePath);
     }
-    emit("error", error);
+    reject(error);
   }
 };
 
@@ -62,6 +64,6 @@ type EventTypes = "error" | "message";
 
 export default (options?: Options) =>
   // EventPromised is a combination of EventEmitter and Promise
-  new EventPromised<EventTypes>((resolve, error, emit) => {
-    createPackage(options, emit).then(resolve);
+  new EventPromised<EventTypes>((resolve, reject, emit) => {
+    createPackage(options, emit, reject).then(resolve);
   });
