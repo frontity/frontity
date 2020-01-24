@@ -38,7 +38,17 @@ export default async ({
         type: "input",
         message: "Enter a name for the project:",
         default: "my-frontity-project"
-      },
+      }
+    ];
+
+    const answers = await prompt(questions);
+    options.name = answers.name;
+  } else {
+    options.name = name;
+  }
+
+  if (!theme && promptUser) {
+    const questions: Question[] = [
       {
         name: "theme",
         type: "input",
@@ -48,10 +58,9 @@ export default async ({
     ];
 
     const answers = await prompt(questions);
-    options.name = answers.name;
     options.theme = answers.theme;
   } else {
-    options.name = name;
+    options.theme = theme;
   }
 
   options.typescript = typescript;

@@ -73,6 +73,7 @@
     "@types/stack-trace": "0.0.29",
     "@types/tar": "^4.0.0",
     "jest": "^24.7.1",
+    "lodash.omit": "4.5.0",
     "ts-jest": "^24.0.2"
   }
 }
