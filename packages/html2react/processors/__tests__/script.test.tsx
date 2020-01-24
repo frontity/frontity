@@ -13,12 +13,20 @@ describe("Script processor", () => {
     const { container } = render(
       <Html2React html={'<script src="/some-js-file.js" />'} {...store} />
     );
-    expect(container).toMatchInlineSnapshot(`<diva />`);
+    expect(container).toMatchSnapshot();
   });
+
+  it("should not process scripts with a non valid type", () => {
+    const { container } = render(
+      <Html2React html={'<script src="/" type="non-valid" />'} {...store} />
+    );
+    expect(container).toMatchSnapshot();
+  });
+
   it("should process a script with code", () => {
     const { container } = render(
       <Html2React html={'<script>const some = "code";</script>'} {...store} />
     );
-    expect(container).toMatchInlineSnapshot(`<div />`);
+    expect(container).toMatchSnapshot();
   });
 });
