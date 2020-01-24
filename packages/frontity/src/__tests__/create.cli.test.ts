@@ -27,13 +27,15 @@ describe("CLI create", () => {
     mockedUtils.errorLogger = jest.fn();
   });
 
+  const options = {
+    name: undefined,
+    typescript: undefined,
+    useCwd: undefined,
+    theme: undefined,
+    prompt: true
+  };
+
   test("frontity create", async done => {
-    const options = {
-      name: undefined,
-      typescript: undefined,
-      useCwd: undefined,
-      prompt: true
-    };
     await create(options);
 
     expect(mockedInquirer.prompt.mock.calls).toMatchSnapshot();
@@ -51,16 +53,11 @@ describe("CLI create", () => {
   });
 
   test("frontity create 'test-project'", () => {
-    const options = {
-      name: "test-project",
-      typescript: undefined,
-      useCwd: undefined,
-      prompt: true
-    };
-
     // Don't need to await because we only check the args
     // that the create command was called with
-    create(options);
+    const name = "test-project";
+
+    create({ ...options, name });
 
     // the path will differ depending on whether we run the test locally or on
     expect(mockedCreateCmd.default.mock.calls[0][0].name).toMatchSnapshot();
@@ -69,23 +66,19 @@ describe("CLI create", () => {
     ).toMatchSnapshot();
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
-      name: options.name,
+      name: name,
       typescript: false,
-      path: resolve(process.cwd(), options.name)
+      path: resolve(process.cwd(), name)
     });
   });
 
   test("frontity create 'test-project' --typescript", () => {
-    const options = {
-      name: "test-project",
-      typescript: true,
-      useCwd: undefined,
-      prompt: true
-    };
-
     // Don't need to await because we only check the args
     // that the create command was called with
-    create(options);
+    const name = "test-project";
+    const typescript = true;
+
+    create({ ...options, name, typescript });
 
     // the path will differ depending on whether we run the test locally or on
     expect(mockedCreateCmd.default.mock.calls[0][0].name).toMatchSnapshot();
@@ -94,22 +87,15 @@ describe("CLI create", () => {
     ).toMatchSnapshot();
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
-      name: options.name,
-      typescript: true,
-      path: resolve(process.cwd(), options.name)
+      name: name,
+      typescript,
+      path: resolve(process.cwd(), name)
     });
   });
 
   test("frontity create --no-prompt", async () => {
-    const options = {
-      name: undefined,
-      typescript: true,
-      useCwd: undefined,
-      prompt: false
-    };
-
     try {
-      await create(options);
+      await create({ ...options, typescript: true, prompt: false });
     } catch (err) {
       expect(err.message).toBe("You need to provide the name for the project");
     }
@@ -118,13 +104,6 @@ describe("CLI create", () => {
   test("FRONTITY_NAME='test-project'; frontity create --no-prompt", () => {
     const name = "test-project";
     process.env.FRONTITY_NAME = name;
-
-    const options = {
-      name: undefined,
-      typescript: undefined,
-      useCwd: undefined,
-      prompt: false
-    };
 
     // Don't need to await because we only check the args
     // that the create command was called with
@@ -144,18 +123,12 @@ describe("CLI create", () => {
   });
 
   test("FRONTITY_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt", () => {
+    const name = "test-project";
     process.env.FRONTITY_TYPESCRIPT = "true";
-
-    const options = {
-      name: "test-project",
-      typescript: undefined,
-      useCwd: undefined,
-      prompt: false
-    };
 
     // Don't need to await because we only check the args
     // that the create command was called with
-    create(options);
+    create({ ...options, name });
 
     // the path will differ depending on whether we run the test locally or on
     expect(mockedCreateCmd.default.mock.calls[0][0].name).toMatchSnapshot();
@@ -164,9 +137,9 @@ describe("CLI create", () => {
     ).toMatchSnapshot();
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
-      name: options.name,
+      name: name,
       typescript: true,
-      path: resolve(process.cwd(), options.name)
+      path: resolve(process.cwd(), name)
     });
   });
 });
