@@ -47,7 +47,6 @@ program
 // options: --typescript, --use-cwd.
 program
   .command("create [name]")
-  .option("-h, --theme <theme>", "The theme to use")
   .option("-t, --typescript", "Adds support for TypeScript")
   .option("-c, --use-cwd", "Generates the project in the current directory.")
   .option("-n, --no-prompt", "Skips prompting the user for options")
