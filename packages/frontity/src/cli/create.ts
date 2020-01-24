@@ -9,16 +9,19 @@ import { Options } from "../steps/types";
 
 export default async ({
   name,
+  theme,
   typescript,
   useCwd,
   prompt: promptUser
 }: {
   name: string;
+  theme: string;
   typescript: boolean;
   useCwd: boolean;
   prompt: boolean;
 }) => {
   name = name || process.env.FRONTITY_NAME;
+  theme = theme || process.env.FRONTITY_THEME;
   typescript = typescript || !!process.env.FRONTITY_TYPESCRIPT;
   useCwd = useCwd || !!process.env.FRONTITY_USE_CWD;
 
