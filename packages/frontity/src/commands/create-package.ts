@@ -10,7 +10,6 @@ import {
 } from "../steps/create-package";
 
 import { ensureProjectDir, revertProgress } from "../steps";
-import { reject } from "ramda";
 
 const createPackage = async (
   options: Options,
