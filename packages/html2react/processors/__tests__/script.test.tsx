@@ -29,4 +29,11 @@ describe("Script processor", () => {
     );
     expect(container).toMatchSnapshot();
   });
+
+  it("should set data-src to src if provided", () => {
+    const { container } = render(
+      <Html2React html={'<script data-src="/some-js-file.js" />'} {...store} />
+    );
+    expect(container).toMatchSnapshot();
+  });
 });

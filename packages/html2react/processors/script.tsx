@@ -19,6 +19,7 @@ const script: Processor = {
 
     if (node.props["data-src"]) {
       node.props.src = node.props["data-src"];
+      delete node.props["data-src"];
     }
 
     if (node.children.length > 0) {
