@@ -32,6 +32,10 @@ const settings: Settings = [
   {
     name: "loadable",
     packages: ["e2e-loadable"]
+  },
+  {
+    name: "iframe",
+    packages: ["e2e-iframe"]
   }
 ];
 
