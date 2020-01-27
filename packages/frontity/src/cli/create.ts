@@ -57,9 +57,18 @@ export default async ({
       {
         name: "theme",
         type: "list",
-        message: "Enter a starter theme to clone:",
+        message: "Pick a starter theme to clone:",
         default: "@frontity/mars-theme",
-        choices: ["@frontity/mars-theme", "@frontity/twentytwenty-theme"]
+        choices: [
+          {
+            name: "@frontity/mars-theme (default)",
+            value: "@frontity/mars-theme"
+          },
+          {
+            name: "@frontity/twentytwenty-theme",
+            value: "@frontity/twentytwenty-theme"
+          }
+        ]
       }
     ];
 

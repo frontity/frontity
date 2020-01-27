@@ -47,7 +47,7 @@ describe("CLI create", () => {
       { message: "Enter a name for the project:" }
     ]);
     expect(mockedInquirer.prompt.mock.calls[1][0]).toMatchObject([
-      { message: "Enter a starter theme to clone:" }
+      { message: "Pick a starter theme to clone:" }
     ]);
 
     expect(mockedInquirer.prompt.mock.calls[2][0]).toMatchObject([
