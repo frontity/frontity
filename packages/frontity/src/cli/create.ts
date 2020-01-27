@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import ora from "ora";
 import chalk from "chalk";
-import { prompt, Question } from "inquirer";
+import { prompt, Question, ListQuestion } from "inquirer";
 import create from "../commands/create";
 import { subscribe } from "../steps";
 import { errorLogger, log } from "../utils";
@@ -47,20 +47,24 @@ export default async ({
     options.name = name;
   }
 
-  if (!theme && promptUser) {
-    const questions: Question[] = [
+  // The theme was provided as a CLI option
+  if (theme) {
+    options.theme = theme;
+  } else if (promptUser) {
+    // The theme was NOT provided as a CLI option
+    // In this case, we prompt the user
+    const questions: ListQuestion[] = [
       {
         name: "theme",
-        type: "input",
+        type: "list",
         message: "Enter a starter theme to clone:",
-        default: "@frontity/mars-theme"
+        default: "@frontity/mars-theme",
+        choices: ["@frontity/mars-theme", "@frontity/twentytwenty-theme"]
       }
     ];
 
     const answers = await prompt(questions);
     options.theme = answers.theme;
-  } else {
-    options.theme = theme;
   }
 
   options.typescript = typescript;

@@ -62,7 +62,7 @@ const create = async (
     );
     await step;
 
-    // 5. Clones `@frontity/mars-theme` inside `packages`.
+    // 5. Clones the theme inside `packages`.
     step = cloneStarterTheme(theme, path);
     emitMessage(`Cloning ${chalk.green(theme)}.`, step);
     await step;

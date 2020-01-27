@@ -159,4 +159,41 @@ describe("create", () => {
       expect(err.message).toBe("Mocked Error");
     }
   });
+
+  test("If no theme is specified, clone the default", async () => {
+    const options = {
+      name: "random-name",
+      path: "/path/to/project"
+    };
+
+    // Restore the original implementation
+    const { normalizeOptions } = jest.requireActual("../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
+    mockedSteps.ensureProjectDir.mockResolvedValueOnce(false);
+
+    await create(options);
+
+    expect(mockedSteps.cloneStarterTheme).toHaveBeenCalledTimes(1);
+    expect(mockedSteps.cloneStarterTheme).toHaveBeenCalledWith(
+      "@frontity/mars-theme",
+      options.path
+    );
+  });
+
+  test("Clone the specified theme", async () => {
+    const options = {
+      name: "random-name",
+      path: "/path/to/project",
+      theme: "@frontity/twentytwenty-theme"
+    };
+
+    await create(options);
+
+    expect(mockedSteps.cloneStarterTheme).toHaveBeenCalledTimes(1);
+    expect(mockedSteps.cloneStarterTheme).toHaveBeenCalledWith(
+      options.theme,
+      options.path
+    );
+  });
 });

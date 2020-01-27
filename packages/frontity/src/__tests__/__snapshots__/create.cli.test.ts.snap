@@ -55,10 +55,14 @@ Array [
   Array [
     Array [
       Object {
+        "choices": Array [
+          "@frontity/mars-theme",
+          "@frontity/twentytwenty-theme",
+        ],
         "default": "@frontity/mars-theme",
         "message": "Enter a starter theme to clone:",
         "name": "theme",
-        "type": "input",
+        "type": "list",
       },
     ],
   ],
