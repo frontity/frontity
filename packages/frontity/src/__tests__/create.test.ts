@@ -74,8 +74,7 @@ describe("create", () => {
         throw error;
       });
 
-      const emitter = create(options);
-      await emitter;
+      await create(options);
     } catch (err) {
       expect(err.message).toBe("Mocked Error");
       expect(mockedSteps.revertProgress).toHaveBeenCalledWith(
@@ -98,8 +97,7 @@ describe("create", () => {
         throw error;
       });
 
-      const emitter = create(options);
-      await emitter;
+      await create(options);
       throw new Error("This should not be reached");
     } catch (err) {
       expect(err.message).toBe("Mocked Error");
@@ -122,8 +120,7 @@ describe("create", () => {
         throw error;
       });
 
-      const emitter = create(options);
-      await emitter;
+      await create(options);
       throw new Error("This should never be reached");
     } catch (err) {
       expect(err.message).toBe("Mocked Error");
@@ -153,8 +150,7 @@ describe("create", () => {
         throw error;
       });
 
-      const emitter = create(options);
-      await emitter;
+      await create(options);
     } catch (err) {
       expect(err.message).toBe("Mocked Error");
     }
