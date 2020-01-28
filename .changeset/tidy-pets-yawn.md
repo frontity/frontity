@@ -2,4 +2,4 @@
 "frontity": minor
 ---
 
-Add a new option `--theme` option which allows specifying the starter theme on the command line. If the theme is not specified, the user can pick a theme from an interactive prompt.
+Add a new option `--theme` which allows specifying the starter theme on the command line. If the theme is not specified, the user can pick a theme from an interactive prompt.
