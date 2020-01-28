@@ -118,7 +118,8 @@ export const createPackageJson = async (
 export const createFrontitySettings = async (
   extension: string,
   name: string,
-  path: string
+  path: string,
+  theme: string
 ) => {
   const frontitySettings = {
     name,
@@ -131,7 +132,7 @@ export const createFrontitySettings = async (
     },
     packages: [
       {
-        name: "@frontity/mars-theme",
+        name: theme,
         state: {
           theme: {
             menu: [

@@ -22,7 +22,8 @@ describe("create", () => {
   test("goes through all steps", async () => {
     const options = {
       name: "random-name",
-      path: "/path/to/project"
+      path: "/path/to/project",
+      theme: "@frontity/mars-theme"
     };
     await create(options);
     expect(mockedSteps.normalizeOptions.mock.calls[0][1]).toMatchSnapshot();
@@ -34,20 +35,31 @@ describe("create", () => {
   });
 
   test("works correctly when `options.typescript` is false", async () => {
+    // Restore the original implementation
+    const { normalizeOptions } = jest.requireActual("../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
     const options = {
       name: "random-name",
       path: "/path/to/project",
       typescript: false
     };
+
     await create(options);
+
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
       "js",
       options.name,
-      options.path
+      options.path,
+      "@frontity/mars-theme"
     );
   });
 
   test("works correctly when `options.typescript` is true", async () => {
+    // Restore the original implementation
+    const { normalizeOptions } = jest.requireActual("../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
     const options = {
       name: "random-name",
       path: "/path/to/project",
@@ -57,7 +69,8 @@ describe("create", () => {
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
       "ts",
       options.name,
-      options.path
+      options.path,
+      "@frontity/mars-theme"
     );
   });
 

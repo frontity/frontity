@@ -169,8 +169,9 @@ describe("createFrontitySettings", () => {
     const name = "random-name";
     const path = "/path/to/project";
     const extension = "js";
+    const theme = "@frontity/mars-theme";
 
-    await createFrontitySettings(extension, name, path);
+    await createFrontitySettings(extension, name, path, theme);
     expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
@@ -179,8 +180,9 @@ describe("createFrontitySettings", () => {
     const name = "random-name";
     const path = "/path/to/project";
     const extension = "ts";
+    const theme = "@frontity/mars-theme";
 
-    await createFrontitySettings(extension, name, path);
+    await createFrontitySettings(extension, name, path, theme);
     expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });

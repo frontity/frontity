@@ -4,6 +4,7 @@ exports[`create goes through all steps 1`] = `
 Object {
   "name": "random-name",
   "path": "/path/to/project",
+  "theme": "@frontity/mars-theme",
 }
 `;
 
@@ -19,7 +20,7 @@ exports[`create goes through all steps 3`] = `
 Array [
   Array [
     "random-name",
-    undefined,
+    "@frontity/mars-theme",
     "/path/to/project",
   ],
 ]
@@ -31,6 +32,7 @@ Array [
     "js",
     "random-name",
     "/path/to/project",
+    "@frontity/mars-theme",
   ],
 ]
 `;
@@ -38,7 +40,7 @@ Array [
 exports[`create goes through all steps 5`] = `
 Array [
   Array [
-    undefined,
+    "@frontity/mars-theme",
     "/path/to/project",
   ],
 ]

@@ -55,7 +55,7 @@ const create = async (
 
     // 4. Creates `frontity.settings`.
     const extension = typescript ? "ts" : "js";
-    step = createFrontitySettings(extension, name, path);
+    step = createFrontitySettings(extension, name, path, theme);
     emitMessage(
       `Creating ${chalk.yellow(`frontity.settings.${extension}`)}.`,
       step
