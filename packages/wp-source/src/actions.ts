@@ -1,4 +1,4 @@
-import WpSource from "../types";
+import WpSource, { ServerError, isServerError } from "../types";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
@@ -53,10 +53,19 @@ const actions: WpSource["actions"]["source"] = {
       // set isHome value if it's true
       if (isHome) source.data[route].isHome = true;
     } catch (e) {
-      console.log(e);
-      // an error happened
+      console.error(e);
+
+      // It's a server error (4xx or 5xx)
+      if (isServerError(e)) {
+        // TODO: do stuff here
+        source.data[route] = {
+          ...source.data.route,
+          [`is${e.status}`]: true
+        };
+      }
+
       source.data[route] = {
-        is404: true,
+        ...source.data[route],
         isFetching: false,
         isReady: false
       };

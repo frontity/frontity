@@ -25,6 +25,16 @@ export type RouteParams = {
   query?: Record<string, any>;
 };
 
+export type ServerError = {
+  status: number;
+  statusText: string;
+  isServerError: true;
+};
+
+export function isServerError(e: Error | ServerError): e is ServerError {
+  return (e as ServerError).isServerError !== undefined;
+}
+
 interface WpSource extends Source {
   name: "@frontity/wp-source";
   state: {
