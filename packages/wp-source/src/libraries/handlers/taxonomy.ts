@@ -1,5 +1,6 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
+import { FrontitySourceError } from "../../errors";
 
 const taxonomyHandler = ({
   taxonomy,
@@ -23,7 +24,7 @@ const taxonomyHandler = ({
     const response = await api.get({ endpoint, params: { slug } });
     const [entity] = await populate({ response, state });
     if (!entity)
-      throw new Error(
+      throw new FrontitySourceError(
         `entity from endpoint "${endpoint}" with slug "${slug}" not found`
       );
     id = entity.id;
@@ -45,7 +46,7 @@ const taxonomyHandler = ({
   // 3. populate response
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
-    throw new Error(
+    throw new FrontitySourceError(
       `${taxonomy} with slug "${params.slug}" doesn't have page ${page}`
     );
 

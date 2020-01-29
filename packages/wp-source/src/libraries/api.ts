@@ -1,5 +1,6 @@
 import { fetch } from "frontity";
 import { stringify } from "query-string";
+import { FrontitySourceError } from "../errors";
 
 class Api {
   api = "";
@@ -57,7 +58,7 @@ class Api {
     const [entity] = await response.clone().json();
 
     if (!entity)
-      throw new Error(
+      throw new FrontitySourceError(
         `entity from endpoint '${endpoint}' with slug '${slug}' not found`
       );
 

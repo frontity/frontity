@@ -1,4 +1,4 @@
-import WpSource, { isServerError } from "../types";
+import WpSource from "../types";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
@@ -8,6 +8,7 @@ import {
   taxonomyHandler
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/src/data";
+import { ServerError, FrontitySourceError } from "./errors";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async link => {
@@ -55,7 +56,7 @@ const actions: WpSource["actions"]["source"] = {
       if (isHome) source.data[route].isHome = true;
     } catch (e) {
       // It's a server error (4xx or 5xx)
-      if (isServerError(e)) {
+      if (e instanceof ServerError) {
         const errorData: ErrorData = {
           ...source.data[route],
           [`is${e.status}`]: true,
@@ -66,6 +67,14 @@ const actions: WpSource["actions"]["source"] = {
           isReady: true
         };
         source.data[route] = errorData;
+      } else if (e instanceof FrontitySourceError) {
+        console.error(e);
+        source.data[route] = {
+          ...source.data[route],
+          isError: true,
+          isFetching: false,
+          isReady: true
+        };
       } else {
         throw e;
       }

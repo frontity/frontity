@@ -1,5 +1,6 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
+import { FrontitySourceError } from "../../errors";
 
 const postTypeArchiveHandler = ({
   type,
@@ -20,7 +21,7 @@ const postTypeArchiveHandler = ({
   // 2. populate response
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
-    throw new Error(`post archive doesn't have page ${page}`);
+    throw new FrontitySourceError(`post archive doesn't have page ${page}`);
 
   // 3. get posts and pages count
   const total = getTotal(response);
