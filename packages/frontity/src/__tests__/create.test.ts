@@ -22,7 +22,8 @@ describe("create", () => {
   test("goes through all steps", async () => {
     const options = {
       name: "random-name",
-      path: "/path/to/project"
+      path: "/path/to/project",
+      theme: "@frontity/mars-theme"
     };
     await create(options);
     expect(mockedSteps.normalizeOptions.mock.calls[0][1]).toMatchSnapshot();
@@ -34,20 +35,31 @@ describe("create", () => {
   });
 
   test("works correctly when `options.typescript` is false", async () => {
+    // Restore the original implementation
+    const { normalizeOptions } = jest.requireActual("../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
     const options = {
       name: "random-name",
       path: "/path/to/project",
       typescript: false
     };
+
     await create(options);
+
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
       "js",
       options.name,
-      options.path
+      options.path,
+      "@frontity/mars-theme"
     );
   });
 
   test("works correctly when `options.typescript` is true", async () => {
+    // Restore the original implementation
+    const { normalizeOptions } = jest.requireActual("../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
     const options = {
       name: "random-name",
       path: "/path/to/project",
@@ -57,7 +69,8 @@ describe("create", () => {
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
       "ts",
       options.name,
-      options.path
+      options.path,
+      "@frontity/mars-theme"
     );
   });
 
@@ -74,8 +87,7 @@ describe("create", () => {
         throw error;
       });
 
-      const emitter = create(options);
-      await emitter;
+      await create(options);
     } catch (err) {
       expect(err.message).toBe("Mocked Error");
       expect(mockedSteps.revertProgress).toHaveBeenCalledWith(
@@ -98,8 +110,7 @@ describe("create", () => {
         throw error;
       });
 
-      const emitter = create(options);
-      await emitter;
+      await create(options);
       throw new Error("This should not be reached");
     } catch (err) {
       expect(err.message).toBe("Mocked Error");
@@ -122,8 +133,7 @@ describe("create", () => {
         throw error;
       });
 
-      const emitter = create(options);
-      await emitter;
+      await create(options);
       throw new Error("This should never be reached");
     } catch (err) {
       expect(err.message).toBe("Mocked Error");
@@ -153,10 +163,46 @@ describe("create", () => {
         throw error;
       });
 
-      const emitter = create(options);
-      await emitter;
+      await create(options);
     } catch (err) {
       expect(err.message).toBe("Mocked Error");
     }
+  });
+
+  test("If no theme is specified, clone the default", async () => {
+    const options = {
+      name: "random-name",
+      path: "/path/to/project"
+    };
+
+    // Restore the original implementation
+    const { normalizeOptions } = jest.requireActual("../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
+    mockedSteps.ensureProjectDir.mockResolvedValueOnce(false);
+
+    await create(options);
+
+    expect(mockedSteps.cloneStarterTheme).toHaveBeenCalledTimes(1);
+    expect(mockedSteps.cloneStarterTheme).toHaveBeenCalledWith(
+      "@frontity/mars-theme",
+      options.path
+    );
+  });
+
+  test("Clone the specified theme", async () => {
+    const options = {
+      name: "random-name",
+      path: "/path/to/project",
+      theme: "@frontity/twentytwenty-theme"
+    };
+
+    await create(options);
+
+    expect(mockedSteps.cloneStarterTheme).toHaveBeenCalledTimes(1);
+    expect(mockedSteps.cloneStarterTheme).toHaveBeenCalledWith(
+      options.theme,
+      options.path
+    );
   });
 });

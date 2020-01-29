@@ -1,20 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CLI create FRONTITY_NAME='test-project'; frontity create --no-prompt 1`] = `"test-project"`;
+exports[`CLI create FRONTITY_NAME='test-project'; frontity create --no-prompt 1`] = `
+Object {
+  "name": "test-project",
+  "theme": undefined,
+  "typescript": false,
+}
+`;
 
-exports[`CLI create FRONTITY_NAME='test-project'; frontity create --no-prompt 2`] = `false`;
+exports[`CLI create FRONTITY_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt 1`] = `
+Object {
+  "name": "test-project",
+  "theme": undefined,
+  "typescript": true,
+}
+`;
 
-exports[`CLI create FRONTITY_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt 1`] = `"test-project"`;
+exports[`CLI create frontity create 'test-project' --theme 'test-theme' 1`] = `
+Object {
+  "name": "test-project",
+  "theme": "test-theme",
+  "typescript": true,
+}
+`;
 
-exports[`CLI create FRONTITY_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt 2`] = `true`;
+exports[`CLI create frontity create 'test-project' --typescript 1`] = `
+Object {
+  "name": "test-project",
+  "theme": undefined,
+  "typescript": true,
+}
+`;
 
-exports[`CLI create frontity create 'test-project' --typescript 1`] = `"test-project"`;
-
-exports[`CLI create frontity create 'test-project' --typescript 2`] = `true`;
-
-exports[`CLI create frontity create 'test-project' 1`] = `"test-project"`;
-
-exports[`CLI create frontity create 'test-project' 2`] = `false`;
+exports[`CLI create frontity create 'test-project' 1`] = `
+Object {
+  "name": "test-project",
+  "theme": "test-theme",
+  "typescript": false,
+}
+`;
 
 exports[`CLI create frontity create 1`] = `
 Array [
@@ -26,11 +50,25 @@ Array [
         "name": "name",
         "type": "input",
       },
+    ],
+  ],
+  Array [
+    Array [
       Object {
+        "choices": Array [
+          Object {
+            "name": "@frontity/mars-theme (default)",
+            "value": "@frontity/mars-theme",
+          },
+          Object {
+            "name": "@frontity/twentytwenty-theme",
+            "value": "@frontity/twentytwenty-theme",
+          },
+        ],
         "default": "@frontity/mars-theme",
-        "message": "Enter a starter theme to clone:",
+        "message": "Pick a starter theme to clone:",
         "name": "theme",
-        "type": "input",
+        "type": "list",
       },
     ],
   ],

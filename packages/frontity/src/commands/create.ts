@@ -55,14 +55,14 @@ const create = async (
 
     // 4. Creates `frontity.settings`.
     const extension = typescript ? "ts" : "js";
-    step = createFrontitySettings(extension, name, path);
+    step = createFrontitySettings(extension, name, path, theme);
     emitMessage(
       `Creating ${chalk.yellow(`frontity.settings.${extension}`)}.`,
       step
     );
     await step;
 
-    // 5. Clones `@frontity/mars-theme` inside `packages`.
+    // 5. Clones the theme inside `packages`.
     step = cloneStarterTheme(theme, path);
     emitMessage(`Cloning ${chalk.green(theme)}.`, step);
     await step;

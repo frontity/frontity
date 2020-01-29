@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import ora from "ora";
 import chalk from "chalk";
-import { prompt, Question } from "inquirer";
+import { prompt, Question, ListQuestion } from "inquirer";
 import create from "../commands/create";
 import { subscribe } from "../steps";
 import { errorLogger, log } from "../utils";
@@ -9,16 +9,19 @@ import { Options } from "../steps/types";
 
 export default async ({
   name,
+  theme,
   typescript,
   useCwd,
   prompt: promptUser
 }: {
   name: string;
+  theme: string;
   typescript: boolean;
   useCwd: boolean;
   prompt: boolean;
 }) => {
   name = name || process.env.FRONTITY_NAME;
+  theme = theme || process.env.FRONTITY_THEME;
   typescript = typescript || !!process.env.FRONTITY_TYPESCRIPT;
   useCwd = useCwd || !!process.env.FRONTITY_USE_CWD;
 
@@ -35,20 +38,42 @@ export default async ({
         type: "input",
         message: "Enter a name for the project:",
         default: "my-frontity-project"
-      },
-      {
-        name: "theme",
-        type: "input",
-        message: "Enter a starter theme to clone:",
-        default: "@frontity/mars-theme"
       }
     ];
 
     const answers = await prompt(questions);
     options.name = answers.name;
-    options.theme = answers.theme;
   } else {
     options.name = name;
+  }
+
+  // The theme was provided as a CLI option
+  if (theme) {
+    options.theme = theme;
+  } else if (promptUser) {
+    // The theme was NOT provided as a CLI option
+    // In this case, we prompt the user
+    const questions: ListQuestion[] = [
+      {
+        name: "theme",
+        type: "list",
+        message: "Pick a starter theme to clone:",
+        default: "@frontity/mars-theme",
+        choices: [
+          {
+            name: "@frontity/mars-theme (default)",
+            value: "@frontity/mars-theme"
+          },
+          {
+            name: "@frontity/twentytwenty-theme",
+            value: "@frontity/twentytwenty-theme"
+          }
+        ]
+      }
+    ];
+
+    const answers = await prompt(questions);
+    options.theme = answers.theme;
   }
 
   options.typescript = typescript;
