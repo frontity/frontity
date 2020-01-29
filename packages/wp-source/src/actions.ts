@@ -27,7 +27,7 @@ const actions: WpSource["actions"]["source"] = {
         isReady: false,
         isFetching: false
       };
-    } else if (data.isReady || data.isFetching || data.is404) {
+    } else if (data.isReady || data.isFetching || data.isError) {
       return;
     }
 
@@ -59,6 +59,7 @@ const actions: WpSource["actions"]["source"] = {
         const errorData: ErrorData = {
           ...source.data[route],
           [`is${e.status}`]: true,
+          isError: true,
           errorStatus: e.status,
           errorStatusText: e.statusText,
           isFetching: false,
@@ -66,12 +67,6 @@ const actions: WpSource["actions"]["source"] = {
         };
         source.data[route] = errorData;
       } else {
-        // source.data[route] = {
-        //   ...source.data[route],
-        //   is404: true,
-        //   isFetching: false,
-        //   isReady: true
-        // };
         throw e;
       }
     }

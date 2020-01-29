@@ -17,9 +17,10 @@ import {
 
 const notFound: ErrorData = {
   is404: true,
+  isError: true,
   errorStatus: 404,
   errorStatusText: "Page Not Found",
-  isReady: false,
+  isReady: true,
   isFetching: false
 };
 

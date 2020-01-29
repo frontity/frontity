@@ -35,7 +35,7 @@ export type BaseData = {
   taxonomy?: string;
   isFetching: boolean;
   isReady: boolean;
-  is404?: boolean;
+  isError?: boolean;
   isArchive?: boolean;
   isTaxonomy?: boolean;
   isCategory?: boolean;
@@ -61,8 +61,38 @@ export type BaseData = {
 export type ErrorData = Merge<
   BaseData,
   {
+    isError: true;
     errorStatus: number;
     errorStatusText: string;
+    isReady: true;
+    isFetching: false;
+
+    // This is ugly but it seems like the best way.
+    // Also types are erased at runtime so it doesnt add to bundle size
+    is400?: boolean;
+    is401?: boolean;
+    is402?: boolean;
+    is403?: boolean;
+    is404?: boolean;
+    is405?: boolean;
+    is406?: boolean;
+    is407?: boolean;
+    is408?: boolean;
+    is409?: boolean;
+    is410?: boolean;
+    is411?: boolean;
+    is412?: boolean;
+    is413?: boolean;
+    is414?: boolean;
+    is415?: boolean;
+    is416?: boolean;
+    is417?: boolean;
+    is500?: boolean;
+    is501?: boolean;
+    is502?: boolean;
+    is503?: boolean;
+    is504?: boolean;
+    is505?: boolean;
   }
 >;
 
