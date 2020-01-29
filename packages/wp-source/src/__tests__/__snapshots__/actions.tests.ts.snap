@@ -17,7 +17,7 @@ Object {
   "/some/route/": Object {
     "is404": true,
     "isFetching": false,
-    "isReady": false,
+    "isReady": true,
   },
 }
 `;

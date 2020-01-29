@@ -12,7 +12,7 @@ export type EntityData = {
  */
 export type Data =
   | BaseData
-  | NotFoundData
+  | ErrorData
   | ArchiveData
   | TaxonomyData
   | CategoryData
@@ -35,32 +35,34 @@ export type BaseData = {
   taxonomy?: string;
   isFetching: boolean;
   isReady: boolean;
-  is404?: false;
-  isArchive?: false;
-  isTaxonomy?: false;
-  isCategory?: false;
-  isTag?: false;
-  isAuthor?: false;
-  isPostTypeArchive?: false;
-  isPostArchive?: false;
-  isDate?: false;
-  isPostType?: false;
-  isPost?: false;
-  isPage?: false;
-  isAttachment?: false;
+  is404?: boolean;
+  isArchive?: boolean;
+  isTaxonomy?: boolean;
+  isCategory?: boolean;
+  isTag?: boolean;
+  isAuthor?: boolean;
+  isPostTypeArchive?: boolean;
+  isPostArchive?: boolean;
+  isDate?: boolean;
+  isPostType?: boolean;
+  isPost?: boolean;
+  isPage?: boolean;
+  isAttachment?: boolean;
   isHome?: boolean;
 };
 
-// NOT FOUND
+// ERROR
 
 /**
- * Adds new properties to `BaseData` to identify not found pages.
- * @property {true} is404
+ * Adds new properties to `BaseData` to identify errors.
+ * @property {string} errorStatusText
+ * @property {number} errorStatus
  */
-export type NotFoundData = Merge<
+export type ErrorData = Merge<
   BaseData,
   {
-    is404: true;
+    errorStatus: number;
+    errorStatusText: string;
   }
 >;
 

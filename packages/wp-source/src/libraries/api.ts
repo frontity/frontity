@@ -41,13 +41,15 @@ class Api {
     const query = stringify(params, { arrayFormat: "bracket", encode: false });
 
     // Send request
-    return fetch(`${requestUrl}${query && "?"}${query}`).then(response => {
-      if (!response.ok) {
-        const { status, statusText } = response;
-        throw { status, statusText, isFrontityError: true };
+    return fetch(`${requestUrl}${query && "?"}${query}`).then(
+      (response: Response) => {
+        if (!response.ok) {
+          const { status, statusText } = response;
+          throw { status, statusText, isServerError: true };
+        }
+        return response;
       }
-      return response;
-    });
+    );
   }
 
   async getIdBySlug(endpoint: string, slug: string) {

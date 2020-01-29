@@ -1,6 +1,6 @@
 import {
   Data,
-  NotFoundData,
+  ErrorData,
   ArchiveData,
   TaxonomyData,
   CategoryData,
@@ -15,8 +15,10 @@ import {
   AttachmentData
 } from "../data";
 
-const notFound: NotFoundData = {
+const notFound: ErrorData = {
   is404: true,
+  errorStatus: 404,
+  errorStatusText: "Page Not Found",
   isReady: false,
   isFetching: false
 };

@@ -1254,7 +1254,7 @@ Object {
     "/2020/": Object {
       "is404": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],

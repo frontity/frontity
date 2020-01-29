@@ -1,4 +1,4 @@
-import WpSource, { ServerError, isServerError } from "../types";
+import WpSource, { isServerError } from "../types";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
@@ -7,6 +7,7 @@ import {
   postTypeArchiveHandler,
   taxonomyHandler
 } from "./libraries/handlers";
+import { ErrorData } from "@frontity/source/src/data";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async link => {
@@ -53,22 +54,26 @@ const actions: WpSource["actions"]["source"] = {
       // set isHome value if it's true
       if (isHome) source.data[route].isHome = true;
     } catch (e) {
-      console.error(e);
-
       // It's a server error (4xx or 5xx)
       if (isServerError(e)) {
-        // TODO: do stuff here
-        source.data[route] = {
-          ...source.data.route,
-          [`is${e.status}`]: true
+        const errorData: ErrorData = {
+          ...source.data[route],
+          [`is${e.status}`]: true,
+          errorStatus: e.status,
+          errorStatusText: e.statusText,
+          isFetching: false,
+          isReady: true
         };
+        source.data[route] = errorData;
+      } else {
+        // source.data[route] = {
+        //   ...source.data[route],
+        //   is404: true,
+        //   isFetching: false,
+        //   isReady: true
+        // };
+        throw e;
       }
-
-      source.data[route] = {
-        ...source.data[route],
-        isFetching: false,
-        isReady: false
-      };
     }
   },
 

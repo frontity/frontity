@@ -1147,7 +1147,7 @@ Object {
     "/non-existent/": Object {
       "is404": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],

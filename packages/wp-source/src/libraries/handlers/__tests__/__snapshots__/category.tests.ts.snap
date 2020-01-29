@@ -778,7 +778,7 @@ Object {
     "/category/non-existent/": Object {
       "is404": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -825,7 +825,7 @@ Object {
     "/category/cat-1/page/3/": Object {
       "is404": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
