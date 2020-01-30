@@ -776,7 +776,10 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/category/non-existent/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "entity from endpoint \\"categories\\" with slug \\"non-existent\\" not found",
       "is404": true,
+      "isError": true,
       "isFetching": false,
       "isReady": true,
     },
@@ -823,7 +826,10 @@ Object {
       "taxonomy": "category",
     },
     "/category/cat-1/page/3/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "category with slug \\"cat-1\\" doesn't have page 3",
       "is404": true,
+      "isError": true,
       "isFetching": false,
       "isReady": true,
     },

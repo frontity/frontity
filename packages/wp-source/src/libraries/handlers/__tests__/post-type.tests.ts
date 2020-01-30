@@ -22,9 +22,12 @@ beforeEach(() => {
 describe("postType", () => {
   test("returns 404 if not found", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    api.get = jest
+      .fn()
+      .mockResolvedValue(mockResponse([], {}, { status: 404 }));
     // Fetch entities
     await store.actions.source.fetch("/non-existent/");
+    expect(api.get).toHaveBeenCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
   });
 });

@@ -12,16 +12,6 @@ Object {
 }
 `;
 
-exports[`fetch returns 404 is fetch fails 1`] = `
-Object {
-  "/some/route/": Object {
-    "is404": true,
-    "isFetching": false,
-    "isReady": true,
-  },
-}
-`;
-
 exports[`fetch should work if data doesn't exist 1`] = `
 Object {
   "/some/route/": Object {

@@ -65,9 +65,15 @@ describe("fetch", () => {
     expect(store.state.source.data).toMatchSnapshot();
   });
 
-  test("returns 404 is fetch fails", async () => {
+  test("Throw an error if fetch fails", async () => {
     handler.func.mockRejectedValue("Some error");
-    await store.actions.source.fetch("/some/route/");
+
+    try {
+      await store.actions.source.fetch("/some/route/");
+      throw new Error("This should not be reached");
+    } catch (e) {
+      expect(e.message).toBe("Some error");
+    }
     expect(store.state.source.data).toMatchSnapshot();
   });
 

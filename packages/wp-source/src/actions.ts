@@ -8,7 +8,7 @@ import {
   taxonomyHandler
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/src/data";
-import { ServerError, FrontitySourceError } from "./errors";
+import { ServerError } from "./errors";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async link => {
@@ -57,6 +57,8 @@ const actions: WpSource["actions"]["source"] = {
     } catch (e) {
       // It's a server error (4xx or 5xx)
       if (e instanceof ServerError) {
+        console.error(e);
+
         const errorData: ErrorData = {
           ...source.data[route],
           [`is${e.status}`]: true,
@@ -67,14 +69,6 @@ const actions: WpSource["actions"]["source"] = {
           isReady: true
         };
         source.data[route] = errorData;
-      } else if (e instanceof FrontitySourceError) {
-        console.error(e);
-        source.data[route] = {
-          ...source.data[route],
-          isError: true,
-          isFetching: false,
-          isReady: true
-        };
       } else {
         throw e;
       }

@@ -1252,7 +1252,10 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/2020/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "date \\"/2020/\\" doesn't have page 1",
       "is404": true,
+      "isError": true,
       "isFetching": false,
       "isReady": true,
     },

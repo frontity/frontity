@@ -1,10 +1,12 @@
 import * as frontity from "frontity";
 import Api from "../api";
+import { Response as NodeResponse } from "node-fetch";
 
 jest.mock("frontity");
 const mockedFrontity = frontity as jest.Mocked<typeof frontity>;
 
-mockedFrontity.fetch.mockResolvedValue(new Response());
+const response = (new NodeResponse() as unknown) as Response;
+mockedFrontity.fetch.mockResolvedValue(response);
 
 const lastFetch = () => mockedFrontity.fetch.mock.calls.slice(-1)[0][0];
 const api = new Api();

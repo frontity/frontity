@@ -1,5 +1,5 @@
 import { Handler } from "../../../types";
-import { FrontitySourceError } from "../../errors";
+import { ServerError } from "../../errors";
 
 export const dateHandler: Handler = async ({
   route,
@@ -40,7 +40,7 @@ export const dateHandler: Handler = async ({
   // 3. populate response
   const items = await populate({ response, state });
   if (items.length === 0)
-    throw new FrontitySourceError(`date "${path}" doesn't have page ${page}`);
+    throw new ServerError(`date "${path}" doesn't have page ${page}`, 404);
 
   // 4. get posts and pages count
   const total = getTotal(response);
