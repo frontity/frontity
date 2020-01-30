@@ -46,7 +46,7 @@ class Api {
       (response: Response) => {
         if (!response.ok) {
           const { status, statusText } = response;
-          throw { status, statusText, isServerError: true };
+          throw new ServerError(statusText, status, statusText);
         }
         return response;
       }
