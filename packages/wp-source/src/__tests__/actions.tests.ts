@@ -66,7 +66,9 @@ describe("fetch", () => {
   });
 
   test("Throw an error if fetch fails", async () => {
-    handler.func.mockRejectedValue("Some error");
+    handler.func = jest.fn(async params => {
+      throw new Error("Some error");
+    });
 
     try {
       await store.actions.source.fetch("/some/route/");
