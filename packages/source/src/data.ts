@@ -13,7 +13,6 @@ export type EntityData = {
 export type Data =
   | BaseData
   | ErrorData
-  | ArchiveData
   | TaxonomyData
   | CategoryData
   | TagData
@@ -35,19 +34,19 @@ export type BaseData = {
   taxonomy?: string;
   isFetching: boolean;
   isReady: boolean;
-  isError?: boolean;
-  isArchive?: boolean;
-  isTaxonomy?: boolean;
-  isCategory?: boolean;
-  isTag?: boolean;
-  isAuthor?: boolean;
-  isPostTypeArchive?: boolean;
-  isPostArchive?: boolean;
-  isDate?: boolean;
-  isPostType?: boolean;
-  isPost?: boolean;
-  isPage?: boolean;
-  isAttachment?: boolean;
+  isError?: false;
+  isArchive?: false;
+  isTaxonomy?: false;
+  isCategory?: false;
+  isTag?: false;
+  isAuthor?: false;
+  isPostTypeArchive?: false;
+  isPostArchive?: false;
+  isDate?: false;
+  isPostType?: false;
+  isPost?: false;
+  isPage?: false;
+  isAttachment?: false;
   isHome?: boolean;
 };
 

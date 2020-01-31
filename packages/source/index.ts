@@ -9,21 +9,23 @@ import {
   PostType
 } from "./src/entities";
 
+// Export directly some types.
+export { Data } from "./src/data";
+export {
+  TaxonomyEntity,
+  PostEntity,
+  AttachmentEntity,
+  AuthorEntity,
+  TaxonomyType,
+  PostType
+} from "./src/entities";
+
 export type RouteParams = {
   path: string;
   page?: number;
   query?: Record<string, any>;
   hash?: string;
 };
-
-export type Data = Data;
-
-export type TaxonomyEntity = TaxonomyEntity;
-export type TaxonomyType = TaxonomyType;
-export type PostEntity = PostEntity;
-export type PostType = PostType;
-export type AttachmentEntity = AttachmentEntity;
-export type AuthorEntity = AuthorEntity;
 
 interface Source<T = null> extends Package {
   state: {

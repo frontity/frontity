@@ -1,7 +1,7 @@
+import { expectType } from "../utils";
 import {
   Data,
   ErrorData,
-  ArchiveData,
   TaxonomyData,
   CategoryData,
   TagData,
@@ -15,7 +15,14 @@ import {
   AttachmentData
 } from "../data";
 
-const notFound: ErrorData = {
+const data: Record<string, Data> = {};
+
+data.onlyStatus = {
+  isFetching: true,
+  isReady: false
+};
+
+data.notFound = {
   is404: true,
   isError: true,
   errorStatus: 404,
@@ -24,7 +31,7 @@ const notFound: ErrorData = {
   isFetching: false
 };
 
-const archive: ArchiveData = {
+data.taxonomy = {
   isArchive: true,
   items: [
     {
@@ -41,20 +48,13 @@ const archive: ArchiveData = {
   isReady: true,
   isFetching: false,
   total: 13,
-  totalPages: 13
+  totalPages: 13,
+  taxonomy: "custom-taxonomy",
+  id: 12,
+  isTaxonomy: true
 };
 
-const taxonomy: TaxonomyData = {
-  isArchive: true,
-  isTaxonomy: true,
-  taxonomy: "taxonomy",
-  id: 7,
-  items: [],
-  isReady: true,
-  isFetching: false
-};
-
-const category: CategoryData = {
+data.category = {
   isArchive: true,
   isTaxonomy: true,
   isCategory: true,
@@ -67,7 +67,7 @@ const category: CategoryData = {
   totalPages: 2
 };
 
-const tag: TagData = {
+data.tag = {
   isArchive: true,
   isTaxonomy: true,
   isTag: true,
@@ -78,7 +78,7 @@ const tag: TagData = {
   isFetching: false
 };
 
-const author: AuthorData = {
+data.author = {
   isArchive: true,
   isAuthor: true,
   id: 7,
@@ -87,7 +87,7 @@ const author: AuthorData = {
   isFetching: false
 };
 
-const postTypeArchive: PostTypeArchiveData = {
+data.postTypeArchive = {
   isArchive: true,
   isPostTypeArchive: true,
   type: "post",
@@ -96,7 +96,7 @@ const postTypeArchive: PostTypeArchiveData = {
   isFetching: false
 };
 
-const postArchive: PostArchiveData = {
+data.postArchive = {
   isArchive: true,
   isPostTypeArchive: true,
   isPostArchive: true,
@@ -107,7 +107,7 @@ const postArchive: PostArchiveData = {
   isFetching: false
 };
 
-const dateArchive: DateData = {
+data.dateArchive = {
   isArchive: true,
   isDate: true,
   year: 2016,
@@ -118,7 +118,7 @@ const dateArchive: DateData = {
   isFetching: false
 };
 
-const postType: PostTypeData = {
+data.postType = {
   isPostType: true,
   type: "type",
   id: 60,
@@ -126,7 +126,7 @@ const postType: PostTypeData = {
   isFetching: false
 };
 
-const post: PostData = {
+data.post = {
   isPostType: true,
   isPost: true,
   type: "post",
@@ -135,7 +135,7 @@ const post: PostData = {
   isFetching: false
 };
 
-const page: PageData = {
+data.page = {
   isPostType: true,
   isPage: true,
   type: "page",
@@ -144,7 +144,7 @@ const page: PageData = {
   isFetching: false
 };
 
-const attachment: AttachmentData = {
+data.attachment = {
   isPostType: true,
   isAttachment: true,
   type: "attachment",
@@ -153,20 +153,18 @@ const attachment: AttachmentData = {
   isFetching: false
 };
 
-const data: Data[] = [
-  notFound,
-  archive,
-  taxonomy,
-  category,
-  tag,
-  author,
-  postTypeArchive,
-  postArchive,
-  dateArchive,
-  postType,
-  post,
-  page,
-  attachment
-];
+expectType<Data>(data.onlyStatus);
+expectType<ErrorData>(data.notFound);
+expectType<TaxonomyData>(data.taxonomy);
+expectType<CategoryData>(data.category);
+expectType<TagData>(data.tag);
+expectType<AuthorData>(data.author);
+expectType<PostTypeArchiveData>(data.postTypeArchive);
+expectType<PostArchiveData>(data.postArchive);
+expectType<DateData>(data.dateArchive);
+expectType<PostTypeData>(data.postType);
+expectType<PostData>(data.post);
+expectType<PageData>(data.page);
+expectType<AttachmentData>(data.attachment);
 
 test("Types are fine!", () => {});
