@@ -23,14 +23,14 @@ const convertToAction = (fn, instance) => (...args) => {
   const first = fn(instance);
   if (first instanceof Promise) {
     return new Promise((resolve, reject) =>
-      first.then(resolve).catch(err => reject(err))
+      first.then(() => resolve()).catch(err => reject(err))
     );
   }
   if (typeof first === "function") {
     const second = first(...args);
     if (second instanceof Promise) {
       return new Promise((resolve, reject) =>
-        second.then(resolve).catch(err => reject(err))
+        second.then(() => resolve()).catch(err => reject(err))
       );
     }
   }
