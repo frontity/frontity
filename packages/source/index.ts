@@ -19,6 +19,7 @@ export {
   TaxonomyType,
   PostType
 } from "./src/entities";
+export { ServerError } from "./src/errors";
 
 export type RouteParams = {
   path: string;

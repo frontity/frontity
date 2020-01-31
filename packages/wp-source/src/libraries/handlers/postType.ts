@@ -1,6 +1,6 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
-import { ServerError } from "../../errors";
+import { ServerError } from "@frontity/source";
 
 const postTypeHandler = ({
   endpoints

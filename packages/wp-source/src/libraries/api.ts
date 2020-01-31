@@ -1,6 +1,6 @@
 import { fetch } from "frontity";
 import { stringify } from "query-string";
-import { ServerError } from "../errors";
+import { ServerError } from "@frontity/source";
 
 class Api {
   api = "";

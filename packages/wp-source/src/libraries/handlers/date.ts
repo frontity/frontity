@@ -1,5 +1,5 @@
 import { Handler } from "../../../types";
-import { ServerError } from "../../errors";
+import { ServerError } from "@frontity/source";
 
 export const dateHandler: Handler = async ({
   route,

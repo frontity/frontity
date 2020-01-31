@@ -1,5 +1,5 @@
 import { Handler } from "../../../types";
-import { ServerError } from "../../errors";
+import { ServerError } from "@frontity/source";
 
 const authorHandler: Handler = async ({ route, params, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;

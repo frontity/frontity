@@ -54,8 +54,9 @@ export type BaseData = {
 
 /**
  * Adds new properties to `BaseData` to identify errors.
- * @property {string} errorStatusText
+ * @property {isError} true
  * @property {number} errorStatus
+ * @property {string} errorStatusText
  */
 export type ErrorData = Merge<
   BaseData,
