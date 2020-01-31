@@ -1145,7 +1145,10 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/non-existent/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "post type from endpoints \\"posts,pages,media\\" with slug \\"non-existent\\" not found",
       "is404": true,
+      "isError": true,
       "isFetching": false,
       "isReady": true,
     },
