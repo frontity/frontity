@@ -54,6 +54,12 @@ beforeEach(() => {
         const prop1 = state.prop1;
         await actions.action7(3);
         state.prop1 = `${state.prop1} ${prop1}`;
+      },
+      action10: () => {
+        throw new Error("action10 error");
+      },
+      action11: async () => {
+        throw new Error("action11 error");
       }
     }
   };
@@ -146,6 +152,28 @@ describe("createStore actions", () => {
     const store = createStore(config);
     const res = await store.actions.action6();
     expect(res).toBe(undefined);
+  });
+
+  it("should catch an error thrown inside of an action", () => {
+    const store = createStore(config);
+
+    try {
+      store.actions.action10();
+      throw new Error("This line should never be reached");
+    } catch (e) {
+      expect(e.message).toBe("action10 error");
+    }
+  });
+
+  it("should catch an error thrown inside of an async action", async () => {
+    const store = createStore(config);
+
+    try {
+      await store.actions.action11();
+      throw new Error("This line should never be reached");
+    } catch (e) {
+      expect(e.message).toBe("action11 error");
+    }
   });
 });
 
