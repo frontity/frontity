@@ -60,13 +60,12 @@ const actions: WpSource["actions"]["source"] = {
         console.error(e);
 
         const errorData: ErrorData = {
-          ...source.data[route],
-          [`is${e.status}`]: true,
           isError: true,
-          errorStatus: e.status,
-          errorStatusText: e.statusText,
+          isReady: true,
           isFetching: false,
-          isReady: true
+          [`is${e.status}`]: true,
+          errorStatus: e.status,
+          errorStatusText: e.statusText
         };
         source.data[route] = errorData;
       } else {
