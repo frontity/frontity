@@ -5,7 +5,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "build/static/*",
+      "src": "build/static/**/*",
       "use": "@now/static"
     },
     {
