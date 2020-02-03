@@ -2,6 +2,7 @@
   "name": "@frontity/source",
   "version": "1.1.0",
   "description": "Types for the Frontity Source API",
+  "main": "src/index.ts",
   "keywords": [
     "frontity",
     "frontity-source",
