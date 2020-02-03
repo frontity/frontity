@@ -23,10 +23,11 @@ beforeEach(() => {
 describe("postType", () => {
   test("returns 404 if not found", async () => {
     // Mock Api responses
+    // We have to use this form instead of:
+    // .mockResolvedValueOnce(mockResponse([]))
+    // because the latter always returns the same instance of Response.
+    // which results in error because response.json() can only be run once
     api.get = jest.fn(_ => Promise.resolve(mockResponse([])));
-
-    // TODO: The test fails if we use this form instead 🤷‍♂️:
-    // api.get = jest.fn().mockResolvedValue(mockResponse([]));
 
     // Fetch entities
     await store.actions.source.fetch("/non-existent/");
