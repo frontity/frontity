@@ -656,9 +656,12 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/author/non-existent/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "entity from endpoint \\"users\\" with slug \\"non-existent\\" not found",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -700,9 +703,12 @@ Object {
       "isReady": false,
     },
     "/author/author-1/page/3/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "author \\"author-1\\" doesn't have page 3",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],

@@ -7,6 +7,8 @@ import {
   postTypeArchiveHandler,
   taxonomyHandler
 } from "./libraries/handlers";
+import { ErrorData } from "@frontity/source/types/data";
+import { ServerError } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async link => {
@@ -26,7 +28,7 @@ const actions: WpSource["actions"]["source"] = {
         isReady: false,
         isFetching: false
       };
-    } else if (data.isReady || data.isFetching || data.is404) {
+    } else if (data.isReady || data.isFetching || data.isError) {
       return;
     }
 
@@ -53,13 +55,22 @@ const actions: WpSource["actions"]["source"] = {
       // set isHome value if it's true
       if (isHome) source.data[route].isHome = true;
     } catch (e) {
-      console.log(e);
-      // an error happened
-      source.data[route] = {
-        is404: true,
-        isFetching: false,
-        isReady: false
-      };
+      // It's a server error (4xx or 5xx)
+      if (e instanceof ServerError) {
+        console.error(e);
+
+        const errorData: ErrorData = {
+          isError: true,
+          isReady: true,
+          isFetching: false,
+          [`is${e.status}`]: true,
+          errorStatus: e.status,
+          errorStatusText: e.statusText
+        };
+        source.data[route] = errorData;
+      } else {
+        throw e;
+      }
     }
   },
 

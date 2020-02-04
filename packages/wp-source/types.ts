@@ -1,6 +1,5 @@
 import { Action, State, Derived } from "frontity/types";
-import Source from "@frontity/source";
-import { EntityData } from "@frontity/source/src/data";
+import Source, { Data, EntityData } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
 export type Pattern<F extends Function = (params: any) => any> = {
@@ -10,25 +9,20 @@ export type Pattern<F extends Function = (params: any) => any> = {
   func: F;
 };
 
-export type Handler = (args: {
+export type Handler<Pkg extends Source = WpSource> = (args: {
   route: string;
   params: { [param: string]: any };
-  state: State<WpSource>;
-  libraries: WpSource["libraries"];
+  state: State<Pkg>;
+  libraries: Pkg["libraries"];
 }) => Promise<void>;
 
 export type Redirection = (params?: Record<string, string>) => string;
 
-export type RouteParams = {
-  path: string;
-  page?: number;
-  query?: Record<string, any>;
-};
-
 interface WpSource extends Source {
   name: "@frontity/wp-source";
   state: {
-    source: Source<WpSource>["state"]["source"] & {
+    source: Source["state"]["source"] & {
+      get: Derived<WpSource, (link: string) => Data>;
       api: string;
       isWpCom: Derived<WpSource, boolean>;
       subdirectory: string;
@@ -52,7 +46,8 @@ interface WpSource extends Source {
     };
   };
   actions: {
-    source: Source<WpSource>["actions"]["source"] & {
+    source: Source["actions"]["source"] & {
+      fetch: Action<WpSource, string>;
       init: Action<WpSource>;
     };
   };
@@ -66,9 +61,9 @@ interface WpSource extends Source {
       }) => Promise<EntityData[]>;
       handlers: Pattern<Handler>[];
       redirections: Pattern<Redirection>[];
-      parse: Source<WpSource>["libraries"]["source"]["parse"];
-      stringify: Source<WpSource>["libraries"]["source"]["stringify"];
-      normalize: Source<WpSource>["libraries"]["source"]["normalize"];
+      parse: Source["libraries"]["source"]["parse"];
+      stringify: Source["libraries"]["source"]["stringify"];
+      normalize: Source["libraries"]["source"]["normalize"];
       getTotal: (Response) => number;
       getTotalPages: (Response) => number;
     };

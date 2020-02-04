@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/no-unused-vars */
 import { Action, Settings } from "frontity/types";
-import Source from "../../";
+import Source from "../../types";
 
 // Source.
 const source1 = (libraries: Source["libraries"]): Source => {
@@ -27,7 +28,6 @@ const source1 = (libraries: Source["libraries"]): Source => {
     },
     libraries: {
       source: {
-        populate: () => {},
         parse: () => ({ path: "" }),
         stringify: () => "/route/",
         normalize: () => "/route/"
@@ -80,7 +80,6 @@ const source2: MySource = {
   },
   libraries: {
     source: {
-      populate: () => {},
       parse: () => ({ path: "" }),
       stringify: () => "/route/",
       normalize: () => "/route/"
