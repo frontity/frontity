@@ -11,15 +11,6 @@ import InterBoldLatin from "../../fonts/inter/Inter-Bold-LATIN.woff2";
 import InterSemiBoldLatin from "../../fonts/inter/Inter-SemiBold-LATIN.woff2";
 
 const FontFace = ({ state }) => {
-  // I added a dependency on state.router.link so this component is
-  // rerendered each time it changes.
-  state.router.link;
-  // Now I do a console.log to check that component is being rendered
-  // successfully on each state.router.link change.
-  React.useEffect(() => {
-    console.log("The FontFace component has been rendered");
-  });
-
   let fonts = null;
   let fontDisplay = "swap";
   switch (state.theme.fontSets) {
@@ -35,7 +26,6 @@ const FontFace = ({ state }) => {
   }
 
   return (
-    // state.frontity.platform === "server" && (
     <Global
       styles={css`
         @font-face {
@@ -63,7 +53,6 @@ const FontFace = ({ state }) => {
         }
       `}
     />
-    // )
   );
 };
 
