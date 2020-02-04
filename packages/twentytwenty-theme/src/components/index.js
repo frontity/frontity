@@ -2,6 +2,7 @@ import { connect, Global, Head, styled } from "frontity";
 import React from "react";
 import Footer from "./footer";
 import globalStyles from "./styles/global-styles";
+import FontFaces from "./styles/font-faces";
 import Header from "./header";
 import Archive from "./archive";
 import Loading from "./loading";
@@ -24,9 +25,10 @@ const Theme = ({ state, libraries }) => {
 
   return (
     <>
-      {/* Add some global styles for the whole site, like body or a's. 
+      {/* Add global styles for the whole site, like body or a's or font-faces. 
         Not classes here because we use CSS-in-JS. Only global HTML tags. */}
-      <Global styles={globalStyles(state.theme.colors, state.theme.fontSets)} />
+      <Global styles={globalStyles(state.theme.colors)} />
+      <FontFaces />
 
       {/* Add some metatags to the <head> of the HTML. */}
       <MetaTitle />
