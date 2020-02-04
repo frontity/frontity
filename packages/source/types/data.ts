@@ -5,6 +5,7 @@ export type EntityData = {
   id: number;
   link: string;
 };
+
 /**
  * Type that represents objects stored in `state.source.data`.
  * These objects give information about data associated to a

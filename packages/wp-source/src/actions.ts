@@ -7,7 +7,7 @@ import {
   postTypeArchiveHandler,
   taxonomyHandler
 } from "./libraries/handlers";
-import { ErrorData } from "@frontity/source/src/data";
+import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {

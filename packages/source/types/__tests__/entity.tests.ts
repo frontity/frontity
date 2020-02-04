@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/no-unused-vars */
 import {
   TaxonomyType,
   TaxonomyEntity,

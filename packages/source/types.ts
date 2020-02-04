@@ -1,5 +1,5 @@
 import { Package, Action, Derived } from "frontity/types";
-import { Data } from "./src/data";
+import { Data } from "./types/data";
 import {
   TaxonomyEntity,
   PostEntity,
@@ -7,10 +7,10 @@ import {
   AuthorEntity,
   TaxonomyType,
   PostType
-} from "./src/entities";
+} from "./types/entities";
 
 // Export directly some types.
-export { Data } from "./src/data";
+export { Data, EntityData } from "./types/data";
 export {
   TaxonomyEntity,
   PostEntity,
@@ -18,8 +18,7 @@ export {
   AuthorEntity,
   TaxonomyType,
   PostType
-} from "./src/entities";
-export { ServerError } from "./src/errors";
+} from "./types/entities";
 
 export type RouteParams = {
   path: string;
@@ -28,10 +27,10 @@ export type RouteParams = {
   hash?: string;
 };
 
-interface Source<T = null> extends Package {
+interface Source extends Package {
   state: {
     source: {
-      get: Derived<T extends null ? Source : T, (link: string) => Data>;
+      get: Derived<Source, (link: string) => Data>;
       data: Record<string, Data>;
       category: Record<string, TaxonomyEntity>;
       tag: Record<string, TaxonomyEntity>;
@@ -45,12 +44,11 @@ interface Source<T = null> extends Package {
   };
   actions: {
     source: {
-      fetch: Action<T extends null ? Source : T, string>;
+      fetch: Action<Source, string>;
     };
   };
   libraries: {
     source: {
-      populate: Function;
       parse: (route: string) => RouteParams;
       stringify: (routeParams: RouteParams) => string;
       normalize: (route: string) => string;
