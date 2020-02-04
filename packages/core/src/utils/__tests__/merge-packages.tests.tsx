@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name, @typescript-eslint/camelcase */
+
 import React from "react";
 import mergePackages from "../merge-packages";
 
@@ -13,12 +15,13 @@ const state = {
     packages: ["package-1", "package-2", "package-3"]
   }
 };
+
 const packages = {
   package_1_html: {
     name: "package1",
     roots: {
-      namespace1: () => <div>"namespace1"</div>,
-      namespace2: () => <div>"namespace2"</div>
+      namespace1: () => <div>namespace1</div>,
+      namespace2: () => <div>namespace2</div>
     },
     state: {
       namespace1: {
@@ -38,7 +41,7 @@ const packages = {
   package_2_html: {
     name: "package2",
     roots: {
-      namespace3: () => <div>"namespace3"</div>
+      namespace3: () => <div>namespace3</div>
     },
     state: {
       namespace1: {
@@ -64,7 +67,7 @@ const packages = {
   package_3_html: () => ({
     name: "package3",
     roots: {
-      namespace4: () => <div>"namespace4"</div>
+      namespace4: () => <div>namespace4</div>
     },
     state: {
       namespace4: {
@@ -92,6 +95,24 @@ describe("mergePackages", () => {
 
   it("should deep clone state", () => {
     const merged = mergePackages({ packages, state });
+    expect(state.frontity).not.toBe(merged.state.frontity);
+    expect(packages.package_2_html.state.namespace3).not.toBe(
+      merged.state.namespace3
+    );
+  });
+
+  it("should overwrite arrays if the 'overwriteArrays' option is true", () => {
+    const { state: initialState } = mergePackages({ packages, state });
+    const merged = mergePackages({
+      packages,
+      state: initialState,
+      overwriteArrays: true
+    });
+    expect(merged.state.namespace1.array1).toEqual(["item1", "item2", "item3"]);
+  });
+
+  it("should deep clone state if the 'overwriteArrays' option is true", () => {
+    const merged = mergePackages({ packages, state, overwriteArrays: true });
     expect(state.frontity).not.toBe(merged.state.frontity);
     expect(packages.package_2_html.state.namespace3).not.toBe(
       merged.state.namespace3
