@@ -1,6 +1,7 @@
 import React from "react";
 import { Global, css, connect, styled, Head } from "frontity";
 import Iframe from "@frontity/components/iframe";
+import Image from '@frontity/components/image';
 import Header from "./header";
 import List from "./list";
 import Post from "./post";
@@ -46,26 +47,26 @@ const Theme = ({ state }) => {
       <Iframe
         src="https://frontity.org"
         title="Frontity"
-        width="500"
-        height="400"
+        width="800"
+        height="700"
       />
       <Iframe
         src="https://olaolu.dev"
         title="Olaolu"
-        width="500"
-        height="400"
+        width="800"
+        height="700"
       />
       <Iframe
         src="https://codewonders.dev"
         title="Codewonders"
-        width="500"
-        height="400"
+        width="800"
+        height="700"
       />
       <Iframe
         src="https://gideonoladimeji.com"
         title="Gideon"
-        width="500"
-        height="400"
+        width="800"
+        height="700"
       />
     </>
   );

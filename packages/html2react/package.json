@@ -24,6 +24,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "@testing-library/react": "9.4.0",
     "@types/he": "^1.1.0",
     "@types/react-test-renderer": "^16.8.1",
     "frontity": "^1.4.3",
@@ -34,6 +35,7 @@
   "dependencies": {
     "@frontity/components": "^1.1.15",
     "he": "^1.2.0",
-    "himalaya": "^1.1.0"
+    "himalaya": "^1.1.0",
+    "@frontity/connect": "1.0.3"
   }
 }

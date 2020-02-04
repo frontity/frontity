@@ -1,7 +1,6 @@
 import { Processor, Element } from "../types";
 import Iframe from "@frontity/components/iframe";
 
-// WIP
 const iframe: Processor = {
   test: node => node.type === "element" && node.component === "iframe",
   priority: 20,

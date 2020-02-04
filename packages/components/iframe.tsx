@@ -3,8 +3,6 @@ import { connect, Head } from "frontity";
 import { Connect, Package } from "frontity/types";
 import { useInView } from "react-intersection-observer";
 
-// TODO: Review and Refactor;
-
 const noJsStyles = `
   :non(noscript) > .frontity-lazy-iframe {
     display: none;
@@ -13,9 +11,9 @@ const noJsStyles = `
 
 // No Proxy === No Frontity
 const noProxyScript = `
-  if (!("Proxy" in window) || !("IntersectionObserver" in window)) {
+  if (typeof window !== "undefined" && (!("Proxy" in window) || !("IntersectionObserver" in window))) {
     document.addEventListener("DOMContentLoaded", () => {
-      let iframes = document.querySelectorAll("img.frontity-lazy-iframe");
+      let iframes = document.querySelectorAll("iframe.frontity-lazy-iframe");
 
       iframes.forEach(iframe => {
          iframe.setAttribute("src", iframe.getAttribute("data-src"));
@@ -28,11 +26,10 @@ const noProxyScript = `
 `;
 
 interface Props {
-  src: string;
-  title: string;
+  src?: string;
+  title?: string;
   width?: number;
   height?: number;
-  id?: string;
   className?: string;
   rootMargin?: string;
   loading?: "auto" | "lazy" | "eager";
@@ -65,8 +62,6 @@ const changeAttributes: ChangeAttributes = attrs => {
 const NoScriptIframe: NoScriptIframe = props => {
   const attributes = { ...props };
 
-  console.log("Condition 1");
-
   return (
     <noscript>
       <iframe {...attributes} />
@@ -75,18 +70,16 @@ const NoScriptIframe: NoScriptIframe = props => {
 };
 
 // WIP
-const Iframe: Component = ({ state, ...props }) => {
-  const {
-    src,
-    title,
-    width,
-    height,
-    id,
-    className,
-    loading = "lazy",
-    rootMargin
-  } = props;
-
+const Iframe: Component = ({
+  state,
+  src,
+  title,
+  width,
+  height,
+  className,
+  loading = "lazy",
+  rootMargin
+}) => {
   const lazyAttributes: Attributes = {
     "data-src": src,
     className: "frontity-lazy-iframe".concat(className ? `${className}` : ""),
@@ -94,17 +87,15 @@ const Iframe: Component = ({ state, ...props }) => {
     style: { visibility: "hidden" },
     height,
     width,
-    title,
-    id
+    title
   };
   const eagerAttributes = changeAttributes(lazyAttributes);
 
   if (loading === "eager") {
-    console.log("Condition 2");
-    return <img {...eagerAttributes} />;
+    return <iframe {...eagerAttributes} />;
   }
 
-  if (typeof window !== undefined) {
+  if (typeof window !== "undefined") {
     if (
       typeof IntersectionObserver !== "undefined" &&
       !("loading" in HTMLIFrameElement.prototype)
@@ -114,8 +105,6 @@ const Iframe: Component = ({ state, ...props }) => {
         triggerOnce: true
       });
 
-      console.log("Condition 3");
-
       return (
         <>
           <NoScriptIframe {...eagerAttributes} />
@@ -123,8 +112,6 @@ const Iframe: Component = ({ state, ...props }) => {
         </>
       );
     }
-
-    console.log("Condition 4");
 
     return (
       <>
@@ -138,8 +125,6 @@ const Iframe: Component = ({ state, ...props }) => {
       </>
     );
   }
-
-  console.log("Condition 5");
 
   return (
     <>
@@ -158,7 +143,7 @@ const Iframe: Component = ({ state, ...props }) => {
         ]}
       />
       <NoScriptIframe {...eagerAttributes} />
-      <img {...lazyAttributes} />
+      <iframe {...lazyAttributes} />
     </>
   );
 };
