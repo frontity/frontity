@@ -1,5 +1,6 @@
 import React from "react";
 import { Head, connect } from "frontity";
+import unescape from "lodash.unescape";
 
 const Title = ({ state }) => {
   // Get data about the current URL.
@@ -15,7 +16,9 @@ const Title = ({ state }) => {
     const taxonomyCapitalized =
       taxonomy.charAt(0).toUpperCase() + taxonomy.slice(1);
     // 3. Render the proper title.
-    title = `${taxonomyCapitalized}: ${name} - ${state.frontity.title}`;
+    title = `${taxonomyCapitalized}: ${unescape(name)} - ${
+      state.frontity.title
+    }`;
   } else if (data.isAuthor) {
     // Add titles to authors, like "Author: Jon Snow - Blog Name".
     // 1. Get the author entity from the state to get its name.
@@ -27,7 +30,7 @@ const Title = ({ state }) => {
     // 1. Get the post entity from the state and get its title.
     const postTitle = state.source[data.type][data.id].title.rendered;
     // 2. Remove any HTML tags found in the title.
-    const cleanTitle = postTitle.replace(/<\/?[^>]+(>|$)/g, "");
+    const cleanTitle = unescape(postTitle);
     // 3. Render the proper title.
     title = `${cleanTitle} - ${state.frontity.title}`;
   } else if (data.is404) {
