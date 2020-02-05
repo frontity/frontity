@@ -17,3 +17,5 @@ import nodeFetch from "node-fetch";
 export const fetch = (nodeFetch as any) as WindowOrWorkerGlobalScope["fetch"];
 
 export { URL } from "url";
+
+export { default as decode } from "lodash.unescape";

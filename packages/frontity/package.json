@@ -50,6 +50,7 @@
     "fs-extra": "^7.0.1",
     "inquirer": "^6.3.1",
     "is-root": "2.1.0",
+    "lodash.unescape": "4.0.1",
     "node-fetch": "^2.6.0",
     "ora": "^3.4.0",
     "ramda": "^0.26.1",
