@@ -7,7 +7,10 @@ const Component: React.FC = () => (
     <p data-test-id="target">OFF</p>
     <button data-test-id="toggle">Toggle</button>
 
-    <Script id="from-src" src="https://unpkg.com/jquery@3.4.1/dist/jquery.js" />
+    <Script
+      id="from-src"
+      src="https://unpkg.com/moment@2.24.0/min/moment.min.js"
+    />
     <Script
       id="from-children"
       code={`
