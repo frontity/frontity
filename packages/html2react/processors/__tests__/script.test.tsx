@@ -23,6 +23,16 @@ describe("Script processor", () => {
     expect(container).toMatchSnapshot();
   });
 
+  it("should process scripts with a valid type", () => {
+    const { container } = render(
+      <Html2React
+        html={'<script src="/" type="application/javascript" />'}
+        {...store}
+      />
+    );
+    expect(container).toMatchSnapshot();
+  });
+
   it("should process a script with code", () => {
     const { container } = render(
       <Html2React html={'<script>const some = "code";</script>'} {...store} />

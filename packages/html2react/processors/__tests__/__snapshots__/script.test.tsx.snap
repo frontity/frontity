@@ -25,6 +25,15 @@ exports[`Script processor should process a script with src 1`] = `
 </div>
 `;
 
+exports[`Script processor should process scripts with a valid type 1`] = `
+<div>
+  <mocked-script
+    src="/"
+    type="application/javascript"
+  />
+</div>
+`;
+
 exports[`Script processor should set data-src to src if provided 1`] = `
 <div>
   <mocked-script
