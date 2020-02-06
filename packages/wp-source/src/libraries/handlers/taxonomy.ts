@@ -22,7 +22,7 @@ const taxonomyHandler = ({
     const { slug } = params;
     // Request entity from WP
     const response = await api.get({ endpoint, params: { slug } });
-    const [entity] = await populate({ response, state });
+    const [entity] = await populate({ response, state, force: true });
     if (!entity)
       throw new ServerError(
         `entity from endpoint "${endpoint}" with slug "${slug}" not found`,

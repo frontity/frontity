@@ -66,6 +66,7 @@ interface WpSource extends Source {
         state: State<WpSource>;
         response: Response;
         subdirectory?: string;
+        force?: boolean;
       }) => Promise<EntityData[]>;
       handlers: Pattern<Handler>[];
       redirections: Pattern<Redirection>[];
