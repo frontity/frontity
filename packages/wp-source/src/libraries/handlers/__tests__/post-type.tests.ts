@@ -10,6 +10,7 @@ import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
+import { ServerError } from "@frontity/source";
 
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
@@ -22,9 +23,29 @@ beforeEach(() => {
 describe("postType", () => {
   test("returns 404 if not found", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    // We have to use this form instead of:
+    // .mockResolvedValueOnce(mockResponse([]))
+    // because the latter always returns the same instance of Response.
+    // which results in error because response.json() can only be run once
+    api.get = jest.fn(_ => Promise.resolve(mockResponse([])));
+
     // Fetch entities
     await store.actions.source.fetch("/non-existent/");
+    expect(api.get).toHaveBeenCalledTimes(3);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("should contain the correct error code on error", async () => {
+    // Mock Api responses
+    api.get = jest.fn(async _ => {
+      throw new ServerError("statusText", 400, "statusText");
+    });
+
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/");
+
+    expect(store.state.source.data["/post-1/"].isError).toBe(true);
+    expect(store.state.source.data["/post-1/"]["is400"]).toBe(true);
     expect(store.state.source).toMatchSnapshot();
   });
 });
