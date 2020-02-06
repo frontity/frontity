@@ -1,14 +1,20 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
 
-const authorHandler: Handler = async ({ route, params, state, libraries }) => {
+const authorHandler: Handler = async ({
+  route,
+  params,
+  state,
+  libraries,
+  force
+}) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
   const { slug } = params;
 
   // 1. search id in state or get it from WP REST API
   let { id } = state.source.get(path);
-  if (!id) {
+  if (!id || force) {
     // Request author from WP
     const response = await api.get({ endpoint: "users", params: { slug } });
     const [entity] = await populate({ response, state });

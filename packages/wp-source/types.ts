@@ -14,6 +14,7 @@ export type Handler<Pkg extends Source = WpSource> = (args: {
   params: { [param: string]: any };
   state: State<Pkg>;
   libraries: Pkg["libraries"];
+  force?: boolean;
 }) => Promise<void>;
 
 export type Redirection = (params?: Record<string, string>) => string;
@@ -46,8 +47,15 @@ interface WpSource extends Source {
     };
   };
   actions: {
-    source: Source["actions"]["source"] & {
-      fetch: Action<WpSource, string>;
+    source: {
+      fetch: Action<
+        WpSource,
+        | string
+        | {
+            link: string;
+            force: boolean;
+          }
+      >;
       init: Action<WpSource>;
     };
   };

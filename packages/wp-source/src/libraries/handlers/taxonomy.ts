@@ -12,13 +12,13 @@ const taxonomyHandler = ({
   endpoint: string;
   postTypeEndpoint?: string;
   params?: Record<string, any>;
-}): Handler => async ({ route, params, state, libraries }) => {
+}): Handler => async ({ route, params, state, libraries, force }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
 
   // 1. search id in state or get it from WP REST API
   let { id } = state.source.get(path);
-  if (!id) {
+  if (!id || force) {
     const { slug } = params;
     // Request entity from WP
     const response = await api.get({ endpoint, params: { slug } });
