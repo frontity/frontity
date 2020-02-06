@@ -1,4 +1,5 @@
 import TinyRouter from "../types";
+import { decode } from "frontity";
 
 let isPopState = false;
 
@@ -7,6 +8,9 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   actions,
   libraries
 }) => (link): void => {
+  // It's possible that the link contains unescaped entities like &amp; or &nbsp;
+  link = decode(link);
+
   // normalizes link
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
@@ -27,11 +31,14 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   libraries
 }) => {
   if (state.frontity.platform === "server") {
+    // It's possible that the link contains unescaped entities like &amp; or &nbsp;
+    const link = decode(state.frontity.initialLink);
+
     // Populate the router info with the initial path and page.
     state.router.link =
       libraries.source && libraries.source.normalize
-        ? libraries.source.normalize(state.frontity.initialLink)
-        : state.frontity.initialLink;
+        ? libraries.source.normalize(link)
+        : link;
   } else {
     // Replace the current url with the same one but with state.
     window.history.replaceState({ link: state.router.link }, "");
