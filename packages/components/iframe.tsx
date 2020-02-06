@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
+
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect, Package } from "frontity/types";
@@ -9,7 +11,6 @@ const noJsStyles = `
   }
 `;
 
-// No Proxy === No Frontity
 const noProxyScript = `
   if (typeof window !== "undefined" && (!("Proxy" in window) || !("IntersectionObserver" in window))) {
     document.addEventListener("DOMContentLoaded", () => {
@@ -26,8 +27,8 @@ const noProxyScript = `
 `;
 
 interface Props {
+  title: string;
   src?: string;
-  title?: string;
   width?: number;
   height?: number;
   className?: string;
@@ -69,7 +70,6 @@ const NoScriptIframe: NoScriptIframe = props => {
   );
 };
 
-// WIP
 const Iframe: Component = ({
   state,
   src,
@@ -91,17 +91,18 @@ const Iframe: Component = ({
   };
   const eagerAttributes = changeAttributes(lazyAttributes);
 
-  if (loading === "eager") {
-    return <iframe {...eagerAttributes} />;
-  }
+  if (loading === "eager") return <iframe {...eagerAttributes} />;
 
   if (typeof window !== "undefined") {
+    const isRationalHeight = height > 0;
+
     if (
       typeof IntersectionObserver !== "undefined" &&
-      !("loading" in HTMLIFrameElement.prototype)
+      "loading" in HTMLIFrameElement.prototype &&
+      isRationalHeight
     ) {
       const [ref, inView] = useInView({
-        rootMargin: rootMargin,
+        rootMargin,
         triggerOnce: true
       });
 

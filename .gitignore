@@ -8,3 +8,4 @@ build
 analyze
 .env
 .vscode/
+lerna-debug.log

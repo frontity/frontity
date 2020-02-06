@@ -1,7 +1,5 @@
 import React from "react";
 import { Global, css, connect, styled, Head } from "frontity";
-import Iframe from "@frontity/components/iframe";
-import Image from '@frontity/components/image';
 import Header from "./header";
 import List from "./list";
 import Post from "./post";
@@ -43,31 +41,6 @@ const Theme = ({ state }) => {
           (data.isPostType && <Post />) ||
           (data.is404 && <Page404 />)}
       </Main>
-
-      <Iframe
-        src="https://frontity.org"
-        title="Frontity"
-        width="800"
-        height="700"
-      />
-      <Iframe
-        src="https://olaolu.dev"
-        title="Olaolu"
-        width="800"
-        height="700"
-      />
-      <Iframe
-        src="https://codewonders.dev"
-        title="Codewonders"
-        width="800"
-        height="700"
-      />
-      <Iframe
-        src="https://gideonoladimeji.com"
-        title="Gideon"
-        width="800"
-        height="700"
-      />
     </>
   );
 };
