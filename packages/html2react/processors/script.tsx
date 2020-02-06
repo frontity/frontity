@@ -8,10 +8,20 @@ const validMediaTypes = [
 ];
 
 const script: Processor = {
-  test: node =>
-    node.type === "element" &&
-    node.component === "script" &&
-    (!node.props.type || node.props.type in validMediaTypes),
+  test: node => {
+    if (node.type === "element" && node.component === "script") {
+      if (
+        "type" in node.props &&
+        !validMediaTypes.includes("" + node.props.type)
+      ) {
+        return false;
+      }
+
+      return true;
+    }
+
+    return false;
+  },
   priority: 20,
   name: "script",
   process: (node: Element) => {
