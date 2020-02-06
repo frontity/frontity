@@ -91,7 +91,10 @@ describe("tag", () => {
 
   test("returns 404 if tag doesn't exist in WP", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    api.get = jest
+      .fn()
+      .mockResolvedValue(mockResponse([], {}, { status: 404 }));
+
     // Fetch entities
     await store.actions.source.fetch("/tag/non-existent/");
     expect(api.get).toHaveBeenCalledTimes(1);

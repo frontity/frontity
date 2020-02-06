@@ -51,15 +51,6 @@ describe("Image lazy-loading (with Intersection Observer)", () => {
       .should("be.visible");
     cy.get("img.bottom").should("not.be.visible");
   });
-
-  it("should work scrolling from right to left", () => {
-    cy.scrollTo("bottomRight");
-    cy.get("img:not(.bottom.right)").should("not.be.visible");
-    cy.get("img.bottom.left")
-      .scrollIntoView({ duration: 300 })
-      .should("be.visible");
-    cy.get("img.top").should("not.be.visible");
-  });
 });
 
 if (!Cypress.env("HEADLESS")) {

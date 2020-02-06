@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create goes through all steps 1`] = `
+Object {
+  "name": "random-name",
+  "path": "/path/to/project",
+  "theme": "@frontity/mars-theme",
+}
+`;
+
+exports[`create goes through all steps 2`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create goes through all steps 3`] = `
+Array [
+  Array [
+    "random-name",
+    "@frontity/mars-theme",
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create goes through all steps 4`] = `
+Array [
+  Array [
+    "js",
+    "random-name",
+    "/path/to/project",
+    "@frontity/mars-theme",
+  ],
+]
+`;
+
+exports[`create goes through all steps 5`] = `
+Array [
+  Array [
+    "@frontity/mars-theme",
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create goes through all steps 6`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create uses the emitter passed to log messages 1`] = `Array []`;

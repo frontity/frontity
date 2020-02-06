@@ -31,6 +31,6 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@frontity/hooks": "^1.1.14"
+    "react-intersection-observer": "8.25.2"
   }
 }

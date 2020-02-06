@@ -3,7 +3,7 @@
 import React from "react";
 import { Head, connect } from "frontity";
 import { Connect, Package } from "frontity/types";
-import useInView from "@frontity/hooks/use-in-view";
+import { useInView } from "react-intersection-observer";
 
 // Hides any image rendered by this component that is not
 // inside a <noscript> when JS is disabled.
@@ -125,9 +125,9 @@ const Image: Image = ({
       typeof IntersectionObserver !== "undefined" &&
       !("loading" in HTMLImageElement.prototype && height > 0)
     ) {
-      const [onScreen, ref] = useInView({
+      const [ref, onScreen] = useInView({
         rootMargin: rootMargin,
-        onlyOnce: true
+        triggerOnce: true
       });
 
       return (

@@ -1,5 +1,6 @@
 import { fetch } from "frontity";
 import { stringify } from "query-string";
+import { ServerError } from "@frontity/source";
 
 class Api {
   api = "";
@@ -41,7 +42,15 @@ class Api {
     const query = stringify(params, { arrayFormat: "bracket", encode: false });
 
     // Send request
-    return fetch(`${requestUrl}${query && "?"}${query}`);
+    return fetch(`${requestUrl}${query && "?"}${query}`).then(
+      (response: Response) => {
+        if (!response.ok) {
+          const { status, statusText } = response;
+          throw new ServerError(statusText, status, statusText);
+        }
+        return response;
+      }
+    );
   }
 
   async getIdBySlug(endpoint: string, slug: string) {
@@ -49,8 +58,9 @@ class Api {
     const [entity] = await response.clone().json();
 
     if (!entity)
-      throw new Error(
-        `entity from endpoint '${endpoint}' with slug '${slug}' not found`
+      throw new ServerError(
+        `entity from endpoint '${endpoint}' with slug '${slug}' not found`,
+        404
       );
 
     return entity.id;
