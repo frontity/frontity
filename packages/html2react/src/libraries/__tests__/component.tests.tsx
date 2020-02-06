@@ -2,7 +2,7 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import Component from "../component";
 import parse from "../parse";
-import decode from "../decode/client";
+import { decode } from "frontity";
 import htmlMock from "./mocks/html";
 
 describe("Component", () => {

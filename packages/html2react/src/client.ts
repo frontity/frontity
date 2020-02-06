@@ -1,5 +1,5 @@
 import html2react from ".";
-import decode from "./libraries/decode/client";
+import { decode } from "frontity";
 
 html2react.libraries.html2react.decode = decode;
 

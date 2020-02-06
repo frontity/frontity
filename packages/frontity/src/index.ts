@@ -16,6 +16,10 @@ export const createStore = originalCreateStore as CreateStore;
 import nodeFetch from "node-fetch";
 export const fetch = (nodeFetch as any) as WindowOrWorkerGlobalScope["fetch"];
 
-export { URL } from "url";
+import decodeClient from "./decode/client";
+import decodeServer from "./decode/server";
 
-export { default as decode } from "lodash.unescape";
+export const decode =
+  typeof window !== "undefined" ? decodeClient : decodeServer;
+
+export { URL } from "url";
