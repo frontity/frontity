@@ -776,9 +776,12 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/tag/non-existent/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "entity from endpoint \\"tags\\" with slug \\"non-existent\\" not found",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -814,9 +817,12 @@ Object {
       "taxonomy": "tag",
     },
     "/tag/tag-1/page/3/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "tag with slug \\"tag-1\\" doesn't have page 3",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
