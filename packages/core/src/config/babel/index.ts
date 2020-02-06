@@ -60,6 +60,8 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
     const plugins = [
       //
       "babel-plugin-frontity",
+      // Support for babel macros. See: https://community.frontity.org/t/tailwindcss-with-babel-macro-plugin-and-css-in-js/1040
+      "babel-plugin-macros",
       // Support for dynamic imports: import("./my-file")
       "@babel/plugin-syntax-dynamic-import",
       // Needed for loadable-component SSR.

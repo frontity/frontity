@@ -5,6 +5,7 @@ export type EntityData = {
   id: number;
   link: string;
 };
+
 /**
  * Type that represents objects stored in `state.source.data`.
  * These objects give information about data associated to a
@@ -12,8 +13,7 @@ export type EntityData = {
  */
 export type Data =
   | BaseData
-  | NotFoundData
-  | ArchiveData
+  | ErrorData
   | TaxonomyData
   | CategoryData
   | TagData
@@ -35,7 +35,7 @@ export type BaseData = {
   taxonomy?: string;
   isFetching: boolean;
   isReady: boolean;
-  is404?: false;
+  isError?: false;
   isArchive?: false;
   isTaxonomy?: false;
   isCategory?: false;
@@ -51,16 +51,49 @@ export type BaseData = {
   isHome?: boolean;
 };
 
-// NOT FOUND
+// ERROR
 
 /**
- * Adds new properties to `BaseData` to identify not found pages.
- * @property {true} is404
+ * Adds new properties to `BaseData` to identify errors.
+ * @property {isError} true
+ * @property {number} errorStatus
+ * @property {string} errorStatusText
  */
-export type NotFoundData = Merge<
+export type ErrorData = Merge<
   BaseData,
   {
-    is404: true;
+    isError: true;
+    errorStatus: number;
+    errorStatusText: string;
+    isReady: true;
+    isFetching: false;
+
+    // This is ugly but it seems like the best way.
+    // Also types are erased at runtime so it doesnt add to bundle size
+    is400?: boolean;
+    is401?: boolean;
+    is402?: boolean;
+    is403?: boolean;
+    is404?: boolean;
+    is405?: boolean;
+    is406?: boolean;
+    is407?: boolean;
+    is408?: boolean;
+    is409?: boolean;
+    is410?: boolean;
+    is411?: boolean;
+    is412?: boolean;
+    is413?: boolean;
+    is414?: boolean;
+    is415?: boolean;
+    is416?: boolean;
+    is417?: boolean;
+    is500?: boolean;
+    is501?: boolean;
+    is502?: boolean;
+    is503?: boolean;
+    is504?: boolean;
+    is505?: boolean;
   }
 >;
 
