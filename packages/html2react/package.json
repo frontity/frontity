@@ -27,6 +27,7 @@
     "@frontity/connect": "^1.0.3",
     "@types/he": "^1.1.0",
     "@types/react-test-renderer": "^16.8.1",
+    "@testing-library/react": "^9.4.0",
     "frontity": "^1.4.3",
     "jest": "^24.7.1",
     "react-test-renderer": "^16.8.6",
@@ -34,7 +35,6 @@
   },
   "dependencies": {
     "@frontity/components": "^1.1.15",
-    "@testing-library/react": "^9.4.0",
     "he": "^1.2.0",
     "himalaya": "^1.1.0"
   }
