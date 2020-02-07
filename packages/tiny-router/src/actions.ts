@@ -1,4 +1,5 @@
 import TinyRouter from "../types";
+import Koa from "koa";
 
 let isPopState = false;
 
@@ -43,16 +44,24 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   }
 };
 
-export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = async ({
+export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   state,
   actions
-}) => {
+}) => async (
+  ctx: Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>
+) => {
   if (state.router.autoFetch) {
-    if (actions.source && actions.source.fetch)
+    if (actions.source && actions.source.fetch) {
       await actions.source.fetch(state.router.link);
-    else
+    }
+
+    const data = state.source.get(state.router.link);
+    if (data.isError) {
+      ctx.status = data.errorStatus;
+    } else {
       console.warn(
         "You are trying to use autoFetch but no source package is installed."
       );
+    }
   }
 };

@@ -8,6 +8,7 @@ interface TinyRouter extends Router {
     router: {
       autoFetch?: boolean;
     };
+    source: Source["state"]["source"];
   };
   actions: Router<TinyRouter>["actions"] & {
     router: {
