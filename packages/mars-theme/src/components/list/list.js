@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, styled } from "frontity";
+import { connect, styled, decode } from "frontity";
 import Item from "./list-item";
 import Pagination from "./pagination";
 
@@ -12,14 +12,15 @@ const List = ({ state }) => {
       {/* If the list is a taxonomy, we render a title. */}
       {data.isTaxonomy && (
         <Header>
-          {data.taxonomy}: <b>{state.source[data.taxonomy][data.id].name}</b>
+          {data.taxonomy}:{" "}
+          <b>{decode(state.source[data.taxonomy][data.id].name)}</b>
         </Header>
       )}
 
       {/* If the list is for a specific author, we render a title. */}
       {data.isAuthor && (
         <Header>
-          Author: <b>{state.source.author[data.id].name}</b>
+          Author: <b>{decode(state.source.author[data.id].name)}</b>
         </Header>
       )}
 

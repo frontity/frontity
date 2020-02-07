@@ -1,4 +1,4 @@
-import { connect } from "frontity";
+import { connect, decode } from "frontity";
 import React, { Fragment } from "react";
 import { TagIcon } from "../icons";
 import Link from "../link";
@@ -21,7 +21,7 @@ const PostTags = ({ tags }) => {
             const isLastTag = index === postTags.length - 1;
             return (
               <Fragment key={tag.id}>
-                <Link link={tag.link}>{tag.name}</Link>
+                <Link link={tag.link}>{decode(tag.name)}</Link>
                 {!isLastTag && <>, </>}
               </Fragment>
             );

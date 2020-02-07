@@ -7,7 +7,6 @@ interface Html2React extends Package {
   libraries: {
     html2react: {
       parse: Parse;
-      decode: Decode;
       processors: Processor[];
       Component: Component;
     };
@@ -15,12 +14,6 @@ interface Html2React extends Package {
 }
 
 export default Html2React;
-
-// Decode
-
-export interface Decode {
-  (text: string): string;
-}
 
 // Parse
 
@@ -58,11 +51,11 @@ export interface Attributes {
 }
 
 export interface Parse {
-  (html: string, decode: Function): Node[];
+  (html: string): Node[];
 }
 
 export interface AdaptNode {
-  (himalayaNode: HiamalayaNode, decode: Function, parent?: Element): Node;
+  (himalayaNode: HiamalayaNode, parent?: Element): Node;
 }
 
 // Processors
