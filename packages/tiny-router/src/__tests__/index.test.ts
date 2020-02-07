@@ -2,12 +2,15 @@ import { createStore, observe } from "frontity";
 import { init, set } from "../actions";
 import tinyRouter from "..";
 import TinyRouter from "../../types";
+import Source from "@frontity/source/types";
 
 let config: TinyRouter;
 let normalize: jest.Mock;
 
 beforeEach(() => {
   normalize = jest.fn();
+
+  const source = {} as Source["state"]["source"];
 
   config = {
     name: "@frontity/tiny-router",
@@ -16,7 +19,8 @@ beforeEach(() => {
         platform: "server",
         initialLink: "/initial/link/"
       },
-      router: { ...tinyRouter.state.router }
+      router: { ...tinyRouter.state.router },
+      source
     },
     actions: {
       router: {
