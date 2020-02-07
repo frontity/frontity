@@ -66,8 +66,8 @@ const handleNodes: HandleNodes = ({ nodes, payload }) => {
 export const Html2React: Component<
   Connect<Html2ReactType, { html: string }>
 > = ({ html, libraries }) => {
-  const { processors, parse, decode } = libraries.html2react;
-  const root = parse(html, decode);
+  const { processors, parse } = libraries.html2react;
+  const root = parse(html);
 
   libraries.html2react.processors = processors.sort(
     (a, b) => (a.priority || 10) - (b.priority || 10)
