@@ -26,10 +26,11 @@
   "dependencies": {
     "@frontity/router": "^1.0.18",
     "@frontity/source": "^1.0.17",
+    "@frontity/wp-source": "^1.5.0",
     "frontity": "^1.4.3"
   },
   "devDependencies": {
-    "@types/koa": "2.11.0",
+    "@types/koa": "^2.11.0",
     "@types/jest": "^24.0.11",
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
