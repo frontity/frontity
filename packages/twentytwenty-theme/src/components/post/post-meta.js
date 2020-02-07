@@ -1,4 +1,4 @@
-import { styled, connect } from "frontity";
+import { styled, connect, decode } from "frontity";
 import React from "react";
 import PostMetaItem from "./post-meta-item";
 import { UserIcon, CalendarIcon } from "../icons";
@@ -41,7 +41,7 @@ const PostMeta = ({ state, item }) => {
         {/* If the post has an author, we render a clickable author text. */}
         {author && (
           <PostMetaItem icon={UserIcon} label="Post Author" link={author.link}>
-            By {author.name}
+            By {decode(author.name)}
           </PostMetaItem>
         )}
         <PostMetaItem icon={CalendarIcon} label="Post Date">

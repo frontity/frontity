@@ -1,4 +1,4 @@
-import { connect, styled } from "frontity";
+import { connect, styled, decode } from "frontity";
 import React from "react";
 import ScreenReaderText from "../styles/screen-reader";
 import Link from "../link";
@@ -18,7 +18,7 @@ const PostCategories = ({ categories }) => {
       <EntryCategoriesInner>
         {postCategories.map(category => (
           <CategoryTag key={category.id} link={category.link}>
-            {category.name}
+            {decode(category.name)}
           </CategoryTag>
         ))}
       </EntryCategoriesInner>

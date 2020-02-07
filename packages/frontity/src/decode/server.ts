@@ -1,5 +1,5 @@
 import he from "he";
-import { Decode } from "../../../types";
+import { Decode } from "../../types";
 
 const decode: Decode = text => he.decode(text);
 
