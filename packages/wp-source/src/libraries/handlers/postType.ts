@@ -1,5 +1,6 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
+import { ServerError } from "@frontity/source";
 
 const postTypeHandler = ({
   endpoints
@@ -35,8 +36,9 @@ const postTypeHandler = ({
 
     // 1.3 if no entity has found, throw an error
     if (!isHandled)
-      throw new Error(
-        `post type from endpoints "${endpoints}" with slug "${slug}" not found`
+      throw new ServerError(
+        `post type from endpoints "${endpoints}" with slug "${slug}" not found`,
+        404
       );
   }
 
