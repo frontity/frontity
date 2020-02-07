@@ -65,6 +65,20 @@ describe("fetch", () => {
     expect(store.state.source.data).toMatchSnapshot();
   });
 
+  test("should run again when `force` is used", async () => {
+    store.state.source.data["/some/route/"] = {
+      errorStatusText: "Request Timeout",
+      errorStatus: 408,
+      isError: true,
+      isFetching: false,
+      isReady: true
+    };
+
+    await store.actions.source.fetch({ link: "/some/route/", force: true });
+    expect(handler.func).toHaveBeenCalled();
+    expect(store.state.source.data).toMatchSnapshot();
+  });
+
   test("Throw an error if fetch fails", async () => {
     handler.func = jest.fn(async params => {
       throw new Error("Some error");

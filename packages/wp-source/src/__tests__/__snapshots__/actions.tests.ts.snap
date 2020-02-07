@@ -21,6 +21,18 @@ Object {
 }
 `;
 
+exports[`fetch should run again when \`force\` is used 1`] = `
+Object {
+  "/some/route/": Object {
+    "id": 1,
+    "isFetching": false,
+    "isPostType": true,
+    "isReady": true,
+    "type": "example",
+  },
+}
+`;
+
 exports[`fetch should work if data doesn't exist 1`] = `
 Object {
   "/some/route/": Object {

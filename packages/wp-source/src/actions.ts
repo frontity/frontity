@@ -27,12 +27,12 @@ const actions: WpSource["actions"]["source"] = {
     // Get current data object
     const data = source.data[route];
 
-    if (!data) {
+    if (!data || force) {
       source.data[route] = {
         isReady: false,
         isFetching: false
       };
-    } else if ((data.isReady && !force) || data.isFetching || data.isError) {
+    } else if (data.isReady || data.isFetching || data.isError) {
       return;
     }
 
