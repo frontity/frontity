@@ -1,5 +1,5 @@
 import Router from "@frontity/router";
-import Source from "@frontity/source";
+import Source from "@frontity/source/types";
 import { Action } from "frontity/types";
 
 interface TinyRouter extends Router {
