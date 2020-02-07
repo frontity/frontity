@@ -1,4 +1,4 @@
-import { connect } from "frontity";
+import { connect, decode } from "frontity";
 import React, { Fragment, useEffect } from "react";
 import Article from "../post/post-item";
 import ArchiveHeader from "./archive-header";
@@ -24,14 +24,14 @@ const Archive = ({ state, showExcerpt, showMedia }) => {
       {/* If the list is a taxonomy, we render a title. */}
       {data.isTaxonomy && (
         <ArchiveHeader labelColor={primary} label={data.taxonomy}>
-          <span>{state.source[data.taxonomy][data.id].name}</span>
+          <span>{decode(state.source[data.taxonomy][data.id].name)}</span>
         </ArchiveHeader>
       )}
 
       {/* If the list is for a specific author, we render a title. */}
       {data.isAuthor && (
         <ArchiveHeader labelColor={primary} label="Author">
-          <b>{state.source.author[data.id].name}</b>
+          <b>{decode(state.source.author[data.id].name)}</b>
         </ArchiveHeader>
       )}
 
