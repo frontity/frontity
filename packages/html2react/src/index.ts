@@ -8,7 +8,7 @@ const html2react: Html2React = {
   libraries: {
     html2react: {
       parse,
-      processors: [],
+      processors: [script],
       Component
     }
   }
