@@ -32,7 +32,7 @@ const noProxyScript = `
   }
 `;
 
-interface Props {
+export interface Props {
   src?: string;
   srcSet?: string;
   sizes?: string;
