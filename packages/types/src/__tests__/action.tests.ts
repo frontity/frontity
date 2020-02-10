@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Action, AsyncAction } from "../action";
 import Package from "../package";
 import Derived from "../derived";
@@ -97,6 +98,7 @@ const package1: Package1 = {
         await Promise.resolve();
         const num1: number = state.namespace1.prop4("123");
         actions.namespace2.action3("123");
+        await actions.namespace1.action2();
         await actions.namespace2.action4(123);
       }
     },
