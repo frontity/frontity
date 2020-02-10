@@ -1,11 +1,28 @@
-import { YoastSocialDefaults, YoastMeta } from "../../types";
-import { Author, Taxonomy, PostType, Attachment } from "@frontity/source/";
+import Yoast, { YoastSocialDefaults, YoastMeta } from "../../types";
+import {
+  AuthorEntity,
+  TaxonomyEntity,
+  PostType,
+  AttachmentEntity,
+  Data
+} from "@frontity/source/types";
+import { State } from "frontity/types";
 
-export type Entity = (Author | Taxonomy | PostType | Attachment) & {
+export type Entity = (
+  | AuthorEntity
+  | TaxonomyEntity
+  | PostType
+  | AttachmentEntity) & {
   yoast_meta: YoastMeta;
 };
 
-export const getEntity = ({ state, data }): Entity => {
+export const getEntity = ({
+  state,
+  data
+}: {
+  state: State<Yoast>;
+  data: Data;
+}) => {
   if (data.isPostType) return state.source[data.type][data.id];
   if (data.isTaxonomy) return state.source[data.taxonomy][data.id];
   if (data.isAuthor) return state.source.author[data.id];
@@ -54,6 +71,6 @@ export const getPage = route => {
 
 export const hasName = (
   entity: Entity
-): entity is (Author | Taxonomy) & {
+): entity is (AuthorEntity | TaxonomyEntity) & {
   yoast_meta: YoastMeta;
 } => "name" in entity;
