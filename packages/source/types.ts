@@ -1,4 +1,4 @@
-import { Package, Action, Derived } from "frontity/types";
+import { Package, AsyncAction, Derived } from "frontity/types";
 import { Data } from "./types/data";
 import {
   TaxonomyEntity,
@@ -27,10 +27,10 @@ export type RouteParams = {
   hash?: string;
 };
 
-interface Source extends Package {
+interface Source<T = null> extends Package {
   state: {
     source: {
-      get: Derived<Source, (link: string) => Data>;
+      get: Derived<T extends null ? Source : T, (link: string) => Data>;
       data: Record<string, Data>;
       category: Record<string, TaxonomyEntity>;
       tag: Record<string, TaxonomyEntity>;
@@ -44,7 +44,7 @@ interface Source extends Package {
   };
   actions: {
     source: {
-      fetch: Action<Source, string>;
+      fetch: AsyncAction<T extends null ? Source : T, string>;
     };
   };
   libraries: {

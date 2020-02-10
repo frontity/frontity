@@ -6,11 +6,11 @@ import FontFaces from "./styles/font-faces";
 import Header from "./header";
 import Archive from "./archive";
 import Loading from "./loading";
-import Page404 from "./page-404";
 import Post from "./post";
 import SearchResults from "./search/search-results";
 import SkipLink from "./styles/skip-link";
 import MetaTitle from "./page-meta-title";
+import PageError from "./page-error";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -53,7 +53,7 @@ const Theme = ({ state, libraries }) => {
             (isSearch && <SearchResults />) ||
             (data.isArchive && <Archive />) ||
             (data.isPostType && <Post />) ||
-            (data.is404 && <Page404 />)}
+            (data.isError && <PageError />)}
         </Main>
       </div>
 
