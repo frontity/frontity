@@ -1,41 +1,4 @@
 {
   "name": "@frontity/yoast",
-  "version": "1.1.6",
-  "description": "Integrate your Frontity site with Yoast",
-  "homepage": "https://github.com/frontity/frontity",
-  "license": "Apache-2.0",
-  "keywords": [
-    "frontity",
-    "frontity-yoast",
-    "yoast",
-    "seo"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/frontity/frontity.git"
-  },
-  "scripts": {
-    "test:ci": "../../node_modules/.bin/jest",
-    "test": "../../node_modules/.bin/jest --watch",
-    "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
-  },
-  "bugs": {
-    "url": "https://github.com/frontity/frontity/issues"
-  
-  "publishConfig": {
-    "access": "public"
-  },
-  "devDependencies": {
-    "@frontity/connect": "^1.0.3",
-    "@frontity/router": "^1.0.18",
-    "@frontity/source": "^1.0.17",
-    "@types/jest": "^24.0.11",
-    "frontity": "^1.4.3",
-    
-    
-    
-  },
-  "dependencies": {
-    "string-humanize": "^1.0.1"
-  }
+  "version": "1.1.6"
 }
