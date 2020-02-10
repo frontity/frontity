@@ -1,5 +1,5 @@
 import { Package, Derived } from "frontity/types";
-import Source from "@frontity/source";
+import Source from "@frontity/source/types";
 import Router from "@frontity/router";
 
 export type YoastSocialDefaults = {
