@@ -27,6 +27,10 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
           } else if (key === "style") {
             // Add inline styles to the component with `emotion`.
             props.css = css(value);
+          } else if (key === "href") {
+            props.href = decode(value);
+          } else if (key === "for") {
+            props.for = value;
           } else if (!/^on/.test(key)) {
             const camelCaseKey = attributesMap[key.toLowerCase()];
             // Map keys with no value to `true` booleans.
