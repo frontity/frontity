@@ -23,7 +23,7 @@ Array [
 
 exports[`date fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -214,7 +214,7 @@ Array [
 
 exports[`date get January 1, 2019 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -349,7 +349,7 @@ Array [
 
 exports[`date get January, 2019 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -545,7 +545,7 @@ Array [
 
 exports[`date get two pages of year 2019 (with query params) 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -901,7 +901,7 @@ Array [
 
 exports[`date get two pages of year 2019 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -1245,7 +1245,7 @@ Array [
 
 exports[`date returns 404 if the page fetched is empty 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
   "category": Object {},
