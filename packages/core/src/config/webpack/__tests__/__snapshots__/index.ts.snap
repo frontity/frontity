@@ -17,6 +17,7 @@ Object {
       ],
     },
     "externals": Object {
+      "he": "{}",
       "node-fetch": "window.fetch",
       "url": "{ URL: window.URL }",
     },
@@ -151,6 +152,7 @@ Object {
       ],
     },
     "externals": Object {
+      "he": "{}",
       "node-fetch": "window.fetch",
       "url": "{ URL: window.URL }",
     },
@@ -400,6 +402,7 @@ Object {
       ],
     },
     "externals": Object {
+      "he": "{}",
       "node-fetch": "window.fetch",
       "url": "{ URL: window.URL }",
     },
@@ -526,6 +529,7 @@ Object {
       ],
     },
     "externals": Object {
+      "he": "{}",
       "node-fetch": "window.fetch",
       "url": "{ URL: window.URL }",
     },
