@@ -1,4 +1,4 @@
-import { Package, Action, Derived } from "frontity/types";
+import { Package, AsyncAction, Derived } from "frontity/types";
 import { Data } from "./types/data";
 import {
   TaxonomyEntity,
@@ -44,7 +44,7 @@ interface Source extends Package {
   };
   actions: {
     source: {
-      fetch: Action<Source, string>;
+      fetch: AsyncAction<Source, string>;
     };
   };
   libraries: {
