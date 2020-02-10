@@ -16,7 +16,7 @@ const state: WpSource["state"]["source"] = {
   attachment: {},
   type: {},
   taxonomy: {},
-  api: "https://test.frontity.io",
+  api: "",
   isWpCom: ({ state }) =>
     state.source.api.startsWith(
       "https://public-api.wordpress.com/wp/v2/sites/"
