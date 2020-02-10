@@ -1,5 +1,5 @@
 import { Package, Action } from "frontity/types";
-import Source from "@frontity/source";
+import Source from "@frontity/source/types";
 
 export type Pageview = {
   page: string;
