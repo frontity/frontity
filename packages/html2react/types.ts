@@ -16,35 +16,39 @@ interface Html2React extends Package {
 export default Html2React;
 
 // Parse
+type NoProps = {
+  [key: string]: string | number | boolean;
+};
 
-export interface Element {
+export interface Element<Props = NoProps> {
   type: "element";
   component: string | React.ComponentType;
   props: {
     css?: SerializedStyles;
-  } & {
-    [key: string]: string | number | boolean;
-  };
-  children?: Node[];
-  parent?: Element;
+  } & Props;
+  children?: Node<Props>[];
+  parent?: Element<Props>;
   ignore?: boolean;
 }
 
-export interface Text {
+export interface Text<Props = NoProps> {
   type: "text";
   content: string;
-  parent?: Element;
+  parent?: Element<Props>;
   ignore?: boolean;
 }
 
-export interface Comment {
+export interface Comment<Props = NoProps> {
   type: "comment";
   content: string;
-  parent?: Element;
+  parent?: Element<Props>;
   ignore?: boolean;
 }
 
-export type Node = Element | Text | Comment;
+export type Node<Props = NoProps> =
+  | Element<Props>
+  | Text<Props>
+  | Comment<Props>;
 
 export interface Attributes {
   [key: string]: string;
@@ -60,19 +64,19 @@ export interface AdaptNode {
 
 // Processors
 
-interface Test {
-  (node: Node): boolean;
+interface Test<Props = NoProps> {
+  (node: Node<Props>): boolean;
 }
 
-interface Process {
-  (node: Node, payload: { root: Node[] }): Node;
+interface Process<Props = NoProps> {
+  (node: Node<Props>, payload: { root: Node<Props>[] }): Node<Props>;
 }
 
-export interface Processor {
+export interface Processor<Props = NoProps> {
   name?: string;
   priority?: number;
-  test: Test;
-  process: Process;
+  test: Test<Props>;
+  process: Process<Props>;
 }
 
 // Component

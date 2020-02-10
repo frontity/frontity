@@ -1,0 +1,10 @@
+{
+  "name": "e2e-script",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do e2e testing of Frontity's Script component",
+  "dependencies": {
+    "@frontity/components": "^1.1.15",
+    "frontity": "^1.4.3"
+  }
+}

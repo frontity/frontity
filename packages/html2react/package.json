@@ -18,14 +18,16 @@
   "scripts": {
     "test:ci": "jest",
     "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
+    "@frontity/connect": "^1.0.3",
     "@types/he": "^1.1.0",
     "@types/react-test-renderer": "^16.8.1",
+    "@testing-library/react": "^9.4.0",
     "frontity": "^1.4.3",
     "jest": "^24.7.1",
     "react-test-renderer": "^16.8.6",
