@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Settings } from "..";
 
 // Settings
@@ -61,7 +62,8 @@ const settings7: Settings = {
       active: true,
       state: {
         namespace3: {
-          someSetting: "some setting of namespace 1"
+          someSetting: "some setting of namespace 1",
+          someArray: ["array 1", "array 2"]
         },
         namespace2: {
           otherSetting: "other setting of namespace 2"

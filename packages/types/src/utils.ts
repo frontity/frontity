@@ -32,17 +32,6 @@ export type ResolveActions<Actions extends Package["state"]> = {
     : ResolveActions<Actions[P]>
 };
 
-// Make properties deeply partial.
-interface DeepPartialArray<T> extends Array<DeepPartial<T>> {}
-type DeepPartialObject<T> = { [P in keyof T]?: DeepPartial<T[P]> };
-export type DeepPartial<T> = T extends Array<infer U>
-  ? DeepPartialArray<U>
-  : T extends object
-  ? DeepPartialObject<T>
-  : T;
-// Omit any property found in the passed object.
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
 // Util to filter the injected props from connect.
 export type FilterInjectedProps<T extends Package> = Omit<
   T,
