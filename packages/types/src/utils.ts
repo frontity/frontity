@@ -33,14 +33,13 @@ export type ResolveActions<Actions extends Package["state"]> = {
 };
 
 // Make properties deeply partial.
-export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends Array<infer U>
-    ? Array<DeepPartial<U>>
-    : T[P] extends ReadonlyArray<infer U>
-    ? ReadonlyArray<DeepPartial<U>>
-    : DeepPartial<T[P]>
-};
-
+interface DeepPartialArray<T> extends Array<DeepPartial<T>> {}
+type DeepPartialObject<T> = { [P in keyof T]?: DeepPartial<T[P]> };
+export type DeepPartial<T> = T extends Array<infer U>
+  ? DeepPartialArray<U>
+  : T extends object
+  ? DeepPartialObject<T>
+  : T;
 // Omit any property found in the passed object.
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
