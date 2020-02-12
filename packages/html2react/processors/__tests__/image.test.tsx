@@ -8,13 +8,13 @@ import Html2ReactPackage from "../../src";
 const store = createStore(Html2ReactPackage);
 store.libraries.html2react.processors.push(image);
 
-jest.mock("@frontity/components/image", () => "mocked-image");
+jest.mock("@frontity/components/image", () => "mocked-img");
 
 describe("Image Processor", () => {
-  it.skip("should process iframes from src", () => {
+  it("should process images from src", () => {
     const { container } = render(
       <Html2React
-        html="<iframe src='https://frontity.org' title='Frontity' width='500' />"
+        html="<img src='https://frontity.org/logo.png' alt='Frontity' width='500' />"
         {...store}
       />
     );
@@ -22,10 +22,10 @@ describe("Image Processor", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it.skip("should process iframes from data-src", () => {
+  it("should process images from data-src", () => {
     const { container } = render(
       <Html2React
-        html="<iframe data-src='https://frontity.org' title='Frontity' width='500' />"
+        html="<img data-src='https://frontity.org/logo.png' alt='Frontity' width='500' />"
         {...store}
       />
     );
