@@ -12,7 +12,7 @@ export default ({
   state: Package["state"];
 }) => {
   state.frontity.platform = "client";
-  const merged = mergePackages({ packages, state });
+  const merged = mergePackages({ packages, state, overwriteArrays: true });
   const store = createStore(merged);
   return store;
 };

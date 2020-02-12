@@ -1,4 +1,5 @@
 import { Handler } from "../../../types";
+import { ServerError } from "@frontity/source";
 
 const authorHandler: Handler = async ({ route, params, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
@@ -12,8 +13,9 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
     const response = await api.get({ endpoint: "users", params: { slug } });
     const [entity] = await populate({ response, state });
     if (!entity)
-      throw new Error(
-        `entity from endpoint "users" with slug "${slug}" not found`
+      throw new ServerError(
+        `entity from endpoint "users" with slug "${slug}" not found`,
+        404
       );
     id = entity.id;
   }
@@ -33,7 +35,7 @@ const authorHandler: Handler = async ({ route, params, state, libraries }) => {
   // 3. Populate response.
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
-    throw new Error(`author "${slug}" doesn't have page ${page}`);
+    throw new ServerError(`author "${slug}" doesn't have page ${page}`, 404);
 
   // 4. Get posts and pages count.
   const total = getTotal(response, items.length);

@@ -1,6 +1,12 @@
 import { Handler } from "../../../types";
+import { ServerError } from "@frontity/source";
 
-const dateHandler: Handler = async ({ route, params, state, libraries }) => {
+export const dateHandler: Handler = async ({
+  route,
+  params,
+  state,
+  libraries
+}) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
 
@@ -34,7 +40,7 @@ const dateHandler: Handler = async ({ route, params, state, libraries }) => {
   // 3. populate response
   const items = await populate({ response, state });
   if (items.length === 0)
-    throw new Error(`date "${path}" doesn't have page ${page}`);
+    throw new ServerError(`date "${path}" doesn't have page ${page}`, 404);
 
   // 4. get posts and pages count
   const total = getTotal(response);

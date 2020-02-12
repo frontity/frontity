@@ -1,8 +1,8 @@
 import { schema } from "normalizr";
 import { normalize } from "../route-utils";
 
-export const author = new schema.Entity(
-  "author",
+export const authorEntity = new schema.Entity(
+  "authorEntity",
   {},
   {
     processStrategy(entity) {
@@ -12,4 +12,4 @@ export const author = new schema.Entity(
     }
   }
 );
-export const authors = new schema.Array(author);
+export const authorEntities = new schema.Array(authorEntity);

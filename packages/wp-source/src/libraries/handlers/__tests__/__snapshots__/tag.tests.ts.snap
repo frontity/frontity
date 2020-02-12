@@ -2,7 +2,7 @@
 
 exports[`tag doesn't exist in source.tag 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -205,12 +205,14 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`tag doesn't return 404 if the first page is empty (no headers) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
   "category": Object {},
@@ -251,12 +253,14 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`tag doesn't return 404 if the first page is empty 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
   "category": Object {},
@@ -297,6 +301,8 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -330,7 +336,7 @@ Array [
 
 exports[`tag fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -540,12 +546,14 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`tag is requested with any query param 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -754,21 +762,26 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`tag returns 404 if tag doesn't exist in WP 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
   "category": Object {},
   "categoryBase": "",
   "data": Object {
     "/tag/non-existent/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "entity from endpoint \\"tags\\" with slug \\"non-existent\\" not found",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -784,12 +797,14 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`tag returns 404 if the page fetched is out of range 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
   "category": Object {},
@@ -802,9 +817,12 @@ Object {
       "taxonomy": "tag",
     },
     "/tag/tag-1/page/3/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "tag with slug \\"tag-1\\" doesn't have page 3",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -829,12 +847,14 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`tag was populated but not accessed 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "4": Object {
       "author": 1,
@@ -994,5 +1014,7 @@ Object {
   },
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;

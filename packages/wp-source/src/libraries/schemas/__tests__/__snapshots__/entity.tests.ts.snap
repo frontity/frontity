@@ -292,6 +292,39 @@ Object {
 }
 `;
 
+exports[`Convert a post type using entity 1`] = `
+Object {
+  "_links": Object {
+    "collection": Array [
+      Object {
+        "href": "http://test.frontity.io/wp-json/wp/v2/types",
+      },
+    ],
+    "curies": Array [
+      Object {
+        "href": "https://api.w.org/{rel}",
+        "name": "wp",
+        "templated": true,
+      },
+    ],
+    "wp:items": Array [
+      Object {
+        "href": "http://test.frontity.io/wp-json/wp/v2/posts",
+      },
+    ],
+  },
+  "description": "",
+  "hierarchical": false,
+  "name": "Posts",
+  "rest_base": "posts",
+  "slug": "post",
+  "taxonomies": Array [
+    "category",
+    "tag",
+  ],
+}
+`;
+
 exports[`Convert a tag using entity 1`] = `
 Object {
   "_links": Object {

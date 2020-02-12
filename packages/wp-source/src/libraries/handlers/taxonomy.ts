@@ -1,5 +1,6 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
+import { ServerError } from "@frontity/source";
 
 const taxonomyHandler = ({
   taxonomy,
@@ -23,8 +24,9 @@ const taxonomyHandler = ({
     const response = await api.get({ endpoint, params: { slug } });
     const [entity] = await populate({ response, state });
     if (!entity)
-      throw new Error(
-        `entity from endpoint "${endpoint}" with slug "${slug}" not found`
+      throw new ServerError(
+        `entity from endpoint "${endpoint}" with slug "${slug}" not found`,
+        404
       );
     id = entity.id;
   }
@@ -45,8 +47,9 @@ const taxonomyHandler = ({
   // 3. populate response
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
-    throw new Error(
-      `${taxonomy} with slug "${params.slug}" doesn't have page ${page}`
+    throw new ServerError(
+      `${taxonomy} with slug "${params.slug}" doesn't have page ${page}`,
+      404
     );
 
   // 4. get posts and pages count

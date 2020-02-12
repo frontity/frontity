@@ -1,4 +1,5 @@
-import Action from "../action";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Action, AsyncAction } from "../action";
 import Package from "../package";
 import Derived from "../derived";
 
@@ -23,11 +24,11 @@ interface Package1 extends Package {
   actions: {
     namespace1: {
       action1: Action<Package1>;
-      action2: Action<Package1>;
+      action2: AsyncAction<Package1>;
     };
     namespace2: {
       action3: Action<Package1, string>;
-      action4: Action<Package1, number>;
+      action4: AsyncAction<Package1, number>;
     };
   };
   libraries: {
@@ -97,6 +98,7 @@ const package1: Package1 = {
         await Promise.resolve();
         const num1: number = state.namespace1.prop4("123");
         actions.namespace2.action3("123");
+        await actions.namespace1.action2();
         await actions.namespace2.action4(123);
       }
     },
