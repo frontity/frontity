@@ -77,6 +77,8 @@ export type AsyncAction<Pkg extends Package, Input = null> = [Input] extends [
 
 type Context = Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>;
 
-export type ServerAction<Pkg, Input = Context> =
-  | AsyncAction<Pkg, Input>
-  | Action<Pkg, Input>;
+export type ServerAction<Pkg> =
+  | Action<Pkg>
+  | Action<Pkg, Context>
+  | AsyncAction<Pkg>
+  | AsyncAction<Pkg, Context>;
