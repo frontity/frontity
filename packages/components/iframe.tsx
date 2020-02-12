@@ -94,12 +94,9 @@ const Iframe: Component = ({
   if (loading === "eager") return <iframe {...eagerAttributes} />;
 
   if (typeof window !== "undefined") {
-    const isRationalHeight = height > 0;
-
     if (
       typeof IntersectionObserver !== "undefined" &&
-      "loading" in HTMLIFrameElement.prototype &&
-      isRationalHeight
+      !("loading" in HTMLImageElement.prototype && height > 0)
     ) {
       const [ref, inView] = useInView({
         rootMargin,

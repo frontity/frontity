@@ -5,13 +5,16 @@
 
 import React from "react";
 import TestRenderer from "react-test-renderer";
-// import * as reactIntesectionObserver from "react-intersection-observer";
+import { useInView } from "react-intersection-observer";
 import Iframe from "../iframe";
 
-jest.mock("react-intersection-observer");
+jest.mock("react-intersection-observer", () => ({
+  __esModule: true,
+  useInView: jest.fn()
+}));
 
-describe("Image", () => {
-  const mockedUseInView = useInView as jest.Mocked<typeof useInView>;
+describe("Iframe", () => {
+  const mockedUseInView = useInView as jest.MockedFunction<typeof useInView>;
 
   beforeEach(() => {
     delete (HTMLIFrameElement as any).prototype.loading;
@@ -22,7 +25,7 @@ describe("Image", () => {
   });
 
   afterEach(() => {
-    mockedUseInView.default.mockReset();
+    mockedUseInView.mockReset();
   });
 
   test('works when loading === "eager"', () => {
@@ -72,15 +75,16 @@ describe("Image", () => {
     expect(result.toJSON()).toMatchSnapshot();
   });
 
-  test("works with `IntersectionObserver if `height` prop is not specified", () => {
+  test("works with `IntersectionObserver` if `height` prop is not specified", () => {
     (HTMLImageElement as any).prototype.loading = true;
-    mockedUseInView.name.mockReturnValue([false, undefined]);
+    mockedUseInView.mockReturnValue([() => {}, false, undefined]);
 
     const props = {
       title: "Iframe title",
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
-      loading: "lazy" as "lazy"
+      loading: "lazy" as "lazy",
+      state: { frontity: { rendering: "csr" } }
     };
 
     const result = TestRenderer.create(<Iframe {...props} />);
@@ -88,13 +92,14 @@ describe("Image", () => {
   });
 
   test("works with `IntersectionObserver` and is out of view", () => {
-    mockedUseInView.default.mockReturnValue([false, undefined]);
+    mockedUseInView.mockReturnValue([() => {}, false, undefined]);
 
     const props = {
       title: "Iframe title",
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
-      height: 300
+      height: 300,
+      state: { frontity: { rendering: "csr" } }
     };
 
     const result = TestRenderer.create(<Iframe {...props} />);
