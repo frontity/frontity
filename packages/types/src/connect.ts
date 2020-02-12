@@ -1,11 +1,6 @@
 import { ComponentProps, FunctionComponent, ComponentClass } from "react";
 import Package from "./package";
-import {
-  ResolveState,
-  Omit,
-  ResolveActions,
-  FilterInjectedProps
-} from "./utils";
+import { ResolveState, ResolveActions, FilterInjectedProps } from "./utils";
 
 export type Connect<Pkg extends Package, Props extends object = {}> = Omit<
   Pkg,
