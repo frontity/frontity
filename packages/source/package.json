@@ -26,8 +26,5 @@
   },
   "dependencies": {
     "frontity": "^1.4.3"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.11"
   }
 }
