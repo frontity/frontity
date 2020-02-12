@@ -75,7 +75,9 @@ export type AsyncAction<Pkg extends Package, Input = null> = [Input] extends [
       libraries: Pkg["libraries"];
     }) => (args: Input) => Promise<void>;
 
-type Context = Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>;
+type Context = {
+  ctx: Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>;
+};
 
 export type ServerAction<Pkg> =
   | Action<Pkg>
