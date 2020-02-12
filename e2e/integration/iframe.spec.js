@@ -1,37 +1,35 @@
 import expect from "expect";
 
-if (!Cypress.env("HEADLESS")) {
-  describe("Native iframe lazy-load", () => {
-    beforeEach(() => {
-      cy.viewport(360, 640);
-      cy.visit("http://localhost:3001?name=iframe");
-    });
-
-    it("native lazy-load should exist", () => {
-      return cy
-        .window()
-        .its("HTMLIframeElement")
-        .then(iframeElement => {
-          expect("loading" in iframeElement.prototype).toBe(true);
-        });
-    });
-
-    it("iframe with loading=lazy attribute and value should exist", () => {
-      cy.scrollTo("topLeft");
-      cy.get("iframe[id='lazy-loaded']").should("have.attr", "loading", "lazy");
-    });
-
-    it("should render an iframe with loading=lazy", () => {
-      cy.scrollTo("topLeft");
-      cy.get("iframe[id='lazy-loaded']")
-        .should("have.attr", "loading", "lazy")
-        .should("not.be.visible");
-      cy.get("iframe[id='lazy-loaded']")
-        .scrollIntoView({ duration: 300 })
-        .should("be.visible");
-    });
+describe("Native iframe lazy-load", () => {
+  beforeEach(() => {
+    cy.viewport(360, 640);
+    cy.visit("http://localhost:3001?name=iframe");
   });
-}
+
+  it("native lazy-load should exist", () => {
+    return cy
+      .window()
+      .its("HTMLIframeElement")
+      .then(iframeElement => {
+        expect("loading" in iframeElement.prototype).toBe(true);
+      });
+  });
+
+  it("iframe with loading=lazy attribute and value should exist", () => {
+    cy.scrollTo("topLeft");
+    cy.get("iframe[id='lazy-loaded']").should("have.attr", "loading", "lazy");
+  });
+
+  it("should render an iframe with loading=lazy", () => {
+    cy.scrollTo("topLeft");
+    cy.get("iframe[id='lazy-loaded']")
+      .should("have.attr", "loading", "lazy")
+      .should("not.be.visible");
+    cy.get("iframe[id='lazy-loaded']")
+      .scrollIntoView({ duration: 300 })
+      .should("be.visible");
+  });
+});
 
 describe("Iframe lazy-load with Intersection Observer", () => {
   beforeEach(() => {
