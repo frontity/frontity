@@ -1,3 +1,4 @@
+import Koa from "koa";
 import { Package, Action, AsyncAction } from "frontity/types";
 import Source from "@frontity/source/types";
 
@@ -13,7 +14,10 @@ interface WpSourceErrors extends Package {
     source?: Source["actions"]["source"];
     wpSourceErrors: {
       init: Action<WpSourceErrors>;
-      beforeSSR: AsyncAction<WpSourceErrors>;
+      beforeSSR: AsyncAction<
+        WpSourceErrors,
+        Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>
+      >;
     };
   };
   roots: {

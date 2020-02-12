@@ -35,11 +35,7 @@ const settings: Settings = [
   },
   {
     name: "wp-source-errors",
-    packages: [
-      "e2e-wp-source-errors",
-      "@frontity/wp-source",
-      "@frontity/tiny-router"
-    ]
+    packages: ["e2e-wp-source-errors", "@frontity/wp-source"]
   },
   {
     name: "script",

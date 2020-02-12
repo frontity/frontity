@@ -28,8 +28,10 @@ const wpSourceErrors: WpSourceErrors = {
           state.source.api = "https://test.frontity.io/wp-json";
         }
       },
-      beforeSSR: async ({ state, actions }) => {
+      beforeSSR: ({ state, actions }) => async ctx => {
         await actions.source.fetch(state.frontity.initialLink);
+        const data = state.source.get(state.frontity.initialLink);
+        if (data.isError) ctx.status = data.errorStatus;
       }
     }
   },
