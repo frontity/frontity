@@ -1,5 +1,5 @@
 import { State } from "frontity/types";
-import { Data, Author } from "@frontity/source";
+import { Data, AuthorEntity } from "@frontity/source/types";
 import humanize from "string-humanize";
 import Yoast from "../../types";
 import { getEntity, appendPage, getPage, hasName } from "./utils";
@@ -102,7 +102,7 @@ export const authorTitle = ({
   // Do nothing if data is not an Author object
   if (!data.isAuthor) return;
 
-  const entity = getEntity({ data, state }) as Author;
+  const entity = getEntity({ data, state }) as AuthorEntity;
   const { name } = entity;
 
   const title = `${name}, Author at ${state.frontity.title}`;

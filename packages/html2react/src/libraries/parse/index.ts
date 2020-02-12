@@ -1,4 +1,4 @@
-import { css } from "frontity";
+import { css, decode } from "frontity";
 import { parse as himalaya } from "himalaya";
 import { Element, Node, Parse, Attributes, AdaptNode } from "../../../types";
 import htmlAttributes from "./attributes/html.json";
@@ -13,7 +13,7 @@ const attributesMap: Attributes = htmlAttributes
   }, {});
 
 // Adapts the Himalaya AST Specification v1 to our format.
-const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
+const adaptNode: AdaptNode = (himalayaNode, parent) => {
   let node: Node;
 
   if (himalayaNode.type === "element") {
@@ -41,7 +41,7 @@ const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
 
     node.children = himalayaNode.children.reduce(
       (tree: Node[], child): Node[] => {
-        const childAdapted = adaptNode(child, decode, node as Element);
+        const childAdapted = adaptNode(child, node as Element);
         if (childAdapted) tree.push(childAdapted);
         return tree;
       },
@@ -76,9 +76,9 @@ const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
   return node;
 };
 
-const parse: Parse = (html, decode) =>
+const parse: Parse = html =>
   himalaya(html).reduce((tree: Node[], element) => {
-    const adapted = adaptNode(element, decode);
+    const adapted = adaptNode(element);
     if (adapted) tree.push(adapted);
     return tree;
   }, []);

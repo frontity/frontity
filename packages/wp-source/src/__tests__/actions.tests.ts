@@ -39,6 +39,7 @@ beforeEach(() => {
 
   // Initialize the store
   store = createStore(clone(wpSource()));
+  store.state.source.api = "https://test.frontity.io/wp-json";
 
   // Add mock handler to the store
   store.libraries.source.handlers.push(handler);
@@ -47,7 +48,7 @@ beforeEach(() => {
 describe("fetch", () => {
   test("should work if data doesn't exist", async () => {
     await store.actions.source.fetch("/some/route/");
-    expect(handler.func).toBeCalledTimes(1);
+    expect(handler.func).toHaveBeenCalledTimes(1);
     expect(store.state.source.data).toMatchSnapshot();
   });
 
@@ -61,13 +62,21 @@ describe("fetch", () => {
     };
 
     await store.actions.source.fetch("/some/route/");
-    expect(handler.func).not.toBeCalled();
+    expect(handler.func).not.toHaveBeenCalled();
     expect(store.state.source.data).toMatchSnapshot();
   });
 
-  test("returns 404 is fetch fails", async () => {
-    handler.func.mockRejectedValue("Some error");
-    await store.actions.source.fetch("/some/route/");
+  test("Throw an error if fetch fails", async () => {
+    handler.func = jest.fn(async params => {
+      throw new Error("Some error");
+    });
+
+    try {
+      await store.actions.source.fetch("/some/route/");
+      throw new Error("This should not be reached");
+    } catch (e) {
+      expect(e.message).toBe("Some error");
+    }
     expect(store.state.source.data).toMatchSnapshot();
   });
 

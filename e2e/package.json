@@ -7,10 +7,11 @@
     "cy:open": "cypress open --env HEADLESS=false",
     "cy:run": "cypress run --env HEADLESS=true",
     "start:dev": "cd project/ && npx frontity dev --port 3001 --dont-open-browser",
+    "start:dev:inspect": "cd project/ && node --inspect ./node_modules/.bin/frontity dev --port 3001",
     "start:prod": "cd project/ && npx frontity build && npx frontity serve --port 3001"
   },
   "devDependencies": {
-    "cypress": "^3.7.0",
+    "cypress": "^4.0.1",
     "cypress-plugin-snapshots": "^1.2.9",
     "start-server-and-test": "^1.10.6"
   }

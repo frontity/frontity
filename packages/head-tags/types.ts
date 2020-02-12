@@ -6,7 +6,7 @@ import Source, {
   PostEntity,
   AuthorEntity,
   PostType
-} from "@frontity/source";
+} from "@frontity/source/types";
 
 /**
  * Create a new type by merging two types.

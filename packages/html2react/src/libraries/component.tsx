@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import React from "react";
 import { connect } from "frontity";
 import { Connect } from "frontity/types";
-import Html2React from "../../types";
-import {
+import Html2ReactType, {
   Component,
   HandleNodes,
   HandleNode,
@@ -10,14 +10,16 @@ import {
 } from "../../types";
 
 const applyProcessors: ApplyProcessors = ({ node, root, processors }) => {
-  for (let processor of processors) {
-    const { test, process } = processor;
+  for (const processor of processors) {
+    const { test: tester, process } = processor;
     let isMatch = false;
 
     // Test processor.
     try {
-      isMatch = test(node);
-    } catch (e) {}
+      isMatch = tester(node);
+    } catch (e) {
+      console.warn(e);
+    }
     if (!isMatch) continue;
 
     // Apply processor.
@@ -61,12 +63,11 @@ const handleNodes: HandleNodes = ({ nodes, payload }) => {
   return null;
 };
 
-const H2R: Component<Connect<Html2React, { html: string }>> = ({
-  html,
-  libraries
-}) => {
-  const { processors, parse, decode } = libraries.html2react;
-  const root = parse(html, decode);
+export const Html2React: Component<
+  Connect<Html2ReactType, { html: string }>
+> = ({ html, libraries }) => {
+  const { processors, parse } = libraries.html2react;
+  const root = parse(html);
 
   libraries.html2react.processors = processors.sort(
     (a, b) => (a.priority || 10) - (b.priority || 10)
@@ -81,4 +82,4 @@ const H2R: Component<Connect<Html2React, { html: string }>> = ({
   }) as React.ReactElement;
 };
 
-export default connect(H2R);
+export default connect(Html2React);

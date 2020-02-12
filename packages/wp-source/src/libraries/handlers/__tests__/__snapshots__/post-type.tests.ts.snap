@@ -2,7 +2,7 @@
 
 exports[`attachment doesn't exist in source.attachment 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -45,7 +45,7 @@ Object {
 
 exports[`attachment exists in source.attachment 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -88,7 +88,7 @@ Object {
 
 exports[`attachment works with query params (doesn't exist in source.attachment) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -137,7 +137,7 @@ Object {
 
 exports[`attachment works with query params (exists in source.attachment) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -186,7 +186,7 @@ Object {
 
 exports[`page doesn't exist in source.page 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -247,7 +247,7 @@ Object {
 
 exports[`page exists in source.page 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -308,7 +308,7 @@ Object {
 
 exports[`page works with query params (doesn't exist in source.page) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -375,7 +375,7 @@ Object {
 
 exports[`page works with query params (exists in source.page) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -442,7 +442,7 @@ Object {
 
 exports[`post doesn't exist in source.post 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -549,7 +549,7 @@ Object {
 
 exports[`post exists in source.post 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -674,7 +674,7 @@ Array [
 
 exports[`post fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "12": Object {
       "author": 1,
@@ -787,7 +787,7 @@ Object {
 
 exports[`post works with query params (doesn't exist in source.post) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -900,7 +900,7 @@ Object {
 
 exports[`post works with query params (exists in source.post) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -1013,7 +1013,7 @@ Object {
 
 exports[`post works with types embedded 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -1138,16 +1138,54 @@ Object {
 
 exports[`postType returns 404 if not found 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
   "category": Object {},
   "categoryBase": "",
   "data": Object {
     "/non-existent/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "post type from endpoints \\"posts,pages,media\\" with slug \\"non-existent\\" not found",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+}
+`;
+
+exports[`postType should contain the correct error code on error 1`] = `
+Object {
+  "api": "https://test.frontity.io/wp-json",
+  "attachment": Object {},
+  "author": Object {},
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/post-1/": Object {
+      "errorStatus": 400,
+      "errorStatusText": "statusText",
+      "is400": true,
+      "isError": true,
+      "isFetching": false,
+      "isReady": true,
     },
   },
   "get": [Function],

@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`fetch Throw an error if fetch fails 1`] = `
+Object {
+  "/some/route/": Object {
+    "isFetching": true,
+    "isReady": false,
+  },
+}
+`;
+
 exports[`fetch does nothing if data exists 1`] = `
 Object {
   "/some/route/": Object {
@@ -8,16 +17,6 @@ Object {
     "isPostType": true,
     "isReady": true,
     "type": "example",
-  },
-}
-`;
-
-exports[`fetch returns 404 is fetch fails 1`] = `
-Object {
-  "/some/route/": Object {
-    "is404": true,
-    "isFetching": false,
-    "isReady": false,
   },
 }
 `;

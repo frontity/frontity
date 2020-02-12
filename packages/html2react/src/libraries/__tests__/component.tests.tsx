@@ -2,7 +2,6 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import Component from "../component";
 import parse from "../parse";
-import decode from "../decode/client";
 import htmlMock from "./mocks/html";
 
 describe("Component", () => {
@@ -27,7 +26,6 @@ describe("Component", () => {
     const libraries = {
       html2react: {
         parse,
-        decode,
         processors
       }
     };

@@ -36,6 +36,14 @@ const settings: Settings = [
   {
     name: "iframe",
     packages: ["e2e-iframe"]
+  },
+  {
+    name: "wp-source-errors",
+    packages: ["e2e-wp-source-errors", "@frontity/wp-source"]
+  },
+  {
+    name: "script",
+    packages: ["e2e-script"]
   }
 ];
 
