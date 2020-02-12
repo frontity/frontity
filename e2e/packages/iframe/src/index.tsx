@@ -1,18 +1,24 @@
 import React from "react";
 import Iframe from "@frontity/components/iframe";
 import Package from "../types";
+import { styled } from "frontity";
 
-const Component: React.FC = () => {
-  return (
+const Component: React.FC = () => (
+  <Container>
     <Iframe
-      id="lazy-loaded"
       src="https://frontity.org"
-      width="200"
-      height="500"
+      width={500}
+      height={500}
+      loading="lazy"
       title="Frontity Website"
     />
-  );
-};
+  </Container>
+);
+
+const Container = styled.div`
+  margin-top: 1200vh;
+  margin-left: 1200vw;
+`;
 
 const IframePackage: Package = {
   name: "iframe",
