@@ -15,8 +15,8 @@
     "url": "https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch",
+    "test:ci": "../../node_modules/.bin/jest",
+    "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
   "bugs": {
@@ -30,11 +30,7 @@
     "@frontity/router": "^1.0.17",
     "@frontity/source": "^1.1.0",
     "@frontity/wp-source": "^1.5.0",
-    "@types/jest": "^24.0.11",
-    "frontity": "^1.4.2",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+    "frontity": "^1.4.2"
   },
   "peerDependencies": {
     "@frontity/wp-source": "^1.5.0"

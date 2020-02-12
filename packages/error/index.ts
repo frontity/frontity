@@ -1,8 +1,7 @@
-const isProduction = process.env.NODE_ENV === "production";
-const suffix = "\n Visit https://community.frontity.org for help! 🙂\n";
+const suffix = "\nVisit https://community.frontity.org for help! 🙂\n";
 
 export const error = (message: string, doThrow = true) => {
-  if (!isProduction) {
+  if (process.env.NODE_ENV !== "production") {
     if (doThrow) throw new Error(message + suffix);
     console.error(message + suffix);
   } else {
@@ -12,7 +11,7 @@ export const error = (message: string, doThrow = true) => {
 };
 
 export const warn = (message: string) => {
-  if (!isProduction) {
+  if (process.env.NODE_ENV !== "production") {
     console.warn(message + suffix);
   }
 };

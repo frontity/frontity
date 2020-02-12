@@ -20,9 +20,9 @@
     "access": "public"
   },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand",
+    "test:ci": "../../node_modules/.bin/jest",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
     "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts",
     "build": "tsc --project ./tsconfig.build.json",
@@ -70,7 +70,6 @@
     "react-helmet-async": "^1.0.2",
     "require-from-string": "^2.0.2",
     "ts-node": "^8.0.3",
-    "typescript": "^3.6.3",
     "url-loader": "2.1.0",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
@@ -100,8 +99,6 @@
     "@types/webpack-bundle-analyzer": "^2.13.1",
     "@types/webpack-dev-middleware": "^2.0.2",
     "@types/webpack-env": "^1.13.9",
-    "@types/webpack-hot-middleware": "^2.16.5",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2"
+    "@types/webpack-hot-middleware": "^2.16.5"
   }
 }
