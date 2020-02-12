@@ -47,9 +47,11 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   state,
   actions
-}) => async (
-  ctx: Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>
-) => {
+}) => async ({
+  ctx
+}: {
+  ctx: Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>;
+}) => {
   if (state.router.autoFetch) {
     if (actions.source && actions.source.fetch) {
       await actions.source.fetch(state.router.link);
