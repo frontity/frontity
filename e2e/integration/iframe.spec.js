@@ -15,14 +15,16 @@ describe("Native iframe lazy-load", () => {
       });
   });
 
-  it("iframe with loading=lazy attribute and value should exist", () => {
+  it("should render an iframe with a loading attribute and 'lazy' as value", () => {
     cy.scrollTo("topLeft");
     cy.get("iframe").should("have.attr", "loading", "lazy");
   });
 
-  it("should render an iframe with loading=lazy", () => {
+  it.skip("should lazy-load iframes", () => {
     cy.scrollTo("topLeft");
-    cy.get("iframe").should("have.attr", "loading", "lazy");
+    cy.get("iframe")
+      .should("have.attr", "loading", "lazy")
+      .should("no.be.visible");
     cy.get("iframe")
       .scrollIntoView({ duration: 300 })
       .should("be.visible");
@@ -34,7 +36,6 @@ describe("Iframe lazy-load with Intersection Observer", () => {
     cy.viewport(360, 640);
     cy.visit("http://localhost:3001?name=iframe", {
       onBeforeLoad(win) {
-        console.log(win);
         Object.defineProperty(win.HTMLIFrameElement.prototype, "loading", {
           configurable: true,
           writable: true
@@ -53,9 +54,11 @@ describe("Iframe lazy-load with Intersection Observer", () => {
       });
   });
 
-  it.skip("iframe with loading=lazy attribute and value should not exist", () => {
-    cy.scrollTo("topLeft");
-    cy.get("iframe").should("not.have.attr", "loading", "lazy");
+  it.skip("loading attribute should not be lazy", () => {
+    cy.scrollTo("bottomLeft");
+    cy.get("iframe")
+      .should("to.be.visible")
+      .should("not.have.attr", "loading", "lazy");
   });
 
   it.skip("should lazy-load iframe", () => {
