@@ -46,4 +46,18 @@ describe("GoogleAnalytics", () => {
 
     expect(head.script.toString()).toMatchSnapshot();
   });
+
+  test("doesn't add anything if there's no tracking ids", () => {
+    const state = getState();
+
+    const helmetContext: HelmetContext = {};
+    TestRenderer.create(
+      <HelmetProvider context={helmetContext}>
+        <GoogleAnalytics state={state} actions={null} />
+      </HelmetProvider>
+    ).toJSON();
+    const head = helmetContext.helmet;
+
+    expect(head.script.toString()).toMatchSnapshot();
+  });
 });
