@@ -9,10 +9,7 @@ describe("analytics.sendPageview", () => {
     const mergedPackages = {
       state: {
         analytics: {
-          namespaces: {
-            pkg1Analytics: "pkg1Analytics",
-            pkg2Analytics: "pkg2Analytics"
-          }
+          namespaces: ["pkg1Analytics", "pkg2Analytics"]
         }
       },
       actions: {
@@ -52,10 +49,7 @@ describe("analytics.sendEvent", () => {
     const mergedPackages = {
       state: {
         analytics: {
-          namespaces: {
-            pkg1Analytics: "pkg1Analytics",
-            pkg2Analytics: "pkg2Analytics"
-          }
+          namespaces: ["pkg1Analytics", "pkg2Analytics"]
         }
       },
       actions: {
