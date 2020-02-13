@@ -16,9 +16,9 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand"
+    "test:ci": "../../node_modules/.bin/jest",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "publishConfig": {
     "access": "public"
@@ -29,7 +29,6 @@
     "@types/react-test-renderer": "^16.8.1",
     "@testing-library/react": "^9.4.0",
     "frontity": "^1.4.3",
-    "jest": "^24.7.1",
     "react-test-renderer": "^16.8.6",
     "ts-jest": "^24.0.2"
   },
