@@ -5,7 +5,7 @@ import { Connect } from "frontity/types";
 import GoogleAnalytics from "../../types";
 import { getTrackerName } from "..";
 
-const Root: React.FC<Connect<GoogleAnalytics>> = ({ state }) => {
+export const Root: React.FC<Connect<GoogleAnalytics>> = ({ state }) => {
   // Get Tracking ids from state.
   const { trackingIds, trackingId } = state.googleAnalytics;
   const ids = trackingIds || (trackingId && [trackingId]) || [];
