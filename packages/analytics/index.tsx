@@ -57,7 +57,7 @@ export const Root = connect<React.FC<Connect<Analytics>>>(
  * and run `sendPageview` for each one.
  */
 export const sendPageview: SendPageview = ({ state, actions }) => pageview => {
-  Object.keys(state.analytics.namespaces)
+  state.analytics.namespaces
     .map(ns => actions[ns])
     .forEach(({ sendPageview }) => sendPageview(pageview));
 };
@@ -67,7 +67,7 @@ export const sendPageview: SendPageview = ({ state, actions }) => pageview => {
  * and run `sendEvent` for each one.
  */
 export const sendEvent: SendEvent = ({ state, actions }) => event => {
-  Object.keys(state.analytics.namespaces)
+  state.analytics.namespaces
     .map(ns => actions[ns])
     .forEach(({ sendEvent }) => sendEvent(event));
 };
