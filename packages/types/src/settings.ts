@@ -1,5 +1,5 @@
 import { Package } from ".";
-import { DeepPartial } from "./utils";
+import { DeepPartial } from "ts-essentials";
 
 // Gets a Package and returns only what's needed for the frontity.settings.js file.
 type PackageForSettings<Pkg extends Package> = {

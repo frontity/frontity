@@ -8,3 +8,5 @@ dist
 build
 analyze
 .env
+.vscode
+**/package-lock.json

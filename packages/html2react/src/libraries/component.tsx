@@ -18,7 +18,7 @@ const applyProcessors: ApplyProcessors = ({ node, root, processors }) => {
     try {
       isMatch = tester(node);
     } catch (e) {
-      // Do nothing.
+      console.warn(e);
     }
     if (!isMatch) continue;
 

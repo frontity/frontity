@@ -13,8 +13,8 @@
     "url": "https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch",
+    "test:ci": "../../node_modules/.bin/jest",
+    "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
   "bugs": {
@@ -24,10 +24,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "frontity": "^1.4.3",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+    "frontity": "^1.4.3"
   },
   "dependencies": {
     "@frontity/analytics": "^1.0.0-beta.0"

@@ -3,9 +3,9 @@ import { Global, css, connect, styled, Head } from "frontity";
 import Header from "./header";
 import List from "./list";
 import Post from "./post";
-import Page404 from "./page404.js";
 import Loading from "./loading";
 import Title from "./title";
+import PageError from "./page-error";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -39,7 +39,7 @@ const Theme = ({ state }) => {
         {(data.isFetching && <Loading />) ||
           (data.isArchive && <List />) ||
           (data.isPostType && <Post />) ||
-          (data.is404 && <Page404 />)}
+          (data.isError && <PageError />)}
       </Main>
     </>
   );

@@ -1,3 +1,4 @@
+import { URL, error } from "frontity";
 import WpSource from "../types";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
@@ -86,6 +87,12 @@ const actions: WpSource["actions"]["source"] = {
 
   init: ({ state, libraries }) => {
     const { api, isWpCom } = state.source;
+
+    try {
+      new URL(api);
+    } catch (e) {
+      error("Add the URL of your WordPress REST API in state.source.api.");
+    }
 
     libraries.source.api.init({ api, isWpCom });
 

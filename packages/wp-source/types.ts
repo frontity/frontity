@@ -1,5 +1,5 @@
-import { Action, State, Derived } from "frontity/types";
-import Source, { Data, EntityData } from "@frontity/source/types";
+import { AsyncAction, Action, State, Derived } from "frontity/types";
+import Source, { EntityData } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
 export type Pattern<F extends Function = (params: any) => any> = {
@@ -22,8 +22,7 @@ export type Redirection = (params?: Record<string, string>) => string;
 interface WpSource extends Source {
   name: "@frontity/wp-source";
   state: {
-    source: Source["state"]["source"] & {
-      get: Derived<WpSource, (link: string) => Data>;
+    source: Source<WpSource>["state"]["source"] & {
       api: string;
       isWpCom: Derived<WpSource, boolean>;
       subdirectory: string;
@@ -48,7 +47,7 @@ interface WpSource extends Source {
   };
   actions: {
     source: {
-      fetch: Action<
+      fetch: AsyncAction<
         WpSource,
         | string
         | {
@@ -73,8 +72,8 @@ interface WpSource extends Source {
       parse: Source["libraries"]["source"]["parse"];
       stringify: Source["libraries"]["source"]["stringify"];
       normalize: Source["libraries"]["source"]["normalize"];
-      getTotal: (Response) => number;
-      getTotalPages: (Response) => number;
+      getTotal: (res: Response) => number;
+      getTotalPages: (res: Response) => number;
     };
   };
 }
