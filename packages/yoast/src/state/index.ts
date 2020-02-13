@@ -34,7 +34,7 @@ const state: Yoast["state"]["yoast"] = {
     if (data.isPostTypeArchive) return postArchiveTitle({ data, state });
 
     // Not found pages
-    if (data.is404) return notFoundTitle({ state });
+    if (data.isError && data.is404) return notFoundTitle({ state });
 
     // Default title
     return state.frontity.title;
