@@ -1,5 +1,5 @@
 import { createStore } from "frontity";
-import { sendPageview, sendEvent } from "..";
+import analytics from "../src";
 
 describe("analytics.sendPageview", () => {
   test("runs all 'sendPageview' from other analytics packages", () => {
@@ -9,16 +9,11 @@ describe("analytics.sendPageview", () => {
     const mergedPackages = {
       state: {
         analytics: {
-          namespaces: {
-            pkg1Analytics: "pkg1Analytics",
-            pkg2Analytics: "pkg2Analytics"
-          }
+          namespaces: ["pkg1Analytics", "pkg2Analytics"]
         }
       },
       actions: {
-        analytics: {
-          sendPageview
-        },
+        ...analytics.actions,
         pkg1Analytics: {
           sendPageview: () => pkg1SendPageview
         },
@@ -52,16 +47,11 @@ describe("analytics.sendEvent", () => {
     const mergedPackages = {
       state: {
         analytics: {
-          namespaces: {
-            pkg1Analytics: "pkg1Analytics",
-            pkg2Analytics: "pkg2Analytics"
-          }
+          namespaces: ["pkg1Analytics", "pkg2Analytics"]
         }
       },
       actions: {
-        analytics: {
-          sendEvent
-        },
+        ...analytics.actions,
         pkg1Analytics: {
           sendEvent: () => pkg1Event
         },

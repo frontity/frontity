@@ -72,13 +72,6 @@ export interface Package {
       [library: string]: any;
     };
   };
-  //
-  // Filters are not supported yet.
-  // filters: {
-  //   [namespace: string]: {
-  //     [filter: string]: any;
-  //   };
-  // };
 }
 
 export default Package;

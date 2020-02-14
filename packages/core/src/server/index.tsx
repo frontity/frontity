@@ -79,7 +79,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     // Run beforeSSR actions.
     await Promise.all(
       Object.values(store.actions).map(({ beforeSSR }) => {
-        if (beforeSSR) return beforeSSR();
+        if (beforeSSR) return beforeSSR({ ctx });
       })
     );
 
