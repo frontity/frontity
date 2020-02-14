@@ -96,7 +96,7 @@ const Iframe: Component = ({
   if (typeof window !== "undefined") {
     if (
       typeof IntersectionObserver !== "undefined" &&
-      !("loading" in HTMLImageElement.prototype && height > 0)
+      !("loading" in HTMLIFrameElement.prototype && height > 0)
     ) {
       const [ref, inView] = useInView({
         rootMargin,
