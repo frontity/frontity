@@ -75,7 +75,7 @@ describe("fetch", () => {
       isReady: true
     };
 
-    await store.actions.source.fetch({ link: "/some/route/", force: true });
+    await store.actions.source.fetch("/some/route/", { force: true });
     expect(handler.func).toHaveBeenCalled();
     expect(store.state.source.data).toMatchSnapshot();
   });

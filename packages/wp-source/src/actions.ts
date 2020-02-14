@@ -24,7 +24,10 @@ const actions: WpSource["actions"]["source"] = {
     // Get current data object
     const data = source.data[route];
 
-    if (!data || options.force) {
+    // Get options
+    const force = options ? options.force : false;
+
+    if (!data || force) {
       source.data[route] = {
         isReady: false,
         isFetching: false
@@ -51,7 +54,7 @@ const actions: WpSource["actions"]["source"] = {
         params: handler.params,
         state,
         libraries,
-        force: options.force
+        force
       });
       // everything OK
       source.data[route] = {
