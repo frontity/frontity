@@ -1,5 +1,6 @@
 import Package from "./package";
 import { ResolveState, ResolveActions } from "./utils";
+import Koa from "koa";
 
 /**
  * Tricky utility for defining list of arguments.
@@ -61,6 +62,39 @@ export type Action<
       libraries: Pkg["libraries"];
     }) => (...args: Arguments<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>) => void;
 
+/**
+ * Type for asynchronous actions.
+ * The `A1`..`A10` parameters correspond to the arguments passed
+ * to the action.abs.
+ *
+ * @example
+ * ```
+ * import { AsyncAction } from '@frontity/types';
+ * interface Input = {
+ *   input: string;
+ * }
+ *
+ * const actions: { myCustomAction: AsyncAction<MyPackage, Input> } = {
+ *   myCustomAction: ({ state, libraries }) => async ({ input }) => {
+ *     const result = await somePromise();
+ *     console.log(input);
+ *    }
+ * }
+ * ```
+ *
+ * Or simply:
+ * @example
+ * ```
+ * import { AsyncAction } from '@frontity/types';
+ *
+ * const actions: { myCustomAction: AsyncAction<MyPackage>} = {
+ *   myCustomAction: async ({ state, libraries }) => {
+ *     const result = await somePromise();
+ *    }
+ * }
+ * ```
+ *
+ */
 export type AsyncAction<
   Pkg extends Package,
   A1 = null,
@@ -94,3 +128,10 @@ export type AsyncAction<
     }) => (
       ...args: Arguments<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>
     ) => Promise<void>;
+
+export type Context = Koa.ParameterizedContext<
+  Koa.DefaultState,
+  Koa.DefaultContext
+>;
+
+export type ServerAction<Pkg> = AsyncAction<Pkg, { ctx: Context }>;
