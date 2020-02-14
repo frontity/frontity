@@ -1,5 +1,4 @@
 import TinyRouter from "../types";
-import Koa from "koa";
 
 let isPopState = false;
 
