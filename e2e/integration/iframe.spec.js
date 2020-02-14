@@ -2,7 +2,7 @@ import expect from "expect";
 
 describe("Native iframe lazy-load", () => {
   beforeEach(() => {
-    cy.viewport(1000, 1000);
+    cy.viewport(360, 640);
     cy.visit("http://localhost:3001?name=iframe");
   });
 
@@ -22,9 +22,7 @@ describe("Native iframe lazy-load", () => {
 
   it.skip("should lazy-load iframes", () => {
     cy.scrollTo("topLeft");
-    cy.get("iframe")
-      .should("have.attr", "loading", "lazy")
-      .should("no.be.visible");
+    cy.get("iframe").should("have.attr", "loading", "lazy");
     cy.get("iframe")
       .scrollIntoView({ duration: 300 })
       .should("be.visible");
@@ -54,16 +52,18 @@ describe("Iframe lazy-load with Intersection Observer", () => {
       });
   });
 
-  it.skip("loading attribute should not be lazy", () => {
-    cy.scrollTo("bottomLeft");
+  it("loading attribute should not be lazy", () => {
+    cy.scrollTo("topLeft");
     cy.get("iframe")
-      .should("to.be.visible")
-      .should("not.have.attr", "loading", "lazy");
+      .should("have.attr", "loading", "lazy")
+      .should("not.be.visible");
   });
 
-  it.skip("should lazy-load iframe", () => {
+  it("should lazy-load iframe", () => {
     cy.scrollTo("topLeft");
-    cy.get("iframe").should("not.be.visible");
+    cy.get("iframe")
+      .should("have.attr", "loading", "lazy")
+      .should("not.be.visible");
     cy.get("iframe")
       .scrollIntoView({ duration: 300 })
       .should("be.visible");
