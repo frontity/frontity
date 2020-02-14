@@ -1,4 +1,5 @@
 import TinyRouter from "../types";
+import { warn } from "frontity";
 
 let isPopState = false;
 
@@ -51,7 +52,7 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     if (actions.source && actions.source.fetch) {
       await actions.source.fetch(state.router.link);
     } else {
-      console.warn(
+      warn(
         "You are trying to use autoFetch but no source package is installed."
       );
     }
