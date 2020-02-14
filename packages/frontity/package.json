@@ -27,8 +27,8 @@
     "start": "node dist/src/cli/index.js",
     "dev": "ts-node src/cli/index.ts",
     "ts": "ts-node",
-    "test": "jest --watch",
-    "test:ci": "jest --colors",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:ci": "../../node_modules/.bin/jest --colors",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
     "prepublish": "npm run build"
@@ -57,15 +57,13 @@
     "simple-entity-decode": "^0.0.3",
     "tar": "^4.4.8",
     "ts-node": "^8.0.3",
-    "typed-emitter": "^0.2.0",
-    "typescript": "^3.6.3"
+    "typed-emitter": "^0.2.0"
   },
   "devDependencies": {
     "@frontity/core": "^1.4.1",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
-    "@types/jest": "^24.0.11",
     "@types/node": "^11.13.2",
     "@types/node-fetch": "^2.3.3",
     "@types/phin": "^3.3.0",
@@ -73,8 +71,6 @@
     "@types/shelljs": "^0.8.4",
     "@types/stack-trace": "0.0.29",
     "@types/tar": "^4.0.0",
-    "jest": "^24.7.1",
-    "lodash.omit": "4.5.0",
-    "ts-jest": "^24.0.2"
+    "lodash.omit": "4.5.0"
   }
 }
