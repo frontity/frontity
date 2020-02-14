@@ -12,14 +12,10 @@ import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries }) => async params => {
+  fetch: ({ state, libraries }) => async (link, options?) => {
     const { source } = state;
 
     const { handlers, redirections } = libraries.source;
-
-    // Get params
-    const link = typeof params === "string" ? params : params.link;
-    const force = typeof params === "string" ? false : params.force;
 
     // Get route and route params
     const route = normalize(link);
@@ -28,7 +24,7 @@ const actions: WpSource["actions"]["source"] = {
     // Get current data object
     const data = source.data[route];
 
-    if (!data || force) {
+    if (!data || options.force) {
       source.data[route] = {
         isReady: false,
         isFetching: false
@@ -55,7 +51,7 @@ const actions: WpSource["actions"]["source"] = {
         params: handler.params,
         state,
         libraries,
-        force
+        force: options.force
       });
       // everything OK
       source.data[route] = {

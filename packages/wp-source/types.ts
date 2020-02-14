@@ -47,14 +47,9 @@ interface WpSource extends Source {
   };
   actions: {
     source: {
-      fetch: AsyncAction<
-        WpSource,
-        | string
-        | {
-            link: string;
-            force: boolean;
-          }
-      >;
+      fetch:
+        | AsyncAction<WpSource, string>
+        | AsyncAction<WpSource, string, { force?: boolean }>;
       init: Action<WpSource>;
     };
   };
