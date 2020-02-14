@@ -1,4 +1,5 @@
-import { createStore, observe } from "frontity";
+import * as frontity from "frontity";
+import { Context } from "frontity/types";
 import tinyRouter from "..";
 import TinyRouter from "../../types";
 
@@ -7,8 +8,13 @@ let normalize: jest.Mock;
 let fetch: jest.Mock;
 let get: jest.Mock;
 
+const createStore = frontity.createStore;
+const observe = frontity.observe;
+
 beforeEach(() => {
   normalize = jest.fn();
+  fetch = jest.fn();
+  get = jest.fn();
 
   config = {
     name: "@frontity/tiny-router",
@@ -19,7 +25,7 @@ beforeEach(() => {
       },
       router: { ...tinyRouter.state.router },
       source: {
-        get
+        get: () => get
       }
     },
     actions: {
@@ -27,7 +33,7 @@ beforeEach(() => {
         ...tinyRouter.actions.router
       },
       source: {
-        fetch
+        fetch: () => fetch
       }
     },
     libraries: {
@@ -105,6 +111,46 @@ describe("actions", () => {
 
       expect(currentLink).toBe("/tag/japan/page/3/");
       expect(store.state.router.link).toBe("/tag/japan/page/3/");
+    });
+  });
+
+  describe("beforeSSR", () => {
+    test("should warn if autoFetch is enabled but there is no source pkg", () => {
+      const ctx = {} as Context;
+      get.mockReturnValue({});
+      Object.defineProperty(frontity, "warn", {
+        value: jest.fn()
+      });
+      const store = createStore(config);
+      store.actions.source = undefined;
+      store.actions.router.beforeSSR({ ctx });
+
+      expect(frontity.warn).toHaveBeenCalledTimes(1);
+      expect(frontity.warn).toHaveBeenCalledWith(
+        "You are trying to use autoFetch but no source package is installed."
+      );
+    });
+
+    test("should fetch is autoFetch is enabled", () => {
+      const ctx = {} as Context;
+      get.mockReturnValue({});
+      const store = createStore(config);
+      store.libraries.source = undefined;
+      store.actions.router.init();
+      store.actions.router.beforeSSR({ ctx });
+
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledWith("/initial/link/");
+    });
+
+    test("should change the context status if there is an error", async () => {
+      const ctx = {} as Context;
+      get.mockReturnValue({ isError: true, errorStatus: 123 });
+
+      const store = createStore(config);
+      await store.actions.router.beforeSSR({ ctx });
+
+      expect(ctx.status).toBe(123);
     });
   });
 });
