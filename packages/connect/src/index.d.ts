@@ -27,11 +27,11 @@ type ResolveState<State> = {
     : ResolveState<State[P]>
 };
 
-type ResolveActions<Actions> = {
+type ResolveActions<Actions extends Record<string, any>> = {
   [P in keyof Actions]: Actions[P] extends (
-    ...a: any
-  ) => (arg: infer Arg) => void
-    ? (arg: Arg) => void
+    ...store: any
+  ) => (...actionArgs: any) => void
+    ? (...actionArgs: Parameters<ReturnType<Actions[P]>>) => void
     : Actions[P] extends (state: object) => any
     ? () => void
     : ResolveActions<Actions[P]>
