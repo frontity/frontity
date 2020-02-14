@@ -1,8 +1,4 @@
-import {
-  sendPageview,
-  sendEvent,
-  Root as AnalyticsRoot
-} from "@frontity/analytics";
+import analytics from "@frontity/analytics";
 import GoogleAnalytics from "../types";
 import Root from "./components";
 
@@ -11,14 +7,11 @@ export const getTrackerName = (id: string) =>
 
 const googleAnalytics: GoogleAnalytics = {
   roots: {
-    analytics: AnalyticsRoot,
+    ...analytics.roots,
     googleAnalytics: Root
   },
   actions: {
-    analytics: {
-      sendPageview,
-      sendEvent
-    },
+    ...analytics.actions,
     googleAnalytics: {
       sendPageview: ({ state }) => pageview => {
         // Get Tracking ids from state.
@@ -53,7 +46,8 @@ const googleAnalytics: GoogleAnalytics = {
   },
   state: {
     analytics: {
-      namespaces: { googleAnalytics: "googleAnalytics" }
+      ...analytics.state.analytics,
+      namespaces: ["googleAnalytics"]
     },
     googleAnalytics: {}
   }
