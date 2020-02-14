@@ -51,15 +51,14 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   if (state.router.autoFetch) {
     if (actions.source && actions.source.fetch) {
       await actions.source.fetch(state.router.link);
+      const data = state.source.get(state.router.link);
+      if (data.isError) {
+        ctx.status = data.errorStatus;
+      }
     } else {
       warn(
         "You are trying to use autoFetch but no source package is installed."
       );
-    }
-
-    const data = state.source.get(state.router.link);
-    if (data.isError) {
-      ctx.status = data.errorStatus;
     }
   }
 };
