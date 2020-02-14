@@ -8,7 +8,6 @@ describe("Status codes", () => {
     expect(res.status).toBe(200);
   });
 
-  // eslint-disable-next-line jest/no-focused-tests
   it("should return a 404 status code", async () => {
     const res404 = await cy.request({
       url: "http://localhost:3001/404?name=wp-source-errors",
