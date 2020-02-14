@@ -17,7 +17,7 @@ export type ResolveActions<Actions extends Package["state"]> = {
     state: ResolveState<Package["state"]>;
     actions: ResolveActions<Package["actions"]>;
     libraries: Package["libraries"];
-  }) => (...args: any[]) => void
+  }) => (...args: any[]) => void | Promise<void>
     ? (
         ...args: Parameters<ReturnType<Actions[P]>>
       ) => ReturnType<ReturnType<Actions[P]>>
@@ -29,7 +29,7 @@ export type ResolveActions<Actions extends Package["state"]> = {
         state: ResolveState<Package["state"]>;
         actions: ResolveActions<Package["actions"]>;
         libraries: Package["libraries"];
-      }) => any
+      }) => void | Promise<void>
     ? () => ReturnType<Actions[P]>
     : ResolveActions<Actions[P]>
 };
