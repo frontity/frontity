@@ -1,5 +1,5 @@
 import { createStore } from "frontity";
-import { sendPageview, sendEvent } from "..";
+import analytics from "../src";
 
 describe("analytics.sendPageview", () => {
   test("runs all 'sendPageview' from other analytics packages", () => {
@@ -13,9 +13,7 @@ describe("analytics.sendPageview", () => {
         }
       },
       actions: {
-        analytics: {
-          sendPageview
-        },
+        ...analytics.actions,
         pkg1Analytics: {
           sendPageview: () => pkg1SendPageview
         },
@@ -53,9 +51,7 @@ describe("analytics.sendEvent", () => {
         }
       },
       actions: {
-        analytics: {
-          sendEvent
-        },
+        ...analytics.actions,
         pkg1Analytics: {
           sendEvent: () => pkg1Event
         },
