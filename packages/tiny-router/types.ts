@@ -15,7 +15,7 @@ interface TinyRouter extends Router {
   actions: Router<TinyRouter>["actions"] & {
     router: {
       init: Action<TinyRouter>;
-      beforeSSR?: ServerAction<TinyRouter>;
+      beforeSSR: ServerAction<TinyRouter>;
     };
     source?: {
       fetch?: Source["actions"]["source"]["fetch"];
