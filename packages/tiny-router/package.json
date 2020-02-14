@@ -27,8 +27,5 @@
     "@frontity/router": "^1.0.18",
     "@frontity/source": "^1.0.17",
     "frontity": "^1.4.3"
-  },
-  "devDependencies": {
-    "@types/koa": "^2.0.48"
   }
 }
