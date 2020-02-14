@@ -25,6 +25,7 @@
     "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest"
   },
   "dependencies": {
-    "ts-essentials": "^6.0.0"
+    "ts-essentials": "^6.0.0",
+    "@types/koa": "^2.11.1"
   }
 }

@@ -1,4 +1,4 @@
-import { Package, Action, AsyncAction } from "frontity/types";
+import { Package, Action, ServerAction } from "frontity/types";
 import Source from "@frontity/source/types";
 
 interface WpSourceErrors extends Package {
@@ -13,7 +13,7 @@ interface WpSourceErrors extends Package {
     source?: Source["actions"]["source"];
     wpSourceErrors: {
       init: Action<WpSourceErrors>;
-      beforeSSR: AsyncAction<WpSourceErrors>;
+      beforeSSR?: ServerAction<WpSourceErrors>;
     };
   };
   roots: {
