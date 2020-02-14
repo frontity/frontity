@@ -9,7 +9,7 @@ import { HelmetContext } from "frontity/types";
 import Iframe from "../iframe";
 
 describe("Iframe", () => {
-  test('It\'s a normal image if loading === "eager"', () => {
+  test('It\'s a normal iframe if loading === "eager"', () => {
     const loading: "lazy" | "eager" | "auto" = "eager";
     const props = {
       title: "Some fake title",
@@ -30,14 +30,14 @@ describe("Iframe", () => {
     };
 
     const helmetContext: HelmetContext = {};
-    const image = TestRenderer.create(
+    const iframe = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Iframe {...props} />
       </HelmetProvider>
     ).toJSON();
     const head = helmetContext.helmet;
 
-    expect(image).toMatchSnapshot();
+    expect(iframe).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();
     expect(head.noscript.toString()).toMatchSnapshot();
   });
@@ -51,14 +51,14 @@ describe("Iframe", () => {
     };
 
     const helmetContext: HelmetContext = {};
-    const image = TestRenderer.create(
+    const iframe = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Iframe {...props} />
       </HelmetProvider>
     ).toJSON();
     const head = helmetContext.helmet;
 
-    expect(image).toMatchSnapshot();
+    expect(iframe).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();
     expect(head.noscript.toString()).toMatchSnapshot();
   });

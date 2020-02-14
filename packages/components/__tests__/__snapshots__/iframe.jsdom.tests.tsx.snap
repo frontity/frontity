@@ -23,10 +23,14 @@ Array [
   </noscript>,
   <iframe
     className="frontity-lazy-iframefake-class-name"
+    data-src="https://iframe-src.com/iframe"
     height={300}
     loading="lazy"
-    src="https://iframe-src.com/iframe"
-    suppressHydrationWarning={true}
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
     title="Iframe title"
   />,
 ]

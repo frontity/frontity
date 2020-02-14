@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Iframe It's a normal image if loading === "eager" 1`] = `
+exports[`Iframe It's a normal iframe if loading === "eager" 1`] = `
 <iframe
   className="frontity-lazy-iframefake-class-name"
   loading="eager"

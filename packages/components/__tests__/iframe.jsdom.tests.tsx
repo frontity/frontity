@@ -44,7 +44,7 @@ describe("Iframe", () => {
   });
 
   test("works with native lazy load and component did not mount", () => {
-    (HTMLImageElement as any).prototype.loading = true;
+    (HTMLIFrameElement as any).prototype.loading = true;
 
     const props = {
       title: "Iframe title",
@@ -76,7 +76,7 @@ describe("Iframe", () => {
   });
 
   test("works with `IntersectionObserver` if `height` prop is not specified", () => {
-    (HTMLImageElement as any).prototype.loading = true;
+    (HTMLIFrameElement as any).prototype.loading = true;
     mockedUseInView.mockReturnValue([() => {}, false, undefined]);
 
     const props = {
@@ -118,7 +118,7 @@ describe("Iframe", () => {
 
     IntersectionObserver = undefined;
 
-    const image = TestRenderer.create(<Iframe {...props} />).toJSON();
-    expect(image).toMatchSnapshot();
+    const iframe = TestRenderer.create(<Iframe {...props} />).toJSON();
+    expect(iframe).toMatchSnapshot();
   });
 });
