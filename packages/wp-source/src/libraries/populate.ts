@@ -34,7 +34,8 @@ const transformLink = ({
 const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
   state,
-  subdirectory
+  subdirectory,
+  force
 }) => {
   // Normalize response
   const json = await response.json();
@@ -60,29 +61,42 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
           isFetching: false
         });
 
+      let entityMap: any;
+      let entityKey: string | number;
+
       if (schema === "postEntity" || schema === "attachmentEntity") {
         if (!state.source[entity.type]) state.source[entity.type] = {};
-        state.source[entity.type][entity.id] = entity;
+        entityMap = state.source[entity.type];
+        entityKey = entity.id;
         Object.assign(entityData, {
           type: entity.type,
           id: entity.id
         });
       } else if (schema === "taxonomyEntity") {
         if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
-        state.source[entity.taxonomy][entity.id] = entity;
+        entityMap = state.source[entity.taxonomy];
+        entityKey = entity.id;
         Object.assign(entityData, {
           taxonomy: entity.taxonomy,
           id: entity.id
         });
       } else if (schema === "authorEntity") {
-        state.source.author[entity.id] = entity;
+        entityMap = state.source.author;
+        entityKey = entity.id;
         Object.assign(entityData, {
           id: entity.id
         });
       } else if (schema === "postType") {
-        state.source.type[entity.slug] = entity;
+        entityMap = state.source.type;
+        entityKey = entity.slug;
       } else if (schema === "taxonomyType") {
-        state.source.taxonomy[entity.slug] = entity;
+        entityMap = state.source.taxonomy;
+        entityKey = entity.slug;
+      }
+
+      // Add the entity if it doesn't exist.
+      if (entityMap && (!entityMap[entityKey] || force)) {
+        entityMap[entityKey] = entity;
       }
     });
   });
