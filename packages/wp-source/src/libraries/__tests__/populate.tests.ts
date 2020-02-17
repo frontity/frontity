@@ -28,6 +28,75 @@ describe("populate", () => {
     expect(state.source).toMatchSnapshot();
   });
 
+  test("does not overwrite added entities", async () => {
+    const { state } = initStore();
+
+    // Add Category 1
+    await populate({
+      state,
+      response: mockResponse([
+        {
+          id: 1,
+          count: 5,
+          link: "https://test.frontity.io/category/cat-1/",
+          slug: "cat-1",
+          taxonomy: "category",
+          description: "This is the Category 1",
+          parent: 0
+        }
+      ])
+    });
+
+    // Try to overwrite Category 1
+    await populate({
+      state,
+      response: mockResponse({
+        id: 1,
+        link: "https://test.frontity.io/category/cat-1/",
+        slug: "cat-1",
+        taxonomy: "category"
+      })
+    });
+
+    expect(state.source.category[1].description).toBe("This is the Category 1");
+    expect(state.source.category[1].count).toBe(5);
+  });
+
+  test("overwrite entities if `force` is true", async () => {
+    const { state } = initStore();
+
+    // Add Category 1 with missing properties
+    await populate({
+      state,
+      response: mockResponse([
+        {
+          id: 1,
+          link: "https://test.frontity.io/category/cat-1/",
+          slug: "cat-1",
+          taxonomy: "category"
+        }
+      ])
+    });
+
+    // Overwrite Category 1 using `force` = true
+    await populate({
+      state,
+      response: mockResponse({
+        id: 1,
+        count: 5,
+        link: "https://test.frontity.io/category/cat-1/",
+        slug: "cat-1",
+        taxonomy: "category",
+        description: "This is the Category 1",
+        parent: 0
+      }),
+      force: true
+    });
+
+    expect(state.source.category[1].description).toBe("This is the Category 1");
+    expect(state.source.category[1].count).toBe(5);
+  });
+
   test("removes WP API path from links", async () => {
     const { state } = initStore();
     state.source.api = "https://test.frontity.io/subdirectory/wp-json";

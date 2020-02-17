@@ -1,4 +1,4 @@
-import { Package, Action } from "frontity/types";
+import { Package, Action, Connect } from "frontity/types";
 import Source from "@frontity/source/types";
 
 export type Pageview = {
@@ -13,6 +13,9 @@ export type Event = {
 };
 
 interface Analytics extends Package {
+  roots: {
+    analytics: React.FC;
+  };
   actions: {
     analytics: {
       sendPageview: Action<Analytics, Pageview>;
@@ -25,7 +28,7 @@ interface Analytics extends Package {
   };
   state: {
     analytics: {
-      namespaces: Record<string, string>;
+      namespaces: string[];
     };
     router?: {
       link: string;

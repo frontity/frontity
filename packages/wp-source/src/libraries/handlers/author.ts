@@ -1,17 +1,23 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
 
-const authorHandler: Handler = async ({ route, params, state, libraries }) => {
+const authorHandler: Handler = async ({
+  route,
+  params,
+  state,
+  libraries,
+  force
+}) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
   const { slug } = params;
 
   // 1. Search id in state or get it from WP REST API.
   let { id } = state.source.get(path);
-  if (!id) {
-    // Request author from WP.
+  if (!id || force) {
+    // Request author from WP
     const response = await api.get({ endpoint: "users", params: { slug } });
-    const [entity] = await populate({ response, state });
+    const [entity] = await populate({ response, state, force: true });
     if (!entity)
       throw new ServerError(
         `entity from endpoint "users" with slug "${slug}" not found`,
