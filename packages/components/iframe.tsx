@@ -16,7 +16,7 @@ const noProxyScript = `
       var iframes = document.querySelectorAll("iframe.frontity-lazy-iframe");
       for (i = 0; i < iframes.length; ++i) {
         var iframe = iframes[i];
-         iframe.setAttribute("src", iframe.getAttribute("data-src"));
+        iframe.setAttribute("src", iframe.getAttribute("data-src"));
         iframe.removeAttribute("data-src");
         iframe.removeAttribute("style");
       }
@@ -80,7 +80,7 @@ const Iframe: Component = ({
 }) => {
   const lazyAttributes: Attributes = {
     "data-src": src,
-    className: "frontity-lazy-iframe".concat(className ? `${className}` : ""),
+    className: "frontity-lazy-iframe".concat(className ? ` ${className}` : ""),
     loading,
     style: { visibility: "hidden" },
     height,
