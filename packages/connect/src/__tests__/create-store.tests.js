@@ -1,3 +1,4 @@
+/* eslint-disable require-atomic-updates */
 import { createStore, isObservable } from "..";
 
 let config = {};

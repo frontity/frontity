@@ -147,7 +147,6 @@ const Image: Image = ({
           {...(state.frontity.rendering === "csr"
             ? eagerAttributes
             : lazyAttributes)}
-          suppressHydrationWarning
         />
       </>
     );

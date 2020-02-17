@@ -20,6 +20,7 @@
     "e2e-fonts": "^1.0.2",
     "e2e-head": "^1.0.5",
     "e2e-image": "^1.0.4",
+    "e2e-iframe": "1.0.0",
     "e2e-loadable": "^1.0.1",
     "e2e-wp-source-errors": "^1.0.0",
     "e2e-script": "^1.0.0",
