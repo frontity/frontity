@@ -44,7 +44,7 @@ describe("Iframe lazy-load with Intersection Observer", () => {
       });
   });
 
-  it("loading attribute should not be lazy", () => {
+  it("should not be visible until it is lazy-loaded", () => {
     cy.scrollTo("topLeft");
     cy.get("iframe")
       .should("have.attr", "loading", "lazy")
