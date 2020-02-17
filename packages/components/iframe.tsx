@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect, Package } from "frontity/types";
@@ -13,15 +12,14 @@ const noJsStyles = `
 
 const noProxyScript = `
   if (typeof window !== "undefined" && (!("Proxy" in window) || !("IntersectionObserver" in window))) {
-    document.addEventListener("DOMContentLoaded", () => {
-      let iframes = document.querySelectorAll("iframe.frontity-lazy-iframe");
-
-      iframes.forEach(iframe => {
+    document.addEventListener("DOMContentLoaded", function() {
+      var iframes = document.querySelectorAll("iframe.frontity-lazy-iframe");
+      for (i = 0; i < iframes.length; ++i) {
+        var iframe = iframes[i];
          iframe.setAttribute("src", iframe.getAttribute("data-src"));
-
         iframe.removeAttribute("data-src");
         iframe.removeAttribute("style");
-      });
+      }
     });
   }
 `;
