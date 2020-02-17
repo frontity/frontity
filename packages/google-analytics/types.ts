@@ -1,3 +1,4 @@
+import { ReactType } from "react";
 import { Action } from "frontity/types";
 import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 
@@ -8,6 +9,9 @@ declare global {
 }
 
 interface GoogleAnalytics extends Analytics {
+  roots: Analytics["roots"] & {
+    googleAnalytics: ReactType;
+  };
   state: Analytics["state"] & {
     googleAnalytics: {
       trackingId?: string;

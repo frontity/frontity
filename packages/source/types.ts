@@ -44,7 +44,9 @@ interface Source<T = null> extends Package {
   };
   actions: {
     source: {
-      fetch: AsyncAction<T extends null ? Source : T, string>;
+      fetch:
+        | AsyncAction<T extends null ? Source : T, string>
+        | AsyncAction<T extends null ? Source : T, string, { force?: boolean }>;
     };
   };
   libraries: {

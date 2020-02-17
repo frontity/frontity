@@ -2,8 +2,10 @@
   "name": "@frontity/analytics",
   "version": "1.0.0-beta.0",
   "description": "This package contains the base types and actions to build analytics packages for »Frontity",
+  "main": "src/index.ts",
   "keywords": [
-    "frontity"
+    "frontity",
+    "frontity-analytics"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",

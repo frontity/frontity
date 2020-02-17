@@ -27,9 +27,6 @@ const wpSourceErrors: WpSourceErrors = {
         } else {
           state.source.api = "https://test.frontity.io/wp-json";
         }
-      },
-      beforeSSR: async ({ state, actions }) => {
-        await actions.source.fetch(state.frontity.initialLink);
       }
     }
   },
