@@ -19,14 +19,6 @@ describe("Native iframe lazy-load", () => {
     cy.scrollTo("topLeft");
     cy.get("iframe").should("have.attr", "loading", "lazy");
   });
-
-  it.skip("should lazy-load iframes", () => {
-    cy.scrollTo("topLeft");
-    cy.get("iframe").should("have.attr", "loading", "lazy");
-    cy.get("iframe")
-      .scrollIntoView({ duration: 300 })
-      .should("be.visible");
-  });
 });
 
 describe("Iframe lazy-load with Intersection Observer", () => {
