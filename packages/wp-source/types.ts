@@ -67,8 +67,8 @@ interface WpSource extends Source {
       parse: Source["libraries"]["source"]["parse"];
       stringify: Source["libraries"]["source"]["stringify"];
       normalize: Source["libraries"]["source"]["normalize"];
-      getTotal: (res: Response) => number;
-      getTotalPages: (res: Response) => number;
+      getTotal: (res: Response, _default: number) => number;
+      getTotalPages: (res: Response, _default: number) => number;
     };
   };
 }
