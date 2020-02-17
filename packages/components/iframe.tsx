@@ -116,7 +116,6 @@ const Iframe: Component = ({
           {...(state.frontity.rendering === "csr"
             ? eagerAttributes
             : lazyAttributes)}
-          suppressHydrationWarning
         />
       </>
     );
