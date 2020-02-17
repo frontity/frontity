@@ -102,7 +102,6 @@ Array [
     loading="lazy"
     src="https://fake-src.com/fake-image.jpg"
     srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
-    suppressHydrationWarning={true}
   />,
 ]
 `;
@@ -131,7 +130,6 @@ Array [
         "visibility": "hidden",
       }
     }
-    suppressHydrationWarning={true}
   />,
 ]
 `;
@@ -153,7 +151,6 @@ Array [
     loading="auto"
     src="https://fake-src.com/fake-image.jpg"
     srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
-    suppressHydrationWarning={true}
   />,
 ]
 `;
@@ -180,7 +177,6 @@ Array [
         "visibility": "hidden",
       }
     }
-    suppressHydrationWarning={true}
   />,
 ]
 `;
