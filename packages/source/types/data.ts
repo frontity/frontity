@@ -37,8 +37,8 @@ export type Data =
  * Base properties of objects of types `Data`.
  */
 export type BaseData = {
-  link: string;
-  query: object;
+  link?: string;
+  query?: object;
   type?: string;
   id?: number;
   taxonomy?: string;
@@ -125,13 +125,12 @@ export type ArchiveData = Merge<
   {
     isArchive: true;
     items: EntityData[];
-    page: number;
-    path: string;
+    page?: number;
+    path?: string;
     next?: string;
     previous?: string;
-    total: number;
-    totalPages: number;
-    isSearch: false;
+    total?: number;
+    totalPages?: number;
   }
 >;
 

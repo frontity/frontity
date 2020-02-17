@@ -13,7 +13,6 @@ import {
   PostData,
   PageData,
   AttachmentData,
-  ArchiveWithSearchData,
   TaxonomyWithSearchData,
   CategoryWithSearchData,
   TagWithSearchData,
@@ -59,7 +58,37 @@ data.taxonomy = {
   totalPages: 13,
   taxonomy: "custom-taxonomy",
   id: 12,
-  isTaxonomy: true
+  isTaxonomy: true,
+  page: 1,
+  path: "/"
+};
+
+data.taxonomyWithSearchData = {
+  isArchive: true,
+  items: [
+    {
+      id: 60,
+      type: "post",
+      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss"
+    },
+    {
+      id: 57,
+      type: "post",
+      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/"
+    }
+  ],
+  isReady: true,
+  isFetching: false,
+  total: 13,
+  totalPages: 13,
+  taxonomy: "custom-taxonomy",
+  id: 12,
+  isTaxonomy: true,
+  page: 1,
+  path: "/",
+  link: "/url",
+  isSearch: true,
+  searchQuery: "nature"
 };
 
 data.category = {
@@ -75,7 +104,7 @@ data.category = {
   totalPages: 0
 };
 
-const categoryWithSearch: CategoryWithSearchData = {
+data.categoryWithSearchData = {
   link: "/url",
   page: 1,
   isArchive: true,
@@ -105,7 +134,7 @@ data.tag = {
   totalPages: 0
 };
 
-const tagWithSearch: TagWithSearchData = {
+data.tagWithSearchData = {
   link: "/url",
   page: 1,
   isArchive: true,
@@ -133,7 +162,7 @@ data.author = {
   totalPages: 0
 };
 
-const authorWithSearch: AuthorWithSearchData = {
+data.authorWithSearchData = {
   link: "/url",
   page: 1,
   isArchive: true,
@@ -159,7 +188,7 @@ data.postTypeArchive = {
   totalPages: 0
 };
 
-const postTypeArchiveWithSearch: PostTypeArchiveWithSearchData = {
+data.postTypeArchiveWithSearchData = {
   link: "/url",
   page: 1,
   isArchive: true,
@@ -187,7 +216,7 @@ data.postArchive = {
   totalPages: 0
 };
 
-const postArchiveWithSearch: PostArchiveWithSearchData = {
+data.postArchiveWithSearchData = {
   link: "/url",
   page: 1,
   isArchive: true,
@@ -217,7 +246,7 @@ data.dateArchive = {
   totalPages: 0
 };
 
-const dateArchiveWithSearch: DateWithSearchData = {
+data.dateArchiveWithSearchData = {
   link: "/url",
   page: 1,
   isArchive: true,
@@ -282,5 +311,14 @@ expectType<PostTypeData>(data.postType);
 expectType<PostData>(data.post);
 expectType<PageData>(data.page);
 expectType<AttachmentData>(data.attachment);
+
+expectType<TaxonomyWithSearchData>(data.taxonomyWithSearchData);
+expectType<CategoryWithSearchData>(data.categoryWithSearchData);
+expectType<TagWithSearchData>(data.tagWithSearchData);
+expectType<AuthorWithSearchData>(data.authorWithSearchData);
+expectType<PostTypeArchiveWithSearchData>(data.postTypeArchiveWithSearchData);
+expectType<CategoryWithSearchData>(data.categoryWithSearchData);
+expectType<PostArchiveWithSearchData>(data.postArchiveWithSearchData);
+expectType<DateWithSearchData>(data.dateArchiveWithSearchData);
 
 test("Types are fine!", () => {});
