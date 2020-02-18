@@ -43,8 +43,8 @@ export const dateHandler: Handler = async ({
     throw new ServerError(`date "${path}" doesn't have page ${page}`, 404);
 
   // 4. get posts and pages count
-  const total = getTotal(response);
-  const totalPages = getTotalPages(response);
+  const total = getTotal(response, items.length);
+  const totalPages = getTotalPages(response, 0);
 
   // 5. add data to source
   const currentPageData = state.source.data[route];

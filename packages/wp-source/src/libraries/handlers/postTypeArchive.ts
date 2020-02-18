@@ -24,8 +24,8 @@ const postTypeArchiveHandler = ({
     throw new ServerError(`post archive doesn't have page ${page}`, 404);
 
   // 3. get posts and pages count
-  const total = getTotal(response);
-  const totalPages = getTotalPages(response);
+  const total = getTotal(response, items.length);
+  const totalPages = getTotalPages(response, 0);
 
   // 4. add data to source
   const currentPageData = state.source.data[route];
