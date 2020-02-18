@@ -21,7 +21,6 @@
     "@frontity/core": "^1.4.1",
     "@frontity/html2react": "^1.1.15",
     "@frontity/mars-theme": "^1.3.0",
-    "@frontity/twentytwenty-theme": "^1.0.0-beta.1",
     "@frontity/tiny-router": "^1.0.18",
     "@frontity/wp-source": "^1.4.3",
     "babel-plugin-frontity": "^1.0.1",

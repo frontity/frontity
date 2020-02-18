@@ -11,49 +11,20 @@ export default {
     "@frontity/tiny-router",
     "@frontity/html2react",
     {
-      name: "@frontity/twentytwenty-theme",
+      name: "@frontity/mars-theme",
       state: {
         theme: {
           menu: [
-            [
-              "Frontity",
-              "https://frontity.org?utm_source=blog&utm_medium=horizontal-menu-link"
-            ],
-            [
-              "Community",
-              "https://community.frontity.org/?utm_source=blog&utm_medium=horizontal-menu-link"
-            ],
-            [
-              "Docs",
-              "https://docs.frontity.org/?utm_source=blog&utm_medium=horizontal-menu-link"
-            ],
-            ["GitHub", "https://github.com/frontity/frontity"],
-            ["Twitter", "https://twitter.com/frontity"]
+            ["Home", "/"],
+            ["Nature", "/category/nature/"],
+            ["Travel", "/category/travel/"],
+            ["Japan", "/tag/japan/"],
+            ["About Us", "/about-us/"]
           ],
-          colors: {
-            primary: "#E6324B",
-            headerBg: "#ffffff",
-            footerBg: "#ffffff",
-            bodyBg: "#ffffff"
-          },
-          // Whether to show the search button in page header
-          showSearchInHeader: true,
-          // Whether to show all post content or only excerpt (summary) in archive view
-          showAllContentOnArchive: false,
-          // Settings for the featured media (image or video)
-          featuredMedia: {
-            // Whether to show it on archive view
-            showOnArchive: true,
-            // Whether to show it on post
+          featured: {
+            showOnList: true,
             showOnPost: true
-          },
-          // Whether to auto-fetch links on a page. Values can be "no" | "all" | "in-view" | "hover"
-          autoPreFetch: "hover",
-          /**
-           * At the moment, we only include the ascii characters of Inter font.
-           * Values can be "us-ascii" | "latin" | "all"
-           */
-          fontSets: "us-ascii"
+          }
         }
       }
     },
