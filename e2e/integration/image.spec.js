@@ -68,10 +68,10 @@ describe("Image lazy-loading (with native lazy-load)", () => {
       });
   });
 
-  it("should render an image with loading=auto if it doesn't have height", () => {
+  it("should render an image without loading if it doesn't have height", () => {
     cy.scrollTo("topLeft");
     cy.get("img:not([height])")
-      .should("have.attr", "loading", "auto")
+      .should("not.have.attr", "loading")
       .should("not.be.visible");
     cy.get("img:not([height])")
       .scrollIntoView({ duration: 300 })
