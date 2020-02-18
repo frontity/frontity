@@ -2,4 +2,5 @@
 "@frontity/html2react": minor
 ---
 
-Decode the HTML special characters in href attributes and map correctly from HTML attributes to react props
+- Decode all the HTML attributes that are strings.
+- Map correctly from some HTML attributes to their corresponding React props.
