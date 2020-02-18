@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Iframe works when loading === "eager" 1`] = `
+<iframe
+  className="frontity-lazy-iframe fake-class-name"
+  height={500}
+  loading="eager"
+  src="https://iframe-src.com/iframe"
+  title="Iframe title"
+/>
+`;
+
+exports[`Iframe works with \`IntersectionObserver\` and is out of view 1`] = `
+Array [
+  <noscript>
+    <iframe
+      className="frontity-lazy-iframe fake-class-name"
+      height={300}
+      loading="lazy"
+      src="https://iframe-src.com/iframe"
+      title="Iframe title"
+    />
+  </noscript>,
+  <iframe
+    className="frontity-lazy-iframe fake-class-name"
+    data-src="https://iframe-src.com/iframe"
+    height={300}
+    loading="lazy"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+    title="Iframe title"
+  />,
+]
+`;
+
+exports[`Iframe works with \`IntersectionObserver\` if \`height\` prop is not specified 1`] = `
+Array [
+  <noscript>
+    <iframe
+      className="frontity-lazy-iframe fake-class-name"
+      loading="lazy"
+      src="https://iframe-src.com/iframe"
+      title="Iframe title"
+    />
+  </noscript>,
+  <iframe
+    className="frontity-lazy-iframe fake-class-name"
+    data-src="https://iframe-src.com/iframe"
+    loading="lazy"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+    title="Iframe title"
+  />,
+]
+`;
+
+exports[`Iframe works with native lazy load and component did mount 1`] = `
+Array [
+  <noscript>
+    <iframe
+      className="frontity-lazy-iframe fake-class-name"
+      height={300}
+      loading="lazy"
+      src="https://iframe-src.com/iframe"
+      title="Iframe title"
+    />
+  </noscript>,
+  <iframe
+    className="frontity-lazy-iframe fake-class-name"
+    height={300}
+    loading="lazy"
+    src="https://iframe-src.com/iframe"
+    title="Iframe title"
+  />,
+]
+`;
+
+exports[`Iframe works with native lazy load and component did not mount 1`] = `
+Array [
+  <noscript>
+    <iframe
+      className="frontity-lazy-iframe fake-class-name"
+      height={300}
+      loading="lazy"
+      src="https://iframe-src.com/iframe"
+      title="Iframe title"
+    />
+  </noscript>,
+  <iframe
+    className="frontity-lazy-iframe fake-class-name"
+    data-src="https://iframe-src.com/iframe"
+    height={300}
+    loading="lazy"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+    title="Iframe title"
+  />,
+]
+`;
+
+exports[`Iframe works without \`IntersectionObserver\` and component did mount 1`] = `
+Array [
+  <noscript>
+    <iframe
+      className="frontity-lazy-iframe fake-class-name"
+      height={300}
+      loading="lazy"
+      src="https://iframe-src.com/iframe"
+      title="Iframe title"
+    />
+  </noscript>,
+  <iframe
+    className="frontity-lazy-iframe fake-class-name"
+    height={300}
+    loading="lazy"
+    src="https://iframe-src.com/iframe"
+    title="Iframe title"
+  />,
+]
+`;
