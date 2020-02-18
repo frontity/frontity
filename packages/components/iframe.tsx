@@ -31,7 +31,7 @@ interface Props {
   height?: number;
   className?: string;
   rootMargin?: string;
-  loading?: "auto" | "lazy" | "eager";
+  loading?: "lazy" | "eager";
 }
 
 type Component = React.FC<Connect<Package, Props>>;

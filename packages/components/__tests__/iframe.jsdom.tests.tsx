@@ -29,7 +29,7 @@ describe("Iframe", () => {
   });
 
   test('works when loading === "eager"', () => {
-    const loading: "lazy" | "eager" | "auto" = "eager";
+    const loading: "lazy" | "eager" = "eager";
 
     const props = {
       title: "Iframe title",
