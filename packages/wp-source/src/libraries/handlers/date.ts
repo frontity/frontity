@@ -64,7 +64,6 @@ export const dateHandler: Handler = async ({
   if (query.s) {
     currentPageData.isSearch = true;
     if (currentPageData.isSearch) {
-      currentPageData.isEmpty = !!items.length;
       currentPageData.searchQuery = query.s;
     }
   }

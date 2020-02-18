@@ -57,15 +57,14 @@ const authorHandler: Handler = async ({
     items,
     total,
     totalPages,
-    isArchive: true as true,
-    isAuthor: true as true
+    isArchive: true,
+    isAuthor: true
   });
 
   // 6. If it's a search, add the information.
   if (query.s) {
     Object.assign(currentPageData, {
       isSearch: true,
-      isEmpty: true,
       searchQuery: query.s
     });
   }
