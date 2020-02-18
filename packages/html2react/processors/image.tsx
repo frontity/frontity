@@ -25,7 +25,7 @@ const image: Processor = {
   test: node => node.type === "element" && node.component === "img",
   process: node => {
     if (node.type === "element") {
-      if (node.parent.component === "noscript") return null;
+      if (node.parent && node.parent.component === "noscript") return null;
 
       if (node.props["data-src"]) {
         node.props.src = node.props["data-src"];

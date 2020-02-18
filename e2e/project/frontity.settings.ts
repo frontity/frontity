@@ -34,6 +34,10 @@ const settings: Settings = [
     packages: ["e2e-loadable"]
   },
   {
+    name: "iframe",
+    packages: ["e2e-iframe"]
+  },
+  {
     name: "wp-source-errors",
     packages: [
       "e2e-wp-source-errors",
