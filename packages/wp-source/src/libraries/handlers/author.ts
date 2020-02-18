@@ -63,10 +63,8 @@ const authorHandler: Handler = async ({
 
   // 6. If it's a search, add the information.
   if (query.s) {
-    Object.assign(currentPageData, {
-      isSearch: true,
-      searchQuery: query.s
-    });
+    currentPageData.isSearch = true;
+    currentPageData.searchQuery = query.s;
   }
 };
 

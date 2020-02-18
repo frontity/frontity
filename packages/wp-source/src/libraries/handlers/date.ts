@@ -63,9 +63,7 @@ export const dateHandler: Handler = async ({
   // 6. If it's a search, add the information.
   if (query.s) {
     currentPageData.isSearch = true;
-    if (currentPageData.isSearch) {
-      currentPageData.searchQuery = query.s;
-    }
+    currentPageData.searchQuery = query.s;
   }
 };
 

@@ -58,6 +58,16 @@ export type BaseData = {
   isPage?: false;
   isAttachment?: false;
   isHome?: boolean;
+
+  // search attributes
+  isSearch?: false;
+  searchQuery?: string;
+
+  // pagination atributes (for Archive)
+  page?: number;
+  path?: string;
+  next?: string;
+  previous?: string;
 };
 
 // ERROR
