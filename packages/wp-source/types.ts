@@ -1,4 +1,4 @@
-import { Action, State, Derived } from "frontity/types";
+import { AsyncAction, Action, State, Derived } from "frontity/types";
 import Source, { EntityData } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
@@ -14,6 +14,7 @@ export type Handler<Pkg extends Source = WpSource> = (args: {
   params: { [param: string]: any };
   state: State<Pkg>;
   libraries: Pkg["libraries"];
+  force?: boolean;
 }) => Promise<void>;
 
 export type Redirection = (params?: Record<string, string>) => string;
@@ -45,7 +46,10 @@ interface WpSource extends Source {
     };
   };
   actions: {
-    source: Source<WpSource>["actions"]["source"] & {
+    source: {
+      fetch:
+        | AsyncAction<WpSource, string>
+        | AsyncAction<WpSource, string, { force?: boolean }>;
       init: Action<WpSource>;
     };
   };
@@ -56,6 +60,7 @@ interface WpSource extends Source {
         state: State<WpSource>;
         response: Response;
         subdirectory?: string;
+        force?: boolean;
       }) => Promise<EntityData[]>;
       handlers: Pattern<Handler>[];
       redirections: Pattern<Redirection>[];

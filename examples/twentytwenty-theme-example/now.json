@@ -1,6 +1,4 @@
 {
-  "name": "twentytwenty-theme",
-  "alias": "twentytwenty.frontity.org",
   "scope": "frontity",
   "version": 2,
   "builds": [

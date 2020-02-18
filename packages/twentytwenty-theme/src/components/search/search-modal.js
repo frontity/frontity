@@ -1,4 +1,3 @@
-
 import { styled, connect, Global, css } from "frontity";
 import React, { useRef } from "react";
 import { useTransition, animated } from "react-spring";
@@ -21,7 +20,6 @@ const SearchModal = ({ state, actions, libraries }) => {
   // Keep a reference to the input so we can grab it's value on form submission
   const inputRef = useRef();
   const containerRef = useRef();
-
 
   const transitions = useTransition(isSearchModalOpen, null, {
     from: { transform: "translate3d(0,-100%,0)" },
