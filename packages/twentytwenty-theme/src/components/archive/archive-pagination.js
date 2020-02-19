@@ -68,14 +68,16 @@ const Pagination = ({ state, actions, libraries }) => {
     <Container>
       <div>
         {hasNewerPosts && (
-          <Link link={getPageLink(page - 1)}>← Newer Posts</Link>
+          <Link link={getPageLink(page - 1)}>
+            ← Newer<span className="hidden"> Posts</span>
+          </Link>
         )}
       </div>
 
-      <div className="">
+      <div>
         <ul>
           {paginationArray.map((item, index) => {
-            // if item is dots
+            // if item is dots, "..."
             if (item === "...") {
               return (
                 <li className="dots" key={index}>
@@ -84,7 +86,7 @@ const Pagination = ({ state, actions, libraries }) => {
               );
             }
 
-            // is item is current page
+            // if item is current page
             if (item === page) {
               return (
                 <li className="active" key={index}>
@@ -104,22 +106,57 @@ const Pagination = ({ state, actions, libraries }) => {
 
       <div>
         {hasOlderPosts && (
-          <Link link={getPageLink(page + 1)}>Older Posts →</Link>
+          <Link link={getPageLink(page + 1)}>
+            Older<span className="hidden"> Posts</span> →
+          </Link>
         )}
       </div>
     </Container>
   );
 };
+
+const getMaxWidth = props => maxWidths[props.size] || maxWidths["medium"];
+
+const maxWidths = {
+  thin: "58rem",
+  small: "80rem",
+  medium: "100rem"
+};
+
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.3em;
-  font-weight: 700;
-  word-spacing: 5px;
+  font-size: 1em;
+  font-weight: 600;
   margin-left: auto;
   margin-right: auto;
   width: calc(100% - 4rem);
+  max-width: ${getMaxWidth};
+
+  & > div {
+    display: inline-flex;
+
+    &:nth-child(2) {
+      margin: 0 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  }
+
+  @media (min-width: 700px) {
+    width: calc(100% - 8rem);
+    font-size: 1.3em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & > div {
+      .hidden {
+        display: none;
+      }
+    }
+  }
 
   a {
     text-decoration: none;

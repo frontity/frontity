@@ -56,7 +56,7 @@ const Archive = ({ state, showExcerpt, showMedia }) => {
       {data.totalPages > 1 && (
         <>
           <PostSeparator />
-          <Pagination />
+          <Pagination size="thin" />
         </>
       )}
     </>
