@@ -11,12 +11,26 @@ const postTypeArchiveHandler = ({
   endpoint: string;
 }): Handler => async ({ route, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { page, query } = parse(route);
+  const { page, query, path } = parse(route);
+
+  // Add the attributes that should be present even if fetch fails or we throw a ServerError below
+  state.source.data[route] = {
+    ...state.source.data[route],
+    link: route,
+    path,
+    query,
+    page
+  };
 
   // 1. fetch the specified page
   const response = await api.get({
     endpoint: endpoint === "posts" ? state.source.postEndpoint : endpoint,
-    params: { search: query.s, page, _embed: true, ...state.source.params }
+    params: {
+      search: query.s,
+      page,
+      _embed: true,
+      ...state.source.params
+    }
   });
 
   // 2. populate response
@@ -31,8 +45,6 @@ const postTypeArchiveHandler = ({
   // 4. add data to source
   const currentPageData = state.source.data[route];
   Object.assign(state.source.data[route], {
-    link: route,
-    query,
     type,
     items,
     total,

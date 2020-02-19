@@ -11,6 +11,15 @@ export const dateHandler: Handler = async ({
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
 
+  // Add the attributes that should be present even if fetch fails or we throw a ServerError below
+  state.source.data[route] = {
+    ...state.source.data[route],
+    link: route,
+    path,
+    query,
+    page
+  };
+
   // 1. build date properties
   const year = parseInt(params.year);
   const month = params.month && parseInt(params.month);
@@ -50,8 +59,6 @@ export const dateHandler: Handler = async ({
   // 5. add data to source
   const currentPageData = state.source.data[route];
   Object.assign(currentPageData, {
-    link: route,
-    query,
     year,
     month,
     day,
