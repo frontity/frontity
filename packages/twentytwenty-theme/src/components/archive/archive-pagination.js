@@ -4,35 +4,38 @@ import Link from "../link";
 
 const paginate = (totalPages, currentPage) => {
   const delta = 1;
-  const range = []; // pagination without dots
-  const pagination = []; // formatted pagination - with dots
-  let last;
+  const pagination = [];
 
-  // Push first page - 1
-  range.push(1);
-
-  for (let i = currentPage - delta; i <= currentPage + delta; i++) {
-    if (i < totalPages && i > 1) range.push(i);
+  // Push items from "current - 1" (if available) to current + 1 (if available)
+  for (
+    let i = Math.max(2, currentPage - delta);
+    i <= Math.min(totalPages - 1, currentPage + delta);
+    i++
+  ) {
+    // if current = 1, total = 7, pagination[] => [2]
+    // if current = 5, total = 7, pagination[] => [4, 5, 6];
+    // current = 7, total = 7, pagination[] => [6];
+    pagination.push(i);
   }
 
-  // Push last page - totalPages
-  range.push(totalPages);
-
-  /**
-   * range[] when totalPages is 5 and currentPage is 1 => [1, 2, 5];
-   * range[] when totalPages is 5 and currentPage is 3 => [1, 2, 3, 4, 5];
-   * range[] when totalPages is 5 and currentPage is 5 => [1, 5, 5];
-   */
-  for (let item of range) {
-    if (last) {
-      if (item - last === 3) pagination.push(last + 1);
-
-      if (item - last !== 1) pagination.push("...");
-    }
-
-    pagination.push(item);
-    last = item;
+  // if 3 or more pages exist before current page
+  //  items from 2 to current - 2 will be "..."
+  if (currentPage - delta > 2) {
+    // add "..." to the beginning
+    pagination.unshift("...");
   }
+
+  // if 3 or more exists after current page
+  // items from current + 2 to lastPage(totalPage) - 1 will be "..."
+  if (currentPage + delta < totalPages - 1) {
+    // add "..." to the end
+    pagination.push("...");
+  }
+
+  // Always add 1 (first page) to the beginning
+  pagination.unshift(1);
+  // Always add totalPage (last page) to the end
+  pagination.push(totalPages);
 
   return pagination;
 };
@@ -50,7 +53,7 @@ const Pagination = ({ state, actions, libraries }) => {
     libraries.source.stringify({ path, query, page: pageNo });
 
   // Pagination - array of numbers/dots for pages
-  const pagination = paginate(totalPages, page);
+  const paginationArray = paginate(totalPages, page);
 
   // Prefetch next page if it hasn't been fetched yet.
   useEffect(() => {
@@ -71,11 +74,11 @@ const Pagination = ({ state, actions, libraries }) => {
 
       <div className="">
         <ul>
-          {pagination.map(item => {
+          {paginationArray.map((item, index) => {
             // if item is dots
             if (item === "...") {
               return (
-                <li className="dots" key={item}>
+                <li className="dots" key={index}>
                   ...
                 </li>
               );
@@ -84,14 +87,14 @@ const Pagination = ({ state, actions, libraries }) => {
             // is item is current page
             if (item === page) {
               return (
-                <li className="active" key={item}>
+                <li className="active" key={index}>
                   {item}
                 </li>
               );
             }
 
             return (
-              <li key={item}>
+              <li key={index}>
                 <Link link={getPageLink(item)}>{item}</Link>
               </li>
             );
