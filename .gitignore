@@ -11,3 +11,4 @@ analyze
 .vscode
 **/package-lock.json
 .now
+e2e/**/*(failed).png

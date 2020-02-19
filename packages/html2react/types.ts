@@ -16,7 +16,7 @@ interface Html2React extends Package {
 export default Html2React;
 
 // Parse
-type NoProps = {
+export type NoProps = {
   [key: string]: string | number | boolean;
 };
 

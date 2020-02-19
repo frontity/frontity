@@ -10,7 +10,7 @@ import Image from "../image";
 
 describe("Image", () => {
   test('It\'s a normal image if loading === "eager"', () => {
-    const loading: "lazy" | "eager" | "auto" = "eager";
+    const loading: "lazy" | "eager" = "eager";
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",

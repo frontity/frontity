@@ -10,7 +10,7 @@ import Iframe from "../iframe";
 
 describe("Iframe", () => {
   test('It\'s a normal iframe if loading === "eager"', () => {
-    const loading: "lazy" | "eager" | "auto" = "eager";
+    const loading: "lazy" | "eager" = "eager";
     const props = {
       title: "Some fake title",
       src: "https://fake-src.com",
