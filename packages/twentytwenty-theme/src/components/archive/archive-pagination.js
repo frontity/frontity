@@ -60,16 +60,12 @@ const Pagination = ({ state, actions, libraries }) => {
     if (hasOlderPosts) actions.source.fetch(getPageLink(page + 1));
   }, []);
 
-  if (totalPages <= 1) {
-    return <div />;
-  }
-
   return (
     <Container>
       <div>
         {hasNewerPosts && (
           <Link link={getPageLink(page - 1)}>
-            ← Newer<span className="hidden"> Posts</span>
+            ← Newer<span className="hidden-on-sm"> Posts</span>
           </Link>
         )}
       </div>
@@ -107,7 +103,7 @@ const Pagination = ({ state, actions, libraries }) => {
       <div>
         {hasOlderPosts && (
           <Link link={getPageLink(page + 1)}>
-            Older<span className="hidden"> Posts</span> →
+            Older<span className="hidden-on-sm"> Posts</span> →
           </Link>
         )}
       </div>
@@ -138,7 +134,7 @@ const Container = styled.div`
       margin: 0 10px;
     }
 
-    .hidden {
+    .hidden-on-sm {
       display: none;
     }
   }
@@ -152,7 +148,7 @@ const Container = styled.div`
     justify-content: space-between;
 
     & > div {
-      .hidden {
+      .hidden-on-sm {
         display: none;
       }
     }
