@@ -1,5 +1,6 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
+import { AuthorData } from "@frontity/source/types/data";
 
 const authorHandler: Handler = async ({
   route,
@@ -53,13 +54,14 @@ const authorHandler: Handler = async ({
 
   Object.assign(currentPageData, {
     link: route,
+    query,
     id: firstPageData.id,
     items,
     total,
     totalPages,
     isArchive: true,
     isAuthor: true
-  });
+  } as AuthorData);
 
   // 6. If it's a search, add the information.
   if (query.s) {

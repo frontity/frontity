@@ -1,6 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
+import { PostTypeArchiveData } from "@frontity/source/types/data";
 
 const postTypeArchiveHandler = ({
   type,
@@ -31,6 +32,7 @@ const postTypeArchiveHandler = ({
   const currentPageData = state.source.data[route];
   Object.assign(state.source.data[route], {
     link: route,
+    query,
     type,
     items,
     total,
@@ -38,7 +40,7 @@ const postTypeArchiveHandler = ({
     isArchive: true,
     isPostTypeArchive: true,
     [`is${capitalize(type)}Archive`]: true
-  });
+  } as PostTypeArchiveData);
 
   // 6. If it's a search, add the information.
   if (query.s) {

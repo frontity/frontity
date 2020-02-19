@@ -1,6 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
+import { PostTypeData } from "@frontity/source/types/data";
 
 const postTypeHandler = ({
   endpoints
@@ -8,7 +9,7 @@ const postTypeHandler = ({
   endpoints: string[];
 }): Handler => async ({ route, params, state, libraries }) => {
   // 1. search id in state or get the entity from WP REST API
-  const { path } = libraries.source.parse(route);
+  const { path, query } = libraries.source.parse(route);
   if (!state.source.get(path).id) {
     const { slug } = params;
 
@@ -47,10 +48,12 @@ const postTypeHandler = ({
   const data = state.source.get(route);
   Object.assign(data, {
     type,
+    link: route,
+    query,
     id,
     isPostType: true,
     [`is${capitalize(type)}`]: true
-  });
+  } as PostTypeData);
 };
 
 export default postTypeHandler;
