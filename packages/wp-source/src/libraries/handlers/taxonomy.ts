@@ -79,7 +79,7 @@ const taxonomyHandler = ({
     isArchive: true,
     isTaxonomy: true,
     [`is${capitalize(firstPageData.taxonomy)}`]: true
-  } as TaxonomyData);
+  });
 
   // 6. If it's a search, add the information.
   if (query.s) {

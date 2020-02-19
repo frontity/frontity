@@ -68,7 +68,7 @@ const authorHandler: Handler = async ({
     totalPages,
     isArchive: true,
     isAuthor: true
-  } as AuthorData);
+  });
 
   // 6. If it's a search, add the information.
   if (query.s) {

@@ -53,7 +53,7 @@ const postTypeHandler = ({
     id,
     isPostType: true,
     [`is${capitalize(type)}`]: true
-  } as PostTypeData);
+  });
 };
 
 export default postTypeHandler;

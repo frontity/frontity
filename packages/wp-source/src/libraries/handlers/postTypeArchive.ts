@@ -52,7 +52,7 @@ const postTypeArchiveHandler = ({
     isArchive: true,
     isPostTypeArchive: true,
     [`is${capitalize(type)}Archive`]: true
-  } as PostTypeArchiveData);
+  });
 
   // 6. If it's a search, add the information.
   if (query.s) {
