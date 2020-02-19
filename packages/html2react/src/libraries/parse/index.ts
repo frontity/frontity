@@ -22,10 +22,21 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
       component: himalayaNode.tagName,
       props: himalayaNode.attributes.reduce(
         (props: Element["props"], { key, value }) => {
+          // Wordpress returns links with HTML escaped entitites so we have to decode them
+          if (typeof value === "string") value = decode(value);
+
+          // mapping from HTML attribute names to react names:  // https://github.com/facebook/react/blob/58b8797b7372c9296e65e08ce8297e4a394b7972/packages/react-dom/src/shared/DOMProperty.js#L241-L244
           if (key === "class") {
             props.className = value;
-          } else if (key === "style") {
+          } else if (key === "for") {
+            props.htmlFor = value;
+          } else if (key === "accept-charset") {
+            props["acceptCharset"] = value;
+          } else if (key === "http-equiv") {
+            props["httpEquiv"] = value;
+
             // Add inline styles to the component with `emotion`.
+          } else if (key === "style") {
             props.css = css(value);
           } else if (!/^on/.test(key)) {
             const camelCaseKey = attributesMap[key.toLowerCase()];

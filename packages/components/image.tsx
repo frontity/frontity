@@ -39,7 +39,7 @@ export interface Props {
   alt?: string;
   className?: string;
   rootMargin?: string;
-  loading?: "auto" | "lazy" | "eager";
+  loading?: "lazy" | "eager";
   height?: number;
 }
 
@@ -110,11 +110,11 @@ const Image: Image = ({
     return <img {...eagerAttributes} />;
   }
 
-  // Changes the loading attribute to "auto" if loading is "lazy"
+  // Delete the loading attribute if loading is "lazy"
   // but there is no height specified (see https://crbug.com/954323)
   if (loading === "lazy" && !(height > 0)) {
-    eagerAttributes.loading = "auto";
-    lazyAttributes.loading = "auto";
+    delete eagerAttributes.loading;
+    delete lazyAttributes.loading;
   }
 
   if (typeof window !== "undefined") {
