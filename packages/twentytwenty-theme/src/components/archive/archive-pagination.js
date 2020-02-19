@@ -62,15 +62,15 @@ const Pagination = ({ state, actions, libraries }) => {
 
   return (
     <Container>
-      <div>
+      <div className="directions">
         {hasNewerPosts && (
           <Link link={getPageLink(page - 1)}>
-            ← Newer<span className="hidden-on-sm"> Posts</span>
+            ← <span className="dir">Newer</span>
           </Link>
         )}
       </div>
 
-      <div>
+      <div id="generated">
         <ul>
           {paginationArray.map((item, index) => {
             // if item is dots, "..."
@@ -100,10 +100,10 @@ const Pagination = ({ state, actions, libraries }) => {
         </ul>
       </div>
 
-      <div>
+      <div className="directions">
         {hasOlderPosts && (
           <Link link={getPageLink(page + 1)}>
-            Older<span className="hidden-on-sm"> Posts</span> →
+            <span className="dir">Older</span> →
           </Link>
         )}
       </div>
@@ -124,19 +124,12 @@ const Container = styled.div`
   font-weight: 600;
   margin-left: auto;
   margin-right: auto;
+  line-height: 30px;
   width: calc(100% - 4rem);
   max-width: ${getMaxWidth};
 
   & > div {
-    display: inline-flex;
-
-    &:nth-child(2) {
-      margin: 0 10px;
-    }
-
-    .hidden-on-sm {
-      display: none;
-    }
+    display: inline-block;
   }
 
   @media (min-width: 700px) {
@@ -147,9 +140,11 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    & > div {
-      .hidden-on-sm {
-        display: none;
+    .directions {
+      a {
+        .dir::after {
+          content: " Posts";
+        }
       }
     }
   }
@@ -164,11 +159,15 @@ const Container = styled.div`
 
   ul {
     list-style: none;
-    margin: 0;
+    margin: 0 2rem;
 
     li {
       display: inline-block;
-      padding: 0 5px;
+      margin: 0;
+
+      &:not(:last-of-type) {
+        margin-right: 2rem;
+      }
     }
   }
 `;
