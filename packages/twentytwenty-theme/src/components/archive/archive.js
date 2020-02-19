@@ -52,7 +52,13 @@ const Archive = ({ state, showExcerpt, showMedia }) => {
           </Fragment>
         );
       })}
-      <Pagination />
+
+      {data.totalPages > 1 && (
+        <>
+          <PostSeparator />
+          <Pagination />
+        </>
+      )}
     </>
   );
 };
