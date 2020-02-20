@@ -70,17 +70,8 @@ const Pagination = ({ state, actions, libraries }) => {
         )}
       </Direction>
 
-      <div
-        css={css`
-          display: inline-block;
-        `}
-      >
-        <div
-          css={css`
-            list-style: none;
-            margin: 0 2rem;
-          `}
-        >
+      <div css={inlineBlock}>
+        <PagingList>
           {paginationArray.map((item, index) => {
             // if item is dots, "..."
             if (item === "...") {
@@ -98,7 +89,7 @@ const Pagination = ({ state, actions, libraries }) => {
               </PagingItem>
             );
           })}
-        </div>
+        </PagingList>
       </div>
 
       <Direction>
@@ -120,6 +111,10 @@ const maxWidths = {
   medium: "100rem"
 };
 
+const inlineBlock = css`
+  display: inline-block;
+`;
+
 const Container = styled.div`
   font-size: 1em;
   font-weight: 600;
@@ -136,6 +131,11 @@ const Container = styled.div`
     font-size: 1.3em;
     font-weight: 700;
   }
+`;
+
+const PagingList = styled.ul`
+  list-style: none;
+  margin: 0 2rem;
 `;
 
 const PagingItem = styled.li`
