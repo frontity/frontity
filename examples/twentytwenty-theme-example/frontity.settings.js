@@ -22,7 +22,7 @@ export default {
             ["About Us", "/about-us/"]
           ],
           colors: {
-            primary: "#cd2653",
+            primary: "#E6324B",
             headerBg: "#ffffff",
             footerBg: "#ffffff",
             bodyBg: "#f5efe0"
