@@ -1,6 +1,5 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
-import { AuthorData } from "@frontity/source/types/data";
 
 const authorHandler: Handler = async ({
   route,
