@@ -65,7 +65,7 @@ const Pagination = ({ state, actions, libraries }) => {
       <Direction>
         {hasNewerPosts && (
           <StyledLink link={getPageLink(page - 1)}>
-            ← <span>Newer</span>
+            ← <DirectionItem>Newer</DirectionItem>
           </StyledLink>
         )}
       </Direction>
@@ -104,7 +104,7 @@ const Pagination = ({ state, actions, libraries }) => {
       <Direction>
         {hasOlderPosts && (
           <StyledLink link={getPageLink(page + 1)}>
-            <span>Older</span> →
+            <DirectionItem>Older</DirectionItem> →
           </StyledLink>
         )}
       </Direction>
@@ -149,9 +149,11 @@ const PagingItem = styled.li`
 
 const Direction = styled.div`
   display: inline-block;
+`;
 
+const DirectionItem = styled.span`
   @media (min-width: 700px) {
-    span::after {
+    &:after {
       content: " Posts";
     }
   }
