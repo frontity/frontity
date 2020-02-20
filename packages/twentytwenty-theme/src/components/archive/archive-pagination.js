@@ -61,22 +61,12 @@ const Pagination = ({ state, actions, libraries }) => {
   }, []);
 
   return (
-    <Container
-      css={css`
-        a {
-          text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      `}
-    >
+    <Container>
       <Direction>
         {hasNewerPosts && (
-          <Link link={getPageLink(page - 1)}>
+          <StyledLink link={getPageLink(page - 1)}>
             ← <span>Newer</span>
-          </Link>
+          </StyledLink>
         )}
       </Direction>
 
@@ -112,7 +102,7 @@ const Pagination = ({ state, actions, libraries }) => {
 
             return (
               <PagingItem key={index}>
-                <Link link={getPageLink(item)}>{item}</Link>
+                <StyledLink link={getPageLink(item)}>{item}</StyledLink>
               </PagingItem>
             );
           })}
@@ -121,9 +111,9 @@ const Pagination = ({ state, actions, libraries }) => {
 
       <Direction>
         {hasOlderPosts && (
-          <Link link={getPageLink(page + 1)}>
+          <StyledLink link={getPageLink(page + 1)}>
             <span>Older</span> →
-          </Link>
+          </StyledLink>
         )}
       </Direction>
     </Container>
@@ -172,6 +162,14 @@ const Direction = styled.div`
     span::after {
       content: " Posts";
     }
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
