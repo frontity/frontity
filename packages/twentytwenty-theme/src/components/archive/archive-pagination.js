@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect, styled } from "frontity";
+import { connect, styled, css } from "frontity";
 import Link from "../link";
 
 const paginate = (totalPages, currentPage) => {
@@ -61,52 +61,71 @@ const Pagination = ({ state, actions, libraries }) => {
   }, []);
 
   return (
-    <Container>
-      <div className="directions">
+    <Container
+      css={css`
+        a {
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      `}
+    >
+      <Direction>
         {hasNewerPosts && (
           <Link link={getPageLink(page - 1)}>
-            ← <span className="dir">Newer</span>
+            ← <span>Newer</span>
           </Link>
         )}
-      </div>
+      </Direction>
 
-      <div id="generated">
-        <ul>
+      <div
+        css={css`
+          display: inline-block;
+        `}
+      >
+        <div
+          css={css`
+            list-style: none;
+            margin: 0 2rem;
+          `}
+        >
           {paginationArray.map((item, index) => {
             // if item is dots, "..."
             if (item === "...") {
               return (
-                <li className="dots" key={index}>
-                  ...
-                </li>
+                <PagingItem className="dots" key={index}>
+                  {`...`}
+                </PagingItem>
               );
             }
 
             // if item is current page
             if (item === page) {
               return (
-                <li className="active" key={index}>
+                <PagingItem className="active" key={index}>
                   {item}
-                </li>
+                </PagingItem>
               );
             }
 
             return (
-              <li key={index}>
+              <PagingItem key={index}>
                 <Link link={getPageLink(item)}>{item}</Link>
-              </li>
+              </PagingItem>
             );
           })}
-        </ul>
+        </div>
       </div>
 
-      <div className="directions">
+      <Direction>
         {hasOlderPosts && (
           <Link link={getPageLink(page + 1)}>
-            <span className="dir">Older</span> →
+            <span>Older</span> →
           </Link>
         )}
-      </div>
+      </Direction>
     </Container>
   );
 };
@@ -122,52 +141,36 @@ const maxWidths = {
 const Container = styled.div`
   font-size: 1em;
   font-weight: 600;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   line-height: 30px;
   width: calc(100% - 4rem);
   max-width: ${getMaxWidth};
 
-  & > div {
-    display: inline-block;
-  }
-
   @media (min-width: 700px) {
-    width: calc(100% - 8rem);
-    font-size: 1.3em;
-    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    .directions {
-      a {
-        .dir::after {
-          content: " Posts";
-        }
-      }
-    }
+    width: calc(100% - 8rem);
+    font-size: 1.3em;
+    font-weight: 700;
   }
+`;
 
-  a {
-    text-decoration: none;
+const PagingItem = styled.li`
+  display: inline-block;
+  margin: 0;
 
-    &:hover {
-      text-decoration: underline;
-    }
+  &:not(:last-of-type) {
+    margin-right: 2rem;
   }
+`;
 
-  ul {
-    list-style: none;
-    margin: 0 2rem;
+const Direction = styled.div`
+  display: inline-block;
 
-    li {
-      display: inline-block;
-      margin: 0;
-
-      &:not(:last-of-type) {
-        margin-right: 2rem;
-      }
+  @media (min-width: 700px) {
+    span::after {
+      content: " Posts";
     }
   }
 `;
