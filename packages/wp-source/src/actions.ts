@@ -20,9 +20,19 @@ const actions: WpSource["actions"]["source"] = {
     // Get route and route params
     const route = normalize(link);
     const routeParams = parse(link);
+    const { query, page } = routeParams;
 
     // Get current data object
     const data = source.data[route];
+
+    // Add the attributes that should be present even if fetch fails or we throw a ServerError below
+    state.source.data[route] = {
+      ...state.source.data[route],
+      link: route,
+      path: routeParams.path,
+      query,
+      page
+    };
 
     // Get options
     const force = options ? options.force : false;
@@ -43,6 +53,7 @@ const actions: WpSource["actions"]["source"] = {
       let { path } = routeParams;
       // check if this is the homepage URL
       const isHome = path === normalize(state.source.subdirectory || "/");
+
       // transform path if there is some redirection
       const redirection = getMatch(path, redirections);
       if (redirection) path = redirection.func(redirection.params);

@@ -16,15 +16,6 @@ const taxonomyHandler = ({
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
 
-  // Add the attributes that should be present even if fetch fails or we throw a ServerError below
-  state.source.data[route] = {
-    ...state.source.data[route],
-    link: route,
-    path,
-    query,
-    page
-  };
-
   // 1. search id in state or get it from WP REST API
   let { id } = state.source.get(path);
   if (!id || force) {

@@ -10,16 +10,7 @@ const postTypeArchiveHandler = ({
   endpoint: string;
 }): Handler => async ({ route, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { page, query, path } = parse(route);
-
-  // Add the attributes that should be present even if fetch fails or we throw a ServerError below
-  state.source.data[route] = {
-    ...state.source.data[route],
-    link: route,
-    path,
-    query,
-    page
-  };
+  const { page, query } = parse(route);
 
   // 1. fetch the specified page
   const response = await api.get({

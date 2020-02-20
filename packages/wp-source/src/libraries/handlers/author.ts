@@ -12,15 +12,6 @@ const authorHandler: Handler = async ({
   const { path, page, query } = parse(route);
   const { slug } = params;
 
-  // Add the attributes that should be present even if fetch fails or we throw a ServerError below
-  state.source.data[route] = {
-    ...state.source.data[route],
-    link: route,
-    path,
-    query,
-    page
-  };
-
   // 1. Search id in state or get it from WP REST API.
   let { id } = state.source.get(path);
   if (!id || force) {
