@@ -84,20 +84,12 @@ const Pagination = ({ state, actions, libraries }) => {
           {paginationArray.map((item, index) => {
             // if item is dots, "..."
             if (item === "...") {
-              return (
-                <PagingItem className="dots" key={index}>
-                  {`...`}
-                </PagingItem>
-              );
+              return <PagingItem key={index}>{`...`}</PagingItem>;
             }
 
             // if item is current page
             if (item === page) {
-              return (
-                <PagingItem className="active" key={index}>
-                  {item}
-                </PagingItem>
-              );
+              return <PagingItem key={index}>{item}</PagingItem>;
             }
 
             return (
