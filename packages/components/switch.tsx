@@ -14,7 +14,7 @@ type SwitchComponent = React.FC<
   >
 >;
 
-// Default Frontity 404 Error Component
+// Default 404 Error Component
 const DefaultErrorComponent = () => (
   <div>
     <h1>404!!</h1>

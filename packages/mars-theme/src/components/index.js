@@ -1,7 +1,6 @@
 import React from "react";
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
-
 import Header from "./header";
 import List from "./list";
 import Post from "./post";
@@ -43,7 +42,6 @@ const Theme = ({ state }) => {
           <List when={data.isArchive} />
           <Post when={data.isPostType} />
           <PageError when={data.isError} />
-          jdjfaf
         </Switch>
       </Main>
     </>
