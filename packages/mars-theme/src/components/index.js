@@ -43,6 +43,7 @@ const Theme = ({ state }) => {
           <List when={data.isArchive} />
           <Post when={data.isPostType} />
           <PageError when={data.isError} />
+          jdjfaf
         </Switch>
       </Main>
     </>
