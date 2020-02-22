@@ -16,8 +16,15 @@ const authorHandler: Handler = async ({
   let { id } = state.source.get(path);
   if (!id || force) {
     // Request author from WP
-    const response = await api.get({ endpoint: "users", params: { slug } });
-    const [entity] = await populate({ response, state, force: true });
+    const response = await api.get({
+      endpoint: "users",
+      params: { slug }
+    });
+    const [entity] = await populate({
+      response,
+      state,
+      force: true
+    });
     if (!entity)
       throw new ServerError(
         `entity from endpoint "users" with slug "${slug}" not found`,
@@ -47,6 +54,14 @@ const authorHandler: Handler = async ({
   const total = getTotal(response, items.length);
   const totalPages = getTotalPages(response, 0);
 
+  // returns true if next page exists
+  const hasOlderPosts = page < totalPages;
+  // returns true if previous page exists
+  const hasNewerPosts = page > 1;
+
+  const getPageLink = (page: number) =>
+    libraries.source.stringify({ path, query, page });
+
   // 5. Add data to source..
   const currentPageData = state.source.data[route];
   const firstPageData = state.source.data[path];
@@ -57,7 +72,9 @@ const authorHandler: Handler = async ({
     total,
     totalPages,
     isArchive: true,
-    isAuthor: true
+    isAuthor: true,
+    prev: hasOlderPosts ? getPageLink(page - 1) : undefined,
+    next: hasNewerPosts ? getPageLink(page + 1) : undefined
   });
 
   // 6. If it's a search, add the information.

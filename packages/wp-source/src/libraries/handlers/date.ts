@@ -46,6 +46,14 @@ export const dateHandler: Handler = async ({
   const total = getTotal(response, items.length);
   const totalPages = getTotalPages(response, 0);
 
+  // returns true if next page exists
+  const hasOlderPosts = page < totalPages;
+  // returns true if previous page exists
+  const hasNewerPosts = page > 1;
+
+  const getPageLink = (page: number) =>
+    libraries.source.stringify({ path, query, page });
+
   // 5. add data to source
   const currentPageData = state.source.data[route];
   Object.assign(currentPageData, {
@@ -56,7 +64,9 @@ export const dateHandler: Handler = async ({
     total,
     totalPages,
     isArchive: true,
-    isDate: true
+    isDate: true,
+    prev: hasOlderPosts ? getPageLink(page - 1) : undefined,
+    next: hasNewerPosts ? getPageLink(page + 1) : undefined
   });
 
   // 6. If it's a search, add the information.
