@@ -1,7 +1,10 @@
-import React, { ReactNode, ReactNodeArray, isValidElement } from "react";
-import { connect } from "frontity";
-import { Connect, Package } from "frontity/types";
 import { warn } from "@frontity/error";
+import { connect, styled } from "frontity";
+import { Connect, Package } from "frontity/types";
+import React, { isValidElement, ReactNode, ReactNodeArray } from "react";
+
+// TODO: Better Handling of Error Responses.
+// Fix issues with path props (isError value)
 
 type SwitchComponent = React.FC<
   Connect<
@@ -14,57 +17,98 @@ type SwitchComponent = React.FC<
   >
 >;
 
-// Default 404 Error Component
-const DefaultErrorComponent = () => (
-  <div>
-    <h1>404!!</h1>
-    <p>Route does not exist</p>
-  </div>
+const description404 = (
+  <>
+    That page can’t be found{" "}
+    <span role="img" aria-label="confused face">
+      😕
+    </span>
+  </>
 );
 
+const description = (
+  <>
+    Don&apos;t panic! Seems like you encountered an error. If this persists,
+    <a href="https://community.frontity.org"> let us know </a> or try refreshing
+    your browser.
+  </>
+);
+
+// Default 404 Error Component
+const DefaultErrorComponent = ({ state }) => {
+  const data = state.source.get(state.router.link);
+
+  const title = "Oops! Something went wrong";
+  const title404 = "Oops! 404";
+
+  return (
+    <Container>
+      <Title>{data.is404 ? title404 : title}</Title>
+      <Description>{data.is404 ? description404 : description}</Description>
+    </Container>
+  );
+};
+
+const ErrorComponent = connect(DefaultErrorComponent);
+
+const Container = styled.div`
+  width: 800px;
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: rgba(12, 17, 43);
+  font-size: 4em;
+`;
+
+const Description = styled.div`
+  line-height: 1.6em;
+  color: rgba(12, 17, 43, 0.8);
+  margin: 24px 0;
+`;
+
 const Switch: SwitchComponent = ({ state, children }) => {
-  // Current Path
-  const currentPath = state.router.link;
-  // Array of components
+  const currentPath = state.router.link.replace(/\/$/, "");
   const components: ReactNodeArray = React.Children.toArray(children);
 
-  // Warn if any node is not an instace of React Node
-  if (components.find(component => !isValidElement(component))) {
+  // Check if components[] has a non-ReactNode type Element
+  const hasInvalidComponent: boolean =
+    components.findIndex(component => !React.isValidElement(component)) !== -1;
+
+  if (hasInvalidComponent) {
     warn("WIP: Child of <Switch /> component should be of type ReactNode");
   }
 
-  // last component
-  const lastComponent = components[components.length - 1];
+  // Match path with currentPath(state.router.link)
+  const pathIsAMatch = (props): boolean =>
+    props.path && props.path === currentPath;
 
-  //  Check if path matches currentPath
-  const pathIsAMatch = ({ path }) => path && path === currentPath;
-
-  // Check if a 404 error component exist
-  // 404 component should not have a 'when'
-  const hasNotFoundComponent =
-    isValidElement(lastComponent) && !lastComponent.props.when;
+  const componentIsAMatch = (component: ReactNode) =>
+    isValidElement(component) &&
+    (component.props.when ||
+      (component.props.path && pathIsAMatch(component.props)));
 
   // Filter components by the value of the 'when' props or path
-  const filteredComponents = components.filter(
-    component =>
-      isValidElement(component) &&
-      (component.props.when || pathIsAMatch(component.props))
+  const filteredComponents = components.filter(component =>
+    componentIsAMatch(component)
   );
 
-  // Iterate and render filtered components if 1 or more components exists
+  // Render filteredComponents
   if (filteredComponents.length > 0) {
     return (
-      <>{filteredComponents.map(filteredComponent => filteredComponent)}</>
+      <React.Fragment>
+        {filteredComponents.map(filteredComponent => filteredComponent)}
+      </React.Fragment>
     );
   }
 
-  // return lastComponents if 404 component
-  if (hasNotFoundComponent) {
-    return <>{lastComponent}</>;
-  }
-
   // Return frontity default 404 page
-  return <DefaultErrorComponent />;
+  return <ErrorComponent />;
 };
 
 export default connect(Switch);
