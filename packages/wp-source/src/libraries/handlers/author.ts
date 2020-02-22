@@ -1,5 +1,6 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
+import { DateData, AuthorData } from "@frontity/source/types/data";
 
 const authorHandler: Handler = async ({
   route,
@@ -66,16 +67,20 @@ const authorHandler: Handler = async ({
   const currentPageData = state.source.data[route];
   const firstPageData = state.source.data[path];
 
-  Object.assign(currentPageData, {
+  const newPageData: AuthorData = {
     id: firstPageData.id,
     items,
     total,
     totalPages,
     isArchive: true,
     isAuthor: true,
+    isReady: currentPageData.isReady,
+    isFetching: currentPageData.isFetching,
     prev: hasOlderPosts ? getPageLink(page - 1) : undefined,
     next: hasNewerPosts ? getPageLink(page + 1) : undefined
-  });
+  };
+
+  Object.assign(currentPageData, newPageData);
 
   // 6. If it's a search, add the information.
   if (query.s) {

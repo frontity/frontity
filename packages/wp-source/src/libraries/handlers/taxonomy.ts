@@ -1,6 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
+import { TaxonomyData } from "@frontity/source/types/data";
 
 const taxonomyHandler = ({
   taxonomy,
@@ -84,7 +85,7 @@ const taxonomyHandler = ({
   const currentPageData = state.source.data[route];
   const firstPageData = state.source.data[path];
 
-  Object.assign(currentPageData, {
+  const newPageData: TaxonomyData = {
     id: firstPageData.id,
     taxonomy: firstPageData.taxonomy,
     items,
@@ -92,10 +93,14 @@ const taxonomyHandler = ({
     totalPages,
     isArchive: true,
     isTaxonomy: true,
+    isFetching: currentPageData.isFetching,
+    isReady: currentPageData.isReady,
     [`is${capitalize(firstPageData.taxonomy)}`]: true,
     prev: hasOlderPosts ? getPageLink(page - 1) : undefined,
     next: hasNewerPosts ? getPageLink(page + 1) : undefined
-  });
+  };
+
+  Object.assign(currentPageData, newPageData);
 
   // 6. If it's a search, add the information.
   if (query.s) {
