@@ -1,5 +1,5 @@
-import decodeServer from "./server";
-import decodeClient from "./client";
+import decodeServer from "../server";
+import decodeClient from "../client";
 import * as he from "he";
 
 jest.mock("he");
