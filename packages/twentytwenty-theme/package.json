@@ -1,6 +1,6 @@
 {
   "name": "@frontity/twentytwenty-theme",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "The WordPress Twenty Twenty starter theme for Frontity",
   "keywords": [
     "wordpress",
@@ -17,9 +17,9 @@
     "url": "https://community.frontity.org"
   },
   "dependencies": {
-    "@frontity/components": "^1.1.14",
-    "@frontity/html2react": "^1.1.14",
-    "frontity": "^1.4.2",
+    "@frontity/components": "^1.2.0",
+    "@frontity/html2react": "^1.2.0",
+    "frontity": "^1.5.0",
     "react-spinners": "^0.5.4",
     "react-spring": "8.0.27"
   }
