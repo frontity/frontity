@@ -3,7 +3,7 @@
 import React from "react";
 import { Head, connect } from "frontity";
 import { Connect, Package } from "frontity/types";
-import useInView from "@frontity/hooks/use-in-view";
+import { useInView } from "react-intersection-observer";
 
 // Hides any image rendered by this component that is not
 // inside a <noscript> when JS is disabled.
@@ -32,14 +32,14 @@ const noProxyScript = `
   }
 `;
 
-interface Props {
+export interface Props {
   src?: string;
   srcSet?: string;
   sizes?: string;
   alt?: string;
   className?: string;
   rootMargin?: string;
-  loading?: "auto" | "lazy" | "eager";
+  loading?: "lazy" | "eager";
   height?: number;
 }
 
@@ -110,11 +110,11 @@ const Image: Image = ({
     return <img {...eagerAttributes} />;
   }
 
-  // Changes the loading attribute to "auto" if loading is "lazy"
+  // Delete the loading attribute if loading is "lazy"
   // but there is no height specified (see https://crbug.com/954323)
   if (loading === "lazy" && !(height > 0)) {
-    eagerAttributes.loading = "auto";
-    lazyAttributes.loading = "auto";
+    delete eagerAttributes.loading;
+    delete lazyAttributes.loading;
   }
 
   if (typeof window !== "undefined") {
@@ -125,9 +125,9 @@ const Image: Image = ({
       typeof IntersectionObserver !== "undefined" &&
       !("loading" in HTMLImageElement.prototype && height > 0)
     ) {
-      const [onScreen, ref] = useInView({
+      const [ref, onScreen] = useInView({
         rootMargin: rootMargin,
-        onlyOnce: true
+        triggerOnce: true
       });
 
       return (
@@ -147,7 +147,6 @@ const Image: Image = ({
           {...(state.frontity.rendering === "csr"
             ? eagerAttributes
             : lazyAttributes)}
-          suppressHydrationWarning
         />
       </>
     );

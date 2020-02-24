@@ -22,15 +22,10 @@
     "access": "public"
   },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand"
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "jest": "^24.7.1",
-    "react-test-renderer": "^16.8.6",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+    "react-test-renderer": "^16.8.6"
   }
 }

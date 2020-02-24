@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image Processor should process images from data-src 1`] = `
+<div>
+  <mocked-img
+    alt="Frontity"
+    data-src="https://frontity.org/logo.png"
+    src="https://frontity.org/logo.png"
+    width="500"
+  />
+</div>
+`;
+
+exports[`Image Processor should process images from src 1`] = `
+<div>
+  <mocked-img
+    alt="Frontity"
+    src="https://frontity.org/logo.png"
+    width="500"
+  />
+</div>
+`;

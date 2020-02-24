@@ -5,13 +5,16 @@
 
 import React from "react";
 import TestRenderer from "react-test-renderer";
-import * as useInView from "@frontity/hooks/use-in-view";
+import { useInView } from "react-intersection-observer";
 import Image from "../image";
 
-jest.mock("@frontity/hooks/use-in-view");
+jest.mock("react-intersection-observer", () => ({
+  __esModule: true,
+  useInView: jest.fn()
+}));
 
 describe("Image", () => {
-  const mockedUseInView = useInView as jest.Mocked<typeof useInView>;
+  const mockedUseInView = useInView as jest.MockedFunction<typeof useInView>;
 
   beforeEach(() => {
     delete (HTMLImageElement as any).prototype.loading;
@@ -22,11 +25,11 @@ describe("Image", () => {
   });
 
   afterEach(() => {
-    mockedUseInView.default.mockReset();
+    mockedUseInView.mockReset();
   });
 
   test('works when loading === "eager"', () => {
-    const loading: "lazy" | "eager" | "auto" = "eager";
+    const loading: "lazy" | "eager" = "eager";
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
@@ -78,7 +81,7 @@ describe("Image", () => {
 
   test("works with `IntersectionObserver if `height` prop is not specified", () => {
     (HTMLImageElement as any).prototype.loading = true;
-    mockedUseInView.default.mockReturnValue([false, undefined]);
+    mockedUseInView.mockReturnValue([() => {}, false, undefined]);
 
     const props = {
       alt: "Some fake alt text",
@@ -94,7 +97,7 @@ describe("Image", () => {
   });
 
   test("works with `IntersectionObserver` and is out of view", () => {
-    mockedUseInView.default.mockReturnValue([false, undefined]);
+    mockedUseInView.mockReturnValue([() => {}, false, undefined]);
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
@@ -108,7 +111,7 @@ describe("Image", () => {
   });
 
   test("works with `IntersectionObserver` and is in view", () => {
-    mockedUseInView.default.mockReturnValue([true, undefined]);
+    mockedUseInView.mockReturnValue([() => {}, true, undefined]);
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",

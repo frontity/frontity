@@ -1,4 +1,4 @@
-import { css } from "frontity";
+import { css, decode } from "frontity";
 import { parse as himalaya } from "himalaya";
 import { Element, Node, Parse, Attributes, AdaptNode } from "../../../types";
 import htmlAttributes from "./attributes/html.json";
@@ -13,7 +13,7 @@ const attributesMap: Attributes = htmlAttributes
   }, {});
 
 // Adapts the Himalaya AST Specification v1 to our format.
-const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
+const adaptNode: AdaptNode = (himalayaNode, parent) => {
   let node: Node;
 
   if (himalayaNode.type === "element") {
@@ -22,10 +22,21 @@ const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
       component: himalayaNode.tagName,
       props: himalayaNode.attributes.reduce(
         (props: Element["props"], { key, value }) => {
+          // Wordpress returns links with HTML escaped entitites so we have to decode them
+          if (typeof value === "string") value = decode(value);
+
+          // mapping from HTML attribute names to react names:  // https://github.com/facebook/react/blob/58b8797b7372c9296e65e08ce8297e4a394b7972/packages/react-dom/src/shared/DOMProperty.js#L241-L244
           if (key === "class") {
             props.className = value;
-          } else if (key === "style") {
+          } else if (key === "for") {
+            props.htmlFor = value;
+          } else if (key === "accept-charset") {
+            props["acceptCharset"] = value;
+          } else if (key === "http-equiv") {
+            props["httpEquiv"] = value;
+
             // Add inline styles to the component with `emotion`.
+          } else if (key === "style") {
             props.css = css(value);
           } else if (!/^on/.test(key)) {
             const camelCaseKey = attributesMap[key.toLowerCase()];
@@ -41,7 +52,7 @@ const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
 
     node.children = himalayaNode.children.reduce(
       (tree: Node[], child): Node[] => {
-        const childAdapted = adaptNode(child, decode, node as Element);
+        const childAdapted = adaptNode(child, node as Element);
         if (childAdapted) tree.push(childAdapted);
         return tree;
       },
@@ -76,9 +87,9 @@ const adaptNode: AdaptNode = (himalayaNode, decode, parent) => {
   return node;
 };
 
-const parse: Parse = (html, decode) =>
+const parse: Parse = html =>
   himalaya(html).reduce((tree: Node[], element) => {
-    const adapted = adaptNode(element, decode);
+    const adapted = adaptNode(element);
     if (adapted) tree.push(adapted);
     return tree;
   }, []);

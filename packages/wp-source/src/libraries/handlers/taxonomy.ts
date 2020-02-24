@@ -1,5 +1,6 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
+import { ServerError } from "@frontity/source";
 
 const taxonomyHandler = ({
   taxonomy,
@@ -11,20 +12,21 @@ const taxonomyHandler = ({
   endpoint: string;
   postTypeEndpoint?: string;
   params?: Record<string, any>;
-}): Handler => async ({ route, params, state, libraries }) => {
+}): Handler => async ({ route, params, state, libraries, force }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { path, page, query } = parse(route);
 
   // 1. search id in state or get it from WP REST API
   let { id } = state.source.get(path);
-  if (!id) {
+  if (!id || force) {
     const { slug } = params;
     // Request entity from WP
     const response = await api.get({ endpoint, params: { slug } });
-    const [entity] = await populate({ response, state });
+    const [entity] = await populate({ response, state, force: true });
     if (!entity)
-      throw new Error(
-        `entity from endpoint "${endpoint}" with slug "${slug}" not found`
+      throw new ServerError(
+        `entity from endpoint "${endpoint}" with slug "${slug}" not found`,
+        404
       );
     id = entity.id;
   }
@@ -45,8 +47,9 @@ const taxonomyHandler = ({
   // 3. populate response
   const items = await populate({ response, state });
   if (page > 1 && items.length === 0)
-    throw new Error(
-      `${taxonomy} with slug "${params.slug}" doesn't have page ${page}`
+    throw new ServerError(
+      `${taxonomy} with slug "${params.slug}" doesn't have page ${page}`,
+      404
     );
 
   // 4. get posts and pages count

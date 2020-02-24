@@ -14,6 +14,7 @@ let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
+  store.state.source.api = "https://test.frontity.io/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -91,7 +92,10 @@ describe("tag", () => {
 
   test("returns 404 if tag doesn't exist in WP", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    api.get = jest
+      .fn()
+      .mockResolvedValue(mockResponse([], {}, { status: 404 }));
+
     // Fetch entities
     await store.actions.source.fetch("/tag/non-existent/");
     expect(api.get).toHaveBeenCalledTimes(1);

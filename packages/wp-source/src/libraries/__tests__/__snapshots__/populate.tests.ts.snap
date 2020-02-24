@@ -22,7 +22,7 @@ Array [
 
 exports[`populate add new custom post types & taxonomies to the state 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "",
   "attachment": Object {
     "11": Object {
       "author": 1,
@@ -194,7 +194,7 @@ Array [
 
 exports[`populate adds posts and embedded into state 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "",
   "attachment": Object {
     "1": Object {
       "author": 1,

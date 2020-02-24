@@ -1,5 +1,4 @@
 [
-  "acceptCharset",
   "accessKey",
   "allowFullScreen",
   "allowTransparency",
@@ -10,7 +9,6 @@
   "cellSpacing",
   "charSet",
   "classID",
-  "className",
   "colSpan",
   "contentEditable",
   "contextMenu",
@@ -24,8 +22,6 @@
   "formTarget",
   "frameBorder",
   "hrefLang",
-  "htmlFor",
-  "httpEquiv",
   "inputMode",
   "keyParams",
   "keyType",

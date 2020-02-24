@@ -2,7 +2,7 @@
 
 exports[`author doesn't exist in source.author 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -175,7 +175,7 @@ Object {
 
 exports[`author doesn't return 404 if the first page is empty (no headers) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -219,7 +219,7 @@ Object {
 
 exports[`author doesn't return 404 if the first page is empty 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -291,7 +291,7 @@ Array [
 
 exports[`author fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -471,7 +471,7 @@ Object {
 
 exports[`author is requested with any query param 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -649,16 +649,19 @@ Object {
 
 exports[`author returns 404 if author doesn't exist in WP 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
   "category": Object {},
   "categoryBase": "",
   "data": Object {
     "/author/non-existent/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "entity from endpoint \\"users\\" with slug \\"non-existent\\" not found",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -681,7 +684,7 @@ Object {
 
 exports[`author returns 404 if the page fetched is out of range 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -700,9 +703,12 @@ Object {
       "isReady": false,
     },
     "/author/author-1/page/3/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "author \\"author-1\\" doesn't have page 3",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -725,7 +731,7 @@ Object {
 
 exports[`author was populated but not accessed 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.io/wp-json",
   "attachment": Object {
     "4": Object {
       "author": 1,

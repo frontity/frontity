@@ -1,12 +1,15 @@
+import * as frontity from "frontity";
 import Api from "../api";
-import { fetch } from "frontity";
+import { Response as NodeResponse } from "node-fetch";
 
 jest.mock("frontity");
-const mockedFetch = (fetch as any) as jest.Mock;
+const mockedFrontity = frontity as jest.Mocked<typeof frontity>;
 
-const lastFetch = () => mockedFetch.mock.calls.slice(-1)[0][0];
+const response = (new NodeResponse() as unknown) as Response;
+mockedFrontity.fetch.mockResolvedValue(response);
+
+const lastFetch = () => mockedFrontity.fetch.mock.calls.slice(-1)[0][0];
 const api = new Api();
-
 describe("api", () => {
   test("get from WP.org without params", async () => {
     api.get({

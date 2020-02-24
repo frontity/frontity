@@ -1,4 +1,4 @@
-import { RouteParams } from "@frontity/source";
+import { RouteParams } from "@frontity/source/types";
 import WpSource from "../../types";
 
 export const addFinalSlash = (path: string): string =>
