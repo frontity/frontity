@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.1
+
+### Patch Changes
+
+- [`80fb05f2`](https://github.com/frontity/frontity/commit/80fb05f237a3267ad27d131753ff82ced2d3d305) [#325](https://github.com/frontity/frontity/pull/325) Thanks [@luisherranz](https://github.com/luisherranz)! - The `decode` function now properly decodes numeric entities.
+
+* [`74eb448e`](https://github.com/frontity/frontity/commit/74eb448e359e1e33b1bd1deb52932850253763f4) [#323](https://github.com/frontity/frontity/pull/323) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix missing typescript dependency in the frontity package. This package is the one responsible to inject typescript in a Frontity Project and the Frontity CLI.
+
 ## 1.5.0
 
 ### Minor Changes
