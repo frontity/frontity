@@ -1,6 +1,6 @@
 {
   "name": "example-twentytwenty-theme",
-  "version": "1.0.1-beta.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Example of a project using mars-theme.",
   "scripts": {
@@ -18,12 +18,12 @@
     "node": "12.x"
   },
   "dependencies": {
-    "@frontity/core": "^1.4.0",
-    "@frontity/html2react": "^1.1.14",
-    "@frontity/twentytwenty-theme": "^1.0.0-beta.0",
-    "@frontity/tiny-router": "^1.0.17",
-    "@frontity/wp-source": "^1.4.2",
+    "@frontity/core": "^1.5.0",
+    "@frontity/html2react": "^1.2.0",
+    "@frontity/twentytwenty-theme": "^1.0.0",
+    "@frontity/tiny-router": "^1.1.0",
+    "@frontity/wp-source": "^1.5.0",
     "babel-plugin-frontity": "^1.0.1",
-    "frontity": "^1.4.2"
+    "frontity": "^1.5.0"
   }
 }

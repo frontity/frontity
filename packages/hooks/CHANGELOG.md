@@ -1,126 +1,77 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 1.2.0
+
+### Minor Changes
+
+- [`1aa1fb22`](https://github.com/frontity/frontity/commit/1aa1fb22e4da9f0c8b00dd08cb364eea31f20a6c) [#256](https://github.com/frontity/frontity/pull/256) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Deprecate the @frontity/hooks package and recommend https://github.com/thebuilder/react-intersection-observer instead.
+
+### Patch Changes
+
+- [`b9372580`](https://github.com/frontity/frontity/commit/b937258068c13e97265d96a6239d584673a17fcd) [#251](https://github.com/frontity/frontity/pull/251) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Bugfix for useInView hook. Fixes occasional error when attempting to find a nonexistent element in page.
+- Updated dependencies [[`417f2b0f`](https://github.com/frontity/frontity/commit/417f2b0f0b6f5626be253eb3f1be2daf257b71ef), [`495771f8`](https://github.com/frontity/frontity/commit/495771f83951f192f92d3162221cedc9b791e399), [`80c1aa3a`](https://github.com/frontity/frontity/commit/80c1aa3aee6cf04f46d6fa1a409abfcae2c511cc)]:
+  - frontity@1.5.0
 
 ## [1.1.14](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.13...@frontity/hooks@1.1.14) (2019-12-10)
 
 **Note:** Version bump only for package @frontity/hooks
 
-
-
-
-
 ## [1.1.13](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.12...@frontity/hooks@1.1.13) (2019-11-04)
 
 **Note:** Version bump only for package @frontity/hooks
-
-
-
-
 
 ## [1.1.12](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.11...@frontity/hooks@1.1.12) (2019-10-10)
 
 **Note:** Version bump only for package @frontity/hooks
 
-
-
-
-
 ## [1.1.11](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.10...@frontity/hooks@1.1.11) (2019-10-02)
-
 
 ### Bug Fixes
 
-* **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
-
-
-
-
+- **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
 
 ## [1.1.10](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.9...@frontity/hooks@1.1.10) (2019-09-10)
 
 **Note:** Version bump only for package @frontity/hooks
 
-
-
-
-
 ## [1.1.9](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.8...@frontity/hooks@1.1.9) (2019-08-12)
 
 **Note:** Version bump only for package @frontity/hooks
-
-
-
-
 
 ## [1.1.8](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.7...@frontity/hooks@1.1.8) (2019-07-12)
 
 **Note:** Version bump only for package @frontity/hooks
 
-
-
-
-
 ## [1.1.7](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.6...@frontity/hooks@1.1.7) (2019-07-04)
 
 **Note:** Version bump only for package @frontity/hooks
-
-
-
-
 
 ## [1.1.6](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.5...@frontity/hooks@1.1.6) (2019-07-04)
 
 **Note:** Version bump only for package @frontity/hooks
 
-
-
-
-
 ## [1.1.5](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.4...@frontity/hooks@1.1.5) (2019-07-01)
 
 **Note:** Version bump only for package @frontity/hooks
-
-
-
-
 
 ## [1.1.4](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.3...@frontity/hooks@1.1.4) (2019-06-20)
 
 **Note:** Version bump only for package @frontity/hooks
 
-
-
-
-
 ## [1.1.3](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.2...@frontity/hooks@1.1.3) (2019-06-20)
 
 **Note:** Version bump only for package @frontity/hooks
-
-
-
-
 
 ## [1.1.2](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.1...@frontity/hooks@1.1.2) (2019-06-20)
 
 **Note:** Version bump only for package @frontity/hooks
 
-
-
-
-
 ## [1.1.1](https://github.com/frontity/frontity/compare/@frontity/hooks@1.1.0...@frontity/hooks@1.1.1) (2019-06-19)
 
 **Note:** Version bump only for package @frontity/hooks
 
-
-
-
-
 # 1.1.0 (2019-06-19)
-
 
 ### Features
 
-* **packages:** creates packages @frontity/components, @frontity/hooks, and adds image processor to @frontity/html2react ([#130](https://github.com/frontity/frontity/issues/130)) ([6af4aa1](https://github.com/frontity/frontity/commit/6af4aa1))
+- **packages:** creates packages @frontity/components, @frontity/hooks, and adds image processor to @frontity/html2react ([#130](https://github.com/frontity/frontity/issues/130)) ([6af4aa1](https://github.com/frontity/frontity/commit/6af4aa1))
