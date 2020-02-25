@@ -98,7 +98,7 @@ const taxonomyHandler = ({
     [`is${capitalize(firstPageData.taxonomy)}`]: true,
 
     // Add those keys if hasOlderPosts / hasNewerPosts === true
-    ...(hasOlderPosts && { prev: getPageLink(page - 1) }),
+    ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
     ...(hasNewerPosts && { next: getPageLink(page + 1) })
   };
 

@@ -67,7 +67,7 @@ export type BaseData = {
   page?: number;
   path?: string;
   next?: string;
-  prev?: string;
+  previous?: string;
 };
 
 // ERROR

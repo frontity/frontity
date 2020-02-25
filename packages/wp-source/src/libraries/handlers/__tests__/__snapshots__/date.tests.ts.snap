@@ -642,7 +642,7 @@ Object {
       "month": undefined,
       "page": 1,
       "path": "/2019/",
-      "prev": "/2019/?some=param",
+      "previous": "/2019/?some=param",
       "query": Object {
         "some": "param",
       },
@@ -1012,7 +1012,7 @@ Object {
       "month": undefined,
       "page": 1,
       "path": "/2019/",
-      "prev": "/2019/",
+      "previous": "/2019/",
       "query": Object {},
       "total": 5,
       "totalPages": 2,

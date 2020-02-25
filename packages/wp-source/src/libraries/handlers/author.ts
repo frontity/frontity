@@ -78,7 +78,7 @@ const authorHandler: Handler = async ({
     isFetching: currentPageData.isFetching,
 
     // Add those keys if hasOlderPosts / hasNewerPosts === true
-    ...(hasOlderPosts && { prev: getPageLink(page - 1) }),
+    ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
     ...(hasNewerPosts && { next: getPageLink(page + 1) })
   };
 
