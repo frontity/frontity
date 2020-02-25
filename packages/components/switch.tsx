@@ -1,9 +1,6 @@
 import { connect, styled, warn } from "frontity";
 import { Package } from "frontity/types";
-import React, { isValidElement, ReactNode, ReactNodeArray } from "react";
-
-// TODO: Better Handling of Error Responses.
-// Fix issues with path props (isError value)
+import React, { isValidElement, ReactNodeArray } from "react";
 
 const description404 = (
   <>
@@ -67,16 +64,20 @@ const Switch: React.FC<Package> = ({ children }) => {
   const hasInvalidComponent: boolean =
     components.findIndex(component => !React.isValidElement(component)) !== -1;
 
+  // last element in components[]
+  const lastComponent = components[components.length - 1];
+
+  // Check if last component is default component - No when props
+  const lastComponentIsDefault =
+    React.isValidElement(lastComponent) && !lastComponent.props.when;
+
   if (hasInvalidComponent) {
     warn("WIP: Child of <Switch /> component should be of type ReactNode");
   }
 
-  const componentIsAMatch = (component: ReactNode) =>
-    isValidElement(component) && component.props.when;
-
   // Filter components by the value of the 'when' props or path
-  const filteredComponents = components.filter(component =>
-    componentIsAMatch(component)
+  const filteredComponents = components.filter(
+    component => isValidElement(component) && component.props.when
   );
 
   // Render filteredComponents
@@ -86,7 +87,12 @@ const Switch: React.FC<Package> = ({ children }) => {
     );
   }
 
-  // Return frontity default 404 page
+  // render last component if it's diffult component (without when props);
+  if (lastComponentIsDefault) {
+    return <>{lastComponent}</>;
+  }
+
+  // render frontity default 404 component
   return <ErrorComponent />;
 };
 
