@@ -51,7 +51,7 @@ const Theme = ({ state, libraries }) => {
         on the type of URL we are in. */}
         <Main id="main">
           <Switch>
-            <Loading when={data.isFetching} />)
+            <Loading when={data.isFetching} />
             <SearchResults when={isSearch} />
             <Archive when={data.isArchive} />
             <Post when={data.isPostType} />

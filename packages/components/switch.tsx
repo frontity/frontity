@@ -1,21 +1,9 @@
-import { warn } from "@frontity/error";
-import { connect, styled } from "frontity";
-import { Connect, Package } from "frontity/types";
+import { connect, styled, warn } from "frontity";
+import { Package } from "frontity/types";
 import React, { isValidElement, ReactNode, ReactNodeArray } from "react";
 
 // TODO: Better Handling of Error Responses.
 // Fix issues with path props (isError value)
-
-type SwitchComponent = React.FC<
-  Connect<
-    Package,
-    {
-      children?: ReactNode;
-      when?: boolean;
-      path?: string;
-    }
-  >
->;
 
 const description404 = (
   <>
@@ -72,8 +60,7 @@ const Description = styled.div`
   margin: 24px 0;
 `;
 
-const Switch: SwitchComponent = ({ state, children }) => {
-  const currentPath = state.router.link.replace(/\/$/, "");
+const Switch: React.FC<Package> = ({ children }) => {
   const components: ReactNodeArray = React.Children.toArray(children);
 
   // Check if components[] has a non-ReactNode type Element
@@ -84,14 +71,8 @@ const Switch: SwitchComponent = ({ state, children }) => {
     warn("WIP: Child of <Switch /> component should be of type ReactNode");
   }
 
-  // Match path with currentPath(state.router.link)
-  const pathIsAMatch = (props): boolean =>
-    props.path && props.path === currentPath;
-
   const componentIsAMatch = (component: ReactNode) =>
-    isValidElement(component) &&
-    (component.props.when ||
-      (component.props.path && pathIsAMatch(component.props)));
+    isValidElement(component) && component.props.when;
 
   // Filter components by the value of the 'when' props or path
   const filteredComponents = components.filter(component =>
@@ -101,9 +82,7 @@ const Switch: SwitchComponent = ({ state, children }) => {
   // Render filteredComponents
   if (filteredComponents.length > 0) {
     return (
-      <React.Fragment>
-        {filteredComponents.map(filteredComponent => filteredComponent)}
-      </React.Fragment>
+      <>{filteredComponents.map(filteredComponent => filteredComponent)}</>
     );
   }
 
