@@ -71,8 +71,8 @@ export const dateHandler: Handler = async ({
     isReady: currentPageData.isReady,
 
     // Add those keys if hasOlderPosts / hasNewerPosts === true
-    ...{ prev: hasOlderPosts && getPageLink(page - 1) },
-    ...{ next: hasNewerPosts && getPageLink(page + 1) }
+    ...(hasOlderPosts && { prev: getPageLink(page - 1) }),
+    ...(hasNewerPosts && { next: getPageLink(page + 1) })
   };
 
   Object.assign(currentPageData, newPageData);

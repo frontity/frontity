@@ -30,15 +30,14 @@ const actions: WpSource["actions"]["source"] = {
 
     if (!data || force) {
       // Add the attributes that should be present even if fetch fails or we throw a ServerError below
-      Object.assign(data, {
-        ...state.source.data[route],
+      source.data[route] = {
         link: route,
         path: routeParams.path,
         query,
         page,
         isFetching: true,
         isReady: false
-      });
+      };
     } else if (data.isReady || data.isFetching || data.isError) {
       return;
     }
