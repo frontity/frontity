@@ -25,23 +25,20 @@ const actions: WpSource["actions"]["source"] = {
     // Get current data object
     const data = source.data[route];
 
-    // Add the attributes that should be present even if fetch fails or we throw a ServerError below
-    state.source.data[route] = {
-      ...state.source.data[route],
-      link: route,
-      path: routeParams.path,
-      query,
-      page
-    };
-
     // Get options
     const force = options ? options.force : false;
 
     if (!data || force) {
-      source.data[route] = {
-        isReady: false,
-        isFetching: false
-      };
+      // Add the attributes that should be present even if fetch fails or we throw a ServerError below
+      Object.assign(data, {
+        ...state.source.data[route],
+        link: route,
+        path: routeParams.path,
+        query,
+        page,
+        isFetching: true,
+        isReady: false
+      });
     } else if (data.isReady || data.isFetching || data.isError) {
       return;
     }
