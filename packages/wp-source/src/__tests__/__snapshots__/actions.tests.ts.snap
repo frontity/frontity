@@ -5,11 +5,27 @@ Object {
   "/some/route/": Object {
     "isFetching": true,
     "isReady": false,
+    "link": "/some/route/",
+    "page": 1,
+    "path": "/some/route/",
+    "query": Object {},
   },
 }
 `;
 
 exports[`fetch does nothing if data exists 1`] = `
+Object {
+  "/some/route/": Object {
+    "id": 1,
+    "isFetching": false,
+    "isPostType": true,
+    "isReady": true,
+    "type": "example",
+  },
+}
+`;
+
+exports[`fetch should run again when \`force\` is used 1`] = `
 Object {
   "/some/route/": Object {
     "id": 1,
@@ -25,18 +41,6 @@ Object {
 }
 `;
 
-exports[`fetch should run again when \`force\` is used 1`] = `
-Object {
-  "/some/route/": Object {
-    "id": 1,
-    "isFetching": false,
-    "isPostType": true,
-    "isReady": true,
-    "type": "example",
-  },
-}
-`;
-
 exports[`fetch should work if data doesn't exist 1`] = `
 Object {
   "/some/route/": Object {
@@ -44,6 +48,10 @@ Object {
     "isFetching": false,
     "isPostType": true,
     "isReady": true,
+    "link": "/some/route/",
+    "page": 1,
+    "path": "/some/route/",
+    "query": Object {},
     "type": "example",
   },
 }

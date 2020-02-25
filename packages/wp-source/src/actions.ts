@@ -42,8 +42,6 @@ const actions: WpSource["actions"]["source"] = {
       return;
     }
 
-    source.data[route].isFetching = true;
-
     // get and execute the corresponding handler based on path
     try {
       let { path } = routeParams;
