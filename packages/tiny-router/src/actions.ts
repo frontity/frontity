@@ -38,8 +38,10 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     window.history.replaceState({ link: state.router.link }, "");
     // Listen to changes in history.
     window.addEventListener("popstate", event => {
-      isPopState = true;
-      if (event.state) actions.router.set(event.state.link);
+      if (event.state) {
+        isPopState = true;
+        actions.router.set(event.state.link);
+      }
     });
   }
 };
