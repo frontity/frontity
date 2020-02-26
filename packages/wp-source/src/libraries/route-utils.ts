@@ -47,6 +47,7 @@ export const routeToParams = (route: string): RouteParams => {
 
   return {
     path: addFinalSlash(path),
+    route: addFinalSlash(path),
     page: parseInt(page, 10),
     query: queryToObj(query),
     hash
@@ -55,10 +56,14 @@ export const routeToParams = (route: string): RouteParams => {
 
 export const paramsToRoute = ({
   path = "/",
+  route,
   page = 1,
   query = {},
   hash = ""
 }: RouteParams): string => {
+  // Use route if present, otherwise use path
+  path = route || path;
+
   // correct path
   path = addFinalSlash(path);
 

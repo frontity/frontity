@@ -21,7 +21,8 @@ export {
 } from "./types/entities";
 
 export type RouteParams = {
-  path: string;
+  path?: string;
+  route?: string;
   page?: number;
   query?: Record<string, any>;
   hash?: string;

@@ -6,10 +6,10 @@ const postTypeHandler = ({
   endpoints
 }: {
   endpoints: string[];
-}): Handler => async ({ route, params, state, libraries }) => {
+}): Handler => async ({ link, params, state, libraries }) => {
   // 1. search id in state or get the entity from WP REST API
-  const { path, query } = libraries.source.parse(route);
-  if (!state.source.get(path).id) {
+  const { route, query } = libraries.source.parse(link);
+  if (!state.source.get(route).id) {
     const { slug } = params;
 
     // 1.1 transform "posts" endpoint to state.source.postEndpoint
@@ -42,12 +42,12 @@ const postTypeHandler = ({
       );
   }
 
-  // 2. get `type` and `id` from path data and assign props to data
-  const { type, id } = state.source.get(path);
-  const data = state.source.get(route);
+  // 2. get `type` and `id` from route data and assign props to data
+  const { type, id } = state.source.get(route);
+  const data = state.source.get(link);
   Object.assign(data, {
     type,
-    link: route,
+    link: link,
     query,
     id,
     isPostType: true,

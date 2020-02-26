@@ -13,7 +13,7 @@ import Link from "../link";
 const Pagination = ({ state, actions, libraries }) => {
   // Get the total posts to be displayed based for the current link
   const { totalPages } = state.source.get(state.router.link);
-  const { path, page, query } = libraries.source.parse(state.router.link);
+  const { route, page, query } = libraries.source.parse(state.router.link);
 
   // Check if we can go to next page within the pagination
   const isThereNextPage = page < totalPages;
@@ -23,14 +23,14 @@ const Pagination = ({ state, actions, libraries }) => {
 
   // Get the link for the next page
   const nextPageLink = libraries.source.stringify({
-    path,
+    route,
     page: page + 1,
     query
   });
 
   // Get the link for the previous page
   const prevPageLink = libraries.source.stringify({
-    path,
+    route,
     page: page - 1,
     query
   });

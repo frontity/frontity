@@ -9,7 +9,7 @@ export const dateHandler: Handler = async ({
   libraries
 }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { path, page, query } = parse(link);
+  const { route, page, query } = parse(link);
 
   // 1. build date properties
   const year = parseInt(params.year);
@@ -41,7 +41,7 @@ export const dateHandler: Handler = async ({
   // 3. populate response
   const items = await populate({ response, state });
   if (items.length === 0)
-    throw new ServerError(`date "${path}" doesn't have page ${page}`, 404);
+    throw new ServerError(`date "${route}" doesn't have page ${page}`, 404);
 
   // 4. get posts and pages count
   const total = getTotal(response, items.length);
@@ -53,7 +53,7 @@ export const dateHandler: Handler = async ({
   const hasNewerPosts = page > 1;
 
   const getPageLink = (page: number) =>
-    libraries.source.stringify({ path, query, page });
+    libraries.source.stringify({ route, query, page });
 
   // 5. add data to source
   const currentPageData = state.source.data[link];
