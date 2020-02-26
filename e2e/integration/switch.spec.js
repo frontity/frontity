@@ -3,7 +3,7 @@ describe("Switch", () => {
     cy.visit("http://localhost:3001?name=switch");
   });
 
-  it("should render last component when no match", () => {
+  it("should render last component when no matching component is found", () => {
     cy.get("h1#one").should("not.exist");
     cy.get("h1#two").should("not.exist");
     cy.get("h1")
