@@ -14,7 +14,7 @@ const Switch: React.FC<Package> | null = ({ children }) => {
 
   // Check if last component is default component - No when props
   const lastComponentIsDefault =
-    isValidElement(lastComponent) && !lastComponent.props.when;
+    isValidElement(lastComponent) && !("when" in lastComponent.props);
 
   if (hasInvalidComponent) {
     warn("Children of <Switch /> component should be a type of ReactNode");
