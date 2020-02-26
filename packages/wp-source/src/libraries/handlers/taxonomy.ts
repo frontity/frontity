@@ -13,9 +13,9 @@ const taxonomyHandler = ({
   endpoint: string;
   postTypeEndpoint?: string;
   params?: Record<string, any>;
-}): Handler => async ({ route, params, state, libraries, force }) => {
+}): Handler => async ({ link, params, state, libraries, force }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { path, page, query } = parse(route);
+  const { path, page, query } = parse(link);
 
   // 1. search id in state or get it from WP REST API
   let { id } = state.source.get(path);
@@ -82,7 +82,7 @@ const taxonomyHandler = ({
     });
 
   // 5. add data to source
-  const currentPageData = state.source.data[route];
+  const currentPageData = state.source.data[link];
   const firstPageData = state.source.data[path];
 
   const newPageData: TaxonomyData = {

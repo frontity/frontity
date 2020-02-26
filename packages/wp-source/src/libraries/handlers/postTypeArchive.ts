@@ -9,9 +9,9 @@ const postTypeArchiveHandler = ({
 }: {
   type: string;
   endpoint: string;
-}): Handler => async ({ route, state, libraries }) => {
+}): Handler => async ({ link, state, libraries }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { page, query, path } = parse(route);
+  const { page, query, path } = parse(link);
 
   // 1. fetch the specified page
   const response = await api.get({
@@ -49,7 +49,7 @@ const postTypeArchiveHandler = ({
     });
 
   // 4. add data to source
-  const currentPageData = state.source.data[route];
+  const currentPageData = state.source.data[link];
 
   const newPageData: PostTypeArchiveData = {
     type,

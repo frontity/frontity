@@ -12,27 +12,28 @@ import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries }) => async (link, options?) => {
+  fetch: ({ state, libraries }) => async (...params) => {
+    const [route, options] = params;
     const { source } = state;
 
     const { handlers, redirections } = libraries.source;
 
     // Get route and route params
-    const route = normalize(link);
-    const routeParams = parse(link);
-    const { query, page } = routeParams;
+    const link = normalize(route);
+    const linkParams = parse(route);
+    const { query, page } = linkParams;
 
     // Get current data object
-    const data = source.data[route];
+    const data = source.data[link];
 
     // Get options
     const force = options ? options.force : false;
 
     if (!data || force) {
       // Add the attributes that should be present even if fetch fails or we throw a ServerError below
-      source.data[route] = {
-        link: route,
-        path: routeParams.path,
+      source.data[link] = {
+        link,
+        path: linkParams.path,
         query,
         page,
         isFetching: true,
@@ -44,7 +45,7 @@ const actions: WpSource["actions"]["source"] = {
 
     // get and execute the corresponding handler based on path
     try {
-      let { path } = routeParams;
+      let { path } = linkParams;
       // check if this is the homepage URL
       const isHome = path === normalize(state.source.subdirectory || "/");
 
@@ -55,20 +56,21 @@ const actions: WpSource["actions"]["source"] = {
       // get the handler for this path
       const handler = getMatch(path, handlers);
       await handler.func({
-        route,
+        link,
+        route: link,
         params: handler.params,
         state,
         libraries,
         force
       });
       // everything OK
-      source.data[route] = {
-        ...source.data[route],
+      source.data[link] = {
+        ...source.data[link],
         isFetching: false,
         isReady: true
       };
       // set isHome value if it's true
-      if (isHome) source.data[route].isHome = true;
+      if (isHome) source.data[link].isHome = true;
     } catch (e) {
       // It's a server error (4xx or 5xx)
       if (e instanceof ServerError) {
@@ -82,7 +84,7 @@ const actions: WpSource["actions"]["source"] = {
           errorStatus: e.status,
           errorStatusText: e.statusText
         };
-        source.data[route] = errorData;
+        source.data[link] = errorData;
       } else {
         throw e;
       }

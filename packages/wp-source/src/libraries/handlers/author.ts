@@ -1,16 +1,16 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
-import { DateData, AuthorData } from "@frontity/source/types/data";
+import { AuthorData } from "@frontity/source/types/data";
 
 const authorHandler: Handler = async ({
-  route,
+  link,
   params,
   state,
   libraries,
   force
 }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { path, page, query } = parse(route);
+  const { path, page, query } = parse(link);
   const { slug } = params;
 
   // 1. Search id in state or get it from WP REST API.
@@ -64,7 +64,7 @@ const authorHandler: Handler = async ({
     libraries.source.stringify({ path, query, page });
 
   // 5. Add data to source..
-  const currentPageData = state.source.data[route];
+  const currentPageData = state.source.data[link];
   const firstPageData = state.source.data[path];
 
   const newPageData: AuthorData = {

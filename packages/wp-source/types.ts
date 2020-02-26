@@ -10,6 +10,7 @@ export type Pattern<F extends Function = (params: any) => any> = {
 };
 
 export type Handler<Pkg extends Source = WpSource> = (args: {
+  link: string;
   route: string;
   params: { [param: string]: any };
   state: State<Pkg>;

@@ -3,13 +3,13 @@ import { ServerError } from "@frontity/source";
 import { DateData } from "@frontity/source/types/data";
 
 export const dateHandler: Handler = async ({
-  route,
+  link,
   params,
   state,
   libraries
 }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { path, page, query } = parse(route);
+  const { path, page, query } = parse(link);
 
   // 1. build date properties
   const year = parseInt(params.year);
@@ -56,7 +56,7 @@ export const dateHandler: Handler = async ({
     libraries.source.stringify({ path, query, page });
 
   // 5. add data to source
-  const currentPageData = state.source.data[route];
+  const currentPageData = state.source.data[link];
 
   const newPageData: DateData = {
     year,
