@@ -63,8 +63,8 @@ const postTypeArchiveHandler = ({
     [`is${capitalize(type)}Archive`]: true,
 
     // Add those keys if hasOlderPosts / hasNewerPosts === true
-    ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
-    ...(hasNewerPosts && { next: getPageLink(page + 1) })
+    ...(hasOlderPosts && { previous: getPageLink(page + 1) }),
+    ...(hasNewerPosts && { next: getPageLink(page - 1) })
   };
 
   Object.assign(currentPageData, newPageData);
