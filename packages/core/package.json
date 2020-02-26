@@ -73,7 +73,7 @@
     "url-loader": "2.1.0",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
-    "webpack-dev-middleware": "^3.6.0",
+    "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
@@ -96,7 +96,7 @@
     "@types/react-helmet": "5.0.10",
     "@types/webpack": "^4.4.25",
     "@types/webpack-bundle-analyzer": "^2.13.1",
-    "@types/webpack-dev-middleware": "^2.0.2",
+    "@types/webpack-dev-middleware": "^3.7.0",
     "@types/webpack-env": "^1.13.9",
     "@types/webpack-hot-middleware": "^2.16.5"
   }
