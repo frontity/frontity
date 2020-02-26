@@ -80,7 +80,7 @@ const Iframe: Component = ({
 }) => {
   const lazyAttributes: Attributes = {
     "data-src": src,
-    className: "frontity-lazy-iframe ".concat(className ? ` ${className}` : ""),
+    className: "frontity-lazy-iframe".concat(className ? ` ${className}` : ""),
     loading,
     style: { visibility: "hidden" },
     height,
