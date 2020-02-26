@@ -12,8 +12,4 @@ exports[`Switch should render the first component that match 1`] = `
 </h1>
 `;
 
-exports[`Switch should return null if no component match 1`] = `
-<h1>
-  Test Blog Component
-</h1>
-`;
+exports[`Switch should return null if no component match 1`] = `null`;

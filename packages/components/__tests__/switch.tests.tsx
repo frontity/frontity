@@ -18,7 +18,7 @@ const Default: React.FC = () => {
 
 describe("Switch", () => {
   test("render default component if no match was found", () => {
-    const switchComponent = create(
+    const SwitchComponent = create(
       <Switch>
         <TestArchive when={"archive" !== "archive"} />
         <TestBlog when={"blog" !== "blog"} />
@@ -26,11 +26,11 @@ describe("Switch", () => {
       </Switch>
     );
 
-    expect(switchComponent.toJSON()).toMatchSnapshot();
+    expect(SwitchComponent.toJSON()).toMatchSnapshot();
   });
 
   test("should render the first component that match", () => {
-    const switchComponent = create(
+    const SwitchComponent = create(
       <Switch>
         <TestArchive when={"archive" === "archive"} />
         <TestBlog when={"blog" === "blog"} />
@@ -38,17 +38,17 @@ describe("Switch", () => {
       </Switch>
     );
 
-    expect(switchComponent.toJSON()).toMatchSnapshot();
+    expect(SwitchComponent.toJSON()).toMatchSnapshot();
   });
 
   test("should return null if no component match", () => {
-    const switchComponent = create(
+    const SwitchComponent = create(
       <Switch>
         <TestArchive when={"archive" !== "archive"} />
         <TestBlog when={"blog" !== "blog"} />
       </Switch>
     );
 
-    expect(switchComponent.toJSON()).toMatchSnapshot();
+    expect(SwitchComponent.toJSON()).toMatchSnapshot();
   });
 });
