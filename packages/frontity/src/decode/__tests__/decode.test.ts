@@ -1,5 +1,5 @@
-import decodeServer from "./server";
-import decodeClient from "./client";
+import decodeServer from "../server";
+import decodeClient from "../client";
 import * as he from "he";
 
 jest.mock("he");
@@ -22,6 +22,14 @@ describe("decode", () => {
     expect(result).toBe("&");
   });
 
+  test("decodes numeric entities", () => {
+    const numeric = "blog&#8217;s";
+    const client = decodeClient(numeric);
+    expect(client).toBe("blog’s");
+    const server = decodeServer(numeric);
+    expect(server).toBe("blog’s");
+  });
+
   test("client preserves the whitespace", () => {
     const result = decodeClient("  &amp; ");
     expect(result).toBe("  & ");
@@ -33,8 +41,10 @@ describe("decode", () => {
   });
 
   test("handles different characters", () => {
-    const result = decodeServer("&equiv; &gamma;");
-    expect(result).toBe("≡ γ");
+    const client = decodeClient("&equiv; &gamma; &#8217;");
+    expect(client).toBe("≡ γ ’");
+    const server = decodeServer("&equiv; &gamma; &#8217;");
+    expect(server).toBe("≡ γ ’");
   });
 
   test("call he.decode if html contains a character that basic decode cannot not handle", () => {

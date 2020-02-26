@@ -83,6 +83,24 @@ Array [
         },
         "type": "element",
       },
+      Object {
+        "content": " Encoded phrase that should be decoded ",
+        "parent": [Circular],
+        "type": "comment",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "content": "Improve your blog’s performance & mobile experience.",
+            "parent": [Circular],
+            "type": "text",
+          },
+        ],
+        "component": "p",
+        "parent": [Circular],
+        "props": Object {},
+        "type": "element",
+      },
     ],
     "component": "audio",
     "props": Object {

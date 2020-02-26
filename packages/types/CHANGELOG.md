@@ -4,6 +4,12 @@
 
 ### Minor Changes
 
+- [`a4e9e579`](https://github.com/frontity/frontity/commit/a4e9e579a6306c87cb91f33e635201387bd405ea) [#309](https://github.com/frontity/frontity/pull/309) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Pass Koa's context to beforeSSR action so packages can modify it.
+
+## 1.2.0
+
+### Minor Changes
+
 - [`009c502`](https://github.com/frontity/frontity/commit/009c50288db2af45d2f586e8be43b76f52612540) [#259](https://github.com/frontity/frontity/pull/259) Thanks [@orballo](https://github.com/orballo)! - Adds types for async actions.
 
 ## [1.1.2](https://github.com/frontity/frontity/compare/@frontity/types@1.1.1...@frontity/types@1.1.2) (2019-10-02)

@@ -4,6 +4,21 @@
 
 ### Minor Changes
 
+- [`fb412d2a`](https://github.com/frontity/frontity/commit/fb412d2af2e9f7cbd5683ea2eb4f961a620edcfc) [#291](https://github.com/frontity/frontity/pull/291) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add status codes and error messages when fetch response is 4xx or 5xx
+
+### Patch Changes
+
+- [`c3d4340a`](https://github.com/frontity/frontity/commit/c3d4340a2ca3088ecda29d2e113d06d8faeb7a0e) [#303](https://github.com/frontity/frontity/pull/303) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add `force` param to `actions.source.fetch` and `libraries.source.populate`.
+
+  Also, change the default behavior of `populate` to not overwrite entities in the state.- Updated dependencies [[`417f2b0f`](https://github.com/frontity/frontity/commit/417f2b0f0b6f5626be253eb3f1be2daf257b71ef), [`495771f8`](https://github.com/frontity/frontity/commit/495771f83951f192f92d3162221cedc9b791e399), [`696dec11`](https://github.com/frontity/frontity/commit/696dec11bb8d32f0821cca3f5ce39e27c42d60b6), [`80c1aa3a`](https://github.com/frontity/frontity/commit/80c1aa3aee6cf04f46d6fa1a409abfcae2c511cc)]:
+
+  - frontity@1.5.0
+  - @frontity/connect@1.0.4
+
+## 1.5.0
+
+### Minor Changes
+
 - [`6ac389b`](https://github.com/frontity/frontity/commit/6ac389b1e406ae32ccb58c7e92c2be84fa4223b8) [#242](https://github.com/frontity/frontity/pull/242) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add a schema for post types and refactor populate. Use also the new types that come from `@frontity/source`.
 
 ### Patch Changes

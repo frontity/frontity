@@ -11,4 +11,7 @@ export default `
   <audio autoplay>
     <source src="example.ogg" type="audio/ogg">
   </div>
+
+  <!-- Encoded phrase that should be decoded -->
+  <p>Improve your blog&#8217;s performance &amp; mobile experience.</p>
 `;
