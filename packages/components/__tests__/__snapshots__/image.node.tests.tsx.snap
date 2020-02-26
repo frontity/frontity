@@ -3,7 +3,7 @@
 exports[`Image It's a normal image if loading === "eager" 1`] = `
 <img
   alt="Some fake alt text"
-  className="frontity-lazy-image  fake-class-name"
+  className="frontity-lazy-image fake-class-name"
   loading="eager"
   src="https://fake-src.com/fake-image.jpg"
   srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
@@ -15,7 +15,7 @@ Array [
   <noscript>
     <img
       alt="Some fake alt text"
-      className="frontity-lazy-image  fake-class-name"
+      className="frontity-lazy-image fake-class-name"
       height={300}
       loading="lazy"
       src="https://fake-src.com/fake-image.jpg"
@@ -24,7 +24,7 @@ Array [
   </noscript>,
   <img
     alt="Some fake alt text"
-    className="frontity-lazy-image  fake-class-name"
+    className="frontity-lazy-image fake-class-name"
     data-src="https://fake-src.com/fake-image.jpg"
     data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     height={300}
@@ -69,14 +69,14 @@ Array [
   <noscript>
     <img
       alt="Some fake alt text"
-      className="frontity-lazy-image  fake-class-name"
+      className="frontity-lazy-image fake-class-name"
       src="https://fake-src.com/fake-image.jpg"
       srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     />
   </noscript>,
   <img
     alt="Some fake alt text"
-    className="frontity-lazy-image  fake-class-name"
+    className="frontity-lazy-image fake-class-name"
     data-src="https://fake-src.com/fake-image.jpg"
     data-srcset="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
     style={

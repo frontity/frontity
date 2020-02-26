@@ -2,7 +2,7 @@
 
 exports[`Iframe It's a normal iframe if loading === "eager" 1`] = `
 <iframe
-  className="frontity-lazy-iframe  fake-class-name"
+  className="frontity-lazy-iframe fake-class-name"
   loading="eager"
   src="https://fake-src.com"
   title="Some fake title"
@@ -13,7 +13,7 @@ exports[`Iframe works on server (with height) 1`] = `
 Array [
   <noscript>
     <iframe
-      className="frontity-lazy-iframe  fake-class-name"
+      className="frontity-lazy-iframe fake-class-name"
       height={300}
       loading="lazy"
       src="https://fake-src.com"
@@ -21,7 +21,7 @@ Array [
     />
   </noscript>,
   <iframe
-    className="frontity-lazy-iframe  fake-class-name"
+    className="frontity-lazy-iframe fake-class-name"
     data-src="https://fake-src.com"
     height={300}
     loading="lazy"
@@ -63,14 +63,14 @@ exports[`Iframe works on server (without height) 1`] = `
 Array [
   <noscript>
     <iframe
-      className="frontity-lazy-iframe  fake-class-name"
+      className="frontity-lazy-iframe fake-class-name"
       loading="lazy"
       src="https://frontity.com"
       title="Some fake title"
     />
   </noscript>,
   <iframe
-    className="frontity-lazy-iframe  fake-class-name"
+    className="frontity-lazy-iframe fake-class-name"
     data-src="https://frontity.com"
     loading="lazy"
     style={
