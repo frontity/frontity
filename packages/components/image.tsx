@@ -96,7 +96,7 @@ const Image: Image = ({
     "data-src": src,
     "data-srcset": srcSet,
     sizes,
-    className: "frontity-lazy-image".concat(className ? ` ${className}` : ""),
+    className: "frontity-lazy-image ".concat(className ? ` ${className}` : ""),
     loading,
     style: { visibility: "hidden" },
     height

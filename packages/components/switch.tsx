@@ -72,7 +72,7 @@ const Switch: React.FC<Package> = ({ children }) => {
     React.isValidElement(lastComponent) && !lastComponent.props.when;
 
   if (hasInvalidComponent) {
-    warn("WIP: Child of <Switch /> component should be of type ReactNode");
+    warn("Children of <Switch /> component should be a type of ReactNode");
   }
 
   // Filter components by the value of the 'when' props or path
