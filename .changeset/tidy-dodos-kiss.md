@@ -2,4 +2,4 @@
 "@frontity/components": minor
 ---
 
-Add Switch component for conditional rendering"
+Add a `<Switch>` component for conditional rendering.

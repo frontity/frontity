@@ -3,4 +3,4 @@
 "@frontity/twentytwenty-theme": minor
 ---
 
-Use switch component for condition rendering
+Use the new `<Switch>` component for conditional rendering.
