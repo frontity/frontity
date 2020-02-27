@@ -33,7 +33,7 @@ const actions: WpSource["actions"]["source"] = {
       // Add the attributes that should be present even if fetch fails or we throw a ServerError below
       source.data[link] = {
         link,
-        path: linkParams.path,
+        route: linkParams.route,
         query,
         page,
         isFetching: true,
@@ -45,16 +45,16 @@ const actions: WpSource["actions"]["source"] = {
 
     // get and execute the corresponding handler based on path
     try {
-      let { path } = linkParams;
+      let { route } = linkParams;
       // check if this is the homepage URL
-      const isHome = path === normalize(state.source.subdirectory || "/");
+      const isHome = route === normalize(state.source.subdirectory || "/");
 
-      // transform path if there is some redirection
-      const redirection = getMatch(path, redirections);
-      if (redirection) path = redirection.func(redirection.params);
+      // transform route if there is some redirection
+      const redirection = getMatch(route, redirections);
+      if (redirection) route = redirection.func(redirection.params);
 
-      // get the handler for this path
-      const handler = getMatch(path, handlers);
+      // get the handler for this route
+      const handler = getMatch(route, handlers);
       await handler.func({
         link,
         route: link,

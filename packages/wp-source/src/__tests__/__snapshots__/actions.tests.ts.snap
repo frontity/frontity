@@ -7,8 +7,8 @@ Object {
     "isReady": false,
     "link": "/some/route/",
     "page": 1,
-    "path": "/some/route/",
     "query": Object {},
+    "route": "/some/route/",
   },
 }
 `;
@@ -34,8 +34,8 @@ Object {
     "isReady": true,
     "link": "/some/route/",
     "page": 1,
-    "path": "/some/route/",
     "query": Object {},
+    "route": "/some/route/",
     "type": "example",
   },
 }
@@ -50,8 +50,8 @@ Object {
     "isReady": true,
     "link": "/some/route/",
     "page": 1,
-    "path": "/some/route/",
     "query": Object {},
+    "route": "/some/route/",
     "type": "example",
   },
 }

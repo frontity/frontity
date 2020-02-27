@@ -65,7 +65,7 @@ export type BaseData = {
 
   // pagination atributes (for Archive)
   page?: number;
-  path?: string;
+  route?: string;
   next?: string;
   previous?: string;
 };
