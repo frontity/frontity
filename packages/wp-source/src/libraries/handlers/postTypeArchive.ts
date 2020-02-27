@@ -37,9 +37,9 @@ const postTypeArchiveHandler = ({
   const totalPages = getTotalPages(response, 0);
 
   // returns true if next page exists
-  const hasOlderPosts = page < totalPages;
+  const hasNewerPosts = page < totalPages;
   // returns true if previous page exists
-  const hasNewerPosts = page > 1;
+  const hasOlderPosts = page > 1;
 
   const getPageLink = (page: number) =>
     libraries.source.stringify({
@@ -63,8 +63,8 @@ const postTypeArchiveHandler = ({
     [`is${capitalize(type)}Archive`]: true,
 
     // Add those keys if hasOlderPosts / hasNewerPosts === true
-    ...(hasOlderPosts && { previous: getPageLink(page + 1) }),
-    ...(hasNewerPosts && { next: getPageLink(page - 1) })
+    ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
+    ...(hasNewerPosts && { next: getPageLink(page + 1) })
   };
 
   Object.assign(currentPageData, newPageData);

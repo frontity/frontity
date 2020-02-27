@@ -60,8 +60,8 @@ const Pagination = ({ state, actions, libraries }) => {
   return (
     <Container>
       <Direction>
-        {next && (
-          <StyledLink link={next}>
+        {previous && (
+          <StyledLink link={previous}>
             ← <DirectionItem>Newer</DirectionItem>
           </StyledLink>
         )}
@@ -90,8 +90,8 @@ const Pagination = ({ state, actions, libraries }) => {
       </div>
 
       <Direction>
-        {previous && (
-          <StyledLink link={previous}>
+        {next && (
+          <StyledLink link={next}>
             <DirectionItem>Older</DirectionItem> →
           </StyledLink>
         )}
