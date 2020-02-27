@@ -41,20 +41,20 @@ const paginate = (totalPages, currentPage) => {
 };
 
 const Pagination = ({ state, actions, libraries }) => {
-  const { path, query, totalPages, next, previous, page } = state.source.get(
+  const { route, query, totalPages, next, previous, page } = state.source.get(
     state.router.link
   );
 
   // get page link with page number
-  const getPageLink = pageNo =>
-    libraries.source.stringify({ path, query, page: pageNo });
+  const getPageLink = page =>
+    libraries.source.stringify({ route, query, page });
 
   // Pagination - array of numbers/dots for pages
   const paginationArray = paginate(totalPages, page);
 
   // Prefetch next page if it hasn't been fetched yet.
   useEffect(() => {
-    if (previous) actions.source.fetch(previous);
+    if (next) actions.source.fetch(next);
   }, []);
 
   return (
