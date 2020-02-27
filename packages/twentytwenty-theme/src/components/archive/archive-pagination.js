@@ -1,73 +1,170 @@
 import React, { useEffect } from "react";
-import { connect, styled } from "frontity";
+import { connect, styled, css } from "frontity";
 import Link from "../link";
 
-/**
- * Pagination Component
- *
- * It's used to allow the user to paginate between a list of posts.
- *
- * The `state`, `actions`, `libraries` props are provided by the global context,
- * when we wrap this component in `connect(...)`
- */
+const paginate = (totalPages, currentPage) => {
+  const delta = 1;
+  const pagination = [];
+
+  // Push items from "current - 1" (if available) to current + 1 (if available)
+  for (
+    let i = Math.max(2, currentPage - delta);
+    i <= Math.min(totalPages - 1, currentPage + delta);
+    i++
+  ) {
+    // if current = 1, total = 7, pagination[] => [2]
+    // if current = 5, total = 7, pagination[] => [4, 5, 6];
+    // current = 7, total = 7, pagination[] => [6];
+    pagination.push(i);
+  }
+
+  // if 3 or more pages exist before current page
+  //  items from 2 to current - 2 will be "..."
+  if (currentPage - delta > 2) {
+    // add "..." to the beginning
+    pagination.unshift("...");
+  }
+
+  // if 3 or more exists after current page
+  // items from current + 2 to lastPage(totalPage) - 1 will be "..."
+  if (currentPage + delta < totalPages - 1) {
+    // add "..." to the end
+    pagination.push("...");
+  }
+
+  // Always add 1 (first page) to the beginning
+  pagination.unshift(1);
+  // Always add totalPage (last page) to the end
+  pagination.push(totalPages);
+
+  return pagination;
+};
+
 const Pagination = ({ state, actions, libraries }) => {
-  // Get the total posts to be displayed based for the current link
   const { totalPages } = state.source.get(state.router.link);
   const { path, page, query } = libraries.source.parse(state.router.link);
 
-  // Check if we can go to next page within the pagination
-  const isThereNextPage = page < totalPages;
+  // returns true if next page exists
+  const hasOlderPosts = page < totalPages;
+  // returns true if previous page exists
+  const hasNewerPosts = page > 1;
+  // get page link with page number
+  const getPageLink = pageNo =>
+    libraries.source.stringify({ path, query, page: pageNo });
 
-  // Check if we can go to previous page within the pagination
-  const isTherePreviousPage = page > 1;
+  // Pagination - array of numbers/dots for pages
+  const paginationArray = paginate(totalPages, page);
 
-  // Get the link for the next page
-  const nextPageLink = libraries.source.stringify({
-    path,
-    page: page + 1,
-    query
-  });
-
-  // Get the link for the previous page
-  const prevPageLink = libraries.source.stringify({
-    path,
-    page: page - 1,
-    query
-  });
-
-  // Pre-fetch the the next page if it hasn't been fetched yet.
+  // Prefetch next page if it hasn't been fetched yet.
   useEffect(() => {
-    if (isThereNextPage) actions.source.fetch(nextPageLink);
+    if (hasOlderPosts) actions.source.fetch(getPageLink(page + 1));
   }, []);
 
   return (
-    <div>
-      {/* If there's a next page, render this link */}
-      {isThereNextPage && (
-        <Link link={nextPageLink}>
-          <Text>← Older posts</Text>
-        </Link>
-      )}
+    <Container>
+      <Direction>
+        {hasNewerPosts && (
+          <StyledLink link={getPageLink(page - 1)}>
+            ← <DirectionItem>Newer</DirectionItem>
+          </StyledLink>
+        )}
+      </Direction>
 
-      {isTherePreviousPage && isThereNextPage && " - "}
+      <div css={inlineBlock}>
+        <PagingList>
+          {paginationArray.map((item, index) => {
+            // if item is dots, "..."
+            if (item === "...") {
+              return <PagingItem key={index}>{`...`}</PagingItem>;
+            }
 
-      {/* If there's a previous page, render this link */}
-      {isTherePreviousPage && (
-        <Link link={prevPageLink}>
-          <Text>Newer posts →</Text>
-        </Link>
-      )}
-    </div>
+            // if item is current page
+            if (item === page) {
+              return <PagingItem key={index}>{item}</PagingItem>;
+            }
+
+            return (
+              <PagingItem key={index}>
+                <StyledLink link={getPageLink(item)}>{item}</StyledLink>
+              </PagingItem>
+            );
+          })}
+        </PagingList>
+      </div>
+
+      <Direction>
+        {hasOlderPosts && (
+          <StyledLink link={getPageLink(page + 1)}>
+            <DirectionItem>Older</DirectionItem> →
+          </StyledLink>
+        )}
+      </Direction>
+    </Container>
   );
 };
 
-/**
- * Connect Pagination to global context to give it access to
- * `state`, `actions`, `libraries` via props
- */
-export default connect(Pagination);
+const getMaxWidth = props => maxWidths[props.size] || maxWidths["medium"];
 
-const Text = styled.em`
+const maxWidths = {
+  thin: "58rem",
+  small: "80rem",
+  medium: "100rem"
+};
+
+const inlineBlock = css`
   display: inline-block;
-  margin-top: 16px;
 `;
+
+const Container = styled.div`
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0 auto;
+  line-height: 30px;
+  width: calc(100% - 4rem);
+  max-width: ${getMaxWidth};
+
+  @media (min-width: 700px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 8rem);
+    font-size: 1.3em;
+    font-weight: 700;
+  }
+`;
+
+const PagingList = styled.ul`
+  list-style: none;
+  margin: 0 2rem;
+`;
+
+const PagingItem = styled.li`
+  display: inline-block;
+  margin: 0;
+
+  &:not(:last-of-type) {
+    margin-right: 2rem;
+  }
+`;
+
+const Direction = styled.div`
+  display: inline-block;
+`;
+
+const DirectionItem = styled.span`
+  @media (min-width: 700px) {
+    &:after {
+      content: " Posts";
+    }
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export default connect(Pagination);

@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Main Frontity package",
   "keywords": [
     "frontity"
@@ -38,7 +38,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@emotion/babel-preset-css-prop": "^10.0.9",
     "@emotion/core": "^10.0.22",
-    "@frontity/connect": "^1.0.3",
+    "@frontity/connect": "^1.0.4",
     "@frontity/file-settings": "^1.1.5",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/component": "^5.10.1",
@@ -73,11 +73,11 @@
     "url-loader": "2.1.0",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
-    "webpack-dev-middleware": "^3.6.0",
+    "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
-    "@frontity/types": "^1.1.2",
+    "@frontity/types": "^1.2.0",
     "@types/babel-core": "^6.25.6",
     "@types/express": "^4.16.1",
     "@types/fs-extra": "^5.0.5",
@@ -96,7 +96,7 @@
     "@types/react-helmet": "5.0.10",
     "@types/webpack": "^4.4.25",
     "@types/webpack-bundle-analyzer": "^2.13.1",
-    "@types/webpack-dev-middleware": "^2.0.2",
+    "@types/webpack-dev-middleware": "^3.7.0",
     "@types/webpack-env": "^1.13.9",
     "@types/webpack-hot-middleware": "^2.16.5"
   }
