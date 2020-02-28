@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@frontity/core": "^1.5.0",
+    "@frontity/html2react": "1.2.0",
     "@frontity/tiny-router": "^1.1.0",
     "@frontity/wp-source": "1.5.0",
     "babel-plugin-frontity": "^1.0.1",
@@ -25,6 +26,7 @@
     "e2e-wp-source-errors": "^1.0.0",
     "e2e-script": "^1.0.0",
     "e2e-switch": "^1.0.0",
+    "e2e-html2react": "^1.0.0",
     "frontity": "^1.5.0"
   }
 }

@@ -52,6 +52,10 @@ const settings: Settings = [
   {
     name: "switch",
     packages: ["e2e-switch"]
+  },
+  {
+    name: "html2react",
+    packages: ["e2e-html2react", "@frontity/html2react"]
   }
 ];
 
