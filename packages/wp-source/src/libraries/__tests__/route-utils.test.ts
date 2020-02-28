@@ -112,42 +112,83 @@ describe("route utils - parse", () => {
 });
 
 describe("route utils - stringify", () => {
-  test("from params (fixes path)", () => {
-    expect(stringify({ path: "/some/path" })).toBe("/some/path/");
+  //
+  // Those tests can be removed when we deprecate the `path`
+  // parameter in favour of the `route` parameter
+  describe("using only the `path` parameter", () => {
+    test("from params (fixes path)", () => {
+      expect(stringify({ path: "/some/path" })).toBe("/some/path/");
+    });
+    test("from params (path is a name)", () => {
+      expect(stringify({ path: "custom-list" })).toBe("custom-list/");
+    });
+    test("from params (path, page)", () => {
+      expect(stringify({ path: "/some/path/", page: 2 })).toBe(
+        "/some/path/page/2/"
+      );
+    });
+    test("from params (path, page, query)", () => {
+      expect(
+        stringify({
+          path: "/some/path",
+          page: 2,
+          query: {
+            k1: "v1",
+            k2: "v2"
+          }
+        })
+      ).toBe("/some/path/page/2/?k1=v1&k2=v2");
+    });
+    test("from params (root, page, query)", () => {
+      expect(
+        stringify({
+          path: "/",
+          page: 2,
+          query: {
+            k1: "v1",
+            k2: "v2"
+          }
+        })
+      ).toBe("/page/2/?k1=v1&k2=v2");
+    });
   });
-  test("from params (path is a name)", () => {
-    expect(stringify({ path: "custom-list" })).toBe("custom-list/");
-  });
-  test("from params (path, page)", () => {
-    expect(stringify({ path: "/some/path/", page: 2 })).toBe(
-      "/some/path/page/2/"
-    );
-  });
-  test("from params (path, page, query)", () => {
-    expect(
-      stringify({
-        path: "/some/path",
-        route: "/some/path",
-        page: 2,
-        query: {
-          k1: "v1",
-          k2: "v2"
-        }
-      })
-    ).toBe("/some/path/page/2/?k1=v1&k2=v2");
-  });
-  test("from params (root, page, query)", () => {
-    expect(
-      stringify({
-        path: "/",
-        route: "/",
-        page: 2,
-        query: {
-          k1: "v1",
-          k2: "v2"
-        }
-      })
-    ).toBe("/page/2/?k1=v1&k2=v2");
+
+  describe("Using only the `route` parameter", () => {
+    test("from params (fixes path)", () => {
+      expect(stringify({ route: "/some/path" })).toBe("/some/path/");
+    });
+    test("from params (path is a name)", () => {
+      expect(stringify({ route: "custom-list" })).toBe("custom-list/");
+    });
+    test("from params (path, page)", () => {
+      expect(stringify({ route: "/some/path/", page: 2 })).toBe(
+        "/some/path/page/2/"
+      );
+    });
+    test("from params (path, page, query)", () => {
+      expect(
+        stringify({
+          route: "/some/path",
+          page: 2,
+          query: {
+            k1: "v1",
+            k2: "v2"
+          }
+        })
+      ).toBe("/some/path/page/2/?k1=v1&k2=v2");
+    });
+    test("from params (root, page, query)", () => {
+      expect(
+        stringify({
+          route: "/",
+          page: 2,
+          query: {
+            k1: "v1",
+            k2: "v2"
+          }
+        })
+      ).toBe("/page/2/?k1=v1&k2=v2");
+    });
   });
 });
 

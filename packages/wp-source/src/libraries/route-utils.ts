@@ -37,6 +37,7 @@ export const decomposeRoute = (route: string) => {
   return { pathname, query, hash };
 };
 
+// Used by `source.parse()`
 export const routeToParams = (route: string): RouteParams => {
   const { pathname, query, hash } = decomposeRoute(route);
   const [, path, page] = /^(.*)page\/(\d+)\/?(\?.*)?$/.exec(pathname) || [
@@ -54,6 +55,7 @@ export const routeToParams = (route: string): RouteParams => {
   };
 };
 
+// Used by `source.stringify()`
 export const paramsToRoute = ({
   path = "/",
   route,
