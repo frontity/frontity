@@ -17,15 +17,8 @@ const authorHandler: Handler = async ({
   let { id } = state.source.get(route);
   if (!id || force) {
     // Request author from WP
-    const response = await api.get({
-      endpoint: "users",
-      params: { slug }
-    });
-    const [entity] = await populate({
-      response,
-      state,
-      force: true
-    });
+    const response = await api.get({ endpoint: "users", params: { slug } });
+    const [entity] = await populate({ response, state, force: true });
     if (!entity)
       throw new ServerError(
         `entity from endpoint "users" with slug "${slug}" not found`,

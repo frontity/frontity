@@ -21,7 +21,7 @@ export {
 } from "./types/entities";
 
 export type RouteParams = {
-  path?: string;
+  path?: string; // we should remove this when `path` is deprecated
   route?: string;
   page?: number;
   query?: Record<string, any>;
