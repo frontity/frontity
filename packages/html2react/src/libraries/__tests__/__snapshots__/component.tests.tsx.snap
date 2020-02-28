@@ -34,9 +34,9 @@ Array [
       src="example.ogg"
       type="audio/ogg"
     />
-    <p>
-      Improve your blog’s performance & mobile experience.
-    </p>
   </audio>,
+  <p>
+    Improve your blog’s performance & mobile experience.
+  </p>,
 ]
 `;
