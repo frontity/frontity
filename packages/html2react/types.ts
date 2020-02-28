@@ -16,39 +16,32 @@ interface Html2React extends Package {
 export default Html2React;
 
 // Parse
-export type NoProps = {
-  [key: string]: string | number | boolean;
-};
-
-export interface Element<Props = NoProps> {
+export interface Element<Props = any> {
   type: "element";
   component: string | React.ComponentType;
   props: {
     css?: SerializedStyles;
   } & Props;
-  children?: Node<Props>[];
-  parent?: Element<Props>;
+  children?: Node<unknown>[];
+  parent?: Element<unknown>;
   ignore?: boolean;
 }
 
-export interface Text<Props = NoProps> {
+export interface Text {
   type: "text";
   content: string;
-  parent?: Element<Props>;
+  parent?: Element<unknown>;
   ignore?: boolean;
 }
 
-export interface Comment<Props = NoProps> {
+export interface Comment {
   type: "comment";
   content: string;
-  parent?: Element<Props>;
+  parent?: Element<unknown>;
   ignore?: boolean;
 }
 
-export type Node<Props = NoProps> =
-  | Element<Props>
-  | Text<Props>
-  | Comment<Props>;
+export type Node<Props = any> = Element<Props> | Text | Comment;
 
 export interface Attributes {
   [key: string]: string;
@@ -84,7 +77,7 @@ interface Process<Props, Pkg extends Package> {
   ): Node<Props> | boolean;
 }
 
-export interface Processor<Props = NoProps, Pkg extends Package = Package> {
+export interface Processor<Props = any, Pkg extends Package = Package> {
   name?: string;
   priority?: number;
   test: Test<Props, Pkg>;
