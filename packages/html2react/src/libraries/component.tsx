@@ -16,7 +16,10 @@ const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
 
     // Test processor.
     try {
-      // Run tester merging node with params for backward-compatibility
+      /**
+       * Run the tester passing node and params merged, and payload as
+       * a second argument for backward compatibility.
+       */
       const params = { node, ...payload };
       isMatch = tester({ ...node, ...params }, payload);
     } catch (e) {
@@ -26,7 +29,10 @@ const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
 
     // Apply processor.
     try {
-      // Run process merging node with payload for backward-compatibility
+      /**
+       * Run the processor passing node and params merged, and payload as
+       * a second argument for backward compatibility.
+       */
       const params = { node, ...payload };
       const processed = process({ ...node, ...params }, payload);
       // Return true if node was removed.

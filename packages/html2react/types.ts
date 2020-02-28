@@ -63,19 +63,15 @@ interface Params<Props, Pkg extends Package> {
   libraries: Pkg["libraries"];
 }
 
-interface Test<Props, Pkg extends Package> {
-  (
-    params: Node<Props> & Params<Props, Pkg>,
-    payload?: Omit<Params<Props, Pkg>, "node">
-  ): boolean;
-}
+type Test<Props, Pkg extends Package> = (
+  params: Params<Props, Pkg>,
+  payload?: Omit<Params<Props, Pkg>, "node"> // make it backwards-compatible
+) => boolean;
 
-interface Process<Props, Pkg extends Package> {
-  (
-    params: Node<Props> & Params<Props, Pkg>,
-    payload?: Omit<Params<Props, Pkg>, "node">
-  ): Node<Props> | boolean;
-}
+type Process<Props, Pkg extends Package> = (
+  params: Params<Props, Pkg>,
+  payload?: Omit<Params<Props, Pkg>, "node"> // make it backwards-compatible
+) => Node<Props> | boolean;
 
 export interface Processor<Props = any, Pkg extends Package = Package> {
   name?: string;
