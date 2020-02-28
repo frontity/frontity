@@ -3,4 +3,4 @@
 "@frontity/twentytwenty-theme": minor
 ---
 
-Update the theme to use new pagination features from state.source.get():wq
+Update the theme to use new pagination features from state.source.get()
