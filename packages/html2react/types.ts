@@ -71,7 +71,7 @@ type Test<Props, Pkg extends Package> = (
 type Process<Props, Pkg extends Package> = (
   params: Params<Props, Pkg>,
   payload?: Omit<Params<Props, Pkg>, "node"> // make it backwards-compatible
-) => Node<Props> | boolean;
+) => Node | boolean;
 
 export interface Processor<Props = any, Pkg extends Package = Package> {
   name?: string;
