@@ -1,6 +1,6 @@
-import { Package } from "frontity/types";
+import { Package, State } from "frontity/types";
 import { SerializedStyles } from "@emotion/core";
-import { Node as HiamalayaNode } from "./himalaya/types";
+import { Node as HimalayaNode } from "./himalaya/types";
 
 interface Html2React extends Package {
   name: "@frontity/html2react";
@@ -59,47 +59,69 @@ export interface Parse {
 }
 
 export interface AdaptNode {
-  (himalayaNode: HiamalayaNode, parent?: Element): Node;
+  (himalayaNode: HimalayaNode, parent?: Element): Node;
 }
 
-// Processors
-
-interface Test<Props = NoProps> {
-  (node: Node<Props>): boolean;
+// Processors.
+interface Params<Props, Pkg extends Package> {
+  node: Node<Props>;
+  root: Node<Props>[];
+  state: State<Pkg>;
+  libraries: Pkg["libraries"];
 }
 
-interface Process<Props = NoProps> {
-  (node: Node<Props>, payload: { root: Node<Props>[] }): Node<Props>;
+interface Test<Props, Pkg extends Package> {
+  (
+    params: Node<Props> & Params<Pkg, Props>,
+    payload?: Omit<Params<Pkg, Props>, "node">
+  ): boolean;
 }
 
-export interface Processor<Props = NoProps> {
+interface Process<Props, Pkg extends Package> {
+  (
+    params: Node<Props> & Params<Pkg, Props>,
+    payload?: Omit<Params<Pkg, Props>, "node">
+  ): Node<Props> | boolean;
+}
+
+export interface Processor<Props = NoProps, Pkg extends Package = Package> {
   name?: string;
   priority?: number;
-  test: Test<Props>;
-  process: Process<Props>;
+  test: Test<Pkg, Props>;
+  process: Process<Pkg, Props>;
 }
 
-// Component
-
-export interface Payload {
+// Component functions.
+interface Payload {
   root: Node[];
   processors: Processor[];
+  state: State<Html2React>;
+  libraries: Html2React["libraries"];
 }
 
 export interface HandleNodes {
-  (params: { nodes: Node[]; payload: Payload }): React.ReactNode;
+  (
+    params: {
+      nodes: Node[];
+    } & Payload
+  ): React.ReactNode;
 }
 
 export interface HandleNode {
-  (params: { node: Node; payload: Payload; index: number }): React.ReactNode;
+  (
+    params: {
+      node: Node;
+      index: number;
+    } & Payload
+  ): React.ReactNode;
 }
 
 export interface ApplyProcessors {
-  (params: {
-    node: Node;
-    root: Payload["root"];
-    processors: Payload["processors"];
-  }): boolean;
+  (
+    params: {
+      node: Node;
+    } & Payload
+  ): React.ReactNode;
 }
 
 export type Component<T = { html: string }> = React.FC<T>;
