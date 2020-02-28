@@ -48,6 +48,10 @@ const settings: Settings = [
   {
     name: "script",
     packages: ["e2e-script"]
+  },
+  {
+    name: "switch",
+    packages: ["e2e-switch"]
   }
 ];
 
