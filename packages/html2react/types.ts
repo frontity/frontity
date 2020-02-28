@@ -72,23 +72,23 @@ interface Params<Props, Pkg extends Package> {
 
 interface Test<Props, Pkg extends Package> {
   (
-    params: Node<Props> & Params<Pkg, Props>,
-    payload?: Omit<Params<Pkg, Props>, "node">
+    params: Node<Props> & Params<Props, Pkg>,
+    payload?: Omit<Params<Props, Pkg>, "node">
   ): boolean;
 }
 
 interface Process<Props, Pkg extends Package> {
   (
-    params: Node<Props> & Params<Pkg, Props>,
-    payload?: Omit<Params<Pkg, Props>, "node">
+    params: Node<Props> & Params<Props, Pkg>,
+    payload?: Omit<Params<Props, Pkg>, "node">
   ): Node<Props> | boolean;
 }
 
 export interface Processor<Props = NoProps, Pkg extends Package = Package> {
   name?: string;
   priority?: number;
-  test: Test<Pkg, Props>;
-  process: Process<Pkg, Props>;
+  test: Test<Props, Pkg>;
+  process: Process<Props, Pkg>;
 }
 
 // Component functions.
