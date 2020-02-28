@@ -63,10 +63,7 @@ interface Params<Props, Pkg extends Package> {
   libraries: Pkg["libraries"];
 }
 
-type Test<Props, Pkg extends Package> = (
-  params: Params<Props, Pkg>,
-  payload?: Omit<Params<Props, Pkg>, "node"> // make it backwards-compatible
-) => boolean;
+type Test<Props, Pkg extends Package> = (params: Params<Props, Pkg>) => boolean;
 
 type Process<Props, Pkg extends Package> = (
   params: Params<Props, Pkg>,

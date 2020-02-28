@@ -17,11 +17,11 @@ const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
     // Test processor.
     try {
       /**
-       * Run the tester passing node and params merged, and payload as
-       * a second argument for backward compatibility.
+       * Run the tester passing node and params merged for backward
+       * compatibility.
        */
       const params = { node, ...payload };
-      isMatch = tester({ ...node, ...params }, payload);
+      isMatch = tester({ ...node, ...params });
     } catch (e) {
       console.warn(e);
     }
