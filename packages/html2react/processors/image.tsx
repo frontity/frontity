@@ -21,9 +21,9 @@ const ContentImage: React.FC<Props> = props => {
   }
 };
 
-const image: Processor = {
-  test: node => node.type === "element" && node.component === "img",
-  process: node => {
+const image: Processor<React.HTMLProps<HTMLImageElement>> = {
+  test: ({ node }) => node.type === "element" && node.component === "img",
+  process: ({ node }) => {
     if (node.type === "element") {
       if (node.parent && node.parent.component === "noscript") return null;
 
