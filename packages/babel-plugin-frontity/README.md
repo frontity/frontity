@@ -1,2 +1,2 @@
-# babel-plugin-frontity
-
+## Description
+Babel plugin for Frontity.
