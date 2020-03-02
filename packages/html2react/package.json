@@ -1,10 +1,10 @@
 {
   "name": "@frontity/html2react",
   "version": "1.2.0",
-  "description": "HTML to React converter for »Frontity",
+  "description": "HTML to React converter for Frontity",
   "keywords": [
     "frontity",
-    "frontity-package"
+    "frontity-html2react"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
@@ -20,21 +20,15 @@
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "devDependencies": {
     "@frontity/connect": "^1.0.4",
-    "@types/he": "^1.1.0",
     "@types/react-test-renderer": "^16.8.1",
     "@testing-library/react": "^9.4.0",
-    "frontity": "^1.5.0",
-    "react-test-renderer": "^16.8.6",
-    "ts-jest": "^24.0.2"
+    "react-test-renderer": "^16.8.6"
   },
   "dependencies": {
     "@frontity/components": "^1.2.0",
-    "he": "^1.2.0",
+    "frontity": "^1.5.0",
     "himalaya": "^1.1.0"
   }
 }
