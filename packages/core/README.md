@@ -1,11 +1,4 @@
-# `core`
+## Description
+The core package of the Frontity framework. It needs to be installed in any Frontity project.
 
-> TODO: description
-
-## Usage
-
-```
-const core = require('core');
-
-// TODO: DEMONSTRATE API
-```
+You can find more information about Frontity at [our docs](https://docs.frontity.org/).
