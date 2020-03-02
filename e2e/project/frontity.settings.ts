@@ -56,6 +56,10 @@ const settings: Settings = [
   {
     name: "html2react",
     packages: ["e2e-html2react", "@frontity/html2react"]
+  },
+  {
+    name: "tiny-router",
+    packages: ["e2e-tiny-router"]
   }
 ];
 
