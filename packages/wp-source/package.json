@@ -20,19 +20,16 @@
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "devDependencies": {
-    "clone-deep": "4.0.1",
-    "frontity": "^1.5.0",
-    "node-fetch": "^2.6.0"
-  },
   "dependencies": {
-    "@frontity/connect": "^1.0.4",
     "@frontity/source": "^1.1.0",
+    "frontity": "^1.5.0",
     "normalizr": "^3.3.0",
     "path-to-regexp": "^3.0.0",
     "query-string": "^6.8.3"
+  },
+  "devDependencies": {
+    "@frontity/connect": "^1.0.4",
+    "clone-deep": "4.0.1",
+    "node-fetch": "^2.6.0"
   }
 }

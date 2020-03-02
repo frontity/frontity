@@ -1,9 +1,10 @@
 {
   "name": "@frontity/core",
   "version": "1.5.0",
-  "description": "Main Frontity package",
+  "description": "The core package of the Frontity framework.",
   "keywords": [
-    "frontity"
+    "frontity",
+    "core"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
@@ -15,9 +16,6 @@
   },
   "bugs": {
     "url": "https://community.frontity.org"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "test:ci": "../../node_modules/.bin/jest",

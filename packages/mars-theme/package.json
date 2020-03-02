@@ -4,8 +4,7 @@
   "description": "A starter theme for Frontity",
   "keywords": [
     "frontity",
-    "frontity-theme",
-    "frontity-amp"
+    "frontity-theme"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
@@ -15,9 +14,6 @@
   },
   "bugs": {
     "url": "https://community.frontity.org"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "dependencies": {
     "@frontity/components": "^1.2.0",

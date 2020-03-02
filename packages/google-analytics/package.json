@@ -1,12 +1,13 @@
 {
   "name": "@frontity/google-analytics",
   "version": "1.0.0",
-  "description": "Analytics package to use Google Analytics with »Frontity",
+  "description": "Analytics package to use Google Analytics with Frontity",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
   "keywords": [
     "frontity",
-    "frontity-analytics"
+    "frontity-analytics",
+    "frontity-google-analytics"
   ],
   "repository": {
     "type": "git",
@@ -20,15 +21,12 @@
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
   },
-  "publishConfig": {
-    "access": "public"
+  "dependencies": {
+    "@frontity/analytics": "^1.0.0",
+    "frontity": "^1.5.0"
   },
   "devDependencies": {
     "@types/react-test-renderer": "^16.9.2",
-    "frontity": "^1.5.0",
     "react-test-renderer": "^16.12.0"
-  },
-  "dependencies": {
-    "@frontity/analytics": "^1.0.0"
   }
 }

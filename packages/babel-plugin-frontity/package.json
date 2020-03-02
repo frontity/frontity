@@ -16,9 +16,6 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "test:ci": "../../node_modules/.bin/jest",
     "test": "../../node_modules/.bin/jest --watch",
