@@ -1,12 +1,24 @@
 import WpSource from "../types";
-import { normalize } from "./libraries/route-utils";
+import { normalize, parse } from "./libraries/route-utils";
 
 const state: WpSource["state"]["source"] = {
-  get: ({ state }) => link =>
-    state.source.data[normalize(link)] || {
+  get: ({ state }) => link => {
+    const normalizedLink = normalize(link);
+    const data = state.source.data[normalizedLink];
+    if (data) {
+      return data;
+    }
+    const { route, query, page } = parse(link);
+
+    return {
+      link: normalize(normalizedLink),
+      route,
+      query,
+      page,
       isFetching: false,
       isReady: false
-    },
+    };
+  },
   data: {},
   category: {},
   tag: {},

@@ -1,14 +1,15 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
+import { DateData, DateWithSearchData } from "@frontity/source/types/data";
 
 export const dateHandler: Handler = async ({
-  route,
+  link,
   params,
   state,
   libraries
 }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { path, page, query } = parse(route);
+  const { route, page, query } = parse(link);
 
   // 1. build date properties
   const year = parseInt(params.year);
@@ -40,23 +41,46 @@ export const dateHandler: Handler = async ({
   // 3. populate response
   const items = await populate({ response, state });
   if (items.length === 0)
-    throw new ServerError(`date "${path}" doesn't have page ${page}`, 404);
+    throw new ServerError(`date "${route}" doesn't have page ${page}`, 404);
 
   // 4. get posts and pages count
-  const total = getTotal(response);
-  const totalPages = getTotalPages(response);
+  const total = getTotal(response, items.length);
+  const totalPages = getTotalPages(response, 0);
+
+  // returns true if next page exists
+  const hasNewerPosts = page < totalPages;
+  // returns true if previous page exists
+  const hasOlderPosts = page > 1;
+
+  const getPageLink = (page: number) =>
+    libraries.source.stringify({ route, query, page });
 
   // 5. add data to source
-  Object.assign(state.source.data[route], {
+  const currentPageData = state.source.data[link];
+
+  const newPageData: DateData | DateWithSearchData = {
     year,
-    month,
-    day,
     items,
     total,
     totalPages,
     isArchive: true,
-    isDate: true
-  });
+    isDate: true,
+    isFetching: currentPageData.isFetching,
+    isReady: currentPageData.isReady,
+
+    // Add next and previous if they exist.
+    ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
+    ...(hasNewerPosts && { next: getPageLink(page + 1) }),
+
+    // Add day and month only if they exist.
+    ...(day && { day }),
+    ...(month && { month }),
+
+    // Add search data if this is a search.
+    ...(query.s && { isSearch: true, searchQuery: query.s })
+  };
+
+  Object.assign(currentPageData, newPageData);
 };
 
 export default dateHandler;

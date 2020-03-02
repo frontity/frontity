@@ -41,30 +41,27 @@ const paginate = (totalPages, currentPage) => {
 };
 
 const Pagination = ({ state, actions, libraries }) => {
-  const { totalPages } = state.source.get(state.router.link);
-  const { path, page, query } = libraries.source.parse(state.router.link);
+  const { route, query, totalPages, next, previous, page } = state.source.get(
+    state.router.link
+  );
 
-  // returns true if next page exists
-  const hasOlderPosts = page < totalPages;
-  // returns true if previous page exists
-  const hasNewerPosts = page > 1;
   // get page link with page number
-  const getPageLink = pageNo =>
-    libraries.source.stringify({ path, query, page: pageNo });
+  const getPageLink = page =>
+    libraries.source.stringify({ route, query, page });
 
   // Pagination - array of numbers/dots for pages
   const paginationArray = paginate(totalPages, page);
 
   // Prefetch next page if it hasn't been fetched yet.
   useEffect(() => {
-    if (hasOlderPosts) actions.source.fetch(getPageLink(page + 1));
+    if (next) actions.source.fetch(next);
   }, []);
 
   return (
     <Container>
       <Direction>
-        {hasNewerPosts && (
-          <StyledLink link={getPageLink(page - 1)}>
+        {previous && (
+          <StyledLink link={previous}>
             ← <DirectionItem>Newer</DirectionItem>
           </StyledLink>
         )}
@@ -93,8 +90,8 @@ const Pagination = ({ state, actions, libraries }) => {
       </div>
 
       <Direction>
-        {hasOlderPosts && (
-          <StyledLink link={getPageLink(page + 1)}>
+        {next && (
+          <StyledLink link={next}>
             <DirectionItem>Older</DirectionItem> →
           </StyledLink>
         )}

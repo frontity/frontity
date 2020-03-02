@@ -1,6 +1,10 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
+import {
+  TaxonomyData,
+  TaxonomyWithSearchData
+} from "@frontity/source/types/data";
 
 const taxonomyHandler = ({
   taxonomy,
@@ -12,17 +16,26 @@ const taxonomyHandler = ({
   endpoint: string;
   postTypeEndpoint?: string;
   params?: Record<string, any>;
-}): Handler => async ({ route, params, state, libraries, force }) => {
+}): Handler => async ({ link, params, state, libraries, force }) => {
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
-  const { path, page, query } = parse(route);
+  const { route, page, query } = parse(link);
 
   // 1. search id in state or get it from WP REST API
-  let { id } = state.source.get(path);
+  let { id } = state.source.get(route);
   if (!id || force) {
     const { slug } = params;
     // Request entity from WP
-    const response = await api.get({ endpoint, params: { slug } });
-    const [entity] = await populate({ response, state, force: true });
+    const response = await api.get({
+      endpoint,
+      params: {
+        slug
+      }
+    });
+    const [entity] = await populate({
+      response,
+      state,
+      force: true
+    });
     if (!entity)
       throw new ServerError(
         `entity from endpoint "${endpoint}" with slug "${slug}" not found`,
@@ -45,7 +58,10 @@ const taxonomyHandler = ({
   });
 
   // 3. populate response
-  const items = await populate({ response, state });
+  const items = await populate({
+    response,
+    state
+  });
   if (page > 1 && items.length === 0)
     throw new ServerError(
       `${taxonomy} with slug "${params.slug}" doesn't have page ${page}`,
@@ -53,14 +69,26 @@ const taxonomyHandler = ({
     );
 
   // 4. get posts and pages count
-  const total = getTotal(response);
-  const totalPages = getTotalPages(response);
+  const total = getTotal(response, items.length);
+  const totalPages = getTotalPages(response, 0);
+
+  // returns true if next page exists
+  const hasNewerPosts = page < totalPages;
+  // returns true if previous page exists
+  const hasOlderPosts = page > 1;
+
+  const getPageLink = (page: number) =>
+    libraries.source.stringify({
+      route,
+      query,
+      page
+    });
 
   // 5. add data to source
-  const currentPageData = state.source.data[route];
-  const firstPageData = state.source.data[path];
+  const currentPageData = state.source.data[link];
+  const firstPageData = state.source.data[route];
 
-  Object.assign(currentPageData, {
+  const newPageData: TaxonomyData | TaxonomyWithSearchData = {
     id: firstPageData.id,
     taxonomy: firstPageData.taxonomy,
     items,
@@ -68,8 +96,19 @@ const taxonomyHandler = ({
     totalPages,
     isArchive: true,
     isTaxonomy: true,
-    [`is${capitalize(firstPageData.taxonomy)}`]: true
-  });
+    isFetching: currentPageData.isFetching,
+    isReady: currentPageData.isReady,
+    [`is${capitalize(firstPageData.taxonomy)}`]: true,
+
+    // Add next and previous if they exist.
+    ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
+    ...(hasNewerPosts && { next: getPageLink(page + 1) }),
+
+    // Add search data if this is a search.
+    ...(query.s && { isSearch: true, searchQuery: query.s })
+  };
+
+  Object.assign(currentPageData, newPageData);
 };
 
 export default taxonomyHandler;
