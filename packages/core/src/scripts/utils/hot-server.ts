@@ -1,6 +1,6 @@
 import path from "path";
 import { RequestHandler } from "express";
-import { MultiCompiler, compilation } from "webpack";
+import { MultiCompiler } from "webpack";
 import requireFromString from "require-from-string";
 import sourceMapSupport from "source-map-support";
 
@@ -28,7 +28,7 @@ const findStats = (multiStats, name) => {
 
 const getFilename = (serverStats, outputPath, chunkName) => {
   const assetsByChunkName = serverStats.toJson().assetsByChunkName;
-  let filename = assetsByChunkName[chunkName] || "";
+  const filename = assetsByChunkName[chunkName] || "";
   // If source maps are generated `assetsByChunkName.main`
   // will be an array of filenames.
   return path.join(
@@ -42,7 +42,7 @@ const getFilename = (serverStats, outputPath, chunkName) => {
 const getServerRenderer = (filename, buffer) => {
   const errMessage = `The 'server' compiler must export a function in the form of \`(options) => (req, res, next) => void\``;
 
-  let serverRenderer = interopRequireDefault(
+  const serverRenderer = interopRequireDefault(
     requireFromString(buffer.toString(), filename)
   );
   if (typeof serverRenderer !== "function") {
@@ -90,8 +90,6 @@ function webpackHotServerMiddleware(
   if (!serverCompiler) {
     throw new Error(`Expected a webpack compiler named 'server'`);
   }
-  if (!clientCompilers.length) {
-  }
 
   const outputFs = serverCompiler.outputFileSystem;
   const outputPath = serverCompiler.outputPath;
@@ -134,6 +132,7 @@ function webpackHotServerMiddleware(
   multiCompiler.hooks.done.tap("WebpackHotServerMiddleware", doneHandler);
 
   return function() {
+    // eslint-disable-next-line prefer-spread,prefer-rest-params
     return createConnectHandler(error, serverRenderer).apply(null, arguments);
   };
 }

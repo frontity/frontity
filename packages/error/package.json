@@ -6,10 +6,10 @@
     "frontity"
   ],
   "homepage": "https://frontity.org",
-  "license": "Apache-2.0",
-  "publishConfig": {
-    "access": "public"
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
   },
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frontity/frontity.git"
@@ -17,8 +17,5 @@
   "scripts": {
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
-  },
-  "bugs": {
-    "url": "https://github.com/frontity/frontity/issues"
   }
 }

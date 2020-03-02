@@ -8,6 +8,7 @@
     "frontity",
     "frontity-head-tags",
     "yoast",
+    "all-in-one-seo-pack",
     "seo"
   ],
   "repository": {
@@ -22,17 +23,13 @@
   "bugs": {
     "url": "https://github.com/frontity/frontity/issues"
   },
-  "publishConfig": {
-    "access": "public"
+  "dependencies": {
+    "frontity": "^1.5.0"
   },
   "devDependencies": {
     "@frontity/connect": "^1.0.4",
     "@frontity/router": "^1.0.17",
     "@frontity/source": "^1.1.0",
-    "@frontity/wp-source": "^1.5.0",
-    "frontity": "^1.5.0"
-  },
-  "peerDependencies": {
     "@frontity/wp-source": "^1.5.0"
   }
 }

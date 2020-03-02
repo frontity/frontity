@@ -6,6 +6,7 @@ type ScriptType = React.FC<
   Connect<Package, { src?: string; code?: string; id?: string }>
 >;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Script: ScriptType = ({ state, ...props }) => {
   let script = null;
   const { src, code, id } = props;

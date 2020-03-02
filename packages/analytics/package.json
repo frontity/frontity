@@ -21,13 +21,8 @@
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "devDependencies": {
-    "frontity": "^1.5.0"
-  },
   "dependencies": {
-    "@frontity/source": "^1.0.17"
+    "@frontity/source": "^1.0.17",
+    "frontity": "^1.5.0"
   }
 }
