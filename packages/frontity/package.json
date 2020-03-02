@@ -44,6 +44,7 @@
     "didyoumean": "^1.2.1",
     "envinfo": "^7.3.1",
     "fs-extra": "^7.0.1",
+    "he": "^1.2.0",
     "inquirer": "^6.3.1",
     "is-root": "2.1.0",
     "node-fetch": "^2.6.0",
