@@ -46,32 +46,39 @@ if (data.isArchive) {
 
 if (data.isTaxonomy) {
   expectType<TaxonomyData | TaxonomyWithSearchData>(data);
+  if (data.isSearch) expectType<TaxonomyWithSearchData>(data);
 }
 
 if (data.isCategory) {
   expectType<TaxonomyData | TaxonomyWithSearchData>(data);
   expectType<CategoryData | CategoryWithSearchData>(data);
+  if (data.isSearch) expectType<CategoryWithSearchData>(data);
 }
 
 if (data.isTag) {
   expectType<TaxonomyData | TaxonomyWithSearchData>(data);
   expectType<TagData | TagWithSearchData>(data);
+  if (data.isSearch) expectType<TagWithSearchData>(data);
 }
 
 if (data.isAuthor) {
   expectType<AuthorData | AuthorWithSearchData>(data);
+  if (data.isSearch) expectType<AuthorWithSearchData>(data);
 }
 
 if (data.isPostTypeArchive) {
   expectType<PostTypeArchiveData | PostTypeArchiveWithSearchData>(data);
+  if (data.isSearch) expectType<PostTypeArchiveWithSearchData>(data);
 }
 
 if (data.isPostArchive) {
   expectType<PostArchiveData | PostArchiveWithSearchData>(data);
+  if (data.isSearch) expectType<PostArchiveWithSearchData>(data);
 }
 
 if (data.isDate) {
   expectType<DateData | DateWithSearchData>(data);
+  if (data.isSearch) expectType<DateWithSearchData>(data);
 }
 
 if (data.isPostType) {
