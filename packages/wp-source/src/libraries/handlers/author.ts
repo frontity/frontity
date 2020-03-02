@@ -1,6 +1,6 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
-import { AuthorData } from "@frontity/source/types/data";
+import { AuthorData, AuthorWithSearchData } from "@frontity/source/types/data";
 
 const authorHandler: Handler = async ({
   link,
@@ -60,7 +60,7 @@ const authorHandler: Handler = async ({
   const currentPageData = state.source.data[link];
   const firstPageData = state.source.data[route];
 
-  const newPageData: AuthorData = {
+  const newPageData: AuthorData | AuthorWithSearchData = {
     id: firstPageData.id,
     items,
     total,
@@ -70,18 +70,15 @@ const authorHandler: Handler = async ({
     isReady: currentPageData.isReady,
     isFetching: currentPageData.isFetching,
 
-    // Add those keys if hasOlderPosts / hasNewerPosts === true
+    // Add next and previous if they exist.
     ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
-    ...(hasNewerPosts && { next: getPageLink(page + 1) })
+    ...(hasNewerPosts && { next: getPageLink(page + 1) }),
+
+    // Add search data if this is a search.
+    ...(query.s && { isSearch: true, searchQuery: query.s })
   };
 
   Object.assign(currentPageData, newPageData);
-
-  // 6. If it's a search, add the information.
-  if (query.s) {
-    currentPageData.isSearch = true;
-    currentPageData.searchQuery = query.s;
-  }
 };
 
 export default authorHandler;

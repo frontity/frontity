@@ -395,7 +395,6 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/2019/01/": Object {
-      "day": undefined,
       "isArchive": true,
       "isDate": true,
       "isFetching": false,
@@ -616,7 +615,6 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/2019/?some=param": Object {
-      "day": undefined,
       "isArchive": true,
       "isDate": true,
       "isFetching": false,
@@ -639,7 +637,6 @@ Object {
         },
       ],
       "link": "/2019/?some=param",
-      "month": undefined,
       "next": "/2019/page/2/?some=param",
       "page": 1,
       "query": Object {
@@ -651,7 +648,6 @@ Object {
       "year": 2019,
     },
     "/2019/page/2/?some=param": Object {
-      "day": undefined,
       "isArchive": true,
       "isDate": true,
       "isFetching": false,
@@ -669,7 +665,6 @@ Object {
         },
       ],
       "link": "/2019/page/2/?some=param",
-      "month": undefined,
       "page": 2,
       "previous": "/2019/?some=param",
       "query": Object {
@@ -986,7 +981,6 @@ Object {
   "categoryBase": "",
   "data": Object {
     "/2019/": Object {
-      "day": undefined,
       "isArchive": true,
       "isDate": true,
       "isFetching": false,
@@ -1009,7 +1003,6 @@ Object {
         },
       ],
       "link": "/2019/",
-      "month": undefined,
       "next": "/2019/page/2/",
       "page": 1,
       "query": Object {},
@@ -1019,7 +1012,6 @@ Object {
       "year": 2019,
     },
     "/2019/page/2/": Object {
-      "day": undefined,
       "isArchive": true,
       "isDate": true,
       "isFetching": false,
@@ -1037,7 +1029,6 @@ Object {
         },
       ],
       "link": "/2019/page/2/",
-      "month": undefined,
       "page": 2,
       "previous": "/2019/",
       "query": Object {},

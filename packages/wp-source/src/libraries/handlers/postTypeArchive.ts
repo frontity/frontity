@@ -1,7 +1,10 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
-import { PostTypeArchiveData } from "@frontity/source/types/data";
+import {
+  PostTypeArchiveData,
+  PostTypeArchiveWithSearchData
+} from "@frontity/source/types/data";
 
 const postTypeArchiveHandler = ({
   type,
@@ -51,7 +54,7 @@ const postTypeArchiveHandler = ({
   // 4. add data to source
   const currentPageData = state.source.data[link];
 
-  const newPageData: PostTypeArchiveData = {
+  const newPageData: PostTypeArchiveData | PostTypeArchiveWithSearchData = {
     type,
     items,
     total,
@@ -62,20 +65,15 @@ const postTypeArchiveHandler = ({
     isReady: currentPageData.isReady,
     [`is${capitalize(type)}Archive`]: true,
 
-    // Add those keys if hasOlderPosts / hasNewerPosts === true
+    // Add next and previous if they exist.
     ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
-    ...(hasNewerPosts && { next: getPageLink(page + 1) })
+    ...(hasNewerPosts && { next: getPageLink(page + 1) }),
+
+    // Add search data if this is a search.
+    ...(query.s && { isSearch: true, searchQuery: query.s })
   };
 
   Object.assign(currentPageData, newPageData);
-
-  // 6. If it's a search, add the information.
-  if (query.s) {
-    currentPageData.isSearch = true;
-    if (currentPageData.isSearch) {
-      currentPageData.searchQuery = query.s;
-    }
-  }
 };
 
 export default postTypeArchiveHandler;

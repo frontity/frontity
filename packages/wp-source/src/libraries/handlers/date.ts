@@ -1,6 +1,6 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
-import { DateData } from "@frontity/source/types/data";
+import { DateData, DateWithSearchData } from "@frontity/source/types/data";
 
 export const dateHandler: Handler = async ({
   link,
@@ -58,10 +58,8 @@ export const dateHandler: Handler = async ({
   // 5. add data to source
   const currentPageData = state.source.data[link];
 
-  const newPageData: DateData = {
+  const newPageData: DateData | DateWithSearchData = {
     year,
-    month,
-    day,
     items,
     total,
     totalPages,
@@ -70,18 +68,19 @@ export const dateHandler: Handler = async ({
     isFetching: currentPageData.isFetching,
     isReady: currentPageData.isReady,
 
-    // Add those keys if hasOlderPosts / hasNewerPosts === true
+    // Add next and previous if they exist.
     ...(hasOlderPosts && { previous: getPageLink(page - 1) }),
-    ...(hasNewerPosts && { next: getPageLink(page + 1) })
+    ...(hasNewerPosts && { next: getPageLink(page + 1) }),
+
+    // Add day and month only if they exist.
+    ...(day && { day }),
+    ...(month && { month }),
+
+    // Add search data if this is a search.
+    ...(query.s && { isSearch: true, searchQuery: query.s })
   };
 
   Object.assign(currentPageData, newPageData);
-
-  // 6. If it's a search, add the information.
-  if (query.s) {
-    currentPageData.isSearch = true;
-    currentPageData.searchQuery = query.s;
-  }
 };
 
 export default dateHandler;
