@@ -20,9 +20,9 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "devDependencies": {
-    "@types/react-test-renderer": "^16.8.1",
+    "@types/react-test-renderer": "^16.9.2",
     "@frontity/error": "^0.0.1",
-    "react-test-renderer": "^16.8.6"
+    "react-test-renderer": "^16.12.0"
   },
   "dependencies": {
     "frontity": "^1.5.0",

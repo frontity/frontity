@@ -23,6 +23,6 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.8.6"
+    "react-test-renderer": "^16.12.0"
   }
 }
