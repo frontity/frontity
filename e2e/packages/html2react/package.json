@@ -4,6 +4,7 @@
   "private": true,
   "description": "Package to do e2e testing of Frontity's Html2React package",
   "dependencies": {
-    "frontity": "^1.5.0"
+    "frontity": "^1.5.0",
+    "@frontity/html2react": "^1.2.0"
   }
 }
