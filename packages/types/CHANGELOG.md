@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- [`897780d5`](https://github.com/frontity/frontity/commit/897780d549b56cc6ddb1c06b107b570114ff5587) [#328](https://github.com/frontity/frontity/pull/328) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add a new type for server actions that want to modify Koa's context called `ServerAction`.
+
 ## 1.2.0
 
 ### Minor Changes

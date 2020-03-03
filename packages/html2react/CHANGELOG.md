@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- [`9cfc178d`](https://github.com/frontity/frontity/commit/9cfc178dc1fb67381607ca67756d629f311bb9f9) [#327](https://github.com/frontity/frontity/pull/327) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add the possibility to access state and libraries at the processors so users can use settings or functionalities stored there.
+
+### Patch Changes
+
+- Updated dependencies [[`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7), [`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7), [`f7418071`](https://github.com/frontity/frontity/commit/f741807197c4cda5df2e43f5496a121428d309bf), [`7d07748e`](https://github.com/frontity/frontity/commit/7d07748e3b19c6c4599116e95fa91a472f9e3aa3)]:
+  - frontity@1.5.2
+  - @frontity/components@1.3.0
+
 ## 1.2.0
 
 ### Minor Changes

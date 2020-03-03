@@ -1,5 +1,32 @@
 # Change Log
 
+## 1.2.0
+
+### Minor Changes
+
+- [`e8210ee9`](https://github.com/frontity/frontity/commit/e8210ee97c25555a122dc63f114fb4188ea0b7af) [#253](https://github.com/frontity/frontity/pull/253) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - We have made easier to work with searches and pagination by adding this new properties to the data object returned by `state.source.get(someLink)`:
+
+  In all entities:
+
+  - `data.link`: the link (short for permalink).
+  - `data.page`: the page number.
+  - `data.route`: the link without the pagination part.
+
+  In archives:
+
+  - `data.next`: the link of the next page in an archive.
+  - `data.previous`: the link of the previous page in an archive.
+
+  In searches:
+
+  - `data.isSearch`: true for links that are searches.
+  - `data.searchQuery`: the value of the search.
+
+### Patch Changes
+
+- Updated dependencies [[`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7), [`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7), [`f7418071`](https://github.com/frontity/frontity/commit/f741807197c4cda5df2e43f5496a121428d309bf)]:
+  - frontity@1.5.2
+
 ## 1.1.0
 
 ### Minor Changes

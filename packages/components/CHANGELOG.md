@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- [`7d07748e`](https://github.com/frontity/frontity/commit/7d07748e3b19c6c4599116e95fa91a472f9e3aa3) [#318](https://github.com/frontity/frontity/pull/318) Thanks [@iamuchejude](https://github.com/iamuchejude)! - Add a `<Switch>` component for conditional rendering.
+
+### Patch Changes
+
+- Updated dependencies [[`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7), [`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7), [`f7418071`](https://github.com/frontity/frontity/commit/f741807197c4cda5df2e43f5496a121428d309bf)]:
+  - frontity@1.5.2
+
 ## 1.2.0
 
 ### Minor Changes
