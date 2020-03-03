@@ -1,5 +1,21 @@
 # @frontity/twentytwenty-theme
 
+## 1.1.0
+
+### Minor Changes
+
+- [`0a0efcba`](https://github.com/frontity/frontity/commit/0a0efcba58a76ef878f03261fc5775d94b21313c) [#318](https://github.com/frontity/frontity/pull/318) Thanks [@iamuchejude](https://github.com/iamuchejude)! - Use the new `<Switch>` component for conditional rendering.
+
+* [`ae9dee70`](https://github.com/frontity/frontity/commit/ae9dee7072d8918f948568ad7e7f0264c9863ad2) [#253](https://github.com/frontity/frontity/pull/253) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Update the theme to use new pagination features from state.source.get()
+
+### Patch Changes
+
+- [`64ef052c`](https://github.com/frontity/frontity/commit/64ef052c7286bc68b7fb27ccb7b9192973b7af53) [#330](https://github.com/frontity/frontity/pull/330) Thanks [@luisherranz](https://github.com/luisherranz)! - Don't auto fetch on hover when the link is external.
+- Updated dependencies [[`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7), [`9cfc178d`](https://github.com/frontity/frontity/commit/9cfc178dc1fb67381607ca67756d629f311bb9f9), [`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7), [`f7418071`](https://github.com/frontity/frontity/commit/f741807197c4cda5df2e43f5496a121428d309bf), [`7d07748e`](https://github.com/frontity/frontity/commit/7d07748e3b19c6c4599116e95fa91a472f9e3aa3)]:
+  - frontity@1.5.2
+  - @frontity/html2react@1.3.0
+  - @frontity/components@1.3.0
+
 ## 1.0.0
 
 ### Major Changes

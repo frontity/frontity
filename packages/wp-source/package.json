@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-source",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Source package of Frontity for self-hosted WordPress and WordPress.com sites",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -21,8 +21,8 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/source": "^1.1.0",
-    "frontity": "^1.5.0",
+    "@frontity/source": "^1.2.0",
+    "frontity": "^1.5.2",
     "normalizr": "^3.3.0",
     "path-to-regexp": "^3.0.0",
     "query-string": "^6.8.3"

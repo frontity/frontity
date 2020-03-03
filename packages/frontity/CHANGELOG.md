@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.5.2
+
+### Patch Changes
+
+- [`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7) [#329](https://github.com/frontity/frontity/pull/329) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix missing `he` dependency for the `decode` function.
+
+* [`b3225692`](https://github.com/frontity/frontity/commit/b32256929351b66647f64900cc59862ee7c702a7) [#329](https://github.com/frontity/frontity/pull/329) Thanks [@luisherranz](https://github.com/luisherranz)! - Remove `@frontity/connect` from dependencies to avoid multiple imports and fix the problem people is having when they are updating Frontity.
+
+- [`f7418071`](https://github.com/frontity/frontity/commit/f741807197c4cda5df2e43f5496a121428d309bf) [#319](https://github.com/frontity/frontity/pull/319) Thanks [@luisherranz](https://github.com/luisherranz)! - Correctly import type declarations from the @frontity/type-declarations package.
+- Updated dependencies [[`f7418071`](https://github.com/frontity/frontity/commit/f741807197c4cda5df2e43f5496a121428d309bf), [`897780d5`](https://github.com/frontity/frontity/commit/897780d549b56cc6ddb1c06b107b570114ff5587), [`f7418071`](https://github.com/frontity/frontity/commit/f741807197c4cda5df2e43f5496a121428d309bf)]:
+  - @frontity/type-declarations@1.1.0
+  - @frontity/types@1.3.0
+
 ## 1.5.1
 
 ### Patch Changes
