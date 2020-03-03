@@ -70,12 +70,26 @@ type Process<Props, Pkg extends Package> = (
   payload?: Omit<Params<Props, Pkg>, "node"> // make it backwards-compatible
 ) => Node | boolean;
 
-export interface Processor<Props = any, Pkg extends Package = Package> {
+interface ProcessorBase<Props, Pkg extends Package> {
   name?: string;
   priority?: number;
   test: Test<Props, Pkg>;
+}
+
+export interface NewProcessor<Props = any, Pkg extends Package = Package>
+  extends ProcessorBase<Props, Pkg> {
+  processor: Process<Props, Pkg>;
+}
+
+export interface OldProcessor<Props = any, Pkg extends Package = Package>
+  extends ProcessorBase<Props, Pkg> {
   process: Process<Props, Pkg>;
 }
+
+// Processor needs either a process or a processor property.
+export type Processor<Props = any, Pkg extends Package = Package> =
+  | NewProcessor<Props, Pkg>
+  | OldProcessor<Props, Pkg>;
 
 // Component functions.
 interface Payload {

@@ -5,7 +5,7 @@ import Iframe from "@frontity/components/iframe";
 const iframe: Processor<React.HTMLProps<HTMLIFrameElement>> = {
   test: ({ node }) => node.type === "element" && node.component === "iframe",
   priority: 20,
-  process: ({ node }) => {
+  processor: ({ node }) => {
     if (node.type === "element") {
       if (node.parent && node.parent.component === "noscript") return node;
 

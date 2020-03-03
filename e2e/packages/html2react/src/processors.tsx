@@ -8,7 +8,7 @@ export const testProcessor: Processor<
   Html2ReactTests
 > = {
   test: ({ node }) => node.type === "element" && node.component === "p",
-  process: ({ node, state }) => {
+  processor: ({ node, state }) => {
     if (node.type === "element") {
       node.props.css = css`
         color: ${state.html2reactTests.color};

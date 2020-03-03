@@ -21,7 +21,7 @@ const script: Processor<ElementProps> = {
     !("type" in node.props && !validMediaTypes.includes(node.props.type)),
   priority: 20,
   name: "script",
-  process: ({ node }) => {
+  processor: ({ node }) => {
     if (node.type === "element") {
       if (node.parent && node.parent.component === "noscript") return node;
 

@@ -1,18 +1,28 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React from "react";
-import { connect } from "frontity";
+import { connect, error } from "frontity";
 import { Connect } from "frontity/types";
 import Html2ReactType, {
   Component,
   HandleNodes,
   HandleNode,
-  ApplyProcessors
+  ApplyProcessors,
+  OldProcessor,
+  NewProcessor
 } from "../../types";
 
 const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
-  for (const processor of processors) {
-    const { test: tester, process } = processor;
+  for (const proc of processors) {
+    const processor =
+      (proc as NewProcessor).processor || (proc as OldProcessor).process;
     let isMatch = false;
+
+    // Check if test and processor are set.
+    if (!proc.test || !processor)
+      error(
+        `The processor ${name ||
+          "(missing name)"} needs both a "test" and a "processor" properties.`
+      );
 
     // Test processor.
     try {
@@ -21,7 +31,7 @@ const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
        * compatibility.
        */
       const params = { node, ...payload };
-      isMatch = tester({ ...node, ...params });
+      isMatch = proc.test({ ...node, ...params });
     } catch (e) {
       console.warn(e);
     }
@@ -34,7 +44,7 @@ const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
        * a second argument for backward compatibility.
        */
       const params = { node, ...payload };
-      const processed = process({ ...node, ...params }, payload);
+      const processed = processor({ ...node, ...params }, payload);
       // Return true if node was removed.
       if (!processed) return true;
       // Merge the nodes if the processor has applied changes.
