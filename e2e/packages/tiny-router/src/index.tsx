@@ -1,59 +1,54 @@
 import React from "react";
-import { set } from "@frontity/tiny-router/src/actions";
 import Package from "../types";
 import { connect } from "frontity";
 
 const Root = connect(({ state, actions }) => {
-  const { pathname } = new URL(state.router.link, "http://localhost:3001");
-
   return (
     <>
       <button
+        data-button-id="switch-to-home"
         onClick={() => {
-          actions.router.set("/");
+          actions.router.set("/?name=tiny-router");
         }}
       >
         Home
       </button>
 
       <button
+        data-button-id="switch-to-about"
         onClick={() => {
-          actions.router.set("/a-page.");
+          actions.router.set("/about/");
         }}
       >
         Page with trailing slash
       </button>
 
       <button
+        data-button-id="switch-to-about-no-trailing"
         onClick={() => {
-          actions.router.set("/a-page");
+          actions.router.set("/about");
         }}
       >
         Page without trailing slash
       </button>
 
-      {state.router.link === "/" && <div data-test-id="content">The home</div>}
-      {state.router.link === "/a-page/" && (
-        <div data-test-id="content">One Page</div>
+      {state.router.link === "/?name=tiny-router" && (
+        <div data-test-id="content">Home</div>
+      )}
+
+      {state.router.link === "/about/" && (
+        <div data-test-id="content">About</div>
       )}
     </>
   );
 });
 
-const TinyRouterPackage = {
+const TinyRouterPackage: Package = {
   name: "tiny-router",
-  state: {
-    router: {
-      link: "/"
-    }
-  },
-  actions: {
-    router: {
-      set
-    }
-  },
+  state: {},
+  actions: {},
   roots: {
-    theme: Root
+    tinyRouter: Root
   },
   libraries: {}
 };
