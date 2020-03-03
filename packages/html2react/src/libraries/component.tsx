@@ -1,22 +1,37 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React from "react";
-import { connect } from "frontity";
+import { connect, error } from "frontity";
 import { Connect } from "frontity/types";
 import Html2ReactType, {
   Component,
   HandleNodes,
   HandleNode,
-  ApplyProcessors
+  ApplyProcessors,
+  OldProcessor,
+  NewProcessor
 } from "../../types";
 
-const applyProcessors: ApplyProcessors = ({ node, root, processors }) => {
-  for (const processor of processors) {
-    const { test: tester, process } = processor;
+const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
+  for (const proc of processors) {
+    const processor =
+      (proc as NewProcessor).processor || (proc as OldProcessor).process;
     let isMatch = false;
+
+    // Check if test and processor are set.
+    if (!proc.test || !processor)
+      error(
+        `The processor ${name ||
+          "(missing name)"} needs both a "test" and a "processor" properties.`
+      );
 
     // Test processor.
     try {
-      isMatch = tester(node);
+      /**
+       * Run the tester passing node and params merged for backward
+       * compatibility.
+       */
+      const params = { node, ...payload };
+      isMatch = proc.test({ ...node, ...params });
     } catch (e) {
       console.warn(e);
     }
@@ -24,11 +39,24 @@ const applyProcessors: ApplyProcessors = ({ node, root, processors }) => {
 
     // Apply processor.
     try {
-      const processed = process(node, { root });
+      /**
+       * Run the processor passing node and params merged, and payload as
+       * a second argument for backward compatibility.
+       */
+      const params = { node, ...payload };
+      const processed = processor({ ...node, ...params }, payload);
       // Return true if node was removed.
       if (!processed) return true;
       // Merge the nodes if the processor has applied changes.
-      if (node !== processed) Object.assign(node, processed);
+      if (node !== processed) {
+        /**
+         * Remove props merged before process, just in case someone
+         * has used the spread operator in a processor.
+         */
+        Object.keys(params).forEach(key => delete processed[key]);
+        // Assign returned props.
+        Object.assign(node, processed);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -38,7 +66,7 @@ const applyProcessors: ApplyProcessors = ({ node, root, processors }) => {
   return false;
 };
 
-const handleNode: HandleNode = ({ node, payload, index }) => {
+const handleNode: HandleNode = ({ node, index, ...payload }) => {
   // `applyProcessors` returns true if node was removed.
   if (applyProcessors({ node, ...payload })) return null;
   if (node.type === "comment") return null;
@@ -46,14 +74,16 @@ const handleNode: HandleNode = ({ node, payload, index }) => {
   if (node.type === "element")
     return (
       <node.component {...{ key: index, ...node.props }}>
-        {node.children ? handleNodes({ nodes: node.children, payload }) : null}
+        {node.children
+          ? handleNodes({ nodes: node.children, ...payload })
+          : null}
       </node.component>
     );
 };
 
-const handleNodes: HandleNodes = ({ nodes, payload }) => {
+const handleNodes: HandleNodes = ({ nodes, ...payload }) => {
   const handled = nodes.reduce((final: React.ReactNodeArray, node, index) => {
-    const handledNode = handleNode({ node, index, payload });
+    const handledNode = handleNode({ node, index, ...payload });
     if (handledNode) final.push(handledNode);
     return final;
   }, []);
@@ -65,7 +95,7 @@ const handleNodes: HandleNodes = ({ nodes, payload }) => {
 
 export const Html2React: Component<
   Connect<Html2ReactType, { html: string }>
-> = ({ html, libraries }) => {
+> = ({ html, state, libraries }) => {
   const { processors, parse } = libraries.html2react;
   const root = parse(html);
 
@@ -75,10 +105,10 @@ export const Html2React: Component<
 
   return handleNodes({
     nodes: root,
-    payload: {
-      root,
-      processors
-    }
+    state,
+    libraries,
+    root,
+    processors
   }) as React.ReactElement;
 };
 

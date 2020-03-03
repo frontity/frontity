@@ -10,16 +10,19 @@ describe("Component", () => {
       {
         name: "priority-15",
         priority: 15,
-        test: () => false
+        test: () => false,
+        processor: () => {}
       },
       {
         name: "priority-5",
         priority: 5,
-        test: () => false
+        test: () => false,
+        processor: () => {}
       },
       {
         name: "priority-none",
-        test: () => false
+        test: () => false,
+        processor: () => {}
       }
     ];
 
