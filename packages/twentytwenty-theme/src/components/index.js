@@ -1,4 +1,5 @@
 import { connect, Global, Head, styled } from "frontity";
+import Switch from "@frontity/components/switch";
 import React from "react";
 import Footer from "./footer";
 import globalStyles from "./styles/global-styles";
@@ -49,11 +50,13 @@ const Theme = ({ state, libraries }) => {
         {/* Add the main section. It renders a different component depending
         on the type of URL we are in. */}
         <Main id="main">
-          {(data.isFetching && <Loading />) ||
-            (isSearch && <SearchResults />) ||
-            (data.isArchive && <Archive />) ||
-            (data.isPostType && <Post />) ||
-            (data.isError && <PageError />)}
+          <Switch>
+            <Loading when={data.isFetching} />
+            <SearchResults when={isSearch} />
+            <Archive when={data.isArchive} />
+            <Post when={data.isPostType} />
+            <PageError when={data.isError} />
+          </Switch>
         </Main>
       </div>
 

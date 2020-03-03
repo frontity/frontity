@@ -64,7 +64,6 @@ describe("author", () => {
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
       { isFetching: false, isReady: false }, // first values are from a different object
-      { isFetching: false, isReady: false }, // initial values from the data object
       { isFetching: true, isReady: false }, // fetch starts
       { isFetching: false, isReady: true } // fetch ends
     ]);
@@ -150,6 +149,29 @@ describe("author", () => {
       );
     // Fetch entities
     await store.actions.source.fetch("/author/author-1/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("is requested with a search param", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([author1]))
+      .mockResolvedValueOnce(
+        mockResponse(author1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2"
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/author/author-1/?s=findAuthor");
+
+    expect(
+      store.state.source.data["/author/author-1/?s=findAuthor"].isSearch
+    ).toBe(true);
+    expect(
+      store.state.source.data["/author/author-1/?s=findAuthor"].searchQuery
+    ).toBe("findAuthor");
     expect(store.state.source).toMatchSnapshot();
   });
 });

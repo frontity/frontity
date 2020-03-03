@@ -1,6 +1,6 @@
-import { Package } from "frontity/types";
+import { Package, State } from "frontity/types";
 import { SerializedStyles } from "@emotion/core";
-import { Node as HiamalayaNode } from "./himalaya/types";
+import { Node as HimalayaNode } from "./himalaya/types";
 
 interface Html2React extends Package {
   name: "@frontity/html2react";
@@ -16,39 +16,32 @@ interface Html2React extends Package {
 export default Html2React;
 
 // Parse
-export type NoProps = {
-  [key: string]: string | number | boolean;
-};
-
-export interface Element<Props = NoProps> {
+export interface Element<Props = any> {
   type: "element";
   component: string | React.ComponentType;
   props: {
     css?: SerializedStyles;
   } & Props;
-  children?: Node<Props>[];
-  parent?: Element<Props>;
+  children?: Node<unknown>[];
+  parent?: Element<unknown>;
   ignore?: boolean;
 }
 
-export interface Text<Props = NoProps> {
+export interface Text {
   type: "text";
   content: string;
-  parent?: Element<Props>;
+  parent?: Element<unknown>;
   ignore?: boolean;
 }
 
-export interface Comment<Props = NoProps> {
+export interface Comment {
   type: "comment";
   content: string;
-  parent?: Element<Props>;
+  parent?: Element<unknown>;
   ignore?: boolean;
 }
 
-export type Node<Props = NoProps> =
-  | Element<Props>
-  | Text<Props>
-  | Comment<Props>;
+export type Node<Props = any> = Element<Props> | Text | Comment;
 
 export interface Attributes {
   [key: string]: string;
@@ -59,47 +52,76 @@ export interface Parse {
 }
 
 export interface AdaptNode {
-  (himalayaNode: HiamalayaNode, parent?: Element): Node;
+  (himalayaNode: HimalayaNode, parent?: Element): Node;
 }
 
-// Processors
-
-interface Test<Props = NoProps> {
-  (node: Node<Props>): boolean;
+// Processors.
+interface Params<Props, Pkg extends Package> {
+  node: Node<Props>;
+  root: Node<Props>[];
+  state: State<Pkg>;
+  libraries: Pkg["libraries"];
 }
 
-interface Process<Props = NoProps> {
-  (node: Node<Props>, payload: { root: Node<Props>[] }): Node<Props>;
-}
+type Test<Props, Pkg extends Package> = (params: Params<Props, Pkg>) => boolean;
 
-export interface Processor<Props = NoProps> {
+type Process<Props, Pkg extends Package> = (
+  params: Params<Props, Pkg>,
+  payload?: Omit<Params<Props, Pkg>, "node"> // make it backwards-compatible
+) => Node | boolean;
+
+interface ProcessorBase<Props, Pkg extends Package> {
   name?: string;
   priority?: number;
-  test: Test<Props>;
-  process: Process<Props>;
+  test: Test<Props, Pkg>;
 }
 
-// Component
+export interface NewProcessor<Props = any, Pkg extends Package = Package>
+  extends ProcessorBase<Props, Pkg> {
+  processor: Process<Props, Pkg>;
+}
 
-export interface Payload {
+export interface OldProcessor<Props = any, Pkg extends Package = Package>
+  extends ProcessorBase<Props, Pkg> {
+  process: Process<Props, Pkg>;
+}
+
+// Processor needs either a process or a processor property.
+export type Processor<Props = any, Pkg extends Package = Package> =
+  | NewProcessor<Props, Pkg>
+  | OldProcessor<Props, Pkg>;
+
+// Component functions.
+interface Payload {
   root: Node[];
   processors: Processor[];
+  state: State<Html2React>;
+  libraries: Html2React["libraries"];
 }
 
 export interface HandleNodes {
-  (params: { nodes: Node[]; payload: Payload }): React.ReactNode;
+  (
+    params: {
+      nodes: Node[];
+    } & Payload
+  ): React.ReactNode;
 }
 
 export interface HandleNode {
-  (params: { node: Node; payload: Payload; index: number }): React.ReactNode;
+  (
+    params: {
+      node: Node;
+      index: number;
+    } & Payload
+  ): React.ReactNode;
 }
 
 export interface ApplyProcessors {
-  (params: {
-    node: Node;
-    root: Payload["root"];
-    processors: Payload["processors"];
-  }): boolean;
+  (
+    params: {
+      node: Node;
+    } & Payload
+  ): React.ReactNode;
 }
 
 export type Component<T = { html: string }> = React.FC<T>;

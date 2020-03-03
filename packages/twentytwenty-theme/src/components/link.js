@@ -52,7 +52,8 @@ const Link = ({
       rel={isExternal ? "noopener noreferrer" : rel}
       onMouseEnter={() => {
         // Prefetch the link's content when the user hovers on the link
-        if (state.theme.autoPreFetch === "hover") actions.source.fetch(link);
+        if (state.theme.autoPreFetch === "hover" && !isExternal)
+          actions.source.fetch(link);
       }}
     >
       {children}

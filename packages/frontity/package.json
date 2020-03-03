@@ -20,9 +20,6 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "start": "node dist/src/cli/index.js",
     "dev": "ts-node src/cli/index.ts",
@@ -36,7 +33,6 @@
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.22",
-    "@frontity/connect": "^1.0.4",
     "@frontity/error": "^0.0.1",
     "@frontity/type-declarations": "^1.0.1",
     "@frontity/types": "^1.2.0",
@@ -48,6 +44,7 @@
     "didyoumean": "^1.2.1",
     "envinfo": "^7.3.1",
     "fs-extra": "^7.0.1",
+    "he": "^1.2.0",
     "inquirer": "^6.3.1",
     "is-root": "2.1.0",
     "node-fetch": "^2.6.0",
@@ -62,6 +59,7 @@
   },
   "devDependencies": {
     "@frontity/core": "^1.5.0",
+    "@frontity/connect": "^1.0.4",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",

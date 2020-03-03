@@ -12,58 +12,65 @@ import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries }) => async (link, options?) => {
+  fetch: ({ state, libraries }) => async (...params) => {
+    const [route, options] = params;
     const { source } = state;
 
     const { handlers, redirections } = libraries.source;
 
     // Get route and route params
-    const route = normalize(link);
-    const routeParams = parse(link);
+    const link = normalize(route);
+    const linkParams = parse(route);
+    const { query, page } = linkParams;
 
     // Get current data object
-    const data = source.data[route];
+    const data = source.data[link];
 
     // Get options
     const force = options ? options.force : false;
 
     if (!data || force) {
-      source.data[route] = {
-        isReady: false,
-        isFetching: false
+      // Add the attributes that should be present even if fetch fails or we throw a ServerError below
+      source.data[link] = {
+        link,
+        route: linkParams.route,
+        query,
+        page,
+        isFetching: true,
+        isReady: false
       };
     } else if (data.isReady || data.isFetching || data.isError) {
       return;
     }
 
-    source.data[route].isFetching = true;
-
     // get and execute the corresponding handler based on path
     try {
-      let { path } = routeParams;
+      let { route } = linkParams;
       // check if this is the homepage URL
-      const isHome = path === normalize(state.source.subdirectory || "/");
-      // transform path if there is some redirection
-      const redirection = getMatch(path, redirections);
-      if (redirection) path = redirection.func(redirection.params);
+      const isHome = route === normalize(state.source.subdirectory || "/");
 
-      // get the handler for this path
-      const handler = getMatch(path, handlers);
+      // transform route if there is some redirection
+      const redirection = getMatch(route, redirections);
+      if (redirection) route = redirection.func(redirection.params);
+
+      // get the handler for this route
+      const handler = getMatch(route, handlers);
       await handler.func({
-        route,
+        link,
+        route: link,
         params: handler.params,
         state,
         libraries,
         force
       });
       // everything OK
-      source.data[route] = {
-        ...source.data[route],
+      source.data[link] = {
+        ...source.data[link],
         isFetching: false,
         isReady: true
       };
       // set isHome value if it's true
-      if (isHome) source.data[route].isHome = true;
+      if (isHome) source.data[link].isHome = true;
     } catch (e) {
       // It's a server error (4xx or 5xx)
       if (e instanceof ServerError) {
@@ -77,7 +84,7 @@ const actions: WpSource["actions"]["source"] = {
           errorStatus: e.status,
           errorStatusText: e.statusText
         };
-        source.data[route] = errorData;
+        source.data[link] = errorData;
       } else {
         throw e;
       }

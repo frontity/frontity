@@ -8,10 +8,8 @@ import useFocusTrap from "../hooks/use-trap-focus";
 import useFocusEffect from "../hooks/use-focus-effect";
 import Button from "../styles/button";
 
-const SearchModal = ({ state, actions, libraries }) => {
-  // Improvement: Discuss with David about making a custom hook to grab query params
-  const parse = libraries.source.parse(state.router.link);
-  const searchQuery = parse.query["s"];
+const SearchModal = ({ state, actions }) => {
+  const { searchQuery } = state.source.get(state.router.link);
 
   const { isSearchModalOpen } = state.theme;
   const { closeSearchModal } = actions.theme;

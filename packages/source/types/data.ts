@@ -24,12 +24,21 @@ export type Data =
   | PostTypeData
   | PostData
   | PageData
-  | AttachmentData;
+  | AttachmentData
+  | TaxonomyWithSearchData
+  | CategoryWithSearchData
+  | TagWithSearchData
+  | AuthorWithSearchData
+  | PostTypeArchiveWithSearchData
+  | PostArchiveWithSearchData
+  | DateWithSearchData;
 
 /**
  * Base properties of objects of types `Data`.
  */
 export type BaseData = {
+  link?: string;
+  query?: object;
   type?: string;
   id?: number;
   taxonomy?: string;
@@ -49,6 +58,16 @@ export type BaseData = {
   isPage?: false;
   isAttachment?: false;
   isHome?: boolean;
+
+  // search attributes
+  isSearch?: false;
+  searchQuery?: string;
+
+  // pagination atributes (for Archive)
+  page?: number;
+  route?: string;
+  next?: string;
+  previous?: string;
 };
 
 // ERROR
@@ -103,18 +122,37 @@ export type ErrorData = Merge<
  * Adds properties to `BaseData` to identify archive pages.
  * @property {true} isArchive
  * @property {EntityData[]} items - List of items contained in this archive page.
+ * @property {number} page - The page number of this archive page.
+ * @property {string} path - The path of this archive page without the page.
+ * @property {string} next - The link to the next page if it exists.
+ * @property {string} previous - The link to the previous page if it exists.
  * @property {number} total - Total number of post entities in the whole archive.
  * @property {number} total - Total number of pages in the whole archive.
+ * @property {false} isSearch
  */
 export type ArchiveData = Merge<
   BaseData,
   {
     isArchive: true;
     items: EntityData[];
+    page?: number;
+    path?: string;
+    next?: string;
+    previous?: string;
     total?: number;
     totalPages?: number;
   }
 >;
+
+/**
+ * Adds properties to identify archive pages with search.
+ * @property {true} isSearch
+ * @property {string} searchQuery
+ */
+export type SearchData = {
+  isSearch: true;
+  searchQuery: string;
+};
 
 /**
  * Adds properties to `ArchiveData` to identify taxonomy pages.
@@ -132,6 +170,11 @@ export type TaxonomyData = Merge<
 >;
 
 /**
+ * Adds properties to `TaxonomyData` to identify taxonomy with search pages.
+ */
+export type TaxonomyWithSearchData = Merge<TaxonomyData, SearchData>;
+
+/**
  * Adds properties to `TaxonomyData` to identify category pages.
  * @property {true} isCategory
  * @property {"category"} taxonomy
@@ -143,6 +186,12 @@ export type CategoryData = Merge<
     isCategory: true;
   }
 >;
+
+/**
+ * Adds properties to `CategoryData` to identify category with search pages.
+ */
+export type CategoryWithSearchData = Merge<CategoryData, SearchData>;
+
 /**
  * Adds properties to `TaxonomyData` to identify tag pages.
  * @property {true} isTag
@@ -155,6 +204,11 @@ export type TagData = Merge<
     isTag: true;
   }
 >;
+
+/**
+ * Adds properties to `TagData` to identify tag with search pages.
+ */
+export type TagWithSearchData = Merge<TagData, SearchData>;
 
 /**
  * Adds properties to `ArchiveData` to identify author pages.
@@ -170,6 +224,11 @@ export type AuthorData = Merge<
 >;
 
 /**
+ * Adds properties to `AuthorData` to identify author with search pages.
+ */
+export type AuthorWithSearchData = Merge<AuthorData, SearchData>;
+
+/**
  * Adds properties to `ArchiveData` to identify post type archive pages.
  * @property {true} isPostTypeArchive
  * @property {string} type - Post type slug.
@@ -183,6 +242,15 @@ export type PostTypeArchiveData = Merge<
 >;
 
 /**
+ * Adds properties to `PostTypeArchiveData` to identify post type archives
+ * with search pages.
+ */
+export type PostTypeArchiveWithSearchData = Merge<
+  PostTypeArchiveData,
+  SearchData
+>;
+
+/**
  * Adds properties to `PostArchiveData` to identify `post` archive pages.
  * @property {true} isPostArchive
  */
@@ -192,6 +260,12 @@ export type PostArchiveData = Merge<
     isPostArchive: true;
   }
 >;
+
+/**
+ * Adds properties to `PostArchiveData` to identify post archives
+ * with search pages.
+ */
+export type PostArchiveWithSearchData = Merge<PostArchiveData, SearchData>;
 
 /**
  * Adds properties to `ArchiveData` to identify date archive pages.
@@ -209,6 +283,11 @@ export type DateData = Merge<
     day?: number;
   }
 >;
+
+/**
+ * Adds properties to `DateData` to identify date with search pages.
+ */
+export type DateWithSearchData = Merge<DateData, SearchData>;
 
 // POST TYPES
 

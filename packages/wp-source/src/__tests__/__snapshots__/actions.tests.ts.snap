@@ -5,6 +5,10 @@ Object {
   "/some/route/": Object {
     "isFetching": true,
     "isReady": false,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
   },
 }
 `;
@@ -28,6 +32,10 @@ Object {
     "isFetching": false,
     "isPostType": true,
     "isReady": true,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
     "type": "example",
   },
 }
@@ -40,6 +48,10 @@ Object {
     "isFetching": false,
     "isPostType": true,
     "isReady": true,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
     "type": "example",
   },
 }

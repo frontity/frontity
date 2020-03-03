@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "The WordPress Twenty Twenty starter theme for Frontity",
   "keywords": [
-    "wordpress",
     "frontity",
-    "frontity-theme"
+    "frontity-theme",
+    "wordpress"
   ],
   "homepage": "https://frontity.org",
   "license": "GNU GPL 2",
