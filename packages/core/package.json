@@ -1,9 +1,10 @@
 {
   "name": "@frontity/core",
   "version": "1.5.0",
-  "description": "Main Frontity package",
+  "description": "The core package of the Frontity framework.",
   "keywords": [
-    "frontity"
+    "frontity",
+    "core"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
@@ -15,9 +16,6 @@
   },
   "bugs": {
     "url": "https://community.frontity.org"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "test:ci": "../../node_modules/.bin/jest",
@@ -82,7 +80,7 @@
     "@types/express": "^4.16.1",
     "@types/fs-extra": "^5.0.5",
     "@types/htmlescape": "^1.1.1",
-    "@types/koa": "^2.0.48",
+    "@types/koa": "^2.11.2",
     "@types/koa-mount": "^3.0.1",
     "@types/koa-route": "^3.2.4",
     "@types/koa-static": "^4.0.1",

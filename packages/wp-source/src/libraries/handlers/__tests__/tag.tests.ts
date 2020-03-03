@@ -64,7 +64,6 @@ describe("tag", () => {
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
       { isFetching: false, isReady: false }, // first values are from a different object
-      { isFetching: false, isReady: false }, // initial values from the data object
       { isFetching: true, isReady: false }, // fetch starts
       { isFetching: false, isReady: true } // fetch ends
     ]);

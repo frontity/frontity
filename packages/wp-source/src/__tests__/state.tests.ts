@@ -14,7 +14,11 @@ describe("state - source.get", () => {
     const store = initStore();
     expect(store.state.source.get("/some-post/")).toEqual({
       isFetching: false,
-      isReady: false
+      isReady: false,
+      link: "/some-post/",
+      page: 1,
+      query: {},
+      route: "/some-post/"
     });
   });
 

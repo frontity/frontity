@@ -12,7 +12,14 @@ import {
   PostTypeData,
   PostData,
   PageData,
-  AttachmentData
+  AttachmentData,
+  TaxonomyWithSearchData,
+  CategoryWithSearchData,
+  TagWithSearchData,
+  AuthorWithSearchData,
+  PostTypeArchiveWithSearchData,
+  PostArchiveWithSearchData,
+  DateWithSearchData
 } from "../data";
 
 const data = {} as Data;
@@ -22,37 +29,56 @@ if (data.isError) {
 }
 
 if (data.isArchive) {
-  expectType<TaxonomyData | AuthorData | PostTypeArchiveData | DateData>(data);
+  expectType<
+    | TaxonomyData
+    | AuthorData
+    | PostTypeArchiveData
+    | DateData
+    | TaxonomyWithSearchData
+    | CategoryWithSearchData
+    | TagWithSearchData
+    | AuthorWithSearchData
+    | PostTypeArchiveWithSearchData
+    | PostArchiveWithSearchData
+    | DateWithSearchData
+  >(data);
 }
 
 if (data.isTaxonomy) {
-  expectType<TaxonomyData>(data);
+  expectType<TaxonomyData | TaxonomyWithSearchData>(data);
+  if (data.isSearch) expectType<TaxonomyWithSearchData>(data);
 }
 
 if (data.isCategory) {
-  expectType<TaxonomyData>(data);
-  expectType<CategoryData>(data);
+  expectType<TaxonomyData | TaxonomyWithSearchData>(data);
+  expectType<CategoryData | CategoryWithSearchData>(data);
+  if (data.isSearch) expectType<CategoryWithSearchData>(data);
 }
 
 if (data.isTag) {
-  expectType<TaxonomyData>(data);
-  expectType<TagData>(data);
+  expectType<TaxonomyData | TaxonomyWithSearchData>(data);
+  expectType<TagData | TagWithSearchData>(data);
+  if (data.isSearch) expectType<TagWithSearchData>(data);
 }
 
 if (data.isAuthor) {
-  expectType<AuthorData>(data);
+  expectType<AuthorData | AuthorWithSearchData>(data);
+  if (data.isSearch) expectType<AuthorWithSearchData>(data);
 }
 
 if (data.isPostTypeArchive) {
-  expectType<PostTypeArchiveData>(data);
+  expectType<PostTypeArchiveData | PostTypeArchiveWithSearchData>(data);
+  if (data.isSearch) expectType<PostTypeArchiveWithSearchData>(data);
 }
 
 if (data.isPostArchive) {
-  expectType<PostArchiveData>(data);
+  expectType<PostArchiveData | PostArchiveWithSearchData>(data);
+  if (data.isSearch) expectType<PostArchiveWithSearchData>(data);
 }
 
 if (data.isDate) {
-  expectType<DateData>(data);
+  expectType<DateData | DateWithSearchData>(data);
+  if (data.isSearch) expectType<DateWithSearchData>(data);
 }
 
 if (data.isPostType) {
