@@ -1,6 +1,6 @@
 import { Package, Derived } from "frontity/types";
 import { InitializedStore } from "@frontity/connect";
-import Router from "@frontity/router";
+import Router from "@frontity/router/types";
 import Source, {
   TaxonomyEntity,
   PostEntity,

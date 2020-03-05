@@ -1,4 +1,5 @@
-import Router from "..";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import Router from "../types";
 
 const router: Router = {
   state: {
