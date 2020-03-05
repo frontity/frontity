@@ -1,4 +1,4 @@
-import Router from "@frontity/router";
+import Router from "@frontity/router/types";
 import Source from "@frontity/source/types";
 import { Action, ServerAction } from "frontity/types";
 
