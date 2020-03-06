@@ -77,6 +77,10 @@ Object {
       "path": "build/static",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -212,6 +216,10 @@ Object {
       "path": "build/static",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -333,6 +341,10 @@ Object {
       "libraryTarget": "commonjs2",
       "path": "build/",
       "publicPath": "/static/",
+    },
+    "performance": Object {
+      "maxAssetSize": 3000000,
+      "maxEntrypointSize": 3000000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -462,6 +474,10 @@ Object {
       "path": "build/static",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -589,6 +605,10 @@ Object {
       "path": "build/static",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -704,6 +724,10 @@ Object {
       "libraryTarget": "commonjs2",
       "path": "build/",
       "publicPath": "/static/",
+    },
+    "performance": Object {
+      "maxAssetSize": 3000000,
+      "maxEntrypointSize": 3000000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
