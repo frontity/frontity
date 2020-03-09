@@ -1,6 +1,6 @@
 {
   "name": "@frontity/router",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Types for the Frontity router namespace",
   "keywords": [
     "frontity",
