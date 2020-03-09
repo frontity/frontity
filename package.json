@@ -11,10 +11,7 @@
     "reinstall": "lerna clean --yes && npm run prepare"
   },
   "workspaces": [
-    "packages/*",
-    "examples/*",
-    "e2e/project",
-    "e2e/packages/*"
+    "packages/*"
   ],
   "devDependencies": {
     "@changesets/changelog-github": "^0.1.1",

@@ -43,17 +43,20 @@ const actions: WpSource["actions"]["source"] = {
       return;
     }
 
-    // get and execute the corresponding handler based on path
+    // Make sure isFetching is true before starting the fetch.
+    source.data[link].isFetching = true;
+
+    // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
-      // check if this is the homepage URL
+      // Check if this is the homepage URL.
       const isHome = route === normalize(state.source.subdirectory || "/");
 
-      // transform route if there is some redirection
+      // Transform route if there is some redirection.
       const redirection = getMatch(route, redirections);
       if (redirection) route = redirection.func(redirection.params);
 
-      // get the handler for this route
+      // Get the handler for this route.
       const handler = getMatch(route, handlers);
       await handler.func({
         link,
@@ -63,16 +66,16 @@ const actions: WpSource["actions"]["source"] = {
         libraries,
         force
       });
-      // everything OK
+      // Everything OK.
       source.data[link] = {
         ...source.data[link],
         isFetching: false,
         isReady: true
       };
-      // set isHome value if it's true
+      // Set isHome value if it's true.
       if (isHome) source.data[link].isHome = true;
     } catch (e) {
-      // It's a server error (4xx or 5xx)
+      // It's a server error (4xx or 5xx).
       if (e instanceof ServerError) {
         console.error(e);
 
@@ -102,13 +105,13 @@ const actions: WpSource["actions"]["source"] = {
 
     libraries.source.api.init({ api, isWpCom });
 
-    // handlers & redirections:
+    // Handlers & redirections.
     const { handlers, redirections } = libraries.source;
 
     const patterns = isWpCom ? wpCom : wpOrg;
     handlers.push(...patterns);
 
-    // Add handlers for custom post types
+    // Add handlers for custom post types.
     state.source.postTypes.forEach(({ type, endpoint, archive }) => {
       // Single page
       handlers.push({
@@ -117,7 +120,7 @@ const actions: WpSource["actions"]["source"] = {
         pattern: concatPath(type, "/:slug"),
         func: postTypeHandler({ endpoints: [endpoint] })
       });
-      // Archive
+      // Archive.
       if (archive)
         handlers.push({
           name: `${type} archive`,
@@ -127,7 +130,7 @@ const actions: WpSource["actions"]["source"] = {
         });
     });
 
-    // Add handlers for custom taxonomies
+    // Add handlers for custom taxonomies.
     state.source.taxonomies.forEach(
       ({ taxonomy, endpoint, postTypeEndpoint, params }) => {
         handlers.push({
@@ -173,7 +176,7 @@ const actions: WpSource["actions"]["source"] = {
     }
 
     if (categoryBase) {
-      // add new direction
+      // Add new direction.
       const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
       redirections.push({
         name: "category base",
@@ -181,7 +184,7 @@ const actions: WpSource["actions"]["source"] = {
         pattern,
         func: ({ subpath }) => `/category/${subpath}/`
       });
-      // remove old direction
+      // Remove old direction.
       redirections.push({
         name: "category base (reverse)",
         priority: 10,
@@ -191,7 +194,7 @@ const actions: WpSource["actions"]["source"] = {
     }
 
     if (tagBase) {
-      // add new direction
+      // Add new direction.
       const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
       redirections.push({
         name: "tag base",
@@ -199,7 +202,7 @@ const actions: WpSource["actions"]["source"] = {
         pattern,
         func: ({ subpath }) => `/tag/${subpath}/`
       });
-      // remove old direction
+      // Remove old direction.
       redirections.push({
         name: "tag base (reverse)",
         priority: 10,
@@ -209,7 +212,7 @@ const actions: WpSource["actions"]["source"] = {
     }
 
     if (subdirectory) {
-      // add new direction
+      // Add new direction.
       const pattern = concatPath(subdirectory, "/:subpath*");
       redirections.push({
         name: "subdirectory",
@@ -217,7 +220,7 @@ const actions: WpSource["actions"]["source"] = {
         pattern,
         func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
       });
-      // remove old direction
+      // Remove old direction.
       redirections.push({
         name: "subdirectory (reverse)",
         priority: 10,

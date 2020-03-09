@@ -66,6 +66,19 @@ describe("fetch", () => {
     expect(store.state.source.data).toMatchSnapshot();
   });
 
+  test("should switch isFetching and isReady even if data exists", async () => {
+    store.state.source.data["/some/route/"] = {
+      isFetching: false,
+      isReady: false
+    };
+    const fetching = store.actions.source.fetch("/some/route/");
+    expect(store.state.source.get("/some/route").isFetching).toBe(true);
+    expect(store.state.source.get("/some/route").isReady).toBe(false);
+    await fetching;
+    expect(store.state.source.get("/some/route").isFetching).toBe(false);
+    expect(store.state.source.get("/some/route").isReady).toBe(true);
+  });
+
   test("should run again when `force` is used", async () => {
     store.state.source.data["/some/route/"] = {
       errorStatusText: "Request Timeout",
