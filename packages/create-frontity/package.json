@@ -1,0 +1,27 @@
+{
+  "name": "create-frontity",
+  "version": "0.1.0",
+  "description": "Frontity package to use npm init instead of npx",
+  "keywords": [
+    "frontity"
+  ],
+  "homepage": "https://frontity.org",
+  "license": "Apache-2.0",
+  "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "bugs": {
+    "url": "https://community.frontity.org"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "frontity": "^1.5.2"
+  }
+}
