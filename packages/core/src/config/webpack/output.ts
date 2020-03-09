@@ -7,14 +7,14 @@ const rootPath = process.cwd();
 
 // Use hashes only in production and distinguish between es5 and module
 // files using their filenames.
-type filenames = {
+type Filenames = {
   development: string;
   production: string;
 };
 const filenames: {
-  module: filenames;
-  es5: filenames;
-  server: filenames;
+  module: Filenames;
+  es5: Filenames;
+  server: Filenames;
 } = {
   module: {
     development: "[name].module.js",
@@ -40,8 +40,8 @@ const paths: {
 };
 // Same with chunks, only hashes in production and es5/module in the filename.
 const chunkFilenames: {
-  module: filenames;
-  es5: filenames;
+  module: Filenames;
+  es5: Filenames;
 } = {
   module: {
     development: "[name].module.js",
