@@ -5,7 +5,7 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { HelmetProvider } from "frontity";
-import { HelmetContext } from "frontity/types";
+import { FilledContext } from "react-helmet-async";
 import Iframe from "../iframe";
 
 describe("Iframe", () => {
@@ -29,13 +29,13 @@ describe("Iframe", () => {
       className: "fake-class-name"
     };
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {};
     const iframe = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Iframe {...props} />
       </HelmetProvider>
     ).toJSON();
-    const head = helmetContext.helmet;
+    const head = (helmetContext as FilledContext).helmet;
 
     expect(iframe).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();
@@ -50,13 +50,13 @@ describe("Iframe", () => {
       height: 300
     };
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {};
     const iframe = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Iframe {...props} />
       </HelmetProvider>
     ).toJSON();
-    const head = helmetContext.helmet;
+    const head = (helmetContext as FilledContext).helmet;
 
     expect(iframe).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();
