@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.1.1
+
+### Patch Changes
+
+- [`fe790be6`](https://github.com/frontity/frontity/commit/fe790be6b806d19edecb0b1eb980b1af13999ee7) [#332](https://github.com/frontity/frontity/pull/332) Thanks [@luisherranz](https://github.com/luisherranz)! - Move router types to @frontity/router/types file to match the placement of the rest of the packages.
+- Updated dependencies [[`fe790be6`](https://github.com/frontity/frontity/commit/fe790be6b806d19edecb0b1eb980b1af13999ee7)]:
+  - @frontity/router@1.0.19
+
 ## 1.1.0
 
 ### Minor Changes

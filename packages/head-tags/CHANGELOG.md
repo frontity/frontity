@@ -1,5 +1,14 @@
 # @frontity/head-tags
 
+## 1.0.2
+
+### Patch Changes
+
+- [`fe790be6`](https://github.com/frontity/frontity/commit/fe790be6b806d19edecb0b1eb980b1af13999ee7) [#332](https://github.com/frontity/frontity/pull/332) Thanks [@luisherranz](https://github.com/luisherranz)! - Move router types to @frontity/router/types file to match the placement of the rest of the packages.
+- Updated dependencies [[`cdc84d57`](https://github.com/frontity/frontity/commit/cdc84d5700213e579d4fe1a3b586e9d6a5687718), [`fe790be6`](https://github.com/frontity/frontity/commit/fe790be6b806d19edecb0b1eb980b1af13999ee7)]:
+  - @frontity/wp-source@1.6.1
+  - @frontity/router@1.0.19
+
 ## 1.0.1
 
 ### Patch Changes

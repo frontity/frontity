@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.1
+
+### Patch Changes
+
+- [`cdc84d57`](https://github.com/frontity/frontity/commit/cdc84d5700213e579d4fe1a3b586e9d6a5687718) [#335](https://github.com/frontity/frontity/pull/335) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix `isFetching` not turning to true when `data` exists. It may happen in cases where we are fetching that `data` in the embed of others. Like for example, taxonomies in posts.
+
 ## 1.6.0
 
 ### Minor Changes
