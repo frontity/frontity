@@ -21,6 +21,6 @@
     "@frontity/html2react": "^1.3.0",
     "frontity": "^1.5.2",
     "react-spinners": "^0.5.4",
-    "react-spring": "8.0.27"
+    "react-spring": "^8.0.27"
   }
 }

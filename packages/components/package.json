@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "frontity": "^1.5.2",
-    "react-intersection-observer": "8.25.2"
+    "react-intersection-observer": "^8.25.2"
   }
 }
