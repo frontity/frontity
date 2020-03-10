@@ -14,7 +14,9 @@ const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
     // Add deprecation warning for process.
     if ((proc as any).process)
       warn(
-        "The property 'process' has been deprecated. Please rename it to 'processor' instead."
+        `The property 'process' has been deprecated.
+Please use the new 'processor' property instead and check the documentation to see the additional changes of the new API:
+https://docs.frontity.org/api-reference-1/frontity-html2react#create-your-own-processors`
       );
 
     const processor = proc.processor || (proc as any).process;
