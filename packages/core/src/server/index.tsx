@@ -84,7 +84,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     );
 
     // Pass a context to HelmetProvider which will hold our state specific to each request.
-    const helmetContext: Partial<FilledContext> = {};
+    const helmetContext = {} as FilledContext;
 
     const Component = <App store={store} helmetContext={helmetContext} />;
 

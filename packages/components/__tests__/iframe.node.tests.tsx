@@ -29,13 +29,13 @@ describe("Iframe", () => {
       className: "fake-class-name"
     };
 
-    const helmetContext = {};
+    const helmetContext = {} as FilledContext;
     const iframe = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Iframe {...props} />
       </HelmetProvider>
     ).toJSON();
-    const head = (helmetContext as FilledContext).helmet;
+    const head = helmetContext.helmet;
 
     expect(iframe).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();
@@ -50,13 +50,13 @@ describe("Iframe", () => {
       height: 300
     };
 
-    const helmetContext = {};
+    const helmetContext = {} as FilledContext;
     const iframe = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Iframe {...props} />
       </HelmetProvider>
     ).toJSON();
-    const head = (helmetContext as FilledContext).helmet;
+    const head = helmetContext.helmet;
 
     expect(iframe).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();

@@ -5,7 +5,7 @@ import { HelmetProvider, FilledContext } from "react-helmet-async";
 
 type Props = {
   store: Package;
-  helmetContext?: Partial<FilledContext>;
+  helmetContext?: FilledContext;
 };
 
 const App: React.FunctionComponent<Props> = ({ store, helmetContext = {} }) => {

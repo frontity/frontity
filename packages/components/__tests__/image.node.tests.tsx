@@ -34,13 +34,13 @@ describe("Image", () => {
       className: "fake-class-name"
     };
 
-    const helmetContext = {};
+    const helmetContext = {} as FilledContext;
     const image = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Image {...props} />
       </HelmetProvider>
     ).toJSON();
-    const head = (helmetContext as FilledContext).helmet;
+    const head = helmetContext.helmet;
 
     expect(image).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();
@@ -57,13 +57,13 @@ describe("Image", () => {
       height: 300
     };
 
-    const helmetContext = {};
+    const helmetContext = {} as FilledContext;
     const image = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Image {...props} />
       </HelmetProvider>
     ).toJSON();
-    const head = (helmetContext as FilledContext).helmet;
+    const head = helmetContext.helmet;
 
     expect(image).toMatchSnapshot();
     expect(head.script.toString()).toMatchSnapshot();
