@@ -5,7 +5,7 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { HelmetProvider } from "frontity";
-import { HelmetContext } from "frontity/types";
+import { FilledContext } from "react-helmet-async";
 import Iframe from "../iframe";
 
 describe("Iframe", () => {
@@ -29,7 +29,7 @@ describe("Iframe", () => {
       className: "fake-class-name"
     };
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {} as FilledContext;
     const iframe = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Iframe {...props} />
@@ -50,7 +50,7 @@ describe("Iframe", () => {
       height: 300
     };
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {} as FilledContext;
     const iframe = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Iframe {...props} />
