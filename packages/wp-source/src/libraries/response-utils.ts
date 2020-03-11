@@ -1,7 +1,15 @@
-export const getTotal = (response: Response, _default: number): number =>
-  parseInt(response.headers.get("X-WP-Total")) || _default || 0;
+export const getTotal = (
+  response: Response,
+  valueIfHeaderMissing: number
+): number =>
+  parseInt(response.headers.get("X-WP-Total")) || valueIfHeaderMissing || 0;
 
-export const getTotalPages = (response: Response, _default: number): number =>
-  parseInt(response.headers.get("X-WP-TotalPages")) || _default || 0;
+export const getTotalPages = (
+  response: Response,
+  valueIfHeaderMissing: number
+): number =>
+  parseInt(response.headers.get("X-WP-TotalPages")) ||
+  valueIfHeaderMissing ||
+  0;
 
 export default { getTotal, getTotalPages };
