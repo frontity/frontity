@@ -16,7 +16,18 @@ const taxonomyHandler = ({
   endpoint: string;
   postTypeEndpoint?: string;
   params?: Record<string, any>;
-}): Handler => async ({ link, params, state, libraries, force }) => {
+}): Handler => async ({
+  link: linkArg,
+  route: routeArg,
+  params,
+  state,
+  libraries,
+  force
+}) => {
+  // This is only for backward compatibility for the moment when handlers used
+  // to receive `route` instead of `link`.
+  const link = linkArg || routeArg;
+
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { route, page, query } = parse(link);
 

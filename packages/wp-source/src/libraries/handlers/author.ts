@@ -3,12 +3,17 @@ import { ServerError } from "@frontity/source";
 import { AuthorData, AuthorWithSearchData } from "@frontity/source/types/data";
 
 const authorHandler: Handler = async ({
-  link,
+  link: linkArg,
+  route: routeArg,
   params,
   state,
   libraries,
   force
 }) => {
+  // This is only for backward compatibility for the moment when handlers used
+  // to receive `route` instead of `link`.
+  const link = linkArg || routeArg;
+
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { route, page, query } = parse(link);
   const { slug } = params;
