@@ -77,6 +77,10 @@ Object {
       "path": "build/static",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -104,6 +108,13 @@ Object {
         "paths": Array [
           /build/,
         ],
+      },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
       },
       HotModuleReplacementPlugin {
         "fullBuildTimeout": 200,
@@ -212,6 +223,10 @@ Object {
       "path": "build/static",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -239,6 +254,13 @@ Object {
         "paths": Array [
           /build/,
         ],
+      },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
       },
       HotModuleReplacementPlugin {
         "fullBuildTimeout": 200,
@@ -334,6 +356,10 @@ Object {
       "path": "build/",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 3000000,
+      "maxEntrypointSize": 3000000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -361,6 +387,13 @@ Object {
         "paths": Array [
           /build/,
         ],
+      },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
       },
       LimitChunkCountPlugin {
         "options": Object {
@@ -462,6 +495,10 @@ Object {
       "path": "build/static",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -489,6 +526,13 @@ Object {
         "paths": Array [
           /build/,
         ],
+      },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
       },
       LoadablePlugin {
         "compiler": null,
@@ -589,6 +633,10 @@ Object {
       "path": "build/static",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -616,6 +664,13 @@ Object {
         "paths": Array [
           /build/,
         ],
+      },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
       },
       LoadablePlugin {
         "compiler": null,
@@ -705,6 +760,10 @@ Object {
       "path": "build/",
       "publicPath": "/static/",
     },
+    "performance": Object {
+      "maxAssetSize": 3000000,
+      "maxEntrypointSize": 3000000,
+    },
     "plugins": Array [
       BundleAnalyzerPlugin {
         "logger": Logger {
@@ -732,6 +791,13 @@ Object {
         "paths": Array [
           /build/,
         ],
+      },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
       },
       LimitChunkCountPlugin {
         "options": Object {
