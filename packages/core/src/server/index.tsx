@@ -6,9 +6,9 @@ import mount from "koa-mount";
 import React from "react";
 import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
+import { FilledContext } from "react-helmet-async";
 import { getSettings } from "@frontity/file-settings";
 import { ChunkExtractor } from "@loadable/server";
-import { HelmetContext } from "@frontity/types";
 import getTemplate from "./templates";
 import {
   getStats,
@@ -84,7 +84,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     );
 
     // Pass a context to HelmetProvider which will hold our state specific to each request.
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {} as FilledContext;
 
     const Component = <App store={store} helmetContext={helmetContext} />;
 
