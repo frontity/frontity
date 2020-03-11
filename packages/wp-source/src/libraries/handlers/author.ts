@@ -46,7 +46,7 @@ const authorHandler: Handler = async ({
 
   // 4. Get posts and pages count.
   const total = getTotal(response, items.length);
-  const totalPages = getTotalPages(response, 0);
+  const totalPages = getTotalPages(response, 1);
 
   // returns true if next page exists
   const hasNewerPosts = page < totalPages;
