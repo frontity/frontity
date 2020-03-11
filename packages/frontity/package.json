@@ -46,7 +46,7 @@
     "fs-extra": "^7.0.1",
     "he": "^1.2.0",
     "inquirer": "^6.3.1",
-    "is-root": "2.1.0",
+    "is-root": "^2.1.0",
     "node-fetch": "^2.6.0",
     "ora": "^3.4.0",
     "ramda": "^0.26.1",
@@ -68,8 +68,8 @@
     "@types/phin": "^3.3.0",
     "@types/ramda": "^0.26.33",
     "@types/shelljs": "^0.8.4",
-    "@types/stack-trace": "0.0.29",
+    "@types/stack-trace": "^0.0.29",
     "@types/tar": "^4.0.0",
-    "lodash.omit": "4.5.0"
+    "lodash.omit": "^4.5.0"
   }
 }

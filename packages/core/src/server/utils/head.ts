@@ -1,7 +1,7 @@
-import { HelmetData } from "@frontity/types";
+import { FilledContext } from "react-helmet-async";
 import { HeadTags } from "../../../types";
 
-export default (helmet: HelmetData): HeadTags => {
+export default (helmet: FilledContext["helmet"]): HeadTags => {
   return {
     base: helmet.base.toString(),
     bodyAttributes: helmet.bodyAttributes.toString(),
