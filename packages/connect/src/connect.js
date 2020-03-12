@@ -7,7 +7,8 @@ import {
   useState,
   useEffect,
   useContext,
-  useRef
+  useRef,
+  useCallback
 } from "react";
 import { observe, unobserve, raw, isObservable } from ".";
 
@@ -43,6 +44,7 @@ export function connect(Comp) {
 
       // use a dummy setState to update the component
       const [, setState] = useState();
+      const triggerRender = useCallback(() => setState({}), []);
 
       // get frontity from the context;
       const frontity = useContext(context);
@@ -52,7 +54,7 @@ export function connect(Comp) {
       const render = useMemo(
         () =>
           observe(Comp, {
-            scheduler: () => _isMounted.current && setState({}),
+            scheduler: () => _isMounted.current && triggerRender(),
             lazy: true
           }),
         []
