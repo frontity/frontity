@@ -50,7 +50,7 @@ export const dateHandler: Handler = async ({
 
   // 4. get posts and pages count
   const total = getTotal(response, items.length);
-  const totalPages = getTotalPages(response, 1);
+  const totalPages = getTotalPages(response, 0);
 
   // returns true if next page exists
   const hasNewerPosts = page < totalPages;
