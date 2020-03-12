@@ -57,7 +57,7 @@ export function connect(Comp) {
             scheduler: () => _isMounted.current && triggerRender(),
             lazy: true
           }),
-        []
+        [Comp]
       );
 
       // cleanup the reactive connections after the very last render of the component
