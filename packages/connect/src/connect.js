@@ -37,7 +37,7 @@ export function connect(Comp) {
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
-    ReactiveComp = memo(props => {
+    ReactiveComp = props => {
       // set a flag to know when the component is unmounted.
       const _isMounted = useRef(true);
 
@@ -66,9 +66,12 @@ export function connect(Comp) {
         };
       }, []);
 
+      ReactiveComp.displayName = Comp.displayName || Comp.name;
+      ReactiveComp = memo(ReactiveComp);
+
       // run the reactive render instead of the original one
       return render({ ...props, ...frontity });
-    });
+    };
   } else {
     const BaseComp = isStatelessComp ? Component : Comp;
     // a HOC which overwrites render, shouldComponentUpdate and componentWillUnmount
