@@ -3,11 +3,16 @@ import { ServerError } from "@frontity/source";
 import { DateData, DateWithSearchData } from "@frontity/source/types/data";
 
 export const dateHandler: Handler = async ({
-  link,
+  link: linkArg,
+  route: routeArg,
   params,
   state,
   libraries
 }) => {
+  // This is only for backward compatibility for the moment when handlers used
+  // to receive `route` instead of `link`.
+  const link = linkArg || routeArg;
+
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { route, page, query } = parse(link);
 

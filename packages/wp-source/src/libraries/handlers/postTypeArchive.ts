@@ -12,7 +12,10 @@ const postTypeArchiveHandler = ({
 }: {
   type: string;
   endpoint: string;
-}): Handler => async ({ link, state, libraries }) => {
+}): Handler => async ({ link: linkArg, route: routeArg, state, libraries }) => {
+  // This is only for backward compatibility for the moment when handlers used
+  // to receive `route` instead of `link`.
+  const link = linkArg || routeArg;
   const { api, populate, parse, getTotal, getTotalPages } = libraries.source;
   const { page, query, route } = parse(link);
 
