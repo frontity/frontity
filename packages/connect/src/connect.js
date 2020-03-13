@@ -18,8 +18,6 @@ const context = createContext();
 
 export const Provider = context.Provider;
 
-const hasHooks = typeof useState === "function";
-
 const mapStateToStores = state => {
   // find store properties and map them to their none observable raw value
   // to do not trigger none static this.setState calls
@@ -36,7 +34,7 @@ export function connect(Comp) {
 
   let ReactiveComp;
 
-  if (isStatelessComp && hasHooks) {
+  if (isStatelessComp) {
     // use a hook based reactive wrapper when we can
     ReactiveComp = props => {
       // set a flag to know when the component is unmounted.
@@ -67,9 +65,6 @@ export function connect(Comp) {
           unobserve(render);
         };
       }, []);
-
-      ReactiveComp.displayName = Comp.displayName || Comp.name;
-      ReactiveComp = memo(ReactiveComp);
 
       // run the reactive render instead of the original one
       return render({ ...props, ...frontity });
@@ -158,6 +153,7 @@ export function connect(Comp) {
   }
 
   ReactiveComp.displayName = Comp.displayName || Comp.name;
+
   // static props are inherited by class components,
   // but have to be copied for function components
   if (isStatelessComp) {
@@ -166,5 +162,5 @@ export function connect(Comp) {
     }
   }
 
-  return ReactiveComp;
+  return isStatelessComp ? memo(ReactiveComp) : ReactiveComp;
 }
