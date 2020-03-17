@@ -8,6 +8,7 @@ import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { FilledContext } from "react-helmet-async";
 import { getSettings } from "@frontity/file-settings";
+import { Context } from "@frontity/types";
 import { ChunkExtractor } from "@loadable/server";
 import getTemplate from "./templates";
 import {
@@ -36,12 +37,11 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
   );
 
   // Ignore HMR if not in dev mode or old browser open.
-  app.use(
-    get("/__webpack_hmr", ctx => {
-      ctx.status = 404;
-      ctx.body = "";
-    })
-  );
+  const return404 = (ctx: Context) => {
+    ctx.status = 404;
+  };
+  app.use(get("/__webpack_hmr", return404));
+  app.use(get("/static/([a-z0-9]+\\.hot-update\\.json)", return404));
 
   // Return Frontity favicon for favicon.ico.
   app.use(get("/favicon.ico", serve("./")));
