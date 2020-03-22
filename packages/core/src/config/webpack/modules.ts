@@ -28,11 +28,11 @@ export default ({
           cacheDirectory: true,
           // A unique hash using @babel/core's version, the babel-loader's version,
           // and the contents of babel.
-          cacheIdentifier: hash({
+          cacheIdentifier: `${hash({
             babelCoreVersion: babelCore.version,
             babelLoaderVersion: babelLoader.version,
             babel: babel
-          }),
+          })}`,
           // Instead, use the babel options directly from our babel object.
           ...babel[target]
         }

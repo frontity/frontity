@@ -24,6 +24,7 @@
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
     "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts",
     "build": "../../node_modules/.bin/tsc --project ./tsconfig.build.json",
+    "build:watch": "../../node_modules/.bin/tsc --project ./tsconfig.build.json --watch",
     "prepublish": "npm run build"
   },
   "dependencies": {
