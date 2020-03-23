@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.5.1
+
+### Patch Changes
+
+- [`a6cea54c`](https://github.com/frontity/frontity/commit/a6cea54c577c3bae42576e22c7b6c5a0c29e8846) [#333](https://github.com/frontity/frontity/pull/333) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix some minor Webpack bundling warnings.
+
+* [`96180f92`](https://github.com/frontity/frontity/commit/96180f926130d4d0f986c9095ef44a6c2b9ab907) [#344](https://github.com/frontity/frontity/pull/344) Thanks [@luisherranz](https://github.com/luisherranz)! - Avoid console error when an old tab is opened with localhost and the server is restarted.
+
+- [`b6fab41a`](https://github.com/frontity/frontity/commit/b6fab41ac5abb917fbcfec9a8a06c3f23909d7bc) [#348](https://github.com/frontity/frontity/pull/348) Thanks [@luisherranz](https://github.com/luisherranz)! - `babel-loader` throws an error if the cache identifier is not a string.
+
 ## 1.5.0
 
 ### Minor Changes

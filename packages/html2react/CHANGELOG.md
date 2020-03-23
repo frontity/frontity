@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.3.1
+
+### Patch Changes
+
+- [`06985b1a`](https://github.com/frontity/frontity/commit/06985b1a908b91086172aa0253ac41b5b8057be1) [#336](https://github.com/frontity/frontity/pull/336) Thanks [@luisherranz](https://github.com/luisherranz)! - Add deprecation warning for `process` in processors. Apart from that, types don't need to be backward compatible because they don't cause errors in Frontity, so I have removed all the old types.
+
 ## 1.3.0
 
 ### Minor Changes
