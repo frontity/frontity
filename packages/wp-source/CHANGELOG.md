@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.6.2
+
+### Patch Changes
+
+- [`e6f48dd9`](https://github.com/frontity/frontity/commit/e6f48dd96184eed68cf48456e56352c1be5fce56) [#339](https://github.com/frontity/frontity/pull/339) Thanks [@luisherranz](https://github.com/luisherranz)! - - Add a fallback to 0 in case `default` (second param) is missing in both `getTotal` and `getTotalPages`.
+  - Add backward compatibility to handlers receiving the `route` param instead of the `link` one.
+
 ## 1.6.1
 
 ### Patch Changes
