@@ -3,7 +3,8 @@ import {
   HotModuleReplacementPlugin,
   Configuration,
   optimize,
-  WatchIgnorePlugin
+  WatchIgnorePlugin,
+  IgnorePlugin
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Target, Mode } from "../../../types";
@@ -27,7 +28,8 @@ export default ({
       openAnalyzer: false,
       logLevel: "silent"
     }),
-    new WatchIgnorePlugin([new RegExp(outDir)])
+    new WatchIgnorePlugin([new RegExp(outDir)]),
+    new IgnorePlugin(/^encoding$/)
   ];
 
   // Support HMR in development. Only needed in client.

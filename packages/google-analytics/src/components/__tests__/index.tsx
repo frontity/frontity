@@ -5,7 +5,8 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { HelmetProvider } from "frontity";
-import { HelmetContext, State } from "frontity/types";
+import { State } from "frontity/types";
+import { FilledContext } from "react-helmet-async";
 import { Root as GoogleAnalytics } from "..";
 import GoogleAnalyticsPkg from "../../../types";
 
@@ -20,13 +21,13 @@ describe("GoogleAnalytics", () => {
 
     state.googleAnalytics.trackingId = "UA-XXXXXXX-X";
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {};
     TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <GoogleAnalytics state={state} actions={null} />
       </HelmetProvider>
     ).toJSON();
-    const head = helmetContext.helmet;
+    const head = (helmetContext as FilledContext).helmet;
 
     expect(head.script.toString()).toMatchSnapshot();
   });
@@ -36,13 +37,13 @@ describe("GoogleAnalytics", () => {
 
     state.googleAnalytics.trackingIds = ["UA-XXXXXXX-X", "UA-YYYYYYY-Y"];
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {};
     TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <GoogleAnalytics state={state} actions={null} />
       </HelmetProvider>
     ).toJSON();
-    const head = helmetContext.helmet;
+    const head = (helmetContext as FilledContext).helmet;
 
     expect(head.script.toString()).toMatchSnapshot();
   });
@@ -50,13 +51,13 @@ describe("GoogleAnalytics", () => {
   test("doesn't add anything if there's no tracking ids", () => {
     const state = getState();
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {};
     TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <GoogleAnalytics state={state} actions={null} />
       </HelmetProvider>
     ).toJSON();
-    const head = helmetContext.helmet;
+    const head = (helmetContext as FilledContext).helmet;
 
     expect(head.script.toString()).toMatchSnapshot();
   });
