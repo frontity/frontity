@@ -7,6 +7,9 @@
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
+  "bin": {
+    "create-frontity": "src/index.js"
+  },
   "main": "src/index.js",
   "publishConfig": {
     "access": "public"
