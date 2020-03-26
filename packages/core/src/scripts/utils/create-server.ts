@@ -6,7 +6,7 @@ import * as https from "https";
 // Create HTTP or HTTPS server using a self-signed certificate.
 export default async ({
   app,
-  isHttps = true
+  isHttps = true,
 }: {
   app: express.Express;
   isHttps: boolean;

@@ -7,7 +7,7 @@ import { Target, BabelConfigs, Mode } from "../../../types";
 export default ({
   target,
   babel,
-  mode
+  mode,
 }: {
   target: Target;
   babel: BabelConfigs;
@@ -31,12 +31,12 @@ export default ({
           cacheIdentifier: `${hash({
             babelCoreVersion: babelCore.version,
             babelLoaderVersion: babelLoader.version,
-            babel: babel
+            babel: babel,
           })}`,
           // Instead, use the babel options directly from our babel object.
-          ...babel[target]
-        }
-      }
+          ...babel[target],
+        },
+      },
     },
     {
       test: /\.(png|jpe?g|gif|svg)$/,
@@ -53,14 +53,14 @@ export default ({
                 : `${filename[1]}-[hash].[ext]`;
             },
             outputPath: "images",
-            emitFile: target !== "server"
-          }
-        }
-      ]
+            emitFile: target !== "server",
+          },
+        },
+      ],
     },
     {
       test: /\.css$/,
-      use: "raw-loader"
+      use: "raw-loader",
     },
     {
       test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -70,7 +70,7 @@ export default ({
           name: (file: string): string => {
             const filename = /([^/\\]+)\.(?:woff(2)?|ttf|eot)$/.exec(file) || [
               "",
-              "font"
+              "font",
             ];
             return mode === "development"
               ? `${filename[1]}.[ext]`
@@ -78,9 +78,9 @@ export default ({
           },
           outputPath: "fonts",
           limit: 25000,
-          emitFile: target !== "server"
-        }
-      }
-    }
-  ]
+          emitFile: target !== "server",
+        },
+      },
+    },
+  ],
 });

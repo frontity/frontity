@@ -16,7 +16,7 @@ type Imports = {
 // Named imports that end up as default imports.
 const defaultImports: Imports = {
   // "import { styled } from 'frontity'" ==> "import styled from '@emotion/styled'"
-  styled: "@emotion/styled"
+  styled: "@emotion/styled",
 };
 
 // Named imports that end up as named imports.
@@ -26,7 +26,7 @@ const namedImports: Imports = {
   // "import { Global } from 'frontity'" ==> "import { Global } from '@emotion/core'"
   Global: "@emotion/core",
   // "import { keyframes } from 'frontity'" ==> "import { keyframes } from '@emotion/core'"
-  keyframes: "@emotion/core"
+  keyframes: "@emotion/core",
 };
 
 // Import names that should be looking for in our "frontity" imports.
@@ -52,7 +52,7 @@ export default (babel: Babel): { name: string; visitor: Visitor } => {
       // Program and this needs to be faster to be able to make the changes before emotion does.
       Program(programPath) {
         programPath.traverse({
-          ImportDeclaration: function(
+          ImportDeclaration: function (
             path: NodePath<BabelTypes.ImportDeclaration>
           ) {
             // Array to store all the our import transforms.
@@ -65,12 +65,12 @@ export default (babel: Babel): { name: string; visitor: Visitor } => {
               );
               // 2. Check if any of them is one of the ones we have to substitute.
               const hasImports = memberImports
-                .map(memberImport => memberImport.imported.name)
-                .filter(name => allNames.includes(name))
+                .map((memberImport) => memberImport.imported.name)
+                .filter((name) => allNames.includes(name))
                 .reduce(() => true, false);
 
               if (hasImports) {
-                memberImports.forEach(memberImport => {
+                memberImports.forEach((memberImport) => {
                   const memberName = memberImport.imported.name;
 
                   if (defaultImports[memberName]) {
@@ -80,7 +80,7 @@ export default (babel: Babel): { name: string; visitor: Visitor } => {
                         [
                           types.importDefaultSpecifier(
                             types.identifier(memberImport.local.name)
-                          )
+                          ),
                         ],
                         types.stringLiteral(defaultImports[memberName])
                       )
@@ -110,9 +110,9 @@ export default (babel: Babel): { name: string; visitor: Visitor } => {
             if (transforms.length > 0) {
               path.replaceWithMultiple(transforms);
             }
-          }
+          },
         });
-      }
-    }
+      },
+    },
   };
 };

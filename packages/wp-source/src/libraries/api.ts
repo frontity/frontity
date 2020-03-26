@@ -20,7 +20,7 @@ class Api {
       endpoint,
       params,
       api = this.api,
-      isWpCom = this.isWpCom
+      isWpCom = this.isWpCom,
     }: {
       endpoint: string;
       params?: Record<string, any>;

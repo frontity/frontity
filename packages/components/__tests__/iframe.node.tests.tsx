@@ -15,7 +15,7 @@ describe("Iframe", () => {
       title: "Some fake title",
       src: "https://fake-src.com",
       className: "fake-class-name",
-      loading
+      loading,
     };
 
     const iframe = TestRenderer.create(<Iframe {...props} />).toJSON();
@@ -26,7 +26,7 @@ describe("Iframe", () => {
     const props = {
       title: "Some fake title",
       src: "https://frontity.com",
-      className: "fake-class-name"
+      className: "fake-class-name",
     };
 
     const helmetContext = {} as FilledContext;
@@ -47,7 +47,7 @@ describe("Iframe", () => {
       title: "Some fake alt text",
       src: "https://fake-src.com",
       className: "fake-class-name",
-      height: 300
+      height: 300,
     };
 
     const helmetContext = {} as FilledContext;

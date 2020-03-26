@@ -15,8 +15,8 @@ function clearConsole() {
 
 export default function choosePort(host: string, defaultPort: number) {
   return detect(defaultPort, host).then(
-    port =>
-      new Promise(resolve => {
+    (port) =>
+      new Promise((resolve) => {
         if (port === defaultPort) {
           return resolve(port);
         }
@@ -35,9 +35,9 @@ export default function choosePort(host: string, defaultPort: number) {
                 message +
                   `${existingProcess ? ` Probably:\n  ${existingProcess}` : ""}`
               ) + "\n\nWould you like to run the app on another port instead?",
-            default: true
+            default: true,
           };
-          inquirer.prompt(question).then(answer => {
+          inquirer.prompt(question).then((answer) => {
             if (answer.shouldChangePort) {
               resolve(port);
             } else {
@@ -49,7 +49,7 @@ export default function choosePort(host: string, defaultPort: number) {
           resolve(null);
         }
       }),
-    err => {
+    (err) => {
       throw new Error(
         chalk.red(`Could not find an open port at ${chalk.bold(host)}.`) +
           "\n" +

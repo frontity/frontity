@@ -19,7 +19,7 @@ export default async ({ name, url }: Props): Promise<NormalizedSettings> => {
   // 2. Return settings when `name` param is passed and exist
   // settings with that name.
   if (name) {
-    const settings = allSettings.find(s => s.name === name);
+    const settings = allSettings.find((s) => s.name === name);
     if (settings) return settings;
     else {
       throw new Error(`Do not exist any settings named '${name}'.`);
@@ -34,16 +34,16 @@ export default async ({ name, url }: Props): Promise<NormalizedSettings> => {
       return final;
     }, [])
     // Filter them to get only the ones that match the `url`
-    .filter(match => new RegExp(match).test(url))
+    .filter((match) => new RegExp(match).test(url))
     // Sort them by length and pick the longest one.
     .sort((a, b) => b.length - a.length)[0];
   // If a valid match was found return those settings.
   if (validMatch)
     return allSettings.find(
-      settings => settings.match && settings.match.includes(validMatch)
+      (settings) => settings.match && settings.match.includes(validMatch)
     );
 
   // 4. Return the first settings without a match defined or,
   // if all of them have match, the first settings in the array.
-  return allSettings.filter(settings => !settings.match)[0] || allSettings[0];
+  return allSettings.filter((settings) => !settings.match)[0] || allSettings[0];
 };

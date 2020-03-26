@@ -2,7 +2,7 @@ import { observable } from "../observable";
 import {
   registerRunningReactionForOperation,
   queueReactionsForOperation,
-  hasRunningReaction
+  hasRunningReaction,
 } from "../reactionRunner";
 import { proxyToRaw, rawToProxy } from "../internals";
 
@@ -138,7 +138,7 @@ const instrumentations = {
     const proto = Reflect.getPrototypeOf(this);
     registerRunningReactionForOperation({ target, type: "iterate" });
     return Reflect.get(proto, "size", target);
-  }
+  },
 };
 
 export default {
@@ -148,5 +148,5 @@ export default {
       ? instrumentations
       : target;
     return Reflect.get(target, key, receiver);
-  }
+  },
 };

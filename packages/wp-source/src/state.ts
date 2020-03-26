@@ -2,7 +2,7 @@ import WpSource from "../types";
 import { normalize, parse } from "./libraries/route-utils";
 
 const state: WpSource["state"]["source"] = {
-  get: ({ state }) => link => {
+  get: ({ state }) => (link) => {
     const normalizedLink = normalize(link);
     const data = state.source.data[normalizedLink];
     if (data) {
@@ -16,7 +16,7 @@ const state: WpSource["state"]["source"] = {
       query,
       page,
       isFetching: false,
-      isReady: false
+      isReady: false,
     };
   },
   data: {},
@@ -41,7 +41,7 @@ const state: WpSource["state"]["source"] = {
   postEndpoint: "posts",
   params: {},
   postTypes: [],
-  taxonomies: []
+  taxonomies: [],
 };
 
 export default state;

@@ -52,7 +52,7 @@ export type HeadTags = {
 export type Template = ({
   html,
   frontity,
-  head
+  head,
 }: {
   html: string;
   frontity: FrontityTags;

@@ -30,7 +30,7 @@ export interface Package {
         | (({
             state,
             actions,
-            libraries
+            libraries,
           }: {
             state: {
               [namespace: string]: {
@@ -49,7 +49,7 @@ export interface Package {
         | (({
             state,
             actions,
-            libraries
+            libraries,
           }: {
             state: {
               [namespace: string]: {

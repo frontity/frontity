@@ -7,6 +7,6 @@ export default (
   },
   slug: string
 ): number | undefined => {
-  const entity = Object.values(entityMap).find(e => e.slug === slug);
+  const entity = Object.values(entityMap).find((e) => e.slug === slug);
   return entity && entity.id;
 };

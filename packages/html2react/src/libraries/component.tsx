@@ -6,7 +6,7 @@ import Html2ReactType, {
   Component,
   HandleNodes,
   HandleNode,
-  ApplyProcessors
+  ApplyProcessors,
 } from "../../types";
 
 const applyProcessors: ApplyProcessors = ({ node, processors, ...payload }) => {
@@ -25,8 +25,9 @@ https://docs.frontity.org/api-reference-1/frontity-html2react#create-your-own-pr
     // Check if test and processor are set.
     if (!proc.test || !processor)
       error(
-        `The processor ${name ||
-          "(missing name)"} needs both a "test" and a "processor" properties.`
+        `The processor ${
+          name || "(missing name)"
+        } needs both a "test" and a "processor" properties.`
       );
 
     // Test processor.
@@ -58,7 +59,7 @@ https://docs.frontity.org/api-reference-1/frontity-html2react#create-your-own-pr
          * Remove props merged before process, just in case someone
          * has used the spread operator in a processor.
          */
-        Object.keys(params).forEach(key => delete processed[key]);
+        Object.keys(params).forEach((key) => delete processed[key]);
         // Assign returned props.
         Object.assign(node, processed);
       }
@@ -98,9 +99,10 @@ const handleNodes: HandleNodes = ({ nodes, ...payload }) => {
   return null;
 };
 
-export const Html2React: Component<
-  Connect<Html2ReactType, { html: string }>
-> = ({ html, state, libraries }) => {
+export const Html2React: Component<Connect<
+  Html2ReactType,
+  { html: string }
+>> = ({ html, state, libraries }) => {
   const { processors, parse } = libraries.html2react;
   const root = parse(html);
 
@@ -113,7 +115,7 @@ export const Html2React: Component<
     state,
     libraries,
     root,
-    processors
+    processors,
   }) as React.ReactElement;
 };
 

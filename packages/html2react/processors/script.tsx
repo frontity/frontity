@@ -4,7 +4,7 @@ import Script from "@frontity/components/script";
 const validMediaTypes = [
   "application/javascript",
   "text/javascript",
-  "application/ecmascript"
+  "application/ecmascript",
 ];
 
 type ElementProps = {
@@ -32,7 +32,7 @@ const script: Processor<ElementProps> = {
 
       if (node.children.length > 0) {
         node.props.code = node.children
-          .map(child => (child.type === "text" ? child.content : ""))
+          .map((child) => (child.type === "text" ? child.content : ""))
           .join("");
         node.children = [];
       }
@@ -41,7 +41,7 @@ const script: Processor<ElementProps> = {
     }
 
     return node;
-  }
+  },
 };
 
 export default script;

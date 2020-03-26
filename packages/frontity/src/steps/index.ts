@@ -9,7 +9,7 @@ import {
   writeFile,
   createWriteStream,
   remove,
-  pathExists
+  pathExists,
 } from "fs-extra";
 import { extract } from "tar";
 import fetch from "node-fetch";
@@ -18,7 +18,7 @@ import { mergeRight } from "ramda";
 import {
   isPackageNameValid,
   isThemeNameValid,
-  fetchPackageVersion
+  fetchPackageVersion,
 } from "../utils";
 import { Options, PackageJson } from "./types";
 
@@ -52,7 +52,7 @@ export const ensureProjectDir = async (path: string): Promise<boolean> => {
     // Check if the directory is a new repo.
     const dirContent = await readDir(path);
     const notAllowedContent = dirContent.filter(
-      content => !allowedExistingContent.includes(content.toLowerCase())
+      (content) => !allowedExistingContent.includes(content.toLowerCase())
     );
     // If it's not, throw.
     if (notAllowedContent.length) {
@@ -76,17 +76,19 @@ export const createPackageJson = async (
     "@frontity/core",
     "@frontity/wp-source",
     "@frontity/tiny-router",
-    "@frontity/html2react"
+    "@frontity/html2react",
   ];
 
   // Add Frontity packages to the dependencies.
-  const dependencies = (await Promise.all(
-    packages.map(async pkg => {
-      // Get the version of each package.
-      const version = await fetchPackageVersion(pkg);
-      return [pkg, `^${version}`];
-    })
-  )).reduce((final, current) => {
+  const dependencies = (
+    await Promise.all(
+      packages.map(async (pkg) => {
+        // Get the version of each package.
+        const version = await fetchPackageVersion(pkg);
+        return [pkg, `^${version}`];
+      })
+    )
+  ).reduce((final, current) => {
     // Reduce the packages into a dependecies object.
     final[current[0]] = current[1];
     return final;
@@ -104,10 +106,10 @@ export const createPackageJson = async (
     scripts: {
       dev: "frontity dev",
       build: "frontity build",
-      serve: "frontity serve"
+      serve: "frontity serve",
     },
     prettier: {},
-    dependencies
+    dependencies,
   };
   const filePath = resolvePath(path, "package.json");
   const fileData = `${JSON.stringify(packageJson, null, 2)}${EOL}`;
@@ -127,8 +129,8 @@ export const createFrontitySettings = async (
       frontity: {
         url: "https://test.frontity.io",
         title: "Test Frontity Blog",
-        description: "WordPress installation for Frontity development"
-      }
+        description: "WordPress installation for Frontity development",
+      },
     },
     packages: [
       {
@@ -140,26 +142,26 @@ export const createFrontitySettings = async (
               ["Nature", "/category/nature/"],
               ["Travel", "/category/travel/"],
               ["Japan", "/tag/japan/"],
-              ["About Us", "/about-us/"]
+              ["About Us", "/about-us/"],
             ],
             featured: {
               showOnList: false,
-              showOnPost: false
-            }
-          }
-        }
+              showOnPost: false,
+            },
+          },
+        },
       },
       {
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "https://test.frontity.io/wp-json"
-          }
-        }
+            api: "https://test.frontity.io/wp-json",
+          },
+        },
       },
       "@frontity/tiny-router",
-      "@frontity/html2react"
-    ]
+      "@frontity/html2react",
+    ],
   };
   const fileTemplate = await readFile(
     resolvePath(__dirname, `../../templates/settings-${extension}-template`),
@@ -183,7 +185,9 @@ export const cloneStarterTheme = async (theme: string, path: string) => {
   if (!isThemeNameValid(theme))
     throw new Error("The name of the theme is not a valid npm package name.");
   await promisify(exec)(`npm pack ${theme}`, { cwd: themePath });
-  const tarball = (await readDir(themePath)).find(file => /\.tgz$/.test(file));
+  const tarball = (await readDir(themePath)).find((file) =>
+    /\.tgz$/.test(file)
+  );
   const tarballPath = resolvePath(themePath, tarball);
   await extract({ cwd: themePath, file: tarballPath, strip: 1 });
   await remove(tarballPath);
@@ -199,7 +203,7 @@ export const downloadFavicon = async (path: string) => {
   const response = await fetch(faviconUrl);
   const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
   response.body.pipe(fileStream);
-  await new Promise(resolve => fileStream.on("finish", resolve));
+  await new Promise((resolve) => fileStream.on("finish", resolve));
 };
 
 // This function removes the files and directories created
@@ -208,8 +212,8 @@ export const revertProgress = async (dirExisted: boolean, path: string) => {
   if (dirExisted) {
     const content = await readDir(path);
     const removableContent = content
-      .filter(item => !allowedExistingContent.includes(item.toLowerCase()))
-      .map(item => resolvePath(path, item));
+      .filter((item) => !allowedExistingContent.includes(item.toLowerCase()))
+      .map((item) => resolvePath(path, item));
     for (const content of removableContent) await remove(content);
   } else {
     await remove(path);
@@ -229,8 +233,8 @@ export const subscribe = async (email: string) => {
     method: "POST",
     body: JSON.stringify({
       event: "frontity-subscribe",
-      email: email.toLowerCase()
+      email: email.toLowerCase(),
     }),
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json" },
   });
 };

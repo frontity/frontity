@@ -9,7 +9,7 @@ type Props = ImageProps & {
   children: ReactNode;
 };
 
-const ContentImage: React.FC<Props> = props => {
+const ContentImage: React.FC<Props> = (props) => {
   if (props.width && props.height) {
     return (
       <Container height={props.height} width={props.width}>
@@ -37,7 +37,7 @@ const image: Processor<React.HTMLProps<HTMLImageElement>> = {
     }
 
     return node;
-  }
+  },
 };
 
 export default image;

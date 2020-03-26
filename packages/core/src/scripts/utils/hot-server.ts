@@ -4,11 +4,11 @@ import { MultiCompiler } from "webpack";
 import requireFromString from "require-from-string";
 import sourceMapSupport from "source-map-support";
 
-const interopRequireDefault = obj => {
+const interopRequireDefault = (obj) => {
   return obj && obj.__esModule ? obj.default : obj;
 };
 
-const isMultiCompiler = compiler => {
+const isMultiCompiler = (compiler) => {
   // Duck typing as `instanceof MultiCompiler` fails when npm decides to
   // install multiple instances of webpack.
   return compiler && compiler.compilers;
@@ -16,13 +16,13 @@ const isMultiCompiler = compiler => {
 
 const findCompiler = (multiCompiler, name) => {
   return multiCompiler.compilers.filter(
-    compiler => compiler.name.indexOf(name) === 0
+    (compiler) => compiler.name.indexOf(name) === 0
   );
 };
 
 const findStats = (multiStats, name) => {
   return multiStats.stats.filter(
-    stats => stats.compilation.name.indexOf(name) === 0
+    (stats) => stats.compilation.name.indexOf(name) === 0
   );
 };
 
@@ -34,7 +34,7 @@ const getFilename = (serverStats, outputPath, chunkName) => {
   return path.join(
     outputPath,
     Array.isArray(filename)
-      ? filename.find(asset => /\.js$/.test(asset))
+      ? filename.find((asset) => /\.js$/.test(asset))
       : filename
   );
 };
@@ -64,7 +64,7 @@ function installSourceMapSupport(fs) {
       } catch (ex) {
         // Doesn't exist
       }
-    }
+    },
   });
 }
 
@@ -99,7 +99,7 @@ function webpackHotServerMiddleware(
   let serverRenderer;
   let error = false;
 
-  const doneHandler = multiStats => {
+  const doneHandler = (multiStats) => {
     error = false;
 
     const serverStats = findStats(multiStats, "server")[0];
@@ -113,7 +113,7 @@ function webpackHotServerMiddleware(
 
     if (clientCompilers.length) {
       const clientStats = findStats(multiStats, "client");
-      clientStatsJson = clientStats.map(obj => obj.toJson());
+      clientStatsJson = clientStats.map((obj) => obj.toJson());
 
       if (clientStatsJson.length === 1) {
         clientStatsJson = clientStatsJson[0];
@@ -131,7 +131,7 @@ function webpackHotServerMiddleware(
 
   multiCompiler.hooks.done.tap("WebpackHotServerMiddleware", doneHandler);
 
-  return function() {
+  return function () {
     // eslint-disable-next-line prefer-spread,prefer-rest-params
     return createConnectHandler(error, serverRenderer).apply(null, arguments);
   };

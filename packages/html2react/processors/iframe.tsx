@@ -17,7 +17,7 @@ const iframe: Processor<React.HTMLProps<HTMLIFrameElement>> = {
     }
 
     return node;
-  }
+  },
 };
 
 export default iframe;

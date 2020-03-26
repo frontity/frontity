@@ -6,12 +6,12 @@ import {
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
-  revertProgress
+  revertProgress,
 } from "../steps";
 import {
   createPackageJson as createPackageJsonForPackage,
   createSrcIndexJs,
-  installPackage
+  installPackage,
 } from "../steps/create-package";
 
 import * as utils from "../utils";
@@ -51,19 +51,19 @@ describe("normalizeOptions", () => {
       path: "/default/path/to/project",
       typescript: false,
       packages: ["frontity", "@frontity/file-settings"],
-      theme: "@frontity/mars-theme"
+      theme: "@frontity/mars-theme",
     };
     const passedOptions = {
       name: "Some Random Name",
       path: "/path/to/project",
-      theme: "@frontity/saturn-theme"
+      theme: "@frontity/saturn-theme",
     };
     const expectedOptions = {
       name: "some-random-name",
       path: passedOptions.path,
       typescript: defaultOptions.typescript,
       packages: defaultOptions.packages,
-      theme: passedOptions.theme
+      theme: passedOptions.theme,
     };
     mockedUtils.isPackageNameValid.mockReturnValue(true);
     const result = normalizeOptions(defaultOptions, passedOptions);
@@ -75,10 +75,10 @@ describe("normalizeOptions", () => {
       path: "/default/path/to/project",
       typescript: false,
       packages: ["frontity", "@frontity/file-settings"],
-      theme: "@frontity/mars-theme"
+      theme: "@frontity/mars-theme",
     };
     const passedOptions = {
-      name: "Some, Random Name"
+      name: "Some, Random Name",
     };
     mockedUtils.isPackageNameValid.mockReturnValue(false);
     expect(() => normalizeOptions(defaultOptions, passedOptions)).toThrow(
@@ -110,7 +110,7 @@ describe("ensureProjectDir", () => {
       "README.md",
       ".git",
       ".gitignore",
-      "LICENSE"
+      "LICENSE",
     ]);
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
     const dirExisted = await ensureProjectDir(path);
@@ -191,11 +191,13 @@ describe("createFrontitySettings", () => {
 describe("cloneStarterTheme", () => {
   beforeEach(() => {
     mockedFsExtra.readFile.mockReset();
-    mockedFsExtra.readFile.mockResolvedValueOnce(JSON.stringify({
-      dependencies: {
-        "@frontity/mars-theme": "./packages/mars-theme"
-      }
-    }) as any);
+    mockedFsExtra.readFile.mockResolvedValueOnce(
+      JSON.stringify({
+        dependencies: {
+          "@frontity/mars-theme": "./packages/mars-theme",
+        },
+      }) as any
+    );
     mockedFsExtra.ensureDir.mockReset();
     mockedUtils.isThemeNameValid.mockReset();
     mockedFsExtra.readdir.mockReset();
@@ -241,12 +243,12 @@ describe("downloadFavicon", () => {
     mockedFetch.default.mockReset();
     (mockedFetch as any).default.mockResolvedValue({
       body: {
-        pipe: jest.fn()
-      }
+        pipe: jest.fn(),
+      },
     });
     mockedFsExtra.createWriteStream.mockReset();
     (mockedFsExtra as any).createWriteStream.mockReturnValue({
-      on: jest.fn((_event, callback) => callback())
+      on: jest.fn((_event, callback) => callback()),
     });
   });
 
@@ -293,7 +295,7 @@ describe("revertProgress", () => {
       "packages",
       "favicon.ico",
       "node_modules",
-      "package-lock.json"
+      "package-lock.json",
     ]);
     await revertProgress(dirExisted, path);
     expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();

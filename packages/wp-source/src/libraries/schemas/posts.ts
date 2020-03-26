@@ -14,12 +14,12 @@ export const postType = new schema.Entity(
 
       // Change "post_tag" to "tag"
       if (result.taxonomies)
-        result.taxonomies = result.taxonomies.map(slug =>
+        result.taxonomies = result.taxonomies.map((slug) =>
           slug === "post_tag" ? "tag" : slug
         );
 
       return result;
-    }
+    },
   }
 );
 
@@ -31,7 +31,7 @@ export const postEntity = new schema.Entity(
       const result = { ...entity };
       result.link = normalize(result.link);
       return result;
-    }
+    },
   }
 );
 
@@ -41,8 +41,8 @@ postEntity.define({
     type: [postType],
     "wp:featuredmedia": [attachmentEntity],
     "wp:contentmedia": [[attachmentEntity]],
-    "wp:term": [taxonomyEntities]
-  }
+    "wp:term": [taxonomyEntities],
+  },
 });
 
 export const postEntities = new schema.Array(postEntity);

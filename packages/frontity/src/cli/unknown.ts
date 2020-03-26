@@ -12,7 +12,7 @@ import chalk from "chalk";
 export default (command: string, program: CommanderStatic) => {
   console.log(chalk.red(`Unknown command: ${chalk.bold(command)}`));
 
-  const availableCommands: string[] = program.commands.map(c => c._name);
+  const availableCommands: string[] = program.commands.map((c) => c._name);
   const suggestion: string | string[] = didYouMean(command, availableCommands);
 
   if (suggestion) {

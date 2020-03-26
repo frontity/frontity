@@ -3,12 +3,12 @@ import Analytics from "../types";
 
 const analytics: Analytics = {
   roots: {
-    analytics: Root
+    analytics: Root,
   },
   state: {
     analytics: {
-      namespaces: []
-    }
+      namespaces: [],
+    },
   },
   actions: {
     /**
@@ -16,9 +16,9 @@ const analytics: Analytics = {
      * and run `sendPageview` for each one.
      */
     analytics: {
-      sendPageview: ({ state, actions }) => pageview => {
+      sendPageview: ({ state, actions }) => (pageview) => {
         state.analytics.namespaces
-          .map(ns => actions[ns])
+          .map((ns) => actions[ns])
           .forEach(({ sendPageview }) => sendPageview(pageview));
       },
 
@@ -26,13 +26,13 @@ const analytics: Analytics = {
        * Get the functions for every analytics package
        * and run `sendEvent` for each one.
        */
-      sendEvent: ({ state, actions }) => event => {
+      sendEvent: ({ state, actions }) => (event) => {
         state.analytics.namespaces
-          .map(ns => actions[ns])
+          .map((ns) => actions[ns])
           .forEach(({ sendEvent }) => sendEvent(event));
-      }
-    }
-  }
+      },
+    },
+  },
 };
 
 export default analytics;

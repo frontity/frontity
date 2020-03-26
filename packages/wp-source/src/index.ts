@@ -6,10 +6,10 @@ import { Api, populate, routeUtils, responseUtils } from "./libraries";
 const wpSource = (): WpSource => ({
   name: "@frontity/wp-source",
   state: {
-    source: state
+    source: state,
   },
   actions: {
-    source: actions
+    source: actions,
   },
   libraries: {
     source: {
@@ -18,9 +18,9 @@ const wpSource = (): WpSource => ({
       redirections: [],
       populate,
       ...routeUtils,
-      ...responseUtils
-    }
-  }
+      ...responseUtils,
+    },
+  },
 });
 
 export default wpSource;

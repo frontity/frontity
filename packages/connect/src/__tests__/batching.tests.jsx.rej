@@ -1,0 +1,33 @@
+diff a/packages/connect/src/__tests__/batching.tests.jsx b/packages/connect/src/__tests__/batching.tests.jsx	(rejected hunks)
+@@ -10,2 +10,2 @@ beforeEach(() => {
+-      number: "1"
+-    }
++      number: "1",
++    },
+@@ -78 +78 @@ describe("batching", () => {
+-    await new Promise(resolve =>
++    await new Promise((resolve) =>
+@@ -94 +94 @@ describe("batching", () => {
+-    await new Promise(resolve =>
++    await new Promise((resolve) =>
+@@ -145 +145 @@ describe("batching", () => {
+-      .then(value => {
++      .then((value) => {
+@@ -150 +150 @@ describe("batching", () => {
+-      .catch(err => {
++      .catch((err) => {
+@@ -156 +156 @@ describe("batching", () => {
+-    await new Promise(resolve => {
++    await new Promise((resolve) => {
+@@ -183 +183 @@ describe("batching", () => {
+-  test("should not break method this value and args", done => {
++  test("should not break method this value and args", (done) => {
+@@ -185 +185 @@ describe("batching", () => {
+-    socket.onclose = function(ev) {
++    socket.onclose = function (ev) {
+@@ -193 +193 @@ describe("batching", () => {
+-  test("should not break callback this value and args", done => {
++  test("should not break callback this value and args", (done) => {
+@@ -196 +196 @@ describe("batching", () => {
+-      function(arg1, arg2) {
++      function (arg1, arg2) {

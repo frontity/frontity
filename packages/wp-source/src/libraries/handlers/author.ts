@@ -8,7 +8,7 @@ const authorHandler: Handler = async ({
   params,
   state,
   libraries,
-  force
+  force,
 }) => {
   // This is only for backward compatibility for the moment when handlers used
   // to receive `route` instead of `link`.
@@ -40,8 +40,8 @@ const authorHandler: Handler = async ({
       search: query.s,
       page,
       _embed: true,
-      ...state.source.params
-    }
+      ...state.source.params,
+    },
   });
 
   // 3. Populate response.
@@ -80,7 +80,7 @@ const authorHandler: Handler = async ({
     ...(hasNewerPosts && { next: getPageLink(page + 1) }),
 
     // Add search data if this is a search.
-    ...(query.s && { isSearch: true, searchQuery: query.s })
+    ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
   Object.assign(currentPageData, newPageData);

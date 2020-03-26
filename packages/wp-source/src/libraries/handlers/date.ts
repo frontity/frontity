@@ -7,7 +7,7 @@ export const dateHandler: Handler = async ({
   route: routeArg,
   params,
   state,
-  libraries
+  libraries,
 }) => {
   // This is only for backward compatibility for the moment when handlers used
   // to receive `route` instead of `link`.
@@ -39,8 +39,8 @@ export const dateHandler: Handler = async ({
       before: before.toISOString(),
       search: query.s,
       page,
-      ...state.source.params
-    }
+      ...state.source.params,
+    },
   });
 
   // 3. populate response
@@ -82,7 +82,7 @@ export const dateHandler: Handler = async ({
     ...(month && { month }),
 
     // Add search data if this is a search.
-    ...(query.s && { isSearch: true, searchQuery: query.s })
+    ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
   Object.assign(currentPageData, newPageData);

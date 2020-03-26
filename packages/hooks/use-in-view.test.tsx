@@ -10,7 +10,7 @@ beforeEach(() => {
   document.body.appendChild(container);
   Object.defineProperty(window, "IntersectionObserver", {
     writable: true,
-    value: jest.fn()
+    value: jest.fn(),
   });
 });
 

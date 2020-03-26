@@ -7,7 +7,7 @@ const Switch: React.FC<Package> | null = ({ children }) => {
 
   // Check if components[] has a non-ReactNode type Element
   const hasInvalidComponent: boolean =
-    components.findIndex(component => !isValidElement(component)) !== -1;
+    components.findIndex((component) => !isValidElement(component)) !== -1;
 
   // last element in components[]
   const lastComponent = components[components.length - 1];
@@ -22,7 +22,7 @@ const Switch: React.FC<Package> | null = ({ children }) => {
 
   // Filter components by the value of the 'when' props or path
   const filteredComponent = components.find(
-    component => isValidElement(component) && component.props.when
+    (component) => isValidElement(component) && component.props.when
   );
 
   // Render filteredComponents

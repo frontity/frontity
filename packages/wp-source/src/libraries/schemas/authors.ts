@@ -9,7 +9,7 @@ export const authorEntity = new schema.Entity(
       const result = { ...entity };
       result.link = normalize(result.link);
       return result;
-    }
+    },
   }
 );
 export const authorEntities = new schema.Array(authorEntity);

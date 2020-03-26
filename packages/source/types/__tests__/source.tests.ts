@@ -9,7 +9,7 @@ const source1 = (libraries: Source["libraries"]): Source => {
   return {
     state: {
       source: {
-        get: ({ state }) => link => state.source.data[""],
+        get: ({ state }) => (link) => state.source.data[""],
         data: {},
         category: {},
         tag: {},
@@ -18,21 +18,21 @@ const source1 = (libraries: Source["libraries"]): Source => {
         author: {},
         attachment: {},
         type: {},
-        taxonomy: {}
-      }
+        taxonomy: {},
+      },
     },
     actions: {
       source: {
-        fetch: ({ state }) => async link => {}
-      }
+        fetch: ({ state }) => async (link) => {},
+      },
     },
     libraries: {
       source: {
         parse: () => ({ path: "" }),
         stringify: () => "/route/",
-        normalize: () => "/route/"
-      }
-    }
+        normalize: () => "/route/",
+      },
+    },
   };
 };
 
@@ -59,7 +59,7 @@ const source2: MySource = {
   state: {
     source: {
       api: "https://site.com/api",
-      get: ({ state }) => link => state.source.data[""],
+      get: ({ state }) => (link) => state.source.data[""],
       data: {},
       category: {},
       tag: {},
@@ -69,22 +69,22 @@ const source2: MySource = {
       attachment: {},
       myOwnProp: "some value",
       type: {},
-      taxonomy: {}
-    }
+      taxonomy: {},
+    },
   },
   actions: {
     source: {
-      fetch: ({ state }) => async link => {},
-      myOwnAction: ({ state }) => {}
-    }
+      fetch: ({ state }) => async (link) => {},
+      myOwnAction: ({ state }) => {},
+    },
   },
   libraries: {
     source: {
       parse: () => ({ path: "" }),
       stringify: () => "/route/",
-      normalize: () => "/route/"
-    }
-  }
+      normalize: () => "/route/",
+    },
+  },
 };
 
 // Package settings from extended Source.
@@ -92,17 +92,17 @@ const source2: MySource = {
 const settings1: Settings<MySource> = {
   packages: [
     {
-      name: "my-source-package"
-    }
-  ]
+      name: "my-source-package",
+    },
+  ],
 };
 // -- No settings, only one namespace selected;
 const settings2: Settings<MySource> = {
   packages: [
     {
-      name: "my-source-package"
-    }
-  ]
+      name: "my-source-package",
+    },
+  ],
 };
 // -- Settings;
 const settings3: Settings<MySource> = {
@@ -111,11 +111,11 @@ const settings3: Settings<MySource> = {
       name: "my-source-package",
       state: {
         source: {
-          api: "1"
-        }
-      }
-    }
-  ]
+          api: "1",
+        },
+      },
+    },
+  ],
 };
 
 test("Types are fine!", () => {});

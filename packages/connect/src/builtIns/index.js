@@ -23,7 +23,7 @@ const handlers = new Map([
   [Int32Array, false],
   [Uint32Array, false],
   [Float32Array, false],
-  [Float64Array, false]
+  [Float64Array, false],
 ]);
 
 export function shouldInstrument({ constructor }) {

@@ -3,7 +3,7 @@ import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
 
 const postTypeHandler = ({
-  endpoints
+  endpoints,
 }: {
   endpoints: string[];
 }): Handler => async ({ link, params, state, libraries }) => {
@@ -13,7 +13,7 @@ const postTypeHandler = ({
     const { slug } = params;
 
     // 1.1 transform "posts" endpoint to state.source.postEndpoint
-    const finalEndpoints = endpoints.map(endpoint =>
+    const finalEndpoints = endpoints.map((endpoint) =>
       endpoint === "posts" ? state.source.postEndpoint : endpoint
     );
 
@@ -22,7 +22,7 @@ const postTypeHandler = ({
     for (const endpoint of finalEndpoints) {
       const response = await libraries.source.api.get({
         endpoint,
-        params: { slug, _embed: true, ...state.source.params }
+        params: { slug, _embed: true, ...state.source.params },
       });
 
       const populated = await libraries.source.populate({ response, state });
@@ -51,7 +51,7 @@ const postTypeHandler = ({
     query,
     id,
     isPostType: true,
-    [`is${capitalize(type)}`]: true
+    [`is${capitalize(type)}`]: true,
   });
 };
 

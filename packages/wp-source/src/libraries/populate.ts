@@ -35,7 +35,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
   state,
   subdirectory,
-  force
+  force,
 }) => {
   // Normalize response
   const json = await response.json();
@@ -58,7 +58,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         data[entity.link] ||
         (data[entity.link] = {
           isReady: false,
-          isFetching: false
+          isFetching: false,
         });
 
       let entityMap: any;
@@ -70,7 +70,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         entityKey = entity.id;
         Object.assign(entityData, {
           type: entity.type,
-          id: entity.id
+          id: entity.id,
         });
       } else if (schema === "taxonomyEntity") {
         if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
@@ -78,13 +78,13 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         entityKey = entity.id;
         Object.assign(entityData, {
           taxonomy: entity.taxonomy,
-          id: entity.id
+          id: entity.id,
         });
       } else if (schema === "authorEntity") {
         entityMap = state.source.author;
         entityKey = entity.id;
         Object.assign(entityData, {
-          id: entity.id
+          id: entity.id,
         });
       } else if (schema === "postType") {
         entityMap = state.source.type;

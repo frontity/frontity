@@ -24,7 +24,7 @@ describe("post archive", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(posts, {
         "X-WP-Total": "5",
-        "X-WP-TotalPages": "2"
+        "X-WP-TotalPages": "2",
       })
     );
     // Fetch entities
@@ -37,7 +37,7 @@ describe("post archive", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(posts2, {
         "X-WP-Total": "5",
-        "X-WP-TotalPages": "2"
+        "X-WP-TotalPages": "2",
       })
     );
     // Fetch entities
@@ -53,7 +53,7 @@ describe("post archive", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(postsCpt, {
         "X-WP-Total": "5",
-        "X-WP-TotalPages": "2"
+        "X-WP-TotalPages": "2",
       })
     );
     // Fetch entities
@@ -67,7 +67,7 @@ describe("post archive", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(posts, {
         "X-WP-Total": "5",
-        "X-WP-TotalPages": "2"
+        "X-WP-TotalPages": "2",
       })
     );
     // Fetch entities
@@ -80,7 +80,7 @@ describe("post archive", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(posts2, {
         "X-WP-Total": "5",
-        "X-WP-TotalPages": "2"
+        "X-WP-TotalPages": "2",
       })
     );
     // Fetch entities

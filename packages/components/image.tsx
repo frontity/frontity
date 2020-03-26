@@ -57,7 +57,7 @@ interface ChangeAttributes {
   (attrs: Attributes): Attributes;
 }
 
-const changeAttributes: ChangeAttributes = attrs => {
+const changeAttributes: ChangeAttributes = (attrs) => {
   const attributes = { ...attrs };
 
   attributes.src = attributes["data-src"];
@@ -69,7 +69,7 @@ const changeAttributes: ChangeAttributes = attrs => {
   return attributes;
 };
 
-const NoScriptImage: NoScriptImage = props => {
+const NoScriptImage: NoScriptImage = (props) => {
   const attributes = { ...props };
 
   return (
@@ -88,7 +88,7 @@ const Image: Image = ({
   className,
   loading = "lazy",
   rootMargin,
-  height
+  height,
 }) => {
   // These are the attributes for the image when it's waiting to be loaded.
   const lazyAttributes: Attributes = {
@@ -99,7 +99,7 @@ const Image: Image = ({
     className: "frontity-lazy-image".concat(className ? ` ${className}` : ""),
     loading,
     style: { visibility: "hidden" },
-    height
+    height,
   };
   // These are the attributes for the image when it's loaded.
   const eagerAttributes = changeAttributes(lazyAttributes);
@@ -127,7 +127,7 @@ const Image: Image = ({
     ) {
       const [ref, onScreen] = useInView({
         rootMargin: rootMargin,
-        triggerOnce: true
+        triggerOnce: true,
       });
 
       return (
@@ -161,13 +161,13 @@ const Image: Image = ({
           {
             id: "frontity-no-proxy-images",
             type: "text/javascript",
-            innerHTML: noProxyScript
-          }
+            innerHTML: noProxyScript,
+          },
         ]}
         noscript={[
           {
-            innerHTML: `<style id="frontity-no-js-images" type="text/css">${noJsStyles}</style>`
-          }
+            innerHTML: `<style id="frontity-no-js-images" type="text/css">${noJsStyles}</style>`,
+          },
         ]}
       />
       <NoScriptImage {...eagerAttributes} />

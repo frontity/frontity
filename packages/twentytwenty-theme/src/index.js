@@ -8,7 +8,7 @@ const twentyTwentyTheme = {
      *  In Frontity, any package can add React components to the site.
      *  We use roots for that, scoped to the `theme` namespace.
      */
-    theme: Theme
+    theme: Theme,
   },
   state: {
     /**
@@ -20,12 +20,12 @@ const twentyTwentyTheme = {
         gray: {
           base: "#6D6D6D",
           light: "#DCD7CA",
-          lighter: "#F5EFE0"
+          lighter: "#F5EFE0",
         },
         primary: "#cd2653",
         headerBg: "#ffffff",
         footerBg: "#ffffff",
-        bodyBg: "#f5efe0"
+        bodyBg: "#f5efe0",
       },
       // Whether to show the search button in page header
       showSearchInHeader: true,
@@ -42,7 +42,7 @@ const twentyTwentyTheme = {
         // Whether to show it on archive view
         showOnArchive: true,
         // Whether to show it on post
-        showOnPost: true
+        showOnPost: true,
       },
       // Whether to auto-fetch links on a page. Values can be "no" | "all" | "in-view" | "hover"
       autoPreFetch: "no",
@@ -50,8 +50,8 @@ const twentyTwentyTheme = {
        * At the moment, we only include the ascii characters of Inter font.
        * Values can be "us-ascii" | "latin" | "all"
        */
-      fontSets: "all"
-    }
+      fontSets: "all",
+    },
   },
   /**
    * Actions are functions that modify the state or deal with other parts of
@@ -70,8 +70,8 @@ const twentyTwentyTheme = {
       },
       closeSearchModal: ({ state }) => {
         state.theme.isSearchModalOpen = false;
-      }
-    }
+      },
+    },
   },
   libraries: {
     html2react: {
@@ -79,9 +79,9 @@ const twentyTwentyTheme = {
        * Add a processor to `html2react` so it processes the `<img>` tags
        * inside the content HTML. You can add your own processors too
        */
-      processors: [image]
-    }
-  }
+      processors: [image],
+    },
+  },
 };
 
 export default twentyTwentyTheme;

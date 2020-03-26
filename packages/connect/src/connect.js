@@ -7,7 +7,7 @@ import {
   useState,
   useEffect,
   useContext,
-  useRef
+  useRef,
 } from "react";
 import { observe, unobserve, raw, isObservable } from ".";
 
@@ -19,13 +19,13 @@ export const Provider = context.Provider;
 
 const hasHooks = typeof useState === "function";
 
-const mapStateToStores = state => {
+const mapStateToStores = (state) => {
   // find store properties and map them to their none observable raw value
   // to do not trigger none static this.setState calls
   // from the static getDerivedStateFromProps lifecycle method
   const component = state[COMPONENT];
   return Object.keys(component)
-    .map(key => component[key])
+    .map((key) => component[key])
     .filter(isObservable)
     .map(raw);
 };
@@ -37,7 +37,7 @@ export function connect(Comp) {
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
-    ReactiveComp = memo(props => {
+    ReactiveComp = memo((props) => {
       // set a flag to know when the component is unmounted.
       const _isMounted = useRef(true);
 
@@ -53,7 +53,7 @@ export function connect(Comp) {
         () =>
           observe(Comp, {
             scheduler: () => _isMounted.current && setState({}),
-            lazy: true
+            lazy: true,
           }),
         []
       );
@@ -87,7 +87,7 @@ export function connect(Comp) {
         // create a reactive render for the component
         this.render = observe(this.render, {
           scheduler: () => this._isMounted && this.setState({}),
-          lazy: true
+          lazy: true,
         });
       }
 
@@ -96,7 +96,7 @@ export function connect(Comp) {
           ? Comp({ ...this.props, ...this.store }, this.context)
           : createElement(BaseComp, {
               ...this.props,
-              ...this.store
+              ...this.store,
             });
       }
 
@@ -119,7 +119,7 @@ export function connect(Comp) {
         const nextKeys = Object.keys(nextProps);
         return (
           nextKeys.length !== keys.length ||
-          nextKeys.some(key => props[key] !== nextProps[key])
+          nextKeys.some((key) => props[key] !== nextProps[key])
         );
       }
 

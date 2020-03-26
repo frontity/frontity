@@ -31,7 +31,7 @@ export const errorLogger = (error: Error, message?: string) => {
 
 export const isFrontityProjectRoot = async (path: string) => {
   const dirContent = await readDir(path);
-  return dirContent.some(content =>
+  return dirContent.some((content) =>
     /^frontity\.settings\.(js|ts)$/i.test(content)
   );
 };

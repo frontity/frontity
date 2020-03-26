@@ -31,11 +31,11 @@ let observer: IntersectionObserver;
 // This callback can be called with more than one entry,
 // so we need to filter them and call the corresponding
 // `setIntersected` function for each changed entry.
-const createCallback: IntersectionObserverCallbackCreator = options => {
-  return entries => {
-    entries.forEach(entry => {
+const createCallback: IntersectionObserverCallbackCreator = (options) => {
+  return (entries) => {
+    entries.forEach((entry) => {
       const setFunction = setFunctions.find(
-        set => set[1].current === entry.target
+        (set) => set[1].current === entry.target
       );
 
       // Check if we found the ref
@@ -64,7 +64,7 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
 
   if (!observer)
     observer = new IntersectionObserver(createCallback({ onlyOnce }), {
-      rootMargin
+      rootMargin,
     });
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const useInView: UseInView = ({ rootMargin, onlyOnce } = {}) => {
     return () => {
       observer.unobserve(ref.current);
       setFunctions.splice(
-        setFunctions.findIndex(set => set[1].current === ref.current),
+        setFunctions.findIndex((set) => set[1].current === ref.current),
         1
       );
     };

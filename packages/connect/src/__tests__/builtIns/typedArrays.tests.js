@@ -9,7 +9,7 @@ const TypedArrays = [
   Int32Array,
   Uint32Array,
   Float32Array,
-  Float64Array
+  Float64Array,
 ];
 
 describe("typed arrays", () => {

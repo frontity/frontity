@@ -38,7 +38,7 @@ export const getMatch: GetMatch = (path, list) => {
     ? {
         func: result.func,
         params: execMatch(path, result),
-        name: result.name
+        name: result.name,
       }
     : null;
 };

@@ -19,7 +19,7 @@ const PostItem = ({
   item,
   libraries,
   showExcerpt,
-  showMedia = true
+  showMedia = true,
 }) => {
   // Get all categories
   const allCategories = state.source.category;
@@ -28,7 +28,7 @@ const PostItem = ({
    * So, we'll look up the details of each category in allCategories
    */
   const categories =
-    item.categories && item.categories.map(catId => allCategories[catId]);
+    item.categories && item.categories.map((catId) => allCategories[catId]);
 
   // Get all tags
   const allTags = state.source.tag;
@@ -36,7 +36,7 @@ const PostItem = ({
    * The item's categories is an array of each tag id
    * So, we'll look up the details of each tag in allTags
    */
-  const tags = item.tags && item.tags.map(tagId => allTags[tagId]);
+  const tags = item.tags && item.tags.map((tagId) => allTags[tagId]);
 
   const content = showExcerpt ? item.excerpt : item.content;
   const { Component: Html2React } = libraries.html2react;
@@ -109,10 +109,10 @@ export const PostHeader = styled.header`
 const maxWidths = {
   thin: "58rem",
   small: "80rem",
-  medium: "100rem"
+  medium: "100rem",
 };
 
-const getMaxWidth = props => maxWidths[props.size] || maxWidths["medium"];
+const getMaxWidth = (props) => maxWidths[props.size] || maxWidths["medium"];
 
 export const SectionContainer = styled.div`
   margin-left: auto;

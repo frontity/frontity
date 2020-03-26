@@ -7,7 +7,7 @@ const appDir = resolve(process.cwd(), "build/server.js");
 // Creates a node server and runs the server.js bundle.
 export default async ({
   isHttps,
-  port
+  port,
 }: {
   port: number;
   isHttps: boolean;

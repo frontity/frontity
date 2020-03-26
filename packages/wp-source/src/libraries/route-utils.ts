@@ -22,7 +22,7 @@ export const objToQuery = (obj: Record<string, any>) => {
 
 export const concatPath = (...paths: string[]) =>
   [""]
-    .concat(...paths.map(path => path.split("/").filter(p => p)), "")
+    .concat(...paths.map((path) => path.split("/").filter((p) => p)), "")
     .join("/");
 
 export const decomposeRoute = (route: string) => {
@@ -30,7 +30,7 @@ export const decomposeRoute = (route: string) => {
     ,
     pathname,
     query,
-    hash
+    hash,
   ] = /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)(?:\?([^#]*))?(#.*)?/.exec(
     route
   );
@@ -43,7 +43,7 @@ export const routeToParams = (route: string): RouteParams => {
   const [, path, page] = /^(.*)page\/(\d+)\/?(\?.*)?$/.exec(pathname) || [
     null,
     pathname,
-    "1"
+    "1",
   ];
 
   return {
@@ -51,7 +51,7 @@ export const routeToParams = (route: string): RouteParams => {
     route: addFinalSlash(path),
     page: parseInt(page, 10),
     query: queryToObj(query),
-    hash
+    hash,
   };
 };
 
@@ -61,7 +61,7 @@ export const paramsToRoute = ({
   route,
   page = 1,
   query = {},
-  hash = ""
+  hash = "",
 }: RouteParams): string => {
   // Use route if present, otherwise use path
   path = route || path;
@@ -75,11 +75,12 @@ export const paramsToRoute = ({
   return `${pathAndPage}${queryStr}${hash}`;
 };
 
-export const parse: WpSource["libraries"]["source"]["parse"] = route =>
+export const parse: WpSource["libraries"]["source"]["parse"] = (route) =>
   routeToParams(route);
 
-export const stringify: WpSource["libraries"]["source"]["stringify"] = routeParams =>
-  paramsToRoute(routeParams);
+export const stringify: WpSource["libraries"]["source"]["stringify"] = (
+  routeParams
+) => paramsToRoute(routeParams);
 
 export const normalize = (route: string): string =>
   paramsToRoute(routeToParams(route));

@@ -3,7 +3,7 @@ import { createStore, isObservable } from "..";
 
 let config = {};
 
-const delay = () => new Promise(resolve => setTimeout(resolve, 100));
+const delay = () => new Promise((resolve) => setTimeout(resolve, 100));
 
 beforeEach(() => {
   config = {
@@ -12,9 +12,9 @@ beforeEach(() => {
       nested1: {
         prop2: 2,
         prop3: ({ state }) => state.prop1 + state.nested1.prop2,
-        prop4: ({ state }) => num => state.nested1.prop3 + num,
-        prop5: 0
-      }
+        prop4: ({ state }) => (num) => state.nested1.prop3 + num,
+        prop5: 0,
+      },
     },
     actions: {
       action1: ({ state }) => {
@@ -24,7 +24,7 @@ beforeEach(() => {
         action2: ({ state }) => {
           state.prop1 = "action2";
           return state.prop1;
-        }
+        },
       },
       nested2: {
         nested3: {
@@ -34,17 +34,17 @@ beforeEach(() => {
           action4: ({ state }) => {
             state.nested1.prop5 = state.nested1.prop4(2);
           },
-          action5: ({ state }) => num => {
+          action5: ({ state }) => (num) => {
             state.nested1.prop5 = state.nested1.prop4(num);
-          }
-        }
+          },
+        },
       },
       action6: async ({ state }) => {
         await delay();
         state.prop1 = "action6";
         return state.prop1;
       },
-      action7: ({ state }) => async num => {
+      action7: ({ state }) => async (num) => {
         await delay();
         state.prop1 = num;
       },
@@ -61,8 +61,8 @@ beforeEach(() => {
       },
       action11: async () => {
         throw new Error("action11 error");
-      }
-    }
+      },
+    },
   };
 });
 
@@ -116,7 +116,7 @@ describe("createStore actions", () => {
     expect(store.state.nested1.prop5).toBe(6);
   });
 
-  it("should return a promise that can be awaited", done => {
+  it("should return a promise that can be awaited", (done) => {
     const store = createStore(config);
     store.actions.action6().then(() => {
       expect(store.state.prop1).toBe("action6");
@@ -124,7 +124,7 @@ describe("createStore actions", () => {
     });
   });
 
-  it("should return a promise that can be awaited even with params", done => {
+  it("should return a promise that can be awaited even with params", (done) => {
     const store = createStore(config);
     store.actions.action7(7).then(() => {
       expect(store.state.prop1).toBe(7);

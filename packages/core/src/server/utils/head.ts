@@ -11,6 +11,6 @@ export default (helmet: FilledContext["helmet"]): HeadTags => {
     noscript: helmet.noscript.toString(),
     script: helmet.script.toString(),
     style: helmet.style.toString(),
-    title: helmet.title.toString()
+    title: helmet.title.toString(),
   };
 };

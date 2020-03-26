@@ -10,7 +10,7 @@ export default async ({
   port,
   isHttps,
   target,
-  openBrowser = true
+  openBrowser = true,
 }: {
   mode: Mode;
   port: number;

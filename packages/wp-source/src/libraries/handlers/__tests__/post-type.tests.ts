@@ -28,7 +28,7 @@ describe("postType", () => {
     // .mockResolvedValueOnce(mockResponse([]))
     // because the latter always returns the same instance of Response.
     // which results in error because response.json() can only be run once
-    api.get = jest.fn(_ => Promise.resolve(mockResponse([])));
+    api.get = jest.fn((_) => Promise.resolve(mockResponse([])));
 
     // Fetch entities
     await store.actions.source.fetch("/non-existent/");
@@ -38,7 +38,7 @@ describe("postType", () => {
 
   test("should contain the correct error code on error", async () => {
     // Mock Api responses
-    api.get = jest.fn(async _ => {
+    api.get = jest.fn(async (_) => {
       throw new ServerError("statusText", 400, "statusText");
     });
 
@@ -64,7 +64,7 @@ describe("post", () => {
     // Add post to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(post1)
+      response: mockResponse(post1),
     });
     // Mock Api responses
     api.get = jest.fn();
@@ -98,7 +98,7 @@ describe("post", () => {
     // Add post to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(post1)
+      response: mockResponse(post1),
     });
     // Mock Api responses
     api.get = jest.fn();
@@ -133,7 +133,7 @@ describe("page", () => {
     // Add page to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(page1)
+      response: mockResponse(page1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
@@ -158,7 +158,7 @@ describe("page", () => {
     // Add page to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(page1)
+      response: mockResponse(page1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
@@ -185,7 +185,7 @@ describe("attachment", () => {
     // Add attachment to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(attachment1)
+      response: mockResponse(attachment1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
@@ -210,7 +210,7 @@ describe("attachment", () => {
     // Add attachment to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(attachment1)
+      response: mockResponse(attachment1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([]));

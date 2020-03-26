@@ -9,7 +9,7 @@ export { error, warn } from "@frontity/error";
 
 import { ConnectFunction, CreateStore } from "@frontity/types/src/connect";
 import originalConnect, {
-  createStore as originalCreateStore
+  createStore as originalCreateStore,
 } from "@frontity/connect";
 
 export const connect = originalConnect as ConnectFunction;

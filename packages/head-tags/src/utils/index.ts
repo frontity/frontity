@@ -4,7 +4,7 @@ import {
   HeadTag,
   State,
   PostTypeWithHeadTags,
-  TaxonomyWithHeadTags
+  TaxonomyWithHeadTags,
 } from "../../types";
 
 // Return a string inviting to ask questions in the community.
@@ -62,7 +62,7 @@ const transformLink = ({
   value,
   ignore,
   base,
-  newBase
+  newBase,
 }: {
   value: string;
   ignore: string;
@@ -76,7 +76,7 @@ const transformLink = ({
 
 export const useFrontityLinks = ({
   state,
-  headTags
+  headTags,
 }: {
   state: State;
   headTags: HeadTags;
@@ -160,7 +160,7 @@ ${content}`
 // Get the entity related to the current link.
 export const getCurrentEntity = ({
   state,
-  link
+  link,
 }: {
   state: State;
   link: string;
@@ -196,7 +196,7 @@ export const getCurrentEntity = ({
  */
 export const getCurrentHeadTags = ({
   state,
-  link
+  link,
 }: {
   state: State;
   link: string;

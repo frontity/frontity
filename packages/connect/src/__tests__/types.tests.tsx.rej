@@ -1,0 +1,33 @@
+diff a/packages/connect/src/__tests__/types.tests.tsx b/packages/connect/src/__tests__/types.tests.tsx	(rejected hunks)
+@@ -4 +4 @@ import connect, { createStore, Action, Derived, Connect } from "..";
+-const delay = () => new Promise(resolve => setTimeout(resolve, 100));
++const delay = () => new Promise((resolve) => setTimeout(resolve, 100));
+@@ -42,3 +42,3 @@ const config: Config = {
+-      prop4: ({ state }) => num => state.nested1.prop3 + num,
+-      prop5: 5
+-    }
++      prop4: ({ state }) => (num) => state.nested1.prop3 + num,
++      prop5: 5,
++    },
+@@ -53 +53 @@ const config: Config = {
+-      }
++      },
+@@ -65 +65 @@ const config: Config = {
+-        action5: ({ state }) => num => {
++        action5: ({ state }) => (num) => {
+@@ -67,2 +67,2 @@ const config: Config = {
+-        }
+-      }
++        },
++      },
+@@ -74 +74 @@ const config: Config = {
+-    action7: ({ state, extra }) => async num => {
++    action7: ({ state, extra }) => async (num) => {
+@@ -78 +78 @@ const config: Config = {
+-    }
++    },
+@@ -81,2 +81,2 @@ const config: Config = {
+-    prop6: 6
+-  }
++    prop6: 6,
++  },

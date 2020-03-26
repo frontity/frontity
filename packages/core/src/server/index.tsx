@@ -15,7 +15,7 @@ import {
   getStats,
   hasEntryPoint,
   getBothScriptTags,
-  Extractor
+  Extractor,
 } from "./utils/stats";
 import getHeadTags from "./utils/head";
 import App from "../app";
@@ -30,7 +30,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
 
   // Default robots.txt.
   app.use(
-    get("/robots.txt", ctx => {
+    get("/robots.txt", (ctx) => {
       ctx.type = "text/plain";
       ctx.body = "User-agent: *\nDisallow:";
     })
@@ -94,7 +94,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       // Run renderToString with ChunkExtractor to get the html.
       const extractor = new ChunkExtractor({
         stats,
-        entrypoints: [settings.name]
+        entrypoints: [settings.name],
       });
       const jsx = extractor.collectChunks(Component);
       html = renderToString(jsx);
@@ -114,7 +114,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
           ? getBothScriptTags({
               extractor: customExtractor,
               moduleStats,
-              es5Stats
+              es5Stats,
             })
           : extractor.getScriptTags();
 

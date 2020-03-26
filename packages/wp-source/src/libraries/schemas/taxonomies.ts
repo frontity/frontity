@@ -13,7 +13,7 @@ export const taxonomyEntity = new schema.Entity(
       result.taxonomy =
         result.taxonomy === "post_tag" ? "tag" : result.taxonomy;
       return result;
-    }
+    },
   }
 );
 export const taxonomyEntities = new schema.Array(taxonomyEntity);

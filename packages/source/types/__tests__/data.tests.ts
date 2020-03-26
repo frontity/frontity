@@ -19,14 +19,14 @@ import {
   AuthorWithSearchData,
   PostTypeArchiveWithSearchData,
   PostArchiveWithSearchData,
-  DateWithSearchData
+  DateWithSearchData,
 } from "../data";
 
 const data: Record<string, Data> = {};
 
 data.onlyStatus = {
   isFetching: true,
-  isReady: false
+  isReady: false,
 };
 
 data.notFound = {
@@ -35,7 +35,7 @@ data.notFound = {
   errorStatus: 404,
   errorStatusText: "Page Not Found",
   isReady: true,
-  isFetching: false
+  isFetching: false,
 };
 
 data.taxonomy = {
@@ -44,13 +44,13 @@ data.taxonomy = {
     {
       id: 60,
       type: "post",
-      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss"
+      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss",
     },
     {
       id: 57,
       type: "post",
-      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/"
-    }
+      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+    },
   ],
   isReady: true,
   isFetching: false,
@@ -60,7 +60,7 @@ data.taxonomy = {
   id: 12,
   isTaxonomy: true,
   page: 1,
-  path: "/"
+  path: "/",
 };
 
 data.taxonomyWithSearchData = {
@@ -69,13 +69,13 @@ data.taxonomyWithSearchData = {
     {
       id: 60,
       type: "post",
-      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss"
+      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss",
     },
     {
       id: 57,
       type: "post",
-      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/"
-    }
+      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+    },
   ],
   isReady: true,
   isFetching: false,
@@ -88,7 +88,7 @@ data.taxonomyWithSearchData = {
   path: "/",
   link: "/url",
   isSearch: true,
-  searchQuery: "nature"
+  searchQuery: "nature",
 };
 
 data.category = {
@@ -101,7 +101,7 @@ data.category = {
   isReady: true,
   isFetching: false,
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.categoryWithSearchData = {
@@ -118,7 +118,7 @@ data.categoryWithSearchData = {
   total: 0,
   totalPages: 0,
   isSearch: true,
-  searchQuery: "nature"
+  searchQuery: "nature",
 };
 
 data.tag = {
@@ -131,7 +131,7 @@ data.tag = {
   isReady: true,
   isFetching: false,
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.tagWithSearchData = {
@@ -148,7 +148,7 @@ data.tagWithSearchData = {
   isSearch: true,
   searchQuery: "nature",
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.author = {
@@ -159,7 +159,7 @@ data.author = {
   isReady: true,
   isFetching: false,
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.authorWithSearchData = {
@@ -174,7 +174,7 @@ data.authorWithSearchData = {
   isSearch: true,
   searchQuery: "nature",
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.postTypeArchive = {
@@ -185,7 +185,7 @@ data.postTypeArchive = {
   isReady: true,
   isFetching: false,
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.postTypeArchiveWithSearchData = {
@@ -200,7 +200,7 @@ data.postTypeArchiveWithSearchData = {
   isSearch: true,
   searchQuery: "nature",
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.postArchive = {
@@ -213,7 +213,7 @@ data.postArchive = {
   isReady: true,
   isFetching: false,
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.postArchiveWithSearchData = {
@@ -230,7 +230,7 @@ data.postArchiveWithSearchData = {
   isSearch: true,
   searchQuery: "nature",
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.dateArchive = {
@@ -243,7 +243,7 @@ data.dateArchive = {
   isReady: true,
   isFetching: false,
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.dateArchiveWithSearchData = {
@@ -260,7 +260,7 @@ data.dateArchiveWithSearchData = {
   isSearch: true,
   searchQuery: "nature",
   total: 0,
-  totalPages: 0
+  totalPages: 0,
 };
 
 data.postType = {
@@ -268,7 +268,7 @@ data.postType = {
   type: "type",
   id: 60,
   isReady: true,
-  isFetching: false
+  isFetching: false,
 };
 
 data.post = {
@@ -277,7 +277,7 @@ data.post = {
   type: "post",
   id: 60,
   isReady: true,
-  isFetching: false
+  isFetching: false,
 };
 
 data.page = {
@@ -286,7 +286,7 @@ data.page = {
   type: "page",
   id: 11,
   isReady: true,
-  isFetching: false
+  isFetching: false,
 };
 
 data.attachment = {
@@ -295,7 +295,7 @@ data.attachment = {
   type: "attachment",
   id: 123,
   isReady: true,
-  isFetching: false
+  isFetching: false,
 };
 
 expectType<Data>(data.onlyStatus);

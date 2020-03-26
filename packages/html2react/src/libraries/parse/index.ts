@@ -47,7 +47,7 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
           return props;
         },
         {}
-      )
+      ),
     };
 
     node.children = himalayaNode.children.reduce(
@@ -66,7 +66,7 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
     if (content.trim().length) {
       node = {
         type: himalayaNode.type,
-        content: content
+        content: content,
       };
     } else return null;
   }
@@ -77,7 +77,7 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
     if (content.trim().length) {
       node = {
         type: himalayaNode.type,
-        content: content
+        content: content,
       };
     } else return null;
   }
@@ -87,7 +87,7 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
   return node;
 };
 
-const parse: Parse = html =>
+const parse: Parse = (html) =>
   himalaya(html).reduce((tree: Node[], element) => {
     const adapted = adaptNode(element);
     if (adapted) tree.push(adapted);

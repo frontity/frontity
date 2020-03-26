@@ -12,7 +12,7 @@ import GoogleAnalyticsPkg from "../../../types";
 
 const getState = (): State<GoogleAnalyticsPkg> => ({
   analytics: { namespaces: ["googleAnalytics"] },
-  googleAnalytics: {}
+  googleAnalytics: {},
 });
 
 describe("GoogleAnalytics", () => {
