@@ -19,7 +19,7 @@ import {
   AuthorWithSearchData,
   PostTypeArchiveWithSearchData,
   PostArchiveWithSearchData,
-  DateWithSearchData
+  DateWithSearchData,
 } from "../data";
 
 const data = {} as Data;

@@ -8,49 +8,49 @@ export const getTrackerName = (id: string) =>
 const googleAnalytics: GoogleAnalytics = {
   roots: {
     ...analytics.roots,
-    googleAnalytics: Root
+    googleAnalytics: Root,
   },
   actions: {
     ...analytics.actions,
     googleAnalytics: {
-      sendPageview: ({ state }) => pageview => {
+      sendPageview: ({ state }) => (pageview) => {
         // Get Tracking ids from state.
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
 
         // Send the pageview to the trackers.
-        ids.forEach(id =>
+        ids.forEach((id) =>
           window.ga(`${getTrackerName(id)}.send`, {
             hitType: "pageview",
-            ...pageview
+            ...pageview,
           })
         );
       },
-      sendEvent: ({ state }) => event => {
+      sendEvent: ({ state }) => (event) => {
         // Get Tracking ids from state.
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
 
         ids
-          .map(id => getTrackerName(id))
-          .forEach(name => {
+          .map((id) => getTrackerName(id))
+          .forEach((name) => {
             window.ga(`${name}.send`, {
               hitType: "event",
               eventCategory: event.category,
               eventAction: event.action,
-              eventLabel: event.label
+              eventLabel: event.label,
             });
           });
-      }
-    }
+      },
+    },
   },
   state: {
     analytics: {
       ...analytics.state.analytics,
-      namespaces: ["googleAnalytics"]
+      namespaces: ["googleAnalytics"],
     },
-    googleAnalytics: {}
-  }
+    googleAnalytics: {},
+  },
 };
 
 export default googleAnalytics;

@@ -21,26 +21,26 @@ beforeEach(() => {
     state: {
       frontity: {
         platform: "server",
-        initialLink: "/initial/link/"
+        initialLink: "/initial/link/",
       },
       router: { ...tinyRouter.state.router },
       source: {
-        get: () => get
-      }
+        get: () => get,
+      },
     },
     actions: {
       router: {
-        ...tinyRouter.actions.router
+        ...tinyRouter.actions.router,
       },
       source: {
-        fetch: () => fetch
-      }
+        fetch: () => fetch,
+      },
     },
     libraries: {
       source: {
-        normalize
-      }
-    }
+        normalize,
+      },
+    },
   };
 });
 
@@ -105,7 +105,7 @@ describe("actions", () => {
 
       window.dispatchEvent(
         new PopStateEvent("popstate", {
-          state: { link: "/tag/japan/page/3/" }
+          state: { link: "/tag/japan/page/3/" },
         })
       );
 
@@ -119,7 +119,7 @@ describe("actions", () => {
       const ctx = {} as Context;
       get.mockReturnValue({});
       Object.defineProperty(frontity, "warn", {
-        value: jest.fn()
+        value: jest.fn(),
       });
       const store = createStore(config);
       store.actions.source = undefined;

@@ -14,11 +14,11 @@ export class EventPromised<Events> extends Promise<any> {
     executor = executor == undefined ? () => undefined : executor;
     super((resolve, reject) =>
       executor(
-        result => {
+        (result) => {
           emitter.removeAllListeners();
           resolve(result);
         },
-        error => {
+        (error) => {
           emitter.removeAllListeners();
           reject(error);
         },

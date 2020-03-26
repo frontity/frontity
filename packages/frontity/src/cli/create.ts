@@ -12,7 +12,7 @@ export default async ({
   theme,
   typescript,
   useCwd,
-  prompt: promptUser
+  prompt: promptUser,
 }: {
   name: string;
   theme: string;
@@ -37,8 +37,8 @@ export default async ({
         name: "name",
         type: "input",
         message: "Enter a name for the project:",
-        default: "my-frontity-project"
-      }
+        default: "my-frontity-project",
+      },
     ];
 
     const answers = await prompt(questions);
@@ -62,14 +62,14 @@ export default async ({
         choices: [
           {
             name: "@frontity/mars-theme (default)",
-            value: "@frontity/mars-theme"
+            value: "@frontity/mars-theme",
           },
           {
             name: "@frontity/twentytwenty-theme",
-            value: "@frontity/twentytwenty-theme"
-          }
-        ]
-      }
+            value: "@frontity/twentytwenty-theme",
+          },
+        ],
+      },
     ];
 
     const answers = await prompt(questions);
@@ -96,14 +96,14 @@ export default async ({
         name: "subscribe",
         type: "confirm",
         message: "Do you want to receive framework updates by email?",
-        default: false
+        default: false,
       },
       {
         name: "email",
         type: "input",
         message: "Please, enter your email:",
-        when: answers => answers.subscribe
-      }
+        when: (answers) => answers.subscribe,
+      },
     ];
     const answers = await prompt(subscribeQuestions);
 

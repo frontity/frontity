@@ -59,7 +59,7 @@ const cssReset = css`
   }
 `;
 
-const documentSetup = colors => css`
+const documentSetup = (colors) => css`
   html {
     font-size: 62.5%; /* 1rem = 10px */
   }
@@ -98,7 +98,7 @@ const accessibilitySettings = css`
   }
 `;
 
-const elementBase = colors => css`
+const elementBase = (colors) => css`
   main {
     display: block;
   }
@@ -303,7 +303,7 @@ const listStyle = css`
   }
 `;
 
-const quoteStyle = colors => css`
+const quoteStyle = (colors) => css`
   blockquote {
     border-color: ${colors.primary};
     border-style: solid;
@@ -336,7 +336,7 @@ const quoteStyle = colors => css`
   }
 `;
 
-const codeStyle = colors => css`
+const codeStyle = (colors) => css`
   code,
   kbd,
   pre,
@@ -368,7 +368,7 @@ const codeStyle = colors => css`
   }
 `;
 
-const mediaStyle = colors => css`
+const mediaStyle = (colors) => css`
   figure {
     display: block;
     margin: 0;
@@ -408,7 +408,7 @@ const mediaStyle = colors => css`
   }
 `;
 
-const tableStyles = colors => css`
+const tableStyles = (colors) => css`
   table {
     border: 0.1rem solid ${colors.gray.light};
     border-collapse: collapse;
@@ -455,7 +455,7 @@ const tableStyles = colors => css`
   }
 `;
 
-const globalStyle = colors =>
+const globalStyle = (colors) =>
   css([
     cssReset,
     documentSetup(colors),
@@ -465,7 +465,7 @@ const globalStyle = colors =>
     quoteStyle(colors),
     codeStyle(colors),
     mediaStyle(colors),
-    tableStyles(colors)
+    tableStyles(colors),
   ]);
 
 export default globalStyle;

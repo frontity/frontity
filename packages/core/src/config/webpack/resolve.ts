@@ -15,6 +15,6 @@ export default (): Configuration["resolve"] => ({
     // Force ramda to be the esModule version to support tree-shaking.
     "ramda/src": "ramda/es",
     // Avoid dynamic imports with Koa require.
-    "any-promise": "promise-monofill"
-  }
+    "any-promise": "promise-monofill",
+  },
 });

@@ -28,13 +28,13 @@ describe("date", () => {
       .mockResolvedValueOnce(
         mockResponse(date2019Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       )
       .mockResolvedValueOnce(
         mockResponse(date2019PostsPage2, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -51,13 +51,13 @@ describe("date", () => {
       .mockResolvedValueOnce(
         mockResponse(date2019Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       )
       .mockResolvedValueOnce(
         mockResponse(date2019PostsPage2, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -72,7 +72,7 @@ describe("date", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(date201901Posts, {
         "X-WP-Total": "2",
-        "X-WP-TotalPages": "1"
+        "X-WP-TotalPages": "1",
       })
     );
     // Fetch entities
@@ -86,7 +86,7 @@ describe("date", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(date20190101Posts, {
         "X-WP-Total": "1",
-        "X-WP-TotalPages": "1"
+        "X-WP-TotalPages": "1",
       })
     );
     // Fetch entities
@@ -103,7 +103,7 @@ describe("date", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(date20190101PostsCpt, {
         "X-WP-Total": "2",
-        "X-WP-TotalPages": "1"
+        "X-WP-TotalPages": "1",
       })
     );
     // Fetch entities

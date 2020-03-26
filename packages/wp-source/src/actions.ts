@@ -6,7 +6,7 @@ import { getMatch } from "./libraries/get-match";
 import {
   postTypeHandler,
   postTypeArchiveHandler,
-  taxonomyHandler
+  taxonomyHandler,
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
@@ -37,7 +37,7 @@ const actions: WpSource["actions"]["source"] = {
         query,
         page,
         isFetching: true,
-        isReady: false
+        isReady: false,
       };
     } else if (data.isReady || data.isFetching || data.isError) {
       return;
@@ -64,13 +64,13 @@ const actions: WpSource["actions"]["source"] = {
         params: handler.params,
         state,
         libraries,
-        force
+        force,
       });
       // Everything OK.
       source.data[link] = {
         ...source.data[link],
         isFetching: false,
-        isReady: true
+        isReady: true,
       };
       // Set isHome value if it's true.
       if (isHome) source.data[link].isHome = true;
@@ -85,7 +85,7 @@ const actions: WpSource["actions"]["source"] = {
           isFetching: false,
           [`is${e.status}`]: true,
           errorStatus: e.status,
-          errorStatusText: e.statusText
+          errorStatusText: e.statusText,
         };
         source.data[link] = errorData;
       } else {
@@ -118,7 +118,7 @@ const actions: WpSource["actions"]["source"] = {
         name: type,
         priority: 10,
         pattern: concatPath(type, "/:slug"),
-        func: postTypeHandler({ endpoints: [endpoint] })
+        func: postTypeHandler({ endpoints: [endpoint] }),
       });
       // Archive.
       if (archive)
@@ -126,7 +126,7 @@ const actions: WpSource["actions"]["source"] = {
           name: `${type} archive`,
           priority: 10,
           pattern: concatPath(archive),
-          func: postTypeArchiveHandler({ type, endpoint })
+          func: postTypeArchiveHandler({ type, endpoint }),
         });
     });
 
@@ -141,8 +141,8 @@ const actions: WpSource["actions"]["source"] = {
             taxonomy,
             endpoint,
             postTypeEndpoint,
-            params
-          })
+            params,
+          }),
         });
       }
     );
@@ -152,7 +152,7 @@ const actions: WpSource["actions"]["source"] = {
       homepage,
       postsPage,
       categoryBase,
-      tagBase
+      tagBase,
     } = state.source;
 
     if (homepage) {
@@ -161,7 +161,7 @@ const actions: WpSource["actions"]["source"] = {
         name: "homepage",
         priority: 10,
         pattern,
-        func: () => concatPath(homepage)
+        func: () => concatPath(homepage),
       });
     }
 
@@ -171,7 +171,7 @@ const actions: WpSource["actions"]["source"] = {
         name: "posts page",
         priority: 10,
         pattern,
-        func: () => "/"
+        func: () => "/",
       });
     }
 
@@ -182,14 +182,14 @@ const actions: WpSource["actions"]["source"] = {
         name: "category base",
         priority: 10,
         pattern,
-        func: ({ subpath }) => `/category/${subpath}/`
+        func: ({ subpath }) => `/category/${subpath}/`,
       });
       // Remove old direction.
       redirections.push({
         name: "category base (reverse)",
         priority: 10,
         pattern: concatPath(subdirectory, "/category/(.*)/"),
-        func: () => ""
+        func: () => "",
       });
     }
 
@@ -200,14 +200,14 @@ const actions: WpSource["actions"]["source"] = {
         name: "tag base",
         priority: 10,
         pattern,
-        func: ({ subpath }) => `/tag/${subpath}/`
+        func: ({ subpath }) => `/tag/${subpath}/`,
       });
       // Remove old direction.
       redirections.push({
         name: "tag base (reverse)",
         priority: 10,
         pattern: concatPath(subdirectory, "/tag/(.*)/"),
-        func: () => ""
+        func: () => "",
       });
     }
 
@@ -218,16 +218,16 @@ const actions: WpSource["actions"]["source"] = {
         name: "subdirectory",
         priority: 10,
         pattern,
-        func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
+        func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`,
       });
       // Remove old direction.
       redirections.push({
         name: "subdirectory (reverse)",
         priority: 10,
         pattern: "/(.*)",
-        func: () => ""
+        func: () => "",
       });
     }
-  }
+  },
 };
 export default actions;

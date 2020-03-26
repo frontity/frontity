@@ -17,7 +17,7 @@ type Type = "client" | "server" | "inline";
 export const entryPoint = async ({
   name,
   mode,
-  type
+  type,
 }: {
   name: string;
   mode: string;
@@ -63,10 +63,10 @@ export const entryPoint = async ({
 // Throw if any of the packages is not installed.
 export const checkForPackages = async ({ sites }: { sites: Site[] }) => {
   // Turn the list into an array of package names.
-  const packages = uniq(flatten(sites.map(site => site.packages)));
+  const packages = uniq(flatten(sites.map((site) => site.packages)));
   await Promise.all(
     // Iterate over the packages.
-    packages.map(async name => {
+    packages.map(async (name) => {
       // Check if the folder exists.
       const exists = await pathExists(
         resolve(process.cwd(), "node_modules", name)
@@ -82,7 +82,7 @@ export const checkForPackages = async ({ sites }: { sites: Site[] }) => {
 // Turn a list of sites into a list of packages that can be used to create the templates.
 const getPackagesList = async ({
   sites,
-  type
+  type,
 }: {
   sites: Site[];
   type: Type;
@@ -90,24 +90,28 @@ const getPackagesList = async ({
   // Get a flat array of unique packages and its modes.
   const packages = uniqBy(
     flatten(
-      sites.map(site => site.packages.map(name => ({ mode: site.mode, name })))
+      sites.map((site) =>
+        site.packages.map((name) => ({ mode: site.mode, name }))
+      )
     ),
     ({ mode, name }) => `${mode}${name}`
   );
-  return (await Promise.all(
-    // Iterate over the packages.
-    packages.map(async ({ name, mode }) => {
-      // Check if the entry point of that mode exists.
-      const path = await entryPoint({ name, mode, type });
-      return { name, mode, path };
-    })
-    // Remove the packages where the entry point doesn't exist.
-  )).filter(({ path }) => path !== "");
+  return (
+    await Promise.all(
+      // Iterate over the packages.
+      packages.map(async ({ name, mode }) => {
+        // Check if the entry point of that mode exists.
+        const path = await entryPoint({ name, mode, type });
+        return { name, mode, path };
+      })
+      // Remove the packages where the entry point doesn't exist.
+    )
+  ).filter(({ path }) => path !== "");
 };
 
 const generateImportsTemplate = ({
   packages,
-  type
+  type,
 }: {
   packages: Package[];
   type: Type;
@@ -130,7 +134,7 @@ const generateImportsTemplate = ({
 
 const generateHotModuleTemplate = ({
   packages,
-  template
+  template,
 }: {
   packages: Package[];
   template: string;
@@ -163,7 +167,7 @@ const generateHotModuleTemplate = ({
 // Create an entry-point file for the server and return the bundle name and path.
 export const generateServerEntryPoint = async ({
   sites,
-  outDir
+  outDir,
 }: {
   sites: Site[];
   outDir: string;
@@ -180,39 +184,44 @@ export const generateServerEntryPoint = async ({
 export const generateClientEntryPoints = async ({
   sites,
   outDir,
-  mode
+  mode,
 }: {
   sites: Site[];
   outDir: string;
   mode: Mode;
 }): Promise<EntryPoints[]> => {
-  return (await Promise.all(
-    // Iterate over the sites
-    sites.map(async site => {
-      const packages = await getPackagesList({ sites: [site], type: "client" });
-      if (packages.length === 0) return;
-      let template = generateImportsTemplate({
-        packages,
-        type: "client"
-      });
-      if (mode === "development") {
-        template = generateHotModuleTemplate({ template, packages });
-      }
-      // Create sub-folder for site.
-      await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
-      // Write the file and return the bundle.
-      const path = `${outDir}/bundling/entry-points/${site.name}/client.ts`;
-      await writeFile(path, template, "utf8");
-      return { name: site.name, path };
-    })
-    // Filter non-existent bundles.
-  )).filter(bundle => bundle);
+  return (
+    await Promise.all(
+      // Iterate over the sites
+      sites.map(async (site) => {
+        const packages = await getPackagesList({
+          sites: [site],
+          type: "client",
+        });
+        if (packages.length === 0) return;
+        let template = generateImportsTemplate({
+          packages,
+          type: "client",
+        });
+        if (mode === "development") {
+          template = generateHotModuleTemplate({ template, packages });
+        }
+        // Create sub-folder for site.
+        await ensureDir(`${outDir}/bundling/entry-points/${site.name}`);
+        // Write the file and return the bundle.
+        const path = `${outDir}/bundling/entry-points/${site.name}/client.ts`;
+        await writeFile(path, template, "utf8");
+        return { name: site.name, path };
+      })
+      // Filter non-existent bundles.
+    )
+  ).filter((bundle) => bundle);
 };
 
 export default async ({
   sites,
   outDir,
-  mode
+  mode,
 }: {
   sites: Site[];
   outDir: string;
@@ -226,7 +235,7 @@ export default async ({
   const clientEntryPoints = await generateClientEntryPoints({
     sites,
     outDir,
-    mode
+    mode,
   });
 
   return [...clientEntryPoints, serverEntryPoints];

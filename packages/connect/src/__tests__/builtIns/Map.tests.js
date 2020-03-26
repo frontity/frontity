@@ -63,7 +63,7 @@ describe("Map", () => {
     const map = observable(new Map());
     observe(() => {
       dummy = 0;
-      map.forEach(num => (dummy += num));
+      map.forEach((num) => (dummy += num));
     });
 
     expect(dummy).toEqual(0);
@@ -215,7 +215,7 @@ describe("Map", () => {
       for (let num of raw(map).values()) {
         dummy += num;
       }
-      raw(map).forEach(num => {
+      raw(map).forEach((num) => {
         dummy += num;
       });
       // eslint-disable-next-line no-unused-vars
@@ -302,7 +302,7 @@ describe("Map", () => {
     const map = observable(new Map());
     map.set("key", {});
 
-    map.forEach(value => expect(isObservable(value)).toBe(false));
+    map.forEach((value) => expect(isObservable(value)).toBe(false));
     for (let [, value] of map) {
       expect(isObservable(value)).toBe(false);
     }
@@ -314,7 +314,7 @@ describe("Map", () => {
     }
 
     observe(() => {
-      map.forEach(value => expect(isObservable(value)).toBe(true));
+      map.forEach((value) => expect(isObservable(value)).toBe(true));
       for (let [, value] of map) {
         expect(isObservable(value)).toBe(true);
       }
@@ -326,7 +326,7 @@ describe("Map", () => {
       }
     });
 
-    map.forEach(value => expect(isObservable(value)).toBe(true));
+    map.forEach((value) => expect(isObservable(value)).toBe(true));
     for (let [, value] of map) {
       expect(isObservable(value)).toBe(true);
     }

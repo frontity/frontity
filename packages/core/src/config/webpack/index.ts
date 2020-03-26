@@ -5,7 +5,7 @@ import {
   WebpackConfigs,
   BabelConfigs,
   EntryPoints,
-  FrontityConfig
+  FrontityConfig,
 } from "../../../types";
 import name from "./name";
 import targets from "./targets";
@@ -22,7 +22,7 @@ export default ({
   mode,
   babel,
   frontity,
-  entryPoints
+  entryPoints,
 }: {
   mode: Mode;
   babel: BabelConfigs;
@@ -40,12 +40,12 @@ export default ({
     resolve: resolve(),
     externals: externals({ target }),
     plugins: plugins({ target, mode, outDir: frontity.outDir }),
-    performance: performance({ target })
+    performance: performance({ target }),
   });
 
   return {
     module: getConfig("module"),
     es5: getConfig("es5"),
-    server: getConfig("server")
+    server: getConfig("server"),
   };
 };

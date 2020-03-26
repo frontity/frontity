@@ -19,7 +19,7 @@ export default async ({ packages }) => {
         state: window["frontity"]
           ? window["frontity"].getSnapshot()
           : JSON.parse(stateElement.innerHTML),
-        packages
+        packages,
       });
 
       // Run init actions.

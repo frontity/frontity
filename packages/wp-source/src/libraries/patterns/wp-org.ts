@@ -6,7 +6,7 @@ import {
   date,
   post,
   attachment,
-  postType
+  postType,
 } from "../handlers";
 
 export default [
@@ -14,54 +14,54 @@ export default [
     name: "post archive",
     priority: 20,
     pattern: "/",
-    func: postArchive
+    func: postArchive,
   },
   {
     name: "category",
     priority: 20,
     pattern: "/category/(.*)?/:slug",
-    func: category
+    func: category,
   },
   {
     name: "tag",
     priority: 20,
     pattern: "/tag/:slug",
-    func: tag
+    func: tag,
   },
   {
     name: "author",
     priority: 20,
     pattern: "/author/:slug",
-    func: author
+    func: author,
   },
   {
     name: "date",
     priority: 20,
     pattern: "/:year(\\d+)/:month(\\d+)?/:day(\\d+)?",
-    func: date
+    func: date,
   },
   {
     name: "attachment from post by day",
     priority: 20,
     pattern: "/:year(\\d+)/:month(\\d+)/:day(\\d+)?/:postSlug(.*\\D.*)/:slug", // day & name
-    func: attachment
+    func: attachment,
   },
   {
     name: "post by id",
     priority: 20,
     pattern: "/archives/:id(\\d+)", // numeric
-    func: post
+    func: post,
   },
   {
     name: "attachment from post by id",
     priority: 20,
     pattern: "/archives/:postId(\\d+)/:slug", // numeric
-    func: attachment
+    func: attachment,
   },
   {
     name: "post type",
     priority: 30,
     pattern: "/(.*)?/:slug", // post or page or attachment
-    func: postType
-  }
+    func: postType,
+  },
 ];

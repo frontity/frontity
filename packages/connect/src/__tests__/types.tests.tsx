@@ -1,7 +1,7 @@
 import React from "react";
 import connect, { createStore, Action, Derived, Connect } from "..";
 
-const delay = () => new Promise(resolve => setTimeout(resolve, 100));
+const delay = () => new Promise((resolve) => setTimeout(resolve, 100));
 
 interface Config {
   state: {
@@ -39,9 +39,9 @@ const config: Config = {
     nested1: {
       prop2: 2,
       prop3: ({ state }) => state.prop1 + state.nested1.prop2,
-      prop4: ({ state }) => num => state.nested1.prop3 + num,
-      prop5: 5
-    }
+      prop4: ({ state }) => (num) => state.nested1.prop3 + num,
+      prop5: 5,
+    },
   },
   actions: {
     action1: ({ state }) => {
@@ -50,7 +50,7 @@ const config: Config = {
     nested1: {
       action2: ({ state }) => {
         state.prop1 = 12;
-      }
+      },
     },
     nested2: {
       nested3: {
@@ -62,24 +62,24 @@ const config: Config = {
         action4: ({ state }) => {
           state.nested1.prop5 = state.nested1.prop4(4);
         },
-        action5: ({ state }) => num => {
+        action5: ({ state }) => (num) => {
           state.nested1.prop5 = state.nested1.prop4(num);
-        }
-      }
+        },
+      },
     },
     action6: async ({ state }) => {
       await delay();
       state.prop1 = 6;
     },
-    action7: ({ state, extra }) => async num => {
+    action7: ({ state, extra }) => async (num) => {
       await delay();
       state.prop1 = num;
       const n: number = extra.prop6;
-    }
+    },
   },
   extra: {
-    prop6: 6
-  }
+    prop6: 6,
+  },
 };
 
 test("After creating a store all derived state and actions are fine", () => {
@@ -115,6 +115,7 @@ type Props = Connect<
 let Component: React.FC<Props>;
 
 test("Injected state and actions are fine", () => {
+  // eslint-disable-next-line react/display-name
   Component = ({ state, actions, extra, ownProp1, optionalProp2 }) => {
     const prop1: number = state.prop1;
     const prop2: number = state.nested1.prop2;

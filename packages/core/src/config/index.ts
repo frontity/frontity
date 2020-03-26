@@ -7,7 +7,7 @@ import getFrontity from "./frontity";
 // we will add here logic to inject the frontity.config.js of each package.
 export default ({
   mode,
-  entryPoints
+  entryPoints,
 }: {
   mode: Mode;
   entryPoints: EntryPoints[];
@@ -18,6 +18,6 @@ export default ({
   return {
     babel,
     webpack,
-    frontity
+    frontity,
   };
 };

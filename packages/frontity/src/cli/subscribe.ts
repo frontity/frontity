@@ -10,8 +10,8 @@ export default async ({ email }: { email: string }) => {
       {
         name: "email",
         type: "input",
-        message: "Please, enter your email:"
-      }
+        message: "Please, enter your email:",
+      },
     ];
     const answer = await prompt(subscribeQuestion);
     email = answer.email;

@@ -6,7 +6,7 @@ export const webpackAsync = (
 ): Promise<webpack.Compiler> =>
   new Promise((resolve, reject) => {
     const compiler = webpack(config);
-    compiler.run(err => {
+    compiler.run((err) => {
       if (err) reject(err);
       else resolve(compiler);
     });

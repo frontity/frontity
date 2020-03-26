@@ -6,7 +6,7 @@ import {
   Options,
   createPackageJson,
   createSrcIndexJs,
-  installPackage
+  installPackage,
 } from "../steps/create-package";
 
 import { ensureProjectDir, revertProgress } from "../steps";

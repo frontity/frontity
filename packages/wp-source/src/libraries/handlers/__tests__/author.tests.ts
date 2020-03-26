@@ -28,7 +28,7 @@ describe("author", () => {
       .mockResolvedValueOnce(
         mockResponse(author1Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -40,13 +40,13 @@ describe("author", () => {
     // Add author to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(author1)
+      response: mockResponse(author1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(author1PostsPage2, {
         "X-WP-Total": "5",
-        "X-WP-TotalPages": "2"
+        "X-WP-TotalPages": "2",
       })
     );
     // Observe changes in isFetching and isReady properties
@@ -65,7 +65,7 @@ describe("author", () => {
     expect(dataState).toEqual([
       { isFetching: false, isReady: false }, // first values are from a different object
       { isFetching: true, isReady: false }, // fetch starts
-      { isFetching: false, isReady: true } // fetch ends
+      { isFetching: false, isReady: true }, // fetch ends
     ]);
   });
 
@@ -80,7 +80,7 @@ describe("author", () => {
       .mockResolvedValueOnce(
         mockResponse(author1PostsCpt, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -117,7 +117,7 @@ describe("author", () => {
       .mockResolvedValueOnce(
         mockResponse([], {
           "X-WP-Total": "0",
-          "X-WP-TotalPages": "0"
+          "X-WP-TotalPages": "0",
         })
       );
     // Fetch entities
@@ -144,7 +144,7 @@ describe("author", () => {
       .mockResolvedValueOnce(
         mockResponse(author1Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -160,7 +160,7 @@ describe("author", () => {
       .mockResolvedValueOnce(
         mockResponse(author1Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities

@@ -21,7 +21,7 @@ function batchFn(fn) {
   }
   let batched = cache.get(fn);
   if (!batched) {
-    batched = function(...args) {
+    batched = function (...args) {
       return batch(fn, this, args);
     };
     cache.set(fn, batched);
@@ -40,13 +40,13 @@ function batchMethodCallbacks(obj, method) {
     obj[method] = new Proxy(descriptor.value, {
       apply(target, ctx, args) {
         return Reflect.apply(target, ctx, args.map(batchFn));
-      }
+      },
     });
   }
 }
 
 function batchMethodsCallbacks(obj, methods) {
-  methods.forEach(method => batchMethodCallbacks(obj, method));
+  methods.forEach((method) => batchMethodCallbacks(obj, method));
 }
 
 // batches obj.onevent = fn like calls
@@ -56,14 +56,14 @@ function batchMethod(obj, method) {
     const newDescriptor = Object.assign({}, descriptor, {
       set(value) {
         return descriptor.set.call(this, batchFn(value));
-      }
+      },
     });
     Object.defineProperty(obj, method, newDescriptor);
   }
 }
 
 function batchMethods(obj, methods) {
-  methods.forEach(method => batchMethod(obj, method));
+  methods.forEach((method) => batchMethod(obj, method));
 }
 
 // do a sync batching for the most common task sources
@@ -75,7 +75,7 @@ if (typeof window !== "undefined" && window["Proxy"]) {
     "setTimeout",
     "setInterval",
     "requestAnimationFrame",
-    "requestIdleCallback"
+    "requestIdleCallback",
   ]);
 
   if (globalObj.Promise) {
@@ -86,7 +86,7 @@ if (typeof window !== "undefined" && window["Proxy"]) {
   if (globalObj.EventTarget) {
     batchMethodsCallbacks(EventTarget.prototype, [
       "addEventListener",
-      "removeEventListener"
+      "removeEventListener",
     ]);
   }
 
@@ -96,7 +96,7 @@ if (typeof window !== "undefined" && window["Proxy"]) {
       "onopen",
       "onmessage",
       "onerror",
-      "onclose"
+      "onclose",
     ]);
   }
 }

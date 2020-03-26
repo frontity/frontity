@@ -9,9 +9,9 @@ const html2react: Html2React = {
     html2react: {
       parse,
       processors: [script],
-      Component
-    }
-  }
+      Component,
+    },
+  },
 };
 
 export default html2react;

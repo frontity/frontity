@@ -2,7 +2,7 @@ import { Decode } from "../../types";
 import simpleDecode from "simple-entity-decode";
 import containsHTMLEntities from "./containsHTMLEntities";
 
-const decode: Decode = text => {
+const decode: Decode = (text) => {
   // If we are free of HTML entities, just return the text
   if (!containsHTMLEntities(text)) {
     return text;

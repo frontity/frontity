@@ -7,8 +7,8 @@ const execOptions: ExecSyncOptionsWithStringEncoding = {
   stdio: [
     "pipe", // stdin (default)
     "pipe", // stdout (default)
-    "ignore" //stderr
-  ]
+    "ignore", //stderr
+  ],
 };
 
 function isProcessAReactApp(processCommand) {

@@ -46,7 +46,7 @@ export type Action<
   ? ({
       state,
       actions,
-      libraries
+      libraries,
     }: {
       state: ResolveState<Pkg["state"]>;
       actions: ResolveActions<Pkg["actions"]>;
@@ -55,7 +55,7 @@ export type Action<
   : ({
       state,
       actions,
-      libraries
+      libraries,
     }: {
       state: ResolveState<Pkg["state"]>;
       actions: ResolveActions<Pkg["actions"]>;
@@ -111,7 +111,7 @@ export type AsyncAction<
   ? ({
       state,
       actions,
-      libraries
+      libraries,
     }: {
       state: ResolveState<Pkg["state"]>;
       actions: ResolveActions<Pkg["actions"]>;
@@ -120,7 +120,7 @@ export type AsyncAction<
   : ({
       state,
       actions,
-      libraries
+      libraries,
     }: {
       state: ResolveState<Pkg["state"]>;
       actions: ResolveActions<Pkg["actions"]>;

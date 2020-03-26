@@ -16,7 +16,7 @@ const PostCategories = ({ categories }) => {
       <ScreenReaderText>Categories</ScreenReaderText>
 
       <EntryCategoriesInner>
-        {postCategories.map(category => (
+        {postCategories.map((category) => (
           <CategoryTag key={category.id} link={category.link}>
             {decode(category.name)}
           </CategoryTag>

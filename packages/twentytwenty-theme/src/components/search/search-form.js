@@ -13,7 +13,7 @@ const SearchForm = ({ state, actions, libraries }) => {
   // Keep a reference to the input so we can grab it's value on form submission
   const inputRef = useRef();
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     // Prevent page navigation
     event.preventDefault();
 

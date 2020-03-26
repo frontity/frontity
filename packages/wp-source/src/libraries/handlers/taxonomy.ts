@@ -3,14 +3,14 @@ import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
 import {
   TaxonomyData,
-  TaxonomyWithSearchData
+  TaxonomyWithSearchData,
 } from "@frontity/source/types/data";
 
 const taxonomyHandler = ({
   taxonomy,
   endpoint,
   postTypeEndpoint,
-  params: handlerParams = {}
+  params: handlerParams = {},
 }: {
   taxonomy: string;
   endpoint: string;
@@ -22,7 +22,7 @@ const taxonomyHandler = ({
   params,
   state,
   libraries,
-  force
+  force,
 }) => {
   // This is only for backward compatibility for the moment when handlers used
   // to receive `route` instead of `link`.
@@ -39,13 +39,13 @@ const taxonomyHandler = ({
     const response = await api.get({
       endpoint,
       params: {
-        slug
-      }
+        slug,
+      },
     });
     const [entity] = await populate({
       response,
       state,
-      force: true
+      force: true,
     });
     if (!entity)
       throw new ServerError(
@@ -64,14 +64,14 @@ const taxonomyHandler = ({
       page,
       _embed: true,
       ...state.source.params,
-      ...handlerParams
-    }
+      ...handlerParams,
+    },
   });
 
   // 3. populate response
   const items = await populate({
     response,
-    state
+    state,
   });
   if (page > 1 && items.length === 0)
     throw new ServerError(
@@ -92,7 +92,7 @@ const taxonomyHandler = ({
     libraries.source.stringify({
       route,
       query,
-      page
+      page,
     });
 
   // 5. add data to source
@@ -116,7 +116,7 @@ const taxonomyHandler = ({
     ...(hasNewerPosts && { next: getPageLink(page + 1) }),
 
     // Add search data if this is a search.
-    ...(query.s && { isSearch: true, searchQuery: query.s })
+    ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
   Object.assign(currentPageData, newPageData);

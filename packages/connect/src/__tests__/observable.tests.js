@@ -32,7 +32,7 @@ describe("observable", () => {
     Object.defineProperty(obj, "prop", {
       value: { num: 12 },
       writable: false,
-      configurable: false
+      configurable: false,
     });
     const obs = observable(obj);
     expect(() => observe(() => (dummy = obs.prop.num))).not.toThrow();
@@ -58,8 +58,8 @@ describe("observable", () => {
       prop2: ({ state }) => state.prop1 + 1,
       nested1: {
         prop3: ({ state }) => state.prop1 + 2,
-        prop4: ({ state }) => state.prop2 + state.nested1.prop3
-      }
+        prop4: ({ state }) => state.prop2 + state.nested1.prop3,
+      },
     };
     const obs = observable(obj);
     expect(obs.prop1).toEqual(1);
@@ -71,12 +71,12 @@ describe("observable", () => {
   it("should be able to return functions from root functions", () => {
     const obj = {
       prop1: 1,
-      prop2: ({ state }) => num => state.prop1 + num,
+      prop2: ({ state }) => (num) => state.prop1 + num,
       nested1: {
-        prop3: ({ state }) => num => state.prop1 + num,
-        prop4: ({ state }) => num =>
-          state.prop2(num) + state.nested1.prop3(num) + num
-      }
+        prop3: ({ state }) => (num) => state.prop1 + num,
+        prop4: ({ state }) => (num) =>
+          state.prop2(num) + state.nested1.prop3(num) + num,
+      },
     };
     const obs = observable(obj);
     expect(obs.prop1).toEqual(1);

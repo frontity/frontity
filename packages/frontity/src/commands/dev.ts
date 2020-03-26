@@ -12,7 +12,7 @@ export default async ({ production, port, https, target, dontOpenBrowser }) => {
     port: parseInt(port, 10) || 3000,
     isHttps: !!https,
     target: target || "module",
-    openBrowser: !dontOpenBrowser
+    openBrowser: !dontOpenBrowser,
   };
 
   try {

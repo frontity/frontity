@@ -12,19 +12,19 @@ beforeEach(() => {
     state: {
       prop1: 1,
       prop2: ({ state }) => state.prop1 + 1,
-      prop3: ({ state }) => num => state.prop1 + num
+      prop3: ({ state }) => (num) => state.prop1 + num,
     },
     actions: {
       action1: ({ state }) => {
         state.prop1 = 2;
       },
-      action2: ({ state }) => num => {
+      action2: ({ state }) => (num) => {
         state.prop1 = num;
-      }
+      },
     },
     libraries: {
-      Component
-    }
+      Component,
+    },
   });
 });
 

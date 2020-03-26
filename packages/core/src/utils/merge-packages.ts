@@ -14,7 +14,7 @@ const overwriteMerge: deepmerge.Options["arrayMerge"] = (_, sourceArray) => {
 export default ({
   packages,
   state,
-  overwriteArrays = false
+  overwriteArrays = false,
 }: {
   packages: {
     [name: string]: Package | PackageFunction;
@@ -27,19 +27,19 @@ export default ({
     fills: {},
     state: {},
     actions: {},
-    libraries: {}
+    libraries: {},
   };
-  state.frontity.packages.forEach(name => {
+  state.frontity.packages.forEach((name) => {
     const variable = getVariable(name, state.frontity.mode);
     const module = packages[variable];
     const pkg = typeof module === "function" ? module() : module;
     config = deepmerge(config, pkg, {
-      clone: false
+      clone: false,
     });
   });
   config.state = deepmerge(config.state, state, {
     clone: true,
-    arrayMerge: overwriteArrays ? overwriteMerge : undefined
+    arrayMerge: overwriteArrays ? overwriteMerge : undefined,
   });
   delete config.name;
   return config;

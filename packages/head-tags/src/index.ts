@@ -7,12 +7,12 @@ const headTags = (): HeadTagsPackage => ({
   roots: { headTags: Component },
   state: {
     headTags: {
-      get: ({ state }) => link => getCurrentHeadTags({ state, link }),
+      get: ({ state }) => (link) => getCurrentHeadTags({ state, link }),
       transformLinks: {
-        ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc"
-      }
-    }
-  }
+        ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
+      },
+    },
+  },
 });
 
 export default headTags;

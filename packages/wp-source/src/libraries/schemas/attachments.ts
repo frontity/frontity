@@ -6,15 +6,15 @@ export const attachmentEntity = new schema.Entity(
   "attachmentEntity",
   {
     _embedded: {
-      author: [authorEntity]
-    }
+      author: [authorEntity],
+    },
   },
   {
     processStrategy(entity) {
       const result = { ...entity };
       result.link = normalize(result.link);
       return result;
-    }
+    },
   }
 );
 

@@ -19,7 +19,7 @@ describe("create-package", () => {
     mockedUtils.errorLogger = jest.fn();
     mockedCreate.default.mockReset();
     mockedCreate.default.mockReturnValue(
-      new EventPromised(resolve => resolve())
+      new EventPromised((resolve) => resolve())
     );
     mockedExit.mockRestore();
     mockedExit.mockImplementation(() => {

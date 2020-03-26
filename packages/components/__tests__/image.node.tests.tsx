@@ -17,7 +17,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading
+      loading,
     };
 
     const image = TestRenderer.create(<Image {...props} />).toJSON();
@@ -31,7 +31,7 @@ describe("Image", () => {
       src: "https://fake-src.com/fake-image.jpg",
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
-      className: "fake-class-name"
+      className: "fake-class-name",
     };
 
     const helmetContext = {} as FilledContext;
@@ -54,7 +54,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      height: 300
+      height: 300,
     };
 
     const helmetContext = {} as FilledContext;

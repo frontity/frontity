@@ -47,7 +47,7 @@ interface ChangeAttributes {
   (attrs: Attributes): Attributes;
 }
 
-const changeAttributes: ChangeAttributes = attrs => {
+const changeAttributes: ChangeAttributes = (attrs) => {
   const attributes = { ...attrs };
 
   attributes.src = attributes["data-src"];
@@ -58,7 +58,7 @@ const changeAttributes: ChangeAttributes = attrs => {
   return attributes;
 };
 
-const NoScriptIframe: NoScriptIframe = props => {
+const NoScriptIframe: NoScriptIframe = (props) => {
   const attributes = { ...props };
 
   return (
@@ -76,7 +76,7 @@ const Iframe: Component = ({
   height,
   className,
   loading = "lazy",
-  rootMargin
+  rootMargin,
 }) => {
   const lazyAttributes: Attributes = {
     "data-src": src,
@@ -85,7 +85,7 @@ const Iframe: Component = ({
     style: { visibility: "hidden" },
     height,
     width,
-    title
+    title,
   };
   const eagerAttributes = changeAttributes(lazyAttributes);
 
@@ -98,7 +98,7 @@ const Iframe: Component = ({
     ) {
       const [ref, inView] = useInView({
         rootMargin,
-        triggerOnce: true
+        triggerOnce: true,
       });
 
       return (
@@ -128,13 +128,13 @@ const Iframe: Component = ({
           {
             id: "frontity-no-proxy-iframe",
             type: "text/javascript",
-            innerHTML: noProxyScript
-          }
+            innerHTML: noProxyScript,
+          },
         ]}
         noscript={[
           {
-            innerHTML: `<style id="frontity-no-js-iframes" type="text/css">${noJsStyles}</style>`
-          }
+            innerHTML: `<style id="frontity-no-js-iframes" type="text/css">${noJsStyles}</style>`,
+          },
         ]}
       />
       <NoScriptIframe {...eagerAttributes} />

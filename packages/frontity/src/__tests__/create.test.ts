@@ -23,7 +23,7 @@ describe("create", () => {
     const options = {
       name: "random-name",
       path: "/path/to/project",
-      theme: "@frontity/mars-theme"
+      theme: "@frontity/mars-theme",
     };
     await create(options);
     expect(mockedSteps.normalizeOptions.mock.calls[0][1]).toMatchSnapshot();
@@ -42,7 +42,7 @@ describe("create", () => {
     const options = {
       name: "random-name",
       path: "/path/to/project",
-      typescript: false
+      typescript: false,
     };
 
     await create(options);
@@ -63,7 +63,7 @@ describe("create", () => {
     const options = {
       name: "random-name",
       path: "/path/to/project",
-      typescript: true
+      typescript: true,
     };
     await create(options);
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
@@ -77,7 +77,7 @@ describe("create", () => {
   test("calls removeProgress on error with dirExisted=true", async () => {
     const options = {
       name: "random-name",
-      path: "/path/to/project"
+      path: "/path/to/project",
     };
     mockedSteps.ensureProjectDir.mockResolvedValueOnce(true);
 
@@ -100,7 +100,7 @@ describe("create", () => {
   test("calls removeProgress on error with dirExisted=false", async () => {
     const options = {
       name: "random-name",
-      path: "/path/to/project"
+      path: "/path/to/project",
     };
     mockedSteps.ensureProjectDir.mockResolvedValueOnce(false);
 
@@ -124,7 +124,7 @@ describe("create", () => {
   test("does not call removeProgress if ensureProjectDir throws error", async () => {
     const options = {
       name: "random-name",
-      path: "/path/to/project"
+      path: "/path/to/project",
     };
 
     try {
@@ -145,7 +145,7 @@ describe("create", () => {
     const emitter = { emit: jest.fn() };
     const options = {
       name: "random-name",
-      path: "/path/to/project"
+      path: "/path/to/project",
     };
     await create(options);
     expect(emitter.emit.mock.calls).toMatchSnapshot();
@@ -154,7 +154,7 @@ describe("create", () => {
   test("Bubbling up the error", async () => {
     const options = {
       name: "random-name",
-      path: "/path/to/project"
+      path: "/path/to/project",
     };
 
     try {
@@ -172,7 +172,7 @@ describe("create", () => {
   test("If no theme is specified, clone the default", async () => {
     const options = {
       name: "random-name",
-      path: "/path/to/project"
+      path: "/path/to/project",
     };
 
     // Restore the original implementation
@@ -194,7 +194,7 @@ describe("create", () => {
     const options = {
       name: "random-name",
       path: "/path/to/project",
-      theme: "@frontity/twentytwenty-theme"
+      theme: "@frontity/twentytwenty-theme",
     };
 
     await create(options);

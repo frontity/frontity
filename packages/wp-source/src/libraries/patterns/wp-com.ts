@@ -5,7 +5,7 @@ import {
   author,
   date,
   post,
-  page
+  page,
 } from "../handlers";
 
 export default [
@@ -13,42 +13,42 @@ export default [
     name: "post archive",
     priority: 20,
     pattern: "/",
-    func: postArchive
+    func: postArchive,
   },
   {
     name: "category",
     priority: 20,
     pattern: "/category/(.*)?/:slug",
-    func: category
+    func: category,
   },
   {
     name: "tag",
     priority: 20,
     pattern: "/tag/:slug",
-    func: tag
+    func: tag,
   },
   {
     name: "author",
     priority: 20,
     pattern: "/author/:slug",
-    func: author
+    func: author,
   },
   {
     name: "date",
     priority: 20,
     pattern: "/:year(\\d+)/:month(\\d+)?/:day(\\d+)?",
-    func: date
+    func: date,
   },
   {
     name: "post",
     priority: 20,
     pattern: "/:year(\\d+)/:month(\\d+)/:day(\\d+)/:slug",
-    func: post
+    func: post,
   },
   {
     name: "page",
     priority: 20,
     pattern: "/(.*)?/:slug",
-    func: page
-  }
+    func: page,
+  },
 ];

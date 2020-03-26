@@ -42,7 +42,7 @@ export const BaseToggle = styled.button`
     right: auto;
     top: auto;
     width: auto;
-    ${props =>
+    ${(props) =>
       props.isMobile &&
       css`
         display: none !important;

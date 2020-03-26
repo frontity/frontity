@@ -7,7 +7,7 @@ import initialState from "./utils/initial-state";
 export default ({
   packages,
   settings,
-  url
+  url,
 }: {
   packages: {
     [name: string]: Package;

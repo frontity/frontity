@@ -5,7 +5,7 @@ import Source, {
   TaxonomyEntity,
   PostEntity,
   AuthorEntity,
-  PostType
+  PostType,
 } from "@frontity/source/types";
 
 /**

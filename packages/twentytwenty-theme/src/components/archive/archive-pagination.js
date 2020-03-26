@@ -46,7 +46,7 @@ const Pagination = ({ state, actions, libraries }) => {
   );
 
   // get page link with page number
-  const getPageLink = page =>
+  const getPageLink = (page) =>
     libraries.source.stringify({ route, query, page });
 
   // Pagination - array of numbers/dots for pages
@@ -100,12 +100,12 @@ const Pagination = ({ state, actions, libraries }) => {
   );
 };
 
-const getMaxWidth = props => maxWidths[props.size] || maxWidths["medium"];
+const getMaxWidth = (props) => maxWidths[props.size] || maxWidths["medium"];
 
 const maxWidths = {
   thin: "58rem",
   small: "80rem",
-  medium: "100rem"
+  medium: "100rem",
 };
 
 const inlineBlock = css`

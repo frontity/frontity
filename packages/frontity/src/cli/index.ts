@@ -21,8 +21,8 @@ tsNode.register({
     // Support for JSX.
     jsx: "react",
     // Transpile JS as well.
-    allowJs: true
-  }
+    allowJs: true,
+  },
 });
 
 import program from "commander";
@@ -97,7 +97,7 @@ program
 program
   .command("subscribe [email]")
   .description("Subscribe to Frontity newsletter.")
-  .action(email => subscribe({ email }));
+  .action((email) => subscribe({ email }));
 
 program
   .command("info")

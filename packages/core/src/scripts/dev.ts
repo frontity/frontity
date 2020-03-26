@@ -18,7 +18,7 @@ export default async ({
   mode,
   port,
   target,
-  openBrowser = true
+  openBrowser = true,
 }: {
   port: number;
   isHttps: boolean;
@@ -45,7 +45,7 @@ export default async ({
     port,
     isHttps,
     target,
-    openBrowser
+    openBrowser,
   });
 
   // Get config for webpack, babel and frontity.
@@ -72,8 +72,8 @@ export default async ({
         errors: true,
         warnings: true,
         errorDetails: true,
-        excludeAssets: /chunks\..*?\.json/
-      }
+        excludeAssets: /chunks\..*?\.json/,
+      },
     })
   );
   app.use(webpackHotMiddleware(compiler.compilers[0]));

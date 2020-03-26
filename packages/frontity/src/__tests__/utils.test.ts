@@ -28,7 +28,7 @@ describe("isPackageNameValid", () => {
       // Unsafe characters extracted from this site:
       // https://perishablepress.com/stop-using-unsafe-characters-in-urls/
       const unsafeChars = "$+!*'(),;?:=&@/";
-      unsafeChars.split("").map(char => {
+      unsafeChars.split("").map((char) => {
         expect(isPackageNameValid(`a${char}a`)).toBe(false);
       });
     });
@@ -38,7 +38,7 @@ describe("isPackageNameValid", () => {
       // Unsafe characters extracted from this question:
       // https://serverfault.com/questions/242110/which-common-charecters-are-illegal-in-unix-and-windows-filesystems
       const unsafeChars = '\\/:*?"<>|';
-      unsafeChars.split("").map(char => {
+      unsafeChars.split("").map((char) => {
         expect(isPackageNameValid(`a${char}a`)).toBe(false);
       });
     });

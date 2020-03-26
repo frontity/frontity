@@ -2,7 +2,7 @@ import {
   ComponentType,
   ComponentProps,
   FunctionComponent,
-  Component
+  Component,
 } from "react";
 
 interface Scheduler {
@@ -24,7 +24,7 @@ type Store = {
 type ResolveState<State> = {
   [P in keyof State]: State[P] extends (state: object) => any
     ? ReturnType<State[P]>
-    : ResolveState<State[P]>
+    : ResolveState<State[P]>;
 };
 
 type ResolveActions<Actions extends any> = {
@@ -36,7 +36,7 @@ type ResolveActions<Actions extends any> = {
       ) => ReturnType<ReturnType<Actions[P]>>
     : Actions[P] extends (...store: any) => void | Promise<void>
     ? () => ReturnType<Actions[P]>
-    : ResolveActions<Actions[P]>
+    : ResolveActions<Actions[P]>;
 };
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -62,7 +62,7 @@ export type Derived<St extends Store, InputOrOutput, Output = null> = [
 ] extends [null]
   ? ({ state }: { state: ResolveState<St["state"]> }) => InputOrOutput
   : ({
-      state
+      state,
     }: {
       state: ResolveState<St["state"]>;
     }) => (input: InputOrOutput) => Output;

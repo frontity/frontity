@@ -8,7 +8,7 @@ import {
   mockPostEntity,
   mockPostType,
   mockTaxonomy,
-  mockAuthor
+  mockAuthor,
 } from "./mocks/utils";
 
 // Spy `console.warn`
@@ -67,9 +67,9 @@ describe("state.headTags.get() (post entity)", () => {
         attributes: {
           name: "robots",
           content:
-            "max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-        }
-      }
+            "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+        },
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -83,23 +83,23 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/post-1/"
-        }
+          href: "https://test.frontity.io/post-1/",
+        },
       },
       {
         tag: "meta",
         attributes: {
           property: "og:url",
-          content: "https://test.frontity.io/post-1/"
-        }
+          content: "https://test.frontity.io/post-1/",
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "shortlink",
-          href: "https://test.frontity.io/?p=1"
-        }
-      }
+          href: "https://test.frontity.io/?p=1",
+        },
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -113,22 +113,24 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "meta",
         attributes: {
           property: "og:image",
-          content: "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg"
-        }
+          content:
+            "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+        },
       },
       {
         tag: "meta",
         attributes: {
           name: "twitter:image",
-          content: "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg"
-        }
+          content:
+            "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "dns-prefetch",
-          href: "//s.w.org"
-        }
+          href: "//s.w.org",
+        },
       },
       {
         tag: "link",
@@ -136,8 +138,8 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "application/rss+xml",
           title: "frontity » Feed",
-          href: "https://test.frontity.io/feed/"
-        }
+          href: "https://test.frontity.io/feed/",
+        },
       },
       {
         tag: "link",
@@ -145,8 +147,8 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "application/rss+xml",
           title: "frontity » Comments Feed",
-          href: "https://test.frontity.io/comments/feed/"
-        }
+          href: "https://test.frontity.io/comments/feed/",
+        },
       },
       {
         tag: "link",
@@ -154,15 +156,15 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "application/rss+xml",
           title: "frontity » Post 1 Comments Feed",
-          href: "https://test.frontity.io/post-1/feed/"
-        }
+          href: "https://test.frontity.io/post-1/feed/",
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/"
-        }
+          href: "https://test.frontity.io/wp-json/",
+        },
       },
       {
         tag: "link",
@@ -170,16 +172,16 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "EditURI",
           type: "application/rsd+xml",
           title: "RSD",
-          href: "https://test.frontity.io/xmlrpc.php?rsd"
-        }
+          href: "https://test.frontity.io/xmlrpc.php?rsd",
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "wlwmanifest",
           type: "application/wlwmanifest+xml",
-          href: "https://test.frontity.io/wp-includes/wlwmanifest.xml"
-        }
+          href: "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+        },
       },
       {
         tag: "link",
@@ -187,8 +189,8 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "application/json+oembed",
           href:
-            "https://test.frontity.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.io%2Fpost-1%2F"
-        }
+            "https://test.frontity.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.io%2Fpost-1%2F",
+        },
       },
       {
         tag: "link",
@@ -196,16 +198,16 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "text/xml+oembed",
           href:
-            "https://test.frontity.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.io%2Fpost-1%2F&format=xml"
-        }
+            "https://test.frontity.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.io%2Fpost-1%2F&format=xml",
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "pingback",
-          href: "https://test.frontity.io/xmlrpc.php"
-        }
-      }
+          href: "https://test.frontity.io/xmlrpc.php",
+        },
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -219,7 +221,7 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "script",
         attributes: {
           type: "application/ld+json",
-          class: "yoast-schema-graph yoast-schema-graph--main"
+          class: "yoast-schema-graph yoast-schema-graph--main",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -231,18 +233,19 @@ describe("state.headTags.get() (post entity)", () => {
               url: "https://test.frontity.io/",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://test.frontity.io/?s={search_term_string}"
-              }
+                target: "https://test.frontity.io/?s={search_term_string}",
+              },
             },
             {
               "@type": "ImageObject",
               "@id": "https://test.frontity.io/post-1/#primaryimage",
               // ...except this one.
-              url: "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg"
-            }
-          ]
-        })
-      }
+              url:
+                "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -256,20 +259,20 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/subdir/post-1/" // should change
-        }
+          href: "https://test.frontity.io/subdir/post-1/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/subdir/wp-json/" // should not change
-        }
+          href: "https://test.frontity.io/subdir/wp-json/", // should not change
+        },
       },
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -278,11 +281,11 @@ describe("state.headTags.get() (post entity)", () => {
               // All these links should change
               "@type": "WebSite",
               "@id": "https://test.frontity.io/subdir/#website",
-              url: "https://test.frontity.io/subdir/"
-            }
-          ]
-        })
-      }
+              url: "https://test.frontity.io/subdir/",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -300,20 +303,20 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/subdir/post-1/" // should change
-        }
+          href: "https://test.frontity.io/subdir/post-1/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/subdir/wp-json/" // should not change
-        }
+          href: "https://test.frontity.io/subdir/wp-json/", // should not change
+        },
       },
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -322,11 +325,11 @@ describe("state.headTags.get() (post entity)", () => {
               // All these links should change
               "@type": "WebSite",
               "@id": "https://test.frontity.io/subdir/#website",
-              url: "https://test.frontity.io/subdir/"
-            }
-          ]
-        })
-      }
+              url: "https://test.frontity.io/subdir/",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -345,9 +348,9 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/subdir/post-1/" // should change
-        }
-      }
+          href: "https://test.frontity.io/subdir/post-1/", // should change
+        },
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -369,7 +372,7 @@ describe("state.headTags.get() (post entity)", () => {
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: `{
   "@context": "https://schema.org",
@@ -385,8 +388,8 @@ describe("state.headTags.get() (post entity)", () => {
       }
     }
   ]
-}`
-      }
+}`,
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -404,20 +407,20 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/post-1/" // should not change
-        }
+          href: "https://test.frontity.io/post-1/", // should not change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/" // should not change
-        }
+          href: "https://test.frontity.io/wp-json/", // should not change
+        },
       },
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -426,11 +429,11 @@ describe("state.headTags.get() (post entity)", () => {
               // All these links should not change
               "@type": "WebSite",
               "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/"
-            }
-          ]
-        })
-      }
+              url: "https://test.frontity.io/",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -448,20 +451,20 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/post-1/" // should not change
-        }
+          href: "https://test.frontity.io/post-1/", // should not change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/" // should not change
-        }
+          href: "https://test.frontity.io/wp-json/", // should not change
+        },
       },
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -470,11 +473,11 @@ describe("state.headTags.get() (post entity)", () => {
               // All these links should not change
               "@type": "WebSite",
               "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/"
-            }
-          ]
-        })
-      }
+              url: "https://test.frontity.io/",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -492,20 +495,20 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://different.frontity.io/blog/post-1/" // should change
-        }
+          href: "https://different.frontity.io/blog/post-1/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/" // should not change
-        }
+          href: "https://test.frontity.io/wp-json/", // should not change
+        },
       },
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -514,11 +517,11 @@ describe("state.headTags.get() (post entity)", () => {
               // All these links should change
               "@type": "WebSite",
               "@id": "https://different.frontity.io/blog/#website",
-              url: "https://different.frontity.io/blog/"
-            }
-          ]
-        })
-      }
+              url: "https://different.frontity.io/blog/",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -539,8 +542,9 @@ describe("state.headTags.get() (post entity)", () => {
         attributes: {
           name: "twitter:image",
           // should change
-          content: "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg"
-        }
+          content:
+            "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+        },
       },
       {
         tag: "link",
@@ -549,9 +553,9 @@ describe("state.headTags.get() (post entity)", () => {
           type: "application/rss+xml",
           title: "frontity » Feed",
           // SHOULD NOT CHANGE
-          href: "https://test.frontity.io/do-not-change/me/"
-        }
-      }
+          href: "https://test.frontity.io/do-not-change/me/",
+        },
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -585,27 +589,27 @@ describe("state.headTags.get() (post type)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/" // should change
-        }
+          href: "https://test.frontity.io/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "next",
-          href: "https://test.frontity.io/page/2/" // should change
-        }
+          href: "https://test.frontity.io/page/2/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/" // should not change
-        }
+          href: "https://test.frontity.io/wp-json/", // should not change
+        },
       },
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -614,11 +618,11 @@ describe("state.headTags.get() (post type)", () => {
               // All these links should change
               "@type": "WebSite",
               "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/"
-            }
-          ]
-        })
-      }
+              url: "https://test.frontity.io/",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -644,27 +648,27 @@ describe("state.headTags.get() (taxonomy)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/category/cat-1/" // should change
-        }
+          href: "https://test.frontity.io/category/cat-1/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "next",
-          href: "https://test.frontity.io/category/cat-1/page/2/" // should change
-        }
+          href: "https://test.frontity.io/category/cat-1/page/2/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/" // should not change
-        }
+          href: "https://test.frontity.io/wp-json/", // should not change
+        },
       },
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -673,11 +677,11 @@ describe("state.headTags.get() (taxonomy)", () => {
               // All these links should change
               "@type": "WebSite",
               "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/"
-            }
-          ]
-        })
-      }
+              url: "https://test.frontity.io/",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -703,27 +707,27 @@ describe("state.headTags.get() (author)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/author/author-1/" // should change
-        }
+          href: "https://test.frontity.io/author/author-1/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "next",
-          href: "https://test.frontity.io/author/author-1/page/2/" // should change
-        }
+          href: "https://test.frontity.io/author/author-1/page/2/", // should change
+        },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/" // should not change
-        }
+          href: "https://test.frontity.io/wp-json/", // should not change
+        },
       },
       {
         tag: "script",
         attributes: {
-          type: "application/ld+json"
+          type: "application/ld+json",
         },
         content: JSON.stringify({
           "@context": "https://schema.org",
@@ -732,11 +736,11 @@ describe("state.headTags.get() (author)", () => {
               // All these links should change
               "@type": "WebSite",
               "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/"
-            }
-          ]
-        })
-      }
+              url: "https://test.frontity.io/",
+            },
+          ],
+        }),
+      },
     ];
     // Populate all state.
     setUpState(store.state, headTags);
@@ -757,8 +761,8 @@ describe("state.headTags.get() (no entity)", () => {
         month: 12,
         day: undefined,
         isFetching: false,
-        isReady: true
-      }
+        isReady: true,
+      },
     };
 
     // Populate router state.

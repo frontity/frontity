@@ -7,7 +7,7 @@ import {
   errorLogger,
   isFrontityProjectRoot,
   isThemeNameValid,
-  log
+  log,
 } from "../utils";
 import { Options } from "../steps/create-package";
 
@@ -23,7 +23,7 @@ import { Options } from "../steps/create-package";
 export default async ({
   name,
   namespace,
-  prompt: promptUser
+  prompt: promptUser,
 }: {
   name: string;
   namespace?: string;
@@ -55,8 +55,8 @@ export default async ({
         name: "name",
         type: "input",
         message: "Enter a name for the package:",
-        default: "my-frontity-package"
-      }
+        default: "my-frontity-package",
+      },
     ];
 
     const answers = await prompt(questions);
@@ -83,8 +83,8 @@ export default async ({
         name: "namespace",
         type: "input",
         message: "Enter the namespace of the package:",
-        default: "theme"
-      }
+        default: "theme",
+      },
     ];
 
     const answers = await prompt(questions);

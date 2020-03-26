@@ -6,7 +6,7 @@ describe("route utils - parse", () => {
       path: "/some/path/",
       route: "/some/path/",
       page: 1,
-      query: {}
+      query: {},
     });
   });
   test("from path (contains 'page')", () => {
@@ -14,7 +14,7 @@ describe("route utils - parse", () => {
       path: "/some-page/",
       route: "/some-page/",
       page: 2,
-      query: {}
+      query: {},
     });
   });
   test("from path (fixes path)", () => {
@@ -22,7 +22,7 @@ describe("route utils - parse", () => {
       path: "/some/path/",
       route: "/some/path/",
       page: 1,
-      query: {}
+      query: {},
     });
   });
   test("from path and page", () => {
@@ -30,7 +30,7 @@ describe("route utils - parse", () => {
       path: "/some/path/",
       route: "/some/path/",
       page: 2,
-      query: {}
+      query: {},
     });
   });
   test("from path and query", () => {
@@ -40,8 +40,8 @@ describe("route utils - parse", () => {
       page: 1,
       query: {
         k1: "v1",
-        k2: "v2"
-      }
+        k2: "v2",
+      },
     });
   });
   test("from path, page and query", () => {
@@ -51,8 +51,8 @@ describe("route utils - parse", () => {
       page: 2,
       query: {
         k1: "v1",
-        k2: "v2"
-      }
+        k2: "v2",
+      },
     });
   });
   test("from root path", () => {
@@ -60,7 +60,7 @@ describe("route utils - parse", () => {
       path: "/",
       route: "/",
       page: 1,
-      query: {}
+      query: {},
     });
   });
   test("from root path and page", () => {
@@ -68,7 +68,7 @@ describe("route utils - parse", () => {
       path: "/",
       route: "/",
       page: 2,
-      query: {}
+      query: {},
     });
   });
   test("from root path, page and query", () => {
@@ -78,8 +78,8 @@ describe("route utils - parse", () => {
       page: 2,
       query: {
         k1: "v1",
-        k2: "v2"
-      }
+        k2: "v2",
+      },
     });
   });
   test("from full URL", () => {
@@ -89,8 +89,8 @@ describe("route utils - parse", () => {
       page: 1,
       query: {
         k1: "v1",
-        k2: "v2"
-      }
+        k2: "v2",
+      },
     });
   });
   test("from name", () => {
@@ -98,7 +98,7 @@ describe("route utils - parse", () => {
       path: "custom-list/",
       route: "custom-list/",
       page: 1,
-      query: {}
+      query: {},
     });
   });
   test("from name (page)", () => {
@@ -106,7 +106,7 @@ describe("route utils - parse", () => {
       path: "custom-list/",
       route: "custom-list/",
       page: 2,
-      query: {}
+      query: {},
     });
   });
 });
@@ -134,8 +134,8 @@ describe("route utils - stringify", () => {
           page: 2,
           query: {
             k1: "v1",
-            k2: "v2"
-          }
+            k2: "v2",
+          },
         })
       ).toBe("/some/path/page/2/?k1=v1&k2=v2");
     });
@@ -146,8 +146,8 @@ describe("route utils - stringify", () => {
           page: 2,
           query: {
             k1: "v1",
-            k2: "v2"
-          }
+            k2: "v2",
+          },
         })
       ).toBe("/page/2/?k1=v1&k2=v2");
     });
@@ -172,8 +172,8 @@ describe("route utils - stringify", () => {
           page: 2,
           query: {
             k1: "v1",
-            k2: "v2"
-          }
+            k2: "v2",
+          },
         })
       ).toBe("/some/path/page/2/?k1=v1&k2=v2");
     });
@@ -184,8 +184,8 @@ describe("route utils - stringify", () => {
           page: 2,
           query: {
             k1: "v1",
-            k2: "v2"
-          }
+            k2: "v2",
+          },
         })
       ).toBe("/page/2/?k1=v1&k2=v2");
     });
