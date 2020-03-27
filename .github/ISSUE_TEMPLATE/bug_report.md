@@ -7,22 +7,29 @@ about: I think something is not working as it should
 
 **_Bug report_**
 
-- [ ] I've searched for existing issues
-- [ ] I've checked documentation: https://docs.frontity.org
-- [ ] I've checked community forum: https://community.frontity.org
+- I've updated both my project and my packages to the latest Frontity versions: https://docs.frontity.org/guides/keep-frontity-updated
+- I've searched for existing issues.
+- I've checked the documentation: https://docs.frontity.org
+- I've checked the community forum: https://community.frontity.org
 
-**Describe the expected behavior**
+**Expected behavior**
 
 <!-- What should happen? -->
 
-**Describe the observed behavior**
+**Observed behavior**
 
 <!-- What happens instead? -->
 
-**Describe the steps involved to reproduce the problem**
+**Steps involved to reproduce the problem**
 
 <!-- Start from the `npx frontity create` command -->
 
-**Add info about your system**
+<!-- Include a link to a repository with the minimum amount of code that presents this problem -->
+
+**Info about your system**
 
 <!-- Run `npx frontity info` in your Frontity root folder and paste the result here -->
+
+**Possible solution**
+
+<!-- If you know about how this should be solved, please indicate it here -->
