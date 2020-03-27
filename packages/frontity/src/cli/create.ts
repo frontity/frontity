@@ -61,7 +61,7 @@ export default async ({
         default: "@frontity/mars-theme",
         choices: [
           {
-            name: "@frontity/mars-theme (default)",
+            name: "@frontity/mars-theme (recommended)",
             value: "@frontity/mars-theme",
           },
           {
