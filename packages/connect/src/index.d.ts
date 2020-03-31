@@ -102,8 +102,9 @@ export type InitializedStore<St extends Store = Store> = Omit<
 > & {
   state: ResolveState<St["state"]>;
   actions: ResolveActions<St["actions"]>;
-  getSnapshot: () => St["state"];
 };
+
+export function getSnapshot(state: object): object;
 
 export function createStore<St extends Store>(store: St): InitializedStore<St>;
 
