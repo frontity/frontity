@@ -23,7 +23,6 @@ export interface CreateStore {
   <Pkg extends Package>(pkg: Pkg): Omit<Pkg, "state" | "actions"> & {
     state: ResolveState<Pkg["state"]>;
     actions: ResolveActions<Pkg["actions"]>;
-    getSnapshot: () => Pkg["state"];
   };
 }
 

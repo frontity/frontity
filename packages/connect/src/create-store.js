@@ -1,6 +1,7 @@
-import { observable } from "./observable";
+import { observable, raw } from "./observable";
 
-const getSnapshot = (obj) => {
+export const getSnapshot = (obj) => {
+  obj = raw(obj);
   if (typeof obj === "function") return;
   if (typeof obj !== "object" || obj === null) return obj;
   if (obj instanceof Date) return new Date(obj.getTime());
@@ -52,7 +53,6 @@ export const createStore = (store) => {
     ...store,
     state: observableState,
     actions: {},
-    getSnapshot: () => getSnapshot(store.state),
   };
   const newActions = convertedActions(store.actions, instance);
   Object.assign(instance.actions, newActions);

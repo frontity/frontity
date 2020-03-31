@@ -1,5 +1,5 @@
 /* eslint-disable require-atomic-updates */
-import { createStore, isObservable } from "..";
+import { createStore, isObservable, getSnapshot } from "..";
 
 let config = {};
 
@@ -181,8 +181,8 @@ describe("createStore actions", () => {
 describe("createStore getSnapshot", () => {
   it("should be able retrieve a serializable snapshot", () => {
     const store = createStore(config);
-    expect(store.getSnapshot()).toMatchSnapshot();
+    expect(getSnapshot(store.state)).toMatchSnapshot();
     store.actions.nested2.nested3.action5(3);
-    expect(store.getSnapshot()).toMatchSnapshot();
+    expect(getSnapshot(store.state)).toMatchSnapshot();
   });
 });
