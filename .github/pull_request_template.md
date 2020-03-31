@@ -27,8 +27,8 @@ merge of your pull request!
 
 <!-- Have you done all of these things?  -->
 
-<!-- Delete each line that's irrelevant to your changes -->
 <!-- To check an item, place an "x" in the box like so: "- [x] Documentation" -->
+<!-- Strikethrough each line that's irrelevant to your changes and add the reason why -->
 
 - [ ] Code
 - [ ] Documentation
@@ -37,6 +37,7 @@ merge of your pull request!
 - [ ] TypeScript
 - [ ] Starter Themes
 - [ ] Community discussions
-- [ ] Changeset <!-- This is necessary if your changes should release any packages. Run `npx changeset` to create a changeset. -->
+<!-- This is necessary if your changes should release any packages. Run `npx changeset` to create a changeset. -->
+- [ ] Changeset 
 
 <!-- Feel free to add additional comments. -->
