@@ -3,10 +3,8 @@ import { create } from "react-test-renderer";
 import Switch from "../switch";
 
 // Test components
-const TestArchive: React.FC<{ when?: boolean; someProp?: string }> = ({
-  someProp,
-}) => {
-  return <h1>Test Archive Component{someProp}</h1>;
+const TestArchive: React.FC<{ when?: boolean; someProp?: string }> = () => {
+  return <h1>Test Archive Component</h1>;
 };
 
 const TestBlog: React.FC<{ when?: boolean }> = () => {
@@ -14,8 +12,8 @@ const TestBlog: React.FC<{ when?: boolean }> = () => {
 };
 
 // Default test component
-const Default: React.FC<{ someProp?: string }> = ({ someProp }) => {
-  return <h1>Default Component{someProp}</h1>;
+const Default: React.FC<{ someProp?: string }> = () => {
+  return <h1>Default Component</h1>;
 };
 
 describe("Switch", () => {
@@ -61,7 +59,10 @@ describe("Switch", () => {
       </Switch>
     );
 
-    expect(SwitchComponent.toJSON()).toMatchSnapshot();
+    expect(SwitchComponent.root.findByType(TestArchive).props).toEqual({
+      someProp: "prop value",
+      when: true,
+    });
   });
 
   test("should pass down any prop of the default component", () => {
@@ -71,6 +72,8 @@ describe("Switch", () => {
       </Switch>
     );
 
-    expect(SwitchComponent.toJSON()).toMatchSnapshot();
+    expect(SwitchComponent.root.findByType(Default).props).toEqual({
+      someProp: "prop value",
+    });
   });
 });
