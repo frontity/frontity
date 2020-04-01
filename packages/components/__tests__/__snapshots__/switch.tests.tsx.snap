@@ -1,6 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Switch render default component if no match was found 1`] = `
+exports[`Switch should pass down any prop of the default component 1`] = `
+<h1>
+  Default Component
+  prop value
+</h1>
+`;
+
+exports[`Switch should pass down any prop that the matching component receives 1`] = `
+<h1>
+  Test Archive Component
+  prop value
+</h1>
+`;
+
+exports[`Switch should render the default component if no match was found 1`] = `
 <h1>
   Default Component
 </h1>
