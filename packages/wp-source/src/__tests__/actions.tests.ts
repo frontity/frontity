@@ -79,6 +79,24 @@ describe("fetch", () => {
     expect(store.state.source.get("/some/route").isReady).toBe(true);
   });
 
+  test("should populate link, route, page and query even if data exists", async () => {
+    store.state.source.data["/some/route/page/2/?a=b"] = {
+      isFetching: false,
+      isReady: false,
+    };
+    await store.actions.source.fetch("/some/route/page/2/?a=b");
+    expect(store.state.source.get("/some/route/page/2/?a=b").link).toBe(
+      "/some/route/page/2/?a=b"
+    );
+    expect(store.state.source.get("/some/route/page/2/?a=b").route).toBe(
+      "/some/route/"
+    );
+    expect(store.state.source.get("/some/route/page/2/?a=b").page).toBe(2);
+    expect(store.state.source.get("/some/route/page/2/?a=b").query).toBe({
+      a: "b",
+    });
+  });
+
   test("should run again when `force` is used", async () => {
     store.state.source.data["/some/route/"] = {
       errorStatusText: "Request Timeout",
