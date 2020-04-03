@@ -15,33 +15,70 @@ interface Html2React extends Package {
 
 export default Html2React;
 
-// Parse
-export interface Element<Props = any> {
+export interface Element<Def extends ElementDef> {
   type: "element";
-  component: string | React.ComponentType;
+  component: string;
   props: {
     css?: SerializedStyles;
-  } & Props;
-  children?: Node<unknown>[];
-  parent?: Element<unknown>;
+  } & Def["props"];
+  children: Def extends { children: (infer T)[] } ? ResolveNode<T>[] : null;
+  parent: Def extends { parent: any } ? ResolveNode<Def["parent"]> : any;
   ignore?: boolean;
 }
 
-export interface Text {
-  type: "text";
+type ElementDef<Props = {}> = {
+  type: "element";
+  component?: "string";
+  props?: Props;
+  children?: (ElementDef | TextDef)[];
+  parent?: ElementDef;
+};
+
+interface Text<Def extends TextDef> {
+  type: "text" | "comment";
   content: string;
-  parent?: Element<unknown>;
+  parent: Def extends { parent: any } ? ResolveNode<Def["parent"]> : any;
   ignore?: boolean;
 }
 
-export interface Comment {
-  type: "comment";
-  content: string;
-  parent?: Element<unknown>;
-  ignore?: boolean;
-}
+type TextDef = {
+  type: "text" | "comment";
+  parent?: ElementDef;
+};
 
-export type Node<Props = any> = Element<Props> | Text | Comment;
+type ResolveNode<NodeDef> = NodeDef extends ElementDef
+  ? Element<NodeDef>
+  : NodeDef extends TextDef
+  ? Text<NodeDef>
+  : never;
+
+// Parse
+// export interface Element<Props = any> {
+//   type: "element";
+//   component: string | React.ComponentType;
+//   props: {
+//     css?: SerializedStyles;
+//   } & Props;
+//   children?: Node<unknown>[];
+//   parent?: Element<unknown>;
+//   ignore?: boolean;
+// }
+
+// export interface Text {
+//   type: "text";
+//   content: string;
+//   parent?: Element<unknown>;
+//   ignore?: boolean;
+// }
+
+// export interface Comment {
+//   type: "comment";
+//   content: string;
+//   parent?: Element<unknown>;
+//   ignore?: boolean;
+// }
+
+export type Node<Props = {}> = Element<Props> | Text | Comment;
 
 export interface Attributes {
   [key: string]: string;
