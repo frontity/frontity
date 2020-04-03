@@ -79,6 +79,52 @@ describe("fetch", () => {
     expect(store.state.source.get("/some/route").isReady).toBe(true);
   });
 
+  test('should set isHome in "/"', (done) => {
+    observe(() => {
+      const data = store.state.source.get("/");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/");
+  });
+
+  test('should set isHome in "/page/x"', (done) => {
+    observe(() => {
+      const data = store.state.source.get("/page/123");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/page/123");
+  });
+
+  test('should set isHome in "/blog" when using a subdirectory', (done) => {
+    store.state.source.subdirectory = "/blog";
+    observe(() => {
+      const data = store.state.source.get("/blog");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/blog");
+  });
+
+  test('should set isHome in "/blog/page/x" when using a subdirectory', (done) => {
+    store.state.source.subdirectory = "/blog";
+    observe(() => {
+      const data = store.state.source.get("/blog/page/123");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/blog/page/123");
+  });
+
   test("should run again when `force` is used", async () => {
     store.state.source.data["/some/route/"] = {
       errorStatusText: "Request Timeout",
