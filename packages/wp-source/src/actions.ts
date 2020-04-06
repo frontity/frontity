@@ -69,11 +69,10 @@ const actions: WpSource["actions"]["source"] = {
       // Everything OK.
       source.data[link] = {
         ...source.data[link],
+        ...(isHome && { isHome: true }),
         isFetching: false,
         isReady: true,
       };
-      // Set isHome value if it's true.
-      if (isHome) source.data[link].isHome = true;
     } catch (e) {
       // It's a server error (4xx or 5xx).
       if (e instanceof ServerError) {
