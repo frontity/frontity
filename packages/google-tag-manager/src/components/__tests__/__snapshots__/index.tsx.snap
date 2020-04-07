@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleTagManager doesn't add anything if there's no container ids 1`] = `""`;
+
+exports[`GoogleTagManager doesn't add anything if there's no container ids 2`] = `""`;
+
+exports[`GoogleTagManager works with a single container id 1`] = `"<script data-rh=\\"true\\" async=\\"true\\" src=\\"https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX\\"></script>"`;
+
+exports[`GoogleTagManager works with a single container id 2`] = `
+"<noscript data-rh=\\"true\\" >
+  <iframe
+    src=\\"https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX\\"
+    height=\\"0\\"
+    width=\\"0\\"
+    style=\\"display: 'none', visibility: 'hidden'\\"
+  ></iframe></noscript>"
+`;
+
+exports[`GoogleTagManager works with multiple container ids 1`] = `"<script data-rh=\\"true\\" async=\\"true\\" src=\\"https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX\\"></script><script data-rh=\\"true\\" async=\\"true\\" src=\\"https://www.googletagmanager.com/gtm.js?id=GTM-YYYYYYY\\"></script>"`;
+
+exports[`GoogleTagManager works with multiple container ids 2`] = `
+"<noscript data-rh=\\"true\\" >
+  <iframe
+    src=\\"https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX\\"
+    height=\\"0\\"
+    width=\\"0\\"
+    style=\\"display: 'none', visibility: 'hidden'\\"
+  ></iframe></noscript><noscript data-rh=\\"true\\" >
+  <iframe
+    src=\\"https://www.googletagmanager.com/ns.html?id=GTM-YYYYYYY\\"
+    height=\\"0\\"
+    width=\\"0\\"
+    style=\\"display: 'none', visibility: 'hidden'\\"
+  ></iframe></noscript>"
+`;
