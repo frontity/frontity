@@ -22,7 +22,7 @@ describe("GoogleTagManager", () => {
     state.googleTagManager.containerId = "GTM-XXXXXXX";
 
     const helmetContext = {};
-    TestRenderer.create(
+    const rendered = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <GoogleTagManager state={state} actions={null} />
       </HelmetProvider>
@@ -30,7 +30,7 @@ describe("GoogleTagManager", () => {
     const head = (helmetContext as FilledContext).helmet;
 
     expect(head.script.toString()).toMatchSnapshot();
-    expect(head.noscript.toString()).toMatchSnapshot();
+    expect(rendered).toMatchSnapshot();
   });
 
   test("works with multiple container ids", () => {
@@ -39,7 +39,7 @@ describe("GoogleTagManager", () => {
     state.googleTagManager.containerIds = ["GTM-XXXXXXX", "GTM-YYYYYYY"];
 
     const helmetContext = {};
-    TestRenderer.create(
+    const rendered = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <GoogleTagManager state={state} actions={null} />
       </HelmetProvider>
@@ -47,14 +47,14 @@ describe("GoogleTagManager", () => {
     const head = (helmetContext as FilledContext).helmet;
 
     expect(head.script.toString()).toMatchSnapshot();
-    expect(head.noscript.toString()).toMatchSnapshot();
+    expect(rendered).toMatchSnapshot();
   });
 
   test("doesn't add anything if there's no container ids", () => {
     const state = getState();
 
     const helmetContext = {};
-    TestRenderer.create(
+    const rendered = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <GoogleTagManager state={state} actions={null} />
       </HelmetProvider>
@@ -62,6 +62,6 @@ describe("GoogleTagManager", () => {
     const head = (helmetContext as FilledContext).helmet;
 
     expect(head.script.toString()).toMatchSnapshot();
-    expect(head.noscript.toString()).toMatchSnapshot();
+    expect(rendered).toMatchSnapshot();
   });
 });
