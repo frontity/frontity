@@ -22,11 +22,13 @@ export interface Element<Def extends ElementDef> {
     css?: SerializedStyles;
   } & Def["props"];
   children: Def extends { children: (infer T)[] } ? ResolveNode<T>[] : null;
-  parent: Def extends { parent: any } ? ResolveNode<Def["parent"]> : any;
+  parent: Def extends { parent: any }
+    ? ResolveNode<Def["parent"]>
+    : Element<ElementDef>;
   ignore?: boolean;
 }
 
-type ElementDef<Props = {}> = {
+export type ElementDef<Props = {}> = {
   type: "element";
   component?: "string";
   props?: Props;
@@ -34,51 +36,27 @@ type ElementDef<Props = {}> = {
   parent?: ElementDef;
 };
 
-interface Text<Def extends TextDef> {
+export interface Text<Def extends TextDef> {
   type: "text" | "comment";
   content: string;
-  parent: Def extends { parent: any } ? ResolveNode<Def["parent"]> : any;
+  parent: Def extends { parent: any }
+    ? ResolveNode<Def["parent"]>
+    : Element<ElementDef>;
   ignore?: boolean;
 }
 
-type TextDef = {
+export type TextDef = {
   type: "text" | "comment";
   parent?: ElementDef;
 };
 
-type ResolveNode<NodeDef> = NodeDef extends ElementDef
+export type ResolveNode<NodeDef> = NodeDef extends ElementDef
   ? Element<NodeDef>
   : NodeDef extends TextDef
   ? Text<NodeDef>
   : never;
 
-// Parse
-// export interface Element<Props = any> {
-//   type: "element";
-//   component: string | React.ComponentType;
-//   props: {
-//     css?: SerializedStyles;
-//   } & Props;
-//   children?: Node<unknown>[];
-//   parent?: Element<unknown>;
-//   ignore?: boolean;
-// }
-
-// export interface Text {
-//   type: "text";
-//   content: string;
-//   parent?: Element<unknown>;
-//   ignore?: boolean;
-// }
-
-// export interface Comment {
-//   type: "comment";
-//   content: string;
-//   parent?: Element<unknown>;
-//   ignore?: boolean;
-// }
-
-export type Node<Props = {}> = Element<Props> | Text | Comment;
+export type Node<Props = {}> = Element<ElementDef<Props>>;
 
 export interface Attributes {
   [key: string]: string;
@@ -88,8 +66,11 @@ export interface Parse {
   (html: string): Node[];
 }
 
-export interface AdaptNode {
-  (himalayaNode: HimalayaNode, parent?: Element): Node;
+export interface AdaptNode<Def extends Node> {
+  (
+    himalayaNode: HimalayaNode,
+    parent?: Def extends { parent: any } ? ResolveNode<Def["parent"]> : any
+  ): Node;
 }
 
 // Processors.
