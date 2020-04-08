@@ -28,15 +28,22 @@ merge of your pull request!
 <!-- Have you done all of these things?  -->
 
 <!-- To check an item, place an "x" in the box like so: "- [x] Documentation" -->
-<!-- Strikethrough each line that's irrelevant to your changes and add the reason why -->
+<!-- Strikethrough each line that's irrelevant to your changes using "~" -->
+<!-- Add the reason: ~Documentation~: Internal code, not documented. -->
 
 - [ ] Code
-- [ ] Documentation
+- [ ] TypeScript
+
 - [ ] Unit tests
 - [ ] End to end tests
-- [ ] TypeScript
-- [ ] Starter Themes
+- [ ] TypeScript tests
+
+- [ ] Update starter themes
+- [ ] Update other packages
+
+- [ ] Documentation
 - [ ] Community discussions
+
 <!-- This is necessary if your changes should release any packages. Run `npx changeset` to create a changeset. -->
 - [ ] Changeset 
 
