@@ -28,10 +28,10 @@ export interface Element<Def extends ElementDef> {
   ignore?: boolean;
 }
 
-export type ElementDef<Props = {}> = {
+export type ElementDef = {
   type: "element";
   component?: "string";
-  props?: Props;
+  props?: {};
   children?: (ElementDef | TextDef)[];
   parent?: ElementDef;
 };
@@ -56,7 +56,7 @@ export type ResolveNode<NodeDef> = NodeDef extends ElementDef
   ? Text<NodeDef>
   : never;
 
-export type Node<Props = {}> = Element<ElementDef<Props>>;
+export type Node<NodeDef = any> = ResolveNode<NodeDef>;
 
 export interface Attributes {
   [key: string]: string;
@@ -74,24 +74,34 @@ export interface AdaptNode<Def extends Node> {
 }
 
 // Processors.
-interface Params<Props, Pkg extends Package> {
-  node: Node<Props>;
-  root: Node<Props>[];
+interface Params<NodeDef, Pkg extends Package> {
+  node: Node<NodeDef>;
+  root: Node<NodeDef>[];
   state: State<Pkg>;
   libraries: Pkg["libraries"];
 }
 
-type Test<Props, Pkg extends Package> = (params: Params<Props, Pkg>) => boolean;
+type Test<NodeDef, Pkg extends Package> = (
+  params: Params<NodeDef, Pkg>
+) => boolean;
 
-type Process<Props, Pkg extends Package> = (
-  params: Params<Props, Pkg>
+type Process<NodeDef, Pkg extends Package> = (
+  params: Params<NodeDef, Pkg>
 ) => Node | boolean;
 
-export interface Processor<Props = any, Pkg extends Package = Package> {
+type DefaultNodeDef = {
+  type: "element";
+  props: React.HTMLProps<HTMLElement>;
+};
+
+export interface Processor<
+  NodeDef extends ElementDef | TextDef = DefaultNodeDef,
+  Pkg extends Package = Package
+> {
   name?: string;
   priority?: number;
-  test: Test<Props, Pkg>;
-  processor: Process<Props, Pkg>;
+  test: Test<NodeDef, Pkg>;
+  processor: Process<NodeDef, Pkg>;
 }
 
 // Component functions.
