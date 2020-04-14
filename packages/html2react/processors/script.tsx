@@ -1,20 +1,26 @@
-import { Processor } from "../types";
+import { Processor, TextDef } from "../types";
+import React from "react";
 import Script from "@frontity/components/script";
 
 const validMediaTypes = [
   "application/javascript",
   "text/javascript",
-  "application/ecmascript",
+  "application/ecmascript"
 ];
 
-type ElementProps = {
-  type: string;
-  "data-src": string;
-  src: string;
-  code: string;
-};
-
-const script: Processor<ElementProps> = {
+const script: Processor<{
+  type: "element";
+  props: React.HTMLProps<HTMLScriptElement> & {
+    type?: string;
+    src: string;
+    code: string;
+    "data-src": string;
+  };
+  parent: {
+    type: "element";
+  };
+  children: TextDef[];
+}> = {
   test: ({ node }) =>
     node.type === "element" &&
     node.component === "script" &&
@@ -32,7 +38,7 @@ const script: Processor<ElementProps> = {
 
       if (node.children.length > 0) {
         node.props.code = node.children
-          .map((child) => (child.type === "text" ? child.content : ""))
+          .map(child => (child.type === "text" ? child.content : ""))
           .join("");
         node.children = [];
       }
@@ -41,7 +47,7 @@ const script: Processor<ElementProps> = {
     }
 
     return node;
-  },
+  }
 };
 
 export default script;

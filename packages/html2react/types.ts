@@ -1,4 +1,5 @@
 import { Package, State } from "frontity/types";
+import React from "react";
 import { SerializedStyles } from "@emotion/core";
 import { Node as HimalayaNode } from "./himalaya/types";
 
@@ -17,14 +18,12 @@ export default Html2React;
 
 export interface Element<Def extends ElementDef> {
   type: "element";
-  component: string;
+  component: Def["props"] extends null ? null : React.FC<Def["props"]> | string;
   props: {
     css?: SerializedStyles;
   } & Def["props"];
-  children: Def extends { children: (infer T)[] } ? ResolveNode<T>[] : null;
-  parent: Def extends { parent: any }
-    ? ResolveNode<Def["parent"]>
-    : Element<ElementDef>;
+  children: Def extends { children: (infer T)[] } ? ResolveNode<T>[] : [];
+  parent: Def extends { parent: any } ? ResolveNode<Def["parent"]> : null;
   ignore?: boolean;
 }
 
@@ -48,6 +47,7 @@ export interface Text<Def extends TextDef> {
 export type TextDef = {
   type: "text" | "comment";
   parent?: ElementDef;
+  content: string;
 };
 
 export type ResolveNode<NodeDef> = NodeDef extends ElementDef

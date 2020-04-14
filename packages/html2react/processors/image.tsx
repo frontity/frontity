@@ -9,7 +9,7 @@ type Props = ImageProps & {
   children: ReactNode;
 };
 
-const ContentImage: React.FC<Props> = (props) => {
+const ContentImage: React.FC<Props> = props => {
   if (props.width && props.height) {
     return (
       <Container height={props.height} width={props.width}>
@@ -21,7 +21,17 @@ const ContentImage: React.FC<Props> = (props) => {
   }
 };
 
-const image: Processor<React.HTMLProps<HTMLImageElement>> = {
+const image: Processor<{
+  type: "element";
+  props: React.HTMLProps<HTMLImageElement> & {
+    code: string;
+    "data-src"?: string;
+    "data-srcset"?: string;
+  };
+  parent: {
+    type: "element";
+  };
+}> = {
   test: ({ node }) => node.type === "element" && node.component === "img",
   processor: ({ node }) => {
     if (node.type === "element") {
@@ -30,14 +40,16 @@ const image: Processor<React.HTMLProps<HTMLImageElement>> = {
       if (node.props["data-src"]) {
         node.props.src = node.props["data-src"];
       }
+
       if (node.props["data-srcset"]) {
         node.props.srcSet = node.props["data-srcset"];
       }
+
       node.component = ContentImage;
     }
 
     return node;
-  },
+  }
 };
 
 export default image;
