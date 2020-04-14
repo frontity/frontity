@@ -18,7 +18,11 @@ export default Html2React;
 
 export interface Element<Def extends ElementDef> {
   type: "element";
-  component: Def["props"] extends null ? null : React.FC<Def["props"]> | string;
+  // component: any;
+  // component: React.FC<Def["props"]> extends React.FC | null
+  //   ? React.FC<Def["props"]> | string
+  //   : null;
+  component: React.FC | string;
   props: {
     css?: SerializedStyles;
   } & Def["props"];
