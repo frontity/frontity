@@ -50,7 +50,7 @@
     "node-fetch": "^2.6.0",
     "ora": "^3.4.0",
     "ramda": "^0.26.1",
-    "react-helmet-async": "^1.0.2",
+    "react-helmet-async": "1.0.4",
     "simple-entity-decode": "^0.0.3",
     "tar": "^4.4.8",
     "ts-node": "^8.0.3",
