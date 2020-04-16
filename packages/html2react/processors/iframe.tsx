@@ -1,31 +1,26 @@
-import React from "react";
-import { Processor } from "../types";
+import { Processor, Element } from "../types";
 import Iframe from "@frontity/components/iframe";
 
-const iframe: Processor<{
-  type: "element";
-  props: React.HTMLProps<HTMLIFrameElement> & {
+interface IframeElement extends Element {
+  props: Element["props"] & {
     "data-src"?: string;
   };
-  parent: {
-    type: "element";
-  };
-}> = {
+}
+
+const iframe: Processor<IframeElement> = {
   test: ({ node }) => node.type === "element" && node.component === "iframe",
   priority: 20,
   processor: ({ node }) => {
-    if (node.type === "element") {
-      if (node.parent && node.parent.component === "noscript") return node;
+    if (node.parent.component === "noscript") return node;
 
-      if (node.props["data-src"]) {
-        node.props.src = node.props["data-src"];
-      }
-
-      node.component = Iframe;
+    if (node.props["data-src"]) {
+      node.props.src = node.props["data-src"];
     }
 
+    node.component = Iframe;
+
     return node;
-  }
+  },
 };
 
 export default iframe;
