@@ -16,51 +16,32 @@ interface Html2React extends Package {
 
 export default Html2React;
 
-export interface Element<Def extends ElementDef> {
+export interface Element {
   type: "element";
-  // component: any;
-  // component: React.FC<Def["props"]> extends React.FC | null
-  //   ? React.FC<Def["props"]> | string
-  //   : null;
-  component: React.FC | string;
+  component: string | React.ComponentType;
   props: {
     css?: SerializedStyles;
-  } & Def["props"];
-  children: Def extends { children: (infer T)[] } ? ResolveNode<T>[] : [];
-  parent: Def extends { parent: any } ? ResolveNode<Def["parent"]> : null;
+  } & React.HTMLProps<any>;
+  children?: Node[];
+  parent?: Element;
   ignore?: boolean;
 }
 
-export type ElementDef = {
-  type: "element";
-  component?: "string";
-  props?: {};
-  children?: (ElementDef | TextDef)[];
-  parent?: ElementDef;
-};
-
-export interface Text<Def extends TextDef> {
-  type: "text" | "comment";
+export interface Text {
+  type: "text";
   content: string;
-  parent: Def extends { parent: any }
-    ? ResolveNode<Def["parent"]>
-    : Element<ElementDef>;
+  parent?: Element;
   ignore?: boolean;
 }
 
-export type TextDef = {
-  type: "text" | "comment";
-  parent?: ElementDef;
+export interface Comment {
+  type: "comment";
   content: string;
-};
+  parent?: Element;
+  ignore?: boolean;
+}
 
-export type ResolveNode<NodeDef> = NodeDef extends ElementDef
-  ? Element<NodeDef>
-  : NodeDef extends TextDef
-  ? Text<NodeDef>
-  : never;
-
-export type Node<NodeDef = any> = ResolveNode<NodeDef>;
+export type Node = Element | Text | Comment;
 
 export interface Attributes {
   [key: string]: string;
@@ -70,36 +51,28 @@ export interface Parse {
   (html: string): Node[];
 }
 
-export interface AdaptNode<Def extends Node> {
-  (
-    himalayaNode: HimalayaNode,
-    parent?: Def extends { parent: any } ? ResolveNode<Def["parent"]> : any
-  ): Node;
+export interface AdaptNode {
+  (himalayaNode: HimalayaNode, parent?: Element): Node;
 }
 
 // Processors.
-interface Params<NodeDef, Pkg extends Package> {
-  node: Node<NodeDef>;
-  root: Node<NodeDef>[];
+interface Params<NodeDef extends Node, Pkg extends Package> {
+  node: NodeDef;
+  root: Node[];
   state: State<Pkg>;
   libraries: Pkg["libraries"];
 }
 
-type Test<NodeDef, Pkg extends Package> = (
+type Test<NodeDef extends Node, Pkg extends Package> = (
   params: Params<NodeDef, Pkg>
 ) => boolean;
 
-type Process<NodeDef, Pkg extends Package> = (
+type Process<NodeDef extends Node, Pkg extends Package> = (
   params: Params<NodeDef, Pkg>
-) => Node | boolean;
-
-type DefaultNodeDef = {
-  type: "element";
-  props: React.HTMLProps<HTMLElement>;
-};
+) => Partial<Node> | boolean;
 
 export interface Processor<
-  NodeDef extends ElementDef | TextDef = DefaultNodeDef,
+  NodeDef extends Node = Node,
   Pkg extends Package = Package
 > {
   name?: string;
