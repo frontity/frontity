@@ -11,7 +11,7 @@ const iframe: Processor<IframeElement> = {
   test: ({ node }) => node.type === "element" && node.component === "iframe",
   priority: 20,
   processor: ({ node }) => {
-    if (node.parent.component === "noscript") return node;
+    if (node.parent?.component === "noscript") return node;
 
     if (node.props["data-src"]) {
       node.props.src = node.props["data-src"];

@@ -32,7 +32,7 @@ const ContentImage: React.FC<Props> = (props) => {
 const image: Processor<ImageElement> = {
   test: ({ node }) => node.type === "element" && node.component === "img",
   processor: ({ node }) => {
-    if (node.parent.component === "noscript") return null;
+    if (node.parent?.component === "noscript") return null;
 
     if (node.props["data-src"]) {
       node.props.src = node.props["data-src"];

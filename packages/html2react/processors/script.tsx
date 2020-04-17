@@ -25,7 +25,7 @@ const script: Processor<ScriptElement> = {
   priority: 20,
   name: "script",
   processor: ({ node }) => {
-    if (node.parent.component === "noscript") return node;
+    if (node.parent?.component === "noscript") return node;
 
     if (node.props["data-src"]) {
       node.props.src = node.props["data-src"];
