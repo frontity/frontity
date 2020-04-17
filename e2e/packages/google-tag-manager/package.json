@@ -1,0 +1,11 @@
+{
+  "name": "e2e-google-tag-manager",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Package to do e2e testing of Frontity's Google Tag Manager package",
+  "dependencies": {
+    "@frontity/analytics": "^1.0.0-beta.0",
+    "@frontity/google-tag-manager": "^0.1.0",
+    "frontity": "^1.4.3"
+  }
+}
