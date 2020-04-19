@@ -20,12 +20,12 @@ describe("Google Tag Manager", () => {
     virtualEvent: { some: "content" },
   };
 
-  beforeAll(() => {
-    cy.visit("http://localhost:3001?site=google-tag-manager");
+  beforeEach(() => {
+    cy.visit("http://localhost:3001?name=google-tag-manager");
   });
 
   it("should load Google Tag Manager library", () => {
-    cy.find(
+    cy.get(
       `script[src="https://www.googletagmanager.com/gtm.js?id=UA-XXXXXX-X"]`
     );
   });
@@ -40,6 +40,7 @@ describe("Google Tag Manager", () => {
   });
 
   it("should sent pageviews when going back or forward", () => {
+    cy.get("button#change-link").click();
     cy.go("back");
     cy.window().its("dataLayer").its(2).should("deep.equal", pageviewHome);
 
@@ -50,6 +51,6 @@ describe("Google Tag Manager", () => {
   it("should send events", () => {
     cy.get("button#send-event").click();
     cy.get("button#change-link").click();
-    cy.window().its("dataLayer").its(4).should("deep.equal", someEvent);
+    cy.window().its("dataLayer").its(1).should("deep.equal", someEvent);
   });
 });

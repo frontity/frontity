@@ -15,7 +15,7 @@ const Homepage = () => (
 const SomePost = () => (
   <>
     <Head>
-      <title>Some post Title</title>
+      <title>Some Post Title</title>
     </Head>
     <h1>Some post</h1>
     <p>This is some post</p>
