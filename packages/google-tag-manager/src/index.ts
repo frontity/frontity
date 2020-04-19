@@ -3,6 +3,7 @@ import GoogleTagManager from "../types";
 import Root from "./components";
 
 const googleTagManager: GoogleTagManager = {
+  name: "@frontity/google-tag-manager",
   roots: {
     ...analytics.roots,
     googleTagManager: Root,
