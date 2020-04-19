@@ -1,16 +1,22 @@
 import { Package } from "frontity/types";
 import Analytics from "@frontity/analytics/types";
+import Source from "@frontity/source/types";
 
 interface TestPackage extends Package {
-  name: "analytics";
-  state: {
-    analytics: Analytics["state"]["analytics"];
+  name: "e2e-analytics";
+  state?: {
+    source?: {
+      data: Record<string, any>;
+      get: Source["state"]["source"]["get"];
+    };
   };
-  actions: {
-    analytics: Analytics["actions"]["analytics"];
+  actions?: {
+    analytics?: Analytics["actions"]["analytics"];
+    source?: {
+      fetch: Source["actions"]["source"]["fetch"];
+    };
   };
   roots: {
-    analytics: Analytics["roots"]["analytics"];
     theme: React.ReactType;
   };
 }
