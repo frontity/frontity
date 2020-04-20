@@ -19,7 +19,6 @@ const validMediaTypes = [
 
 const script: Processor<ScriptElement> = {
   test: ({ node }) =>
-    node.type === "element" &&
     node.component === "script" &&
     !("type" in node.props && !validMediaTypes.includes(node.props.type)),
   priority: 20,

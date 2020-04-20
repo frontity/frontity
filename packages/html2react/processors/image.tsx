@@ -11,7 +11,6 @@ type Props = ImageProps & {
 
 interface ImageElement extends Element {
   props: Element["props"] & {
-    code: string;
     "data-src"?: string;
     "data-srcset"?: string;
   };
@@ -30,7 +29,7 @@ const ContentImage: React.FC<Props> = (props) => {
 };
 
 const image: Processor<ImageElement> = {
-  test: ({ node }) => node.type === "element" && node.component === "img",
+  test: ({ node }) => node.component === "img",
   processor: ({ node }) => {
     if (node.parent?.component === "noscript") return null;
 

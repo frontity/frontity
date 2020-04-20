@@ -8,7 +8,7 @@ interface IframeElement extends Element {
 }
 
 const iframe: Processor<IframeElement> = {
-  test: ({ node }) => node.type === "element" && node.component === "iframe",
+  test: ({ node }) => node.component === "iframe",
   priority: 20,
   processor: ({ node }) => {
     if (node.parent?.component === "noscript") return node;
