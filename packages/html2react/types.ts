@@ -7,7 +7,6 @@ interface Html2React extends Package {
   name: "@frontity/html2react";
   libraries: {
     html2react: {
-      parse: Parse;
       processors: Processor[];
       Component: Component;
     };
