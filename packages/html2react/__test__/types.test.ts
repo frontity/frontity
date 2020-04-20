@@ -93,19 +93,26 @@ interface MyElementParent extends Element {
   };
 }
 
-interface MyElement extends Element {
+interface MyElementChild extends Element {
   props: Element["props"] & {
     isChild: true;
   };
+  parent: MyElement;
+}
+
+interface MyElement extends Element {
+  props: Element["props"] & {
+    isElement: true;
+  };
   parent: MyElementParent;
-  children: [Element, Text, Comment];
+  children: [Element, Text, Comment, MyElementChild];
 }
 
 const proc4: Processor<MyElement> = {
   test: ({ node }) => {
     // Test node.
     expectType<MyElement>(node);
-    expectType<true>(node.props.isChild);
+    expectType<true>(node.props.isElement);
     // Test parent.
     expectType<MyElementParent>(node.parent);
     expectType<true>(node.parent.props.isParent);
@@ -113,13 +120,16 @@ const proc4: Processor<MyElement> = {
     expectType<Element>(node.children[0]);
     expectType<Text>(node.children[1]);
     expectType<Comment>(node.children[2]);
+    expectType<MyElementChild>(node.children[3]);
+    expectType<true>(node.children[3].props.isChild);
+    expectType<MyElement>(node.children[3].parent);
 
     return true;
   },
   processor: ({ node }) => {
     // Test node.
     expectType<MyElement>(node);
-    expectType<true>(node.props.isChild);
+    expectType<true>(node.props.isElement);
     // Test parent.
     expectType<MyElementParent>(node.parent);
     expectType<true>(node.parent.props.isParent);
@@ -127,6 +137,9 @@ const proc4: Processor<MyElement> = {
     expectType<Element>(node.children[0]);
     expectType<Text>(node.children[1]);
     expectType<Comment>(node.children[2]);
+    expectType<MyElementChild>(node.children[3]);
+    expectType<true>(node.children[3].props.isChild);
+    expectType<MyElement>(node.children[3].parent);
 
     return node;
   },
