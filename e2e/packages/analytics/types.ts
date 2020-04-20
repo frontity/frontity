@@ -1,17 +1,17 @@
 import { Package } from "frontity/types";
 import Analytics from "@frontity/analytics/types";
 import Source from "@frontity/source/types";
+import Router from "@frontity/router/types";
 
-interface TestPackage extends Package {
+interface TestAnalytics extends Package {
   name: "e2e-analytics";
   state?: {
-    source?: {
-      data: Record<string, any>;
-      get: Source["state"]["source"]["get"];
-    };
+    router?: Router["state"]["router"];
+    source?: Partial<Source["state"]["source"]>;
   };
   actions?: {
     analytics?: Analytics["actions"]["analytics"];
+    router?: Router["actions"]["router"];
     source?: {
       fetch: Source["actions"]["source"]["fetch"];
     };
@@ -21,4 +21,4 @@ interface TestPackage extends Package {
   };
 }
 
-export default TestPackage;
+export default TestAnalytics;

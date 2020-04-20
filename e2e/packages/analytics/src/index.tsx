@@ -1,6 +1,7 @@
 import React from "react";
 import { Head, connect, URL } from "frontity";
-import Package from "../types";
+import { Connect } from "frontity/types";
+import Analytics from "../types";
 
 const Homepage = () => (
   <>
@@ -22,12 +23,16 @@ const SomePost = () => (
   </>
 );
 
-const Theme = connect(({ state, actions }) => {
+const Theme: React.FC<Connect<Analytics>> = ({ state, actions }) => {
   // Get only the pathname (link has query).
   const { pathname } = new URL(state.router.link, "http://localhost:3001");
 
   const changeLink = () => actions.router.set("/some-post/");
-  const sendEvent = () => actions.analytics.sendEvent({ some: "content" });
+  const sendEvent = () =>
+    actions.analytics.sendEvent({
+      event: "some event",
+      payload: { content: "some content" },
+    });
 
   return (
     <>
@@ -43,12 +48,12 @@ const Theme = connect(({ state, actions }) => {
       </button>
     </>
   );
-});
+};
 
-const testPackage: Package = {
+const analytics: Analytics = {
   name: "e2e-analytics",
   roots: {
-    theme: Theme,
+    theme: connect(Theme),
   },
   state: {
     source: {
@@ -58,7 +63,7 @@ const testPackage: Package = {
   },
   actions: {
     source: {
-      fetch: ({ state }) => async (link, options) => {
+      fetch: ({ state }) => async (link) => {
         const { data } = state.source;
         if (!data[link]) {
           data[link] = {
@@ -80,4 +85,4 @@ const testPackage: Package = {
   },
 };
 
-export default testPackage;
+export default analytics;

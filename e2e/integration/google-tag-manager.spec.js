@@ -16,8 +16,8 @@ describe("Google Tag Manager", () => {
   };
 
   const someEvent = {
-    event: "virtualEvent",
-    virtualEvent: { some: "content" },
+    event: "some event",
+    payload: { content: "some content" },
   };
 
   beforeEach(() => {
@@ -50,7 +50,6 @@ describe("Google Tag Manager", () => {
 
   it("should send events", () => {
     cy.get("button#send-event").click();
-    cy.get("button#change-link").click();
     cy.window().its("dataLayer").its(1).should("deep.equal", someEvent);
   });
 });

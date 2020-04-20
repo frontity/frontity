@@ -16,9 +16,10 @@ const googleTagManager: GoogleTagManager = {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: "virtualPageview", pageview });
       },
-      sendEvent: () => (virtualEvent) => {
+      sendEvent: () => ({ event, payload }) => {
+        // Send the event to the trackers.
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: "virtualEvent", virtualEvent });
+        window.dataLayer.push({ event, payload });
       },
     },
   },
