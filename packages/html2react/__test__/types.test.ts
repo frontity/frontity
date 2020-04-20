@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { expectType } from "frontity/types/helpers";
 import { Processor, Node, Element, Text, Comment } from "../types";
-
-// Simple functions to check types.
-export const expectType = <T>(value: T) => {
-  value;
-};
 
 // 1. Processor by default accepts Element, Text or Comment.
 const proc1: Processor = {

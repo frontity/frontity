@@ -1,4 +1,4 @@
-import { expectType } from "../utils";
+import { expectType } from "frontity/types/helpers";
 import {
   Data,
   ErrorData,
