@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@frontity/core": "^1.5.0",
+    "@frontity/google-tag-manager": "^0.1.0",
     "@frontity/html2react": "^1.3.0",
     "@frontity/tiny-router": "^1.1.0",
     "@frontity/wp-source": "^1.6.0",
@@ -27,6 +28,7 @@
     "e2e-script": "^1.0.0",
     "e2e-switch": "^1.0.0",
     "e2e-html2react": "^1.0.0",
+    "e2e-analytics": "^1.0.0",
     "frontity": "^1.5.2"
   }
 }
