@@ -9,6 +9,9 @@
     "frontity-analytics",
     "frontity-google-tag-manager"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
