@@ -1,6 +1,6 @@
 import React from "react";
 import Package from "../types";
-import { connect } from "frontity";
+import { css, connect } from "frontity";
 
 const Root = connect(({ state, actions }) => {
   return (
@@ -39,6 +39,25 @@ const Root = connect(({ state, actions }) => {
       {state.router.link === "/about/" && (
         <div data-test-id="content">About</div>
       )}
+
+      <a
+        data-link-id="hash-link"
+        href="#hash-element"
+        css={css`
+          display: block;
+        `}
+      >
+        Visit #hash-element
+      </a>
+
+      <div
+        id="hash-element"
+        css={css`
+          margin-top: 100vh;
+        `}
+      >
+        This is #hash-element
+      </div>
     </>
   );
 });
@@ -48,9 +67,9 @@ const TinyRouterPackage: Package = {
   state: {},
   actions: {},
   roots: {
-    tinyRouter: Root
+    tinyRouter: Root,
   },
-  libraries: {}
+  libraries: {},
 };
 
 export default TinyRouterPackage;

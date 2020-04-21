@@ -35,4 +35,15 @@ describe("Tiny Router", () => {
       .should("exist")
       .should("have.text", "About");
   });
+
+  it("should scroll to the element when a hash link is clicked", () => {
+    cy.location("href").should("eq", "http://localhost:3001/?name=tiny-router");
+    cy.get('div[id="hash-element"]').isNotInViewport();
+    cy.get('a[data-link-id="hash-link"]').click();
+    cy.get('div[id="hash-element"]').isInViewport();
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/?name=tiny-router#hash-element"
+    );
+  });
 });
