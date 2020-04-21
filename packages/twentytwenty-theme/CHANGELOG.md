@@ -1,5 +1,15 @@
 # @frontity/twentytwenty-theme
 
+## 1.1.1
+
+### Patch Changes
+
+- [`1130066b`](https://github.com/frontity/frontity/commit/1130066b11cf6fb7f76e7f31b40bb58059d0ba3e) [#358](https://github.com/frontity/frontity/pull/358) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Fix 404 pages of twentytwenty-theme
+- Updated dependencies [[`4dc3ccd8`](https://github.com/frontity/frontity/commit/4dc3ccd8b27a70632bc79ab593fdd8a2768ae316), [`7854971e`](https://github.com/frontity/frontity/commit/7854971eaefa665dc5d77b0b91129c1495b0dab4)]:
+  - @frontity/html2react@1.3.2
+  - frontity@1.5.3
+  - @frontity/components@1.3.1
+
 ## 1.1.0
 
 ### Minor Changes

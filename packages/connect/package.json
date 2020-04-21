@@ -1,6 +1,6 @@
 {
   "name": "@frontity/connect",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The state manager of Frontity. Similar to MobX but much more lightweight because it's based on ES6 proxies.",
   "keywords": [
     "frontity",
