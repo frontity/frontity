@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.3.2
+
+### Patch Changes
+
+- [`4dc3ccd8`](https://github.com/frontity/frontity/commit/4dc3ccd8b27a70632bc79ab593fdd8a2768ae316) [#370](https://github.com/frontity/frontity/pull/370) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Change the TypeScript API to define processors, allowing to pass an Element definition instead of just the element's props definition.
+- Updated dependencies [[`34b37ec8`](https://github.com/frontity/frontity/commit/34b37ec84bc4c387754f241ea56fd5eb8b13b14d), [`7854971e`](https://github.com/frontity/frontity/commit/7854971eaefa665dc5d77b0b91129c1495b0dab4)]:
+  - @frontity/connect@1.0.5
+  - frontity@1.5.3
+  - @frontity/components@1.3.1
+
 ## 1.3.1
 
 ### Patch Changes
