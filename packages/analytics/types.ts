@@ -1,4 +1,4 @@
-import { Package, Action, Connect } from "frontity/types";
+import { Package, Action } from "frontity/types";
 import Source from "@frontity/source/types";
 
 export type Pageview = {
@@ -7,9 +7,8 @@ export type Pageview = {
 };
 
 export type Event = {
-  category: string;
-  action: string;
-  label?: string;
+  event: string;
+  payload: Record<string, any>;
 };
 
 interface Analytics extends Package {

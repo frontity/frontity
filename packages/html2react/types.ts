@@ -1,4 +1,5 @@
 import { Package, State } from "frontity/types";
+import React from "react";
 import { SerializedStyles } from "@emotion/core";
 import { Node as HimalayaNode } from "./himalaya/types";
 
@@ -6,7 +7,6 @@ interface Html2React extends Package {
   name: "@frontity/html2react";
   libraries: {
     html2react: {
-      parse: Parse;
       processors: Processor[];
       Component: Component;
     };
@@ -15,33 +15,32 @@ interface Html2React extends Package {
 
 export default Html2React;
 
-// Parse
-export interface Element<Props = any> {
+export interface Element {
   type: "element";
   component: string | React.ComponentType;
   props: {
     css?: SerializedStyles;
-  } & Props;
-  children?: Node<unknown>[];
-  parent?: Element<unknown>;
+  } & React.HTMLProps<any>;
+  children?: Node[];
+  parent?: Element;
   ignore?: boolean;
 }
 
 export interface Text {
   type: "text";
   content: string;
-  parent?: Element<unknown>;
+  parent?: Element;
   ignore?: boolean;
 }
 
 export interface Comment {
   type: "comment";
   content: string;
-  parent?: Element<unknown>;
+  parent?: Element;
   ignore?: boolean;
 }
 
-export type Node<Props = any> = Element<Props> | Text | Comment;
+export type Node = Element | Text | Comment;
 
 export interface Attributes {
   [key: string]: string;
@@ -56,24 +55,29 @@ export interface AdaptNode {
 }
 
 // Processors.
-interface Params<Props, Pkg extends Package> {
-  node: Node<Props>;
-  root: Node<Props>[];
+interface Params<NodeDef extends Node, Pkg extends Package> {
+  node: NodeDef;
+  root: Node[];
   state: State<Pkg>;
   libraries: Pkg["libraries"];
 }
 
-type Test<Props, Pkg extends Package> = (params: Params<Props, Pkg>) => boolean;
+type Test<NodeDef extends Node, Pkg extends Package> = (
+  params: Params<NodeDef, Pkg>
+) => boolean;
 
-type Process<Props, Pkg extends Package> = (
-  params: Params<Props, Pkg>
-) => Node | boolean;
+type Process<NodeDef extends Node, Pkg extends Package> = (
+  params: Params<NodeDef, Pkg>
+) => Partial<Node> | boolean;
 
-export interface Processor<Props = any, Pkg extends Package = Package> {
+export interface Processor<
+  NodeDef extends Node = Node,
+  Pkg extends Package = Package
+> {
   name?: string;
   priority?: number;
-  test: Test<Props, Pkg>;
-  processor: Process<Props, Pkg>;
+  test: Test<NodeDef, Pkg>;
+  processor: Process<NodeDef, Pkg>;
 }
 
 // Component functions.
