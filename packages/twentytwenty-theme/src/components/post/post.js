@@ -7,7 +7,7 @@ import {
   PostHeader,
   PostInner,
   PostTitle,
-  SectionContainer
+  SectionContainer,
 } from "./post-item";
 import PostCategories from "./post-categories";
 import PostMeta from "./post-meta";
@@ -33,7 +33,7 @@ const Post = ({ state, actions, libraries }) => {
    * So, we'll look up the details of each category in allCategories
    */
   const categories =
-    post.categories && post.categories.map(catId => allCategories[catId]);
+    post.categories && post.categories.map((catId) => allCategories[catId]);
 
   // Get all tags
   const allTags = state.source.tag;
@@ -41,7 +41,7 @@ const Post = ({ state, actions, libraries }) => {
    * The item's categories is an array of each tag id
    * So, we'll look up the details of each tag in allTags
    */
-  const tags = post.tags && post.tags.map(tagId => allTags[tagId]);
+  const tags = post.tags && post.tags.map((tagId) => allTags[tagId]);
 
   /**
    * Once the post has loaded in the DOM, prefetch both the

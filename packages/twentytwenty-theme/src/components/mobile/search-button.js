@@ -4,7 +4,7 @@ import { SearchIcon } from "../icons";
 import {
   LabeledIcon,
   SearchToggle,
-  ToggleWrapper
+  ToggleWrapper,
 } from "../navigation/nav-toggle";
 
 const MobileSearchButton = ({ state, actions }) => {

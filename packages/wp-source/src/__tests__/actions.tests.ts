@@ -32,9 +32,9 @@ beforeEach(() => {
         id: 1,
         isPostType: true,
         isFetching: true,
-        isReady: false
+        isReady: false,
       });
-    })
+    }),
   };
 
   // Initialize the store
@@ -58,7 +58,7 @@ describe("fetch", () => {
       id: 1,
       isPostType: true,
       isFetching: false,
-      isReady: true
+      isReady: true,
     };
 
     await store.actions.source.fetch("/some/route/");
@@ -69,7 +69,7 @@ describe("fetch", () => {
   test("should switch isFetching and isReady even if data exists", async () => {
     store.state.source.data["/some/route/"] = {
       isFetching: false,
-      isReady: false
+      isReady: false,
     };
     const fetching = store.actions.source.fetch("/some/route/");
     expect(store.state.source.get("/some/route").isFetching).toBe(true);
@@ -79,13 +79,59 @@ describe("fetch", () => {
     expect(store.state.source.get("/some/route").isReady).toBe(true);
   });
 
+  test('should set isHome in "/"', (done) => {
+    observe(() => {
+      const data = store.state.source.get("/");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/");
+  });
+
+  test('should set isHome in "/page/x"', (done) => {
+    observe(() => {
+      const data = store.state.source.get("/page/123");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/page/123");
+  });
+
+  test('should set isHome in "/blog" when using a subdirectory', (done) => {
+    store.state.source.subdirectory = "/blog";
+    observe(() => {
+      const data = store.state.source.get("/blog");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/blog");
+  });
+
+  test('should set isHome in "/blog/page/x" when using a subdirectory', (done) => {
+    store.state.source.subdirectory = "/blog";
+    observe(() => {
+      const data = store.state.source.get("/blog/page/123");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/blog/page/123");
+  });
+
   test("should run again when `force` is used", async () => {
     store.state.source.data["/some/route/"] = {
       errorStatusText: "Request Timeout",
       errorStatus: 408,
       isError: true,
       isFetching: false,
-      isReady: true
+      isReady: true,
     };
 
     await store.actions.source.fetch("/some/route/", { force: true });
@@ -94,7 +140,7 @@ describe("fetch", () => {
   });
 
   test("Throw an error if fetch fails", async () => {
-    handler.func = jest.fn(async params => {
+    handler.func = jest.fn(async (params) => {
       throw new Error("Some error");
     });
 
@@ -107,7 +153,7 @@ describe("fetch", () => {
     expect(store.state.source.data).toMatchSnapshot();
   });
 
-  test("should allow to observe 'isReady' properly", done => {
+  test("should allow to observe 'isReady' properly", (done) => {
     expect(store.state.source.get("/").isReady).toBe(false);
     observe(() => {
       if (store.state.source.get("/").isReady) done();
@@ -115,7 +161,7 @@ describe("fetch", () => {
     store.actions.source.fetch("/");
   });
 
-  test("should allow to observe 'isFetching' properly", done => {
+  test("should allow to observe 'isFetching' properly", (done) => {
     expect(store.state.source.get("/").isFetching).toBe(false);
     store.actions.source.fetch("/");
     expect(store.state.source.get("/").isFetching).toBe(true);
@@ -165,12 +211,12 @@ describe("init", () => {
     store.state.source.postTypes.push(
       {
         type: "cpt1",
-        endpoint: "cpts1"
+        endpoint: "cpts1",
       },
       {
         type: "cpt2",
         endpoint: "cpts2",
-        archive: "cpt2-archive"
+        archive: "cpt2-archive",
       }
     );
 
@@ -185,20 +231,20 @@ describe("init", () => {
     store.state.source.taxonomies.push(
       {
         taxonomy: "taxonomy1",
-        endpoint: "taxonomies1"
+        endpoint: "taxonomies1",
       },
       {
         taxonomy: "taxonomy2",
         endpoint: "taxonomies2",
-        postTypeEndpoint: "cpt"
+        postTypeEndpoint: "cpt",
       },
       {
         taxonomy: "taxonomy3",
         endpoint: "taxonomies3",
         postTypeEndpoint: "multiple-post-type",
         params: {
-          type: ["posts", "cpts"]
-        }
+          type: ["posts", "cpts"],
+        },
       }
     );
 

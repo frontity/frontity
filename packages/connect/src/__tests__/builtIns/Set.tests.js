@@ -44,7 +44,7 @@ describe("Set", () => {
     const set = observable(new Set());
     observe(() => {
       dummy = 0;
-      set.forEach(num => (dummy += num));
+      set.forEach((num) => (dummy += num));
     });
 
     expect(dummy).toEqual(0);
@@ -204,7 +204,7 @@ describe("Set", () => {
       for (let num of raw(set).values()) {
         dummy += num;
       }
-      raw(set).forEach(num => {
+      raw(set).forEach((num) => {
         dummy += num;
       });
       for (let num of raw(set)) {
@@ -278,7 +278,7 @@ describe("Set", () => {
     const set = observable(new Set());
     set.add({});
 
-    set.forEach(value => expect(isObservable(value)).toBe(false));
+    set.forEach((value) => expect(isObservable(value)).toBe(false));
     for (let value of set) {
       expect(isObservable(value)).toBe(false);
     }
@@ -290,7 +290,7 @@ describe("Set", () => {
     }
 
     observe(() => {
-      set.forEach(value => expect(isObservable(value)).toBe(true));
+      set.forEach((value) => expect(isObservable(value)).toBe(true));
       for (let value of set) {
         expect(isObservable(value)).toBe(true);
       }
@@ -302,7 +302,7 @@ describe("Set", () => {
       }
     });
 
-    set.forEach(value => expect(isObservable(value)).toBe(true));
+    set.forEach((value) => expect(isObservable(value)).toBe(true));
     for (let value of set) {
       expect(isObservable(value)).toBe(true);
     }

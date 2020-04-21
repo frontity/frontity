@@ -9,7 +9,7 @@ import {
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
-  revertProgress
+  revertProgress,
 } from "../steps";
 
 const defaultOptions: Options = {
@@ -18,7 +18,7 @@ const defaultOptions: Options = {
   packages: [
     // "@frontity/wp-source"
   ],
-  theme: "@frontity/mars-theme"
+  theme: "@frontity/mars-theme",
 };
 
 const create = async (

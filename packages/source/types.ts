@@ -6,7 +6,7 @@ import {
   AttachmentEntity,
   AuthorEntity,
   TaxonomyType,
-  PostType
+  PostType,
 } from "./types/entities";
 
 // Export directly some types.
@@ -17,7 +17,7 @@ export {
   AttachmentEntity,
   AuthorEntity,
   TaxonomyType,
-  PostType
+  PostType,
 } from "./types/entities";
 
 export type RouteParams = {

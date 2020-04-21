@@ -11,7 +11,7 @@ import { webpackAsync } from "./utils/webpack";
 
 export default async ({
   mode,
-  target
+  target,
 }: {
   mode: Mode;
   target: "both" | "es5" | "module";

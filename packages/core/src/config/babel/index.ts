@@ -32,11 +32,11 @@ const targets: {
       "op_mob >= 46",
       "opera >= 36",
       "safari >= 10",
-      "samsung >= 5"
-    ]
+      "samsung >= 5",
+    ],
   },
   // Node version used by AWS Lambda.
-  server: { node: "8.10" }
+  server: { node: "8.10" },
 };
 
 export default ({ mode }: { mode: Mode }): BabelConfigs => {
@@ -50,12 +50,12 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
           targets: targets[target],
           useBuiltIns: target === "es5" && "entry",
           corejs: target === "es5" && "3",
-          modules: false
-        }
+          modules: false,
+        },
       ],
       "@babel/preset-react",
       // Babel plugin for Emotion CSS property and other goodness.
-      "@emotion/babel-preset-css-prop"
+      "@emotion/babel-preset-css-prop",
     ];
     const plugins = [
       //
@@ -74,20 +74,20 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       [
         "babel-plugin-transform-inline-environment-variables",
         {
-          include: ["CWD"]
-        }
-      ]
+          include: ["CWD"],
+        },
+      ],
     ];
     return {
       compact: true,
       presets,
-      plugins
+      plugins,
     };
   };
 
   return {
     module: getConfig("module"),
     es5: getConfig("es5"),
-    server: getConfig("server")
+    server: getConfig("server"),
   };
 };

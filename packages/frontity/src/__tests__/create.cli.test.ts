@@ -18,15 +18,15 @@ describe("CLI create", () => {
   beforeEach(() => {
     mockedCreateCmd.default.mockReset();
     mockedCreateCmd.default.mockReturnValue(
-      new EventPromised(resolve => resolve())
+      new EventPromised((resolve) => resolve())
     );
     mockedInquirer.prompt.mockReset();
     mockedInquirer.prompt
       .mockResolvedValueOnce({
-        name: "test-project"
+        name: "test-project",
       })
       .mockResolvedValueOnce({
-        theme: "test-theme"
+        theme: "test-theme",
       });
     mockedUtils.errorLogger = jest.fn();
   });
@@ -36,7 +36,7 @@ describe("CLI create", () => {
     typescript: undefined,
     useCwd: undefined,
     theme: undefined,
-    prompt: true
+    prompt: true,
   };
 
   test("frontity create", async () => {
@@ -44,15 +44,15 @@ describe("CLI create", () => {
 
     expect(mockedInquirer.prompt).toHaveBeenCalledTimes(3);
     expect(mockedInquirer.prompt.mock.calls[0][0]).toMatchObject([
-      { message: "Enter a name for the project:" }
+      { message: "Enter a name for the project:" },
     ]);
     expect(mockedInquirer.prompt.mock.calls[1][0]).toMatchObject([
-      { message: "Pick a starter theme to clone:" }
+      { message: "Pick a starter theme to clone:" },
     ]);
 
     expect(mockedInquirer.prompt.mock.calls[2][0]).toMatchObject([
       { message: "Do you want to receive framework updates by email?" },
-      { message: "Please, enter your email:" }
+      { message: "Please, enter your email:" },
     ]);
     expect(mockedInquirer.prompt.mock.calls).toMatchSnapshot();
   });
@@ -60,7 +60,7 @@ describe("CLI create", () => {
   test("frontity create 'test-project'", async () => {
     mockedInquirer.prompt.mockReset();
     mockedInquirer.prompt.mockResolvedValueOnce({
-      theme: "test-theme"
+      theme: "test-theme",
     });
 
     const name = "test-project";
@@ -74,7 +74,7 @@ describe("CLI create", () => {
       name: "test-project",
       theme: "test-theme",
       typescript: false,
-      path: resolve(process.cwd(), name)
+      path: resolve(process.cwd(), name),
     });
   });
 
@@ -92,7 +92,7 @@ describe("CLI create", () => {
       name: name,
       theme: undefined,
       typescript,
-      path: resolve(process.cwd(), name)
+      path: resolve(process.cwd(), name),
     });
   });
 
@@ -118,7 +118,7 @@ describe("CLI create", () => {
       name,
       theme: undefined,
       typescript: false,
-      path: resolve(process.cwd(), name)
+      path: resolve(process.cwd(), name),
     });
   });
 
@@ -136,7 +136,7 @@ describe("CLI create", () => {
       name,
       theme: undefined,
       typescript: true,
-      path: resolve(process.cwd(), name)
+      path: resolve(process.cwd(), name),
     });
   });
 
@@ -153,7 +153,7 @@ describe("CLI create", () => {
       name,
       theme,
       typescript: true,
-      path: resolve(process.cwd(), name)
+      path: resolve(process.cwd(), name),
     });
   });
 });

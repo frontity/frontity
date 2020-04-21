@@ -10,7 +10,7 @@ import Image from "../image";
 
 jest.mock("react-intersection-observer", () => ({
   __esModule: true,
-  useInView: jest.fn()
+  useInView: jest.fn(),
 }));
 
 describe("Image", () => {
@@ -20,7 +20,7 @@ describe("Image", () => {
     delete (HTMLImageElement as any).prototype.loading;
     Object.defineProperty(window, "IntersectionObserver", {
       writable: true,
-      value: jest.fn()
+      value: jest.fn(),
     });
   });
 
@@ -36,7 +36,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading
+      loading,
     };
 
     const result = TestRenderer.create(<Image {...props} />).toJSON();
@@ -54,7 +54,7 @@ describe("Image", () => {
       className: "fake-class-name",
       loading: "lazy" as "lazy",
       height: 300,
-      state: { frontity: { rendering: "ssr" } }
+      state: { frontity: { rendering: "ssr" } },
     };
 
     const result = TestRenderer.create(<Image {...props} />);
@@ -72,7 +72,7 @@ describe("Image", () => {
       className: "fake-class-name",
       loading: "lazy" as "lazy",
       height: 300,
-      state: { frontity: { rendering: "csr" } }
+      state: { frontity: { rendering: "csr" } },
     };
 
     const result = TestRenderer.create(<Image {...props} />);
@@ -89,7 +89,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading: "lazy" as "lazy"
+      loading: "lazy" as "lazy",
     };
 
     const result = TestRenderer.create(<Image {...props} />);
@@ -103,7 +103,7 @@ describe("Image", () => {
       src: "https://fake-src.com/fake-image.jpg",
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
-      className: "fake-class-name"
+      className: "fake-class-name",
     };
 
     const result = TestRenderer.create(<Image {...props} />);
@@ -117,7 +117,7 @@ describe("Image", () => {
       src: "https://fake-src.com/fake-image.jpg",
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
-      className: "fake-class-name"
+      className: "fake-class-name",
     };
 
     const result = TestRenderer.create(<Image {...props} />);
@@ -131,7 +131,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      state: { frontity: { rendering: "ssr" } }
+      state: { frontity: { rendering: "ssr" } },
     };
 
     IntersectionObserver = undefined;
@@ -147,7 +147,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      state: { frontity: { rendering: "csr" } }
+      state: { frontity: { rendering: "csr" } },
     };
 
     IntersectionObserver = undefined;

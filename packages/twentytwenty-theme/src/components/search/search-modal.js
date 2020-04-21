@@ -22,19 +22,15 @@ const SearchModal = ({ state, actions }) => {
   const transitions = useTransition(isSearchModalOpen, null, {
     from: { transform: "translate3d(0,-100%,0)" },
     enter: { transform: "translate3d(0,0px,0)" },
-    leave: { transform: "translate3d(0,-100%,0)" }
+    leave: { transform: "translate3d(0,-100%,0)" },
   });
   useFocusEffect(inputRef, isSearchModalOpen);
   useFocusTrap(containerRef, isSearchModalOpen);
 
   // Format the query to remove trailing spaces and replace space with "+"
-  const formatQuery = query =>
-    query
-      .trim()
-      .replace(" ", "+")
-      .toLowerCase();
+  const formatQuery = (query) => query.trim().replace(" ", "+").toLowerCase();
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     // Prevent page navigation
     event.preventDefault();
 
@@ -90,7 +86,7 @@ const SearchModal = ({ state, actions }) => {
                 <ModalInner
                   role="dialog"
                   aria-modal="true"
-                  onClick={event => {
+                  onClick={(event) => {
                     // prevent clicks within the content from propagating to the ModalOverlay
                     event.stopPropagation();
                   }}

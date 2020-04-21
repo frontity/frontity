@@ -9,13 +9,14 @@ import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { FilledContext } from "react-helmet-async";
 import { getSettings } from "@frontity/file-settings";
 import { Context } from "@frontity/types";
+import { getSnapshot } from "@frontity/connect";
 import { ChunkExtractor } from "@loadable/server";
 import getTemplate from "./templates";
 import {
   getStats,
   hasEntryPoint,
   getBothScriptTags,
-  Extractor
+  Extractor,
 } from "./utils/stats";
 import getHeadTags from "./utils/head";
 import App from "../app";
@@ -30,7 +31,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
 
   // Default robots.txt.
   app.use(
-    get("/robots.txt", ctx => {
+    get("/robots.txt", (ctx) => {
       ctx.type = "text/plain";
       ctx.body = "User-agent: *\nDisallow:";
     })
@@ -94,7 +95,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       // Run renderToString with ChunkExtractor to get the html.
       const extractor = new ChunkExtractor({
         stats,
-        entrypoints: [settings.name]
+        entrypoints: [settings.name],
       });
       const jsx = extractor.collectChunks(Component);
       html = renderToString(jsx);
@@ -114,13 +115,13 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
           ? getBothScriptTags({
               extractor: customExtractor,
               moduleStats,
-              es5Stats
+              es5Stats,
             })
           : extractor.getScriptTags();
 
       // Add mutations to our scripts.
       frontity.script = `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${htmlescape(
-        store.getSnapshot()
+        getSnapshot(store.state)
       )}</script>\n${frontity.script}`;
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup

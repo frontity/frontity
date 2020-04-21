@@ -1,4 +1,4 @@
-import { expectType } from "../utils";
+import { expectType } from "frontity/types/helpers";
 import {
   Data,
   ErrorData,
@@ -19,7 +19,7 @@ import {
   AuthorWithSearchData,
   PostTypeArchiveWithSearchData,
   PostArchiveWithSearchData,
-  DateWithSearchData
+  DateWithSearchData,
 } from "../data";
 
 const data = {} as Data;

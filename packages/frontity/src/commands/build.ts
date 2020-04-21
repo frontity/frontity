@@ -6,7 +6,7 @@ export default async ({ development, target }) => {
 
   const options = {
     mode: development ? "development" : "production",
-    target: target || "both"
+    target: target || "both",
   };
 
   try {

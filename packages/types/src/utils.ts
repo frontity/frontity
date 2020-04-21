@@ -4,7 +4,7 @@ import { Package } from ".";
 export type ResolveState<State extends Package["state"]> = {
   [P in keyof State]: State[P] extends (state: Package["state"]) => any
     ? ReturnType<State[P]>
-    : ResolveState<State[P]>
+    : ResolveState<State[P]>;
 };
 
 // Resolve actions to its final form.
@@ -12,7 +12,7 @@ export type ResolveActions<Actions extends Package["state"]> = {
   [P in keyof Actions]: Actions[P] extends ({
     state,
     actions,
-    libraries
+    libraries,
   }: {
     state: ResolveState<Package["state"]>;
     actions: ResolveActions<Package["actions"]>;
@@ -24,14 +24,14 @@ export type ResolveActions<Actions extends Package["state"]> = {
     : Actions[P] extends ({
         state,
         actions,
-        libraries
+        libraries,
       }: {
         state: ResolveState<Package["state"]>;
         actions: ResolveActions<Package["actions"]>;
         libraries: Package["libraries"];
       }) => void | Promise<void>
     ? () => ReturnType<Actions[P]>
-    : ResolveActions<Actions[P]>
+    : ResolveActions<Actions[P]>;
 };
 
 // Util to filter the injected props from connect.

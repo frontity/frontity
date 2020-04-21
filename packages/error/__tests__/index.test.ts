@@ -20,11 +20,19 @@ describe("error", () => {
 
   test("In development, console.error the full message", () => {
     console.error = jest.fn();
-    error("This is wrong", false);
+    expect(() => error("This is wrong", { throw: false })).not.toThrow();
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenLastCalledWith(
       "This is wrong\nVisit https://community.frontity.org for help! 🙂\n"
     );
+  });
+
+  test("In production, console.error the short message", () => {
+    process.env.NODE_ENV = "production";
+    console.error = jest.fn();
+    expect(() => error("This is wrong", { throw: false })).not.toThrow();
+    expect(console.error).toHaveBeenCalledTimes(1);
+    expect(console.error).toHaveBeenLastCalledWith("This is wrong");
   });
 });
 

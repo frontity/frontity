@@ -4,7 +4,7 @@ import {
   Configuration,
   optimize,
   WatchIgnorePlugin,
-  IgnorePlugin
+  IgnorePlugin,
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Target, Mode } from "../../../types";
@@ -12,7 +12,7 @@ import { Target, Mode } from "../../../types";
 export default ({
   target,
   mode,
-  outDir
+  outDir,
 }: {
   target: Target;
   mode: Mode;
@@ -26,10 +26,10 @@ export default ({
         target !== "server" ? `../` : ""
       }analyze/${target}-${mode}.html`,
       openAnalyzer: false,
-      logLevel: "silent"
+      logLevel: "silent",
     }),
     new WatchIgnorePlugin([new RegExp(outDir)]),
-    new IgnorePlugin(/^encoding$/)
+    new IgnorePlugin(/^encoding$/),
   ];
 
   // Support HMR in development. Only needed in client.
@@ -40,7 +40,7 @@ export default ({
   if (target !== "server")
     config.push(
       new LoadablePlugin({
-        filename: `../bundling/chunks.${target}.json`
+        filename: `../bundling/chunks.${target}.json`,
       })
     );
 

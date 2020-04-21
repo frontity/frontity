@@ -8,7 +8,7 @@ const rootPath = process.cwd();
 export default ({
   target,
   mode,
-  entryPoints
+  entryPoints,
 }: {
   target: Target;
   mode: Mode;
@@ -17,11 +17,11 @@ export default ({
   let config: Configuration["entry"] = {};
 
   if (target === "server") {
-    const { path } = entryPoints.find(bundle => bundle.name === "server");
+    const { path } = entryPoints.find((bundle) => bundle.name === "server");
     config = resolve(rootPath, path);
   } else {
     entryPoints
-      .filter(bundle => bundle.name !== "server")
+      .filter((bundle) => bundle.name !== "server")
       .forEach(({ name, path }) => {
         config[name] = [];
 

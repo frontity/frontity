@@ -35,11 +35,11 @@ describe("getSettings", () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithNames);
     const settings = [
       await getSettings({
-        name: "settings-one"
+        name: "settings-one",
       }),
       await getSettings({
-        name: "settings-two"
-      })
+        name: "settings-two",
+      }),
     ];
     expect(settings[0].name).toBe("settings-one");
     expect(settings[1].name).toBe("settings-two");
@@ -55,7 +55,7 @@ describe("getSettings", () => {
   test("should work when one of the settings matches `url`", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithOneMatch);
     const settings = await getSettings({
-      url: "https://frontity.org/amp/"
+      url: "https://frontity.org/amp/",
     });
     expect(settings.name).toBe("settings-with-match");
   });
@@ -63,7 +63,7 @@ describe("getSettings", () => {
   test("should work when more than one of the settings matches `url`", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithMatches);
     const settings = await getSettings({
-      url: "https://frontity.org/page/about-us"
+      url: "https://frontity.org/page/about-us",
     });
     expect(settings.name).toBe("settings-with-large-match");
   });
@@ -71,7 +71,7 @@ describe("getSettings", () => {
   test("should work when none of the settings matches `url` but one doesn't have `match` defined", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithOneMatch);
     const settings = await getSettings({
-      url: "https://frontity.org"
+      url: "https://frontity.org",
     });
     expect(settings.name).toBe("settings-without-match");
   });
@@ -79,7 +79,7 @@ describe("getSettings", () => {
   test("should work when none of the settings matches `url` and all have `match` defined", async () => {
     mockedImportSettings.default.mockResolvedValue(mockedSettingsWithMatches);
     const settings = await getSettings({
-      url: "https://not.frontity.org"
+      url: "https://not.frontity.org",
     });
     expect(settings.name).toBe("settings-with-short-match");
   });

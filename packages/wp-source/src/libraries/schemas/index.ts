@@ -11,9 +11,9 @@ export const entity = new schema.Union(
     taxonomyEntity,
     taxonomyType,
     authorEntity,
-    attachmentEntity
+    attachmentEntity,
   },
-  val => {
+  (val) => {
     if (val.taxonomies && val.rest_base) return "postType";
     else if (val.types && val.rest_base) return "taxonomyType";
     else if (val.taxonomy) return "taxonomyEntity";

@@ -9,25 +9,25 @@ describe("analytics.sendPageview", () => {
     const mergedPackages = {
       state: {
         analytics: {
-          namespaces: ["pkg1Analytics", "pkg2Analytics"]
-        }
+          namespaces: ["pkg1Analytics", "pkg2Analytics"],
+        },
       },
       actions: {
         ...analytics.actions,
         pkg1Analytics: {
-          sendPageview: () => pkg1SendPageview
+          sendPageview: () => pkg1SendPageview,
         },
         pkg2Analytics: {
-          sendPageview: () => pkg2SendPageview
-        }
-      }
+          sendPageview: () => pkg2SendPageview,
+        },
+      },
     };
 
     const { actions } = createStore(mergedPackages);
 
     const pageview = {
       page: "/some/page",
-      title: "Some Title - My Site"
+      title: "Some Title - My Site",
     };
 
     actions.analytics.sendPageview(pageview);
@@ -47,25 +47,28 @@ describe("analytics.sendEvent", () => {
     const mergedPackages = {
       state: {
         analytics: {
-          namespaces: ["pkg1Analytics", "pkg2Analytics"]
-        }
+          namespaces: ["pkg1Analytics", "pkg2Analytics"],
+        },
       },
       actions: {
         ...analytics.actions,
         pkg1Analytics: {
-          sendEvent: () => pkg1Event
+          sendEvent: () => pkg1Event,
         },
         pkg2Analytics: {
-          sendEvent: () => pkg2Event
-        }
-      }
+          sendEvent: () => pkg2Event,
+        },
+      },
     };
 
     const { actions } = createStore(mergedPackages);
 
     const event = {
-      category: "post",
-      action: "scroll"
+      event: "some event",
+      payload: {
+        category: "post",
+        action: "scroll",
+      },
     };
 
     actions.analytics.sendEvent(event);

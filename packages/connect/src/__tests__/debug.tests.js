@@ -7,7 +7,7 @@ describe("debugger", () => {
     const counter = observable(rawCounter);
     const debugSpy = jest.fn(() => {});
     observe(() => (dummy = counter.num), {
-      debugger: debugSpy
+      debugger: debugSpy,
     });
 
     expect(dummy).toEqual(0);
@@ -17,8 +17,8 @@ describe("debugger", () => {
         type: "get",
         target: rawCounter,
         key: "num",
-        receiver: counter
-      }
+        receiver: counter,
+      },
     ]);
   });
 
@@ -28,7 +28,7 @@ describe("debugger", () => {
     const counter = observable(rawCounter);
     const debugSpy = jest.fn(() => {});
     observe(() => (dummy = "num" in counter), {
-      debugger: debugSpy
+      debugger: debugSpy,
     });
 
     expect(dummy).toEqual(false);
@@ -37,8 +37,8 @@ describe("debugger", () => {
       {
         type: "has",
         target: rawCounter,
-        key: "num"
-      }
+        key: "num",
+      },
     ]);
   });
 
@@ -54,7 +54,7 @@ describe("debugger", () => {
         }
       },
       {
-        debugger: debugSpy
+        debugger: debugSpy,
       }
     );
 
@@ -63,8 +63,8 @@ describe("debugger", () => {
     expect(debugSpy.mock.calls[0]).toEqual([
       {
         type: "iterate",
-        target: rawCounter
-      }
+        target: rawCounter,
+      },
     ]);
   });
 
@@ -74,7 +74,7 @@ describe("debugger", () => {
     const counter = observable(rawCounter);
     const debugSpy = jest.fn(() => {});
     observe(() => (dummy = counter.num), {
-      debugger: debugSpy
+      debugger: debugSpy,
     });
 
     expect(dummy).toEqual(undefined);
@@ -88,8 +88,8 @@ describe("debugger", () => {
         target: rawCounter,
         key: "num",
         value: 12,
-        receiver: counter
-      }
+        receiver: counter,
+      },
     ]);
   });
 
@@ -99,7 +99,7 @@ describe("debugger", () => {
     const counter = observable(rawCounter);
     const debugSpy = jest.fn(() => {});
     observe(() => (dummy = counter.num), {
-      debugger: debugSpy
+      debugger: debugSpy,
     });
 
     expect(dummy).toEqual(0);
@@ -114,8 +114,8 @@ describe("debugger", () => {
         key: "num",
         value: 12,
         oldValue: 0,
-        receiver: counter
-      }
+        receiver: counter,
+      },
     ]);
   });
 
@@ -125,7 +125,7 @@ describe("debugger", () => {
     const counter = observable(rawCounter);
     const debugSpy = jest.fn(() => {});
     observe(() => (dummy = counter.num), {
-      debugger: debugSpy
+      debugger: debugSpy,
     });
 
     expect(dummy).toEqual(0);
@@ -138,8 +138,8 @@ describe("debugger", () => {
         type: "delete",
         target: rawCounter,
         key: "num",
-        oldValue: 0
-      }
+        oldValue: 0,
+      },
     ]);
   });
 
@@ -150,7 +150,7 @@ describe("debugger", () => {
     const map = observable(rawMap);
     const debugSpy = jest.fn(() => {});
     observe(() => (dummy = map.get("key")), {
-      debugger: debugSpy
+      debugger: debugSpy,
     });
 
     expect(dummy).toEqual("value");
@@ -163,8 +163,8 @@ describe("debugger", () => {
       {
         type: "clear",
         target: rawMap,
-        oldTarget: oldMap
-      }
+        oldTarget: oldMap,
+      },
     ]);
   });
 
@@ -174,7 +174,7 @@ describe("debugger", () => {
     const counter = observable(rawCounter);
     const debugSpy = jest.fn(({ receiver }) => (receiverDummy = receiver.num));
     observe(() => counter.num, {
-      debugger: debugSpy
+      debugger: debugSpy,
     });
 
     expect(receiverDummy).toEqual(0);

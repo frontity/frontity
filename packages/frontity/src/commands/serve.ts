@@ -6,7 +6,7 @@ export default async ({ port, https }) => {
 
   const options = {
     port: parseInt(port, 10) || 3000,
-    isHttps: !!https
+    isHttps: !!https,
   };
 
   try {

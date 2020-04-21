@@ -6,7 +6,7 @@ let isPopState = false;
 export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
   actions,
-  libraries
+  libraries,
 }) => (link): void => {
   // normalizes link
   if (libraries.source && libraries.source.normalize)
@@ -25,7 +25,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
 export const init: TinyRouter["actions"]["router"]["init"] = ({
   state,
   actions,
-  libraries
+  libraries,
 }) => {
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
@@ -46,7 +46,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 
 export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   state,
-  actions
+  actions,
 }) => async ({ ctx }) => {
   if (state.router.autoFetch) {
     if (actions.source && actions.source.fetch) {

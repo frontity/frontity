@@ -7,7 +7,7 @@ export type Derived<Pkg extends Package, InputOrOutput, Output = null> = [
   ? ({
       state,
       actions,
-      libraries
+      libraries,
     }: {
       state: ResolveState<Pkg["state"]>;
       actions: ResolveActions<Pkg["actions"]>;
@@ -16,7 +16,7 @@ export type Derived<Pkg extends Package, InputOrOutput, Output = null> = [
   : ({
       state,
       actions,
-      libraries
+      libraries,
     }: {
       state: ResolveState<Pkg["state"]>;
       actions: ResolveActions<Pkg["actions"]>;

@@ -18,16 +18,16 @@ const filenames: {
 } = {
   module: {
     development: "[name].module.js",
-    production: "[name].module.[chunkhash].js"
+    production: "[name].module.[chunkhash].js",
   },
   es5: {
     development: "[name].es5.js",
-    production: "[name].es5.[chunkhash].js"
+    production: "[name].es5.[chunkhash].js",
   },
   server: {
     development: "server.js",
-    production: "server.js"
-  }
+    production: "server.js",
+  },
 };
 const paths: {
   module: string;
@@ -36,7 +36,7 @@ const paths: {
 } = {
   module: "static",
   es5: "static",
-  server: ""
+  server: "",
 };
 // Same with chunks, only hashes in production and es5/module in the filename.
 const chunkFilenames: {
@@ -45,18 +45,18 @@ const chunkFilenames: {
 } = {
   module: {
     development: "[name].module.js",
-    production: "[name].module.[chunkhash].js"
+    production: "[name].module.[chunkhash].js",
   },
   es5: {
     development: "[name].es5.js",
-    production: "[name].es5.[chunkhash].js"
-  }
+    production: "[name].es5.[chunkhash].js",
+  },
 };
 
 export default ({
   target,
   mode,
-  outDir
+  outDir,
 }: {
   target: Target;
   mode: Mode;
@@ -67,5 +67,5 @@ export default ({
   publicPath: "/static/",
   ...(target !== "server" && { chunkFilename: chunkFilenames[target][mode] }),
   // Node still needs CJS.
-  ...(target === "server" && { libraryTarget: "commonjs2" })
+  ...(target === "server" && { libraryTarget: "commonjs2" }),
 });

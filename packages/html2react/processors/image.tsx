@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { styled } from "frontity";
 import Image, { Props as ImageProps } from "@frontity/components/image";
-import { Processor } from "../types";
+import { Processor, Element } from "../types";
 
 type Props = ImageProps & {
   width: string;
@@ -9,7 +9,14 @@ type Props = ImageProps & {
   children: ReactNode;
 };
 
-const ContentImage: React.FC<Props> = props => {
+interface ImageElement extends Element {
+  props: Element["props"] & {
+    "data-src"?: string;
+    "data-srcset"?: string;
+  };
+}
+
+const ContentImage: React.FC<Props> = (props) => {
   if (props.width && props.height) {
     return (
       <Container height={props.height} width={props.width}>
@@ -21,23 +28,23 @@ const ContentImage: React.FC<Props> = props => {
   }
 };
 
-const image: Processor<React.HTMLProps<HTMLImageElement>> = {
-  test: ({ node }) => node.type === "element" && node.component === "img",
+const image: Processor<ImageElement> = {
+  test: ({ node }) => node.component === "img",
   processor: ({ node }) => {
-    if (node.type === "element") {
-      if (node.parent && node.parent.component === "noscript") return null;
+    if (node.parent?.component === "noscript") return null;
 
-      if (node.props["data-src"]) {
-        node.props.src = node.props["data-src"];
-      }
-      if (node.props["data-srcset"]) {
-        node.props.srcSet = node.props["data-srcset"];
-      }
-      node.component = ContentImage;
+    if (node.props["data-src"]) {
+      node.props.src = node.props["data-src"];
     }
 
+    if (node.props["data-srcset"]) {
+      node.props.srcSet = node.props["data-srcset"];
+    }
+
+    node.component = ContentImage;
+
     return node;
-  }
+  },
 };
 
 export default image;

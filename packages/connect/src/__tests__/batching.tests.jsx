@@ -7,8 +7,8 @@ let store, renderCount, app;
 beforeEach(() => {
   store = createStore({
     state: {
-      number: "1"
-    }
+      number: "1",
+    },
   });
 
   renderCount = 0;
@@ -75,7 +75,7 @@ describe("batching", () => {
   test("should batch changes in setTimeout and setInterval", async () => {
     expect(renderCount).toBe(1);
     expect(app).toMatchSnapshot();
-    await new Promise(resolve =>
+    await new Promise((resolve) =>
       setTimeout(() => {
         act(() => {
           store.state.number = "2";
@@ -91,7 +91,7 @@ describe("batching", () => {
   test("should batch changes in requestAnimationFrame and requestIdleCallback", async () => {
     expect(renderCount).toBe(1);
     expect(app).toMatchSnapshot();
-    await new Promise(resolve =>
+    await new Promise((resolve) =>
       // eslint-disable-next-line
       requestAnimationFrame(() => {
         act(() => {
@@ -141,19 +141,19 @@ describe("batching", () => {
   });
 
   test("should not break Promises", async () => {
-    await Promise.resolve(12)
-      .then(value => {
+    return await Promise.resolve(12)
+      .then((value) => {
         expect(value).toBe(12);
         // eslint-disable-next-line
         throw 15;
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err).toBe(15);
       });
   });
 
   test("should not break setTimeout", async () => {
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       setTimeout(
         (arg1, arg2, arg3) => {
           expect(arg1).toBe("Hello");
@@ -180,9 +180,9 @@ describe("batching", () => {
     expect(callCount).toBe(1);
   });
 
-  test("should not break method this value and args", done => {
+  test("should not break method this value and args", (done) => {
     const socket = new WebSocket("ws://www.example.com");
-    socket.onclose = function(ev) {
+    socket.onclose = function (ev) {
       expect(ev).toBeDefined();
       expect(this).toBe(socket);
       done();
@@ -190,10 +190,10 @@ describe("batching", () => {
     socket.close();
   });
 
-  test("should not break callback this value and args", done => {
+  test("should not break callback this value and args", (done) => {
     const ctx = {};
     setTimeout(
-      function(arg1, arg2) {
+      function (arg1, arg2) {
         expect(arg1).toBe("Test");
         expect(arg2).toBe("Test2");
         expect(this).toBe(ctx);

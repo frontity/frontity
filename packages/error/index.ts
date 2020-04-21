@@ -1,6 +1,16 @@
 const suffix = "\nVisit https://community.frontity.org for help! 🙂\n";
 
-export const error = (message: string, doThrow = true) => {
+interface FrontityError {
+  (
+    message: string,
+    options?: {
+      throw?: boolean;
+    }
+  ): void;
+}
+
+export const error: FrontityError = (message, options = {}) => {
+  const doThrow = typeof options.throw !== "undefined" ? options.throw : true;
   if (process.env.NODE_ENV !== "production") {
     if (doThrow) throw new Error(message + suffix);
     console.error(message + suffix);

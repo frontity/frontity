@@ -21,7 +21,7 @@ const SearchResults = ({ state, libraries }) => {
   const searchQuery = parse.query["s"];
 
   // Since we formatted the query string in the search modal, let's reverse the formatting
-  const reverseFormat = query => query.replace("+", " ");
+  const reverseFormat = (query) => query.replace("+", " ");
 
   return (
     <>

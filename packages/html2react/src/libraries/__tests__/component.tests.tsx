@@ -11,26 +11,26 @@ describe("Component", () => {
         name: "priority-15",
         priority: 15,
         test: () => false,
-        processor: () => {}
+        processor: () => {},
       },
       {
         name: "priority-5",
         priority: 5,
         test: () => false,
-        processor: () => {}
+        processor: () => {},
       },
       {
         name: "priority-none",
         test: () => false,
-        processor: () => {}
-      }
+        processor: () => {},
+      },
     ];
 
     const libraries = {
       html2react: {
         parse,
-        processors
-      }
+        processors,
+      },
     };
 
     expect(libraries.html2react.processors[0].name).toBe("priority-15");

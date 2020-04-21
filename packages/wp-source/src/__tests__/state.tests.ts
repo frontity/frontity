@@ -18,7 +18,7 @@ describe("state - source.get", () => {
       link: "/some-post/",
       page: 1,
       query: {},
-      route: "/some-post/"
+      route: "/some-post/",
     });
   });
 
@@ -28,7 +28,7 @@ describe("state - source.get", () => {
       id: 1,
       isPostType: true,
       isReady: true,
-      isFetching: false
+      isFetching: false,
     };
     const { source } = initStore({ "/some-post/": post }).state;
     expect(source.get("/some-post")).toEqual(post);
@@ -45,7 +45,7 @@ describe("state - source.get", () => {
       isTaxonomy: true,
       isTag: true,
       isReady: true,
-      isFetching: false
+      isFetching: false,
     };
     const { source } = initStore({ "/tag/some-tag/page/2/": archive }).state;
     expect(source.get("/tag/some-tag/page/2")).toEqual(archive);
@@ -64,7 +64,7 @@ describe("state - source.get", () => {
       isTaxonomy: true,
       isTag: true,
       isReady: true,
-      isFetching: false
+      isFetching: false,
     };
     const { source } = initStore({ "/tag/some-tag/?s=search": archive }).state;
     expect(source.get("/tag/some-tag?s=search")).toEqual(archive);
@@ -83,10 +83,10 @@ describe("state - source.get", () => {
       isTaxonomy: true,
       isTag: true,
       isReady: true,
-      isFetching: false
+      isFetching: false,
     };
     const { source } = initStore({
-      "/tag/some-tag/page/2/?s=search": archive
+      "/tag/some-tag/page/2/?s=search": archive,
     }).state;
     expect(source.get("/tag/some-tag/page/2/?s=search")).toEqual(archive);
     expect(source.get("/tag/some-tag/page/2?s=search")).toEqual(archive);

@@ -16,7 +16,7 @@ const Root: React.FC<Connect<HeadTagsPackage>> = ({ state }) => {
     state.source.api,
     transformLinks,
     transformLinks && transformLinks.base,
-    transformLinks && transformLinks.ignore
+    transformLinks && transformLinks.ignore,
   ]);
 
   // Render all tags inside <head>.

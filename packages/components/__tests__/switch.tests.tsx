@@ -3,7 +3,7 @@ import { create } from "react-test-renderer";
 import Switch from "../switch";
 
 // Test components
-const TestArchive: React.FC<{ when?: boolean }> = () => {
+const TestArchive: React.FC<{ when?: boolean; someProp?: string }> = () => {
   return <h1>Test Archive Component</h1>;
 };
 
@@ -12,12 +12,12 @@ const TestBlog: React.FC<{ when?: boolean }> = () => {
 };
 
 // Default test component
-const Default: React.FC = () => {
+const Default: React.FC<{ someProp?: string }> = () => {
   return <h1>Default Component</h1>;
 };
 
 describe("Switch", () => {
-  test("render default component if no match was found", () => {
+  test("should render the default component if no match was found", () => {
     const SwitchComponent = create(
       <Switch>
         <TestArchive when={"archive" !== "archive"} />
@@ -50,5 +50,30 @@ describe("Switch", () => {
     );
 
     expect(SwitchComponent.toJSON()).toMatchSnapshot();
+  });
+
+  test("should pass down any prop that the matching component receives", () => {
+    const SwitchComponent = create(
+      <Switch>
+        <TestArchive when={true} someProp="prop value" />
+      </Switch>
+    );
+
+    expect(SwitchComponent.root.findByType(TestArchive).props).toEqual({
+      someProp: "prop value",
+      when: true,
+    });
+  });
+
+  test("should pass down any prop of the default component", () => {
+    const SwitchComponent = create(
+      <Switch>
+        <Default someProp="prop value" />
+      </Switch>
+    );
+
+    expect(SwitchComponent.root.findByType(Default).props).toEqual({
+      someProp: "prop value",
+    });
   });
 });

@@ -10,7 +10,7 @@ import Iframe from "../iframe";
 
 jest.mock("react-intersection-observer", () => ({
   __esModule: true,
-  useInView: jest.fn()
+  useInView: jest.fn(),
 }));
 
 describe("Iframe", () => {
@@ -20,7 +20,7 @@ describe("Iframe", () => {
     delete (HTMLIFrameElement as any).prototype.loading;
     Object.defineProperty(window, "IntersectionObserver", {
       writable: true,
-      value: jest.fn()
+      value: jest.fn(),
     });
   });
 
@@ -36,7 +36,7 @@ describe("Iframe", () => {
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
       height: 500,
-      loading
+      loading,
     };
 
     const result = TestRenderer.create(<Iframe {...props} />).toJSON();
@@ -52,7 +52,7 @@ describe("Iframe", () => {
       className: "fake-class-name",
       loading: "lazy" as "lazy",
       height: 300,
-      state: { frontity: { rendering: "ssr" } }
+      state: { frontity: { rendering: "ssr" } },
     };
 
     const result = TestRenderer.create(<Iframe {...props} />);
@@ -68,7 +68,7 @@ describe("Iframe", () => {
       className: "fake-class-name",
       loading: "lazy" as "lazy",
       height: 300,
-      state: { frontity: { rendering: "csr" } }
+      state: { frontity: { rendering: "csr" } },
     };
 
     const result = TestRenderer.create(<Iframe {...props} />);
@@ -84,7 +84,7 @@ describe("Iframe", () => {
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
       loading: "lazy" as "lazy",
-      state: { frontity: { rendering: "csr" } }
+      state: { frontity: { rendering: "csr" } },
     };
 
     const result = TestRenderer.create(<Iframe {...props} />);
@@ -99,7 +99,7 @@ describe("Iframe", () => {
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
       height: 300,
-      state: { frontity: { rendering: "csr" } }
+      state: { frontity: { rendering: "csr" } },
     };
 
     const result = TestRenderer.create(<Iframe {...props} />);
@@ -113,7 +113,7 @@ describe("Iframe", () => {
       className: "fake-class-name",
       loading: "lazy" as "lazy",
       height: 300,
-      state: { frontity: { rendering: "csr" } }
+      state: { frontity: { rendering: "csr" } },
     };
 
     IntersectionObserver = undefined;

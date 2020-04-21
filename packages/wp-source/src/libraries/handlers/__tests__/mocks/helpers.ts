@@ -2,7 +2,7 @@ import {
   HeadersInit,
   ResponseInit,
   Headers,
-  Response as NodeResponse
+  Response as NodeResponse,
 } from "node-fetch";
 
 export const mockResponse = (
@@ -13,13 +13,13 @@ export const mockResponse = (
   const headers = headersInit && { headers: new Headers(headersInit) };
   return (new NodeResponse(JSON.stringify(body), {
     ...init,
-    ...headers
+    ...headers,
   }) as unknown) as Response;
 };
 
-export const expectEntities = sourceState => {
+export const expectEntities = (sourceState) => {
   const ids = {};
-  ["post", "category", "tag", "author", "attachment"].forEach(kind => {
+  ["post", "category", "tag", "author", "attachment"].forEach((kind) => {
     const entities = Object.values(sourceState[kind]);
     ids[kind] = entities.map(({ id }) => id);
   });

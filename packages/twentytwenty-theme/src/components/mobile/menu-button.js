@@ -4,7 +4,7 @@ import { ToggleIcon } from "../icons";
 import {
   LabeledIcon,
   NavToggle,
-  ToggleWrapper
+  ToggleWrapper,
 } from "../navigation/nav-toggle";
 
 const MobileMenuButton = ({ state, actions }) => {

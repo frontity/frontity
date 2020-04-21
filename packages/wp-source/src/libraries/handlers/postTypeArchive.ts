@@ -3,12 +3,12 @@ import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
 import {
   PostTypeArchiveData,
-  PostTypeArchiveWithSearchData
+  PostTypeArchiveWithSearchData,
 } from "@frontity/source/types/data";
 
 const postTypeArchiveHandler = ({
   type,
-  endpoint
+  endpoint,
 }: {
   type: string;
   endpoint: string;
@@ -26,14 +26,14 @@ const postTypeArchiveHandler = ({
       search: query.s,
       page,
       _embed: true,
-      ...state.source.params
-    }
+      ...state.source.params,
+    },
   });
 
   // 2. populate response
   const items = await populate({
     response,
-    state
+    state,
   });
   if (page > 1 && items.length === 0)
     throw new ServerError(`post archive doesn't have page ${page}`, 404);
@@ -51,7 +51,7 @@ const postTypeArchiveHandler = ({
     libraries.source.stringify({
       route,
       query,
-      page
+      page,
     });
 
   // 4. add data to source
@@ -73,7 +73,7 @@ const postTypeArchiveHandler = ({
     ...(hasNewerPosts && { next: getPageLink(page + 1) }),
 
     // Add search data if this is a search.
-    ...(query.s && { isSearch: true, searchQuery: query.s })
+    ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
   Object.assign(currentPageData, newPageData);

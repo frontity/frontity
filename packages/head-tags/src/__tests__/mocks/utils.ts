@@ -19,8 +19,8 @@ export const mockPostEntity = (
         categories: [],
         tags: [],
         _embedded: {},
-        head_tags: headTags
-      }
+        head_tags: headTags,
+      },
     },
     data: {
       "/post-1/": {
@@ -29,9 +29,9 @@ export const mockPostEntity = (
         isPostType: true,
         isPost: true,
         isFetching: false,
-        isReady: true
-      }
-    }
+        isReady: true,
+      },
+    },
   };
 };
 
@@ -50,8 +50,8 @@ export const mockPostType = (
         slug: "post",
         taxonomies: ["category", "tag"],
         rest_base: "posts",
-        head_tags: headTags
-      }
+        head_tags: headTags,
+      },
     },
     data: {
       "/": {
@@ -62,9 +62,9 @@ export const mockPostType = (
         isPostArchive: true,
         isHome: true,
         isFetching: false,
-        isReady: true
-      }
-    }
+        isReady: true,
+      },
+    },
   };
 };
 
@@ -78,8 +78,8 @@ export const mockTaxonomy = (headTags: HeadTags) => {
         slug: "cat-1",
         taxonomy: "category",
         parent: 0,
-        head_tags: headTags
-      }
+        head_tags: headTags,
+      },
     },
     data: {
       "/category/cat-1/": {
@@ -90,9 +90,9 @@ export const mockTaxonomy = (headTags: HeadTags) => {
         isTaxonomy: true as true,
         isCategory: true as true,
         isFetching: false as false,
-        isReady: true as true
-      }
-    }
+        isReady: true as true,
+      },
+    },
   };
 };
 
@@ -104,8 +104,8 @@ export const mockAuthor = (headTags: HeadTags) => {
         name: "Author 1",
         link: "https://test.frontity.io/author/author-1/",
         slug: "author-1",
-        head_tags: headTags
-      }
+        head_tags: headTags,
+      },
     },
     data: {
       "/author/author-1/": {
@@ -114,8 +114,8 @@ export const mockAuthor = (headTags: HeadTags) => {
         isArchive: true as true,
         isAuthor: true as true,
         isFetching: false as false,
-        isReady: true as true
-      }
-    }
+        isReady: true as true,
+      },
+    },
   };
 };

@@ -4,7 +4,7 @@ import mergePackages from "../utils/merge-packages";
 
 export default ({
   packages,
-  state
+  state,
 }: {
   packages: {
     [name: string]: Package;
