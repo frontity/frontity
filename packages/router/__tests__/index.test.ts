@@ -5,15 +5,19 @@ const router: Router = {
   state: {
     router: {
       link: "/some-path/page/2/?k1=v1",
+      windowHistoryState: {
+        initial: "/some-path/",
+        pages: [1, 2],
+      },
     },
   },
   actions: {
     router: {
-      set: (state) => (link) => {
+      set: (state) => (link, options) => {
         /* do something */
       },
     },
   },
 };
 
-test("Types are fine!", () => {});
+test("Types are fine!", () => ({}));

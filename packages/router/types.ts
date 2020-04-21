@@ -5,13 +5,22 @@ interface Router<T = null> extends Package {
     frontity?: Package["state"]["frontity"];
     router: {
       link: string;
+      windowHistoryState: SetOptions["state"];
     };
   };
   actions: {
     router: {
-      set: Action<T extends null ? Router : T, string>;
+      set:
+        | Action<T extends null ? Router : T, string>
+        | Action<T extends null ? Router : T, string, SetOptions>;
     };
   };
 }
 
 export default Router;
+
+export interface SetOptions {
+  method?: "push" | "replace";
+  title?: string;
+  state?: object;
+}
