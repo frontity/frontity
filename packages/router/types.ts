@@ -21,6 +21,6 @@ interface Router<T = null> extends Package {
 export default Router;
 
 export interface SetOptions {
-  method?: "push" | "replace";
+  method?: "push" | "replace" | "pop";
   state?: object;
 }

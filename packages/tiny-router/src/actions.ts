@@ -1,24 +1,34 @@
 import TinyRouter from "../types";
 import { warn } from "frontity";
 
-let isPopState = false;
-
 export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
   actions,
   libraries,
-}) => (link): void => {
+}) => (link, options = {}): void => {
   // normalizes link
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
 
-  state.router.link = link;
+  // sets state default value.
+  if (!options.state) options.state = {};
 
-  if (state.frontity.platform === "client" && !isPopState) {
-    window.history.pushState({ link }, "", link);
+  state.router.link = link;
+  state.router.state = options.state;
+
+  if (
+    options.method === "push" ||
+    (!options.method && state.frontity.platform === "client")
+  ) {
+    state.router.method = "push";
+    window.history.pushState(options.state, "", link);
     if (state.router.autoFetch) actions.source.fetch(link);
-  } else {
-    isPopState = false;
+  } else if (options.method === "replace") {
+    state.router.method = "replace";
+    window.history.replaceState(options.state, "", link);
+    if (state.router.autoFetch) actions.source.fetch(link);
+  } else if (options.method === "pop") {
+    state.router.method = "pop";
   }
 };
 
@@ -35,12 +45,15 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
         : state.frontity.initialLink;
   } else {
     // Replace the current url with the same one but with state.
-    window.history.replaceState({ link: state.router.link }, "");
+    window.history.replaceState({ ...state.router.state }, "");
     // Listen to changes in history.
-    window.addEventListener("popstate", event => {
+    window.addEventListener("popstate", (event) => {
       if (event.state) {
-        isPopState = true;
-        actions.router.set(event.state.link);
+        console.log("location:", location);
+        actions.router.set(
+          location.pathname + location.search + location.hash,
+          { method: "pop", state: event.state }
+        );
       }
     });
   }
