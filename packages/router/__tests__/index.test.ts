@@ -5,7 +5,8 @@ const router: Router = {
   state: {
     router: {
       link: "/some-path/page/2/?k1=v1",
-      windowHistoryState: {
+      method: "push",
+      state: {
         initial: "/some-path/",
         pages: [1, 2],
       },
