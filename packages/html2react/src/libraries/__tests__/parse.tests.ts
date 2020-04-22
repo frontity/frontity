@@ -21,9 +21,9 @@ describe("parse", () => {
       '<div class="test-class"> test </div> <label for="nothing"></label>'
     ) as Element[];
 
-    expect(result[0].props.class).toBeUndefined();
+    expect((result[0].props as any).class).toBeUndefined();
     expect(result[0].props.className).toBe("test-class");
-    expect(result[1].props.for).toBeUndefined();
+    expect((result[1].props as any).for).toBeUndefined();
     expect(result[1].props.htmlFor).toBe("nothing");
   });
 });

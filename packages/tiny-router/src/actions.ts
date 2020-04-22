@@ -37,9 +37,11 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     // Replace the current url with the same one but with state.
     window.history.replaceState({ link: state.router.link }, "");
     // Listen to changes in history.
-    window.addEventListener("popstate", ({ state }) => {
-      isPopState = true;
-      actions.router.set(state.link);
+    window.addEventListener("popstate", event => {
+      if (event.state) {
+        isPopState = true;
+        actions.router.set(event.state.link);
+      }
     });
   }
 };

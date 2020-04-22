@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0.5
+
+### Patch Changes
+
+- [`34b37ec8`](https://github.com/frontity/frontity/commit/34b37ec84bc4c387754f241ea56fd5eb8b13b14d) [#360](https://github.com/frontity/frontity/pull/360) Thanks [@luisherranz](https://github.com/luisherranz)! - Move `getSnapshot` from a store property to an import of `"@frontity/connect"`.
+
 ## 1.0.4
 
 ### Patch Changes

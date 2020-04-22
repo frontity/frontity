@@ -35,5 +35,8 @@
     "ts-jest": "^24.0.2",
     "typescript": "^3.8.2"
   },
-  "prettier": {}
+  "prettier": {
+    "trailingComma": "es5",
+    "arrowParens": "always"
+  }
 }
