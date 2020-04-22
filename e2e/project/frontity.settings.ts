@@ -58,6 +58,20 @@ const settings: Settings = [
     packages: ["e2e-html2react", "@frontity/html2react"],
   },
   {
+    name: "tiny-router",
+    packages: [
+      "e2e-tiny-router",
+      {
+        name: "@frontity/tiny-router",
+        state: { router: { autoFetch: false } }
+      },
+      {
+        name: "@frontity/wp-source",
+        state: { source: { api: "https://test.frontity.io/wp-json" } }
+      }
+    ]
+  },
+  {
     name: "google-tag-manager",
     packages: [
       "e2e-analytics",

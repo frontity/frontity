@@ -1,0 +1,10 @@
+{
+  "name": "e2e-tiny-router",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do e2e testing of Frontity's tiny-router",
+  "dependencies": {
+    "frontity": "^1.4.3",
+    "@frontity/tiny-router": "^1.1.0"
+  }
+}
