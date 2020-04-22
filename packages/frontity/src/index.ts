@@ -18,8 +18,8 @@ export const createStore = originalCreateStore as CreateStore;
 import nodeFetch from "node-fetch";
 export const fetch = (nodeFetch as any) as WindowOrWorkerGlobalScope["fetch"];
 
-import decodeClient from "./decode/client";
-import decodeServer from "./decode/server";
+import decodeClient from "./utils/decode/client";
+import decodeServer from "./utils/decode/server";
 
 export const decode =
   typeof window !== "undefined" ? decodeClient : decodeServer;

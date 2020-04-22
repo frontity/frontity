@@ -1,4 +1,4 @@
-import { Decode } from "../../types";
+import { Decode } from "./types";
 import simpleDecode from "simple-entity-decode";
 import containsHTMLEntities from "./containsHTMLEntities";
 

@@ -129,7 +129,7 @@ export default async ({
         `cd ${options.name} && npx frontity dev`
       )} and have fun! 🎉\n\nYou can find docs at ${chalk.underline.magenta(
         "https://docs.frontity.org/"
-      )}.\nIf you have any doubts, join our community at ${chalk.underline.magenta(
+      )}.\nFor technical support and assistance please join our community at ${chalk.underline.magenta(
         "https://community.frontity.org/"
       )}.\n`
     );
