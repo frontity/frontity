@@ -10,7 +10,6 @@ let fetch: jest.Mock;
 let get: jest.Mock;
 
 const createStore = frontity.createStore;
-const observe = frontity.observe;
 
 beforeEach(() => {
   normalize = jest.fn();
@@ -173,33 +172,31 @@ describe("actions", () => {
       expect(store.state.router.link).toBe("/initial/link/");
     });
 
-    test("should add event listener to handle popstate events", () => {
+    test("should fire `replaceState` once and add an event listener to handle popstate events", () => {
       config.state.frontity.platform = "client";
       const store = createStore(config);
-      store.state.router.link = "/tag/japan/page/3/";
+      store.state.router.state = { some: "state" };
       store.actions.router.init();
 
-      normalize.mockReturnValueOnce(store.state.router.link);
-
-      // check that first state is correct
+      // checks that `replaceState` was fired.
       expect(window.history.state).toEqual(store.state.router.state);
 
-      // check reactions to "popstate" events
-      let currentLink = store.state.router.link;
-      observe(() => {
-        currentLink = store.state.router.link;
-      });
-
-      const link = "/tag/japan/page/4/";
+      const link = "/about-us/";
 
       Object.defineProperty(window, "location", {
         value: { pathname: link, search: "", hash: "" },
       });
-      normalize.mockReturnValueOnce(link);
-      window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
 
-      expect(currentLink).toBe("/tag/japan/page/4/");
-      expect(store.state.router.link).toBe("/tag/japan/page/4/");
+      normalize.mockReturnValueOnce(link);
+
+      // checks that there is an event listener handleling `popstate`.
+      window.dispatchEvent(
+        new PopStateEvent("popstate", { state: { some: "different state" } })
+      );
+
+      expect(store.state.router.link).toBe(link);
+      expect(store.state.router.state).toEqual({ some: "different state" });
+      expect(store.state.router.method).toBe("pop");
     });
   });
 
