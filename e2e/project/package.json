@@ -29,7 +29,7 @@
     "e2e-switch": "^1.0.0",
     "e2e-html2react": "^1.0.0",
     "e2e-analytics": "^1.0.0",
-    "e2e-tiny-router": "^1.1.0",
+    "e2e-tiny-router": "^1.0.0",
     "frontity": "^1.5.2"
   }
 }
