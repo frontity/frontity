@@ -49,7 +49,6 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     // Listen to changes in history.
     window.addEventListener("popstate", (event) => {
       if (event.state) {
-        console.log("location:", location);
         actions.router.set(
           location.pathname + location.search + location.hash,
           { method: "pop", state: event.state }
