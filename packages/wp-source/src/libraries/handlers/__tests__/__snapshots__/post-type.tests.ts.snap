@@ -13,6 +13,7 @@ Object {
     },
   },
   "author": Object {},
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -60,6 +61,7 @@ Object {
     },
   },
   "author": Object {},
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -105,6 +107,7 @@ Object {
     },
   },
   "author": Object {},
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -160,6 +163,7 @@ Object {
     },
   },
   "author": Object {},
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -214,6 +218,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -279,6 +284,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -342,6 +348,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -415,6 +422,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -496,6 +504,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -607,6 +616,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -734,6 +744,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "cpt": Object {
@@ -851,6 +862,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -970,6 +982,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -1089,6 +1102,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -1203,6 +1217,7 @@ Object {
   "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
@@ -1238,6 +1253,7 @@ Object {
   "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
