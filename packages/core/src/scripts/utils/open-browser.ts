@@ -6,7 +6,6 @@
  */
 
 import chalk from "chalk";
-// const chalk = require("chalk");
 import { execSync } from "child_process";
 import spawn from "cross-spawn";
 import open from "open";
