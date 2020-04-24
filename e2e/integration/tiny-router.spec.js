@@ -10,7 +10,7 @@ describe("Tiny Router", () => {
       .should("have.text", "Home");
   });
 
-  it("should switch router when router is set", () => {
+  it("should switch route when using set", () => {
     cy.location("href").should("eq", "http://localhost:3001/?name=tiny-router");
 
     cy.get('button[data-button-id="switch-to-about"]').click();
@@ -26,7 +26,7 @@ describe("Tiny Router", () => {
       .should("have.text", "Home");
   });
 
-  it("should switch router when router is set with `push`", () => {
+  it("should switch route when using set with `push`", () => {
     cy.location("href").should("eq", "http://localhost:3001/?name=tiny-router");
 
     cy.get('button[data-button-id="switch-using-push"]').click();
@@ -36,7 +36,7 @@ describe("Tiny Router", () => {
       .should("have.text", "About");
   });
 
-  it("should switch router when router is set with `replace`", () => {
+  it("should switch route when using set with `replace`", () => {
     cy.location("href").should("eq", "http://localhost:3001/?name=tiny-router");
 
     cy.get('button[data-button-id="switch-using-replace"]').click();
@@ -44,6 +44,31 @@ describe("Tiny Router", () => {
     cy.get('[data-test-id="content"]')
       .should("exist")
       .should("have.text", "About");
+  });
+
+  it("should replace history entry when using set with `replace`", () => {
+    cy.location("href").should("eq", "http://localhost:3001/?name=tiny-router");
+    cy.get('[data-test-id="content"]')
+      .should("exist")
+      .should("have.text", "Home");
+
+    cy.get('button[data-button-id="switch-using-push"]').click();
+    cy.location("href").should("eq", "http://localhost:3001/about/");
+    cy.get('[data-test-id="content"]')
+      .should("exist")
+      .should("have.text", "About");
+
+    cy.get('button[data-button-id="switch-to-privacy-using-replace"]').click();
+    cy.location("href").should("eq", "http://localhost:3001/privacy/");
+    cy.get('[data-test-id="content"]')
+      .should("exist")
+      .should("have.text", "Privacy");
+
+    cy.go("back");
+    cy.location("href").should("eq", "http://localhost:3001/?name=tiny-router");
+    cy.get('[data-test-id="content"]')
+      .should("exist")
+      .should("have.text", "Home");
   });
 
   it("should recover state when moving back and forward in history", () => {

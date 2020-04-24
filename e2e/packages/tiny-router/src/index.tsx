@@ -20,7 +20,7 @@ const Root = connect(({ state, actions }) => {
           actions.router.set("/about/");
         }}
       >
-        Page with trailing slash
+        About (with trailing slash)
       </button>
 
       <button
@@ -29,7 +29,7 @@ const Root = connect(({ state, actions }) => {
           actions.router.set("/about");
         }}
       >
-        Page without trailing slash
+        About (without trailing slash)
       </button>
 
       <button
@@ -38,7 +38,7 @@ const Root = connect(({ state, actions }) => {
           actions.router.set("/about", { method: "push" });
         }}
       >
-        Set using push
+        About (push)
       </button>
 
       <button
@@ -47,7 +47,16 @@ const Root = connect(({ state, actions }) => {
           actions.router.set("/about", { method: "replace" });
         }}
       >
-        Set using replace
+        About (replace)
+      </button>
+
+      <button
+        data-button-id="switch-to-privacy-using-replace"
+        onClick={() => {
+          actions.router.set("/privacy", { method: "replace" });
+        }}
+      >
+        Privacy (replace)
       </button>
 
       <button
@@ -56,7 +65,7 @@ const Root = connect(({ state, actions }) => {
           actions.router.set("/about", { state: { hasState: true } });
         }}
       >
-        Set using state
+        About (with state)
       </button>
 
       {state.router.link === "/?name=tiny-router" && (
@@ -65,6 +74,10 @@ const Root = connect(({ state, actions }) => {
 
       {state.router.link === "/about/" && (
         <div data-test-id="content">About</div>
+      )}
+
+      {state.router.link === "/privacy/" && (
+        <div data-test-id="content">Privacy</div>
       )}
 
       {state.router.state.hasState && (
