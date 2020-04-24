@@ -32,12 +32,43 @@ const Root = connect(({ state, actions }) => {
         Page without trailing slash
       </button>
 
+      <button
+        data-button-id="switch-using-push"
+        onClick={() => {
+          actions.router.set("/about", { method: "push" });
+        }}
+      >
+        Set using push
+      </button>
+
+      <button
+        data-button-id="switch-using-replace"
+        onClick={() => {
+          actions.router.set("/about", { method: "replace" });
+        }}
+      >
+        Set using replace
+      </button>
+
+      <button
+        data-button-id="switch-using-state"
+        onClick={() => {
+          actions.router.set("/about", { state: { hasState: true } });
+        }}
+      >
+        Set using state
+      </button>
+
       {state.router.link === "/?name=tiny-router" && (
         <div data-test-id="content">Home</div>
       )}
 
       {state.router.link === "/about/" && (
         <div data-test-id="content">About</div>
+      )}
+
+      {state.router.state.hasState && (
+        <div data-test-id="has-state">Router has state!</div>
       )}
 
       <a
