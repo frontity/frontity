@@ -6,11 +6,11 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   actions,
   libraries,
 }) => (link, options = {}): void => {
-  // normalizes link
+  // Normalizes link.
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
 
-  // sets state default value.
+  // Sets state default value.
   if (!options.state) options.state = {};
 
   state.router.link = link;
@@ -47,7 +47,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       if (event.state) {
         actions.router.set(
           location.pathname + location.search + location.hash,
-          // we ar casting types here because `pop` is used only internally,
+          // We are casting types here because `pop` is used only internally,
           // therefore we don't want to expose it in the types for users.
           { method: "pop", state: event.state } as {
             method: any;
