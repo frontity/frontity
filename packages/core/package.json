@@ -73,7 +73,8 @@
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-dev-middleware": "^3.7.2",
-    "webpack-hot-middleware": "^2.24.3"
+    "webpack-hot-middleware": "^2.24.3",
+    "symlink-dir": "3.1.2"
   },
   "devDependencies": {
     "@frontity/types": "^1.2.0",
