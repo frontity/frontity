@@ -213,6 +213,11 @@ describe("route utils - normalize", () => {
       "/some/path/page/2/?k1=v1&k2=v2"
     );
   });
+  test("from path, query and hash", () => {
+    expect(normalize("/some/path/?id=1&search=value#element")).toBe(
+      "/some/path/?id=1&search=value#element"
+    );
+  });
 
   test("from root path", () => {
     expect(normalize("/")).toEqual("/");
