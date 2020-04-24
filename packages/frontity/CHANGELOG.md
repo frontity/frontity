@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.5.3
+
+### Patch Changes
+
+- [`7854971e`](https://github.com/frontity/frontity/commit/7854971eaefa665dc5d77b0b91129c1495b0dab4) [#354](https://github.com/frontity/frontity/pull/354) Thanks [@luisherranz](https://github.com/luisherranz)! - Recommend mars-theme to beginners, because it's simpler and has more comments.
+- Updated dependencies [[`34b37ec8`](https://github.com/frontity/frontity/commit/34b37ec84bc4c387754f241ea56fd5eb8b13b14d), [`ffdebed8`](https://github.com/frontity/frontity/commit/ffdebed862541d39f06305137a5cbcdec8f4ee66), [`43cf2305`](https://github.com/frontity/frontity/commit/43cf230526ed810c3778c830e41eb26ef2c53bc3), [`ac8832b1`](https://github.com/frontity/frontity/commit/ac8832b1be702f8bf4e00a8c9bc4ec3a32a3e236)]:
+  - @frontity/connect@1.0.5
+  - @frontity/core@1.5.2
+  - @frontity/error@0.1.0
+
 ## 1.5.2
 
 ### Patch Changes

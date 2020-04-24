@@ -5,6 +5,7 @@ import { Action, ServerAction } from "frontity/types";
 interface TinyRouter extends Router {
   name: "@frontity/tiny-router";
   state: Router<TinyRouter>["state"] & {
+    frontity?: Router["state"]["frontity"];
     router: {
       autoFetch?: boolean;
     };

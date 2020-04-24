@@ -1,24 +1,30 @@
 import TinyRouter from "../types";
 import { warn } from "frontity";
 
-let isPopState = false;
-
 export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
   actions,
   libraries,
-}) => (link): void => {
-  // normalizes link
+}) => (link, options = {}): void => {
+  // Normalizes link.
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
 
-  state.router.link = link;
+  // Sets state default value.
+  if (!options.state) options.state = {};
 
-  if (state.frontity.platform === "client" && !isPopState) {
-    window.history.pushState({ link }, "", link);
+  state.router.link = link;
+  state.router.state = options.state;
+
+  if (
+    options.method === "push" ||
+    (!options.method && state.frontity.platform === "client")
+  ) {
+    window.history.pushState(options.state, "", link);
     if (state.router.autoFetch) actions.source.fetch(link);
-  } else {
-    isPopState = false;
+  } else if (options.method === "replace") {
+    window.history.replaceState(options.state, "", link);
+    if (state.router.autoFetch) actions.source.fetch(link);
   }
 };
 
@@ -35,11 +41,20 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
         : state.frontity.initialLink;
   } else {
     // Replace the current url with the same one but with state.
-    window.history.replaceState({ link: state.router.link }, "");
+    window.history.replaceState({ ...state.router.state }, "");
     // Listen to changes in history.
-    window.addEventListener("popstate", ({ state }) => {
-      isPopState = true;
-      actions.router.set(state.link);
+    window.addEventListener("popstate", (event) => {
+      if (event.state) {
+        actions.router.set(
+          location.pathname + location.search + location.hash,
+          // We are casting types here because `pop` is used only internally,
+          // therefore we don't want to expose it in the types for users.
+          { method: "pop", state: event.state } as {
+            method: any;
+            state: object;
+          }
+        );
+      }
     });
   }
 };

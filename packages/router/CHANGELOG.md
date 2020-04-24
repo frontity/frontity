@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.1.0
+
+### Minor Changes
+
+- [`0b09d627`](https://github.com/frontity/frontity/commit/0b09d627a247fa77f1627a91600f0daa029d4dd9) [#380](https://github.com/frontity/frontity/pull/380) Thanks [@orballo](https://github.com/orballo)! - - Add `method` option to `actions.router.set()` to allow `"replace"` in addition to `"push"`.
+
+  - Add `state` option to `actions.router.set()` to allow storing an object in `window.history`.
+
+  More information in this Feature Discussion: https://community.frontity.org/t/router-set-options-method-title-and-state/1508/14
+
 ## 1.0.19
 
 ### Patch Changes
