@@ -5,7 +5,6 @@ const router: Router = {
   state: {
     router: {
       link: "/some-path/page/2/?k1=v1",
-      method: "push",
       state: {
         initial: "/some-path/",
         pages: [1, 2],
@@ -21,4 +20,4 @@ const router: Router = {
   },
 };
 
-test("Types are fine!", () => ({}));
+test("Types are fine!", () => {});

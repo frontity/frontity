@@ -59,7 +59,7 @@ describe("actions", () => {
       expect(store.state.router.link).toBe(normalized);
     });
 
-    test("set() should work with full URLs", () => {
+    test("should work with full URLs", () => {
       const store = createStore(config);
 
       const link = "https://blog.example/some-post/page/3/?some=query";
@@ -89,7 +89,6 @@ describe("actions", () => {
 
       store.actions.router.set(link, options);
       expect(store.state.router.link).toBe(normalized);
-      expect(store.state.router.method).toBe(options.method);
       expect(store.state.router.state).toEqual(options.state);
     });
 
@@ -181,10 +180,13 @@ describe("actions", () => {
       // checks that `replaceState` was fired.
       expect(window.history.state).toEqual(store.state.router.state);
 
-      const link = "/about-us/";
+      const pathname = "/about-us/";
+      const search = "?id=3&search=value";
+      const hash = "#element";
+      const link = pathname + search + hash;
 
       Object.defineProperty(window, "location", {
-        value: { pathname: link, search: "", hash: "" },
+        value: { pathname, search, hash },
       });
 
       normalize.mockReturnValueOnce(link);
@@ -196,7 +198,6 @@ describe("actions", () => {
 
       expect(store.state.router.link).toBe(link);
       expect(store.state.router.state).toEqual({ some: "different state" });
-      expect(store.state.router.method).toBe("pop");
     });
   });
 

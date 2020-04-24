@@ -6,7 +6,6 @@ const tinyRouter: TinyRouter = {
   state: {
     router: {
       link: "/",
-      method: "push",
       state: {},
       autoFetch: true,
     },

@@ -20,15 +20,11 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     options.method === "push" ||
     (!options.method && state.frontity.platform === "client")
   ) {
-    state.router.method = "push";
     window.history.pushState(options.state, "", link);
     if (state.router.autoFetch) actions.source.fetch(link);
   } else if (options.method === "replace") {
-    state.router.method = "replace";
     window.history.replaceState(options.state, "", link);
     if (state.router.autoFetch) actions.source.fetch(link);
-  } else if (options.method === "pop") {
-    state.router.method = "pop";
   }
 };
 
@@ -51,7 +47,12 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       if (event.state) {
         actions.router.set(
           location.pathname + location.search + location.hash,
-          { method: "pop", state: event.state }
+          // we ar casting types here because `pop` is used only internally,
+          // therefore we don't want to expose it in the types for users.
+          { method: "pop", state: event.state } as {
+            method: any;
+            state: object;
+          }
         );
       }
     });
