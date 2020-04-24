@@ -47,6 +47,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "cpt": Object {
@@ -226,6 +227,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -434,6 +436,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -642,6 +645,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,

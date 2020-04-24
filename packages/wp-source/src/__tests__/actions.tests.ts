@@ -3,6 +3,7 @@ import clone from "clone-deep";
 import wpSource from "../";
 import WpSource, { Pattern, Handler } from "../../types";
 import * as handlers from "../libraries/handlers";
+import { getMatch } from "../libraries/get-match";
 
 // Create mock for handler generators
 jest.mock("../libraries/handlers");
@@ -202,12 +203,33 @@ describe("init", () => {
     store.state.source.categoryBase = "wp-cat";
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
+    // Test that the redirection works.
+    const link = "/wp-cat/travel/";
+    const redirect = getMatch(link, store.libraries.source.redirections);
+    expect(redirect).toBeTruthy();
+    expect(redirect.func(redirect.params)).toBe("/category/travel/");
   });
 
   test("should add redirect for tags if 'tagBase' is set", async () => {
     store.state.source.tagBase = "wp-tag";
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
+    // Test that the redirection works.
+    const link = "/wp-tag/paris/";
+    const redirect = getMatch(link, store.libraries.source.redirections);
+    expect(redirect).toBeTruthy();
+    expect(redirect.func(redirect.params)).toBe("/tag/paris/");
+  });
+
+  test("should add redirect for tags if 'authorBase' is set", async () => {
+    store.state.source.authorBase = "/blog/author";
+    await store.actions.source.init();
+    expect(store.libraries.source.redirections).toMatchSnapshot();
+    // Test that the redirection works.
+    const link = "/blog/author/admin/";
+    const redirect = getMatch(link, store.libraries.source.redirections);
+    expect(redirect).toBeTruthy();
+    expect(redirect.func(redirect.params)).toBe("/author/admin/");
   });
 
   test("should add redirect if 'subirectory' is present", async () => {
