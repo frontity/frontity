@@ -139,6 +139,19 @@ describe("fetch", () => {
     expect(store.state.source.data).toMatchSnapshot();
   });
 
+  test("state.data['/some/route/'].isReady should stay true when fetching again with { force: true }", async () => {
+    // Get initial data into the store
+    await store.actions.source.fetch("/some/route/");
+
+    const fetchLink = store.actions.source.fetch("/some/route/", {
+      force: true,
+    });
+
+    expect(store.state.source.data["/some/route/"].isReady).toBe(true);
+
+    await fetchLink;
+  });
+
   test("Throw an error if fetch fails", async () => {
     handler.func = jest.fn(async (params) => {
       throw new Error("Some error");
