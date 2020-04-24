@@ -29,6 +29,7 @@ interface WpSource extends Source {
       subdirectory: string;
       categoryBase: string;
       tagBase: string;
+      authorBase: string;
       homepage: string;
       postsPage: string;
       postEndpoint: string;

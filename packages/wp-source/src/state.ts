@@ -38,6 +38,7 @@ const state: WpSource["state"]["source"] = {
   postsPage: "",
   categoryBase: "",
   tagBase: "",
+  authorBase: "",
   postEndpoint: "posts",
   params: {},
   postTypes: [],
