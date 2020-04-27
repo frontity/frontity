@@ -1,5 +1,23 @@
 # Change Log
 
+## 1.2.0
+
+### Minor Changes
+
+- [`0b09d627`](https://github.com/frontity/frontity/commit/0b09d627a247fa77f1627a91600f0daa029d4dd9) [#380](https://github.com/frontity/frontity/pull/380) Thanks [@orballo](https://github.com/orballo)! - - Add `method` option to `actions.router.set()` to allow `"replace"` in addition to `"push"`.
+
+  - Add `state` option to `actions.router.set()` to allow storing an object in `window.history`.
+
+  More information in this Feature Discussion: https://community.frontity.org/t/router-set-options-method-title-and-state/1508/14
+
+### Patch Changes
+
+- [`5e199053`](https://github.com/frontity/frontity/commit/5e199053a1fb79711836aeddd535699b5dd5e79d) [#321](https://github.com/frontity/frontity/pull/321) Thanks [@orballo](https://github.com/orballo)! - Temporary fix to make anchors with a hash work, like `/some-post#some-id`.
+
+  This will be superseded by a combination of router converters and an internal router hook.- Updated dependencies [[`0b09d627`](https://github.com/frontity/frontity/commit/0b09d627a247fa77f1627a91600f0daa029d4dd9)]:
+
+  - @frontity/router@1.1.0
+
 ## 1.1.1
 
 ### Patch Changes
