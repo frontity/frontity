@@ -26,6 +26,6 @@
     "babel-plugin-frontity": "^1.0.1",
     "frontity": "^1.5.1",
     "test": "../../packages/hooks",
-    "test-pattern-2": "../../packages/head-tags"
+    "test-pattern-2": "file:../../packages/head-tags"
   }
 }
