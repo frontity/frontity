@@ -1,5 +1,5 @@
 import symlinkDir from "symlink-dir";
-import { pathExists } from "fs-extra";
+import { pathExists, readFile } from "fs-extra";
 import { resolve } from "path";
 
 const semverRE = /^(~|\^|<|>|=)?([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/;
@@ -13,9 +13,13 @@ const isValidNodePackage = async (dir) =>
 
 export default async () => {
   // Get dependencies from CWD package.json
-  const { dependencies } = await import(process.env.CWD + "/package.json");
+  const packageJsonPath = resolve(process.env.CWD, "./package.json");
+  const packageJson = JSON.parse(
+    await readFile(packageJsonPath, { encoding: "utf8" })
+  );
+  const { dependencies } = packageJson;
 
-  const dependencyNames = await Object.keys(dependencies).filter(
+  const dependencyNames = Object.keys(dependencies).filter(
     (dependency) =>
       isNotSemanticVersion(dependencies[dependency]) &&
       isValidLinkPath(dependencies[dependency])
@@ -26,7 +30,7 @@ export default async () => {
     dependencyNames.map(async (name) => {
       const packageDir = dependencies[name].replace(/^(file:)/, "");
 
-      const dir = await resolve(process.cwd(), packageDir);
+      const dir = resolve(process.env.CWD, packageDir);
       // Check if the folder exists.
       const exists = await pathExists(dir);
       // Check if package.json exists
