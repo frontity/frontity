@@ -31,6 +31,7 @@ export default async ({
   const frontityConfig = getFrontity();
   const { outDir } = frontityConfig;
 
+  // Create symlinks for internal packages
   await createSymlinks();
 
   // Create the directories if they don't exist, clean them if they do.
