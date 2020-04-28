@@ -30,7 +30,7 @@ const mapStateToStores = (state) => {
     .map(raw);
 };
 
-export function connect(Comp) {
+export function connect(Comp, options = { injectProps: true }) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
 
   let ReactiveComp;
@@ -67,7 +67,7 @@ export function connect(Comp) {
       }, []);
 
       // run the reactive render instead of the original one
-      return render({ ...props, ...frontity });
+      return render({ ...props, ...(options.injectProps ? frontity : {}) });
     });
   } else {
     const BaseComp = isStatelessComp ? Component : Comp;

@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`connect should not inject props if \`injectProps\` option is \`false\` 1`] = `
+Array [
+  <div>
+    hasState: 
+    false
+  </div>,
+  <div>
+    hasActions: 
+    false
+  </div>,
+  <div>
+    hasLibraries: 
+    false
+  </div>,
+]
+`;
+
 exports[`connect should pass actions and react to changes 1`] = `
 Array [
   <button
