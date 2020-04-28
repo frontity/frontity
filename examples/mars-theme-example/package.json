@@ -24,6 +24,7 @@
     "@frontity/tiny-router": "^1.1.0",
     "@frontity/wp-source": "^1.5.0",
     "babel-plugin-frontity": "^1.0.1",
-    "frontity": "^1.5.1"
+    "frontity": "^1.5.1",
+    "testing-fake": "file:../packages/testing-fake"
   }
 }

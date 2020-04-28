@@ -37,11 +37,11 @@ export default async () => {
       const isNodePackage = await isValidNodePackage(dir);
 
       if (!exists) {
-        throw new Error(`${dir} for ${name} is not a directory.`);
+        throw new Error(`${dir} for ${name} does not exist.`);
       }
 
       if (!isNodePackage) {
-        throw new Error(`${name} is not a valid node package`);
+        throw new Error(`${name} is not a valid node package.`);
       }
 
       try {
