@@ -70,12 +70,6 @@ describe("Create Symlink", () => {
       }`,
     });
 
-    try {
-      await createSymlinks();
-    } catch (e) {
-      expect(true).toBeTruthy();
-    }
-
     await expect(createSymlinks()).rejects.toThrow(
       `${projectDir}/packages/${packageName} for ${packageName} does not exist.`
     );
@@ -93,12 +87,6 @@ describe("Create Symlink", () => {
       }`,
       [`${projectDir}/packages/${packageName}`]: {},
     });
-
-    try {
-      await createSymlinks();
-    } catch (e) {
-      expect(true).toBeTruthy();
-    }
 
     await expect(createSymlinks()).rejects.toThrow(
       `${packageName} is not a valid node package.`
