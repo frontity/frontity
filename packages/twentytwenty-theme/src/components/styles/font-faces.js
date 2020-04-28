@@ -12,11 +12,9 @@ import InterSemiBoldLatin from "../../fonts/inter/Inter-SemiBold-LATIN.woff2";
 
 const FontFace = ({ state }) => {
   let fonts = null;
-  let fontDisplay = "swap";
   switch (state.theme.fontSets) {
     case "us-ascii":
       fonts = [InterMediumUS, InterSemiBoldUS, InterBoldUS];
-      fontDisplay = "block";
       break;
     case "latin":
       fonts = [InterMediumLatin, InterSemiBoldLatin, InterBoldLatin];
@@ -32,24 +30,24 @@ const FontFace = ({ state }) => {
           font-family: "Inter";
           font-style: normal;
           font-weight: 500;
+          font-display: "swap";
           src: url(${fonts[0]}) format("woff2");
-          font-display: ${fontDisplay};
         }
 
         @font-face {
           font-family: "Inter";
           font-style: normal;
           font-weight: 600;
+          font-display: "swap";
           src: url(${fonts[1]}) format("woff2");
-          font-display: ${fontDisplay};
         }
 
         @font-face {
           font-family: "Inter";
           font-style: normal;
           font-weight: 700;
+          font-display: "swap";
           src: url(${fonts[2]}) format("woff2");
-          font-display: ${fontDisplay};
         }
       `}
     />
