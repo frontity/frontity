@@ -74,6 +74,7 @@ describe("populate", () => {
           link: "https://test.frontity.io/category/cat-1/",
           slug: "cat-1",
           taxonomy: "category",
+          count: 1,
         },
       ]),
     });
@@ -83,12 +84,11 @@ describe("populate", () => {
       state,
       response: mockResponse({
         id: 1,
-        count: 5,
         link: "https://test.frontity.io/category/cat-1/",
         slug: "cat-1",
         taxonomy: "category",
+        count: 5,
         description: "This is the Category 1",
-        parent: 0,
       }),
       force: true,
     });
