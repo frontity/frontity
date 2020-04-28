@@ -1,11 +1,9 @@
 import mock from "mock-fs";
 import createSymlinks from "../create-symlinks";
-import { lstat, realpathSync } from "fs";
+import { lstatSync, realpathSync } from "fs";
 import { tmpdir } from "os";
-import { promisify } from "util";
 
 // We pretend that we're running the command in some project directory, but really we just get an absolute path to a temp directory
-const lstatPromise = promisify(lstat);
 const projectDir = realpathSync(tmpdir());
 
 afterEach(() => {
@@ -35,7 +33,7 @@ describe("Create Symlink", () => {
 
     await createSymlinks();
 
-    const stats = await lstatPromise("./node_modules/someDep");
+    const stats = lstatSync("./node_modules/someDep");
     expect(stats.isSymbolicLink()).toBe(true);
   });
 
@@ -54,7 +52,7 @@ describe("Create Symlink", () => {
 
     await createSymlinks();
 
-    const stats = await lstatPromise("./node_modules/dep-with-file");
+    const stats = lstatSync("./node_modules/dep-with-file");
     expect(stats.isSymbolicLink()).toBe(true);
   });
 
