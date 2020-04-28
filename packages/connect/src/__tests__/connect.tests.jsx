@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { create, act } from "react-test-renderer";
-import connect, { Provider, createStore } from "..";
+import connect, { Provider, createStore, useConnect } from "..";
 
 let store;
 
@@ -150,6 +150,70 @@ describe("connect", () => {
     const app = create(
       <Provider value={store}>
         <Connected />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+  });
+});
+
+describe("useConnect", () => {
+  it("should pass state, derived state and derived state functions", () => {
+    const Comp = connect(() => {
+      const { state } = useConnect();
+      return (
+        <>
+          <div>{state.prop1}</div>
+          <div>{state.prop2}</div>
+          <div>{state.prop3(2)}</div>
+        </>
+      );
+    });
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+  });
+
+  it("should pass actions and actions with params", () => {
+    const Comp = connect(() => {
+      const { state, actions } = useConnect();
+      return (
+        <>
+          <button id="no-params" onClick={() => actions.action1()}>
+            change prop1
+          </button>
+          <button id="with-params" onClick={() => actions.action2(3)}>
+            change prop1 with params
+          </button>
+          <div>{state.prop1}</div>
+        </>
+      );
+    });
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+    const rootInstance = app.root;
+    const button1 = rootInstance.findByProps({ id: "no-params" });
+    act(() => button1.props.onClick());
+    expect(app).toMatchSnapshot();
+    const button2 = rootInstance.findByProps({ id: "with-params" });
+    act(() => button2.props.onClick());
+    expect(app).toMatchSnapshot();
+  });
+
+  it("should pass libraries", () => {
+    const Comp = connect(() => {
+      const { libraries } = useConnect();
+      return <libraries.Component />;
+    });
+    const app = create(
+      <Provider value={store}>
+        <Comp />
       </Provider>
     );
     expect(app).toMatchSnapshot();

@@ -163,3 +163,5 @@ export function connect(Comp) {
 
   return ReactiveComp;
 }
+
+export const useConnect = () => useContext(context);

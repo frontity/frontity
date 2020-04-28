@@ -109,3 +109,83 @@ exports[`connect should pass state to functional components 1`] = `
   1
 </div>
 `;
+
+exports[`useConnect should pass actions and actions with params 1`] = `
+Array [
+  <button
+    id="no-params"
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <button
+    id="with-params"
+    onClick={[Function]}
+  >
+    change prop1 with params
+  </button>,
+  <div>
+    1
+  </div>,
+]
+`;
+
+exports[`useConnect should pass actions and actions with params 2`] = `
+Array [
+  <button
+    id="no-params"
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <button
+    id="with-params"
+    onClick={[Function]}
+  >
+    change prop1 with params
+  </button>,
+  <div>
+    2
+  </div>,
+]
+`;
+
+exports[`useConnect should pass actions and actions with params 3`] = `
+Array [
+  <button
+    id="no-params"
+    onClick={[Function]}
+  >
+    change prop1
+  </button>,
+  <button
+    id="with-params"
+    onClick={[Function]}
+  >
+    change prop1 with params
+  </button>,
+  <div>
+    3
+  </div>,
+]
+`;
+
+exports[`useConnect should pass libraries 1`] = `
+<div>
+  component from library
+</div>
+`;
+
+exports[`useConnect should pass state, derived state and derived state functions 1`] = `
+Array [
+  <div>
+    1
+  </div>,
+  <div>
+    2
+  </div>,
+  <div>
+    3
+  </div>,
+]
+`;
