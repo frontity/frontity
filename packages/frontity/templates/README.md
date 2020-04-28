@@ -26,3 +26,9 @@ $ npm run build
 $ npx now login
 $ npx now --prod
 ```
+
+
+## Additional information
+
+Documentation: https://docs.frontity.org/
+Community forum: https://community.frontity.org/
