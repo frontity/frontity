@@ -1,5 +1,20 @@
 # Change Log
 
+## 1.7.0
+
+### Minor Changes
+
+- [`9b7858ba`](https://github.com/frontity/frontity/commit/9b7858ba283c1780037eb7519f459b01363cca54) [#382](https://github.com/frontity/frontity/pull/382) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add an option called `authorBase` to change the base of author links. Useful when a custom structure for permalinks is set in the WordPress site connected with the `@frontity/wp-source` package.
+
+## 1.6.3
+
+### Patch Changes
+
+- [`ad275b2e`](https://github.com/frontity/frontity/commit/ad275b2ee1a5bb5f365599d21ab41e4d456a9492) [#369](https://github.com/frontity/frontity/pull/369) Thanks [@luisherranz](https://github.com/luisherranz)! - `data.isHome` is now available when `data.isReady` turns true.
+- Updated dependencies [[`34b37ec8`](https://github.com/frontity/frontity/commit/34b37ec84bc4c387754f241ea56fd5eb8b13b14d), [`7854971e`](https://github.com/frontity/frontity/commit/7854971eaefa665dc5d77b0b91129c1495b0dab4)]:
+  - @frontity/connect@1.0.5
+  - frontity@1.5.3
+
 ## 1.6.2
 
 ### Patch Changes

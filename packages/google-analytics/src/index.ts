@@ -26,7 +26,7 @@ const googleAnalytics: GoogleAnalytics = {
           })
         );
       },
-      sendEvent: ({ state }) => (event) => {
+      sendEvent: ({ state }) => ({ event, payload }) => {
         // Get Tracking ids from state.
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
@@ -36,9 +36,12 @@ const googleAnalytics: GoogleAnalytics = {
           .forEach((name) => {
             window.ga(`${name}.send`, {
               hitType: "event",
-              eventCategory: event.category,
-              eventAction: event.action,
-              eventLabel: event.label,
+              eventAction: event,
+              eventCategory: payload.category,
+              eventLabel: payload.label,
+              eventValue: payload.value,
+              transport: payload.transport,
+              nonInteraction: payload.nonInteraction,
             });
           });
       },

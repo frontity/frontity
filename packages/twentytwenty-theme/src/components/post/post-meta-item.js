@@ -29,7 +29,7 @@ const MetaText = styled.span`
     text-decoration: none;
   }
 
-  :hover {
+  a:hover {
     text-decoration: underline;
   }
 `;

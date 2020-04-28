@@ -48,6 +48,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -236,6 +237,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -382,6 +384,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -602,6 +605,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -968,6 +972,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -1275,6 +1280,7 @@ Object {
   "api": "https://test.frontity.io/wp-json",
   "attachment": Object {},
   "author": Object {},
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {

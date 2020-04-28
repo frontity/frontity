@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.5.2
+
+### Patch Changes
+
+- [`34b37ec8`](https://github.com/frontity/frontity/commit/34b37ec84bc4c387754f241ea56fd5eb8b13b14d) [#360](https://github.com/frontity/frontity/pull/360) Thanks [@luisherranz](https://github.com/luisherranz)! - Move `getSnapshot` from a store property to an import of `"@frontity/connect"`.
+
+* [`ffdebed8`](https://github.com/frontity/frontity/commit/ffdebed862541d39f06305137a5cbcdec8f4ee66) [#357](https://github.com/frontity/frontity/pull/357) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix vulnerability in minimist package.
+
+- [`ac8832b1`](https://github.com/frontity/frontity/commit/ac8832b1be702f8bf4e00a8c9bc4ec3a32a3e236) [#350](https://github.com/frontity/frontity/pull/350) Thanks [@luisherranz](https://github.com/luisherranz)! - Don't catch errors in `npx frontity serve`.
+- Updated dependencies [[`34b37ec8`](https://github.com/frontity/frontity/commit/34b37ec84bc4c387754f241ea56fd5eb8b13b14d)]:
+  - @frontity/connect@1.0.5
+
 ## 1.5.1
 
 ### Patch Changes

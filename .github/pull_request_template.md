@@ -1,8 +1,10 @@
 <!--
-Thanks for your pull request 😊. Note that not following the template might result in your issue being closed
+Thanks for your pull request 😊. Note that not following the template might
+result in your issue being closed
 
 Please make sure you're familiar with and follow the instructions in the
-contributing guidelines found in the https://docs.frontity.org/contributing/code-contributions.
+contributing guidelines found in the
+https://docs.frontity.org/contributing/code-contributions.
 
 If you're new to contributing to open source projects, you might find this free
 video course helpful: http://kcd.im/pull-request
@@ -27,17 +29,22 @@ merge of your pull request!
 
 <!-- Have you done all of these things?  -->
 
-<!-- To check an item, place an "x" in the box like so: "- [x] Documentation" -->
-<!-- Strikethrough each line that's irrelevant to your changes and add the reason why -->
+<!-- To check an item, place an "x" in the box like so: "- [x] Documentation"
+Strikethrough each line that's irrelevant to your changes using ~, for example: "- [x] ~Code~"
+If needed, add the reason: "- [x] ~Documentation~: Internal code, not documented." -->
 
 - [ ] Code
-- [ ] Documentation
+- [ ] TypeScript
 - [ ] Unit tests
 - [ ] End to end tests
-- [ ] TypeScript
-- [ ] Starter Themes
+- [ ] TypeScript tests
+- [ ] Update starter themes
+- [ ] Update other packages
+- [ ] Documentation
 - [ ] Community discussions
-<!-- This is necessary if your changes should release any packages. Run `npx changeset` to create a changeset. -->
-- [ ] Changeset 
+- [ ] Changeset
+<!-- Changesets are necessary if your changes should release any packages.Run
+`npx changeset` to create a changeset. If there is a Feature Discussion for
+this, please add a link: https://community.frontity.org/c/33 -->
 
-<!-- Feel free to add additional comments. -->
+<!-- Feel free to add any additional comments. -->
