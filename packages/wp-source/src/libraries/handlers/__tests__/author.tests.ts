@@ -75,6 +75,7 @@ describe("author", () => {
       state: store.state,
       response: mockResponse(author1),
     });
+    await store.actions.source.fetch("/author/author-1/");
 
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
@@ -87,17 +88,19 @@ describe("author", () => {
       )
     );
 
-    console.log(store.state.source);
+    expect((store.state.source.data["/author/author-1"] as any).name).toEqual(
+      "Author 1"
+    );
 
-    expect(store.state.source.author).toEqual("Author 1");
-
-    // Fetch entities
+    // Fetch entities with { force: true }
     await store.actions.source.fetch("/author/author-1/", { force: true });
 
-    expect(api.get).toHaveBeenCalledTimes(1);
+    expect(api.get).toHaveBeenCalledTimes(2);
     // expect(store.state.source).toMatchSnapshot();
 
-    expect(store.state.source.author.name).toEqual("Author 2");
+    expect((store.state.source.data["/author/author-1"] as any).name).toEqual(
+      "Author 2"
+    );
   });
 
   test("fetchs from a different endpoint with extra params", async () => {
