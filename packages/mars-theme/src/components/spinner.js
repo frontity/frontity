@@ -46,7 +46,7 @@ const StyledSpinner = styled.div`
   border-radius: 50%;
   position: relative;
   text-indent: -9999em;
-  -webkit-animation: load4 1.3s infinite linear;
+  -webkit-animation: ${loading} 1.3s infinite linear;
   animation: ${loading} 1.3s infinite linear;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
