@@ -77,7 +77,7 @@ export default ({
               : `${filename[1]}-[hash].[ext]`;
           },
           outputPath: "fonts",
-          limit: 25000,
+          limit: 8192,
           emitFile: target !== "server",
         },
       },
