@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`connect should inject props if \`options\` object is empty 1`] = `
+Array [
+  <div>
+    hasState: 
+    true
+  </div>,
+  <div>
+    hasActions: 
+    true
+  </div>,
+  <div>
+    hasLibraries: 
+    true
+  </div>,
+]
+`;
+
 exports[`connect should not inject props if \`injectProps\` option is \`false\` 1`] = `
 Array [
   <div>

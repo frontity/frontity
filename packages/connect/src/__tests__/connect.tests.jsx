@@ -177,6 +177,29 @@ describe("connect", () => {
     );
     expect(app).toMatchSnapshot();
   });
+
+  it("should inject props if `options` object is empty", () => {
+    const Comp = ({ state, actions, libraries }) => {
+      const hasState = (!!state).toString();
+      const hasActions = (!!actions).toString();
+      const hasLibraries = (!!libraries).toString();
+
+      return (
+        <>
+          <div>hasState: {hasState}</div>
+          <div>hasActions: {hasActions}</div>
+          <div>hasLibraries: {hasLibraries}</div>
+        </>
+      );
+    };
+    const Connected = connect(Comp, {});
+    const app = create(
+      <Provider value={store}>
+        <Connected />
+      </Provider>
+    );
+    expect(app).toMatchSnapshot();
+  });
 });
 
 describe("useConnect", () => {

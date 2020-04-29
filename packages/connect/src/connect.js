@@ -30,10 +30,16 @@ const mapStateToStores = (state) => {
     .map(raw);
 };
 
-export function connect(Comp, options = { injectProps: true }) {
+export function connect(Comp, options) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
 
   let ReactiveComp;
+
+  const defaultOptions = {
+    injectProps: true,
+  };
+
+  options = options ? { ...defaultOptions, ...options } : defaultOptions;
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
