@@ -152,6 +152,7 @@ const actions: WpSource["actions"]["source"] = {
       postsPage,
       categoryBase,
       tagBase,
+      authorBase,
     } = state.source;
 
     if (homepage) {
@@ -206,6 +207,24 @@ const actions: WpSource["actions"]["source"] = {
         name: "tag base (reverse)",
         priority: 10,
         pattern: concatPath(subdirectory, "/tag/(.*)/"),
+        func: () => "",
+      });
+    }
+
+    if (authorBase) {
+      // Add new direction.
+      const pattern = concatPath(subdirectory, authorBase, "/:subpath+");
+      redirections.push({
+        name: "author base",
+        priority: 10,
+        pattern,
+        func: ({ subpath }) => `/author/${subpath}/`,
+      });
+      // Remove old direction.
+      redirections.push({
+        name: "author base (reverse)",
+        priority: 10,
+        pattern: concatPath(subdirectory, "/author/(.*)/"),
         func: () => "",
       });
     }
