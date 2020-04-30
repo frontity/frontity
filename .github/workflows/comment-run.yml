@@ -15,4 +15,4 @@ jobs:
       - uses: nwtgck/actions-comment-run@v1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          allowed-associations: '["OWNER"]'
+          allowed-associations: '["OWNER", "MEMBER"]'
