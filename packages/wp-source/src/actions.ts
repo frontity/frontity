@@ -29,8 +29,7 @@ const actions: WpSource["actions"]["source"] = {
     // Get options
     const force = options ? options.force : false;
 
-    if (!data || force) {
-      // Add the attributes that should be present even if fetch fails or we throw a ServerError below
+    if (!data) {
       source.data[link] = {
         link,
         route: linkParams.route,
@@ -38,8 +37,23 @@ const actions: WpSource["actions"]["source"] = {
         page,
         isFetching: true,
         isReady: false,
+      } as any;
+    } else if (force) {
+      source.data[link] = {
+        link,
+        route: linkParams.route,
+        query,
+        page,
+        isFetching: true,
+        isReady: true,
       };
-    } else if (data.isReady || data.isFetching || data.isError) {
+    } else if (data) {
+      // Always set link, route, query & page
+      source.data[link].link = link;
+      source.data[link].route = linkParams.route;
+      source.data[link].query = query;
+      source.data[link].page = page;
+    } else if ((data.isReady && !force) || data.isFetching || data.isError) {
       return;
     }
 

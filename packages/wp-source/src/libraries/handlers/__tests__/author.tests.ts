@@ -88,7 +88,7 @@ describe("author", () => {
       )
     );
 
-    expect((store.state.source.data["/author/author-1"] as any).name).toEqual(
+    expect((store.state.source.data["/author/author-1/"] as any).name).toEqual(
       "Author 1"
     );
 
@@ -98,7 +98,7 @@ describe("author", () => {
     expect(api.get).toHaveBeenCalledTimes(2);
     // expect(store.state.source).toMatchSnapshot();
 
-    expect((store.state.source.data["/author/author-1"] as any).name).toEqual(
+    expect((store.state.source.data["/author/author-1/"] as any).name).toEqual(
       "Author 2"
     );
   });
