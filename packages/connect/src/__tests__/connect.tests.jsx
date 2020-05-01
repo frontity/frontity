@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { create, act } from "react-test-renderer";
+import * as error from "@frontity/error";
 import connect, { Provider, createStore, useConnect } from "..";
 
 let store;
@@ -263,5 +264,24 @@ describe("useConnect", () => {
       </Provider>
     );
     expect(app).toMatchSnapshot();
+  });
+
+  it("should log a warning if the component is not connected", () => {
+    error.warn = jest.fn();
+
+    const Comp = () => {
+      const { state } = useConnect();
+      return <div>{state.prop1}</div>;
+    };
+    const ConnectedComp = connect(Comp);
+
+    create(
+      <Provider value={store}>
+        <Comp />
+        <ConnectedComp />
+      </Provider>
+    );
+
+    expect(error.warn).toHaveBeenCalledTimes(1);
   });
 });
