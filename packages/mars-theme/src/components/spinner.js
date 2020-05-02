@@ -45,7 +45,10 @@ const StyledSpinner = styled.div`
   height: 1em;
   border-radius: 50%;
   position: relative;
-  text-indent: -9999em;  
-  animation: ${loading} 1.3s infinite linear;  
+  text-indent: -9999em;
+  -webkit-animation: ${loading} 1.3s infinite linear;
+  animation: ${loading} 1.3s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
   transform: translateZ(0);
 `;

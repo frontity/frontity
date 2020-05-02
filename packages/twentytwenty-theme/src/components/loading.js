@@ -1,10 +1,16 @@
 import React from "react";
 import { styled, connect } from "frontity";
-import Spinner from "./spinner";
+import Loader from "react-spinners/BarLoader";
 
 const Loading = ({ state }) => (
   <Container>
-    <Spinner />
+    <Loader
+      color={state.theme.colors.primary}
+      radius={0}
+      margin="3px"
+      height={4}
+      width={240}
+    />
   </Container>
 );
 
