@@ -68,9 +68,9 @@ Upload your `static` folder to a CDN and your `server.js` file to a serverless s
 We have different channels at your disposal where you can find information about the project, discuss about it and get involved:
 
 - 📖 **[Docs](https://docs.frontity.org)**: this is the place to learn how to build amazing sites with Frontity.
-- 👨‍👩‍👧‍👦 **[Community](https://community.frontity.org/)**: use our forum to [share any doubts](https://community.frontity.org/c/dev-talk-questions), feedback and meet great people. This is your place too to share [what are you building with Frontity](https://community.frontity.org/c/showcases)!
-- 🐞 **[GitHub](https://github.com/frontity/frontity)**: we use GitHub for bugs and pull requests. Doubts are solved at the [community forum](https://community.frontity.org/).!
-- 🗣 **Social media**: a more informal place to interact with Frontity users, reach out to us on [Twitter](https://twitter.com/frontity)
+- 👨‍👩‍👧‍👦 **[Community](https://community.frontity.org/)**: use our forum to [ask any questions](https://community.frontity.org/c/dev-talk-questions), feedback and meet great people. This is your place too to share [what are you building with Frontity](https://community.frontity.org/c/showcases)!
+- 🐞 **[GitHub](https://github.com/frontity/frontity)**: we use GitHub for bugs and pull requests. Questions are solved at the [community forum](https://community.frontity.org/)!
+- 🗣 **Social media**: a more informal place to interact with Frontity users, reach out to us on [Twitter](https://twitter.com/frontity).
 - 💌 **Newsletter**: do you want to receive the latest framework updates and news? Subscribe [here](https://frontity.org/)
 
 ### » Get involved 🤗
