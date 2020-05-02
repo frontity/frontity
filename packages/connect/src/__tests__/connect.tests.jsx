@@ -275,11 +275,13 @@ describe("useConnect", () => {
     };
     const ConnectedComp = connect(Comp);
 
-    create(
-      <Provider value={store}>
-        <Comp />
-        <ConnectedComp />
-      </Provider>
+    act(() =>
+      create(
+        <Provider value={store}>
+          <Comp />
+          <ConnectedComp />
+        </Provider>
+      )
     );
 
     expect(error.warn).toHaveBeenCalledTimes(1);
