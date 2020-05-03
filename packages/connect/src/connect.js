@@ -186,13 +186,11 @@ export function connect(Comp, options) {
 
 export const useConnect = () => {
   if (!isConnected)
-    useEffect(() => {
-      warn(
-        "Warning: useConnect() is being used in a non connected component, " +
-          "therefore the component won't update on state changes. " +
-          "Please wrap your component with connect().\n"
-      );
-    }, []);
+    warn(
+      "Warning: useConnect() is being used in a non connected component, " +
+        "therefore the component won't update on state changes. " +
+        "Please wrap your component with connect().\n"
+    );
 
   return useContext(context);
 };
