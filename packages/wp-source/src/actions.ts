@@ -31,31 +31,27 @@ const actions: WpSource["actions"]["source"] = {
 
     if (!data) {
       source.data[link] = {
-        link,
-        route: linkParams.route,
-        query,
-        page,
         isFetching: true,
         isReady: false,
       } as any;
     } else if (force) {
       source.data[link] = {
-        link,
-        route: linkParams.route,
-        query,
-        page,
         isFetching: true,
         isReady: true,
       };
-    } else if (data) {
-      // Always set link, route, query & page
+    } else if ((data?.isReady && !force) || data.isFetching || data.isError) {
       source.data[link].link = link;
       source.data[link].route = linkParams.route;
       source.data[link].query = query;
       source.data[link].page = page;
-    } else if ((data.isReady && !force) || data.isFetching || data.isError) {
       return;
     }
+
+    // Always set link, route, query & page
+    source.data[link].link = link;
+    source.data[link].route = linkParams.route;
+    source.data[link].query = query;
+    source.data[link].page = page;
 
     // Make sure isFetching is true before starting the fetch.
     source.data[link].isFetching = true;
