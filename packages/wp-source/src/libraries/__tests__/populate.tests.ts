@@ -94,7 +94,7 @@ describe("populate", () => {
     });
 
     expect(state.source.category[1].description).toBe("This is the Category 1");
-    expect(state.source.category[1].count).toBe(2);
+    expect(state.source.category[1].count).toBe(5);
   });
 
   test("removes WP API path from links", async () => {
