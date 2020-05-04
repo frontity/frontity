@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Frontity](https://frontity.org/).
 
-#### Table of Contents 
+#### Table of Contents
 
 - [Launch a development server](#launch-a-development-server)
 - [Create your custom theme](#create-your-custom-theme)
@@ -37,9 +37,9 @@ Use the command `npx frontity create-package` to create a new package that can b
 npx frontity build
 ```
 
-Builds the app for production to the `build` folder. 
+Builds the app for production to the `build` folder.
 
-This will create a `/build` folder with a `server.js` (a [serverless function](https://vercel.com/docs/v2/serverless-functions/introduction)) file and a `/static` folder with all your javascript files and other assets. 
+This will create a `/build` folder with a `server.js` (a [serverless function](https://vercel.com/docs/v2/serverless-functions/introduction)) file and a `/static` folder with all your javascript files and other assets.
 
 Your app is ready to be deployed.
 
@@ -51,7 +51,7 @@ With the files generated in the _build_ you can deploy your project
 
 #### As a node app
 
-Use `npx frontity serve` to run it like a normal Node app. 
+Use `npx frontity serve` to run it like a normal Node app.
 
 This command generates (and runs) a small web server that uses the generated `server.js` and `/static` to serve your content
 
@@ -59,7 +59,7 @@ This command generates (and runs) a small web server that uses the generated `se
 
 Upload your `static` folder to a CDN and your `server.js` file to a serverless service, like Now or Netlify.
 
-> Get more info about [how to deploy](https://docs.frontity.org/deployment) a Frontity project 
+> Get more info about [how to deploy](https://docs.frontity.org/deployment) a Frontity project
 
 ---
 
@@ -69,7 +69,7 @@ We have different channels at your disposal where you can find information about
 
 - 📖 **[Docs](https://docs.frontity.org)**: this is the place to learn how to build amazing sites with Frontity.
 - 👨‍👩‍👧‍👦 **[Community](https://community.frontity.org/)**: use our forum to [ask any questions](https://community.frontity.org/c/dev-talk-questions), feedback and meet great people. This is your place too to share [what are you building with Frontity](https://community.frontity.org/c/showcases)!
-- 🐞 **[GitHub](https://github.com/frontity/frontity)**: we use GitHub for bugs and pull requests. Questions are solved at the [community forum](https://community.frontity.org/)!
+- 🐞 **[GitHub](https://github.com/frontity/frontity)**: we use GitHub for bugs and pull requests. Questions are answered in the [community forum](https://community.frontity.org/)!
 - 🗣 **Social media**: a more informal place to interact with Frontity users, reach out to us on [Twitter](https://twitter.com/frontity).
 - 💌 **Newsletter**: do you want to receive the latest framework updates and news? Subscribe [here](https://frontity.org/)
 
