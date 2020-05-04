@@ -314,7 +314,7 @@ describe("init", () => {
     expect(store.state.source.data["/some/route/"].isReady).toBe(true);
   });
 
-  test("state.data['/some/route/'].customProperty should be removed when fetching with { force: true }", async () => {
+  test("state.data['/some/route/'].isCategory should be removed when fetching with { force: true }", async () => {
     // Get initial data into the store
     const initialData: any = {
       isArchive: true,

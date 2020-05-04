@@ -30,11 +30,14 @@ const actions: WpSource["actions"]["source"] = {
     const force = options ? options.force : false;
 
     if (!data) {
+      // If there is no data yet, just set the necessary flags:
       source.data[link] = {
         isFetching: true,
         isReady: false,
-      } as any;
+      };
     } else if (force) {
+      // If we fetch with `{ force: true }`, then wipe out whatever
+      // other data was present before and just set those flags:
       source.data[link] = {
         isFetching: true,
         isReady: true,
