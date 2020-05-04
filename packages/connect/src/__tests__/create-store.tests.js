@@ -1,6 +1,5 @@
 /* eslint-disable require-atomic-updates */
 import { createStore, isObservable, getSnapshot } from "..";
-import { observe } from "@nx-js/observer-util";
 
 let config = {};
 let store = null;
@@ -110,9 +109,6 @@ describe("createStore actions", () => {
   });
 
   it("should be able to access derived state", () => {
-    observe(() => {
-      store.state.nested1.prop5;
-    });
     store.actions.nested2.nested3.action3();
     expect(store.state.nested1.prop5).toBe(3);
   });
