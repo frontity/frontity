@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.0
+
+### Minor Changes
+
+- [`9b7858ba`](https://github.com/frontity/frontity/commit/9b7858ba283c1780037eb7519f459b01363cca54) [#382](https://github.com/frontity/frontity/pull/382) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add an option called `authorBase` to change the base of author links. Useful when a custom structure for permalinks is set in the WordPress site connected with the `@frontity/wp-source` package.
+
 ## 1.6.3
 
 ### Patch Changes

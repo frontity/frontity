@@ -304,6 +304,23 @@ Array [
 ]
 `;
 
+exports[`init should add redirect for tags if 'authorBase' is set 1`] = `
+Array [
+  Object {
+    "func": [Function],
+    "name": "author base",
+    "pattern": "/blog/author/:subpath+/",
+    "priority": 10,
+  },
+  Object {
+    "func": [Function],
+    "name": "author base (reverse)",
+    "pattern": "/author/(.*)/",
+    "priority": 10,
+  },
+]
+`;
+
 exports[`init should add redirect for tags if 'tagBase' is set 1`] = `
 Array [
   Object {
