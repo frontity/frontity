@@ -84,17 +84,17 @@ describe("populate", () => {
       state,
       response: mockResponse({
         id: 1,
+        count: 2,
         link: "https://test.frontity.io/category/cat-1/",
         slug: "cat-1",
         taxonomy: "category",
-        count: 5,
         description: "This is the Category 1",
       }),
       force: true,
     });
 
     expect(state.source.category[1].description).toBe("This is the Category 1");
-    expect(state.source.category[1].count).toBe(5);
+    expect(state.source.category[1].count).toBe(2);
   });
 
   test("removes WP API path from links", async () => {
