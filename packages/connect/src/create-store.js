@@ -1,4 +1,9 @@
-import { observable, raw } from "./observable";
+import {
+  observable,
+  raw,
+  setHandlers,
+  defaultHandlers,
+} from "@nx-js/observer-util";
 
 export const getSnapshot = (obj) => {
   obj = raw(obj);
@@ -49,6 +54,14 @@ const convertedActions = (obj, instance) => {
 
 export const createStore = (store) => {
   const observableState = observable(store.state);
+  setHandlers({
+    get: (target, key, receiver) => {
+      // if it's a function, return the result of that function run with the root state.
+      if (!Array.isArray(target) && typeof target[key] === "function")
+        return target[key]({ state: observableState });
+      return defaultHandlers.get(target, key, receiver);
+    },
+  });
   const instance = {
     ...store,
     state: observableState,
