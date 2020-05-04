@@ -43,6 +43,7 @@ const actions: WpSource["actions"]["source"] = {
         isReady: true,
       };
     } else if ((data?.isReady && !force) || data.isFetching || data.isError) {
+      // Always set link, route, query & page
       source.data[link].link = link;
       source.data[link].route = linkParams.route;
       source.data[link].query = query;
