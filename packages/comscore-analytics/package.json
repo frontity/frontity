@@ -1,0 +1,28 @@
+{
+  "name": "@frontity/comscore-analytics",
+  "version": "1.0.1",
+  "description": "Comscore Analytics package for Frontity",
+  "homepage": "https://github.com/frontity/frontity",
+  "license": "Apache-2.0",
+  "keywords": [
+    "frontity",
+    "frontity-analytics",
+    "frontity-comscore-analytics"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "scripts": {
+    "test:ci": "../../node_modules/.bin/jest",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+  },
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
+  "dependencies": {
+    "@frontity/analytics": "^1.0.0",
+    "frontity": "^1.5.0"
+  }
+}
