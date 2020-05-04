@@ -84,7 +84,7 @@ describe("populate", () => {
       state,
       response: mockResponse({
         id: 1,
-        count: 2,
+        count: 5,
         link: "https://test.frontity.io/category/cat-1/",
         slug: "cat-1",
         taxonomy: "category",
