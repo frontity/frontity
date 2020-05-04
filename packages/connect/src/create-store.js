@@ -3,6 +3,7 @@ import {
   raw,
   setHandlers,
   defaultHandlers,
+  isObservable,
 } from "@nx-js/observer-util";
 
 export const getSnapshot = (obj) => {
@@ -52,16 +53,35 @@ const convertedActions = (obj, instance) => {
   }
 };
 
+const proxyToRoot = new WeakMap();
+
+setHandlers({
+  get: (target, key, receiver) => {
+    // if it's a function, return the result of that function run with the root state.
+    if (!Array.isArray(target) && typeof target[key] === "function") {
+      const state = proxyToRoot.get(receiver);
+      return target[key]({ state });
+    }
+
+    const result = defaultHandlers.get(target, key, receiver);
+
+    if (
+      typeof result === "object" &&
+      result !== null &&
+      !isObservable(result)
+    ) {
+      const observableChildren = observable(result);
+      const root = proxyToRoot.get(receiver);
+      proxyToRoot.set(observableChildren, root);
+    }
+
+    return result;
+  },
+});
+
 export const createStore = (store) => {
   const observableState = observable(store.state);
-  setHandlers({
-    get: (target, key, receiver) => {
-      // if it's a function, return the result of that function run with the root state.
-      if (!Array.isArray(target) && typeof target[key] === "function")
-        return target[key]({ state: observableState });
-      return defaultHandlers.get(target, key, receiver);
-    },
-  });
+  proxyToRoot.set(observableState, observableState);
   const instance = {
     ...store,
     state: observableState,

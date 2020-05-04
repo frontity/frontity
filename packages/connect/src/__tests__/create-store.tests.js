@@ -68,11 +68,6 @@ beforeEach(() => {
   };
 
   store = createStore(config);
-
-  // Temporary hack until we have `alwaysWrapInObservable`.
-  observe(() => {
-    JSON.stringify(store.state);
-  });
 });
 
 describe("createStore", () => {
@@ -94,6 +89,17 @@ describe("createStore", () => {
   it("should include arbitrary properties", () => {
     store = createStore({ ...config, something: "else" });
     expect(store.something).toBe("else");
+  });
+
+  it("should create two different stores", () => {
+    const store1 = createStore({
+      state: { prop1: 1, prop2: ({ state }) => state.prop1 * 2 },
+    });
+    const store2 = createStore({
+      state: { prop1: 2, prop2: ({ state }) => state.prop1 * 2 },
+    });
+    expect(store1.state.prop2).toBe(2);
+    expect(store2.state.prop2).toBe(4);
   });
 });
 
