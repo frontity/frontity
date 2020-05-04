@@ -63,13 +63,13 @@ const settings: Settings = [
       "e2e-tiny-router",
       {
         name: "@frontity/tiny-router",
-        state: { router: { autoFetch: false } }
+        state: { router: { autoFetch: false } },
       },
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "https://test.frontity.io/wp-json" } }
-      }
-    ]
+        state: { source: { api: "https://test.frontity.io/wp-json" } },
+      },
+    ],
   },
   {
     name: "google-tag-manager",
@@ -85,6 +85,10 @@ const settings: Settings = [
         },
       },
     ],
+  },
+  {
+    name: "use-in-view",
+    packages: ["e2e-use-in-view"],
   },
 ];
 

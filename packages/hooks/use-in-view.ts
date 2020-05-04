@@ -7,7 +7,10 @@ interface UseInViewResponse {
 }
 
 export default (options?: IntersectionOptions): UseInViewResponse => {
-  if (typeof window.IntersectionObserver === "undefined") {
+  if (
+    typeof window !== "undefined" &&
+    typeof window.IntersectionObserver === "undefined"
+  ) {
     return { ref: undefined, inView: true, supported: false };
   }
 
