@@ -13,7 +13,7 @@
     "url": "https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest --coverage --ci",
+    "test:ci": "../../node_modules/.bin/jest --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
