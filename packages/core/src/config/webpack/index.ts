@@ -23,11 +23,13 @@ export default ({
   babel,
   frontity,
   entryPoints,
+  publicPath,
 }: {
   mode: Mode;
   babel: BabelConfigs;
   frontity: FrontityConfig;
   entryPoints: EntryPoints[];
+  publicPath: string;
 }): WebpackConfigs => {
   const getConfig = (target: Target): Configuration => ({
     mode,
@@ -35,7 +37,7 @@ export default ({
     target: targets({ target }),
     devtool: devtool({ mode }),
     entry: entry({ target, mode, entryPoints }),
-    output: output({ target, mode, outDir: frontity.outDir }),
+    output: output({ target, mode, outDir: frontity.outDir, publicPath }),
     module: modules({ target, babel, mode }),
     resolve: resolve(),
     externals: externals({ target }),

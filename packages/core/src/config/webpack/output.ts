@@ -57,14 +57,16 @@ export default ({
   target,
   mode,
   outDir,
+  publicPath,
 }: {
   target: Target;
   mode: Mode;
   outDir: string;
+  publicPath: string;
 }): Configuration["output"] => ({
   filename: filenames[target][mode],
   path: resolve(rootPath, outDir, paths[target]),
-  publicPath: "/static/",
+  publicPath,
   ...(target !== "server" && { chunkFilename: chunkFilenames[target][mode] }),
   // Node still needs CJS.
   ...(target === "server" && { libraryTarget: "commonjs2" }),
