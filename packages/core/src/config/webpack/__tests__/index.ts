@@ -63,3 +63,19 @@ test("Webpack returns for production", () => {
     })
   ).toMatchSnapshot();
 });
+
+test("Webpack changes the public path if specified", () => {
+  const publicPath = "/custom-public-path/";
+
+  const { es5, module, server } = getWebpack({
+    mode: "production",
+    babel: babel["production"],
+    frontity,
+    entryPoints,
+    publicPath,
+  });
+
+  expect(es5.output.publicPath).toBe(publicPath);
+  expect(module.output.publicPath).toBe(publicPath);
+  expect(server.output.publicPath).toBe(publicPath);
+});

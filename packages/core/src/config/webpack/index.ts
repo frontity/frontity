@@ -23,13 +23,13 @@ export default ({
   babel,
   frontity,
   entryPoints,
-  publicPath,
+  publicPath = "/static/",
 }: {
   mode: Mode;
   babel: BabelConfigs;
   frontity: FrontityConfig;
   entryPoints: EntryPoints[];
-  publicPath: string;
+  publicPath?: string;
 }): WebpackConfigs => {
   const getConfig = (target: Target): Configuration => ({
     mode,
