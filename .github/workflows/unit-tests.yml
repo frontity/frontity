@@ -38,4 +38,4 @@ jobs:
           CI: true
 
       - name: Upload result to codecov
-        uses: npm run codecov
+        run: npm run codecov
