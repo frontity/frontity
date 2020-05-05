@@ -7,7 +7,7 @@ export default async ({ development, target, publicPath }) => {
   const options = {
     mode: development ? "development" : "production",
     target: target || "both",
-    publicPath: publicPath || "/static",
+    publicPath: publicPath || "/static/",
   };
 
   try {
