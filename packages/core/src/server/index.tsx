@@ -31,7 +31,8 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     const moduleStats = await getStats({ target: "module" });
     const es5Stats = await getStats({ target: "es5" });
     const stats = moduleStats || es5Stats;
-    if (stats) mount(stats.publicPath, serve("build/static"))(ctx, next);
+    const publicPath = stats ? stats.publicPath : "/static";
+    return mount(publicPath, serve("build/static"))(ctx, next);
   });
 
   // Default robots.txt.
