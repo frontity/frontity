@@ -27,7 +27,12 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
   const app = new Koa();
 
   // Serve static files.
-  app.use(mount("/static", serve("./build/static")));
+  app.use(async (ctx, next) => {
+    const moduleStats = await getStats({ target: "module" });
+    const es5Stats = await getStats({ target: "es5" });
+    const stats = moduleStats || es5Stats;
+    if (stats) mount(stats.publicPath, serve("build/static"))(ctx, next);
+  });
 
   // Default robots.txt.
   app.use(
