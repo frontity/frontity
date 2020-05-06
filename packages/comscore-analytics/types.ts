@@ -20,8 +20,7 @@ interface ComscoreAnalytics extends Analytics {
   };
   state: Analytics["state"] & {
     comscoreAnalytics: {
-      trackingIds: string[];
-      id: string;
+      trackingIds?: string[];
     };
   };
   actions: Analytics["actions"] & {
