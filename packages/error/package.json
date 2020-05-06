@@ -17,6 +17,7 @@
   },
   "scripts": {
     "test": "../../node_modules/.bin/jest --watch",
-    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
+    "tsdoc": "../../node_modules/.bin/typedoc --out ../../tsdoc/error src --plugin typedoc-plugin-markdown --tsconfig ../../tsconfig.json"
   }
 }
