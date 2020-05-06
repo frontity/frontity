@@ -10,7 +10,7 @@
 
 ▸ (`message`: string, `options`: object): *void*
 
-Defined in index.ts:13
+*Defined in [index.ts:13](https://github.com/frontity/frontity/blob/8ecbfbfc/packages/error/src/index.ts#L13)*
 
 **Parameters:**
 

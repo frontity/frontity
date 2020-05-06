@@ -29,7 +29,7 @@ Visit https://community.frontity.org for help! 🙂
 Visit https://community.frontity.org for help! 🙂
 "
 
-Defined in index.ts:11
+*Defined in [index.ts:11](https://github.com/frontity/frontity/blob/8ecbfbfc/packages/error/src/index.ts#L11)*
 
 Community message added to [error](_index_.md#const-error) and [warn](_index_.md#const-warn).
 
@@ -39,7 +39,7 @@ Community message added to [error](_index_.md#const-error) and [warn](_index_.md
 
 ▸ **error**(`message`: string, `options`: object): *void*
 
-Defined in index.ts:33
+*Defined in [index.ts:33](https://github.com/frontity/frontity/blob/8ecbfbfc/packages/error/src/index.ts#L33)*
 
 Throws an error, but adding a standard Frontity suffix to the message
 encouraging users to visit the community for help.
@@ -66,7 +66,7 @@ ___
 
 ▸ **warn**(`message`: string): *void*
 
-Defined in index.ts:52
+*Defined in [index.ts:52](https://github.com/frontity/frontity/blob/8ecbfbfc/packages/error/src/index.ts#L52)*
 
 Logs a warning in the console adding a standard Frontity suffix to the
 message encouraging users to visit the community for help.
