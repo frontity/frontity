@@ -17,7 +17,7 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest --passWithNoTests --coverage",
+    "test:ci": "../../node_modules/.bin/jest --passWithNoTests --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },

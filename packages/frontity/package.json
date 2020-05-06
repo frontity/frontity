@@ -25,7 +25,7 @@
     "dev": "ts-node src/cli/index.ts",
     "ts": "ts-node",
     "test": "../../node_modules/.bin/jest --watch",
-    "test:ci": "../../node_modules/.bin/jest --colors --coverage",
+    "test:ci": "../../node_modules/.bin/jest --colors --ci --coverage",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
     "prepublish": "npm run build"
