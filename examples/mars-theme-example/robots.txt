@@ -1,0 +1,3 @@
+# Robots.txt from file.
+User-agent: *
+Disallow:
