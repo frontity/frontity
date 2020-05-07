@@ -343,10 +343,11 @@ describe("init", () => {
       force: true,
     });
 
-    // The items should be present before and after fetching is done
-    expect(store.state.source.data["/some/route/"].isCategory).toBeUndefined();
-    expect(
-      (store.state.source.data["/some/route/"] as any).items
-    ).toBeUndefined();
+    // NOTE!!! This should fail in wp-source 2.0, because `isCategory` and `items` should be removed
+    expect(store.state.source.data["/some/route/"]).toMatchSnapshot();
+
+    // NOTE!!! This should fail in wp-source 2.0, because `isCategory` and `items` should be removed
+    expect(store.state.source.data["/some/route/"].isCategory).toBe(true);
+    expect((store.state.source.data["/some/route/"] as any).items).toEqual([]);
   });
 });

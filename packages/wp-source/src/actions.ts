@@ -36,12 +36,18 @@ const actions: WpSource["actions"]["source"] = {
         isReady: false,
       };
     } else if (force) {
-      // If we fetch with `{ force: true }`, then wipe out whatever
-      // other data was present before and just set those flags:
+      // If we fetch with `{ force: true }`, then only set `isFetching` to true again
       source.data[link] = {
+        ...source.data[link],
         isFetching: true,
-        isReady: true,
-      };
+      } as any;
+
+      //
+      if (source.data[link].isError) {
+        delete source.data[link].isError;
+        delete (source.data[link] as any).errorStatus;
+        delete (source.data[link] as any).errorStatusText;
+      }
     } else if ((data?.isReady && !force) || data.isFetching || data.isError) {
       // Always set link, route, query & page
       source.data[link].link = link;

@@ -416,3 +416,19 @@ Array [
   },
 ]
 `;
+
+exports[`init state.data['/some/route/'].isCategory should be removed when fetching with { force: true } 1`] = `
+Object {
+  "isArchive": true,
+  "isCategory": true,
+  "isFetching": false,
+  "isReady": true,
+  "isTaxonomy": true,
+  "items": Array [],
+  "link": "/some/route/",
+  "page": 1,
+  "query": Object {},
+  "route": "/some/route/",
+  "taxonomy": "category",
+}
+`;
