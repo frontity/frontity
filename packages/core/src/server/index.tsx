@@ -22,6 +22,7 @@ import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../../types";
 import createStore from "./store";
+import fs from "fs";
 
 export default ({ packages }): ReturnType<Koa["callback"]> => {
   const app = new Koa();
@@ -29,12 +30,21 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
   // Serve static files.
   app.use(mount("/static", serve("./build/static")));
 
-  // Default robots.txt.
+  // Default robots.txt, if it not exists.
+  let hasRobotTxt = false;
+  if (fs.existsSync("./robots.txt")) {
+    hasRobotTxt = true;
+  }
   app.use(
-    get("/robots.txt", (ctx) => {
-      ctx.type = "text/plain";
-      ctx.body = "User-agent: *\nDisallow:";
-    })
+    get(
+      "/robots.txt",
+      hasRobotTxt
+        ? serve("./")
+        : (ctx) => {
+            ctx.type = "text/plain";
+            ctx.body = "User-agent: *\nDisallow:";
+          }
+    )
   );
 
   // Ignore HMR if not in dev mode or old browser open.
