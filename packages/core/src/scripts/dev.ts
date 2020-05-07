@@ -11,6 +11,7 @@ import getFrontity from "../config/frontity";
 import { Mode } from "../../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
+import createSymlinks from "./utils/create-symlinks";
 
 // Start Frontity development environment.
 export default async ({
@@ -29,6 +30,9 @@ export default async ({
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
   const { outDir } = frontityConfig;
+
+  // Create symlinks for internal packages
+  await createSymlinks();
 
   // Create the directories if they don't exist, clean them if they do.
   await cleanBuildFolders({ outDir });

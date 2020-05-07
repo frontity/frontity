@@ -5,6 +5,7 @@ import {
   normalizeOptions,
   ensureProjectDir,
   createPackageJson,
+  createReadme,
   createFrontitySettings,
   cloneStarterTheme,
   installDependencies,
@@ -47,6 +48,11 @@ const create = async (
     step = ensureProjectDir(path);
     emitMessage(`Ensuring ${chalk.yellow(path)} directory.`, step);
     dirExisted = await step;
+
+    // 3. Creates `README.md`
+    step = createReadme(name, path);
+    emitMessage(`Creating ${chalk.yellow("README.md")}.`, step);
+    await step;
 
     // 3. Creates `package.json`.
     step = createPackageJson(name, theme, path);
