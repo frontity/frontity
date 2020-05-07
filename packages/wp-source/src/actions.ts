@@ -42,7 +42,7 @@ const actions: WpSource["actions"]["source"] = {
         isFetching: true,
       } as any;
 
-      //
+      // This is a workaround in case that `data` has previously included an error
       if (source.data[link].isError) {
         delete source.data[link].isError;
         delete (source.data[link] as any).errorStatus;
