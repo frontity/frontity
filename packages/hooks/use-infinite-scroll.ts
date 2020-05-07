@@ -5,10 +5,12 @@ import WpSource from "@frontity/wp-source/types";
 import TinyRouter from "@frontity/tiny-router/types";
 
 export interface Options {
-  link: string;
+  currentLink: string;
+  nextLink?: string;
+  limit?: number;
 }
 
-export default ({ link }: Options) => {
+export default ({ currentLink, nextLink }) => {
   const fetch = useInView({
     rootMargin: "400px 0px",
     triggerOnce: true,
@@ -22,33 +24,35 @@ export default ({ link }: Options) => {
 
   const { state, actions } = useConnect<WpSource & TinyRouter>();
 
-  const data = state.source.get(link);
-  const next = state.source.get(data.next);
-
-  if (!state.router.state.links) state.router.state.links = [link];
+  const current = state.source.get(currentLink);
+  const next = nextLink ? state.source.get(nextLink) : null;
 
   useEffect(() => {
-    if (fetch.inView && !next.isReady) {
-      console.log("fetching");
+    if (fetch.inView && next) {
       (async () => {
-        await actions.source.fetch(next.link);
-        actions.router.set(link, {
+        if (!next.isReady) await actions.source.fetch(next.link);
+
+        const links = state.router.state.links || [current.link];
+        if (!links.includes(next.link)) links.push(next.link);
+
+        actions.router.set(current.link, {
           method: "replace",
-          state: {
-            ...state.router.state,
-            links: state.router.state.links.push(next.link),
-          },
+          state: JSON.parse(
+            JSON.stringify({
+              ...state.router.state,
+              links,
+            })
+          ),
         });
       })();
     }
   }, [fetch.inView]);
 
   useEffect(() => {
-    if (route.inView && state.router.link !== link) {
-      console.log("routing");
-      actions.router.set(link, {
+    if (route.inView && state.router.link !== current.link) {
+      actions.router.set(current.link, {
         method: "replace",
-        state: state.router.state,
+        state: JSON.parse(JSON.stringify(state.router.state)),
       });
     }
   }, [route.inView]);
