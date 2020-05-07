@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.6.0
+
+### Minor Changes
+
+- [`bf3db894`](https://github.com/frontity/frontity/commit/bf3db8949c7ae85c699a9c5a4613185e4ba0baaa) [#391](https://github.com/frontity/frontity/pull/391) Thanks [@hideokamoto](https://github.com/hideokamoto)! - Create a `README.md` file on `npx frontity create` with a brief explanation of how to work with Frontity and links to the community and documentation.
+
+### Patch Changes
+
+- Updated dependencies [[`502bc144`](https://github.com/frontity/frontity/commit/502bc144158a1b64971c738dcf93306ad5b61a8f), [`7c2a99f9`](https://github.com/frontity/frontity/commit/7c2a99f9be43ad965f4d4b00c81145f21230f63f)]:
+  - @frontity/core@1.5.3
+
 ## 1.5.3
 
 ### Patch Changes

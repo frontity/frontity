@@ -1,5 +1,17 @@
 # @frontity/twentytwenty-theme
 
+## 1.1.2
+
+### Patch Changes
+
+- [`f945ec01`](https://github.com/frontity/frontity/commit/f945ec01d920e54aa19ef7999ace9e48c6b1b8bc) [#418](https://github.com/frontity/frontity/pull/418) Thanks [@w3bdesign](https://github.com/w3bdesign)! - Use a CSS-only loader to get rid of the outdated `react-spinners` package.
+
+* [`7ca40685`](https://github.com/frontity/frontity/commit/7ca40685fbdabdec51f47561d3aa4c1d6efc2968) [#388](https://github.com/frontity/frontity/pull/388) Thanks [@uokesita](https://github.com/uokesita)! - Fix tag underlining on hover.
+
+- [`502bc144`](https://github.com/frontity/frontity/commit/502bc144158a1b64971c738dcf93306ad5b61a8f) [#406](https://github.com/frontity/frontity/pull/406) Thanks [@luisherranz](https://github.com/luisherranz)! - Use `swap` in all `font-displays`. This was needed because we are not embedding fonts smaller than 25Kbs anymore.
+- Updated dependencies [[`bf3db894`](https://github.com/frontity/frontity/commit/bf3db8949c7ae85c699a9c5a4613185e4ba0baaa)]:
+  - frontity@1.6.0
+
 ## 1.1.1
 
 ### Patch Changes

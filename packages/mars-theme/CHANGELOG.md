@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.4.1
+
+### Patch Changes
+
+- [`77327403`](https://github.com/frontity/frontity/commit/77327403a8fbd44ba6780c3f1be016fda219298b) [#409](https://github.com/frontity/frontity/pull/409) Thanks [@w3bdesign](https://github.com/w3bdesign)! - Use a CSS-only loader to get rid of the outdated `react-spinners` package.
+- Updated dependencies [[`bf3db894`](https://github.com/frontity/frontity/commit/bf3db8949c7ae85c699a9c5a4613185e4ba0baaa)]:
+  - frontity@1.6.0
+
 ## 1.4.0
 
 ### Minor Changes

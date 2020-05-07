@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.3
+
+### Patch Changes
+
+- [`502bc144`](https://github.com/frontity/frontity/commit/502bc144158a1b64971c738dcf93306ad5b61a8f) [#406](https://github.com/frontity/frontity/pull/406) Thanks [@luisherranz](https://github.com/luisherranz)! - Don't embed fonts so big because they have an impact on LightHouse performance score. I have reduced the limit from 25Kbs to 8Kbs, which seems to be the recommendation in Webpack.
+
+* [`7c2a99f9`](https://github.com/frontity/frontity/commit/7c2a99f9be43ad965f4d4b00c81145f21230f63f) [#387](https://github.com/frontity/frontity/pull/387) Thanks [@iamuchejude](https://github.com/iamuchejude)! - Fix yarn symlink bug
+
 ## 1.5.2
 
 ### Patch Changes
