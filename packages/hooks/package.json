@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "frontity": "^1.5.0",
-    "react-intersection-observer": "^8.26.2"
+    "react-intersection-observer": "^8.26.2",
+    "@frontity/wp-source": "^1.7.0",
+    "@frontity/tiny-router": "^1.2.0"
   }
 }
