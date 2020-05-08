@@ -21,5 +21,5 @@ export default Router;
 
 export interface SetOptions {
   method?: "push" | "replace";
-  state?: object;
+  state?: any;
 }

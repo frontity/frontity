@@ -29,22 +29,20 @@ export default ({ currentLink, nextLink }) => {
 
   useEffect(() => {
     if (fetch.inView && next) {
-      (async () => {
-        if (!next.isReady) await actions.source.fetch(next.link);
+      if (!next.isReady) actions.source.fetch(next.link);
 
-        const links = state.router.state.links || [current.link];
-        if (!links.includes(next.link)) links.push(next.link);
+      const links = state.router.state.links || [current.link];
+      if (!links.includes(next.link)) links.push(next.link);
 
-        actions.router.set(current.link, {
-          method: "replace",
-          state: JSON.parse(
-            JSON.stringify({
-              ...state.router.state,
-              links,
-            })
-          ),
-        });
-      })();
+      actions.router.set(current.link, {
+        method: "replace",
+        state: JSON.parse(
+          JSON.stringify({
+            ...state.router.state,
+            links,
+          })
+        ),
+      });
     }
   }, [fetch.inView]);
 
