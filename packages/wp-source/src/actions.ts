@@ -37,10 +37,7 @@ const actions: WpSource["actions"]["source"] = {
       };
     } else if (force) {
       // If we fetch with `{ force: true }`, then only set `isFetching` to true again
-      source.data[link] = {
-        ...source.data[link],
-        isFetching: true,
-      } as any;
+      data.isFetching = true;
 
       // This is a workaround in case that `data` has previously included an error
       if (source.data[link].isError) {
