@@ -10,7 +10,7 @@ export interface Options {
   limit?: number;
 }
 
-export default ({ currentLink, nextLink }) => {
+export default ({ currentLink, nextLink, limit }) => {
   const fetch = useInView({
     rootMargin: "400px 0px",
     triggerOnce: true,
@@ -27,8 +27,24 @@ export default ({ currentLink, nextLink }) => {
   const current = state.source.get(currentLink);
   const next = nextLink ? state.source.get(nextLink) : null;
 
+  // Check if the current scroll has reached the limit.
+  const isLimit =
+    limit &&
+    state.router.state.links &&
+    state.router.state.links.length >= limit;
+
+  // Request the current route in case it's not ready
+  // and it's not fetching.
   useEffect(() => {
-    if (fetch.inView && next) {
+    if (!current.isReady && !current.isFetching)
+      actions.source.fetch(current.link);
+  }, []);
+
+  // Once the fetch waypoint is in view, fetch the next
+  // route content, if not available yet, and add the new route
+  // to the array of elements in the infinite scroll.
+  useEffect(() => {
+    if (fetch.inView && next && !isLimit) {
       if (!next.isReady) actions.source.fetch(next.link);
 
       const links = state.router.state.links || [current.link];
@@ -46,6 +62,9 @@ export default ({ currentLink, nextLink }) => {
     }
   }, [fetch.inView]);
 
+  // Once the route waypoint is in view, change the route to the
+  // current element. This preserves the route state between changes
+  // to avoid rerendering.
   useEffect(() => {
     if (route.inView && state.router.link !== current.link) {
       actions.router.set(current.link, {
