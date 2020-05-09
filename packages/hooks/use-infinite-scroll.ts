@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useConnect } from "frontity";
 import useInView from "./use-in-view";
 import WpSource from "@frontity/wp-source/types";
@@ -10,7 +10,7 @@ export interface Options {
   limit?: number;
 }
 
-export default ({ currentLink, nextLink, limit }) => {
+export default ({ currentLink, nextLink, limit }: Options) => {
   const fetch = useInView({
     rootMargin: "400px 0px",
     triggerOnce: true,
@@ -28,10 +28,14 @@ export default ({ currentLink, nextLink, limit }) => {
   const next = nextLink ? state.source.get(nextLink) : null;
 
   // Check if the current scroll has reached the limit.
-  const isLimit =
-    limit &&
-    state.router.state.links &&
-    state.router.state.links.length >= limit;
+  const { links } = state.router.state;
+  const hasReachedLimit =
+    !!limit &&
+    !!links &&
+    links.length >= limit &&
+    links[links.length - 1] === currentLink;
+
+  const [shouldForceFetch, setShouldForceFetch] = useState(false);
 
   // Request the current route in case it's not ready
   // and it's not fetching.
@@ -44,7 +48,10 @@ export default ({ currentLink, nextLink, limit }) => {
   // route content, if not available yet, and add the new route
   // to the array of elements in the infinite scroll.
   useEffect(() => {
-    if (fetch.inView && next && !isLimit) {
+    if (
+      (fetch.inView && next && !hasReachedLimit) ||
+      (next && shouldForceFetch)
+    ) {
       if (!next.isReady) actions.source.fetch(next.link);
 
       const links = state.router.state.links || [current.link];
@@ -60,7 +67,7 @@ export default ({ currentLink, nextLink, limit }) => {
         ),
       });
     }
-  }, [fetch.inView]);
+  }, [shouldForceFetch, fetch.inView]);
 
   // Once the route waypoint is in view, change the route to the
   // current element. This preserves the route state between changes
@@ -74,10 +81,18 @@ export default ({ currentLink, nextLink, limit }) => {
     }
   }, [route.inView]);
 
+  const forceFetch = () => {
+    setShouldForceFetch(true);
+  };
+
   return {
     routeRef: route.ref,
     fetchRef: fetch.ref,
     routeInView: route.inView,
     fetchInView: fetch.inView,
+    isReady: current.isReady,
+    isFetching: current.isFetching,
+    hasReachedLimit,
+    forceFetch,
   };
 };
