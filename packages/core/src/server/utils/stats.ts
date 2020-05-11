@@ -1,6 +1,6 @@
 export interface Stats {
   assetsByChunkName: { [key: string]: string };
-  publicPath: string;
+  publicPath?: string;
 }
 
 export interface Extractor {
