@@ -41,9 +41,10 @@ const actions: WpSource["actions"]["source"] = {
 
       // This is a workaround in case that `data` has previously included an error
       if (data.isError) {
-        delete data.isError;
-        delete data.errorStatus;
-        delete data.errorStatusText;
+        source.data[link] = {
+          isFetching: true,
+          isReady: false,
+        };
       }
     } else if ((data?.isReady && !force) || data.isFetching || data.isError) {
       // Always set link, route, query & page
