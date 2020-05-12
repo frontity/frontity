@@ -1,3 +1,5 @@
+import { join } from "path";
+
 export interface Stats {
   assetsByChunkName: { [key: string]: string };
   publicPath?: string;
@@ -51,11 +53,17 @@ export const getBothScriptTags = ({
 
   const moduleTags = chunkNames.map(
     (chunk) =>
-      `<script async type="module" data-chunk="${chunk}" src="${publicPath}${moduleStats.assetsByChunkName[chunk]}"></script>`
+      `<script async type="module" data-chunk="${chunk}" src="${join(
+        publicPath,
+        moduleStats.assetsByChunkName[chunk]
+      )}"></script>`
   );
   const es5Tags = chunkNames.map(
     (chunk) =>
-      `<script async nomodule data-chunk="${chunk}" src="${publicPath}${es5Stats.assetsByChunkName[chunk]}"></script>`
+      `<script async nomodule data-chunk="${chunk}" src="${join(
+        publicPath,
+        es5Stats.assetsByChunkName[chunk]
+      )}"></script>`
   );
 
   const requiredChunksTag = extractor.getRequiredChunksScriptTag({});
