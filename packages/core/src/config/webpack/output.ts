@@ -66,7 +66,8 @@ export default ({
 }): Configuration["output"] => ({
   filename: filenames[target][mode],
   path: resolve(rootPath, outDir, paths[target]),
-  publicPath,
+  // Ensure there is a trailing slash in the public path.
+  publicPath: publicPath.replace(/\/?$/, "/"),
   ...(target !== "server" && { chunkFilename: chunkFilenames[target][mode] }),
   // Node still needs CJS.
   ...(target === "server" && { libraryTarget: "commonjs2" }),
