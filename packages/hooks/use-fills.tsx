@@ -48,23 +48,21 @@ const useFills = (name: string) => {
       .sort((a, b) => a.priority - b.priority)
 
       // Add real component to the array.
-      .map((fill) => {
+      .reduce((allFills, fill) => {
         const { fills } = libraries;
         const { library } = fill;
 
         // If we cannot find the fill component in `libraries` OR
-        // if we cannot find the reference to the component in `state.fills.library` return a "placeholder". This is more clear than .reduce()
-        if (!fills || !library) return "not found";
+        // if we cannot find the reference to the component in `state.fills.library` we skip.
+        if (!fills || !library) return allFills;
 
-        const Fill = libraries.fills[fill?.library];
-
-        return {
+        const newFill = {
           ...fill,
-          Fill,
+          Fill: libraries.fills[fill.library],
         };
-      })
-      // Remove the "placeholders" from the array
-      .filter((item) => item !== "not found")
+
+        return allFills.concat(newFill);
+      }, [])
   );
 };
 
