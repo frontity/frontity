@@ -28,8 +28,8 @@ const useFills = (name: string) => {
     return [];
   }
 
-  if (!Object.values(state.fills).find((slot) => slot.slot === name)) {
-    warn(`Could not find any slot with name ${name}. Is this what you want?`);
+  // The user has not specified any fills yet
+  if (!state.fills || typeof state.fills !== "object") {
     return [];
   }
 
@@ -54,7 +54,8 @@ const useFills = (name: string) => {
           const { fills } = libraries;
           const { library } = fill;
 
-          // If we cannot find the fill component in `libraries` OR
+          // If we cannot find the fill component in `libraries`
+          // OR
           // if we cannot find the reference to the component in `state.fills.library` we skip.
           if (!fills || !library) return allFills;
 

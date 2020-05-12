@@ -18,7 +18,7 @@
   "scripts": {
     "test:ci": "../../node_modules/.bin/jest --passWithNoTests",
     "test": "../../node_modules/.bin/jest --watch",
-    "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+    "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
   "dependencies": {
     "frontity": "^1.5.0"

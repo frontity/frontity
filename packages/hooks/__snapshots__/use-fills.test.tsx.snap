@@ -1,15 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`useFills Should re-render the fill when updating the props 1`] = `
+<div
+  id="test-fill"
+>
+  Im a Fill
+  <span>
+    43
+  </span>
+</div>
+`;
+
 exports[`useFills Should remind to specify the slot name if called without arguments 1`] = `null`;
+
+exports[`useFills Should return [] when state.fills.[].library is not specified 1`] = `null`;
+
+exports[`useFills Should return [] when the state.fills.[].slot is not specified 1`] = `null`;
 
 exports[`useFills Should work in the most basic case 1`] = `
 <div
   id="test-fill"
 >
-  Hi, Im Phil, Im a Fill
+  Im a Fill
+  <span>
+    42
+  </span>
 </div>
 `;
 
-exports[`useFills Should work when the library does not exist 1`] = `null`;
+exports[`useFills Should work when \`state.fills\` is missing 1`] = `null`;
 
 exports[`useFills Should work when the slot does not exist and should show a warning 1`] = `null`;

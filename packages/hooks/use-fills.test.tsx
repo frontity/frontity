@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { create } from "react-test-renderer";
+import { create, act } from "react-test-renderer";
 import { createStore, connect } from "frontity";
 import { Provider } from "@frontity/connect";
 import useFills from "./use-fills";
@@ -10,12 +10,24 @@ let store;
 // spy on the console.warn calls
 const warn = jest.spyOn(global.console, "warn");
 
-const FillComponent = () => <div id="test-fill">Hi, Im Phil, Im a Fill</div>;
+const FillComponent = ({ number }) => (
+  <div id="test-fill">
+    Im a Fill
+    <span>{number}</span>
+  </div>
+);
 
 beforeEach(() => {
   warn.mockClear();
 
   store = createStore({
+    actions: {
+      fillActions: {
+        setNumber: ({ state }) => (number: number) => {
+          state.fills["test fill"].props.number = number;
+        },
+      },
+    },
     state: {
       fills: {
         "test fill": {
@@ -56,7 +68,8 @@ describe("useFills", () => {
     );
 
     expect(app.toJSON().props).toEqual({ id: "test-fill" });
-    expect(app.toJSON().children).toEqual(["Hi, Im Phil, Im a Fill"]);
+    expect(app.toJSON().children[0]).toEqual("Im a Fill");
+    expect(app.root.findByType("span").children).toEqual(["42"]);
 
     expect(app.toJSON()).toMatchSnapshot();
   });
@@ -80,10 +93,6 @@ describe("useFills", () => {
       <Provider value={store}>
         <Comp />
       </Provider>
-    );
-
-    expect(warn.mock.calls[0][0]).toMatch(
-      "Could not find any slot with name slot that does not exist. Is this what you want?"
     );
 
     expect(app.toJSON()).toEqual(null);
@@ -124,7 +133,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should work when the library does not exist", () => {
+  it("Should return [] when state.fills.[].library is not specified", () => {
     delete store.state.fills["test fill"].library;
 
     const Comp = connect(() => {
@@ -147,6 +156,88 @@ describe("useFills", () => {
     );
 
     expect(app.toJSON()).toEqual(null);
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+
+  it("Should return [] when the state.fills.[].slot is not specified", () => {
+    delete store.state.fills["test fill"].slot;
+
+    const Comp = connect(() => {
+      const fills = useFills("slot 1");
+      expect(fills).toEqual([]);
+
+      return (
+        <>
+          {fills.map(({ Fill, props, key }) => (
+            <Fill key={key} {...props} />
+          ))}
+        </>
+      );
+    });
+
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+
+    expect(app.toJSON()).toEqual(null);
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+
+  it("Should work when `state.fills` is missing", () => {
+    delete store.state.fills;
+
+    const Comp = connect(() => {
+      const fills = useFills("slot 1");
+      expect(fills).toEqual([]);
+
+      return (
+        <>
+          {fills.map(({ Fill, props, key }) => (
+            <Fill key={key} {...props} />
+          ))}
+        </>
+      );
+    });
+
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+
+    expect(app.toJSON()).toEqual(null);
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+
+  it("Should re-render the fill when updating the props", () => {
+    const Comp = connect(() => {
+      const fills = useFills("slot 1");
+
+      return (
+        <>
+          {fills.map(({ Fill, props, key }) => (
+            <Fill key={key} {...props} />
+          ))}
+        </>
+      );
+    });
+
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+
+    act(() => {
+      store.actions.fillActions.setNumber(43);
+    });
+
+    expect(app.toJSON().props).toEqual({ id: "test-fill" });
+    expect(app.toJSON().children[0]).toEqual("Im a Fill");
+    expect(app.root.findByType("span").children).toEqual(["43"]);
+
     expect(app.toJSON()).toMatchSnapshot();
   });
 });
