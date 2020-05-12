@@ -1,19 +1,17 @@
 import { useConnect, warn } from "frontity";
 
-interface Fills {
-  [key: string]: {
-    slot: string;
-    library: string;
-    priority?: number;
-    props?: {
-      [key: string]: any;
-    };
+interface Fill {
+  slot: string;
+  library: string;
+  priority?: number;
+  props?: {
+    [key: string]: any;
   };
 }
 
 interface FillsPackage {
   state: {
-    fills: Fills;
+    fills: { [key: string]: Fill };
   };
   libraries: {
     fills: {
@@ -48,21 +46,27 @@ const useFills = (name: string) => {
       .sort((a, b) => a.priority - b.priority)
 
       // Add real component to the array.
-      .reduce((allFills, fill) => {
-        const { fills } = libraries;
-        const { library } = fill;
+      .reduce(
+        (
+          allFills: (Fill & { Fill: React.ComponentType; key: string })[],
+          fill
+        ) => {
+          const { fills } = libraries;
+          const { library } = fill;
 
-        // If we cannot find the fill component in `libraries` OR
-        // if we cannot find the reference to the component in `state.fills.library` we skip.
-        if (!fills || !library) return allFills;
+          // If we cannot find the fill component in `libraries` OR
+          // if we cannot find the reference to the component in `state.fills.library` we skip.
+          if (!fills || !library) return allFills;
 
-        const newFill = {
-          ...fill,
-          Fill: libraries.fills[fill.library],
-        };
+          const newFill = {
+            ...fill,
+            Fill: libraries.fills[fill.library],
+          };
 
-        return allFills.concat(newFill);
-      }, [])
+          return allFills.concat(newFill);
+        },
+        []
+      )
   );
 };
 
