@@ -11,9 +11,8 @@ let store;
 const warn = jest.spyOn(global.console, "warn");
 
 const FillComponent = ({ number }) => (
-  <div id="test-fill">
+  <div id="test-fill" data-number={number}>
     Im a Fill
-    <span id={number}>{number}</span>
   </div>
 );
 
@@ -67,9 +66,8 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(app.toJSON().props).toEqual({ id: "test-fill" });
+    expect(app.toJSON().props).toEqual({ id: "test-fill", "data-number": 42 });
     expect(app.toJSON().children[0]).toEqual("Im a Fill");
-    expect(app.root.findByType("span").children).toEqual(["42"]);
 
     expect(app.toJSON()).toMatchSnapshot();
   });
@@ -234,9 +232,8 @@ describe("useFills", () => {
       store.actions.fillActions.setNumber(43);
     });
 
-    expect(app.toJSON().props).toEqual({ id: "test-fill" });
+    expect(app.toJSON().props).toEqual({ id: "test-fill", "data-number": 43 });
     expect(app.toJSON().children[0]).toEqual("Im a Fill");
-    expect(app.root.findByType("span").children).toEqual(["43"]);
 
     expect(app.toJSON()).toMatchSnapshot();
   });
@@ -269,14 +266,55 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(app.toJSON()[1].props).toEqual({ id: "test-fill" });
-    expect(app.toJSON()[1].children[0]).toEqual("Im a Fill");
-
     // This fill should come first
-    expect(app.toJSON()[0].children[1].props).toEqual({ id: 43 });
+    expect(app.toJSON()[0].props).toEqual({
+      id: "test-fill",
+      "data-number": 43,
+    });
 
     // This fill should come second
-    expect(app.toJSON()[1].children[1].props).toEqual({ id: 42 });
+    expect(app.toJSON()[1].props).toEqual({
+      id: "test-fill",
+      "data-number": 42,
+    });
+
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+
+  it("Should skip rendering the fills with value `false`", () => {
+    store.state.fills["other fill"] = {
+      slot: "slot 1",
+      library: "FillComponent",
+      props: {
+        number: 1,
+      },
+    };
+
+    store.state.fills["test fill"] = false;
+
+    const Comp = connect(() => {
+      const fills = useFills("slot 1");
+
+      return (
+        <>
+          {fills.map(({ Fill, props, key }) => (
+            <Fill key={key} {...props} />
+          ))}
+        </>
+      );
+    });
+
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+
+    // We should only render 1 component with the prop `{number: 1}`
+    expect(app.toJSON().props).toEqual({
+      id: "test-fill",
+      "data-number": 1,
+    });
 
     expect(app.toJSON()).toMatchSnapshot();
   });
