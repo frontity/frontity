@@ -13,7 +13,7 @@ const warn = jest.spyOn(global.console, "warn");
 const FillComponent = ({ number }) => (
   <div id="test-fill">
     Im a Fill
-    <span>{number}</span>
+    <span id={number}>{number}</span>
   </div>
 );
 
@@ -237,6 +237,46 @@ describe("useFills", () => {
     expect(app.toJSON().props).toEqual({ id: "test-fill" });
     expect(app.toJSON().children[0]).toEqual("Im a Fill");
     expect(app.root.findByType("span").children).toEqual(["43"]);
+
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+
+  it("Should render the fills in the order of priority", () => {
+    store.state.fills["more important fill"] = {
+      slot: "slot 1",
+      library: "FillComponent",
+      priority: 1,
+      props: {
+        number: 43,
+      },
+    };
+
+    const Comp = connect(() => {
+      const fills = useFills("slot 1");
+
+      return (
+        <>
+          {fills.map(({ Fill, props, key }) => (
+            <Fill key={key} {...props} />
+          ))}
+        </>
+      );
+    });
+
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+
+    expect(app.toJSON()[1].props).toEqual({ id: "test-fill" });
+    expect(app.toJSON()[1].children[0]).toEqual("Im a Fill");
+
+    // This fill should come first
+    expect(app.toJSON()[0].children[1].props).toEqual({ id: 43 });
+
+    // This fill should come second
+    expect(app.toJSON()[1].children[1].props).toEqual({ id: 42 });
 
     expect(app.toJSON()).toMatchSnapshot();
   });
