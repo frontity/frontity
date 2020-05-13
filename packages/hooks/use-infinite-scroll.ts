@@ -1,41 +1,55 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useConnect } from "frontity";
 import useInView from "./use-in-view";
 import WpSource from "@frontity/wp-source/types";
 import TinyRouter from "@frontity/tiny-router/types";
+import { IntersectionOptions } from "react-intersection-observer";
 
 export interface Options {
-  currentLink: string;
-  nextLink?: string;
-  limit?: number;
+  link: string;
+  fetchInViewOptions?: IntersectionOptions;
+  routeInViewOptions?: IntersectionOptions;
 }
 
-export default ({ currentLink, nextLink, limit }: Options) => {
-  const fetch = useInView({
+export default ({
+  link,
+  fetchInViewOptions = {
     rootMargin: "400px 0px",
     triggerOnce: true,
-  });
-
-  const route = useInView({
+  },
+  routeInViewOptions = {
     rootMargin: "-70% 0% -29.9999% 0%",
-  });
+  },
+}: Options) => {
+  const fetch = useInView(fetchInViewOptions);
+  const route = useInView(routeInViewOptions);
 
-  if (!route.supported || !fetch.supported) return;
+  if (!fetch.supported || !route.supported) return;
 
   const { state, actions } = useConnect<WpSource & TinyRouter>();
 
-  const current = state.source.get(currentLink);
-  const next = nextLink ? state.source.get(nextLink) : null;
+  const current = state.source.get(link);
+  const next = current.next ? state.source.get(current.next) : null;
 
-  // Check if the current scroll has reached the limit.
-  const { links } = state.router.state;
-  const hasReachedLimit =
-    !!limit &&
-    !!links &&
-    links.length >= limit &&
-    links[links.length - 1] === currentLink;
+  const fetchNext = () => {
+    if (!next.isReady) actions.source.fetch(next.link);
 
-  const [shouldForceFetch, setShouldForceFetch] = useState(false);
+    const links = state.router.state.links || [current.link];
+
+    if (!links.includes(next.link)) {
+      links.push(next.link);
+
+      actions.router.set(current.link, {
+        method: "replace",
+        state: JSON.parse(
+          JSON.stringify({
+            ...state.router.state,
+            links,
+          })
+        ),
+      });
+    }
+  };
 
   // Request the current route in case it's not ready
   // and it's not fetching.
@@ -48,32 +62,18 @@ export default ({ currentLink, nextLink, limit }: Options) => {
   // route content, if not available yet, and add the new route
   // to the array of elements in the infinite scroll.
   useEffect(() => {
-    if (
-      (fetch.inView && next && !hasReachedLimit) ||
-      (next && shouldForceFetch)
-    ) {
-      if (!next.isReady) actions.source.fetch(next.link);
-
-      const links = state.router.state.links || [current.link];
-      if (!links.includes(next.link)) links.push(next.link);
-
-      actions.router.set(current.link, {
-        method: "replace",
-        state: JSON.parse(
-          JSON.stringify({
-            ...state.router.state,
-            links,
-          })
-        ),
-      });
+    if (fetch.inView && next) {
+      console.log("fetching next in", current.link);
+      fetchNext();
     }
-  }, [shouldForceFetch, fetch.inView]);
+  }, [fetch.inView]);
 
   // Once the route waypoint is in view, change the route to the
   // current element. This preserves the route state between changes
   // to avoid rerendering.
   useEffect(() => {
     if (route.inView && state.router.link !== current.link) {
+      console.log("routing to ", current.link);
       actions.router.set(current.link, {
         method: "replace",
         state: JSON.parse(JSON.stringify(state.router.state)),
@@ -81,18 +81,11 @@ export default ({ currentLink, nextLink, limit }: Options) => {
     }
   }, [route.inView]);
 
-  const forceFetch = () => {
-    setShouldForceFetch(true);
-  };
-
   return {
     routeRef: route.ref,
     fetchRef: fetch.ref,
     routeInView: route.inView,
     fetchInView: fetch.inView,
     isReady: current.isReady,
-    isFetching: current.isFetching,
-    hasReachedLimit,
-    forceFetch,
   };
 };
