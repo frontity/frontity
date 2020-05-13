@@ -17,12 +17,9 @@ import PageError from "./page-error";
  * Theme is the root React component of our theme. The one we will export
  * in roots.
  */
-const Theme = ({ state, libraries }) => {
+const Theme = ({ state }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
-  const parse = libraries.source.parse(state.router.link);
-  // Check if the url is a search type
-  const isSearch = Boolean(parse.query["s"]);
 
   return (
     <>
@@ -52,7 +49,7 @@ const Theme = ({ state, libraries }) => {
         <Main id="main">
           <Switch>
             <Loading when={data.isFetching} />
-            <SearchResults when={isSearch} />
+            <SearchResults when={data.isSearch} />
             <Archive when={data.isArchive} />
             <Post when={data.isPostType} />
             <PageError when={data.isError} />
