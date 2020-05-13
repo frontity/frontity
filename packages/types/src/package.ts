@@ -24,12 +24,12 @@ export interface Package {
       packages?: string[];
       platform?: "client" | "server";
       rendering?: "ssr" | "csr";
-      fills: { [key: string]: Fill };
       // Populated by the user:
       title?: string;
       description?: string;
       url?: string;
     };
+    fills: { [key: string]: Fill };
     [namespace: string]: {
       [key: string]: any;
     };
