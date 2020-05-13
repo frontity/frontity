@@ -5,23 +5,18 @@ import ArchiveHeader from "../archive/archive-header";
 import SectionContainer from "../styles/section-container";
 import SearchForm from "./search-form";
 
-const SearchResults = ({ state, libraries }) => {
+const reverseFormat = (query) => query.replace("+", " ");
+
+const SearchResults = ({ state }) => {
   const { primary } = state.theme.colors;
-  // Get the current path or link
-  const currentPath = state.router.link;
 
-  // Get the total pages that match the current path/url
-  const { total } = state.source.data[currentPath];
-  const isEmpty = total === 0;
+  // Get information about the current URL.
+  const data = state.source.get(state.router.link);
 
-  // Parse to current url to get the search query
-  const parse = libraries.source.parse(state.router.link);
-
-  // Parse returns an object whose query string is stored in "s"
-  const searchQuery = parse.query["s"];
-
-  // Since we formatted the query string in the search modal, let's reverse the formatting
-  const reverseFormat = (query) => query.replace("+", " ");
+  // data.total → total pages that match the current path/url
+  // data.searchQuery → query done to get search results
+  const { total, searchQuery } = data;
+  const isEmpty = data.total === 0;
 
   return (
     <>
