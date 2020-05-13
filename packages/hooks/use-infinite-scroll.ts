@@ -24,7 +24,7 @@ export default ({
   const fetch = useInView(fetchInViewOptions);
   const route = useInView(routeInViewOptions);
 
-  if (!fetch.supported || !route.supported) return;
+  if (!fetch.supported || !route.supported) return { supported: false };
 
   const { state, actions } = useConnect<WpSource & TinyRouter>();
 
@@ -82,6 +82,7 @@ export default ({
   }, [route.inView]);
 
   return {
+    supported: true,
     routeRef: route.ref,
     fetchRef: fetch.ref,
     routeInView: route.inView,

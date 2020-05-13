@@ -41,7 +41,10 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
         : state.frontity.initialLink;
   } else {
     // Replace the current url with the same one but with state.
-    window.history.replaceState({ ...state.router.state }, "");
+    window.history.replaceState(
+      JSON.parse(JSON.stringify(state.router.state)),
+      ""
+    );
     // Listen to changes in history.
     window.addEventListener("popstate", (event) => {
       if (event.state) {

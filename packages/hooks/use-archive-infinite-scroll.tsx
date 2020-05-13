@@ -4,12 +4,26 @@ import useInfiniteScroll from "./use-infinite-scroll";
 import WpSource from "@frontity/wp-source/types";
 import TinyRouter from "@frontity/tiny-router/types";
 
-const Wrapper = connect(({ link, isLimit, children }) => {
-  const { fetchRef, routeRef, isReady } = useInfiniteScroll({
+const Wrapper = connect(({ link, children }) => {
+  const { state } = useConnect<WpSource & TinyRouter>();
+
+  const { supported, fetchRef, routeRef, isReady } = useInfiniteScroll({
     link,
   });
 
   if (!isReady) return null;
+
+  children = React.Children.map(children, (child) =>
+    child ? React.cloneElement(child, { link }) : child
+  );
+
+  if (!supported) return children;
+
+  const { limit, links } = state.router.state;
+  const last = state.source.get(links[links.length - 1]);
+
+  const isLimit =
+    !!limit && links.length >= limit && !last.isFetching && !!last.next;
 
   const container = css`
     position: relative;
@@ -23,9 +37,7 @@ const Wrapper = connect(({ link, isLimit, children }) => {
 
   return (
     <div css={container} ref={routeRef}>
-      {React.Children.map(children, (child) => {
-        return child ? React.cloneElement(child, { link }) : child;
-      })}
+      {children}
       {!isLimit && <div css={fetcher} ref={fetchRef} />}
     </div>
   );
@@ -33,19 +45,46 @@ const Wrapper = connect(({ link, isLimit, children }) => {
 
 export interface Options {
   limit?: number;
+  context?: string;
 }
 
-export default ({ limit }: Options) => {
+export default ({ limit, context }: Options) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
+
   const current = state.source.get(state.router.link);
   const links: string[] = state.router.state.links || [current.link];
   const last = state.source.get(links[links.length - 1]);
 
-  const isLimit =
-    !!limit && links.length >= limit && !last.isFetching && last.next;
+  if (typeof window === "undefined") {
+    Object.assign(state.router.state, {
+      links,
+      context,
+      limit,
+    });
+  }
 
-  // TODO:
-  // Return: isLimit, isFetching, isLastPage, [Wrapper, link, key], fetchNextPage
+  // Sync the browser state with the current router state.
+  React.useEffect(() => {
+    actions.router.set(current.link, {
+      method: "replace",
+      state: JSON.parse(JSON.stringify(state.router.state)),
+    });
+  }, []);
+
+  const isLimit =
+    !!limit && links.length >= limit && !last.isFetching && !!last.next;
+
+  const increaseLimit = () => {
+    actions.router.set(current.link, {
+      method: "replace",
+      state: JSON.parse(
+        JSON.stringify({
+          ...state.router.state,
+          limit: state.router.state.limit + 1,
+        })
+      ),
+    });
+  };
 
   const pages = links.map((link) => ({
     key: link,
@@ -54,29 +93,10 @@ export default ({ limit }: Options) => {
     Wrapper: Wrapper,
   }));
 
-  const fetchNext = () => {
-    const next = last.next ? state.source.get(last.next) : null;
-    if (!next.isReady) actions.source.fetch(next.link);
-
-    if (!links.includes(next.link)) {
-      links.push(next.link);
-
-      actions.router.set(current.link, {
-        method: "replace",
-        state: JSON.parse(
-          JSON.stringify({
-            ...state.router.state,
-            links,
-          })
-        ),
-      });
-    }
-  };
-
   return {
     pages,
     isLimit,
     isFetching: last.isFetching,
-    fetchNext,
+    increaseLimit,
   };
 };
