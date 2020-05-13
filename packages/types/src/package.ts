@@ -1,3 +1,12 @@
+export interface Fill {
+  slot: string;
+  library: string;
+  priority?: number;
+  props?: {
+    [key: string]: any;
+  };
+}
+
 export interface Package {
   name?: string;
   roots?: {
@@ -15,6 +24,7 @@ export interface Package {
       packages?: string[];
       platform?: "client" | "server";
       rendering?: "ssr" | "csr";
+      fills: { [key: string]: Fill };
       // Populated by the user:
       title?: string;
       description?: string;

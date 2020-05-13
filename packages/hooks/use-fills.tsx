@@ -1,13 +1,5 @@
 import { useConnect, warn } from "frontity";
-
-interface Fill {
-  slot: string;
-  library: string;
-  priority?: number;
-  props?: {
-    [key: string]: any;
-  };
-}
+import { Fill } from "@frontity/types";
 
 interface FillsPackage {
   state: {
