@@ -29,7 +29,7 @@ export interface Package {
       description?: string;
       url?: string;
     };
-    fills: { [key: string]: Fill };
+    fills?: { [key: string]: Fill };
     [namespace: string]: {
       [key: string]: any;
     };
@@ -66,6 +66,7 @@ export interface Package {
                 [state: string]: any;
               };
             };
+            fills: { [key: string]: Fill };
             actions: {
               [key: string]: {
                 [action: string]: any;
@@ -79,6 +80,9 @@ export interface Package {
   };
   libraries?: {
     [namespace: string]: {
+      fills?: {
+        [namespace: string]: React.ReactType;
+      };
       [library: string]: any;
     };
   };
