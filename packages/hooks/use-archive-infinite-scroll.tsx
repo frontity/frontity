@@ -50,8 +50,16 @@ export default ({ limit, context }: Options) => {
   const isLimit =
     !!limit && links.length >= limit && !last.isFetching && !!last.next;
 
-  // Set initial router state on SSR.
-  if (typeof window === "undefined") {
+  // Map every link to its DIY object.
+  const pages = links.map((link) => ({
+    key: link,
+    link: link,
+    isLastPage: link === last.link,
+    Wrapper,
+  }));
+
+  // Initialize router state.
+  if (!state.router.state.links) {
     Object.assign(state.router.state, {
       links,
       context,
@@ -61,19 +69,12 @@ export default ({ limit, context }: Options) => {
 
   // Sync current router state with browser state.
   useEffect(() => {
+    console.log("initializing links");
     actions.router.set(current.link, {
       method: "replace",
       state: JSON.parse(JSON.stringify(state.router.state)),
     });
   }, []);
-
-  // Map every link to its DIY object.
-  const pages = links.map((link) => ({
-    key: link,
-    link: link,
-    isLastPage: link === last.link,
-    Wrapper,
-  }));
 
   // Increases the limit so more pages can be loaded.
   const increaseLimit = (increment = 1) => {
