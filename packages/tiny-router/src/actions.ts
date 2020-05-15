@@ -1,5 +1,5 @@
 import TinyRouter from "../types";
-import { warn } from "frontity";
+import { warn, clone } from "frontity";
 
 export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
@@ -20,18 +20,10 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     options.method === "push" ||
     (!options.method && state.frontity.platform === "client")
   ) {
-    window.history.pushState(
-      JSON.parse(JSON.stringify(options.state)),
-      "",
-      link
-    );
+    window.history.pushState(clone(options.state), "", link);
     if (state.router.autoFetch) actions.source.fetch(link);
   } else if (options.method === "replace") {
-    window.history.replaceState(
-      JSON.parse(JSON.stringify(options.state)),
-      "",
-      link
-    );
+    window.history.replaceState(clone(options.state), "", link);
     if (state.router.autoFetch) actions.source.fetch(link);
   }
 };
@@ -49,10 +41,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
         : state.frontity.initialLink;
   } else {
     // Replace the current url with the same one but with state.
-    window.history.replaceState(
-      JSON.parse(JSON.stringify(state.router.state)),
-      ""
-    );
+    window.history.replaceState(clone(state.router.state), "");
     // Listen to changes in history.
     window.addEventListener("popstate", (event) => {
       if (event.state) {

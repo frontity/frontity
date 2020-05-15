@@ -1,3 +1,4 @@
+import ramdaClone from "ramda/src/clone";
 import { proxyToRaw, rawToProxy, rawToRoot } from "./internals";
 import { storeObservable } from "./store";
 import * as builtIns from "./builtIns";
@@ -34,4 +35,8 @@ export function isObservable(obj) {
 
 export function raw(obj) {
   return proxyToRaw.get(obj) || obj;
+}
+
+export function clone(obj) {
+  return ramdaClone(obj);
 }

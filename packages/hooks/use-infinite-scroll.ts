@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useConnect, raw } from "frontity";
+import { useConnect } from "frontity";
 import useInView from "./use-in-view";
 import WpSource from "@frontity/wp-source/types";
 import TinyRouter from "@frontity/tiny-router/types";

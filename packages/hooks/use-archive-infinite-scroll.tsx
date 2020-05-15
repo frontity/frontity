@@ -7,11 +7,11 @@ import TinyRouter from "@frontity/tiny-router/types";
 const Wrapper = connect(({ link, children }) => {
   const { state } = useConnect<WpSource & TinyRouter>();
   const current = state.source.get(link);
-  const { limit, links } = state.router.state;
+  const links = state.router.state.links || [link];
   const last = state.source.get(links[links.length - 1]);
+  const { limit } = state.router.state;
   const isLimit =
     !!limit && links.length >= limit && !last.isFetching && !!last.next;
-
   const { supported, fetchRef, routeRef } = useInfiniteScroll({
     link,
   });
@@ -61,31 +61,26 @@ export default (options: Options = {}) => {
     Wrapper,
   }));
 
-  // Initialize router state.
-  if (!state.router.state.links) {
-    Object.assign(state.router.state, {
-      links,
-      context: options.context,
-      limit: options.limit,
-    });
-  }
-
-  // Sync current router state with browser state.
+  // Initialize browser state.
   useEffect(() => {
-    console.log("initializing links");
     actions.router.set(current.link, {
       method: "replace",
-      state: state.router.state,
+      state: {
+        links,
+        limit: options.limit,
+        context: options.context,
+        ...state.router.state,
+      },
     });
   }, []);
 
   // Increases the limit so more pages can be loaded.
-  const increaseLimit = (increment = 1) => {
+  const increaseLimit = () => {
     actions.router.set(current.link, {
       method: "replace",
       state: {
         ...state.router.state,
-        limit: state.router.state.limit + increment,
+        limit: state.router.state.limit ? state.router.state.limit + 1 : 1,
       },
     });
   };
