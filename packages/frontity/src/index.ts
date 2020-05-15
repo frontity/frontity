@@ -4,7 +4,7 @@ export { css, Global, keyframes } from "@emotion/core";
 export { default as styled } from "@emotion/styled";
 export { Helmet as Head, HelmetProvider } from "react-helmet-async";
 export { default as loadable } from "@loadable/component";
-export { observe, batch, useConnect, raw } from "@frontity/connect";
+export { observe, batch, useConnect } from "@frontity/connect";
 export { error, warn } from "@frontity/error";
 
 import { ConnectFunction, CreateStore } from "@frontity/types/src/connect";

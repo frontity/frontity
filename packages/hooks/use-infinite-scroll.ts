@@ -31,9 +31,6 @@ export default ({
   const current = state.source.get(link);
   const next = current.next ? state.source.get(current.next) : null;
 
-  console.log("current:", current);
-  console.log("next:", next);
-
   const fetchNext = () => {
     if (!next.isReady) actions.source.fetch(next.link);
 
@@ -44,12 +41,10 @@ export default ({
 
       actions.router.set(current.link, {
         method: "replace",
-        state: JSON.parse(
-          JSON.stringify({
-            ...state.router.state,
-            links,
-          })
-        ),
+        state: {
+          ...state.router.state,
+          links,
+        },
       });
     }
   };
@@ -66,7 +61,6 @@ export default ({
   // to the array of elements in the infinite scroll.
   useEffect(() => {
     if (fetch.inView && next) {
-      console.log("fetching next in", current.link);
       fetchNext();
     }
   }, [fetch.inView]);
@@ -76,22 +70,12 @@ export default ({
   // to avoid rerendering.
   useEffect(() => {
     if (route.inView && state.router.link !== current.link) {
-      console.log("routing to ", current.link);
       actions.router.set(current.link, {
         method: "replace",
-        state: JSON.parse(JSON.stringify(state.router.state)),
+        state: state.router.state,
       });
     }
   }, [route.inView]);
-
-  console.log(
-    "link:",
-    link,
-    "routeInView:",
-    route.inView,
-    "fetchInView:",
-    fetch.inView
-  );
 
   return {
     supported: true,

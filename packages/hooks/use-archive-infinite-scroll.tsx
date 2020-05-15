@@ -42,13 +42,16 @@ export interface Options {
   context?: string;
 }
 
-export default ({ limit, context }: Options) => {
+export default (options: Options = {}) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
   const current = state.source.get(state.router.link);
   const links: string[] = state.router.state.links || [current.link];
   const last = state.source.get(links[links.length - 1]);
   const isLimit =
-    !!limit && links.length >= limit && !last.isFetching && !!last.next;
+    !!options.limit &&
+    links.length >= options.limit &&
+    !last.isFetching &&
+    !!last.next;
 
   // Map every link to its DIY object.
   const pages = links.map((link) => ({
@@ -62,8 +65,8 @@ export default ({ limit, context }: Options) => {
   if (!state.router.state.links) {
     Object.assign(state.router.state, {
       links,
-      context,
-      limit,
+      context: options.context,
+      limit: options.limit,
     });
   }
 
@@ -72,7 +75,7 @@ export default ({ limit, context }: Options) => {
     console.log("initializing links");
     actions.router.set(current.link, {
       method: "replace",
-      state: JSON.parse(JSON.stringify(state.router.state)),
+      state: state.router.state,
     });
   }, []);
 
@@ -80,12 +83,10 @@ export default ({ limit, context }: Options) => {
   const increaseLimit = (increment = 1) => {
     actions.router.set(current.link, {
       method: "replace",
-      state: JSON.parse(
-        JSON.stringify({
-          ...state.router.state,
-          limit: state.router.state.limit + increment,
-        })
-      ),
+      state: {
+        ...state.router.state,
+        limit: state.router.state.limit + increment,
+      },
     });
   };
 
