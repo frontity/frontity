@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect, useConnect, css } from "frontity";
 import useInfiniteScroll from "./use-infinite-scroll";
 import WpSource from "@frontity/wp-source/types";
@@ -6,24 +6,18 @@ import TinyRouter from "@frontity/tiny-router/types";
 
 const Wrapper = connect(({ link, children }) => {
   const { state } = useConnect<WpSource & TinyRouter>();
+  const current = state.source.get(link);
+  const { limit, links } = state.router.state;
+  const last = state.source.get(links[links.length - 1]);
+  const isLimit =
+    !!limit && links.length >= limit && !last.isFetching && !!last.next;
 
-  const { supported, fetchRef, routeRef, isReady } = useInfiniteScroll({
+  const { supported, fetchRef, routeRef } = useInfiniteScroll({
     link,
   });
 
-  if (!isReady) return null;
-
-  children = React.Children.map(children, (child) =>
-    child ? React.cloneElement(child, { link }) : child
-  );
-
+  if (!current.isReady) return null;
   if (!supported) return children;
-
-  const { limit, links } = state.router.state;
-  const last = state.source.get(links[links.length - 1]);
-
-  const isLimit =
-    !!limit && links.length >= limit && !last.isFetching && !!last.next;
 
   const container = css`
     position: relative;
@@ -50,11 +44,13 @@ export interface Options {
 
 export default ({ limit, context }: Options) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
-
   const current = state.source.get(state.router.link);
   const links: string[] = state.router.state.links || [current.link];
   const last = state.source.get(links[links.length - 1]);
+  const isLimit =
+    !!limit && links.length >= limit && !last.isFetching && !!last.next;
 
+  // Set initial router state on SSR.
   if (typeof window === "undefined") {
     Object.assign(state.router.state, {
       links,
@@ -63,35 +59,34 @@ export default ({ limit, context }: Options) => {
     });
   }
 
-  // Sync the browser state with the current router state.
-  React.useEffect(() => {
+  // Sync current router state with browser state.
+  useEffect(() => {
     actions.router.set(current.link, {
       method: "replace",
       state: JSON.parse(JSON.stringify(state.router.state)),
     });
   }, []);
 
-  const isLimit =
-    !!limit && links.length >= limit && !last.isFetching && !!last.next;
+  // Map every link to its DIY object.
+  const pages = links.map((link) => ({
+    key: link,
+    link: link,
+    isLastPage: link === last.link,
+    Wrapper,
+  }));
 
-  const increaseLimit = () => {
+  // Increases the limit so more pages can be loaded.
+  const increaseLimit = (increment = 1) => {
     actions.router.set(current.link, {
       method: "replace",
       state: JSON.parse(
         JSON.stringify({
           ...state.router.state,
-          limit: state.router.state.limit + 1,
+          limit: state.router.state.limit + increment,
         })
       ),
     });
   };
-
-  const pages = links.map((link) => ({
-    key: link,
-    link: link,
-    isLastPage: link === last.link,
-    Wrapper: Wrapper,
-  }));
 
   return {
     pages,

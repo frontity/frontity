@@ -87,6 +87,5 @@ export default ({
     fetchRef: fetch.ref,
     routeInView: route.inView,
     fetchInView: fetch.inView,
-    isReady: current.isReady,
   };
 };
