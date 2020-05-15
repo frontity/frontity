@@ -37,7 +37,7 @@ jobs:
       - name: Create Release Pull Request
         uses: changesets/action@master
         with:
-          publish: npx changeset publish && git checkout dev && git rebase master && git push origin dev
+          publish: npx changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
