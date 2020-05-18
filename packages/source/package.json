@@ -17,6 +17,7 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest"
   },
   "dependencies": {

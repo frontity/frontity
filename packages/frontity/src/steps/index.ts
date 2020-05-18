@@ -116,6 +116,22 @@ export const createPackageJson = async (
   await writeFile(filePath, fileData);
 };
 
+// This function create a `README.md` file.
+export const createReadme = async (
+  name: string,
+  path: string
+): Promise<void> => {
+  const fileTemplate = await readFile(
+    resolvePath(__dirname, "../../templates/README.md"),
+    {
+      encoding: "utf8",
+    }
+  );
+  const filePath = resolvePath(path, "README.md");
+  const fileData = fileTemplate.replace(/\$name\$/g, name);
+  await writeFile(filePath, fileData);
+};
+
 // This function creates a `frontity.settings` file.
 export const createFrontitySettings = async (
   extension: string,
