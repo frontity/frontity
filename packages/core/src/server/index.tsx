@@ -38,7 +38,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
         await serve("./")(ctx, next);
       } else {
         ctx.type = "text/plain";
-        ctx.body = "User-agent: *\nDisallow:";
+        ctx.body = "User-agent: *\nAllow: /";
       }
     })
   );
