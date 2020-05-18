@@ -11,9 +11,37 @@ export type Connect<Pkg extends Package, Props extends object = {}> = Omit<
 } & Props;
 
 export interface ConnectFunction {
+  /**
+   * Connect a React component to the Frontity state manager.
+   *
+   * From interface {@link ConnectFunction}
+   *
+   * This function returns the same component it receives but passing
+   * `state`, `actions` and `libraries` as properties, and making it reactive
+   * to changes on the state.
+   *
+   * @param Comp React component
+   * @param options Options object
+   *
+   * @return Input component connected to Frontity state
+   */
   <Comp extends FunctionComponent<any>>(comp: Comp): FunctionComponent<
     FilterInjectedProps<ComponentProps<Comp>>
   >;
+  /**
+   * Connect a React component to the Frontity state manager.
+   *
+   * From interface {@link ConnectFunction}
+   *
+   * This function returns the same component it receives but passing
+   * `state`, `actions` and `libraries` as properties, and making it reactive
+   * to changes on the state.
+   *
+   * @param Comp React component
+   * @param options Options object
+   *
+   * @return Input component connected to Frontity state
+   */
   <Comp extends ComponentClass<any>>(comp: Comp): ComponentClass<
     FilterInjectedProps<ComponentProps<Comp>>
   >;

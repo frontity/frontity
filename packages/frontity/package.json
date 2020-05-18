@@ -28,7 +28,8 @@
     "test:ci": "../../node_modules/.bin/jest --colors --ci --coverage",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "tsdoc": "../../node_modules/.bin/typedoc --out ../../tsdoc/frontity src --plugin typedoc-plugin-markdown --tsconfig ../../tsconfig.json"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",

@@ -13,7 +13,7 @@ const suffix = "\nVisit https://community.frontity.org for help! 🙂\n";
 interface Error {
   (
     message: string,
-    options: {
+    options?: {
       /**
        * Throws if true, does a console.error if false.
        * @default true

@@ -123,6 +123,16 @@ declare function connect<Props extends object>(
 
 export const Provider: React.ProviderExoticComponent<React.ProviderProps<any>>;
 
+/**
+ * Access to the Frontity state using a hook.
+ *
+ * It returns the Frontity state props (`state`, `actions` and `libraries`).
+ * Note that hook must be used in connected components with the option
+ * `injectProps` set to `false`.
+ *
+ * @returns An object with the Frontity state props (`state`, `actions` and
+ * `libraries`).
+ */
 export function useConnect<Package extends Store>(): UseConnect<Package>;
 
 export default connect;

@@ -12,6 +12,18 @@ import originalConnect, {
   createStore as originalCreateStore,
 } from "@frontity/connect";
 
+/**
+ * Connect a React component to the Frontity state manager.
+ *
+ * This function returns the same component it receives but passing
+ * `state`, `actions` and `libraries` as properties, and making it reactive
+ * to changes on the state.
+ *
+ * @param Comp React component
+ * @param options Options object (see {@link connect})
+ *
+ * @return Input component connected to Frontity state
+ */
 export const connect = originalConnect as ConnectFunction;
 export const createStore = originalCreateStore as CreateStore;
 
