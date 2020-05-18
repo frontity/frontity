@@ -873,29 +873,29 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/attachment",
+            "href": "https://test.frontity.org/wp-json/wp/v2/types/attachment",
           },
         ],
         "author": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/2",
+            "href": "https://test.frontity.org/wp-json/wp/v2/users/2",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media",
+            "href": "https://test.frontity.org/wp-json/wp/v2/media",
           },
         ],
         "replies": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=55",
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments?post=55",
           },
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/55",
+            "href": "https://test.frontity.org/wp-json/wp/v2/media/55",
           },
         ],
       },
@@ -908,8 +908,79 @@ Object {
       "date": "2016-11-25T18:14:19",
       "head_tags": Array [
         Object {
-          "content": "canyon – Frontity Test – WP Title",
+          "content": "canyon - Frontity Test - WP Title",
           "tag": "title",
+        },
+        Object {
+          "attributes": Object {
+            "content": "noindex,follow",
+            "name": "robots",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "article",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "canyon - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/2016/lower-antelope-canyon/canyon/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "canyon - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/wp-content/uploads/2016/11/canyon.jpg",
+            "name": "twitter:image",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"WebPage\\",\\"@id\\":\\"https://test.frontity.org/2016/lower-antelope-canyon/canyon/#webpage\\",\\"url\\":\\"https://test.frontity.org/2016/lower-antelope-canyon/canyon/\\",\\"name\\":\\"canyon - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\",\\"datePublished\\":\\"2016-11-25T18:14:19+00:00\\",\\"dateModified\\":\\"2016-11-25T18:14:24+00:00\\",\\"potentialAction\\":[{\\"@type\\":\\"ReadAction\\",\\"target\\":[\\"https://test.frontity.org/2016/lower-antelope-canyon/canyon/\\"]}]}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -942,7 +1013,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -951,7 +1022,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -960,7 +1031,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/2016/lower-antelope-canyon/canyon/feed/",
+            "href": "https://test.frontity.org/2016/lower-antelope-canyon/canyon/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » canyon Comments Feed",
             "type": "application/rss+xml",
@@ -969,14 +1040,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -985,7 +1056,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
@@ -993,21 +1064,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
-        },
-        Object {
-          "attributes": Object {
-            "href": "https://test.frontity.io/?p=55",
+            "href": "https://test.frontity.org/?p=55",
             "rel": "shortlink",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.io%2F2016%2Flower-antelope-canyon%2Fcanyon%2F",
+            "href": "https://test.frontity.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.org%2F2016%2Flower-antelope-canyon%2Fcanyon%2F",
             "rel": "alternate",
             "type": "application/json+oembed",
           },
@@ -1015,7 +1079,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.io%2F2016%2Flower-antelope-canyon%2Fcanyon%2F&format=xml",
+            "href": "https://test.frontity.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.org%2F2016%2Flower-antelope-canyon%2Fcanyon%2F&format=xml",
             "rel": "alternate",
             "type": "text/xml+oembed",
           },
@@ -1074,42 +1138,42 @@ Object {
             "file": "canyon.jpg?fit=3072%2C2048&ssl=1",
             "height": 2048,
             "mime_type": "image/jpeg",
-            "source_url": "https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?fit=3072%2C2048&ssl=1",
+            "source_url": "https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?fit=3072%2C2048&ssl=1",
             "width": 3072,
           },
           "large": Object {
             "file": "canyon-1024x683.jpg",
             "height": 683,
             "mime_type": "image/jpeg",
-            "source_url": "https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?fit=840%2C560&ssl=1",
+            "source_url": "https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?fit=840%2C560&ssl=1",
             "width": 1024,
           },
           "medium": Object {
             "file": "canyon-300x200.jpg",
             "height": 200,
             "mime_type": "image/jpeg",
-            "source_url": "https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?fit=300%2C200&ssl=1",
+            "source_url": "https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?fit=300%2C200&ssl=1",
             "width": 300,
           },
           "medium_large": Object {
             "file": "canyon-768x512.jpg",
             "height": 512,
             "mime_type": "image/jpeg",
-            "source_url": "https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?fit=768%2C512&ssl=1",
+            "source_url": "https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?fit=768%2C512&ssl=1",
             "width": 768,
           },
           "post-thumbnail": Object {
             "file": "canyon-1200x800.jpg",
             "height": 800,
             "mime_type": "image/jpeg",
-            "source_url": "https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?fit=1200%2C800&ssl=1",
+            "source_url": "https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?fit=1200%2C800&ssl=1",
             "width": 1200,
           },
           "thumbnail": Object {
             "file": "canyon-150x150.jpg",
             "height": 150,
             "mime_type": "image/jpeg",
-            "source_url": "https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?resize=150%2C150&ssl=1",
+            "source_url": "https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?resize=150%2C150&ssl=1",
             "width": 150,
           },
         },
@@ -1118,7 +1182,7 @@ Object {
       "media_type": "image",
       "mime_type": "image/jpeg",
       "slug": "canyon",
-      "source_url": "https://test.frontity.io/wp-content/uploads/2016/11/canyon.jpg",
+      "source_url": "https://test.frontity.org/wp-content/uploads/2016/11/canyon.jpg",
       "title": Object {
         "rendered": "canyon",
       },
@@ -1139,12 +1203,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories",
           },
         ],
         "curies": Array [
@@ -1156,42 +1220,91 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/1",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories/1",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=1",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?categories=1",
           },
         ],
       },
       "acf": Array [],
       "head_tags": Array [
         Object {
-          "content": "Weekend trip | Frontity Test - WP Title",
+          "content": "Weekend trip Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "content": "noindex,follow",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
             "name": "robots",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
-          },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/category/weekend-trip/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/category/weekend-trip/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Weekend trip\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"}}]}",
-          "tag": "script",
-        },
-        Object {
-          "attributes": Object {
-            "href": "https://test.frontity.io/category/weekend-trip/",
+            "href": "https://test.frontity.org/category/weekend-trip/",
             "rel": "canonical",
           },
           "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "object",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Weekend trip Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/category/weekend-trip/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Weekend trip Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/category/weekend-trip/#webpage\\",\\"url\\":\\"https://test.frontity.org/category/weekend-trip/\\",\\"name\\":\\"Weekend trip Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -1224,7 +1337,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -1233,7 +1346,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -1242,7 +1355,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/weekend-trip/feed/",
+            "href": "https://test.frontity.org/category/weekend-trip/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Weekend trip Category Feed",
             "type": "application/rss+xml",
@@ -1251,14 +1364,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -1267,18 +1380,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -1319,12 +1425,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories",
           },
         ],
         "curies": Array [
@@ -1336,42 +1442,91 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/3",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories/3",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=3",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?categories=3",
           },
         ],
       },
       "acf": Array [],
       "head_tags": Array [
         Object {
-          "content": "Photography | Frontity Test - WP Title",
+          "content": "Photography Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "content": "noindex,follow",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
             "name": "robots",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
-          },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/category/photography/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/category/photography/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Photography\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"}}]}",
-          "tag": "script",
-        },
-        Object {
-          "attributes": Object {
-            "href": "https://test.frontity.io/category/photography/",
+            "href": "https://test.frontity.org/category/photography/",
             "rel": "canonical",
           },
           "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "object",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Photography Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/category/photography/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Photography Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/category/photography/#webpage\\",\\"url\\":\\"https://test.frontity.org/category/photography/\\",\\"name\\":\\"Photography Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -1404,7 +1559,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -1413,7 +1568,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -1422,7 +1577,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/photography/feed/",
+            "href": "https://test.frontity.org/category/photography/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Photography Category Feed",
             "type": "application/rss+xml",
@@ -1431,14 +1586,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -1447,18 +1602,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -1499,12 +1647,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories",
           },
         ],
         "curies": Array [
@@ -1516,56 +1664,112 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/56",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories/56",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=56",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?categories=56",
           },
         ],
       },
       "acf": Array [],
       "head_tags": Array [
         Object {
-          "content": "News | Frontity Test - WP Title",
+          "content": "News Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "content": "Aleteia",
-            "name": "description",
-          },
-          "tag": "meta",
-        },
-        Object {
-          "attributes": Object {
-            "content": "noindex,follow",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
             "name": "robots",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/page/2/?_embed=true&page=1",
+            "href": "https://test.frontity.org/category/news/",
+            "rel": "canonical",
+          },
+          "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "href": "https://test.frontity.org/category/news/page/2/",
             "rel": "next",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "en_US",
+            "property": "og:locale",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/category/news/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/category/news/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"News\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"description\\":\\"Aleteia\\"}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/news/",
-            "rel": "canonical",
+            "content": "object",
+            "property": "og:type",
           },
-          "tag": "link",
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "News Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Aleteia",
+            "property": "og:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/category/news/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Aleteia",
+            "name": "twitter:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "News Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/category/news/#webpage\\",\\"url\\":\\"https://test.frontity.org/category/news/\\",\\"name\\":\\"News Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -1598,7 +1802,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -1607,7 +1811,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -1616,7 +1820,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/news/feed/",
+            "href": "https://test.frontity.org/category/news/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » News Category Feed",
             "type": "application/rss+xml",
@@ -1625,14 +1829,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -1641,18 +1845,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -1693,12 +1890,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories",
           },
         ],
         "curies": Array [
@@ -1710,56 +1907,112 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/57",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories/57",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=57",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?categories=57",
           },
         ],
       },
       "acf": Array [],
       "head_tags": Array [
         Object {
-          "content": "Inspiring Stories | Frontity Test - WP Title",
+          "content": "Inspiring Stories Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "content": "Aleteia",
-            "name": "description",
-          },
-          "tag": "meta",
-        },
-        Object {
-          "attributes": Object {
-            "content": "noindex,follow",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
             "name": "robots",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/page/2/?_embed=true&page=1",
+            "href": "https://test.frontity.org/category/inspiring-stories/",
+            "rel": "canonical",
+          },
+          "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "href": "https://test.frontity.org/category/inspiring-stories/page/2/",
             "rel": "next",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "en_US",
+            "property": "og:locale",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/category/inspiring-stories/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/category/inspiring-stories/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Inspiring Stories\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"description\\":\\"Aleteia\\"}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/inspiring-stories/",
-            "rel": "canonical",
+            "content": "object",
+            "property": "og:type",
           },
-          "tag": "link",
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Inspiring Stories Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Aleteia",
+            "property": "og:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/category/inspiring-stories/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Aleteia",
+            "name": "twitter:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Inspiring Stories Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/category/inspiring-stories/#webpage\\",\\"url\\":\\"https://test.frontity.org/category/inspiring-stories/\\",\\"name\\":\\"Inspiring Stories Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -1792,7 +2045,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -1801,7 +2054,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -1810,7 +2063,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/inspiring-stories/feed/",
+            "href": "https://test.frontity.org/category/inspiring-stories/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Inspiring Stories Category Feed",
             "type": "application/rss+xml",
@@ -1819,14 +2072,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -1835,18 +2088,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -1887,12 +2133,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories",
           },
         ],
         "curies": Array [
@@ -1904,56 +2150,112 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/58",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories/58",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=58",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?categories=58",
           },
         ],
       },
       "acf": Array [],
       "head_tags": Array [
         Object {
-          "content": "Voices and Views | Frontity Test - WP Title",
+          "content": "Voices and Views Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "content": "Aleteia",
-            "name": "description",
-          },
-          "tag": "meta",
-        },
-        Object {
-          "attributes": Object {
-            "content": "noindex,follow",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
             "name": "robots",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/page/2/?_embed=true&page=1",
+            "href": "https://test.frontity.org/category/voices-and-views/",
+            "rel": "canonical",
+          },
+          "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "href": "https://test.frontity.org/category/voices-and-views/page/2/",
             "rel": "next",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "en_US",
+            "property": "og:locale",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/category/voices-and-views/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/category/voices-and-views/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Voices and Views\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"description\\":\\"Aleteia\\"}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/voices-and-views/",
-            "rel": "canonical",
+            "content": "object",
+            "property": "og:type",
           },
-          "tag": "link",
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Voices and Views Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Aleteia",
+            "property": "og:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/category/voices-and-views/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Aleteia",
+            "name": "twitter:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Voices and Views Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/category/voices-and-views/#webpage\\",\\"url\\":\\"https://test.frontity.org/category/voices-and-views/\\",\\"name\\":\\"Voices and Views Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -1986,7 +2288,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -1995,7 +2297,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -2004,7 +2306,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/voices-and-views/feed/",
+            "href": "https://test.frontity.org/category/voices-and-views/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Voices and Views Category Feed",
             "type": "application/rss+xml",
@@ -2013,14 +2315,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -2029,18 +2331,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -2081,12 +2376,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories",
           },
         ],
         "curies": Array [
@@ -2098,56 +2393,112 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/59",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories/59",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=59",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?categories=59",
           },
         ],
       },
       "acf": Array [],
       "head_tags": Array [
         Object {
-          "content": "Lifestyle | Frontity Test - WP Title",
+          "content": "Lifestyle Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "content": "Aleteia",
-            "name": "description",
-          },
-          "tag": "meta",
-        },
-        Object {
-          "attributes": Object {
-            "content": "noindex,follow",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
             "name": "robots",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/page/2/?_embed=true&page=1",
+            "href": "https://test.frontity.org/category/lifestyle/",
+            "rel": "canonical",
+          },
+          "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "href": "https://test.frontity.org/category/lifestyle/page/2/",
             "rel": "next",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "en_US",
+            "property": "og:locale",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/category/lifestyle/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/category/lifestyle/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Lifestyle\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"description\\":\\"Aleteia\\"}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/lifestyle/",
-            "rel": "canonical",
+            "content": "object",
+            "property": "og:type",
           },
-          "tag": "link",
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Lifestyle Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Aleteia",
+            "property": "og:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/category/lifestyle/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Aleteia",
+            "name": "twitter:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Lifestyle Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/category/lifestyle/#webpage\\",\\"url\\":\\"https://test.frontity.org/category/lifestyle/\\",\\"name\\":\\"Lifestyle Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -2180,7 +2531,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -2189,7 +2540,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -2198,7 +2549,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/lifestyle/feed/",
+            "href": "https://test.frontity.org/category/lifestyle/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Lifestyle Category Feed",
             "type": "application/rss+xml",
@@ -2207,14 +2558,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -2223,18 +2574,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -2275,12 +2619,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories",
           },
         ],
         "curies": Array [
@@ -2292,42 +2636,91 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/7",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories/7",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=7",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?categories=7",
           },
         ],
       },
       "acf": Array [],
       "head_tags": Array [
         Object {
-          "content": "Nature | Frontity Test - WP Title",
+          "content": "Nature Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "content": "noindex,follow",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
             "name": "robots",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
-          },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/category/nature/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/category/nature/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Nature\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"}}]}",
-          "tag": "script",
-        },
-        Object {
-          "attributes": Object {
-            "href": "https://test.frontity.io/category/nature/",
+            "href": "https://test.frontity.org/category/nature/",
             "rel": "canonical",
           },
           "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "object",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Nature Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/category/nature/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Nature Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/category/nature/#webpage\\",\\"url\\":\\"https://test.frontity.org/category/nature/\\",\\"name\\":\\"Nature Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -2360,7 +2753,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -2369,7 +2762,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -2378,7 +2771,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/nature/feed/",
+            "href": "https://test.frontity.org/category/nature/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Nature Category Feed",
             "type": "application/rss+xml",
@@ -2387,14 +2780,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -2403,18 +2796,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -2455,12 +2841,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories",
           },
         ],
         "curies": Array [
@@ -2472,42 +2858,91 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories/8",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories/8",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?categories=8",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?categories=8",
           },
         ],
       },
       "acf": Array [],
       "head_tags": Array [
         Object {
-          "content": "Travel | Frontity Test - WP Title",
+          "content": "Travel Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "content": "noindex,follow",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
             "name": "robots",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
-          },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/category/travel/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/category/travel/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Travel\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"}}]}",
-          "tag": "script",
-        },
-        Object {
-          "attributes": Object {
-            "href": "https://test.frontity.io/category/travel/",
+            "href": "https://test.frontity.org/category/travel/",
             "rel": "canonical",
           },
           "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "object",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Travel Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/category/travel/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Travel Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/category/travel/#webpage\\",\\"url\\":\\"https://test.frontity.org/category/travel/\\",\\"name\\":\\"Travel Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -2540,7 +2975,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -2549,7 +2984,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -2558,7 +2993,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/category/travel/feed/",
+            "href": "https://test.frontity.org/category/travel/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Travel Category Feed",
             "type": "application/rss+xml",
@@ -2567,14 +3002,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -2583,18 +3018,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -2773,18 +3201,18 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
+            "href": "https://test.frontity.org/wp-json/wp/v2/types/post",
           },
         ],
         "author": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/1",
+            "href": "https://test.frontity.org/wp-json/wp/v2/users/1",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts",
           },
         ],
         "curies": Array [
@@ -2794,49 +3222,43 @@ Object {
             "templated": true,
           },
         ],
-        "predecessor-version": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/1919/revisions/1920",
-            "id": 1920,
-          },
-        ],
         "replies": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=1919",
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments?post=1919",
           },
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/1919",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts/1919",
           },
         ],
         "type": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
+            "href": "https://test.frontity.org/wp-json/wp/v2/types/post",
           },
         ],
         "version-history": Array [
           Object {
-            "count": 1,
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/1919/revisions",
+            "count": 0,
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts/1919/revisions",
           },
         ],
         "wp:attachment": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=1919",
+            "href": "https://test.frontity.org/wp-json/wp/v2/media?parent=1919",
           },
         ],
         "wp:term": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=1919",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories?post=1919",
             "taxonomy": "category",
           },
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=1919",
+            "href": "https://test.frontity.org/wp-json/wp/v2/tags?post=1919",
             "taxonomy": "post_tag",
           },
         ],
@@ -2863,27 +3285,132 @@ Object {
       "featured_media": 0,
       "format": "standard",
       "guid": Object {
-        "rendered": "https://test.frontity.io/?p=1919",
+        "rendered": "http://test.frontity.org/?p=1919",
       },
       "head_tags": Array [
         Object {
-          "content": "XSS Attack | Frontity Test - WP Title",
+          "content": "XSS Attack - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+            "name": "robots",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"WebPage\\",\\"@id\\":\\"https://test.frontity.io/2009/xss-attack/#webpage\\",\\"url\\":\\"https://test.frontity.io/2009/xss-attack/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"XSS Attack\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"datePublished\\":\\"2009-04-24T10:21:46+02:00\\",\\"dateModified\\":\\"2019-08-24T10:23:17+02:00\\"},{\\"@type\\":\\"Article\\",\\"@id\\":\\"https://test.frontity.io/2009/xss-attack/#article\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/2009/xss-attack/#webpage\\"},\\"author\\":{\\"@id\\":\\"https://test.frontity.io/author/luisherranz/#author\\"},\\"headline\\":\\"XSS Attack\\",\\"datePublished\\":\\"2009-04-24T10:21:46+02:00\\",\\"dateModified\\":\\"2019-08-24T10:23:17+02:00\\",\\"commentCount\\":0,\\"mainEntityOfPage\\":{\\"@id\\":\\"https://test.frontity.io/2009/xss-attack/#webpage\\"},\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"articleSection\\":\\"Weekend trip\\"},{\\"@type\\":\\"Person\\",\\"@id\\":\\"https://test.frontity.io/author/luisherranz/#author\\",\\"name\\":\\"luisherranz\\",\\"sameAs\\":[],\\"image\\":{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://test.frontity.io/#personlogo\\",\\"url\\":\\"https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g\\",\\"width\\":96,\\"height\\":96,\\"caption\\":\\"luisherranz\\"}}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/2009/xss-attack/",
+            "href": "https://test.frontity.org/2009/xss-attack/",
             "rel": "canonical",
           },
           "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "article",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "XSS Attack - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "This post contains an XSS attack. If you don’t see an alert, everything is fine.",
+            "property": "og:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/2009/xss-attack/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Weekend trip",
+            "property": "article:section",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "2009-04-24T10:21:46+00:00",
+            "property": "article:published_time",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "2019-08-24T10:23:17+00:00",
+            "property": "article:modified_time",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "2019-08-24T10:23:17+00:00",
+            "property": "og:updated_time",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "This post contains an XSS attack. If you don’t see an alert, everything is fine.",
+            "name": "twitter:description",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "XSS Attack - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "http://x",
+            "name": "twitter:image",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://test.frontity.org/2009/xss-attack/#primaryimage\\",\\"inLanguage\\":\\"en-US\\",\\"url\\":\\"x\\"},{\\"@type\\":\\"WebPage\\",\\"@id\\":\\"https://test.frontity.org/2009/xss-attack/#webpage\\",\\"url\\":\\"https://test.frontity.org/2009/xss-attack/\\",\\"name\\":\\"XSS Attack - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\",\\"primaryImageOfPage\\":{\\"@id\\":\\"https://test.frontity.org/2009/xss-attack/#primaryimage\\"},\\"datePublished\\":\\"2009-04-24T10:21:46+00:00\\",\\"dateModified\\":\\"2019-08-24T10:23:17+00:00\\",\\"author\\":{\\"@id\\":\\"https://test.frontity.org/#/schema/person/a5c5ec7b6b2d3a3abc6f7c105121a4ad\\"},\\"potentialAction\\":[{\\"@type\\":\\"ReadAction\\",\\"target\\":[\\"https://test.frontity.org/2009/xss-attack/\\"]}]},{\\"@type\\":[\\"Person\\"],\\"@id\\":\\"https://test.frontity.org/#/schema/person/a5c5ec7b6b2d3a3abc6f7c105121a4ad\\",\\"name\\":\\"luisherranz\\",\\"image\\":{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://test.frontity.org/#authorlogo\\",\\"inLanguage\\":\\"en-US\\",\\"url\\":\\"https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g\\",\\"caption\\":\\"luisherranz\\"},\\"sameAs\\":[]}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -2916,7 +3443,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -2925,7 +3452,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -2934,7 +3461,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/2009/xss-attack/feed/",
+            "href": "https://test.frontity.org/2009/xss-attack/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » XSS Attack Comments Feed",
             "type": "application/rss+xml",
@@ -2943,14 +3470,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -2959,7 +3486,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
@@ -2967,29 +3494,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/2009/edge-case-nested-and-mixed-lists/",
-            "rel": "next",
-            "title": "Edge Case: Nested And Mixed Lists",
-          },
-          "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
-        },
-        Object {
-          "attributes": Object {
-            "href": "https://test.frontity.io/?p=1919",
+            "href": "https://test.frontity.org/?p=1919",
             "rel": "shortlink",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.io%2F2009%2Fxss-attack%2F",
+            "href": "https://test.frontity.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.org%2F2009%2Fxss-attack%2F",
             "rel": "alternate",
             "type": "application/json+oembed",
           },
@@ -2997,7 +3509,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.io%2F2009%2Fxss-attack%2F&format=xml",
+            "href": "https://test.frontity.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.org%2F2009%2Fxss-attack%2F&format=xml",
             "rel": "alternate",
             "type": "text/xml+oembed",
           },
@@ -3082,18 +3594,18 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
+            "href": "https://test.frontity.org/wp-json/wp/v2/types/post",
           },
         ],
         "author": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/users/1",
+            "href": "https://test.frontity.org/wp-json/wp/v2/users/1",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts",
           },
         ],
         "curies": Array [
@@ -3103,55 +3615,49 @@ Object {
             "templated": true,
           },
         ],
-        "predecessor-version": Array [
-          Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54/revisions/1875",
-            "id": 1875,
-          },
-        ],
         "replies": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/comments?post=54",
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments?post=54",
           },
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts/54",
           },
         ],
         "type": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/types/post",
+            "href": "https://test.frontity.org/wp-json/wp/v2/types/post",
           },
         ],
         "version-history": Array [
           Object {
-            "count": 6,
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/54/revisions",
+            "count": 0,
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts/54/revisions",
           },
         ],
         "wp:attachment": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/media?parent=54",
+            "href": "https://test.frontity.org/wp-json/wp/v2/media?parent=54",
           },
         ],
         "wp:featuredmedia": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/media/55",
+            "href": "https://test.frontity.org/wp-json/wp/v2/media/55",
           },
         ],
         "wp:term": Array [
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/categories?post=54",
+            "href": "https://test.frontity.org/wp-json/wp/v2/categories?post=54",
             "taxonomy": "category",
           },
           Object {
             "embeddable": true,
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags?post=54",
+            "href": "https://test.frontity.org/wp-json/wp/v2/tags?post=54",
             "taxonomy": "post_tag",
           },
         ],
@@ -3176,7 +3682,7 @@ Object {
 <p>The Navajo name for Upper Antelope Canyon is Tsé bighánílíní, which means <strong><em>&#8220;the place where water runs through rocks.&#8221;</em></strong> Lower Antelope Canyon is Hazdistazí (advertised as &#8220;Hasdestwazi&#8221; by the Navajo Parks and Recreation Department), or &#8220;spiral rock arches.&#8221; Both are located within the LeChee Chapter of the Navajo Nation</p>
 <h3><strong>Lower Antelope Canyon</strong></h3>
 <p>Lower Antelope Canyon, called Hazdistazí, or &#8220;spiral rock arches&#8221; by the Navajo Indians, are located a few miles away. Prior to the installation of metal stairways, visiting the canyon required climbing along pre-installed ladders in certain areas. Even following the installation of stairways, it is a more difficult hike than Upper Antelope. It is longer, narrower in spots, and even footing is not available in all areas. At the end, the climb out requires several flights of stairs.</p>
-<p><img class=\\"alignnone wp-image-80 size-large\\" src=\\"https://i0.wp.com/test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=840%2C559&#038;ssl=1\\" alt=\\"canyon\\" width=\\"840\\" height=\\"559\\" srcset=\\"https://i0.wp.com/test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=1024%2C682&amp;ssl=1 1024w, https://i0.wp.com/test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=300%2C200&amp;ssl=1 300w, https://i0.wp.com/test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=768%2C512&amp;ssl=1 768w, https://i0.wp.com/test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=1200%2C800&amp;ssl=1 1200w, https://i0.wp.com/test.frontity.io/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?w=1280&amp;ssl=1 1280w\\" sizes=\\"(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px\\" data-recalc-dims=\\"1\\" /></p>
+<p><img class=\\"alignnone wp-image-80 size-large\\" src=\\"https://i0.wp.com/test.frontity.org/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=840%2C559\\" alt=\\"canyon\\" width=\\"840\\" height=\\"559\\" srcset=\\"https://i0.wp.com/test.frontity.org/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=1024%2C682&amp;ssl=1 1024w, https://i0.wp.com/test.frontity.org/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=300%2C200&amp;ssl=1 300w, https://i0.wp.com/test.frontity.org/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=768%2C512&amp;ssl=1 768w, https://i0.wp.com/test.frontity.org/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?resize=1200%2C800&amp;ssl=1 1200w, https://i0.wp.com/test.frontity.org/wp-content/uploads/2016/11/pexels-photo-94807.jpeg?w=1280&amp;ssl=1 1280w\\" sizes=\\"(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px\\" data-recalc-dims=\\"1\\" /></p>
 <p>Despite these limitations, Lower Antelope Canyon draws a considerable number of photographers, though casual sightseers are much less common there than in Upper.</p>
 <p>The lower canyon is in the shape of a &#8220;V&#8221; and shallower than the Upper Antelope. Lighting is better in the early hours and late morning.</p>
 <p>Source: <a href=\\"https://en.wikipedia.org/wiki/Antelope_Canyon\\">Antelope Canyon</a>.</p>
@@ -3186,13 +3692,13 @@ Object {
       "date_gmt": "2016-10-25T16:14:29",
       "excerpt": Object {
         "protected": false,
-        "rendered": "<p>“Travel is the only thing you buy that makes you richer.” – Anonymous Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes two separate, scenic slot canyon sections, referred to individually as &#8220;Upper Antelope Canyon&#8221; or &#8220;The Crack&#8221;; and &#8220;Antelope Canyon&#8221; &hellip; <a href=\\"https://test.frontity.io/2016/lower-antelope-canyon/\\" class=\\"more-link\\">Continue reading<span class=\\"screen-reader-text\\"> &#8220;Antelope Canyon&#8221;</span></a></p>
+        "rendered": "<p>“Travel is the only thing you buy that makes you richer.” – Anonymous Antelope Canyon is a slot canyon in the American Southwest. It is located on Navajo land east of Page, Arizona. Antelope Canyon includes two separate, scenic slot canyon sections, referred to individually as &#8220;Upper Antelope Canyon&#8221; or &#8220;The Crack&#8221;; and &#8220;Antelope Canyon&#8221; &hellip; <a href=\\"https://test.frontity.org/2016/lower-antelope-canyon/\\" class=\\"more-link\\">Continue reading<span class=\\"screen-reader-text\\"> &#8220;Antelope Canyon&#8221;</span></a></p>
 ",
       },
       "featured_media": 55,
       "format": "standard",
       "guid": Object {
-        "rendered": "https://test.frontity.io/?p=54",
+        "rendered": "http://test.frontity.org/?p=54",
       },
       "head_tags": Array [
         Object {
@@ -3208,7 +3714,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/2016/lower-antelope-canyon/",
+            "href": "https://test.frontity.org/2016/lower-antelope-canyon/",
             "rel": "canonical",
           },
           "tag": "link",
@@ -3243,7 +3749,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "content": "https://test.frontity.io/2016/lower-antelope-canyon/",
+            "content": "https://test.frontity.org/2016/lower-antelope-canyon/",
             "property": "og:url",
           },
           "tag": "meta",
@@ -3306,14 +3812,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "content": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-1024x683.jpg",
+            "content": "https://test.frontity.org/wp-content/uploads/2016/11/canyon-1024x683.jpg",
             "property": "og:image",
           },
           "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "content": "https://test.frontity.io/wp-content/uploads/2016/11/canyon-1024x683.jpg",
+            "content": "https://test.frontity.org/wp-content/uploads/2016/11/canyon-1024x683.jpg",
             "property": "og:image:secure_url",
           },
           "tag": "meta",
@@ -3355,7 +3861,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "content": "https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?fit=3072%2C2048&ssl=1",
+            "content": "https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?fit=3072%2C2048&ssl=1",
             "name": "twitter:image",
           },
           "tag": "meta",
@@ -3365,7 +3871,7 @@ Object {
             "class": "yoast-schema-graph yoast-schema-graph--main",
             "type": "application/ld+json",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://test.frontity.io/2016/lower-antelope-canyon/#primaryimage\\",\\"url\\":\\"https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?fit=3072%2C2048&ssl=1\\",\\"width\\":3072,\\"height\\":2048,\\"caption\\":\\"canyon\\"},{\\"@type\\":\\"WebPage\\",\\"@id\\":\\"https://test.frontity.io/2016/lower-antelope-canyon/#webpage\\",\\"url\\":\\"https://test.frontity.io/2016/lower-antelope-canyon/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Antelope Canyon - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"primaryImageOfPage\\":{\\"@id\\":\\"https://test.frontity.io/2016/lower-antelope-canyon/#primaryimage\\"},\\"datePublished\\":\\"2016-10-25T16:14:29+00:00\\",\\"dateModified\\":\\"2019-05-15T12:52:01+00:00\\",\\"author\\":{\\"@id\\":\\"https://test.frontity.io/#/schema/person/b6a70917e79fcd26a6de955d7f234118\\"}},{\\"@type\\":[\\"Person\\"],\\"@id\\":\\"https://test.frontity.io/#/schema/person/b6a70917e79fcd26a6de955d7f234118\\",\\"name\\":\\"luisherranz\\",\\"image\\":{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://test.frontity.io/#authorlogo\\",\\"url\\":\\"https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g\\",\\"caption\\":\\"luisherranz\\"},\\"sameAs\\":[]}]}",
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://test.frontity.org/2016/lower-antelope-canyon/#primaryimage\\",\\"inLanguage\\":\\"en-US\\",\\"url\\":\\"https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?fit=3072%2C2048&ssl=1\\",\\"width\\":3072,\\"height\\":2048,\\"caption\\":\\"canyon\\"},{\\"@type\\":\\"WebPage\\",\\"@id\\":\\"https://test.frontity.org/2016/lower-antelope-canyon/#webpage\\",\\"url\\":\\"https://test.frontity.org/2016/lower-antelope-canyon/\\",\\"name\\":\\"Antelope Canyon - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\",\\"primaryImageOfPage\\":{\\"@id\\":\\"https://test.frontity.org/2016/lower-antelope-canyon/#primaryimage\\"},\\"datePublished\\":\\"2016-10-25T16:14:29+00:00\\",\\"dateModified\\":\\"2019-05-15T12:52:01+00:00\\",\\"author\\":{\\"@id\\":\\"https://test.frontity.org/#/schema/person/a5c5ec7b6b2d3a3abc6f7c105121a4ad\\"},\\"potentialAction\\":[{\\"@type\\":\\"ReadAction\\",\\"target\\":[\\"https://test.frontity.org/2016/lower-antelope-canyon/\\"]}]},{\\"@type\\":[\\"Person\\"],\\"@id\\":\\"https://test.frontity.org/#/schema/person/a5c5ec7b6b2d3a3abc6f7c105121a4ad\\",\\"name\\":\\"luisherranz\\",\\"image\\":{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://test.frontity.org/#authorlogo\\",\\"inLanguage\\":\\"en-US\\",\\"url\\":\\"https://secure.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g\\",\\"caption\\":\\"luisherranz\\"},\\"sameAs\\":[]}]}",
           "tag": "script",
         },
         Object {
@@ -3399,7 +3905,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -3408,7 +3914,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -3417,7 +3923,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/2016/lower-antelope-canyon/feed/",
+            "href": "https://test.frontity.org/2016/lower-antelope-canyon/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Antelope Canyon Comments Feed",
             "type": "application/rss+xml",
@@ -3426,14 +3932,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -3442,7 +3948,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
@@ -3450,21 +3956,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
-        },
-        Object {
-          "attributes": Object {
-            "href": "https://test.frontity.io/?p=54",
+            "href": "https://test.frontity.org/?p=54",
             "rel": "shortlink",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.io%2F2016%2Flower-antelope-canyon%2F",
+            "href": "https://test.frontity.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.org%2F2016%2Flower-antelope-canyon%2F",
             "rel": "alternate",
             "type": "application/json+oembed",
           },
@@ -3472,7 +3971,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.io%2F2016%2Flower-antelope-canyon%2F&format=xml",
+            "href": "https://test.frontity.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftest.frontity.org%2F2016%2Flower-antelope-canyon%2F&format=xml",
             "rel": "alternate",
             "type": "text/xml+oembed",
           },
@@ -3508,7 +4007,7 @@ Object {
         },
       ],
       "id": 54,
-      "jetpack_featured_media_url": "https://i1.wp.com/test.frontity.io/wp-content/uploads/2016/11/canyon.jpg?fit=3072%2C2048&ssl=1",
+      "jetpack_featured_media_url": "https://i1.wp.com/test.frontity.org/wp-content/uploads/2016/11/canyon.jpg?fit=3072%2C2048&ssl=1",
       "link": "/2016/lower-antelope-canyon/",
       "meta": Object {
         "spay_email": "",
@@ -3540,12 +4039,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/post_tag",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
+            "href": "https://test.frontity.org/wp-json/wp/v2/tags",
           },
         ],
         "curies": Array [
@@ -3557,34 +4056,90 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/13",
+            "href": "https://test.frontity.org/wp-json/wp/v2/tags/13",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=13",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?tags=13",
           },
         ],
       },
       "head_tags": Array [
         Object {
-          "content": "Nature | Frontity Test - WP Title",
+          "content": "Nature Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+            "name": "robots",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/tag/nature/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/tag/nature/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Nature\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"}}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/tag/nature/",
+            "href": "https://test.frontity.org/tag/nature/",
             "rel": "canonical",
           },
           "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "object",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Nature Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/tag/nature/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Nature Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/tag/nature/#webpage\\",\\"url\\":\\"https://test.frontity.org/tag/nature/\\",\\"name\\":\\"Nature Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -3617,7 +4172,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -3626,7 +4181,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -3635,7 +4190,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/tag/nature/feed/",
+            "href": "https://test.frontity.org/tag/nature/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Nature Tag Feed",
             "type": "application/rss+xml",
@@ -3644,14 +4199,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -3660,18 +4215,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -3712,12 +4260,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/post_tag",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
+            "href": "https://test.frontity.org/wp-json/wp/v2/tags",
           },
         ],
         "curies": Array [
@@ -3729,34 +4277,90 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/18",
+            "href": "https://test.frontity.org/wp-json/wp/v2/tags/18",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=18",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?tags=18",
           },
         ],
       },
       "head_tags": Array [
         Object {
-          "content": "Antelope Canyon | Frontity Test - WP Title",
+          "content": "Antelope Canyon Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+            "name": "robots",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/tag/antelope-canyon/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/tag/antelope-canyon/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Antelope Canyon\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"}}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/tag/antelope-canyon/",
+            "href": "https://test.frontity.org/tag/antelope-canyon/",
             "rel": "canonical",
           },
           "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "object",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Antelope Canyon Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/tag/antelope-canyon/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Antelope Canyon Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/tag/antelope-canyon/#webpage\\",\\"url\\":\\"https://test.frontity.org/tag/antelope-canyon/\\",\\"name\\":\\"Antelope Canyon Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -3789,7 +4393,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -3798,7 +4402,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -3807,7 +4411,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/tag/antelope-canyon/feed/",
+            "href": "https://test.frontity.org/tag/antelope-canyon/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Antelope Canyon Tag Feed",
             "type": "application/rss+xml",
@@ -3816,14 +4420,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -3832,18 +4436,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -3884,12 +4481,12 @@ Object {
       "_links": Object {
         "about": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/taxonomies/post_tag",
+            "href": "https://test.frontity.org/wp-json/wp/v2/taxonomies/post_tag",
           },
         ],
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags",
+            "href": "https://test.frontity.org/wp-json/wp/v2/tags",
           },
         ],
         "curies": Array [
@@ -3901,34 +4498,90 @@ Object {
         ],
         "self": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/tags/19",
+            "href": "https://test.frontity.org/wp-json/wp/v2/tags/19",
           },
         ],
         "wp:post_type": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts?tags=19",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts?tags=19",
           },
         ],
       },
       "head_tags": Array [
         Object {
-          "content": "Arizona | Frontity Test - WP Title",
+          "content": "Arizona Archives - Frontity Test - WP Title",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+            "name": "robots",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.io/tag/arizona/#collectionpage\\",\\"url\\":\\"https://test.frontity.io/tag/arizona/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Arizona\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"}}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/tag/arizona/",
+            "href": "https://test.frontity.org/tag/arizona/",
             "rel": "canonical",
           },
           "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "object",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Arizona Archives - Frontity Test - WP Title",
+            "property": "og:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "https://test.frontity.org/tag/arizona/",
+            "property": "og:url",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title",
+            "property": "og:site_name",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "summary_large_image",
+            "name": "twitter:card",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Arizona Archives - Frontity Test - WP Title",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/tag/arizona/#webpage\\",\\"url\\":\\"https://test.frontity.org/tag/arizona/\\",\\"name\\":\\"Arizona Archives - Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -3961,7 +4614,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -3970,7 +4623,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -3979,7 +4632,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/tag/arizona/feed/",
+            "href": "https://test.frontity.org/tag/arizona/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Arizona Tag Feed",
             "type": "application/rss+xml",
@@ -3988,14 +4641,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -4004,18 +4657,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
@@ -4061,7 +4707,7 @@ Object {
       "_links": Object {
         "collection": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/types",
+            "href": "https://test.frontity.org/wp-json/wp/v2/types",
           },
         ],
         "curies": Array [
@@ -4073,40 +4719,60 @@ Object {
         ],
         "wp:items": Array [
           Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts",
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts",
           },
         ],
       },
       "head_tags": Array [
         Object {
-          "content": "Frontity Test - WP Title | Not just another Wordpress site. Seriously.",
+          "content": "Frontity Test - WP Title - Not just another Wordpress site. Seriously.",
           "tag": "title",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/wp/v2/posts/page/2/?_embed=true&page=1",
-            "rel": "next",
+            "content": "Not just another Wordpress site. Seriously.",
+            "name": "description",
           },
-          "tag": "link",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "class": "aioseop-schema",
-            "type": "application/ld+json",
+            "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+            "name": "robots",
           },
-          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"Organization\\",\\"@id\\":\\"https://test.frontity.io/#organization\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"sameAs\\":[]},{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.io/#website\\",\\"url\\":\\"https://test.frontity.io/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"publisher\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.io/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}},{\\"@type\\":\\"WebPage\\",\\"@id\\":\\"https://test.frontity.io/#webpage\\",\\"url\\":\\"https://test.frontity.io/\\",\\"inLanguage\\":\\"en-US\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.io/#website\\"},\\"about\\":{\\"@id\\":\\"https://test.frontity.io/#organization\\"},\\"description\\":\\"Not just another Wordpress site. Seriously.\\"}]}",
-          "tag": "script",
+          "tag": "meta",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/",
+            "href": "https://test.frontity.org/",
             "rel": "canonical",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "content": "Frontity Test - WP Title",
+            "href": "http://test.frontity.org/page/2/",
+            "rel": "next",
+          },
+          "tag": "link",
+        },
+        Object {
+          "attributes": Object {
+            "content": "en_US",
+            "property": "og:locale",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "website",
+            "property": "og:type",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title - Not just another Wordpress site. Seriously.",
             "property": "og:title",
           },
           "tag": "meta",
@@ -4120,7 +4786,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "content": "https://test.frontity.io/",
+            "content": "https://test.frontity.org/",
             "property": "og:url",
           },
           "tag": "meta",
@@ -4134,15 +4800,8 @@ Object {
         },
         Object {
           "attributes": Object {
-            "content": "summary",
+            "content": "summary_large_image",
             "name": "twitter:card",
-          },
-          "tag": "meta",
-        },
-        Object {
-          "attributes": Object {
-            "content": "Frontity Test - WP Title",
-            "name": "twitter:title",
           },
           "tag": "meta",
         },
@@ -4152,6 +4811,21 @@ Object {
             "name": "twitter:description",
           },
           "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "content": "Frontity Test - WP Title - Not just another Wordpress site. Seriously.",
+            "name": "twitter:title",
+          },
+          "tag": "meta",
+        },
+        Object {
+          "attributes": Object {
+            "class": "yoast-schema-graph yoast-schema-graph--main",
+            "type": "application/ld+json",
+          },
+          "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title\\",\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\",\\"potentialAction\\":[{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://test.frontity.org/?s={search_term_string}\\",\\"query-input\\":\\"required name=search_term_string\\"}]},{\\"@type\\":\\"CollectionPage\\",\\"@id\\":\\"https://test.frontity.org/#webpage\\",\\"url\\":\\"https://test.frontity.org/\\",\\"name\\":\\"Frontity Test - WP Title - Not just another Wordpress site. Seriously.\\",\\"isPartOf\\":{\\"@id\\":\\"https://test.frontity.org/#website\\"},\\"inLanguage\\":\\"en-US\\",\\"description\\":\\"Not just another Wordpress site. Seriously.\\"}]}",
+          "tag": "script",
         },
         Object {
           "attributes": Object {
@@ -4184,7 +4858,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/feed/",
+            "href": "https://test.frontity.org/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Feed",
             "type": "application/rss+xml",
@@ -4193,7 +4867,7 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/comments/feed/",
+            "href": "https://test.frontity.org/comments/feed/",
             "rel": "alternate",
             "title": "Frontity Test - WP Title » Comments Feed",
             "type": "application/rss+xml",
@@ -4202,14 +4876,14 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-json/",
+            "href": "https://test.frontity.org/wp-json/",
             "rel": "https://api.w.org/",
           },
           "tag": "link",
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/xmlrpc.php?rsd",
+            "href": "https://test.frontity.org/xmlrpc.php?rsd",
             "rel": "EditURI",
             "title": "RSD",
             "type": "application/rsd+xml",
@@ -4218,18 +4892,11 @@ Object {
         },
         Object {
           "attributes": Object {
-            "href": "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+            "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
             "rel": "wlwmanifest",
             "type": "application/wlwmanifest+xml",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "WordPress 5.3.1",
-            "name": "generator",
-          },
-          "tag": "meta",
         },
         Object {
           "attributes": Object {
