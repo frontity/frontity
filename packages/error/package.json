@@ -2,6 +2,7 @@
   "name": "@frontity/error",
   "version": "0.1.0",
   "description": "Frontity errors and warnings",
+  "main": "src/index.ts",
   "keywords": [
     "frontity"
   ],
@@ -17,6 +18,7 @@
   "scripts": {
     "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
-    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
+    "tsdoc": "../../node_modules/.bin/typedoc --out ../../tsdoc/error src --plugin typedoc-plugin-markdown --tsconfig ../../tsconfig.json"
   }
 }
