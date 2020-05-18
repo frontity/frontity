@@ -7,7 +7,7 @@ import useFills from "./use-fills";
 
 let store;
 
-// spy on the console.warn calls
+// Spy on the console.warn calls
 const warn = jest.spyOn(global.console, "warn");
 
 const FillComponent = ({ number }) => (
