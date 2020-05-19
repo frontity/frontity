@@ -33,11 +33,13 @@ jobs:
 
       - name: Deploy to now
         run: npx lerna run now --parallel -- -- ${{ steps.deploy.outputs.args }}
+        if: github.actor == github.event.repository.owner.login
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
 
       - name: Create alias for this deploy
         run: npx lerna run now:alias --parallel
+        if: github.actor == github.event.repository.owner.login
         env:
           COMMIT_SHA: ${{ github.sha }}
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
