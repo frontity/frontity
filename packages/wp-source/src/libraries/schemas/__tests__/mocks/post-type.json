@@ -8,12 +8,12 @@
   "_links": {
     "collection": [
       {
-        "href": "http://test.frontity.io/wp-json/wp/v2/types"
+        "href": "http://test.frontity.org/wp-json/wp/v2/types"
       }
     ],
     "wp:items": [
       {
-        "href": "http://test.frontity.io/wp-json/wp/v2/posts"
+        "href": "http://test.frontity.org/wp-json/wp/v2/posts"
       }
     ],
     "curies": [
