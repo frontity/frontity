@@ -24,7 +24,7 @@ beforeEach(() => {
 
   // Mock wp-source state.
   config.state.source = clone(wpSource()).state.source;
-  config.state.source.api = "https://test.frontity.io/wp-json";
+  config.state.source.api = "https://test.frontity.org/wp-json";
   // Mock router state.
   config.state.router = { link: "/", state: {} };
   // Mock site url.
@@ -83,21 +83,21 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/post-1/",
+          href: "https://test.frontity.org/post-1/",
         },
       },
       {
         tag: "meta",
         attributes: {
           property: "og:url",
-          content: "https://test.frontity.io/post-1/",
+          content: "https://test.frontity.org/post-1/",
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "shortlink",
-          href: "https://test.frontity.io/?p=1",
+          href: "https://test.frontity.org/?p=1",
         },
       },
     ];
@@ -114,7 +114,7 @@ describe("state.headTags.get() (post entity)", () => {
         attributes: {
           property: "og:image",
           content:
-            "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+            "https://test.frontity.org/wp-content/uploads/2019/12/img.jpg",
         },
       },
       {
@@ -122,7 +122,7 @@ describe("state.headTags.get() (post entity)", () => {
         attributes: {
           name: "twitter:image",
           content:
-            "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+            "https://test.frontity.org/wp-content/uploads/2019/12/img.jpg",
         },
       },
       {
@@ -138,7 +138,7 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "application/rss+xml",
           title: "frontity » Feed",
-          href: "https://test.frontity.io/feed/",
+          href: "https://test.frontity.org/feed/",
         },
       },
       {
@@ -147,7 +147,7 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "application/rss+xml",
           title: "frontity » Comments Feed",
-          href: "https://test.frontity.io/comments/feed/",
+          href: "https://test.frontity.org/comments/feed/",
         },
       },
       {
@@ -156,14 +156,14 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "application/rss+xml",
           title: "frontity » Post 1 Comments Feed",
-          href: "https://test.frontity.io/post-1/feed/",
+          href: "https://test.frontity.org/post-1/feed/",
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/",
+          href: "https://test.frontity.org/wp-json/",
         },
       },
       {
@@ -172,7 +172,7 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "EditURI",
           type: "application/rsd+xml",
           title: "RSD",
-          href: "https://test.frontity.io/xmlrpc.php?rsd",
+          href: "https://test.frontity.org/xmlrpc.php?rsd",
         },
       },
       {
@@ -180,7 +180,7 @@ describe("state.headTags.get() (post entity)", () => {
         attributes: {
           rel: "wlwmanifest",
           type: "application/wlwmanifest+xml",
-          href: "https://test.frontity.io/wp-includes/wlwmanifest.xml",
+          href: "https://test.frontity.org/wp-includes/wlwmanifest.xml",
         },
       },
       {
@@ -189,7 +189,7 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "application/json+oembed",
           href:
-            "https://test.frontity.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.io%2Fpost-1%2F",
+            "https://test.frontity.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.org%2Fpost-1%2F",
         },
       },
       {
@@ -198,14 +198,14 @@ describe("state.headTags.get() (post entity)", () => {
           rel: "alternate",
           type: "text/xml+oembed",
           href:
-            "https://test.frontity.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.io%2Fpost-1%2F&format=xml",
+            "https://test.frontity.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.org%2Fpost-1%2F&format=xml",
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "pingback",
-          href: "https://test.frontity.io/xmlrpc.php",
+          href: "https://test.frontity.org/xmlrpc.php",
         },
       },
     ];
@@ -229,19 +229,19 @@ describe("state.headTags.get() (post entity)", () => {
             {
               // All these links should change...
               "@type": "WebSite",
-              "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/",
+              "@id": "https://test.frontity.org/#website",
+              url: "https://test.frontity.org/",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://test.frontity.io/?s={search_term_string}",
+                target: "https://test.frontity.org/?s={search_term_string}",
               },
             },
             {
               "@type": "ImageObject",
-              "@id": "https://test.frontity.io/post-1/#primaryimage",
+              "@id": "https://test.frontity.org/post-1/#primaryimage",
               // ...except this one.
               url:
-                "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+                "https://test.frontity.org/wp-content/uploads/2019/12/img.jpg",
             },
           ],
         }),
@@ -259,14 +259,14 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/subdir/post-1/", // should change
+          href: "https://test.frontity.org/subdir/post-1/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/subdir/wp-json/", // should not change
+          href: "https://test.frontity.org/subdir/wp-json/", // should not change
         },
       },
       {
@@ -280,8 +280,8 @@ describe("state.headTags.get() (post entity)", () => {
             {
               // All these links should change
               "@type": "WebSite",
-              "@id": "https://test.frontity.io/subdir/#website",
-              url: "https://test.frontity.io/subdir/",
+              "@id": "https://test.frontity.org/subdir/#website",
+              url: "https://test.frontity.org/subdir/",
             },
           ],
         }),
@@ -291,7 +291,7 @@ describe("state.headTags.get() (post entity)", () => {
     setUpState(store.state, headTags);
 
     // Change API prop
-    store.state.source.api = "https://test.frontity.io/subdir/wp-json/";
+    store.state.source.api = "https://test.frontity.org/subdir/wp-json/";
 
     // Test current head tags.
     expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
@@ -303,14 +303,14 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/subdir/post-1/", // should change
+          href: "https://test.frontity.org/subdir/post-1/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/subdir/wp-json/", // should not change
+          href: "https://test.frontity.org/subdir/wp-json/", // should not change
         },
       },
       {
@@ -324,8 +324,8 @@ describe("state.headTags.get() (post entity)", () => {
             {
               // All these links should change
               "@type": "WebSite",
-              "@id": "https://test.frontity.io/subdir/#website",
-              url: "https://test.frontity.io/subdir/",
+              "@id": "https://test.frontity.org/subdir/#website",
+              url: "https://test.frontity.org/subdir/",
             },
           ],
         }),
@@ -336,7 +336,7 @@ describe("state.headTags.get() (post entity)", () => {
 
     // Change API and Frontity URL prop
     store.state.frontity.url = "https://frontity.org/mars/";
-    store.state.source.api = "https://test.frontity.io/subdir/wp-json/";
+    store.state.source.api = "https://test.frontity.org/subdir/wp-json/";
 
     // Test current head tags.
     expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
@@ -348,7 +348,7 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/subdir/post-1/", // should change
+          href: "https://test.frontity.org/subdir/post-1/", // should change
         },
       },
     ];
@@ -379,12 +379,12 @@ describe("state.headTags.get() (post entity)", () => {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://test.frontity.io/wrong-title/#webpage",
-      "url": "https://test.frontity.io/wrong-title/",
+      "@id": "https://test.frontity.org/wrong-title/#webpage",
+      "url": "https://test.frontity.org/wrong-title/",
       "inLanguage": "en-US",
       "name": "Wrong title with "quotes" - frontity",
       "isPartOf": {
-        "@id": "https://test.frontity.io/#website"
+        "@id": "https://test.frontity.org/#website"
       }
     }
   ]
@@ -407,14 +407,14 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/post-1/", // should not change
+          href: "https://test.frontity.org/post-1/", // should not change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/", // should not change
+          href: "https://test.frontity.org/wp-json/", // should not change
         },
       },
       {
@@ -428,8 +428,8 @@ describe("state.headTags.get() (post entity)", () => {
             {
               // All these links should not change
               "@type": "WebSite",
-              "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/",
+              "@id": "https://test.frontity.org/#website",
+              url: "https://test.frontity.org/",
             },
           ],
         }),
@@ -451,14 +451,14 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/post-1/", // should not change
+          href: "https://test.frontity.org/post-1/", // should not change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/", // should not change
+          href: "https://test.frontity.org/wp-json/", // should not change
         },
       },
       {
@@ -472,8 +472,8 @@ describe("state.headTags.get() (post entity)", () => {
             {
               // All these links should not change
               "@type": "WebSite",
-              "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/",
+              "@id": "https://test.frontity.org/#website",
+              url: "https://test.frontity.org/",
             },
           ],
         }),
@@ -483,7 +483,7 @@ describe("state.headTags.get() (post entity)", () => {
     setUpState(store.state, headTags);
 
     // Set `frontity.url` to the same site.
-    store.state.frontity.url = "https://test.frontity.io/";
+    store.state.frontity.url = "https://test.frontity.org/";
 
     // Test current head tags.
     expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
@@ -495,14 +495,14 @@ describe("state.headTags.get() (post entity)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://different.frontity.io/blog/post-1/", // should change
+          href: "https://different.frontity.org/blog/post-1/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/", // should not change
+          href: "https://test.frontity.org/wp-json/", // should not change
         },
       },
       {
@@ -516,8 +516,8 @@ describe("state.headTags.get() (post entity)", () => {
             {
               // All these links should change
               "@type": "WebSite",
-              "@id": "https://different.frontity.io/blog/#website",
-              url: "https://different.frontity.io/blog/",
+              "@id": "https://different.frontity.org/blog/#website",
+              url: "https://different.frontity.org/blog/",
             },
           ],
         }),
@@ -529,7 +529,7 @@ describe("state.headTags.get() (post entity)", () => {
     // Set `transformLinks` to false.
     const { transformLinks } = store.state.headTags;
     if (transformLinks)
-      transformLinks.base = "https://different.frontity.io/blog/";
+      transformLinks.base = "https://different.frontity.org/blog/";
 
     // Test current head tags.
     expect(store.state.headTags.get(store.state.router.link)).toMatchSnapshot();
@@ -543,7 +543,7 @@ describe("state.headTags.get() (post entity)", () => {
           name: "twitter:image",
           // should change
           content:
-            "https://test.frontity.io/wp-content/uploads/2019/12/img.jpg",
+            "https://test.frontity.org/wp-content/uploads/2019/12/img.jpg",
         },
       },
       {
@@ -553,7 +553,7 @@ describe("state.headTags.get() (post entity)", () => {
           type: "application/rss+xml",
           title: "frontity » Feed",
           // SHOULD NOT CHANGE
-          href: "https://test.frontity.io/do-not-change/me/",
+          href: "https://test.frontity.org/do-not-change/me/",
         },
       },
     ];
@@ -563,7 +563,7 @@ describe("state.headTags.get() (post entity)", () => {
     // Set `transformLinks` to false.
     const { transformLinks } = store.state.headTags;
     if (transformLinks) {
-      transformLinks.base = "https://test.frontity.io/";
+      transformLinks.base = "https://test.frontity.org/";
       transformLinks.ignore = "do\\-not\\-change";
     }
 
@@ -589,21 +589,21 @@ describe("state.headTags.get() (post type)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/", // should change
+          href: "https://test.frontity.org/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "next",
-          href: "https://test.frontity.io/page/2/", // should change
+          href: "https://test.frontity.org/page/2/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/", // should not change
+          href: "https://test.frontity.org/wp-json/", // should not change
         },
       },
       {
@@ -617,8 +617,8 @@ describe("state.headTags.get() (post type)", () => {
             {
               // All these links should change
               "@type": "WebSite",
-              "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/",
+              "@id": "https://test.frontity.org/#website",
+              url: "https://test.frontity.org/",
             },
           ],
         }),
@@ -648,21 +648,21 @@ describe("state.headTags.get() (taxonomy)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/category/cat-1/", // should change
+          href: "https://test.frontity.org/category/cat-1/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "next",
-          href: "https://test.frontity.io/category/cat-1/page/2/", // should change
+          href: "https://test.frontity.org/category/cat-1/page/2/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/", // should not change
+          href: "https://test.frontity.org/wp-json/", // should not change
         },
       },
       {
@@ -676,8 +676,8 @@ describe("state.headTags.get() (taxonomy)", () => {
             {
               // All these links should change
               "@type": "WebSite",
-              "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/",
+              "@id": "https://test.frontity.org/#website",
+              url: "https://test.frontity.org/",
             },
           ],
         }),
@@ -707,21 +707,21 @@ describe("state.headTags.get() (author)", () => {
         tag: "link",
         attributes: {
           rel: "canonical",
-          href: "https://test.frontity.io/author/author-1/", // should change
+          href: "https://test.frontity.org/author/author-1/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "next",
-          href: "https://test.frontity.io/author/author-1/page/2/", // should change
+          href: "https://test.frontity.org/author/author-1/page/2/", // should change
         },
       },
       {
         tag: "link",
         attributes: {
           rel: "https://api.w.org/",
-          href: "https://test.frontity.io/wp-json/", // should not change
+          href: "https://test.frontity.org/wp-json/", // should not change
         },
       },
       {
@@ -735,8 +735,8 @@ describe("state.headTags.get() (author)", () => {
             {
               // All these links should change
               "@type": "WebSite",
-              "@id": "https://test.frontity.io/#website",
-              url: "https://test.frontity.io/",
+              "@id": "https://test.frontity.org/#website",
+              url: "https://test.frontity.org/",
             },
           ],
         }),
