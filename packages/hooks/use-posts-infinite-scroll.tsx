@@ -7,13 +7,18 @@ import TinyRouter from "@frontity/tiny-router/types";
 const Wrapper = connect(({ link, children }) => {
   const { state } = useConnect<WpSource & TinyRouter>();
   const current = state.source.get(link);
-  // const links = state.router.state.links || [link];
+  const links: string[] = state.router.state.links || [link];
+  const first = links[0];
   // const last = state.source.get(links[links.length - 1]);
-  const pages = state.router.state.pages || [];
-  const items = pages.reduce((final, current) => {
+  const pages: string[] = state.router.state.pages || [];
+  const items = pages.reduce((final, current, index) => {
     const data = state.source.get(current);
     if (data.isArchive && data.isReady) {
-      final = final.concat(data.items);
+      const items =
+        index !== 0
+          ? data.items.filter(({ link }) => link !== first)
+          : data.items;
+      final = final.concat(items);
     }
     return final;
   }, []);
@@ -49,9 +54,10 @@ const Wrapper = connect(({ link, children }) => {
   // })();
 
   // console.log("Wrapper iLimit:", isLimit);
+
   const { supported, fetchRef, routeRef } = useInfiniteScroll({
     currentLink: link,
-    nextLink: next ? next.link : null,
+    nextLink: next?.link,
   });
 
   if (!current.isReady) return null;
@@ -86,14 +92,23 @@ export default (options: Options = {}) => {
   const links: string[] = state.router.state.links || [current.link];
   const context: string = state.router.state.context || options.context;
   const pages: string[] = state.router.state.pages || [options.context];
+  const first = links[0];
   const last = state.source.get(links[links.length - 1]);
-  const items = pages.reduce((final, current) => {
+  const lastPage = state.source.get(pages[pages.length - 1]);
+  const nextPage = state.source.get(lastPage.next);
+  const items = pages.reduce((final, current, index) => {
     const data = state.source.get(current);
     if (data.isArchive && data.isReady) {
-      final = final.concat(data.items);
+      const items =
+        index !== 0
+          ? data.items.filter(({ link }) => link !== first)
+          : data.items;
+      final = final.concat(items);
     }
     return final;
   }, []);
+
+  const isFetching = last.isFetching || lastPage.isFetching;
 
   const isLimit = false;
   // const isLimit = (() => {
@@ -160,9 +175,6 @@ export default (options: Options = {}) => {
   // Request next context on last item.
   useEffect(() => {
     if (items[items.length - 1]?.link === current.link) {
-      const lastPage = state.source.get(pages[pages.length - 1]);
-      const nextPage = state.source.get(lastPage.next);
-      console.log("nextPage", nextPage);
       console.info("fetching page", nextPage.link);
 
       if (!nextPage.isReady && !nextPage.isFetching)
@@ -196,7 +208,7 @@ export default (options: Options = {}) => {
   return {
     posts,
     isLimit,
-    isFetching: last.isFetching,
+    isFetching,
     increaseLimit,
   };
 };
