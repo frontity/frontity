@@ -404,7 +404,7 @@ Array [
 
 exports[`populate removes WP API path from links 2`] = `
 Object {
-  "api": "https://test.frontity.io/subdirectory/wp-json",
+  "api": "https://test.frontity.org/subdirectory/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -613,7 +613,7 @@ Array [
 
 exports[`populate transforms links if subdirectory is specified 2`] = `
 Object {
-  "api": "https://test.frontity.io/subdirectory/wp-json",
+  "api": "https://test.frontity.org/subdirectory/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,

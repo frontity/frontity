@@ -13,7 +13,7 @@ export const mockPostEntity = (
         id: 1,
         slug: "post-1",
         type: "post",
-        link: "https://test.frontity.io/post-1/",
+        link: "https://test.frontity.org/post-1/",
         author: 1,
         featured_media: 1,
         categories: [],
@@ -74,7 +74,7 @@ export const mockTaxonomy = (headTags: HeadTags) => {
       1: {
         id: 1,
         count: 5,
-        link: "https://test.frontity.io/category/cat-1/",
+        link: "https://test.frontity.org/category/cat-1/",
         slug: "cat-1",
         taxonomy: "category",
         parent: 0,
@@ -102,7 +102,7 @@ export const mockAuthor = (headTags: HeadTags) => {
       1: {
         id: 1,
         name: "Author 1",
-        link: "https://test.frontity.io/author/author-1/",
+        link: "https://test.frontity.org/author/author-1/",
         slug: "author-1",
         head_tags: headTags,
       },
