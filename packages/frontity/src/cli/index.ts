@@ -77,7 +77,7 @@ program
 
   .option(
     "--publicPath <path>",
-    'set the public path for static assests. Default path is "/static/".'
+    'set the public path for static assets. Default path is "/static/".'
   )
   .description("Starts a server in development mode.")
   .action(dev);
@@ -91,7 +91,7 @@ program
   )
   .option(
     "--publicPath <path>",
-    'set the public path for static assests. Default path is "/static/".'
+    'set the public path for static assets. Default path is "/static/".'
   )
   .description("Builds the project for production.")
   .action(build);
