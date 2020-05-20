@@ -22,6 +22,8 @@ import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../../types";
 import createStore from "./store";
+import { exists } from "fs";
+import { promisify } from "util";
 
 export default ({ packages }): ReturnType<Koa["callback"]> => {
   const app = new Koa();
@@ -29,11 +31,15 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
   // Serve static files.
   app.use(mount("/static", serve("./build/static")));
 
-  // Default robots.txt.
+  // Serve robots.txt from root or default if it doesn't exists.
   app.use(
-    get("/robots.txt", (ctx) => {
-      ctx.type = "text/plain";
-      ctx.body = "User-agent: *\nDisallow:";
+    get("/robots.txt", async (ctx, next) => {
+      if (await promisify(exists)("./robots.txt")) {
+        await serve("./")(ctx, next);
+      } else {
+        ctx.type = "text/plain";
+        ctx.body = "User-agent: *\nAllow: /";
+      }
     })
   );
 
