@@ -219,4 +219,18 @@ describe("attachment", () => {
     expect(api.get).toHaveBeenCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("overwrites the data when fetched with { force: true }", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([post1]))
+      .mockResolvedValueOnce(mockResponse(attachment1));
+
+    // Fetch entities
+    await store.actions.source.fetch("/post-1");
+    await store.actions.source.fetch("/post-1", { force: true });
+
+    expect(store.state.source).toMatchSnapshot();
+  });
 });
