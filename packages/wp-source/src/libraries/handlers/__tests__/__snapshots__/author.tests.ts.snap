@@ -867,7 +867,7 @@ Object {
 
 exports[`author overwrites the data when fetched with { force: true } 1`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "55": Object {
       "_links": Object {
