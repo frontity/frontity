@@ -3,7 +3,7 @@
     "id": 4,
     "slug": "post-4",
     "type": "post",
-    "link": "https://test.frontity.io/post-4/",
+    "link": "https://test.frontity.org/post-4/",
     "author": 1,
     "featured_media": 4,
     "categories": [],
@@ -13,7 +13,7 @@
         {
           "id": 1,
           "name": "Author 1",
-          "link": "https://test.frontity.io/author/author-1/",
+          "link": "https://test.frontity.org/author/author-1/",
           "slug": "author-1"
         }
       ],
@@ -22,7 +22,7 @@
           "id": 4,
           "slug": "attachment-4",
           "type": "attachment",
-          "link": "https://test.frontity.io/post-4/attachment-4/",
+          "link": "https://test.frontity.org/post-4/attachment-4/",
           "author": 1
         }
       ],
@@ -31,7 +31,7 @@
           {
             "id": 1,
             "count": 5,
-            "link": "https://test.frontity.io/tag/tag-1/",
+            "link": "https://test.frontity.org/tag/tag-1/",
             "slug": "tag-1",
             "taxonomy": "post_tag",
             "parent": 0
@@ -44,7 +44,7 @@
     "id": 5,
     "slug": "post-5",
     "type": "post",
-    "link": "https://test.frontity.io/post-5/",
+    "link": "https://test.frontity.org/post-5/",
     "author": 1,
     "featured_media": 5,
     "categories": [],
@@ -54,7 +54,7 @@
         {
           "id": 1,
           "name": "Author 1",
-          "link": "https://test.frontity.io/author/author-1/",
+          "link": "https://test.frontity.org/author/author-1/",
           "slug": "author-1"
         }
       ],
@@ -63,7 +63,7 @@
           "id": 5,
           "slug": "attachment-5",
           "type": "attachment",
-          "link": "https://test.frontity.io/post-5/attachment-5/",
+          "link": "https://test.frontity.org/post-5/attachment-5/",
           "author": 1
         }
       ],
@@ -72,7 +72,7 @@
           {
             "id": 1,
             "count": 5,
-            "link": "https://test.frontity.io/tag/tag-1/",
+            "link": "https://test.frontity.org/tag/tag-1/",
             "slug": "tag-1",
             "taxonomy": "post_tag",
             "parent": 0
