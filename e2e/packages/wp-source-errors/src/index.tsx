@@ -25,15 +25,15 @@ const wpSourceErrors: WpSourceErrors = {
         if (path !== "/") {
           state.source.api = `https://httpstat.us/${path}?rest_route=/`;
         } else {
-          state.source.api = "https://test.frontity.io/wp-json";
+          state.source.api = "https://test.frontity.org/wp-json";
         }
-      }
-    }
+      },
+    },
   },
   roots: {
-    wpSourceErrors: Root
+    wpSourceErrors: Root,
   },
-  libraries: {}
+  libraries: {},
 };
 
 export default wpSourceErrors;

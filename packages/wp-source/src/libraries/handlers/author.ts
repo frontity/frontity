@@ -45,7 +45,7 @@ const authorHandler: Handler = async ({
   });
 
   // 3. Populate response.
-  const items = await populate({ response, state });
+  const items = await populate({ response, state, force });
   if (page > 1 && items.length === 0)
     throw new ServerError(`author "${slug}" doesn't have page ${page}`, 404);
 
