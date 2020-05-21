@@ -69,6 +69,44 @@ describe("author", () => {
     ]);
   });
 
+  test("overwrites the data when fetched with { force: true }", async () => {
+    // Add iniital data to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(author1),
+    });
+    await store.actions.source.fetch("/author/author-1/");
+
+    // Mock Api responses
+    api.get = jest.fn((unused) =>
+      Promise.resolve(
+        mockResponse(
+          {
+            ...author1,
+            name: "Author 2",
+          },
+          {
+            "X-WP-Total": "5",
+            "X-WP-TotalPages": "2",
+          }
+        )
+      )
+    );
+
+    expect(store.state.source.author["1"].name).toEqual("Author 1");
+
+    // Fetch entities with { force: true }
+    await store.actions.source.fetch("/author/author-1/", {
+      force: true,
+    });
+
+    // Make sure that api.get() was called for each `source.fetch()`
+    expect(api.get).toHaveBeenCalledTimes(2);
+
+    expect(store.state.source).toMatchSnapshot();
+    expect(store.state.source.author["1"].name).toEqual("Author 2");
+  });
+
   test("fetchs from a different endpoint with extra params", async () => {
     // Add custom post endpoint and params
     store.state.source.postEndpoint = "multiple-post-type";
