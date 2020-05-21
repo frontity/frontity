@@ -20,12 +20,14 @@ export default async ({
   port,
   target,
   openBrowser = true,
+  publicPath,
 }: {
   port: number;
   isHttps: boolean;
   mode: Mode;
   target: "es5" | "module";
   openBrowser?: boolean;
+  publicPath: string;
 }): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
@@ -53,7 +55,7 @@ export default async ({
   });
 
   // Get config for webpack, babel and frontity.
-  const config = getConfig({ mode, entryPoints });
+  const config = getConfig({ mode, entryPoints, publicPath });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import

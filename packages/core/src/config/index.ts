@@ -8,13 +8,21 @@ import getFrontity from "./frontity";
 export default ({
   mode,
   entryPoints,
+  publicPath,
 }: {
   mode: Mode;
   entryPoints: EntryPoints[];
+  publicPath: string;
 }): Config => {
   const frontity = getFrontity();
   const babel = getBabel({ mode });
-  const webpack = getWebpack({ mode, babel, frontity, entryPoints });
+  const webpack = getWebpack({
+    mode,
+    babel,
+    frontity,
+    entryPoints,
+    publicPath,
+  });
   return {
     babel,
     webpack,
