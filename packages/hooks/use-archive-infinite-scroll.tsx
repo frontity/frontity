@@ -14,13 +14,9 @@ export const Wrapper = connect(({ link, children }) => {
   // Shorcuts to needed state.
   const current = state.source.get(link);
   const next = current.next ? state.source.get(current.next) : null;
-  const last = state.source.get(links[links.length - 1]);
 
   // Infinite scroll booleans.
   const hasReachedLimit = !!limit && links.length >= limit;
-  const isLast = last.link === current.link;
-  const isThereNext = !!next;
-  const shouldRenderFetch = !hasReachedLimit || !isLast || !isThereNext;
 
   const { supported, fetchRef, routeRef } = useInfiniteScroll({
     currentLink: link,
@@ -43,7 +39,7 @@ export const Wrapper = connect(({ link, children }) => {
   return (
     <div css={container} ref={routeRef}>
       {children}
-      {shouldRenderFetch && <div css={fetcher} ref={fetchRef} />}
+      {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
     </div>
   );
 });
@@ -60,9 +56,15 @@ export default (options: Options = {}) => {
   const links: string[] = state.router.state.links || [state.router.link];
   const limit: number = state.router.state.limit || options.limit;
 
-  // Shorcuts to needed state.
+  // Aliases to needed state.
   const current = state.source.get(state.router.link);
   const last = state.source.get(links[links.length - 1]);
+
+  // Infinite scroll booleans.
+  const hasReachedLimit = !!limit && links.length >= limit;
+  const thereIsNext = !!last.next;
+  const isFetching = last.isFetching;
+  const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   // Initialize/update browser state.
   useEffect(() => {
@@ -78,13 +80,13 @@ export default (options: Options = {}) => {
 
   // Requests the next page disregarding the limit.
   const fetchNext = () => {
-    if (!last.next) return;
+    if (!thereIsNext) return;
 
     const links = state.router.state.links || [current.link];
 
     if (links.includes(last.next)) return;
 
-    console.log("fetching", last.next);
+    console.info("fetching", last.next);
 
     const next = state.source.get(last.next);
 
@@ -111,12 +113,6 @@ export default (options: Options = {}) => {
       link === last.link || (link === links[links.length - 2] && !last.isReady),
     Wrapper,
   }));
-
-  // Infinite scroll booleans.
-  const isFetching = last.isFetching;
-  const hasReachedLimit = !!limit && links.length >= limit;
-  const thereIsNext = !!last.next;
-  const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   return {
     pages,

@@ -28,19 +28,9 @@ const Wrapper = connect(({ link, children }) => {
   }, []);
   const currentIndex = items.findIndex(({ link }) => link === current.link);
   const nextItem = items[currentIndex + 1];
-  const last = state.source.get(links[links.length - 1]);
-  const lastIndex = items.findIndex(({ link }) => link === last.link);
-  const lastPage = state.source.get(pages[pages.length - 1]);
 
-  // TODO:
-  // Scenarios that need to be supported:
-  // - the current element is not in the context array.
-  // - the current element is in the context array.
-  // - the current element is the last element in the context array.
-
+  // Infinite scroll booleans.
   const hasReachedLimit = !!limit && links.length >= limit;
-  const thereIsNext = lastIndex < items.length - 1 || !!lastPage.next;
-  const isLimit = hasReachedLimit && thereIsNext;
 
   const { supported, fetchRef, routeRef } = useInfiniteScroll({
     currentLink: link,
@@ -63,7 +53,7 @@ const Wrapper = connect(({ link, children }) => {
   return (
     <div css={container} ref={routeRef}>
       {children}
-      {!isLimit && <div css={fetcher} ref={fetchRef} />}
+      {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
     </div>
   );
 });
@@ -82,7 +72,7 @@ export default (options: Options = {}) => {
   const pages: string[] = state.router.state.pages || [options.context];
   const limit = state.router.state.limit || options.limit;
 
-  // Shortcuts to needed state.
+  // Aliases to needed state.
   const current = state.source.get(state.router.link);
   const first = links[0];
   const last = state.source.get(links[links.length - 1]);
@@ -102,9 +92,10 @@ export default (options: Options = {}) => {
   const lastIndex = items.findIndex(({ link }) => link === last.link);
 
   // Infinite scroll booleans.
-  const isFetching = last.isFetching || lastPage.isFetching;
   const hasReachedLimit = !!limit && links.length >= limit;
   const thereIsNext = lastIndex < items.length - 1 || !!lastPage.next;
+  const isFetching =
+    last.isFetching || (pages.length > 1 && lastPage.isFetching);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   // Initialize/update browser state.
@@ -125,12 +116,12 @@ export default (options: Options = {}) => {
   useEffect(() => {
     const data = context ? state.source.get(context) : null;
     if (data && !data.isReady && !data.isFetching) {
-      console.log("fetching context", context.link);
+      console.info("fetching context", context.link);
       actions.source.fetch(data.link);
     }
   }, []);
 
-  // Request next context on last item.
+  // Request next page on last item.
   useEffect(() => {
     if (
       nextPage &&
@@ -157,12 +148,59 @@ export default (options: Options = {}) => {
   }, [current.link, items.length, hasReachedLimit]);
 
   // Increases the limit so more pages can be loaded.
-  const increaseLimit = () => {
+  const fetchNext = async () => {
+    if (!thereIsNext) return;
+
+    const links = state.router.state.links || [current.link];
+
+    let nextItem = items[lastIndex + 1];
+    let nextPage = state.source.get(lastPage.next);
+
+    if (!nextItem) {
+      if (!pages.includes(nextPage.link)) {
+        console.info("fetching page", nextPage.link);
+
+        pages.push(nextPage.link);
+
+        if (!nextPage?.isReady && !nextPage?.isFetching) {
+          await actions.source.fetch(nextPage.link);
+          nextPage = state.source.get(nextPage.link);
+        }
+
+        const items = pages.reduce((final, current, index) => {
+          const data = state.source.get(current);
+          if (data.isArchive && data.isReady) {
+            const items =
+              index !== 0
+                ? data.items.filter(({ link }) => link !== first)
+                : data.items;
+            final = final.concat(items);
+          }
+          return final;
+        }, []);
+
+        nextItem = items[lastIndex + 1];
+      }
+    }
+
+    if (links.includes(nextItem.link)) return;
+
+    console.info("fetching", nextItem.link);
+
+    const next = state.source.get(nextItem.link);
+
+    if (!next.isReady && !next.isFetching) {
+      actions.source.fetch(nextItem.link);
+    }
+
+    links.push(nextItem.link);
+
     actions.router.set(current.link, {
       method: "replace",
       state: {
         ...state.router.state,
-        limit: state.router.state.limit ? state.router.state.limit + 1 : 1,
+        links,
+        pages,
       },
     });
   };
@@ -176,39 +214,10 @@ export default (options: Options = {}) => {
     Wrapper,
   }));
 
-  // const isLimit = (() => {
-  //   const limit = state.router.state.limit || options.limit;
-  //   const { items, contexts } = pages.reduce(
-  //     (final, current) => {
-  //       const data = state.source.get(current);
-  //       final.contexts.push(data);
-  //       if (data.isArchive && data.isReady) {
-  //         final.items = final.items.concat(data.items);
-  //       }
-  //       return final;
-  //     },
-  //     { items: [], contexts: [] }
-  //   );
-  //   console.log("items:", items);
-  //   const currentIndex = items.findIndex(({ link }) => link === current.link);
-  //   const nextItem = items[currentIndex + 1];
-  //   const lastItem = items[items.length - 1];
-  //   const lastContext = contexts[contexts.length - 1];
-
-  //   const hasReachedLimit = !!limit && links.length >= limit;
-  //   const isLastItem = !!lastItem && lastItem.link === last.link;
-
-  //   return (
-  //     hasReachedLimit &&
-  //     ((!isLastItem && !nextItem.isFetching) ||
-  //       (isLastItem && !lastContext.isFetching))
-  //   );
-  // })();
-
   return {
     posts,
     isLimit,
     isFetching,
-    increaseLimit,
+    fetchNext,
   };
 };
