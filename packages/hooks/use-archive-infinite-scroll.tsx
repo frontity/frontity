@@ -6,40 +6,18 @@ import TinyRouter from "@frontity/tiny-router/types";
 
 export const Wrapper = connect(({ link, children }) => {
   const { state } = useConnect<WpSource & TinyRouter>();
+
+  // Values from browser state.
+  const links: string[] = state.router.state.links || [link];
+  const limit: number = state.router.state.limit;
+
+  // Shorcuts to needed state.
   const current = state.source.get(link);
-  const links = state.router.state.links || [link];
   const next = current.next ? state.source.get(current.next) : null;
   const last = state.source.get(links[links.length - 1]);
 
-  // TODO:
-  // Scenarios that need to be supported:
-  // - the current element is not in the context array.
-  // - the current element is in the context array.
-  // - the current element is the last element in the context array.
-
-  const isLimit = false;
-  // const isLimit = (() => {
-  //   const { limit } = state.router.state;
-  //   const hasReachedLimit = !!limit && links.length >= limit;
-
-  //   if (last.isPostType && context && context.isArchive) {
-  //     // TODO: add isNotFecthing clause.
-  //     const isNotLastItem =
-  //       context.items[context.items.length - 1].link !== last.link;
-  //     const isThereNext = !!context.next;
-  //     return hasReachedLimit && (isNotLastItem || isThereNext);
-  //   }
-
-  //   if (last.isArchive) {
-  //     const isNotFetching = !last.isFetching;
-  //     const isThereNext = !!last.next;
-  //     return hasReachedLimit && isNotFetching && isThereNext;
-  //   }
-
-  //   return false;
-  // })();
-
-  // console.log("Wrapper iLimit:", isLimit);
+  const isLimit =
+    !!limit && links.length >= limit && !!last.next && !last.isFetching;
 
   const { supported, fetchRef, routeRef } = useInfiniteScroll({
     currentLink: link,
@@ -74,29 +52,22 @@ export interface Options {
 
 export default (options: Options = {}) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
+
+  // Values from/for browser state.
+  const links: string[] = state.router.state.links || [state.router.link];
+  const limit: number = state.router.state.limit || options.limit;
+
+  // Shorcuts to needed state.
   const current = state.source.get(state.router.link);
-  const links: string[] = state.router.state.links || [current.link];
   const last = state.source.get(links[links.length - 1]);
-  const limit = state.router.state.limit || options.limit;
-  const isLimit =
-    !!limit && links.length >= limit && !last.isFetching && !!last.next;
 
-  // Map every link to its DIY object.
-  const pages = links.map((link) => ({
-    key: link,
-    link: link,
-    isLastPage:
-      link === last.link || (link === links[links.length - 2] && !last.isReady),
-    Wrapper,
-  }));
-
-  // Initialize browser state.
+  // Initialize/update browser state.
   useEffect(() => {
     actions.router.set(current.link, {
       method: "replace",
       state: {
         links,
-        limit: options.limit,
+        limit,
         ...state.router.state,
       },
     });
@@ -113,10 +84,24 @@ export default (options: Options = {}) => {
     });
   };
 
+  // Map every link to its DIY object.
+  const pages = links.map((link) => ({
+    key: link,
+    link: link,
+    isLastPage:
+      link === last.link || (link === links[links.length - 2] && !last.isReady),
+    Wrapper,
+  }));
+
+  // Infinite scroll booleans.
+  const isFetching = last.isFetching;
+  const isLimit =
+    !!limit && links.length >= limit && !!last.next && !last.isFetching;
+
   return {
     pages,
     isLimit,
-    isFetching: last.isFetching,
+    isFetching,
     increaseLimit,
   };
 };

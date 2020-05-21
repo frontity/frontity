@@ -88,10 +88,15 @@ export interface Options {
 
 export default (options: Options = {}) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
-  const current = state.source.get(state.router.link);
-  const links: string[] = state.router.state.links || [current.link];
+
+  // Values from/for browser state.
+  const links: string[] = state.router.state.links || [state.router.link];
   const context: string = state.router.state.context || options.context;
   const pages: string[] = state.router.state.pages || [options.context];
+  const limit = state.router.state.limit || options.limit;
+
+  // Shortcuts to needed state.
+  const current = state.source.get(state.router.link);
   const first = links[0];
   const last = state.source.get(links[links.length - 1]);
   const lastPage = state.source.get(pages[pages.length - 1]);
@@ -108,48 +113,7 @@ export default (options: Options = {}) => {
     return final;
   }, []);
 
-  const isFetching = last.isFetching || lastPage.isFetching;
-
-  const isLimit = false;
-  // const isLimit = (() => {
-  //   const limit = state.router.state.limit || options.limit;
-  //   const { items, contexts } = pages.reduce(
-  //     (final, current) => {
-  //       const data = state.source.get(current);
-  //       final.contexts.push(data);
-  //       if (data.isArchive && data.isReady) {
-  //         final.items = final.items.concat(data.items);
-  //       }
-  //       return final;
-  //     },
-  //     { items: [], contexts: [] }
-  //   );
-  //   console.log("items:", items);
-  //   const currentIndex = items.findIndex(({ link }) => link === current.link);
-  //   const nextItem = items[currentIndex + 1];
-  //   const lastItem = items[items.length - 1];
-  //   const lastContext = contexts[contexts.length - 1];
-
-  //   const hasReachedLimit = !!limit && links.length >= limit;
-  //   const isLastItem = !!lastItem && lastItem.link === last.link;
-
-  //   return (
-  //     hasReachedLimit &&
-  //     ((!isLastItem && !nextItem.isFetching) ||
-  //       (isLastItem && !lastContext.isFetching))
-  //   );
-  // })();
-
-  // Map every link to its DIY object.
-  const posts = links.map((link) => ({
-    key: link,
-    link: link,
-    isLastPost:
-      link === last.link || (link === links[links.length - 2] && !last.isReady),
-    Wrapper,
-  }));
-
-  // Initialize browser state.
+  // Initialize/update browser state.
   useEffect(() => {
     actions.router.set(current.link, {
       method: "replace",
@@ -157,7 +121,7 @@ export default (options: Options = {}) => {
         links,
         context,
         pages,
-        limit: options.limit,
+        limit,
         ...state.router.state,
       },
     });
@@ -204,6 +168,47 @@ export default (options: Options = {}) => {
       },
     });
   };
+
+  // Map every link to its DIY object.
+  const posts = links.map((link) => ({
+    key: link,
+    link: link,
+    isLastPost:
+      link === last.link || (link === links[links.length - 2] && !last.isReady),
+    Wrapper,
+  }));
+
+  // Infinite scroll booleans.
+  const isFetching = last.isFetching || lastPage.isFetching;
+  const isLimit = false;
+  // const isLimit = (() => {
+  //   const limit = state.router.state.limit || options.limit;
+  //   const { items, contexts } = pages.reduce(
+  //     (final, current) => {
+  //       const data = state.source.get(current);
+  //       final.contexts.push(data);
+  //       if (data.isArchive && data.isReady) {
+  //         final.items = final.items.concat(data.items);
+  //       }
+  //       return final;
+  //     },
+  //     { items: [], contexts: [] }
+  //   );
+  //   console.log("items:", items);
+  //   const currentIndex = items.findIndex(({ link }) => link === current.link);
+  //   const nextItem = items[currentIndex + 1];
+  //   const lastItem = items[items.length - 1];
+  //   const lastContext = contexts[contexts.length - 1];
+
+  //   const hasReachedLimit = !!limit && links.length >= limit;
+  //   const isLastItem = !!lastItem && lastItem.link === last.link;
+
+  //   return (
+  //     hasReachedLimit &&
+  //     ((!isLastItem && !nextItem.isFetching) ||
+  //       (isLastItem && !lastContext.isFetching))
+  //   );
+  // })();
 
   return {
     posts,
