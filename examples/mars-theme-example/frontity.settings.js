@@ -4,8 +4,8 @@ export default {
     frontity: {
       url: "https://mars.frontity.org",
       title: "Test Frontity Blog",
-      description: "Useful content for Frontity development"
-    }
+      description: "Useful content for Frontity development",
+    },
   },
   packages: [
     "@frontity/tiny-router",
@@ -19,22 +19,22 @@ export default {
             ["Nature", "/category/nature/"],
             ["Travel", "/category/travel/"],
             ["Japan", "/tag/japan/"],
-            ["About Us", "/about-us/"]
+            ["About Us", "/about-us/"],
           ],
           featured: {
             showOnList: true,
-            showOnPost: true
-          }
-        }
-      }
+            showOnPost: true,
+          },
+        },
+      },
     },
     {
       name: "@frontity/wp-source",
       state: {
         source: {
-          api: "https://test.frontity.io/wp-json"
-        }
-      }
-    }
-  ]
+          api: "https://test.frontity.org/wp-json",
+        },
+      },
+    },
+  ],
 };

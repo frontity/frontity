@@ -143,7 +143,7 @@ export const createFrontitySettings = async (
     name,
     state: {
       frontity: {
-        url: "https://test.frontity.io",
+        url: "https://test.frontity.org",
         title: "Test Frontity Blog",
         description: "WordPress installation for Frontity development",
       },
@@ -171,7 +171,7 @@ export const createFrontitySettings = async (
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "https://test.frontity.io/wp-json",
+            api: "https://test.frontity.org/wp-json",
           },
         },
       },
