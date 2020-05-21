@@ -45,15 +45,15 @@ const useInfiniteScroll = ({
   // to the array of elements in the infinite scroll.
   useEffect(() => {
     if (fetch.inView && nextLink) {
+      const links = state.router.state.links || [currentLink];
+
+      if (links.includes(nextLink)) return;
+
       console.log("fetching", nextLink);
 
       if (!next.isReady && !next.isFetching) {
         actions.source.fetch(nextLink);
       }
-
-      const links = state.router.state.links || [currentLink];
-
-      if (links.includes(nextLink)) return;
 
       links.push(nextLink);
 
@@ -65,7 +65,7 @@ const useInfiniteScroll = ({
         },
       });
     }
-  }, [fetch.inView, nextLink]);
+  }, [fetch.inView]);
 
   // Once the route waypoint is in view, change the route to the
   // current element. This preserves the route state between changes

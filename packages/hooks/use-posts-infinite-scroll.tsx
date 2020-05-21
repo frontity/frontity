@@ -6,11 +6,15 @@ import TinyRouter from "@frontity/tiny-router/types";
 
 const Wrapper = connect(({ link, children }) => {
   const { state } = useConnect<WpSource & TinyRouter>();
-  const current = state.source.get(link);
+
+  // Values from browser state.
   const links: string[] = state.router.state.links || [link];
-  const first = links[0];
-  // const last = state.source.get(links[links.length - 1]);
+  const limit: number = state.router.state.limit;
   const pages: string[] = state.router.state.pages || [];
+
+  // Shortcuts to needed state.
+  const current = state.source.get(link);
+  const first = links[0];
   const items = pages.reduce((final, current, index) => {
     const data = state.source.get(current);
     if (data.isArchive && data.isReady) {
@@ -22,42 +26,25 @@ const Wrapper = connect(({ link, children }) => {
     }
     return final;
   }, []);
-
   const currentIndex = items.findIndex(({ link }) => link === current.link);
-  const next = items[currentIndex + 1];
+  const nextItem = items[currentIndex + 1];
+  const last = state.source.get(links[links.length - 1]);
+  const lastIndex = items.findIndex(({ link }) => link === last.link);
+  const lastPage = state.source.get(pages[pages.length - 1]);
 
   // TODO:
   // Scenarios that need to be supported:
   // - the current element is not in the context array.
   // - the current element is in the context array.
   // - the current element is the last element in the context array.
-  const isLimit = false;
-  // const isLimit = (() => {
-  //   const { limit } = state.router.state;
-  //   const hasReachedLimit = !!limit && links.length >= limit;
 
-  //   if (last.isPostType && context && context.isArchive) {
-  //     // TODO: add isNotFecthing clause.
-  //     const isNotLastItem =
-  //       context.items[context.items.length - 1].link !== last.link;
-  //     const isThereNext = !!context.next;
-  //     return hasReachedLimit && (isNotLastItem || isThereNext);
-  //   }
-
-  //   if (last.isArchive) {
-  //     const isNotFetching = !last.isFetching;
-  //     const isThereNext = !!last.next;
-  //     return hasReachedLimit && isNotFetching && isThereNext;
-  //   }
-
-  //   return false;
-  // })();
-
-  // console.log("Wrapper iLimit:", isLimit);
+  const hasReachedLimit = !!limit && links.length >= limit;
+  const thereIsNext = lastIndex < items.length - 1 || !!lastPage.next;
+  const isLimit = hasReachedLimit && thereIsNext;
 
   const { supported, fetchRef, routeRef } = useInfiniteScroll({
     currentLink: link,
-    nextLink: next?.link,
+    nextLink: nextItem?.link,
   });
 
   if (!current.isReady) return null;
@@ -112,6 +99,13 @@ export default (options: Options = {}) => {
     }
     return final;
   }, []);
+  const lastIndex = items.findIndex(({ link }) => link === last.link);
+
+  // Infinite scroll booleans.
+  const isFetching = last.isFetching || lastPage.isFetching;
+  const hasReachedLimit = !!limit && links.length >= limit;
+  const thereIsNext = lastIndex < items.length - 1 || !!lastPage.next;
+  const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   // Initialize/update browser state.
   useEffect(() => {
@@ -138,7 +132,11 @@ export default (options: Options = {}) => {
 
   // Request next context on last item.
   useEffect(() => {
-    if (nextPage && items[items.length - 1]?.link === current.link) {
+    if (
+      nextPage &&
+      !hasReachedLimit &&
+      items[items.length - 1]?.link === current.link
+    ) {
       console.info("fetching page", nextPage.link);
 
       if (!nextPage?.isReady && !nextPage?.isFetching)
@@ -156,7 +154,7 @@ export default (options: Options = {}) => {
         },
       });
     }
-  }, [current.link, items.length]);
+  }, [current.link, items.length, hasReachedLimit]);
 
   // Increases the limit so more pages can be loaded.
   const increaseLimit = () => {
@@ -178,9 +176,6 @@ export default (options: Options = {}) => {
     Wrapper,
   }));
 
-  // Infinite scroll booleans.
-  const isFetching = last.isFetching || lastPage.isFetching;
-  const isLimit = false;
   // const isLimit = (() => {
   //   const limit = state.router.state.limit || options.limit;
   //   const { items, contexts } = pages.reduce(

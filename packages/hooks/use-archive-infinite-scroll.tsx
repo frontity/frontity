@@ -16,8 +16,10 @@ export const Wrapper = connect(({ link, children }) => {
   const next = current.next ? state.source.get(current.next) : null;
   const last = state.source.get(links[links.length - 1]);
 
-  const isLimit =
-    !!limit && links.length >= limit && !!last.next && !last.isFetching;
+  const hasReachedLimit = !!limit && links.length >= limit;
+  const isLast = last.link === current.link;
+  const thereIsNext = !!next;
+  const isLimit = hasReachedLimit && isLast && thereIsNext;
 
   const { supported, fetchRef, routeRef } = useInfiniteScroll({
     currentLink: link,
@@ -36,6 +38,8 @@ export const Wrapper = connect(({ link, children }) => {
     width: 100%;
     bottom: 0;
   `;
+
+  // console.log("wrapper", current.link, "isLimit", isLimit);
 
   return (
     <div css={container} ref={routeRef}>
@@ -73,13 +77,29 @@ export default (options: Options = {}) => {
     });
   }, []);
 
-  // Increases the limit so more pages can be loaded.
-  const increaseLimit = () => {
+  // Requests the next page disregarding the limit value.
+  const fetchNext = () => {
+    if (!last.next) return;
+
+    const links = state.router.state.links || [current.link];
+
+    if (links.includes(last.next)) return;
+
+    console.log("fetching", last.next);
+
+    const next = state.source.get(last.next);
+
+    if (!next.isReady && !next.isFetching) {
+      actions.source.fetch(last.next);
+    }
+
+    links.push(last.next);
+
     actions.router.set(current.link, {
       method: "replace",
       state: {
         ...state.router.state,
-        limit: state.router.state.limit ? state.router.state.limit + 1 : 1,
+        links,
       },
     });
   };
@@ -95,13 +115,16 @@ export default (options: Options = {}) => {
 
   // Infinite scroll booleans.
   const isFetching = last.isFetching;
-  const isLimit =
-    !!limit && links.length >= limit && !!last.next && !last.isFetching;
+  const hasReachedLimit = !!limit && links.length >= limit;
+  const thereIsNext = !!last.next;
+  const isLimit = hasReachedLimit && thereIsNext && !isFetching;
+
+  // console.log("isLimit", isLimit, "isFetching", isFetching);
 
   return {
     pages,
     isLimit,
     isFetching,
-    increaseLimit,
+    fetchNext,
   };
 };
