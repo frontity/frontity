@@ -95,7 +95,7 @@ export default (options: Options = {}) => {
   const first = links[0];
   const last = state.source.get(links[links.length - 1]);
   const lastPage = state.source.get(pages[pages.length - 1]);
-  const nextPage = state.source.get(lastPage.next);
+  const nextPage = lastPage.next && state.source.get(lastPage.next);
   const items = pages.reduce((final, current, index) => {
     const data = state.source.get(current);
     if (data.isArchive && data.isReady) {
@@ -174,10 +174,10 @@ export default (options: Options = {}) => {
 
   // Request next context on last item.
   useEffect(() => {
-    if (items[items.length - 1]?.link === current.link) {
+    if (nextPage && items[items.length - 1]?.link === current.link) {
       console.info("fetching page", nextPage.link);
 
-      if (!nextPage.isReady && !nextPage.isFetching)
+      if (!nextPage?.isReady && !nextPage?.isFetching)
         actions.source.fetch(nextPage.link);
 
       if (pages.includes(nextPage.link)) return;

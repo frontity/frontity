@@ -20,7 +20,7 @@ const useInfiniteScroll = ({
     triggerOnce: true,
   },
   routeInViewOptions = {
-    rootMargin: "-70% 0% -29.9999% 0%",
+    rootMargin: "-80% 0% -19.9999% 0%",
   },
 }: Options) => {
   const fetch = useInView(fetchInViewOptions);
