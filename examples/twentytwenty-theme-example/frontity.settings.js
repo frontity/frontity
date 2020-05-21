@@ -52,7 +52,7 @@ export default {
       name: "@frontity/wp-source",
       state: {
         source: {
-          api: "https://test.frontity.io/wp-json",
+          api: "https://test.frontity.org/wp-json",
         },
       },
     },

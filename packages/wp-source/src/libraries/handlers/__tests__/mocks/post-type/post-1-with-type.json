@@ -2,7 +2,7 @@
   "id": 1,
   "slug": "post-1",
   "type": "post",
-  "link": "https://test.frontity.io/post-1/",
+  "link": "https://test.frontity.org/post-1/",
   "author": 1,
   "featured_media": 1,
   "categories": [1],
@@ -12,7 +12,7 @@
       {
         "id": 1,
         "name": "Author 1",
-        "link": "https://test.frontity.io/author/author-1/",
+        "link": "https://test.frontity.org/author/author-1/",
         "slug": "author-1"
       }
     ],
@@ -21,7 +21,7 @@
         "id": 1,
         "slug": "attachment-1",
         "type": "attachment",
-        "link": "https://test.frontity.io/post-1/attachment-1/",
+        "link": "https://test.frontity.org/post-1/attachment-1/",
         "author": 1
       }
     ],
@@ -30,7 +30,7 @@
         {
           "id": 1,
           "count": 5,
-          "link": "https://test.frontity.io/category/cat-1/",
+          "link": "https://test.frontity.org/category/cat-1/",
           "slug": "cat-1",
           "taxonomy": "category",
           "parent": 0
@@ -40,7 +40,7 @@
         {
           "id": 1,
           "count": 5,
-          "link": "https://test.frontity.io/tag/tag-1/",
+          "link": "https://test.frontity.org/tag/tag-1/",
           "slug": "tag-1",
           "taxonomy": "tag",
           "parent": 0

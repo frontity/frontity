@@ -44,12 +44,12 @@ data.taxonomy = {
     {
       id: 60,
       type: "post",
-      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss",
+      link: "https://test.frontity.org/2016/the-beauties-of-gullfoss",
     },
     {
       id: 57,
       type: "post",
-      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+      link: "https://test.frontity.org/2016/shinjuku-gyoen-national-garden/",
     },
   ],
   isReady: true,
@@ -69,12 +69,12 @@ data.taxonomyWithSearchData = {
     {
       id: 60,
       type: "post",
-      link: "https://test.frontity.io/2016/the-beauties-of-gullfoss",
+      link: "https://test.frontity.org/2016/the-beauties-of-gullfoss",
     },
     {
       id: 57,
       type: "post",
-      link: "https://test.frontity.io/2016/shinjuku-gyoen-national-garden/",
+      link: "https://test.frontity.org/2016/shinjuku-gyoen-national-garden/",
     },
   ],
   isReady: true,
