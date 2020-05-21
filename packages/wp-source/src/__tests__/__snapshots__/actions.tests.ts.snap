@@ -20,6 +20,10 @@ Object {
     "isFetching": false,
     "isPostType": true,
     "isReady": true,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
     "type": "example",
   },
 }
@@ -54,6 +58,20 @@ Object {
     "route": "/some/route/",
     "type": "example",
   },
+}
+`;
+
+exports[`init Errors for state.data['/some/route/'] should be removed when fetching with { force: true } 1`] = `
+Object {
+  "id": 1,
+  "isFetching": false,
+  "isPostType": true,
+  "isReady": true,
+  "link": "/some/route/",
+  "page": 1,
+  "query": Object {},
+  "route": "/some/route/",
+  "type": "example",
 }
 `;
 
@@ -411,4 +429,20 @@ Array [
     "priority": 10,
   },
 ]
+`;
+
+exports[`init state.data['/some/route/'].isCategory should be removed when fetching with { force: true } 1`] = `
+Object {
+  "isArchive": true,
+  "isCategory": true,
+  "isFetching": false,
+  "isReady": true,
+  "isTaxonomy": true,
+  "items": Array [],
+  "link": "/some/route/",
+  "page": 1,
+  "query": Object {},
+  "route": "/some/route/",
+  "taxonomy": "category",
+}
 `;

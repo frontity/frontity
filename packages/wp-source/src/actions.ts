@@ -29,19 +29,37 @@ const actions: WpSource["actions"]["source"] = {
     // Get options
     const force = options ? options.force : false;
 
-    if (!data || force) {
-      // Add the attributes that should be present even if fetch fails or we throw a ServerError below
+    if (!data) {
+      // If there is no data yet, just set the necessary flags:
       source.data[link] = {
-        link,
-        route: linkParams.route,
-        query,
-        page,
         isFetching: true,
         isReady: false,
       };
-    } else if (data.isReady || data.isFetching || data.isError) {
+    } else if (force) {
+      // If we fetch with `{ force: true }`, then only set `isFetching` to true again
+      data.isFetching = true;
+
+      // This is a workaround in case that `data` has previously included an error
+      if (data.isError) {
+        source.data[link] = {
+          isFetching: true,
+          isReady: false,
+        };
+      }
+    } else if ((data.isReady && !force) || data.isFetching || data.isError) {
+      // Always set link, route, query & page
+      data.link = link;
+      data.route = linkParams.route;
+      data.query = query;
+      data.page = page;
       return;
     }
+
+    // Always set link, route, query & page
+    source.data[link].link = link;
+    source.data[link].route = linkParams.route;
+    source.data[link].query = query;
+    source.data[link].page = page;
 
     // Make sure isFetching is true before starting the fetch.
     source.data[link].isFetching = true;
