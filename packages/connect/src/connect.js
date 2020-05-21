@@ -9,6 +9,7 @@ import {
   useContext,
   useRef,
 } from "react";
+import { warn } from "@frontity/error";
 import { observe, unobserve, raw, isObservable } from ".";
 
 const COMPONENT = Symbol("owner component");
@@ -18,6 +19,8 @@ const context = createContext();
 export const Provider = context.Provider;
 
 const hasHooks = typeof useState === "function";
+
+let isConnected = false;
 
 const mapStateToStores = (state) => {
   // find store properties and map them to their none observable raw value
@@ -30,10 +33,16 @@ const mapStateToStores = (state) => {
     .map(raw);
 };
 
-export function connect(Comp) {
+export function connect(Comp, options) {
   const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
 
   let ReactiveComp;
+
+  const defaultOptions = {
+    injectProps: true,
+  };
+
+  options = options ? { ...defaultOptions, ...options } : defaultOptions;
 
   if (isStatelessComp && hasHooks) {
     // use a hook based reactive wrapper when we can
@@ -66,8 +75,19 @@ export function connect(Comp) {
         };
       }, []);
 
+      // set flag indicating that the component is wrapped by `connect()` when using `useConnect()`.
+      isConnected = true;
+
       // run the reactive render instead of the original one
-      return render({ ...props, ...frontity });
+      const rendered = render({
+        ...props,
+        ...(options.injectProps ? frontity : {}),
+      });
+
+      // reset the flag for the next component.
+      isConnected = false;
+
+      return rendered;
     });
   } else {
     const BaseComp = isStatelessComp ? Component : Comp;
@@ -163,3 +183,14 @@ export function connect(Comp) {
 
   return ReactiveComp;
 }
+
+export const useConnect = () => {
+  if (!isConnected)
+    warn(
+      "Warning: useConnect() is being used in a non connected component, " +
+        "therefore the component won't update on state changes. " +
+        "Please wrap your component with connect().\n"
+    );
+
+  return useContext(context);
+};
