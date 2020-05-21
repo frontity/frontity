@@ -1,12 +1,28 @@
 import React, { useEffect } from "react";
 import { useConnect, connect, css } from "frontity";
+import { Connect } from "frontity/types";
 import useInfiniteScroll from "./use-infinite-scroll";
 import WpSource from "@frontity/wp-source/types";
 import TinyRouter from "@frontity/tiny-router/types";
 
-export const Wrapper = connect(({ link, children }) => {
-  const { state } = useConnect<WpSource & TinyRouter>();
+type Wrapper = React.FC<Connect<WpSource & TinyRouter, { link: string }>>;
 
+type UseArchiveInfiniteScroll = (options: {
+  limit?: number;
+  context?: string;
+}) => {
+  pages: {
+    key: string;
+    link: string;
+    isLastPage: boolean;
+    Wrapper: Wrapper;
+  }[];
+  isLimit: boolean;
+  isFetching: boolean;
+  fetchNext: () => Promise<void>;
+};
+
+const Wrapper: Wrapper = connect(({ state, link, children }) => {
   // Values from browser state.
   const links: string[] = state.router.state.links || [link];
   const limit: number = state.router.state.limit;
@@ -44,12 +60,7 @@ export const Wrapper = connect(({ link, children }) => {
   );
 });
 
-export interface Options {
-  limit?: number;
-  context?: string;
-}
-
-export default (options: Options = {}) => {
+const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
 
   // Values from/for browser state.
@@ -79,7 +90,7 @@ export default (options: Options = {}) => {
   }, []);
 
   // Requests the next page disregarding the limit.
-  const fetchNext = () => {
+  const fetchNext = async () => {
     if (!thereIsNext) return;
 
     const links = state.router.state.links || [current.link];
@@ -88,13 +99,16 @@ export default (options: Options = {}) => {
 
     console.info("fetching", last.next);
 
+    // TODO:
+    // Needs fix.
+    // It's pushing inside `state.router.state.links`.
+    links.push(last.next);
+
     const next = state.source.get(last.next);
 
     if (!next.isReady && !next.isFetching) {
-      actions.source.fetch(last.next);
+      await actions.source.fetch(last.next);
     }
-
-    links.push(last.next);
 
     actions.router.set(current.link, {
       method: "replace",
@@ -121,3 +135,5 @@ export default (options: Options = {}) => {
     fetchNext,
   };
 };
+
+export default useArchiveInfiniteScroll;

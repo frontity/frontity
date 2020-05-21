@@ -5,14 +5,28 @@ import WpSource from "@frontity/wp-source/types";
 import TinyRouter from "@frontity/tiny-router/types";
 import { IntersectionOptions } from "react-intersection-observer";
 
-export interface Options {
+type UseInfiniteScroll = (options: {
   currentLink: string;
   nextLink: string;
   fetchInViewOptions?: IntersectionOptions;
   routeInViewOptions?: IntersectionOptions;
-}
+}) =>
+  | {
+      supported: false;
+      routeRef?: undefined;
+      fetchRef?: undefined;
+      routeInView?: undefined;
+      fetchInView?: undefined;
+    }
+  | {
+      supported: true;
+      routeRef: (node?: Element) => void;
+      fetchRef: (node?: Element) => void;
+      routeInView: boolean;
+      fetchInView: boolean;
+    };
 
-const useInfiniteScroll = ({
+const useInfiniteScroll: UseInfiniteScroll = ({
   currentLink,
   nextLink,
   fetchInViewOptions = {
@@ -22,7 +36,7 @@ const useInfiniteScroll = ({
   routeInViewOptions = {
     rootMargin: "-80% 0% -19.9999% 0%",
   },
-}: Options) => {
+}) => {
   const fetch = useInView(fetchInViewOptions);
   const route = useInView(routeInViewOptions);
 

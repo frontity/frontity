@@ -1,18 +1,34 @@
 import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
+import { Connect } from "frontity/types";
 import useInfiniteScroll from "./use-infinite-scroll";
 import WpSource from "@frontity/wp-source/types";
 import TinyRouter from "@frontity/tiny-router/types";
 
-const Wrapper = connect(({ link, children }) => {
-  const { state } = useConnect<WpSource & TinyRouter>();
+type Wrapper = React.FC<Connect<WpSource & TinyRouter, { link: string }>>;
 
+type UsePostsInfiniteScroll = (options: {
+  limit?: number;
+  context?: string;
+}) => {
+  posts: {
+    key: string;
+    link: string;
+    isLastPost: boolean;
+    Wrapper: Wrapper;
+  }[];
+  isLimit: boolean;
+  isFetching: boolean;
+  fetchNext: () => Promise<void>;
+};
+
+const Wrapper: Wrapper = connect(({ state, link, children }) => {
   // Values from browser state.
   const links: string[] = state.router.state.links || [link];
   const limit: number = state.router.state.limit;
   const pages: string[] = state.router.state.pages || [];
 
-  // Shortcuts to needed state.
+  // Aliases to needed state.
   const current = state.source.get(link);
   const first = links[0];
   const items = pages.reduce((final, current, index) => {
@@ -58,12 +74,7 @@ const Wrapper = connect(({ link, children }) => {
   );
 });
 
-export interface Options {
-  limit?: number;
-  context?: string;
-}
-
-export default (options: Options = {}) => {
+const usePostsInfiniteScroll: UsePostsInfiniteScroll = (options) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
 
   // Values from/for browser state.
@@ -160,6 +171,9 @@ export default (options: Options = {}) => {
       if (!pages.includes(nextPage.link)) {
         console.info("fetching page", nextPage.link);
 
+        // TODO:
+        // Needs fix.
+        // It's pushing inside `state.router.state.pages`.
         pages.push(nextPage.link);
 
         if (!nextPage?.isReady && !nextPage?.isFetching) {
@@ -193,6 +207,9 @@ export default (options: Options = {}) => {
       actions.source.fetch(nextItem.link);
     }
 
+    // TODO:
+    // Needs fix.
+    // It's pushing inside `state.router.state.links`.
     links.push(nextItem.link);
 
     actions.router.set(current.link, {
@@ -221,3 +238,5 @@ export default (options: Options = {}) => {
     fetchNext,
   };
 };
+
+export default usePostsInfiniteScroll;
