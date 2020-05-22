@@ -12,7 +12,13 @@ const postTypeArchiveHandler = ({
 }: {
   type: string;
   endpoint: string;
-}): Handler => async ({ link: linkArg, route: routeArg, state, libraries }) => {
+}): Handler => async ({
+  link: linkArg,
+  route: routeArg,
+  state,
+  libraries,
+  force,
+}) => {
   // This is only for backward compatibility for the moment when handlers used
   // to receive `route` instead of `link`.
   const link = linkArg || routeArg;
@@ -34,6 +40,7 @@ const postTypeArchiveHandler = ({
   const items = await populate({
     response,
     state,
+    force,
   });
   if (page > 1 && items.length === 0)
     throw new ServerError(`post archive doesn't have page ${page}`, 404);

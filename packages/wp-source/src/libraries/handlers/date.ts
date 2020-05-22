@@ -8,6 +8,7 @@ export const dateHandler: Handler = async ({
   params,
   state,
   libraries,
+  force,
 }) => {
   // This is only for backward compatibility for the moment when handlers used
   // to receive `route` instead of `link`.
@@ -44,7 +45,7 @@ export const dateHandler: Handler = async ({
   });
 
   // 3. populate response
-  const items = await populate({ response, state });
+  const items = await populate({ response, state, force });
   if (items.length === 0)
     throw new ServerError(`date "${route}" doesn't have page ${page}`, 404);
 

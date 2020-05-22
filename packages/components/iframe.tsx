@@ -2,7 +2,7 @@
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect, Package } from "frontity/types";
-import { useInView } from "react-intersection-observer";
+import useInView from "@frontity/hooks/use-in-view";
 
 const noJsStyles = `
   :non(noscript) > .frontity-lazy-iframe {
@@ -87,20 +87,21 @@ const Iframe: Component = ({
     width,
     title,
   };
+
   const eagerAttributes = changeAttributes(lazyAttributes);
+
+  const { ref, inView, supported } = useInView({
+    rootMargin,
+    triggerOnce: true,
+  });
 
   if (loading === "eager") return <iframe {...eagerAttributes} />;
 
   if (typeof window !== "undefined") {
     if (
-      typeof IntersectionObserver !== "undefined" &&
+      supported &&
       !("loading" in HTMLIFrameElement.prototype && height > 0)
     ) {
-      const [ref, inView] = useInView({
-        rootMargin,
-        triggerOnce: true,
-      });
-
       return (
         <>
           <NoScriptIframe {...eagerAttributes} />

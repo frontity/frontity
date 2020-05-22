@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "frontity": "^1.5.3",
-    "react-intersection-observer": "^8.25.2"
+    "@frontity/hooks": "^1.2.0"
   }
 }
