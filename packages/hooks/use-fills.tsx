@@ -28,6 +28,9 @@ const useFills = (name: string) => {
   return (
     Object.entries(state.fills)
 
+      // Match only the fills for this name.
+      .filter(([key, { slot }]) => slot === name)
+
       // 1. Nest the `key` of the fill
       // 2. Add default priority of 10 if not present
       .map(([key, value]) => ({
@@ -35,9 +38,6 @@ const useFills = (name: string) => {
         priority: value.priority || 10,
         ...value,
       }))
-
-      // Match only the fills for this name.
-      .filter(({ slot }) => slot === name)
 
       // Sort by priority
       .sort((a, b) => a.priority - b.priority)
