@@ -86,6 +86,10 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "use-in-view",
+    packages: ["e2e-use-in-view"],
+  },
 ];
 
 export default settings;
