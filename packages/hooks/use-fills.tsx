@@ -1,19 +1,8 @@
 import { useConnect, warn } from "frontity";
-import { Fill } from "@frontity/types";
-
-interface FillsPackage {
-  state: {
-    fills: { [key: string]: Fill };
-  };
-  libraries: {
-    fills: {
-      [key: string]: React.ComponentType;
-    };
-  };
-}
+import { Fill, Package } from "@frontity/types";
 
 const useFills = (name: string) => {
-  const { state, libraries } = useConnect<FillsPackage>();
+  const { state, libraries } = useConnect<Package>();
 
   if (!name) {
     warn("You should pass the name of the slot that you would like to fill!");
