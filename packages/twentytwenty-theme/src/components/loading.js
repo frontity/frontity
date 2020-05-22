@@ -50,7 +50,7 @@ const wrapper = (width, height, color) =>
 
 const Loading = ({ state }) => (
   <Container>
-    <div css={[wrapper(240, 4, state.theme.colors.primary), css]}>
+    <div css={wrapper(240, 4, state.theme.colors.primary)}>
       <div css={style(1, state.theme.colors.primary)} />
     </div>
   </Container>
