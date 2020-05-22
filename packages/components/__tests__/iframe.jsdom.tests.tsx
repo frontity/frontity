@@ -5,12 +5,12 @@
 
 import React from "react";
 import TestRenderer from "react-test-renderer";
-import { useInView } from "react-intersection-observer";
+import useInView from "@frontity/hooks/use-in-view";
 import Iframe from "../iframe";
 
-jest.mock("react-intersection-observer", () => ({
+jest.mock("@frontity/hooks/use-in-view", () => ({
   __esModule: true,
-  useInView: jest.fn(),
+  default: jest.fn(),
 }));
 
 describe("Iframe", () => {
@@ -39,12 +39,24 @@ describe("Iframe", () => {
       loading,
     };
 
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
+
     const result = TestRenderer.create(<Iframe {...props} />).toJSON();
     expect(result).toMatchSnapshot();
   });
 
   test("works with native lazy load and component did not mount", () => {
     (HTMLIFrameElement as any).prototype.loading = true;
+
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
 
     const props = {
       title: "Iframe title",
@@ -62,6 +74,12 @@ describe("Iframe", () => {
   test("works with native lazy load and component did mount", () => {
     (HTMLIFrameElement as any).prototype.loading = true;
 
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
+
     const props = {
       title: "Iframe title",
       src: "https://iframe-src.com/iframe",
@@ -77,7 +95,12 @@ describe("Iframe", () => {
 
   test("works with `IntersectionObserver` if `height` prop is not specified", () => {
     (HTMLIFrameElement as any).prototype.loading = true;
-    mockedUseInView.mockReturnValue([() => {}, false, undefined]);
+
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
 
     const props = {
       title: "Iframe title",
@@ -92,7 +115,11 @@ describe("Iframe", () => {
   });
 
   test("works with `IntersectionObserver` and is out of view", () => {
-    mockedUseInView.mockReturnValue([() => {}, false, undefined]);
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
 
     const props = {
       title: "Iframe title",
@@ -116,7 +143,11 @@ describe("Iframe", () => {
       state: { frontity: { rendering: "csr" } },
     };
 
-    IntersectionObserver = undefined;
+    mockedUseInView.mockReturnValue({
+      ref: undefined,
+      inView: true,
+      supported: false,
+    });
 
     const iframe = TestRenderer.create(<Iframe {...props} />).toJSON();
     expect(iframe).toMatchSnapshot();

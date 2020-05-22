@@ -5,7 +5,7 @@
 
 import React from "react";
 import TestRenderer from "react-test-renderer";
-import * as useInView from "@frontity/hooks/use-in-view";
+import useInView from "@frontity/hooks/use-in-view";
 import Image from "../image";
 
 jest.mock("@frontity/hooks/use-in-view", () => ({
@@ -14,9 +14,7 @@ jest.mock("@frontity/hooks/use-in-view", () => ({
 }));
 
 describe("Image", () => {
-  const mockedUseInView = useInView.default as jest.MockedFunction<
-    typeof useInView.default
-  >;
+  const mockedUseInView = useInView as jest.MockedFunction<typeof useInView>;
 
   beforeEach(() => {
     delete (HTMLImageElement as any).prototype.loading;
@@ -101,6 +99,7 @@ describe("Image", () => {
 
   test("works with `IntersectionObserver if `height` prop is not specified", () => {
     (HTMLImageElement as any).prototype.loading = true;
+
     mockedUseInView.mockReturnValue({
       ref: () => {},
       inView: false,
@@ -126,6 +125,7 @@ describe("Image", () => {
       inView: false,
       supported: true,
     });
+
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
