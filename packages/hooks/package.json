@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
+  "sideEffects": false,
   "scripts": {
     "test:ci": "../../node_modules/.bin/jest --passWithNoTests --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
