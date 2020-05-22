@@ -1,6 +1,13 @@
 import { useConnect, warn } from "frontity";
 import { Fill, Package } from "@frontity/types";
 
+/**
+ * A React hook to ease the creation of `Slot` components.
+ *
+ * @param name The name of the Slot that you want to fill.
+ *
+ * @returns `Object[]` List of objects that you can use to create the `Fill` components.
+ */
 const useFills = (name: string) => {
   const { state, libraries } = useConnect<Package>();
 
