@@ -1,14 +1,31 @@
 import { useConnect, warn } from "frontity";
-import { Fill, Package } from "@frontity/types";
+import { Fill as StateFill, Package } from "frontity/types";
+
+/**
+ * The fill items returned by the useFills hooks. They contain the same
+ * information than {@link StateFill} plus the final React comonent and a key
+ * to iterate over the array.
+ */
+interface Fill extends StateFill {
+  /**
+   * The React component that needs to be injected in the Slot for this fill.
+   */
+  Fill: React.ReactType;
+
+  /**
+   * A unique key that can be used when iterating over the array in React.
+   */
+  key: string;
+}
 
 /**
  * A React hook to ease the creation of `Slot` components.
  *
  * @param name The name of the Slot that you want to fill.
  *
- * @returns `Object[]` List of objects that you can use to create the `Fill` components.
+ * @return Array of objects that you can use to inject in the slot with this name.
  */
-const useFills = (name: string) => {
+const useFills = (name: string): Fill[] => {
   const { state, libraries } = useConnect<Package>();
 
   if (!name) {
@@ -39,28 +56,22 @@ const useFills = (name: string) => {
       .sort((a, b) => a.priority - b.priority)
 
       // Add real component to the array.
-      .reduce(
-        (
-          allFills: (Fill & { Fill: React.ComponentType; key: string })[],
-          fill
-        ) => {
-          const { fills } = libraries;
-          const { library } = fill;
+      .reduce((allFills: Fill[], fill) => {
+        const { fills } = libraries;
+        const { library } = fill;
 
-          // If we cannot find the fill component in `libraries`
-          // OR
-          // if we cannot find the reference to the component in `state.fills.library` we skip.
-          if (!fills || !library) return allFills;
+        // If we cannot find the fill component in `libraries`
+        // OR
+        // if we cannot find the reference to the component in `state.fills.library` we skip.
+        if (!fills || !library) return allFills;
 
-          const newFill = {
-            ...fill,
-            Fill: libraries.fills[fill.library],
-          };
+        const newFill: Fill = {
+          ...fill,
+          Fill: libraries.fills[fill.library],
+        };
 
-          return allFills.concat(newFill);
-        },
-        []
-      )
+        return allFills.concat(newFill);
+      }, [])
   );
 };
 
