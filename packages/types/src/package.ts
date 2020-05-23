@@ -12,9 +12,6 @@ export interface Package {
   roots?: {
     [namespace: string]: React.ReactType;
   };
-  fills?: {
-    [namespace: string]: React.ReactType;
-  };
   state?: {
     frontity?: {
       // Automatically populated:
