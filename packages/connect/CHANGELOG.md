@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.1.0
+
+### Minor Changes
+
+- [`996865a2`](https://github.com/frontity/frontity/commit/996865a27690d5b89d2ef110f5b1bf3fb91da6f5) [#404](https://github.com/frontity/frontity/pull/404) Thanks [@orballo](https://github.com/orballo)! - Implements `useConnect()` and adds options object `{ injectProps: boolean }` to `connect()`.
+
 ## 1.0.5
 
 ### Patch Changes

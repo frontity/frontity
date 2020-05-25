@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🚀 Feature request 
+    url: https://community.frontity.org/c/feature-discussions/33
+    about: The right place to suggest and keep track of features and improvements is our community forum
+  - name: 🤔 Question
+    url: https://community.frontity.org
+    about: Any question should be asked in the forum. This way, other users can learn or answer them 
