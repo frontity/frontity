@@ -2,7 +2,7 @@
 
 exports[`category doesn't exist in source.category 1`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -218,7 +218,7 @@ Object {
 
 exports[`category doesn't return 404 if the first page is empty (no headers) 1`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -271,7 +271,7 @@ Object {
 
 exports[`category doesn't return 404 if the first page is empty 1`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -352,7 +352,7 @@ Array [
 
 exports[`category fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -575,7 +575,7 @@ Object {
 
 exports[`category is requested with any query param 1`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -799,7 +799,7 @@ Object {
 
 exports[`category returns 404 if category doesn't exist in WP 1`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -835,7 +835,7 @@ Object {
 
 exports[`category returns 404 if the page fetched is out of range 1`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -886,7 +886,7 @@ Object {
 
 exports[`category was populated but not accessed 1`] = `
 Object {
-  "api": "https://test.frontity.io/wp-json",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "4": Object {
       "author": 1,

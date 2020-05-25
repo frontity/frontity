@@ -297,7 +297,7 @@ Object {
   "_links": Object {
     "collection": Array [
       Object {
-        "href": "http://test.frontity.io/wp-json/wp/v2/types",
+        "href": "http://test.frontity.org/wp-json/wp/v2/types",
       },
     ],
     "curies": Array [
@@ -309,7 +309,7 @@ Object {
     ],
     "wp:items": Array [
       Object {
-        "href": "http://test.frontity.io/wp-json/wp/v2/posts",
+        "href": "http://test.frontity.org/wp-json/wp/v2/posts",
       },
     ],
   },

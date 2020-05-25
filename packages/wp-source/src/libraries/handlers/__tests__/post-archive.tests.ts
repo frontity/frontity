@@ -13,7 +13,7 @@ let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.io/wp-json";
+  store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -85,6 +85,31 @@ describe("post archive", () => {
     );
     // Fetch entities
     await store.actions.source.fetch("/page/2/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("overwrites the data when fetched with { force: true }", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(
+        mockResponse(posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
+      )
+      .mockResolvedValueOnce(
+        mockResponse(posts2, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
+      );
+
+    // Fetch entities
+    await store.actions.source.fetch("/");
+
+    await store.actions.source.fetch("/", { force: true });
+
     expect(store.state.source).toMatchSnapshot();
   });
 });

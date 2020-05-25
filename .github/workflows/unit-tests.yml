@@ -36,3 +36,6 @@ jobs:
         run: npm run test:ci
         env:
           CI: true
+
+      - name: Upload result to codecov
+        run: npm run codecov

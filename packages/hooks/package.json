@@ -16,11 +16,12 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest --ci --passWithNoTests",
+    "test:ci": "../../node_modules/.bin/jest --passWithNoTests --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "frontity": "^1.5.0"
+    "frontity": "^1.5.0",
+    "react-intersection-observer": "^8.26.2"
   }
 }
