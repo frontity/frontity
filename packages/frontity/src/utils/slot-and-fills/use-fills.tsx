@@ -1,5 +1,5 @@
-import { useConnect, warn } from "frontity";
-import { Fill as StateFill, Package } from "frontity/types";
+import { useConnect, warn } from "../..";
+import { Fill as StateFill, Package } from "../../../types";
 
 /**
  * The fill items returned by the useFills hooks. They contain the same
@@ -23,7 +23,7 @@ interface Fill extends StateFill {
  *
  * @param name The name of the Slot that you want to fill.
  *
- * @return Array of objects that you can use to inject in the slot with this name.
+ * @return Array of fill objects that you can use to inject in the slot for this name.
  */
 const useFills = (name: string): Fill[] => {
   const { state, libraries } = useConnect<Package>();

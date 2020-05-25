@@ -70,6 +70,7 @@
     "@types/shelljs": "^0.8.4",
     "@types/stack-trace": "^0.0.29",
     "@types/tar": "^4.0.0",
-    "lodash.omit": "^4.5.0"
+    "lodash.omit": "^4.5.0",
+    "react-test-renderer": "^16.13.1"
   }
 }

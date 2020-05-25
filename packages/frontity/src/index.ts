@@ -25,3 +25,5 @@ export const decode =
   typeof window !== "undefined" ? decodeClient : decodeServer;
 
 export { URL } from "url";
+
+export { default as useFills } from "./utils/slot-and-fills/use-fills";
