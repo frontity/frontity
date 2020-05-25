@@ -38,8 +38,6 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       : // Use the value by default.
         "/static";
 
-    console.log(publicPath);
-
     // Serve the static files.
     return mount(publicPath, serve("build/static"))(ctx, next);
   });
