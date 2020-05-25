@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [[`8a0bb8f0`](https://github.com/frontity/frontity/commit/8a0bb8f03ad70ac6b92be14c2c95dcad2b3ccf75), [`661ac083`](https://github.com/frontity/frontity/commit/661ac08316f44172166e79b05b47f0c15a837a9a), [`75343be3`](https://github.com/frontity/frontity/commit/75343be3154dda5b587a3065b225161af96f0488)]:
+  - @frontity/hooks@2.0.0
+  - frontity@1.7.0
+
 ## 1.3.1
 
 ### Patch Changes
