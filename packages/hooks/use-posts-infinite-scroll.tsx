@@ -80,7 +80,7 @@ const usePostsInfiniteScroll: UsePostsInfiniteScroll = (options) => {
   // Values from/for browser state.
   const links: string[] = state.router.state.links || [state.router.link];
   const context: string = state.router.state.context || options.context;
-  const pages: string[] = state.router.state.pages || [options.context];
+  const pages: string[] = state.router.state.pages || [context];
   const limit = state.router.state.limit || options.limit;
 
   // Aliases to needed state.
