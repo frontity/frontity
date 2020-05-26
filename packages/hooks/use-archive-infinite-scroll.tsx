@@ -10,7 +10,6 @@ type Wrapper = (link: string) => React.FC<Connect<Source & Router>>;
 
 type UseArchiveInfiniteScroll = (options: {
   limit?: number;
-  context?: string;
 }) => {
   pages: {
     key: string;

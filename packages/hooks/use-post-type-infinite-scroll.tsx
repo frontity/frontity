@@ -10,7 +10,7 @@ type Wrapper = (link: string) => React.FC<Connect<Source & Router>>;
 
 type UsePostTypeInfiniteScroll = (options: {
   limit?: number;
-  context?: string;
+  archive?: string;
 }) => {
   posts: {
     key: string;
@@ -88,9 +88,9 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
   const links: string[] = state.router.state.infiniteScroll?.links || [
     state.router.link,
   ];
-  const context: string =
-    state.router.state.infiniteScroll?.context || options.context;
-  const pages: string[] = state.router.state.infiniteScroll?.pages || [context];
+  const archive: string =
+    state.router.state.infiniteScroll?.archive || options.archive;
+  const pages: string[] = state.router.state.infiniteScroll?.pages || [archive];
   const limit = state.router.state.infiniteScroll?.limit || options.limit;
 
   // Aliases to needed state.
@@ -127,7 +127,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
         ...state.router.state,
         infiniteScroll: {
           links,
-          context,
+          archive,
           pages,
           limit,
           ...state.router.state.infiniteScroll,
@@ -136,11 +136,11 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
     });
   }, []);
 
-  // Request context if not present.
+  // Request archive if not present.
   useEffect(() => {
-    const data = context ? state.source.get(context) : null;
+    const data = archive ? state.source.get(archive) : null;
     if (data && !data.isReady && !data.isFetching) {
-      console.info("fetching context", context.link);
+      console.info("fetching archive", archive.link);
       actions.source.fetch(data.link);
     }
   }, []);
