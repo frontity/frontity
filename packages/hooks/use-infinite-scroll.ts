@@ -69,16 +69,15 @@ const useInfiniteScroll: UseInfiniteScroll = ({
         actions.source.fetch(nextLink);
       }
 
+      // TODO:
+      // fix, is pushing to `state.router.state.infiniteScroll.links`.
       links.push(nextLink);
 
-      actions.router.set(currentLink, {
-        method: "replace",
-        state: {
-          ...state.router.state,
-          infiniteScroll: {
-            ...state.router.state.infiniteScroll,
-            links,
-          },
+      actions.router.updateState({
+        ...state.router.state,
+        infiniteScroll: {
+          ...state.router.state.infiniteScroll,
+          links,
         },
       });
     }

@@ -121,17 +121,14 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
 
   // Initialize/update browser state.
   useEffect(() => {
-    actions.router.set(current.link, {
-      method: "replace",
-      state: {
-        ...state.router.state,
-        infiniteScroll: {
-          links,
-          archive,
-          pages,
-          limit,
-          ...state.router.state.infiniteScroll,
-        },
+    actions.router.updateState({
+      ...state.router.state,
+      infiniteScroll: {
+        links,
+        archive,
+        pages,
+        limit,
+        ...state.router.state.infiniteScroll,
       },
     });
   }, []);
@@ -161,14 +158,11 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
 
       pages.push(nextPage.link);
 
-      actions.router.set(current.link, {
-        method: "replace",
-        state: {
-          ...state.router.state,
-          infiniteScroll: {
-            ...state.router.state.infiniteScroll,
-            pages,
-          },
+      actions.router.updateState({
+        ...state.router.state,
+        infiniteScroll: {
+          ...state.router.state.infiniteScroll,
+          pages,
         },
       });
     }
@@ -228,15 +222,12 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
     // It's pushing inside `state.router.state.links`.
     links.push(nextItem.link);
 
-    actions.router.set(current.link, {
-      method: "replace",
-      state: {
-        ...state.router.state,
-        infiniteScroll: {
-          ...state.router.state.infiniteScroll,
-          links,
-          pages,
-        },
+    actions.router.updateState({
+      ...state.router.state,
+      infiniteScroll: {
+        ...state.router.state.infiniteScroll,
+        links,
+        pages,
       },
     });
   };

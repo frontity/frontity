@@ -88,15 +88,12 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
 
   // Initialize/update browser state.
   useEffect(() => {
-    actions.router.set(current.link, {
-      method: "replace",
-      state: {
-        ...state.router.state,
-        infiniteScroll: {
-          links,
-          limit,
-          ...state.router.state.infiniteScroll,
-        },
+    actions.router.updateState({
+      ...state.router.state,
+      infiniteScroll: {
+        links,
+        limit,
+        ...state.router.state.infiniteScroll,
       },
     });
   }, []);
@@ -122,14 +119,11 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
       await actions.source.fetch(last.next);
     }
 
-    actions.router.set(current.link, {
-      method: "replace",
-      state: {
-        ...state.router.state,
-        infiniteScroll: {
-          ...state.router.state.infiniteScroll,
-          links,
-        },
+    actions.router.updateState({
+      ...state.router.state,
+      infiniteScroll: {
+        ...state.router.state.infiniteScroll,
+        links,
       },
     });
   };
