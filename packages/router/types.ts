@@ -14,6 +14,7 @@ interface Router<T = null> extends Package {
       set:
         | Action<T extends null ? Router : T, string>
         | Action<T extends null ? Router : T, string, SetOptions>;
+      updateState: Action<T extends null ? Router : T, unknown>;
     };
   };
 }

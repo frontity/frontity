@@ -6,7 +6,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
   actions,
   libraries,
-}) => (link, options = {}): void => {
+}) => (link, options = {}) => {
   // Normalizes link.
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
@@ -28,6 +28,13 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     window.history.replaceState(clone(options.state), "", link);
     if (state.router.autoFetch) actions.source.fetch(link);
   }
+};
+
+export const updateState: TinyRouter["actions"]["router"]["updateState"] = ({
+  state,
+}) => (browserState) => {
+  state.router.state = browserState;
+  window.history.replaceState(clone(browserState), "", state.router.link);
 };
 
 export const init: TinyRouter["actions"]["router"]["init"] = ({

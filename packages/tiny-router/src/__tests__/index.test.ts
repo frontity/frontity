@@ -11,6 +11,9 @@ let get: jest.Mock;
 
 const createStore = frontity.createStore;
 
+const spiedPushState = jest.spyOn(window.history, "pushState");
+const spiedReplaceState = jest.spyOn(window.history, "replaceState");
+
 beforeEach(() => {
   normalize = jest.fn();
   fetch = jest.fn();
@@ -42,6 +45,11 @@ beforeEach(() => {
       },
     },
   };
+});
+
+afterEach(() => {
+  spiedPushState.mockClear();
+  spiedReplaceState.mockClear();
 });
 
 describe("actions", () => {
@@ -132,16 +140,14 @@ describe("actions", () => {
       };
 
       normalize.mockReturnValue(normalized);
-      jest.spyOn(window.history, "pushState");
 
       store.actions.router.set(link, options);
-      expect(window.history.pushState).toHaveBeenCalledTimes(1);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
 
       options.method = "replace";
-      jest.spyOn(window.history, "replaceState");
 
       store.actions.router.set(link, options);
-      expect(window.history.replaceState).toHaveBeenCalledTimes(1);
+      expect(spiedReplaceState).toHaveBeenCalledTimes(1);
     });
 
     test("should store the state in `window.history`", () => {
@@ -184,6 +190,32 @@ describe("actions", () => {
       store.actions.router.set(link, { method: "replace" });
       expect(fetch).toHaveBeenCalledTimes(2);
       expect(fetch).toHaveBeenLastCalledWith(link);
+    });
+  });
+
+  describe("updateState", () => {
+    test("should replace the current browser state with the new state", () => {
+      const store = createStore(config);
+      const currentState = {
+        links: ["/"],
+      };
+
+      const link = store.state.router.link;
+      store.state.router.state = currentState;
+
+      const nextState = {
+        links: ["/", "/page/2/"],
+      };
+
+      expect(store.state.router.link).toBe(link);
+      expect(store.state.router.state).toEqual(currentState);
+
+      store.actions.router.updateState(nextState);
+
+      expect(store.state.router.link).toBe(link);
+      expect(store.state.router.state).toEqual(nextState);
+      expect(spiedReplaceState).toHaveBeenCalledTimes(1);
+      expect(spiedReplaceState).toHaveBeenCalledWith(nextState, "", link);
     });
   });
 
