@@ -1,5 +1,22 @@
 # Change Log
 
+## 1.7.1
+
+### Patch Changes
+
+- [`1c247126`](https://github.com/frontity/frontity/commit/1c24712651c481bf44a388567c93ab9f8e0e51c6) [#389](https://github.com/frontity/frontity/pull/389) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Bugfixes:
+
+  - When using actions.source.fetch("/some-link", { force: true }), the data object property isReady should never be reset to false.
+  - The data object custom properties (like items, isCategory...) should not be removed from the data.
+  - The entities I get from the new fetch should overwrite the old ones.
+  - When calling actions.source.fetch, it should populate data with link, route, page and query, even if data already exists.
+
+- [`75343be3`](https://github.com/frontity/frontity/commit/75343be3154dda5b587a3065b225161af96f0488) [#433](https://github.com/frontity/frontity/pull/433) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Change urls to point to test.frontity.org instead of test.frontity.io.
+- Updated dependencies [[`996865a2`](https://github.com/frontity/frontity/commit/996865a27690d5b89d2ef110f5b1bf3fb91da6f5), [`661ac083`](https://github.com/frontity/frontity/commit/661ac08316f44172166e79b05b47f0c15a837a9a), [`75343be3`](https://github.com/frontity/frontity/commit/75343be3154dda5b587a3065b225161af96f0488)]:
+  - @frontity/connect@1.1.0
+  - frontity@1.7.0
+  - @frontity/source@1.2.1
+
 ## 1.7.0
 
 ### Minor Changes

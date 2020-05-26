@@ -5,12 +5,12 @@
 
 import React from "react";
 import TestRenderer from "react-test-renderer";
-import { useInView } from "react-intersection-observer";
+import useInView from "@frontity/hooks/use-in-view";
 import Image from "../image";
 
-jest.mock("react-intersection-observer", () => ({
+jest.mock("@frontity/hooks/use-in-view", () => ({
   __esModule: true,
-  useInView: jest.fn(),
+  default: jest.fn(),
 }));
 
 describe("Image", () => {
@@ -39,12 +39,24 @@ describe("Image", () => {
       loading,
     };
 
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
+
     const result = TestRenderer.create(<Image {...props} />).toJSON();
     expect(result).toMatchSnapshot();
   });
 
   test("works with native lazy load and component did not mount", () => {
     (HTMLImageElement as any).prototype.loading = true;
+
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
 
     const props = {
       alt: "Some fake alt text",
@@ -64,6 +76,12 @@ describe("Image", () => {
   test("works with native lazy load and component did mount", () => {
     (HTMLImageElement as any).prototype.loading = true;
 
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
+
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
@@ -81,7 +99,12 @@ describe("Image", () => {
 
   test("works with `IntersectionObserver if `height` prop is not specified", () => {
     (HTMLImageElement as any).prototype.loading = true;
-    mockedUseInView.mockReturnValue([() => {}, false, undefined]);
+
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
 
     const props = {
       alt: "Some fake alt text",
@@ -97,7 +120,12 @@ describe("Image", () => {
   });
 
   test("works with `IntersectionObserver` and is out of view", () => {
-    mockedUseInView.mockReturnValue([() => {}, false, undefined]);
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: false,
+      supported: true,
+    });
+
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
@@ -111,7 +139,11 @@ describe("Image", () => {
   });
 
   test("works with `IntersectionObserver` and is in view", () => {
-    mockedUseInView.mockReturnValue([() => {}, true, undefined]);
+    mockedUseInView.mockReturnValue({
+      ref: () => {},
+      inView: true,
+      supported: true,
+    });
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
@@ -134,7 +166,11 @@ describe("Image", () => {
       state: { frontity: { rendering: "ssr" } },
     };
 
-    IntersectionObserver = undefined;
+    mockedUseInView.mockReturnValue({
+      ref: undefined,
+      inView: true,
+      supported: false,
+    });
 
     const image = TestRenderer.create(<Image {...props} />).toJSON();
     expect(image).toMatchSnapshot();
@@ -150,7 +186,11 @@ describe("Image", () => {
       state: { frontity: { rendering: "csr" } },
     };
 
-    IntersectionObserver = undefined;
+    mockedUseInView.mockReturnValue({
+      ref: undefined,
+      inView: true,
+      supported: false,
+    });
 
     const image = TestRenderer.create(<Image {...props} />).toJSON();
     expect(image).toMatchSnapshot();

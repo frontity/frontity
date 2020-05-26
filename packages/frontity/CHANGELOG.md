@@ -1,5 +1,29 @@
 # Change Log
 
+## 1.7.0
+
+### Minor Changes
+
+- [`661ac083`](https://github.com/frontity/frontity/commit/661ac08316f44172166e79b05b47f0c15a837a9a) [#420](https://github.com/frontity/frontity/pull/420) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add a `--publicPath` option to `build` and `dev` commands and pass it to webpack builds.
+
+### Patch Changes
+
+- [`75343be3`](https://github.com/frontity/frontity/commit/75343be3154dda5b587a3065b225161af96f0488) [#433](https://github.com/frontity/frontity/pull/433) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Change urls to point to test.frontity.org instead of test.frontity.io.
+- Updated dependencies [[`996865a2`](https://github.com/frontity/frontity/commit/996865a27690d5b89d2ef110f5b1bf3fb91da6f5), [`661ac083`](https://github.com/frontity/frontity/commit/661ac08316f44172166e79b05b47f0c15a837a9a)]:
+  - @frontity/connect@1.1.0
+  - @frontity/core@1.6.0
+
+## 1.6.0
+
+### Minor Changes
+
+- [`bf3db894`](https://github.com/frontity/frontity/commit/bf3db8949c7ae85c699a9c5a4613185e4ba0baaa) [#391](https://github.com/frontity/frontity/pull/391) Thanks [@hideokamoto](https://github.com/hideokamoto)! - Create a `README.md` file on `npx frontity create` with a brief explanation of how to work with Frontity and links to the community and documentation.
+
+### Patch Changes
+
+- Updated dependencies [[`502bc144`](https://github.com/frontity/frontity/commit/502bc144158a1b64971c738dcf93306ad5b61a8f), [`7c2a99f9`](https://github.com/frontity/frontity/commit/7c2a99f9be43ad965f4d4b00c81145f21230f63f)]:
+  - @frontity/core@1.5.3
+
 ## 1.5.3
 
 ### Patch Changes
