@@ -12,6 +12,11 @@ describe("Html2React", () => {
     cy.get("p").should("have.css", "color", "rgb(255, 0, 0)");
   });
 
+  it("should remove elements when processors return `null`", () => {
+    cy.get("button#remove-paragraphs").click();
+    cy.get("p").should("not.exist");
+  });
+
   it("should work with old processors", () => {
     cy.get("span#old-processors").should("have.text", "Yes");
   });
