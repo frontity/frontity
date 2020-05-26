@@ -90,7 +90,9 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
   ];
   const archive: string =
     state.router.state.infiniteScroll?.archive || options.archive;
-  const pages: string[] = state.router.state.infiniteScroll?.pages || [archive];
+  const pages: string[] = state.router.state.infiniteScroll?.pages
+    ? [...state.router.state.infiniteScroll.pages]
+    : [archive];
   const limit = state.router.state.infiniteScroll?.limit || options.limit;
 
   // Aliases to needed state.
@@ -172,7 +174,9 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
   const fetchNext = async () => {
     if (!thereIsNext) return;
 
-    const links = state.router.state.infiniteScroll?.links || [current.link];
+    const links = state.router.state.infiniteScroll?.links
+      ? [...state.router.state.infiniteScroll.links]
+      : [current.link];
 
     let nextItem = items[lastIndex + 1];
     let nextPage = state.source.get(lastPage.next);
@@ -181,9 +185,6 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
       if (!pages.includes(nextPage.link)) {
         console.info("fetching page", nextPage.link);
 
-        // TODO:
-        // Needs fix.
-        // It's pushing inside `state.router.state.pages`.
         pages.push(nextPage.link);
 
         if (!nextPage?.isReady && !nextPage?.isFetching) {
@@ -217,9 +218,6 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
       actions.source.fetch(nextItem.link);
     }
 
-    // TODO:
-    // Needs fix.
-    // It's pushing inside `state.router.state.links`.
     links.push(nextItem.link);
 
     actions.router.updateState({

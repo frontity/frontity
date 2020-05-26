@@ -59,7 +59,9 @@ const useInfiniteScroll: UseInfiniteScroll = ({
   // to the array of elements in the infinite scroll.
   useEffect(() => {
     if (fetch.inView && nextLink) {
-      const links = state.router.state.infiniteScroll?.links || [currentLink];
+      const links = state.router.state.infiniteScroll?.links
+        ? [...state.router.state.infiniteScroll.links]
+        : [currentLink];
 
       if (links.includes(nextLink)) return;
 
@@ -69,8 +71,6 @@ const useInfiniteScroll: UseInfiniteScroll = ({
         actions.source.fetch(nextLink);
       }
 
-      // TODO:
-      // fix, is pushing to `state.router.state.infiniteScroll.links`.
       links.push(nextLink);
 
       actions.router.updateState({

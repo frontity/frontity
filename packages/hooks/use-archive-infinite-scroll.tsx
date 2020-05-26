@@ -102,15 +102,14 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
   const fetchNext = async () => {
     if (!thereIsNext) return;
 
-    const links = state.router.state.infiniteScroll?.links || [current.link];
+    const links = state.router.state.infiniteScroll?.links
+      ? [...state.router.state.infiniteScroll.links]
+      : [current.link];
 
     if (links.includes(last.next)) return;
 
     console.info("fetching", last.next);
 
-    // TODO:
-    // Needs fix.
-    // It's pushing inside `state.router.state.links`.
     links.push(last.next);
 
     const next = state.source.get(last.next);
