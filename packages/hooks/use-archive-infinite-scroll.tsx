@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useConnect, connect, css } from "frontity";
 import { Connect } from "frontity/types";
+import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll from "./use-infinite-scroll";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
-type Wrapper = React.FC<Connect<Source & Router, { link: string }>>;
+type Wrapper = (link: string) => React.FC<Connect<Source & Router>>;
 
 type UseArchiveInfiniteScroll = (options: {
   limit?: number;
@@ -15,50 +16,56 @@ type UseArchiveInfiniteScroll = (options: {
     key: string;
     link: string;
     isLastPage: boolean;
-    Wrapper: Wrapper;
+    Wrapper: React.FC<Connect<Source & Router>>;
   }[];
   isLimit: boolean;
   isFetching: boolean;
   fetchNext: () => Promise<void>;
 };
 
-const Wrapper: Wrapper = connect(({ state, link, children }) => {
-  // Values from browser state.
-  const links: string[] = state.router.state.infiniteScroll?.links || [link];
-  const limit: number = state.router.state.infiniteScroll?.limit;
+const Wrapper: Wrapper = memoize(
+  (key) => key,
+  (link) =>
+    connect(({ state, children }) => {
+      // Values from browser state.
+      const links: string[] = state.router.state.infiniteScroll?.links || [
+        link,
+      ];
+      const limit: number = state.router.state.infiniteScroll?.limit;
 
-  // Shorcuts to needed state.
-  const current = state.source.get(link);
-  const next = current.next ? state.source.get(current.next) : null;
+      // Shorcuts to needed state.
+      const current = state.source.get(link);
+      const next = current.next ? state.source.get(current.next) : null;
 
-  // Infinite scroll booleans.
-  const hasReachedLimit = !!limit && links.length >= limit;
+      // Infinite scroll booleans.
+      const hasReachedLimit = !!limit && links.length >= limit;
 
-  const { supported, fetchRef, routeRef } = useInfiniteScroll({
-    currentLink: link,
-    nextLink: next?.link,
-  });
+      const { supported, fetchRef, routeRef } = useInfiniteScroll({
+        currentLink: link,
+        nextLink: next?.link,
+      });
 
-  if (!current.isReady) return null;
-  if (!supported) return children;
+      if (!current.isReady) return null;
+      if (!supported) return children;
 
-  const container = css`
-    position: relative;
-  `;
+      const container = css`
+        position: relative;
+      `;
 
-  const fetcher = css`
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  `;
+      const fetcher = css`
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+      `;
 
-  return (
-    <div css={container} ref={routeRef}>
-      {children}
-      {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
-    </div>
-  );
-});
+      return (
+        <div css={container} ref={routeRef}>
+          {children}
+          {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
+        </div>
+      );
+    })
+);
 
 const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
   const { state, actions } = useConnect<Source & Router>();
@@ -134,7 +141,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
     link: link,
     isLastPage:
       link === last.link || (link === links[links.length - 2] && !last.isReady),
-    Wrapper,
+    Wrapper: Wrapper(link),
   }));
 
   return {

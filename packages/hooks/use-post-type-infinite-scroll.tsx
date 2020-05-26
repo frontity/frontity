@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
 import { Connect } from "frontity/types";
+import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll from "./use-infinite-scroll";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
-type Wrapper = React.FC<Connect<Source & Router, { link: string }>>;
+type Wrapper = (link: string) => React.FC<Connect<Source & Router>>;
 
 type UsePostTypeInfiniteScroll = (options: {
   limit?: number;
@@ -15,64 +16,70 @@ type UsePostTypeInfiniteScroll = (options: {
     key: string;
     link: string;
     isLastPost: boolean;
-    Wrapper: Wrapper;
+    Wrapper: React.FC<Connect<Source & Router>>;
   }[];
   isLimit: boolean;
   isFetching: boolean;
   fetchNext: () => Promise<void>;
 };
 
-const Wrapper: Wrapper = connect(({ state, link, children }) => {
-  // Values from browser state.
-  const links: string[] = state.router.state.infiniteScroll?.links || [link];
-  const limit: number = state.router.state.infiniteScroll?.limit;
-  const pages: string[] = state.router.state.infiniteScroll?.pages || [];
+const Wrapper: Wrapper = memoize(
+  (key) => key,
+  (link) =>
+    connect(({ state, children }) => {
+      // Values from browser state.
+      const links: string[] = state.router.state.infiniteScroll?.links || [
+        link,
+      ];
+      const limit: number = state.router.state.infiniteScroll?.limit;
+      const pages: string[] = state.router.state.infiniteScroll?.pages || [];
 
-  // Aliases to needed state.
-  const current = state.source.get(link);
-  const first = links[0];
-  const items = pages.reduce((final, current, index) => {
-    const data = state.source.get(current);
-    if (data.isArchive && data.isReady) {
-      const items =
-        index !== 0
-          ? data.items.filter(({ link }) => link !== first)
-          : data.items;
-      final = final.concat(items);
-    }
-    return final;
-  }, []);
-  const currentIndex = items.findIndex(({ link }) => link === current.link);
-  const nextItem = items[currentIndex + 1];
+      // Aliases to needed state.
+      const current = state.source.get(link);
+      const first = links[0];
+      const items = pages.reduce((final, current, index) => {
+        const data = state.source.get(current);
+        if (data.isArchive && data.isReady) {
+          const items =
+            index !== 0
+              ? data.items.filter(({ link }) => link !== first)
+              : data.items;
+          final = final.concat(items);
+        }
+        return final;
+      }, []);
+      const currentIndex = items.findIndex(({ link }) => link === current.link);
+      const nextItem = items[currentIndex + 1];
 
-  // Infinite scroll booleans.
-  const hasReachedLimit = !!limit && links.length >= limit;
+      // Infinite scroll booleans.
+      const hasReachedLimit = !!limit && links.length >= limit;
 
-  const { supported, fetchRef, routeRef } = useInfiniteScroll({
-    currentLink: link,
-    nextLink: nextItem?.link,
-  });
+      const { supported, fetchRef, routeRef } = useInfiniteScroll({
+        currentLink: link,
+        nextLink: nextItem?.link,
+      });
 
-  if (!current.isReady) return null;
-  if (!supported) return children;
+      if (!current.isReady) return null;
+      if (!supported) return children;
 
-  const container = css`
-    position: relative;
-  `;
+      const container = css`
+        position: relative;
+      `;
 
-  const fetcher = css`
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  `;
+      const fetcher = css`
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+      `;
 
-  return (
-    <div css={container} ref={routeRef}>
-      {children}
-      {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
-    </div>
-  );
-});
+      return (
+        <div css={container} ref={routeRef}>
+          {children}
+          {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
+        </div>
+      );
+    })
+);
 
 const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
   const { state, actions } = useConnect<Source & Router>();
@@ -240,7 +247,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
     link: link,
     isLastPost:
       link === last.link || (link === links[links.length - 2] && !last.isReady),
-    Wrapper,
+    Wrapper: Wrapper(link),
   }));
 
   return {
