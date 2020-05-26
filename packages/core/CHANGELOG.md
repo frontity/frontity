@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.1
+
+### Patch Changes
+
+- [`b4b25e43`](https://github.com/frontity/frontity/commit/b4b25e434e5e7c2a96e1fce8c11b0e0dac228295) [#446](https://github.com/frontity/frontity/pull/446) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix --publicPath option when its value is a URL with domain specified.
+
 ## 1.6.0
 
 ### Minor Changes
