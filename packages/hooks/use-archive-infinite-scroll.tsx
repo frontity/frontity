@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useConnect, connect, css } from "frontity";
 import { Connect } from "frontity/types";
 import useInfiniteScroll from "./use-infinite-scroll";
-import WpSource from "@frontity/wp-source/types";
-import TinyRouter from "@frontity/tiny-router/types";
+import Source from "@frontity/source/types";
+import Router from "@frontity/router/types";
 
-type Wrapper = React.FC<Connect<WpSource & TinyRouter, { link: string }>>;
+type Wrapper = React.FC<Connect<Source & Router, { link: string }>>;
 
 type UseArchiveInfiniteScroll = (options: {
   limit?: number;
@@ -61,7 +61,7 @@ const Wrapper: Wrapper = connect(({ state, link, children }) => {
 });
 
 const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
-  const { state, actions } = useConnect<WpSource & TinyRouter>();
+  const { state, actions } = useConnect<Source & Router>();
 
   // Values from/for browser state.
   const links: string[] = state.router.state.infiniteScroll?.links || [

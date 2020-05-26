@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useConnect } from "frontity";
 import useInView from "./use-in-view";
-import WpSource from "@frontity/wp-source/types";
-import TinyRouter from "@frontity/tiny-router/types";
+import Source from "@frontity/source/types";
+import Router from "@frontity/router/types";
 import { IntersectionOptions } from "react-intersection-observer";
 
 type UseInfiniteScroll = (options: {
@@ -42,7 +42,7 @@ const useInfiniteScroll: UseInfiniteScroll = ({
 
   if (!fetch.supported || !route.supported) return { supported: false };
 
-  const { state, actions } = useConnect<WpSource & TinyRouter>();
+  const { state, actions } = useConnect<Source & Router>();
 
   const current = state.source.get(currentLink);
   const next = nextLink ? state.source.get(nextLink) : null;
