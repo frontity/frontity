@@ -41,6 +41,13 @@ export interface Package {
       initialLink?: string;
 
       /**
+       * The mode of this site.
+       *
+       * @deprecated
+       */
+      mode?: string;
+
+      /**
        * An array with the names of the Frontity packages that are loaded for
        * this site.
        *
@@ -191,7 +198,7 @@ interface Action {
  * An object containing Frontity actions, or other objects containing actions.
  */
 interface Actions {
-  [key: string]: Action | Actions;
+  [key: string]: (...args: any) => any | Actions;
 }
 
 /**

@@ -24,7 +24,6 @@ export default ({
 }): Package => {
   let config: Package = {
     roots: {},
-    fills: {},
     state: {},
     actions: {},
     libraries: {},
