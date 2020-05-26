@@ -7,7 +7,7 @@ import Router from "@frontity/router/types";
 
 type Wrapper = React.FC<Connect<Source & Router, { link: string }>>;
 
-type UsePostsInfiniteScroll = (options: {
+type UsePostTypeInfiniteScroll = (options: {
   limit?: number;
   context?: string;
 }) => {
@@ -74,7 +74,7 @@ const Wrapper: Wrapper = connect(({ state, link, children }) => {
   );
 });
 
-const usePostsInfiniteScroll: UsePostsInfiniteScroll = (options) => {
+const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
   const { state, actions } = useConnect<Source & Router>();
 
   // Values from/for browser state.
@@ -251,4 +251,4 @@ const usePostsInfiniteScroll: UsePostsInfiniteScroll = (options) => {
   };
 };
 
-export default usePostsInfiniteScroll;
+export default usePostTypeInfiniteScroll;
