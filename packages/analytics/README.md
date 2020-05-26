@@ -1,5 +1,5 @@
-# `@frontity/google-analytics`
-[![Version](https://img.shields.io/npm/v/@frontity/google-analytics.svg)](https://www.npmjs.com/package/@frontity/google-analytics)
+# `@frontity/analytics`
+[![Version](https://img.shields.io/npm/v/@frontity/analytics.svg)](https://www.npmjs.com/package/@frontity/analytics)
 
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://docs.frontity.org/)
 
@@ -7,38 +7,31 @@
 
 [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity)
 
-Analytics package to use Google Analytics with Frontity
+This package contains the base types and actions to build analytics packages for »Frontity
 
 
 ## Install
 
 ```sh
-npm i @frontity/google-analytics
+npm i @frontity/analytics
 ```
 
-## Usage 
+## Example
 
-**`frontity.settings.js`**
+All **Analytics Frontity Packages** should extend from this package
+
+```ts
+...
+import Analytics, { ... } from "@frontity/analytics/types";
+
+...
+
+interface GoogleAnalytics extends Analytics {
+  ...
+}
+
+export default GoogleAnalytics;
 ```
-export default {
-  packages: [
-    {
-      name: "@frontity/google-analytics",
-      state: {
-        googleAnalytics: {
-          trackingIds: ['UA-12345678-9']
-        },
-      },
-    },
-  ],
-};
-```
-
-## Feature Discussions
-
-All the [Feature Discussions](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can participate in the discussions and vote the ones you're interested in or create a new one.
-
-In that board you can find [some *Feature Discussions* related to this package](https://community.frontity.org/tag/google-analytics) 
 
 ## Contributing
 
@@ -54,6 +47,7 @@ This project has quite a backlog of suggestions! If you're new to the project, m
 This project is [Apache--2.0](https://github.com/frontity/frontity/blob/master/LICENSE) licensed.
 
 ***
+
 ### » Frontity Channels 🌎
 
 We have different channels at your disposal where you can find information about the project, discuss about it and get involved:

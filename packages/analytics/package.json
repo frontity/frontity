@@ -7,6 +7,7 @@
     "frontity",
     "frontity-analytics"
   ],
+  "docs": "https://frontity.org",
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
   "repository": {
