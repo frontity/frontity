@@ -145,4 +145,10 @@ const proc4: Processor<MyElement> = {
   },
 };
 
+// 5. Processor can return null to remove nodes.
+const proc5: Processor<Element> = {
+  test: ({ node }) => node.props.className.includes("to-remove"),
+  processor: () => null,
+};
+
 test("Types are fine!", () => {});

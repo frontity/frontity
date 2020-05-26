@@ -68,7 +68,7 @@ type Test<NodeDef extends Node, Pkg extends Package> = (
 
 type Process<NodeDef extends Node, Pkg extends Package> = (
   params: Params<NodeDef, Pkg>
-) => Partial<Node> | boolean;
+) => Partial<Node> | null;
 
 export interface Processor<
   NodeDef extends Node = Node,
