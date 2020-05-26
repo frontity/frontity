@@ -1,5 +1,6 @@
+import { warn } from "frontity";
+import clone from "ramda/src/clone";
 import TinyRouter from "../types";
-import { warn, clone } from "frontity";
 
 export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,

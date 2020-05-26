@@ -84,8 +84,6 @@ export function isObservable(obj: object): boolean;
 
 export function raw<Observable extends object>(obj: Observable): Observable;
 
-export function clone<Observable extends object>(obj: Observable): Observable;
-
 export function observe<Reaction extends Function>(
   func: Reaction,
   options?: ObserveOptions
