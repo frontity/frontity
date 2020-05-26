@@ -5,6 +5,7 @@ interface Router<T = null> extends Package {
     frontity?: Package["state"]["frontity"];
     router: {
       link: string;
+      previous?: string;
       state: SetOptions["state"];
     };
   };

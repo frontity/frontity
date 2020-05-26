@@ -14,6 +14,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   // Sets state default value.
   if (!options.state) options.state = {};
 
+  if (state.router.link !== link) state.router.previous = state.router.link;
   state.router.link = link;
   state.router.state = options.state;
 

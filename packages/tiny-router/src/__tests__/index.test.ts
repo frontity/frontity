@@ -72,7 +72,7 @@ describe("actions", () => {
       expect(store.state.router.link).toBe(normalized);
     });
 
-    test("should populate latest link, method and state", () => {
+    test("should populate latest link and state", () => {
       const store = createStore(config);
 
       const link = "/some-post/";
@@ -90,6 +90,36 @@ describe("actions", () => {
       store.actions.router.set(link, options);
       expect(store.state.router.link).toBe(normalized);
       expect(store.state.router.state).toEqual(options.state);
+    });
+
+    test("should populate previous link if current link and next link are different", () => {
+      const store = createStore(config);
+
+      const current = "/";
+      const next = "/page/2/";
+
+      store.state.router.link = current;
+
+      normalize.mockReturnValue(next);
+
+      store.actions.router.set(next);
+      expect(store.state.router.link).toBe(next);
+      expect(store.state.router.previous).toBe(current);
+    });
+
+    test("should not populate previous link if current link and next link are the same", () => {
+      const store = createStore(config);
+
+      const current = "/page/2/";
+      const next = "/page/2/";
+
+      store.state.router.link = current;
+
+      normalize.mockReturnValue(next);
+
+      store.actions.router.set(next);
+      expect(store.state.router.link).toBe(next);
+      expect(store.state.router.previous).toBeUndefined();
     });
 
     test("should follow the `options.method` value if present", () => {
