@@ -1,3 +1,4 @@
+import get from "get-value";
 import { useConnect, warn } from "../..";
 import { Fill as StateFill, Package } from "../../../types";
 
@@ -33,45 +34,37 @@ const useFills = (name: string): Fill[] => {
     return [];
   }
 
-  // The user has not specified any fills yet
-  if (!state.fills || typeof state.fills !== "object") {
-    return [];
-  }
-
   return (
-    Object.entries(state.fills)
+    Object.values(state.fills || {})
+      // Flat all the fills and turn them into entries.
+      .flatMap((fill) => Object.entries(fill))
 
       // Match only the fills for this name.
-      .filter(([key, { slot }]) => slot === name)
+      .filter(([, { slot }]) => slot === name)
 
       // 1. Nest the `key` of the fill
       // 2. Add default priority of 10 if not present
-      .map(([key, value]) => ({
-        key,
-        priority: value.priority || 10,
-        ...value,
-      }))
+      // 3. Add the Fill component.
+      .map(
+        ([key, fill]): Fill => ({
+          key,
+          priority: fill.priority || 10,
+          Fill: get(libraries.fills, fill.library),
+          ...fill,
+        })
+      )
+
+      // Filter out fills without a Fill component.
+      .filter(({ Fill, key, library }) => {
+        if (!Fill)
+          warn(
+            `The Fill component for "${key}" cannot be found in "libraries.fills.${library}"`
+          );
+        return !!Fill;
+      })
 
       // Sort by priority
       .sort((a, b) => a.priority - b.priority)
-
-      // Add real component to the array.
-      .reduce((allFills: Fill[], fill) => {
-        const { fills } = libraries;
-        const { library } = fill;
-
-        // If we cannot find the fill component in `libraries`
-        // OR
-        // if we cannot find the reference to the component in `state.fills.library` we skip.
-        if (!fills || !library) return allFills;
-
-        const newFill: Fill = {
-          ...fill,
-          Fill: libraries.fills[fill.library],
-        };
-
-        return allFills.concat(newFill);
-      }, [])
   );
 };
 

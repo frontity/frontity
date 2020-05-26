@@ -23,24 +23,41 @@ beforeEach(() => {
     actions: {
       fillActions: {
         setNumber: ({ state }) => (number: number) => {
-          state.fills["test fill"].props.number = number;
+          state.fills.namespace["test fill"].props.number = number;
         },
       },
     },
     state: {
       fills: {
-        "test fill": {
-          slot: "slot 1",
-          library: "FillComponent",
-          props: {
-            number: 42,
+        namespace1: {
+          "test fill 1": {
+            slot: "slot 1",
+            library: "namespace1.FillComponent",
+            props: {
+              number: 42,
+            },
+          },
+          "test fill 2": {
+            slot: "slot 2",
+            library: "namespace1.FillComponent",
+          },
+        },
+        namespace2: {
+          "test fill 3": {
+            slot: "slot 3",
+            library: "namespace2.FillComponent",
           },
         },
       },
     },
     libraries: {
       fills: {
-        FillComponent,
+        namespace1: {
+          FillComponent,
+        },
+        namespace2: {
+          FillComponent,
+        },
       },
     },
   });
@@ -72,7 +89,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should work when the slot does not exist and should show a warning", () => {
+  it("Should work when the slot does not exist", () => {
     const Comp = connect(() => {
       const fills = useFills("slot that does not exist");
 
@@ -131,8 +148,41 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should return [] when state.fills.[].library is not specified", () => {
-    delete store.state.fills["test fill"].library;
+  it("Should warn when the Fill component is not found in libraries", () => {
+    const warn = jest.spyOn(global.console, "warn");
+
+    const Comp = connect(() => {
+      // This is just to trick typescript to allow us to call
+      // useFills without any arguments
+      const useFills2: any = useFills;
+      const fills = useFills2();
+
+      expect(fills).toEqual([]);
+
+      return (
+        <>
+          {fills.map(({ Fill, props, key }) => (
+            <Fill key={key} {...props} />
+          ))}
+        </>
+      );
+    });
+
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+
+    expect(warn.mock.calls[0][0]).toMatch(
+      "You should pass the name of the slot that you would like to fill!"
+    );
+
+    expect(app.toJSON()).toEqual(null);
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+  it("Should return [] when state.fills.namespace.[].library is not specified", () => {
+    delete store.state.fills.namespace1["test fill"].library;
 
     const Comp = connect(() => {
       const fills = useFills("slot 1");
@@ -209,6 +259,32 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
+  it("Should work when `state.fills` doesn't contain any fills", () => {
+    delete store.state.fills.namespace;
+
+    const Comp = connect(() => {
+      const fills = useFills("slot 1");
+      expect(fills).toEqual([]);
+
+      return (
+        <>
+          {fills.map(({ Fill, props, key }) => (
+            <Fill key={key} {...props} />
+          ))}
+        </>
+      );
+    });
+
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+
+    expect(app.toJSON()).toEqual(null);
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+
   it("Should re-render the fill when updating the props", () => {
     const Comp = connect(() => {
       const fills = useFills("slot 1");
@@ -239,7 +315,7 @@ describe("useFills", () => {
   });
 
   it("Should render the fills in the order of priority", () => {
-    store.state.fills["more important fill"] = {
+    store.state.fills.namespace1["more important fill"] = {
       slot: "slot 1",
       library: "FillComponent",
       priority: 1,
@@ -268,7 +344,7 @@ describe("useFills", () => {
 
     // This fill should come first
     expect(app.toJSON()[0].props).toEqual({
-      id: "test-fill",
+      id: "more important fill",
       "data-number": 43,
     });
 

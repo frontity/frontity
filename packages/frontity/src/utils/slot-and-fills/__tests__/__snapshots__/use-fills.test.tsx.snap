@@ -28,8 +28,6 @@ Array [
 ]
 `;
 
-exports[`useFills Should return [] when state.fills.[].library is not specified 1`] = `null`;
-
 exports[`useFills Should return [] when the state.fills.[].slot is not specified 1`] = `null`;
 
 exports[`useFills Should skip rendering the fills with value \`false\` 1`] = `
@@ -40,6 +38,8 @@ exports[`useFills Should skip rendering the fills with value \`false\` 1`] = `
   Im a Fill
 </div>
 `;
+
+exports[`useFills Should warn when the Fill component is not found in libraries 1`] = `null`;
 
 exports[`useFills Should work in the most basic case 1`] = `
 <div
@@ -52,4 +52,4 @@ exports[`useFills Should work in the most basic case 1`] = `
 
 exports[`useFills Should work when \`state.fills\` is missing 1`] = `null`;
 
-exports[`useFills Should work when the slot does not exist and should show a warning 1`] = `null`;
+exports[`useFills Should work when the slot does not exist 1`] = `null`;
