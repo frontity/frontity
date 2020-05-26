@@ -24,9 +24,9 @@ type UsePostsInfiniteScroll = (options: {
 
 const Wrapper: Wrapper = connect(({ state, link, children }) => {
   // Values from browser state.
-  const links: string[] = state.router.state.links || [link];
-  const limit: number = state.router.state.limit;
-  const pages: string[] = state.router.state.pages || [];
+  const links: string[] = state.router.state.infiniteScroll?.links || [link];
+  const limit: number = state.router.state.infiniteScroll?.limit;
+  const pages: string[] = state.router.state.infiniteScroll?.pages || [];
 
   // Aliases to needed state.
   const current = state.source.get(link);
@@ -78,10 +78,13 @@ const usePostsInfiniteScroll: UsePostsInfiniteScroll = (options) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
 
   // Values from/for browser state.
-  const links: string[] = state.router.state.links || [state.router.link];
-  const context: string = state.router.state.context || options.context;
-  const pages: string[] = state.router.state.pages || [context];
-  const limit = state.router.state.limit || options.limit;
+  const links: string[] = state.router.state.infiniteScroll?.links || [
+    state.router.link,
+  ];
+  const context: string =
+    state.router.state.infiniteScroll?.context || options.context;
+  const pages: string[] = state.router.state.infiniteScroll?.pages || [context];
+  const limit = state.router.state.infiniteScroll?.limit || options.limit;
 
   // Aliases to needed state.
   const current = state.source.get(state.router.link);
@@ -114,11 +117,14 @@ const usePostsInfiniteScroll: UsePostsInfiniteScroll = (options) => {
     actions.router.set(current.link, {
       method: "replace",
       state: {
-        links,
-        context,
-        pages,
-        limit,
         ...state.router.state,
+        infiniteScroll: {
+          links,
+          context,
+          pages,
+          limit,
+          ...state.router.state.infiniteScroll,
+        },
       },
     });
   }, []);
@@ -152,17 +158,20 @@ const usePostsInfiniteScroll: UsePostsInfiniteScroll = (options) => {
         method: "replace",
         state: {
           ...state.router.state,
-          pages,
+          infiniteScroll: {
+            ...state.router.state.infiniteScroll,
+            pages,
+          },
         },
       });
     }
   }, [current.link, items.length, hasReachedLimit]);
 
-  // Increases the limit so more pages can be loaded.
+  // Fetches the next item disregarding the limit.
   const fetchNext = async () => {
     if (!thereIsNext) return;
 
-    const links = state.router.state.links || [current.link];
+    const links = state.router.state.infiniteScroll?.links || [current.link];
 
     let nextItem = items[lastIndex + 1];
     let nextPage = state.source.get(lastPage.next);
@@ -216,8 +225,11 @@ const usePostsInfiniteScroll: UsePostsInfiniteScroll = (options) => {
       method: "replace",
       state: {
         ...state.router.state,
-        links,
-        pages,
+        infiniteScroll: {
+          ...state.router.state.infiniteScroll,
+          links,
+          pages,
+        },
       },
     });
   };

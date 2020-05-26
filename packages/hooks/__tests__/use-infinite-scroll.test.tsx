@@ -218,7 +218,7 @@ describe("useInfiniteScroll", () => {
     mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
-        router: { state: {} },
+        router: { state: { someOtherPackage: {} } },
       },
       actions: { source: { fetch: sourceFetch }, router: { set: routerSet } },
     } as any);
@@ -243,7 +243,10 @@ describe("useInfiniteScroll", () => {
     expect(sourceFetch).toHaveBeenCalledWith("/page/2/");
     expect(routerSet).toHaveBeenCalledWith("/", {
       method: "replace",
-      state: { links: ["/", "/page/2/"] },
+      state: {
+        someOtherPackage: {},
+        infiniteScroll: { links: ["/", "/page/2/"] },
+      },
     });
   });
 
@@ -263,7 +266,11 @@ describe("useInfiniteScroll", () => {
     mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
-        router: { state: { links: ["/post-3/", "/past-1/", "/post-2/"] } },
+        router: {
+          state: {
+            infiniteScroll: { links: ["/post-3/", "/past-1/", "/post-2/"] },
+          },
+        },
       },
       actions: { source: { fetch: sourceFetch }, router: { set: routerSet } },
     } as any);
@@ -302,7 +309,12 @@ describe("useInfiniteScroll", () => {
     mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
-        router: { state: { links: ["/"] } },
+        router: {
+          state: {
+            someOtherPackage: {},
+            infiniteScroll: { links: ["/"] },
+          },
+        },
       },
       actions: { source: { fetch: sourceFetch }, router: { set: routerSet } },
     } as any);
@@ -324,7 +336,10 @@ describe("useInfiniteScroll", () => {
     expect(sourceFetch).not.toHaveBeenCalled();
     expect(routerSet).toHaveBeenCalledWith("/", {
       method: "replace",
-      state: { links: ["/", "/page/2/"] },
+      state: {
+        someOtherPackage: {},
+        infiniteScroll: { links: ["/", "/page/2/"] },
+      },
     });
   });
 
@@ -344,7 +359,9 @@ describe("useInfiniteScroll", () => {
     mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
-        router: { state: { links: ["/"] } },
+        router: {
+          state: { someOtherPackage: {}, infiniteScroll: { links: ["/"] } },
+        },
       },
       actions: { source: { fetch: sourceFetch }, router: { set: routerSet } },
     } as any);
@@ -366,7 +383,10 @@ describe("useInfiniteScroll", () => {
     expect(sourceFetch).not.toHaveBeenCalled();
     expect(routerSet).toHaveBeenCalledWith("/", {
       method: "replace",
-      state: { links: ["/", "/page/2/"] },
+      state: {
+        someOtherPackage: {},
+        infiniteScroll: { links: ["/", "/page/2/"] },
+      },
     });
   });
 
@@ -386,7 +406,13 @@ describe("useInfiniteScroll", () => {
     mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
-        router: { link: "/page/2/", state: { links: ["/", "/page/2/"] } },
+        router: {
+          link: "/page/2/",
+          state: {
+            someOtherPackage: {},
+            infiniteScroll: { links: ["/", "/page/2/"] },
+          },
+        },
       },
       actions: { router: { set: routerSet } },
     } as any);
@@ -408,7 +434,10 @@ describe("useInfiniteScroll", () => {
     expect(routerSet).toHaveBeenCalledTimes(1);
     expect(routerSet).toHaveBeenCalledWith("/", {
       method: "replace",
-      state: { links: ["/", "/page/2/"] },
+      state: {
+        someOtherPackage: {},
+        infiniteScroll: { links: ["/", "/page/2/"] },
+      },
     });
   });
 
@@ -428,7 +457,12 @@ describe("useInfiniteScroll", () => {
     mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
-        router: { link: "/", state: { links: ["/", "/page/2/"] } },
+        router: {
+          link: "/",
+          state: {
+            infiniteScroll: { links: ["/", "/page/2/"] },
+          },
+        },
       },
       actions: { router: { set: routerSet } },
     } as any);

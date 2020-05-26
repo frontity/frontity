@@ -24,8 +24,8 @@ type UseArchiveInfiniteScroll = (options: {
 
 const Wrapper: Wrapper = connect(({ state, link, children }) => {
   // Values from browser state.
-  const links: string[] = state.router.state.links || [link];
-  const limit: number = state.router.state.limit;
+  const links: string[] = state.router.state.infiniteScroll?.links || [link];
+  const limit: number = state.router.state.infiniteScroll?.limit;
 
   // Shorcuts to needed state.
   const current = state.source.get(link);
@@ -64,8 +64,11 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
   const { state, actions } = useConnect<WpSource & TinyRouter>();
 
   // Values from/for browser state.
-  const links: string[] = state.router.state.links || [state.router.link];
-  const limit: number = state.router.state.limit || options.limit;
+  const links: string[] = state.router.state.infiniteScroll?.links || [
+    state.router.link,
+  ];
+  const limit: number =
+    state.router.state.infiniteScroll?.limit || options.limit;
 
   // Aliases to needed state.
   const current = state.source.get(state.router.link);
@@ -82,9 +85,12 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
     actions.router.set(current.link, {
       method: "replace",
       state: {
-        links,
-        limit,
         ...state.router.state,
+        infiniteScroll: {
+          links,
+          limit,
+          ...state.router.state.infiniteScroll,
+        },
       },
     });
   }, []);
@@ -93,7 +99,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
   const fetchNext = async () => {
     if (!thereIsNext) return;
 
-    const links = state.router.state.links || [current.link];
+    const links = state.router.state.infiniteScroll?.links || [current.link];
 
     if (links.includes(last.next)) return;
 
@@ -114,7 +120,10 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
       method: "replace",
       state: {
         ...state.router.state,
-        links,
+        infiniteScroll: {
+          ...state.router.state.infiniteScroll,
+          links,
+        },
       },
     });
   };

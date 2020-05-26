@@ -59,7 +59,7 @@ const useInfiniteScroll: UseInfiniteScroll = ({
   // to the array of elements in the infinite scroll.
   useEffect(() => {
     if (fetch.inView && nextLink) {
-      const links = state.router.state.links || [currentLink];
+      const links = state.router.state.infiniteScroll?.links || [currentLink];
 
       if (links.includes(nextLink)) return;
 
@@ -75,7 +75,10 @@ const useInfiniteScroll: UseInfiniteScroll = ({
         method: "replace",
         state: {
           ...state.router.state,
-          links,
+          infiniteScroll: {
+            ...state.router.state.infiniteScroll,
+            links,
+          },
         },
       });
     }
