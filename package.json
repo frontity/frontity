@@ -7,7 +7,7 @@
     "codecov": "curl -s https://codecov.io/bash | bash -s",
     "e2e:prod:all": "cd e2e/project/ && npx frontity build && npx frontity serve --port 3001",
     "e2e:prod:module": "cd e2e/project/ && npx frontity build --publicPath /custom/path --target module && npx frontity serve --port 3001",
-    "e2e:prod:es5": "cd e2e/project/ && npx frontity build --publicPath /custom/path/ --target es5 && npx frontity serve --port 3001",
+    "e2e:prod:es5": "cd e2e/project/ && npx frontity build --publicPath http://localhost:3001/custom/path/ --target es5 && npx frontity serve --port 3001",
     "prepare": "lerna bootstrap --hoist",
     "reinstall": "lerna clean --yes && npm run prepare"
   },

@@ -33,7 +33,14 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     const moduleStats = await getStats({ target: "module" });
     const es5Stats = await getStats({ target: "es5" });
     const stats = moduleStats || es5Stats;
-    const publicPath = stats ? stats.publicPath : "/static";
+
+    const publicPath = stats
+      ? // Remove domain from publicPath.
+        stats.publicPath.replace(/^(?:https?:)?\/\/([^/])+/, "")
+      : // Use the value by default.
+        "/static";
+
+    // Serve the static files.
     return mount(publicPath, serve("build/static"))(ctx, next);
   });
 
