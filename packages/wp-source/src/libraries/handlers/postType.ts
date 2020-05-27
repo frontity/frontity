@@ -6,7 +6,7 @@ const postTypeHandler = ({
   endpoints,
 }: {
   endpoints: string[];
-}): Handler => async ({ link, params, state, libraries }) => {
+}): Handler => async ({ link, params, state, libraries, force }) => {
   // 1. search id in state or get the entity from WP REST API
   const { route, query } = libraries.source.parse(link);
   if (!state.source.get(route).id) {
@@ -25,7 +25,11 @@ const postTypeHandler = ({
         params: { slug, _embed: true, ...state.source.params },
       });
 
-      const populated = await libraries.source.populate({ response, state });
+      const populated = await libraries.source.populate({
+        response,
+        state,
+        force,
+      });
 
       // exit loop if this endpoint returns an entity!
       if (populated.length > 0) {

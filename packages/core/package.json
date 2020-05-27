@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "1.5.2",
+  "version": "1.6.1",
   "description": "The core package of the Frontity framework.",
   "keywords": [
     "frontity",
@@ -37,7 +37,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@emotion/babel-preset-css-prop": "^10.0.9",
     "@emotion/core": "^10.0.22",
-    "@frontity/connect": "^1.0.5",
+    "@frontity/connect": "^1.1.0",
     "@frontity/file-settings": "^1.1.5",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/component": "^5.10.1",

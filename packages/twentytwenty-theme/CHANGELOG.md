@@ -1,5 +1,31 @@
 # @frontity/twentytwenty-theme
 
+## 1.2.0
+
+### Minor Changes
+
+- [`789b5d08`](https://github.com/frontity/frontity/commit/789b5d08459a1f0ec4c18fb32323e8e8a2fa9e0d) [#414](https://github.com/frontity/frontity/pull/414) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - Use of recommended way to handle search results in a Frontity project
+
+### Patch Changes
+
+- [`e12d2e3e`](https://github.com/frontity/frontity/commit/e12d2e3e1948be4cfd0604742f56f89bdda79900) [#441](https://github.com/frontity/frontity/pull/441) Thanks [@luisherranz](https://github.com/luisherranz)! - Remove unnecessary css array.
+- Updated dependencies [[`e9cff121`](https://github.com/frontity/frontity/commit/e9cff1218289a2c84a38ae4c575db381627c86bc), [`661ac083`](https://github.com/frontity/frontity/commit/661ac08316f44172166e79b05b47f0c15a837a9a), [`75343be3`](https://github.com/frontity/frontity/commit/75343be3154dda5b587a3065b225161af96f0488)]:
+  - @frontity/html2react@1.3.3
+  - frontity@1.7.0
+  - @frontity/components@1.3.2
+
+## 1.1.2
+
+### Patch Changes
+
+- [`f945ec01`](https://github.com/frontity/frontity/commit/f945ec01d920e54aa19ef7999ace9e48c6b1b8bc) [#418](https://github.com/frontity/frontity/pull/418) Thanks [@w3bdesign](https://github.com/w3bdesign)! - Use a CSS-only loader to get rid of the outdated `react-spinners` package.
+
+* [`7ca40685`](https://github.com/frontity/frontity/commit/7ca40685fbdabdec51f47561d3aa4c1d6efc2968) [#388](https://github.com/frontity/frontity/pull/388) Thanks [@uokesita](https://github.com/uokesita)! - Fix tag underlining on hover.
+
+- [`502bc144`](https://github.com/frontity/frontity/commit/502bc144158a1b64971c738dcf93306ad5b61a8f) [#406](https://github.com/frontity/frontity/pull/406) Thanks [@luisherranz](https://github.com/luisherranz)! - Use `swap` in all `font-displays`. This was needed because we are not embedding fonts smaller than 25Kbs anymore.
+- Updated dependencies [[`bf3db894`](https://github.com/frontity/frontity/commit/bf3db8949c7ae85c699a9c5a4613185e4ba0baaa)]:
+  - frontity@1.6.0
+
 ## 1.1.1
 
 ### Patch Changes
