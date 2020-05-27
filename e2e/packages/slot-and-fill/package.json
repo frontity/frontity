@@ -1,0 +1,9 @@
+{
+  "name": "e2e-slot-and-fill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do e2e testing of Frontity's Slot and Fill tools",
+  "dependencies": {
+    "frontity": "^1.4.3"
+  }
+}

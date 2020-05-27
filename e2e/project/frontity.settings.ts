@@ -90,6 +90,10 @@ const settings: Settings = [
     name: "use-in-view",
     packages: ["e2e-use-in-view"],
   },
+  {
+    name: "slot-and-fill",
+    packages: ["e2e-slot-and-fill"],
+  },
 ];
 
 export default settings;
