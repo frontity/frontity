@@ -35,10 +35,12 @@ const useFills = (name: string): Fill[] => {
   }
 
   return (
-    Object.values(state.fills || {})
-      // Flat all the fills and turn them into entries.
-      .reduce((arr, item) => [...arr, ...Object.entries(item)], [])
-
+    // Flat all the fills and turn them into entries.
+    Object.values(state.fills)
+      .reduce<[string, StateFill][]>(
+        (fills, fill) => [...fills, ...Object.entries(fill)],
+        []
+      )
       // Match only the fills for this name.
       .filter(([, { slot }]) => slot === name)
 
