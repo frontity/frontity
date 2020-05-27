@@ -14,7 +14,7 @@ type UseArchiveInfiniteScroll = (options?: {
   pages: {
     key: string;
     link: string;
-    isLastPage: boolean;
+    isLast: boolean;
     Wrapper: React.FC<Connect<Source & Router>>;
   }[];
   isLimit: boolean;
@@ -132,7 +132,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
   const pages = links.map((link) => ({
     key: link,
     link: link,
-    isLastPage:
+    isLast:
       (link === last.link && last.isReady) ||
       (link === links[links.length - 2] && !last.isReady),
     Wrapper: MemoizedWrapper(link),

@@ -206,7 +206,7 @@ describe("useArchiveInfiniteScroll", () => {
         {
           key: "/",
           link: "/",
-          isLastPage: true,
+          isLast: true,
           Wrapper: expect.any(Function),
         },
       ],
@@ -252,19 +252,19 @@ describe("useArchiveInfiniteScroll", () => {
         {
           key: "/",
           link: "/",
-          isLastPage: false,
+          isLast: false,
           Wrapper: expect.any(Function),
         },
         {
           key: "/page/2/",
           link: "/page/2/",
-          isLastPage: false,
+          isLast: false,
           Wrapper: expect.any(Function),
         },
         {
           key: "/page/3/",
           link: "/page/3/",
-          isLastPage: true,
+          isLast: true,
           Wrapper: expect.any(Function),
         },
       ],
@@ -274,7 +274,7 @@ describe("useArchiveInfiniteScroll", () => {
     });
   });
 
-  test("should return `isLastPage` false when the last page is not ready", () => {
+  test("should return `isLast` false when the last page is not ready", () => {
     mockedUseConnect.mockReturnValue({
       state: {
         router: {
@@ -310,19 +310,19 @@ describe("useArchiveInfiniteScroll", () => {
         {
           key: "/",
           link: "/",
-          isLastPage: false,
+          isLast: false,
           Wrapper: expect.any(Function),
         },
         {
           key: "/page/2/",
           link: "/page/2/",
-          isLastPage: true,
+          isLast: true,
           Wrapper: expect.any(Function),
         },
         {
           key: "/page/3/",
           link: "/page/3/",
-          isLastPage: false,
+          isLast: false,
           Wrapper: expect.any(Function),
         },
       ],
@@ -369,7 +369,7 @@ describe("useArchiveInfiniteScroll", () => {
         {
           key: "/",
           link: "/",
-          isLastPage: true,
+          isLast: true,
           Wrapper: expect.any(Function),
         },
       ],
@@ -416,13 +416,13 @@ describe("useArchiveInfiniteScroll", () => {
         {
           key: "/",
           link: "/",
-          isLastPage: true,
+          isLast: true,
           Wrapper: expect.any(Function),
         },
         {
           key: "/page/2/",
           link: "/page/2/",
-          isLastPage: false,
+          isLast: false,
           Wrapper: expect.any(Function),
         },
       ],
@@ -464,7 +464,7 @@ describe("useArchiveInfiniteScroll", () => {
         {
           key: "/",
           link: "/",
-          isLastPage: true,
+          isLast: true,
           Wrapper: expect.any(Function),
         },
       ],
@@ -507,7 +507,7 @@ describe("useArchiveInfiniteScroll", () => {
         {
           key: "/",
           link: "/",
-          isLastPage: true,
+          isLast: true,
           Wrapper: expect.any(Function),
         },
       ],
