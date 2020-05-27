@@ -64,10 +64,10 @@ export interface Package {
 
       /**
        * Indicates if Frontity is in server-side rendering or client-side
-       * rendering. The difference between this and `state.frontity.platform`
+       * rendering context. The difference between this and `state.frontity.platform`
        * is that `state.frontity.rendering` is still `"ssr"` in the first frame
        * of the client. That is useful when working with components that are
-       * different on server-side rendering and client-side rendering, because
+       * different when server-side rendering and client-side rendering, because
        * it won't cause a mismatch warning in the React hydration.
        *
        * Populated automatically by Frontity.
