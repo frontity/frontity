@@ -7,7 +7,7 @@ import { IntersectionOptions } from "react-intersection-observer";
 
 type UseInfiniteScroll = (options: {
   currentLink: string;
-  nextLink: string;
+  nextLink?: string;
   fetchInViewOptions?: IntersectionOptions;
   routeInViewOptions?: IntersectionOptions;
 }) =>

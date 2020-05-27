@@ -37,6 +37,7 @@ const mockedUseConnect = useConnect as jest.MockedFunction<typeof useConnect>;
 const sourceGet = jest.fn();
 const sourceFetch = jest.fn();
 const routerSet = jest.fn();
+const routerUpdateState = jest.fn();
 
 beforeEach(() => {
   container = document.createElement("div");
@@ -52,6 +53,7 @@ afterEach(() => {
   sourceGet.mockReset();
   sourceFetch.mockReset();
   routerSet.mockReset();
+  routerUpdateState.mockReset();
 });
 
 describe("useInfiniteScroll", () => {
@@ -170,7 +172,7 @@ describe("useInfiniteScroll", () => {
     expect(sourceFetch).toHaveBeenCalledWith("/");
   });
 
-  test("should not fetch if nextLink is undefined", () => {
+  test("should not fetch if `nextLink` is undefined", () => {
     mockedUseInView
       .mockReturnValueOnce({
         ref: () => {},
@@ -202,7 +204,7 @@ describe("useInfiniteScroll", () => {
     expect(sourceFetch).not.toHaveBeenCalled();
   });
 
-  test("should fetch `nextLink` content and update browser state if first reference is in view", () => {
+  test("should fetch `nextLink` and update browser state if first reference is in view", () => {
     mockedUseInView
       .mockReturnValueOnce({
         ref: () => {},
@@ -220,7 +222,10 @@ describe("useInfiniteScroll", () => {
         source: { get: sourceGet },
         router: { state: { someOtherPackage: {} } },
       },
-      actions: { source: { fetch: sourceFetch }, router: { set: routerSet } },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
     } as any);
 
     sourceGet
@@ -241,12 +246,9 @@ describe("useInfiniteScroll", () => {
     expect(sourceGet).toHaveBeenNthCalledWith(1, "/");
     expect(sourceGet).toHaveBeenNthCalledWith(2, "/page/2/");
     expect(sourceFetch).toHaveBeenCalledWith("/page/2/");
-    expect(routerSet).toHaveBeenCalledWith("/", {
-      method: "replace",
-      state: {
-        someOtherPackage: {},
-        infiniteScroll: { links: ["/", "/page/2/"] },
-      },
+    expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
+      infiniteScroll: { links: ["/", "/page/2/"] },
     });
   });
 
@@ -272,7 +274,10 @@ describe("useInfiniteScroll", () => {
           },
         },
       },
-      actions: { source: { fetch: sourceFetch }, router: { set: routerSet } },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
     } as any);
 
     sourceGet
@@ -290,7 +295,7 @@ describe("useInfiniteScroll", () => {
     });
 
     expect(sourceFetch).not.toHaveBeenCalled();
-    expect(routerSet).not.toHaveBeenCalled();
+    expect(routerUpdateState).not.toHaveBeenCalled();
   });
 
   test("should not fetch `nextLink` if it's already fetching", () => {
@@ -316,7 +321,10 @@ describe("useInfiniteScroll", () => {
           },
         },
       },
-      actions: { source: { fetch: sourceFetch }, router: { set: routerSet } },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
     } as any);
 
     sourceGet
@@ -334,12 +342,9 @@ describe("useInfiniteScroll", () => {
     });
 
     expect(sourceFetch).not.toHaveBeenCalled();
-    expect(routerSet).toHaveBeenCalledWith("/", {
-      method: "replace",
-      state: {
-        someOtherPackage: {},
-        infiniteScroll: { links: ["/", "/page/2/"] },
-      },
+    expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
+      infiniteScroll: { links: ["/", "/page/2/"] },
     });
   });
 
@@ -363,7 +368,10 @@ describe("useInfiniteScroll", () => {
           state: { someOtherPackage: {}, infiniteScroll: { links: ["/"] } },
         },
       },
-      actions: { source: { fetch: sourceFetch }, router: { set: routerSet } },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
     } as any);
 
     sourceGet
@@ -381,12 +389,9 @@ describe("useInfiniteScroll", () => {
     });
 
     expect(sourceFetch).not.toHaveBeenCalled();
-    expect(routerSet).toHaveBeenCalledWith("/", {
-      method: "replace",
-      state: {
-        someOtherPackage: {},
-        infiniteScroll: { links: ["/", "/page/2/"] },
-      },
+    expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
+      infiniteScroll: { links: ["/", "/page/2/"] },
     });
   });
 
