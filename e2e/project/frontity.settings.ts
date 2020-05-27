@@ -95,7 +95,7 @@ const settings: Settings = [
         name: "@frontity/comscore-analytics",
         state: {
           comscoreAnalytics: {
-            trackingIds: ["123456"],
+            trackingIds: ["111111", "222222"],
           },
         },
       },
