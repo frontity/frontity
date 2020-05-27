@@ -111,8 +111,6 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
 
     if (links.includes(last.next)) return;
 
-    console.info("fetching", last.next);
-
     links.push(last.next);
 
     actions.router.updateState({

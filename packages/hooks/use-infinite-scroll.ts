@@ -65,8 +65,6 @@ const useInfiniteScroll: UseInfiniteScroll = ({
 
       if (links.includes(nextLink)) return;
 
-      console.info("fetching", nextLink);
-
       if (!next.isReady && !next.isFetching) {
         actions.source.fetch(nextLink);
       }
@@ -88,7 +86,6 @@ const useInfiniteScroll: UseInfiniteScroll = ({
   // to avoid rerendering.
   useEffect(() => {
     if (route.inView && state.router.link !== currentLink) {
-      console.info("routing to", currentLink);
       actions.router.set(currentLink, {
         method: "replace",
         state: state.router.state,
