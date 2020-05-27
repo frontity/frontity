@@ -4,7 +4,7 @@ import { Fill as StateFill, Package } from "../../../types";
 
 /**
  * The fill items returned by the useFills hooks. They contain the same
- * information than {@link StateFill} plus the final React comonent and a key
+ * information as {@link StateFill} plus the final React component and a key
  * to iterate over the array.
  */
 interface Fill extends StateFill {
