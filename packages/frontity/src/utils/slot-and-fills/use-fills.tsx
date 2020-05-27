@@ -49,7 +49,9 @@ const useFills = (name: string): Fill[] => {
         ([key, fill]): Fill => ({
           key,
           priority: fill.priority || 10,
-          Fill: get(libraries.fills, fill.library),
+          ...(fill.library && {
+            Fill: get(libraries.fills, fill.library),
+          }),
           ...fill,
         })
       )
