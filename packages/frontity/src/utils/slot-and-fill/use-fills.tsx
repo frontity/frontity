@@ -36,7 +36,7 @@ const useFills = (name: string): Fill[] => {
 
   return (
     // Flat all the fills and turn them into entries.
-    Object.values(state.fills)
+    Object.values(state.fills || {})
       .reduce<[string, StateFill][]>(
         (fills, fill) => [...fills, ...Object.entries(fill)],
         []
