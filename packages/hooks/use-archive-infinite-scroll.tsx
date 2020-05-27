@@ -23,43 +23,50 @@ type UseArchiveInfiniteScroll = (options?: {
 };
 
 export const Wrapper: Wrapper = (link) =>
-  connect(({ state, children }) => {
-    // Values from browser state.
-    const links: string[] = state.router.state.infiniteScroll?.links || [link];
-    const limit: number = state.router.state.infiniteScroll?.limit;
+  connect(
+    ({ children }) => {
+      const { state } = useConnect<Source & Router>();
 
-    // Shorcuts to needed state.
-    const current = state.source.get(link);
-    const next = current.next ? state.source.get(current.next) : null;
+      // Values from browser state.
+      const links: string[] = state.router.state.infiniteScroll?.links || [
+        link,
+      ];
+      const limit: number = state.router.state.infiniteScroll?.limit;
 
-    // Infinite scroll booleans.
-    const hasReachedLimit = !!limit && links.length >= limit;
+      // Shorcuts to needed state.
+      const current = state.source.get(link);
+      const next = current.next ? state.source.get(current.next) : null;
 
-    const { supported, fetchRef, routeRef } = useInfiniteScroll({
-      currentLink: link,
-      nextLink: next?.link,
-    });
+      // Infinite scroll booleans.
+      const hasReachedLimit = !!limit && links.length >= limit;
 
-    if (!current.isReady) return null;
-    if (!supported) return children;
+      const { supported, fetchRef, routeRef } = useInfiniteScroll({
+        currentLink: link,
+        nextLink: next?.link,
+      });
 
-    const container = css`
-      position: relative;
-    `;
+      if (!current.isReady) return null;
+      if (!supported) return children;
 
-    const fetcher = css`
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-    `;
+      const container = css`
+        position: relative;
+      `;
 
-    return (
-      <div css={container} ref={routeRef}>
-        {children}
-        {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
-      </div>
-    );
-  });
+      const fetcher = css`
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+      `;
+
+      return (
+        <div css={container} ref={routeRef}>
+          {children}
+          {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
+        </div>
+      );
+    },
+    { injectProps: false }
+  );
 
 const MemoizedWrapper = memoize((key) => key, Wrapper);
 

@@ -14,6 +14,10 @@ export interface ConnectFunction {
   <Comp extends FunctionComponent<any>>(comp: Comp): FunctionComponent<
     FilterInjectedProps<ComponentProps<Comp>>
   >;
+  <Comp extends FunctionComponent<any>>(
+    comp: Comp,
+    options: { injectProps: boolean }
+  ): FunctionComponent<FilterInjectedProps<ComponentProps<Comp>>>;
   <Comp extends ComponentClass<any>>(comp: Comp): ComponentClass<
     FilterInjectedProps<ComponentProps<Comp>>
   >;

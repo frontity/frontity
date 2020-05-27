@@ -13,6 +13,7 @@ jest.mock("../use-infinite-scroll", () => ({
 jest.mock("frontity", () => ({
   useConnect: jest.fn(),
   connect: jest.fn((fn) => fn),
+  css: jest.fn(),
 }));
 
 const App = ({ options }: { options?: any }) => {
@@ -45,6 +46,7 @@ const routerUpdateState = jest.fn();
 
 beforeEach(() => {
   container = document.createElement("div");
+  container.id = "container";
   document.body.appendChild(container);
 });
 
@@ -754,5 +756,184 @@ describe("useArchiveInfiniteScroll", () => {
 });
 
 describe("Wrapper", () => {
-  test.todo("should return children if IntersectionObserver is not supported");
+  test("should return children if IntersectionObserver is not supported", () => {
+    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: {
+          get: sourceGet,
+        },
+        router: { state: {} },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockReturnValueOnce({
+      isReady: true,
+    });
+
+    mockedUseInfiniteScroll.mockReturnValue({ supported: false });
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should return null if the current element is not ready", () => {
+    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: {
+          get: sourceGet,
+        },
+        router: { state: {} },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockReturnValueOnce({
+      isReady: false,
+    });
+
+    mockedUseInfiniteScroll.mockReturnValue({ supported: false });
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should return children inside a wrapper", () => {
+    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: {
+          get: sourceGet,
+        },
+        router: { state: { infiniteScroll: { limit: 1 } } },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockReturnValueOnce({
+      isReady: true,
+    });
+
+    mockedUseInfiniteScroll.mockReturnValue({
+      supported: true,
+      fetchRef: () => {},
+      routeRef: () => {},
+    } as any);
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should return children and fetcher inside a wrapper", () => {
+    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: {
+          get: sourceGet,
+        },
+        router: { state: {} },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockReturnValueOnce({
+      isReady: true,
+    });
+
+    mockedUseInfiniteScroll.mockReturnValue({
+      supported: true,
+      fetchRef: () => {},
+      routeRef: () => {},
+    } as any);
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should call `useInfiniteScroll` with `currentLink` and `nextLink`", () => {
+    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: {
+          get: sourceGet,
+        },
+        router: { state: {} },
+      },
+      actions: {},
+    });
+
+    sourceGet
+      .mockReturnValueOnce({
+        next: "/page/2/",
+        isReady: true,
+      })
+      .mockReturnValueOnce({
+        link: "/page/2/",
+        isReady: false,
+      });
+
+    mockedUseInfiniteScroll.mockReturnValue({
+      supported: true,
+      fetchRef: () => {},
+      routeRef: () => {},
+    } as any);
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledWith({
+      currentLink: "/",
+      nextLink: "/page/2/",
+    });
+  });
 });
