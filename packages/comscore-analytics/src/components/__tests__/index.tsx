@@ -12,7 +12,9 @@ import ComscoreAnalyticsPkg from "../../../types";
 
 const getState = (): State<ComscoreAnalyticsPkg> => ({
   analytics: { namespaces: ["comscoreAnalytics"] },
-  comscoreAnalytics: {},
+  comscoreAnalytics: {
+    trackingIds: [],
+  },
 });
 
 describe("Comscore Analytics", () => {

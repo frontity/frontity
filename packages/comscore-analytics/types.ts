@@ -4,7 +4,7 @@ import Analytics, { Pageview } from "@frontity/analytics/types";
 
 declare global {
   interface Window {
-    comscore: {
+    COMSCORE: {
       beacon: Function;
     };
     _comscore: Array<{
@@ -20,7 +20,7 @@ interface ComscoreAnalytics extends Analytics {
   };
   state: Analytics["state"] & {
     comscoreAnalytics: {
-      trackingIds?: string[];
+      trackingIds: string[];
     };
   };
   actions: Analytics["actions"] & {

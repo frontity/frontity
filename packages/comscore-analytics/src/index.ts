@@ -15,9 +15,9 @@ const comscoreAnalytics: ComscoreAnalytics = {
         const hasTrackingIds = trackingIds.length > 0;
 
         if (hasTrackingIds) {
-          if (window.comscore) {
+          if (window.COMSCORE) {
             trackingIds.forEach((id) =>
-              window.comscore.beacon({ c1: "2", c2: id })
+              window.COMSCORE.beacon({ c1: "2", c2: id })
             );
           } else {
             window._comscore = window._comscore || [];
@@ -34,7 +34,9 @@ const comscoreAnalytics: ComscoreAnalytics = {
       ...analytics.state.analytics,
       namespaces: ["comscoreAnalytics"],
     },
-    comscoreAnalytics: {},
+    comscoreAnalytics: {
+      trackingIds: [],
+    },
   },
 };
 
