@@ -1,3 +1,4 @@
+import { warn } from "frontity";
 import analytics from "@frontity/analytics";
 import ComscoreAnalytics from "../types";
 import Root from "./components";
@@ -11,21 +12,20 @@ const comscoreAnalytics: ComscoreAnalytics = {
     ...analytics.actions,
     comscoreAnalytics: {
       sendPageview: ({ state }) => () => {
-        const trackingIds = state.comscoreAnalytics.trackingIds;
-        const hasTrackingIds = trackingIds.length > 0;
+        const { trackingIds } = state.comscoreAnalytics;
 
-        if (hasTrackingIds) {
-          if (window.COMSCORE) {
-            trackingIds.forEach((id) =>
-              window.COMSCORE.beacon({ c1: "2", c2: id })
-            );
-          } else {
+        if (trackingIds.length === 0)
+          warn(
+            "Trying to send pageviews to Comscore but `state.comscoreAnalytics.trackingIds` is empty."
+          );
+
+        trackingIds.forEach((id) => {
+          if (window.COMSCORE) window.COMSCORE.beacon({ c1: "2", c2: id });
+          else {
             window._comscore = window._comscore || [];
-            trackingIds.forEach((id) =>
-              window._comscore.push({ c1: "2", c2: id })
-            );
+            window._comscore.push({ c1: "2", c2: id });
           }
-        }
+        });
       },
     },
   },
