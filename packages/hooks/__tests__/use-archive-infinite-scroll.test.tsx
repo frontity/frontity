@@ -174,49 +174,7 @@ describe("useArchiveInfiniteScroll", () => {
     });
   });
 
-  test("should return the right object (without existing state)", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    });
-
-    sourceGet.mockReturnValueOnce({
-      link: "/",
-      isReady: true,
-      isFetching: false,
-    });
-
-    act(() => {
-      render(<App />, container);
-    });
-
-    expect(spiedUseArchiveInfiniteScroll).toHaveBeenCalledTimes(1);
-    expect(spiedUseArchiveInfiniteScroll).toHaveReturnedWith({
-      pages: [
-        {
-          key: "/",
-          link: "/",
-          isLast: true,
-          Wrapper: expect.any(Function),
-        },
-      ],
-      isLimit: false,
-      isFetching: false,
-      fetchNext: expect.any(Function),
-    });
-  });
-
-  test("should return the right object (with existing state)", () => {
+  test("should return the right object", () => {
     mockedUseConnect.mockReturnValue({
       state: {
         router: {

@@ -169,16 +169,6 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
     last.isFetching || (pages.length > 1 && lastPage.isFetching);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
-  // Map every link to its DIY object.
-  const posts = links.map((link) => ({
-    key: link,
-    link: link,
-    isLast:
-      (link === last.link && last.isReady) ||
-      (link === links[links.length - 2] && !last.isReady),
-    Wrapper: MemoizedWrapper(link),
-  }));
-
   // Request archive if not present.
   useEffect(() => {
     if (!options.active) return;
@@ -192,14 +182,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
 
   // Request next page on last item.
   useEffect(() => {
-    if (
-      !options.active ||
-      !nextPage ||
-      hasReachedLimit ||
-      !isLastItem ||
-      pages.includes(nextPage.link)
-    )
-      return;
+    if (!options.active || !nextPage || hasReachedLimit || !isLastItem) return;
 
     pages.push(nextPage.link);
 
@@ -226,47 +209,38 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
 
     // We need `nextItem` and `nextPage` to be declared in local scope.
     let nextItem = items[lastIndex + 1];
-    let nextPage = state.source.get(lastPage.next);
-
-    console.log("lastPage.next:", lastPage.next);
-    console.log("nextPage:", nextPage);
+    let nextPage = lastPage.next ? state.source.get(lastPage.next) : null;
 
     if (!nextItem) {
-      if (!pages.includes(nextPage.link)) {
-        console.info("fetching page", nextPage.link);
+      if (!nextPage) return;
 
-        pages.push(nextPage.link);
+      console.info("fetching page", nextPage.link);
 
-        if (!nextPage?.isReady && !nextPage?.isFetching) {
-          await actions.source.fetch(nextPage.link);
-          nextPage = state.source.get(nextPage.link);
-        }
+      pages.push(nextPage.link);
 
-        const items = pages.reduce((final, current, index) => {
-          const data = state.source.get(current);
-          if (data.isArchive && data.isReady) {
-            const items =
-              index !== 0
-                ? data.items.filter(({ link }) => link !== firstLink)
-                : data.items;
-            final = final.concat(items);
-          }
-          return final;
-        }, []);
-
-        nextItem = items[lastIndex + 1];
+      if (!nextPage.isReady && !nextPage.isFetching) {
+        await actions.source.fetch(nextPage.link);
+        nextPage = state.source.get(nextPage.link);
       }
+
+      const items = pages.reduce((final, current, index) => {
+        const data = state.source.get(current);
+        if (data.isArchive && data.isReady) {
+          const items =
+            index !== 0
+              ? data.items.filter(({ link }) => link !== firstLink)
+              : data.items;
+          final = final.concat(items);
+        }
+        return final;
+      }, []);
+
+      nextItem = items[lastIndex + 1];
     }
 
     if (links.includes(nextItem.link)) return;
 
     console.info("fetching", nextItem.link);
-
-    const next = state.source.get(nextItem.link);
-
-    if (!next.isReady && !next.isFetching) {
-      actions.source.fetch(nextItem.link);
-    }
 
     links.push(nextItem.link);
 
@@ -278,7 +252,23 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
         pages,
       },
     });
+
+    const next = state.source.get(nextItem.link);
+
+    if (!next.isReady && !next.isFetching) {
+      await actions.source.fetch(nextItem.link);
+    }
   };
+
+  // Map every link to its DIY object.
+  const posts = links.map((link) => ({
+    key: link,
+    link: link,
+    isLast:
+      (link === last.link && last.isReady) ||
+      (link === links[links.length - 2] && !last.isReady),
+    Wrapper: MemoizedWrapper(link),
+  }));
 
   return {
     posts,

@@ -80,15 +80,6 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
   const limit: number =
     state.router.state.infiniteScroll?.limit || options.limit;
 
-  // Aliases to needed state.
-  const last = state.source.get(links[links.length - 1]);
-
-  // Infinite scroll booleans.
-  const hasReachedLimit = !!limit && links.length >= limit;
-  const thereIsNext = !!last.next;
-  const isFetching = last.isFetching;
-  const isLimit = hasReachedLimit && thereIsNext && !isFetching;
-
   // Initialize/update browser state.
   useEffect(() => {
     actions.router.updateState({
@@ -100,6 +91,15 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
       },
     });
   }, []);
+
+  // Aliases to needed state.
+  const last = state.source.get(links[links.length - 1]);
+
+  // Infinite scroll booleans.
+  const hasReachedLimit = !!limit && links.length >= limit;
+  const thereIsNext = !!last.next;
+  const isFetching = last.isFetching;
+  const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   // Requests the next page disregarding the limit.
   const fetchNext = async () => {
