@@ -29,5 +29,6 @@ jobs:
 
       - name: Run-docker
         run: docker-compose up -d
+
       - name: Test
         run: node e2e/scripts/index.js

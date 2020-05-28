@@ -2,7 +2,7 @@ version: "3"
 
 services:
   wp:
-    image: wordpress:${WORDPRESS_VERSION}
+    image: wordpress:5.0
     ports:
       - 8080:80
     volumes:
