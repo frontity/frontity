@@ -1,4 +1,4 @@
-const { spawn, exec } = require("child-process-promise");
+const { spawn } = require("child-process-promise");
 
 (async () => {
   try {
@@ -11,12 +11,13 @@ const { spawn, exec } = require("child-process-promise");
       stdio: "inherit",
     });
 
-    const { stdout } = await exec("curl localhost:8080");
-    console.log(stdout);
-
-    // await spawn("docker-compose", ["run", "wp", "core", "install"], {
-    //   stdio: "inherit",
-    // });
+    await spawn(
+      "docker-compose",
+      ["run", "--user", "33:33", "wp", "core", "install"],
+      {
+        stdio: "inherit",
+      }
+    );
 
     // Change permissions to the wp-content folder because volumes have root
     // permissions by default.
@@ -38,6 +39,8 @@ const { spawn, exec } = require("child-process-promise");
       [
         "run",
         "--rm",
+        "--user",
+        "33:33",
         "wpcli",
         "plugin",
         "install",
