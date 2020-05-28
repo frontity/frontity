@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
 import * as useInView from "../use-in-view";
 
-let container;
+let container: HTMLDivElement;
 
 beforeEach(() => {
   container = document.createElement("div");
