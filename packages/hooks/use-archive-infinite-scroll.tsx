@@ -74,9 +74,9 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
   const { state, actions } = useConnect<Source & Router>();
 
   // Values from/for browser state.
-  const links: string[] = state.router.state.infiniteScroll?.links || [
-    state.router.link,
-  ];
+  const links: string[] = state.router.state.infiniteScroll?.links
+    ? [...state.router.state.infiniteScroll?.links]
+    : [state.router.link];
   const limit: number =
     state.router.state.infiniteScroll?.limit || options.limit;
 
@@ -103,13 +103,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
 
   // Requests the next page disregarding the limit.
   const fetchNext = async () => {
-    if (!thereIsNext) return;
-
-    const links = state.router.state.infiniteScroll?.links
-      ? [...state.router.state.infiniteScroll.links]
-      : [state.router.link];
-
-    if (links.includes(last.next)) return;
+    if (!thereIsNext || links.includes(last.next)) return;
 
     links.push(last.next);
 

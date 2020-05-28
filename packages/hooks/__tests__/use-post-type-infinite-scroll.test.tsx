@@ -406,6 +406,528 @@ describe("usePostTypeInfiniteScroll", () => {
       },
     });
   });
+
+  test("should not update the browser state if `options.active` is false", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {},
+        },
+      },
+      actions: {
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isFetching: false,
+    }));
+
+    act(() => {
+      render(<App options={{ active: false }} />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).not.toHaveBeenCalled();
+  });
+
+  test("should request the archive if not ready and not fetching", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {},
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: link !== "/",
+      isFetching: false,
+      isArchive: true,
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/");
+  });
+
+  test("should not request the archive if `options.active` is false", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {},
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: link !== "/",
+      isFetching: false,
+    }));
+
+    act(() => {
+      render(<App options={{ active: false }} />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not request the archive if it's ready", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {},
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isFetching: false,
+      isArchive: true,
+      items: [],
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not request the archive if it's fetching", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {},
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: false,
+      isFetching: true,
+      isArchive: true,
+      items: [],
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not request the archive if it's not archive", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {},
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: false,
+      isFetching: false,
+      isArchive: false,
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should request next page on last item", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              archive: "/initial-archive/",
+              pages: ["/initial-archive/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next:
+        link === "/initial-archive/" ? "/initial-archive/page/2/" : undefined,
+      isReady: link !== "/initial-archive/page/2/",
+      isFetching: false,
+      isArchive: link.includes("archive"),
+      items: link.includes("archive") ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledTimes(2);
+    expect(routerUpdateState).toHaveBeenNthCalledWith(2, {
+      infiniteScroll: {
+        archive: "/initial-archive/",
+        pages: ["/initial-archive/", "/initial-archive/page/2/"],
+        links: ["/post-one/"],
+      },
+    });
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/initial-archive/page/2/");
+  });
+
+  test("should not request next page on last item if `options.active` is false", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              archive: "/initial-archive/",
+              pages: ["/initial-archive/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next:
+        link === "/initial-archive/" ? "/initial-archive/page/2/" : undefined,
+      isReady: link !== "/initial-archive/page/2/",
+      isFetching: false,
+      isArchive: link.includes("archive"),
+      items: link.includes("archive") ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    act(() => {
+      render(<App options={{ active: false }} />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not request next page on last item if there isn't next page", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              archive: "/initial-archive/",
+              pages: ["/initial-archive/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: link !== "/initial-archive/page/2/",
+      isFetching: false,
+      isArchive: link.includes("archive"),
+      items: link.includes("archive") ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not request next page on last item if has reached limit", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              archive: "/initial-archive/",
+              pages: ["/initial-archive/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next:
+        link === "/initial-archive/" ? "/initial-archive/page/2/" : undefined,
+      isReady: link !== "/initial-archive/page/2/",
+      isFetching: false,
+      isArchive: link.includes("archive"),
+      items: link.includes("archive") ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    act(() => {
+      render(<App options={{ limit: 1 }} />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not request next page if it's not on last item", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              archive: "/initial-archive/",
+              pages: ["/initial-archive/"],
+              links: ["/post-one/", "/post-two/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next:
+        link === "/initial-archive/" ? "/initial-archive/page/2/" : undefined,
+      isReady: link !== "/initial-archive/page/2/",
+      isFetching: false,
+      isArchive: link.includes("archive"),
+      items: link.includes("archive")
+        ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+        : undefined,
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not request next page if it's already included in pages", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              archive: "/initial-archive/",
+              pages: ["/initial-archive/", "/initial-archive/page/2/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next:
+        link === "/initial-archive/" ? "/initial-archive/page/2/" : undefined,
+      isReady: link !== "/initial-archive/page/2/",
+      isFetching: false,
+      isArchive: link.includes("archive"),
+      items: link.includes("archive") ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not fetch next page if ready", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              archive: "/initial-archive/",
+              pages: ["/initial-archive/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next:
+        link === "/initial-archive/" ? "/initial-archive/page/2/" : undefined,
+      isReady: true,
+      isFetching: false,
+      isArchive: link.includes("archive"),
+      items: link.includes("archive") ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledTimes(2);
+    expect(routerUpdateState).toHaveBeenNthCalledWith(2, {
+      infiniteScroll: {
+        archive: "/initial-archive/",
+        pages: ["/initial-archive/", "/initial-archive/page/2/"],
+        links: ["/post-one/"],
+      },
+    });
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("should not fetch next page if fetching", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              archive: "/initial-archive/",
+              pages: ["/initial-archive/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next:
+        link === "/initial-archive/" ? "/initial-archive/page/2/" : undefined,
+      isReady: link !== "/initial-archive/page/2/",
+      isFetching: link === "/initial-archive/page/2/",
+      isArchive: link.includes("archive"),
+      items: link.includes("archive") ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledTimes(2);
+    expect(routerUpdateState).toHaveBeenNthCalledWith(2, {
+      infiniteScroll: {
+        archive: "/initial-archive/",
+        pages: ["/initial-archive/", "/initial-archive/page/2/"],
+        links: ["/post-one/"],
+      },
+    });
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
 });
 
 describe("Wrapper", () => {

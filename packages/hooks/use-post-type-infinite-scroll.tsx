@@ -162,6 +162,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
   const lastIndex = items.findIndex(({ link }) => link === last.link);
 
   // Infinite scroll booleans.
+  const isLastItem = items[items.length - 1]?.link === state.router.link;
   const hasReachedLimit = !!limit && links.length >= limit;
   const thereIsNext = lastIndex < items.length - 1 || !!lastPage.next;
   const isFetching =
@@ -183,37 +184,35 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
     if (!options.active) return;
 
     const data = archive ? state.source.get(archive) : null;
-    if (data && !data.isReady && !data.isFetching) {
-      console.info("fetching archive", data.link);
+
+    if (data?.isArchive && !data.isReady && !data.isFetching) {
       actions.source.fetch(data.link);
     }
   }, [options.active]);
 
   // Request next page on last item.
   useEffect(() => {
-    if (!options.active) return;
-
     if (
-      nextPage &&
-      !hasReachedLimit &&
-      items[items.length - 1]?.link === state.router.link
-    ) {
-      console.info("fetching page", nextPage.link);
+      !options.active ||
+      !nextPage ||
+      hasReachedLimit ||
+      !isLastItem ||
+      pages.includes(nextPage.link)
+    )
+      return;
 
-      if (!nextPage?.isReady && !nextPage?.isFetching)
-        actions.source.fetch(nextPage.link);
+    pages.push(nextPage.link);
 
-      if (pages.includes(nextPage.link)) return;
+    actions.router.updateState({
+      ...state.router.state,
+      infiniteScroll: {
+        ...state.router.state.infiniteScroll,
+        pages,
+      },
+    });
 
-      pages.push(nextPage.link);
-
-      actions.router.updateState({
-        ...state.router.state,
-        infiniteScroll: {
-          ...state.router.state.infiniteScroll,
-          pages,
-        },
-      });
+    if (!nextPage.isReady && !nextPage.isFetching) {
+      actions.source.fetch(nextPage.link);
     }
   }, [options.active, state.router.link, items.length, hasReachedLimit]);
 
