@@ -20,13 +20,17 @@ const { spawn, exec } = require("child-process-promise");
 
     // Change permissions to the wp-content folder because volumes have root
     // permissions by default.
-    await spawn("docker-compose", [
-      "run",
-      "wp",
-      "/bin/bash",
-      "-c",
-      "chown -R www-data:www-data /var/www/html/wp-content/",
-    ]);
+    await spawn(
+      "docker-compose",
+      [
+        "run",
+        "wp",
+        "/bin/bash",
+        "-c",
+        "chown -R www-data:www-data /var/www/html/wp-content/",
+      ],
+      { stdio: "inherit" }
+    );
 
     // Install plugins.
     await spawn(
