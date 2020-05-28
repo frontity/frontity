@@ -1,0 +1,10 @@
+# Robots.txt - This is an example file.
+
+# This file allows all crawlers to access the entire site, which is the default behavior in the absence of this file!
+
+# It is safe to leave this file as is.
+
+# Make sure that you know what you are doing before editing this file as it might prevent google from indexing your content. To find out more about robots.txt: https://support.google.com/webmasters/answer/6062608
+
+User-agent: *
+Allow: /
