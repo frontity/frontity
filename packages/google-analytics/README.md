@@ -1,11 +1,6 @@
 # `@frontity/google-analytics`
-[![Version](https://img.shields.io/npm/v/@frontity/google-analytics.svg)](https://www.npmjs.com/package/@frontity/google-analytics)
 
-[![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://docs.frontity.org/)
-
-[![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-orange)](https://github.com/frontity/frontity/blob/master/LICENSE)
-
-[![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity)
+[![Version](https://img.shields.io/npm/v/@frontity/google-analytics.svg)](https://www.npmjs.com/package/@frontity/google-analytics) [![npm](https://img.shields.io/npm/dw/@frontity/google-analytics)](https://www.npmjs.com/package/@frontity/google-analytics) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
 Analytics package to use Google Analytics with Frontity
 
@@ -16,10 +11,12 @@ Analytics package to use Google Analytics with Frontity
 npm i @frontity/google-analytics
 ```
 
-## Usage 
+## Usage
+
+Once is installed the GA Tracking ID should be added in the `frontity.settings.js` under the `state` scope
 
 **`frontity.settings.js`**
-```
+```js
 export default {
   packages: [
     {
@@ -36,25 +33,18 @@ export default {
 
 ## Feature Discussions
 
-All the [Feature Discussions](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can participate in the discussions and vote the ones you're interested in or create a new one.
+[*Feature Discussions*](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-In that board you can find [some *Feature Discussions* related to this package](https://community.frontity.org/tag/google-analytics) 
-
-## Contributing
-
-Frontity is a community project. We invite your participation through issues and pull requests! Check [here how to contribute](https://docs.frontity.org/contributing/how-to-contribute)
-
-This project has quite a backlog of suggestions! If you're new to the project, maybe you'd like to open a pull request to address one of them:
-
-[![GitHub issues by-label](https://img.shields.io/github/issues/frontity/frontity/good%20first%20issue)](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/google-analytics
 
 
 ## 📝 License
-
 This project is [Apache--2.0](https://github.com/frontity/frontity/blob/master/LICENSE) licensed.
 
 ***
 ### » Frontity Channels 🌎
+
+[![Community Forum Topics](https://img.shields.io/discourse/topics?color=blue&label=community%20forum&server=https%3A%2F%2Fcommunity.frontity.org%2F)](https://community.frontity.org/) [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity) ![Frontity Github Stars](https://img.shields.io/github/stars/frontity/frontity?style=social)
 
 We have different channels at your disposal where you can find information about the project, discuss about it and get involved:
 
@@ -66,6 +56,10 @@ We have different channels at your disposal where you can find information about
 
 ### » Get involved 🤗
 
+[![GitHub issues by-label](https://img.shields.io/github/issues/frontity/frontity/good%20first%20issue)](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+
 Got questions or feedback about Frontity? We'd love to hear from you. Use our [community forum](https://community.frontity.org) yo ! ❤️
 
 Frontity also welcomes contributions. There are many ways to support the project! If you don't know where to start, this guide might help: [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute)
+
+If you're eager to start contributing to the code, maybe you'd like to open a pull request to address one of our [*good first issues*](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
