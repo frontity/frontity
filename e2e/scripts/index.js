@@ -1,4 +1,4 @@
-import { spawn } from "child-process-promise";
+const spawn = require("child-process-promise");
 
 (async () => {
   try {
