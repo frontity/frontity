@@ -1,4 +1,4 @@
-const { spawn } = require("child-process-promise");
+const { spawn, exec } = require("child-process-promise");
 
 (async () => {
   try {
@@ -17,11 +17,11 @@ const { spawn } = require("child-process-promise");
       "chown -R www-data:www-data /var/www/html/wp-content/",
     ]);
 
+    await spawn("docker-compose", ["run", "wp", "core", "install"]);
+
     // Install plugins.
     await spawn("docker-compose", [
       "run",
-      "--user",
-      "33:33",
       "--rm",
       "wpcli",
       "plugin",
@@ -29,6 +29,9 @@ const { spawn } = require("child-process-promise");
       "wordpress-seo --version=12.6",
       "all-in-one-seo-pack",
     ]);
+
+    const { stdout } = await exec("curl localhost:8080");
+    console.log(stdout);
   } catch (err) {
     console.error(err);
 

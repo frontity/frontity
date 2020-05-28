@@ -33,7 +33,7 @@ jobs:
       - name: Run e2e tests
         uses: cypress-io/github-action@v1.21.0
         with:
-          start: npm run e2e:prod:${{ matrix.ci_node_index }}
+          start: cd e2e/project/ && npx frontity build --target module && npx frontity serve --port 3001
           wait-on: "http://localhost:3001"
           wait-on-timeout: 180
           env: HEADLESS=true
