@@ -41,7 +41,7 @@ const { spawn } = require("child-process-promise");
         "--rm",
         "--user",
         "33:33",
-        "wpcli",
+        "wp",
         "plugin",
         "install",
         "wordpress-seo --version=12.6",
