@@ -92,15 +92,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
   const { state, actions } = useConnect<Source & Router>();
 
   // Values for browser state.
-  const links: string[] = state.router.state.infiniteScroll?.links || [
-    state.router.link,
-  ];
   const archive: string = (() => {
-    // If `active` is false, don't set an archive.
-    if (!options.active) {
-      return;
-    }
-
     // If `archive` is set in options, use it.
     if (options.archive) {
       return options.archive;
@@ -111,11 +103,6 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
       return state.router.state.infiniteScroll.archive;
     }
 
-    // If `fallback` is set in options, use it.
-    if (options.fallback) {
-      return options.fallback;
-    }
-
     // If `state.router.previous` is an archive, use it.
     const previous = state.router.previous
       ? state.source.get(state.router.previous)
@@ -124,37 +111,49 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
       return previous.link;
     }
 
+    // If `fallback` is set in options, use it.
+    if (options.fallback) {
+      return options.fallback;
+    }
+
     // Return home as default.
     return "/";
   })();
-  const pages: string[] = (() => {
-    // If pages already exist in the state, use them.
-    if (state.router.state.infiniteScroll?.pages) {
-      return [...state.router.state.infiniteScroll.pages];
-    }
-
-    // If archive is available, use it as first page.
-    if (archive) {
-      return [archive];
-    }
-
-    // Return empty for a "non infinite scroll" behaviour.
-    return [];
-  })();
+  const pages: string[] = state.router.state.infiniteScroll?.pages
+    ? [...state.router.state.infiniteScroll.pages]
+    : [archive];
+  const links: string[] = state.router.state.infiniteScroll?.links
+    ? [...state.router.state.infiniteScroll.links]
+    : [state.router.link];
   const limit = state.router.state.infiniteScroll?.limit || options.limit;
 
+  // Initialize/update browser state.
+  useEffect(() => {
+    if (!options.active) return;
+
+    actions.router.updateState({
+      ...state.router.state,
+      infiniteScroll: {
+        ...state.router.state.infiniteScroll,
+        archive,
+        pages,
+        links,
+        limit,
+      },
+    });
+  }, [options.active]);
+
   // Aliases to needed state.
-  const current = state.source.get(state.router.link);
-  const first = links[0];
+  const firstLink = links[0];
   const last = state.source.get(links[links.length - 1]);
   const lastPage = state.source.get(pages[pages.length - 1]);
-  const nextPage = lastPage.next && state.source.get(lastPage.next);
+  const nextPage = lastPage.next ? state.source.get(lastPage.next) : null;
   const items = pages.reduce((final, current, index) => {
     const data = state.source.get(current);
     if (data.isArchive && data.isReady) {
       const items =
         index !== 0
-          ? data.items.filter(({ link }) => link !== first)
+          ? data.items.filter(({ link }) => link !== firstLink)
           : data.items;
       final = final.concat(items);
     }
@@ -169,35 +168,35 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
     last.isFetching || (pages.length > 1 && lastPage.isFetching);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
-  // Initialize/update browser state.
-  useEffect(() => {
-    actions.router.updateState({
-      ...state.router.state,
-      infiniteScroll: {
-        links,
-        archive,
-        pages,
-        limit,
-        ...state.router.state.infiniteScroll,
-      },
-    });
-  }, []);
+  // Map every link to its DIY object.
+  const posts = links.map((link) => ({
+    key: link,
+    link: link,
+    isLast:
+      (link === last.link && last.isReady) ||
+      (link === links[links.length - 2] && !last.isReady),
+    Wrapper: MemoizedWrapper(link),
+  }));
 
   // Request archive if not present.
   useEffect(() => {
+    if (!options.active) return;
+
     const data = archive ? state.source.get(archive) : null;
     if (data && !data.isReady && !data.isFetching) {
       console.info("fetching archive", data.link);
       actions.source.fetch(data.link);
     }
-  }, []);
+  }, [options.active]);
 
   // Request next page on last item.
   useEffect(() => {
+    if (!options.active) return;
+
     if (
       nextPage &&
       !hasReachedLimit &&
-      items[items.length - 1]?.link === current.link
+      items[items.length - 1]?.link === state.router.link
     ) {
       console.info("fetching page", nextPage.link);
 
@@ -216,18 +215,22 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
         },
       });
     }
-  }, [current.link, items.length, hasReachedLimit]);
+  }, [options.active, state.router.link, items.length, hasReachedLimit]);
 
   // Fetches the next item disregarding the limit.
   const fetchNext = async () => {
-    if (!thereIsNext) return;
+    if (!options.active || !thereIsNext) return;
 
     const links = state.router.state.infiniteScroll?.links
       ? [...state.router.state.infiniteScroll.links]
-      : [current.link];
+      : [state.router.link];
 
+    // We need `nextItem` and `nextPage` to be declared in local scope.
     let nextItem = items[lastIndex + 1];
     let nextPage = state.source.get(lastPage.next);
+
+    console.log("lastPage.next:", lastPage.next);
+    console.log("nextPage:", nextPage);
 
     if (!nextItem) {
       if (!pages.includes(nextPage.link)) {
@@ -245,7 +248,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
           if (data.isArchive && data.isReady) {
             const items =
               index !== 0
-                ? data.items.filter(({ link }) => link !== first)
+                ? data.items.filter(({ link }) => link !== firstLink)
                 : data.items;
             final = final.concat(items);
           }
@@ -277,16 +280,6 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
       },
     });
   };
-
-  // Map every link to its DIY object.
-  const posts = links.map((link) => ({
-    key: link,
-    link: link,
-    isLast:
-      (link === last.link && last.isReady) ||
-      (link === links[links.length - 2] && !last.isReady),
-    Wrapper: MemoizedWrapper(link),
-  }));
 
   return {
     posts,
