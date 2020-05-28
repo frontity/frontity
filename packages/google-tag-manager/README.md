@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/npm/v/@frontity/google-tag-manager.svg)](https://www.npmjs.com/package/@frontity/google-tag-manager) [![npm](https://img.shields.io/npm/dw/@frontity/google-tag-manager)](https://www.npmjs.com/package/@frontity/google-tag-manager) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-  Analytics package to use Google Tag Manager with Frontity
+Analytics package to use Google Tag Manager with Frontity
 
 
 ## Install
@@ -13,7 +13,7 @@ npm i @frontity/google-tag-manager
 
 ## Usage
 
-Once is installed the GA Tracking ID should be added in the `frontity.settings.js` under the `state` scope
+Once is installed the Tracking ID should be added in the `frontity.settings.js` under the package `state`
 
 **`frontity.settings.js`**
 ```js
@@ -31,19 +31,19 @@ export default {
 };
 ```
 
+
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-  
-
 These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/google-tag-manager
 
+## Changelog
 
-## 📝 License
-This project is [Apache--2.0](https://github.com/frontity/frontity/blob/master/LICENSE) licensed.
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/google-tag-manager/CHANGELOG.md)
 
 ***
+
 ### » Frontity Channels 🌎
 
 [![Community Forum Topics](https://img.shields.io/discourse/topics?color=blue&label=community%20forum&server=https%3A%2F%2Fcommunity.frontity.org%2F)](https://community.frontity.org/) [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity) ![Frontity Github Stars](https://img.shields.io/github/stars/frontity/frontity?style=social)

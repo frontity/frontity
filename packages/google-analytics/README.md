@@ -13,7 +13,7 @@ npm i @frontity/google-analytics
 
 ## Usage
 
-Once is installed the GA Tracking ID should be added in the `frontity.settings.js` under the `state` scope
+Once is installed the GA Tracking ID should be added in the `frontity.settings.js` under the package `state`
 
 **`frontity.settings.js`**
 ```js
@@ -31,17 +31,19 @@ export default {
 };
 ```
 
+
 ## Feature Discussions
 
-[*Feature Discussions*](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
+[**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
 These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/google-analytics
 
+## Changelog
 
-## 📝 License
-This project is [Apache--2.0](https://github.com/frontity/frontity/blob/master/LICENSE) licensed.
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/google-analytics/CHANGELOG.md)
 
 ***
+
 ### » Frontity Channels 🌎
 
 [![Community Forum Topics](https://img.shields.io/discourse/topics?color=blue&label=community%20forum&server=https%3A%2F%2Fcommunity.frontity.org%2F)](https://community.frontity.org/) [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity) ![Frontity Github Stars](https://img.shields.io/github/stars/frontity/frontity?style=social)

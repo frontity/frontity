@@ -1,9 +1,9 @@
 # `<%= projectName %>`
 
-[![Version](https://img.shields.io/npm/v/<%= projectName %>.svg)](https://www.npmjs.com/package/<%= projectName %>) [![npm](https://img.shields.io/npm/dw/<%= projectName %>)](https://www.npmjs.com/package/<%= projectName %>) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-orange)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/<%= projectName %>.svg)](https://www.npmjs.com/package/<%= projectName %>) [![npm](https://img.shields.io/npm/dw/<%= projectName %>)](https://www.npmjs.com/package/<%= projectName %>) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
 <% if (projectDescription) { -%>
-  <%= projectDescription %>
+<%= projectDescription %>
 <% } -%>
 
 
@@ -13,21 +13,18 @@
 npm i <%= projectName %>
 ```
 
+<% projectNameTag = projectName.split("/")[1] %>  
+
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-<% projectNameTag = projectName.split("/")[1] %>  
 These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/<%= projectNameTag  %>
 
+## Changelog
 
-<% if (licenseName && licenseUrl) { -%>
-## 📝 License
-<% if (authorName && authorGithubUsername) { -%>
-  Copyright © <%= currentYear %> [<%= authorName %>](https://github.com/<%= authorGithubUsername %>).
-<% } -%>
-This project is [<%= licenseName %>](<%= licenseUrl %>) licensed.
-<% } -%>
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/<%= projectNameTag %>/CHANGELOG.md)
 
 ***
+
 <%- include('footer.md'); -%>

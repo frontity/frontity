@@ -32,15 +32,16 @@ export default GoogleAnalytics;
 ```
 
 
+
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
 These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/analytics
 
+## Changelog
 
-## 📝 License
-This project is [Apache--2.0](https://github.com/frontity/frontity/blob/master/LICENSE) licensed.
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/analytics/CHANGELOG.md)
 
 ***
 ### » Frontity Channels 🌎
