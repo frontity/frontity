@@ -9,7 +9,6 @@ interface ObserveOptions {
   lazy?: boolean;
 }
 
-type Function = (...args: any) => any;
 interface ActionsRecursive<T> {
   [key: string]: T | Function;
 }
