@@ -4,6 +4,10 @@
 
 Analytics package to use Google Tag Manager with Frontity
 
+> ## Beta version
+>
+> Please, bear in mind that this package is currently in beta version. It hasn't proper tests or docs and its implementation may change with the final release.
+
 
 ## Install
 
@@ -13,7 +17,7 @@ npm i @frontity/google-tag-manager
 
 ## Usage
 
-Once is installed the Tracking ID should be added in the `frontity.settings.js` under the package `state`
+Once is installed the Container ID should be added in the `frontity.settings.js` under the package `state`
 
 **`frontity.settings.js`**
 ```js
@@ -23,7 +27,7 @@ export default {
       name: "@frontity/google-tag-manager",
       state: {
         googleTagManager: {
-          containerIds: ['GTM-BCDFGHJ']
+          containerId: 'GTM-BCDFGHJ'
         },
       },
     },

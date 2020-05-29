@@ -4,6 +4,11 @@
 
 Analytics package to use Google Analytics with Frontity
 
+> ## Beta version
+>
+> Please, bear in mind that this package is currently in beta version. It hasn't proper tests or docs and its implementation may change with the final release.
+
+
 
 ## Install
 
@@ -23,7 +28,7 @@ export default {
       name: "@frontity/google-analytics",
       state: {
         googleAnalytics: {
-          trackingIds: ['UA-12345678-9']
+          trackingId: 'UA-12345678-9'
         },
       },
     },
