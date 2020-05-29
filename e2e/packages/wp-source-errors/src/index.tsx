@@ -25,7 +25,7 @@ const wpSourceErrors: WpSourceErrors = {
         if (path !== "/") {
           state.source.api = `https://httpstat.us/${path}?rest_route=/`;
         } else {
-          state.source.api = "https://test.frontity.org/wp-json";
+          state.source.api = "http://localhost:8080";
         }
       },
     },
