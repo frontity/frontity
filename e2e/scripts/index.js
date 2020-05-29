@@ -11,9 +11,23 @@ const { spawn } = require("child-process-promise");
       stdio: "inherit",
     });
 
-    await spawn("docker-compose", ["run", "wpcli", "core", "install"], {
-      stdio: "inherit",
-    });
+    await spawn(
+      "docker-compose",
+      [
+        "run",
+        "wpcli",
+        "core",
+        "install",
+        "--url=example.com",
+        "--title=Example",
+        "--admin_user=admin",
+        "--admin_password=password",
+        "--admin_email=info@example.com",
+      ],
+      {
+        stdio: "inherit",
+      }
+    );
 
     // Change permissions to the wp-content folder because volumes have root
     // permissions by default.
