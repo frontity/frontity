@@ -12,9 +12,11 @@ import { webpackAsync } from "./utils/webpack";
 export default async ({
   mode,
   target,
+  publicPath,
 }: {
   mode: Mode;
   target: "both" | "es5" | "module";
+  publicPath: string;
 }): Promise<void> => {
   console.log(`mode: ${mode}\n`);
 
@@ -32,7 +34,7 @@ export default async ({
   const entryPoints = await generateEntryPoints({ sites, outDir, mode });
 
   // Get FrontityConfig for Webpack.
-  const config = getConfig({ mode, entryPoints });
+  const config = getConfig({ mode, entryPoints, publicPath });
 
   // Build and wait until webpack finished the clients first.
   // We need to do this because the server bundle needs to import

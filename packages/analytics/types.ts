@@ -21,8 +21,8 @@ interface Analytics extends Package {
       sendEvent: Action<Analytics, Event>;
     };
     [key: string]: {
-      sendPageview: Action<Analytics, Pageview>;
-      sendEvent: Action<Analytics, Event>;
+      sendPageview?: Action<Analytics, Pageview>;
+      sendEvent?: Action<Analytics, Event>;
     };
   };
   state: {

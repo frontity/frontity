@@ -1,10 +1,3 @@
-import {
-  ComponentType,
-  ComponentProps,
-  FunctionComponent,
-  Component,
-} from "react";
-
 interface Scheduler {
   add: Function;
   delete: Function;
@@ -75,6 +68,14 @@ export type Connect<St extends Store, Props extends object = {}> = Omit<
   actions: ResolveActions<St["actions"]>;
 } & Props;
 
+export type UseConnect<Package extends Store> = Omit<
+  Package,
+  "state" | "actions"
+> & {
+  state: ResolveState<Package["state"]>;
+  actions: ResolveActions<Package["actions"]>;
+};
+
 export function observable<Observable extends object>(
   obj?: Observable
 ): Observable;
@@ -108,10 +109,20 @@ export function getSnapshot(state: object): object;
 
 export function createStore<St extends Store>(store: St): InitializedStore<St>;
 
+export type ConnectOptions = {
+  injectProps?: boolean;
+};
+
 declare function connect<Props extends object>(
   Component: React.ComponentType<Props>
-): FunctionComponent<FilterInjectedProps<Props>>;
+): React.FunctionComponent<FilterInjectedProps<Props>>;
+declare function connect<Props extends object>(
+  Component: React.ComponentType<Props>,
+  options: ConnectOptions
+): React.FunctionComponent<FilterInjectedProps<Props>>;
 
 export const Provider: React.ProviderExoticComponent<React.ProviderProps<any>>;
+
+export function useConnect<Package extends Store>(): UseConnect<Package>;
 
 export default connect;

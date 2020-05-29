@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-source",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Source package of Frontity for self-hosted WordPress and WordPress.com sites",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -13,7 +13,7 @@
     "url": "https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest",
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
@@ -21,14 +21,14 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/source": "^1.2.0",
-    "frontity": "^1.5.3",
+    "@frontity/source": "^1.2.1",
+    "frontity": "^1.7.0",
     "normalizr": "^3.3.0",
     "path-to-regexp": "^3.0.0",
     "query-string": "^6.8.3"
   },
   "devDependencies": {
-    "@frontity/connect": "^1.0.5",
+    "@frontity/connect": "^1.1.0",
     "clone-deep": "^4.0.1",
     "node-fetch": "^2.6.0"
   }

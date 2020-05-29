@@ -62,7 +62,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": true,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -208,7 +208,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": true,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -341,7 +341,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": false,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -480,7 +480,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": true,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -618,7 +618,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": true,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -745,7 +745,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": false,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },

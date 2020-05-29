@@ -1,5 +1,6 @@
 export interface Stats {
   assetsByChunkName: { [key: string]: string };
+  publicPath?: string;
 }
 
 export interface Extractor {
@@ -42,7 +43,8 @@ export const getBothScriptTags = ({
   moduleStats: Stats;
   es5Stats: Stats;
 }): string => {
-  const publicPath = extractor.publicPath;
+  // Ensure publicPath ends with a slash.
+  const publicPath = extractor.publicPath.replace(/\/?$/, "/");
 
   const chunkNames = extractor
     .getMainAssets("script")

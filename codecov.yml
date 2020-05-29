@@ -1,0 +1,7 @@
+coverage:
+  precision: 2
+  round: up
+
+comment:
+  layout: "files"
+  behavior: once
