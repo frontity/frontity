@@ -55,7 +55,7 @@
     "tar": "^4.4.8",
     "ts-node": "^8.0.3",
     "typed-emitter": "^0.2.0",
-    "typescript": "^3.8.2"
+    "typescript": "3.8.2"
   },
   "devDependencies": {
     "@frontity/core": "^1.6.0",
