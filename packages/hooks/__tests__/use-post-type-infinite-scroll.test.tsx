@@ -1253,7 +1253,7 @@ describe("usePostTypeInfiniteScroll", () => {
       state: {
         source: { get: sourceGet },
         router: {
-          link: "/post-two/",
+          link: "/post-one/",
           state: {
             infiniteScroll: {
               limit: 2,
@@ -1300,21 +1300,464 @@ describe("usePostTypeInfiniteScroll", () => {
     });
   });
 
-  test.todo("`fetchNext` should fetch next item");
+  test("`fetchNext` should fetch next item", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
 
-  test.todo("`fetchNext` should fetch next page and next item");
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: link !== "/post-two/",
+      isFetching: false,
+      isArchive: link === "/page-one/",
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+          : undefined,
+    }));
 
-  test.todo("`fetchNext` should not fetch next page if it's ready or fetching");
+    act(() => {
+      render(<AppWithButton />, container);
+    });
 
-  test.todo("`fetchNext` should not fetch next item if it's ready or fetching");
+    routerUpdateState.mockClear();
 
-  test.todo("`fetchNext` should do nothing if `options.active` is false");
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
 
-  test.todo(
-    "`fetchNext` should do nothing if there isn't a next item and there isn't a next page"
-  );
+    expect(routerUpdateState).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledWith({
+      infiniteScroll: {
+        limit: 1,
+        archive: "/page-one/",
+        pages: ["/page-one/"],
+        links: ["/post-one/", "/post-two/"],
+      },
+    });
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/post-two/");
+  });
 
-  test.todo("`fetchNext` should do nothing if next item is already in links");
+  test("`fetchNext` should fetch next page and next item", async () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next: link === "/page-one/" ? "/page-two/" : undefined,
+      isReady: !link.includes("two"),
+      isFetching: false,
+      isArchive: link.includes("page"),
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }]
+          : link === "/page-two/"
+          ? [{ link: "/post-two/" }]
+          : undefined,
+    }));
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next: link === "/page-one/" ? "/page-two/" : undefined,
+      isReady: link !== "/post-two/",
+      isFetching: false,
+      isArchive: link.includes("page"),
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }]
+          : link === "/page-two/"
+          ? [{ link: "/post-two/" }]
+          : undefined,
+    }));
+
+    const fetchNext = act(async () => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).toHaveBeenCalledWith({
+      infiniteScroll: {
+        limit: 1,
+        archive: "/page-one/",
+        pages: ["/page-one/", "/page-two/"],
+        links: ["/post-one/"],
+      },
+    });
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/page-two/");
+
+    await fetchNext;
+
+    expect(routerUpdateState).toHaveBeenCalledTimes(2);
+    expect(routerUpdateState).toHaveBeenNthCalledWith(2, {
+      infiniteScroll: {
+        limit: 1,
+        archive: "/page-one/",
+        pages: ["/page-one/", "/page-two/"],
+        links: ["/post-one/", "/post-two/"],
+      },
+    });
+    expect(sourceFetch).toHaveBeenCalledTimes(2);
+    expect(sourceFetch).toHaveBeenNthCalledWith(2, "/post-two/");
+  });
+
+  test("`fetchNext` should not fetch next page if it's ready", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next: link === "/page-one/" ? "/page-two/" : undefined,
+      isReady: link !== "/post-two/",
+      isFetching: false,
+      isArchive: link.includes("page"),
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }]
+          : link === "/page-two/"
+          ? [{ link: "/post-two/" }]
+          : undefined,
+    }));
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).toHaveBeenCalledTimes(2);
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/post-two/");
+  });
+
+  test("`fetchNext` should not fetch next page if it's fetching", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next: link === "/page-one/" ? "/page-two/" : undefined,
+      isReady: !link.includes("two"),
+      isFetching: link === "/page-two/",
+      isArchive: link.includes("page"),
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }]
+          : link === "/page-two/"
+          ? [{ link: "/post-two/" }]
+          : undefined,
+    }));
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      next: link === "/page-one/" ? "/page-two/" : undefined,
+      isReady: link !== "/post-two/",
+      isFetching: false,
+      isArchive: link.includes("page"),
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }]
+          : link === "/page-two/"
+          ? [{ link: "/post-two/" }]
+          : undefined,
+    }));
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).toHaveBeenCalledTimes(2);
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/post-two/");
+  });
+
+  test("`fetchNext` should not fetch next item if it's ready or fetching", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isFetching: false,
+      isArchive: link.includes("page"),
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+          : undefined,
+    }));
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+
+    routerUpdateState.mockClear();
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: link !== "/post-two/",
+      isFetching: link === "/post-two/",
+    }));
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("`fetchNext` should do nothing if `options.active` is false", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isFetching: false,
+      isArchive: link.includes("page"),
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+          : undefined,
+    }));
+
+    act(() => {
+      render(<AppWithButton options={{ active: false }} />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("`fetchNext` should do nothing if there isn't a next item and there isn't a next page", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isFetching: false,
+      isArchive: link.includes("page"),
+      items: link === "/page-one/" ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("`fetchNext` should do nothing if next item is already in links", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/", "/post-two/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isFetching: false,
+      isArchive: link.includes("page"),
+      items:
+        link === "/page-one/"
+          ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+          : undefined,
+    }));
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
 });
 
 describe("Wrapper", () => {

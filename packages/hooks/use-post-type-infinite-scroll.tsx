@@ -33,6 +33,7 @@ export const Wrapper: Wrapper = (link) =>
     const links: string[] = state.router.state.infiniteScroll?.links || [link];
     const limit: number = state.router.state.infiniteScroll?.limit;
     const pages: string[] = state.router.state.infiniteScroll?.pages || [];
+    const isActive = !!state.router.state.infiniteScroll;
 
     // Aliases to needed state.
     const current = state.source.get(link);
@@ -75,7 +76,7 @@ export const Wrapper: Wrapper = (link) =>
     return (
       <div css={container} ref={routeRef}>
         {children}
-        {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
+        {isActive && !hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
       </div>
     );
   });
@@ -207,20 +208,25 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
       ? [...state.router.state.infiniteScroll.links]
       : [state.router.link];
 
-    // We need `nextItem` and `nextPage` to be declared in local scope.
+    // We need `nextItem` to be declared in local scope.
     let nextItem = items[lastIndex + 1];
-    let nextPage = lastPage.next ? state.source.get(lastPage.next) : null;
 
     if (!nextItem) {
       if (!nextPage) return;
 
-      console.info("fetching page", nextPage.link);
-
       pages.push(nextPage.link);
+
+      actions.router.updateState({
+        ...state.router.state,
+        infiniteScroll: {
+          ...state.router.state.infiniteScroll,
+          links,
+          pages,
+        },
+      });
 
       if (!nextPage.isReady && !nextPage.isFetching) {
         await actions.source.fetch(nextPage.link);
-        nextPage = state.source.get(nextPage.link);
       }
 
       const items = pages.reduce((final, current, index) => {
@@ -239,8 +245,6 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
     }
 
     if (links.includes(nextItem.link)) return;
-
-    console.info("fetching", nextItem.link);
 
     links.push(nextItem.link);
 
