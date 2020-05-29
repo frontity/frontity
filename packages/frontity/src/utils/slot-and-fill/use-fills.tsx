@@ -38,7 +38,7 @@ const useFills = (name: string): Fill[] => {
     // Flat all the fills and turn them into entries.
     Object.values(state.fills || {})
       .reduce<[string, StateFill][]>(
-        (fills, fill) => [...fills, ...Object.entries(fill)],
+        (fills, namespace) => [...fills, ...Object.entries(namespace)],
         []
       )
       // Match only the fills for this name.
