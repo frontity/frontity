@@ -1761,5 +1761,206 @@ describe("usePostTypeInfiniteScroll", () => {
 });
 
 describe("Wrapper", () => {
-  test.todo("should return children if IntersectionObserver is not supported");
+  test("should return children if IntersectionObserver is not supported", () => {
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: { state: {} },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isArchive: link === "/",
+      items: link === "/" ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    mockedUseInfiniteScroll.mockReturnValueOnce({
+      supported: false,
+    });
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should return null if the current element is not ready", () => {
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: { state: {} },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: link !== "/post-one/",
+      isArchive: link === "/",
+      items: link === "/" ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    mockedUseInfiniteScroll.mockReturnValueOnce({
+      supported: true,
+      fetchRef: () => {},
+      routeRef: () => {},
+      fetchInView: false,
+      routeInView: false,
+    });
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should return children and fetcher inside a wrapper", () => {
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: { state: {} },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isArchive: link === "/",
+      items: link === "/" ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    mockedUseInfiniteScroll.mockReturnValueOnce({
+      supported: true,
+      fetchRef: () => {},
+      routeRef: () => {},
+      fetchInView: false,
+      routeInView: false,
+    });
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should return only children inside the wrapper if limit reached", () => {
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: { state: { infiniteScroll: { limit: 1 } } },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isArchive: link === "/",
+      items: link === "/" ? [{ link: "/post-one/" }] : undefined,
+    }));
+
+    mockedUseInfiniteScroll.mockReturnValueOnce({
+      supported: true,
+      fetchRef: () => {},
+      routeRef: () => {},
+      fetchInView: false,
+      routeInView: false,
+    });
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should call `useInfiniteScroll` with `currentLink` and `nextLink`", () => {
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          state: {
+            infiniteScroll: {
+              pages: ["/"],
+            },
+          },
+        },
+      },
+      actions: {},
+    });
+
+    sourceGet.mockImplementation((link) => ({
+      link,
+      isReady: true,
+      isArchive: link === "/",
+      items:
+        link === "/"
+          ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+          : undefined,
+    }));
+
+    mockedUseInfiniteScroll.mockReturnValueOnce({
+      supported: true,
+      fetchRef: () => {},
+      routeRef: () => {},
+      fetchInView: false,
+      routeInView: false,
+    });
+
+    act(() => {
+      render(
+        <Wrapper>
+          <div id="children" />
+        </Wrapper>,
+        container
+      );
+    });
+
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(mockedUseInfiniteScroll).toHaveBeenCalledWith({
+      currentLink: "/post-one/",
+      nextLink: "/post-two/",
+    });
+  });
 });

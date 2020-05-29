@@ -33,7 +33,6 @@ export const Wrapper: Wrapper = (link) =>
     const links: string[] = state.router.state.infiniteScroll?.links || [link];
     const limit: number = state.router.state.infiniteScroll?.limit;
     const pages: string[] = state.router.state.infiniteScroll?.pages || [];
-    const isActive = !!state.router.state.infiniteScroll;
 
     // Aliases to needed state.
     const current = state.source.get(link);
@@ -76,7 +75,7 @@ export const Wrapper: Wrapper = (link) =>
     return (
       <div css={container} ref={routeRef}>
         {children}
-        {isActive && !hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
+        {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
       </div>
     );
   });
