@@ -6,7 +6,7 @@ Analytics package to use Google Analytics with Frontity
 
 > ## Beta version
 >
-> Please, bear in mind that this package is currently in beta version. It hasn't proper tests or docs and its implementation may change with the final release.
+> Please bear in mind that the current version of this package is a beta version. This means that it hasn't as yet been fully tested and that it's documentation is not yet complete. In addition, its implementation may change with the final release.
 
 
 
