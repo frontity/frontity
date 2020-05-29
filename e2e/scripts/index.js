@@ -11,13 +11,9 @@ const { spawn } = require("child-process-promise");
       stdio: "inherit",
     });
 
-    await spawn(
-      "docker-compose",
-      ["run", "--user", "33:33", "wp", "core", "install"],
-      {
-        stdio: "inherit",
-      }
-    );
+    // await spawn("docker-compose", ["run", "wpcli", "core", "install"], {
+    //   stdio: "inherit",
+    // });
 
     // Change permissions to the wp-content folder because volumes have root
     // permissions by default.
@@ -25,7 +21,7 @@ const { spawn } = require("child-process-promise");
       "docker-compose",
       [
         "run",
-        "wp",
+        "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
         "/bin/bash",
         "-c",
         "chown -R www-data:www-data /var/www/html/wp-content/",
@@ -39,9 +35,7 @@ const { spawn } = require("child-process-promise");
       [
         "run",
         "--rm",
-        "--user",
-        "33:33",
-        "wp",
+        "wpcli",
         "plugin",
         "install",
         "wordpress-seo --version=12.6",
