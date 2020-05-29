@@ -10,6 +10,7 @@ type Wrapper = (link: string) => React.FC<Connect<Source & Router>>;
 
 type UseArchiveInfiniteScroll = (options?: {
   limit?: number;
+  active?: boolean;
 }) => {
   pages: {
     key: string;
@@ -70,7 +71,11 @@ export const Wrapper: Wrapper = (link) =>
 
 const MemoizedWrapper = memoize((key) => key, Wrapper);
 
-const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
+const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
+  const defaultOptions = { active: true };
+
+  options = options ? { ...defaultOptions, ...options } : defaultOptions;
+
   const { state, actions } = useConnect<Source & Router>();
 
   // Values from/for browser state.
@@ -82,6 +87,8 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
 
   // Initialize/update browser state.
   useEffect(() => {
+    if (!options.active) return;
+
     actions.router.updateState({
       ...state.router.state,
       infiniteScroll: {
@@ -90,7 +97,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
         ...state.router.state.infiniteScroll,
       },
     });
-  }, []);
+  }, [options.active]);
 
   // Aliases to needed state.
   const last = state.source.get(links[links.length - 1]);
@@ -103,7 +110,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
 
   // Requests the next page disregarding the limit.
   const fetchNext = async () => {
-    if (!thereIsNext || links.includes(last.next)) return;
+    if (!options.active || !thereIsNext || links.includes(last.next)) return;
 
     links.push(last.next);
 

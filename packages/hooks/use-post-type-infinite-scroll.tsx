@@ -83,9 +83,7 @@ export const Wrapper: Wrapper = (link) =>
 const MemoizedWrapper = memoize((key) => key, Wrapper);
 
 const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
-  const defaultOptions = {
-    active: true,
-  };
+  const defaultOptions = { active: true };
 
   options = options ? { ...defaultOptions, ...options } : defaultOptions;
 

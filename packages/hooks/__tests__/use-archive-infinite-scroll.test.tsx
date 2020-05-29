@@ -174,6 +174,36 @@ describe("useArchiveInfiniteScroll", () => {
     });
   });
 
+  test("should not update the browser state if `options.active` is false", () => {
+    mockedUseConnect.mockReturnValue({
+      state: {
+        router: {
+          link: "/",
+          state: {},
+        },
+        source: {
+          get: sourceGet,
+        },
+      },
+      actions: {
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockReturnValueOnce({
+      link: "/",
+      isReady: false,
+      isFetching: false,
+    });
+
+    act(() => {
+      render(<App options={{ active: false }} />, container);
+    });
+
+    expect(spiedUseArchiveInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(routerUpdateState).not.toHaveBeenCalled();
+  });
+
   test("should return the right object", () => {
     mockedUseConnect.mockReturnValue({
       state: {
@@ -700,6 +730,50 @@ describe("useArchiveInfiniteScroll", () => {
 
     sourceGet.mockReturnValueOnce({
       link: "/page/2/",
+      isReady: false,
+      isFetching: false,
+    });
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(sourceFetch).not.toHaveBeenCalled();
+  });
+
+  test("`fetchNext` should do nothing if `options.active` is false", () => {
+    mockedUseConnect.mockReturnValue({
+      state: {
+        router: {
+          link: "/page-one/",
+          state: {},
+        },
+        source: {
+          get: sourceGet,
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    });
+
+    sourceGet.mockReturnValueOnce({
+      link: "/page-one/",
+      next: "/page-two/",
+      isReady: true,
+      isFetching: false,
+    });
+
+    act(() => {
+      render(<AppWithButton options={{ active: false }} />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    sourceGet.mockReturnValueOnce({
+      link: "/page-two/",
       isReady: false,
       isFetching: false,
     });
