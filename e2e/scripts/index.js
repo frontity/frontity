@@ -16,6 +16,7 @@ const { spawn } = require("child-process-promise");
       [
         "run",
         "wpcli",
+        "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
         "core",
         "install",
         "--url=example.com",
@@ -49,10 +50,12 @@ const { spawn } = require("child-process-promise");
       [
         "run",
         "--rm",
+        "--user",
+        "33:33",
         "wpcli",
+        "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
         "plugin",
         "install",
-        "wordpress-seo --version=12.6",
         "all-in-one-seo-pack",
         "--activate",
       ],
