@@ -87,6 +87,21 @@ const settings: Settings = [
     ],
   },
   {
+    name: "comscore-analytics",
+    packages: [
+      "e2e-analytics",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/comscore-analytics",
+        state: {
+          comscoreAnalytics: {
+            trackingIds: ["111111", "222222"],
+          },
+        },
+      },
+    ],
+  },
+  {
     name: "use-in-view",
     packages: ["e2e-use-in-view"],
   },
