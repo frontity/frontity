@@ -39,7 +39,10 @@ const { spawn } = require("child-process-promise");
         "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
         "/bin/bash",
         "-c",
-        "chown -R www-data:www-data /var/www/html/wp-content/",
+        "chown -R www-data:www-data /var/www/html/wp-content/plugins/ && \
+         chown -R www-data:www-data /var/www/html/wp-content/ && \
+         chmod 775 /var/www/html/wp-content/plugins && \
+         chmod 775 /var/www/html/wp-content/",
       ],
       { stdio: "inherit" }
     );
@@ -50,10 +53,10 @@ const { spawn } = require("child-process-promise");
       [
         "run",
         "--rm",
-        "--user",
+        "--user", // https://hub.docker.com/_/wordpress/ See: "Running as arbitrary user"
         "33:33",
-        "wpcli",
-        "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
+        "wpcli", // this is the reference to the volume (we have wp, wpcli, and msql)
+        "wp",
         "plugin",
         "install",
         "all-in-one-seo-pack",
