@@ -2,6 +2,7 @@
   "name": "@frontity/error",
   "version": "0.1.0",
   "description": "Frontity errors and warnings",
+  "main": "src/index.ts",
   "keywords": [
     "frontity"
   ],
