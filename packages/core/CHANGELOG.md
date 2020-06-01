@@ -1,5 +1,30 @@
 # Change Log
 
+## 1.6.1
+
+### Patch Changes
+
+- [`b4b25e43`](https://github.com/frontity/frontity/commit/b4b25e434e5e7c2a96e1fce8c11b0e0dac228295) [#446](https://github.com/frontity/frontity/pull/446) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix --publicPath option when its value is a URL with domain specified.
+
+## 1.6.0
+
+### Minor Changes
+
+- [`661ac083`](https://github.com/frontity/frontity/commit/661ac08316f44172166e79b05b47f0c15a837a9a) [#420](https://github.com/frontity/frontity/pull/420) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add a `--publicPath` option to `build` and `dev` commands and pass it to webpack builds.
+
+### Patch Changes
+
+- Updated dependencies [[`996865a2`](https://github.com/frontity/frontity/commit/996865a27690d5b89d2ef110f5b1bf3fb91da6f5)]:
+  - @frontity/connect@1.1.0
+
+## 1.5.3
+
+### Patch Changes
+
+- [`502bc144`](https://github.com/frontity/frontity/commit/502bc144158a1b64971c738dcf93306ad5b61a8f) [#406](https://github.com/frontity/frontity/pull/406) Thanks [@luisherranz](https://github.com/luisherranz)! - Don't embed fonts so big because they have an impact on LightHouse performance score. I have reduced the limit from 25Kbs to 8Kbs, which seems to be the recommendation in Webpack.
+
+* [`7c2a99f9`](https://github.com/frontity/frontity/commit/7c2a99f9be43ad965f4d4b00c81145f21230f63f) [#387](https://github.com/frontity/frontity/pull/387) Thanks [@iamuchejude](https://github.com/iamuchejude)! - Fix yarn symlink bug
+
 ## 1.5.2
 
 ### Patch Changes

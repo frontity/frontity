@@ -10,20 +10,14 @@ import InterMediumLatin from "../../fonts/inter/Inter-Medium-LATIN.woff2";
 import InterBoldLatin from "../../fonts/inter/Inter-Bold-LATIN.woff2";
 import InterSemiBoldLatin from "../../fonts/inter/Inter-SemiBold-LATIN.woff2";
 
+const fonts = {
+  "us-ascii": [InterMediumUS, InterSemiBoldUS, InterBoldUS],
+  latin: [InterMediumLatin, InterSemiBoldLatin, InterBoldLatin],
+  all: [InterMedium, InterSemiBold, InterBold],
+};
+
 const FontFace = ({ state }) => {
-  let fonts = null;
-  let fontDisplay = "swap";
-  switch (state.theme.fontSets) {
-    case "us-ascii":
-      fonts = [InterMediumUS, InterSemiBoldUS, InterBoldUS];
-      fontDisplay = "block";
-      break;
-    case "latin":
-      fonts = [InterMediumLatin, InterSemiBoldLatin, InterBoldLatin];
-      break;
-    default:
-      fonts = [InterMedium, InterSemiBold, InterBold];
-  }
+  const font = fonts[state.theme.fontSets] || fonts["all"];
 
   return (
     <Global
@@ -32,24 +26,24 @@ const FontFace = ({ state }) => {
           font-family: "Inter";
           font-style: normal;
           font-weight: 500;
-          src: url(${fonts[0]}) format("woff2");
-          font-display: ${fontDisplay};
+          font-display: "swap";
+          src: url(${font[0]}) format("woff2");
         }
 
         @font-face {
           font-family: "Inter";
           font-style: normal;
           font-weight: 600;
-          src: url(${fonts[1]}) format("woff2");
-          font-display: ${fontDisplay};
+          font-display: "swap";
+          src: url(${font[1]}) format("woff2");
         }
 
         @font-face {
           font-family: "Inter";
           font-style: normal;
           font-weight: 700;
-          src: url(${fonts[2]}) format("woff2");
-          font-display: ${fontDisplay};
+          font-display: "swap";
+          src: url(${font[2]}) format("woff2");
         }
       `}
     />

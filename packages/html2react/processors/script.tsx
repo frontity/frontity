@@ -15,6 +15,7 @@ const validMediaTypes = [
   "application/javascript",
   "text/javascript",
   "application/ecmascript",
+  "module",
 ];
 
 const script: Processor<ScriptElement> = {

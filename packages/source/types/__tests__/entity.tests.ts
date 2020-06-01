@@ -13,7 +13,7 @@ const author: AuthorEntity = {
   name: "luisherranz",
   url: "",
   description: "",
-  link: "https://test.frontity.io/author/luisherranz/",
+  link: "https://test.frontity.org/author/luisherranz/",
   slug: "luisherranz",
   avatar_urls: {
     "24": "https://secure.gravatar.com/avatar/?s=24&d=mm&r=g",
@@ -24,12 +24,12 @@ const author: AuthorEntity = {
   _links: {
     self: [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/users/1",
+        href: "https://test.frontity.org/wp-json/wp/v2/users/1",
       },
     ],
     collection: [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/users",
+        href: "https://test.frontity.org/wp-json/wp/v2/users",
       },
     ],
   },
@@ -39,7 +39,7 @@ const taxonomy: TaxonomyEntity = {
   id: 7,
   count: 10,
   description: "",
-  link: "https://test.frontity.io/category/nature/",
+  link: "https://test.frontity.org/category/nature/",
   name: "Nature",
   slug: "nature",
   taxonomy: "category",
@@ -48,22 +48,22 @@ const taxonomy: TaxonomyEntity = {
   _links: {
     self: [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/categories/7",
+        href: "https://test.frontity.org/wp-json/wp/v2/categories/7",
       },
     ],
     collection: [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/categories",
+        href: "https://test.frontity.org/wp-json/wp/v2/categories",
       },
     ],
     about: [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/taxonomies/category",
+        href: "https://test.frontity.org/wp-json/wp/v2/taxonomies/category",
       },
     ],
     "wp:post_type": [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/posts?categories=7",
+        href: "https://test.frontity.org/wp-json/wp/v2/posts?categories=7",
       },
     ],
     curies: [
@@ -88,7 +88,7 @@ const post: PostEntity = {
   slug: "block-button",
   status: "publish",
   type: "post",
-  link: "https://test.frontity.io/2018/block-button/",
+  link: "https://test.frontity.org/2018/block-button/",
   title: {
     rendered: "Block: Button",
   },
@@ -99,7 +99,7 @@ const post: PostEntity = {
   },
   excerpt: {
     rendered:
-      '<p>Button blocks are not semantically buttons, but links inside a styled div.&nbsp; If you do not add a link, a link tag without an anchor will be used. Left aligned Check to make sure that the text wraps correctly when the button has more than one line of text, and when it is extra long. &hellip; </p>\n<p class="link-more"><a href="https://test.frontity.io/2018/block-button/" class="more-link">Continue reading<span class="screen-reader-text"> &#8220;Block: Button&#8221;</span></a></p>\n',
+      '<p>Button blocks are not semantically buttons, but links inside a styled div.&nbsp; If you do not add a link, a link tag without an anchor will be used. Left aligned Check to make sure that the text wraps correctly when the button has more than one line of text, and when it is extra long. &hellip; </p>\n<p class="link-more"><a href="https://test.frontity.org/2018/block-button/" class="more-link">Continue reading<span class="screen-reader-text"> &#8220;Block: Button&#8221;</span></a></p>\n',
     protected: false,
   },
   author: 6,
@@ -116,57 +116,57 @@ const post: PostEntity = {
   _links: {
     self: [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/posts/1798",
+        href: "https://test.frontity.org/wp-json/wp/v2/posts/1798",
       },
     ],
     collection: [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/posts",
+        href: "https://test.frontity.org/wp-json/wp/v2/posts",
       },
     ],
     about: [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/types/post",
+        href: "https://test.frontity.org/wp-json/wp/v2/types/post",
       },
     ],
     author: [
       {
         embeddable: true,
-        href: "https://test.frontity.io/wp-json/wp/v2/users/6",
+        href: "https://test.frontity.org/wp-json/wp/v2/users/6",
       },
     ],
     replies: [
       {
         embeddable: true,
-        href: "https://test.frontity.io/wp-json/wp/v2/comments?post=1798",
+        href: "https://test.frontity.org/wp-json/wp/v2/comments?post=1798",
       },
     ],
     "version-history": [
       {
         count: 0,
-        href: "https://test.frontity.io/wp-json/wp/v2/posts/1798/revisions",
+        href: "https://test.frontity.org/wp-json/wp/v2/posts/1798/revisions",
       },
     ],
     "wp:attachment": [
       {
-        href: "https://test.frontity.io/wp-json/wp/v2/media?parent=1798",
+        href: "https://test.frontity.org/wp-json/wp/v2/media?parent=1798",
       },
     ],
     "wp:term": [
       {
         taxonomy: "category",
         embeddable: true,
-        href: "https://test.frontity.io/wp-json/wp/v2/categories?post=1798",
+        href: "https://test.frontity.org/wp-json/wp/v2/categories?post=1798",
       },
       {
         taxonomy: "post_tag",
         embeddable: true,
-        href: "https://test.frontity.io/wp-json/wp/v2/tags?post=1798",
+        href: "https://test.frontity.org/wp-json/wp/v2/tags?post=1798",
       },
       {
         taxonomy: "latest",
         embeddable: true,
-        href: "https://test.frontity.io/wp-json/wp/v2/latest?post=1798",
+        href: "https://test.frontity.org/wp-json/wp/v2/latest?post=1798",
       },
     ],
     curies: [
@@ -186,7 +186,7 @@ const attachment: AttachmentEntity = {
   date_gmt: "2018-11-23T12:27:38",
   guid: {
     rendered:
-      "https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg",
+      "https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg",
   },
   modified: "2018-11-23T14:27:38",
   modified_gmt: "2018-11-23T12:27:38",
@@ -194,7 +194,7 @@ const attachment: AttachmentEntity = {
   status: "inherit",
   type: "attachment",
   link:
-    "https://test.frontity.io/web3_baby_boy_smile_hat_shutterstock_476144548/",
+    "https://test.frontity.org/web3_baby_boy_smile_hat_shutterstock_476144548/",
   title: {
     rendered: "web3_baby_boy_smile_hat_shutterstock_476144548",
   },
@@ -205,7 +205,7 @@ const attachment: AttachmentEntity = {
   meta: [],
   description: {
     rendered:
-      '<p class="attachment"><a href=\'https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg\'><img data-attachment-id="0" data-attachment-id-source="attachment-link-hook"width="300" height="150" src="https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg" class="attachment-medium size-medium" alt="" srcset="https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg 300w, https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-768x384.jpg 768w, https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-1024x512.jpg 1024w, https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg 1200w" sizes="100vw" data-attachment-id="437" data-attachment-id-source="image-attributes-hook" /></a></p>\n',
+      '<p class="attachment"><a href=\'https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg\'><img data-attachment-id="0" data-attachment-id-source="attachment-link-hook"width="300" height="150" src="https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg" class="attachment-medium size-medium" alt="" srcset="https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg 300w, https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-768x384.jpg 768w, https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-1024x512.jpg 1024w, https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg 1200w" sizes="100vw" data-attachment-id="437" data-attachment-id-source="image-attributes-hook" /></a></p>\n',
   },
   caption: {
     rendered: "",
@@ -224,7 +224,7 @@ const attachment: AttachmentEntity = {
         height: 150,
         mime_type: "image/jpeg",
         source_url:
-          "https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-150x150.jpg",
+          "https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-150x150.jpg",
       },
       medium: {
         file: "web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg",
@@ -232,7 +232,7 @@ const attachment: AttachmentEntity = {
         height: 150,
         mime_type: "image/jpeg",
         source_url:
-          "https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg",
+          "https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg",
       },
       medium_large: {
         file: "web3_baby_boy_smile_hat_shutterstock_476144548-768x384.jpg",
@@ -240,7 +240,7 @@ const attachment: AttachmentEntity = {
         height: 384,
         mime_type: "image/jpeg",
         source_url:
-          "https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-768x384.jpg",
+          "https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-768x384.jpg",
       },
       large: {
         file: "web3_baby_boy_smile_hat_shutterstock_476144548-1024x512.jpg",
@@ -248,7 +248,7 @@ const attachment: AttachmentEntity = {
         height: 512,
         mime_type: "image/jpeg",
         source_url:
-          "https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-1024x512.jpg",
+          "https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-1024x512.jpg",
       },
       "twentyseventeen-thumbnail-avatar": {
         file: "web3_baby_boy_smile_hat_shutterstock_476144548-100x100.jpg",
@@ -256,7 +256,7 @@ const attachment: AttachmentEntity = {
         height: 100,
         mime_type: "image/jpeg",
         source_url:
-          "https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-100x100.jpg",
+          "https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-100x100.jpg",
       },
       full: {
         file: "web3_baby_boy_smile_hat_shutterstock_476144548.jpg",
@@ -264,7 +264,7 @@ const attachment: AttachmentEntity = {
         height: 600,
         mime_type: "image/jpeg",
         source_url:
-          "https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg",
+          "https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg",
       },
     },
     image_meta: {
@@ -284,24 +284,24 @@ const attachment: AttachmentEntity = {
   },
   post: null,
   source_url:
-    "https://test.frontity.io/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg",
+    "https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg",
   _links: {
     self: [
       {
         attributes: [],
-        href: "https://test.frontity.io/wp-json/wp/v2/media/437",
+        href: "https://test.frontity.org/wp-json/wp/v2/media/437",
       },
     ],
     collection: [
       {
         attributes: [],
-        href: "https://test.frontity.io/wp-json/wp/v2/media",
+        href: "https://test.frontity.org/wp-json/wp/v2/media",
       },
     ],
     about: [
       {
         attributes: [],
-        href: "https://test.frontity.io/wp-json/wp/v2/types/attachment",
+        href: "https://test.frontity.org/wp-json/wp/v2/types/attachment",
       },
     ],
     author: [
@@ -309,7 +309,7 @@ const attachment: AttachmentEntity = {
         attributes: {
           embeddable: true,
         },
-        href: "https://test.frontity.io/wp-json/wp/v2/users/2",
+        href: "https://test.frontity.org/wp-json/wp/v2/users/2",
       },
     ],
     replies: [
@@ -317,7 +317,7 @@ const attachment: AttachmentEntity = {
         attributes: {
           embeddable: true,
         },
-        href: "https://test.frontity.io/wp-json/wp/v2/comments?post=437",
+        href: "https://test.frontity.org/wp-json/wp/v2/comments?post=437",
       },
     ],
     "wp:term": [
@@ -326,12 +326,12 @@ const attachment: AttachmentEntity = {
           taxonomy: "latest",
           embeddable: true,
         },
-        href: "https://test.frontity.io/wp-json/wp/v2/latest?attachment=437",
+        href: "https://test.frontity.org/wp-json/wp/v2/latest?attachment=437",
       },
       {
         taxonomy: "latest",
         embeddable: true,
-        href: "https://test.frontity.io/wp-json/wp/v2/latest?attachment=437",
+        href: "https://test.frontity.org/wp-json/wp/v2/latest?attachment=437",
       },
     ],
     curies: [
@@ -354,12 +354,12 @@ const taxonomyType: TaxonomyType = {
   _links: {
     collection: [
       {
-        href: "http://test.frontity.io/wp-json/wp/v2/types",
+        href: "http://test.frontity.org/wp-json/wp/v2/types",
       },
     ],
     "wp:items": [
       {
-        href: "http://test.frontity.io/wp-json/wp/v2/posts",
+        href: "http://test.frontity.org/wp-json/wp/v2/posts",
       },
     ],
     curies: [
@@ -382,12 +382,12 @@ const postType: PostType = {
   _links: {
     collection: [
       {
-        href: "http://test.frontity.io/wp-json/wp/v2/types",
+        href: "http://test.frontity.org/wp-json/wp/v2/types",
       },
     ],
     "wp:items": [
       {
-        href: "http://test.frontity.io/wp-json/wp/v2/posts",
+        href: "http://test.frontity.org/wp-json/wp/v2/posts",
       },
     ],
     curies: [

@@ -1,6 +1,6 @@
 {
   "name": "frontity",
-  "version": "1.5.3",
+  "version": "1.7.0",
   "description": "Frontity cli and entry point to other packages",
   "keywords": [
     "frontity",
@@ -25,7 +25,7 @@
     "dev": "ts-node src/cli/index.ts",
     "ts": "ts-node",
     "test": "../../node_modules/.bin/jest --watch",
-    "test:ci": "../../node_modules/.bin/jest --colors",
+    "test:ci": "../../node_modules/.bin/jest --colors --ci --coverage",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
     "prepublish": "npm run build"
@@ -58,8 +58,8 @@
     "typescript": "^3.8.2"
   },
   "devDependencies": {
-    "@frontity/core": "^1.5.2",
-    "@frontity/connect": "^1.0.5",
+    "@frontity/core": "^1.6.0",
+    "@frontity/connect": "^1.1.0",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",

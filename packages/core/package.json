@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "1.5.2",
+  "version": "1.6.1",
   "description": "The core package of the Frontity framework.",
   "keywords": [
     "frontity",
@@ -18,7 +18,7 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest",
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
@@ -38,7 +38,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@emotion/babel-preset-css-prop": "^10.0.9",
     "@emotion/core": "^10.0.22",
-    "@frontity/connect": "^1.0.5",
+    "@frontity/connect": "^1.1.0",
     "@frontity/file-settings": "^1.1.5",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/component": "^5.10.1",
@@ -64,6 +64,7 @@
     "koa-static": "^5.0.0",
     "lodash-es": "^4.17.11",
     "minimist": "^1.2.5",
+    "mock-fs": "^4.12.0",
     "open": "^6.3.0",
     "promise-monofill": "^1.0.1",
     "raw-loader": "^3.0.0",
@@ -76,7 +77,8 @@
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-dev-middleware": "^3.7.2",
-    "webpack-hot-middleware": "^2.24.3"
+    "webpack-hot-middleware": "^2.24.3",
+    "symlink-dir": "3.1.2"
   },
   "devDependencies": {
     "@frontity/types": "^1.2.0",

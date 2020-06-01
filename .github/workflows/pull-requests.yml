@@ -1,0 +1,14 @@
+name: Pull requests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  tasks:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Task List
+        uses: WeeverApps/gha-task-list-zero@v1.0

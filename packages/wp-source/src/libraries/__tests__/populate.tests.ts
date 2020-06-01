@@ -38,7 +38,7 @@ describe("populate", () => {
         {
           id: 1,
           count: 5,
-          link: "https://test.frontity.io/category/cat-1/",
+          link: "https://test.frontity.org/category/cat-1/",
           slug: "cat-1",
           taxonomy: "category",
           description: "This is the Category 1",
@@ -52,7 +52,7 @@ describe("populate", () => {
       state,
       response: mockResponse({
         id: 1,
-        link: "https://test.frontity.io/category/cat-1/",
+        link: "https://test.frontity.org/category/cat-1/",
         slug: "cat-1",
         taxonomy: "category",
       }),
@@ -71,9 +71,10 @@ describe("populate", () => {
       response: mockResponse([
         {
           id: 1,
-          link: "https://test.frontity.io/category/cat-1/",
+          link: "https://test.frontity.org/category/cat-1/",
           slug: "cat-1",
           taxonomy: "category",
+          count: 1,
         },
       ]),
     });
@@ -84,11 +85,10 @@ describe("populate", () => {
       response: mockResponse({
         id: 1,
         count: 5,
-        link: "https://test.frontity.io/category/cat-1/",
+        link: "https://test.frontity.org/category/cat-1/",
         slug: "cat-1",
         taxonomy: "category",
         description: "This is the Category 1",
-        parent: 0,
       }),
       force: true,
     });
@@ -99,7 +99,7 @@ describe("populate", () => {
 
   test("removes WP API path from links", async () => {
     const { state } = initStore();
-    state.source.api = "https://test.frontity.io/subdirectory/wp-json";
+    state.source.api = "https://test.frontity.org/subdirectory/wp-json";
 
     const response = mockResponse(postsSubdir);
     const result = await populate({ state, response });
@@ -110,7 +110,7 @@ describe("populate", () => {
 
   test("transforms links if subdirectory is specified", async () => {
     const { state } = initStore();
-    state.source.api = "https://test.frontity.io/subdirectory/wp-json";
+    state.source.api = "https://test.frontity.org/subdirectory/wp-json";
 
     const response = mockResponse(postsSubdir);
     const subdirectory = "/blog/";
