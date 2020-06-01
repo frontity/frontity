@@ -1,0 +1,11 @@
+{
+  "name": "Frontity",
+  "mode": "modules",
+  "out": "typedoc",
+  "tsconfig": "./tsconfig.typedoc.json",
+  "external-modulemap": "packages/([^/]+)/.*",
+  "readme": "./README.md",
+  "ignoreCompilerErrors": true,
+  "excludeExternals": true,
+  "excludeNotExported": true
+}
