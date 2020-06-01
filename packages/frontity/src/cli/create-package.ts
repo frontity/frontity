@@ -2,7 +2,7 @@ import ora from "ora";
 import chalk from "chalk";
 import { normalize } from "path";
 import { prompt, Question } from "inquirer";
-import createPackage from "../commands/create-package";
+import createPackageCommand from "../commands/create-package";
 import {
   errorLogger,
   isFrontityProjectRoot,
@@ -11,16 +11,7 @@ import {
 } from "../utils";
 import { Options } from "../steps/create-package";
 
-//  Command:
-//    create-package [name]
-//
-//  Steps:
-//    1. validate project location
-//    2. ask for the package name if it wasn't passed as argument and validate
-//    3. ask for the package namespace if it wasn't passed as argument
-//    4. create package
-
-export default async ({
+const createPackage = async ({
   name,
   namespace,
   prompt: promptUser,
@@ -95,7 +86,7 @@ export default async ({
 
   try {
     // 4. get the emitter for `create-package`
-    const emitter = createPackage(options);
+    const emitter = createPackageCommand(options);
 
     emitter.on("message", (message, action) => {
       if (action) ora.promise(action, message);
@@ -110,3 +101,5 @@ export default async ({
 
   log(chalk.bold(`\nNew package "${options.name}" created.\n`));
 };
+
+export default createPackage;

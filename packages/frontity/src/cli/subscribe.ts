@@ -1,10 +1,10 @@
 import ora from "ora";
 import chalk from "chalk";
 import { errorLogger } from "../utils";
-import subscribe from "../commands/subscribe";
+import subscribeCommand from "../commands/subscribe";
 import { prompt, Question } from "inquirer";
 
-export default async ({ email }: { email: string }) => {
+const subscribe = async ({ email }: { email: string }) => {
   while (!email) {
     const subscribeQuestion: Question[] = [
       {
@@ -18,7 +18,7 @@ export default async ({ email }: { email: string }) => {
   }
 
   try {
-    const emitter = subscribe(email);
+    const emitter = subscribeCommand(email);
     emitter.on("message", (message, action) => {
       if (action) ora.promise(action, message);
       else console.log(message);
@@ -35,3 +35,5 @@ export default async ({ email }: { email: string }) => {
         "https://community.frontity.org/"
       )}.\n`);
 };
+
+export default subscribe;

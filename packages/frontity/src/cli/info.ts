@@ -1,8 +1,8 @@
-import { info } from "../commands";
+import infoCommand from "../commands/info";
 import { writeSync } from "clipboardy";
 
-export default async () => {
-  const information = await info();
+const info = async () => {
+  const information = await infoCommand();
   console.log(`${information}
   
   System info copied in the clipboard!
@@ -11,3 +11,5 @@ export default async () => {
   `);
   writeSync(information);
 };
+
+export default info;

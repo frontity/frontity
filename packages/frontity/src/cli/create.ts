@@ -2,12 +2,12 @@ import { resolve } from "path";
 import ora from "ora";
 import chalk from "chalk";
 import { prompt, Question, ListQuestion } from "inquirer";
-import create from "../commands/create";
+import createCommand from "../commands/create";
 import { subscribe } from "../steps";
 import { errorLogger, log } from "../utils";
 import { Options } from "../steps/types";
 
-export default async ({
+const create = async ({
   name,
   theme,
   typescript,
@@ -81,7 +81,7 @@ export default async ({
 
   try {
     // Get the emitter for `create`
-    const emitter = create(options);
+    const emitter = createCommand(options);
     emitter.on("message", (message, action) => {
       if (action) ora.promise(action, message);
       else log(message);
@@ -137,3 +137,5 @@ export default async ({
     errorLogger(error);
   }
 };
+
+export default create;
