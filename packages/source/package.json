@@ -18,8 +18,7 @@
   },
   "scripts": {
     "test:ci": "../../node_modules/.bin/jest --ci --coverage",
-    "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest",
-    "typedoc": "../../node_modules/.bin/typedoc --tsconfig tsconfig.typedoc.json --out typedoc --excludeExternals"
+    "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest"
   },
   "dependencies": {
     "frontity": "^1.7.0"
