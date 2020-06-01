@@ -50,7 +50,6 @@
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "babel-polyfill": "^6.26.0",
     "core-js": "^3.0.1",
-    "copyfiles": "^2.2.0",
     "cross-spawn": "^7.0.2",
     "deepmerge": "^3.2.0",
     "express": "^4.16.4",
@@ -103,6 +102,7 @@
     "@types/webpack-bundle-analyzer": "^2.13.1",
     "@types/webpack-dev-middleware": "^3.7.0",
     "@types/webpack-env": "^1.13.9",
-    "@types/webpack-hot-middleware": "^2.16.5"
+    "@types/webpack-hot-middleware": "^2.16.5",
+    "copyfiles": "^2.2.0"
   }
 }
