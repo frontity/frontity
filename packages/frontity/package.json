@@ -28,8 +28,7 @@
     "test:ci": "../../node_modules/.bin/jest --colors --ci --coverage",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
-    "prepublish": "npm run build",
-    "typedoc": "../../node_modules/.bin/typedoc --tsconfig tsconfig.typedoc.json --out typedoc --excludeExternals"
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
@@ -56,11 +55,11 @@
     "tar": "^4.4.8",
     "ts-node": "^8.0.3",
     "typed-emitter": "^0.2.0",
-    "typescript": "3.8.3"
+    "typescript": "^3.8.2"
   },
   "devDependencies": {
-    "@frontity/connect": "^1.1.0",
     "@frontity/core": "^1.6.0",
+    "@frontity/connect": "^1.1.0",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
