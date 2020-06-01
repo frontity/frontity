@@ -138,7 +138,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -284,7 +283,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -405,7 +403,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -550,7 +547,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -688,7 +684,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -809,7 +804,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
