@@ -36,7 +36,7 @@ jobs:
         uses: cypress-io/github-action@v1.21.0
         with:
           build: ./scripts/build-e2e-docker.sh ${{ matrix.publicPath }} ${{ matrix.target }}
-          start: ./scripts/run-e2e-docker.sh
+          start: ls && ./scripts/run-e2e-docker.sh
           wait-on: "http://localhost:3001"
           wait-on-timeout: 180
           env: HEADLESS=true
