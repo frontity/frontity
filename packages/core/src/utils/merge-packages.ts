@@ -36,10 +36,16 @@ export default ({
       clone: false,
     });
   });
+  // Save debug, which is the only value we want to retain.
+  const debug = !!config.state?.frontity?.debug;
+  // Merge the state from the packages with the initial state.
   config.state = deepmerge(config.state, state, {
     clone: true,
     arrayMerge: overwriteArrays ? overwriteMerge : undefined,
   });
+  // Delete the name and restore the debug flag.
   delete config.name;
+  config.state.frontity.debug = debug;
+
   return config;
 };

@@ -48,6 +48,16 @@ export interface Package {
       mode?: string;
 
       /**
+       * Debug mode.
+       *
+       * Useful to test some packages that can do different things in debug
+       * mode, like for example the slot and fills.
+       *
+       * @default false
+       */
+      debug?: boolean;
+
+      /**
        * An array with the names of the Frontity packages that are loaded for
        * this site.
        *
