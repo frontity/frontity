@@ -35,7 +35,7 @@ jobs:
       - name: Run e2e tests
         uses: cypress-io/github-action@v1.21.0
         with:
-          build: ./scripts/build-e2e-docker ${{ matrix.publicPath }} ${{ matrix.target }}
+          build: ./scripts/build-e2e-docker.sh ${{ matrix.publicPath }} ${{ matrix.target }}
           start: node scripts/start-e2e-docker.js && npx frontity serve --port 3001
           wait-on: "http://localhost:3001"
           wait-on-timeout: 180
