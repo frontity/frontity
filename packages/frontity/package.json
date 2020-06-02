@@ -28,6 +28,7 @@
     "test:ci": "../../node_modules/.bin/jest --colors --ci --coverage",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
+    "build:watch": "tsc --project ./tsconfig.build.json --watch",
     "prepublish": "npm run build"
   },
   "dependencies": {

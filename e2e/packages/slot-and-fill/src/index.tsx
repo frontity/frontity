@@ -6,6 +6,7 @@ const Root: FC = connect(() => {
   const { actions } = useConnect<SlotAndFill>();
   const fills1 = useFills("slot 1");
   const fills2 = useFills("slot 2");
+
   return (
     <>
       <div id="useFills-slot1">
@@ -29,6 +30,9 @@ const Root: FC = connect(() => {
       </button>
       <button id="addFill2" onClick={actions.slotAndFill.addFill2}>
         Add Fill2
+      </button>
+      <button id="toggleDebug" onClick={actions.slotAndFill.toggleDebug}>
+        Toggle Debug
       </button>
     </>
   );
@@ -64,6 +68,9 @@ const slotAndFill: SlotAndFill = {
           },
           priority: 9,
         };
+      },
+      toggleDebug: ({ state }) => {
+        state.frontity.debug = !state.frontity.debug;
       },
     },
   },

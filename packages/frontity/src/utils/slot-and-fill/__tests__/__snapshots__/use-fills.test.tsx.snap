@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useFills Should not return the fill when library doesn't match a component in libraries 1`] = `null`;
+exports[`useFills should not return the fill when library doesn't match a component in libraries 1`] = `null`;
 
-exports[`useFills Should not return the fill when library is not specified 1`] = `null`;
+exports[`useFills should not return the fill when library is not specified 1`] = `null`;
 
-exports[`useFills Should not return the fill when the slot is not specified 1`] = `null`;
+exports[`useFills should not return the fill when the slot is not specified 1`] = `null`;
 
-exports[`useFills Should re-render the fill when updating the props 1`] = `
+exports[`useFills should re-render the fill when updating the props 1`] = `
 <div
   data-name="namespace1 - test fill 1"
   data-number={43}
@@ -16,9 +16,20 @@ exports[`useFills Should re-render the fill when updating the props 1`] = `
 </div>
 `;
 
-exports[`useFills Should remind to specify the slot name if called without arguments 1`] = `null`;
+exports[`useFills should remind to specify the slot name if called without arguments 1`] = `null`;
 
-exports[`useFills Should render the fills in the order of priority 1`] = `
+exports[`useFills should render the debug slots when \`state.frontity.debug\` is true 1`] = `
+<div
+  className="css-35givi"
+  data-slot-name="slot 1"
+>
+  Slot: "
+  slot 1
+  "
+</div>
+`;
+
+exports[`useFills should render the fills in the order of priority 1`] = `
 Array [
   <div
     data-name="namespace2 - test fill 3"
@@ -37,7 +48,7 @@ Array [
 ]
 `;
 
-exports[`useFills Should skip rendering the fills with value \`false\` 1`] = `
+exports[`useFills should skip rendering the fills with value \`false\` 1`] = `
 <div
   data-name="namespace2 - test fill 3"
   data-number={3}
@@ -47,9 +58,9 @@ exports[`useFills Should skip rendering the fills with value \`false\` 1`] = `
 </div>
 `;
 
-exports[`useFills Should warn when the Fill component is not found in libraries 1`] = `null`;
+exports[`useFills should warn when the Fill component is not found in libraries 1`] = `null`;
 
-exports[`useFills Should work in the most basic case 1`] = `
+exports[`useFills should work in the most basic case 1`] = `
 <div
   data-name="namespace1 - test fill 1"
   data-number={1}
@@ -59,8 +70,8 @@ exports[`useFills Should work in the most basic case 1`] = `
 </div>
 `;
 
-exports[`useFills Should work when \`state.fills\` doesn't contain any fills 1`] = `null`;
+exports[`useFills should work when \`state.fills\` doesn't contain any fills 1`] = `null`;
 
-exports[`useFills Should work when \`state.fills\` is missing 1`] = `null`;
+exports[`useFills should work when \`state.fills\` is missing 1`] = `null`;
 
-exports[`useFills Should work when the slot does not exist 1`] = `null`;
+exports[`useFills should work when the slot does not exist 1`] = `null`;

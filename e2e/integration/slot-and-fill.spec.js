@@ -33,4 +33,13 @@ describe("useFills", () => {
     cy.get("#useFills-slot1").should("have.text", "I am Fill2I am Fill1");
     cy.get("#useFills-slot2-empty").should("exist");
   });
+
+  it("should show the debug fills when `state.frontity.debug` is true", () => {
+    cy.visit("http://localhost:3001/?name=slot-and-fill");
+    cy.get("#toggleDebug").click();
+    cy.get("#useFills-slot1-empty").should("not.exist");
+    cy.get("#useFills-slot2-empty").should("not.exist");
+    cy.get("[data-slot-name='slot 1']").should("exist");
+    cy.get("[data-slot-name='slot 2']").should("exist");
+  });
 });

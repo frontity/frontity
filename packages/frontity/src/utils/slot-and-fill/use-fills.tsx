@@ -1,5 +1,6 @@
+import React from "react";
 import get from "get-value";
-import { useConnect, warn } from "../..";
+import { useConnect, warn, styled } from "../..";
 import { Fill as StateFill, Package } from "../../../types";
 
 /**
@@ -20,6 +21,26 @@ interface Fill extends StateFill {
 }
 
 /**
+ * The React component that is used in all the Slots when
+ * `state.frontity.debug` is true
+ *
+ * @param slotName - The name of the slot.
+ */
+const DebugFill: React.FC<{ name: string }> = ({ name }) => (
+  <Debug data-slot-name={name}>Slot: &quot;{name}&quot;</Debug>
+);
+
+/**
+ * Styles for the Debug Fill components.
+ */
+const Debug = styled.div`
+  font-size: 20px;
+  background: blue;
+  color: yellow;
+  padding: 10px;
+`;
+
+/**
  * A React hook to ease the creation of `Slot` components.
  *
  * @param name The name of the Slot that you want to fill.
@@ -32,6 +53,21 @@ const useFills = (name: string): Fill[] => {
   if (!name) {
     warn("You should pass the name of the slot that you would like to fill!");
     return [];
+  }
+
+  if (state.frontity?.debug) {
+    return [
+      {
+        key: "debug-fill",
+        priority: 10,
+        slot: name,
+        library: "",
+        Fill: DebugFill,
+        props: {
+          name,
+        },
+      },
+    ];
   }
 
   return (

@@ -68,7 +68,7 @@ beforeEach(() => {
 });
 
 describe("useFills", () => {
-  it("Should work in the most basic case", () => {
+  it("should work in the most basic case", () => {
     const Comp = connect(() => {
       const fills = useFills("slot 1");
 
@@ -97,7 +97,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should work when the slot does not exist", () => {
+  it("should work when the slot does not exist", () => {
     const Comp = connect(() => {
       const fills = useFills("slot that does not exist");
 
@@ -122,7 +122,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should remind to specify the slot name if called without arguments", () => {
+  it("should remind to specify the slot name if called without arguments", () => {
     const warn = jest.spyOn(global.console, "warn");
 
     const Comp = connect(() => {
@@ -156,7 +156,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should warn when the Fill component is not found in libraries", () => {
+  it("should warn when the Fill component is not found in libraries", () => {
     const warn = jest.spyOn(global.console, "warn");
 
     const Comp = connect(() => {
@@ -190,7 +190,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should not return the fill when library is not specified", () => {
+  it("should not return the fill when library is not specified", () => {
     delete store.state.fills.namespace1["test fill 1"].library;
 
     const Comp = connect(() => {
@@ -216,7 +216,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should not return the fill when library doesn't match a component in libraries", () => {
+  it("should not return the fill when library doesn't match a component in libraries", () => {
     store.state.fills.namespace1["test fill 1"].library = "FillComponent";
 
     const Comp = connect(() => {
@@ -242,7 +242,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should not return the fill when the slot is not specified", () => {
+  it("should not return the fill when the slot is not specified", () => {
     delete store.state.fills.namespace1["test fill 1"].slot;
 
     const Comp = connect(() => {
@@ -268,7 +268,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should work when `state.fills` is missing", () => {
+  it("should work when `state.fills` is missing", () => {
     delete store.state.fills;
 
     const Comp = connect(() => {
@@ -294,7 +294,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should work when `state.fills` doesn't contain any fills", () => {
+  it("should work when `state.fills` doesn't contain any fills", () => {
     store.state.fills = {};
 
     const Comp = connect(() => {
@@ -320,7 +320,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should re-render the fill when updating the props", () => {
+  it("should re-render the fill when updating the props", () => {
     const Comp = connect(() => {
       const fills = useFills("slot 1");
 
@@ -353,7 +353,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should render the fills in the order of priority", () => {
+  it("should render the fills in the order of priority", () => {
     store.state.fills.namespace2["test fill 3"].slot = "slot 1";
 
     const Comp = connect(() => {
@@ -391,7 +391,7 @@ describe("useFills", () => {
     expect(app.toJSON()).toMatchSnapshot();
   });
 
-  it("Should skip rendering the fills with value `false`", () => {
+  it("should skip rendering the fills with value `false`", () => {
     store.state.fills.namespace2["test fill 3"].slot = "slot 1";
     store.state.fills.namespace1["test fill 1"] = false;
 
@@ -419,6 +419,33 @@ describe("useFills", () => {
       "data-number": 3,
       "data-name": "namespace2 - test fill 3",
     });
+
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+
+  it("should render the debug slots when `state.frontity.debug` is true", () => {
+    store.state.frontity = { debug: true };
+
+    const Comp = connect(() => {
+      const fills = useFills("slot 1");
+
+      return (
+        <>
+          {fills.map(({ Fill, props, key }) => (
+            <Fill key={key} name={key} {...props} />
+          ))}
+        </>
+      );
+    });
+
+    const app = create(
+      <Provider value={store}>
+        <Comp />
+      </Provider>
+    );
+
+    // We should only render 1 component.
+    expect(app.toJSON().props["data-slot-name"]).toBe("slot 1");
 
     expect(app.toJSON()).toMatchSnapshot();
   });

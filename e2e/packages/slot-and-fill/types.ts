@@ -6,6 +6,7 @@ interface SlotAndFill extends Package {
     slotAndFill: {
       addFill1: Action<SlotAndFill>;
       addFill2: Action<SlotAndFill>;
+      toggleDebug: Action<SlotAndFill>;
     };
   };
   roots: {
