@@ -1,6 +1,5 @@
 #!/bin/bash
+set -euxo pipefail
 
-node ./start-e2e-docker.js 
-cd ../e2e/project/ 
-npx frontity build 
+node ./start-e2e-docker.js
 npx frontity serve --port 3001

@@ -35,6 +35,7 @@ const { spawn } = require("child-process-promise");
       "docker-compose",
       [
         "exec",
+        "-it",
         "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
         "/bin/bash",
         "-c",
@@ -53,6 +54,7 @@ const { spawn } = require("child-process-promise");
       "docker-compose",
       [
         "exec",
+        "-it",
         "--user", // https://hub.docker.com/_/wordpress/ See: "Running as arbitrary user"
         "33:33",
         "wpcli", // this is the reference to the volume (we have wp, wpcli, and msql)
