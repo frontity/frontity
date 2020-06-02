@@ -4,6 +4,7 @@
   "scripts": {
     "test": "lerna run test:ci --stream",
     "test:ci": "jest --clearCache && lerna run test:ci --stream",
+    "e2e-docker": "./scripts/run-e2e-docker-tests",
     "codecov": "curl -s https://codecov.io/bash | bash -s",
     "e2e:prod:all": "cd e2e/project/ && npx frontity build && npx frontity serve --port 3001",
     "e2e:prod:module": "cd e2e/project/ && npx frontity build --publicPath /custom/path --target module && npx frontity serve --port 3001",
@@ -19,6 +20,7 @@
     "@changesets/cli": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "@types/execa": "^2.0.0",
     "@types/jest": "^24.0.25",
     "child-process-promise": "^2.2.1",
     "cross-env": "^5.2.1",
@@ -29,6 +31,7 @@
     "eslint-plugin-jest": "^22.15.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
+    "execa": "^4.0.2",
     "husky": "^1.3.1",
     "jest": "^24.9.0",
     "lerna": "^3.15.0",

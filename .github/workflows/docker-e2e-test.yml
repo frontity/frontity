@@ -4,6 +4,11 @@ on: [pull_request]
 
 jobs:
   run-e2e:
+    strategy:
+      matrix:
+        targets: ["module"]
+        publicPath: ["/custom/path"]
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,13 +32,11 @@ jobs:
         env:
           CI: true
 
-      - name: Test
-        run: node e2e/scripts/index.js
-
       - name: Run e2e tests
         uses: cypress-io/github-action@v1.21.0
         with:
-          start: npm run e2e:prod:module
+          build: "./scripts/build-e2e-docker.sh ${{ matrix.publicPath }} ${{ matrix.target }}"
+          start: "node scripts/start-e2e-docker.js && npx frontity serve --port 3001"
           wait-on: "http://localhost:3001"
           wait-on-timeout: 180
           env: HEADLESS=true
