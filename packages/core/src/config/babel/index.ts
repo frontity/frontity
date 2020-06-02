@@ -70,6 +70,8 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       "@babel/plugin-proposal-object-rest-spread",
       // Support for the class props: class MyClass { myProp = 'hi there' }
       "@babel/plugin-proposal-class-properties",
+      // Cherry-pick Lodash modules
+      "babel-plugin-lodash",
       // Transform inline environment variables (for process.env.CWD)
       [
         "babel-plugin-transform-inline-environment-variables",
