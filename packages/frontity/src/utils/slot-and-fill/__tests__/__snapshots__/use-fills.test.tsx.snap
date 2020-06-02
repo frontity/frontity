@@ -8,7 +8,7 @@ exports[`useFills Should not return the fill when the slot is not specified 1`] 
 
 exports[`useFills Should re-render the fill when updating the props 1`] = `
 <div
-  data-name="test fill 1"
+  data-name="namespace1 - test fill 1"
   data-number={43}
   id="test-fill"
 >
@@ -21,14 +21,14 @@ exports[`useFills Should remind to specify the slot name if called without argum
 exports[`useFills Should render the fills in the order of priority 1`] = `
 Array [
   <div
-    data-name="test fill 3"
+    data-name="namespace2 - test fill 3"
     data-number={3}
     id="test-fill"
   >
     Im a Fill
   </div>,
   <div
-    data-name="test fill 1"
+    data-name="namespace1 - test fill 1"
     data-number={1}
     id="test-fill"
   >
@@ -39,7 +39,7 @@ Array [
 
 exports[`useFills Should skip rendering the fills with value \`false\` 1`] = `
 <div
-  data-name="test fill 3"
+  data-name="namespace2 - test fill 3"
   data-number={3}
   id="test-fill"
 >
@@ -51,7 +51,7 @@ exports[`useFills Should warn when the Fill component is not found in libraries 
 
 exports[`useFills Should work in the most basic case 1`] = `
 <div
-  data-name="test fill 1"
+  data-name="namespace1 - test fill 1"
   data-number={1}
   id="test-fill"
 >

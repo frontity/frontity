@@ -90,7 +90,7 @@ describe("useFills", () => {
     expect(app.toJSON().props).toEqual({
       id: "test-fill",
       "data-number": 1,
-      "data-name": "test fill 1",
+      "data-name": "namespace1 - test fill 1",
     });
     expect(app.toJSON().children[0]).toEqual("Im a Fill");
 
@@ -346,7 +346,7 @@ describe("useFills", () => {
     expect(app.toJSON().props).toEqual({
       id: "test-fill",
       "data-number": 43,
-      "data-name": "test fill 1",
+      "data-name": "namespace1 - test fill 1",
     });
     expect(app.toJSON().children[0]).toEqual("Im a Fill");
 
@@ -378,14 +378,14 @@ describe("useFills", () => {
     expect(app.toJSON()[0].props).toEqual({
       id: "test-fill",
       "data-number": 3,
-      "data-name": "test fill 3",
+      "data-name": "namespace2 - test fill 3",
     });
 
     // This fill should come second
     expect(app.toJSON()[1].props).toEqual({
       id: "test-fill",
       "data-number": 1,
-      "data-name": "test fill 1",
+      "data-name": "namespace1 - test fill 1",
     });
 
     expect(app.toJSON()).toMatchSnapshot();
@@ -417,7 +417,7 @@ describe("useFills", () => {
     expect(app.toJSON().props).toEqual({
       id: "test-fill",
       "data-number": 3,
-      "data-name": "test fill 3",
+      "data-name": "namespace2 - test fill 3",
     });
 
     expect(app.toJSON()).toMatchSnapshot();

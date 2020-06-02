@@ -36,27 +36,29 @@ const useFills = (name: string): Fill[] => {
 
   return (
     // Flat all the fills and turn them into entries.
-    Object.values(state.fills || {})
-      .reduce<[string, StateFill][]>(
-        (fills, namespace) => [...fills, ...Object.entries(namespace)],
+    Object.entries(state.fills || {})
+      .reduce<Fill[]>(
+        (allFills, [namespace, fills]) => [
+          ...allFills,
+          ...Object.entries(fills).map(
+            // 1. Nest the `key` of the fill adding names.
+            // 2. Add default priority of 10 if not present
+            // 3. Add the Fill component.
+            ([key, fill]): Fill => ({
+              key: `${namespace} - ${key}`,
+              priority: fill.priority || 10,
+              ...(fill.library && {
+                Fill: get(libraries.fills, fill.library),
+              }),
+              ...fill,
+            })
+          ),
+        ],
         []
       )
-      // Match only the fills for this name.
-      .filter(([, { slot }]) => slot === name)
 
-      // 1. Nest the `key` of the fill
-      // 2. Add default priority of 10 if not present
-      // 3. Add the Fill component.
-      .map(
-        ([key, fill]): Fill => ({
-          key,
-          priority: fill.priority || 10,
-          ...(fill.library && {
-            Fill: get(libraries.fills, fill.library),
-          }),
-          ...fill,
-        })
-      )
+      // Match only the fills for this name.
+      .filter(({ slot }) => slot === name)
 
       // Filter out fills without a Fill component.
       .filter(({ Fill, key, library }) => {
