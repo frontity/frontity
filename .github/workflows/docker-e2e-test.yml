@@ -38,7 +38,7 @@ jobs:
           build: ./scripts/build-e2e-docker.sh ${{ matrix.publicPath }} ${{ matrix.target }}
           start: node scripts/start-e2e-docker.js; npx frontity serve --port 3001
           wait-on: "http://localhost:3001"
-          wait-on-timeout: 300
+          wait-on-timeout: 180
           env: HEADLESS=true
           working-directory: e2e
           config: video=true,screenshotOnRunFailure=true
