@@ -11,30 +11,30 @@ const { spawn } = require("child-process-promise");
       stdio: "inherit",
     });
 
-    await spawn(
-      "docker-compose",
-      [
-        "run",
-        "wpcli",
-        "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
-        "core",
-        "install",
-        "--url=example.com",
-        "--title=Example",
-        "--admin_user=admin",
-        "--admin_password=password",
-        "--admin_email=info@example.com",
-      ],
-      {
-        stdio: "inherit",
-      }
-    );
+    // await spawn(
+    //   "docker-compose",
+    //   [
+    //     "exec",
+    //     "wpcli",
+    //     "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
+    //     "core",
+    //     "install",
+    //     "--url=example.com",
+    //     "--title=Example",
+    //     "--admin_user=admin",
+    //     "--admin_password=password",
+    //     "--admin_email=info@example.com",
+    //   ],
+    //   {
+    //     stdio: "inherit",
+    //   }
+    // );
 
     // Change permissions to the wp-content folder so that we can install plugins and load content
     await spawn(
       "docker-compose",
       [
-        "run",
+        "exec",
         "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
         "/bin/bash",
         "-c",
@@ -52,7 +52,7 @@ const { spawn } = require("child-process-promise");
     await spawn(
       "docker-compose",
       [
-        "run",
+        "exec",
         "--user", // https://hub.docker.com/_/wordpress/ See: "Running as arbitrary user"
         "33:33",
         "wpcli", // this is the reference to the volume (we have wp, wpcli, and msql)
