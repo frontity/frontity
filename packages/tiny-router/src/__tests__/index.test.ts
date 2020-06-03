@@ -23,7 +23,7 @@ beforeEach(() => {
     name: "@frontity/tiny-router",
     state: {
       frontity: {
-        platform: "server",
+        platform: "client",
         initialLink: "/initial/link/",
       },
       router: { ...tinyRouter.state.router },
@@ -65,6 +65,7 @@ describe("actions", () => {
       store.actions.router.set(link);
       expect(normalize).toHaveBeenCalledWith(link);
       expect(store.state.router.link).toBe(normalized);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
     });
 
     test("should work with full URLs", () => {
@@ -78,6 +79,22 @@ describe("actions", () => {
       store.actions.router.set(link);
       expect(normalize).toHaveBeenCalledWith(link);
       expect(store.state.router.link).toBe(normalized);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
+    });
+
+    test("should not create new history entry if link is the same", () => {
+      const store = createStore(config);
+
+      const link = "/some-post/";
+      const normalized = "/some-post/";
+
+      normalize.mockReturnValue(normalized);
+
+      store.actions.router.set(link);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
+
+      store.actions.router.set(link);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
     });
 
     test("should populate latest link and state", () => {
@@ -134,19 +151,19 @@ describe("actions", () => {
       const store = createStore(config);
 
       const link = "/some-post/";
-      const normalized = "/some-post/";
       const options: SetOptions = {
         method: "push",
       };
-
-      normalize.mockReturnValue(normalized);
+      normalize.mockReturnValue(link);
 
       store.actions.router.set(link, options);
       expect(spiedPushState).toHaveBeenCalledTimes(1);
 
+      const link2 = "/other-post/";
       options.method = "replace";
+      normalize.mockReturnValue(link2);
 
-      store.actions.router.set(link, options);
+      store.actions.router.set(link2, options);
       expect(spiedReplaceState).toHaveBeenCalledTimes(1);
     });
 
@@ -222,6 +239,7 @@ describe("actions", () => {
   describe("init", () => {
     test("should populate the initial link", () => {
       const store = createStore(config);
+      store.state.frontity.platform = "server";
 
       normalize.mockReturnValue("/initial/link/");
 
@@ -234,7 +252,6 @@ describe("actions", () => {
     });
 
     test("should fire `replaceState` once and add an event listener to handle popstate events", () => {
-      config.state.frontity.platform = "client";
       const store = createStore(config);
       store.state.router.state = { some: "state" };
       store.actions.router.init();
@@ -283,8 +300,11 @@ describe("actions", () => {
     test("should fetch if autoFetch is enabled", () => {
       const ctx = {} as Context;
       get.mockReturnValue({});
+
       const store = createStore(config);
+      store.state.frontity.platform = "server";
       store.libraries.source = undefined;
+
       store.actions.router.init();
       store.actions.router.beforeSSR({ ctx });
 
@@ -297,6 +317,7 @@ describe("actions", () => {
       get.mockReturnValue({ isError: true, errorStatus: 123 });
 
       const store = createStore(config);
+
       await store.actions.router.beforeSSR({ ctx });
 
       expect(ctx.status).toBe(123);
