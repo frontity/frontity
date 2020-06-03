@@ -89,7 +89,7 @@ program
   .option("-d, --development", "Builds the project for development.")
   .option(
     "--target <target>",
-    'create bundles with "es5" or "module". Default target is "module".'
+    'create bundles with "es5", "module" or "both". Default target is "both".'
   )
   .option(
     "--publicPath <path>",
