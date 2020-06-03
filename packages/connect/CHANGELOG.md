@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.1.1
+
+### Patch Changes
+
+- [`5cb29ab6`](https://github.com/frontity/frontity/commit/5cb29ab63ab31872a4d853e5e2fdbdabca974c9f) [#430](https://github.com/frontity/frontity/pull/430) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix broken types in TypeScript 3.9.
+
 ## 1.1.0
 
 ### Minor Changes
