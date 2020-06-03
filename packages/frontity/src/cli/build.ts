@@ -2,9 +2,9 @@ import build from "../commands/build";
 import { errorLogger } from "../utils";
 
 export default async ({
-  target = process.env.FRONTITY_TARGET,
+  target = process.env.FRONTITY_TARGET || "both",
   development = !!process.env.FRONTITY_DEVELOPMENT,
-  publicPath = process.env.FRONTITY_PUBLIC_PATH,
+  publicPath = process.env.FRONTITY_PUBLIC_PATH || "/static/",
 }: {
   target?: string;
   development?: boolean;

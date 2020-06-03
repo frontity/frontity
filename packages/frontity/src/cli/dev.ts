@@ -2,11 +2,11 @@ import dev from "../commands/dev";
 import { errorLogger } from "../utils";
 
 export default async ({
-  target = process.env.FRONTITY_TARGET,
+  target = process.env.FRONTITY_TARGET || "module",
   port = process.env.FRONTITY_PORT || "3000",
   https = !!process.env.FRONTITY_HTTPS,
   production = !!process.env.FRONTITY_PRODUCTION,
-  publicPath = process.env.FRONTITY_PUBLIC_PATH,
+  publicPath = process.env.FRONTITY_PUBLIC_PATH || "/static/",
   dontOpenBrowser = !!process.env.FRONTITY_DONT_OPEN_BROWSER,
 }: {
   target?: string;

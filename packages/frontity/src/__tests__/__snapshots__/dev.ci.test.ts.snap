@@ -54,8 +54,8 @@ Array [
       "https": false,
       "port": 3000,
       "production": false,
-      "publicPath": undefined,
-      "target": undefined,
+      "publicPath": "/static/",
+      "target": "module",
     },
   ],
 ]

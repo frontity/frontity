@@ -37,8 +37,8 @@ Array [
   Array [
     Object {
       "development": false,
-      "publicPath": undefined,
-      "target": undefined,
+      "publicPath": "/static/",
+      "target": "both",
     },
   ],
 ]
