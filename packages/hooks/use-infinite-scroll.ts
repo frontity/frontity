@@ -3,7 +3,8 @@ import { useConnect } from "frontity";
 import useInView from "./use-in-view";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
-import { IntersectionOptions } from "react-intersection-observer";
+
+type IntersectionOptions = Parameters<typeof useInView>[0];
 
 type UseInfiniteScroll = (options: {
   currentLink: string;
