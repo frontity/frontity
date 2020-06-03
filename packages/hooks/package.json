@@ -1,6 +1,6 @@
 {
   "name": "@frontity/hooks",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Collection of React hooks for Frontity",
   "keywords": [
     "frontity",
@@ -22,6 +22,9 @@
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "react-intersection-observer": "^8.26.2"
+    "frontity": "^1.5.0",
+    "react-intersection-observer": "^8.26.2",
+    "@frontity/source": "^1.2.0",
+    "@frontity/router": "^1.1.0"
   }
 }

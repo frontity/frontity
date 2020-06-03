@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
 import Router from "../types";
 
 const router: Router = {
@@ -14,6 +14,9 @@ const router: Router = {
   actions: {
     router: {
       set: (state) => (link, options) => {
+        /* do something */
+      },
+      updateState: (state) => (browserState) => {
         /* do something */
       },
     },

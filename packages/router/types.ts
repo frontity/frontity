@@ -5,6 +5,7 @@ interface Router<T = null> extends Package {
     frontity?: Package["state"]["frontity"];
     router: {
       link: string;
+      previous?: string;
       state: SetOptions["state"];
     };
   };
@@ -13,6 +14,7 @@ interface Router<T = null> extends Package {
       set:
         | Action<T extends null ? Router : T, string>
         | Action<T extends null ? Router : T, string, SetOptions>;
+      updateState: Action<T extends null ? Router : T, unknown>;
     };
   };
 }
@@ -21,5 +23,5 @@ export default Router;
 
 export interface SetOptions {
   method?: "push" | "replace";
-  state?: object;
+  state?: any;
 }

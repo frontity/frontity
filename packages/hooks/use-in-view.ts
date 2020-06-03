@@ -13,7 +13,7 @@ interface UseInViewResponse {
    */
   inView: boolean;
   /**
-   * Boolean indicating if {@link https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver | `IntersectionObserver`} is supported.
+   * Boolean indicating if [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) is supported.
    */
   supported: boolean;
 }
@@ -21,11 +21,11 @@ interface UseInViewResponse {
 /**
  * React hook that tracks when an element enters or leaves the viewport. It also checks if `IntersectionObserver` is supported by the browser.
  *
- * Uses {@link https://github.com/thebuilder/react-intersection-observer | `react-intersection-observer`} under the hood.
+ * Uses [`react-intersection-observer`](https://github.com/thebuilder/react-intersection-observer) under the hood.
  *
- * @param options - Object containing options (see: {@link https://github.com/thebuilder/react-intersection-observer#options | react-intersection-observer#options})
+ * @param options - Object containing options (see: [react-intersection-observer#options](https://github.com/thebuilder/react-intersection-observer#options)).
  *
- * @return Object of type {@link UseInViewResponse}.
+ * @returns Object of type {@link UseInViewResponse}.
  */
 export default (options?: IntersectionOptions): UseInViewResponse => {
   if (

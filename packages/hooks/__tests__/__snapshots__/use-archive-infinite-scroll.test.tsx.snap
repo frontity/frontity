@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Wrapper should return children and fetcher inside a wrapper 1`] = `
+<div
+  id="container"
+>
+  <div>
+    <div
+      id="children"
+    />
+    <div />
+  </div>
+</div>
+`;
+
+exports[`Wrapper should return children if IntersectionObserver is not supported 1`] = `
+<div
+  id="container"
+>
+  <div
+    id="children"
+  />
+</div>
+`;
+
+exports[`Wrapper should return children inside a wrapper 1`] = `
+<div
+  id="container"
+>
+  <div>
+    <div
+      id="children"
+    />
+  </div>
+</div>
+`;
+
+exports[`Wrapper should return null if the current element is not ready 1`] = `
+<div
+  id="container"
+/>
+`;
