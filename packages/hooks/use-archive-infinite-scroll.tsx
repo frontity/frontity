@@ -78,7 +78,7 @@ type UseArchiveInfiniteScroll = (options?: {
  */
 export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
   connect(
-    ({ children }) => {
+    ({ children, className }) => {
       const { state } = useConnect<Source & Router>();
 
       // Values from browser state.
@@ -113,7 +113,7 @@ export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
       `;
 
       return (
-        <div css={container} ref={routeRef}>
+        <div css={container} ref={routeRef} className={className}>
           {children}
           {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
         </div>
