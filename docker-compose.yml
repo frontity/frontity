@@ -2,7 +2,6 @@ version: "3"
 
 services:
   wp:
-    container_name: frontity_wp
     image: wordpress:5.0
     ports:
       - 8080:80
@@ -20,7 +19,6 @@ services:
       - db
 
   wpcli:
-    container_name: frontity_wpcli
     image: wordpress:cli
     volumes:
       - wp_data:/var/www/html
@@ -29,7 +27,6 @@ services:
       - wp
 
   db:
-    container_name: frontity_db
     image: mysql:latest
     command:
       [
