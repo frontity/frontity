@@ -30,6 +30,8 @@ var waitOn = require("wait-on");
       "docker-compose",
       [
         "run",
+        "--user", // https://hub.docker.com/_/wordpress/ See: "Running as arbitrary user"
+        "33:33",
         "wpcli", // this is the reference to the service (we have wp, wpcli, and msql)
         "wp",
         "core",
