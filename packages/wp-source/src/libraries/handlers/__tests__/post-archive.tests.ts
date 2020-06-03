@@ -87,4 +87,29 @@ describe("post archive", () => {
     await store.actions.source.fetch("/page/2/?some=param");
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("overwrites the data when fetched with { force: true }", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(
+        mockResponse(posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
+      )
+      .mockResolvedValueOnce(
+        mockResponse(posts2, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
+      );
+
+    // Fetch entities
+    await store.actions.source.fetch("/");
+
+    await store.actions.source.fetch("/", { force: true });
+
+    expect(store.state.source).toMatchSnapshot();
+  });
 });

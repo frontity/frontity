@@ -1,5 +1,22 @@
 # Change Log
 
+## 1.4.2
+
+### Patch Changes
+
+- [`de6c7fe6`](https://github.com/frontity/frontity/commit/de6c7fe6e43510dddf26e8afbe1ef05ac5ab379c) [#454](https://github.com/frontity/frontity/pull/454) Thanks [@c4rl0sbr4v0](https://github.com/c4rl0sbr4v0)! - Rename the `Fecha` component name from Spanish to English: `DateWrapper`.
+
+- Updated dependencies [[`6900916a`](https://github.com/frontity/frontity/commit/6900916ace309d3cc55b9c732124df5d3db96838)]:
+  - frontity@1.8.0
+
+## 1.4.1
+
+### Patch Changes
+
+- [`77327403`](https://github.com/frontity/frontity/commit/77327403a8fbd44ba6780c3f1be016fda219298b) [#409](https://github.com/frontity/frontity/pull/409) Thanks [@w3bdesign](https://github.com/w3bdesign)! - Use a CSS-only loader to get rid of the outdated `react-spinners` package.
+- Updated dependencies [[`bf3db894`](https://github.com/frontity/frontity/commit/bf3db8949c7ae85c699a9c5a4613185e4ba0baaa)]:
+  - frontity@1.6.0
+
 ## 1.4.0
 
 ### Minor Changes

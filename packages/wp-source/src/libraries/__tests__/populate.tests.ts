@@ -74,6 +74,7 @@ describe("populate", () => {
           link: "https://test.frontity.org/category/cat-1/",
           slug: "cat-1",
           taxonomy: "category",
+          count: 1,
         },
       ]),
     });
@@ -88,7 +89,6 @@ describe("populate", () => {
         slug: "cat-1",
         taxonomy: "category",
         description: "This is the Category 1",
-        parent: 0,
       }),
       force: true,
     });

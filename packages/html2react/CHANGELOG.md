@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.3.3
+
+### Patch Changes
+
+- [`e9cff121`](https://github.com/frontity/frontity/commit/e9cff1218289a2c84a38ae4c575db381627c86bc) [#437](https://github.com/frontity/frontity/pull/437) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for processing `<script>` tags with `type=module`.
+- Updated dependencies [[`996865a2`](https://github.com/frontity/frontity/commit/996865a27690d5b89d2ef110f5b1bf3fb91da6f5), [`661ac083`](https://github.com/frontity/frontity/commit/661ac08316f44172166e79b05b47f0c15a837a9a), [`75343be3`](https://github.com/frontity/frontity/commit/75343be3154dda5b587a3065b225161af96f0488)]:
+  - @frontity/connect@1.1.0
+  - frontity@1.7.0
+  - @frontity/components@1.3.2
+
 ## 1.3.2
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.1.1
+
+### Patch Changes
+
+- [`5cb29ab6`](https://github.com/frontity/frontity/commit/5cb29ab63ab31872a4d853e5e2fdbdabca974c9f) [#430](https://github.com/frontity/frontity/pull/430) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix broken types in TypeScript 3.9.
+
+## 1.1.0
+
+### Minor Changes
+
+- [`996865a2`](https://github.com/frontity/frontity/commit/996865a27690d5b89d2ef110f5b1bf3fb91da6f5) [#404](https://github.com/frontity/frontity/pull/404) Thanks [@orballo](https://github.com/orballo)! - Implements `useConnect()` and adds options object `{ injectProps: boolean }` to `connect()`.
+
 ## 1.0.5
 
 ### Patch Changes

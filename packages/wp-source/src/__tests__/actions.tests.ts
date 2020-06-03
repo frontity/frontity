@@ -275,4 +275,104 @@ describe("init", () => {
     expect(store.libraries.source.handlers).toMatchSnapshot();
     expect(handlerMocks.taxonomyHandler.mock.calls).toMatchSnapshot();
   });
+
+  test("should populate link, route, page and query even if data exists", async () => {
+    store.state.source.data["/some/route/page/2/?a=b"] = {
+      isFetching: false,
+      isReady: false,
+    };
+
+    await store.actions.source.fetch("/some/route/page/2/?a=b");
+
+    const { link, route, page, query } = store.state.source.get(
+      "/some/route/page/2/?a=b"
+    );
+
+    expect(link).toEqual("/some/route/page/2/?a=b");
+    expect(route).toEqual("/some/route/");
+    expect(page).toEqual(2);
+    expect(query).toEqual({ a: "b" });
+  });
+
+  test("state.data['/some/route/'].isReady should stay true when fetching with { force: true }", async () => {
+    // Get initial data into the store
+    store.state.source.data["/some/route/"] = {
+      isFetching: false,
+      isReady: true,
+    };
+
+    const fetchLink = store.actions.source.fetch("/some/route/", {
+      force: true,
+    });
+
+    // Normally this would be `false` if we hadn't already fetched the data
+    expect(store.state.source.data["/some/route/"].isReady).toBe(true);
+
+    await fetchLink;
+
+    // It should stay `true` after having fetched, obviously
+    expect(store.state.source.data["/some/route/"].isReady).toBe(true);
+  });
+
+  test("state.data['/some/route/'].isCategory should be removed when fetching with { force: true }", async () => {
+    // Get initial data into the store
+    const initialData: any = {
+      isArchive: true,
+      isTaxonomy: true,
+      isCategory: true,
+      taxonomy: "category",
+      items: [],
+      isReady: true,
+      isFetching: false,
+    };
+
+    store.state.source.data["/some/route/"] = initialData;
+
+    handler.func = jest.fn(async ({ route, state }) => {
+      await Promise.resolve();
+      Object.assign(state.source.data[route], {
+        isFetching: true,
+        isReady: true,
+      });
+    });
+
+    expect(store.state.source.data["/some/route/"].isCategory).toBe(true);
+    expect((store.state.source.data["/some/route/"] as any).items).toEqual([]);
+
+    await store.actions.source.fetch("/some/route/", {
+      force: true,
+    });
+
+    const data = store.state.source.get("/some/route/");
+
+    // NOTE!!! This should fail in wp-source 2.0, because `isCategory` and `items` should be removed
+    expect(data).toMatchSnapshot();
+
+    // NOTE!!! This should fail in wp-source 2.0, because `isCategory` and `items` should be removed
+    expect(data.isCategory).toBe(true);
+    expect((data as any).items).toEqual([]);
+  });
+
+  test("Errors for state.data['/some/route/'] should be removed when fetching with { force: true }", async () => {
+    // Get initial data into the store
+    store.state.source["/some/route/"] = {
+      isError: true,
+      errorStatusText: "Some error",
+      errorStatus: 404,
+      isReady: true,
+      isFetching: false,
+    };
+
+    await store.actions.source.fetch("/some/route/", {
+      force: true,
+    });
+
+    const data = store.state.source.get("/some/route/");
+
+    expect(data).toMatchSnapshot();
+
+    expect(data.isError).toBeUndefined();
+    expect((data as any).errorStatus).toBeUndefined();
+    expect((data as any).errorStatusText).toBeUndefined();
+  });
 });

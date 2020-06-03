@@ -3,7 +3,7 @@
 import React from "react";
 import { Head, connect } from "frontity";
 import { Connect, Package } from "frontity/types";
-import { useInView } from "react-intersection-observer";
+import useInView from "@frontity/hooks/use-in-view";
 
 // Hides any image rendered by this component that is not
 // inside a <noscript> when JS is disabled.
@@ -104,6 +104,11 @@ const Image: Image = ({
   // These are the attributes for the image when it's loaded.
   const eagerAttributes = changeAttributes(lazyAttributes);
 
+  const { ref, inView, supported } = useInView({
+    rootMargin: rootMargin,
+    triggerOnce: true,
+  });
+
   // Renders a simple image, either in server or client, without
   // lazyload, if the loading attribute is set to `eager`.
   if (loading === "eager") {
@@ -121,19 +126,11 @@ const Image: Image = ({
     // Renders an image in client that will use IntersectionObserver to lazy load
     // if the native lazy load is not available,
     // or `height` prop is not provided.
-    if (
-      typeof IntersectionObserver !== "undefined" &&
-      !("loading" in HTMLImageElement.prototype && height > 0)
-    ) {
-      const [ref, onScreen] = useInView({
-        rootMargin: rootMargin,
-        triggerOnce: true,
-      });
-
+    if (supported && !("loading" in HTMLImageElement.prototype && height > 0)) {
       return (
         <>
           <NoScriptImage {...eagerAttributes} />
-          <img ref={ref} {...(onScreen ? eagerAttributes : lazyAttributes)} />
+          <img ref={ref} {...(inView ? eagerAttributes : lazyAttributes)} />
         </>
       );
     }

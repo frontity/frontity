@@ -22,18 +22,37 @@ import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../../types";
 import createStore from "./store";
+import { exists } from "fs";
+import { promisify } from "util";
 
 export default ({ packages }): ReturnType<Koa["callback"]> => {
   const app = new Koa();
 
   // Serve static files.
-  app.use(mount("/static", serve("./build/static")));
+  app.use(async (ctx, next) => {
+    const moduleStats = await getStats({ target: "module" });
+    const es5Stats = await getStats({ target: "es5" });
+    const stats = moduleStats || es5Stats;
 
-  // Default robots.txt.
+    const publicPath = stats
+      ? // Remove domain from publicPath.
+        stats.publicPath.replace(/^(?:https?:)?\/\/([^/])+/, "")
+      : // Use the value by default.
+        "/static";
+
+    // Serve the static files.
+    return mount(publicPath, serve("build/static"))(ctx, next);
+  });
+
+  // Serve robots.txt from root or default if it doesn't exists.
   app.use(
-    get("/robots.txt", (ctx) => {
-      ctx.type = "text/plain";
-      ctx.body = "User-agent: *\nDisallow:";
+    get("/robots.txt", async (ctx, next) => {
+      if (await promisify(exists)("./robots.txt")) {
+        await serve("./")(ctx, next);
+      } else {
+        ctx.type = "text/plain";
+        ctx.body = "User-agent: *\nAllow: /";
+      }
     })
   );
 
