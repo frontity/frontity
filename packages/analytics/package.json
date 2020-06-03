@@ -1,6 +1,6 @@
 {
   "name": "@frontity/analytics",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "This package contains the base types and actions to build analytics packages for »Frontity",
   "main": "src/index.ts",
   "keywords": [
@@ -23,6 +23,6 @@
   },
   "dependencies": {
     "@frontity/source": "^1.0.17",
-    "frontity": "^1.5.0"
+    "frontity": "^1.8.0"
   }
 }
