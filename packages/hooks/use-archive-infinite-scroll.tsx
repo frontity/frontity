@@ -6,24 +6,77 @@ import useInfiniteScroll from "./use-infinite-scroll";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
-type Wrapper = (link: string) => React.FC<Connect<Source & Router>>;
-
+/**
+ * The types of the {@link useArchiveInfiniteScroll} hook.
+ */
 type UseArchiveInfiniteScroll = (options?: {
+  /**
+   * The number of pages that the hook should load automatically before
+   * switching to manual fetching.
+   */
   limit?: number;
+
+  /**
+   * A boolean indicating if this hook should be active or not. It can be
+   * useful in situations where users want to share the same component for
+   * different types of Archives, but avoid doing infinite scroll in some of
+   * them.
+   */
   active?: boolean;
 }) => {
+  /**
+   * An array of the existing pages. Users should iterate over this array in
+   * their own layout.
+   */
   pages: {
+    /**
+     * A unique key to be used in the iteration.
+     */
     key: string;
+
+    /**
+     * The link of this page.
+     */
     link: string;
+
+    /**
+     * If this page is the last page. Useful to add separators between pages,
+     * but avoid adding it for the last one.
+     */
     isLast: boolean;
+
+    /**
+     * The Wrapper component that should wrap the real `Archive` component.
+     */
     Wrapper: React.FC<Connect<Source & Router>>;
   }[];
+
+  /**
+   * If it has reached the limit of pages and it should switch to manual mode.
+   */
   isLimit: boolean;
+
+  /**
+   * If it's fetching the next page. Useful to add a loader.
+   */
   isFetching: boolean;
+
+  /**
+   * A function that fetches the next page. Useful when the limit has been
+   * reached (`isLimit === true`) and the user pushes a button to get the next
+   * page.
+   */
   fetchNext: () => Promise<void>;
 };
 
-export const Wrapper: Wrapper = (link) =>
+/**
+ * A function that generates Wrapper components.
+ *
+ * @param link The link for the page that the Wrapper belongs to.
+ *
+ * @returns A React component that should be used to wrap the page.
+ */
+export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
   connect(
     ({ children }) => {
       const { state } = useConnect<Source & Router>();
@@ -69,12 +122,28 @@ export const Wrapper: Wrapper = (link) =>
     { injectProps: false }
   );
 
-const MemoizedWrapper = memoize((key) => key, Wrapper);
+/**
+ * A memoized {@link Wrapper} to generate Wrapper components only once.
+ *
+ * @param link The link for the page that the Wrapper belongs to.
+ *
+ * @returns A React component that should be used to wrap the page.
+ */
+const MemoizedWrapper = memoize((link: string) => link, Wrapper);
 
-const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options) => {
+/**
+ * A hook used to add infinite scroll to any Frontity archive.
+ *
+ * @param options - Options for the hook, like the number of pages it should
+ * load autoamtically or if it's active or not. Defined in {@link
+ * UseArchiveInfiniteScroll}.
+ *
+ * @returns - An array of pages and other useful booleans. Defined in {@link
+ * UseArchiveInfiniteScroll}.
+ */
+const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
   const defaultOptions = { active: true };
-
-  options = options ? { ...defaultOptions, ...options } : defaultOptions;
+  options = { ...defaultOptions, ...options };
 
   const { state, actions } = useConnect<Source & Router>();
 
