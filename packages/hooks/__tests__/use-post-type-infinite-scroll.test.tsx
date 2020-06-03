@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react";
 import { render } from "react-dom";
 import { act, Simulate } from "react-dom/test-utils";
@@ -71,7 +72,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -114,7 +115,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -151,7 +152,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -191,7 +192,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -234,7 +235,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -274,7 +275,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -314,7 +315,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -349,7 +350,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -384,7 +385,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -419,7 +420,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -448,7 +449,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -479,7 +480,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -508,7 +509,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -539,7 +540,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -570,7 +571,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -606,7 +607,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -654,7 +655,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -694,7 +695,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -732,7 +733,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -772,7 +773,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -814,7 +815,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -861,7 +862,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -907,7 +908,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -964,7 +965,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1022,7 +1023,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1084,7 +1085,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1152,7 +1153,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1209,7 +1210,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1267,7 +1268,7 @@ describe("usePostTypeInfiniteScroll", () => {
       actions: {
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1320,7 +1321,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1376,7 +1377,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1463,7 +1464,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1514,7 +1515,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1579,7 +1580,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1641,7 +1642,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1688,7 +1689,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
@@ -1732,7 +1733,7 @@ describe("usePostTypeInfiniteScroll", () => {
         source: { fetch: sourceFetch },
         router: { updateState: routerUpdateState },
       },
-    });
+    } as any);
 
     sourceGet.mockImplementation((link) => ({
       link,
