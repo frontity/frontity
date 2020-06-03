@@ -9,9 +9,14 @@ interface ObserveOptions {
   lazy?: boolean;
 }
 
+interface ActionsRecursive<T> {
+  [key: string]: T | Function;
+}
+type Actions = ActionsRecursive<Actions>;
+
 type Store = {
   state?: object;
-  actions?: object;
+  actions?: Actions;
 };
 
 type ResolveState<State> = {
@@ -20,16 +25,18 @@ type ResolveState<State> = {
     : ResolveState<State[P]>;
 };
 
-type ResolveActions<Actions extends any> = {
-  [P in keyof Actions]: Actions[P] extends (
+type ResolveActions<Act extends Actions> = {
+  [P in keyof Act]: Act[P] extends (
     ...store: any
   ) => (...actionArgs: any) => void | Promise<void>
     ? (
-        ...actionArgs: Parameters<ReturnType<Actions[P]>>
-      ) => ReturnType<ReturnType<Actions[P]>>
-    : Actions[P] extends (...store: any) => void | Promise<void>
-    ? () => ReturnType<Actions[P]>
-    : ResolveActions<Actions[P]>;
+        ...actionArgs: Parameters<ReturnType<Act[P]>>
+      ) => ReturnType<ReturnType<Act[P]>>
+    : Act[P] extends (...store: any) => void | Promise<void>
+    ? () => ReturnType<Act[P]>
+    : Act[P] extends Actions
+    ? ResolveActions<Act[P]>
+    : never;
 };
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;

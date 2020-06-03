@@ -8,7 +8,6 @@ Object {
       "action2": [Function],
     },
   },
-  "fills": Object {},
   "libraries": Object {
     "namespace3": Object {
       "lib1": "lib1",
@@ -26,6 +25,7 @@ Object {
   },
   "state": Object {
     "frontity": Object {
+      "debug": false,
       "mode": "html",
       "packages": Array [
         "package-1",
