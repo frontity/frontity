@@ -27,9 +27,7 @@ export default async ({
 
   // Check `port` parameter.
   if (port && Number.isNaN(parseInt(port, 10))) {
-    errorLogger(
-      new Error(`The port number specified is not valid: "${port}".`)
-    );
+    errorLogger(new Error(`The port number specified is not valid: ${port}.`));
   }
 
   // Execute `dev` command.
