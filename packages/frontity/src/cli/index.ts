@@ -26,10 +26,11 @@ tsNode.register({
 });
 
 import program from "commander";
-import { dev, build, serve } from "../commands";
+import { build, serve } from "../commands";
 
 import { default as create } from "./create";
 import { default as createPackage } from "./create-package";
+import { default as dev } from "./dev";
 import { default as subscribe } from "./subscribe";
 import { default as unknown } from "./unknown";
 import { default as info } from "./info";
