@@ -28,6 +28,7 @@
     "test:ci": "../../node_modules/.bin/jest --colors --ci --coverage",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
+    "build:watch": "tsc --project ./tsconfig.build.json --watch",
     "prepublish": "npm run build"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
     "didyoumean": "^1.2.1",
     "envinfo": "^7.3.1",
     "fs-extra": "^7.0.1",
+    "get-value": "^3.0.1",
     "he": "^1.2.0",
     "inquirer": "^6.3.1",
     "is-root": "^2.1.0",
@@ -55,21 +57,22 @@
     "tar": "^4.4.8",
     "ts-node": "^8.0.3",
     "typed-emitter": "^0.2.0",
-    "typescript": "3.8.2"
+    "typescript": "3.8.3"
   },
   "devDependencies": {
-    "@frontity/core": "^1.6.0",
     "@frontity/connect": "^1.1.0",
+    "@frontity/core": "^1.6.0",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
     "@types/node": "^11.13.2",
     "@types/node-fetch": "^2.3.3",
     "@types/phin": "^3.3.0",
-    "@types/ramda": "^0.26.33",
+    "@types/ramda": "0.26.33",
     "@types/shelljs": "^0.8.4",
     "@types/stack-trace": "^0.0.29",
     "@types/tar": "^4.0.0",
-    "lodash.omit": "^4.5.0"
+    "lodash.omit": "^4.5.0",
+    "react-test-renderer": "^16.13.1"
   }
 }
