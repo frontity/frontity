@@ -4,29 +4,116 @@ import useInView from "./use-in-view";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
+/**
+ * The intersection options passed down to `useInView`.
+ *
+ * They come originally from the
+ * [`react-intersection-observer`](https://github.com/thebuilder/react-intersection-observer)
+ * package.
+ */
 type IntersectionOptions = Parameters<typeof useInView>[0];
 
+/**
+ * The types of the {@link useInfiniteScroll} hook.
+ */
 type UseInfiniteScroll = (options: {
+  /**
+   * The current link that should be used to start the infinite scroll.
+   */
   currentLink: string;
+
+  /**
+   * The next link that should be fetched and loaded once the user scrolls
+   * down.
+   */
   nextLink?: string;
+
+  /**
+   * The options for the internal {@link useInView} hook used for the
+   * `actions.source.fetch`.
+   */
   fetchInViewOptions?: IntersectionOptions;
+
+  /**
+   * The options for the internal {@link useInView} hook used for the
+   * `actions.router.set`.
+   */
   routeInViewOptions?: IntersectionOptions;
 }) =>
   | {
+      /**
+       * Boolean indicating if the Intersection Observer is supported or not by
+       * the browser.
+       */
       supported: false;
+
+      /**
+       * The ref that should be attached to the element used to trigger
+       * `actions.router.set`.
+       */
       routeRef?: undefined;
+
+      /**
+       * The ref that should be attached to the element used to trigger
+       * `actions.source.fetch`.
+       */
       fetchRef?: undefined;
+
+      /**
+       * Boolean that indicates when the element used to trigger
+       * `actions.router.set` is in the screen.
+       */
       routeInView?: undefined;
+
+      /**
+       * Boolean that indicates when the element used to trigger
+       * `actions.source.fetch` is in the screen.
+       */
       fetchInView?: undefined;
     }
   | {
+      /**
+       * Boolean indicating if the Intersection Observer is supported or not by
+       * the browser.
+       */
       supported: true;
+
+      /**
+       * The ref that should be attached to the element used to trigger
+       * `actions.router.set`.
+       */
       routeRef: (node?: Element) => void;
+
+      /**
+       * The ref that should be attached to the element used to trigger
+       * `actions.source.fetch`.
+       */
       fetchRef: (node?: Element) => void;
+
+      /**
+       * Boolean that indicates when the element used to trigger
+       * `actions.router.set` is in the screen.
+       */
       routeInView: boolean;
+
+      /**
+       * Boolean that indicates when the element used to trigger
+       * `actions.source.fetch` is in the screen.
+       */
+
       fetchInView: boolean;
     };
 
+/**
+ * A hook to build other infinite scroll hooks.
+ *
+ * It is used by the higher abstracted hooks `useArchiveInfiniteScroll` and
+ * `usePostTypeInfiniteScroll`.
+ *
+ * @param options - The options of the hook. Defined in {@link UseInfiniteScroll}.
+ * @returns - An object with refs and booleans to use in your own hook. Defined
+ * at {@link useArchiveInfiniteScroll}
+ */
 const useInfiniteScroll: UseInfiniteScroll = ({
   currentLink,
   nextLink,
