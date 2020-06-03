@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.4.2
+
+### Patch Changes
+
+- [`de6c7fe6`](https://github.com/frontity/frontity/commit/de6c7fe6e43510dddf26e8afbe1ef05ac5ab379c) [#454](https://github.com/frontity/frontity/pull/454) - Rename the `Fecha` component name from Spanish to English: `DateWrapper`.
+
+- Updated dependencies [[`6900916a`](https://github.com/frontity/frontity/commit/6900916ace309d3cc55b9c732124df5d3db96838)]:
+  - frontity@1.8.0
+
 ## 1.4.1
 
 ### Patch Changes

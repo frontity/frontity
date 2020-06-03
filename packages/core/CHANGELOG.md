@@ -1,5 +1,24 @@
 # Change Log
 
+## 1.7.0
+
+### Minor Changes
+
+- [`4212f46a`](https://github.com/frontity/frontity/commit/4212f46a9a655b2c91940135a22f3f0b69715119) [#422](https://github.com/frontity/frontity/pull/422) Thanks [@Koli14](https://github.com/Koli14)! - Optionally, use the content of a robots.txt file if it exists in the root project folder.
+
+### Patch Changes
+
+- [`f13f72bb`](https://github.com/frontity/frontity/commit/f13f72bb19b7d1f379ef21e349e7d6b047ec5098) [#456](https://github.com/frontity/frontity/pull/456) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Replace `lodash-es` by `lodash` library and remove the `lodash` alias to avoid problems with third-party libraries.
+
+  Also, adds `babel-plugin-lodash` to still get tree shaking when importing named exports from `lodash`.
+
+* [`5cb29ab6`](https://github.com/frontity/frontity/commit/5cb29ab63ab31872a4d853e5e2fdbdabca974c9f) [#430](https://github.com/frontity/frontity/pull/430) Thanks [@luisherranz](https://github.com/luisherranz)! - Remove React `Fills` package export. This was meant to be used for the [Slot and Fill](https://community.frontity.org/t/slot-and-fill/895) pattern, but we are going to finally use `state.fills` to add the configuration for the fills and `libraries.fills` to expose the React components.
+
+- [`5ada3cb0`](https://github.com/frontity/frontity/commit/5ada3cb0e44dc869291d5e9fdea67a1ef6bcced8) [#374](https://github.com/frontity/frontity/pull/374) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Try to re-use an already open browser tab when running `frontity dev` on MacOS.
+
+- Updated dependencies [[`5cb29ab6`](https://github.com/frontity/frontity/commit/5cb29ab63ab31872a4d853e5e2fdbdabca974c9f)]:
+  - @frontity/connect@1.1.1
+
 ## 1.6.1
 
 ### Patch Changes
