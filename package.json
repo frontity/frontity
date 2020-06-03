@@ -4,7 +4,7 @@
   "scripts": {
     "test": "lerna run test:ci --stream",
     "test:ci": "jest --clearCache && lerna run test:ci --stream",
-    "e2e-docker": "./scripts/run-e2e-docker-tests",
+    "e2e-docker": "./scripts/run-e2e-docker.sh",
     "codecov": "curl -s https://codecov.io/bash | bash -s",
     "e2e:prod:all": "cd e2e/project/ && npx frontity build && npx frontity serve --port 3001",
     "e2e:prod:module": "cd e2e/project/ && npx frontity build --publicPath /custom/path --target module && npx frontity serve --port 3001",
