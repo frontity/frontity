@@ -1,6 +1,6 @@
 {
   "name": "@frontity/comscore-analytics",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Comscore Analytics package for Frontity",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -22,7 +22,7 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/analytics": "^1.0.0",
-    "frontity": "^1.5.0"
+    "@frontity/analytics": "^1.1.0",
+    "frontity": "^1.8.0"
   }
 }

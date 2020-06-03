@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.4.0
+
+### Minor Changes
+
+- [`6900916a`](https://github.com/frontity/frontity/commit/6900916ace309d3cc55b9c732124df5d3db96838) [#430](https://github.com/frontity/frontity/pull/430) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add types for `state.fills` and `library.fills` for the ["Slot and Fill" pattern](https://community.frontity.org/t/slot-and-fill/895).
+
 ## 1.3.0
 
 ### Minor Changes

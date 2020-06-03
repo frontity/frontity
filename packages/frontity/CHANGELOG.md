@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.8.0
+
+### Minor Changes
+
+- [`6900916a`](https://github.com/frontity/frontity/commit/6900916ace309d3cc55b9c732124df5d3db96838) [#430](https://github.com/frontity/frontity/pull/430) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Create a `useFills` hook that can be used to create <Slot/> components for a ["Slot and Fill" pattern](https://community.frontity.org/t/slot-and-fill/895).
+
+### Patch Changes
+
+- Updated dependencies [[`6900916a`](https://github.com/frontity/frontity/commit/6900916ace309d3cc55b9c732124df5d3db96838)]:
+  - @frontity/types@1.4.0
+
 ## 1.7.0
 
 ### Minor Changes
