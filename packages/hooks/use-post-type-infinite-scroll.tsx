@@ -6,27 +6,90 @@ import useInfiniteScroll from "./use-infinite-scroll";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
-type Wrapper = (link: string) => React.FC<Connect<Source & Router>>;
-
+/**
+ * The types of the {@link usePostTypeInfiniteScroll} hook.
+ */
 type UsePostTypeInfiniteScroll = (options?: {
+  /**
+   * The number of pages that the hook should load automatically before
+   * switching to manual fetching.
+   */
   limit?: number;
+
+  /**
+   * A boolean indicating if this hook should be active or not. It can be
+   * useful in situations where users want to share the same component for
+   * different types of Archives, but avoid doing infinite scroll in some of
+   * them.
+   */
   active?: boolean;
+
+  /**
+   * The archive that should be used to get the next posts. If none is present,
+   * the previous link is used. If the previous link is not an archive, the
+   * homepage is used.
+   */
   archive?: string;
+
+  /**
+   * The archive that should be used if the `archive` option is not present and
+   * the previous link is not an archive.
+   */
   fallback?: string;
 }) => {
+  /**
+   * An array of the existing posts. Users should iterate over this array in
+   * their own layout.
+   */
   posts: {
+    /**
+     * A unique key to be used in the iteration.
+     */
     key: string;
+
+    /**
+     * The link of this post.
+     */
     link: string;
+
+    /**
+     * If this post is the last post. Useful to add separators between posts,
+     * but avoid adding it for the last one.
+     */
     isLast: boolean;
+
+    /**
+     * The Wrapper component that should wrap the real `Post` component.
+     */
     Wrapper: React.FC<Connect<Source & Router>>;
   }[];
+  /**
+   * If it has reached the limit of posts and it should switch to manual mode.
+   */
   isLimit: boolean;
+
+  /**
+   * If it's fetching the next post. Useful to add a loader.
+   */
   isFetching: boolean;
+
+  /**
+   * A function that fetches the next post. Useful when the limit has been
+   * reached (`isLimit === true`) and the user pushes a button to get the next
+   * post.
+   */
   fetchNext: () => Promise<void>;
 };
 
-export const Wrapper: Wrapper = (link) =>
-  connect(({ children }) => {
+/**
+ * A function that generates Wrapper components.
+ *
+ * @param link The link for the post that the Wrapper belongs to.
+ *
+ * @returns A React component that should be used to wrap the post.
+ */
+export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
+  connect(({ children, className }) => {
     const { state } = useConnect<Source & Router>();
 
     // Values from browser state.
@@ -73,19 +136,35 @@ export const Wrapper: Wrapper = (link) =>
     `;
 
     return (
-      <div css={container} ref={routeRef}>
+      <div css={container} ref={routeRef} className={className}>
         {children}
         {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
       </div>
     );
   });
 
-const MemoizedWrapper = memoize((key) => key, Wrapper);
+/**
+ * A memoized {@link Wrapper} to generate Wrapper components only once.
+ *
+ * @param link The link for the post that the Wrapper belongs to.
+ *
+ * @returns A React component that should be used to wrap the post.
+ */
+const MemoizedWrapper = memoize((link: string) => link, Wrapper);
 
-const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options) => {
+/**
+ * A hook used to add infinite scroll to any Frontity post type.
+ *
+ * @param options - Options for the hook, like the number of posts it should
+ * load autoamtically or if it's active or not. Defined in {@link
+ * UsePostTypeInfiniteScroll}.
+ *
+ * @returns - An array of posts and other useful booleans. Defined in {@link
+ * UsePostTypeInfiniteScroll}.
+ */
+const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
   const defaultOptions = { active: true };
-
-  options = options ? { ...defaultOptions, ...options } : defaultOptions;
+  options = { ...defaultOptions, ...options };
 
   const { state, actions } = useConnect<Source & Router>();
 
