@@ -23,9 +23,10 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
     "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts",
-    "build": "../../node_modules/.bin/tsc --project ./tsconfig.build.json",
+    "build": "tsc --project ./tsconfig.build.json && npm run copy-files",
     "build:watch": "../../node_modules/.bin/tsc --project ./tsconfig.build.json --watch",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "copy-files": "copyfiles -u 1 \"src/**/*.applescript\" dist/src"
   },
   "dependencies": {
     "@babel/core": "^7.3.4",
@@ -45,10 +46,12 @@
     "@loadable/webpack-plugin": "^5.7.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-frontity": "^1.0.1",
+    "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "babel-polyfill": "^6.26.0",
     "core-js": "^3.0.1",
+    "cross-spawn": "^7.0.2",
     "deepmerge": "^3.2.0",
     "express": "^4.16.4",
     "file-loader": "^3.0.1",
@@ -59,7 +62,7 @@
     "koa-mount": "^4.0.0",
     "koa-route": "^3.2.0",
     "koa-static": "^5.0.0",
-    "lodash-es": "^4.17.11",
+    "lodash": "^4.17.15",
     "minimist": "^1.2.5",
     "mock-fs": "^4.12.0",
     "open": "^6.3.0",
@@ -80,6 +83,7 @@
   "devDependencies": {
     "@frontity/types": "^1.2.0",
     "@types/babel-core": "^6.25.6",
+    "@types/cross-spawn": "^6.0.1",
     "@types/express": "^4.16.1",
     "@types/fs-extra": "^5.0.5",
     "@types/htmlescape": "^1.1.1",
@@ -89,7 +93,7 @@
     "@types/koa-static": "^4.0.1",
     "@types/loadable__component": "^5.6.0",
     "@types/loadable__server": "^5.8.0",
-    "@types/lodash-es": "^4.17.3",
+    "@types/lodash": "^4.14.154",
     "@types/minimist": "^1.2.0",
     "@types/node": "^11.13.2",
     "@types/react": "^16.8.6",
@@ -99,6 +103,7 @@
     "@types/webpack-bundle-analyzer": "^2.13.1",
     "@types/webpack-dev-middleware": "^3.7.0",
     "@types/webpack-env": "^1.13.9",
-    "@types/webpack-hot-middleware": "^2.16.5"
+    "@types/webpack-hot-middleware": "^2.16.5",
+    "copyfiles": "^2.2.0"
   }
 }
