@@ -29,7 +29,7 @@ const analytics: Analytics = {
       sendEvent: ({ state, actions }) => (event) => {
         state.analytics.namespaces
           .map((ns) => actions[ns])
-          .forEach(({ sendEvent }) => sendEvent(event));
+          .forEach(({ sendEvent }) => sendEvent && sendEvent(event));
       },
     },
   },

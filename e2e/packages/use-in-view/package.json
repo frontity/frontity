@@ -5,6 +5,6 @@
   "description": "Package to do e2e testing of Frontity's useInView hook",
   "dependencies": {
     "frontity": "^1.4.3",
-    "@frontity/hooks": "^1.2.0"
+    "@frontity/hooks": "^2.0.0"
   }
 }
