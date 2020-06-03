@@ -36,7 +36,7 @@ const { spawn } = require("child-process-promise");
       [
         "exec",
         "-T", // Disable pseudo-tty allocation https://stackoverflow.com/a/57565119/2638310
-        "wp", // this is the reference to the volume (we have wp, wpcli, and msql)
+        "frontity_wp", // this is the reference to the volume (we have wp, wpcli, and msql)
         "/bin/bash",
         "-c",
         "chown -R www-data:www-data /var/www/html/wp-content/plugins/ && \
@@ -57,7 +57,7 @@ const { spawn } = require("child-process-promise");
         "-T",
         "--user", // https://hub.docker.com/_/wordpress/ See: "Running as arbitrary user"
         "33:33",
-        "wpcli", // this is the reference to the volume (we have wp, wpcli, and msql)
+        "frontity_wpcli", // this is the reference to the volume (we have wp, wpcli, and msql)
         "wp",
         "plugin",
         "install",
