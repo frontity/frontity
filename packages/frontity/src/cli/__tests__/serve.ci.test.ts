@@ -1,9 +1,9 @@
-import serve from "../cli/serve";
-import * as utils from "../utils";
-import * as serveCmd from "../commands/serve";
-import { EventPromised } from "../utils/eventPromised";
+import serve from "../serve";
+import * as utils from "../../utils";
+import * as serveCmd from "../../commands/serve";
+import { EventPromised } from "../../utils/eventPromised";
 
-jest.mock("../commands/serve");
+jest.mock("../../commands/serve");
 
 const mockedUtils = utils as any;
 const mockedDev = serveCmd as jest.Mocked<typeof serveCmd>;

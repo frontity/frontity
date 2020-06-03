@@ -1,9 +1,9 @@
-import dev from "../cli/dev";
-import * as utils from "../utils";
-import * as devCmd from "../commands/dev";
-import { EventPromised } from "../utils/eventPromised";
+import dev from "../dev";
+import * as utils from "../../utils";
+import * as devCmd from "../../commands/dev";
+import { EventPromised } from "../../utils/eventPromised";
 
-jest.mock("../commands/dev");
+jest.mock("../../commands/dev");
 
 const mockedUtils = utils as any;
 const mockedDev = devCmd as jest.Mocked<typeof devCmd>;

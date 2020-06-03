@@ -1,9 +1,9 @@
-import build from "../cli/build";
-import * as utils from "../utils";
-import * as buildCmd from "../commands/build";
-import { EventPromised } from "../utils/eventPromised";
+import build from "../build";
+import * as utils from "../../utils";
+import * as buildCmd from "../../commands/build";
+import { EventPromised } from "../../utils/eventPromised";
 
-jest.mock("../commands/build");
+jest.mock("../../commands/build");
 
 const mockedUtils = utils as any;
 const mockedDev = buildCmd as jest.Mocked<typeof buildCmd>;
