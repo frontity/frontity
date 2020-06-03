@@ -1,5 +1,13 @@
 # @frontity/google-tag-manager
 
+## 0.2.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/analytics@1.1.1-infinite-scroll-beta.0
+
 ## 0.2.0
 
 ### Minor Changes

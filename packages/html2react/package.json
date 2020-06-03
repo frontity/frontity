@@ -1,6 +1,6 @@
 {
   "name": "@frontity/html2react",
-  "version": "1.3.3",
+  "version": "1.3.4-infinite-scroll-beta.0",
   "description": "HTML to React converter for Frontity",
   "keywords": [
     "frontity",
@@ -27,8 +27,8 @@
     "react-test-renderer": "^16.13.1"
   },
   "dependencies": {
-    "@frontity/components": "^1.3.2",
-    "frontity": "^1.7.0",
+    "@frontity/components": "^1.3.3-infinite-scroll-beta.0",
+    "frontity": "^1.8.1-infinite-scroll-beta.0",
     "himalaya": "^1.1.0"
   }
 }

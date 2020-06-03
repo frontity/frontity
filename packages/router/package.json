@@ -1,6 +1,6 @@
 {
   "name": "@frontity/router",
-  "version": "1.1.0",
+  "version": "1.2.0-infinite-scroll-beta.0",
   "description": "Types for the Frontity router namespace",
   "keywords": [
     "frontity",
@@ -20,6 +20,6 @@
     "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest"
   },
   "dependencies": {
-    "frontity": "^1.4.3"
+    "frontity": "^1.8.1-infinite-scroll-beta.0"
   }
 }

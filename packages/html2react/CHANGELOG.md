@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.3.4-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/components@1.3.3-infinite-scroll-beta.0
+
 ## 1.3.3
 
 ### Patch Changes

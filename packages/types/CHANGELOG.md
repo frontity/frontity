@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.4.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Fixes types for `connect()` with the new options parameter.
+
 ## 1.4.0
 
 ### Minor Changes

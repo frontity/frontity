@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.1.0-infinite-scroll-beta.0
+
+### Minor Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Implements the brand new and long-awaited infinite scroll hooks collection, featuring `useArchiveInfiniteScroll`, `usePostTypeInfiniteScroll` and `useInfiniteScroll`.
+
+### Patch Changes
+
+- Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b)]:
+  - @frontity/router@1.2.0-infinite-scroll-beta.0
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/source@1.2.2-infinite-scroll-beta.0
+
 ## 2.0.1
 
 ### Patch Changes

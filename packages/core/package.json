@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "1.7.0",
+  "version": "1.7.1-infinite-scroll-beta.0",
   "description": "The core package of the Frontity framework.",
   "keywords": [
     "frontity",
@@ -39,7 +39,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.9",
     "@emotion/core": "^10.0.22",
     "@frontity/connect": "^1.1.1",
-    "@frontity/file-settings": "^1.1.5",
+    "@frontity/file-settings": "^1.1.5-infinite-scroll-beta.0",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/component": "^5.10.1",
     "@loadable/server": "^5.9.0",
@@ -81,7 +81,7 @@
     "symlink-dir": "3.1.2"
   },
   "devDependencies": {
-    "@frontity/types": "^1.4.0",
+    "@frontity/types": "^1.4.1-infinite-scroll-beta.0",
     "@types/babel-core": "^6.25.6",
     "@types/cross-spawn": "^6.0.1",
     "@types/express": "^4.16.1",

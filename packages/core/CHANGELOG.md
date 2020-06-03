@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.7.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @frontity/file-settings@1.1.5-infinite-scroll-beta.0
+
 ## 1.7.0
 
 ### Minor Changes

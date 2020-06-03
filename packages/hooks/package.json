@@ -1,6 +1,6 @@
 {
   "name": "@frontity/hooks",
-  "version": "2.0.1",
+  "version": "2.1.0-infinite-scroll-beta.0",
   "description": "Collection of React hooks for Frontity",
   "keywords": [
     "frontity",
@@ -22,9 +22,9 @@
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "frontity": "^1.5.0",
+    "frontity": "^1.8.1-infinite-scroll-beta.0",
     "react-intersection-observer": "^8.26.2",
-    "@frontity/source": "^1.2.0",
-    "@frontity/router": "^1.1.0"
+    "@frontity/source": "^1.2.2-infinite-scroll-beta.0",
+    "@frontity/router": "^1.2.0-infinite-scroll-beta.0"
   }
 }

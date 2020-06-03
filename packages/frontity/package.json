@@ -1,6 +1,6 @@
 {
   "name": "frontity",
-  "version": "1.8.0",
+  "version": "1.8.1-infinite-scroll-beta.0",
   "description": "Frontity cli and entry point to other packages",
   "keywords": [
     "frontity",
@@ -36,7 +36,7 @@
     "@emotion/styled": "^10.0.22",
     "@frontity/error": "^0.1.0",
     "@frontity/type-declarations": "^1.1.0",
-    "@frontity/types": "^1.4.0",
+    "@frontity/types": "^1.4.1-infinite-scroll-beta.0",
     "@loadable/component": "^5.10.1",
     "chalk": "^2.4.2",
     "clipboardy": "^2.1.0",
@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@frontity/connect": "^1.1.1",
-    "@frontity/core": "^1.7.0",
+    "@frontity/core": "^1.7.1-infinite-scroll-beta.0",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",

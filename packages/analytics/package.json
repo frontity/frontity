@@ -1,6 +1,6 @@
 {
   "name": "@frontity/analytics",
-  "version": "1.1.0",
+  "version": "1.1.1-infinite-scroll-beta.0",
   "description": "This package contains the base types and actions to build analytics packages for »Frontity",
   "main": "src/index.ts",
   "keywords": [
@@ -22,7 +22,7 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "@frontity/source": "^1.0.17",
-    "frontity": "^1.8.0"
+    "@frontity/source": "^1.2.2-infinite-scroll-beta.0",
+    "frontity": "^1.8.1-infinite-scroll-beta.0"
   }
 }
