@@ -1,5 +1,5 @@
 ---
-"@frontity/core": minor
+"@frontity/core": patch
 ---
 
-README.md with full info of the package
+README.md with full info of the package.
