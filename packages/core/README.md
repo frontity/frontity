@@ -6,11 +6,15 @@ The core package of the Frontity framework. It contains babel & webpack configur
 
 ## Install
 
+This is a package internally used by [Frontity CLI](https://docs.frontity.org/frontity-cli) 
+
+You'll find it as a dependency of your Frontity project after you create it by doing 
+
 ```sh
-npm i @frontity/core
+npx frontity create [project-name]
 ```
 
-  
+> [More info on `npx frontity create`](https://docs.frontity.org/frontity-cli/create)
 
 ## Feature Discussions
 
