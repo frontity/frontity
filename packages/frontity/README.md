@@ -8,9 +8,13 @@ More info about this package can be found in the docs → https://docs.frontity.
 
 ## Install
 
+It is automatically installed when you create your Frontity project by doing 
+
 ```sh
-npm i frontity
+npx frontity create [project-name]
 ```
+
+> More info on `npx frontity create` [here](https://docs.frontity.org/frontity-cli/create) 
 
 ## Usage
 
