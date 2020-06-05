@@ -1,5 +1,5 @@
 ---
-"@frontity/file-settings": minor
+"@frontity/file-settings": patch
 ---
 
-README.md full standard
+README.md with more detailed info of the package.
