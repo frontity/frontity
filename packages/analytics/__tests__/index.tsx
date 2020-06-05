@@ -1,8 +1,8 @@
 import { createStore } from "frontity";
 import analytics from "../src";
 
-describe("analytics.sendPageview", () => {
-  test("runs all 'sendPageview' from other analytics packages", () => {
+describe("analytics.pageview", () => {
+  test("runs all 'pageview' from other analytics packages", () => {
     const pkg1SendPageview = jest.fn();
     const pkg2SendPageview = jest.fn();
     const pkg3SendPageview = jest.fn();
@@ -20,13 +20,13 @@ describe("analytics.sendPageview", () => {
       actions: {
         ...analytics.actions,
         pkg1Analytics: {
-          sendPageview: () => pkg1SendPageview,
+          pageview: () => pkg1SendPageview,
         },
         pkg2Analytics: {
-          sendPageview: () => pkg2SendPageview,
+          pageview: () => pkg2SendPageview,
         },
         pkg3Analytics: {
-          sendPageview: () => pkg3SendPageview,
+          pageview: () => pkg3SendPageview,
         },
       },
     };
@@ -38,7 +38,7 @@ describe("analytics.sendPageview", () => {
       title: "Some Title - My Site",
     };
 
-    actions.analytics.sendPageview(pageview);
+    actions.analytics.pageview(pageview);
 
     expect(pkg1SendPageview).toHaveBeenCalledWith(pageview);
     expect(pkg1SendPageview).toHaveBeenCalledTimes(1);
@@ -48,8 +48,8 @@ describe("analytics.sendPageview", () => {
   });
 });
 
-describe("analytics.sendEvent", () => {
-  test("runs all 'sendEvent' from other analytics packages", () => {
+describe("analytics.event", () => {
+  test("runs all 'event' from other analytics packages", () => {
     const pkg1Event = jest.fn();
     const pkg2Event = jest.fn();
     const pkg3Event = jest.fn();
@@ -67,13 +67,13 @@ describe("analytics.sendEvent", () => {
       actions: {
         ...analytics.actions,
         pkg1Analytics: {
-          sendEvent: () => pkg1Event,
+          event: () => pkg1Event,
         },
         pkg2Analytics: {
-          sendEvent: () => pkg2Event,
+          event: () => pkg2Event,
         },
         pkg3Analytics: {
-          sendEvent: () => pkg3Event,
+          event: () => pkg3Event,
         },
       },
     };
@@ -88,7 +88,7 @@ describe("analytics.sendEvent", () => {
       },
     };
 
-    actions.analytics.sendEvent(event);
+    actions.analytics.event(event);
 
     expect(pkg1Event).toHaveBeenCalledWith(event);
     expect(pkg1Event).toHaveBeenCalledTimes(1);

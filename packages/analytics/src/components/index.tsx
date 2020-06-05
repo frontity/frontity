@@ -30,7 +30,7 @@ const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
       onChangeClientState={({ title }) => {
         if (isReady && !isPageviewSent) {
           // Send pageview.
-          actions.analytics.sendPageview({
+          actions.analytics.pageview({
             page: state.router.link,
             title,
           });

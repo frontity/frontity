@@ -18,12 +18,12 @@ interface Analytics<Pkgs = null> extends Package {
   };
   actions: {
     analytics: {
-      sendPageview: Action<Pkgs, Pageview>;
-      sendEvent: Action<Pkgs, Event>;
+      pageview: Action<Pkgs, Pageview>;
+      event: Action<Pkgs, Event>;
     };
     [key: string]: {
-      sendPageview?: Action<Pkgs, Pageview>;
-      sendEvent?: Action<Pkgs, Event>;
+      pageview?: Action<Pkgs, Pageview>;
+      event?: Action<Pkgs, Event>;
     };
   };
   state: {
