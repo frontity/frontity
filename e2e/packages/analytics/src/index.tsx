@@ -30,7 +30,7 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
   const changeLinkPost1 = () => actions.router.set("/some-post/");
   const changeLinkPost2 = () => actions.router.set("/some-other-post/");
   const sendEvent = () =>
-    actions.analytics.sendEvent({
+    actions.analytics.event({
       name: "some event",
       payload: { content: "some content" },
     });
@@ -67,7 +67,12 @@ const analytics: Analytics<Packages> = {
       get: ({ state }) => (link) => state.source.data[link],
     },
     analytics: {
-      namespaces: ["testAnalytics"],
+      pageviews: {
+        testAnalytics: true,
+      },
+      events: {
+        testAnalytics: true,
+      },
     },
     testAnalytics: {
       pageviews: [],
@@ -96,10 +101,10 @@ const analytics: Analytics<Packages> = {
       },
     },
     testAnalytics: {
-      sendPageview: ({ state }) => (pageview) => {
+      pageview: ({ state }) => (pageview) => {
         state.testAnalytics.pageviews.push(pageview);
       },
-      sendEvent: ({ state }) => (event) => {
+      event: ({ state }) => (event) => {
         state.testAnalytics.events.push(event);
       },
     },

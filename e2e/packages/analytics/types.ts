@@ -11,7 +11,12 @@ interface TestAnalytics<Pkgs = null> extends Package {
       get: Source<Pkgs>["state"]["source"]["get"];
     };
     analytics: {
-      namespaces: Analytics["state"]["analytics"]["namespaces"];
+      pageviews: {
+        testAnalytics: boolean;
+      };
+      events: {
+        testAnalytics: boolean;
+      };
     };
     testAnalytics: {
       pageviews: Pageview[];
@@ -23,8 +28,8 @@ interface TestAnalytics<Pkgs = null> extends Package {
       fetch: Source<Pkgs>["actions"]["source"]["fetch"];
     };
     testAnalytics: {
-      sendPageview: Action<Pkgs, Pageview>;
-      sendEvent: Action<Pkgs, Event>;
+      pageview: Action<Pkgs, Pageview>;
+      event: Action<Pkgs, Event>;
     };
   };
   roots: {

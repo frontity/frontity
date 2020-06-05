@@ -1,16 +1,16 @@
 describe("Analytics package", () => {
   const pageviewHome = {
-    page: "/?name=analytics",
+    link: "/?name=analytics",
     title: "Homepage Title",
   };
 
   const pageviewSomePost = {
-    page: "/some-post/",
+    link: "/some-post/",
     title: "Some Post Title",
   };
 
   const pageviewSomeOtherPost = {
-    page: "/some-other-post/",
+    link: "/some-other-post/",
     title: "Some Post Title",
   };
 
