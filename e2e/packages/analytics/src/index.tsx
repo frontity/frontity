@@ -71,6 +71,7 @@ const analytics: Analytics<Packages> = {
     },
     testAnalytics: {
       pageviews: [],
+      events: [],
     },
   },
   actions: {
@@ -97,6 +98,9 @@ const analytics: Analytics<Packages> = {
     testAnalytics: {
       sendPageview: ({ state }) => (pageview) => {
         state.testAnalytics.pageviews.push(pageview);
+      },
+      sendEvent: ({ state }) => (event) => {
+        state.testAnalytics.events.push(event);
       },
     },
   },

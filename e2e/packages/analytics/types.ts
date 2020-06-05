@@ -1,5 +1,5 @@
-import { Package } from "frontity/types";
-import Analytics, { Pageview } from "@frontity/analytics/types";
+import { Package, Action } from "frontity/types";
+import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -15,6 +15,7 @@ interface TestAnalytics<Pkgs = null> extends Package {
     };
     testAnalytics: {
       pageviews: Pageview[];
+      events: Event[];
     };
   };
   actions: {
@@ -22,7 +23,8 @@ interface TestAnalytics<Pkgs = null> extends Package {
       fetch: Source<Pkgs>["actions"]["source"]["fetch"];
     };
     testAnalytics: {
-      sendPageview: Analytics<Pkgs>["actions"]["analytics"]["sendPageview"];
+      sendPageview: Action<Pkgs, Pageview>;
+      sendEvent: Action<Pkgs, Event>;
     };
   };
   roots: {
