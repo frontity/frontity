@@ -1,5 +1,5 @@
 import { ReactType } from "react";
-import { Action } from "frontity/types";
+import { Action, Package } from "frontity/types";
 import Analytics, { Pageview } from "@frontity/analytics/types";
 
 declare global {
@@ -14,20 +14,26 @@ declare global {
   }
 }
 
-interface ComscoreAnalytics extends Analytics {
-  roots: Analytics["roots"] & {
+interface ComscoreAnalytics<Pkgs extends Package> extends Package {
+  roots: {
     comscoreAnalytics: ReactType;
   };
-  state: Analytics["state"] & {
+  state: {
     comscoreAnalytics: {
       trackingIds: string[];
     };
+    analytics: {
+      pageviews: {
+        comscoreAnalytics: boolean;
+      };
+    };
   };
-  actions: Analytics["actions"] & {
+  actions: {
     comscoreAnalytics: {
-      sendPageview: Action<ComscoreAnalytics, Pageview>;
+      pageview: Action<Pkgs, Pageview>;
     };
   };
 }
+export type Packages = ComscoreAnalytics<Packages> & Analytics<Packages>;
 
 export default ComscoreAnalytics;

@@ -1,9 +1,9 @@
 import { warn } from "frontity";
 import analytics from "@frontity/analytics";
-import ComscoreAnalytics from "../types";
+import ComscoreAnalytics, { Packages } from "../types";
 import Root from "./components";
 
-const comscoreAnalytics: ComscoreAnalytics = {
+const comscoreAnalytics: ComscoreAnalytics<Packages> = {
   roots: {
     ...analytics.roots,
     comscoreAnalytics: Root,
@@ -11,7 +11,7 @@ const comscoreAnalytics: ComscoreAnalytics = {
   actions: {
     ...analytics.actions,
     comscoreAnalytics: {
-      sendPageview: ({ state }) => () => {
+      pageview: ({ state }) => () => {
         const { trackingIds } = state.comscoreAnalytics;
 
         if (trackingIds.length === 0)
@@ -32,7 +32,9 @@ const comscoreAnalytics: ComscoreAnalytics = {
   state: {
     analytics: {
       ...analytics.state.analytics,
-      namespaces: ["comscoreAnalytics"],
+      pageviews: {
+        comscoreAnalytics: true,
+      },
     },
     comscoreAnalytics: {
       trackingIds: [],
