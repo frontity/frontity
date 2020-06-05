@@ -1,5 +1,5 @@
 ---
-"@frontity/error": minor
+"@frontity/error": patch
 ---
 
-README.md full standard
+Add proper README.
