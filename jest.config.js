@@ -4,7 +4,7 @@ module.exports = {
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   testPathIgnorePatterns: ["/mocks/"],
   collectCoverageFrom: [
-    "**/packages/**/*.{js,jsx,ts,tsx}",
+    "**/*.{js,jsx,ts,tsx}",
     "!**/node_modules/**",
     "!**/vendor/**",
     "!**/dist/**",
