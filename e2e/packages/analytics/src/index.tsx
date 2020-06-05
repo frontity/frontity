@@ -1,7 +1,7 @@
 import React from "react";
 import { Head, connect, URL } from "frontity";
 import { Connect } from "frontity/types";
-import Analytics from "../types";
+import Analytics, { Packages } from "../types";
 
 const Homepage = () => (
   <>
@@ -23,11 +23,12 @@ const SomePost = () => (
   </>
 );
 
-const Theme: React.FC<Connect<Analytics>> = ({ state, actions }) => {
+const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
   // Get only the pathname (link has query).
   const { pathname } = new URL(state.router.link, "http://localhost:3001");
 
-  const changeLink = () => actions.router.set("/some-post/");
+  const changeLinkPost1 = () => actions.router.set("/some-post/");
+  const changeLinkPost2 = () => actions.router.set("/some-other-post/");
   const sendEvent = () =>
     actions.analytics.sendEvent({
       event: "some event",
@@ -38,9 +39,14 @@ const Theme: React.FC<Connect<Analytics>> = ({ state, actions }) => {
     <>
       {/* Render homepage or post */}
       {pathname === "/" && <Homepage />}
+      {/* Same component to test the case when the title doesn't change*/}
       {pathname === "/some-post/" && <SomePost />}
+      {pathname === "/some-other-post/" && <SomePost />}
       {/* Buttons */}
-      <button id="change-link" onClick={changeLink}>
+      <button id="change-link" onClick={changeLinkPost1}>
+        Some Post
+      </button>
+      <button id="change-link-post-2" onClick={changeLinkPost2}>
         Some Post
       </button>
       <button id="send-event" onClick={sendEvent}>
@@ -50,7 +56,7 @@ const Theme: React.FC<Connect<Analytics>> = ({ state, actions }) => {
   );
 };
 
-const analytics: Analytics = {
+const analytics: Analytics<Packages> = {
   name: "e2e-analytics",
   roots: {
     theme: connect(Theme),
@@ -59,6 +65,12 @@ const analytics: Analytics = {
     source: {
       data: {},
       get: ({ state }) => (link) => state.source.data[link],
+    },
+    analytics: {
+      namespaces: ["testAnalytics"],
+    },
+    testAnalytics: {
+      pageviews: [],
     },
   },
   actions: {
@@ -80,6 +92,11 @@ const analytics: Analytics = {
             isReady: true,
           };
         }
+      },
+    },
+    testAnalytics: {
+      sendPageview: ({ state }) => (pageview) => {
+        state.testAnalytics.pageviews.push(pageview);
       },
     },
   },
