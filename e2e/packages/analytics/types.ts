@@ -40,6 +40,6 @@ interface TestAnalytics<Pkgs = null> extends Package {
 export type Packages = TestAnalytics<Packages> &
   Router<Packages> &
   Source<Packages> &
-  Analytics;
+  Analytics<Packages>;
 
 export default TestAnalytics;
