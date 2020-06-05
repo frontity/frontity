@@ -9,6 +9,11 @@ describe("Analytics package", () => {
     title: "Some Post Title",
   };
 
+  const pageviewSomeOtherPost = {
+    page: "/some-other-post/",
+    title: "Some Post Title",
+  };
+
   const someEvent = {
     event: "some event",
     payload: { content: "some content" },
@@ -35,7 +40,9 @@ describe("Analytics package", () => {
     cy.get("button#change-link-post-2").click();
     cy.go("back");
     getAnalytics("pageviews").its(1).should("deep.equal", pageviewSomePost);
-    getAnalytics("pageviews").its(2).should("deep.equal", pageviewSomePost);
+    getAnalytics("pageviews")
+      .its(2)
+      .should("deep.equal", pageviewSomeOtherPost);
     getAnalytics("pageviews").its(3).should("deep.equal", pageviewSomePost);
   });
 
