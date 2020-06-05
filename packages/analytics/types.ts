@@ -1,5 +1,6 @@
 import { Package, Action } from "frontity/types";
 import Source from "@frontity/source/types";
+import Router from "@frontity/router/types";
 
 export type Pageview = {
   page: string;
@@ -11,31 +12,29 @@ export type Event = {
   payload: Record<string, any>;
 };
 
-interface Analytics extends Package {
+interface Analytics<Pkgs = null> extends Package {
   roots: {
     analytics: React.FC;
   };
   actions: {
     analytics: {
-      sendPageview: Action<Analytics, Pageview>;
-      sendEvent: Action<Analytics, Event>;
+      sendPageview: Action<Pkgs, Pageview>;
+      sendEvent: Action<Pkgs, Event>;
     };
     [key: string]: {
-      sendPageview?: Action<Analytics, Pageview>;
-      sendEvent?: Action<Analytics, Event>;
+      sendPageview?: Action<Pkgs, Pageview>;
+      sendEvent?: Action<Pkgs, Event>;
     };
   };
   state: {
     analytics: {
       namespaces: string[];
     };
-    router?: {
-      link: string;
-    };
-    source?: {
-      get: Source["state"]["source"]["get"];
-    };
   };
 }
+
+export type Packages = Analytics<Packages> &
+  Router<Packages> &
+  Source<Packages>;
 
 export default Analytics;

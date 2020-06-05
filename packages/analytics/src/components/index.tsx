@@ -1,13 +1,13 @@
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
-import Analytics from "../../types";
+import { Packages } from "../../types";
 
 /**
  * Send a pageview anytime the title changes
  * and data.isReady === true.
  */
-const Root: React.FC<Connect<Analytics>> = ({ state, actions }) => {
+const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
   const { link } = state.router;
   const { isReady } = state.source.get(link);
 
