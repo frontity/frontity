@@ -7,6 +7,8 @@ import Koa from "koa";
  *
  * Hopefully, the https://github.com/microsoft/TypeScript/issues/5453 proposal
  * would avoid this kind of type definitions.
+ *
+ * @template AN - List of arguments.
  */
 type Arguments<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10> = [A1] extends [null]
   ? []
@@ -30,8 +32,42 @@ type Arguments<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10> = [A1] extends [null]
   ? [A1, A2, A3, A4, A5, A6, A7, A8, A9]
   : [A1, A2, A3, A4, A5, A6, A7, A8, A9, A10];
 
+/**
+ * Type declaration of a Frontity action.
+ *
+ * @example
+ *
+ * Without additional parameters:
+ * ```typescript
+ * const someAction: Action<Packages> = ({ state, actions, libraries }) => {
+ *  // Action content.
+ * }
+ *
+ * // Calling the action:
+ * actions.myPackage.someAction();
+ * ```
+ *
+ * @example
+ * With additional parameters:
+ *
+ * ```typescript
+ * const someAction: Action<Packages, Args> = ({ state, actions, libraries }) =>
+ *   (...args) => {
+ *      // Action content.
+ *   }
+ *
+ * // Calling the action:
+ * actions.myPackage.someAction("arg 1", "arg 2", ...);
+ * ```
+ *
+ * @template Packages - The definition of all the packages that a Frontity
+ * package is aware of.
+ * @template An - The arguments of the final action.
+ *
+ * @returns void
+ */
 export type Action<
-  Pkg extends Package,
+  Packages extends Package,
   A1 = null,
   A2 = null,
   A3 = null,
@@ -48,55 +84,56 @@ export type Action<
       actions,
       libraries,
     }: {
-      state: ResolveState<Pkg["state"]>;
-      actions: ResolveActions<Pkg["actions"]>;
-      libraries: Pkg["libraries"];
+      state: ResolveState<Packages["state"]>;
+      actions: ResolveActions<Packages["actions"]>;
+      libraries: Packages["libraries"];
     }) => void
   : ({
       state,
       actions,
       libraries,
     }: {
-      state: ResolveState<Pkg["state"]>;
-      actions: ResolveActions<Pkg["actions"]>;
-      libraries: Pkg["libraries"];
+      state: ResolveState<Packages["state"]>;
+      actions: ResolveActions<Packages["actions"]>;
+      libraries: Packages["libraries"];
     }) => (...args: Arguments<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>) => void;
 
 /**
- * Type for asynchronous actions.
- * The `A1`..`A10` parameters correspond to the arguments passed
- * to the action.abs.
+ * Type declaration of a Frontity async action.
  *
  * @example
- * ```
- * import { AsyncAction } from '@frontity/types';
- * interface Input = {
- *   input: string;
+ *
+ * Without additional parameters:
+ * ```typescript
+ * const someAction: AsyncAction<Packages> = async ({ state, actions, libraries }) => {
+ *  // Action content. It can await.
  * }
  *
- * const actions: { myCustomAction: AsyncAction<MyPackage, Input> } = {
- *   myCustomAction: ({ state, libraries }) => async ({ input }) => {
- *     const result = await somePromise();
- *     console.log(input);
- *    }
- * }
+ * // Calling the action:
+ * actions.myPackage.someAction();
  * ```
  *
- * Or simply:
  * @example
- * ```
- * import { AsyncAction } from '@frontity/types';
+ * With additional parameters:
  *
- * const actions: { myCustomAction: AsyncAction<MyPackage>} = {
- *   myCustomAction: async ({ state, libraries }) => {
- *     const result = await somePromise();
- *    }
- * }
+ * ```typescript
+ * const someAction: AsyncAction<Packages, Args> =
+ *   async ({ state, actions, libraries }) => (...args) => {
+ *    // Action content. It can await.
+ *   }
+ *
+ * // Calling the action:
+ * actions.myPackage.someAction("arg 1", "arg 2", ...);
  * ```
  *
+ * @template Packages - The definition of all the packages that a Frontity
+ * package is aware of.
+ * @template An - The arguments of the final action.
+ *
+ * @returns Promise<void>
  */
 export type AsyncAction<
-  Pkg extends Package,
+  Packages extends Package,
   A1 = null,
   A2 = null,
   A3 = null,
@@ -113,25 +150,34 @@ export type AsyncAction<
       actions,
       libraries,
     }: {
-      state: ResolveState<Pkg["state"]>;
-      actions: ResolveActions<Pkg["actions"]>;
-      libraries: Pkg["libraries"];
+      state: ResolveState<Packages["state"]>;
+      actions: ResolveActions<Packages["actions"]>;
+      libraries: Packages["libraries"];
     }) => Promise<void>
   : ({
       state,
       actions,
       libraries,
     }: {
-      state: ResolveState<Pkg["state"]>;
-      actions: ResolveActions<Pkg["actions"]>;
-      libraries: Pkg["libraries"];
+      state: ResolveState<Packages["state"]>;
+      actions: ResolveActions<Packages["actions"]>;
+      libraries: Packages["libraries"];
     }) => (
       ...args: Arguments<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10>
     ) => Promise<void>;
 
+/**
+ * The context of a Koa application.
+ */
 export type Context = Koa.ParameterizedContext<
   Koa.DefaultState,
   Koa.DefaultContext
 >;
 
-export type ServerAction<Pkg> = AsyncAction<Pkg, { ctx: Context }>;
+/**
+ * Type definition for Frontity server actions, like `beforeSSR` or `afterSSR`.
+ *
+ * @template Packages - The definition of all the packages that a Frontity
+ * package is aware of.
+ */
+export type ServerAction<Packages> = AsyncAction<Packages, { ctx: Context }>;

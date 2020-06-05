@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comscore Analytics should not send if no tracking ids are passed 1`] = `""`;
+
+exports[`Comscore Analytics should send if tracking ids are passed 1`] = `"<script data-rh=\\"true\\" async=\\"true\\" src=\\"https://sb.scorecardresearch.com/beacon.js\\"></script>"`;

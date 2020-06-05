@@ -43,10 +43,10 @@ const Post = ({ state, actions, libraries }) => {
                 </Author>
               </StyledLink>
             )}
-            <Fecha>
+            <DateWrapper>
               {" "}
               on <b>{date.toDateString()}</b>
-            </Fecha>
+            </DateWrapper>
           </div>
         )}
       </div>
@@ -90,7 +90,7 @@ const Author = styled.p`
   display: inline;
 `;
 
-const Fecha = styled.p`
+const DateWrapper = styled.p`
   color: rgba(12, 17, 43, 0.9);
   font-size: 0.9em;
   display: inline;

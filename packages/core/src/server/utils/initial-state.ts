@@ -13,6 +13,7 @@ export default ({
     frontity: {
       name: settings.name,
       mode: settings.mode,
+      debug: false,
       platform: "server",
       rendering: "ssr",
       initialLink: `${url.pathname}${url.search}${url.hash}`,
