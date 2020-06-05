@@ -11,9 +11,6 @@ const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
   const { link } = state.router;
   const { isReady } = state.source.get(link);
 
-  // Store the previous title.
-  const [prevTitle, setPrevTitle] = React.useState("");
-
   // Store if a pageview has been sent for this link.
   const [isPageviewSent, setIsPageviewSent] = React.useState(false);
 
@@ -31,9 +28,7 @@ const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
        */
       titleTemplate={!isReady ? "%s " : ""}
       onChangeClientState={({ title }) => {
-        if (isReady && !isPageviewSent && prevTitle !== title) {
-          // Store current title.
-          setPrevTitle(title);
+        if (isReady && !isPageviewSent) {
           // Send pageview.
           actions.analytics.sendPageview({
             page: state.router.link,
