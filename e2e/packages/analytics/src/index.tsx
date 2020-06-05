@@ -56,7 +56,7 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
   );
 };
 
-const analytics: Analytics<Packages> = {
+const analytics: Analytics = {
   name: "e2e-analytics",
   roots: {
     theme: connect(Theme),

@@ -3,12 +3,12 @@ import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
-interface TestAnalytics<Pkgs = null> extends Package {
+interface TestAnalytics extends Package {
   name: "e2e-analytics";
   state: {
     source: {
-      data: Source<Pkgs>["state"]["source"]["data"];
-      get: Source<Pkgs>["state"]["source"]["get"];
+      data: Source["state"]["source"]["data"];
+      get: Source["state"]["source"]["get"];
     };
     analytics: {
       namespaces: Analytics["state"]["analytics"]["namespaces"];
@@ -20,11 +20,11 @@ interface TestAnalytics<Pkgs = null> extends Package {
   };
   actions: {
     source: {
-      fetch: Source<Pkgs>["actions"]["source"]["fetch"];
+      fetch: Source["actions"]["source"]["fetch"];
     };
     testAnalytics: {
-      sendPageview: Action<Pkgs, Pageview>;
-      sendEvent: Action<Pkgs, Event>;
+      sendPageview: Action<Packages, Pageview>;
+      sendEvent: Action<Packages, Event>;
     };
   };
   roots: {
@@ -32,9 +32,6 @@ interface TestAnalytics<Pkgs = null> extends Package {
   };
 }
 
-export type Packages = TestAnalytics<Packages> &
-  Router<Packages> &
-  Source<Packages> &
-  Analytics;
+export type Packages = TestAnalytics & Router & Source & Analytics;
 
 export default TestAnalytics;

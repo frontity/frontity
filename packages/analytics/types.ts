@@ -12,7 +12,7 @@ export type Event = {
   payload: Record<string, any>;
 };
 
-interface Analytics<Pkgs = null> extends Package {
+interface Analytics<Pkgs = Packages> extends Package {
   roots: {
     analytics: React.FC;
   };
@@ -33,8 +33,6 @@ interface Analytics<Pkgs = null> extends Package {
   };
 }
 
-export type Packages = Analytics<Packages> &
-  Router<Packages> &
-  Source<Packages>;
+export type Packages = Analytics & Router & Source;
 
 export default Analytics;

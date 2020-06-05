@@ -1,7 +1,7 @@
 import Root from "./components";
-import Analytics, { Packages } from "../types";
+import Analytics from "../types";
 
-const analytics: Analytics<Packages> = {
+const analytics: Analytics = {
   roots: {
     analytics: Root,
   },
