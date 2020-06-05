@@ -14,7 +14,7 @@ _`frontity.settings.js` should contain data that allows it to be serializable (a
 
 - [Feature Discussions](#feature-discussions)
 - [Changelog](#changelog)
-- [Frontity Open Source Community](#frontity-open-source-community)
+- [Open Source Community](#open-source-community)
   * [Channels](#channels)
   * [Get involved](#get-involved)
 
@@ -32,18 +32,18 @@ Have a look at the latest updates of this package in the [CHANGELOG](https://git
 
 ***
 
-## Frontity Open Source Community
+## Open Source Community
 
 ### Channels
 
 [![Community Forum Topics](https://img.shields.io/discourse/topics?color=blue&label=community%20forum&server=https%3A%2F%2Fcommunity.frontity.org%2F)](https://community.frontity.org/) [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity) ![Frontity Github Stars](https://img.shields.io/github/stars/frontity/frontity?style=social)
 
-We have a number of different channels at your disposal where you can find out more information about the project, join in discussions about it, and also get involved:
+Frontity has a number of different channels at your disposal where you can find out more information about the project, join in discussions about it, and also get involved:
 
-- **📖  [Docs](https://docs.frontity.org/):** our primary documentation resource - this is the place to learn how to build amazing sites with Frontity.
-* **👨‍👩‍👧‍👦  [Community forum](https://community.frontity.org/):** join our forum and ask questions, share your knowledge, give us feedback and tell us how we're doing, and meet other cool Frontity people. We'd also love to know about what you're building with Frontity, so please do swing by the [forum](https://community.frontity.org/) and tell us about your projects.
-* **🐞  Contribute:** we use [GitHub](https://github.com/frontity/frontity) for bugs and pull requests. See our [Contributing](../contributing/) section to find out how you can help develop Frontity, or improve this documentation.
-* **🗣  Social media**: interact with other Frontity users. Reach out to us on [Twitter](https://twitter.com/frontity). Mention us in your tweets about Frontity and what you're building by using **`@frontity`**.
+- **📖  [Docs](https://docs.frontity.org/):** Frontity's primary documentation resource - this is the place to learn how to build amazing sites with Frontity.
+* **👨‍👩‍👧‍👦  [Community forum](https://community.frontity.org/):** join Frontity's forum and ask questions, share your knowledge, give feedback and meet other cool Frontity people. We'd love to know about what you're building with Frontity, so please do swing by the [forum](https://community.frontity.org/) and tell us about your projects.
+* **🐞  Contribute:** Frontity uses [GitHub](https://github.com/frontity/frontity) for bugs and pull requests. Check out the [Contributing](../contributing/) section to find out how you can help develop Frontity, or improve this documentation.
+* **🗣  Social media**: interact with other Frontity users. Reach out to the Frontity team on [Twitter](https://twitter.com/frontity). Mention us in your tweets about Frontity and what you're building by using **`@frontity`**.
 * 💌  **Newsletter:** do you want to receive the latest news about Frontity and find out as soon as there's an update to the framework? Subscribe to our [newsletter](https://frontity.org/#newsletter).
 
 ### Get involved
