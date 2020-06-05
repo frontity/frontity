@@ -3,18 +3,27 @@
 [![Version](https://img.shields.io/npm/v/create-frontity.svg)](https://www.npmjs.com/package/create-frontity) [![npm](https://img.shields.io/npm/dw/create-frontity)](https://www.npmjs.com/package/create-frontity) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
 This package is linked to `npx frontity create`. 
-This way, people can use `npx frontity create` as well as `npm init frontity`.  
+This way, people can use `npx frontity create` as well as `npm init frontity`.
 
 ## Table of contents
 
 <!-- toc -->
 
+- [Install](#install)
 - [Feature Discussions](#feature-discussions)
 - [Changelog](#changelog)
-- [» Frontity Resources 🌎](#%C2%BB-frontity-resources-%F0%9F%8C%8E)
-- [» Get involved 🤗](#%C2%BB-get-involved-%F0%9F%A4%97)
+  * [» Frontity Resources 🌎](#%C2%BB-frontity-resources-%F0%9F%8C%8E)
+  * [» Get involved 🤗](#%C2%BB-get-involved-%F0%9F%A4%97)
 
 <!-- tocstop -->
+
+## Install
+
+```sh
+npm i create-frontity
+```
+
+  
 
 ## Feature Discussions
 
@@ -28,7 +37,7 @@ Have a look at the latest updates of this package in the [CHANGELOG](https://git
 
 ***
 
-## » Frontity Resources 🌎
+### » Frontity Resources 🌎
 
 [![Community Forum Topics](https://img.shields.io/discourse/topics?color=blue&label=community%20forum&server=https%3A%2F%2Fcommunity.frontity.org%2F)](https://community.frontity.org/) [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity) ![Frontity Github Stars](https://img.shields.io/github/stars/frontity/frontity?style=social)
 
@@ -40,7 +49,7 @@ We have a number of different channels at your disposal where you can find out m
 * **🗣  Social media**: interact with other Frontity users. Reach out to us on [Twitter](https://twitter.com/frontity). Mention us in your tweets about Frontity and what you're building by using **`@frontity`**.
 * 💌  **Newsletter:** do you want to receive the latest news about Frontity and find out as soon as there's an update to the framework? Subscribe to our [newsletter](https://frontity.org/#newsletter).
 
-## » Get involved 🤗
+### » Get involved 🤗
 
 [![GitHub issues by-label](https://img.shields.io/github/issues/frontity/frontity/good%20first%20issue)](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
 
