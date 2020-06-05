@@ -1,5 +1,5 @@
 ---
-"create-frontity": minor
+"create-frontity": patch
 ---
 
-README.md full description
+README.md with more detailed info of the package.
