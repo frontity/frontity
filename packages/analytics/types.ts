@@ -28,7 +28,8 @@ interface Analytics<Pkgs = null> extends Package {
   };
   state: {
     analytics: {
-      namespaces: string[];
+      pageviews: Record<string, boolean>;
+      events: Record<string, boolean>;
     };
   };
 }

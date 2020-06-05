@@ -7,7 +7,8 @@ const analytics: Analytics<Packages> = {
   },
   state: {
     analytics: {
-      namespaces: [],
+      pageviews: {},
+      events: {},
     },
   },
   actions: {
@@ -17,9 +18,11 @@ const analytics: Analytics<Packages> = {
      */
     analytics: {
       sendPageview: ({ state, actions }) => (pageview) => {
-        state.analytics.namespaces
-          .map((ns) => actions[ns])
-          .forEach(({ sendPageview }) => sendPageview(pageview));
+        Object.entries(state.analytics.pageviews).forEach(
+          ([namespace, shouldSend]) => {
+            if (shouldSend) actions[namespace].sendPageview(pageview);
+          }
+        );
       },
 
       /**
@@ -27,9 +30,11 @@ const analytics: Analytics<Packages> = {
        * and run `sendEvent` for each one.
        */
       sendEvent: ({ state, actions }) => (event) => {
-        state.analytics.namespaces
-          .map((ns) => actions[ns])
-          .forEach(({ sendEvent }) => sendEvent && sendEvent(event));
+        Object.entries(state.analytics.events).forEach(
+          ([namespace, shouldSend]) => {
+            if (shouldSend) actions[namespace].sendEvent(event);
+          }
+        );
       },
     },
   },
