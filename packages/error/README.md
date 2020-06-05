@@ -7,14 +7,14 @@ Frontity errors and warnings.
 
 ## Install
 
-```sh
-npm i @frontity/error
-```
+This package is not meant to be installed individually, it comes within [`frontity`](https://github.com/frontity/frontity/tree/dev/packages/frontity).
 
 ## Usage
 
+These tools are only meant to be used by frontity code (packages included).
+
 ```js
-import { warn, error } from "@frontity/error";
+import { warn, error } from "frontity";
 ...
 warn("Warning: myMethod() is being used in a non ... ");
 ...
