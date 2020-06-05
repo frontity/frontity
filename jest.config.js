@@ -9,5 +9,6 @@ module.exports = {
     "!**/vendor/**",
     "!**/dist/**",
     "!**/build/**",
+    "!**/jest.config.{js,ts}",
   ],
 };
