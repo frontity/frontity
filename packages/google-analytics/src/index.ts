@@ -26,17 +26,17 @@ const googleAnalytics: GoogleAnalytics = {
           })
         );
       },
-      sendEvent: ({ state }) => ({ event, payload }) => {
+      sendEvent: ({ state }) => ({ name, payload }) => {
         // Get Tracking ids from state.
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
 
         ids
           .map((id) => getTrackerName(id))
-          .forEach((name) => {
-            window.ga(`${name}.send`, {
+          .forEach((trackerName) => {
+            window.ga(`${trackerName}.send`, {
               hitType: "event",
-              eventAction: event,
+              eventAction: name,
               eventCategory: payload.category,
               eventLabel: payload.label,
               eventValue: payload.value,

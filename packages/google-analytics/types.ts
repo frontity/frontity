@@ -9,7 +9,7 @@ declare global {
 }
 
 interface GoogleAnalyticsEvent {
-  event: string;
+  name: string;
   payload: {
     category: string;
     label: string;
