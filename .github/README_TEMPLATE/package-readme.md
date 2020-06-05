@@ -6,6 +6,9 @@
 <%= projectDescription %>
 <% } -%>
 
+## Table of contents
+
+<!-- toc -->
 
 ## Install
 
