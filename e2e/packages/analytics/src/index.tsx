@@ -31,7 +31,7 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
   const changeLinkPost2 = () => actions.router.set("/some-other-post/");
   const sendEvent = () =>
     actions.analytics.sendEvent({
-      event: "some event",
+      name: "some event",
       payload: { content: "some content" },
     });
 

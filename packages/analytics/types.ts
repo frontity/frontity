@@ -8,7 +8,7 @@ export type Pageview = {
 };
 
 export type Event = {
-  event: string;
+  name: string;
   payload: Record<string, any>;
 };
 

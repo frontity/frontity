@@ -15,7 +15,7 @@ describe("Analytics package", () => {
   };
 
   const someEvent = {
-    event: "some event",
+    name: "some event",
     payload: { content: "some content" },
   };
 
