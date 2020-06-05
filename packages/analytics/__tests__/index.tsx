@@ -34,7 +34,7 @@ describe("analytics.pageview", () => {
     const { actions } = createStore(mergedPackages);
 
     const pageview = {
-      page: "/some/page",
+      link: "/some/page",
       title: "Some Title - My Site",
     };
 

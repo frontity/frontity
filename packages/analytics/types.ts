@@ -3,7 +3,7 @@ import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
 export type Pageview = {
-  page: string;
+  link: string;
   title: string;
 };
 

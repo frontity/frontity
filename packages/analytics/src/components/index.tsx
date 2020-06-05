@@ -31,7 +31,7 @@ const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
         if (isReady && !isPageviewSent) {
           // Send pageview.
           actions.analytics.pageview({
-            page: state.router.link,
+            link: state.router.link,
             title,
           });
           // Mark pageview as sent.
