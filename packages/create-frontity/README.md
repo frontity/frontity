@@ -19,11 +19,7 @@ This way, people can use `npx frontity create` as well as `npm init frontity`.
 
 ## Install
 
-```sh
-npm i create-frontity
-```
-
-  
+This package doesn't need to be installed. It's meant to be used only in conjunction with `npm init frontity`
 
 ## Feature Discussions
 
