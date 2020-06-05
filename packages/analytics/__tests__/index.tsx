@@ -64,7 +64,7 @@ describe("analytics.sendEvent", () => {
     const { actions } = createStore(mergedPackages);
 
     const event = {
-      event: "some event",
+      name: "some event",
       payload: {
         category: "post",
         action: "scroll",
