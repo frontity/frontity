@@ -40,12 +40,12 @@ export default async ({ packages }) => {
       }
 
       loadableReady(() => {
-        // hydrate(<App store={store} />, window.document.getElementById("root"));
-        (ReactDOM as any)
-          .unstable_createRoot(window.document.getElementById("root"), {
-            hydrate: true,
-          })
-          .render(<App store={store} />);
+        hydrate(<App store={store} />, window.document.getElementById("root"));
+        // (ReactDOM as any)
+        //   .unstable_createRoot(window.document.getElementById("root"), {
+        //     hydrate: true,
+        //   })
+        //   .render(<App store={store} />);
 
         // Switch to CSR mode.
         store.state.frontity.rendering = "csr";
