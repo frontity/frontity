@@ -1,5 +1,5 @@
 import React from "react";
-import { hydrate, createRoot } from "react-dom";
+import ReactDOM, { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import { getSnapshot } from "@frontity/connect";
 import App from "../app";
@@ -41,9 +41,11 @@ export default async ({ packages }) => {
 
       loadableReady(() => {
         // hydrate(<App store={store} />, window.document.getElementById("root"));
-        createRoot(window.document.getElementById("root"), {
-          hydrate: true,
-        }).render(<App store={store} />);
+        (ReactDOM as any)
+          .unstable_createRoot(window.document.getElementById("root"), {
+            hydrate: true,
+          })
+          .render(<App store={store} />);
 
         // Switch to CSR mode.
         store.state.frontity.rendering = "csr";
