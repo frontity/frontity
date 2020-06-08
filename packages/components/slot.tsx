@@ -2,11 +2,12 @@ import React from "react";
 import { connect, useFills } from "frontity";
 import { Connect, Package } from "frontity/types";
 
-type SlotType = React.FC<
-  Connect<Package, { src?: string; code?: string; id?: string }>
->;
+type SlotType = React.FC<Connect<Package, { name: string; data?: any }>>;
 
-const Slot = ({ name, state, children, ...slotProps }) => {
+/**
+ * A React component that renders a Fill
+ */
+const Slot: SlotType = ({ name, state, children, ...slotProps }) => {
   // Get the data, either from props or the current link.
   const data = slotProps.data || state.source.get(state.router.link);
 

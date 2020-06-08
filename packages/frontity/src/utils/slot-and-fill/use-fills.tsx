@@ -12,7 +12,7 @@ interface Fill extends StateFill {
   /**
    * The React component that needs to be injected in the Slot for this fill.
    */
-  Fill: React.ReactType;
+  Fill: any;
 
   /**
    * A unique key that can be used when iterating over the array in React.
@@ -26,7 +26,7 @@ interface Fill extends StateFill {
  *
  * @param slotName - The name of the slot.
  */
-const DebugFill: React.FC<{ name: string }> = ({ name }) => (
+const DebugFill = ({ name }) => (
   <Debug data-slot-name={name}>Slot: &quot;{name}&quot;</Debug>
 );
 
