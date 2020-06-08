@@ -11,7 +11,7 @@ import { Root as ComscoreAnalytics } from "..";
 import ComscoreAnalyticsPkg from "../../../types";
 
 const getState = (): State<ComscoreAnalyticsPkg> => ({
-  analytics: { namespaces: ["comscoreAnalytics"] },
+  analytics: { pageviews: { comscoreAnalytics: true } },
   comscoreAnalytics: {
     trackingIds: [],
   },

@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-interface ComscoreAnalytics<Pkgs extends Package> extends Package {
+interface ComscoreAnalytics<Pkgs = Packages> extends Package {
   roots: {
     comscoreAnalytics: ReactType;
   };

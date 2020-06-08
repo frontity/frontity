@@ -1,9 +1,9 @@
 import { warn } from "frontity";
 import analytics from "@frontity/analytics";
-import ComscoreAnalytics, { Packages } from "../types";
+import ComscoreAnalytics from "../types";
 import Root from "./components";
 
-const comscoreAnalytics: ComscoreAnalytics<Packages> = {
+const comscoreAnalytics: ComscoreAnalytics = {
   roots: {
     ...analytics.roots,
     comscoreAnalytics: Root,
