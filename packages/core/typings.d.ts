@@ -1,5 +1,5 @@
 declare module "hash-it" {
-  export default function(obj: {}): string;
+  export default function (obj: {}): string;
 }
 
 interface NodeModule {

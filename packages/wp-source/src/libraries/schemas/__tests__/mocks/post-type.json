@@ -1,0 +1,27 @@
+{
+  "description": "",
+  "hierarchical": false,
+  "name": "Posts",
+  "slug": "post",
+  "taxonomies": ["category", "post_tag"],
+  "rest_base": "posts",
+  "_links": {
+    "collection": [
+      {
+        "href": "http://test.frontity.org/wp-json/wp/v2/types"
+      }
+    ],
+    "wp:items": [
+      {
+        "href": "http://test.frontity.org/wp-json/wp/v2/posts"
+      }
+    ],
+    "curies": [
+      {
+        "name": "wp",
+        "href": "https://api.w.org/{rel}",
+        "templated": true
+      }
+    ]
+  }
+}

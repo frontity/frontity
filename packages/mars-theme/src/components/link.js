@@ -7,9 +7,9 @@ const Link = ({
   link,
   className,
   children,
-  "aria-current": ariaCurrent
+  "aria-current": ariaCurrent,
 }) => {
-  const onClick = event => {
+  const onClick = (event) => {
     // Do nothing if it's an external link
     if (link.startsWith("http")) return;
 

@@ -7,8 +7,8 @@ const settings = {
     frontity: {
       url: "https://site.com",
       prop1: "prop1",
-      menu1: ["item1"]
-    }
+      menu1: ["item1"],
+    },
   },
   packages: [
     {
@@ -17,26 +17,26 @@ const settings = {
       state: {
         frontity: {
           prop1: "overwritten by package1",
-          menu1: ["item2", "item3"]
+          menu1: ["item2", "item3"],
         },
         package1: {
-          prop2: "prop2"
-        }
-      }
+          prop2: "prop2",
+        },
+      },
     },
     {
       name: "package2",
       active: true,
       state: {
         frontity: {
-          prop1: "overwritten by package2"
+          prop1: "overwritten by package2",
         },
         package2: {
-          prop3: "prop2"
-        }
-      }
-    }
-  ]
+          prop3: "prop2",
+        },
+      },
+    },
+  ],
 };
 
 describe("initialState", () => {

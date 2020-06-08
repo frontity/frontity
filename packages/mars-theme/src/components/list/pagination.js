@@ -10,50 +10,29 @@ import Link from "../link";
  * The `state`, `actions`, `libraries` props are provided by the global context,
  * when we wrap this component in `connect(...)`
  */
-const Pagination = ({ state, actions, libraries }) => {
+const Pagination = ({ state, actions }) => {
   // Get the total posts to be displayed based for the current link
-  const { totalPages } = state.source.get(state.router.link);
-  const { path, page, query } = libraries.source.parse(state.router.link);
-
-  // Check if we can go to next page within the pagination
-  const isThereNextPage = page < totalPages;
-
-  // Check if we can go to previous page within the pagination
-  const isTherePreviousPage = page > 1;
-
-  // Get the link for the next page
-  const nextPageLink = libraries.source.stringify({
-    path,
-    page: page + 1,
-    query
-  });
-
-  // Get the link for the previous page
-  const prevPageLink = libraries.source.stringify({
-    path,
-    page: page - 1,
-    query
-  });
+  const { next, previous } = state.source.get(state.router.link);
 
   // Pre-fetch the the next page if it hasn't been fetched yet.
   useEffect(() => {
-    if (isThereNextPage) actions.source.fetch(nextPageLink);
+    if (next) actions.source.fetch(next);
   }, []);
 
   return (
     <div>
       {/* If there's a next page, render this link */}
-      {isThereNextPage && (
-        <Link link={nextPageLink}>
+      {next && (
+        <Link link={next}>
           <Text>← Older posts</Text>
         </Link>
       )}
 
-      {isTherePreviousPage && isThereNextPage && " - "}
+      {previous && next && " - "}
 
       {/* If there's a previous page, render this link */}
-      {isTherePreviousPage && (
-        <Link link={prevPageLink}>
+      {previous && (
+        <Link link={previous}>
           <Text>Newer posts →</Text>
         </Link>
       )}

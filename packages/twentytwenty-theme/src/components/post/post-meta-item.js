@@ -28,6 +28,10 @@ const MetaText = styled.span`
     color: inherit;
     text-decoration: none;
   }
+
+  a:hover {
+    text-decoration: underline;
+  }
 `;
 
 const ListItem = styled.li`

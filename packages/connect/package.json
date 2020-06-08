@@ -1,7 +1,7 @@
 {
   "name": "@frontity/connect",
-  "version": "1.0.3",
-  "description": "A state manager that's easy to use and hackable at the same time.",
+  "version": "1.1.1",
+  "description": "The state manager of Frontity. Similar to MobX but much more lightweight because it's based on ES6 proxies.",
   "keywords": [
     "frontity",
     "connect",
@@ -18,19 +18,15 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand"
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
+  },
+  "dependencies": {
+    "@frontity/error": "^0.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "jest": "^24.7.1",
-    "react-test-renderer": "^16.8.6",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+    "react-test-renderer": "^16.13.1"
   }
 }

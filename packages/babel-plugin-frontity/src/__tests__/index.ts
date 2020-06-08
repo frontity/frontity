@@ -7,21 +7,21 @@ pluginTester({
   tests: [
     {
       title: "Unrelated named import",
-      code: 'import { named } from "other-module";'
+      code: 'import { named } from "other-module";',
     },
     {
       title: "Unrelated default import",
-      code: 'import def from "other-module";'
+      code: 'import def from "other-module";',
     },
     {
       title: "Unrelated import from frontity",
-      code: 'import { connect } from "frontity";'
+      code: 'import { connect } from "frontity";',
     },
     {
       title: "Unrelated multiple import from frontity",
-      code: 'import { connect, loadable } from "frontity";'
-    }
-  ]
+      code: 'import { connect, loadable } from "frontity";',
+    },
+  ],
 });
 
 pluginTester({
@@ -31,7 +31,7 @@ pluginTester({
     {
       title: "Only styled import",
       code: 'import { styled } from "frontity";',
-      output: 'import styled from "@emotion/styled";'
+      output: 'import styled from "@emotion/styled";',
     },
     {
       title: "Styled import with other unrelated import",
@@ -39,7 +39,7 @@ pluginTester({
       output: `
         import { connect } from "frontity";
         import styled from "@emotion/styled";
-      `
+      `,
     },
     {
       title: "Styled import with other two unrelated imports",
@@ -48,9 +48,9 @@ pluginTester({
         import { connect } from "frontity";
         import { loadable } from "frontity";
         import styled from "@emotion/styled";
-      `
-    }
-  ]
+      `,
+    },
+  ],
 });
 
 pluginTester({
@@ -60,7 +60,7 @@ pluginTester({
     {
       title: "Only css import",
       code: 'import { css } from "frontity";',
-      output: 'import { css } from "@emotion/core";'
+      output: 'import { css } from "@emotion/core";',
     },
     {
       title: "css import with other unrelated import",
@@ -68,9 +68,9 @@ pluginTester({
       output: `
         import { connect } from "frontity";
         import { css } from "@emotion/core";
-      `
-    }
-  ]
+      `,
+    },
+  ],
 });
 
 pluginTester({
@@ -80,7 +80,7 @@ pluginTester({
     {
       title: "Only Global import",
       code: 'import { Global } from "frontity";',
-      output: 'import { Global } from "@emotion/core";'
+      output: 'import { Global } from "@emotion/core";',
     },
     {
       title: "Global import with other unrelated import",
@@ -88,9 +88,9 @@ pluginTester({
       output: `
         import { connect } from "frontity";
         import { Global } from "@emotion/core";
-      `
-    }
-  ]
+      `,
+    },
+  ],
 });
 
 pluginTester({
@@ -100,7 +100,7 @@ pluginTester({
     {
       title: "Only keyframes import",
       code: 'import { keyframes } from "frontity";',
-      output: 'import { keyframes } from "@emotion/core";'
+      output: 'import { keyframes } from "@emotion/core";',
     },
     {
       title: "keyframes import with other unrelated import",
@@ -108,9 +108,9 @@ pluginTester({
       output: `
         import { connect } from "frontity";
         import { keyframes } from "@emotion/core";
-      `
-    }
-  ]
+      `,
+    },
+  ],
 });
 
 pluginTester({
@@ -123,7 +123,7 @@ pluginTester({
       output: `
         import styled from "@emotion/styled";
         import { css } from "@emotion/core";
-      `
+      `,
     },
     {
       title: "css import with styled and other unrelated import",
@@ -132,7 +132,7 @@ pluginTester({
         import styled from "@emotion/styled";
         import { css } from "@emotion/core";
         import { connect } from "frontity";
-      `
-    }
-  ]
+      `,
+    },
+  ],
 });

@@ -1,12 +1,10 @@
 {
   "name": "@frontity/router",
-  "version": "1.0.18",
-  "description": "Types for the Frontity Router API",
+  "version": "1.1.0",
+  "description": "Types for the Frontity router namespace",
   "keywords": [
     "frontity",
-    "frontity-router",
-    "types",
-    "typescript"
+    "frontity-router"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
@@ -17,20 +15,11 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --clearCache && jest"
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest"
   },
   "dependencies": {
     "frontity": "^1.4.3"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
   }
 }

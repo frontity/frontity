@@ -14,6 +14,7 @@ let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
+  store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -27,7 +28,7 @@ describe("category", () => {
       .mockResolvedValueOnce(
         mockResponse(cat1Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -39,13 +40,13 @@ describe("category", () => {
     // Add category to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse([cat1])
+      response: mockResponse([cat1]),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(cat1PostsPage2, {
         "X-WP-Total": "5",
-        "X-WP-TotalPages": "2"
+        "X-WP-TotalPages": "2",
       })
     );
     // Observe changes in isFetching and isReady properties
@@ -63,9 +64,8 @@ describe("category", () => {
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
       { isFetching: false, isReady: false }, // first values are from a different object
-      { isFetching: false, isReady: false }, // initial values from the data object
       { isFetching: true, isReady: false }, // fetch starts
-      { isFetching: false, isReady: true } // fetch ends
+      { isFetching: false, isReady: true }, // fetch ends
     ]);
   });
 
@@ -80,7 +80,7 @@ describe("category", () => {
       .mockResolvedValueOnce(
         mockResponse(cat1PostsCpt, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -117,7 +117,7 @@ describe("category", () => {
       .mockResolvedValueOnce(
         mockResponse([], {
           "X-WP-Total": "0",
-          "X-WP-TotalPages": "0"
+          "X-WP-TotalPages": "0",
         })
       );
     // Fetch entities
@@ -144,7 +144,7 @@ describe("category", () => {
       .mockResolvedValueOnce(
         mockResponse(cat1Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities

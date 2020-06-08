@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`fetch Throw an error if fetch fails 1`] = `
+Object {
+  "/some/route/": Object {
+    "isFetching": true,
+    "isReady": false,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
+  },
+}
+`;
+
 exports[`fetch does nothing if data exists 1`] = `
 Object {
   "/some/route/": Object {
@@ -7,17 +20,27 @@ Object {
     "isFetching": false,
     "isPostType": true,
     "isReady": true,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
     "type": "example",
   },
 }
 `;
 
-exports[`fetch returns 404 is fetch fails 1`] = `
+exports[`fetch should run again when \`force\` is used 1`] = `
 Object {
   "/some/route/": Object {
-    "is404": true,
+    "id": 1,
     "isFetching": false,
-    "isReady": false,
+    "isPostType": true,
+    "isReady": true,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
+    "type": "example",
   },
 }
 `;
@@ -29,8 +52,26 @@ Object {
     "isFetching": false,
     "isPostType": true,
     "isReady": true,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
     "type": "example",
   },
+}
+`;
+
+exports[`init Errors for state.data['/some/route/'] should be removed when fetching with { force: true } 1`] = `
+Object {
+  "id": 1,
+  "isFetching": false,
+  "isPostType": true,
+  "isReady": true,
+  "link": "/some/route/",
+  "page": 1,
+  "query": Object {},
+  "route": "/some/route/",
+  "type": "example",
 }
 `;
 
@@ -281,6 +322,23 @@ Array [
 ]
 `;
 
+exports[`init should add redirect for tags if 'authorBase' is set 1`] = `
+Array [
+  Object {
+    "func": [Function],
+    "name": "author base",
+    "pattern": "/blog/author/:subpath+/",
+    "priority": 10,
+  },
+  Object {
+    "func": [Function],
+    "name": "author base (reverse)",
+    "pattern": "/author/(.*)/",
+    "priority": 10,
+  },
+]
+`;
+
 exports[`init should add redirect for tags if 'tagBase' is set 1`] = `
 Array [
   Object {
@@ -371,4 +429,20 @@ Array [
     "priority": 10,
   },
 ]
+`;
+
+exports[`init state.data['/some/route/'].isCategory should be removed when fetching with { force: true } 1`] = `
+Object {
+  "isArchive": true,
+  "isCategory": true,
+  "isFetching": false,
+  "isReady": true,
+  "isTaxonomy": true,
+  "items": Array [],
+  "link": "/some/route/",
+  "page": 1,
+  "query": Object {},
+  "route": "/some/route/",
+  "taxonomy": "category",
+}
 `;

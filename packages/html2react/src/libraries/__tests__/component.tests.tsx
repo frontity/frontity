@@ -2,7 +2,6 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import Component from "../component";
 import parse from "../parse";
-import decode from "../decode/client";
 import htmlMock from "./mocks/html";
 
 describe("Component", () => {
@@ -11,25 +10,27 @@ describe("Component", () => {
       {
         name: "priority-15",
         priority: 15,
-        test: () => false
+        test: () => false,
+        processor: () => {},
       },
       {
         name: "priority-5",
         priority: 5,
-        test: () => false
+        test: () => false,
+        processor: () => {},
       },
       {
         name: "priority-none",
-        test: () => false
-      }
+        test: () => false,
+        processor: () => {},
+      },
     ];
 
     const libraries = {
       html2react: {
         parse,
-        decode,
-        processors
-      }
+        processors,
+      },
     };
 
     expect(libraries.html2react.processors[0].name).toBe("priority-15");

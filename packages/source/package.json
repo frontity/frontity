@@ -1,12 +1,11 @@
 {
   "name": "@frontity/source",
-  "version": "1.0.17",
-  "description": "Types for the Frontity Source API",
+  "version": "1.2.1",
+  "description": "Types for the Frontity source namespace",
+  "main": "src/index.ts",
   "keywords": [
     "frontity",
-    "frontity-source",
-    "types",
-    "typescript"
+    "frontity-source"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
@@ -17,20 +16,11 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --clearCache && jest"
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest"
   },
   "dependencies": {
-    "frontity": "^1.4.3"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+    "frontity": "^1.7.0"
   }
 }

@@ -6,7 +6,7 @@ import SectionContainer from "./styles/section-container";
 // Component that provides scroll to top functionality
 const BackToTop = () => {
   // scroll to top function
-  const scrollToTop = event => {
+  const scrollToTop = (event) => {
     // prevent the default behaviors
     event.preventDefault();
     // scroll to the top smoothly
@@ -57,7 +57,7 @@ const SiteFooter = styled.footer`
   border-style: solid;
   border-width: 0;
   padding: 3rem 0;
-  background-color: ${props => props.bg};
+  background-color: ${(props) => props.bg};
   color: #000000;
 
   @media (min-width: 700px) {

@@ -1,7 +1,7 @@
-import open from "open";
 import { MultiCompiler } from "webpack";
 import express from "express";
 import createServer from "./create-server";
+import { openBrowserTab } from "./open-browser";
 import { Mode } from "../../../types";
 
 // Create an express app ready to be used with webpack-dev-middleware.
@@ -10,7 +10,7 @@ export default async ({
   port,
   isHttps,
   target,
-  openBrowser = true
+  openBrowser = true,
 }: {
   mode: Mode;
   port: number;
@@ -55,7 +55,7 @@ export default async ({
   });
 
   // Open localhost on the local browser.
-  if (openBrowser) open(url);
+  if (openBrowser) openBrowserTab(url);
 
   // Check if webpack has finished (both the client and server bundles).
   const done = (compiler: MultiCompiler) => {

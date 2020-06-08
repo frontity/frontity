@@ -11,32 +11,32 @@ const redirections: {
     name: "",
     priority: 10,
     pattern: "/",
-    func: () => "/about-us/"
+    func: () => "/about-us/",
   },
   {
     name: "",
     priority: 10,
     pattern: "/posts/",
-    func: () => "/"
+    func: () => "/",
   },
   {
     name: "",
     priority: 10,
     pattern: "/wp-cat/:subpath+",
-    func: ({ subpath }) => `/category/${subpath}/`
+    func: ({ subpath }) => `/category/${subpath}/`,
   },
   {
     name: "",
     priority: 10,
     pattern: "/category/(.*)",
-    func: () => ""
+    func: () => "",
   },
   {
     name: "",
     priority: 10,
     pattern: "/blog/:subpath*/",
-    func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`
-  }
+    func: ({ subpath = "" }) => `/${subpath}${subpath ? "/" : ""}`,
+  },
 ];
 
 const redirect = (path, redirections) => {

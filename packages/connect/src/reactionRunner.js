@@ -1,7 +1,7 @@
 import {
   registerReactionForOperation,
   getReactionsForOperation,
-  releaseReaction
+  releaseReaction,
 } from "./store";
 
 // reactions can call each other and form a call stack

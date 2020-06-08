@@ -1,4 +1,4 @@
-import { connect, styled } from "frontity";
+import { connect, styled, decode } from "frontity";
 import React from "react";
 import ScreenReaderText from "../styles/screen-reader";
 import Link from "../link";
@@ -16,9 +16,9 @@ const PostCategories = ({ categories }) => {
       <ScreenReaderText>Categories</ScreenReaderText>
 
       <EntryCategoriesInner>
-        {postCategories.map(category => (
+        {postCategories.map((category) => (
           <CategoryTag key={category.id} link={category.link}>
-            {category.name}
+            {decode(category.name)}
           </CategoryTag>
         ))}
       </EntryCategoriesInner>
@@ -60,5 +60,10 @@ const CategoryTag = styled(Link)`
   @media (min-width: 700px) {
     font-size: 1.5rem;
     margin: 1rem 0 0 2rem;
+  }
+
+  transition: border-bottom-color 150ms;
+  :hover {
+    border-bottom-color: transparent;
   }
 `;

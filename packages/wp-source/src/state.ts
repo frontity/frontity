@@ -1,12 +1,24 @@
 import WpSource from "../types";
-import { normalize } from "./libraries/route-utils";
+import { normalize, parse } from "./libraries/route-utils";
 
 const state: WpSource["state"]["source"] = {
-  get: ({ state }) => link =>
-    state.source.data[normalize(link)] || {
+  get: ({ state }) => (link) => {
+    const normalizedLink = normalize(link);
+    const data = state.source.data[normalizedLink];
+    if (data) {
+      return data;
+    }
+    const { route, query, page } = parse(link);
+
+    return {
+      link: normalize(normalizedLink),
+      route,
+      query,
+      page,
       isFetching: false,
-      isReady: false
-    },
+      isReady: false,
+    };
+  },
   data: {},
   category: {},
   tag: {},
@@ -14,7 +26,9 @@ const state: WpSource["state"]["source"] = {
   page: {},
   author: {},
   attachment: {},
-  api: "https://test.frontity.io",
+  type: {},
+  taxonomy: {},
+  api: "",
   isWpCom: ({ state }) =>
     state.source.api.startsWith(
       "https://public-api.wordpress.com/wp/v2/sites/"
@@ -24,10 +38,11 @@ const state: WpSource["state"]["source"] = {
   postsPage: "",
   categoryBase: "",
   tagBase: "",
+  authorBase: "",
   postEndpoint: "posts",
   params: {},
   postTypes: [],
-  taxonomies: []
+  taxonomies: [],
 };
 
 export default state;

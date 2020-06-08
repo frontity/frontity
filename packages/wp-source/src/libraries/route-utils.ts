@@ -1,53 +1,71 @@
-import { RouteParams } from "@frontity/source";
+import { RouteParams } from "@frontity/source/types";
 import WpSource from "../../types";
 
-export const parse: WpSource["libraries"]["source"]["parse"] = route =>
-  routeToParams(route);
+export const addFinalSlash = (path: string): string =>
+  path.replace(/\/?$/, "/");
 
-export const stringify: WpSource["libraries"]["source"]["stringify"] = routeParams =>
-  paramsToRoute(routeParams);
+export const queryToObj = (query = "") =>
+  query && query.includes("=")
+    ? query.split("&").reduce((result, param) => {
+        const [k, v] = param.split("=");
+        result[k] = v;
+        return result;
+      }, {})
+    : {};
 
-export const normalize = (route: string): string =>
-  paramsToRoute(routeToParams(route));
+export const objToQuery = (obj: Record<string, any>) => {
+  const entries = Object.entries(obj);
+  return entries.length
+    ? `?${entries.map(([key, value]) => `${key}=${value}`).join("&")}`
+    : "";
+};
 
-export default { parse, stringify, normalize };
-
-// UTILS
+export const concatPath = (...paths: string[]) =>
+  [""]
+    .concat(...paths.map((path) => path.split("/").filter((p) => p)), "")
+    .join("/");
 
 export const decomposeRoute = (route: string) => {
   const [
     ,
     pathname,
     query,
-    hash
+    hash,
   ] = /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)(?:\?([^#]*))?(#.*)?/.exec(
     route
   );
   return { pathname, query, hash };
 };
 
+// Used by `source.parse()`
 export const routeToParams = (route: string): RouteParams => {
   const { pathname, query, hash } = decomposeRoute(route);
   const [, path, page] = /^(.*)page\/(\d+)\/?(\?.*)?$/.exec(pathname) || [
     null,
     pathname,
-    "1"
+    "1",
   ];
 
   return {
     path: addFinalSlash(path),
+    route: addFinalSlash(path),
     page: parseInt(page, 10),
     query: queryToObj(query),
-    hash
+    hash,
   };
 };
 
+// Used by `source.stringify()`
 export const paramsToRoute = ({
   path = "/",
+  route,
   page = 1,
   query = {},
-  hash = ""
+  hash = "",
 }: RouteParams): string => {
+  // Use route if present, otherwise use path
+  path = route || path;
+
   // correct path
   path = addFinalSlash(path);
 
@@ -57,26 +75,14 @@ export const paramsToRoute = ({
   return `${pathAndPage}${queryStr}${hash}`;
 };
 
-export const addFinalSlash = (path: string): string =>
-  path.replace(/\/?$/, "/");
+export const parse: WpSource["libraries"]["source"]["parse"] = (route) =>
+  routeToParams(route);
 
-export const objToQuery = (obj: Record<string, any>) => {
-  const entries = Object.entries(obj);
-  return entries.length
-    ? `?${entries.map(([key, value]) => `${key}=${value}`).join("&")}`
-    : "";
-};
+export const stringify: WpSource["libraries"]["source"]["stringify"] = (
+  routeParams
+) => paramsToRoute(routeParams);
 
-export const queryToObj = (query: string = "") =>
-  query && query.includes("=")
-    ? query.split("&").reduce((result, param) => {
-        const [k, v] = param.split("=");
-        result[k] = v;
-        return result;
-      }, {})
-    : {};
+export const normalize = (route: string): string =>
+  paramsToRoute(routeToParams(route));
 
-export const concatPath = (...paths: string[]) =>
-  [""]
-    .concat(...paths.map(path => path.split("/").filter(p => p)), "")
-    .join("/");
+export default { parse, stringify, normalize };

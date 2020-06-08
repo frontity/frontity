@@ -27,22 +27,22 @@ const state1: State<Package1> = {
     prop1: "prop1",
     prop2: 2,
     prop3: "prop3",
-    prop4: str => {
+    prop4: (str) => {
       const str2: string = str;
       return 4;
     },
     array1: ["item1", "item2"],
     nested1: {
-      prop5: str => {
+      prop5: (str) => {
         const str2: string = str;
         return 5;
       },
       array2: [3, 4],
       nested2: {
-        prop6: "prop6"
-      }
-    }
-  }
+        prop6: "prop6",
+      },
+    },
+  },
 };
 
 test("Types are fine!", () => {});

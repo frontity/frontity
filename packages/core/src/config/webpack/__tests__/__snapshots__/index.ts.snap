@@ -17,6 +17,7 @@ Object {
       ],
     },
     "externals": Object {
+      "he": "{}",
       "node-fetch": "window.fetch",
       "url": "{ URL: window.URL }",
     },
@@ -61,7 +62,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": true,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -75,6 +76,10 @@ Object {
       "filename": "[name].es5.js",
       "path": "build/static",
       "publicPath": "/static/",
+    },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -104,6 +109,13 @@ Object {
           /build/,
         ],
       },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
+      },
       HotModuleReplacementPlugin {
         "fullBuildTimeout": 200,
         "multiStep": undefined,
@@ -126,7 +138,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -151,6 +162,7 @@ Object {
       ],
     },
     "externals": Object {
+      "he": "{}",
       "node-fetch": "window.fetch",
       "url": "{ URL: window.URL }",
     },
@@ -195,7 +207,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": true,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -209,6 +221,10 @@ Object {
       "filename": "[name].module.js",
       "path": "build/static",
       "publicPath": "/static/",
+    },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -238,6 +254,13 @@ Object {
           /build/,
         ],
       },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
+      },
       HotModuleReplacementPlugin {
         "fullBuildTimeout": 200,
         "multiStep": undefined,
@@ -260,7 +283,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -317,7 +339,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": false,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -331,6 +353,10 @@ Object {
       "libraryTarget": "commonjs2",
       "path": "build/",
       "publicPath": "/static/",
+    },
+    "performance": Object {
+      "maxAssetSize": 3000000,
+      "maxEntrypointSize": 3000000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -360,6 +386,13 @@ Object {
           /build/,
         ],
       },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
+      },
       LimitChunkCountPlugin {
         "options": Object {
           "maxChunks": 1,
@@ -370,7 +403,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -400,6 +432,7 @@ Object {
       ],
     },
     "externals": Object {
+      "he": "{}",
       "node-fetch": "window.fetch",
       "url": "{ URL: window.URL }",
     },
@@ -444,7 +477,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": true,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -458,6 +491,10 @@ Object {
       "filename": "[name].es5.[chunkhash].js",
       "path": "build/static",
       "publicPath": "/static/",
+    },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -487,6 +524,13 @@ Object {
           /build/,
         ],
       },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -503,7 +547,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -526,6 +569,7 @@ Object {
       ],
     },
     "externals": Object {
+      "he": "{}",
       "node-fetch": "window.fetch",
       "url": "{ URL: window.URL }",
     },
@@ -570,7 +614,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": true,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -584,6 +628,10 @@ Object {
       "filename": "[name].module.[chunkhash].js",
       "path": "build/static",
       "publicPath": "/static/",
+    },
+    "performance": Object {
+      "maxAssetSize": 300000,
+      "maxEntrypointSize": 300000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -613,6 +661,13 @@ Object {
           /build/,
         ],
       },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
+      },
       LoadablePlugin {
         "compiler": null,
         "handleEmit": [Function],
@@ -629,7 +684,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -686,7 +740,7 @@ Object {
             "loader": "url-loader",
             "options": Object {
               "emitFile": false,
-              "limit": 25000,
+              "limit": 8192,
               "name": [Function],
               "outputPath": "fonts",
             },
@@ -700,6 +754,10 @@ Object {
       "libraryTarget": "commonjs2",
       "path": "build/",
       "publicPath": "/static/",
+    },
+    "performance": Object {
+      "maxAssetSize": 3000000,
+      "maxEntrypointSize": 3000000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -729,6 +787,13 @@ Object {
           /build/,
         ],
       },
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^encoding\\$/,
+        },
+      },
       LimitChunkCountPlugin {
         "options": Object {
           "maxChunks": 1,
@@ -739,7 +804,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [

@@ -1,6 +1,6 @@
 import Settings from "../settings";
 import Package from "../package";
-import Action from "../action";
+import { Action, AsyncAction } from "../action";
 import Derived from "../derived";
 
 // Custom package extending from Package.
@@ -21,9 +21,11 @@ interface Package1 extends Package {
   actions: {
     namespace1: {
       action1: Action<Package1>;
+      action2: AsyncAction<Package1>;
     };
     namespace2: {
-      action2: Action<Package1, string>;
+      action3: Action<Package1, string>;
+      action4: AsyncAction<Package1, string>;
     };
   };
   libraries: {
@@ -39,39 +41,43 @@ const package1: Package1 = {
   state: {
     namespace1: {
       prop1: "prop1",
-      prop2: ({ state }) => ""
+      prop2: ({ state }) => "",
     },
     namespace2: {
       prop3: "prop3",
       nested1: {
-        prop4: ({ state }) => str => 1
-      }
-    }
+        prop4: ({ state }) => (str) => 1,
+      },
+    },
   },
   actions: {
     namespace1: {
-      action1: ({ state, actions, libraries }) => {}
+      action1: ({ state, actions, libraries }) => {},
+      action2: async ({ state, actions, libraries }) => {},
     },
     namespace2: {
-      action2: ({ state }) => str => {
+      action3: ({ state }) => (str) => {
         str.startsWith("");
-      }
-    }
+      },
+      action4: ({ state }) => async (str) => {
+        str.startsWith("");
+      },
+    },
   },
   libraries: {
     namespace1: {
-      library1: () => {}
-    }
-  }
+      library1: () => {},
+    },
+  },
 };
 
 // Settings from Package1.
 const package2: Settings<Package1> = {
   packages: [
     {
-      name: "package-1"
-    }
-  ]
+      name: "package-1",
+    },
+  ],
 };
 
 // Two different settings extending from Package.
@@ -94,19 +100,19 @@ const package3: Settings<Package1 | Package2> = {
       name: "package-1",
       state: {
         namespace1: {
-          prop1: ""
-        }
-      }
+          prop1: "",
+        },
+      },
     },
     {
       name: "package-2",
       state: {
         namespace2: {
-          prop2: ""
-        }
-      }
-    }
-  ]
+          prop2: "",
+        },
+      },
+    },
+  ],
 };
 
 test("Types are fine!", () => {});

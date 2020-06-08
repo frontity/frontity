@@ -113,7 +113,7 @@ describe("observe", () => {
       },
       get prop() {
         return hiddenValue;
-      }
+      },
     });
     Object.setPrototypeOf(obj, parent);
     observe(() => (dummy = obj.prop));
@@ -273,7 +273,7 @@ describe("observe", () => {
       },
       get prop() {
         return hiddenValue;
-      }
+      },
     });
     Object.setPrototypeOf(obj, parent);
     observe(() => (dummy = obj.prop));

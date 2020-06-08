@@ -1,0 +1,22 @@
+{
+  "name": "@frontity/error",
+  "version": "0.1.0",
+  "description": "Frontity errors and warnings",
+  "keywords": [
+    "frontity"
+  ],
+  "homepage": "https://frontity.org",
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontity/frontity.git"
+  },
+  "scripts": {
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
+  }
+}

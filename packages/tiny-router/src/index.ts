@@ -6,17 +6,18 @@ const tinyRouter: TinyRouter = {
   state: {
     router: {
       link: "/",
-      autoFetch: true
-    }
+      state: {},
+      autoFetch: true,
+    },
   },
   actions: {
     router: {
       init,
       set,
-      beforeSSR
-    }
+      beforeSSR,
+    },
   },
-  libraries: {}
+  libraries: {},
 };
 
 export default tinyRouter;

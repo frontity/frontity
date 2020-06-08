@@ -32,14 +32,14 @@ const noProxyScript = `
   }
 `;
 
-interface Props {
+export interface Props {
   src?: string;
   srcSet?: string;
   sizes?: string;
   alt?: string;
   className?: string;
   rootMargin?: string;
-  loading?: "auto" | "lazy" | "eager";
+  loading?: "lazy" | "eager";
   height?: number;
 }
 
@@ -57,7 +57,7 @@ interface ChangeAttributes {
   (attrs: Attributes): Attributes;
 }
 
-const changeAttributes: ChangeAttributes = attrs => {
+const changeAttributes: ChangeAttributes = (attrs) => {
   const attributes = { ...attrs };
 
   attributes.src = attributes["data-src"];
@@ -69,7 +69,7 @@ const changeAttributes: ChangeAttributes = attrs => {
   return attributes;
 };
 
-const NoScriptImage: NoScriptImage = props => {
+const NoScriptImage: NoScriptImage = (props) => {
   const attributes = { ...props };
 
   return (
@@ -88,7 +88,7 @@ const Image: Image = ({
   className,
   loading = "lazy",
   rootMargin,
-  height
+  height,
 }) => {
   // These are the attributes for the image when it's waiting to be loaded.
   const lazyAttributes: Attributes = {
@@ -99,10 +99,15 @@ const Image: Image = ({
     className: "frontity-lazy-image".concat(className ? ` ${className}` : ""),
     loading,
     style: { visibility: "hidden" },
-    height
+    height,
   };
   // These are the attributes for the image when it's loaded.
   const eagerAttributes = changeAttributes(lazyAttributes);
+
+  const { ref, inView, supported } = useInView({
+    rootMargin: rootMargin,
+    triggerOnce: true,
+  });
 
   // Renders a simple image, either in server or client, without
   // lazyload, if the loading attribute is set to `eager`.
@@ -110,30 +115,22 @@ const Image: Image = ({
     return <img {...eagerAttributes} />;
   }
 
-  // Changes the loading attribute to "auto" if loading is "lazy"
+  // Delete the loading attribute if loading is "lazy"
   // but there is no height specified (see https://crbug.com/954323)
   if (loading === "lazy" && !(height > 0)) {
-    eagerAttributes.loading = "auto";
-    lazyAttributes.loading = "auto";
+    delete eagerAttributes.loading;
+    delete lazyAttributes.loading;
   }
 
   if (typeof window !== "undefined") {
     // Renders an image in client that will use IntersectionObserver to lazy load
     // if the native lazy load is not available,
     // or `height` prop is not provided.
-    if (
-      typeof IntersectionObserver !== "undefined" &&
-      !("loading" in HTMLImageElement.prototype && height > 0)
-    ) {
-      const [onScreen, ref] = useInView({
-        rootMargin: rootMargin,
-        onlyOnce: true
-      });
-
+    if (supported && !("loading" in HTMLImageElement.prototype && height > 0)) {
       return (
         <>
           <NoScriptImage {...eagerAttributes} />
-          <img ref={ref} {...(onScreen ? eagerAttributes : lazyAttributes)} />
+          <img ref={ref} {...(inView ? eagerAttributes : lazyAttributes)} />
         </>
       );
     }
@@ -147,7 +144,6 @@ const Image: Image = ({
           {...(state.frontity.rendering === "csr"
             ? eagerAttributes
             : lazyAttributes)}
-          suppressHydrationWarning
         />
       </>
     );
@@ -162,13 +158,13 @@ const Image: Image = ({
           {
             id: "frontity-no-proxy-images",
             type: "text/javascript",
-            innerHTML: noProxyScript
-          }
+            innerHTML: noProxyScript,
+          },
         ]}
         noscript={[
           {
-            innerHTML: `<style id="frontity-no-js-images" type="text/css">${noJsStyles}</style>`
-          }
+            innerHTML: `<style id="frontity-no-js-images" type="text/css">${noJsStyles}</style>`,
+          },
         ]}
       />
       <NoScriptImage {...eagerAttributes} />

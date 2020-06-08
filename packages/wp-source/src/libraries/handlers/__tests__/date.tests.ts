@@ -15,6 +15,7 @@ let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
+  store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -27,13 +28,13 @@ describe("date", () => {
       .mockResolvedValueOnce(
         mockResponse(date2019Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       )
       .mockResolvedValueOnce(
         mockResponse(date2019PostsPage2, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -50,13 +51,13 @@ describe("date", () => {
       .mockResolvedValueOnce(
         mockResponse(date2019Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       )
       .mockResolvedValueOnce(
         mockResponse(date2019PostsPage2, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -71,7 +72,7 @@ describe("date", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(date201901Posts, {
         "X-WP-Total": "2",
-        "X-WP-TotalPages": "1"
+        "X-WP-TotalPages": "1",
       })
     );
     // Fetch entities
@@ -85,7 +86,7 @@ describe("date", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(date20190101Posts, {
         "X-WP-Total": "1",
-        "X-WP-TotalPages": "1"
+        "X-WP-TotalPages": "1",
       })
     );
     // Fetch entities
@@ -102,7 +103,7 @@ describe("date", () => {
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(date20190101PostsCpt, {
         "X-WP-Total": "2",
-        "X-WP-TotalPages": "1"
+        "X-WP-TotalPages": "1",
       })
     );
     // Fetch entities
@@ -117,6 +118,36 @@ describe("date", () => {
     // Fetch entities
     await store.actions.source.fetch("/2020/");
     expect(api.get.mock.calls).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("overwrites the data when fetched with { force: true }", async () => {
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(
+        mockResponse(date2019Posts, {
+          "X-WP-Total": "3",
+          "X-WP-TotalPages": "1",
+        })
+      )
+      .mockResolvedValueOnce(
+        mockResponse(date2019PostsPage2, {
+          "X-WP-Total": "3",
+          "X-WP-TotalPages": "1",
+        })
+      );
+
+    // Fetch the data for the first page
+    await store.actions.source.fetch("/2019/");
+
+    // Fetch the data again (this time returning `date2019PostsPage2`)
+    await store.actions.source.fetch("/2019/", {
+      force: true,
+    });
+
+    // Make sure that api.get() was called for each `source.fetch()`
+    expect(api.get).toHaveBeenCalledTimes(2);
+
     expect(store.state.source).toMatchSnapshot();
   });
 });

@@ -22,8 +22,8 @@ describe("getAllSites", () => {
       {
         name: "mono-settings",
         mode: "default",
-        packages: ["@frontity/theme", "@frontity/wp-source"]
-      }
+        packages: ["@frontity/theme", "@frontity/wp-source"],
+      },
     ]);
   });
 
@@ -34,13 +34,13 @@ describe("getAllSites", () => {
       {
         name: "settings-default",
         mode: "default",
-        packages: ["@frontity/theme-default", "@frontity/wp-source-default"]
+        packages: ["@frontity/theme-default", "@frontity/wp-source-default"],
       },
       {
         name: "settings-amp",
         mode: "amp",
-        packages: ["@frontity/theme-amp", "@frontity/wp-source-amp"]
-      }
+        packages: ["@frontity/theme-amp", "@frontity/wp-source-amp"],
+      },
     ]);
   });
 
@@ -51,8 +51,8 @@ describe("getAllSites", () => {
       {
         name: "mono-settings",
         mode: "default",
-        packages: ["@frontity/theme"]
-      }
+        packages: ["@frontity/theme"],
+      },
     ]);
   });
 });

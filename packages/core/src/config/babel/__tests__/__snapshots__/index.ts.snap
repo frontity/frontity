@@ -6,10 +6,12 @@ Object {
     "compact": true,
     "plugins": Array [
       "babel-plugin-frontity",
+      "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
       Array [
         "babel-plugin-transform-inline-environment-variables",
         Object {
@@ -55,10 +57,12 @@ Object {
     "compact": true,
     "plugins": Array [
       "babel-plugin-frontity",
+      "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
       Array [
         "babel-plugin-transform-inline-environment-variables",
         Object {
@@ -89,10 +93,12 @@ Object {
     "compact": true,
     "plugins": Array [
       "babel-plugin-frontity",
+      "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
       Array [
         "babel-plugin-transform-inline-environment-variables",
         Object {
@@ -128,10 +134,12 @@ Object {
     "compact": true,
     "plugins": Array [
       "babel-plugin-frontity",
+      "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
       Array [
         "babel-plugin-transform-inline-environment-variables",
         Object {
@@ -177,10 +185,12 @@ Object {
     "compact": true,
     "plugins": Array [
       "babel-plugin-frontity",
+      "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
       Array [
         "babel-plugin-transform-inline-environment-variables",
         Object {
@@ -211,10 +221,12 @@ Object {
     "compact": true,
     "plugins": Array [
       "babel-plugin-frontity",
+      "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-proposal-class-properties",
+      "babel-plugin-lodash",
       Array [
         "babel-plugin-transform-inline-environment-variables",
         Object {

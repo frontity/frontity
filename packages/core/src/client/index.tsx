@@ -1,6 +1,7 @@
 import React from "react";
 import { hydrate, createRoot } from "react-dom";
 import { loadableReady } from "@loadable/component";
+import { getSnapshot } from "@frontity/connect";
 import App from "../app";
 import createStore from "./store";
 
@@ -17,9 +18,9 @@ export default async ({ packages }) => {
       const store = createStore({
         // Use initial state from server only if we are not in a HMR reload.
         state: window["frontity"]
-          ? window["frontity"].getSnapshot()
+          ? getSnapshot(window["frontity"].state)
           : JSON.parse(stateElement.innerHTML),
-        packages
+        packages,
       });
 
       // Run init actions.
@@ -41,7 +42,7 @@ export default async ({ packages }) => {
       loadableReady(() => {
         // hydrate(<App store={store} />, window.document.getElementById("root"));
         createRoot(window.document.getElementById("root"), {
-          hydrate: true
+          hydrate: true,
         }).render(<App store={store} />);
 
         // Switch to CSR mode.

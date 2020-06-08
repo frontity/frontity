@@ -1,6 +1,6 @@
 {
   "name": "frontity",
-  "version": "1.4.4",
+  "version": "1.8.0",
   "description": "Frontity cli and entry point to other packages",
   "keywords": [
     "frontity",
@@ -8,10 +8,10 @@
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "bin": {
-    "frontity": "dist/commands.js"
+    "frontity": "dist/src/cli/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,55 +20,59 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "start": "node dist/commands.js",
-    "dev": "ts-node src/commands.ts",
+    "start": "node dist/src/cli/index.js",
+    "dev": "ts-node src/cli/index.ts",
     "ts": "ts-node",
-    "test": "jest --watch",
-    "test:ci": "jest --colors",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:ci": "../../node_modules/.bin/jest --colors --ci --coverage",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
-    "build": "tsc --project ./tsconfig.build.json",
+    "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
+    "build:watch": "tsc --project ./tsconfig.build.json --watch",
     "prepublish": "npm run build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.22",
-    "@frontity/connect": "^1.0.3",
-    "@frontity/type-declarations": "^1.0.1",
-    "@frontity/types": "^1.1.2",
+    "@frontity/error": "^0.1.0",
+    "@frontity/type-declarations": "^1.1.0",
+    "@frontity/types": "^1.4.0",
     "@loadable/component": "^5.10.1",
     "chalk": "^2.4.2",
     "clipboardy": "^2.1.0",
     "commander": "^2.20.0",
+    "detect-port-alt": "^1.1.6",
     "didyoumean": "^1.2.1",
     "envinfo": "^7.3.1",
     "fs-extra": "^7.0.1",
+    "get-value": "^3.0.1",
+    "he": "^1.2.0",
     "inquirer": "^6.3.1",
+    "is-root": "^2.1.0",
     "node-fetch": "^2.6.0",
     "ora": "^3.4.0",
     "ramda": "^0.26.1",
-    "react-helmet-async": "^1.0.2",
+    "react-helmet-async": "1.0.4",
+    "simple-entity-decode": "^0.0.3",
     "tar": "^4.4.8",
     "ts-node": "^8.0.3",
-    "typescript": "^3.6.3"
+    "typed-emitter": "^0.2.0",
+    "typescript": "3.8.3"
   },
   "devDependencies": {
-    "@frontity/core": "^1.4.1",
+    "@frontity/connect": "^1.1.1",
+    "@frontity/core": "^1.7.0",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
-    "@types/jest": "^24.0.11",
     "@types/node": "^11.13.2",
     "@types/node-fetch": "^2.3.3",
     "@types/phin": "^3.3.0",
-    "@types/ramda": "^0.26.33",
+    "@types/ramda": "0.26.33",
     "@types/shelljs": "^0.8.4",
-    "@types/stack-trace": "0.0.29",
+    "@types/stack-trace": "^0.0.29",
     "@types/tar": "^4.0.0",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2"
+    "lodash.omit": "^4.5.0",
+    "react-test-renderer": "^16.13.1"
   }
 }

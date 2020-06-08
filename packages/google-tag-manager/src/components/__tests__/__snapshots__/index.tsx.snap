@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleTagManager doesn't add anything if there's no container ids 1`] = `""`;
+
+exports[`GoogleTagManager doesn't add anything if there's no container ids 2`] = `null`;
+
+exports[`GoogleTagManager works with a single container id 1`] = `"<script data-rh=\\"true\\" async=\\"true\\" src=\\"https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX\\"></script>"`;
+
+exports[`GoogleTagManager works with a single container id 2`] = `
+<noscript>
+  <iframe
+    css={
+      Object {
+        "map": undefined,
+        "name": "8s6lqv",
+        "next": undefined,
+        "styles": "
+          display: none;
+          visibility: hidden;
+        ",
+        "toString": [Function],
+      }
+    }
+    height="0"
+    src="https://www.googletagmanager.com/ns.html?id=\${containerId}"
+    title="GTM-XXXXXXX"
+    width="0"
+  />
+</noscript>
+`;
+
+exports[`GoogleTagManager works with multiple container ids 1`] = `"<script data-rh=\\"true\\" async=\\"true\\" src=\\"https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX\\"></script><script data-rh=\\"true\\" async=\\"true\\" src=\\"https://www.googletagmanager.com/gtm.js?id=GTM-YYYYYYY\\"></script>"`;
+
+exports[`GoogleTagManager works with multiple container ids 2`] = `
+Array [
+  <noscript>
+    <iframe
+      css={
+        Object {
+          "map": undefined,
+          "name": "8s6lqv",
+          "next": undefined,
+          "styles": "
+          display: none;
+          visibility: hidden;
+        ",
+          "toString": [Function],
+        }
+      }
+      height="0"
+      src="https://www.googletagmanager.com/ns.html?id=\${containerId}"
+      title="GTM-XXXXXXX"
+      width="0"
+    />
+  </noscript>,
+  <noscript>
+    <iframe
+      css={
+        Object {
+          "map": undefined,
+          "name": "8s6lqv",
+          "next": undefined,
+          "styles": "
+          display: none;
+          visibility: hidden;
+        ",
+          "toString": [Function],
+        }
+      }
+      height="0"
+      src="https://www.googletagmanager.com/ns.html?id=\${containerId}"
+      title="GTM-YYYYYYY"
+      width="0"
+    />
+  </noscript>,
+]
+`;

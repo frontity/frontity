@@ -1,7 +1,7 @@
 import { styled } from "frontity";
 
 const Button = styled.button`
-  background-color: ${props => props.bg};
+  background-color: ${(props) => props.bg};
   font-size: 1.7rem;
   border: none;
   border-radius: 0;

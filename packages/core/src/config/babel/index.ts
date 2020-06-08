@@ -32,11 +32,11 @@ const targets: {
       "op_mob >= 46",
       "opera >= 36",
       "safari >= 10",
-      "samsung >= 5"
-    ]
+      "samsung >= 5",
+    ],
   },
   // Node version used by AWS Lambda.
-  server: { node: "8.10" }
+  server: { node: "8.10" },
 };
 
 export default ({ mode }: { mode: Mode }): BabelConfigs => {
@@ -50,16 +50,18 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
           targets: targets[target],
           useBuiltIns: target === "es5" && "entry",
           corejs: target === "es5" && "3",
-          modules: false
-        }
+          modules: false,
+        },
       ],
       "@babel/preset-react",
       // Babel plugin for Emotion CSS property and other goodness.
-      "@emotion/babel-preset-css-prop"
+      "@emotion/babel-preset-css-prop",
     ];
     const plugins = [
       //
       "babel-plugin-frontity",
+      // Support for babel macros. See: https://community.frontity.org/t/tailwindcss-with-babel-macro-plugin-and-css-in-js/1040
+      "babel-plugin-macros",
       // Support for dynamic imports: import("./my-file")
       "@babel/plugin-syntax-dynamic-import",
       // Needed for loadable-component SSR.
@@ -68,24 +70,26 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       "@babel/plugin-proposal-object-rest-spread",
       // Support for the class props: class MyClass { myProp = 'hi there' }
       "@babel/plugin-proposal-class-properties",
+      // Cherry-pick Lodash modules
+      "babel-plugin-lodash",
       // Transform inline environment variables (for process.env.CWD)
       [
         "babel-plugin-transform-inline-environment-variables",
         {
-          include: ["CWD"]
-        }
-      ]
+          include: ["CWD"],
+        },
+      ],
     ];
     return {
       compact: true,
       presets,
-      plugins
+      plugins,
     };
   };
 
   return {
     module: getConfig("module"),
     es5: getConfig("es5"),
-    server: getConfig("server")
+    server: getConfig("server"),
   };
 };

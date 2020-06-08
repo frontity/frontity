@@ -1,4 +1,5 @@
-import Action from "../action";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Action, AsyncAction } from "../action";
 import Package from "../package";
 import Derived from "../derived";
 
@@ -23,11 +24,13 @@ interface Package1 extends Package {
   actions: {
     namespace1: {
       action1: Action<Package1>;
-      action2: Action<Package1>;
+      action2: AsyncAction<Package1>;
     };
     namespace2: {
       action3: Action<Package1, string>;
-      action4: Action<Package1, number>;
+      action4: AsyncAction<Package1, number>;
+      action5: Action<Package1, number, string, number, string, number, string>;
+      action6: Action<Package, number> | Action<Package, number, string>;
     };
   };
   libraries: {
@@ -44,16 +47,16 @@ const package1: Package1 = {
       prop1: "prop1",
       prop2: 2,
       prop3: ({ state }) => state.namespace1.prop1,
-      prop4: ({ state }) => str => str.length + state.namespace1.prop2,
+      prop4: ({ state }) => (str) => str.length + state.namespace1.prop2,
       array1: ["item1", "item2"],
       nested1: {
-        prop5: ({ state }) => str => str.length + state.namespace1.prop2,
+        prop5: ({ state }) => (str) => str.length + state.namespace1.prop2,
         array2: [3, 4],
         nested2: {
-          prop6: ({ state }) => state.namespace1.prop1
-        }
-      }
-    }
+          prop6: ({ state }) => state.namespace1.prop1,
+        },
+      },
+    },
   },
   actions: {
     namespace1: {
@@ -88,6 +91,13 @@ const package1: Package1 = {
 
         // Check that libraries are accesible.
         const str3: string = libraries.namespace1.lib1;
+
+        // Check that actions with multiple parameters work.
+        actions.namespace2.action5(1, "2", 3, "4", 5, "6");
+
+        // Check that actions with optional parameters work.
+        actions.namespace2.action6(1);
+        actions.namespace2.action6(1, "2");
       },
       // Async Action without params.
       action2: async ({ state, actions }) => {
@@ -97,31 +107,46 @@ const package1: Package1 = {
         await Promise.resolve();
         const num1: number = state.namespace1.prop4("123");
         actions.namespace2.action3("123");
+        await actions.namespace1.action2();
         await actions.namespace2.action4(123);
-      }
+      },
     },
     namespace2: {
       // Action with params.
-      action3: ({ state }) => str => {
+      action3: ({ state }) => (str) => {
         state.namespace1.prop1 = str;
         const str1: string = state.namespace1.prop3 + str;
         const num1: number = state.namespace1.prop4(str);
       },
       // Async Action with params.
-      action4: ({ state }) => async num => {
+      action4: ({ state }) => async (num) => {
         state.namespace1.prop2 = num;
         await Promise.resolve();
         const num1: number = state.namespace1.prop4("123") + num;
         await Promise.resolve();
         const num2: number = state.namespace1.nested1.prop5("123") + num;
-      }
-    }
+      },
+      // Action with mutilple parameters.
+      action5: ({ state, actions }) => (num1, str1, num2, str2, num3, str3) => {
+        state.namespace1.prop2 = num1;
+        state.namespace1.prop1 = str1;
+        state.namespace1.prop2 = num2;
+        state.namespace1.prop1 = str2;
+        state.namespace1.prop2 = num3;
+        state.namespace1.prop1 = str3;
+      },
+      // Action with optional parameters.
+      action6: ({ state }) => (num, str) => {
+        state.namespace1.prop2 = num;
+        state.namespace1.prop1 = str;
+      },
+    },
   },
   libraries: {
     namespace1: {
-      lib1: "lib1"
-    }
-  }
+      lib1: "lib1",
+    },
+  },
 };
 
 test("Types are fine!", () => {});

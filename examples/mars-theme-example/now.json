@@ -1,15 +1,17 @@
 {
-  "name": "mars-theme",
-  "alias": "mars.frontity.org",
   "scope": "frontity",
   "version": 2,
   "builds": [
     {
-      "src": "build/static/*",
+      "src": "build/static/**/*",
       "use": "@now/static"
     },
     {
       "src": "favicon.ico",
+      "use": "@now/static"
+    },
+    {
+      "src": "robots.txt",
       "use": "@now/static"
     },
     {
@@ -26,6 +28,7 @@
       "dest": "/build/static/$1"
     },
     { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/robots.txt", "dest": "/robots.txt" },
     {
       "src": "/(.*)",
       "headers": { "cache-control": "s-maxage=1,stale-while-revalidate" },

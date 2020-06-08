@@ -1,9 +1,10 @@
 {
   "name": "@frontity/hooks",
-  "version": "1.1.14",
-  "description": "Collection of React hooks for »Frontity",
+  "version": "2.0.1",
+  "description": "Collection of React hooks for Frontity",
   "keywords": [
-    "frontity"
+    "frontity",
+    "hooks"
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
@@ -14,18 +15,13 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
+  "sideEffects": false,
   "scripts": {
-    "test:ci": "jest --passWithNoTests",
-    "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+    "test:ci": "../../node_modules/.bin/jest --passWithNoTests --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "devDependencies": {
-    "frontity": "^1.4.3",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+  "dependencies": {
+    "react-intersection-observer": "^8.26.2"
   }
 }

@@ -9,6 +9,6 @@ export default async (): Promise<Site[]> => {
   return allSettings.map(({ name, mode, packages }) => ({
     name,
     mode,
-    packages: packages.filter(pkg => pkg.active).map(pkg => pkg.name)
+    packages: packages.filter((pkg) => pkg.active).map((pkg) => pkg.name),
   }));
 };

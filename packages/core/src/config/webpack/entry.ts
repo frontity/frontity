@@ -8,41 +8,32 @@ const rootPath = process.cwd();
 export default ({
   target,
   mode,
-  entryPoints
+  entryPoints,
 }: {
   target: Target;
   mode: Mode;
   entryPoints: EntryPoints[];
 }): Configuration["entry"] => {
-  // Use /client for both es5 and modules and /server for node.
-  const name: "server" | "client" = target === "server" ? "server" : "client";
-
   let config: Configuration["entry"] = {};
 
   if (target === "server") {
-    const { path } = entryPoints.find(bundle => bundle.name === "server");
+    const { path } = entryPoints.find((bundle) => bundle.name === "server");
     config = resolve(rootPath, path);
   } else {
     entryPoints
-      .filter(bundle => bundle.name !== "server")
+      .filter((bundle) => bundle.name !== "server")
       .forEach(({ name, path }) => {
-        config[name] = [resolve(rootPath, path)];
-      });
-  }
-  // Add babel polyfill for the es5 packages (regeneratorRuntime and so on).
-  if (target === "es5") {
-    Object.values(config).forEach(entry => {
-      // @ts-ignore
-      entry.unshift("babel-polyfill");
-    });
-  }
+        config[name] = [];
 
-  // This is needed for HMR in the client but only when we are in development.
-  if (target !== "server" && mode === "development") {
-    Object.values(config).forEach(entry => {
-      // @ts-ignore
-      entry.unshift("webpack-hot-middleware/client");
-    });
+        // This is needed for HMR in the client but only when we are in development.
+        if (mode === "development")
+          config[name].push("webpack-hot-middleware/client");
+
+        // Add babel polyfill for the es5 packages (regeneratorRuntime and so on).
+        if (target === "es5") config[name].push("babel-polyfill");
+
+        config[name].push(resolve(rootPath, path));
+      });
   }
   return config;
 };

@@ -1,6 +1,7 @@
-import { observable } from "./observable";
+import { observable, raw } from "./observable";
 
-const getSnapshot = obj => {
+export const getSnapshot = (obj) => {
+  obj = raw(obj);
   if (typeof obj === "function") return;
   if (typeof obj !== "object" || obj === null) return obj;
   if (obj instanceof Date) return new Date(obj.getTime());
@@ -21,12 +22,18 @@ const getSnapshot = obj => {
 
 const convertToAction = (fn, instance) => (...args) => {
   const first = fn(instance);
-  if (first instanceof Promise)
-    return new Promise(resolve => first.then(() => resolve()));
+  if (first instanceof Promise) {
+    return new Promise((resolve, reject) =>
+      first.then(() => resolve()).catch((err) => reject(err))
+    );
+  }
   if (typeof first === "function") {
     const second = first(...args);
-    if (second instanceof Promise)
-      return new Promise(resolve => second.then(() => resolve()));
+    if (second instanceof Promise) {
+      return new Promise((resolve, reject) =>
+        second.then(() => resolve()).catch((err) => reject(err))
+      );
+    }
   }
 };
 
@@ -40,13 +47,12 @@ const convertedActions = (obj, instance) => {
   }
 };
 
-export const createStore = store => {
+export const createStore = (store) => {
   const observableState = observable(store.state);
   const instance = {
     ...store,
     state: observableState,
     actions: {},
-    getSnapshot: () => getSnapshot(store.state)
   };
   const newActions = convertedActions(store.actions, instance);
   Object.assign(instance.actions, newActions);

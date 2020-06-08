@@ -1,7 +1,16 @@
-export const getTotal = (response: Response): number =>
-  parseInt(response.headers.get("X-WP-Total"));
+import WpSource from "../../types";
 
-export const getTotalPages = (response: Response): number =>
-  parseInt(response.headers.get("X-WP-TotalPages"));
+export const getTotal: WpSource["libraries"]["source"]["getTotal"] = (
+  response,
+  valueIfHeaderMissing
+) => parseInt(response.headers.get("X-WP-Total")) || valueIfHeaderMissing || 0;
+
+export const getTotalPages: WpSource["libraries"]["source"]["getTotal"] = (
+  response,
+  valueIfHeaderMissing
+) =>
+  parseInt(response.headers.get("X-WP-TotalPages")) ||
+  valueIfHeaderMissing ||
+  0;
 
 export default { getTotal, getTotalPages };

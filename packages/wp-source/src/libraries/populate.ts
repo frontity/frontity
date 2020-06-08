@@ -34,7 +34,8 @@ const transformLink = ({
 const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
   state,
-  subdirectory
+  subdirectory,
+  force,
 }) => {
   // Normalize response
   const json = await response.json();
@@ -49,7 +50,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
     Object.entries(entityMap).forEach(([, entity]) => {
       // Fix links that come from the REST API
       // to match the Frontity server location.
-      transformLink({ entity, state, subdirectory });
+      if (entity.link) transformLink({ entity, state, subdirectory });
 
       // Get or init data using the transformed link
       const { data } = state.source;
@@ -57,28 +58,45 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         data[entity.link] ||
         (data[entity.link] = {
           isReady: false,
-          isFetching: false
+          isFetching: false,
         });
 
-      if (schema === "postType" || schema === "attachment") {
+      let entityMap: any;
+      let entityKey: string | number;
+
+      if (schema === "postEntity" || schema === "attachmentEntity") {
         if (!state.source[entity.type]) state.source[entity.type] = {};
-        state.source[entity.type][entity.id] = entity;
+        entityMap = state.source[entity.type];
+        entityKey = entity.id;
         Object.assign(entityData, {
           type: entity.type,
-          id: entity.id
+          id: entity.id,
         });
-      } else if (schema === "taxonomy") {
+      } else if (schema === "taxonomyEntity") {
         if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
-        state.source[entity.taxonomy][entity.id] = entity;
+        entityMap = state.source[entity.taxonomy];
+        entityKey = entity.id;
         Object.assign(entityData, {
           taxonomy: entity.taxonomy,
-          id: entity.id
+          id: entity.id,
         });
-      } else if (schema === "author") {
-        state.source.author[entity.id] = entity;
+      } else if (schema === "authorEntity") {
+        entityMap = state.source.author;
+        entityKey = entity.id;
         Object.assign(entityData, {
-          id: entity.id
+          id: entity.id,
         });
+      } else if (schema === "postType") {
+        entityMap = state.source.type;
+        entityKey = entity.slug;
+      } else if (schema === "taxonomyType") {
+        entityMap = state.source.taxonomy;
+        entityKey = entity.slug;
+      }
+
+      // Add the entity if it doesn't exist.
+      if (entityMap && (!entityMap[entityKey] || force)) {
+        entityMap[entityKey] = entity;
       }
     });
   });

@@ -1,7 +1,7 @@
 {
   "name": "@frontity/components",
-  "version": "1.1.15",
-  "description": "Collection of React components for »Frontity",
+  "version": "1.3.2",
+  "description": "Collection of React components for Frontity",
   "keywords": [
     "frontity"
   ],
@@ -15,22 +15,17 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand"
-  },
-  "publishConfig": {
-    "access": "public"
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "devDependencies": {
-    "@types/react-test-renderer": "^16.8.1",
-    "frontity": "^1.4.3",
-    "jest": "^24.7.1",
-    "react-test-renderer": "^16.8.6",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+    "@types/react-test-renderer": "^16.9.2",
+    "@frontity/error": "^0.1.0",
+    "react-test-renderer": "^16.13.1"
   },
   "dependencies": {
-    "@frontity/hooks": "^1.1.14"
+    "frontity": "^1.7.0",
+    "@frontity/hooks": "^2.0.0"
   }
 }

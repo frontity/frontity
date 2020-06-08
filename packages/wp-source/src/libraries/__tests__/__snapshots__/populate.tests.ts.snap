@@ -22,7 +22,7 @@ Array [
 
 exports[`populate add new custom post types & taxonomies to the state 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "",
   "attachment": Object {
     "11": Object {
       "author": 1,
@@ -47,6 +47,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "cpt": Object {
@@ -167,6 +168,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -192,7 +195,7 @@ Array [
 
 exports[`populate adds posts and embedded into state 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -224,6 +227,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -373,6 +377,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -398,7 +404,7 @@ Array [
 
 exports[`populate removes WP API path from links 2`] = `
 Object {
-  "api": "https://test.frontity.io/subdirectory/wp-json",
+  "api": "https://test.frontity.org/subdirectory/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -430,6 +436,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -579,6 +586,8 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -604,7 +613,7 @@ Array [
 
 exports[`populate transforms links if subdirectory is specified 2`] = `
 Object {
-  "api": "https://test.frontity.io/subdirectory/wp-json",
+  "api": "https://test.frontity.org/subdirectory/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -636,6 +645,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -785,5 +795,7 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;

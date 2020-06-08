@@ -18,7 +18,7 @@ function trapFocus(element) {
   const KEYCODE_TAB = 9;
 
   // Listen for keydown event for when the `tab` key is pressed
-  element.addEventListener("keydown", function(event) {
+  element.addEventListener("keydown", function (event) {
     const isTabPressed = event.key === "Tab" || event.keyCode === KEYCODE_TAB;
     if (!isTabPressed) return;
 

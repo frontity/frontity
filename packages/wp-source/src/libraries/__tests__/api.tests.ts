@@ -1,8 +1,11 @@
+import * as frontity from "frontity";
 import Api from "../api";
-import { fetch } from "frontity";
+import { Response as NodeResponse } from "node-fetch";
 
-jest.mock("frontity");
-const mockedFetch = (fetch as any) as jest.Mock;
+const response = (new NodeResponse() as unknown) as Response;
+const mockedFetch: jest.MockedFunction<typeof fetch> = jest.fn();
+(frontity.fetch as typeof fetch) = mockedFetch;
+mockedFetch.mockResolvedValue(response);
 
 const lastFetch = () => mockedFetch.mock.calls.slice(-1)[0][0];
 const api = new Api();
@@ -11,7 +14,7 @@ describe("api", () => {
   test("get from WP.org without params", async () => {
     api.get({
       api: "https://test.frontity.org/wp-json",
-      endpoint: "posts"
+      endpoint: "posts",
     });
     expect(lastFetch()).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
   });
@@ -19,7 +22,7 @@ describe("api", () => {
   test("get from WP.org without params 2", () => {
     api.get({
       api: "https://test.frontity.org/wp-json/",
-      endpoint: "posts/12"
+      endpoint: "posts/12",
     });
     expect(lastFetch()).toBe(
       "https://test.frontity.org/wp-json/wp/v2/posts/12"
@@ -30,7 +33,7 @@ describe("api", () => {
     api.get({
       api: "https://test.frontity.org/wp-json/",
       endpoint: "posts",
-      params: { _embed: true, include: "12,13,14" }
+      params: { _embed: true, include: "12,13,14" },
     });
     expect(lastFetch()).toBe(
       "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&include=12,13,14"
@@ -41,7 +44,7 @@ describe("api", () => {
     api.get({
       api: "https://test.frontity.org/wp-json/",
       endpoint: "posts",
-      params: {}
+      params: {},
     });
     expect(lastFetch()).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
   });
@@ -52,8 +55,8 @@ describe("api", () => {
       endpoint: "posts",
       params: {
         _embed: true,
-        type: ["post", "page"]
-      }
+        type: ["post", "page"],
+      },
     });
     expect(lastFetch()).toBe(
       "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&type[]=post&type[]=page"
@@ -64,7 +67,7 @@ describe("api", () => {
     api.get({
       api: "https://test.frontity.org/wp-json/",
       endpoint: "/discovery/v1",
-      params: { link: "/the-beauties-of-gullfoss" }
+      params: { link: "/the-beauties-of-gullfoss" },
     });
     expect(lastFetch()).toBe(
       "https://test.frontity.org/wp-json/discovery/v1?link=/the-beauties-of-gullfoss"
@@ -75,7 +78,7 @@ describe("api", () => {
     api.get({
       api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
       endpoint: "posts",
-      isWpCom: true
+      isWpCom: true,
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts"
@@ -90,7 +93,7 @@ describe("api", () => {
       endpoint,
       params,
       api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/",
-      isWpCom
+      isWpCom,
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts?_embed=true&include=12,13,14"
@@ -102,7 +105,7 @@ describe("api", () => {
       api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
       endpoint: "posts",
       isWpCom: true,
-      params: {}
+      params: {},
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts"
@@ -113,7 +116,7 @@ describe("api", () => {
     api.get({
       api: "https://test.frontity.org/wp-json/",
       endpoint: "posts",
-      params: { ignoreMe: undefined }
+      params: { ignoreMe: undefined },
     });
     expect(lastFetch()).toBe("https://test.frontity.org/wp-json/wp/v2/posts");
   });
@@ -121,17 +124,17 @@ describe("api", () => {
   test("get from api specified with the init function", () => {
     api.init({
       api: "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org",
-      isWpCom: true
+      isWpCom: true,
     });
     api.get({
-      endpoint: "posts"
+      endpoint: "posts",
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts"
     );
     api.get({
       endpoint: "posts",
-      params: { _embed: true, include: "12,13,14" }
+      params: { _embed: true, include: "12,13,14" },
     });
     expect(lastFetch()).toBe(
       "https://public-api.wordpress.com/wp/v2/sites/test.frontity.org/posts?_embed=true&include=12,13,14"

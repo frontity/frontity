@@ -2,7 +2,7 @@
 
 exports[`category doesn't exist in source.category 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -34,6 +34,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -75,6 +76,11 @@ Object {
           "type": "post",
         },
       ],
+      "link": "/category/cat-1/",
+      "next": "/category/cat-1/page/2/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
       "taxonomy": "category",
       "total": 5,
       "totalPages": 2,
@@ -205,14 +211,17 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`category doesn't return 404 if the first page is empty (no headers) 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {},
   "author": Object {},
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -233,52 +242,10 @@ Object {
       "isReady": true,
       "isTaxonomy": true,
       "items": Array [],
-      "taxonomy": "category",
-      "total": NaN,
-      "totalPages": NaN,
-    },
-  },
-  "get": [Function],
-  "homepage": "",
-  "isWpCom": false,
-  "page": Object {},
-  "params": Object {},
-  "post": Object {},
-  "postEndpoint": "posts",
-  "postTypes": Array [],
-  "postsPage": "",
-  "subdirectory": "",
-  "tag": Object {},
-  "tagBase": "",
-  "taxonomies": Array [],
-}
-`;
-
-exports[`category doesn't return 404 if the first page is empty 1`] = `
-Object {
-  "api": "https://test.frontity.io",
-  "attachment": Object {},
-  "author": Object {},
-  "category": Object {
-    "1": Object {
-      "count": 5,
-      "id": 1,
       "link": "/category/cat-1/",
-      "parent": 0,
-      "slug": "cat-1",
-      "taxonomy": "category",
-    },
-  },
-  "categoryBase": "",
-  "data": Object {
-    "/category/cat-1/": Object {
-      "id": 1,
-      "isArchive": true,
-      "isCategory": true,
-      "isFetching": false,
-      "isReady": true,
-      "isTaxonomy": true,
-      "items": Array [],
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
       "taxonomy": "category",
       "total": 0,
       "totalPages": 0,
@@ -297,6 +264,61 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+}
+`;
+
+exports[`category doesn't return 404 if the first page is empty 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json",
+  "attachment": Object {},
+  "author": Object {},
+  "authorBase": "",
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
+  "categoryBase": "",
+  "data": Object {
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isArchive": true,
+      "isCategory": true,
+      "isFetching": false,
+      "isReady": true,
+      "isTaxonomy": true,
+      "items": Array [],
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
+      "total": 0,
+      "totalPages": 0,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
@@ -330,7 +352,7 @@ Array [
 
 exports[`category fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -362,6 +384,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -430,6 +453,11 @@ Object {
           "type": "post",
         },
       ],
+      "link": "/category/cat-1/",
+      "next": "/category/cat-1/page/2/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
       "taxonomy": "category",
       "total": 5,
       "totalPages": 2,
@@ -540,12 +568,14 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`category is requested with any query param 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -577,6 +607,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -624,6 +655,13 @@ Object {
           "type": "post",
         },
       ],
+      "link": "/category/cat-1/?some=param",
+      "next": "/category/cat-1/page/2/?some=param",
+      "page": 1,
+      "query": Object {
+        "some": "param",
+      },
+      "route": "/category/cat-1/",
       "taxonomy": "category",
       "total": 5,
       "totalPages": 2,
@@ -754,21 +792,27 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`category returns 404 if category doesn't exist in WP 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {},
   "author": Object {},
+  "authorBase": "",
   "category": Object {},
   "categoryBase": "",
   "data": Object {
     "/category/non-existent/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "entity from endpoint \\"categories\\" with slug \\"non-existent\\" not found",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -784,14 +828,17 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`category returns 404 if the page fetched is out of range 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {},
   "author": Object {},
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -811,9 +858,12 @@ Object {
       "taxonomy": "category",
     },
     "/category/cat-1/page/3/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "category with slug \\"cat-1\\" doesn't have page 3",
       "is404": true,
+      "isError": true,
       "isFetching": false,
-      "isReady": false,
+      "isReady": true,
     },
   },
   "get": [Function],
@@ -829,12 +879,14 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;
 
 exports[`category was populated but not accessed 1`] = `
 Object {
-  "api": "https://test.frontity.io",
+  "api": "https://test.frontity.org/wp-json",
   "attachment": Object {
     "4": Object {
       "author": 1,
@@ -859,6 +911,7 @@ Object {
       "slug": "author-1",
     },
   },
+  "authorBase": "",
   "category": Object {
     "1": Object {
       "count": 5,
@@ -901,6 +954,11 @@ Object {
           "type": "post",
         },
       ],
+      "link": "/category/cat-1/page/2/",
+      "page": 2,
+      "previous": "/category/cat-1/",
+      "query": Object {},
+      "route": "/category/cat-1/",
       "taxonomy": "category",
       "total": 5,
       "totalPages": 2,
@@ -994,5 +1052,7 @@ Object {
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
 }
 `;

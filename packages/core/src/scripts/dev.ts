@@ -11,6 +11,7 @@ import getFrontity from "../config/frontity";
 import { Mode } from "../../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
+import createSymlinks from "./utils/create-symlinks";
 
 // Start Frontity development environment.
 export default async ({
@@ -18,17 +19,22 @@ export default async ({
   mode,
   port,
   target,
-  openBrowser = true
+  openBrowser = true,
+  publicPath,
 }: {
   port: number;
   isHttps: boolean;
   mode: Mode;
   target: "es5" | "module";
   openBrowser?: boolean;
+  publicPath: string;
 }): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
   const { outDir } = frontityConfig;
+
+  // Create symlinks for internal packages
+  await createSymlinks();
 
   // Create the directories if they don't exist, clean them if they do.
   await cleanBuildFolders({ outDir });
@@ -45,11 +51,11 @@ export default async ({
     port,
     isHttps,
     target,
-    openBrowser
+    openBrowser,
   });
 
   // Get config for webpack, babel and frontity.
-  const config = getConfig({ mode, entryPoints });
+  const config = getConfig({ mode, entryPoints, publicPath });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import
@@ -72,8 +78,8 @@ export default async ({
         errors: true,
         warnings: true,
         errorDetails: true,
-        excludeAssets: /chunks\..*?\.json/
-      }
+        excludeAssets: /chunks\..*?\.json/,
+      },
     })
   );
   app.use(webpackHotMiddleware(compiler.compilers[0]));

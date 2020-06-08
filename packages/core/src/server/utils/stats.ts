@@ -1,5 +1,6 @@
 export interface Stats {
   assetsByChunkName: { [key: string]: string };
+  publicPath?: string;
 }
 
 export interface Extractor {
@@ -9,12 +10,14 @@ export interface Extractor {
 }
 
 export const getStats = async ({
-  target
+  target,
 }: {
   target: "module" | "es5";
 }): Promise<Stats | false> => {
   try {
-    const json = (await import(`build/bundling/chunks.${target}.json`)) as Stats;
+    const json = (await import(
+      `build/bundling/chunks.${target}.json`
+    )) as Stats;
     return json;
   } catch (e) {
     return false;
@@ -23,7 +26,7 @@ export const getStats = async ({
 
 export const hasEntryPoint = ({
   site,
-  stats
+  stats,
 }: {
   site: string;
   stats: Stats;
@@ -34,29 +37,26 @@ export const hasEntryPoint = ({
 export const getBothScriptTags = ({
   extractor,
   moduleStats,
-  es5Stats
+  es5Stats,
 }: {
   extractor: Extractor;
   moduleStats: Stats;
   es5Stats: Stats;
 }): string => {
-  const publicPath = extractor.publicPath;
+  // Ensure publicPath ends with a slash.
+  const publicPath = extractor.publicPath.replace(/\/?$/, "/");
 
   const chunkNames = extractor
     .getMainAssets("script")
-    .map(chunk => /(.+)\.module/.exec(chunk.filename)[1]) as string[];
+    .map((chunk) => /(.+)\.module/.exec(chunk.filename)[1]) as string[];
 
   const moduleTags = chunkNames.map(
-    chunk =>
-      `<script async type="module" data-chunk="${chunk}" src="${publicPath}${
-        moduleStats.assetsByChunkName[chunk]
-      }"></script>`
+    (chunk) =>
+      `<script async type="module" data-chunk="${chunk}" src="${publicPath}${moduleStats.assetsByChunkName[chunk]}"></script>`
   );
   const es5Tags = chunkNames.map(
-    chunk =>
-      `<script async nomodule data-chunk="${chunk}" src="${publicPath}${
-        es5Stats.assetsByChunkName[chunk]
-      }"></script>`
+    (chunk) =>
+      `<script async nomodule data-chunk="${chunk}" src="${publicPath}${es5Stats.assetsByChunkName[chunk]}"></script>`
   );
 
   const requiredChunksTag = extractor.getRequiredChunksScriptTag({});

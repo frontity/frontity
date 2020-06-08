@@ -1,8 +1,9 @@
-import { createStore, isObservable } from "..";
+/* eslint-disable require-atomic-updates */
+import { createStore, isObservable, getSnapshot } from "..";
 
 let config = {};
 
-const delay = () => new Promise(resolve => setTimeout(resolve, 100));
+const delay = () => new Promise((resolve) => setTimeout(resolve, 100));
 
 beforeEach(() => {
   config = {
@@ -11,9 +12,9 @@ beforeEach(() => {
       nested1: {
         prop2: 2,
         prop3: ({ state }) => state.prop1 + state.nested1.prop2,
-        prop4: ({ state }) => num => state.nested1.prop3 + num,
-        prop5: 0
-      }
+        prop4: ({ state }) => (num) => state.nested1.prop3 + num,
+        prop5: 0,
+      },
     },
     actions: {
       action1: ({ state }) => {
@@ -23,7 +24,7 @@ beforeEach(() => {
         action2: ({ state }) => {
           state.prop1 = "action2";
           return state.prop1;
-        }
+        },
       },
       nested2: {
         nested3: {
@@ -33,17 +34,17 @@ beforeEach(() => {
           action4: ({ state }) => {
             state.nested1.prop5 = state.nested1.prop4(2);
           },
-          action5: ({ state }) => num => {
+          action5: ({ state }) => (num) => {
             state.nested1.prop5 = state.nested1.prop4(num);
-          }
-        }
+          },
+        },
       },
       action6: async ({ state }) => {
         await delay();
         state.prop1 = "action6";
         return state.prop1;
       },
-      action7: ({ state }) => async num => {
+      action7: ({ state }) => async (num) => {
         await delay();
         state.prop1 = num;
       },
@@ -54,8 +55,14 @@ beforeEach(() => {
         const prop1 = state.prop1;
         await actions.action7(3);
         state.prop1 = `${state.prop1} ${prop1}`;
-      }
-    }
+      },
+      action10: () => {
+        throw new Error("action10 error");
+      },
+      action11: async () => {
+        throw new Error("action11 error");
+      },
+    },
   };
 });
 
@@ -109,7 +116,7 @@ describe("createStore actions", () => {
     expect(store.state.nested1.prop5).toBe(6);
   });
 
-  it("should return a promise that can be awaited", done => {
+  it("should return a promise that can be awaited", (done) => {
     const store = createStore(config);
     store.actions.action6().then(() => {
       expect(store.state.prop1).toBe("action6");
@@ -117,7 +124,7 @@ describe("createStore actions", () => {
     });
   });
 
-  it("should return a promise that can be awaited even with params", done => {
+  it("should return a promise that can be awaited even with params", (done) => {
     const store = createStore(config);
     store.actions.action7(7).then(() => {
       expect(store.state.prop1).toBe(7);
@@ -147,13 +154,35 @@ describe("createStore actions", () => {
     const res = await store.actions.action6();
     expect(res).toBe(undefined);
   });
+
+  it("should catch an error thrown inside of an action", () => {
+    const store = createStore(config);
+
+    try {
+      store.actions.action10();
+      throw new Error("This line should never be reached");
+    } catch (e) {
+      expect(e.message).toBe("action10 error");
+    }
+  });
+
+  it("should catch an error thrown inside of an async action", async () => {
+    const store = createStore(config);
+
+    try {
+      await store.actions.action11();
+      throw new Error("This line should never be reached");
+    } catch (e) {
+      expect(e.message).toBe("action11 error");
+    }
+  });
 });
 
 describe("createStore getSnapshot", () => {
   it("should be able retrieve a serializable snapshot", () => {
     const store = createStore(config);
-    expect(store.getSnapshot()).toMatchSnapshot();
+    expect(getSnapshot(store.state)).toMatchSnapshot();
     store.actions.nested2.nested3.action5(3);
-    expect(store.getSnapshot()).toMatchSnapshot();
+    expect(getSnapshot(store.state)).toMatchSnapshot();
   });
 });

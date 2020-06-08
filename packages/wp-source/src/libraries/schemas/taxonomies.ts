@@ -1,8 +1,10 @@
 import { schema } from "normalizr";
 import { normalize } from "../route-utils";
 
-export const taxonomy = new schema.Entity(
-  "taxonomy",
+export const taxonomyType = new schema.Entity("taxonomyType");
+
+export const taxonomyEntity = new schema.Entity(
+  "taxonomyEntity",
   {},
   {
     processStrategy(entity) {
@@ -11,7 +13,7 @@ export const taxonomy = new schema.Entity(
       result.taxonomy =
         result.taxonomy === "post_tag" ? "tag" : result.taxonomy;
       return result;
-    }
+    },
   }
 );
-export const taxonomies = new schema.Array(taxonomy);
+export const taxonomyEntities = new schema.Array(taxonomyEntity);

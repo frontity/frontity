@@ -1,11 +1,9 @@
 {
-  "name": "twentytwenty-theme",
-  "alias": "twentytwenty.frontity.org",
   "scope": "frontity",
   "version": 2,
   "builds": [
     {
-      "src": "build/static/*",
+      "src": "build/static/**/*",
       "use": "@now/static"
     },
     {

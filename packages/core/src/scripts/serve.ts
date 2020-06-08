@@ -7,19 +7,12 @@ const appDir = resolve(process.cwd(), "build/server.js");
 // Creates a node server and runs the server.js bundle.
 export default async ({
   isHttps,
-  port
+  port,
 }: {
   port: number;
   isHttps: boolean;
 }): Promise<void> => {
-  let app;
-  try {
-    app = require(appDir).default;
-  } catch (error) {
-    throw new Error(
-      'Something went wrong. Did you forget to run "frontity build"?'
-    );
-  }
+  const app = require(appDir).default;
   const server = await createServer({ app, isHttps });
   server.listen(port);
   console.log(

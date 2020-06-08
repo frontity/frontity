@@ -6,42 +6,62 @@ import mount from "koa-mount";
 import React from "react";
 import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
+import { FilledContext } from "react-helmet-async";
 import { getSettings } from "@frontity/file-settings";
+import { Context } from "@frontity/types";
+import { getSnapshot } from "@frontity/connect";
 import { ChunkExtractor } from "@loadable/server";
-import { HelmetContext } from "@frontity/types";
 import getTemplate from "./templates";
 import {
   getStats,
   hasEntryPoint,
   getBothScriptTags,
-  Extractor
+  Extractor,
 } from "./utils/stats";
 import getHeadTags from "./utils/head";
 import App from "../app";
 import { FrontityTags } from "../../types";
 import createStore from "./store";
+import { exists } from "fs";
+import { promisify } from "util";
 
 export default ({ packages }): ReturnType<Koa["callback"]> => {
   const app = new Koa();
 
   // Serve static files.
-  app.use(mount("/static", serve("./build/static")));
+  app.use(async (ctx, next) => {
+    const moduleStats = await getStats({ target: "module" });
+    const es5Stats = await getStats({ target: "es5" });
+    const stats = moduleStats || es5Stats;
 
-  // Default robots.txt.
+    const publicPath = stats
+      ? // Remove domain from publicPath.
+        stats.publicPath.replace(/^(?:https?:)?\/\/([^/])+/, "")
+      : // Use the value by default.
+        "/static";
+
+    // Serve the static files.
+    return mount(publicPath, serve("build/static"))(ctx, next);
+  });
+
+  // Serve robots.txt from root or default if it doesn't exists.
   app.use(
-    get("/robots.txt", ctx => {
-      ctx.type = "text/plain";
-      ctx.body = "User-agent: *\nDisallow:";
+    get("/robots.txt", async (ctx, next) => {
+      if (await promisify(exists)("./robots.txt")) {
+        await serve("./")(ctx, next);
+      } else {
+        ctx.type = "text/plain";
+        ctx.body = "User-agent: *\nAllow: /";
+      }
     })
   );
 
   // Ignore HMR if not in dev mode or old browser open.
-  app.use(
-    get("/__webpack_hmr", ctx => {
-      ctx.status = 404;
-      ctx.body = "";
-    })
-  );
+  const return404 = (ctx: Context) => {
+    ctx.status = 404;
+  };
+  app.use(get("/__webpack_hmr", return404));
+  app.use(get("/static/([a-z0-9]+\\.hot-update\\.json)", return404));
 
   // Return Frontity favicon for favicon.ico.
   app.use(get("/favicon.ico", serve("./")));
@@ -79,12 +99,12 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     // Run beforeSSR actions.
     await Promise.all(
       Object.values(store.actions).map(({ beforeSSR }) => {
-        if (beforeSSR) return beforeSSR();
+        if (beforeSSR) return beforeSSR({ ctx });
       })
     );
 
     // Pass a context to HelmetProvider which will hold our state specific to each request.
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {} as FilledContext;
 
     const Component = <App store={store} helmetContext={helmetContext} />;
 
@@ -94,7 +114,7 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       // Run renderToString with ChunkExtractor to get the html.
       const extractor = new ChunkExtractor({
         stats,
-        entrypoints: [settings.name]
+        entrypoints: [settings.name],
       });
       const jsx = extractor.collectChunks(Component);
       html = renderToString(jsx);
@@ -114,13 +134,13 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
           ? getBothScriptTags({
               extractor: customExtractor,
               moduleStats,
-              es5Stats
+              es5Stats,
             })
           : extractor.getScriptTags();
 
       // Add mutations to our scripts.
       frontity.script = `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${htmlescape(
-        store.getSnapshot()
+        getSnapshot(store.state)
       )}</script>\n${frontity.script}`;
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup

@@ -2,14 +2,14 @@ import { observable } from "./observable";
 import { proxyToRaw, rawToProxy, rawToRoot } from "./internals";
 import {
   registerRunningReactionForOperation,
-  queueReactionsForOperation
+  queueReactionsForOperation,
 } from "./reactionRunner";
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 const wellKnownSymbols = new Set(
   Object.getOwnPropertyNames(Symbol)
-    .map(key => Symbol[key])
-    .filter(value => typeof value === "symbol")
+    .map((key) => Symbol[key])
+    .filter((value) => typeof value === "symbol")
 );
 
 // intercept get operations on observables to know which reaction uses their properties
@@ -90,7 +90,7 @@ function set(target, key, value, receiver) {
       value,
       oldValue,
       receiver,
-      type: "set"
+      type: "set",
     });
   }
   return result;

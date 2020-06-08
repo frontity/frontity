@@ -1,12 +1,8 @@
-import React, {
-  ComponentType,
-  FunctionComponent,
-  ClassicComponent,
-  ComponentClass
-} from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
+import React from "react";
 import Connect, { ConnectFunction } from "../connect";
 import { FilterInjectedProps } from "../utils";
-import Action from "../action";
+import { Action, AsyncAction } from "../action";
 import Package from "../package";
 import Derived from "../derived";
 
@@ -31,11 +27,11 @@ interface Package1 extends Package {
   actions: {
     namespace1: {
       action1: Action<Package1>;
-      action2: Action<Package1>;
+      action2: AsyncAction<Package1>;
     };
     namespace2: {
       action3: Action<Package1, string>;
-      action4: Action<Package1, number>;
+      action4: AsyncAction<Package1, number>;
     };
   };
   libraries: {
@@ -56,7 +52,7 @@ const Component1: React.FC<Connect<Package1, { html: string }>> = ({
   state,
   actions,
   libraries,
-  html
+  html,
 }) => {
   state;
   actions;
@@ -73,7 +69,7 @@ class Component2 extends React.Component<Connect<Package1, { html: string }>> {
   }
 }
 
-const connect: ConnectFunction = comp => comp;
+const connect: ConnectFunction = (comp) => comp;
 
 const ConnectedComponent1 = connect(Component1);
 const ConnectedComponent2 = connect(Component2);
@@ -84,40 +80,40 @@ const internalProps: Connect<Package1, OwnProps> = {
       prop1: "prop1",
       prop2: 2,
       prop3: "prop3",
-      prop4: str => str.length,
+      prop4: (str) => str.length,
       array1: ["array1"],
       nested1: {
-        prop5: str => str.length,
+        prop5: (str) => str.length,
         array2: [2],
         nested2: {
-          prop6: "prop6"
-        }
-      }
-    }
+          prop6: "prop6",
+        },
+      },
+    },
   },
   actions: {
     namespace1: {
       action1: () => {},
-      action2: () => {}
+      action2: async () => {},
     },
     namespace2: {
-      action3: str => {
+      action3: (str) => {
         const str2: string = str;
       },
-      action4: num => {
+      action4: async (num) => {
         const num2: number = num;
-      }
-    }
+      },
+    },
   },
   libraries: {
     namespace3: {
       library1: () => {},
       Component1: ConnectedComponent1,
-      Component2: ConnectedComponent2
-    }
+      Component2: ConnectedComponent2,
+    },
   },
   ownProp1: "ownProp1",
-  name: "nameProp"
+  name: "nameProp",
 };
 
 internalProps.actions.namespace1.action1();
@@ -127,7 +123,7 @@ internalProps.actions.namespace2.action4(123);
 
 const externalProps: FilterInjectedProps<Connect<Package1, OwnProps>> = {
   ownProp1: "ownProp1",
-  name: "nameProp"
+  name: "nameProp",
 };
 
 test("Types are fine!", () => {});

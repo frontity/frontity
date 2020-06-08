@@ -1,13 +1,4 @@
 import { css } from "frontity";
-import InterMedium from "../../fonts/inter/Inter-Medium.woff2";
-import InterBold from "../../fonts/inter/Inter-Bold.woff2";
-import InterSemiBold from "../../fonts/inter/Inter-SemiBold.woff2";
-import InterMediumUS from "../../fonts/inter/Inter-Medium-US-ASCII.woff2";
-import InterBoldUS from "../../fonts/inter/Inter-Bold-US-ASCII.woff2";
-import InterSemiBoldUS from "../../fonts/inter/Inter-SemiBold-US-ASCII.woff2";
-import InterMediumLatin from "../../fonts/inter/Inter-Medium-LATIN.woff2";
-import InterBoldLatin from "../../fonts/inter/Inter-Bold-LATIN.woff2";
-import InterSemiBoldLatin from "../../fonts/inter/Inter-SemiBold-LATIN.woff2";
 
 const cssReset = css`
   html,
@@ -68,7 +59,7 @@ const cssReset = css`
   }
 `;
 
-const documentSetup = colors => css`
+const documentSetup = (colors) => css`
   html {
     font-size: 62.5%; /* 1rem = 10px */
   }
@@ -98,60 +89,6 @@ const documentSetup = colors => css`
   }
 `;
 
-function getFontSrc(fontSet, fonts) {
-  const [defaultFont, asciiFont, latinFont] = fonts;
-  switch (fontSet) {
-    case "us-ascii":
-      return asciiFont;
-    case "latin":
-      return latinFont;
-    default:
-      return defaultFont;
-  }
-}
-
-const fontFace = fontSet => {
-  const font500 = getFontSrc(fontSet, [
-    InterMedium,
-    InterMediumUS,
-    InterMediumLatin
-  ]);
-
-  const font600 = getFontSrc(fontSet, [
-    InterSemiBold,
-    InterSemiBoldUS,
-    InterSemiBoldLatin
-  ]);
-
-  const font700 = getFontSrc(fontSet, [InterBold, InterBoldUS, InterBoldLatin]);
-
-  return css`
-    @font-face {
-      font-family: "Inter";
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url(${font500}) format("woff2");
-    }
-
-    @font-face {
-      font-family: "Inter";
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(${font600}) format("woff2");
-    }
-
-    @font-face {
-      font-family: "Inter";
-      font-style: normal;
-      font-weight: 700;
-      font-display: swap;
-      src: url(${font700}) format("woff2");
-    }
-  `;
-};
-
 const accessibilitySettings = css`
   @media (prefers-reduced-motion: reduce) {
     * {
@@ -161,7 +98,7 @@ const accessibilitySettings = css`
   }
 `;
 
-const elementBase = colors => css`
+const elementBase = (colors) => css`
   main {
     display: block;
   }
@@ -366,7 +303,7 @@ const listStyle = css`
   }
 `;
 
-const quoteStyle = colors => css`
+const quoteStyle = (colors) => css`
   blockquote {
     border-color: ${colors.primary};
     border-style: solid;
@@ -399,7 +336,7 @@ const quoteStyle = colors => css`
   }
 `;
 
-const codeStyle = colors => css`
+const codeStyle = (colors) => css`
   code,
   kbd,
   pre,
@@ -431,7 +368,7 @@ const codeStyle = colors => css`
   }
 `;
 
-const mediaStyle = colors => css`
+const mediaStyle = (colors) => css`
   figure {
     display: block;
     margin: 0;
@@ -471,7 +408,7 @@ const mediaStyle = colors => css`
   }
 `;
 
-const tableStyles = colors => css`
+const tableStyles = (colors) => css`
   table {
     border: 0.1rem solid ${colors.gray.light};
     border-collapse: collapse;
@@ -518,18 +455,17 @@ const tableStyles = colors => css`
   }
 `;
 
-const globalStyle = (colors, fontSets) =>
+const globalStyle = (colors) =>
   css([
     cssReset,
     documentSetup(colors),
-    fontFace(fontSets),
     accessibilitySettings,
     elementBase(colors),
     listStyle,
     quoteStyle(colors),
     codeStyle(colors),
     mediaStyle(colors),
-    tableStyles(colors)
+    tableStyles(colors),
   ]);
 
 export default globalStyle;

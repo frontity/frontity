@@ -4,7 +4,7 @@ import { SearchIcon } from "../icons";
 import {
   BaseToggle,
   LabeledIcon,
-  ToggleWrapper
+  ToggleWrapper,
 } from "../navigation/nav-toggle";
 
 const SearchButton = ({ state, actions }) => {

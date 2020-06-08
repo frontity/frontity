@@ -3,13 +3,13 @@ import validateSettings from "./validateSettings";
 import { NormalizedSettings } from "../types";
 import Settings, {
   MultiSettings,
-  MonoSettings
+  MonoSettings,
 } from "@frontity/types/src/settings";
 
 const defaultSettings = {
   name: "default",
   mode: "default",
-  state: {}
+  state: {},
 };
 
 const defaultPackage: {
@@ -17,7 +17,7 @@ const defaultPackage: {
   state: object;
 } = {
   active: true,
-  state: {}
+  state: {},
 };
 
 // This function merges the imported settings with the default settings.
@@ -26,17 +26,17 @@ const mergeSettings = ({
   ...settings
 }: MultiSettings | MonoSettings): NormalizedSettings => ({
   ...merge(defaultSettings, settings),
-  packages: packages.map(pkg =>
+  packages: packages.map((pkg) =>
     typeof pkg === "string"
       ? {
           ...defaultPackage,
-          name: pkg
+          name: pkg,
         }
       : {
           ...defaultPackage,
-          ...pkg
+          ...pkg,
         }
-  )
+  ),
 });
 
 // This function normalizes the imported settings.
@@ -50,7 +50,7 @@ const normalizeSettings = (settings: Settings): NormalizedSettings[] => {
   // Merge mono settings.
   if (!Array.isArray(settings)) return [mergeSettings(settings)];
   // Merge multi settings.
-  return settings.map(s => mergeSettings(s));
+  return settings.map((s) => mergeSettings(s));
 };
 
 export default normalizeSettings;

@@ -35,5 +35,8 @@ Array [
       type="audio/ogg"
     />
   </audio>,
+  <p>
+    Improve your blog’s performance & mobile experience.
+  </p>,
 ]
 `;

@@ -1,5 +1,6 @@
 import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
+import iframe from "@frontity/html2react/processors/iframe";
 
 const marsTheme = {
   name: "@frontity/mars-theme",
@@ -8,7 +9,7 @@ const marsTheme = {
      *  In Frontity, any package can add React components to the site.
      *  We use roots for that, scoped to the `theme` namespace.
      */
-    theme: Theme
+    theme: Theme,
   },
   state: {
     /**
@@ -20,9 +21,9 @@ const marsTheme = {
       isMobileMenuOpen: false,
       featured: {
         showOnList: false,
-        showOnPost: false
-      }
-    }
+        showOnPost: false,
+      },
+    },
   },
   /**
    * Actions are functions that modify the state or deal with other parts of
@@ -35,8 +36,8 @@ const marsTheme = {
       },
       closeMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = false;
-      }
-    }
+      },
+    },
   },
   libraries: {
     html2react: {
@@ -44,9 +45,9 @@ const marsTheme = {
        * Add a processor to `html2react` so it processes the `<img>` tags
        * inside the content HTML. You can add your own processors too
        */
-      processors: [image]
-    }
-  }
+      processors: [image, iframe],
+    },
+  },
 };
 
 export default marsTheme;

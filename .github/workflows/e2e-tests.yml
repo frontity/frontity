@@ -1,10 +1,10 @@
-name: e2e tests 
+name: e2e tests
 
-on: [push]
+on: [pull_request]
 
 jobs:
   e2e-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
 
     strategy:
       matrix:
@@ -28,8 +28,8 @@ jobs:
         env:
           CI: true
 
-      - name: Run e2e tests 
-        uses: cypress-io/github-action@v1
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v1.21.0
         with:
           start: npm run e2e:prod:${{ matrix.ci_node_index }}
           wait-on: "http://localhost:3001"

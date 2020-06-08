@@ -16,13 +16,10 @@
   "bugs": {
     "url": "https://community.frontity.org"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "test:ci": "jest",
-    "test": "jest --watch",
-    "test:inspect": "node --inspect ./node_modules/.bin/jest --watch --no-cache --runInBand",
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json",
     "prepublish": "npm run build"
   },
@@ -30,10 +27,6 @@
     "@babel/types": "^7.6.3"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "babel-plugin-tester": "^7.0.1",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+    "babel-plugin-tester": "^7.0.1"
   }
 }

@@ -8,12 +8,15 @@ import { mockResponse } from "./mocks/helpers";
 import attachment1 from "./mocks/post-type/attachment-1.json";
 import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
+import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
+import { ServerError } from "@frontity/source";
 
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
+  store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -21,9 +24,29 @@ beforeEach(() => {
 describe("postType", () => {
   test("returns 404 if not found", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    // We have to use this form instead of:
+    // .mockResolvedValueOnce(mockResponse([]))
+    // because the latter always returns the same instance of Response.
+    // which results in error because response.json() can only be run once
+    api.get = jest.fn((_) => Promise.resolve(mockResponse([])));
+
     // Fetch entities
     await store.actions.source.fetch("/non-existent/");
+    expect(api.get).toHaveBeenCalledTimes(3);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("should contain the correct error code on error", async () => {
+    // Mock Api responses
+    api.get = jest.fn(async (_) => {
+      throw new ServerError("statusText", 400, "statusText");
+    });
+
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/");
+
+    expect(store.state.source.data["/post-1/"].isError).toBe(true);
+    expect(store.state.source.data["/post-1/"]["is400"]).toBe(true);
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -41,7 +64,7 @@ describe("post", () => {
     // Add post to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(post1)
+      response: mockResponse(post1),
     });
     // Mock Api responses
     api.get = jest.fn();
@@ -75,13 +98,21 @@ describe("post", () => {
     // Add post to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(post1)
+      response: mockResponse(post1),
     });
     // Mock Api responses
     api.get = jest.fn();
     // Fetch entities
     await store.actions.source.fetch("/post-1/?some=param");
     expect(api.get).not.toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with types embedded", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1withType]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/");
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -102,7 +133,7 @@ describe("page", () => {
     // Add page to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(page1)
+      response: mockResponse(page1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
@@ -127,7 +158,7 @@ describe("page", () => {
     // Add page to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(page1)
+      response: mockResponse(page1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
@@ -154,7 +185,7 @@ describe("attachment", () => {
     // Add attachment to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(attachment1)
+      response: mockResponse(attachment1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
@@ -179,13 +210,27 @@ describe("attachment", () => {
     // Add attachment to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse(attachment1)
+      response: mockResponse(attachment1),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/attachment-1/?some=param");
     expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("overwrites the data when fetched with { force: true }", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([post1]))
+      .mockResolvedValueOnce(mockResponse(attachment1));
+
+    // Fetch entities
+    await store.actions.source.fetch("/post-1");
+    await store.actions.source.fetch("/post-1", { force: true });
+
     expect(store.state.source).toMatchSnapshot();
   });
 });

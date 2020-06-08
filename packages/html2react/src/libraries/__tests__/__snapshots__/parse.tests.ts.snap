@@ -90,5 +90,21 @@ Array [
     },
     "type": "element",
   },
+  Object {
+    "content": " Encoded phrase that should be decoded ",
+    "type": "comment",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "content": "Improve your blog’s performance & mobile experience.",
+        "parent": [Circular],
+        "type": "text",
+      },
+    ],
+    "component": "p",
+    "props": Object {},
+    "type": "element",
+  },
 ]
 `;

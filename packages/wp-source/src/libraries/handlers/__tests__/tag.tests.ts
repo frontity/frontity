@@ -14,6 +14,7 @@ let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
+  store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -27,7 +28,7 @@ describe("tag", () => {
       .mockResolvedValueOnce(
         mockResponse(tag1Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -39,13 +40,13 @@ describe("tag", () => {
     // Add tag to the store
     await store.libraries.source.populate({
       state: store.state,
-      response: mockResponse([tag1])
+      response: mockResponse([tag1]),
     });
     // Mock Api responses
     api.get = jest.fn().mockResolvedValueOnce(
       mockResponse(tag1PostsPage2, {
         "X-WP-Total": "5",
-        "X-WP-TotalPages": "2"
+        "X-WP-TotalPages": "2",
       })
     );
     // Observe changes in isFetching and isReady properties
@@ -63,9 +64,8 @@ describe("tag", () => {
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
       { isFetching: false, isReady: false }, // first values are from a different object
-      { isFetching: false, isReady: false }, // initial values from the data object
       { isFetching: true, isReady: false }, // fetch starts
-      { isFetching: false, isReady: true } // fetch ends
+      { isFetching: false, isReady: true }, // fetch ends
     ]);
   });
 
@@ -80,7 +80,7 @@ describe("tag", () => {
       .mockResolvedValueOnce(
         mockResponse(tag1PostsCpt, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities
@@ -91,7 +91,10 @@ describe("tag", () => {
 
   test("returns 404 if tag doesn't exist in WP", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValue(mockResponse([]));
+    api.get = jest
+      .fn()
+      .mockResolvedValue(mockResponse([], {}, { status: 404 }));
+
     // Fetch entities
     await store.actions.source.fetch("/tag/non-existent/");
     expect(api.get).toHaveBeenCalledTimes(1);
@@ -117,7 +120,7 @@ describe("tag", () => {
       .mockResolvedValueOnce(
         mockResponse([], {
           "X-WP-Total": "0",
-          "X-WP-TotalPages": "0"
+          "X-WP-TotalPages": "0",
         })
       );
     // Fetch entities
@@ -144,7 +147,7 @@ describe("tag", () => {
       .mockResolvedValueOnce(
         mockResponse(tag1Posts, {
           "X-WP-Total": "5",
-          "X-WP-TotalPages": "2"
+          "X-WP-TotalPages": "2",
         })
       );
     // Fetch entities

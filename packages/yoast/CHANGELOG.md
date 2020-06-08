@@ -1,65 +1,14 @@
-# Change Log
+# @frontity/yoast
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
-
-## [1.1.6](https://github.com/frontity/frontity/compare/@frontity/yoast@1.1.5...@frontity/yoast@1.1.6) (2019-12-10)
-
-**Note:** Version bump only for package @frontity/yoast
+## 1.2.0
+### Minor Changes
 
 
 
+- [`68b395f1`](https://github.com/frontity/frontity/commit/68b395f10086fc7096442007d4f1a1a9929443c5) [#310](https://github.com/frontity/frontity/pull/310) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate `@frontity/yoast` in favor of `@frontity/head-tags`
 
-
-## [1.1.5](https://github.com/frontity/frontity/compare/@frontity/yoast@1.1.4...@frontity/yoast@1.1.5) (2019-11-04)
-
-**Note:** Version bump only for package @frontity/yoast
-
+### Patch Changes
 
 
 
-
-## [1.1.4](https://github.com/frontity/frontity/compare/@frontity/yoast@1.1.3...@frontity/yoast@1.1.4) (2019-10-10)
-
-**Note:** Version bump only for package @frontity/yoast
-
-
-
-
-
-## [1.1.3](https://github.com/frontity/frontity/compare/@frontity/yoast@1.1.2...@frontity/yoast@1.1.3) (2019-10-02)
-
-
-### Bug Fixes
-
-* **typescript:** update to latest version ([a89b11c](https://github.com/frontity/frontity/commit/a89b11c))
-
-
-
-
-
-## [1.1.2](https://github.com/frontity/frontity/compare/@frontity/yoast@1.1.1...@frontity/yoast@1.1.2) (2019-09-10)
-
-**Note:** Version bump only for package @frontity/yoast
-
-
-
-
-
-## [1.1.1](https://github.com/frontity/frontity/compare/@frontity/yoast@1.1.0...@frontity/yoast@1.1.1) (2019-08-12)
-
-
-### Bug Fixes
-
-* **yoast:** do not use canonical from yoast_meta ([#165](https://github.com/frontity/frontity/issues/165)) ([b698670](https://github.com/frontity/frontity/commit/b698670))
-
-
-
-
-
-# 1.1.0 (2019-07-12)
-
-
-### Features
-
-* **yoast:** implement Yoast package ([2d08915](https://github.com/frontity/frontity/commit/2d08915))
+- [`6566d8e7`](https://github.com/frontity/frontity/commit/6566d8e70ae5801168a09008a8b341613a774f34) [#308](https://github.com/frontity/frontity/pull/308) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Update outdated TS types and correct the outdated import paths

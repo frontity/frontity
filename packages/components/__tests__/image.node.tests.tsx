@@ -5,19 +5,19 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { HelmetProvider } from "frontity";
-import { HelmetContext } from "frontity/types";
+import { FilledContext } from "react-helmet-async";
 import Image from "../image";
 
 describe("Image", () => {
   test('It\'s a normal image if loading === "eager"', () => {
-    const loading: "lazy" | "eager" | "auto" = "eager";
+    const loading: "lazy" | "eager" = "eager";
     const props = {
       alt: "Some fake alt text",
       src: "https://fake-src.com/fake-image.jpg",
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading
+      loading,
     };
 
     const image = TestRenderer.create(<Image {...props} />).toJSON();
@@ -31,10 +31,10 @@ describe("Image", () => {
       src: "https://fake-src.com/fake-image.jpg",
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
-      className: "fake-class-name"
+      className: "fake-class-name",
     };
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {} as FilledContext;
     const image = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Image {...props} />
@@ -54,10 +54,10 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      height: 300
+      height: 300,
     };
 
-    const helmetContext: HelmetContext = {};
+    const helmetContext = {} as FilledContext;
     const image = TestRenderer.create(
       <HelmetProvider context={helmetContext}>
         <Image {...props} />
