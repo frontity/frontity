@@ -14,11 +14,20 @@ const Slot: SlotType = ({ name, state, children, ...slotProps }) => {
   // Get the fills for this name.
   const fills = useFills(name);
 
-  return fills.length > 0
-    ? fills.map(({ Fill, props, key }) => (
-        <Fill key={key} name={key} {...data} {...props} />
-      ))
-    : children;
+  return (
+    // Returning a <Fragment/> because returning an array of components results in a typescript error
+    <>
+      {fills.length > 0
+        ? fills.map(({ Fill, props, key }) =>
+            React.createElement(
+              Fill,
+              { key, name: key, data, ...props },
+              children
+            )
+          )
+        : children}
+    </>
+  );
 };
 
 export default connect(Slot);
