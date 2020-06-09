@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/display-name, @typescript-eslint/camelcase */
 
 import React from "react";
@@ -11,6 +12,7 @@ class MyLib {
 
 const state = {
   frontity: {
+    debug: false,
     mode: "html",
     packages: ["package-1", "package-2", "package-3"],
   },
@@ -24,6 +26,9 @@ const packages = {
       namespace2: () => <div>namespace2</div>,
     },
     state: {
+      frontity: {
+        debug: true,
+      },
       namespace1: {
         prop1: "prop1",
         array1: ["item1"],
@@ -117,5 +122,13 @@ describe("mergePackages", () => {
     expect(packages.package_2_html.state.namespace3).not.toBe(
       merged.state.namespace3
     );
+  });
+
+  it("should not use debug mode in production", () => {
+    const nodeEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "production";
+    const merged = mergePackages({ packages, state, overwriteArrays: true });
+    expect(merged.state.frontity.debug).toBe(false);
+    process.env.NODE_ENV = nodeEnv;
   });
 });

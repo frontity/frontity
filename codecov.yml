@@ -1,7 +1,16 @@
+# Round the coverage up, up to the 2nd decimal point. E.g
+# 89.0199 % => 89.02%
 coverage:
   precision: 2
   round: up
 
+  # The `patch` target of 100% means that all new code must be fully tested (100%)
+  status:
+    patch:
+      default:
+        target: 100%
+
+# Make the layout of the comment posted on the PR by the codecov bot a bit nicer
 comment:
   layout: "files"
   behavior: once
