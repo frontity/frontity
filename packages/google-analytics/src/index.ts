@@ -34,14 +34,14 @@ const googleAnalytics: GoogleAnalytics = {
         ids
           .map((id) => getTrackerName(id))
           .forEach((trackerName) => {
+            const { category, label, value, ...rest } = payload;
             window.ga(`${trackerName}.send`, {
               hitType: "event",
               eventAction: name,
-              eventCategory: payload.category,
-              eventLabel: payload.label,
-              eventValue: payload.value,
-              transport: payload.transport,
-              nonInteraction: payload.nonInteraction,
+              eventCategory: category,
+              eventLabel: label,
+              eventValue: value,
+              ...rest,
             });
           });
       },
