@@ -4,11 +4,9 @@ coverage:
   precision: 2
   round: up
 
-  # The `patch` target of 100% means that all new code must be fully tested (100%)
+  # Patch is currently disable until cypress coverage is implemented.
   status:
-    patch:
-      default:
-        target: 100%
+    patch: off
 
 # Make the layout of the comment posted on the PR by the codecov bot a bit nicer
 comment:
