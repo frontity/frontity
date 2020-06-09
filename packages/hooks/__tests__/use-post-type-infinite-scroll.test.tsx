@@ -558,36 +558,6 @@ describe("usePostTypeInfiniteScroll", () => {
     expect(sourceFetch).not.toHaveBeenCalled();
   });
 
-  test("should not request the archive if it's not archive", () => {
-    mockedUseConnect.mockReturnValueOnce({
-      state: {
-        source: { get: sourceGet },
-        router: {
-          link: "/post-one/",
-          state: {},
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
-    sourceGet.mockImplementation((link) => ({
-      link,
-      isReady: false,
-      isFetching: false,
-      isArchive: false,
-    }));
-
-    act(() => {
-      render(<App />, container);
-    });
-
-    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
-    expect(sourceFetch).not.toHaveBeenCalled();
-  });
-
   test("should request next page on last item", () => {
     mockedUseConnect.mockReturnValueOnce({
       state: {
