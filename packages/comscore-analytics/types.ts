@@ -14,11 +14,11 @@ declare global {
   }
 }
 
-interface ComscoreAnalytics<Pkgs = Packages> extends Package {
-  roots: {
+interface ComscoreAnalytics extends Package {
+  roots: Analytics["roots"] & {
     comscoreAnalytics: ReactType;
   };
-  state: {
+  state: Analytics["state"] & {
     comscoreAnalytics: {
       trackingIds: string[];
     };
@@ -28,12 +28,12 @@ interface ComscoreAnalytics<Pkgs = Packages> extends Package {
       };
     };
   };
-  actions: {
+  actions: Analytics["actions"] & {
     comscoreAnalytics: {
-      pageview: Action<Pkgs, Pageview>;
+      pageview: Action<ComscoreAnalytics, Pageview>;
     };
   };
 }
-export type Packages = ComscoreAnalytics<Packages> & Analytics<Packages>;
+export type Packages = ComscoreAnalytics & Analytics;
 
 export default ComscoreAnalytics;
