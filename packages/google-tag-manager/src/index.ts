@@ -11,12 +11,12 @@ const googleTagManager: GoogleTagManager = {
   actions: {
     ...analytics.actions,
     googleTagManager: {
-      sendPageview: () => (pageview) => {
+      pageview: () => (pageview) => {
         // Send the pageview to the trackers.
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: "virtualPageview", pageview });
       },
-      sendEvent: () => ({ name: event, payload }) => {
+      event: () => ({ name: event, payload }) => {
         // Send the event to the trackers.
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event, payload });
@@ -26,7 +26,8 @@ const googleTagManager: GoogleTagManager = {
   state: {
     analytics: {
       ...analytics.state.analytics,
-      namespaces: ["googleTagManager"],
+      pageviews: { googleTagManager: true },
+      events: { googleTagManager: true },
     },
     googleTagManager: {},
   },

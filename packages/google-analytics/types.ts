@@ -1,6 +1,6 @@
 import { ReactType } from "react";
-import { Action } from "frontity/types";
-import Analytics, { Pageview } from "@frontity/analytics/types";
+import { Action, Package } from "frontity/types";
+import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 
 declare global {
   interface Window {
@@ -21,7 +21,7 @@ interface GoogleAnalyticsEvent {
   };
 }
 
-interface GoogleAnalytics extends Analytics {
+interface GoogleAnalytics extends Package {
   roots: Analytics["roots"] & {
     googleAnalytics: ReactType;
   };
@@ -33,10 +33,12 @@ interface GoogleAnalytics extends Analytics {
   };
   actions: Analytics["actions"] & {
     googleAnalytics: {
-      sendPageview: Action<GoogleAnalytics, Pageview>;
-      sendEvent: Action<GoogleAnalytics, GoogleAnalyticsEvent>;
+      pageview: Action<Packages, Pageview>;
+      event: Action<Packages, GoogleAnalyticsEvent>;
     };
   };
 }
+
+export type Packages = GoogleAnalytics & Analytics;
 
 export default GoogleAnalytics;

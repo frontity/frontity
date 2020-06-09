@@ -22,8 +22,8 @@ interface GoogleTagManager extends Analytics {
   };
   actions: Analytics["actions"] & {
     googleTagManager: {
-      sendPageview: Action<GoogleTagManager, Pageview>;
-      sendEvent: Action<GoogleTagManager, Event>;
+      pageview: Action<GoogleTagManager, Pageview>;
+      event: Action<GoogleTagManager, Event>;
     };
   };
 }

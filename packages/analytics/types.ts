@@ -12,18 +12,14 @@ export type Event = {
   payload: Record<string, any>;
 };
 
-interface Analytics<Pkgs extends Package> extends Package {
+interface Analytics extends Package {
   roots: {
     analytics: React.FC;
   };
   actions: {
     analytics: {
-      pageview: Action<Pkgs, Pageview>;
-      event: Action<Pkgs, Event>;
-    };
-    [key: string]: {
-      pageview?: Action<Pkgs, Pageview>;
-      event?: Action<Pkgs, Event>;
+      pageview: Action<Analytics, Pageview>;
+      event: Action<Analytics, Event>;
     };
   };
   state: {
@@ -34,8 +30,6 @@ interface Analytics<Pkgs extends Package> extends Package {
   };
 }
 
-export type Packages = Analytics<Packages> &
-  Router<Packages> &
-  Source<Packages>;
+export type Packages = Analytics & Router & Source;
 
 export default Analytics;

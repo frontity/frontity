@@ -13,7 +13,7 @@ const googleAnalytics: GoogleAnalytics = {
   actions: {
     ...analytics.actions,
     googleAnalytics: {
-      sendPageview: ({ state }) => (pageview) => {
+      pageview: ({ state }) => (pageview) => {
         // Get Tracking ids from state.
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
@@ -26,7 +26,7 @@ const googleAnalytics: GoogleAnalytics = {
           })
         );
       },
-      sendEvent: ({ state }) => ({ name, payload }) => {
+      event: ({ state }) => ({ name, payload }) => {
         // Get Tracking ids from state.
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
@@ -50,7 +50,8 @@ const googleAnalytics: GoogleAnalytics = {
   state: {
     analytics: {
       ...analytics.state.analytics,
-      namespaces: ["googleAnalytics"],
+      pageviews: { googleAnalytics: true },
+      events: { googleAnalytics: true },
     },
     googleAnalytics: {},
   },
