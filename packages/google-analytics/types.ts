@@ -39,6 +39,6 @@ interface GoogleAnalytics extends Package {
   };
 }
 
-export type Packages = GoogleAnalytics & Analytics<GoogleAnalytics>;
+export type Packages = GoogleAnalytics & Analytics;
 
 export default GoogleAnalytics;
