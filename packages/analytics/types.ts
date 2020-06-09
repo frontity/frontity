@@ -30,6 +30,9 @@ export type Event = {
   payload: Record<string, any>;
 };
 
+/**
+ * `@frontity/analytics` package.
+ */
 interface Analytics extends Package {
   roots: {
     analytics: React.FC;

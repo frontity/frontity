@@ -14,22 +14,47 @@ declare global {
   }
 }
 
+/**
+ * `@frontity/comscore-analytics` package.
+ */
 interface ComscoreAnalytics extends Package {
   roots: Analytics["roots"] & {
     comscoreAnalytics: ReactType;
   };
   state: Analytics["state"] & {
+    /**
+     * State properties for the Comscore analytics package.
+     */
     comscoreAnalytics: {
+      /**
+       * Array of tracking ids associated to a Comscore client.
+       */
       trackingIds: string[];
     };
     analytics: {
       pageviews: {
+        /**
+         * Enable or disable sending pageviews to Comscore (default is `true`).
+         */
         comscoreAnalytics: boolean;
       };
     };
   };
   actions: Analytics["actions"] & {
+    /**
+     * Actions from the Comscore analytics package.
+     */
     comscoreAnalytics: {
+      /**
+       * Send a pageview to all Comscore traking ids defined in
+       * `state.comscoreAnalytics.trackingIds`.
+       *
+       * @remarks
+       * This action is called automatically if
+       * `state.analytics.pageviews.comscoreAnalytics` is set to `true`.
+       *
+       * @param pageview - Object of type {@link Pageview}.
+       */
       pageview: Action<ComscoreAnalytics, Pageview>;
     };
   };
