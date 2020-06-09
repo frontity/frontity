@@ -12,11 +12,11 @@ const analytics: Analytics = {
     },
   },
   actions: {
-    /**
-     * Get the functions for every analytics package
-     * and run `pageview` for each one.
-     */
     analytics: {
+      /**
+       * Get the functions for every analytics package
+       * and run `pageview` for each one.
+       */
       pageview: ({ state, actions }) => (pageview) => {
         Object.entries(state.analytics.pageviews).forEach(
           ([namespace, shouldSend]) => {
