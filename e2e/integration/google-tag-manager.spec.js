@@ -49,6 +49,9 @@ describe("Google Tag Manager", () => {
   });
 
   it("should send events", () => {
+    // Wait for the first pageview to be sent.
+    cy.window().its("dataLayer").its(0).should("deep.equal", pageviewHome);
+    // Send event.
     cy.get("button#send-event").click();
     cy.window().its("dataLayer").its(1).should("deep.equal", someEvent);
   });
