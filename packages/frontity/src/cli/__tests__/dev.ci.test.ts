@@ -26,24 +26,24 @@ describe("dev", () => {
   });
 
   test("should get values from ENV variables", async () => {
-    process.env.FRONTITY_TARGET = "es5";
-    process.env.FRONTITY_PORT = "3001";
-    process.env.FRONTITY_HTTPS = "true";
-    process.env.FRONTITY_PRODUCTION = "true";
-    process.env.FRONTITY_PUBLIC_PATH = "/public/path";
-    process.env.FRONTITY_DONT_OPEN_BROWSER = "true";
+    process.env.FRONTITY_DEV_TARGET = "es5";
+    process.env.FRONTITY_DEV_PORT = "3001";
+    process.env.FRONTITY_DEV_HTTPS = "true";
+    process.env.FRONTITY_DEV_PRODUCTION = "true";
+    process.env.FRONTITY_DEV_PUBLIC_PATH = "/public/path";
+    process.env.FRONTITY_DEV_DONT_OPEN_BROWSER = "true";
 
     await dev({});
     expect(mockedDev.default.mock.calls).toMatchSnapshot();
   });
 
   test("should ignore ENV variables for passed arguments", async () => {
-    process.env.FRONTITY_TARGET = "es5";
-    process.env.FRONTITY_PORT = "3001";
-    process.env.FRONTITY_HTTPS = "true";
-    process.env.FRONTITY_PRODUCTION = "true";
-    process.env.FRONTITY_PUBLIC_PATH = "/public/path";
-    process.env.FRONTITY_DONT_OPEN_BROWSER = "true";
+    process.env.FRONTITY_DEV_TARGET = "es5";
+    process.env.FRONTITY_DEV_PORT = "3001";
+    process.env.FRONTITY_DEV_HTTPS = "true";
+    process.env.FRONTITY_DEV_PRODUCTION = "true";
+    process.env.FRONTITY_DEV_PUBLIC_PATH = "/public/path";
+    process.env.FRONTITY_DEV_DONT_OPEN_BROWSER = "true";
 
     await dev({
       target: "module",

@@ -26,16 +26,16 @@ describe("serve", () => {
   });
 
   test("should get values from ENV variables", async () => {
-    process.env.FRONTITY_PORT = "3001";
-    process.env.FRONTITY_HTTPS = "true";
+    process.env.FRONTITY_SERVE_PORT = "3001";
+    process.env.FRONTITY_SERVE_HTTPS = "true";
 
     await serve({});
     expect(mockedDev.default.mock.calls).toMatchSnapshot();
   });
 
   test("should ignore ENV variables for passed arguments", async () => {
-    process.env.FRONTITY_PORT = "3001";
-    process.env.FRONTITY_HTTPS = "true";
+    process.env.FRONTITY_SERVE_PORT = "3001";
+    process.env.FRONTITY_SERVE_HTTPS = "true";
 
     await serve({
       port: "4000",

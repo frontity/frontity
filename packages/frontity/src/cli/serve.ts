@@ -2,8 +2,8 @@ import serve from "../commands/serve";
 import { errorLogger } from "../utils";
 
 export default async ({
-  port = process.env.FRONTITY_PORT || "3000",
-  https = !!process.env.FRONTITY_HTTPS,
+  port = process.env.FRONTITY_SERVE_PORT || "3000",
+  https = !!process.env.FRONTITY_SERVE_HTTPS,
 }: {
   port?: string;
   https?: boolean;

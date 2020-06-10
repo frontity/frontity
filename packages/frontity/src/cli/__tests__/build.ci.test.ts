@@ -26,18 +26,18 @@ describe("build", () => {
   });
 
   test("should get values from ENV variables", async () => {
-    process.env.FRONTITY_TARGET = "es5";
-    process.env.FRONTITY_DEVELOPMENT = "true";
-    process.env.FRONTITY_PUBLIC_PATH = "/public/path";
+    process.env.FRONTITY_BUILD_TARGET = "es5";
+    process.env.FRONTITY_BUILD_DEVELOPMENT = "true";
+    process.env.FRONTITY_BUILD_PUBLIC_PATH = "/public/path";
 
     await build({});
     expect(mockedDev.default.mock.calls).toMatchSnapshot();
   });
 
   test("should ignore ENV variables for passed arguments", async () => {
-    process.env.FRONTITY_TARGET = "es5";
-    process.env.FRONTITY_DEVELOPMENT = "true";
-    process.env.FRONTITY_PUBLIC_PATH = "/public/path";
+    process.env.FRONTITY_BUILD_TARGET = "es5";
+    process.env.FRONTITY_BUILD_DEVELOPMENT = "true";
+    process.env.FRONTITY_BUILD_PUBLIC_PATH = "/public/path";
 
     await build({
       target: "module",
