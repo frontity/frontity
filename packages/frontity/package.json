@@ -57,11 +57,11 @@
     "tar": "^4.4.8",
     "ts-node": "^8.0.3",
     "typed-emitter": "^0.2.0",
-    "typescript": "3.8.3"
+    "typescript": "3.8.3",
+    "@frontity/core": "^1.7.0",
+    "@frontity/connect": "^1.1.1"
   },
   "devDependencies": {
-    "@frontity/connect": "^1.1.1",
-    "@frontity/core": "^1.7.0",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
