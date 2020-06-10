@@ -2,7 +2,7 @@ describe("Google Tag Manager", () => {
   const pageviewHome = {
     event: "virtualPageview",
     pageview: {
-      page: "/?name=google-tag-manager",
+      link: "/?name=google-tag-manager",
       title: "Homepage Title",
     },
   };
@@ -10,7 +10,7 @@ describe("Google Tag Manager", () => {
   const pageviewSomePost = {
     event: "virtualPageview",
     pageview: {
-      page: "/some-post/",
+      link: "/some-post/",
       title: "Some Post Title",
     },
   };
@@ -26,7 +26,7 @@ describe("Google Tag Manager", () => {
 
   it("should load Google Tag Manager library", () => {
     cy.get(
-      `script[src="https://www.googletagmanager.com/gtm.js?id=UA-XXXXXX-X"]`
+      `script[src="https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXX-X"]`
     );
   });
 
