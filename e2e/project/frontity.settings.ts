@@ -80,7 +80,7 @@ const settings: Settings = [
         name: "@frontity/google-tag-manager",
         state: {
           googleTagManager: {
-            containerId: "UA-XXXXXX-X",
+            containerId: "GTM-XXXXXX-X",
           },
         },
       },
