@@ -43,9 +43,11 @@ export default ({
     clone: true,
     arrayMerge: overwriteArrays ? overwriteMerge : undefined,
   });
-  // Delete the name and restore the debug flag.
+  // Delete the name.
   delete config.name;
-  config.state.frontity.debug = debug;
+  // Restore the debug flag if we are not in production.
+  if (process.env.NODE_ENV !== "production")
+    config.state.frontity.debug = debug;
 
   return config;
 };

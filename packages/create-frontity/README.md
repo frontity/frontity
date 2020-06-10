@@ -1,3 +1,39 @@
+# `create-frontity`
+
+[![Version](https://img.shields.io/npm/v/create-frontity.svg)](https://www.npmjs.com/package/create-frontity) [![npm](https://img.shields.io/npm/dw/create-frontity)](https://www.npmjs.com/package/create-frontity) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+
+This package is linked to `npx frontity create`. 
+This way, people can use `npx frontity create` as well as `npm init frontity`.
+
+## Table of contents
+
+<!-- toc -->
+
+- [Install](#install)
+- [Feature Discussions](#feature-discussions)
+- [Changelog](#changelog)
+- [Open Source Community](#open-source-community)
+  * [Channels](#channels)
+  * [Get involved](#get-involved)
+
+<!-- tocstop -->
+
+## Install
+
+This package doesn't need to be installed. It's meant to be used only in conjunction with `npm init frontity`
+
+## Feature Discussions
+
+[**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
+
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/create-frontity
+
+## Changelog
+
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/create-frontity/CHANGELOG.md)
+
+***
+
 ## Open Source Community
 
 ### Channels

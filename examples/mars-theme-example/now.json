@@ -11,6 +11,10 @@
       "use": "@now/static"
     },
     {
+      "src": "robots.txt",
+      "use": "@now/static"
+    },
+    {
       "src": "build/server.js",
       "use": "@now/node"
     }
@@ -24,6 +28,7 @@
       "dest": "/build/static/$1"
     },
     { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/robots.txt", "dest": "/robots.txt" },
     {
       "src": "/(.*)",
       "headers": { "cache-control": "s-maxage=1,stale-while-revalidate" },
