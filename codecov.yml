@@ -4,9 +4,12 @@ coverage:
   precision: 2
   round: up
 
-  # Patch is currently disable until cypress coverage is implemented.
+  # Patch is set to 0% so it doesn't prevent PRs to be merged but the value
+  # is reported anyways
   status:
-    patch: off
+    patch:
+      default:
+        target: 0%
 
 # Make the layout of the comment posted on the PR by the codecov bot a bit nicer
 comment:
