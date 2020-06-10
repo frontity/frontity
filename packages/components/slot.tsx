@@ -5,12 +5,12 @@ import { Connect, Package } from "frontity/types";
 interface SlotProps {
   /*
    * The name of the Slot.
-   * The user of this Slot will have to specify this name in order to insert a component.
+   * The user of this Slot will have to specify this name in order to insert a Fill component.
    */
   name: string;
 
   /*
-   * Any data that you might want to pass as props to the Fill.
+   * Any data that you might want to pass to the Fill.
    * Normally used for passing route data fetched in the parent component.
    */
   data?: any;
