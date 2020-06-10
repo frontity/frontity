@@ -1,6 +1,7 @@
 import React from "react";
-import { connect, useFills } from "frontity";
-import { Connect, Package } from "frontity/types";
+import connect from "@frontity/connect";
+import { Connect, Package } from "../../../types";
+import useFills from "./use-fills";
 
 interface SlotProps {
   /*

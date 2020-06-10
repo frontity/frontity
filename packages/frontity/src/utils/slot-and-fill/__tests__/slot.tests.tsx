@@ -1,6 +1,6 @@
 import React from "react";
 import { create } from "react-test-renderer";
-import { createStore } from "frontity";
+import { createStore } from "../../..";
 import { Provider } from "@frontity/connect";
 import Slot from "../slot";
 
