@@ -24,6 +24,35 @@ exports[`Slot should read the data from state.source and pass it to the Fill 1`]
 </div>
 `;
 
+exports[`Slot should render 2 elements with all props 1`] = `
+Array [
+  <div>
+    {
+  "name": "namespace1 - fill 5.1",
+  "data": "This would normally be data for this route",
+  "libraries": {
+    "fills": {
+      "namespace1": {}
+    }
+  },
+  "actions": {}
+}
+  </div>,
+  <div>
+    {
+  "name": "namespace1 - fill 5.2",
+  "data": "This would normally be data for this route",
+  "libraries": {
+    "fills": {
+      "namespace1": {}
+    }
+  },
+  "actions": {}
+}
+  </div>,
+]
+`;
+
 exports[`Slot should render children as a fallback 1`] = `"fallback"`;
 
 exports[`Slot should work in the most basic case 1`] = `

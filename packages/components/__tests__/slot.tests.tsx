@@ -9,6 +9,9 @@ let store;
 const SimpleFill = () => <div>Im a Fill</div>;
 const DataFill = ({ data }) => <div>{data}</div>;
 const PropFill = ({ whateverProp }) => <div>{whateverProp}</div>;
+const AllPropsFill = (allProps) => (
+  <div>{JSON.stringify(allProps, null, 2)}</div>
+);
 
 beforeEach(() => {
   store = createStore({
@@ -38,6 +41,14 @@ beforeEach(() => {
               whateverProp: "This should render instead",
             },
           },
+          "fill 5.1": {
+            slot: "slot 5",
+            library: "namespace1.AllPropsFill",
+          },
+          "fill 5.2": {
+            slot: "slot 5",
+            library: "namespace1.AllPropsFill",
+          },
         },
       },
     },
@@ -47,6 +58,7 @@ beforeEach(() => {
           SimpleFill,
           DataFill,
           PropFill,
+          AllPropsFill,
         },
       },
     },
@@ -119,6 +131,17 @@ describe("Slot", () => {
     );
 
     expect(app.toJSON().children[0]).toEqual("This should render instead");
+    expect(app.toJSON()).toMatchSnapshot();
+  });
+
+  it("should render 2 elements with all props", () => {
+    const app = create(
+      <Provider value={store}>
+        <Slot name="slot 5" />
+      </Provider>
+    );
+
+    expect((app.toJSON() as any).length).toEqual(2); // We render 2 elements
     expect(app.toJSON()).toMatchSnapshot();
   });
 });
