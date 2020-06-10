@@ -11,7 +11,10 @@ import { Root as GoogleTagManager } from "..";
 import GoogleTagManagerPkg from "../../../types";
 
 const getState = (): State<GoogleTagManagerPkg> => ({
-  analytics: { namespaces: ["googleTagManager"] },
+  analytics: {
+    pageviews: { googleTagManager: true },
+    events: {},
+  },
   googleTagManager: {},
 });
 
