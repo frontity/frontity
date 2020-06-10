@@ -4,11 +4,12 @@ coverage:
   precision: 2
   round: up
 
-  # The `patch` target of 100% means that all new code must be fully tested (100%)
+  # Patch is set to 0% so it doesn't prevent PRs to be merged but the value
+  # is reported anyways
   status:
     patch:
       default:
-        target: 100%
+        target: 0%
 
 # Make the layout of the comment posted on the PR by the codecov bot a bit nicer
 comment:
