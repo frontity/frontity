@@ -21,6 +21,7 @@ interface TestAnalytics extends Package {
     testAnalytics: {
       pageviews: Pageview[];
       events: Event[];
+      testEvent: Event;
     };
   };
   actions: {
@@ -28,8 +29,8 @@ interface TestAnalytics extends Package {
       fetch: Source["actions"]["source"]["fetch"];
     };
     testAnalytics: {
-      sendPageview: Action<Packages, Pageview>;
-      sendEvent: Action<Packages, Event>;
+      pageview: Action<Packages, Pageview>;
+      event: Action<Packages, Event>;
     };
   };
   roots: {

@@ -30,10 +30,7 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
   const changeLinkPost1 = () => actions.router.set("/some-post/");
   const changeLinkPost2 = () => actions.router.set("/some-other-post/");
   const sendEvent = () =>
-    actions.analytics.event({
-      name: "some event",
-      payload: { content: "some content" },
-    });
+    actions.analytics.event(state.testAnalytics.testEvent);
 
   return (
     <>
@@ -77,6 +74,10 @@ const analytics: Analytics = {
     testAnalytics: {
       pageviews: [],
       events: [],
+      testEvent: {
+        name: "some event",
+        payload: { content: "some content" },
+      },
     },
   },
   actions: {
