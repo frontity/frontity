@@ -13,7 +13,7 @@ const googleAnalytics: GoogleAnalytics = {
   actions: {
     ...analytics.actions,
     googleAnalytics: {
-      pageview: ({ state }) => (pageview) => {
+      pageview: ({ state }) => ({ link, title }) => {
         // Get Tracking ids from state.
         const { trackingIds, trackingId } = state.googleAnalytics;
         const ids = trackingIds || (trackingId && [trackingId]) || [];
@@ -22,7 +22,8 @@ const googleAnalytics: GoogleAnalytics = {
         ids.forEach((id) =>
           window.ga(`${getTrackerName(id)}.send`, {
             hitType: "pageview",
-            ...pageview,
+            page: link,
+            title,
           })
         );
       },
