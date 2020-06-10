@@ -113,6 +113,21 @@ const settings: Settings = [
     name: "analytics",
     packages: ["e2e-analytics", "@frontity/tiny-router", "@frontity/analytics"],
   },
+  {
+    name: "google-analytics",
+    packages: [
+      "e2e-analytics",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/google-analytics",
+        state: {
+          googleAnalytics: {
+            trackingIds: ["UA-XXXXXX-X", "UA-YYYYYY-Y"],
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
