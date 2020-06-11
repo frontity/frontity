@@ -1,7 +1,17 @@
+# Round the coverage up, up to the 2nd decimal point. E.g
+# 89.0199 % => 89.02%
 coverage:
   precision: 2
   round: up
 
+  # Patch is set to 0% so it doesn't prevent PRs to be merged but the value
+  # is reported anyways
+  status:
+    patch:
+      default:
+        target: 0%
+
+# Make the layout of the comment posted on the PR by the codecov bot a bit nicer
 comment:
   layout: "files"
   behavior: once
