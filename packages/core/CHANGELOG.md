@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.8.0-react-concurrent-experimental.0
+
+### Minor Changes
+
+- [`e045bb0d`](https://github.com/frontity/frontity/commit/e045bb0da36c1b61610cba5d956dfc4d4fc6c7b8) Thanks [@luisherranz](https://github.com/luisherranz)! - Experimental: Switch to React Concurrent mode.
+
 ## 1.7.0
 
 ### Minor Changes

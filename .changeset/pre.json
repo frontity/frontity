@@ -27,5 +27,7 @@
     "@frontity/wp-source": "1.7.1",
     "@frontity/yoast": "1.2.0"
   },
-  "changesets": []
+  "changesets": [
+    "slimy-bananas-worry"
+  ]
 }
