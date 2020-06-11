@@ -11,6 +11,16 @@ Full info about this package can be found in the [docs](https://docs.frontity.or
 
 <!-- toc -->
 
+- [Install](#install)
+- [Usage](#usage)
+- [Feature Discussions](#feature-discussions)
+- [Changelog](#changelog)
+- [Open Source Community](#open-source-community)
+  * [Channels](#channels)
+  * [Get involved](#get-involved)
+
+<!-- tocstop -->
+
 ## Install
 
 ```sh
