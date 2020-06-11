@@ -2,7 +2,10 @@
 
 [![Version](https://img.shields.io/npm/v/@frontity/wp-source.svg)](https://www.npmjs.com/package/@frontity/wp-source) [![npm](https://img.shields.io/npm/dw/@frontity/wp-source)](https://www.npmjs.com/package/@frontity/wp-source) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-Source package of Frontity for self-hosted WordPress and WordPress.com sites
+Source package of Frontity for self-hosted WordPress and WordPress.com sites.  
+It provides methods and structures tha can be used to access the data got from the REST API from your React components.
+
+Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/wordpress-source)
 
 ## Table of contents
 
@@ -13,6 +16,36 @@ Source package of Frontity for self-hosted WordPress and WordPress.com sites
 ```sh
 npm i @frontity/wp-source
 ```
+
+## Usage
+
+Once installed it should be included and configured in your `frontity.settings.js`
+
+```jsx
+module.exports = {
+  packages: [
+    "@frontity/mars-theme",
+    "@frontity/tiny-router",
+    {
+      name: "@frontity/wp-source",
+      state: {
+        source: {
+          api: "https://site.com/wp-json"
+        }
+      }  
+    }
+  ]
+}
+```
+
+Some interesting methods defined in this package (and available in your React components if you apply [`connect`](https://docs.frontity.org/api-reference-1/frontity#connect) on them) are:
+
+- [`source.fetch`](https://docs.frontity.org/api-reference-1/wordpress-source#source-fetch)
+- [`source.get`](https://docs.frontity.org/api-reference-1/wordpress-source#source-get)
+- [`source.api.get`](https://docs.frontity.org/api-reference-1/wordpress-source#api-get-endpoint-params-api-iswpcom)
+- [`source.api.populate`](https://docs.frontity.org/api-reference-1/wordpress-source#populate-response-state-subdirectory-force)
+
+Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/wordpress-source)
 
   
 
