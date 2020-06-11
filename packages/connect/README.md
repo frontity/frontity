@@ -2,17 +2,34 @@
 
 [![Version](https://img.shields.io/npm/v/@frontity/connect.svg)](https://www.npmjs.com/package/@frontity/connect) [![npm](https://img.shields.io/npm/dw/@frontity/connect)](https://www.npmjs.com/package/@frontity/connect) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-The state manager of Frontity. Similar to MobX but much more lightweight because it's based on [ES6 proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
+The state manager of Frontity.  
+Similar to [MobX](https://mobx.js.org/README.html) but much more lightweight because it's based on [ES6 proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
 
 ## Table of contents
 
 <!-- toc -->
 
+- [Install](#install)
+- [Usage](#usage)
+- [Feature Discussions](#feature-discussions)
+- [Changelog](#changelog)
+- [Open Source Community](#open-source-community)
+  * [Channels](#channels)
+  * [Get involved](#get-involved)
+
+<!-- tocstop -->
+
 ## Install
 
-This package is not meant to be installed individually.   
-It is an [internal dependency](https://www.npmjs.com/browse/depended/@frontity/connect) dependency of [`@frontity/core`](https://github.com/frontity/frontity/tree/dev/packages/core) package.   
-It is [publicly exported](https://github.com/frontity/frontity/blob/dev/packages/frontity/types/index.ts) by [`frontity`](https://github.com/frontity/frontity/tree/dev/packages/frontity) package
+This package is not meant to be installed individually.  
+The public methods defined in `@frontity/connect` are meant to be used through [`frontity`](https://github.com/frontity/frontity/tree/dev/packages/frontity) package (from which we can import these [methods](https://github.com/frontity/frontity/blob/dev/packages/frontity/src/index.ts)).
+
+## Usage
+
+Some interesting methods defined in this package and available through [`frontity`](https://github.com/frontity/frontity/tree/dev/packages/frontity) package are:
+
+- [`connect`](https://docs.frontity.org/api-reference-1/frontity#connect)
+- [`useConnect`](https://docs.frontity.org/api-reference-1/frontity#useconnect)
 
 ## Feature Discussions
 
