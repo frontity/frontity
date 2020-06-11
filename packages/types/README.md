@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/npm/v/@frontity/types.svg)](https://www.npmjs.com/package/@frontity/types) [![npm](https://img.shields.io/npm/dw/@frontity/types)](https://www.npmjs.com/package/@frontity/types) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
 Types for the different Frontity APIs.  
-The goal of this package is to separate and centralize all the type definitions required for Typescript's development of main Frontity's packages
+The purpose of this package is to separate and centralize all the type definitions required for Typescript's development of main Frontity's packages
 
 ## Table of contents
 
@@ -21,9 +21,8 @@ The goal of this package is to separate and centralize all the type definitions 
 
 ## Install
 
-This package is not meant to be installed individually.   
-It is an [internal dependency](https://www.npmjs.com/browse/depended/@frontity/types) dependency of [`frontity`](https://github.com/frontity/frontity/tree/dev/packages/frontity) package.   
-It is [publicly exported](https://github.com/frontity/frontity/blob/dev/packages/frontity/types/index.ts) by [`frontity`](https://github.com/frontity/frontity/tree/dev/packages/frontity) package
+This package is not meant to be installed individually.  
+The types defined in `@frontity/types` are meant to be used through [`frontity`](https://github.com/frontity/frontity/tree/dev/packages/frontity) package (from which we can import these [types](https://github.com/frontity/frontity/blob/dev/packages/frontity/types/index.ts)).
 
 ## Usage
 
