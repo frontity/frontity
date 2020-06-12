@@ -1,4 +1,4 @@
-import { Package, Action } from "frontity/types";
+import { Package, AsyncAction } from "frontity/types";
 import WpSource from "@frontity/wp-source/types";
 
 /**
@@ -53,7 +53,7 @@ interface WpComments extends Package {
        *
        * @param comment - Object of type {@link Comment}.
        */
-      create: Action<Packages, Comment>;
+      create: AsyncAction<Packages, Comment>;
     };
   };
 }
