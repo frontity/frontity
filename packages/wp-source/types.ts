@@ -50,11 +50,12 @@ interface WpSource extends Source {
   actions: {
     source: {
       /**
-       * An action that fetches all the entities related to a link, and
-       * populates the state with both an entry in `state.source.data` with
-       * information about that link and the entities, normalized, in the
-       * relevant part of the state, like `state.source.post`,
-       * `state.source.category`, `state.source.author` and so on.
+       * An action that fetches all the information and entities related to a link.
+       *
+       * It populates the state with both: 
+       * - An entry in `state.source.data` with information about that link.
+       * - Normalized entities in relevant part of the state, like `state.source.post`, `state.source.category` 
+       *   or `state.source.author` and so on.
        *
        * @param link - The link that should be fetched. It can be a URL or a
        * custom link created to fetch additional entities from the REST API.
