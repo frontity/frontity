@@ -29,25 +29,13 @@ Array [
   <div>
     {
   "name": "namespace1 - fill 5.1",
-  "data": "This would normally be data for this route",
-  "libraries": {
-    "fills": {
-      "namespace1": {}
-    }
-  },
-  "actions": {}
+  "data": "This would normally be data for this route"
 }
   </div>,
   <div>
     {
   "name": "namespace1 - fill 5.2",
-  "data": "This would normally be data for this route",
-  "libraries": {
-    "fills": {
-      "namespace1": {}
-    }
-  },
-  "actions": {}
+  "data": "This would normally be data for this route"
 }
   </div>,
 ]
