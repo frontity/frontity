@@ -49,9 +49,46 @@ interface WpSource extends Source {
   };
   actions: {
     source: {
+      /**
+       * An action that fetches all the entities related to a link, and
+       * populates the state with both an entry in `state.source.data` with
+       * information about that link and the entities, normalized, in the
+       * relevant part of the state, like `state.source.post`,
+       * `state.source.category`, `state.source.author` and so on.
+       *
+       * @param link - The link that should be fetched. It can be a URL or a
+       * custom link created to fetch additional entities from the REST API.
+       * - URLs start with "/".
+       * - Non URLs start with "@".
+       * @example Fetch the content of the `/some-post` URL:
+       * `actions.source.fecth("/some-post");`
+       * @example Fetch the comments of the post with id 135:
+       * `actions.source.fecth("@comments/135");`
+       *
+       * @param options - Optional options.
+       *
+       * @returns A promise that resolves when the data fetching has finished.
+       */
       fetch:
         | AsyncAction<WpSource, string>
-        | AsyncAction<WpSource, string, { force?: boolean }>;
+        | AsyncAction<
+            WpSource,
+            string,
+            {
+              /**
+               * Whether the fetch should be done again if data for that link
+               * already exists.
+               */
+              force?: boolean;
+            }
+          >;
+
+      /**
+       * An internal action that bootstraps the initialization
+       *
+       * This action is not meant to be run by the user, but by the Frontity
+       * framework.
+       */
       init: Action<WpSource>;
     };
   };
