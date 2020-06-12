@@ -4,9 +4,23 @@
 
 The WordPress Twenty Twenty starter theme for Frontity
 
+Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-twentytwenty-theme)
+
+![](https://raw.githubusercontent.com/frontity/gitbook-docs/master/docs/.gitbook/assets/screenshot-homepage-view-twentytwenty-frontity-theme.png)
+
 ## Table of contents
 
 <!-- toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+- [Feature Discussions](#feature-discussions)
+- [Changelog](#changelog)
+- [Open Source Community](#open-source-community)
+  * [Channels](#channels)
+  * [Get involved](#get-involved)
+
+<!-- tocstop -->
 
 ## Install
 
@@ -14,7 +28,44 @@ The WordPress Twenty Twenty starter theme for Frontity
 npm i @frontity/twentytwenty-theme
 ```
 
-  
+## Usage
+
+Once installed it should be included in your `frontity.settings.js`.
+The theme options can be specified in the `state.theme` property.
+
+
+```jsx
+{
+  name: "@frontity/twentytwenty-theme",
+  state: {
+    theme: {
+      menu: [
+        ["Home", "/"],
+        ["Nature", "/category/nature/"],
+        ["Travel", "/category/travel/"],
+        ["Japan", "/tag/japan/"],
+        ["About Us", "/about-us/"]
+      ],
+      colors: {
+        primary: "#E6324B",
+        headerBg: "#ffffff",
+        footerBg: "#ffffff",
+        bodyBg: "#f5efe0"
+      },
+      showSearchInHeader: true,
+      showAllContentOnArchive: false,
+      featuredMedia: {
+        showOnArchive: true,
+        showOnPost: true
+      },
+      autoPreFetch: "hover",
+      fontSets: "us-ascii"
+    }
+  }
+},
+```
+
+Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-twentytwenty-theme)
 
 ## Feature Discussions
 
