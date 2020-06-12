@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WP Comments > create should send the correct call to WordPress 1`] = `
+Array [
+  Array [
+    "https://test.frontity.org/wp-comments-post.php",
+    Object {
+      "body": URLSearchParams {},
+      "headers": Object {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
+
+exports[`WP Comments > create should send the correct call to WordPress 2`] = `"comment=This+is+a+comment+example.+Hi%21&author=Frontibotito&email=frontibotito%40frontity.com&url=https%3A%2F%2Ffrontity.org&comment_post_ID=60&comment_parent=0"`;
+
+exports[`WP Comments > create should show a warning message if the source is a WP.com site 1`] = `
+Array [
+  Array [
+    "Sending comments to a WordPress.com site is not supported yet.",
+  ],
+]
+`;
