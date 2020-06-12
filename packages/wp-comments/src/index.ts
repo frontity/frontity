@@ -1,4 +1,4 @@
-import { fetch } from "frontity";
+import { fetch, warn } from "frontity";
 import WpComments from "../types";
 
 const wpComments: WpComments = {
@@ -13,6 +13,13 @@ const wpComments: WpComments = {
         postId,
         parentId = 0,
       }) => {
+        // Check first if the connected source is a WP.com site.
+        if (state.source.isWpCom) {
+          return warn(
+            "Sending comments to a WordPress.com site is not supported yet."
+          );
+        }
+
         // Generate form content.
         const body = new URLSearchParams();
         body.set("comment", comment);
@@ -29,7 +36,7 @@ const wpComments: WpComments = {
         );
 
         // Send a POST request.
-        await fetch(commentsPost, {
+        return await fetch(commentsPost, {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body,
