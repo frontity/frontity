@@ -31,6 +31,9 @@ export type Comment = {
   parentId?: number;
 };
 
+/**
+ * `@frontity/wp-comments` package.
+ */
 interface WpComments extends Package {
   actions: {
     /**
