@@ -33,7 +33,26 @@ export type Comment = {
 
 interface WpComments extends Package {
   actions: {
+    /**
+     * Actions to handle comments.
+     */
     comments: {
+      /**
+       * Publish a new comment to the post specified by `postId`.
+       *
+       * Usage example:
+       *
+       * ```ts
+       * actions.comments.create({
+       *   comment: "This is a comment example. Hi!",
+       *   author: "Frontibotito",
+       *   email: "frontibotito@frontity.com",
+       *   postId: 60,
+       * });
+       * ```
+       *
+       * @param comment - Object of type {@link Comment}.
+       */
       create: Action<Packages, Comment>;
     };
   };
