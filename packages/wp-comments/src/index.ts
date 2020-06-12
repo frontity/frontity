@@ -36,7 +36,7 @@ const wpComments: WpComments = {
         );
 
         // Send a POST request.
-        return await fetch(commentsPost, {
+        await fetch(commentsPost, {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body,
