@@ -28,7 +28,15 @@ type SlotType = React.FC<Connect<Package, SlotProps>>;
 /**
  * A React component that renders a Fill to fulfill a Slot and Fill pattern.
  */
-const Slot: SlotType = ({ name, state, children, ...slotProps }) => {
+const Slot: SlotType = ({
+  name,
+  state,
+  children,
+  libraries, //  These props are unused on purpose.
+  actions, ////  We're only destructuring them so that we can filter them out from `...slotProps`
+  roots, //////  which are passed to the Fill component
+  ...slotProps
+}) => {
   // Get the data, either from props or the current link.
   const data = slotProps.data || state.source.get(state.router.link);
 
