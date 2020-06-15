@@ -12,6 +12,7 @@
     "serve:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity serve"
   },
   "dependencies": {
+    "@frontity/analytics": "^1.1.0",
     "@frontity/comscore-analytics": "^0.1.0",
     "@frontity/core": "^1.5.0",
     "@frontity/google-tag-manager": "^0.2.0",
