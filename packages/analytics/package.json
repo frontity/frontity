@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@frontity/source": "^1.0.17",
+    "@frontity/router": "^1.1.0",
     "frontity": "^1.8.0"
   }
 }
