@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.0-infinite-scroll-beta.1
+
+### Patch Changes
+
+- [`9bdf948b`](https://github.com/frontity/frontity/commit/9bdf948bda7e5352762ccf220ecb1f41c911d6dc) [#476](https://github.com/frontity/frontity/pull/476) Thanks [@orballo](https://github.com/orballo)! - Fixes a bug on the `usePostTypeInfiniteScroll` where the archive is not requested if we are loading the post type from SSR.
+
 ## 2.1.0-infinite-scroll-beta.0
 
 ### Minor Changes
