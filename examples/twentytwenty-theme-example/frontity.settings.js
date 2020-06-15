@@ -1,3 +1,7 @@
+import React from "react";
+
+const ExampleFill = () => <div>example</div>;
+
 export default {
   name: "twentytwenty-theme-example",
   state: {
@@ -13,6 +17,14 @@ export default {
     {
       name: "@frontity/twentytwenty-theme",
       state: {
+        fills: {
+          example: {
+            "fill 1": {
+              slot: "slot 1",
+              library: "example.ExampleFill",
+            },
+          },
+        },
         theme: {
           menu: [
             ["Home", "/"],
@@ -45,6 +57,13 @@ export default {
            * Values can be "us-ascii" | "latin" | "all"
            */
           fontSets: "us-ascii",
+        },
+      },
+      libraries: {
+        fills: {
+          example: {
+            ExampleFill,
+          },
         },
       },
     },

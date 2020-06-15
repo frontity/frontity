@@ -1,4 +1,4 @@
-import { connect, decode } from "frontity";
+import { connect, decode, Slot } from "frontity";
 import React, { Fragment, useEffect } from "react";
 import Article from "../post/post-item";
 import ArchiveHeader from "./archive-header";
@@ -34,6 +34,8 @@ const Archive = ({ state, showExcerpt, showMedia }) => {
           <b>{decode(state.source.author[data.id].name)}</b>
         </ArchiveHeader>
       )}
+
+      <Slot name="slot 1" />
 
       {/* Iterate over the items of the list. */}
       {data.items.map(({ type, id }, index) => {
