@@ -2,4 +2,4 @@
 "@frontity/hooks": patch
 ---
 
-Fixes a bug where archive is not requested if loading post type from SSR
+Fixes a bug on the `usePostTypeInfiniteScroll` where the archive is not requested if we are loading the post type from SSR.
