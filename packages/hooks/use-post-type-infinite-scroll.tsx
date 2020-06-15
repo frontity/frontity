@@ -252,7 +252,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
 
     const data = archive ? state.source.get(archive) : null;
 
-    if (data?.isArchive && !data.isReady && !data.isFetching) {
+    if (!data.isReady && !data.isFetching) {
       actions.source.fetch(data.link);
     }
   }, [options.active]);
