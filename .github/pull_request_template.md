@@ -45,6 +45,7 @@ merge of your pull request!
 - [ ] Unit tests
 - [ ] End to end tests
 - [ ] TypeScript tests
+- [ ] Update package README.md
 - [ ] Update starter themes
 - [ ] Update other packages
 - [ ] Link to PR in [Documentation](https://github.com/frontity/gitbook-docs/)
