@@ -2,7 +2,8 @@
 
 [![Version](https://img.shields.io/npm/v/@frontity/html2react.svg)](https://www.npmjs.com/package/@frontity/html2react) [![npm](https://img.shields.io/npm/dw/@frontity/html2react)](https://www.npmjs.com/package/@frontity/html2react) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-HTML to React converter for Frontity
+HTML to React converter for Frontity.
+
 Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/frontity-html2react)
 
 ## Table of contents
