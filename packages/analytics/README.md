@@ -32,7 +32,7 @@ npm i @frontity/analytics
 
 ## Usage
 
-Any Analytics Frontity package should extend from this package to assure the same _interface_ (API contract)
+Any Analytics Frontity package should extend from this package to ensure the same _interface_ (API contract)
 
 ```ts
 ...
