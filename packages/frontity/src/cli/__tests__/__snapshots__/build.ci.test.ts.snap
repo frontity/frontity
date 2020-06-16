@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`build should fail if an invalid target is passed 1`] = `
+Array [
+  Array [
+    [Error: The target specified is invalid: "not-valid-target". Use either "module", "es5" or "both".],
+  ],
+]
+`;
+
+exports[`build should get values from ENV variables 1`] = `
+Array [
+  Array [
+    Object {
+      "development": true,
+      "publicPath": "/public/path",
+      "target": "es5",
+    },
+  ],
+]
+`;
+
+exports[`build should ignore ENV variables for passed arguments 1`] = `
+Array [
+  Array [
+    Object {
+      "development": false,
+      "publicPath": "/static",
+      "target": "module",
+    },
+  ],
+]
+`;
+
+exports[`build should receive default values 1`] = `
+Array [
+  Array [
+    Object {
+      "development": false,
+      "publicPath": "/static/",
+      "target": "both",
+    },
+  ],
+]
+`;

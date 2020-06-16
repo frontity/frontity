@@ -1,11 +1,11 @@
-import createPackage from "../cli/create-package";
+import createPackage from "../create-package";
 import inquirer from "inquirer";
-import * as utils from "../utils";
-import * as createCmd from "../commands/create-package";
-import { EventPromised } from "../utils/eventPromised";
+import * as utils from "../../utils";
+import * as createCmd from "../../commands/create-package";
+import { EventPromised } from "../../utils/eventPromised";
 
 jest.mock("inquirer");
-jest.mock("../commands/create-package");
+jest.mock("../../commands/create-package");
 
 const mockedInquirer = inquirer as jest.Mocked<typeof inquirer>;
 const mockedUtils = utils as any;
