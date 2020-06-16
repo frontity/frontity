@@ -2,9 +2,9 @@
 
 [![Version](https://img.shields.io/npm/v/@frontity/head-tags.svg)](https://www.npmjs.com/package/@frontity/head-tags) [![npm](https://img.shields.io/npm/dw/@frontity/head-tags)](https://www.npmjs.com/package/@frontity/head-tags) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-This package is designed to get automatically all the data that the [REST API Head Tags plugin](https://wordpress.org/plugins/rest-api-head-tags/) exposes in the REST API, depending on the URL. 
+This package is designed to automatically get all the data that the [REST API Head Tags plugin](https://wordpress.org/plugins/rest-api-head-tags/) exposes in the REST API, depending on the URL. 
 
-This package doesn't make sense without the mentioned plugin, so before installing the package you have to install the plugin in your WordPress backend.
+This package needs to be used together with the Head Tags WordPress plugin, so before installing this package you have to install the Head Tags plugin in your WordPress backend.
 
 Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/frontity-head-tags)
 
