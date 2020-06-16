@@ -1,8 +1,11 @@
-# `babel-plugin-frontity`
+# `@frontity/wp-source`
 
-[![Version](https://img.shields.io/npm/v/babel-plugin-frontity.svg)](https://www.npmjs.com/package/babel-plugin-frontity) [![npm](https://img.shields.io/npm/dw/babel-plugin-frontity)](https://www.npmjs.com/package/babel-plugin-frontity) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@frontity/wp-source.svg)](https://www.npmjs.com/package/@frontity/wp-source) [![npm](https://img.shields.io/npm/dw/@frontity/wp-source)](https://www.npmjs.com/package/@frontity/wp-source) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-Babel Plugin for Frontity. It contains some custom configuration for [Babel](https://babeljs.io/).
+Source package of Frontity for self-hosted WordPress and WordPress.com sites.  
+It provides methods and structures tha can be used to access the data got from the REST API from your React components.
+
+Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/wordpress-source)
 
 ## Table of contents
 
@@ -20,22 +23,51 @@ Babel Plugin for Frontity. It contains some custom configuration for [Babel](htt
 
 ## Install
 
-This package is not meant to be installed individually. 
+```sh
+npm i @frontity/wp-source
+```
 
 ## Usage
 
-This package is [used internally](https://www.npmjs.com/package/babel-plugin-frontity) by [`@frontity/core`](https://github.com/frontity/frontity/tree/dev/packages/core) to fix things such as source maps issues with emotion
+Once installed it should be included and configured in your `frontity.settings.js`
+
+```jsx
+module.exports = {
+  packages: [
+    "@frontity/mars-theme",
+    "@frontity/tiny-router",
+    {
+      name: "@frontity/wp-source",
+      state: {
+        source: {
+          api: "https://site.com/wp-json"
+        }
+      }  
+    }
+  ]
+}
+```
+
+Some interesting methods defined in this package (and available in your React components if you apply [`connect`](https://docs.frontity.org/api-reference-1/frontity#connect) on them) are:
+
+- [`source.fetch`](https://docs.frontity.org/api-reference-1/wordpress-source#source-fetch)
+- [`source.get`](https://docs.frontity.org/api-reference-1/wordpress-source#source-get)
+- [`source.api.get`](https://docs.frontity.org/api-reference-1/wordpress-source#api-get-endpoint-params-api-iswpcom)
+- [`source.api.populate`](https://docs.frontity.org/api-reference-1/wordpress-source#populate-response-state-subdirectory-force)
+
+Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/wordpress-source)
+
   
 
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/babel-plugin-frontit
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/wp-source
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/babel-plugin-frontity/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/wp-source/CHANGELOG.md)
 
 ***
 
