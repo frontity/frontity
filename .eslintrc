@@ -32,6 +32,7 @@
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
+      "plugins": ["eslint-plugin-tsdoc"],
       "extends": [
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
@@ -39,7 +40,8 @@
       "rules": {
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "tsdoc/syntax": "error"
       }
     }
   ]
