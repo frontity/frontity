@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dev gets the correct default values when it receives an empty object 1`] = `
+Array [
+  Array [
+    Object {
+      "isHttps": false,
+      "mode": "development",
+      "openBrowser": true,
+      "port": 3000,
+      "publicPath": "/static/",
+      "target": "module",
+    },
+  ],
+]
+`;

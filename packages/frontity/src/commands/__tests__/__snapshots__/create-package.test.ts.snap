@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-package goes through all steps 1`] = `
+Array [
+  Array [
+    "packages/src",
+  ],
+]
+`;
+
+exports[`create-package goes through all steps 2`] = `
+Array [
+  Array [
+    "my-package",
+    "myPackage",
+    "/User/Frontity/Code/my-frontity-project",
+    "./packages",
+  ],
+]
+`;
+
+exports[`create-package goes through all steps 3`] = `
+Array [
+  Array [
+    "my-package",
+    "myPackage",
+    "/User/Frontity/Code/my-frontity-project",
+    "./packages",
+  ],
+]
+`;
+
+exports[`create-package goes through all steps 4`] = `
+Array [
+  Array [
+    "/User/Frontity/Code/my-frontity-project",
+    "./packages",
+  ],
+]
+`;
+
+exports[`create-package should revert changes if something fail and files have been created 1`] = `
+Array [
+  Array [
+    true,
+    "./packages",
+  ],
+]
+`;
