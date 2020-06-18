@@ -1,5 +1,22 @@
 import * as tsNode from "ts-node";
 
+/**
+ * This file gets transpiled to JS anyway, but if the users's frontity.settings.(js|ts)
+ * is an ES Module, we cannot require an ES Module from a commonjs module!
+ *
+ * This is why we use ts-node here as well as in the `dev` script. It's ONLY
+ * because we want the user to be able to use ES Modules syntax in the
+ * frontity.settings.(js|ts) file like:
+ *
+ * ```
+ * export default {
+ *   name: 'my-theme',
+ *   state: {},
+ *   packages: {},
+ * }
+ * ```
+ *
+ */
 tsNode.register({
   transpileOnly: true,
   compilerOptions: {
