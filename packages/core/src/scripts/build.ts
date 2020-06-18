@@ -1,3 +1,29 @@
+import * as tsNode from "ts-node";
+
+tsNode.register({
+  transpileOnly: true,
+  compilerOptions: {
+    // Target latest version of ECMAScript.
+    target: "es2017",
+    // Search under node_modules for non-relative imports.
+    moduleResolution: "node",
+    // commonjs modules.
+    module: "commonjs",
+    // Allow default imports from modules with no default export.
+    allowSyntheticDefaultImports: true,
+    // Don't emit; allow Babel to transform files.
+    noEmit: true,
+    // Import non-ES modules as default imports.
+    esModuleInterop: true,
+    // Resolve JSON files.
+    resolveJsonModule: true,
+    // Support for JSX.
+    jsx: "react",
+    // Transpile JS as well.
+    allowJs: true,
+  },
+});
+
 import "./utils/envs";
 import { join } from "path";
 import { remove } from "fs-extra";
