@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/npm/v/@frontity/tiny-router.svg)](https://www.npmjs.com/package/@frontity/tiny-router) [![npm](https://img.shields.io/npm/dw/@frontity/tiny-router)](https://www.npmjs.com/package/@frontity/tiny-router) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
 This package is used to manage routes in a Frontity project.
-It's an implementación of the [_router interface_](https://github.com/frontity/frontity/tree/dev/packages/router)
+It's an implementation of the [_router interface_](https://github.com/frontity/frontity/tree/dev/packages/router)
 
 Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/router)
 
