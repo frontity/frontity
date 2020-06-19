@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.1.6
+
+### Patch Changes
+
+- [`b6ada1cc`](https://github.com/frontity/frontity/commit/b6ada1cc7075d32a9ef82d525e251e1554baaba3) [#465](https://github.com/frontity/frontity/pull/465) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md with more detailed info of the package.
+
 ## [1.1.5](https://github.com/frontity/frontity/compare/@frontity/file-settings@1.1.4...@frontity/file-settings@1.1.5) (2019-11-04)
 
 **Note:** Version bump only for package @frontity/file-settings
