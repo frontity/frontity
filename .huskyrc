@@ -1,5 +1,0 @@
-{
-  "hooks": {
-    "pre-commit": "node lint-staged.js"
-  }
-}
