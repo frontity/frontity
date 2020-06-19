@@ -1,4 +1,4 @@
-import { isPackageNameValid, fetchPackageVersion } from "../utils";
+import { isPackageNameValid, fetchPackageVersion } from "../";
 import * as fetch from "node-fetch";
 
 describe("isPackageNameValid", () => {

@@ -109,6 +109,10 @@ const settings: Settings = [
     name: "slot-and-fill",
     packages: ["e2e-slot-and-fill"],
   },
+  {
+    name: "analytics",
+    packages: ["e2e-analytics", "@frontity/tiny-router", "@frontity/analytics"],
+  },
 ];
 
 export default settings;
