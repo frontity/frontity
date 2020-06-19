@@ -1,10 +1,12 @@
 #! /usr/bin/env node
 
 import program from "commander";
-import { dev, build, serve } from "../commands";
 
 import { default as create } from "./create";
 import { default as createPackage } from "./create-package";
+import { default as dev } from "./dev";
+import { default as build } from "./build";
+import { default as serve } from "./serve";
 import { default as subscribe } from "./subscribe";
 import { default as unknown } from "./unknown";
 import { default as info } from "./info";
@@ -62,7 +64,7 @@ program
   .option("-d, --development", "Builds the project for development.")
   .option(
     "--target <target>",
-    'create bundles with "es5" or "module". Default target is "module".'
+    'create bundles with "es5", "module" or "both". Default target is "both".'
   )
   .option(
     "--publicPath <path>",

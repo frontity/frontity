@@ -47,7 +47,7 @@ merge of your pull request!
 - [ ] TypeScript tests
 - [ ] Update starter themes
 - [ ] Update other packages
-- [ ] Link to PR in [Documentation](https://github.com/frontity/gitbook-docs/)
+- [ ] Link to PR in [Documentation](https://github.com/frontity/gitbook-docs/wiki/Code-Releases)
 - [ ] Community discussions
 - [ ] Changeset (with link to its [Feature Discussion](https://community.frontity.org/c/33) if it exists)
 

@@ -1,8 +1,11 @@
-# `babel-plugin-frontity`
+# `@frontity/router`
 
-[![Version](https://img.shields.io/npm/v/babel-plugin-frontity.svg)](https://www.npmjs.com/package/babel-plugin-frontity) [![npm](https://img.shields.io/npm/dw/babel-plugin-frontity)](https://www.npmjs.com/package/babel-plugin-frontity) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@frontity/router.svg)](https://www.npmjs.com/package/@frontity/router) [![npm](https://img.shields.io/npm/dw/@frontity/router)](https://www.npmjs.com/package/@frontity/router) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-Babel Plugin for Frontity. It contains some custom configuration for [Babel](https://babeljs.io/).
+This package defines the common [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html) (types) to build router packages for Frontity
+
+Some packages that [implement this interface](https://www.npmjs.com/browse/depended/@frontity/router) are:
+- [`@frontity/tiny-router`](https://www.npmjs.com/package/@frontity/tiny-router)
 
 ## Table of contents
 
@@ -20,22 +23,34 @@ Babel Plugin for Frontity. It contains some custom configuration for [Babel](htt
 
 ## Install
 
-This package is not meant to be installed individually. 
+```sh
+npm i @frontity/router
+```
 
 ## Usage
 
-This package is [used internally](https://www.npmjs.com/package/babel-plugin-frontity) by [`@frontity/core`](https://github.com/frontity/frontity/tree/dev/packages/core) to fix things such as source maps issues with emotion
-  
+Any router Frontity package should extend from this package to assure the same _interface_ (API contract)
+
+```ts
+import Router from "@frontity/router/types";
+...
+
+interface TinyRouter extends Router {
+  ...
+}
+
+export default TinyRouter;
+```
 
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/babel-plugin-frontit
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/router
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/babel-plugin-frontity/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/router/CHANGELOG.md)
 
 ***
 

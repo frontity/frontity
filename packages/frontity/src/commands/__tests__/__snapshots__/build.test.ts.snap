@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`build gets the correct default values when it receives an empty object 1`] = `
+Array [
+  Array [
+    Object {
+      "mode": "production",
+      "publicPath": "/static/",
+      "target": "both",
+    },
+  ],
+]
+`;
