@@ -1,6 +1,11 @@
 import { connect, warn } from "frontity";
 import { Package } from "frontity/types";
-import React, { isValidElement, ReactNodeArray, ReactElement } from "react";
+import React, {
+  isValidElement,
+  ReactNodeArray,
+  ReactElement,
+  createElement,
+} from "react";
 
 interface SwitchChild {
   when?: boolean;
@@ -31,7 +36,10 @@ const Switch: React.FC<Package> | null = ({ children }) => {
   ) as ReactElement<SwitchChild>;
 
   // Render filteredComponents
-  if (filteredComponent) return <>{filteredComponent}</>;
+  if (filteredComponent) {
+    const { when, ...props } = filteredComponent.props;
+    return createElement(filteredComponent.type, { ...props });
+  }
 
   // render last component if it's diffult component (without when props);
   if (lastComponentIsDefault) return <>{lastComponent}</>;
