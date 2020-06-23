@@ -1,6 +1,10 @@
 import { connect, warn } from "frontity";
 import { Package } from "frontity/types";
-import React, { isValidElement, ReactNodeArray } from "react";
+import React, { isValidElement, ReactNodeArray, ReactElement } from "react";
+
+interface SwitchChild {
+  when?: boolean;
+}
 
 const Switch: React.FC<Package> | null = ({ children }) => {
   const components: ReactNodeArray = React.Children.toArray(children);
@@ -22,8 +26,9 @@ const Switch: React.FC<Package> | null = ({ children }) => {
 
   // Filter components by the value of the 'when' props or path
   const filteredComponent = components.find(
-    (component) => isValidElement(component) && component.props.when
-  );
+    (component) =>
+      isValidElement<SwitchChild>(component) && component.props.when
+  ) as ReactElement<SwitchChild>;
 
   // Render filteredComponents
   if (filteredComponent) return <>{filteredComponent}</>;
