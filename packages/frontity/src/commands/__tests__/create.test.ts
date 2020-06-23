@@ -1,7 +1,7 @@
-import create from "../commands/create";
-import * as steps from "../steps";
+import create from "../create";
+import * as steps from "../../steps";
 
-jest.mock("../steps");
+jest.mock("../../steps");
 
 const mockedSteps = steps as jest.Mocked<typeof steps>;
 
@@ -36,7 +36,7 @@ describe("create", () => {
 
   test("works correctly when `options.typescript` is false", async () => {
     // Restore the original implementation
-    const { normalizeOptions } = jest.requireActual("../steps");
+    const { normalizeOptions } = jest.requireActual("../../steps");
     mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
 
     const options = {
@@ -57,7 +57,7 @@ describe("create", () => {
 
   test("works correctly when `options.typescript` is true", async () => {
     // Restore the original implementation
-    const { normalizeOptions } = jest.requireActual("../steps");
+    const { normalizeOptions } = jest.requireActual("../../steps");
     mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
 
     const options = {
@@ -176,7 +176,7 @@ describe("create", () => {
     };
 
     // Restore the original implementation
-    const { normalizeOptions } = jest.requireActual("../steps");
+    const { normalizeOptions } = jest.requireActual("../../steps");
     mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
 
     mockedSteps.ensureProjectDir.mockResolvedValueOnce(false);
