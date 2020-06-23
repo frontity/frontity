@@ -15,16 +15,14 @@ const getState = (): State<ComscoreAnalyticsPkg> => ({
     pageviews: { comscoreAnalytics: true },
     events: {},
   },
-  comscoreAnalytics: {
-    trackingIds: [],
-  },
+  comscoreAnalytics: {},
 });
 
-describe("Comscore Analytics", () => {
-  test("should send if tracking ids are passed", () => {
+describe("Comscore Analytics Component", () => {
+  test("should render script for all tracking IDs", () => {
     const state = getState();
 
-    state.comscoreAnalytics.trackingIds = ["UA-XXXXXXX-X", "UA-YYYYYYY-Y"];
+    state.comscoreAnalytics.trackingIds = ["111111", "222222"];
 
     const helmetContext = {};
     TestRenderer.create(
@@ -35,9 +33,27 @@ describe("Comscore Analytics", () => {
     const head = (helmetContext as FilledContext).helmet;
 
     expect(head.script.toString()).toMatchSnapshot();
+    expect(head.noscript.toString()).toMatchSnapshot();
   });
 
-  test("should not send if no tracking ids are passed", () => {
+  test("should render a script for a single tracking ID", () => {
+    const state = getState();
+
+    state.comscoreAnalytics.trackingId = "333333";
+
+    const helmetContext = {};
+    TestRenderer.create(
+      <HelmetProvider context={helmetContext}>
+        <ComscoreAnalytics state={state} actions={null} />
+      </HelmetProvider>
+    ).toJSON();
+    const head = (helmetContext as FilledContext).helmet;
+
+    expect(head.script.toString()).toMatchSnapshot();
+    expect(head.noscript.toString()).toMatchSnapshot();
+  });
+
+  test("should not render if no tracking IDs are specified", () => {
     const state = getState();
 
     const helmetContext = {};
@@ -49,5 +65,6 @@ describe("Comscore Analytics", () => {
     const head = (helmetContext as FilledContext).helmet;
 
     expect(head.script.toString()).toMatchSnapshot();
+    expect(head.noscript.toString()).toMatchSnapshot();
   });
 });

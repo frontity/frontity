@@ -27,9 +27,13 @@ interface ComscoreAnalytics extends Package {
      */
     comscoreAnalytics: {
       /**
-       * Array of tracking ids associated to a Comscore client.
+       * Single tracking ID associated to a Comscore client.
        */
-      trackingIds: string[];
+      trackingId?: string;
+      /**
+       * Array of tracking IDs associated to a Comscore client.
+       */
+      trackingIds?: string[];
     };
     analytics: {
       pageviews: {

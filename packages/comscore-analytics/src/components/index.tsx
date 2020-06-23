@@ -13,9 +13,13 @@ const ComscoreHead: React.FC<{ id?: string }> = ({ id }) => (
 );
 
 export const Root: React.FC<Connect<ComscoreAnalytics>> = ({ state }) => {
+  // Get Tracking ids from state.
+  const { trackingIds, trackingId } = state.comscoreAnalytics;
+  const ids = trackingIds || (trackingId && [trackingId]) || [];
+
   return (
     <>
-      {state.comscoreAnalytics.trackingIds.map((id) => (
+      {ids.map((id) => (
         <ComscoreHead id={id} key={id} />
       ))}
     </>

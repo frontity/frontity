@@ -12,14 +12,16 @@ const comscoreAnalytics: ComscoreAnalytics = {
     ...analytics.actions,
     comscoreAnalytics: {
       pageview: ({ state }) => () => {
-        const { trackingIds } = state.comscoreAnalytics;
+        // Get Tracking ids from state.
+        const { trackingIds, trackingId } = state.comscoreAnalytics;
+        const ids = trackingIds || (trackingId && [trackingId]) || [];
 
-        if (trackingIds.length === 0)
+        if (ids.length === 0)
           warn(
-            "Trying to send pageviews to Comscore but `state.comscoreAnalytics.trackingIds` is empty."
+            "Trying to send an event to Comscore but neither `trackingId` nor `trackingIds` are specified inside `state.comscoreAnalytics`."
           );
 
-        trackingIds.forEach((id) => {
+        ids.forEach((id) => {
           if (window.COMSCORE) window.COMSCORE.beacon({ c1: "2", c2: id });
           else {
             window._comscore = window._comscore || [];
@@ -36,9 +38,7 @@ const comscoreAnalytics: ComscoreAnalytics = {
         comscoreAnalytics: true,
       },
     },
-    comscoreAnalytics: {
-      trackingIds: [],
-    },
+    comscoreAnalytics: {},
   },
 };
 
