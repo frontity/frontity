@@ -1,6 +1,6 @@
 {
   "name": "@frontity/types",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Types for the different Frontity APIs",
   "main": "src/index.ts",
   "keywords": [
