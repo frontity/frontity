@@ -1,5 +1,5 @@
 ---
-"@frontity/analytics": major
+"@frontity/analytics": minor
 ---
 
 Release the first stable version of @frontity/analytics library ([Feature Discussion](https://community.frontity.org/t/the-analytics-library/1103)).
