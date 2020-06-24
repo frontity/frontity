@@ -12,17 +12,17 @@ import GoogleTagManagerPkg from "../../../types";
 
 const getState = (): State<GoogleTagManagerPkg> => ({
   analytics: {
-    pageviews: { googleTagManager: true },
+    pageviews: { googleTagManagerAnalytics: true },
     events: {},
   },
-  googleTagManager: {},
+  googleTagManagerAnalytics: {},
 });
 
 describe("GoogleTagManager", () => {
   test("works with a single container id", () => {
     const state = getState();
 
-    state.googleTagManager.containerId = "GTM-XXXXXXX";
+    state.googleTagManagerAnalytics.containerId = "GTM-XXXXXXX";
 
     const helmetContext = {};
     const rendered = TestRenderer.create(
@@ -39,7 +39,10 @@ describe("GoogleTagManager", () => {
   test("works with multiple container ids", () => {
     const state = getState();
 
-    state.googleTagManager.containerIds = ["GTM-XXXXXXX", "GTM-YYYYYYY"];
+    state.googleTagManagerAnalytics.containerIds = [
+      "GTM-XXXXXXX",
+      "GTM-YYYYYYY",
+    ];
 
     const helmetContext = {};
     const rendered = TestRenderer.create(

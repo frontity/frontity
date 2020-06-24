@@ -2,7 +2,7 @@
 import React from "react";
 import { Head, connect, css } from "frontity";
 import { Connect } from "frontity/types";
-import GoogleTagManager from "../../types";
+import GoogleTagManagerAnalytics from "../../types";
 
 const GtmCode: React.FC<{ containerId: string }> = ({ containerId }) => (
   <>
@@ -29,8 +29,10 @@ const GtmCode: React.FC<{ containerId: string }> = ({ containerId }) => (
   </>
 );
 
-export const Root: React.FC<Connect<GoogleTagManager>> = ({ state }) => {
-  const { containerId, containerIds } = state.googleTagManager;
+export const Root: React.FC<Connect<GoogleTagManagerAnalytics>> = ({
+  state,
+}) => {
+  const { containerId, containerIds } = state.googleTagManagerAnalytics;
   const ids = containerIds || (containerId && [containerId]) || [];
   return (
     <>
