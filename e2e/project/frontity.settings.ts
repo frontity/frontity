@@ -77,9 +77,9 @@ const settings: Settings = [
       "e2e-analytics",
       "@frontity/tiny-router",
       {
-        name: "@frontity/google-tag-manager",
+        name: "@frontity/google-tag-manager-analytics",
         state: {
-          googleTagManager: {
+          googleTagManagerAnalytics: {
             containerId: "GTM-XXXXXX-X",
           },
         },
