@@ -5,7 +5,7 @@ on: [pull_request]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.author_association == 'OWNER' }}
+    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
 
     steps:
       - name: Checkout
