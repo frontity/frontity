@@ -1,5 +1,5 @@
 {
-  "name": "@frontity/google-tag-manager",
+  "name": "@frontity/google-tag-manager-analytics",
   "version": "0.2.0",
   "description": "Analytics package to use Google Tag Manager with Frontity",
   "homepage": "https://github.com/frontity/frontity",

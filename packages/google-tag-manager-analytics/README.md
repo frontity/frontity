@@ -1,6 +1,6 @@
-# `@frontity/google-tag-manager`
+# `@frontity/google-tag-manager-analytics`
 
-[![Version](https://img.shields.io/npm/v/@frontity/google-tag-manager.svg)](https://www.npmjs.com/package/@frontity/google-tag-manager) [![npm](https://img.shields.io/npm/dw/@frontity/google-tag-manager)](https://www.npmjs.com/package/@frontity/google-tag-manager) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@frontity/google-tag-manager-analytics.svg)](https://www.npmjs.com/package/@frontity/google-tag-manager-analytics) [![npm](https://img.shields.io/npm/dw/@frontity/google-tag-manager-analytics)](https://www.npmjs.com/package/@frontity/google-tag-manager-analytics) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
 Analytics package to use Google Tag Manager with Frontity
 
@@ -8,11 +8,10 @@ Analytics package to use Google Tag Manager with Frontity
 >
 > Please bear in mind that the current version of this package is a beta version. This means that it hasn't as yet been fully tested and that it's documentation is not yet complete. In addition, its implementation may change with the final release.
 
-
 ## Install
 
 ```sh
-npm i @frontity/google-tag-manager
+npm i @frontity/google-tag-manager-analytics
 ```
 
 ## Usage
@@ -20,21 +19,21 @@ npm i @frontity/google-tag-manager
 Once is installed the Container ID should be added in the `frontity.settings.js` under the package `state`
 
 **`frontity.settings.js`**
+
 ```js
 export default {
   packages: [
     {
-      name: "@frontity/google-tag-manager",
+      name: "@frontity/google-tag-manager-analytics",
       state: {
         googleTagManager: {
-          containerId: 'GTM-BCDFGHJ'
+          containerId: "GTM-BCDFGHJ",
         },
       },
     },
   ],
 };
 ```
-
 
 ## Feature Discussions
 
@@ -44,9 +43,9 @@ These are the ones related to this package: https://community.frontity.org/tags/
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/google-tag-manager/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/google-tag-manager-analytics/CHANGELOG.md)
 
-***
+---
 
 ### » Frontity Channels 🌎
 
@@ -68,4 +67,4 @@ Got questions or feedback about Frontity? We'd love to hear from you. Use our [c
 
 Frontity also welcomes contributions. There are many ways to support the project! If you don't know where to start, this guide might help: [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute)
 
-If you're eager to start contributing to the code, maybe you'd like to open a pull request to address one of our [*good first issues*](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+If you're eager to start contributing to the code, maybe you'd like to open a pull request to address one of our [_good first issues_](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
