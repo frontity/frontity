@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.4.1
+
+### Patch Changes
+
+- [`ee9f2616`](https://github.com/frontity/frontity/commit/ee9f26165e1f965d3234b4cf9588966e3ab36ec7) [#478](https://github.com/frontity/frontity/pull/478) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md package created
+
 ## 1.4.0
 
 ### Minor Changes

@@ -1,5 +1,14 @@
 # create-frontity
 
+## 1.0.2
+
+### Patch Changes
+
+- [`84040af2`](https://github.com/frontity/frontity/commit/84040af261eea5284663983164de17f67ca30887) [#468](https://github.com/frontity/frontity/pull/468) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md with more detailed info of the package.
+
+- Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b)]:
+  - frontity@1.9.0
+
 ## 1.0.1
 
 ### Patch Changes

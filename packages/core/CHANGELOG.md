@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.7.1
+
+### Patch Changes
+
+- [`2c9ddab1`](https://github.com/frontity/frontity/commit/2c9ddab1f8962c1860fe206f77d8872808c2c3ef) [#463](https://github.com/frontity/frontity/pull/463) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md with full info of the package.
+
+* [`aade774f`](https://github.com/frontity/frontity/commit/aade774fba18e8790153e49365790a1c7826a9a5) [#467](https://github.com/frontity/frontity/pull/467) Thanks [@luisherranz](https://github.com/luisherranz)! - Do not allow the new `state.frontity.debug` flag to be `true` in production.
+
+* Updated dependencies [[`ba11bca8`](https://github.com/frontity/frontity/commit/ba11bca879d86493181b35e358ded8c583496641), [`1440cfe7`](https://github.com/frontity/frontity/commit/1440cfe77f1a9154562dff23a97185c77bebb59c), [`b6ada1cc`](https://github.com/frontity/frontity/commit/b6ada1cc7075d32a9ef82d525e251e1554baaba3)]:
+  - babel-plugin-frontity@1.0.2
+  - @frontity/connect@1.1.2
+  - @frontity/file-settings@1.1.6
+
 ## 1.7.0
 
 ### Minor Changes
