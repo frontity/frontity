@@ -11,7 +11,7 @@ declare global {
 }
 
 /**
- * `@frontity/google-tag-manager` package.
+ * Analytics package to use Google Tag Manager with Frontity.
  */
 interface GoogleTagManagerAnalytics extends Analytics {
   roots: Analytics["roots"] & {
@@ -26,6 +26,7 @@ interface GoogleTagManagerAnalytics extends Analytics {
        * Container ID associated to a Google Tag Manager account.
        */
       containerId?: string;
+
       /**
        * List of container IDs associated to a Google Tag Manager account.
        */
@@ -62,6 +63,7 @@ interface GoogleTagManagerAnalytics extends Analytics {
        * @param pageview - Object of type {@link Pageview}.
        */
       pageview: Action<GoogleTagManagerAnalytics, Pageview>;
+
       /**
        * Send an event to all container IDs defined in
        * either `state.googleTagManagerAnalytics.containerId` or
