@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.1.2
+
+### Patch Changes
+
+- [`1440cfe7`](https://github.com/frontity/frontity/commit/1440cfe77f1a9154562dff23a97185c77bebb59c) [#482](https://github.com/frontity/frontity/pull/482) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md created for this package.
+
+- Updated dependencies [[`fb67272b`](https://github.com/frontity/frontity/commit/fb67272bd8a3dfff00868af394484ec09f1e0785)]:
+  - @frontity/error@0.1.1
+
 ## 1.1.1
 
 ### Patch Changes

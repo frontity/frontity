@@ -1,5 +1,16 @@
 # @frontity/head-tags
 
+## 1.0.4
+
+### Patch Changes
+
+- [`d0827c97`](https://github.com/frontity/frontity/commit/d0827c978f61ef512c0ef3ad797763983f151b75) [#487](https://github.com/frontity/frontity/pull/487) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md created.
+
+- Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b), [`3f61f711`](https://github.com/frontity/frontity/commit/3f61f71197d33b478427d1b74882c31258861e92), [`868c120f`](https://github.com/frontity/frontity/commit/868c120f2ede7a2f9013f6e659e1b0a1bf2785fe)]:
+  - frontity@1.9.0
+  - @frontity/source@1.2.2
+  - @frontity/router@1.1.1
+
 ## 1.0.3
 
 ### Patch Changes

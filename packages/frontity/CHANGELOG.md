@@ -1,5 +1,19 @@
 # Change Log
 
+## 1.9.0
+
+### Minor Changes
+
+- [`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8) [#458](https://github.com/frontity/frontity/pull/458) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Allow `dev`, `build` and `serve` commands to be configured using environment variables ([feature discussion](https://community.frontity.org/t/change-publicpath/1461)).
+
+### Patch Changes
+
+- [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b) [#462](https://github.com/frontity/frontity/pull/462) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md with full info of the package
+
+- Updated dependencies [[`fb67272b`](https://github.com/frontity/frontity/commit/fb67272bd8a3dfff00868af394484ec09f1e0785), [`ee9f2616`](https://github.com/frontity/frontity/commit/ee9f26165e1f965d3234b4cf9588966e3ab36ec7)]:
+  - @frontity/error@0.1.1
+  - @frontity/types@1.4.1
+
 ## 1.8.0
 
 ### Minor Changes

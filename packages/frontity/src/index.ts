@@ -27,3 +27,4 @@ export const decode =
 export { URL } from "url";
 
 export { default as useFills } from "./utils/slot-and-fill/use-fills";
+export { default as Slot } from "./utils/slot-and-fill/slot";

@@ -55,6 +55,8 @@ merge of your pull request!
 Run `npx changeset` to create a changeset.
 More info at https://docs.frontity.org/contributing/code-contribution-guide#what-is-a-changeset -->
 
+<!-- ignore-task-list-start -->
+
 **Unrelated Tasks**
 
 <!-- Remove the "[ ]" from any non related task. -->
@@ -62,3 +64,5 @@ More info at https://docs.frontity.org/contributing/code-contribution-guide#what
 **Additional Comments**
 
 <!-- Feel free to add any additional comments. -->
+
+<!-- ignore-task-list-end -->

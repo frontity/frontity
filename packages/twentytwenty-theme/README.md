@@ -1,11 +1,12 @@
-# `@frontity/tiny-router`
+# `@frontity/twentytwenty-theme`
 
-[![Version](https://img.shields.io/npm/v/@frontity/tiny-router.svg)](https://www.npmjs.com/package/@frontity/tiny-router) [![npm](https://img.shields.io/npm/dw/@frontity/tiny-router)](https://www.npmjs.com/package/@frontity/tiny-router) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@frontity/twentytwenty-theme.svg)](https://www.npmjs.com/package/@frontity/twentytwenty-theme) [![npm](https://img.shields.io/npm/dw/@frontity/twentytwenty-theme)](https://www.npmjs.com/package/@frontity/twentytwenty-theme) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-This package is used to manage routes in a Frontity project.
-It's an implementation of the [_router interface_](https://github.com/frontity/frontity/tree/dev/packages/router)
+The WordPress Twenty Twenty starter theme for Frontity
 
-Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/router)
+Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-twentytwenty-theme)
+
+![](https://raw.githubusercontent.com/frontity/gitbook-docs/master/docs/.gitbook/assets/screenshot-homepage-view-twentytwenty-frontity-theme.png)
 
 ## Table of contents
 
@@ -24,32 +25,57 @@ Full info about this package can be found in the [docs](https://docs.frontity.or
 ## Install
 
 ```sh
-npm i @frontity/tiny-router
+npm i @frontity/twentytwenty-theme
 ```
 
 ## Usage
 
-Once installed it should be included in your `frontity.settings.js`
+Once installed it should be included in your `frontity.settings.js`.
+The theme options can be specified in the `state.theme` property.
+
 
 ```jsx
-module.exports = {
-  packages: [
-    "@frontity/tiny-router"
-  ]
-}
+{
+  name: "@frontity/twentytwenty-theme",
+  state: {
+    theme: {
+      menu: [
+        ["Home", "/"],
+        ["Nature", "/category/nature/"],
+        ["Travel", "/category/travel/"],
+        ["Japan", "/tag/japan/"],
+        ["About Us", "/about-us/"]
+      ],
+      colors: {
+        primary: "#E6324B",
+        headerBg: "#ffffff",
+        footerBg: "#ffffff",
+        bodyBg: "#f5efe0"
+      },
+      showSearchInHeader: true,
+      showAllContentOnArchive: false,
+      featuredMedia: {
+        showOnArchive: true,
+        showOnPost: true
+      },
+      autoPreFetch: "hover",
+      fontSets: "us-ascii"
+    }
+  }
+},
 ```
 
-Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/router)
+Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-twentytwenty-theme)
 
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/tiny-router
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/twentytwenty-theme
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/tiny-router/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/twentytwenty-theme/CHANGELOG.md)
 
 ***
 

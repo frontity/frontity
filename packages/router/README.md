@@ -1,11 +1,11 @@
-# `@frontity/tiny-router`
+# `@frontity/router`
 
-[![Version](https://img.shields.io/npm/v/@frontity/tiny-router.svg)](https://www.npmjs.com/package/@frontity/tiny-router) [![npm](https://img.shields.io/npm/dw/@frontity/tiny-router)](https://www.npmjs.com/package/@frontity/tiny-router) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@frontity/router.svg)](https://www.npmjs.com/package/@frontity/router) [![npm](https://img.shields.io/npm/dw/@frontity/router)](https://www.npmjs.com/package/@frontity/router) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-This package is used to manage routes in a Frontity project.
-It's an implementation of the [_router interface_](https://github.com/frontity/frontity/tree/dev/packages/router)
+This package defines the common [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html) (types) to build router packages for Frontity
 
-Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/router)
+Some packages that [implement this interface](https://www.npmjs.com/browse/depended/@frontity/router) are:
+- [`@frontity/tiny-router`](https://www.npmjs.com/package/@frontity/tiny-router)
 
 ## Table of contents
 
@@ -24,32 +24,33 @@ Full info about this package can be found in the [docs](https://docs.frontity.or
 ## Install
 
 ```sh
-npm i @frontity/tiny-router
+npm i @frontity/router
 ```
 
 ## Usage
 
-Once installed it should be included in your `frontity.settings.js`
+Any router Frontity package should extend from this package to assure the same _interface_ (API contract)
 
-```jsx
-module.exports = {
-  packages: [
-    "@frontity/tiny-router"
-  ]
+```ts
+import Router from "@frontity/router/types";
+...
+
+interface TinyRouter extends Router {
+  ...
 }
-```
 
-Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/router)
+export default TinyRouter;
+```
 
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/tiny-router
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/router
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/tiny-router/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/router/CHANGELOG.md)
 
 ***
 
