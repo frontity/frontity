@@ -15,7 +15,7 @@ declare global {
 }
 
 /**
- * `@frontity/comscore-analytics` package.
+ * Comscore Analytics package for Frontity.
  */
 interface ComscoreAnalytics extends Package {
   roots: Analytics["roots"] & {
@@ -30,6 +30,7 @@ interface ComscoreAnalytics extends Package {
        * Single tracking ID associated to a Comscore client.
        */
       trackingId?: string;
+
       /**
        * Array of tracking IDs associated to a Comscore client.
        */
@@ -63,6 +64,10 @@ interface ComscoreAnalytics extends Package {
     };
   };
 }
+
+/**
+ * Package types used internally in ComscoreAnalytics.
+ */
 export type Packages = ComscoreAnalytics & Analytics;
 
 export default ComscoreAnalytics;
