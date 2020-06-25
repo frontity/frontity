@@ -4,12 +4,6 @@
 
 Analytics package to use Google Analytics with Frontity
 
-> ## Beta version
->
-> Please bear in mind that the current version of this package is a beta version. This means that it hasn't as yet been fully tested and that it's documentation is not yet complete. In addition, its implementation may change with the final release.
-
-
-
 ## Install
 
 ```sh
@@ -21,6 +15,7 @@ npm i @frontity/google-analytics
 Once is installed the GA Tracking ID should be added in the `frontity.settings.js` under the package `state`
 
 **`frontity.settings.js`**
+
 ```js
 export default {
   packages: [
@@ -28,14 +23,13 @@ export default {
       name: "@frontity/google-analytics",
       state: {
         googleAnalytics: {
-          trackingId: 'UA-12345678-9'
+          trackingId: "UA-12345678-9",
         },
       },
     },
   ],
 };
 ```
-
 
 ## Feature Discussions
 
@@ -47,7 +41,7 @@ These are the ones related to this package: https://community.frontity.org/tags/
 
 Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/google-analytics/CHANGELOG.md)
 
-***
+---
 
 ### » Frontity Channels 🌎
 
@@ -69,4 +63,4 @@ Got questions or feedback about Frontity? We'd love to hear from you. Use our [c
 
 Frontity also welcomes contributions. There are many ways to support the project! If you don't know where to start, this guide might help: [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute)
 
-If you're eager to start contributing to the code, maybe you'd like to open a pull request to address one of our [*good first issues*](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+If you're eager to start contributing to the code, maybe you'd like to open a pull request to address one of our [_good first issues_](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
