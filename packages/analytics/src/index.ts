@@ -13,10 +13,8 @@ const analytics: Analytics = {
   },
   actions: {
     analytics: {
-      /**
-       * Get the functions for every analytics package
-       * and run `pageview` for each one.
-       */
+      // Get the functions for every analytics package
+      // and run `pageview` for each one.
       pageview: ({ state, actions }) => (pageview) => {
         Object.entries(state.analytics.pageviews).forEach(
           ([namespace, shouldSend]) => {
@@ -25,10 +23,8 @@ const analytics: Analytics = {
         );
       },
 
-      /**
-       * Get the functions for every analytics package
-       * and run `event` for each one.
-       */
+      // Get the functions for every analytics package
+      // and run `event` for each one.
       event: ({ state, actions }) => (event) => {
         Object.entries(state.analytics.events).forEach(
           ([namespace, shouldSend]) => {
