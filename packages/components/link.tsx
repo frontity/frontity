@@ -3,7 +3,7 @@ import { connect, useConnect } from "frontity";
 import { Package } from "frontity/types";
 
 type LinkType = React.FC<{
-  href?: string;
+  link?: string;
   className?: string;
   onClick?: () => void;
   scroll?: boolean;
@@ -11,7 +11,7 @@ type LinkType = React.FC<{
 
 const Link: LinkType = ({
   className,
-  href,
+  link,
   children,
   onClick,
   scroll = true,
@@ -20,12 +20,12 @@ const Link: LinkType = ({
 
   const onClickHandler = (event: MouseEvent<HTMLAnchorElement>) => {
     // Do nothing if it's an external link
-    if (href.startsWith("http")) return;
+    if (link.startsWith("http")) return;
 
     event.preventDefault();
 
     // Set the router to the new url.
-    actions.router.set(href);
+    actions.router.set(link);
 
     // Scroll the page to the top
     if (scroll) {
@@ -39,7 +39,7 @@ const Link: LinkType = ({
   };
 
   return (
-    <a href={href} onClick={onClickHandler} className={className}>
+    <a href={link} onClick={onClickHandler} className={className}>
       {children}
     </a>
   );
