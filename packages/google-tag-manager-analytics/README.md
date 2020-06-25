@@ -22,7 +22,7 @@ export default {
     {
       name: "@frontity/google-tag-manager-analytics",
       state: {
-        googleTagManager: {
+        googleTagManagerAnalytics: {
           containerId: "GTM-BCDFGHJ",
         },
       },
