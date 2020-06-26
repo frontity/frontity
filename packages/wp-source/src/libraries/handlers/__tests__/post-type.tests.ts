@@ -233,4 +233,29 @@ describe("attachment", () => {
 
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("Every new URL should return a 404 even if it accidentally matches", async () => {
+    store.state.source.data["/undefined/post-1"] = {
+      isFetching: true,
+      isReady: false,
+      link: "/undefined/post-1",
+    };
+
+    api.get = jest.fn((_) =>
+      Promise.resolve(
+        mockResponse([
+          {
+            id: 1,
+            slug: "post-1",
+            type: "post",
+            link: "https://test.frontity.org/post-1/",
+          },
+        ])
+      )
+    );
+
+    await store.actions.source.fetch("/undefined/post-1");
+
+    expect(store.state.source).toMatchSnapshot();
+  });
 });
