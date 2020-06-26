@@ -18,7 +18,7 @@ const comscoreAnalytics: ComscoreAnalytics = {
 
         if (ids.length === 0)
           warn(
-            "Trying to send an event to Comscore but neither `trackingId` nor `trackingIds` are specified inside `state.comscoreAnalytics`."
+            "Trying to send a pageview to Comscore but neither `trackingId` nor `trackingIds` are specified inside `state.comscoreAnalytics`."
           );
 
         ids.forEach((id) => {
