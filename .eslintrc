@@ -93,6 +93,14 @@
         "@typescript-eslint/no-explicit-any": "off",
         "tsdoc/syntax": "error"
       }
+    },
+    {
+      "files": ["**/__tests__/*.{js,ts,jsx,tsx}"],
+      "rules": {
+        "jsdoc/require-jsdoc": 0,
+        "jsdoc/require-description": 0,
+        "tsdoc/syntax": 0
+      }
     }
   ]
 }
