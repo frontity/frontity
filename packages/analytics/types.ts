@@ -1,5 +1,6 @@
 import { Package, Action } from "frontity/types";
 import Source from "@frontity/source/types";
+import Router from "@frontity/router/types";
 
 export type Pageview = {
   page: string;
@@ -20,22 +21,14 @@ interface Analytics extends Package {
       sendPageview: Action<Analytics, Pageview>;
       sendEvent: Action<Analytics, Event>;
     };
-    [key: string]: {
-      sendPageview?: Action<Analytics, Pageview>;
-      sendEvent?: Action<Analytics, Event>;
-    };
   };
   state: {
     analytics: {
       namespaces: string[];
     };
-    router?: {
-      link: string;
-    };
-    source?: {
-      get: Source["state"]["source"]["get"];
-    };
   };
 }
+
+export type Packages = Analytics & Router & Source;
 
 export default Analytics;
