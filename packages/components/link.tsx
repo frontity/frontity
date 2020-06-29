@@ -3,17 +3,19 @@ import { connect, useConnect } from "frontity";
 import { Package } from "frontity/types";
 
 type LinkType = React.FC<{
-  link?: string;
+  link: string;
+  target?: "_self" | "_blank";
   className?: string;
   onClick?: () => void;
   scroll?: boolean;
 }>;
 
 const Link: LinkType = ({
-  className,
   link,
   children,
   onClick,
+  target = "_self",
+  className = "",
   scroll = true,
 }) => {
   const { actions } = useConnect<Package>();
@@ -21,6 +23,9 @@ const Link: LinkType = ({
   const onClickHandler = (event: MouseEvent<HTMLAnchorElement>) => {
     // Do nothing if it's an external link
     if (link.startsWith("http")) return;
+
+    // Do nothing if this is supposed to open in a new tab
+    if (target === "_blank") return;
 
     event.preventDefault();
 
@@ -39,10 +44,15 @@ const Link: LinkType = ({
   };
 
   return (
-    <a href={link} onClick={onClickHandler} className={className}>
+    <a
+      href={link}
+      target={target}
+      onClick={onClickHandler}
+      className={className}
+    >
       {children}
     </a>
   );
 };
 
-export default connect(Link, { injectProps: false });
+export default connect(Link);

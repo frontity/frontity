@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link should add classname if provided 1`] = `
+<a
+  className="custom-classname"
+  href="/"
+  onClick={[Function]}
+  target="_self"
+>
+  This is a link
+</a>
+`;
+
+exports[`Link should render a regular link 1`] = `
+<a
+  className=""
+  href="/"
+  onClick={[Function]}
+  target="_self"
+>
+  This is a link
+</a>
+`;
