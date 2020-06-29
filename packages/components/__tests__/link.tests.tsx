@@ -159,4 +159,63 @@ describe("Link", () => {
     expect(window.scrollTo).not.toHaveBeenCalled();
     expect(store.actions.router.set).not.toHaveBeenCalledWith(linkUrl);
   });
+
+  test("forcing a link to open in a new tab/window works", () => {
+    const linkUrl = "/my-link";
+
+    act(() => {
+      render(
+        <Provider value={store}>
+          <Link link={linkUrl} className="my-link">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.router, "set");
+
+    const anchor = document.querySelector("a.my-link");
+
+    act(() => {
+      // ctrl + click
+      anchor.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, ctrlKey: true })
+      );
+    });
+
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    expect(store.actions.router.set).not.toHaveBeenCalledWith(linkUrl);
+
+    act(() => {
+      // shift + click
+      anchor.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, shiftKey: true })
+      );
+    });
+
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    expect(store.actions.router.set).not.toHaveBeenCalledWith(linkUrl);
+
+    act(() => {
+      // cmd + click
+      anchor.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, metaKey: true })
+      );
+    });
+
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    expect(store.actions.router.set).not.toHaveBeenCalledWith(linkUrl);
+
+    act(() => {
+      // middle mouse button
+      anchor.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, button: 1 })
+      );
+    });
+
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    expect(store.actions.router.set).not.toHaveBeenCalledWith(linkUrl);
+  });
 });

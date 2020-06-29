@@ -33,6 +33,15 @@ const Link: LinkType = ({
     // Do nothing if this is supposed to open in a new tab
     if (target === "_blank") return;
 
+    if (
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.metaKey ||
+      (event.button && event.button === 1)
+    ) {
+      return;
+    }
+
     event.preventDefault();
 
     // Set the router to the new url.
