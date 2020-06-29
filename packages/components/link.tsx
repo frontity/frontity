@@ -1,4 +1,5 @@
 import React, { MouseEvent } from "react";
+import { warn } from "frontity";
 import connect, { useConnect } from "@frontity/connect";
 import { Package } from "frontity/types";
 
@@ -20,6 +21,10 @@ const Link: LinkType = ({
   ...anchorProps
 }) => {
   const { actions } = useConnect<Package>();
+
+  if (!link || typeof link !== "string") {
+    warn("link prop is required and must be a string");
+  }
 
   const onClickHandler = (event: MouseEvent<HTMLAnchorElement>) => {
     // Do nothing if it's an external link
