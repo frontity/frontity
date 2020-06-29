@@ -1,4 +1,4 @@
-import { styled, connect } from "frontity";
+import { styled, connect, Slot } from "frontity";
 import React, { useEffect } from "react";
 import FeaturedMedia from "./featured-media";
 import {
@@ -83,6 +83,7 @@ const Post = ({ state, actions, libraries }) => {
       {post.content && (
         <PostInner size="thin">
           <EntryContent>
+            <Slot name="smart ad"> Im a default</Slot>
             <Html2React html={post.content.rendered} />
           </EntryContent>
           {/* If the post has tags, render it */}

@@ -1,5 +1,10 @@
+import React from "react";
 import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
+
+const TheActualComponent = ({ number }) => {
+  return <div> Im a smart ad {number}</div>;
+};
 
 const twentyTwentyTheme = {
   name: "@frontity/twentytwenty-theme",
@@ -11,6 +16,18 @@ const twentyTwentyTheme = {
     theme: Theme,
   },
   state: {
+    fills: {
+      smartAdsNamespace: {
+        "ad 1": {
+          slot: "smart ad",
+          library: "smartAds.SmartAdComponent",
+          priority: 10,
+          props: {
+            number: 42,
+          },
+        },
+      },
+    },
     /**
      * State is where the packages store their default settings and other
      * relevant state. It is scoped to the `theme` namespace.
@@ -74,6 +91,11 @@ const twentyTwentyTheme = {
     },
   },
   libraries: {
+    fills: {
+      smartAds: {
+        SmartAdComponent: TheActualComponent,
+      },
+    },
     html2react: {
       /**
        * Add a processor to `html2react` so it processes the `<img>` tags
