@@ -121,11 +121,8 @@ export type ConnectOptions = {
 };
 
 declare function connect<Props extends object>(
-  Component: React.ComponentType<Props>
-): React.FunctionComponent<FilterInjectedProps<Props>>;
-declare function connect<Props extends object>(
   Component: React.ComponentType<Props>,
-  options: ConnectOptions
+  options?: ConnectOptions
 ): React.FunctionComponent<FilterInjectedProps<Props>>;
 
 export const Provider: React.ProviderExoticComponent<React.ProviderProps<any>>;
