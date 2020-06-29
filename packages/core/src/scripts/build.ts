@@ -1,3 +1,46 @@
+import * as tsNode from "ts-node";
+
+/**
+ * This file gets transpiled to JS anyway, but if the users's frontity.settings.(js|ts)
+ * is an ES Module, we cannot require an ES Module from a commonjs module!
+ *
+ * This is why we use ts-node here as well as in the `dev` script. It's ONLY
+ * because we want the user to be able to use ES Modules syntax in the
+ * frontity.settings.(js|ts) file like:
+ *
+ * ```
+ * export default {
+ *   name: 'my-theme',
+ *   state: {},
+ *   packages: {},
+ * }
+ * ```
+ *
+ */
+tsNode.register({
+  transpileOnly: true,
+  compilerOptions: {
+    // Target latest version of ECMAScript.
+    target: "es2017",
+    // Search under node_modules for non-relative imports.
+    moduleResolution: "node",
+    // commonjs modules.
+    module: "commonjs",
+    // Allow default imports from modules with no default export.
+    allowSyntheticDefaultImports: true,
+    // Don't emit; allow Babel to transform files.
+    noEmit: true,
+    // Import non-ES modules as default imports.
+    esModuleInterop: true,
+    // Resolve JSON files.
+    resolveJsonModule: true,
+    // Support for JSX.
+    jsx: "react",
+    // Transpile JS as well.
+    allowJs: true,
+  },
+});
+
 import "./utils/envs";
 import { join } from "path";
 import { remove } from "fs-extra";
