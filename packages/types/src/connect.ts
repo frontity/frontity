@@ -11,12 +11,14 @@ export type Connect<Pkg extends Package, Props extends object = {}> = Omit<
 } & Props;
 
 export interface ConnectFunction {
-  <Comp extends FunctionComponent<any>>(comp: Comp): FunctionComponent<
-    FilterInjectedProps<ComponentProps<Comp>>
-  >;
-  <Comp extends ComponentClass<any>>(comp: Comp): ComponentClass<
-    FilterInjectedProps<ComponentProps<Comp>>
-  >;
+  <Comp extends FunctionComponent<any>>(
+    comp: Comp,
+    options?: { injectProps: boolean }
+  ): FunctionComponent<FilterInjectedProps<ComponentProps<Comp>>>;
+  <Comp extends ComponentClass<any>>(
+    comp: Comp,
+    options?: { injectProps: boolean }
+  ): ComponentClass<FilterInjectedProps<ComponentProps<Comp>>>;
 }
 
 export interface CreateStore {
