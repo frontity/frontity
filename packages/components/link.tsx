@@ -1,5 +1,5 @@
 import React, { MouseEvent } from "react";
-import { connect, useConnect } from "frontity";
+import connect, { useConnect } from "@frontity/connect";
 import { Package } from "frontity/types";
 
 type LinkType = React.FC<{
@@ -17,6 +17,7 @@ const Link: LinkType = ({
   target = "_self",
   className = "",
   scroll = true,
+  ...anchorProps
 }) => {
   const { actions } = useConnect<Package>();
 
@@ -49,10 +50,11 @@ const Link: LinkType = ({
       target={target}
       onClick={onClickHandler}
       className={className}
+      {...anchorProps}
     >
       {children}
     </a>
   );
 };
 
-export default connect(Link);
+export default connect(Link, { injectProps: false });
