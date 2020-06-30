@@ -17,7 +17,6 @@ const Link: LinkType = ({
   children,
   onClick,
   target = "_self",
-  className,
   scroll = true,
   "aria-current": ariaCurrent,
   ...anchorProps
@@ -66,7 +65,6 @@ const Link: LinkType = ({
       href={link}
       target={target}
       onClick={onClickHandler}
-      className={className}
       aria-current={ariaCurrent}
       {...anchorProps}
     >
