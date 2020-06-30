@@ -39,7 +39,15 @@ describe("Link", () => {
       </Provider>
     );
 
-    expect(LinkComponent.toJSON()).toMatchSnapshot();
+    expect(LinkComponent.toJSON()).toMatchInlineSnapshot(`
+      <a
+        href="/"
+        onClick={[Function]}
+        target="_self"
+      >
+        This is a link
+      </a>
+    `);
   });
 
   test("should add classname if provided", () => {
@@ -51,7 +59,16 @@ describe("Link", () => {
       </Provider>
     );
 
-    expect(LinkComponent.toJSON()).toMatchSnapshot();
+    expect(LinkComponent.toJSON()).toMatchInlineSnapshot(`
+      <a
+        className="custom-classname"
+        href="/"
+        onClick={[Function]}
+        target="_self"
+      >
+        This is a link
+      </a>
+    `);
   });
 
   test("clicking a link works as expected", () => {

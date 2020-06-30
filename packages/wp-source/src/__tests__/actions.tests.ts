@@ -375,4 +375,26 @@ describe("init", () => {
     expect((data as any).errorStatus).toBeUndefined();
     expect((data as any).errorStatusText).toBeUndefined();
   });
+
+  test("test 1", async () => {
+    await store.actions.source.fetch("/another-post-hello-🙂", {
+      force: true,
+    });
+
+    expect(store.state.source.data).toMatchInlineSnapshot(`
+      Object {
+        "/another-post-hello-🙂/": Object {
+          "id": 1,
+          "isFetching": false,
+          "isPostType": true,
+          "isReady": true,
+          "link": "/another-post-hello-🙂/",
+          "page": 1,
+          "query": Object {},
+          "route": "/another-post-hello-🙂/",
+          "type": "example",
+        },
+      }
+    `);
+  });
 });

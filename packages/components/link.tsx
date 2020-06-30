@@ -9,6 +9,7 @@ type LinkType = React.FC<{
   className?: string;
   onClick?: () => void;
   scroll?: boolean;
+  "aria-current"?: React.AriaAttributes["aria-current"];
 }>;
 
 const Link: LinkType = ({
@@ -16,8 +17,9 @@ const Link: LinkType = ({
   children,
   onClick,
   target = "_self",
-  className = "",
+  className,
   scroll = true,
+  "aria-current": ariaCurrent,
   ...anchorProps
 }) => {
   const { actions } = useConnect<Package>();
@@ -33,6 +35,7 @@ const Link: LinkType = ({
     // Do nothing if this is supposed to open in a new tab
     if (target === "_blank") return;
 
+    // Allow the user to open the link in a new tab
     if (
       event.ctrlKey ||
       event.shiftKey ||
@@ -64,6 +67,7 @@ const Link: LinkType = ({
       target={target}
       onClick={onClickHandler}
       className={className}
+      aria-current={ariaCurrent}
       {...anchorProps}
     >
       {children}
