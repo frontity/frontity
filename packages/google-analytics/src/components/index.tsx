@@ -5,6 +5,22 @@ import { Connect } from "frontity/types";
 import GoogleAnalytics from "../../types";
 import { getTrackerName } from "..";
 
+/**
+ * Root component of the Google Analytics package.
+ *
+ * It renders the Google Analytics tag and set up each tracking ID defined in
+ * the state.
+ *
+ * @remarks
+ * This component is automatically rendered by Frontity and it's not meant to be
+ * imported and used anywhere.
+ *
+ * @example roots.googleAnalytics
+ *
+ * @param props - Injected props by `connect`.
+ *
+ * @returns Root element.
+ */
 export const Root: React.FC<Connect<GoogleAnalytics>> = ({ state }) => {
   // Get Tracking ids from state.
   const { trackingIds, trackingId } = state.googleAnalytics;

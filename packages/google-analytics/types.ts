@@ -3,7 +3,13 @@ import { Action, Package } from "frontity/types";
 import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 
 declare global {
+  /**
+   * Extended with Google Analytics global variables.
+   */
   interface Window {
+    /**
+     * Google Analytics command queue function.
+     */
     ga: Function;
   }
 }
@@ -89,9 +95,19 @@ interface GoogleAnalyticsEvent extends Event {
  * Analytics package to use Google Analytics with Frontity.
  */
 interface GoogleAnalytics extends Package {
+  /**
+   * Root elements exposed by this package.
+   */
   roots: Analytics["roots"] & {
+    /**
+     * Google Analytics root element.
+     */
     googleAnalytics: ReactType;
   };
+
+  /**
+   * The state exposed by this package.
+   */
   state: Analytics["state"] & {
     /**
      * State properties for the Google analytics package.
@@ -108,6 +124,10 @@ interface GoogleAnalytics extends Package {
       trackingIds?: string[];
     };
   };
+
+  /**
+   * The actions exposed by this package.
+   */
   actions: Analytics["actions"] & {
     /**
      * Actions from the Google analytics package.
