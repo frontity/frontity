@@ -44,6 +44,12 @@ type LinkType = React.FC<{
    * Https://www.w3.org/TR/wai-aria-1.1/#aria-current.
    */
   "aria-current"?: React.AriaAttributes["aria-current"];
+
+  /**
+   * Represents any other prop that can be passed to Link.
+   * These props are passed down to the `<a/>` element.
+   */
+  [key: string]: any;
 }>;
 
 // eslint-disable-next-line jsdoc/require-jsdoc
