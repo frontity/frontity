@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`serve gets the correct default values when it receives an empty object 1`] = `
+Array [
+  Array [
+    Object {
+      "isHttps": false,
+      "port": 3000,
+    },
+  ],
+]
+`;

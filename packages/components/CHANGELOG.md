@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.3.3
+
+### Patch Changes
+
+- [`cfa8062d`](https://github.com/frontity/frontity/commit/cfa8062d60ccf46b3e0c5aa5490e4e03f1b693a5) [#480](https://github.com/frontity/frontity/pull/480) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - Removed unneeded dependency.
+
+* [`845de536`](https://github.com/frontity/frontity/commit/845de536d111105dd3f636c3543170a676ac65cc) [#485](https://github.com/frontity/frontity/pull/485) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md created.
+
+* Updated dependencies [[`fc1220b5`](https://github.com/frontity/frontity/commit/fc1220b5eb2ae0af933b76cc9fb1a62b83fc7075), [`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b)]:
+  - @frontity/hooks@2.0.2
+  - frontity@1.9.0
+
 ## 1.3.2
 
 ### Patch Changes
