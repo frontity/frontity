@@ -2,15 +2,82 @@ import { ReactType } from "react";
 import { Action, Package } from "frontity/types";
 import Analytics, { Pageview } from "@frontity/analytics/types";
 
+/**
+ * Comscore's Tag Parameters.
+ */
+interface ComscoreTagParams {
+  /**
+   * Tag Type. Pre-populated with a constant value of `2`.
+   *
+   * @defaultValue 2
+   */
+  c1?: string;
+
+  /**
+   * Unique ID for each client assigned by Comscore.
+   */
+  c2: string;
+
+  /**
+   * Full Page URL.
+   *
+   * Manually populated full page URL, including query string variables.
+   */
+  c4?: string;
+
+  /**
+   * Genre of content.
+   *
+   * Alphanumeric value used for client specific custom classification.
+   */
+  c5?: string;
+
+  /**
+   * Package.
+   *
+   * Alphanumeric value for customized aggregation to reflectsections or site
+   * centric advertising packages.
+   */
+  c6?: string;
+
+  /**
+   * Client Segment ID.
+   *
+   * Alphanumeric value for Publisher’s own segment for the machinethe content
+   * asset is being served to.
+   */
+  c15?: string;
+}
 declare global {
+  /**
+   * Extended with Comscore global variables.
+   */
   interface Window {
+    /**
+     * Comscore main object.
+     */
     COMSCORE: {
-      beacon: Function;
+      /**
+       * Function that sends tag params to Comscore.
+       *
+       * @remarks
+       * It generates the following params automatically, which are sent to
+       * Comscore along with the received ones:
+       *
+       * - `c7`: Full Page URL, including query string variables.
+       * - `c8`: Page Title.
+       * - `c9`: Referring URL.
+       *
+       * @param tagParams - Object of type {@link ComscoreTagParams}.
+       */
+      beacon: (tagParams: ComscoreTagParams) => void;
     };
-    _comscore: Array<{
-      c1: string;
-      c2: string;
-    }>;
+
+    /**
+     * Array that stores the first tag params generated right before the
+     * Comscore library has loaded.
+     */
+    _comscore: Array<ComscoreTagParams>;
   }
 }
 
@@ -18,12 +85,22 @@ declare global {
  * Comscore Analytics package for Frontity.
  */
 interface ComscoreAnalytics extends Package {
+  /**
+   * Root elements exposed by this package.
+   */
   roots: Analytics["roots"] & {
+    /**
+     * Comscore Analytics root element.
+     */
     comscoreAnalytics: ReactType;
   };
+
+  /**
+   * The state exposed by this package.
+   */
   state: Analytics["state"] & {
     /**
-     * State properties for the Comscore analytics package.
+     * Comscore Analytics namespace.
      */
     comscoreAnalytics: {
       /**
@@ -36,18 +113,14 @@ interface ComscoreAnalytics extends Package {
        */
       trackingIds?: string[];
     };
-    analytics: {
-      pageviews: {
-        /**
-         * Enable or disable sending pageviews to Comscore (default is `true`).
-         */
-        comscoreAnalytics: boolean;
-      };
-    };
   };
+
+  /**
+   * The actions exposed by this package.
+   */
   actions: Analytics["actions"] & {
     /**
-     * Actions from the Comscore analytics package.
+     * Comscore Analytics namespace.
      */
     comscoreAnalytics: {
       /**
