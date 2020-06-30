@@ -8,11 +8,15 @@ import Router from "@frontity/router/types";
 export interface Pageview {
   /**
    * Link of the page (without the host part).
+   *
+   * @example "/2016/the-beauties-of-gullfoss"
    */
   link: string;
 
   /**
    * Title of the page.
+   *
+   * @example "The Beauties Of Gullfoss - Frontity Test"
    */
   title: string;
 }
@@ -23,25 +27,49 @@ export interface Pageview {
 export interface Event {
   /**
    * The name of the event.
+   *
+   * @example "Click"
    */
   name: string;
 
   /**
    * Collection of properties sent along with the event.
+   *
+   * @remarks
+   * Each analytics package requires some specific properties to be included
+   * here. Check out their documentation for more info.
+   *
+   * @example
+   * ```
+   * {
+   *   label: "video",
+   *   category: "youtube",
+   * }
+   * ```
    */
   payload: Record<string, any>;
 }
 
 /**
- * Base types and actions to build analytics packages for Frontity
+ * Base types and actions to build analytics packages for Frontity.
  */
 interface Analytics extends Package {
+  /**
+   * Root elements exposed by this package.
+   */
   roots: {
+    /**
+     * Analytics root element.
+     */
     analytics: React.FC;
   };
+
+  /**
+   * The actions exposed by this package.
+   */
   actions: {
     /**
-     * Actions to interact with all the analytics packages.
+     * Analytics namespace.
      */
     analytics: {
       /**
@@ -63,7 +91,7 @@ interface Analytics extends Package {
        * });
        * ```
        *
-       * @param pageview - Object of type {@link Pageview}
+       * @param pageview - Object of type {@link Pageview}.
        */
       pageview: Action<Analytics, Pageview>;
 
@@ -85,14 +113,18 @@ interface Analytics extends Package {
        * });
        * ```
        *
-       * @param event - Object of type {@link Event}
+       * @param event - Object of type {@link Event}.
        */
       event: Action<Analytics, Event>;
     };
   };
+
+  /**
+   * The state exposed by this package.
+   */
   state: {
     /**
-     * State of the analytics package.
+     * Analytics namespace.
      */
     analytics: {
       /**

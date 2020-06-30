@@ -4,8 +4,20 @@ import { Connect } from "frontity/types";
 import { Packages } from "../../types";
 
 /**
- * Send a pageview anytime the title changes
- * and data.isReady === true.
+ * Analytics Root component.
+ *
+ * It sends a pageview anytime the title changes and `data.isReady` is `true`
+ * for the current link (i.e. `state.router.link`).
+ *
+ * @remarks
+ * This component is automatically rendered by Frontity and it's not meant to be
+ * imported and used anywhere.
+ *
+ * @example roots.analytics
+ *
+ * @param props - Injected props by `connect`.
+ *
+ * @returns Root element.
  */
 const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
   const { link } = state.router;
