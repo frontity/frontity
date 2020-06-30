@@ -41,11 +41,11 @@ interface WpSource extends Source {
        * The name or path indicating the subdirectory of the domain where the
        * Frontity site lives.
        *
-       * For example, if your site is in https://mysite.com/blog, you have to
+       * For example, if your site is at https://mysite.com/blog, you have to
        * use it with the value of /blog.
        *
-       * It also used to transform links of the entities that come from the
-       * REST API.
+       * It is also used to transform links of the entities that come from the
+       * REST API by prefixing them with this value.
        *
        * @example "/blog"
        */
@@ -61,7 +61,7 @@ interface WpSource extends Source {
        * - This option overrides the `/` route so it should be used in
        * combination with `state.source.postsPage` to be able to access the
        * posts archive with a different route.
-       * - Configure WordPress with the same setting.
+       * - You will need to configure WordPress with the same setting.
        *
        * @example "/about-us"
        */
@@ -77,7 +77,7 @@ interface WpSource extends Source {
        * @remarks
        * - It is useful when used in combination with
        * `state.source.homepage`.
-       * - Configure WordPress with the same setting.
+       * - You will need to configure WordPress with the same setting.
        *
        * @example "/blog"
        */
@@ -126,7 +126,7 @@ interface WpSource extends Source {
       postEndpoint: string;
 
       /**
-       * Object of params that will be used in each call to the REST API when
+       * An object that will be used in each call to the REST API when
        * using `actions.source.fetch` with the default handlers.
        *
        * This is useful to filter fields from the REST API, change the default
@@ -311,7 +311,7 @@ interface WpSource extends Source {
        *
        * It has two methods, `api.init` and `api.get`:
        * - `api.init`: Used internally to initialize the class.
-       * - `api.get`: Used to fetch the REST API.
+       * - `api.get`: Used to fetch the entities from the REST API.
        *
        * Types defined in {@link Api}.
        *
@@ -346,7 +346,7 @@ interface WpSource extends Source {
          * The Response object.
          *
          * Usually returned from `api.get`, but can also be the one returned
-         * by `fetch`.
+         * by `window.fetch`.
          */
         response: Response;
 
@@ -404,7 +404,7 @@ interface WpSource extends Source {
        * Response object.
        *
        * @param response - The Response object. Usually returned from
-       * `api.get`, but can also be the one returned by `fetch`.
+       * `api.get`, but can also be the one returned by `window.fetch`.
        * @param valueIfHeaderMissing - The value that must be returned if the
        * header containing the information is not found in the Response object.
        *
@@ -419,7 +419,7 @@ interface WpSource extends Source {
        * Response object.
        *
        * @param response - The Response object. Usually returned from
-       * `api.get`, but can also be the one returned by `fetch`.
+       * `api.get`, but can also be the one returned by `window.fetch`.
        * @param valueIfHeaderMissing - The value that must be returned if the
        * header containing the information is not found in the Response object.
        *
