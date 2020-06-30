@@ -1,5 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`date An invalid day of the month should return a 404 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json",
+  "attachment": Object {},
+  "author": Object {},
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/2020/12/77/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "77 is a wrong day number",
+      "is404": true,
+      "isError": true,
+      "isFetching": false,
+      "isReady": true,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+}
+`;
+
+exports[`date An invalid month of the year should return a 404 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json",
+  "attachment": Object {},
+  "author": Object {},
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/2020/99/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "99 is a wrong month number",
+      "is404": true,
+      "isError": true,
+      "isFetching": false,
+      "isReady": true,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+}
+`;
+
 exports[`date fetchs from a different endpoint with extra params 1`] = `
 Array [
   Array [
