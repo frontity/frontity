@@ -1,18 +1,14 @@
 describe("Google Tag Manager", () => {
   const pageviewHome = {
-    event: "virtualPageview",
-    pageview: {
-      link: "/?name=google-tag-manager",
-      title: "Homepage Title",
-    },
+    event: "pageview",
+    link: "/?name=google-tag-manager",
+    title: "Homepage Title",
   };
 
   const pageviewSomePost = {
-    event: "virtualPageview",
-    pageview: {
-      link: "/some-post/",
-      title: "Some Post Title",
-    },
+    event: "pageview",
+    link: "/some-post/",
+    title: "Some Post Title",
   };
 
   const someEvent = {

@@ -14,7 +14,7 @@ const googleTagManagerAnalytics: GoogleTagManagerAnalytics = {
       pageview: () => (pageview) => {
         // Send the pageview to the trackers.
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: "virtualPageview", pageview });
+        window.dataLayer.push({ event: "pageview", ...pageview });
       },
       event: () => ({ name: event, payload }) => {
         // Send the event to the trackers.
