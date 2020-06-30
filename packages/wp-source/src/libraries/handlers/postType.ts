@@ -19,6 +19,7 @@ const postTypeHandler = ({
 
     // 1.2 iterate over finalEndpoints array
     let isHandled = false;
+    let isMismatched = false;
     for (const endpoint of finalEndpoints) {
       const response = await libraries.source.api.get({
         endpoint,
@@ -33,9 +34,21 @@ const postTypeHandler = ({
 
       // exit loop if this endpoint returns an entity!
       if (populated.length > 0) {
-        isHandled = true;
-        break;
+        // But we have to check if the link we populated is
+        if (populated[0].link === route) {
+          isHandled = true;
+          break;
+        } else {
+          isMismatched = true;
+        }
       }
+    }
+
+    if (isMismatched) {
+      throw new ServerError(
+        `You have tried to access content at route: ${route} but it does not exist`,
+        404
+      );
     }
 
     // 1.3 if no entity has found, throw an error
