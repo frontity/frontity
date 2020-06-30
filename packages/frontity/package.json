@@ -55,7 +55,6 @@
     "react-helmet-async": "1.0.4",
     "simple-entity-decode": "^0.0.3",
     "tar": "^4.4.8",
-    "ts-node": "^8.0.3",
     "typed-emitter": "^0.2.0",
     "typescript": "3.8.3"
   },
@@ -73,6 +72,7 @@
     "@types/stack-trace": "^0.0.29",
     "@types/tar": "^4.0.0",
     "lodash.omit": "^4.5.0",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.13.1",
+    "ts-node": "^8.0.3"
   }
 }
