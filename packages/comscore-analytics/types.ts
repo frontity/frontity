@@ -35,7 +35,7 @@ interface ComscoreTagParams {
   /**
    * Package.
    *
-   * Alphanumeric value for customized aggregation to reflectsections or site
+   * Alphanumeric value for customized aggregation to reflect sections or site
    * centric advertising packages.
    */
   c6?: string;
