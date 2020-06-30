@@ -4,7 +4,29 @@ import { Head, connect, css } from "frontity";
 import { Connect } from "frontity/types";
 import GoogleTagManagerAnalytics from "../../types";
 
-const GtmCode: React.FC<{ containerId: string }> = ({ containerId }) => (
+/**
+ * Props used by {@link GtmCode}.
+ */
+interface GtmCodeProps {
+  /**
+   * GTM container ID.
+   */
+  containerId: string;
+}
+
+/**
+ * Render the GTM library inside `<head>` for the given container ID.
+ *
+ * @example
+ * ```
+ * <GtmCode containerId={containerId} />
+ * ```
+ *
+ * @param props - Object of type {@link GtmCodeProps}.
+ *
+ * @returns React element.
+ */
+const GtmCode: React.FC<GtmCodeProps> = ({ containerId }) => (
   <>
     {/* Add the GTM script in the <head> */}
     <Head>
@@ -29,6 +51,22 @@ const GtmCode: React.FC<{ containerId: string }> = ({ containerId }) => (
   </>
 );
 
+/**
+ * Root component of the Comscore Analytics package.
+ *
+ * It renders the Comscore script library for each Comscore tracking ID defined
+ * in the state.
+ *
+ * @remarks
+ * This component is automatically rendered by Frontity and it's not meant to be
+ * imported and used anywhere.
+ *
+ * @example roots.comscoreAnalytics
+ *
+ * @param props - Injected props by `connect`.
+ *
+ * @returns Root element.
+ */
 export const Root: React.FC<Connect<GoogleTagManagerAnalytics>> = ({
   state,
 }) => {
