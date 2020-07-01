@@ -10,6 +10,6 @@ jobs:
         # GITHUB_TOKEN in forked repositories is read-only
         # https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
         if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
-      - uses: bradennapier/eslint-plus-action@v1
+      - uses: bradennapier/eslint-plus-action@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
