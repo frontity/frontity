@@ -6,10 +6,25 @@ jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v2
         # GITHUB_TOKEN in forked repositories is read-only
         # https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
         if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
+
+      - name: Setup npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          CI: true
+
       - uses: bradennapier/eslint-plus-action@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
