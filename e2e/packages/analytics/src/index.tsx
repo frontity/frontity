@@ -3,6 +3,16 @@ import { Head, connect, URL } from "frontity";
 import { Connect } from "frontity/types";
 import Analytics, { Packages } from "../types";
 
+/**
+ * Simple component that mocks the homepage.
+ *
+ * @example
+ * ```
+ * <Homepage />
+ * ```
+ *
+ * @returns React element.
+ */
 const Homepage = () => (
   <>
     <Head>
@@ -13,6 +23,16 @@ const Homepage = () => (
   </>
 );
 
+/**
+ * Simple component that mocks a post.
+ *
+ * @example
+ * ```
+ * <Homepage />
+ * ```
+ *
+ * @returns React element.
+ */
 const SomePost = () => (
   <>
     <Head>
@@ -23,14 +43,21 @@ const SomePost = () => (
   </>
 );
 
+/**
+ * Simple component that mocks a theme.
+ *
+ * @example
+ * ```
+ * <Theme />
+ * ```
+ *
+ * @param props - Injected props by {@link connect}.
+ *
+ * @returns React element.
+ */
 const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
   // Get only the pathname (link has query).
   const { pathname } = new URL(state.router.link, "http://localhost:3001");
-
-  const changeLinkPost1 = () => actions.router.set("/some-post/");
-  const changeLinkPost2 = () => actions.router.set("/some-other-post/");
-  const sendEvent = () =>
-    actions.analytics.event(state.testAnalytics.testEvent);
 
   return (
     <>
@@ -40,13 +67,22 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
       {pathname === "/some-post/" && <SomePost />}
       {pathname === "/some-other-post/" && <SomePost />}
       {/* Buttons */}
-      <button id="change-link" onClick={changeLinkPost1}>
+      <button
+        id="change-link"
+        onClick={() => actions.router.set("/some-post/")}
+      >
         Some Post
       </button>
-      <button id="change-link-post-2" onClick={changeLinkPost2}>
+      <button
+        id="change-link-post-2"
+        onClick={() => actions.router.set("/some-other-post/")}
+      >
         Some Post
       </button>
-      <button id="send-event" onClick={sendEvent}>
+      <button
+        id="send-event"
+        onClick={() => actions.analytics.event(state.testAnalytics.testEvent)}
+      >
         Send event
       </button>
     </>
