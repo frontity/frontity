@@ -3,21 +3,26 @@ import { connect, useConnect } from "frontity";
 import Link from "@frontity/components/link";
 
 /**
- * The Link component.
+ * The MarsLink component, which is a wrapper on top of the {@link Link}
+ * component.
  *
- * @param chldren React children.
+ * @param props - It accepts the same props than the {@link Link} component.
  *
  * @example
  * ```js
- *   <MarsLink link="/posts" />
+ * <MarsLink link="/some-post">
+ *   <div>Some Post</div>
+ * </MarsLink>
  * ```
  *
- * @returns React `<a/>` element.
+ * @returns A {@link Link} component, which returns an HTML anchor element.
  */
 const MarsLink = ({ children, ...props }) => {
   const { state, actions } = useConnect();
 
-  //eslint-disable-next-line jsdoc/require-jsdoc
+  /**
+   * A handler that closes the mobile menu when a link is clicked.
+   */
   const onClick = () => {
     if (state.theme.isMobileMenuOpen) {
       actions.theme.closeMobileMenu();

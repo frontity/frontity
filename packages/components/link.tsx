@@ -4,44 +4,40 @@ import connect, { useConnect } from "@frontity/connect";
 import { Package } from "frontity/types";
 
 /**
- * The Link component that enables linking to internal pages in a frontity app.
- *
- * Under the hood, this component uses the `actions.router.set(link)` method
- * from \@frontity/tiny-router and creates an `<a/>` tag.
- *
- * All "unknown" props passed to the Link are passed down to an anchor `</a>` tag.
- *
- * @example
- * ```js
- *   <Link link="/posts" />
- * ```
+ * Props for React component {@link Link}.
  */
-type LinkType = React.FC<{
+interface LinkProps {
   /**
    * The URL to link to.
    */
   link: string;
 
   /**
-   * The target of the anchor: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target.
+   * The target of the anchor:
+   * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target.
+   *
+   * @defaultValue "_self"
    */
   target?: "_self" | "_blank";
 
   /**
-   * The onClick handler. Can be used to pass an optional callback that will be invoked on click.
+   * The onClick handler. Can be used to pass an optional callback that will be
+   * invoked on click.
    */
   onClick?: () => void;
 
   /**
-   * Whether the browser should scroll up to the top upon navigating to a new page.
+   * Whether the browser should scroll up to the top upon navigating to a new
+   * page.
    *
    * @defaultValue true
    */
   scroll?: boolean;
 
   /**
-   * Indicates the element that represents the current item within a container or set of related elements.
-   * Https://www.w3.org/TR/wai-aria-1.1/#aria-current.
+   * Indicates the element that represents the current item within a container
+   * or set of related elements:
+   * https://www.w3.org/TR/wai-aria-1.1/#aria-current.
    */
   "aria-current"?: React.AriaAttributes["aria-current"];
 
@@ -50,10 +46,29 @@ type LinkType = React.FC<{
    * These props are passed down to the `<a/>` element.
    */
   [key: string]: any;
-}>;
+}
 
-// eslint-disable-next-line jsdoc/require-jsdoc
-const Link: LinkType = ({
+/**
+ * The Link component that enables linking to internal pages in a frontity app.
+ *
+ * Under the hood, this component uses the `actions.router.set(link)` method
+ * from `@frontity/tiny-router` and creates an `<a/>` tag.
+ *
+ * All "unknown" props passed to the Link are passed down to an anchor `</a>`
+ * tag.
+ *
+ * @example
+ * ```js
+ * <Link link="/some-post">
+ *   <div>Some Post</div>
+ * </Link>
+ * ```
+ *
+ * @param props - Defined by {@link LinkProps}.
+ *
+ * @returns An HTML anchor element.
+ */
+const Link: React.FC<LinkProps> = ({
   link,
   children,
   onClick,
@@ -68,7 +83,13 @@ const Link: LinkType = ({
     warn("link prop is required and must be a string");
   }
 
-  //eslint-disable-next-line jsdoc/require-jsdoc
+  /**
+   * The event handler for the click event. It will try to do client-side
+   * rendering but bail out in certain situations, like when the link is
+   * external or the user is trying to open a new tab.
+   *
+   * @param event - The mouse click event.
+   */
   const onClickHandler = (event: MouseEvent<HTMLAnchorElement>) => {
     // Do nothing if it's an external link
     if (link.startsWith("http")) return;
@@ -86,6 +107,7 @@ const Link: LinkType = ({
       return;
     }
 
+    // Prevent the server-side rendering.
     event.preventDefault();
 
     // Set the router to the new url.
@@ -97,6 +119,7 @@ const Link: LinkType = ({
       document.body.focus();
     }
 
+    // If there's an additional handler, execute it.
     if (typeof onClick === "function") {
       onClick();
     }
