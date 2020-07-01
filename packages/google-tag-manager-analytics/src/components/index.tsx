@@ -39,7 +39,7 @@ const GtmCode: React.FC<GtmCodeProps> = ({ containerId }) => (
     <noscript>
       <iframe
         title={containerId}
-        src="https://www.googletagmanager.com/ns.html?id=${containerId}"
+        src={`https://www.googletagmanager.com/ns.html?id=${containerId}`}
         height="0"
         width="0"
         css={css`
