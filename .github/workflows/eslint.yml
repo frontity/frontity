@@ -21,9 +21,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci
-        env:
-          CI: true
+        run: npm install
 
       - uses: bradennapier/eslint-plus-action@v1
         with:
