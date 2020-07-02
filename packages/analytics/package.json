@@ -1,7 +1,7 @@
 {
   "name": "@frontity/analytics",
   "version": "1.1.1",
-  "description": "This package contains the base types and actions to build analytics packages for »Frontity",
+  "description": "Base types and actions to build analytics packages for Frontity",
   "main": "src/index.ts",
   "keywords": [
     "frontity",
