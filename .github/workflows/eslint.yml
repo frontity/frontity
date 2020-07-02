@@ -25,6 +25,7 @@ jobs:
         env:
           CI: true
 
-      - uses: bradennapier/eslint-plus-action@v2
+      # - uses: bradennapier/eslint-plus-action@v2
+      - uses: luisherranz/eslint-plus-action@fix-npm-install
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
