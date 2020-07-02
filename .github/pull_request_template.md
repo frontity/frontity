@@ -59,11 +59,8 @@ More info at https://docs.frontity.org/contributing/code-contribution-guide#what
 
 <!-- ignore-task-list-start -->
 
-<!-- Move the unrelated tasks here, between the "ignore-task-list" tags. -->
-
 <!-- ignore-task-list-end -->
 
 **Additional Comments**
 
 <!-- Feel free to add any additional comments. -->
-
