@@ -3,6 +3,21 @@ import analytics from "@frontity/analytics";
 import GoogleAnalytics from "../types";
 import Root from "./components";
 
+/**
+ * Generates a name for the tracking ID passed as argument.
+ *
+ * This function is used by the Google Analytics root component and actions to
+ * initialize and send pageviews and events to each tracking ID separately.
+ *
+ * @example
+ * ```
+ * getTrackerName("UA-01234567-89") // => "tracker_UA_01234567_89".
+ * ```
+ *
+ * @param id - Tracking ID.
+ *
+ * @returns A name for the given tracking ID.
+ */
 export const getTrackerName = (id: string) =>
   `tracker_${id.replace(/-/g, "_")}`;
 
