@@ -95,7 +95,7 @@
       }
     },
     {
-      "files": ["**/__tests__/*.{js,ts,jsx,tsx}"],
+      "files": ["**/__tests__/*.{js,ts,jsx,tsx}", "**/*.spec.js"],
       "rules": {
         "jsdoc/require-jsdoc": 0,
         "jsdoc/require-description": 0,
