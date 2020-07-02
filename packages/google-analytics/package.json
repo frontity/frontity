@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/react-test-renderer": "^16.9.2",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.13.1",
+    "react-helmet-async": "^1.0.4"
   }
 }
