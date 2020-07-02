@@ -30,7 +30,7 @@
       }
     ],
     "jsdoc/require-description-complete-sentence": 2,
-    "jsdoc/require-example": 2,
+    "jsdoc/require-example": 0,
     "jsdoc/require-param": [
       "error",
       {
