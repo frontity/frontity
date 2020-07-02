@@ -21,8 +21,12 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+        env:
+          CI: true
 
-      - uses: bradennapier/eslint-plus-action@v1
+      # - uses: bradennapier/eslint-plus-action@v2
+      - uses: luisherranz/eslint-plus-action@npm-install-input
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
+          npmInstall: false
