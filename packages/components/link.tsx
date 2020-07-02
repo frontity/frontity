@@ -1,6 +1,5 @@
 import React, { MouseEvent } from "react";
-import { warn } from "frontity";
-import connect, { useConnect } from "@frontity/connect";
+import { warn, connect, useConnect } from "frontity";
 import { Package } from "frontity/types";
 
 /**
