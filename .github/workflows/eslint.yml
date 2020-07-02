@@ -26,7 +26,7 @@ jobs:
           CI: true
 
       # - uses: bradennapier/eslint-plus-action@v2
-      - uses: luisherranz/eslint-plus-action@fix-npm-install
+      - uses: luisherranz/eslint-plus-action@npm-install-input
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           npmInstall: false
