@@ -61,8 +61,6 @@ const GtmCode: React.FC<GtmCodeProps> = ({ containerId }) => (
  * This component is automatically rendered by Frontity and it's not meant to be
  * imported and used anywhere.
  *
- * @example roots.comscoreAnalytics
- *
  * @param props - Injected props by `connect`.
  *
  * @returns Root element.

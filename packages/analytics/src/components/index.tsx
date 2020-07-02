@@ -13,8 +13,6 @@ import { Packages } from "../../types";
  * This component is automatically rendered by Frontity and it's not meant to be
  * imported and used anywhere.
  *
- * @example roots.analytics
- *
  * @param props - Injected props by `connect`.
  *
  * @returns Root element.

@@ -6,11 +6,6 @@ import Analytics, { Packages } from "../types";
 /**
  * Simple component that mocks the homepage.
  *
- * @example
- * ```
- * <Homepage />
- * ```
- *
  * @returns React element.
  */
 const Homepage = () => (
@@ -26,11 +21,6 @@ const Homepage = () => (
 /**
  * Simple component that mocks a post.
  *
- * @example
- * ```
- * <Homepage />
- * ```
- *
  * @returns React element.
  */
 const SomePost = () => (
@@ -45,11 +35,6 @@ const SomePost = () => (
 
 /**
  * Simple component that mocks a theme.
- *
- * @example
- * ```
- * <Theme />
- * ```
  *
  * @param props - Injected props by {@link connect}.
  *
