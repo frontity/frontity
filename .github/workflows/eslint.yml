@@ -29,3 +29,4 @@ jobs:
       - uses: luisherranz/eslint-plus-action@fix-npm-install
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
+          npmInstall: false
