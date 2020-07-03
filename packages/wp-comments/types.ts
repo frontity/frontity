@@ -1,66 +1,177 @@
-import { Package, AsyncAction } from "frontity/types";
+import { Package, Action, AsyncAction } from "frontity/types";
 import WpSource from "@frontity/wp-source/types";
 
 /**
- * Comment object.
+ * Object that represents a form to submit comments in a post.
  */
-export type Comment = {
+interface Form {
   /**
-   * The comment text.
+   * Form fields with their values.
    */
-  comment: string;
+  fields: Fields;
+
   /**
-   * Author name that will be shown with the comment.
+   * Field values when this form is submitted along with the submission status.
+   *
+   * @remarks
+   * This prop is undefined if nothing has been submitted yet.
    */
-  author: string;
-  /**
-   * The email address of the author.
-   */
-  email: string;
-  /**
-   * URL of the author’s website.
-   */
-  url?: string;
-  /**
-   * ID of the post where this comment will be posted.
-   */
-  postId: number;
-  /**
-   * ID of the comment parent (if this comment is a reply).
-   */
-  parentId?: number;
-};
+  submitted?: Submitted;
+}
 
 /**
- * `@frontity/wp-comments` package.
+ * Form fields with their values.
+ */
+interface Fields {
+  /**
+   * Author's name.
+   */
+  author: string;
+
+  /**
+   * Author's email.
+   */
+  email: string;
+
+  /**
+   * Text of the comment.
+   */
+  comment: string;
+
+  /**
+   * URL of the author's site.
+   *
+   * @defaultValue ""
+   */
+  url?: string;
+
+  /**
+   * ID of the comment to which this one responds.
+   *
+   * @defaultValue 0
+   */
+  parent?: number;
+}
+
+/**
+ * Form field values when it is submitted along with the submission status.
+ */
+interface Submitted extends Fields {
+  /**
+   * The comment hasn't been received by WP yet.
+   */
+  isPending: boolean;
+  /**
+   * The comment has been received but not accepted.
+   */
+  isUnapproved: boolean;
+  /**
+   * The comment has been received and is published.
+   */
+  isApproved: boolean;
+  /**
+   * The request has failed.
+   */
+  isError: boolean;
+  /**
+   * Failure reason.
+   */
+  errorMessage: string;
+  /**
+   * Submission date in string format.
+   */
+  date: string;
+  /**
+   * Comment ID if it has been received (`isUnapproved` or `isApproved`).
+   */
+  id?: number;
+}
+
+/**
+ * Add integration for WordPress native comments.
  */
 interface WpComments extends Package {
+  /**
+   * The state exposed by this package.
+   */
+  state: {
+    /**
+     * Comments namespace.
+     */
+    comments: {
+      /**
+       * Map of form objects by post ID.
+       */
+      forms: Record<number, Form>;
+    };
+  };
+
+  /**
+   * The actions exposed by this package.
+   */
   actions: {
     /**
-     * Actions to handle comments.
+     * Comments namespace.
      */
     comments: {
       /**
        * Publish a new comment to the post specified by `postId`.
        *
-       * Usage example:
+       * It submits the fields stored in the respective form (i.e.
+       * `state.comments.form[postId]`) or the fields passed as a second
+       * argument. If fields are passed, those replace the current values stored
+       * in `state.comments.form[postId].fields`.
        *
-       * ```ts
-       * actions.comments.create({
+       *
+       * @example
+       * ```
+       * actions.comments.submit(60);
+       * ```
+       *
+       * @example
+       * ```
+       * actions.comments.submit(60, {
        *   comment: "This is a comment example. Hi!",
        *   author: "Frontibotito",
        *   email: "frontibotito@frontity.com",
-       *   postId: 60,
        * });
        * ```
        *
-       * @param comment - Object of type {@link Comment}.
+       * @param postId - The ID of the post where the comment will be published.
+       *
+       * @param comment - Object of type {@link Fields}.
+       *
+       * @returns A promise that resolves when the comment was submitted.
        */
-      create: AsyncAction<Packages, Comment>;
+      submit:
+        | AsyncAction<Packages, number>
+        | AsyncAction<Packages, number, Fields>;
+
+      /**
+       * Update the fields of the form specified by `postId`.
+       *
+       * This action simply updates what is stored in
+       * `state.comments.form[postId].fields` with the given values.
+       *
+       * @example
+       * ```
+       * actions.comments.updateFields(60, {
+       *   comment: "Hello world!"
+       * });
+       * ```
+       *
+       * @param postId - The ID of the post where the comment will be published.
+       *
+       * @param comment - Partial object of type {@link Fields}.
+       */
+      updateFields: Action<Packages, number, Partial<Fields>>;
     };
   };
 }
 
+/**
+ * Packages used internally by WpComments.
+ */
 export type Packages = WpComments & WpSource;
 
 export default WpComments;
