@@ -2,11 +2,51 @@ import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
 
+/**
+ * The parameters for {@link postTypeHandler}.
+ */
+interface PostTypeHandlerParams {
+  /**
+   * The list of [WP REST API endpoints](https://developer.wordpress.org/rest-api/reference/)
+   * from which the generated handler is going to fetch the data.
+   */
+  endpoints: string[];
+}
+
+/**
+ * A {@link Handler} function generator for WordPress Post Types.
+ *
+ * This function will generate a handler function for specific
+ * [WP REST API endpoints](https://developer.wordpress.org/rest-api/reference/)
+ * from which the data is going to be fetched. The generated handler will fetch
+ * data from all specified endpoints.
+ *
+ * @param options - Options for the handler generator: {@link PostTypeHandlerParams}.
+ *
+ * @example
+ * ```js
+ *   const postTypeHandlerFunc = postTypeHandler({ endpoints: ['post']});
+ *   libraries.source.handlers.push({
+ *     name: "post type",
+ *     priority: 30,
+ *     pattern: "/(.*)?/:slug",
+ *     func: postTypeHandlerFunc,
+ *   })
+ * ```
+ *
+ * @returns An async "handler" function that can be passed as an argument to the handler object.
+ * This function will be invoked by the frontity framework when calling `source.fetch()` for
+ * a specific entity.
+ */
 const postTypeHandler = ({
   endpoints,
-}: {
-  endpoints: string[];
-}): Handler => async ({ link, params, state, libraries, force }) => {
+}: PostTypeHandlerParams): Handler => async ({
+  link,
+  params,
+  state,
+  libraries,
+  force,
+}) => {
   // 1. search id in state or get the entity from WP REST API
   const { route, query } = libraries.source.parse(link);
   if (!state.source.get(route).id) {
@@ -34,7 +74,8 @@ const postTypeHandler = ({
 
       // exit loop if this endpoint returns an entity!
       if (populated.length > 0) {
-        // But we have to check if the link we populated is
+        // We have to check if the link property in the data that we
+        // populated is the same as the current route.
         if (populated[0].link === route) {
           isHandled = true;
           break;
