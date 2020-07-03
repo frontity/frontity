@@ -47,22 +47,20 @@ merge of your pull request!
 - [ ] TypeScript tests
 - [ ] Update starter themes
 - [ ] Update other packages
-- [ ] Link to PR in [Documentation](https://github.com/frontity/gitbook-docs/wiki/Code-Releases)
-- [ ] Community discussions
-- [ ] Changeset (with link to its [Feature Discussion](https://community.frontity.org/c/33) if it exists)
+- [ ] Open an issue for this feature in the [docs repo](https://github.com/frontity/docs/wiki/Code-Releases)
+- [ ] Update community discussions
+- [ ] Add a changeset (with link to its [Feature Discussion](https://community.frontity.org/c/33) if it exists)
 
 <!-- Changesets are necessary if your changes should release any packages.
 Run `npx changeset` to create a changeset.
 More info at https://docs.frontity.org/contributing/code-contribution-guide#what-is-a-changeset -->
 
-<!-- ignore-task-list-start -->
-
 **Unrelated Tasks**
 
-<!-- Remove the "[ ]" from any non related task. -->
+<!-- ignore-task-list-start -->
+
+<!-- ignore-task-list-end -->
 
 **Additional Comments**
 
 <!-- Feel free to add any additional comments. -->
-
-<!-- ignore-task-list-end -->

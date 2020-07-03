@@ -1,3 +1,12 @@
+/* eslint-disable jsdoc/require-jsdoc */
+
+/**
+ * TSDocs disabled by `@luisherranz` in this file because he needs to figure
+ * out first which types will remain when we merge this PR
+ * https://github.com/frontity/frontity/pull/415, taking into account that
+ * `react-easy-state` and `@nx-js/observer-util` already have types themselves.
+ */
+
 interface Scheduler {
   add: Function;
   delete: Function;
@@ -121,11 +130,8 @@ export type ConnectOptions = {
 };
 
 declare function connect<Props extends object>(
-  Component: React.ComponentType<Props>
-): React.FunctionComponent<FilterInjectedProps<Props>>;
-declare function connect<Props extends object>(
   Component: React.ComponentType<Props>,
-  options: ConnectOptions
+  options?: ConnectOptions
 ): React.FunctionComponent<FilterInjectedProps<Props>>;
 
 export const Provider: React.ProviderExoticComponent<React.ProviderProps<any>>;

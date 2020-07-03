@@ -1,18 +1,14 @@
 describe("Google Tag Manager", () => {
   const pageviewHome = {
-    event: "virtualPageview",
-    pageview: {
-      page: "/?name=google-tag-manager",
-      title: "Homepage Title",
-    },
+    event: "pageview",
+    link: "/?name=google-tag-manager",
+    title: "Homepage Title",
   };
 
   const pageviewSomePost = {
-    event: "virtualPageview",
-    pageview: {
-      page: "/some-post/",
-      title: "Some Post Title",
-    },
+    event: "pageview",
+    link: "/some-post/",
+    title: "Some Post Title",
   };
 
   const someEvent = {
@@ -26,7 +22,7 @@ describe("Google Tag Manager", () => {
 
   it("should load Google Tag Manager library", () => {
     cy.get(
-      `script[src="https://www.googletagmanager.com/gtm.js?id=UA-XXXXXX-X"]`
+      `script[src="https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXX-X"]`
     );
   });
 
@@ -49,6 +45,9 @@ describe("Google Tag Manager", () => {
   });
 
   it("should send events", () => {
+    // Wait for the first pageview to be sent.
+    cy.window().its("dataLayer").its(0).should("deep.equal", pageviewHome);
+    // Send event.
     cy.get("button#send-event").click();
     cy.window().its("dataLayer").its(1).should("deep.equal", someEvent);
   });
