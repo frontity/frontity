@@ -79,6 +79,13 @@ const taxonomyHandler = ({
       404
     );
 
+  if (!state.source.data[route].taxonomy) {
+    throw new ServerError(
+      `You have tried to access content at route: ${route} but it does not exist`,
+      404
+    );
+  }
+
   // 4. get posts and pages count
   const total = getTotal(response, items.length);
   const totalPages = getTotalPages(response, 0);
