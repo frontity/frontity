@@ -3,6 +3,11 @@ import { Head, connect, URL } from "frontity";
 import { Connect } from "frontity/types";
 import Analytics, { Packages } from "../types";
 
+/**
+ * Simple component that mocks the homepage.
+ *
+ * @returns React element.
+ */
 const Homepage = () => (
   <>
     <Head>
@@ -13,6 +18,11 @@ const Homepage = () => (
   </>
 );
 
+/**
+ * Simple component that mocks a post.
+ *
+ * @returns React element.
+ */
 const SomePost = () => (
   <>
     <Head>
@@ -23,17 +33,16 @@ const SomePost = () => (
   </>
 );
 
+/**
+ * Simple component that mocks a theme.
+ *
+ * @param props - Injected props by {@link connect}.
+ *
+ * @returns React element.
+ */
 const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
   // Get only the pathname (link has query).
   const { pathname } = new URL(state.router.link, "http://localhost:3001");
-
-  const changeLinkPost1 = () => actions.router.set("/some-post/");
-  const changeLinkPost2 = () => actions.router.set("/some-other-post/");
-  const sendEvent = () =>
-    actions.analytics.sendEvent({
-      event: "some event",
-      payload: { content: "some content" },
-    });
 
   return (
     <>
@@ -43,13 +52,22 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
       {pathname === "/some-post/" && <SomePost />}
       {pathname === "/some-other-post/" && <SomePost />}
       {/* Buttons */}
-      <button id="change-link" onClick={changeLinkPost1}>
+      <button
+        id="change-link"
+        onClick={() => actions.router.set("/some-post/")}
+      >
         Some Post
       </button>
-      <button id="change-link-post-2" onClick={changeLinkPost2}>
+      <button
+        id="change-link-post-2"
+        onClick={() => actions.router.set("/some-other-post/")}
+      >
         Some Post
       </button>
-      <button id="send-event" onClick={sendEvent}>
+      <button
+        id="send-event"
+        onClick={() => actions.analytics.event(state.testAnalytics.testEvent)}
+      >
         Send event
       </button>
     </>
@@ -67,11 +85,20 @@ const analytics: Analytics = {
       get: ({ state }) => (link) => state.source.data[link],
     },
     analytics: {
-      namespaces: ["testAnalytics"],
+      pageviews: {
+        testAnalytics: true,
+      },
+      events: {
+        testAnalytics: true,
+      },
     },
     testAnalytics: {
       pageviews: [],
       events: [],
+      testEvent: {
+        name: "some event",
+        payload: { content: "some content" },
+      },
     },
   },
   actions: {
@@ -96,10 +123,10 @@ const analytics: Analytics = {
       },
     },
     testAnalytics: {
-      sendPageview: ({ state }) => (pageview) => {
+      pageview: ({ state }) => (pageview) => {
         state.testAnalytics.pageviews.push(pageview);
       },
-      sendEvent: ({ state }) => (event) => {
+      event: ({ state }) => (event) => {
         state.testAnalytics.events.push(event);
       },
     },
