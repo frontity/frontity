@@ -1,5 +1,19 @@
 # Change Log
 
+## 1.1.3
+
+### Patch Changes
+
+- [`159e02ca`](https://github.com/frontity/frontity/commit/159e02ca080ec9f7004c90276621d1a2708192ce) [#508](https://github.com/frontity/frontity/pull/508) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix the types of `connect` when imported from `frontity` and used with options, like:
+
+  ```js
+  import { connect } from "frontity";
+
+  const Component = () = { /* Some React component... */ };
+
+  export default connect(Component, { injectProps: false });
+  ```
+
 ## 1.1.2
 
 ### Patch Changes

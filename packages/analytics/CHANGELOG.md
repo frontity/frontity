@@ -1,5 +1,26 @@
 # @frontity/analytics
 
+## 1.2.0
+
+### Minor Changes
+
+- [`2fb73fc7`](https://github.com/frontity/frontity/commit/2fb73fc798653803a21f9e9bd7f21355f7675e55) [#472](https://github.com/frontity/frontity/pull/472) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Release the first stable version of @frontity/analytics library ([Feature Discussion](https://community.frontity.org/t/the-analytics-library/1103)).
+
+  The main differences with the previous version are:
+
+  - In `state.analytics`, the `namespace` array is replaced by two objects that will contain the namespaces with a boolean value: `pageviews` and `events`. This allow users to have more control over which analytics packages should send pageviews or events, and it can also be configured in `frontity.settings.js`.
+
+  - In `actions.analytics`, the `sendPageview` and `sendEvent` actions are renamed to `pageview` and `event` respectively.
+
+  - Pageview `page` property is now `link`.
+
+  - Event `event` property is now `name`.
+
+### Patch Changes
+
+- Updated dependencies [[`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f), [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377)]:
+  - frontity@1.10.0
+
 ## 1.1.1
 
 ### Patch Changes
