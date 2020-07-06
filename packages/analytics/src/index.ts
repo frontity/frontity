@@ -7,29 +7,30 @@ const analytics: Analytics = {
   },
   state: {
     analytics: {
-      namespaces: [],
+      pageviews: {},
+      events: {},
     },
   },
   actions: {
-    /**
-     * Get the functions for every analytics package
-     * and run `sendPageview` for each one.
-     */
     analytics: {
-      sendPageview: ({ state, actions }) => (pageview) => {
-        state.analytics.namespaces
-          .map((ns) => actions[ns])
-          .forEach(({ sendPageview }) => sendPageview(pageview));
+      // Get the functions for every analytics package
+      // and run `pageview` for each one.
+      pageview: ({ state, actions }) => (pageview) => {
+        Object.entries(state.analytics.pageviews).forEach(
+          ([namespace, shouldSend]) => {
+            if (shouldSend) actions[namespace].pageview(pageview);
+          }
+        );
       },
 
-      /**
-       * Get the functions for every analytics package
-       * and run `sendEvent` for each one.
-       */
-      sendEvent: ({ state, actions }) => (event) => {
-        state.analytics.namespaces
-          .map((ns) => actions[ns])
-          .forEach(({ sendEvent }) => sendEvent && sendEvent(event));
+      // Get the functions for every analytics package
+      // and run `event` for each one.
+      event: ({ state, actions }) => (event) => {
+        Object.entries(state.analytics.events).forEach(
+          ([namespace, shouldSend]) => {
+            if (shouldSend) actions[namespace].event(event);
+          }
+        );
       },
     },
   },

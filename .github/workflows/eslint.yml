@@ -5,12 +5,10 @@ on: pull_request
 jobs:
   eslint:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-        # GITHUB_TOKEN in forked repositories is read-only
-        # https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
-        if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
 
       - name: Setup npm cache
         uses: actions/cache@v1
@@ -25,6 +23,8 @@ jobs:
         env:
           CI: true
 
-      - uses: bradennapier/eslint-plus-action@v1
+      # - uses: bradennapier/eslint-plus-action@v2
+      - uses: luisherranz/eslint-plus-action@npm-install-input
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
+          npmInstall: false

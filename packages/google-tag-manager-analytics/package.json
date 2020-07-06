@@ -1,14 +1,17 @@
 {
-  "name": "@frontity/google-analytics",
-  "version": "1.2.0",
-  "description": "Analytics package to use Google Analytics with Frontity",
+  "name": "@frontity/google-tag-manager-analytics",
+  "version": "1.0.0",
+  "description": "Analytics package to use Google Tag Manager with Frontity",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
   "keywords": [
     "frontity",
     "frontity-analytics",
-    "frontity-google-analytics"
+    "frontity-google-tag-manager"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"

@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.10.0
+
+### Minor Changes
+
+- [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377) [#475](https://github.com/frontity/frontity/pull/475) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add a `Slot` component which can be used to fulfill the "Slot and Fill" pattern: https://community.frontity.org/t/slot-and-fill/895/8
+
+### Patch Changes
+
+- [`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f) [#501](https://github.com/frontity/frontity/pull/501) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Remove the tsNode.register() from the CLI
+
+- Updated dependencies [[`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377), [`159e02ca`](https://github.com/frontity/frontity/commit/159e02ca080ec9f7004c90276621d1a2708192ce)]:
+  - @frontity/types@1.4.2
+
 ## 1.9.0
 
 ### Minor Changes

@@ -22,7 +22,7 @@ exports[`GoogleTagManager works with a single container id 2`] = `
       }
     }
     height="0"
-    src="https://www.googletagmanager.com/ns.html?id=\${containerId}"
+    src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
     title="GTM-XXXXXXX"
     width="0"
   />
@@ -48,7 +48,7 @@ Array [
         }
       }
       height="0"
-      src="https://www.googletagmanager.com/ns.html?id=\${containerId}"
+      src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
       title="GTM-XXXXXXX"
       width="0"
     />
@@ -68,7 +68,7 @@ Array [
         }
       }
       height="0"
-      src="https://www.googletagmanager.com/ns.html?id=\${containerId}"
+      src="https://www.googletagmanager.com/ns.html?id=GTM-YYYYYYY"
       title="GTM-YYYYYYY"
       width="0"
     />
