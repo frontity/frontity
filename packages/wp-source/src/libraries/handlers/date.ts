@@ -2,6 +2,23 @@ import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
 import { DateData, DateWithSearchData } from "@frontity/source/types/data";
 
+/**
+ * A {@link Handler} for fetching posts by date.
+ *
+ * @param params - Defined in {@link Handler}.
+ *
+ * @example
+ * ```js
+ *   libraries.source.handlers.push({
+ *     name: "date",
+ *     priority: 20,
+ *     pattern: "/:year(\\d+)/:month(\\d+)?/:day(\\d+)?",
+ *     func: dateHandler,
+ *   })
+ * ```
+ *
+ * @returns A Promise that will resolve once the data for the posts has loaded.
+ */
 export const dateHandler: Handler = async ({
   link: linkArg,
   route: routeArg,
@@ -65,6 +82,14 @@ export const dateHandler: Handler = async ({
   // returns true if previous page exists
   const hasOlderPosts = page > 1;
 
+  /**
+   * A helper function that helps "glue" the link back together
+   * from `route`, `query` and `page`.
+   *
+   * @param page - The page number.
+   * @returns The full link for a particular page.
+   * @example `getPageLink(1)`
+   */
   const getPageLink = (page: number) =>
     libraries.source.stringify({ route, query, page });
 
