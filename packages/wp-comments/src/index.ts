@@ -119,7 +119,7 @@ const wpComments: WpComments = {
           return;
         }
       },
-      updateFields: ({ state }) => async (postId, fields) => {
+      updateFields: ({ state }) => (postId, fields) => {
         // Get form from state.
         let form = state.comments.forms[postId];
 
