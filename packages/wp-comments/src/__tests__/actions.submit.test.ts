@@ -95,7 +95,21 @@ describe("actions.comments.submit", () => {
 
     // Check the comment was sent.
     expect(fetch).toHaveBeenCalled();
-    expect(fetch.mock.calls).toMatchInlineSnapshot(`Array []`);
+    expect(fetch.mock.calls).toMatchInlineSnapshot(`
+      Array [
+        Array [
+          "https://test.frontity.org/wp-comments-post.php",
+          Object {
+            "body": URLSearchParams {},
+            "headers": Object {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            "method": "POST",
+            "redirect": "manual",
+          },
+        ],
+      ]
+    `);
   });
 
   test("should use the form fields", async () => {
@@ -160,7 +174,21 @@ describe("actions.comments.submit", () => {
 
     // Check the comment was sent.
     expect(fetch).toHaveBeenCalled();
-    expect(fetch.mock.calls).toMatchInlineSnapshot(`Array []`);
+    expect(fetch.mock.calls).toMatchInlineSnapshot(`
+      Array [
+        Array [
+          "https://test.frontity.org/wp-comments-post.php",
+          Object {
+            "body": URLSearchParams {},
+            "headers": Object {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            "method": "POST",
+            "redirect": "manual",
+          },
+        ],
+      ]
+    `);
   });
   test.todo("should populate an error if author or email are wrong");
   test.todo("should populate an error if duplicated");
