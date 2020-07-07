@@ -130,6 +130,8 @@ const wpComments: WpComments = {
               comment: "",
               author: "",
               email: "",
+              url: "",
+              parent: 0,
             },
           };
         }

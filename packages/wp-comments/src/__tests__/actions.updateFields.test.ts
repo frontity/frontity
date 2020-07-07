@@ -20,6 +20,8 @@ describe("actions.comments.updateFields", () => {
             "author": "",
             "comment": "",
             "email": "",
+            "parent": 0,
+            "url": "",
           },
         },
       }
@@ -40,6 +42,8 @@ describe("actions.comments.updateFields", () => {
                 author: "John Doe",
                 comment: "Hello world!",
                 email: "johndoe@email.test",
+                url: "",
+                parent: 0,
               },
             },
           },
@@ -62,6 +66,8 @@ describe("actions.comments.updateFields", () => {
             "author": "John Doe",
             "comment": "Hi everybody!",
             "email": "johndoe@email.test",
+            "parent": 0,
+            "url": "",
           },
         },
       }
