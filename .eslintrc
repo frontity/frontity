@@ -17,6 +17,10 @@
       "error",
       { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
     ],
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
+    ],
     "jsdoc/check-examples": 2,
     "jsdoc/check-indentation": 2,
     "jsdoc/check-param-names": 0,
