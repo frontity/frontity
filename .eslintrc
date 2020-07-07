@@ -8,16 +8,12 @@
     "plugin:jest/recommended",
     "plugin:cypress/recommended"
   ],
-  "plugins": ["jsdoc"],
+  "plugins": ["jsdoc", "@typescript-eslint"],
   "rules": {
     "@typescript-eslint/indent": "off",
     "react/prop-types": "off",
     "import/named": "off",
     "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
-    ],
-    "no-unused-vars": [
       "error",
       { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
     ],
