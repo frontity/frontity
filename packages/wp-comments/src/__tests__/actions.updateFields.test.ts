@@ -10,7 +10,7 @@ describe("actions.comments.updateFields", () => {
     const store = createStore<Packages>(clone(wpComments));
     const postId = 60;
 
-    // Pass empty fields.
+    // Pass `comment` field.
     store.actions.comments.updateFields(postId, {
       comment: "Hello world!",
     });
