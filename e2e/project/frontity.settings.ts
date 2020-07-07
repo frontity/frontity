@@ -67,7 +67,7 @@ const settings: Settings = [
       },
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "http://localhost:8080/" } },
+        state: { source: { api: "https://test.frontity.org/wp-json" } },
       },
     ],
   },
