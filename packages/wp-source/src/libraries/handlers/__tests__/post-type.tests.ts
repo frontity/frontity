@@ -28,7 +28,6 @@ describe("postType", () => {
     // .mockResolvedValueOnce(mockResponse([]))
     // because the latter always returns the same instance of Response.
     // which results in error because response.json() can only be run once
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     api.get = jest.fn((_) => Promise.resolve(mockResponse([])));
 
     // Fetch entities
@@ -39,7 +38,6 @@ describe("postType", () => {
 
   test("should contain the correct error code on error", async () => {
     // Mock Api responses
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     api.get = jest.fn(async (_) => {
       throw new ServerError("statusText", 400, "statusText");
     });
@@ -237,7 +235,6 @@ describe("attachment", () => {
   });
 
   test("Every unknown URL should return a 404 even if it's substring matches a path", async () => {
-    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     api.get = jest.fn((_) =>
       Promise.resolve(
         mockResponse([
@@ -257,7 +254,6 @@ describe("attachment", () => {
   });
 
   test("Every unknown URL should return a 404 even if it's substring matches a path 2", async () => {
-    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     api.get = jest.fn((_) =>
       Promise.resolve(
         mockResponse([
