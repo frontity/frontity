@@ -1,5 +1,17 @@
 # @frontity/comscore-analytics
 
+## 1.0.0
+
+### Major Changes
+
+- [`5ece8821`](https://github.com/frontity/frontity/commit/5ece88219d354952baadd5649091b09dd5288b49) [#472](https://github.com/frontity/frontity/pull/472) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Release first stable version of `@frontity/comscore-analytics` package ([Feature Discussion](https://community.frontity.org/t/comscore-analytics-package/1435/7)).
+
+### Patch Changes
+
+- Updated dependencies [[`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f), [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377), [`2fb73fc7`](https://github.com/frontity/frontity/commit/2fb73fc798653803a21f9e9bd7f21355f7675e55)]:
+  - frontity@1.10.0
+  - @frontity/analytics@1.2.0
+
 ## 0.1.1
 
 ### Patch Changes
