@@ -124,7 +124,7 @@ const wpComments: WpComments = {
         let form = state.comments.forms[postId];
 
         // Create it if doesn't exist yet.
-        if (!form) {
+        if (!form || !fields) {
           form = state.comments.forms[postId] = {
             fields: {
               comment: "",
@@ -137,7 +137,7 @@ const wpComments: WpComments = {
         }
 
         // Assign given fields.
-        Object.assign(form.fields, fields);
+        Object.assign(form.fields, fields || {});
       },
     },
   },

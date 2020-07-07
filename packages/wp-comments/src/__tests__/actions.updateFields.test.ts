@@ -11,14 +11,16 @@ describe("actions.comments.updateFields", () => {
     const postId = 60;
 
     // Pass empty fields.
-    store.actions.comments.updateFields(postId, {});
+    store.actions.comments.updateFields(postId, {
+      comment: "Hello world!",
+    });
 
     expect(store.state.comments.forms).toMatchInlineSnapshot(`
       Object {
         "60": Object {
           "fields": Object {
             "author": "",
-            "comment": "",
+            "comment": "Hello world!",
             "email": "",
             "parent": 0,
             "url": "",
@@ -116,6 +118,48 @@ describe("actions.comments.updateFields", () => {
             "email": "hi@janedoe.test",
             "parent": 123,
             "url": "https://janedoe.test",
+          },
+        },
+      }
+    `);
+  });
+
+  test("should reset all fields if nothing passed", () => {
+    // Specify a post ID where the comment is meant to be published.
+    const postId = 60;
+
+    // Mock packages with the API specified in state.source.
+    const packages: any = mergeDeepRight(clone(wpComments), {
+      state: {
+        comments: {
+          forms: {
+            [postId]: {
+              fields: {
+                author: "John Doe",
+                comment: "Hello world!",
+                email: "hello@johndoe.test",
+              },
+            },
+          },
+        },
+      },
+    });
+
+    // Create store from mocked packages.
+    const store = createStore<Packages>(packages as Packages);
+
+    // Change all form fields.
+    store.actions.comments.updateFields(postId);
+
+    expect(store.state.comments.forms).toMatchInlineSnapshot(`
+      Object {
+        "60": Object {
+          "fields": Object {
+            "author": "",
+            "comment": "",
+            "email": "",
+            "parent": 0,
+            "url": "",
           },
         },
       }

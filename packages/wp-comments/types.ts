@@ -153,6 +153,8 @@ interface WpComments extends Package {
        * This action simply updates what is stored in
        * `state.comments.form[postId].fields` with the given values.
        *
+       * If no fields are specified, the form fields are emptied.
+       *
        * @example
        * ```
        * actions.comments.updateFields(60, {
@@ -164,7 +166,9 @@ interface WpComments extends Package {
        *
        * @param comment - Partial object of type {@link Fields}.
        */
-      updateFields: Action<Packages, number, Partial<Fields>>;
+      updateFields:
+        | AsyncAction<Packages, number>
+        | Action<Packages, number, Partial<Fields>>;
     };
   };
 }
