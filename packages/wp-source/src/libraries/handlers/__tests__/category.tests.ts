@@ -153,7 +153,6 @@ describe("category", () => {
   });
 
   test("Unknown URL should return a 404 even if it's substring matches a path", async () => {
-    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     api.get = jest.fn((_) =>
       Promise.resolve(
         mockResponse(cat1Posts, {
