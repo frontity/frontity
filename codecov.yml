@@ -4,12 +4,15 @@ coverage:
   precision: 2
   round: up
 
-  # Patch is set to 0% so it doesn't prevent PRs to be merged but the value
-  # is reported anyways
+  # use codecov in informational mode, it wont block PR merging
+  # https://docs.codecov.io/docs/common-recipe-list#set-non-blocking-status-checks
   status:
+    project:
+      default:
+        informational: true
     patch:
       default:
-        target: 0%
+        informational: true
 
 # Make the layout of the comment posted on the PR by the codecov bot a bit nicer
 comment:
