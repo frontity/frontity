@@ -1,15 +1,16 @@
 const suffix = "\nVisit https://community.frontity.org for help! 🙂\n";
 
-interface FrontityError {
-  (
-    message: string,
-    options?: {
-      throw?: boolean;
-    }
-  ): void;
+interface ErrorOptions {
+  throw?: boolean;
 }
 
-export const error: FrontityError = (message, options = {}) => {
+/**
+ *
+ *
+ * @param message - Describes the error.
+ * @param options Options
+ */
+export const error = (message: string, options: ErrorOptions = {}): void => {
   const doThrow = typeof options.throw !== "undefined" ? options.throw : true;
   if (process.env.NODE_ENV !== "production") {
     if (doThrow) throw new Error(message + suffix);
@@ -20,6 +21,12 @@ export const error: FrontityError = (message, options = {}) => {
   }
 };
 
+/**
+ * Logs a warning in the console, adding a message that indicates users to
+ * visit the Frontity community if they need help. It's intended to be used
+ * by Frontity packages.
+ *
+ */
 export const warn = (message: string) => {
   if (process.env.NODE_ENV !== "production") {
     console.warn(message + suffix);
