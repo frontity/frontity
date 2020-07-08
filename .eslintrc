@@ -8,15 +8,11 @@
     "plugin:jest/recommended",
     "plugin:cypress/recommended"
   ],
-  "plugins": ["jsdoc", "@typescript-eslint"],
+  "plugins": ["jsdoc"],
   "rules": {
     "@typescript-eslint/indent": "off",
     "react/prop-types": "off",
     "import/named": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
-    ],
     "jsdoc/check-examples": 2,
     "jsdoc/check-indentation": 2,
     "jsdoc/check-param-names": 0,
@@ -95,6 +91,10 @@
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
+        ],
         "tsdoc/syntax": "error"
       }
     },
