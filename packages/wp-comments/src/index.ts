@@ -38,7 +38,7 @@ const wpComments: WpComments = {
           isPending: true,
           isUnapproved: false,
           isApproved: false,
-          date: new Date().toISOString(),
+          timestamp: Date.now(),
           ...fields,
         };
 
@@ -75,7 +75,7 @@ const wpComments: WpComments = {
         }
 
         // 200 OK - The request has failed because the post ID is invalid, name
-        //          or email are missing or have an invalid format.
+        //          or email are missing or email has an invalid format.
         if (response.status === 200) {
           // Get first the body content.
           const body = await response.text();
@@ -88,7 +88,7 @@ const wpComments: WpComments = {
           // `author` or `email` otherwise.
           form.submitted.errorMessage = !body
             ? "The post ID is invalid"
-            : "The author name or email is invalid";
+            : "Email has an invalid format";
 
           return;
         }

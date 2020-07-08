@@ -78,9 +78,9 @@ interface Submitted extends Fields {
    */
   errorMessage: string;
   /**
-   * Submission date in string format.
+   * Submission timestamp.
    */
-  date: string;
+  timestamp: number;
   /**
    * Comment ID if it has been received (`isUnapproved` or `isApproved`).
    */
