@@ -1,0 +1,8 @@
+{
+  "name": "e2e-wp",
+  "private": false,
+  "scripts": {},
+  "devDependencies": {
+    "cypress": "^4.7.0"
+  }
+}
