@@ -41,20 +41,9 @@ const cypress = require("cypress");
       .map((t) => `./integration/${t}`)
       .join(",");
 
-    await cypress.run({
-      spec: testfiles,
-      env: { HEADLESS: true },
-    });
+    await cypress.run({ spec: testfiles });
 
     process.exit(0);
-
-    // const testProcess = execa(
-    //   "npx",
-    //   ["cypress", "run", "--env", "HEADLESS=true", "--spec", testfiles],
-    //   { shell: true }
-    // );
-    // testProcess.stdout.pipe(process.stdout);
-    // await testProcess;
   } catch (e) {
     console.error(e);
     process.exit(1);
