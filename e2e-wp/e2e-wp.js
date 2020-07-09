@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const execa = require("execa");
 const waitOn = require("wait-on");
+const cypress = require("cypress");
 
 (async () => {
   const input = process.argv[2];
@@ -40,13 +41,19 @@ const waitOn = require("wait-on");
       .map((t) => `./integration/${t}`)
       .join(",");
 
-    const testProcess = execa(
-      "npx",
-      ["cypress", "run", "--env", "HEADLESS=true", "--spec", testfiles],
-      { shell: true }
-    );
-    testProcess.stdout.pipe(process.stdout);
-    await testProcess;
+    const result = await cypress.run({
+      spec: testfiles,
+      env: { HEADLESS: true },
+    });
+    console.log(result);
+
+    // const testProcess = execa(
+    //   "npx",
+    //   ["cypress", "run", "--env", "HEADLESS=true", "--spec", testfiles],
+    //   { shell: true }
+    // );
+    // testProcess.stdout.pipe(process.stdout);
+    // await testProcess;
   } catch (e) {
     console.error(e);
     process.exit(1);
