@@ -78,6 +78,7 @@ const postTypeHandler = ({
         // populated is the same as the current route.
         if (populated[0].link === route) {
           isHandled = true;
+          isMismatched = false;
           break;
         } else {
           isMismatched = true;
