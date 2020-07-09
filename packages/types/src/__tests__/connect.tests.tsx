@@ -73,6 +73,8 @@ const connect: ConnectFunction = (comp) => comp;
 
 const ConnectedComponent1 = connect(Component1);
 const ConnectedComponent2 = connect(Component2);
+connect(Component1, { injectProps: false });
+connect(Component2, { injectProps: false });
 
 const internalProps: Connect<Package1, OwnProps> = {
   state: {

@@ -8,10 +8,60 @@
     "plugin:jest/recommended",
     "plugin:cypress/recommended"
   ],
+  "plugins": ["jsdoc"],
   "rules": {
     "@typescript-eslint/indent": "off",
     "react/prop-types": "off",
-    "import/named": "off"
+    "import/named": "off",
+    "jsdoc/check-examples": 2,
+    "jsdoc/check-indentation": 2,
+    "jsdoc/check-param-names": 0,
+    "jsdoc/check-syntax": 2,
+    "jsdoc/check-types": 2,
+    "jsdoc/implements-on-classes": 2,
+    "jsdoc/match-description": 2,
+    "jsdoc/newline-after-description": 2,
+    "jsdoc/no-types": 2,
+    "jsdoc/no-undefined-types": 2,
+    "jsdoc/require-description": [
+      "error",
+      {
+        "contexts": ["any"]
+      }
+    ],
+    "jsdoc/require-description-complete-sentence": 2,
+    "jsdoc/require-example": 0,
+    "jsdoc/require-param": [
+      "error",
+      {
+        "checkDestructured": false
+      }
+    ],
+    "jsdoc/require-param-description": 2,
+    "jsdoc/require-param-name": 2,
+    "jsdoc/require-param-type": 0,
+    "jsdoc/require-returns": 2,
+    "jsdoc/require-returns-check": 2,
+    "jsdoc/require-returns-description": 2,
+    "jsdoc/require-returns-type": 0,
+    "jsdoc/valid-types": 2,
+    "jsdoc/require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "ClassDeclaration": true,
+          "MethodDefinition": true,
+          "FunctionDeclaration": true,
+          "ArrowFunctionExpression": true
+        },
+        "contexts": [
+          "TSInterfaceDeclaration",
+          "TSTypeAliasDeclaration",
+          "TSEnumDeclaration",
+          "TSPropertySignature"
+        ]
+      }
+    ]
   },
   "env": {
     "browser": true,
@@ -32,6 +82,7 @@
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
+      "plugins": ["eslint-plugin-tsdoc"],
       "extends": [
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
@@ -39,7 +90,16 @@
       "rules": {
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "tsdoc/syntax": "error"
+      }
+    },
+    {
+      "files": ["**/__tests__/*.{js,ts,jsx,tsx}", "**/*.spec.js"],
+      "rules": {
+        "jsdoc/require-jsdoc": 0,
+        "jsdoc/require-description": 0,
+        "tsdoc/syntax": 0
       }
     }
   ]

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`serve should fail if an invalid port is passed 1`] = `
+Array [
+  Array [
+    [Error: The port number specified is not valid: not-valid-port.],
+  ],
+]
+`;
+
+exports[`serve should get values from ENV variables 1`] = `
+Array [
+  Array [
+    Object {
+      "https": true,
+      "port": 3001,
+    },
+  ],
+]
+`;
+
+exports[`serve should ignore ENV variables for passed arguments 1`] = `
+Array [
+  Array [
+    Object {
+      "https": false,
+      "port": 4000,
+    },
+  ],
+]
+`;
+
+exports[`serve should receive default values 1`] = `
+Array [
+  Array [
+    Object {
+      "https": false,
+      "port": 3000,
+    },
+  ],
+]
+`;

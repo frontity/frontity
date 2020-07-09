@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.8.0
+
+### Minor Changes
+
+- [`b53817d1`](https://github.com/frontity/frontity/commit/b53817d10eb52f4cd1bf159edb06dd21169eb70a) [#488](https://github.com/frontity/frontity/pull/488) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README created.
+
+### Patch Changes
+
+- Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b), [`3f61f711`](https://github.com/frontity/frontity/commit/3f61f71197d33b478427d1b74882c31258861e92)]:
+  - frontity@1.9.0
+  - @frontity/source@1.2.2
+
 ## 1.7.1
 
 ### Patch Changes

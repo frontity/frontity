@@ -1,5 +1,27 @@
 # Change Log
 
+## 1.4.2
+
+### Patch Changes
+
+- [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377) [#475](https://github.com/frontity/frontity/pull/475) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Use `React.ElementType` instead of the deprecated `React.ReactType`
+
+* [`159e02ca`](https://github.com/frontity/frontity/commit/159e02ca080ec9f7004c90276621d1a2708192ce) [#508](https://github.com/frontity/frontity/pull/508) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix the types of `connect` when imported from `frontity` and used with options, like:
+
+  ```js
+  import { connect } from "frontity";
+
+  const Component = () = { /* Some React component... */ };
+
+  export default connect(Component, { injectProps: false });
+  ```
+
+## 1.4.1
+
+### Patch Changes
+
+- [`ee9f2616`](https://github.com/frontity/frontity/commit/ee9f26165e1f965d3234b4cf9588966e3ab36ec7) [#478](https://github.com/frontity/frontity/pull/478) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md package created
+
 ## 1.4.0
 
 ### Minor Changes

@@ -141,7 +141,7 @@ export interface Package {
      */
     fills?: {
       [namespace: string]: {
-        [name: string]: React.ReactType;
+        [name: string]: React.ElementType;
       };
     };
 

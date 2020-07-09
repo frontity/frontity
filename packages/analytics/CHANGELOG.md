@@ -1,5 +1,39 @@
 # @frontity/analytics
 
+## 1.2.0
+
+### Minor Changes
+
+- [`2fb73fc7`](https://github.com/frontity/frontity/commit/2fb73fc798653803a21f9e9bd7f21355f7675e55) [#472](https://github.com/frontity/frontity/pull/472) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Release the first stable version of @frontity/analytics library ([Feature Discussion](https://community.frontity.org/t/the-analytics-library/1103)).
+
+  The main differences with the previous version are:
+
+  - In `state.analytics`, the `namespace` array is replaced by two objects that will contain the namespaces with a boolean value: `pageviews` and `events`. This allow users to have more control over which analytics packages should send pageviews or events, and it can also be configured in `frontity.settings.js`.
+
+  - In `actions.analytics`, the `sendPageview` and `sendEvent` actions are renamed to `pageview` and `event` respectively.
+
+  - Pageview `page` property is now `link`.
+
+  - Event `event` property is now `name`.
+
+### Patch Changes
+
+- Updated dependencies [[`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f), [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377)]:
+  - frontity@1.10.0
+
+## 1.1.1
+
+### Patch Changes
+
+- [`3e2c355a`](https://github.com/frontity/frontity/commit/3e2c355a7530a2cda7ad74e0410389690ea57012) [#471](https://github.com/frontity/frontity/pull/471) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix a bug that was causing pageviews not to be sent if the previous page has the same title.
+
+* [`4879e0e7`](https://github.com/frontity/frontity/commit/4879e0e7b9069c0fe2a93e02281704683616ae17) [#489](https://github.com/frontity/frontity/pull/489) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README updated.
+
+* Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b), [`3f61f711`](https://github.com/frontity/frontity/commit/3f61f71197d33b478427d1b74882c31258861e92), [`868c120f`](https://github.com/frontity/frontity/commit/868c120f2ede7a2f9013f6e659e1b0a1bf2785fe)]:
+  - frontity@1.9.0
+  - @frontity/source@1.2.2
+  - @frontity/router@1.1.1
+
 ## 1.1.0
 
 ### Minor Changes

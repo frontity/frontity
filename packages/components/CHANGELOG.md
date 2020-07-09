@@ -1,5 +1,30 @@
 # Change Log
 
+## 1.4.0
+
+### Minor Changes
+
+- [`559b3c5a`](https://github.com/frontity/frontity/commit/559b3c5a261d8a986e91c60b909c532d97f96555) [#507](https://github.com/frontity/frontity/pull/507) - Introduces the `<Link>` component. Theme authors can now use the Link component without having to create one or manually deal with the router.
+
+### Patch Changes
+
+- [`a0cc3e77`](https://github.com/frontity/frontity/commit/a0cc3e778a747b1826c6f106a7845813d69bf591) [#503](https://github.com/frontity/frontity/pull/503) Thanks [@goiblas](https://github.com/goiblas)! - Filter the `when` prop from the Switch component children.
+
+- Updated dependencies [[`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f), [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377)]:
+  - frontity@1.10.0
+
+## 1.3.3
+
+### Patch Changes
+
+- [`cfa8062d`](https://github.com/frontity/frontity/commit/cfa8062d60ccf46b3e0c5aa5490e4e03f1b693a5) [#480](https://github.com/frontity/frontity/pull/480) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - Removed unneeded dependency.
+
+* [`845de536`](https://github.com/frontity/frontity/commit/845de536d111105dd3f636c3543170a676ac65cc) [#485](https://github.com/frontity/frontity/pull/485) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md created.
+
+* Updated dependencies [[`fc1220b5`](https://github.com/frontity/frontity/commit/fc1220b5eb2ae0af933b76cc9fb1a62b83fc7075), [`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b)]:
+  - @frontity/hooks@2.0.2
+  - frontity@1.9.0
+
 ## 1.3.2
 
 ### Patch Changes
