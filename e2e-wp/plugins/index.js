@@ -1,7 +1,9 @@
 /* eslint-disable */
 
 module.exports = (on, config) => {
-  on("replaceDb", () => {
-    console.log("replacing db");
+  on("task", {
+    replaceDb() {
+      console.log("replacing db");
+    },
   });
 };
