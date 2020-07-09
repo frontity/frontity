@@ -31,6 +31,9 @@
     "build:watch": "tsc --project ./tsconfig.build.json --watch",
     "prepublish": "npm run build"
   },
+  "peerDependencies": {
+    "@frontity/core": "^1.7.2"
+  },
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.22",
