@@ -22,7 +22,6 @@ const wpSourceErrors: WpSourceErrors = {
     wpSourceErrors: {
       init: ({ state, libraries }) => {
         const { query } = libraries.source.parse(state.frontity.initialLink);
-        console.log(query);
         if (query.statusCode) {
           state.source.api = `https://httpstat.us/${query.statusCode}?rest_route=/`;
         } else {
