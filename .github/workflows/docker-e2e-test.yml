@@ -6,8 +6,7 @@ jobs:
   run-e2e:
     strategy:
       matrix:
-        target: ["module"]
-        publicPath: ["/custom/path"]
+        instances: ["instance-1:wp-test.spec.js"]
 
     runs-on: ubuntu-latest
     steps:
@@ -33,12 +32,4 @@ jobs:
           CI: true
 
       - name: Run e2e tests
-        uses: cypress-io/github-action@v1.21.0
-        with:
-          build: ./scripts/build-e2e-docker.sh ${{ matrix.publicPath }} ${{ matrix.target }}
-          start: npm run e2e-docker
-          wait-on: "http://localhost:3001"
-          wait-on-timeout: 180
-          env: HEADLESS=true
-          working-directory: e2e
-          config: video=true,screenshotOnRunFailure=true
+        run: npm run e2e-wp-test ${{ matrix.instances }}

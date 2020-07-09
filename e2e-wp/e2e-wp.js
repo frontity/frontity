@@ -5,12 +5,7 @@ const waitOn = require("wait-on");
 (async () => {
   const input = process.argv[2];
 
-  const parseInput = (input) => {
-    const [instance, tests] = input.split(":");
-    return { instance, testFiles: tests.split(",") };
-  };
-
-  const { instance, testFiles } = parseInput(input);
+  const [instance, tests] = input.split(":");
 
   process.chdir(instance);
 
@@ -37,6 +32,16 @@ const waitOn = require("wait-on");
       resources: ["http-get://localhost:3001"],
       interval: 1000,
     });
+
+    process.chdir("../integration");
+
+    const testProcess = execa(
+      "cypress",
+      ["run", "--env", "HEADLESS=true", "--spec", tests],
+      { shell: true }
+    );
+    testProcess.stdout.pipe(process.stdout);
+    await testProcess;
   } catch (e) {
     console.error(e);
     process.exit();
