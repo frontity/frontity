@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const { spawn } = require("child-process-promise");
 var waitOn = require("wait-on");
 
