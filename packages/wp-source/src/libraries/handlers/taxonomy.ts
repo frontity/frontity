@@ -130,6 +130,11 @@ const taxonomyHandler = ({
       404
     );
 
+  // `libraries.source.populate()` creates a data object for each taxonomy it
+  // receives from the Response object
+  //
+  // If state.source.data[route] doesn't contain that the `taxonomy` property it means that
+  // something else was returned from the endopoint and this handler was matched erroneously.
   if (!state.source.data[route].taxonomy) {
     throw new ServerError(
       `You have tried to access content at route: ${route} but it does not exist`,
