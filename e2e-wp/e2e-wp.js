@@ -33,7 +33,7 @@ const waitOn = require("wait-on");
       interval: 1000,
     });
 
-    process.chdir("../integration");
+    process.chdir("..");
 
     const testProcess = execa(
       "npx",
