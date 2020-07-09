@@ -1,6 +1,7 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
 import { DateData, DateWithSearchData } from "@frontity/source/types/data";
+import validateDate from "./utils/validateDate";
 
 /**
  * A {@link Handler} for fetching posts by date.
@@ -39,12 +40,7 @@ export const dateHandler: Handler = async ({
   const month = params.month && parseInt(params.month);
   const day = params.day && parseInt(params.day);
 
-  if (typeof month === "number" && (month < 1 || month > 12)) {
-    throw new ServerError(`${month} is a wrong month number`, 404);
-  }
-  if (typeof day === "number" && (day < 1 || day > 31)) {
-    throw new ServerError(`${day} is a wrong day number`, 404);
-  }
+  validateDate(year, month, day);
 
   const after = new Date(
     `${params.year}-${params.month || "01"}-${params.day || "01"}`
