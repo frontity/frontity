@@ -36,8 +36,8 @@ const waitOn = require("wait-on");
     process.chdir("../integration");
 
     const testProcess = execa(
-      "cypress",
-      ["run", "--env", "HEADLESS=true", "--spec", tests],
+      "npx",
+      ["cypress", "run", "--env", "HEADLESS=true", "--spec", tests],
       { shell: true }
     );
     testProcess.stdout.pipe(process.stdout);
