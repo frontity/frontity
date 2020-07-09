@@ -41,11 +41,16 @@ const cypress = require("cypress");
       .map((t) => `./integration/${t}`)
       .join(",");
 
-    const result = await cypress.run({
+    await cypress.run({
       spec: testfiles,
       env: { HEADLESS: true },
     });
-    console.log(result);
+
+    setTimeout(() => {
+      serveProcess.kill("SIGTERM", {
+        forceKillAfterTimeout: 2000,
+      });
+    }, 1000);
 
     // const testProcess = execa(
     //   "npx",
