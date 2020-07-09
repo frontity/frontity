@@ -1,6 +1,11 @@
 import React from "react";
 import Package from "../types";
 
+/**
+ * This is a basic test.
+ *
+ * @returns React Element.
+ */
 const Component: React.FC = () => (
   <>
     <div id="test" className="test">

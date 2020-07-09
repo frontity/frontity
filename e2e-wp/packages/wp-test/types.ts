@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Package } from "frontity/types";
 
 interface WPTest extends Package {
