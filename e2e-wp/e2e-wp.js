@@ -49,6 +49,6 @@ const waitOn = require("wait-on");
     await testProcess;
   } catch (e) {
     console.error(e);
-    process.exit();
+    process.exit(1);
   }
 })();
