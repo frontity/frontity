@@ -25,6 +25,7 @@
     "@types/wait-on": "^4.0.0",
     "child-process-promise": "^2.2.1",
     "cross-env": "^5.2.1",
+    "cypress": "^4.10.0",
     "eslint": "^6.2.2",
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-cypress": "^2.6.1",
