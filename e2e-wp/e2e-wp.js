@@ -46,11 +46,7 @@ const cypress = require("cypress");
       env: { HEADLESS: true },
     });
 
-    setTimeout(() => {
-      serveProcess.kill("SIGTERM", {
-        forceKillAfterTimeout: 2000,
-      });
-    }, 1000);
+    process.exit(0);
 
     // const testProcess = execa(
     //   "npx",
