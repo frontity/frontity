@@ -36,8 +36,11 @@ export const dateHandler: Handler = async ({
   const { route, page, query } = parse(link);
 
   // 1. build date properties
+  // year has to be parsed correctly because it HAD TO be matched by a pattern.
   const year = parseInt(params.year);
+  // it's okay if month is undefined, this will return NaN in that case.
   const month = params.month && parseInt(params.month);
+  // it's okay if month is undefined, this will return NaN in that case.
   const day = params.day && parseInt(params.day);
 
   validateDate(year, month, day);
