@@ -26,11 +26,6 @@ const wpComments: WpComments = {
         const form = state.comments.forms[postId];
         const { fields } = form;
 
-        // Check that required fields are not empty.
-        if (!fields.comment) return error("`comment` is required");
-        if (!fields.author) return error("`author` is required");
-        if (!fields.email) return error("`email` is required");
-
         // Reset the `submitted` object.
         form.submitted = {
           isError: false,
@@ -85,10 +80,10 @@ const wpComments: WpComments = {
           form.submitted.isError = true;
 
           // If the body is empty `postId` is invalid;
-          // `author` or `email` otherwise.
+          // `author` or `email` are invalid otherwise.
           form.submitted.errorMessage = !body
             ? "The post ID is invalid"
-            : "Email has an invalid format";
+            : "Author or email are empty, or email has an invalid format";
 
           return;
         }

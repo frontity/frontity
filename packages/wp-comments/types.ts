@@ -122,6 +122,16 @@ interface WpComments extends Package {
        * argument. If fields are passed, those replace the current values stored
        * in `state.comments.form[postId].fields`.
        *
+       * After calling this action, you can access
+       * `state.comments.forms[postId].submitted` properties to know the
+       * submittion status.
+       *
+       * @remarks
+       * This action does not validate input. That means requests are made even
+       * though some fields are empty or have invalid values. If that is the
+       * case, WordPress would return an error message and populate the error
+       * status accordingly.
+       *
        *
        * @example
        * ```
