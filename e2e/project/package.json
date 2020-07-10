@@ -33,6 +33,7 @@
     "e2e-slot-and-fill": "^1.0.0",
     "e2e-tiny-router": "^1.0.0",
     "e2e-use-in-view": "^1.0.0",
+    "e2e-use-infinite-scroll": "^1.0.0",
     "frontity": "^1.5.2"
   }
 }
