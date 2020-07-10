@@ -5,9 +5,14 @@ services:
     image: wordpress:5.0
     ports:
       - 8080:80
+    # The wordpress container will retry to connect to the mysql database for 30 seconds
+    # after starting. However, it might take longer than this for mysql container
+    # to initialize (inluding loading data into the DB). For this reason, if the
+    # wordpress container times out, we have to restart it
+    restart: always
     volumes:
       - wp_data:/var/www/html
-      - ./data/uploads/:/var/www/html/wp-content/uploads
+      - ./data:/var/www/html/wp-content
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: wordpress
@@ -21,6 +26,7 @@ services:
   wpcli:
     image: wordpress:cli
     volumes:
+      # Needs to share a volume with the `wp` service so that the CLI can run the commands
       - wp_data:/var/www/html
     depends_on:
       - db
@@ -36,6 +42,7 @@ services:
       ]
     volumes:
       - db_data:/var/lib/mysql
+      # The mysql image will load any .sql file in the ./data folder
       - ./data:/docker-entrypoint-initdb.d
     environment:
       MYSQL_DATABASE: wordpress
