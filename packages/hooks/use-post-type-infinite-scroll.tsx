@@ -61,7 +61,7 @@ type UsePostTypeInfiniteScroll = (options?: {
     /**
      * The Wrapper component that should wrap the real `Post` component.
      */
-    Wrapper: React.FC<Connect<Source & Router>>;
+    Wrapper: React.FC;
   }[];
   /**
    * If it has reached the limit of posts and it should switch to manual mode.
@@ -156,7 +156,7 @@ const MemoizedWrapper = memoize((link: string) => link, Wrapper);
  * A hook used to add infinite scroll to any Frontity post type.
  *
  * @param options - Options for the hook, like the number of posts it should
- * load autoamtically or if it's active or not. Defined in {@link
+ * load automatically or if it's active or not. Defined in {@link
  * UsePostTypeInfiniteScroll}.
  *
  * @returns - An array of posts and other useful booleans. Defined in {@link
