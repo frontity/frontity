@@ -1,4 +1,4 @@
-import { fetch, warn, error, URL } from "frontity";
+import { fetch, warn, URL } from "frontity";
 import WpComments from "../types";
 
 const wpComments: WpComments = {
