@@ -1,6 +1,5 @@
 import { ResponseInit, Response as NodeResponse } from "node-fetch";
 
-//
 /**
  * Utility to mock responses from WP REST API.
  *
@@ -14,3 +13,18 @@ import { ResponseInit, Response as NodeResponse } from "node-fetch";
  */
 export const mockResponse = (body, init?: ResponseInit): Response =>
   (new NodeResponse(JSON.stringify(body), init) as any) as Response;
+
+/**
+ * Function that returns an object from given entries.
+ *
+ * @param entries - Array of key-value pairs.
+ *
+ * @returns Object with entries transformed to keys and values.
+ */
+export const fromEntries = (
+  entries: IterableIterator<[string, any]>
+): object => {
+  const result = {};
+  for (const [key, value] of entries) result[key] = value;
+  return result;
+};

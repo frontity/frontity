@@ -18,6 +18,13 @@ const wpComments: WpComments = {
           );
         }
 
+        // Return if a submission is pending.
+        if (state.comments.forms[postId]?.submitted?.isPending) {
+          return warn(
+            "You cannot submit a comment to the same post if another is pending."
+          );
+        }
+
         // Update fields for this form.
         // This line inits the form if it wans't yet.
         actions.comments.updateFields(postId, comment || {});
@@ -113,6 +120,11 @@ const wpComments: WpComments = {
           form.submitted.id = id;
           return;
         }
+
+        // Any other response - Unexpected error.
+        form.submitted.isPending = false;
+        form.submitted.isError = true;
+        form.submitted.errorMessage = `Unexpected error: ${response.status}`;
       },
       updateFields: ({ state }) => (postId, fields) => {
         // Get form from state.
