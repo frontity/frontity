@@ -38,7 +38,7 @@ interface LinkProps {
    * The onClick handler. Can be used to pass an optional callback that will be
    * invoked on click.
    */
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 
   /**
    * Whether the browser should scroll up to the top upon navigating to a new
@@ -119,6 +119,7 @@ const Link: React.FC<LinkProps> = ({
     [inViewRef]
   );
   const autoPrefetch = state?.theme?.autoPrefetch;
+  const isExternal = link.startsWith("http");
 
   if (!link || typeof link !== "string") {
     warn("link prop is required and must be a string");
@@ -131,7 +132,7 @@ const Link: React.FC<LinkProps> = ({
       _navigator?.connection?.saveData ||
       (_navigator?.connection?.effectiveType || "").includes("2g");
 
-    if (!prefetch || !link || isSlowConnection) {
+    if (!prefetch || !link || isSlowConnection || isExternal) {
       return;
     }
 
@@ -168,7 +169,7 @@ const Link: React.FC<LinkProps> = ({
    */
   const onClickHandler = (event: MouseEvent<HTMLAnchorElement>) => {
     // Do nothing if it's an external link
-    if (link.startsWith("http")) return;
+    if (isExternal) return;
 
     // Do nothing if this is supposed to open in a new tab
     if (target === "_blank") return;
@@ -197,7 +198,7 @@ const Link: React.FC<LinkProps> = ({
 
     // If there's an additional handler, execute it.
     if (typeof onClick === "function") {
-      onClick();
+      onClick(event);
     }
   };
 
