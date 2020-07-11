@@ -67,6 +67,20 @@ function watch(el: Element, cb: () => void) {
 }
 
 /**
+ * Executes the callback when the hover event is triggered for the element.
+ *
+ * @param el The element to watch for hover events.
+ * @param cb The callback that should run should an hover event happen.
+ */
+function onHover(el: HTMLAnchorElement, cb: () => void) {
+  el.addEventListener("mouseover", cb);
+
+  return () => {
+    el.removeEventListener("mouseover", cb);
+  };
+}
+
+/**
  * Props for React component {@link Link}.
  */
 interface LinkProps {
@@ -152,6 +166,8 @@ const Link: React.FC<LinkProps> = ({
   const { state, actions } = useConnect<Package>();
   const ref = useRef(null);
 
+  const autoPrefetch = state?.theme?.autoPrefetch;
+
   if (!link || typeof link !== "string") {
     warn("link prop is required and must be a string");
   }
@@ -161,18 +177,34 @@ const Link: React.FC<LinkProps> = ({
       return;
     }
 
-    const autoPrefetch = state?.theme?.autoPrefetch;
+    /**
+     * Prefetches the link only if necessary
+     *
+     * @param link The link to prefetch
+     */
+    const maybePrefetch = (link: string) => {
+      const data = state.source.get(link);
+
+      if (!data.isReady && !data.isFetching) {
+        console.log("fetching");
+        actions.source.fetch(link);
+      }
+    };
+
     if (autoPrefetch === "all") {
-      actions.source.fetch(link);
+      maybePrefetch(link);
     } else if (ref.current && autoPrefetch === "hover") {
-      // TODO
+      return onHover(ref.current, () => {
+        console.log("Link on hover, autoprefetching");
+        maybePrefetch(link);
+      });
     } else if (ref.current && autoPrefetch === "in-view") {
       return watch(ref.current, () => {
         console.log("Link in view, autoprefetching");
-        actions.source.fetch(link);
+        maybePrefetch(link);
       });
     }
-  }, [prefetch, link, ref]);
+  }, [prefetch, link, ref, autoPrefetch]);
 
   /**
    * The event handler for the click event. It will try to do client-side
