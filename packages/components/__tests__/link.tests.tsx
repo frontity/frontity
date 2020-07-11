@@ -7,18 +7,37 @@ import Link from "../link";
 
 let store;
 let container;
+let fetch: jest.Mock;
+let get: jest.Mock;
 
 beforeEach(() => {
+  fetch = jest.fn();
+  get = jest.fn();
+
   container = document.createElement("div");
   document.body.appendChild(container);
   window.scrollTo = jest.fn();
+  Object.defineProperty(window, "IntersectionObserver", {
+    writable: true,
+    value: jest.fn(),
+  });
   store = createStore({
-    state: {},
+    state: {
+      theme: {
+        autoPrefetch: "hover",
+      },
+      source: {
+        get: () => get,
+      },
+    },
     actions: {
       router: {
         set(link) {
           return link;
         },
+      },
+      source: {
+        fetch: () => fetch,
       },
     },
   });
@@ -234,5 +253,89 @@ describe("Link", () => {
 
     expect(window.scrollTo).not.toHaveBeenCalled();
     expect(store.actions.router.set).not.toHaveBeenCalledWith(linkUrl);
+  });
+});
+
+describe("Link prefetching", () => {
+  test("all mode works", () => {
+    const linkUrl1 = "/post-name";
+    const linkUrl2 = "/post-name-2";
+    const storeAllMode = { ...store };
+    storeAllMode.state.theme.autoPrefetch = "all";
+
+    get.mockReturnValue({ isReady: false, isFetching: false });
+    jest.spyOn(store.actions.source, "fetch");
+
+    act(() => {
+      render(
+        <Provider value={storeAllMode}>
+          <Link link={linkUrl1} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl2} className="my-link-2">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    expect(store.actions.source.fetch).toHaveBeenCalledTimes(2);
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl1);
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl2);
+  });
+
+  test("hover mode works", () => {
+    const linkUrl = "/post-name";
+    const linkUrlNoPrefetch = "/post-name-2";
+    act(() => {
+      render(
+        <Provider value={store}>
+          <Link link={linkUrl} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl} className="my-link-2">
+            This is a link
+          </Link>
+          <Link link={linkUrlNoPrefetch} className="my-link-3">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.source, "fetch");
+    get.mockReturnValue({ isReady: false, isFetching: false });
+
+    const anchor = document.querySelector("a.my-link");
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+    });
+
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl);
+
+    // if data is already avaliable no need to prefetch again.
+    get.mockReturnValue({ isReady: true, isFetching: false });
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+    });
+
+    const anchor2 = document.querySelector("a.my-link-2");
+
+    act(() => {
+      anchor2.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+    });
+
+    // a link that was not prefetched should not call fetch, it should go through the router instead
+    const anchor3 = document.querySelector("a.my-link-3");
+
+    act(() => {
+      anchor3.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(store.actions.source.fetch).toHaveBeenCalledTimes(1);
   });
 });

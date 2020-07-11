@@ -179,7 +179,12 @@ const Link: React.FC<LinkProps> = ({
       _navigator?.connection?.saveData ||
       (_navigator?.connection?.effectiveType || "").includes("2g");
 
-    if (!prefetch || !link || !IntersectionObserver || isSlowConnection) {
+    if (
+      !prefetch ||
+      !link ||
+      !window.IntersectionObserver ||
+      isSlowConnection
+    ) {
       return;
     }
 
@@ -192,7 +197,6 @@ const Link: React.FC<LinkProps> = ({
       const data = state.source.get(link);
 
       if (!data.isReady && !data.isFetching) {
-        console.log("fetching");
         actions.source.fetch(link);
       }
     };
@@ -201,12 +205,10 @@ const Link: React.FC<LinkProps> = ({
       maybePrefetch(link);
     } else if (ref.current && autoPrefetch === "hover") {
       return onHover(ref.current, () => {
-        console.log("Link on hover, autoprefetching");
         maybePrefetch(link);
       });
     } else if (ref.current && autoPrefetch === "in-view") {
       return watch(ref.current, () => {
-        console.log("Link in view, autoprefetching");
         maybePrefetch(link);
       });
     }
