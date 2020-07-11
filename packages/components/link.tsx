@@ -173,7 +173,13 @@ const Link: React.FC<LinkProps> = ({
   }
 
   useEffect(() => {
-    if (!prefetch || !link || !IntersectionObserver) {
+    // Checks if user is on slow connection or has enabled data saver
+    const _navigator = navigator as Navigator & { connection };
+    const isSlowConnection =
+      _navigator?.connection?.saveData ||
+      (_navigator?.connection?.effectiveType || "").includes("2g");
+
+    if (!prefetch || !link || !IntersectionObserver || isSlowConnection) {
       return;
     }
 
