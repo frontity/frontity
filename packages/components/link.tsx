@@ -1,70 +1,7 @@
-import React, { MouseEvent, useEffect, useRef } from "react";
+import React, { MouseEvent, useEffect, useRef, useCallback } from "react";
 import { warn, connect, useConnect } from "frontity";
+import useInView from "@frontity/hooks/use-in-view";
 import { Package } from "frontity/types";
-
-let cachedObserver: IntersectionObserver;
-const IntersectionObserver =
-  typeof window !== "undefined" ? window.IntersectionObserver : null;
-const listeners = new Map<Element, () => void>();
-
-/**
- * Returns a shared instance of a IntersectionObserver.
- */
-function getObserver(): IntersectionObserver | undefined {
-  if (cachedObserver) {
-    return cachedObserver;
-  }
-
-  if (!IntersectionObserver) {
-    return undefined;
-  }
-
-  cachedObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!listeners.has(entry.target)) {
-          return;
-        }
-
-        const cb = listeners.get(entry.target);
-        if (entry.isIntersecting || entry.intersectionRatio > 0) {
-          cachedObserver.unobserve(entry.target);
-          listeners.delete(entry.target);
-          cb();
-        }
-      });
-    },
-    { rootMargin: "200px" }
-  );
-
-  return cachedObserver;
-}
-
-/**
- * Watches intersections.
- *
- * @param el The element to watch for intersections.
- * @param cb The callback that should run should an intersection happen.
- */
-function watch(el: Element, cb: () => void) {
-  const observer = getObserver();
-
-  if (!observer) {
-    return () => {};
-  }
-
-  observer.observe(el);
-  listeners.set(el, cb);
-
-  return () => {
-    try {
-      observer.unobserve(el);
-    } catch (exception) {
-      console.error(exception);
-    }
-    listeners.delete(el);
-  };
-}
 
 /**
  * Executes the callback when the hover event is triggered for the element.
@@ -164,8 +101,23 @@ const Link: React.FC<LinkProps> = ({
   ...anchorProps
 }) => {
   const { state, actions } = useConnect<Package>();
+  // Get the reference and the visibility status.
+  const { ref: inViewRef, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "200px",
+  });
   const ref = useRef(null);
 
+  // we need to handle multiple ref, one for useInView and one for tracking the hover events.
+  const setRefs = useCallback(
+    (node) => {
+      ref.current = node;
+      if (typeof inViewRef === "function") {
+        inViewRef(node);
+      }
+    },
+    [inViewRef]
+  );
   const autoPrefetch = state?.theme?.autoPrefetch;
 
   if (!link || typeof link !== "string") {
@@ -179,12 +131,7 @@ const Link: React.FC<LinkProps> = ({
       _navigator?.connection?.saveData ||
       (_navigator?.connection?.effectiveType || "").includes("2g");
 
-    if (
-      !prefetch ||
-      !link ||
-      !window.IntersectionObserver ||
-      isSlowConnection
-    ) {
+    if (!prefetch || !link || isSlowConnection) {
       return;
     }
 
@@ -207,12 +154,10 @@ const Link: React.FC<LinkProps> = ({
       return onHover(ref.current, () => {
         maybePrefetch(link);
       });
-    } else if (ref.current && autoPrefetch === "in-view") {
-      return watch(ref.current, () => {
-        maybePrefetch(link);
-      });
+    } else if (inView && autoPrefetch === "in-view") {
+      maybePrefetch(link);
     }
-  }, [prefetch, link, ref, autoPrefetch]);
+  }, [prefetch, link, ref, inView, autoPrefetch]);
 
   /**
    * The event handler for the click event. It will try to do client-side
@@ -263,7 +208,7 @@ const Link: React.FC<LinkProps> = ({
       onClick={onClickHandler}
       aria-current={ariaCurrent}
       {...anchorProps}
-      ref={ref}
+      ref={setRefs}
     >
       {children}
     </a>

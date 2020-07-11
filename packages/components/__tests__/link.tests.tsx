@@ -17,10 +17,6 @@ beforeEach(() => {
   container = document.createElement("div");
   document.body.appendChild(container);
   window.scrollTo = jest.fn();
-  Object.defineProperty(window, "IntersectionObserver", {
-    writable: true,
-    value: jest.fn(),
-  });
   store = createStore({
     state: {
       theme: {
