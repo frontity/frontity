@@ -1,6 +1,70 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useEffect, useRef } from "react";
 import { warn, connect, useConnect } from "frontity";
 import { Package } from "frontity/types";
+
+let cachedObserver: IntersectionObserver;
+const IntersectionObserver =
+  typeof window !== "undefined" ? window.IntersectionObserver : null;
+const listeners = new Map<Element, () => void>();
+
+/**
+ * Returns a shared instance of a IntersectionObserver.
+ */
+function getObserver(): IntersectionObserver | undefined {
+  if (cachedObserver) {
+    return cachedObserver;
+  }
+
+  if (!IntersectionObserver) {
+    return undefined;
+  }
+
+  cachedObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!listeners.has(entry.target)) {
+          return;
+        }
+
+        const cb = listeners.get(entry.target);
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
+          cachedObserver.unobserve(entry.target);
+          listeners.delete(entry.target);
+          cb();
+        }
+      });
+    },
+    { rootMargin: "200px" }
+  );
+
+  return cachedObserver;
+}
+
+/**
+ * Watches intersections.
+ *
+ * @param el The element to watch for intersections.
+ * @param cb The callback that should run should an intersection happen.
+ */
+function watch(el: Element, cb: () => void) {
+  const observer = getObserver();
+
+  if (!observer) {
+    return () => {};
+  }
+
+  observer.observe(el);
+  listeners.set(el, cb);
+
+  return () => {
+    try {
+      observer.unobserve(el);
+    } catch (exception) {
+      console.error(exception);
+    }
+    listeners.delete(el);
+  };
+}
 
 /**
  * Props for React component {@link Link}.
@@ -32,6 +96,14 @@ interface LinkProps {
    * @defaultValue true
    */
   scroll?: boolean;
+
+  /**
+   * Whether frontity should automatically prefetch this link or not.
+   * The prefetching mode is controlled through state.theme.prefetch.
+   *
+   * @defaultValue true
+   */
+  prefetch?: boolean;
 
   /**
    * Indicates the element that represents the current item within a container
@@ -73,14 +145,34 @@ const Link: React.FC<LinkProps> = ({
   onClick,
   target = "_self",
   scroll = true,
+  prefetch = true,
   "aria-current": ariaCurrent,
   ...anchorProps
 }) => {
-  const { actions } = useConnect<Package>();
+  const { state, actions } = useConnect<Package>();
+  const ref = useRef(null);
 
   if (!link || typeof link !== "string") {
     warn("link prop is required and must be a string");
   }
+
+  useEffect(() => {
+    if (!prefetch || !link || !IntersectionObserver) {
+      return;
+    }
+
+    const autoPrefetch = state?.theme?.autoPrefetch;
+    if (autoPrefetch === "all") {
+      actions.source.fetch(link);
+    } else if (ref.current && autoPrefetch === "hover") {
+      // TODO
+    } else if (ref.current && autoPrefetch === "in-view") {
+      return watch(ref.current, () => {
+        console.log("Link in view, autoprefetching");
+        actions.source.fetch(link);
+      });
+    }
+  }, [prefetch, link, ref]);
 
   /**
    * The event handler for the click event. It will try to do client-side
@@ -131,6 +223,7 @@ const Link: React.FC<LinkProps> = ({
       onClick={onClickHandler}
       aria-current={ariaCurrent}
       {...anchorProps}
+      ref={ref}
     >
       {children}
     </a>
