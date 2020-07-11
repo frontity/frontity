@@ -253,6 +253,60 @@ describe("Link", () => {
 });
 
 describe("Link prefetching", () => {
+  test("disabling works", () => {
+    const linkUrl1 = "/post-name";
+    const linkUrl2 = "/post-name-2";
+    const storeAllMode = { ...store };
+    storeAllMode.state.theme.autoPrefetch = "all";
+
+    get.mockReturnValue({ isReady: false, isFetching: false });
+    jest.spyOn(store.actions.source, "fetch");
+
+    act(() => {
+      render(
+        <Provider value={storeAllMode}>
+          <Link link={linkUrl1} prefetch={false} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl2} className="my-link-2">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    expect(store.actions.source.fetch).toHaveBeenCalledTimes(1);
+    expect(store.actions.source.fetch).not.toHaveBeenCalledWith(linkUrl1);
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl2);
+  });
+
+  test("does not run on slow connections", () => {
+    const linkUrl1 = "/post-name";
+    const storeAllMode = { ...store };
+    storeAllMode.state.theme.autoPrefetch = "all";
+
+    get.mockReturnValue({ isReady: false, isFetching: false });
+    jest.spyOn(store.actions.source, "fetch");
+    // simulate save data mode
+    (navigator as Navigator & { connection }).connection = { saveData: true };
+    act(() => {
+      render(
+        <Provider value={storeAllMode}>
+          <Link link={linkUrl1} className="my-link">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    expect(store.actions.source.fetch).toHaveBeenCalledTimes(0);
+    expect(store.actions.source.fetch).not.toHaveBeenCalledWith(linkUrl1);
+
+    (navigator as Navigator & { connection }).connection = { saveData: false };
+  });
+
   test("all mode works", () => {
     const linkUrl1 = "/post-name";
     const linkUrl2 = "/post-name-2";
