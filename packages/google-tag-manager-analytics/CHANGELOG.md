@@ -1,12 +1,20 @@
 # @frontity/google-tag-manager
 
-## 0.3.0
+## 1.0.0
 
-### Minor Changes
+### Major Changes
 
-- [`496192cc`](https://github.com/frontity/frontity/commit/496192cc9413a54f93b894f44ad0e1ec3d0c9f9b) [#472](https://github.com/frontity/frontity/pull/472) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate `@frontity/google-tag-manager` in favor of `@frontity/google-tag-manager-analytics`.
+- [`5ece8821`](https://github.com/frontity/frontity/commit/5ece88219d354952baadd5649091b09dd5288b49) [#472](https://github.com/frontity/frontity/pull/472) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Release the first version of `@frontity/google-tag-manager-analytics` ([Feature Discussion](https://community.frontity.org/t/google-tag-manager-package/1400)).
+
+  Deprecates `@frontity/google-tag-manager` package.
 
   > This package was renamed from `@frontity/google-tag-manager` to `@frontity/google-tag-manager-analytics` to remark that it belongs to the Frontity analytics packages.
+
+### Patch Changes
+
+- Updated dependencies [[`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f), [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377), [`2fb73fc7`](https://github.com/frontity/frontity/commit/2fb73fc798653803a21f9e9bd7f21355f7675e55)]:
+  - frontity@1.10.0
+  - @frontity/analytics@1.2.0
 
 ## 0.2.0
 

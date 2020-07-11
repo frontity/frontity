@@ -1,22 +1,22 @@
 import analytics from "@frontity/analytics";
-import GoogleTagManager from "../types";
+import GoogleTagManagerAnalytics from "../types";
 import Root from "./components";
 
-const googleTagManager: GoogleTagManager = {
+const googleTagManagerAnalytics: GoogleTagManagerAnalytics = {
   name: "@frontity/google-tag-manager",
   roots: {
     ...analytics.roots,
-    googleTagManager: Root,
+    googleTagManagerAnalytics: Root,
   },
   actions: {
     ...analytics.actions,
-    googleTagManager: {
-      sendPageview: () => (pageview) => {
+    googleTagManagerAnalytics: {
+      pageview: () => (pageview) => {
         // Send the pageview to the trackers.
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: "virtualPageview", pageview });
+        window.dataLayer.push({ event: "pageview", ...pageview });
       },
-      sendEvent: () => ({ event, payload }) => {
+      event: () => ({ name: event, payload }) => {
         // Send the event to the trackers.
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event, payload });
@@ -26,10 +26,11 @@ const googleTagManager: GoogleTagManager = {
   state: {
     analytics: {
       ...analytics.state.analytics,
-      namespaces: ["googleTagManager"],
+      pageviews: { googleTagManagerAnalytics: true },
+      events: { googleTagManagerAnalytics: true },
     },
-    googleTagManager: {},
+    googleTagManagerAnalytics: {},
   },
 };
 
-export default googleTagManager;
+export default googleTagManagerAnalytics;

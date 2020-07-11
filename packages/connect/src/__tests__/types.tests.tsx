@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import connect, { createStore, Action, Derived, Connect } from "..";
 
@@ -139,6 +140,9 @@ test("Injected state and actions are fine", () => {
 
 test("Connected components only require own props", () => {
   const ConnectedComponent = connect(Component);
+  () => <ConnectedComponent ownProp1={1} />;
+});
 
-  const ParentComponent: React.FC = () => <ConnectedComponent ownProp1={1} />;
+test("connect can receive `inpectProps` option", () => {
+  connect(Component, { injectProps: false });
 });

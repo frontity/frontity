@@ -1,18 +1,18 @@
-# `@frontity/google-analytics`
+# `@frontity/google-tag-manager-analytics`
 
-[![Version](https://img.shields.io/npm/v/@frontity/google-analytics.svg)](https://www.npmjs.com/package/@frontity/google-analytics) [![npm](https://img.shields.io/npm/dw/@frontity/google-analytics)](https://www.npmjs.com/package/@frontity/google-analytics) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@frontity/google-tag-manager-analytics.svg)](https://www.npmjs.com/package/@frontity/google-tag-manager-analytics) [![npm](https://img.shields.io/npm/dw/@frontity/google-tag-manager-analytics)](https://www.npmjs.com/package/@frontity/google-tag-manager-analytics) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-Analytics package to use Google Analytics with Frontity
+Analytics package to use Google Tag Manager with Frontity
 
 ## Install
 
 ```sh
-npm i @frontity/google-analytics
+npm i @frontity/google-tag-manager-analytics
 ```
 
 ## Usage
 
-Once is installed the GA Tracking ID should be added in the `frontity.settings.js` under the package `state`
+Once is installed the Container ID should be added in the `frontity.settings.js` under the package `state`
 
 **`frontity.settings.js`**
 
@@ -20,10 +20,10 @@ Once is installed the GA Tracking ID should be added in the `frontity.settings.j
 export default {
   packages: [
     {
-      name: "@frontity/google-analytics",
+      name: "@frontity/google-tag-manager-analytics",
       state: {
-        googleAnalytics: {
-          trackingId: "UA-12345678-9",
+        googleTagManagerAnalytics: {
+          containerId: "GTM-BCDFGHJ",
         },
       },
     },
@@ -35,11 +35,11 @@ export default {
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/google-analytics
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/google-tag-manager
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/google-analytics/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/google-tag-manager-analytics/CHANGELOG.md)
 
 ---
 

@@ -1,4 +1,5 @@
 {
   "name": "@frontity/yoast",
+  "description": "This package has been deprecated. Please use @frontity/head-tags instead.",
   "version": "1.2.0"
 }
