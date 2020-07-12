@@ -6,7 +6,7 @@ import { Package } from "frontity/types";
 const toPrefetch = new Set<string>();
 let isProcessingQueue = false;
 
-const config = {
+export const config = {
   hoverDelay: 50,
   requestsPerBatch: 4,
   batchInterval: 1000,

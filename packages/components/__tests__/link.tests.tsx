@@ -2,8 +2,9 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { create } from "react-test-renderer";
-import { createStore, Provider } from "../../connect/src";
-import Link from "../link";
+import { mockIsIntersecting } from "react-intersection-observer/test-utils";
+import { createStore, Provider, batch } from "../../connect/src";
+import Link, { config } from "../link";
 
 let store;
 let container;
@@ -415,5 +416,89 @@ describe("Link prefetching", () => {
     });
 
     expect(store.actions.source.fetch).toHaveBeenCalledTimes(1);
+  });
+
+  test("in-view mode works", () => {
+    const linkUrl = "/post-name-hover-1";
+    const linkUrl2 = "/post-name-hover-2";
+
+    const storeInViewMode = { ...store };
+    storeInViewMode.state.theme.autoPrefetch = "in-view";
+
+    jest.spyOn(store.actions.source, "fetch");
+    get.mockReturnValue({ isReady: false, isFetching: false });
+
+    act(() => {
+      render(
+        <Provider value={storeInViewMode}>
+          <Link link={linkUrl} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl2} className="my-link-2">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    const anchor = document.querySelector("a.my-link");
+    mockIsIntersecting(anchor, true);
+    jest.runAllTimers();
+
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl);
+    expect(store.actions.source.fetch).not.toHaveBeenCalledWith(linkUrl2);
+    expect(store.actions.source.fetch).toHaveBeenCalledTimes(1);
+
+    const anchor2 = document.querySelector("a.my-link-2");
+    mockIsIntersecting(anchor2, true);
+    jest.runAllTimers();
+
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl2);
+    expect(store.actions.source.fetch).toHaveBeenCalledTimes(2);
+  });
+
+  test("works in batches", () => {
+    const links = [
+      "/post-name-1",
+      "/post-name-2",
+      "/post-name-3",
+      "/post-name-4",
+      "/post-name-5",
+      "/post-name-6",
+      "/post-name-7",
+      "/post-name-8",
+      "/post-name-9",
+      "/post-name-10",
+    ];
+
+    const storeInViewMode = { ...store };
+    storeInViewMode.state.theme.autoPrefetch = "all";
+
+    jest.spyOn(store.actions.source, "fetch");
+    get.mockReturnValue({ isReady: false, isFetching: false });
+
+    act(() => {
+      render(
+        <Provider value={storeInViewMode}>
+          {links.map((link, i) => (
+            <Link key={link} link={link} className={"my-link-${i}"}>
+              This is a link
+            </Link>
+          ))}
+        </Provider>,
+        container
+      );
+    });
+
+    const numBatches = links.length / config.requestsPerBatch;
+
+    for (let i = 1; i < numBatches; i++) {
+      // process batch
+      jest.runOnlyPendingTimers();
+      expect(store.actions.source.fetch).toHaveBeenCalledTimes(
+        config.requestsPerBatch * i
+      );
+    }
   });
 });
