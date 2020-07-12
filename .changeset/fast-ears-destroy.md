@@ -2,7 +2,7 @@
 "@frontity/components": minor
 ---
 
-Introducing autoprefetching to the `<Link />` component.
+Introducing [auto prefetching](https://community.frontity.org/t/auto-prefetch-data/886) to the `<Link />` component.
 
 There are four supported modes:
 
