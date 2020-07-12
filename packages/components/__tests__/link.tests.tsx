@@ -13,7 +13,7 @@ let get: jest.Mock;
 beforeEach(() => {
   fetch = jest.fn();
   get = jest.fn();
-
+  jest.useFakeTimers();
   container = document.createElement("div");
   document.body.appendChild(container);
   window.scrollTo = jest.fn();
@@ -276,6 +276,8 @@ describe("Link prefetching", () => {
       );
     });
 
+    jest.runAllTimers();
+
     expect(store.actions.source.fetch).toHaveBeenCalledTimes(1);
     expect(store.actions.source.fetch).not.toHaveBeenCalledWith(linkUrl1);
     expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl2);
@@ -308,8 +310,11 @@ describe("Link prefetching", () => {
   });
 
   test("all mode works", () => {
-    const linkUrl1 = "/post-name";
-    const linkUrl2 = "/post-name-2";
+    const linkUrl1 = "/post-name-all-1";
+    const linkUrl2 = "/post-name-all-2";
+    const linkUrl3 = "/post-name-all-3";
+    const linkUrl4 = "/post-name-all-4";
+    const linkUrl5 = "/post-name-all-5";
     const storeAllMode = { ...store };
     storeAllMode.state.theme.autoPrefetch = "all";
 
@@ -325,19 +330,40 @@ describe("Link prefetching", () => {
           <Link link={linkUrl2} className="my-link-2">
             This is a link
           </Link>
+          <Link link={linkUrl3} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl4} className="my-link-2">
+            This is a link
+          </Link>
+          <Link link={linkUrl5} className="my-link-2">
+            This is a link
+          </Link>
+          <Link link={linkUrl1} className="my-link-3">
+            This is a link
+          </Link>
+          <Link link={linkUrl2} className="my-link-4">
+            This is a link
+          </Link>
         </Provider>,
         container
       );
     });
 
-    expect(store.actions.source.fetch).toHaveBeenCalledTimes(2);
+    jest.runAllTimers();
+
+    expect(store.actions.source.fetch).toHaveBeenCalledTimes(5);
     expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl1);
     expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl2);
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl3);
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl4);
+    expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl5);
   });
 
   test("hover mode works", () => {
-    const linkUrl = "/post-name";
-    const linkUrlNoPrefetch = "/post-name-2";
+    const linkUrl = "/post-name-hover-1";
+    const linkUrlNoPrefetch = "/post-name-hover-2";
+
     act(() => {
       render(
         <Provider value={store}>
@@ -363,7 +389,7 @@ describe("Link prefetching", () => {
     act(() => {
       anchor.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
     });
-
+    jest.runAllTimers();
     expect(store.actions.source.fetch).toHaveBeenCalledWith(linkUrl);
 
     // if data is already avaliable no need to prefetch again.
@@ -372,6 +398,7 @@ describe("Link prefetching", () => {
     act(() => {
       anchor.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
     });
+    jest.runAllTimers();
 
     const anchor2 = document.querySelector("a.my-link-2");
 
@@ -379,6 +406,7 @@ describe("Link prefetching", () => {
       anchor2.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
     });
 
+    jest.runAllTimers();
     // a link that was not prefetched should not call fetch, it should go through the router instead
     const anchor3 = document.querySelector("a.my-link-3");
 

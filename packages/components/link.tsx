@@ -3,6 +3,47 @@ import { warn, connect, useConnect } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
 import { Package } from "frontity/types";
 
+const toPrefetch = new Set<string>();
+let isProcessingQueue = false;
+
+const config = {
+  hoverDelay: 50,
+  requestsPerBatch: 4,
+  batchInterval: 1000,
+};
+
+/**
+ * Process the queue of links to prefetch.
+ *
+ * @param prefetcher The function used to prefetch the link.
+ */
+function processQueue(prefetcher: (link: string) => void) {
+  let batchInterval;
+
+  /**
+   * Process a batch of prefetches
+   */
+  const process = () => {
+    const batch = Array.from(toPrefetch).slice(0, config.requestsPerBatch);
+
+    // if batch is empty, stop process and allow it to run again if necessary.
+    if (batch.length === 0) {
+      isProcessingQueue = false;
+      clearTimeout(batchInterval);
+      return;
+    }
+
+    batch.forEach((link) => {
+      prefetcher(link);
+      toPrefetch.delete(link);
+    });
+  };
+
+  batchInterval = setInterval(() => {
+    process();
+  }, config.batchInterval);
+}
+
 /**
  * Executes the callback when the hover event is triggered for the element.
  *
@@ -10,10 +51,24 @@ import { Package } from "frontity/types";
  * @param cb The callback that should run should an hover event happen.
  */
 function onHover(el: HTMLAnchorElement, cb: () => void) {
-  el.addEventListener("mouseover", cb);
+  let timeout;
+
+  const mouseOverHandler = () => {
+    timeout = setTimeout(() => {
+      cb();
+    }, config.hoverDelay);
+  };
+
+  const mouseOutHandler = () => {
+    clearTimeout(timeout);
+  };
+
+  el.addEventListener("mouseover", mouseOverHandler);
+  el.addEventListener("mouseout", mouseOutHandler);
 
   return () => {
-    el.removeEventListener("mouseover", cb);
+    el.removeEventListener("mouseover", mouseOverHandler);
+    el.removeEventListener("mouseout", mouseOutHandler);
   };
 }
 
@@ -101,14 +156,13 @@ const Link: React.FC<LinkProps> = ({
   ...anchorProps
 }) => {
   const { state, actions } = useConnect<Package>();
-  // Get the reference and the visibility status.
   const { ref: inViewRef, inView } = useInView({
     triggerOnce: true,
     rootMargin: "200px",
   });
   const ref = useRef(null);
 
-  // we need to handle multiple ref, one for useInView and one for tracking the hover events.
+  // we need to handle multiple refs, one for useInView and one for tracking the hover events.
   const setRefs = useCallback(
     (node) => {
       ref.current = node;
@@ -118,12 +172,13 @@ const Link: React.FC<LinkProps> = ({
     },
     [inViewRef]
   );
-  const autoPrefetch = state?.theme?.autoPrefetch;
-  const isExternal = link.startsWith("http");
 
   if (!link || typeof link !== "string") {
     warn("link prop is required and must be a string");
   }
+
+  const autoPrefetch = state?.theme?.autoPrefetch;
+  const isExternal = link.startsWith("http");
 
   useEffect(() => {
     // Checks if user is on slow connection or has enabled data saver
@@ -140,12 +195,30 @@ const Link: React.FC<LinkProps> = ({
      * Prefetches the link only if necessary
      *
      * @param link The link to prefetch
+     * @param runNow Whether the prefetch should be executed immediatelly.
      */
-    const maybePrefetch = (link: string) => {
+    const maybePrefetch = (link: string, runNow: boolean = false) => {
+      if (toPrefetch.has(link)) {
+        return;
+      }
+
       const data = state.source.get(link);
 
-      if (!data.isReady && !data.isFetching) {
+      if (data.isReady || data.isFetching) {
+        return;
+      }
+
+      // when prefetch mode is "hover" we want to prefetch without batching.
+      if (runNow) {
         actions.source.fetch(link);
+      } else {
+        toPrefetch.add(link);
+      }
+
+      // if the queue is still running this link will be picked up automatically.
+      if (!isProcessingQueue) {
+        processQueue(actions.source.fetch);
+        isProcessingQueue = true;
       }
     };
 
@@ -153,7 +226,7 @@ const Link: React.FC<LinkProps> = ({
       maybePrefetch(link);
     } else if (ref.current && autoPrefetch === "hover") {
       return onHover(ref.current, () => {
-        maybePrefetch(link);
+        maybePrefetch(link, true);
       });
     } else if (inView && autoPrefetch === "in-view") {
       maybePrefetch(link);
