@@ -314,6 +314,36 @@ describe("Link prefetching", () => {
     expect(store.actions.source.fetch).not.toHaveBeenCalledWith(linkUrl2);
   });
 
+  test("does not prefetch if setting is missing", () => {
+    const linkUrl1 = "/post-name";
+    const linkUrl2 = "/post-name-2";
+    const storeNoPrefetchMode = { ...store };
+    delete storeNoPrefetchMode.state.theme.autoPrefetch;
+
+    get.mockReturnValue({ isReady: false, isFetching: false });
+    jest.spyOn(store.actions.source, "fetch");
+
+    act(() => {
+      render(
+        <Provider value={storeNoPrefetchMode}>
+          <Link link={linkUrl1} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl2} className="my-link-2">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.runAllTimers();
+
+    expect(store.actions.source.fetch).toHaveBeenCalledTimes(0);
+    expect(store.actions.source.fetch).not.toHaveBeenCalledWith(linkUrl1);
+    expect(store.actions.source.fetch).not.toHaveBeenCalledWith(linkUrl2);
+  });
+
   test("does not run on slow connections", () => {
     const linkUrl1 = "/post-name";
     const storeAllMode = { ...store };
