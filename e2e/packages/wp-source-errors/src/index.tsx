@@ -23,7 +23,7 @@ const wpSourceErrors: WpSourceErrors = {
       init: ({ state, libraries }) => {
         const { query } = libraries.source.parse(state.frontity.initialLink);
         if (query.statusCode) {
-          state.source.api = `https://httpstat.us/${query.statusCode}?rest_route=/`;
+          state.source.api = `http://httpstat.us/${query.statusCode}?rest_route=/`;
         } else {
           state.source.api = "https://test.frontity.org/wp-json";
         }

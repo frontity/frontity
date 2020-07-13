@@ -17,6 +17,7 @@ const marsTheme = {
      * relevant state. It is scoped to the `theme` namespace.
      */
     theme: {
+      autoPrefetch: "in-view",
       menu: [],
       isMobileMenuOpen: false,
       featured: {
