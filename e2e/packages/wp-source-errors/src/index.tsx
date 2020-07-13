@@ -23,7 +23,7 @@ const wpSourceErrors: WpSourceErrors = {
       init: ({ state, libraries }) => {
         const { path } = libraries.source.parse(state.frontity.initialLink);
         if (path !== "/") {
-          state.source.api = `https://httpstat.us/${path}?rest_route=/`;
+          state.source.api = `http://httpstat.us${path}?rest_route=/`;
         } else {
           state.source.api = "https://test.frontity.org/wp-json";
         }
