@@ -151,4 +151,26 @@ describe("category", () => {
     await store.actions.source.fetch("/category/cat-1/?some=param");
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("Unknown URL should return a 404 even if it's substring matches a path", async () => {
+    api.get = jest.fn((_) =>
+      Promise.resolve(
+        mockResponse(cat1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
+      )
+    );
+
+    await store.actions.source.fetch("/category/undefined/cat-1/");
+
+    expect(
+      (store.state.source.data as any)["/category/undefined/cat-1/"]
+        .errorStatusText
+    ).toBe(
+      "You have tried to access content at route: /category/undefined/cat-1/ but it does not exist"
+    );
+
+    expect(store.state.source).toMatchSnapshot();
+  });
 });

@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.7.2
+
+### Patch Changes
+
+- [`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f) [#501](https://github.com/frontity/frontity/pull/501) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add the tsNode.register for `dev` and `build` scripts which were previously in `frontity`
+
+- Updated dependencies [[`159e02ca`](https://github.com/frontity/frontity/commit/159e02ca080ec9f7004c90276621d1a2708192ce)]:
+  - @frontity/connect@1.1.3
+
 ## 1.7.1
 
 ### Patch Changes

@@ -30,7 +30,7 @@
       }
     ],
     "jsdoc/require-description-complete-sentence": 2,
-    "jsdoc/require-example": 2,
+    "jsdoc/require-example": 0,
     "jsdoc/require-param": [
       "error",
       {
@@ -91,11 +91,15 @@
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
+        ],
         "tsdoc/syntax": "error"
       }
     },
     {
-      "files": ["**/__tests__/*.{js,ts,jsx,tsx}"],
+      "files": ["**/__tests__/*.{js,ts,jsx,tsx}", "**/*.spec.js"],
       "rules": {
         "jsdoc/require-jsdoc": 0,
         "jsdoc/require-description": 0,

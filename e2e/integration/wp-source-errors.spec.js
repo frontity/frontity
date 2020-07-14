@@ -10,16 +10,16 @@ describe("Status codes", () => {
 
   it("should return a 404 status code", async () => {
     const res404 = await cy.request({
-      url: "http://localhost:3001/404?name=wp-source-errors",
-      failOnStatusCode: false
+      url: "http://localhost:3001/?statusCode=404&name=wp-source-errors",
+      failOnStatusCode: false,
     });
     expect(res404.status).toBe(404);
   });
 
   it("should return a 500 status code", async () => {
     const res500 = await cy.request({
-      url: "http://localhost:3001/500?name=wp-source-errors",
-      failOnStatusCode: false
+      url: "http://localhost:3001/?statusCode=500&name=wp-source-errors",
+      failOnStatusCode: false,
     });
     expect(res500.status).toBe(500);
   });
@@ -33,8 +33,8 @@ describe("Data", () => {
 
   it("should have data populated correctly with 404 errors", () => {
     cy.visit({
-      url: "http://localhost:3001/404?name=wp-source-errors",
-      failOnStatusCode: false
+      url: "http://localhost:3001/?statusCode=404&name=wp-source-errors",
+      failOnStatusCode: false,
     });
     cy.get("[data-test-id='isError']").should("contain.text", "true");
     cy.get("[data-test-id='is404']").should("contain.text", "true");
@@ -43,8 +43,8 @@ describe("Data", () => {
 
   it("should have data populated correctly with 500 errors", () => {
     cy.visit({
-      url: "http://localhost:3001/500?name=wp-source-errors",
-      failOnStatusCode: false
+      url: "http://localhost:3001/?statusCode=500&name=wp-source-errors",
+      failOnStatusCode: false,
     });
     cy.get("[data-test-id='isError']").should("contain.text", "true");
     cy.get("[data-test-id='is404']").should("contain.text", "false");

@@ -11,7 +11,10 @@ import { Root as GoogleAnalytics } from "..";
 import GoogleAnalyticsPkg from "../../../types";
 
 const getState = (): State<GoogleAnalyticsPkg> => ({
-  analytics: { namespaces: ["googleAnalytics"] },
+  analytics: {
+    pageviews: { googleAnalytics: true },
+    events: {},
+  },
   googleAnalytics: {},
 });
 

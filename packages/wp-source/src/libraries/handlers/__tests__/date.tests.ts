@@ -150,4 +150,22 @@ describe("date", () => {
 
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("An invalid month of the year should return a 404", async () => {
+    await store.actions.source.fetch("/2020/99/");
+
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("An invalid day of the month should return a 404", async () => {
+    await store.actions.source.fetch("/2020/12/77");
+
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("An invalid day AND month should return a 404", async () => {
+    await store.actions.source.fetch("/2020/999/999");
+
+    expect(store.state.source).toMatchSnapshot();
+  });
 });
