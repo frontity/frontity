@@ -1,38 +1,31 @@
-import React, { useEffect } from "react";
-import { connect } from "frontity";
+import React from "react";
+import { connect, useConnect } from "frontity";
+import Link from "@frontity/components/link";
 
-const Link = ({
-  state,
-  actions,
-  link,
-  className,
-  children,
-  rel,
-  "aria-current": ariaCurrent,
-  onClick: onClickProp,
-}) => {
-  // Check if the link is an external or internal link
-  const isExternal = link.startsWith("http");
+/**
+ * The TwentyLink component, which is a wrapper on top of the {@link Link}
+ * component.
+ *
+ * @param props - It accepts the same props than the {@link Link} component.
+ *
+ * @example
+ * ```js
+ * <TwentyLink link="/some-post">
+ *   <div>Some Post</div>
+ * </TwentyLink>
+ * ```
+ *
+ * @returns A {@link Link} component, which returns an HTML anchor element.
+ */
+const TwentyLink = ({ children, onClick: onClickProp, ...props }) => {
+  const { state, actions } = useConnect();
 
-  // Prefetch the link's content when it mounts and autoPreFetch is set to `true`
-  useEffect(() => {
-    if (!isExternal) {
-      if (state.theme.autoPreFetch === "all") actions.source.fetch(link);
-    }
-  }, []);
-
+  /**
+   * A handler that closes the mobile menu when a link is clicked.
+   *
+   * @param event The event object.
+   */
   const onClick = (event) => {
-    // Do nothing if it's an external link
-    if (isExternal) return;
-
-    event.preventDefault();
-    // Set the router to the new url.
-    actions.router.set(link);
-
-    // Scroll the page to the top
-    window.scrollTo(0, 0);
-
-    // if the menu modal is open, close it so it doesn't block rendering
     if (state.theme.isMobileMenuOpen) {
       actions.theme.closeMobileMenu();
     }
@@ -43,22 +36,10 @@ const Link = ({
   };
 
   return (
-    <a
-      // ref={ref}
-      href={link}
-      onClick={onClick}
-      className={className}
-      aria-current={ariaCurrent}
-      rel={isExternal ? "noopener noreferrer" : rel}
-      onMouseEnter={() => {
-        // Prefetch the link's content when the user hovers on the link
-        if (state.theme.autoPreFetch === "hover" && !isExternal)
-          actions.source.fetch(link);
-      }}
-    >
+    <Link {...props} onClick={onClick}>
       {children}
-    </a>
+    </Link>
   );
 };
 
-export default connect(Link);
+export default connect(TwentyLink, { injectProps: false });
