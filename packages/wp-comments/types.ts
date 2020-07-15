@@ -124,7 +124,7 @@ interface WpComments extends Package {
        *
        * After calling this action, you can access
        * `state.comments.forms[postId].submitted` properties to know the
-       * submittion status.
+       * submission status.
        *
        * @remarks
        * This action does not validate input. That means requests are made even
