@@ -6,7 +6,7 @@ module.exports = (on, config) => {
     replaceDB(WP_INSTANCE) {
       (async () => {
         try {
-          const command = `docker-compose exec -T db sh -c "mysql -u root -p password wordpress < ./${WP_INSTANCE}/data/dump.sql"`;
+          const command = `docker-compose -f ./${WP_INSTANCE}/docker-compose.yml exec -T db sh -c "mysql -u root -p password wordpress < ./${WP_INSTANCE}/data/dump.sql"`;
 
           await execa.command(command, { stdio: "inherit" });
         } catch (e) {
