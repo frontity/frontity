@@ -6,7 +6,7 @@ jobs:
   run-e2e:
     strategy:
       matrix:
-        instances: ["instance-1:wp-test.spec.js"]
+        instances: ["instance-1"]
 
     runs-on: ubuntu-latest
     steps:

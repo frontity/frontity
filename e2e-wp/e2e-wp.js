@@ -1,47 +1,20 @@
 #!/usr/bin/env node
 const execa = require("execa");
-const waitOn = require("wait-on");
-const cypress = require("cypress");
+
+const instance = process.argv[2];
+
+if (!instance) {
+  throw new Error("Specifiy the WP instance for which to run the tests!");
+}
+
+process.env.WP_INSTANCE = instance;
+
+process.chdir(instance);
 
 (async () => {
-  const input = process.argv[2];
-
-  const [instance, tests] = input.split(":");
-
-  process.chdir(instance);
-
   try {
-    // docker
-    const dockerProcess = execa("./start-e2e-docker.js");
-    dockerProcess.stdout.pipe(process.stdout);
-    await dockerProcess;
-
-    process.chdir("../project");
-
-    // build
-    const buildProcess = execa("npx", ["frontity", "build"], {
-      shell: true,
-    });
-    buildProcess.stdout.pipe(process.stdout);
-    await buildProcess;
-
-    // serve
-    const serveProcess = execa("npx", ["frontity", "serve", "--port", "3001"]);
-    serveProcess.stdout.pipe(process.stdout);
-
-    await waitOn({
-      resources: ["http-get://localhost:3001"],
-      interval: 1000,
-    });
-
-    process.chdir("..");
-
-    const testfiles = tests
-      .split(",")
-      .map((t) => `./integration/${t}`)
-      .join(",");
-
-    await cypress.run({ spec: testfiles });
+    // run the start script for the instance
+    await execa("./start.js", [instance], { stdio: "inherit" });
 
     process.exit(0);
   } catch (e) {

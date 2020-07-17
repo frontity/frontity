@@ -1,6 +1,7 @@
 describe("WP test", () => {
   beforeEach(() => {
-    await cy.task('replaceDB');
+    const { WP_INSTANCE } = Cypress.env();
+    cy.task("replaceDB", WP_INSTANCE);
     cy.visit("http://localhost:3001?name=e2e-wp-test");
   });
 

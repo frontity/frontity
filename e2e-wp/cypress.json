@@ -1,9 +1,12 @@
 {
   "integrationFolder": "integration",
   "pluginsFile": "plugins/index.js",
-  "video": false,
   "screenshotOnRunFailure": false,
-  "trashAssetsBeforeRuns": false,
+  "screenshotsFolder": "screenshots",
+  "supportFile": false,
+  "videosFolder": "videos",
+  "video": false,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
-  "projectId": "ed7hed"
+  "projectId": "ed7hed",
+  "defaultCommandTimeout": 10000
 }

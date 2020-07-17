@@ -11,7 +11,10 @@ services:
     # wordpress container times out, we have to restart it
     restart: always
     volumes:
+      # Volume that is shared between WordPress and WP-CLI services
       - wp_data:/var/www/html
+
+      # This volume is used for adding custom uploaded content to the WP instance
       - ./data:/var/www/html/wp-content
     environment:
       WORDPRESS_DB_HOST: db
