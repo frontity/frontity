@@ -1,5 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`attachment Every unknown URL should return a 404 even if it's substring matches a path 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json",
+  "attachment": Object {},
+  "author": Object {},
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+    "/undefined/post-1/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "You have tried to access content at route: /undefined/post-1/ but it does not exist",
+      "is404": true,
+      "isError": true,
+      "isFetching": false,
+      "isReady": true,
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+}
+`;
+
+exports[`attachment Every unknown URL should return a 404 even if it's substring matches a path 2 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json",
+  "attachment": Object {},
+  "author": Object {},
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/does/not/exist/": Object {
+      "errorStatus": 404,
+      "errorStatusText": "You have tried to access content at route: /does/not/exist/ but it does not exist",
+      "is404": true,
+      "isError": true,
+      "isFetching": false,
+      "isReady": true,
+    },
+    "/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "type": "post",
+    },
+  },
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+}
+`;
+
 exports[`attachment doesn't exist in source.attachment 1`] = `
 Object {
   "api": "https://test.frontity.org/wp-json",
