@@ -2,6 +2,86 @@ import { Package, Action, AsyncAction } from "frontity/types";
 import WpSource from "@frontity/wp-source/types";
 
 /**
+ * Schema for a Comment entity in WordPress.
+ */
+interface WpComment {
+  /**
+   * Unique identifier for the object.
+   */
+  id: number;
+
+  /**
+   * The ID of the associated post object.
+   */
+  post: number;
+
+  /**
+   * The ID for the parent of the object.
+   */
+  parent: number;
+
+  /**
+   * The ID of the user object, if author was a user.
+   */
+  author: number;
+
+  /**
+   * Display name for the object author.
+   */
+  author_name: string;
+
+  /**
+   * URL for the object author.
+   */
+  author_url: string;
+
+  /**
+   * The date the object was published, in the site's timezone.
+   */
+  date: string;
+
+  /**
+   * The date the object was published, as GMT.
+   */
+  date_gmt: string;
+
+  /**
+   * The content for the object.
+   */
+  content: {
+    /**
+     * Content rendered in HTML format.
+     */
+    rendered: string;
+  };
+
+  /**
+   * URL to the object.
+   */
+  link: string;
+
+  /**
+   * State of the object.
+   */
+  status: "approved" | "hold" | "spam" | "trash";
+
+  /**
+   * Type of Comment for the object.
+   */
+  type: "comment";
+
+  /**
+   * Avatar URLs for the object author.
+   */
+  author_avatar_urls: Record<string, string>;
+
+  /**
+   * Meta fields.
+   */
+  meta: [];
+}
+
+/**
  * Object that represents a form to submit comments in a post.
  */
 interface Form {
@@ -61,26 +141,32 @@ interface Submitted extends Fields {
    * The comment hasn't been received by WP yet.
    */
   isPending: boolean;
+
   /**
    * The comment has been received but not accepted.
    */
   isUnapproved: boolean;
+
   /**
    * The comment has been received and is published.
    */
   isApproved: boolean;
+
   /**
    * The request has failed.
    */
   isError: boolean;
+
   /**
    * Failure reason.
    */
   errorMessage: string;
+
   /**
    * Submission timestamp.
    */
   timestamp: number;
+
   /**
    * Comment ID if it has been received (`isUnapproved` or `isApproved`).
    */
@@ -103,6 +189,19 @@ interface WpComments extends Package {
        * Map of form objects by post ID.
        */
       forms: Record<number, Form>;
+    };
+
+    /**
+     * Source namespace.
+     */
+    source: {
+      /**
+       * Map of comments by ID.
+       *
+       * Here is where comments are stored when fetched using
+       * `actions.source.fetch()`.
+       */
+      comment: Record<number, WpComment>;
     };
   };
 
@@ -181,6 +280,7 @@ interface WpComments extends Package {
         | Action<Packages, number, Partial<Fields>>;
     };
   };
+
   /**
    * Libraries exposed by this package.
    */
