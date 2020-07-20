@@ -8,6 +8,9 @@ const wpComments: WpComments = {
     comments: {
       forms: {},
     },
+    source: {
+      comment: {},
+    },
   },
   libraries: {
     source: {
