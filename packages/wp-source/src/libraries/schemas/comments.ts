@@ -2,7 +2,7 @@ import { schema } from "normalizr";
 import { normalize } from "../route-utils";
 
 export const commentEntity = new schema.Entity(
-  "comment",
+  "commentEntity",
   {},
   {
     processStrategy(entity) {
@@ -12,4 +12,5 @@ export const commentEntity = new schema.Entity(
     },
   }
 );
-export const comments = new schema.Array(commentEntity);
+
+export const commentEntities = new schema.Array(commentEntity);
