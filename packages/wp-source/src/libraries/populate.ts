@@ -64,7 +64,11 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
       let entityMap: any;
       let entityKey: string | number;
 
-      if (schema === "postEntity" || schema === "attachmentEntity") {
+      if (
+        schema === "postEntity" ||
+        schema === "attachmentEntity" ||
+        schema === "commentEntity"
+      ) {
         if (!state.source[entity.type]) state.source[entity.type] = {};
         entityMap = state.source[entity.type];
         entityKey = entity.id;
