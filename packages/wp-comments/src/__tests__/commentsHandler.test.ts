@@ -46,6 +46,7 @@ describe("commentsHandler", () => {
         },
       ]
     `);
+
     expect(store.state.source.comment).toMatchInlineSnapshot(`
       Object {
         "1": Object {
@@ -86,6 +87,33 @@ describe("commentsHandler", () => {
           "status": "approved",
           "type": "comment",
         },
+      }
+    `);
+
+    expect(store.state.source.get("comments/60")).toMatchInlineSnapshot(`
+      Object {
+        "areComments": true,
+        "isFetching": false,
+        "isReady": true,
+        "items": Array [
+          Object {
+            "children": Array [],
+            "id": 2,
+            "type": "comment",
+          },
+          Object {
+            "children": Array [],
+            "id": 1,
+            "type": "comment",
+          },
+        ],
+        "link": "comments/60/",
+        "page": 1,
+        "postId": 60,
+        "query": Object {},
+        "route": "comments/60/",
+        "total": 2,
+        "totalPages": 1,
       }
     `);
   });
