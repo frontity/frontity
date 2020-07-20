@@ -1,13 +1,13 @@
 import Html2React from "../types";
 import Component from "./libraries/component";
 import script from "../processors/script";
-import links from "../processors/links";
+import link from "../processors/link";
 
 const html2react: Html2React = {
   name: "@frontity/html2react",
   libraries: {
     html2react: {
-      processors: [script, links],
+      processors: [script, link],
       Component,
     },
   },

@@ -75,7 +75,7 @@ function onHover(el: HTMLAnchorElement, cb: () => void) {
 /**
  * Props for React component {@link Link}.
  */
-interface LinkProps {
+export interface LinkProps {
   /**
    * The URL to link to.
    */
