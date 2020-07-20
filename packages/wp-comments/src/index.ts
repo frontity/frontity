@@ -14,6 +14,7 @@ const wpComments: WpComments = {
       handlers: [
         {
           name: "comments",
+          priority: 10,
           pattern: "comments/:postId(\\d+)",
           func: commentsHandler,
         },

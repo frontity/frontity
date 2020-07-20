@@ -181,6 +181,23 @@ interface WpComments extends Package {
         | Action<Packages, number, Partial<Fields>>;
     };
   };
+  /**
+   * Libraries exposed by this package.
+   */
+  libraries: {
+    /**
+     * Source namespace.
+     */
+    source: {
+      /**
+       * Handlers are objects that associate a link pattern with a function that
+       * fetches all the entities that belong to that WordPress link.
+       *
+       * Extended with {@link commentsHandler}.
+       */
+      handlers: WpSource["libraries"]["source"]["handlers"];
+    };
+  };
 }
 
 /**
