@@ -21,7 +21,7 @@ const link: Processor<LinkElement> = {
   name: "link",
   test: ({ node }) => node.component === "a",
   processor: ({ node }) => {
-    if (node.props?.href) {
+    if (node.props?.href && !node.props?.href?.startsWith("#")) {
       node.props.link = node.props.href;
     }
 
