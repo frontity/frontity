@@ -4,7 +4,7 @@ import WpSource from "@frontity/wp-source/types";
 /**
  * Schema for a Comment entity in WordPress.
  */
-interface WpComment {
+export interface WpComment {
   /**
    * Unique identifier for the object.
    */
@@ -82,9 +82,35 @@ interface WpComment {
 }
 
 /**
+ * Comment item, added by {@link commentsHandler} to data objects in
+ * `state.source`.
+ */
+export interface CommentItem {
+  /**
+   * Comment type.
+   */
+  type: "comment";
+
+  /**
+   * Comment ID.
+   */
+  id: number;
+
+  /**
+   * Parent ID.
+   */
+  parent: number;
+
+  /**
+   * List of replies (if any).
+   */
+  children?: CommentItem[];
+}
+
+/**
  * Object that represents a form to submit comments in a post.
  */
-interface Form {
+export interface Form {
   /**
    * Form fields with their values.
    */
@@ -102,7 +128,7 @@ interface Form {
 /**
  * Form fields with their values.
  */
-interface Fields {
+export interface Fields {
   /**
    * Author's name.
    */
@@ -136,7 +162,7 @@ interface Fields {
 /**
  * Form field values when it is submitted along with the submission status.
  */
-interface Submitted extends Fields {
+export interface Submitted extends Fields {
   /**
    * The comment hasn't been received by WP yet.
    */
