@@ -4,17 +4,43 @@ import { normalize } from "normalizr";
 import * as schemas from "./schemas";
 import { concatPath, decomposeRoute } from "./route-utils";
 
+/**
+ * Arguments passed to {@link transformLink}.
+ */
+interface TransformLinkParams {
+  /**
+   * The entity we want to transform it link.
+   */
+  entity: {
+    /**
+     * Link attribute.
+     */
+    link: string;
+  };
+
+  /**
+   * Frontity state.
+   */
+  state: State<WpSource>;
+
+  /**
+   * Optional property if `subdirectory` is not specified in the state. This
+   * value is passed by `populate()`.
+   */
+  subdirectory?: string;
+}
+
+/**
+ * Utility used by {@link populate} to convert the `link` attribute that
+ * entities have so they point to Frontity instead to WordPress.
+ *
+ * @param transformLinkParams - Object of type {@link TransformLinkParams}.
+ */
 const transformLink = ({
   entity,
   state,
   ...options
-}: {
-  entity: {
-    link: string;
-  };
-  state: State<WpSource>;
-  subdirectory?: string;
-}): void => {
+}: TransformLinkParams): void => {
   let { subdirectory } = state.source;
   if (options.subdirectory) subdirectory = options.subdirectory;
 
@@ -31,6 +57,26 @@ const transformLink = ({
   entity.link = subdirectory ? concatPath(subdirectory, link) : link;
 };
 
+/**
+ * A library helper to add entities to the Frontity state.
+ *
+ * @remarks
+ * Entities are not overwritten. If an entity already exists in the state
+ * and a new one is fetched, the one in the state will prevail. If you
+ * want to overwrite them, use the `force` option.
+ *
+ * @example
+ * ```js
+ * const response = await libraries.source.api.get({ endpoint: "posts" });
+ * const entities = await libraries.source.populate({ response, state });
+ * ```
+ *
+ * @param populateParams - Types specified in {@link WpSource}.
+ *
+ * @returns
+ * Returns a promise that resolves with an array of objects with
+ * attributes `type`, `id` and `link` representing the added entities.
+ */
 const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
   state,
