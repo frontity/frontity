@@ -37,12 +37,12 @@ const wpComments: WpComments = {
         // Return if a submission is pending.
         if (state.comments.forms[postId]?.submitted?.isPending) {
           return warn(
-            "You cannot submit a comment to the same post if another is pending."
+            "You cannot submit a comment to the same post if another is already pending."
           );
         }
 
         // Update fields for this form.
-        // This line inits the form if it wans't yet.
+        // This line inits the form if it wasn't yet.
         actions.comments.updateFields(postId, comment || {});
 
         // Get fields from the corresponding form.
@@ -54,7 +54,7 @@ const wpComments: WpComments = {
           isError: false,
           errorMessage: "",
           isPending: true,
-          isUnapproved: false,
+          isOnHold: false,
           isApproved: false,
           timestamp: Date.now(),
           ...fields,
@@ -128,11 +128,11 @@ const wpComments: WpComments = {
           const id = parseInt(location.hash.match(/#comment-(\d+)/)[1], 10);
 
           // Check if the comment is unapproved.
-          const isUnapproved = location.searchParams.has("unapproved");
+          const isOnHold = location.searchParams.has("unapproved");
 
           form.submitted.isPending = false;
-          form.submitted.isUnapproved = isUnapproved;
-          form.submitted.isApproved = !isUnapproved;
+          form.submitted.isOnHold = isOnHold;
+          form.submitted.isApproved = !isOnHold;
           form.submitted.id = id;
           return;
         }

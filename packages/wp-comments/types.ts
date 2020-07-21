@@ -164,9 +164,9 @@ export interface Submitted extends Fields {
   isPending: boolean;
 
   /**
-   * The comment has been received but not accepted.
+   * The comment has been received but not accepted yet.
    */
-  isUnapproved: boolean;
+  isOnHold: boolean;
 
   /**
    * The comment has been received and is published.
@@ -189,7 +189,7 @@ export interface Submitted extends Fields {
   timestamp: number;
 
   /**
-   * Comment ID if it has been received (`isUnapproved` or `isApproved`).
+   * Comment ID if it has been received (`isOnHold` or `isApproved`).
    */
   id?: number;
 }
@@ -244,7 +244,7 @@ interface WpComments extends Package {
        *
        * After calling this action, you can access
        * `state.comments.forms[postId].submitted` properties to know the
-       * submittion status.
+       * submission status.
        *
        * @remarks
        * This action does not validate input. That means requests are made even
