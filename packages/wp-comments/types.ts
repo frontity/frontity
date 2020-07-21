@@ -61,28 +61,34 @@ interface Submitted extends Fields {
    * The comment hasn't been received by WP yet.
    */
   isPending: boolean;
+
   /**
-   * The comment has been received but not accepted.
+   * The comment has been received but not accepted yet.
    */
-  isUnapproved: boolean;
+  isOnHold: boolean;
+
   /**
    * The comment has been received and is published.
    */
   isApproved: boolean;
+
   /**
    * The request has failed.
    */
   isError: boolean;
+
   /**
    * Failure reason.
    */
   errorMessage: string;
+
   /**
    * Submission timestamp.
    */
   timestamp: number;
+
   /**
-   * Comment ID if it has been received (`isUnapproved` or `isApproved`).
+   * Comment ID if it has been received (`isOnHold` or `isApproved`).
    */
   id?: number;
 }

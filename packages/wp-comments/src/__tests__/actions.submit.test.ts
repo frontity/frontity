@@ -121,8 +121,8 @@ describe("actions.comments.submit", () => {
         "errorMessage": "",
         "isApproved": false,
         "isError": false,
+        "isOnHold": false,
         "isPending": true,
-        "isUnapproved": false,
         "parent": 0,
         "timestamp": 1594161555147,
         "url": "https://frontity.org",
@@ -207,8 +207,8 @@ describe("actions.comments.submit", () => {
         "errorMessage": "",
         "isApproved": false,
         "isError": false,
+        "isOnHold": false,
         "isPending": true,
-        "isUnapproved": false,
         "parent": 0,
         "timestamp": 1594161555147,
         "url": "https://frontity.org",
@@ -538,7 +538,7 @@ describe("actions.comments.submit", () => {
     // The submission should have succeed (but not approved yet).
     expect(submitted.isPending).toBe(false);
     expect(submitted.isError).toBe(false);
-    expect(submitted.isUnapproved).toBe(true);
+    expect(submitted.isOnHold).toBe(true);
     expect(submitted.isApproved).toBe(false);
     expect(submitted.id).toBe(123);
   });
@@ -589,7 +589,7 @@ describe("actions.comments.submit", () => {
     // The submission should have succeeded and is approved.
     expect(submitted.isPending).toBe(false);
     expect(submitted.isError).toBe(false);
-    expect(submitted.isUnapproved).toBe(false);
+    expect(submitted.isOnHold).toBe(false);
     expect(submitted.isApproved).toBe(true);
     expect(submitted.id).toBe(123);
   });
@@ -665,7 +665,7 @@ describe("actions.comments.submit", () => {
                 isApproved: false,
                 isError: false,
                 isPending: false,
-                isUnapproved: false,
+                isOnHold: false,
                 parent: 0,
                 timestamp: 1594161555147,
                 url: "https://frontity.org",
@@ -703,8 +703,8 @@ describe("actions.comments.submit", () => {
         "errorMessage": "",
         "isApproved": false,
         "isError": false,
+        "isOnHold": false,
         "isPending": true,
-        "isUnapproved": false,
         "parent": 123,
         "timestamp": 1594161555147,
         "url": "https://other.url.test",
@@ -740,7 +740,7 @@ describe("actions.comments.submit", () => {
                 isApproved: false,
                 isError: false,
                 isPending: true,
-                isUnapproved: false,
+                isOnHold: false,
                 parent: 0,
                 timestamp: 1594161555147,
                 url: "https://frontity.org",
@@ -779,8 +779,8 @@ describe("actions.comments.submit", () => {
         "errorMessage": "",
         "isApproved": false,
         "isError": false,
+        "isOnHold": false,
         "isPending": true,
-        "isUnapproved": false,
         "parent": 0,
         "timestamp": 1594161555147,
         "url": "https://frontity.org",
