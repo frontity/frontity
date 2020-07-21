@@ -12,7 +12,7 @@ async function installPlugin(name) {
   // Install plugins.
   // https://github.com/docker-library/wordpress/issues/417#issuecomment-514360301
   await execa.command(
-    `docker run -i --user 33 \
+    `docker run -i --rm --user 33 \
     --volumes-from ${WP_INSTANCE}_wp_1 \
     --network container:${WP_INSTANCE}_wp_1 \
     wordpress:cli wp plugin install ${name} --activate`,

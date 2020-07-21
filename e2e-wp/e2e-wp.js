@@ -4,7 +4,9 @@ const execa = require("execa");
 const instance = process.argv[2];
 
 if (!instance) {
-  throw new Error("Specifiy the WP instance for which to run the tests!");
+  throw new Error(
+    "You need to specify the WP instance for which to run the tests!"
+  );
 }
 
 process.env.WP_INSTANCE = instance;
