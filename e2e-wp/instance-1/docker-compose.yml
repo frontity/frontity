@@ -15,7 +15,7 @@ services:
       - wp_data:/var/www/html
 
       # This volume is used for adding custom uploaded content to the WP instance
-      - ./data:/var/www/html/wp-content
+      - ./data/uploads:/var/www/html/wp-content/uploads
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: wordpress

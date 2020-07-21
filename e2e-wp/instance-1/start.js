@@ -21,8 +21,17 @@ const { WP_INSTANCE } = process.env;
       interval: 1000,
     });
 
+    // give read and wrie permission to all files
+    await execa("docker-compose", [
+      "run",
+      "wp",
+      "/bin/bash",
+      "-c",
+      "chmod -R 777 /var/www/html",
+    ]);
+
     // // Install plugins.
-    installPlugin("all-in-one-seo-pack");
+    await installPlugin("all-in-one-seo-pack");
 
     process.chdir("../project");
 
