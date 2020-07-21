@@ -61,7 +61,7 @@ type UsePostTypeInfiniteScroll = (options?: {
     /**
      * The Wrapper component that should wrap the real `Post` component.
      */
-    Wrapper: React.FC<Connect<Source & Router>>;
+    Wrapper: React.FC;
   }[];
   /**
    * If it has reached the limit of posts and it should switch to manual mode.

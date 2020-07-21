@@ -4,9 +4,9 @@
   "private": true,
   "description": "Package to do e2e testing of Frontity's useInfiniteScroll hooks",
   "dependencies": {
-    "frontity": "^1.10.0",
-    "@frontity/tiny-router": "^1.2.1",
-    "@frontity/wp-source": "^1.8.0",
+    "frontity": "^1.8.1-infinite-scroll-beta.0",
+    "@frontity/tiny-router": "^1.3.0-infinite-scroll-beta.0",
+    "@frontity/wp-source": "^1.7.2-infinite-scroll-beta.0",
     "@frontity/hooks": "^2.1.0-infinite-scroll-beta.1"
   }
 }

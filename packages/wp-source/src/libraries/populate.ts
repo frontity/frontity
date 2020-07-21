@@ -39,7 +39,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
 }) => {
   // Normalize response
   const json = await response.json();
-  const isList = json instanceof Array;
+  const isList = Array.isArray(json);
   const { entities, result } = normalize(
     json,
     isList ? schemas.list : schemas.entity

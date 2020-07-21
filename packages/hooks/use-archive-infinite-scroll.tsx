@@ -48,7 +48,7 @@ type UseArchiveInfiniteScroll = (options?: {
     /**
      * The Wrapper component that should wrap the real `Archive` component.
      */
-    Wrapper: React.FC<Connect<Source & Router>>;
+    Wrapper: React.FC;
   }[];
 
   /**

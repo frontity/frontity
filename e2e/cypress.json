@@ -8,6 +8,7 @@
   "video": false,
   "screenshotOnRunFailure": false,
   "trashAssetsBeforeRuns": false,
+  "experimentalFetchPolyfill": true,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "projectId": "ed7hed"
 }
