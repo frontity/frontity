@@ -13,15 +13,26 @@ const Root: React.FC = connect(
       <>
         {(state.router.link.startsWith("/archive") && <Archive />) ||
           (state.router.link.startsWith("/post-type") && <PostType />) || (
-            <button
-              data-test="to-archive"
-              onClick={() => {
-                actions.router.set("/archive");
-                actions.source.fetch("/archive");
-              }}
-            >
-              To Archive
-            </button>
+            <>
+              <button
+                data-test="to-archive"
+                onClick={() => {
+                  actions.router.set("/archive");
+                  actions.source.fetch("/archive");
+                }}
+              >
+                To Archive
+              </button>
+              <button
+                data-test="to-post-type"
+                onClick={() => {
+                  actions.router.set("/post-type");
+                  actions.source.fetch("/post-type");
+                }}
+              >
+                To PostType
+              </button>
+            </>
           )}
       </>
     );
@@ -41,7 +52,9 @@ const pkg: UseInfiniteScroll = {
       },
       beforeSSR({ state, actions }) {
         return async () => {
-          // await actions.source.fetch(state.router.link);
+          if (state.router.link !== "/?name=use-infinite-scroll") {
+            await actions.source.fetch(state.router.link);
+          }
         };
       },
     },

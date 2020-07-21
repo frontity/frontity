@@ -1,7 +1,7 @@
 export default {
-  name: "archive",
+  name: "post-type",
   priority: 13,
-  pattern: "/archive",
+  pattern: "/post-type",
   func: async ({ link, params, state, libraries }) => {
     const handler = libraries.source.handlers.find(
       (handler) => handler.name === "post type"

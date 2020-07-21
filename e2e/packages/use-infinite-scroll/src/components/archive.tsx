@@ -14,8 +14,6 @@ const Archive: React.FC = () => {
     height: 200vh;
   `;
 
-  console.log("isFetching", isFetching);
-
   return (
     <div data-test="archive">
       {pages.map(({ Wrapper, key, link }) => {
