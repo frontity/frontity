@@ -1,4 +1,5 @@
 import { Handler } from "@frontity/wp-source/types";
+import { CommentItem } from "../types";
 
 /**
  * A {@link Handler} for fetching comments by post ID.
@@ -80,21 +81,25 @@ export const commentsHandler: Handler = async ({
     rawItems = rawItems.concat(...otherPages.map(({ populated }) => populated));
   }
 
-  const commentsMap = {};
+  const commentsMap: Record<string, CommentItem> = {};
   const items = rawItems
-    .map(({ type, id }) => (commentsMap[id] = { type, id, children: [] }))
-    .reduce((root, { type, id, children }) => {
+    .map(({ type, id }) => (commentsMap[id] = { type, id }))
+    .reduce((root, item) => {
       // Get the parent ID if this comment is a reply.
-      const { parent } = state.source[type][id];
+      const { parent } = state.source[item.type][item.id];
 
-      // Get proper list of comments where this comment should be added.
-      const list = parent !== 0 ? commentsMap[parent].children : root;
-
-      // Add comment to the list.
-      list.push({ type, id, children });
+      if (parent !== 0) {
+        // Add it to its parent's children list if it is a reply.
+        const parentItem = commentsMap[parent];
+        parentItem.children = parentItem.children || [];
+        parentItem.children.push(item);
+      } else {
+        // Add it to the root list.
+        root.push(item);
+      }
 
       return root;
-    }, []);
+    }, [] as CommentItem[]);
 
   // Add data to source.
   const currentPageData = state.source.data[route];

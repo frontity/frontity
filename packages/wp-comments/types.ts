@@ -68,7 +68,7 @@ export interface WpComment {
   /**
    * Type of Comment for the object.
    */
-  type: "comment";
+  type: string;
 
   /**
    * Avatar URLs for the object author.
@@ -89,17 +89,12 @@ export interface CommentItem {
   /**
    * Comment type.
    */
-  type: "comment";
+  type: string;
 
   /**
    * Comment ID.
    */
   id: number;
-
-  /**
-   * Parent ID.
-   */
-  parent: number;
 
   /**
    * List of replies (if any).
