@@ -3,7 +3,7 @@
   "pluginsFile": "plugins/index.js",
   "screenshotOnRunFailure": false,
   "screenshotsFolder": "screenshots",
-  "supportFile": false,
+  "supportFile": "support/index.js",
   "videosFolder": "videos",
   "video": false,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
