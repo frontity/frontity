@@ -33,11 +33,16 @@ export const commentsHandler: Handler = async ({
   const postId = parseInt(params.postId);
 
   /**
-   * Utility that fetches and populates pages of comments.
+   * Utility that fetches and populates pages of 100 comments,
+   * the most recent first.
    *
-   * @param param0 - Something.
+   * @param params - Object with the following params:
+   * - `postId` (`number`): post ID.
+   * - `page` (`number`): the page number.
    *
-   * @returns Something.
+   * @returns Object with the following properties:
+   * - `response`: object of type {@link Response}.
+   * - `populated`: array of type {@link EntityData}.
    */
   const fetchComments = async ({ postId, page }) => {
     // Fetch the first page of 100 comments.
