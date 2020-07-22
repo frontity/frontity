@@ -1,5 +1,6 @@
 import responsePageOne from "./responses/infinite-scroll-page-1.json";
 import responsePageTwo from "./responses/infinite-scroll-page-2.json";
+import responsePostOne from "./responses/infinite-scroll-post-1.json";
 
 describe("UseInfiniteScroll", () => {
   it("useArchiveInfiniteScroll should load next page", async () => {
@@ -19,7 +20,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
       },
-    }).as("pageOne");
+    });
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
       response: responsePageTwo,
@@ -27,7 +28,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
       },
-    }).as("pageTwo");
+    });
 
     // Changes url to `/archive`.
     cy.get("[data-test='to-archive']").should("exist").click();
@@ -52,35 +53,37 @@ describe("UseInfiniteScroll", () => {
     );
 
     // Stubs calls to REST API.
-    // cy.server();
-    // cy.route({
-    //   url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
-    //   response: responsePageOne,
-    //   headers: {
-    //     "x-wp-total": 20,
-    //     "x-wp-totalpages": 2,
-    //   },
-    // }).as("pageOne");
-    // cy.route({
-    //   url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
-    //   response: responsePageTwo,
-    //   headers: {
-    //     "x-wp-total": 20,
-    //     "x-wp-totalpages": 2,
-    //   },
-    // }).as("pageTwo");
+    cy.server();
+    cy.route({
+      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: responsePageOne,
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+    });
+    cy.route({
+      url:
+        "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&slug=the-beauties-of-gullfoss",
+      response: responsePostOne,
+      headers: {
+        "x-wp-total": 1,
+        "x-wp-totalpages": 1,
+      },
+    });
 
     // Changes url to `/post-type`.
     cy.get("[data-test='to-post-type']").should("exist").click();
-    cy.location("href").should("eq", "http://localhost:3001/post-type/");
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/2016/the-beauties-of-gullfoss/"
+    );
     cy.get("[data-test='post-type']").should("exist");
-    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-60']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
 
     // Scrolls to bottom to fetch next page.
     cy.scrollTo("bottom");
-    cy.get("[data-test='fetching']").should("exist");
-    cy.get("[data-test='post-2']").should("not.exist");
-    cy.get("[data-test='post-2']").should("exist");
+    cy.get("[data-test='post-57']").should("exist");
   });
 });

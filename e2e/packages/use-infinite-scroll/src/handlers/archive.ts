@@ -1,6 +1,6 @@
 export default {
   name: "archive",
-  priority: 13,
+  priority: 10,
   pattern: "/archive",
   func: async ({ link, params, state, libraries }) => {
     const handler = libraries.source.handlers.find(
