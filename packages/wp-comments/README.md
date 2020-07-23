@@ -16,7 +16,7 @@ npm i @frontity/wp-comments
 
 ## Usage
 
-This package doesn't have any configuration, it should just be added in the `frontity.settings.js` under the package `state`.
+This package doesn't have any configuration, it should just be added in the `frontity.settings.js` to the `packages` array.
 
 **`frontity.settings.js`**
 
