@@ -6,7 +6,7 @@ Comments package that adds integration for WordPress native comments.
 
 > ## Beta version
 >
-> Please, bear in mind that this package is currently in beta version. It hasn't proper tests or docs and its implementation may change with the final release.
+> Please, bear in mind that this package is currently in beta version. It doesn't have proper tests or docs yet and its implementation may change with the final release.
 
 ## Install
 
@@ -16,7 +16,7 @@ npm i @frontity/wp-comments
 
 ## Usage
 
-This package doesn't have any configuration, it just should be added in the `frontity.settings.js` under the package `state`.
+This package doesn't have any configuration, it should just be added in the `frontity.settings.js` under the package `state`.
 
 **`frontity.settings.js`**
 
