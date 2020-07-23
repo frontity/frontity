@@ -1,6 +1,18 @@
 import { Connect, Package, Fill } from "frontity/types";
 import { FC } from "react";
 
+declare global {
+  /**
+   * Extended with GPT global variables.
+   */
+  interface Window {
+    /**
+     * Google Publisher Tag library.
+     */
+    googletag: googletag.Googletag;
+  }
+}
+
 /**
  * A duple for width and height values, in pixels.
  *
@@ -62,6 +74,7 @@ interface GoogleAdManager extends Package {
   roots: {
     /**
      * Google Ad Manager root element.
+     * It simply adds the Google Publisher Tag library.
      */
     googleAdManager: FC<Connect<GoogleAdManager>>;
   };

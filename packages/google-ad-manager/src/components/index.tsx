@@ -1,3 +1,5 @@
+import { Head } from "frontity";
+import React from "react";
 import GoogleAdManager from "../../types";
 
 /**
@@ -6,7 +8,14 @@ import GoogleAdManager from "../../types";
  * @returns React element.
  */
 const Root: GoogleAdManager["roots"]["googleAdManager"] = () => {
-  return null;
+  return (
+    <Head>
+      <script
+        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        async
+      />
+    </Head>
+  );
 };
 
 export default Root;
