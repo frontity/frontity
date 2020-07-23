@@ -3,6 +3,8 @@ import { FC } from "react";
 
 /**
  * A duple for width and height values, in pixels.
+ *
+ * @example [300, 250]
  */
 export type Size = [number, number];
 
@@ -11,23 +13,41 @@ export type Size = [number, number];
  */
 export interface GooglePublisherTagProps {
   /**
-   * ID for this ad, used to generate the ID for the `<div>` element that will
-   * contain the Google Publisher Tag ad.
+   * ID for this ad, used to generate the ID the `<div>` container will use.
+   *
+   * @example "div-gpt-below-content"
    */
   id: string;
 
   /**
    * Unit defined in Google Ad Manager.
+   *
+   * @example "/1234567/sports"
    */
   unit: string;
 
   /**
    * An object or a list of type {@link Size}.
+   *
+   * @example
+   * ```
+   * [300, 250]
+   * ```
+   *
+   * @example
+   * ```
+   * [[300, 250], [300, 600]]
+   * ```
    */
   size: Size | Size[];
 
   /**
    * A record of targeting options in key:value format.
+   *
+   * @example
+   * ```ts
+   * { interests: ["sports", "music", "movies"] }
+   * ```
    */
   targeting?: Record<string, any>;
 }
