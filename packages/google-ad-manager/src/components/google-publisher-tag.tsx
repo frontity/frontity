@@ -12,13 +12,26 @@ const GooglePublisherTag: GoogleAdManager["libraries"]["googleAdManager"]["Googl
   size,
   id,
   targeting = {},
+  data,
 }) => {
-  // Setup unit once the component has been mounted.
+  // Generate the div ID.
+  let divId = `${id}-${unit}`;
+
+  /**
+   * Append link if data is specified.
+   *
+   * This allows the same units to be rendered in the same slots but in
+   * different pages showed at the same time, like in an infinite-scroll
+   * layout, without conflicts.
+   */
+  if (data) divId = `${divId}-${data.link}`;
+
+  // Set up the ad unit once the component has been mounted.
   React.useEffect(() => {
     window.googletag.cmd.push(function () {
       // Define the slot with the give properties.
       const slot = window.googletag
-        .defineSlot(unit, size, id)
+        .defineSlot(unit, size, divId)
         .addService(window.googletag.pubads());
 
       // Set targeting values if specified.
@@ -26,13 +39,13 @@ const GooglePublisherTag: GoogleAdManager["libraries"]["googleAdManager"]["Googl
         slot.setTargeting(key, value)
       );
 
-      // Show the unit.
-      window.googletag.display(id);
+      // Show the ad unit.
+      window.googletag.display(divId);
     });
   }, []);
 
   // Render the ad container.
-  return <div id={id} />;
+  return <div id={divId} />;
 };
 
 export default GooglePublisherTag;

@@ -62,6 +62,12 @@ export interface GooglePublisherTagProps {
    * ```
    */
   targeting?: Record<string, any>;
+
+  /**
+   * Data object representing a link, passed automatically if the component is
+   * rendered by a slot.
+   */
+  data?: any;
 }
 
 /**
@@ -138,6 +144,7 @@ interface GoogleAdManager extends Package {
        *     id="content-ad-1"
        *     unit="content/0812630984"
        *     size={[300, 250]}
+       *     data={state.source.get(state.router.link)}
        *   />
        * );
        * ```
