@@ -3,8 +3,8 @@ const execa = require("execa");
 
 // Get the name of the instance
 // This is normally passed through standard input:
-// - locally, the usr has to speify the instance they want to run the tests for like:
-// npm run start -- "instance-1"
+// - locally, the user has to specify the instance they want to run the tests for like:
+//  npm start "instance-1"
 // - on the CI, this argument is provided from the github actions
 const instance = process.argv[2];
 
