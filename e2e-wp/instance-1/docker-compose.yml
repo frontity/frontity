@@ -47,7 +47,7 @@ services:
       - db_data:/var/lib/mysql
 
       # The mysql container will load any .sql file in the ./data folder
-      # This way, we can
+      # This way, we can specify the data outside the container and load it on startup.
       - ./data:/docker-entrypoint-initdb.d
     environment:
       MYSQL_DATABASE: wordpress
