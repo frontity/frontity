@@ -2,7 +2,7 @@
   "name": "e2e-wp",
   "private": false,
   "scripts": {
-    "start": "./e2e-wp.js",
+    "start": "./start.js",
     "dump-db": "./scripts/dump-db.js"
   },
   "devDependencies": {
