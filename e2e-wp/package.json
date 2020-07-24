@@ -2,8 +2,7 @@
   "name": "e2e-wp",
   "private": false,
   "scripts": {
-    "start": "./start.js",
-    "dump-db": "./scripts/dump-db.js"
+    "start": "./start.js"
   },
   "devDependencies": {
     "@types/execa": "^2.0.0",

@@ -4,8 +4,6 @@ const waitOn = require("wait-on");
 const execa = require("execa");
 const cypress = require("cypress");
 
-const { installPlugin } = require("../scripts");
-
 // The test suites to run
 const TESTS = ["wp-test.spec.js"];
 
@@ -13,26 +11,6 @@ const { WP_INSTANCE } = process.env;
 
 (async () => {
   try {
-    // run docker
-    await execa("docker-compose", ["up", "-d"], { stdio: "inherit" });
-
-    await waitOn({
-      resources: ["http-get://localhost:8080"],
-      interval: 1000,
-    });
-
-    // give read and wrie permission to all files
-    await execa("docker-compose", [
-      "run",
-      "wp",
-      "/bin/bash",
-      "-c",
-      "chmod -R 777 /var/www/html",
-    ]);
-
-    // // Install plugins.
-    await installPlugin("all-in-one-seo-pack");
-
     process.chdir("../project");
 
     // build
@@ -48,7 +26,6 @@ const { WP_INSTANCE } = process.env;
 
     await waitOn({
       resources: ["http-get://localhost:3001"],
-      interval: 1000,
     });
 
     process.chdir("..");
