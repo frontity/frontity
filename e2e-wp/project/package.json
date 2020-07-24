@@ -5,13 +5,9 @@
   "description": "WP e2e tests",
   "scripts": {},
   "dependencies": {
-    "@frontity/comscore-analytics": "^0.1.0",
     "@frontity/core": "^1.5.0",
-    "@frontity/google-tag-manager": "^0.2.0",
-    "@frontity/html2react": "^1.3.0",
     "@frontity/tiny-router": "^1.1.0",
     "@frontity/wp-source": "^1.6.0",
-    "babel-plugin-frontity": "^1.0.1",
     "e2e-wp-test": "^1.0.0",
     "frontity": "^1.5.2"
   }
