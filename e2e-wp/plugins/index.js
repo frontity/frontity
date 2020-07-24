@@ -42,6 +42,7 @@ module.exports = (on, config) => {
             );
 
             // Run all the services defined in docker-compose.yml: wp, wpcli & mysql
+            // (in the background via the -d flag)
             await execa(
               "docker-compose",
               ["-f", `./${WP_INSTANCE}/docker-compose.yml`, "up", "-d"],

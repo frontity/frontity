@@ -24,18 +24,25 @@ const { WP_INSTANCE } = process.env;
       stdio: "inherit",
     });
 
+    // Wait for the frontity app to become available
     await waitOn({
       resources: ["http-get://localhost:3001"],
     });
 
+    // At this point we could put additional configuration that could be specific
+    // to this instance.
+
+    // The cypress tests have to be run out of the parent dirctory
     process.chdir("..");
 
-    // workaround for a bug:
+    // Workaround for a bug in cypress, otherwise it fails with:
     // electron: -max-http-header-size=1048576 is not allowed in NODE_OPTIONS
     process.env.NODE_OPTIONS = "";
 
     const testfiles = TESTS.map((t) => `./integration/${t}`).join(",");
 
+    // Run the tests and inject the WP instance name as an env variable so
+    // that it can be read out later like: `const { WP_INSTANCE } = Cypress.env();`
     await cypress.run({ spec: testfiles, env: { WP_INSTANCE } });
 
     // It seems that if we run a script as a child process we have to explicitly
