@@ -21,7 +21,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-totalpages": 2,
       },
       delay: 300,
-    });
+    }).as("pageOne");
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
       response: responsePageTwo,
@@ -35,6 +35,7 @@ describe("UseInfiniteScroll", () => {
     // Changes url to `/archive`.
     cy.get("[data-test='to-archive']").should("exist").click();
     cy.location("href").should("eq", "http://localhost:3001/archive/");
+    cy.wait("@pageOne");
     cy.get("[data-test='archive']").should("exist");
     cy.get("[data-test='page-1']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
@@ -66,7 +67,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-totalpages": 2,
       },
       delay: 300,
-    });
+    }).as("pageOne");
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
       status: 503,
@@ -77,6 +78,7 @@ describe("UseInfiniteScroll", () => {
     // Changes url to `/archive`.
     cy.get("[data-test='to-archive']").should("exist").click();
     cy.location("href").should("eq", "http://localhost:3001/archive/");
+    cy.wait("@pageOne");
     cy.get("[data-test='archive']").should("exist");
     cy.get("[data-test='page-1']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
@@ -133,7 +135,8 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
       },
-    });
+      delay: 300,
+    }).as("pageOne");
     cy.route({
       url:
         "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&slug=the-beauties-of-gullfoss",
@@ -142,7 +145,8 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": 1,
         "x-wp-totalpages": 1,
       },
-    });
+      delay: 300,
+    }).as("postOne");
 
     // Changes url to `/post-type`.
     cy.get("[data-test='to-post-type']").should("exist").click();
@@ -150,6 +154,7 @@ describe("UseInfiniteScroll", () => {
       "eq",
       "http://localhost:3001/2016/the-beauties-of-gullfoss/"
     );
+    cy.wait("@postOne");
     cy.get("[data-test='post-type']").should("exist");
     cy.get("[data-test='post-60']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
@@ -158,4 +163,6 @@ describe("UseInfiniteScroll", () => {
     cy.scrollTo("bottom");
     cy.get("[data-test='post-57']").should("exist");
   });
+
+  it("usePostTypeInfiniteScroll should return `isError` true", () => {});
 });

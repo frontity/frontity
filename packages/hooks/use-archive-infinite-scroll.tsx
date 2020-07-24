@@ -104,7 +104,7 @@ export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
         nextLink: next?.link,
       });
 
-      if (!current.isReady) return null;
+      if (!current.isReady || current.isError) return null;
       if (!supported) return children;
 
       const container = css`
@@ -192,7 +192,9 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
     )
       return;
 
-    if (!isError) {
+    if (isError) {
+      await actions.source.fetch(links[links.length - 1], { force: true });
+    } else {
       links.push(last.next);
 
       actions.router.updateState({
@@ -208,9 +210,6 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
       if (!next.isReady && !next.isFetching) {
         await actions.source.fetch(last.next);
       }
-    } else {
-      const last = links[links.length - 1];
-      await actions.source.fetch(last, { force: true });
     }
   };
 
