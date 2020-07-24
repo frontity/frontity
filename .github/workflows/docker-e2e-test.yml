@@ -6,6 +6,9 @@ jobs:
   run-e2e:
     strategy:
       matrix:
+        # Here we have to specify the names of all the WP instances for which we run tests.
+        # For each instance in this array github actions will launch a separate container,
+        # so we can run the tests for all instances in parallel
         instances: ["instance-1"]
 
     runs-on: ubuntu-latest
