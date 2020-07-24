@@ -62,6 +62,11 @@ type UseArchiveInfiniteScroll = (options?: {
   isFetching: boolean;
 
   /**
+   * If the next page returned an error. Useful to try again.
+   */
+  isError: boolean;
+
+  /**
    * A function that fetches the next page. Useful when the limit has been
    * reached (`isLimit === true`) and the user pushes a button to get the next
    * page.
@@ -175,26 +180,37 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
   const hasReachedLimit = !!limit && links.length >= limit;
   const thereIsNext = !!last.next;
   const isFetching = last.isFetching;
+  const isError = !!last.isError;
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   // Requests the next page disregarding the limit.
   const fetchNext = async () => {
-    if (!options.active || !thereIsNext || links.includes(last.next)) return;
+    if (
+      !options.active ||
+      (!thereIsNext && !isError) ||
+      links.includes(last.next)
+    )
+      return;
 
-    links.push(last.next);
+    if (!isError) {
+      links.push(last.next);
 
-    actions.router.updateState({
-      ...state.router.state,
-      infiniteScroll: {
-        ...state.router.state.infiniteScroll,
-        links,
-      },
-    });
+      actions.router.updateState({
+        ...state.router.state,
+        infiniteScroll: {
+          ...state.router.state.infiniteScroll,
+          links,
+        },
+      });
 
-    const next = state.source.get(last.next);
+      const next = state.source.get(last.next);
 
-    if (!next.isReady && !next.isFetching) {
-      await actions.source.fetch(last.next);
+      if (!next.isReady && !next.isFetching) {
+        await actions.source.fetch(last.next);
+      }
+    } else {
+      const last = links[links.length - 1];
+      await actions.source.fetch(last, { force: true });
     }
   };
 
@@ -212,6 +228,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
     pages,
     isLimit,
     isFetching,
+    isError,
     fetchNext,
   };
 };
