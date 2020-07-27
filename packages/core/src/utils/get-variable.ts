@@ -9,7 +9,6 @@
  */
 export default (pkg: string, mode: string) => {
   return (
-    // "_" +
     pkg
       .replace(/^@/, "")
       .replace(/^(\d)/, "_$1")
