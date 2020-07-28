@@ -12,9 +12,7 @@ const Root: React.FC = connect(
     return (
       <>
         {(state.router.link.startsWith("/archive") && <Archive />) ||
-          (state.router.link.startsWith("/2016/the-beauties-of-gullfoss") && (
-            <PostType />
-          )) || (
+          (state.router.link.startsWith("/2016") && <PostType />) || (
             <>
               <button
                 data-test="to-archive"
@@ -26,13 +24,22 @@ const Root: React.FC = connect(
                 To Archive
               </button>
               <button
-                data-test="to-post-type"
+                data-test="to-first-post"
                 onClick={() => {
                   actions.router.set("/2016/the-beauties-of-gullfoss");
                   actions.source.fetch("/2016/the-beauties-of-gullfoss");
                 }}
               >
-                To PostType
+                To First Post
+              </button>
+              <button
+                data-test="to-last-post"
+                onClick={() => {
+                  actions.router.set("/2016/discovering-iceland");
+                  actions.source.fetch("/2016/discovering-iceland");
+                }}
+              >
+                To Last Post
               </button>
             </>
           )}

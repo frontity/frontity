@@ -6,12 +6,16 @@ import Theme from "../../types";
 const PostType: React.FC = () => {
   const { state } = useConnect<Theme>();
   const current = state.source.get(state.router.link);
-  const { posts, isFetching } = usePostTypeInfiniteScroll();
+  const { posts, isFetching, isError, fetchNext } = usePostTypeInfiniteScroll();
 
   if (!current.isReady) return null;
 
   const div = css`
     height: 200vh;
+  `;
+
+  const fetchDiv = css`
+    height: 100vh;
   `;
 
   return (
@@ -27,6 +31,13 @@ const PostType: React.FC = () => {
         );
       })}
       {isFetching && <div data-test="fetching">Fetching</div>}
+      {isError && (
+        <div data-test="error" css={fetchDiv}>
+          <button data-test="fetch" onClick={fetchNext}>
+            Fetch Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

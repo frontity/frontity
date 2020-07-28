@@ -14,6 +14,10 @@ const Archive: React.FC = () => {
     height: 200vh;
   `;
 
+  const fetchDiv = css`
+    height: 100vh;
+  `;
+
   return (
     <div data-test="archive">
       {pages.map(({ Wrapper, key, link }) => {
@@ -36,7 +40,7 @@ const Archive: React.FC = () => {
       })}
       {isFetching && <div data-test="fetching">Fetching</div>}
       {isError && (
-        <div data-test="error">
+        <div data-test="error" css={fetchDiv}>
           <button data-test="fetch" onClick={fetchNext}>
             Fetch Next
           </button>

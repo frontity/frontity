@@ -74,6 +74,11 @@ type UsePostTypeInfiniteScroll = (options?: {
   isFetching: boolean;
 
   /**
+   * If the next page returned an error. Useful to try again.
+   */
+  isError: boolean;
+
+  /**
    * A function that fetches the next post. Useful when the limit has been
    * reached (`isLimit === true`) and the user pushes a button to get the next
    * post.
@@ -244,6 +249,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
   const thereIsNext = lastIndex < items.length - 1 || !!lastPage.next;
   const isFetching =
     last.isFetching || (pages.length > 1 && lastPage.isFetching);
+  const isError = !!last.isError || !!lastPage.isError;
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   // Request archive if not present.
@@ -278,7 +284,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
 
   // Fetches the next item disregarding the limit.
   const fetchNext = async () => {
-    if (!options.active || !thereIsNext) return;
+    if (!options.active || (!thereIsNext && !isError)) return;
 
     const links = state.router.state.infiniteScroll?.links
       ? [...state.router.state.infiniteScroll.links]
@@ -287,7 +293,10 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     // We need `nextItem` to be declared in local scope.
     let nextItem = items[lastIndex + 1];
 
-    if (!nextItem) {
+    if (isError) {
+      if (lastPage.isError)
+        await actions.source.fetch(pages[pages.length - 1], { force: true });
+    } else if (!nextItem) {
       if (!nextPage) return;
 
       pages.push(nextPage.link);
@@ -320,23 +329,28 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
       nextItem = items[lastIndex + 1];
     }
 
-    if (links.includes(nextItem.link)) return;
+    if (isError) {
+      if (last.isError)
+        await actions.source.fetch(links[links.length - 1], { force: true });
+    } else {
+      if (links.includes(nextItem.link)) return;
 
-    links.push(nextItem.link);
+      links.push(nextItem.link);
 
-    actions.router.updateState({
-      ...state.router.state,
-      infiniteScroll: {
-        ...state.router.state.infiniteScroll,
-        links,
-        pages,
-      },
-    });
+      actions.router.updateState({
+        ...state.router.state,
+        infiniteScroll: {
+          ...state.router.state.infiniteScroll,
+          links,
+          pages,
+        },
+      });
 
-    const next = state.source.get(nextItem.link);
+      const next = state.source.get(nextItem.link);
 
-    if (!next.isReady && !next.isFetching) {
-      await actions.source.fetch(nextItem.link);
+      if (!next.isReady && !next.isFetching) {
+        await actions.source.fetch(nextItem.link);
+      }
     }
   };
 
@@ -354,6 +368,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     posts,
     isLimit,
     isFetching,
+    isError,
     fetchNext,
   };
 };
