@@ -26,6 +26,8 @@ export default {
 };
 ```
 
+More info about how to use this package can be found in the [Feature Discussion](https://community.frontity.org/t/wordpress-comments-package/1267).
+
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
