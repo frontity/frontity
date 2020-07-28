@@ -29,23 +29,23 @@ describe("commentsHandler", () => {
       ])
     );
 
-    await store.actions.source.fetch("comments/60");
+    await store.actions.source.fetch("@comments/60");
 
     expect(api.get).toHaveBeenCalledTimes(1);
     expect(api.get.mock.calls[0]).toMatchSnapshot();
     expect(store.state.source.comment).toMatchSnapshot();
-    expect(store.state.source.get("comments/60")).toMatchSnapshot();
+    expect(store.state.source.get("@comments/60")).toMatchSnapshot();
   });
 
   test("should work fine if there are no comments", async () => {
     api.get.mockResolvedValueOnce(mockResponse([]));
 
-    await store.actions.source.fetch("comments/60");
+    await store.actions.source.fetch("@comments/60");
 
     expect(api.get).toHaveBeenCalledTimes(1);
     expect(api.get.mock.calls[0]).toMatchSnapshot();
     expect(store.state.source.comment).toMatchSnapshot();
-    expect(store.state.source.get("comments/60")).toMatchSnapshot();
+    expect(store.state.source.get("@comments/60")).toMatchSnapshot();
   });
 
   test("should request more pages if there are more than 100 comments", async () => {
@@ -69,12 +69,12 @@ describe("commentsHandler", () => {
         mockResponse([mockComment({ post: 60, id: 1 })], responseProps)
       );
 
-    await store.actions.source.fetch("comments/60");
+    await store.actions.source.fetch("@comments/60");
 
     expect(api.get).toHaveBeenCalledTimes(3);
     expect(api.get.mock.calls[0]).toMatchSnapshot();
     expect(store.state.source.comment).toMatchSnapshot();
-    expect(store.state.source.get("comments/60")).toMatchSnapshot();
+    expect(store.state.source.get("@comments/60")).toMatchSnapshot();
   });
 
   test("should handle replies correctly", async () => {
@@ -86,12 +86,12 @@ describe("commentsHandler", () => {
       ])
     );
 
-    await store.actions.source.fetch("comments/60");
+    await store.actions.source.fetch("@comments/60");
 
     expect(api.get).toHaveBeenCalledTimes(1);
     expect(api.get.mock.calls[0]).toMatchSnapshot();
     expect(store.state.source.comment).toMatchSnapshot();
-    expect(store.state.source.get("comments/60")).toMatchSnapshot();
+    expect(store.state.source.get("@comments/60")).toMatchSnapshot();
   });
 
   test("should handle replies correctly when more than one page", async () => {
@@ -126,11 +126,11 @@ describe("commentsHandler", () => {
         )
       );
 
-    await store.actions.source.fetch("comments/60");
+    await store.actions.source.fetch("@comments/60");
 
     expect(api.get).toHaveBeenCalledTimes(2);
     expect(api.get.mock.calls[0]).toMatchSnapshot();
     expect(store.state.source.comment).toMatchSnapshot();
-    expect(store.state.source.get("comments/60")).toMatchSnapshot();
+    expect(store.state.source.get("@comments/60")).toMatchSnapshot();
   });
 });

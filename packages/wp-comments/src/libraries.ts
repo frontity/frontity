@@ -12,7 +12,7 @@ import { CommentItem } from "../types";
  *   libraries.source.handlers.push({
  *     name: "comments",
  *     priority: 20,
- *     pattern: "comments/:postId(\\d+)",
+ *     pattern: "@comments/:postId(\\d+)",
  *     func: commentsHandler,
  *   })
  * ```
