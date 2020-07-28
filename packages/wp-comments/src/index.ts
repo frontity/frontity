@@ -1,4 +1,5 @@
 import { fetch, warn, URL } from "frontity";
+import { commentsHandler } from "./libraries";
 import WpComments from "../types";
 
 const wpComments: WpComments = {
@@ -6,6 +7,21 @@ const wpComments: WpComments = {
   state: {
     comments: {
       forms: {},
+    },
+    source: {
+      comment: {},
+    },
+  },
+  libraries: {
+    source: {
+      handlers: [
+        {
+          name: "comments",
+          priority: 10,
+          pattern: "@comments/:postId(\\d+)",
+          func: commentsHandler,
+        },
+      ],
     },
   },
   actions: {

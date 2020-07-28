@@ -2,9 +2,110 @@ import { Package, Action, AsyncAction } from "frontity/types";
 import WpSource from "@frontity/wp-source/types";
 
 /**
+ * Schema for a Comment entity in WordPress.
+ */
+export interface WpComment {
+  /**
+   * Unique identifier for the object.
+   */
+  id: number;
+
+  /**
+   * The ID of the associated post object.
+   */
+  post: number;
+
+  /**
+   * The ID for the parent of the object.
+   */
+  parent: number;
+
+  /**
+   * The ID of the user object, if author was a user.
+   */
+  author: number;
+
+  /**
+   * Display name for the object author.
+   */
+  author_name: string;
+
+  /**
+   * URL for the object author.
+   */
+  author_url: string;
+
+  /**
+   * The date the object was published, in the site's timezone.
+   */
+  date: string;
+
+  /**
+   * The date the object was published, as GMT.
+   */
+  date_gmt: string;
+
+  /**
+   * The content for the object.
+   */
+  content: {
+    /**
+     * Content rendered in HTML format.
+     */
+    rendered: string;
+  };
+
+  /**
+   * URL to the object.
+   */
+  link: string;
+
+  /**
+   * State of the object.
+   */
+  status: "approved" | "hold" | "spam" | "trash";
+
+  /**
+   * Type of Comment for the object.
+   */
+  type: string;
+
+  /**
+   * Avatar URLs for the object author.
+   */
+  author_avatar_urls: Record<string, string>;
+
+  /**
+   * Meta fields.
+   */
+  meta: [];
+}
+
+/**
+ * Comment item, added by {@link commentsHandler} to data objects in
+ * `state.source`.
+ */
+export interface CommentItem {
+  /**
+   * Comment type.
+   */
+  type: string;
+
+  /**
+   * Comment ID.
+   */
+  id: number;
+
+  /**
+   * List of replies (if any).
+   */
+  children?: CommentItem[];
+}
+
+/**
  * Object that represents a form to submit comments in a post.
  */
-interface Form {
+export interface Form {
   /**
    * Form fields with their values.
    */
@@ -22,7 +123,7 @@ interface Form {
 /**
  * Form fields with their values.
  */
-interface Fields {
+export interface Fields {
   /**
    * Author's name.
    */
@@ -56,7 +157,7 @@ interface Fields {
 /**
  * Form field values when it is submitted along with the submission status.
  */
-interface Submitted extends Fields {
+export interface Submitted extends Fields {
   /**
    * The comment hasn't been received by WP yet.
    */
@@ -109,6 +210,19 @@ interface WpComments extends Package {
        * Map of form objects by post ID.
        */
       forms: Record<number, Form>;
+    };
+
+    /**
+     * Source namespace.
+     */
+    source: {
+      /**
+       * Map of comments by ID.
+       *
+       * Here is where comments are stored when fetched using
+       * `actions.source.fetch()`.
+       */
+      comment: Record<number, WpComment>;
     };
   };
 
@@ -185,6 +299,24 @@ interface WpComments extends Package {
       updateFields:
         | AsyncAction<Packages, number>
         | Action<Packages, number, Partial<Fields>>;
+    };
+  };
+
+  /**
+   * Libraries exposed by this package.
+   */
+  libraries: {
+    /**
+     * Source namespace.
+     */
+    source: {
+      /**
+       * Handlers are objects that associate a link pattern with a function that
+       * fetches all the entities that belong to that WordPress link.
+       *
+       * Extended with {@link commentsHandler}.
+       */
+      handlers: WpSource["libraries"]["source"]["handlers"];
     };
   };
 }
