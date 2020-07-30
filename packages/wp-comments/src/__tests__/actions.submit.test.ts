@@ -505,10 +505,10 @@ describe("actions.comments.submit", () => {
     // Create store from mocked packages.
     const store = createStore<Packages>(packages as Packages);
 
-    // WordPress returns 203 when a comment was successfully submitted.
+    // WordPress returns 302 when a comment was successfully submitted.
     fetch.mockResolvedValue(
       mockResponse(undefined, {
-        status: 203,
+        status: 302,
         headers: {
           Location:
             "https://test.frontity.org/2016/the-beauties-of-gullfoss/http://frontity.site/post/?unapproved=123&moderation-hash=847492149d817bf7e08d81457bf9952f#comment-123",
@@ -556,10 +556,10 @@ describe("actions.comments.submit", () => {
     // Create store from mocked packages.
     const store = createStore<Packages>(packages as Packages);
 
-    // WordPress returns 203 when a comment was successfully submitted.
+    // WordPress returns 302 when a comment was successfully submitted.
     fetch.mockResolvedValue(
       mockResponse(undefined, {
-        status: 203,
+        status: 302,
         headers: {
           Location:
             "https://test.frontity.org/2016/the-beauties-of-gullfoss/http://frontity.site/post/#comment-123",
