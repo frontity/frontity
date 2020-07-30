@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.3
+
+### Patch Changes
+
+- [`a0fc05cb`](https://github.com/frontity/frontity/commit/a0fc05cb8d51e4e101994b1b35410d5c2fd16e55) [#525](https://github.com/frontity/frontity/pull/525) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix for package names that start with a number, like `@123/package`.
+
 ## 1.7.2
 
 ### Patch Changes
