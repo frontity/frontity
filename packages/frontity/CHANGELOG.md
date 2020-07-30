@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.10.1
+
+### Patch Changes
+
+- [`17f539bf`](https://github.com/frontity/frontity/commit/17f539bfb547105bd4565735c5491f2400c3c8fe) [#516](https://github.com/frontity/frontity/pull/516) Thanks [@luisherranz](https://github.com/luisherranz)! - Add `@frontity/core` as a peer dependency of `frontity` to make sure that people get a warning when they update `frontity` if they have not updated `@frontity/core` as well.
+
+- Updated dependencies [[`a0fc05cb`](https://github.com/frontity/frontity/commit/a0fc05cb8d51e4e101994b1b35410d5c2fd16e55)]:
+  - @frontity/core@1.7.3
+
 ## 1.10.0
 
 ### Minor Changes
