@@ -2,6 +2,7 @@ import { schema } from "normalizr";
 import { taxonomyEntities } from "./taxonomies";
 import { authorEntity } from "./authors";
 import { attachmentEntity } from "./attachments";
+import { commentEntities } from "./comments";
 import { normalize } from "../route-utils";
 
 export const postType = new schema.Entity(
@@ -42,6 +43,7 @@ postEntity.define({
     "wp:featuredmedia": [attachmentEntity],
     "wp:contentmedia": [[attachmentEntity]],
     "wp:term": [taxonomyEntities],
+    replies: [commentEntities],
   },
 });
 
