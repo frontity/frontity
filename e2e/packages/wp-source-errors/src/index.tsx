@@ -21,19 +21,19 @@ const wpSourceErrors: WpSourceErrors = {
   actions: {
     wpSourceErrors: {
       init: ({ state, libraries }) => {
-        const { path } = libraries.source.parse(state.frontity.initialLink);
-        if (path !== "/") {
-          state.source.api = `https://httpstat.us/${path}?rest_route=/`;
+        const { query } = libraries.source.parse(state.frontity.initialLink);
+        if (query.statusCode) {
+          state.source.api = `http://httpstat.us/${query.statusCode}?rest_route=/`;
         } else {
-          state.source.api = "https://test.frontity.io/wp-json";
+          state.source.api = "https://test.frontity.org/wp-json";
         }
-      }
-    }
+      },
+    },
   },
   roots: {
-    wpSourceErrors: Root
+    wpSourceErrors: Root,
   },
-  libraries: {}
+  libraries: {},
 };
 
 export default wpSourceErrors;

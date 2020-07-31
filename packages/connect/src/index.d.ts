@@ -1,3 +1,12 @@
+/* eslint-disable jsdoc/require-jsdoc */
+
+/**
+ * TSDocs disabled by `@luisherranz` in this file because he needs to figure
+ * out first which types will remain when we merge this PR
+ * https://github.com/frontity/frontity/pull/415, taking into account that
+ * `react-easy-state` and `@nx-js/observer-util` already have types themselves.
+ */
+
 import {
   ComponentType,
   FunctionComponent,
@@ -16,9 +25,14 @@ interface ObserveOptions {
   lazy?: boolean;
 }
 
+interface ActionsRecursive<T> {
+  [key: string]: T | Function;
+}
+type Actions = ActionsRecursive<Actions>;
+
 type Store = {
   state?: object;
-  actions?: object;
+  actions?: Actions;
 };
 
 type ResolveState<State> = {
@@ -27,16 +41,18 @@ type ResolveState<State> = {
     : ResolveState<State[P]>;
 };
 
-type ResolveActions<Actions extends any> = {
-  [P in keyof Actions]: Actions[P] extends (
+type ResolveActions<Act extends Actions> = {
+  [P in keyof Act]: Act[P] extends (
     ...store: any
   ) => (...actionArgs: any) => void | Promise<void>
     ? (
-        ...actionArgs: Parameters<ReturnType<Actions[P]>>
-      ) => ReturnType<ReturnType<Actions[P]>>
-    : Actions[P] extends (...store: any) => void | Promise<void>
-    ? () => ReturnType<Actions[P]>
-    : ResolveActions<Actions[P]>;
+        ...actionArgs: Parameters<ReturnType<Act[P]>>
+      ) => ReturnType<ReturnType<Act[P]>>
+    : Act[P] extends (...store: any) => void | Promise<void>
+    ? () => ReturnType<Act[P]>
+    : Act[P] extends Actions
+    ? ResolveActions<Act[P]>
+    : never;
 };
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -75,6 +91,14 @@ export type Connect<St extends Store, Props extends object = {}> = Omit<
   actions: ResolveActions<St["actions"]>;
 } & Props;
 
+export type UseConnect<Package extends Store> = Omit<
+  Package,
+  "state" | "actions"
+> & {
+  state: ResolveState<Package["state"]>;
+  actions: ResolveActions<Package["actions"]>;
+};
+
 export function observable<Observable extends object>(
   obj?: Observable
 ): Observable;
@@ -108,10 +132,17 @@ export function getSnapshot(state: object): object;
 
 export function createStore<St extends Store>(store: St): InitializedStore<St>;
 
+export type ConnectOptions = {
+  injectProps?: boolean;
+};
+
 declare function connect<Props extends object>(
-  Component: ComponentType<Props>
-): FunctionComponent<FilterInjectedProps<Props>>;
+  Component: React.ComponentType<Props>,
+  options?: ConnectOptions
+): React.FunctionComponent<FilterInjectedProps<Props>>;
 
 export const Provider: ProviderExoticComponent<ProviderProps<any>>;
+
+export function useConnect<Package extends Store>(): UseConnect<Package>;
 
 export default connect;

@@ -1,6 +1,6 @@
 {
   "name": "@frontity/error",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Frontity errors and warnings",
   "keywords": [
     "frontity"
@@ -15,6 +15,7 @@
     "url": "git+https://github.com/frontity/frontity.git"
   },
   "scripts": {
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   }

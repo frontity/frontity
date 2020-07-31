@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-frontity",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Babel Plugin for Frontity",
   "keywords": [
     "frontity"
@@ -17,7 +17,7 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest",
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json",

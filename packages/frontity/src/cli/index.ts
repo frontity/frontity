@@ -1,35 +1,12 @@
 #! /usr/bin/env node
-import * as tsNode from "ts-node";
-
-tsNode.register({
-  transpileOnly: true,
-  compilerOptions: {
-    // Target latest version of ECMAScript.
-    target: "es2017",
-    // Search under node_modules for non-relative imports.
-    moduleResolution: "node",
-    // commonjs modules.
-    module: "commonjs",
-    // Allow default imports from modules with no default export.
-    allowSyntheticDefaultImports: true,
-    // Don't emit; allow Babel to transform files.
-    noEmit: true,
-    // Import non-ES modules as default imports.
-    esModuleInterop: true,
-    // Resolve JSON files.
-    resolveJsonModule: true,
-    // Support for JSX.
-    jsx: "react",
-    // Transpile JS as well.
-    allowJs: true,
-  },
-});
 
 import program from "commander";
-import { dev, build, serve } from "../commands";
 
 import { default as create } from "./create";
 import { default as createPackage } from "./create-package";
+import { default as dev } from "./dev";
+import { default as build } from "./build";
+import { default as serve } from "./serve";
 import { default as subscribe } from "./subscribe";
 import { default as unknown } from "./unknown";
 import { default as info } from "./info";
@@ -74,6 +51,11 @@ program
     "--target <target>",
     'create bundles with "es5" or "module". Default target is "module".'
   )
+
+  .option(
+    "--publicPath <path>",
+    'set the public path for static assets. Default path is "/static/".'
+  )
   .description("Starts a server in development mode.")
   .action(dev);
 
@@ -82,7 +64,11 @@ program
   .option("-d, --development", "Builds the project for development.")
   .option(
     "--target <target>",
-    'create bundles with "es5" or "module". Default target is "module".'
+    'create bundles with "es5", "module" or "both". Default target is "both".'
+  )
+  .option(
+    "--publicPath <path>",
+    'set the public path for static assets. Default path is "/static/".'
   )
   .description("Builds the project for production.")
   .action(build);

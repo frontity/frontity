@@ -4,15 +4,30 @@ import choosePort from "../utils/choosePort";
 
 const HOST = process.env.HOST || "0.0.0.0";
 
-export default async ({ production, port, https, target, dontOpenBrowser }) => {
+export default async ({
+  production = false,
+  port = 3000,
+  https = false,
+  target = "module",
+  dontOpenBrowser = false,
+  publicPath = "/static/",
+}: {
+  production?: boolean;
+  port?: number;
+  https?: boolean;
+  target?: "es5" | "module";
+  dontOpenBrowser?: boolean;
+  publicPath?: string;
+}) => {
   let dev: Function;
 
   const options = {
     mode: production ? "production" : "development",
-    port: parseInt(port, 10) || 3000,
+    port,
     isHttps: !!https,
-    target: target || "module",
+    target,
     openBrowser: !dontOpenBrowser,
+    publicPath,
   };
 
   try {

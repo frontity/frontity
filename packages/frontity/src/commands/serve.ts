@@ -1,13 +1,16 @@
 import chalk from "chalk";
 import { errorLogger } from "../utils";
 
-export default async ({ port, https }) => {
+export default async ({
+  port = 3000,
+  https = false,
+}: {
+  port?: number;
+  https?: boolean;
+}) => {
   let serve: Function;
 
-  const options = {
-    port: parseInt(port, 10) || 3000,
-    isHttps: !!https,
-  };
+  const options = { port, isHttps: https };
 
   try {
     serve = require("@frontity/core").serve;

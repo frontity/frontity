@@ -16,7 +16,7 @@ let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.io/wp-json";
+  store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -217,6 +217,58 @@ describe("attachment", () => {
     // Fetch entities
     await store.actions.source.fetch("/post-1/attachment-1/?some=param");
     expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("overwrites the data when fetched with { force: true }", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([post1]))
+      .mockResolvedValueOnce(mockResponse(attachment1));
+
+    // Fetch entities
+    await store.actions.source.fetch("/post-1");
+    await store.actions.source.fetch("/post-1", { force: true });
+
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("Every unknown URL should return a 404 even if it's substring matches a path", async () => {
+    api.get = jest.fn((_) =>
+      Promise.resolve(
+        mockResponse([
+          {
+            id: 1,
+            slug: "post-1",
+            type: "post",
+            link: "https://test.frontity.org/post-1/",
+          },
+        ])
+      )
+    );
+
+    await store.actions.source.fetch("/undefined/post-1/");
+
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("Every unknown URL should return a 404 even if it's substring matches a path 2", async () => {
+    api.get = jest.fn((_) =>
+      Promise.resolve(
+        mockResponse([
+          {
+            id: 1,
+            slug: "post-1",
+            type: "post",
+            link: "https://test.frontity.org/post-1/",
+          },
+        ])
+      )
+    );
+
+    await store.actions.source.fetch("/does/not/exist/");
+
     expect(store.state.source).toMatchSnapshot();
   });
 });

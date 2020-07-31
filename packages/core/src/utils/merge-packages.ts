@@ -24,7 +24,6 @@ export default ({
 }): Package => {
   let config: Package = {
     roots: {},
-    fills: {},
     state: {},
     actions: {},
     libraries: {},
@@ -37,10 +36,18 @@ export default ({
       clone: false,
     });
   });
+  // Save debug, which is the only value we want to retain.
+  const debug = !!config.state?.frontity?.debug;
+  // Merge the state from the packages with the initial state.
   config.state = deepmerge(config.state, state, {
     clone: true,
     arrayMerge: overwriteArrays ? overwriteMerge : undefined,
   });
+  // Delete the name.
   delete config.name;
+  // Restore the debug flag if we are not in production.
+  if (process.env.NODE_ENV !== "production")
+    config.state.frontity.debug = debug;
+
   return config;
 };

@@ -1,9 +1,5 @@
-import React, {
-  ComponentType,
-  FunctionComponent,
-  ClassicComponent,
-  ComponentClass,
-} from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
+import React from "react";
 import Connect, { ConnectFunction } from "../connect";
 import { FilterInjectedProps } from "../utils";
 import { Action, AsyncAction } from "../action";
@@ -77,6 +73,8 @@ const connect: ConnectFunction = (comp) => comp;
 
 const ConnectedComponent1 = connect(Component1);
 const ConnectedComponent2 = connect(Component2);
+connect(Component1, { injectProps: false });
+connect(Component2, { injectProps: false });
 
 const internalProps: Connect<Package1, OwnProps> = {
   state: {

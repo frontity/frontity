@@ -1,14 +1,20 @@
 <!--
 Thanks for your pull request 😊. Note that not following the template might
-result in your issue being closed
+result in your issue being closed.
+-->
 
+<!--
 Please make sure you're familiar with and follow the instructions in the
 contributing guidelines found in the
 https://docs.frontity.org/contributing/code-contributions.
+-->
 
+<!--
 If you're new to contributing to open source projects, you might find this free
 video course helpful: http://kcd.im/pull-request
+-->
 
+<!--
 Please fill out the information below to expedite the review and (hopefully)
 merge of your pull request!
 -->
@@ -29,22 +35,32 @@ merge of your pull request!
 
 <!-- Have you done all of these things?  -->
 
-<!-- To check an item, place an "x" in the box like so: "- [x] Documentation"
-Strikethrough each line that's irrelevant to your changes using ~, for example: "- [x] ~Code~"
-If needed, add the reason: "- [x] ~Documentation~: Internal code, not documented." -->
+<!-- To check an item, place an "x" in the box like so: "- [x] Unit tests" -->
+
+<!-- Move any unrelated task to the Unrelated tasks section below. -->
 
 - [ ] Code
+- [ ] TSDocs
 - [ ] TypeScript
 - [ ] Unit tests
 - [ ] End to end tests
 - [ ] TypeScript tests
 - [ ] Update starter themes
 - [ ] Update other packages
-- [ ] Documentation
-- [ ] Community discussions
-- [ ] Changeset
-<!-- Changesets are necessary if your changes should release any packages.Run
-`npx changeset` to create a changeset. If there is a Feature Discussion for
-this, please add a link: https://community.frontity.org/c/33 -->
+- [ ] Open an issue for this feature in the [docs repo](https://github.com/frontity/docs/wiki/Code-Releases)
+- [ ] Update community discussions
+- [ ] Add a changeset (with link to its [Feature Discussion](https://community.frontity.org/c/33) if it exists)
+
+<!-- Changesets are necessary if your changes should release any packages.
+Run `npx changeset` to create a changeset.
+More info at https://docs.frontity.org/contributing/code-contribution-guide#what-is-a-changeset -->
+
+**Unrelated Tasks**
+
+<!-- ignore-task-list-start -->
+
+<!-- ignore-task-list-end -->
+
+**Additional Comments**
 
 <!-- Feel free to add any additional comments. -->

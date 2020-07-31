@@ -63,13 +63,13 @@ const settings: Settings = [
       "e2e-tiny-router",
       {
         name: "@frontity/tiny-router",
-        state: { router: { autoFetch: false } }
+        state: { router: { autoFetch: false } },
       },
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "https://test.frontity.io/wp-json" } }
-      }
-    ]
+        state: { source: { api: "https://test.frontity.org/wp-json" } },
+      },
+    ],
   },
   {
     name: "google-tag-manager",
@@ -77,10 +77,52 @@ const settings: Settings = [
       "e2e-analytics",
       "@frontity/tiny-router",
       {
-        name: "@frontity/google-tag-manager",
+        name: "@frontity/google-tag-manager-analytics",
         state: {
-          googleTagManager: {
-            containerId: "UA-XXXXXX-X",
+          googleTagManagerAnalytics: {
+            containerId: "GTM-XXXXXX-X",
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "comscore-analytics",
+    packages: [
+      "e2e-analytics",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/comscore-analytics",
+        state: {
+          comscoreAnalytics: {
+            trackingIds: ["111111", "222222"],
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "use-in-view",
+    packages: ["e2e-use-in-view"],
+  },
+  {
+    name: "slot-and-fill",
+    packages: ["e2e-slot-and-fill"],
+  },
+  {
+    name: "analytics",
+    packages: ["e2e-analytics", "@frontity/tiny-router", "@frontity/analytics"],
+  },
+  {
+    name: "google-analytics",
+    packages: [
+      "e2e-analytics",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/google-analytics",
+        state: {
+          googleAnalytics: {
+            trackingIds: ["UA-XXXXXX-X", "UA-YYYYYY-Y"],
           },
         },
       },

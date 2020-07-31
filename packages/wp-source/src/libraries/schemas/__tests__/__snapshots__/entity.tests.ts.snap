@@ -75,6 +75,58 @@ Object {
 }
 `;
 
+exports[`Convert a comment using entity 1`] = `
+Object {
+  "_links": Object {
+    "author": Array [
+      Object {
+        "embeddable": true,
+        "href": "https://test.frontity.org/wp-json/wp/v2/users/2",
+      },
+    ],
+    "collection": Array [
+      Object {
+        "href": "https://test.frontity.org/wp-json/wp/v2/comments",
+      },
+    ],
+    "self": Array [
+      Object {
+        "href": "https://test.frontity.org/wp-json/wp/v2/comments/5",
+      },
+    ],
+    "up": Array [
+      Object {
+        "embeddable": true,
+        "href": "https://test.frontity.org/wp-json/wp/v2/posts/60",
+        "post_type": "post",
+      },
+    ],
+  },
+  "acf": Array [],
+  "author": 2,
+  "author_avatar_urls": Object {
+    "24": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=24&d=mm&r=g",
+    "48": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=48&d=mm&r=g",
+    "96": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=96&d=mm&r=g",
+  },
+  "author_name": "Reyes Martinez",
+  "author_url": "http://www.worona.org",
+  "content": Object {
+    "rendered": "<p>Nice post, Alan! Iceland must be amazing. Thanks for sharing 🙂</p>
+",
+  },
+  "date": "2017-01-13T16:10:43",
+  "date_gmt": "2017-01-13T16:10:43",
+  "id": 5,
+  "link": "/2016/the-beauties-of-gullfoss/comment-page-1/#comment-5",
+  "meta": Array [],
+  "parent": 0,
+  "post": 60,
+  "status": "approved",
+  "type": "comment",
+}
+`;
+
 exports[`Convert a latest taxonomy using entity 1`] = `
 Object {
   "count": 1,
@@ -297,7 +349,7 @@ Object {
   "_links": Object {
     "collection": Array [
       Object {
-        "href": "http://test.frontity.io/wp-json/wp/v2/types",
+        "href": "http://test.frontity.org/wp-json/wp/v2/types",
       },
     ],
     "curies": Array [
@@ -309,7 +361,7 @@ Object {
     ],
     "wp:items": Array [
       Object {
-        "href": "http://test.frontity.io/wp-json/wp/v2/posts",
+        "href": "http://test.frontity.org/wp-json/wp/v2/posts",
       },
     ],
   },
@@ -504,50 +556,7 @@ Object {
     ],
     "replies": Array [
       Array [
-        Object {
-          "_links": Object {
-            "author": Array [
-              Object {
-                "embeddable": true,
-                "href": "https://demo.worona.org/wp-json/wp/v2/users/2",
-              },
-            ],
-            "collection": Array [
-              Object {
-                "href": "https://demo.worona.org/wp-json/wp/v2/comments",
-              },
-            ],
-            "self": Array [
-              Object {
-                "href": "https://demo.worona.org/wp-json/wp/v2/comments/5",
-              },
-            ],
-            "up": Array [
-              Object {
-                "embeddable": true,
-                "href": "https://demo.worona.org/wp-json/wp/v2/posts/60",
-                "post_type": "post",
-              },
-            ],
-          },
-          "author": 2,
-          "author_avatar_urls": Object {
-            "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
-            "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
-            "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g",
-          },
-          "author_name": "Reyes Martinez",
-          "author_url": "http://www.worona.org",
-          "content": Object {
-            "rendered": "<p>Nice post, Alan! Iceland must be amazing. Thanks for sharing 🙂</p>
-",
-          },
-          "date": "2017-01-13T16:10:43",
-          "id": 5,
-          "link": "https://demo.worona.org/the-beauties-of-gullfoss/#comment-5",
-          "parent": 0,
-          "type": "comment",
-        },
+        5,
       ],
     ],
     "wp:contentmedia": Array [
@@ -967,5 +976,52 @@ Object {
   "yoast_meta": Object {
     "title": "Demo Worona - Just another WordPress site",
   },
+}
+`;
+
+exports[`Convert post using entity 7`] = `
+Object {
+  "_links": Object {
+    "author": Array [
+      Object {
+        "embeddable": true,
+        "href": "https://demo.worona.org/wp-json/wp/v2/users/2",
+      },
+    ],
+    "collection": Array [
+      Object {
+        "href": "https://demo.worona.org/wp-json/wp/v2/comments",
+      },
+    ],
+    "self": Array [
+      Object {
+        "href": "https://demo.worona.org/wp-json/wp/v2/comments/5",
+      },
+    ],
+    "up": Array [
+      Object {
+        "embeddable": true,
+        "href": "https://demo.worona.org/wp-json/wp/v2/posts/60",
+        "post_type": "post",
+      },
+    ],
+  },
+  "author": 2,
+  "author_avatar_urls": Object {
+    "24": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=24&d=mm&r=g",
+    "48": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=48&d=mm&r=g",
+    "96": "https://secure.gravatar.com/avatar/485a5c16c5e51ffad6e76c48fd0cb88b?s=96&d=mm&r=g",
+  },
+  "author_name": "Reyes Martinez",
+  "author_url": "http://www.worona.org",
+  "content": Object {
+    "rendered": "<p>Nice post, Alan! Iceland must be amazing. Thanks for sharing 🙂</p>
+",
+  },
+  "date": "2017-01-13T16:10:43",
+  "id": 5,
+  "link": "/the-beauties-of-gullfoss/#comment-5",
+  "parent": 0,
+  "type": "comment",
 }
 `;

@@ -1,13 +1,32 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
 import { DateData, DateWithSearchData } from "@frontity/source/types/data";
+import validateDate from "./utils/validateDate";
 
+/**
+ * A {@link Handler} for fetching posts by date.
+ *
+ * @param params - Defined in {@link Handler}.
+ *
+ * @example
+ * ```js
+ *   libraries.source.handlers.push({
+ *     name: "date",
+ *     priority: 20,
+ *     pattern: "/:year(\\d+)/:month(\\d+)?/:day(\\d+)?",
+ *     func: dateHandler,
+ *   })
+ * ```
+ *
+ * @returns A Promise that will resolve once the data for the posts has loaded.
+ */
 export const dateHandler: Handler = async ({
   link: linkArg,
   route: routeArg,
   params,
   state,
   libraries,
+  force,
 }) => {
   // This is only for backward compatibility for the moment when handlers used
   // to receive `route` instead of `link`.
@@ -17,9 +36,14 @@ export const dateHandler: Handler = async ({
   const { route, page, query } = parse(link);
 
   // 1. build date properties
+  // year has to be parsed correctly because it HAD TO be matched by a pattern.
   const year = parseInt(params.year);
+  // it's okay if month is undefined, this will return NaN in that case.
   const month = params.month && parseInt(params.month);
+  // it's okay if month is undefined, this will return NaN in that case.
   const day = params.day && parseInt(params.day);
+
+  validateDate(year, month, day);
 
   const after = new Date(
     `${params.year}-${params.month || "01"}-${params.day || "01"}`
@@ -44,7 +68,7 @@ export const dateHandler: Handler = async ({
   });
 
   // 3. populate response
-  const items = await populate({ response, state });
+  const items = await populate({ response, state, force });
   if (items.length === 0)
     throw new ServerError(`date "${route}" doesn't have page ${page}`, 404);
 
@@ -57,6 +81,14 @@ export const dateHandler: Handler = async ({
   // returns true if previous page exists
   const hasOlderPosts = page > 1;
 
+  /**
+   * A helper function that helps "glue" the link back together
+   * from `route`, `query` and `page`.
+   *
+   * @param page - The page number.
+   * @returns The full link for a particular page.
+   * @example `getPageLink(1)`
+   */
   const getPageLink = (page: number) =>
     libraries.source.stringify({ route, query, page });
 

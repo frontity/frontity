@@ -61,7 +61,6 @@ describe("Switch", () => {
 
     expect(SwitchComponent.root.findByType(TestArchive).props).toEqual({
       someProp: "prop value",
-      when: true,
     });
   });
 

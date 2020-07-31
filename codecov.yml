@@ -1,0 +1,20 @@
+# Round the coverage up, up to the 2nd decimal point. E.g
+# 89.0199 % => 89.02%
+coverage:
+  precision: 2
+  round: up
+
+  # use codecov in informational mode, it wont block PR merging
+  # https://docs.codecov.io/docs/common-recipe-list#set-non-blocking-status-checks
+  status:
+    project:
+      default:
+        informational: true
+    patch:
+      default:
+        informational: true
+
+# Make the layout of the comment posted on the PR by the codecov bot a bit nicer
+comment:
+  layout: "files"
+  behavior: once
