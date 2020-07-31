@@ -40,25 +40,25 @@ export const connect = (Component, options) => {
   );
 
   if (isStatelessComp) {
-    isConnected = true;
-    const rendered = view((props) => {
+    return view((props) => {
       const store = useContext(context);
-      return Component({ ...props, ...(options.injectProps ? store : {}) });
+      isConnected = true;
+      const rendered = Component({
+        ...props,
+        ...(options.injectProps ? store : {}),
+      });
+      isConnected = false;
+      return rendered;
     });
-    isConnected = false;
-    return rendered;
   } else {
     class ConnectedComponent extends Component {
       static contextType = context;
 
       render() {
-        isConnected = true;
-        const rendered = createElement(Component, {
+        return createElement(Component, {
           ...this.props,
           ...(options.injectProps ? this.context : {}),
         });
-        isConnected = false;
-        return rendered;
       }
     }
 
