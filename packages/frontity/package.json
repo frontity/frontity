@@ -67,7 +67,7 @@
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
-    "@types/node": "^11.13.2",
+    "@types/node": "^12.12.53",
     "@types/node-fetch": "^2.3.3",
     "@types/phin": "^3.3.0",
     "@types/ramda": "0.26.33",
