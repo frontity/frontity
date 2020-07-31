@@ -1,12 +1,16 @@
 # @frontity/wp-comments
 
+## 0.2.1
+
+### Patch Changes
+
+- [`1c0efec7`](https://github.com/frontity/frontity/commit/1c0efec742f0dff27d223815008ea2bcc31166f3) [#528](https://github.com/frontity/frontity/pull/528) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix a in the HTTP response code that WordPress returns when a comment is submitted.
+
 ## 0.2.0
+
 ### Minor Changes
 
-
-
 - [`ce672740`](https://github.com/frontity/frontity/commit/ce672740f63e215ced6f62bf2d9554734cefa46c) [#495](https://github.com/frontity/frontity/pull/495) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Release the first beta version of `@frontity/wp-comments` package ([Feature Discussion](https://community.frontity.org/t/wordpress-comments-package/1267)).
-
 
 ### Patch Changes
 

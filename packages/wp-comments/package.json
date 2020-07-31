@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-comments",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Add integration for WordPress native comments",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
