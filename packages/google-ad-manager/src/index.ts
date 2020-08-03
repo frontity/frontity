@@ -12,8 +12,10 @@ const googleAdManager: GoogleAdManager = {
     },
   },
   libraries: {
-    googleAdManager: {
-      GooglePublisherTag,
+    fills: {
+      googleAdManager: {
+        GooglePublisherTag,
+      },
     },
   },
 };

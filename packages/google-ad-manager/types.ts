@@ -127,33 +127,38 @@ interface GoogleAdManager extends Package {
    */
   libraries: {
     /**
-     * Google Ad Manager namespace.
+     * Fills namespace.
      */
-    googleAdManager: {
+    fills: {
       /**
-       * Component that renders an Google Publisher Tag ad.
-       *
-       * This component can be used directly from `libraries` or with fills.
-       *
-       * @example
-       * ```tsx
-       * const { GooglePublisherTag } = libraries.googleAdManager;
-       *
-       * return (
-       *   <GooglePublisherTag
-       *     id="content-ad-1"
-       *     unit="content/0812630984"
-       *     size={[300, 250]}
-       *     data={state.source.get(state.router.link)}
-       *   />
-       * );
-       * ```
-       *
-       * @param props - Object of type {@link GooglePublisherTagProps}.
-       *
-       * @returns A React element with the ad.
+       * Fill components from Google Ad Manager package.
        */
-      GooglePublisherTag: FC<Connect<GoogleAdManager, GooglePublisherTagProps>>;
+      googleAdManager: {
+        /**
+         * Component that renders an Google Publisher Tag ad.
+         *
+         * This component can be used directly from `libraries` or with fills.
+         *
+         * @example
+         * ```tsx
+         * const { GooglePublisherTag } = libraries.googleAdManager;
+         *
+         * return (
+         *   <GooglePublisherTag
+         *     id="content-ad-1"
+         *     unit="content/0812630984"
+         *     size={[300, 250]}
+         *     data={state.source.get(state.router.link)}
+         *   />
+         * );
+         * ```
+         *
+         * @param props - Object of type {@link GooglePublisherTagProps}.
+         *
+         * @returns A React element with the ad.
+         */
+        GooglePublisherTag: FC<GooglePublisherTagProps>;
+      };
     };
   };
 }
