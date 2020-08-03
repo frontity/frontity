@@ -144,24 +144,8 @@ const settings: Settings = [
                 priority: 5,
                 props: {
                   id: "header-ad",
-                  unit: "/6355419/Travel/Europe/France/Paris",
-                  size: [
-                    [300, 250],
-                    [300, 600],
-                  ],
-                },
-              },
-              footerAd: {
-                slot: "footer",
-                library: "googleAdManager.GooglePublisherTag",
-                priority: 5,
-                props: {
-                  id: "footer-ad",
-                  unit: "/6355419/Travel/Europe/France/Paris",
-                  size: [
-                    [300, 250],
-                    [300, 600],
-                  ],
+                  unit: "/6355419/Travel/Europe/",
+                  size: [300, 250],
                 },
               },
               contentAd: {
@@ -170,6 +154,16 @@ const settings: Settings = [
                 priority: 5,
                 props: {
                   id: "content-ad",
+                  unit: "/6355419/Travel/Europe/France",
+                  size: [300, 250],
+                },
+              },
+              footerAd: {
+                slot: "footer",
+                library: "googleAdManager.GooglePublisherTag",
+                priority: 5,
+                props: {
+                  id: "footer-ad",
                   unit: "/6355419/Travel/Europe/France/Paris",
                   size: [
                     [300, 250],

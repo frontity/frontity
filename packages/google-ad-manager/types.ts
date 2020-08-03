@@ -1,5 +1,6 @@
-import { Connect, Package, Fill } from "frontity/types";
-import { FC } from "react";
+import { Package, Fill } from "frontity/types";
+import Router from "@frontity/router/types";
+import React from "react";
 
 declare global {
   /**
@@ -82,7 +83,7 @@ interface GoogleAdManager extends Package {
      * Google Ad Manager root element.
      * It simply adds the Google Publisher Tag library.
      */
-    googleAdManager: FC<Connect<GoogleAdManager>>;
+    googleAdManager: React.FC;
   };
 
   /**
@@ -157,10 +158,15 @@ interface GoogleAdManager extends Package {
          *
          * @returns A React element with the ad.
          */
-        GooglePublisherTag: FC<GooglePublisherTagProps>;
+        GooglePublisherTag: React.FC<GooglePublisherTagProps>;
       };
     };
   };
 }
 
 export default GoogleAdManager;
+
+/**
+ * Packages used internally by GoogleAdManager.
+ */
+export type Packages = GoogleAdManager & Router;

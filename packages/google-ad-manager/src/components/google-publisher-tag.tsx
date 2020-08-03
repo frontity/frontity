@@ -1,7 +1,7 @@
 import React from "react";
-import { css } from "frontity";
+import { css, connect } from "frontity";
 import { Connect } from "frontity/types";
-import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
+import { Packages, GooglePublisherTagProps, Size } from "../../types";
 
 /**
  * Documented at {@link GoogleAdManager.libraries.googleAdManager.GooglePublisherTag}.
@@ -10,9 +10,9 @@ import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
  * @returns React element.
  */
 const GooglePublisherTag: React.FC<Connect<
-  GoogleAdManager,
+  Packages,
   GooglePublisherTagProps
->> = ({ unit, size, id, targeting = {}, data }) => {
+>> = ({ unit, size, id, targeting = {}, data, state }) => {
   /**
    * Append link if data is specified.
    *
@@ -20,22 +20,31 @@ const GooglePublisherTag: React.FC<Connect<
    * different pages showed at the same time, like in an infinite-scroll
    * layout, without conflicts.
    */
-  if (data) id = `${id}-${data.link.replace(/[^\w]/g, "-")}`;
+  if (data) {
+    const { pathname } = new URL(data.link, "http://example.org");
+    id = `${id}${pathname.replace(/\//g, "_").replace(/_?$/, "")}`;
+  }
+
+  // Create a ref to store the slot.
+  const slot = React.useRef<googletag.Slot>(null);
 
   // Set up the ad unit once the component has been mounted.
   React.useEffect(() => {
     window.googletag =
       window.googletag || (({ cmd: [] } as unknown) as googletag.Googletag);
 
-    window.googletag.cmd.push(function () {
+    window.googletag.cmd.push(() => {
+      // Remove slot if already defined.
+      if (slot.current) window.googletag.destroySlots([slot.current]);
+
       // Define the slot with the give properties.
-      const slot = window.googletag
+      slot.current = window.googletag
         .defineSlot(unit, size, id)
         .addService(window.googletag.pubads());
 
       // Set targeting values if specified.
       Object.entries(targeting).forEach(([key, value]) =>
-        slot.setTargeting(key, value)
+        slot.current.setTargeting(key, value)
       );
 
       // Enables all GPT services.
@@ -44,7 +53,24 @@ const GooglePublisherTag: React.FC<Connect<
       // Show the ad unit.
       window.googletag.display(id);
     });
-  }, []);
+
+    // Return cleanup function.
+    return () => {
+      // Destroy the slot created.
+      if (slot.current)
+        window.googletag.cmd.push(() => {
+          window.googletag.destroySlots([slot.current]);
+        });
+    };
+  }, [state.router.link]);
+
+  // // Refresh the slot each time the link changes.
+  // React.useEffect(() => {
+  //   if (slot.current)
+  //     window.googletag.cmd.push(() => {
+  //       window.googletag.pubads().refresh([slot.current]);
+  //     });
+  // }, [state.router.link]);
 
   /*
    * Get `minWidth` and `minHeight` from `size` prop to render the container
@@ -63,11 +89,11 @@ const GooglePublisherTag: React.FC<Connect<
     <div
       id={id}
       css={css`
-        min-height: ${minWidth};
-        min-width: ${minHeight};
+        min-width: ${minWidth}px;
+        min-height: ${minHeight}px;
       `}
     />
   );
 };
 
-export default GooglePublisherTag;
+export default connect(GooglePublisherTag);
