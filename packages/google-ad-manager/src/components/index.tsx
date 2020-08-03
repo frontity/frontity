@@ -1,7 +1,7 @@
-import { Head, connect } from "frontity";
+import { Head } from "frontity";
 import { Connect } from "frontity/types";
 import React from "react";
-import { Packages } from "../../types";
+import GoogleAdManager from "../../types";
 
 /**
  * Documented at {@link GoogleAdManager}.
@@ -9,17 +9,7 @@ import { Packages } from "../../types";
  * @param props - Frontity injected props.
  * @returns React element.
  */
-const Root: React.FC<Connect<Packages>> = ({ state }) => {
-  // Each time the link changes:
-  React.useEffect(() => {
-    if (window.googletag?.apiReady) {
-      // Change correlator number.
-      // window.googletag.pubads().updateCorrelator();
-      // // Destroy all slots.
-      // window.googletag.destroySlots();
-    }
-  }, [state.router.link]);
-
+const Root: React.FC<Connect<GoogleAdManager>> = () => {
   // Render GPT library.
   return (
     <Head>
@@ -31,4 +21,4 @@ const Root: React.FC<Connect<Packages>> = ({ state }) => {
   );
 };
 
-export default connect(Root);
+export default Root;

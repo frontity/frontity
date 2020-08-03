@@ -1,5 +1,4 @@
 import { Package, Fill } from "frontity/types";
-import Router from "@frontity/router/types";
 import React from "react";
 
 declare global {
@@ -165,8 +164,3 @@ interface GoogleAdManager extends Package {
 }
 
 export default GoogleAdManager;
-
-/**
- * Packages used internally by GoogleAdManager.
- */
-export type Packages = GoogleAdManager & Router;

@@ -1,7 +1,7 @@
 import React from "react";
 import { css, connect } from "frontity";
 import { Connect } from "frontity/types";
-import { Packages, GooglePublisherTagProps, Size } from "../../types";
+import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
 
 /**
  * Documented at {@link GoogleAdManager.libraries.googleAdManager.GooglePublisherTag}.
@@ -10,9 +10,9 @@ import { Packages, GooglePublisherTagProps, Size } from "../../types";
  * @returns React element.
  */
 const GooglePublisherTag: React.FC<Connect<
-  Packages,
+  GoogleAdManager,
   GooglePublisherTagProps
->> = ({ unit, size, id, targeting = {}, data, state }) => {
+>> = ({ unit, size, id, targeting = {}, data }) => {
   /**
    * Append link if data is specified.
    *
