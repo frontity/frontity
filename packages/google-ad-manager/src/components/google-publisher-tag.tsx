@@ -24,7 +24,8 @@ const GooglePublisherTag: React.FC<Connect<
 
   // Set up the ad unit once the component has been mounted.
   React.useEffect(() => {
-    window.googletag = window.googletag || { cmd: [] };
+    window.googletag =
+      window.googletag || (({ cmd: [] } as unknown) as googletag.Googletag);
 
     window.googletag.cmd.push(function () {
       // Define the slot with the give properties.
