@@ -34,9 +34,6 @@ const GooglePublisherTag: React.FC<Connect<
       window.googletag || (({ cmd: [] } as unknown) as googletag.Googletag);
 
     window.googletag.cmd.push(() => {
-      // Remove slot if already defined.
-      if (slot.current) window.googletag.destroySlots([slot.current]);
-
       // Define the slot with the give properties.
       slot.current = window.googletag
         .defineSlot(unit, size, id)
@@ -62,15 +59,7 @@ const GooglePublisherTag: React.FC<Connect<
           window.googletag.destroySlots([slot.current]);
         });
     };
-  }, [state.router.link]);
-
-  // // Refresh the slot each time the link changes.
-  // React.useEffect(() => {
-  //   if (slot.current)
-  //     window.googletag.cmd.push(() => {
-  //       window.googletag.pubads().refresh([slot.current]);
-  //     });
-  // }, [state.router.link]);
+  }, []);
 
   /*
    * Get `minWidth` and `minHeight` from `size` prop to render the container

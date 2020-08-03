@@ -144,7 +144,7 @@ const settings: Settings = [
                 priority: 5,
                 props: {
                   id: "header-ad",
-                  unit: "/6355419/Travel/Europe/",
+                  unit: "/4595/nfl.test.open",
                   size: [300, 250],
                 },
               },
@@ -154,7 +154,7 @@ const settings: Settings = [
                 priority: 5,
                 props: {
                   id: "content-ad",
-                  unit: "/6355419/Travel/Europe/France",
+                  unit: "/4595/nfl.test.open",
                   size: [300, 250],
                 },
               },
@@ -164,7 +164,7 @@ const settings: Settings = [
                 priority: 5,
                 props: {
                   id: "footer-ad",
-                  unit: "/6355419/Travel/Europe/France/Paris",
+                  unit: "/4595/nfl.test.open",
                   size: [
                     [300, 250],
                     [300, 600],

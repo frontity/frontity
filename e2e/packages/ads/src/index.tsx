@@ -98,7 +98,7 @@ const PostWithGPTComponent: React.FC<Connect<Packages>> = ({ libraries }) => {
       <p>Below this paragraph must appear an add.</p>
       <GooglePublisherTag
         id="div-gpt-below-content"
-        unit="/6355419/Travel/Europe/France/Paris"
+        unit="/4595/nfl.test.open"
         size={[300, 250]}
       />
     </>
