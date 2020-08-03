@@ -34,9 +34,16 @@ const Homepage = () => (
 /**
  * Simple component that mocks a post.
  *
+ * @param props - React props.
  * @returns React element.
  */
-const Post = () => (
+const Post = ({
+  data,
+}: {
+  /**
+   *Data object.
+   */ data?: any;
+}) => (
   <>
     <h1>A post</h1>
     <p>This is some post</p>
@@ -56,7 +63,7 @@ const Post = () => (
       Tincidunt arcu non sodales neque. Tortor aliquam nulla facilisi cras
       fermentum odio eu feugiat pretium.
     </p>
-    <Slot name="content" />
+    <Slot name="content" data={data} />
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -121,9 +128,15 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
   return (
     <>
       <Slot name="header" />
-      {/* Render homepage or post */}
+      {/* Render homepage*/}
       {pathname === "/" && <Homepage />}
-      {pathname === "/post/" && <Post />}
+      {/* Render two posts with different data */}
+      {pathname === "/post/" && (
+        <>
+          <Post />
+          <Post data={{ link: "/next-post/" }} />
+        </>
+      )}
       {pathname === "/post-with-gpt/" && <PostWithGPT />}
       {/* Buttons */}
       <button id="change-link" onClick={() => actions.router.set("/post/")}>
