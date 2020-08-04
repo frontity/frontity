@@ -12,7 +12,14 @@ const attributesMap: Attributes = htmlAttributes
     return map;
   }, {});
 
-// Adapts the Himalaya AST Specification v1 to our format.
+/**
+ * Adapts the Himalaya AST Specification v1 to our format.
+ *
+ * @param himalayaNode - The node comming from himalaya.
+ * @param parent - The parent node.
+ *
+ * @returns The final and modified node.
+ */
 const adaptNode: AdaptNode = (himalayaNode, parent) => {
   let node: Node;
 
@@ -85,6 +92,13 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
   return node;
 };
 
+/**
+ * Parses the HTML and returns AST.
+ *
+ * @param html - The HTML from content.
+ *
+ * @returns The AST of the HTML.
+ */
 const parse: Parse = (html) =>
   himalaya(html).reduce((tree: Node[], element) => {
     const adapted = adaptNode(element);
