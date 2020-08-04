@@ -37,7 +37,7 @@ jobs:
           env: HEADLESS=true
           working-directory: e2e
           config: video=true,screenshotOnRunFailure=true
-          spec: e2e/integration/google-analytics.spec.js
+          spec: integration/google-analytics.spec.js
 
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v1
