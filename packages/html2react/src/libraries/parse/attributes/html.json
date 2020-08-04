@@ -39,5 +39,7 @@
   "srcLang",
   "srcSet",
   "tabIndex",
-  "useMap"
+  "useMap",
+  "acceptCharset",
+  "httpEquiv"
 ]

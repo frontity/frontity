@@ -52,7 +52,7 @@ type ResolveActions<Act extends Actions> = {
     ? () => ReturnType<Act[P]>
     : Act[P] extends Actions
     ? ResolveActions<Act[P]>
-    : never;
+    : any;
 };
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;

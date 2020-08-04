@@ -21,12 +21,24 @@ interface Fill extends StateFill {
 }
 
 /**
- * The React component that is used in all the Slots when
- * `state.frontity.debug` is true
- *
- * @param slotName - The name of the slot.
+ * Props for the {@link DebugFill} component.
  */
-const DebugFill: React.FC<{ name: string }> = ({ name }) => (
+interface DebugFillProps {
+  /**
+   * The name of the slot.
+   */
+  name: string;
+}
+
+/**
+ * The React component that is used in all the Slots when
+ * `state.frontity.debug` is true.
+ *
+ * @param props - The props defined in {@link DebugFillProps}.
+ *
+ * @returns A blue div with the name of the slot.
+ */
+const DebugFill: React.FC<DebugFillProps> = ({ name }) => (
   <Debug data-slot-name={name}>Slot: &quot;{name}&quot;</Debug>
 );
 
@@ -43,9 +55,9 @@ const Debug = styled.div`
 /**
  * A React hook to ease the creation of `Slot` components.
  *
- * @param name The name of the Slot that you want to fill.
+ * @param name - The name of the Slot that you want to fill.
  *
- * @return Array of fill objects that you can use to inject in the slot for this name.
+ * @returns Array of fill objects that you can use to inject in the slot for this name.
  */
 const useFills = (name: string): Fill[] => {
   const { state, libraries } = useConnect<Package>();
