@@ -1,5 +1,5 @@
 /* eslint-disable jsdoc/require-jsdoc */
-import { raw, isObservable, proxyHandlers } from "@nx-js/observer-util";
+import { raw, proxyHandlers } from "@nx-js/observer-util";
 import { store } from "@risingstack/react-easy-state";
 
 export const getSnapshot = (obj) => {
@@ -49,40 +49,22 @@ const convertedActions = (obj, instance) => {
   }
 };
 
-const proxyToRoot = new WeakMap();
-
-const handlers = {
-  proxyHandlers: {
-    get: (target, key, receiver) => {
-      // If it's a function, return the result of that function run with the root
-      // state.
-      if (!Array.isArray(target) && typeof target[key] === "function") {
-        const state = proxyToRoot.get(receiver);
-        return target[key]({ state });
-      }
-
-      const result = proxyHandlers.get(target, key, receiver);
-
-      // If it's an object, generate the observable ourselves so we can store the
-      // reference to the root for the derived state.
-      if (
-        typeof result === "object" &&
-        result !== null &&
-        !isObservable(result)
-      ) {
-        const observableChildren = store(result, handlers);
-        const root = proxyToRoot.get(receiver);
-        proxyToRoot.set(observableChildren, root);
-      }
-
-      return result;
-    },
-  },
-};
-
 export const createStore = (config) => {
-  const observableState = store(config.state, handlers);
-  proxyToRoot.set(observableState, observableState);
+  const observableState = store(config.state, {
+    proxyHandlers: {
+      get: (target, key, receiver) => {
+        const result = proxyHandlers.get(target, key, receiver);
+
+        // If it's a function, return the result of that function run with the
+        // root state.
+        if (!Array.isArray(target) && typeof result === "function") {
+          return result({ state: observableState });
+        }
+
+        return result;
+      },
+    },
+  });
   const instance = {
     ...config,
     state: observableState,
