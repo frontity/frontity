@@ -30,16 +30,14 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
             props.className = value;
           } else if (key === "for") {
             props.htmlFor = value;
-          } else if (key === "accept-charset") {
-            props["acceptCharset"] = value;
-          } else if (key === "http-equiv") {
-            props["httpEquiv"] = value;
-
-            // Add inline styles to the component with `emotion`.
+          } else if (/^data-/.test(key)) {
+            props[key] = value;
           } else if (key === "style") {
+            // Add inline styles to the component with `emotion`.
             props.css = css(value);
           } else if (!/^on/.test(key)) {
-            const camelCaseKey = attributesMap[key.toLowerCase()];
+            const camelCaseKey =
+              attributesMap[key.replace(/[-:]/, "").toLowerCase()];
             // Map keys with no value to `true` booleans.
             props[camelCaseKey || key] = value === null ? true : value;
           }
