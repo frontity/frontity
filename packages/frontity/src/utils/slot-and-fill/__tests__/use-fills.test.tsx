@@ -4,7 +4,7 @@ import { create, act } from "react-test-renderer";
 import { createStore, connect } from "../../..";
 import { Provider } from "@frontity/connect";
 import useFills from "../use-fills";
-import { toJSON } from "./slot.tests";
+import { toJson, toJsonArray } from "./slot.tests";
 
 let store;
 
@@ -88,14 +88,14 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(toJSON(app).props).toEqual({
+    expect(toJson(app).props).toEqual({
       id: "test-fill",
       "data-number": 1,
       "data-name": "namespace1 - test fill 1",
     });
-    expect(toJSON(app).children[0]).toEqual("Im a Fill");
+    expect(toJson(app).children[0]).toEqual("Im a Fill");
 
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should work when the slot does not exist", () => {
@@ -119,8 +119,8 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(toJSON(app)).toEqual(null);
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toEqual(null);
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should remind to specify the slot name if called without arguments", () => {
@@ -153,8 +153,8 @@ describe("useFills", () => {
       "You should pass the name of the slot that you would like to fill!"
     );
 
-    expect(toJSON(app)).toEqual(null);
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toEqual(null);
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should warn when the Fill component is not found in libraries", () => {
@@ -187,8 +187,8 @@ describe("useFills", () => {
       "You should pass the name of the slot that you would like to fill!"
     );
 
-    expect(toJSON(app)).toEqual(null);
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toEqual(null);
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should not return the fill when library is not specified", () => {
@@ -213,8 +213,8 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(toJSON(app)).toEqual(null);
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toEqual(null);
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should not return the fill when library doesn't match a component in libraries", () => {
@@ -239,8 +239,8 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(toJSON(app)).toEqual(null);
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toEqual(null);
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should not return the fill when the slot is not specified", () => {
@@ -265,8 +265,8 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(toJSON(app)).toEqual(null);
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toEqual(null);
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should work when `state.fills` is missing", () => {
@@ -291,8 +291,8 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(toJSON(app)).toEqual(null);
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toEqual(null);
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should work when `state.fills` doesn't contain any fills", () => {
@@ -317,8 +317,8 @@ describe("useFills", () => {
       </Provider>
     );
 
-    expect(toJSON(app)).toEqual(null);
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toEqual(null);
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should re-render the fill when updating the props", () => {
@@ -344,14 +344,14 @@ describe("useFills", () => {
       store.actions.fillActions.setNumber(43);
     });
 
-    expect(toJSON(app).props).toEqual({
+    expect(toJson(app).props).toEqual({
       id: "test-fill",
       "data-number": 43,
       "data-name": "namespace1 - test fill 1",
     });
-    expect(toJSON(app).children[0]).toEqual("Im a Fill");
+    expect(toJson(app).children[0]).toEqual("Im a Fill");
 
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should render the fills in the order of priority", () => {
@@ -376,20 +376,20 @@ describe("useFills", () => {
     );
 
     // This fill should come first
-    expect(toJSON(app)[0].props).toEqual({
+    expect(toJsonArray(app)[0].props).toEqual({
       id: "test-fill",
       "data-number": 3,
       "data-name": "namespace2 - test fill 3",
     });
 
     // This fill should come second
-    expect(toJSON(app)[1].props).toEqual({
+    expect(toJsonArray(app)[1].props).toEqual({
       id: "test-fill",
       "data-number": 1,
       "data-name": "namespace1 - test fill 1",
     });
 
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJsonArray(app)).toMatchSnapshot();
   });
 
   it("should skip rendering the fills with value `false`", () => {
@@ -415,13 +415,13 @@ describe("useFills", () => {
     );
 
     // We should only render 1 component.
-    expect(toJSON(app).props).toEqual({
+    expect(toJson(app).props).toEqual({
       id: "test-fill",
       "data-number": 3,
       "data-name": "namespace2 - test fill 3",
     });
 
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toMatchSnapshot();
   });
 
   it("should render the debug slots when `state.frontity.debug` is true", () => {
@@ -446,8 +446,8 @@ describe("useFills", () => {
     );
 
     // We should only render 1 component.
-    expect(toJSON(app).props["data-slot-name"]).toBe("slot 1");
+    expect(toJson(app).props["data-slot-name"]).toBe("slot 1");
 
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(toJson(app)).toMatchSnapshot();
   });
 });
