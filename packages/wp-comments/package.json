@@ -1,12 +1,12 @@
 {
-  "name": "@frontity/wp-source",
-  "version": "1.8.1",
-  "description": "A Frontity source package for the REST API of self-hosted and WordPress.com sites",
+  "name": "@frontity/wp-comments",
+  "version": "0.2.1",
+  "description": "Add integration for WordPress native comments",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
   "keywords": [
     "frontity",
-    "frontity-source"
+    "frontity-comments"
   ],
   "repository": {
     "type": "git",
@@ -21,15 +21,11 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/source": "^1.2.2",
-    "frontity": "^1.10.1",
-    "normalizr": "^3.3.0",
-    "path-to-regexp": "^3.0.0",
-    "query-string": "^6.8.3"
+    "@frontity/wp-source": "^1.8.1",
+    "frontity": "^1.10.1"
   },
   "devDependencies": {
-    "@frontity/connect": "^1.1.2",
-    "clone-deep": "^4.0.1",
-    "node-fetch": "^2.6.0"
+    "@frontity/connect": "^1.1.0",
+    "clone-deep": "^4.0.1"
   }
 }
