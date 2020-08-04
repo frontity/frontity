@@ -45,7 +45,8 @@ const twentyTwentyTheme = {
         showOnPost: true,
       },
       // Whether to auto-fetch links on a page. Values can be "no" | "all" | "in-view" | "hover"
-      autoPreFetch: "no",
+      autoPrefetch: "in-view",
+
       /**
        * At the moment, we only include the ascii characters of Inter font.
        * Values can be "us-ascii" | "latin" | "all"

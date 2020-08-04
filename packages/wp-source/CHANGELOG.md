@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.8.1
+
+### Patch Changes
+
+- [`2a28af19`](https://github.com/frontity/frontity/commit/2a28af19ef6cd2d148c8418895387943c7c8a95f) [#513](https://github.com/frontity/frontity/pull/513) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix a bug where requesting posts for a date that is outside of the calendar range causes a 500 error instead of a 404.
+
+* [`769a7bfd`](https://github.com/frontity/frontity/commit/769a7bfd047d388053e45b13d75ca84510afa02d) [#506](https://github.com/frontity/frontity/pull/506) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix the bug that causes a server crash and 500 errors to be returned if a URL contained a partly known entity. E.g. `/undefined/2020/some-interesting-post`.
+
+* Updated dependencies [[`17f539bf`](https://github.com/frontity/frontity/commit/17f539bfb547105bd4565735c5491f2400c3c8fe)]:
+  - frontity@1.10.1
+
 ## 1.8.0
 
 ### Minor Changes
