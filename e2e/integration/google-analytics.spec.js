@@ -87,6 +87,9 @@ describe("Google Analytics", () => {
   });
 
   it("should have sent the first pageview", () => {
+    // Ensures Google Analytics library has loaded.
+    cy.window().its("ga").its("ready").should("be", true);
+
     // Check that Google Analytics has sent the pageview with the correct title.
     cy.window()
       .its("gaRequests")
@@ -100,6 +103,9 @@ describe("Google Analytics", () => {
   });
 
   it("should sent a pageview if the page changes", () => {
+    // Ensures Google Analytics library has loaded.
+    cy.window().its("ga").its("ready").should("be", true);
+
     cy.get("button#change-link").click();
     cy.window()
       .its("gaRequests")
@@ -113,6 +119,9 @@ describe("Google Analytics", () => {
   });
 
   it("should sent pageviews when going back or forward", () => {
+    // Ensures Google Analytics library has loaded.
+    cy.window().its("ga").its("ready").should("be", true);
+
     cy.get("button#change-link").click();
     cy.go("back");
 
@@ -140,6 +149,9 @@ describe("Google Analytics", () => {
   });
 
   it("should send events", () => {
+    // Ensures Google Analytics library has loaded.
+    cy.window().its("ga").its("ready").should("be", true);
+
     // Wait for the first pageview to be sent.
     cy.window()
       .its("gaRequests")
