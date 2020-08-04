@@ -119,8 +119,8 @@ const wpComments: WpComments = {
           return;
         }
 
-        // 203 Found - The comment was submitted.
-        if (response.status === 203) {
+        // 302 Found - The comment was submitted.
+        if (response.status === 302) {
           // We can know if the comment was approved from the returned location.
           const location = new URL(response.headers.get("Location"));
 

@@ -1,5 +1,25 @@
 # Change Log
 
+## 1.5.0
+
+### Minor Changes
+
+- [`453e58de`](https://github.com/frontity/frontity/commit/453e58dee065a03e70355973b5f77d443fc5b0f6) [#518](https://github.com/frontity/frontity/pull/518) - Introducing [auto prefetching](https://community.frontity.org/t/auto-prefetch-data/886) to the `<Link />` component.
+
+  There are four supported modes:
+
+  - "in-view": Only prefetch links that are currently visible in the viewport. (recommended)
+  - "all": Prefetches all internal links on the page.
+  - "hover": Prefetches links on hover.
+  - "no": No auto prefetch.
+
+  The prefetch mode should be set in `state.theme.autoPrefetch`.
+
+### Patch Changes
+
+- Updated dependencies [[`17f539bf`](https://github.com/frontity/frontity/commit/17f539bfb547105bd4565735c5491f2400c3c8fe)]:
+  - frontity@1.10.1
+
 ## 1.4.0
 
 ### Minor Changes
