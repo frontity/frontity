@@ -37,7 +37,7 @@ describe("Google Ad Manager", () => {
     cy.get("button#change-link-gpt").click();
 
     // Get add unit from content.
-    cy.get("#div-gpt-below-content > div").should("have.descendants", "iframe");
+    cy.get("#post-with-gpt-ad > div").should("have.descendants", "iframe");
   });
 
   it("should add the link to the container ID if data is passed", () => {
