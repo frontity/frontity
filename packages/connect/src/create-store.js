@@ -1,10 +1,6 @@
-import {
-  observable,
-  raw,
-  setHandlers,
-  defaultHandlers,
-  isObservable,
-} from "@nx-js/observer-util";
+/* eslint-disable jsdoc/require-jsdoc */
+import { raw, isObservable, proxyHandlers } from "@nx-js/observer-util";
+import { store } from "@risingstack/react-easy-state";
 
 export const getSnapshot = (obj) => {
   obj = raw(obj);
@@ -55,39 +51,44 @@ const convertedActions = (obj, instance) => {
 
 const proxyToRoot = new WeakMap();
 
-setHandlers({
-  get: (target, key, receiver) => {
-    // if it's a function, return the result of that function run with the root state.
-    if (!Array.isArray(target) && typeof target[key] === "function") {
-      const state = proxyToRoot.get(receiver);
-      return target[key]({ state });
-    }
+const handlers = {
+  proxyHandlers: {
+    get: (target, key, receiver) => {
+      // If it's a function, return the result of that function run with the root
+      // state.
+      if (!Array.isArray(target) && typeof target[key] === "function") {
+        const state = proxyToRoot.get(receiver);
+        return target[key]({ state });
+      }
 
-    const result = defaultHandlers.get(target, key, receiver);
+      const result = proxyHandlers.get(target, key, receiver);
 
-    if (
-      typeof result === "object" &&
-      result !== null &&
-      !isObservable(result)
-    ) {
-      const observableChildren = observable(result);
-      const root = proxyToRoot.get(receiver);
-      proxyToRoot.set(observableChildren, root);
-    }
+      // If it's an object, generate the observable ourselves so we can store the
+      // reference to the root for the derived state.
+      if (
+        typeof result === "object" &&
+        result !== null &&
+        !isObservable(result)
+      ) {
+        const observableChildren = store(result, handlers);
+        const root = proxyToRoot.get(receiver);
+        proxyToRoot.set(observableChildren, root);
+      }
 
-    return result;
+      return result;
+    },
   },
-});
+};
 
-export const createStore = (store) => {
-  const observableState = observable(store.state);
+export const createStore = (config) => {
+  const observableState = store(config.state, handlers);
   proxyToRoot.set(observableState, observableState);
   const instance = {
-    ...store,
+    ...config,
     state: observableState,
     actions: {},
   };
-  const newActions = convertedActions(store.actions, instance);
+  const newActions = convertedActions(config.actions, instance);
   Object.assign(instance.actions, newActions);
   return instance;
 };
