@@ -127,7 +127,7 @@ export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
       nextLink: nextItem?.link,
     });
 
-    if (!current.isReady) return null;
+    if (!current.isReady || current.isError) return null;
     if (!supported) return children;
 
     const container = css`
