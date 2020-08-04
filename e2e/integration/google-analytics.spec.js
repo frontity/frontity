@@ -93,74 +93,107 @@ describe("Google Analytics", () => {
     // Check that Google Analytics has sent the pageview with the correct title.
     cy.window()
       .its("gaRequests")
-      .its(0)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewHome });
-
-    cy.window()
-      .its("gaRequests")
-      .its(1)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewHome });
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+      ]);
   });
 
   it("should sent a pageview if the page changes", () => {
     // Ensures Google Analytics library has loaded.
     cy.window().its("ga").its("ready").should("be", true);
 
-    cy.get("button#change-link").click();
+    // Check first pageviews.
     cy.window()
       .its("gaRequests")
-      .its(2)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewSomePost });
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+      ]);
 
+    // Go to "/some-post/"
+    cy.get("button#change-link").click();
+
+    // Check pageviews after going to the new link.
     cy.window()
       .its("gaRequests")
-      .its(3)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewSomePost });
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+        { id: "UA-XXXXXX-X", ...pageviewSomePost },
+        { id: "UA-YYYYYY-Y", ...pageviewSomePost },
+      ]);
   });
 
   it("should sent pageviews when going back or forward", () => {
     // Ensures Google Analytics library has loaded.
     cy.window().its("ga").its("ready").should("be", true);
 
+    // Check first pageviews.
+    cy.window()
+      .its("gaRequests")
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+      ]);
+
+    // Go to "/some-post/".
     cy.get("button#change-link").click();
+
+    // Check pageviews after going to the new link.
+    cy.window()
+      .its("gaRequests")
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+        { id: "UA-XXXXXX-X", ...pageviewSomePost },
+        { id: "UA-YYYYYY-Y", ...pageviewSomePost },
+      ]);
+
+    // Go to the previous link ("/").
     cy.go("back");
 
+    // Check pageviews after going to the previous link.
     cy.window()
       .its("gaRequests")
-      .its(4)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewHome });
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+        { id: "UA-XXXXXX-X", ...pageviewSomePost },
+        { id: "UA-YYYYYY-Y", ...pageviewSomePost },
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+      ]);
 
-    cy.window()
-      .its("gaRequests")
-      .its(5)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewHome });
-
+    // Go forward to "/some-post/".
     cy.go("forward");
 
+    // Check pageviews after going forward.
     cy.window()
       .its("gaRequests")
-      .its(6)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewSomePost });
-
-    cy.window()
-      .its("gaRequests")
-      .its(7)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewSomePost });
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+        { id: "UA-XXXXXX-X", ...pageviewSomePost },
+        { id: "UA-YYYYYY-Y", ...pageviewSomePost },
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+        { id: "UA-XXXXXX-X", ...pageviewSomePost },
+        { id: "UA-YYYYYY-Y", ...pageviewSomePost },
+      ]);
   });
 
   it("should send events", () => {
     // Ensures Google Analytics library has loaded.
     cy.window().its("ga").its("ready").should("be", true);
 
-    // Wait for the first pageview to be sent.
+    // Check first pageviews.
     cy.window()
       .its("gaRequests")
-      .its(0)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewHome });
-    cy.window()
-      .its("gaRequests")
-      .its(1)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewHome });
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+      ]);
 
     // Change testEvent to send Google Analytics specific data.
     cy.window().then((win) => {
@@ -176,13 +209,15 @@ describe("Google Analytics", () => {
 
     // Send event.
     cy.get("button#send-event").click();
+
+    // Check events have been sent.
     cy.window()
       .its("gaRequests")
-      .its(2)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...someEvent });
-    cy.window()
-      .its("gaRequests")
-      .its(3)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...someEvent });
+      .should("deep.equal", [
+        { id: "UA-XXXXXX-X", ...pageviewHome },
+        { id: "UA-YYYYYY-Y", ...pageviewHome },
+        { id: "UA-XXXXXX-X", ...someEvent },
+        { id: "UA-YYYYYY-Y", ...someEvent },
+      ]);
   });
 });
