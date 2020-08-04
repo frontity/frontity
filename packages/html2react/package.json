@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@frontity/connect": "^1.1.2",
-    "@types/react-test-renderer": "^16.9.2",
+    "@types/react-test-renderer": "^16.9.3",
     "@testing-library/react": "^9.4.0",
     "react-test-renderer": "^16.13.1"
   },
