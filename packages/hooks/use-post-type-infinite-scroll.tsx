@@ -109,8 +109,8 @@ export const Wrapper = ({
   routeInViewOptions,
 }: {
   link: string;
-  fetchInViewOptions: IntersectionOptions;
-  routeInViewOptions: IntersectionOptions;
+  fetchInViewOptions?: IntersectionOptions;
+  routeInViewOptions?: IntersectionOptions;
 }): React.FC =>
   connect(
     ({ children, className }) => {

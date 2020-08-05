@@ -913,6 +913,7 @@ describe("usePostTypeInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: false,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -970,6 +971,7 @@ describe("usePostTypeInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: false,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -1032,6 +1034,7 @@ describe("usePostTypeInfiniteScroll", () => {
       ],
       isLimit: true,
       isFetching: false,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -1100,6 +1103,7 @@ describe("usePostTypeInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: true,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -1157,6 +1161,7 @@ describe("usePostTypeInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: true,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -1215,6 +1220,7 @@ describe("usePostTypeInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: false,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -1267,6 +1273,132 @@ describe("usePostTypeInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: false,
+      isError: false,
+      fetchNext: expect.any(Function),
+    });
+  });
+
+  test("should return `isError` true when current post is unavailable", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 2,
+              archive: "/",
+              pages: ["/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        router: { updateState: routerUpdateState },
+      },
+    } as any);
+
+    sourceGet.mockImplementation((link) => {
+      if (link === "/post-one/") {
+        return {
+          isReady: true,
+          isFetching: false,
+          isError: true,
+        };
+      }
+
+      return {
+        link,
+        isReady: true,
+        isFetching: false,
+        isArchive: link === "/",
+        items:
+          link === "/"
+            ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+            : undefined,
+      };
+    });
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(spiedUsePostTypeInfiniteScroll).toHaveReturnedWith({
+      posts: [
+        {
+          key: "/post-one/",
+          link: "/post-one/",
+          isLast: true,
+          Wrapper: expect.any(Function),
+        },
+      ],
+      isLimit: false,
+      isFetching: false,
+      isError: true,
+      fetchNext: expect.any(Function),
+    });
+  });
+
+  test("should return `isError` true when current page is unavailable", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 2,
+              archive: "/",
+              pages: ["/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        router: { updateState: routerUpdateState },
+      },
+    } as any);
+
+    sourceGet.mockImplementation((link) => {
+      if (link === "/") {
+        return {
+          isReady: true,
+          isFetching: false,
+          isError: true,
+        };
+      }
+
+      return {
+        link,
+        isReady: true,
+        isFetching: false,
+        items:
+          link === "/"
+            ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+            : undefined,
+      };
+    });
+
+    act(() => {
+      render(<App />, container);
+    });
+
+    expect(spiedUsePostTypeInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(spiedUsePostTypeInfiniteScroll).toHaveReturnedWith({
+      posts: [
+        {
+          key: "/post-one/",
+          link: "/post-one/",
+          isLast: true,
+          Wrapper: expect.any(Function),
+        },
+      ],
+      isLimit: false,
+      isFetching: false,
+      isError: true,
       fetchNext: expect.any(Function),
     });
   });
@@ -1733,7 +1865,9 @@ describe("usePostTypeInfiniteScroll", () => {
 
 describe("Wrapper", () => {
   test("should return children if IntersectionObserver is not supported", () => {
-    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper({
+      link: "/post-one/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -1768,7 +1902,9 @@ describe("Wrapper", () => {
   });
 
   test("should return null if the current element is not ready", () => {
-    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper({
+      link: "/post-one/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -1807,7 +1943,9 @@ describe("Wrapper", () => {
   });
 
   test("should return children and fetcher inside a wrapper", () => {
-    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper({
+      link: "/post-one/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -1846,7 +1984,9 @@ describe("Wrapper", () => {
   });
 
   test("should return only children inside the wrapper if limit reached", () => {
-    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper({
+      link: "/post-one/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -1885,7 +2025,9 @@ describe("Wrapper", () => {
   });
 
   test("should call `useInfiniteScroll` with `currentLink` and `nextLink`", () => {
-    const Wrapper = usePostTypeInfiniteScroll.Wrapper("/post-one/") as any;
+    const Wrapper = usePostTypeInfiniteScroll.Wrapper({
+      link: "/post-one/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {

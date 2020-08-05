@@ -31,6 +31,18 @@ import usePostTypeInfiniteSCroll from "../use-post-type-infinite-scroll";
   useArchiveInfiniteScroll({
     limit: 1,
     active: false,
+    fetchInViewOptions: {
+      root: null,
+      rootMargin: "",
+      threshold: 1,
+      triggerOnce: true,
+    },
+    routeInViewOptions: {
+      root: document.createElement("div"),
+      rootMargin: "",
+      threshold: 0.5,
+      triggerOnce: false,
+    },
   });
 
   usePostTypeInfiniteSCroll();
@@ -42,9 +54,22 @@ import usePostTypeInfiniteSCroll from "../use-post-type-infinite-scroll";
     active: true,
     archive: "/forced-archive/",
     fallback: "/default-archive/",
+    fetchInViewOptions: {
+      root: null,
+      rootMargin: "",
+      threshold: 1,
+      triggerOnce: true,
+    },
+    routeInViewOptions: {
+      root: document.createElement("div"),
+      rootMargin: "",
+      threshold: 0.5,
+      triggerOnce: false,
+    },
   });
 
   return null;
 };
 
+//eslint-disable-next-line @typescript-eslint/no-empty-function
 test("Types are fine!", () => {});
