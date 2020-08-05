@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useConnect, connect, css } from "frontity";
-import { Connect } from "frontity/types";
 import memoize from "ramda/src/memoizeWith";
-import useInfiniteScroll from "./use-infinite-scroll";
+import useInfiniteScroll, { IntersectionOptions } from "./use-infinite-scroll";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -23,6 +22,16 @@ type UseArchiveInfiniteScroll = (options?: {
    * them.
    */
   active?: boolean;
+
+  /**
+   * The intersection observer options for fetching.
+   */
+  fetchInViewOptions?: IntersectionOptions;
+
+  /**
+   * The intersection observer options for routing.
+   */
+  routeInViewOptions?: IntersectionOptions;
 }) => {
   /**
    * An array of the existing pages. Users should iterate over this array in
@@ -77,11 +86,20 @@ type UseArchiveInfiniteScroll = (options?: {
 /**
  * A function that generates Wrapper components.
  *
- * @param link The link for the page that the Wrapper belongs to.
+ * @param options The link for the page that the Wrapper belongs to
+ * and the intersection observer options for fetching and routing.
  *
  * @returns A React component that should be used to wrap the page.
  */
-export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
+export const Wrapper = ({
+  link,
+  fetchInViewOptions,
+  routeInViewOptions,
+}: {
+  link: string;
+  fetchInViewOptions: IntersectionOptions;
+  routeInViewOptions: IntersectionOptions;
+}): React.FC =>
   connect(
     ({ children, className }) => {
       const { state } = useConnect<Source & Router>();
@@ -102,6 +120,8 @@ export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
       const { supported, fetchRef, routeRef } = useInfiniteScroll({
         currentLink: link,
         nextLink: next?.link,
+        fetchInViewOptions,
+        routeInViewOptions,
       });
 
       if (!current.isReady || current.isError) return null;
@@ -131,10 +151,25 @@ export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
  * A memoized {@link Wrapper} to generate Wrapper components only once.
  *
  * @param link The link for the page that the Wrapper belongs to.
+ * @param options The intersection observer options for fetching and routing.
  *
  * @returns A React component that should be used to wrap the page.
  */
-const MemoizedWrapper = memoize((link: string) => link, Wrapper);
+const MemoizedWrapper = memoize(
+  (link) => link,
+  (
+    link: string,
+    options: {
+      fetchInViewOptions: IntersectionOptions;
+      routeInViewOptions: IntersectionOptions;
+    }
+  ) =>
+    Wrapper({
+      link,
+      fetchInViewOptions: options.fetchInViewOptions,
+      routeInViewOptions: options.routeInViewOptions,
+    })
+);
 
 /**
  * A hook used to add infinite scroll to any Frontity archive.
@@ -220,7 +255,10 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
     isLast:
       (link === last.link && last.isReady) ||
       (link === links[links.length - 2] && !last.isReady),
-    Wrapper: MemoizedWrapper(link),
+    Wrapper: MemoizedWrapper(link, {
+      fetchInViewOptions: options.fetchInViewOptions,
+      routeInViewOptions: options.routeInViewOptions,
+    }),
   }));
 
   return {

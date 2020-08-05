@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
-import { Connect } from "frontity/types";
 import memoize from "ramda/src/memoizeWith";
-import useInfiniteScroll from "./use-infinite-scroll";
+import useInfiniteScroll, { IntersectionOptions } from "./use-infinite-scroll";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -36,6 +35,16 @@ type UsePostTypeInfiniteScroll = (options?: {
    * the previous link is not an archive.
    */
   fallback?: string;
+
+  /**
+   * The intersection observer options for fetching.
+   */
+  fetchInViewOptions?: IntersectionOptions;
+
+  /**
+   * The intersection observer options for routing.
+   */
+  routeInViewOptions?: IntersectionOptions;
 }) => {
   /**
    * An array of the existing posts. Users should iterate over this array in
@@ -89,73 +98,104 @@ type UsePostTypeInfiniteScroll = (options?: {
 /**
  * A function that generates Wrapper components.
  *
- * @param link The link for the post that the Wrapper belongs to.
+ * @param options The link for the page that the Wrapper belongs to
+ * and the intersection observer options for fetching and routing.
  *
  * @returns A React component that should be used to wrap the post.
  */
-export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
-  connect(({ children, className }) => {
-    const { state } = useConnect<Source & Router>();
+export const Wrapper = ({
+  link,
+  fetchInViewOptions,
+  routeInViewOptions,
+}: {
+  link: string;
+  fetchInViewOptions: IntersectionOptions;
+  routeInViewOptions: IntersectionOptions;
+}): React.FC =>
+  connect(
+    ({ children, className }) => {
+      const { state } = useConnect<Source & Router>();
 
-    // Values from browser state.
-    const links: string[] = state.router.state.infiniteScroll?.links || [link];
-    const limit: number = state.router.state.infiniteScroll?.limit;
-    const pages: string[] = state.router.state.infiniteScroll?.pages || [];
+      // Values from browser state.
+      const links: string[] = state.router.state.infiniteScroll?.links || [
+        link,
+      ];
+      const limit: number = state.router.state.infiniteScroll?.limit;
+      const pages: string[] = state.router.state.infiniteScroll?.pages || [];
 
-    // Aliases to needed state.
-    const current = state.source.get(link);
-    const first = links[0];
-    const items = pages.reduce((final, current, index) => {
-      const data = state.source.get(current);
-      if (data.isArchive && data.isReady) {
-        const items =
-          index !== 0
-            ? data.items.filter(({ link }) => link !== first)
-            : data.items;
-        final = final.concat(items);
-      }
-      return final;
-    }, []);
-    const currentIndex = items.findIndex(({ link }) => link === current.link);
-    const nextItem = items[currentIndex + 1];
+      // Aliases to needed state.
+      const current = state.source.get(link);
+      const first = links[0];
+      const items = pages.reduce((final, current, index) => {
+        const data = state.source.get(current);
+        if (data.isArchive && data.isReady) {
+          const items =
+            index !== 0
+              ? data.items.filter(({ link }) => link !== first)
+              : data.items;
+          final = final.concat(items);
+        }
+        return final;
+      }, []);
+      const currentIndex = items.findIndex(({ link }) => link === current.link);
+      const nextItem = items[currentIndex + 1];
 
-    // Infinite scroll booleans.
-    const hasReachedLimit = !!limit && links.length >= limit;
+      // Infinite scroll booleans.
+      const hasReachedLimit = !!limit && links.length >= limit;
 
-    const { supported, fetchRef, routeRef } = useInfiniteScroll({
-      currentLink: link,
-      nextLink: nextItem?.link,
-    });
+      const { supported, fetchRef, routeRef } = useInfiniteScroll({
+        currentLink: link,
+        nextLink: nextItem?.link,
+        fetchInViewOptions,
+        routeInViewOptions,
+      });
 
-    if (!current.isReady || current.isError) return null;
-    if (!supported) return children;
+      if (!current.isReady || current.isError) return null;
+      if (!supported) return children;
 
-    const container = css`
-      position: relative;
-    `;
+      const container = css`
+        position: relative;
+      `;
 
-    const fetcher = css`
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-    `;
+      const fetcher = css`
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+      `;
 
-    return (
-      <div css={container} ref={routeRef} className={className}>
-        {children}
-        {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
-      </div>
-    );
-  });
+      return (
+        <div css={container} ref={routeRef} className={className}>
+          {children}
+          {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
+        </div>
+      );
+    },
+    { injectProps: false }
+  );
 
 /**
  * A memoized {@link Wrapper} to generate Wrapper components only once.
  *
  * @param link The link for the post that the Wrapper belongs to.
+ * @param options The intersection observer options for fetching and routing.
  *
  * @returns A React component that should be used to wrap the post.
  */
-const MemoizedWrapper = memoize((link: string) => link, Wrapper);
+const MemoizedWrapper = memoize(
+  (link) => link,
+  (
+    link: string,
+    options: {
+      fetchInViewOptions: IntersectionOptions;
+      routeInViewOptions: IntersectionOptions;
+    }
+  ) =>
+    Wrapper({
+      link,
+      fetchInViewOptions: options.fetchInViewOptions,
+      routeInViewOptions: options.routeInViewOptions,
+    })
+);
 
 /**
  * A hook used to add infinite scroll to any Frontity post type.
@@ -361,7 +401,10 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     isLast:
       (link === last.link && last.isReady) ||
       (link === links[links.length - 2] && !last.isReady),
-    Wrapper: MemoizedWrapper(link),
+    Wrapper: MemoizedWrapper(link, {
+      fetchInViewOptions: options.fetchInViewOptions,
+      routeInViewOptions: options.routeInViewOptions,
+    }),
   }));
 
   return {

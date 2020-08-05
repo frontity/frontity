@@ -6,7 +6,17 @@ import Theme from "../../types";
 const Archive: React.FC = () => {
   const { state, libraries } = useConnect<Theme>();
   const current = state.source.get(state.router.link);
-  const { pages, isFetching, isError, fetchNext } = useArchiveInfiniteScroll();
+  const { pages, isFetching, isError, fetchNext } = useArchiveInfiniteScroll({
+    fetchInViewOptions: {
+      root: document as any,
+      rootMargin: "400px 0px",
+      triggerOnce: true,
+    },
+    routeInViewOptions: {
+      root: document as any,
+      rootMargin: "-80% 0% -19.9999% 0%",
+    },
+  });
 
   if (!current.isReady) return null;
 

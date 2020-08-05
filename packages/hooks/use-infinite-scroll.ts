@@ -11,7 +11,7 @@ import Router from "@frontity/router/types";
  * [`react-intersection-observer`](https://github.com/thebuilder/react-intersection-observer)
  * package.
  */
-type IntersectionOptions = Parameters<typeof useInView>[0];
+export type IntersectionOptions = Parameters<typeof useInView>[0];
 
 /**
  * The types of the {@link useInfiniteScroll} hook.
@@ -118,12 +118,10 @@ const useInfiniteScroll: UseInfiniteScroll = ({
   currentLink,
   nextLink,
   fetchInViewOptions = {
-    root: document,
     rootMargin: "400px 0px",
     triggerOnce: true,
   },
   routeInViewOptions = {
-    root: document,
     rootMargin: "-80% 0% -19.9999% 0%",
   },
 }) => {

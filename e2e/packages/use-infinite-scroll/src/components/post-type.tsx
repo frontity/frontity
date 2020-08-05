@@ -6,7 +6,17 @@ import Theme from "../../types";
 const PostType: React.FC = () => {
   const { state } = useConnect<Theme>();
   const current = state.source.get(state.router.link);
-  const { posts, isFetching, isError, fetchNext } = usePostTypeInfiniteScroll();
+  const { posts, isFetching, isError, fetchNext } = usePostTypeInfiniteScroll({
+    fetchInViewOptions: {
+      root: document as any,
+      rootMargin: "400px 0px",
+      triggerOnce: true,
+    },
+    routeInViewOptions: {
+      root: document as any,
+      rootMargin: "-80% 0% -19.9999% 0%",
+    },
+  });
 
   if (!current.isReady) return null;
 
