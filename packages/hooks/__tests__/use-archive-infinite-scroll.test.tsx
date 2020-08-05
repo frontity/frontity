@@ -835,6 +835,44 @@ describe("useArchiveInfiniteScroll", () => {
     expect(routerUpdateState).not.toHaveBeenCalled();
     expect(sourceFetch).not.toHaveBeenCalled();
   });
+
+  test("`fetchNext` should request the last page if `isError` is true", () => {
+    mockedUseConnect.mockReturnValue({
+      state: {
+        router: {
+          link: "/page-one/",
+          state: {},
+        },
+        source: {
+          get: sourceGet,
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    } as any);
+
+    sourceGet.mockReturnValue({
+      isReady: true,
+      isFetching: false,
+      isError: true,
+    });
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/page-one/", { force: true });
+  });
 });
 
 describe("Wrapper", () => {

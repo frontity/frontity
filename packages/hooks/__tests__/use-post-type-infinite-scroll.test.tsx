@@ -1861,6 +1861,122 @@ describe("usePostTypeInfiniteScroll", () => {
     expect(routerUpdateState).not.toHaveBeenCalled();
     expect(sourceFetch).not.toHaveBeenCalled();
   });
+
+  test("`fetchNext` should request the last page if `isError` is true", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    } as any);
+
+    sourceGet.mockImplementation((link) => {
+      if (link === "/page-one/") {
+        return {
+          isReady: true,
+          isFetching: false,
+          isError: true,
+        };
+      }
+
+      return {
+        link,
+        isReady: link !== "/post-two/",
+        isFetching: false,
+        isArchive: link === "/page-one/",
+        items:
+          link === "/page-one/"
+            ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+            : undefined,
+      };
+    });
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/page-one/", { force: true });
+  });
+
+  test("`fetchNext` should request the last post if `isError` is true", () => {
+    mockedUseConnect.mockReturnValueOnce({
+      state: {
+        source: { get: sourceGet },
+        router: {
+          link: "/post-one/",
+          state: {
+            infiniteScroll: {
+              limit: 1,
+              archive: "/page-one/",
+              pages: ["/page-one/"],
+              links: ["/post-one/"],
+            },
+          },
+        },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    } as any);
+
+    sourceGet.mockImplementation((link) => {
+      if (link === "/post-one/") {
+        return {
+          isReady: true,
+          isFetching: false,
+          isError: true,
+        };
+      }
+
+      return {
+        link,
+        isReady: link !== "/post-two/",
+        isFetching: false,
+        isArchive: link === "/page-one/",
+        items:
+          link === "/page-one/"
+            ? [{ link: "/post-one/" }, { link: "/post-two/" }]
+            : undefined,
+      };
+    });
+
+    act(() => {
+      render(<AppWithButton />, container);
+    });
+
+    routerUpdateState.mockClear();
+
+    act(() => {
+      Simulate.click(container.querySelector("button"));
+    });
+
+    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(sourceFetch).toHaveBeenCalledTimes(1);
+    expect(sourceFetch).toHaveBeenCalledWith("/post-one/", { force: true });
+  });
 });
 
 describe("Wrapper", () => {
