@@ -4,7 +4,7 @@ import responsePostOne from "./responses/infinite-scroll-post-1.json";
 import responseLastPost from "./responses/infinite-scroll-last-post.json";
 
 describe("UseInfiniteScroll", () => {
-  it("useArchiveInfiniteScroll should load next page", async () => {
+  it("useArchiveInfiniteScroll should load next page", () => {
     cy.visit("http://localhost:3001/?name=use-infinite-scroll");
     cy.location("href").should(
       "eq",
