@@ -97,8 +97,8 @@ export const Wrapper = ({
   routeInViewOptions,
 }: {
   link: string;
-  fetchInViewOptions: IntersectionOptions;
-  routeInViewOptions: IntersectionOptions;
+  fetchInViewOptions?: IntersectionOptions;
+  routeInViewOptions?: IntersectionOptions;
 }): React.FC =>
   connect(
     ({ children, className }) => {
@@ -254,6 +254,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
     link: link,
     isLast:
       (link === last.link && last.isReady) ||
+      (link === links[links.length - 1] && !!last.isError) ||
       (link === links[links.length - 2] && !last.isReady),
     Wrapper: MemoizedWrapper(link, {
       fetchInViewOptions: options.fetchInViewOptions,

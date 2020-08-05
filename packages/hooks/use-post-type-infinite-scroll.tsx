@@ -400,6 +400,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     link: link,
     isLast:
       (link === last.link && last.isReady) ||
+      (link === links[links.length - 1] && !!last.isError) ||
       (link === links[links.length - 2] && !last.isReady),
     Wrapper: MemoizedWrapper(link, {
       fetchInViewOptions: options.fetchInViewOptions,

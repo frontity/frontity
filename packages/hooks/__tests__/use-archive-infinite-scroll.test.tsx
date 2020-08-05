@@ -259,6 +259,7 @@ describe("useArchiveInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: false,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -317,6 +318,7 @@ describe("useArchiveInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: false,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -364,6 +366,7 @@ describe("useArchiveInfiniteScroll", () => {
       ],
       isLimit: true,
       isFetching: false,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -417,6 +420,7 @@ describe("useArchiveInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: true,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -459,6 +463,7 @@ describe("useArchiveInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: false,
+      isError: false,
       fetchNext: expect.any(Function),
     });
   });
@@ -502,6 +507,50 @@ describe("useArchiveInfiniteScroll", () => {
       ],
       isLimit: false,
       isFetching: false,
+      isError: false,
+      fetchNext: expect.any(Function),
+    });
+  });
+
+  test("should return `isError` true when current page is unavailable", () => {
+    mockedUseConnect.mockReturnValue({
+      state: {
+        router: {
+          link: "/",
+          state: {},
+        },
+        source: {
+          get: sourceGet,
+        },
+      },
+      actions: {
+        router: { updateState: routerUpdateState },
+      },
+    } as any);
+
+    sourceGet.mockReturnValueOnce({
+      isReady: true,
+      isError: true,
+      isFetching: false,
+    });
+
+    act(() => {
+      render(<App options={{ limit: 3 }} />, container);
+    });
+
+    expect(spiedUseArchiveInfiniteScroll).toHaveBeenCalledTimes(1);
+    expect(spiedUseArchiveInfiniteScroll).toHaveReturnedWith({
+      pages: [
+        {
+          key: "/",
+          link: "/",
+          isLast: true,
+          Wrapper: expect.any(Function),
+        },
+      ],
+      isLimit: false,
+      isFetching: false,
+      isError: true,
       fetchNext: expect.any(Function),
     });
   });
@@ -790,7 +839,7 @@ describe("useArchiveInfiniteScroll", () => {
 
 describe("Wrapper", () => {
   test("should return children if IntersectionObserver is not supported", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -822,7 +871,7 @@ describe("Wrapper", () => {
   });
 
   test("should return null if the current element is not ready", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -854,7 +903,7 @@ describe("Wrapper", () => {
   });
 
   test("should return children inside a wrapper", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -890,7 +939,7 @@ describe("Wrapper", () => {
   });
 
   test("should return children and fetcher inside a wrapper", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -926,7 +975,7 @@ describe("Wrapper", () => {
   });
 
   test("should call `useInfiniteScroll` with `currentLink` and `nextLink`", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper("/") as any;
+    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
