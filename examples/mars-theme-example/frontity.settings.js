@@ -32,7 +32,7 @@ export default {
       name: "@frontity/wp-source",
       state: {
         source: {
-          api: "https://test.frontity.org/wp-json",
+          api: "http://frontity.local/wp-json",
         },
       },
     },

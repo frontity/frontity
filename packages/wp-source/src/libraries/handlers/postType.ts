@@ -1,6 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
+import { fetch } from "frontity";
 
 /**
  * The parameters for {@link postTypeHandler}.
@@ -112,6 +113,32 @@ const postTypeHandler = ({
     isPostType: true,
     [`is${capitalize(type)}`]: true,
   });
+
+  // Overwrite properties if the request is a preview.
+  const { preview, token } = query;
+  if (preview && token) {
+    console.log("nope");
+    // Get entity from the state.
+    const entity = state.source[type][id];
+
+    // Get latest revision link.
+    const [{ href: revisionLink }] = entity._links["predecessor-version"];
+
+    // Fetch the latest revision using the token.
+    const response = await fetch(revisionLink, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // Get modified props from revision.
+    const data = await response.json();
+    const { title, content, excerpt } = data;
+    console.log(data);
+
+    // Merge props with entity.
+    Object.assign(entity, { title, content, excerpt });
+  }
 };
 
 export default postTypeHandler;
