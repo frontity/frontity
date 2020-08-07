@@ -132,12 +132,16 @@ const postTypeHandler = ({
     });
 
     // Get modified props from revision.
-    const data = await response.json();
-    const { title, content, excerpt } = data;
-    console.log(data);
+    const json = await response.json();
 
-    // Merge props with entity.
-    Object.assign(entity, { title, content, excerpt });
+    if (json.parent === id) {
+      const { title, content, excerpt } = json;
+      // Merge props with entity.
+      Object.assign(entity, { title, content, excerpt });
+    } else {
+      // Error response.
+      console.warn(json);
+    }
   }
 };
 
