@@ -1,0 +1,493 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`commentsHandler should handle replies correctly 1`] = `
+Array [
+  Object {
+    "endpoint": "comments",
+    "params": Object {
+      "_embed": false,
+      "page": 1,
+      "per_page": 100,
+      "post": 60,
+    },
+  },
+]
+`;
+
+exports[`commentsHandler should handle replies correctly 2`] = `
+Object {
+  "1": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 1</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 1,
+    "link": "/2020/post-60/comment-page-1/#comment-1",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "2": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 2</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 2,
+    "link": "/2020/post-60/comment-page-1/#comment-2",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "3": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 3</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 3,
+    "link": "/2020/post-60/comment-page-1/#comment-3",
+    "meta": Array [],
+    "parent": 2,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+}
+`;
+
+exports[`commentsHandler should handle replies correctly 3`] = `
+Object {
+  "areComments": true,
+  "isFetching": false,
+  "isReady": true,
+  "items": Array [
+    Object {
+      "children": Array [
+        Object {
+          "id": 3,
+          "type": "comment",
+        },
+      ],
+      "id": 2,
+      "type": "comment",
+    },
+    Object {
+      "id": 1,
+      "type": "comment",
+    },
+  ],
+  "link": "@comments/60/",
+  "page": 1,
+  "postId": 60,
+  "query": Object {},
+  "route": "@comments/60/",
+  "total": 3,
+  "totalPages": 1,
+}
+`;
+
+exports[`commentsHandler should handle replies correctly when more than one page 1`] = `
+Array [
+  Object {
+    "endpoint": "comments",
+    "params": Object {
+      "_embed": false,
+      "page": 1,
+      "per_page": 100,
+      "post": 60,
+    },
+  },
+]
+`;
+
+exports[`commentsHandler should handle replies correctly when more than one page 2`] = `
+Object {
+  "1": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 1</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 1,
+    "link": "/2020/post-60/comment-page-1/#comment-1",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "2": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 2</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 2,
+    "link": "/2020/post-60/comment-page-1/#comment-2",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "3": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 3</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 3,
+    "link": "/2020/post-60/comment-page-1/#comment-3",
+    "meta": Array [],
+    "parent": 2,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "4": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 4</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 4,
+    "link": "/2020/post-60/comment-page-1/#comment-4",
+    "meta": Array [],
+    "parent": 3,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "5": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 5</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 5,
+    "link": "/2020/post-60/comment-page-1/#comment-5",
+    "meta": Array [],
+    "parent": 4,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "6": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 6</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 6,
+    "link": "/2020/post-60/comment-page-1/#comment-6",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+}
+`;
+
+exports[`commentsHandler should handle replies correctly when more than one page 3`] = `
+Object {
+  "areComments": true,
+  "isFetching": false,
+  "isReady": true,
+  "items": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "id": 5,
+                  "type": "comment",
+                },
+              ],
+              "id": 4,
+              "type": "comment",
+            },
+          ],
+          "id": 3,
+          "type": "comment",
+        },
+      ],
+      "id": 2,
+      "type": "comment",
+    },
+    Object {
+      "id": 1,
+      "type": "comment",
+    },
+    Object {
+      "id": 6,
+      "type": "comment",
+    },
+  ],
+  "link": "@comments/60/",
+  "page": 1,
+  "postId": 60,
+  "query": Object {},
+  "route": "@comments/60/",
+  "total": 103,
+  "totalPages": 2,
+}
+`;
+
+exports[`commentsHandler should populate comments correctly 1`] = `
+Array [
+  Object {
+    "endpoint": "comments",
+    "params": Object {
+      "_embed": false,
+      "page": 1,
+      "per_page": 100,
+      "post": 60,
+    },
+  },
+]
+`;
+
+exports[`commentsHandler should populate comments correctly 2`] = `
+Object {
+  "1": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 1</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 1,
+    "link": "/2020/post-60/comment-page-1/#comment-1",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "2": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 2</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 2,
+    "link": "/2020/post-60/comment-page-1/#comment-2",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+}
+`;
+
+exports[`commentsHandler should populate comments correctly 3`] = `
+Object {
+  "areComments": true,
+  "isFetching": false,
+  "isReady": true,
+  "items": Array [
+    Object {
+      "id": 2,
+      "type": "comment",
+    },
+    Object {
+      "id": 1,
+      "type": "comment",
+    },
+  ],
+  "link": "@comments/60/",
+  "page": 1,
+  "postId": 60,
+  "query": Object {},
+  "route": "@comments/60/",
+  "total": 2,
+  "totalPages": 1,
+}
+`;
+
+exports[`commentsHandler should request more pages if there are more than 100 comments 1`] = `
+Array [
+  Object {
+    "endpoint": "comments",
+    "params": Object {
+      "_embed": false,
+      "page": 1,
+      "per_page": 100,
+      "post": 60,
+    },
+  },
+]
+`;
+
+exports[`commentsHandler should request more pages if there are more than 100 comments 2`] = `
+Object {
+  "1": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 1</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 1,
+    "link": "/2020/post-60/comment-page-1/#comment-1",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "101": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 101</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 101,
+    "link": "/2020/post-60/comment-page-1/#comment-101",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+  "201": Object {
+    "author": 1,
+    "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
+    "content": Object {
+      "rendered": "<p>Test Comment 201</p>",
+    },
+    "date": "2020-07-20T12:00:00",
+    "date_gmt": "2020-07-20T10:00:00",
+    "id": 201,
+    "link": "/2020/post-60/comment-page-1/#comment-201",
+    "meta": Array [],
+    "parent": 0,
+    "post": 60,
+    "status": "approved",
+    "type": "comment",
+  },
+}
+`;
+
+exports[`commentsHandler should request more pages if there are more than 100 comments 3`] = `
+Object {
+  "areComments": true,
+  "isFetching": false,
+  "isReady": true,
+  "items": Array [
+    Object {
+      "id": 201,
+      "type": "comment",
+    },
+    Object {
+      "id": 101,
+      "type": "comment",
+    },
+    Object {
+      "id": 1,
+      "type": "comment",
+    },
+  ],
+  "link": "@comments/60/",
+  "page": 1,
+  "postId": 60,
+  "query": Object {},
+  "route": "@comments/60/",
+  "total": 201,
+  "totalPages": 3,
+}
+`;
+
+exports[`commentsHandler should work fine if there are no comments 1`] = `
+Array [
+  Object {
+    "endpoint": "comments",
+    "params": Object {
+      "_embed": false,
+      "page": 1,
+      "per_page": 100,
+      "post": 60,
+    },
+  },
+]
+`;
+
+exports[`commentsHandler should work fine if there are no comments 2`] = `Object {}`;
+
+exports[`commentsHandler should work fine if there are no comments 3`] = `
+Object {
+  "areComments": true,
+  "isFetching": false,
+  "isReady": true,
+  "items": Array [],
+  "link": "@comments/60/",
+  "page": 1,
+  "postId": 60,
+  "query": Object {},
+  "route": "@comments/60/",
+  "total": 0,
+  "totalPages": 1,
+}
+`;

@@ -18,6 +18,11 @@
   - @frontity/router@1.2.0-infinite-scroll-beta.0
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/source@1.2.2-infinite-scroll-beta.0
+## 2.0.2
+
+### Patch Changes
+
+- [`fc1220b5`](https://github.com/frontity/frontity/commit/fc1220b5eb2ae0af933b76cc9fb1a62b83fc7075) [#484](https://github.com/frontity/frontity/pull/484) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md created.
 
 ## 2.0.1
 

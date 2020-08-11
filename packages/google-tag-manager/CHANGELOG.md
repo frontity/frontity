@@ -7,6 +7,13 @@
 - Updated dependencies []:
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/analytics@1.1.1-infinite-scroll-beta.0
+## 0.3.0
+
+### Minor Changes
+
+- [`496192cc`](https://github.com/frontity/frontity/commit/496192cc9413a54f93b894f44ad0e1ec3d0c9f9b) [#472](https://github.com/frontity/frontity/pull/472) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate `@frontity/google-tag-manager` in favor of `@frontity/google-tag-manager-analytics`.
+
+  > This package was renamed from `@frontity/google-tag-manager` to `@frontity/google-tag-manager-analytics` to remark that it belongs to the Frontity analytics packages.
 
 ## 0.2.0
 

@@ -6,17 +6,68 @@ import {
   TaxonomyWithSearchData,
 } from "@frontity/source/types/data";
 
+/**
+ * The parameters for {@link taxonomyHandler}.
+ */
+interface TaxonomyHandlerParams {
+  /**
+   * The slug of the custom taxonomy as configured in WordPress.
+   *
+   * @example "actor"
+   */
+  taxonomy: string;
+
+  /**
+   * The name of the [WordPress REST API endpoint](https://developer.wordpress.org/rest-api/reference/)
+   * from which the generated handler is going to fetch the taxonomy data.
+   *
+   * @example "actors"
+   */
+  endpoint: string;
+
+  /**
+   * The [WordPress REST API endpoint](https://developer.wordpress.org/rest-api/reference/)
+   * of the custom post type that should be fetched for this taxonomy.
+   *
+   * @example "movies"
+   */
+  postTypeEndpoint?: string;
+
+  /**
+   * The params that should be used in the REST API when fetching this
+   * taxonomy.
+   */
+  params?: Record<string, any>;
+}
+
+/**
+ * A {@link Handler} function generator for WordPress Taxonomies.
+ *
+ * This function will generate a handler function for the specified parameters.
+ *
+ * @param options - Options for the handler generator: {@link TaxonomyHandlerParams}.
+ *
+ * @example
+ * ```js
+ *   const tagHandler = taxonomyHandler({ taxonomy: "tag", endpoint: "tags" });
+ *   libraries.source.handlers.push({
+ *     name: "tag",
+ *     priority: 20,
+ *     pattern: "/tag/:slug"
+ *     func: tagHandler,
+ *   })
+ * ```
+ *
+ * @returns An async "handler" function that can be passed as an argument to the handler object.
+ * This function will be invoked by the frontity framework when calling `source.fetch()` for
+ * a specific entity.
+ */
 const taxonomyHandler = ({
   taxonomy,
   endpoint,
   postTypeEndpoint,
   params: handlerParams = {},
-}: {
-  taxonomy: string;
-  endpoint: string;
-  postTypeEndpoint?: string;
-  params?: Record<string, any>;
-}): Handler => async ({
+}: TaxonomyHandlerParams): Handler => async ({
   link: linkArg,
   route: routeArg,
   params,
@@ -79,6 +130,18 @@ const taxonomyHandler = ({
       404
     );
 
+  // `libraries.source.populate()` creates a data object for each taxonomy it
+  // receives from the Response object
+  //
+  // If state.source.data[route] doesn't contain that the `taxonomy` property it means that
+  // something else was returned from the endopoint and this handler was matched erroneously.
+  if (!state.source.data[route].taxonomy) {
+    throw new ServerError(
+      `You have tried to access content at route: ${route} but it does not exist`,
+      404
+    );
+  }
+
   // 4. get posts and pages count
   const total = getTotal(response, items.length);
   const totalPages = getTotalPages(response, 0);
@@ -88,6 +151,14 @@ const taxonomyHandler = ({
   // returns true if previous page exists
   const hasOlderPosts = page > 1;
 
+  /**
+   * A helper function that helps "glue" the link back together
+   * from `route`, `query` and `page`.
+   *
+   * @param page - The page number.
+   *
+   * @returns The full link for a particular page.
+   */
   const getPageLink = (page: number) =>
     libraries.source.stringify({
       route,
