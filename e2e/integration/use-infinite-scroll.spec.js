@@ -225,7 +225,6 @@ describe("UseInfiniteScroll", () => {
 
     // Scrolls to bottom to fetch next post.
     cy.scrollTo("bottom");
-    cy.get("[data-test='fetching']").should("exist");
     cy.wait("@pageTwo");
     cy.get("[data-test='fetching']").should("not.exist");
     cy.get("[data-test='post-23']").should("not.exist");
