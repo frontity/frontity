@@ -1,11 +1,12 @@
 import React from "react";
 import { css, connect, useConnect } from "frontity";
 import useArchiveInfiniteScroll from "@frontity/hooks/use-archive-infinite-scroll";
-import Theme from "../../types";
+import { Packages } from "../../types";
 
 const Archive: React.FC = () => {
-  const { state, libraries } = useConnect<Theme>();
+  const { state, libraries } = useConnect<Packages>();
   const current = state.source.get(state.router.link);
+
   const { pages, isFetching, isError, fetchNext } = useArchiveInfiniteScroll({
     fetchInViewOptions: {
       root: document as any,

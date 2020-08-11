@@ -4,24 +4,17 @@ import WpSource from "@frontity/wp-source/types";
 
 interface UseInfiniteScroll extends Package {
   name: "use-infinite-scroll";
-  state: {
-    router?: TinyRouter["state"]["router"];
-    source?: WpSource["state"]["source"];
-  };
   actions: {
     theme: {
-      init: Action<UseInfiniteScroll>;
-      beforeSSR: ServerAction<UseInfiniteScroll>;
+      init: Action<Packages>;
+      beforeSSR: ServerAction<Packages>;
     };
-    router?: TinyRouter["actions"]["router"];
-    source?: WpSource["actions"]["source"];
   };
   roots: {
     useInfiniteScroll: React.ReactType;
   };
-  libraries: {
-    source?: WpSource["libraries"]["source"];
-  };
 }
+
+export type Packages = UseInfiniteScroll & TinyRouter & WpSource;
 
 export default UseInfiniteScroll;

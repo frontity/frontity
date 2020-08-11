@@ -3,10 +3,10 @@ import { connect, useConnect } from "frontity";
 import Archive from "./components/archive";
 import PostType from "./components/post-type";
 import * as handlers from "./handlers";
-import UseInfiniteScroll from "../types";
+import UseInfiniteScroll, { Packages } from "../types";
 
 const Root: React.FC = connect(() => {
-  const { state, actions } = useConnect<UseInfiniteScroll>();
+  const { state, actions } = useConnect<Packages>();
 
   return (
     <>

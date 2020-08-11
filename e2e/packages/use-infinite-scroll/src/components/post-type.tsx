@@ -1,11 +1,12 @@
 import React from "react";
 import { css, connect, useConnect } from "frontity";
 import usePostTypeInfiniteScroll from "@frontity/hooks/use-post-type-infinite-scroll";
-import Theme from "../../types";
+import { Packages } from "../../types";
 
 const PostType: React.FC = () => {
-  const { state } = useConnect<Theme>();
+  const { state } = useConnect<Packages>();
   const current = state.source.get(state.router.link);
+
   const { posts, isFetching, isError, fetchNext } = usePostTypeInfiniteScroll({
     fetchInViewOptions: {
       root: document as any,
