@@ -119,7 +119,7 @@ const settings: Settings = [
       },
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "https://test.frontity.org/wp-json" } },
+        state: { source: { api: "https://domain.com/wp-json" } },
       },
     ],
   },

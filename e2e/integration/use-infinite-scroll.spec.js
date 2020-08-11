@@ -9,7 +9,7 @@ describe("UseInfiniteScroll", () => {
     // Stubs calls to REST API.
     cy.server();
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
       response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": 20,
@@ -18,7 +18,7 @@ describe("UseInfiniteScroll", () => {
       delay: 300,
     }).as("pageOne");
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
       response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
         "x-wp-total": 20,
@@ -60,7 +60,7 @@ describe("UseInfiniteScroll", () => {
     // Stubs calls to REST API.
     cy.server();
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
       response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": 20,
@@ -69,7 +69,7 @@ describe("UseInfiniteScroll", () => {
       delay: 300,
     }).as("pageOne");
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
       status: 503,
       response: {},
       delay: 300,
@@ -102,7 +102,7 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/archive/");
 
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
       response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
         "x-wp-total": 20,
@@ -131,7 +131,7 @@ describe("UseInfiniteScroll", () => {
     // Stubs calls to REST API.
     cy.server();
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
       response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": 20,
@@ -140,8 +140,7 @@ describe("UseInfiniteScroll", () => {
       delay: 300,
     }).as("pageOne");
     cy.route({
-      url:
-        "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&slug=the-beauties-of-gullfoss",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
       response: "fixture:use-infinite-scroll/post-1.json",
       headers: {
         "x-wp-total": 1,
@@ -152,29 +151,20 @@ describe("UseInfiniteScroll", () => {
 
     // Changes url to `/post-type`.
     cy.get("[data-test='to-first-post']").should("exist").click();
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/2016/the-beauties-of-gullfoss/"
-    );
+    cy.location("href").should("eq", "http://localhost:3001/post-1/");
     cy.wait("@postOne");
     cy.get("[data-test='post-type']").should("exist");
-    cy.get("[data-test='post-60']").should("exist");
+    cy.get("[data-test='post-1']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
 
     // Scrolls to bottom to fetch next post.
     cy.scrollTo("bottom");
-    cy.get("[data-test='post-57']").should("exist").scrollIntoView();
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/2016/shinjuku-gyoen-national-garden/"
-    );
+    cy.get("[data-test='post-2']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-2/");
 
     // Scrolls back to top.
     cy.scrollTo("top");
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/2016/the-beauties-of-gullfoss/"
-    );
+    cy.location("href").should("eq", "http://localhost:3001/post-1/");
   });
 
   it("usePostTypeInfiniteScroll should return `isError` true", () => {
@@ -187,8 +177,7 @@ describe("UseInfiniteScroll", () => {
     // Stubs calls to REST API.
     cy.server();
     cy.route({
-      url:
-        "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&slug=discovering-iceland",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-10",
       response: "fixture:use-infinite-scroll/post-last.json",
       headers: {
         "x-wp-total": 1,
@@ -197,7 +186,7 @@ describe("UseInfiniteScroll", () => {
       delay: 300,
     }).as("lastPost");
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
       response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": 20,
@@ -206,7 +195,7 @@ describe("UseInfiniteScroll", () => {
       delay: 300,
     }).as("pageOne");
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
       status: 503,
       response: {},
       delay: 300,
@@ -214,25 +203,19 @@ describe("UseInfiniteScroll", () => {
 
     // Changes url to `/post-type`.
     cy.get("[data-test='to-last-post']").should("exist").click();
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/2016/discovering-iceland/"
-    );
+    cy.location("href").should("eq", "http://localhost:3001/post-10/");
     cy.wait("@lastPost");
     cy.get("[data-test='post-type']").should("exist");
-    cy.get("[data-test='post-26']").should("exist");
+    cy.get("[data-test='post-10']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
 
     // Scrolls to bottom to fetch next post.
     cy.scrollTo("bottom");
     cy.wait("@pageTwo");
     cy.get("[data-test='fetching']").should("not.exist");
-    cy.get("[data-test='post-23']").should("not.exist");
+    cy.get("[data-test='post-11']").should("not.exist");
     cy.get("[data-test='error']").should("exist").scrollIntoView();
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/2016/discovering-iceland/"
-    );
+    cy.location("href").should("eq", "http://localhost:3001/post-10/");
 
     // Try fetching again.
     cy.get("[data-test='fetch']").should("exist").click();
@@ -241,13 +224,10 @@ describe("UseInfiniteScroll", () => {
     cy.wait("@pageTwo");
     cy.get("[data-test='fetching']").should("not.exist");
     cy.get("[data-test='error']").should("exist").scrollIntoView();
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/2016/discovering-iceland/"
-    );
+    cy.location("href").should("eq", "http://localhost:3001/post-10/");
 
     cy.route({
-      url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
       response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
         "x-wp-total": 20,
@@ -259,13 +239,10 @@ describe("UseInfiniteScroll", () => {
     // Try one more time.
     cy.get("[data-test='fetch']").should("exist").click();
     cy.get("[data-test='fetching']").should("exist");
-    cy.get("[data-test='post-23']").should("not.exist");
+    cy.get("[data-test='post-11']").should("not.exist");
     cy.wait("@pageTwo");
     cy.get("[data-test='fetching']").should("not.exist");
-    cy.get("[data-test='post-23']").should("exist").scrollIntoView();
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/2016/switzerlands-mountains/"
-    );
+    cy.get("[data-test='post-11']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-11/");
   });
 });

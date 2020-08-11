@@ -5,49 +5,46 @@ import PostType from "./components/post-type";
 import * as handlers from "./handlers";
 import UseInfiniteScroll from "../types";
 
-const Root: React.FC = connect(
-  () => {
-    const { state, actions } = useConnect<UseInfiniteScroll>();
+const Root: React.FC = connect(() => {
+  const { state, actions } = useConnect<UseInfiniteScroll>();
 
-    return (
-      <>
-        {(state.router.link.startsWith("/archive") && <Archive />) ||
-          (state.router.link.startsWith("/2016") && <PostType />) || (
-            <>
-              <button
-                data-test="to-archive"
-                onClick={() => {
-                  actions.router.set("/archive");
-                  actions.source.fetch("/archive");
-                }}
-              >
-                To Archive
-              </button>
-              <button
-                data-test="to-first-post"
-                onClick={() => {
-                  actions.router.set("/2016/the-beauties-of-gullfoss");
-                  actions.source.fetch("/2016/the-beauties-of-gullfoss");
-                }}
-              >
-                To First Post
-              </button>
-              <button
-                data-test="to-last-post"
-                onClick={() => {
-                  actions.router.set("/2016/discovering-iceland");
-                  actions.source.fetch("/2016/discovering-iceland");
-                }}
-              >
-                To Last Post
-              </button>
-            </>
-          )}
-      </>
-    );
-  },
-  { injectProps: false }
-);
+  return (
+    <>
+      {(state.router.link.startsWith("/archive") && <Archive />) ||
+        (state.router.link.startsWith("/post") && <PostType />) || (
+          <>
+            <button
+              data-test="to-archive"
+              onClick={() => {
+                actions.router.set("/archive");
+                actions.source.fetch("/archive");
+              }}
+            >
+              To Archive
+            </button>
+            <button
+              data-test="to-first-post"
+              onClick={() => {
+                actions.router.set("/post-1");
+                actions.source.fetch("/post-1");
+              }}
+            >
+              To First Post
+            </button>
+            <button
+              data-test="to-last-post"
+              onClick={() => {
+                actions.router.set("/post-10");
+                actions.source.fetch("/post-10");
+              }}
+            >
+              To Last Post
+            </button>
+          </>
+        )}
+    </>
+  );
+});
 
 const pkg: UseInfiniteScroll = {
   name: "use-infinite-scroll",

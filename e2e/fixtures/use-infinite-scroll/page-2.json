@@ -1,52 +1,52 @@
 [
   {
-    "id": 23,
+    "id": 11,
     "type": "post",
-    "link": "https://test.frontity.org/2016/switzerlands-mountains/"
-  },
-  {
-    "id": 17,
-    "type": "post",
-    "link": "https://test.frontity.org/2016/latest-trip-to-india/"
+    "link": "https://test.frontity.org/post-11"
   },
   {
     "id": 12,
     "type": "post",
-    "link": "https://test.frontity.org/2016/somewhere-in-romania/"
+    "link": "https://test.frontity.org/post-12"
   },
   {
-    "id": 8,
+    "id": 13,
     "type": "post",
-    "link": "https://test.frontity.org/2016/paris-city-of-light/"
+    "link": "https://test.frontity.org/post-13"
   },
   {
-    "id": 1,
+    "id": 14,
     "type": "post",
-    "link": "https://test.frontity.org/2016/iceland/"
+    "link": "https://test.frontity.org/post-14"
   },
   {
-    "id": 1950,
+    "id": 15,
     "type": "post",
-    "link": "https://test.frontity.org/2015/test-multiple-blocks/"
+    "link": "https://test.frontity.org/post-15"
   },
   {
-    "id": 1929,
+    "id": 16,
     "type": "post",
-    "link": "https://test.frontity.org/2015/same-slug-test/"
+    "link": "https://test.frontity.org/post-16"
   },
   {
-    "id": 1923,
+    "id": 17,
     "type": "post",
-    "link": "https://test.frontity.org/2014/testing-contact-form-7/"
+    "link": "https://test.frontity.org/post-17"
   },
   {
-    "id": 1801,
+    "id": 18,
     "type": "post",
-    "link": "https://test.frontity.org/2013/block-image/"
+    "link": "https://test.frontity.org/post-18"
   },
   {
-    "id": 1798,
+    "id": 19,
     "type": "post",
-    "link": "https://test.frontity.org/2013/block-button/"
+    "link": "https://test.frontity.org/post-19"
+  },
+  {
+    "id": 20,
+    "type": "post",
+    "link": "https://test.frontity.org/post-20"
   }
 ]
