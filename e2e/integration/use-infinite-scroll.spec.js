@@ -1,8 +1,3 @@
-import responsePageOne from "./responses/infinite-scroll-page-1.json";
-import responsePageTwo from "./responses/infinite-scroll-page-2.json";
-import responsePostOne from "./responses/infinite-scroll-post-1.json";
-import responseLastPost from "./responses/infinite-scroll-last-post.json";
-
 describe("UseInfiniteScroll", () => {
   it("useArchiveInfiniteScroll should load next page", () => {
     cy.visit("http://localhost:3001/?name=use-infinite-scroll");
@@ -15,7 +10,7 @@ describe("UseInfiniteScroll", () => {
     cy.server();
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
-      response: responsePageOne,
+      response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
@@ -24,7 +19,7 @@ describe("UseInfiniteScroll", () => {
     }).as("pageOne");
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
-      response: responsePageTwo,
+      response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
@@ -66,7 +61,7 @@ describe("UseInfiniteScroll", () => {
     cy.server();
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
-      response: responsePageOne,
+      response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
@@ -108,7 +103,7 @@ describe("UseInfiniteScroll", () => {
 
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
-      response: responsePageTwo,
+      response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
@@ -137,7 +132,7 @@ describe("UseInfiniteScroll", () => {
     cy.server();
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
-      response: responsePageOne,
+      response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
@@ -147,7 +142,7 @@ describe("UseInfiniteScroll", () => {
     cy.route({
       url:
         "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&slug=the-beauties-of-gullfoss",
-      response: responsePostOne,
+      response: "fixture:use-infinite-scroll/post-1.json",
       headers: {
         "x-wp-total": 1,
         "x-wp-totalpages": 1,
@@ -194,7 +189,7 @@ describe("UseInfiniteScroll", () => {
     cy.route({
       url:
         "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&slug=discovering-iceland",
-      response: responseLastPost,
+      response: "fixture:use-infinite-scroll/post-last.json",
       headers: {
         "x-wp-total": 1,
         "x-wp-totalpages": 1,
@@ -203,7 +198,7 @@ describe("UseInfiniteScroll", () => {
     }).as("lastPost");
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=1",
-      response: responsePageOne,
+      response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
@@ -254,7 +249,7 @@ describe("UseInfiniteScroll", () => {
 
     cy.route({
       url: "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&page=2",
-      response: responsePageTwo,
+      response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
         "x-wp-total": 20,
         "x-wp-totalpages": 2,
