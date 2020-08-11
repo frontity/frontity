@@ -4,6 +4,6 @@
   "private": true,
   "description": "Package to do e2e testing for fonts",
   "dependencies": {
-    "frontity": "^1.4.3"
+    "frontity": "^1.10.1"
   }
 }
