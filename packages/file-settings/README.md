@@ -1,135 +1,57 @@
-# File Settings
+# `@frontity/file-settings`
 
-### _This is an internal package used by @frontity/core._
+[![Version](https://img.shields.io/npm/v/@frontity/file-settings.svg)](https://www.npmjs.com/package/@frontity/file-settings) [![npm](https://img.shields.io/npm/dw/@frontity/file-settings)](https://www.npmjs.com/package/@frontity/file-settings) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-## Usage
+> This is an internal package used by [@frontity/core](https://github.com/frontity/frontity/tree/dev/packages/core)
 
-This package is used to import the Frontity settings from a local file.
+A settings package for Frontity that reads a `frontity.settings.js` file.
 
-You can install it with `npm`:
+_`frontity.settings.js` should contain data that allows it to be serializable (as a JSON) so it can be stored in DB_
 
-```
-npm i @frontity/file-settings
-```
+## Table of contents
 
-Here is a small example of how to use `getSettings`:
+<!-- toc -->
 
-```js
-import { getSettings } from "@frontity/file-settings";
+- [Feature Discussions](#feature-discussions)
+- [Changelog](#changelog)
+- [Open Source Community](#open-source-community)
+  * [Channels](#channels)
+  * [Get involved](#get-involved)
 
-const settings = await getSettings({
-  name: "example-name",
-  url: "https://example.site"
-});
-```
+<!-- tocstop -->
 
-## API Reference
+## Feature Discussions
 
-### `async getSettings(options) => settings`
+[**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-Used to retrieve the settings from the `frontity.settings.js` file.
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/file-settings
 
-#### Parameters
+## Changelog
 
-**`options`** : `{ name?: string; url: string; }`
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/file-settings/CHANGELOG.md)
 
-Used to match the right set of settings when there is more than one.
+***
 
-- **`options.name`** : `string (optional)`\
-  The name of the set of settings you want to retrieve. When provided, `getSettings` won't use `options.url`.
+## Open Source Community
 
-- **`options.url`** : `string`\
-  The url of the site using Frontity. The `matches` field of each set of settings will be tested against this url to determine which set of settings should be used.
+### Channels
 
-#### Return
+[![Community Forum Topics](https://img.shields.io/discourse/topics?color=blue&label=community%20forum&server=https%3A%2F%2Fcommunity.frontity.org%2F)](https://community.frontity.org/) [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity) ![Frontity Github Stars](https://img.shields.io/github/stars/frontity/frontity?style=social)
 
-**`settings`** : `Settings`\
-An object with type `Settings` containing a set of settings.
+Frontity has a number of different channels at your disposal where you can find out more information about the project, join in discussions about it, and also get involved:
 
-### `async getAllSites() => sites`
+- **📖  [Docs](https://docs.frontity.org/):** Frontity's primary documentation resource - this is the place to learn how to build amazing sites with Frontity.
+* **👨‍👩‍👧‍👦  [Community forum](https://community.frontity.org/):** join Frontity's forum and ask questions, share your knowledge, give feedback and meet other cool Frontity people. We'd love to know about what you're building with Frontity, so please do swing by the [forum](https://community.frontity.org/) and tell us about your projects.
+* **🐞  Contribute:** Frontity uses [GitHub](https://github.com/frontity/frontity) for bugs and pull requests. Check out the [Contributing](../contributing/) section to find out how you can help develop Frontity, or improve this documentation.
+* **🗣  Social media**: interact with other Frontity users. Reach out to the Frontity team on [Twitter](https://twitter.com/frontity). Mention us in your tweets about Frontity and what you're building by using **`@frontity`**.
+* 💌  **Newsletter:** do you want to receive the latest news about Frontity and find out as soon as there's an update to the framework? Subscribe to our [newsletter](https://frontity.org/#newsletter).
 
-Used to retrieve all the sites with its name, mode and packages.
+### Get involved
 
-#### Return
+[![GitHub issues by-label](https://img.shields.io/github/issues/frontity/frontity/good%20first%20issue)](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
 
-**Sites**: `{ name: string; mode: string; packages: string[]; }[]`\
-An array of sites containing name, mode and packages.
+Got questions or feedback about Frontity? We'd love to hear from you in our [community forum](https://community.frontity.org).
 
-```js
-[
-  {
-    name: "my-site-1",
-    mode: "html",
-    packages: ["package-1", "package-2"]
-  },
-  {
-    name: "my-site-1-amp",
-    mode: "amp",
-    packages: ["package-1", "package-3"]
-  },
-  {
-    name: "my-site-2",
-    mode: "html",
-    packages: ["package-1", "package-2"]
-  }
-];
-```
+Frontity also welcomes contributions. There are many ways to support the project! If you don't know where to start then this guide might help: [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute).
 
-## Settings File
-
-The file must be located in the root directory of the project, it must be named `frontity.settings.ts` or `frontity.settings.js`, and it needs to export a serializable object.
-
-The settings exported can be **mono settings** (only one):
-
-```ts
-{
-  name?: string;
-  match?: string[];
-  mode?: string; // Default: "html"
-  state?: object,
-  packages: [
-    string,
-    {
-      name: string;
-      active?: boolean; // Default: true
-      state?: object;
-    }
-  ]
-}
-```
-
-Or **multi settings**:
-
-```ts
-// An array of more than one set of settings.
-[
-  {
-    name: string; // Here name is mandatory and must be unique.
-    match?: string[];
-    mode?: string; // Default: "html"
-    state?: { ... },
-    packages: [ ... ]
-  },
-  {
-    name: string; // Here name is mandatory and must be unique.
-    match?: string[];
-    mode?: string; // Default: "html"
-    state?: { ... },
-    packages: [ ... ]
-  }
-]
-```
-
-## Typescript
-
-The `Settings` interface is exposed to be used in development. It can be accessed like this:
-
-```js
-import { Settings } from "@frontity/file-settings";
-
-const settings: Settings = { ... };
-```
-
-### `Settings<T = Package>`
-
-Types for the imported settings object from the settings file. You'll want to use them on your `frontity.settings.ts` file.
+If you would like to start contributing to the code please open a pull request to address one of our [*good first issues*](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).

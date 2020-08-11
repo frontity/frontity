@@ -77,10 +77,10 @@ const settings: Settings = [
       "e2e-analytics",
       "@frontity/tiny-router",
       {
-        name: "@frontity/google-tag-manager",
+        name: "@frontity/google-tag-manager-analytics",
         state: {
-          googleTagManager: {
-            containerId: "UA-XXXXXX-X",
+          googleTagManagerAnalytics: {
+            containerId: "GTM-XXXXXX-X",
           },
         },
       },
@@ -108,6 +108,25 @@ const settings: Settings = [
   {
     name: "slot-and-fill",
     packages: ["e2e-slot-and-fill"],
+  },
+  {
+    name: "analytics",
+    packages: ["e2e-analytics", "@frontity/tiny-router", "@frontity/analytics"],
+  },
+  {
+    name: "google-analytics",
+    packages: [
+      "e2e-analytics",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/google-analytics",
+        state: {
+          googleAnalytics: {
+            trackingIds: ["UA-XXXXXX-X", "UA-YYYYYY-Y"],
+          },
+        },
+      },
+    ],
   },
 ];
 

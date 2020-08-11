@@ -6,6 +6,41 @@
 
 - Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b)]:
   - @frontity/types@1.4.1-infinite-scroll-beta.0
+## 1.10.1
+
+### Patch Changes
+
+- [`17f539bf`](https://github.com/frontity/frontity/commit/17f539bfb547105bd4565735c5491f2400c3c8fe) [#516](https://github.com/frontity/frontity/pull/516) Thanks [@luisherranz](https://github.com/luisherranz)! - Add `@frontity/core` as a peer dependency of `frontity` to make sure that people get a warning when they update `frontity` if they have not updated `@frontity/core` as well.
+
+- Updated dependencies [[`a0fc05cb`](https://github.com/frontity/frontity/commit/a0fc05cb8d51e4e101994b1b35410d5c2fd16e55)]:
+  - @frontity/core@1.7.3
+
+## 1.10.0
+
+### Minor Changes
+
+- [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377) [#475](https://github.com/frontity/frontity/pull/475) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add a `Slot` component which can be used to fulfill the "Slot and Fill" pattern: https://community.frontity.org/t/slot-and-fill/895/8
+
+### Patch Changes
+
+- [`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f) [#501](https://github.com/frontity/frontity/pull/501) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Remove the tsNode.register() from the CLI
+
+- Updated dependencies [[`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377), [`159e02ca`](https://github.com/frontity/frontity/commit/159e02ca080ec9f7004c90276621d1a2708192ce)]:
+  - @frontity/types@1.4.2
+
+## 1.9.0
+
+### Minor Changes
+
+- [`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8) [#458](https://github.com/frontity/frontity/pull/458) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Allow `dev`, `build` and `serve` commands to be configured using environment variables ([feature discussion](https://community.frontity.org/t/change-publicpath/1461)).
+
+### Patch Changes
+
+- [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b) [#462](https://github.com/frontity/frontity/pull/462) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md with full info of the package
+
+- Updated dependencies [[`fb67272b`](https://github.com/frontity/frontity/commit/fb67272bd8a3dfff00868af394484ec09f1e0785), [`ee9f2616`](https://github.com/frontity/frontity/commit/ee9f26165e1f965d3234b4cf9588966e3ab36ec7)]:
+  - @frontity/error@0.1.1
+  - @frontity/types@1.4.1
 
 ## 1.8.0
 

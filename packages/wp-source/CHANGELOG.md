@@ -7,6 +7,28 @@
 - Updated dependencies []:
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/source@1.2.2-infinite-scroll-beta.0
+## 1.8.1
+
+### Patch Changes
+
+- [`2a28af19`](https://github.com/frontity/frontity/commit/2a28af19ef6cd2d148c8418895387943c7c8a95f) [#513](https://github.com/frontity/frontity/pull/513) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix a bug where requesting posts for a date that is outside of the calendar range causes a 500 error instead of a 404.
+
+* [`769a7bfd`](https://github.com/frontity/frontity/commit/769a7bfd047d388053e45b13d75ca84510afa02d) [#506](https://github.com/frontity/frontity/pull/506) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix the bug that causes a server crash and 500 errors to be returned if a URL contained a partly known entity. E.g. `/undefined/2020/some-interesting-post`.
+
+* Updated dependencies [[`17f539bf`](https://github.com/frontity/frontity/commit/17f539bfb547105bd4565735c5491f2400c3c8fe)]:
+  - frontity@1.10.1
+
+## 1.8.0
+
+### Minor Changes
+
+- [`b53817d1`](https://github.com/frontity/frontity/commit/b53817d10eb52f4cd1bf159edb06dd21169eb70a) [#488](https://github.com/frontity/frontity/pull/488) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README created.
+
+### Patch Changes
+
+- Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b), [`3f61f711`](https://github.com/frontity/frontity/commit/3f61f71197d33b478427d1b74882c31258861e92)]:
+  - frontity@1.9.0
+  - @frontity/source@1.2.2
 
 ## 1.7.1
 
