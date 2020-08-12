@@ -14,7 +14,7 @@ declare global {
 }
 
 /**
- * A duple for width and height values, in pixels.
+ * A tuple for width and height values, in pixels.
  *
  * @example [300, 250]
  */
