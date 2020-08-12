@@ -10,7 +10,7 @@ describe("Google Ad Manager", () => {
     // Go to home.
     cy.visit("http://localhost:3001?name=google-ad-manager");
 
-    // Get add unit from header.
+    // Get ad unit from header.
     cy.get("#header-ad > div").should("have.descendants", "iframe");
 
     // Get ad unit from footer.
@@ -19,13 +19,13 @@ describe("Google Ad Manager", () => {
     // Go to "/post/".
     cy.get("button#change-link").click();
 
-    // Get add unit from header.
+    // Get ad unit from header.
     cy.get("#header-ad_post > div").should("have.descendants", "iframe");
 
     // Get ad unit from footer.
     cy.get("#footer-ad_post > div").should("have.descendants", "iframe");
 
-    // Get add unit from content.
+    // Get ad unit from content.
     cy.get("#content-ad_post > div").should("have.descendants", "iframe");
   });
 
@@ -36,21 +36,21 @@ describe("Google Ad Manager", () => {
     // Go to "/post-with-gpt/".
     cy.get("button#change-link-gpt").click();
 
-    // Get add unit from content.
+    // Get ad unit from content.
     cy.get("#post-with-gpt-ad > div").should("have.descendants", "iframe");
   });
 
-  it("should add the link to the container ID if data is passed", () => {
+  it("should ad the link to the container ID if data is passed", () => {
     // Go to home.
     cy.visit("http://localhost:3001?name=google-ad-manager");
 
     // Go to "/post/".
     cy.get("button#change-link").click();
 
-    // Get add unit from content ("/post/").
+    // Get ad unit from content ("/post/").
     cy.get("#content-ad_post > div").should("have.descendants", "iframe");
 
-    // Get add unit from content ("/next-post/").
+    // Get ad unit from content ("/next-post/").
     cy.get("#content-ad_next-post > div").should("have.descendants", "iframe");
   });
 });
