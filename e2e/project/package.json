@@ -15,7 +15,7 @@
     "@frontity/analytics": "^1.1.0",
     "@frontity/comscore-analytics": "^1.0.0",
     "@frontity/core": "^1.5.0",
-    "@frontity/google-ad-manager": "^0.0.1",
+    "@frontity/google-ad-manager": "^0.1.0",
     "@frontity/google-analytics": "^1.1.0",
     "@frontity/google-tag-manager-analytics": "^1.0.0",
     "@frontity/html2react": "^1.3.0",
