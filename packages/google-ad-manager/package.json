@@ -1,0 +1,35 @@
+{
+  "name": "@frontity/google-ad-manager",
+  "version": "0.0.1",
+  "description": "Integrate your Frontity site with Google Ad Manager",
+  "homepage": "https://github.com/frontity/frontity",
+  "license": "Apache-2.0",
+  "keywords": [
+    "frontity",
+    "frontity-ads",
+    "google-ad-manager",
+    "doubleclick",
+    "google-publisher-tag",
+    "gpt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "scripts": {
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+  },
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
+  "dependencies": {
+    "@types/doubleclick-gpt": "^2019041801.0.2",
+    "frontity": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/react-test-renderer": "^16.9.3",
+    "react-test-renderer": "^16.13.1"
+  }
+}

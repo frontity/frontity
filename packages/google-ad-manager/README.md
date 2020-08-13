@@ -1,0 +1,1 @@
+# `@frontity/google-ad-manager`

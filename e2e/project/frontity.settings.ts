@@ -128,6 +128,55 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "google-ad-manager",
+    packages: [
+      "e2e-ads",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/google-ad-manager",
+        state: {
+          fills: {
+            googleAdManager: {
+              headerAd: {
+                slot: "header",
+                library: "googleAdManager.GooglePublisherTag",
+                priority: 5,
+                props: {
+                  id: "header-ad",
+                  unit: "/4595/nfl.test.open",
+                  size: [300, 250],
+                },
+              },
+              contentAd: {
+                slot: "content",
+                library: "googleAdManager.GooglePublisherTag",
+                priority: 5,
+                props: {
+                  id: "content-ad",
+                  unit: "/4595/nfl.test.open",
+                  size: [300, 250],
+                },
+              },
+              footerAd: {
+                slot: "footer",
+                library: "googleAdManager.GooglePublisherTag",
+                priority: 5,
+                props: {
+                  id: "footer-ad",
+                  unit: "/4595/nfl.test.open",
+                  size: [
+                    [300, 250],
+                    [300, 600],
+                  ],
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
