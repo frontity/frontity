@@ -1,6 +1,6 @@
 {
   "name": "@frontity/google-ad-manager",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Integrate your Frontity site with Google Ad Manager",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
