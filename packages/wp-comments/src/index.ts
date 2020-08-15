@@ -70,10 +70,7 @@ const wpComments: WpComments = {
         body.set("comment_post_ID", postId.toString());
 
         // Generate endpoint URL.
-        const commentsPost = state.source.api.replace(
-          /\/wp-json\/?$/,
-          "/wp-comments-post.php"
-        );
+        const commentsPost = state.source.api + "/wp/v2/comments";
 
         // Send a POST request.
         let response: Response;
