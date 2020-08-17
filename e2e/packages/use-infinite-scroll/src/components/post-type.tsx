@@ -3,6 +3,11 @@ import { css, connect, useConnect } from "frontity";
 import usePostTypeInfiniteScroll from "@frontity/hooks/use-post-type-infinite-scroll";
 import { Packages } from "../../types";
 
+/**
+ * Component to render post types.
+ *
+ * @returns A React node.
+ */
 const PostType: React.FC = () => {
   const { state } = useConnect<Packages>();
   const current = state.source.get(state.router.link);
@@ -53,4 +58,4 @@ const PostType: React.FC = () => {
   );
 };
 
-export default connect(PostType);
+export default connect(PostType, { injectProps: false });

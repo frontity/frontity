@@ -3,6 +3,11 @@ import { css, connect, useConnect } from "frontity";
 import useArchiveInfiniteScroll from "@frontity/hooks/use-archive-infinite-scroll";
 import { Packages } from "../../types";
 
+/**
+ * Component to render archives.
+ *
+ * @returns A React node.
+ */
 const Archive: React.FC = () => {
   const { state, libraries } = useConnect<Packages>();
   const current = state.source.get(state.router.link);
