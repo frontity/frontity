@@ -38,11 +38,35 @@ const Root: FC = connect(() => {
   );
 });
 
-const Fill1: FC<{ text: string }> = ({ text }) => <div id="Fill1">{text}</div>;
-const Fill2: FC<{ text: string }> = ({ text }) => <div id="Fill2">{text}</div>;
+/**
+ * The props of the {@link Fill1} and {@link Fill2} components.
+ */
+interface FillProps {
+  /**
+   * Some text that will be rendered by the component.
+   */
+  text: string;
+}
+
+/**
+ * A Fill component that renders some text and has some id.
+ *
+ * @param props - The props of the component, defined by {@link FillProps}.
+ *
+ * @returns A div tag with some text.
+ */
+const Fill1: FC<FillProps> = ({ text }) => <div id="Fill1">{text}</div>;
+
+/**
+ * A Fill component that renders some text and has some id.
+ *
+ * @param props - The props of the component, defined by {@link FillProps}.
+ *
+ * @returns A div tag with some text.
+ */
+const Fill2: FC<FillProps> = ({ text }) => <div id="Fill2">{text}</div>;
 
 const slotAndFill: SlotAndFill = {
-  name: "slot-and-fill",
   state: {
     fills: {
       slotAndFill: {},

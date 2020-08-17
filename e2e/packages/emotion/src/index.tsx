@@ -2,6 +2,11 @@ import React from "react";
 import { Global, css, connect, URL, styled } from "frontity";
 import Package from "../types";
 
+/**
+ * A React component that can change the background color of the body.
+ *
+ * @returns React element.
+ */
 const GlobalBackgroundBlue = () => {
   const [global, setGlobal] = React.useState(false);
   return (
@@ -23,6 +28,11 @@ const GlobalBackgroundBlue = () => {
   );
 };
 
+/**
+ * A React component that can change the color of the body.
+ *
+ * @returns React element.
+ */
 const GlobalColorRed = () => {
   const [global, setGlobal] = React.useState(false);
   return (
@@ -44,10 +54,28 @@ const GlobalColorRed = () => {
   );
 };
 
+/**
+ * A styled component of a `<div>` that can change the color.
+ *
+ * @param color - The color that will be used for this `<div>` element.
+ * @defaultValue "red"
+ *
+ * @returns A div tag.
+ */
 const Styled = styled.div`
   color: ${({ color }) => color || "red"};
 `;
 
+/**
+ * A React component with a `css` prop to change the color.
+ *
+ * @param color - The color that will be used for the `<div>` element.
+ * @defaultValue "red"
+ *
+ * @param children - The children of the `<div>` element.
+ *
+ * @returns A div tag.
+ */
 const CSS = ({ children, color }) => (
   <div
     data-test-id="css-div"
@@ -59,6 +87,12 @@ const CSS = ({ children, color }) => (
   </div>
 );
 
+/**
+ * A React component that wraps both a styled component and a component using
+ * the `css` prop with a button to toggle between red and blue colors.
+ *
+ * @returns React element.
+ */
 const StyledPage = () => {
   const [isBlue, setIsBlue] = React.useState(false);
   return (
@@ -82,13 +116,9 @@ const Root = connect(({ state }) => {
 });
 
 const EmotionPackage: Package = {
-  name: "emotion",
-  state: {},
-  actions: {},
   roots: {
-    emotion: Root
+    emotion: Root,
   },
-  libraries: {}
 };
 
 export default EmotionPackage;

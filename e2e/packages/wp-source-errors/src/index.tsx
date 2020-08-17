@@ -1,23 +1,33 @@
 import React from "react";
 import { connect } from "frontity";
-import WpSourceErrors from "../types";
+import { Connect } from "frontity/types";
+import WpSourceErrors, { Packages } from "../types";
 
-const Root: React.FC = connect(({ state }) => {
+/**
+ * A React component that shows if there's been an error in the request.
+ *
+ * @param props - The store injected by `connect`.
+ *
+ * @returns React Element.
+ */
+const Root: React.FC<Connect<Packages>> = ({ state }) => {
   const data = state.source.get(state.frontity.initialLink);
-  return (
-    <>
-      <div data-test-id="is404">is404: {data.is404 ? "true" : "false"}</div>
-      <div data-test-id="isError">
-        isError: {data.isError ? "true" : "false"}
-      </div>
-      <div data-test-id="status">error status: {data.errorStatus}</div>
-    </>
-  );
-});
+
+  if (data.isError)
+    return (
+      <>
+        <div data-test-id="is404">is404: {data.is404 ? "true" : "false"}</div>
+        <div data-test-id="isError">
+          isError: {data.isError ? "true" : "false"}
+        </div>
+        <div data-test-id="status">error status: {data.errorStatus}</div>
+      </>
+    );
+
+  return null;
+};
 
 const wpSourceErrors: WpSourceErrors = {
-  name: "wp-source-errors",
-  state: {},
   actions: {
     wpSourceErrors: {
       init: ({ state, libraries }) => {
@@ -31,9 +41,8 @@ const wpSourceErrors: WpSourceErrors = {
     },
   },
   roots: {
-    wpSourceErrors: Root,
+    wpSourceErrors: connect(Root),
   },
-  libraries: {},
 };
 
 export default wpSourceErrors;

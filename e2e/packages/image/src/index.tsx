@@ -27,6 +27,14 @@ import phuQuoc768x506 from "../static/images/sunrise-phu-quoc-island-ocean-768x5
 import phuQuoc1024x675 from "../static/images/sunrise-phu-quoc-island-ocean-1024x675.jpg";
 import phuQuoc1200x791 from "../static/images/sunrise-phu-quoc-island-ocean-1200x791.jpg";
 
+/**
+ * A React component that displays an iceland image.
+ *
+ * @param className - The class.
+ * @param styles - The styles, in `css` prop format.
+ *
+ * @returns The iceland image with some class and styles.
+ */
 const ImgIceland = ({ className, styles }) => (
   <Image
     className={className}
@@ -38,12 +46,20 @@ const ImgIceland = ({ className, styles }) => (
       `${iceland300x182} 300w`,
       `${iceland768x465} 768w`,
       `${iceland1024x620} 1024w`,
-      `${iceland1200x726} 1200w`
+      `${iceland1200x726} 1200w`,
     ].join(", ")}
     sizes="100vw"
   />
 );
 
+/**
+ * A React component that displays an japan image.
+ *
+ * @param className - The class.
+ * @param styles - The styles, in `css` prop format.
+ *
+ * @returns The japan image with some class and styles.
+ */
 const ImgJapan = ({ className, styles }) => (
   <Image
     className={className}
@@ -54,12 +70,20 @@ const ImgJapan = ({ className, styles }) => (
       `${japan300x200} 300w`,
       `${japan768x512} 768w`,
       `${japan1024x683} 1024w`,
-      `${japan1200x800} 1200w`
+      `${japan1200x800} 1200w`,
     ].join(", ")}
     sizes="100vw"
   />
 );
 
+/**
+ * A React component that displays an canyon image.
+ *
+ * @param className - The class.
+ * @param styles - The styles, in `css` prop format.
+ *
+ * @returns The canyon image with some class and styles.
+ */
 const ImgCanyon = ({ className, styles }) => (
   <Image
     className={className}
@@ -71,12 +95,20 @@ const ImgCanyon = ({ className, styles }) => (
       `${canyon300x200} 300w`,
       `${canyon768x512} 768w`,
       `${canyon1024x683} 1024w`,
-      `${canyon1200x800} 1200w`
+      `${canyon1200x800} 1200w`,
     ].join(", ")}
     sizes="100vw"
   />
 );
 
+/**
+ * A React component that displays an phuquoc image.
+ *
+ * @param className - The class.
+ * @param styles - The styles, in `css` prop format.
+ *
+ * @returns The phuquoc image with some class and styles.
+ */
 const ImgPhuQuoc = ({ className, styles }) => (
   <Image
     className={className}
@@ -88,12 +120,17 @@ const ImgPhuQuoc = ({ className, styles }) => (
       `${phuQuoc300x198} 300w`,
       `${phuQuoc768x506} 768w`,
       `${phuQuoc1024x675} 1024w`,
-      `${phuQuoc1200x791} 1200w`
+      `${phuQuoc1200x791} 1200w`,
     ].join(", ")}
     sizes="100vw"
   />
 );
 
+/**
+ * A React component that contains all the images to be tested when scrolling.
+ *
+ * @returns React element.
+ */
 const Root: React.FC = () => (
   <>
     <Global
@@ -159,13 +196,9 @@ const Container = styled.div`
 `;
 
 const ImagePackage: Package = {
-  name: "image",
-  state: {},
-  actions: {},
   roots: {
-    image: Root
+    image: Root,
   },
-  libraries: {}
 };
 
 export default ImagePackage;

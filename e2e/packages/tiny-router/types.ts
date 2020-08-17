@@ -1,18 +1,45 @@
 import { Package } from "frontity/types";
 import Router from "@frontity/tiny-router/types";
 
-interface TinyRouter extends Package {
-  name: "tiny-router";
-  state: {
-    router?: Router["state"]["router"];
+/**
+ * Package to do e2e testing of Frontity's TinyRouter package.
+ */
+interface TinyRouterTests extends Package {
+  /**
+   * State exposed by this package.
+   */
+  state?: {
+    /**
+     * Router namespace.
+     */
+    router: {
+      /**
+       * The state saved on the browser history.
+       */
+      state: {
+        /**
+         * A boolean that indicates if this has state or not. Used only for
+         * testing purposes.
+         */
+        hasState?: boolean;
+      };
+    };
   };
-  actions: {
-    router?: Router["actions"]["router"];
-  };
+
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
-    tinyRouter: React.ReactType;
+    /**
+     * TinyRouterTests namespace.
+     */
+    tinyRouterTests: React.ReactType;
   };
-  libraries: {};
 }
 
-export default TinyRouter;
+/**
+ * All packages used internally by TinyRouterTests.
+ */
+export type Packages = TinyRouterTests & Router;
+
+export default TinyRouterTests;

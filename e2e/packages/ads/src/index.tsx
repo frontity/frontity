@@ -142,7 +142,6 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
 };
 
 const testAds: TestAds = {
-  name: "e2e-ads",
   roots: {
     theme: connect(Theme),
   },

@@ -5,6 +5,6 @@
   "description": "Package to do e2e testing of Frontity's wp-source errors",
   "dependencies": {
     "frontity": "^1.4.3",
-    "@frontity/source": "^1.1.0"
+    "@frontity/wp-source": "^1.8.1"
   }
 }

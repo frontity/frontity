@@ -1,13 +1,18 @@
 import { Package } from "frontity/types";
 
+/**
+ * Package to do e2e testing of Frontity's font support.
+ */
 interface Fonts extends Package {
-  name: "fonts";
-  state: {};
-  actions: {};
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
+    /**
+     * Fonts namespace.
+     */
     fonts: React.ReactType;
   };
-  libraries: {};
 }
 
 export default Fonts;

@@ -1,13 +1,18 @@
 import { Package } from "frontity/types";
 
+/**
+ * Package to do e2e testing of Frontity's emotion integration.
+ */
 interface Emotion extends Package {
-  name: "emotion";
-  state: {};
-  actions: {};
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
+    /**
+     * Emotion namespace.
+     */
     emotion: React.ReactType;
   };
-  libraries: {};
 }
 
 export default Emotion;

@@ -8,10 +8,6 @@ import GoogleAdManager from "@frontity/google-ad-manager/types";
  */
 interface TestAds extends Package {
   /**
-   * Package name.
-   */
-  name: "e2e-ads";
-  /**
    * State exposed by this package.
    */
   state: {
@@ -23,6 +19,7 @@ interface TestAds extends Package {
        * Map of data describing each link in Frontity.
        */
       data: Source["state"]["source"]["data"];
+
       /**
        * Get a data object for the specified link.
        */
@@ -53,6 +50,7 @@ interface TestAds extends Package {
     theme: React.ReactType;
   };
 }
+
 /**
  * All packages used internally by TestAds.
  */

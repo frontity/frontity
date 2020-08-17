@@ -8,10 +8,6 @@ import Router from "@frontity/router/types";
  */
 interface TestAnalytics extends Package {
   /**
-   * Package name.
-   */
-  name: "e2e-analytics";
-  /**
    * State exposed by this package.
    */
   state: {
@@ -23,15 +19,18 @@ interface TestAnalytics extends Package {
        * Map of data describing each link in Frontity.
        */
       data: Source["state"]["source"]["data"];
+
       /**
        * Get a data object for the specified link.
        */
       get: Source["state"]["source"]["get"];
     };
+
     /**
      * Analytics namespace.
      */
     analytics: Analytics["state"]["analytics"];
+
     /**
      * Test Analytics namespace.
      */
@@ -41,10 +40,12 @@ interface TestAnalytics extends Package {
        * `actions.analytics.pageview()`.
        */
       pageviews: Pageview[];
+
       /**
        * Array containing all sent pageviews using `actions.analytics.event()`.
        */
       events: Event[];
+
       /**
        * Event used the {@link Theme} component to test the
        * `actions.analytics.event()` action.
@@ -65,6 +66,7 @@ interface TestAnalytics extends Package {
        */
       fetch: Source["actions"]["source"]["fetch"];
     };
+
     /**
      * Test Analytics namespace.
      */
@@ -76,6 +78,7 @@ interface TestAnalytics extends Package {
        * `state.testAnalytics.pageviews` list.
        */
       pageview: Action<Packages, Pageview>;
+
       /**
        * Action executed by `actions.analytics.pageview()`.
        *
@@ -85,6 +88,7 @@ interface TestAnalytics extends Package {
       event: Action<Packages, Event>;
     };
   };
+
   /**
    * Root components exposed by this package.
    */
@@ -95,6 +99,7 @@ interface TestAnalytics extends Package {
     theme: React.ReactType;
   };
 }
+
 /**
  * All packages used internally by TestAnalytics.
  */

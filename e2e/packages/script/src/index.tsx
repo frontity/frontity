@@ -2,6 +2,12 @@ import React from "react";
 import Script from "@frontity/components/script";
 import Package from "../types";
 
+/**
+ * A React component that loads two scripts, one from an external source, and
+ * another that contains some code.
+ *
+ * @returns React element.
+ */
 const Component: React.FC = () => (
   <>
     <p data-test-id="target">OFF</p>
@@ -26,13 +32,9 @@ const Component: React.FC = () => (
 );
 
 const ScriptPackage: Package = {
-  name: "script",
-  state: {},
-  actions: {},
   roots: {
-    script: Component
+    script: Component,
   },
-  libraries: {}
 };
 
 export default ScriptPackage;

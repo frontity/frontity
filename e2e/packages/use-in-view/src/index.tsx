@@ -7,19 +7,20 @@ if (typeof window !== "undefined") {
   if (params.has("removeIO")) delete window.IntersectionObserver;
 }
 
+/**
+ * A React component that uses the `useInView` hook.
+ *
+ * @returns React element.
+ */
 const Root: React.FC = () => {
   const { supported } = useInView();
   return <div id="supported">supported: {supported.toString()}</div>;
 };
 
 const pkg: UseInView = {
-  name: "use-in-view",
-  state: {},
-  actions: {},
   roots: {
     useInView: Root,
   },
-  libraries: {},
 };
 
 export default pkg;
