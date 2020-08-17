@@ -98,7 +98,7 @@ type UsePostTypeInfiniteScroll = (options?: {
 /**
  * A function that generates Wrapper components.
  *
- * @param options The link for the page that the Wrapper belongs to
+ * @param options - The link for the page that the Wrapper belongs to
  * and the intersection observer options for fetching and routing.
  *
  * @returns A React component that should be used to wrap the post.
@@ -108,8 +108,17 @@ export const Wrapper = ({
   fetchInViewOptions,
   routeInViewOptions,
 }: {
+  /**
+   * Link of the post that will be rendered inside this wrapper.
+   */
   link: string;
+  /**
+   * The intersection observer options for fetching.
+   */
   fetchInViewOptions?: IntersectionOptions;
+  /**
+   * The intersection observer options for routing.
+   */
   routeInViewOptions?: IntersectionOptions;
 }): React.FC =>
   connect(
@@ -176,8 +185,8 @@ export const Wrapper = ({
 /**
  * A memoized {@link Wrapper} to generate Wrapper components only once.
  *
- * @param link The link for the post that the Wrapper belongs to.
- * @param options The intersection observer options for fetching and routing.
+ * @param link - The link for the post that the Wrapper belongs to.
+ * @param options - The intersection observer options for fetching and routing.
  *
  * @returns A React component that should be used to wrap the post.
  */
@@ -186,7 +195,13 @@ const MemoizedWrapper = memoize(
   (
     link: string,
     options: {
+      /**
+       * The intersection observer options for fetching.
+       */
       fetchInViewOptions: IntersectionOptions;
+      /**
+       * The intersection observer options for routing.
+       */
       routeInViewOptions: IntersectionOptions;
     }
   ) =>
@@ -322,7 +337,9 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     }
   }, [options.active, state.router.link, items.length, hasReachedLimit]);
 
-  // Fetches the next item disregarding the limit.
+  /**
+   * Function to fetch the next item disregarding the limit.
+   */
   const fetchNext = async () => {
     if (!options.active || (!thereIsNext && !isError)) return;
 
