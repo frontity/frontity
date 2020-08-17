@@ -3,8 +3,8 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { create } from "react-test-renderer";
 import { mockIsIntersecting } from "react-intersection-observer/test-utils";
-import { createStore, Provider, batch } from "../../connect/src";
-import Link, { config } from "../link";
+import { createStore, Provider } from "../../../connect/src";
+import Link, { config } from "..";
 
 let store;
 let container;

@@ -21,7 +21,9 @@
   },
   "devDependencies": {
     "@types/react-test-renderer": "^16.9.3",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.13.1",
+    "@frontity/source": "^1.2.2",
+    "@frontity/router": "^1.1.1"
   },
   "dependencies": {
     "frontity": "^1.10.1",
