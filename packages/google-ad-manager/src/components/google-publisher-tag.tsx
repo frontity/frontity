@@ -4,9 +4,12 @@ import { Connect } from "frontity/types";
 import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
 
 /**
- * Documented at {@link GoogleAdManager.libraries.googleAdManager.GooglePublisherTag}.
+ * Documented at {@link
+ * GoogleAdManager.libraries.fills.googleAdManager.GooglePublisherTag}.
  *
- * @param props - Documented at {@link GoogleAdManager.libraries.googleAdManager.GooglePublisherTag}.
+ * @param props - Documented at {@link
+ * GoogleAdManager.libraries.fills.googleAdManager.GooglePublisherTag}.
+ *
  * @returns React element.
  */
 const GooglePublisherTag: React.FC<Connect<
@@ -14,7 +17,7 @@ const GooglePublisherTag: React.FC<Connect<
   GooglePublisherTagProps
 >> = ({ unit, size, id, targeting = {}, data }) => {
   /**
-   * Append link if data is specified.
+   * Append link to the `id` if `data` is specified.
    *
    * This allows the same units to be rendered in the same slots but in
    * different pages showed at the same time, like in an infinite-scroll
