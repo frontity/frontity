@@ -1,22 +1,36 @@
-import Theme from "./components";
-import image from "@frontity/html2react/processors/image";
-import iframe from "@frontity/html2react/processors/iframe";
+import { Package } from "frontity/types";
 
-const marsTheme = {
+/**
+ * A Frontity starter theme designed to learn Frontity.
+ */
+interface marsTheme extends Package {
+  /**
+   * The name of this package.
+   */
   name: "@frontity/mars-theme",
+
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
     /**
      * In Frontity, any package can add React components to the site.
      * We use roots for that, scoped to the `theme` namespace.
      */
-    theme: Theme,
+    theme: React.ReactType,
   },
+
+  /**
+   * The state exposed by this package.
+   */
   state: {
     /**
-     * State is where the packages store their default settings and other
-     * relevant state. It is scoped to the `theme` namespace.
+     * Theme namespace.
      */
     theme: {
+      /**
+       * The 
+       */
       autoPrefetch: "in-view",
       menu: [],
       isMobileMenuOpen: false,
@@ -26,9 +40,9 @@ const marsTheme = {
       },
     },
   },
+
   /**
-   * Actions are functions that modify the state or deal with other parts of
-   * Frontity like libraries.
+   * The actions exposed by this package.
    */
   actions: {
     theme: {
@@ -50,5 +64,3 @@ const marsTheme = {
     },
   },
 };
-
-export default marsTheme;

@@ -1,4 +1,7 @@
-export default {
+import { Settings } from "frontity/types";
+import WpSource from "@frontity/wp-source/types";
+
+const settings: Settings<WpSource> = {
   name: "mars-theme-example",
   state: {
     frontity: {
@@ -38,3 +41,5 @@ export default {
     },
   ],
 };
+
+export default settings;
