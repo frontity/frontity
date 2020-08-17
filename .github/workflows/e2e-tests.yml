@@ -29,7 +29,7 @@ jobs:
           CI: true
 
       - name: Run e2e tests
-        uses: cypress-io/github-action@v1.21.0
+        uses: cypress-io/github-action@v2
         with:
           start: npm run e2e:prod:${{ matrix.ci_node_index }}
           wait-on: "http://localhost:3001"
@@ -37,6 +37,8 @@ jobs:
           env: HEADLESS=true
           working-directory: e2e
           config: video=true,screenshotOnRunFailure=true
+          with:
+            browser: chrome
 
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v1
