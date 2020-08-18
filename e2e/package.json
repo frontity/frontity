@@ -18,6 +18,7 @@
     "cypress": "^4.7.0",
     "cypress-plugin-snapshots": "^1.4.3",
     "execa": "^4.0.3",
+    "minimist": "^1.2.5",
     "start-server-and-test": "^1.10.6",
     "wait-on": "^5.1.0"
   }
