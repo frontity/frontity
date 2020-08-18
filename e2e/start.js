@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const waitOn = require("wait-on");
 const execa = require("execa");
+const cypress = require("cypress");
 const argv = require("minimist")(process.argv.slice(2));
 
 (async () => {
@@ -55,6 +56,12 @@ const argv = require("minimist")(process.argv.slice(2));
 
     // Wait for the frontity app to become available
     await waitOn({ resources: ["http-get://localhost:3001"] });
+
+    // CD into the e2e directory
+    process.chdir("..");
+
+    // Run Cypress.
+    await cypress.open({ env: { WORDPRESS_VERSION: "latest" } });
 
     // It seems that if we run a script as a child process we have to explicitly
     // exit with a status code so that the parent process can continue
