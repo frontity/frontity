@@ -1,6 +1,6 @@
 {
   "name": "@frontity/components",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Collection of React components for Frontity",
   "keywords": [
     "frontity"
@@ -20,11 +20,11 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "devDependencies": {
-    "@types/react-test-renderer": "^16.9.2",
+    "@types/react-test-renderer": "^16.9.3",
     "react-test-renderer": "^16.13.1"
   },
   "dependencies": {
-    "frontity": "^1.10.0",
+    "frontity": "^1.10.1",
     "@frontity/hooks": "^2.0.2"
   }
 }

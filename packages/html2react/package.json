@@ -1,6 +1,6 @@
 {
   "name": "@frontity/html2react",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "HTML to React converter for Frontity",
   "keywords": [
     "frontity",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@frontity/connect": "^1.1.2",
-    "@types/react-test-renderer": "^16.9.2",
+    "@types/react-test-renderer": "^16.9.3",
     "@testing-library/react": "^9.4.0",
     "react-test-renderer": "^16.13.1"
   },
