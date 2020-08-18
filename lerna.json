@@ -1,11 +1,4 @@
 {
-  "packages": [
-    "packages/*",
-    "examples/*",
-    "e2e/project",
-    "e2e/packages/*",
-    "e2e-wp/project",
-    "e2e-wp/packages/*"
-  ],
+  "packages": ["packages/*", "examples/*", "e2e/project", "e2e/packages/*"],
   "version": "independent"
 }
