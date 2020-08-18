@@ -1,37 +1,38 @@
 #!/usr/bin/env node
-/* eslint-disable */
 const waitOn = require("wait-on");
 const execa = require("execa");
 const argv = require("minimist")(process.argv.slice(2));
 
 (async () => {
   try {
-    // Stop all the containers and remove all the volumes that they use (the `-v` option)
+    // Set the WordPress version as an environment variable to be consumed by
+    // the docker-compose.yml file.
+    process.env.WORDPRESS_VERSION = "latest";
+
+    // Stop all the containers and remove all the volumes that they use (the
+    // `-v` option).
     await execa("docker-compose", ["down", "-v"], {
       stdio: "inherit",
     });
 
     // Run all the services defined in docker-compose.yml: wp, wpcli & mysql
-    // (in the background via the -d flag)
+    // (in the background via the -d flag).
     await execa("docker-compose", ["up", "-d"], { stdio: "inherit" });
 
-    // Wait until WP is responsive
+    // Wait until WordPress is responsive.
     await waitOn({
       resources: ["http-get://localhost:8080"],
       log: true,
     });
 
-    // Give read and write permission to all files under /var/www/html in the WP container
-    // This is fine because we are only using the instances for testing
-    await execa("docker-compose", [
-      "run",
-      "-e",
-      "WORDPRESS_VERSION=5.0",
-      "wp",
-      "/bin/bash",
-      "-c",
-      "chmod -R 777 /var/www/html",
-    ]);
+    // Give read and write permission to all files under /var/www/html in the
+    // WordPress container This is fine because we are only using the instances
+    // for testing.
+    await execa(
+      "docker-compose",
+      ["run", "wp", "/bin/bash", "-c", "chmod -R 777 /var/www/html"],
+      { stdio: "inherit" }
+    );
 
     // CD into the project directory
     process.chdir("./project");
