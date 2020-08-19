@@ -29,7 +29,7 @@ let {
 
 // Sane defaults for local development
 wpVersion = wpVersion || "latest";
-target = target || "all";
+target = target || "both";
 browser = browser || "chrome";
 prod = prod || false;
 cypressCommand = cypressCommand || "open";
