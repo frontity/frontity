@@ -24,16 +24,16 @@ program
 // options: --typescript, --use-cwd.
 program
   .command("create [name]")
-  .option("-h, --theme <theme>", "The theme to use")
-  .option("-t, --typescript", "Adds support for TypeScript")
-  .option("-c, --use-cwd", "Generates the project in the current directory.")
-  .option("-n, --no-prompt", "Skips prompting the user for options")
+  .option("--theme <theme>", "The theme to use")
+  .option("--typescript", "Adds support for TypeScript")
+  .option("--use-cwd", "Generates the project in the current directory.")
+  .option("--no-prompt", "Skips prompting the user for options")
   .description("Creates a new Frontity project.")
   .action((name, { ...args }) => create({ name, ...args }));
 
 program
   .command("create-package [name]")
-  .option("-n, --namespace <value>", "Sets the namespace for this package")
+  .option("--namespace <value>", "Sets the namespace for this package")
   .option("--no-prompt", "Skips prompting the user for options")
   .description("Creates a new Frontity package in a project.")
   .action((name, { ...args }) => createPackage({ name, ...args }));
@@ -42,7 +42,7 @@ program
   .command("dev")
   .option("-p, --production", "Builds the project for production.")
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
-  .option("-s, --https", "Runs the server using https.")
+  .option("--https", "Runs the server using https.")
   .option(
     "--dont-open-browser",
     "Don't open a browser window with the localhost."
@@ -76,7 +76,7 @@ program
 program
   .command("serve")
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
-  .option("-s, --https", "Runs the server using https.")
+  .option("--https", "Runs the server using https.")
   .description("Starts a server in production mode.")
   .action(serve);
 
