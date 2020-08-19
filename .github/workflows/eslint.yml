@@ -1,4 +1,4 @@
-name: Eslint
+name: eslint
 
 on:
   # By adding a schedule task to this workflow we will automatically
