@@ -2,10 +2,8 @@
   "name": "e2e",
   "private": false,
   "scripts": {
-    "e2e:run": "start-server-and-test start:prod http://localhost:3001 cy:run",
-    "e2e:open": "start-server-and-test start:dev http://localhost:3001 cy:open",
-    "e2e-wp:run": "./e2e.js && npm run cy:run",
-    "e2e-wp:open": "./e2e.js && npm run cy:open",
+    "e2e:run": "./e2e.js --suite e2e --cypress run",
+    "e2e:open": "./e2e.js --suite e2e --cypress open",
     "cy:open": "cypress open --env HEADLESS=false",
     "cy:run": "cypress run --env HEADLESS=true",
     "start:dev": "cd project/ && npx frontity dev --port 3001 --dont-open-browser",
@@ -19,7 +17,6 @@
     "cypress-plugin-snapshots": "^1.4.3",
     "execa": "^4.0.3",
     "minimist": "^1.2.5",
-    "start-server-and-test": "^1.10.6",
     "wait-on": "^5.1.0"
   }
 }

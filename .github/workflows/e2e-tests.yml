@@ -38,7 +38,7 @@ jobs:
             --browser ${{ matrix.browser }} \
             --prod \
             --cypress off \
-            --suite all \
+            --suite all
           headless: true
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
