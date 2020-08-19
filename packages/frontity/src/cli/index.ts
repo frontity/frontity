@@ -40,7 +40,7 @@ program
 
 program
   .command("dev")
-  .option("-p, --production", "Builds the project for production.")
+  .option("--prod, --production", "Builds the project for production.")
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
   .option("--https", "Runs the server using https.")
   .option(
@@ -61,7 +61,7 @@ program
 
 program
   .command("build")
-  .option("-d, --development", "Builds the project for development.")
+  .option("--dev, --development", "Builds the project for development.")
   .option(
     "--target <target>",
     'create bundles with "es5", "module" or "both". Default target is "both".'
