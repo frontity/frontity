@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        frontity_build_type: ["all", "module", "es5"]
+        target: ["both", "module", "es5"]
         wordpress_version: ["5.0"]
         browsers: ["chrome"]
 
@@ -32,13 +32,17 @@ jobs:
       - name: Run e2e tests
         uses: cypress-io/github-action@v2
         with:
-          start: npm run e2e-test ${{ matrix.frontity_build_type }}
+          start: cd e2e && node e2e.js \
+            --wp-version ${{ matrix.wordpress_version }} \
+            --target ${{ matrix.target }} \ 
+            --browser ${{ matrix.browser }} \
+            --prod \
+            --cypress off \    # off / open / run 
+            --suite all \      # wp / e2e / all
+          headless: true
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
-          env:
-            HEADLESS: true
-            WORDPRESS_VERSION: ${{ matrix.wordpress_version }}
-            browser: ${{ matrix.browser }}
+          browser: ${{ matrix.browser }}
           working-directory: e2e
           config: video=true,screenshotOnRunFailure=true
 
