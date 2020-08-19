@@ -34,11 +34,11 @@ jobs:
         with:
           start: cd e2e && node e2e.js \
             --wp-version ${{ matrix.wordpress_version }} \
-            --target ${{ matrix.target }} \ 
+            --target ${{ matrix.target }} \
             --browser ${{ matrix.browser }} \
             --prod \
-            --cypress off \    # off / open / run 
-            --suite all \      # wp / e2e / all
+            --cypress off \
+            --suite all \
           headless: true
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
