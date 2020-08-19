@@ -41,6 +41,10 @@ validateArgs(browser, { possibleValues: ["firefox", "chrome", "edge"] });
 validateArgs(cypressCommand, { possibleValues: ["open", "run", "off"] });
 validateArgs(suite, { possibleValues: ["wp", "e2e", "all"] });
 
+// We have to make sure that we are runnng inside of the e2e directory
+// The script assumes that files are relative to this location
+process.chdir(__dirname);
+
 (async () => {
   try {
     if (suite === "all" || suite === "wp") {
@@ -103,6 +107,10 @@ validateArgs(suite, { possibleValues: ["wp", "e2e", "all"] });
 
     // CD back into the e2e directory
     process.chdir("..");
+
+    // Workaround for a bug in cypress, otherwise it fails with:
+    // electron: -max-http-header-size=1048576 is not allowed in NODE_OPTIONS
+    process.env.NODE_OPTIONS = "";
 
     // Run Cypress if the `cypressCommnand` is not "off"
     if (cypressCommand === "open") {

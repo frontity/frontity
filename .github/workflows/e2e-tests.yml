@@ -32,13 +32,13 @@ jobs:
       - name: Run e2e tests
         uses: cypress-io/github-action@v2
         with:
-          start: "cd e2e && node e2e.js \
+          start: node e2e/e2e.js \
             --wp-version ${{ matrix.wordpress_version }} \
             --target ${{ matrix.target }} \
             --browser ${{ matrix.browser }} \
             --prod \
             --cypress off \
-            --suite all"
+            --suite all
           headless: true
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
