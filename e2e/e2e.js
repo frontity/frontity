@@ -89,9 +89,13 @@ validateArgs(suite, { possibleValues: ["wp", "e2e", "all"] });
       });
     } else {
       // dev
-      execa("npx", ["frontity", "dev"], {
-        stdio: "inherit",
-      });
+      execa(
+        "npx",
+        ["frontity", "dev", "--port", "3001", "--dont-open-browser"],
+        {
+          stdio: "inherit",
+        }
+      );
     }
 
     // Wait for the frontity app to become available
