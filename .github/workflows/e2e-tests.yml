@@ -38,6 +38,10 @@ jobs:
             --prod \
             --cypress off \
             --suite all"
+          env:
+            # We need to specify the WordPress version here as well so that
+            # it's available inside of the cypress GH action container
+            WORDPRESS_VERSION: ${{ matrix.wordpress_version }}
           headless: true
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600

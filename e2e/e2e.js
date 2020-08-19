@@ -114,20 +114,20 @@ process.chdir(__dirname);
 
     // Run Cypress if the `cypressCommnand` is not "off"
     if (cypressCommand === "open") {
-      await cypress.open({ env: { WORDPRESS_VERSION: "latest" }, browser });
+      await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
     } else if (cypressCommand === "run") {
       switch (suite) {
         case "all":
-          await cypress.run({ env: { WORDPRESS_VERSION: "latest" }, browser });
+          await cypress.run({ env: { WORDPRESS_VERSION: wpVersion }, browser });
         case "wp":
           await cypress.run({
-            env: { WORDPRESS_VERSION: "latest" },
+            env: { WORDPRESS_VERSION: wpVersion },
             browser,
             spec: "./integration/wp-tests/*",
           });
         case "e2e":
           await cypress.run({
-            env: { WORDPRESS_VERSION: "latest" },
+            env: { WORDPRESS_VERSION: wpVersion },
             browser,
             spec: "./integration/*.js",
           });

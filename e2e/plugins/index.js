@@ -17,7 +17,7 @@ module.exports = (on, config) => {
         (async () => {
           try {
             await execa.command(
-              `docker-compose run --rm wpcli wp plugin install ${name} --activate`,
+              `docker-compose run --rm wpcli wp plugin install ${name}`,
               { stdio: "inherit" }
             );
           } catch (err) {
