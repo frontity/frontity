@@ -12,9 +12,12 @@ module.exports = (on, config) => {
       //
       return new Promise((resolve, reject) => {
         execa
-          .command(`docker-compose run --rm wpcli wp plugin install ${name}`, {
-            stdio: "inherit",
-          })
+          .command(
+            `docker-compose run --rm wpcli wp plugin install ${name} --activate`,
+            {
+              stdio: "inherit",
+            }
+          )
           .then(() => resolve(null))
           .catch((e) => reject(e));
       });
@@ -54,6 +57,7 @@ module.exports = (on, config) => {
             `docker-compose exec -T wp /bin/bash -c "rm -rf /var/www/html/wp-content/plugins/*"`,
             {
               stdio: "inherit",
+              shell: true,
             }
           )
           .then(() => resolve(null))
