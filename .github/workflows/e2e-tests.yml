@@ -14,7 +14,7 @@ jobs:
         target: [both]
         image: ["cypress/browsers:node12.18.0-chrome83-ff77"]
         os: [ubuntu-16.04]
-        options: ["--user 1000"]
+        options: ["--user node"]
 
         include:
           - name: Test Firefox
@@ -31,7 +31,7 @@ jobs:
             target: both
             image: cypress/browsers:node12.18.0-chrome83-ff77
             os: ubuntu-16.04
-            options: --user 1001
+            options: --user node
 
           # - name: Test ES5 in Chrome
           #   wp-version: latest
