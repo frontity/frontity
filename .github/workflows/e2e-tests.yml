@@ -75,6 +75,10 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    container:
+      image: ${{ matrix.image }}
+      options: ${ matrix.options }
+
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -97,14 +101,14 @@ jobs:
         env:
           # We need to specify the WordPress version here as well so that
           # it's available inside of the cypress GH action container
-          WORDPRESS_VERSION: ${{ matrix.wordpress_version }}
+          WORDPRESS_VERSION: ${{ matrix.wp-version }}
         with:
           start: "node e2e.js \
-            --wpVersion ${{ matrix.wordpress_version }} \
+            --wpVersion ${{ matrix.wp-version }} \
             --target ${{ matrix.target }} \
             --prod \
             --cypress off \
-            --publicPath ${{ matrix.publicPath }} \
+            --publicPath ${{ matrix.public-path }} \
             --suite all"
           headless: true
           wait-on: "http://localhost:3001"
