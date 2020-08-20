@@ -34,4 +34,4 @@ jobs:
           CI: true
 
       - name: Run Eslint
-        uses: bradennapier/eslint-plus-action@v3
+        uses: bradennapier/eslint-plus-action@v3.4.2
