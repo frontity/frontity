@@ -25,12 +25,17 @@
     "@frontity/type-declarations": "1.1.0",
     "@frontity/types": "1.4.2",
     "@frontity/wp-source": "1.8.1",
-    "@frontity/yoast": "1.2.0"
+    "@frontity/yoast": "1.2.0",
+    "@frontity/google-tag-manager-analytics": "1.0.0",
+    "@frontity/wp-comments": "0.2.1"
   },
   "changesets": [
     "eleven-adults-chew",
+    "eleven-pandas-look",
     "fair-apples-hear",
     "moody-windows-love",
-    "sharp-rivers-train"
+    "sharp-rivers-train",
+    "tiny-kangaroos-develop",
+    "twelve-turtles-arrive"
   ]
 }

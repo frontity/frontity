@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.0-infinite-scroll-beta.2
+
+### Minor Changes
+
+- [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Adds `isError` boolean to infinite scroll hooks will be `true` when either the last post or the last page has failed to fetch.
+
 ## 2.1.0-infinite-scroll-beta.1
 
 ### Patch Changes
@@ -18,6 +24,7 @@
   - @frontity/router@1.2.0-infinite-scroll-beta.0
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/source@1.2.2-infinite-scroll-beta.0
+
 ## 2.0.2
 
 ### Patch Changes

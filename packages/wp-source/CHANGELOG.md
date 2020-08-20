@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.8.2-infinite-scroll-beta.0
+
+### Patch Changes
+
+- [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Fix an array check by using `Array.isArray` instead of `instanceof Array`.
+
 ## 1.7.2-infinite-scroll-beta.0
 
 ### Patch Changes
@@ -7,6 +13,7 @@
 - Updated dependencies []:
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/source@1.2.2-infinite-scroll-beta.0
+
 ## 1.8.1
 
 ### Patch Changes
