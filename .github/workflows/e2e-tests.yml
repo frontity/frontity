@@ -17,9 +17,9 @@ jobs:
           - Test custom relative public-path
           - Test custom absolute public-path
 
-        image: ["cypress/browsers:node12.18.0-chrome83-ff77"]
-        os: ["ubuntu-16.04"]
-        options: ["--user 1000"]
+        image: [cypress/browsers:node12.18.0-chrome83-ff77]
+        os: [ubuntu-16.04]
+        options: [--user 1000]
 
         include:
           - name: Test Chrome
