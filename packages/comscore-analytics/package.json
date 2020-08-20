@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@frontity/analytics": "^1.2.0",
-    "frontity": "^1.10.0"
+    "frontity": "^1.10.1"
   },
   "devDependencies": {
     "react-helmet-async": "1.0.4",

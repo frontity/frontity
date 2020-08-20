@@ -37,6 +37,7 @@ jobs:
           env: HEADLESS=true
           working-directory: e2e
           config: video=true,screenshotOnRunFailure=true
+          browser: chrome
 
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v1

@@ -28,7 +28,7 @@
     "ramda": "^0.26.1"
   },
   "devDependencies": {
-    "@frontity/types": "^1.4.1",
+    "@frontity/types": "^1.4.1-infinite-scroll-beta.0",
     "@types/ramda": "0.26.33"
   }
 }

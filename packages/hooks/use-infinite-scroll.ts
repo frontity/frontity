@@ -11,7 +11,7 @@ import Router from "@frontity/router/types";
  * [`react-intersection-observer`](https://github.com/thebuilder/react-intersection-observer)
  * package.
  */
-type IntersectionOptions = Parameters<typeof useInView>[0];
+export type IntersectionOptions = Parameters<typeof useInView>[0];
 
 /**
  * The types of the {@link useInfiniteScroll} hook.
@@ -100,7 +100,6 @@ type UseInfiniteScroll = (options: {
        * Boolean that indicates when the element used to trigger
        * `actions.source.fetch` is in the screen.
        */
-
       fetchInView: boolean;
     };
 
@@ -112,7 +111,7 @@ type UseInfiniteScroll = (options: {
  *
  * @param options - The options of the hook. Defined in {@link UseInfiniteScroll}.
  * @returns - An object with refs and booleans to use in your own hook. Defined
- * at {@link useArchiveInfiniteScroll}
+ * at {@link useArchiveInfiniteScroll}.
  */
 const useInfiniteScroll: UseInfiniteScroll = ({
   currentLink,

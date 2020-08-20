@@ -3,15 +3,17 @@
   "private": false,
   "scripts": {
     "e2e:run": "start-server-and-test start:prod http://localhost:3001 cy:run",
+    "e2e:run:firefox": "start-server-and-test start:prod http://localhost:3001 cy:run:firefox",
     "e2e:open": "start-server-and-test start:dev http://localhost:3001 cy:open",
     "cy:open": "cypress open --env HEADLESS=false",
-    "cy:run": "cypress run --env HEADLESS=true",
+    "cy:run": "cypress run --env HEADLESS=true --browser chrome",
+    "cy:run:firefox": "cypress run --env HEADLESS=true --browser firefox",
     "start:dev": "cd project/ && npx frontity dev --port 3001 --dont-open-browser",
     "start:dev:inspect": "cd project/ && node --inspect ./node_modules/.bin/frontity dev --port 3001",
     "start:prod": "cd project/ && npx frontity build && npx frontity serve --port 3001"
   },
   "devDependencies": {
-    "cypress": "^4.7.0",
+    "cypress": "^4.9.0",
     "cypress-plugin-snapshots": "^1.4.3",
     "start-server-and-test": "^1.10.6"
   }

@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useConnect, connect, css } from "frontity";
-import { Connect } from "frontity/types";
 import memoize from "ramda/src/memoizeWith";
-import useInfiniteScroll from "./use-infinite-scroll";
+import useInfiniteScroll, { IntersectionOptions } from "./use-infinite-scroll";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -23,6 +22,16 @@ type UseArchiveInfiniteScroll = (options?: {
    * them.
    */
   active?: boolean;
+
+  /**
+   * The intersection observer options for fetching.
+   */
+  fetchInViewOptions?: IntersectionOptions;
+
+  /**
+   * The intersection observer options for routing.
+   */
+  routeInViewOptions?: IntersectionOptions;
 }) => {
   /**
    * An array of the existing pages. Users should iterate over this array in
@@ -48,7 +57,7 @@ type UseArchiveInfiniteScroll = (options?: {
     /**
      * The Wrapper component that should wrap the real `Archive` component.
      */
-    Wrapper: React.FC<Connect<Source & Router>>;
+    Wrapper: React.FC;
   }[];
 
   /**
@@ -62,6 +71,11 @@ type UseArchiveInfiniteScroll = (options?: {
   isFetching: boolean;
 
   /**
+   * If the next page returned an error. Useful to try again.
+   */
+  isError: boolean;
+
+  /**
    * A function that fetches the next page. Useful when the limit has been
    * reached (`isLimit === true`) and the user pushes a button to get the next
    * page.
@@ -72,11 +86,29 @@ type UseArchiveInfiniteScroll = (options?: {
 /**
  * A function that generates Wrapper components.
  *
- * @param link The link for the page that the Wrapper belongs to.
+ * @param options - The link for the page that the Wrapper belongs to
+ * and the intersection observer options for fetching and routing.
  *
  * @returns A React component that should be used to wrap the page.
  */
-export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
+export const Wrapper = ({
+  link,
+  fetchInViewOptions,
+  routeInViewOptions,
+}: {
+  /**
+   * Link of the post that will be rendered inside this wrapper.
+   */
+  link: string;
+  /**
+   * The intersection observer options for fetching.
+   */
+  fetchInViewOptions?: IntersectionOptions;
+  /**
+   * The intersection observer options for routing.
+   */
+  routeInViewOptions?: IntersectionOptions;
+}): React.FC =>
   connect(
     ({ children, className }) => {
       const { state } = useConnect<Source & Router>();
@@ -97,9 +129,11 @@ export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
       const { supported, fetchRef, routeRef } = useInfiniteScroll({
         currentLink: link,
         nextLink: next?.link,
+        fetchInViewOptions,
+        routeInViewOptions,
       });
 
-      if (!current.isReady) return null;
+      if (!current.isReady || current.isError) return null;
       if (!supported) return children;
 
       const container = css`
@@ -125,11 +159,32 @@ export const Wrapper = (link: string): React.FC<Connect<Source & Router>> =>
 /**
  * A memoized {@link Wrapper} to generate Wrapper components only once.
  *
- * @param link The link for the page that the Wrapper belongs to.
+ * @param link - The link for the page that the Wrapper belongs to.
+ * @param options - The intersection observer options for fetching and routing.
  *
  * @returns A React component that should be used to wrap the page.
  */
-const MemoizedWrapper = memoize((link: string) => link, Wrapper);
+const MemoizedWrapper = memoize(
+  (link) => link,
+  (
+    link: string,
+    options: {
+      /**
+       * The intersection observer options for fetching.
+       */
+      fetchInViewOptions: IntersectionOptions;
+      /**
+       * The intersection observer options for routing.
+       */
+      routeInViewOptions: IntersectionOptions;
+    }
+  ) =>
+    Wrapper({
+      link,
+      fetchInViewOptions: options.fetchInViewOptions,
+      routeInViewOptions: options.routeInViewOptions,
+    })
+);
 
 /**
  * A hook used to add infinite scroll to any Frontity archive.
@@ -175,26 +230,38 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
   const hasReachedLimit = !!limit && links.length >= limit;
   const thereIsNext = !!last.next;
   const isFetching = last.isFetching;
+  const isError = !!last.isError;
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
-  // Requests the next page disregarding the limit.
+  /**
+   * Function to fetch the next item disregarding the limit.
+   */
   const fetchNext = async () => {
-    if (!options.active || !thereIsNext || links.includes(last.next)) return;
+    if (
+      !options.active ||
+      (!thereIsNext && !isError) ||
+      links.includes(last.next)
+    )
+      return;
 
-    links.push(last.next);
+    if (isError) {
+      await actions.source.fetch(links[links.length - 1], { force: true });
+    } else {
+      links.push(last.next);
 
-    actions.router.updateState({
-      ...state.router.state,
-      infiniteScroll: {
-        ...state.router.state.infiniteScroll,
-        links,
-      },
-    });
+      actions.router.updateState({
+        ...state.router.state,
+        infiniteScroll: {
+          ...state.router.state.infiniteScroll,
+          links,
+        },
+      });
 
-    const next = state.source.get(last.next);
+      const next = state.source.get(last.next);
 
-    if (!next.isReady && !next.isFetching) {
-      await actions.source.fetch(last.next);
+      if (!next.isReady && !next.isFetching) {
+        await actions.source.fetch(last.next);
+      }
     }
   };
 
@@ -204,14 +271,19 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
     link: link,
     isLast:
       (link === last.link && last.isReady) ||
+      (link === links[links.length - 1] && !!last.isError) ||
       (link === links[links.length - 2] && !last.isReady),
-    Wrapper: MemoizedWrapper(link),
+    Wrapper: MemoizedWrapper(link, {
+      fetchInViewOptions: options.fetchInViewOptions,
+      routeInViewOptions: options.routeInViewOptions,
+    }),
   }));
 
   return {
     pages,
     isLimit,
     isFetching,
+    isError,
     fetchNext,
   };
 };
