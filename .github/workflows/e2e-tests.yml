@@ -11,6 +11,7 @@ jobs:
         target: ["both", "module", "es5"]
         wordpress_version: ["5.0"]
         browsers: ["chrome"]
+        publicPath: ["/custom/path", "http://localhost:3001/custom/path/"]
 
     steps:
       - name: Checkout
@@ -37,10 +38,11 @@ jobs:
           WORDPRESS_VERSION: ${{ matrix.wordpress_version }}
         with:
           start: "node e2e.js \
-            --wp-version ${{ matrix.wordpress_version }} \
+            --wpVersion ${{ matrix.wordpress_version }} \
             --target ${{ matrix.target }} \
             --prod \
             --cypress off \
+            --publicPath ${{ matrix.publicPath }} \
             --suite all"
           headless: true
           wait-on: "http://localhost:3001"

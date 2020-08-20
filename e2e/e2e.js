@@ -19,12 +19,13 @@ function validateArgs(arg, { possibleValues }) {
 }
 
 let {
-  "wp-version": wpVersion,
+  wpVersion,
   target,
   browser,
   prod,
   cypress: cypressCommand,
   suite,
+  publicPath,
 } = argv;
 
 // Sane defaults for local development
@@ -82,8 +83,15 @@ process.chdir(__dirname);
     process.chdir("./project");
 
     if (prod) {
+      let args = ["frontity", "build", "--target", target];
+
+      // Only if publicPath was passed as a CLI argument, add it to the final command
+      if (publicPath) {
+        args = [...args, "--publicPath", publicPath];
+      }
+
       // build
-      await execa("npx", ["frontity", "build", "--target", target], {
+      await execa("npx", args, {
         stdio: "inherit",
       });
 

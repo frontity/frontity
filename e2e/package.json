@@ -2,13 +2,8 @@
   "name": "e2e",
   "private": false,
   "scripts": {
-    "e2e:run": "./e2e.js --suite e2e --cypress run",
-    "e2e:open": "./e2e.js --suite e2e --cypress open",
-    "cy:open": "cypress open --env HEADLESS=false",
-    "cy:run": "cypress run --env HEADLESS=true",
-    "start:dev": "cd project/ && npx frontity dev --port 3001 --dont-open-browser",
-    "start:dev:inspect": "cd project/ && node --inspect ./node_modules/.bin/frontity dev --port 3001",
-    "start:prod": "cd project/ && npx frontity build && npx frontity serve --port 3001"
+    "start": "./e2e.js",
+    "start:only-e2e": "./e2e.js --suite e2e"
   },
   "devDependencies": {
     "@types/execa": "^2.0.0",
