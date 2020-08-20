@@ -1,18 +1,13 @@
-// This is just a test for illustrative purposes for now
-
 describe("WP test", () => {
   beforeEach(() => {
-    cy.task("installPlugin", { name: "all-in-one-seo-pack" });
-
+    cy.task("resetDatabase");
+    cy.task("removeAllPlugins");
     cy.visit("http://localhost:3001?name=e2e-wp-test");
   });
 
   it("should work", () => {
-    cy.get("[id='test']").should("have.attr", "class", "test");
-  });
-
-  it("should work as well", () => {
-    // Maybe just in this test we want to install another plugin like Yoast
+    // the path is relative to the e2e directory
+    cy.task("loadDatabase", { path: "./data/db.sql" });
     cy.task("installPlugin", { name: "wordpress-seo" });
     cy.get("[id='test']").should("have.attr", "class", "test");
   });

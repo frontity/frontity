@@ -5,28 +5,59 @@ const execa = require("execa");
 module.exports = (on, config) => {
   on("task", {
     installPlugin({ name }) {
-      // Because cypress commands are async but are not promises,
-      // we have to wrap all task functions with a new Promise constructor.
-      // https://stackoverflow.com/a/49980928/2638310
-      //
-      // Asynchronous tasks HAVE TO return a promise.
+      // Asynchronous tasks in cypress HAVE TO return a promise which resolves to a value or a null.
       // https://docs.cypress.io/api/commands/task.html#Return-a-Promise-from-an-asynchronous-task
       //
+      // For this reason it's more convenient to NOT use async/await here.
       //
       return new Promise((resolve, reject) => {
-        (async () => {
-          try {
-            await execa.command(
-              `docker-compose run --rm wpcli wp plugin install ${name}`,
-              { stdio: "inherit" }
-            );
-          } catch (err) {
-            reject(err);
-          }
-          // A cypress task HAS to return null or return a promise that resolves to null
-          // otherwise it will fail
-          resolve(null);
-        })();
+        execa
+          .command(`docker-compose run --rm wpcli wp plugin install ${name}`, {
+            stdio: "inherit",
+          })
+          .then(() => resolve(null))
+          .catch((e) => reject(e));
+      });
+    },
+    loadDatabase({ path }) {
+      return new Promise((resolve, reject) => {
+        execa
+          .command(
+            `docker-compose exec -T db mysql -uroot -ppassword wordpress < ${path}`,
+            {
+              stdio: "inherit",
+              shell: true, // Because we use file redirection (the "<") in the command
+            }
+          )
+          .then(() => resolve(null))
+          .catch((e) => reject(e));
+      });
+    },
+    resetDatabase() {
+      return new Promise((resolve, reject) => {
+        execa
+          .command(
+            `docker-compose exec -T db mysql -uroot -ppassword wordpress < ./data/db.sql`,
+            {
+              stdio: "inherit",
+              shell: true, // Because we use file redirection (the "<") in the command
+            }
+          )
+          .then(() => resolve(null))
+          .catch((e) => reject(e));
+      });
+    },
+    removeAllPlugins() {
+      return new Promise((resolve, reject) => {
+        execa
+          .command(
+            `docker-compose exec -T wp /bin/bash -c "rm -rf /var/www/html/wp-content/plugins/*"`,
+            {
+              stdio: "inherit",
+            }
+          )
+          .then(() => resolve(null))
+          .catch((e) => reject(e));
       });
     },
   });
