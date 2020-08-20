@@ -141,10 +141,6 @@ process.chdir(__dirname);
           });
       }
     }
-
-    // It seems that if we run a script as a child process we have to explicitly
-    // exit with a status code so that the parent process can continue
-    process.exit(0);
   } catch (err) {
     console.error(err);
 
