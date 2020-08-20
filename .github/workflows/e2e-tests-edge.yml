@@ -1,4 +1,4 @@
-name: firefox e2e tests
+name: edge e2e tests
 
 on: [pull_request]
 
