@@ -10,7 +10,7 @@ jobs:
       matrix:
         wp-version: [latest, 5.4]
         target: [both, es5]
-        public-path: [http://localhost:3001/custom/path, /custom/path]
+        public-path: ["http://localhost:3001/custom/path", /custom/path]
 
     steps:
       - name: Checkout
