@@ -4,6 +4,8 @@ on: [pull_request]
 
 jobs:
   e2e-tests:
+    runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         name:
@@ -14,9 +16,8 @@ jobs:
           - Test ES5 in Firefox
           - Test ES5 in Edge
           - Test previous WordPress version
-          - Test custom relative public-path
-          - Test custom absolute public-path
-
+          - "Test custom relative public-path"
+          - "Test custom absolute public-path"
         image: ["cypress/browsers:node12.18.0-chrome83-ff77"]
         os: ["ubuntu-16.04"]
         options: ["--user 1000"]
@@ -37,7 +38,7 @@ jobs:
             wp-version: latest
             browser: edge
             target: both
-            os: windows-latest
+            os: "windows-latest"
 
           - name: Test ES5 in Chrome
             wp-version: latest
@@ -54,26 +55,24 @@ jobs:
             wp-version: latest
             browser: edge
             target: es5
-            os: windows-latest
+            os: "windows-latest"
 
           - name: Test previous WordPress version
-            wp-version: 5.4
+            wp-version: "5.4"
             browser: chrome
             target: both
 
-          - name: Test custom relative public-path
+          - name: "Test custom relative public-path"
             wp-version: latest
             browser: chrome
             target: both
             public-path: /custom/path
 
-          - name: Test custom absolute public-path
+          - name: "Test custom absolute public-path"
             wp-version: latest
             browser: chrome
             target: both
             public-path: "http://localhost:3001/custom/path"
-
-    runs-on: ${{ matrix.os }}
 
     container:
       image: ${{ matrix.image }}
