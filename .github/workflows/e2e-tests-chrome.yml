@@ -1,4 +1,4 @@
-name: e2e tests
+name: chrome e2e tests
 
 on: [pull_request]
 
@@ -8,8 +8,9 @@ jobs:
 
     strategy:
       matrix:
-        ci_node_total: [3]
-        ci_node_index: ["all", "module", "es5"]
+        wp-version: [latest, 5.4]
+        target: [both, es5]
+        public-path: ["http://localhost:3001/custom/path", /custom/path]
 
     steps:
       - name: Checkout
@@ -29,12 +30,22 @@ jobs:
           CI: true
 
       - name: Run e2e tests
-        uses: cypress-io/github-action@v1.21.0
+        uses: cypress-io/github-action@v2
+        env:
+          # We need to specify the WordPress version here as well so that
+          # it's available inside of the cypress GH action container
+          WORDPRESS_VERSION: ${{ matrix.wp-version }}
         with:
-          start: npm run e2e:prod:${{ matrix.ci_node_index }}
+          start: "node e2e.js \
+            --wpVersion ${{ matrix.wp-version }} \
+            --target ${{ matrix.target }} \
+            --prod \
+            --cypress off \
+            --publicPath ${{ matrix.public-path }} \
+            --suite all"
           wait-on: "http://localhost:3001"
-          wait-on-timeout: 180
-          env: HEADLESS=true
+          wait-on-timeout: 600
+          browser: chrome
           working-directory: e2e
           config: video=true,screenshotOnRunFailure=true
 

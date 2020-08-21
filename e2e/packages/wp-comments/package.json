@@ -1,0 +1,9 @@
+{
+  "name": "e2e-wp-comments",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to run e2e tests of wp-comments",
+  "dependencies": {
+    "frontity": "^1.4.3"
+  }
+}
