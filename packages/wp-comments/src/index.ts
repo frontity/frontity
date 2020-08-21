@@ -65,7 +65,7 @@ const wpComments: WpComments = {
           author,
           author_name,
           author_email,
-          url,
+          author_url,
           parent,
         } = fields;
 
@@ -75,7 +75,7 @@ const wpComments: WpComments = {
         body.set("author", author.toString());
         body.set("author_name", author_name);
         body.set("author_email", author_email);
-        body.set("url", url);
+        body.set("author_url", author_url);
         body.set("parent", parent.toString());
         body.set("post", postId.toString());
 

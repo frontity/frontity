@@ -140,16 +140,16 @@ export interface Fields {
   author_email?: string;
 
   /**
-   * Content of the comment.
-   */
-  content: string;
-
-  /**
    * URL of the author's site.
    *
    * @defaultValue ""
    */
-  url?: string;
+  author_url?: string;
+
+  /**
+   * Content of the comment.
+   */
+  content: string;
 
   /**
    * ID of the comment to which this one responds.
