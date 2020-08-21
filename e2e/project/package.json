@@ -36,7 +36,7 @@
     "e2e-slot-and-fill": "^1.0.0",
     "e2e-tiny-router": "^1.0.0",
     "e2e-use-in-view": "^1.0.0",
-    "e2e-wp-comments": "^1.0.0",
+    "e2e-wp-test": "^1.0.0",
     "e2e-ads": "^1.0.0",
     "frontity": "^1.5.2"
   }

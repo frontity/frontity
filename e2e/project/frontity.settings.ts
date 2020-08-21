@@ -129,9 +129,9 @@ const settings: Settings = [
     ],
   },
   {
-    name: "wp-comments",
+    name: "wp-test",
     packages: [
-      "e2e-wp-comments",
+      "e2e-wp-test",
       "@frontity/tiny-router",
       {
         name: "@frontity/wp-source",
