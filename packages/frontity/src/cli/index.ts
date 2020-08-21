@@ -51,9 +51,9 @@ program
     "--target <target>",
     'create bundles with "es5" or "module". Default target is "module".'
   )
-
+  .option("--publicPath <path>", "DEPRECATED, use --public-path instead.")
   .option(
-    "--publicPath <path>",
+    "--public-path <path>",
     'set the public path for static assets. Default path is "/static/".'
   )
   .description("Starts a server in development mode.")
@@ -66,8 +66,9 @@ program
     "--target <target>",
     'create bundles with "es5", "module" or "both". Default target is "both".'
   )
+  .option("--publicPath <path>", "DEPRECATED, use --public-path instead.")
   .option(
-    "--publicPath <path>",
+    "--public-path <path>",
     'set the public path for static assets. Default path is "/static/".'
   )
   .description("Builds the project for production.")
