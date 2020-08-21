@@ -13,7 +13,7 @@
 You can dump the contents of the database with the `exportDatabase.sh` script:
 
 ```sh
-./exportDatabase.sh > ./fixtures/dump.sql
+./exportDatabase.js > ./fixtures/dump.sql
 ```
 
 This is very useful for local development when you make manual changes in the WP instance and want to persist them for the future
