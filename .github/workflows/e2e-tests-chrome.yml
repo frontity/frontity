@@ -43,7 +43,6 @@ jobs:
             --cypress off \
             --publicPath ${{ matrix.public-path }} \
             --suite all"
-          headless: true
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
           browser: chrome
