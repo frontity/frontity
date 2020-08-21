@@ -1,8 +1,8 @@
 /* eslint-disable */
 import { Package } from "frontity/types";
 
-interface WPTest extends Package {
-  name: "e2e-wp-test";
+interface WPComments extends Package {
+  name: "e2e-wp-comments";
   state: {};
   actions: {};
   roots: {
@@ -11,4 +11,4 @@ interface WPTest extends Package {
   libraries: {};
 }
 
-export default WPTest;
+export default WPComments;
