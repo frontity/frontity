@@ -6,11 +6,13 @@ interface Html2ReactTests extends Package {
   state: {
     html2reactTests: {
       color: string;
+      removeParagraphs: boolean;
     };
   };
   actions: {
     html2reactTests: {
       setColor: Action<Html2ReactTests, string>;
+      removeParagraphs: Action<Html2ReactTests>;
     };
   };
   roots: {

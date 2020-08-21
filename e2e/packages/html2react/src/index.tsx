@@ -16,6 +16,12 @@ const Root: React.FC<Connect<Html2ReactTests>> = ({ actions, libraries }) => {
       >
         Change color
       </button>
+      <button
+        id="remove-paragraphs"
+        onClick={() => actions.html2reactTests.removeParagraphs()}
+      >
+        Remove paragraphs
+      </button>
     </>
   );
 };
@@ -24,24 +30,28 @@ const html2reactTests: Html2ReactTests = {
   name: "e2e-html2react",
   state: {
     html2reactTests: {
-      color: "blue"
-    }
+      color: "blue",
+      removeParagraphs: false,
+    },
   },
   actions: {
     html2reactTests: {
       setColor: ({ state }) => (color: string) => {
         state.html2reactTests.color = color;
-      }
-    }
+      },
+      removeParagraphs: ({ state }) => {
+        state.html2reactTests.removeParagraphs = true;
+      },
+    },
   },
   roots: {
-    html2reactTests: connect(Root)
+    html2reactTests: connect(Root),
   },
   libraries: {
     html2react: {
-      processors
-    }
-  }
+      processors,
+    },
+  },
 };
 
 export default html2reactTests;
