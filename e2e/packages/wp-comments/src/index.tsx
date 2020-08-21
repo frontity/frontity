@@ -14,8 +14,8 @@ const Component: React.FC = () => (
   </>
 );
 
-const WPTestPackage: Package = {
-  name: "e2e-wp-test",
+const WPCommentsPackage: Package = {
+  name: "e2e-wp-comments",
   state: {},
   actions: {},
   roots: {
@@ -24,4 +24,4 @@ const WPTestPackage: Package = {
   libraries: {},
 };
 
-export default WPTestPackage;
+export default WPCommentsPackage;

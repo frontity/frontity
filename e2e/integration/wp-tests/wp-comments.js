@@ -1,8 +1,8 @@
-describe("WP test", () => {
+describe("", () => {
   beforeEach(() => {
     cy.task("resetDatabase");
     cy.task("removeAllPlugins");
-    cy.visit("http://localhost:3001?name=e2e-wp-test");
+    cy.visit("http://localhost:3001?name=e2e-wp-comments");
   });
 
   it("should work", () => {
