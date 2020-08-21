@@ -127,17 +127,22 @@ export interface Fields {
   /**
    * Author's name.
    */
-  author: number;
+  author_name?: string;
+
+  /**
+   * The ID of the author.
+   */
+  author?: number;
 
   /**
    * Author's email.
    */
-  email: string;
+  author_email?: string;
 
   /**
-   * Text of the comment.
+   * Content of the comment.
    */
-  comment: string;
+  content: string;
 
   /**
    * URL of the author's site.

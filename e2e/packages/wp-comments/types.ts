@@ -6,7 +6,7 @@ interface WPComments extends Package {
   state: {};
   actions: {};
   roots: {
-    testing: React.ReactType;
+    wpComments: React.ReactType;
   };
   libraries: {};
 }

@@ -1,25 +1,33 @@
 import React from "react";
 import Package from "../types";
+import { connect } from "frontity";
 
 /**
- * This is a basic test.
+ * This is a basic test of the wp-comments.
  *
  * @returns React Element.
  */
-const Component: React.FC = () => (
+const Component: React.FC = connect(({ actions }) => (
   <>
-    <div id="test" className="test">
-      hello test
-    </div>
+    <button
+      onClick={() =>
+        actions.comments.submit(1, {
+          content: "Hello world!",
+          email: "frontibotito@frontity.org",
+        })
+      }
+    >
+      Comment
+    </button>
   </>
-);
+));
 
 const WPCommentsPackage: Package = {
   name: "e2e-wp-comments",
   state: {},
   actions: {},
   roots: {
-    testing: Component,
+    wpComments: Component,
   },
   libraries: {},
 };

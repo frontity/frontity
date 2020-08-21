@@ -60,13 +60,23 @@ const wpComments: WpComments = {
           ...fields,
         };
 
+        const {
+          content,
+          author,
+          author_name,
+          author_email,
+          url,
+          parent,
+        } = fields;
+
         // Generate form content.
         const body = new URLSearchParams();
-        body.set("content", fields.content);
-        body.set("author", fields.author.toString());
-        body.set("email", fields.email);
-        body.set("url", fields.url);
-        body.set("parent", fields.parent.toString());
+        body.set("content", content);
+        body.set("author", author.toString());
+        body.set("author_name", author_name);
+        body.set("author_email", author_email);
+        body.set("url", url);
+        body.set("parent", parent.toString());
         body.set("post", postId.toString());
 
         // Generate endpoint URL.
