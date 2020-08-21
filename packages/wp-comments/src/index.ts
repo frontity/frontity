@@ -62,12 +62,12 @@ const wpComments: WpComments = {
 
         // Generate form content.
         const body = new URLSearchParams();
-        body.set("comment", fields.comment);
-        body.set("author", fields.author);
+        body.set("content", fields.content);
+        body.set("author", fields.author.toString());
         body.set("email", fields.email);
         body.set("url", fields.url);
-        body.set("comment_parent", fields.parent.toString());
-        body.set("comment_post_ID", postId.toString());
+        body.set("parent", fields.parent.toString());
+        body.set("post", postId.toString());
 
         // Generate endpoint URL.
         const commentsPost = state.source.api + "/wp/v2/comments";
@@ -147,11 +147,7 @@ const wpComments: WpComments = {
         if (!form || !fields) {
           form = state.comments.forms[postId] = {
             fields: {
-              comment: "",
-              author: "",
-              email: "",
-              url: "",
-              parent: 0,
+              content: "",
             },
           };
         }

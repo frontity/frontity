@@ -127,7 +127,7 @@ export interface Fields {
   /**
    * Author's name.
    */
-  author: string;
+  author: number;
 
   /**
    * Author's email.
