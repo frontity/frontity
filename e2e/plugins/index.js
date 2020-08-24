@@ -4,11 +4,13 @@ const execa = require("execa");
 
 module.exports = (on, config) => {
   on("task", {
-    installPlugin({ name }) {
+    installPlugin({ name, version }) {
       return (async () => {
         try {
           await execa.command(
-            `docker-compose run --rm wpcli wp plugin install ${name}`,
+            `docker-compose run --rm wpcli wp plugin install ${name}${
+              version ? ` --version=${version}` : ""
+            }`,
             { stdio: "inherit" }
           );
           // Asynchronous tasks in cypress HAVE TO return a promise which resolves to a value or a null.
