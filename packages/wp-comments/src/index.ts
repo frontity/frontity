@@ -60,24 +60,26 @@ const wpComments: WpComments = {
           ...fields,
         };
 
-        const {
-          content,
-          author,
-          author_name,
-          author_email,
-          author_url,
-          parent,
-        } = fields;
+        const body = new URLSearchParams();
+
+        /**
+         * Set the request URL params.
+         *
+         * @param param - A URL param to be set on the request to create a comment. The possible arguments are listed in https://developer.wordpress.org/rest-api/reference/comments/#arguments-2.
+         * @param value - The value for the param.
+         */
+        const setBody = (param: string, value: string) => {
+          if (value) body.set(param, value);
+        };
 
         // Generate form content.
-        const body = new URLSearchParams();
-        body.set("content", content);
-        body.set("author", author.toString());
-        body.set("author_name", author_name);
-        body.set("author_email", author_email);
-        body.set("author_url", author_url);
-        body.set("parent", parent.toString());
-        body.set("post", postId.toString());
+        setBody("content", fields?.content);
+        setBody("author", fields?.author?.toString());
+        setBody("author_name", fields?.author_name);
+        setBody("author_email", fields?.author_email);
+        setBody("author_url", fields?.author_url);
+        setBody("parent", fields?.parent?.toString());
+        setBody("post", postId.toString());
 
         // Generate endpoint URL.
         const commentsPost = state.source.api + "/wp/v2/comments";
@@ -87,7 +89,9 @@ const wpComments: WpComments = {
         try {
           response = await fetch(commentsPost, {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
             body,
           });
         } catch (e) {

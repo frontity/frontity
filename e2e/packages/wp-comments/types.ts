@@ -1,10 +1,17 @@
 /* eslint-disable */
 import { Package } from "frontity/types";
+import WPCommentsPackage from "@frontity/wp-comments/types";
 
 interface WPComments extends Package {
   name: "e2e-wp-comments";
-  state: {};
-  actions: {};
+  state: {
+    comments: WPCommentsPackage["state"]["comments"];
+  };
+  actions?: {
+    comments: {
+      submit: WPCommentsPackage["actions"]["comments"]["submit"];
+    };
+  };
   roots: {
     wpComments: React.ReactType;
   };
