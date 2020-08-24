@@ -122,26 +122,32 @@ process.chdir(__dirname);
     process.env.NODE_OPTIONS = "";
 
     // Run Cypress if the `cypressCommnand` is not "off".
-    // Run Cypress if the `cypressCommnand` is not "off"
-    if (cypressCommand === "open") {
-      await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
-    } else if (cypressCommand === "run") {
-      switch (suite) {
-        case "all":
-          await cypress.run({ env: { WORDPRESS_VERSION: wpVersion }, browser });
-        case "wp":
-          await cypress.run({
-            env: { WORDPRESS_VERSION: wpVersion },
-            browser,
-            spec: "./integration/wp-tests/*",
-          });
-        case "e2e":
-          await cypress.run({
-            env: { WORDPRESS_VERSION: wpVersion },
-            browser,
-            spec: "./integration/*.js",
-          });
+    if (cypressCommand !== "off") {
+      if (cypressCommand === "open") {
+        await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
+      } else if (cypressCommand === "run") {
+        switch (suite) {
+          case "all":
+            await cypress.run({
+              env: { WORDPRESS_VERSION: wpVersion },
+              browser,
+            });
+          case "wp":
+            await cypress.run({
+              env: { WORDPRESS_VERSION: wpVersion },
+              browser,
+              spec: "./integration/wp-tests/*",
+            });
+          case "e2e":
+            await cypress.run({
+              env: { WORDPRESS_VERSION: wpVersion },
+              browser,
+              spec: "./integration/*.js",
+            });
+        }
       }
+      // Exit the process once Cypress ends.
+      process.exit(0);
     }
   } catch (err) {
     console.error(err);
