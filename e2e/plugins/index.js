@@ -8,7 +8,7 @@ module.exports = (on, config) => {
       return (async () => {
         try {
           await execa.command(
-            `docker-compose run --rm wpcli wp plugin install ${name} --activate`,
+            `docker-compose run --rm wpcli wp plugin install ${name}`,
             { stdio: "inherit" }
           );
           // Asynchronous tasks in cypress HAVE TO return a promise which resolves to a value or a null.
