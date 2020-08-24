@@ -88,7 +88,6 @@ const wpComments: WpComments = {
           response = await fetch(commentsPost, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            redirect: "manual",
             body,
           });
         } catch (e) {

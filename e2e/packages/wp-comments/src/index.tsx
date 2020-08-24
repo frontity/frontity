@@ -7,9 +7,10 @@ import { connect } from "frontity";
  *
  * @returns React Element.
  */
-const Component: React.FC = connect(({ actions }) => (
+const Component: React.FC = connect(({ actions, state }) => (
   <>
     <button
+      data-button-id="send-comment"
       onClick={() =>
         actions.comments.submit(1, {
           content: "Hello world!",
@@ -19,6 +20,8 @@ const Component: React.FC = connect(({ actions }) => (
     >
       Comment
     </button>
+
+    <div>{JSON.stringify(state.comments.form)}</div>
   </>
 ));
 
