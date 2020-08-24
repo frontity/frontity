@@ -24,17 +24,13 @@ module.exports = (on, config) => {
      */
     installPlugin({ name, version }) {
       return (async () => {
-        try {
-          await execa.command(
-            `docker-compose run --rm wpcli wp plugin install ${name}${
-              version ? ` --version=${version}` : ""
-            }`,
-            { stdio: "inherit" }
-          );
-          return null;
-        } catch (err) {
-          console.log(err);
-        }
+        await execa.command(
+          `docker-compose run --rm wpcli wp plugin install ${name}${
+            version ? ` --version=${version}` : ""
+          }`,
+          { stdio: "inherit" }
+        );
+        return null;
       })();
     },
 
@@ -49,19 +45,15 @@ module.exports = (on, config) => {
      */
     loadDatabase({ path }) {
       return (async () => {
-        try {
-          await execa.command(
-            `docker-compose exec -T db mysql -uroot -ppassword wordpress < ${path}`,
-            {
-              stdio: "inherit",
-              // Because we use file redirection (the "<") in the command.
-              shell: true,
-            }
-          );
-          return null;
-        } catch (err) {
-          console.log(err);
-        }
+        await execa.command(
+          `docker-compose exec -T db mysql -uroot -ppassword wordpress < ${path}`,
+          {
+            stdio: "inherit",
+            // Because we use file redirection (the "<") in the command.
+            shell: true,
+          }
+        );
+        return null;
       })();
     },
 
@@ -72,19 +64,15 @@ module.exports = (on, config) => {
      */
     resetDatabase() {
       return (async () => {
-        try {
-          await execa.command(
-            `docker-compose exec -T db mysql -uroot -ppassword wordpress < ./data/db.sql`,
-            {
-              stdio: "inherit",
-              // Because we use file redirection (the "<") in the command.
-              shell: true,
-            }
-          );
-          return null;
-        } catch (err) {
-          console.log(err);
-        }
+        await execa.command(
+          `docker-compose exec -T db mysql -uroot -ppassword wordpress < ./data/db.sql`,
+          {
+            stdio: "inherit",
+            // Because we use file redirection (the "<") in the command.
+            shell: true,
+          }
+        );
+        return null;
       })();
     },
 
