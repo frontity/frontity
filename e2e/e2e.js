@@ -132,18 +132,21 @@ process.chdir(__dirname);
               env: { WORDPRESS_VERSION: wpVersion },
               browser,
             });
+            break;
           case "wp":
             await cypress.run({
               env: { WORDPRESS_VERSION: wpVersion },
               browser,
               spec: "./integration/wp-tests/*",
             });
+            break;
           case "e2e":
             await cypress.run({
               env: { WORDPRESS_VERSION: wpVersion },
               browser,
               spec: "./integration/*.js",
             });
+            break;
         }
       }
       // Exit the process once Cypress ends.
