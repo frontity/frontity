@@ -88,7 +88,7 @@ process.chdir(__dirname);
       // Only if publicPath was passed as a CLI argument, add it to the final
       // command.
       if (publicPath) {
-        args = [...args, "--publicPath", publicPath];
+        args = [...args, "--public-path", publicPath];
       }
 
       // Build.
