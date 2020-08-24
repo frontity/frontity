@@ -14,7 +14,7 @@ describe("WordPress plugins", () => {
   before(() => {
     cy.task("installPlugin", { name: "code-snippets" });
     cy.task("loadDatabase", {
-      path: "./integration/wordpress-01/wp-basic-tests/code-snippets.sql",
+      path: "./wp-data/wp-basic-tests/code-snippets.sql",
     });
   });
 

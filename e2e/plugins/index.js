@@ -65,7 +65,7 @@ module.exports = (on, config) => {
     resetDatabase() {
       return (async () => {
         await execa.command(
-          "docker-compose exec -T db mysql -uroot -ppassword wordpress < ./data/default-db.sql",
+          "docker-compose exec -T db mysql -uroot -ppassword wordpress < ./wp-data/default-db.sql",
           {
             stdio: "inherit",
             // Because we use file redirection (the "<") in the command.
