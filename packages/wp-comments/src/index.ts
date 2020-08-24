@@ -1,6 +1,6 @@
 import { fetch, warn, URL } from "frontity";
 import { commentsHandler } from "./libraries";
-import WpComments from "../types";
+import WpComments, { WpComment } from "../types";
 
 const wpComments: WpComments = {
   name: "@frontity/wp-comments",
@@ -102,22 +102,21 @@ const wpComments: WpComments = {
           return;
         }
 
-        // 200 OK - The request has failed because the post ID is invalid, name
-        //          or email are missing or email has an invalid format.
-        if (response.status === 200) {
+        // 200 OK - The comment was posted successfully
+        if (response.status === 201) {
           // Get first the body content.
-          const body = await response.text();
+          const body: WpComment = await response.json();
 
-          // Set error properties
+          // Get the comment ID from the hash.
+          const { id, status } = body;
+
+          // Check if the comment is unapproved.
+          const isOnHold = status === "hold";
+
           form.submitted.isPending = false;
-          form.submitted.isError = true;
-
-          // If the body is empty `postId` is invalid;
-          // `author` or `email` are invalid otherwise.
-          form.submitted.errorMessage = !body
-            ? "The post ID is invalid"
-            : "Author or email are empty, or email has an invalid format";
-
+          form.submitted.isOnHold = isOnHold;
+          form.submitted.isApproved = !isOnHold;
+          form.submitted.id = id;
           return;
         }
 
@@ -126,24 +125,6 @@ const wpComments: WpComments = {
           form.submitted.isPending = false;
           form.submitted.isError = true;
           form.submitted.errorMessage = "The comment was already submitted";
-          return;
-        }
-
-        // 302 Found - The comment was submitted.
-        if (response.status === 302) {
-          // We can know if the comment was approved from the returned location.
-          const location = new URL(response.headers.get("Location"));
-
-          // Get the comment ID from the hash.
-          const id = parseInt(location.hash.match(/#comment-(\d+)/)[1], 10);
-
-          // Check if the comment is unapproved.
-          const isOnHold = location.searchParams.has("unapproved");
-
-          form.submitted.isPending = false;
-          form.submitted.isOnHold = isOnHold;
-          form.submitted.isApproved = !isOnHold;
-          form.submitted.id = id;
           return;
         }
 
