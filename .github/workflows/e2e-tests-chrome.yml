@@ -25,6 +25,7 @@ jobs:
             wp-version: latest
             args: "--prod --public-path /custom/path/"
           - name: Absolute Public Path
+            wp-version: latest
             args: "--prod --public-path http://localhost:3001/custom/path/"
 
     steps:
