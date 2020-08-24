@@ -91,21 +91,19 @@ module.exports = (on, config) => {
     /**
      * Removes all the WordPress plugins.
      *
+     * Official WP CLI Docs: https://developer.wordpress.org/cli/commands/plugin/delete/.
+     *
      * @returns Null if successful. Throws an error otherwise.
      */
     removeAllPlugins() {
       return (async () => {
-        try {
-          await execa.command(
-            `docker-compose exec -T wp /bin/bash -c "rm -rf /var/www/html/wp-content/plugins/*"`,
-            {
-              stdio: "inherit",
-            }
-          );
-          return null;
-        } catch (err) {
-          console.log(err);
-        }
+        await execa.command(
+          `docker-compose run --rm wpcli wp plugin delete --all`,
+          {
+            stdio: "inherit",
+          }
+        );
+        return null;
       })();
     },
   });
