@@ -8,9 +8,24 @@ jobs:
 
     strategy:
       matrix:
-        wp-version: [latest, 5.4]
-        target: [both, es5]
-        public-path: ["http://localhost:3001/custom/path", /custom/path]
+        include:
+          - name: Default
+            wp-version: latest
+            args: "--prod"
+          - name: ES5 Bundle
+            wp-version: latest
+            args: "--prod --target es5"
+          - name: Development
+            wp-version: latest
+            args: ""
+          - name: Previous WordPress Version
+            wp-version: 5.4
+            args: "--prod --wp-version 5.4"
+          - name: Relative Public Path
+            wp-version: latest
+            args: "--prod --public-path /custom/path/"
+          - name: Absolute Public Path
+            args: "--prod --public-path http://localhost:3001/custom/path/"
 
     steps:
       - name: Checkout
@@ -37,12 +52,9 @@ jobs:
           WORDPRESS_VERSION: ${{ matrix.wp-version }}
         with:
           start: "node e2e.js \
-            --wpVersion ${{ matrix.wp-version }} \
-            --target ${{ matrix.target }} \
-            --prod \
             --cypress off \
-            --publicPath ${{ matrix.public-path }} \
-            --suite all"
+            --suite all \
+            ${{ matrix.args }}"
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
           browser: chrome
