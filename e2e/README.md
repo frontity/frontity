@@ -74,10 +74,10 @@ Once WordPress has started, you can access it in `http://localhost:8080`.
 
 If you need to modify the database, you can log in on `http://localhost:8080/wp-admin` with the user name `admin` and the password `password`.
 
-After you've done your modifications, export the database using:
+After you've done your modifications, export the database to the `e2e/wp-data` folder using:
 
 ```sh
-node export-db.js ./integrations/wordpress-01/my-test-suite/my-database.sql
+node export-db.js ./wp-data/my-test-suite/my-database.sql
 ```
 
 You can replace the database in your spec file using a Cypress task:
@@ -85,7 +85,7 @@ You can replace the database in your spec file using a Cypress task:
 ```js
 before(() => {
   cy.task("loadDatabase", {
-    path: "./integrations/wordpress-01/my-test-suite/my-database.sql",
+    path: "./wp-data/my-test-suite/my-database.sql",
   });
 });
 ```
