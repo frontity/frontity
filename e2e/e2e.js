@@ -40,7 +40,6 @@ suite = suite || "all";
 validateArgs(target, { possibleValues: ["es5", "module", "both"] });
 validateArgs(browser, { possibleValues: ["firefox", "chrome", "edge"] });
 validateArgs(cypressCommand, { possibleValues: ["open", "run", "off"] });
-validateArgs(suite, { possibleValues: ["wp", "e2e", "all"] });
 
 // We have to make sure that we are runnng inside of the e2e directory The
 // script assumes that files are relative to this location.
@@ -48,7 +47,7 @@ process.chdir(__dirname);
 
 (async () => {
   try {
-    if (suite === "all" || suite === "wp") {
+    if (suite === "all" || suite.startsWith("wordpress")) {
       // Set the WordPress version as an environment variable to be consumed by
       // the docker-compose.yml file.
       process.env.WORDPRESS_VERSION = wpVersion;
@@ -116,7 +115,7 @@ process.chdir(__dirname);
 
       // Dev.
       execa("npx", args, {
-          stdio: "inherit",
+        stdio: "inherit",
       });
     }
 
@@ -136,27 +135,17 @@ process.chdir(__dirname);
       if (cypressCommand === "open") {
         await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
       } else if (cypressCommand === "run") {
-        switch (suite) {
-          case "all":
-            await cypress.run({
-              env: { WORDPRESS_VERSION: wpVersion },
-              browser,
-            });
-            break;
-          case "wp":
-            await cypress.run({
-              env: { WORDPRESS_VERSION: wpVersion },
-              browser,
-              spec: "./integration/wp-tests/*",
-            });
-            break;
-          case "e2e":
-            await cypress.run({
-              env: { WORDPRESS_VERSION: wpVersion },
-              browser,
-              spec: "./integration/*.js",
-            });
-            break;
+        if (suite === "all") {
+          await cypress.run({
+            env: { WORDPRESS_VERSION: wpVersion },
+            browser,
+          });
+        } else {
+          await cypress.run({
+            env: { WORDPRESS_VERSION: wpVersion },
+            browser,
+            spec: `./integration/${suite}/*`,
+          });
         }
       }
       // Exit the process once Cypress ends.
