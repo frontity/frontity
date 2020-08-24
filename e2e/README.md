@@ -119,7 +119,7 @@ The WordPress version that will be used in the Docker container. For example, `-
 
 Default: `latest`
 
-### `--prop`: boolean
+### `--prod`: boolean
 
 If Frontity runs in production mode (`npx frontity build && npx frontity server`) or in development mode (`npx frontity dev`).
 
