@@ -138,6 +138,7 @@ process.chdir(__dirname);
         if (suite === "all") {
           await cypress.run({
             env: { WORDPRESS_VERSION: wpVersion },
+            spec: `./integration/**/*.spec.js`,
             browser,
           });
         } else {
