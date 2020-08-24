@@ -25,7 +25,7 @@ module.exports = (on, config) => {
     installPlugin({ name, version }) {
       return (async () => {
         await execa.command(
-          `docker-compose -f docker-compose.yml run wpcli wp plugin install ${name}${
+          `docker-compose run wpcli wp plugin install ${name}${
             version ? ` --version=${version}` : ""
           }`,
           { stdio: "inherit" }
@@ -46,7 +46,7 @@ module.exports = (on, config) => {
     loadDatabase({ path }) {
       return (async () => {
         await execa.command(
-          `docker-compose -f docker-compose.yml exec -T db mysql -uroot -ppassword wordpress < ${path}`,
+          `docker-compose exec -T db mysql -uroot -ppassword wordpress < ${path}`,
           {
             stdio: "inherit",
             // Because we use file redirection (the "<") in the command.
@@ -65,7 +65,7 @@ module.exports = (on, config) => {
     resetDatabase() {
       return (async () => {
         await execa.command(
-          "docker-compose -f docker-compose.yml exec -T db mysql -uroot -ppassword wordpress < ./wp-data/default-db.sql",
+          "docker-compose exec -T db mysql -uroot -ppassword wordpress < ./wp-data/default-db.sql",
           {
             stdio: "inherit",
             // Because we use file redirection (the "<") in the command.
@@ -85,12 +85,9 @@ module.exports = (on, config) => {
      */
     removeAllPlugins() {
       return (async () => {
-        await execa.command(
-          `docker-compose -f docker-compose.yml run wpcli wp plugin delete --all`,
-          {
-            stdio: "inherit",
-          }
-        );
+        await execa.command(`docker-compose run wpcli wp plugin delete --all`, {
+          stdio: "inherit",
+        });
         return null;
       })();
     },

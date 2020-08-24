@@ -19,7 +19,7 @@ const argv = require("minimist")(process.argv.slice(2));
   console.log(`\nExporting database to the "${path}" file.\n`);
 
   await execa.command(
-    `docker-compose -f docker-compose.yml exec -T db sh -c exec mysqldump -uroot -ppassword wordpress"  > "${path}"`,
+    `docker-compose exec -T db sh -c "exec mysqldump -uroot -ppassword wordpress"  > "${path}"`,
     {
       stdio: "inherit",
       shell: true,

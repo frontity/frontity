@@ -54,19 +54,13 @@ process.chdir(__dirname);
 
       // Stop all the containers and remove all the volumes that they use (the
       // `-v` option).
-      await execa(
-        "docker-compose",
-        ["-f", "docker-compose.yml", "down", "-v"],
-        {
-          stdio: "inherit",
-        }
-      );
+      await execa("docker-compose", ["down", "-v"], {
+        stdio: "inherit",
+      });
 
       // Run all the services defined in docker-compose.yml: wp, wpcli & mysql
       // (in the background via the -d flag).
-      await execa("docker-compose", ["-f", "docker-compose.yml", "up", "-d"], {
-        stdio: "inherit",
-      });
+      await execa("docker-compose", ["up", "-d"], { stdio: "inherit" });
 
       // Wait until WordPress is responsive.
       await waitOn({
@@ -79,15 +73,7 @@ process.chdir(__dirname);
       // instances for testing.
       await execa(
         "docker-compose",
-        [
-          "-f",
-          "docker-compose.yml",
-          "run",
-          "wp",
-          "/bin/bash",
-          "-c",
-          "chmod -R 777 /var/www/html",
-        ],
+        ["run", "wp", "/bin/bash", "-c", "chmod -R 777 /var/www/html"],
         { stdio: "inherit" }
       );
     }

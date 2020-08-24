@@ -9,7 +9,7 @@ const execa = require("execa");
   console.log(`\nResetting the database.\n`);
 
   await execa.command(
-    "docker-compose -f docker-compose.yml exec -T db mysql -uroot -ppassword wordpress < ./wp-data/default-db.sql",
+    "docker-compose exec -T db mysql -uroot -ppassword wordpress < ./wp-data/default-db.sql",
     {
       stdio: "inherit",
       shell: true,
