@@ -25,7 +25,7 @@ let {
   prod,
   cypress: cypressCommand,
   suite,
-  publicPath,
+  "public-path": publicPath,
 } = argv;
 
 // Sane defaults for local development.
