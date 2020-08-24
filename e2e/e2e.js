@@ -1,16 +1,16 @@
 #!/usr/bin/env node
-/* eslint-disable */
 // @ts-check
-
 const waitOn = require("wait-on");
 const execa = require("execa");
 const cypress = require("cypress");
 const argv = require("minimist")(process.argv.slice(2));
 
 /**
- * @param {string} arg - The CLI argument
- * @param {Object} options
- * @param {string[]} options.possibleValues
+ * Validates the CLI arguments and throws an error if a value is not correct.
+ *
+ * @param arg - The CLI argument.
+ * @param options - Options object. Contains `possibleValues` with all the
+ * possible values.
  */
 function validateArgs(arg, { possibleValues }) {
   if (!possibleValues.includes(arg)) {
@@ -119,6 +119,7 @@ process.chdir(__dirname);
 
     // Workaround for a bug in Cypress, otherwise it fails with:
     // electron: -max-http-header-size=1048576 is not allowed in NODE_OPTIONS.
+    // eslint-disable-next-line require-atomic-updates
     process.env.NODE_OPTIONS = "";
 
     // Run Cypress if the `cypressCommnand` is not "off".
