@@ -19,7 +19,7 @@ function validateArgs(arg, { possibleValues }) {
 }
 
 let {
-  wpVersion,
+  "wp-version": wpVersion,
   target,
   browser,
   prod,
