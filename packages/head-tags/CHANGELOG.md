@@ -8,6 +8,12 @@
   - @frontity/router@1.2.0-infinite-scroll-beta.0
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/source@1.2.2-infinite-scroll-beta.0
+## 1.0.5
+
+### Patch Changes
+
+- [`c219fb63`](https://github.com/frontity/frontity/commit/c219fb634672c1897e1a32fe34721c2591a4625c) [#512](https://github.com/frontity/frontity/pull/512) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Reword the README to specify that users need to install the Rest API Head Tags WP plugin before using the frontity head-tags package
+
 ## 1.0.4
 
 ### Patch Changes

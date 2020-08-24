@@ -10,5 +10,7 @@
   "trashAssetsBeforeRuns": false,
   "experimentalFetchPolyfill": true,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
-  "projectId": "ed7hed"
+  "projectId": "ed7hed",
+  "defaultCommandTimeout": 10000,
+  "taskTimeout": 60000
 }

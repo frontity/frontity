@@ -22,7 +22,7 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "@frontity/source": "^1.2.2-infinite-scroll-beta.0",
+    "@frontity/source": "^1.2.2",
     "@frontity/router": "^1.2.0-infinite-scroll-beta.0",
     "frontity": "^1.10.1"
   }

@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.3.4-infinite-scroll-beta.1
+## 1.3.5
 
 ### Patch Changes
 
