@@ -8,11 +8,11 @@ describe("Image lazy-loading (with Intersection Observer)", () => {
         // Remove the "loading" prop from the HTMLImageElement prototype
         Object.defineProperty(win.HTMLImageElement.prototype, "loading", {
           configurable: true,
-          writable: true
+          writable: true,
         });
         // win.HTMLImageElement.prototype.loading = undefined;
         delete win.HTMLImageElement.prototype.loading;
-      }
+      },
     });
   });
 
@@ -20,7 +20,7 @@ describe("Image lazy-loading (with Intersection Observer)", () => {
     return cy
       .window()
       .its("HTMLImageElement")
-      .then(htmlImageElement => {
+      .then((htmlImageElement) => {
         expect("loading" in htmlImageElement.prototype).toBe(false);
       });
   });
@@ -63,7 +63,7 @@ describe("Image lazy-loading (with native lazy-load)", () => {
     return cy
       .window()
       .its("HTMLImageElement")
-      .then(htmlImageElement => {
+      .then((htmlImageElement) => {
         expect("loading" in htmlImageElement.prototype).toBe(true);
       });
   });

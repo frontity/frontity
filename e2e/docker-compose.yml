@@ -5,17 +5,18 @@ services:
     image: "wordpress:${WORDPRESS_VERSION}"
     ports:
       - 8080:80
-    # The wordpress container will retry to connect to the mysql database for 30 seconds
-    # after starting. However, it might take longer than this for mysql container
-    # to initialize (inluding loading data into the DB). For this reason, if the
-    # wordpress container times out, we have to restart it
+    # The wordpress container will retry to connect to the mysql database for
+    # 30 seconds after starting. However, it might take longer than this for
+    # mysql container to initialize (inluding loading data into the DB). For
+    # this reason, if the wordpress container times out, we have to restart it.
     restart: always
     volumes:
-      # Volume that is shared between WordPress and WP-CLI services
+      # Volume that is shared between WordPress and WP-CLI services.
       - wp_data:/var/www/html
 
-      # This volume is used for adding custom uploaded content to the WP instance
-      - ./data/uploads:/var/www/html/wp-content/uploads
+      # This volume is used for adding custom uploaded content to the WP
+      # instance.
+      - ./wp-data/uploads:/var/www/html/wp-content/uploads
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: wordpress
@@ -29,7 +30,8 @@ services:
   wpcli:
     image: wordpress:cli
     volumes:
-      # Needs to share a volume with the `wp` service so that the CLI can run the commands
+      # Needs to share a volume with the `wp` service so that the CLI can run
+      # the commands.
       - wp_data:/var/www/html
     depends_on:
       - db
@@ -46,9 +48,10 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
-      # The mysql container will load any .sql file in the ./data folder
-      # This way, we can specify the data outside the container and load it on startup.
-      - ./data:/docker-entrypoint-initdb.d
+      # The mysql container will load an .sql file in the ./wp-data folder This
+      # way, we can specify the data outside the container and load it on
+      # startup.
+      - ./wp-data:/docker-entrypoint-initdb.d
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_ROOT_PASSWORD: password
