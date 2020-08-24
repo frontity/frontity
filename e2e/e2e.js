@@ -101,14 +101,23 @@ process.chdir(__dirname);
         stdio: "inherit",
       });
     } else {
+      let args = ["frontity", "dev", "--port", "3001", "--dont-open-browser"];
+
+      // Only if publicPath was passed as a CLI argument, add it to the final
+      // command.
+      if (publicPath) {
+        args = [...args, "--public-path", publicPath];
+      }
+
+      // Only if target is es5, add it to the final command.
+      if (target === "es5") {
+        args = [...args, "--target", target];
+      }
+
       // Dev.
-      execa(
-        "npx",
-        ["frontity", "dev", "--port", "3001", "--dont-open-browser"],
-        {
+      execa("npx", args, {
           stdio: "inherit",
-        }
-      );
+      });
     }
 
     // Wait for the frontity app to become available.
