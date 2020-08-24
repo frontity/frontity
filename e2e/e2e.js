@@ -28,7 +28,7 @@ let {
   publicPath,
 } = argv;
 
-// Sane defaults for local development
+// Sane defaults for local development.
 wpVersion = wpVersion || "latest";
 target = target || "both";
 browser = browser || "chrome";
@@ -36,14 +36,14 @@ prod = prod || false;
 cypressCommand = cypressCommand || "open";
 suite = suite || "all";
 
-// Validate CLI args
+// Validate CLI args.
 validateArgs(target, { possibleValues: ["es5", "module", "both"] });
 validateArgs(browser, { possibleValues: ["firefox", "chrome", "edge"] });
 validateArgs(cypressCommand, { possibleValues: ["open", "run", "off"] });
 validateArgs(suite, { possibleValues: ["wp", "e2e", "all"] });
 
-// We have to make sure that we are runnng inside of the e2e directory
-// The script assumes that files are relative to this location
+// We have to make sure that we are runnng inside of the e2e directory The
+// script assumes that files are relative to this location.
 process.chdir(__dirname);
 
 (async () => {
@@ -70,8 +70,8 @@ process.chdir(__dirname);
       });
 
       // Give read and write permission to all files under /var/www/html in the
-      // WordPress container This is fine because we are only using the instances
-      // for testing.
+      // WordPress container This is fine because we are only using the
+      // instances for testing.
       await execa(
         "docker-compose",
         ["run", "wp", "/bin/bash", "-c", "chmod -R 777 /var/www/html"],
@@ -79,28 +79,29 @@ process.chdir(__dirname);
       );
     }
 
-    // CD into the project directory
+    // CD into the project directory.
     process.chdir("./project");
 
     if (prod) {
       let args = ["frontity", "build", "--target", target];
 
-      // Only if publicPath was passed as a CLI argument, add it to the final command
+      // Only if publicPath was passed as a CLI argument, add it to the final
+      // command.
       if (publicPath) {
         args = [...args, "--publicPath", publicPath];
       }
 
-      // build
+      // Build.
       await execa("npx", args, {
         stdio: "inherit",
       });
 
-      // serve
+      // Serve.
       execa("npx", ["frontity", "serve", "--port", "3001"], {
         stdio: "inherit",
       });
     } else {
-      // dev
+      // Dev.
       execa(
         "npx",
         ["frontity", "dev", "--port", "3001", "--dont-open-browser"],
@@ -110,16 +111,17 @@ process.chdir(__dirname);
       );
     }
 
-    // Wait for the frontity app to become available
+    // Wait for the frontity app to become available.
     await waitOn({ resources: ["http-get://localhost:3001"] });
 
-    // CD back into the e2e directory
+    // CD back into the e2e directory.
     process.chdir("..");
 
-    // Workaround for a bug in cypress, otherwise it fails with:
-    // electron: -max-http-header-size=1048576 is not allowed in NODE_OPTIONS
+    // Workaround for a bug in Cypress, otherwise it fails with:
+    // electron: -max-http-header-size=1048576 is not allowed in NODE_OPTIONS.
     process.env.NODE_OPTIONS = "";
 
+    // Run Cypress if the `cypressCommnand` is not "off".
     // Run Cypress if the `cypressCommnand` is not "off"
     if (cypressCommand === "open") {
       await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
@@ -144,7 +146,7 @@ process.chdir(__dirname);
   } catch (err) {
     console.error(err);
 
-    // We need to return the exit code so that the github action returns a fail
+    // We need to return the exit code so that the GitHub action returns a fail.
     process.exit(1);
   }
 })();
