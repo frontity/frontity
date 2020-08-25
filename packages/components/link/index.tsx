@@ -55,7 +55,7 @@ const Link: React.FC<LinkProps> = ({
     warn("link prop is required and must be a string");
   }
 
-  const autoPrefetch = state?.theme?.autoPrefetch;
+  const autoPrefetch = state.theme?.autoPrefetch;
   const isExternal = link.startsWith("http");
 
   useEffect(() => {
