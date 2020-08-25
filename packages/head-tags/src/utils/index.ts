@@ -10,6 +10,14 @@ import {
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
 
+/**
+ * Iterates over an object, executing the suplied function.
+ *
+ * @param obj - The object that will be iterated.
+ * @param func - The function that will be executed. The first parameter is the
+ * object property and the rest are defined in `args`.
+ * @param args - The rest of the parameters of the function.
+ */
 const deepTransform = (obj: object, func: Function, ...args: object[]) => {
   for (const key in obj) {
     if (typeof obj[key] === "string") {
@@ -20,6 +28,14 @@ const deepTransform = (obj: object, func: Function, ...args: object[]) => {
   }
 };
 
+/**
+ * Extracts the WordPress URL from `state.source.api`.
+ *
+ * @param api - The api field, normally `state.source.api`.
+ * @param isWpCom - If it's WP.com or not.
+ *
+ * @returns A URL object with the WordPress base URL.
+ */
 const getWpUrl = (api: string, isWpCom: boolean): URL => {
   const apiUrl = new URL(api);
   if (isWpCom) {
@@ -31,15 +47,35 @@ const getWpUrl = (api: string, isWpCom: boolean): URL => {
   return new URL(apiSubdir, apiUrl);
 };
 
-const shouldTransform = (value: string, prefix: string, ignore: string) => {
+/**
+ * Checks if the link should be transformed to the Frontity URL or left as it
+ * is, usually the WordPress URL.
+ *
+ * @param link - The link that will be checked.
+ * @param base - The base that the link needs to have, usually the WordPress
+ * URL.
+ * @param ignore - A Regexp (in a string format) used to know if the link
+ * should be changed or not.
+ *
+ * @returns A boolean indicating if the link should be transformed.
+ */
+const shouldTransform = (link: string, base: string, ignore: string) => {
   return (
-    value.startsWith(prefix) &&
-    !new RegExp(ignore).test(value.replace(prefix, ""))
+    link.startsWith(base) && !new RegExp(ignore).test(link.replace(base, ""))
   );
 };
 
-const getNewLink = (value: string, base: string, newBase: string) => {
-  const { pathname, search, hash } = new URL(value);
+/**
+ * The function that actually transforms the link in the new one.
+ *
+ * @param link - The original link.
+ * @param base - The old base (hostname and path). Usually the WordPress URL.
+ * @param newBase - The new base (hostname and path). Usually the Frontity URL.
+ *
+ * @returns The transformed link.
+ */
+const getNewLink = (link: string, base: string, newBase: string) => {
+  const { pathname, search, hash } = new URL(link);
   const finalPathname = pathname.replace(
     new RegExp(`^${new URL(base).pathname}`),
     "/"
@@ -47,43 +83,95 @@ const getNewLink = (value: string, base: string, newBase: string) => {
   return `${newBase.replace(/\/?$/, "")}${finalPathname}${search}${hash}`;
 };
 
-const getPrefixFromSource = ({ state }: { state: State }): string => {
+/**
+ * A function that extracts the WordPress URL from `state.source.api`.
+ *
+ * @param state - The Frontity state.
+ *
+ * @returns The WordPress URL, without the prefix (usually `/wp-json`).
+ */
+const getBaseFromSource = (state: State): string => {
   const { api, isWpCom } = state.source;
   return getWpUrl(api, isWpCom).href;
 };
 
+/**
+ * The options of the {@link transformLink} function.
+ */
+interface TransformLinkOptions {
+  /**
+   * The link that will be changed.
+   */
+  link: string;
+  /**
+   * The old base (hostname and path) that will be changed by the `newBase`.
+   */
+  base: string;
+  /**
+   * The new base that will replace the old `base`.
+   */
+  newBase: string;
+  /**
+   * A Regexp (in string format) so that if the link matches the transform
+   * doesn't happen.
+   */
+  ignore: string;
+}
+
+/**
+ * Changes the URL hostname to the Frontity one, instead of the WordPress one.
+ *
+ * @param options - Defined in {@link TransformLinkOptions}.
+ *
+ * @returns The new link.
+ */
 const transformLink = ({
-  value,
+  link,
   ignore,
   base,
   newBase,
-}: {
-  value: string;
-  ignore: string;
-  base: string;
-  newBase: string;
-}) => {
-  if (shouldTransform(value, base, ignore))
-    return getNewLink(value, base, newBase);
-  return value;
+}: TransformLinkOptions) => {
+  if (shouldTransform(link, base, ignore))
+    return getNewLink(link, base, newBase);
+  return link;
 };
 
+/**
+ * The options of the {@link useFrontityLinks} function.
+ */
+interface UseFrontityLinksOptions {
+  /**
+   * The Frontity state.
+   */
+  state: State;
+
+  /**
+   * The `head_tags` array that usually comes from the REST API.
+   */
+  headTags: HeadTags;
+}
+
+/**
+ * It receives an array of head tags and depending on the settings defined in
+ * the state modifies all the link found in the head tags that need
+ * transformation.
+ *
+ * @param options - Defined in {@link UseFrontityLinksOptions}.
+ *
+ * @returns The modified head tags array.
+ */
 export const useFrontityLinks = ({
   state,
   headTags,
-}: {
-  state: State;
-  headTags: HeadTags;
-}) => {
+}: UseFrontityLinksOptions) => {
   /**
    * At this point we assume that `state.headTags.transformLinks` and
    * `state.frontity.url` are defined.
    */
   if (!state.headTags.transformLinks || !state.frontity.url) return headTags;
 
-  // prefix of links to change.
-  const base =
-    state.headTags.transformLinks.base || getPrefixFromSource({ state });
+  // Prefix of links to change.
+  const base = state.headTags.transformLinks.base || getBaseFromSource(state);
   const ignore = state.headTags.transformLinks.ignore;
 
   // The site URL.
@@ -118,8 +206,8 @@ ${content}`
 
         // Iterate over json props.
         if (json) {
-          deepTransform(json, (value: string) => {
-            return transformLink({ value, ignore, base, newBase });
+          deepTransform(json, (link: string) => {
+            return transformLink({ link, ignore, base, newBase });
           });
           // Stringify json again.
           processed.content = JSON.stringify(json);
@@ -130,16 +218,16 @@ ${content}`
     // Process Attributes.
     if (attributes) {
       processed.attributes = Object.entries(attributes)
-        .map(([key, value]) => {
-          // Change value if it's a WP blog link.
+        .map(([key, link]) => {
+          // Change link if it's a WP blog link.
           if (possibleLink.includes(key)) {
-            value = transformLink({ value, ignore, base, newBase });
+            link = transformLink({ link, ignore, base, newBase });
           }
           // Return the entry.
-          return [key, value];
+          return [key, link];
         })
-        .reduce((result, [key, value]) => {
-          result[key] = value;
+        .reduce((result, [key, link]) => {
+          result[key] = link;
           return result;
         }, {});
     }
@@ -149,14 +237,30 @@ ${content}`
   });
 };
 
-// Get the entity related to the current link.
-export const getCurrentEntity = ({
-  state,
-  link,
-}: {
+/**
+ * The options of the {@link getCurrentEntity} and {@link getCurrentHeadTags}
+ * functions.
+ */
+interface HeadTagsOptions {
+  /**
+   * The Frontity state.
+   */
   state: State;
+
+  /**
+   * The link (URL) of the entity.
+   */
   link: string;
-}) => {
+}
+
+/**
+ * Get the entity related to the current link.
+ *
+ * @param options - Defined in {@link HeadTagsOptions}.
+ *
+ * @returns The entity if it was found in the `state` or `null` if it wasn't.
+ */
+export const getCurrentEntity = ({ state, link }: HeadTagsOptions) => {
   const data = state.source.get(link);
 
   if (data.isPostType) {
@@ -183,16 +287,15 @@ export const getCurrentEntity = ({
 };
 
 /**
- * Get the head tags stored in the current entity,
- * or an empty array if there is no entity or head tags.
+ * Get the head tags stored in the current entity, or an empty array if there
+ * is no entity or head tags.
+ *
+ * @param options - Defined in {@link HeadTagsOptions}.
+ *
+ * @returns Either the transformed head tags or an empty array if they are not
+ * found.
  */
-export const getCurrentHeadTags = ({
-  state,
-  link,
-}: {
-  state: State;
-  link: string;
-}) => {
+export const getCurrentHeadTags = ({ state, link }: HeadTagsOptions) => {
   const entity = getCurrentEntity({ state, link });
   const headTags = entity && entity.head_tags;
 
