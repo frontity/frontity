@@ -1,8 +1,10 @@
 import React, { MouseEvent, useEffect, useRef, useCallback } from "react";
 import { warn, connect, useConnect } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
-import { isProcessingQueue, toPrefetch, onHover, processQueue } from "./utils";
+import { Queue, onHover } from "./utils";
 import { Packages, LinkProps, NavigatorWithConnection } from "./types";
+
+const queue = new Queue();
 
 /**
  * The Link component that enables linking to internal pages in a frontity app.
@@ -79,7 +81,7 @@ const Link: React.FC<LinkProps> = ({
      * @param runNow - Whether the prefetch should be executed immediatelly.
      */
     const maybePrefetch = (link: string, runNow = false) => {
-      if (toPrefetch.has(link)) {
+      if (queue.toPrefetch.has(link)) {
         return;
       }
 
@@ -93,13 +95,13 @@ const Link: React.FC<LinkProps> = ({
       if (runNow) {
         actions.source.fetch(link);
       } else {
-        toPrefetch.add(link);
+        queue.toPrefetch.add(link);
       }
 
       // if the queue is still running this link will be picked up automatically.
-      if (!isProcessingQueue) {
-        processQueue(actions.source.fetch);
-        isProcessingQueue = true;
+      if (!queue.isProcessing) {
+        queue.process(actions.source.fetch);
+        queue.isProcessing = true;
       }
     };
 

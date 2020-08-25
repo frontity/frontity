@@ -24,47 +24,54 @@ const config = {
 };
 
 /**
- * Globally accessible variable that indicates whether the queue is processing
- * or not.
+ * Controls the processing queue of the links.
  */
-export let isProcessingQueue = false;
-
-/**
- * Gobally accessible Set to store the links that need to be prefetched.
- */
-export const toPrefetch = new Set<string>();
-
-/**
- * Process the queue of links to prefetch.
- *
- * @param prefetcher - The function used to prefetch the link.
- */
-export const processQueue = (prefetcher: (link: string) => void) => {
-  let batchInterval: ReturnType<typeof setInterval> = null;
+export class Queue {
+  /**
+   * Indicates whether the queue is processing or not.
+   */
+  isProcessing = false;
 
   /**
-   * Process a batch of prefetches.
+   * Set to store the links that need to be prefetched.
    */
-  const process = () => {
-    const batch = Array.from(toPrefetch).slice(0, config.requestsPerBatch);
+  toPrefetch = new Set<string>();
 
-    // if batch is empty, stop process and allow it to run again if necessary.
-    if (batch.length === 0) {
-      isProcessingQueue = false;
-      clearTimeout(batchInterval);
-      return;
-    }
+  /**
+   * Process the queue of links to prefetch.
+   *
+   * @param prefetcher - The function used to prefetch the link.
+   */
+  process(prefetcher: (link: string) => void) {
+    let batchInterval: ReturnType<typeof setInterval> = null;
 
-    batch.forEach((link) => {
-      prefetcher(link);
-      toPrefetch.delete(link);
-    });
-  };
+    /**
+     * Process a batch of prefetches.
+     */
+    const process = () => {
+      const batch = Array.from(this.toPrefetch).slice(
+        0,
+        config.requestsPerBatch
+      );
 
-  batchInterval = setInterval(() => {
-    process();
-  }, config.batchInterval);
-};
+      // if batch is empty, stop process and allow it to run again if necessary.
+      if (batch.length === 0) {
+        this.isProcessing = false;
+        clearTimeout(batchInterval);
+        return;
+      }
+
+      batch.forEach((link) => {
+        prefetcher(link);
+        this.toPrefetch.delete(link);
+      });
+    };
+
+    batchInterval = setInterval(() => {
+      process();
+    }, config.batchInterval);
+  }
+}
 
 /**
  * Executes the callback when the hover event is triggered for the element.
