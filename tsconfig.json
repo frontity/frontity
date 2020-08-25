@@ -19,6 +19,6 @@
     // Transpile JS as well.
     "allowJs": true
   },
-  "exclude": ["**/node_modules/*", "**/dist/*", "**/build/*"],
+  "exclude": ["**/node_modules/*", "**/dist/*", "**/build/*", "e2e/e2e.js"],
   "include": ["packages", "examples", "e2e"]
 }
