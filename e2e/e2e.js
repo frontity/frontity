@@ -149,7 +149,14 @@ process.chdir(__dirname);
           });
         }
       }
-      // Exit the process once Cypress ends.
+
+      // Stop all the containers and remove all the volumes that they use (the
+      // `-v` option).
+      await execa("docker-compose", ["down", "-v"], {
+        stdio: "inherit",
+      });
+
+      // Exit the process to indicate that everything went fine.
       process.exit(0);
     }
   } catch (err) {
