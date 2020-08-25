@@ -4,6 +4,15 @@ import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
 /**
+ * The auto prefetching setting. It can be:
+ * - "hover": Prefetches links on hover.
+ * - "in-view": Prefetch links currently visible in the viewport.
+ * - "all": Prefetches all internal links on the page.
+ * - "no": No auto prefetch.
+ */
+export type AutoPrefetch = "no" | "in-view" | "hover" | "all";
+
+/**
  * The types of the theme namespace required by the {@link Link} component.
  */
 export interface Theme extends Package {
@@ -16,15 +25,11 @@ export interface Theme extends Package {
      */
     theme: {
       /**
-       * The auto prefetching setting. It can be:
-       * - "hover": Prefetches links on hover.
-       * - "in-view": Prefetch links currently visible in the viewport.
-       * - "all": Prefetches all internal links on the page.
-       * - "no": No auto prefetch.
+       * The auto prefetch setting. Defined in {@link AutoPrefetch}.
        *
        * @defaultValue "no"
        */
-      autoPrefetch: "no" | "in-view" | "hover" | "all";
+      autoPrefetch: AutoPrefetch;
     };
   };
 }
