@@ -73,7 +73,7 @@ process.chdir(__dirname);
       // instances for testing.
       await execa(
         "docker-compose",
-        ["run", "wp", "/bin/bash", "-c", "chmod -R 777 /var/www/html"],
+        ["run", "--rm", "wp", "/bin/bash", "-c", "chmod -R 777 /var/www/html"],
         { stdio: "inherit" }
       );
     }
