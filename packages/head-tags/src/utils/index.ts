@@ -1,3 +1,4 @@
+import { warn } from "frontity";
 import {
   HeadTags,
   HeadTag,
@@ -5,12 +6,6 @@ import {
   PostTypeWithHeadTags,
   TaxonomyWithHeadTags,
 } from "../../types";
-
-// Return a string inviting to ask questions in the community.
-const msg = (text: string) => `${text}
-
-If you have any questions, join our community at https://community.frontity.org/.
-`;
 
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
@@ -114,12 +109,10 @@ export const useFrontityLinks = ({
         try {
           json = JSON.parse(content);
         } catch (e) {
-          console.warn(
-            msg(
-              `The following content of a <script type="ld+json"> tag is not a valid JSON. Links in that tag will not be changed.
+          warn(
+            `The following content of a <script type="ld+json"> tag is not a valid JSON. Links in that tag will not be changed.
 
 ${content}`
-            )
           );
         }
 
@@ -211,10 +204,8 @@ export const getCurrentHeadTags = ({
 
   // Do not change links if `state.frontity.url` is not defined.
   if (!state.frontity || !state.frontity.url) {
-    console.warn(
-      msg(
-        "Property `state.headTags.links.transform` is defined but `state.frontity.url` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed."
-      )
+    warn(
+      "Property `state.headTags.links.transform` is defined but `state.frontity.url` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed."
     );
     return headTags;
   }
