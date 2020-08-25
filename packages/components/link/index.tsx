@@ -79,7 +79,7 @@ const Link: React.FC<LinkProps> = ({
      * Prefetches the link only if necessary.
      *
      * @param link - The link to prefetch.
-     * @param runNow - Whether the prefetch should be executed immediatelly.
+     * @param runNow - Whether the prefetch should be executed immediately.
      */
     const maybePrefetch = (link: string, runNow = false) => {
       if (queue.toPrefetch.has(link)) {

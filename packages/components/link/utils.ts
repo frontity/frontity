@@ -18,7 +18,7 @@ export const config = {
   requestsPerBatch: 4,
 
   /**
-   * Time between different batch intervals.
+   * Interval of time to wait between processing each batch.
    */
   batchInterval: 1000,
 };
@@ -33,7 +33,7 @@ export class Queue {
   isProcessing = false;
 
   /**
-   * Set to store the links that need to be prefetched.
+   * A `Set` to store the links that need to be prefetched.
    */
   toPrefetch = new Set<string>();
 
