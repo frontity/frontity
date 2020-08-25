@@ -1,6 +1,6 @@
 {
   "name": "example-mars-theme-ts",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Example of a project using mars-theme but using a `frontity.settings.ts` file (TypeScript)",
   "scripts": {
