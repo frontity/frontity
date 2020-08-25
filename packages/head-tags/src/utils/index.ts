@@ -1,4 +1,3 @@
-import { URL } from "frontity";
 import {
   HeadTags,
   HeadTag,

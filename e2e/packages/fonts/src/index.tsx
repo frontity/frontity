@@ -1,5 +1,5 @@
 import React from "react";
-import { Global, css, connect, styled, URL } from "frontity";
+import { Global, css, connect, styled } from "frontity";
 import Package from "../types";
 import aclonicaEot from "./fonts/aclonica-v10-latin-regular.eot";
 import aclonicaWoff from "./fonts/aclonica-v10-latin-regular.woff";
@@ -139,9 +139,9 @@ const FontsPackage: Package = {
   state: {},
   actions: {},
   roots: {
-    fonts: Font
+    fonts: Font,
   },
-  libraries: {}
+  libraries: {},
 };
 
 export default FontsPackage;

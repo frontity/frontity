@@ -1,5 +1,5 @@
 import React from "react";
-import { Global, css, connect, URL, styled } from "frontity";
+import { Global, css, connect, styled } from "frontity";
 import Package from "../types";
 
 const GlobalBackgroundBlue = () => {
@@ -86,9 +86,9 @@ const EmotionPackage: Package = {
   state: {},
   actions: {},
   roots: {
-    emotion: Root
+    emotion: Root,
   },
-  libraries: {}
+  libraries: {},
 };
 
 export default EmotionPackage;
