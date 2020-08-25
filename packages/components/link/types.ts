@@ -73,7 +73,7 @@ export interface LinkProps {
 
   /**
    * Whether frontity should automatically prefetch this link or not.
-   * The prefetching mode is controlled through state.theme.prefetch.
+   * The prefetching mode is controlled through `state.theme.autoPrefetch`.
    *
    * @defaultValue true
    */
