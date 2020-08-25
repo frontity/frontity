@@ -1,7 +1,4 @@
-import { Settings } from "frontity/types";
-import WpSource from "@frontity/wp-source/types";
-
-const settings: Settings<WpSource> = {
+const settings = {
   name: "mars-theme-example",
   state: {
     frontity: {
