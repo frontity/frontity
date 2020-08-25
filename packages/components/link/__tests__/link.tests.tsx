@@ -542,7 +542,7 @@ describe("Link prefetching", () => {
     act(() => {
       render(
         <Provider value={storeInViewMode}>
-          {links.map((link) => (
+          {links.map((link, i) => (
             <Link key={link} link={link} className={"my-link-${i}"}>
               This is a link
             </Link>
