@@ -36,6 +36,9 @@ prod = prod || false;
 cypressCommand = cypressCommand || "open";
 suite = suite || "all";
 
+// Flag to know if we have started Docker.
+let isDockerRunning = false;
+
 // Validate CLI args.
 validateArgs(target, { possibleValues: ["es5", "module", "both"] });
 validateArgs(browser, { possibleValues: ["firefox", "chrome", "edge"] });
@@ -61,6 +64,9 @@ process.chdir(__dirname);
       // Run all the services defined in docker-compose.yml: wp, wpcli & mysql
       // (in the background via the -d flag).
       await execa("docker-compose", ["up", "-d"], { stdio: "inherit" });
+
+      // Set the flag. We will needed it later to stop the containers.
+      isDockerRunning = true;
 
       // Wait until WordPress is responsive.
       await waitOn({
@@ -150,17 +156,27 @@ process.chdir(__dirname);
         }
       }
 
-      // Stop all the containers and remove all the volumes that they use (the
-      // `-v` option).
-      await execa("docker-compose", ["down", "-v"], {
-        stdio: "inherit",
-      });
+      if (isDockerRunning) {
+        // Stop all the containers and remove all the volumes that they use (the
+        // `-v` option).
+        await execa("docker-compose", ["down", "-v"], {
+          stdio: "inherit",
+        });
+      }
 
       // Exit the process to indicate that everything went fine.
       process.exit(0);
     }
   } catch (err) {
     console.error(err);
+
+    if (isDockerRunning) {
+      // Stop all the containers and remove all the volumes that they use (the
+      // `-v` option).
+      await execa("docker-compose", ["down", "-v"], {
+        stdio: "inherit",
+      });
+    }
 
     // We need to return the exit code so that the GitHub action returns a fail.
     process.exit(1);
