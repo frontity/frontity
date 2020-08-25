@@ -1,7 +1,7 @@
 /**
  * Configuration for the prefetcher behaviour.
  */
-const config = {
+export const config = {
   /**
    * The number of miliseconds to wait until the hover triggers the prefetch.
    *
