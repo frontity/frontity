@@ -19,7 +19,7 @@ describe("Script", () => {
   it("should access code from the external script", () => {
     let isMoment;
     cy.window()
-      .then(win => {
+      .then((win) => {
         isMoment = win.moment()._isAMomentObject;
       })
       .then(() => {

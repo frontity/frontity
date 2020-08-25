@@ -57,7 +57,7 @@ describe("styled", () => {
 
   it("should have a Styled class name (autoLabel)", () => {
     cy.visit("http://localhost:3001/styled-css?name=emotion");
-    cy.get("[data-test-id='styled-div']").should(div => {
+    cy.get("[data-test-id='styled-div']").should((div) => {
       const className = div[0].className;
       expect(className).toContain("Styled");
     });
@@ -97,7 +97,7 @@ describe("css", () => {
 
   it("should have a Styled class name (autoLabel)", () => {
     cy.visit("http://localhost:3001/styled-css?name=emotion");
-    cy.get("[data-test-id='css-div']").should(div => {
+    cy.get("[data-test-id='css-div']").should((div) => {
       const className = div[0].className;
       expect(className).toContain("CSS");
     });
