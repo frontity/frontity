@@ -33,6 +33,7 @@ const Link: React.FC<LinkProps> = ({
   target = "_self",
   scroll = true,
   prefetch = true,
+  "aria-current": ariaCurrent,
   ...anchorProps
 }) => {
   const { state, actions } = useConnect<Packages>();
