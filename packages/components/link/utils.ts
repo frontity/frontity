@@ -85,7 +85,7 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
   let timeout: ReturnType<typeof setTimeout> = null;
 
   /**
-   * When the mouse is moved over the element, if delays the call of the
+   * When the mouse is moved over the element, it delays the call of the
    * callback for a number of miliseconds, as configured in
    * `config.hoverDelay`.
    */
@@ -96,8 +96,8 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
   };
 
   /**
-   * Removes the timeout to avoid executing the callback if when the mouse is
-   * moved out of the element.
+   * Removes the timeout to avoid executing the callback if the cursor is
+   * moved out of the element before `config.hoverDelay`
    */
   const mouseOutHandler = () => {
     clearTimeout(timeout);
