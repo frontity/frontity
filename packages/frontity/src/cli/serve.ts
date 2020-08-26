@@ -8,6 +8,8 @@ interface ServeOptions {
   /**
    * The port that should be used to open the server.
    *
+   * It can be also configured using the `FRONTITY_SERVE_PORT` env variable.
+   *
    * @example
    * ```sh
    * # This will start Frontity in http://localhost:3003.
@@ -23,6 +25,8 @@ interface ServeOptions {
    *
    * The certificates used are stored internally in the Frontity core and are
    * not meant to be used in production, only in local development.
+   *
+   * It can be also configured using the `FRONTITY_SERVE_HTTPS` env variable.
    *
    * @example
    * ```sh

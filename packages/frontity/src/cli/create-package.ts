@@ -19,11 +19,17 @@ interface CreatePackageOptions {
    * The name of your Frontity package. The create-package command will
    * create a folder with this name, under `/packages`. It will also add the
    * proper dependency in the package.json of your Frontity project.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_PACKAGE_NAME` env
+   * variable.
    */
   name: string;
 
   /**
    * The namespace that should be used to create this package.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_PACKAGE_NAMESPACE`
+   * env variable.
    *
    * @example "analytics"
    *

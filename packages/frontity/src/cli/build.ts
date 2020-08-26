@@ -19,6 +19,8 @@ interface BuildOptions {
    * 10, not op_mini all, op_mob \>= 46, opera \>= 36, "safari \>= 10, samsung
    * \>= 5.
    *
+   * It can be also configured using the `FRONTITY_BUILD_TARGET` env variable.
+   *
    * @defaultValue "both"
    */
   target?: string;
@@ -29,6 +31,9 @@ interface BuildOptions {
    *
    * Webpack docs: https://webpack.js.org/configuration/mode/.
    *
+   * It can be also configured using the `FRONTITY_BUILD_DEVELOPMENT` env
+   * variable.
+   *
    * @defaultValue false
    */
   development?: boolean;
@@ -37,6 +42,9 @@ interface BuildOptions {
    * The publicPath option of Webpack.
    *
    * Webpack docs: https://webpack.js.org/guides/public-path/.
+   *
+   * It can be also configured using the `FRONTITY_BUILD_PUBLIC_PATH` env
+   * variable.
    *
    * @example
    * ```sh

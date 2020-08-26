@@ -15,11 +15,15 @@ interface CreateOptions {
    * The name of your Frontity project. It will also be the name of the folder
    * that this command will create for you with the files of your Frontity
    * project inside.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_NAME` env variable.
    */
   name: string;
 
   /**
    * The theme that will be installed. It can be a npm package.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_THEME` env variable.
    *
    * @defaultValue `@frontity/mars-theme`
    */
@@ -28,6 +32,9 @@ interface CreateOptions {
   /**
    * Whether to bootstrap the project with TypeScript files.
    *
+   * It can be also configured using the `FRONTITY_CREATE_TYPESCRIPT` env
+   * variable.
+   *
    * @defaultValue false
    */
   typescript?: boolean;
@@ -35,6 +42,9 @@ interface CreateOptions {
   /**
    * Whether to create the files inside the current working directory instead
    * of a new folder.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_USE_CWD` env
+   * variable.
    *
    * @defaultValue false
    */

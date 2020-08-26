@@ -19,6 +19,8 @@ interface DevOptions {
    * 10, not op_mini all, op_mob \>= 46, opera \>= 36, "safari \>= 10, samsung
    * \>= 5.
    *
+   * It can be also configured using the `FRONTITY_DEV_TARGET` env variable.
+   *
    * @defaultValue "module"
    */
   target?: string;
@@ -29,6 +31,9 @@ interface DevOptions {
    *
    * Webpack docs: https://webpack.js.org/configuration/mode/.
    *
+   * It can be also configured using the `FRONTITY_DEV_PRODUCTION` env
+   * variable.
+   *
    * @defaultValue false
    */
   production?: boolean;
@@ -37,6 +42,9 @@ interface DevOptions {
    * The publicPath option of Webpack.
    *
    * Webpack docs: https://webpack.js.org/guides/public-path/.
+   *
+   * It can be also configured using the `FRONTITY_DEV_PUBLIC_PATH` env
+   * variable.
    *
    * @example
    * ```sh
@@ -50,6 +58,8 @@ interface DevOptions {
 
   /**
    * The port that should be used to open the server.
+   *
+   * It can be also configured using the `FRONTITY_DEV_PORT` env variable.
    *
    * @example
    * ```sh
@@ -67,6 +77,8 @@ interface DevOptions {
    * The certificates used are stored internally in the Frontity core and are
    * not meant to be used in production, only in local development.
    *
+   * It can be also configured using the `FRONTITY_DEV_HTTPS` env variable.
+   *
    * @example
    * ```sh
    * # This will start Frontity in https://localhost:3000.
@@ -79,6 +91,9 @@ interface DevOptions {
 
   /**
    * Indicates if a browser tab should be opened once Frontity starts.
+   *
+   * It can be also configured using the `FRONTITY_DEV_DONT_OPEN_BROWSER` env
+   * variable.
    *
    * @defaultValue true
    */
