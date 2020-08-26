@@ -8,7 +8,7 @@
   "devDependencies": {
     "@types/execa": "^2.0.0",
     "@types/wait-on": "^4.0.0",
-    "cypress": "^4.7.0",
+    "cypress": "^5.0.0",
     "cypress-plugin-snapshots": "^1.4.3",
     "execa": "^4.0.3",
     "minimist": "^1.2.5",
