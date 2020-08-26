@@ -25,7 +25,7 @@ module.exports = (on, config) => {
     installPlugin({ name, version }) {
       return (async () => {
         await execa.command(
-          `docker-compose run wpcli wp plugin install ${name}${
+          `docker-compose run --rm wpcli wp plugin install ${name}${
             version ? ` --version=${version}` : ""
           }`,
           { stdio: "inherit" }
@@ -85,9 +85,12 @@ module.exports = (on, config) => {
      */
     removeAllPlugins() {
       return (async () => {
-        await execa.command(`docker-compose run wpcli wp plugin delete --all`, {
-          stdio: "inherit",
-        });
+        await execa.command(
+          `docker-compose run --rm wpcli wp plugin delete --all`,
+          {
+            stdio: "inherit",
+          }
+        );
         return null;
       })();
     },
