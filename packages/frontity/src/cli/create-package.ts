@@ -2,7 +2,7 @@ import ora from "ora";
 import chalk from "chalk";
 import { normalize } from "path";
 import { prompt, Question } from "inquirer";
-import createPackage from "../commands/create-package";
+import createPackageCommand from "../commands/create-package";
 import {
   errorLogger,
   isFrontityProjectRoot,
@@ -11,34 +11,59 @@ import {
 } from "../utils";
 import { Options } from "../steps/create-package";
 
-//  Command:
-//    create-package [name]
-//
-//  Steps:
-//    1. validate project location
-//    2. ask for the package name if it wasn't passed as argument and validate
-//    3. ask for the package namespace if it wasn't passed as argument
-//    4. create package
+/**
+ * Options for the create-package command.
+ */
+interface CreatePackageOptions {
+  /**
+   * The name of your Frontity package. The create-package command will
+   * create a folder with this name, under `/packages`. It will also add the
+   * proper dependency in the package.json of your Frontity project.
+   */
+  name: string;
 
-export default async ({
+  /**
+   * The namespace that should be used to create this package.
+   *
+   * @example "analytics"
+   *
+   * @defaultValue "theme"
+   */
+  namespace?: string;
+
+  /**
+   * Whether to prompt the user in the CLI or to run the command silently,
+   * using only the CLI args and environment variables found.
+   *
+   * @defaultValue true
+   */
+  prompt?: boolean;
+}
+
+/**
+ * The create CLI command, usually run with `npx frontity create-package`.
+ *
+ * It takes args from the CLI and checks for the presence of environment
+ * variables. Then, it runs the create command programatically.
+ *
+ * @param options - Defined in {@link CreatePackageOptions}.
+ */
+const createPackage = async ({
   name,
   namespace,
   prompt: promptUser,
-}: {
-  name: string;
-  namespace?: string;
-  prompt: boolean;
-}) => {
-  name = name || process.env.FRONTITY_NAME;
+}: CreatePackageOptions) => {
+  name = name || process.env.FRONTITY_CREATE_PACKAGE_NAME;
+  namespace = namespace || process.env.FRONTITY_CREATE_PACKAGE_NAMESPACE;
 
   if (!promptUser && !name) {
-    errorLogger(new Error("You need to provide the name for the project"));
+    errorLogger(new Error("You need to provide the name for the package."));
   }
 
-  // Init options
+  // Init options.
   const options: Options = {};
 
-  // Validate project location
+  // Validate project location.
   options.projectPath = process.cwd();
   if (!(await isFrontityProjectRoot(options.projectPath))) {
     errorLogger(
@@ -48,36 +73,31 @@ export default async ({
     );
   }
 
-  // Ask for the package name if it wasn't passed as argument and validate
-  if (!name) {
+  if (name) {
+    // Name was passed as arg or env variable.
+    options.name = name;
+  } else if (promptUser) {
+    // Name was missing, but we can prompt.
     const questions: Question[] = [
       {
         name: "name",
         type: "input",
-        message: "Enter a name for the package:",
+        message: "Enter the name of the package:",
         default: "my-frontity-package",
       },
     ];
-
     const answers = await prompt(questions);
     options.name = answers.name;
   } else {
-    options.name = name;
+    // Name is missing and we can't prompt. Stop.
+    errorLogger(new Error("You need to provide the name of the package."));
   }
 
-  if (!isThemeNameValid(options.name)) {
-    errorLogger(
-      new Error("The name of the package is not a valid npm package name.")
-    );
-  }
-
-  // 2.1 set the package path
-  options.packagePath = normalize(
-    `packages/${options.name.replace(/(?:@.+\/)/i, "")}`
-  );
-
-  // 3. ask for the package namespace if it wasn't passed as argument
-  if (!namespace) {
+  if (namespace) {
+    // Namespace was passed as arg or env variable.
+    options.namespace = namespace;
+  } else if (promptUser) {
+    // Namespace was missing, but we can prompt.
     const questions: Question[] = [
       {
         name: "namespace",
@@ -86,23 +106,36 @@ export default async ({
         default: "theme",
       },
     ];
-
     const answers = await prompt(questions);
     options.namespace = answers.namespace;
   } else {
-    options.namespace = namespace;
+    // Add the default option.
+    options.namespace = "theme";
   }
 
+  if (!isThemeNameValid(options.name)) {
+    errorLogger(
+      new Error(
+        "The name of the package is not a valid npm package name. Please start again."
+      )
+    );
+  }
+
+  // Set the package path.
+  options.packagePath = normalize(
+    `packages/${options.name.replace(/(?:@.+\/)/i, "")}`
+  );
+
   try {
-    // 4. get the emitter for `create-package`
-    const emitter = createPackage(options);
+    // Get the emitter for `create-package`.
+    const emitter = createPackageCommand(options);
 
     emitter.on("message", (message, action) => {
       if (action) ora.promise(action, message);
       else log(message);
     });
 
-    // 5. Actually create the package
+    // Actually create the package.
     await emitter;
   } catch (error) {
     errorLogger(error);
@@ -110,3 +143,5 @@ export default async ({
 
   log(chalk.bold(`\nNew package "${options.name}" created.\n`));
 };
+
+export default createPackage;
