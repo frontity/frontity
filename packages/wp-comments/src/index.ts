@@ -82,7 +82,8 @@ const wpComments: WpComments = {
         setBody("post", postId.toString());
 
         // Generate endpoint URL.
-        const commentsPost = state.source.api + "/wp/v2/comments";
+        const commentsPost =
+          state.source.api.replace(/\/$/, "") + "/wp/v2/comments";
 
         // Send a POST request.
         let response: Response;
