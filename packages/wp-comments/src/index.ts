@@ -1,6 +1,6 @@
-import { fetch, warn, URL } from "frontity";
+import { fetch, warn } from "frontity";
 import { commentsHandler } from "./libraries";
-import WpComments, { WpComment } from "../types";
+import WpComments, { WpComment, WpCommentError } from "../types";
 
 const wpComments: WpComments = {
   name: "@frontity/wp-comments",
@@ -53,6 +53,7 @@ const wpComments: WpComments = {
         form.submitted = {
           isError: false,
           errorMessage: "",
+          errorCode: "",
           isPending: true,
           isOnHold: false,
           isApproved: false,
@@ -75,9 +76,9 @@ const wpComments: WpComments = {
         // Generate form content.
         setBody("content", fields?.content);
         setBody("author", fields?.author?.toString());
-        setBody("author_name", fields?.author_name);
-        setBody("author_email", fields?.author_email);
-        setBody("author_url", fields?.author_url);
+        setBody("author_name", fields?.authorName);
+        setBody("author_email", fields?.authorEmail);
+        setBody("author_url", fields?.authorURL);
         setBody("parent", fields?.parent?.toString());
         setBody("post", postId.toString());
 
@@ -121,11 +122,14 @@ const wpComments: WpComments = {
           return;
         }
 
-        // 409 Conflict - The comment was already submitted, is duplicated.
-        if (response.status === 409) {
+        // Handle 4xx errors
+        if (response.status >= 400 && response.status < 500) {
+          const errorBody: WpCommentError = await response.json();
+
           form.submitted.isPending = false;
           form.submitted.isError = true;
-          form.submitted.errorMessage = "The comment was already submitted";
+          form.submitted.errorMessage = errorBody.message;
+          form.submitted.errorCode = errorBody.code;
           return;
         }
 

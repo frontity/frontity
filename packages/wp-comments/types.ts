@@ -28,12 +28,12 @@ export interface WpComment {
   /**
    * Display name for the object author.
    */
-  author_name: string;
+  authorName: string;
 
   /**
    * URL for the object author.
    */
-  author_url: string;
+  authorURL: string;
 
   /**
    * The date the object was published, in the site's timezone.
@@ -82,6 +82,35 @@ export interface WpComment {
 }
 
 /**
+ * The error that might be received from WordPress when POSTing a comment.
+ */
+export interface WpCommentError {
+  /**
+   * An identifier for the error in the WordPress REST API.
+   *
+   * @example rest_comment_invalid_post_id
+   */
+  code: string;
+
+  /**
+   * Just a namespace.
+   */
+  data: {
+    /**
+     * The status code of the HTTP response.
+     */
+    status: number;
+  };
+
+  /**
+   * The human-readable error message.
+   *
+   * @example "Sorry, you are not allowed to create this comment without a post."
+   */
+  message: string;
+}
+
+/**
  * Comment item, added by {@link commentsHandler} to data objects in
  * `state.source`.
  */
@@ -127,7 +156,7 @@ export interface Fields {
   /**
    * Author's name.
    */
-  author_name?: string;
+  authorName?: string;
 
   /**
    * The ID of the author.
@@ -137,14 +166,14 @@ export interface Fields {
   /**
    * Author's email.
    */
-  author_email?: string;
+  authorEmail?: string;
 
   /**
    * URL of the author's site.
    *
    * @defaultValue ""
    */
-  author_url?: string;
+  authorURL?: string;
 
   /**
    * Content of the comment.
@@ -187,6 +216,13 @@ export interface Submitted extends Fields {
    * Failure reason.
    */
   errorMessage: string;
+
+  /**
+   * The error code. Those are defined internally in the WordPress REST API.
+   *
+   * @example rest_comment_invalid_post_id
+   */
+  errorCode: string;
 
   /**
    * Submission timestamp.
