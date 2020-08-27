@@ -15,7 +15,7 @@ describe("wp-comments", () => {
     cy.task("removeAllPlugins");
   });
 
-  const commentForPostId = (postId) => ({
+  const comment = (postId) => ({
     shouldHavePropertyWithValue: (property, value) =>
       cy
         .window()
@@ -30,22 +30,16 @@ describe("wp-comments", () => {
   it("should work in the basic case", () => {
     cy.get("#comment-ok").click();
 
-    commentForPostId(1).shouldHavePropertyWithValue("submitted.isOnHold", true);
-    commentForPostId(1).shouldHavePropertyWithValue(
-      "submitted.isApproved",
-      false
-    );
-    commentForPostId(1).shouldHavePropertyWithValue("submitted.id", 2);
+    comment(1).shouldHavePropertyWithValue("submitted.isOnHold", true);
+    comment(1).shouldHavePropertyWithValue("submitted.isApproved", false);
+    comment(1).shouldHavePropertyWithValue("submitted.id", 2);
   });
 
   it("should return an error when sending a comment for a non-existing post ID", () => {
     cy.get("#comment-wrong-id").click();
 
-    commentForPostId(9999).shouldHavePropertyWithValue(
-      "submitted.isError",
-      true
-    );
-    commentForPostId(9999).shouldHavePropertyWithValue(
+    comment(9999).shouldHavePropertyWithValue("submitted.isError", true);
+    comment(9999).shouldHavePropertyWithValue(
       "submitted.errorMessage",
       "Sorry, you are not allowed to create this comment without a post."
     );
@@ -54,8 +48,8 @@ describe("wp-comments", () => {
   it("should return when sending a comment without an email", () => {
     cy.get("#comment-no-email").click();
 
-    commentForPostId(1).shouldHavePropertyWithValue("submitted.isError", true);
-    commentForPostId(1).shouldHavePropertyWithValue(
+    comment(1).shouldHavePropertyWithValue("submitted.isError", true);
+    comment(1).shouldHavePropertyWithValue(
       "submitted.errorMessage",
       "Creating a comment requires valid author name and email values."
     );
@@ -71,12 +65,9 @@ describe("wp-comments", () => {
     cy.get("#comment-ok").click();
     cy.get("#comment-ok").click();
 
-    commentForPostId(1).shouldHavePropertyWithValue("submitted.isOnHold", true);
-    commentForPostId(1).shouldHavePropertyWithValue(
-      "submitted.isApproved",
-      false
-    );
-    commentForPostId(1).shouldHavePropertyWithValue("submitted.id", 2);
+    comment(1).shouldHavePropertyWithValue("submitted.isOnHold", true);
+    comment(1).shouldHavePropertyWithValue("submitted.isApproved", false);
+    comment(1).shouldHavePropertyWithValue("submitted.id", 2);
 
     cy.get("@consoleWarn").should(
       "be.calledWith",
