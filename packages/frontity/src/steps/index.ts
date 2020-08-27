@@ -14,22 +14,31 @@ import {
 import { extract } from "tar";
 import fetch from "node-fetch";
 import { mergeRight } from "ramda";
-
 import {
   isPackageNameValid,
   isThemeNameValid,
   fetchPackageVersion,
 } from "../utils";
-import { Options, PackageJson } from "./types";
+import { CreateCommandOptions, PackageJson } from "./types";
 
 const allowedExistingContent = ["readme.md", "license", ".git", ".gitignore"];
 const faviconUrl = "https://favicon.frontity.org/";
 
-// This function normalizes and validates options.
+/**
+ * This function normalizes and validates options.
+ *
+ * @param defaultOptions - The default options. Defined in {@link
+ * CreateCommandOptions}.
+ * @param passedOptions - The options from the user. Defined in {@link
+ * CreateCommandOptions}.
+ *
+ * @returns The final options, normalized. Defined in {@link
+ * CreateCommandOptions}.
+ */
 export const normalizeOptions = (
-  defaultOptions: Options,
-  passedOptions: Options
-): Options => {
+  defaultOptions: CreateCommandOptions,
+  passedOptions: CreateCommandOptions
+): CreateCommandOptions => {
   const options = mergeRight(defaultOptions, passedOptions);
 
   // Normalize and validate `name` option.
@@ -43,8 +52,14 @@ export const normalizeOptions = (
   return options;
 };
 
-// This function ensures the path and checks if it's empty or it's a new repo.
-// Also returns a boolean indicating if the dir existed already.
+/**
+ * This function ensures the path exists and checks if it's empty or it's a new
+ * repo. Also returns a boolean indicating if the directory existed already.
+ *
+ * @param path - The path were the project will be installed.
+ *
+ * @returns A promise that resolves once the check has been made.
+ */
 export const ensureProjectDir = async (path: string): Promise<boolean> => {
   const dirExisted = await pathExists(path);
 
@@ -65,7 +80,13 @@ export const ensureProjectDir = async (path: string): Promise<boolean> => {
   return dirExisted;
 };
 
-// This function creates a `package.json` file.
+/**
+ * Create a `package.json` file.
+ *
+ * @param name - The name of the project.
+ * @param theme - The theme that will be cloned and installed locally.
+ * @param path - The path were the file will be created.
+ */
 export const createPackageJson = async (
   name: string,
   theme: string,
@@ -103,6 +124,10 @@ export const createPackageJson = async (
     private: true,
     description: "Frontity project",
     keywords: ["frontity"],
+    engines: {
+      node: ">=10.0.0",
+      npm: ">=6.0.0",
+    },
     scripts: {
       dev: "frontity dev",
       build: "frontity build",
@@ -116,7 +141,12 @@ export const createPackageJson = async (
   await writeFile(filePath, fileData);
 };
 
-// This function create a `README.md` file.
+/**
+ * Create a `README.md` file.
+ *
+ * @param name - The name of the project.
+ * @param path - The path were the file will be created.
+ */
 export const createReadme = async (
   name: string,
   path: string
@@ -132,7 +162,14 @@ export const createReadme = async (
   await writeFile(filePath, fileData);
 };
 
-// This function creates a `frontity.settings` file.
+/**
+ * Create a `frontity.settings` file.
+ *
+ * @param extension - The extension of the file, either `.js` or `.ts`.
+ * @param name - The name of the project.
+ * @param path - The path were the file will be created.
+ * @param theme - The theme installed in the project.
+ */
 export const createFrontitySettings = async (
   extension: string,
   name: string,
@@ -190,7 +227,12 @@ export const createFrontitySettings = async (
   await writeFile(filePath, fileData);
 };
 
-// This functions clones the starter theme.
+/**
+ * Clone the starter theme.
+ *
+ * @param theme - The name of the theme.
+ * @param path - The path were it needs to be installed.
+ */
 export const cloneStarterTheme = async (theme: string, path: string) => {
   const packageJsonPath = resolvePath(path, "./package.json");
   const packageJson = JSON.parse(
@@ -209,12 +251,20 @@ export const cloneStarterTheme = async (theme: string, path: string) => {
   await remove(tarballPath);
 };
 
-// This function installs the Frontity packages.
+/**
+ * Install the Frontity packages.
+ *
+ * @param path -
+ */
 export const installDependencies = async (path: string) => {
   await promisify(exec)("npm install", { cwd: path });
 };
 
-// This function downlaods the favicon file.
+/**
+ * Downlaod the favicon file.
+ *
+ * @param path - The path were the favicon should be downloaded.
+ */
 export const downloadFavicon = async (path: string) => {
   const response = await fetch(faviconUrl);
   const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
@@ -222,8 +272,13 @@ export const downloadFavicon = async (path: string) => {
   await new Promise((resolve) => fileStream.on("finish", resolve));
 };
 
-// This function removes the files and directories created
-// with `frontity create`.
+/**
+ * Remove the files and directories created with `frontity create` in case there
+ * was a problem and we need to revert everything.
+ *
+ * @param dirExisted - If the directory existed already.
+ * @param path - The path of the direcotry.
+ */
 export const revertProgress = async (dirExisted: boolean, path: string) => {
   if (dirExisted) {
     const content = await readDir(path);
@@ -236,12 +291,24 @@ export const revertProgress = async (dirExisted: boolean, path: string) => {
   }
 };
 
+/**
+ * Check if an email is valid or not.
+ *
+ * @param email - The email to be checked.
+ *
+ * @returns True or false depending if the email is valid.
+ */
 const isEmailValid = (email: string): boolean =>
   /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i.test(email);
 
+/**
+ * Subscribe an email to the newsletter service.
+ *
+ * @param email - The email to be subscribed.
+ *
+ * @returns The response of the subscription.
+ */
 export const subscribe = async (email: string) => {
-  let step: Promise<any>;
-
   if (!isEmailValid(email))
     throw new Error("Email not valid. Please enter a valid email.");
 
