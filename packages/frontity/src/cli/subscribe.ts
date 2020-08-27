@@ -11,6 +11,8 @@ interface SubscribeOptions {
   /**
    * The email that will be subscribed to the newsletter service.
    *
+   * It will be prompted if the CLI arg is missing.
+   *
    * @example `name@domain.com`
    */
   email: string;

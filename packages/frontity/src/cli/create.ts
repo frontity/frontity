@@ -17,6 +17,11 @@ interface CreateOptions {
    * project inside.
    *
    * It can be also configured using the `FRONTITY_CREATE_NAME` env variable.
+   *
+   * It will be prompted if both the CLI arg and the env variables is missing
+   * and the `prompt` is false.
+   *
+   * @example "my-frontity-project"
    */
   name: string;
 
@@ -24,6 +29,11 @@ interface CreateOptions {
    * The theme that will be installed. It can be a npm package.
    *
    * It can be also configured using the `FRONTITY_CREATE_THEME` env variable.
+   *
+   * It will be prompted if both the CLI arg and the env variables is missing
+   * and the `prompt` is false.
+   *
+   * @example "my-awesome-theme"
    *
    * @defaultValue `@frontity/mars-theme`
    */
