@@ -12,18 +12,14 @@ describe("actions.comments.updateFields", () => {
 
     // Pass `comment` field.
     store.actions.comments.updateFields(postId, {
-      comment: "Hello world!",
+      content: "Hello world!",
     });
 
     expect(store.state.comments.forms).toMatchInlineSnapshot(`
       Object {
         "60": Object {
           "fields": Object {
-            "author": "",
-            "comment": "Hello world!",
-            "email": "",
-            "parent": 0,
-            "url": "",
+            "content": "Hello world!",
           },
         },
       }
@@ -41,10 +37,10 @@ describe("actions.comments.updateFields", () => {
           forms: {
             [postId]: {
               fields: {
-                author: "John Doe",
-                comment: "Hello world!",
-                email: "johndoe@email.test",
-                url: "",
+                content: "Hello world!",
+                authorName: "John Doe",
+                authorEmail: "johndoe@email.test",
+                authorURL: "",
                 parent: 0,
               },
             },
@@ -58,18 +54,18 @@ describe("actions.comments.updateFields", () => {
 
     // Change `comment` from "Hello world!" to "Hi everybody!".
     store.actions.comments.updateFields(postId, {
-      comment: "Hi everybody!",
+      content: "Hi everybody!",
     });
 
     expect(store.state.comments.forms).toMatchInlineSnapshot(`
       Object {
         "60": Object {
           "fields": Object {
-            "author": "John Doe",
-            "comment": "Hi everybody!",
-            "email": "johndoe@email.test",
+            "authorEmail": "johndoe@email.test",
+            "authorName": "John Doe",
+            "authorURL": "",
+            "content": "Hi everybody!",
             "parent": 0,
-            "url": "",
           },
         },
       }
@@ -87,9 +83,9 @@ describe("actions.comments.updateFields", () => {
           forms: {
             [postId]: {
               fields: {
-                author: "John Doe",
-                comment: "Hello world!",
-                email: "hello@johndoe.test",
+                content: "Hello world!",
+                authorName: "John Doe",
+                authorEmail: "hello@johndoe.test",
               },
             },
           },
@@ -102,22 +98,22 @@ describe("actions.comments.updateFields", () => {
 
     // Change all form fields.
     store.actions.comments.updateFields(postId, {
-      author: "Jane Doe",
-      comment: "Hi everybody!",
-      email: "hi@janedoe.test",
+      authorName: "Jane Doe",
+      content: "Hi everybody!",
+      authorEmail: "hi@janedoe.test",
       parent: 123,
-      url: "https://janedoe.test",
+      authorURL: "https://janedoe.test",
     });
 
     expect(store.state.comments.forms).toMatchInlineSnapshot(`
       Object {
         "60": Object {
           "fields": Object {
-            "author": "Jane Doe",
-            "comment": "Hi everybody!",
-            "email": "hi@janedoe.test",
+            "authorEmail": "hi@janedoe.test",
+            "authorName": "Jane Doe",
+            "authorURL": "https://janedoe.test",
+            "content": "Hi everybody!",
             "parent": 123,
-            "url": "https://janedoe.test",
           },
         },
       }
@@ -135,9 +131,9 @@ describe("actions.comments.updateFields", () => {
           forms: {
             [postId]: {
               fields: {
-                author: "John Doe",
-                comment: "Hello world!",
-                email: "hello@johndoe.test",
+                content: "Hello world!",
+                authorName: "John Doe",
+                authorEmail: "hello@johndoe.test",
               },
             },
           },
@@ -151,15 +147,12 @@ describe("actions.comments.updateFields", () => {
     // Change all form fields.
     store.actions.comments.updateFields(postId);
 
+    // Only `content` should remain
     expect(store.state.comments.forms).toMatchInlineSnapshot(`
       Object {
         "60": Object {
           "fields": Object {
-            "author": "",
-            "comment": "",
-            "email": "",
-            "parent": 0,
-            "url": "",
+            "content": "",
           },
         },
       }
