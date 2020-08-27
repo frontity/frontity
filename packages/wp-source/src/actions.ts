@@ -1,4 +1,4 @@
-import { URL, error } from "frontity";
+import { error } from "frontity";
 import WpSource from "../types";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
