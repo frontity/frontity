@@ -1,18 +1,40 @@
 import { Configuration } from "webpack";
 import { Target } from "../../../types";
 
-export default ({
-  target,
-}: {
+/**
+ * The options of the {@link performance} function.
+ */
+interface PerformanceOptions {
+  /**
+   * The target of the build: "server", "es5" or "module".
+   */
   target: Target;
-}): Configuration["performance"] => ({
+}
+
+/**
+ * Generate the object for Webpack's performance configuration.
+ *
+ * Official Webpack docs: https://webpack.js.org/configuration/performance/.
+ *
+ * @param options - Defined in {@link PerformanceOptions}.
+ *
+ * @returns The configuration object for Webpack.
+ */
+const performance = ({
+  target,
+}: PerformanceOptions): Configuration["performance"] => ({
+  hints: "warning",
   ...(target === "server"
     ? {
-        maxEntrypointSize: 3000000,
-        maxAssetSize: 3000000,
+        // Max size recommended for the server bundle: 5Mbs.
+        maxEntrypointSize: 5000000,
+        maxAssetSize: 5000000,
       }
     : {
-        maxEntrypointSize: 300000,
-        maxAssetSize: 300000,
+        // Max size recommended for the client bundles: 500Kbs.
+        maxEntrypointSize: 500000,
+        maxAssetSize: 500000,
       }),
 });
+
+export default performance;
