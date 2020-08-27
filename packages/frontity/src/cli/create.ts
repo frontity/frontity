@@ -5,7 +5,7 @@ import { prompt, Question, ListQuestion } from "inquirer";
 import createCommand from "../commands/create";
 import { subscribe } from "../steps";
 import { errorLogger, log } from "../utils";
-import { Options } from "../steps/types";
+import { CreateCommandOptions } from "../steps/types";
 
 /**
  * Options for the {@link create} command.
@@ -89,7 +89,7 @@ const create = async ({
   typescript = typescript || !!process.env.FRONTITY_CREATE_TYPESCRIPT;
   useCwd = useCwd || !!process.env.FRONTITY_CREATE_USE_CWD;
 
-  const options: Options = {};
+  const options: CreateCommandOptions = {};
 
   if (name) {
     // Name was passed as arg or env variable.
