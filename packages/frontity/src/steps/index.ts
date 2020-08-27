@@ -56,7 +56,7 @@ export const normalizeOptions = (
  * This function ensures the path exists and checks if it's empty or it's a new
  * repo. Also returns a boolean indicating if the directory existed already.
  *
- * @param path - The path were the project will be installed.
+ * @param path - The path where the project will be installed.
  *
  * @returns A promise that resolves once the check has been made.
  */
@@ -85,7 +85,7 @@ export const ensureProjectDir = async (path: string): Promise<boolean> => {
  *
  * @param name - The name of the project.
  * @param theme - The theme that will be cloned and installed locally.
- * @param path - The path were the file will be created.
+ * @param path - The path where the file will be created.
  */
 export const createPackageJson = async (
   name: string,
@@ -145,7 +145,7 @@ export const createPackageJson = async (
  * Create a `README.md` file.
  *
  * @param name - The name of the project.
- * @param path - The path were the file will be created.
+ * @param path - The path where the file will be created.
  */
 export const createReadme = async (
   name: string,
@@ -167,7 +167,7 @@ export const createReadme = async (
  *
  * @param extension - The extension of the file, either `.js` or `.ts`.
  * @param name - The name of the project.
- * @param path - The path were the file will be created.
+ * @param path - The path where the file will be created.
  * @param theme - The theme installed in the project.
  */
 export const createFrontitySettings = async (
@@ -231,7 +231,7 @@ export const createFrontitySettings = async (
  * Clone the starter theme.
  *
  * @param theme - The name of the theme.
- * @param path - The path were it needs to be installed.
+ * @param path - The path where it needs to be installed.
  */
 export const cloneStarterTheme = async (theme: string, path: string) => {
   const packageJsonPath = resolvePath(path, "./package.json");
@@ -254,7 +254,7 @@ export const cloneStarterTheme = async (theme: string, path: string) => {
 /**
  * Install the Frontity packages.
  *
- * @param path -
+ * @param path - The location where `npm install` should be run.
  */
 export const installDependencies = async (path: string) => {
   await promisify(exec)("npm install", { cwd: path });
@@ -263,7 +263,7 @@ export const installDependencies = async (path: string) => {
 /**
  * Downlaod the favicon file.
  *
- * @param path - The path were the favicon should be downloaded.
+ * @param path - The path where the favicon should be downloaded.
  */
 export const downloadFavicon = async (path: string) => {
   const response = await fetch(faviconUrl);

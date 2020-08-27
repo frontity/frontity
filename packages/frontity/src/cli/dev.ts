@@ -63,7 +63,7 @@ interface DevOptions {
    *
    * @example
    * ```sh
-   * # This will start Frontity in http://localhost:3003.
+   * # This will start Frontity at http://localhost:3003.
    * npx frontity dev --port 3003
    * ```
    *

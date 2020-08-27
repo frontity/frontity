@@ -18,8 +18,8 @@ interface CreateOptions {
    *
    * It can be also configured using the `FRONTITY_CREATE_NAME` env variable.
    *
-   * It will be prompted if both the CLI arg and the env variables is missing
-   * and the `prompt` is false.
+   * The Frontity CLI will prompt to provide a value if both this CLI argument and
+   * the `FRONTITY_CREATE_NAME` env variable are missing and `prompt` is false.
    *
    * @example "my-frontity-project"
    */
@@ -30,8 +30,8 @@ interface CreateOptions {
    *
    * It can be also configured using the `FRONTITY_CREATE_THEME` env variable.
    *
-   * It will be prompted if both the CLI arg and the env variables is missing
-   * and the `prompt` is false.
+   * The Frontity CLI will prompt to provide a value if both this CLI argument and
+   * the `FRONTITY_CREATE_THEME` env variable are missing and `prompt` is false.
    *
    * @example "my-awesome-theme"
    *

@@ -8,7 +8,7 @@ interface ServeOptions {
   /**
    * The port that should be used to open the server.
    *
-   * It can be also configured using the `FRONTITY_SERVE_PORT` env variable.
+   * It can also be configured using the `FRONTITY_SERVE_PORT` env variable.
    *
    * @example
    * ```sh

@@ -23,8 +23,8 @@ interface CreatePackageOptions {
    * It can be also configured using the `FRONTITY_CREATE_PACKAGE_NAME` env
    * variable.
    *
-   * It will be prompted if both the CLI arg and the env variables is missing
-   * and the `prompt` is false.
+   * The Frontity CLI will prompt to provide a value if both this CLI argument and
+   * the `FRONTITY_CREATE_PACKAGE_NAME` env variable are missing and `prompt` is false.
    *
    * @example "my-frontity-package"
    */
@@ -33,11 +33,11 @@ interface CreatePackageOptions {
   /**
    * The namespace that should be used to create this package.
    *
-   * It can be also configured using the `FRONTITY_CREATE_PACKAGE_NAMESPACE`
+   * It can also be configured using the `FRONTITY_CREATE_PACKAGE_NAMESPACE`
    * env variable.
    *
-   * It will be prompted if both the CLI arg and the env variables is missing
-   * and the `prompt` is false.
+   * The Frontity CLI will prompt to provide a value if both this CLI argument and the
+   * `FRONTITY_CREATE_PACKAGE_NAMESPACE` env variable are missing and `prompt` is false.
    *
    * @example "analytics"
    *
