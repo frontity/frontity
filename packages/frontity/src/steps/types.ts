@@ -1,5 +1,7 @@
 /**
  * Options passed to the `create` function.
+ *
+ * Used for both the CLI and programatic commands.
  */
 export type CreateCommandOptions = {
   /**
