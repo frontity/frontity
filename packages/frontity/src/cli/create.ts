@@ -2,36 +2,100 @@ import { resolve } from "path";
 import ora from "ora";
 import chalk from "chalk";
 import { prompt, Question, ListQuestion } from "inquirer";
-import create from "../commands/create";
+import createCommand from "../commands/create";
 import { subscribe } from "../steps";
 import { errorLogger, log } from "../utils";
-import { Options } from "../steps/types";
+import { CreateCommandOptions } from "../steps/types";
 
-export default async ({
+/**
+ * Options for the {@link create} command.
+ */
+interface CreateOptions {
+  /**
+   * The name of your Frontity project. It will also be the name of the folder
+   * that this command will create for you with the files of your Frontity
+   * project inside.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_NAME` env variable.
+   *
+   * The Frontity CLI will prompt to provide a value if both this CLI argument and
+   * the `FRONTITY_CREATE_NAME` env variable are missing and `prompt` is false.
+   *
+   * @example "my-frontity-project"
+   */
+  name: string;
+
+  /**
+   * The theme that will be installed. It can be a npm package.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_THEME` env variable.
+   *
+   * The Frontity CLI will prompt to provide a value if both this CLI argument and
+   * the `FRONTITY_CREATE_THEME` env variable are missing and `prompt` is false.
+   *
+   * @example "my-awesome-theme"
+   *
+   * @defaultValue `@frontity/mars-theme`
+   */
+  theme?: string;
+
+  /**
+   * Whether to bootstrap the project with TypeScript files.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_TYPESCRIPT` env
+   * variable.
+   *
+   * @defaultValue false
+   */
+  typescript?: boolean;
+
+  /**
+   * Whether to create the files inside the current working directory instead
+   * of a new folder.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_USE_CWD` env
+   * variable.
+   *
+   * @defaultValue false
+   */
+  useCwd?: boolean;
+
+  /**
+   * Whether to prompt the user in the CLI or to run the command silently,
+   * using only the CLI args and environment variables found.
+   *
+   * @defaultValue true
+   */
+  prompt?: boolean;
+}
+
+/**
+ * The create CLI command, usually run with `npx frontity create`.
+ *
+ * It takes args from the CLI and checks for the presence of environment
+ * variables. Then, it runs the create command programatically.
+ *
+ * @param options - Defined in {@link CreateOptions}.
+ */
+const create = async ({
   name,
   theme,
   typescript,
   useCwd,
   prompt: promptUser,
-}: {
-  name: string;
-  theme: string;
-  typescript: boolean;
-  useCwd: boolean;
-  prompt: boolean;
-}) => {
-  name = name || process.env.FRONTITY_NAME;
-  theme = theme || process.env.FRONTITY_THEME;
-  typescript = typescript || !!process.env.FRONTITY_TYPESCRIPT;
-  useCwd = useCwd || !!process.env.FRONTITY_USE_CWD;
+}: CreateOptions) => {
+  name = name || process.env.FRONTITY_CREATE_NAME;
+  theme = theme || process.env.FRONTITY_CREATE_THEME;
+  typescript = typescript || !!process.env.FRONTITY_CREATE_TYPESCRIPT;
+  useCwd = useCwd || !!process.env.FRONTITY_CREATE_USE_CWD;
 
-  if (!promptUser && !name) {
-    errorLogger(new Error("You need to provide the name for the project"));
-  }
+  const options: CreateCommandOptions = {};
 
-  const options: Options = {};
-
-  if (!name) {
+  if (name) {
+    // Name was passed as arg or env variable.
+    options.name = name;
+  } else if (promptUser) {
+    // Name was missing, but we can prompt.
     const questions: Question[] = [
       {
         name: "name",
@@ -40,19 +104,18 @@ export default async ({
         default: "my-frontity-project",
       },
     ];
-
     const answers = await prompt(questions);
     options.name = answers.name;
   } else {
-    options.name = name;
+    // Name is missing and we can't prompt. Stop.
+    errorLogger(new Error("You need to provide the name for the project."));
   }
 
-  // The theme was provided as a CLI option
+  // Theme was passed as arg or env variable.
   if (theme) {
     options.theme = theme;
   } else if (promptUser) {
-    // The theme was NOT provided as a CLI option
-    // In this case, we prompt the user
+    // Theme was missing, but we can prompt.
     const questions: ListQuestion[] = [
       {
         name: "theme",
@@ -71,9 +134,11 @@ export default async ({
         ],
       },
     ];
-
     const answers = await prompt(questions);
     options.theme = answers.theme;
+  } else {
+    // Add the default option.
+    options.theme = "@frontity/mars-theme";
   }
 
   options.typescript = typescript;
@@ -81,7 +146,7 @@ export default async ({
 
   try {
     // Get the emitter for `create`
-    const emitter = create(options);
+    const emitter = createCommand(options);
     emitter.on("message", (message, action) => {
       if (action) ora.promise(action, message);
       else log(message);
@@ -91,37 +156,39 @@ export default async ({
 
     log(chalk.bold("\nFrontity project created.\n"));
 
-    const subscribeQuestions: Question[] = [
-      {
-        name: "subscribe",
-        type: "confirm",
-        message: "Do you want to receive framework updates by email?",
-        default: false,
-      },
-      {
-        name: "email",
-        type: "input",
-        message: "Please, enter your email:",
-        when: (answers) => answers.subscribe,
-      },
-    ];
-    const answers = await prompt(subscribeQuestions);
+    if (promptUser) {
+      const subscribeQuestions: Question[] = [
+        {
+          name: "subscribe",
+          type: "confirm",
+          message: "Do you want to receive framework updates by email?",
+          default: false,
+        },
+        {
+          name: "email",
+          type: "input",
+          message: "Please, enter your email:",
+          when: (answers) => answers.subscribe,
+        },
+      ];
+      const answers = await prompt(subscribeQuestions);
 
-    if (answers.subscribe) {
-      emitter.on("subscribe", (message, action) => {
-        if (action) ora.promise(action, message);
-        else log(message);
-      });
+      if (answers.subscribe) {
+        emitter.on("subscribe", (message, action) => {
+          if (action) ora.promise(action, message);
+          else log(message);
+        });
 
-      await subscribe(answers.email);
+        await subscribe(answers.email);
 
-      log("\nThanks for subscribing! 😃");
-    } else {
-      log(
-        `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
-          "npx frontity subscribe <email>"
-        )}.`
-      );
+        log("\nThanks for subscribing! 😃");
+      } else {
+        log(
+          `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
+            "npx frontity subscribe <email>"
+          )}.`
+        );
+      }
     }
 
     log(
@@ -137,3 +204,5 @@ export default async ({
     errorLogger(error);
   }
 };
+
+export default create;

@@ -1,8 +1,14 @@
-import { info } from "../commands";
+import { info as infoCommand } from "../commands";
 import { writeSync } from "clipboardy";
 
-export default async () => {
-  const information = await info();
+/**
+ * The info CLI command, usually run with `npx frontity info`.
+ *
+ * It retrieves information about the system and writes it in the console so it
+ * can be copied and pasted in an issue.
+ */
+const info = async () => {
+  const information = await infoCommand();
   console.log(`${information}
   
   System info copied in the clipboard!
@@ -11,3 +17,5 @@ export default async () => {
   `);
   writeSync(information);
 };
+
+export default info;
