@@ -4,7 +4,7 @@ import { Connect } from "frontity/types";
 import { Packages, WithYoastHead } from "../../types";
 import { getEntity, getWpUrl } from "@frontity/head-tags/src/utils";
 
-import yoastHeadProcessor from "../processors/yoastHead";
+import headWrapper from "../processors/headWrapper";
 import { transformAllLinks } from "../utils";
 
 /**
@@ -46,9 +46,15 @@ const Root: React.FC<Connect<Packages>> = ({ state, libraries }) => {
     );
   }
 
-  // Render all tags inside <head>.
+  /**
+   * Render all tags inside <head>.
+   *
+   * We need to use <Html2React> here plus a processor because we cannot add
+   * the `yoast_head` string directly inside the <Head> component, it must be
+   * parsed first and converted to React elements.
+   */
   const Html2React = libraries.html2react.Component;
-  return <Html2React html={yoastHead} processors={[yoastHeadProcessor]} />;
+  return <Html2React html={yoastHead} processors={[headWrapper]} />;
 };
 
 export default connect(Root);

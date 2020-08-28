@@ -81,6 +81,6 @@ interface YoastPackage extends Package {
 export default YoastPackage;
 
 /**
- * Packages that are dependencies of YoastPackage.
+ * Yoast package and its dependencies.
  */
 export type Packages = YoastPackage & Router & WpSource & Html2React;

@@ -1,7 +1,7 @@
 import { Head } from "frontity";
 import { Processor, Element } from "@frontity/html2react/types";
 
-const yoastHead: Processor<Element> = {
+const headWrapper: Processor<Element> = {
   /**
    * Check that this is the first node of the HTML tree.
    *
@@ -14,7 +14,7 @@ const yoastHead: Processor<Element> = {
    * Wrap all nodes into a `<Head>` element (see {@link Head}).
    *
    * @param payload - Processor function payload.
-   * @returns `<Head>` element containing the whole HTML tree.
+   * @returns `<Head>` element containing all nodes.
    */
   processor: ({ node, root }) => {
     // Copy all props from this node.
@@ -38,4 +38,4 @@ const yoastHead: Processor<Element> = {
   },
 };
 
-export default yoastHead;
+export default headWrapper;
