@@ -1,17 +1,12 @@
 import { Package } from "frontity/types";
 import Router from "@frontity/router/types";
 import Html2React from "@frontity/html2react/types";
-import Source, {
-  TaxonomyEntity,
-  PostEntity,
-  AuthorEntity,
-  PostType,
-} from "@frontity/source/types";
+import WpSource from "@frontity/wp-source/types";
 
 /**
  * Type for objects that contain the `yoast_head` field.
  */
-export type YoastMeta = {
+export type WithYoastHead = {
   /**
    * All meta tags in string format.
    */
@@ -35,40 +30,50 @@ interface YoastPackage extends Package {
   /**
    * State exposed by this package.
    */
-  state?: {
+  state: {
     /**
-     * Source namespace.
+     * Yoast namespace.
      */
-    source?: {
+    yoast: {
       /**
-       * Post entities, extended with the `yoast_meta` property.
+       * Define a set of properties to transform links present in the
+       * `yoast_head` field in case you are
+       * using Frontity in decoupled mode.
+       *
+       * If you are using Frontity in embedded mode, this property must be set
+       * to `false`.
+       *
+       * @example
+       * ```
+       * {
+       *   ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
+       *   base: "https://wp.mysite.com"
+       * }
+       * ```
+       *
+       * @example false
        */
-      post: Record<string, PostEntity & YoastMeta>;
+      transformLinks:
+        | {
+            /**
+             * RegExp in string format that defines a set of links that must
+             * not be transformed.
+             *
+             * @defaultValue
+             * ```
+             * "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
+             * ```
+             */
+            ignore: string;
 
-      /**
-       * Page entities, extended with the `yoast_meta` property.
-       */
-      page: Record<string, PostEntity & YoastMeta>;
-
-      /**
-       * Author entities, extended with the `yoast_meta` property.
-       */
-      author: Record<string, AuthorEntity & YoastMeta>;
-
-      /**
-       * Type entities, extended with the `yoast_meta` property.
-       */
-      type: Record<string, PostType & YoastMeta>;
-
-      /**
-       * Category entities, extended with the `yoast_meta` property.
-       */
-      category: Record<string, TaxonomyEntity & YoastMeta>;
-
-      /**
-       * Tag entities, extended with the `yoast_meta` property.
-       */
-      tag: Record<string, TaxonomyEntity & YoastMeta>;
+            /**
+             * WordPress URL base that must be replaced by the Frontity URL
+             * base (specified in `state.frontity.url`). If this value is not
+             * set, it is computed from `state.source.api`.
+             */
+            base?: string;
+          }
+        | false;
     };
   };
 }
@@ -78,4 +83,4 @@ export default YoastPackage;
 /**
  * Packages that are dependencies of YoastPackage.
  */
-export type Packages = YoastPackage & Router & Source & Html2React;
+export type Packages = YoastPackage & Router & WpSource & Html2React;
