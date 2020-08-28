@@ -1,10 +1,15 @@
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
-import HeadTagsPackage from "../../types";
+import { Packages } from "../../types";
 
-// Render all head tags from the current entity.
-const Root: React.FC<Connect<HeadTagsPackage>> = ({ state }) => {
+/**
+ * Render all head tags from the current entity.
+ *
+ * @param props - Frontity props injected by {@link connect}.
+ * @returns A <Head> element with all head tags inside.
+ */
+const Root: React.FC<Connect<Packages>> = ({ state }) => {
   // Get current link.
   const { link } = state.router;
   const { transformLinks } = state.headTags;
