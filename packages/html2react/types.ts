@@ -200,7 +200,7 @@ export interface Processor<
 /**
  * Props passed to Html2React {@link Component}.
  */
-interface ComponentProps {
+export interface ComponentProps {
   /**
    * HTML code in string format.
    */
@@ -217,4 +217,4 @@ interface ComponentProps {
  *
  * @param props - Object of type {@link ComponentProps}.
  */
-export type Component<T = ComponentProps> = React.FC<T>;
+export type Component = React.FC<ComponentProps>;
