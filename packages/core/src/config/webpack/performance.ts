@@ -1,5 +1,5 @@
 import { Configuration } from "webpack";
-import { Target, Mode } from "../../../types";
+import { Target } from "../../../types";
 
 /**
  * The options of the {@link performance} function.
