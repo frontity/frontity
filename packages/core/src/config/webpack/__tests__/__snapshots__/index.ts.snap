@@ -78,7 +78,6 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "hints": "warning",
       "maxAssetSize": 500000,
       "maxEntrypointSize": 500000,
     },
@@ -224,7 +223,6 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "hints": "warning",
       "maxAssetSize": 500000,
       "maxEntrypointSize": 500000,
     },
@@ -357,7 +355,6 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "hints": "warning",
       "maxAssetSize": 5000000,
       "maxEntrypointSize": 5000000,
     },
@@ -496,7 +493,6 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "hints": "warning",
       "maxAssetSize": 500000,
       "maxEntrypointSize": 500000,
     },
@@ -634,7 +630,6 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "hints": "warning",
       "maxAssetSize": 500000,
       "maxEntrypointSize": 500000,
     },
@@ -761,7 +756,6 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "hints": "warning",
       "maxAssetSize": 5000000,
       "maxEntrypointSize": 5000000,
     },
