@@ -1,6 +1,6 @@
 import { fetch, warn } from "frontity";
 import { commentsHandler } from "./libraries";
-import WpComments, { WpComment, WpCommentError } from "../types";
+import WpComments, { WpCommentError } from "../types";
 
 const wpComments: WpComments = {
   name: "@frontity/wp-comments",
@@ -27,39 +27,26 @@ const wpComments: WpComments = {
   actions: {
     comments: {
       submit: ({ state, actions }) => async (postId, comment) => {
-        // Check first if the connected source is a WP.com site.
-        if (state.source.isWpCom) {
-          return warn(
-            "Sending comments to a WordPress.com site is not supported yet."
-          );
-        }
-
         // Return if a submission is pending.
-        if (state.comments.forms[postId]?.submitted?.isPending) {
+        if (state.comments.forms[postId]?.isSubmitting) {
           return warn(
             "You cannot submit a comment to the same post if another is already pending."
           );
         }
 
         // Update fields for this form.
-        // This line inits the form if it wasn't yet.
+        // This line inits the form if it hasn't been initialized yet.
         actions.comments.updateFields(postId, comment || {});
 
-        // Get fields from the corresponding form.
+        // Reset the form.
         const form = state.comments.forms[postId];
-        const { fields } = form;
 
-        // Reset the `submitted` object.
-        form.submitted = {
-          isError: false,
-          errorMessage: "",
-          errorCode: "",
-          isPending: true,
-          isOnHold: false,
-          isApproved: false,
-          timestamp: Date.now(),
-          ...fields,
-        };
+        form.isError = false;
+        form.errorMessage = "";
+        form.errorCode = "";
+        form.isSubmitting = true;
+        form.isSubmitted = false;
+        form.errors = {};
 
         const body = new URLSearchParams();
 
@@ -72,6 +59,9 @@ const wpComments: WpComments = {
         const setBody = (param: string, value: string) => {
           if (value) body.set(param, value);
         };
+
+        // Get fields from the corresponding form.
+        const { fields } = form;
 
         // Generate form content.
         setBody("content", fields?.content);
@@ -98,27 +88,24 @@ const wpComments: WpComments = {
           });
         } catch (e) {
           // Network error.
-          form.submitted.isPending = false;
-          form.submitted.isError = true;
-          form.submitted.errorMessage = "Network error";
+          form.isSubmitting = false;
+          form.isError = true;
+          form.errorMessage = "Network error";
           return;
         }
 
         // 200 OK - The comment was posted successfully
         if (response.status === 201) {
           // Get first the body content.
-          const body: WpComment = await response.json();
+          // const body: WpComment = await response.json();
 
           // Get the comment ID from the hash.
-          const { id, status } = body;
+          // const { id, status } = body;
 
-          // Check if the comment is unapproved.
-          const isOnHold = status === "hold";
+          form.isSubmitting = false;
+          form.isSubmitted = true;
 
-          form.submitted.isPending = false;
-          form.submitted.isOnHold = isOnHold;
-          form.submitted.isApproved = !isOnHold;
-          form.submitted.id = id;
+          // TODO: Add the comment to state.source comments.
           return;
         }
 
@@ -126,17 +113,19 @@ const wpComments: WpComments = {
         if (response.status >= 400 && response.status < 500) {
           const errorBody: WpCommentError = await response.json();
 
-          form.submitted.isPending = false;
-          form.submitted.isError = true;
-          form.submitted.errorMessage = errorBody.message;
-          form.submitted.errorCode = errorBody.code;
+          form.isSubmitting = false;
+          form.isError = true;
+          form.errorMessage = errorBody.message;
+          form.errorCode = errorBody.code;
+          form.errorStatusCode = response.status;
           return;
         }
 
         // Any other response - Unexpected error.
-        form.submitted.isPending = false;
-        form.submitted.isError = true;
-        form.submitted.errorMessage = `Unexpected error: ${response.status}`;
+        form.isSubmitting = false;
+        form.isError = true;
+        form.errorMessage = `Unexpected error: ${response.statusText}`;
+        form.errorStatusCode = response.status;
       },
       updateFields: ({ state }) => (postId, fields) => {
         // Get form from state.
@@ -148,6 +137,12 @@ const wpComments: WpComments = {
             fields: {
               content: "",
             },
+            isSubmitting: false,
+            isSubmitted: false,
+            isError: false,
+            errors: {},
+            errorMessage: "",
+            errorCode: "",
           };
         }
 

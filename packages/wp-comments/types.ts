@@ -82,7 +82,7 @@ export interface WpComment {
 }
 
 /**
- * The error that might be received from WordPress when POSTing a comment.
+ * The error that might be received from WordPress REST API when POSTing a comment.
  */
 export interface WpCommentError {
   /**
@@ -141,12 +141,43 @@ export interface Form {
   fields: Fields;
 
   /**
-   * Field values when this form is submitted along with the submission status.
-   *
-   * @remarks
-   * This prop is undefined if nothing has been submitted yet.
+   * The comment hasn't been received by WP yet.
    */
-  submitted?: Submitted;
+  isSubmitting: boolean;
+
+  /**
+   * The comment has been received.
+   */
+  isSubmitted: boolean;
+
+  /**
+   * The request has failed.
+   */
+  isError: boolean;
+
+  /**
+   * Failure reason.
+   */
+  errorMessage: string;
+
+  /**
+   * The error code. Those are defined internally in the WordPress REST API.
+   *
+   * @example rest_comment_invalid_post_id
+   */
+  errorCode: string;
+
+  /**
+   * The HTTP status code that might have been received from the WordPress REST API.
+   */
+  errorStatusCode?: number;
+
+  /**
+   * The validation errors that can be returned by the WordPress REST API.
+   */
+  errors: {
+    [K in keyof Fields]?: string;
+  };
 }
 
 /**
@@ -186,53 +217,6 @@ export interface Fields {
    * @defaultValue 0
    */
   parent?: number;
-}
-
-/**
- * Form field values when it is submitted along with the submission status.
- */
-export interface Submitted extends Fields {
-  /**
-   * The comment hasn't been received by WP yet.
-   */
-  isPending: boolean;
-
-  /**
-   * The comment has been received but not accepted yet.
-   */
-  isOnHold: boolean;
-
-  /**
-   * The comment has been received and is published.
-   */
-  isApproved: boolean;
-
-  /**
-   * The request has failed.
-   */
-  isError: boolean;
-
-  /**
-   * Failure reason.
-   */
-  errorMessage: string;
-
-  /**
-   * The error code. Those are defined internally in the WordPress REST API.
-   *
-   * @example rest_comment_invalid_post_id
-   */
-  errorCode: string;
-
-  /**
-   * Submission timestamp.
-   */
-  timestamp: number;
-
-  /**
-   * Comment ID if it has been received (`isOnHold` or `isApproved`).
-   */
-  id?: number;
 }
 
 /**
