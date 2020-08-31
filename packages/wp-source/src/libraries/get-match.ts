@@ -29,10 +29,16 @@ export const getMatch: GetMatch = (path, list) => {
     .sort(({ priority: p1 }, { priority: p2 }) => p1 - p2)
     .map(({ name, priority, pattern, func }) => {
       const keys = [];
-      const regexp = pathToRegexp(pattern, keys);
+      const patternContainsQuery = /\\\?/.test(pattern);
+      const regexp = pathToRegexp(pattern, keys, {
+        end: true,
+        ...(patternContainsQuery ? {} : { endsWith: "?" }),
+      });
       return { name, priority, pattern, regexp, keys, func };
     })
-    .find(({ regexp }) => regexp.test(path));
+    .find(({ regexp }) => {
+      return regexp.test(path);
+    });
 
   return result
     ? {

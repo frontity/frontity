@@ -25,6 +25,7 @@ export type RouteParams = {
   route?: string;
   page?: number;
   query?: Record<string, any>;
+  queryString?: string;
   hash?: string;
 };
 

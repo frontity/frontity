@@ -85,6 +85,12 @@ Array [
   },
   Object {
     "func": [MockFunction],
+    "name": "post type with query",
+    "pattern": "/\\\\?p=:id",
+    "priority": 5,
+  },
+  Object {
+    "func": [MockFunction],
     "name": "post archive",
     "pattern": "/",
     "priority": 20,
@@ -195,6 +201,12 @@ Array [
     "name": "always",
     "pattern": "/(.*)",
     "priority": 0,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "post type with query",
+    "pattern": "/\\\\?p=:id",
+    "priority": 5,
   },
   Object {
     "func": [MockFunction],

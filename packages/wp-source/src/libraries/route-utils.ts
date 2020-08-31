@@ -14,7 +14,11 @@ export const queryToObj = (query = "") =>
     : {};
 
 export const objToQuery = (obj: Record<string, any>) => {
-  const entries = Object.entries(obj);
+  const entries = Object.entries(obj).sort(([a], [b]) => {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
   return entries.length
     ? `?${entries.map(([key, value]) => `${key}=${value}`).join("&")}`
     : "";
@@ -51,6 +55,7 @@ export const routeToParams = (route: string): RouteParams => {
     route: addFinalSlash(path),
     page: parseInt(page, 10),
     query: queryToObj(query),
+    queryString: objToQuery(queryToObj(query)),
     hash,
   };
 };

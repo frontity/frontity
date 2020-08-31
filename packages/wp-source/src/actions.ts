@@ -21,7 +21,7 @@ const actions: WpSource["actions"]["source"] = {
     // Get route and route params
     const link = normalize(route);
     const linkParams = parse(route);
-    const { query, page } = linkParams;
+    const { query, page, queryString } = linkParams;
 
     // Get current data object
     const data = source.data[link];
@@ -75,7 +75,7 @@ const actions: WpSource["actions"]["source"] = {
       if (redirection) route = redirection.func(redirection.params);
 
       // Get the handler for this route.
-      const handler = getMatch(route, handlers);
+      const handler = getMatch(`${route}${queryString}`, handlers);
       await handler.func({
         link,
         route: link,

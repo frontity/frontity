@@ -7,9 +7,17 @@ import {
   post,
   attachment,
   postType,
+  postTypeWithQuery,
 } from "../handlers";
 
 export default [
+  {
+    name: "post type with query",
+    priority: 5,
+    // pattern: "/\\?(&)?p=:id",
+    pattern: "/\\?p=:id",
+    func: postTypeWithQuery,
+  },
   {
     name: "post archive",
     priority: 20,
