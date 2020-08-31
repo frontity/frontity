@@ -1,4 +1,4 @@
-export default {
+const settings = {
   name: "mars-theme-example",
   state: {
     frontity: {
@@ -38,3 +38,5 @@ export default {
     },
   ],
 };
+
+export default settings;

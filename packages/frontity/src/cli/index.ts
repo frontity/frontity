@@ -24,25 +24,25 @@ program
 // options: --typescript, --use-cwd.
 program
   .command("create [name]")
-  .option("-h, --theme <theme>", "The theme to use")
-  .option("-t, --typescript", "Adds support for TypeScript")
-  .option("-c, --use-cwd", "Generates the project in the current directory.")
-  .option("-n, --no-prompt", "Skips prompting the user for options")
+  .option("--theme <theme>", "The theme to use")
+  .option("--typescript", "Adds support for TypeScript")
+  .option("--use-cwd", "Generates the project in the current directory.")
+  .option("--no-prompt", "Skips prompting the user for options")
   .description("Creates a new Frontity project.")
   .action((name, { ...args }) => create({ name, ...args }));
 
 program
   .command("create-package [name]")
-  .option("-n, --namespace <value>", "Sets the namespace for this package")
+  .option("--namespace <value>", "Sets the namespace for this package")
   .option("--no-prompt", "Skips prompting the user for options")
   .description("Creates a new Frontity package in a project.")
   .action((name, { ...args }) => createPackage({ name, ...args }));
 
 program
   .command("dev")
-  .option("-p, --production", "Builds the project for production.")
+  .option("--prod, --production", "Builds the project for production.")
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
-  .option("-s, --https", "Runs the server using https.")
+  .option("--https", "Runs the server using https.")
   .option(
     "--dont-open-browser",
     "Don't open a browser window with the localhost."
@@ -51,9 +51,9 @@ program
     "--target <target>",
     'create bundles with "es5" or "module". Default target is "module".'
   )
-
+  .option("--publicPath <path>", "DEPRECATED, use --public-path instead.")
   .option(
-    "--publicPath <path>",
+    "--public-path <path>",
     'set the public path for static assets. Default path is "/static/".'
   )
   .description("Starts a server in development mode.")
@@ -61,13 +61,14 @@ program
 
 program
   .command("build")
-  .option("-d, --development", "Builds the project for development.")
+  .option("--dev, --development", "Builds the project for development.")
   .option(
     "--target <target>",
     'create bundles with "es5", "module" or "both". Default target is "both".'
   )
+  .option("--publicPath <path>", "DEPRECATED, use --public-path instead.")
   .option(
-    "--publicPath <path>",
+    "--public-path <path>",
     'set the public path for static assets. Default path is "/static/".'
   )
   .description("Builds the project for production.")
@@ -76,7 +77,7 @@ program
 program
   .command("serve")
   .option("--port <port>", "Runs the server on a custom port. Default is 3000.")
-  .option("-s, --https", "Runs the server using https.")
+  .option("--https", "Runs the server using https.")
   .description("Starts a server in production mode.")
   .action(serve);
 
