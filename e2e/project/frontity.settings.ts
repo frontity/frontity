@@ -192,6 +192,65 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "yoast-package",
+    state: {
+      frontity: {
+        url: "http://my.frontity.site",
+        title: "Test Frontity Blog",
+        description: "Useful content for Frontity development",
+      },
+    },
+    packages: [
+      "@frontity/tiny-router",
+      "@frontity/html2react",
+      {
+        name: "@frontity/mars-theme",
+        state: {
+          theme: {
+            menu: [
+              ["Home", "/"],
+              ["Nature", "/category/nature/"],
+              ["Travel", "/category/travel/"],
+              ["Japan", "/tag/japan/"],
+              ["About Us", "/about-us/"],
+            ],
+            featured: {
+              showOnList: true,
+              showOnPost: true,
+            },
+          },
+        },
+      },
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+          },
+        },
+      },
+      {
+        name: "@frontity/yoast",
+        state: {
+          yoast: {
+            transformLinks: {
+              /**
+               * Yoast SEO package is surprisingly not including the port number
+               * in links so even thought WordPress is running in
+               * http://localhost:8080, all links end being something like
+               * http://localhost/hello-world/ in the `yoast_head` field.
+               *
+               * As a workaround, we have to explicitly set the `base` property
+               * here.
+               */
+              base: "http://localhost/",
+            },
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
