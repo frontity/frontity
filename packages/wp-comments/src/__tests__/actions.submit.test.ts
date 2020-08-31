@@ -78,19 +78,20 @@ describe("actions.comments.submit", () => {
     `);
 
     // Check that the populated state is correct.
-    expect(store.state.comments.forms[postId].submitted).toMatchInlineSnapshot(`
+    expect(store.state.comments.forms[postId]).toMatchInlineSnapshot(`
       Object {
-        "authorEmail": "frontibotito@frontity.org",
-        "authorName": "Frontibotito",
-        "authorURL": "https://frontity.org",
-        "content": "Hello world!",
         "errorCode": "",
         "errorMessage": "",
-        "isApproved": false,
+        "errors": Object {},
+        "fields": Object {
+          "authorEmail": "frontibotito@frontity.org",
+          "authorName": "Frontibotito",
+          "authorURL": "https://frontity.org",
+          "content": "Hello world!",
+        },
         "isError": false,
-        "isOnHold": false,
-        "isPending": true,
-        "timestamp": 1594161555147,
+        "isSubmitted": false,
+        "isSubmitting": true,
       }
     `);
   });
@@ -163,20 +164,21 @@ describe("actions.comments.submit", () => {
     `);
 
     // Check that the populated state is correct.
-    expect(store.state.comments.forms[postId].submitted).toMatchInlineSnapshot(`
+    expect(store.state.comments.forms[postId]).toMatchInlineSnapshot(`
       Object {
-        "authorEmail": "frontibotito@frontity.org",
-        "authorName": "Frontibotito",
-        "authorURL": "https://frontity.org",
-        "content": "Hello world!",
         "errorCode": "",
         "errorMessage": "",
-        "isApproved": false,
+        "errors": Object {},
+        "fields": Object {
+          "authorEmail": "frontibotito@frontity.org",
+          "authorName": "Frontibotito",
+          "authorURL": "https://frontity.org",
+          "content": "Hello world!",
+          "parent": 0,
+        },
         "isError": false,
-        "isOnHold": false,
-        "isPending": true,
-        "parent": 0,
-        "timestamp": 1594161555147,
+        "isSubmitted": false,
+        "isSubmitting": true,
       }
     `);
   });
@@ -219,17 +221,17 @@ describe("actions.comments.submit", () => {
     });
 
     // Get the form data.
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // Check the submission is in progress.
-    expect(submitted.isPending).toBe(true);
+    expect(form.isSubmitting).toBe(true);
 
     await submission;
 
     // The submission should have failed.
-    expect(submitted.isPending).toBe(false);
-    expect(submitted.isError).toBe(true);
-    expect(submitted.errorMessage).toMatchInlineSnapshot(
+    expect(form.isSubmitting).toBe(false);
+    expect(form.isError).toBe(true);
+    expect(form.errorMessage).toMatchInlineSnapshot(
       `"Sorry, you are not allowed to create this comment without a post."`
     );
   });
@@ -272,17 +274,17 @@ describe("actions.comments.submit", () => {
     });
 
     // Get the form data.
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // Check the submission is in progress.
-    expect(submitted.isPending).toBe(true);
+    expect(form.isSubmitting).toBe(true);
 
     await submission;
 
     // The submission should have failed.
-    expect(submitted.isPending).toBe(false);
-    expect(submitted.isError).toBe(true);
-    expect(submitted.errorMessage).toMatchInlineSnapshot(
+    expect(form.isSubmitting).toBe(false);
+    expect(form.isError).toBe(true);
+    expect(form.errorMessage).toMatchInlineSnapshot(
       `"Creating a comment requires valid author name and email values."`
     );
   });
@@ -325,17 +327,17 @@ describe("actions.comments.submit", () => {
     });
 
     // Get the form data.
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // Check the submission is in progress.
-    expect(submitted.isPending).toBe(true);
+    expect(form.isSubmitting).toBe(true);
 
     await submission;
 
     // The submission should have failed.
-    expect(submitted.isPending).toBe(false);
-    expect(submitted.isError).toBe(true);
-    expect(submitted.errorMessage).toMatchInlineSnapshot(
+    expect(form.isSubmitting).toBe(false);
+    expect(form.isError).toBe(true);
+    expect(form.errorMessage).toMatchInlineSnapshot(
       `"Creating a comment requires valid author name and email values."`
     );
   });
@@ -381,17 +383,17 @@ describe("actions.comments.submit", () => {
     });
 
     // Get the form data.
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // Check the submission is in progress.
-    expect(submitted.isPending).toBe(true);
+    expect(form.isSubmitting).toBe(true);
 
     await submission;
 
     // The submission should have failed.
-    expect(submitted.isPending).toBe(false);
-    expect(submitted.isError).toBe(true);
-    expect(submitted.errorMessage).toMatchInlineSnapshot(
+    expect(form.isSubmitting).toBe(false);
+    expect(form.isError).toBe(true);
+    expect(form.errorMessage).toMatchInlineSnapshot(
       `"Duplicate comment detected; it looks as though you&#8217;ve already said that!"`
     );
   });
@@ -443,19 +445,17 @@ describe("actions.comments.submit", () => {
     });
 
     // Get the form data.
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // Check the submission is in progress.
-    expect(submitted.isPending).toBe(true);
+    expect(form.isSubmitting).toBe(true);
 
     await submission;
 
     // The submission should have succeed (but not approved yet).
-    expect(submitted.isPending).toBe(false);
-    expect(submitted.isError).toBe(false);
-    expect(submitted.isOnHold).toBe(true);
-    expect(submitted.isApproved).toBe(false);
-    expect(submitted.id).toBe(123);
+    expect(form.isSubmitting).toBe(false);
+    expect(form.isSubmitted).toBe(true);
+    expect(form.isError).toBe(false);
   });
 
   test("should indicate if the comment was accepted", async () => {
@@ -505,19 +505,17 @@ describe("actions.comments.submit", () => {
     });
 
     // Get the form data.
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // Check the submission is in progress.
-    expect(submitted.isPending).toBe(true);
+    expect(form.isSubmitting).toBe(true);
 
     await submission;
 
     // The submission should have succeeded and is approved.
-    expect(submitted.isPending).toBe(false);
-    expect(submitted.isError).toBe(false);
-    expect(submitted.isOnHold).toBe(false);
-    expect(submitted.isApproved).toBe(true);
-    expect(submitted.id).toBe(123);
+    expect(form.isSubmitting).toBe(false);
+    expect(form.isSubmitted).toBe(true);
+    expect(form.isError).toBe(false);
   });
 
   test("should populate an error in any other case", async () => {
@@ -548,18 +546,18 @@ describe("actions.comments.submit", () => {
     });
 
     // Get the form data.
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // Check the submission is in progress.
-    expect(submitted.isPending).toBe(true);
+    expect(form.isSubmitting).toBe(true);
 
     await submission;
 
     // The submission failed with a 500 error.
-    expect(submitted.isPending).toBe(false);
-    expect(submitted.isError).toBe(true);
-    expect(submitted.errorMessage).toMatchInlineSnapshot(
-      `"Unexpected error: 500"`
+    expect(form.isSubmitting).toBe(false);
+    expect(form.isError).toBe(true);
+    expect(form.errorMessage).toMatchInlineSnapshot(
+      `"Unexpected error: Internal Server Error"`
     );
   });
 
@@ -576,24 +574,17 @@ describe("actions.comments.submit", () => {
         comments: {
           forms: {
             [postId]: {
+              isSubmitted: false,
+              isSubmitting: false,
+              isError: false,
+              errorMessage: "",
+              errorCode: "",
+              errors: {},
               fields: {
                 content: "Hello world!",
                 authorName: "Frontibotito",
                 authorEmail: "frontibotito@frontity.org",
                 parent: 0,
-                authorURL: "https://frontity.org",
-              },
-              submitted: {
-                authorName: "Frontibotito",
-                content: "Hello world!",
-                authorEmail: "frontibotito@frontity.org",
-                errorMessage: "",
-                isApproved: false,
-                isError: false,
-                isPending: false,
-                isOnHold: false,
-                parent: 0,
-                timestamp: 1594161555147,
                 authorURL: "https://frontity.org",
               },
             },
@@ -618,23 +609,24 @@ describe("actions.comments.submit", () => {
         // Do nothing.
       });
 
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // The submission should have been overwritten.
-    expect(submitted).toMatchInlineSnapshot(`
+    expect(form).toMatchInlineSnapshot(`
       Object {
-        "authorEmail": "other@email.test",
-        "authorName": "Other author",
-        "authorURL": "https://other.url.test",
-        "content": "Other comment!",
         "errorCode": "",
         "errorMessage": "",
-        "isApproved": false,
+        "errors": Object {},
+        "fields": Object {
+          "authorEmail": "other@email.test",
+          "authorName": "Other author",
+          "authorURL": "https://other.url.test",
+          "content": "Other comment!",
+          "parent": 123,
+        },
         "isError": false,
-        "isOnHold": false,
-        "isPending": true,
-        "parent": 123,
-        "timestamp": 1594161555147,
+        "isSubmitted": false,
+        "isSubmitting": true,
       }
     `);
   });
@@ -652,25 +644,17 @@ describe("actions.comments.submit", () => {
         comments: {
           forms: {
             [postId]: {
+              isSubmitted: false,
+              isSubmitting: true, // <-- This is the key property for this test
+              isError: false,
+              errorMessage: "",
+              errorCode: "",
+              errors: {},
               fields: {
                 content: "Hello world!",
                 authorName: "Frontibotito",
                 authorEmail: "frontibotito@frontity.org",
                 parent: 0,
-                authorURL: "https://frontity.org",
-              },
-              submitted: {
-                authorName: "Frontibotito",
-                content: "Hello world!",
-                authorEmail: "frontibotito@frontity.org",
-                errorMessage: "",
-                errorCode: "",
-                isApproved: false,
-                isError: false,
-                isPending: true,
-                isOnHold: false,
-                parent: 0,
-                timestamp: 1594161555147,
                 authorURL: "https://frontity.org",
               },
             },
@@ -695,24 +679,25 @@ describe("actions.comments.submit", () => {
         // Do nothing.
       });
 
-    const { submitted } = store.state.comments.forms[postId];
+    const form = store.state.comments.forms[postId];
 
     // The submission should not be sent.
     expect(fetch).not.toHaveBeenCalled();
-    expect(submitted).toMatchInlineSnapshot(`
+    expect(form).toMatchInlineSnapshot(`
       Object {
-        "authorEmail": "frontibotito@frontity.org",
-        "authorName": "Frontibotito",
-        "authorURL": "https://frontity.org",
-        "content": "Hello world!",
         "errorCode": "",
         "errorMessage": "",
-        "isApproved": false,
+        "errors": Object {},
+        "fields": Object {
+          "authorEmail": "frontibotito@frontity.org",
+          "authorName": "Frontibotito",
+          "authorURL": "https://frontity.org",
+          "content": "Hello world!",
+          "parent": 0,
+        },
         "isError": false,
-        "isOnHold": false,
-        "isPending": true,
-        "parent": 0,
-        "timestamp": 1594161555147,
+        "isSubmitted": false,
+        "isSubmitting": true,
       }
     `);
 

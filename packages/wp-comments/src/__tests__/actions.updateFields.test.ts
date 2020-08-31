@@ -18,9 +18,15 @@ describe("actions.comments.updateFields", () => {
     expect(store.state.comments.forms).toMatchInlineSnapshot(`
       Object {
         "60": Object {
+          "errorCode": "",
+          "errorMessage": "",
+          "errors": Object {},
           "fields": Object {
             "content": "Hello world!",
           },
+          "isError": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
         },
       }
     `);
@@ -151,9 +157,15 @@ describe("actions.comments.updateFields", () => {
     expect(store.state.comments.forms).toMatchInlineSnapshot(`
       Object {
         "60": Object {
+          "errorCode": "",
+          "errorMessage": "",
+          "errors": Object {},
           "fields": Object {
             "content": "",
           },
+          "isError": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
         },
       }
     `);
