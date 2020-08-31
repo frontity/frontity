@@ -117,22 +117,21 @@ const postTypeHandler = ({
   // Overwrite properties if the request is a preview.
   const { preview, token } = query;
   if (preview && token) {
-    console.log("nope");
     // Get entity from the state.
     const entity = state.source[type][id];
 
-    // Get latest revision link.
-    const [{ href: revisionLink }] = entity._links["predecessor-version"];
-
     // Fetch the latest revision using the token.
-    const response = await fetch(revisionLink, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${state.source.api}/wp/v2/posts/${id}/revisions?per_page=1`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     // Get modified props from revision.
-    const json = await response.json();
+    const [json] = await response.json();
 
     if (json.parent === id) {
       const { title, content, excerpt } = json;
