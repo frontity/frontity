@@ -23,7 +23,6 @@ interface PerformanceOptions {
 const performance = ({
   target,
 }: PerformanceOptions): Configuration["performance"] => ({
-  hints: "warning",
   ...(target === "server"
     ? {
         // Max size recommended for the server bundle: 5Mbs.
