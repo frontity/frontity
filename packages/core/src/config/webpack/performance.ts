@@ -1,5 +1,5 @@
 import { Configuration } from "webpack";
-import { Target } from "../../../types";
+import { Target, Mode } from "../../../types";
 
 /**
  * The options of the {@link performance} function.
@@ -23,7 +23,6 @@ interface PerformanceOptions {
 const performance = ({
   target,
 }: PerformanceOptions): Configuration["performance"] => ({
-  hints: "warning",
   ...(target === "server"
     ? {
         // Max size recommended for the server bundle: 5Mbs.
