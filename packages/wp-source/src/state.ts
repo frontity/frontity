@@ -43,6 +43,9 @@ const state: WpSource["state"]["source"] = {
   params: {},
   postTypes: [],
   taxonomies: [],
+  handledQueries: {
+    p: true,
+  },
 };
 
 export default state;

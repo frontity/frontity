@@ -19,6 +19,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -55,6 +58,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -91,6 +97,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -260,6 +269,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -405,6 +417,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -568,6 +583,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -860,6 +878,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -1223,6 +1244,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -1525,6 +1549,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},
@@ -1704,6 +1731,9 @@ Object {
     },
   },
   "get": [Function],
+  "handledQueries": Object {
+    "p": true,
+  },
   "homepage": "",
   "isWpCom": false,
   "page": Object {},

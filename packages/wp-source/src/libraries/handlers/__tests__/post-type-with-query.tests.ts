@@ -11,11 +11,20 @@ import post1 from "./mocks/post-type/post-1.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
 import { ServerError } from "@frontity/source";
+import { PostEntity } from "@frontity/source/types";
 
-let store: InitializedStore<WpSource>;
+interface WpSouceCPT extends WpSource {
+  state: {
+    source: WpSource["state"]["source"] & {
+      cpt: Record<string, PostEntity>;
+    };
+  };
+}
+
+let store: InitializedStore<WpSouceCPT>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
+  store = createStore<WpSouceCPT>(clone(wpSource()));
   store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
