@@ -86,7 +86,7 @@ Array [
   Object {
     "func": [MockFunction],
     "name": "post type with query",
-    "pattern": "/\\\\?p=:id",
+    "pattern": "RegExp:(\\\\?|&)p=\\\\d+",
     "priority": 5,
   },
   Object {
@@ -205,7 +205,7 @@ Array [
   Object {
     "func": [MockFunction],
     "name": "post type with query",
-    "pattern": "/\\\\?p=:id",
+    "pattern": "RegExp:(\\\\?|&)p=\\\\d+",
     "priority": 5,
   },
   Object {

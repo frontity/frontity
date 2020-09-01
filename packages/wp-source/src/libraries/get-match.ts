@@ -1,5 +1,5 @@
 import { Pattern } from "../../types";
-import pathToRegexp, { Key } from "path-to-regexp";
+import pathToRegexp, { Key, regexpToFunction } from "path-to-regexp";
 
 type GetMatch = <T extends Pattern>(
   path: string,
@@ -8,6 +8,7 @@ type GetMatch = <T extends Pattern>(
   params: Record<string, string>;
   func: T["func"];
   name: string;
+  pattern: string;
 } | null;
 
 type ExecMatch = (
@@ -29,11 +30,9 @@ export const getMatch: GetMatch = (path, list) => {
     .sort(({ priority: p1 }, { priority: p2 }) => p1 - p2)
     .map(({ name, priority, pattern, func }) => {
       const keys = [];
-      const patternContainsQuery = /\\\?/.test(pattern);
-      const regexp = pathToRegexp(pattern, keys, {
-        end: true,
-        ...(patternContainsQuery ? {} : { endsWith: "?" }),
-      });
+      const regexp = pattern.startsWith("RegExp:")
+        ? new RegExp(pattern.replace("RegExp:", ""))
+        : pathToRegexp(pattern, keys, { endsWith: "?" });
       return { name, priority, pattern, regexp, keys, func };
     })
     .find(({ regexp }) => {
@@ -43,8 +42,11 @@ export const getMatch: GetMatch = (path, list) => {
   return result
     ? {
         func: result.func,
-        params: execMatch(path, result),
+        params: result.pattern.startsWith("RegExp:")
+          ? result.regexp.exec(path).groups
+          : execMatch(path, result),
         name: result.name,
+        pattern: result.pattern,
       }
     : null;
 };

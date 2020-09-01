@@ -18,28 +18,30 @@ const actions: WpSource["actions"]["source"] = {
 
     const { handlers, redirections } = libraries.source;
 
-    // Get route and route params
+    // Get route and route params.
     const link = normalize(route);
     const linkParams = parse(route);
     const { query, page, queryString } = linkParams;
 
-    // Get current data object
+    // Get current data object.
     const data = source.data[link];
 
-    // Get options
+    // Get options.
     const force = options ? options.force : false;
 
     if (!data) {
-      // If there is no data yet, just set the necessary flags:
+      // If there is no data yet, just set the necessary flags.
       source.data[link] = {
         isFetching: true,
         isReady: false,
       };
     } else if (force) {
-      // If we fetch with `{ force: true }`, then only set `isFetching` to true again
+      // If we fetch with `{ force: true }`, then only set `isFetching` to true
+      // again.
       data.isFetching = true;
 
-      // This is a workaround in case that `data` has previously included an error
+      // This is a workaround in case that `data` has previously included an
+      // error.
       if (data.isError) {
         source.data[link] = {
           isFetching: true,
@@ -47,7 +49,7 @@ const actions: WpSource["actions"]["source"] = {
         };
       }
     } else if ((data.isReady && !force) || data.isFetching || data.isError) {
-      // Always set link, route, query & page
+      // Always set link, route, query & page.
       data.link = link;
       data.route = linkParams.route;
       data.query = query;
@@ -55,7 +57,7 @@ const actions: WpSource["actions"]["source"] = {
       return;
     }
 
-    // Always set link, route, query & page
+    // Always set link, route, query & page.
     source.data[link].link = link;
     source.data[link].route = linkParams.route;
     source.data[link].query = query;
@@ -67,15 +69,21 @@ const actions: WpSource["actions"]["source"] = {
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
-      // Check if this is the homepage URL.
-      const isHome = route === normalize(state.source.subdirectory || "/");
-
       // Transform route if there is some redirection.
       const redirection = getMatch(route, redirections);
       if (redirection) route = redirection.func(redirection.params);
 
       // Get the handler for this route.
       const handler = getMatch(`${route}${queryString}`, handlers);
+
+      // Check if this is the homepage URL if it is either the root "/" or the
+      // subdirectory "/folder/", but only in the case that the matched handler
+      // is not used for queries (starts with "RegExp:").
+      const isHome =
+        !handler.pattern.startsWith("RegExp:") &&
+        route === normalize(state.source.subdirectory || "/");
+
+      // Execute the handler.
       await handler.func({
         link,
         route: link,
@@ -84,7 +92,8 @@ const actions: WpSource["actions"]["source"] = {
         libraries,
         force,
       });
-      // Everything OK.
+
+      // Populate the data object.
       source.data[link] = {
         ...source.data[link],
         ...(isHome && { isHome: true }),
@@ -130,7 +139,7 @@ const actions: WpSource["actions"]["source"] = {
 
     // Add handlers for custom post types.
     state.source.postTypes.forEach(({ type, endpoint, archive }) => {
-      // Single page
+      // Single page.
       handlers.push({
         name: type,
         priority: 10,

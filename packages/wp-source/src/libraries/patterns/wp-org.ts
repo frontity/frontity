@@ -14,8 +14,7 @@ export default [
   {
     name: "post type with query",
     priority: 5,
-    // pattern: "/\\?(&)?p=:id",
-    pattern: "/\\?p=:id",
+    pattern: "RegExp:(\\?|&)p=\\d+",
     func: postTypeWithQuery,
   },
   {

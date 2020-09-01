@@ -43,19 +43,19 @@ const postTypeHandler = ({
   endpoints,
 }: PostTypeHandlerParams): Handler => async ({
   link,
-  params,
   state,
   libraries,
   force,
 }) => {
-  // 1. search id in state or get the entity from WP REST API
+  // Search for the entity in the state.
   const { query } = libraries.source.parse(link);
-  const id = parseInt(params.id, 10);
+  const id = parseInt(query.p, 10);
 
   const finalTypes = ["post", "page"].concat(
     state.source.postTypes.map((postType) => postType.type)
   );
 
+  //
   let entity = finalTypes
     .reduce((all, type) => {
       all.push(...Object.values(state.source[type]));
@@ -64,12 +64,12 @@ const postTypeHandler = ({
     .find((post) => post.id === id);
 
   if (!entity) {
-    // 1.1 transform "posts" endpoint to state.source.postEndpoint
+    // Transform "posts" endpoint to state.source.postEndpoint.
     const finalEndpoints = endpoints.map((endpoint) =>
       endpoint === "posts" ? state.source.postEndpoint : endpoint
     );
 
-    // 1.2 iterate over finalEndpoints array
+    // Iterate over finalEndpoints array.
     let isHandled = false;
     let isMismatched = false;
     for (const endpoint of finalEndpoints) {
@@ -84,7 +84,7 @@ const postTypeHandler = ({
         force,
       });
 
-      // exit loop if this endpoint returns an entity!
+      // Exit loop if this endpoint returns an entity.
       if (populated.length > 0) {
         // We have to check if the link property in the data that we
         // populated is the same as the current route.
@@ -106,7 +106,7 @@ const postTypeHandler = ({
       );
     }
 
-    // 1.3 if no entity has found, throw an error
+    // If no entity has found, throw an error.
     if (!isHandled)
       throw new ServerError(
         `post type from endpoints "${endpoints}" with id "${id}" not found`,
@@ -114,7 +114,7 @@ const postTypeHandler = ({
       );
   }
 
-  // 2. get `type` and `id` from route data and assign props to data
+  // Get `type` and `id` from route data and assign props to data.
   const data = state.source.get(link);
   Object.assign(data, {
     type: entity.type,
