@@ -697,3 +697,178 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
   }
 </script>
 `;
+
+exports[`Yoast Package > Homepage > should render the correct canonical URL #0`] = `
+<link data-rh="true" rel="canonical" href="http://my.frontity.site/" />
+`;
+
+exports[`Yoast Package > Homepage > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="website" />
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="Test WP Site - Just another WordPress site"
+/>
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:description"
+  content="Just another WordPress site"
+/>
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #4`] = `
+<meta data-rh="true" property="og:url" content="http://localhost:8080/" />
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #5`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > Homepage > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://localhost:8080/#website",
+        "url": "http://localhost:8080/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://localhost:8080/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/#webpage",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site - Just another WordPress site",
+        "isPartOf": {
+          "@id": "http://localhost:8080/#website"
+        },
+        "description": "Just another WordPress site",
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the correct canonical URL #0`] = `
+<link data-rh="true" rel="canonical" href="http://localhost:8080/movies/" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="website" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="Movies Archive - Test WP Site"
+/>
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://localhost:8080/movies/"
+/>
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #4`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://localhost:8080/#website",
+        "url": "http://localhost:8080/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://localhost:8080/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://localhost:8080/movies/#webpage",
+        "url": "http://localhost:8080/movies/",
+        "name": "Movies Archive - Test WP Site",
+        "isPartOf": {
+          "@id": "http://localhost:8080/#website"
+        },
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://localhost:8080/movies/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;

@@ -1,16 +1,28 @@
 describe("Yoast Package", () => {
-  // before(() => {
-  //   cy.task("installPlugin", { name: "wordpress-seo" });
-  //   cy.task("installPlugin", { name: "custom-post-type-ui" });
-  //   cy.task("loadDatabase", {
-  //     path: "./wp-data/yoast-package/yoast-with-cpt.sql",
-  //   });
-  // });
+  before(() => {
+    cy.task("installPlugin", { name: "wordpress-seo" });
+    cy.task("installPlugin", { name: "code-snippets" });
+    cy.task("installPlugin", { name: "custom-post-type-ui" });
+    cy.task("loadDatabase", {
+      path: "./wp-data/yoast-package/yoast-with-cpt.sql",
+    });
+  });
 
-  // after(() => {
-  //   cy.task("resetDatabase");
-  //   cy.task("removeAllPlugins");
-  // });
+  after(() => {
+    cy.task("resetDatabase");
+    cy.task("removeAllPlugins");
+  });
+
+  /**
+   * Check the title for the current page is the given one.
+   *
+   * @param title - The page title for the given link.
+   */
+  const checkTitle = (title) => {
+    it("should render the correct title", () => {
+      cy.get("title").should("contain", title);
+    });
+  };
 
   /**
    * Run a set of test to ensure the correct meta tags are being rendered.
@@ -21,22 +33,17 @@ describe("Yoast Package", () => {
    * @remarks The <title> tag is not tested using snapshots. That's because the
    * plugin we are using to generate snapshots gives an error when trying to
    * generate a snapshot for that tag (it also doesn't work well with strings).
-   *
-   * @param link - Page link that will be visited in all tests.
    */
-  const checkMetaSnapshots = (link) => {
+  const checkMetaTags = () => {
     it("should render the correct canonical URL", () => {
-      cy.visit(link);
       cy.get('link[rel="canonical"]').toMatchSnapshot();
     });
 
     it("should render the robots tag", () => {
-      cy.visit(link);
       cy.get('meta[name="robots"]').toMatchSnapshot();
     });
 
     it("should render the Open Graph tags", () => {
-      cy.visit(link);
       cy.get(
         `
           meta[property^="og:"],
@@ -49,14 +56,12 @@ describe("Yoast Package", () => {
     });
 
     it("should render the Twitter tags", () => {
-      cy.visit(link);
       cy.get('meta[name^="twitter:"]').each((meta) => {
         cy.wrap(meta).toMatchSnapshot();
       });
     });
 
     it("should render the schema tag", () => {
-      cy.visit(link);
       cy.get('script[type="application/ld+json"]').toMatchSnapshot();
     });
   };
@@ -65,124 +70,107 @@ describe("Yoast Package", () => {
    * Tests for posts.
    */
   describe("Post", () => {
-    const link = "http://localhost:3001/hello-world?name=yoast-package";
+    const link = "/hello-world/";
+    const title = "Hello World From Yoast! - Test WP Site";
 
-    it("should render the correct title", () => {
-      cy.visit(link);
-      cy.get("title").should(
-        "contain",
-        "Hello World From Yoast! - Test WP Site"
-      );
-    });
-    checkMetaSnapshots(link);
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
   });
 
   /**
    * Tests for pages.
    */
   describe("Page", () => {
-    const link = "http://localhost:3001/sample-page?name=yoast-package";
+    const link = "/sample-page/";
+    const title = "Sample Page - Test WP Site";
 
-    it("should render the correct title", () => {
-      cy.visit(link);
-      cy.get("title").should("contain", "Sample Page - Test WP Site");
-    });
-    checkMetaSnapshots(link);
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
   });
 
   /**
    * Tests for categories.
    */
   describe("Category", () => {
-    const link = "http://localhost:3001/category/nature?name=yoast-package";
+    const link = "/category/nature/";
+    const title = "Nature Archives - Test WP Site";
 
-    it("should render the correct title", () => {
-      cy.visit(link);
-      cy.get("title").should("contain", "Nature Archives - Test WP Site");
-    });
-    checkMetaSnapshots(link);
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
   });
 
   /**
    * Tests for tags.
    */
   describe("Tag", () => {
-    const link = "http://localhost:3001/tag/japan?name=yoast-package";
+    const link = "/tag/japan/";
+    const title = "Japan Archives - Test WP Site";
 
-    it("should render the correct title", () => {
-      cy.visit(link);
-      cy.get("title").should("contain", "Japan Archives - Test WP Site");
-    });
-    checkMetaSnapshots(link);
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
   });
 
   /**
    * Tests for authors.
    */
   describe("Author", () => {
-    const link = "http://localhost:3001/author/luisherranz?name=yoast-package";
+    const link = "/author/luisherranz";
+    const title = "luisherranz, Author at Test WP Site";
 
-    it("should render the correct title", () => {
-      cy.visit(link);
-      cy.get("title").should("contain", "luisherranz, Author at Test WP Site");
-    });
-    checkMetaSnapshots(link);
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
   });
 
-  // /**
-  //  * Tests for the homepage.
-  //  */
-  // describe("Homepage", () => {
-  //   const link = "http://localhost:3001/?name=yoast-package";
+  /**
+   * Tests for the homepage.
+   */
+  describe("Homepage", () => {
+    const link = "/";
+    const title = "Test WP Site - Just another WordPress site";
 
-  //   it("should render the correct title", () => {
-  //     cy.visit(link);
-  //     cy.get("title").should("contain", "Sample Page - Test WP Site");
-  //   });
-  //   checkMetaSnapshots(link);
-  // });
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
+  });
 
   /**
    * Tests for custom post types.
    */
   describe("CPT", () => {
-    const link =
-      "http://localhost:3001/movie/the-terminator/?name=yoast-package";
+    const link = "/movie/the-terminator/";
+    const title = "The Terminator - Test WP Site";
 
-    it("should render the correct title", () => {
-      cy.visit(link);
-      cy.get("title").should("contain", "The Terminator - Test WP Site");
-    });
-    checkMetaSnapshots(link);
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
   });
 
-  // /**
-  //  * Tests for archive of custom post types.
-  //  */
-  // describe("CPT (archive)", () => {
-  //   const link = "http://localhost:3001/movies/?name=yoast-package";
+  /**
+   * Tests for archive of custom post types.
+   */
+  describe("CPT (archive)", () => {
+    const title = "Movies Archive - Test WP Site";
+    const link = "/movies/";
 
-  //   it("should render the correct title", () => {
-  //     cy.visit(link);
-  //     cy.get("title").should("contain", "Movies Archive - Test WP Site");
-  //   });
-  //   checkMetaSnapshots(link);
-  // });
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
+  });
 
   /**
    * Tests for archive of custom post types.
    */
   describe("Custom Taxonomy", () => {
-    const link =
-      "http://localhost:3001/actor/linda-hamilton/?name=yoast-package";
+    const link = "/actor/linda-hamilton/";
+    const title = "Linda Hamilton Archives - Test WP Site";
 
-    it("should render the correct title", () => {
-      cy.visit(link);
-      cy.get("title").should(
-        "contain",
-        "Linda Hamilton Archives - Test WP Site"
-      );
-    });
-    checkMetaSnapshots(link);
+    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    checkTitle(title);
+    checkMetaTags();
   });
 });
