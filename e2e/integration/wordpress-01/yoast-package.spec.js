@@ -13,10 +13,14 @@ describe("Yoast Package", () => {
   // });
 
   /**
-   * Run a set of checks to ensure the correct meta tags are being rendered.
+   * Run a set of test to ensure the correct meta tags are being rendered.
    *
    * This way, snapshots are generated with a meaningful name and are easy to
-   * read by a human being.
+   * read and check by a human being.
+   *
+   * @remarks The <title> tag is not tested using snapshots. That's because the
+   * plugin we are using to generate snapshots gives an error when trying to
+   * generate a snapshot for that tag (it also doesn't work well with strings).
    *
    * @param link - Page link that will be visited in all tests.
    */
