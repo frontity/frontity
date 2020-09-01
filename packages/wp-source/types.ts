@@ -242,36 +242,6 @@ interface WpSource extends Source {
          */
         params?: Record<string, any>;
       }[];
-
-      /**
-       * The map of queries that will be sent to the handlers.
-       *
-       * To receive these queries, the handlers need to have a query match in
-       * the pattern, like for example: `"/\\?p=:id"`.
-       *
-       * This is needed because some URLs belong to WordPress, like `/?p=13`,
-       * but others are the same URL with or without the query, like `/` and
-       * `/?utm_campaign=sale`.
-       *
-       * Setting a query to `false` is the same than not setting it at all.
-       *
-       * @example
-       * ```js
-       * {
-       *   p: true,
-       *   search: true,
-       * }
-       * ```
-       *
-       * @defaultValue
-       * ```js
-       * {
-       *   p: true,
-       * }
-       * ```
-       *
-       */
-      handledQueries: Record<string, boolean>;
     };
   };
 
