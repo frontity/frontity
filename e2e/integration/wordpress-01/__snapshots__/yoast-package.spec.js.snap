@@ -77,14 +77,14 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -96,12 +96,12 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
         "url": "http://my.frontity.site/hello-world/",
         "name": "Hello World From Yoast! - Test WP Site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "datePublished": "2020-08-20T01:31:05+00:00",
         "dateModified": "2020-08-31T13:42:07+00:00",
         "author": {
-          "@id": "http://localhost:8080/#/schema/person/7d2c90397c7dfc78012b92d2a9f3463b"
+          "@id": "http://my.frontity.site/#/schema/person/7d2c90397c7dfc78012b92d2a9f3463b"
         },
         "description": "Meta tags are managed from WordPress by Yoast SEO plugin.",
         "inLanguage": "en-US",
@@ -114,11 +114,11 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
       },
       {
         "@type": "Person",
-        "@id": "http://localhost:8080/#/schema/person/7d2c90397c7dfc78012b92d2a9f3463b",
+        "@id": "http://my.frontity.site/#/schema/person/7d2c90397c7dfc78012b92d2a9f3463b",
         "name": "admin",
         "image": {
           "@type": "ImageObject",
-          "@id": "http://localhost:8080/#personlogo",
+          "@id": "http://my.frontity.site/#personlogo",
           "inLanguage": "en-US",
           "url": "http://2.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=96&d=mm&r=g",
           "caption": "admin"
@@ -188,14 +188,14 @@ exports[`Yoast Package > Page > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -207,7 +207,7 @@ exports[`Yoast Package > Page > should render the schema tag #0`] = `
         "url": "http://my.frontity.site/sample-page/",
         "name": "Sample Page - Test WP Site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "datePublished": "2020-08-20T01:31:05+00:00",
         "dateModified": "2020-08-20T01:31:05+00:00",
@@ -228,7 +228,7 @@ exports[`Yoast Package > Category > should render the correct canonical URL #0`]
 <link
   data-rh="true"
   rel="canonical"
-  href="http://localhost:8080/category/nature/"
+  href="http://my.frontity.site/category/nature/"
 />
 `;
 
@@ -260,7 +260,7 @@ exports[`Yoast Package > Category > should render the Open Graph tags #3`] = `
 <meta
   data-rh="true"
   property="og:url"
-  content="http://localhost:8080/category/nature/"
+  content="http://my.frontity.site/category/nature/"
 />
 `;
 
@@ -279,14 +279,14 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -294,17 +294,17 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
       },
       {
         "@type": "CollectionPage",
-        "@id": "http://localhost:8080/category/nature/#webpage",
-        "url": "http://localhost:8080/category/nature/",
+        "@id": "http://my.frontity.site/category/nature/#webpage",
+        "url": "http://my.frontity.site/category/nature/",
         "name": "Nature Archives - Test WP Site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
-            "target": ["http://localhost:8080/category/nature/"]
+            "target": ["http://my.frontity.site/category/nature/"]
           }
         ]
       }
@@ -314,7 +314,11 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
 `;
 
 exports[`Yoast Package > Tag > should render the correct canonical URL #0`] = `
-<link data-rh="true" rel="canonical" href="http://localhost:8080/tag/japan/" />
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/tag/japan/"
+/>
 `;
 
 exports[`Yoast Package > Tag > should render the robots tag #0`] = `
@@ -345,7 +349,7 @@ exports[`Yoast Package > Tag > should render the Open Graph tags #3`] = `
 <meta
   data-rh="true"
   property="og:url"
-  content="http://localhost:8080/tag/japan/"
+  content="http://my.frontity.site/tag/japan/"
 />
 `;
 
@@ -364,14 +368,14 @@ exports[`Yoast Package > Tag > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -379,17 +383,17 @@ exports[`Yoast Package > Tag > should render the schema tag #0`] = `
       },
       {
         "@type": "CollectionPage",
-        "@id": "http://localhost:8080/tag/japan/#webpage",
-        "url": "http://localhost:8080/tag/japan/",
+        "@id": "http://my.frontity.site/tag/japan/#webpage",
+        "url": "http://my.frontity.site/tag/japan/",
         "name": "Japan Archives - Test WP Site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
-            "target": ["http://localhost:8080/tag/japan/"]
+            "target": ["http://my.frontity.site/tag/japan/"]
           }
         ]
       }
@@ -402,7 +406,7 @@ exports[`Yoast Package > Author > should render the correct canonical URL #0`] =
 <link
   data-rh="true"
   rel="canonical"
-  href="http://localhost:8080/author/luisherranz/"
+  href="http://my.frontity.site/author/luisherranz/"
 />
 `;
 
@@ -434,7 +438,7 @@ exports[`Yoast Package > Author > should render the Open Graph tags #3`] = `
 <meta
   data-rh="true"
   property="og:url"
-  content="http://localhost:8080/author/luisherranz/"
+  content="http://my.frontity.site/author/luisherranz/"
 />
 `;
 
@@ -461,14 +465,14 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -476,33 +480,33 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
       },
       {
         "@type": "ProfilePage",
-        "@id": "http://localhost:8080/author/luisherranz/#webpage",
-        "url": "http://localhost:8080/author/luisherranz/",
+        "@id": "http://my.frontity.site/author/luisherranz/#webpage",
+        "url": "http://my.frontity.site/author/luisherranz/",
         "name": "luisherranz, Author at Test WP Site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
-            "target": ["http://localhost:8080/author/luisherranz/"]
+            "target": ["http://my.frontity.site/author/luisherranz/"]
           }
         ]
       },
       {
         "@type": "Person",
-        "@id": "http://localhost:8080/#/schema/person/9f1ddec414507e6250ba7fad34b5cfbe",
+        "@id": "http://my.frontity.site/#/schema/person/9f1ddec414507e6250ba7fad34b5cfbe",
         "name": "luisherranz",
         "image": {
           "@type": "ImageObject",
-          "@id": "http://localhost:8080/#personlogo",
+          "@id": "http://my.frontity.site/#personlogo",
           "inLanguage": "en-US",
           "url": "http://2.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
           "caption": "luisherranz"
         },
         "mainEntityOfPage": {
-          "@id": "http://localhost:8080/author/luisherranz/#webpage"
+          "@id": "http://my.frontity.site/author/luisherranz/#webpage"
         }
       }
     ]
@@ -514,7 +518,7 @@ exports[`Yoast Package > CPT > should render the correct canonical URL #0`] = `
 <link
   data-rh="true"
   rel="canonical"
-  href="http://localhost:8080/movie/the-terminator/"
+  href="http://my.frontity.site/movie/the-terminator/"
 />
 `;
 
@@ -554,7 +558,7 @@ exports[`Yoast Package > CPT > should render the Open Graph tags #4`] = `
 <meta
   data-rh="true"
   property="og:url"
-  content="http://localhost:8080/movie/the-terminator/"
+  content="http://my.frontity.site/movie/the-terminator/"
 />
 `;
 
@@ -573,14 +577,14 @@ exports[`Yoast Package > CPT > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -588,11 +592,11 @@ exports[`Yoast Package > CPT > should render the schema tag #0`] = `
       },
       {
         "@type": "WebPage",
-        "@id": "http://localhost:8080/movie/the-terminator/#webpage",
-        "url": "http://localhost:8080/movie/the-terminator/",
+        "@id": "http://my.frontity.site/movie/the-terminator/#webpage",
+        "url": "http://my.frontity.site/movie/the-terminator/",
         "name": "The Terminator - Test WP Site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "datePublished": "2020-01-09T19:07:38+00:00",
         "dateModified": "2020-01-09T19:07:38+00:00",
@@ -600,7 +604,7 @@ exports[`Yoast Package > CPT > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "ReadAction",
-            "target": ["http://localhost:8080/movie/the-terminator/"]
+            "target": ["http://my.frontity.site/movie/the-terminator/"]
           }
         ]
       }
@@ -613,7 +617,7 @@ exports[`Yoast Package > Custom Taxonomy > should render the correct canonical U
 <link
   data-rh="true"
   rel="canonical"
-  href="http://localhost:8080/actor/linda-hamilton/"
+  href="http://my.frontity.site/actor/linda-hamilton/"
 />
 `;
 
@@ -645,7 +649,7 @@ exports[`Yoast Package > Custom Taxonomy > should render the Open Graph tags #3`
 <meta
   data-rh="true"
   property="og:url"
-  content="http://localhost:8080/actor/linda-hamilton/"
+  content="http://my.frontity.site/actor/linda-hamilton/"
 />
 `;
 
@@ -664,14 +668,14 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -679,17 +683,17 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
       },
       {
         "@type": "CollectionPage",
-        "@id": "http://localhost:8080/actor/linda-hamilton/#webpage",
-        "url": "http://localhost:8080/actor/linda-hamilton/",
+        "@id": "http://my.frontity.site/actor/linda-hamilton/#webpage",
+        "url": "http://my.frontity.site/actor/linda-hamilton/",
         "name": "Linda Hamilton Archives - Test WP Site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
-            "target": ["http://localhost:8080/actor/linda-hamilton/"]
+            "target": ["http://my.frontity.site/actor/linda-hamilton/"]
           }
         ]
       }
@@ -735,7 +739,7 @@ exports[`Yoast Package > Homepage > should render the Open Graph tags #3`] = `
 `;
 
 exports[`Yoast Package > Homepage > should render the Open Graph tags #4`] = `
-<meta data-rh="true" property="og:url" content="http://localhost:8080/" />
+<meta data-rh="true" property="og:url" content="http://my.frontity.site/" />
 `;
 
 exports[`Yoast Package > Homepage > should render the Open Graph tags #5`] = `
@@ -753,14 +757,14 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -772,7 +776,7 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
         "url": "http://my.frontity.site/",
         "name": "Test WP Site - Just another WordPress site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "description": "Just another WordPress site",
         "inLanguage": "en-US",
@@ -789,7 +793,7 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
 `;
 
 exports[`Yoast Package > CPT (archive) > should render the correct canonical URL #0`] = `
-<link data-rh="true" rel="canonical" href="http://localhost:8080/movies/" />
+<link data-rh="true" rel="canonical" href="http://my.frontity.site/movies/" />
 `;
 
 exports[`Yoast Package > CPT (archive) > should render the robots tag #0`] = `
@@ -820,7 +824,7 @@ exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #3`] 
 <meta
   data-rh="true"
   property="og:url"
-  content="http://localhost:8080/movies/"
+  content="http://my.frontity.site/movies/"
 />
 `;
 
@@ -839,14 +843,14 @@ exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "http://localhost:8080/#website",
-        "url": "http://localhost:8080/",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
         "name": "Test WP Site",
         "description": "Just another WordPress site",
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://localhost:8080/?s={search_term_string}",
+            "target": "http://my.frontity.site/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         ],
@@ -854,17 +858,17 @@ exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
       },
       {
         "@type": "CollectionPage",
-        "@id": "http://localhost:8080/movies/#webpage",
-        "url": "http://localhost:8080/movies/",
+        "@id": "http://my.frontity.site/movies/#webpage",
+        "url": "http://my.frontity.site/movies/",
         "name": "Movies Archive - Test WP Site",
         "isPartOf": {
-          "@id": "http://localhost:8080/#website"
+          "@id": "http://my.frontity.site/#website"
         },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
-            "target": ["http://localhost:8080/movies/"]
+            "target": ["http://my.frontity.site/movies/"]
           }
         ]
       }

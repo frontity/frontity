@@ -258,7 +258,7 @@ const settings: Settings = [
                * As a workaround, we have to explicitly set the `base` property
                * here.
                */
-              base: "http://localhost/",
+              base: "http://localhost",
             },
           },
         },
