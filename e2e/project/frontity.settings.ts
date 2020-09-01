@@ -213,7 +213,7 @@ const settings: Settings = [
               ["Nature", "/category/nature/"],
               ["Travel", "/category/travel/"],
               ["Japan", "/tag/japan/"],
-              ["About Us", "/about-us/"],
+              ["Sample Page", "/sample-page/"],
             ],
             featured: {
               showOnList: true,
@@ -227,6 +227,20 @@ const settings: Settings = [
         state: {
           source: {
             api: "http://localhost:8080/wp-json",
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+                archive: "/movies",
+              },
+            ],
+            taxonomies: [
+              {
+                taxonomy: "actor",
+                endpoint: "actors",
+                postTypeEndpoint: "movies",
+              },
+            ],
           },
         },
       },
