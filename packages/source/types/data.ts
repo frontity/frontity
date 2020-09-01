@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-jsdoc */
 import { Merge } from "./utils";
 
 export type EntityData = {
@@ -31,7 +32,8 @@ export type Data =
   | AuthorWithSearchData
   | PostTypeArchiveWithSearchData
   | PostArchiveWithSearchData
-  | DateWithSearchData;
+  | DateWithSearchData
+  | CommentData;
 
 /**
  * Base properties of objects of types `Data`.
@@ -74,6 +76,7 @@ export type BaseData = {
 
 /**
  * Adds new properties to `BaseData` to identify errors.
+ *
  * @property {isError} true
  * @property {number} errorStatus
  * @property {string} errorStatusText
@@ -120,6 +123,7 @@ export type ErrorData = Merge<
 
 /**
  * Adds properties to `BaseData` to identify archive pages.
+ *
  * @property {true} isArchive
  * @property {EntityData[]} items - List of items contained in this archive page.
  * @property {number} page - The page number of this archive page.
@@ -146,6 +150,7 @@ export type ArchiveData = Merge<
 
 /**
  * Adds properties to identify archive pages with search.
+ *
  * @property {true} isSearch
  * @property {string} searchQuery
  */
@@ -156,6 +161,7 @@ export type SearchData = {
 
 /**
  * Adds properties to `ArchiveData` to identify taxonomy pages.
+ *
  * @property {true} isTaxonomy
  * @property {string} taxonomy - Taxonomy slug.
  * @property {number} id - Taxonomy id.
@@ -176,6 +182,7 @@ export type TaxonomyWithSearchData = Merge<TaxonomyData, SearchData>;
 
 /**
  * Adds properties to `TaxonomyData` to identify category pages.
+ *
  * @property {true} isCategory
  * @property {"category"} taxonomy
  */
@@ -194,6 +201,7 @@ export type CategoryWithSearchData = Merge<CategoryData, SearchData>;
 
 /**
  * Adds properties to `TaxonomyData` to identify tag pages.
+ *
  * @property {true} isTag
  * @property {"tag"} taxonomy
  */
@@ -212,6 +220,7 @@ export type TagWithSearchData = Merge<TagData, SearchData>;
 
 /**
  * Adds properties to `ArchiveData` to identify author pages.
+ *
  * @property {true} isAuthor
  * @property {number} id - Author id.
  */
@@ -230,6 +239,7 @@ export type AuthorWithSearchData = Merge<AuthorData, SearchData>;
 
 /**
  * Adds properties to `ArchiveData` to identify post type archive pages.
+ *
  * @property {true} isPostTypeArchive
  * @property {string} type - Post type slug.
  */
@@ -252,6 +262,7 @@ export type PostTypeArchiveWithSearchData = Merge<
 
 /**
  * Adds properties to `PostArchiveData` to identify `post` archive pages.
+ *
  * @property {true} isPostArchive
  */
 export type PostArchiveData = Merge<
@@ -269,6 +280,7 @@ export type PostArchiveWithSearchData = Merge<PostArchiveData, SearchData>;
 
 /**
  * Adds properties to `ArchiveData` to identify date archive pages.
+ *
  * @property {true} isDate
  * @property {number} year - The year number.
  * @property {number} month - The month number (from 1 to 12).
@@ -294,6 +306,7 @@ export type DateWithSearchData = Merge<DateData, SearchData>;
 /**
  * Adds properties to `BaseData` to identify post type pages.
  * Post type entities are posts, pages, attachments, custom post types, etc.
+ *
  * @property {true} isPostType
  * @property {string} type - Post type slug.
  * @property {number} id - Entity id.
@@ -309,6 +322,7 @@ export type PostTypeData = Merge<
 
 /**
  * Adds properties to `PostTypeData` to identify posts.
+ *
  * @property {true} isPost
  * @property {"post"} type
  */
@@ -322,6 +336,7 @@ export type PostData = Merge<
 
 /**
  * Adds properties to `PostTypeData` to identify pages.
+ *
  * @property {true} isPage
  * @property {"page"} type
  */
@@ -335,6 +350,7 @@ export type PageData = Merge<
 
 /**
  * Adds properties to `PostTypeData` to identify attachments.
+ *
  * @property {true} isAttachment
  * @property {"attachment"} type
  */
@@ -343,5 +359,20 @@ export type AttachmentData = Merge<
   {
     type: "attachment";
     isAttachment: true;
+  }
+>;
+
+/**
+ * Adds properties to `BaseData` to identify the comments.
+ */
+export type CommentData = Merge<
+  BaseData,
+  {
+    postId: number;
+    type: "comments";
+    isComments: true;
+    items: EntityData[];
+    total: number;
+    totalPages: number;
   }
 >;

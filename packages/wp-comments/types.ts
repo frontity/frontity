@@ -1,5 +1,6 @@
 import { Package, Action, AsyncAction } from "frontity/types";
 import WpSource from "@frontity/wp-source/types";
+import TinyRouter from "../tiny-router/types";
 
 /**
  * Schema for a Comment entity in WordPress.
@@ -349,6 +350,6 @@ interface WpComments extends Package {
 /**
  * Packages used internally by WpComments.
  */
-export type Packages = WpComments & WpSource;
+export type Packages = WpComments & WpSource & TinyRouter;
 
 export default WpComments;

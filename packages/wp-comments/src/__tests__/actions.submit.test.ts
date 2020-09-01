@@ -2,6 +2,7 @@ import * as frontity from "frontity";
 import clone from "clone-deep";
 import { createStore } from "@frontity/connect";
 import { mergeDeepRight } from "ramda";
+import wpSource from "@frontity/wp-source/src";
 
 import wpComments from "..";
 import { Packages } from "../../types";
@@ -400,16 +401,10 @@ describe("actions.comments.submit", () => {
 
   test("should indicate if the comment was not accepted yet", async () => {
     // Mock packages with the API specified and some form.
-    const packages: any = mergeDeepRight(clone(wpComments), {
-      state: {
-        source: {
-          api: "https://test.frontity.org/wp-json/",
-        },
-      },
-    });
-
-    // Create store from mocked packages.
-    const store = createStore<Packages>(packages as Packages);
+    const packages: any = mergeDeepRight(clone(wpSource()), clone(wpComments));
+    const store = createStore<Packages>(packages);
+    store.state.source.api = "https://test.frontity.org/wp-json";
+    store.actions.source.init();
 
     // WordPress returns 201 when a comment was successfully submitted.
     fetch.mockResolvedValue(
@@ -460,16 +455,10 @@ describe("actions.comments.submit", () => {
 
   test("should indicate if the comment was accepted", async () => {
     // Mock packages with the API specified and some form.
-    const packages: any = mergeDeepRight(clone(wpComments), {
-      state: {
-        source: {
-          api: "https://test.frontity.org/wp-json/",
-        },
-      },
-    });
-
-    // Create store from mocked packages.
-    const store = createStore<Packages>(packages as Packages);
+    const packages: any = mergeDeepRight(clone(wpSource()), clone(wpComments));
+    const store = createStore<Packages>(packages);
+    store.state.source.api = "https://test.frontity.org/wp-json";
+    store.actions.source.init();
 
     // WordPress returns 201 when a comment was successfully submitted.
     fetch.mockResolvedValue(
@@ -482,7 +471,9 @@ describe("actions.comments.submit", () => {
           authorName: "Frontitbotito",
           authorURL: "",
           date: "2020-08-26T21:45:06",
-          content: { rendered: "<p>Hello world!</p>\n" },
+          content: {
+            rendered: "<p>Hello world!</p>\n",
+          },
           link: "http://localhost:8080/hello-world/#comment-2",
           status: "approved",
           type: "comment",
