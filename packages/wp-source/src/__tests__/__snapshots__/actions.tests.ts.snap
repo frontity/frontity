@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fetch Throw an error if fetch fails 1`] = `
+exports[`actions.source.fetch Throw an error if fetch fails 1`] = `
 Object {
   "/some/route/": Object {
     "isFetching": true,
@@ -13,7 +13,7 @@ Object {
 }
 `;
 
-exports[`fetch does nothing if data exists 1`] = `
+exports[`actions.source.fetch does nothing if data exists 1`] = `
 Object {
   "/some/route/": Object {
     "id": 1,
@@ -29,7 +29,7 @@ Object {
 }
 `;
 
-exports[`fetch should run again when \`force\` is used 1`] = `
+exports[`actions.source.fetch should run again when \`force\` is used 1`] = `
 Object {
   "/some/route/": Object {
     "id": 1,
@@ -45,7 +45,7 @@ Object {
 }
 `;
 
-exports[`fetch should work if data doesn't exist 1`] = `
+exports[`actions.source.fetch should work if data doesn't exist 1`] = `
 Object {
   "/some/route/": Object {
     "id": 1,
@@ -61,7 +61,7 @@ Object {
 }
 `;
 
-exports[`init Errors for state.data['/some/route/'] should be removed when fetching with { force: true } 1`] = `
+exports[`actions.source.init Errors for state.data['/some/route/'] should be removed when fetching with { force: true } 1`] = `
 Object {
   "id": 1,
   "isFetching": false,
@@ -75,7 +75,7 @@ Object {
 }
 `;
 
-exports[`init should add new handlers from postTypes array 1`] = `
+exports[`actions.source.init should add new handlers from postTypes array 1`] = `
 Array [
   Object {
     "func": [MockFunction],
@@ -164,7 +164,7 @@ Array [
 ]
 `;
 
-exports[`init should add new handlers from postTypes array 2`] = `
+exports[`actions.source.init should add new handlers from postTypes array 2`] = `
 Array [
   Array [
     Object {
@@ -183,7 +183,7 @@ Array [
 ]
 `;
 
-exports[`init should add new handlers from postTypes array 3`] = `
+exports[`actions.source.init should add new handlers from postTypes array 3`] = `
 Array [
   Array [
     Object {
@@ -194,7 +194,7 @@ Array [
 ]
 `;
 
-exports[`init should add new handlers from taxonomies array 1`] = `
+exports[`actions.source.init should add new handlers from taxonomies array 1`] = `
 Array [
   Object {
     "func": [MockFunction],
@@ -283,7 +283,7 @@ Array [
 ]
 `;
 
-exports[`init should add new handlers from taxonomies array 2`] = `
+exports[`actions.source.init should add new handlers from taxonomies array 2`] = `
 Array [
   Array [
     Object {
@@ -317,7 +317,7 @@ Array [
 ]
 `;
 
-exports[`init should add redirect for categories if 'categoryBase' is set 1`] = `
+exports[`actions.source.init should add redirect for categories if 'categoryBase' is set 1`] = `
 Array [
   Object {
     "func": [Function],
@@ -334,7 +334,7 @@ Array [
 ]
 `;
 
-exports[`init should add redirect for tags if 'authorBase' is set 1`] = `
+exports[`actions.source.init should add redirect for tags if 'authorBase' is set 1`] = `
 Array [
   Object {
     "func": [Function],
@@ -351,7 +351,7 @@ Array [
 ]
 `;
 
-exports[`init should add redirect for tags if 'tagBase' is set 1`] = `
+exports[`actions.source.init should add redirect for tags if 'tagBase' is set 1`] = `
 Array [
   Object {
     "func": [Function],
@@ -368,7 +368,7 @@ Array [
 ]
 `;
 
-exports[`init should add redirect for the specified homepage 1`] = `
+exports[`actions.source.init should add redirect for the specified homepage 1`] = `
 Array [
   Object {
     "func": [Function],
@@ -379,7 +379,7 @@ Array [
 ]
 `;
 
-exports[`init should add redirect for the specified posts page 1`] = `
+exports[`actions.source.init should add redirect for the specified posts page 1`] = `
 Array [
   Object {
     "func": [Function],
@@ -390,7 +390,7 @@ Array [
 ]
 `;
 
-exports[`init should add redirect if 'subirectory' is present 1`] = `
+exports[`actions.source.init should add redirect if 'subirectory' is present 1`] = `
 Array [
   Object {
     "func": [Function],
@@ -443,7 +443,7 @@ Array [
 ]
 `;
 
-exports[`init state.data['/some/route/'].isCategory should be removed when fetching with { force: true } 1`] = `
+exports[`actions.source.init state.data['/some/route/'].isCategory should be removed when fetching with { force: true } 1`] = `
 Object {
   "isArchive": true,
   "isCategory": true,
