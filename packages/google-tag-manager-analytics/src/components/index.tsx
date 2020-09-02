@@ -34,6 +34,15 @@ const GtmCode: React.FC<GtmCodeProps> = ({ containerId }) => (
         async
         src={`https://www.googletagmanager.com/gtm.js?id=${containerId}`}
       />
+      <script>
+        {`
+        var dataLayer = window.dataLayer || [];
+        dataLayer.push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        })
+      `}
+      </script>
     </Head>
     {/* Add the GTM noscript in the <body> */}
     <noscript>
