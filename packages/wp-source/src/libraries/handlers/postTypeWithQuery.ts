@@ -4,12 +4,13 @@ import { ServerError } from "@frontity/source";
 import { fetch } from "frontity";
 
 /**
- * The parameters for {@link postTypeHandler}.
+ * The parameters for {@link postTypeWithQueryHandler}.
  */
-interface PostTypeHandlerParams {
+interface PostTypeWithQueryHandlerOptions {
   /**
-   * The list of [WP REST API endpoints](https://developer.wordpress.org/rest-api/reference/)
-   * from which the generated handler is going to fetch the data.
+   * The list of [WP REST API
+   * endpoints](https://developer.wordpress.org/rest-api/reference/) from which
+   * the generated handler is going to fetch the data.
    */
   endpoints: string[];
 }
@@ -17,31 +18,34 @@ interface PostTypeHandlerParams {
 /**
  * A {@link Handler} function generator for WordPress Post Types.
  *
- * This function will generate a handler function for specific
- * [WP REST API endpoints](https://developer.wordpress.org/rest-api/reference/)
- * from which the data is going to be fetched. The generated handler will fetch
- * data from all specified endpoints.
+ * This function will generate a handler function for specific [WP REST API
+ * endpoints](https://developer.wordpress.org/rest-api/reference/) from which
+ * the data is going to be fetched. The generated handler will fetch data from
+ * all specified endpoints.
  *
- * @param options - Options for the handler generator: {@link PostTypeHandlerParams}.
+ * @param options - Options for the handler generator: {@link
+ * PostTypeWithQueryHandlerOptions}.
  *
  * @example
  * ```js
- *   const postTypeHandlerFunc = postTypeHandler({ endpoints: ['post']});
- *   libraries.source.handlers.push({
- *     name: "post type",
- *     priority: 30,
- *     pattern: "/(.*)?/:slug",
- *     func: postTypeHandlerFunc,
- *   })
+ * const postTypeWithQuery = postTypeWithQueryHandler({
+ *   endpoints: ["post", "page"],
+ * });
+ * libraries.source.handlers.push({
+ *   name: "post type - query permalink",
+ *   priority: 10,
+ *   pattern: "RegExp:(\\?|&)p=\\d+",
+ *   func: postTypeWithQuery,
+ * });
  * ```
  *
- * @returns An async "handler" function that can be passed as an argument to the handler object.
- * This function will be invoked by the frontity framework when calling `source.fetch()` for
- * a specific entity.
+ * @returns An async "handler" function that can be passed as an argument to
+ * the handler object. This function will be invoked by the frontity framework
+ * when calling `actions.source.fetch()` for a specific entity.
  */
-const postTypeHandler = ({
+const postTypeWithQueryHandler = ({
   endpoints,
-}: PostTypeHandlerParams): Handler => async ({
+}: PostTypeWithQueryHandlerOptions): Handler => async ({
   link,
   state,
   libraries,
@@ -152,4 +156,4 @@ const postTypeHandler = ({
   }
 };
 
-export default postTypeHandler;
+export default postTypeWithQueryHandler;

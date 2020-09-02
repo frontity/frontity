@@ -12,8 +12,8 @@ import {
 
 export default [
   {
-    name: "post type with query",
-    priority: 5,
+    name: "post type - query permalink",
+    priority: 10,
     pattern: "RegExp:(\\?|&)p=\\d+",
     func: postTypeWithQuery,
   },
