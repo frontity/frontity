@@ -244,25 +244,7 @@ const settings: Settings = [
           },
         },
       },
-      {
-        name: "@frontity/yoast",
-        state: {
-          yoast: {
-            transformLinks: {
-              /**
-               * Yoast SEO package is surprisingly not including the port number
-               * in links so even thought WordPress is running in
-               * http://localhost:8080, all links end being something like
-               * http://localhost/hello-world/ in the `yoast_head` field.
-               *
-               * As a workaround, we have to explicitly set the `base` property
-               * here.
-               */
-              base: "http://localhost",
-            },
-          },
-        },
-      },
+      "@frontity/yoast",
     ],
   },
 ];
