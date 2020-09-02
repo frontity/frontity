@@ -1,5 +1,6 @@
 /* eslint-disable jsdoc/require-jsdoc */
 import { Merge } from "./utils";
+import { CommentItem } from "../../wp-comments/types";
 
 export type EntityData = {
   type: string;
@@ -371,7 +372,7 @@ export type CommentData = Merge<
     postId: number;
     type: "comments";
     isComments: true;
-    items: EntityData[];
+    items: CommentItem[];
     total: number;
     totalPages: number;
   }
