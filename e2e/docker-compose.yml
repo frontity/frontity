@@ -22,6 +22,8 @@ services:
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_AUTH_KEY: wordpress-auth-key
+      WORDPRESS_AUTH_SALT: wordpress-auth-salt
     depends_on:
       - db
     links:
