@@ -10,7 +10,7 @@ export type WithYoastHead = {
   /**
    * All meta tags in string format.
    */
-  yoast_head: string;
+  yoast_head?: string;
 };
 
 /**
@@ -35,6 +35,20 @@ interface YoastPackage extends Package {
      * Yoast namespace.
      */
     yoast: {
+      /**
+       * Render the Yoast meta tags only in Server Side Rendering.
+       *
+       * The title tag is still shown while navigating but not the rest of them.
+       * This option is useful to improve the perfomance a bit as the
+       * `<Html2React>` component is not used to render the title tag.
+       *
+       * @remarks With this option active, the Yoast meta tags will only be
+       * visible if you go to the page source.
+       *
+       * @defaultValue `false`
+       */
+      onlyInSSR?: boolean;
+
       /**
        * Define a set of properties to transform links present in the
        * `yoast_head` field in case you are

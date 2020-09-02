@@ -6,6 +6,7 @@ const yoastPackage: YoastPackage = {
   roots: { yoast: Component },
   state: {
     yoast: {
+      onlyInSSR: false,
       transformLinks: {
         ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
       },

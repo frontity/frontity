@@ -1,11 +1,10 @@
 import React from "react";
-import { connect } from "frontity";
+import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
-import { Packages, WithYoastHead } from "../../types";
-import { getEntity, getWpUrl } from "@frontity/head-tags/src/utils";
+import { Packages } from "../../types";
 
+import { useYoastHead } from "../hooks";
 import headWrapper from "../processors/headWrapper";
-import { transformAllLinks } from "../utils";
 
 /**
  * Render all meta tags included in the `yoast_meta` field, if that field exists
@@ -20,29 +19,20 @@ const Root: React.FC<Connect<Packages>> = ({ state, libraries }) => {
   const { link } = state.router;
 
   /**
-   * Get the entity pointed by the current link.
-   *
-   * As we don't know which kind of entity is pointed by `link` and we only need
-   * the `yoast_head` field, we cast the returned entity to a type with only
-   * that property.
+   * Get `title` or `head` param from the `yoast_head` field, depending on the
+   * Yoast package settings.
    */
-  const entity = (getEntity({ state, link }) as unknown) as WithYoastHead;
+  const { title, head } = useYoastHead({ link, state });
 
-  // Get the `yoast_head` field from entity.
-  let yoastHead = entity?.yoast_head || "";
-
-  if (state.yoast.transformLinks) {
-    // Props to replace all links present in `yoast_head`.
-    const html = yoastHead;
-    const ignore = state.yoast.transformLinks.ignore;
-    const base =
-      state.yoast.transformLinks.base || getWpUrl(state.source.api, false).href;
-    const newBase = state.frontity.url;
-
-    // Memoize the html code with all links transformed.
-    yoastHead = React.useMemo(
-      () => transformAllLinks({ html, ignore, base, newBase }),
-      [html, ignore, base, newBase]
+  /**
+   * Render the `title` string extracted from the `<title>` tag present in the
+   * `yoast_head` field.
+   */
+  if (title) {
+    return (
+      <Head>
+        <title>{title}</title>
+      </Head>
     );
   }
 
@@ -53,8 +43,13 @@ const Root: React.FC<Connect<Packages>> = ({ state, libraries }) => {
    * the `yoast_head` string directly inside the <Head> component, it must be
    * parsed first and converted to React elements.
    */
-  const Html2React = libraries.html2react.Component;
-  return <Html2React html={yoastHead} processors={[headWrapper]} />;
+  if (head) {
+    const Html2React = libraries.html2react.Component;
+    return <Html2React html={head} processors={[headWrapper]} />;
+  }
+
+  // Return nothing if there are not `title` or `head`.
+  return null;
 };
 
 export default connect(Root);
