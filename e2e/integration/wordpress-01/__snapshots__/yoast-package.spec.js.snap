@@ -101,7 +101,7 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
         "datePublished": "2020-08-20T01:31:05+00:00",
         "dateModified": "2020-08-31T13:42:07+00:00",
         "author": {
-          "@id": "http://my.frontity.site/#/schema/person/65f2236d1b44949b0e5308bda962ad94"
+          "@id": "http://my.frontity.site/#/schema/person/9948b1443aa9e586af18d75cf4855438"
         },
         "description": "Meta tags are managed from WordPress by Yoast SEO plugin.",
         "inLanguage": "en-US",
@@ -114,7 +114,7 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
       },
       {
         "@type": "Person",
-        "@id": "http://my.frontity.site/#/schema/person/65f2236d1b44949b0e5308bda962ad94",
+        "@id": "http://my.frontity.site/#/schema/person/9948b1443aa9e586af18d75cf4855438",
         "name": "admin",
         "image": {
           "@type": "ImageObject",
@@ -496,7 +496,7 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
       },
       {
         "@type": "Person",
-        "@id": "http://my.frontity.site/#/schema/person/a82446e0aacd19ba09625316dea94265",
+        "@id": "http://my.frontity.site/#/schema/person/1f3ad884727a4dbe50779670489694a7",
         "name": "luisherranz",
         "image": {
           "@type": "ImageObject",

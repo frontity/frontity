@@ -67,13 +67,24 @@ describe("Yoast Package", () => {
   };
 
   /**
+   * Visit the specified link with scripts disabled.
+   *
+   * @param link - The link of the page.
+   */
+  const visitWithoutScripts = (link) => {
+    cy.visit(`http://localhost:3001${link}?name=yoast-package`, {
+      script: false,
+    });
+  };
+
+  /**
    * Tests for posts.
    */
   describe("Post", () => {
     const link = "/hello-world/";
     const title = "Hello World From Yoast! - Test WP Site";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });
@@ -85,7 +96,7 @@ describe("Yoast Package", () => {
     const link = "/sample-page/";
     const title = "Sample Page - Test WP Site";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });
@@ -97,7 +108,7 @@ describe("Yoast Package", () => {
     const link = "/category/nature/";
     const title = "Nature Archives - Test WP Site";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });
@@ -109,7 +120,7 @@ describe("Yoast Package", () => {
     const link = "/tag/japan/";
     const title = "Japan Archives - Test WP Site";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });
@@ -121,7 +132,7 @@ describe("Yoast Package", () => {
     const link = "/author/luisherranz";
     const title = "luisherranz, Author at Test WP Site";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });
@@ -133,7 +144,7 @@ describe("Yoast Package", () => {
     const link = "/";
     const title = "Test WP Site - Just another WordPress site";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });
@@ -145,7 +156,7 @@ describe("Yoast Package", () => {
     const link = "/movie/the-terminator/";
     const title = "The Terminator - Test WP Site";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });
@@ -157,7 +168,7 @@ describe("Yoast Package", () => {
     const title = "Movies Archive - Test WP Site";
     const link = "/movies/";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });
@@ -169,7 +180,7 @@ describe("Yoast Package", () => {
     const link = "/actor/linda-hamilton/";
     const title = "Linda Hamilton Archives - Test WP Site";
 
-    before(() => cy.visit(`http://localhost:3001${link}?name=yoast-package`));
+    before(() => visitWithoutScripts(link));
     checkTitle(title);
     checkMetaTags();
   });

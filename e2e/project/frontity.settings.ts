@@ -244,7 +244,14 @@ const settings: Settings = [
           },
         },
       },
-      "@frontity/yoast",
+      {
+        name: "@frontity/yoast",
+        state: {
+          yoast: {
+            onlyInSSR: true,
+          },
+        },
+      },
     ],
   },
 ];
