@@ -10,7 +10,7 @@ describe("Native iframe lazy-load", () => {
     return cy
       .window()
       .its("HTMLIFrameElement")
-      .then(HTMLIframeElement => {
+      .then((HTMLIframeElement) => {
         expect("loading" in HTMLIframeElement.prototype).toBe(true);
       });
   });
@@ -28,10 +28,10 @@ describe("Iframe lazy-load with Intersection Observer", () => {
       onBeforeLoad(win) {
         Object.defineProperty(win.HTMLIFrameElement.prototype, "loading", {
           configurable: true,
-          writable: true
+          writable: true,
         });
         delete win.HTMLIFrameElement.prototype.loading;
-      }
+      },
     });
   });
 
@@ -39,7 +39,7 @@ describe("Iframe lazy-load with Intersection Observer", () => {
     return cy
       .window()
       .its("HTMLIFrameElement")
-      .then(HTMLIframeElement => {
+      .then((HTMLIframeElement) => {
         expect("loading" in HTMLIframeElement.prototype).toBe(false);
       });
   });
@@ -56,8 +56,6 @@ describe("Iframe lazy-load with Intersection Observer", () => {
     cy.get("iframe")
       .should("have.attr", "loading", "lazy")
       .should("not.be.visible");
-    cy.get("iframe")
-      .scrollIntoView({ duration: 300 })
-      .should("be.visible");
+    cy.get("iframe").scrollIntoView({ duration: 300 }).should("be.visible");
   });
 });

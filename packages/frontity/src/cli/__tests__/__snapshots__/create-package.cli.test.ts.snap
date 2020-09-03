@@ -6,7 +6,7 @@ Array [
     Array [
       Object {
         "default": "my-frontity-package",
-        "message": "Enter a name for the package:",
+        "message": "Enter the name of the package:",
         "name": "name",
         "type": "input",
       },

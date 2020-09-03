@@ -21,14 +21,9 @@ describe("CLI create", () => {
       new EventPromised((resolve) => resolve())
     );
     mockedInquirer.prompt.mockReset();
-    mockedInquirer.prompt
-      .mockResolvedValueOnce({
-        name: "test-project",
-      })
-      .mockResolvedValueOnce({
-        theme: "test-theme",
-      });
-    mockedUtils.errorLogger = jest.fn();
+    mockedUtils.errorLogger = jest.fn((error) => {
+      throw error;
+    });
   });
 
   const options = {
@@ -40,6 +35,15 @@ describe("CLI create", () => {
   };
 
   test("frontity create", async () => {
+    mockedInquirer.prompt
+      .mockResolvedValueOnce({
+        name: "test-project",
+      })
+      .mockResolvedValueOnce({
+        theme: "test-theme",
+      })
+      .mockResolvedValueOnce("n");
+
     await create(options);
 
     expect(mockedInquirer.prompt).toHaveBeenCalledTimes(3);
@@ -58,10 +62,11 @@ describe("CLI create", () => {
   });
 
   test("frontity create 'test-project'", async () => {
-    mockedInquirer.prompt.mockReset();
-    mockedInquirer.prompt.mockResolvedValueOnce({
-      theme: "test-theme",
-    });
+    mockedInquirer.prompt
+      .mockResolvedValueOnce({
+        theme: "test-theme",
+      })
+      .mockResolvedValueOnce("n");
 
     const name = "test-project";
     await create({ ...options, name });
@@ -79,6 +84,12 @@ describe("CLI create", () => {
   });
 
   test("frontity create 'test-project' --typescript", async () => {
+    mockedInquirer.prompt
+      .mockResolvedValueOnce({
+        theme: "test-theme",
+      })
+      .mockResolvedValueOnce("Y");
+
     const name = "test-project";
     const typescript = true;
 
@@ -90,7 +101,7 @@ describe("CLI create", () => {
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name: name,
-      theme: undefined,
+      theme: "test-theme",
       typescript,
       path: resolve(process.cwd(), name),
     });
@@ -100,33 +111,33 @@ describe("CLI create", () => {
     try {
       await create({ ...options, typescript: true, prompt: false });
     } catch (err) {
-      expect(err.message).toBe("You need to provide the name for the project");
+      expect(err.message).toBe("You need to provide the name for the project.");
     }
   });
 
-  test("FRONTITY_NAME='test-project'; frontity create --no-prompt", async () => {
+  test("FRONTITY_CREATE__NAME='test-project'; frontity create --no-prompt", async () => {
     const name = "test-project";
-    process.env.FRONTITY_NAME = name;
+    process.env.FRONTITY_CREATE_NAME = name;
 
-    await create(options);
+    await create({ ...options, prompt: false });
 
     const params = mockedCreateCmd.default.mock.calls[0][0];
-    // omit path because it can vary depending on environment
+    // Omit path because it can vary depending on environment.
     expect(omit(params, "path")).toMatchSnapshot();
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name,
-      theme: undefined,
+      theme: "@frontity/mars-theme",
       typescript: false,
       path: resolve(process.cwd(), name),
     });
   });
 
-  test("FRONTITY_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt", async () => {
+  test("FRONTITY_CREATE_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt", async () => {
     const name = "test-project";
-    process.env.FRONTITY_TYPESCRIPT = "true";
+    process.env.FRONTITY_CREATE_TYPESCRIPT = "true";
 
-    await create({ ...options, name });
+    await create({ ...options, name, prompt: false });
 
     const params = mockedCreateCmd.default.mock.calls[0][0];
     // omit path because it can vary depending on environment
@@ -134,13 +145,15 @@ describe("CLI create", () => {
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name,
-      theme: undefined,
+      theme: "@frontity/mars-theme",
       typescript: true,
       path: resolve(process.cwd(), name),
     });
   });
 
   test("frontity create 'test-project' --theme 'test-theme'", async () => {
+    mockedInquirer.prompt.mockResolvedValueOnce("n");
+
     const name = "test-project";
     const theme = "test-theme";
     await create({ ...options, name, theme });
