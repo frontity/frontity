@@ -1,6 +1,6 @@
 {
   "name": "@frontity/google-tag-manager-analytics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Analytics package to use Google Tag Manager with Frontity",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -25,8 +25,8 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/analytics": "^1.2.0",
-    "frontity": "^1.10.0"
+    "@frontity/analytics": "^1.2.1",
+    "frontity": "^2.0.0"
   },
   "devDependencies": {
     "@types/react-test-renderer": "^16.9.3",

@@ -1,5 +1,13 @@
 # @frontity/wp-comments
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`611f3e2a`](https://github.com/frontity/frontity/commit/611f3e2ac836033417e9921a44b52cdd2f07793f), [`d95262df`](https://github.com/frontity/frontity/commit/d95262df70c43afb955747473393c8440d2a3af9), [`6ece281a`](https://github.com/frontity/frontity/commit/6ece281a8a3b8cf66443123fa1f4b88734ef95c2), [`d95262df`](https://github.com/frontity/frontity/commit/d95262df70c43afb955747473393c8440d2a3af9), [`2a1a1f35`](https://github.com/frontity/frontity/commit/2a1a1f35810337a18edc96c3da06ffd492152ed8), [`623a4146`](https://github.com/frontity/frontity/commit/623a41464aab97981f3c02d16747c5b8f9111b83)]:
+  - frontity@2.0.0
+  - @frontity/wp-source@1.8.2
+
 ## 0.2.1
 
 ### Patch Changes
