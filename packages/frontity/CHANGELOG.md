@@ -1,5 +1,28 @@
 # Change Log
 
+## 2.0.0
+
+### Minor Changes
+
+- [`623a4146`](https://github.com/frontity/frontity/commit/623a41464aab97981f3c02d16747c5b8f9111b83) [#540](https://github.com/frontity/frontity/pull/540) Thanks [@luisherranz](https://github.com/luisherranz)! - Remove all the short flags from the CLI commands.
+
+### Patch Changes
+
+- [`611f3e2a`](https://github.com/frontity/frontity/commit/611f3e2ac836033417e9921a44b52cdd2f07793f) [#541](https://github.com/frontity/frontity/pull/541) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate the `--publicPath` CLI arg of the `npx frontity dev` and `npx frontity build` commands in favor of `--public-path` to be consistent with the rest of the arguments.
+
+  It also adds a log to those commands, along with the already existing `mode` and `target` logs.
+
+* [`d95262df`](https://github.com/frontity/frontity/commit/d95262df70c43afb955747473393c8440d2a3af9) [#545](https://github.com/frontity/frontity/pull/545) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix environment variable names that were missing the middle command name in the `create` and `create-package` commands: from `FRONTITY_NAME` (wrong) to `FRONTITY_CREATE_NAME` (right).
+
+- [`6ece281a`](https://github.com/frontity/frontity/commit/6ece281a8a3b8cf66443123fa1f4b88734ef95c2) [#543](https://github.com/frontity/frontity/pull/543) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate the `URL` import from `"frontity"` in favor of the `new URL` global that is now present in both the browser and Node 10+.
+
+* [`d95262df`](https://github.com/frontity/frontity/commit/d95262df70c43afb955747473393c8440d2a3af9) [#545](https://github.com/frontity/frontity/pull/545) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix two bugs with `--no-prompt` actually prompting in the `create` and `create-package` commands.
+
+- [`2a1a1f35`](https://github.com/frontity/frontity/commit/2a1a1f35810337a18edc96c3da06ffd492152ed8) [#550](https://github.com/frontity/frontity/pull/550) Thanks [@luisherranz](https://github.com/luisherranz)! - Update chalk version.
+
+- Updated dependencies [[`611f3e2a`](https://github.com/frontity/frontity/commit/611f3e2ac836033417e9921a44b52cdd2f07793f), [`f4f20007`](https://github.com/frontity/frontity/commit/f4f200074dd360fbf6b41dea63c89f9c6938c75d), [`2a1a1f35`](https://github.com/frontity/frontity/commit/2a1a1f35810337a18edc96c3da06ffd492152ed8), [`94a1c41c`](https://github.com/frontity/frontity/commit/94a1c41cc683675b70fd92e759eb14c7f6daca8a)]:
+  - @frontity/core@1.8.0
+
 ## 1.10.1
 
 ### Patch Changes
