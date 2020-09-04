@@ -165,6 +165,7 @@ describe("actions.comments.submit", () => {
     `);
 
     // Check that the populated state is correct.
+    // The form should still be submitting.
     expect(store.state.comments.forms[postId]).toMatchInlineSnapshot(`
       Object {
         "errorCode": "",
@@ -406,12 +407,15 @@ describe("actions.comments.submit", () => {
     store.state.source.api = "https://test.frontity.org/wp-json";
     store.actions.source.init();
 
+    // A post ID.
+    const postId = 60;
+
     // WordPress returns 201 when a comment was successfully submitted.
     fetch.mockResolvedValue(
       mockResponse(
         {
           id: 123,
-          post: 1,
+          post: postId,
           parent: 0,
           author: 0,
           authorName: "Frontitbotito",
@@ -427,9 +431,6 @@ describe("actions.comments.submit", () => {
         }
       )
     );
-
-    // A post ID.
-    const postId = 60;
 
     // Send a comment and wait for the response.
     const submission = store.actions.comments.submit(postId, {
@@ -460,12 +461,24 @@ describe("actions.comments.submit", () => {
     store.state.source.api = "https://test.frontity.org/wp-json";
     store.actions.source.init();
 
+    type Api = Packages["libraries"]["source"]["api"];
+    const api = store.libraries.source.api as jest.Mocked<Api>;
+    api.get = jest.fn();
+
+    // Initialize the state.
+    // There are no comments, but we nee
+    api.get.mockResolvedValueOnce(mockResponse([]));
+    await store.actions.source.fetch("@comments/60");
+
+    // A post ID.
+    const postId = 60;
+
     // WordPress returns 201 when a comment was successfully submitted.
     fetch.mockResolvedValue(
       mockResponse(
         {
           id: 123,
-          post: 1,
+          post: postId,
           parent: 0,
           author: 0,
           authorName: "Frontitbotito",
@@ -483,9 +496,6 @@ describe("actions.comments.submit", () => {
         }
       )
     );
-
-    // A post ID.
-    const postId = 60;
 
     // Send a comment and wait for the response.
     const submission = store.actions.comments.submit(postId, {
@@ -507,6 +517,45 @@ describe("actions.comments.submit", () => {
     expect(form.isSubmitting).toBe(false);
     expect(form.isSubmitted).toBe(true);
     expect(form.isError).toBe(false);
+
+    // The comment is ready has been added to the items
+    expect(store.state.source.get(`@comments/${postId}`))
+      .toMatchInlineSnapshot(`
+      Object {
+        "isComments": true,
+        "isFetching": false,
+        "isReady": true,
+        "items": Array [
+          Object {
+            "id": 123,
+            "type": "comment",
+          },
+        ],
+        "link": "@comments/60/",
+        "page": 1,
+        "postId": 60,
+        "query": Object {},
+        "route": "@comments/60/",
+        "total": 1,
+        "totalPages": 1,
+        "type": "comments",
+      }
+    `);
+
+    // The fields should have been reset.
+    expect(store.state.comments.forms[postId]).toMatchInlineSnapshot(`
+      Object {
+        "errorCode": "",
+        "errorMessage": "",
+        "errors": Object {},
+        "fields": Object {
+          "content": "",
+        },
+        "isError": false,
+        "isSubmitted": true,
+        "isSubmitting": false,
+      }
+    `);
   });
 
   test("should populate an error in any other case", async () => {
