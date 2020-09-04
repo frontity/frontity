@@ -81,6 +81,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
   state,
   subdirectory,
+  link,
   force,
 }) => {
   // Normalize response
@@ -101,8 +102,8 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
       // Get or init data using the transformed link
       const { data } = state.source;
       const entityData =
-        data[entity.link] ||
-        (data[entity.link] = {
+        data[link || entity.link] ||
+        (data[link || entity.link] = {
           isReady: false,
           isFetching: false,
         });

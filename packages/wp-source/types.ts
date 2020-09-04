@@ -266,8 +266,8 @@ interface WpSource extends Source {
        * custom link created to fetch additional entities from the REST API.
        * - URLs start with `/`.
        * - Non URLs start with `@`.
-       * @example `actions.source.fecth("/some-post");`
-       * @example `actions.source.fecth("@comments/135");`
+       * @example `actions.source.fetch("/some-post");`
+       * @example `actions.source.fetch("@comments/135");`
        *
        * @param options - Optional options.
        *
@@ -359,6 +359,16 @@ interface WpSource extends Source {
          * @defaultValue `state.source.subdirectory`
          */
         subdirectory?: string;
+
+        /**
+         * An optional link for the entity. It will be used to populate the
+         * state in state.source.data[link] instead of the link that is included
+         * the entity itself.
+         *
+         * This has been introduced in order to avoid populating the state with entites
+         * that should not appear there e.g. For the individual comment entities.
+         */
+        link?: string;
 
         /**
          * A boolean that indicates if the entities should be overwritten.
