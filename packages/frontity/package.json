@@ -1,6 +1,6 @@
 {
   "name": "frontity",
-  "version": "1.10.1",
+  "version": "1.11.0",
   "description": "Frontity cli and entry point to other packages",
   "keywords": [
     "frontity",
@@ -32,7 +32,7 @@
     "prepublish": "npm run build"
   },
   "peerDependencies": {
-    "@frontity/core": "^1.7.3"
+    "@frontity/core": "^1.8.0"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "@frontity/connect": "^1.1.3",
-    "@frontity/core": "^1.7.3",
+    "@frontity/core": "^1.8.0",
     "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
