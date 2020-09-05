@@ -94,6 +94,19 @@ module.exports = (on, config) => {
         return null;
       })();
     },
+
+    updateOption({ name, value }) {
+      return (async () => {
+        await execa(
+          "docker-compose",
+          ["run", "--rm", "wpcli", "wp", "option", "update", name, value],
+          {
+            stdio: "inherit",
+          }
+        );
+        return null;
+      })();
+    },
   });
 
   /**

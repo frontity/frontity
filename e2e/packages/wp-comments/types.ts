@@ -10,6 +10,7 @@ interface WPComments extends Package {
   actions?: {
     comments: {
       submit: WPCommentsPackage["actions"]["comments"]["submit"];
+      updateFields: WPCommentsPackage["actions"]["comments"]["updateFields"];
     };
   };
   roots: {

@@ -55,12 +55,8 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
         comment with no email
       </button>
 
-      <pre id="form">
-        {JSON.stringify(state.comments.forms[1]?.submitted, null, 2)}
-      </pre>
-      <pre id="error-message">
-        {state.comments.forms[1]?.submitted?.errorMessage}
-      </pre>
+      <pre id="form">{JSON.stringify(state.comments.forms[1], null, 2)}</pre>
+      <pre id="error-message">{state.comments.forms[1]?.errorMessage}</pre>
     </>
   );
 };
