@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "1.7.3",
+  "version": "1.8.0",
   "description": "The core package of the Frontity framework.",
   "keywords": [
     "frontity",
@@ -50,6 +50,7 @@
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "babel-polyfill": "^6.26.0",
+    "chalk": "^4.1.0",
     "core-js": "^3.0.1",
     "cross-spawn": "^7.0.2",
     "deepmerge": "^3.2.0",
