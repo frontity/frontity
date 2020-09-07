@@ -28,7 +28,7 @@ describe("Head Tags - All in One SEO Pack", () => {
    * Ensure that the canonical link has been rendered.
    */
   const checkCanonical = () => {
-    it("should render the correct link tags", () => {
+    it("should render the correct canonical link", () => {
       cy.get('link[rel="canonical"]').toMatchSnapshot();
     });
   };

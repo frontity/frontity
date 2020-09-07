@@ -6,7 +6,7 @@ describe("Head Tags - WP SEO 0.13", () => {
     cy.task("installPlugin", { name: "rest-api-head-tags" });
     cy.task("installPlugin", { name: "custom-post-type-ui" });
     cy.task("loadDatabase", {
-      path: "./wp-data/head-tags/wpseo-0.13.sql",
+      path: "./wp-data/head-tags/wpseo.sql",
     });
   });
 
