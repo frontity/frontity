@@ -1,10 +1,10 @@
-describe("Yoast Package", () => {
+describe("Head Tags - Yoast 13.5", () => {
   before(() => {
-    cy.task("installPlugin", { name: "wordpress-seo" });
-    cy.task("installPlugin", { name: "code-snippets" });
+    cy.task("installPlugin", { name: "wordpress-seo", version: "13.5" });
+    cy.task("installPlugin", { name: "rest-api-head-tags" });
     cy.task("installPlugin", { name: "custom-post-type-ui" });
     cy.task("loadDatabase", {
-      path: "./wp-data/yoast-package/yoast-with-cpt.sql",
+      path: "./wp-data/head-tags/yoast-13.5.sql",
     });
   });
 
@@ -73,7 +73,7 @@ describe("Yoast Package", () => {
    * @param options - Visit options.
    */
   const visitLink = (link, options) => {
-    cy.visit(`http://localhost:3001${link}?name=yoast-package`, options);
+    cy.visit(`http://localhost:3001${link}?name=head-tags`, options);
   };
 
   /**

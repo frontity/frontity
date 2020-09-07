@@ -14,6 +14,9 @@ const Root: React.FC<Connect<Packages>> = ({ state }) => {
   const { link } = state.router;
   const { transformLinks } = state.headTags;
 
+  // Get if current link is ready.
+  const { isReady } = state.source.get(link);
+
   // Get the head tags for that link.
   const headTags = React.useMemo(() => state.headTags.get(link), [
     state.frontity.url,
@@ -22,6 +25,7 @@ const Root: React.FC<Connect<Packages>> = ({ state }) => {
     transformLinks,
     transformLinks && transformLinks.base,
     transformLinks && transformLinks.ignore,
+    isReady,
   ]);
 
   // Render all tags inside <head>.
