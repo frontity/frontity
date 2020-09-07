@@ -1,6 +1,6 @@
 import { error } from "frontity";
 import WpSource from "../types";
-import { parse, normalize, concatPath } from "./libraries/route-utils";
+import { parse, normalize, concatLink } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
 import {
@@ -143,7 +143,7 @@ const actions: WpSource["actions"]["source"] = {
       handlers.push({
         name: type,
         priority: 10,
-        pattern: concatPath(type, "/:slug"),
+        pattern: concatLink(type, "/:slug"),
         func: postTypeHandler({ endpoints: [endpoint] }),
       });
       // Archive.
@@ -151,7 +151,7 @@ const actions: WpSource["actions"]["source"] = {
         handlers.push({
           name: `${type} archive`,
           priority: 10,
-          pattern: concatPath(archive),
+          pattern: concatLink(archive),
           func: postTypeArchiveHandler({ type, endpoint }),
         });
     });
@@ -162,7 +162,7 @@ const actions: WpSource["actions"]["source"] = {
         handlers.push({
           name: taxonomy,
           priority: 10,
-          pattern: concatPath(taxonomy, "/(.*)?/:slug"),
+          pattern: concatLink(taxonomy, "/(.*)?/:slug"),
           func: taxonomyHandler({
             taxonomy,
             endpoint,
@@ -183,17 +183,17 @@ const actions: WpSource["actions"]["source"] = {
     } = state.source;
 
     if (homepage) {
-      const pattern = concatPath(subdirectory);
+      const pattern = concatLink(subdirectory);
       redirections.push({
         name: "homepage",
         priority: 10,
         pattern,
-        func: () => concatPath(homepage),
+        func: () => concatLink(homepage),
       });
     }
 
     if (postsPage) {
-      const pattern = concatPath(subdirectory, postsPage);
+      const pattern = concatLink(subdirectory, postsPage);
       redirections.push({
         name: "posts page",
         priority: 10,
@@ -204,7 +204,7 @@ const actions: WpSource["actions"]["source"] = {
 
     if (categoryBase) {
       // Add new direction.
-      const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
+      const pattern = concatLink(subdirectory, categoryBase, "/:subpath+");
       redirections.push({
         name: "category base",
         priority: 10,
@@ -215,14 +215,14 @@ const actions: WpSource["actions"]["source"] = {
       redirections.push({
         name: "category base (reverse)",
         priority: 10,
-        pattern: concatPath(subdirectory, "/category/(.*)/"),
+        pattern: concatLink(subdirectory, "/category/(.*)/"),
         func: () => "",
       });
     }
 
     if (tagBase) {
       // Add new direction.
-      const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
+      const pattern = concatLink(subdirectory, tagBase, "/:subpath+");
       redirections.push({
         name: "tag base",
         priority: 10,
@@ -233,14 +233,14 @@ const actions: WpSource["actions"]["source"] = {
       redirections.push({
         name: "tag base (reverse)",
         priority: 10,
-        pattern: concatPath(subdirectory, "/tag/(.*)/"),
+        pattern: concatLink(subdirectory, "/tag/(.*)/"),
         func: () => "",
       });
     }
 
     if (authorBase) {
       // Add new direction.
-      const pattern = concatPath(subdirectory, authorBase, "/:subpath+");
+      const pattern = concatLink(subdirectory, authorBase, "/:subpath+");
       redirections.push({
         name: "author base",
         priority: 10,
@@ -251,14 +251,14 @@ const actions: WpSource["actions"]["source"] = {
       redirections.push({
         name: "author base (reverse)",
         priority: 10,
-        pattern: concatPath(subdirectory, "/author/(.*)/"),
+        pattern: concatLink(subdirectory, "/author/(.*)/"),
         func: () => "",
       });
     }
 
     if (subdirectory) {
       // Add new direction.
-      const pattern = concatPath(subdirectory, "/:subpath*");
+      const pattern = concatLink(subdirectory, "/:subpath*");
       redirections.push({
         name: "subdirectory",
         priority: 10,
