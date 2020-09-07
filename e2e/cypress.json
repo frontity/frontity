@@ -12,5 +12,6 @@
   "projectId": "ed7hed",
   "defaultCommandTimeout": 10000,
   "taskTimeout": 60000,
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "baseUrl": "http://localhost:3001"
 }
