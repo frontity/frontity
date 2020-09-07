@@ -303,10 +303,22 @@ const settings: Settings = [
                 postTypeEndpoint: "movies",
               },
             ],
+            params: {
+              ["head_tags_skip_cache"]: "true",
+            },
           },
         },
       },
-      "@frontity/head-tags",
+      {
+        name: "@frontity/head-tags",
+        state: {
+          headTags: {
+            transformLinks: {
+              base: "http://localhost:8080",
+            },
+          },
+        },
+      },
     ],
   },
 ];
