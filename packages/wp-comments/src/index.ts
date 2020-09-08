@@ -54,9 +54,10 @@ export const insertComment = (
   // It should be present because we have already `populate()`'d the state previously()`
   const { parent, post } = state.source.comment[item.id];
 
-  // Get the comment data if it exists;
-  const commentData = (state.source.data[`@comments/${post}/`] ||
-    {}) as CommentData;
+  // Get the comment data
+  // We can assume that the data is already there because we have called `populate()`
+  // before in the body of the `submit()`
+  const commentData = state.source.data[`@comments/${post}/`] as CommentData;
 
   // Check if there already exists any comment for this post.
   if (commentData?.items?.length > 0) {
@@ -82,6 +83,7 @@ export const insertComment = (
     });
   } else {
     // This means that it's a new comment so we just create all the new data.
+    // We also have to set the `isReady` and `isFetching` flags appropriately.
     Object.assign(commentData, {
       postId: post,
       total: 1,
@@ -193,7 +195,7 @@ const wpComments: WpComments = {
           const populated = await libraries.source.populate({
             response,
             state,
-            link: `@comments/${postId}`,
+            link: `@comments/${postId}/`,
           });
 
           // There is only one comment inserted at a time, so we can access it with `[0]`
@@ -201,6 +203,12 @@ const wpComments: WpComments = {
 
           // Insert the comment into the state
           insertComment({ id, type }, state);
+
+          // Explicitly mark the data as ready
+          Object.assign(state.source.data[`@comments/${postId}/`], {
+            isFetching: false,
+            isReady: true,
+          });
 
           // Reset the form fields
           form.fields = {

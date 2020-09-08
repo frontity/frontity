@@ -121,7 +121,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         entityKey = entity.id;
         Object.assign(entityData, {
           type: entity.type,
-          id: entity.id,
+          ...(schema !== "commentEntity" && { id: entity.id }), // Only add the `id` if it's not a comment
         });
       } else if (schema === "taxonomyEntity") {
         if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
