@@ -58,7 +58,7 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
       <pre id="form">{JSON.stringify(state.comments.forms[1], null, 2)}</pre>
       <pre id="error-message">{state.comments.forms[1]?.errorMessage}</pre>
       <pre id="source">
-        {JSON.stringify(state.source.data[`@comments/1`], null, 2)}
+        {JSON.stringify(state.source.data[`@comments/1/`], null, 2)}
       </pre>
     </>
   );

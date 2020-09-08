@@ -147,7 +147,6 @@ describe("wp-comments", () => {
       comment(1).shouldHavePropertyWithValue("isSubmitting", false);
       comment(1).shouldHavePropertyWithValue("isSubmitted", true);
 
-      state(`@comments/1/`).shouldHavePropertyWithValue("id", 2);
       state(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
       state(`@comments/1/`).shouldHavePropertyWithValue("isFetching", false);
       state(`@comments/1/`).shouldHavePropertyWithValue("items[0].id", 2);
