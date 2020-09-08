@@ -43,7 +43,7 @@ interface YoastPackage extends Package {
        * `<Html2React>` component is not used to render the title tag.
        *
        * @remarks With this option active, the Yoast meta tags will only be
-       * visible if you go to the page source.
+       * visible if you go to the page source, before Frontity has been loaded.
        *
        * @defaultValue `false`
        */
