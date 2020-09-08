@@ -87,13 +87,18 @@ export const useYoastHead = ({
     }
 
     // Transform links in the `yoast_head` string and return it.
-    if (shouldTransformLinks) {
+    if (html && shouldTransformLinks) {
       const head = transformAllLinks({ html, ignore, base, newBase });
       return { head };
     }
 
+    // Return just the `yoast_head` string.
+    if (html && !shouldTransformLinks) {
+      return { head: html };
+    }
+
     /**
-     * Return an empty object if neither the title nor  the head tags are going
+     * Return an empty object if neither the title nor the head tags are going
      * to be rendered for this link.
      */
     return {};
