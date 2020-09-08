@@ -1,4 +1,4 @@
-/* eslint-disable jsdoc/require-jsdoc */
+/* eslint-disable */
 import { Merge } from "./utils";
 import { CommentItem } from "../../wp-comments/types";
 
