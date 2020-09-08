@@ -1,176 +1,248 @@
+import expect from "expect";
+
+// Function to manually check that the spy created with `cy.spy` has been called
+// with an argument. I am not checking the order because sometimes pageviews
+// take a bit longer to be sent and that cause race conditions.
+const expectGaToHaveBeenCalledWith = (win, data) => {
+  expect(win.ga.args).toEqual(
+    expect.arrayContaining([expect.arrayContaining(data)])
+  );
+};
+
+const pageviewHome = {
+  title: "Homepage Title",
+  link: "/?name=google-analytics",
+};
+
+const pageviewSomePost = {
+  title: "Some Post Title",
+  link: "/some-post/",
+};
+
 describe("Google Analytics", () => {
-  const pageviewHome = {
-    title: "Homepage Title",
-    link: "/?name=google-analytics",
-  };
-
-  const pageviewSomePost = {
-    title: "Some Post Title",
-    link: "/some-post/",
-  };
-
-  const someEvent = {
-    action: "play",
-    category: "video",
-    label: "featured",
-    value: "100",
-  };
-
-  let createElementBackup;
-
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=google-analytics", {
-      onBeforeLoad(win) {
-        // Google Analytics requests are images created using `createElement`
-        // so that function is modified to return a mock image when is called
-        // with `img`.
+    cy.visit("http://localhost:3001?name=google-analytics");
 
-        // Backup `createElement` function.
-        createElementBackup = win.document.createElement;
+    // Wait for Google Analytics to load its <script> and create `window.ga`.
+    cy.window().should("have.property", "ga");
 
-        // Image mock.
-        const getImageMock = () => ({
-          set src(source) {
-            const url = new URL(source);
-            if (url.host === "www.google-analytics.com") {
-              win.gaRequests = win.gaRequests || [];
-              // Get request type.
-              const type = url.searchParams.get("t");
-              if (type === "pageview")
-                // Save pageview properties.
-                win.gaRequests.push({
-                  id: url.searchParams.get("tid"),
-                  title: url.searchParams.get("dt"),
-                  link: url.searchParams.get("dp"),
-                });
-              if (type === "event")
-                // Save event properties.
-                win.gaRequests.push({
-                  id: url.searchParams.get("tid"),
-                  action: url.searchParams.get("ea"),
-                  category: url.searchParams.get("ec"),
-                  label: url.searchParams.get("el"),
-                  value: url.searchParams.get("ev"),
-                });
-            }
-          },
-        });
-
-        // Define `createElement` mock.
-        const createElementMock = (element) => {
-          if (element === "img") return getImageMock();
-          else return createElementBackup.bind(win.document)(element);
-        };
-
-        // Overwrite `createElement` function.
-        Object.defineProperty(win.document, "createElement", {
-          value: createElementMock,
-          writable: true,
-        });
-      },
-    });
-  });
-
-  afterEach(() => {
+    // Add a spy on `window.ga`.
     cy.window().then((win) => {
-      // Restore Image class.
-      Object.defineProperty(win.document, "createElement", {
-        value: createElementBackup,
-      });
+      cy.spy(win, "ga");
     });
   });
 
   it("should load the Google Analytics library", () => {
+    // Make sure the <script> was created.
     cy.get(
       `script[src="https://www.google-analytics.com/analytics.js"][async]`
     );
+
+    // Make sure the Google Analytics library has loaded.
+    cy.window().should("have.property", "ga");
   });
 
+  // I was not able to find a way to stub/spy `window.ga` between the moment
+  // that it is created by the Google Analytics <script> and the moment it sends
+  // the first pageviews so I'm just checking that it has a `hitcount` of 1 in
+  // its internal count.
   it("should have sent the first pageview", () => {
-    // Check that Google Analytics has sent the pageview with the correct title.
     cy.window()
-      .its("gaRequests")
-      .its(0)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewHome });
+      .its("gaData")
+      .its("UA-XXXXXX-X")
+      .its("hitcount")
+      .should("equal", 1);
 
     cy.window()
-      .its("gaRequests")
-      .its(1)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewHome });
+      .its("gaData")
+      .its("UA-YYYYYY-Y")
+      .its("hitcount")
+      .should("equal", 1);
   });
 
   it("should sent a pageview if the page changes", () => {
     cy.get("button#change-link").click();
+
+    cy.window().then((win) => {
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_XXXXXX_X.send",
+        {
+          hitType: "pageview",
+          page: pageviewSomePost.link,
+          title: pageviewSomePost.title,
+        },
+      ]);
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_YYYYYY_Y.send",
+        {
+          hitType: "pageview",
+          page: pageviewSomePost.link,
+          title: pageviewSomePost.title,
+        },
+      ]);
+    });
+
+    // Make sure the real library sent two pageviews for each tracker.
     cy.window()
-      .its("gaRequests")
-      .its(2)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewSomePost });
+      .its("gaData")
+      .its("UA-XXXXXX-X")
+      .its("hitcount")
+      .should("equal", 2);
 
     cy.window()
-      .its("gaRequests")
-      .its(3)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewSomePost });
+      .its("gaData")
+      .its("UA-YYYYYY-Y")
+      .its("hitcount")
+      .should("equal", 2);
   });
 
   it("should sent pageviews when going back or forward", () => {
     cy.get("button#change-link").click();
     cy.go("back");
 
-    cy.window()
-      .its("gaRequests")
-      .its(4)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewHome });
-
-    cy.window()
-      .its("gaRequests")
-      .its(5)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewHome });
+    cy.window().then((win) => {
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_XXXXXX_X.send",
+        {
+          hitType: "pageview",
+          page: pageviewHome.link,
+          title: pageviewHome.title,
+        },
+      ]);
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_YYYYYY_Y.send",
+        {
+          hitType: "pageview",
+          page: pageviewHome.link,
+          title: pageviewHome.title,
+        },
+      ]);
+    });
 
     cy.go("forward");
 
+    cy.window().then((win) => {
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_XXXXXX_X.send",
+        {
+          hitType: "pageview",
+          page: pageviewSomePost.link,
+          title: pageviewSomePost.title,
+        },
+      ]);
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_YYYYYY_Y.send",
+        {
+          hitType: "pageview",
+          page: pageviewSomePost.link,
+          title: pageviewSomePost.title,
+        },
+      ]);
+    });
+
+    // Make sure the real library sent four pageviews for each tracker.
     cy.window()
-      .its("gaRequests")
-      .its(6)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewSomePost });
+      .its("gaData")
+      .its("UA-XXXXXX-X")
+      .its("hitcount")
+      .should("equal", 4);
 
     cy.window()
-      .its("gaRequests")
-      .its(7)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewSomePost });
+      .its("gaData")
+      .its("UA-YYYYYY-Y")
+      .its("hitcount")
+      .should("equal", 4);
   });
 
   it("should send events", () => {
-    // Wait for the first pageview to be sent.
-    cy.window()
-      .its("gaRequests")
-      .its(0)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...pageviewHome });
-    cy.window()
-      .its("gaRequests")
-      .its(1)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...pageviewHome });
+    cy.get("button#send-event").click();
 
-    // Change testEvent to send Google Analytics specific data.
     cy.window().then((win) => {
-      win.frontity.state.testAnalytics.testEvent = {
-        name: "play",
-        payload: {
-          category: "video",
-          label: "featured",
-          value: 100,
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_XXXXXX_X.send",
+        {
+          hitType: "event",
+          eventAction: "some event",
+          content: "some content",
+          eventCategory: undefined,
+          eventLabel: undefined,
+          eventValue: undefined,
         },
-      };
+      ]);
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_YYYYYY_Y.send",
+        {
+          hitType: "event",
+          eventAction: "some event",
+          content: "some content",
+          eventCategory: undefined,
+          eventLabel: undefined,
+          eventValue: undefined,
+        },
+      ]);
     });
 
-    // Send event.
+    cy.window()
+      .its("gaData")
+      .its("UA-XXXXXX-X")
+      .its("hitcount")
+      .should("equal", 2);
+
+    cy.window()
+      .its("gaData")
+      .its("UA-YYYYYY-Y")
+      .its("hitcount")
+      .should("equal", 2);
+
+    // Change testEvent to send Google Analytics specific data.
+    const someEvent = {
+      name: "some-action",
+      payload: {
+        category: "some-category",
+        label: "some-label",
+        value: "some-value",
+      },
+    };
+    cy.window().then((win) => {
+      win.frontity.state.testAnalytics.testEvent = someEvent;
+    });
+
+    // Send event again.
     cy.get("button#send-event").click();
+
+    cy.window().then((win) => {
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_XXXXXX_X.send",
+        {
+          hitType: "event",
+          eventAction: someEvent.name,
+          eventCategory: someEvent.payload.category,
+          eventLabel: someEvent.payload.label,
+          eventValue: someEvent.payload.value,
+        },
+      ]);
+      expectGaToHaveBeenCalledWith(win, [
+        "tracker_UA_YYYYYY_Y.send",
+        {
+          hitType: "event",
+          eventAction: someEvent.name,
+          eventCategory: someEvent.payload.category,
+          eventLabel: someEvent.payload.label,
+          eventValue: someEvent.payload.value,
+        },
+      ]);
+    });
+
     cy.window()
-      .its("gaRequests")
-      .its(2)
-      .should("deep.equal", { id: "UA-XXXXXX-X", ...someEvent });
+      .its("gaData")
+      .its("UA-XXXXXX-X")
+      .its("hitcount")
+      .should("equal", 3);
+
     cy.window()
-      .its("gaRequests")
-      .its(3)
-      .should("deep.equal", { id: "UA-YYYYYY-Y", ...someEvent });
+      .its("gaData")
+      .its("UA-YYYYYY-Y")
+      .its("hitcount")
+      .should("equal", 3);
   });
 });

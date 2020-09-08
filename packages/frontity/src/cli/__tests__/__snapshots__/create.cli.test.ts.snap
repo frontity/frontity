@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CLI create FRONTITY_NAME='test-project'; frontity create --no-prompt 1`] = `
+exports[`CLI create FRONTITY_CREATE__NAME='test-project'; frontity create --no-prompt 1`] = `
 Object {
   "name": "test-project",
-  "theme": undefined,
+  "theme": "@frontity/mars-theme",
   "typescript": false,
 }
 `;
 
-exports[`CLI create FRONTITY_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt 1`] = `
+exports[`CLI create FRONTITY_CREATE_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt 1`] = `
 Object {
   "name": "test-project",
-  "theme": undefined,
+  "theme": "@frontity/mars-theme",
   "typescript": true,
 }
 `;
@@ -27,7 +27,7 @@ Object {
 exports[`CLI create frontity create 'test-project' --typescript 1`] = `
 Object {
   "name": "test-project",
-  "theme": undefined,
+  "theme": "test-theme",
   "typescript": true,
 }
 `;
