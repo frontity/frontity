@@ -6,6 +6,7 @@
     "start:only-e2e": "./e2e.js --suite e2e"
   },
   "devDependencies": {
+    "@types/cypress": "^1.1.3",
     "@types/execa": "^2.0.0",
     "@types/wait-on": "^4.0.0",
     "cypress": "^5.0.0",
