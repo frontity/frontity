@@ -1,6 +1,6 @@
 /* eslint-disable jest/valid-expect */
 
-import "cypress-plugin-snapshots/commands";
+require("cypress-plugin-snapshots/commands");
 
 Cypress.Commands.add("isInViewport", { prevSubject: true }, (subject) => {
   const bottom = Cypress.$(cy.state("window")).height();
