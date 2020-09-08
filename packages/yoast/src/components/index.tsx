@@ -14,7 +14,7 @@ import headWrapper from "../processors/headWrapper";
  *
  * @returns React element.
  */
-const Root: React.FC<Connect<Packages>> = ({ state, libraries }) => {
+export const Root: React.FC<Connect<Packages>> = ({ state, libraries }) => {
   // Get current link.
   const { link } = state.router;
 
