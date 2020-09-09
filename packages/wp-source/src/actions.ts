@@ -76,13 +76,6 @@ const actions: WpSource["actions"]["source"] = {
       // Get the handler for this route.
       const handler = getMatch(`${route}${queryString}`, handlers);
 
-      // Check if this is the homepage URL if it is either the root "/" or the
-      // subdirectory "/folder/", but only in the case that the matched handler
-      // is not used for queries (starts with "RegExp:").
-      const isHome =
-        !handler.pattern.startsWith("RegExp:") &&
-        route === normalize(state.source.subdirectory || "/");
-
       // Execute the handler.
       await handler.func({
         link,
@@ -92,6 +85,15 @@ const actions: WpSource["actions"]["source"] = {
         libraries,
         force,
       });
+
+      // Check if this is the homepage URL if it is either the root "/" or the
+      // subdirectory "/folder/", but only in the case that it is not a search
+      // and the matched handler is not used to match for queries (the ones that
+      // start with "RegExp:").
+      const isHome =
+        source.data[link].isSearch !== true &&
+        !handler.pattern.startsWith("RegExp:") &&
+        route === normalize(state.source.subdirectory || "/");
 
       // Populate the data object.
       source.data[link] = {
