@@ -85,9 +85,9 @@ Array [
   },
   Object {
     "func": [MockFunction],
-    "name": "post type with query",
+    "name": "post type - query permalink",
     "pattern": "RegExp:(\\\\?|&)p=\\\\d+",
-    "priority": 5,
+    "priority": 10,
   },
   Object {
     "func": [MockFunction],
@@ -204,9 +204,9 @@ Array [
   },
   Object {
     "func": [MockFunction],
-    "name": "post type with query",
+    "name": "post type - query permalink",
     "pattern": "RegExp:(\\\\?|&)p=\\\\d+",
-    "priority": 5,
+    "priority": 10,
   },
   Object {
     "func": [MockFunction],
