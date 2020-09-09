@@ -47,7 +47,7 @@ const actions: WpSource["actions"]["source"] = {
         };
       }
     } else if ((data.isReady && !force) || data.isFetching || data.isError) {
-&      // If the link starts with "@" it means that it's a non-URL resource, e.g a WordPress comment.
+      // If the link starts with "@" it means that it's a non-URL resource, e.g a WordPress comment.
       // In that case it makes no sense to set `link`, `query` and `route`.
       if (link.startsWith("@")) {
         data.page = page;
