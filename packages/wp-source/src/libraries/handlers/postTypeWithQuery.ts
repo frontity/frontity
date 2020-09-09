@@ -55,14 +55,14 @@ const postTypeWithQueryHandler = ({
   const { query } = libraries.source.parse(link);
   const id = parseInt(query.p, 10);
 
-  const finalTypes = ["post", "page"].concat(
+  const finalTypes = ["post"].concat(
     state.source.postTypes.map((postType) => postType.type)
   );
 
   //
   let entity = finalTypes
     .reduce((all, type) => {
-      all.push(...Object.values(state.source[type]));
+      all.push(...Object.values(state.source[type] || {}));
       return all;
     }, [])
     .find((post) => post.id === id);
