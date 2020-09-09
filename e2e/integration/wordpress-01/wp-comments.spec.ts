@@ -196,7 +196,7 @@ describe("wp-comments", () => {
     });
 
     it(`Should post a sub-comment correctly`, () => {
-      // fetch all comments and wait till they are ready in state
+      // fetch the existing (one) comment and wait tills it's ready in state
       cy.get("#fetch-comments").click();
       data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
 
@@ -217,20 +217,35 @@ describe("wp-comments", () => {
     });
 
     it(`Should submit a form with an error and then submit correctly`, () => {
-      // // fetch all comments and wait till they are in state
-      // cy.get("#fetch-comments").click();
-      // state(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
-      // cy.get("#sub-comment").click();
-      // commentForm(1).shouldHavePropertyWithValue("isSubmitting", false);
-      // commentForm(1).shouldHavePropertyWithValue("isSubmitted", true);
-      // // There should exist a sub-comment of the top-level comment
-      // state(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
-      // state(`@comments/1/`).shouldHavePropertyWithValue(
-      //   "items[0].children[0].id",
-      //   2
-      // );
-      // // There should be a total of 2 comments now
-      // state(`@comments/1/`).shouldHavePropertyWithValue("total", 2);
+      // fetch the existing (one) comment and wait tills it's ready in state
+      cy.get("#fetch-comments").click();
+      data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
+
+      // Send an incorrect comment and wait till the error has been returned
+      cy.get("#comment-no-email").click();
+      commentForm(1).shouldHavePropertyWithValue("isError", true);
+
+      // send a correct comment
+      cy.get("#comment-ok").click();
+
+      // The submission was successful and the form has been cleared
+      commentForm(1).shouldHavePropertyWithValue("isError", false);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitting", false);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitted", true);
+      commentForm(1).shouldHavePropertyWithValue("fields.content", "");
+
+      // Check that the new comment has been added to `state.source.comment`
+      comment(2).shouldHavePropertyWithValue("type", "comment");
+      comment(2).shouldHavePropertyWithValue("id", 2);
+      comment(2).shouldHavePropertyWithValue("status", "hold");
+
+      // The new comment has been added to `state.source.data` correctly
+      data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
+      data(`@comments/1/`).shouldHavePropertyWithValue("items.length", 2);
+      data(`@comments/1/`).shouldHavePropertyWithValue("items[1].id", 2);
+
+      // There should be a total of 2 comments now
+      data(`@comments/1/`).shouldHavePropertyWithValue("total", 2);
     });
   });
 });
