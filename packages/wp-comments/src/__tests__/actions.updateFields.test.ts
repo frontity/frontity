@@ -20,6 +20,7 @@ describe("actions.comments.updateFields", () => {
         "60": Object {
           "errorCode": "",
           "errorMessage": "",
+          "errorStatusCode": null,
           "errors": Object {},
           "fields": Object {
             "content": "Hello world!",
@@ -159,6 +160,7 @@ describe("actions.comments.updateFields", () => {
         "60": Object {
           "errorCode": "",
           "errorMessage": "",
+          "errorStatusCode": null,
           "errors": Object {},
           "fields": Object {
             "content": "",

@@ -22,6 +22,18 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
   };
 
   /**
+   * Send a sub-comment for a parent comment that exists by default.
+   */
+  const sendSubComment = () => {
+    actions.comments.submit(1, {
+      content: "Hello world!",
+      authorEmail: "frontibotito@frontity.com",
+      authorName: "Frontitbotito",
+      parent: 1,
+    });
+  };
+
+  /**
    * Send a comment with a non-existing ID.
    */
   const sendCommentWrongId = () => {
@@ -43,6 +55,13 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
     });
   };
 
+  /**
+   * Fetch all the comments.
+   */
+  const fetchComments = () => {
+    actions.source.fetch(`@comments/1`, { force: true });
+  };
+
   return (
     <>
       <button id="comment-ok" onClick={sendComment}>
@@ -54,6 +73,61 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
       <button id="comment-no-email" onClick={sendCommentNoEmail}>
         comment with no email
       </button>
+      <button id="sub-comment" onClick={sendSubComment}>
+        sub-comment
+      </button>
+
+      <button id="fetch-comments" onClick={fetchComments}>
+        fetch comments
+      </button>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          actions.comments.submit(1);
+        }}
+      >
+        <input
+          name="content"
+          type="text"
+          placeholder="content"
+          onChange={(e) =>
+            actions.comments.updateFields(1, { content: e.target.value })
+          }
+          value={state.comments.forms[1]?.fields?.content || ""}
+        />
+        <input
+          name="author_name"
+          type="text"
+          placeholder="author_name"
+          onChange={(e) =>
+            actions.comments.updateFields(1, { authorName: e.target.value })
+          }
+          value={state.comments.forms[1]?.fields?.authorName || ""}
+        />
+        <input
+          name="author_email"
+          type="text"
+          placeholder="author_email"
+          onChange={(e) =>
+            actions.comments.updateFields(1, { authorEmail: e.target.value })
+          }
+          value={state.comments.forms[1]?.fields?.authorEmail || ""}
+        />
+        <input
+          name="parent"
+          type="number"
+          placeholder="parent"
+          onChange={(e) =>
+            actions.comments.updateFields(1, {
+              parent: e.target.value,
+            })
+          }
+          value={state.comments.forms[1]?.fields?.parent || 0}
+        />
+
+        <input type="submit" />
+      </form>
 
       <pre id="form">{JSON.stringify(state.comments.forms[1], null, 2)}</pre>
       <pre id="error-message">{state.comments.forms[1]?.errorMessage}</pre>

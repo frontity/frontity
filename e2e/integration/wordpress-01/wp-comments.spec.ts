@@ -18,7 +18,7 @@ describe("wp-comments", () => {
    * @returns An object with a `shouldHavePropertyWithValue()` method for easily
    * chaining it.
    */
-  const comment = (postId: number) => ({
+  const commentForm = (postId: number) => ({
     shouldHavePropertyWithValue: (property: string, value: any) =>
       cy
         .window()
@@ -61,8 +61,8 @@ describe("wp-comments", () => {
     it("Should return an error when sending a comment for a non-existing post ID", () => {
       cy.get("#comment-wrong-id").click();
 
-      comment(9999).shouldHavePropertyWithValue("isError", true);
-      comment(9999).shouldHavePropertyWithValue(
+      commentForm(9999).shouldHavePropertyWithValue("isError", true);
+      commentForm(9999).shouldHavePropertyWithValue(
         "errorMessage",
         "Sorry, you are not allowed to create this comment without a post."
       );
@@ -76,16 +76,19 @@ describe("wp-comments", () => {
       });
 
       cy.get("#comment-ok").click();
-      comment(1).shouldHavePropertyWithValue("isSubmitted", true);
-      comment(1).shouldHavePropertyWithValue("isSubmitting", false);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitted", true);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitting", false);
 
       cy.get("#comment-ok").click();
-      comment(1).shouldHavePropertyWithValue("isSubmitted", false);
-      comment(1).shouldHavePropertyWithValue("isSubmitting", false);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitted", false);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitting", false);
 
-      comment(1).shouldHavePropertyWithValue("isError", true);
-      comment(1).shouldHavePropertyWithValue("errorCode", "comment_duplicate");
-      comment(1).shouldHavePropertyWithValue(
+      commentForm(1).shouldHavePropertyWithValue("isError", true);
+      commentForm(1).shouldHavePropertyWithValue(
+        "errorCode",
+        "comment_duplicate"
+      );
+      commentForm(1).shouldHavePropertyWithValue(
         "errorMessage",
         "Duplicate comment detected; it looks as though you&#8217;ve already said that!"
       );
@@ -103,12 +106,12 @@ describe("wp-comments", () => {
 
       cy.get("#comment-ok").click();
 
-      comment(1).shouldHavePropertyWithValue("isError", true);
-      comment(1).shouldHavePropertyWithValue(
+      commentForm(1).shouldHavePropertyWithValue("isError", true);
+      commentForm(1).shouldHavePropertyWithValue(
         "errorCode",
         "rest_comment_login_required"
       );
-      comment(1).shouldHavePropertyWithValue(
+      commentForm(1).shouldHavePropertyWithValue(
         "errorMessage",
         "Sorry, you must be logged in to comment."
       );
@@ -128,8 +131,8 @@ describe("wp-comments", () => {
     it("Should return an error when sending a comment without an email", () => {
       cy.get("#comment-no-email").click();
 
-      comment(1).shouldHavePropertyWithValue("isError", true);
-      comment(1).shouldHavePropertyWithValue(
+      commentForm(1).shouldHavePropertyWithValue("isError", true);
+      commentForm(1).shouldHavePropertyWithValue(
         "errorMessage",
         "Creating a comment requires valid author name and email values."
       );
@@ -144,12 +147,16 @@ describe("wp-comments", () => {
 
       cy.get("#comment-no-email").click();
 
-      comment(1).shouldHavePropertyWithValue("isSubmitting", false);
-      comment(1).shouldHavePropertyWithValue("isSubmitted", true);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitting", false);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitted", true);
 
       state(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
       state(`@comments/1/`).shouldHavePropertyWithValue("isFetching", false);
       state(`@comments/1/`).shouldHavePropertyWithValue("items[0].id", 2);
+
+      // There should be a total of 1 comments now, even though there had existed one
+      // comment previously. This is because we haven't fetched the data
+      state(`@comments/1/`).shouldHavePropertyWithValue("total", 1);
     });
 
     it(`Should be registered in order to post a comment if "Users must be registered and logged in to comment" is enabled`, () => {
@@ -161,19 +168,57 @@ describe("wp-comments", () => {
 
       cy.get("#comment-ok").click();
 
-      comment(1).shouldHavePropertyWithValue("isError", true);
-      comment(1).shouldHavePropertyWithValue(
+      commentForm(1).shouldHavePropertyWithValue("isError", true);
+      commentForm(1).shouldHavePropertyWithValue(
         "errorCode",
         "rest_comment_login_required"
       );
-      comment(1).shouldHavePropertyWithValue(
+      commentForm(1).shouldHavePropertyWithValue(
         "errorMessage",
         "Sorry, you must be logged in to comment."
       );
     });
-  });
 
-  // describe(`With "Comment author must fill out name and email" disabled`, () => {});
-  // describe(`With "Allow people to submit comments on new posts" disabled `, () => {});
-  describe(`With "Comment must be manually approved" enabled`, () => {});
+    it(`Should post a sub-comment correctly`, () => {
+      // fetch all comments and wait till they are in state
+      cy.get("#fetch-comments").click();
+      state(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
+
+      cy.get("#sub-comment").click();
+
+      commentForm(1).shouldHavePropertyWithValue("isSubmitting", false);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitted", true);
+
+      // There should exist a sub-comment of the top-level comment
+      state(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
+      state(`@comments/1/`).shouldHavePropertyWithValue(
+        "items[0].children[0].id",
+        2
+      );
+
+      // There should be a total of 2 comments now
+      state(`@comments/1/`).shouldHavePropertyWithValue("total", 2);
+    });
+
+    it(`Should submit a form with an error and then submit correctly`, () => {
+      // fetch all comments and wait till they are in state
+      cy.get("#fetch-comments").click();
+      state(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
+
+      cy.get("#sub-comment").click();
+
+      commentForm(1).shouldHavePropertyWithValue("isSubmitting", false);
+      commentForm(1).shouldHavePropertyWithValue("isSubmitted", true);
+
+      // There should exist a sub-comment of the top-level comment
+      state(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
+      state(`@comments/1/`).shouldHavePropertyWithValue(
+        "items[0].children[0].id",
+        2
+      );
+
+      // There should be a total of 2 comments now
+      state(`@comments/1/`).shouldHavePropertyWithValue("total", 2);
+    });
+  });
 });

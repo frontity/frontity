@@ -133,13 +133,16 @@ const wpComments: WpComments = {
 
         const form = state.comments.forms[postId];
 
-        // Reset the form status
+        // We have to set the form status just in case the user has not used
+        // `actions.comments.updateFields()` to set the form values. In that case
+        // some of the fields like `isError` or `errorCode` would be missing.
         form.isError = false;
         form.errorMessage = "";
         form.errorCode = "";
         form.isSubmitting = true;
         form.isSubmitted = false;
         form.errors = {};
+        form.errorStatusCode = null;
 
         const body = new URLSearchParams();
 
@@ -256,6 +259,7 @@ const wpComments: WpComments = {
             errors: {},
             errorMessage: "",
             errorCode: "",
+            errorStatusCode: null,
           };
         }
 

@@ -14,6 +14,9 @@ interface WPComments extends Package {
       submit: WPCommentsPackage["actions"]["comments"]["submit"];
       updateFields: WPCommentsPackage["actions"]["comments"]["updateFields"];
     };
+    source: {
+      fetch: WpSource["actions"]["source"]["fetch"];
+    };
   };
   roots: {
     wpComments: React.ReactType;
