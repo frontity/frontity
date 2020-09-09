@@ -1,6 +1,11 @@
 import { fetch, warn } from "frontity";
 import { commentsHandler } from "./libraries";
-import WpComments, { WpCommentError, CommentItem, Packages } from "../types";
+import WpComments, {
+  WpCommentError,
+  CommentItem,
+  Packages,
+  WpComment,
+} from "../types";
 import { ResolveState } from "../../types/src/utils";
 import { CommentData } from "../../source/types/data";
 
@@ -51,16 +56,13 @@ export const insertComment = (
   state: ResolveState<Packages["state"]>
 ) => {
   // Get the data for the comment.
-  // It should be present because we have already `populate()`'d the state previously()`
+  // We can assume that the data is already there because we have
+  // populated it manually in the body of the `submit()` action.
   const { parent, post } = state.source.comment[item.id];
-
-  // Get the comment data
-  // We can assume that the data is already there because we have called `populate()`
-  // before in the body of the `submit()`
   const commentData = state.source.data[`@comments/${post}/`] as CommentData;
 
   // Check if there already exists any comment for this post.
-  if (commentData?.items?.length > 0) {
+  if (commentData.items?.length > 0) {
     let items: CommentItem[] = [];
 
     // If the comment has a parent, we have to insert it in the correct place
@@ -119,7 +121,7 @@ const wpComments: WpComments = {
   },
   actions: {
     comments: {
-      submit: ({ state, actions, libraries }) => async (postId, comment) => {
+      submit: ({ state, actions }) => async (postId, comment) => {
         // Return if a submission is pending.
         if (state.comments.forms[postId]?.isSubmitting) {
           return warn(
@@ -195,23 +197,34 @@ const wpComments: WpComments = {
         // No other status should be returned by the WordPress REST API on a
         // successful comment creation, so we can treat any other status as error.
         if (response.status === 201) {
-          const populated = await libraries.source.populate({
-            response,
-            state,
-            link: `@comments/${postId}/`,
-          });
+          const comment: WpComment = await response.json();
+          const { id, type } = comment;
 
-          // There is only one comment inserted at a time, so we can access it with `[0]`
-          const { id, type } = populated[0];
+          // Add the comment entity.
+          state.source.comment[id] = comment; // eslint-disable-line require-atomic-updates
 
-          // Insert the comment into the state
-          insertComment({ id, type }, state);
+          const commentData = state.source.data[`@comments/${postId}/`];
 
-          // Explicitly mark the data as ready
-          Object.assign(state.source.data[`@comments/${postId}/`], {
-            isFetching: false,
-            isReady: true,
-          });
+          // If the comment data has not been fetched yet, do nothing. This is because if we were
+          // to populate the `commentData` now, any future `fetch()` would have to be called
+          // with the `{ force: true }` parameter. This it would be confusing because the user
+          // expects that the first `fetch()` never requires the `{ force: true }`.
+          if (commentData) {
+            Object.assign(commentData, {
+              isFetching: false,
+              isReady: false,
+              type: "comments",
+            });
+
+            // Insert the comment into the state
+            insertComment({ id, type }, state);
+
+            // Explicitly mark the data as ready
+            Object.assign(commentData, {
+              isFetching: false,
+              isReady: true,
+            });
+          }
 
           // Reset the form fields
           form.fields = {

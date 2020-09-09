@@ -428,6 +428,7 @@ describe("actions.comments.submit", () => {
           status: "hold",
           type: "comment",
         },
+
         {
           status: 201,
         }
@@ -493,6 +494,7 @@ describe("actions.comments.submit", () => {
           status: "approved",
           type: "comment",
         },
+
         {
           status: 201,
         }
