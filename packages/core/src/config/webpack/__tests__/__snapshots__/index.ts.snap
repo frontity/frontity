@@ -78,8 +78,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 300000,
-      "maxEntrypointSize": 300000,
+      "maxAssetSize": 500000,
+      "maxEntrypointSize": 500000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -223,8 +223,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 300000,
-      "maxEntrypointSize": 300000,
+      "maxAssetSize": 500000,
+      "maxEntrypointSize": 500000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -355,8 +355,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 3000000,
-      "maxEntrypointSize": 3000000,
+      "maxAssetSize": 5000000,
+      "maxEntrypointSize": 5000000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -493,8 +493,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 300000,
-      "maxEntrypointSize": 300000,
+      "maxAssetSize": 500000,
+      "maxEntrypointSize": 500000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -630,8 +630,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 300000,
-      "maxEntrypointSize": 300000,
+      "maxAssetSize": 500000,
+      "maxEntrypointSize": 500000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -756,8 +756,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 3000000,
-      "maxEntrypointSize": 3000000,
+      "maxAssetSize": 5000000,
+      "maxEntrypointSize": 5000000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
