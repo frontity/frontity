@@ -361,16 +361,6 @@ interface WpSource extends Source {
         subdirectory?: string;
 
         /**
-         * An optional link for the entity. It will be used to populate the
-         * state in state.source.data[link] instead of the link that is included
-         * the entity itself.
-         *
-         * This has been introduced in order to avoid populating the state with entites
-         * that should not appear there e.g. For the individual comment entities.
-         */
-        link?: string;
-
-        /**
          * A boolean that indicates if the entities should be overwritten.
          *
          * @defaultValue false

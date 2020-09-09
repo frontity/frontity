@@ -81,7 +81,6 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
   response,
   state,
   subdirectory,
-  link,
   force,
 }) => {
   // Normalize response
@@ -102,8 +101,8 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
       // Get or init data using the transformed link
       const { data } = state.source;
       const entityData =
-        data[link || entity.link] ||
-        (data[link || entity.link] = {
+        data[entity.link] ||
+        (data[entity.link] = {
           isReady: false,
           isFetching: false,
         });
@@ -121,7 +120,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         entityKey = entity.id;
         Object.assign(entityData, {
           type: entity.type,
-          ...(schema !== "commentEntity" && { id: entity.id }), // Only add the `id` if it's not a comment
+          id: entity.id,
         });
       } else if (schema === "taxonomyEntity") {
         if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
