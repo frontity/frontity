@@ -2,6 +2,15 @@
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 
+/**
+ * Explanation of the data found in the WordPress instance for this test suite.
+ *
+ * Strangely, the default comment with ID === 1 is not returned from the REST API in WP 5.4 and below.
+ * Because of that, this comment is deleted and by default, only the comment with ID === 2 is present in the database.
+ *
+ * Any subsequent comments added to WordPress, will have a comment ID of 3 or above.
+ *
+ */
 describe("wp-comments", () => {
   before(() => {
     cy.task("installPlugin", {
@@ -52,12 +61,12 @@ describe("wp-comments", () => {
   /**
    * A helper to test that `state.source.data` object has properties with certain values.
    *
-   * @param postKey - The key of the state object for the comments.
+   * @param postId - The key of the state object for the comments.
    * @example `@comments/60`
    * @returns An object with a `shouldHavePropertyWithValue()` method for easily
    * chaining it.
    */
-  const data = (postKey: string) => ({
+  const data = (postId: string) => ({
     shouldHavePropertyWithValue: (property: string, value: any) =>
       cy
         .window()
@@ -65,7 +74,7 @@ describe("wp-comments", () => {
         .its("state")
         .its("source")
         .its("data")
-        .its(postKey)
+        .its(postId)
         .should("have.nested.property", property, value),
   });
 
@@ -157,7 +166,7 @@ describe("wp-comments", () => {
       );
     });
 
-    it.only("Should allow submitting a comment if email & name are not required", () => {
+    it("Should allow submitting a comment if email & name are not required", () => {
       // Disable the option to require the name and email to comment
       task("updateOption", {
         name: "require_name_email",
@@ -170,17 +179,8 @@ describe("wp-comments", () => {
       commentForm(1).shouldHavePropertyWithValue("isSubmitted", true);
 
       // Check that the new comment has been added to `state.source.comment`
-      comment(2).shouldHavePropertyWithValue("type", "comment");
-      comment(2).shouldHavePropertyWithValue("id", 2);
-
-      const { WORDPRESS_VERSION } = Cypress.env();
-      // We compare the strings lexicographically ("5.4.9" < "5.5" < "latest" === true)
-      if (WORDPRESS_VERSION.toString() < "5.5") {
-        // If the version of WordPress is < 5.5, the comments are approved by default!
-        comment(2).shouldHavePropertyWithValue("status", "approved");
-      } else {
-        comment(2).shouldHavePropertyWithValue("status", "hold");
-      }
+      comment(3).shouldHavePropertyWithValue("type", "comment");
+      comment(3).shouldHavePropertyWithValue("id", 3);
     });
 
     it(`Should be registered in order to post a comment if "Users must be registered and logged in to comment" is enabled`, () => {
@@ -217,7 +217,7 @@ describe("wp-comments", () => {
       data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
       data(`@comments/1/`).shouldHavePropertyWithValue(
         "items[0].children[0].id",
-        2
+        3
       );
 
       // There should be a total of 2 comments now
@@ -243,22 +243,13 @@ describe("wp-comments", () => {
       commentForm(1).shouldHavePropertyWithValue("fields.content", "");
 
       // Check that the new comment has been added to `state.source.comment`
-      comment(2).shouldHavePropertyWithValue("type", "comment");
-      comment(2).shouldHavePropertyWithValue("id", 2);
-
-      const { WORDPRESS_VERSION } = Cypress.env();
-      // We compare the strings lexicographically ("5.4.9" < "5.5" < "latest" === true)
-      if (WORDPRESS_VERSION.toString() < "5.5") {
-        // If the version of WordPress is < 5.5, the comments are approved by default!
-        comment(2).shouldHavePropertyWithValue("status", "approved");
-      } else {
-        comment(2).shouldHavePropertyWithValue("status", "hold");
-      }
+      comment(3).shouldHavePropertyWithValue("type", "comment");
+      comment(3).shouldHavePropertyWithValue("id", 3);
 
       // The new comment has been added to `state.source.data` correctly
       data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
       data(`@comments/1/`).shouldHavePropertyWithValue("items.length", 2);
-      data(`@comments/1/`).shouldHavePropertyWithValue("items[1].id", 2);
+      data(`@comments/1/`).shouldHavePropertyWithValue("items[1].id", 3);
 
       // There should be a total of 2 comments now
       data(`@comments/1/`).shouldHavePropertyWithValue("total", 2);

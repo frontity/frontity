@@ -29,7 +29,7 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
       content: "Hello world!",
       authorEmail: "frontibotito@frontity.com",
       authorName: "Frontitbotito",
-      parent: 1,
+      parent: 2, // The ID of the parent comment
     });
   };
 
