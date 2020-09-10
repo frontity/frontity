@@ -18,9 +18,9 @@ exports[`commentsHandler should handle replies correctly 2`] = `
 Object {
   "1": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 1</p>",
     },
@@ -36,9 +36,9 @@ Object {
   },
   "2": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 2</p>",
     },
@@ -54,9 +54,9 @@ Object {
   },
   "3": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 3</p>",
     },
@@ -120,9 +120,9 @@ exports[`commentsHandler should handle replies correctly when more than one page
 Object {
   "1": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 1</p>",
     },
@@ -138,9 +138,9 @@ Object {
   },
   "2": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 2</p>",
     },
@@ -156,9 +156,9 @@ Object {
   },
   "3": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 3</p>",
     },
@@ -174,9 +174,9 @@ Object {
   },
   "4": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 4</p>",
     },
@@ -192,9 +192,9 @@ Object {
   },
   "5": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 5</p>",
     },
@@ -210,9 +210,9 @@ Object {
   },
   "6": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 6</p>",
     },
@@ -292,9 +292,9 @@ exports[`commentsHandler should populate comments correctly 2`] = `
 Object {
   "1": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 1</p>",
     },
@@ -310,9 +310,9 @@ Object {
   },
   "2": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 2</p>",
     },
@@ -370,9 +370,9 @@ exports[`commentsHandler should request more pages if there are more than 100 co
 Object {
   "1": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 1</p>",
     },
@@ -388,9 +388,9 @@ Object {
   },
   "101": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 101</p>",
     },
@@ -406,9 +406,9 @@ Object {
   },
   "201": Object {
     "author": 1,
-    "authorName": "Frontibotito",
-    "authorURL": "http://test.frontity.org",
     "author_avatar_urls": Object {},
+    "author_name": "Frontibotito",
+    "author_url": "http://test.frontity.org",
     "content": Object {
       "rendered": "<p>Test Comment 201</p>",
     },

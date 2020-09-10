@@ -4,6 +4,7 @@ import TinyRouter from "../tiny-router/types";
 
 /**
  * Schema for a Comment entity in WordPress.
+ * This is the interface for the data fetched and received directly from the WordPress REST API.
  */
 export interface WpComment {
   /**
@@ -29,12 +30,12 @@ export interface WpComment {
   /**
    * Display name for the object author.
    */
-  authorName: string;
+  author_name: string;
 
   /**
    * URL for the object author.
    */
-  authorURL: string;
+  author_url: string;
 
   /**
    * The date the object was published, in the site's timezone.
@@ -113,7 +114,7 @@ export interface WpCommentError {
 
 /**
  * Comment item, added by {@link commentsHandler} to data objects in
- * `state.source`.
+ * `state.source.data[commentLink].items`.
  */
 export interface CommentItem {
   /**
