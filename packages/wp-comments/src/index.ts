@@ -10,10 +10,11 @@ import { ResolveState } from "../../types/src/utils";
 import { CommentData } from "../../source/types/data";
 
 /**
- * Recursively walk the comment tree and insert the new comment in the correct place.
+ * Recursively walk the comment tree and insert the new comment in the
+ * correct place in state.source.data[commentLink].items.
  * The tree of comments is going to be traversed depth-first.
  *
- * @param items - The array of Comments items that are currently present in the state.
+ * @param items - The array of Comment items that are currently present in the state. The new comment will be inserted into this array.
  * @param newItem - The new comment item to be inserted.
  * @param parentId - The ID of the parent comment.
  *
@@ -43,7 +44,7 @@ const insertItem = (
 /**
  * Insert the comment into Frontity state.
  *
- * POSTing a new comment ot the REST API returns a newly added comment.
+ * POSTing a new comment to the REST API returns a newly added comment.
  * This function will add that newly created comment to the state and update
  * any dependant pieces of state, e.g. Increment the total number of comments
  * for a post.
