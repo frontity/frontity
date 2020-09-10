@@ -30,7 +30,8 @@ class FrontityURL extends URL {
     warn(
       "Importing `URL` from Frontity has been deprecated. Please use `new URL()` instead."
     );
-    super(input, base);
+    // Calling `new URL("http://some.url", undefined)` fails in Sarafi.
+    base ? super(input, base) : super(input);
   }
 }
 
