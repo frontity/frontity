@@ -128,12 +128,33 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
 
         <input type="submit" />
       </form>
+      <style>
+        {`pre { 
+            background-color: lightgrey;
+            padding: 5px;
+            margin: 3px;
+          }`}
+      </style>
 
-      <pre id="form">{JSON.stringify(state.comments.forms[1], null, 2)}</pre>
-      <pre id="error-message">{state.comments.forms[1]?.errorMessage}</pre>
-      <pre id="source">
-        {JSON.stringify(state.source.data[`@comments/1/`], null, 2)}
-      </pre>
+      <div style={{ display: "flex", flexFlow: "row nowrap" }}>
+        <div>
+          <h5>state.comments.form</h5>
+          <pre id="form">
+            {JSON.stringify(state.comments.forms[1], null, 2)}
+          </pre>
+        </div>
+        <div>
+          <h5>state.source.data</h5>
+          <pre id="source">
+            {JSON.stringify(state.source.data[`@comments/1/`], null, 2)}
+          </pre>
+        </div>
+
+        <div>
+          <h5>state.source.comment</h5>
+          <pre id="source">{JSON.stringify(state.source.comment, null, 2)}</pre>
+        </div>
+      </div>
     </>
   );
 };

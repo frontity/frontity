@@ -7,7 +7,7 @@ interface WPComments extends Package {
   name: "e2e-wp-comments";
   state: {
     comments: WPCommentsPackage["state"]["comments"];
-    source?: WpSource["state"]["source"];
+    source?: WpSource["state"]["source"] & WPCommentsPackage["state"]["source"];
   };
   actions?: {
     comments: {

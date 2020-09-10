@@ -157,7 +157,7 @@ describe("wp-comments", () => {
       );
     });
 
-    it("Should allow submitting a comment if email & name are not required", () => {
+    it.only("Should allow submitting a comment if email & name are not required", () => {
       // Disable the option to require the name and email to comment
       task("updateOption", {
         name: "require_name_email",
@@ -172,7 +172,15 @@ describe("wp-comments", () => {
       // Check that the new comment has been added to `state.source.comment`
       comment(2).shouldHavePropertyWithValue("type", "comment");
       comment(2).shouldHavePropertyWithValue("id", 2);
-      comment(2).shouldHavePropertyWithValue("status", "hold");
+
+      const { WORDPRESS_VERSION } = Cypress.env();
+      // We compare the strings lexicographically ("5.4.9" < "5.5" < "latest" === true)
+      if (WORDPRESS_VERSION.toString() < "5.5") {
+        // If the version of WordPress is < 5.5, the comments are approved by default!
+        comment(2).shouldHavePropertyWithValue("status", "approved");
+      } else {
+        comment(2).shouldHavePropertyWithValue("status", "hold");
+      }
     });
 
     it(`Should be registered in order to post a comment if "Users must be registered and logged in to comment" is enabled`, () => {
@@ -196,7 +204,7 @@ describe("wp-comments", () => {
     });
 
     it(`Should post a sub-comment correctly`, () => {
-      // fetch the existing (one) comment and wait tills it's ready in state
+      // fetch the existing (one) comment and wait till it's ready in state
       cy.get("#fetch-comments").click();
       data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
 
@@ -237,7 +245,15 @@ describe("wp-comments", () => {
       // Check that the new comment has been added to `state.source.comment`
       comment(2).shouldHavePropertyWithValue("type", "comment");
       comment(2).shouldHavePropertyWithValue("id", 2);
-      comment(2).shouldHavePropertyWithValue("status", "hold");
+
+      const { WORDPRESS_VERSION } = Cypress.env();
+      // We compare the strings lexicographically ("5.4.9" < "5.5" < "latest" === true)
+      if (WORDPRESS_VERSION.toString() < "5.5") {
+        // If the version of WordPress is < 5.5, the comments are approved by default!
+        comment(2).shouldHavePropertyWithValue("status", "approved");
+      } else {
+        comment(2).shouldHavePropertyWithValue("status", "hold");
+      }
 
       // The new comment has been added to `state.source.data` correctly
       data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
