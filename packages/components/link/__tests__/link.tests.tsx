@@ -3,8 +3,9 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { create } from "react-test-renderer";
 import { mockIsIntersecting } from "react-intersection-observer/test-utils";
-import { createStore, Provider, batch } from "../../connect/src";
-import Link, { config } from "../link";
+import { createStore, Provider } from "../../../connect/src";
+import Link from "..";
+import { config } from "../utils";
 
 let store;
 let container;
@@ -542,7 +543,7 @@ describe("Link prefetching", () => {
       render(
         <Provider value={storeInViewMode}>
           {links.map((link, i) => (
-            <Link key={link} link={link} className={"my-link-${i}"}>
+            <Link key={link} link={link} className={`my-link-${i}`}>
               This is a link
             </Link>
           ))}

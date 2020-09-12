@@ -177,6 +177,21 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "wp-basic-tests",
+    packages: [
+      "e2e-wp-basic-tests",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;

@@ -141,14 +141,13 @@ interface GoogleAdManager extends Package {
          *
          * @example
          * ```tsx
-         * const { GooglePublisherTag } = libraries.googleAdManager;
+         * const { GooglePublisherTag } = libraries.fills.googleAdManager;
          *
          * return (
          *   <GooglePublisherTag
          *     id="content-ad-1"
          *     unit="content/0812630984"
          *     size={[300, 250]}
-         *     data={state.source.get(state.router.link)}
          *   />
          * );
          * ```

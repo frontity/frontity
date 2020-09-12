@@ -1,4 +1,4 @@
-import { fetch, warn, URL } from "frontity";
+import { fetch, warn } from "frontity";
 import { commentsHandler } from "./libraries";
 import WpComments from "../types";
 

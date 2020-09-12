@@ -1,5 +1,14 @@
 # @frontity/head-tags
 
+## 1.0.6
+
+### Patch Changes
+
+- [`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af) [#566](https://github.com/frontity/frontity/pull/566) Thanks [@luisherranz](https://github.com/luisherranz)! - Do not import `URL` from `frontity` anymore.
+
+- Updated dependencies [[`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af)]:
+  - frontity@1.11.1
+
 ## 1.0.5
 
 ### Patch Changes
