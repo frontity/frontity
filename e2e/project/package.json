@@ -37,6 +37,7 @@
     "e2e-tiny-router": "^1.0.0",
     "e2e-use-in-view": "^1.0.0",
     "e2e-ads": "^1.0.0",
+    "e2e-wp-basic-tests": "^1.0.0",
     "frontity": "^1.5.2"
   }
 }

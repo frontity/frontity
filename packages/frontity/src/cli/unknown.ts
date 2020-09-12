@@ -3,13 +3,12 @@ import { CommanderStatic } from "commander";
 import chalk from "chalk";
 
 /**
- * @param {String} command - Unknown command
- * @param {CommanderStatic} program - commander instance
+ * The CLI command that runs when the user types a command that doesn't exit.
  *
- * @returns {void}
+ * @param command - Unknown command.
+ * @param program - Commander instance.
  */
-
-export default (command: string, program: CommanderStatic) => {
+const unknown = (command: string, program: CommanderStatic) => {
   console.log(chalk.red(`Unknown command: ${chalk.bold(command)}`));
 
   const availableCommands: string[] = program.commands.map((c) => c._name);
@@ -21,3 +20,5 @@ export default (command: string, program: CommanderStatic) => {
 
   program.help();
 };
+
+export default unknown;
