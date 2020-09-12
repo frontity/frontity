@@ -16,6 +16,10 @@ let store: InitializedStore<WpSource>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
   store.state.source.api = "https://test.frontity.org/wp-json";
+
+  store.state.source.headers = {
+    test: "hello",
+  };
   store.actions.source.init();
 });
 

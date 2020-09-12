@@ -2,18 +2,54 @@ import { fetch } from "frontity";
 import { stringify } from "query-string";
 import { ServerError } from "@frontity/source";
 
+/**
+ *
+ */
 class Api {
   api = "";
   isWpCom = false;
+  headers = {};
 
+  /**
+   * @param this
+   * @param root0
+   */
   init(
     this: Api,
-    { api, isWpCom = false }: { api: string; isWpCom?: boolean }
+    {
+      api,
+      headers,
+      isWpCom = false,
+    }: {
+      /**
+       *
+       */
+      api: string;
+      /**
+       *
+       */
+      /**
+       *
+       */
+      isWpCom?: boolean;
+      /**
+       *
+       */
+      /**
+       *
+       */
+      headers: { [key: string]: string };
+    }
   ) {
     this.api = api;
     this.isWpCom = isWpCom;
+    this.headers = headers;
   }
 
+  /**
+   * @param this
+   * @param root0
+   */
   get(
     this: Api,
     {
@@ -22,9 +58,21 @@ class Api {
       api = this.api,
       isWpCom = this.isWpCom,
     }: {
+      /**
+       *
+       */
       endpoint: string;
+      /**
+       *
+       */
       params?: Record<string, any>;
+      /**
+       *
+       */
       api?: string;
+      /**
+       *
+       */
       isWpCom?: boolean;
     }
   ): Promise<Response> {
@@ -42,17 +90,21 @@ class Api {
     const query = stringify(params, { arrayFormat: "bracket", encode: false });
 
     // Send request
-    return fetch(`${requestUrl}${query && "?"}${query}`).then(
-      (response: Response) => {
-        if (!response.ok) {
-          const { status, statusText } = response;
-          throw new ServerError(statusText, status, statusText);
-        }
-        return response;
+    return fetch(`${requestUrl}${query && "?"}${query}`, {
+      headers: this.headers,
+    }).then((response: Response) => {
+      if (!response.ok) {
+        const { status, statusText } = response;
+        throw new ServerError(statusText, status, statusText);
       }
-    );
+      return response;
+    });
   }
 
+  /**
+   * @param endpoint
+   * @param slug
+   */
   async getIdBySlug(endpoint: string, slug: string) {
     const response = await this.get({ endpoint, params: { slug } });
     const [entity] = await response.clone().json();

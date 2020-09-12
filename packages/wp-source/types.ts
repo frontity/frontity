@@ -143,6 +143,13 @@ interface WpSource extends Source {
       params: Record<string, any>;
 
       /**
+       * Headers.
+       */
+      headers: {
+        [key: string]: string;
+      };
+
+      /**
        * An array of objects that define the custom post types present in the
        * site.
        *
