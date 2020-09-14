@@ -13,7 +13,7 @@ const task: taskTypes = cy.task;
  */
 describe("wp-comments", () => {
   before(() => {
-    cy.task("installPlugin", {
+    task("installPlugin", {
       name: "code-snippets",
     });
   });

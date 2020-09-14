@@ -15,7 +15,7 @@ interface InstallPlugin {
   /**
    * The version of the plugin.
    */
-  version: string;
+  version?: string;
 }
 
 /**
@@ -50,7 +50,7 @@ interface LoadDatabase {
 }
 
 const tasks = {
-  installPlugin: ({ name, version }: InstallPlugin) => {
+  installPlugin({ name, version }: InstallPlugin) {
     return (async () => {
       await execa.command(
         `docker-compose run --rm wpcli wp plugin install ${name}${
