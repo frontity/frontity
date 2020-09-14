@@ -266,8 +266,8 @@ interface WpSource extends Source {
        * custom link created to fetch additional entities from the REST API.
        * - URLs start with `/`.
        * - Non URLs start with `@`.
-       * @example `actions.source.fecth("/some-post");`
-       * @example `actions.source.fecth("@comments/135");`
+       * @example `actions.source.fetch("/some-post");`
+       * @example `actions.source.fetch("@comments/135");`
        *
        * @param options - Optional options.
        *

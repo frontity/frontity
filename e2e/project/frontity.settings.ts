@@ -129,6 +129,18 @@ const settings: Settings = [
     ],
   },
   {
+    name: "wp-comments",
+    packages: [
+      "e2e-wp-comments",
+      "@frontity/tiny-router",
+      "@frontity/wp-comments",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { api: "http://localhost:8080/wp-json" } },
+      },
+    ],
+  },
+  {
     name: "google-ad-manager",
     packages: [
       "e2e-ads",
