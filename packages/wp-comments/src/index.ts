@@ -86,7 +86,6 @@ export const insertComment = (
     });
   } else {
     // This means that it's a new comment so we just create all the new data.
-    // We also have to set the `isReady` and `isFetching` flags appropriately.
     Object.assign(commentData, {
       postId: post,
       total: 1,
