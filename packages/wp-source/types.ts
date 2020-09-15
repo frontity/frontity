@@ -23,16 +23,6 @@ interface WpSource extends Source {
      */
     source: Source<WpSource>["state"]["source"] & {
       /**
-       * The URL of the REST API.
-       *
-       * It can be from a self-hosted WordPress or from a WordPress.com site.
-       *
-       * @example "https://your-site.com/wp-json"
-       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
-       */
-      api: string;
-
-      /**
        * True when the REST API belongs to a WordPress.com site.
        */
       isWpCom: Derived<WpSource, boolean>;

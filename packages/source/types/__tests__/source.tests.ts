@@ -11,6 +11,7 @@ const source1 = (libraries: Source["libraries"]): Source => {
       source: {
         get: ({ state }) => (link) => state.source.data[""],
         entity: ({ state }) => <T>(link) => state.source.post[1] as T,
+        api: "https://test.frontity.org",
         data: {},
         category: {},
         tag: {},

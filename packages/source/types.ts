@@ -51,6 +51,17 @@ interface Source<T = null> extends Package {
         T extends null ? Source : T,
         <Entity = any>(link: string) => Entity
       >;
+
+      /**
+       * The URL of the REST API.
+       *
+       * It can be from a self-hosted WordPress or from a WordPress.com site.
+       *
+       * @example "https://your-site.com/wp-json"
+       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
+       */
+      api: string;
+
       data: Record<string, Data>;
       category: Record<string, TaxonomyEntity>;
       tag: Record<string, TaxonomyEntity>;
