@@ -1,7 +1,7 @@
 import React from "react";
 import { decode } from "frontity";
 import { State } from "frontity/types";
-import { getEntity, getWpUrl } from "@frontity/head-tags/src/utils";
+import { getWpUrl } from "@frontity/head-tags/src/utils";
 import { transformAllLinks } from "../utils";
 import { Packages, WithYoastHead } from "../../types";
 
@@ -45,14 +45,8 @@ export const useYoastHead = ({
   link,
   state,
 }: UseYoastHeadParams): UseYoastHeadResult => {
-  /**
-   * Get the entity pointed by the current link.
-   *
-   * As we don't know which kind of entity is pointed by `link` and we only need
-   * the `yoast_head` field, we cast the returned entity to a type with only
-   * that property.
-   */
-  const entity = (getEntity({ state, link }) as unknown) as WithYoastHead;
+  // Get the entity pointed by the given link.
+  const entity: WithYoastHead = state.source.entity(link);
 
   // Get the `yoast_head` field from entity.
   const html = entity?.yoast_head || "";
