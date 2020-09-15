@@ -260,7 +260,7 @@ const settings: Settings = [
         name: "@frontity/yoast",
         state: {
           yoast: {
-            onlyInSSR: true,
+            renderTags: "server",
           },
         },
       },

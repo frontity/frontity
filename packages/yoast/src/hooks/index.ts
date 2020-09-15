@@ -52,7 +52,7 @@ export const useYoastHead = ({
   const html = entity?.yoast_head || "";
 
   const shouldUseTitle =
-    state.yoast.onlyInSSR && state.frontity.rendering === "csr";
+    state.yoast.renderTags === "server" && state.frontity.rendering === "csr";
   const shouldTransformLinks = !!state.yoast.transformLinks;
 
   let ignore = "";

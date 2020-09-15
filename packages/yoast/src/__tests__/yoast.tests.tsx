@@ -27,21 +27,13 @@ const getState404 = () =>
       link: "/not-found",
     },
     source: {
-      get: jest.fn().mockReturnValue({
-        isFetching: false,
-        isReady: true,
-        isError: true,
-        errorStatus: 404,
-        errorStatusText: "Not found",
-        is404: true,
-      }),
-      post: {},
+      entity: () => null,
     },
     frontity: {
       url: "http://my.frontity.test",
     },
     yoast: {
-      onlyInSSR: false,
+      renderTags: "both",
       transformLinks: {
         ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
         base: "http://localhost:8080",
@@ -65,21 +57,12 @@ const getStateHelloWorld = () =>
       link: "/hello-world/",
     },
     source: {
-      get: jest.fn().mockReturnValue({
-        isFetching: false,
-        isReady: true,
-        isPostType: true,
-        isPost: true,
+      entity: () => ({
         type: "post",
         id: 1,
-      }),
-      post: {
-        1: {
-          type: "post",
-          id: 1,
-          slug: "hello-world",
-          link: "/hello-world/",
-          ["yoast_head"]: `
+        slug: "hello-world",
+        link: "/hello-world/",
+        ["yoast_head"]: `
           <title>Hello World &ndash; WP Test Site</title>
           <meta property="og:url" content="http://localhost:8080/hello-world/">
           <link rel="canonical" href="http://localhost:8080/hello-world/">
@@ -94,14 +77,13 @@ const getStateHelloWorld = () =>
           }
           </script>
         `,
-        },
-      },
+      }),
     },
     frontity: {
       url: "http://my.frontity.test",
     },
     yoast: {
-      onlyInSSR: false,
+      renderTags: "both",
       transformLinks: {
         ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
         base: "http://localhost:8080",
@@ -217,12 +199,12 @@ describe("Yoast", () => {
     `);
   });
 
-  it("renders all tags in SSR (onlyInSSR: true)", () => {
+  it("renders all tags in SSR (renderTags: server)", () => {
     const state = getStateHelloWorld();
     const libraries = getLibraries();
 
     // Set Yoast settings.
-    state.yoast.onlyInSSR = true;
+    state.yoast.renderTags = "server";
 
     const head = renderYoastHead({ state, libraries });
 
@@ -249,12 +231,12 @@ describe("Yoast", () => {
     `);
   });
 
-  it("renders only the title in CSR (onlyInSSR: true)", () => {
+  it("renders only the title in CSR (renderTags: server)", () => {
     const state = getStateHelloWorld();
     const libraries = getLibraries();
 
     // Set Yoast settings.
-    state.yoast.onlyInSSR = true;
+    state.yoast.renderTags = "server";
 
     // Set rendering state to CSR.
     state.frontity.rendering = "csr";
