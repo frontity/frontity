@@ -49,6 +49,10 @@ interface YoastPackage extends Package {
        * component -- which is used to render the meta tags -- is not needed to
        * render only the title tag.
        *
+       * @remarks
+       * The `"server"` option shouldn’t affect the SEO as Google and other
+       * search engines does not do client-side navigation.
+       *
        * @defaultValue `"both"`
        */
       renderTags?: "both" | "server";
