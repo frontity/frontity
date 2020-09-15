@@ -239,55 +239,6 @@ ${content}`
 };
 
 /**
- * The options of the {@link getEntity} and {@link getHeadTags}
- * functions.
- */
-interface GetEntityOptions {
-  /**
-   * The Source state.
-   */
-  state: State<Source>;
-
-  /**
-   * The link (URL) of the entity.
-   */
-  link: string;
-}
-
-/**
- * Get the entity related to the current link.
- *
- * @param options - Defined in {@link GetEntityOptions}.
- *
- * @returns The entity if it was found in the `state` or `null` if it wasn't.
- */
-export const getEntity = ({ state, link }: GetEntityOptions) => {
-  const data = state.source.get(link);
-
-  if (data.isPostType) {
-    const { type, id } = data;
-    return state.source[type][id] as PostEntity;
-  }
-
-  if (data.isTaxonomy) {
-    const { taxonomy, id } = data;
-    return state.source[taxonomy][id] as TaxonomyEntity;
-  }
-
-  if (data.isAuthor) {
-    const { id } = data;
-    return state.source.author[id] as AuthorEntity;
-  }
-
-  if (data.isPostTypeArchive) {
-    const { type } = data;
-    return state.source.type[type] as PostType;
-  }
-
-  return null;
-};
-
-/**
  * The options of the {@link getHeadTags} function.
  */
 interface GetHeadTagsOptions {
@@ -312,14 +263,8 @@ interface GetHeadTagsOptions {
  * found.
  */
 export const getHeadTags = ({ state, link }: GetHeadTagsOptions) => {
-  /**
-   * Get the entity pointed by the current link.
-   *
-   * As we don't know which kind of entity is pointed by `link` and we only need
-   * the `head_tags` field, we cast the returned entity to a type with just
-   * that property.
-   */
-  const entity = (getEntity({ state, link }) as unknown) as WithHeadTags;
+  // Main entity pointed by the given link.
+  const entity: WithHeadTags = state.source.entity(link);
 
   // Get the `head_tags` field from the entity.
   const headTags = entity?.head_tags;
