@@ -32,6 +32,10 @@ interface Source<T = null> extends Package {
   state: {
     source: {
       get: Derived<T extends null ? Source : T, (link: string) => Data>;
+      entity: Derived<
+        T extends null ? Source : T,
+        <Entity = any>(link: string) => Entity
+      >;
       data: Record<string, Data>;
       category: Record<string, TaxonomyEntity>;
       tag: Record<string, TaxonomyEntity>;
