@@ -75,7 +75,7 @@ Object {
 
 exports[`commentsHandler should handle replies correctly 3`] = `
 Object {
-  "areComments": true,
+  "isComments": true,
   "isFetching": false,
   "isReady": true,
   "items": Array [
@@ -94,13 +94,11 @@ Object {
       "type": "comment",
     },
   ],
-  "link": "@comments/60/",
   "page": 1,
   "postId": 60,
-  "query": Object {},
-  "route": "@comments/60/",
   "total": 3,
   "totalPages": 1,
+  "type": "comments",
 }
 `;
 
@@ -233,7 +231,7 @@ Object {
 
 exports[`commentsHandler should handle replies correctly when more than one page 3`] = `
 Object {
-  "areComments": true,
+  "isComments": true,
   "isFetching": false,
   "isReady": true,
   "items": Array [
@@ -268,13 +266,11 @@ Object {
       "type": "comment",
     },
   ],
-  "link": "@comments/60/",
   "page": 1,
   "postId": 60,
-  "query": Object {},
-  "route": "@comments/60/",
   "total": 103,
   "totalPages": 2,
+  "type": "comments",
 }
 `;
 
@@ -335,7 +331,7 @@ Object {
 
 exports[`commentsHandler should populate comments correctly 3`] = `
 Object {
-  "areComments": true,
+  "isComments": true,
   "isFetching": false,
   "isReady": true,
   "items": Array [
@@ -348,13 +344,11 @@ Object {
       "type": "comment",
     },
   ],
-  "link": "@comments/60/",
   "page": 1,
   "postId": 60,
-  "query": Object {},
-  "route": "@comments/60/",
   "total": 2,
   "totalPages": 1,
+  "type": "comments",
 }
 `;
 
@@ -433,7 +427,7 @@ Object {
 
 exports[`commentsHandler should request more pages if there are more than 100 comments 3`] = `
 Object {
-  "areComments": true,
+  "isComments": true,
   "isFetching": false,
   "isReady": true,
   "items": Array [
@@ -450,13 +444,11 @@ Object {
       "type": "comment",
     },
   ],
-  "link": "@comments/60/",
   "page": 1,
   "postId": 60,
-  "query": Object {},
-  "route": "@comments/60/",
   "total": 201,
   "totalPages": 3,
+  "type": "comments",
 }
 `;
 
@@ -478,16 +470,14 @@ exports[`commentsHandler should work fine if there are no comments 2`] = `Object
 
 exports[`commentsHandler should work fine if there are no comments 3`] = `
 Object {
-  "areComments": true,
+  "isComments": true,
   "isFetching": false,
   "isReady": true,
   "items": Array [],
-  "link": "@comments/60/",
   "page": 1,
   "postId": 60,
-  "query": Object {},
-  "route": "@comments/60/",
   "total": 0,
   "totalPages": 1,
+  "type": "comments",
 }
 `;
