@@ -209,31 +209,11 @@ const settings: Settings = [
     state: {
       frontity: {
         url: "http://my.frontity.site",
-        title: "Test Frontity Blog",
-        description: "Useful content for Frontity development",
       },
     },
     packages: [
       "@frontity/tiny-router",
       "@frontity/html2react",
-      {
-        name: "@frontity/mars-theme",
-        state: {
-          theme: {
-            menu: [
-              ["Home", "/"],
-              ["Nature", "/category/nature/"],
-              ["Travel", "/category/travel/"],
-              ["Japan", "/tag/japan/"],
-              ["Sample Page", "/sample-page/"],
-            ],
-            featured: {
-              showOnList: true,
-              showOnPost: true,
-            },
-          },
-        },
-      },
       {
         name: "@frontity/wp-source",
         state: {
@@ -271,31 +251,11 @@ const settings: Settings = [
     state: {
       frontity: {
         url: "http://my.frontity.site",
-        title: "Test Frontity Blog",
-        description: "Useful content for Frontity development",
       },
     },
     packages: [
       "@frontity/tiny-router",
       "@frontity/html2react",
-      {
-        name: "@frontity/mars-theme",
-        state: {
-          theme: {
-            menu: [
-              ["Home", "/"],
-              ["Nature", "/category/nature/"],
-              ["Travel", "/category/travel/"],
-              ["Japan", "/tag/japan/"],
-              ["Sample Page", "/sample-page/"],
-            ],
-            featured: {
-              showOnList: true,
-              showOnPost: true,
-            },
-          },
-        },
-      },
       {
         name: "@frontity/wp-source",
         state: {
