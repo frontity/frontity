@@ -1,11 +1,5 @@
 import { warn } from "frontity";
 import { State } from "frontity/types";
-import Source, {
-  PostEntity,
-  TaxonomyEntity,
-  AuthorEntity,
-  PostType,
-} from "@frontity/source/types";
 import { Packages, HeadTag, WithHeadTags } from "../../types";
 
 // Attributes that could contain links.
