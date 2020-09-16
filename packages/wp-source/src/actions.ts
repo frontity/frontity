@@ -55,7 +55,10 @@ const actions: WpSource["actions"]["source"] = {
       return;
     }
 
-    // Always set the page
+    // Always set link, route, query & page
+    source.data[link].link = link;
+    source.data[link].route = linkParams.route;
+    source.data[link].query = query;
     source.data[link].page = page;
 
     // Make sure isFetching is true before starting the fetch.
