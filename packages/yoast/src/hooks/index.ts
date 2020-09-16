@@ -1,24 +1,8 @@
 import React from "react";
-import { decode } from "frontity";
-import { State } from "frontity/types";
+import { decode, useConnect } from "frontity";
 import { getWpUrl } from "@frontity/head-tags/src/utils";
 import { transformAllLinks } from "../utils";
 import { Packages, WithYoastHead } from "../../types";
-
-/**
- * Params for {@link useYoastHead} hook.
- */
-interface UseYoastHeadParams {
-  /**
-   * Link pointing to a page in Frontity.
-   */
-  link: string;
-
-  /**
-   * Frontity state.
-   */
-  state: State<Packages>;
-}
 
 /**
  * Object returned for {@link useYoastHead} hook.
@@ -38,13 +22,12 @@ interface UseYoastHeadResult {
 /**
  * Hook that returns either the content of the <title> tag or all the head tags.
  *
- * @param params - Object of type {@link UseYoastHeadParams}.
+ * @param link - Link pointing to a page in Frontity.
  * @returns Object of type {@link UseYoastHeadResult}.
  */
-export const useYoastHead = ({
-  link,
-  state,
-}: UseYoastHeadParams): UseYoastHeadResult => {
+export const useYoastHead = (link: string): UseYoastHeadResult => {
+  const { state } = useConnect<Packages>();
+
   // Get the entity pointed by the given link.
   const entity: WithYoastHead = state.source.entity(link);
 

@@ -2,7 +2,6 @@ import React from "react";
 import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
 import { Packages } from "../../types";
-
 import { useYoastHead } from "../hooks";
 import headWrapper from "../processors/headWrapper";
 
@@ -22,7 +21,7 @@ export const Root: React.FC<Connect<Packages>> = ({ state, libraries }) => {
    * Get `title` or `head` param from the `yoast_head` field, depending on the
    * Yoast package settings.
    */
-  const { title, head } = useYoastHead({ link, state });
+  const { title, head } = useYoastHead(link);
 
   /**
    * Render the `title` string extracted from the `<title>` tag present in the
