@@ -1,6 +1,6 @@
 {
   "name": "@frontity/yoast",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Integrate your Frontity site with Yoast SEO plugin.",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -25,9 +25,9 @@
   "dependencies": {
     "frontity": "^1.9.0",
     "@frontity/router": "^1.1.1",
-    "@frontity/source": "^1.2.2",
-    "@frontity/html2react": "^1.3.4",
-    "@frontity/head-tags": "^1.0.5"
+    "@frontity/source": "^1.3.0",
+    "@frontity/html2react": "^1.4.0",
+    "@frontity/head-tags": "^1.0.7"
   },
   "devDependencies": {
     "@frontity/connect": "^1.1.3"
