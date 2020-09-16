@@ -72,8 +72,10 @@ interface YoastPackage extends Package {
        *   base: "https://wp.mysite.com"
        * }
        * ```
-       *
        * @example false
+       *
+       * @defaultValue
+       * `{ ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc" }`
        */
       transformLinks:
         | {
@@ -82,9 +84,7 @@ interface YoastPackage extends Package {
              * not be transformed.
              *
              * @defaultValue
-             * ```
-             * "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
-             * ```
+             * "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc"
              */
             ignore: string;
 
