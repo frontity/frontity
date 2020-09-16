@@ -3,6 +3,7 @@ import WpSource from "@frontity/wp-source/types";
 
 /**
  * Schema for a Comment entity in WordPress.
+ * This is the interface for the data fetched and received directly from the WordPress REST API.
  */
 export interface WpComment {
   /**
@@ -82,8 +83,37 @@ export interface WpComment {
 }
 
 /**
+ * The error that might be received from WordPress REST API when POSTing a comment.
+ */
+export interface WpCommentError {
+  /**
+   * An identifier for the error in the WordPress REST API.
+   *
+   * @example rest_comment_invalid_post_id
+   */
+  code: string;
+
+  /**
+   * Just a namespace.
+   */
+  data: {
+    /**
+     * The status code of the HTTP response.
+     */
+    status: number;
+  };
+
+  /**
+   * The human-readable error message.
+   *
+   * @example "Sorry, you are not allowed to create this comment without a post."
+   */
+  message: string;
+}
+
+/**
  * Comment item, added by {@link commentsHandler} to data objects in
- * `state.source`.
+ * `state.source.data[commentLink].items`.
  */
 export interface CommentItem {
   /**
@@ -112,66 +142,14 @@ export interface Form {
   fields: Fields;
 
   /**
-   * Field values when this form is submitted along with the submission status.
-   *
-   * @remarks
-   * This prop is undefined if nothing has been submitted yet.
-   */
-  submitted?: Submitted;
-}
-
-/**
- * Form fields with their values.
- */
-export interface Fields {
-  /**
-   * Author's name.
-   */
-  author: string;
-
-  /**
-   * Author's email.
-   */
-  email: string;
-
-  /**
-   * Text of the comment.
-   */
-  comment: string;
-
-  /**
-   * URL of the author's site.
-   *
-   * @defaultValue ""
-   */
-  url?: string;
-
-  /**
-   * ID of the comment to which this one responds.
-   *
-   * @defaultValue 0
-   */
-  parent?: number;
-}
-
-/**
- * Form field values when it is submitted along with the submission status.
- */
-export interface Submitted extends Fields {
-  /**
    * The comment hasn't been received by WP yet.
    */
-  isPending: boolean;
+  isSubmitting: boolean;
 
   /**
-   * The comment has been received but not accepted yet.
+   * The comment has been received.
    */
-  isOnHold: boolean;
-
-  /**
-   * The comment has been received and is published.
-   */
-  isApproved: boolean;
+  isSubmitted: boolean;
 
   /**
    * The request has failed.
@@ -184,14 +162,62 @@ export interface Submitted extends Fields {
   errorMessage: string;
 
   /**
-   * Submission timestamp.
+   * The error code. Those are defined internally in the WordPress REST API.
+   *
+   * @example rest_comment_invalid_post_id
    */
-  timestamp: number;
+  errorCode: string;
 
   /**
-   * Comment ID if it has been received (`isOnHold` or `isApproved`).
+   * The HTTP status code that might have been received from the WordPress REST API.
    */
-  id?: number;
+  errorStatusCode?: number;
+
+  /**
+   * The validation errors that can be returned by the WordPress REST API.
+   */
+  errors: {
+    [K in keyof Fields]?: string;
+  };
+}
+
+/**
+ * Form fields with their values.
+ */
+export interface Fields {
+  /**
+   * Author's name.
+   */
+  authorName?: string;
+
+  /**
+   * The ID of the author.
+   */
+  author?: number;
+
+  /**
+   * Author's email.
+   */
+  authorEmail?: string;
+
+  /**
+   * URL of the author's site.
+   *
+   * @defaultValue ""
+   */
+  authorURL?: string;
+
+  /**
+   * Content of the comment.
+   */
+  content: string;
+
+  /**
+   * ID of the comment to which this one responds.
+   *
+   * @defaultValue 0
+   */
+  parent?: number;
 }
 
 /**
