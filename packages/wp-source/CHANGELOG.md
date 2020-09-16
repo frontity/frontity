@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.8.3
+
+### Patch Changes
+
+- [`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b) [#548](https://github.com/frontity/frontity/pull/548) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add a derived prop in `state.source` called `entity` that returns the entity pointed by a given link.
+
+* [`958fe49f`](https://github.com/frontity/frontity/commit/958fe49f043ca43ae2b1b982059c78e921785d71) [#542](https://github.com/frontity/frontity/pull/542) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for non-URL resources e.g. WordPress comments.
+
+* Updated dependencies [[`870e4ba5`](https://github.com/frontity/frontity/commit/870e4ba5ab6afd216d9f2c5f15383fb8028d471c), [`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b)]:
+  - @frontity/source@1.3.0
+
 ## 1.8.2
 
 ### Patch Changes
