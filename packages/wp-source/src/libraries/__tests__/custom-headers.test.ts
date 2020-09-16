@@ -21,11 +21,10 @@ beforeEach(() => {
   store.actions.source.init();
 });
 
-describe("Should work", () => {
-  test("first test", async () => {
-    await store.actions.source.fetch("/some-post/1");
+it("should add the Authorization header when fetching a post", async () => {
+  await store.actions.source.fetch("/some-post/1");
 
-    expect(mockedFetch.mock.calls).toMatchInlineSnapshot(`
+  expect(mockedFetch.mock.calls).toMatchInlineSnapshot(`
       Array [
         Array [
           "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&slug=1",
@@ -53,5 +52,4 @@ describe("Should work", () => {
         ],
       ]
     `);
-  });
 });
