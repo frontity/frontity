@@ -1,11 +1,12 @@
 import { css, decode } from "frontity";
 import { parse as himalaya } from "himalaya";
-import { Element, Node, Parse, Attributes, AdaptNode } from "../../../types";
+import { Element, Node } from "../../../types";
 import htmlAttributes from "./attributes/html.json";
 import svgAttributes from "./attributes/svg.json";
+import { Node as HimalayaNode } from "../../../himalaya/types";
 
 // Map of lowercased HTML and SVG attributes to get their camelCase version.
-const attributesMap: Attributes = htmlAttributes
+const attributesMap: Record<string, string> = htmlAttributes
   .concat(svgAttributes)
   .reduce((map, value) => {
     map[value.toLowerCase()] = value;
@@ -20,7 +21,7 @@ const attributesMap: Attributes = htmlAttributes
  *
  * @returns The final and modified node.
  */
-const adaptNode: AdaptNode = (himalayaNode, parent) => {
+const adaptNode = (himalayaNode: HimalayaNode, parent?: Element): Node => {
   let node: Node;
 
   if (himalayaNode.type === "element") {
@@ -99,7 +100,7 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
  *
  * @returns The AST of the HTML.
  */
-const parse: Parse = (html) =>
+const parse = (html: string): Node[] =>
   himalaya(html).reduce((tree: Node[], element) => {
     const adapted = adaptNode(element);
     if (adapted) tree.push(adapted);
