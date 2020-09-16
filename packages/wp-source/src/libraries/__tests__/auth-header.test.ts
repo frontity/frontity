@@ -16,12 +16,11 @@ let store: InitializedStore<WpSource>;
 beforeEach(() => {
   store = createStore(clone(wpSource()));
   store.state.source.api = "https://test.frontity.org/wp-json";
-
-  store.state.source.auth = "Hello test";
   store.actions.source.init();
 });
 
 it("should add the Authorization header when fetching a post", async () => {
+  store.state.source.auth = "Hello test";
   await store.actions.source.fetch("/some-post/1");
 
   expect(mockedFetch.mock.calls).toMatchInlineSnapshot(`
@@ -52,4 +51,13 @@ it("should add the Authorization header when fetching a post", async () => {
         ],
       ]
     `);
+});
+
+it("should add value of frontity_source_auth to state.source.auth", async () => {
+  const authToken = "hello";
+  await store.actions.source.fetch(
+    `/some-post/1?frontity_source_auth=${authToken}`
+  );
+
+  expect(store.state.source.auth).toBe(authToken);
 });

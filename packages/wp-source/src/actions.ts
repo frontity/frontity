@@ -74,6 +74,12 @@ const actions: WpSource["actions"]["source"] = {
       const redirection = getMatch(route, redirections);
       if (redirection) route = redirection.func(redirection.params);
 
+      // If the URL contains an auth token, then add it to the state.
+      // This is normally the case e.g, when accessing the post preview.
+      if (query.frontity_source_auth) {
+        state.source.auth = query.frontity_source_auth;
+      }
+
       // Get the handler for this route.
       const handler = getMatch(route, handlers);
       await handler.func({
