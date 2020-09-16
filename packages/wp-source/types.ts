@@ -143,11 +143,12 @@ interface WpSource extends Source {
       params: Record<string, any>;
 
       /**
-       * Headers.
+       * The value that should be used to authenticate with the server.
+       *
+       * Typically, this would be used to store the JWT needed for WordPress
+       * preview functionality or the password used for Basic Buthentication.
        */
-      headers: {
-        [key: string]: string;
-      };
+      auth: string;
 
       /**
        * An array of objects that define the custom post types present in the

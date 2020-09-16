@@ -64,6 +64,7 @@ const postTypeHandler = ({
       const response = await libraries.source.api.get({
         endpoint,
         params: { slug, _embed: true, ...state.source.params },
+        auth: state.source.auth,
       });
 
       const populated = await libraries.source.populate({
