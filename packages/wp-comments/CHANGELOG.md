@@ -1,5 +1,12 @@
 # @frontity/wp-comments
 
+## 0.2.4-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @frontity/wp-source@1.8.4-infinite-scroll-beta.0
+
 ## 0.2.3
 
 ### Patch Changes

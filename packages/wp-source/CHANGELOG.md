@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.8.4-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Release stable changes on the beta branch.
+
 ## 1.8.2-infinite-scroll-beta.0
 
 ### Patch Changes
@@ -13,6 +19,7 @@
 - Updated dependencies []:
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/source@1.2.2-infinite-scroll-beta.0
+
 ## 1.8.3
 
 ### Patch Changes

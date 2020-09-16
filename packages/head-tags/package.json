@@ -30,6 +30,6 @@
   },
   "devDependencies": {
     "@frontity/connect": "^1.1.2",
-    "@frontity/wp-source": "^1.8.2-infinite-scroll-beta.0"
+    "@frontity/wp-source": "^1.8.4-infinite-scroll-beta.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-comments",
-  "version": "0.2.3",
+  "version": "0.2.4-infinite-scroll-beta.0",
   "description": "Add integration for WordPress native comments",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -21,7 +21,7 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/wp-source": "^1.8.2-infinite-scroll-beta.0",
+    "@frontity/wp-source": "^1.8.4-infinite-scroll-beta.0",
     "frontity": "^1.11.1"
   },
   "devDependencies": {
