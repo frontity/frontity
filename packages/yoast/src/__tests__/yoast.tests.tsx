@@ -5,9 +5,10 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { HelmetProvider } from "frontity";
+import { Provider as ConnectProvider } from "@frontity/connect";
 import { State } from "frontity/types";
 import { FilledContext } from "react-helmet-async";
-import { Root as Yoast } from "../components";
+import Yoast from "../components";
 import { Packages } from "../../types";
 import Html2React from "@frontity/html2react/src";
 
@@ -116,7 +117,9 @@ const renderYoastHead = ({ state, libraries }) => {
   const helmetContext = {};
   TestRenderer.create(
     <HelmetProvider context={helmetContext}>
-      <Yoast state={state} actions={null} libraries={libraries} />
+      <ConnectProvider value={{ state, libraries }}>
+        <Yoast />
+      </ConnectProvider>
     </HelmetProvider>
   ).toJSON();
   return (helmetContext as FilledContext).helmet;

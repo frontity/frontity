@@ -28,5 +28,8 @@
     "@frontity/source": "^1.2.2",
     "@frontity/html2react": "^1.3.4",
     "@frontity/head-tags": "^1.0.5"
+  },
+  "devDependencies": {
+    "@frontity/connect": "^1.1.3"
   }
 }
