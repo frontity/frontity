@@ -2,7 +2,7 @@ import clone from "clone-deep";
 import { createStore, InitializedStore } from "@frontity/connect";
 import * as frontity from "frontity";
 
-import wpSource from "../../";
+import wpSource from "../..";
 import { mockResponse } from "../handlers/__tests__/mocks/helpers";
 import WpSource from "../../../types";
 
