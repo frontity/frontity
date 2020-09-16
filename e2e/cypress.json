@@ -1,7 +1,7 @@
 {
   "integrationFolder": "integration",
   "fixturesFolder": "fixtures",
-  "pluginsFile": "plugins/index.js",
+  "pluginsFile": "plugins/index.ts",
   "screenshotsFolder": "screenshots",
   "supportFile": "support/index.js",
   "videosFolder": "videos",
@@ -11,5 +11,9 @@
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "projectId": "ed7hed",
   "defaultCommandTimeout": 10000,
-  "taskTimeout": 60000
+  "taskTimeout": 60000,
+  "retries": {
+    "runMode": 3,
+    "openMode": 0
+  }
 }
