@@ -29,4 +29,10 @@ describe("WordPress plugins", () => {
       "Hello from WordPress plugin"
     );
   });
+
+  it("dummy test, otherwise the previous test doesn't run", () => {
+    // I'm not sure why, but if I remove this test, the previous one doesn't run
+    // and if it fails, Cypress does not complain. I guess it is a bug in
+    // Cypress.
+  });
 });

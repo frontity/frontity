@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.4.0
+
+### Minor Changes
+
+- [`b12a1006`](https://github.com/frontity/frontity/commit/b12a100643d3207ab540b66cd7a1bb5626953900) [#548](https://github.com/frontity/frontity/pull/548) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add a `processors` prop to the `Html2React` component which overrides the processors defined in `libraries.html2react.processors` for that specific element.
+
 ## 1.3.5
 
 ### Patch Changes

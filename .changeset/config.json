@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@0.3.0/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@1.3.0/schema.json",
   "changelog": [
     "@changesets/changelog-github",
     { "repo": "frontity/frontity" }
@@ -7,5 +7,8 @@
   "commit": false,
   "linked": [],
   "access": "public",
-  "baseBranch": "infinite-scroll-beta"
+  "baseBranch": "infinite-scroll-beta",
+  "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
+    "onlyUpdatePeerDependentsWhenOutOfRange": true
+  }
 }

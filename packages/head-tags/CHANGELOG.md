@@ -8,6 +8,26 @@
   - @frontity/router@1.2.0-infinite-scroll-beta.0
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/source@1.2.2-infinite-scroll-beta.0
+## 1.0.7
+
+### Patch Changes
+
+- [`b12a1006`](https://github.com/frontity/frontity/commit/b12a100643d3207ab540b66cd7a1bb5626953900) [#548](https://github.com/frontity/frontity/pull/548) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix a bug rendering head tags for links that were not ready the first time they were visited.
+
+  Also, some TypeScript refactor was done along with TSDocs.
+
+- Updated dependencies [[`870e4ba5`](https://github.com/frontity/frontity/commit/870e4ba5ab6afd216d9f2c5f15383fb8028d471c), [`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b)]:
+  - @frontity/source@1.3.0
+
+## 1.0.6
+
+### Patch Changes
+
+- [`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af) [#566](https://github.com/frontity/frontity/pull/566) Thanks [@luisherranz](https://github.com/luisherranz)! - Do not import `URL` from `frontity` anymore.
+
+- Updated dependencies [[`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af)]:
+  - frontity@1.11.1
+
 ## 1.0.5
 
 ### Patch Changes

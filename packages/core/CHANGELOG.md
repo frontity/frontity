@@ -6,6 +6,25 @@
 
 - Updated dependencies []:
   - @frontity/file-settings@1.1.5-infinite-scroll-beta.0
+## 1.8.0
+
+### Minor Changes
+
+- [`2a1a1f35`](https://github.com/frontity/frontity/commit/2a1a1f35810337a18edc96c3da06ffd492152ed8) [#550](https://github.com/frontity/frontity/pull/550) Thanks [@luisherranz](https://github.com/luisherranz)! - Expose Webpack errors and warnings in the `npx frontity build` command.
+
+### Patch Changes
+
+- [`611f3e2a`](https://github.com/frontity/frontity/commit/611f3e2ac836033417e9921a44b52cdd2f07793f) [#541](https://github.com/frontity/frontity/pull/541) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate the `--publicPath` CLI arg of the `npx frontity dev` and `npx frontity build` commands in favor of `--public-path` to be consistent with the rest of the arguments.
+
+  It also adds a log to those commands, along with the already existing `mode` and `target` logs.
+
+* [`f4f20007`](https://github.com/frontity/frontity/commit/f4f200074dd360fbf6b41dea63c89f9c6938c75d) [#450](https://github.com/frontity/frontity/pull/450) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Remove the unused `minimist` dependency and its types.
+
+- [`94a1c41c`](https://github.com/frontity/frontity/commit/94a1c41cc683675b70fd92e759eb14c7f6daca8a) [#547](https://github.com/frontity/frontity/pull/547) Thanks [@luisherranz](https://github.com/luisherranz)! - Relax `maxEntrypointSize` option of Webpack's performance to:
+
+  - 5Mbs for the server bundle.
+  - 500Kbs for the client bundles.
+
 ## 1.7.3
 
 ### Patch Changes
