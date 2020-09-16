@@ -148,7 +148,7 @@ interface WpSource extends Source {
        * Typically, this would be used to store the JWT needed for WordPress
        * preview functionality or the password used for Basic Buthentication.
        */
-      auth: string;
+      auth?: string;
 
       /**
        * An array of objects that define the custom post types present in the
