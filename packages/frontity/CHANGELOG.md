@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.11.1
+
+### Patch Changes
+
+- [`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af) [#566](https://github.com/frontity/frontity/pull/566) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix URL class wrapper in Safari.
+
 ## 1.11.0
 
 ### Minor Changes

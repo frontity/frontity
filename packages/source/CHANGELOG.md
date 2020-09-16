@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- [`870e4ba5`](https://github.com/frontity/frontity/commit/870e4ba5ab6afd216d9f2c5f15383fb8028d471c) [#542](https://github.com/frontity/frontity/pull/542) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add the new types required for wp-comments.
+
+### Patch Changes
+
+- [`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b) [#548](https://github.com/frontity/frontity/pull/548) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add a derived prop in `state.source` called `entity` that returns the entity pointed by a given link.
+
 ## 1.2.2
 
 ### Patch Changes

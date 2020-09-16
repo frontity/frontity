@@ -23,16 +23,6 @@ interface WpSource extends Source {
      */
     source: Source<WpSource>["state"]["source"] & {
       /**
-       * The URL of the REST API.
-       *
-       * It can be from a self-hosted WordPress or from a WordPress.com site.
-       *
-       * @example "https://your-site.com/wp-json"
-       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
-       */
-      api: string;
-
-      /**
        * True when the REST API belongs to a WordPress.com site.
        */
       isWpCom: Derived<WpSource, boolean>;
@@ -266,8 +256,8 @@ interface WpSource extends Source {
        * custom link created to fetch additional entities from the REST API.
        * - URLs start with `/`.
        * - Non URLs start with `@`.
-       * @example `actions.source.fecth("/some-post");`
-       * @example `actions.source.fecth("@comments/135");`
+       * @example `actions.source.fetch("/some-post");`
+       * @example `actions.source.fetch("@comments/135");`
        *
        * @param options - Optional options.
        *

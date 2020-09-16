@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Package, AsyncAction, Derived } from "frontity/types";
 import { Data } from "./types/data";
 import {
@@ -107,12 +109,32 @@ interface Source<T = null> extends Package {
       get: Derived<T extends null ? Source : T, (link: string) => Data>;
 
       /**
-       * The map of data objects. They contain information about a specific link, like
-       * what type of entity is (archive, taxonomy, post type...), if it is a
-       * search or not, if it's the home or not and so on.
+       * Return the entity pointed by the given link.
        *
-       * It should not be accessed directly, but by using `state.source.get`.
+       * If the entity is not found (because it has not been populated in the
+       * state yet or because the link does not point to an entity, e.g. a date
+       * archive or a 404 page) this derived prop returns `null`.
+       *
+       * @example state.source.entity("/2020/some-post");
+       *
+       * @param link - A link to a page of the Frontity site.
+       * @returns The entity found or `null` otherwise.
        */
+      entity: Derived<
+        T extends null ? Source : T,
+        <Entity = any>(link: string) => Entity
+      >;
+
+      /**
+       * The URL of the REST API.
+       *
+       * It can be from a self-hosted WordPress or from a WordPress.com site.
+       *
+       * @example "https://your-site.com/wp-json"
+       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
+       */
+      api: string;
+
       data: Record<string, Data>;
 
       /**
