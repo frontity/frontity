@@ -48,6 +48,10 @@ const postTypeHandler = ({
   libraries,
   force,
 }) => {
+  // Name of the endpoint that returned an entity.
+  // Used later in case this fetch is for a preview.
+  let matchedEndpoint = "";
+
   // 1. search id in state or get the entity from WP REST API
   const { route, query } = libraries.source.parse(link);
   if (!state.source.get(route).id) {
@@ -80,6 +84,7 @@ const postTypeHandler = ({
         if (populated[0].link === route) {
           isHandled = true;
           isMismatched = false;
+          matchedEndpoint = endpoint;
           break;
         } else {
           isMismatched = true;
@@ -122,7 +127,7 @@ const postTypeHandler = ({
 
     // Fetch the latest revision using the token.
     const response = await fetch(
-      `${state.source.api}/wp/v2/posts/${id}/revisions?per_page=1`,
+      `${state.source.api}/wp/v2/${matchedEndpoint}/${id}/revisions?per_page=1`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
