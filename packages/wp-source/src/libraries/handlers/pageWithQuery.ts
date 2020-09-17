@@ -1,6 +1,5 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
-import { ServerError } from "@frontity/source";
 
 /**
  * A {@link Handler} function for WordPress to fetch pages using plain
@@ -48,6 +47,8 @@ const pageWithQueryHandler: Handler = async ({
     // Use the token if present.
     if (preview && token) request.auth = `Bearer ${token}`;
 
+    // Fetch and populate the page.
+    // The `api.get` call will throw a `ServerError` if the request has failed.
     const response = await libraries.source.api.get(request);
     const [item] = await libraries.source.populate({
       response,
@@ -55,12 +56,10 @@ const pageWithQueryHandler: Handler = async ({
       force,
     });
 
-    // If no entity has found, throw an error.
-    if (!item) {
-      throw new ServerError(`page with id "${id}" not found`, 404);
-    } else {
-      entity = state.source[item.type][item.id];
-    }
+    // We don't have to check if `item` exists or is correct because in that
+    // case `api.get()` would have thrown a `ServerError`, and this line of code
+    // would have not been reached.
+    entity = state.source[item.type][item.id];
   }
 
   // Get `type` and `id` from entity and assign props to data.
