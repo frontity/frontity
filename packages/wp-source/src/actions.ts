@@ -88,6 +88,13 @@ const actions: WpSource["actions"]["source"] = {
       // Get the handler for this route.
       const handler = getMatch(`${route}${queryString}`, handlers);
 
+      // Return a 404 error if no handler has matched.
+      if (!handler)
+        throw new ServerError(
+          `No handler has matched for the given link: "${link}"`,
+          404
+        );
+
       // Execute the handler.
       await handler.func({
         link,
