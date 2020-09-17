@@ -10,16 +10,6 @@ const state: WpSource["state"]["source"] = {
     }
     const { route, query, page } = parse(link);
 
-    // The non-URL resources start with `@` by convention. In that case,
-    // it makes no sense to add the `link`, `route` and `query`
-    if (link.startsWith("@")) {
-      return {
-        page,
-        isFetching: false,
-        isReady: false,
-      };
-    }
-
     return {
       link: normalize(normalizedLink),
       route,
