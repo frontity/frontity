@@ -20,37 +20,24 @@ beforeEach(() => {
 });
 
 it("should add the Authorization header when fetching a post", async () => {
-  store.state.source.auth = "Hello test";
-  await store.actions.source.fetch("/some-post/1");
+  // Get the entites, passing the auth information.
+  await store.libraries.source.api.get({
+    endpoint: "post",
+    auth: "Hello test",
+  });
 
   expect(mockedFetch.mock.calls).toMatchInlineSnapshot(`
+    Array [
       Array [
-        Array [
-          "https://test.frontity.org/wp-json/wp/v2/posts?_embed=true&slug=1",
-          Object {
-            "headers": Object {
-              "Authorization": "Hello test",
-            },
+        "https://test.frontity.org/wp-json/wp/v2/post",
+        Object {
+          "headers": Object {
+            "Authorization": "Hello test",
           },
-        ],
-        Array [
-          "https://test.frontity.org/wp-json/wp/v2/pages?_embed=true&slug=1",
-          Object {
-            "headers": Object {
-              "Authorization": "Hello test",
-            },
-          },
-        ],
-        Array [
-          "https://test.frontity.org/wp-json/wp/v2/media?_embed=true&slug=1",
-          Object {
-            "headers": Object {
-              "Authorization": "Hello test",
-            },
-          },
-        ],
-      ]
-    `);
+        },
+      ],
+    ]
+  `);
 });
 
 it("should add value of frontity_source_auth to state.source.auth", async () => {
