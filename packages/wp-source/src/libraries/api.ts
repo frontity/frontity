@@ -1,3 +1,9 @@
+// This is a temporary fix so ESLint does not complain about missing TSDocs.
+// Those will be added in a different PR.
+// See https://github.com/frontity/frontity/pull/568.
+
+/* eslint-disable */
+
 import { fetch } from "frontity";
 import { stringify } from "query-string";
 import { ServerError } from "@frontity/source";
@@ -21,11 +27,13 @@ class Api {
       params,
       api = this.api,
       isWpCom = this.isWpCom,
+      auth,
     }: {
       endpoint: string;
       params?: Record<string, any>;
       api?: string;
       isWpCom?: boolean;
+      auth?: string;
     }
   ): Promise<Response> {
     // Ensure there is a final slash
@@ -40,9 +48,10 @@ class Api {
 
     // Add query parameters
     const query = stringify(params, { arrayFormat: "bracket", encode: false });
+    const headers = auth ? { Authorization: auth } : {};
 
     // Send request
-    return fetch(`${requestUrl}${query && "?"}${query}`).then(
+    return fetch(`${requestUrl}${query && "?"}${query}`, { headers }).then(
       (response: Response) => {
         if (!response.ok) {
           const { status, statusText } = response;
