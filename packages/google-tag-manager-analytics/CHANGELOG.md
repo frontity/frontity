@@ -1,5 +1,14 @@
 # @frontity/google-tag-manager
 
+## 1.0.1
+
+### Patch Changes
+
+- [`452c2e3c`](https://github.com/frontity/frontity/commit/452c2e3c7a0c6e7f612d553448d60dd8b098209c) [#551](https://github.com/frontity/frontity/pull/551) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Add the script to load the Google Tag Manager container, that is needed to listen to default Google Tag Manager events.
+
+- Updated dependencies [[`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af)]:
+  - frontity@1.11.1
+
 ## 1.0.0
 
 ### Major Changes

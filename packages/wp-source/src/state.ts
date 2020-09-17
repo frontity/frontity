@@ -19,6 +19,32 @@ const state: WpSource["state"]["source"] = {
       isReady: false,
     };
   },
+  entity: ({ state }) => (link) => {
+    // Get the data object pointed by `link`.
+    const data = state.source.get(link);
+
+    // Initialize entity as `null` (it is possible that data doesn't point to an
+    // entity, e.g. a date archive or a 404 page).
+    let entity: any = null;
+
+    // Entities are stored in different places depending on their type.
+    if (data.isPostType) {
+      const { type, id } = data;
+      entity = state.source[type][id];
+    } else if (data.isTaxonomy) {
+      const { taxonomy, id } = data;
+      entity = state.source[taxonomy][id];
+    } else if (data.isAuthor) {
+      const { id } = data;
+      entity = state.source.author[id];
+    } else if (data.isPostTypeArchive) {
+      const { type } = data;
+      entity = state.source.type[type];
+    }
+
+    // It returns the entity found or `null` otherwise.
+    return entity;
+  },
   data: {},
   category: {},
   tag: {},

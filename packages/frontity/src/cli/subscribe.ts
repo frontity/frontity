@@ -1,10 +1,32 @@
 import ora from "ora";
 import chalk from "chalk";
 import { errorLogger } from "../utils";
-import subscribe from "../commands/subscribe";
+import subscribeCommand from "../commands/subscribe";
 import { prompt, Question } from "inquirer";
 
-export default async ({ email }: { email: string }) => {
+/**
+ * The options of the {@link subscribe} command.
+ */
+interface SubscribeOptions {
+  /**
+   * The email that will be subscribed to the newsletter service.
+   *
+   * It will be prompted if the CLI arg is missing.
+   *
+   * @example `name@domain.com`
+   */
+  email: string;
+}
+
+/**
+ * The subscribe CLI command, usually run with `npx frontity subscribe`.
+ *
+ * It takes args from the CLI. Then, it runs the subscribe command
+ * programatically.
+ *
+ * @param options - Defined in {@link SubscribeOptions}.
+ */
+const subscribe = async ({ email }: SubscribeOptions) => {
   while (!email) {
     const subscribeQuestion: Question[] = [
       {
@@ -18,7 +40,7 @@ export default async ({ email }: { email: string }) => {
   }
 
   try {
-    const emitter = subscribe(email);
+    const emitter = subscribeCommand(email);
     emitter.on("message", (message, action) => {
       if (action) ora.promise(action, message);
       else console.log(message);
@@ -35,3 +57,5 @@ export default async ({ email }: { email: string }) => {
         "https://community.frontity.org/"
       )}.\n`);
 };
+
+export default subscribe;

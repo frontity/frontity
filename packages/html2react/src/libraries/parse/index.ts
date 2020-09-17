@@ -1,19 +1,27 @@
 import { css, decode } from "frontity";
 import { parse as himalaya } from "himalaya";
-import { Element, Node, Parse, Attributes, AdaptNode } from "../../../types";
+import { Element, Node } from "../../../types";
 import htmlAttributes from "./attributes/html.json";
 import svgAttributes from "./attributes/svg.json";
+import { Node as HimalayaNode } from "../../../himalaya/types";
 
 // Map of lowercased HTML and SVG attributes to get their camelCase version.
-const attributesMap: Attributes = htmlAttributes
+const attributesMap: Record<string, string> = htmlAttributes
   .concat(svgAttributes)
   .reduce((map, value) => {
     map[value.toLowerCase()] = value;
     return map;
   }, {});
 
-// Adapts the Himalaya AST Specification v1 to our format.
-const adaptNode: AdaptNode = (himalayaNode, parent) => {
+/**
+ * Adapts the Himalaya AST Specification v1 to our format.
+ *
+ * @param himalayaNode - The node comming from himalaya.
+ * @param parent - The parent node.
+ *
+ * @returns The final and modified node.
+ */
+const adaptNode = (himalayaNode: HimalayaNode, parent?: Element): Node => {
   let node: Node;
 
   if (himalayaNode.type === "element") {
@@ -30,16 +38,14 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
             props.className = value;
           } else if (key === "for") {
             props.htmlFor = value;
-          } else if (key === "accept-charset") {
-            props["acceptCharset"] = value;
-          } else if (key === "http-equiv") {
-            props["httpEquiv"] = value;
-
-            // Add inline styles to the component with `emotion`.
+          } else if (/^data-/.test(key)) {
+            props[key] = value;
           } else if (key === "style") {
+            // Add inline styles to the component with `emotion`.
             props.css = css(value);
           } else if (!/^on/.test(key)) {
-            const camelCaseKey = attributesMap[key.toLowerCase()];
+            const camelCaseKey =
+              attributesMap[key.replace(/[-:]/, "").toLowerCase()];
             // Map keys with no value to `true` booleans.
             props[camelCaseKey || key] = value === null ? true : value;
           }
@@ -87,7 +93,14 @@ const adaptNode: AdaptNode = (himalayaNode, parent) => {
   return node;
 };
 
-const parse: Parse = (html) =>
+/**
+ * Parses the HTML and returns AST.
+ *
+ * @param html - The HTML from content.
+ *
+ * @returns The AST of the HTML.
+ */
+const parse = (html: string): Node[] =>
   himalaya(html).reduce((tree: Node[], element) => {
     const adapted = adaptNode(element);
     if (adapted) tree.push(adapted);

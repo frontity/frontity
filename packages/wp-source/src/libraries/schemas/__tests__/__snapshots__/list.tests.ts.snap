@@ -324,6 +324,165 @@ Object {
 }
 `;
 
+exports[`Convert a comment list 1`] = `
+Object {
+  "commentEntity": Object {
+    "124": Object {
+      "_links": Object {
+        "children": Array [
+          Object {
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments?parent=124",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments",
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments/124",
+          },
+        ],
+        "up": Array [
+          Object {
+            "embeddable": true,
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts/60",
+            "post_type": "post",
+          },
+        ],
+      },
+      "acf": Array [],
+      "author": 0,
+      "author_avatar_urls": Object {
+        "24": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=24&d=mm&r=g",
+        "48": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=48&d=mm&r=g",
+        "96": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=96&d=mm&r=g",
+      },
+      "author_name": "Mario",
+      "author_url": "",
+      "content": Object {
+        "rendered": "<p>Hola David</p>
+",
+      },
+      "date": "2019-02-06T17:35:39",
+      "date_gmt": "2019-02-06T15:35:39",
+      "id": 124,
+      "link": "/2016/the-beauties-of-gullfoss/comment-page-1/#comment-124",
+      "meta": Array [],
+      "parent": 0,
+      "post": 60,
+      "status": "approved",
+      "type": "comment",
+    },
+    "129": Object {
+      "_links": Object {
+        "author": Array [
+          Object {
+            "embeddable": true,
+            "href": "https://test.frontity.org/wp-json/wp/v2/users/4",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments",
+          },
+        ],
+        "in-reply-to": Array [
+          Object {
+            "embeddable": true,
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments/124",
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments/129",
+          },
+        ],
+        "up": Array [
+          Object {
+            "embeddable": true,
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts/60",
+            "post_type": "post",
+          },
+        ],
+      },
+      "acf": Array [],
+      "author": 4,
+      "author_avatar_urls": Object {
+        "24": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=24&d=mm&r=g",
+        "48": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=48&d=mm&r=g",
+        "96": "https://secure.gravatar.com/avatar/0e185711dda10636f58cf83e358b2e6e?s=96&d=mm&r=g",
+      },
+      "author_name": "David Arenas",
+      "author_url": "",
+      "content": Object {
+        "rendered": "<p>Hola Mario</p>
+",
+      },
+      "date": "2019-02-08T17:28:33",
+      "date_gmt": "2019-02-08T15:28:33",
+      "id": 129,
+      "link": "/2016/the-beauties-of-gullfoss/comment-page-1/#comment-129",
+      "meta": Array [],
+      "parent": 124,
+      "post": 60,
+      "status": "approved",
+      "type": "comment",
+    },
+    "5": Object {
+      "_links": Object {
+        "author": Array [
+          Object {
+            "embeddable": true,
+            "href": "https://test.frontity.org/wp-json/wp/v2/users/2",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments",
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://test.frontity.org/wp-json/wp/v2/comments/5",
+          },
+        ],
+        "up": Array [
+          Object {
+            "embeddable": true,
+            "href": "https://test.frontity.org/wp-json/wp/v2/posts/60",
+            "post_type": "post",
+          },
+        ],
+      },
+      "acf": Array [],
+      "author": 2,
+      "author_avatar_urls": Object {
+        "24": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=24&d=mm&r=g",
+        "48": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=48&d=mm&r=g",
+        "96": "https://secure.gravatar.com/avatar/a850f5724ad7ea03941081972841a04a?s=96&d=mm&r=g",
+      },
+      "author_name": "Reyes Martinez",
+      "author_url": "http://www.worona.org",
+      "content": Object {
+        "rendered": "<p>Nice post, Alan! Iceland must be amazing. Thanks for sharing 🙂</p>
+",
+      },
+      "date": "2017-01-13T16:10:43",
+      "date_gmt": "2017-01-13T16:10:43",
+      "id": 5,
+      "link": "/2016/the-beauties-of-gullfoss/comment-page-1/#comment-5",
+      "meta": Array [],
+      "parent": 0,
+      "post": 60,
+      "status": "approved",
+      "type": "comment",
+    },
+  },
+}
+`;
+
 exports[`Convert a media list 1`] = `
 Object {
   "attachmentEntity": Object {
