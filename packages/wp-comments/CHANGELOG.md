@@ -1,5 +1,14 @@
 # @frontity/wp-comments
 
+## 0.2.3
+
+### Patch Changes
+
+- [`36c2e03c`](https://github.com/frontity/frontity/commit/36c2e03c8fd8ed85966ecb806189bdabd4965f47) [#542](https://github.com/frontity/frontity/pull/542) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Update the implementation of the wp-comments to use the REST API directly according to the Feature Discussion: https://community.frontity.org/t/wordpress-comments-package/1267/69?u=mmczaplinski
+
+- Updated dependencies [[`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b), [`958fe49f`](https://github.com/frontity/frontity/commit/958fe49f043ca43ae2b1b982059c78e921785d71)]:
+  - @frontity/wp-source@1.8.3
+
 ## 0.2.2
 
 ### Patch Changes
