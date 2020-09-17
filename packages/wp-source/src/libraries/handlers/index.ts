@@ -4,6 +4,7 @@ import taxonomyHandler from "./taxonomy";
 import postTypeHandler from "./postType";
 import postTypeArchiveHandler from "./postTypeArchive";
 import postTypeWithQueryHandler from "./postTypeWithQuery";
+import pageWithQuery from "./pageWithQuery";
 
 // Post Types
 export const post = postTypeHandler({ endpoints: ["posts"] });
@@ -30,7 +31,7 @@ export const postArchive = postTypeArchiveHandler({
 });
 
 // Other handlers
-export { author, date };
+export { author, date, pageWithQuery };
 
 // Handlers generators
 export { taxonomyHandler, postTypeHandler, postTypeArchiveHandler };

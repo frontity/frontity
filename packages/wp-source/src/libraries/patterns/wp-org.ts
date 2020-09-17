@@ -8,6 +8,7 @@ import {
   attachment,
   postType,
   postTypeWithQuery,
+  pageWithQuery,
 } from "../handlers";
 
 export default [
@@ -16,6 +17,12 @@ export default [
     priority: 10,
     pattern: "RegExp:(\\?|&)p=\\d+",
     func: postTypeWithQuery,
+  },
+  {
+    name: "page - query permalink",
+    priority: 10,
+    pattern: "RegExp:(\\?|&)page_id=\\d+",
+    func: pageWithQuery,
   },
   {
     name: "post archive",
