@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-source",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "description": "A Frontity source package for the REST API of self-hosted and WordPress.com sites",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
