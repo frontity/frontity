@@ -1,7 +1,6 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
-import { fetch } from "frontity";
 
 /**
  * The parameters for {@link postTypeWithQueryHandler}.
@@ -51,21 +50,20 @@ const postTypeWithQueryHandler = ({
   libraries,
   force,
 }) => {
-  // Search for the entity in the state.
   const { query } = libraries.source.parse(link);
+  const { preview, token } = query;
+
+  // Get the post ID from the query.
   const id = parseInt(query.p, 10);
 
   const finalTypes = ["post"].concat(
     state.source.postTypes.map((postType) => postType.type)
   );
 
-  //
+  // Search for an entity with the given ID in every post type.
   let entity = finalTypes
-    .reduce((all, type) => {
-      all.push(...Object.values(state.source[type] || {}));
-      return all;
-    }, [])
-    .find((post) => post.id === id);
+    .map((type) => state.source[type] && state.source[type][id])
+    .find((post) => post);
 
   if (!entity) {
     // Transform "posts" endpoint to state.source.postEndpoint.
@@ -73,45 +71,49 @@ const postTypeWithQueryHandler = ({
       endpoint === "posts" ? state.source.postEndpoint : endpoint
     );
 
-    // Iterate over finalEndpoints array.
-    let isHandled = false;
-    let isMismatched = false;
-    for (const endpoint of finalEndpoints) {
-      const response = await libraries.source.api.get({
-        endpoint,
-        params: { include: id, _embed: true, ...state.source.params },
-      });
+    // No endpoint has returned the desired entity yet.
+    let isFound = false;
 
-      const populated = await libraries.source.populate({
+    // Iterate over finalEndpoints array.
+    for (const endpoint of finalEndpoints) {
+      const request = {
+        endpoint: `${endpoint}/${id}`,
+        params: { _embed: true, ...state.source.params },
+        auth: "",
+      };
+
+      // Use the token if present.
+      if (preview && token) request.auth = `Bearer ${token}`;
+
+      // Try getting an entity from `endpoint` with the given ID.
+      let response: Response;
+      try {
+        response = await libraries.source.api.get(request);
+      } catch (e) {
+        // The `api.get` request has failed!
+        // Jump to the next iteration step.
+        continue;
+      }
+
+      // The `api.get` request has succeed.
+      isFound = true;
+
+      // Populate response.
+      const [item] = await libraries.source.populate({
         response,
         state,
         force,
       });
 
-      // Exit loop if this endpoint returns an entity.
-      if (populated.length > 0) {
-        // We have to check if the link property in the data that we
-        // populated is the same as the current route.
-        if (populated[0].id === id) {
-          isHandled = true;
-          isMismatched = false;
-          entity = populated[0];
-          break;
-        } else {
-          isMismatched = true;
-        }
-      }
-    }
+      // Get populated entity. `item` should be fine at this point.
+      entity = state.source[item.type][item.id];
 
-    if (isMismatched) {
-      throw new ServerError(
-        `You have tried to access content at link: ${link} but it does not exist`,
-        404
-      );
+      // Get out of the loop.
+      break;
     }
 
     // If no entity has found, throw an error.
-    if (!isHandled)
+    if (!isFound)
       throw new ServerError(
         `post type from endpoints "${endpoints}" with id "${id}" not found`,
         404
@@ -128,32 +130,6 @@ const postTypeWithQueryHandler = ({
     isPostType: true,
     [`is${capitalize(entity.type)}`]: true,
   });
-
-  // Overwrite properties if the request is a preview.
-  const { preview, token } = query;
-  if (preview && token) {
-    // Fetch the latest revision using the token.
-    const response = await fetch(
-      `${state.source.api}/wp/v2/posts/${id}/revisions?per_page=1`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    // Get modified props from revision.
-    const [json] = await response.json();
-
-    if (json.parent === id) {
-      const { title, content, excerpt } = json;
-      // Merge props with entity.
-      Object.assign(entity, { title, content, excerpt });
-    } else {
-      // Error response.
-      console.warn(json);
-    }
-  }
 };
 
 export default postTypeWithQueryHandler;
