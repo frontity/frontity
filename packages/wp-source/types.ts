@@ -303,6 +303,15 @@ interface WpSource extends Source {
        * framework.
        */
       init: Action<WpSource>;
+
+      /**
+       * An internal frontity action that runs after server-side rendering completes.
+       *
+       * @remarks
+       * This action is not meant to be run by the user, but by the Frontity
+       * framework.
+       */
+      afterSSR: Action<WpSource>;
     };
   };
 

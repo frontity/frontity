@@ -283,5 +283,9 @@ const actions: WpSource["actions"]["source"] = {
       });
     }
   },
+
+  afterSSR: ({ state }) => {
+    delete state.source.auth;
+  },
 };
 export default actions;

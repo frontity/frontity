@@ -8,7 +8,7 @@ import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { FilledContext } from "react-helmet-async";
 import { getSettings } from "@frontity/file-settings";
-import { Context } from "@frontity/types";
+import { Context, Package } from "@frontity/types";
 import { getSnapshot } from "@frontity/connect";
 import { ChunkExtractor } from "@loadable/server";
 import getTemplate from "./templates";
@@ -25,7 +25,27 @@ import createStore from "./store";
 import { exists } from "fs";
 import { promisify } from "util";
 
-export default ({ packages }): ReturnType<Koa["callback"]> => {
+/**
+ * Options for {@link server}.
+ */
+interface ServerOptions {
+  /**
+   * A map of module names to Frontity packages.
+   */
+  packages: {
+    [moduleName: string]: Package;
+  };
+}
+
+/**
+ * Create the Frontity server.
+ *
+ * @param options - Options passed when creating the server.
+ * - `packages`: A map of module names to Frontity packages.
+ *
+ * @returns A Frontity server which is a request handler callback for node's native http/http2 server.
+ */
+const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   const app = new Koa();
 
   // Serve static files.
@@ -56,7 +76,12 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     })
   );
 
-  // Ignore HMR if not in dev mode or old browser open.
+  /**
+   * A helper function for setting 404 status.
+   * It's used to ignore HMR if not in dev mode or old browser open.
+   *
+   * @param ctx - The Koa app context.
+   */
   const return404 = (ctx: Context) => {
     ctx.status = 404;
   };
@@ -119,6 +144,13 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       const jsx = extractor.collectChunks(Component);
       html = renderToString(jsx);
 
+      // Run afterSSR actions.
+      // It runs at this point because we want to run it before taking the state snapshot.
+      // This gives the user a chance to modify the state before sending it to the client
+      Object.values(store.actions).forEach(({ afterSSR }) => {
+        if (afterSSR) afterSSR();
+      });
+
       // Get the linkTags. Crossorigin needed for type="module".
       const crossorigin = moduleStats && es5Stats ? { crossorigin: "" } : {};
       frontity.link = extractor.getLinkTags(crossorigin);
@@ -146,6 +178,11 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.
       html = renderToStaticMarkup(Component);
+
+      // Run afterSSR actions.
+      Object.values(store.actions).forEach(({ afterSSR }) => {
+        if (afterSSR) afterSSR();
+      });
     }
 
     // Get static head strings.
@@ -154,12 +191,9 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     // Write the template to body.
     ctx.body = template({ html, frontity, head });
     next();
-
-    // Run afterSSR actions.
-    Object.values(store.actions).forEach(({ afterSSR }) => {
-      if (afterSSR) afterSSR();
-    });
   });
 
   return app.callback();
 };
+
+export default server;
