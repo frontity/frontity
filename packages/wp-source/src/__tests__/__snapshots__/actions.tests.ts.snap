@@ -91,6 +91,12 @@ Array [
   },
   Object {
     "func": [MockFunction],
+    "name": "page - query permalink",
+    "pattern": "RegExp:(\\\\?|&)page_id=\\\\d+",
+    "priority": 10,
+  },
+  Object {
+    "func": [MockFunction],
     "name": "post archive",
     "pattern": "/",
     "priority": 20,
@@ -206,6 +212,12 @@ Array [
     "func": [MockFunction],
     "name": "post type - query permalink",
     "pattern": "RegExp:(\\\\?|&)p=\\\\d+",
+    "priority": 10,
+  },
+  Object {
+    "func": [MockFunction],
+    "name": "page - query permalink",
+    "pattern": "RegExp:(\\\\?|&)page_id=\\\\d+",
     "priority": 10,
   },
   Object {

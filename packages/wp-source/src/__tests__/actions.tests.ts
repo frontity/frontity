@@ -171,6 +171,22 @@ describe("actions.source.fetch", () => {
       if (!isFetching) done();
     });
   });
+
+  test("Should throw a 404 error if no handler matched the link", async () => {
+    await store.actions.source.fetch("@unknown/link");
+    expect(store.state.source.data).toMatchInlineSnapshot(`
+      Object {
+        "@unknown/link/": Object {
+          "errorStatus": 404,
+          "errorStatusText": "No handler has matched for the given link: \\"@unknown/link/\\"",
+          "is404": true,
+          "isError": true,
+          "isFetching": false,
+          "isReady": true,
+        },
+      }
+    `);
+  });
 });
 
 describe("actions.source.init", () => {
