@@ -17,6 +17,9 @@ const extractParameters = (
   keys: Key[]
 ): Record<string, string> =>
   link
+    // First remove the query and hash part.
+    // These parameters are extracted from the pathname.
+    .replace(/\?.*/, "")
     .match(regexp)
     .slice(1)
     .reduce((result, value, index) => {
