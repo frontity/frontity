@@ -122,8 +122,6 @@ const actions: WpSource["actions"]["source"] = {
 
     libraries.source.api.init({ api, isWpCom });
 
-    console.log(state.router.link);
-
     // Handlers & redirections.
     const { handlers, redirections } = libraries.source;
 
