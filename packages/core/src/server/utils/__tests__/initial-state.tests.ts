@@ -108,7 +108,7 @@ describe("initialState", () => {
       "https://site.com/page/2?frontity_name=mySite&otherParam=value&frontity_source_auth=hello"
     );
 
-    // The frontity_name & frontity_source_auth should be removed but `otherParam` not
+    // The frontity_name & frontity_source_auth should be removed but `otherParam` should not!
     expect(initialState({ settings, url }).frontity.initialLink).toBe(
       "/page/2?otherParam=value"
     );
