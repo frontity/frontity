@@ -31,8 +31,8 @@ const state = ({ settings, url }: StateOptions) => {
 
   paramsToDelete.forEach((param) => {
     if (searchParams.has(param)) {
-      searchParams.delete(param);
       options[param] = searchParams.get(param);
+      searchParams.delete(param);
     }
   });
   url.search = searchParams.toString();

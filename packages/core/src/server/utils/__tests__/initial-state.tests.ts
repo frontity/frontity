@@ -87,4 +87,30 @@ describe("initialState", () => {
     const url = new URL("https://site.com/page/2?some=query#some-hash");
     expect(initialState({ settings, url }).frontity.platform).toBe("server");
   });
+
+  it("should set the frontity.options correctly", () => {
+    const url = new URL(
+      "https://site.com/page/2?frontity_name=mySite&frontity_source_auth=hello"
+    );
+
+    // The frontity_name & frontity_source_auth should be present in the options
+    expect(initialState({ settings, url }).frontity.options)
+      .toMatchInlineSnapshot(`
+      Object {
+        "frontity_name": "mySite",
+        "frontity_source_auth": "hello",
+      }
+    `);
+  });
+
+  it("should remove frontity_name & frontity_source_auth from the initialLink", () => {
+    const url = new URL(
+      "https://site.com/page/2?frontity_name=mySite&otherParam=value&frontity_source_auth=hello"
+    );
+
+    // The frontity_name & frontity_source_auth should be removed but `otherParam` not
+    expect(initialState({ settings, url }).frontity.initialLink).toBe(
+      "/page/2?otherParam=value"
+    );
+  });
 });
