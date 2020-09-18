@@ -102,7 +102,10 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
     const stats = moduleStats || es5Stats;
 
     // Get settings.
-    const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
+    const settings = await getSettings({
+      url: ctx.href,
+      name: ctx.query.frontity_name,
+    });
 
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
