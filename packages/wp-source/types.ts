@@ -1,4 +1,4 @@
-import { AsyncAction, Action, State, Derived } from "frontity/types";
+import { AsyncAction, Action, State, Derived, Package } from "frontity/types";
 import Source, { EntityData } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
@@ -21,11 +21,11 @@ interface WpSource extends Source {
      *
      * It also contains the state defined in the main source package.
      */
-    source: Source<WpSource>["state"]["source"] & {
+    source: Source<Packages>["state"]["source"] & {
       /**
        * True when the REST API belongs to a WordPress.com site.
        */
-      isWpCom: Derived<WpSource, boolean>;
+      isWpCom: Derived<Packages, boolean>;
 
       /**
        * The name or path indicating the subdirectory of the domain where the
@@ -272,9 +272,9 @@ interface WpSource extends Source {
        * @returns A promise that resolves when the data fetching has finished.
        */
       fetch:
-        | AsyncAction<WpSource, string>
+        | AsyncAction<Packages, string>
         | AsyncAction<
-            WpSource,
+            Packages,
             string,
             {
               /**
@@ -292,7 +292,7 @@ interface WpSource extends Source {
        * This action is not meant to be run by the user, but by the Frontity
        * framework.
        */
-      init: Action<WpSource>;
+      init: Action<Packages>;
 
       /**
        * An internal frontity action that runs after server-side rendering completes.
@@ -301,7 +301,7 @@ interface WpSource extends Source {
        * This action is not meant to be run by the user, but by the Frontity
        * framework.
        */
-      afterSSR: Action<WpSource>;
+      afterSSR: Action<Packages>;
     };
   };
 
@@ -347,7 +347,7 @@ interface WpSource extends Source {
         /**
          * The Frontity state.
          */
-        state: State<WpSource>;
+        state: State<Packages>;
 
         /**
          * The Response object.
@@ -441,6 +441,11 @@ interface WpSource extends Source {
     };
   };
 }
+
+/**
+ * Packages used internally by wp-source.
+ */
+export type Packages = WpSource & Package;
 
 export default WpSource;
 

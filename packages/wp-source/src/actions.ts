@@ -122,6 +122,14 @@ const actions: WpSource["actions"]["source"] = {
 
     libraries.source.api.init({ api, isWpCom });
 
+    // If the URL contains an auth token, then add it to the state.
+    // This is normally the case e.g, when accessing the post preview.
+    const auth = state.frontity?.options?.frontity_source_auth;
+    const authFromEnv = process.env.FRONTITY_SOURCE_AUTH;
+    if (auth || authFromEnv) {
+      state.source.auth = auth || authFromEnv;
+    }
+
     // Handlers & redirections.
     const { handlers, redirections } = libraries.source;
 

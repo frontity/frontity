@@ -27,7 +27,7 @@ export interface Package {
      */
     frontity?: {
       /**
-       * The name of the site
+       * The name of the site.
        *
        * Populated automatically by Frontity.
        */
@@ -41,9 +41,32 @@ export interface Package {
       initialLink?: string;
 
       /**
+       * Options for a frontity app that are parsed from the URL query string of the page.
+       * For this reason, they are in snake_case, rather than camelCase like other properties
+       * in Frontity Framework.
+       */
+      options: {
+        /**
+         * The authentication token.
+         *
+         * This can be a Bearer token a JWT or a Basic Authentication payload.
+         * It's value will be attached to the `Authorization` HTTP header and used to
+         * authenticate with the Wordpress server.
+         *
+         * An example use case is the WordPress post preview with Frontity. The server generates
+         * a temporary token and a URL that contains `frontity_source_auth=SoMeToKeNValue`.
+         */
+        frontity_source_auth?: string;
+        /**
+         * The name of the Frontity site. Used for [multi-site](https://docs.frontity.org/learning-frontity/settings#multiple-sites) frontity projects.
+         */
+        frontity_name?: string;
+      };
+
+      /**
        * The mode of this site.
        *
-       * @deprecated
+       * @deprecated This parameter is deprecated.
        */
       mode?: string;
 
@@ -53,7 +76,7 @@ export interface Package {
        * Useful to test some packages that can do different things in debug
        * mode, like for example the slot and fills.
        *
-       * @default false
+       * @defaultValue false
        */
       debug?: boolean;
 
@@ -118,7 +141,7 @@ export interface Package {
     /**
      * The rest of the state exposed by this package.
      *
-     * @todo Replace `any` with serializable objects and derived state.
+     * TODO: Replace `any` with serializable objects and derived state.
      */
     [namespace: string]: {
       [key: string]: any;
@@ -173,9 +196,9 @@ interface Action {
    * actions.myPackage.someAction();
    * ```
    *
-   * @param store An object containing `state`, `actions` and `libraries`.
+   * @param store - An object containing `state`, `actions` and `libraries`.
    *
-   * @returns void or Promise<void> if it is an async action.
+   * @returns Void or Promise<void> if it is an async action.
    */
   (store: Pick<Package, "state" | "actions" | "libraries">): void | Promise<
     void
@@ -197,7 +220,7 @@ interface Action {
    * @param store - An object containing `state`, `actions` and `libraries`.
    * @param args - Any number of arguments.
    *
-   * @returns void or Promise<void> if it is an async action.
+   * @returns Void or Promise<void> if it is an async action.
    */
   (store: Pick<Package, "state" | "actions" | "libraries">): (
     ...args: any
@@ -228,7 +251,7 @@ export interface Fill {
   /**
    * The priority of this fill in relation to the other fills that also point to the same `slot`.
    *
-   * @default 10
+   * @defaultValue 10
    */
   priority?: number;
 
