@@ -66,7 +66,7 @@ export interface Package {
       /**
        * The mode of this site.
        *
-       * @deprecated This parameter is deprecated.
+       * @deprecated This parameter is deprecated. It could be used to choose to render Frontity to `html` or `amp`.
        */
       mode?: string;
 
