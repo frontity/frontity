@@ -45,7 +45,7 @@ export interface Package {
        * For this reason, they are in snake_case, rather than camelCase like other properties
        * in Frontity Framework.
        */
-      options: {
+      options?: {
         /**
          * The authentication token.
          *
