@@ -1,5 +1,16 @@
 #! /usr/bin/env node
 
+// We use `require()` instead of `import` because of https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const dotenv = require("dotenv");
+
+const result = dotenv.config();
+if (result.error) {
+  console.warn(
+    "Frontity has detected a malformed .env file. If you are relying on the .env file to load environmental variables, you might want to check it's correctness. For reference, Frontity is using the https://github.com/motdotla/dotenv module."
+  );
+}
+
 import program from "commander";
 
 import { default as create } from "./create";
