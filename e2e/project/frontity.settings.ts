@@ -293,6 +293,28 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "preview",
+    match: ["preview=true"],
+    state: {
+      frontity: {
+        url: "http://localhost:8080",
+      },
+    },
+    packages: [
+      "@frontity/tiny-router",
+      "@frontity/html2react",
+      "@frontity/mars-theme",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
