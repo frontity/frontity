@@ -1,5 +1,5 @@
 ---
-"frontity": patch
+"frontity": minor
 ---
 
 Add the dotenv to support loading environment variables from `.env` files.

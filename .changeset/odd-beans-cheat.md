@@ -1,5 +1,5 @@
 ---
-"@frontity/core": patch
+"@frontity/core": minor
 ---
 
 Add support for auth headers: https://community.frontity.org/t/support-for-auth-header-in-source-packages/2678/12
