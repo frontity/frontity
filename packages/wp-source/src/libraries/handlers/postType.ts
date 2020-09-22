@@ -136,7 +136,13 @@ const postTypeHandler = ({
     );
 
     // Get modified props from revision.
-    const [json] = await response.json();
+    const revision = await response.json();
+    if (revision.code) {
+      console.log(revision);
+      throw new ServerError(revision.message, revision.data.status);
+    }
+
+    const [json] = revision;
 
     if (json.parent === id) {
       const { title, content, excerpt } = json;
