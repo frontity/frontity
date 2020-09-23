@@ -25,16 +25,22 @@ interface StateOptions {
  * @returns The Frontity state object.
  */
 const state = ({ settings, url }: StateOptions) => {
-  const paramsToDelete = ["frontity_source_auth", "frontity_name"];
-  const options = {};
   const { searchParams } = url;
+  const options = {};
 
+  // Get all the params in the query string that start with "frontity_"
+  const paramsToDelete = Array.from(searchParams.entries())
+    .map(([key]) => key)
+    .filter((param) => param.startsWith("frontity_"));
+
+  // Delete all of them from the searchString and at the same time add them to `options`
   paramsToDelete.forEach((param) => {
     if (searchParams.has(param)) {
       options[param] = searchParams.get(param);
       searchParams.delete(param);
     }
   });
+
   url.search = searchParams.toString();
 
   let state: Package["state"] = {
