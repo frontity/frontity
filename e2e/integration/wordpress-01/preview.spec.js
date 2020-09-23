@@ -1,20 +1,4 @@
 describe("Preview plugin", () => {
-  /**
-   * TEST CASES
-   * (logged in & not logged in):
-   *
-   * Preview with an unpublished post.
-   * Preview with a published post.
-   * Preview with an edited post.
-   * Preview with an unpublished page.
-   * Preview with a published page.
-   * Preview with an edited page.
-   * Preview with unpublished custom post type.
-   * Preview with published custom post type.
-   * Preview with edited custom post type.
-   *
-   *
-   */
   before(() => {
     cy.task("removeAllPlugins");
     cy.task("installPlugin", { name: "custom-post-type-ui" });
@@ -27,17 +11,16 @@ describe("Preview plugin", () => {
     });
   });
 
-  // after(() => {
-  //   cy.task("resetDatabase");
-  //   cy.task("removeAllPlugins");
-  // });
+  after(() => {
+    cy.task("resetDatabase");
+    cy.task("removeAllPlugins");
+  });
 
   /**
    * Tests for posts.
    */
-
   describe("Logged in WordPress", () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit("http://localhost:8080/wp-login.php");
       cy.get("input#user_login").type("admin");
       cy.get("input#user_pass").type("password");
@@ -45,23 +28,30 @@ describe("Preview plugin", () => {
     });
 
     it("a published post should be accessible", () => {
-      cy.visit("http://localhost:8080/hello-world/?preview=true");
+      cy.visit("http://localhost:8080/hello-world/");
       cy.get('h1[class*="Title"]').should("have.text", "Hello world!");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
         "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+      );
+    });
+
+    it("a post revision should be accessible", () => {
+      cy.visit("http://localhost:8080/hello-world/?preview_id=1&preview=true");
+      cy.get('h1[class*="Title"]').should("have.text", "Hello world! (edited)");
+      cy.get('div[class*="Content"] > p').should(
+        "have.text",
+        "The content of this post was modified."
       );
     });
 
     it("a post draft should be accessible", () => {
-      cy.visit("http://localhost:8080/hello-world/?preview=true");
-      cy.get('h1[class*="Title"]').should("have.text", "Hello world!");
+      cy.visit("http://localhost:8080/?p=5&preview=true");
+      cy.get('h1[class*="Title"]').should("have.text", "This is a draft");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
-        "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+        "This post is just a draft and it should not be publicly accessible."
       );
     });
-
-    it("a post revision should be accessible", () => {});
   });
 });
