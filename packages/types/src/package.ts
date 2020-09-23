@@ -42,26 +42,12 @@ export interface Package {
 
       /**
        * Options for a frontity app that are parsed from the URL query string of the page.
-       * For this reason, they are in snake_case, rather than camelCase like other properties
-       * in Frontity Framework.
+       * This is for example used by `@frontity/core` to get the name of the site from
+       * the `frontity_name` param in a multi-site WordPress setup.
+       *
+       * @example `frontity_name`
        */
-      options?: {
-        /**
-         * The authentication token.
-         *
-         * This can be a Bearer token a JWT or a Basic Authentication payload.
-         * It's value will be attached to the `Authorization` HTTP header and used to
-         * authenticate with the Wordpress server.
-         *
-         * An example use case is the WordPress post preview with Frontity. The server generates
-         * a temporary token and a URL that contains `frontity_source_auth=SoMeToKeNValue`.
-         */
-        frontity_source_auth?: string;
-        /**
-         * The name of the Frontity site. Used for [multi-site](https://docs.frontity.org/learning-frontity/settings#multiple-sites) frontity projects.
-         */
-        frontity_name?: string;
-      };
+      options?: Record<string, string>;
 
       /**
        * The mode of this site.
