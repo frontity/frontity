@@ -270,9 +270,9 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
     key: link,
     link: link,
     isLast:
-      (link === last.link && last.isReady) ||
-      (link === links[links.length - 1] && !!last.isError) ||
-      (link === links[links.length - 2] && !last.isReady),
+      (link === last.link && !!last.isReady && !last.isError) ||
+      (link === links[links.length - 2] && !last.isReady) ||
+      (link === links[links.length - 2] && !!last.isReady && !!last.isError),
     Wrapper: MemoizedWrapper(link, {
       fetchInViewOptions: options.fetchInViewOptions,
       routeInViewOptions: options.routeInViewOptions,
