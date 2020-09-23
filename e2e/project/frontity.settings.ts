@@ -294,8 +294,8 @@ const settings: Settings = [
     ],
   },
   {
-    name: "preview",
-    match: ["preview=true"],
+    name: "embedded-mode",
+    match: ["http://172.17.0.1:3001"],
     state: {
       frontity: {
         url: "http://localhost:8080",
