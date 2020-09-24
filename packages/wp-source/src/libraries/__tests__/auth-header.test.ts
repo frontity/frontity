@@ -43,7 +43,7 @@ it("should add the Authorization header when fetching a post", async () => {
 });
 
 it("should pass the value of FRONTITY_SOURCE_AUTH to state.source.auth", async () => {
-  const authToken = "hello";
+  const authToken = "test-1";
 
   // Add the token to the env variable
   process.env.FRONTITY_SOURCE_AUTH = authToken;
@@ -54,11 +54,11 @@ it("should pass the value of FRONTITY_SOURCE_AUTH to state.source.auth", async (
   expect(store.state.source.auth).toBe(authToken);
 });
 
-it("should pass the frontity_source_auth option to state.source.auth", async () => {
-  const authToken = "hello";
+it("should pass the frontitySourceAuth option to state.source.auth", async () => {
+  const authToken = "test-2";
 
   // eslint-disable-next-line @typescript-eslint/camelcase
-  store.state.frontity = { options: { frontity_source_auth: authToken } };
+  store.state.frontity = { options: { frontitySourceAuth: authToken } };
 
   // Initialize wp-source package
   store.actions.source.init();
@@ -73,7 +73,7 @@ it("should use the value from `options` if both the state.source.auth and FRONTI
   store.state.frontity = {
     options: {
       // eslint-disable-next-line @typescript-eslint/camelcase
-      frontity_source_auth: "This is used indeed",
+      frontitySourceAuth: "This is used indeed",
     },
   };
 
@@ -82,7 +82,3 @@ it("should use the value from `options` if both the state.source.auth and FRONTI
 
   expect(store.state.source.auth).toBe("This is used indeed");
 });
-
-it.todo("should check that the token is erased correctly in afterSSR");
-
-it.todo("should check that we handle the frontity_name param correctly");
