@@ -310,6 +310,12 @@ const settings: Settings = [
         state: {
           source: {
             api: "http://localhost:8080/wp-json",
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+              },
+            ],
           },
         },
       },
