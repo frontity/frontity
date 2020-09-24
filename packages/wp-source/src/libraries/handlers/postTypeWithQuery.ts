@@ -1,40 +1,63 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
-import { ServerError } from "@frontity/source";
 
 /**
  * The parameters for {@link postTypeWithQueryHandler}.
  */
 interface PostTypeWithQueryHandlerOptions {
   /**
-   * The list of [WP REST API
-   * endpoints](https://developer.wordpress.org/rest-api/reference/) from which
+   * The type of entities that are going to be fetched.
+   */
+  type: string;
+
+  /**
+   * A [WP REST API
+   * endpoint](https://developer.wordpress.org/rest-api/reference/) from which
    * the generated handler is going to fetch the data.
    */
-  endpoints: string[];
+  endpoint: string;
+
+  /**
+   * Name of the query parameter where the ID is stored. Default is `p`.
+   */
+  idParamName?: string;
 }
 
 /**
  * A {@link Handler} function generator for WordPress Post Types.
  *
- * This function will generate a handler function for specific [WP REST API
- * endpoints](https://developer.wordpress.org/rest-api/reference/) from which
- * the data is going to be fetched. The generated handler will fetch data from
- * all specified endpoints.
+ * This function will generate a handler function for a specific [WP REST API
+ * endpoint](https://developer.wordpress.org/rest-api/reference/) from which the
+ * data is going to be fetched.
+ *
+ * The generated function is intended to be used with handlers for fetching post
+ * type entities using plain permalinks (e.g. Http://frontity.site/?page_id=42).
  *
  * @param options - Options for the handler generator: {@link
  * PostTypeWithQueryHandlerOptions}.
  *
  * @example
  * ```js
- * const postTypeWithQuery = postTypeWithQueryHandler({
- *   endpoints: ["post", "page"],
- * });
+ * const postWithQuery = postTypeWithQueryHandler({ endpoint: "posts" });
  * libraries.source.handlers.push({
- *   name: "post type - query permalink",
+ *   name: "post with query permalink",
  *   priority: 10,
  *   pattern: "RegExp:(\\?|&)p=\\d+",
- *   func: postTypeWithQuery,
+ *   func: postWithQuery,
+ * });
+ * ```
+ *
+ * @example
+ * ```js
+ * const pageWithQuery = postTypeWithQueryHandler({
+ *   endpoint: "pages",
+ *   idParamName: "page_id"
+ * });
+ * libraries.source.handlers.push({
+ *   name: "page with query permalink",
+ *   priority: 10,
+ *   pattern: "RegExp:(\\?|&)page_id=\\d+",
+ *   func: pageWithQuery,
  * });
  * ```
  *
@@ -43,7 +66,9 @@ interface PostTypeWithQueryHandlerOptions {
  * when calling `actions.source.fetch()` for a specific entity.
  */
 const postTypeWithQueryHandler = ({
-  endpoints,
+  type,
+  endpoint,
+  idParamName = "p",
 }: PostTypeWithQueryHandlerOptions): Handler => async ({
   link,
   state,
@@ -53,82 +78,42 @@ const postTypeWithQueryHandler = ({
   const { query } = libraries.source.parse(link);
   const { preview, token } = query;
 
-  // Get the post ID from the query.
-  const id = parseInt(query.p, 10);
+  // Get the ID from the query.
+  const id = parseInt(query[idParamName], 10);
 
-  const finalTypes = ["post"].concat(
-    state.source.postTypes.map((postType) => postType.type)
-  );
+  // Search for the entity in the state.
+  const entity = state.source[type] && state.source[type][id];
 
-  // Search for an entity with the given ID in every post type.
-  let entity = finalTypes
-    .map((type) => state.source[type] && state.source[type][id])
-    .find((post) => post);
+  // If not found, fetch the entity. Also if force is `true`.
+  if (!entity || force) {
+    const request = {
+      endpoint: `${endpoint}/${id}`,
+      params: { _embed: true, ...state.source.params },
+      auth: "",
+    };
 
-  if (!entity) {
-    // Transform "posts" endpoint to state.source.postEndpoint.
-    const finalEndpoints = endpoints.map((endpoint) =>
-      endpoint === "posts" ? state.source.postEndpoint : endpoint
-    );
+    // Use the token if present.
+    if (preview && token) request.auth = `Bearer ${token}`;
 
-    // No endpoint has returned the desired entity yet.
-    let isFound = false;
+    // Fetch the entity.
+    // The `api.get` call will throw a `ServerError` if the request has failed.
+    const response = await libraries.source.api.get(request);
 
-    // Iterate over finalEndpoints array.
-    for (const endpoint of finalEndpoints) {
-      const request = {
-        endpoint: `${endpoint}/${id}`,
-        params: { _embed: true, ...state.source.params },
-        auth: "",
-      };
-
-      // Use the token if present.
-      if (preview && token) request.auth = `Bearer ${token}`;
-
-      // Try getting an entity from `endpoint` with the given ID.
-      let response: Response;
-      try {
-        response = await libraries.source.api.get(request);
-      } catch (e) {
-        // The `api.get` request has failed!
-        // Jump to the next iteration step.
-        continue;
-      }
-
-      // The `api.get` request has succeed.
-      isFound = true;
-
-      // Populate response.
-      const [item] = await libraries.source.populate({
-        response,
-        state,
-        force,
-      });
-
-      // Get populated entity. `item` should be fine at this point.
-      entity = state.source[item.type][item.id];
-
-      // Get out of the loop.
-      break;
-    }
-
-    // If no entity has found, throw an error.
-    if (!isFound)
-      throw new ServerError(
-        `post type from endpoints "${endpoints}" with id "${id}" not found`,
-        404
-      );
+    // Populate the entity.
+    // We can be sure here that the entity is being populated because the
+    // previous call would have been thrown a `ServerError` otherwise.
+    await libraries.source.populate({ response, state, force });
   }
 
-  // Get `type` and `id` from route data and assign props to data.
+  // Assign props to data.
   const data = state.source.get(link);
   Object.assign(data, {
-    type: entity.type,
+    type,
     link,
     query,
     id,
     isPostType: true,
-    [`is${capitalize(entity.type)}`]: true,
+    [`is${capitalize(type)}`]: true,
   });
 };
 

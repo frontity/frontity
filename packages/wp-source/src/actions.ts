@@ -173,7 +173,7 @@ const actions: WpSource["actions"]["source"] = {
         name: `${type} - query permalink`,
         priority: 9,
         pattern: `RegExp:(\\?|&)p=\\d+&post_type=${type}`,
-        func: postTypeWithQueryHandler({ endpoints: [endpoint] }),
+        func: postTypeWithQueryHandler({ type, endpoint }),
       });
       // Archive.
       if (archive)
