@@ -97,8 +97,8 @@ describe("initialState", () => {
     expect(initialState({ settings, url }).frontity.options)
       .toMatchInlineSnapshot(`
       Object {
-        "frontity_name": "mySite",
-        "frontity_source_auth": "hello",
+        "frontityName": "mySite",
+        "frontitySourceAuth": "hello",
       }
     `);
   });

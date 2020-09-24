@@ -1,6 +1,7 @@
 import deepmerge from "deepmerge";
 import { NormalizedSettings } from "@frontity/file-settings";
 import { Package } from "@frontity/types";
+import snakeToCamel from "../../utils/snake-to-camel";
 
 /**
  * Options for {@link state}.
@@ -36,7 +37,8 @@ const state = ({ settings, url }: StateOptions) => {
   // Delete all of them from the searchString and at the same time add them to `options`
   paramsToDelete.forEach((param) => {
     if (searchParams.has(param)) {
-      options[param] = searchParams.get(param);
+      const key = snakeToCamel(param);
+      options[key] = searchParams.get(param);
       searchParams.delete(param);
     }
   });
