@@ -1,7 +1,8 @@
 describe("Preview plugin", () => {
   before(() => {
+    // Go first to the main URL to avoid a restart when the WordPress site is
+    // visited (baseUrl is different here).
     cy.visit("http://localhost:8080");
-    cy.task("removeAllPlugins");
     cy.task("installPlugin", { name: "custom-post-type-ui" });
     cy.task("installPlugin", {
       name:
@@ -23,13 +24,24 @@ describe("Preview plugin", () => {
   describe("Logged in WordPress", () => {
     beforeEach(() => {
       cy.visit("http://localhost:8080/wp-login.php");
-      cy.get("input#user_login").type("admin");
-      cy.get("input#user_pass").type("password");
+      cy.get("input#user_login")
+        .then(([input]) => {
+          input.value = "admin";
+        })
+        .should("have.value", "admin");
+      cy.get("input#user_pass")
+        .then(([input]) => {
+          input.value = "password";
+        })
+        .should("have.value", "password");
       cy.get("input#wp-submit").click();
     });
 
     it("a published post should be accessible", () => {
       cy.visit("http://localhost:8080/hello-world/");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Hello world!");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -39,6 +51,9 @@ describe("Preview plugin", () => {
 
     it("a post revision should be accessible", () => {
       cy.visit("http://localhost:8080/hello-world/?preview_id=1&preview=true");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Hello world! (edited)");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -48,6 +63,9 @@ describe("Preview plugin", () => {
 
     it("a post draft should be accessible", () => {
       cy.visit("http://localhost:8080/?p=5&preview=true");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "This is a draft");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -57,6 +75,9 @@ describe("Preview plugin", () => {
 
     it("a published page should be accessible", () => {
       cy.visit("http://localhost:8080/sample-page/");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Sample Page");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -66,6 +87,9 @@ describe("Preview plugin", () => {
 
     it("a page revision should be accessible", () => {
       cy.visit("http://localhost:8080/sample-page/?preview_id=2&preview=true");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Sample Page (edited)");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -75,6 +99,9 @@ describe("Preview plugin", () => {
 
     it("a page draft should be accessible", () => {
       cy.visit("http://localhost:8080/?page_id=9&preview=true");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "This is a page draft");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -84,6 +111,9 @@ describe("Preview plugin", () => {
 
     it("a published CPT should be accessible", () => {
       cy.visit("http://localhost:8080/movie/published-movie/");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Published movie");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -95,6 +125,9 @@ describe("Preview plugin", () => {
       cy.visit(
         "http://localhost:8080/movie/published-movie/?preview_id=16&preview=true"
       );
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should(
         "have.text",
         "Published movie (edited)"
@@ -107,6 +140,9 @@ describe("Preview plugin", () => {
 
     it("a CPT draft should be accessible", () => {
       cy.visit("http://localhost:8080/?post_type=movie&p=17&preview=true");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Movie draft");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -115,9 +151,12 @@ describe("Preview plugin", () => {
     });
   });
 
-  describe("Logged out WordPress", () => {
+  describe("Logged out from WordPress", () => {
     it("a published post should be accessible", () => {
       cy.visit("http://localhost:8080/hello-world/");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Hello world!");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -127,6 +166,9 @@ describe("Preview plugin", () => {
 
     it("a post revision should not be accessible", () => {
       cy.visit("http://localhost:8080/hello-world/?preview_id=1&preview=true");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Hello world!");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -138,11 +180,14 @@ describe("Preview plugin", () => {
       cy.request({
         url: "http://localhost:8080/?p=5&preview=true",
         failOnStatusCode: false,
-      }).should("have.property", "status", 404);
+      }).should("have.property", "status", 401);
     });
 
     it("a published page should be accessible", () => {
       cy.visit("http://localhost:8080/sample-page/");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Sample Page");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -152,6 +197,9 @@ describe("Preview plugin", () => {
 
     it("a page revision should not be accessible", () => {
       cy.visit("http://localhost:8080/sample-page/?preview_id=2&preview=true");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should come from the published version.
       cy.get('h1[class*="Title"]').should("have.text", "Sample Page");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -168,6 +216,9 @@ describe("Preview plugin", () => {
 
     it("a published CPT should be accessible", () => {
       cy.visit("http://localhost:8080/movie/published-movie/");
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should be correct.
       cy.get('h1[class*="Title"]').should("have.text", "Published movie");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -179,6 +230,9 @@ describe("Preview plugin", () => {
       cy.visit(
         "http://localhost:8080/movie/published-movie/?preview_id=16&preview=true"
       );
+      // Frontity should have been loaded.
+      cy.window().should("have.property", "frontity");
+      // Title and content should come from the published version.
       cy.get('h1[class*="Title"]').should("have.text", "Published movie");
       cy.get('div[class*="Content"] > p').should(
         "have.text",
@@ -190,7 +244,7 @@ describe("Preview plugin", () => {
       cy.request({
         url: "http://localhost:8080/?post_type=movie&p=17&preview=true",
         failOnStatusCode: false,
-      }).should("have.property", "status", 404);
+      }).should("have.property", "status", 401);
     });
   });
 });
