@@ -12,6 +12,7 @@ const handlerMocks = handlers as jest.Mocked<typeof handlers>;
 handlerMocks.taxonomyHandler.mockReturnValue(jest.fn());
 handlerMocks.postTypeHandler.mockReturnValue(jest.fn());
 handlerMocks.postTypeArchiveHandler.mockReturnValue(jest.fn());
+handlerMocks.postTypeWithQueryHandler.mockReturnValue(jest.fn());
 
 let handler: jest.Mocked<Pattern<Handler>>;
 let store: InitializedStore<WpSource>;
@@ -21,6 +22,7 @@ beforeEach(() => {
   handlerMocks.taxonomyHandler.mockClear();
   handlerMocks.postTypeHandler.mockClear();
   handlerMocks.postTypeArchiveHandler.mockClear();
+  handlerMocks.postTypeWithQueryHandler.mockClear();
   // Create a mock handler
   handler = {
     name: "always",
@@ -263,6 +265,7 @@ describe("actions.source.init", () => {
     expect(store.libraries.source.handlers).toMatchSnapshot();
     expect(handlerMocks.postTypeHandler.mock.calls).toMatchSnapshot();
     expect(handlerMocks.postTypeArchiveHandler.mock.calls).toMatchSnapshot();
+    expect(handlerMocks.postTypeWithQueryHandler.mock.calls).toMatchSnapshot();
   });
 
   test("should add new handlers from taxonomies array", async () => {

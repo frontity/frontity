@@ -34,4 +34,9 @@ export const postArchive = postTypeArchiveHandler({
 export { author, date, pageWithQuery };
 
 // Handlers generators
-export { taxonomyHandler, postTypeHandler, postTypeArchiveHandler };
+export {
+  taxonomyHandler,
+  postTypeHandler,
+  postTypeArchiveHandler,
+  postTypeWithQueryHandler,
+};

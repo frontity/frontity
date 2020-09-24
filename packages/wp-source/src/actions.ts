@@ -6,6 +6,7 @@ import { getMatch } from "./libraries/get-match";
 import {
   postTypeHandler,
   postTypeArchiveHandler,
+  postTypeWithQueryHandler,
   taxonomyHandler,
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
@@ -166,6 +167,13 @@ const actions: WpSource["actions"]["source"] = {
         priority: 10,
         pattern: concatLink(type, "/:slug"),
         func: postTypeHandler({ endpoints: [endpoint] }),
+      });
+      // Query permalink (mainly for drafts).
+      handlers.push({
+        name: `${type} - query permalink`,
+        priority: 9,
+        pattern: `RegExp:(\\?|&)p=\\d+&post_type=${type}`,
+        func: postTypeWithQueryHandler({ endpoints: [endpoint] }),
       });
       // Archive.
       if (archive)
