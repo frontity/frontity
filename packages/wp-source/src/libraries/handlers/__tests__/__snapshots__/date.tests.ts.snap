@@ -1238,6 +1238,7 @@ Object {
       "type": "attachment",
     },
   },
+  "entity": [Function],
   "get": [Function],
   "homepage": "",
   "isWpCom": false,
