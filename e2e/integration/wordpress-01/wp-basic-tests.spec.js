@@ -1,11 +1,11 @@
 describe("WordPress REST API", () => {
   it("archives should work", () => {
-    cy.visit("http://localhost:3001?name=wp-basic-tests");
+    cy.visit("http://localhost:3001?frontity_name=wp-basic-tests");
     cy.get("[data-test-id='1']").contains("/hello-world");
   });
 
   it("posts should work", () => {
-    cy.visit("http://localhost:3001/hello-world?name=wp-basic-tests");
+    cy.visit("http://localhost:3001/hello-world?frontity_name=wp-basic-tests");
     cy.get("[data-test-id='post']").contains("Hello world");
   });
 });

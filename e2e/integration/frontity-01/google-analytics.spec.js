@@ -11,7 +11,7 @@ const expectGaToHaveBeenCalledWith = (win, data) => {
 
 const pageviewHome = {
   title: "Homepage Title",
-  link: "/?name=google-analytics",
+  link: "/?frontity_name=google-analytics",
 };
 
 const pageviewSomePost = {
@@ -21,7 +21,7 @@ const pageviewSomePost = {
 
 describe("Google Analytics", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=google-analytics");
+    cy.visit("http://localhost:3001?frontity_name=google-analytics");
 
     // Wait for Google Analytics to load its <script> and create `window.ga`.
     cy.window().should("have.property", "ga");
