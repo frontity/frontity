@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-16.04
     container:
       image: cypress/browsers:node12.14.1-chrome85-ff81
-      options: --user 1001
 
     strategy:
       matrix:
