@@ -5,6 +5,7 @@ on: [pull_request]
 jobs:
   e2e-tests:
     runs-on: ubuntu-16.04
+    container: cypress/browsers:node12.14.1-chrome85-ff81
 
     strategy:
       matrix:
