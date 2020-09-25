@@ -78,7 +78,7 @@ describe("author", () => {
     await store.actions.source.fetch("/author/author-1/");
 
     // Mock Api responses
-    api.get = jest.fn((unused) =>
+    api.get = jest.fn((_) =>
       Promise.resolve(
         mockResponse(
           {
