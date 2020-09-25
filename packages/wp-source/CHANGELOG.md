@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.8.4
+
+### Patch Changes
+
+- [`b8d187b3`](https://github.com/frontity/frontity/commit/b8d187b3e8b8893f604727b66f88acef6e846a0c) [#571](https://github.com/frontity/frontity/pull/571) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Revert a change introduced in https://github.com/frontity/frontity/pull/542. Keep setting `query`, `link` and `route` on all entities (including non-URL entities) in source.data
+
 ## 1.8.3
 
 ### Patch Changes
