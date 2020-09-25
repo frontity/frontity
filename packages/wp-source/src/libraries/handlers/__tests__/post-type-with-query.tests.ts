@@ -36,17 +36,19 @@ describe("postType", () => {
     // .mockResolvedValueOnce(mockResponse([]))
     // because the latter always returns the same instance of Response.
     // which results in error because response.json() can only be run once
-    api.get = jest.fn((_) => Promise.resolve(mockResponse([])));
+    api.get = jest.fn((_) =>
+      Promise.reject(new ServerError("Not Found", 404, "Not Found"))
+    );
     // Fetch entities
     await store.actions.source.fetch("/?p=1");
-    expect(api.get).toHaveBeenCalledTimes(2);
+    expect(api.get).toHaveBeenCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
   });
 
   test("should contain the correct error code on error", async () => {
     // Mock Api responses
     api.get = jest.fn(async (_) => {
-      throw new ServerError("statusText", 400, "statusText");
+      throw new ServerError("Bad Request", 400, "Bad Request");
     });
     // Fetch entities
     await store.actions.source.fetch("/?p=1");
@@ -59,7 +61,7 @@ describe("postType", () => {
 describe("post", () => {
   test("doesn't exist in source.post", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1]));
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse(post1));
     // Fetch entities
     await store.actions.source.fetch("/?p=1");
     expect(store.state.source).toMatchSnapshot();
@@ -72,35 +74,16 @@ describe("post", () => {
       response: mockResponse(post1),
     });
     // Mock Api responses
-    api.get = jest.fn();
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/?p=1");
     expect(api.get).not.toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 
-  test("fetchs from a different endpoint with extra params", async () => {
-    // Add custom post endpoint and params
-    store.state.source.postEndpoint = "multiple-post-type";
-    store.state.source.params = { type: ["post", "cpt"] };
-    store.state.source.postTypes = [
-      {
-        type: "cpt",
-        endpoint: "cpts",
-      },
-    ];
-    store.state.source.cpt = {};
-    // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
-    // Fetch entities
-    await store.actions.source.fetch("/?p=11");
-    expect(api.get.mock.calls).toMatchSnapshot();
-    expect(store.state.source).toMatchSnapshot();
-  });
-
   test("works with query params (doesn't exist in source.post)", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1]));
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse(post1));
     // Fetch entities
     await store.actions.source.fetch("/?p=1&some=param");
     expect(store.state.source).toMatchSnapshot();
@@ -113,7 +96,7 @@ describe("post", () => {
       response: mockResponse(post1),
     });
     // Mock Api responses
-    api.get = jest.fn();
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/?p=1&some=param");
     expect(api.get).not.toHaveBeenCalled();
@@ -122,7 +105,7 @@ describe("post", () => {
 
   test("works with unordered query params (doesn't exist in source.post)", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1]));
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse(post1));
     // Fetch entities
     await store.actions.source.fetch("/?z=v1&p=1&a=v2");
     expect(store.state.source).toMatchSnapshot();
@@ -142,58 +125,19 @@ describe("post", () => {
     expect(store.state.source).toMatchSnapshot();
   });
 
-  test("works with custom post types (doesn't exist in source.post)", async () => {
-    store.state.source.postTypes = [
-      {
-        endpoint: "cpts",
-        type: "cpt",
-      },
-    ];
-    store.state.source.cpt = {};
-    // Mock Api responses
-    api.get = jest
-      .fn()
-      .mockResolvedValueOnce(mockResponse([]))
-      .mockResolvedValueOnce(mockResponse([cpt11]));
-    // Fetch entities
-    await store.actions.source.fetch("/?p=11");
-    expect(store.state.source).toMatchSnapshot();
-  });
-
-  test("works with custom post types (exists in source.post)", async () => {
-    store.state.source.postTypes = [
-      {
-        endpoint: "cpts",
-        type: "cpt",
-      },
-    ];
-    store.state.source.cpt = {};
-    // Add post to the store
-    await store.libraries.source.populate({
-      state: store.state,
-      response: mockResponse(cpt11),
-    });
-    // Mock Api responses
-    api.get = jest.fn();
-    // Fetch entities
-    await store.actions.source.fetch("/?p=11");
-    expect(api.get).not.toHaveBeenCalled();
-    expect(store.state.source).toMatchSnapshot();
-  });
-
   test("works with types embedded", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1withType]));
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse(post1withType));
     // Fetch entities
     await store.actions.source.fetch("/?p=1");
     expect(store.state.source).toMatchSnapshot();
   });
 });
 
-describe.skip("page", () => {
+describe("page", () => {
   test("doesn't exist in source.page", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([page1]));
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse(page1));
     // Fetch entities
     await store.actions.source.fetch("/?page_id=1");
     expect(store.state.source).toMatchSnapshot();
@@ -215,7 +159,7 @@ describe.skip("page", () => {
 
   test("works with query params (doesn't exist in source.page)", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([page1]));
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse(page1));
     // Fetch entities
     await store.actions.source.fetch("/?page_id=1&some=param");
     expect(store.state.source).toMatchSnapshot();
@@ -228,10 +172,51 @@ describe.skip("page", () => {
       response: mockResponse(page1),
     });
     // Mock Api responses
-    api.get = jest.fn();
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/?page_id=1&some=param");
     expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+});
+
+describe("custom post type", () => {
+  test("works with custom post types (doesn't exist in source.post)", async () => {
+    store.state.source.postTypes = [
+      {
+        endpoint: "cpts",
+        type: "cpt",
+      },
+    ];
+    // Execute init and create handlers for CPT.
+    store.actions.source.init();
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse(cpt11));
+    // Fetch entities
+    await store.actions.source.fetch("/?p=11&post_type=cpt");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with custom post types (exists in source.post)", async () => {
+    store.state.source.postTypes = [
+      {
+        endpoint: "cpts",
+        type: "cpt",
+      },
+    ];
+    // Execute init and create handlers for CPT.
+    store.actions.source.init();
+    const response = mockResponse(cpt11);
+    // Add post to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response,
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/?post_type=cpt&p=11");
+    expect(api.get).not.toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 });

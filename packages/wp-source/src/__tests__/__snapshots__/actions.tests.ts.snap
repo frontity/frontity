@@ -85,13 +85,13 @@ Array [
   },
   Object {
     "func": [MockFunction],
-    "name": "post type - query permalink",
+    "name": "post with query permalink",
     "pattern": "RegExp:(\\\\?|&)p=\\\\d+",
     "priority": 10,
   },
   Object {
     "func": [MockFunction],
-    "name": "page - query permalink",
+    "name": "page with query permalink",
     "pattern": "RegExp:(\\\\?|&)page_id=\\\\d+",
     "priority": 10,
   },
@@ -157,7 +157,7 @@ Array [
   },
   Object {
     "func": [MockFunction],
-    "name": "cpt1 - query permalink",
+    "name": "cpt1 with query permalink",
     "pattern": "RegExp:(\\\\?|&)p=\\\\d+&post_type=cpt1",
     "priority": 9,
   },
@@ -169,7 +169,7 @@ Array [
   },
   Object {
     "func": [MockFunction],
-    "name": "cpt2 - query permalink",
+    "name": "cpt2 with query permalink",
     "pattern": "RegExp:(\\\\?|&)p=\\\\d+&post_type=cpt2",
     "priority": 9,
   },
@@ -216,16 +216,14 @@ exports[`actions.source.init should add new handlers from postTypes array 4`] = 
 Array [
   Array [
     Object {
-      "endpoints": Array [
-        "cpts1",
-      ],
+      "endpoint": "cpts1",
+      "type": "cpt1",
     },
   ],
   Array [
     Object {
-      "endpoints": Array [
-        "cpts2",
-      ],
+      "endpoint": "cpts2",
+      "type": "cpt2",
     },
   ],
 ]
@@ -241,13 +239,13 @@ Array [
   },
   Object {
     "func": [MockFunction],
-    "name": "post type - query permalink",
+    "name": "post with query permalink",
     "pattern": "RegExp:(\\\\?|&)p=\\\\d+",
     "priority": 10,
   },
   Object {
     "func": [MockFunction],
-    "name": "page - query permalink",
+    "name": "page with query permalink",
     "pattern": "RegExp:(\\\\?|&)page_id=\\\\d+",
     "priority": 10,
   },

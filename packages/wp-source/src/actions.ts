@@ -170,7 +170,7 @@ const actions: WpSource["actions"]["source"] = {
       });
       // Query permalink (mainly for drafts).
       handlers.push({
-        name: `${type} - query permalink`,
+        name: `${type} with query permalink`,
         priority: 9,
         pattern: `RegExp:(\\?|&)p=\\d+&post_type=${type}`,
         func: postTypeWithQueryHandler({ type, endpoint }),
