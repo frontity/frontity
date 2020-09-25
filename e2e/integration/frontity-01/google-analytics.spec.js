@@ -11,7 +11,7 @@ const expectGaToHaveBeenCalledWith = (win, data) => {
 
 const pageviewHome = {
   title: "Homepage Title",
-  link: "/?frontity_name=google-analytics",
+  link: "/",
 };
 
 const pageviewSomePost = {

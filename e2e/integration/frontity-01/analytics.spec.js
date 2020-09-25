@@ -1,6 +1,6 @@
 describe("Analytics package", () => {
   const pageviewHome = {
-    link: "/?frontity_name=analytics",
+    link: "/",
     title: "Homepage Title",
   };
 

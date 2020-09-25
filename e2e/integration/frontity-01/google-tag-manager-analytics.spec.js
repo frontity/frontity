@@ -1,7 +1,7 @@
 describe("Google Tag Manager", () => {
   const pageviewHome = {
     event: "pageview",
-    link: "/?frontity_name=google-tag-manager",
+    link: "/",
     title: "Homepage Title",
   };
 

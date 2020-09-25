@@ -1,7 +1,7 @@
 describe("Comscore", () => {
   const pageviewHome = {
     title: "Homepage Title",
-    location: "http://localhost:3001/?frontity_name=comscore-analytics",
+    location: "http://localhost:3001/",
   };
 
   const pageviewSomePost = {
