@@ -1,5 +1,0 @@
-{
-  "name": "@frontity/google-tag-manager",
-  "version": "0.3.0",
-  "description": "This package has been deprecated. Please use @frontity/google-tag-manager-analytics instead"
-}
