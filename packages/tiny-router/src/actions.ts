@@ -61,9 +61,9 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
 };
 
 /**
- * Implementatio of the `init()` frontity action as used by the tiny-router.
+ * Implementation of the `init()` Frontity action as used by the tiny-router.
  *
- * @param params - Defined in {@link TinyRouter}.
+ * @param params - The params passed to every action in frontity: `state`, `actions`, `library`.
  */
 export const init: TinyRouter["actions"]["router"]["init"] = ({
   state,
@@ -98,7 +98,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 };
 
 /**
- * Implementatio of the `beforeSSR()` frontity action as used by the tiny-router.
+ * Implementation of the `beforeSSR()` Frontity action as used by the tiny-router.
  *
  * @param ctx - The context of the Koa application.
  *
