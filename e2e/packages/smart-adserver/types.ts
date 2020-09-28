@@ -10,7 +10,7 @@ interface SmartAdserver extends Package {
     fills: {};
   };
   roots: {
-    smartAdserver: React.ReactType;
+    smartAdserver: React.ElementType;
   };
   libraries: {};
 }
