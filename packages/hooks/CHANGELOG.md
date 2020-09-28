@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.1.0-infinite-scroll-beta.3
+
+### Patch Changes
+
+- [`c702ab9f`](https://github.com/frontity/frontity/commit/c702ab9f350d9a1b217b5f51e9469f3e5c92b53e) [#575](https://github.com/frontity/frontity/pull/575) Thanks [@orballo](https://github.com/orballo)! - Use `state.source.subdirectory` and `state.source.postsPage` to get the link of the post archive in `usePostTypeInfiniteScroll`.
+
+* [`464aa87f`](https://github.com/frontity/frontity/commit/464aa87f49e57f493bb1b2725f0c8e0e4ce7d31d) [#575](https://github.com/frontity/frontity/pull/575) Thanks [@orballo](https://github.com/orballo)! - Fix `isLast` value when last post returned `isError`.
+
 ## 2.1.0-infinite-scroll-beta.2
 
 ### Minor Changes
