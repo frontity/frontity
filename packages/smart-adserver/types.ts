@@ -42,15 +42,32 @@ interface SmartAdserver extends Package {
    * Root elements exposed by this package.
    */
   roots: {
+
     /**
      * Smart Adserver root element.
      */
     smartAdserver: React.FC;
   };
+
   /**
    * State.
    */
   state: {
+    /**
+     * The namespace.
+     */
+    smartAdserver: {
+      /**
+       * NetworkId.
+       */
+      networkId?: string;
+
+      /**
+       * Subdomain.
+       */
+      subdomain?: string;
+    };
+
     /**
      * Fills.
      */
@@ -61,6 +78,7 @@ interface SmartAdserver extends Package {
       smartAdserver: {};
     };
   };
+
   /**
    * Libraries.
    */

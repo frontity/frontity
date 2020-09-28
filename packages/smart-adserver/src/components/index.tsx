@@ -1,5 +1,7 @@
 import React from "react";
 import { Head, connect } from "frontity";
+import { Connect } from "frontity/types";
+import SmartAdserver from "../../types";
 
 /**
  * Root of the Smartads package.
@@ -7,7 +9,7 @@ import { Head, connect } from "frontity";
  * @param props - Frontity injected props.
  * @returns React element.
  */
-const SmartAdserver = ({ state }) => {
+const SmartAdserver: React.FC<Connect<SmartAdserver>> = ({ state }) => {
   const { networkId, subdomain } = state.smartAdserver;
 
   React.useEffect(() => {

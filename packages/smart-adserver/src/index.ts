@@ -9,6 +9,7 @@ const SmartAdserver: SmartAdserver = {
     fills: {
       smartAdserver: {},
     },
+    smartAdserver: {}
   },
   libraries: {
     fills: {
