@@ -1286,10 +1286,10 @@ describe("usePostTypeInfiniteScroll", () => {
           link: "/post-one/",
           state: {
             infiniteScroll: {
-              limit: 2,
+              limit: 3,
               archive: "/",
               pages: ["/"],
-              links: ["/post-one/"],
+              links: ["/post-one/", "/post-two/"],
             },
           },
         },
@@ -1301,6 +1301,16 @@ describe("usePostTypeInfiniteScroll", () => {
 
     sourceGet.mockImplementation((link) => {
       if (link === "/post-one/") {
+        return {
+          link: "/post-one/",
+          next: "/post-two",
+          isReady: true,
+          isFetching: false,
+          isError: false,
+        };
+      }
+
+      if (link === "/post-two/") {
         return {
           isReady: true,
           isFetching: false,
@@ -1331,6 +1341,12 @@ describe("usePostTypeInfiniteScroll", () => {
           key: "/post-one/",
           link: "/post-one/",
           isLast: true,
+          Wrapper: expect.any(Function),
+        },
+        {
+          key: "/post-two/",
+          link: "/post-two/",
+          isLast: false,
           Wrapper: expect.any(Function),
         },
       ],

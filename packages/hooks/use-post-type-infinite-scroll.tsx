@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
 import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll, { IntersectionOptions } from "./use-infinite-scroll";
-import Source from "@frontity/source/types";
+import WpSource from "@frontity/wp-source/types";
 import Router from "@frontity/router/types";
 
 /**
@@ -123,7 +123,7 @@ export const Wrapper = ({
 }): React.FC =>
   connect(
     ({ children, className }) => {
-      const { state } = useConnect<Source & Router>();
+      const { state } = useConnect<WpSource & Router>();
 
       // Values from browser state.
       const links: string[] = state.router.state.infiniteScroll?.links || [
@@ -226,7 +226,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
   const defaultOptions = { active: true };
   options = { ...defaultOptions, ...options };
 
-  const { state, actions } = useConnect<Source & Router>();
+  const { state, actions } = useConnect<WpSource & Router>();
 
   // Values for browser state.
   const archive: string = (() => {
@@ -252,6 +252,19 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     if (options.fallback) {
       return options.fallback;
     }
+
+    // If subdirectory (and postsPage) exist, return them.
+    if (state.source.subdirectory) {
+      const subdirectory = state.source.subdirectory.replace(/^\/?|\/?$/g, "/");
+
+      if (state.source.postsPage) return subdirectory + state.source.postsPage;
+
+      return subdirectory;
+    }
+
+    // If postsPage exists, return it.
+    if (state.source.postsPage)
+      return state.source.postsPage.replace(/^\/?|\/?$/g, "/");
 
     // Return home as default.
     return "/";
@@ -416,9 +429,9 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     key: link,
     link: link,
     isLast:
-      (link === last.link && last.isReady) ||
-      (link === links[links.length - 1] && !!last.isError) ||
-      (link === links[links.length - 2] && !last.isReady),
+      (link === last.link && !!last.isReady && !last.isError) ||
+      (link === links[links.length - 2] && !last.isReady) ||
+      (link === links[links.length - 2] && !!last.isReady && !!last.isError),
     Wrapper: MemoizedWrapper(link, {
       fetchInViewOptions: options.fetchInViewOptions,
       routeInViewOptions: options.routeInViewOptions,

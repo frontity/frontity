@@ -517,7 +517,11 @@ describe("useArchiveInfiniteScroll", () => {
       state: {
         router: {
           link: "/",
-          state: {},
+          state: {
+            infiniteScroll: {
+              links: ["/", "/page/2/"],
+            },
+          },
         },
         source: {
           get: sourceGet,
@@ -535,7 +539,7 @@ describe("useArchiveInfiniteScroll", () => {
     });
 
     act(() => {
-      render(<App options={{ limit: 3 }} />, container);
+      render(<App />, container);
     });
 
     expect(spiedUseArchiveInfiniteScroll).toHaveBeenCalledTimes(1);
@@ -545,6 +549,12 @@ describe("useArchiveInfiniteScroll", () => {
           key: "/",
           link: "/",
           isLast: true,
+          Wrapper: expect.any(Function),
+        },
+        {
+          key: "/page/2/",
+          link: "/page/2/",
+          isLast: false,
           Wrapper: expect.any(Function),
         },
       ],
