@@ -49,7 +49,7 @@ const twentyTwentyTheme = {
 
       /**
        * At the moment, we only include the ascii characters of Inter font.
-       * Values can be "us-ascii" | "latin" | "all"
+       * Values can be "us-ascii" | "latin" | "all".
        */
       fontSets: "all",
     },
@@ -78,7 +78,7 @@ const twentyTwentyTheme = {
     html2react: {
       /**
        * Add a processor to `html2react` so it processes the `<img>` tags
-       * inside the content HTML. You can add your own processors too
+       * inside the content HTML. You can add your own processors too.
        */
       processors: [image],
     },

@@ -13,6 +13,25 @@ export const config = {
 };
 
 /**
+ * Parses the WP URL form state.source.api
+ *
+ * @param api - The API URL
+ * @param isWpCom - Whether this is a wp.com site.
+ *
+ * @returns The WP URL
+ */
+const getWpUrl = (api: string, isWpCom: boolean): URL => {
+  const apiUrl = new URL(api);
+  if (isWpCom) {
+    const { pathname } = apiUrl;
+    return new URL(pathname.replace(/^\/wp\/v2\/sites\//, "https://"));
+  }
+  // Get API subdirectory.
+  const apiSubdir = apiUrl.pathname.replace(/\/wp-json\/?$/, "/");
+  return new URL(apiSubdir, apiUrl);
+};
+
+/**
  * Process the queue of links to prefetch.
  *
  * @param prefetcher The function used to prefetch the link.
@@ -146,7 +165,7 @@ export interface LinkProps {
  * @returns An HTML anchor element.
  */
 const Link: React.FC<LinkProps> = ({
-  link,
+  link: rawLink,
   children,
   onClick,
   target = "_self",
@@ -172,6 +191,10 @@ const Link: React.FC<LinkProps> = ({
     },
     [inViewRef]
   );
+
+  const link = rawLink
+    .replace(`http://${getWpUrl(state.source.api, false)}`, "")
+    .replace(`https://${getWpUrl(state.source.api, false)}`, "");
 
   if (!link || typeof link !== "string") {
     warn("link prop is required and must be a string");
