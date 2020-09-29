@@ -1,8 +1,8 @@
 /**
  * Types of a Frontity package.
  *
- * The main purpose of this interface is to be extended by the specific types
- * of a Frontity package.
+ * The main purpose of this interface is to be extended by the specific types of
+ * a Frontity package.
  */
 export interface Package {
   /**
@@ -27,7 +27,7 @@ export interface Package {
      */
     frontity?: {
       /**
-       * The name of the site
+       * The name of the site.
        *
        * Populated automatically by Frontity.
        */
@@ -41,9 +41,20 @@ export interface Package {
       initialLink?: string;
 
       /**
+       * Options for a frontity app that are parsed from the URL query string of
+       * the page. This is for example used by `@frontity/core` to get the name
+       * of the site from the `frontity_name` param in a multi-site WordPress
+       * setup.
+       *
+       * @example `frontity_name`
+       */
+      options?: Record<string, string>;
+
+      /**
        * The mode of this site.
        *
-       * @deprecated
+       * @deprecated This parameter is deprecated. It could be used to choose to
+       * render Frontity to `html` or `amp`.
        */
       mode?: string;
 
@@ -53,7 +64,7 @@ export interface Package {
        * Useful to test some packages that can do different things in debug
        * mode, like for example the slot and fills.
        *
-       * @default false
+       * @defaultValue false
        */
       debug?: boolean;
 
@@ -74,11 +85,12 @@ export interface Package {
 
       /**
        * Indicates if Frontity is in server-side rendering or client-side
-       * rendering context. The difference between this and `state.frontity.platform`
-       * is that `state.frontity.rendering` is still `"ssr"` in the first frame
-       * of the client. That is useful when working with components that are
-       * different when server-side rendering and client-side rendering, because
-       * it won't cause a mismatch warning in the React hydration.
+       * rendering context. The difference between this and
+       * `state.frontity.platform` is that `state.frontity.rendering` is still
+       * `"ssr"` in the first frame of the client. That is useful when working
+       * with components that are different when server-side rendering and
+       * client-side rendering, because it won't cause a mismatch warning in the
+       * React hydration.
        *
        * Populated automatically by Frontity.
        */
@@ -118,7 +130,7 @@ export interface Package {
     /**
      * The rest of the state exposed by this package.
      *
-     * @todo Replace `any` with serializable objects and derived state.
+     * TODO: Replace `any` with serializable objects and derived state.
      */
     [namespace: string]: {
       [key: string]: any;
@@ -173,9 +185,9 @@ interface Action {
    * actions.myPackage.someAction();
    * ```
    *
-   * @param store An object containing `state`, `actions` and `libraries`.
+   * @param store - An object containing `state`, `actions` and `libraries`.
    *
-   * @returns void or Promise<void> if it is an async action.
+   * @returns Void or Promise<void> if it is an async action.
    */
   (store: Pick<Package, "state" | "actions" | "libraries">): void | Promise<
     void
@@ -197,7 +209,7 @@ interface Action {
    * @param store - An object containing `state`, `actions` and `libraries`.
    * @param args - Any number of arguments.
    *
-   * @returns void or Promise<void> if it is an async action.
+   * @returns Void or Promise<void> if it is an async action.
    */
   (store: Pick<Package, "state" | "actions" | "libraries">): (
     ...args: any
@@ -221,19 +233,22 @@ export interface Fill {
   slot: string;
 
   /**
-   * The name of the React component that it should be stored in `libraries.fills`.
+   * The name of the React component that it should be stored in
+   * `libraries.fills`.
    */
   library: string;
 
   /**
-   * The priority of this fill in relation to the other fills that also point to the same `slot`.
+   * The priority of this fill in relation to the other fills that also point to
+   * the same `slot`.
    *
-   * @default 10
+   * @defaultValue 10
    */
   priority?: number;
 
   /**
-   * Optional object with props that will be passed to the React component defined in `library`.
+   * Optional object with props that will be passed to the React component
+   * defined in `library`.
    */
   props?: {
     [key: string]: any;

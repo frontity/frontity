@@ -73,7 +73,7 @@ describe("Head Tags - Yoast 13.5", () => {
    * @param options - Visit options.
    */
   const visitLink = (link, options) => {
-    cy.visit(`http://localhost:3001${link}?name=head-tags`, options);
+    cy.visit(`http://localhost:3001${link}?frontity_name=head-tags`, options);
   };
 
   /**

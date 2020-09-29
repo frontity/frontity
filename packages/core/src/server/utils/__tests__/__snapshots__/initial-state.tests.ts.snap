@@ -12,6 +12,7 @@ Object {
     ],
     "mode": "html",
     "name": "site",
+    "options": Object {},
     "packages": Array [
       "package1",
       "package2",

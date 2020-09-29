@@ -3,7 +3,7 @@ import expect from "expect";
 describe("Native iframe lazy-load", () => {
   beforeEach(() => {
     cy.viewport(360, 640);
-    cy.visit("http://localhost:3001?name=iframe");
+    cy.visit("http://localhost:3001?frontity_name=iframe");
   });
 
   it("native lazy-load should exist", () => {
@@ -24,7 +24,7 @@ describe("Native iframe lazy-load", () => {
 describe("Iframe lazy-load with Intersection Observer", () => {
   beforeEach(() => {
     cy.viewport(360, 640);
-    cy.visit("http://localhost:3001?name=iframe", {
+    cy.visit("http://localhost:3001?frontity_name=iframe", {
       onBeforeLoad(win) {
         Object.defineProperty(win.HTMLIFrameElement.prototype, "loading", {
           configurable: true,
