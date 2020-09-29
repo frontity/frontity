@@ -275,7 +275,9 @@ const actions: WpSource["actions"]["source"] = {
   },
 
   afterSSR: ({ state }) => {
+    // Remove the auth tokens that were used in the server.
     delete state.source.auth;
+    delete state.frontity.options.sourceAuth;
   },
 };
 export default actions;
