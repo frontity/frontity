@@ -9,7 +9,7 @@ import SmartAdserver from "../../types";
  * @param props - Frontity injected props.
  * @returns React element.
  */
-const SmartAdserver: React.FC<Connect<SmartAdserver>> = ({ state }) => {
+const Root: React.FC<Connect<SmartAdserver>> = ({ state }) => {
   const { networkId, subdomain } = state.smartAdserver;
 
   React.useEffect(() => {
@@ -30,4 +30,4 @@ const SmartAdserver: React.FC<Connect<SmartAdserver>> = ({ state }) => {
   );
 };
 
-export default connect(SmartAdserver);
+export default connect(Root);

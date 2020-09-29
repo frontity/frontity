@@ -1,10 +1,10 @@
-import smartAdserver from "./components";
+import Root from "./components";
 import SmartAdserver from "../types";
 import SmartAd from "./components/smart-ad";
 
-const SmartAdserver: SmartAdserver = {
+const smartAdserver: SmartAdserver = {
   roots: {
-    smartAdserver,
+    smartAdserver: Root,
   },
   state: {
     fills: {
@@ -19,4 +19,4 @@ const SmartAdserver: SmartAdserver = {
   },
 };
 
-export default SmartAdserver;
+export default smartAdserver;
