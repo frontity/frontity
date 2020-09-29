@@ -204,6 +204,26 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "smart-adserver",
+    packages: [
+      "e2e-smart-adserver",
+      {
+        name: "@frontity/smart-adserver",
+        state: {
+          fills: {
+            smartAdserver: {
+              headerAd: {
+                slot: "header",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
