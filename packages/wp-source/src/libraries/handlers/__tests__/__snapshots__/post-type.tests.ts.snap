@@ -228,7 +228,7 @@ Object {
       "isReady": false,
     },
     "/post-1/": Object {
-      "id": 1,
+      "id": 2,
       "isFetching": false,
       "isPost": true,
       "isPostType": true,
@@ -282,6 +282,36 @@ Object {
       ],
       "featured_media": 1,
       "id": 1,
+      "link": "/post-1/",
+      "slug": "post-1",
+      "tags": Array [
+        1,
+      ],
+      "type": "post",
+    },
+    "2": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 2,
       "link": "/post-1/",
       "slug": "post-1",
       "tags": Array [
