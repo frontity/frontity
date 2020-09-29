@@ -295,7 +295,7 @@ const settings: Settings = [
   },
   {
     name: "embedded-mode",
-    match: ["http://172.17.0.1:3001"],
+    match: [process.env.FRONTITY_SERVER],
     state: {
       frontity: {
         url: "http://localhost:8080",
