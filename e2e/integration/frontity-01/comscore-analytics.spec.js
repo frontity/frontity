@@ -1,7 +1,7 @@
 describe("Comscore", () => {
   const pageviewHome = {
     title: "Homepage Title",
-    location: "http://localhost:3001/?name=comscore-analytics",
+    location: "http://localhost:3001/",
   };
 
   const pageviewSomePost = {
@@ -12,7 +12,7 @@ describe("Comscore", () => {
   let ImageBackup;
 
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=comscore-analytics", {
+    cy.visit("http://localhost:3001?frontity_name=comscore-analytics", {
       onBeforeLoad(win) {
         // Comscore requests are images so here
         // we overwrite the `Image` class, just during this tests.
