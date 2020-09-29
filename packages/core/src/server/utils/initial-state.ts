@@ -8,8 +8,9 @@ import snakeToCamel from "../../utils/snake-to-camel";
  */
 interface StateOptions {
   /**
-   * Settings for a frontity project.
-   * They are defined in a [frontity.settings.js](https://docs.frontity.org/learning-frontity/project#the-frontity-setting-js-file) file.
+   * Settings for a frontity project. They are defined in a
+   * [frontity.settings.js](https://docs.frontity.org/learning-frontity/project#the-frontity-setting-js-file)
+   * file.
    */
   settings: NormalizedSettings;
   /**
@@ -29,12 +30,13 @@ const state = ({ settings, url }: StateOptions) => {
   const { searchParams } = url;
   const options = {};
 
-  // Get all the params in the query string that start with "frontity_"
+  // Get all the params in the query string that start with "frontity_".
   const paramsToDelete = Array.from(searchParams.entries())
     .map(([key]) => key)
     .filter((param) => param.startsWith("frontity_"));
 
-  // Delete all of them from the `searchParams` and at the same time add them to `options`
+  // Delete all of them from the `searchParams` and at the same time add them to
+  // `options`.
   paramsToDelete.forEach((param) => {
     if (searchParams.has(param)) {
       const key = snakeToCamel(param.replace("frontity_", ""));

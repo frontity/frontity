@@ -40,10 +40,11 @@ interface ServerOptions {
 /**
  * Create the Frontity server.
  *
- * @param options - Options passed when creating the server.
- * - `packages`: A map of module names to Frontity packages.
+ * @param options - Options passed when creating the server. Defined in {@link
+ * ServerOptions}.
  *
- * @returns A Frontity server which is a request handler callback for node's native http/http2 server.
+ * @returns A Frontity server which is a request handler callback for node's
+ * native http/http2 server.
  */
 const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   const app = new Koa();
@@ -77,8 +78,8 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   );
 
   /**
-   * A helper function for setting 404 status.
-   * It's used to ignore HMR if not in dev mode or old browser open.
+   * A helper function for setting 404 status. It's used to ignore HMR if not in
+   * dev mode or old browser open.
    *
    * @param ctx - The Koa app context.
    */
@@ -97,8 +98,8 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
     const moduleStats = await getStats({ target: "module" });
     // Get es5 chunk stats.
     const es5Stats = await getStats({ target: "es5" });
-    // If present, module is the main chunk. This means that we can only
-    // use es5 for HMR if module is not present.
+    // If present, module is the main chunk. This means that we can only use es5
+    // for HMR if module is not present.
     const stats = moduleStats || es5Stats;
 
     // Get settings.
@@ -131,13 +132,14 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
       })
     );
 
-    // Pass a context to HelmetProvider which will hold our state specific to each request.
+    // Pass a context to HelmetProvider which will hold our state specific to
+    // each request.
     const helmetContext = {} as FilledContext;
 
     const Component = <App store={store} helmetContext={helmetContext} />;
 
-    // If there's no client stats or there is no client entrypoint for the site we
-    // want to load, we don't extract scripts.
+    // If there's no client stats or there is no client entrypoint for the site
+    // we want to load, we don't extract scripts.
     if (stats && hasEntryPoint({ stats, site: settings.name })) {
       // Run renderToString with ChunkExtractor to get the html.
       const extractor = new ChunkExtractor({
@@ -147,9 +149,9 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
       const jsx = extractor.collectChunks(Component);
       html = renderToString(jsx);
 
-      // Run afterSSR actions.
-      // It runs at this point because we want to run it before taking the state snapshot.
-      // This gives the user a chance to modify the state before sending it to the client
+      // Run afterSSR actions. It runs at this point because we want to run it
+      // before taking the state snapshot. This gives the user a chance to
+      // modify the state before sending it to the client
       Object.values(store.actions).forEach(({ afterSSR }) => {
         if (afterSSR) afterSSR();
       });
