@@ -226,10 +226,12 @@ describe("attachment", () => {
     // Fetch entities
     await store.actions.source.fetch("/post-1");
 
+    // Restore the mock
     api.get = jest.fn((_) =>
       Promise.resolve(mockResponse([{ ...post1, id: 2 }]))
     );
 
+    // Fetch again
     await store.actions.source.fetch("/post-1", { force: true });
 
     expect(store.state.source).toMatchSnapshot();
