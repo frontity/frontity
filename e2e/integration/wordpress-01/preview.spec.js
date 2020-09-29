@@ -42,137 +42,146 @@ describe("Preview plugin", () => {
       // Frontity should have been loaded.
       cy.window().should("have.property", "frontity");
       // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Hello world!");
-      cy.get('div[class*="Content"] > p').should(
+      cy.get("[data-test-id='title']").should("have.text", "Hello world!");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+        "\nWelcome to WordPress. This is your first post. Edit or delete it, then start writing!\n"
       );
     });
 
     it("a post revision should be accessible", () => {
       cy.visit("http://localhost:8080/hello-world/?preview_id=1&preview=true");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Hello world! (edited)");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should(
         "have.text",
-        "The content of this post was modified."
+        "Hello world! (edited)"
+      );
+      cy.get("[data-test-id='content']").should(
+        "have.text",
+        "\nThe content of this post was modified.\n"
       );
     });
 
     it("a post draft should be accessible", () => {
       cy.visit("http://localhost:8080/?p=5&preview=true");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "This is a draft");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should("have.text", "This is a draft");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This post is just a draft and it should not be publicly accessible."
+        "\nThis post is just a draft and it should not be publicly accessible.\n"
       );
     });
 
     it("a published page should be accessible", () => {
       cy.visit("http://localhost:8080/sample-page/");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Sample Page");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should("have.text", "Sample Page");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This is an example page."
+        "\nThis is an example page.\n"
       );
     });
 
     it("a page revision should be accessible", () => {
       cy.visit("http://localhost:8080/sample-page/?preview_id=2&preview=true");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Sample Page (edited)");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should(
         "have.text",
-        "This page was modified."
+        "Sample Page (edited)"
+      );
+      cy.get("[data-test-id='content']").should(
+        "have.text",
+        "\nThis page was modified.\n"
       );
     });
 
     it("a page draft should be accessible", () => {
       cy.visit("http://localhost:8080/?page_id=9&preview=true");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "This is a page draft");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should(
         "have.text",
-        "This page is just a draft and it should not be publicly accessible."
+        "This is a page draft"
+      );
+      cy.get("[data-test-id='content']").should(
+        "have.text",
+        "\nThis page is just a draft and it should not be publicly accessible.\n"
       );
     });
 
-    it("a published CPT should be accessible", () => {
+    it("a published cpt should be accessible", () => {
       cy.visit("http://localhost:8080/movie/published-movie/");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Published movie");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should("have.text", "Published movie");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This is a published movie."
+        "\nThis is a published movie.\n"
       );
     });
 
-    it("a CPT revision should be accessible", () => {
+    it("a cpt revision should be accessible", () => {
       cy.visit(
         "http://localhost:8080/movie/published-movie/?preview_id=16&preview=true"
       );
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should(
         "have.text",
         "Published movie (edited)"
       );
-      cy.get('div[class*="Content"] > p').should(
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This movie was modified."
+        "\nThis movie was modified.\n"
       );
     });
 
-    it("a CPT draft should be accessible", () => {
+    it("a cpt draft should be accessible", () => {
       cy.visit("http://localhost:8080/?post_type=movie&p=17&preview=true");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Movie draft");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should("have.text", "Movie draft");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This is a movie draft."
+        "\nThis is a movie draft.\n"
       );
     });
   });
 
-  describe("Logged out from WordPress", () => {
+  describe("logged out from wordpress", () => {
     it("a published post should be accessible", () => {
       cy.visit("http://localhost:8080/hello-world/");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Hello world!");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should("have.text", "Hello world!");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+        "\nWelcome to WordPress. This is your first post. Edit or delete it, then start writing!\n"
       );
     });
 
     it("a post revision should not be accessible", () => {
       cy.visit("http://localhost:8080/hello-world/?preview_id=1&preview=true");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Hello world!");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should("have.text", "Hello world!");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+        "\nWelcome to WordPress. This is your first post. Edit or delete it, then start writing!\n"
       );
     });
 
@@ -185,25 +194,25 @@ describe("Preview plugin", () => {
 
     it("a published page should be accessible", () => {
       cy.visit("http://localhost:8080/sample-page/");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Sample Page");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should("have.text", "Sample Page");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This is an example page."
+        "\nThis is an example page.\n"
       );
     });
 
     it("a page revision should not be accessible", () => {
       cy.visit("http://localhost:8080/sample-page/?preview_id=2&preview=true");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should come from the published version.
-      cy.get('h1[class*="Title"]').should("have.text", "Sample Page");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should come from the published version.
+      cy.get("[data-test-id='title']").should("have.text", "Sample Page");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This is an example page."
+        "\nThis is an example page.\n"
       );
     });
 
@@ -214,33 +223,33 @@ describe("Preview plugin", () => {
       }).should("have.property", "status", 401);
     });
 
-    it("a published CPT should be accessible", () => {
+    it("a published cpt should be accessible", () => {
       cy.visit("http://localhost:8080/movie/published-movie/");
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should be correct.
-      cy.get('h1[class*="Title"]').should("have.text", "Published movie");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should be correct.
+      cy.get("[data-test-id='title']").should("have.text", "Published movie");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This is a published movie."
+        "\nThis is a published movie.\n"
       );
     });
 
-    it("a CPT revision should not be accessible", () => {
+    it("a cpt revision should not be accessible", () => {
       cy.visit(
         "http://localhost:8080/movie/published-movie/?preview_id=16&preview=true"
       );
-      // Frontity should have been loaded.
+      // frontity should have been loaded.
       cy.window().should("have.property", "frontity");
-      // Title and content should come from the published version.
-      cy.get('h1[class*="Title"]').should("have.text", "Published movie");
-      cy.get('div[class*="Content"] > p').should(
+      // title and content should come from the published version.
+      cy.get("[data-test-id='title']").should("have.text", "Published movie");
+      cy.get("[data-test-id='content']").should(
         "have.text",
-        "This is a published movie."
+        "\nThis is a published movie.\n"
       );
     });
 
-    it("a CPT draft should not be accessible", () => {
+    it("a cpt draft should not be accessible", () => {
       cy.request({
         url: "http://localhost:8080/?post_type=movie&p=17&preview=true",
         failOnStatusCode: false,

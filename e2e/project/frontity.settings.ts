@@ -302,9 +302,7 @@ const settings: Settings = [
       },
     },
     packages: [
-      "@frontity/tiny-router",
-      "@frontity/html2react",
-      "@frontity/mars-theme",
+      "e2e-preview",
       {
         name: "@frontity/wp-source",
         state: {
