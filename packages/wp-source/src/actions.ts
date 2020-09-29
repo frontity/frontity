@@ -124,7 +124,7 @@ const actions: WpSource["actions"]["source"] = {
 
     // If the URL contains an auth token, then add it to the state.
     // This is normally the case e.g, when accessing the post preview.
-    const auth = state.frontity?.options?.frontitySourceAuth;
+    const auth = state.frontity?.options?.sourceAuth;
     const authFromEnv = process.env.FRONTITY_SOURCE_AUTH;
     if (auth || authFromEnv) {
       state.source.auth = auth || authFromEnv;

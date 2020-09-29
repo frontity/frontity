@@ -57,8 +57,7 @@ it("should pass the value of FRONTITY_SOURCE_AUTH to state.source.auth", async (
 it("should pass the frontitySourceAuth option to state.source.auth", async () => {
   const authToken = "test-2";
 
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  store.state.frontity = { options: { frontitySourceAuth: authToken } };
+  store.state.frontity = { options: { sourceAuth: authToken } };
 
   // Initialize wp-source package
   store.actions.source.init();
@@ -72,8 +71,7 @@ it("should use the value from `options` if both the state.source.auth and FRONTI
 
   store.state.frontity = {
     options: {
-      // eslint-disable-next-line @typescript-eslint/camelcase
-      frontitySourceAuth: "This is used indeed",
+      sourceAuth: "This is used indeed",
     },
   };
 
