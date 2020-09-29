@@ -1,9 +1,3 @@
-// This is a temporary fix so ESLint does not complain about missing TSDocs.
-// Those will be added in a different PR.
-// See https://github.com/frontity/frontity/pull/568.
-
-/* eslint-disable */
-
 import { fetch } from "frontity";
 import { stringify } from "query-string";
 import { ServerError } from "@frontity/source";
