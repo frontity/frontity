@@ -1,8 +1,8 @@
 /**
  * Types of a Frontity package.
  *
- * The main purpose of this interface is to be extended by the specific types
- * of a Frontity package.
+ * The main purpose of this interface is to be extended by the specific types of
+ * a Frontity package.
  */
 export interface Package {
   /**
@@ -41,9 +41,10 @@ export interface Package {
       initialLink?: string;
 
       /**
-       * Options for a frontity app that are parsed from the URL query string of the page.
-       * This is for example used by `@frontity/core` to get the name of the site from
-       * the `frontity_name` param in a multi-site WordPress setup.
+       * Options for a frontity app that are parsed from the URL query string of
+       * the page. This is for example used by `@frontity/core` to get the name
+       * of the site from the `frontity_name` param in a multi-site WordPress
+       * setup.
        *
        * @example `frontity_name`
        */
@@ -52,7 +53,8 @@ export interface Package {
       /**
        * The mode of this site.
        *
-       * @deprecated This parameter is deprecated. It could be used to choose to render Frontity to `html` or `amp`.
+       * @deprecated This parameter is deprecated. It could be used to choose to
+       * render Frontity to `html` or `amp`.
        */
       mode?: string;
 
@@ -83,11 +85,12 @@ export interface Package {
 
       /**
        * Indicates if Frontity is in server-side rendering or client-side
-       * rendering context. The difference between this and `state.frontity.platform`
-       * is that `state.frontity.rendering` is still `"ssr"` in the first frame
-       * of the client. That is useful when working with components that are
-       * different when server-side rendering and client-side rendering, because
-       * it won't cause a mismatch warning in the React hydration.
+       * rendering context. The difference between this and
+       * `state.frontity.platform` is that `state.frontity.rendering` is still
+       * `"ssr"` in the first frame of the client. That is useful when working
+       * with components that are different when server-side rendering and
+       * client-side rendering, because it won't cause a mismatch warning in the
+       * React hydration.
        *
        * Populated automatically by Frontity.
        */
@@ -230,19 +233,22 @@ export interface Fill {
   slot: string;
 
   /**
-   * The name of the React component that it should be stored in `libraries.fills`.
+   * The name of the React component that it should be stored in
+   * `libraries.fills`.
    */
   library: string;
 
   /**
-   * The priority of this fill in relation to the other fills that also point to the same `slot`.
+   * The priority of this fill in relation to the other fills that also point to
+   * the same `slot`.
    *
    * @defaultValue 10
    */
   priority?: number;
 
   /**
-   * Optional object with props that will be passed to the React component defined in `library`.
+   * Optional object with props that will be passed to the React component
+   * defined in `library`.
    */
   props?: {
     [key: string]: any;

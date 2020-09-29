@@ -21,17 +21,18 @@ interface Init {
  */
 interface Get {
   /**
-   * Used to specify the kind of the WordPress REST API endpoint.
-   * Used to construct the final URL from which data will be fetched.
+   * Used to specify the kind of the WordPress REST API endpoint. Used to
+   * construct the final URL from which data will be fetched.
    *
-   * It should be the name of the endpoint if is a `/wp/v2 endpoint` (e.g. `posts`),
-   * or the full path of other REST endpoints (e.g. `/acf/v3/posts`).
+   * It should be the name of the endpoint if is a `/wp/v2 endpoint` (e.g.
+   * `posts`), or the full path of other REST endpoints (e.g. `/acf/v3/posts`).
    *
    * @example "posts", "pages"
    */
   endpoint: string;
   /**
-   * The URL params used to create the query string in the final `fetch()` request.
+   * The URL params used to create the query string in the final `fetch()`
+   * request.
    *
    * @example
    * ```
@@ -56,7 +57,8 @@ interface Get {
 }
 
 /**
- * A container class which handles fetching the data from the WordPress REST API.
+ * A container class which handles fetching the data from the WordPress REST
+ * API.
  */
 class Api {
   api = "";
@@ -79,7 +81,8 @@ class Api {
    * @param this - The instance of the {@link Api}.
    * @param params - Defined in {@link Get}.
    *
-   * @returns A Promise that resolves to the `Response` object retuned from `fetch()`.
+   * @returns A Promise that resolves to the `Response` object retuned from
+   * `fetch()`.
    */
   get(
     this: Api,
@@ -88,8 +91,8 @@ class Api {
     // Ensure there is a final slash
     const baseUrl = api.replace(/\/?$/, "/");
 
-    // Add the REST path depending on whether it should start
-    // with "/wp/v2" or not
+    // Add the REST path depending on whether it should start with "/wp/v2" or
+    // not
     const requestUrl =
       isWpCom || endpoint.startsWith("/")
         ? `${baseUrl}${endpoint.replace(/^\//, "")}`
@@ -114,7 +117,8 @@ class Api {
   }
 
   /**
-   * A helper method for getting the ID of a particular entity based on it's slug.
+   * A helper method for getting the ID of a particular entity based on it's
+   * slug.
    *
    * @param endpoint - The endpoint from which to fetch the entity.
    * @param slug - The slug of the entity.

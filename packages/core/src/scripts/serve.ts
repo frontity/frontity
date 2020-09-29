@@ -13,7 +13,8 @@ interface ServeOptions {
    */
   port: number;
   /**
-   * Whether to start the server with `https` using a local self-signed certificate.
+   * Whether to start the server with `https` using a local self-signed
+   * certificate.
    */
   isHttps: boolean;
 }

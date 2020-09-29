@@ -4,17 +4,18 @@ import { warn } from "frontity";
 /**
  * Set the URL.
  *
- * @param link - The URL that will replace the current one.
- * It can be a path like `/category/nature/`, a path that includes the page `/category/nature/page/2`
- * or the full URL `https://site.com/category/nature`.
+ * @param link - The URL that will replace the current one. It can be a path
+ * like `/category/nature/`, a path that includes the page
+ * `/category/nature/page/2` or the full URL `https://site.com/category/nature`.
  *
  * @param options - An optional configuration object that can contain:
  * - `method` "push" | "replace" (default: "push").
  *
- * The method used in the action. "push" corresponds to window.history.pushState and "replace" to window.history.replaceState.
+ * The method used in the action. "push" corresponds to window.history.pushState
+ * and "replace" to window.history.replaceState.
  *
- * - `state` - An object that will be saved in window.history.state.
- * This object is recovered when the user go back and forward using the browser buttons.
+ * - `state` - An object that will be saved in window.history.state. This object
+ *   is recovered when the user go back and forward using the browser buttons.
  *
  * @example
  * ```
@@ -63,7 +64,8 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
 /**
  * Implementation of the `init()` Frontity action as used by the tiny-router.
  *
- * @param params - The params passed to every action in frontity: `state`, `actions`, `library`.
+ * @param params - The params passed to every action in frontity: `state`,
+ * `actions`, `library`.
  */
 export const init: TinyRouter["actions"]["router"]["init"] = ({
   state,
@@ -98,7 +100,8 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 };
 
 /**
- * Implementation of the `beforeSSR()` Frontity action as used by the tiny-router.
+ * Implementation of the `beforeSSR()` Frontity action as used by the
+ * tiny-router.
  *
  * @param ctx - The context of the Koa application.
  *
