@@ -47,13 +47,6 @@ const actions: WpSource["actions"]["source"] = {
         };
       }
     } else if ((data.isReady && !force) || data.isFetching || data.isError) {
-      // If the link starts with "@" it means that it's a non-URL resource, e.g a WordPress comment.
-      // In that case it makes no sense to set `link`, `query` and `route`.
-      if (link.startsWith("@")) {
-        data.page = page;
-        return;
-      }
-
       // Always set link, route, query & page
       data.link = link;
       data.route = linkParams.route;
@@ -62,15 +55,10 @@ const actions: WpSource["actions"]["source"] = {
       return;
     }
 
-    // If the link starts with "@" it means that it's a non-URL resource, e.g a WordPress comment.
-    // In that case it would make no sense to set `link`, `query` and `route`.
-    if (!link.startsWith("@")) {
-      source.data[link].link = link;
-      source.data[link].route = linkParams.route;
-      source.data[link].query = query;
-    }
-
-    // Always set the page
+    // Always set link, route, query & page
+    source.data[link].link = link;
+    source.data[link].route = linkParams.route;
+    source.data[link].query = query;
     source.data[link].page = page;
 
     // Make sure isFetching is true before starting the fetch.
@@ -133,6 +121,14 @@ const actions: WpSource["actions"]["source"] = {
     }
 
     libraries.source.api.init({ api, isWpCom });
+
+    // If the URL contains an auth token, then add it to the state.
+    // This is normally the case e.g, when accessing the post preview.
+    const auth = state.frontity?.options?.sourceAuth;
+    const authFromEnv = process.env.FRONTITY_SOURCE_AUTH;
+    if (auth || authFromEnv) {
+      state.source.auth = auth || authFromEnv;
+    }
 
     // Handlers & redirections.
     const { handlers, redirections } = libraries.source;
@@ -276,6 +272,12 @@ const actions: WpSource["actions"]["source"] = {
         func: () => "",
       });
     }
+  },
+
+  afterSSR: ({ state }) => {
+    // Remove the auth tokens that were used in the server.
+    delete state.source.auth;
+    delete state.frontity.options.sourceAuth;
   },
 };
 export default actions;

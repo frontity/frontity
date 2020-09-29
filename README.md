@@ -102,7 +102,7 @@ React is a JavaScript library. In order to generate HTML for the visitors or Goo
 
 > _In theory a PHP server can send an empty HTML with the JavaScript files and the visitor will see the page after the JavaScript has loaded, but it is not a good user experience and certainly not recommended if your site needs to rank in Google._
 
-**Frontity** is prepared to be hosted either in a regular Node.js server or in **serverless** services like [AWS Lambda](https://aws.amazon.com/lambda), [Now](https://zeit.co/now), [Netlify](https://www.netlify.com/), [Google Functions](https://cloud.google.com/functions/) and so on. That makes it super cheap and infinitely scalable.
+**Frontity** is prepared to be hosted either in a regular Node.js server or in **serverless** services like [AWS Lambda](https://aws.amazon.com/lambda), [Vercel](https://vercel.com/home), [Netlify](https://www.netlify.com/), [Google Functions](https://cloud.google.com/functions/) and so on. That makes it super cheap and infinitely scalable.
 
 Oh, and by the way, **Frontity is extensible**. It allows you to easily add new features to your theme via extensions and NPM packages without having to create them from scratch. Right now, we are working on extensions like _Disqus comments, OneSignal notifications, Adsense, Doubleclick, SmartAds, Google Analytics, Google Tag Manager, Custom CSS or Custom HTML_. This means, Frontity Themes won't have to reinvent the wheel and include the same functionalities over and over.
 

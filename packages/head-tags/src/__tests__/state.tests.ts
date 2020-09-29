@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import clone from "clone-deep";
+import { State } from "frontity/types";
 import { createStore, InitializedStore } from "@frontity/connect";
 import wpSource from "@frontity/wp-source/src";
-import HeadTagsPackage, { State, HeadTags } from "../../types";
+import { Packages, HeadTag } from "../../types";
 import headTagsPackage from "..";
 import {
   mockPostEntity,
@@ -15,12 +16,12 @@ import {
 const warn = jest.spyOn(global.console, "warn");
 
 // Mock Frontity state.
-let store: InitializedStore<HeadTagsPackage>;
+let store: InitializedStore<Packages>;
 beforeEach(() => {
   warn.mockClear();
 
   // Create store.
-  const config: HeadTagsPackage = clone(headTagsPackage());
+  const config: Packages = clone(headTagsPackage);
 
   // Mock wp-source state.
   config.state.source = clone(wpSource()).state.source;
@@ -34,7 +35,7 @@ beforeEach(() => {
 });
 
 describe("state.headTags.get() (post entity)", () => {
-  const setUpState = (state: State, headTags?: HeadTags) => {
+  const setUpState = (state: State<Packages>, headTags?: HeadTag[]) => {
     // Populate source state.
     const { post, data } = mockPostEntity(headTags);
     state.source.post = post;
@@ -53,7 +54,9 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("returns elements without attributes (title)", () => {
-    const headTags: HeadTags = [{ tag: "title", content: "Post 1 - Frontity" }];
+    const headTags: HeadTag[] = [
+      { tag: "title", content: "Post 1 - Frontity" },
+    ];
     // Populate all state.
     setUpState(store.state, headTags);
     // Test current head tags.
@@ -61,7 +64,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("returns elements without content (meta tags)", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "meta",
         attributes: {
@@ -78,7 +81,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("transforms links that point to WordPress pages", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -108,7 +111,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("doesn't change links that don't point to WordPress pages", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "meta",
         attributes: {
@@ -216,7 +219,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("transform links inside ld+json data", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "script",
         attributes: {
@@ -254,7 +257,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("transforms links appropiately when WP is in a subdirectory", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -298,7 +301,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("transforms links appropiately when Frontity is in a subdirectory", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -343,7 +346,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("shows a warning message if `state.frontity.url` is not defined", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -368,7 +371,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test('shows a warning message if a <script type="ld+json"> could not be parsed', () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "script",
         attributes: {
@@ -402,7 +405,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("doesn't transform links if `state.headTags.transformLinks` = false", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -446,7 +449,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("doesn't transform links if `source.api` and `frontity.url` are the same site", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -490,7 +493,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("transform links using a custom `base` value", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -536,7 +539,7 @@ describe("state.headTags.get() (post entity)", () => {
   });
 
   test("transform links using a custom `ignore` value", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "meta",
         attributes: {
@@ -573,7 +576,7 @@ describe("state.headTags.get() (post entity)", () => {
 });
 
 describe("state.headTags.get() (post type)", () => {
-  const setUpState = (state: State, headTags?: HeadTags) => {
+  const setUpState = (state: State<Packages>, headTags?: HeadTag[]) => {
     // Populate source state.
     const { type, data } = mockPostType(headTags);
     state.source.type = type;
@@ -584,7 +587,7 @@ describe("state.headTags.get() (post type)", () => {
   };
 
   test("works with post types", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -632,7 +635,7 @@ describe("state.headTags.get() (post type)", () => {
 });
 
 describe("state.headTags.get() (taxonomy)", () => {
-  const setUpState = (state: State, headTags?: HeadTags) => {
+  const setUpState = (state: State<Packages>, headTags?: HeadTag[]) => {
     // Populate source state.
     const { category, data } = mockTaxonomy(headTags);
     state.source.category = category;
@@ -643,7 +646,7 @@ describe("state.headTags.get() (taxonomy)", () => {
   };
 
   test("works with taxonomies", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -691,7 +694,7 @@ describe("state.headTags.get() (taxonomy)", () => {
 });
 
 describe("state.headTags.get() (author)", () => {
-  const setUpState = (state: State, headTags?: HeadTags) => {
+  const setUpState = (state: State<Packages>, headTags?: HeadTag[]) => {
     // Populate source state.
     const { author, data } = mockAuthor(headTags);
     state.source.author = author;
@@ -702,7 +705,7 @@ describe("state.headTags.get() (author)", () => {
   };
 
   test("works with auhors", () => {
-    const headTags: HeadTags = [
+    const headTags: HeadTag[] = [
       {
         tag: "link",
         attributes: {
@@ -750,7 +753,7 @@ describe("state.headTags.get() (author)", () => {
 });
 
 describe("state.headTags.get() (no entity)", () => {
-  const setUpState = (state: State) => {
+  const setUpState = (state: State<Packages>) => {
     // Populate source state.
     state.source.data = {
       "/2019/12/": {

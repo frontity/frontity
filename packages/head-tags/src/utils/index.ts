@@ -1,11 +1,6 @@
 import { warn } from "frontity";
-import {
-  HeadTags,
-  HeadTag,
-  State,
-  PostTypeWithHeadTags,
-  TaxonomyWithHeadTags,
-} from "../../types";
+import { State } from "frontity/types";
+import { Packages, HeadTag, WithHeadTags } from "../../types";
 
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
@@ -36,7 +31,7 @@ const deepTransform = (obj: object, func: Function, ...args: object[]) => {
  *
  * @returns A URL object with the WordPress base URL.
  */
-const getWpUrl = (api: string, isWpCom: boolean): URL => {
+export const getWpUrl = (api: string, isWpCom: boolean): URL => {
   const apiUrl = new URL(api);
   if (isWpCom) {
     const { pathname } = apiUrl;
@@ -90,7 +85,7 @@ const getNewLink = (link: string, base: string, newBase: string) => {
  *
  * @returns The WordPress URL, without the prefix (usually `/wp-json`).
  */
-const getBaseFromSource = (state: State): string => {
+const getBaseFromSource = (state: State<Packages>): string => {
   const { api, isWpCom } = state.source;
   return getWpUrl(api, isWpCom).href;
 };
@@ -125,7 +120,7 @@ interface TransformLinkOptions {
  *
  * @returns The new link.
  */
-const transformLink = ({
+export const transformLink = ({
   link,
   ignore,
   base,
@@ -143,12 +138,12 @@ interface UseFrontityLinksOptions {
   /**
    * The Frontity state.
    */
-  state: State;
+  state: State<Packages>;
 
   /**
    * The `head_tags` array that usually comes from the REST API.
    */
-  headTags: HeadTags;
+  headTags: HeadTag[];
 }
 
 /**
@@ -238,14 +233,13 @@ ${content}`
 };
 
 /**
- * The options of the {@link getCurrentEntity} and {@link getCurrentHeadTags}
- * functions.
+ * The options of the {@link getHeadTags} function.
  */
-interface HeadTagsOptions {
+interface GetHeadTagsOptions {
   /**
    * The Frontity state.
    */
-  state: State;
+  state: State<Packages>;
 
   /**
    * The link (URL) of the entity.
@@ -254,50 +248,20 @@ interface HeadTagsOptions {
 }
 
 /**
- * Get the entity related to the current link.
- *
- * @param options - Defined in {@link HeadTagsOptions}.
- *
- * @returns The entity if it was found in the `state` or `null` if it wasn't.
- */
-export const getCurrentEntity = ({ state, link }: HeadTagsOptions) => {
-  const data = state.source.get(link);
-
-  if (data.isPostType) {
-    const { type, id } = data;
-    return state.source[type][id] as PostTypeWithHeadTags;
-  }
-
-  if (data.isTaxonomy) {
-    const { taxonomy, id } = data;
-    return state.source[taxonomy][id] as TaxonomyWithHeadTags;
-  }
-
-  if (data.isAuthor) {
-    const { id } = data;
-    return state.source.author[id];
-  }
-
-  if (data.isPostTypeArchive) {
-    const { type } = data;
-    return state.source.type[type];
-  }
-
-  return null;
-};
-
-/**
- * Get the head tags stored in the current entity, or an empty array if there
- * is no entity or head tags.
+ * Get the head tags stored in the entity pointed by `link`, or an empty array
+ * if there is no entity nor head tags.
  *
  * @param options - Defined in {@link HeadTagsOptions}.
  *
  * @returns Either the transformed head tags or an empty array if they are not
  * found.
  */
-export const getCurrentHeadTags = ({ state, link }: HeadTagsOptions) => {
-  const entity = getCurrentEntity({ state, link });
-  const headTags = entity && entity.head_tags;
+export const getHeadTags = ({ state, link }: GetHeadTagsOptions) => {
+  // Main entity pointed by the given link.
+  const entity: WithHeadTags = state.source.entity(link);
+
+  // Get the `head_tags` field from the entity.
+  const headTags = entity?.head_tags;
 
   // Return an empty array if there is no entity or head tags.
   if (!headTags) return [];

@@ -1,13 +1,21 @@
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
-import HeadTagsPackage from "../../types";
+import { Packages } from "../../types";
 
-// Render all head tags from the current entity.
-const Root: React.FC<Connect<HeadTagsPackage>> = ({ state }) => {
+/**
+ * Render all head tags from the current entity.
+ *
+ * @param props - Frontity props injected by {@link connect}.
+ * @returns A <Head> element with all head tags inside.
+ */
+const Root: React.FC<Connect<Packages>> = ({ state }) => {
   // Get current link.
   const { link } = state.router;
   const { transformLinks } = state.headTags;
+
+  // Get if current link is ready.
+  const { isReady } = state.source.get(link);
 
   // Get the head tags for that link.
   const headTags = React.useMemo(() => state.headTags.get(link), [
@@ -17,6 +25,7 @@ const Root: React.FC<Connect<HeadTagsPackage>> = ({ state }) => {
     transformLinks,
     transformLinks && transformLinks.base,
     transformLinks && transformLinks.ignore,
+    isReady,
   ]);
 
   // Render all tags inside <head>.

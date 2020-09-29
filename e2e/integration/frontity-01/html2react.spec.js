@@ -1,6 +1,6 @@
 describe("Html2React", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=html2react");
+    cy.visit("http://localhost:3001?frontity_name=html2react");
   });
 
   it("should pass state to processors", () => {
