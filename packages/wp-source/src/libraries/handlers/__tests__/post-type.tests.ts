@@ -239,7 +239,7 @@ describe("attachment", () => {
     // Should have the new ID now
     expect(store.state.source.get("/post-1").id).toEqual(2);
 
-    // Delete the ID's because there are different
+    // Delete the IDs because there are different
     const firstPost = store.state.source.post[1];
     const secondPost = store.state.source.post[2];
     delete firstPost.id;
