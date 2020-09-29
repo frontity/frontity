@@ -128,6 +128,171 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "wp-comments",
+    packages: [
+      "e2e-wp-comments",
+      "@frontity/tiny-router",
+      "@frontity/wp-comments",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { api: "http://localhost:8080/wp-json" } },
+      },
+    ],
+  },
+  {
+    name: "google-ad-manager",
+    packages: [
+      "e2e-ads",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/google-ad-manager",
+        state: {
+          fills: {
+            googleAdManager: {
+              headerAd: {
+                slot: "header",
+                library: "googleAdManager.GooglePublisherTag",
+                priority: 5,
+                props: {
+                  id: "header-ad",
+                  unit: "/4595/nfl.test.open",
+                  size: [300, 250],
+                },
+              },
+              contentAd: {
+                slot: "content",
+                library: "googleAdManager.GooglePublisherTag",
+                priority: 5,
+                props: {
+                  id: "content-ad",
+                  unit: "/4595/nfl.test.open",
+                  size: [300, 250],
+                },
+              },
+              footerAd: {
+                slot: "footer",
+                library: "googleAdManager.GooglePublisherTag",
+                priority: 5,
+                props: {
+                  id: "footer-ad",
+                  unit: "/4595/nfl.test.open",
+                  size: [
+                    [300, 250],
+                    [300, 600],
+                  ],
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "wp-basic-tests",
+    packages: [
+      "e2e-wp-basic-tests",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "yoast-package",
+    state: {
+      frontity: {
+        url: "http://my.frontity.site",
+      },
+    },
+    packages: [
+      "@frontity/tiny-router",
+      "@frontity/html2react",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+                archive: "/movies",
+              },
+            ],
+            taxonomies: [
+              {
+                taxonomy: "actor",
+                endpoint: "actors",
+                postTypeEndpoint: "movies",
+              },
+            ],
+          },
+        },
+      },
+      {
+        name: "@frontity/yoast",
+        state: {
+          yoast: {
+            renderTags: "server",
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "head-tags",
+    state: {
+      frontity: {
+        url: "http://my.frontity.site",
+      },
+    },
+    packages: [
+      "@frontity/tiny-router",
+      "@frontity/html2react",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+                archive: "/movies",
+              },
+            ],
+            taxonomies: [
+              {
+                taxonomy: "actor",
+                endpoint: "actors",
+                postTypeEndpoint: "movies",
+              },
+            ],
+            params: {
+              ["head_tags_skip_cache"]: "true",
+            },
+          },
+        },
+      },
+      {
+        name: "@frontity/head-tags",
+        state: {
+          headTags: {
+            transformLinks: {
+              base: "http://localhost:8080",
+            },
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;

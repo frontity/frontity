@@ -8,7 +8,7 @@ const Root = connect(({ state, actions }) => {
       <button
         data-button-id="switch-to-home"
         onClick={() => {
-          actions.router.set("/?name=tiny-router");
+          actions.router.set("/");
         }}
       >
         Home
@@ -68,9 +68,7 @@ const Root = connect(({ state, actions }) => {
         About (with state)
       </button>
 
-      {state.router.link === "/?name=tiny-router" && (
-        <div data-test-id="content">Home</div>
-      )}
+      {state.router.link === "/" && <div data-test-id="content">Home</div>}
 
       {state.router.link === "/about/" && (
         <div data-test-id="content">About</div>

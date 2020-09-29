@@ -1,12 +1,29 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { HeadTags, State } from "../../../types";
+import { State } from "frontity/types";
+import { HeadTag, Packages } from "../../../types";
 
-export const mockPostEntity = (
-  headTags?: HeadTags
-): {
-  post: State["source"]["post"];
-  data: State["source"]["data"];
-} => {
+/**
+ * Return type of {@link mockPostEntity}.
+ */
+interface MockPostEntityData {
+  /**
+   * Mocked post.
+   */
+  post: State<Packages>["source"]["post"];
+
+  /**
+   * Mocked data object.
+   */
+  data: State<Packages>["source"]["data"];
+}
+
+/**
+ * Returns a mocked post and its data object.
+ *
+ * @param headTags - Array of {@link HeadTag}.
+ * @returns Object of type {@link MockPostEntityData}.
+ */
+export const mockPostEntity = (headTags?: HeadTag[]): MockPostEntityData => {
   return {
     post: {
       1: {
@@ -35,12 +52,28 @@ export const mockPostEntity = (
   };
 };
 
-export const mockPostType = (
-  headTags: HeadTags
-): {
-  type: State["source"]["type"];
-  data: State["source"]["data"];
-} => {
+/**
+ * Return type of {@link mockPostType}.
+ */
+interface MockPostTypeData {
+  /**
+   * Mocked post type.
+   */
+  type: State<Packages>["source"]["type"];
+
+  /**
+   * Mocked data object.
+   */
+  data: State<Packages>["source"]["data"];
+}
+
+/**
+ * Returns a mocked post type and its data object.
+ *
+ * @param headTags - Array of {@link HeadTag}.
+ * @returns Object of type {@link MockPostTypeData}.
+ */
+export const mockPostType = (headTags: HeadTag[]): MockPostTypeData => {
   return {
     type: {
       post: {
@@ -68,7 +101,28 @@ export const mockPostType = (
   };
 };
 
-export const mockTaxonomy = (headTags: HeadTags) => {
+/**
+ * Return type of {@link mockTaxonomy}.
+ */
+interface MockTaxonomyData {
+  /**
+   * Mocked taxonomy.
+   */
+  category: State<Packages>["source"]["category"];
+
+  /**
+   * Mocked data object.
+   */
+  data: State<Packages>["source"]["data"];
+}
+
+/**
+ * Returns a mocked taxonomy and its data object.
+ *
+ * @param headTags - Array of {@link HeadTag}.
+ * @returns Object of type {@link MockTaxonomyData}.
+ */
+export const mockTaxonomy = (headTags: HeadTag[]): MockTaxonomyData => {
   return {
     category: {
       1: {
@@ -96,7 +150,28 @@ export const mockTaxonomy = (headTags: HeadTags) => {
   };
 };
 
-export const mockAuthor = (headTags: HeadTags) => {
+/**
+ * Return type of {@link mockAuthor}.
+ */
+interface MockAuthorData {
+  /**
+   * Mocked author.
+   */
+  author: State<Packages>["source"]["author"];
+
+  /**
+   * Mocked data object.
+   */
+  data: State<Packages>["source"]["data"];
+}
+
+/**
+ * Returns a mocked author and its data object.
+ *
+ * @param headTags - Array of {@link HeadTag}.
+ * @returns Object of type {@link MockAuthorData}.
+ */
+export const mockAuthor = (headTags: HeadTag[]): MockAuthorData => {
   return {
     author: {
       1: {

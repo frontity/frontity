@@ -1,4 +1,4 @@
-import { URL, error } from "frontity";
+import { error } from "frontity";
 import WpSource from "../types";
 import { parse, normalize, concatPath } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
@@ -121,6 +121,14 @@ const actions: WpSource["actions"]["source"] = {
     }
 
     libraries.source.api.init({ api, isWpCom });
+
+    // If the URL contains an auth token, then add it to the state.
+    // This is normally the case e.g, when accessing the post preview.
+    const auth = state.frontity?.options?.sourceAuth;
+    const authFromEnv = process.env.FRONTITY_SOURCE_AUTH;
+    if (auth || authFromEnv) {
+      state.source.auth = auth || authFromEnv;
+    }
 
     // Handlers & redirections.
     const { handlers, redirections } = libraries.source;
@@ -264,6 +272,12 @@ const actions: WpSource["actions"]["source"] = {
         func: () => "",
       });
     }
+  },
+
+  afterSSR: ({ state }) => {
+    // Remove the auth tokens that were used in the server.
+    delete state.source.auth;
+    delete state.frontity.options.sourceAuth;
   },
 };
 export default actions;

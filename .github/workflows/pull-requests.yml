@@ -1,4 +1,4 @@
-name: Pull requests
+name: check PR tasks
 
 on:
   pull_request:

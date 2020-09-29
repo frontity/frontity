@@ -14,7 +14,7 @@
     "react/prop-types": "off",
     "import/named": "off",
     "jsdoc/check-examples": 2,
-    "jsdoc/check-indentation": 2,
+    "jsdoc/check-indentation": 0,
     "jsdoc/check-param-names": 0,
     "jsdoc/check-syntax": 2,
     "jsdoc/check-types": 2,

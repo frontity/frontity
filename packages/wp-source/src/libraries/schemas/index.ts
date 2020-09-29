@@ -3,6 +3,7 @@ import { postEntity, postType } from "./posts";
 import { taxonomyEntity, taxonomyType } from "./taxonomies";
 import { authorEntity } from "./authors";
 import { attachmentEntity } from "./attachments";
+import { commentEntity } from "./comments";
 
 export const entity = new schema.Union(
   {
@@ -12,6 +13,7 @@ export const entity = new schema.Union(
     taxonomyType,
     authorEntity,
     attachmentEntity,
+    commentEntity,
   },
   (val) => {
     if (val.taxonomies && val.rest_base) return "postType";
@@ -19,6 +21,7 @@ export const entity = new schema.Union(
     else if (val.taxonomy) return "taxonomyEntity";
     else if (val.media_type) return "attachmentEntity";
     else if (val.name) return "authorEntity";
+    else if (val.type === "comment") return "commentEntity";
     return "postEntity";
   }
 );
