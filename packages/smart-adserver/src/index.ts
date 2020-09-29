@@ -1,5 +1,6 @@
 import smartAdserver from "./components";
 import SmartAdserver from "../types";
+import SmartAd from "./components/smart-ad";
 
 const SmartAdserver: SmartAdserver = {
   roots: {
@@ -9,11 +10,11 @@ const SmartAdserver: SmartAdserver = {
     fills: {
       smartAdserver: {},
     },
-    smartAdserver: {}
+    smartAdserver: {},
   },
   libraries: {
     fills: {
-      SmartAd: {},
+      smartAdserver: { SmartAd },
     },
   },
 };

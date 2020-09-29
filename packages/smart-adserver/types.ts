@@ -6,32 +6,71 @@ declare global {
    */
   interface Window {
     /**
-     * Smart Adserve library.
+     * Smart Adserver library.
      */
     sas: {
       /**
-       * The cmd.
+       *
        */
       cmd: Function[];
       /**
-       * The setup function.
+       *
        */
       setup?: (params: {
         /**
-         * NetworkId.
+         *
          */
         networkid: string;
         /**
-         * Domain.
+         *
          */
         domain: string;
         /**
-         * Async.
+         *
          */
         async: boolean;
       }) => void;
+
+      /**
+       *
+       */
+      call?: (calltype: string, options: CallOptions) => void;
     };
   }
+}
+
+/**
+ *
+ */
+export interface CallOptions {
+  /**
+   *
+   */
+  siteId;
+  /**
+   *
+   */
+  pageId;
+  /**
+   *
+   */
+  formatId;
+  /**
+   *
+   */
+  tagId;
+  /**
+   *
+   */
+  width;
+  /**
+   *
+   */
+  height;
+  /**
+   *
+   */
+  target;
 }
 
 /**
@@ -42,7 +81,6 @@ interface SmartAdserver extends Package {
    * Root elements exposed by this package.
    */
   roots: {
-
     /**
      * Smart Adserver root element.
      */
@@ -54,16 +92,16 @@ interface SmartAdserver extends Package {
    */
   state: {
     /**
-     * The namespace.
+     *
      */
     smartAdserver: {
       /**
-       * NetworkId.
+       *
        */
       networkId?: string;
 
       /**
-       * Subdomain.
+       *
        */
       subdomain?: string;
     };
@@ -73,7 +111,7 @@ interface SmartAdserver extends Package {
      */
     fills: {
       /**
-       * SmartAdserver.
+       *
        */
       smartAdserver: {};
     };
@@ -88,9 +126,14 @@ interface SmartAdserver extends Package {
      */
     fills: {
       /**
-       * Smartad.
+       *
        */
-      SmartAd: {};
+      smartAdserver: {
+        /**
+         *
+         */
+        SmartAd: React.FC;
+      };
     };
   };
 }
