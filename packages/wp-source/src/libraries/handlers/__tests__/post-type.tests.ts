@@ -221,14 +221,15 @@ describe("attachment", () => {
   });
 
   test("overwrites the data when fetched with { force: true }", async () => {
-    // Mock Api responses
-    api.get = jest
-      .fn()
-      .mockResolvedValueOnce(mockResponse([post1]))
-      .mockResolvedValueOnce(mockResponse(attachment1));
+    api.get = jest.fn((_) => Promise.resolve(mockResponse([post1])));
 
     // Fetch entities
     await store.actions.source.fetch("/post-1");
+
+    api.get = jest.fn((_) =>
+      Promise.resolve(mockResponse([{ ...post1, id: 2 }]))
+    );
+
     await store.actions.source.fetch("/post-1", { force: true });
 
     expect(store.state.source).toMatchSnapshot();
