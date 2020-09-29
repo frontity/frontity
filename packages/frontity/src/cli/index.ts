@@ -1,5 +1,7 @@
 #! /usr/bin/env node
 
+require("dotenv").config();
+
 import program from "commander";
 
 import { default as create } from "./create";

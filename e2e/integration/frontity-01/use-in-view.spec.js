@@ -1,5 +1,5 @@
 describe("UseInView", () => {
-  const url = "http://localhost:3001/?name=use-in-view";
+  const url = "http://localhost:3001/?frontity_name=use-in-view";
 
   it("useInView should return supported true", () => {
     cy.visit(url);

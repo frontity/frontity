@@ -3,7 +3,7 @@ import expect from "expect";
 
 describe("Script", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=script");
+    cy.visit("http://localhost:3001?frontity_name=script");
   });
 
   it("should load a external script from src url", () => {

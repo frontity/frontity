@@ -49,7 +49,7 @@ describe("Head Tags - All in One SEO Pack", () => {
    * @param options - Visit options.
    */
   const visitLink = (link, options) => {
-    cy.visit(`http://localhost:3001${link}?name=head-tags`, options);
+    cy.visit(`http://localhost:3001${link}?frontity_name=head-tags`, options);
   };
 
   /**

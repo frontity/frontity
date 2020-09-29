@@ -3,14 +3,15 @@ import expect from "expect";
 describe("Status codes", () => {
   it("should return a 200 status code", async () => {
     const res = await cy.request(
-      "http://localhost:3001/?name=wp-source-errors"
+      "http://localhost:3001/?frontity_name=wp-source-errors"
     );
     expect(res.status).toBe(200);
   });
 
   it("should return a 404 status code", async () => {
     const res404 = await cy.request({
-      url: "http://localhost:3001/?statusCode=404&name=wp-source-errors",
+      url:
+        "http://localhost:3001/?statusCode=404&frontity_name=wp-source-errors",
       failOnStatusCode: false,
     });
     expect(res404.status).toBe(404);
@@ -18,7 +19,8 @@ describe("Status codes", () => {
 
   it("should return a 500 status code", async () => {
     const res500 = await cy.request({
-      url: "http://localhost:3001/?statusCode=500&name=wp-source-errors",
+      url:
+        "http://localhost:3001/?statusCode=500&frontity_name=wp-source-errors",
       failOnStatusCode: false,
     });
     expect(res500.status).toBe(500);
@@ -27,13 +29,14 @@ describe("Status codes", () => {
 
 describe("Data", () => {
   it("should have data populated correctly without errors", () => {
-    cy.visit("http://localhost:3001/?name=wp-source-errors");
+    cy.visit("http://localhost:3001/?frontity_name=wp-source-errors");
     cy.get("[data-test-id='isError']").should("contain.text", "false");
   });
 
   it("should have data populated correctly with 404 errors", () => {
     cy.visit({
-      url: "http://localhost:3001/?statusCode=404&name=wp-source-errors",
+      url:
+        "http://localhost:3001/?statusCode=404&frontity_name=wp-source-errors",
       failOnStatusCode: false,
     });
     cy.get("[data-test-id='isError']").should("contain.text", "true");
@@ -43,7 +46,8 @@ describe("Data", () => {
 
   it("should have data populated correctly with 500 errors", () => {
     cy.visit({
-      url: "http://localhost:3001/?statusCode=500&name=wp-source-errors",
+      url:
+        "http://localhost:3001/?statusCode=500&frontity_name=wp-source-errors",
       failOnStatusCode: false,
     });
     cy.get("[data-test-id='isError']").should("contain.text", "true");
