@@ -1,18 +1,20 @@
 /* eslint-disable */
 import { Package } from "frontity/types";
-import SmartAdserverPackage from "@frontity/smart-adserver/types";
+import Source from "@frontity/source/types";
+import Router from "@frontity/router/types";
+import SmartAdserver from "@frontity/smart-adserver/types";
 import WpSource from "../../../packages/wp-source/types";
 
-interface SmartAdserver extends Package {
-  name: "e2e-wp-comments";
+interface TestSmartAdserver extends Package {
+  name: "e2e-smart-adserver";
   state: {
     source?: WpSource["state"]["source"];
-    fills: {};
   };
   roots: {
     smartAdserver: React.ElementType;
   };
-  libraries: {};
 }
 
-export default SmartAdserver;
+export type Packages = Router & Source & TestSmartAdserver & SmartAdserver;
+
+export default TestSmartAdserver;

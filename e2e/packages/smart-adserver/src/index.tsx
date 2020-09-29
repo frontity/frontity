@@ -1,25 +1,25 @@
 import React from "react";
-import { connect } from "frontity";
-import SmartAdserver from "../types";
+import { connect, Slot } from "frontity";
+import SmartAdserver, { Packages } from "../types";
+import { Connect } from "frontity/types";
 
-const Root: React.FC = connect(({ state }) => {
-  const data = state.source.get(state.frontity.initialLink);
+const Root: React.FC<Connect<Packages>> = connect(({ libraries }) => {
+  const { SmartAd } = libraries.fills.smartAdserver;
+
   return (
     <>
-      <div>hello</div>
+      <Slot name="header" />
+      <SmartAd />
     </>
   );
 });
 
-const wpSourceErrors: SmartAdserver = {
-  name: "e2e-wp-comments",
-  state: {
-    fills: {},
-  },
+const smartAdserver: SmartAdserver = {
+  name: "e2e-smart-adserver",
+  state: {},
   roots: {
     smartAdserver: Root,
   },
-  libraries: {},
 };
 
-export default wpSourceErrors;
+export default smartAdserver;
