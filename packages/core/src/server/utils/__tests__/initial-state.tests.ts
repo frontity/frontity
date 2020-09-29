@@ -90,15 +90,15 @@ describe("initialState", () => {
 
   it("should set the frontity.options correctly", () => {
     const url = new URL(
-      "https://site.com/page/2?frontity_name=mySite&frontity_source_auth=hello"
+      "https://site.com/page/2?frontity_name=some-site&frontity_source_auth=some-token"
     );
 
     // The frontity_name & frontity_source_auth should be present in the options
     expect(initialState({ settings, url }).frontity.options)
       .toMatchInlineSnapshot(`
       Object {
-        "frontityName": "mySite",
-        "frontitySourceAuth": "hello",
+        "name": "some-site",
+        "sourceAuth": "some-token",
       }
     `);
   });

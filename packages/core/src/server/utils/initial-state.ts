@@ -37,7 +37,7 @@ const state = ({ settings, url }: StateOptions) => {
   // Delete all of them from the `searchParams` and at the same time add them to `options`
   paramsToDelete.forEach((param) => {
     if (searchParams.has(param)) {
-      const key = snakeToCamel(param);
+      const key = snakeToCamel(param.replace("frontity_", ""));
       options[key] = searchParams.get(param);
       searchParams.delete(param);
     }
