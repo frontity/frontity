@@ -10,6 +10,8 @@ const source1 = (libraries: Source["libraries"]): Source => {
     state: {
       source: {
         get: ({ state }) => (link) => state.source.data[""],
+        entity: ({ state }) => <T>(link) => state.source.post[1] as T,
+        api: "https://test.frontity.org",
         data: {},
         category: {},
         tag: {},
@@ -60,6 +62,7 @@ const source2: MySource = {
     source: {
       api: "https://site.com/api",
       get: ({ state }) => (link) => state.source.data[""],
+      entity: ({ state }) => <T>(link) => state.source.post[1] as T,
       data: {},
       category: {},
       tag: {},

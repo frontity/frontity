@@ -1,5 +1,25 @@
 # Change Log
 
+## 1.4.3
+
+### Patch Changes
+
+- [`8b756d13`](https://github.com/frontity/frontity/commit/8b756d13a696ad41796f5e687fc77d2556618f66) [#490](https://github.com/frontity/frontity/pull/490) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README created.
+
+- Updated dependencies [[`cfa8062d`](https://github.com/frontity/frontity/commit/cfa8062d60ccf46b3e0c5aa5490e4e03f1b693a5), [`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`19912053`](https://github.com/frontity/frontity/commit/1991205379a103bc4ec09397cca99c1f2ba09a2d), [`845de536`](https://github.com/frontity/frontity/commit/845de536d111105dd3f636c3543170a676ac65cc), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b)]:
+  - @frontity/components@1.3.3
+  - frontity@1.9.0
+  - @frontity/html2react@1.3.4
+
+## 1.4.2
+
+### Patch Changes
+
+- [`de6c7fe6`](https://github.com/frontity/frontity/commit/de6c7fe6e43510dddf26e8afbe1ef05ac5ab379c) [#454](https://github.com/frontity/frontity/pull/454) Thanks [@c4rl0sbr4v0](https://github.com/c4rl0sbr4v0)! - Rename the `Fecha` component name from Spanish to English: `DateWrapper`.
+
+- Updated dependencies [[`6900916a`](https://github.com/frontity/frontity/commit/6900916ace309d3cc55b9c732124df5d3db96838)]:
+  - frontity@1.8.0
+
 ## 1.4.1
 
 ### Patch Changes

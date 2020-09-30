@@ -12,6 +12,7 @@ const handlerMocks = handlers as jest.Mocked<typeof handlers>;
 handlerMocks.taxonomyHandler.mockReturnValue(jest.fn());
 handlerMocks.postTypeHandler.mockReturnValue(jest.fn());
 handlerMocks.postTypeArchiveHandler.mockReturnValue(jest.fn());
+handlerMocks.postTypeWithQueryHandler.mockReturnValue(jest.fn());
 
 let handler: jest.Mocked<Pattern<Handler>>;
 let store: InitializedStore<WpSource>;
@@ -21,6 +22,7 @@ beforeEach(() => {
   handlerMocks.taxonomyHandler.mockClear();
   handlerMocks.postTypeHandler.mockClear();
   handlerMocks.postTypeArchiveHandler.mockClear();
+  handlerMocks.postTypeWithQueryHandler.mockClear();
   // Create a mock handler
   handler = {
     name: "always",
@@ -39,14 +41,14 @@ beforeEach(() => {
   };
 
   // Initialize the store
-  store = createStore(clone(wpSource()));
+  store = createStore<WpSource>(clone(wpSource()));
   store.state.source.api = "https://test.frontity.org/wp-json";
 
   // Add mock handler to the store
   store.libraries.source.handlers.push(handler);
 });
 
-describe("fetch", () => {
+describe("actions.source.fetch", () => {
   test("should work if data doesn't exist", async () => {
     await store.actions.source.fetch("/some/route/");
     expect(handler.func).toHaveBeenCalledTimes(1);
@@ -141,7 +143,7 @@ describe("fetch", () => {
   });
 
   test("Throw an error if fetch fails", async () => {
-    handler.func = jest.fn(async (params) => {
+    handler.func = jest.fn(async (_) => {
       throw new Error("Some error");
     });
 
@@ -171,9 +173,25 @@ describe("fetch", () => {
       if (!isFetching) done();
     });
   });
+
+  test("Should throw a 404 error if no handler matched the link", async () => {
+    await store.actions.source.fetch("@unknown/link");
+    expect(store.state.source.data).toMatchInlineSnapshot(`
+      Object {
+        "@unknown/link/": Object {
+          "errorStatus": 404,
+          "errorStatusText": "No handler has matched for the given link: \\"@unknown/link/\\"",
+          "is404": true,
+          "isError": true,
+          "isFetching": false,
+          "isReady": true,
+        },
+      }
+    `);
+  });
 });
 
-describe("init", () => {
+describe("actions.source.init", () => {
   test("should add redirect for the specified homepage", async () => {
     store.state.source.homepage = "/about-us/";
     await store.actions.source.init();
@@ -247,6 +265,7 @@ describe("init", () => {
     expect(store.libraries.source.handlers).toMatchSnapshot();
     expect(handlerMocks.postTypeHandler.mock.calls).toMatchSnapshot();
     expect(handlerMocks.postTypeArchiveHandler.mock.calls).toMatchSnapshot();
+    expect(handlerMocks.postTypeWithQueryHandler.mock.calls).toMatchSnapshot();
   });
 
   test("should add new handlers from taxonomies array", async () => {

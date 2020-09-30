@@ -9,7 +9,7 @@ const mockedHe = he as jest.Mocked<typeof he>;
 describe("decode", () => {
   beforeEach(() => {
     mockedHe.decode.mockReset();
-    mockedHe.decode.mockImplementation(require.requireActual("he").decode);
+    mockedHe.decode.mockImplementation(jest.requireActual("he").decode);
   });
 
   test("works on server", () => {

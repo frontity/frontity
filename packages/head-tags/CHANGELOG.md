@@ -1,5 +1,42 @@
 # @frontity/head-tags
 
+## 1.0.7
+
+### Patch Changes
+
+- [`b12a1006`](https://github.com/frontity/frontity/commit/b12a100643d3207ab540b66cd7a1bb5626953900) [#548](https://github.com/frontity/frontity/pull/548) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix a bug rendering head tags for links that were not ready the first time they were visited.
+
+  Also, some TypeScript refactor was done along with TSDocs.
+
+- Updated dependencies [[`870e4ba5`](https://github.com/frontity/frontity/commit/870e4ba5ab6afd216d9f2c5f15383fb8028d471c), [`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b)]:
+  - @frontity/source@1.3.0
+
+## 1.0.6
+
+### Patch Changes
+
+- [`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af) [#566](https://github.com/frontity/frontity/pull/566) Thanks [@luisherranz](https://github.com/luisherranz)! - Do not import `URL` from `frontity` anymore.
+
+- Updated dependencies [[`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af)]:
+  - frontity@1.11.1
+
+## 1.0.5
+
+### Patch Changes
+
+- [`c219fb63`](https://github.com/frontity/frontity/commit/c219fb634672c1897e1a32fe34721c2591a4625c) [#512](https://github.com/frontity/frontity/pull/512) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Reword the README to specify that users need to install the Rest API Head Tags WP plugin before using the frontity head-tags package
+
+## 1.0.4
+
+### Patch Changes
+
+- [`d0827c97`](https://github.com/frontity/frontity/commit/d0827c978f61ef512c0ef3ad797763983f151b75) [#487](https://github.com/frontity/frontity/pull/487) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md created.
+
+- Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b), [`3f61f711`](https://github.com/frontity/frontity/commit/3f61f71197d33b478427d1b74882c31258861e92), [`868c120f`](https://github.com/frontity/frontity/commit/868c120f2ede7a2f9013f6e659e1b0a1bf2785fe)]:
+  - frontity@1.9.0
+  - @frontity/source@1.2.2
+  - @frontity/router@1.1.1
+
 ## 1.0.3
 
 ### Patch Changes

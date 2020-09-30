@@ -13,7 +13,7 @@ import author1PostsCpt from "./mocks/author/author-1-posts-cpt.json";
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
+  store = createStore<WpSource>(clone(wpSource()));
   store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
@@ -78,7 +78,7 @@ describe("author", () => {
     await store.actions.source.fetch("/author/author-1/");
 
     // Mock Api responses
-    api.get = jest.fn((unused) =>
+    api.get = jest.fn((_) =>
       Promise.resolve(
         mockResponse(
           {

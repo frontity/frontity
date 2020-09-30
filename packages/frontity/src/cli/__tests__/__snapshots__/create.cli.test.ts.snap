@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CLI create FRONTITY_CREATE__NAME='test-project'; frontity create --no-prompt 1`] = `
+Object {
+  "name": "test-project",
+  "theme": "@frontity/mars-theme",
+  "typescript": false,
+}
+`;
+
+exports[`CLI create FRONTITY_CREATE_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt 1`] = `
+Object {
+  "name": "test-project",
+  "theme": "@frontity/mars-theme",
+  "typescript": true,
+}
+`;
+
+exports[`CLI create frontity create 'test-project' --theme 'test-theme' 1`] = `
+Object {
+  "name": "test-project",
+  "theme": "test-theme",
+  "typescript": true,
+}
+`;
+
+exports[`CLI create frontity create 'test-project' --typescript 1`] = `
+Object {
+  "name": "test-project",
+  "theme": "test-theme",
+  "typescript": true,
+}
+`;
+
+exports[`CLI create frontity create 'test-project' 1`] = `
+Object {
+  "name": "test-project",
+  "theme": "test-theme",
+  "typescript": false,
+}
+`;
+
+exports[`CLI create frontity create 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "default": "my-frontity-project",
+        "message": "Enter a name for the project:",
+        "name": "name",
+        "type": "input",
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "choices": Array [
+          Object {
+            "name": "@frontity/mars-theme (recommended)",
+            "value": "@frontity/mars-theme",
+          },
+          Object {
+            "name": "@frontity/twentytwenty-theme",
+            "value": "@frontity/twentytwenty-theme",
+          },
+        ],
+        "default": "@frontity/mars-theme",
+        "message": "Pick a starter theme to clone:",
+        "name": "theme",
+        "type": "list",
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "default": false,
+        "message": "Do you want to receive framework updates by email?",
+        "name": "subscribe",
+        "type": "confirm",
+      },
+      Object {
+        "message": "Please, enter your email:",
+        "name": "email",
+        "type": "input",
+        "when": [Function],
+      },
+    ],
+  ],
+]
+`;

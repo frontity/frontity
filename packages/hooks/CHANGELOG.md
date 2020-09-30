@@ -1,5 +1,17 @@
 # Change Log
 
+## 2.0.2
+
+### Patch Changes
+
+- [`fc1220b5`](https://github.com/frontity/frontity/commit/fc1220b5eb2ae0af933b76cc9fb1a62b83fc7075) [#484](https://github.com/frontity/frontity/pull/484) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md created.
+
+## 2.0.1
+
+### Patch Changes
+
+- [`5cb29ab6`](https://github.com/frontity/frontity/commit/5cb29ab63ab31872a4d853e5e2fdbdabca974c9f) [#430](https://github.com/frontity/frontity/pull/430) Thanks [@luisherranz](https://github.com/luisherranz)! - Mark the package as "side-effect free" to allow [tree shaking in Webpack](https://webpack.js.org/guides/tree-shaking/).
+
 ## 2.0.0
 
 ### Major Changes

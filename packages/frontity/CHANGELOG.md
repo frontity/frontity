@@ -1,5 +1,90 @@
 # Change Log
 
+## 1.12.0
+
+### Minor Changes
+
+- [`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b) [#568](https://github.com/frontity/frontity/pull/568) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add the dotenv to support loading environment variables from `.env` files.
+  https://community.frontity.org/t/support-for-auth-header-in-source-packages/2678/12
+
+### Patch Changes
+
+- Updated dependencies [[`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b)]:
+  - @frontity/types@1.5.0
+
+## 1.11.1
+
+### Patch Changes
+
+- [`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af) [#566](https://github.com/frontity/frontity/pull/566) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix URL class wrapper in Safari.
+
+## 1.11.0
+
+### Minor Changes
+
+- [`623a4146`](https://github.com/frontity/frontity/commit/623a41464aab97981f3c02d16747c5b8f9111b83) [#540](https://github.com/frontity/frontity/pull/540) Thanks [@luisherranz](https://github.com/luisherranz)! - Remove all the short flags from the CLI commands.
+
+### Patch Changes
+
+- [`611f3e2a`](https://github.com/frontity/frontity/commit/611f3e2ac836033417e9921a44b52cdd2f07793f) [#541](https://github.com/frontity/frontity/pull/541) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate the `--publicPath` CLI arg of the `npx frontity dev` and `npx frontity build` commands in favor of `--public-path` to be consistent with the rest of the arguments.
+
+  It also adds a log to those commands, along with the already existing `mode` and `target` logs.
+
+* [`d95262df`](https://github.com/frontity/frontity/commit/d95262df70c43afb955747473393c8440d2a3af9) [#545](https://github.com/frontity/frontity/pull/545) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix environment variable names that were missing the middle command name in the `create` and `create-package` commands: from `FRONTITY_NAME` (wrong) to `FRONTITY_CREATE_NAME` (right).
+
+- [`6ece281a`](https://github.com/frontity/frontity/commit/6ece281a8a3b8cf66443123fa1f4b88734ef95c2) [#543](https://github.com/frontity/frontity/pull/543) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate the `URL` import from `"frontity"` in favor of the `new URL` global that is now present in both the browser and Node 10+.
+
+* [`d95262df`](https://github.com/frontity/frontity/commit/d95262df70c43afb955747473393c8440d2a3af9) [#545](https://github.com/frontity/frontity/pull/545) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix two bugs with `--no-prompt` actually prompting in the `create` and `create-package` commands.
+
+- [`2a1a1f35`](https://github.com/frontity/frontity/commit/2a1a1f35810337a18edc96c3da06ffd492152ed8) [#550](https://github.com/frontity/frontity/pull/550) Thanks [@luisherranz](https://github.com/luisherranz)! - Update chalk version.
+
+## 1.10.1
+
+### Patch Changes
+
+- [`17f539bf`](https://github.com/frontity/frontity/commit/17f539bfb547105bd4565735c5491f2400c3c8fe) [#516](https://github.com/frontity/frontity/pull/516) Thanks [@luisherranz](https://github.com/luisherranz)! - Add `@frontity/core` as a peer dependency of `frontity` to make sure that people get a warning when they update `frontity` if they have not updated `@frontity/core` as well.
+
+- Updated dependencies [[`a0fc05cb`](https://github.com/frontity/frontity/commit/a0fc05cb8d51e4e101994b1b35410d5c2fd16e55)]:
+  - @frontity/core@1.7.3
+
+## 1.10.0
+
+### Minor Changes
+
+- [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377) [#475](https://github.com/frontity/frontity/pull/475) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add a `Slot` component which can be used to fulfill the "Slot and Fill" pattern: https://community.frontity.org/t/slot-and-fill/895/8
+
+### Patch Changes
+
+- [`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f) [#501](https://github.com/frontity/frontity/pull/501) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Remove the tsNode.register() from the CLI
+
+- Updated dependencies [[`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377), [`159e02ca`](https://github.com/frontity/frontity/commit/159e02ca080ec9f7004c90276621d1a2708192ce)]:
+  - @frontity/types@1.4.2
+
+## 1.9.0
+
+### Minor Changes
+
+- [`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8) [#458](https://github.com/frontity/frontity/pull/458) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Allow `dev`, `build` and `serve` commands to be configured using environment variables ([feature discussion](https://community.frontity.org/t/change-publicpath/1461)).
+
+### Patch Changes
+
+- [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b) [#462](https://github.com/frontity/frontity/pull/462) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md with full info of the package
+
+- Updated dependencies [[`fb67272b`](https://github.com/frontity/frontity/commit/fb67272bd8a3dfff00868af394484ec09f1e0785), [`ee9f2616`](https://github.com/frontity/frontity/commit/ee9f26165e1f965d3234b4cf9588966e3ab36ec7)]:
+  - @frontity/error@0.1.1
+  - @frontity/types@1.4.1
+
+## 1.8.0
+
+### Minor Changes
+
+- [`6900916a`](https://github.com/frontity/frontity/commit/6900916ace309d3cc55b9c732124df5d3db96838) [#430](https://github.com/frontity/frontity/pull/430) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Create a `useFills` hook that can be used to create <Slot/> components for a ["Slot and Fill" pattern](https://community.frontity.org/t/slot-and-fill/895).
+
+### Patch Changes
+
+- Updated dependencies [[`6900916a`](https://github.com/frontity/frontity/commit/6900916ace309d3cc55b9c732124df5d3db96838)]:
+  - @frontity/types@1.4.0
+
 ## 1.7.0
 
 ### Minor Changes

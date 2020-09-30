@@ -24,4 +24,7 @@ import decodeServer from "./utils/decode/server";
 export const decode =
   typeof window !== "undefined" ? decodeClient : decodeServer;
 
-export { URL } from "url";
+export { default as URL } from "./utils/url";
+
+export { default as useFills } from "./utils/slot-and-fill/use-fills";
+export { default as Slot } from "./utils/slot-and-fill/slot";
