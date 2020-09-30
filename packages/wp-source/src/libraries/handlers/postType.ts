@@ -53,7 +53,7 @@ const postTypeHandler = ({
 
   // 1. search id in state or get the entity from WP REST API
   const { route, query } = libraries.source.parse(link);
-  if (!state.source.get(route).id) {
+  if (!state.source.get(route).id || force) {
     const { slug } = params;
 
     // 1.1 transform "posts" endpoint to state.source.postEndpoint
