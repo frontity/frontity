@@ -61,9 +61,9 @@ interface PostTypeWithQueryHandlerOptions {
  * });
  * ```
  *
- * @returns An async "handler" function that can be passed as an argument to
- * the handler object. This function will be invoked by the frontity framework
- * when calling `actions.source.fetch()` for a specific entity.
+ * @returns An async "handler" function that can be passed as an argument to the
+ * handler object. This function will be invoked by the frontity framework when
+ * calling `actions.source.fetch()` for a specific entity.
  */
 const postTypeWithQueryHandler = ({
   type,
@@ -76,8 +76,6 @@ const postTypeWithQueryHandler = ({
   force,
 }) => {
   const { query } = libraries.source.parse(link);
-  const { preview, token } = query;
-
   // Get the ID from the query.
   const id = parseInt(query[idParamName], 10);
 
@@ -86,22 +84,17 @@ const postTypeWithQueryHandler = ({
 
   // If not found, fetch the entity. Also if force is `true`.
   if (!entity || force) {
-    const request = {
+    // Fetch the entity. The `api.get` call will throw a `ServerError` if the
+    // request has failed.
+    const response = await libraries.source.api.get({
       endpoint: `${endpoint}/${id}`,
       params: { _embed: true, ...state.source.params },
-      auth: "",
-    };
+      auth: state.source.auth,
+    });
 
-    // Use the token if present.
-    if (preview && token) request.auth = `Bearer ${token}`;
-
-    // Fetch the entity.
-    // The `api.get` call will throw a `ServerError` if the request has failed.
-    const response = await libraries.source.api.get(request);
-
-    // Populate the entity.
-    // We can be sure here that the entity is being populated because the
-    // previous call would have been thrown a `ServerError` otherwise.
+    // Populate the entity. We can be sure here that the entity is being
+    // populated because the previous call would have been thrown a
+    // `ServerError` otherwise.
     await libraries.source.populate({ response, state, force });
   }
 

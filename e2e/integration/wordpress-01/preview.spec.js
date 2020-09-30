@@ -6,7 +6,7 @@ describe("Preview plugin", () => {
     cy.task("installPlugin", { name: "custom-post-type-ui" });
     cy.task("installPlugin", {
       name:
-        "https://github.com/frontity/frontity-embedded-proof-of-concept/archive/preview-poc.zip",
+        "https://github.com/frontity/frontity-embedded-proof-of-concept/archive/master.zip",
     });
     cy.task("loadDatabase", {
       path: "./wp-data/preview.sql",
