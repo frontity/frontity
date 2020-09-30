@@ -1,6 +1,6 @@
 describe("Analytics package", () => {
   const pageviewHome = {
-    link: "/?name=analytics",
+    link: "/",
     title: "Homepage Title",
   };
 
@@ -23,7 +23,7 @@ describe("Analytics package", () => {
     cy.window().its("frontity").its("state").its("testAnalytics").its(data);
 
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=analytics");
+    cy.visit("http://localhost:3001?frontity_name=analytics");
   });
 
   it("should have sent the first pageview", () => {

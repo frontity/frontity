@@ -5,18 +5,24 @@ services:
     image: "wordpress:${WORDPRESS_VERSION}"
     ports:
       - 8080:80
-    # The wordpress container will retry to connect to the mysql database for
-    # 30 seconds after starting. However, it might take longer than this for
-    # mysql container to initialize (inluding loading data into the DB). For
-    # this reason, if the wordpress container times out, we have to restart it.
+
+    # The wordpress container will retry to connect to the mysql database for 30
+    # seconds after starting. However, it might take longer than this for mysql
+    # container to initialize (inluding loading data into the DB). For this
+    # reason, if the wordpress container times out, we have to restart it.
     restart: always
+
     volumes:
       # Volume that is shared between WordPress and WP-CLI services.
       - wp_data:/var/www/html
 
+      # The .htaccess file.
+      - ./wp-data/.htaccess:/var/www/html/.htaccess
+
       # This volume is used for adding custom uploaded content to the WP
       # instance.
       - ./wp-data/uploads:/var/www/html/wp-content/uploads
+
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: wordpress
@@ -24,6 +30,11 @@ services:
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_AUTH_KEY: wordpress-auth-key
       WORDPRESS_AUTH_SALT: wordpress-auth-salt
+      # This makes WordPress point to the Frontity server running in the host
+      # machine, which is accessible on the IP address `172.17.0.1` in linux or
+      # using `host.docker.internal` in Mac and Windows.
+      FRONTITY_SERVER: ${FRONTITY_SERVER}
+
     depends_on:
       - db
     links:

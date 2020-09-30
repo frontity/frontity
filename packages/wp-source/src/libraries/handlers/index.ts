@@ -3,6 +3,7 @@ import date from "./date";
 import taxonomyHandler from "./taxonomy";
 import postTypeHandler from "./postType";
 import postTypeArchiveHandler from "./postTypeArchive";
+import postTypeWithQueryHandler from "./postTypeWithQuery";
 
 // Post Types
 export const post = postTypeHandler({ endpoints: ["posts"] });
@@ -10,6 +11,15 @@ export const page = postTypeHandler({ endpoints: ["pages"] });
 export const attachment = postTypeHandler({ endpoints: ["media"] });
 export const postType = postTypeHandler({
   endpoints: ["posts", "pages", "media"],
+});
+export const postWithQuery = postTypeWithQueryHandler({
+  type: "post",
+  endpoint: "posts",
+});
+export const pageWithQuery = postTypeWithQueryHandler({
+  type: "page",
+  endpoint: "pages",
+  idParamName: "page_id",
 });
 
 // Taxonomies
@@ -29,4 +39,9 @@ export const postArchive = postTypeArchiveHandler({
 export { author, date };
 
 // Handlers generators
-export { taxonomyHandler, postTypeHandler, postTypeArchiveHandler };
+export {
+  taxonomyHandler,
+  postTypeHandler,
+  postTypeArchiveHandler,
+  postTypeWithQueryHandler,
+};
