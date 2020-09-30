@@ -3,22 +3,28 @@ import { connect, Slot } from "frontity";
 import SmartAdserver, { Packages } from "../types";
 import { Connect } from "frontity/types";
 
-const Root: React.FC<Connect<Packages>> = connect(({ libraries }) => {
-  const { SmartAd } = libraries.fills.smartAdserver;
-
+const Theme: React.FC<Connect<Packages>> = connect(({ libraries, state }) => {
   return (
     <>
+      <div> hello </div>
       <Slot name="header" />
-      <SmartAd />
     </>
   );
 });
 
 const smartAdserver: SmartAdserver = {
   name: "e2e-smart-adserver",
-  state: {},
+  state: {
+    source: {
+      data: {},
+      get: ({ state }) => (link) => state.source.data[link],
+    },
+    router: {
+      link: "/",
+    },
+  },
   roots: {
-    smartAdserver: Root,
+    theme: Theme,
   },
 };
 

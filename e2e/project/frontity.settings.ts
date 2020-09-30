@@ -211,6 +211,10 @@ const settings: Settings = [
       {
         name: "@frontity/smart-adserver",
         state: {
+          smartAdserver: {
+            networkId: 123,
+            subdomain: "frontity",
+          },
           fills: {
             smartAdserver: {
               headerAd: {
@@ -221,7 +225,7 @@ const settings: Settings = [
                   siteId: 103409,
                   pageId: 659846,
                   formatId: 14968,
-                  tagId: "below-header-14968",
+                  tagId: "header-14968",
                   width: 300,
                   height: 600,
                 },

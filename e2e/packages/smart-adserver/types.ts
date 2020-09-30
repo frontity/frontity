@@ -8,13 +8,19 @@ import WpSource from "../../../packages/wp-source/types";
 interface TestSmartAdserver extends Package {
   name: "e2e-smart-adserver";
   state: {
-    source?: WpSource["state"]["source"];
+    source?: {
+      data: WpSource["state"]["source"]["data"];
+      get: Source["state"]["source"]["get"];
+    };
+    router: {
+      link: Router["state"]["router"]["link"];
+    };
   };
   roots: {
-    smartAdserver: React.ElementType;
+    theme: React.ElementType;
   };
 }
 
-export type Packages = Router & Source & TestSmartAdserver & SmartAdserver;
+export type Packages = TestSmartAdserver & Router & Source & SmartAdserver;
 
 export default TestSmartAdserver;

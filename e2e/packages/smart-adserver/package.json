@@ -5,8 +5,8 @@
   "description": "Package to run e2e tests of smart-adserver",
   "dependencies": {
     "frontity": "^1.4.3",
+    "@frontity/router": "^1.0.19",
     "@frontity/smart-adserver": "^1.0.0",
-    "@frontity/source": "^1.2.0",
-    "@frontity/router": "^1.0.19"
+    "@frontity/source": "^1.2.0"
   }
 }
