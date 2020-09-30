@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.0
+
+### Minor Changes
+
+- [`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b) [#568](https://github.com/frontity/frontity/pull/568) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add type for frontity options (`state.frontity.options`).
+
+  https://community.frontity.org/t/support-for-auth-header-in-source-packages/2678/12
+
 ## 1.4.2
 
 ### Patch Changes
