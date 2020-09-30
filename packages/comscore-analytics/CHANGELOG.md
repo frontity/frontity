@@ -1,5 +1,16 @@
 # @frontity/comscore-analytics
 
+## 1.1.0
+
+### Minor Changes
+
+- [`8296f899`](https://github.com/frontity/frontity/commit/8296f899b2e435554a590eac0fc339ded3f597fa) [#573](https://github.com/frontity/frontity/pull/573) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - Updated info in README to add Settings and Usage of each Analytics package
+
+### Patch Changes
+
+- Updated dependencies [[`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b)]:
+  - frontity@1.12.0
+
 ## 1.0.0
 
 ### Major Changes

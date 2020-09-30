@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.9.0
+
+### Minor Changes
+
+- [`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b) [#568](https://github.com/frontity/frontity/pull/568) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for auth headers: https://community.frontity.org/t/support-for-auth-header-in-source-packages/2678/12
+
+  - Use use the URL search param `frontity_name` instead of just `name` for frontity multisite.
+  - Remove all querystring parameters that start with `frontity_` from the page querystring and pass them (camelCased) to `state.frontity.options`.
+
 ## 1.8.0
 
 ### Minor Changes
