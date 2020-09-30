@@ -1,5 +1,40 @@
 # Change Log
 
+## 1.9.0
+
+### Minor Changes
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - New post type handlers for plain query permalinks:
+
+  - `/?p=ID` for posts and custom post types.
+  - `/?page_id=ID` for pages.
+
+* [`5553daf4`](https://github.com/frontity/frontity/commit/5553daf451e22747f62539c33dfe85566d723fe2) [#568](https://github.com/frontity/frontity/pull/568) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for adding auth headers to the source packages by setting `state.source.auth`. This will allow users to e.g. pass Basic Auth header in all requests. Feature Discussion: https://community.frontity.org/t/support-for-custom-headers-in-source-packages/2678
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Sort the link query alphabetically. For example, `?k1=v1&k2=v2` is now the same than `?k2=v2&k1=v1`.
+
+* [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Support the `preview=true` query in the PostType and PostTypeWithQuery handlers.
+
+  If that query is present, the handlers will do an additional request to get
+  the latest revision and they will substitute the `title`, `content` and
+  `excerpt` with the last one.
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Add `queryString` to the list of link params we get/set using
+  `libraries.source.parse` and `libraries.source.stringify`.
+
+* [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Support regular expression patterns to match queries in the URLs, like
+  "RegExp:(\\?|&)preview=true".
+
+### Patch Changes
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Do not set `isHome` to true `when` `isSearch` is `true`.
+
+* [`f57af435`](https://github.com/frontity/frontity/commit/f57af43594cbced7fb3a27cc0a10a978e7307355) [#579](https://github.com/frontity/frontity/pull/579) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix the issue where the `{ force: true }` option was not respected in the postType handler.
+
+* Updated dependencies [[`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b), [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396)]:
+  - frontity@1.12.0
+  - @frontity/source@1.3.1
+
 ## 1.8.4
 
 ### Patch Changes
