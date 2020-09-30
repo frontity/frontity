@@ -100,12 +100,11 @@ class Api {
 
     // Add query parameters
     const query = stringify(params, { arrayFormat: "bracket", encode: false });
-
     // If `auth` was passed, add it to the headers
-    const headers = auth ? { headers: { Authorization: auth } } : {};
+    const headers = auth ? { Authorization: auth } : {};
 
     // Send request
-    return fetch(`${requestUrl}${query && "?"}${query}`, headers).then(
+    return fetch(`${requestUrl}${query && "?"}${query}`, { headers }).then(
       (response: Response) => {
         if (!response.ok) {
           const { status, statusText } = response;

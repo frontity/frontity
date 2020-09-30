@@ -47,6 +47,10 @@ const postTypeHandler = ({
   libraries,
   force,
 }) => {
+  // Name of the endpoint that returned an entity.
+  // Used later in case this fetch is for a preview.
+  let matchedEndpoint = "";
+
   // 1. search id in state or get the entity from WP REST API
   const { route, query } = libraries.source.parse(link);
   if (!state.source.get(route).id || force) {
@@ -79,6 +83,7 @@ const postTypeHandler = ({
         if (populated[0].link === route) {
           isHandled = true;
           isMismatched = false;
+          matchedEndpoint = endpoint;
           break;
         } else {
           isMismatched = true;
@@ -112,6 +117,37 @@ const postTypeHandler = ({
     isPostType: true,
     [`is${capitalize(type)}`]: true,
   });
+
+  // Overwrite properties if the request is a preview.
+  if (query.preview && state.source.auth) {
+    // Get entity from the state.
+    const entity = state.source[type][id];
+
+    // Fetch the latest revision using the token.
+    const response = await libraries.source.api.get({
+      endpoint: `${matchedEndpoint}/${id}/revisions?per_page=1`,
+      params: state.source.params,
+      auth: state.source.auth,
+    });
+
+    // Get modified props from revision.
+    const revision = await response.json();
+    if (revision.code) {
+      console.log(revision);
+      throw new ServerError(revision.message, revision.data.status);
+    }
+
+    const [json] = revision;
+
+    if (json.parent === id) {
+      const { title, content, excerpt } = json;
+      // Merge props with entity.
+      Object.assign(entity, { title, content, excerpt });
+    } else {
+      // Error response.
+      console.warn(json);
+    }
+  }
 };
 
 export default postTypeHandler;
