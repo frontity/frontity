@@ -12,20 +12,32 @@ import SmartAdserver from "../../types";
 const Root: React.FC<Connect<SmartAdserver>> = ({ state }) => {
   const { networkId, subdomain } = state.smartAdserver;
 
-  React.useEffect(() => {
-    window.sas = window.sas || { cmd: [] };
-    window.sas.cmd.push(function () {
-      window.sas.setup({
-        networkid: networkId,
-        domain: `//${subdomain}.smartadserver.com`,
-        async: true,
-      });
-    });
-  }, []);
+  // React.useEffect(() => {
+  //   window.sas = window.sas || { cmd: [] };
+  //   window.sas.cmd.push(function () {
+  //     window.sas.setup({
+  //       networkid: networkId,
+  //       domain: `//${subdomain}.smartadserver.com`,
+  //       async: true,
+  //     });
+  //   });
+  // }, []);
 
   return (
     <Head>
       <script src={`//ced.sascdn.com/tag/${networkId}/smart.js`} async />
+      <script type="application/javascript">
+        {`
+        window.sas = window.sas || { cmd: [] };
+        window.sas.cmd.push(function () {
+          window.sas.setup({
+            networkid: ${networkId},
+            domain: "//${subdomain}.smartadserver.com",
+            async: true,
+          });
+        });
+      `}
+      </script>
     </Head>
   );
 };
