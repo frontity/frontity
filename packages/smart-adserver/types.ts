@@ -46,31 +46,31 @@ export interface CallOptions {
   /**
    *
    */
-  siteId;
+  siteId: number;
   /**
    *
    */
-  pageId;
+  pageId: number;
   /**
    *
    */
-  formatId;
+  formatId: number;
   /**
    *
    */
-  tagId;
+  tagId: string;
   /**
    *
    */
-  width;
+  width: number;
   /**
    *
    */
-  height;
+  height: number;
   /**
    *
    */
-  target;
+  target: number;
 }
 
 /**
