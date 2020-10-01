@@ -4,6 +4,16 @@ import SmartAdserver, { CallOptions } from "../../types";
 import { Connect } from "frontity/types";
 
 /**
+ * Props for the {@link SmartAd} component.
+ */
+interface SmartAdProps extends CallOptions {
+  /**
+   * The type of the ad call.
+   */
+  callType: "iframe" | "std";
+}
+
+/**
  *
  * Component which makes the call for a particular ad and renders it.
  *
@@ -11,7 +21,8 @@ import { Connect } from "frontity/types";
  *
  * @returns The component which renders an ad.
  */
-const SmartAd: React.FC<Connect<SmartAdserver> & CallOptions> = ({
+const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
+  callType,
   siteId,
   pageId,
   formatId,
@@ -26,7 +37,7 @@ const SmartAd: React.FC<Connect<SmartAdserver> & CallOptions> = ({
   useEffect(() => {
     if (sas) {
       window.sas.cmd.push(function () {
-        window.sas.call("std", {
+        window.sas.call(callType, {
           siteId,
           pageId,
           formatId,
