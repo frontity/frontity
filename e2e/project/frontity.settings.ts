@@ -213,7 +213,7 @@ const settings: Settings = [
         state: {
           smartAdserver: {
             networkId: 123,
-            subdomain: "frontity",
+            subdomain: "www3",
           },
           fills: {
             smartAdserver: {
