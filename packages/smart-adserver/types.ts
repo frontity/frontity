@@ -8,7 +8,7 @@ interface SAS {
    * The array of function callbacks that the SmartAdserver library uses
    * to make the ad calls.
    */
-  cmd: Function[];
+  cmd: unknown[];
 
   /**
    * The setup function which initializes the ad manager.

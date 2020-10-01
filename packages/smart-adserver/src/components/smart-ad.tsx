@@ -1,24 +1,17 @@
-import React from "react";
-import { css } from "frontity";
-import { CallOptions } from "../../types";
+import React, { useEffect } from "react";
+import { css, connect } from "frontity";
+import SmartAdserver, { CallOptions } from "../../types";
+import { Connect } from "frontity/types";
 
 /**
  *
- */
-interface SmartAdProps extends CallOptions {
-  /**
-   *
-   */
-  target: string;
-}
-
-/**
+ * Component which makes the call for a particular ad and renders it.
  *
- * @param props - Defined in {@link SmartAdProps}.
+ * @param props - Defined in {@link CallOptions}.
  *
- * @returns A placeholder for an ad.
+ * @returns The component which renders an ad.
  */
-const SmartAd: React.FC<SmartAdProps> = ({
+const SmartAd: React.FC<Connect<SmartAdserver> & CallOptions> = ({
   siteId,
   pageId,
   formatId,
@@ -26,21 +19,25 @@ const SmartAd: React.FC<SmartAdProps> = ({
   target,
   width,
   height,
+  state,
 }) => {
-  React.useEffect(() => {
-    const sas = window.sas || (window.sas = { cmd: [] });
-    sas.cmd.push(function () {
-      sas.call("std", {
-        siteId,
-        pageId,
-        formatId,
-        target,
-        width,
-        height,
-        tagId,
+  const { sas } = state.smartAdserver;
+
+  useEffect(() => {
+    if (sas) {
+      window.sas.cmd.push(function () {
+        window.sas.call("std", {
+          siteId,
+          pageId,
+          formatId,
+          target,
+          width,
+          height,
+          tagId,
+        });
       });
-    });
-  }, []);
+    }
+  }, [sas]);
 
   return (
     <div
@@ -53,4 +50,4 @@ const SmartAd: React.FC<SmartAdProps> = ({
   );
 };
 
-export default SmartAd;
+export default connect(SmartAd);
