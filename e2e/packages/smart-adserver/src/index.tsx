@@ -14,7 +14,33 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries }) => {
 
   return (
     <div id="smart-ads">
-      <SmartAd callType="std" siteId={123} pageId={123} formatId={123} />
+      {/* A basic ad using the std call with a specific tagId */}
+      <SmartAd
+        callType="std"
+        siteId={1}
+        pageId={1}
+        formatId={1}
+        tagId="test-smartad"
+      />
+
+      <div id="default-tag-id">
+        {/* An ad using the default tagId */}
+        <SmartAd callType="std" siteId={2} pageId={2} formatId={2} />
+      </div>
+
+      {/* An ad created using an iframe */}
+      <div id="iframe-ad">
+        <SmartAd
+          callType="iframe"
+          siteId={3}
+          pageId={3}
+          formatId={3}
+          width={200}
+          height={200}
+        />
+      </div>
+
+      {/* An ad that should be rendered by the fill specified in frontity.settings.ts */}
       <Slot name="header" />
     </div>
   );

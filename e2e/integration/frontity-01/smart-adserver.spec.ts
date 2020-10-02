@@ -4,21 +4,28 @@ describe("Smart Adserver", () => {
   });
 
   it("Should load the smart adserver library", () => {
-    // `123` is the networkId defined in state.smartAdserver.networkId
-    cy.get(`script[src="http://ced.sascdn.com/tag/123/smart.js"][async]`);
+    // `1445` is the networkId defined in state.smartAdserver.networkId
+    cy.get(`script[src="//ced.sascdn.com/tag/1445/smart.js"][async]`);
   });
 
-  it("Should render the ad using the SmartAd component from the libraries", () => {});
+  // ----- Testing the various component configurations ------
 
-  it("Should warn if you forget to put the networkId || subdomain", () => {});
+  it("Should render the ad using the SmartAd component from the libraries", () => {
+    cy.get("#test-smartad").should("have.descendants", "script");
+  });
 
-  it("Should make the iframe call", () => {});
+  it("Should render the ad using the SmartAd component and a default tag id", () => {
+    // Check that when there is no tagId specified the the id is "sas_" + `formatId`
+    cy.get("#default-tag-id").should("have.descendants", "#sas_2");
+  });
 
-  it("Should make the std call", () => {});
+  it("Should render the ad in an iframe", () => {
+    cy.get("#iframe-ad").should("have.descendants", "iframe");
+  });
 
   it("Should render the ad in the slot", () => {
-    // Get ad unit from header.
-    cy.get("#header > div").should("have.descendants", "iframe");
+    // The Slot
+    cy.get("#hello").should("have.descendants", "script");
   });
 
   it("Should render with various configurations of options: pageId, formatId, siteId, tagId, target", () => {});
