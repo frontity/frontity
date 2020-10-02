@@ -15,10 +15,10 @@ const Root: React.FC<Connect<SmartAdserver>> = ({ state }) => {
   useEffect(() => {
     window.sas = window.sas || { cmd: [] };
 
-    // Put the reference to window.sas in the state. We will need it to make
-    // sure that the setup function is called before any individual ad call
-    // in the SmartAd component.
-    state.smartAdserver.sas = window.sas;
+    // Set the flag that means that the Smart Adserver library has been
+    // initialized. This is flag is checked by the individual Ad components
+    // before making ad calls.
+    state.smartAdserver.isLoaded = true;
 
     if (!networkId) {
       warn(
@@ -43,7 +43,7 @@ const Root: React.FC<Connect<SmartAdserver>> = ({ state }) => {
 
     // Clean up when component unmounts.
     return () => {
-      window.sas = undefined;
+      state.smartAdserver.isLoaded = false;
     };
   }, [networkId, subdomain]);
 

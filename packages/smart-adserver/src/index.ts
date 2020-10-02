@@ -11,12 +11,14 @@ const smartAdserver: SmartAdserver = {
       smartAdserver: {},
     },
     smartAdserver: {
-      sas: undefined,
+      isLoaded: false,
     },
   },
   libraries: {
     fills: {
-      smartAdserver: { SmartAd },
+      smartAdserver: {
+        SmartAd,
+      },
     },
   },
 };

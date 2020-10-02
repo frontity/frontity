@@ -110,9 +110,14 @@ interface SmartAdserver extends Package {
      */
     smartAdserver: {
       /**
-       * Reference to window.sas that is used internally by the SmartAds library.
+       * A flag that signals if the Smart Adserver library has been initialized
+       * by calling `sas.setup()`.
+       *
+       * A SmartAd component should check it before running `sas.call()` in
+       * order make sure that the ad calls run after initialization.
+       *
        */
-      sas: SAS;
+      isLoaded: boolean;
 
       /**
        * ID of the network (account) at Smart.

@@ -49,12 +49,11 @@ const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
   height,
   state,
 }) => {
-  // Get the reference to window.sas
-  const { sas } = state.smartAdserver;
+  const { isLoaded } = state.smartAdserver;
 
   useEffect(() => {
-    // If it exists, it means that `setup()` of the SmartAdserver has been called.
-    if (sas) {
+    // If true, it means that `setup()` of the SmartAdserver has been called.
+    if (isLoaded) {
       window.sas.cmd.push(function () {
         window.sas.call(callType, {
           siteId,
@@ -67,7 +66,7 @@ const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
         });
       });
     }
-  }, [sas]);
+  }, [isLoaded]);
 
   return <div id={tagId} css={styles(callType, width, height)} />;
 };
