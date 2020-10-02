@@ -15,13 +15,8 @@ import {
   PostData,
   PageData,
   AttachmentData,
-  TaxonomyWithSearchData,
-  CategoryWithSearchData,
-  TagWithSearchData,
-  AuthorWithSearchData,
-  PostTypeArchiveWithSearchData,
-  PostArchiveWithSearchData,
-  DateWithSearchData,
+  SearchData,
+  HomeData,
   // Guards.
   isError,
   isArchive,
@@ -38,6 +33,7 @@ import {
   isPage,
   isAttachment,
 } from "../";
+import { isHome } from "../guards";
 
 const data = {} as Data;
 
@@ -63,7 +59,7 @@ if (isTaxonomy(data)) {
     expectType<Data>(data);
     expectType<ArchiveData>(data);
     expectType<TaxonomyData>(data);
-    expectType<TaxonomyWithSearchData>(data);
+    expectType<TaxonomyData & SearchData>(data);
   }
 }
 
@@ -72,7 +68,7 @@ if (isTaxonomy(data) && isSearch(data)) {
   expectType<Data>(data);
   expectType<ArchiveData>(data);
   expectType<TaxonomyData>(data);
-  expectType<TaxonomyWithSearchData>(data);
+  expectType<TaxonomyData & SearchData>(data);
 }
 
 if (isCategory(data)) {
@@ -80,7 +76,7 @@ if (isCategory(data)) {
   expectType<ArchiveData>(data);
   expectType<TaxonomyData>(data);
   expectType<CategoryData>(data);
-  if (isSearch(data)) expectType<CategoryWithSearchData>(data);
+  if (isSearch(data)) expectType<CategoryData & SearchData>(data);
 }
 
 if (isTag(data)) {
@@ -88,21 +84,21 @@ if (isTag(data)) {
   expectType<ArchiveData>(data);
   expectType<TaxonomyData>(data);
   expectType<TagData>(data);
-  if (isSearch(data)) expectType<TagWithSearchData>(data);
+  if (isSearch(data)) expectType<TagData & SearchData>(data);
 }
 
 if (isAuthor(data)) {
   expectType<Data>(data);
   expectType<ArchiveData>(data);
   expectType<AuthorData>(data);
-  if (isSearch(data)) expectType<AuthorWithSearchData>(data);
+  if (isSearch(data)) expectType<AuthorData & SearchData>(data);
 }
 
 if (isPostTypeArchive(data)) {
   expectType<Data>(data);
   expectType<ArchiveData>(data);
   expectType<PostTypeArchiveData>(data);
-  if (isSearch(data)) expectType<PostTypeArchiveWithSearchData>(data);
+  if (isSearch(data)) expectType<PostTypeArchiveData & SearchData>(data);
 }
 
 if (isPostArchive(data)) {
@@ -110,14 +106,15 @@ if (isPostArchive(data)) {
   expectType<ArchiveData>(data);
   expectType<PostTypeArchiveData>(data);
   expectType<PostArchiveData>(data);
-  if (isSearch(data)) expectType<PostArchiveWithSearchData>(data);
+  if (isSearch(data)) expectType<PostArchiveData & SearchData>(data);
+  if (isHome(data)) expectType<PostArchiveData & HomeData>(data);
 }
 
 if (isDate(data)) {
   expectType<Data>(data);
   expectType<ArchiveData>(data);
   expectType<DateData>(data);
-  if (isSearch(data)) expectType<DateWithSearchData>(data);
+  if (isSearch(data)) expectType<DateData & SearchData>(data);
 }
 
 if (isPostType(data)) {
@@ -135,6 +132,7 @@ if (isPage(data)) {
   expectType<Data>(data);
   expectType<PostTypeData>(data);
   expectType<PageData>(data);
+  if (isHome(data)) expectType<PageData & HomeData>(data);
 }
 
 if (isAttachment(data)) {

@@ -292,3 +292,10 @@ export interface CommentData extends Data {
   total: number;
   totalPages: number;
 }
+
+/**
+ * Interface for the homepage.
+ */
+export interface HomeData extends Data {
+  isHome: true;
+}

@@ -15,6 +15,7 @@ import {
   PageData,
   AttachmentData,
   CommentData,
+  HomeData,
 } from "./";
 
 /**
@@ -164,4 +165,14 @@ export function isAttachment(data: Data): data is AttachmentData {
  */
 export function isComments(data: Data): data is CommentData {
   return (data as CommentData).isComments === true;
+}
+
+/**
+ * Checks if a data object represents the homepage.
+ *
+ * @param data - Object of type {@link Data}.
+ * @returns A boolean value with the result.
+ */
+export function isHome(data: Data): data is HomeData {
+  return (data as HomeData).isHome === true;
 }
