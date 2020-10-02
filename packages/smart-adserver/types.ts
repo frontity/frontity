@@ -55,7 +55,7 @@ declare global {
  * All the possible options are visible in https://support.smartadserver.com/s/article/Tagging-guide.
  *
  */
-export interface CallOptions {
+interface CallOptions {
   /**
    * Identifies the website; parent element of a page.
    */
@@ -85,6 +85,16 @@ export interface CallOptions {
    * See [Using keyword targeting](https://support.smartadserver.com/s/article/Using-keyword-targeting).
    */
   target?: number;
+}
+
+/**
+ * Props for the {@link SmartAd} component.
+ */
+export interface SmartAdProps extends CallOptions {
+  /**
+   * The type of the ad call.
+   */
+  callType: "iframe" | "std";
 }
 
 /**
@@ -158,7 +168,7 @@ interface SmartAdserver extends Package {
         /**
          * The component that is used to render the ads.
          */
-        SmartAd: React.FC;
+        SmartAd: React.FC<SmartAdProps>;
       };
     };
   };

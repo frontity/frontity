@@ -4,7 +4,10 @@ import SmartAdserver, { Packages } from "../types";
 import { Connect } from "frontity/types";
 
 /**
- * @param root0
+ * Root of the package for testing the Smart Ads.
+ *
+ * @param props - Props.
+ * @returns React element.
  */
 const Theme: React.FC<Connect<Packages>> = ({ libraries }) => {
   const { SmartAd } = libraries.fills.smartAdserver;

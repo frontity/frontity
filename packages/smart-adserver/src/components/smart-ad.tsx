@@ -1,17 +1,7 @@
 import React, { useEffect } from "react";
 import { css, connect } from "frontity";
-import SmartAdserver, { CallOptions } from "../../types";
+import SmartAdserver, { SmartAdProps } from "../../types";
 import { Connect } from "frontity/types";
-
-/**
- * Props for the {@link SmartAd} component.
- */
-interface SmartAdProps extends CallOptions {
-  /**
-   * The type of the ad call.
-   */
-  callType: "iframe" | "std";
-}
 
 /**
  * Create styles for the iframe ad.
@@ -22,7 +12,7 @@ interface SmartAdProps extends CallOptions {
  *
  * @returns The styles.
  */
-const styles = (callType, width, height) =>
+const styles = (callType: string, width: number, height: number) =>
   callType === "iframe"
     ? css`
         width: ${width}px;
@@ -32,7 +22,7 @@ const styles = (callType, width, height) =>
 
 /**
  *
- * Component which makes the call for a particular ad and renders it.
+ * Component which makes the ad call for a particular ad and renders it.
  *
  * @param props - Defined in {@link CallOptions}.
  *
