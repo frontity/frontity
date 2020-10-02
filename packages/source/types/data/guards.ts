@@ -4,19 +4,12 @@ import {
   ArchiveData,
   SearchData,
   TaxonomyData,
-  TaxonomyWithSearchData,
   CategoryData,
-  CategoryWithSearchData,
   TagData,
-  TagWithSearchData,
   AuthorData,
-  AuthorWithSearchData,
   PostTypeArchiveData,
-  PostTypeArchiveWithSearchData,
   PostArchiveData,
-  PostArchiveWithSearchData,
   DateData,
-  DateWithSearchData,
   PostTypeData,
   PostData,
   PageData,
@@ -64,18 +57,6 @@ export function isTaxonomy(data: Data): data is TaxonomyData {
 }
 
 /**
- * Checks if a data object represents a search in a taxonomy.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isTaxonomyWithSearch(
-  data: Data
-): data is TaxonomyWithSearchData {
-  return (data as TaxonomyWithSearchData).isTaxonomy === true;
-}
-
-/**
  * Checks if a data object represents a category.
  *
  * @param data - Object of type {@link Data}.
@@ -83,18 +64,6 @@ export function isTaxonomyWithSearch(
  */
 export function isCategory(data: Data): data is CategoryData {
   return (data as CategoryData).isCategory === true;
-}
-
-/**
- * Checks if a data object represents a search in a category.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isCategoryWithSearch(
-  data: Data
-): data is CategoryWithSearchData {
-  return (data as CategoryWithSearchData).isCategory === true;
 }
 
 /**
@@ -108,16 +77,6 @@ export function isTag(data: Data): data is TagData {
 }
 
 /**
- * Checks if a data object represents a search in a tag.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isTagWithSearch(data: Data): data is TagWithSearchData {
-  return (data as TagWithSearchData).isTag === true;
-}
-
-/**
  * Checks if a data object represents an author archive.
  *
  * @param data - Object of type {@link Data}.
@@ -125,16 +84,6 @@ export function isTagWithSearch(data: Data): data is TagWithSearchData {
  */
 export function isAuthor(data: Data): data is AuthorData {
   return (data as AuthorData).isAuthor === true;
-}
-
-/**
- * Checks if a data object represents a search in an author archive.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isAuthorWithSearch(data: Data): data is AuthorWithSearchData {
-  return (data as AuthorWithSearchData).isAuthor === true;
 }
 
 /**
@@ -148,16 +97,6 @@ export function isDate(data: Data): data is DateData {
 }
 
 /**
- * Checks if a data object represents a search in a date archive.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isDateWithSearch(data: Data): data is DateWithSearchData {
-  return (data as DateWithSearchData).isDate === true;
-}
-
-/**
  * Checks if a data object represents a post type archive.
  *
  * @param data - Object of type {@link Data}.
@@ -168,18 +107,6 @@ export function isPostTypeArchive(data: Data): data is PostTypeArchiveData {
 }
 
 /**
- * Checks if a data object represents a search in a post type archive.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isPostTypeArchiveWithSearch(
-  data: Data
-): data is PostTypeArchiveWithSearchData {
-  return (data as PostTypeArchiveWithSearchData).isPostTypeArchive === true;
-}
-
-/**
  * Checks if a data object represents a post archive.
  *
  * @param data - Object of type {@link Data}.
@@ -187,18 +114,6 @@ export function isPostTypeArchiveWithSearch(
  */
 export function isPostArchive(data: Data): data is PostArchiveData {
   return (data as PostArchiveData).isPostArchive === true;
-}
-
-/**
- * Checks if a data object represents a search in a post archive.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isPostArchiveWithSearch(
-  data: Data
-): data is PostArchiveWithSearchData {
-  return (data as PostArchiveWithSearchData).isPostArchive === true;
 }
 
 /**
