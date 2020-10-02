@@ -476,11 +476,17 @@ export interface Pattern<F extends Function = Function> {
   /**
    * The pattern used to compare against the link that is being fetched.
    *
-   * It uses [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp)
-   * under the hood, so please check its documentation to know how to write
-   * patterns.
+   * - To match a URL that doesn't include a query, like "/category/nature",
+   * you have to use a `path-to-regexp` pattern. Please check its documentation
+   * to learn how to use them: https://github.com/pillarjs/path-to-regexp.
+   *
+   * - To match a URL that includes a query, like "/?p=12", you have to use a
+   * regular expression. Start the string with "RegExp:" to differenciate it
+   * from the `path-to-regexp` patterns. Named capture groups will be
+   * added to the params object.
    *
    * @example "/product/:slug"
+   * @example "RegExp:\\?p=(?<id>\\d+)"
    */
   pattern: string;
 

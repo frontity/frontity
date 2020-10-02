@@ -326,6 +326,32 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "embedded-mode",
+    match: [process.env.FRONTITY_SERVER],
+    state: {
+      frontity: {
+        url: "http://localhost:8080",
+      },
+    },
+    packages: [
+      "e2e-preview",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+              },
+            ],
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
