@@ -1,9 +1,7 @@
-import React, { useEffect, createContext } from "react";
+import React, { useEffect } from "react";
 import { Head, connect, warn } from "frontity";
 import { Connect } from "frontity/types";
 import SmartAdserver from "../../types";
-
-export const SmartAdContext = createContext(undefined);
 
 /**
  * Root of the Smartads package.
@@ -11,7 +9,7 @@ export const SmartAdContext = createContext(undefined);
  * @param props - Frontity injected props.
  * @returns React element.
  */
-const Root: React.FC<Connect<SmartAdserver>> = ({ state, children }) => {
+const Root: React.FC<Connect<SmartAdserver>> = ({ state }) => {
   const { networkId, subdomain } = state.smartAdserver;
 
   useEffect(() => {
@@ -50,12 +48,9 @@ const Root: React.FC<Connect<SmartAdserver>> = ({ state, children }) => {
   }, [networkId, subdomain]);
 
   return (
-    <SmartAdContext.Provider value={state.smartAdserver.sas}>
-      <Head>
-        <script src={`//ced.sascdn.com/tag/${networkId}/smart.js`} async />
-      </Head>
-      {children}
-    </SmartAdContext.Provider>
+    <Head>
+      <script src={`//ced.sascdn.com/tag/${networkId}/smart.js`} async />
+    </Head>
   );
 };
 
