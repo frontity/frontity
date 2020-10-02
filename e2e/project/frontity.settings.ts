@@ -222,6 +222,7 @@ const settings: Settings = [
                 library: "smartAdserver.SmartAd",
                 priority: 5,
                 props: {
+                  callType: "std",
                   siteId: 103409,
                   pageId: 659846,
                   formatId: 14968,

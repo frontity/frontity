@@ -1,5 +1,5 @@
 import React, { useEffect, createContext } from "react";
-import { Head, connect } from "frontity";
+import { Head, connect, warn } from "frontity";
 import { Connect } from "frontity/types";
 import SmartAdserver from "../../types";
 
@@ -16,8 +16,25 @@ const Root: React.FC<Connect<SmartAdserver>> = ({ state, children }) => {
 
   useEffect(() => {
     window.sas = window.sas || { cmd: [] };
+
+    // Put the reference to window.sas in the state. We will need it to make
+    // sure that the setup function is called before any individual ad call
+    // in the SmartAd component.
     state.smartAdserver.sas = window.sas;
 
+    if (!networkId) {
+      warn(
+        "state.smartAdserver.networkId was not defined. The Smart Adserver library will not be able to load."
+      );
+    }
+
+    if (!subdomain) {
+      warn(
+        "state.smartAdserver.subdomain was not defined. The Smart Adserver library will not be able to load."
+      );
+    }
+
+    // Set up the Smart Adserver library
     window.sas.cmd.push(function () {
       window.sas.setup({
         networkid: networkId,
@@ -26,6 +43,7 @@ const Root: React.FC<Connect<SmartAdserver>> = ({ state, children }) => {
       });
     });
 
+    // Clean up when component unmounts.
     return () => {
       window.sas = undefined;
     };

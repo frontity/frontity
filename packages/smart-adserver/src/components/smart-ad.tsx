@@ -32,9 +32,11 @@ const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
   height,
   state,
 }) => {
+  // Get the reference to window.sas
   const { sas } = state.smartAdserver;
 
   useEffect(() => {
+    // If it exists, it means that `setup()` of the SmartAdserver has been called.
     if (sas) {
       window.sas.cmd.push(function () {
         window.sas.call(callType, {

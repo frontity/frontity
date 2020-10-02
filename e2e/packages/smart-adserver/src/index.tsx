@@ -6,7 +6,6 @@ import { Connect } from "frontity/types";
 const Theme: React.FC<Connect<Packages>> = connect(({ libraries, state }) => {
   return (
     <>
-      <div> hello </div>
       <Slot name="header" />
     </>
   );
