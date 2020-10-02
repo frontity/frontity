@@ -70,6 +70,8 @@ interface CallOptions {
   formatId: number;
   /**
    * The `id` of the container of the page that will contain the ad.
+   *
+   * @defaultValue `"sas_${formatId}"`
    */
   tagId?: string;
   /**

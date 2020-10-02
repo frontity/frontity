@@ -41,6 +41,12 @@ const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
 }) => {
   const { isLoaded } = state.smartAdserver;
 
+  // If the tagId was not passed as a prop, we fall back to the default used by
+  // Smart Adserver.
+  if (!tagId) {
+    tagId = `sas_${formatId}`;
+  }
+
   useEffect(() => {
     // If true, it means that `setup()` of the SmartAdserver has been called.
     if (isLoaded) {
