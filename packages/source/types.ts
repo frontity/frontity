@@ -12,7 +12,7 @@ import {
 } from "./types/entities";
 
 // Export directly some types.
-export { Data, EntityData } from "./types/data";
+export { Data, DataItem, EntityData } from "./types/data";
 export {
   TaxonomyEntity,
   PostEntity,

@@ -42,7 +42,7 @@ export const commentsHandler: Handler = async ({
    *
    * @returns Object with the following properties:
    * - `response`: object of type {@link Response}.
-   * - `populated`: array of type {@link EntityData}.
+   * - `populated`: array of type {@link DataItem}.
    */
   const fetchComments = async ({ postId, page }) => {
     // Fetch the first page of 100 comments.

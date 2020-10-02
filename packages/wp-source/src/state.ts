@@ -1,5 +1,11 @@
 import WpSource from "../types";
 import { normalize, parse } from "./libraries/route-utils";
+import {
+  isPostType,
+  isTaxonomy,
+  isAuthor,
+  isPostTypeArchive,
+} from "@frontity/source/data";
 
 const state: WpSource["state"]["source"] = {
   get: ({ state }) => (link) => {
@@ -28,16 +34,16 @@ const state: WpSource["state"]["source"] = {
     let entity: any = null;
 
     // Entities are stored in different places depending on their type.
-    if (data.isPostType) {
+    if (isPostType(data)) {
       const { type, id } = data;
       entity = state.source[type][id];
-    } else if (data.isTaxonomy) {
+    } else if (isTaxonomy(data)) {
       const { taxonomy, id } = data;
       entity = state.source[taxonomy][id];
-    } else if (data.isAuthor) {
+    } else if (isAuthor(data)) {
       const { id } = data;
       entity = state.source.author[id];
-    } else if (data.isPostTypeArchive) {
+    } else if (isPostTypeArchive(data)) {
       const { type } = data;
       entity = state.source.type[type];
     }

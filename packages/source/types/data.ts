@@ -4,11 +4,16 @@ import { CommentItem } from "../../wp-comments/types";
 /**
  * This one is the return type of `libraries.source.populate`...
  */
-export interface EntityData {
+export interface DataItem {
   type: string;
   id: number;
   link: string;
 }
+
+/**
+ * @deprecated Use {@link DataItem} instead.
+ */
+export interface EntityData extends DataItem {}
 
 /**
  * Type that represents objects stored in `state.source.data`.
@@ -74,7 +79,7 @@ export interface ErrorData extends Data {
  * Adds properties to `BaseData` to identify archive pages.
  *
  * @property {true} isArchive
- * @property {EntityData[]} items - List of items contained in this archive page.
+ * @property {DataItem[]} items - List of items contained in this archive page.
  * @property {number} page - The page number of this archive page.
  * @property {string} path - The path of this archive page without the page.
  * @property {string} next - The link to the next page if it exists.
@@ -85,7 +90,7 @@ export interface ErrorData extends Data {
  */
 export interface ArchiveData extends Data {
   isArchive: true;
-  items: EntityData[];
+  items: DataItem[];
   page: number;
   path: string;
   next?: string;
