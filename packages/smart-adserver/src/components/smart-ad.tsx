@@ -14,6 +14,23 @@ interface SmartAdProps extends CallOptions {
 }
 
 /**
+ * Create styles for the iframe ad.
+ *
+ * @param callType - Type of call: "iframe" | "std".
+ * @param width - Width in px.
+ * @param height - Height in px.
+ *
+ * @returns The styles.
+ */
+const styles = (callType, width, height) =>
+  callType === "iframe"
+    ? css`
+        width: ${width}px;
+        height: ${height}px;
+      `
+    : css``;
+
+/**
  *
  * Component which makes the call for a particular ad and renders it.
  *
@@ -52,15 +69,7 @@ const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
     }
   }, [sas]);
 
-  return (
-    <div
-      id={tagId}
-      css={css`
-        width: ${width}px;
-        height: ${height}px;
-      `}
-    />
-  );
+  return <div id={tagId} css={styles(callType, width, height)} />;
 };
 
 export default connect(SmartAd);
