@@ -1,7 +1,9 @@
 import { expectType } from "frontity/types/helpers";
 import {
+  // Types.
   Data,
   ErrorData,
+  ArchiveData,
   TaxonomyData,
   CategoryData,
   TagData,
@@ -20,82 +22,123 @@ import {
   PostTypeArchiveWithSearchData,
   PostArchiveWithSearchData,
   DateWithSearchData,
-} from "../data";
+  // Guards.
+  isError,
+  isArchive,
+  isSearch,
+  isTaxonomy,
+  isCategory,
+  isTag,
+  isAuthor,
+  isDate,
+  isPostTypeArchive,
+  isPostArchive,
+  isPostType,
+  isPost,
+  isPage,
+  isAttachment,
+} from "../";
 
 const data = {} as Data;
 
-if (data.isError) {
+if (isError(data)) {
+  expectType<Data>(data);
   expectType<ErrorData>(data);
 }
 
-if (data.isArchive) {
-  expectType<
-    | TaxonomyData
-    | AuthorData
-    | PostTypeArchiveData
-    | DateData
-    | TaxonomyWithSearchData
-    | CategoryWithSearchData
-    | TagWithSearchData
-    | AuthorWithSearchData
-    | PostTypeArchiveWithSearchData
-    | PostArchiveWithSearchData
-    | DateWithSearchData
-  >(data);
+if (isArchive(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
 }
 
-if (data.isTaxonomy) {
-  expectType<TaxonomyData | TaxonomyWithSearchData>(data);
-  if (data.isSearch) expectType<TaxonomyWithSearchData>(data);
+if (isTaxonomy(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
+  expectType<TaxonomyData>(data);
 }
 
-if (data.isCategory) {
-  expectType<TaxonomyData | TaxonomyWithSearchData>(data);
-  expectType<CategoryData | CategoryWithSearchData>(data);
-  if (data.isSearch) expectType<CategoryWithSearchData>(data);
+// Type composition nesting other checks.
+if (isTaxonomy(data)) {
+  if (isSearch(data)) {
+    expectType<Data>(data);
+    expectType<ArchiveData>(data);
+    expectType<TaxonomyData>(data);
+    expectType<TaxonomyWithSearchData>(data);
+  }
 }
 
-if (data.isTag) {
-  expectType<TaxonomyData | TaxonomyWithSearchData>(data);
-  expectType<TagData | TagWithSearchData>(data);
-  if (data.isSearch) expectType<TagWithSearchData>(data);
+// Types can be composited in the same condition.
+if (isTaxonomy(data) && isSearch(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
+  expectType<TaxonomyData>(data);
+  expectType<TaxonomyWithSearchData>(data);
 }
 
-if (data.isAuthor) {
-  expectType<AuthorData | AuthorWithSearchData>(data);
-  if (data.isSearch) expectType<AuthorWithSearchData>(data);
+if (isCategory(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
+  expectType<TaxonomyData>(data);
+  expectType<CategoryData>(data);
+  if (isSearch(data)) expectType<CategoryWithSearchData>(data);
 }
 
-if (data.isPostTypeArchive) {
-  expectType<PostTypeArchiveData | PostTypeArchiveWithSearchData>(data);
-  if (data.isSearch) expectType<PostTypeArchiveWithSearchData>(data);
+if (isTag(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
+  expectType<TaxonomyData>(data);
+  expectType<TagData>(data);
+  if (isSearch(data)) expectType<TagWithSearchData>(data);
 }
 
-if (data.isPostArchive) {
-  expectType<PostArchiveData | PostArchiveWithSearchData>(data);
-  if (data.isSearch) expectType<PostArchiveWithSearchData>(data);
+if (isAuthor(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
+  expectType<AuthorData>(data);
+  if (isSearch(data)) expectType<AuthorWithSearchData>(data);
 }
 
-if (data.isDate) {
-  expectType<DateData | DateWithSearchData>(data);
-  if (data.isSearch) expectType<DateWithSearchData>(data);
+if (isPostTypeArchive(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
+  expectType<PostTypeArchiveData>(data);
+  if (isSearch(data)) expectType<PostTypeArchiveWithSearchData>(data);
 }
 
-if (data.isPostType) {
+if (isPostArchive(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
+  expectType<PostTypeArchiveData>(data);
+  expectType<PostArchiveData>(data);
+  if (isSearch(data)) expectType<PostArchiveWithSearchData>(data);
+}
+
+if (isDate(data)) {
+  expectType<Data>(data);
+  expectType<ArchiveData>(data);
+  expectType<DateData>(data);
+  if (isSearch(data)) expectType<DateWithSearchData>(data);
+}
+
+if (isPostType(data)) {
+  expectType<Data>(data);
   expectType<PostTypeData>(data);
 }
 
-if (data.isPost) {
+if (isPost(data)) {
+  expectType<Data>(data);
   expectType<PostTypeData>(data);
   expectType<PostData>(data);
 }
 
-if (data.isPage) {
+if (isPage(data)) {
+  expectType<Data>(data);
   expectType<PostTypeData>(data);
   expectType<PageData>(data);
 }
 
-if (data.isAttachment) {
+if (isAttachment(data)) {
+  expectType<Data>(data);
   expectType<PostTypeData>(data);
   expectType<AttachmentData>(data);
 }
