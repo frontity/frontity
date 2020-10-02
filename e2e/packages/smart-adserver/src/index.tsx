@@ -3,13 +3,19 @@ import { connect, Slot } from "frontity";
 import SmartAdserver, { Packages } from "../types";
 import { Connect } from "frontity/types";
 
-const Theme: React.FC<Connect<Packages>> = connect(({ libraries, state }) => {
+/**
+ * @param root0
+ */
+const Theme: React.FC<Connect<Packages>> = ({ libraries }) => {
+  const { SmartAd } = libraries.fills.smartAdserver;
+
   return (
-    <>
+    <div id="smart-ads">
+      <SmartAd callType="std" siteId={123} pageId={123} formatId={123} />
       <Slot name="header" />
-    </>
+    </div>
   );
-});
+};
 
 const smartAdserver: SmartAdserver = {
   name: "e2e-smart-adserver",
@@ -23,7 +29,7 @@ const smartAdserver: SmartAdserver = {
     },
   },
   roots: {
-    theme: Theme,
+    theme: connect(Theme),
   },
 };
 
