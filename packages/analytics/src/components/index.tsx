@@ -1,18 +1,25 @@
 import React from "react";
 import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
-import Analytics from "../../types";
+import { Packages } from "../../types";
 
 /**
- * Send a pageview anytime the title changes
- * and data.isReady === true.
+ * Analytics Root component.
+ *
+ * It sends a pageview anytime the title changes and `data.isReady` is `true`
+ * for the current link (i.e. `state.router.link`).
+ *
+ * @remarks
+ * This component is automatically rendered by Frontity and it's not meant to be
+ * imported and used anywhere.
+ *
+ * @param props - Injected props by `connect`.
+ *
+ * @returns Root element.
  */
-const Root: React.FC<Connect<Analytics>> = ({ state, actions }) => {
+const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
   const { link } = state.router;
   const { isReady } = state.source.get(link);
-
-  // Store the previous title.
-  const [prevTitle, setPrevTitle] = React.useState("");
 
   // Store if a pageview has been sent for this link.
   const [isPageviewSent, setIsPageviewSent] = React.useState(false);
@@ -31,12 +38,10 @@ const Root: React.FC<Connect<Analytics>> = ({ state, actions }) => {
        */
       titleTemplate={!isReady ? "%s " : ""}
       onChangeClientState={({ title }) => {
-        if (isReady && !isPageviewSent && prevTitle !== title) {
-          // Store current title.
-          setPrevTitle(title);
+        if (isReady && !isPageviewSent) {
           // Send pageview.
-          actions.analytics.sendPageview({
-            page: state.router.link,
+          actions.analytics.pageview({
+            link: state.router.link,
             title,
           });
           // Mark pageview as sent.

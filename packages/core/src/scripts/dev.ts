@@ -1,3 +1,47 @@
+import * as tsNode from "ts-node";
+
+/**
+ * This file gets transpiled to JS anyway, but if the users's
+ * frontity.settings.(js|ts) is an ES Module, we cannot require an ES Module
+ * from a commonjs module.
+ *
+ * This is why we use ts-node here as well as in the `build` script.
+ * It's only because we want the user to be able to use ES Modules syntax in
+ * the frontity.settings.(js|ts) file like this.
+ *
+ * @example
+ * ```js
+ * export default {
+ *   name: 'my-theme',
+ *   state: {},
+ *   packages: {},
+ * }
+ * ```
+ */
+tsNode.register({
+  transpileOnly: true,
+  compilerOptions: {
+    // Target latest version of ECMAScript.
+    target: "es2017",
+    // Search under node_modules for non-relative imports.
+    moduleResolution: "node",
+    // commonjs modules.
+    module: "commonjs",
+    // Allow default imports from modules with no default export.
+    allowSyntheticDefaultImports: true,
+    // Don't emit; allow Babel to transform files.
+    noEmit: true,
+    // Import non-ES modules as default imports.
+    esModuleInterop: true,
+    // Resolve JSON files.
+    resolveJsonModule: true,
+    // Support for JSX.
+    jsx: "react",
+    // Transpile JS as well.
+    allowJs: true,
+  },
+});
+
 import "./utils/envs";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
@@ -13,7 +57,62 @@ import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
 import createSymlinks from "./utils/create-symlinks";
 
-// Start Frontity development environment.
+/**
+ * The options of the dev command.
+ */
+export interface DevOptions {
+  /**
+   * The Webpack mode used, either "development" or "production".
+   *
+   * @defaultValue "development"
+   */
+  mode: Mode;
+
+  /**
+   * The port used to start the server.
+   *
+   * @defaultValue 3000
+   */
+  port: number;
+
+  /**
+   * Indicate if the server should be started using HTTPS. The certs used
+   * are in the /certs folder of this package. They are valid only for local
+   * usage.
+   *
+   * @defaultValue false
+   */
+  isHttps: boolean;
+
+  /**
+   * The JavaScript transpilation target. Either "es5" or "module".
+   *
+   * @defaultValue "module"
+   */
+  target: "es5" | "module";
+
+  /**
+   * If this command should open a browser or not.
+   *
+   * @defaultValue true
+   */
+  openBrowser?: boolean;
+
+  /**
+   * The publicPath used in Webpack.
+   *
+   * @defaultValue "/static/"
+   */
+  publicPath: string;
+}
+
+/**
+ * The Frontity dev command that starts a development Frontity server.
+ *
+ * @param options - Defined in {@link DevOptions}.
+ *
+ * @returns A promise that resolves when the server has started.
+ */
 export default async ({
   isHttps,
   mode,
@@ -21,14 +120,7 @@ export default async ({
   target,
   openBrowser = true,
   publicPath,
-}: {
-  port: number;
-  isHttps: boolean;
-  mode: Mode;
-  target: "es5" | "module";
-  openBrowser?: boolean;
-  publicPath: string;
-}): Promise<void> => {
+}: DevOptions): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
   const { outDir } = frontityConfig;
@@ -52,6 +144,7 @@ export default async ({
     isHttps,
     target,
     openBrowser,
+    publicPath,
   });
 
   // Get config for webpack, babel and frontity.

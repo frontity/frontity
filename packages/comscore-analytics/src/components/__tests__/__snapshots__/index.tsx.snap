@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comscore Analytics Component should not render if no tracking IDs are specified 1`] = `""`;
+
+exports[`Comscore Analytics Component should not render if no tracking IDs are specified 2`] = `""`;
+
+exports[`Comscore Analytics Component should render a script for a single tracking ID 1`] = `"<script data-rh=\\"true\\" async=\\"true\\" src=\\"https://sb.scorecardresearch.com/beacon.js\\"></script>"`;
+
+exports[`Comscore Analytics Component should render a script for a single tracking ID 2`] = `"<noscript data-rh=\\"true\\" ><img alt=\\"comscore\\" src=\\"https://sb.scorecardresearch.com/p?c1=2&c2=333333&cv=2.0&cj=1\\" /></noscript>"`;
+
+exports[`Comscore Analytics Component should render script for all tracking IDs 1`] = `"<script data-rh=\\"true\\" async=\\"true\\" src=\\"https://sb.scorecardresearch.com/beacon.js\\"></script>"`;
+
+exports[`Comscore Analytics Component should render script for all tracking IDs 2`] = `"<noscript data-rh=\\"true\\" ><img alt=\\"comscore\\" src=\\"https://sb.scorecardresearch.com/p?c1=2&c2=111111&cv=2.0&cj=1\\" /></noscript><noscript data-rh=\\"true\\" ><img alt=\\"comscore\\" src=\\"https://sb.scorecardresearch.com/p?c1=2&c2=222222&cv=2.0&cj=1\\" /></noscript>"`;

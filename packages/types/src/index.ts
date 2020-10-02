@@ -1,5 +1,5 @@
 export { default as Settings } from "./settings";
-export { default as Package } from "./package";
+export { default as Package, Fill } from "./package";
 export { Action, AsyncAction, ServerAction, Context } from "./action";
 export { default as Derived } from "./derived";
 export { default as State } from "./state";

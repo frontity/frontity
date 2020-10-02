@@ -2,14 +2,58 @@ import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
 
+/**
+ * The parameters for {@link postTypeHandler}.
+ */
+interface PostTypeHandlerParams {
+  /**
+   * The list of [WP REST API endpoints](https://developer.wordpress.org/rest-api/reference/)
+   * from which the generated handler is going to fetch the data.
+   */
+  endpoints: string[];
+}
+
+/**
+ * A {@link Handler} function generator for WordPress Post Types.
+ *
+ * This function will generate a handler function for specific
+ * [WP REST API endpoints](https://developer.wordpress.org/rest-api/reference/)
+ * from which the data is going to be fetched. The generated handler will fetch
+ * data from all specified endpoints.
+ *
+ * @param options - Options for the handler generator: {@link PostTypeHandlerParams}.
+ *
+ * @example
+ * ```js
+ *   const postTypeHandlerFunc = postTypeHandler({ endpoints: ['post']});
+ *   libraries.source.handlers.push({
+ *     name: "post type",
+ *     priority: 30,
+ *     pattern: "/(.*)?/:slug",
+ *     func: postTypeHandlerFunc,
+ *   })
+ * ```
+ *
+ * @returns An async "handler" function that can be passed as an argument to the handler object.
+ * This function will be invoked by the frontity framework when calling `source.fetch()` for
+ * a specific entity.
+ */
 const postTypeHandler = ({
   endpoints,
-}: {
-  endpoints: string[];
-}): Handler => async ({ link, params, state, libraries, force }) => {
+}: PostTypeHandlerParams): Handler => async ({
+  link,
+  params,
+  state,
+  libraries,
+  force,
+}) => {
+  // Name of the endpoint that returned an entity.
+  // Used later in case this fetch is for a preview.
+  let matchedEndpoint = "";
+
   // 1. search id in state or get the entity from WP REST API
   const { route, query } = libraries.source.parse(link);
-  if (!state.source.get(route).id) {
+  if (!state.source.get(route).id || force) {
     const { slug } = params;
 
     // 1.1 transform "posts" endpoint to state.source.postEndpoint
@@ -19,6 +63,7 @@ const postTypeHandler = ({
 
     // 1.2 iterate over finalEndpoints array
     let isHandled = false;
+    let isMismatched = false;
     for (const endpoint of finalEndpoints) {
       const response = await libraries.source.api.get({
         endpoint,
@@ -33,9 +78,24 @@ const postTypeHandler = ({
 
       // exit loop if this endpoint returns an entity!
       if (populated.length > 0) {
-        isHandled = true;
-        break;
+        // We have to check if the link property in the data that we
+        // populated is the same as the current route.
+        if (populated[0].link === route) {
+          isHandled = true;
+          isMismatched = false;
+          matchedEndpoint = endpoint;
+          break;
+        } else {
+          isMismatched = true;
+        }
       }
+    }
+
+    if (isMismatched) {
+      throw new ServerError(
+        `You have tried to access content at route: ${route} but it does not exist`,
+        404
+      );
     }
 
     // 1.3 if no entity has found, throw an error
@@ -57,6 +117,37 @@ const postTypeHandler = ({
     isPostType: true,
     [`is${capitalize(type)}`]: true,
   });
+
+  // Overwrite properties if the request is a preview.
+  if (query.preview && state.source.auth) {
+    // Get entity from the state.
+    const entity = state.source[type][id];
+
+    // Fetch the latest revision using the token.
+    const response = await libraries.source.api.get({
+      endpoint: `${matchedEndpoint}/${id}/revisions?per_page=1`,
+      params: state.source.params,
+      auth: state.source.auth,
+    });
+
+    // Get modified props from revision.
+    const revision = await response.json();
+    if (revision.code) {
+      console.log(revision);
+      throw new ServerError(revision.message, revision.data.status);
+    }
+
+    const [json] = revision;
+
+    if (json.parent === id) {
+      const { title, content, excerpt } = json;
+      // Merge props with entity.
+      Object.assign(entity, { title, content, excerpt });
+    } else {
+      // Error response.
+      console.warn(json);
+    }
+  }
 };
 
 export default postTypeHandler;

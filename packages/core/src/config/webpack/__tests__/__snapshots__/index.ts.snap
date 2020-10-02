@@ -78,8 +78,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 300000,
-      "maxEntrypointSize": 300000,
+      "maxAssetSize": 500000,
+      "maxEntrypointSize": 500000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -98,6 +98,7 @@ Object {
           "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../analyze/es5-development.html",
+          "reportTitle": [Function],
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -138,7 +139,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -224,8 +224,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 300000,
-      "maxEntrypointSize": 300000,
+      "maxAssetSize": 500000,
+      "maxEntrypointSize": 500000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -244,6 +244,7 @@ Object {
           "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../analyze/module-development.html",
+          "reportTitle": [Function],
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -284,7 +285,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -357,8 +357,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 3000000,
-      "maxEntrypointSize": 3000000,
+      "maxAssetSize": 5000000,
+      "maxEntrypointSize": 5000000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -377,6 +377,7 @@ Object {
           "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "analyze/server-development.html",
+          "reportTitle": [Function],
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -405,7 +406,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -496,8 +496,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 300000,
-      "maxEntrypointSize": 300000,
+      "maxAssetSize": 500000,
+      "maxEntrypointSize": 500000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -516,6 +516,7 @@ Object {
           "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../analyze/es5-production.html",
+          "reportTitle": [Function],
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -550,7 +551,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -634,8 +634,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 300000,
-      "maxEntrypointSize": 300000,
+      "maxAssetSize": 500000,
+      "maxEntrypointSize": 500000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -654,6 +654,7 @@ Object {
           "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "../analyze/module-production.html",
+          "reportTitle": [Function],
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -688,7 +689,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [
@@ -761,8 +761,8 @@ Object {
       "publicPath": "/static/",
     },
     "performance": Object {
-      "maxAssetSize": 3000000,
-      "maxEntrypointSize": 3000000,
+      "maxAssetSize": 5000000,
+      "maxEntrypointSize": 5000000,
     },
     "plugins": Array [
       BundleAnalyzerPlugin {
@@ -781,6 +781,7 @@ Object {
           "logLevel": "silent",
           "openAnalyzer": false,
           "reportFilename": "analyze/server-production.html",
+          "reportTitle": [Function],
           "startAnalyzer": true,
           "statsFilename": "stats.json",
           "statsOptions": null,
@@ -809,7 +810,6 @@ Object {
       "alias": Object {
         "any-promise": "promise-monofill",
         "build": "build",
-        "lodash": "lodash-es",
         "ramda/src": "ramda/es",
       },
       "extensions": Array [

@@ -21,9 +21,10 @@ const wpSourceErrors: WpSourceErrors = {
   actions: {
     wpSourceErrors: {
       init: ({ state, libraries }) => {
-        const { path } = libraries.source.parse(state.frontity.initialLink);
-        if (path !== "/") {
-          state.source.api = `https://httpstat.us/${path}?rest_route=/`;
+        const { query } = libraries.source.parse(state.frontity.initialLink);
+        if (query.statusCode) {
+          // This is a simple app made on glitch.me which just returns the HTTP status code passed as param.
+          state.source.api = `https://ballistic-western-donkey.glitch.me/status/${query.statusCode}?rest_route=/`;
         } else {
           state.source.api = "https://test.frontity.org/wp-json";
         }

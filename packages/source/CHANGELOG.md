@@ -1,5 +1,33 @@
 # Change Log
 
+## 1.3.1
+
+### Patch Changes
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Rename `RouteParams` type to `LinkParams`. The word `route` is now used to
+  describe a `link` without the pagination part.
+- Updated dependencies [[`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b)]:
+  - frontity@1.12.0
+
+## 1.3.0
+
+### Minor Changes
+
+- [`870e4ba5`](https://github.com/frontity/frontity/commit/870e4ba5ab6afd216d9f2c5f15383fb8028d471c) [#542](https://github.com/frontity/frontity/pull/542) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add the new types required for wp-comments.
+
+### Patch Changes
+
+- [`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b) [#548](https://github.com/frontity/frontity/pull/548) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add a derived prop in `state.source` called `entity` that returns the entity pointed by a given link.
+
+## 1.2.2
+
+### Patch Changes
+
+- [`3f61f711`](https://github.com/frontity/frontity/commit/3f61f71197d33b478427d1b74882c31258861e92) [#493](https://github.com/frontity/frontity/pull/493) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README created.
+
+- Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b)]:
+  - frontity@1.9.0
+
 ## 1.2.1
 
 ### Patch Changes

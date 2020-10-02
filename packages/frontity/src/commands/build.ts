@@ -1,13 +1,21 @@
 import chalk from "chalk";
 import { errorLogger } from "../utils";
 
-export default async ({ development, target, publicPath }) => {
+export default async ({
+  development = false,
+  target = "both",
+  publicPath = "/static/",
+}: {
+  development?: boolean;
+  target?: "es5" | "module" | "both";
+  publicPath?: string;
+}) => {
   let build: Function;
 
   const options = {
     mode: development ? "development" : "production",
-    target: target || "both",
-    publicPath: publicPath || "/static/",
+    target,
+    publicPath,
   };
 
   try {

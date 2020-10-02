@@ -11,11 +11,20 @@ import post1 from "./mocks/post-type/post-1.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
 import { ServerError } from "@frontity/source";
+import { PostEntity } from "@frontity/source/types";
 
-let store: InitializedStore<WpSource>;
+interface WpSourceAndCpt extends WpSource {
+  state: {
+    source: WpSource["state"]["source"] & {
+      cpt: Record<string, PostEntity>;
+    };
+  };
+}
+
+let store: InitializedStore<WpSourceAndCpt>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
+  store = createStore<WpSourceAndCpt>(clone(wpSource()));
   store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
@@ -221,15 +230,67 @@ describe("attachment", () => {
   });
 
   test("overwrites the data when fetched with { force: true }", async () => {
-    // Mock Api responses
-    api.get = jest
-      .fn()
-      .mockResolvedValueOnce(mockResponse([post1]))
-      .mockResolvedValueOnce(mockResponse(attachment1));
+    api.get = jest.fn((_) => Promise.resolve(mockResponse([post1])));
 
     // Fetch entities
     await store.actions.source.fetch("/post-1");
+
+    // Restore the mock (just change the ID)
+    api.get = jest.fn((_) =>
+      Promise.resolve(mockResponse([{ ...post1, id: 2 }]))
+    );
+
+    // Fetch again
     await store.actions.source.fetch("/post-1", { force: true });
+
+    expect(store.state.source).toMatchSnapshot();
+
+    // Should have the new ID now
+    expect(store.state.source.get("/post-1").id).toEqual(2);
+
+    // Delete the IDs because there are different
+    const firstPost = store.state.source.post[1];
+    const secondPost = store.state.source.post[2];
+    delete firstPost.id;
+    delete secondPost.id;
+
+    expect(firstPost).toMatchObject(secondPost);
+  });
+
+  test("Every unknown URL should return a 404 even if it's substring matches a path", async () => {
+    api.get = jest.fn((_) =>
+      Promise.resolve(
+        mockResponse([
+          {
+            id: 1,
+            slug: "post-1",
+            type: "post",
+            link: "https://test.frontity.org/post-1/",
+          },
+        ])
+      )
+    );
+
+    await store.actions.source.fetch("/undefined/post-1/");
+
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("Every unknown URL should return a 404 even if it's substring matches a path 2", async () => {
+    api.get = jest.fn((_) =>
+      Promise.resolve(
+        mockResponse([
+          {
+            id: 1,
+            slug: "post-1",
+            type: "post",
+            link: "https://test.frontity.org/post-1/",
+          },
+        ])
+      )
+    );
+
+    await store.actions.source.fetch("/does/not/exist/");
 
     expect(store.state.source).toMatchSnapshot();
   });

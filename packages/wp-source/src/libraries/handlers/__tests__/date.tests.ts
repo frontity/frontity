@@ -14,7 +14,7 @@ import date20190101PostsCpt from "./mocks/date/2019-01-01-posts-cpt.json";
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
+  store = createStore<WpSource>(clone(wpSource()));
   store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
@@ -63,6 +63,29 @@ describe("date", () => {
     // Fetch entities
     await store.actions.source.fetch("/2019/?some=param");
     await store.actions.source.fetch("/2019/page/2/?some=param");
+    expect(api.get.mock.calls).toMatchSnapshot();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("get two pages of year 2019 (with search)", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(
+        mockResponse(date2019Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "3",
+        })
+      )
+      .mockResolvedValueOnce(
+        mockResponse(date2019PostsPage2, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "3",
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/2019/?s=some+search");
+    await store.actions.source.fetch("/2019/page/2/?s=some+search");
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();
   });
@@ -147,6 +170,24 @@ describe("date", () => {
 
     // Make sure that api.get() was called for each `source.fetch()`
     expect(api.get).toHaveBeenCalledTimes(2);
+
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("An invalid month of the year should return a 404", async () => {
+    await store.actions.source.fetch("/2020/99/");
+
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("An invalid day of the month should return a 404", async () => {
+    await store.actions.source.fetch("/2020/12/77");
+
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("An invalid day AND month should return a 404", async () => {
+    await store.actions.source.fetch("/2020/999/999");
 
     expect(store.state.source).toMatchSnapshot();
   });

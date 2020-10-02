@@ -1,0 +1,36 @@
+{
+  "name": "@frontity/google-tag-manager-analytics",
+  "version": "1.1.0",
+  "description": "Analytics package to use Google Tag Manager with Frontity",
+  "homepage": "https://github.com/frontity/frontity",
+  "license": "Apache-2.0",
+  "keywords": [
+    "frontity",
+    "frontity-analytics",
+    "frontity-google-tag-manager"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "scripts": {
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+  },
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
+  "dependencies": {
+    "@frontity/analytics": "^1.2.0",
+    "frontity": "^1.12.0"
+  },
+  "devDependencies": {
+    "@types/react-test-renderer": "^16.9.3",
+    "react-test-renderer": "^16.13.1",
+    "react-helmet-async": "1.0.4"
+  }
+}
