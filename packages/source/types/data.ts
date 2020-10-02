@@ -1,10 +1,5 @@
 /* eslint-disable */
-import { CommentItem } from "../../../wp-comments/types";
-
-/**
- * Export all default type guards defined for each `Data` interface.
- */
-export * from "./guards";
+import { CommentItem } from "../../wp-comments/types";
 
 /**
  * This one is the return type of `libraries.source.populate`...

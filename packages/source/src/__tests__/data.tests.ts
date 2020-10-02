@@ -17,6 +17,9 @@ import {
   AttachmentData,
   SearchData,
   HomeData,
+} from "../../types/data";
+
+import {
   // Guards.
   isError,
   isArchive,
@@ -32,8 +35,8 @@ import {
   isPost,
   isPage,
   isAttachment,
-} from "../";
-import { isHome } from "../guards";
+  isHome,
+} from "../data";
 
 const data = {} as Data;
 

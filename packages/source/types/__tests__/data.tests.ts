@@ -14,7 +14,7 @@ import {
   AttachmentData,
   SearchData,
   HomeData,
-} from "../";
+} from "../data";
 
 const data: Record<string, Data> = {};
 

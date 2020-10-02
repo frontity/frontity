@@ -16,7 +16,7 @@ import {
   AttachmentData,
   CommentData,
   HomeData,
-} from "./";
+} from "../types/data";
 
 /**
  * Checks if a data object represents an error.
