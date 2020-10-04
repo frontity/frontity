@@ -1,10 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
-import {
-  TaxonomyData,
-  TaxonomyWithSearchData,
-} from "@frontity/source/types/data";
+import { TaxonomyData } from "@frontity/source/types/data";
 
 /**
  * The parameters for {@link taxonomyHandler}.
@@ -18,24 +15,25 @@ interface TaxonomyHandlerParams {
   taxonomy: string;
 
   /**
-   * The name of the [WordPress REST API endpoint](https://developer.wordpress.org/rest-api/reference/)
-   * from which the generated handler is going to fetch the taxonomy data.
+   * The name of the [WordPress REST API
+   * endpoint](https://developer.wordpress.org/rest-api/reference/) from which
+   * the generated handler is going to fetch the taxonomy data.
    *
    * @example "actors"
    */
   endpoint: string;
 
   /**
-   * The [WordPress REST API endpoint](https://developer.wordpress.org/rest-api/reference/)
-   * of the custom post type that should be fetched for this taxonomy.
+   * The [WordPress REST API
+   * endpoint](https://developer.wordpress.org/rest-api/reference/) of the
+   * custom post type that should be fetched for this taxonomy.
    *
    * @example "movies"
    */
   postTypeEndpoint?: string;
 
   /**
-   * The params that should be used in the REST API when fetching this
-   * taxonomy.
+   * The params that should be used in the REST API when fetching this taxonomy.
    */
   params?: Record<string, any>;
 }
@@ -45,7 +43,8 @@ interface TaxonomyHandlerParams {
  *
  * This function will generate a handler function for the specified parameters.
  *
- * @param options - Options for the handler generator: {@link TaxonomyHandlerParams}.
+ * @param options - Options for the handler generator:
+ * {@link TaxonomyHandlerParams}.
  *
  * @example
  * ```js
@@ -58,9 +57,9 @@ interface TaxonomyHandlerParams {
  *   })
  * ```
  *
- * @returns An async "handler" function that can be passed as an argument to the handler object.
- * This function will be invoked by the frontity framework when calling `source.fetch()` for
- * a specific entity.
+ * @returns An async "handler" function that can be passed as an argument to the
+ * handler object. This function will be invoked by the frontity framework when
+ * calling `source.fetch()` for a specific entity.
  */
 const taxonomyHandler = ({
   taxonomy,
@@ -83,7 +82,7 @@ const taxonomyHandler = ({
   const { route, page, query } = parse(link);
 
   // 1. search id in state or get it from WP REST API
-  let { id } = state.source.get(route);
+  let { id }: Partial<TaxonomyData> = state.source.get(route);
   if (!id || force) {
     const { slug } = params;
     // Request entity from WP
@@ -133,9 +132,11 @@ const taxonomyHandler = ({
   // `libraries.source.populate()` creates a data object for each taxonomy it
   // receives from the Response object
   //
-  // If state.source.data[route] doesn't contain that the `taxonomy` property it means that
-  // something else was returned from the endopoint and this handler was matched erroneously.
-  if (!state.source.data[route].taxonomy) {
+  // If state.source.data[route] doesn't contain the `taxonomy` property it
+  // means that something else was returned from the endopoint and this handler
+  // was matched erroneously.
+  const data: Partial<TaxonomyData> = state.source.data[route];
+  if (!data.taxonomy) {
     throw new ServerError(
       `You have tried to access content at route: ${route} but it does not exist`,
       404
@@ -152,8 +153,8 @@ const taxonomyHandler = ({
   const hasOlderPosts = page > 1;
 
   /**
-   * A helper function that helps "glue" the link back together
-   * from `route`, `query` and `page`.
+   * A helper function that helps "glue" the link back together from `route`,
+   * `query` and `page`.
    *
    * @param page - The page number.
    *
@@ -168,9 +169,9 @@ const taxonomyHandler = ({
 
   // 5. add data to source
   const currentPageData = state.source.data[link];
-  const firstPageData = state.source.data[route];
+  const firstPageData: Partial<TaxonomyData> = state.source.data[route];
 
-  const newPageData: TaxonomyData | TaxonomyWithSearchData = {
+  const newPageData = {
     id: firstPageData.id,
     taxonomy: firstPageData.taxonomy,
     items,
@@ -178,8 +179,6 @@ const taxonomyHandler = ({
     totalPages,
     isArchive: true,
     isTaxonomy: true,
-    isFetching: currentPageData.isFetching,
-    isReady: currentPageData.isReady,
     [`is${capitalize(firstPageData.taxonomy)}`]: true,
 
     // Add next and previous if they exist.
@@ -190,7 +189,7 @@ const taxonomyHandler = ({
     ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
-  Object.assign(currentPageData, newPageData);
+  Object.assign(currentPageData, newPageData) as TaxonomyData;
 };
 
 export default taxonomyHandler;
