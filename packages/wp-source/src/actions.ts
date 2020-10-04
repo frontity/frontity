@@ -11,6 +11,7 @@ import {
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
+import { isError, isSearch } from "@frontity/source/data";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
@@ -24,48 +25,42 @@ const actions: WpSource["actions"]["source"] = {
     const linkParams = parse(route);
     const { query, page, queryString } = linkParams;
 
-    // Get current data object.
-    const data = source.data[link];
-
     // Get options.
     const force = options ? options.force : false;
 
-    if (!data) {
-      // If there is no data yet, just set the necessary flags.
-      source.data[link] = {
-        isFetching: true,
-        isReady: false,
-      };
-    } else if (force) {
-      // If we fetch with `{ force: true }`, then only set `isFetching` to true
-      // again.
-      data.isFetching = true;
+    // Get current data object.
+    let data = source.data[link];
 
-      // This is a workaround in case that `data` has previously included an
-      // error.
-      if (data.isError) {
-        source.data[link] = {
-          isFetching: true,
-          isReady: false,
-        };
-      }
-    } else if ((data.isReady && !force) || data.isFetching || data.isError) {
-      // Always set link, route, query & page
-      data.link = link;
-      data.route = linkParams.route;
-      data.query = query;
-      data.page = page;
-      return;
+    // Initialize `data` if it does not exist yet. Also, reinitialize it only in
+    // the case `data` is an error and `{ force: true }` is used.
+    if (!data || (force && isError(data))) {
+      source.data[link] = data = {
+        isFetching: false,
+        isReady: false,
+        route: linkParams.route,
+        link,
+        query,
+        page,
+      };
+    }
+    // Reassign `route`, `link`, `query`, `page` to fix custom handlers that do
+    // not add them.
+    else {
+      source.data[link] = data = {
+        ...data,
+        route: linkParams.route,
+        link,
+        query,
+        page,
+      };
     }
 
-    // Always set link, route, query & page
-    source.data[link].link = link;
-    source.data[link].route = linkParams.route;
-    source.data[link].query = query;
-    source.data[link].page = page;
+    // Stop fetching if data is ready or being fetched and `{ force: true }` is
+    // not used.
+    if (!force && data && (data.isReady || data.isFetching)) return;
 
-    // Make sure isFetching is true before starting the fetch.
-    source.data[link].isFetching = true;
+    // Reached this point, make sure `isFetching` is true.
+    data.isFetching = true;
 
     // Get and execute the corresponding handler based on path.
     try {
@@ -99,7 +94,7 @@ const actions: WpSource["actions"]["source"] = {
       // and the matched handler is not used to match for queries (the ones that
       // start with "RegExp:").
       const isHome =
-        source.data[link].isSearch !== true &&
+        isSearch(source.data[link]) !== true &&
         !handler.pattern.startsWith("RegExp:") &&
         route === normalize(state.source.subdirectory || "/");
 
@@ -122,6 +117,10 @@ const actions: WpSource["actions"]["source"] = {
           [`is${e.status}`]: true,
           errorStatus: e.status,
           errorStatusText: e.statusText,
+          route: linkParams.route,
+          link,
+          query,
+          page,
         };
         source.data[link] = errorData;
       } else {
