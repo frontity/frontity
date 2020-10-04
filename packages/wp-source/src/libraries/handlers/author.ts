@@ -2,6 +2,23 @@ import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
 import { AuthorData, AuthorWithSearchData } from "@frontity/source/types/data";
 
+/**
+ * A {@link Handler} for fetching posts by author.
+ *
+ * @param params - Defined in {@link Handler}.
+ *
+ * @example
+ * ```js
+ *   libraries.source.handlers.push({
+ *     name: "author",
+ *     priority: 20,
+ *     pattern: "/author/:slug",
+ *     func: authorHandler,
+ *   })
+ * ```
+ *
+ * @returns A Promise that will resolve once the data for the posts has loaded.
+ */
 const authorHandler: Handler = async ({
   link: linkArg,
   route: routeArg,
@@ -19,7 +36,7 @@ const authorHandler: Handler = async ({
   const { slug } = params;
 
   // 1. Search id in state or get it from WP REST API.
-  let { id } = state.source.get(route);
+  let { id }: Partial<AuthorData> = state.source.get(route);
   if (!id || force) {
     // Request author from WP
     const response = await api.get({ endpoint: "users", params: { slug } });
@@ -58,14 +75,22 @@ const authorHandler: Handler = async ({
   // returns true if previous page exists
   const hasOlderPosts = page > 1;
 
+  /**
+   * A helper function that helps "glue" the link back together from `route`,
+   * `query` and `page`.
+   *
+   * @param page - The page number.
+   *
+   * @returns The full link for a particular page.
+   */
   const getPageLink = (page: number) =>
     libraries.source.stringify({ route, query, page });
 
   // 5. Add data to source..
   const currentPageData = state.source.data[link];
-  const firstPageData = state.source.data[route];
+  const firstPageData: Partial<AuthorData> = state.source.data[route];
 
-  const newPageData: AuthorData | AuthorWithSearchData = {
+  const newPageData = {
     id: firstPageData.id,
     items,
     total,
@@ -83,7 +108,9 @@ const authorHandler: Handler = async ({
     ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
-  Object.assign(currentPageData, newPageData);
+  Object.assign(currentPageData, newPageData) as
+    | AuthorData
+    | AuthorWithSearchData;
 };
 
 export default authorHandler;
