@@ -58,7 +58,7 @@ const taxonomy: TaxonomyData = {
   id: 12,
   isTaxonomy: true,
   page: 1,
-  path: "/custom-taxonomy/nature/",
+  route: "/custom-taxonomy/nature/",
   link: "/custom-taxonomy/nature/",
   query: {},
 };
@@ -85,7 +85,7 @@ const taxonomyWithSearchData: TaxonomyData & SearchData = {
   id: 12,
   isTaxonomy: true,
   page: 1,
-  path: "/custom-taxonomy/nature/",
+  route: "/custom-taxonomy/nature/",
   link: "/custom-taxonomy/nature/?s=nature",
   query: { s: "nature" },
   isSearch: true,
@@ -104,7 +104,7 @@ const category: CategoryData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/category/nature/",
+  route: "/category/nature/",
   link: "/category/nature/",
   query: {},
 };
@@ -121,7 +121,7 @@ const categoryWithSearchData: CategoryData & SearchData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/category/nature/",
+  route: "/category/nature/",
   link: "/category/nature/?s=gullfoss",
   query: { s: "gullfoss" },
   isSearch: true,
@@ -140,7 +140,7 @@ const tag: TagData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/tag/japan/",
+  route: "/tag/japan/",
   link: "/tag/japan/",
   query: {},
 };
@@ -159,7 +159,7 @@ const tagWithSearchData: TagData & SearchData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/tag/japan/",
+  route: "/tag/japan/",
   link: "/tag/japan/?s=shinjuku",
   query: { s: "shinjuku" },
 };
@@ -174,7 +174,7 @@ const author: AuthorData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/author/mario/",
+  route: "/author/mario/",
   link: "/author/mario/",
   query: {},
 };
@@ -191,7 +191,7 @@ const authorWithSearchData: AuthorData & SearchData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/author/mario/",
+  route: "/author/mario/",
   link: "/author/mario/?s=nature",
   query: { s: "nature" },
 };
@@ -206,7 +206,7 @@ const postTypeArchive: PostTypeArchiveData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/movies/",
+  route: "/movies/",
   link: "/movies/",
   query: {},
 };
@@ -223,7 +223,7 @@ const postTypeArchiveWithSearchData: PostTypeArchiveData & SearchData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/movies/",
+  route: "/movies/",
   link: "/movies/?s=nature",
   query: { s: "nature" },
 };
@@ -240,7 +240,7 @@ const postArchive: PostArchiveData & HomeData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/",
+  route: "/",
   link: "/",
   query: {},
 };
@@ -259,7 +259,7 @@ const postArchiveWithSearchData: PostArchiveData & HomeData & SearchData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/",
+  route: "/",
   link: "/?s=nature",
   query: { s: "nature" },
 };
@@ -276,7 +276,7 @@ const dateArchive: DateData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/2016/03/24/",
+  route: "/2016/03/24/",
   link: "/2016/03/24/",
   query: {},
 };
@@ -295,7 +295,7 @@ const dateArchiveWithSearchData: DateData & SearchData = {
   total: 0,
   totalPages: 0,
   page: 1,
-  path: "/2016/03/24/",
+  route: "/2016/03/24/",
   link: "/2016/03/24/?s=nature",
   query: { s: "nature" },
 };
