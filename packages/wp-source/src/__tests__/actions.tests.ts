@@ -4,6 +4,9 @@ import wpSource from "../";
 import WpSource, { Pattern, Handler } from "../../types";
 import * as handlers from "../libraries/handlers";
 import { getMatch } from "../libraries/get-match";
+import { Data } from "@frontity/source/types";
+import { isCategory, isError, isHome } from "@frontity/source/data";
+import { CategoryData, ErrorData } from "@frontity/source/types/data";
 
 // Create mock for handler generators
 jest.mock("../libraries/handlers");
@@ -28,9 +31,9 @@ beforeEach(() => {
     name: "always",
     priority: 0,
     pattern: "/(.*)",
-    func: jest.fn(async ({ route, state }) => {
+    func: jest.fn(async ({ link, state }) => {
       await Promise.resolve();
-      Object.assign(state.source.data[route], {
+      Object.assign(state.source.data[link], {
         type: "example",
         id: 1,
         isPostType: true,
@@ -62,7 +65,9 @@ describe("actions.source.fetch", () => {
       isPostType: true,
       isFetching: false,
       isReady: true,
-    };
+      link: "/some/route/",
+      query: {},
+    } as Data;
 
     await store.actions.source.fetch("/some/route/");
     expect(handler.func).not.toHaveBeenCalled();
@@ -73,6 +78,8 @@ describe("actions.source.fetch", () => {
     store.state.source.data["/some/route/"] = {
       isFetching: false,
       isReady: false,
+      link: "/some/route/",
+      query: {},
     };
     const fetching = store.actions.source.fetch("/some/route/");
     expect(store.state.source.get("/some/route").isFetching).toBe(true);
@@ -86,7 +93,7 @@ describe("actions.source.fetch", () => {
     observe(() => {
       const data = store.state.source.get("/");
       if (data.isReady) {
-        expect(data.isHome).toBe(true);
+        expect(isHome(data)).toBe(true);
         done();
       }
     });
@@ -97,7 +104,7 @@ describe("actions.source.fetch", () => {
     observe(() => {
       const data = store.state.source.get("/page/123");
       if (data.isReady) {
-        expect(data.isHome).toBe(true);
+        expect(isHome(data)).toBe(true);
         done();
       }
     });
@@ -109,7 +116,7 @@ describe("actions.source.fetch", () => {
     observe(() => {
       const data = store.state.source.get("/blog");
       if (data.isReady) {
-        expect(data.isHome).toBe(true);
+        expect(isHome(data)).toBe(true);
         done();
       }
     });
@@ -121,7 +128,7 @@ describe("actions.source.fetch", () => {
     observe(() => {
       const data = store.state.source.get("/blog/page/123");
       if (data.isReady) {
-        expect(data.isHome).toBe(true);
+        expect(isHome(data)).toBe(true);
         done();
       }
     });
@@ -135,7 +142,9 @@ describe("actions.source.fetch", () => {
       isError: true,
       isFetching: false,
       isReady: true,
-    };
+      link: "/some/route/",
+      query: {},
+    } as ErrorData;
 
     await store.actions.source.fetch("/some/route/", { force: true });
     expect(handler.func).toHaveBeenCalled();
@@ -185,6 +194,10 @@ describe("actions.source.fetch", () => {
           "isError": true,
           "isFetching": false,
           "isReady": true,
+          "link": "@unknown/link/",
+          "page": 1,
+          "query": Object {},
+          "route": "@unknown/link/",
         },
       }
     `);
@@ -299,6 +312,8 @@ describe("actions.source.init", () => {
     store.state.source.data["/some/route/page/2/?a=b"] = {
       isFetching: false,
       isReady: false,
+      link: "/some/route/page/2/?a=b",
+      query: {},
     };
 
     await store.actions.source.fetch("/some/route/page/2/?a=b");
@@ -318,6 +333,8 @@ describe("actions.source.init", () => {
     store.state.source.data["/some/route/"] = {
       isFetching: false,
       isReady: true,
+      link: "/some/route/",
+      query: {},
     };
 
     const fetchLink = store.actions.source.fetch("/some/route/", {
@@ -335,14 +352,19 @@ describe("actions.source.init", () => {
 
   test("state.data['/some/route/'].isCategory should be removed when fetching with { force: true }", async () => {
     // Get initial data into the store
-    const initialData: any = {
+    const initialData: CategoryData = {
       isArchive: true,
       isTaxonomy: true,
       isCategory: true,
       taxonomy: "category",
+      id: 7,
       items: [],
       isReady: true,
       isFetching: false,
+      link: "/some/route/",
+      query: {},
+      route: "/some/route/",
+      page: 1,
     };
 
     store.state.source.data["/some/route/"] = initialData;
@@ -355,7 +377,7 @@ describe("actions.source.init", () => {
       });
     });
 
-    expect(store.state.source.data["/some/route/"].isCategory).toBe(true);
+    expect(isCategory(store.state.source.data["/some/route/"])).toBe(true);
     expect((store.state.source.data["/some/route/"] as any).items).toEqual([]);
 
     await store.actions.source.fetch("/some/route/", {
@@ -368,7 +390,7 @@ describe("actions.source.init", () => {
     expect(data).toMatchSnapshot();
 
     // NOTE!!! This should fail in wp-source 2.0, because `isCategory` and `items` should be removed
-    expect(data.isCategory).toBe(true);
+    expect(isCategory(data)).toBe(true);
     expect((data as any).items).toEqual([]);
   });
 
@@ -390,7 +412,7 @@ describe("actions.source.init", () => {
 
     expect(data).toMatchSnapshot();
 
-    expect(data.isError).toBeUndefined();
+    expect(isError(data)).toBe(false);
     expect((data as any).errorStatus).toBeUndefined();
     expect((data as any).errorStatusText).toBeUndefined();
   });
