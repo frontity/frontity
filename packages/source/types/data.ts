@@ -23,10 +23,11 @@ export interface EntityData extends DataItem {}
  */
 export interface Data {
   link: string;
-  // route: string; // this one was deprecated, if I remember correctly.
   query: object;
   isFetching: boolean;
   isReady: boolean;
+  route?: string;
+  page?: number;
 }
 
 // ERROR
@@ -91,8 +92,8 @@ export interface ErrorData extends Data {
 export interface ArchiveData extends Data {
   isArchive: true;
   items: DataItem[];
+  route: string;
   page: number;
-  path: string;
   next?: string;
   previous?: string;
   total?: number;
@@ -108,6 +109,8 @@ export interface ArchiveData extends Data {
 export interface SearchData extends Data {
   isSearch: true;
   searchQuery: string;
+  route: string;
+  page: number;
 }
 
 /**
