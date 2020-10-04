@@ -34,33 +34,31 @@ const actions: WpSource["actions"]["source"] = {
     // Initialize `data` if it does not exist yet. Also, reinitialize it only in
     // the case `data` is an error and `{ force: true }` is used.
     if (!data || (force && isError(data))) {
-      source.data[link] = data = {
-        isFetching: false,
+      data = source.data[link] = {
+        isFetching: true,
         isReady: false,
         route: linkParams.route,
         link,
         query,
         page,
       };
-    }
-    // Reassign `route`, `link`, `query`, `page` to fix custom handlers that do
-    // not add them.
-    else {
-      source.data[link] = data = {
+    } else {
+      // Reassign `route`, `link`, `query`, `page` to fix custom handlers that
+      // do not add them.
+      data = source.data[link] = {
         ...data,
         route: linkParams.route,
         link,
         query,
         page,
       };
+      // Stop fetching if data is ready or being fetched and `{ force: true }`
+      // is not used.
+      if (!force && (data.isReady || data.isFetching)) return;
+
+      // Reached this point, make sure `isFetching` is true.
+      data.isFetching = true;
     }
-
-    // Stop fetching if data is ready or being fetched and `{ force: true }` is
-    // not used.
-    if (!force && data && (data.isReady || data.isFetching)) return;
-
-    // Reached this point, make sure `isFetching` is true.
-    data.isFetching = true;
 
     // Get and execute the corresponding handler based on path.
     try {
@@ -140,8 +138,8 @@ const actions: WpSource["actions"]["source"] = {
 
     libraries.source.api.init({ api, isWpCom });
 
-    // If the URL contains an auth token, then add it to the state.
-    // This is normally the case e.g, when accessing the post preview.
+    // If the URL contains an auth token, then add it to the state. This is
+    // normally the case e.g, when accessing the post preview.
     const auth = state.frontity?.options?.sourceAuth;
     const authFromEnv = process.env.FRONTITY_SOURCE_AUTH;
     if (auth || authFromEnv) {
