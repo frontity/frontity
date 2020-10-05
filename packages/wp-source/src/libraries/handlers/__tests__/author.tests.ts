@@ -71,7 +71,7 @@ describe("author", () => {
   });
 
   test("overwrites the data when fetched with { force: true }", async () => {
-    // Add iniital data to the store
+    // Add initial data to the store
     await store.libraries.source.populate({
       state: store.state,
       response: mockResponse(author1),

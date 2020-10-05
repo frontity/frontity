@@ -9,7 +9,7 @@ import postsSubdir from "../handlers/__tests__/mocks/post-archive/posts-subdir.j
 import cpts from "../handlers/__tests__/mocks/cpt-archive/cpts.json";
 
 const initStore = (): InitializedStore<WpSource> => {
-  const config = clone(wpSource());
+  const config: WpSource = clone(wpSource());
   return createStore(config);
 };
 
