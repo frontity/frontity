@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { State } from "frontity/types";
+import {
+  CategoryData,
+  PostArchiveData,
+  PostData,
+  AuthorData,
+} from "@frontity/source/types/data";
 import { HeadTag, Packages } from "../../../types";
 
 /**
@@ -47,7 +53,11 @@ export const mockPostEntity = (headTags?: HeadTag[]): MockPostEntityData => {
         isPost: true,
         isFetching: false,
         isReady: true,
-      },
+        link: "/post-1/",
+        route: "/post-1/",
+        query: {},
+        page: 1,
+      } as PostData,
     },
   };
 };
@@ -96,7 +106,11 @@ export const mockPostType = (headTags: HeadTag[]): MockPostTypeData => {
         isHome: true,
         isFetching: false,
         isReady: true,
-      },
+        link: "/",
+        route: "/",
+        query: {},
+        page: 1,
+      } as PostArchiveData,
     },
   };
 };
@@ -137,15 +151,19 @@ export const mockTaxonomy = (headTags: HeadTag[]): MockTaxonomyData => {
     },
     data: {
       "/category/cat-1/": {
-        taxonomy: "category" as "category",
+        taxonomy: "category",
         id: 1,
         items: [],
-        isArchive: true as true,
-        isTaxonomy: true as true,
-        isCategory: true as true,
-        isFetching: false as false,
-        isReady: true as true,
-      },
+        isArchive: true,
+        isTaxonomy: true,
+        isCategory: true,
+        isFetching: false,
+        isReady: true,
+        link: "/post-1/",
+        route: "/post-1/",
+        query: {},
+        page: 1,
+      } as CategoryData,
     },
   };
 };
@@ -190,7 +208,11 @@ export const mockAuthor = (headTags: HeadTag[]): MockAuthorData => {
         isAuthor: true as true,
         isFetching: false as false,
         isReady: true as true,
-      },
+        link: "/author/author-1/",
+        route: "/author/author-1/",
+        query: {},
+        page: 1,
+      } as AuthorData,
     },
   };
 };
