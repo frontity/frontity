@@ -1,4 +1,5 @@
 import * as frontity from "frontity";
+import * as frontityError from "@frontity/error";
 import { Context } from "frontity/types";
 import tinyRouter from "..";
 import TinyRouter from "../../types";
@@ -205,7 +206,7 @@ describe("actions", () => {
     test("should warn if autoFetch is enabled but there is no source pkg", () => {
       const ctx = {} as Context;
       get.mockReturnValue({});
-      const frontityWarn = jest.spyOn(frontity, "warn");
+      const frontityWarn = jest.spyOn(frontityError, "warn");
       const store = createStore(config);
       store.actions.source = undefined;
       store.actions.router.beforeSSR({ ctx });
