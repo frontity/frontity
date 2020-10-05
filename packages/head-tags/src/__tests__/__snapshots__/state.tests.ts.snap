@@ -212,8 +212,7 @@ exports[`state.headTags.get() (post entity) shows a warning message if \`state.f
 Array [
   Array [
     "Property \`state.headTags.links.transform\` is defined but \`state.frontity.url\` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed.
-
-If you have any questions, join our community at https://community.frontity.org/.
+Visit https://community.frontity.org for help! 🙂
 ",
   ],
 ]
@@ -239,8 +238,7 @@ Array [
     }
   ]
 }
-
-If you have any questions, join our community at https://community.frontity.org/.
+Visit https://community.frontity.org for help! 🙂
 ",
   ],
 ]

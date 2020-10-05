@@ -114,6 +114,7 @@ export const commentsHandler: Handler = async ({
     items,
     total,
     totalPages,
-    areComments: true,
+    type: "comments",
+    isComments: true,
   });
 };

@@ -6,7 +6,7 @@ Comments package that adds integration for WordPress native comments.
 
 > ## Beta version
 >
-> Please, bear in mind that this package is currently in beta version. It doesn't have proper tests or docs yet and its implementation may change with the final release.
+> Please, bear in mind that this package is currently in beta version. It is not fully documented yet and its implementation may change with the final release.
 
 ## Install
 
@@ -15,6 +15,14 @@ npm i @frontity/wp-comments
 ```
 
 ## Usage
+
+> In order to use this package, you will need to add a single line of configuration to your Wordpress installation:
+
+```php
+add_filter( 'rest_allow_anonymous_comments', '__return_true' );
+```
+
+You can add that directly in your `theme.php` file or use a [Code Snippets](https://wordpress.org/plugins/code-snippets/) plugin.
 
 This package doesn't have any configuration, it should just be added in the `frontity.settings.js` to the `packages` array.
 

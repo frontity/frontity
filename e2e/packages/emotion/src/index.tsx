@@ -1,5 +1,5 @@
 import React from "react";
-import { Global, css, connect, URL, styled } from "frontity";
+import { Global, css, connect, styled } from "frontity";
 import Package from "../types";
 
 /**
