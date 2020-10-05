@@ -33,6 +33,10 @@ describe("Script", () => {
     cy.get("[data-test-id='target']").should("have.text", "ON");
   });
 
+  /**
+   * This one was added to check this bug was solved:
+   * https://github.com/frontity/frontity/issues/592.
+   */
   it("should not fail when scripts are unmounted", () => {
     cy.get("[data-test-id='unmount-script']").click();
   });
