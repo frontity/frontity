@@ -20,7 +20,7 @@ There is a detailed guide about how to contribute coding at our docs: [Code Cont
 
 >***WARNING: `npm test` will be run automatically each time your commit or push, so it may take a while. If it fails, it won't let you commit/push. Fix the tests and try again.***
 
-If you get stuck on any of these steps, you should check the [Code Contributions guide](https://docs.frontity.org/contributing/code-contributions).
+If you get stuck on any of these steps, you should check the [Code Contributions guide](https://docs.frontity.org/contributing/code-contribution-guide).
 
 ## Other types of contributions
 
