@@ -28,7 +28,7 @@ const styles = (callType: string, width: number, height: number) =>
  *
  * @returns The component which renders an ad.
  */
-const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
+export const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
   callType,
   siteId,
   pageId,

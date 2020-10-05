@@ -213,7 +213,7 @@ const settings: Settings = [
         state: {
           smartAdserver: {
             networkId: 1445,
-            subdomain: "www3",
+            subdomain: "www",
           },
           fills: {
             smartAdserver: {
@@ -223,9 +223,9 @@ const settings: Settings = [
                 priority: 5,
                 props: {
                   callType: "std",
-                  siteId: 123,
-                  pageId: 123,
-                  formatId: 123,
+                  siteId: 78061,
+                  pageId: 884496,
+                  formatId: 33780,
                   tagId: "hello",
                   width: 300,
                   height: 600,
