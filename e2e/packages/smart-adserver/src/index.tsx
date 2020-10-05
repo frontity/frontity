@@ -3,6 +3,10 @@ import { connect, Slot } from "frontity";
 import SmartAdserver, { Packages } from "../types";
 import { Connect } from "frontity/types";
 
+const siteId = 78061;
+const pageId = 884496;
+const formatId = 33780;
+
 /**
  * Root of the package for testing the Smart Ads.
  *
@@ -17,24 +21,29 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries }) => {
       {/* A basic ad using the std call with a specific tagId */}
       <SmartAd
         callType="std"
-        siteId={1}
-        pageId={1}
-        formatId={1}
+        siteId={siteId}
+        pageId={pageId}
+        formatId={formatId}
         tagId="test-smartad"
       />
 
       <div id="default-tag-id">
         {/* An ad using the default tagId */}
-        <SmartAd callType="std" siteId={2} pageId={2} formatId={2} />
+        <SmartAd
+          callType="std"
+          siteId={siteId}
+          pageId={pageId}
+          formatId={formatId}
+        />
       </div>
 
       {/* An ad created using an iframe */}
       <div id="iframe-ad">
         <SmartAd
           callType="iframe"
-          siteId={3}
-          pageId={3}
-          formatId={3}
+          siteId={siteId}
+          pageId={pageId}
+          formatId={formatId}
           width={200}
           height={200}
         />

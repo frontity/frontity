@@ -1,6 +1,6 @@
-# `@frontity/smart-admanager`
+# `@frontity/smart-adserver`
 
-[![Version](https://img.shields.io/npm/v/@frontity/wp-comments.svg)](https://www.npmjs.com/package/@frontity/wp-comments) [![npm](https://img.shields.io/npm/dw/@frontity/wp-comments)](https://www.npmjs.com/package/@frontity/wp-comments) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@frontity/smart-adserver.svg)](https://www.npmjs.com/package/@frontity/smart-adserver) [![npm](https://img.shields.io/npm/dw/@frontity/smart-adserver)](https://www.npmjs.com/package/@frontity/smart-adserver) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
 A package that integrates [Smart AdServer](https://smartadserver.com/) with Frontity.
 
@@ -68,7 +68,7 @@ More info about how to use this package can be found in the [Feature Discussion]
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/wp-comments/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/smart-adserver/CHANGELOG.md)
 
 ---
 
