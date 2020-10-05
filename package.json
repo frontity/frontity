@@ -16,6 +16,7 @@
     "@changesets/cli": "^2.10.3",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "@types/jest": "^26.0.10",
     "cross-env": "^5.2.1",
     "eslint": "^6.2.2",
     "eslint-import-resolver-typescript": "^2.0.0",
