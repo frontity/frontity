@@ -3,6 +3,7 @@ import { connect, Slot } from "frontity";
 import SmartAdserver, { Packages } from "../types";
 import { Connect } from "frontity/types";
 
+// These are the same values as defined in the frontity.settings.ts for the e2e project.
 const siteId = 78061;
 const pageId = 884496;
 const formatId = 33780;
@@ -13,45 +14,70 @@ const formatId = 33780;
  * @param props - Props.
  * @returns React element.
  */
-const Theme: React.FC<Connect<Packages>> = ({ libraries }) => {
+const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
   const { SmartAd } = libraries.fills.smartAdserver;
 
-  return (
-    <div id="smart-ads">
-      {/* A basic ad using the std call with a specific tagId */}
-      <SmartAd
-        callType="std"
-        siteId={siteId}
-        pageId={pageId}
-        formatId={formatId}
-        tagId="test-smartad"
-      />
+  const { pathname } = new URL(state.router.link, "http://localhost:3001");
 
-      <div id="default-tag-id">
-        {/* An ad using the default tagId */}
+  if (pathname === "/other-page/") {
+    return (
+      <div>
         <SmartAd
           callType="std"
           siteId={siteId}
           pageId={pageId}
           formatId={formatId}
+          tagId="other-page-ad"
         />
       </div>
+    );
+  }
 
-      {/* An ad created using an iframe */}
-      <div id="iframe-ad">
+  return (
+    <>
+      <button
+        id="change-page"
+        onClick={() => actions.router.set("/other-page/")}
+      >
+        go to other page
+      </button>
+
+      <div id="smart-ads">
+        {/* A basic ad using the std call with a specific tagId */}
         <SmartAd
-          callType="iframe"
+          callType="std"
           siteId={siteId}
           pageId={pageId}
           formatId={formatId}
-          width={200}
-          height={200}
+          tagId="test-smartad"
         />
-      </div>
 
-      {/* An ad that should be rendered by the fill specified in frontity.settings.ts */}
-      <Slot name="header" />
-    </div>
+        <div id="default-tag-id">
+          {/* An ad using the default tagId */}
+          <SmartAd
+            callType="std"
+            siteId={siteId}
+            pageId={pageId}
+            formatId={formatId}
+          />
+        </div>
+
+        {/* An ad created using an iframe */}
+        <div id="iframe-ad">
+          <SmartAd
+            callType="iframe"
+            siteId={siteId}
+            pageId={pageId}
+            formatId={formatId}
+            width={200}
+            height={200}
+          />
+        </div>
+
+        {/* An ad that should be rendered by the fill specified in frontity.settings.ts */}
+        <Slot name="header" />
+      </div>
+    </>
   );
 };
 
@@ -63,6 +89,28 @@ const smartAdserver: SmartAdserver = {
     },
     router: {
       link: "/",
+    },
+  },
+  actions: {
+    source: {
+      fetch: ({ state }) => async (link) => {
+        const { data } = state.source;
+        if (!data[link]) {
+          data[link] = {
+            link,
+            isFetching: true,
+            isReady: false,
+          };
+
+          await Promise.resolve();
+
+          data[link] = {
+            ...data[link],
+            isFetching: false,
+            isReady: true,
+          };
+        }
+      },
     },
   },
   roots: {

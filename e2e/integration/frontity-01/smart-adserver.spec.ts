@@ -26,5 +26,12 @@ describe("Smart Adserver", () => {
     cy.get("#hello").should("have.descendants", "iframe");
   });
 
+  it("Should unmount correctly and show the other ad in the other page", () => {
+    // Go to "/other-page/".
+    cy.get("button#change-page").click();
+
+    cy.get("#other-page-ad").should("have.descendants", "iframe");
+  });
+
   it("Should render with various configurations of options: pageId, formatId, siteId, tagId, target", () => {});
 });

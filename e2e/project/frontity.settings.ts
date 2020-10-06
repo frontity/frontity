@@ -208,6 +208,7 @@ const settings: Settings = [
     name: "smart-adserver",
     packages: [
       "e2e-smart-adserver",
+      "@frontity/tiny-router",
       {
         name: "@frontity/smart-adserver",
         state: {
