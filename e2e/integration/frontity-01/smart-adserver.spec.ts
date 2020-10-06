@@ -9,14 +9,13 @@ describe("Smart Adserver", () => {
   });
 
   // ----- Testing the various component configurations ------
-
   it("Should render the ad using the SmartAd component from the libraries", () => {
-    cy.get("#test-smartad").should("have.descendants", "script");
+    cy.get("#test-smartad").should("have.descendants", "iframe");
   });
 
   it("Should render the ad using the SmartAd component and a default tag id", () => {
     // Check that when there is no tagId specified the the id is "sas_" + `formatId`
-    cy.get("#default-tag-id").should("have.descendants", "#sas_2");
+    cy.get("#default-tag-id").should("have.descendants", "#sas_33780");
   });
 
   it("Should render the ad in an iframe", () => {
@@ -24,8 +23,7 @@ describe("Smart Adserver", () => {
   });
 
   it("Should render the ad in the slot", () => {
-    // The Slot
-    cy.get("#hello").should("have.descendants", "script");
+    cy.get("#hello").should("have.descendants", "iframe");
   });
 
   it("Should render with various configurations of options: pageId, formatId, siteId, tagId, target", () => {});
