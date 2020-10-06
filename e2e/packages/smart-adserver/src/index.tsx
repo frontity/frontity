@@ -41,9 +41,9 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries }) => {
       <div id="iframe-ad">
         <SmartAd
           callType="iframe"
-          siteId={siteId}
-          pageId={pageId}
-          formatId={formatId}
+          siteId={154826}
+          pageId={792435}
+          formatId={53441}
           width={200}
           height={200}
         />
@@ -56,7 +56,6 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries }) => {
 };
 
 const smartAdserver: SmartAdserver = {
-  name: "e2e-smart-adserver",
   state: {
     source: {
       data: {},

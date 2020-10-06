@@ -9,10 +9,6 @@ import WpSource from "../../../packages/wp-source/types";
  */
 interface TestSmartAdserver extends Package {
   /**
-   * Package name.
-   */
-  name: "e2e-smart-adserver";
-  /**
    * State exposed by this package.
    */
   state: {
