@@ -20,11 +20,13 @@ interface TestSmartAdserver extends Package {
        * Map of data describing each link in Frontity.
        */
       data: WpSource["state"]["source"]["data"];
+
       /**
        * Getter for the data object given a specific link.
        */
       get: Source["state"]["source"]["get"];
     };
+
     /**
      * Router namespace.
      */
@@ -35,6 +37,7 @@ interface TestSmartAdserver extends Package {
       link: Router["state"]["router"]["link"];
     };
   };
+
   /**
    * The root components exposed by this package.
    */
