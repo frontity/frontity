@@ -41,9 +41,9 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries }) => {
       <div id="iframe-ad">
         <SmartAd
           callType="iframe"
-          siteId={154826}
-          pageId={792435}
-          formatId={53441}
+          siteId={siteId}
+          pageId={pageId}
+          formatId={formatId}
           width={200}
           height={200}
         />
