@@ -42,8 +42,8 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
         go to other page
       </button>
 
+      {/* A basic ad using the std call with a specific tagId */}
       <div id="smart-ads">
-        {/* A basic ad using the std call with a specific tagId */}
         <SmartAd
           callType="std"
           siteId={siteId}
@@ -52,8 +52,8 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
           tagId="test-smartad"
         />
 
+        {/* An ad using the default tagId */}
         <div id="default-tag-id">
-          {/* An ad using the default tagId */}
           <SmartAd
             callType="std"
             siteId={siteId}
