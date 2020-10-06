@@ -1,13 +1,18 @@
 import { Package } from "frontity/types";
 
 /**
- * Package to do e2e testing of the `<Script>` component.
+ * Package to do e2e testing of Frontity's Script component.
  */
 interface Script extends Package {
   /**
-   * Package name.
+   * Root components exposed by this package.
    */
-  name: "script";
+  roots: {
+    /**
+     * Script namespace.
+     */
+    script: React.ElementType;
+  };
 }
 
 export default Script;

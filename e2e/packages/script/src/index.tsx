@@ -42,13 +42,9 @@ const Component: React.FC = () => {
 };
 
 const ScriptPackage: Package = {
-  name: "script",
-  state: {},
-  actions: {},
   roots: {
     script: Component,
   },
-  libraries: {},
 };
 
 export default ScriptPackage;
