@@ -43,7 +43,7 @@ interface TestSmartAdserver extends Package {
    */
   roots: {
     /**
-     * Theme namespace.
+     * The root component.
      */
     theme: React.ElementType;
   };

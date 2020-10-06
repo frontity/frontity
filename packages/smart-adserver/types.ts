@@ -60,28 +60,34 @@ interface CallOptions {
    * Identifies the website; parent element of a page.
    */
   siteId: number;
+
   /**
    * Identifies the page on a website; child element of the website.
    */
   pageId: number;
+
   /**
    * Identifies the format (medium rectangle, skyscraper, etc.).
    */
   formatId: number;
+
   /**
    * The `id` of the container of the page that will contain the ad.
    *
    * @defaultValue `"sas_${formatId}"`
    */
   tagId?: string;
+
   /**
    * The width of the ad. Used in the calls of type `iframe`.
    */
   width?: number;
+
   /**
    * The height of the ad. Used in the calls of type `iframe`.
    */
   height?: number;
+
   /**
    * Used to pass keywords and key=value pairs.
    * See [Using keyword targeting](https://support.smartadserver.com/s/article/Using-keyword-targeting).
