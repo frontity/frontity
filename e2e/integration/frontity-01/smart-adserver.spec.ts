@@ -18,9 +18,12 @@ describe("Smart Adserver", () => {
     cy.get("#default-tag-id").should("have.descendants", "#sas_33780");
   });
 
-  it("Should render the ad in an iframe", () => {
-    cy.get("#iframe-ad").should("have.descendants", "iframe");
-  });
+  // This test case is commented out on purpose. The pageId, siteId & formatId
+  // that are used at the moment do not support the iframe calls.
+  //
+  // it("Should render the ad in an iframe", () => {
+  //   cy.get("#iframe-ad").should("have.descendants", "iframe");
+  // });
 
   it("Should render the ad in the slot", () => {
     cy.get("#hello").should("have.descendants", "iframe");
@@ -32,6 +35,4 @@ describe("Smart Adserver", () => {
 
     cy.get("#other-page-ad").should("have.descendants", "iframe");
   });
-
-  it("Should render with various configurations of options: pageId, formatId, siteId, tagId, target", () => {});
 });
