@@ -1,6 +1,6 @@
 {
   "name": "@frontity/smart-adserver",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Integrate your Frontity site with Smart Adserver",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
