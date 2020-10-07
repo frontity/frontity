@@ -6,7 +6,6 @@
   "dependencies": {
     "frontity": "^1.4.3",
     "@frontity/router": "^1.0.19",
-    "@frontity/smart-adserver": "^1.0.0",
-    "@frontity/source": "^1.2.0"
+    "@frontity/smart-adserver": "^1.0.0"
   }
 }

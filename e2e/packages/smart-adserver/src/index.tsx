@@ -3,7 +3,8 @@ import { connect, Slot } from "frontity";
 import SmartAdserver, { Packages } from "../types";
 import { Connect } from "frontity/types";
 
-// These are the same values as defined in the frontity.settings.ts for the e2e project.
+// These are the same values as defined in the frontity.settings.ts for the e2e
+// project.
 const siteId = 78061;
 const pageId = 884496;
 const formatId = 33780;
@@ -17,9 +18,7 @@ const formatId = 33780;
 const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
   const { SmartAd } = libraries.fills.smartAdserver;
 
-  const { pathname } = new URL(state.router.link, "http://localhost:3001");
-
-  if (pathname === "/other-page/") {
+  if (state.router.link === "/other-page/") {
     return (
       <div>
         <SmartAd
@@ -42,7 +41,7 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
         go to other page
       </button>
 
-      {/* A basic ad using the std call with a specific tagId */}
+      {/* A basic ad using the std call with a specific tagId. */}
       <div id="smart-ads">
         <SmartAd
           callType="std"
@@ -52,7 +51,7 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
           tagId="test-smartad"
         />
 
-        {/* An ad using the default tagId */}
+        {/* An ad using the default tagId. */}
         <div id="default-tag-id">
           <SmartAd
             callType="std"
@@ -62,7 +61,7 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
           />
         </div>
 
-        {/* An ad created using an iframe */}
+        {/* An ad created using an iframe. */}
         <div id="iframe-ad">
           <SmartAd
             callType="iframe"
@@ -74,7 +73,8 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
           />
         </div>
 
-        {/* An ad that should be rendered by the fill specified in frontity.settings.ts */}
+        {/* An ad that should be rendered by the fill specified in
+        frontity.settings.ts. */}
         <Slot name="header" />
       </div>
     </>
@@ -84,33 +84,7 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
 const smartAdserver: SmartAdserver = {
   state: {
     source: {
-      data: {},
-      get: ({ state }) => (link) => state.source.data[link],
-    },
-    router: {
-      link: "/",
-    },
-  },
-  actions: {
-    source: {
-      fetch: ({ state }) => async (link) => {
-        const { data } = state.source;
-        if (!data[link]) {
-          data[link] = {
-            link,
-            isFetching: true,
-            isReady: false,
-          };
-
-          await Promise.resolve();
-
-          data[link] = {
-            ...data[link],
-            isFetching: false,
-            isReady: true,
-          };
-        }
-      },
+      get: () => () => {},
     },
   },
   roots: {

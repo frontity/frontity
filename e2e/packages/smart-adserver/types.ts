@@ -1,8 +1,6 @@
 import { Package } from "frontity/types";
-import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 import SmartAdserver from "@frontity/smart-adserver/types";
-import WpSource from "../../../packages/wp-source/types";
 
 /**
  * Package to do the e2e testing of Smart ads.
@@ -15,26 +13,13 @@ interface TestSmartAdserver extends Package {
     /**
      * Source namespace.
      */
-    source?: {
+    source: {
       /**
-       * Map of data describing each link in Frontity.
+       * Mocked getter for the data object given a specific link.
+       *
+       * Required because `<Slot>` depends on it.
        */
-      data: WpSource["state"]["source"]["data"];
-
-      /**
-       * Getter for the data object given a specific link.
-       */
-      get: Source["state"]["source"]["get"];
-    };
-
-    /**
-     * Router namespace.
-     */
-    router: {
-      /**
-       * Current page link.
-       */
-      link: Router["state"]["router"]["link"];
+      get: Function;
     };
   };
 
@@ -52,6 +37,6 @@ interface TestSmartAdserver extends Package {
 /**
  * All packages used internally by the TestSmartAdserver package.
  */
-export type Packages = TestSmartAdserver & Router & Source & SmartAdserver;
+export type Packages = TestSmartAdserver & Router & SmartAdserver;
 
 export default TestSmartAdserver;
