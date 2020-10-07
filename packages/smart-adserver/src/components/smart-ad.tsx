@@ -1,7 +1,28 @@
 import React, { useEffect } from "react";
-import { css, connect } from "frontity";
+import { css, connect, useConnect } from "frontity";
 import SmartAdserver, { SmartAdProps } from "../../types";
-import { Connect } from "frontity/types";
+
+/**
+ * Params for the {@link styles} function.
+ */
+interface StylesParams {
+  /**
+   * CallType: "std" | "iframe".
+   */
+  callType: string;
+  /**
+   * Width of the ad. Used with callType 'iframe'.
+   */
+  width: number;
+  /**
+   * Height of the ad. Used with callType 'iframe'.
+   */
+  height: number;
+  /**
+   * Minimum height of the container for the ad. Used with callType 'std'.
+   */
+  minHeight: number;
+}
 
 /**
  * Create styles for the iframe ad.
@@ -12,13 +33,16 @@ import { Connect } from "frontity/types";
  *
  * @returns The styles.
  */
-const styles = (callType: string, width: number, height: number) =>
+const styles = ({ callType, width, height, minHeight }: StylesParams) =>
   callType === "iframe"
     ? css`
         width: ${width}px;
         height: ${height}px;
       `
-    : css``;
+    : minHeight &&
+      css`
+        min-height: ${minHeight}px;
+      `;
 
 /**
  *
@@ -28,7 +52,7 @@ const styles = (callType: string, width: number, height: number) =>
  *
  * @returns The component which renders an ad.
  */
-export const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
+const SmartAd: React.FC<SmartAdProps> = ({
   callType,
   siteId,
   pageId,
@@ -37,8 +61,11 @@ export const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
   target,
   width,
   height,
-  state,
+  minHeight,
+  css: styling,
+  ...props
 }) => {
+  const { state } = useConnect<SmartAdserver>();
   const { isLoaded } = state.smartAdserver;
 
   // If the tagId was not passed as a prop, we fall back to the default used by
@@ -74,7 +101,13 @@ export const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
     height,
   ]);
 
-  return <div id={tagId} css={styles(callType, width, height)} />;
+  return (
+    <div
+      id={tagId}
+      css={[styles({ callType, width, height, minHeight }), styling]}
+      {...props}
+    />
+  );
 };
 
-export default connect(SmartAd);
+export default connect(SmartAd, { injectProps: false });

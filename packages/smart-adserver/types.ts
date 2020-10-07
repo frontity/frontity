@@ -1,4 +1,5 @@
 import { Package } from "frontity/types";
+import { css } from "frontity";
 
 /**
  * Smart Adserver library.
@@ -103,6 +104,18 @@ export interface SmartAdProps extends CallOptions {
    * The type of the ad call.
    */
   callType: "iframe" | "std";
+
+  /**
+   * Minimum height of the container for the ad. Used with callType 'std'.
+   *
+   */
+  minHeight?: number;
+
+  /**
+   * The optional styles that can be passed to the SmartAd component via `css` prop.
+   * They will be merged with the default styles of the SmartAd component.
+   */
+  css?: ReturnType<typeof css>;
 }
 
 /**
