@@ -35,4 +35,10 @@ describe("Smart Adserver", () => {
 
     cy.get("#other-page-ad").should("have.descendants", "iframe");
   });
+
+  it("Should set the minHeight on the ad container if it makes the 'std' call", () => {
+    cy.get("#std-min-height").should("have.descendants", "iframe");
+
+    cy.get("#std-min-height").should("have.css", "min-height", "100px");
+  });
 });
