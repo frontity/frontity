@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.5.1
+
+### Patch Changes
+
+- [`882450a9`](https://github.com/frontity/frontity/commit/882450a95ac88855384909d2476404fd93bc1b11) [#593](https://github.com/frontity/frontity/pull/593) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix an error that happens when an inline script evaluation returns a value.
+
+  See [#592](https://github.com/frontity/frontity/issues/592).
+
 ## 1.5.0
 
 ### Minor Changes
