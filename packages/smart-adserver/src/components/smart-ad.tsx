@@ -62,7 +62,17 @@ export const SmartAd: React.FC<Connect<SmartAdserver> & SmartAdProps> = ({
         });
       });
     }
-  }, [isLoaded]);
+  }, [
+    isLoaded,
+    callType,
+    siteId,
+    pageId,
+    formatId,
+    tagId,
+    target,
+    width,
+    height,
+  ]);
 
   return <div id={tagId} css={styles(callType, width, height)} />;
 };

@@ -45,7 +45,7 @@ const Root: React.FC<Connect<SmartAdserver>> = ({ state }) => {
     return () => {
       state.smartAdserver.isLoaded = false;
     };
-  }, [networkId, subdomain]);
+  }, [networkId, subdomain, state.smartAdserver]);
 
   return (
     <Head>
