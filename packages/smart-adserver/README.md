@@ -12,7 +12,7 @@ npm i @frontity/smart-adserver
 
 ## Usage
 
-You can configure this package by passing some parameter to it's state. For example:
+You can configure this package by passing some parameter to its state. For example:
 
 **`frontity.settings.js`**
 

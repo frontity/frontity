@@ -77,7 +77,7 @@ const Theme: React.FC<Connect<Packages>> = ({ libraries, state, actions }) => {
         frontity.settings.ts. */}
         <Slot name="header" />
 
-        {/* Ad ad that is rendered by the fill with a "std" call and a minHeight */}
+        {/* An ad that is rendered by the fill with a "std" call and a minHeight */}
         <Slot name="bottom" />
       </div>
     </>

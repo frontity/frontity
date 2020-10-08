@@ -45,7 +45,6 @@ const styles = ({ callType, width, height, minHeight }: StylesParams) =>
       `;
 
 /**
- *
  * Component which makes the ad call for a particular ad and renders it.
  *
  * @param props - Defined in {@link CallOptions}.
