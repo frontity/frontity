@@ -3,7 +3,7 @@ import expect from "expect";
 
 describe("Script", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=script");
+    cy.visit("http://localhost:3001?frontity_name=script");
   });
 
   it("should load a external script from src url", () => {
@@ -31,5 +31,13 @@ describe("Script", () => {
     cy.get("[data-test-id='target']").should("have.text", "OFF");
     cy.get("[data-test-id='toggle']").click();
     cy.get("[data-test-id='target']").should("have.text", "ON");
+  });
+
+  /**
+   * This one was added to check this bug was solved:
+   * https://github.com/frontity/frontity/issues/592.
+   */
+  it("should not fail when scripts are unmounted", () => {
+    cy.get("[data-test-id='unmount-script']").click();
   });
 });

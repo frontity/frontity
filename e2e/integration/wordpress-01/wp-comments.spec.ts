@@ -83,7 +83,7 @@ describe("wp-comments", () => {
       task("loadDatabase", {
         path: "./wp-data/wp-comments/code-snippets.sql",
       });
-      cy.visit("http://localhost:3001?name=wp-comments");
+      cy.visit("http://localhost:3001?frontity_name=wp-comments");
     });
 
     it("Should return an error when sending a comment for a non-existing post ID", () => {
@@ -97,7 +97,7 @@ describe("wp-comments", () => {
     });
 
     it("Should return an error when submitting a duplicate comment", () => {
-      cy.visit("http://localhost:3001?name=wp-comments", {
+      cy.visit("http://localhost:3001?frontity_name=wp-comments", {
         onBeforeLoad(win) {
           cy.stub(win.console, "warn").as("consoleWarn");
         },
@@ -130,7 +130,7 @@ describe("wp-comments", () => {
       task("loadDatabase", {
         path: "./wp-data/wp-comments/no-code-snippets.sql",
       });
-      cy.visit("http://localhost:3001?name=wp-comments");
+      cy.visit("http://localhost:3001?frontity_name=wp-comments");
 
       cy.get("#comment-ok").click();
 
@@ -153,7 +153,7 @@ describe("wp-comments", () => {
       task("loadDatabase", {
         path: "./wp-data/wp-comments/code-snippets.sql",
       });
-      cy.visit("http://localhost:3001?name=wp-comments");
+      cy.visit("http://localhost:3001?frontity_name=wp-comments");
     });
 
     it("Should return an error when sending a comment without an email", () => {

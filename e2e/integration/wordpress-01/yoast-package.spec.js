@@ -73,7 +73,10 @@ describe("Yoast Package", () => {
    * @param options - Visit options.
    */
   const visitLink = (link, options) => {
-    cy.visit(`http://localhost:3001${link}?name=yoast-package`, options);
+    cy.visit(
+      `http://localhost:3001${link}?frontity_name=yoast-package`,
+      options
+    );
   };
 
   /**

@@ -1,11 +1,12 @@
 import { error } from "frontity";
 import WpSource from "../types";
-import { parse, normalize, concatPath } from "./libraries/route-utils";
+import { parse, normalize, concatLink } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
 import {
   postTypeHandler,
   postTypeArchiveHandler,
+  postTypeWithQueryHandler,
   taxonomyHandler,
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
@@ -18,28 +19,30 @@ const actions: WpSource["actions"]["source"] = {
 
     const { handlers, redirections } = libraries.source;
 
-    // Get route and route params
+    // Get route and route params.
     const link = normalize(route);
     const linkParams = parse(route);
-    const { query, page } = linkParams;
+    const { query, page, queryString } = linkParams;
 
-    // Get current data object
+    // Get current data object.
     const data = source.data[link];
 
-    // Get options
+    // Get options.
     const force = options ? options.force : false;
 
     if (!data) {
-      // If there is no data yet, just set the necessary flags:
+      // If there is no data yet, just set the necessary flags.
       source.data[link] = {
         isFetching: true,
         isReady: false,
       };
     } else if (force) {
-      // If we fetch with `{ force: true }`, then only set `isFetching` to true again
+      // If we fetch with `{ force: true }`, then only set `isFetching` to true
+      // again.
       data.isFetching = true;
 
-      // This is a workaround in case that `data` has previously included an error
+      // This is a workaround in case that `data` has previously included an
+      // error.
       if (data.isError) {
         source.data[link] = {
           isFetching: true,
@@ -67,15 +70,21 @@ const actions: WpSource["actions"]["source"] = {
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
-      // Check if this is the homepage URL.
-      const isHome = route === normalize(state.source.subdirectory || "/");
-
       // Transform route if there is some redirection.
       const redirection = getMatch(route, redirections);
       if (redirection) route = redirection.func(redirection.params);
 
       // Get the handler for this route.
-      const handler = getMatch(route, handlers);
+      const handler = getMatch(`${route}${queryString}`, handlers);
+
+      // Return a 404 error if no handler has matched.
+      if (!handler)
+        throw new ServerError(
+          `No handler has matched for the given link: "${link}"`,
+          404
+        );
+
+      // Execute the handler.
       await handler.func({
         link,
         route: link,
@@ -84,7 +93,17 @@ const actions: WpSource["actions"]["source"] = {
         libraries,
         force,
       });
-      // Everything OK.
+
+      // Check if this is the homepage URL if it is either the root "/" or the
+      // subdirectory "/folder/", but only in the case that it is not a search
+      // and the matched handler is not used to match for queries (the ones that
+      // start with "RegExp:").
+      const isHome =
+        source.data[link].isSearch !== true &&
+        !handler.pattern.startsWith("RegExp:") &&
+        route === normalize(state.source.subdirectory || "/");
+
+      // Populate the data object.
       source.data[link] = {
         ...source.data[link],
         ...(isHome && { isHome: true }),
@@ -122,6 +141,14 @@ const actions: WpSource["actions"]["source"] = {
 
     libraries.source.api.init({ api, isWpCom });
 
+    // If the URL contains an auth token, then add it to the state.
+    // This is normally the case e.g, when accessing the post preview.
+    const auth = state.frontity?.options?.sourceAuth;
+    const authFromEnv = process.env.FRONTITY_SOURCE_AUTH;
+    if (auth || authFromEnv) {
+      state.source.auth = auth || authFromEnv;
+    }
+
     // Handlers & redirections.
     const { handlers, redirections } = libraries.source;
 
@@ -130,19 +157,26 @@ const actions: WpSource["actions"]["source"] = {
 
     // Add handlers for custom post types.
     state.source.postTypes.forEach(({ type, endpoint, archive }) => {
-      // Single page
+      // Single page.
       handlers.push({
         name: type,
         priority: 10,
-        pattern: concatPath(type, "/:slug"),
+        pattern: concatLink(type, "/:slug"),
         func: postTypeHandler({ endpoints: [endpoint] }),
+      });
+      // Query permalink (mainly for drafts).
+      handlers.push({
+        name: `${type} with query permalink`,
+        priority: 9,
+        pattern: `RegExp:(\\?|&)p=\\d+&post_type=${type}`,
+        func: postTypeWithQueryHandler({ type, endpoint }),
       });
       // Archive.
       if (archive)
         handlers.push({
           name: `${type} archive`,
           priority: 10,
-          pattern: concatPath(archive),
+          pattern: concatLink(archive),
           func: postTypeArchiveHandler({ type, endpoint }),
         });
     });
@@ -153,7 +187,7 @@ const actions: WpSource["actions"]["source"] = {
         handlers.push({
           name: taxonomy,
           priority: 10,
-          pattern: concatPath(taxonomy, "/(.*)?/:slug"),
+          pattern: concatLink(taxonomy, "/(.*)?/:slug"),
           func: taxonomyHandler({
             taxonomy,
             endpoint,
@@ -174,17 +208,17 @@ const actions: WpSource["actions"]["source"] = {
     } = state.source;
 
     if (homepage) {
-      const pattern = concatPath(subdirectory);
+      const pattern = concatLink(subdirectory);
       redirections.push({
         name: "homepage",
         priority: 10,
         pattern,
-        func: () => concatPath(homepage),
+        func: () => concatLink(homepage),
       });
     }
 
     if (postsPage) {
-      const pattern = concatPath(subdirectory, postsPage);
+      const pattern = concatLink(subdirectory, postsPage);
       redirections.push({
         name: "posts page",
         priority: 10,
@@ -195,7 +229,7 @@ const actions: WpSource["actions"]["source"] = {
 
     if (categoryBase) {
       // Add new direction.
-      const pattern = concatPath(subdirectory, categoryBase, "/:subpath+");
+      const pattern = concatLink(subdirectory, categoryBase, "/:subpath+");
       redirections.push({
         name: "category base",
         priority: 10,
@@ -206,14 +240,14 @@ const actions: WpSource["actions"]["source"] = {
       redirections.push({
         name: "category base (reverse)",
         priority: 10,
-        pattern: concatPath(subdirectory, "/category/(.*)/"),
+        pattern: concatLink(subdirectory, "/category/(.*)/"),
         func: () => "",
       });
     }
 
     if (tagBase) {
       // Add new direction.
-      const pattern = concatPath(subdirectory, tagBase, "/:subpath+");
+      const pattern = concatLink(subdirectory, tagBase, "/:subpath+");
       redirections.push({
         name: "tag base",
         priority: 10,
@@ -224,14 +258,14 @@ const actions: WpSource["actions"]["source"] = {
       redirections.push({
         name: "tag base (reverse)",
         priority: 10,
-        pattern: concatPath(subdirectory, "/tag/(.*)/"),
+        pattern: concatLink(subdirectory, "/tag/(.*)/"),
         func: () => "",
       });
     }
 
     if (authorBase) {
       // Add new direction.
-      const pattern = concatPath(subdirectory, authorBase, "/:subpath+");
+      const pattern = concatLink(subdirectory, authorBase, "/:subpath+");
       redirections.push({
         name: "author base",
         priority: 10,
@@ -242,14 +276,14 @@ const actions: WpSource["actions"]["source"] = {
       redirections.push({
         name: "author base (reverse)",
         priority: 10,
-        pattern: concatPath(subdirectory, "/author/(.*)/"),
+        pattern: concatLink(subdirectory, "/author/(.*)/"),
         func: () => "",
       });
     }
 
     if (subdirectory) {
       // Add new direction.
-      const pattern = concatPath(subdirectory, "/:subpath*");
+      const pattern = concatLink(subdirectory, "/:subpath*");
       redirections.push({
         name: "subdirectory",
         priority: 10,
@@ -264,6 +298,12 @@ const actions: WpSource["actions"]["source"] = {
         func: () => "",
       });
     }
+  },
+
+  afterSSR: ({ state }) => {
+    // Remove the auth tokens that were used in the server.
+    delete state.source.auth;
+    delete state.frontity.options.sourceAuth;
   },
 };
 export default actions;

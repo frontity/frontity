@@ -8,13 +8,15 @@
     "plugin:jest/recommended",
     "plugin:cypress/recommended"
   ],
-  "plugins": ["jsdoc"],
+  "plugins": ["jsdoc", "react-hooks"],
   "rules": {
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
     "@typescript-eslint/indent": "off",
     "react/prop-types": "off",
     "import/named": "off",
     "jsdoc/check-examples": 2,
-    "jsdoc/check-indentation": 2,
+    "jsdoc/check-indentation": 0,
     "jsdoc/check-param-names": 0,
     "jsdoc/check-syntax": 2,
     "jsdoc/check-types": 2,

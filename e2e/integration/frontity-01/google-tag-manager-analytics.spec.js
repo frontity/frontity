@@ -1,7 +1,7 @@
 describe("Google Tag Manager", () => {
   const pageviewHome = {
     event: "pageview",
-    link: "/?name=google-tag-manager",
+    link: "/",
     title: "Homepage Title",
   };
 
@@ -17,7 +17,7 @@ describe("Google Tag Manager", () => {
   };
 
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=google-tag-manager");
+    cy.visit("http://localhost:3001?frontity_name=google-tag-manager");
   });
 
   it("should load Google Tag Manager library", () => {

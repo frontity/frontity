@@ -1,6 +1,6 @@
 describe("Loadable", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=loadable");
+    cy.visit("http://localhost:3001?frontity_name=loadable");
   });
 
   it("should be able to render elements from dynamic components", () => {

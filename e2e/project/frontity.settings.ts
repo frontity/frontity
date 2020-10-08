@@ -205,6 +205,51 @@ const settings: Settings = [
     ],
   },
   {
+    name: "smart-adserver",
+    packages: [
+      "e2e-smart-adserver",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/smart-adserver",
+        state: {
+          smartAdserver: {
+            networkId: 1445,
+            subdomain: "www",
+          },
+          fills: {
+            smartAdserver: {
+              headerAd: {
+                slot: "header",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+                props: {
+                  callType: "std",
+                  siteId: 78061,
+                  pageId: 884496,
+                  formatId: 33780,
+                  tagId: "hello",
+                },
+              },
+              bottomAd: {
+                slot: "bottom",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+                props: {
+                  callType: "std",
+                  siteId: 78061,
+                  pageId: 884496,
+                  formatId: 33780,
+                  minHeight: 100,
+                  tagId: "std-min-height",
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
     name: "yoast-package",
     state: {
       frontity: {
@@ -288,6 +333,32 @@ const settings: Settings = [
             transformLinks: {
               base: "http://localhost:8080",
             },
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "embedded-mode",
+    match: [process.env.FRONTITY_SERVER],
+    state: {
+      frontity: {
+        url: "http://localhost:8080",
+      },
+    },
+    packages: [
+      "e2e-preview",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+              },
+            ],
           },
         },
       },
