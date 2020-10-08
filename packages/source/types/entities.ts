@@ -12,11 +12,10 @@ export interface BaseEntity {
 
 /**
  * Define the base structure of post entities.
- * Interfaces that extends from this are:
- * - PostEntity (posts & pages)
- * - AttachmentEntity (images, videos, etc.)
  *
- * @extends BaseEntity
+ * Interfaces that extends from this are:
+ * - PostEntity (posts & pages).
+ * - AttachmentEntity (images, videos, etc.).
  */
 export interface BasePostEntity extends BaseEntity {
   type: string;
@@ -41,7 +40,6 @@ export interface BasePostEntity extends BaseEntity {
 
 /**
  * Define the structure of author entities.
- * @extends BaseEntity
  */
 export interface AuthorEntity extends BaseEntity {
   name: string;
@@ -54,8 +52,7 @@ export interface AuthorEntity extends BaseEntity {
 }
 
 /**
- * Define the structure of taxonomy entities (specific categories, tags, etc.)
- * @extends BaseEntity
+ * Define the structure of taxonomy entities (specific categories, tags, etc.).
  */
 export interface TaxonomyEntity extends BaseEntity {
   taxonomy: string;
@@ -65,8 +62,7 @@ export interface TaxonomyEntity extends BaseEntity {
 }
 
 /**
- * Define the structure of attachment entities (images, videos, etc.)
- * @extends BasePostEntity
+ * Define the structure of attachment entities (images, videos, etc.).
  */
 export interface AttachmentEntity extends BasePostEntity {
   source_url?: string;
@@ -79,8 +75,7 @@ export interface AttachmentEntity extends BasePostEntity {
 }
 
 /**
- * Define the structure of post entityes (post & pages)
- * @extends BasePostEntity
+ * Define the structure of post entityes (post & pages).
  */
 export interface PostEntity extends BasePostEntity {
   categories?: number[];
@@ -100,8 +95,8 @@ export interface PostEntity extends BasePostEntity {
 }
 
 /**
- * Define the base structure of type entities.
- * Type entities are those that describe the entity types.
+ * Define the base structure of type entities. Type entities are those that
+ * describe the entity types.
  */
 export interface BaseType {
   name: string;
@@ -113,18 +108,16 @@ export interface BaseType {
 }
 
 /**
- * Define the structure of post types.
- * Post types are `"post"`, `"page"`, `"attachment"` and unknown custom post type.
- * @extends BaseType
+ * Define the structure of post types. Post types are `"post"`, `"page"`,
+ * `"attachment"` and unknown custom post type.
  */
 export interface PostType extends BaseType {
   taxonomies: string[];
 }
 
 /**
- * Define the structure of taxonomy types.
- * Taxonomy types are `"category"`, `"tag"` and unknown custom taxonomy.
- * @extends BaseType
+ * Define the structure of taxonomy types. Taxonomy types are `"category"`,
+ * `"tag"` and unknown custom taxonomy.
  */
 export interface TaxonomyType extends BaseType {
   types: string[];
