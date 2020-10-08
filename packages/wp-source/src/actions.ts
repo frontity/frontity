@@ -87,6 +87,8 @@ const actions: WpSource["actions"]["source"] = {
       // Execute the handler.
       await handler.func({
         link,
+        // This `route` parameter does not match `data.route`. It is the name
+        // given to `link` prior to @frontity/wp-source@1.6.0.
         route: link,
         params: handler.params,
         state,
