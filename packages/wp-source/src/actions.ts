@@ -101,9 +101,9 @@ const actions: WpSource["actions"]["source"] = {
       // and the matched handler is not used to match for queries (the ones that
       // start with "RegExp:").
       const isHome =
-        source.data[link].isSearch !== true &&
         !handler.pattern.startsWith("RegExp:") &&
-        route === normalize(state.source.subdirectory || "/");
+        source.data[link].isSearch !== true &&
+        source.data[link].route === normalize(state.source.subdirectory || "/");
 
       // Populate the data object.
       source.data[link] = {
