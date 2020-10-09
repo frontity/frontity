@@ -135,6 +135,46 @@ describe("actions.source.fetch", () => {
     store.actions.source.fetch("/blog/page/123");
   });
 
+  test('should set isHome in "/" when a redirection has matched', (done) => {
+    store.libraries.source.redirections = [
+      {
+        name: "homepage",
+        priority: 10,
+        pattern: "/",
+        func: () => "/front-page/",
+      },
+    ];
+
+    observe(() => {
+      const data = store.state.source.get("/");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/");
+  });
+
+  test('should set isHome in "/page/x/" when a redirection has matched', (done) => {
+    store.libraries.source.redirections = [
+      {
+        name: "homepage",
+        priority: 10,
+        pattern: "/",
+        func: () => "/front-page/",
+      },
+    ];
+
+    observe(() => {
+      const data = store.state.source.get("/page/123");
+      if (data.isReady) {
+        expect(data.isHome).toBe(true);
+        done();
+      }
+    });
+    store.actions.source.fetch("/page/123");
+  });
+
   test("should run again when `force` is used", async () => {
     store.state.source.data["/some/route/"] = {
       errorStatusText: "Request Timeout",
