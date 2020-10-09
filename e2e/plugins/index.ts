@@ -45,6 +45,8 @@ interface LoadDatabase {
   /**
    * The path where the database SQL file is located. Relative to
    * the `e2e` folder.
+   *
+   * @example "./wp-data/wp-basic-tests/dump.sql"
    */
   path: string;
 }
