@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.9.1
+
+### Patch Changes
+
+- [`81edef5d`](https://github.com/frontity/frontity/commit/81edef5d903a9583437bb498096985625a8d6597) [#599](https://github.com/frontity/frontity/pull/599) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix `data.isHome` when the `state.source.homepage` option is set.
+
 ## 1.9.0
 
 ### Minor Changes
