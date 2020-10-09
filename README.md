@@ -72,7 +72,7 @@ But, in spite of how amazing it is, React is just **a JavaScript library, not a 
 
 In order to create a WordPress theme with React, developers need to learn and configure lots of different things: _bundling, transpiling, routing, server rendering, retrieving data from WordPress, managing state, managing css, linting, testing..._
 
-**There is a reason React frameworks exist**. For example, [Next.js](https://nextjs.org/) and [GatbsyJS](https://www.gatsbyjs.org/) are two amazing React frameworks. Both _can_ work with WordPress, but they are not focused on WordPress. Therefore, there's still some configuration and additional tooling left to the developer.
+**There is a reason React frameworks exist**. For example, [Next.js](https://nextjs.org/) and [GatsbyJS](https://www.gatsbyjs.org/) are two amazing React frameworks. Both _can_ work with WordPress, but they are not focused on WordPress. Therefore, there's still some configuration and additional tooling left to the developer.
 
 [**Frontity**](https://frontity.org), on the other hand, is an **opinionated React framework focused on WordPress**:
 
