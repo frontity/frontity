@@ -116,6 +116,24 @@ export interface Package {
        * Populated by the user in `frontity.settings.js`.
        */
       url?: string;
+
+      /**
+       * How the router should handle 301 redirections that can be stored in the
+       * WordPress database e.g. Via a Redirection plugin: https://wordpress.org/plugins/redirection/.
+       *
+       * - "none" - Does not handle them at all.
+       *
+       * - "all"  - Always make an additional request to the WordPress instance
+       * to check if there exists a redirection.
+       *
+       * - "error" - Only send the additional request to the WordPress instance
+       * if the original request returned a 404.
+       *
+       * - Regexp  - Make the additional request for links that match the given regex.
+       *
+       * @defaultValue "none"
+       */
+      redirections: "none" | "all" | "error" | RegExp;
     };
 
     /**
