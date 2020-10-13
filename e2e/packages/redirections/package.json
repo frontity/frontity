@@ -1,0 +1,11 @@
+{
+  "name": "e2e-redirections",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do test handling of redirections stored in the WP database",
+  "dependencies": {
+    "@frontity/source": "^1.2.2",
+    "@frontity/router": "^1.1.1",
+    "frontity": "^1.4.3"
+  }
+}

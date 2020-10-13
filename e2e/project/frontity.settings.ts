@@ -339,6 +339,33 @@ const settings: Settings = [
     ],
   },
   {
+    name: "redirections",
+    state: {
+      frontity: {
+        url: "http://localhost:8080",
+      },
+    },
+    packages: [
+      "e2e-redirections",
+      {
+        name: "@frontity/tiny-router",
+        state: {
+          router: {
+            redirections: "error",
+          },
+        },
+      },
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            api: "http://localhost:8080/wp-json",
+          },
+        },
+      },
+    ],
+  },
+  {
     name: "embedded-mode",
     match: [process.env.FRONTITY_SERVER],
     state: {
