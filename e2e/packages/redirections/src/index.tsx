@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useConnect, connect } from "frontity";
 import Redirections, { Packages } from "../types";
 
 const Post: React.FC = connect(() => {
-  const { state } = useConnect<Packages>();
+  const { state, actions } = useConnect<Packages>();
+
+  useEffect(() => {
+    if (state.router.link === "/post-with-prefetch/") {
+      actions.source.fetch("/hello-world/");
+    }
+  }, [state.router.link, actions.source]);
+
   const data = state.source.get(state.router.link);
   const post = state.source.post[data.id];
-  return <div data-test-id="post">Post: {post.title.rendered}</div>;
+  return <div id="post">Post: {post.title.rendered}</div>;
 });
 
 /**

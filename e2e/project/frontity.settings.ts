@@ -342,7 +342,7 @@ const settings: Settings = [
     name: "redirections",
     state: {
       frontity: {
-        url: "http://localhost:8080",
+        url: "http://localhost:3001",
       },
     },
     packages: [

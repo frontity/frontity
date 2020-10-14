@@ -18,10 +18,13 @@ describe("Preview plugin", () => {
       "eq",
       "http://localhost:3001/hello-world-redirected/"
     );
+    cy.get("#post").should("exist");
   });
 
   it("Should redirect when navigating on the client", () => {
     cy.visit("http://localhost:3001?frontity_name=redirections");
+
+    // Go to the "redirected" page
 
     cy.get("#open-post").click();
 
@@ -29,5 +32,48 @@ describe("Preview plugin", () => {
       "eq",
       "http://localhost:3001/hello-world-redirected/"
     );
+    cy.get("#post").should("exist");
+  });
+
+  it("The back and forward button should work fine when navigating ", () => {
+    cy.visit("http://localhost:3001?frontity_name=redirections");
+
+    cy.get("#open-post").click();
+
+    // Go to the "redirected" page
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+
+    // go back to the homepage
+    cy.go("back");
+    cy.location("href").should("eq", "http://localhost:3001/");
+
+    // go to the "redirected" page again.
+    cy.get("#open-post").click();
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
+
+  it("It should work when you prefetch the data for a (redirected) post", () => {
+    cy.visit(
+      "http://localhost:3001/post-with-prefetch/?frontity_name=redirections"
+    );
+
+    // We need to wait for the redirection
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1000);
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/post-with-prefetch/"
+    );
+
+    cy.get("#post").should("contain.text", "Post with prefetch");
   });
 });
