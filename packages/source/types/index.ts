@@ -7,20 +7,14 @@ import {
   PostEntity,
   AttachmentEntity,
   AuthorEntity,
-  TaxonomyType,
-  PostType,
+  TermEntity,
+  TypeEntity,
+  Entity,
 } from "./entities";
 
 // Export directly some types.
-export { Data, DataItem, EntityData } from "./data";
-export {
-  TaxonomyEntity,
-  PostEntity,
-  AttachmentEntity,
-  AuthorEntity,
-  TaxonomyType,
-  PostType,
-} from "./entities";
+export * from "./data";
+export * from "./entities";
 
 /**
  * The Frontity params extracted from a link.
@@ -120,10 +114,7 @@ interface Source<T = null> extends Package {
        * @param link - A link to a page of the Frontity site.
        * @returns The entity found or `null` otherwise.
        */
-      entity: Derived<
-        T extends null ? Source : T,
-        <Entity = any>(link: string) => Entity
-      >;
+      entity: Derived<T extends null ? Source : T, (link: string) => Entity>;
 
       /**
        * The URL of the REST API.
@@ -142,7 +133,7 @@ interface Source<T = null> extends Package {
        *
        * The entities have the shape returned by the WP REST API.
        */
-      category: Record<string, TaxonomyEntity>;
+      category: Record<string, TermEntity>;
 
       /**
        * The map of tag entities, indexed by ID.
@@ -150,7 +141,7 @@ interface Source<T = null> extends Package {
        * The entities have the shape returned by the WP REST API, expect that
        * `post_tag` is renamed to `tag`.
        */
-      tag: Record<string, TaxonomyEntity>;
+      tag: Record<string, TermEntity>;
 
       /**
        * The map of post entities, indexed by ID.
@@ -185,14 +176,14 @@ interface Source<T = null> extends Package {
        *
        * The entities have the shape returned by the WP REST API.
        */
-      type: Record<string, PostType>;
+      type: Record<string, TypeEntity>;
 
       /**
        * The map of taxonomy entities, indexed by ID.
        *
        * The entities have the shape returned by the WP REST API.
        */
-      taxonomy: Record<string, TaxonomyType>;
+      taxonomy: Record<string, TaxonomyEntity>;
     };
   };
 

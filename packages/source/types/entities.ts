@@ -16,7 +16,7 @@ export interface Entity {
 /**
  * Interface for entities from the /wp/v2/posts endpoint.
  */
-export interface Post extends Entity {
+export interface PostEntity extends Entity {
   /**
    * The date the object was published, in the site's timezone.
    */
@@ -348,7 +348,7 @@ export interface PostRevision extends Entity {
 /**
  * Interface for entities from the /wp/v2/pages endpoint.
  */
-export interface Page extends Entity {
+export interface PageEntity extends Entity {
   /**
    * The date the object was published, in the site's timezone.
    */
@@ -535,7 +535,7 @@ export interface Page extends Entity {
 /**
  * Interface for entities from the /wp/v2/media endpoint.
  */
-export interface Attachment extends Entity {
+export interface AttachmentEntity extends Entity {
   /**
    * The date the object was published, in the site's timezone.
    */
@@ -724,7 +724,7 @@ export interface Attachment extends Entity {
 /**
  * Interface for entities from the /wp/v2/blocks endpoint.
  */
-export interface WpBlock extends Entity {
+export interface WpBlockEntity extends Entity {
   /**
    * The date the object was published, in the site's timezone.
    */
@@ -833,7 +833,7 @@ export interface WpBlock extends Entity {
 /**
  * Interface for entities from the /wp/v2/types endpoint.
  */
-export interface Type extends Entity {
+export interface TypeEntity extends Entity {
   /**
    * All capabilities used by the post type.
    */
@@ -895,7 +895,7 @@ export interface Type extends Entity {
 /**
  * Interface for entities from the /wp/v2/taxonomies endpoint.
  */
-export interface Taxonomy extends Entity {
+export interface TaxonomyEntity extends Entity {
   /**
    * All capabilities used by the taxonomy.
    */
@@ -984,9 +984,13 @@ export interface Taxonomy extends Entity {
 }
 
 /**
- * Interface for entities from the /wp/v2/categories endpoint.
+ * Interface for terms that belong to a taxonomy.
+ *
+ * For example:
+ * - entities from the /wp/v2/categories endpoint.
+ * - entities from the /wp/v2/tags endpoint.
  */
-export interface Category extends Entity {
+export interface TermEntity extends Entity {
   /**
    * Unique identifier for the term.
    */
@@ -1020,12 +1024,7 @@ export interface Category extends Entity {
   /**
    * Type attribution for the term.
    */
-  taxonomy?:
-    | "category"
-    | "post_tag"
-    | "nav_menu"
-    | "link_category"
-    | "post_format";
+  taxonomy?: string;
 
   /**
    * The parent term ID.
@@ -1042,62 +1041,9 @@ export interface Category extends Entity {
 }
 
 /**
- * Interface for entities from the /wp/v2/tags endpoint.
- */
-export interface Tag extends Entity {
-  /**
-   * Unique identifier for the term.
-   */
-  id?: number;
-
-  /**
-   * Number of published posts for the term.
-   */
-  count?: number;
-
-  /**
-   * HTML description of the term.
-   */
-  description?: string;
-
-  /**
-   * URL of the term.
-   */
-  link?: string;
-
-  /**
-   * HTML title for the term.
-   */
-  name?: string;
-
-  /**
-   * An alphanumeric identifier for the term unique to its type.
-   */
-  slug?: string;
-
-  /**
-   * Type attribution for the term.
-   */
-  taxonomy?:
-    | "category"
-    | "post_tag"
-    | "nav_menu"
-    | "link_category"
-    | "post_format";
-
-  /**
-   * Meta fields.
-   */
-  meta?: {
-    [k: string]: unknown;
-  };
-  [k: string]: unknown;
-}
-
-/**
  * Interface for entities from the /wp/v2/users endpoint.
  */
-export interface User extends Entity {
+export interface AuthorEntity extends Entity {
   /**
    * Unique identifier for the user.
    */
@@ -1220,7 +1166,7 @@ export interface User extends Entity {
 /**
  * Interface for entities from the /wp/v2/comments endpoint.
  */
-export interface Comment extends Entity {
+export interface CommentEntity extends Entity {
   /**
    * Unique identifier for the object.
    */
@@ -1340,7 +1286,7 @@ export interface Comment extends Entity {
 /**
  * Interface for entities from the /wp/v2/search endpoint.
  */
-export interface SearchResult extends Entity {
+export interface SearchResultEntity extends Entity {
   /**
    * Unique identifier for the object.
    */
@@ -1371,7 +1317,7 @@ export interface SearchResult extends Entity {
 /**
  * Interface for entities from the /wp/v2/block-types endpoint.
  */
-export interface BlockType extends Entity {
+export interface BlockTypeEntity extends Entity {
   /**
    * Title of block type.
    */
