@@ -1,4 +1,12 @@
 /**
+ * These types were partially generated using
+ * [json-schema-to-typescript](https://www.npmjs.com/package/json-schema-to-typescript)
+ * to transform the default schemas exposed by the WordPress REST API.
+ *
+ * Those schemas are accessible making an OPTIONS call to each endpoint.
+ */
+
+/**
  * Empty interface from which all entities inherit.
  */
 export interface Entity {
