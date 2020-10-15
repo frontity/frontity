@@ -3,6 +3,17 @@ import { decode, useConnect } from "frontity";
 import { getWpUrl } from "@frontity/head-tags/src/utils";
 import { transformAllLinks } from "../utils";
 import { Packages, WithYoastHead } from "../../types";
+import { Entity } from "@frontity/source/types";
+
+/**
+ * Returns `true` if the given entity has the `yoast_head` field.
+ *
+ * @param e - Entity.
+ * @returns Boolean value.
+ */
+export function hasYoastHead(e: Entity): e is WithYoastHead {
+  return !(e as WithYoastHead).yoast_head;
+}
 
 /**
  * Object returned for {@link useYoastHead} hook.
@@ -29,10 +40,10 @@ export const useYoastHead = (link: string): UseYoastHeadResult => {
   const { state } = useConnect<Packages>();
 
   // Get the entity pointed by the given link.
-  const entity: WithYoastHead = state.source.entity(link);
+  const entity = state.source.entity(link);
 
   // Get the `yoast_head` field from entity.
-  const html = entity?.yoast_head || "";
+  const html = hasYoastHead(entity) ? entity.yoast_head : "";
 
   const shouldUseTitle =
     state.yoast.renderTags === "server" && state.frontity.rendering === "csr";
