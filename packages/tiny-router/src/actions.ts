@@ -121,17 +121,15 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
           const head = await fetch(
             "http://localhost:8080" + state.router.link,
             {
-              redirect: "manual",
               method: "HEAD",
             }
           );
-          if (head.status === 301) {
-            const newUrl = new URL(head.headers.get("Location"));
-            const location = "http://localhost:3001" + newUrl.pathname;
+          if (head.redirected) {
+            const newLink = new URL(head.url).pathname;
 
             // TODO: Handle the Frontity Options
             ctx.redirect(
-              location + "?" + `frontity_name=` + state.frontity.options.name
+              newLink + "?" + `frontity_name=` + state.frontity.options.name
             );
           }
         }
