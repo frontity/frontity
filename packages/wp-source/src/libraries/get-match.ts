@@ -77,8 +77,9 @@ export const getMatch = <Patt extends Pattern>(
     })
     .find(({ regexp }) => regexp.test(link));
 
-  return result
-    ? {
+  if (result) {
+    try {
+      return {
         func: result.func,
         params: result.pattern.startsWith("RegExp:")
           ? result.regexp.exec(link).groups
@@ -86,5 +87,11 @@ export const getMatch = <Patt extends Pattern>(
         name: result.name,
         pattern: result.pattern,
       }
-    : null;
+
+    } catch {
+      return null;
+    }
+  } else {
+    return null;
+  }
 };
