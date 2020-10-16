@@ -1,5 +1,5 @@
 import TinyRouter from "../types";
-import { warn } from "frontity";
+import { warn, fetch } from "frontity";
 
 /**
  * Set the URL.
@@ -117,6 +117,24 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
       const data = state.source.get(state.router.link);
       if (data.isError) {
         ctx.status = data.errorStatus;
+        if (state.router.redirections === "error") {
+          const head = await fetch(
+            "http://localhost:8080" + state.router.link,
+            {
+              redirect: "manual",
+              method: "HEAD",
+            }
+          );
+          if (head.status === 301) {
+            const newUrl = new URL(head.headers.get("Location"));
+            const location = "http://localhost:3001" + newUrl.pathname;
+
+            // TODO: Handle the Frontity Options
+            ctx.redirect(
+              location + "?" + `frontity_name=` + state.frontity.options.name
+            );
+          }
+        }
       }
     } else {
       warn(
