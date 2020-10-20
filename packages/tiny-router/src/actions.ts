@@ -61,11 +61,11 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   ) {
     window.history.pushState(options.state, "", link);
     if (state.router.autoFetch)
-      actions.source?.fetch(link, { setLinkAfterRedirect: true });
+      actions.source?.fetch(link, { _setLinkAfterRedirect: true });
   } else if (options.method === "replace") {
     window.history.replaceState(options.state, "", link);
     if (state.router.autoFetch)
-      actions.source?.fetch(link, { setLinkAfterRedirect: true });
+      actions.source?.fetch(link, { _setLinkAfterRedirect: true });
   }
 };
 

@@ -285,7 +285,7 @@ interface WpSource extends Source {
               /**
                * Whether to set the link after calling the fetch.
                */
-              setLinkAfterRedirect: boolean;
+              _setLinkAfterRedirect: boolean;
             }
           >;
 

@@ -136,7 +136,7 @@ const actions: WpSource["actions"]["source"] = {
               isRedirection: true,
             });
 
-            if (options.setLinkAfterRedirect) {
+            if (options._setLinkAfterRedirect) {
               return actions.router.set(newLink, { method: "replace" });
             }
           }
