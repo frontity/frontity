@@ -1,6 +1,6 @@
 import TinyRouter from "../types";
-import { warn, fetch, observe } from "frontity";
-import { RedirectionData } from "@frontity/source/types/data";
+import { warn, observe } from "frontity";
+import { RedirectionData, ErrorData } from "@frontity/source/types/data";
 
 /**
  * Set the URL.
@@ -60,12 +60,10 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     (!options.method && state.frontity.platform === "client")
   ) {
     window.history.pushState(options.state, "", link);
-    if (state.router.autoFetch)
-      actions.source?.fetch(link, { _setLinkAfterRedirect: true });
+    if (state.router.autoFetch) actions.source?.fetch(link);
   } else if (options.method === "replace") {
     window.history.replaceState(options.state, "", link);
-    if (state.router.autoFetch)
-      actions.source?.fetch(link, { _setLinkAfterRedirect: true });
+    if (state.router.autoFetch) actions.source?.fetch(link);
   }
 };
 
@@ -80,6 +78,13 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   actions,
   libraries,
 }) => {
+  observe(() => {
+    const data = state.source.get(state.router.link) as RedirectionData;
+    if (data.isRedirection && state.frontity.platform === "client") {
+      actions.router.set(data.location, { method: "replace" });
+    }
+  });
+
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
     state.router.link =
@@ -122,28 +127,16 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   if (state.router.autoFetch) {
     if (actions.source && actions.source.fetch) {
       await actions.source.fetch(state.router.link);
-      const data = state.source.get(state.router.link);
-      if (data.isError) {
+      const data = state.source.get(state.router.link) as RedirectionData &
+        ErrorData;
+
+      if (data.isRedirection && state.router.redirections === "error") {
+        // TODO: Handle the Frontity Options
+        ctx.redirect(
+          data.location + "?" + `frontity_name=` + state.frontity.options.name
+        );
+      } else if (data.isError) {
         ctx.status = data.errorStatus;
-        if (state.router.redirections === "error") {
-          const head = await fetch(
-            "http://localhost:8080" + state.router.link,
-            {
-              method: "HEAD",
-            }
-          );
-          if (head.redirected) {
-            const newLink = new URL(head.url).pathname;
-
-            // cause by default it's a 302
-            ctx.status = 301;
-
-            // TODO: Handle the Frontity Options
-            ctx.redirect(
-              newLink + "?" + `frontity_name=` + state.frontity.options.name
-            );
-          }
-        }
       }
     } else {
       warn(

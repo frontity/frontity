@@ -13,7 +13,7 @@ import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries, actions }) => async (...params) => {
+  fetch: ({ state, libraries }) => async (...params) => {
     const [route, options] = params;
     const { source } = state;
 
@@ -113,10 +113,7 @@ const actions: WpSource["actions"]["source"] = {
     } catch (e) {
       // It's a server error (4xx or 5xx).
       if (e instanceof ServerError) {
-        if (
-          state.router.redirections === "error" &&
-          state.frontity.platform === "client"
-        ) {
+        if (state.router.redirections === "error") {
           // TODO: handle errors
           const head = await fetch("http://localhost:8080" + link, {
             method: "HEAD",
@@ -135,10 +132,7 @@ const actions: WpSource["actions"]["source"] = {
               isReady: true,
               isRedirection: true,
             });
-
-            if (options._setLinkAfterRedirect) {
-              return actions.router.set(newLink, { method: "replace" });
-            }
+            return;
           }
         }
 
