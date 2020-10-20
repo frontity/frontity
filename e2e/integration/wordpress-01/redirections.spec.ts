@@ -60,7 +60,7 @@ describe("Preview plugin", () => {
     cy.get("#post").should("exist");
   });
 
-  it("It should work when you prefetch the data for a (redirected) post", () => {
+  it("Should work when you prefetch the data for a (redirected) post", () => {
     cy.visit(
       "http://localhost:3001/post-with-prefetch/?frontity_name=redirections"
     );
@@ -75,5 +75,22 @@ describe("Preview plugin", () => {
     );
 
     cy.get("#post").should("contain.text", "Post with prefetch");
+  });
+
+  it("Should work with a double redirection on the server", () => {
+    cy.visit("http://localhost:3001/initial-url/?frontity_name=redirections");
+
+    cy.location("href").should("eq", "http://localhost:3001/final-url/");
+
+    cy.get("#post").should("contain.text", "Post: Doubly redirected post");
+  });
+
+  it("Should work with a double redirection on the client", () => {
+    cy.visit("http://localhost:3001?frontity_name=redirections");
+
+    cy.get("#doubly-redirected").click();
+
+    cy.location("href").should("eq", "http://localhost:3001/final-url/");
+    cy.get("#post").should("contain.text", "Post: Doubly redirected post");
   });
 });
