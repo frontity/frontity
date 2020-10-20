@@ -81,6 +81,8 @@ interface FetchOptions {
    * @defaultValue false
    */
   force?: boolean;
+
+  setLinkAfterRedirect: boolean;
 }
 
 /**

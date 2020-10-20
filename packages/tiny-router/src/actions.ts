@@ -1,5 +1,6 @@
 import TinyRouter from "../types";
-import { warn, fetch } from "frontity";
+import { warn, fetch, observe } from "frontity";
+import { RedirectionData } from "@frontity/source/types/data";
 
 /**
  * Set the URL.
@@ -46,6 +47,11 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   // Sets state default value.
   if (!options.state) options.state = {};
 
+  const data = state.source.get(link) as RedirectionData;
+  if (data.isRedirection) {
+    link = data.location;
+  }
+
   state.router.link = link;
   state.router.state = options.state;
 
@@ -54,10 +60,12 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     (!options.method && state.frontity.platform === "client")
   ) {
     window.history.pushState(options.state, "", link);
-    if (state.router.autoFetch) actions.source?.fetch(link);
+    if (state.router.autoFetch)
+      actions.source?.fetch(link, { setLinkAfterRedirect: true });
   } else if (options.method === "replace") {
     window.history.replaceState(options.state, "", link);
-    if (state.router.autoFetch) actions.source?.fetch(link);
+    if (state.router.autoFetch)
+      actions.source?.fetch(link, { setLinkAfterRedirect: true });
   }
 };
 
@@ -126,6 +134,9 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
           );
           if (head.redirected) {
             const newLink = new URL(head.url).pathname;
+
+            // cause by default it's a 302
+            ctx.status = 301;
 
             // TODO: Handle the Frontity Options
             ctx.redirect(

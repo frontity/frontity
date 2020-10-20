@@ -1,4 +1,4 @@
-import { error } from "frontity";
+import { error, fetch } from "frontity";
 import WpSource from "../types";
 import { parse, normalize, concatLink } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
@@ -13,7 +13,7 @@ import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
-  fetch: ({ state, libraries }) => async (...params) => {
+  fetch: ({ state, libraries, actions }) => async (...params) => {
     const [route, options] = params;
     const { source } = state;
 
@@ -113,6 +113,35 @@ const actions: WpSource["actions"]["source"] = {
     } catch (e) {
       // It's a server error (4xx or 5xx).
       if (e instanceof ServerError) {
+        if (
+          state.router.redirections === "error" &&
+          state.frontity.platform === "client"
+        ) {
+          // TODO: handle errors
+          const head = await fetch("http://localhost:8080" + link, {
+            method: "HEAD",
+          });
+
+          // TODO: handle if there is no redirection
+          if (head.redirected) {
+            // TODO: We'll have to preserve the query string as well
+            // TODO: I guess we should also normalize the link with libraries.source.normalize(link);
+            const newLink = new URL(head.url).pathname;
+
+            Object.assign(source.data[link], {
+              location: newLink,
+              is301: true,
+              isFetching: true,
+              isReady: true,
+              isRedirection: true,
+            });
+
+            if (options.setLinkAfterRedirect) {
+              return actions.router.set(newLink, { method: "replace" });
+            }
+          }
+        }
+
         console.error(e);
 
         const errorData: ErrorData = {

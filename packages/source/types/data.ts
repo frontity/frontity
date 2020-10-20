@@ -16,6 +16,7 @@ export type EntityData = {
 export type Data =
   | BaseData
   | ErrorData
+  | RedirectionData
   | TaxonomyData
   | CategoryData
   | TagData
@@ -375,5 +376,19 @@ export type CommentData = Merge<
     items: CommentItem[];
     total: number;
     totalPages: number;
+  }
+>;
+
+/**
+ * Adds the data for the redirection to the
+ */
+export type RedirectionData = Merge<
+  BaseData,
+  {
+    isReady: true;
+    isFetching: false;
+    isRedirection: true;
+    is301: true;
+    location: string;
   }
 >;
