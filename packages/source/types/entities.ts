@@ -14,9 +14,39 @@ export interface Entity {
 }
 
 /**
+ * Base interface for all post type entities.
+ *
+ * Interfaces that extends from this one are:
+ * - {@link PostEntity}.
+ * - {@link PageEntity}.
+ * - {@link AttachmentEntity}.
+ */
+export interface PostTypeEntity extends Entity {
+  /**
+   * Type of Post for the object.
+   */
+  type: string;
+
+  /**
+   * Unique identifier for the object.
+   */
+  id: number;
+
+  /**
+   * URL to the object.
+   */
+  link: string;
+
+  /**
+   * An alphanumeric identifier for the object unique to its type.
+   */
+  slug: string;
+}
+
+/**
  * Interface for entities from the /wp/v2/posts endpoint.
  */
-export interface PostEntity extends Entity {
+export interface PostEntity extends PostTypeEntity {
   /**
    * The date the object was published, in the site's timezone.
    */
@@ -46,12 +76,12 @@ export interface PostEntity extends Entity {
   /**
    * Unique identifier for the object.
    */
-  id?: number;
+  id: number;
 
   /**
    * URL to the object.
    */
-  link?: string;
+  link: string;
 
   /**
    * The date the object was last modified, in the site's timezone.
@@ -66,7 +96,7 @@ export interface PostEntity extends Entity {
   /**
    * An alphanumeric identifier for the object unique to its type.
    */
-  slug?: string;
+  slug: string;
 
   /**
    * A named status for the object.
@@ -76,7 +106,7 @@ export interface PostEntity extends Entity {
   /**
    * Type of Post for the object.
    */
-  type?: string;
+  type: "post";
 
   /**
    * A password to protect access to the content and excerpt.
@@ -223,7 +253,7 @@ export interface PostEntity extends Entity {
 /**
  * Interface for entities from the /wp/v2/posts/1/revisions endpoint.
  */
-export interface PostRevision extends Entity {
+export interface RevisionEntity extends Entity {
   /**
    * The ID for the author of the object.
    */
@@ -378,12 +408,12 @@ export interface PageEntity extends Entity {
   /**
    * Unique identifier for the object.
    */
-  id?: number;
+  id: number;
 
   /**
    * URL to the object.
    */
-  link?: string;
+  link: string;
 
   /**
    * The date the object was last modified, in the site's timezone.
@@ -398,7 +428,7 @@ export interface PageEntity extends Entity {
   /**
    * An alphanumeric identifier for the object unique to its type.
    */
-  slug?: string;
+  slug: string;
 
   /**
    * A named status for the object.
@@ -408,7 +438,7 @@ export interface PageEntity extends Entity {
   /**
    * Type of Post for the object.
    */
-  type?: string;
+  type: "page";
 
   /**
    * A password to protect access to the content and excerpt.
@@ -565,12 +595,12 @@ export interface AttachmentEntity extends Entity {
   /**
    * Unique identifier for the object.
    */
-  id?: number;
+  id: number;
 
   /**
    * URL to the object.
    */
-  link?: string;
+  link: string;
 
   /**
    * The date the object was last modified, in the site's timezone.
@@ -585,7 +615,7 @@ export interface AttachmentEntity extends Entity {
   /**
    * An alphanumeric identifier for the object unique to its type.
    */
-  slug?: string;
+  slug: string;
 
   /**
    * A named status for the object.
@@ -595,7 +625,7 @@ export interface AttachmentEntity extends Entity {
   /**
    * Type of Post for the object.
    */
-  type?: string;
+  type: string;
 
   /**
    * Permalink template for the object.
@@ -718,115 +748,6 @@ export interface AttachmentEntity extends Entity {
    * List of the missing image sizes of the attachment.
    */
   missing_image_sizes?: string[];
-  [k: string]: unknown;
-}
-
-/**
- * Interface for entities from the /wp/v2/blocks endpoint.
- */
-export interface WpBlockEntity extends Entity {
-  /**
-   * The date the object was published, in the site's timezone.
-   */
-  date?: string | null;
-
-  /**
-   * The date the object was published, as GMT.
-   */
-  date_gmt?: string | null;
-
-  /**
-   * The globally unique identifier for the object.
-   */
-  guid?: {
-    /**
-     * GUID for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * GUID for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
-
-  /**
-   * Unique identifier for the object.
-   */
-  id?: number;
-
-  /**
-   * URL to the object.
-   */
-  link?: string;
-
-  /**
-   * The date the object was last modified, in the site's timezone.
-   */
-  modified?: string;
-
-  /**
-   * The date the object was last modified, as GMT.
-   */
-  modified_gmt?: string;
-
-  /**
-   * An alphanumeric identifier for the object unique to its type.
-   */
-  slug?: string;
-
-  /**
-   * A named status for the object.
-   */
-  status?: "publish" | "future" | "draft" | "pending" | "private";
-
-  /**
-   * Type of Post for the object.
-   */
-  type?: string;
-
-  /**
-   * A password to protect access to the content and excerpt.
-   */
-  password?: string;
-
-  /**
-   * The title for the object.
-   */
-  title?: {
-    /**
-     * Title for the object, as it exists in the database.
-     */
-    raw?: string;
-    [k: string]: unknown;
-  };
-
-  /**
-   * The content for the object.
-   */
-  content?: {
-    /**
-     * Content for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * Version of the content block format used by the object.
-     */
-    block_version?: number;
-
-    /**
-     * Whether the content is protected with a password.
-     */
-    protected?: boolean;
-    [k: string]: unknown;
-  };
-
-  /**
-   * The theme file to use to display the object.
-   */
-  template?: string;
   [k: string]: unknown;
 }
 
@@ -1280,197 +1201,5 @@ export interface CommentEntity extends Entity {
   meta?: {
     [k: string]: unknown;
   };
-  [k: string]: unknown;
-}
-
-/**
- * Interface for entities from the /wp/v2/search endpoint.
- */
-export interface SearchResultEntity extends Entity {
-  /**
-   * Unique identifier for the object.
-   */
-  id?: number;
-
-  /**
-   * The title for the object.
-   */
-  title?: string;
-
-  /**
-   * URL to the object.
-   */
-  url?: string;
-
-  /**
-   * Object type.
-   */
-  type?: "post";
-
-  /**
-   * Object subtype.
-   */
-  subtype?: "post" | "page";
-  [k: string]: unknown;
-}
-
-/**
- * Interface for entities from the /wp/v2/block-types endpoint.
- */
-export interface BlockTypeEntity extends Entity {
-  /**
-   * Title of block type.
-   */
-  title?: string;
-
-  /**
-   * Unique name identifying the block type.
-   */
-  name?: string;
-
-  /**
-   * Description of block type.
-   */
-  description?: string;
-
-  /**
-   * Icon of block type.
-   */
-  icon?: string | null;
-
-  /**
-   * Block attributes.
-   */
-  attributes?: {
-    [k: string]: {
-      [k: string]: unknown;
-    };
-  } | null;
-
-  /**
-   * Context provided by blocks of this type.
-   */
-  provides_context?: {
-    [k: string]: string;
-  };
-
-  /**
-   * Context values inherited by blocks of this type.
-   */
-  uses_context?: string[];
-
-  /**
-   * Block supports.
-   */
-  supports?: {
-    [k: string]: unknown;
-  };
-
-  /**
-   * Block category.
-   */
-  category?: string | null;
-
-  /**
-   * Is the block dynamically rendered.
-   */
-  is_dynamic?: boolean;
-
-  /**
-   * Editor script handle.
-   */
-  editor_script?: string | null;
-
-  /**
-   * Public facing script handle.
-   */
-  script?: string | null;
-
-  /**
-   * Editor style handle.
-   */
-  editor_style?: string | null;
-
-  /**
-   * Public facing style handle.
-   */
-  style?: string | null;
-
-  /**
-   * Block style variations.
-   */
-  styles?: {
-    /**
-     * Unique name identifying the style.
-     */
-    name?: string;
-
-    /**
-     * The human-readable label for the style.
-     */
-    label?: string;
-
-    /**
-     * Inline CSS code that registers the CSS class required for the style.
-     */
-    inline_style?: string;
-
-    /**
-     * Contains the handle that defines the block style.
-     */
-    style_handle?: string;
-    [k: string]: unknown;
-  }[];
-
-  /**
-   * Public text domain.
-   */
-  textdomain?: string | null;
-
-  /**
-   * Parent blocks.
-   */
-  parent?: string[] | null;
-
-  /**
-   * Block keywords.
-   */
-  keywords?: string[];
-
-  /**
-   * Block example.
-   */
-  example?: {
-    /**
-     * The attributes used in the example.
-     */
-    attributes?: {
-      [k: string]: unknown;
-    };
-
-    /**
-     * The list of inner blocks used in the example.
-     */
-    innerBlocks?: {
-      /**
-       * The name of the inner block.
-       */
-      name?: string;
-
-      /**
-       * The attributes of the inner block.
-       */
-      attributes?: {
-        [k: string]: unknown;
-      };
-
-      /**
-       * A list of the inner block's own inner blocks. This is a recursive definition following the parent innerBlocks schema.
-       */
-      innerBlocks?: unknown[];
-      [k: string]: unknown;
-    }[];
-    [k: string]: unknown;
-  } | null;
   [k: string]: unknown;
 }
