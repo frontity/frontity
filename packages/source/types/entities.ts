@@ -14,6 +14,69 @@ export interface Entity {
 }
 
 /**
+ * The title for the object.
+ */
+interface EntityTitle {
+  /**
+   * Title for the object, as it exists in the database.
+   */
+  raw?: string;
+
+  /**
+   * HTML title for the object, transformed for display.
+   */
+  rendered?: string;
+  [k: string]: unknown;
+}
+
+/**
+ * The content for the object.
+ */
+interface EntityContent {
+  /**
+   * Content for the object, as it exists in the database.
+   */
+  raw?: string;
+
+  /**
+   * HTML content for the object, transformed for display.
+   */
+  rendered?: string;
+
+  /**
+   * Version of the content block format used by the object.
+   */
+  block_version?: number;
+
+  /**
+   * Whether the content is protected with a password.
+   */
+  protected?: boolean;
+  [k: string]: unknown;
+}
+
+/**
+ * The excerpt for the object.
+ */
+interface EntityExcerpt {
+  /**
+   * Excerpt for the object, as it exists in the database.
+   */
+  raw?: string;
+
+  /**
+   * HTML excerpt for the object, transformed for display.
+   */
+  rendered?: string;
+
+  /**
+   * Whether the excerpt is protected with a password.
+   */
+  protected?: boolean;
+  [k: string]: unknown;
+}
+
+/**
  * Base interface for all post type entities.
  *
  * Interfaces that extends from this one are:
@@ -22,31 +85,6 @@ export interface Entity {
  * - {@link AttachmentEntity}.
  */
 export interface PostTypeEntity extends Entity {
-  /**
-   * Type of Post for the object.
-   */
-  type: string;
-
-  /**
-   * Unique identifier for the object.
-   */
-  id: number;
-
-  /**
-   * URL to the object.
-   */
-  link: string;
-
-  /**
-   * An alphanumeric identifier for the object unique to its type.
-   */
-  slug: string;
-}
-
-/**
- * Interface for entities from the /wp/v2/posts endpoint.
- */
-export interface PostEntity extends PostTypeEntity {
   /**
    * The date the object was published, in the site's timezone.
    */
@@ -74,16 +112,6 @@ export interface PostEntity extends PostTypeEntity {
   };
 
   /**
-   * Unique identifier for the object.
-   */
-  id: number;
-
-  /**
-   * URL to the object.
-   */
-  link: string;
-
-  /**
    * The date the object was last modified, in the site's timezone.
    */
   modified?: string;
@@ -92,6 +120,16 @@ export interface PostEntity extends PostTypeEntity {
    * The date the object was last modified, as GMT.
    */
   modified_gmt?: string;
+
+  /**
+   * Unique identifier for the object.
+   */
+  id: number;
+
+  /**
+   * URL to the object.
+   */
+  link: string;
 
   /**
    * An alphanumeric identifier for the object unique to its type.
@@ -106,95 +144,17 @@ export interface PostEntity extends PostTypeEntity {
   /**
    * Type of Post for the object.
    */
-  type: "post";
-
-  /**
-   * A password to protect access to the content and excerpt.
-   */
-  password?: string;
-
-  /**
-   * Permalink template for the object.
-   */
-  permalink_template?: string;
-
-  /**
-   * Slug automatically generated from the object title.
-   */
-  generated_slug?: string;
+  type?: string;
 
   /**
    * The title for the object.
    */
-  title?: {
-    /**
-     * Title for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML title for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
-
-  /**
-   * The content for the object.
-   */
-  content?: {
-    /**
-     * Content for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML content for the object, transformed for display.
-     */
-    rendered?: string;
-
-    /**
-     * Version of the content block format used by the object.
-     */
-    block_version?: number;
-
-    /**
-     * Whether the content is protected with a password.
-     */
-    protected?: boolean;
-    [k: string]: unknown;
-  };
+  title?: EntityTitle;
 
   /**
    * The ID for the author of the object.
    */
   author?: number;
-
-  /**
-   * The excerpt for the object.
-   */
-  excerpt?: {
-    /**
-     * Excerpt for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML excerpt for the object, transformed for display.
-     */
-    rendered?: string;
-
-    /**
-     * Whether the excerpt is protected with a password.
-     */
-    protected?: boolean;
-    [k: string]: unknown;
-  };
-
-  /**
-   * The ID of the featured media for the object.
-   */
-  featured_media?: number;
 
   /**
    * Whether or not comments are open on the object.
@@ -205,6 +165,26 @@ export interface PostEntity extends PostTypeEntity {
    * Whether or not the object can be pinged.
    */
   ping_status?: "open" | "closed";
+}
+
+/**
+ * Interface for entities from the /wp/v2/posts endpoint.
+ */
+export interface PostEntity extends PostTypeEntity {
+  /**
+   * Type of Post for the object.
+   */
+  type: "post";
+
+  /**
+   * The content for the object.
+   */
+  content?: EntityContent;
+
+  /**
+   * The excerpt for the object.
+   */
+  excerpt?: EntityExcerpt;
 
   /**
    * The format for the object.
@@ -247,58 +227,21 @@ export interface PostEntity extends PostTypeEntity {
    * The terms assigned to the object in the post_tag taxonomy.
    */
   tags?: number[];
-  [k: string]: unknown;
+
+  /**
+   * The ID of the featured media for the object.
+   */
+  featured_media?: number;
 }
 
 /**
  * Interface for entities from the /wp/v2/posts/1/revisions endpoint.
  */
-export interface RevisionEntity extends Entity {
+export interface RevisionEntity extends PostTypeEntity {
   /**
    * The ID for the author of the object.
    */
   author?: number;
-
-  /**
-   * The date the object was published, in the site's timezone.
-   */
-  date?: string;
-
-  /**
-   * The date the object was published, as GMT.
-   */
-  date_gmt?: string;
-
-  /**
-   * The globally unique identifier for the object.
-   */
-  guid?: {
-    /**
-     * GUID for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * GUID for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
-
-  /**
-   * Unique identifier for the object.
-   */
-  id?: number;
-
-  /**
-   * The date the object was last modified, in the site's timezone.
-   */
-  modified?: string;
-
-  /**
-   * The date the object was last modified, as GMT.
-   */
-  modified_gmt?: string;
 
   /**
    * The ID for the parent of the object.
@@ -306,242 +249,39 @@ export interface RevisionEntity extends Entity {
   parent?: number;
 
   /**
-   * An alphanumeric identifier for the object unique to its type.
-   */
-  slug?: string;
-
-  /**
-   * The title for the object.
-   */
-  title?: {
-    /**
-     * Title for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML title for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
-
-  /**
    * The content for the object.
    */
-  content?: {
-    /**
-     * Content for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML content for the object, transformed for display.
-     */
-    rendered?: string;
-
-    /**
-     * Version of the content block format used by the object.
-     */
-    block_version?: number;
-
-    /**
-     * Whether the content is protected with a password.
-     */
-    protected?: boolean;
-    [k: string]: unknown;
-  };
+  content?: EntityContent;
 
   /**
    * The excerpt for the object.
    */
-  excerpt?: {
-    /**
-     * Excerpt for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML excerpt for the object, transformed for display.
-     */
-    rendered?: string;
-
-    /**
-     * Whether the excerpt is protected with a password.
-     */
-    protected?: boolean;
-    [k: string]: unknown;
-  };
-  [k: string]: unknown;
+  excerpt?: EntityExcerpt;
 }
 
 /**
  * Interface for entities from the /wp/v2/pages endpoint.
  */
-export interface PageEntity extends Entity {
-  /**
-   * The date the object was published, in the site's timezone.
-   */
-  date?: string | null;
-
-  /**
-   * The date the object was published, as GMT.
-   */
-  date_gmt?: string | null;
-
-  /**
-   * The globally unique identifier for the object.
-   */
-  guid?: {
-    /**
-     * GUID for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * GUID for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
-
-  /**
-   * Unique identifier for the object.
-   */
-  id: number;
-
-  /**
-   * URL to the object.
-   */
-  link: string;
-
-  /**
-   * The date the object was last modified, in the site's timezone.
-   */
-  modified?: string;
-
-  /**
-   * The date the object was last modified, as GMT.
-   */
-  modified_gmt?: string;
-
-  /**
-   * An alphanumeric identifier for the object unique to its type.
-   */
-  slug: string;
-
-  /**
-   * A named status for the object.
-   */
-  status?: "publish" | "future" | "draft" | "pending" | "private";
-
+export interface PageEntity extends PostTypeEntity {
   /**
    * Type of Post for the object.
    */
   type: "page";
 
   /**
-   * A password to protect access to the content and excerpt.
-   */
-  password?: string;
-
-  /**
-   * Permalink template for the object.
-   */
-  permalink_template?: string;
-
-  /**
-   * Slug automatically generated from the object title.
-   */
-  generated_slug?: string;
-
-  /**
    * The ID for the parent of the object.
    */
   parent?: number;
 
   /**
-   * The title for the object.
-   */
-  title?: {
-    /**
-     * Title for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML title for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
-
-  /**
    * The content for the object.
    */
-  content?: {
-    /**
-     * Content for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML content for the object, transformed for display.
-     */
-    rendered?: string;
-
-    /**
-     * Version of the content block format used by the object.
-     */
-    block_version?: number;
-
-    /**
-     * Whether the content is protected with a password.
-     */
-    protected?: boolean;
-    [k: string]: unknown;
-  };
-
-  /**
-   * The ID for the author of the object.
-   */
-  author?: number;
+  content?: EntityContent;
 
   /**
    * The excerpt for the object.
    */
-  excerpt?: {
-    /**
-     * Excerpt for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML excerpt for the object, transformed for display.
-     */
-    rendered?: string;
-
-    /**
-     * Whether the excerpt is protected with a password.
-     */
-    protected?: boolean;
-    [k: string]: unknown;
-  };
-
-  /**
-   * The ID of the featured media for the object.
-   */
-  featured_media?: number;
-
-  /**
-   * Whether or not comments are open on the object.
-   */
-  comment_status?: "open" | "closed";
-
-  /**
-   * Whether or not the object can be pinged.
-   */
-  ping_status?: "open" | "closed";
+  excerpt?: EntityExcerpt;
 
   /**
    * The order of the object in relation to other object of its type.
@@ -559,7 +299,11 @@ export interface PageEntity extends Entity {
    * The theme file to use to display the object.
    */
   template?: string;
-  [k: string]: unknown;
+
+  /**
+   * The ID of the featured media for the object.
+   */
+  featured_media?: number;
 }
 
 /**
@@ -567,106 +311,9 @@ export interface PageEntity extends Entity {
  */
 export interface AttachmentEntity extends Entity {
   /**
-   * The date the object was published, in the site's timezone.
-   */
-  date?: string | null;
-
-  /**
-   * The date the object was published, as GMT.
-   */
-  date_gmt?: string | null;
-
-  /**
-   * The globally unique identifier for the object.
-   */
-  guid?: {
-    /**
-     * GUID for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * GUID for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
-
-  /**
-   * Unique identifier for the object.
-   */
-  id: number;
-
-  /**
-   * URL to the object.
-   */
-  link: string;
-
-  /**
-   * The date the object was last modified, in the site's timezone.
-   */
-  modified?: string;
-
-  /**
-   * The date the object was last modified, as GMT.
-   */
-  modified_gmt?: string;
-
-  /**
-   * An alphanumeric identifier for the object unique to its type.
-   */
-  slug: string;
-
-  /**
-   * A named status for the object.
-   */
-  status?: "publish" | "future" | "draft" | "pending" | "private";
-
-  /**
    * Type of Post for the object.
    */
-  type: string;
-
-  /**
-   * Permalink template for the object.
-   */
-  permalink_template?: string;
-
-  /**
-   * Slug automatically generated from the object title.
-   */
-  generated_slug?: string;
-
-  /**
-   * The title for the object.
-   */
-  title?: {
-    /**
-     * Title for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML title for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
-
-  /**
-   * The ID for the author of the object.
-   */
-  author?: number;
-
-  /**
-   * Whether or not comments are open on the object.
-   */
-  comment_status?: "open" | "closed";
-
-  /**
-   * Whether or not the object can be pinged.
-   */
-  ping_status?: "open" | "closed";
+  type: "attachment";
 
   /**
    * Meta fields.
