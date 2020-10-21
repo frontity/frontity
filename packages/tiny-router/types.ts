@@ -34,19 +34,20 @@ interface TinyRouter extends Router {
        * How the router should handle 301 redirections that can be stored in the
        * WordPress database e.g. Via a Redirection plugin: https://wordpress.org/plugins/redirection/.
        *
-       * - "none" - Does not handle them at all.
+       * - "no" - Does not handle them at all.
        *
        * - "all"  - Always make an additional request to the WordPress instance
        * to check if there exists a redirection.
        *
-       * - "error" - Only send the additional request to the WordPress instance
+       * - "404" - Only send the additional request to the WordPress instance
        * if the original request returned a 404.
        *
-       * - Regexp  - Make the additional request for links that match the given regex.
+       * - string - A string pattern used to match a route according to rules in
+       *  https://github.com/pillarjs/path-to-regexp.
        *
-       * @defaultValue "none"
+       * @defaultValue "no"
        */
-      redirections: "none" | "all" | "error" | RegExp;
+      redirections: string | string[];
     };
     /**
      * The source namespace.

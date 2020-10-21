@@ -113,7 +113,7 @@ const actions: WpSource["actions"]["source"] = {
     } catch (e) {
       // It's a server error (4xx or 5xx).
       if (e instanceof ServerError) {
-        if (state.router.redirections === "error") {
+        if (state.router.redirections === "404") {
           // TODO: handle errors
           const head = await fetch("http://localhost:8080" + link, {
             method: "HEAD",
