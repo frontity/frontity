@@ -14,65 +14,13 @@ export interface Entity {
 }
 
 /**
- * The title for the object.
+ * Cover some cases of objects with `rendered` property.
  */
-interface EntityTitle {
+interface Rendered {
   /**
-   * Title for the object, as it exists in the database.
-   */
-  raw?: string;
-
-  /**
-   * HTML title for the object, transformed for display.
+   * Property of the object, transformed for display.
    */
   rendered?: string;
-  [k: string]: unknown;
-}
-
-/**
- * The content for the object.
- */
-interface EntityContent {
-  /**
-   * Content for the object, as it exists in the database.
-   */
-  raw?: string;
-
-  /**
-   * HTML content for the object, transformed for display.
-   */
-  rendered?: string;
-
-  /**
-   * Version of the content block format used by the object.
-   */
-  block_version?: number;
-
-  /**
-   * Whether the content is protected with a password.
-   */
-  protected?: boolean;
-  [k: string]: unknown;
-}
-
-/**
- * The excerpt for the object.
- */
-interface EntityExcerpt {
-  /**
-   * Excerpt for the object, as it exists in the database.
-   */
-  raw?: string;
-
-  /**
-   * HTML excerpt for the object, transformed for display.
-   */
-  rendered?: string;
-
-  /**
-   * Whether the excerpt is protected with a password.
-   */
-  protected?: boolean;
   [k: string]: unknown;
 }
 
@@ -83,6 +31,7 @@ interface EntityExcerpt {
  * - {@link PostEntity}.
  * - {@link PageEntity}.
  * - {@link AttachmentEntity}.
+ * - {@link RevisionEntity}.
  */
 export interface PostTypeEntity extends Entity {
   /**
@@ -98,18 +47,7 @@ export interface PostTypeEntity extends Entity {
   /**
    * The globally unique identifier for the object.
    */
-  guid?: {
-    /**
-     * GUID for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * GUID for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
+  guid?: Rendered;
 
   /**
    * The date the object was last modified, in the site's timezone.
@@ -149,7 +87,7 @@ export interface PostTypeEntity extends Entity {
   /**
    * The title for the object.
    */
-  title?: EntityTitle;
+  title?: Rendered;
 
   /**
    * The ID for the author of the object.
@@ -179,12 +117,12 @@ export interface PostEntity extends PostTypeEntity {
   /**
    * The content for the object.
    */
-  content?: EntityContent;
+  content?: Rendered;
 
   /**
    * The excerpt for the object.
    */
-  excerpt?: EntityExcerpt;
+  excerpt?: Rendered;
 
   /**
    * The format for the object.
@@ -204,9 +142,7 @@ export interface PostEntity extends PostTypeEntity {
   /**
    * Meta fields.
    */
-  meta?: {
-    [k: string]: unknown;
-  };
+  meta?: Record<string, unknown>;
 
   /**
    * Whether or not the object should be treated as sticky.
@@ -251,12 +187,12 @@ export interface RevisionEntity extends PostTypeEntity {
   /**
    * The content for the object.
    */
-  content?: EntityContent;
+  content?: Rendered;
 
   /**
    * The excerpt for the object.
    */
-  excerpt?: EntityExcerpt;
+  excerpt?: Rendered;
 }
 
 /**
@@ -276,12 +212,12 @@ export interface PageEntity extends PostTypeEntity {
   /**
    * The content for the object.
    */
-  content?: EntityContent;
+  content?: Rendered;
 
   /**
    * The excerpt for the object.
    */
-  excerpt?: EntityExcerpt;
+  excerpt?: Rendered;
 
   /**
    * The order of the object in relation to other object of its type.
@@ -291,9 +227,7 @@ export interface PageEntity extends PostTypeEntity {
   /**
    * Meta fields.
    */
-  meta?: {
-    [k: string]: unknown;
-  };
+  meta?: Record<string, unknown>;
 
   /**
    * The theme file to use to display the object.
@@ -318,9 +252,7 @@ export interface AttachmentEntity extends Entity {
   /**
    * Meta fields.
    */
-  meta?: {
-    [k: string]: unknown;
-  };
+  meta?: Record<string, unknown>;
 
   /**
    * The theme file to use to display the object.
@@ -335,34 +267,12 @@ export interface AttachmentEntity extends Entity {
   /**
    * The attachment caption.
    */
-  caption?: {
-    /**
-     * Caption for the attachment, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML caption for the attachment, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
+  caption?: Rendered;
 
   /**
    * The attachment description.
    */
-  description?: {
-    /**
-     * Description for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML description for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
+  description?: Rendered;
 
   /**
    * Attachment type.
@@ -377,9 +287,7 @@ export interface AttachmentEntity extends Entity {
   /**
    * Details about the media file, specific to its type.
    */
-  media_details?: {
-    [k: string]: unknown;
-  };
+  media_details?: Record<string, unknown>;
 
   /**
    * The ID for the associated post of the attachment.
@@ -399,16 +307,13 @@ export interface AttachmentEntity extends Entity {
 }
 
 /**
- * Interface for entities from the /wp/v2/types endpoint.
+ * Interface for entities that represents types.
+ *
+ * Interfaces that extends from this one are:
+ * - {@link PostType}.
+ * - {@link TaxonomyType}.
  */
 export interface TypeEntity extends Entity {
-  /**
-   * All capabilities used by the post type.
-   */
-  capabilities?: {
-    [k: string]: unknown;
-  };
-
   /**
    * A human-readable description of the post type.
    */
@@ -420,18 +325,6 @@ export interface TypeEntity extends Entity {
   hierarchical?: boolean;
 
   /**
-   * Whether or not the post type can be viewed.
-   */
-  viewable?: boolean;
-
-  /**
-   * Human-readable labels for the post type for various contexts.
-   */
-  labels?: {
-    [k: string]: unknown;
-  };
-
-  /**
    * The title for the post type.
    */
   name?: string;
@@ -440,13 +333,6 @@ export interface TypeEntity extends Entity {
    * An alphanumeric identifier for the post type.
    */
   slug?: string;
-
-  /**
-   * All features, supported by the post type.
-   */
-  supports?: {
-    [k: string]: unknown;
-  };
 
   /**
    * Taxonomies associated with post type.
@@ -461,94 +347,22 @@ export interface TypeEntity extends Entity {
 }
 
 /**
- * Interface for entities from the /wp/v2/taxonomies endpoint.
+ * Interface for entities from the /wp/v2/types endpoint.
  */
-export interface TaxonomyEntity extends Entity {
+export interface PostType extends TypeEntity {
   /**
-   * All capabilities used by the taxonomy.
+   * Taxonomies associated with post type.
    */
-  capabilities?: {
-    [k: string]: unknown;
-  };
-
-  /**
-   * A human-readable description of the taxonomy.
-   */
-  description?: string;
-
-  /**
-   * Whether or not the taxonomy should have children.
-   */
-  hierarchical?: boolean;
-
-  /**
-   * Human-readable labels for the taxonomy for various contexts.
-   */
-  labels?: {
-    [k: string]: unknown;
-  };
-
-  /**
-   * The title for the taxonomy.
-   */
-  name?: string;
-
-  /**
-   * An alphanumeric identifier for the taxonomy.
-   */
-  slug?: string;
-
-  /**
-   * Whether or not the term cloud should be displayed.
-   */
-  show_cloud?: boolean;
-
+  taxonomies?: string[];
+}
+/**
+ * Interface for entities from the /wp/v2/taxonomy endpoint.
+ */
+export interface TaxonomyType extends TypeEntity {
   /**
    * Types associated with the taxonomy.
    */
   types?: string[];
-
-  /**
-   * REST base route for the taxonomy.
-   */
-  rest_base?: string;
-
-  /**
-   * The visibility settings for the taxonomy.
-   */
-  visibility?: {
-    /**
-     * Whether a taxonomy is intended for use publicly either via the admin interface or by front-end users.
-     */
-    public?: boolean;
-
-    /**
-     * Whether the taxonomy is publicly queryable.
-     */
-    publicly_queryable?: boolean;
-
-    /**
-     * Whether to generate a default UI for managing this taxonomy.
-     */
-    show_ui?: boolean;
-
-    /**
-     * Whether to allow automatic creation of taxonomy columns on associated post-types table.
-     */
-    show_admin_column?: boolean;
-
-    /**
-     * Whether to make the taxonomy available for selection in navigation menus.
-     */
-    show_in_nav_menus?: boolean;
-
-    /**
-     * Whether to show the taxonomy in the quick/bulk edit panel.
-     */
-    show_in_quick_edit?: boolean;
-    [k: string]: unknown;
-  };
-  [k: string]: unknown;
 }
 
 /**
@@ -558,7 +372,7 @@ export interface TaxonomyEntity extends Entity {
  * - entities from the /wp/v2/categories endpoint.
  * - entities from the /wp/v2/tags endpoint.
  */
-export interface TermEntity extends Entity {
+export interface TaxonomyEntity extends Entity {
   /**
    * Unique identifier for the term.
    */
@@ -602,9 +416,28 @@ export interface TermEntity extends Entity {
   /**
    * Meta fields.
    */
-  meta?: {
-    [k: string]: unknown;
-  };
+  meta?: Record<string, unknown>;
+  [k: string]: unknown;
+}
+
+/**
+ * Map of avatar URLs by their size.
+ */
+export interface AvatarUrls {
+  /**
+   * Avatar URL with image size of 24 pixels.
+   */
+  "24"?: string;
+
+  /**
+   * Avatar URL with image size of 48 pixels.
+   */
+  "48"?: string;
+
+  /**
+   * Avatar URL with image size of 96 pixels.
+   */
+  "96"?: string;
   [k: string]: unknown;
 }
 
@@ -618,29 +451,9 @@ export interface AuthorEntity extends Entity {
   id?: number;
 
   /**
-   * Login name for the user.
-   */
-  username?: string;
-
-  /**
    * Display name for the user.
    */
   name?: string;
-
-  /**
-   * First name for the user.
-   */
-  first_name?: string;
-
-  /**
-   * Last name for the user.
-   */
-  last_name?: string;
-
-  /**
-   * The email address for the user.
-   */
-  email?: string;
 
   /**
    * URL of the user.
@@ -658,76 +471,19 @@ export interface AuthorEntity extends Entity {
   link?: string;
 
   /**
-   * Locale for the user.
-   */
-  locale?: "" | "en_US";
-
-  /**
-   * The nickname for the user.
-   */
-  nickname?: string;
-
-  /**
    * An alphanumeric identifier for the user.
    */
   slug?: string;
 
   /**
-   * Registration date for the user.
-   */
-  registered_date?: string;
-
-  /**
-   * Roles assigned to the user.
-   */
-  roles?: string[];
-
-  /**
-   * Password for the user (never included).
-   */
-  password?: string;
-
-  /**
-   * All capabilities assigned to the user.
-   */
-  capabilities?: {
-    [k: string]: unknown;
-  };
-
-  /**
-   * Any extra capabilities assigned to the user.
-   */
-  extra_capabilities?: {
-    [k: string]: unknown;
-  };
-
-  /**
    * Avatar URLs for the user.
    */
-  avatar_urls?: {
-    /**
-     * Avatar URL with image size of 24 pixels.
-     */
-    "24"?: string;
-
-    /**
-     * Avatar URL with image size of 48 pixels.
-     */
-    "48"?: string;
-
-    /**
-     * Avatar URL with image size of 96 pixels.
-     */
-    "96"?: string;
-    [k: string]: unknown;
-  };
+  avatar_urls?: AvatarUrls;
 
   /**
    * Meta fields.
    */
-  meta?: {
-    [k: string]: unknown;
-  };
+  meta?: Record<string, unknown>;
   [k: string]: unknown;
 }
 
@@ -751,11 +507,6 @@ export interface CommentEntity extends Entity {
   author_email?: string;
 
   /**
-   * IP address for the object author.
-   */
-  author_ip?: string;
-
-  /**
    * Display name for the object author.
    */
   author_name?: string;
@@ -766,25 +517,9 @@ export interface CommentEntity extends Entity {
   author_url?: string;
 
   /**
-   * User agent for the object author.
-   */
-  author_user_agent?: string;
-
-  /**
    * The content for the object.
    */
-  content?: {
-    /**
-     * Content for the object, as it exists in the database.
-     */
-    raw?: string;
-
-    /**
-     * HTML content for the object, transformed for display.
-     */
-    rendered?: string;
-    [k: string]: unknown;
-  };
+  content?: Rendered;
 
   /**
    * The date the object was published, in the site's timezone.
@@ -824,29 +559,11 @@ export interface CommentEntity extends Entity {
   /**
    * Avatar URLs for the object author.
    */
-  author_avatar_urls?: {
-    /**
-     * Avatar URL with image size of 24 pixels.
-     */
-    "24"?: string;
-
-    /**
-     * Avatar URL with image size of 48 pixels.
-     */
-    "48"?: string;
-
-    /**
-     * Avatar URL with image size of 96 pixels.
-     */
-    "96"?: string;
-    [k: string]: unknown;
-  };
+  author_avatar_urls?: AvatarUrls;
 
   /**
    * Meta fields.
    */
-  meta?: {
-    [k: string]: unknown;
-  };
+  meta?: Record<string, unknown>;
   [k: string]: unknown;
 }
