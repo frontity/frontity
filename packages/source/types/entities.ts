@@ -37,12 +37,12 @@ export interface PostTypeEntity extends Entity {
   /**
    * The date the object was published, in the site's timezone.
    */
-  date?: string | null;
+  date?: string;
 
   /**
    * The date the object was published, as GMT.
    */
-  date_gmt?: string | null;
+  date_gmt?: string;
 
   /**
    * The globally unique identifier for the object.
@@ -313,7 +313,7 @@ export interface AttachmentEntity extends Entity {
  * - {@link PostType}.
  * - {@link TaxonomyType}.
  */
-export interface TypeEntity extends Entity {
+export interface EntityType extends Entity {
   /**
    * A human-readable description of the post type.
    */
@@ -335,38 +335,33 @@ export interface TypeEntity extends Entity {
   slug?: string;
 
   /**
-   * Taxonomies associated with post type.
-   */
-  taxonomies?: string[];
-
-  /**
    * REST base route for the post type.
    */
-  rest_base?: string;
+  rest_base: string;
   [k: string]: unknown;
 }
 
 /**
  * Interface for entities from the /wp/v2/types endpoint.
  */
-export interface PostType extends TypeEntity {
+export interface PostType extends EntityType {
   /**
    * Taxonomies associated with post type.
    */
-  taxonomies?: string[];
+  taxonomies: string[];
 }
 /**
  * Interface for entities from the /wp/v2/taxonomy endpoint.
  */
-export interface TaxonomyType extends TypeEntity {
+export interface TaxonomyType extends EntityType {
   /**
    * Types associated with the taxonomy.
    */
-  types?: string[];
+  types: string[];
 }
 
 /**
- * Interface for terms that belong to a taxonomy.
+ * Interface for entities that belong to a taxonomy.
  *
  * For example:
  * - entities from the /wp/v2/categories endpoint.
@@ -376,7 +371,7 @@ export interface TaxonomyEntity extends Entity {
   /**
    * Unique identifier for the term.
    */
-  id?: number;
+  id: number;
 
   /**
    * Number of published posts for the term.
@@ -391,7 +386,7 @@ export interface TaxonomyEntity extends Entity {
   /**
    * URL of the term.
    */
-  link?: string;
+  link: string;
 
   /**
    * HTML title for the term.
@@ -406,7 +401,7 @@ export interface TaxonomyEntity extends Entity {
   /**
    * Type attribution for the term.
    */
-  taxonomy?: string;
+  taxonomy: string;
 
   /**
    * The parent term ID.
@@ -448,7 +443,7 @@ export interface AuthorEntity extends Entity {
   /**
    * Unique identifier for the user.
    */
-  id?: number;
+  id: number;
 
   /**
    * Display name for the user.
@@ -468,7 +463,7 @@ export interface AuthorEntity extends Entity {
   /**
    * Author URL of the user.
    */
-  link?: string;
+  link: string;
 
   /**
    * An alphanumeric identifier for the user.
@@ -554,7 +549,7 @@ export interface CommentEntity extends Entity {
   /**
    * Type of Comment for the object.
    */
-  type?: string;
+  type: "comment";
 
   /**
    * Avatar URLs for the object author.
