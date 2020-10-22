@@ -7,8 +7,8 @@ import {
   PostEntity,
   AttachmentEntity,
   AuthorEntity,
-  TermEntity,
-  TypeEntity,
+  PostType,
+  TaxonomyType,
   Entity,
 } from "./entities";
 
@@ -114,7 +114,10 @@ interface Source<T = null> extends Package {
        * @param link - A link to a page of the Frontity site.
        * @returns The entity found or `null` otherwise.
        */
-      entity: Derived<T extends null ? Source : T, (link: string) => Entity>;
+      entity: Derived<
+        T extends null ? Source : T,
+        (link: string) => Entity | null
+      >;
 
       /**
        * The URL of the REST API.
@@ -133,7 +136,7 @@ interface Source<T = null> extends Package {
        *
        * The entities have the shape returned by the WP REST API.
        */
-      category: Record<string, TermEntity>;
+      category: Record<string, TaxonomyEntity>;
 
       /**
        * The map of tag entities, indexed by ID.
@@ -141,7 +144,7 @@ interface Source<T = null> extends Package {
        * The entities have the shape returned by the WP REST API, expect that
        * `post_tag` is renamed to `tag`.
        */
-      tag: Record<string, TermEntity>;
+      tag: Record<string, TaxonomyEntity>;
 
       /**
        * The map of post entities, indexed by ID.
@@ -176,14 +179,14 @@ interface Source<T = null> extends Package {
        *
        * The entities have the shape returned by the WP REST API.
        */
-      type: Record<string, TypeEntity>;
+      type: Record<string, PostType>;
 
       /**
        * The map of taxonomy entities, indexed by ID.
        *
        * The entities have the shape returned by the WP REST API.
        */
-      taxonomy: Record<string, TaxonomyEntity>;
+      taxonomy: Record<string, TaxonomyType>;
     };
   };
 
