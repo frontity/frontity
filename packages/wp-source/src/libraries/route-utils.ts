@@ -181,6 +181,6 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  * @returns The normalized link.
  */
 export const normalize = (link: string): string =>
-  paramsToLink(linkToParams(link));
+  paramsToLink(linkToParams(link.toLowerCase()));
 
 export default { parse, stringify, normalize };

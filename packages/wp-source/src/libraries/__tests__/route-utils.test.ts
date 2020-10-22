@@ -276,6 +276,10 @@ describe("route utils - normalize", () => {
     expect(normalize("/some/path")).toBe("/some/path/");
   });
 
+  test("from path (upper case)", () => {
+    expect(normalize("/SOME/PATH/")).toBe("/some/path/");
+  });
+
   test("from path and page", () => {
     expect(normalize("/some/path/page/2")).toBe("/some/path/page/2/");
   });
