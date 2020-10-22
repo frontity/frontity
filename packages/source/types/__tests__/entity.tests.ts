@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/no-unused-vars */
 import {
-  TaxonomyEntity,
-  TypeEntity,
   PostEntity,
   AuthorEntity,
   AttachmentEntity,
-  TermEntity,
+  TaxonomyEntity,
+  PostType,
+  TaxonomyType,
 } from "../entities";
-
-import { expectType } from "frontity/types/helpers";
 
 const author: AuthorEntity = {
   id: 1,
@@ -37,7 +35,7 @@ const author: AuthorEntity = {
   },
 };
 
-const category: TermEntity = {
+const category: TaxonomyEntity = {
   id: 7,
   count: 10,
   description: "",
@@ -346,7 +344,7 @@ const attachment: AttachmentEntity = {
   },
 };
 
-const taxonomyEntity: TaxonomyEntity = {
+const taxonomyType: TaxonomyType = {
   name: "Categories",
   slug: "category",
   description: "",
@@ -374,7 +372,7 @@ const taxonomyEntity: TaxonomyEntity = {
   },
 };
 
-const typeEntity: TypeEntity = {
+const postType: PostType = {
   description: "",
   hierarchical: false,
   name: "Posts",
