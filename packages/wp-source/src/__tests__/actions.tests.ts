@@ -148,7 +148,7 @@ describe("actions.source.fetch", () => {
     observe(() => {
       const data = store.state.source.get("/");
       if (data.isReady) {
-        expect(data.isHome).toBe(true);
+        expect(isHome(data)).toBe(true);
         done();
       }
     });
@@ -168,7 +168,7 @@ describe("actions.source.fetch", () => {
     observe(() => {
       const data = store.state.source.get("/page/123");
       if (data.isReady) {
-        expect(data.isHome).toBe(true);
+        expect(isHome(data)).toBe(true);
         done();
       }
     });
