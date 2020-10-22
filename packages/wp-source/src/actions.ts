@@ -67,12 +67,31 @@ const actions: WpSource["actions"]["source"] = {
     // Make sure isFetching is true before starting the fetch.
     source.data[link].isFetching = true;
 
+    let redirectionPromise: Promise<Response>;
+
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
       // Transform route if there is some redirection.
       const redirection = getMatch(route, redirections);
       if (redirection) route = redirection.func(redirection.params);
+
+      let routerRedirections = state.router.redirections;
+
+      if (routerRedirections === "all") {
+        redirectionPromise = fetch("http://localhost:8080" + link, {
+          method: "HEAD",
+        });
+      } else if (Array.isArray(routerRedirections)) {
+        routerRedirections = routerRedirections.filter(
+          (r) => r instanceof RegExp
+        );
+        if (routerRedirections.some((r) => state.router.link.match(r))) {
+          redirectionPromise = fetch("http://localhost:8080" + link, {
+            method: "HEAD",
+          });
+        }
+      }
 
       // Get the handler for this route.
       const handler = getMatch(`${route}${queryString}`, handlers);
@@ -113,14 +132,19 @@ const actions: WpSource["actions"]["source"] = {
     } catch (e) {
       // It's a server error (4xx or 5xx).
       if (e instanceof ServerError) {
-        if (state.router.redirections === "404") {
-          // TODO: handle errors
-          const head = await fetch("http://localhost:8080" + link, {
-            method: "HEAD",
-          });
+        // Check if the error is 4xx and we want to handle redirections in case
+        // of an error.
+        if (e.status === 404) {
+          let head = redirectionPromise && (await redirectionPromise);
+
+          if (state.router.redirections === "404") {
+            head = await fetch("http://localhost:8080" + link, {
+              method: "HEAD",
+            });
+          }
 
           // TODO: handle if there is no redirection
-          if (head.redirected) {
+          if (head?.redirected) {
             // TODO: We'll have to preserve the query string as well
             // TODO: I guess we should also normalize the link with libraries.source.normalize(link);
             const newLink = new URL(head.url).pathname;

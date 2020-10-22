@@ -1,15 +1,46 @@
 import { Package, Action } from "frontity/types";
 
+/**
+ *
+ */
 interface Router<T = null> extends Package {
+  /**
+   *
+   */
   state: {
+    /**
+     *
+     */
     frontity?: Package["state"]["frontity"];
+    /**
+     *
+     */
     router: {
+      /**
+       *
+       */
       link: string;
+      /**
+       *
+       */
       state: SetOptions["state"];
+      /**
+       *
+       */
+      redirections: "all" | "no" | "404" | RegExp | (RegExp | "404")[];
     };
   };
+  /**
+   *
+   */
   actions: {
+    /**
+     *
+     */
     router: {
+      /**
+       *
+       */
       set:
         | Action<T extends null ? Router : T, string>
         | Action<T extends null ? Router : T, string, SetOptions>;
@@ -19,7 +50,16 @@ interface Router<T = null> extends Package {
 
 export default Router;
 
+/**
+ *
+ */
 export interface SetOptions {
+  /**
+   *
+   */
   method?: "push" | "replace";
+  /**
+   *
+   */
   state?: object;
 }

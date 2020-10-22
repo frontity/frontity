@@ -1,6 +1,7 @@
 import { AsyncAction, Action, State, Derived, Package } from "frontity/types";
 import Source, { EntityData } from "@frontity/source/types";
 import { Api } from "./src/libraries";
+import Router from "@frontity/router/types";
 
 /**
  * A Frontity source package for the REST API of self-hosted WordPress and
@@ -446,7 +447,7 @@ interface WpSource extends Source {
 /**
  * Packages used internally by wp-source.
  */
-export type Packages = WpSource & Package;
+export type Packages = WpSource & Package & Router;
 
 export default WpSource;
 

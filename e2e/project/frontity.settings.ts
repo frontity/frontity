@@ -351,7 +351,7 @@ const settings: Settings = [
         name: "@frontity/tiny-router",
         state: {
           router: {
-            redirections: "error",
+            redirections: "404",
           },
         },
       },
