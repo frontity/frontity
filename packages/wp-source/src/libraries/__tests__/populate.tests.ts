@@ -7,9 +7,11 @@ import populate from "../populate";
 import posts from "../handlers/__tests__/mocks/post-archive/posts.json";
 import postsSubdir from "../handlers/__tests__/mocks/post-archive/posts-subdir.json";
 import cpts from "../handlers/__tests__/mocks/cpt-archive/cpts.json";
+import merge from "deepmerge";
+import Router from "@frontity/router/types";
 
-const initStore = (): InitializedStore<WpSource> => {
-  const config = clone(wpSource());
+const initStore = (): InitializedStore<WpSource & Router> => {
+  const config = clone(merge(wpSource(), { state: { router: {} } }));
   return createStore(config);
 };
 

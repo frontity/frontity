@@ -1,9 +1,20 @@
 import { createStore } from "@frontity/connect";
 import clone from "clone-deep";
 import wpSource from "../";
+import merge from "deepmerge";
 
 const initStore = (data = {}) => {
-  const config = clone(wpSource());
+  const config = clone(
+    merge(
+      wpSource(),
+      {
+        state: {
+          router: {},
+        },
+      },
+      { clone: false }
+    )
+  );
   // replace data by the one passed as argument
   config.state.source.data = data;
   return createStore(config);

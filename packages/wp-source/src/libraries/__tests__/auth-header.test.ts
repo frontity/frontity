@@ -6,6 +6,7 @@ import wpSource from "../..";
 import { mockResponse } from "../handlers/__tests__/mocks/helpers";
 import WpSource from "../../../types";
 import { Package } from "frontity/types";
+import merge from "deepmerge";
 
 const mockedFetch: jest.MockedFunction<typeof fetch> = jest.fn((_) =>
   Promise.resolve(mockResponse({ id: 1 }))
@@ -15,7 +16,19 @@ const mockedFetch: jest.MockedFunction<typeof fetch> = jest.fn((_) =>
 let store: InitializedStore<WpSource & Package>;
 
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
+  store = createStore(
+    clone(
+      merge(
+        wpSource(),
+        {
+          state: {
+            router: {},
+          },
+        },
+        { clone: false }
+      )
+    )
+  );
   store.state.source.api = "https://test.frontity.org/wp-json";
 });
 

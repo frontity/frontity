@@ -1,5 +1,9 @@
 import { createStore, observe, InitializedStore } from "@frontity/connect";
+import Router from "@frontity/router/types";
+
+import merge from "deepmerge";
 import clone from "clone-deep";
+
 import wpSource from "../";
 import WpSource, { Pattern, Handler } from "../../types";
 import * as handlers from "../libraries/handlers";
@@ -15,7 +19,7 @@ handlerMocks.postTypeArchiveHandler.mockReturnValue(jest.fn());
 handlerMocks.postTypeWithQueryHandler.mockReturnValue(jest.fn());
 
 let handler: jest.Mocked<Pattern<Handler>>;
-let store: InitializedStore<WpSource>;
+let store: InitializedStore<WpSource & Router>;
 
 beforeEach(() => {
   // Reset mocks
@@ -41,7 +45,20 @@ beforeEach(() => {
   };
 
   // Initialize the store
-  store = createStore<WpSource>(clone(wpSource()));
+  store = createStore<WpSource & Router>(
+    clone(
+      merge(
+        wpSource(),
+        {
+          state: {
+            router: {},
+          },
+        },
+        { clone: false }
+      )
+    )
+  );
+
   store.state.source.api = "https://test.frontity.org/wp-json";
 
   // Add mock handler to the store

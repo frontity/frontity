@@ -1,5 +1,6 @@
 import { createStore, InitializedStore } from "@frontity/connect";
 import clone from "clone-deep";
+import merge from "deepmerge";
 import wpSource from "../../../";
 import WpSource from "../../../../types";
 import Api from "../../api";
@@ -8,11 +9,24 @@ import { mockResponse } from "./mocks/helpers";
 import posts from "./mocks/post-archive/posts.json";
 import posts2 from "./mocks/post-archive/posts-page-2.json";
 import postsCpt from "./mocks/post-archive/posts-cpt.json";
+import Router from "@frontity/router/types";
 
-let store: InitializedStore<WpSource>;
+let store: InitializedStore<WpSource & Router>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore<WpSource>(clone(wpSource()));
+  store = createStore<WpSource & Router>(
+    clone(
+      merge(
+        wpSource(),
+        {
+          state: {
+            router: {},
+          },
+        },
+        { clone: false }
+      )
+    )
+  );
   store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;

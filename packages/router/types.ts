@@ -27,7 +27,7 @@ interface Router<T = null> extends Package {
       /**
        *
        */
-      redirections: "all" | "no" | "404" | RegExp | (RegExp | "404")[];
+      redirections?: string | string[];
     };
   };
   /**

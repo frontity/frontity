@@ -9,11 +9,25 @@ import tag1 from "./mocks/tag/tag-1.json";
 import tag1Posts from "./mocks/tag/tag-1-posts.json";
 import tag1PostsPage2 from "./mocks/tag/tag-1-posts-page-2.json";
 import tag1PostsCpt from "./mocks/tag/tag-1-posts-cpt.json";
+import merge from "deepmerge";
+import Router from "@frontity/router/types";
 
-let store: InitializedStore<WpSource>;
+let store: InitializedStore<WpSource & Router>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore<WpSource>(clone(wpSource()));
+  store = createStore<WpSource & Router>(
+    clone(
+      merge(
+        wpSource(),
+        {
+          state: {
+            router: {},
+          },
+        },
+        { clone: false }
+      )
+    )
+  );
   store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;

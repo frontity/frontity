@@ -539,7 +539,7 @@ export interface Pattern<F extends Function = Function> {
  *
  * @returns - Returns a promise that is resolved when the handler has finished.
  */
-export interface Handler<Pkg extends Source = WpSource> {
+export interface Handler<Pkg extends Source = WpSource & Router> {
   (args: {
     /**
      * The link that is being fetched.

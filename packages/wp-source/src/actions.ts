@@ -76,17 +76,18 @@ const actions: WpSource["actions"]["source"] = {
       const redirection = getMatch(route, redirections);
       if (redirection) route = redirection.func(redirection.params);
 
-      let routerRedirections = state.router.redirections;
+      const routerRedirections = state.router.redirections;
 
       if (routerRedirections === "all") {
         redirectionPromise = fetch("http://localhost:8080" + link, {
           method: "HEAD",
         });
       } else if (Array.isArray(routerRedirections)) {
-        routerRedirections = routerRedirections.filter(
-          (r) => r instanceof RegExp
+        const patterns = routerRedirections.filter((r) =>
+          r.startsWith("RegExp:")
         );
-        if (routerRedirections.some((r) => state.router.link.match(r))) {
+
+        if (patterns.some((r) => state.router.link.match(r))) {
           redirectionPromise = fetch("http://localhost:8080" + link, {
             method: "HEAD",
           });
