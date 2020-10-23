@@ -288,6 +288,10 @@ describe("route utils - normalize", () => {
     expect(normalize("/some/path?k1=v1&k2=v2")).toBe("/some/path/?k1=v1&k2=v2");
   });
 
+  test("from path and query (upper case)", () => {
+    expect(normalize("/some/PATH?K1=V1&k2=v2")).toBe("/some/path/?K1=V1&k2=v2");
+  });
+
   test("from path, page and query", () => {
     expect(normalize("/some/path/page/2?k1=v1&k2=v2")).toBe(
       "/some/path/page/2/?k1=v1&k2=v2"

@@ -146,7 +146,7 @@ const paramsToLink = ({
   const pathAndPage = page > 1 ? `${path}page/${page}/` : path;
   const queryString = objToQuery(query);
 
-  return `${pathAndPage}${queryString}${hash}`;
+  return `${pathAndPage.toLowerCase()}${queryString}${hash}`;
 };
 
 /**
@@ -181,6 +181,6 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  * @returns The normalized link.
  */
 export const normalize = (link: string): string =>
-  paramsToLink(linkToParams(link.toLowerCase()));
+  paramsToLink(linkToParams(link));
 
 export default { parse, stringify, normalize };
