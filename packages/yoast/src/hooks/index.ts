@@ -12,7 +12,7 @@ import { Entity } from "@frontity/source/types";
  * @returns Boolean value.
  */
 export function hasYoastHead(e: Entity): e is WithYoastHead {
-  return !(e as WithYoastHead).yoast_head;
+  return "yoast_head" in e && typeof e.yoast_head === "string";
 }
 
 /**
@@ -43,7 +43,7 @@ export const useYoastHead = (link: string): UseYoastHeadResult => {
   const entity = state.source.entity(link);
 
   // Get the `yoast_head` field from entity.
-  const html = hasYoastHead(entity) ? entity.yoast_head : "";
+  const html = entity && hasYoastHead(entity) ? entity.yoast_head : "";
 
   const shouldUseTitle =
     state.yoast.renderTags === "server" && state.frontity.rendering === "csr";
