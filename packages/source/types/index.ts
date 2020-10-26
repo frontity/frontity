@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { Package, AsyncAction, Derived } from "frontity/types";
 import { Data } from "./data";
 import {
@@ -21,7 +19,9 @@ export * from "./entities";
  */
 export type LinkParams = {
   /**
-   * DEPRECATED in favor of `route`. To be removed in Source v2.
+   * The pathname part of the link, but without the pagination: `/page/X`.
+   *
+   * @deprecated In favor of `route`. To be removed in Source v2.
    */
   path?: string;
 
@@ -103,9 +103,12 @@ interface Source<T = null> extends Package {
       get: Derived<T extends null ? Source : T, (link: string) => Data>;
 
       /**
-       * @deprecated
-       * This function is no longer recommended. Please, use entity's props
-       * from `state.source.get()` to access the state directly, e.g.
+       * Return the entity pointed by the given link.
+       *
+       * @deprecated This function is no longer recommended. Please, use
+       * entity's props from `state.source.get()` to access the state directly.
+       *
+       * @example
        * ```ts
        * const data = state.source.get("/some/post");
        * if (isPost(data)) {
@@ -128,6 +131,15 @@ interface Source<T = null> extends Package {
        */
       api: string;
 
+      /**
+       * The map of all {@link Data} objects, indexed by link.
+       *
+       * Data objects are generated when `actions.source.fetch(link)` is called,
+       * and contain information about that URL.
+       *
+       * @remarks
+       * The proper way of getting data objects is using `state.source.get()`.
+       */
       data: Record<string, Data>;
 
       /**
