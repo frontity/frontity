@@ -132,9 +132,9 @@ export const transformLink = ({
 };
 
 /**
- * The options of the {@link useFrontityLinks} function.
+ * The options of the {@link transformHeadTags} function.
  */
-interface UseFrontityLinksOptions {
+interface TransformHeadTagsOptions {
   /**
    * The Frontity state.
    */
@@ -147,18 +147,18 @@ interface UseFrontityLinksOptions {
 }
 
 /**
- * It receives an array of head tags and depending on the settings defined in
- * the state modifies all the link found in the head tags that need
- * transformation.
+ * Return a copy of the given head tags, transforming all links found that
+ * should point to the Frontity server according to
+ * `state.source.transformLinks`.
  *
- * @param options - Defined in {@link UseFrontityLinksOptions}.
+ * @param options - Defined in {@link TransformHeadTagsOptions}.
  *
  * @returns The modified head tags array.
  */
-export const useFrontityLinks = ({
+export const transformHeadTags = ({
   state,
   headTags,
-}: UseFrontityLinksOptions) => {
+}: TransformHeadTagsOptions) => {
   /**
    * At this point we assume that `state.headTags.transformLinks` and
    * `state.frontity.url` are defined.
@@ -278,5 +278,5 @@ export const getHeadTags = ({ state, link }: GetHeadTagsOptions) => {
   }
 
   // Transform links.
-  return useFrontityLinks({ state, headTags });
+  return transformHeadTags({ state, headTags });
 };
