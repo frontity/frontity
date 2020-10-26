@@ -153,7 +153,7 @@ const actions: WpSource["actions"]["source"] = {
             Object.assign(source.data[link], {
               location: newLink,
               is301: true,
-              isFetching: true,
+              isFetching: false,
               isReady: true,
               isRedirection: true,
             });
