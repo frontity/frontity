@@ -1,6 +1,12 @@
 import { warn } from "frontity";
 import { State } from "frontity/types";
 import { Packages, HeadTag, WithHeadTags } from "../../types";
+import {
+  isPostType,
+  isTaxonomy,
+  isAuthor,
+  isPostTypeArchive,
+} from "@frontity/source/data";
 
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
@@ -257,8 +263,26 @@ interface GetHeadTagsOptions {
  * found.
  */
 export const getHeadTags = ({ state, link }: GetHeadTagsOptions) => {
-  // Main entity pointed by the given link.
-  const entity: WithHeadTags = state.source.entity(link);
+  // Get the data object associated to link.
+  const data = state.source.get(link);
+
+  // Get the entity pointed by the given link.
+  let entity: WithHeadTags = null;
+
+  // Entities are stored in different places depending on their type.
+  if (isPostType(data)) {
+    const { type, id } = data;
+    entity = state.source[type][id];
+  } else if (isTaxonomy(data)) {
+    const { taxonomy, id } = data;
+    entity = state.source[taxonomy][id];
+  } else if (isAuthor(data)) {
+    const { id } = data;
+    entity = state.source.author[id];
+  } else if (isPostTypeArchive(data)) {
+    const { type } = data;
+    entity = state.source.type[type];
+  }
 
   // Get the `head_tags` field from the entity.
   const headTags = entity?.head_tags;
