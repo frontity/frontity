@@ -276,12 +276,20 @@ describe("route utils - normalize", () => {
     expect(normalize("/some/path")).toBe("/some/path/");
   });
 
+  test("from path (upper case)", () => {
+    expect(normalize("/SOME/PATH/")).toBe("/some/path/");
+  });
+
   test("from path and page", () => {
     expect(normalize("/some/path/page/2")).toBe("/some/path/page/2/");
   });
 
   test("from path and query", () => {
     expect(normalize("/some/path?k1=v1&k2=v2")).toBe("/some/path/?k1=v1&k2=v2");
+  });
+
+  test("from path and query (upper case)", () => {
+    expect(normalize("/some/PATH?K1=V1&k2=v2")).toBe("/some/path/?K1=V1&k2=v2");
   });
 
   test("from path, page and query", () => {
