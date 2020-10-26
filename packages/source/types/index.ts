@@ -103,16 +103,15 @@ interface Source<T = null> extends Package {
       get: Derived<T extends null ? Source : T, (link: string) => Data>;
 
       /**
-       * Return the entity pointed by the given link.
-       *
-       * If the entity is not found (because it has not been populated in the
-       * state yet or because the link does not point to an entity, e.g. a date
-       * archive or a 404 page) this derived prop returns `null`.
-       *
-       * @example state.source.entity("/2020/some-post");
-       *
-       * @param link - A link to a page of the Frontity site.
-       * @returns The entity found or `null` otherwise.
+       * @deprecated
+       * This function is no longer recommended. Please, use entity's props
+       * from `state.source.get()` to access the state directly, e.g.
+       * ```ts
+       * const data = state.source.get("/some/post");
+       * if (isPost(data)) {
+       *   const post = state.source[data.type][data.id];
+       * }
+       * ```
        */
       entity: Derived<
         T extends null ? Source : T,
