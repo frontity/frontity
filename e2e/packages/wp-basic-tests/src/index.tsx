@@ -1,6 +1,6 @@
 import React from "react";
 import { useConnect, connect } from "frontity";
-import { isPostType, isArchive } from "@frontity/source/data";
+import { isPostType, isArchive } from "@frontity/source";
 import { PostTypeData } from "@frontity/source/types/data";
 import WpBasicTests, { Packages } from "../types";
 

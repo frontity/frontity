@@ -1,6 +1,6 @@
 import React from "react";
 import { connect, useConnect } from "frontity";
-import { isPostType, isError } from "@frontity/source/data";
+import { isPostType, isError } from "@frontity/source";
 import Preview, { Packages } from "../types";
 
 /**
