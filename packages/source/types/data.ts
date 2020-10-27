@@ -1,53 +1,104 @@
-/* eslint-disable */
 import { CommentItem } from "../../wp-comments/types";
 
 /**
- * This one is the return type of `libraries.source.populate`...
- */
-export interface DataItem {
-  type: string;
-  id: number;
-  link: string;
-}
-
-/**
- * @deprecated Use {@link DataItem} instead.
- */
-export interface EntityData extends DataItem {}
-
-/**
- * Type that represents objects stored in `state.source.data`.
- * These objects give information about data associated to a
- * given URL in a Frontity site.
- * It contains the base properties of all types that extend `Data`.
+ * Data related to a link in Frontity.
+ *
+ * These objects give information about data associated to a specific link in a
+ * Frontity site. It contains the base properties of all interfaces that extend
+ * `Data`.
+ *
+ * @example
+ * ```
+ * const data = {
+ *   link: "/some/post/",
+ *   route: "/some/post/",
+ *   page: 1,
+ *   query: {},
+ *   isFetching: false,
+ *   isReady: true,
+ * }
+ * ```
  */
 export interface Data {
+  /**
+   * Link this data belongs to.
+   */
   link: string;
+  /**
+   * Pathname part of the link, without the page part if the links points to an
+   * archive page (like `/category/nature/page/2/`).
+   */
+  route: string;
+  /**
+   * Page number.
+   *
+   * @defaultValue 1
+   */
+  page: number;
+  /**
+   * The query part of the link, in object format.
+   */
   query: object;
+  /**
+   * Boolean indicating if this link is being fetched.
+   */
   isFetching: boolean;
+  /**
+   * Boolean indicating if this link is ready and entities related can be
+   * consumed.
+   */
   isReady: boolean;
-  route?: string;
-  page?: number;
 }
 
-// ERROR
-
 /**
- * Adds new properties to `BaseData` to identify errors.
+ * A link in Frontity that shows an error.
  *
- * @property {isError} true
- * @property {number} errorStatus
- * @property {string} errorStatusText
+ * @example
+ * ```
+ * const data = {
+ *   link: "/not-a-post/",
+ *   route: "/not-a-post/",
+ *   page: 1,
+ *   query: {},
+ *   isFetching: false,
+ *   isReady: true,
+ *   isError: true,
+ *   is404: true,
+ *   errorStatus: 404,
+ *   errorStatusText: "Not Found",
+ * }
+ * ```
  */
 export interface ErrorData extends Data {
+  /**
+   * Property specifying that the link is an error.
+   */
   isError: true;
+  /**
+   * HTTP error code.
+   *
+   * @example 404
+   */
   errorStatus: number;
+  /**
+   * HTTP error message.
+   *
+   * @example "Not Found"
+   */
   errorStatusText: string;
+  /**
+   * Link is ready when data is an error.
+   */
   isReady: true;
+  /**
+   * Link is not being fetched when data is an error.
+   */
   isFetching: false;
 
   // This is ugly but it seems like the best way.
   // Also types are erased at runtime so it doesnt add to bundle size
+
+  /* eslint-disable jsdoc/require-jsdoc */
   is400?: boolean;
   is401?: boolean;
   is402?: boolean;
@@ -72,246 +123,305 @@ export interface ErrorData extends Data {
   is503?: boolean;
   is504?: boolean;
   is505?: boolean;
+  /* eslint-enable */
 }
 
 // ARCHIVES
 
 /**
- * Adds properties to `BaseData` to identify archive pages.
+ * Data that references a post type entity in the state.
  *
- * @property {true} isArchive
- * @property {DataItem[]} items - List of items contained in this archive page.
- * @property {number} page - The page number of this archive page.
- * @property {string} path - The path of this archive page without the page.
- * @property {string} next - The link to the next page if it exists.
- * @property {string} previous - The link to the previous page if it exists.
- * @property {number} total - Total number of post entities in the whole archive.
- * @property {number} total - Total number of pages in the whole archive.
- * @property {false} isSearch
+ * This kind of objects are included in an array called `items` present in
+ * {@link ArchiveData} objects.
+ */
+export interface DataItem {
+  /**
+   * Entity post type.
+   */
+  type: string;
+
+  /**
+   * Entity ID.
+   */
+  id: number;
+
+  /**
+   * Link where this entity is shown.
+   */
+  link: string;
+}
+
+/**
+ * Data that references a post type entity in the state.
+ *
+ * @deprecated Use {@link DataItem} instead.
+ */
+export type EntityData = DataItem;
+
+/**
+ * Data for and archive, like the homepage,
+ * categories or tags, authors, date archives, etc.
  */
 export interface ArchiveData extends Data {
+  /**
+   * Property indicatig that the link is an archive.
+   */
   isArchive: true;
+  /**
+   * List of items contained in this archive page.
+   */
   items: DataItem[];
-  route: string;
-  page: number;
+  /**
+   * The link to the next page if it exists.
+   */
   next?: string;
+  /**
+   * The link to the previous page if it exists.
+   */
   previous?: string;
+  /**
+   * Total number of post entities in the whole archive.
+   */
   total?: number;
+  /**
+   * Total number of pages in the whole archive.
+   */
   totalPages?: number;
 }
 
 /**
- * Adds properties to identify archive pages with search.
- *
- * @property {true} isSearch
- * @property {string} searchQuery
+ * Data for a search in an archive.
  */
 export interface SearchData extends Data {
+  /**
+   * Identify a search in an archive.
+   */
   isSearch: true;
+  /**
+   * Search query in string format.
+   */
   searchQuery: string;
-  route: string;
-  page: number;
 }
 
 /**
- * Adds properties to `ArchiveData` to identify taxonomy pages.
- *
- * @property {true} isTerm
- * @property {string} taxonomy - Term taxonomy.
- * @property {number} id - Term id.
+ * Data for a term page.
  */
 export interface TermData extends ArchiveData {
   /**
+   * Identify a term page.
+   *
    * @deprecated Use `isTerm` instead.
    */
   isTaxonomy?: true;
+  /**
+   * Identify a term page.
+   */
   isTerm: true;
+  /**
+   * Slug of the taxonomy this term belongs to.
+   */
   taxonomy: string;
+  /**
+   * Term ID.
+   */
   id: number;
 }
 
 /**
- * Adds properties to `TermData` to identify taxonomy with search pages.
- */
-export interface TermWithSearchData extends TermData, SearchData {}
-
-/**
+ * Data for a term page.
+ *
  * @deprecated Use `TermData` instead.
  */
 export type TaxonomyData = TermData;
-/**
- * @deprecated Use `TermWithSearchData` instead.
- */
-export type TaxonomyWithSearchData = TermWithSearchData;
 
 /**
- * Adds properties to `TermData` to identify category pages.
- *
- * @property {true} isCategory
- * @property {"category"} taxonomy
+ * Data for a category page.
  */
 export interface CategoryData extends TermData {
+  /**
+   * Slug of the taxonomy this term belongs to.
+   */
   taxonomy: "category";
+  /**
+   * Identify a category page.
+   */
   isCategory: true;
 }
 
 /**
- * Adds properties to `CategoryData` to identify category with search pages.
- */
-export interface CategoryWithSearchData extends CategoryData, SearchData {}
-
-/**
- * Adds properties to `TermData` to identify tag pages.
- *
- * @property {true} isTag
- * @property {"tag"} taxonomy
+ * Data for a category page.
  */
 export interface TagData extends TermData {
+  /**
+   * Slug of the taxonomy this term belongs to.
+   */
   taxonomy: "tag";
+  /**
+   * Identify a tag page.
+   */
   isTag: true;
 }
 
 /**
- * Adds properties to `TagData` to identify tag with search pages.
- */
-export interface TagWithSearchData extends TagData, SearchData {}
-
-/**
- * Adds properties to `ArchiveData` to identify author pages.
- *
- * @property {true} isAuthor
- * @property {number} id - Author id.
+ * Data for an author page.
  */
 export interface AuthorData extends ArchiveData {
+  /**
+   * Identify an author page.
+   */
   isAuthor: true;
+  /**
+   * Author ID.
+   */
   id: number;
 }
 
 /**
- * Adds properties to `AuthorData` to identify author with search pages.
- */
-export interface AuthorWithSearchData extends AuthorData, SearchData {}
-
-/**
- * Adds properties to `ArchiveData` to identify post type archive pages.
- *
- * @property {true} isPostTypeArchive
- * @property {string} type - Post type slug.
+ * Data for post type archive pages.
  */
 export interface PostTypeArchiveData extends ArchiveData {
+  /**
+   * Identify a post type archive page.
+   */
   isPostTypeArchive: true;
+  /**
+   * Post type slug.
+   */
   type: string;
 }
 
 /**
- * Adds properties to `PostTypeArchiveData` to identify post type archives
- * with search pages.
- */
-export interface PostTypeArchiveWithSearchData
-  extends PostTypeArchiveData,
-    SearchData {}
-
-/**
- * Adds properties to `PostArchiveData` to identify `post` archive pages.
- *
- * @property {true} isPostArchive
+ * Data for `post` archive pages.
  */
 export interface PostArchiveData extends PostTypeArchiveData {
+  /**
+   * Identify a `post` archive page.
+   */
   isPostArchive: true;
 }
 
 /**
- * Adds properties to `PostArchiveData` to identify post archives
- * with search pages.
- */
-export interface PostArchiveWithSearchData
-  extends PostArchiveData,
-    SearchData {}
-
-/**
  * Adds properties to `ArchiveData` to identify date archive pages.
- *
- * @property {true} isDate
- * @property {number} year - The year number.
- * @property {number} month - The month number (from 1 to 12).
- * @property {number} day - The day number.
  */
 export interface DateData extends ArchiveData {
+  /**
+   * Identify a date archive page.
+   */
   isDate: true;
+  /**
+   * The year number.
+   */
   year: number;
+  /**
+   * The month number (from 1 to 12).
+   */
   month?: number;
+  /**
+   * The day number.
+   */
   day?: number;
 }
-
-/**
- * Adds properties to `DateData` to identify date with search pages.
- */
-export interface DateWithSearchData extends DateData, SearchData {}
 
 // POST TYPES
 
 /**
- * Adds properties to `BaseData` to identify post type pages.
- * Post type entities are posts, pages, attachments, custom post types, etc.
+ * Data for a post type page.
  *
- * @property {true} isPostType
- * @property {string} type - Post type slug.
- * @property {number} id - Entity id.
+ * Post type entities are posts, pages, attachments, custom post types, etc.
  */
 export interface PostTypeData extends Data {
+  /**
+   * Identify a post type page.
+   */
   isPostType: true;
+  /**
+   * Post type slug.
+   */
   type: string;
+  /**
+   * Entity ID.
+   */
   id: number;
 }
 
 /**
- * Adds properties to `PostTypeData` to identify posts.
- *
- * @property {true} isPost
- * @property {"post"} type
+ * Data for a post.
  */
 export interface PostData extends PostTypeData {
+  /**
+   * Post type slug.
+   */
   type: "post";
+  /**
+   * Identify a post.
+   */
   isPost: true;
 }
 
 /**
- * Adds properties to `PostTypeData` to identify pages.
- *
- * @property {true} isPage
- * @property {"page"} type
+ * Data for a page.
  */
 export interface PageData extends PostTypeData {
+  /**
+   * Post type slug.
+   */
   type: "page";
+  /**
+   * Identify a page.
+   */
   isPage: true;
 }
 
 /**
- * Adds properties to `PostTypeData` to identify attachments.
- *
- * @property {true} isAttachment
- * @property {"attachment"} type
+ * Data for an attachment.
  */
 export interface AttachmentData extends PostTypeData {
+  /**
+   * Post type slug.
+   */
   type: "attachment";
+  /**
+   * Identify an attachment.
+   */
   isAttachment: true;
 }
 
 /**
- * Adds properties to `Data` to identify the comments.
+ * Data for the homepage.
  */
-export interface CommentData extends Data {
-  postId: number;
-  type: "comments";
-  isComments: true;
-  items: CommentItem[];
-  total: number;
-  totalPages: number;
+export interface HomeData extends Data {
+  /**
+   * Identify the homepage.
+   */
+  isHome: true;
 }
 
 /**
- * Interface for the homepage.
+ * Data for the comments published in a post.
  */
-export interface HomeData extends Data {
-  isHome: true;
+export interface CommentData extends Data {
+  /**
+   * Post ID where the comments are published.
+   */
+  postId: number;
+  /**
+   * Type of this data object.
+   */
+  type: "comments";
+  /**
+   * Identify a data of type comments.
+   */
+  isComments: true;
+  /**
+   * Tree of all comments published.
+   */
+  items: CommentItem[];
+  /**
+   * Number of comments.
+   */
+  total: number;
+  /**
+   * Number of comment pages.
+   */
+  totalPages: number;
 }
