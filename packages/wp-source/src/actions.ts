@@ -11,6 +11,7 @@ import {
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
 import { ServerError } from "@frontity/source";
+import { stringify } from "query-string";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
@@ -136,6 +137,9 @@ const actions: WpSource["actions"]["source"] = {
         // Check if the error is 4xx and we want to handle redirections in case
         // of an error.
         if (e.status === 404) {
+          // If the route matched the redirection regex or
+          // state.router.redirections === 'all', then have already started
+          // fetching the data, so just await it.
           let head = redirectionPromise && (await redirectionPromise);
 
           if (state.router.redirections === "404") {
@@ -150,12 +154,14 @@ const actions: WpSource["actions"]["source"] = {
           }
 
           if (head?.redirected) {
-            // TODO: We'll have to preserve the query string as well
-            // TODO: I guess we should also normalize the link with libraries.source.normalize(link);
-            const newLink = new URL(head.url).pathname;
+            const pathname = new URL(head.url).pathname;
+
+            const location = `${normalize(pathname)}${query && "?"}${stringify(
+              query
+            )}`;
 
             Object.assign(source.data[link], {
-              location: newLink,
+              location,
               is301: true,
               isFetching: false,
               isReady: true,

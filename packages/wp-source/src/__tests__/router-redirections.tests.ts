@@ -109,10 +109,11 @@ describe("redirections: 404", () => {
   test("Should NOT redirect on an error that is not a 404", async () => {
     store.state.router.redirections = "404";
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    handler.func = jest.fn(async ({ route, state }) => {
+    // Throw a 500 inside of the handler
+    handler.func = jest.fn(() => {
       throw new ServerError("There was an error", 500);
-    });
+    }) as any;
+
     await store.actions.source.fetch("/some-post/");
 
     expect(mockedFetch).not.toHaveBeenCalled();
@@ -122,10 +123,11 @@ describe("redirections: 404", () => {
   test("Should redirect on 404", async () => {
     store.state.router.redirections = "404";
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    handler.func = jest.fn(async ({ route, state }) => {
+    // The handler throws a 404
+    handler.func = jest.fn(() => {
       throw new ServerError("There was an error", 404);
-    });
+    }) as any;
+
     await store.actions.source.fetch("/some-post/");
 
     // the `fetch()` was called
@@ -152,7 +154,7 @@ describe("redirections: 404", () => {
           "isReady": true,
           "isRedirection": true,
           "link": "/some-post/",
-          "location": "/redirected-url",
+          "location": "/redirected-url/?",
           "page": 1,
           "query": Object {},
           "route": "/some-post/",
@@ -164,13 +166,14 @@ describe("redirections: 404", () => {
   test("Handle if fetching the redirection fails", async () => {
     store.state.router.redirections = "404";
 
+    // Fetching the redirection fails
     mockedFetch = jest.fn().mockRejectedValueOnce("Fetch Error");
     (frontity.fetch as typeof fetch) = mockedFetch;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    handler.func = jest.fn(async ({ route, state }) => {
+    handler.func = jest.fn(() => {
       throw new ServerError("There was an error", 404);
-    });
+    }) as any;
+
     await store.actions.source.fetch("/some-post/");
 
     expect(mockedFetch).toHaveBeenCalledWith(
@@ -188,6 +191,36 @@ describe("redirections: 404", () => {
           "isError": true,
           "isFetching": false,
           "isReady": true,
+        },
+      }
+    `);
+  });
+
+  test("Redirections with query string", async () => {
+    store.state.router.redirections = "404";
+
+    // The handler throws a 404
+    handler.func = jest.fn(() => {
+      throw new ServerError("There was an error", 404);
+    }) as any;
+
+    await store.actions.source.fetch("/some-post?key=value&key2=value2");
+
+    expect(store.state.source.data).toMatchInlineSnapshot(`
+      Object {
+        "/some-post/?key=value&key2=value2": Object {
+          "is301": true,
+          "isFetching": false,
+          "isReady": true,
+          "isRedirection": true,
+          "link": "/some-post/?key=value&key2=value2",
+          "location": "/redirected-url/?key=value&key2=value2",
+          "page": 1,
+          "query": Object {
+            "key": "value",
+            "key2": "value2",
+          },
+          "route": "/some-post/",
         },
       }
     `);
