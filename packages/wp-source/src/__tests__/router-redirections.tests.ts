@@ -10,17 +10,16 @@ import { ServerError } from "@frontity/source";
 
 let handler: jest.Mocked<Pattern<Handler>>;
 let store: InitializedStore<WpSource & Router>;
-
-const mockedFetch: jest.MockedFunction<typeof fetch> = jest.fn((_) =>
-  Promise.resolve({
-    url: "https://localhost:8080/redirected-url",
-    redirected: true,
-  } as Response)
-);
-(frontity.fetch as typeof fetch) = mockedFetch;
+let mockedFetch: jest.MockedFunction<typeof fetch>;
 
 beforeEach(() => {
-  mockedFetch.mockClear();
+  mockedFetch = jest.fn((_) =>
+    Promise.resolve({
+      url: "https://localhost:8080/redirected-url",
+      redirected: true,
+    } as Response)
+  );
+  (frontity.fetch as typeof fetch) = mockedFetch;
 
   // Initialize the store
   store = createStore<WpSource & Router>(
@@ -103,9 +102,7 @@ describe("redirections: 404", () => {
 
     await store.actions.source.fetch("/some-post/");
 
-    // the `fetch()` was NOT called
-    expect(mockedFetch).toHaveBeenCalledTimes(0);
-
+    expect(mockedFetch).not.toHaveBeenCalled();
     expect(handler.func).toHaveBeenCalledTimes(1);
   });
 
@@ -118,8 +115,7 @@ describe("redirections: 404", () => {
     });
     await store.actions.source.fetch("/some-post/");
 
-    // the `fetch()` was NOT called
-    expect(mockedFetch).toHaveBeenCalledTimes(0);
+    expect(mockedFetch).not.toHaveBeenCalled();
     expect(handler.func).toHaveBeenCalledTimes(1);
   });
 
@@ -160,6 +156,38 @@ describe("redirections: 404", () => {
           "page": 1,
           "query": Object {},
           "route": "/some-post/",
+        },
+      }
+    `);
+  });
+
+  test("Handle if fetching the redirection fails", async () => {
+    store.state.router.redirections = "404";
+
+    mockedFetch = jest.fn().mockRejectedValueOnce("Fetch Error");
+    (frontity.fetch as typeof fetch) = mockedFetch;
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    handler.func = jest.fn(async ({ route, state }) => {
+      throw new ServerError("There was an error", 404);
+    });
+    await store.actions.source.fetch("/some-post/");
+
+    expect(mockedFetch).toHaveBeenCalledWith(
+      "http://localhost:8080/some-post/",
+      {
+        method: "HEAD",
+      }
+    );
+    expect(store.state.source.data).toMatchInlineSnapshot(`
+      Object {
+        "/some-post/": Object {
+          "errorStatus": 404,
+          "errorStatusText": "There was an error",
+          "is404": true,
+          "isError": true,
+          "isFetching": false,
+          "isReady": true,
         },
       }
     `);

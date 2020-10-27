@@ -139,12 +139,16 @@ const actions: WpSource["actions"]["source"] = {
           let head = redirectionPromise && (await redirectionPromise);
 
           if (state.router.redirections === "404") {
-            head = await fetch("http://localhost:8080" + link, {
-              method: "HEAD",
-            });
+            try {
+              head = await fetch("http://localhost:8080" + link, {
+                method: "HEAD",
+              });
+            } catch (e) {
+              // If there is no redirection, we ignore it and just continue
+              // handling the 404 ServerError that was thrown in the handler
+            }
           }
 
-          // TODO: handle if there is no redirection
           if (head?.redirected) {
             // TODO: We'll have to preserve the query string as well
             // TODO: I guess we should also normalize the link with libraries.source.normalize(link);
