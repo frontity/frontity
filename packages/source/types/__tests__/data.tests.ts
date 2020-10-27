@@ -25,6 +25,8 @@ const onlyStatus: Data = {
   isFetching: true,
   isReady: false,
   link: "",
+  route: "",
+  page: 1,
   query: {},
 };
 
@@ -36,6 +38,8 @@ const notFound: ErrorData = {
   isReady: true,
   isFetching: false,
   link: "/this-page-does-not-exist",
+  route: "/this-page-does-not-exist",
+  page: 1,
   query: {},
 };
 
@@ -316,6 +320,8 @@ const postType: PostTypeData = {
   isReady: true,
   isFetching: false,
   link: "/movie/the-terminator/",
+  route: "/movie/the-terminator/",
+  page: 1,
   query: {},
 };
 
@@ -327,6 +333,8 @@ const post: PostData = {
   isReady: true,
   isFetching: false,
   link: "/the-beauties-of-gullfoss/",
+  route: "/the-beauties-of-gullfoss/",
+  page: 1,
   query: {},
 };
 
@@ -338,6 +346,8 @@ const page: PageData = {
   isReady: true,
   isFetching: false,
   link: "/about-us/",
+  route: "/about-us/",
+  page: 1,
   query: {},
 };
 
@@ -349,6 +359,8 @@ const attachment: AttachmentData = {
   isReady: true,
   isFetching: false,
   link: "/the-beauties-of-gullfoss/gullfoss/",
+  route: "/the-beauties-of-gullfoss/gullfoss/",
+  page: 1,
   query: {},
 };
 
