@@ -5,10 +5,10 @@ import { transformAllLinks } from "../utils";
 import { Packages, WithYoastHead } from "../../types";
 import {
   isPostType,
-  isTaxonomy,
+  isTerm,
   isAuthor,
   isPostTypeArchive,
-} from "@frontity/source/data";
+} from "@frontity/source";
 
 /**
  * Object returned for {@link useYoastHead} hook.
@@ -44,7 +44,7 @@ export const useYoastHead = (link: string): UseYoastHeadResult => {
   if (isPostType(data)) {
     const { type, id } = data;
     entity = state.source[type][id];
-  } else if (isTaxonomy(data)) {
+  } else if (isTerm(data)) {
     const { taxonomy, id } = data;
     entity = state.source[taxonomy][id];
   } else if (isAuthor(data)) {
