@@ -307,13 +307,9 @@ export interface AttachmentEntity extends Entity {
 }
 
 /**
- * Interface for entities that represents types.
- *
- * Interfaces that extends from this one are:
- * - {@link PostType}.
- * - {@link TaxonomyType}.
+ * Interface for entities from the /wp/v2/types endpoint.
  */
-export interface EntityType extends Entity {
+export interface TypeEntity extends Entity {
   /**
    * A human-readable description of the post type.
    */
@@ -338,26 +334,46 @@ export interface EntityType extends Entity {
    * REST base route for the post type.
    */
   rest_base: string;
-  [k: string]: unknown;
-}
-
-/**
- * Interface for entities from the /wp/v2/types endpoint.
- */
-export interface PostType extends EntityType {
   /**
    * Taxonomies associated with post type.
    */
   taxonomies: string[];
+  [k: string]: unknown;
 }
+
 /**
  * Interface for entities from the /wp/v2/taxonomy endpoint.
  */
-export interface TaxonomyType extends EntityType {
+export interface TaxonomyEntity extends Entity {
+  /**
+   * A human-readable description of the taxonomy.
+   */
+  description?: string;
+
+  /**
+   * Whether or not the taxonomy should have children.
+   */
+  hierarchical?: boolean;
+
+  /**
+   * The title for the taxonomy.
+   */
+  name?: string;
+
+  /**
+   * An alphanumeric identifier for the taxonomy.
+   */
+  slug?: string;
+
+  /**
+   * REST base route for the taxonomy.
+   */
+  rest_base: string;
   /**
    * Types associated with the taxonomy.
    */
   types: string[];
+  [k: string]: unknown;
 }
 
 /**
@@ -367,7 +383,7 @@ export interface TaxonomyType extends EntityType {
  * - entities from the /wp/v2/categories endpoint.
  * - entities from the /wp/v2/tags endpoint.
  */
-export interface TaxonomyEntity extends Entity {
+export interface TermEntity extends Entity {
   /**
    * Unique identifier for the term.
    */
