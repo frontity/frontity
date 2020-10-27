@@ -179,7 +179,7 @@ const taxonomyHandler = ({
     totalPages,
     isArchive: true,
     isTerm: true,
-    isTaxonomy: true,
+    isTaxonomy: true, // Added to maintaing backwards compatibility.
     [`is${capitalize(firstPageData.taxonomy)}`]: true,
 
     // Add next and previous if they exist.
