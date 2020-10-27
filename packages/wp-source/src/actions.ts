@@ -156,9 +156,11 @@ const actions: WpSource["actions"]["source"] = {
           if (head?.redirected) {
             const pathname = new URL(head.url).pathname;
 
-            const location = `${normalize(pathname)}${query && "?"}${stringify(
-              query
-            )}`;
+            const searchParams = stringify(query);
+
+            const location = `${normalize(pathname)}${
+              searchParams && "?"
+            }${searchParams}`;
 
             Object.assign(source.data[link], {
               location,

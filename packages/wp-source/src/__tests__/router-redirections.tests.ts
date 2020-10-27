@@ -154,7 +154,7 @@ describe("redirections: 404", () => {
           "isReady": true,
           "isRedirection": true,
           "link": "/some-post/",
-          "location": "/redirected-url/?",
+          "location": "/redirected-url/",
           "page": 1,
           "query": Object {},
           "route": "/some-post/",
