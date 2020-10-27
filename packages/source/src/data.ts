@@ -14,7 +14,6 @@ import {
   PostData,
   PageData,
   AttachmentData,
-  CommentData,
   HomeData,
 } from "../types/data";
 
@@ -167,16 +166,6 @@ export function isPage(data: Data): data is PageData {
  */
 export function isAttachment(data: Data): data is AttachmentData {
   return (data as AttachmentData).isAttachment === true;
-}
-
-/**
- * Checks if a data object represents a list of comments.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isComments(data: Data): data is CommentData {
-  return (data as CommentData).isComments === true;
 }
 
 /**

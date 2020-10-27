@@ -1,5 +1,3 @@
-import { CommentItem } from "../../wp-comments/types";
-
 /**
  * Data related to a link in Frontity.
  *
@@ -394,34 +392,4 @@ export interface HomeData extends Data {
    * Identify the homepage.
    */
   isHome: true;
-}
-
-/**
- * Data for the comments published in a post.
- */
-export interface CommentData extends Data {
-  /**
-   * Post ID where the comments are published.
-   */
-  postId: number;
-  /**
-   * Type of this data object.
-   */
-  type: "comments";
-  /**
-   * Identify a data of type comments.
-   */
-  isComments: true;
-  /**
-   * Tree of all comments published.
-   */
-  items: CommentItem[];
-  /**
-   * Number of comments.
-   */
-  total: number;
-  /**
-   * Number of comment pages.
-   */
-  totalPages: number;
 }

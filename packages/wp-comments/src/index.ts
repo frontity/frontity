@@ -3,11 +3,12 @@ import { commentsHandler } from "./libraries";
 import WpComments, {
   WpCommentError,
   CommentItem,
+  CommentData,
   Packages,
   WpComment,
 } from "../types";
+import { Data } from "@frontity/source/types";
 import { ResolveState } from "../../types/src/utils";
-import { CommentData } from "../../source/types/data";
 
 /**
  * Recursively walk the comment tree and insert the new comment in the
@@ -96,6 +97,16 @@ export const insertComment = (
     });
   }
 };
+
+/**
+ * Checks if a data object represents a list of comments.
+ *
+ * @param data - Object of type {@link Data}.
+ * @returns A boolean value with the result.
+ */
+export function isComments(data: Data): data is CommentData {
+  return (data as CommentData).isComments === true;
+}
 
 const wpComments: WpComments = {
   name: "@frontity/wp-comments",
