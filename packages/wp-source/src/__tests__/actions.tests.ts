@@ -4,9 +4,8 @@ import wpSource from "../";
 import WpSource, { Pattern, Handler } from "../../types";
 import * as handlers from "../libraries/handlers";
 import { getMatch } from "../libraries/get-match";
-import { Data } from "@frontity/source/types";
-import { isCategory, isError, isHome } from "@frontity/source/data";
-import { CategoryData, ErrorData } from "@frontity/source/types/data";
+import { Data, CategoryData, ErrorData } from "@frontity/source/types";
+import { isCategory, isError, isHome } from "@frontity/source";
 
 // Create mock for handler generators
 jest.mock("../libraries/handlers");
@@ -66,6 +65,8 @@ describe("actions.source.fetch", () => {
       isFetching: false,
       isReady: true,
       link: "/some/route/",
+      route: "/some/route/",
+      page: 1,
       query: {},
     } as Data;
 
@@ -79,6 +80,8 @@ describe("actions.source.fetch", () => {
       isFetching: false,
       isReady: false,
       link: "/some/route/",
+      route: "/some/route/",
+      page: 1,
       query: {},
     };
     const fetching = store.actions.source.fetch("/some/route/");
@@ -353,7 +356,9 @@ describe("actions.source.init", () => {
       isFetching: false,
       isReady: false,
       link: "/some/route/page/2/?a=b",
-      query: {},
+      route: "/some/route/",
+      page: 2,
+      query: { a: "b" },
     };
 
     await store.actions.source.fetch("/some/route/page/2/?a=b");
@@ -374,6 +379,8 @@ describe("actions.source.init", () => {
       isFetching: false,
       isReady: true,
       link: "/some/route/",
+      route: "/some/route/",
+      page: 1,
       query: {},
     };
 
@@ -394,7 +401,7 @@ describe("actions.source.init", () => {
     // Get initial data into the store
     const initialData: CategoryData = {
       isArchive: true,
-      isTaxonomy: true,
+      isTerm: true,
       isCategory: true,
       taxonomy: "category",
       id: 7,
@@ -409,9 +416,9 @@ describe("actions.source.init", () => {
 
     store.state.source.data["/some/route/"] = initialData;
 
-    handler.func = jest.fn(async ({ route, state }) => {
+    handler.func = jest.fn(async ({ link, state }) => {
       await Promise.resolve();
-      Object.assign(state.source.data[route], {
+      Object.assign(state.source.data[link], {
         isFetching: true,
         isReady: true,
       });

@@ -10,8 +10,7 @@ import {
   taxonomyHandler,
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
-import { ServerError } from "@frontity/source";
-import { isError, isSearch } from "@frontity/source/data";
+import { ServerError, isError, isSearch } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {

@@ -10,9 +10,8 @@ import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
-import { ServerError } from "@frontity/source";
+import { ServerError, isError, isPostType } from "@frontity/source";
 import { PostEntity } from "@frontity/source/types";
-import { isError, isPostType } from "@frontity/source/data";
 
 interface WpSourceAndCpt extends WpSource {
   state: {

@@ -9,7 +9,7 @@ import author1 from "./mocks/author/author-1.json";
 import author1Posts from "./mocks/author/author-1-posts.json";
 import author1PostsPage2 from "./mocks/author/author-1-posts-page-2.json";
 import author1PostsCpt from "./mocks/author/author-1-posts-cpt.json";
-import { isSearch } from "@frontity/source/data";
+import { isSearch } from "@frontity/source";
 
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;

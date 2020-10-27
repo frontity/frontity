@@ -2,10 +2,10 @@ import WpSource from "../types";
 import { normalize, parse } from "./libraries/route-utils";
 import {
   isPostType,
-  isTaxonomy,
+  isTerm,
   isAuthor,
   isPostTypeArchive,
-} from "@frontity/source/data";
+} from "@frontity/source";
 
 const state: WpSource["state"]["source"] = {
   get: ({ state }) => (link) => {
@@ -37,7 +37,7 @@ const state: WpSource["state"]["source"] = {
     if (isPostType(data)) {
       const { type, id } = data;
       entity = state.source[type][id];
-    } else if (isTaxonomy(data)) {
+    } else if (isTerm(data)) {
       const { taxonomy, id } = data;
       entity = state.source[taxonomy][id];
     } else if (isAuthor(data)) {
