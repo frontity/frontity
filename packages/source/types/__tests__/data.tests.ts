@@ -2,6 +2,7 @@ import {
   Data,
   ErrorData,
   TaxonomyData,
+  TermData,
   CategoryData,
   TagData,
   AuthorData,
@@ -15,6 +16,8 @@ import {
   SearchData,
   HomeData,
 } from "../data";
+
+import { expectType } from "frontity/types/helpers";
 
 const data: Record<string, Data> = {};
 
@@ -36,7 +39,7 @@ const notFound: ErrorData = {
   query: {},
 };
 
-const taxonomy: TaxonomyData = {
+const term: TermData = {
   isArchive: true,
   items: [
     {
@@ -56,14 +59,15 @@ const taxonomy: TaxonomyData = {
   totalPages: 13,
   taxonomy: "custom-taxonomy",
   id: 12,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   page: 1,
   route: "/custom-taxonomy/nature/",
   link: "/custom-taxonomy/nature/",
   query: {},
 };
 
-const taxonomyWithSearchData: TaxonomyData & SearchData = {
+const termWithSearchData: TermData & SearchData = {
   isArchive: true,
   items: [
     {
@@ -83,7 +87,8 @@ const taxonomyWithSearchData: TaxonomyData & SearchData = {
   totalPages: 13,
   taxonomy: "custom-taxonomy",
   id: 12,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   page: 1,
   route: "/custom-taxonomy/nature/",
   link: "/custom-taxonomy/nature/?s=nature",
@@ -94,7 +99,8 @@ const taxonomyWithSearchData: TaxonomyData & SearchData = {
 
 const category: CategoryData = {
   isArchive: true,
-  isTaxonomy: true,
+  isTaxonomy: true, // This value is deprecated.
+  isTerm: true,
   isCategory: true,
   taxonomy: "category",
   id: 7,
@@ -111,7 +117,8 @@ const category: CategoryData = {
 
 const categoryWithSearchData: CategoryData & SearchData = {
   isArchive: true,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   isCategory: true,
   taxonomy: "category",
   id: 7,
@@ -130,7 +137,8 @@ const categoryWithSearchData: CategoryData & SearchData = {
 
 const tag: TagData = {
   isArchive: true,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   isTag: true,
   taxonomy: "tag",
   id: 7,
@@ -147,7 +155,8 @@ const tag: TagData = {
 
 const tagWithSearchData: TagData & SearchData = {
   isArchive: true,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   isTag: true,
   taxonomy: "tag",
   id: 7,
@@ -346,8 +355,8 @@ const attachment: AttachmentData = {
 // As long as it extends `Data`, any object can be added to `data`.
 data.onlyStatus = onlyStatus;
 data.notFound = notFound;
-data.taxonomy = taxonomy;
-data.taxonomyWithSearchData = taxonomyWithSearchData;
+data.term = term;
+data.termWithSearchData = termWithSearchData;
 data.category = category;
 data.categoryWithSearchData = categoryWithSearchData;
 data.tag = tag;
@@ -364,5 +373,10 @@ data.postType = postType;
 data.post = post;
 data.page = page;
 data.attachment = attachment;
+
+// Check that TermData and TaxonomyData are equivalent.
+const taxonomy: TaxonomyData = term;
+expectType<true>(taxonomy.isTaxonomy);
+expectType<true>(taxonomy.isTerm);
 
 test("Types are fine!", () => {});

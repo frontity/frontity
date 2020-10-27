@@ -116,28 +116,41 @@ export interface SearchData extends Data {
 /**
  * Adds properties to `ArchiveData` to identify taxonomy pages.
  *
- * @property {true} isTaxonomy
- * @property {string} taxonomy - Taxonomy slug.
- * @property {number} id - Taxonomy id.
+ * @property {true} isTerm
+ * @property {string} taxonomy - Term taxonomy.
+ * @property {number} id - Term id.
  */
-export interface TaxonomyData extends ArchiveData {
-  isTaxonomy: true;
+export interface TermData extends ArchiveData {
+  /**
+   * @deprecated Use `isTerm` instead.
+   */
+  isTaxonomy?: true;
+  isTerm: true;
   taxonomy: string;
   id: number;
 }
 
 /**
- * Adds properties to `TaxonomyData` to identify taxonomy with search pages.
+ * Adds properties to `TermData` to identify taxonomy with search pages.
  */
-export interface TaxonomyWithSearchData extends TaxonomyData, SearchData {}
+export interface TermWithSearchData extends TermData, SearchData {}
 
 /**
- * Adds properties to `TaxonomyData` to identify category pages.
+ * @deprecated Use `TermData` instead.
+ */
+export type TaxonomyData = TermData;
+/**
+ * @deprecated Use `TermWithSearchData` instead.
+ */
+export type TaxonomyWithSearchData = TermWithSearchData;
+
+/**
+ * Adds properties to `TermData` to identify category pages.
  *
  * @property {true} isCategory
  * @property {"category"} taxonomy
  */
-export interface CategoryData extends TaxonomyData {
+export interface CategoryData extends TermData {
   taxonomy: "category";
   isCategory: true;
 }
@@ -148,12 +161,12 @@ export interface CategoryData extends TaxonomyData {
 export interface CategoryWithSearchData extends CategoryData, SearchData {}
 
 /**
- * Adds properties to `TaxonomyData` to identify tag pages.
+ * Adds properties to `TermData` to identify tag pages.
  *
  * @property {true} isTag
  * @property {"tag"} taxonomy
  */
-export interface TagData extends TaxonomyData {
+export interface TagData extends TermData {
   taxonomy: "tag";
   isTag: true;
 }

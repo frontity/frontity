@@ -3,7 +3,7 @@ import {
   ErrorData,
   ArchiveData,
   SearchData,
-  TaxonomyData,
+  TermData,
   CategoryData,
   TagData,
   AuthorData,
@@ -50,11 +50,23 @@ export function isSearch(data: Data): data is SearchData {
 /**
  * Checks if a data object represents a taxonomy.
  *
+ * @deprecated Use {@link isTerm} instead.
+ *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
  */
-export function isTaxonomy(data: Data): data is TaxonomyData {
-  return (data as TaxonomyData).isTaxonomy === true;
+export function isTaxonomy(data: Data): data is TermData {
+  return (data as TermData).isTerm === true;
+}
+
+/**
+ * Checks if a data object represents a taxonomy.
+ *
+ * @param data - Object of type {@link Data}.
+ * @returns A boolean value with the result.
+ */
+export function isTerm(data: Data): data is TermData {
+  return (data as TermData).isTerm === true;
 }
 
 /**

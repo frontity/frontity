@@ -5,6 +5,7 @@ import {
   ErrorData,
   ArchiveData,
   TaxonomyData,
+  TermData,
   CategoryData,
   TagData,
   AuthorData,
@@ -24,7 +25,7 @@ import {
   isError,
   isArchive,
   isSearch,
-  isTaxonomy,
+  isTerm,
   isCategory,
   isTag,
   isAuthor,
@@ -50,26 +51,31 @@ if (isArchive(data)) {
   expectType<ArchiveData>(data);
 }
 
-if (isTaxonomy(data)) {
+if (isTerm(data)) {
   expectType<Data>(data);
   expectType<ArchiveData>(data);
+  expectType<TermData>(data);
   expectType<TaxonomyData>(data);
 }
 
 // Type composition nesting other checks.
-if (isTaxonomy(data)) {
+if (isTerm(data)) {
   if (isSearch(data)) {
     expectType<Data>(data);
     expectType<ArchiveData>(data);
+    expectType<TermData>(data);
+    expectType<TermData & SearchData>(data);
     expectType<TaxonomyData>(data);
     expectType<TaxonomyData & SearchData>(data);
   }
 }
 
 // Types can be composited in the same condition.
-if (isTaxonomy(data) && isSearch(data)) {
+if (isTerm(data) && isSearch(data)) {
   expectType<Data>(data);
   expectType<ArchiveData>(data);
+  expectType<TermData>(data);
+  expectType<TermData & SearchData>(data);
   expectType<TaxonomyData>(data);
   expectType<TaxonomyData & SearchData>(data);
 }
@@ -77,6 +83,7 @@ if (isTaxonomy(data) && isSearch(data)) {
 if (isCategory(data)) {
   expectType<Data>(data);
   expectType<ArchiveData>(data);
+  expectType<TermData>(data);
   expectType<TaxonomyData>(data);
   expectType<CategoryData>(data);
   if (isSearch(data)) expectType<CategoryData & SearchData>(data);
@@ -85,6 +92,7 @@ if (isCategory(data)) {
 if (isTag(data)) {
   expectType<Data>(data);
   expectType<ArchiveData>(data);
+  expectType<TermData>(data);
   expectType<TaxonomyData>(data);
   expectType<TagData>(data);
   if (isSearch(data)) expectType<TagData & SearchData>(data);
