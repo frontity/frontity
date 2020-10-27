@@ -4,11 +4,10 @@ import {
   PostEntity,
   PageEntity,
   CommentEntity,
-  TaxonomyEntity,
+  TermEntity,
   AuthorEntity,
-  EntityType,
-  PostType,
-  TaxonomyType,
+  TypeEntity,
+  TaxonomyEntity,
   AttachmentEntity,
 } from "../types/entities";
 
@@ -68,13 +67,13 @@ export function isCommentEntity(entity: Entity): entity is CommentEntity {
 }
 
 /**
- * Checks if a data object represents a taxonomy entity.
+ * Checks if a data object represents a term entity.
  *
  * @param entity - Object of type {@link Entity}.
  * @returns Boolean value.
  */
-export function isTaxonomyEntity(entity: Entity): entity is TaxonomyEntity {
-  const { taxonomy, id } = entity as TaxonomyEntity;
+export function isTermEntity(entity: Entity): entity is TermEntity {
+  const { taxonomy, id } = entity as TermEntity;
   return typeof taxonomy === "string" && typeof id === "number";
 }
 
@@ -94,36 +93,33 @@ export function isAuthorEntity(entity: Entity): entity is AuthorEntity {
 }
 
 /**
- * Checks if a data object represents a type entity.
+ * Checks if a data object represents a type.
  *
  * @param entity - Object of type {@link Entity}.
  * @returns Boolean value.
  */
-export function isEntityType(entity: Entity): entity is EntityType {
-  const { slug, name, rest_base: restBase } = entity as EntityType;
+export function isTypeEntity(entity: Entity): entity is TypeEntity {
+  const { slug, name, rest_base: restBase } = entity as TypeEntity;
   return (
     typeof slug === "string" &&
     typeof name === "string" &&
-    typeof restBase === "string"
+    typeof restBase === "string" &&
+    Array.isArray((entity as TypeEntity).taxonomies)
   );
 }
 
 /**
- * Checks if a data object represents a post type.
+ * Checks if a data object represents a taxonomy.
  *
  * @param entity - Object of type {@link Entity}.
  * @returns Boolean value.
  */
-export function isPostType(entity: Entity): entity is PostType {
-  return isEntityType(entity) && Array.isArray((entity as PostType).taxonomies);
-}
-
-/**
- * Checks if a data object represents a taxonomy type.
- *
- * @param entity - Object of type {@link Entity}.
- * @returns Boolean value.
- */
-export function isTaxonomyType(entity: Entity): entity is TaxonomyType {
-  return isEntityType(entity) && Array.isArray((entity as TaxonomyType).types);
+export function isTaxonomyEntity(entity: Entity): entity is TaxonomyEntity {
+  const { slug, name, rest_base: restBase } = entity as TaxonomyEntity;
+  return (
+    typeof slug === "string" &&
+    typeof name === "string" &&
+    typeof restBase === "string" &&
+    Array.isArray((entity as TaxonomyEntity).types)
+  );
 }

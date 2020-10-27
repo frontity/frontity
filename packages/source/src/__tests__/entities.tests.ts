@@ -6,21 +6,20 @@ import {
   isPageEntity,
   isAttachmentEntity,
   isCommentEntity,
-  isTaxonomyEntity,
+  isTermEntity,
   isAuthorEntity,
-  isEntityType,
-  isTaxonomyType,
-  isPostType,
+  isTypeEntity,
+  isTaxonomyEntity,
 } from "../entities";
 import {
   PostEntity,
   PageEntity,
   AttachmentEntity,
   CommentEntity,
-  TaxonomyEntity,
+  TermEntity,
   AuthorEntity,
-  TaxonomyType,
-  PostType,
+  TypeEntity,
+  TaxonomyEntity,
 } from "../../types/entities";
 
 const post: PostEntity = {
@@ -205,7 +204,7 @@ const comment: CommentEntity = {
   _links: {},
 };
 
-const category: TaxonomyEntity = {
+const category: TermEntity = {
   id: 7,
   count: 10,
   description: "",
@@ -234,7 +233,7 @@ const author: AuthorEntity = {
   _links: {},
 };
 
-const taxonomyType: TaxonomyType = {
+const taxonomy: TaxonomyEntity = {
   name: "Categories",
   slug: "category",
   description: "",
@@ -244,7 +243,7 @@ const taxonomyType: TaxonomyType = {
   _links: {},
 };
 
-const postType: PostType = {
+const type: TypeEntity = {
   description: "",
   hierarchical: false,
   name: "Posts",
@@ -262,8 +261,8 @@ describe("Entities type guards", () => {
     expect(isPostTypeEntity(comment)).toBe(true);
     expect(isPostTypeEntity(category)).toBe(false);
     expect(isPostTypeEntity(author)).toBe(false);
-    expect(isPostTypeEntity(taxonomyType)).toBe(false);
-    expect(isPostTypeEntity(postType)).toBe(false);
+    expect(isPostTypeEntity(taxonomy)).toBe(false);
+    expect(isPostTypeEntity(type)).toBe(false);
   });
 
   test("`isPostEntity` should recognize only post entities", () => {
@@ -273,8 +272,8 @@ describe("Entities type guards", () => {
     expect(isPostEntity(comment)).toBe(false);
     expect(isPostEntity(category)).toBe(false);
     expect(isPostEntity(author)).toBe(false);
-    expect(isPostEntity(taxonomyType)).toBe(false);
-    expect(isPostEntity(postType)).toBe(false);
+    expect(isPostEntity(taxonomy)).toBe(false);
+    expect(isPostEntity(type)).toBe(false);
   });
 
   test("`isPageEntity` should recognize only page entities", () => {
@@ -284,8 +283,8 @@ describe("Entities type guards", () => {
     expect(isPageEntity(comment)).toBe(false);
     expect(isPageEntity(category)).toBe(false);
     expect(isPageEntity(author)).toBe(false);
-    expect(isPageEntity(taxonomyType)).toBe(false);
-    expect(isPageEntity(postType)).toBe(false);
+    expect(isPageEntity(taxonomy)).toBe(false);
+    expect(isPageEntity(type)).toBe(false);
   });
 
   test("`isAttachmentEntity` should recognize only attachment entities", () => {
@@ -295,8 +294,8 @@ describe("Entities type guards", () => {
     expect(isAttachmentEntity(comment)).toBe(false);
     expect(isAttachmentEntity(category)).toBe(false);
     expect(isAttachmentEntity(author)).toBe(false);
-    expect(isAttachmentEntity(taxonomyType)).toBe(false);
-    expect(isAttachmentEntity(postType)).toBe(false);
+    expect(isAttachmentEntity(taxonomy)).toBe(false);
+    expect(isAttachmentEntity(type)).toBe(false);
   });
 
   test("`isCommentEntity` should recognize only comment entities", () => {
@@ -306,8 +305,30 @@ describe("Entities type guards", () => {
     expect(isCommentEntity(comment)).toBe(true);
     expect(isCommentEntity(category)).toBe(false);
     expect(isCommentEntity(author)).toBe(false);
-    expect(isCommentEntity(taxonomyType)).toBe(false);
-    expect(isCommentEntity(postType)).toBe(false);
+    expect(isCommentEntity(taxonomy)).toBe(false);
+    expect(isCommentEntity(type)).toBe(false);
+  });
+
+  test("`isTermEntity` should recognize term entities", () => {
+    expect(isTermEntity(post)).toBe(false);
+    expect(isTermEntity(page)).toBe(false);
+    expect(isTermEntity(attachment)).toBe(false);
+    expect(isTermEntity(comment)).toBe(false);
+    expect(isTermEntity(category)).toBe(true);
+    expect(isTermEntity(author)).toBe(false);
+    expect(isTermEntity(taxonomy)).toBe(false);
+    expect(isTermEntity(type)).toBe(false);
+  });
+
+  test("`isAuthorEntity` should recognize author entities", () => {
+    expect(isAuthorEntity(post)).toBe(false);
+    expect(isAuthorEntity(page)).toBe(false);
+    expect(isAuthorEntity(attachment)).toBe(false);
+    expect(isAuthorEntity(comment)).toBe(false);
+    expect(isAuthorEntity(category)).toBe(false);
+    expect(isAuthorEntity(author)).toBe(true);
+    expect(isAuthorEntity(taxonomy)).toBe(false);
+    expect(isAuthorEntity(type)).toBe(false);
   });
 
   test("`isTaxonomyEntity` should recognize taxonomy entities", () => {
@@ -315,53 +336,20 @@ describe("Entities type guards", () => {
     expect(isTaxonomyEntity(page)).toBe(false);
     expect(isTaxonomyEntity(attachment)).toBe(false);
     expect(isTaxonomyEntity(comment)).toBe(false);
-    expect(isTaxonomyEntity(category)).toBe(true);
+    expect(isTaxonomyEntity(category)).toBe(false);
     expect(isTaxonomyEntity(author)).toBe(false);
-    expect(isTaxonomyEntity(taxonomyType)).toBe(false);
-    expect(isTaxonomyEntity(postType)).toBe(false);
+    expect(isTaxonomyEntity(taxonomy)).toBe(true);
+    expect(isTaxonomyEntity(type)).toBe(false);
   });
 
-  test("`isAuthorEntity` should recognize taxonomy entities", () => {
-    expect(isAuthorEntity(post)).toBe(false);
-    expect(isAuthorEntity(page)).toBe(false);
-    expect(isAuthorEntity(attachment)).toBe(false);
-    expect(isAuthorEntity(comment)).toBe(false);
-    expect(isAuthorEntity(category)).toBe(false);
-    expect(isAuthorEntity(author)).toBe(true);
-    expect(isAuthorEntity(taxonomyType)).toBe(false);
-    expect(isAuthorEntity(postType)).toBe(false);
-  });
-
-  test("`isEntityType` should recognize taxonomy entities", () => {
-    expect(isEntityType(post)).toBe(false);
-    expect(isEntityType(page)).toBe(false);
-    expect(isEntityType(attachment)).toBe(false);
-    expect(isEntityType(comment)).toBe(false);
-    expect(isEntityType(category)).toBe(false);
-    expect(isEntityType(author)).toBe(false);
-    expect(isEntityType(taxonomyType)).toBe(true);
-    expect(isEntityType(postType)).toBe(true);
-  });
-
-  test("`isTaxonomyType` should recognize taxonomy entities", () => {
-    expect(isTaxonomyType(post)).toBe(false);
-    expect(isTaxonomyType(page)).toBe(false);
-    expect(isTaxonomyType(attachment)).toBe(false);
-    expect(isTaxonomyType(comment)).toBe(false);
-    expect(isTaxonomyType(category)).toBe(false);
-    expect(isTaxonomyType(author)).toBe(false);
-    expect(isTaxonomyType(taxonomyType)).toBe(true);
-    expect(isTaxonomyType(postType)).toBe(false);
-  });
-
-  test("`isPostType` should recognize taxonomy entities", () => {
-    expect(isPostType(post)).toBe(false);
-    expect(isPostType(page)).toBe(false);
-    expect(isPostType(attachment)).toBe(false);
-    expect(isPostType(comment)).toBe(false);
-    expect(isPostType(category)).toBe(false);
-    expect(isPostType(author)).toBe(false);
-    expect(isPostType(taxonomyType)).toBe(false);
-    expect(isPostType(postType)).toBe(true);
+  test("`isTypeEntity` should recognize type entities", () => {
+    expect(isTypeEntity(post)).toBe(false);
+    expect(isTypeEntity(page)).toBe(false);
+    expect(isTypeEntity(attachment)).toBe(false);
+    expect(isTypeEntity(comment)).toBe(false);
+    expect(isTypeEntity(category)).toBe(false);
+    expect(isTypeEntity(author)).toBe(false);
+    expect(isTypeEntity(taxonomy)).toBe(false);
+    expect(isTypeEntity(type)).toBe(true);
   });
 });
