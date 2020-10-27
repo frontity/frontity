@@ -1,10 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
-import {
-  PostTypeArchiveData,
-  PostTypeArchiveWithSearchData,
-} from "@frontity/source/types/data";
+import { PostTypeArchiveData, SearchData } from "@frontity/source/types/data";
 
 /**
  * The parameters for {@link postTypeArchiveHandler}.
@@ -137,7 +134,7 @@ const postTypeArchiveHandler = ({
   // This ensures the resulting type is correct.
   Object.assign(currentPageData, newPageData) as
     | PostTypeArchiveData
-    | PostTypeArchiveWithSearchData;
+    | (PostTypeArchiveData & SearchData);
 };
 
 export default postTypeArchiveHandler;

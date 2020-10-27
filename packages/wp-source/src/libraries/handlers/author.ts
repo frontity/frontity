@@ -1,6 +1,6 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
-import { AuthorData, AuthorWithSearchData } from "@frontity/source/types/data";
+import { AuthorData, SearchData } from "@frontity/source/types/data";
 
 /**
  * A {@link Handler} for fetching posts by author.
@@ -110,7 +110,7 @@ const authorHandler: Handler = async ({
 
   Object.assign(currentPageData, newPageData) as
     | AuthorData
-    | AuthorWithSearchData;
+    | (AuthorData & SearchData);
 };
 
 export default authorHandler;

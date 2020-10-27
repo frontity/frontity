@@ -1,6 +1,6 @@
 import { Handler } from "../../../types";
 import { ServerError } from "@frontity/source";
-import { DateData, DateWithSearchData } from "@frontity/source/types/data";
+import { DateData, SearchData } from "@frontity/source/types/data";
 import validateDate from "./utils/validateDate";
 
 /**
@@ -117,7 +117,9 @@ export const dateHandler: Handler = async ({
     ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
-  Object.assign(currentPageData, newPageData) as DateData | DateWithSearchData;
+  Object.assign(currentPageData, newPageData) as
+    | DateData
+    | (DateData & SearchData);
 };
 
 export default dateHandler;
