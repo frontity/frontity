@@ -1,6 +1,6 @@
 import TinyRouter from "../types";
 import { warn } from "frontity";
-import { isError } from "@frontity/source/data";
+import { isError } from "@frontity/source";
 
 /**
  * Set the URL.
