@@ -155,6 +155,7 @@ export const mockTaxonomy = (headTags: HeadTag[]): MockTaxonomyData => {
         id: 1,
         items: [],
         isArchive: true,
+        isTerm: true,
         isTaxonomy: true,
         isCategory: true,
         isFetching: false,
