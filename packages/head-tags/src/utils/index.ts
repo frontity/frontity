@@ -3,10 +3,10 @@ import { State } from "frontity/types";
 import { Packages, HeadTag, WithHeadTags } from "../../types";
 import {
   isPostType,
-  isTaxonomy,
+  isTerm,
   isAuthor,
   isPostTypeArchive,
-} from "@frontity/source/data";
+} from "@frontity/source";
 
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
@@ -273,7 +273,7 @@ export const getHeadTags = ({ state, link }: GetHeadTagsOptions) => {
   if (isPostType(data)) {
     const { type, id } = data;
     entity = state.source[type][id];
-  } else if (isTaxonomy(data)) {
+  } else if (isTerm(data)) {
     const { taxonomy, id } = data;
     entity = state.source[taxonomy][id];
   } else if (isAuthor(data)) {
