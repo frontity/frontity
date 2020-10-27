@@ -1,7 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
-import { TaxonomyData } from "@frontity/source/types/data";
+import { TermData } from "@frontity/source/types/data";
 
 /**
  * The parameters for {@link taxonomyHandler}.
@@ -82,7 +82,7 @@ const taxonomyHandler = ({
   const { route, page, query } = parse(link);
 
   // 1. search id in state or get it from WP REST API
-  let { id }: Partial<TaxonomyData> = state.source.get(route);
+  let { id }: Partial<TermData> = state.source.get(route);
   if (!id || force) {
     const { slug } = params;
     // Request entity from WP
@@ -135,7 +135,7 @@ const taxonomyHandler = ({
   // If state.source.data[route] doesn't contain the `taxonomy` property it
   // means that something else was returned from the endopoint and this handler
   // was matched erroneously.
-  const data: Partial<TaxonomyData> = state.source.data[route];
+  const data: Partial<TermData> = state.source.data[route];
   if (!data.taxonomy) {
     throw new ServerError(
       `You have tried to access content at route: ${route} but it does not exist`,
@@ -169,7 +169,7 @@ const taxonomyHandler = ({
 
   // 5. add data to source
   const currentPageData = state.source.data[link];
-  const firstPageData: Partial<TaxonomyData> = state.source.data[route];
+  const firstPageData: Partial<TermData> = state.source.data[route];
 
   const newPageData = {
     id: firstPageData.id,
@@ -178,6 +178,7 @@ const taxonomyHandler = ({
     total,
     totalPages,
     isArchive: true,
+    isTerm: true,
     isTaxonomy: true,
     [`is${capitalize(firstPageData.taxonomy)}`]: true,
 
@@ -189,7 +190,7 @@ const taxonomyHandler = ({
     ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
-  Object.assign(currentPageData, newPageData) as TaxonomyData;
+  Object.assign(currentPageData, newPageData) as TermData;
 };
 
 export default taxonomyHandler;
