@@ -297,6 +297,7 @@ Object {
       "isFetching": false,
       "isReady": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 1,
@@ -504,6 +505,7 @@ Object {
       "isFetching": false,
       "isReady": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [],
       "link": "/category/cat-1/",
       "page": 1,
@@ -558,6 +560,7 @@ Object {
       "isFetching": false,
       "isReady": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [],
       "link": "/category/cat-1/",
       "page": 1,
@@ -705,6 +708,7 @@ Object {
       "isFetching": false,
       "isReady": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 1,
@@ -940,6 +944,7 @@ Object {
       "isFetching": false,
       "isReady": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 1,
@@ -1291,6 +1296,7 @@ Object {
       "isFetching": false,
       "isReady": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 4,
@@ -1497,6 +1503,7 @@ Object {
       "isReady": true,
       "isSearch": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 1,
@@ -1749,6 +1756,7 @@ Object {
       "isReady": true,
       "isSearch": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 4,

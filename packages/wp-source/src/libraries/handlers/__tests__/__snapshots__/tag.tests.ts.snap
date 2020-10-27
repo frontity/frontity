@@ -114,6 +114,7 @@ Object {
       "isReady": true,
       "isTag": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 1,
@@ -261,6 +262,7 @@ Object {
       "isReady": true,
       "isTag": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [],
       "link": "/tag/tag-1/",
       "page": 1,
@@ -315,6 +317,7 @@ Object {
       "isReady": true,
       "isTag": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [],
       "link": "/tag/tag-1/",
       "page": 1,
@@ -522,6 +525,7 @@ Object {
       "isReady": true,
       "isTag": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 1,
@@ -757,6 +761,7 @@ Object {
       "isReady": true,
       "isTag": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 1,
@@ -1088,6 +1093,7 @@ Object {
       "isReady": true,
       "isTag": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 4,
@@ -1314,6 +1320,7 @@ Object {
       "isSearch": true,
       "isTag": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 1,
@@ -1546,6 +1553,7 @@ Object {
       "isSearch": true,
       "isTag": true,
       "isTaxonomy": true,
+      "isTerm": true,
       "items": Array [
         Object {
           "id": 4,

@@ -491,7 +491,7 @@ Object {
   "isCategory": true,
   "isFetching": false,
   "isReady": true,
-  "isTaxonomy": true,
+  "isTerm": true,
   "items": Array [],
   "link": "/some/route/",
   "page": 1,
