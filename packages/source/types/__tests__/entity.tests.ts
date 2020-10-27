@@ -3,9 +3,9 @@ import {
   PostEntity,
   AuthorEntity,
   AttachmentEntity,
+  TermEntity,
+  TypeEntity,
   TaxonomyEntity,
-  PostType,
-  TaxonomyType,
 } from "../entities";
 
 const author: AuthorEntity = {
@@ -35,7 +35,7 @@ const author: AuthorEntity = {
   },
 };
 
-const category: TaxonomyEntity = {
+const category: TermEntity = {
   id: 7,
   count: 10,
   description: "",
@@ -344,7 +344,7 @@ const attachment: AttachmentEntity = {
   },
 };
 
-const taxonomyType: TaxonomyType = {
+const taxonomyType: TaxonomyEntity = {
   name: "Categories",
   slug: "category",
   description: "",
@@ -372,7 +372,7 @@ const taxonomyType: TaxonomyType = {
   },
 };
 
-const postType: PostType = {
+const postType: TypeEntity = {
   description: "",
   hierarchical: false,
   name: "Posts",
