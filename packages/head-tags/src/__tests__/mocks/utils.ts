@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { State } from "frontity/types";
 import {
   CategoryData,
@@ -205,10 +204,10 @@ export const mockAuthor = (headTags: HeadTag[]): MockAuthorData => {
       "/author/author-1/": {
         id: 1,
         items: [],
-        isArchive: true as true,
-        isAuthor: true as true,
-        isFetching: false as false,
-        isReady: true as true,
+        isArchive: true as const,
+        isAuthor: true as const,
+        isFetching: false as const,
+        isReady: true as const,
         link: "/author/author-1/",
         route: "/author/author-1/",
         query: {},
