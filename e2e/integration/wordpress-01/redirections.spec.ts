@@ -93,4 +93,28 @@ describe("Preview plugin", () => {
     cy.location("href").should("eq", "http://localhost:3001/final-url/");
     cy.get("#post").should("contain.text", "Post: Doubly redirected post");
   });
+
+  it("Should work with a 302 redirection on the server", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world-302?frontity_name=redirections"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
+
+  it("Should work with a 302 redirection on the client", () => {
+    cy.visit("http://localhost:3001?frontity_name=redirections");
+
+    cy.get("#302-redirection").click();
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
 });

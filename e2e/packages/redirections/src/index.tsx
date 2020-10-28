@@ -42,6 +42,12 @@ const Component: React.FC = () => {
           >
             doubly redirected post
           </button>
+          <button
+            id="302-redirection"
+            onClick={() => actions.router.set("/hello-world-302")}
+          >
+            doubly redirected post
+          </button>
           Archive:
           {data.items.map(({ link, id }) => (
             <div key={id} data-test-id={id}>
