@@ -69,6 +69,13 @@ const actions: WpSource["actions"]["source"] = {
     source.data[link].isFetching = true;
 
     let redirectionPromise: Promise<Response>;
+    /**
+     *
+     */
+    const fetchRedirection = () =>
+      fetch("http://localhost:8080" + link, {
+        method: "HEAD",
+      });
 
     // Get and execute the corresponding handler based on path.
     try {
@@ -79,19 +86,23 @@ const actions: WpSource["actions"]["source"] = {
 
       const routerRedirections = state.router.redirections;
 
-      if (routerRedirections === "all") {
-        redirectionPromise = fetch("http://localhost:8080" + link, {
-          method: "HEAD",
-        });
-      } else if (Array.isArray(routerRedirections)) {
+      // The router redirections can be an array.
+      if (Array.isArray(routerRedirections)) {
         const patterns = routerRedirections.filter((r) =>
           r.startsWith("RegExp:")
         );
 
         if (patterns.some((r) => state.router.link.match(r))) {
-          redirectionPromise = fetch("http://localhost:8080" + link, {
-            method: "HEAD",
-          });
+          redirectionPromise = fetchRedirection();
+        }
+        // Or it can be "all".
+      } else if (routerRedirections === "all") {
+        redirectionPromise = fetchRedirection();
+        // Or it can be just a regex.
+      } else if (routerRedirections?.startsWith("RegExp:")) {
+        const regex = routerRedirections.replace(/^RegExp:/, "");
+        if (link.match(regex)) {
+          redirectionPromise = fetchRedirection();
         }
       }
 
@@ -144,12 +155,10 @@ const actions: WpSource["actions"]["source"] = {
 
           if (state.router.redirections === "404") {
             try {
-              head = await fetch("http://localhost:8080" + link, {
-                method: "HEAD",
-              });
+              head = await fetchRedirection();
             } catch (e) {
               // If there is no redirection, we ignore it and just continue
-              // handling the 404 ServerError that was thrown in the handler
+              // handling the 404 ServerError that was thrown previously.
             }
           }
 
