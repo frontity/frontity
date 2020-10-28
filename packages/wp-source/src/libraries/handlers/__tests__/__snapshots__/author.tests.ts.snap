@@ -177,6 +177,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;
 
@@ -227,6 +228,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;
 
@@ -277,6 +279,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;
 
@@ -492,6 +495,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;
 
@@ -681,6 +685,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;
 
@@ -868,6 +873,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;
 
@@ -4939,6 +4945,7 @@ Object {
       "slug": "post",
     },
   },
+  "url": "http://frontity.local",
 }
 `;
 
@@ -4976,6 +4983,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;
 
@@ -5025,6 +5033,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;
 
@@ -5168,5 +5177,6 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "http://frontity.local",
 }
 `;

@@ -54,7 +54,15 @@ const state: WpSource["state"]["source"] = {
   attachment: {},
   type: {},
   taxonomy: {},
-  api: "",
+  // Keep backward compatibility when `state.source.api` is not
+  // overwritten in frontity.settings.js.
+  api: ({ state }) => {
+    // Check if it's a free WordPress.com site.
+    if (/^https:\/\/[\w-]\.wordpress\.com/.test(state.source.url))
+      return `https://public-api.wordpress.com/wp/v2/sites/${state.source.url}`;
+
+    return state.source.url + state.wpSource.prefix;
+  },
   isWpCom: ({ state }) =>
     state.source.api.startsWith(
       "https://public-api.wordpress.com/wp/v2/sites/"
@@ -69,6 +77,7 @@ const state: WpSource["state"]["source"] = {
   params: {},
   postTypes: [],
   taxonomies: [],
+  url: ({ state }) => state.frontity.url,
 };
 
 export default state;

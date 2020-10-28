@@ -10,11 +10,16 @@ import date2019PostsPage2 from "./mocks/date/2019-posts-page-2.json";
 import date201901Posts from "./mocks/date/2019-01-posts.json";
 import date20190101Posts from "./mocks/date/2019-01-01-posts.json";
 import date20190101PostsCpt from "./mocks/date/2019-01-01-posts-cpt.json";
+import { Package } from "frontity/types";
 
-let store: InitializedStore<WpSource>;
+let store: InitializedStore<WpSource & Package>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore<WpSource>(clone(wpSource()));
+  store = createStore<WpSource & Package>(clone(wpSource()));
+
+  // We need to set it because state.source.url derives state from state.frontity.url
+  store.state.frontity = { url: "http://frontity.local" };
+
   store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;

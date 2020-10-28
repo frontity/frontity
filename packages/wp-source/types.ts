@@ -239,6 +239,21 @@ interface WpSource extends Source {
          */
         params?: Record<string, any>;
       }[];
+
+      /**
+       * The url.
+       */
+      url: Derived<Package & WpSource, string>;
+    };
+
+    /**
+     * The WP Source namespace.
+     */
+    wpSource: {
+      /**
+       * The prefix of the API.
+       */
+      prefix: string;
     };
   };
 
