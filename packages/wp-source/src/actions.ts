@@ -69,8 +69,13 @@ const actions: WpSource["actions"]["source"] = {
     source.data[link].isFetching = true;
 
     let redirectionPromise: Promise<Response>;
+
     /**
+     * A tiny helper to lazily create a fetch of the redirection.
      *
+     * @param link - The original link.
+     * @returns A Promise that resolves to the redirection or rejects if there is no
+     * redirection.
      */
     const fetchRedirection = () =>
       fetch("http://localhost:8080" + link, {
