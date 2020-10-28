@@ -388,7 +388,10 @@ export type RedirectionData = Merge<
     isReady: true;
     isFetching: false;
     isRedirection: true;
-    is301: true;
+    is301: boolean;
+    is302: boolean;
+    is307: boolean;
+    is308: boolean;
     location: string;
   }
 >;

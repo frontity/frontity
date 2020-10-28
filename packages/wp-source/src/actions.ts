@@ -185,7 +185,7 @@ const actions: WpSource["actions"]["source"] = {
 
             Object.assign(source.data[link], {
               location,
-              is301: true,
+              [`is${head.status}`]: true,
               isFetching: false,
               isReady: true,
               isRedirection: true,

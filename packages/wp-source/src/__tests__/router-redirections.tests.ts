@@ -9,6 +9,7 @@ import { InitializedStore, createStore } from "@frontity/connect";
 import WpSource, { Pattern, Handler } from "../../types";
 import wpSource from "..";
 import { ServerError } from "@frontity/source";
+import { RedirectionData } from "@frontity/source/types/data";
 
 let handler: jest.Mocked<Pattern<Handler>>;
 let store: InitializedStore<WpSource & Router>;
@@ -55,6 +56,7 @@ beforeEach(() => {
     Promise.resolve({
       url: "https://localhost:8080/redirected-url",
       redirected: true,
+      status: 301,
     } as Response)
   );
   (frontity.fetch as typeof fetch) = mockedFetch;
@@ -177,6 +179,47 @@ describe("redirections: 404", () => {
       Object {
         "/some-post/": Object {
           "is301": true,
+          "isFetching": false,
+          "isReady": true,
+          "isRedirection": true,
+          "link": "/some-post/",
+          "location": "/redirected-url/",
+          "page": 1,
+          "query": Object {},
+          "route": "/some-post/",
+        },
+      }
+    `);
+  });
+
+  it("Should redirect on 404 when the redirection is a 302 redirection", async () => {
+    store.state.router.redirections = "404";
+
+    mockedFetch = jest.fn((_) =>
+      Promise.resolve({
+        url: "https://localhost:8080/redirected-url",
+        redirected: true,
+        status: 302,
+      } as Response)
+    );
+    (frontity.fetch as typeof fetch) = mockedFetch;
+
+    await store.actions.source.fetch("/some-post/");
+
+    // the `fetch()` was called
+    expect(mockedFetch).toHaveBeenCalledTimes(1);
+    expect(mockedFetch).toHaveBeenCalledWith(...fetchRedirectionParams);
+
+    expect(handler.func).toHaveBeenCalledTimes(1);
+    expect(handler.func).toHaveBeenCalledBefore(mockedFetch);
+
+    expect(
+      (store.state.source.data["/some-post/"] as RedirectionData).is302
+    ).toBe(true);
+    expect(store.state.source.data).toMatchInlineSnapshot(`
+      Object {
+        "/some-post/": Object {
+          "is302": true,
           "isFetching": false,
           "isReady": true,
           "isRedirection": true,
@@ -329,9 +372,7 @@ describe("redirections: RegExp and RegExp[]", () => {
     `);
   });
 
-  it(`Should fetch the redirection 
-when the redirection is an array of regexes that includes a 404 AND
-the regex does NOT match the route`, async () => {
+  it(`Should fetch the redirection when the redirection is an array of regexes that includes a 404 AND the regex does NOT match the route`, async () => {
     store.state.router.redirections = [
       "404",
       "RegExp:/some-other-post", // This regex does not match
@@ -365,9 +406,7 @@ the regex does NOT match the route`, async () => {
     `);
   });
 
-  it(`Should fetch the redirection
-when the redirection is an array of regexes that includes a 404 AND 
-the regex matches a route`, async () => {
+  it(`Should fetch the redirection when the redirection is an array of regexes that includes a 404 AND the regex matches a route`, async () => {
     store.state.router.redirections = [
       "404",
       "RegExp:/some-(\\w*)", // This regex DOES match
