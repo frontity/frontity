@@ -89,15 +89,17 @@ const actions: WpSource["actions"]["source"] = {
       const redirection = getMatch(route, redirections);
       if (redirection) route = redirection.func(redirection.params);
 
+      // These are different from the "redirections" above - this setting is
+      // used for handling 30x redirections that can be stored in the WordPress database.
       const routerRedirections = state.router.redirections;
 
       // The router redirections can be an array.
       if (Array.isArray(routerRedirections)) {
-        const patterns = routerRedirections.filter((r) =>
-          r.startsWith("RegExp:")
-        );
+        const patterns = routerRedirections
+          .filter((r) => r.startsWith("RegExp:"))
+          .map((r) => r.replace(/^RegExp:/, ""));
 
-        if (patterns.some((r) => state.router.link.match(r))) {
+        if (patterns.some((r) => route.match(r))) {
           redirectionPromise = fetchRedirection();
         }
         // Or it can be "all".
@@ -158,7 +160,12 @@ const actions: WpSource["actions"]["source"] = {
           // fetching the data, so just await it.
           let head = redirectionPromise && (await redirectionPromise);
 
-          if (state.router.redirections === "404") {
+          const { redirections } = state.router;
+          if (
+            !head &&
+            (redirections === "404" ||
+              (Array.isArray(redirections) && redirections.includes("404")))
+          ) {
             try {
               head = await fetchRedirection();
             } catch (e) {
