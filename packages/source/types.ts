@@ -134,7 +134,7 @@ interface Source<T = null> extends Package {
        * @example "https://your-site.com/wp-json"
        * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
        */
-      api: Derived<Package & WpSource, string>;
+      api: Derived<Package & WpSource, string> | string;
 
       data: Record<string, Data>;
 

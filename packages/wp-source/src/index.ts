@@ -4,9 +4,9 @@ import actions from "./actions";
 import { Api, populate, routeUtils, responseUtils } from "./libraries";
 
 /**
- * The WP Source package.
+ * The function that returns the wp-source package.
  *
- * @returns The wp-source state, actions & libraries.
+ * @returns The wp-source package which includes its `state`, `actions` & `libraries`.
  */
 const wpSource = (): WpSource => ({
   name: "@frontity/wp-source",

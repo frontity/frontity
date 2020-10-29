@@ -119,7 +119,7 @@ describe("state.source.get", () => {
 });
 
 describe("state.source.url & state.source.api", () => {
-  const initStore = (data?: Record<string, any>) => {
+  const initStore = (data = {}) => {
     const config = clone(merge(wpSource(), data));
     return createStore(config);
   };
@@ -176,7 +176,7 @@ describe("state.source.url & state.source.api", () => {
   test("You can set the source.url later", () => {
     const store = initStore();
 
-    store.state.source.url = "http://frontity.local";
+    store.state.source.url = "http://frontity.local/";
 
     expect(store.state.source.url).toBe("http://frontity.local/");
     expect(store.state.source.api).toBe("http://frontity.local/wp-json");
