@@ -253,7 +253,7 @@ interface WpSource extends Source {
       /**
        * The prefix of the API.
        */
-      prefix: string;
+      prefix?: string;
     };
   };
 

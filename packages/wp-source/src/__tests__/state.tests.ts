@@ -1,6 +1,7 @@
 import { createStore } from "@frontity/connect";
 import clone from "clone-deep";
 import wpSource from "../";
+import merge from "deepmerge";
 
 const initStore = (data = {}) => {
   const config = clone(wpSource());
@@ -118,16 +119,14 @@ describe("state.source.get", () => {
 });
 
 describe("state.source.url & state.source.api", () => {
-  const initStore = (updateConfig) => {
-    let config = clone(wpSource());
-    config = updateConfig(config);
+  const initStore = (data?: Record<string, any>) => {
+    const config = clone(merge(wpSource(), data));
     return createStore(config);
   };
 
   test("Only setting the state.frontity.url", () => {
-    const store = initStore((config) => {
-      config.state.frontity = { url: "http://frontity.local" };
-      return config;
+    const store = initStore({
+      state: { frontity: { url: "http://frontity.local" } },
     });
 
     expect(store.state.source.api).toBe("http://frontity.local/wp-json");
@@ -136,15 +135,51 @@ describe("state.source.url & state.source.api", () => {
   });
 
   test("state.frontity.url containing final slash", () => {
-    const store = initStore((config) => {
-      config.state.frontity = { url: "http://frontity.local/" };
-      return config;
+    const store = initStore({
+      state: { frontity: { url: "http://frontity.local/" } },
     });
 
     expect(store.state.source.api).toBe("http://frontity.local/wp-json");
 
     // Has the final slash
     expect(store.state.source.url).toBe("http://frontity.local/");
+    expect(store.state.source.isWpCom).toBe(false);
+  });
+
+  test("The correct prefix is being added", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "http://frontity.local/" },
+        wpSource: { prefix: "/api" },
+      },
+    });
+
+    // Has the correct prefix
+    expect(store.state.source.api).toBe("http://frontity.local/api");
+
+    expect(store.state.source.url).toBe("http://frontity.local/");
+    expect(store.state.source.isWpCom).toBe(false);
+  });
+
+  test("Only setting the source.url", () => {
+    const store = initStore({
+      state: {
+        source: { url: "http://frontity.local/" },
+      },
+    });
+
+    expect(store.state.source.url).toBe("http://frontity.local/");
+    expect(store.state.source.api).toBe("http://frontity.local/wp-json");
+    expect(store.state.source.isWpCom).toBe(false);
+  });
+
+  test("You can set the source.url later", () => {
+    const store = initStore();
+
+    store.state.source.url = "http://frontity.local";
+
+    expect(store.state.source.url).toBe("http://frontity.local/");
+    expect(store.state.source.api).toBe("http://frontity.local/wp-json");
     expect(store.state.source.isWpCom).toBe(false);
   });
 });
