@@ -1,5 +1,5 @@
 import WpSource from "../types";
-import { normalize, parse } from "./libraries/route-utils";
+import { addFinalSlash, normalize, parse } from "./libraries/route-utils";
 
 const state: WpSource["state"]["source"] = {
   get: ({ state }) => (link) => {
@@ -61,7 +61,9 @@ const state: WpSource["state"]["source"] = {
     if (/^https:\/\/[\w-]\.wordpress\.com/.test(state.source.url))
       return `https://public-api.wordpress.com/wp/v2/sites/${state.source.url}`;
 
-    return state.source.url + state.wpSource.prefix;
+    return (
+      addFinalSlash(state.source.url) + state.wpSource.prefix.replace(/^\//, "")
+    );
   },
   isWpCom: ({ state }) =>
     state.source.api.startsWith(

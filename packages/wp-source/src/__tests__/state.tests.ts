@@ -116,3 +116,35 @@ describe("state.source.get", () => {
     ).toEqual(archive);
   });
 });
+
+describe("state.source.url & state.source.api", () => {
+  const initStore = (updateConfig) => {
+    let config = clone(wpSource());
+    config = updateConfig(config);
+    return createStore(config);
+  };
+
+  test("Only setting the state.frontity.url", () => {
+    const store = initStore((config) => {
+      config.state.frontity = { url: "http://frontity.local" };
+      return config;
+    });
+
+    expect(store.state.source.api).toBe("http://frontity.local/wp-json");
+    expect(store.state.source.url).toBe("http://frontity.local");
+    expect(store.state.source.isWpCom).toBe(false);
+  });
+
+  test("state.frontity.url containing final slash", () => {
+    const store = initStore((config) => {
+      config.state.frontity = { url: "http://frontity.local/" };
+      return config;
+    });
+
+    expect(store.state.source.api).toBe("http://frontity.local/wp-json");
+
+    // Has the final slash
+    expect(store.state.source.url).toBe("http://frontity.local/");
+    expect(store.state.source.isWpCom).toBe(false);
+  });
+});
