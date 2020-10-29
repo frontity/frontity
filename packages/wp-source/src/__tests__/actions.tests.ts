@@ -54,19 +54,21 @@ beforeEach(() => {
  * Helper that returns a link's data when the given prop has the given value.
  *
  * @param link - Link in the Frontity site.
- * @param prop - Name of the prop.
- * @param value - Boolean value to check.
+ * @param props - Props and their values to check.
  * @returns Promise with the data object when is ready.
  */
-const observeData = (
-  link: string,
-  prop: keyof Data,
-  value = true
-): Promise<Data> =>
+const observeData = (link: string, props: Partial<Data>): Promise<Data> =>
   new Promise((resolve) => {
     observe(() => {
       const data = store.state.source.get(link);
-      if (data[prop] === value) resolve(data);
+
+      // Exit if some condition fails.
+      for (const prop in props) {
+        if (!data[prop] === props[prop]) return;
+      }
+
+      // Resolve only when all conditions are true.
+      resolve(data);
     });
   });
 
@@ -113,27 +115,27 @@ describe("actions.source.fetch", () => {
   });
 
   test('should set isHome in "/"', async () => {
-    const promisedData = observeData("/", "isReady");
+    const promisedData = observeData("/", { isReady: true });
     store.actions.source.fetch("/");
     expect(isHome(await promisedData)).toBe(true);
   });
 
   test('should set isHome in "/page/x"', async () => {
-    const promisedData = observeData("/page/123", "isReady");
+    const promisedData = observeData("/page/123", { isReady: true });
     store.actions.source.fetch("/page/123");
     expect(isHome(await promisedData)).toBe(true);
   });
 
   test('should set isHome in "/blog" when using a subdirectory', async () => {
     store.state.source.subdirectory = "/blog";
-    const promisedData = observeData("/blog", "isReady");
+    const promisedData = observeData("/blog", { isReady: true });
     store.actions.source.fetch("/blog");
     expect(isHome(await promisedData)).toBe(true);
   });
 
   test('should set isHome in "/blog/page/x" when using a subdirectory', async () => {
     store.state.source.subdirectory = "/blog";
-    const promisedData = observeData("/blog/page/123", "isReady");
+    const promisedData = observeData("/blog/page/123", { isReady: true });
     store.actions.source.fetch("/blog/page/123");
     expect(isHome(await promisedData)).toBe(true);
   });
@@ -148,7 +150,7 @@ describe("actions.source.fetch", () => {
       },
     ];
 
-    const promisedData = observeData("/", "isReady");
+    const promisedData = observeData("/", { isReady: true });
     store.actions.source.fetch("/");
     expect(isHome(await promisedData)).toBe(true);
   });
@@ -163,7 +165,7 @@ describe("actions.source.fetch", () => {
       },
     ];
 
-    const promisedData = observeData("/page/123", "isReady");
+    const promisedData = observeData("/page/123", { isReady: true });
     store.actions.source.fetch("/page/123");
     expect(isHome(await promisedData)).toBe(true);
   });
@@ -206,7 +208,7 @@ describe("actions.source.fetch", () => {
     expect(store.state.source.get("/").isReady).toBe(false);
 
     // `observeData` uses `observe`.
-    const promisedData = observeData("/", "isReady");
+    const promisedData = observeData("/", { isReady: true });
     store.actions.source.fetch("/");
     await promisedData;
   });
@@ -217,7 +219,7 @@ describe("actions.source.fetch", () => {
     expect(store.state.source.get("/").isFetching).toBe(true);
 
     // `observeData` uses `observe`.
-    const promisedData = observeData("/", "isFetching", false);
+    const promisedData = observeData("/", { isFetching: false });
     await promisedData;
   });
 
