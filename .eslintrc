@@ -11,41 +11,40 @@
   "plugins": ["jsdoc", "react-hooks"],
   "rules": {
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "react-hooks/exhaustive-deps": "error", // Checks effect dependencies
     "react/prop-types": "off",
     "import/named": "off",
-    "jsdoc/check-examples": 2,
-    "jsdoc/check-indentation": 0,
-    "jsdoc/check-param-names": 0,
-    "jsdoc/check-syntax": 2,
-    "jsdoc/check-types": 2,
-    "jsdoc/implements-on-classes": 2,
-    "jsdoc/match-description": 2,
-    "jsdoc/newline-after-description": 2,
-    "jsdoc/no-types": 2,
-    "jsdoc/no-undefined-types": 2,
+    "jsdoc/check-examples": "error",
+    "jsdoc/check-indentation": "error",
+    "jsdoc/check-param-names": "error",
+    "jsdoc/check-syntax": "error",
+    "jsdoc/check-types": "error",
+    "jsdoc/implements-on-classes": "error",
+    "jsdoc/match-description": "error",
+    "jsdoc/newline-after-description": "error",
+    "jsdoc/no-types": "error",
+    "jsdoc/no-undefined-types": "error",
     "jsdoc/require-description": [
       "error",
       {
         "contexts": ["any"]
       }
     ],
-    "jsdoc/require-description-complete-sentence": 2,
-    "jsdoc/require-example": 0,
+    "jsdoc/require-description-complete-sentence": "error",
     "jsdoc/require-param": [
       "error",
       {
         "checkDestructured": false
       }
     ],
-    "jsdoc/require-param-description": 2,
-    "jsdoc/require-param-name": 2,
-    "jsdoc/require-param-type": 0,
-    "jsdoc/require-returns": 2,
-    "jsdoc/require-returns-check": 2,
-    "jsdoc/require-returns-description": 2,
-    "jsdoc/require-returns-type": 0,
-    "jsdoc/valid-types": 2,
+    "jsdoc/require-param-description": "error",
+    "jsdoc/require-param-name": "error",
+    "jsdoc/require-param-type": "off",
+    "jsdoc/require-returns": "error",
+    "jsdoc/require-returns-check": "error",
+    "jsdoc/require-returns-description": "error",
+    "jsdoc/require-returns-type": "off",
+    "jsdoc/valid-types": "error",
     "jsdoc/require-jsdoc": [
       "error",
       {
