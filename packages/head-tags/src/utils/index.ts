@@ -19,13 +19,22 @@ const possibleLink = ["href", "content"];
  * object property and the rest are defined in `args`.
  * @param args - The rest of the parameters of the function.
  */
-const deepTransform = (obj: object, func: Function, ...args: object[]) => {
+const deepTransform = <
+  Func extends (value: string, ...args: Args) => string,
+  Args extends any[]
+>(
+  obj: any,
+  func: Func,
+  ...args: Args
+): void => {
+  // Iterate over keys.
   for (const key in obj) {
-    if (typeof obj[key] === "string") {
-      obj[key] = func(obj[key], ...args);
-    } else if (typeof obj[key] === "object") {
-      deepTransform(obj[key], func, ...args);
-    }
+    // Get value.
+    const value = obj[key];
+    // Transform value if it is a string.
+    if (typeof value === "string") obj[key] = func(value, ...args);
+    // Iterate over props if it is an object.
+    else if (typeof value === "object") deepTransform(value, func, ...args);
   }
 };
 
@@ -194,7 +203,7 @@ export const transformHeadTags = ({
         attributes.type.endsWith("ld+json")
       ) {
         // Try to parse the tag content.
-        let json: object;
+        let json: any;
         try {
           json = JSON.parse(content);
         } catch (e) {
