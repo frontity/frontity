@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import clone from "clone-deep";
 import { State } from "frontity/types";
 import { createStore, InitializedStore } from "@frontity/connect";

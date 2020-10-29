@@ -52,7 +52,7 @@ export const commentsHandler: Handler = async ({
         post: postId,
         page,
         // Fetch as many comments as possible.
-        per_page: 100, // eslint-disable-line @typescript-eslint/camelcase
+        per_page: 100,
         ...state.source.params,
         // Do not get embedded entities.
         _embed: false,

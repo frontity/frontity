@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import {
   isPostTypeEntity,
   isPostEntity,
