@@ -1,5 +1,4 @@
-/* eslint-disable */
-
+/* eslint-disable jsdoc/require-jsdoc */
 import { Package } from ".";
 
 /**
