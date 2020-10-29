@@ -10,7 +10,6 @@ import {
   TaxonomyType,
   PostType,
 } from "./types/entities";
-import WpSource from "../wp-source/types";
 
 // Export directly some types.
 export { Data, EntityData } from "./types/data";
@@ -134,7 +133,7 @@ interface Source<T = null> extends Package {
        * @example "https://your-site.com/wp-json"
        * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
        */
-      api: Derived<Package & WpSource, string> | string;
+      api: Derived<Package, string>;
 
       data: Record<string, Data>;
 

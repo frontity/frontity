@@ -1,9 +1,16 @@
-import Package from "./package";
-import { ResolveState, ResolveActions } from "./utils";
+/* eslint-disable */
 
+import Package from "./package";
+import { ResolveState, ResolveActions, Serializable } from "./utils";
+
+/**
+ * Derived state can be
+ */
 export type Derived<Pkg extends Package, InputOrOutput, Output = null> = [
-  Output
-] extends [null]
+  InputOrOutput
+] extends [Serializable]
+  ? InputOrOutput
+  : [Output] extends [null]
   ? ({
       state,
       actions,
