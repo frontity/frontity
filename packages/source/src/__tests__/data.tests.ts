@@ -152,4 +152,7 @@ if (isAttachment(data)) {
   expectType<AttachmentData>(data);
 }
 
-test("Types are fine!", () => {});
+// eslint-disable-next-line jest/expect-expect
+test("Types are fine!", () => {
+  // Do nothing here.
+});
