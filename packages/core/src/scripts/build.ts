@@ -56,7 +56,7 @@ import { webpackAsync } from "./utils/webpack";
 /**
  * The options of the build command.
  */
-interface BuildOptions {
+export interface BuildOptions {
   /**
    * The Webpack mode used, either "development" or "production".
    *
