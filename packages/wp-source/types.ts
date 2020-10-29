@@ -456,7 +456,7 @@ export default WpSource;
  *
  * Handlers are used when `actions.source.fetch` is executed.
  */
-export interface Pattern<F extends Function = Function> {
+export interface Pattern<F extends (...args: any) => any> {
   /**
    * A unique name to identify this handler.
    *
