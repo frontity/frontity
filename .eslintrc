@@ -53,13 +53,14 @@
           "ClassDeclaration": true,
           "MethodDefinition": true,
           "FunctionDeclaration": true,
-          "ArrowFunctionExpression": true
+          "ArrowFunctionExpression": false
         },
         "contexts": [
           "TSInterfaceDeclaration",
           "TSTypeAliasDeclaration",
           "TSEnumDeclaration",
-          "TSPropertySignature"
+          "TSPropertySignature",
+          "VariableDeclarator > ArrowFunctionExpression"
         ]
       }
     ]
