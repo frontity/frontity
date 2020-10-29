@@ -171,6 +171,13 @@ export default Package;
 /**
  * An individual Frontity action.
  */
+// NOTE: This interface looks like was intended to be used in the `Actions`
+// interface defined below, but it creates a circular reference and breaks it,
+// so it's currently unused.
+//
+// TODO: either fix these types or remove this `Action` definition.
+//
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Action {
   /**
    * Declaration of an action without additional params.
