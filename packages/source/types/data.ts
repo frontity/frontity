@@ -36,7 +36,7 @@ export interface Data {
   /**
    * The query part of the link, in object format.
    */
-  query: object;
+  query: Record<string, any>;
   /**
    * Boolean indicating if this link is being fetched.
    */
