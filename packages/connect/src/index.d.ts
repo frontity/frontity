@@ -28,9 +28,13 @@ type Store = {
   actions?: Actions;
 };
 
+type Primitive = number | string | boolean | symbol | undefined | null;
+
 type ResolveState<State> = {
   [P in keyof State]: State[P] extends (state: object) => any
     ? ReturnType<State[P]>
+    : [State[P]] extends [Primitive | Derived<any, any>]
+    ? Exclude<State[P], Derived<any, any>>
     : ResolveState<State[P]>;
 };
 
