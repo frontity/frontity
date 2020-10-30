@@ -123,6 +123,10 @@ export interface SmartAdProps extends CallOptions {
  */
 interface SmartAdserver extends Package {
   /**
+   * Package name.
+   */
+  name: "@frontity/smart-adserver";
+  /**
    * Root elements exposed by this package.
    */
   roots: {
