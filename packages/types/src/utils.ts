@@ -8,7 +8,7 @@ import Derived from "./derived";
 export type ResolveState<State extends Package["state"]> = {
   [P in keyof State]: State[P] extends (state: Package["state"]) => any
     ? ReturnType<State[P]>
-    : [State[P]] extends [Serializable | Derived<any, any>]
+    : State[P] extends Serializable | Derived<any, any>
     ? Exclude<State[P], Derived<any, any>>
     : ResolveState<State[P]>;
 };
