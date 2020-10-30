@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable jsdoc/require-jsdoc */
 
 import Package from "./package";
 import { ResolveState, ResolveActions, Serializable } from "./utils";
