@@ -4,6 +4,10 @@ import Derived from "../derived";
 import MergePackages from "../merge-packages";
 import { expectType } from "../../helpers";
 
+/**
+ * Package using the types of `Package1`, `Package2` and `Package3` for derived
+ * props and actions.
+ */
 interface Package1 extends Package {
   name: "package-1";
   state: {
@@ -53,6 +57,9 @@ interface Package3 extends Package {
   };
 }
 
+/**
+ * All packages merged together.
+ */
 type Packages = MergePackages<Package1, Package2, Package3>;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
