@@ -11,7 +11,7 @@ interface Script extends Package {
     /**
      * Script namespace.
      */
-    script: React.ReactType;
+    script: React.ElementType;
   };
 }
 

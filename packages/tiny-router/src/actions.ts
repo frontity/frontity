@@ -54,10 +54,10 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     (!options.method && state.frontity.platform === "client")
   ) {
     window.history.pushState(options.state, "", link);
-    if (state.router.autoFetch) actions.source.fetch(link);
+    if (state.router.autoFetch) actions.source?.fetch(link);
   } else if (options.method === "replace") {
     window.history.replaceState(options.state, "", link);
-    if (state.router.autoFetch) actions.source.fetch(link);
+    if (state.router.autoFetch) actions.source?.fetch(link);
   }
 };
 
