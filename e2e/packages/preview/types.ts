@@ -12,7 +12,7 @@ interface Preview extends Package {
     /**
      * The preview namespace.
      */
-    preview: React.ReactType;
+    preview: React.ElementType;
   };
 
   /**

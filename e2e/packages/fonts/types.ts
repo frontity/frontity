@@ -11,7 +11,7 @@ interface Fonts extends Package {
     /**
      * Fonts namespace.
      */
-    fonts: React.ReactType;
+    fonts: React.ElementType;
   };
 }
 

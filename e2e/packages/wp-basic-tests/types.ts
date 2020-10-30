@@ -13,7 +13,7 @@ interface WpBasicTests extends Package {
     /**
      * The WpBasicTests namespace.
      */
-    wpBasicTests: React.ReactType;
+    wpBasicTests: React.ElementType;
   };
 }
 

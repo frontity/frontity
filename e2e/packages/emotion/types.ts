@@ -11,7 +11,7 @@ interface Emotion extends Package {
     /**
      * Emotion namespace.
      */
-    emotion: React.ReactType;
+    emotion: React.ElementType;
   };
 }
 

@@ -45,7 +45,7 @@ interface Html2ReactTests extends Package {
     /**
      * Html2reactTests namespace.
      */
-    html2reactTests: React.ReactType;
+    html2reactTests: React.ElementType;
   };
 
   /**

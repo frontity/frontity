@@ -11,7 +11,7 @@ interface UseInView extends Package {
     /**
      * UseInView namespace.
      */
-    useInView: React.ReactType;
+    useInView: React.ElementType;
   };
 }
 

@@ -36,7 +36,7 @@ interface SlotAndFill extends Package {
     /**
      * SlotAndFill namespace.
      */
-    slotAndFill: React.ReactType;
+    slotAndFill: React.ElementType;
   };
 
   /**
@@ -54,12 +54,12 @@ interface SlotAndFill extends Package {
         /**
          * A Fill component.
          */
-        Fill1: React.ReactType;
+        Fill1: React.ElementType;
 
         /**
          * Another Fill component.
          */
-        Fill2: React.ReactType;
+        Fill2: React.ElementType;
       };
     };
   };

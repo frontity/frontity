@@ -33,7 +33,7 @@ interface TinyRouterTests extends Package {
     /**
      * TinyRouterTests namespace.
      */
-    tinyRouterTests: React.ReactType;
+    tinyRouterTests: React.ElementType;
   };
 }
 

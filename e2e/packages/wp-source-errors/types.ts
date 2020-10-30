@@ -27,7 +27,7 @@ interface WpSourceErrors extends Package {
     /**
      * WpSourceErrors namespace.
      */
-    wpSourceErrors: React.ReactType;
+    wpSourceErrors: React.ElementType;
   };
 }
 

@@ -11,7 +11,7 @@ interface Loadable extends Package {
     /**
      * Loadable namespace.
      */
-    loadable: React.ReactType;
+    loadable: React.ElementType;
   };
 }
 

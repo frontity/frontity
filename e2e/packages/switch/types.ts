@@ -11,7 +11,7 @@ interface Switch extends Package {
     /**
      * Switch namespace.
      */
-    switch: React.ReactType;
+    switch: React.ElementType;
   };
 }
 

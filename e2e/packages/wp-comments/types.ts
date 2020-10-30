@@ -19,7 +19,7 @@ interface WPComments extends Package {
     };
   };
   roots: {
-    wpComments: React.ReactType;
+    wpComments: React.ElementType;
   };
   libraries: {};
 }

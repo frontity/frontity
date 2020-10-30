@@ -11,7 +11,7 @@ interface Head extends Package {
     /**
      * Head namespace.
      */
-    head: React.ReactType;
+    head: React.ElementType;
   };
 }
 

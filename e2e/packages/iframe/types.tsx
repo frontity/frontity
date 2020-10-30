@@ -11,7 +11,7 @@ interface Iframe extends Package {
     /**
      * Iframe namespace.
      */
-    iframe: React.ReactType;
+    iframe: React.ElementType;
   };
 }
 

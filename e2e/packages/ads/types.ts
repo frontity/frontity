@@ -47,7 +47,7 @@ interface TestAds extends Package {
     /**
      * Theme namespace.
      */
-    theme: React.ReactType;
+    theme: React.ElementType;
   };
 }
 

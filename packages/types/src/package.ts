@@ -15,7 +15,7 @@ export interface Package {
    * namespaces.
    */
   roots?: {
-    [namespace: string]: React.ReactType;
+    [namespace: string]: React.ElementType;
   };
 
   /**

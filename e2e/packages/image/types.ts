@@ -11,7 +11,7 @@ interface Image extends Package {
     /**
      * Image namespace.
      */
-    image: React.ReactType;
+    image: React.ElementType;
   };
 }
 
