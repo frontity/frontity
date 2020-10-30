@@ -2,11 +2,13 @@ import { Package } from ".";
 import { DeepPartial } from "ts-essentials";
 
 // Gets a Package and returns only what's needed for the frontity.settings.js file.
-type PackageForSettings<Pkg extends Package> = {
-  name: Required<Pkg["name"]>;
-  active?: boolean;
-  state?: DeepPartial<Pkg["state"]>;
-};
+type PackageForSettings<Pkg> = Pkg extends Package
+  ? {
+      name: Required<Pkg["name"]>;
+      active?: boolean;
+      state?: DeepPartial<Pkg["state"]>;
+    }
+  : never;
 
 export interface MonoSettings<Pkg extends Package = Package> {
   name?: string;
