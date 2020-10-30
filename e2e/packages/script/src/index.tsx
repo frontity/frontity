@@ -47,6 +47,7 @@ const Component: React.FC = () => {
 };
 
 const ScriptPackage: Package = {
+  name: "e2e-script",
   roots: {
     script: Component,
   },

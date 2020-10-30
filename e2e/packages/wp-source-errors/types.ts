@@ -1,10 +1,14 @@
-import { Package, Action } from "frontity/types";
+import { Package, Action, MergePackages } from "frontity/types";
 import WpSource from "@frontity/wp-source/types";
 
 /**
  * Package to do e2e testing of Frontity's Lodable component.
  */
 interface WpSourceErrors extends Package {
+  /**
+   * Package name.
+   */
+  name: "e2e-wp-source-errors";
   /**
    * Actions exposed by this package.
    */
@@ -34,6 +38,6 @@ interface WpSourceErrors extends Package {
 /**
  * All packages used internally by WpSourceErrors.
  */
-export type Packages = WpSourceErrors & WpSource;
+export type Packages = MergePackages<WpSourceErrors, WpSource>;
 
 export default WpSourceErrors;

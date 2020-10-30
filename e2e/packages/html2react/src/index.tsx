@@ -29,6 +29,7 @@ const Root: React.FC<Connect<Packages>> = ({ actions, libraries }) => {
 };
 
 const html2reactTests: Html2ReactTests = {
+  name: "e2e-html2react",
   state: {
     html2reactTests: {
       color: "blue",

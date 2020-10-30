@@ -1,4 +1,4 @@
-import { Package } from "frontity/types";
+import { MergePackages, Package } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 import GoogleAdManager from "@frontity/google-ad-manager/types";
@@ -7,6 +7,10 @@ import GoogleAdManager from "@frontity/google-ad-manager/types";
  * Package to do e2e testing of Frontity's ad libraries.
  */
 interface TestAds extends Package {
+  /**
+   * Package name.
+   */
+  name: "e2e-ads";
   /**
    * State exposed by this package.
    */
@@ -54,6 +58,6 @@ interface TestAds extends Package {
 /**
  * All packages used internally by TestAds.
  */
-export type Packages = TestAds & Router & Source & GoogleAdManager;
+export type Packages = MergePackages<TestAds, Router, Source, GoogleAdManager>;
 
 export default TestAds;

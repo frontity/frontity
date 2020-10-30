@@ -165,6 +165,7 @@ const Font: React.FC = connect(({ state }) => {
 });
 
 const FontsPackage: Package = {
+  name: "e2e-fonts",
   roots: {
     fonts: Font,
   },

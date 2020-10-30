@@ -5,6 +5,10 @@ import { Package, Action } from "frontity/types";
  */
 interface SlotAndFill extends Package {
   /**
+   * Package name.
+   */
+  name: "e2e-slot-and-fill";
+  /**
    * Actions exposed by this package.
    */
   actions: {

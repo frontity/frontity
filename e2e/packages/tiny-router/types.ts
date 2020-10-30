@@ -1,10 +1,14 @@
-import { Package } from "frontity/types";
+import { MergePackages, Package } from "frontity/types";
 import Router from "@frontity/tiny-router/types";
 
 /**
  * Package to do e2e testing of Frontity's TinyRouter package.
  */
 interface TinyRouterTests extends Package {
+  /**
+   * Package name.
+   */
+  name: "e2e-tiny-router";
   /**
    * State exposed by this package.
    */
@@ -40,6 +44,6 @@ interface TinyRouterTests extends Package {
 /**
  * All packages used internally by TinyRouterTests.
  */
-export type Packages = TinyRouterTests & Router;
+export type Packages = MergePackages<TinyRouterTests, Router>;
 
 export default TinyRouterTests;

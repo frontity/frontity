@@ -5,6 +5,11 @@ import { Package } from "frontity/types";
  */
 interface Image extends Package {
   /**
+   * Package name.
+   */
+  name: "e2e-image";
+
+  /**
    * Root components exposed by this package.
    */
   roots: {

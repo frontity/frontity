@@ -28,6 +28,7 @@ const Root: React.FC<Connect<Packages>> = ({ state }) => {
 };
 
 const wpSourceErrors: WpSourceErrors = {
+  name: "e2e-wp-source-errors",
   actions: {
     wpSourceErrors: {
       init: ({ state, libraries }) => {

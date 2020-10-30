@@ -67,6 +67,7 @@ const Fill1: FC<FillProps> = ({ text }) => <div id="Fill1">{text}</div>;
 const Fill2: FC<FillProps> = ({ text }) => <div id="Fill2">{text}</div>;
 
 const slotAndFill: SlotAndFill = {
+  name: "e2e-slot-and-fill",
   state: {
     fills: {
       slotAndFill: {},

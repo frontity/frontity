@@ -5,6 +5,11 @@ import { Package } from "frontity/types";
  */
 interface Iframe extends Package {
   /**
+   * Package name.
+   */
+  name: "e2e-iframe";
+
+  /**
    * Root components exposed by this package.
    */
   roots: {

@@ -25,6 +25,7 @@ const Root: React.FC = () => (
 );
 
 const HeadPackage: Package = {
+  name: "e2e-head",
   roots: {
     head: Root,
   },

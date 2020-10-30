@@ -120,7 +120,7 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
           placeholder="parent"
           onChange={(e) =>
             actions.comments.updateFields(1, {
-              parent: e.target.value,
+              parent: parseInt(e.target.value, 10),
             })
           }
           value={state.comments.forms[1]?.fields?.parent || 0}

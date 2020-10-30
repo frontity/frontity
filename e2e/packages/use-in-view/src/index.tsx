@@ -18,6 +18,7 @@ const Root: React.FC = () => {
 };
 
 const pkg: UseInView = {
+  name: "e2e-use-in-view",
   roots: {
     useInView: Root,
   },

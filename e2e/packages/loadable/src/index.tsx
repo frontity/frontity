@@ -18,6 +18,7 @@ const Root: React.FC = () => (
 );
 
 const LoadablePackage: Package = {
+  name: "e2e-loadable",
   roots: {
     loadable: Root,
   },

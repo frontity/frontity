@@ -1,4 +1,4 @@
-import { Package, Action } from "frontity/types";
+import { Package, Action, MergePackages } from "frontity/types";
 import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
@@ -7,6 +7,10 @@ import Router from "@frontity/router/types";
  * Package to do e2e testing of Frontity's analytics library.
  */
 interface TestAnalytics extends Package {
+  /**
+   * Package name.
+   */
+  name: "e2e-analytics";
   /**
    * State exposed by this package.
    */
@@ -103,6 +107,6 @@ interface TestAnalytics extends Package {
 /**
  * All packages used internally by TestAnalytics.
  */
-export type Packages = TestAnalytics & Router & Source & Analytics;
+export type Packages = MergePackages<TestAnalytics, Router, Source, Analytics>;
 
 export default TestAnalytics;

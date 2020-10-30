@@ -116,6 +116,7 @@ const Root = connect(({ state }) => {
 });
 
 const EmotionPackage: Package = {
+  name: "e2e-emotion",
   roots: {
     emotion: Root,
   },

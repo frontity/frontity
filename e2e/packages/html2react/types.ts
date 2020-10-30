@@ -1,10 +1,14 @@
-import { Package, Action } from "frontity/types";
+import { Package, Action, MergePackages } from "frontity/types";
 import Html2React from "@frontity/html2react/types";
 
 /**
  * Package to do e2e testing of Frontity's Html2React package.
  */
 interface Html2ReactTests extends Package {
+  /**
+   * Package name.
+   */
+  name: "e2e-html2react";
   /**
    * State exposed by this package.
    */
@@ -67,6 +71,6 @@ interface Html2ReactTests extends Package {
 /**
  * All packages used internally by Html2ReactTests.
  */
-export type Packages = Html2ReactTests & Html2React;
+export type Packages = MergePackages<Html2ReactTests, Html2React>;
 
 export default Html2ReactTests;

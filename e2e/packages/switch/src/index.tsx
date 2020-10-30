@@ -65,6 +65,7 @@ const Component: React.FC = () => {
 };
 
 const SwitchPackage: Package = {
+  name: "e2e-switch",
   roots: {
     switch: Component,
   },

@@ -196,6 +196,7 @@ const Container = styled.div`
 `;
 
 const ImagePackage: Package = {
+  name: "e2e-image",
   roots: {
     image: Root,
   },

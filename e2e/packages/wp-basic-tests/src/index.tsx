@@ -37,6 +37,7 @@ const Component: React.FC = () => {
 };
 
 const wpBasicTests: WpBasicTests = {
+  name: "e2e-wp-basic-tests",
   roots: {
     wpBasicTests: connect(Component),
   },

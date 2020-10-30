@@ -1,10 +1,14 @@
-import { ServerAction, Package } from "frontity/types";
+import { ServerAction, Package, MergePackages } from "frontity/types";
 import Source from "@frontity/source/types";
 
 /**
  * Package to do e2e testing of Frontity's Preview.
  */
 interface Preview extends Package {
+  /**
+   * Package name.
+   */
+  name: "e2e-preview";
   /**
    * Root components exposed by this package.
    */
@@ -34,6 +38,6 @@ interface Preview extends Package {
 /**
  * Merge type for all known packages.
  */
-export type Packages = Source & Package;
+export type Packages = MergePackages<Source, Package>;
 
 export default Preview;

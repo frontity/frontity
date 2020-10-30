@@ -5,6 +5,10 @@ import { Package } from "frontity/types";
  */
 interface Emotion extends Package {
   /**
+   * Package name.
+   */
+  name: "e2e-emotion";
+  /**
    * Root components exposed by this package.
    */
   roots: {

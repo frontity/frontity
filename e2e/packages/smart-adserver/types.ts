@@ -1,4 +1,4 @@
-import { Package } from "frontity/types";
+import { MergePackages, Package } from "frontity/types";
 import Router from "@frontity/router/types";
 import SmartAdserver from "@frontity/smart-adserver/types";
 
@@ -6,6 +6,10 @@ import SmartAdserver from "@frontity/smart-adserver/types";
  * Package to do the e2e testing of Smart ads.
  */
 interface TestSmartAdserver extends Package {
+  /**
+   * Package name.
+   */
+  name: "e2e-smart-adserver";
   /**
    * State exposed by this package.
    */
@@ -19,7 +23,7 @@ interface TestSmartAdserver extends Package {
        *
        * Required because `<Slot>` depends on it.
        */
-      get: Function;
+      get: (...args: any) => any;
     };
   };
 
@@ -37,6 +41,6 @@ interface TestSmartAdserver extends Package {
 /**
  * All packages used internally by the TestSmartAdserver package.
  */
-export type Packages = TestSmartAdserver & Router & SmartAdserver;
+export type Packages = MergePackages<TestSmartAdserver, Router, SmartAdserver>;
 
 export default TestSmartAdserver;

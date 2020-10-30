@@ -114,6 +114,7 @@ const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
 };
 
 const tinyRouterTests: TinyRouterTests = {
+  name: "e2e-tiny-router",
   roots: {
     tinyRouterTests: connect(Root),
   },

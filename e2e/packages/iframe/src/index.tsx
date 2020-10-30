@@ -26,6 +26,7 @@ const Container = styled.div`
 `;
 
 const IframePackage: Package = {
+  name: "e2e-iframe",
   roots: {
     iframe: Component,
   },
