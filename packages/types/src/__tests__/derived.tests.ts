@@ -29,7 +29,7 @@ const package1: Package1 = {
       prop3: ({ state }) => state.namespace1.prop3,
       // Check that prop4 returns a number (and not a function).
       prop4: ({ state }) => (str) => state.namespace1.nested1.prop5(str),
-      unionDerivedProp1: ({ state }) => state.namespace1.prop1,
+      unionDerivedProp1: ({ state }) => state.namespace1.unionDerivedProp1,
       unionDerivedProp2: "A string works as well",
       nested1: {
         // Check that nested derived state functions are processed correctly.
@@ -42,5 +42,8 @@ const package1: Package1 = {
     },
   },
 };
+
+// I have to "use" the package1, otherwise eslint will complain.
+package1.name = "test";
 
 test("Types are fine!", () => {});
