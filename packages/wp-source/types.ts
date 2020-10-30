@@ -243,7 +243,7 @@ interface WpSource extends Source {
       /**
        * The url.
        */
-      url: Derived<Packages, string>;
+      url: Derived<Packages, string> | string;
     };
 
     /**
