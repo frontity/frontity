@@ -58,7 +58,7 @@ const state: WpSource["state"]["source"] = {
   // overwritten in frontity.settings.js.
   api: ({ state }) => {
     // Check if it's a free WordPress.com site.
-    if (/^https:\/\/[\w-]\.wordpress\.com/.test(state.source.url))
+    if (/^https:\/\/(\w+\.)?wordpress\.com/.test(state.source.url))
       return `https://public-api.wordpress.com/wp/v2/sites/${state.source.url}`;
 
     return (
