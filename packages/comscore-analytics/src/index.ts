@@ -4,7 +4,7 @@ import ComscoreAnalytics from "../types";
 import Root from "./components";
 
 const comscoreAnalytics: ComscoreAnalytics = {
-  name: " @frontity/comscore-analytics",
+  name: "@frontity/comscore-analytics",
   roots: {
     ...analytics.roots,
     comscoreAnalytics: Root,

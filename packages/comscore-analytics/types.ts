@@ -88,7 +88,7 @@ interface ComscoreAnalytics extends Package {
   /**
    * Package name.
    */
-  name: " @frontity/comscore-analytics";
+  name: "@frontity/comscore-analytics";
   /**
    * Root elements exposed by this package.
    */
