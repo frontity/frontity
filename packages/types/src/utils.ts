@@ -8,7 +8,7 @@ import Derived from "./derived";
 export type ResolveState<State extends Package["state"]> = {
   [P in keyof State]: State[P] extends (state: Package["state"]) => any
     ? ReturnType<State[P]>
-    : [State[P]] extends [Primitive | Derived<any, any>]
+    : [State[P]] extends [Serializable | Derived<any, any>]
     ? Exclude<State[P], Derived<any, any>>
     : ResolveState<State[P]>;
 };
@@ -55,3 +55,11 @@ export type FilterInjectedProps<T extends Package> = Omit<
  * https://developer.mozilla.org/en-US/docs/Glossary/Primitive.
  */
 type Primitive = number | string | boolean | symbol | undefined | null;
+
+/**
+ * Represents the values that can be "serializable" in javascript.
+ */
+export type Serializable =
+  | Primitive
+  | (Primitive | Record<string, Primitive>)[]
+  | Record<string, Primitive>;
