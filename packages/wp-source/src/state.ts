@@ -1,3 +1,4 @@
+import { error } from "frontity";
 import WpSource from "../types";
 import { addFinalSlash, normalize, parse } from "./libraries/route-utils";
 
@@ -81,7 +82,13 @@ const state: WpSource["state"]["source"] = {
   params: {},
   postTypes: [],
   taxonomies: [],
-  url: ({ state }) => addFinalSlash(state.frontity.url),
+  url: ({ state }) => {
+    if (!state.frontity?.url)
+      error(
+        "Please set either `state.source.url` (or at least `state.frontity.url` if you are using Embedded mode) in your frontity.settings.js file."
+      );
+    return addFinalSlash(state.frontity.url);
+  },
 };
 
 export default state;
