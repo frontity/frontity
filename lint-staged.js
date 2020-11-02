@@ -1,6 +1,5 @@
 const lintStaged = require("lint-staged");
 
-
 /**
  * Run lint-staged programatically to catch the errors because we don't want
  * eslint errors to prevent the commit. Eslint will be checked again using a
@@ -11,8 +10,7 @@ const lintStaged = require("lint-staged");
  */
 (async () => {
   try {
-    
-/**
+    /**
      * This script adds a linebreak before each TSDocs comment. Unnecessary
      * linebreaks and double linebreaks will be removed by prettier in the next
      * step.
@@ -21,16 +19,13 @@ const lintStaged = require("lint-staged");
       allowEmpty: true,
       config: {
         "*.{js,jsx,ts,tsx}": [
-          'replace-in-files --string="
-/**" --replacement="\n
-/**"',
+          'replace-in-files --regex="\\/\\*\\*\\s*\n" --replacement="\n/**\n"',
           "git add",
         ],
       },
     });
 
-    
-/**
+    /**
      * Prettier.
      */
     await lintStaged({
@@ -40,8 +35,7 @@ const lintStaged = require("lint-staged");
       },
     });
 
-    
-/**
+    /**
      * Eslint.
      */
     await lintStaged({
