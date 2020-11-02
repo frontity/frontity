@@ -126,26 +126,23 @@ describe("state.source.url & state.source.api", () => {
 
   test("Only setting the state.frontity.url", () => {
     const store = initStore({
-      state: { frontity: { url: "http://frontity.local" } },
+      state: { frontity: { url: "http://domain.com" } },
     });
-
-    expect(store.state.source.api).toBe("http://frontity.local/wp-json");
-    expect(store.state.wpSource.api).toBe("http://frontity.local/wp-json");
-    expect(store.state.source.url).toBe("http://frontity.local");
+    expect(store.state.source.api).toBe("http://domain.com/wp-json");
+    expect(store.state.wpSource.api).toBe("http://domain.com/wp-json");
+    expect(store.state.source.url).toBe("http://domain.com");
     expect(store.state.source.isWpCom).toBe(false);
     expect(store.state.wpSource.isWpCom).toBe(false);
   });
 
   test("state.frontity.url containing final slash", () => {
     const store = initStore({
-      state: { frontity: { url: "http://frontity.local/" } },
+      state: { frontity: { url: "http://domain.com/" } },
     });
-
-    expect(store.state.source.api).toBe("http://frontity.local/wp-json");
-    expect(store.state.wpSource.api).toBe("http://frontity.local/wp-json");
-
+    expect(store.state.source.api).toBe("http://domain.com/wp-json");
+    expect(store.state.wpSource.api).toBe("http://domain.com/wp-json");
     // Has the final slash
-    expect(store.state.source.url).toBe("http://frontity.local/");
+    expect(store.state.source.url).toBe("http://domain.com/");
     expect(store.state.source.isWpCom).toBe(false);
     expect(store.state.wpSource.isWpCom).toBe(false);
   });
@@ -153,42 +150,37 @@ describe("state.source.url & state.source.api", () => {
   test("The correct prefix is being added", () => {
     const store = initStore({
       state: {
-        frontity: { url: "http://frontity.local/" },
+        frontity: { url: "http://domain.com/" },
         wpSource: { prefix: "/api" },
       },
     });
-
     // Has the correct prefix
-    expect(store.state.source.api).toBe("http://frontity.local/api");
-    expect(store.state.wpSource.api).toBe("http://frontity.local/api");
-
-    expect(store.state.source.url).toBe("http://frontity.local/");
+    expect(store.state.source.api).toBe("http://domain.com/api");
+    expect(store.state.wpSource.api).toBe("http://domain.com/api");
+    expect(store.state.source.url).toBe("http://domain.com/");
     expect(store.state.source.isWpCom).toBe(false);
     expect(store.state.wpSource.isWpCom).toBe(false);
   });
 
-  test("Only setting the source.url", () => {
+  test("Only setting the state.source.url", () => {
     const store = initStore({
       state: {
-        source: { url: "http://frontity.local/" },
+        source: { url: "http://backend.com/" },
       },
     });
-
-    expect(store.state.source.url).toBe("http://frontity.local/");
-    expect(store.state.source.api).toBe("http://frontity.local/wp-json");
-    expect(store.state.wpSource.api).toBe("http://frontity.local/wp-json");
+    expect(store.state.source.url).toBe("http://backend.com/");
+    expect(store.state.source.api).toBe("http://backend.com/wp-json");
+    expect(store.state.wpSource.api).toBe("http://backend.com/wp-json");
     expect(store.state.source.isWpCom).toBe(false);
     expect(store.state.wpSource.isWpCom).toBe(false);
   });
 
   test("You can set the source.url later", () => {
     const store = initStore();
-
-    store.state.source.url = "http://frontity.local/";
-
-    expect(store.state.source.url).toBe("http://frontity.local/");
-    expect(store.state.source.api).toBe("http://frontity.local/wp-json");
-    expect(store.state.wpSource.api).toBe("http://frontity.local/wp-json");
+    store.state.source.url = "http://backend.com/";
+    expect(store.state.source.url).toBe("http://backend.com/");
+    expect(store.state.source.api).toBe("http://backend.com/wp-json");
+    expect(store.state.wpSource.api).toBe("http://backend.com/wp-json");
     expect(store.state.source.isWpCom).toBe(false);
     expect(store.state.wpSource.isWpCom).toBe(false);
   });
