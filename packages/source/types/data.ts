@@ -22,25 +22,30 @@ export interface Data {
    * Link this data belongs to.
    */
   link: string;
+
   /**
    * Pathname part of the link, without the page part if the links points to an
    * archive page (like `/category/nature/page/2/`).
    */
   route: string;
+
   /**
-   * Page number.
+   * Page number. It is always present, even for posts.
    *
    * @defaultValue 1
    */
   page: number;
+
   /**
    * The query part of the link, in object format.
    */
   query: Record<string, any>;
+
   /**
    * Boolean indicating if this link is being fetched.
    */
   isFetching: boolean;
+
   /**
    * Boolean indicating if this link is ready and entities related can be
    * consumed.
@@ -72,30 +77,33 @@ export interface ErrorData extends Data {
    * Property specifying that the link is an error.
    */
   isError: true;
+
   /**
    * HTTP error code.
    *
    * @example 404
    */
   errorStatus: number;
+
   /**
    * HTTP error message.
    *
    * @example "Not Found"
    */
   errorStatusText: string;
+
   /**
    * Link is ready when data is an error.
    */
   isReady: true;
+
   /**
    * Link is not being fetched when data is an error.
    */
   isFetching: false;
 
   // This is ugly but it seems like the best way.
-  // Also types are erased at runtime so it doesnt add to bundle size
-
+  // Also types are erased at runtime so it doesnt add to bundle size.
   /* eslint-disable jsdoc/require-jsdoc */
   is400?: boolean;
   is401?: boolean;
@@ -157,30 +165,35 @@ export interface DataItem {
 export type EntityData = DataItem;
 
 /**
- * Data for and archive, like the homepage,
- * categories or tags, authors, date archives, etc.
+ * Data for and archive, like the homepage, categories or tags, authors, date
+ * archives, etc.
  */
 export interface ArchiveData extends Data {
   /**
    * Property indicatig that the link is an archive.
    */
   isArchive: true;
+
   /**
    * List of items contained in this archive page.
    */
   items: DataItem[];
+
   /**
    * The link to the next page if it exists.
    */
   next?: string;
+
   /**
    * The link to the previous page if it exists.
    */
   previous?: string;
+
   /**
    * Total number of post entities in the whole archive.
    */
   total?: number;
+
   /**
    * Total number of pages in the whole archive.
    */
@@ -195,6 +208,7 @@ export interface SearchData extends Data {
    * Identify a search in an archive.
    */
   isSearch: true;
+
   /**
    * Search query in string format.
    */
@@ -211,14 +225,17 @@ export interface TermData extends ArchiveData {
    * @deprecated Use `isTerm` instead.
    */
   isTaxonomy?: true;
+
   /**
    * Identify a term page.
    */
   isTerm: true;
+
   /**
    * Slug of the taxonomy this term belongs to.
    */
   taxonomy: string;
+
   /**
    * Term ID.
    */
@@ -240,6 +257,7 @@ export interface CategoryData extends TermData {
    * Slug of the taxonomy this term belongs to.
    */
   taxonomy: "category";
+
   /**
    * Identify a category page.
    */
@@ -254,6 +272,7 @@ export interface TagData extends TermData {
    * Slug of the taxonomy this term belongs to.
    */
   taxonomy: "tag";
+
   /**
    * Identify a tag page.
    */
@@ -268,6 +287,7 @@ export interface AuthorData extends ArchiveData {
    * Identify an author page.
    */
   isAuthor: true;
+
   /**
    * Author ID.
    */
@@ -282,6 +302,7 @@ export interface PostTypeArchiveData extends ArchiveData {
    * Identify a post type archive page.
    */
   isPostTypeArchive: true;
+
   /**
    * Post type slug.
    */
@@ -306,14 +327,17 @@ export interface DateData extends ArchiveData {
    * Identify a date archive page.
    */
   isDate: true;
+
   /**
    * The year number.
    */
   year: number;
+
   /**
    * The month number (from 1 to 12).
    */
   month?: number;
+
   /**
    * The day number.
    */
@@ -332,10 +356,12 @@ export interface PostTypeData extends Data {
    * Identify a post type page.
    */
   isPostType: true;
+
   /**
    * Post type slug.
    */
   type: string;
+
   /**
    * Entity ID.
    */
@@ -350,6 +376,7 @@ export interface PostData extends PostTypeData {
    * Post type slug.
    */
   type: "post";
+
   /**
    * Identify a post.
    */
@@ -364,6 +391,7 @@ export interface PageData extends PostTypeData {
    * Post type slug.
    */
   type: "page";
+
   /**
    * Identify a page.
    */
@@ -378,6 +406,7 @@ export interface AttachmentData extends PostTypeData {
    * Post type slug.
    */
   type: "attachment";
+
   /**
    * Identify an attachment.
    */
