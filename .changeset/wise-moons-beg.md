@@ -1,4 +1,5 @@
 ---
+"@frontity/wp-source": patch
 "@frontity/source": patch
 ---
 

@@ -130,8 +130,10 @@ describe("state.source.url & state.source.api", () => {
     });
 
     expect(store.state.source.api).toBe("http://frontity.local/wp-json");
+    expect(store.state.wpSource.api).toBe("http://frontity.local/wp-json");
     expect(store.state.source.url).toBe("http://frontity.local");
     expect(store.state.source.isWpCom).toBe(false);
+    expect(store.state.wpSource.isWpCom).toBe(false);
   });
 
   test("state.frontity.url containing final slash", () => {
@@ -140,10 +142,12 @@ describe("state.source.url & state.source.api", () => {
     });
 
     expect(store.state.source.api).toBe("http://frontity.local/wp-json");
+    expect(store.state.wpSource.api).toBe("http://frontity.local/wp-json");
 
     // Has the final slash
     expect(store.state.source.url).toBe("http://frontity.local/");
     expect(store.state.source.isWpCom).toBe(false);
+    expect(store.state.wpSource.isWpCom).toBe(false);
   });
 
   test("The correct prefix is being added", () => {
@@ -156,9 +160,11 @@ describe("state.source.url & state.source.api", () => {
 
     // Has the correct prefix
     expect(store.state.source.api).toBe("http://frontity.local/api");
+    expect(store.state.wpSource.api).toBe("http://frontity.local/api");
 
     expect(store.state.source.url).toBe("http://frontity.local/");
     expect(store.state.source.isWpCom).toBe(false);
+    expect(store.state.wpSource.isWpCom).toBe(false);
   });
 
   test("Only setting the source.url", () => {
@@ -170,7 +176,9 @@ describe("state.source.url & state.source.api", () => {
 
     expect(store.state.source.url).toBe("http://frontity.local/");
     expect(store.state.source.api).toBe("http://frontity.local/wp-json");
+    expect(store.state.wpSource.api).toBe("http://frontity.local/wp-json");
     expect(store.state.source.isWpCom).toBe(false);
+    expect(store.state.wpSource.isWpCom).toBe(false);
   });
 
   test("You can set the source.url later", () => {
@@ -180,6 +188,8 @@ describe("state.source.url & state.source.api", () => {
 
     expect(store.state.source.url).toBe("http://frontity.local/");
     expect(store.state.source.api).toBe("http://frontity.local/wp-json");
+    expect(store.state.wpSource.api).toBe("http://frontity.local/wp-json");
     expect(store.state.source.isWpCom).toBe(false);
+    expect(store.state.wpSource.isWpCom).toBe(false);
   });
 });

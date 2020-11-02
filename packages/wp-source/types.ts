@@ -1,4 +1,4 @@
-import { AsyncAction, Action, State, Derived, Package } from "frontity/types";
+import { Action, State, Derived, Package } from "frontity/types";
 import Source, { EntityData } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
@@ -6,7 +6,7 @@ import { Api } from "./src/libraries";
  * A Frontity source package for the REST API of self-hosted WordPress and
  * WordPress.com sites.
  */
-interface WpSource extends Source {
+interface WpSource extends Source<Packages> {
   /**
    * The name of this package.
    */
@@ -24,6 +24,8 @@ interface WpSource extends Source {
     source: Source<Packages>["state"]["source"] & {
       /**
        * True when the REST API belongs to a WordPress.com site.
+       *
+       * @deprecated Use `state.wpSource.isWpCom` instead.
        */
       isWpCom: Derived<Packages, boolean>;
 
@@ -241,15 +243,37 @@ interface WpSource extends Source {
       }[];
 
       /**
-       * The url.
+       * The URL of the REST API.
+       *
+       * It can be from a self-hosted WordPress or from a WordPress.com site.
+       *
+       * @example "https://your-site.com/wp-json"
+       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
+       *
+       * @deprecated Use `state.wpSource.api` instead.
        */
-      url: Derived<Packages, string> | string;
+      api: Derived<Package, string> | string;
     };
 
     /**
      * The WP Source namespace.
      */
     wpSource: {
+      /**
+       * The URL of the REST API.
+       *
+       * It can be from a self-hosted WordPress or from a WordPress.com site.
+       *
+       * @example "https://your-site.com/wp-json"
+       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
+       */
+      api: Derived<Packages, string>;
+
+      /**
+       * True when the REST API belongs to a WordPress.com site.
+       */
+      isWpCom: Derived<Packages, boolean>;
+
       /**
        * The prefix of the API.
        */
@@ -264,42 +288,7 @@ interface WpSource extends Source {
     /**
      * Source namespace.
      */
-    source: {
-      /**
-       * An action that fetches all the information and entities related to a
-       * link.
-       *
-       * It populates the state with both:
-       * - An entry in `state.source.data` with information about that link.
-       * - Normalized entities in relevant part of the state, like
-       *   `state.source.post`, `state.source.category` or `state.source.author`
-       *   and so on.
-       *
-       * @param link - The link that should be fetched. It can be a URL or a
-       * custom link created to fetch additional entities from the REST API.
-       * - URLs start with `/`.
-       * - Non URLs start with `@`.
-       * @example `actions.source.fetch("/some-post");`
-       * @example `actions.source.fetch("@comments/135");`
-       *
-       * @param options - Optional options.
-       *
-       * @returns A promise that resolves when the data fetching has finished.
-       */
-      fetch:
-        | AsyncAction<Packages, string>
-        | AsyncAction<
-            Packages,
-            string,
-            {
-              /**
-               * Whether the fetch should be done again if data for that link
-               * already exists.
-               */
-              force?: boolean;
-            }
-          >;
-
+    source: Source<Packages>["actions"]["source"] & {
       /**
        * An internal action that bootstraps the initialization.
        *
