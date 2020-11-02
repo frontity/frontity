@@ -9,17 +9,12 @@ import cat1 from "./mocks/category/cat-1.json";
 import cat1Posts from "./mocks/category/cat-1-posts.json";
 import cat1PostsPage2 from "./mocks/category/cat-1-posts-page-2.json";
 import cat1PostsCpt from "./mocks/category/cat-1-posts-cpt.json";
-import { Package } from "frontity/types";
 
-let store: InitializedStore<WpSource & Package>;
+let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore<WpSource>(clone(wpSource()));
-
-  // We need to set it because state.source.url derives state from state.frontity.url
-  store.state.frontity = { url: "http://frontity.local" };
-
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });

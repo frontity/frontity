@@ -21,7 +21,7 @@ Array [
 
 exports[`post archive fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -246,13 +246,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`post archive overwrites the data when fetched with { force: true } 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -553,13 +553,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`post archive works with first page 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -777,13 +777,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`post archive works with pagination 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "4": Object {
       "author": 1,
@@ -952,13 +952,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`post archive works with query params 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -1178,13 +1178,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`post archive works with query params and pagination 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "4": Object {
       "author": 1,
@@ -1355,13 +1355,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`post archive works with search 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -1582,13 +1582,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`post archive works with search and pagination 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "4": Object {
       "author": 1,
@@ -1760,6 +1760,6 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;

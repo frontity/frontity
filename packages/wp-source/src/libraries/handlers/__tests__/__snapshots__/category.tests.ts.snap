@@ -2,7 +2,7 @@
 
 exports[`category Unknown URL should return a 404 even if it's substring matches a path 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -195,13 +195,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category doesn't exist in source.category 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -413,13 +413,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category doesn't return 404 if the first page is empty (no headers) 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -468,13 +468,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category doesn't return 404 if the first page is empty 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -523,7 +523,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
@@ -557,7 +557,7 @@ Array [
 
 exports[`category fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -776,13 +776,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category is requested with any query param 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -1002,13 +1002,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category returns 404 if category doesn't exist in WP 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -1040,13 +1040,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category returns 404 if the page fetched is out of range 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -1093,13 +1093,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category was populated but not accessed 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "4": Object {
       "author": 1,
@@ -1268,13 +1268,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category with a search 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -1496,13 +1496,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`category with a search with pagination 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "4": Object {
       "author": 1,
@@ -1676,6 +1676,6 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "http://frontity.local",
+  "url": "https://test.frontity.org",
 }
 `;
