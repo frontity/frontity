@@ -59,9 +59,11 @@ const state: WpSource["state"]["source"] = {
   api: ({ state }) => {
     // Check if it's a free WordPress.com site.
     if (/^https:\/\/(\w+\.)?wordpress\.com/.test(state.source.url))
-      return `https://public-api.wordpress.com/wp/v2/sites/${state.source.url}`;
+      return addFinalSlash(
+        `https://public-api.wordpress.com/wp/v2/sites/${state.source.url}`
+      );
 
-    return (
+    return addFinalSlash(
       addFinalSlash(state.source.url) + state.wpSource.prefix.replace(/^\//, "")
     );
   },
@@ -79,7 +81,7 @@ const state: WpSource["state"]["source"] = {
   params: {},
   postTypes: [],
   taxonomies: [],
-  url: ({ state }) => state.frontity.url,
+  url: ({ state }) => addFinalSlash(state.frontity.url),
 };
 
 export default state;
