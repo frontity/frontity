@@ -25,7 +25,6 @@ describe("Preview plugin", () => {
     cy.visit("http://localhost:3001?frontity_name=redirections");
 
     // Go to the "redirected" page
-
     cy.get("#open-post").click();
 
     cy.location("href").should(
@@ -38,9 +37,9 @@ describe("Preview plugin", () => {
   it("The back and forward button should work fine when navigating ", () => {
     cy.visit("http://localhost:3001?frontity_name=redirections");
 
+    // Go to the "redirected" page
     cy.get("#open-post").click();
 
-    // Go to the "redirected" page
     cy.location("href").should(
       "eq",
       "http://localhost:3001/hello-world-redirected/"
