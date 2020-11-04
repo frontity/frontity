@@ -203,7 +203,7 @@ export interface ArchiveData extends Data {
 /**
  * Data for a search in an archive.
  */
-export interface SearchData extends Data {
+export interface SearchData extends ArchiveData {
   /**
    * Identify a search in an archive.
    */
