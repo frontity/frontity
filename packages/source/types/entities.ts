@@ -303,7 +303,6 @@ export interface AttachmentEntity extends Entity {
    * List of the missing image sizes of the attachment.
    */
   missing_image_sizes?: string[];
-  [k: string]: unknown;
 }
 
 /**
@@ -338,7 +337,6 @@ export interface TypeEntity extends Entity {
    * Taxonomies associated with post type.
    */
   taxonomies: string[];
-  [k: string]: unknown;
 }
 
 /**
@@ -373,7 +371,6 @@ export interface TaxonomyEntity extends Entity {
    * Types associated with the taxonomy.
    */
   types: string[];
-  [k: string]: unknown;
 }
 
 /**
@@ -428,7 +425,6 @@ export interface TermEntity extends Entity {
    * Meta fields.
    */
   meta?: Record<string, unknown>;
-  [k: string]: unknown;
 }
 
 /**
@@ -495,7 +491,6 @@ export interface AuthorEntity extends Entity {
    * Meta fields.
    */
   meta?: Record<string, unknown>;
-  [k: string]: unknown;
 }
 
 /**
@@ -576,5 +571,4 @@ export interface CommentEntity extends Entity {
    * Meta fields.
    */
   meta?: Record<string, unknown>;
-  [k: string]: unknown;
 }
