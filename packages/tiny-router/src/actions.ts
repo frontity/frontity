@@ -48,7 +48,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   if (!options.state) options.state = {};
 
   const data = state.source.get(link) as RedirectionData;
-  if (data.isRedirection) {
+  if (data?.isRedirection) {
     link = data.location;
   }
 
@@ -80,7 +80,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 }) => {
   observe(() => {
     const data = state.source.get(state.router.link) as RedirectionData;
-    if (data.isRedirection && state.frontity.platform === "client") {
+    if (data?.isRedirection && state.frontity.platform === "client") {
       // TODO: what about the query string?
       actions.router.set(data.location, { method: "replace" });
     }
@@ -131,7 +131,7 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
       const data = state.source.get(state.router.link) as RedirectionData &
         ErrorData;
 
-      if (data.isRedirection && state.router.redirections === "404") {
+      if (data?.isRedirection && state.router.redirections === "404") {
         // TODO: Handle the Frontity Options
         ctx.redirect(
           data.location + "?" + `frontity_name=` + state.frontity.options.name
