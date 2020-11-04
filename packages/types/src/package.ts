@@ -169,61 +169,6 @@ export interface Package {
 export default Package;
 
 /**
- * An individual Frontity action.
- */
-// NOTE: This interface looks like was intended to be used in the `Actions`
-// interface defined below, but it creates a circular reference and breaks it,
-// so it's currently unused.
-//
-// TODO: either fix these types or remove this `Action` definition.
-//
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface Action {
-  /**
-   * Declaration of an action without additional params.
-   *
-   * @example
-   * ```typescript
-   * const someAction: ({ state, actions, libraries }) => {
-   *  // Action content.
-   * }
-   *
-   * // Calling the action:
-   * actions.myPackage.someAction();
-   * ```
-   *
-   * @param store - An object containing `state`, `actions` and `libraries`.
-   *
-   * @returns Void or Promise<void> if it is an async action.
-   */
-  (store: Pick<Package, "state" | "actions" | "libraries">): void | Promise<
-    void
-  >;
-
-  /**
-   * Declaration of an action with additional params.
-   *
-   * @example
-   * ```typescript
-   * const someAction: ({ state, actions, libraries }) => (...args) => {
-   *  // Action content.
-   * }
-   *
-   * // Calling the action:
-   * actions.myPackage.someAction("arg 1", "arg 2", ...);
-   * ```
-   *
-   * @param store - An object containing `state`, `actions` and `libraries`.
-   * @param args - Any number of arguments.
-   *
-   * @returns Void or Promise<void> if it is an async action.
-   */
-  (store: Pick<Package, "state" | "actions" | "libraries">): (
-    ...args: any
-  ) => void | Promise<void>;
-}
-
-/**
  * An object containing Frontity actions, or other objects containing actions.
  */
 interface Actions {
