@@ -1,7 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
-import { TermData } from "@frontity/source/types/data";
+import { TermData, SearchData } from "@frontity/source/types/data";
 
 /**
  * The parameters for {@link taxonomyHandler}.
@@ -190,7 +190,9 @@ const taxonomyHandler = ({
     ...(query.s && { isSearch: true, searchQuery: query.s }),
   };
 
-  Object.assign(currentPageData, newPageData) as TermData;
+  Object.assign(currentPageData, newPageData) as
+    | TermData
+    | (TermData & SearchData);
 };
 
 export default taxonomyHandler;
