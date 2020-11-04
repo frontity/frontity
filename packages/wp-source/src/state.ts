@@ -1,3 +1,4 @@
+import { warn } from "frontity";
 import WpSource from "../types";
 import { normalize, parse } from "./libraries/route-utils";
 import {
@@ -26,6 +27,13 @@ const state: WpSource["state"]["source"] = {
     };
   },
   entity: ({ state }) => (link) => {
+    warn(
+      "`state.source.entity(link)` is deprecated. Please, use the props " +
+        "included in the data returned by `state.source.get(link)` to access " +
+        "entities directly. This function will be removed in a future " +
+        "version of `@frontity/wp-source`."
+    );
+
     // Get the data object pointed by `link`.
     const data = state.source.get(link);
 
