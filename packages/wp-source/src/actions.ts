@@ -44,13 +44,12 @@ const actions: WpSource["actions"]["source"] = {
     } else {
       // Reassign `route`, `link`, `query`, `page` to fix custom handlers that
       // do not add them.
-      data = source.data[link] = {
-        ...data,
+      Object.assign(data, {
         route: linkParams.route,
         link,
         query,
         page,
-      };
+      });
       // Stop fetching if data is ready or being fetched and `{ force: true }`
       // is not used.
       if (!force && (data.isReady || data.isFetching)) return;
