@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { Package, AsyncAction, Derived } from "frontity/types";
 import { Data } from "./types/data";
 import {
@@ -96,6 +94,11 @@ interface Source<T = null> extends Package {
      */
     source: {
       /**
+       * The url of the backend.
+       */
+      url: Derived<T extends null ? Source : T, string> | string;
+
+      /**
        * Return a data object from `state.source.data`. People should use this
        * derived state instead of accessing `state.source.data` directly
        * because it addresses some problems, like missing trailing slahes.
@@ -112,8 +115,8 @@ interface Source<T = null> extends Package {
        * Return the entity pointed by the given link.
        *
        * If the entity is not found (because it has not been populated in the
-       * state yet or because the link does not point to an entity, e.g. a date
-       * archive or a 404 page) this derived prop returns `null`.
+       * state yet or because the link does not point to an entity, for example
+       * a date archive or a 404 page) this derived prop returns `null`.
        *
        * @example state.source.entity("/2020/some-post");
        *
@@ -126,15 +129,12 @@ interface Source<T = null> extends Package {
       >;
 
       /**
-       * The URL of the REST API.
+       * The map of data objects, indexed by link.
        *
-       * It can be from a self-hosted WordPress or from a WordPress.com site.
-       *
-       * @example "https://your-site.com/wp-json"
-       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
+       * These data objects contain information about each resource that the
+       * Frontity app fetched from the backend API using the
+       * `actions.source.fetch()` action.
        */
-      api: string;
-
       data: Record<string, Data>;
 
       /**
@@ -205,14 +205,26 @@ interface Source<T = null> extends Package {
      */
     source: {
       /**
-       * Fetch a new set of entities from the source API, corresponding to all
-       * the data needed for that link.
+       * An action that fetches all the information and entities related to a
+       * link.
        *
-       * @param link - The link.
+       * It populates the state with both:
+       * - An entry in `state.source.data` with information about that link.
+       * - Normalized entities in relevant part of the state, like
+       *   `state.source.post`, `state.source.category` or `state.source.author`
+       *   and so on.
+       *
+       * @param link - The link that should be fetched. It can be a URL or a
+       * custom link created to fetch additional entities from the REST API.
+       * - URLs start with `/`.
+       * - Non URLs start with `@`.
+       * @example `actions.source.fetch("/some-post");`
+       * @example `actions.source.fetch("@comments/135");`
+       *
        * @param options - The options for this fetch. Defined by {@link
        * FetchOptions}.
        *
-       * @returns A promise that resolves once the fetch has finished.
+       * @returns A promise that resolves when the data fetching has finished.
        */
       fetch:
         | AsyncAction<T extends null ? Source : T, string>

@@ -2,7 +2,7 @@
 
 exports[`author doesn't exist in source.author 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -177,12 +177,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`author doesn't return 404 if the first page is empty (no headers) 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -227,12 +228,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`author doesn't return 404 if the first page is empty 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -277,6 +279,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
@@ -310,7 +313,7 @@ Array [
 
 exports[`author fetchs from a different endpoint with extra params 2`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -492,12 +495,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`author is requested with a search param 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -681,12 +685,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`author is requested with any query param 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -868,12 +873,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`author overwrites the data when fetched with { force: true } 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "55": Object {
       "_links": Object {
@@ -4939,12 +4945,13 @@ Object {
       "slug": "post",
     },
   },
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`author returns 404 if author doesn't exist in WP 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {},
   "author": Object {},
   "authorBase": "",
@@ -4976,12 +4983,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`author returns 404 if the page fetched is out of range 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {},
   "author": Object {
     "1": Object {
@@ -5025,12 +5033,13 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
 exports[`author was populated but not accessed 1`] = `
 Object {
-  "api": "https://test.frontity.org/wp-json",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "4": Object {
       "author": 1,
@@ -5168,5 +5177,6 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;

@@ -1,7 +1,7 @@
 import { Package } from "frontity/types";
 import Router from "@frontity/router/types";
 import Html2React from "@frontity/html2react/types";
-import Source from "@frontity/source/types";
+import WpSource from "@frontity/wp-source/types";
 
 /**
  * Type for objects that contain the `yoast_head` field.
@@ -105,4 +105,4 @@ export default YoastPackage;
 /**
  * Yoast package and its dependencies.
  */
-export type Packages = YoastPackage & Router & Source & Html2React;
+export type Packages = YoastPackage & Router & WpSource & Html2React;
