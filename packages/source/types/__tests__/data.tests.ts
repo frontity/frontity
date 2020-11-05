@@ -1,8 +1,8 @@
-import { expectType } from "frontity/types/helpers";
 import {
   Data,
   ErrorData,
   TaxonomyData,
+  TermData,
   CategoryData,
   TagData,
   AuthorData,
@@ -13,32 +13,37 @@ import {
   PostData,
   PageData,
   AttachmentData,
-  TaxonomyWithSearchData,
-  CategoryWithSearchData,
-  TagWithSearchData,
-  AuthorWithSearchData,
-  PostTypeArchiveWithSearchData,
-  PostArchiveWithSearchData,
-  DateWithSearchData,
+  SearchData,
+  HomeData,
 } from "../data";
+
+import { expectType } from "frontity/types/helpers";
 
 const data: Record<string, Data> = {};
 
-data.onlyStatus = {
+const onlyStatus: Data = {
   isFetching: true,
   isReady: false,
+  link: "",
+  route: "",
+  page: 1,
+  query: {},
 };
 
-data.notFound = {
+const notFound: ErrorData = {
   is404: true,
   isError: true,
   errorStatus: 404,
   errorStatusText: "Page Not Found",
   isReady: true,
   isFetching: false,
+  link: "/this-page-does-not-exist",
+  route: "/this-page-does-not-exist",
+  page: 1,
+  query: {},
 };
 
-data.taxonomy = {
+const term: TermData = {
   isArchive: true,
   items: [
     {
@@ -58,12 +63,15 @@ data.taxonomy = {
   totalPages: 13,
   taxonomy: "custom-taxonomy",
   id: 12,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   page: 1,
-  path: "/",
+  route: "/custom-taxonomy/nature/",
+  link: "/custom-taxonomy/nature/",
+  query: {},
 };
 
-data.taxonomyWithSearchData = {
+const termWithSearchData: TermData & SearchData = {
   isArchive: true,
   items: [
     {
@@ -83,17 +91,20 @@ data.taxonomyWithSearchData = {
   totalPages: 13,
   taxonomy: "custom-taxonomy",
   id: 12,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   page: 1,
-  path: "/",
-  link: "/url",
+  route: "/custom-taxonomy/nature/",
+  link: "/custom-taxonomy/nature/?s=nature",
+  query: { s: "nature" },
   isSearch: true,
   searchQuery: "nature",
 };
 
-data.category = {
+const category: CategoryData = {
   isArchive: true,
-  isTaxonomy: true,
+  isTaxonomy: true, // This value is deprecated.
+  isTerm: true,
   isCategory: true,
   taxonomy: "category",
   id: 7,
@@ -102,13 +113,16 @@ data.category = {
   isFetching: false,
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/category/nature/",
+  link: "/category/nature/",
+  query: {},
 };
 
-data.categoryWithSearchData = {
-  link: "/url",
-  page: 1,
+const categoryWithSearchData: CategoryData & SearchData = {
   isArchive: true,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   isCategory: true,
   taxonomy: "category",
   id: 7,
@@ -117,13 +131,18 @@ data.categoryWithSearchData = {
   isFetching: false,
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/category/nature/",
+  link: "/category/nature/?s=gullfoss",
+  query: { s: "gullfoss" },
   isSearch: true,
-  searchQuery: "nature",
+  searchQuery: "gullfoss",
 };
 
-data.tag = {
+const tag: TagData = {
   isArchive: true,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   isTag: true,
   taxonomy: "tag",
   id: 7,
@@ -132,13 +151,16 @@ data.tag = {
   isFetching: false,
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/tag/japan/",
+  link: "/tag/japan/",
+  query: {},
 };
 
-data.tagWithSearchData = {
-  link: "/url",
-  page: 1,
+const tagWithSearchData: TagData & SearchData = {
   isArchive: true,
-  isTaxonomy: true,
+  isTaxonomy: true, // This values is deprecated.
+  isTerm: true,
   isTag: true,
   taxonomy: "tag",
   id: 7,
@@ -146,12 +168,16 @@ data.tagWithSearchData = {
   isReady: true,
   isFetching: false,
   isSearch: true,
-  searchQuery: "nature",
+  searchQuery: "shinjuku",
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/tag/japan/",
+  link: "/tag/japan/?s=shinjuku",
+  query: { s: "shinjuku" },
 };
 
-data.author = {
+const author: AuthorData = {
   isArchive: true,
   isAuthor: true,
   id: 7,
@@ -160,11 +186,13 @@ data.author = {
   isFetching: false,
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/author/mario/",
+  link: "/author/mario/",
+  query: {},
 };
 
-data.authorWithSearchData = {
-  link: "/url",
-  page: 1,
+const authorWithSearchData: AuthorData & SearchData = {
   isArchive: true,
   isAuthor: true,
   id: 7,
@@ -175,9 +203,13 @@ data.authorWithSearchData = {
   searchQuery: "nature",
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/author/mario/",
+  link: "/author/mario/?s=nature",
+  query: { s: "nature" },
 };
 
-data.postTypeArchive = {
+const postTypeArchive: PostTypeArchiveData = {
   isArchive: true,
   isPostTypeArchive: true,
   type: "post",
@@ -186,11 +218,13 @@ data.postTypeArchive = {
   isFetching: false,
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/movies/",
+  link: "/movies/",
+  query: {},
 };
 
-data.postTypeArchiveWithSearchData = {
-  link: "/url",
-  page: 1,
+const postTypeArchiveWithSearchData: PostTypeArchiveData & SearchData = {
   isArchive: true,
   isPostTypeArchive: true,
   type: "post",
@@ -201,9 +235,13 @@ data.postTypeArchiveWithSearchData = {
   searchQuery: "nature",
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/movies/",
+  link: "/movies/?s=nature",
+  query: { s: "nature" },
 };
 
-data.postArchive = {
+const postArchive: PostArchiveData & HomeData = {
   isArchive: true,
   isPostTypeArchive: true,
   isPostArchive: true,
@@ -214,11 +252,13 @@ data.postArchive = {
   isFetching: false,
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/",
+  link: "/",
+  query: {},
 };
 
-data.postArchiveWithSearchData = {
-  link: "/url",
-  page: 1,
+const postArchiveWithSearchData: PostArchiveData & HomeData & SearchData = {
   isArchive: true,
   isPostTypeArchive: true,
   isPostArchive: true,
@@ -231,24 +271,30 @@ data.postArchiveWithSearchData = {
   searchQuery: "nature",
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/",
+  link: "/?s=nature",
+  query: { s: "nature" },
 };
 
-data.dateArchive = {
+const dateArchive: DateData = {
   isArchive: true,
   isDate: true,
   year: 2016,
-  month: 0,
-  day: 31,
+  month: 3,
+  day: 24,
   items: [],
   isReady: true,
   isFetching: false,
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/2016/03/24/",
+  link: "/2016/03/24/",
+  query: {},
 };
 
-data.dateArchiveWithSearchData = {
-  link: "/url",
-  page: 1,
+const dateArchiveWithSearchData: DateData & SearchData = {
   isArchive: true,
   isDate: true,
   year: 2016,
@@ -261,64 +307,91 @@ data.dateArchiveWithSearchData = {
   searchQuery: "nature",
   total: 0,
   totalPages: 0,
+  page: 1,
+  route: "/2016/03/24/",
+  link: "/2016/03/24/?s=nature",
+  query: { s: "nature" },
 };
 
-data.postType = {
+const postType: PostTypeData = {
   isPostType: true,
-  type: "type",
+  type: "movie",
   id: 60,
   isReady: true,
   isFetching: false,
+  link: "/movie/the-terminator/",
+  route: "/movie/the-terminator/",
+  page: 1,
+  query: {},
 };
 
-data.post = {
+const post: PostData = {
   isPostType: true,
   isPost: true,
   type: "post",
   id: 60,
   isReady: true,
   isFetching: false,
+  link: "/the-beauties-of-gullfoss/",
+  route: "/the-beauties-of-gullfoss/",
+  page: 1,
+  query: {},
 };
 
-data.page = {
+const page: PageData = {
   isPostType: true,
   isPage: true,
   type: "page",
   id: 11,
   isReady: true,
   isFetching: false,
+  link: "/about-us/",
+  route: "/about-us/",
+  page: 1,
+  query: {},
 };
 
-data.attachment = {
+const attachment: AttachmentData = {
   isPostType: true,
   isAttachment: true,
   type: "attachment",
   id: 123,
   isReady: true,
   isFetching: false,
+  link: "/the-beauties-of-gullfoss/gullfoss/",
+  route: "/the-beauties-of-gullfoss/gullfoss/",
+  page: 1,
+  query: {},
 };
 
-expectType<Data>(data.onlyStatus);
-expectType<ErrorData>(data.notFound);
-expectType<TaxonomyData>(data.taxonomy);
-expectType<CategoryData>(data.category);
-expectType<TagData>(data.tag);
-expectType<AuthorData>(data.author);
-expectType<PostTypeArchiveData>(data.postTypeArchive);
-expectType<PostArchiveData>(data.postArchive);
-expectType<DateData>(data.dateArchive);
-expectType<PostTypeData>(data.postType);
-expectType<PostData>(data.post);
-expectType<PageData>(data.page);
-expectType<AttachmentData>(data.attachment);
+// As long as it extends `Data`, any object can be added to `data`.
+data.onlyStatus = onlyStatus;
+data.notFound = notFound;
+data.term = term;
+data.termWithSearchData = termWithSearchData;
+data.category = category;
+data.categoryWithSearchData = categoryWithSearchData;
+data.tag = tag;
+data.tagWithSearchData = tagWithSearchData;
+data.author = author;
+data.authorWithSearchData = authorWithSearchData;
+data.postTypeArchive = postTypeArchive;
+data.postTypeArchiveWithSearchData = postTypeArchiveWithSearchData;
+data.postArchive = postArchive;
+data.postArchiveWithSearchData = postArchiveWithSearchData;
+data.dateArchive = dateArchive;
+data.dateArchiveWithSearchData = dateArchiveWithSearchData;
+data.postType = postType;
+data.post = post;
+data.page = page;
+data.attachment = attachment;
 
-expectType<TaxonomyWithSearchData>(data.taxonomyWithSearchData);
-expectType<CategoryWithSearchData>(data.categoryWithSearchData);
-expectType<TagWithSearchData>(data.tagWithSearchData);
-expectType<AuthorWithSearchData>(data.authorWithSearchData);
-expectType<PostTypeArchiveWithSearchData>(data.postTypeArchiveWithSearchData);
-expectType<CategoryWithSearchData>(data.categoryWithSearchData);
-expectType<PostArchiveWithSearchData>(data.postArchiveWithSearchData);
-expectType<DateWithSearchData>(data.dateArchiveWithSearchData);
+// Check that TermData and TaxonomyData are equivalent.
+const taxonomy: TaxonomyData = term;
+expectType<true>(taxonomy.isTaxonomy);
+expectType<true>(taxonomy.isTerm);
 
-test("Types are fine!", () => {});
+// eslint-disable-next-line jest/expect-expect
+test("Types are fine!", () => {
+  // Do nothing here.
+});

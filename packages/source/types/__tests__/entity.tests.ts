@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  TaxonomyType,
-  TaxonomyEntity,
-  PostType,
   PostEntity,
   AuthorEntity,
   AttachmentEntity,
+  TermEntity,
+  TypeEntity,
+  TaxonomyEntity,
 } from "../entities";
 
 const author: AuthorEntity = {
@@ -20,7 +20,7 @@ const author: AuthorEntity = {
     "48": "https://secure.gravatar.com/avatar/?s=48&d=mm&r=g",
     "96": "https://secure.gravatar.com/avatar/?s=96&d=mm&r=g",
   },
-  meta: [],
+  meta: {},
   _links: {
     self: [
       {
@@ -35,7 +35,7 @@ const author: AuthorEntity = {
   },
 };
 
-const taxonomy: TaxonomyEntity = {
+const category: TermEntity = {
   id: 7,
   count: 10,
   description: "",
@@ -44,7 +44,7 @@ const taxonomy: TaxonomyEntity = {
   slug: "nature",
   taxonomy: "category",
   parent: 0,
-  meta: [],
+  meta: {},
   _links: {
     self: [
       {
@@ -108,7 +108,7 @@ const post: PostEntity = {
   ping_status: "open",
   sticky: false,
   format: "standard",
-  meta: [],
+  meta: {},
   categories: [66],
   tags: [],
   custom_fields: [],
@@ -191,7 +191,7 @@ const attachment: AttachmentEntity = {
   modified: "2018-11-23T14:27:38",
   modified_gmt: "2018-11-23T12:27:38",
   slug: "web3_baby_boy_smile_hat_shutterstock_476144548",
-  status: "inherit",
+  status: "publish",
   type: "attachment",
   link:
     "https://test.frontity.org/web3_baby_boy_smile_hat_shutterstock_476144548/",
@@ -202,7 +202,7 @@ const attachment: AttachmentEntity = {
   comment_status: "open",
   ping_status: "closed",
   template: "",
-  meta: [],
+  meta: {},
   description: {
     rendered:
       '<p class="attachment"><a href=\'https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg\'><img data-attachment-id="0" data-attachment-id-source="attachment-link-hook"width="300" height="150" src="https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg" class="attachment-medium size-medium" alt="" srcset="https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-300x150.jpg 300w, https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-768x384.jpg 768w, https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548-1024x512.jpg 1024w, https://test.frontity.org/wp-content/uploads/2018/11/web3_baby_boy_smile_hat_shutterstock_476144548.jpg 1200w" sizes="100vw" data-attachment-id="437" data-attachment-id-source="image-attributes-hook" /></a></p>\n',
@@ -344,7 +344,7 @@ const attachment: AttachmentEntity = {
   },
 };
 
-const taxonomyType: TaxonomyType = {
+const taxonomyType: TaxonomyEntity = {
   name: "Categories",
   slug: "category",
   description: "",
@@ -372,7 +372,7 @@ const taxonomyType: TaxonomyType = {
   },
 };
 
-const postType: PostType = {
+const postType: TypeEntity = {
   description: "",
   hierarchical: false,
   name: "Posts",
@@ -400,4 +400,7 @@ const postType: PostType = {
   },
 };
 
-test("Types are fine!", () => {});
+// eslint-disable-next-line jest/expect-expect
+test("Types are fine!", () => {
+  // Do nothing here.
+});

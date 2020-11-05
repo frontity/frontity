@@ -10,7 +10,7 @@ import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
-import { ServerError } from "@frontity/source";
+import { ServerError, isError, isPostType } from "@frontity/source";
 import { PostEntity } from "@frontity/source/types";
 
 interface WpSourceAndCpt extends WpSource {
@@ -54,8 +54,9 @@ describe("postType", () => {
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
 
-    expect(store.state.source.data["/post-1/"].isError).toBe(true);
-    expect(store.state.source.data["/post-1/"]["is400"]).toBe(true);
+    const data = store.state.source.data["/post-1/"];
+    expect(isError(data)).toBe(true);
+    expect(isError(data) && data.is400).toBe(true);
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -246,7 +247,8 @@ describe("attachment", () => {
     expect(store.state.source).toMatchSnapshot();
 
     // Should have the new ID now
-    expect(store.state.source.get("/post-1").id).toEqual(2);
+    const data = store.state.source.get("/post-1");
+    expect(isPostType(data) && data.id).toEqual(2);
 
     // Delete the IDs because there are different
     const firstPost = store.state.source.post[1];

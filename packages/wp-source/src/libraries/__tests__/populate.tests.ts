@@ -9,15 +9,15 @@ import postsSubdir from "../handlers/__tests__/mocks/post-archive/posts-subdir.j
 import cpts from "../handlers/__tests__/mocks/cpt-archive/cpts.json";
 
 const initStore = (): InitializedStore<WpSource> => {
-  const config = clone(wpSource());
+  const config: WpSource = clone(wpSource());
   config.state.source.url = "https://test.frontity.org";
-  return createStore<WpSource>(config);
+  return createStore(config);
 };
 
 // Use Response from "node-fetch" to mock response objects,
 // but with "lib.dom.d.ts" Response type.
 const mockResponse = (body): Response =>
-  (new NodeResponse(JSON.stringify(body)) as object) as Response;
+  (new NodeResponse(JSON.stringify(body)) as unknown) as Response;
 
 describe("populate", () => {
   test("adds posts and embedded into state", async () => {

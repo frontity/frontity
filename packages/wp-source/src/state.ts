@@ -1,6 +1,12 @@
-import { error } from "frontity";
+import { warn, error } from "frontity";
 import WpSource from "../types";
 import { addFinalSlash, normalize, parse } from "./libraries/route-utils";
+import {
+  isPostType,
+  isTerm,
+  isAuthor,
+  isPostTypeArchive,
+} from "@frontity/source";
 
 const state: WpSource["state"]["source"] = {
   get: ({ state }) => (link) => {
@@ -21,6 +27,13 @@ const state: WpSource["state"]["source"] = {
     };
   },
   entity: ({ state }) => (link) => {
+    warn(
+      "`state.source.entity(link)` is deprecated. Please, use the props " +
+        "included in the data returned by `state.source.get(link)` to access " +
+        "entities directly. This function will be removed in a future " +
+        "version of `@frontity/wp-source`."
+    );
+
     // Get the data object pointed by `link`.
     const data = state.source.get(link);
 
@@ -29,16 +42,16 @@ const state: WpSource["state"]["source"] = {
     let entity: any = null;
 
     // Entities are stored in different places depending on their type.
-    if (data.isPostType) {
+    if (isPostType(data)) {
       const { type, id } = data;
       entity = state.source[type][id];
-    } else if (data.isTaxonomy) {
+    } else if (isTerm(data)) {
       const { taxonomy, id } = data;
       entity = state.source[taxonomy][id];
-    } else if (data.isAuthor) {
+    } else if (isAuthor(data)) {
       const { id } = data;
       entity = state.source.author[id];
-    } else if (data.isPostTypeArchive) {
+    } else if (isPostTypeArchive(data)) {
       const { type } = data;
       entity = state.source.type[type];
     }
