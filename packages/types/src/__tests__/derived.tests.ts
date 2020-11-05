@@ -8,6 +8,8 @@ interface Package1 extends Package {
       prop2: number;
       prop3: Derived<Package1, string>;
       prop4: Derived<Package1, string, number>;
+      unionDerivedProp1: Derived<Package1, string> | string;
+      unionDerivedProp2: Derived<Package1, string> | string;
       nested1: {
         prop5: Derived<Package1, string, number>;
         nested2: {
@@ -27,6 +29,8 @@ const package1: Package1 = {
       prop3: ({ state }) => state.namespace1.prop3,
       // Check that prop4 returns a number (and not a function).
       prop4: ({ state }) => (str) => state.namespace1.nested1.prop5(str),
+      unionDerivedProp1: ({ state }) => state.namespace1.unionDerivedProp1,
+      unionDerivedProp2: "A string works as well",
       nested1: {
         // Check that nested derived state functions are processed correctly.
         prop5: ({ state }) => (str) => state.namespace1.prop4(str),
@@ -38,5 +42,8 @@ const package1: Package1 = {
     },
   },
 };
+
+// I have to "use" the package1, otherwise eslint will complain.
+package1.name = "test";
 
 test("Types are fine!", () => {});

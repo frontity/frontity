@@ -10,6 +10,7 @@ import cpts from "../handlers/__tests__/mocks/cpt-archive/cpts.json";
 
 const initStore = (): InitializedStore<WpSource> => {
   const config: WpSource = clone(wpSource());
+  config.state.source.url = "https://test.frontity.org";
   return createStore(config);
 };
 

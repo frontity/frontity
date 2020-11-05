@@ -15,7 +15,7 @@ let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore<WpSource>(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });

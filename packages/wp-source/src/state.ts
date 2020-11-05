@@ -1,6 +1,6 @@
-import { warn } from "frontity";
+import { warn, error } from "frontity";
 import WpSource from "../types";
-import { normalize, parse } from "./libraries/route-utils";
+import { addFinalSlash, normalize, parse } from "./libraries/route-utils";
 import {
   isPostType,
   isTerm,
@@ -68,7 +68,19 @@ const state: WpSource["state"]["source"] = {
   attachment: {},
   type: {},
   taxonomy: {},
-  api: "",
+  // Keep backward compatibility when `state.source.api` is not
+  // overwritten in frontity.settings.js.
+  api: ({ state }) => {
+    // Check if it's a free WordPress.com site.
+    if (/^https:\/\/(\w+\.)?wordpress\.com/.test(state.source.url))
+      return addFinalSlash(
+        `https://public-api.wordpress.com/wp/v2/sites/${state.source.url}`
+      );
+
+    return addFinalSlash(
+      addFinalSlash(state.source.url) + state.wpSource.prefix.replace(/^\//, "")
+    );
+  },
   isWpCom: ({ state }) =>
     state.source.api.startsWith(
       "https://public-api.wordpress.com/wp/v2/sites/"
@@ -83,6 +95,13 @@ const state: WpSource["state"]["source"] = {
   params: {},
   postTypes: [],
   taxonomies: [],
+  url: ({ state }) => {
+    if (!state.frontity?.url)
+      error(
+        "Please set either `state.source.url` (or at least `state.frontity.url` if you are using Embedded mode) in your frontity.settings.js file."
+      );
+    return addFinalSlash(state.frontity.url);
+  },
 };
 
 export default state;

@@ -22,7 +22,7 @@ Array [
 
 exports[`populate add new custom post types & taxonomies to the state 2`] = `
 Object {
-  "api": "",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "11": Object {
       "author": 1,
@@ -195,6 +195,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
@@ -220,7 +221,7 @@ Array [
 
 exports[`populate adds posts and embedded into state 2`] = `
 Object {
-  "api": "",
+  "api": "https://test.frontity.org/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -437,6 +438,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
@@ -679,6 +681,7 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;
 
@@ -921,5 +924,6 @@ Object {
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
+  "url": "https://test.frontity.org",
 }
 `;

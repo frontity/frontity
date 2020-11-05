@@ -14,7 +14,7 @@ import { ServerError, isError, isPostType } from "@frontity/source";
 import { PostEntity } from "@frontity/source/types";
 
 interface WpSourceAndCpt extends WpSource {
-  state: {
+  state: WpSource["state"] & {
     source: WpSource["state"]["source"] & {
       cpt: Record<string, PostEntity>;
     };
@@ -25,7 +25,7 @@ let store: InitializedStore<WpSourceAndCpt>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore<WpSourceAndCpt>(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
