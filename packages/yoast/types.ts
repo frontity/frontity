@@ -106,4 +106,8 @@ export default YoastPackage;
 /**
  * Yoast package and its dependencies.
  */
-export type Packages = YoastPackage & Router & WpSource & Html2React;
+// TODO - Use `MergePackages` here.
+export type Packages = YoastPackage &
+  Router &
+  Omit<WpSource, "name"> &
+  Omit<Html2React, "name">;
