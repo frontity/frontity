@@ -140,7 +140,7 @@ export interface ErrorData extends Data {
  * This kind of objects are included in an array called `items` present in
  * {@link ArchiveData} objects.
  */
-export interface DataItem {
+export interface DataEntity {
   /**
    * Entity post type.
    */
@@ -160,9 +160,9 @@ export interface DataItem {
 /**
  * Data that references a post type entity in the state.
  *
- * @deprecated Use {@link DataItem} instead.
+ * @deprecated Use {@link DataEntity} instead.
  */
-export type EntityData = DataItem;
+export type EntityData = DataEntity;
 
 /**
  * Data for and archive, like the homepage, categories or tags, authors, date
@@ -177,7 +177,7 @@ export interface ArchiveData extends Data {
   /**
    * List of items contained in this archive page.
    */
-  items: DataItem[];
+  items: DataEntity[];
 
   /**
    * The link to the next page if it exists.

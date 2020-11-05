@@ -1,5 +1,5 @@
 import { AsyncAction, Action, State, Derived, Package } from "frontity/types";
-import Source, { DataItem } from "@frontity/source/types";
+import Source, { DataEntity } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
 /**
@@ -388,7 +388,7 @@ interface WpSource extends Source {
        * }))
        * ```
        */
-      Promise<DataItem[]>;
+      Promise<DataEntity[]>;
 
       /**
        * Handlers are objects that associate a link pattern with a function that
