@@ -6,8 +6,8 @@ import { css } from "frontity";
  */
 interface SAS {
   /**
-   * The array of function callbacks that the SmartAdserver library uses
-   * to make the ad calls.
+   * The array of function callbacks that the SmartAdserver library uses to make
+   * the ad calls.
    */
   cmd: unknown[];
 
@@ -26,8 +26,8 @@ interface SAS {
     domain: string;
 
     /**
-     * Specifies if the calls are done asynchronously.
-     * Asynchronous calls are recommended.
+     * Specifies if the calls are done asynchronously. Asynchronous calls are
+     * recommended.
      */
     async: boolean;
   }) => void;
@@ -53,7 +53,8 @@ declare global {
 /**
  * The options used for a particular ad call.
  *
- * All the possible options are visible in https://support.smartadserver.com/s/article/Tagging-guide.
+ * All the possible options are visible in
+ * https://support.smartadserver.com/s/article/Tagging-guide.
  *
  */
 interface CallOptions {
@@ -90,8 +91,8 @@ interface CallOptions {
   height?: number;
 
   /**
-   * Used to pass keywords and key=value pairs.
-   * See [Using keyword targeting](https://support.smartadserver.com/s/article/Using-keyword-targeting).
+   * Used to pass keywords and key=value pairs. See [Using keyword
+   * targeting](https://support.smartadserver.com/s/article/Using-keyword-targeting).
    */
   target?: number;
 }
@@ -112,8 +113,8 @@ export interface SmartAdProps extends CallOptions {
   minHeight?: number;
 
   /**
-   * The optional styles that can be passed to the SmartAd component via `css` prop.
-   * They will be merged with the default styles of the SmartAd component.
+   * The optional styles that can be passed to the SmartAd component via `css`
+   * prop. They will be merged with the default styles of the SmartAd component.
    */
   css?: ReturnType<typeof css>;
 }
@@ -126,6 +127,7 @@ interface SmartAdserver extends Package {
    * Package name.
    */
   name: "@frontity/smart-adserver";
+
   /**
    * Root elements exposed by this package.
    */
@@ -174,7 +176,9 @@ interface SmartAdserver extends Package {
       /**
        * The smartAdserver namespace.
        */
-      smartAdserver: {};
+      smartAdserver: {
+        // Smart Adserver fills.
+      };
     };
   };
 
