@@ -105,6 +105,10 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         (data[entity.link] = {
           isReady: false,
           isFetching: false,
+          link: entity.link,
+          route: entity.link,
+          query: {},
+          page: 1,
         });
 
       let entityMap: any;

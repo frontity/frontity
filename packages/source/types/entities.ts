@@ -1,131 +1,574 @@
 /**
- * Define the base structure of entities.
- */
-export interface BaseEntity {
-  id: number;
-  slug: string;
-  link: string;
-  description?: string | { rendered: string };
-  meta?: unknown;
-  _links?: unknown;
-}
-
-/**
- * Define the base structure of post entities.
- * Interfaces that extends from this are:
- * - PostEntity (posts & pages)
- * - AttachmentEntity (images, videos, etc.)
+ * These types were partially generated using
+ * [json-schema-to-typescript](https://www.npmjs.com/package/json-schema-to-typescript)
+ * to transform the default schemas exposed by the WordPress REST API.
  *
- * @extends BaseEntity
+ * Those schemas are accessible making an OPTIONS call to each endpoint.
  */
-export interface BasePostEntity extends BaseEntity {
-  type: string;
-  author?: number;
+
+/**
+ * Empty interface from which all entities inherit.
+ */
+export interface Entity {
+  [k: string]: unknown;
+}
+
+/**
+ * Cover some cases of objects with `rendered` property.
+ */
+interface Rendered {
+  /**
+   * Property of the object, transformed for display.
+   */
+  rendered?: string;
+  [k: string]: unknown;
+}
+
+/**
+ * Base interface for all post type entities.
+ *
+ * Interfaces that extends from this one are:
+ * - {@link PostEntity}.
+ * - {@link PageEntity}.
+ * - {@link AttachmentEntity}.
+ * - {@link RevisionEntity}.
+ */
+export interface PostTypeEntity extends Entity {
+  /**
+   * The date the object was published, in the site's timezone.
+   */
   date?: string;
+
+  /**
+   * The date the object was published, as GMT.
+   */
   date_gmt?: string;
+
+  /**
+   * The globally unique identifier for the object.
+   */
+  guid?: Rendered;
+
+  /**
+   * The date the object was last modified, in the site's timezone.
+   */
   modified?: string;
+
+  /**
+   * The date the object was last modified, as GMT.
+   */
   modified_gmt?: string;
-  title?: {
-    rendered?: string;
-  };
-  guid?: {
-    rendered?: string;
-  };
-  status?: "publish" | "future" | "draft" | "pending" | "private" | "inherit";
-  comment_status?: "open" | "closed";
-  ping_status?: "open" | "closed";
-  custom_fields?: unknown;
-  template?: string;
-  _embedded?: unknown;
-}
 
-/**
- * Define the structure of author entities.
- * @extends BaseEntity
- */
-export interface AuthorEntity extends BaseEntity {
-  name: string;
-  url?: string;
-  avatar_urls?: {
-    "24"?: string;
-    "48"?: string;
-    "96"?: string;
-  };
-}
+  /**
+   * Unique identifier for the object.
+   */
+  id: number;
 
-/**
- * Define the structure of taxonomy entities (specific categories, tags, etc.)
- * @extends BaseEntity
- */
-export interface TaxonomyEntity extends BaseEntity {
-  taxonomy: string;
-  name?: string;
-  parent?: number;
-  count?: number;
-}
+  /**
+   * URL to the object.
+   */
+  link: string;
 
-/**
- * Define the structure of attachment entities (images, videos, etc.)
- * @extends BasePostEntity
- */
-export interface AttachmentEntity extends BasePostEntity {
-  source_url?: string;
-  caption?: string | { rendered: string };
-  alt_text?: string;
-  post?: number;
-  media_details?: unknown;
-  media_type?: string;
-  mime_type?: string;
-}
-
-/**
- * Define the structure of post entityes (post & pages)
- * @extends BasePostEntity
- */
-export interface PostEntity extends BasePostEntity {
-  categories?: number[];
-  tags?: number[];
-  featured_media?: number;
-  excerpt?: {
-    protected?: false;
-    rendered?: string;
-  };
-  content?: {
-    protected?: boolean;
-    rendered?: string;
-  };
-  content_media?: number[];
-  format?: string;
-  sticky?: boolean;
-}
-
-/**
- * Define the base structure of type entities.
- * Type entities are those that describe the entity types.
- */
-export interface BaseType {
-  name: string;
+  /**
+   * An alphanumeric identifier for the object unique to its type.
+   */
   slug: string;
-  description: string;
-  hierarchical: boolean;
-  rest_base: string;
-  _links?: unknown;
+
+  /**
+   * A named status for the object.
+   */
+  status?: "publish" | "future" | "draft" | "pending" | "private";
+
+  /**
+   * Type of Post for the object.
+   */
+  type?: string;
+
+  /**
+   * The title for the object.
+   */
+  title?: Rendered;
+
+  /**
+   * The ID for the author of the object.
+   */
+  author?: number;
+
+  /**
+   * Whether or not comments are open on the object.
+   */
+  comment_status?: "open" | "closed";
+
+  /**
+   * Whether or not the object can be pinged.
+   */
+  ping_status?: "open" | "closed";
 }
 
 /**
- * Define the structure of post types.
- * Post types are `"post"`, `"page"`, `"attachment"` and unknown custom post type.
- * @extends BaseType
+ * Interface for entities from the /wp/v2/posts endpoint.
  */
-export interface PostType extends BaseType {
+export interface PostEntity extends PostTypeEntity {
+  /**
+   * Type of Post for the object.
+   */
+  type: "post";
+
+  /**
+   * The content for the object.
+   */
+  content?: Rendered;
+
+  /**
+   * The excerpt for the object.
+   */
+  excerpt?: Rendered;
+
+  /**
+   * The format for the object.
+   */
+  format?:
+    | "standard"
+    | "aside"
+    | "chat"
+    | "gallery"
+    | "link"
+    | "image"
+    | "quote"
+    | "status"
+    | "video"
+    | "audio";
+
+  /**
+   * Meta fields.
+   */
+  meta?: Record<string, unknown>;
+
+  /**
+   * Whether or not the object should be treated as sticky.
+   */
+  sticky?: boolean;
+
+  /**
+   * The theme file to use to display the object.
+   */
+  template?: string;
+
+  /**
+   * The terms assigned to the object in the category taxonomy.
+   */
+  categories?: number[];
+
+  /**
+   * The terms assigned to the object in the post_tag taxonomy.
+   */
+  tags?: number[];
+
+  /**
+   * The ID of the featured media for the object.
+   */
+  featured_media?: number;
+}
+
+/**
+ * Interface for entities from the /wp/v2/posts/1/revisions endpoint.
+ */
+export interface RevisionEntity extends PostTypeEntity {
+  /**
+   * The ID for the author of the object.
+   */
+  author?: number;
+
+  /**
+   * The ID for the parent of the object.
+   */
+  parent?: number;
+
+  /**
+   * The content for the object.
+   */
+  content?: Rendered;
+
+  /**
+   * The excerpt for the object.
+   */
+  excerpt?: Rendered;
+}
+
+/**
+ * Interface for entities from the /wp/v2/pages endpoint.
+ */
+export interface PageEntity extends PostTypeEntity {
+  /**
+   * Type of Post for the object.
+   */
+  type: "page";
+
+  /**
+   * The ID for the parent of the object.
+   */
+  parent?: number;
+
+  /**
+   * The content for the object.
+   */
+  content?: Rendered;
+
+  /**
+   * The excerpt for the object.
+   */
+  excerpt?: Rendered;
+
+  /**
+   * The order of the object in relation to other object of its type.
+   */
+  menu_order?: number;
+
+  /**
+   * Meta fields.
+   */
+  meta?: Record<string, unknown>;
+
+  /**
+   * The theme file to use to display the object.
+   */
+  template?: string;
+
+  /**
+   * The ID of the featured media for the object.
+   */
+  featured_media?: number;
+}
+
+/**
+ * Interface for entities from the /wp/v2/media endpoint.
+ */
+export interface AttachmentEntity extends Entity {
+  /**
+   * Type of Post for the object.
+   */
+  type: "attachment";
+
+  /**
+   * Meta fields.
+   */
+  meta?: Record<string, unknown>;
+
+  /**
+   * The theme file to use to display the object.
+   */
+  template?: string;
+
+  /**
+   * Alternative text to display when attachment is not displayed.
+   */
+  alt_text?: string;
+
+  /**
+   * The attachment caption.
+   */
+  caption?: Rendered;
+
+  /**
+   * The attachment description.
+   */
+  description?: Rendered;
+
+  /**
+   * Attachment type.
+   */
+  media_type?: "image" | "file";
+
+  /**
+   * The attachment MIME type.
+   */
+  mime_type?: string;
+
+  /**
+   * Details about the media file, specific to its type.
+   */
+  media_details?: Record<string, unknown>;
+
+  /**
+   * The ID for the associated post of the attachment.
+   */
+  post?: number;
+
+  /**
+   * URL to the original attachment file.
+   */
+  source_url?: string;
+
+  /**
+   * List of the missing image sizes of the attachment.
+   */
+  missing_image_sizes?: string[];
+}
+
+/**
+ * Interface for entities from the /wp/v2/types endpoint.
+ */
+export interface TypeEntity extends Entity {
+  /**
+   * A human-readable description of the post type.
+   */
+  description?: string;
+
+  /**
+   * Whether or not the post type should have children.
+   */
+  hierarchical?: boolean;
+
+  /**
+   * The title for the post type.
+   */
+  name?: string;
+
+  /**
+   * An alphanumeric identifier for the post type.
+   */
+  slug?: string;
+
+  /**
+   * REST base route for the post type.
+   */
+  rest_base: string;
+  /**
+   * Taxonomies associated with post type.
+   */
   taxonomies: string[];
 }
 
 /**
- * Define the structure of taxonomy types.
- * Taxonomy types are `"category"`, `"tag"` and unknown custom taxonomy.
- * @extends BaseType
+ * Interface for entities from the /wp/v2/taxonomy endpoint.
  */
-export interface TaxonomyType extends BaseType {
+export interface TaxonomyEntity extends Entity {
+  /**
+   * A human-readable description of the taxonomy.
+   */
+  description?: string;
+
+  /**
+   * Whether or not the taxonomy should have children.
+   */
+  hierarchical?: boolean;
+
+  /**
+   * The title for the taxonomy.
+   */
+  name?: string;
+
+  /**
+   * An alphanumeric identifier for the taxonomy.
+   */
+  slug?: string;
+
+  /**
+   * REST base route for the taxonomy.
+   */
+  rest_base: string;
+  /**
+   * Types associated with the taxonomy.
+   */
   types: string[];
+}
+
+/**
+ * Interface for entities that belong to a taxonomy.
+ *
+ * For example:
+ * - entities from the /wp/v2/categories endpoint.
+ * - entities from the /wp/v2/tags endpoint.
+ */
+export interface TermEntity extends Entity {
+  /**
+   * Unique identifier for the term.
+   */
+  id: number;
+
+  /**
+   * Number of published posts for the term.
+   */
+  count?: number;
+
+  /**
+   * HTML description of the term.
+   */
+  description?: string;
+
+  /**
+   * URL of the term.
+   */
+  link: string;
+
+  /**
+   * HTML title for the term.
+   */
+  name?: string;
+
+  /**
+   * An alphanumeric identifier for the term unique to its type.
+   */
+  slug?: string;
+
+  /**
+   * Type attribution for the term.
+   */
+  taxonomy: string;
+
+  /**
+   * The parent term ID.
+   */
+  parent?: number;
+
+  /**
+   * Meta fields.
+   */
+  meta?: Record<string, unknown>;
+}
+
+/**
+ * Map of avatar URLs by their size.
+ */
+export interface AvatarUrls {
+  /**
+   * Avatar URL with image size of 24 pixels.
+   */
+  "24"?: string;
+
+  /**
+   * Avatar URL with image size of 48 pixels.
+   */
+  "48"?: string;
+
+  /**
+   * Avatar URL with image size of 96 pixels.
+   */
+  "96"?: string;
+  [k: string]: unknown;
+}
+
+/**
+ * Interface for entities from the /wp/v2/users endpoint.
+ */
+export interface AuthorEntity extends Entity {
+  /**
+   * Unique identifier for the user.
+   */
+  id: number;
+
+  /**
+   * Display name for the user.
+   */
+  name?: string;
+
+  /**
+   * URL of the user.
+   */
+  url?: string;
+
+  /**
+   * Description of the user.
+   */
+  description?: string;
+
+  /**
+   * Author URL of the user.
+   */
+  link: string;
+
+  /**
+   * An alphanumeric identifier for the user.
+   */
+  slug?: string;
+
+  /**
+   * Avatar URLs for the user.
+   */
+  avatar_urls?: AvatarUrls;
+
+  /**
+   * Meta fields.
+   */
+  meta?: Record<string, unknown>;
+}
+
+/**
+ * Interface for entities from the /wp/v2/comments endpoint.
+ */
+export interface CommentEntity extends Entity {
+  /**
+   * Unique identifier for the object.
+   */
+  id?: number;
+
+  /**
+   * The ID of the user object, if author was a user.
+   */
+  author?: number;
+
+  /**
+   * Email address for the object author.
+   */
+  author_email?: string;
+
+  /**
+   * Display name for the object author.
+   */
+  author_name?: string;
+
+  /**
+   * URL for the object author.
+   */
+  author_url?: string;
+
+  /**
+   * The content for the object.
+   */
+  content?: Rendered;
+
+  /**
+   * The date the object was published, in the site's timezone.
+   */
+  date?: string;
+
+  /**
+   * The date the object was published, as GMT.
+   */
+  date_gmt?: string;
+
+  /**
+   * URL to the object.
+   */
+  link?: string;
+
+  /**
+   * The ID for the parent of the object.
+   */
+  parent?: number;
+
+  /**
+   * The ID of the associated post object.
+   */
+  post?: number;
+
+  /**
+   * State of the object.
+   */
+  status?: string;
+
+  /**
+   * Type of Comment for the object.
+   */
+  type: "comment";
+
+  /**
+   * Avatar URLs for the object author.
+   */
+  author_avatar_urls?: AvatarUrls;
+
+  /**
+   * Meta fields.
+   */
+  meta?: Record<string, unknown>;
 }

@@ -1,17 +1,18 @@
 import { MergePackages, Package } from "frontity/types";
 import Router from "@frontity/router/types";
 import Html2React from "@frontity/html2react/types";
-import Source from "@frontity/source/types";
+import { Entity } from "@frontity/source/types";
+import WpSource from "@frontity/wp-source/types";
 
 /**
  * Type for objects that contain the `yoast_head` field.
  */
-export type WithYoastHead = {
+export interface WithYoastHead extends Entity {
   /**
    * All meta tags in string format.
    */
   yoast_head?: string;
-};
+}
 
 /**
  * Integrate your Frontity site with Yoast SEO plugin.
@@ -109,4 +110,9 @@ export default YoastPackage;
 /**
  * Yoast package and its dependencies.
  */
-export type Packages = MergePackages<YoastPackage, Router, Source, Html2React>;
+export type Packages = MergePackages<
+  YoastPackage,
+  Router,
+  WpSource,
+  Html2React
+>;

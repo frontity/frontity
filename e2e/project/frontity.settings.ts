@@ -87,7 +87,7 @@ const settings: Settings<
       },
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "https://test.frontity.org/wp-json" } },
+        state: { source: { url: "https://test.frontity.org/" } },
       },
     ],
   },
@@ -156,7 +156,7 @@ const settings: Settings<
       "@frontity/wp-comments",
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "http://localhost:8080/wp-json" } },
+        state: { source: { url: "http://localhost:8080/" } },
       },
     ],
   },
@@ -218,7 +218,7 @@ const settings: Settings<
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
+            url: "http://localhost:8080/",
           },
         },
       },
@@ -283,7 +283,7 @@ const settings: Settings<
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
+            url: "http://localhost:8080/",
             postTypes: [
               {
                 type: "movie",
@@ -325,7 +325,7 @@ const settings: Settings<
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
+            url: "http://localhost:8080/",
             postTypes: [
               {
                 type: "movie",
@@ -372,7 +372,6 @@ const settings: Settings<
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
             postTypes: [
               {
                 type: "movie",

@@ -36,7 +36,7 @@ const settings: Settings<WpSource | MarsTheme> = {
       name: "@frontity/wp-source",
       state: {
         source: {
-          api: "https://test.frontity.org/wp-json",
+          url: "https://test.frontity.org",
         },
       },
     },

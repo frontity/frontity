@@ -169,54 +169,6 @@ export interface Package {
 export default Package;
 
 /**
- * An individual Frontity action.
- */
-interface Action {
-  /**
-   * Declaration of an action without additional params.
-   *
-   * @example
-   * ```typescript
-   * const someAction: ({ state, actions, libraries }) => {
-   *  // Action content.
-   * }
-   *
-   * // Calling the action:
-   * actions.myPackage.someAction();
-   * ```
-   *
-   * @param store - An object containing `state`, `actions` and `libraries`.
-   *
-   * @returns Void or Promise<void> if it is an async action.
-   */
-  (store: Pick<Package, "state" | "actions" | "libraries">): void | Promise<
-    void
-  >;
-
-  /**
-   * Declaration of an action with additional params.
-   *
-   * @example
-   * ```typescript
-   * const someAction: ({ state, actions, libraries }) => (...args) => {
-   *  // Action content.
-   * }
-   *
-   * // Calling the action:
-   * actions.myPackage.someAction("arg 1", "arg 2", ...);
-   * ```
-   *
-   * @param store - An object containing `state`, `actions` and `libraries`.
-   * @param args - Any number of arguments.
-   *
-   * @returns Void or Promise<void> if it is an async action.
-   */
-  (store: Pick<Package, "state" | "actions" | "libraries">): (
-    ...args: any
-  ) => void | Promise<void>;
-}
-
-/**
  * An object containing Frontity actions, or other objects containing actions.
  */
 interface Actions {

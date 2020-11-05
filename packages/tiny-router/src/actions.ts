@@ -1,5 +1,6 @@
 import TinyRouter from "../types";
 import { warn } from "frontity";
+import { isError } from "@frontity/source";
 
 /**
  * Set the URL.
@@ -115,7 +116,7 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     if (actions.source && actions.source.fetch) {
       await actions.source.fetch(state.router.link);
       const data = state.source.get(state.router.link);
-      if (data.isError) {
+      if (isError(data)) {
         ctx.status = data.errorStatus;
       }
     } else {

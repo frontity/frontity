@@ -1,5 +1,6 @@
 import React from "react";
 import { connect, useConnect } from "frontity";
+import { isPostType, isError } from "@frontity/source";
 import Preview, { Packages } from "../types";
 
 /**
@@ -12,7 +13,7 @@ import Preview, { Packages } from "../types";
 const Theme = () => {
   const { state } = useConnect<Packages>();
   const data = state.source.get(state.frontity.initialLink);
-  if (data.isPostType) {
+  if (isPostType(data)) {
     const post = state.source[data.type][data.id];
     return (
       <>
@@ -40,7 +41,7 @@ const preview: Preview = {
       beforeSSR: ({ state, actions }) => async ({ ctx }) => {
         await actions.source.fetch(state.frontity.initialLink);
         const data = state.source.get(state.frontity.initialLink);
-        if (data.isError) {
+        if (isError(data)) {
           ctx.status = data.errorStatus;
         }
       },

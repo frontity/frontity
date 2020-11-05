@@ -9,11 +9,11 @@ import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
-import { ServerError } from "@frontity/source";
+import { ServerError, isError } from "@frontity/source";
 import { PostEntity } from "@frontity/source/types";
 
 interface WpSourceAndCpt extends WpSource {
-  state: {
+  state: WpSource["state"] & {
     source: WpSource["state"]["source"] & {
       cpt: Record<string, PostEntity>;
     };
@@ -24,18 +24,17 @@ let store: InitializedStore<WpSourceAndCpt>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore<WpSourceAndCpt>(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
 
 describe("postType", () => {
   test("returns 404 if not found", async () => {
-    // Mock Api responses
-    // We have to use this form instead of:
-    // .mockResolvedValueOnce(mockResponse([]))
-    // because the latter always returns the same instance of Response.
-    // which results in error because response.json() can only be run once
+    // Mock Api responses We have to use this form instead of:
+    // .mockResolvedValueOnce(mockResponse([])) because the latter always
+    // returns the same instance of Response. which results in error because
+    // response.json() can only be run once
     api.get = jest.fn((_) =>
       Promise.reject(new ServerError("Not Found", 404, "Not Found"))
     );
@@ -52,8 +51,9 @@ describe("postType", () => {
     });
     // Fetch entities
     await store.actions.source.fetch("/?p=1");
-    expect(store.state.source.data["/?p=1"].isError).toBe(true);
-    expect(store.state.source.data["/?p=1"]["is400"]).toBe(true);
+    const data = store.state.source.data["/?p=1"];
+    expect(isError(data)).toBe(true);
+    expect(isError(data) && data.is400).toBe(true);
     expect(store.state.source).toMatchSnapshot();
   });
 });
