@@ -1,27 +1,30 @@
-/* eslint-disable */
-import { Package } from "frontity/types";
-import WPCommentsPackage from "@frontity/wp-comments/types";
+import { MergePackages, Package } from "frontity/types";
+import WpComments from "@frontity/wp-comments/types";
 import WpSource from "../../../packages/wp-source/types";
 
-interface WPComments extends Package {
+/**
+ * Package to do e2e tests to the wp-comments package.
+ */
+interface TestWpComments extends Package {
+  /**
+   * Package name.
+   */
   name: "e2e-wp-comments";
-  state: {
-    comments: WPCommentsPackage["state"]["comments"];
-    source?: WpSource["state"]["source"] & WPCommentsPackage["state"]["source"];
-  };
-  actions?: {
-    comments: {
-      submit: WPCommentsPackage["actions"]["comments"]["submit"];
-      updateFields: WPCommentsPackage["actions"]["comments"]["updateFields"];
-    };
-    source: {
-      fetch: WpSource["actions"]["source"]["fetch"];
-    };
-  };
+
+  /**
+   * Roots exposed by this package.
+   */
   roots: {
+    /**
+     * WpComments namespace.
+     */
     wpComments: React.ElementType;
   };
-  libraries: {};
 }
 
-export default WPComments;
+export default TestWpComments;
+
+/**
+ * Packages required by this one.
+ */
+export type Packages = MergePackages<WpSource, WpComments, TestWpComments>;
