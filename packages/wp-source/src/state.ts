@@ -10,7 +10,7 @@ import {
 
 const state: WpSource["state"]["source"] = {
   get: ({ state }) => (link) => {
-    const normalizedLink = normalize(link);
+    const normalizedLink = normalize(link, { removeHash: true });
     const data = state.source.data[normalizedLink];
     if (data) {
       return data;

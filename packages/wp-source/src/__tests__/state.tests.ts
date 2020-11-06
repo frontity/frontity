@@ -37,6 +37,22 @@ describe("state.source.get", () => {
     expect(source.get("https://wp.site.test/some-post/")).toEqual(post);
   });
 
+  test("returns the correct object (path, hash)", () => {
+    const post = {
+      type: "post",
+      id: 1,
+      isPostType: true,
+      isReady: true,
+      isFetching: false,
+    };
+    const { source } = initStore({ "/some-post/": post }).state;
+    expect(source.get("/some-post#some-div")).toEqual(post);
+    expect(source.get("/some-post/#some-div")).toEqual(post);
+    expect(source.get("https://wp.site.test/some-post/#some-div")).toEqual(
+      post
+    );
+  });
+
   test("returns the correct object (path, page)", () => {
     const archive = {
       taxonomy: "tag",

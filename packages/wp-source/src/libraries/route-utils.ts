@@ -127,16 +127,14 @@ const linkToParams = (link: string): LinkParams => {
  * Turn a set of Frontity link params into a string link.
  *
  * @param linkParams - The link params, defined by {@link LinkParams}.
+ * @param options - Options to remove some parts of the link.
  *
  * @returns The link, in string format.
  */
-const paramsToLink = ({
-  path = "/",
-  route,
-  page = 1,
-  query = {},
-  hash = "",
-}: LinkParams): string => {
+const paramsToLink = (
+  { path = "/", route, page = 1, query = {}, hash = "" }: LinkParams,
+  options: { removeHash: boolean } = { removeHash: false }
+): string => {
   // Use route if present, otherwise use path.
   path = route || path;
 
@@ -146,7 +144,9 @@ const paramsToLink = ({
   const pathAndPage = page > 1 ? `${path}page/${page}/` : path;
   const queryString = objToQuery(query);
 
-  return `${pathAndPage.toLowerCase()}${queryString}${hash}`;
+  return `${pathAndPage.toLowerCase()}${queryString}${
+    !options.removeHash ? hash : ""
+  }`;
 };
 
 /**
@@ -177,10 +177,13 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  * @example `/some-post -> /some-post/`
  *
  * @param link - The link to be normalized.
+ * @param options - Options to remove some parts of the link.
  *
  * @returns The normalized link.
  */
-export const normalize = (link: string): string =>
-  paramsToLink(linkToParams(link));
+export const normalize = (
+  link: string,
+  options: { removeHash: boolean } = { removeHash: false }
+): string => paramsToLink(linkToParams(link), options);
 
 export default { parse, stringify, normalize };

@@ -335,4 +335,9 @@ describe("route utils - normalize", () => {
   test("from name (page)", () => {
     expect(normalize("custom-list/page/2/")).toBe("custom-list/page/2/");
   });
+  test("with option `removeHash`", () => {
+    expect(normalize("/some-post#some-div", { removeHash: true })).toBe(
+      "/some-post/"
+    );
+  });
 });
