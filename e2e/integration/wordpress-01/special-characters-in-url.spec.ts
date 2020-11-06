@@ -10,15 +10,13 @@ describe("Special characters in the URL", () => {
   });
 
   it("Should load the post", () => {
-    cy.visit(
-      "http://localhost:3001/test%e2%99%afpost%f0%9f%98%8a/?frontity_name=wp-basic-tests"
-    );
+    cy.visit("http://localhost:3001?frontity_name=wp-basic-tests");
+    cy.get("[data-test-id='/test♯post😊/']").click();
 
+    cy.get("[data-test-id='post']").contains("Post: test♯post😊");
     cy.location("href").should(
       "eq",
       "http://localhost:3001/test%e2%99%afpost%f0%9f%98%8a/"
     );
-
-    cy.get("[data-test-id='post']").contains("Post: test♯post😊");
   });
 });
