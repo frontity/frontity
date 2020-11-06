@@ -9,7 +9,7 @@ import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
-import { ServerError } from "@frontity/source";
+import { ServerError, isError } from "@frontity/source";
 import { PostEntity } from "@frontity/source/types";
 
 interface WpSourceAndCpt extends WpSource {
@@ -51,8 +51,9 @@ describe("postType", () => {
     });
     // Fetch entities
     await store.actions.source.fetch("/?p=1");
-    expect(store.state.source.data["/?p=1"].isError).toBe(true);
-    expect(store.state.source.data["/?p=1"]["is400"]).toBe(true);
+    const data = store.state.source.data["/?p=1"];
+    expect(isError(data)).toBe(true);
+    expect(isError(data) && data.is400).toBe(true);
     expect(store.state.source).toMatchSnapshot();
   });
 });

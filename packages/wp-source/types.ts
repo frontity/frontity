@@ -1,5 +1,5 @@
 import { Action, State, Derived, Package } from "frontity/types";
-import Source, { EntityData } from "@frontity/source/types";
+import Source, { DataEntity } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
 /**
@@ -392,7 +392,7 @@ interface WpSource extends Source<Packages> {
        * }))
        * ```
        */
-      Promise<EntityData[]>;
+      Promise<DataEntity[]>;
 
       /**
        * Handlers are objects that associate a link pattern with a function that
@@ -460,7 +460,7 @@ export default WpSource;
  *
  * Handlers are used when `actions.source.fetch` is executed.
  */
-export interface Pattern<F extends Function = Function> {
+export interface Pattern<F extends (...args: any) => any> {
   /**
    * A unique name to identify this handler.
    *

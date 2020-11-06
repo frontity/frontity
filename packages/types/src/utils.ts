@@ -3,6 +3,28 @@ import { Package } from ".";
 import Derived from "./derived";
 
 /**
+ * Frontity properties injected to actions.
+ *
+ * @typeparam Packages - All package definitions together.
+ */
+export interface ResolvePackages<Packages extends Package> {
+  /**
+   * State from all packages resolved.
+   */
+  state: ResolveState<Packages["state"]>;
+
+  /**
+   * Actions from all packages resolved.
+   */
+  actions: ResolveActions<Packages["actions"]>;
+
+  /**
+   * Libraries from all packages.
+   */
+  libraries: Packages["libraries"];
+}
+
+/**
  * Resolve derived state to its final form.
  */
 export type ResolveState<State extends Package["state"]> = {
@@ -21,11 +43,7 @@ export type ResolveActions<Actions extends Package["state"]> = {
     state,
     actions,
     libraries,
-  }: {
-    state: ResolveState<Package["state"]>;
-    actions: ResolveActions<Package["actions"]>;
-    libraries: Package["libraries"];
-  }) => (...args: any[]) => void | Promise<void>
+  }: ResolvePackages<Package>) => (...args: any[]) => void | Promise<void>
     ? (
         ...args: Parameters<ReturnType<Actions[P]>>
       ) => ReturnType<ReturnType<Actions[P]>>
@@ -33,11 +51,7 @@ export type ResolveActions<Actions extends Package["state"]> = {
         state,
         actions,
         libraries,
-      }: {
-        state: ResolveState<Package["state"]>;
-        actions: ResolveActions<Package["actions"]>;
-        libraries: Package["libraries"];
-      }) => void | Promise<void>
+      }: ResolvePackages<Package>) => void | Promise<void>
     ? () => ReturnType<Actions[P]>
     : ResolveActions<Actions[P]>;
 };

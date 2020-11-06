@@ -1,10 +1,10 @@
 import { Package, Derived } from "frontity/types";
 import Router from "@frontity/router/types";
 import Source, {
-  TaxonomyEntity,
+  TermEntity,
   PostEntity,
   AuthorEntity,
-  PostType,
+  TypeEntity,
 } from "@frontity/source/types";
 
 /**
@@ -168,17 +168,17 @@ interface HeadTagsPackage extends Package {
       /**
        * Type entities by ID, extended with a `head_tags` property.
        */
-      type: Record<string, PostType & WithHeadTags>;
+      type: Record<string, TypeEntity & WithHeadTags>;
 
       /**
        * Category entities by ID, extended with a `head_tags` property.
        */
-      category: Record<string, TaxonomyEntity & WithHeadTags>;
+      category: Record<string, TermEntity & WithHeadTags>;
 
       /**
        * Tag entities by ID, extended with a `head_tags` property.
        */
-      tag: Record<string, TaxonomyEntity & WithHeadTags>;
+      tag: Record<string, TermEntity & WithHeadTags>;
     };
   };
 }

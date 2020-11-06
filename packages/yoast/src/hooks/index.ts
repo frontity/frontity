@@ -3,6 +3,12 @@ import { decode, useConnect } from "frontity";
 import { getWpUrl } from "@frontity/head-tags/src/utils";
 import { transformAllLinks } from "../utils";
 import { Packages, WithYoastHead } from "../../types";
+import {
+  isPostType,
+  isTerm,
+  isAuthor,
+  isPostTypeArchive,
+} from "@frontity/source";
 
 /**
  * Object returned for {@link useYoastHead} hook.
@@ -28,8 +34,26 @@ interface UseYoastHeadResult {
 export const useYoastHead = (link: string): UseYoastHeadResult => {
   const { state } = useConnect<Packages>();
 
+  // Get the data object associated to link.
+  const data = state.source.get(link);
+
   // Get the entity pointed by the given link.
-  const entity: WithYoastHead = state.source.entity(link);
+  let entity: WithYoastHead = null;
+
+  // Entities are stored in different places depending on their type.
+  if (isPostType(data)) {
+    const { type, id } = data;
+    entity = state.source[type][id];
+  } else if (isTerm(data)) {
+    const { taxonomy, id } = data;
+    entity = state.source[taxonomy][id];
+  } else if (isAuthor(data)) {
+    const { id } = data;
+    entity = state.source.author[id];
+  } else if (isPostTypeArchive(data)) {
+    const { type } = data;
+    entity = state.source.type[type];
+  }
 
   // Get the `yoast_head` field from entity.
   const html = entity?.yoast_head || "";

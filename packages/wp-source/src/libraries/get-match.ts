@@ -30,7 +30,10 @@ const extractParameters = (
 /**
  * The return object for the {@link getMatch} function.
  */
-interface GetMatchReturn<Patt extends Pattern> {
+interface GetMatchReturn<
+  Func extends (...args: any) => any,
+  Patt extends Pattern<Func>
+> {
   /**
    * The params extracted from the `path-to-regexp` pattern or the named capture
    * groups of the regular expresion.
@@ -62,10 +65,13 @@ interface GetMatchReturn<Patt extends Pattern> {
  * @returns An object containing the matched handler/redirection. Defined in
  * {@link GetMatchReturn}.
  */
-export const getMatch = <Patt extends Pattern>(
+export const getMatch = <
+  Func extends (...args: any) => any,
+  Patt extends Pattern<Func>
+>(
   link: string,
   list: Patt[]
-): GetMatchReturn<Patt> | null => {
+): GetMatchReturn<Func, Patt> | null => {
   const result = list
     .sort(({ priority: p1 }, { priority: p2 }) => p1 - p2)
     .map(({ name, priority, pattern, func }) => {

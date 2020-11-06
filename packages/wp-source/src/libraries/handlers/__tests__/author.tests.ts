@@ -9,6 +9,7 @@ import author1 from "./mocks/author/author-1.json";
 import author1Posts from "./mocks/author/author-1-posts.json";
 import author1PostsPage2 from "./mocks/author/author-1-posts-page-2.json";
 import author1PostsCpt from "./mocks/author/author-1-posts-cpt.json";
+import { isSearch } from "@frontity/source";
 
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
@@ -70,7 +71,7 @@ describe("author", () => {
   });
 
   test("overwrites the data when fetched with { force: true }", async () => {
-    // Add iniital data to the store
+    // Add initial data to the store
     await store.libraries.source.populate({
       state: store.state,
       response: mockResponse(author1),
@@ -204,12 +205,9 @@ describe("author", () => {
     // Fetch entities
     await store.actions.source.fetch("/author/author-1/?s=findAuthor");
 
-    expect(
-      store.state.source.data["/author/author-1/?s=findAuthor"].isSearch
-    ).toBe(true);
-    expect(
-      store.state.source.data["/author/author-1/?s=findAuthor"].searchQuery
-    ).toBe("findAuthor");
+    const data = store.state.source.data["/author/author-1/?s=findAuthor"];
+    expect(isSearch(data)).toBe(true);
+    expect(isSearch(data) && data.searchQuery).toBe("findAuthor");
     expect(store.state.source).toMatchSnapshot();
   });
 });
