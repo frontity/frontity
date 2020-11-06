@@ -133,7 +133,7 @@ const linkToParams = (link: string): LinkParams => {
  */
 const paramsToLink = (
   { path = "/", route, page = 1, query = {}, hash = "" }: LinkParams,
-  options: { removeHash: boolean } = { removeHash: false }
+  options: { removeHash?: boolean } = { removeHash: false }
 ): string => {
   // Use route if present, otherwise use path.
   path = route || path;
@@ -183,7 +183,7 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  */
 export const normalize = (
   link: string,
-  options: { removeHash: boolean } = { removeHash: false }
+  options: { removeHash?: boolean } = { removeHash: false }
 ): string => paramsToLink(linkToParams(link), options);
 
 export default { parse, stringify, normalize };
