@@ -133,7 +133,7 @@ const linkToParams = (link: string): LinkParams => {
  */
 const paramsToLink = (
   { path = "/", route, page = 1, query = {}, hash = "" }: LinkParams,
-  options: { removeHash?: boolean } = { removeHash: false }
+  options: ParamsToLinkOptions = { removeHash: false }
 ): string => {
   // Use route if present, otherwise use path.
   path = route || path;
@@ -183,7 +183,17 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  */
 export const normalize = (
   link: string,
-  options: { removeHash?: boolean } = { removeHash: false }
+  options: ParamsToLinkOptions = { removeHash: false }
 ): string => paramsToLink(linkToParams(link), options);
+
+/**
+ * Options to remove some parts of the link in {@link paramsToLink} function.
+ */
+interface ParamsToLinkOptions {
+  /**
+   * Remove the hash part from the link.
+   */
+  removeHash?: boolean;
+}
 
 export default { parse, stringify, normalize };
