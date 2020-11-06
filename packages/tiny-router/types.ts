@@ -1,6 +1,6 @@
 import Router from "@frontity/router/types";
 import Source from "@frontity/source/types";
-import { Package, Action, MergePackages, ServerAction } from "frontity/types";
+import { Frontity, Action, MergePackages, ServerAction } from "frontity/types";
 
 /**
  * A tiny router for Frontity projects.
@@ -64,4 +64,4 @@ export default TinyRouter;
 /**
  * Packages that tiny-router depends on.
  */
-export type Packages = MergePackages<Package, Source, TinyRouter>;
+export type Packages = MergePackages<Frontity, Source, TinyRouter>;

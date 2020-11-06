@@ -23,6 +23,103 @@ export interface Package {
    */
   state?: {
     /**
+     * The configuration objects for all the fills exposed by this package.
+     */
+    fills?: {
+      [namespace: string]: {
+        [name: string]: Fill;
+      };
+    };
+
+    /**
+     * The rest of the state exposed by this package.
+     *
+     * TODO: Replace `any` with serializable objects and derived state.
+     */
+    [namespace: string]: {
+      [key: string]: any;
+    };
+  };
+
+  /**
+   * The actions exposed by this package.
+   */
+  actions?: {
+    [namespace: string]: Actions;
+  };
+
+  /**
+   * The libraries exposed by this package.
+   */
+  libraries?: {
+    /**
+     * The Fill compoments exposed by this package.
+     */
+    fills?: {
+      [namespace: string]: {
+        [name: string]: React.ElementType;
+      };
+    };
+
+    /**
+     * The rest of the libraries exposed by this package.
+     */
+    [namespace: string]: {
+      [library: string]: any;
+    };
+  };
+}
+
+export default Package;
+
+/**
+ * An object containing Frontity actions, or other objects containing actions.
+ */
+interface Actions {
+  [key: string]: (...args: any) => any | Actions;
+}
+
+/**
+ * The configuration object for a Fill.
+ */
+export interface Fill {
+  /**
+   * The name of the Slot that this Fill wants to be injected in.
+   */
+  slot: string;
+
+  /**
+   * The name of the React component that it should be stored in
+   * `libraries.fills`.
+   */
+  library: string;
+
+  /**
+   * The priority of this fill in relation to the other fills that also point to
+   * the same `slot`.
+   *
+   * @defaultValue 10
+   */
+  priority?: number;
+
+  /**
+   * Optional object with props that will be passed to the React component
+   * defined in `library`.
+   */
+  props?: {
+    [key: string]: any;
+  };
+}
+
+/**
+ * All the properties exposed by the Frontity framework.
+ */
+export interface Frontity extends Package {
+  /**
+   * State exposed by this package.
+   */
+  state: {
+    /**
      * State exposed in the `frontity` namespace.
      */
     frontity?: {
@@ -117,92 +214,5 @@ export interface Package {
        */
       url?: string;
     };
-
-    /**
-     * The configuration objects for all the fills exposed by this package.
-     */
-    fills?: {
-      [namespace: string]: {
-        [name: string]: Fill;
-      };
-    };
-
-    /**
-     * The rest of the state exposed by this package.
-     *
-     * TODO: Replace `any` with serializable objects and derived state.
-     */
-    [namespace: string]: {
-      [key: string]: any;
-    };
-  };
-
-  /**
-   * The actions exposed by this package.
-   */
-  actions?: {
-    [namespace: string]: Actions;
-  };
-
-  /**
-   * The libraries exposed by this package.
-   */
-  libraries?: {
-    /**
-     * The Fill compoments exposed by this package.
-     */
-    fills?: {
-      [namespace: string]: {
-        [name: string]: React.ElementType;
-      };
-    };
-
-    /**
-     * The rest of the libraries exposed by this package.
-     */
-    [namespace: string]: {
-      [library: string]: any;
-    };
-  };
-}
-
-export default Package;
-
-/**
- * An object containing Frontity actions, or other objects containing actions.
- */
-interface Actions {
-  [key: string]: (...args: any) => any | Actions;
-}
-
-/**
- * The configuration object for a Fill.
- */
-export interface Fill {
-  /**
-   * The name of the Slot that this Fill wants to be injected in.
-   */
-  slot: string;
-
-  /**
-   * The name of the React component that it should be stored in
-   * `libraries.fills`.
-   */
-  library: string;
-
-  /**
-   * The priority of this fill in relation to the other fills that also point to
-   * the same `slot`.
-   *
-   * @defaultValue 10
-   */
-  priority?: number;
-
-  /**
-   * Optional object with props that will be passed to the React component
-   * defined in `library`.
-   */
-  props?: {
-    [key: string]: any;
   };
 }
