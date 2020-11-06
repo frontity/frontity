@@ -29,6 +29,22 @@ Object {
 }
 `;
 
+exports[`actions.source.fetch should ignore the hash in the link 1`] = `
+Object {
+  "/some/route/": Object {
+    "id": 1,
+    "isFetching": false,
+    "isPostType": true,
+    "isReady": true,
+    "link": "/some/route/",
+    "page": 1,
+    "query": Object {},
+    "route": "/some/route/",
+    "type": "example",
+  },
+}
+`;
+
 exports[`actions.source.fetch should run again when \`force\` is used 1`] = `
 Object {
   "/some/route/": Object {

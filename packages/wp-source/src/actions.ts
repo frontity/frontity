@@ -20,7 +20,7 @@ const actions: WpSource["actions"]["source"] = {
     const { handlers, redirections } = libraries.source;
 
     // Get route and route params.
-    const link = normalize(route);
+    const link = normalize(route, { removeHash: true });
     const linkParams = parse(route);
     const { query, page, queryString } = linkParams;
 

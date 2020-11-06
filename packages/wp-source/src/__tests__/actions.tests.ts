@@ -79,6 +79,12 @@ describe("actions.source.fetch", () => {
     expect(store.state.source.data).toMatchSnapshot();
   });
 
+  test("should ignore the hash in the link", async () => {
+    await store.actions.source.fetch("/some/route/#some-div");
+    expect(handler.func).toHaveBeenCalledTimes(1);
+    expect(store.state.source.data).toMatchSnapshot();
+  });
+
   test("does nothing if data exists", async () => {
     store.state.source.data["/some/route/"] = {
       type: "example",
