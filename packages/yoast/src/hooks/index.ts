@@ -8,6 +8,7 @@ import {
   isTerm,
   isAuthor,
   isPostTypeArchive,
+  isTaxonomy,
 } from "@frontity/source";
 
 /**
@@ -44,7 +45,7 @@ export const useYoastHead = (link: string): UseYoastHeadResult => {
   if (isPostType(data)) {
     const { type, id } = data;
     entity = state.source[type][id];
-  } else if (isTerm(data)) {
+  } else if (isTerm(data) || isTaxonomy(data)) {
     const { taxonomy, id } = data;
     entity = state.source[taxonomy][id];
   } else if (isAuthor(data)) {
