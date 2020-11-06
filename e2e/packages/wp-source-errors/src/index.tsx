@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "frontity";
 import { Connect } from "frontity/types";
+import { isError } from "@frontity/source";
 import WpSourceErrors, { Packages } from "../types";
 
 /**
@@ -12,19 +13,19 @@ import WpSourceErrors, { Packages } from "../types";
  */
 const Root: React.FC<Connect<Packages>> = ({ state }) => {
   const data = state.source.get(state.frontity.initialLink);
-
-  if (data.isError)
-    return (
-      <>
-        <div data-test-id="is404">is404: {data.is404 ? "true" : "false"}</div>
-        <div data-test-id="isError">
-          isError: {data.isError ? "true" : "false"}
-        </div>
-        <div data-test-id="status">error status: {data.errorStatus}</div>
-      </>
-    );
-
-  return null;
+  return (
+    <>
+      <div data-test-id="is404">
+        is404: {isError(data) && data.is404 ? "true" : "false"}
+      </div>
+      <div data-test-id="isError">
+        isError: {isError(data) ? "true" : "false"}
+      </div>
+      <div data-test-id="status">
+        error status: {isError(data) && data.errorStatus}
+      </div>
+    </>
+  );
 };
 
 const wpSourceErrors: WpSourceErrors = {
