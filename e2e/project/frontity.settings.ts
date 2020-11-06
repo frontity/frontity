@@ -363,6 +363,15 @@ const settings: Settings = [
       },
     ],
   },
+  {
+    name: "render",
+    state: {
+      frontity: {
+        url: "https://domain.com",
+      },
+    },
+    packages: ["e2e-render", "@frontity/tiny-router", "@frontity/wp-source"],
+  },
 ];
 
 export default settings;

@@ -47,9 +47,6 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   // Sets state default value.
   if (!options.state) options.state = {};
 
-  state.router.link = link;
-  state.router.state = options.state;
-
   if (
     options.method === "push" ||
     (!options.method && state.frontity.platform === "client")
@@ -60,6 +57,9 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     window.history.replaceState(options.state, "", link);
     if (state.router.autoFetch) actions.source?.fetch(link);
   }
+
+  state.router.link = link;
+  state.router.state = options.state;
 };
 
 /**

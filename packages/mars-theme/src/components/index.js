@@ -8,11 +8,17 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 
+const Data = ({ state }) => {
+  const data = state.source.get(state.router.link);
+  console.log(data);
+  return <Theme />;
+};
+
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
  */
-const Theme = ({ state }) => {
+const Theme = connect(({ state }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
 
@@ -46,9 +52,9 @@ const Theme = ({ state }) => {
       </Main>
     </>
   );
-};
+});
 
-export default connect(Theme);
+export default connect(Data);
 
 const globalStyles = css`
   body {
