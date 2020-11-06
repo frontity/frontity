@@ -83,9 +83,7 @@
     {
       "files": ["**/*.ts", "**/*.tsx"],
       "plugins": ["eslint-plugin-tsdoc"],
-      "extends": [
-        "plugin:@typescript-eslint/recommended"
-      ],
+      "extends": ["plugin:@typescript-eslint/recommended"],
       "rules": {
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
@@ -103,11 +101,17 @@
       }
     },
     {
-      "files": ["**/__tests__/*.{js,ts,jsx,tsx}", "**/*.spec.js"],
+      "files": ["**/__tests__/*.{js,ts,jsx,tsx}", "**/*.spec.(js|ts)"],
       "rules": {
         "jsdoc/require-jsdoc": 0,
         "jsdoc/require-description": 0,
-        "tsdoc/syntax": 0
+        "tsdoc/syntax": 0,
+        "jest/expect-expect": [
+          "error",
+          {
+            "assertFunctionNames": ["expect", "*.should"]
+          }
+        ]
       }
     }
   ]
