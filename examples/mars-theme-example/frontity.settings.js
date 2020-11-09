@@ -14,7 +14,6 @@ const settings = {
       name: "@frontity/mars-theme",
       state: {
         theme: {
-          autoPrefetch: "no",
           menu: [
             ["Home", "/"],
             ["Nature", "/category/nature/"],
