@@ -8,7 +8,9 @@ let counter = 0;
 const Counter = connect(() => {
   const { state } = useConnect<Packages>();
 
-  // Subscribe to the current data object.
+  // Subscribe to the current data object. This will rerender each time either
+  // `state.router.link` or the data object returned by `state.source`get`
+  // changes.
   state.source.get(state.router.link);
 
   // Add 1 to the counter each time this component rerenders.
@@ -16,29 +18,16 @@ const Counter = connect(() => {
 
   return (
     <>
-      <div>{counter}</div>
+      <div data-test-id="counter">Renders: {counter}</div>
       <Theme />
     </>
   );
 });
 
 const Theme = connect(() => {
-  const { state, actions } = useConnect<Packages>();
+  const { state } = useConnect<Packages>();
   const data = state.source.get(state.router.link);
-
-  return (
-    <>
-      <button
-        data-button-id="go-to-post-1"
-        onClick={() => {
-          actions.router.set("/post-1/");
-        }}
-      >
-        Go to post 1
-      </button>
-      {isPost(data) && <div data-test-id="content">Post 1</div>}
-    </>
-  );
+  return <>{isPost(data) && <div data-test-id="content">Post 1</div>}</>;
 });
 
 const render: Render = {
@@ -55,7 +44,6 @@ const render: Render = {
   roots: {
     render: Counter,
   },
-  libraries: {},
 };
 
 export default render;

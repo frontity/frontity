@@ -6,7 +6,6 @@ interface Render extends Package {
   roots: {
     render: React.ElementType;
   };
-  libraries: {};
 }
 
 export type Packages = Render & Router & Source;
