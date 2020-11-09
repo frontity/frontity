@@ -30,7 +30,7 @@ import phuQuoc1200x791 from "../static/images/sunrise-phu-quoc-island-ocean-1200
 /**
  * A React component that displays an iceland image.
  *
- * @param className - The class.
+ * @param className - The CSS class.
  * @param styles - The styles, in `css` prop format.
  *
  * @returns The iceland image with some class and styles.
@@ -53,9 +53,9 @@ const ImgIceland = ({ className, styles }) => (
 );
 
 /**
- * A React component that displays an japan image.
+ * A React component that displays a japan image.
  *
- * @param className - The class.
+ * @param className - The CSS class.
  * @param styles - The styles, in `css` prop format.
  *
  * @returns The japan image with some class and styles.
@@ -79,7 +79,7 @@ const ImgJapan = ({ className, styles }) => (
 /**
  * A React component that displays an canyon image.
  *
- * @param className - The class.
+ * @param className - The CSS class.
  * @param styles - The styles, in `css` prop format.
  *
  * @returns The canyon image with some class and styles.
@@ -104,7 +104,7 @@ const ImgCanyon = ({ className, styles }) => (
 /**
  * A React component that displays an phuquoc image.
  *
- * @param className - The class.
+ * @param className - The CSS class.
  * @param styles - The styles, in `css` prop format.
  *
  * @returns The phuquoc image with some class and styles.
