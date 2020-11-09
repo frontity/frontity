@@ -1,3 +1,8 @@
+/* eslint-disable */
+/*
+ * TSDocs will be added in the `migrate-to-react-easy-state` PR:
+ * https://github.com/frontity/frontity/pull/415
+ */
 import { observable, raw } from "./observable";
 
 export const getSnapshot = (obj) => {
