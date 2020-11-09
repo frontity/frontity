@@ -26,6 +26,6 @@ describe("Render", () => {
     });
     cy.location("href").should("eq", "http://localhost:3001/post-1/");
     cy.get("[data-test-id='content']").should("contain", "Post 1");
-    cy.get("[data-test-id='counter']").should("have.text", "2");
+    cy.get("[data-test-id='counter']").should("have.text", "Renders: 2");
   });
 });

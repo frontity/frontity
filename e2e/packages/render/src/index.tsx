@@ -1,7 +1,7 @@
 import React from "react";
 import Render, { Packages } from "../types";
 import { connect, useConnect } from "frontity";
-import { isPost } from "@frontity/source";
+import { isPost, isPostArchive } from "@frontity/source";
 
 let counter = 0;
 
@@ -27,7 +27,13 @@ const Counter = connect(() => {
 const Theme = connect(() => {
   const { state } = useConnect<Packages>();
   const data = state.source.get(state.router.link);
-  return <>{isPost(data) && <div data-test-id="content">Post 1</div>}</>;
+  return (
+    <>
+      {data.isFetching && <div data-test-id="content">Fetching...</div>}
+      {isPostArchive(data) && <div data-test-id="content">Rendered: Home</div>}
+      {isPost(data) && <div data-test-id="content">Rendered: Post 1</div>}
+    </>
+  );
 });
 
 const render: Render = {
@@ -36,7 +42,7 @@ const render: Render = {
       data: {
         "/": {
           isReady: true,
-          isHome: true,
+          isPostArchive: true,
         },
       },
     },
