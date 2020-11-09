@@ -6,8 +6,8 @@ import Package from "../types";
  * A React component that loads two scripts, one from an external source, and
  * another that contains some code.
  *
- * It renders a third one which its code returns a value, to check that it's not
- * returned in the `useEffect` hook, see [this
+ * It also renders a third script whose code returns a value to check that this
+ * value is not returned in the `useEffect` hook, see [this
  * bug](https://github.com/frontity/frontity/issues/592).
  *
  * @returns React element.
