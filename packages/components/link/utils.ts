@@ -97,7 +97,7 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
 
   /**
    * Removes the timeout to avoid executing the callback if the cursor is
-   * moved out of the element before `config.hoverDelay`
+   * moved out of the element before `config.hoverDelay`.
    */
   const mouseOutHandler = () => {
     clearTimeout(timeout);
@@ -110,4 +110,16 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
     el.removeEventListener("mouseover", mouseOverHandler);
     el.removeEventListener("mouseout", mouseOutHandler);
   };
+};
+
+/**
+ * Removes the WP URL.
+ *
+ * @param link - The link URL.
+ * @param wpURL - The WP URL.
+ *
+ * @returns The URL without the WP URL.
+ */
+export const removeWPUrl = (link: string, wpURL: string) => {
+  return link.replace(wpURL, "");
 };
