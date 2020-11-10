@@ -15,6 +15,21 @@ interface Redirections extends Package {
      */
     redirections: React.ReactType;
   };
+  /**
+   * The state exposed by this package.
+   */
+  state: {
+    /**
+     * The router namespace.
+     */
+    router: {
+      /**
+       * How the router should handle 301 redirections that can be stored in the
+       * WordPress database. Possible values are: "404" | "no" | "all" | RegExp.
+       */
+      redirections: Router["state"]["router"]["redirections"];
+    };
+  };
 }
 
 /**

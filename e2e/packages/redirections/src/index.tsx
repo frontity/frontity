@@ -65,6 +65,21 @@ const redirections: Redirections = {
   roots: {
     redirections: connect(Component),
   },
+  state: {
+    router: {
+      redirections: "all",
+    },
+  },
+  actions: {
+    redirections: {
+      init: ({ state, libraries }) => {
+        const { query } = libraries.source.parse(state.frontity.initialLink);
+        if (query.redirections) {
+          state.router.redirections = query.redirections;
+        }
+      },
+    },
+  },
 };
 
 export default redirections;

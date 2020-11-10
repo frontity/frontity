@@ -135,7 +135,7 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
     } catch (e) {
       // If there was a redirection, a custom error will be thrown inside of
       // beforeSSR action of tiny-router.
-      if (e.message == "There was a redirection") {
+      if (e.message == "Redirection") {
         return;
       }
       throw e;
