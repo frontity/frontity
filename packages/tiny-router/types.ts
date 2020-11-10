@@ -50,7 +50,7 @@ interface TinyRouter extends Router {
       init: Action<Packages>;
 
       /**
-       * Callback that runs in server side, right before the react rendering.
+       * Callback that runs on the server side, right before React's rendering.
        *
        * @remarks Called by the Frontity framework.
        */

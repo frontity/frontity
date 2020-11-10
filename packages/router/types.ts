@@ -13,7 +13,7 @@ export interface SetOptions {
 
   /**
    * An object that will be saved in `window.history.state`. This object is
-   * recovered when the user go back and forward using the browser buttons.
+   * recovered when the user goes back and forward using the browser buttons.
    */
   state?: Record<string, unknown>;
 }
@@ -33,12 +33,12 @@ interface Router<T = null> extends Package {
       /**
        * Variable that points to the current link in the Frontity site.
        *
-       * @example "/" // You are in the homepage.
-       * @example "/page/2" // You are in the homepage, page 2.
+       * @example "/" // You are on the homepage.
+       * @example "/page/2" // You are on the homepage, page 2.
        * @example "/category/nature/" // You are in the category "Nature".
        * @example "/category/nature/page/2" // Same category, page 2.
        * @example "/some-post/" // You are in a post, path is /some-post/.
-       * @example "/some-page/" // You are in a page, path is /some-page/.
+       * @example "/some-page/" // You are on a page, path is /some-page/.
        */
       link: string;
 
@@ -48,6 +48,7 @@ interface Router<T = null> extends Package {
       state: SetOptions["state"];
     };
   };
+
   /**
    * Actions exposed by router packages.
    */

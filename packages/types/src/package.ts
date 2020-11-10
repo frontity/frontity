@@ -53,7 +53,7 @@ export interface Package {
    */
   libraries?: {
     /**
-     * The Fill compoments exposed by this package.
+     * The Fill components exposed by this package.
      */
     fills?: {
       [namespace: string]: {
@@ -95,7 +95,7 @@ export interface Fill {
   library: string;
 
   /**
-   * The priority of this fill in relation to the other fills that also point to
+   * The priority of this fill in relation to other fills that also point to
    * the same `slot`.
    *
    * @defaultValue 10
