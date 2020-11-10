@@ -125,12 +125,21 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
       })
     );
 
-    // Run beforeSSR actions.
-    await Promise.all(
-      Object.values(store.actions).map(({ beforeSSR }) => {
-        if (beforeSSR) return beforeSSR({ ctx });
-      })
-    );
+    try {
+      // Run beforeSSR actions.
+      await Promise.all(
+        Object.values(store.actions).map(({ beforeSSR }) => {
+          if (beforeSSR) return beforeSSR({ ctx });
+        })
+      );
+    } catch (e) {
+      // If there was a redirection, a custom error will be thrown inside of
+      // beforeSSR action of tiny-router.
+      if (e.message == "There was a redirection") {
+        return;
+      }
+      throw e;
+    }
 
     // Pass a context to HelmetProvider which will hold our state specific to
     // each request.

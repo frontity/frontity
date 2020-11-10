@@ -131,11 +131,12 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
       const data = state.source.get(state.router.link) as RedirectionData &
         ErrorData;
 
-      if (data?.isRedirection && state.router.redirections === "404") {
+      if (data?.isRedirection) {
         // TODO: Handle the Frontity Options
         ctx.redirect(
           data.location + "?" + `frontity_name=` + state.frontity.options.name
         );
+        throw new Error("Redirection");
       } else if (data.isError) {
         ctx.status = data.errorStatus;
       }
