@@ -1,4 +1,5 @@
 import { Package, Action, AsyncAction } from "frontity/types";
+import { Data } from "@frontity/source/types";
 import WpSource from "@frontity/wp-source/types";
 
 /**
@@ -130,6 +131,36 @@ export interface CommentItem {
    * List of replies (if any).
    */
   children?: CommentItem[];
+}
+
+/**
+ * Data for the comments published in a post.
+ */
+export interface CommentData extends Data {
+  /**
+   * Post ID where the comments are published.
+   */
+  postId: number;
+  /**
+   * Type of this data object.
+   */
+  type: "comments";
+  /**
+   * Identify a data of type comments.
+   */
+  isComments: true;
+  /**
+   * Tree of all comments published.
+   */
+  items: CommentItem[];
+  /**
+   * Number of comments.
+   */
+  total: number;
+  /**
+   * Number of comment pages.
+   */
+  totalPages: number;
 }
 
 /**

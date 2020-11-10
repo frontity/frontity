@@ -13,8 +13,8 @@ import cat1PostsCpt from "./mocks/category/cat-1-posts-cpt.json";
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store = createStore<WpSource>(clone(wpSource()));
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -149,6 +149,38 @@ describe("category", () => {
       );
     // Fetch entities
     await store.actions.source.fetch("/category/cat-1/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("with a search", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([cat1]))
+      .mockResolvedValueOnce(
+        mockResponse(cat1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "3",
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/category/cat-1/?s=some+search");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("with a search with pagination", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([cat1]))
+      .mockResolvedValueOnce(
+        mockResponse(cat1PostsPage2, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "3",
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/category/cat-1/page/2?s=some+search");
     expect(store.state.source).toMatchSnapshot();
   });
 

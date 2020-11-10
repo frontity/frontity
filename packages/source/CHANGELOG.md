@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.3.1
+
+### Patch Changes
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Rename `RouteParams` type to `LinkParams`. The word `route` is now used to
+  describe a `link` without the pagination part.
+- Updated dependencies [[`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b)]:
+  - frontity@1.12.0
+
 ## 1.3.0
 
 ### Minor Changes

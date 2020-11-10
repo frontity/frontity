@@ -1,4 +1,5 @@
 import * as frontity from "frontity";
+import * as frontityError from "@frontity/error";
 import clone from "clone-deep";
 import { createStore } from "@frontity/connect";
 import { mergeDeepRight } from "ramda";
@@ -9,7 +10,7 @@ import { Packages } from "../../types";
 import { mockResponse, fromEntries } from "./mocks/helpers";
 
 const fetch = jest.spyOn(frontity, "fetch").mockResolvedValue(undefined);
-const warn = jest.spyOn(frontity, "warn");
+const warn = jest.spyOn(frontityError, "warn");
 jest.spyOn(Date, "now").mockReturnValue(1594161555147);
 
 describe("actions.comments.submit", () => {

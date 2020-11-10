@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2.2
+
+### Patch Changes
+
+- [`c21b2b4f`](https://github.com/frontity/frontity/commit/c21b2b4fb31516d7111fb5ecf195527851c160f8) [#569](https://github.com/frontity/frontity/pull/569) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Do not call `actions.source.fetch()` if it doesn't exist.
+
 ## 1.2.1
 
 ### Patch Changes

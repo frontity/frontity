@@ -15,7 +15,7 @@ const mockedFetch: jest.MockedFunction<typeof fetch> = jest.fn((_) =>
 let store: InitializedStore<WpSource & Package>;
 
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
+  store = createStore<WpSource>(clone(wpSource()));
   store.state.source.api = "https://test.frontity.org/wp-json";
 });
 

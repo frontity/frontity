@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import clone from "clone-deep";
 import { State } from "frontity/types";
 import { createStore, InitializedStore } from "@frontity/connect";
 import wpSource from "@frontity/wp-source/src";
+import { DateData } from "@frontity/source/types/data";
 import { Packages, HeadTag } from "../../types";
 import headTagsPackage from "..";
 import {
@@ -765,7 +765,11 @@ describe("state.headTags.get() (no entity)", () => {
         day: undefined,
         isFetching: false,
         isReady: true,
-      },
+        link: "/2019/12/",
+        route: "/2019/12/",
+        query: {},
+        page: 1,
+      } as DateData,
     };
 
     // Populate router state.
