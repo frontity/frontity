@@ -1,4 +1,4 @@
-name: Eslint
+name: eslint
 
 on:
   # By adding a schedule task to this workflow we will automatically
@@ -16,7 +16,6 @@ on:
 jobs:
   eslint:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -35,4 +34,4 @@ jobs:
           CI: true
 
       - name: Run Eslint
-        uses: bradennapier/eslint-plus-action@v3
+        uses: bradennapier/eslint-plus-action@v3.4.2

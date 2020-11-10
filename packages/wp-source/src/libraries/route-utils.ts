@@ -1,45 +1,112 @@
-import { RouteParams } from "@frontity/source/types";
+import { LinkParams } from "@frontity/source/types";
 import WpSource from "../../types";
 
-export const addFinalSlash = (path: string): string =>
-  path.replace(/\/?$/, "/");
+/**
+ * Add the final slash to a link. It does nothing if the link already has a
+ * final slash.
+ *
+ * @param link - The link to be processed.
+ *
+ * @returns The same link but with the final slash.
+ */
+export const addFinalSlash = (link: string): string =>
+  link.replace(/\/?$/, "/");
 
-export const queryToObj = (query = "") =>
-  query && query.includes("=")
-    ? query.split("&").reduce((result, param) => {
+/**
+ * Turn a query string into a query object.
+ *
+ * @param queryString - The query, in string format.
+ *
+ * @returns An object with the queries and its values.
+ */
+export const queryToObj = (queryString = ""): Record<string, string> =>
+  queryString && queryString.includes("=")
+    ? queryString.split("&").reduce((result, param) => {
         const [k, v] = param.split("=");
         result[k] = v;
         return result;
       }, {})
     : {};
 
-export const objToQuery = (obj: Record<string, any>) => {
-  const entries = Object.entries(obj);
+/**
+ * Turn a query object into a query string.
+ *
+ * @param queryObject -  The query object.
+ *
+ * @returns The query, in string format.
+ */
+export const objToQuery = (queryObject: Record<string, any>) => {
+  const entries = Object.entries(queryObject).sort(([a], [b]) => {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
   return entries.length
     ? `?${entries.map(([key, value]) => `${key}=${value}`).join("&")}`
     : "";
 };
 
-export const concatPath = (...paths: string[]) =>
+/**
+ * Concatenate links together, making sure there are no double slashes.
+ *
+ * @param links - The links to be concatenated.
+ *
+ * @returns The final link.
+ */
+export const concatLink = (...links: string[]) =>
   [""]
-    .concat(...paths.map((path) => path.split("/").filter((p) => p)), "")
+    .concat(...links.map((path) => path.split("/").filter((p) => p)), "")
     .join("/");
 
-export const decomposeRoute = (route: string) => {
+/**
+ * The return of the {@link extractLinkParts} function.
+ */
+interface ExtractLinkPartsReturn {
+  /**
+   * The pathname of the link.
+   */
+  pathname: string;
+
+  /**
+   * The query string of the link.
+   */
+  queryString: string;
+
+  /**
+   * The hash part of the link.
+   */
+  hash: string;
+}
+
+/**
+ * Extract the different link parts: pathname, query and hash.
+ *
+ * @param link - The link.
+ *
+ * @returns An object with the different parts of the link. Defined in {@link
+ * ExtractLinkPartsReturn}.
+ */
+export const extractLinkParts = (link: string): ExtractLinkPartsReturn => {
   const [
     ,
     pathname,
-    query,
+    queryString,
     hash,
   ] = /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)(?:\?([^#]*))?(#.*)?/.exec(
-    route
+    link
   );
-  return { pathname, query, hash };
+  return { pathname, queryString, hash };
 };
 
-// Used by `source.parse()`
-export const routeToParams = (route: string): RouteParams => {
-  const { pathname, query, hash } = decomposeRoute(route);
+/**
+ * Extract the different Frontity link params.
+ *
+ * @param link - The link.
+ *
+ * @returns The link params, defined by {@link LinkParams}.
+ */
+const linkToParams = (link: string): LinkParams => {
+  const { pathname, queryString, hash } = extractLinkParts(link);
   const [, path, page] = /^(.*)page\/(\d+)\/?(\?.*)?$/.exec(pathname) || [
     null,
     pathname,
@@ -50,39 +117,70 @@ export const routeToParams = (route: string): RouteParams => {
     path: addFinalSlash(path),
     route: addFinalSlash(path),
     page: parseInt(page, 10),
-    query: queryToObj(query),
+    query: queryToObj(queryString),
+    queryString: objToQuery(queryToObj(queryString)),
     hash,
   };
 };
 
-// Used by `source.stringify()`
-export const paramsToRoute = ({
+/**
+ * Turn a set of Frontity link params into a string link.
+ *
+ * @param linkParams - The link params, defined by {@link LinkParams}.
+ *
+ * @returns The link, in string format.
+ */
+const paramsToLink = ({
   path = "/",
   route,
   page = 1,
   query = {},
   hash = "",
-}: RouteParams): string => {
-  // Use route if present, otherwise use path
+}: LinkParams): string => {
+  // Use route if present, otherwise use path.
   path = route || path;
 
-  // correct path
+  // Correct the path.
   path = addFinalSlash(path);
 
   const pathAndPage = page > 1 ? `${path}page/${page}/` : path;
-  const queryStr = objToQuery(query);
+  const queryString = objToQuery(query);
 
-  return `${pathAndPage}${queryStr}${hash}`;
+  return `${pathAndPage.toLowerCase()}${queryString}${hash}`;
 };
 
-export const parse: WpSource["libraries"]["source"]["parse"] = (route) =>
-  routeToParams(route);
+/**
+ * Extract the different Frontity link params.
+ *
+ * @param link - The link.
+ *
+ * @returns The link params, defined by {@link LinkParams}.
+ */
+export const parse: WpSource["libraries"]["source"]["parse"] = (link) =>
+  linkToParams(link);
 
+/**
+ * Turn a set of Frontity link params into a string link.
+ *
+ * @param linkParams - The link params, defined by {@link LinkParams}.
+ *
+ * @returns The link, in string format.
+ */
 export const stringify: WpSource["libraries"]["source"]["stringify"] = (
-  routeParams
-) => paramsToRoute(routeParams);
+  linkParams
+) => paramsToLink(linkParams);
 
-export const normalize = (route: string): string =>
-  paramsToRoute(routeToParams(route));
+/**
+ * Normalize a link, making sure that multiple links that should point to
+ * the same canonical link are processed as a single one.
+ *
+ * @example `/some-post -> /some-post/`
+ *
+ * @param link - The link to be normalized.
+ *
+ * @returns The normalized link.
+ */
+export const normalize = (link: string): string =>
+  paramsToLink(linkToParams(link));
 
 export default { parse, stringify, normalize };

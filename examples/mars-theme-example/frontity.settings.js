@@ -1,4 +1,4 @@
-export default {
+const settings = {
   name: "mars-theme-example",
   state: {
     frontity: {
@@ -32,9 +32,11 @@ export default {
       name: "@frontity/wp-source",
       state: {
         source: {
-          api: "https://test.frontity.org/wp-json",
+          url: "https://test.frontity.org",
         },
       },
     },
   ],
 };
+
+export default settings;

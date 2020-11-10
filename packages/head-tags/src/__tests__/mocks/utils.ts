@@ -1,12 +1,34 @@
-/* eslint-disable @typescript-eslint/camelcase */
-import { HeadTags, State } from "../../../types";
+import { State } from "frontity/types";
+import {
+  CategoryData,
+  PostArchiveData,
+  PostData,
+  AuthorData,
+} from "@frontity/source/types/data";
+import { HeadTag, Packages } from "../../../types";
 
-export const mockPostEntity = (
-  headTags?: HeadTags
-): {
-  post: State["source"]["post"];
-  data: State["source"]["data"];
-} => {
+/**
+ * Return type of {@link mockPostEntity}.
+ */
+interface MockPostEntityData {
+  /**
+   * Mocked post.
+   */
+  post: State<Packages>["source"]["post"];
+
+  /**
+   * Mocked data object.
+   */
+  data: State<Packages>["source"]["data"];
+}
+
+/**
+ * Returns a mocked post and its data object.
+ *
+ * @param headTags - Array of {@link HeadTag}.
+ * @returns Object of type {@link MockPostEntityData}.
+ */
+export const mockPostEntity = (headTags?: HeadTag[]): MockPostEntityData => {
   return {
     post: {
       1: {
@@ -30,17 +52,37 @@ export const mockPostEntity = (
         isPost: true,
         isFetching: false,
         isReady: true,
-      },
+        link: "/post-1/",
+        route: "/post-1/",
+        query: {},
+        page: 1,
+      } as PostData,
     },
   };
 };
 
-export const mockPostType = (
-  headTags: HeadTags
-): {
-  type: State["source"]["type"];
-  data: State["source"]["data"];
-} => {
+/**
+ * Return type of {@link mockPostType}.
+ */
+interface MockPostTypeData {
+  /**
+   * Mocked post type.
+   */
+  type: State<Packages>["source"]["type"];
+
+  /**
+   * Mocked data object.
+   */
+  data: State<Packages>["source"]["data"];
+}
+
+/**
+ * Returns a mocked post type and its data object.
+ *
+ * @param headTags - Array of {@link HeadTag}.
+ * @returns Object of type {@link MockPostTypeData}.
+ */
+export const mockPostType = (headTags: HeadTag[]): MockPostTypeData => {
   return {
     type: {
       post: {
@@ -63,12 +105,37 @@ export const mockPostType = (
         isHome: true,
         isFetching: false,
         isReady: true,
-      },
+        link: "/",
+        route: "/",
+        query: {},
+        page: 1,
+      } as PostArchiveData,
     },
   };
 };
 
-export const mockTaxonomy = (headTags: HeadTags) => {
+/**
+ * Return type of {@link mockTaxonomy}.
+ */
+interface MockTaxonomyData {
+  /**
+   * Mocked taxonomy.
+   */
+  category: State<Packages>["source"]["category"];
+
+  /**
+   * Mocked data object.
+   */
+  data: State<Packages>["source"]["data"];
+}
+
+/**
+ * Returns a mocked taxonomy and its data object.
+ *
+ * @param headTags - Array of {@link HeadTag}.
+ * @returns Object of type {@link MockTaxonomyData}.
+ */
+export const mockTaxonomy = (headTags: HeadTag[]): MockTaxonomyData => {
   return {
     category: {
       1: {
@@ -83,20 +150,46 @@ export const mockTaxonomy = (headTags: HeadTags) => {
     },
     data: {
       "/category/cat-1/": {
-        taxonomy: "category" as "category",
+        taxonomy: "category",
         id: 1,
         items: [],
-        isArchive: true as true,
-        isTaxonomy: true as true,
-        isCategory: true as true,
-        isFetching: false as false,
-        isReady: true as true,
-      },
+        isArchive: true,
+        isTerm: true,
+        isTaxonomy: true,
+        isCategory: true,
+        isFetching: false,
+        isReady: true,
+        link: "/post-1/",
+        route: "/post-1/",
+        query: {},
+        page: 1,
+      } as CategoryData,
     },
   };
 };
 
-export const mockAuthor = (headTags: HeadTags) => {
+/**
+ * Return type of {@link mockAuthor}.
+ */
+interface MockAuthorData {
+  /**
+   * Mocked author.
+   */
+  author: State<Packages>["source"]["author"];
+
+  /**
+   * Mocked data object.
+   */
+  data: State<Packages>["source"]["data"];
+}
+
+/**
+ * Returns a mocked author and its data object.
+ *
+ * @param headTags - Array of {@link HeadTag}.
+ * @returns Object of type {@link MockAuthorData}.
+ */
+export const mockAuthor = (headTags: HeadTag[]): MockAuthorData => {
   return {
     author: {
       1: {
@@ -111,11 +204,15 @@ export const mockAuthor = (headTags: HeadTags) => {
       "/author/author-1/": {
         id: 1,
         items: [],
-        isArchive: true as true,
-        isAuthor: true as true,
-        isFetching: false as false,
-        isReady: true as true,
-      },
+        isArchive: true as const,
+        isAuthor: true as const,
+        isFetching: false as const,
+        isReady: true as const,
+        link: "/author/author-1/",
+        route: "/author/author-1/",
+        query: {},
+        page: 1,
+      } as AuthorData,
     },
   };
 };

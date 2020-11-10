@@ -1,7 +1,6 @@
 import { ServerError } from "@frontity/source";
 
 /**
- *
  * Check if a given year is a leap year.
  *
  * @param year - Year as integer.
@@ -18,7 +17,6 @@ function isLeapYear(year: number) {
  * @param year - Year as integer.
  * @param month - Month of the year as integer (should start with 1).
  * @param day - Day of the month as integer (should start with 1).
- *
  */
 function validateDate(year: number, month: number, day: number) {
   // This is just an arbitrary sanity check.

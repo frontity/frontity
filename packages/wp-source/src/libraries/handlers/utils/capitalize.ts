@@ -1,3 +1,10 @@
+/**
+ * Receive a string in snake or kebab case and return it capitalized in upper
+ * camel case.
+ *
+ * @param str - Input string.
+ * @returns - Capitalized string.
+ */
 export default (str: string) =>
   str
     .split(/[\s-_]+/)

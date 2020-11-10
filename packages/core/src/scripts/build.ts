@@ -1,21 +1,22 @@
 import * as tsNode from "ts-node";
 
 /**
- * This file gets transpiled to JS anyway, but if the users's frontity.settings.(js|ts)
- * is an ES Module, we cannot require an ES Module from a commonjs module!
+ * This file gets transpiled to JS anyway, but if the users's
+ * frontity.settings.(js|ts) is an ES Module, we cannot require an ES Module
+ * from a commonjs module.
  *
- * This is why we use ts-node here as well as in the `dev` script. It's ONLY
- * because we want the user to be able to use ES Modules syntax in the
- * frontity.settings.(js|ts) file like:
+ * This is why we use ts-node here as well as in the `dev` script.
+ * It's only because we want the user to be able to use ES Modules syntax in
+ * the frontity.settings.(js|ts) file like this.
  *
- * ```
+ * @example
+ * ```js
  * export default {
  *   name: 'my-theme',
  *   state: {},
  *   packages: {},
  * }
  * ```
- *
  */
 tsNode.register({
   transpileOnly: true,
@@ -52,16 +53,50 @@ import { Mode } from "../../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
 
-export default async ({
-  mode,
-  target,
-  publicPath,
-}: {
+/**
+ * The options of the build command.
+ */
+export interface BuildOptions {
+  /**
+   * The Webpack mode used, either "development" or "production".
+   *
+   * @defaultValue "production"
+   */
   mode: Mode;
-  target: "both" | "es5" | "module";
+
+  /**
+   * The JavaScript transpilation target. Either "es5" or "module".
+   *
+   * @defaultValue "both"
+   */
+  target: "es5" | "module" | "both";
+
+  /**
+   * The publicPath used in Webpack.
+   *
+   * @defaultValue "/static/"
+   */
   publicPath: string;
-}): Promise<void> => {
-  console.log(`mode: ${mode}\n`);
+}
+
+/**
+ * The Frontity build command that creates all the bundles and assets necessary
+ * to run the Frontity server.
+ *
+ * @param options - Defined in {@link BuildOptions}.
+ *
+ * @returns A promise that resolves when the build has finished.
+ */
+export default async ({
+  mode = "production",
+  target = "both",
+  publicPath = "/static/",
+}: BuildOptions): Promise<void> => {
+  console.log();
+  console.log(`  - mode: ${mode}`);
+  console.log(`  - target: ${target}`);
+  console.log(`  - public-path: ${publicPath}`);
+  console.log();
 
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();

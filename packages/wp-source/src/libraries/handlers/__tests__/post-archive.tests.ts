@@ -12,8 +12,8 @@ import postsCpt from "./mocks/post-archive/posts-cpt.json";
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store = createStore<WpSource>(clone(wpSource()));
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -85,6 +85,32 @@ describe("post archive", () => {
     );
     // Fetch entities
     await store.actions.source.fetch("/page/2/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with search", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(
+      mockResponse(posts, {
+        "X-WP-Total": "5",
+        "X-WP-TotalPages": "2",
+      })
+    );
+    // Fetch entities
+    await store.actions.source.fetch("/?s=some+search");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with search and pagination", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(
+      mockResponse(posts2, {
+        "X-WP-Total": "5",
+        "X-WP-TotalPages": "2",
+      })
+    );
+    // Fetch entities
+    await store.actions.source.fetch("/page/2/?s=some+search");
     expect(store.state.source).toMatchSnapshot();
   });
 
