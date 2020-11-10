@@ -2,7 +2,7 @@
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 
-describe("Preview plugin", () => {
+describe("Redirections", () => {
   before(() => {
     task("installPlugin", { name: "redirection" });
 
