@@ -4,7 +4,7 @@ import { DeepPartial } from "ts-essentials";
 /**
  * Gets a Package and returns only what's needed for the frontity.settings.js file.
  */
-type PackageForSettings<Pkg> = Pkg extends Package
+type PackageForSettings<Pkg extends Package> = Pkg extends Package
   ? {
       /**
        * Package name.
