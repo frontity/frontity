@@ -2,7 +2,6 @@ import { MouseEvent } from "react";
 import { Package } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
-import WpSource from "../../yoast/node_modules/@frontity/wp-source/types";
 
 /**
  * The auto prefetching setting. It can be:
@@ -39,7 +38,7 @@ export interface Theme extends Package {
  * Merge of the types of all the namespaces required by the {@link Link}
  * component.
  */
-export type Packages = Source & Router & Theme & WpSource;
+export type Packages = Source & Router & Theme;
 
 /**
  * Props for React component {@link Link}.
