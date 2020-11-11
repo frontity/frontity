@@ -5,6 +5,11 @@ import Dynamic2 from "./dynamic-2";
 
 const Dynamic1 = loadable(() => import("./dynamic"));
 
+/**
+ * A React component that renders two dynamic components.
+ *
+ * @returns React element.
+ */
 const Root: React.FC = () => (
   <>
     <Dynamic1 />
@@ -13,13 +18,10 @@ const Root: React.FC = () => (
 );
 
 const LoadablePackage: Package = {
-  name: "loadable",
-  state: {},
-  actions: {},
+  name: "e2e-loadable",
   roots: {
-    loadable: Root
+    loadable: Root,
   },
-  libraries: {}
 };
 
 export default LoadablePackage;

@@ -75,6 +75,10 @@ export interface GooglePublisherTagProps {
  */
 interface GoogleAdManager extends Package {
   /**
+   * Package name.
+   */
+  name: "@frontity/google-ad-manager";
+  /**
    * Root elements exposed by this package.
    */
   roots: {

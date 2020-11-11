@@ -3,6 +3,11 @@ import Iframe from "@frontity/components/iframe";
 import Package from "../types";
 import { styled } from "frontity";
 
+/**
+ * A React component that renders an Iframe.
+ *
+ * @returns An `<iframe>` tag of https://frontity.org.
+ */
 const Component: React.FC = () => (
   <Container>
     <Iframe
@@ -21,13 +26,10 @@ const Container = styled.div`
 `;
 
 const IframePackage: Package = {
-  name: "iframe",
-  state: {},
-  actions: {},
-  libraries: {},
+  name: "e2e-iframe",
   roots: {
-    iframe: Component
-  }
+    iframe: Component,
+  },
 };
 
 export default IframePackage;

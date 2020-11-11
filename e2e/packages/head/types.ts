@@ -1,13 +1,22 @@
 import { Package } from "frontity/types";
 
+/**
+ * Package to do e2e testing of Frontity's Head component.
+ */
 interface Head extends Package {
-  name: "head";
-  state: {};
-  actions: {};
+  /**
+   * Package name.
+   */
+  name: "e2e-head";
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
-    head: React.ReactType;
+    /**
+     * Head namespace.
+     */
+    head: React.ElementType;
   };
-  libraries: {};
 }
 
 export default Head;

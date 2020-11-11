@@ -1,32 +1,34 @@
 import Router from "@frontity/router/types";
 import Source from "@frontity/source/types";
-import { Action, ServerAction } from "frontity/types";
+import { Frontity, Action, MergePackages, ServerAction } from "frontity/types";
 
 /**
- * The frontity tiny-router package.
- * A very simple router which just exposes one action: `actions.router.set()`.
+ * A tiny router for Frontity projects.
  */
 interface TinyRouter extends Router {
   /**
-   * The package name.
+   * Package name.
    */
   name: "@frontity/tiny-router";
+
   /**
-   * State exposed by the router.
+   * State exposed by this package.
    */
-  state: Router<TinyRouter>["state"] & {
+  state: Router<Packages>["state"] & {
     /**
-     * The frontity namespace.
-     */
-    frontity?: Router["state"]["frontity"];
-    /**
-     * The router namespace.
+     * Router namespace.
      */
     router: {
       /**
-       * When `true`, tiny-router does a actions.source.fetch(link) each time
-       * the actions.router.set(link) is called. This ensures that the data you
+       * When autoFetch is activated, tiny-router does a
+       * `actions.source.fetch(link)` each time the action
+       * `actions.router.set(link)` is triggered. This ensures that the data you
        * need for the current page is always available.
+       *
+       * It also does a `actions.source.fetch(link)` in the `beforeSSR` action
+       * to ensure that the data needed for SSR is also available.
+       *
+       * @defaultValue true
        */
       autoFetch?: boolean;
 
@@ -55,57 +57,36 @@ interface TinyRouter extends Router {
        */
       redirections: string | string[];
     };
-    /**
-     * The source namespace.
-     */
-    source?: {
-      /**
-       * Returns an object that gives you info about the type of that link and related entities.
-       */
-      get?: Source["state"]["source"]["get"];
-    };
   };
+
   /**
-   * Actions exposed by the router.
+   * Actions exposed by this package.
    */
-  actions: Router<TinyRouter>["actions"] & {
+  actions: Router<Packages>["actions"] & {
     /**
      * Router namespace.
      */
     router: {
       /**
-       * `init()` action used internally by Frontity.
+       * Initialize the tiny-router package.
+       *
+       * @remarks Called by the Frontity framework.
        */
-      init: Action<TinyRouter>;
+      init: Action<Packages>;
+
       /**
-       * `beforeSSR()` action used internally by Frontity.
+       * Callback that runs on the server side, right before React's rendering.
+       *
+       * @remarks Called by the Frontity framework.
        */
-      beforeSSR: ServerAction<TinyRouter>;
-    };
-    /**
-     * The source namespace.
-     */
-    source?: {
-      /**
-       * The action which fetches all entities related to a link.
-       */
-      fetch?: Source["actions"]["source"]["fetch"];
-    };
-  };
-  /**
-   * Libraries exposed by the router.
-   */
-  libraries: {
-    /**
-     * The source namespace.
-     */
-    source?: {
-      /**
-       * Map the link onto a standard format (append final slash, etc.).
-       */
-      normalize?: Source["libraries"]["source"]["normalize"];
+      beforeSSR: ServerAction<Packages>;
     };
   };
 }
 
 export default TinyRouter;
+
+/**
+ * Packages that tiny-router depends on.
+ */
+export type Packages = MergePackages<Frontity, Source, TinyRouter>;
