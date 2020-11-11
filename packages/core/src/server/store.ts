@@ -14,7 +14,7 @@ export default ({
   };
   settings: NormalizedSettings;
   url: URL;
-}): InitializedStore => {
+}): InitializedStore<Package> => {
   const state = initialState({ settings, url });
   const merged = mergePackages({ packages, state });
   const store = createStore(merged);

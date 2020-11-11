@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore, require-atomic-updates */
 import Koa from "koa";
 import { get } from "koa-route";
 import serve from "koa-static";

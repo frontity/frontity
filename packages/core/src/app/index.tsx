@@ -1,10 +1,13 @@
 import React from "react";
-import { Provider as ConnectProvider } from "@frontity/connect";
+import {
+  InitializedStore,
+  Provider as ConnectProvider,
+} from "@frontity/connect";
 import { Package } from "@frontity/types";
 import { HelmetProvider, FilledContext } from "react-helmet-async";
 
 type Props = {
-  store: Package;
+  store: InitializedStore<Package>;
   helmetContext?: FilledContext;
 };
 

@@ -60,7 +60,7 @@ describe("Redirections", () => {
     cy.get("#post").should("exist");
   });
 
-  it("The back and forward button should work fine when navigating ", () => {
+  it("The back and forward button should work fine when navigating", () => {
     cy.visit("http://localhost:3001?frontity_name=redirections");
 
     // Go to the "redirected" page
