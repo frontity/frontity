@@ -121,5 +121,7 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
  * @returns The URL without the WP URL.
  */
 export const removeWPUrl = (link: string, wpURL: string) => {
-  return link.replace(wpURL, "");
+  // remove http and https and ensure there's a final slash
+  const domain = wpURL.replace(/https?:\/\//, "").replace(/\/?$/, "/");
+  return link.replace(new RegExp(`https?://${domain}`), "/");
 };

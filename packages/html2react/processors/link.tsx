@@ -1,4 +1,6 @@
-import Link, { LinkProps } from "@frontity/components/link";
+import Link from "@frontity/components/link";
+import { LinkProps } from "@frontity/components/link/types";
+
 import { Processor, Element } from "../types";
 
 /**
