@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.1.4
+
+### Patch Changes
+
+- [`b766e330`](https://github.com/frontity/frontity/commit/b766e330465b6a76d927eaddaa763a684dc1b228) [#610](https://github.com/frontity/frontity/pull/610) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Update the types so that state accepts parameters which are a union of derived state & some serializable value
+
 ## 1.1.3
 
 ### Patch Changes
