@@ -11,42 +11,39 @@
   "plugins": ["jsdoc", "react-hooks"],
   "rules": {
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
-    "@typescript-eslint/indent": "off",
+    "react-hooks/exhaustive-deps": "error", // Checks effect dependencies
     "react/prop-types": "off",
     "import/named": "off",
-    "jsdoc/check-examples": 2,
-    "jsdoc/check-indentation": 0,
-    "jsdoc/check-param-names": 0,
-    "jsdoc/check-syntax": 2,
-    "jsdoc/check-types": 2,
-    "jsdoc/implements-on-classes": 2,
-    "jsdoc/match-description": 2,
-    "jsdoc/newline-after-description": 2,
-    "jsdoc/no-types": 2,
-    "jsdoc/no-undefined-types": 2,
+    "jsdoc/check-examples": "error",
+    "jsdoc/check-param-names": "off",
+    "jsdoc/check-syntax": "error",
+    "jsdoc/check-types": "error",
+    "jsdoc/implements-on-classes": "error",
+    "jsdoc/match-description": "error",
+    "jsdoc/newline-after-description": "error",
+    "jsdoc/no-types": "error",
+    "jsdoc/no-undefined-types": "error",
     "jsdoc/require-description": [
       "error",
       {
         "contexts": ["any"]
       }
     ],
-    "jsdoc/require-description-complete-sentence": 2,
-    "jsdoc/require-example": 0,
+    "jsdoc/require-description-complete-sentence": "error",
     "jsdoc/require-param": [
       "error",
       {
         "checkDestructured": false
       }
     ],
-    "jsdoc/require-param-description": 2,
-    "jsdoc/require-param-name": 2,
-    "jsdoc/require-param-type": 0,
-    "jsdoc/require-returns": 2,
-    "jsdoc/require-returns-check": 2,
-    "jsdoc/require-returns-description": 2,
-    "jsdoc/require-returns-type": 0,
-    "jsdoc/valid-types": 2,
+    "jsdoc/require-param-description": "error",
+    "jsdoc/require-param-name": "error",
+    "jsdoc/require-param-type": "off",
+    "jsdoc/require-returns": "error",
+    "jsdoc/require-returns-check": "error",
+    "jsdoc/require-returns-description": "error",
+    "jsdoc/require-returns-type": "off",
+    "jsdoc/valid-types": "error",
     "jsdoc/require-jsdoc": [
       "error",
       {
@@ -54,13 +51,14 @@
           "ClassDeclaration": true,
           "MethodDefinition": true,
           "FunctionDeclaration": true,
-          "ArrowFunctionExpression": true
+          "ArrowFunctionExpression": false
         },
         "contexts": [
           "TSInterfaceDeclaration",
           "TSTypeAliasDeclaration",
           "TSEnumDeclaration",
-          "TSPropertySignature"
+          "TSPropertySignature",
+          "VariableDeclarator > ArrowFunctionExpression"
         ]
       }
     ]
@@ -85,10 +83,7 @@
     {
       "files": ["**/*.ts", "**/*.tsx"],
       "plugins": ["eslint-plugin-tsdoc"],
-      "extends": [
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
-      ],
+      "extends": ["plugin:@typescript-eslint/recommended"],
       "rules": {
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
@@ -97,15 +92,26 @@
           "error",
           { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
         ],
-        "tsdoc/syntax": "error"
+        "tsdoc/syntax": "error",
+        // The option `allowTypedFunctionExpressions` doesn't work with
+        // nested typed functions, so this rule is disabled.
+        // Bug: https://github.com/typescript-eslint/typescript-eslint/issues/2183
+        // Docs: https://github.com/typescript-eslint/typescript-eslint/blob/v4.6.0/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md#allowtypedfunctionexpressions
+        "@typescript-eslint/explicit-module-boundary-types": "off"
       }
     },
     {
-      "files": ["**/__tests__/*.{js,ts,jsx,tsx}", "**/*.spec.js"],
+      "files": ["**/__tests__/*.{js,ts,jsx,tsx}", "**/*.spec.{js,ts}"],
       "rules": {
-        "jsdoc/require-jsdoc": 0,
-        "jsdoc/require-description": 0,
-        "tsdoc/syntax": 0
+        "jsdoc/require-jsdoc": "off",
+        "jsdoc/require-description": "off",
+        "tsdoc/syntax": "off",
+        "jest/expect-expect": [
+          "error",
+          {
+            "assertFunctionNames": ["expect", "**.should"]
+          }
+        ]
       }
     }
   ]

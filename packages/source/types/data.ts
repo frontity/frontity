@@ -1,397 +1,462 @@
-/* eslint-disable */
-import { Merge } from "./utils";
-import { CommentItem } from "../../wp-comments/types";
-
-export type EntityData = {
-  type: string;
-  id: number;
-  link: string;
-};
-
 /**
- * Type that represents objects stored in `state.source.data`.
- * These objects give information about data associated to a
- * given URL in a Frontity site.
- */
-export type Data =
-  | BaseData
-  | ErrorData
-  | RedirectionData
-  | TaxonomyData
-  | CategoryData
-  | TagData
-  | AuthorData
-  | PostTypeArchiveData
-  | PostArchiveData
-  | DateData
-  | PostTypeData
-  | PostData
-  | PageData
-  | AttachmentData
-  | TaxonomyWithSearchData
-  | CategoryWithSearchData
-  | TagWithSearchData
-  | AuthorWithSearchData
-  | PostTypeArchiveWithSearchData
-  | PostArchiveWithSearchData
-  | DateWithSearchData
-  | CommentData;
-
-/**
- * Base properties of objects of types `Data`.
- */
-export type BaseData = {
-  link?: string;
-  query?: Record<string, string>;
-  type?: string;
-  id?: number;
-  taxonomy?: string;
-  isFetching: boolean;
-  isReady: boolean;
-  isError?: false;
-  isArchive?: false;
-  isTaxonomy?: false;
-  isCategory?: false;
-  isTag?: false;
-  isAuthor?: false;
-  isPostTypeArchive?: false;
-  isPostArchive?: false;
-  isDate?: false;
-  isPostType?: false;
-  isPost?: false;
-  isPage?: false;
-  isAttachment?: false;
-  isHome?: boolean;
-
-  // search attributes
-  isSearch?: false;
-  searchQuery?: string;
-
-  // pagination atributes (for Archive)
-  page?: number;
-  route?: string;
-  next?: string;
-  previous?: string;
-};
-
-// ERROR
-
-/**
- * Adds new properties to `BaseData` to identify errors.
+ * Data related to a link in Frontity.
  *
- * @property {isError} true
- * @property {number} errorStatus
- * @property {string} errorStatusText
+ * These objects give information about data associated to a specific link in a
+ * Frontity site. It contains the base properties of all interfaces that extend
+ * `Data`.
+ *
+ * @example
+ * ```
+ * const data = {
+ *   link: "/some/post/",
+ *   route: "/some/post/",
+ *   page: 1,
+ *   query: {},
+ *   isFetching: false,
+ *   isReady: true,
+ * }
+ * ```
  */
-export type ErrorData = Merge<
-  BaseData,
-  {
-    isError: true;
-    errorStatus: number;
-    errorStatusText: string;
-    isReady: true;
-    isFetching: false;
+export interface Data {
+  /**
+   * Link this data belongs to.
+   */
+  link: string;
 
-    // This is ugly but it seems like the best way.
-    // Also types are erased at runtime so it doesnt add to bundle size
-    is400?: boolean;
-    is401?: boolean;
-    is402?: boolean;
-    is403?: boolean;
-    is404?: boolean;
-    is405?: boolean;
-    is406?: boolean;
-    is407?: boolean;
-    is408?: boolean;
-    is409?: boolean;
-    is410?: boolean;
-    is411?: boolean;
-    is412?: boolean;
-    is413?: boolean;
-    is414?: boolean;
-    is415?: boolean;
-    is416?: boolean;
-    is417?: boolean;
-    is500?: boolean;
-    is501?: boolean;
-    is502?: boolean;
-    is503?: boolean;
-    is504?: boolean;
-    is505?: boolean;
-  }
->;
+  /**
+   * Pathname part of the link, without the page part if the links points to an
+   * archive page (like `/category/nature/page/2/`).
+   */
+  route: string;
+
+  /**
+   * Page number. It is always present, even for posts.
+   *
+   * @defaultValue 1
+   */
+  page: number;
+
+  /**
+   * The query part of the link, in object format.
+   */
+  query: Record<string, any>;
+
+  /**
+   * Boolean indicating if this link is being fetched.
+   */
+  isFetching: boolean;
+
+  /**
+   * Boolean indicating if this link is ready and entities related can be
+   * consumed.
+   */
+  isReady: boolean;
+}
+
+/**
+ * A link in Frontity that shows an error.
+ *
+ * @example
+ * ```
+ * const data = {
+ *   link: "/not-a-post/",
+ *   route: "/not-a-post/",
+ *   page: 1,
+ *   query: {},
+ *   isFetching: false,
+ *   isReady: true,
+ *   isError: true,
+ *   is404: true,
+ *   errorStatus: 404,
+ *   errorStatusText: "Not Found",
+ * }
+ * ```
+ */
+export interface ErrorData extends Data {
+  /**
+   * Property specifying that the link is an error.
+   */
+  isError: true;
+
+  /**
+   * HTTP error code.
+   *
+   * @example 404
+   */
+  errorStatus: number;
+
+  /**
+   * HTTP error message.
+   *
+   * @example "Not Found"
+   */
+  errorStatusText: string;
+
+  /**
+   * Link is ready when data is an error.
+   */
+  isReady: true;
+
+  /**
+   * Link is not being fetched when data is an error.
+   */
+  isFetching: false;
+
+  // This is ugly but it seems like the best way.
+  // Also types are erased at runtime so it doesnt add to bundle size.
+  /* eslint-disable jsdoc/require-jsdoc */
+  is400?: boolean;
+  is401?: boolean;
+  is402?: boolean;
+  is403?: boolean;
+  is404?: boolean;
+  is405?: boolean;
+  is406?: boolean;
+  is407?: boolean;
+  is408?: boolean;
+  is409?: boolean;
+  is410?: boolean;
+  is411?: boolean;
+  is412?: boolean;
+  is413?: boolean;
+  is414?: boolean;
+  is415?: boolean;
+  is416?: boolean;
+  is417?: boolean;
+  is500?: boolean;
+  is501?: boolean;
+  is502?: boolean;
+  is503?: boolean;
+  is504?: boolean;
+  is505?: boolean;
+  /* eslint-enable */
+}
 
 // ARCHIVES
 
 /**
- * Adds properties to `BaseData` to identify archive pages.
+ * Data that references a post type entity in the state.
  *
- * @property {true} isArchive
- * @property {EntityData[]} items - List of items contained in this archive page.
- * @property {number} page - The page number of this archive page.
- * @property {string} path - The path of this archive page without the page.
- * @property {string} next - The link to the next page if it exists.
- * @property {string} previous - The link to the previous page if it exists.
- * @property {number} total - Total number of post entities in the whole archive.
- * @property {number} total - Total number of pages in the whole archive.
- * @property {false} isSearch
+ * This kind of objects are included in an array called `items` present in
+ * {@link ArchiveData} objects.
  */
-export type ArchiveData = Merge<
-  BaseData,
-  {
-    isArchive: true;
-    items: EntityData[];
-    page?: number;
-    path?: string;
-    next?: string;
-    previous?: string;
-    total?: number;
-    totalPages?: number;
-  }
->;
+export interface DataEntity {
+  /**
+   * Entity post type.
+   */
+  type: string;
+
+  /**
+   * Entity ID.
+   */
+  id: number;
+
+  /**
+   * Link where this entity is shown.
+   */
+  link: string;
+}
 
 /**
- * Adds properties to identify archive pages with search.
+ * Data that references a post type entity in the state.
  *
- * @property {true} isSearch
- * @property {string} searchQuery
+ * @deprecated Use {@link DataEntity} instead.
  */
-export type SearchData = {
+export type EntityData = DataEntity;
+
+/**
+ * Data for and archive, like the homepage, categories or tags, authors, date
+ * archives, etc.
+ */
+export interface ArchiveData extends Data {
+  /**
+   * Property indicatig that the link is an archive.
+   */
+  isArchive: true;
+
+  /**
+   * List of items contained in this archive page.
+   */
+  items: DataEntity[];
+
+  /**
+   * The link to the next page if it exists.
+   */
+  next?: string;
+
+  /**
+   * The link to the previous page if it exists.
+   */
+  previous?: string;
+
+  /**
+   * Total number of post entities in the whole archive.
+   */
+  total?: number;
+
+  /**
+   * Total number of pages in the whole archive.
+   */
+  totalPages?: number;
+}
+
+/**
+ * Data for a search in an archive.
+ */
+export interface SearchData extends ArchiveData {
+  /**
+   * Identify a search in an archive.
+   */
   isSearch: true;
+
+  /**
+   * Search query in string format.
+   */
   searchQuery: string;
-};
+}
 
 /**
- * Adds properties to `ArchiveData` to identify taxonomy pages.
+ * Data for a term page.
+ */
+export interface TermData extends ArchiveData {
+  /**
+   * Identify a term page.
+   *
+   * @deprecated Use `isTerm` instead.
+   */
+  isTaxonomy?: true;
+
+  /**
+   * Identify a term page.
+   */
+  isTerm: true;
+
+  /**
+   * Slug of the taxonomy this term belongs to.
+   */
+  taxonomy: string;
+
+  /**
+   * Term ID.
+   */
+  id: number;
+}
+
+/**
+ * Data for a term page.
  *
- * @property {true} isTaxonomy
- * @property {string} taxonomy - Taxonomy slug.
- * @property {number} id - Taxonomy id.
+ * @deprecated Use `TermData` instead.
  */
-export type TaxonomyData = Merge<
-  ArchiveData,
-  {
-    isTaxonomy: true;
-    taxonomy: string;
-    id: number;
-  }
->;
+export type TaxonomyData = TermData;
 
 /**
- * Adds properties to `TaxonomyData` to identify taxonomy with search pages.
+ * Data for a category page.
  */
-export type TaxonomyWithSearchData = Merge<TaxonomyData, SearchData>;
+export interface CategoryData extends TermData {
+  /**
+   * Slug of the taxonomy this term belongs to.
+   */
+  taxonomy: "category";
+
+  /**
+   * Identify a category page.
+   */
+  isCategory: true;
+}
 
 /**
- * Adds properties to `TaxonomyData` to identify category pages.
- *
- * @property {true} isCategory
- * @property {"category"} taxonomy
+ * Data for a category page.
  */
-export type CategoryData = Merge<
-  TaxonomyData,
-  {
-    taxonomy: "category";
-    isCategory: true;
-  }
->;
+export interface TagData extends TermData {
+  /**
+   * Slug of the taxonomy this term belongs to.
+   */
+  taxonomy: "tag";
+
+  /**
+   * Identify a tag page.
+   */
+  isTag: true;
+}
 
 /**
- * Adds properties to `CategoryData` to identify category with search pages.
+ * Data for an author page.
  */
-export type CategoryWithSearchData = Merge<CategoryData, SearchData>;
+export interface AuthorData extends ArchiveData {
+  /**
+   * Identify an author page.
+   */
+  isAuthor: true;
+
+  /**
+   * Author ID.
+   */
+  id: number;
+}
 
 /**
- * Adds properties to `TaxonomyData` to identify tag pages.
- *
- * @property {true} isTag
- * @property {"tag"} taxonomy
+ * Data for post type archive pages.
  */
-export type TagData = Merge<
-  TaxonomyData,
-  {
-    taxonomy: "tag";
-    isTag: true;
-  }
->;
+export interface PostTypeArchiveData extends ArchiveData {
+  /**
+   * Identify a post type archive page.
+   */
+  isPostTypeArchive: true;
+
+  /**
+   * Post type slug.
+   */
+  type: string;
+}
 
 /**
- * Adds properties to `TagData` to identify tag with search pages.
+ * Data for `post` archive pages.
  */
-export type TagWithSearchData = Merge<TagData, SearchData>;
-
-/**
- * Adds properties to `ArchiveData` to identify author pages.
- *
- * @property {true} isAuthor
- * @property {number} id - Author id.
- */
-export type AuthorData = Merge<
-  ArchiveData,
-  {
-    isAuthor: true;
-    id: number;
-  }
->;
-
-/**
- * Adds properties to `AuthorData` to identify author with search pages.
- */
-export type AuthorWithSearchData = Merge<AuthorData, SearchData>;
-
-/**
- * Adds properties to `ArchiveData` to identify post type archive pages.
- *
- * @property {true} isPostTypeArchive
- * @property {string} type - Post type slug.
- */
-export type PostTypeArchiveData = Merge<
-  ArchiveData,
-  {
-    isPostTypeArchive: true;
-    type: string;
-  }
->;
-
-/**
- * Adds properties to `PostTypeArchiveData` to identify post type archives
- * with search pages.
- */
-export type PostTypeArchiveWithSearchData = Merge<
-  PostTypeArchiveData,
-  SearchData
->;
-
-/**
- * Adds properties to `PostArchiveData` to identify `post` archive pages.
- *
- * @property {true} isPostArchive
- */
-export type PostArchiveData = Merge<
-  PostTypeArchiveData,
-  {
-    isPostArchive: true;
-  }
->;
-
-/**
- * Adds properties to `PostArchiveData` to identify post archives
- * with search pages.
- */
-export type PostArchiveWithSearchData = Merge<PostArchiveData, SearchData>;
+export interface PostArchiveData extends PostTypeArchiveData {
+  /**
+   * Identify a `post` archive page.
+   */
+  isPostArchive: true;
+}
 
 /**
  * Adds properties to `ArchiveData` to identify date archive pages.
- *
- * @property {true} isDate
- * @property {number} year - The year number.
- * @property {number} month - The month number (from 1 to 12).
- * @property {number} day - The day number.
  */
-export type DateData = Merge<
-  ArchiveData,
-  {
-    isDate: true;
-    year: number;
-    month?: number;
-    day?: number;
-  }
->;
+export interface DateData extends ArchiveData {
+  /**
+   * Identify a date archive page.
+   */
+  isDate: true;
 
-/**
- * Adds properties to `DateData` to identify date with search pages.
- */
-export type DateWithSearchData = Merge<DateData, SearchData>;
+  /**
+   * The year number.
+   */
+  year: number;
+
+  /**
+   * The month number (from 1 to 12).
+   */
+  month?: number;
+
+  /**
+   * The day number.
+   */
+  day?: number;
+}
 
 // POST TYPES
 
 /**
- * Adds properties to `BaseData` to identify post type pages.
+ * Data for a post type page.
+ *
  * Post type entities are posts, pages, attachments, custom post types, etc.
- *
- * @property {true} isPostType
- * @property {string} type - Post type slug.
- * @property {number} id - Entity id.
  */
-export type PostTypeData = Merge<
-  BaseData,
-  {
-    isPostType: true;
-    type: string;
-    id: number;
-  }
->;
+export interface PostTypeData extends Data {
+  /**
+   * Identify a post type page.
+   */
+  isPostType: true;
+
+  /**
+   * Post type slug.
+   */
+  type: string;
+
+  /**
+   * Entity ID.
+   */
+  id: number;
+}
 
 /**
- * Adds properties to `PostTypeData` to identify posts.
- *
- * @property {true} isPost
- * @property {"post"} type
+ * Data for a post.
  */
-export type PostData = Merge<
-  PostTypeData,
-  {
-    type: "post";
-    isPost: true;
-  }
->;
+export interface PostData extends PostTypeData {
+  /**
+   * Post type slug.
+   */
+  type: "post";
+
+  /**
+   * Identify a post.
+   */
+  isPost: true;
+}
 
 /**
- * Adds properties to `PostTypeData` to identify pages.
- *
- * @property {true} isPage
- * @property {"page"} type
+ * Data for a page.
  */
-export type PageData = Merge<
-  PostTypeData,
-  {
-    type: "page";
-    isPage: true;
-  }
->;
+export interface PageData extends PostTypeData {
+  /**
+   * Post type slug.
+   */
+  type: "page";
+
+  /**
+   * Identify a page.
+   */
+  isPage: true;
+}
 
 /**
- * Adds properties to `PostTypeData` to identify attachments.
- *
- * @property {true} isAttachment
- * @property {"attachment"} type
+ * Data for an attachment.
  */
-export type AttachmentData = Merge<
-  PostTypeData,
-  {
-    type: "attachment";
-    isAttachment: true;
-  }
->;
+export interface AttachmentData extends PostTypeData {
+  /**
+   * Post type slug.
+   */
+  type: "attachment";
+
+  /**
+   * Identify an attachment.
+   */
+  isAttachment: true;
+}
 
 /**
- * Adds properties to `BaseData` to identify the comments.
+ * Data for the homepage.
  */
-export type CommentData = Merge<
-  BaseData,
-  {
-    postId: number;
-    type: "comments";
-    isComments: true;
-    items: CommentItem[];
-    total: number;
-    totalPages: number;
-  }
->;
+export interface HomeData extends Data {
+  /**
+   * Identify the homepage.
+   */
+  isHome: true;
+}
 
 /**
- * Adds the data for the redirection to the
+ * Redirection data.
  */
-export type RedirectionData = Merge<
-  BaseData,
-  {
-    isReady: true;
-    isFetching: false;
-    isRedirection: true;
-    is301: boolean;
-    is302: boolean;
-    is307: boolean;
-    is308: boolean;
-    location: string;
-  }
->;
+export interface RedirectionData extends Data {
+  /**
+   *
+   */
+  isReady: true;
+  /**
+   *
+   */
+  isFetching: false;
+  /**
+   *
+   */
+  isRedirection: true;
+  /**
+   *
+   */
+  is301: boolean;
+  /**
+   *
+   */
+  is302: boolean;
+  /**
+   *
+   */
+  is307: boolean;
+  /**
+   *
+   */
+  is308: boolean;
+  /**
+   *
+   */
+  location: string;
+}

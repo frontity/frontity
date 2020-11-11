@@ -8,6 +8,8 @@ import wpSource from "../";
 import WpSource, { Pattern, Handler } from "../../types";
 import * as handlers from "../libraries/handlers";
 import { getMatch } from "../libraries/get-match";
+import { Data, CategoryData, ErrorData } from "@frontity/source/types";
+import { isCategory, isError, isHome } from "@frontity/source";
 
 // Create mock for handler generators
 jest.mock("../libraries/handlers");
@@ -32,9 +34,9 @@ beforeEach(() => {
     name: "always",
     priority: 0,
     pattern: "/(.*)",
-    func: jest.fn(async ({ route, state }) => {
+    func: jest.fn(async ({ link, state }) => {
       await Promise.resolve();
-      Object.assign(state.source.data[route], {
+      Object.assign(state.source.data[link], {
         type: "example",
         id: 1,
         isPostType: true,
@@ -65,6 +67,28 @@ beforeEach(() => {
   store.libraries.source.handlers.push(handler);
 });
 
+/**
+ * Helper that returns a link's data when the given prop has the given value.
+ *
+ * @param link - Link in the Frontity site.
+ * @param props - Props and their values to check.
+ * @returns Promise with the data object when is ready.
+ */
+const observeData = (link: string, props: Partial<Data>): Promise<Data> =>
+  new Promise((resolve) => {
+    observe(() => {
+      const data = store.state.source.get(link);
+
+      // Exit if some condition fails.
+      for (const prop in props) {
+        if (!data[prop] === props[prop]) return;
+      }
+
+      // Resolve only when all conditions are true.
+      resolve(data);
+    });
+  });
+
 describe("actions.source.fetch", () => {
   test("should work if data doesn't exist", async () => {
     await store.actions.source.fetch("/some/route/");
@@ -79,7 +103,11 @@ describe("actions.source.fetch", () => {
       isPostType: true,
       isFetching: false,
       isReady: true,
-    };
+      link: "/some/route/",
+      route: "/some/route/",
+      page: 1,
+      query: {},
+    } as Data;
 
     await store.actions.source.fetch("/some/route/");
     expect(handler.func).not.toHaveBeenCalled();
@@ -90,6 +118,10 @@ describe("actions.source.fetch", () => {
     store.state.source.data["/some/route/"] = {
       isFetching: false,
       isReady: false,
+      link: "/some/route/",
+      route: "/some/route/",
+      page: 1,
+      query: {},
     };
     const fetching = store.actions.source.fetch("/some/route/");
     expect(store.state.source.get("/some/route").isFetching).toBe(true);
@@ -99,53 +131,33 @@ describe("actions.source.fetch", () => {
     expect(store.state.source.get("/some/route").isReady).toBe(true);
   });
 
-  test('should set isHome in "/"', (done) => {
-    observe(() => {
-      const data = store.state.source.get("/");
-      if (data.isReady) {
-        expect(data.isHome).toBe(true);
-        done();
-      }
-    });
+  test('should set isHome in "/"', async () => {
+    const promisedData = observeData("/", { isReady: true });
     store.actions.source.fetch("/");
+    expect(isHome(await promisedData)).toBe(true);
   });
 
-  test('should set isHome in "/page/x"', (done) => {
-    observe(() => {
-      const data = store.state.source.get("/page/123");
-      if (data.isReady) {
-        expect(data.isHome).toBe(true);
-        done();
-      }
-    });
+  test('should set isHome in "/page/x"', async () => {
+    const promisedData = observeData("/page/123", { isReady: true });
     store.actions.source.fetch("/page/123");
+    expect(isHome(await promisedData)).toBe(true);
   });
 
-  test('should set isHome in "/blog" when using a subdirectory', (done) => {
+  test('should set isHome in "/blog" when using a subdirectory', async () => {
     store.state.source.subdirectory = "/blog";
-    observe(() => {
-      const data = store.state.source.get("/blog");
-      if (data.isReady) {
-        expect(data.isHome).toBe(true);
-        done();
-      }
-    });
+    const promisedData = observeData("/blog", { isReady: true });
     store.actions.source.fetch("/blog");
+    expect(isHome(await promisedData)).toBe(true);
   });
 
-  test('should set isHome in "/blog/page/x" when using a subdirectory', (done) => {
+  test('should set isHome in "/blog/page/x" when using a subdirectory', async () => {
     store.state.source.subdirectory = "/blog";
-    observe(() => {
-      const data = store.state.source.get("/blog/page/123");
-      if (data.isReady) {
-        expect(data.isHome).toBe(true);
-        done();
-      }
-    });
+    const promisedData = observeData("/blog/page/123", { isReady: true });
     store.actions.source.fetch("/blog/page/123");
+    expect(isHome(await promisedData)).toBe(true);
   });
 
-  test('should set isHome in "/" when a redirection has matched', (done) => {
+  test('should set isHome in "/" when a redirection has matched', async () => {
     store.libraries.source.redirections = [
       {
         name: "homepage",
@@ -155,17 +167,12 @@ describe("actions.source.fetch", () => {
       },
     ];
 
-    observe(() => {
-      const data = store.state.source.get("/");
-      if (data.isReady) {
-        expect(data.isHome).toBe(true);
-        done();
-      }
-    });
+    const promisedData = observeData("/", { isReady: true });
     store.actions.source.fetch("/");
+    expect(isHome(await promisedData)).toBe(true);
   });
 
-  test('should set isHome in "/page/x/" when a redirection has matched', (done) => {
+  test('should set isHome in "/page/x/" when a redirection has matched', async () => {
     store.libraries.source.redirections = [
       {
         name: "homepage",
@@ -175,14 +182,9 @@ describe("actions.source.fetch", () => {
       },
     ];
 
-    observe(() => {
-      const data = store.state.source.get("/page/123");
-      if (data.isReady) {
-        expect(data.isHome).toBe(true);
-        done();
-      }
-    });
+    const promisedData = observeData("/page/123", { isReady: true });
     store.actions.source.fetch("/page/123");
+    expect(isHome(await promisedData)).toBe(true);
   });
 
   test("should run again when `force` is used", async () => {
@@ -192,7 +194,9 @@ describe("actions.source.fetch", () => {
       isError: true,
       isFetching: false,
       isReady: true,
-    };
+      link: "/some/route/",
+      query: {},
+    } as ErrorData;
 
     await store.actions.source.fetch("/some/route/", { force: true });
     expect(handler.func).toHaveBeenCalled();
@@ -201,34 +205,39 @@ describe("actions.source.fetch", () => {
 
   test("Throw an error if fetch fails", async () => {
     handler.func = jest.fn(async (_) => {
-      throw new Error("Some error");
+      throw new Error("Handler error");
     });
+
+    let error: Error;
 
     try {
       await store.actions.source.fetch("/some/route/");
       throw new Error("This should not be reached");
     } catch (e) {
-      expect(e.message).toBe("Some error");
+      error = e;
     }
+
+    expect(error.message).toBe("Handler error");
     expect(store.state.source.data).toMatchSnapshot();
   });
 
-  test("should allow to observe 'isReady' properly", (done) => {
+  test("should allow to observe 'isReady' properly", async () => {
     expect(store.state.source.get("/").isReady).toBe(false);
-    observe(() => {
-      if (store.state.source.get("/").isReady) done();
-    });
+
+    // `observeData` uses `observe`.
+    const promisedData = observeData("/", { isReady: true });
     store.actions.source.fetch("/");
+    await promisedData;
   });
 
-  test("should allow to observe 'isFetching' properly", (done) => {
+  test("should allow to observe 'isFetching' properly", async () => {
     expect(store.state.source.get("/").isFetching).toBe(false);
     store.actions.source.fetch("/");
     expect(store.state.source.get("/").isFetching).toBe(true);
-    observe(() => {
-      const { isFetching } = store.state.source.get("/");
-      if (!isFetching) done();
-    });
+
+    // `observeData` uses `observe`.
+    const promisedData = observeData("/", { isFetching: false });
+    await promisedData;
   });
 
   test("Should throw a 404 error if no handler matched the link", async () => {
@@ -242,6 +251,10 @@ describe("actions.source.fetch", () => {
           "isError": true,
           "isFetching": false,
           "isReady": true,
+          "link": "@unknown/link/",
+          "page": 1,
+          "query": Object {},
+          "route": "@unknown/link/",
         },
       }
     `);
@@ -356,6 +369,10 @@ describe("actions.source.init", () => {
     store.state.source.data["/some/route/page/2/?a=b"] = {
       isFetching: false,
       isReady: false,
+      link: "/some/route/page/2/?a=b",
+      route: "/some/route/",
+      page: 2,
+      query: { a: "b" },
     };
 
     await store.actions.source.fetch("/some/route/page/2/?a=b");
@@ -375,6 +392,10 @@ describe("actions.source.init", () => {
     store.state.source.data["/some/route/"] = {
       isFetching: false,
       isReady: true,
+      link: "/some/route/",
+      route: "/some/route/",
+      page: 1,
+      query: {},
     };
 
     const fetchLink = store.actions.source.fetch("/some/route/", {
@@ -392,27 +413,32 @@ describe("actions.source.init", () => {
 
   test("state.data['/some/route/'].isCategory should be removed when fetching with { force: true }", async () => {
     // Get initial data into the store
-    const initialData: any = {
+    const initialData: CategoryData = {
       isArchive: true,
-      isTaxonomy: true,
+      isTerm: true,
       isCategory: true,
       taxonomy: "category",
+      id: 7,
       items: [],
       isReady: true,
       isFetching: false,
+      link: "/some/route/",
+      query: {},
+      route: "/some/route/",
+      page: 1,
     };
 
     store.state.source.data["/some/route/"] = initialData;
 
-    handler.func = jest.fn(async ({ route, state }) => {
+    handler.func = jest.fn(async ({ link, state }) => {
       await Promise.resolve();
-      Object.assign(state.source.data[route], {
+      Object.assign(state.source.data[link], {
         isFetching: true,
         isReady: true,
       });
     });
 
-    expect(store.state.source.data["/some/route/"].isCategory).toBe(true);
+    expect(isCategory(store.state.source.data["/some/route/"])).toBe(true);
     expect((store.state.source.data["/some/route/"] as any).items).toEqual([]);
 
     await store.actions.source.fetch("/some/route/", {
@@ -425,7 +451,7 @@ describe("actions.source.init", () => {
     expect(data).toMatchSnapshot();
 
     // NOTE!!! This should fail in wp-source 2.0, because `isCategory` and `items` should be removed
-    expect(data.isCategory).toBe(true);
+    expect(isCategory(data)).toBe(true);
     expect((data as any).items).toEqual([]);
   });
 
@@ -447,7 +473,7 @@ describe("actions.source.init", () => {
 
     expect(data).toMatchSnapshot();
 
-    expect(data.isError).toBeUndefined();
+    expect(isError(data)).toBe(false);
     expect((data as any).errorStatus).toBeUndefined();
     expect((data as any).errorStatusText).toBeUndefined();
   });

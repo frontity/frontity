@@ -25,5 +25,8 @@
     "@frontity/source": "^1.2.2",
     "frontity": "^1.9.0",
     "query-string": "^6.13.7"
+  },
+  "devDependencies": {
+    "@frontity/error": "0.1.1"
   }
 }

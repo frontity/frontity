@@ -113,6 +113,9 @@ const analytics: Analytics = {
         if (!data[link]) {
           data[link] = {
             link,
+            route: link,
+            query: {},
+            page: 1,
             isFetching: true,
             isReady: false,
           };

@@ -11,6 +11,7 @@ import author1PostsPage2 from "./mocks/author/author-1-posts-page-2.json";
 import author1PostsCpt from "./mocks/author/author-1-posts-cpt.json";
 import Router from "@frontity/router/types";
 import merge from "deepmerge";
+import { isSearch } from "@frontity/source";
 
 let store: InitializedStore<WpSource & Router>;
 let api: jest.Mocked<Api>;
@@ -18,7 +19,7 @@ beforeEach(() => {
   store = createStore<WpSource & Router>(
     clone(merge(wpSource(), { state: { router: {} } }, { clone: false }))
   );
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -74,7 +75,7 @@ describe("author", () => {
   });
 
   test("overwrites the data when fetched with { force: true }", async () => {
-    // Add iniital data to the store
+    // Add initial data to the store
     await store.libraries.source.populate({
       state: store.state,
       response: mockResponse(author1),
@@ -208,12 +209,9 @@ describe("author", () => {
     // Fetch entities
     await store.actions.source.fetch("/author/author-1/?s=findAuthor");
 
-    expect(
-      store.state.source.data["/author/author-1/?s=findAuthor"].isSearch
-    ).toBe(true);
-    expect(
-      store.state.source.data["/author/author-1/?s=findAuthor"].searchQuery
-    ).toBe("findAuthor");
+    const data = store.state.source.data["/author/author-1/?s=findAuthor"];
+    expect(isSearch(data)).toBe(true);
+    expect(isSearch(data) && data.searchQuery).toBe("findAuthor");
     expect(store.state.source).toMatchSnapshot();
   });
 });

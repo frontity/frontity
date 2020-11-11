@@ -16,7 +16,7 @@ const mockedFetch: jest.MockedFunction<typeof fetch> = jest.fn((_) =>
 let store: InitializedStore<WpSource & Package>;
 
 beforeEach(() => {
-  store = createStore(
+  store = createStore<WpSource & Package>(
     clone(
       merge(
         wpSource(),

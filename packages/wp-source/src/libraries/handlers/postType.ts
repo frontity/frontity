@@ -1,6 +1,7 @@
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
+import { PostTypeData } from "@frontity/source/types/data";
 
 /**
  * The parameters for {@link postTypeHandler}.
@@ -53,7 +54,8 @@ const postTypeHandler = ({
 
   // 1. search id in state or get the entity from WP REST API
   const { route, query } = libraries.source.parse(link);
-  if (!state.source.get(route).id || force) {
+  const routeData: Partial<PostTypeData> = state.source.get(route);
+  if (!routeData.id || force) {
     const { slug } = params;
 
     // 1.1 transform "posts" endpoint to state.source.postEndpoint
@@ -107,7 +109,7 @@ const postTypeHandler = ({
   }
 
   // 2. get `type` and `id` from route data and assign props to data
-  const { type, id } = state.source.get(route);
+  const { type, id }: Partial<PostTypeData> = state.source.get(route);
   const data = state.source.get(link);
   Object.assign(data, {
     type,
@@ -116,7 +118,7 @@ const postTypeHandler = ({
     id,
     isPostType: true,
     [`is${capitalize(type)}`]: true,
-  });
+  }) as PostTypeData; // This ensures the resulting type is correct.
 
   // Overwrite properties if the request is a preview.
   if (query.preview && state.source.auth) {

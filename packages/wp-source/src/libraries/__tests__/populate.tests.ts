@@ -11,14 +11,17 @@ import merge from "deepmerge";
 import Router from "@frontity/router/types";
 
 const initStore = (): InitializedStore<WpSource & Router> => {
-  const config = clone(merge(wpSource(), { state: { router: {} } }));
+  const config: WpSource & Router = clone(
+    merge(wpSource(), { state: { router: {} } })
+  );
+  config.state.source.url = "https://test.frontity.org";
   return createStore(config);
 };
 
 // Use Response from "node-fetch" to mock response objects,
 // but with "lib.dom.d.ts" Response type.
 const mockResponse = (body): Response =>
-  (new NodeResponse(JSON.stringify(body)) as object) as Response;
+  (new NodeResponse(JSON.stringify(body)) as unknown) as Response;
 
 describe("populate", () => {
   test("adds posts and embedded into state", async () => {

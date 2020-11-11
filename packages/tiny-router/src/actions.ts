@@ -2,6 +2,7 @@ import TinyRouter from "../types";
 import { warn, observe } from "frontity";
 import { RedirectionData, ErrorData } from "@frontity/source/types/data";
 import { stringify } from "query-string";
+import { isError } from "@frontity/source";
 
 /**
  * Set the URL.
@@ -150,13 +151,16 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
 
         // This error needs to be caught by the server in @frontity/core
         throw new Error("Redirection");
-      } else if (data.isError) {
-        ctx.status = data.errorStatus;
+      } else if (isError(data)) {
+        const data = state.source.get(state.router.link);
+        if (isError(data)) {
+          ctx.status = data.errorStatus;
+        }
+      } else {
+        warn(
+          "You are trying to use autoFetch but no source package is installed."
+        );
       }
-    } else {
-      warn(
-        "You are trying to use autoFetch but no source package is installed."
-      );
     }
   }
 };
