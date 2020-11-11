@@ -2,6 +2,11 @@ import React from "react";
 import { Head } from "frontity";
 import Package from "../types";
 
+/**
+ * A React component that adds different elements to the `<head>`.
+ *
+ * @returns React element.
+ */
 const Root: React.FC = () => (
   <>
     <Head>
@@ -20,13 +25,10 @@ const Root: React.FC = () => (
 );
 
 const HeadPackage: Package = {
-  name: "head",
-  state: {},
-  actions: {},
+  name: "e2e-head",
   roots: {
-    head: Root
+    head: Root,
   },
-  libraries: {}
 };
 
 export default HeadPackage;

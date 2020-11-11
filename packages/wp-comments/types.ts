@@ -1,4 +1,5 @@
-import { Package, Action, AsyncAction } from "frontity/types";
+import { Package, Action, AsyncAction, MergePackages } from "frontity/types";
+import { Data } from "@frontity/source/types";
 import WpSource from "@frontity/wp-source/types";
 
 /**
@@ -133,6 +134,36 @@ export interface CommentItem {
 }
 
 /**
+ * Data for the comments published in a post.
+ */
+export interface CommentData extends Data {
+  /**
+   * Post ID where the comments are published.
+   */
+  postId: number;
+  /**
+   * Type of this data object.
+   */
+  type: "comments";
+  /**
+   * Identify a data of type comments.
+   */
+  isComments: true;
+  /**
+   * Tree of all comments published.
+   */
+  items: CommentItem[];
+  /**
+   * Number of comments.
+   */
+  total: number;
+  /**
+   * Number of comment pages.
+   */
+  totalPages: number;
+}
+
+/**
  * Object that represents a form to submit comments in a post.
  */
 export interface Form {
@@ -224,6 +255,10 @@ export interface Fields {
  * Add integration for WordPress native comments.
  */
 interface WpComments extends Package {
+  /**
+   * Package name.
+   */
+  name: "@frontity/wp-comments";
   /**
    * The state exposed by this package.
    */
@@ -350,6 +385,6 @@ interface WpComments extends Package {
 /**
  * Packages used internally by WpComments.
  */
-export type Packages = WpComments & WpSource;
+export type Packages = MergePackages<WpComments, WpSource>;
 
 export default WpComments;
