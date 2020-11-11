@@ -42,7 +42,7 @@ export type Data =
  */
 export type BaseData = {
   link?: string;
-  query?: object;
+  query?: Record<string, string>;
   type?: string;
   id?: number;
   taxonomy?: string;
