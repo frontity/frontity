@@ -33,7 +33,7 @@ const Link: React.FC<LinkProps> = ({
   target = "_self",
   scroll = true,
   prefetch = true,
-  removeWPUrls = true,
+  replaceSourceUrls = true,
   "aria-current": ariaCurrent,
   ...anchorProps
 }) => {
@@ -59,7 +59,9 @@ const Link: React.FC<LinkProps> = ({
     warn("link prop is required and must be a string");
   }
 
-  const link = removeWPUrls ? removeWPUrl(rawLink, state.source.url) : rawLink;
+  const link = replaceSourceUrls
+    ? removeWPUrl(rawLink, state.source.url)
+    : rawLink;
 
   const autoPrefetch = state.theme?.autoPrefetch;
   const isExternal = link.startsWith("http");

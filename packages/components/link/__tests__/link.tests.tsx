@@ -263,7 +263,7 @@ describe("Link", () => {
           <Link link={linkUrl} className="my-link">
             This is a link
           </Link>
-          <Link link={linkUrl} className="my-link-2" removeWPUrls={false}>
+          <Link link={linkUrl} className="my-link-2" replaceSourceUrls={false}>
             This is a link
           </Link>
         </Provider>,

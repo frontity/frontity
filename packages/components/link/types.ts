@@ -91,7 +91,7 @@ export interface LinkProps {
    *
    * @defaultValue true
    */
-  removeWPUrls?: boolean;
+  replaceSourceUrls?: boolean;
 
   /**
    * Represents any other prop that can be passed to Link.
