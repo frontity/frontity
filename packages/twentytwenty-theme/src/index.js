@@ -1,5 +1,6 @@
 import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
+import link from "@frontity/html2react/processors/link";
 
 const twentyTwentyTheme = {
   name: "@frontity/twentytwenty-theme",
@@ -54,6 +55,7 @@ const twentyTwentyTheme = {
       fontSets: "all",
     },
   },
+
   /**
    * Actions are functions that modify the state or deal with other parts of
    * Frontity like libraries.
@@ -78,9 +80,10 @@ const twentyTwentyTheme = {
     html2react: {
       /**
        * Add a processor to `html2react` so it processes the `<img>` tags
-       * inside the content HTML. You can add your own processors too.
+       * and internal link inside the content HTML.
+       * You can add your own processors too.
        */
-      processors: [image],
+      processors: [image, link],
     },
   },
 };
