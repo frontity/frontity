@@ -40,16 +40,15 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   actions,
   libraries,
 }) => (link, options = {}): void => {
-  // Normalizes link.
+  // Normalize the link.
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
 
-  // Sets state default value.
+  // Set state default value.
   if (!options.state) options.state = {};
 
-  state.router.link = link;
-  state.router.state = options.state;
-
+  // Trigger the fetch if `autoFetch` is true and update the window.history
+  // object.
   if (
     options.method === "push" ||
     (!options.method && state.frontity.platform === "client")
@@ -60,6 +59,10 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     window.history.replaceState(options.state, "", link);
     if (state.router.autoFetch) actions.source?.fetch(link);
   }
+
+  // Finally, set the `state.router.link` property to the new value.
+  state.router.link = link;
+  state.router.state = options.state;
 };
 
 /**
