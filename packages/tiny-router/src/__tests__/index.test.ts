@@ -2,15 +2,15 @@ import * as frontity from "frontity";
 import * as frontityError from "@frontity/error";
 import { Context } from "frontity/types";
 import tinyRouter from "..";
-import TinyRouter from "../../types";
+import { Packages } from "../../types";
 import { SetOptions } from "@frontity/router/types";
 
-let config: TinyRouter;
+let config: any;
 let normalize: jest.Mock;
 let fetch: jest.Mock;
 let get: jest.Mock;
 
-const createStore = frontity.createStore;
+const createStore = (config) => frontity.createStore<Packages>(config);
 
 beforeEach(() => {
   normalize = jest.fn();

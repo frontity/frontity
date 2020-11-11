@@ -1,4 +1,4 @@
-import { Package, Action, AsyncAction } from "frontity/types";
+import { Package, Action, AsyncAction, MergePackages } from "frontity/types";
 import { Data } from "@frontity/source/types";
 import WpSource from "@frontity/wp-source/types";
 
@@ -256,6 +256,10 @@ export interface Fields {
  */
 interface WpComments extends Package {
   /**
+   * Package name.
+   */
+  name: "@frontity/wp-comments";
+  /**
    * The state exposed by this package.
    */
   state: {
@@ -381,6 +385,6 @@ interface WpComments extends Package {
 /**
  * Packages used internally by WpComments.
  */
-export type Packages = WpComments & WpSource;
+export type Packages = MergePackages<WpComments, WpSource>;
 
 export default WpComments;
