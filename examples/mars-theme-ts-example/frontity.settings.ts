@@ -36,7 +36,7 @@ const settings: Settings<WpSource | MarsTheme> = {
       name: "@frontity/wp-source",
       state: {
         source: {
-          url: "http://elasticpress.test/",
+          url: "https://test.frontity.org",
         },
       },
     },
