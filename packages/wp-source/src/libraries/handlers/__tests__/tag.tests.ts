@@ -67,7 +67,7 @@ describe("tag", () => {
       { isFetching: false, isReady: false },
       // Fetch starts.
       { isFetching: true, isReady: false },
-      // Intermetiable value.
+      // Intermediate values.
       { isFetching: false, isReady: false },
       // Fetch ends.
       { isFetching: false, isReady: true },
