@@ -32,6 +32,7 @@ const Theme = () => {
 };
 
 const preview: Preview = {
+  name: "e2e-preview",
   roots: {
     preview: connect(Theme),
   },

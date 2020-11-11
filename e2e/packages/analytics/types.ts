@@ -1,4 +1,4 @@
-import { Package, Action } from "frontity/types";
+import { Package, Action, MergePackages } from "frontity/types";
 import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
@@ -23,15 +23,18 @@ interface TestAnalytics extends Package {
        * Map of data describing each link in Frontity.
        */
       data: Source["state"]["source"]["data"];
+
       /**
        * Get a data object for the specified link.
        */
       get: Source["state"]["source"]["get"];
     };
+
     /**
      * Analytics namespace.
      */
     analytics: Analytics["state"]["analytics"];
+
     /**
      * Test Analytics namespace.
      */
@@ -41,10 +44,12 @@ interface TestAnalytics extends Package {
        * `actions.analytics.pageview()`.
        */
       pageviews: Pageview[];
+
       /**
        * Array containing all sent pageviews using `actions.analytics.event()`.
        */
       events: Event[];
+
       /**
        * Event used the {@link Theme} component to test the
        * `actions.analytics.event()` action.
@@ -65,6 +70,7 @@ interface TestAnalytics extends Package {
        */
       fetch: Source["actions"]["source"]["fetch"];
     };
+
     /**
      * Test Analytics namespace.
      */
@@ -76,6 +82,7 @@ interface TestAnalytics extends Package {
        * `state.testAnalytics.pageviews` list.
        */
       pageview: Action<Packages, Pageview>;
+
       /**
        * Action executed by `actions.analytics.pageview()`.
        *
@@ -85,6 +92,7 @@ interface TestAnalytics extends Package {
       event: Action<Packages, Event>;
     };
   };
+
   /**
    * Root components exposed by this package.
    */
@@ -92,12 +100,13 @@ interface TestAnalytics extends Package {
     /**
      * Theme namespace.
      */
-    theme: React.ReactType;
+    theme: React.ElementType;
   };
 }
+
 /**
  * All packages used internally by TestAnalytics.
  */
-export type Packages = TestAnalytics & Router & Source & Analytics;
+export type Packages = MergePackages<TestAnalytics, Router, Source, Analytics>;
 
 export default TestAnalytics;
