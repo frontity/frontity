@@ -21,12 +21,13 @@ interface LinkElement extends Element {
 const link: Processor<LinkElement> = {
   priority: 10,
   name: "link",
-  test: ({ node }) => node.component === "a",
+  test: ({ node }) =>
+    node.component === "a" &&
+    node.props?.href &&
+    !node.props?.href?.startsWith("#"),
   processor: ({ node }) => {
-    if (node.props?.href && !node.props?.href?.startsWith("#")) {
-      node.props.link = node.props.href;
-      node.component = Link;
-    }
+    node.props.link = node.props.href;
+    node.component = Link;
 
     return node;
   },
