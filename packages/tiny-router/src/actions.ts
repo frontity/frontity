@@ -1,6 +1,7 @@
 import TinyRouter from "../types";
 import { warn, observe } from "frontity";
 import { RedirectionData, ErrorData } from "@frontity/source/types/data";
+import { stringify } from "query-string";
 
 /**
  * Set the URL.
@@ -131,10 +132,20 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
       const data = state.source.get(state.router.link) as RedirectionData &
         ErrorData;
 
+      // Re-create the Frontity Options.
+      const options = {};
+      for (const [key, value] of Object.entries(state.frontity.options)) {
+        options[`frontity_${key}`] = value;
+      }
+
       if (data?.isRedirection) {
-        // TODO: Handle the Frontity Options
+        // The query is always added to `data` and it's always an object, but
+        // can be empty if there were no search params.
         const location =
-          data.location + "?" + `frontity_name=` + state.frontity.options.name;
+          Object.keys(data.query).length > 0
+            ? data.location + "&" + stringify(options)
+            : data.location + "?" + stringify(options);
+
         ctx.redirect(location);
         throw new Error("Redirection");
       } else if (data.isError) {

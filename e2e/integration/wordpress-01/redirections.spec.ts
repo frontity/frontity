@@ -21,6 +21,32 @@ describe("Redirections", () => {
     cy.get("#post").should("exist");
   });
 
+  it("Should handle query params in a redirection", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world/?frontity_name=redirections&redirections=all"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/?redirections=all"
+    );
+
+    cy.get("#post").should("exist");
+  });
+
+  it("Should handle query params in a redirection, and NOT redirect if NOT matching the RegExp", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world/?frontity_name=redirections&redirections=RegExp:/some-post",
+      { failOnStatusCode: false }
+    );
+
+    // The RegExp is URI-encoded
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world/?redirections=RegExp%3A%2Fsome-post"
+    );
+  });
+
   it("Should redirect when navigating on the client", () => {
     cy.visit("http://localhost:3001?frontity_name=redirections");
 
