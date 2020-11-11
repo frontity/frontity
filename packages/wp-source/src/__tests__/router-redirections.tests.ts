@@ -18,7 +18,7 @@ let mockedFetch: jest.MockedFunction<typeof fetch>;
 declare global {
   namespace jest {
     interface Matchers<R> {
-      toHaveBeenCalledBefore(func: Function): R;
+      toHaveBeenCalledBefore(func: any): R;
     }
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Koa from "koa";
 import { get } from "koa-route";
 import serve from "koa-static";
