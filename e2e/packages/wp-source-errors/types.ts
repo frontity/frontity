@@ -1,27 +1,43 @@
-import { Package, Action, ServerAction } from "frontity/types";
-import Source from "@frontity/source/types";
+import { Package, Action, MergePackages } from "frontity/types";
+import WpSource from "@frontity/wp-source/types";
 
+/**
+ * Package to do e2e testing of Frontity's Lodable component.
+ */
 interface WpSourceErrors extends Package {
-  name: "wp-source-errors";
-  state: {
-    frontity?: Package["state"]["frontity"];
-    source?: Source["state"]["source"] & {
-      api: string;
-    };
-  };
+  /**
+   * Package name.
+   */
+  name: "e2e-wp-source-errors";
+  /**
+   * Actions exposed by this package.
+   */
   actions: {
-    source?: Source["actions"]["source"];
+    /**
+     * WpSourceErrors namespace.
+     */
     wpSourceErrors: {
-      init: Action<WpSourceErrors>;
-      beforeSSR?: ServerAction<WpSourceErrors>;
+      /**
+       * The initialization action. It changes `state.source.api`.
+       */
+      init: Action<Packages>;
     };
   };
+
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
-    wpSourceErrors: React.ReactType;
-  };
-  libraries: {
-    source?: Source["libraries"]["source"];
+    /**
+     * WpSourceErrors namespace.
+     */
+    wpSourceErrors: React.ElementType;
   };
 }
+
+/**
+ * All packages used internally by WpSourceErrors.
+ */
+export type Packages = MergePackages<WpSourceErrors, WpSource>;
 
 export default WpSourceErrors;

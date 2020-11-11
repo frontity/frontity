@@ -12,7 +12,7 @@ interface Fill extends StateFill {
   /**
    * The React component that needs to be injected in the Slot for this fill.
    */
-  Fill: React.ReactType;
+  Fill: React.ElementType;
 
   /**
    * A unique key that can be used when iterating over the array in React.
