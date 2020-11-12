@@ -9,6 +9,7 @@ const router: Router = {
         initial: "/some-path/",
         pages: [1, 2],
       },
+      redirections: "no",
     },
   },
   actions: {
@@ -20,4 +21,5 @@ const router: Router = {
   },
 };
 
+// eslint-disable-next-line
 test("Types are fine!", () => {});
