@@ -66,7 +66,11 @@ interface Router<T = null> extends Package {
        *   Note that the shorthand character classes will have to be escaped, so
        *   instead of `\d`, you will need to write `\\d`.
        *
-       *   @example `"RegExp:/post-number/(\\d*)"`
+       * @example "no"
+       * @example "all"
+       * @example "404"
+       * @example "RegExp:/some-post/(\\d*)"
+       * @example "RegExp:/post-(\\w*)/(\\d*)"
        *
        * @defaultValue "no"
        */
