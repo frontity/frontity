@@ -113,15 +113,17 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
 };
 
 /**
- * Removes the WP URL.
+ * Make the link relative if it belongs to the backend, to force client-side
+ * navigation.
  *
  * @param link - The link URL.
- * @param wpURL - The WP URL.
+ * @param sourceUrl - The Source URL. It usually comes from `state.source.url`.
  *
- * @returns The URL without the WP URL.
+ * @returns The URL without the Source URL.
  */
-export const removeWPUrl = (link: string, wpURL: string) => {
-  // remove http and https and ensure there's a final slash
-  const domain = wpURL.replace(/https?:\/\//, "").replace(/\/?$/, "/");
-  return link.replace(new RegExp(`https?://${domain}`), "/");
+export const removeSourceUrl = (link: string, sourceUrl: string) => {
+  const linkUrl = new URL(link, sourceUrl);
+  return linkUrl.hostname === new URL(sourceUrl).hostname
+    ? linkUrl.pathname + linkUrl.search + linkUrl.hash
+    : link;
 };

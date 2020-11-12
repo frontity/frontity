@@ -1,7 +1,7 @@
 import React, { MouseEvent, useEffect, useRef, useCallback } from "react";
 import { warn, connect, useConnect } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
-import { Queue, onHover, removeWPUrl } from "./utils";
+import { Queue, onHover, removeSourceUrl } from "./utils";
 import { Packages, LinkProps, NavigatorWithConnection } from "./types";
 
 const queue = new Queue();
@@ -60,7 +60,7 @@ const Link: React.FC<LinkProps> = ({
   }
 
   const link = replaceSourceUrls
-    ? removeWPUrl(rawLink, state.source.url)
+    ? removeSourceUrl(rawLink, state.source.url)
     : rawLink;
 
   const autoPrefetch = state.theme?.autoPrefetch;
