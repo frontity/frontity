@@ -25,7 +25,7 @@ exports[`Script processor should process a script with src 1`] = `
 </div>
 `;
 
-exports[`Script processor should process a script with type=module  1`] = `
+exports[`Script processor should process a script with type=module 1`] = `
 <div>
   <mocked-script
     code="const some=\\"code\\";"

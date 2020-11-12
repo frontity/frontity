@@ -47,7 +47,7 @@ describe("Script processor", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it("should process a script with type=module ", () => {
+  it("should process a script with type=module", () => {
     const { container } = render(
       <Html2React
         html={'<script type="module">const some="code";</script>'}
