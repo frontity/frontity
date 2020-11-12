@@ -140,7 +140,9 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
 
       // Re-create the Frontity Options.
       const options = {};
-      for (const [key, value] of Object.entries(state.frontity.options)) {
+      for (const [key, value] of Object.entries(
+        state?.frontity?.options || {}
+      )) {
         options[`frontity_${key}`] = value;
       }
 
@@ -161,11 +163,11 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
         if (isError(data)) {
           ctx.status = data.errorStatus;
         }
-      } else {
-        warn(
-          "You are trying to use autoFetch but no source package is installed."
-        );
       }
+    } else {
+      warn(
+        "You are trying to use autoFetch but no source package is installed."
+      );
     }
   }
 };
