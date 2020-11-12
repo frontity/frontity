@@ -428,35 +428,19 @@ export interface HomeData extends Data {
  */
 export interface RedirectionData extends Data {
   /**
-   *
-   */
-  isReady: true;
-  /**
-   *
-   */
-  isFetching: false;
-  /**
-   *
+   * Identify a redirection.
    */
   isRedirection: true;
+
   /**
-   *
-   */
-  is301: boolean;
-  /**
-   *
-   */
-  is302: boolean;
-  /**
-   *
-   */
-  is307: boolean;
-  /**
-   *
-   */
-  is308: boolean;
-  /**
-   *
+   * The URL that the redirection points to.
    */
   location: string;
+
+  /* eslint-disable jsdoc/require-jsdoc */
+  is301: boolean;
+  is302: boolean;
+  is307: boolean;
+  is308: boolean;
+  /* eslint-enable */
 }

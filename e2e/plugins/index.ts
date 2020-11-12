@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { initPlugin } from "cypress-plugin-snapshots/plugin";
 import execa from "execa";
 
@@ -12,6 +13,7 @@ interface InstallPlugin {
    * The name of the plugin.
    */
   name: string;
+
   /**
    * The version of the plugin.
    */
@@ -30,6 +32,7 @@ interface UpdateOption {
    * The name of the option.
    */
   name: string;
+
   /**
    * The value to set for the option.
    */

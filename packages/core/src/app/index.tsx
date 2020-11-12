@@ -6,12 +6,34 @@ import {
 import { Package } from "@frontity/types";
 import { HelmetProvider, FilledContext } from "react-helmet-async";
 
-type Props = {
+/**
+ * Props for the <App/> component.
+ */
+type AppProps = {
+  /**
+   * The object that contains the frontity actions, state, libraries, etc.
+   * Normally created by calling `createStore()` from `@frontity/connect`.
+   */
   store: InitializedStore<Package>;
+
+  /**
+   * The "context" of react-helmet-async. This is an implementation detail and
+   * required to be passed as explained in https://github.com/staylor/react-helmet-async.
+   */
   helmetContext?: FilledContext;
 };
 
-const App: React.FunctionComponent<Props> = ({ store, helmetContext = {} }) => {
+/**
+ * The root component of a Frontity App.
+ *
+ * @param props - Defined in {@link Props}.
+ *
+ * @returns React Element.
+ */
+const App: React.FunctionComponent<AppProps> = ({
+  store,
+  helmetContext = {},
+}) => {
   return (
     <HelmetProvider context={helmetContext}>
       <ConnectProvider value={store}>
