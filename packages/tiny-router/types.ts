@@ -31,31 +31,6 @@ interface TinyRouter extends Router {
        * @defaultValue true
        */
       autoFetch?: boolean;
-
-      /**
-       * How the router should handle 301 redirections that can be stored in the
-       * WordPress database e.g. Via a Redirection plugin: https://wordpress.org/plugins/redirection/.
-       *
-       * - "no" - Does not handle them at all.
-       *
-       * - "all"  - Always make an additional request to the WordPress instance
-       * to check if there exists a redirection.
-       *
-       * - "404" - Only send the additional request to the WordPress instance
-       * if the original request returned a 404.
-       *
-       * - string - A string that contains a regex pattern. The string must
-       *   start with `RegExp:`. This pattern will be matched against the
-       *   current route and if matched, frontity will make an additional
-       *   request to the WordPress instance to check if there exists a redirection.
-       *   Note that the shorthand character classes will have to be escaped, so
-       *   instead of `\d`, you will need to write `\\d`.
-       *
-       *   @example `"RegExp:/post-number/(\\d*)"`
-       *
-       * @defaultValue "no"
-       */
-      redirections: string | string[];
     };
   };
 

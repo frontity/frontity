@@ -89,7 +89,6 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   observe(() => {
     const data = state.source.get(state.router.link) as RedirectionData;
     if (data?.isRedirection && state.frontity.platform === "client") {
-      // TODO: what about the query string?
       actions.router.set(data.location, { method: "replace" });
     }
   });
