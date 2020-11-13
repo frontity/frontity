@@ -29,8 +29,11 @@ export default ({
         if (mode === "development")
           config[name].push("webpack-hot-middleware/client");
 
-        // Add babel polyfill for the es5 packages (regeneratorRuntime and so on).
-        if (target === "es5") config[name].push("babel-polyfill");
+        // Add polyfills for the es5 packages.
+        if (target === "es5") {
+          // config[name].push("core-js/stable");
+          // config[name].push("regenerator-runtime/runtime");
+        }
 
         config[name].push(resolve(rootPath, path));
       });
