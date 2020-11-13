@@ -1,6 +1,6 @@
 {
   "name": "@frontity/google-ad-manager",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Integrate your Frontity site with Google Ad Manager",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@types/doubleclick-gpt": "^2019041801.0.2",
-    "frontity": "^1.11.1"
+    "frontity": "^1.13.0"
   },
   "devDependencies": {
     "@types/react-test-renderer": "^16.9.3",
