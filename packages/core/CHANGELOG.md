@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.9.1
+
+### Patch Changes
+
+- [`e9f7b5c6`](https://github.com/frontity/frontity/commit/e9f7b5c6889fb6dfb68fb15baad77031ffd7c324) [#609](https://github.com/frontity/frontity/pull/609) Thanks [@cristianbote](https://github.com/cristianbote)! - The `serve` command was taking too much to spin the server. That was due to the build and dev scripts which are having side-effects by loading ts-node and other scripts.
+
+- Updated dependencies [[`d7b4b429`](https://github.com/frontity/frontity/commit/d7b4b429f1f23dfae74b9781ea1b1de00aed763c), [`b766e330`](https://github.com/frontity/frontity/commit/b766e330465b6a76d927eaddaa763a684dc1b228)]:
+  - @frontity/connect@1.1.4
+
 ## 1.9.0
 
 ### Minor Changes
