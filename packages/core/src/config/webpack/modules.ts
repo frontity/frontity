@@ -17,6 +17,7 @@ export default ({
     {
       // Support for js, jsx, ts and tsx files.
       test: /\.(j|t)sx?$/,
+      exclude: [/\bcore-js\b/, /\bwebpack\b/, /\bregenerator-runtime\b/],
       use: {
         loader: "babel-loader",
         options: {
