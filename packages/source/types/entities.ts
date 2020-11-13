@@ -333,6 +333,7 @@ export interface TypeEntity extends Entity {
    * REST base route for the post type.
    */
   rest_base: string;
+
   /**
    * Taxonomies associated with post type.
    */
@@ -367,6 +368,7 @@ export interface TaxonomyEntity extends Entity {
    * REST base route for the taxonomy.
    */
   rest_base: string;
+
   /**
    * Types associated with the taxonomy.
    */

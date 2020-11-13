@@ -10,6 +10,7 @@ interface Init {
    * The URL of the WordPress REST API.
    */
   api: string;
+
   /**
    * Whether the REST API belongs to a site hosted on wordpress.com.
    */
@@ -30,6 +31,7 @@ interface Get {
    * @example "posts", "pages"
    */
   endpoint: string;
+
   /**
    * The URL params used to create the query string in the final `fetch()`
    * request.
@@ -40,14 +42,17 @@ interface Get {
    * ```
    */
   params?: Record<string, any>;
+
   /**
    * Optionally override the value of Api.api.
    */
   api?: string;
+
   /**
    * Optionally override the value of Api.isWpCom.
    */
   isWpCom?: boolean;
+
   /**
    * The optional authentication information.
    *

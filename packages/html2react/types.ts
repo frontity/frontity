@@ -10,6 +10,7 @@ interface Html2React extends Package {
    * Package name.
    */
   name: "@frontity/html2react";
+
   /**
    * Libraries exposed by this package.
    */

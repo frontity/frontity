@@ -8,14 +8,17 @@ interface TransformAllLinksParams {
    * HTML code containing the links that will be changed.
    */
   html: string;
+
   /**
    * The old base (hostname and path) that will be changed by the `newBase`.
    */
   base: string;
+
   /**
    * The new base that will replace the old `base`.
    */
   newBase: string;
+
   /**
    * A Regexp (in string format) so that if the link matches the transform
    * doesn't happen.
