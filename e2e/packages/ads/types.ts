@@ -1,4 +1,4 @@
-import { Package } from "frontity/types";
+import { MergePackages, Package } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 import GoogleAdManager from "@frontity/google-ad-manager/types";
@@ -54,13 +54,13 @@ interface TestAds extends Package {
     /**
      * Theme namespace.
      */
-    theme: React.ReactType;
+    theme: React.ElementType;
   };
 }
 
 /**
  * All packages used internally by TestAds.
  */
-export type Packages = TestAds & Router & Source & GoogleAdManager;
+export type Packages = MergePackages<TestAds, Router, Source, GoogleAdManager>;
 
 export default TestAds;

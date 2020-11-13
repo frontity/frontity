@@ -56,7 +56,8 @@ export function isSearch(data: Data): data is SearchData {
  * @returns A boolean value with the result.
  */
 export function isTaxonomy(data: Data): data is TermData {
-  return (data as TermData).isTerm === true;
+  const termData = data as TermData;
+  return termData.isTerm === true || termData.isTaxonomy === true;
 }
 
 /**
@@ -66,7 +67,8 @@ export function isTaxonomy(data: Data): data is TermData {
  * @returns A boolean value with the result.
  */
 export function isTerm(data: Data): data is TermData {
-  return (data as TermData).isTerm === true;
+  const termData = data as TermData;
+  return termData.isTerm === true || termData.isTaxonomy === true;
 }
 
 /**

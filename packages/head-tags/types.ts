@@ -1,4 +1,4 @@
-import { Package, Derived } from "frontity/types";
+import { Package, Derived, MergePackages, Frontity } from "frontity/types";
 import Router from "@frontity/router/types";
 import Source, {
   TermEntity,
@@ -63,6 +63,11 @@ export interface WithHeadTags {
  * Integrate your Frontity site with REST API - Head Tags by Frontity.
  */
 interface HeadTagsPackage extends Package {
+  /**
+   * Package name.
+   */
+  name: "@frontity/head-tags";
+
   /**
    * Root components exposed by this package.
    */
@@ -187,6 +192,6 @@ interface HeadTagsPackage extends Package {
 /**
  * The Head Tags package and its dependencies joined together.
  */
-export type Packages = HeadTagsPackage & Source & Router;
+export type Packages = MergePackages<Frontity, Source, Router, HeadTagsPackage>;
 
 export default HeadTagsPackage;

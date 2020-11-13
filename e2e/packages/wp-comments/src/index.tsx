@@ -1,5 +1,5 @@
 import React from "react";
-import Package from "../types";
+import TestComments, { Packages } from "../types";
 import { connect } from "frontity";
 import { Connect } from "frontity/types";
 
@@ -9,7 +9,7 @@ import { Connect } from "frontity/types";
  * @param props - Injected props by {@link connect}.
  * @returns React Element.
  */
-const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
+const Component: React.FC<Connect<Packages>> = ({ actions, state }) => {
   /**
    * Send a correct test comment.
    */
@@ -120,7 +120,7 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
           placeholder="parent"
           onChange={(e) =>
             actions.comments.updateFields(1, {
-              parent: e.target.value,
+              parent: parseInt(e.target.value, 10),
             })
           }
           value={state.comments.forms[1]?.fields?.parent || 0}
@@ -159,15 +159,11 @@ const Component: React.FC<Connect<Package>> = ({ actions, state }) => {
   );
 };
 
-const WPCommentsPackage: Package = {
+const WPCommentsPackage: TestComments = {
   name: "e2e-wp-comments",
-  state: {
-    comments: { forms: {} },
-  },
   roots: {
     wpComments: connect(Component),
   },
-  libraries: {},
 };
 
 export default WPCommentsPackage;

@@ -1,5 +1,5 @@
-import { ReactType } from "react";
-import { Action, Package } from "frontity/types";
+import React from "react";
+import { Action, MergePackages, Package } from "frontity/types";
 import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 
 declare global {
@@ -10,7 +10,7 @@ declare global {
     /**
      * Google Analytics command queue function.
      */
-    ga: Function;
+    ga: (...args: any) => any;
   }
 }
 
@@ -96,13 +96,17 @@ interface GoogleAnalyticsEvent extends Event {
  */
 interface GoogleAnalytics extends Package {
   /**
+   * Package name.
+   */
+  name: "@frontity/google-analytics";
+  /**
    * Root elements exposed by this package.
    */
   roots: Analytics["roots"] & {
     /**
      * Google Analytics root element.
      */
-    googleAnalytics: ReactType;
+    googleAnalytics: React.ElementType;
   };
 
   /**
@@ -178,6 +182,6 @@ interface GoogleAnalytics extends Package {
 /**
  * Package types used internally by GoogleAnalytics.
  */
-export type Packages = GoogleAnalytics & Analytics;
+export type Packages = MergePackages<GoogleAnalytics, Analytics>;
 
 export default GoogleAnalytics;
