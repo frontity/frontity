@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link Processor should not replace anchor tags starting with # 1`] = `
+<div>
+  <a
+    href="#id"
+  >
+    My Link
+  </a>
+  <mocked-link
+    href="http://my-link.com/post-name"
+    link="http://my-link.com/post-name"
+  >
+    My Link 2
+  </mocked-link>
+</div>
+`;
+
+exports[`Link Processor should replace all anchor tags with links 1`] = `
+<div>
+  <mocked-link
+    href="http://my-link.com/post-name"
+    link="http://my-link.com/post-name"
+  >
+    My Link
+  </mocked-link>
+  <mocked-link
+    href="http://my-link.com/post-name"
+    link="http://my-link.com/post-name"
+  >
+    My Link 2
+  </mocked-link>
+</div>
+`;
