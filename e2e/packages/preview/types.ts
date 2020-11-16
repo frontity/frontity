@@ -1,4 +1,4 @@
-import { ServerAction, Package } from "frontity/types";
+import { ServerAction, Package, MergePackages } from "frontity/types";
 import Source from "@frontity/source/types";
 
 /**
@@ -6,13 +6,17 @@ import Source from "@frontity/source/types";
  */
 interface Preview extends Package {
   /**
+   * Package name.
+   */
+  name: "e2e-preview";
+  /**
    * Root components exposed by this package.
    */
   roots: {
     /**
      * The preview namespace.
      */
-    preview: React.ReactType;
+    preview: React.ElementType;
   };
 
   /**
@@ -34,6 +38,6 @@ interface Preview extends Package {
 /**
  * Merge type for all known packages.
  */
-export type Packages = Source & Package;
+export type Packages = MergePackages<Source, Package>;
 
 export default Preview;

@@ -5,6 +5,10 @@ import { Package } from "frontity/types";
  */
 interface Script extends Package {
   /**
+   * Package name.
+   */
+  name: "e2e-script";
+  /**
    * Root components exposed by this package.
    */
   roots: {

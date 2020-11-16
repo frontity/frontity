@@ -64,9 +64,14 @@ describe("author", () => {
     expect(store.state.source).toMatchSnapshot();
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
-      { isFetching: false, isReady: false }, // first values are from a different object
-      { isFetching: true, isReady: false }, // fetch starts
-      { isFetching: false, isReady: true }, // fetch ends
+      // First values are from a different object.
+      { isFetching: false, isReady: false },
+      // Fetch starts.
+      { isFetching: true, isReady: false },
+      // Intermediate values.
+      { isFetching: false, isReady: false },
+      // Fetch ends.
+      { isFetching: false, isReady: true },
     ]);
   });
 

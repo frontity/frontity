@@ -100,8 +100,12 @@
         "@typescript-eslint/explicit-module-boundary-types": "off"
       }
     },
+    // Overrides for all the tests files.
     {
-      "files": ["**/__tests__/*.{js,ts,jsx,tsx}", "**/*.spec.{js,ts}"],
+      "files": [
+        "**/__tests__/*.{js,ts,jsx,tsx}",
+        "**/integration/**/*.spec.{js,ts}"
+      ],
       "rules": {
         "jsdoc/require-jsdoc": "off",
         "jsdoc/require-description": "off",
@@ -112,6 +116,13 @@
             "assertFunctionNames": ["expect", "**.should"]
           }
         ]
+      }
+    },
+    // Overrides for Cypress test files.
+    {
+      "files": ["**/integration/**/*.spec.{js,ts}"],
+      "rules": {
+        "jest/valid-expect-in-promise": "off"
       }
     }
   ]

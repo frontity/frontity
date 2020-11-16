@@ -12,6 +12,7 @@ interface InstallPlugin {
    * The name of the plugin.
    */
   name: string;
+
   /**
    * The version of the plugin.
    */
@@ -30,6 +31,7 @@ interface UpdateOption {
    * The name of the option.
    */
   name: string;
+
   /**
    * The value to set for the option.
    */

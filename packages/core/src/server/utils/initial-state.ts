@@ -13,6 +13,7 @@ interface StateOptions {
    * file.
    */
   settings: NormalizedSettings;
+
   /**
    * The WHATWG parsed URL object for the current page. Passed from the
    * [context](https://koajs.com/#context) of the Koa app.
