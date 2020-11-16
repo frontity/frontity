@@ -252,6 +252,10 @@ describe("redirections: 404", () => {
           "isError": true,
           "isFetching": false,
           "isReady": true,
+          "link": "/some-post/",
+          "page": 1,
+          "query": Object {},
+          "route": "/some-post/",
         },
       }
     `);
@@ -336,6 +340,10 @@ describe("redirections: RegExp and RegExp[]", () => {
           "isError": true,
           "isFetching": false,
           "isReady": true,
+          "link": "/some-post/",
+          "page": 1,
+          "query": Object {},
+          "route": "/some-post/",
         },
       }
     `);

@@ -2,6 +2,10 @@
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 
+Cypress.config({
+  experimentalFetchPolyfill: false,
+} as any);
+
 describe("Redirections", () => {
   before(() => {
     task("installPlugin", { name: "redirection" });

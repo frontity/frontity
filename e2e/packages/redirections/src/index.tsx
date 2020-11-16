@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useConnect, connect } from "frontity";
 import Redirections, { Packages } from "../types";
+import { isArchive, isPostType, isPost } from "@frontity/source";
 
 const Post: React.FC = connect(() => {
   const { state, actions } = useConnect<Packages>();
@@ -12,7 +13,7 @@ const Post: React.FC = connect(() => {
   }, [state.router.link, actions.source]);
 
   const data = state.source.get(state.router.link);
-  const post = state.source.post[data.id];
+  const post = isPost(data) && state.source.post[data.id];
   return <div id="post">Post: {post.title.rendered}</div>;
 });
 
@@ -28,7 +29,7 @@ const Component: React.FC = () => {
 
   return (
     <>
-      {data.isArchive && (
+      {isArchive(data) && (
         <div>
           <button
             id="open-post"
@@ -46,7 +47,7 @@ const Component: React.FC = () => {
             id="302-redirection"
             onClick={() => actions.router.set("/hello-world-302")}
           >
-            doubly redirected post
+            302 redirection
           </button>
           Archive:
           {data.items.map(({ link, id }) => (
@@ -56,7 +57,7 @@ const Component: React.FC = () => {
           ))}
         </div>
       )}
-      {data.isPostType && <Post />}
+      {isPostType(data) && <Post />}
     </>
   );
 };

@@ -54,9 +54,6 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     link = data.location;
   }
 
-  state.router.link = link;
-  state.router.state = options.state;
-
   // Trigger the fetch if `autoFetch` is true and update the window.history
   // object.
   if (

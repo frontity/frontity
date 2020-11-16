@@ -27,7 +27,7 @@ beforeEach(() => {
   config.state.source = clone(wpSource()).state.source;
   config.state.source.api = "https://test.frontity.org/wp-json";
   // Mock router state.
-  config.state.router = { link: "/", state: {} };
+  config.state.router = { link: "/", state: {}, redirections: "no" };
   // Mock site url.
   config.state.frontity = { url: "https://mars.frontity.org" };
   // Initialize store.

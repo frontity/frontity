@@ -36,6 +36,10 @@ const settings: Settings<
         name: "@frontity/tiny-router",
         state: { router: { autoFetch: false } },
       },
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
+      },
       "e2e-fonts",
     ],
   },
@@ -45,6 +49,10 @@ const settings: Settings<
       {
         name: "@frontity/tiny-router",
         state: { router: { autoFetch: false } },
+      },
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
       },
       "e2e-emotion",
     ],
@@ -379,7 +387,7 @@ const settings: Settings<
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
+            url: "http://localhost:8080",
           },
         },
       },
