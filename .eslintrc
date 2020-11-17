@@ -109,20 +109,15 @@
       "rules": {
         "jsdoc/require-jsdoc": "off",
         "jsdoc/require-description": "off",
-        "tsdoc/syntax": "off",
-        "jest/expect-expect": [
-          "error",
-          {
-            "assertFunctionNames": ["expect", "**.should"]
-          }
-        ]
+        "tsdoc/syntax": "off"
       }
     },
     // Overrides for Cypress test files.
     {
       "files": ["**/integration/**/*.spec.{js,ts}"],
       "rules": {
-        "jest/valid-expect-in-promise": "off"
+        "jest/valid-expect-in-promise": "off",
+        "jest/expect-expect": "off"
       }
     }
   ]
