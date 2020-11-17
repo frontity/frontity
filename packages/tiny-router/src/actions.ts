@@ -129,39 +129,42 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   state,
   actions,
 }) => async ({ ctx }) => {
-  if (state.router.autoFetch) {
-    if (actions.source && actions.source.fetch) {
-      await actions.source.fetch(state.router.link);
-      const data = state.source.get(state.router.link) as RedirectionData &
-        ErrorData;
+  // If autoFetch is disabled, there is nothing to do.
+  if (!state.router.autoFetch) {
+    return;
+  }
 
-      // Re-create the Frontity Options.
-      const options = {};
-      for (const [key, value] of Object.entries(
-        state?.frontity?.options || {}
-      )) {
-        options[`frontity_${key}`] = value;
-      }
+  // Because Frontity is a modular framework, it could happen that a source
+  // package like `@frontity/wp-source` has not been installed but the user is
+  // trying to use autoFetch option, which requires it.
+  if (!actions.source || !actions.source.fetch || !state.source.get) {
+    warn("You are trying to use autoFetch but no source package is installed.");
+    return;
+  }
 
-      if (data?.isRedirection) {
-        // The query is always added to `data` and it's always an object, but
-        // can be empty if there were no search params.
-        const location =
-          Object.keys(data.query).length > 0
-            ? data.location + "&" + stringify(options)
-            : data.location + "?" + stringify(options);
+  await actions.source.fetch(state.router.link);
+  const data = state.source.get(state.router.link) as RedirectionData &
+    ErrorData;
 
-        ctx.redirect(location);
-      } else if (isError(data)) {
-        const data = state.source.get(state.router.link);
-        if (isError(data)) {
-          ctx.status = data.errorStatus;
-        }
-      }
-    } else {
-      warn(
-        "You are trying to use autoFetch but no source package is installed."
-      );
+  // Re-create the Frontity Options.
+  const options = {};
+  for (const [key, value] of Object.entries(state?.frontity?.options || {})) {
+    options[`frontity_${key}`] = value;
+  }
+
+  if (data?.isRedirection) {
+    // The query is always added to `data` and it's always an object, but
+    // can be empty if there were no search params.
+    const location =
+      Object.keys(data.query).length > 0
+        ? data.location + "&" + stringify(options)
+        : data.location + "?" + stringify(options);
+
+    ctx.redirect(location);
+  } else if (isError(data)) {
+    const data = state.source.get(state.router.link);
+    if (isError(data)) {
+      ctx.status = data.errorStatus;
     }
   }
 };
