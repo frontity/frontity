@@ -66,11 +66,6 @@ const redirections: Redirections = {
   roots: {
     redirections: connect(Component),
   },
-  state: {
-    router: {
-      redirections: "all",
-    },
-  },
   actions: {
     redirections: {
       init: ({ state, libraries }) => {
