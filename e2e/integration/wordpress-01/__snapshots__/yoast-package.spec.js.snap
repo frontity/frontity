@@ -122,7 +122,8 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
           "inLanguage": "en-US",
           "url": "http://2.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=96&d=mm&r=g",
           "caption": "admin"
-        }
+        },
+        "sameAs": ["http://localhost:8080"]
       }
     ]
   }
@@ -875,4 +876,52 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
     ]
   }
 </script>
+`;
+
+exports[`Yoast Package > Post > should render the Twitter tags #1`] = `
+<meta data-rh="true" name="twitter:label1" content="Written by" />
+`;
+
+exports[`Yoast Package > Post > should render the Twitter tags #2`] = `
+<meta data-rh="true" name="twitter:data1" content="admin" />
+`;
+
+exports[`Yoast Package > Post > should render the Twitter tags #3`] = `
+<meta data-rh="true" name="twitter:label2" content="Est. reading time" />
+`;
+
+exports[`Yoast Package > Post > should render the Twitter tags #4`] = `
+<meta data-rh="true" name="twitter:data2" content="0 minutes" />
+`;
+
+exports[`Yoast Package > Page > should render the Twitter tags #1`] = `
+<meta data-rh="true" name="twitter:label1" content="Written by" />
+`;
+
+exports[`Yoast Package > Page > should render the Twitter tags #2`] = `
+<meta data-rh="true" name="twitter:data1" content="admin" />
+`;
+
+exports[`Yoast Package > Page > should render the Twitter tags #3`] = `
+<meta data-rh="true" name="twitter:label2" content="Est. reading time" />
+`;
+
+exports[`Yoast Package > Page > should render the Twitter tags #4`] = `
+<meta data-rh="true" name="twitter:data2" content="1 minute" />
+`;
+
+exports[`Yoast Package > CPT > should render the Twitter tags #1`] = `
+<meta data-rh="true" name="twitter:label1" content="Written by" />
+`;
+
+exports[`Yoast Package > CPT > should render the Twitter tags #2`] = `
+<meta data-rh="true" name="twitter:data1" content="admin" />
+`;
+
+exports[`Yoast Package > CPT > should render the Twitter tags #3`] = `
+<meta data-rh="true" name="twitter:label2" content="Est. reading time" />
+`;
+
+exports[`Yoast Package > CPT > should render the Twitter tags #4`] = `
+<meta data-rh="true" name="twitter:data2" content="0 minutes" />
 `;
