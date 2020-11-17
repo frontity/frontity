@@ -12,7 +12,7 @@ import Router from "@frontity/router/types";
 
 const initStore = (): InitializedStore<WpSource & Router> => {
   const config: WpSource & Router = clone(
-    merge(wpSource(), { state: { router: {} } })
+    merge(wpSource(), { state: { router: {} } }, { clone: false })
   );
   config.state.source.url = "https://test.frontity.org";
   return createStore(config);
