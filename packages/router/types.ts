@@ -64,7 +64,7 @@ interface Router<T = null> extends Package {
        *   current route and if matched, frontity will make an additional
        *   request to the WordPress instance to check if there exists a redirection.
        *   Note that the shorthand character classes will have to be escaped, so
-       *   instead of `\d`, you will need to write `\\d`.
+       *   for example instead of `\d`, you will need to write `\\d`.
        *
        * @example "no"
        * @example "all"
