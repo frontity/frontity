@@ -19,7 +19,9 @@ beforeEach(async () => {
     mergeDeepRight(clone(wpSource()), clone(wpComments)),
     {
       state: {
-        router: {},
+        router: {
+          redirections: "no",
+        },
       },
     }
   );
