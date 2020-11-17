@@ -68,6 +68,7 @@ export default async ({
   if (openBrowser) openBrowserTab(url);
 
   //
+
   /**
    * Check if webpack has finished (both the client and server bundles).
    *

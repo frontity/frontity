@@ -179,6 +179,7 @@ interface WpSource extends Source<Packages> {
          */
         archive?: string;
       }[];
+
       /**
        * An array of objects that define the custom taxonomies present in the
        * site.
