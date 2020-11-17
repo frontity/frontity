@@ -30,6 +30,7 @@ describe("actions.comments.submit", () => {
           api: "https://test.frontity.org/wp-json/",
         },
       },
+      router: { redirections: "no" },
     });
 
     // Create store from mocked packages.
@@ -460,7 +461,10 @@ describe("actions.comments.submit", () => {
 
   test("should indicate if the comment was accepted", async () => {
     // Mock packages with the API specified and some form.
-    const packages: any = mergeDeepRight(clone(wpSource()), clone(wpComments));
+    const packages: any = mergeDeepRight(
+      mergeDeepRight(clone(wpSource()), clone(wpComments)),
+      { state: { router: { redirections: "no" } } }
+    );
     const store = createStore<Packages>(packages);
     store.state.source.api = "https://test.frontity.org/wp-json";
     store.actions.source.init();
