@@ -125,20 +125,18 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
       })
     );
 
-    try {
-      // Run beforeSSR actions.
-      await Promise.all(
-        Object.values(store.actions).map(({ beforeSSR }) => {
-          if (beforeSSR) return beforeSSR({ ctx });
-        })
-      );
-    } catch (e) {
-      // If there was a redirection, a custom error will be thrown inside of
-      // beforeSSR action of tiny-router.
-      if (e.message == "Redirection") {
-        return;
-      }
-      throw e;
+    // Run beforeSSR actions.
+    await Promise.all(
+      Object.values(store.actions).map(({ beforeSSR }) => {
+        if (beforeSSR) return beforeSSR({ ctx });
+      })
+    );
+
+    // The beforeSSR actions for source packages (e.g. wp-source) can set a
+    // redirection by calling `ctx.redirect()`. In that case, the `Location`
+    // HTTP header will already be set and we can just return early.
+    if ([301, 302, 307, 308].includes(ctx.status) && ctx.get("Location")) {
+      return;
     }
 
     // Pass a context to HelmetProvider which will hold our state specific to

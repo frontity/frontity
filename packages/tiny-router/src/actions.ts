@@ -152,9 +152,6 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
             : data.location + "?" + stringify(options);
 
         ctx.redirect(location);
-
-        // This error needs to be caught by the server in @frontity/core
-        throw new Error("Redirection");
       } else if (isError(data)) {
         const data = state.source.get(state.router.link);
         if (isError(data)) {
