@@ -151,22 +151,19 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   await actions.source.fetch(state.router.link);
   const data = state.source.get(state.router.link);
 
-  // Re-create the Frontity Options.
-  const options = {};
-  for (const [key, value] of Object.entries(state?.frontity?.options || {})) {
-    options[`frontity_${key}`] = value;
-  }
-
+  // Check if the link has a redirection.
   if (isRedirection(data)) {
-    // The query is always added to `data` and it's always an object, but
-    // can be empty if there were no search params.
-    const location =
-      Object.keys(data.query).length > 0
-        ? data.location + "&" + stringify(options)
-        : data.location + "?" + stringify(options);
-
-    ctx.redirect(location);
+    // Recover all the missing query params from the original URL. This is
+    // required because we remove the query params that start with `frontity_`.
+    const location = new URL(data.location, "https://dummy-domain.com");
+    ctx.URL.searchParams.forEach((value, key) => {
+      if (!location.searchParams.has(key))
+        location.searchParams.append(key, value);
+    });
+    // Do the redirection.
+    ctx.redirect(location.pathname + location.search + location.hash);
   } else if (isError(data)) {
+    // If there was an error, return the proper status.
     const data = state.source.get(state.router.link);
     if (isError(data)) {
       ctx.status = data.errorStatus;
