@@ -45,7 +45,7 @@ expect.extend({
 });
 
 const fetchRedirectionParams = [
-  "http://localhost:8080/some-post/",
+  "https://localhost:8080/some-post/",
   {
     method: "HEAD",
   },
@@ -69,6 +69,9 @@ beforeEach(() => {
         {
           state: {
             router: {},
+            source: {
+              url: "https://localhost:8080",
+            },
           },
         },
         { clone: false }
