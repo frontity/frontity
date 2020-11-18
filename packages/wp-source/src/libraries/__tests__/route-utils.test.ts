@@ -171,6 +171,27 @@ describe("route utils - parse", () => {
       queryString: "",
     });
   });
+
+  test("from hash", () => {
+    expect(parse("#some-div")).toEqual({
+      path: "/",
+      route: "/",
+      page: 1,
+      query: {},
+      queryString: "",
+      hash: "#some-div",
+    });
+  });
+  test("from path and hash", () => {
+    expect(parse("/some-path/#some-div")).toEqual({
+      path: "/some-path/",
+      route: "/some-path/",
+      page: 1,
+      query: {},
+      queryString: "",
+      hash: "#some-div",
+    });
+  });
 });
 
 describe("route utils - stringify", () => {
@@ -335,6 +356,11 @@ describe("route utils - normalize", () => {
   test("from name (page)", () => {
     expect(normalize("custom-list/page/2/")).toBe("custom-list/page/2/");
   });
+
+  test("from hash", () => {
+    expect(normalize("#some-div")).toBe("/#some-div");
+  });
+
   test("with option `removeHash`", () => {
     expect(normalize("/some-post#some-div", { removeHash: true })).toBe(
       "/some-post/"

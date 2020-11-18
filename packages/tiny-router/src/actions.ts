@@ -40,6 +40,13 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   actions,
   libraries,
 }) => (link, options = {}): void => {
+  if (!link.startsWith("/")) {
+    const parsed = libraries.source.parse(state.router.link);
+    delete parsed.hash;
+    delete parsed.query;
+    link = libraries.source.stringify(parsed) + link;
+  }
+
   // Normalizes link.
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);

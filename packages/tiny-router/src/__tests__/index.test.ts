@@ -73,6 +73,20 @@ describe("actions", () => {
       expect(store.state.router.link).toBe(normalized);
     });
 
+    test.only("should work with hash links", () => {
+      const store = createStore(config);
+      store.state.router.link = "/some-path/#some-div";
+
+      const link = "#some-div";
+      const normalized = "/some-path/#some-div";
+
+      normalize.mockReturnValue(normalized);
+
+      store.actions.router.set(link);
+      expect(normalize).toHaveBeenCalledWith("/some-path/#some-div");
+      expect(store.state.router.link).toBe(normalized);
+    });
+
     test("should populate latest link, method and state", () => {
       const store = createStore(config);
 
