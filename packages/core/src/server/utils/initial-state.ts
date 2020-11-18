@@ -34,7 +34,7 @@ const state = ({ settings, url }: StateOptions) => {
   // them to `state.frontity.options` using camel case for the key and delete
   // them from the search. Avoid modifying the original `ctx.URL`.
   const searchParams = new URLSearchParams(url.search);
-  searchParams.forEach((value, key) => {
+  url.searchParams.forEach((value, key) => {
     if (key.startsWith("frontity_")) {
       const camelKey = snakeToCamel(key.replace("frontity_", ""));
       options[camelKey] = value;
