@@ -28,25 +28,20 @@ interface StateOptions {
  * @returns The Frontity state object.
  */
 const state = ({ settings, url }: StateOptions) => {
-  const { searchParams } = url;
   const options = {};
 
-  // Get all the params in the query string that start with "frontity_".
-  const paramsToDelete = Array.from(searchParams.entries())
-    .map(([key]) => key)
-    .filter((param) => param.startsWith("frontity_"));
-
-  // Delete all of them from the `searchParams` and at the same time add them to
-  // `options`.
-  paramsToDelete.forEach((param) => {
-    if (searchParams.has(param)) {
-      const key = snakeToCamel(param.replace("frontity_", ""));
-      options[key] = searchParams.get(param);
-      searchParams.delete(param);
+  // Get all the params in the query string that start with "frontity_", add
+  // them to `state.frontity.options` using camel case for the key and delete
+  // them from the search. Avoid modifying the original `ctx.URL`.
+  const searchParams = new URLSearchParams(url.search);
+  searchParams.forEach((value, key) => {
+    if (key.startsWith("frontity_")) {
+      const camelKey = snakeToCamel(key.replace("frontity_", ""));
+      options[camelKey] = value;
+      searchParams.delete(key);
     }
   });
-
-  url.search = searchParams.toString();
+  const search = searchParams.toString() ? `?${searchParams.toString()}` : "";
 
   let state: Package["state"] = {
     frontity: {
@@ -55,7 +50,7 @@ const state = ({ settings, url }: StateOptions) => {
       debug: false,
       platform: "server",
       rendering: "ssr",
-      initialLink: `${url.pathname}${url.search}${url.hash}`,
+      initialLink: `${url.pathname}${search}${url.hash}`,
       options,
       packages: settings.packages.map((pkg) => pkg.name),
     },
