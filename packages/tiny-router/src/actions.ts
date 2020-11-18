@@ -50,7 +50,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   // If the data is a redirection, then we set the link to the location.
   // The redirections are stored in source.data just like any other data.
   const data = state.source.get(link);
-  if (isRedirection(data)) {
+  if (data && isRedirection(data)) {
     link = data.location;
   }
 
@@ -89,7 +89,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   if (state.frontity.platform === "client") {
     observe(() => {
       const data = state.source.get(state.router.link);
-      if (isRedirection(data)) {
+      if (data && isRedirection(data)) {
         actions.router.set(data.location, { method: "replace" });
       }
     });
@@ -151,7 +151,7 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   const data = state.source.get(state.router.link);
 
   // Check if the link has a redirection.
-  if (isRedirection(data)) {
+  if (data && isRedirection(data)) {
     // Recover all the missing query params from the original URL. This is
     // required because we remove the query params that start with `frontity_`.
     const location = new URL(data.location, "https://dummy-domain.com");
