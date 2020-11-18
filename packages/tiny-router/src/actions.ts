@@ -1,6 +1,5 @@
 import TinyRouter from "../types";
 import { warn, observe } from "frontity";
-import { stringify } from "query-string";
 import { isError, isRedirection } from "@frontity/source";
 
 /**
@@ -84,12 +83,17 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   actions,
   libraries,
 }) => {
-  observe(() => {
-    const data = state.source.get(state.router.link);
-    if (data && isRedirection(data) && state.frontity.platform === "client") {
-      actions.router.set(data.location, { method: "replace" });
-    }
-  });
+  // Observe the current data object when we are in the client. If it is ever a
+  // redirection, replace the current link with the new one using "replace" to
+  // keep the browser history consistent.
+  if (state.frontity.platform === "client") {
+    observe(() => {
+      const data = state.source.get(state.router.link);
+      if (data && isRedirection(data)) {
+        actions.router.set(data.location, { method: "replace" });
+      }
+    });
+  }
 
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
@@ -146,22 +150,19 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   await actions.source.fetch(state.router.link);
   const data = state.source.get(state.router.link);
 
-  // Re-create the Frontity Options.
-  const options = {};
-  for (const [key, value] of Object.entries(state?.frontity?.options || {})) {
-    options[`frontity_${key}`] = value;
-  }
-
-  if (isRedirection(data)) {
-    // The query is always added to `data` and it's always an object, but
-    // can be empty if there were no search params.
-    const location =
-      Object.keys(data.query).length > 0
-        ? data.location + "&" + stringify(options)
-        : data.location + "?" + stringify(options);
-
-    ctx.redirect(location);
+  // Check if the link has a redirection.
+  if (data && isRedirection(data)) {
+    // Recover all the missing query params from the original URL. This is
+    // required because we remove the query params that start with `frontity_`.
+    const location = new URL(data.location, "https://dummy-domain.com");
+    ctx.URL.searchParams.forEach((value, key) => {
+      if (!location.searchParams.has(key))
+        location.searchParams.append(key, value);
+    });
+    // Do the redirection.
+    ctx.redirect(location.pathname + location.search + location.hash);
   } else if (isError(data)) {
+    // If there was an error, return the proper status.
     const data = state.source.get(state.router.link);
     if (isError(data)) {
       ctx.status = data.errorStatus;

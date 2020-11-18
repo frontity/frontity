@@ -109,7 +109,8 @@
       "rules": {
         "jsdoc/require-jsdoc": "off",
         "jsdoc/require-description": "off",
-        "tsdoc/syntax": "off"
+        "tsdoc/syntax": "off",
+        "jest/expect-expect": "error"
       }
     },
     // Overrides for Cypress test files.

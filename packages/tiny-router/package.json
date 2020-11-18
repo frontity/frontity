@@ -23,8 +23,7 @@
   "dependencies": {
     "@frontity/router": "^1.1.2",
     "@frontity/source": "^1.4.0",
-    "frontity": "^1.13.0",
-    "query-string": "^6.13.7"
+    "frontity": "^1.13.0"
   },
   "devDependencies": {
     "@frontity/error": "0.1.1"

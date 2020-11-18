@@ -15,7 +15,7 @@ const createStore = (config) => frontity.createStore<Packages>(config);
 beforeEach(() => {
   normalize = jest.fn();
   fetch = jest.fn();
-  get = jest.fn();
+  get = jest.fn().mockReturnValue({ isReady: false, isFetching: false });
 
   config = {
     name: "@frontity/tiny-router",

@@ -354,7 +354,7 @@ interface WpSource extends Source<Packages> {
         /**
          * The Frontity state.
          */
-        state: State<Packages>;
+        state: State<WpSource>;
 
         /**
          * The Response object.
