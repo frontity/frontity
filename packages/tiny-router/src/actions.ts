@@ -48,6 +48,8 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   // Set state default value.
   if (!options.state) options.state = {};
 
+  // If the data is a redirection, then we set the link to the location.
+  // The redirections are stored in source.data just like any other data.
   const data = state.source.get(link);
   if (isRedirection(data)) {
     link = data.location;
