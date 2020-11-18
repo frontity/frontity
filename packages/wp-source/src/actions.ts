@@ -157,7 +157,7 @@ const actions: WpSource["actions"]["source"] = {
         // of an error.
         if (e.status === 404) {
           // If the route matched the redirection regex or
-          // state.router.redirections === 'all', then have already started
+          // state.router.redirections === 'all', then we have already started
           // fetching the data, so just await it.
           let head = redirectionPromise && (await redirectionPromise);
 
