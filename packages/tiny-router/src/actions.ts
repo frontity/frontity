@@ -1,6 +1,5 @@
 import TinyRouter from "../types";
 import { warn, observe } from "frontity";
-import { RedirectionData } from "@frontity/source/types/data";
 import { stringify } from "query-string";
 import { isError, isRedirection } from "@frontity/source";
 
@@ -49,8 +48,8 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   // Set state default value.
   if (!options.state) options.state = {};
 
-  const data = state.source.get(link) as RedirectionData;
-  if (data?.isRedirection) {
+  const data = state.source.get(link);
+  if (isRedirection(data)) {
     link = data.location;
   }
 
@@ -84,8 +83,8 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   libraries,
 }) => {
   observe(() => {
-    const data = state.source.get(state.router.link) as RedirectionData;
-    if (data?.isRedirection && state.frontity.platform === "client") {
+    const data = state.source.get(state.router.link);
+    if (isRedirection(data) && state.frontity.platform === "client") {
       actions.router.set(data.location, { method: "replace" });
     }
   });
