@@ -132,6 +132,50 @@ describe("post", () => {
     await store.actions.source.fetch("/?p=1");
     expect(store.state.source).toMatchSnapshot();
   });
+
+  test("uses the auth token to fetch an unpublished draft", async () => {
+    // Mock auht token.
+    store.state.source.auth = "Bearer TOKEN";
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse(post1));
+    // Fetch entities
+    await store.actions.source.fetch("/?p=1");
+    expect(api.get.mock.calls[0]).toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "auth": "Bearer TOKEN",
+          "endpoint": "posts/1",
+          "params": Object {
+            "_embed": true,
+          },
+        },
+      ]
+    `);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("populates an error when using an invalid auth token", async () => {
+    // Mock auht token.
+    store.state.source.auth = "Bearer INVALID";
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockRejectedValueOnce(new ServerError("Forbidden", 403, "Forbidden"));
+    // Fetch entities
+    await store.actions.source.fetch("/?p=1");
+    expect(api.get.mock.calls[0]).toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "auth": "Bearer INVALID",
+          "endpoint": "posts/1",
+          "params": Object {
+            "_embed": true,
+          },
+        },
+      ]
+    `);
+    expect(store.state.source).toMatchSnapshot();
+  });
 });
 
 describe("page", () => {
