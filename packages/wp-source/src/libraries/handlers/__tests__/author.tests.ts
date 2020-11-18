@@ -9,16 +9,12 @@ import author1 from "./mocks/author/author-1.json";
 import author1Posts from "./mocks/author/author-1-posts.json";
 import author1PostsPage2 from "./mocks/author/author-1-posts-page-2.json";
 import author1PostsCpt from "./mocks/author/author-1-posts-cpt.json";
-import Router from "@frontity/router/types";
-import merge from "deepmerge";
 import { isSearch } from "@frontity/source";
 
-let store: InitializedStore<WpSource & Router>;
+let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore<WpSource & Router>(
-    clone(merge(wpSource(), { state: { router: {} } }, { clone: false }))
-  );
+  store = createStore<WpSource>(clone(wpSource()));
   store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;

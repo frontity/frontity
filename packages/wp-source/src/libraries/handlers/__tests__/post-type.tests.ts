@@ -8,13 +8,10 @@ import { mockResponse } from "./mocks/helpers";
 import attachment1 from "./mocks/post-type/attachment-1.json";
 import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
-import post1Revision from "./mocks/post-type/post-1-revision.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
 import { ServerError, isError, isPostType } from "@frontity/source";
 import { PostEntity } from "@frontity/source/types";
-import merge from "deepmerge";
-import Router from "@frontity/router/types";
 
 interface WpSourceAndCpt extends WpSource {
   state: WpSource["state"] & {
@@ -24,12 +21,10 @@ interface WpSourceAndCpt extends WpSource {
   };
 }
 
-let store: InitializedStore<WpSourceAndCpt & Router>;
+let store: InitializedStore<WpSourceAndCpt>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore<WpSourceAndCpt & Router>(
-    clone(merge(wpSource(), { state: { router: {} } }, { clone: false }))
-  );
+  store = createStore<WpSourceAndCpt>(clone(wpSource()));
   store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
@@ -128,60 +123,6 @@ describe("post", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1withType]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
-    expect(store.state.source).toMatchSnapshot();
-  });
-
-  test("applies the latest revision if it is a preview", async () => {
-    // Mock auth token
-    store.state.source.auth = "Bearer TOKEN";
-    // Mock Api responses
-    api.get = jest
-      .fn()
-      .mockResolvedValueOnce(mockResponse([post1]))
-      .mockResolvedValueOnce(mockResponse([post1Revision]));
-    // Fetch entities
-    await store.actions.source.fetch("/post-1/?preview=true");
-    expect(store.state.source).toMatchSnapshot();
-
-    // Get updated props from the post that was fetched.
-    const { title, content, excerpt } = store.state.source.post[1];
-    expect({ title, content, excerpt }).toMatchInlineSnapshot(`
-      Object {
-        "content": Object {
-          "rendered": "Content from revision 11",
-        },
-        "excerpt": Object {
-          "rendered": "Excerpt from revision 11",
-        },
-        "title": Object {
-          "rendered": "Title from revision 11",
-        },
-      }
-    `);
-  });
-
-  test("populates an error if it is a preview with an invalid token", async () => {
-    // Mock auth token
-    store.state.source.auth = "Bearer INVALID";
-    // Mock Api responses
-    api.get = jest
-      .fn()
-      .mockResolvedValueOnce(mockResponse([post1]))
-      .mockRejectedValueOnce(new ServerError("Forbidden", 403, "Forbidden"));
-    // Fetch entities
-    await store.actions.source.fetch("/post-1/?preview=true");
-    expect(store.state.source).toMatchSnapshot();
-  });
-
-  test("ignores the preview parameter if there is no auth token", async () => {
-    // Mock Api responses
-    api.get = jest
-      .fn()
-      .mockResolvedValueOnce(mockResponse([post1]))
-      .mockRejectedValueOnce(new ServerError("Forbidden", 403, "Forbidden"));
-    // Fetch entities
-    await store.actions.source.fetch("/post-1/?preview=true");
-    expect(api.get).toHaveBeenCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
   });
 });

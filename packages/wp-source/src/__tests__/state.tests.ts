@@ -4,17 +4,7 @@ import wpSource from "../";
 import merge from "deepmerge";
 
 const initStore = (data = {}) => {
-  const config = clone(
-    merge(
-      wpSource(),
-      {
-        state: {
-          router: {},
-        },
-      },
-      { clone: false }
-    )
-  );
+  const config = clone(merge(wpSource(), { clone: false }));
   // replace data by the one passed as argument
   config.state.source.data = data;
   return createStore(config);

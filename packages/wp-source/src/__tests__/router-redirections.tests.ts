@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-
 import * as frontity from "frontity";
 import Router from "@frontity/router/types";
-
 import merge from "deepmerge";
 import clone from "clone-deep";
 import { InitializedStore, createStore } from "@frontity/connect";
