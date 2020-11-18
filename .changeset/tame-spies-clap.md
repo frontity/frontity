@@ -1,7 +1,6 @@
 ---
 "@frontity/core": minor
 "@frontity/router": minor
-"@frontity/source": minor
 "@frontity/tiny-router": minor
 "@frontity/wp-source": minor
 ---
