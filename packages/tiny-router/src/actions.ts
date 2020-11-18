@@ -1,6 +1,5 @@
 import TinyRouter from "../types";
 import { warn, observe } from "frontity";
-import { stringify } from "query-string";
 import { isError, isRedirection } from "@frontity/source";
 
 /**
