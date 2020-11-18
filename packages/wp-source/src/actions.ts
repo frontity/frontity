@@ -70,18 +70,6 @@ const actions: WpSource["actions"]["source"] = {
 
     let redirectionPromise: Promise<Response>;
 
-    /**
-     * A tiny helper to lazily create a fetch of the redirection.
-     *
-     * @param link - The original link.
-     * @returns A Promise that resolves to the redirection or rejects if there is no
-     * redirection.
-     */
-    const fetchRedirection = () =>
-      fetch("http://localhost:8080" + link, {
-        method: "HEAD",
-      });
-
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
@@ -100,16 +88,20 @@ const actions: WpSource["actions"]["source"] = {
           .map((r) => r.replace(/^RegExp:/, ""));
 
         if (patterns.some((r) => route.match(r))) {
-          redirectionPromise = fetchRedirection();
+          redirectionPromise = fetch(state.source.url + link, {
+            method: "HEAD",
+          });
         }
         // Or it can be "all".
       } else if (routerRedirections === "all") {
-        redirectionPromise = fetchRedirection();
+        redirectionPromise = fetch(state.source.url + link, { method: "HEAD" });
         // Or it can be just a regex.
       } else if (routerRedirections?.startsWith("RegExp:")) {
         const regex = routerRedirections.replace(/^RegExp:/, "");
         if (link.match(regex)) {
-          redirectionPromise = fetchRedirection();
+          redirectionPromise = fetch(state.source.url + link, {
+            method: "HEAD",
+          });
         }
       }
 
@@ -168,7 +160,7 @@ const actions: WpSource["actions"]["source"] = {
               (Array.isArray(redirections) && redirections.includes("404")))
           ) {
             try {
-              head = await fetchRedirection();
+              head = await fetch(state.source.url + link, { method: "HEAD" });
             } catch (e) {
               // If there is no redirection, we ignore it and just continue
               // handling the 404 ServerError that was thrown previously.
