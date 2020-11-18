@@ -437,10 +437,11 @@ export interface RedirectionData extends Data {
    */
   location: string;
 
+  // HTTP status types.
   /* eslint-disable jsdoc/require-jsdoc */
-  is301: boolean;
-  is302: boolean;
-  is307: boolean;
-  is308: boolean;
+  is301?: boolean;
+  is302?: boolean;
+  is307?: boolean;
+  is308?: boolean;
   /* eslint-enable */
 }

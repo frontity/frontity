@@ -15,6 +15,7 @@ import {
   AttachmentData,
   SearchData,
   HomeData,
+  RedirectionData,
 } from "../../types/data";
 
 export const onlyStatus: Data = {
@@ -387,4 +388,16 @@ export const attachment: AttachmentData = {
   route: "/the-beauties-of-gullfoss/gullfoss/",
   page: 1,
   query: {},
+};
+
+export const redirection: RedirectionData = {
+  link: "/example/",
+  query: {},
+  route: "/example/",
+  page: 1,
+  isRedirection: true,
+  location: "http://example.com/example",
+  is301: true,
+  isFetching: false,
+  isReady: true,
 };
