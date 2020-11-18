@@ -8,6 +8,8 @@
   "linked": [],
   "access": "public",
   "baseBranch": "infinite-scroll-beta",
+  "updateInternalDependencies": "patch",
+  "ignore": [],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   }

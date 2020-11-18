@@ -4,6 +4,7 @@ const waitOn = require("wait-on");
 const execa = require("execa");
 const cypress = require("cypress");
 const argv = require("minimist")(process.argv.slice(2));
+const { platform } = require("os");
 
 /**
  * Validates the CLI arguments and throws an error if a value is not correct.
@@ -41,7 +42,9 @@ let isDockerRunning = false;
 
 // Validate CLI args.
 validateArgs(target, { possibleValues: ["es5", "module", "both"] });
-validateArgs(browser, { possibleValues: ["firefox", "chrome", "edge"] });
+validateArgs(browser, {
+  possibleValues: ["firefox", "chrome", "edge", "electron"],
+});
 validateArgs(cypressCommand, { possibleValues: ["open", "run", "off"] });
 
 // We have to make sure that we are runnng inside of the e2e directory The
@@ -54,6 +57,13 @@ process.chdir(__dirname);
       // Set the WordPress version as an environment variable to be consumed by
       // the docker-compose.yml file.
       process.env.WORDPRESS_VERSION = wpVersion;
+
+      // Set the Frontity server address. In Windows and Mac we use
+      // `host.docker.internal` and in Linux we use `172.17.0.1`.
+      process.env.FRONTITY_SERVER =
+        platform() === "darwin" || platform().startsWith("win")
+          ? "http://host.docker.internal:3001"
+          : "http://172.17.0.1:3001";
 
       // Stop all the containers and remove all the volumes that they use (the
       // `-v` option).
@@ -131,8 +141,8 @@ process.chdir(__dirname);
     // CD back into the e2e directory.
     process.chdir("..");
 
-    // Workaround for a bug in Cypress, otherwise it fails with:
-    // electron: -max-http-header-size=1048576 is not allowed in NODE_OPTIONS.
+    // Workaround for a bug in Cypress, otherwise it fails with electron:
+    // -max-http-header-size=1048576 is not allowed in NODE_OPTIONS.
     // eslint-disable-next-line require-atomic-updates
     process.env.NODE_OPTIONS = "";
 

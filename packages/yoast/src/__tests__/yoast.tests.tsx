@@ -28,7 +28,18 @@ const getState404 = () =>
       link: "/not-found",
     },
     source: {
-      entity: () => null,
+      get: () => ({
+        link: "/not-found/",
+        route: "/not-found/",
+        page: 1,
+        query: {},
+        isFetching: false,
+        isReady: true,
+        isError: true,
+        is404: true,
+        errorStatus: 404,
+        errorStatusText: "Not Found",
+      }),
     },
     frontity: {
       url: "http://my.frontity.test",
@@ -58,12 +69,25 @@ const getStateHelloWorld = () =>
       link: "/hello-world/",
     },
     source: {
-      entity: () => ({
+      get: () => ({
+        link: "/hello-word/",
+        route: "/hello-word/",
+        page: 1,
+        query: {},
+        isFetching: false,
+        isReady: true,
+        isPostType: true,
+        isPost: true,
         type: "post",
         id: 1,
-        slug: "hello-world",
-        link: "/hello-world/",
-        ["yoast_head"]: `
+      }),
+      post: {
+        1: {
+          type: "post",
+          id: 1,
+          slug: "hello-world",
+          link: "/hello-world/",
+          ["yoast_head"]: `
           <title>Hello World &ndash; WP Test Site</title>
           <meta property="og:url" content="http://localhost:8080/hello-world/">
           <link rel="canonical" href="http://localhost:8080/hello-world/">
@@ -77,8 +101,9 @@ const getStateHelloWorld = () =>
             ]
           }
           </script>
-        `,
-      }),
+          `,
+        },
+      },
     },
     frontity: {
       url: "http://my.frontity.test",

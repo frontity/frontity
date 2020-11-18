@@ -6,6 +6,44 @@
 
 - Updated dependencies []:
   - frontity@1.8.1-infinite-scroll-beta.0
+## 1.4.0
+
+### Minor Changes
+
+- [`362b02f1`](https://github.com/frontity/frontity/commit/362b02f1beb100ffb178a1d4e775e89b84b99ccc) [#449](https://github.com/frontity/frontity/pull/449) Thanks [@luisherranz](https://github.com/luisherranz)! - Rename `Taxonomy` to `Term` when it refers to [terms](https://developer.wordpress.org/reference/classes/wp_term/), and refactor entity types ([feature discussion](https://community.frontity.org/t/extend-sources-data-interface-with-types-from-new-handlers/1187/28)).
+
+  These changes were made:
+
+  - Alias `TaxonomyData` to `TermData`.
+  - Alias `isTaxonomy()` to `isTerm()`.
+  - Deprecate `data.isTaxonomy` and add `data.isTerm`.
+  - Rename `TaxonomyEntity` to `TermEntity`.
+  - Rename `TaxonomyType` to `TaxonomyEntity`.
+  - Also, rename `PostType` to `TypeEntity`.
+
+* [`362b02f1`](https://github.com/frontity/frontity/commit/362b02f1beb100ffb178a1d4e775e89b84b99ccc) [#449](https://github.com/frontity/frontity/pull/449) Thanks [@luisherranz](https://github.com/luisherranz)! - Add [type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards) for data objects and entities ([feature discussion](https://community.frontity.org/t/extend-sources-data-interface-with-types-from-new-handlers/1187/28)).
+
+- [`3dfa3c48`](https://github.com/frontity/frontity/commit/3dfa3c4809d3b00528db8c1c8c530cf311901553) [#610](https://github.com/frontity/frontity/pull/610) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add the `state.source.url` setting to source according to
+  https://community.frontity.org/t/make-the-backend-url-a-global-setting/2381.
+  The types are in `@frontity/source` and the implementation is in
+  `@frontity/wp-source`.
+
+### Patch Changes
+
+- [`3dfa3c48`](https://github.com/frontity/frontity/commit/3dfa3c4809d3b00528db8c1c8c530cf311901553) [#610](https://github.com/frontity/frontity/pull/610) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Update `state.source.api` to be a derived state.
+
+- Updated dependencies [[`362b02f1`](https://github.com/frontity/frontity/commit/362b02f1beb100ffb178a1d4e775e89b84b99ccc), [`6b4bf82b`](https://github.com/frontity/frontity/commit/6b4bf82b5eee698f7ea8ea3b0bfd69a989caaba3), [`44f44e3f`](https://github.com/frontity/frontity/commit/44f44e3f2ba436236b65518ddac30cd4af57ea18)]:
+  - frontity@1.13.0
+
+## 1.3.1
+
+### Patch Changes
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Rename `RouteParams` type to `LinkParams`. The word `route` is now used to
+  describe a `link` without the pagination part.
+- Updated dependencies [[`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b)]:
+  - frontity@1.12.0
+
 ## 1.3.0
 
 ### Minor Changes

@@ -4,7 +4,7 @@ We really appreciate your interest to contribute to Frontity! Any kind of contri
 
 ## Coding Contributions
 
-There is a detailed guide about how to contribute coding at our docs: [Code Contributions](https://docs.frontity.org/contributing/code-contributions), but if you are looking for a quick guide, these are the main steps:
+There is a detailed guide about how to contribute coding at our docs: [Code Contributions](https://docs.frontity.org/contributing/code-contribution-guide), but if you are looking for a quick guide, these are the main steps:
 
 **Prerequisites:** Node 10 (or newer) installed in your computer.
 
@@ -20,7 +20,7 @@ There is a detailed guide about how to contribute coding at our docs: [Code Cont
 
 >***WARNING: `npm test` will be run automatically each time your commit or push, so it may take a while. If it fails, it won't let you commit/push. Fix the tests and try again.***
 
-If you get stuck on any of these steps, you should check the [Code Contributions guide](https://docs.frontity.org/contributing/code-contributions).
+If you get stuck on any of these steps, you should check the [Code Contributions guide](https://docs.frontity.org/contributing/code-contribution-guide).
 
 ## Other types of contributions
 

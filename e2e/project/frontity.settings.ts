@@ -1,6 +1,26 @@
 import { Settings } from "frontity/types";
 
-const settings: Settings = [
+import TinyRouter from "@frontity/tiny-router/types";
+import WpSource from "@frontity/wp-source/types";
+import GoogleTagManagerAnalytics from "@frontity/google-tag-manager-analytics/types";
+import ComscoreAnalytics from "@frontity/comscore-analytics/types";
+import GoogleAnalytics from "@frontity/google-analytics/types";
+import GoogleAdManager from "@frontity/google-ad-manager/types";
+import SmartAdserver from "@frontity/smart-adserver/types";
+import Yoast from "@frontity/yoast/types";
+import HeadTags from "@frontity/head-tags/types";
+
+const settings: Settings<
+  | TinyRouter
+  | WpSource
+  | GoogleTagManagerAnalytics
+  | ComscoreAnalytics
+  | GoogleAnalytics
+  | GoogleAdManager
+  | SmartAdserver
+  | Yoast
+  | HeadTags
+> = [
   {
     name: "head",
     packages: ["e2e-head"],
@@ -67,7 +87,7 @@ const settings: Settings = [
       },
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "https://test.frontity.org/wp-json" } },
+        state: { source: { url: "https://test.frontity.org/" } },
       },
     ],
   },
@@ -150,7 +170,7 @@ const settings: Settings = [
       "@frontity/wp-comments",
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "http://localhost:8080/wp-json" } },
+        state: { source: { url: "http://localhost:8080/" } },
       },
     ],
   },
@@ -212,7 +232,52 @@ const settings: Settings = [
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
+            url: "http://localhost:8080/",
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "smart-adserver",
+    packages: [
+      "e2e-smart-adserver",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/smart-adserver",
+        state: {
+          smartAdserver: {
+            networkId: "1445",
+            subdomain: "www",
+          },
+          fills: {
+            smartAdserver: {
+              headerAd: {
+                slot: "header",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+                props: {
+                  callType: "std",
+                  siteId: 78061,
+                  pageId: 884496,
+                  formatId: 33780,
+                  tagId: "hello",
+                },
+              },
+              bottomAd: {
+                slot: "bottom",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+                props: {
+                  callType: "std",
+                  siteId: 78061,
+                  pageId: 884496,
+                  formatId: 33780,
+                  minHeight: 100,
+                  tagId: "std-min-height",
+                },
+              },
+            },
           },
         },
       },
@@ -232,7 +297,7 @@ const settings: Settings = [
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
+            url: "http://localhost:8080/",
             postTypes: [
               {
                 type: "movie",
@@ -274,7 +339,7 @@ const settings: Settings = [
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
+            url: "http://localhost:8080/",
             postTypes: [
               {
                 type: "movie",
@@ -306,6 +371,40 @@ const settings: Settings = [
         },
       },
     ],
+  },
+  {
+    name: "embedded-mode",
+    match: [process.env.FRONTITY_SERVER],
+    state: {
+      frontity: {
+        url: "http://localhost:8080",
+      },
+    },
+    packages: [
+      "e2e-preview",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+              },
+            ],
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "render",
+    state: {
+      frontity: {
+        url: "https://domain.com",
+      },
+    },
+    packages: ["e2e-render", "@frontity/tiny-router", "@frontity/wp-source"],
   },
 ];
 

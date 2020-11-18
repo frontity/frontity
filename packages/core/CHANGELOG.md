@@ -6,6 +6,24 @@
 
 - Updated dependencies []:
   - @frontity/file-settings@1.1.5-infinite-scroll-beta.0
+## 1.9.1
+
+### Patch Changes
+
+- [`e9f7b5c6`](https://github.com/frontity/frontity/commit/e9f7b5c6889fb6dfb68fb15baad77031ffd7c324) [#609](https://github.com/frontity/frontity/pull/609) Thanks [@cristianbote](https://github.com/cristianbote)! - The `serve` command was taking too much to spin the server. That was due to the build and dev scripts which are having side-effects by loading ts-node and other scripts.
+
+- Updated dependencies [[`d7b4b429`](https://github.com/frontity/frontity/commit/d7b4b429f1f23dfae74b9781ea1b1de00aed763c), [`b766e330`](https://github.com/frontity/frontity/commit/b766e330465b6a76d927eaddaa763a684dc1b228)]:
+  - @frontity/connect@1.1.4
+
+## 1.9.0
+
+### Minor Changes
+
+- [`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b) [#568](https://github.com/frontity/frontity/pull/568) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for auth headers: https://community.frontity.org/t/support-for-auth-header-in-source-packages/2678/12
+
+  - Use use the URL search param `frontity_name` instead of just `name` for frontity multisite.
+  - Remove all querystring parameters that start with `frontity_` from the page querystring and pass them (camelCased) to `state.frontity.options`.
+
 ## 1.8.0
 
 ### Minor Changes

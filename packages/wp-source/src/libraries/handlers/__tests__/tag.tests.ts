@@ -13,8 +13,8 @@ import tag1PostsCpt from "./mocks/tag/tag-1-posts-cpt.json";
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store = createStore<WpSource>(clone(wpSource()));
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -63,9 +63,14 @@ describe("tag", () => {
     expect(store.state.source).toMatchSnapshot();
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
-      { isFetching: false, isReady: false }, // first values are from a different object
-      { isFetching: true, isReady: false }, // fetch starts
-      { isFetching: false, isReady: true }, // fetch ends
+      // First values are from a different object.
+      { isFetching: false, isReady: false },
+      // Fetch starts.
+      { isFetching: true, isReady: false },
+      // Intermediate values.
+      { isFetching: false, isReady: false },
+      // Fetch ends.
+      { isFetching: false, isReady: true },
     ]);
   });
 
@@ -152,6 +157,38 @@ describe("tag", () => {
       );
     // Fetch entities
     await store.actions.source.fetch("/tag/tag-1/?some=param");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("with a search", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([tag1]))
+      .mockResolvedValueOnce(
+        mockResponse(tag1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "3",
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/?s=some+search");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("with a search with pagination", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([tag1]))
+      .mockResolvedValueOnce(
+        mockResponse(tag1PostsPage2, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "3",
+        })
+      );
+    // Fetch entities
+    await store.actions.source.fetch("/tag/tag-1/page/2?s=some+search");
     expect(store.state.source).toMatchSnapshot();
   });
 });

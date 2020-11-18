@@ -4,6 +4,7 @@
   "private": true,
   "description": "Package to do e2e testing of Frontity and WordPress instances together",
   "dependencies": {
+    "@frontity/components": "^1.5.1",
     "@frontity/source": "^1.2.2",
     "@frontity/router": "^1.2.0-infinite-scroll-beta.0",
     "frontity": "^1.4.3"

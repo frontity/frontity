@@ -8,7 +8,7 @@ import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { FilledContext } from "react-helmet-async";
 import { getSettings } from "@frontity/file-settings";
-import { Context } from "@frontity/types";
+import { Context, Package } from "@frontity/types";
 import { getSnapshot } from "@frontity/connect";
 import { ChunkExtractor } from "@loadable/server";
 import getTemplate from "./templates";
@@ -25,7 +25,28 @@ import createStore from "./store";
 import { exists } from "fs";
 import { promisify } from "util";
 
-export default ({ packages }): ReturnType<Koa["callback"]> => {
+/**
+ * Options for {@link server}.
+ */
+interface ServerOptions {
+  /**
+   * A map of module names to Frontity packages.
+   */
+  packages: {
+    [moduleName: string]: Package;
+  };
+}
+
+/**
+ * Create the Frontity server.
+ *
+ * @param options - Options passed when creating the server. Defined in {@link
+ * ServerOptions}.
+ *
+ * @returns A Frontity server which is a request handler callback for node's
+ * native http/http2 server.
+ */
+const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   const app = new Koa();
 
   // Serve static files.
@@ -56,7 +77,12 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     })
   );
 
-  // Ignore HMR if not in dev mode or old browser open.
+  /**
+   * A helper function for setting 404 status. It's used to ignore HMR if not in
+   * dev mode or old browser open.
+   *
+   * @param ctx - The Koa app context.
+   */
   const return404 = (ctx: Context) => {
     ctx.status = 404;
   };
@@ -72,12 +98,15 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     const moduleStats = await getStats({ target: "module" });
     // Get es5 chunk stats.
     const es5Stats = await getStats({ target: "es5" });
-    // If present, module is the main chunk. This means that we can only
-    // use es5 for HMR if module is not present.
+    // If present, module is the main chunk. This means that we can only use es5
+    // for HMR if module is not present.
     const stats = moduleStats || es5Stats;
 
     // Get settings.
-    const settings = await getSettings({ url: ctx.href, name: ctx.query.name });
+    const settings = await getSettings({
+      url: ctx.href,
+      name: ctx.query.frontity_name,
+    });
 
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
@@ -103,13 +132,14 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       })
     );
 
-    // Pass a context to HelmetProvider which will hold our state specific to each request.
+    // Pass a context to HelmetProvider which will hold our state specific to
+    // each request.
     const helmetContext = {} as FilledContext;
 
     const Component = <App store={store} helmetContext={helmetContext} />;
 
-    // If there's no client stats or there is no client entrypoint for the site we
-    // want to load, we don't extract scripts.
+    // If there's no client stats or there is no client entrypoint for the site
+    // we want to load, we don't extract scripts.
     if (stats && hasEntryPoint({ stats, site: settings.name })) {
       // Run renderToString with ChunkExtractor to get the html.
       const extractor = new ChunkExtractor({
@@ -118,6 +148,15 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       });
       const jsx = extractor.collectChunks(Component);
       html = renderToString(jsx);
+
+      // Run afterSSR actions. It runs at this point because we want to run it
+      // before taking the state snapshot. This gives the user a chance to
+      // modify the state before sending it to the client
+      await Promise.all(
+        Object.values(store.actions).map(({ afterSSR }) => {
+          if (afterSSR) return afterSSR({ ctx });
+        })
+      );
 
       // Get the linkTags. Crossorigin needed for type="module".
       const crossorigin = moduleStats && es5Stats ? { crossorigin: "" } : {};
@@ -146,6 +185,11 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.
       html = renderToStaticMarkup(Component);
+
+      // Run afterSSR actions.
+      Object.values(store.actions).forEach(({ afterSSR }) => {
+        if (afterSSR) afterSSR();
+      });
     }
 
     // Get static head strings.
@@ -154,12 +198,9 @@ export default ({ packages }): ReturnType<Koa["callback"]> => {
     // Write the template to body.
     ctx.body = template({ html, frontity, head });
     next();
-
-    // Run afterSSR actions.
-    Object.values(store.actions).forEach(({ afterSSR }) => {
-      if (afterSSR) afterSSR();
-    });
   });
 
   return app.callback();
 };
+
+export default server;

@@ -1,10 +1,10 @@
-import { Package, Derived } from "frontity/types";
+import { Package, Derived, MergePackages, Frontity } from "frontity/types";
 import Router from "@frontity/router/types";
 import Source, {
-  TaxonomyEntity,
+  TermEntity,
   PostEntity,
   AuthorEntity,
-  PostType,
+  TypeEntity,
 } from "@frontity/source/types";
 
 /**
@@ -63,6 +63,11 @@ export interface WithHeadTags {
  * Integrate your Frontity site with REST API - Head Tags by Frontity.
  */
 interface HeadTagsPackage extends Package {
+  /**
+   * Package name.
+   */
+  name: "@frontity/head-tags";
+
   /**
    * Root components exposed by this package.
    */
@@ -140,6 +145,7 @@ interface HeadTagsPackage extends Package {
        * True when the REST API belongs to a WordPress.com site.
        */
       isWpCom?: boolean;
+
       /**
        * The URL of the REST API.
        *
@@ -168,17 +174,17 @@ interface HeadTagsPackage extends Package {
       /**
        * Type entities by ID, extended with a `head_tags` property.
        */
-      type: Record<string, PostType & WithHeadTags>;
+      type: Record<string, TypeEntity & WithHeadTags>;
 
       /**
        * Category entities by ID, extended with a `head_tags` property.
        */
-      category: Record<string, TaxonomyEntity & WithHeadTags>;
+      category: Record<string, TermEntity & WithHeadTags>;
 
       /**
        * Tag entities by ID, extended with a `head_tags` property.
        */
-      tag: Record<string, TaxonomyEntity & WithHeadTags>;
+      tag: Record<string, TermEntity & WithHeadTags>;
     };
   };
 }
@@ -186,6 +192,6 @@ interface HeadTagsPackage extends Package {
 /**
  * The Head Tags package and its dependencies joined together.
  */
-export type Packages = HeadTagsPackage & Source & Router;
+export type Packages = MergePackages<Frontity, Source, Router, HeadTagsPackage>;
 
 export default HeadTagsPackage;

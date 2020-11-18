@@ -1,3 +1,8 @@
+/* eslint-disable */
+/*
+ * TSDocs will be added in the `migrate-to-react-easy-state` PR:
+ * https://github.com/frontity/frontity/pull/415
+ */
 import { observable, raw } from "./observable";
 
 export const getSnapshot = (obj) => {
@@ -5,7 +10,7 @@ export const getSnapshot = (obj) => {
   if (typeof obj === "function") return;
   if (typeof obj !== "object" || obj === null) return obj;
   if (obj instanceof Date) return new Date(obj.getTime());
-  if (obj instanceof Array) {
+  if (Array.isArray(obj)) {
     return obj.reduce((arr, item, i) => {
       arr[i] = getSnapshot(item);
       return arr;

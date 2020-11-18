@@ -1,6 +1,6 @@
 {
   "name": "@frontity/head-tags",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Integrate your Frontity site with REST API - Head Tags by Frontity",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -25,11 +25,11 @@
   },
   "dependencies": {
     "frontity": "^1.11.1",
-    "@frontity/router": "^1.2.0-infinite-scroll-beta.0",
-    "@frontity/source": "^1.3.0"
+    "@frontity/router": "^1.2.1",
+    "@frontity/source": "^1.4.0"
   },
   "devDependencies": {
-    "@frontity/connect": "^1.1.2",
-    "@frontity/wp-source": "^1.8.4-infinite-scroll-beta.0"
+    "@frontity/wp-source": "^1.10.0",
+    "@frontity/connect": "^1.1.4"
   }
 }

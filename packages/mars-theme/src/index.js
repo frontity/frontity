@@ -1,6 +1,7 @@
 import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
 import iframe from "@frontity/html2react/processors/iframe";
+import link from "@frontity/html2react/processors/link";
 
 const marsTheme = {
   name: "@frontity/mars-theme",
@@ -26,6 +27,7 @@ const marsTheme = {
       },
     },
   },
+
   /**
    * Actions are functions that modify the state or deal with other parts of
    * Frontity like libraries.
@@ -44,9 +46,10 @@ const marsTheme = {
     html2react: {
       /**
        * Add a processor to `html2react` so it processes the `<img>` tags
-       * inside the content HTML. You can add your own processors too.
+       * and internal link inside the content HTML.
+       * You can add your own processors too.
        */
-      processors: [image, iframe],
+      processors: [image, iframe, link],
     },
   },
 };

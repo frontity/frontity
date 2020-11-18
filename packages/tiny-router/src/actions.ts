@@ -2,6 +2,7 @@ import { warn, error } from "frontity";
 import { SetOptions } from "@frontity/router/types";
 import clone from "ramda/src/clone";
 import TinyRouter from "../types";
+import { isError } from "@frontity/source";
 
 /**
  * Default options for the `actions.router.set` action.
@@ -11,11 +12,44 @@ const defaultSetOptions: SetOptions = {
   state: {},
 };
 
+/**
+ * Set the URL.
+ *
+ * @param link - The URL that will replace the current one. It can be a path
+ * like `/category/nature/`, a path that includes the page
+ * `/category/nature/page/2` or the full URL `https://site.com/category/nature`.
+ *
+ * @param options - An optional configuration object that can contain:
+ * - `method` "push" | "replace" (default: "push").
+ *
+ * The method used in the action. "push" corresponds to window.history.pushState
+ * and "replace" to window.history.replaceState.
+ *
+ * - `state` - An object that will be saved in window.history.state. This object
+ *   is recovered when the user go back and forward using the browser buttons.
+ *
+ * @example
+ * ```
+ * const Link = ({ actions, children, link }) => {
+ *   const onClick = (event) => {
+ *     event.preventDefault();
+ *     actions.router.set(link);
+ *   };
+ *
+ *   return (
+ *     <a href={link} onClick={onClick}>
+ *       {children}
+ *    </a>
+ *   );
+ * };
+ * ```
+ * @returns Void.
+ */
 export const set: TinyRouter["actions"]["router"]["set"] = ({
   state,
   actions,
   libraries,
-}) => (link, options = {}) => {
+}) => (link, options = {}): void => {
   // Normalize the link.
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
@@ -49,11 +83,15 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
       );
     }
   }
+
+  // Finally, set the `state.router.link` property to the new value.
+  state.router.link = link;
+  state.router.state = options.state;
 };
 
 export const updateState: TinyRouter["actions"]["router"]["updateState"] = ({
   state,
-}) => (browserState) => {
+}) => (browserState: object) => {
   state.router.state = browserState;
   window.history.replaceState(clone(browserState), "", state.router.link);
 };
@@ -78,16 +116,21 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
           location.pathname + location.search + location.hash,
           // We are casting types here because `pop` is used only internally,
           // therefore we don't want to expose it in the types for users.
-          { method: "pop", state: event.state } as {
-            method: any;
-            state: object;
-          }
+          { method: "pop", state: event.state } as any
         );
       }
     });
   }
 };
 
+/**
+ * Implementation of the `beforeSSR()` Frontity action as used by the
+ * tiny-router.
+ *
+ * @param ctx - The context of the Koa application.
+ *
+ * @returns Void.
+ */
 export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   state,
   actions,
@@ -96,7 +139,7 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     if (actions.source?.fetch) {
       await actions.source.fetch(state.router.link);
       const data = state.source.get(state.router.link);
-      if (data.isError) {
+      if (isError(data)) {
         ctx.status = data.errorStatus;
       }
     } else {

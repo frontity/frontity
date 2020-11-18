@@ -1,5 +1,12 @@
+import { warn, error } from "frontity";
 import WpSource from "../types";
-import { normalize, parse } from "./libraries/route-utils";
+import { addFinalSlash, normalize, parse } from "./libraries/route-utils";
+import {
+  isPostType,
+  isTerm,
+  isAuthor,
+  isPostTypeArchive,
+} from "@frontity/source";
 
 const state: WpSource["state"]["source"] = {
   get: ({ state }) => (link) => {
@@ -9,16 +16,6 @@ const state: WpSource["state"]["source"] = {
       return data;
     }
     const { route, query, page } = parse(link);
-
-    // The non-URL resources start with `@` by convention. In that case,
-    // it makes no sense to add the `link`, `route` and `query`
-    if (link.startsWith("@")) {
-      return {
-        page,
-        isFetching: false,
-        isReady: false,
-      };
-    }
 
     return {
       link: normalize(normalizedLink),
@@ -30,6 +27,13 @@ const state: WpSource["state"]["source"] = {
     };
   },
   entity: ({ state }) => (link) => {
+    warn(
+      "`state.source.entity(link)` is deprecated. Please, use the props " +
+        "included in the data returned by `state.source.get(link)` to access " +
+        "entities directly. This function will be removed in a future " +
+        "version of `@frontity/wp-source`."
+    );
+
     // Get the data object pointed by `link`.
     const data = state.source.get(link);
 
@@ -38,16 +42,16 @@ const state: WpSource["state"]["source"] = {
     let entity: any = null;
 
     // Entities are stored in different places depending on their type.
-    if (data.isPostType) {
+    if (isPostType(data)) {
       const { type, id } = data;
       entity = state.source[type][id];
-    } else if (data.isTaxonomy) {
+    } else if (isTerm(data)) {
       const { taxonomy, id } = data;
       entity = state.source[taxonomy][id];
-    } else if (data.isAuthor) {
+    } else if (isAuthor(data)) {
       const { id } = data;
       entity = state.source.author[id];
-    } else if (data.isPostTypeArchive) {
+    } else if (isPostTypeArchive(data)) {
       const { type } = data;
       entity = state.source.type[type];
     }
@@ -64,7 +68,19 @@ const state: WpSource["state"]["source"] = {
   attachment: {},
   type: {},
   taxonomy: {},
-  api: "",
+  // Keep backward compatibility when `state.source.api` is not
+  // overwritten in frontity.settings.js.
+  api: ({ state }) => {
+    // Check if it's a free WordPress.com site.
+    if (/^https:\/\/(\w+\.)?wordpress\.com/.test(state.source.url))
+      return addFinalSlash(
+        `https://public-api.wordpress.com/wp/v2/sites/${state.source.url}`
+      );
+
+    return addFinalSlash(
+      addFinalSlash(state.source.url) + state.wpSource.prefix.replace(/^\//, "")
+    );
+  },
   isWpCom: ({ state }) =>
     state.source.api.startsWith(
       "https://public-api.wordpress.com/wp/v2/sites/"
@@ -79,6 +95,13 @@ const state: WpSource["state"]["source"] = {
   params: {},
   postTypes: [],
   taxonomies: [],
+  url: ({ state }) => {
+    if (!state.frontity?.url)
+      error(
+        "Please set either `state.source.url` (or at least `state.frontity.url` if you are using Embedded mode) in your frontity.settings.js file."
+      );
+    return addFinalSlash(state.frontity.url);
+  },
 };
 
 export default state;

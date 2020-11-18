@@ -1,5 +1,19 @@
 # Change Log
 
+## 1.5.0
+
+### Minor Changes
+
+- [`54c588a9`](https://github.com/frontity/frontity/commit/54c588a9534d7c1761c0def8c83381696fd443fc) [#520](https://github.com/frontity/frontity/pull/520) Thanks [@nicholasio](https://github.com/nicholasio)! - Introduces a `replaceSourceUrls` prop to the `Link` component and `link` processor that replaces all anchor tags with the `Link` component to make internal links work.
+
+  https://community.frontity.org/t/client-routing-for-internal-content-links/887
+
+### Patch Changes
+
+- Updated dependencies [[`362b02f1`](https://github.com/frontity/frontity/commit/362b02f1beb100ffb178a1d4e775e89b84b99ccc), [`54c588a9`](https://github.com/frontity/frontity/commit/54c588a9534d7c1761c0def8c83381696fd443fc), [`6b4bf82b`](https://github.com/frontity/frontity/commit/6b4bf82b5eee698f7ea8ea3b0bfd69a989caaba3), [`44f44e3f`](https://github.com/frontity/frontity/commit/44f44e3f2ba436236b65518ddac30cd4af57ea18)]:
+  - frontity@1.13.0
+  - @frontity/components@1.6.0
+
 ## 1.4.0
 
 ### Minor Changes

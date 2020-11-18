@@ -1,12 +1,12 @@
-import { AsyncAction, Action, State, Derived } from "frontity/types";
-import Source, { EntityData } from "@frontity/source/types";
+import { Action, State, Derived, Package } from "frontity/types";
+import Source, { DataEntity } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
 /**
  * A Frontity source package for the REST API of self-hosted WordPress and
  * WordPress.com sites.
  */
-interface WpSource extends Source {
+interface WpSource extends Source<Packages> {
   /**
    * The name of this package.
    */
@@ -21,11 +21,13 @@ interface WpSource extends Source {
      *
      * It also contains the state defined in the main source package.
      */
-    source: Source<WpSource>["state"]["source"] & {
+    source: Source<Packages>["state"]["source"] & {
       /**
        * True when the REST API belongs to a WordPress.com site.
+       *
+       * @deprecated Use `state.wpSource.isWpCom` instead.
        */
-      isWpCom: Derived<WpSource, boolean>;
+      isWpCom: Derived<Packages, boolean>;
 
       /**
        * The name or path indicating the subdirectory of the domain where the
@@ -49,8 +51,8 @@ interface WpSource extends Source {
        *
        * @remarks
        * - This option overrides the `/` route so it should be used in
-       * combination with `state.source.postsPage` to be able to access the
-       * posts archive with a different route.
+       *   combination with `state.source.postsPage` to be able to access the
+       *   posts archive with a different route.
        * - You will need to configure WordPress with the same setting.
        *
        * @example "/about-us"
@@ -65,8 +67,7 @@ interface WpSource extends Source {
        * will be shown if you access `/blog` instead of `/`.
        *
        * @remarks
-       * - It is useful when used in combination with
-       * `state.source.homepage`.
+       * - It is useful when used in combination with `state.source.homepage`.
        * - You will need to configure WordPress with the same setting.
        *
        * @example "/blog"
@@ -106,8 +107,8 @@ interface WpSource extends Source {
       /**
        * Set the endpoint against which calls to the REST API are made when
        * posts are requested when fetching a single post, the post archive, date
-       * archives, categories, tags, authors, and so on. This is useful when
-       * you want to use another post type as your default.
+       * archives, categories, tags, authors, and so on. This is useful when you
+       * want to use another post type as your default.
        *
        * @example "products"
        *
@@ -116,8 +117,8 @@ interface WpSource extends Source {
       postEndpoint: string;
 
       /**
-       * An object that will be used in each call to the REST API when
-       * using `actions.source.fetch` with the default handlers.
+       * An object that will be used in each call to the REST API when using
+       * `actions.source.fetch` with the default handlers.
        *
        * This is useful to filter fields from the REST API, change the default
        * `per_page` value and so on.
@@ -131,6 +132,14 @@ interface WpSource extends Source {
        * ```
        */
       params: Record<string, any>;
+
+      /**
+       * The value that should be used to authenticate with the server.
+       *
+       * Typically, this would be used to store the JWT needed for WordPress
+       * preview functionality or the password used for Basic Buthentication.
+       */
+      auth?: string;
 
       /**
        * An array of objects that define the custom post types present in the
@@ -169,6 +178,7 @@ interface WpSource extends Source {
          */
         archive?: string;
       }[];
+
       /**
        * An array of objects that define the custom taxonomies present in the
        * site.
@@ -204,8 +214,8 @@ interface WpSource extends Source {
         endpoint: string;
 
         /**
-         * The REST API endpoint of the custom post type that should be
-         * fetched for this taxonomy.
+         * The REST API endpoint of the custom post type that should be fetched
+         * for this taxonomy.
          *
          * @example "movies"
          */
@@ -232,6 +242,43 @@ interface WpSource extends Source {
          */
         params?: Record<string, any>;
       }[];
+
+      /**
+       * The URL of the REST API.
+       *
+       * It can be from a self-hosted WordPress or from a WordPress.com site.
+       *
+       * @example "https://your-site.com/wp-json"
+       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
+       *
+       * @deprecated Use `state.wpSource.api` instead.
+       */
+      api: Derived<Package, string> | string;
+    };
+
+    /**
+     * The WP Source namespace.
+     */
+    wpSource: {
+      /**
+       * The URL of the REST API.
+       *
+       * It can be from a self-hosted WordPress or from a WordPress.com site.
+       *
+       * @example "https://your-site.com/wp-json"
+       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
+       */
+      api: Derived<Packages, string>;
+
+      /**
+       * True when the REST API belongs to a WordPress.com site.
+       */
+      isWpCom: Derived<Packages, boolean>;
+
+      /**
+       * The prefix of the API.
+       */
+      prefix?: string;
     };
   };
 
@@ -242,41 +289,7 @@ interface WpSource extends Source {
     /**
      * Source namespace.
      */
-    source: {
-      /**
-       * An action that fetches all the information and entities related to a link.
-       *
-       * It populates the state with both:
-       * - An entry in `state.source.data` with information about that link.
-       * - Normalized entities in relevant part of the state, like
-       * `state.source.post`, `state.source.category`
-       * or `state.source.author` and so on.
-       *
-       * @param link - The link that should be fetched. It can be a URL or a
-       * custom link created to fetch additional entities from the REST API.
-       * - URLs start with `/`.
-       * - Non URLs start with `@`.
-       * @example `actions.source.fetch("/some-post");`
-       * @example `actions.source.fetch("@comments/135");`
-       *
-       * @param options - Optional options.
-       *
-       * @returns A promise that resolves when the data fetching has finished.
-       */
-      fetch:
-        | AsyncAction<WpSource, string>
-        | AsyncAction<
-            WpSource,
-            string,
-            {
-              /**
-               * Whether the fetch should be done again if data for that link
-               * already exists.
-               */
-              force?: boolean;
-            }
-          >;
-
+    source: Source<Packages>["actions"]["source"] & {
       /**
        * An internal action that bootstraps the initialization.
        *
@@ -284,7 +297,17 @@ interface WpSource extends Source {
        * This action is not meant to be run by the user, but by the Frontity
        * framework.
        */
-      init: Action<WpSource>;
+      init: Action<Packages>;
+
+      /**
+       * An internal frontity action that runs after server-side rendering
+       * completes.
+       *
+       * @remarks
+       * This action is not meant to be run by the user, but by the Frontity
+       * framework.
+       */
+      afterSSR: Action<Packages>;
     };
   };
 
@@ -330,13 +353,13 @@ interface WpSource extends Source {
         /**
          * The Frontity state.
          */
-        state: State<WpSource>;
+        state: State<Packages>;
 
         /**
          * The Response object.
          *
-         * Usually returned from `api.get`, but can also be the one returned
-         * by `window.fetch`.
+         * Usually returned from `api.get`, but can also be the one returned by
+         * `window.fetch`.
          */
         response: Response;
 
@@ -370,11 +393,11 @@ interface WpSource extends Source {
        * }))
        * ```
        */
-      Promise<EntityData[]>;
+      Promise<DataEntity[]>;
 
       /**
-       * Handlers are objects that associate a link pattern with a function
-       * that fetches all the entities that belong to that WordPress link.
+       * Handlers are objects that associate a link pattern with a function that
+       * fetches all the entities that belong to that WordPress link.
        *
        * Types defined in {@link Pattern}.
        */
@@ -393,8 +416,8 @@ interface WpSource extends Source {
        * Extracts the total number of entities of an archive from its REST API
        * Response object.
        *
-       * @param response - The Response object. Usually returned from
-       * `api.get`, but can also be the one returned by `window.fetch`.
+       * @param response - The Response object. Usually returned from `api.get`,
+       * but can also be the one returned by `window.fetch`.
        * @param valueIfHeaderMissing - The value that must be returned if the
        * header containing the information is not found in the Response object.
        *
@@ -408,8 +431,8 @@ interface WpSource extends Source {
        * Extracts the total number of pages of an archive from its REST API
        * Response object.
        *
-       * @param response - The Response object. Usually returned from
-       * `api.get`, but can also be the one returned by `window.fetch`.
+       * @param response - The Response object. Usually returned from `api.get`,
+       * but can also be the one returned by `window.fetch`.
        * @param valueIfHeaderMissing - The value that must be returned if the
        * header containing the information is not found in the Response object.
        *
@@ -425,15 +448,20 @@ interface WpSource extends Source {
   };
 }
 
+/**
+ * Packages used internally by wp-source.
+ */
+export type Packages = WpSource & Package;
+
 export default WpSource;
 
 /**
- * Handlers are objects that associate a link pattern with a function
- * that fetches all the entities that belong to that WordPress link.
+ * Handlers are objects that associate a link pattern with a function that
+ * fetches all the entities that belong to that WordPress link.
  *
  * Handlers are used when `actions.source.fetch` is executed.
  */
-export interface Pattern<F extends Function = Function> {
+export interface Pattern<F extends (...args: any) => any> {
   /**
    * A unique name to identify this handler.
    *
@@ -453,11 +481,17 @@ export interface Pattern<F extends Function = Function> {
   /**
    * The pattern used to compare against the link that is being fetched.
    *
-   * It uses [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp)
-   * under the hood, so please check its documentation to know how to write
-   * patterns.
+   * - To match a URL that doesn't include a query, like "/category/nature",
+   * you have to use a `path-to-regexp` pattern. Please check its documentation
+   * to learn how to use them: https://github.com/pillarjs/path-to-regexp.
+   *
+   * - To match a URL that includes a query, like "/?p=12", you have to use a
+   * regular expression. Start the string with "RegExp:" to differenciate it
+   * from the `path-to-regexp` patterns. Named capture groups will be
+   * added to the params object.
    *
    * @example "/product/:slug"
+   * @example "RegExp:\\?p=(?<id>\\d+)"
    */
   pattern: string;
 
@@ -470,8 +504,8 @@ export interface Pattern<F extends Function = Function> {
 }
 
 /**
- * The handler function is in charge of fetching all the entities that belong
- * to a link.
+ * The handler function is in charge of fetching all the entities that belong to
+ * a link.
  *
  * For example, when we fetch the link of a page, the handler must retrieve the
  * entitiy for that page, but also its author. When we fetch the link of a post,
@@ -559,11 +593,11 @@ export interface Handler<Pkg extends Source = WpSource> {
 }
 
 /**
- * Redirections are objects that associate a link pattern with a function
- * that returns a new link.
+ * Redirections are objects that associate a link pattern with a function that
+ * returns a new link.
  *
- * These redirections are used when `actions.source.fetch` is executed,
- * before the handlers.
+ * These redirections are used when `actions.source.fetch` is executed, before
+ * the handlers.
  *
  * @example
  * ```js
@@ -578,8 +612,8 @@ export interface Handler<Pkg extends Source = WpSource> {
  * @param params - An object that contains the values extracted from the
  * pattern.
  *
- * For example, if the pattern is `"/category/:slug"` and it is called for
- * the link `"/category/nature"`, it will receive `{ slug: "nature" }`.
+ * For example, if the pattern is `"/category/:slug"` and it is called for the
+ * link `"/category/nature"`, it will receive `{ slug: "nature" }`.
  *
  * @example
  * ```js

@@ -1,4 +1,4 @@
-import { Package } from "frontity/types";
+import { MergePackages, Package } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 import GoogleAdManager from "@frontity/google-ad-manager/types";
@@ -11,6 +11,7 @@ interface TestAds extends Package {
    * Package name.
    */
   name: "e2e-ads";
+
   /**
    * State exposed by this package.
    */
@@ -23,12 +24,14 @@ interface TestAds extends Package {
        * Map of data describing each link in Frontity.
        */
       data: Source["state"]["source"]["data"];
+
       /**
        * Get a data object for the specified link.
        */
       get: Source["state"]["source"]["get"];
     };
   };
+
   /**
    * Actions exposed by this package.
    */
@@ -43,6 +46,7 @@ interface TestAds extends Package {
       fetch: Source["actions"]["source"]["fetch"];
     };
   };
+
   /**
    * Root components exposed by this package.
    */
@@ -50,12 +54,13 @@ interface TestAds extends Package {
     /**
      * Theme namespace.
      */
-    theme: React.ReactType;
+    theme: React.ElementType;
   };
 }
+
 /**
  * All packages used internally by TestAds.
  */
-export type Packages = TestAds & Router & Source & GoogleAdManager;
+export type Packages = MergePackages<TestAds, Router, Source, GoogleAdManager>;
 
 export default TestAds;

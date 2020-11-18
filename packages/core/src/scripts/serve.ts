@@ -4,14 +4,28 @@ import createServer from "./utils/create-server";
 
 const appDir = resolve(process.cwd(), "build/server.js");
 
-// Creates a node server and runs the server.js bundle.
-export default async ({
-  isHttps,
-  port,
-}: {
+/**
+ * Options for {@link serve}.
+ */
+export interface ServeOptions {
+  /**
+   * The port number to use.
+   */
   port: number;
+
+  /**
+   * Whether to start the server with `https` using a local self-signed
+   * certificate.
+   */
   isHttps: boolean;
-}): Promise<void> => {
+}
+
+/**
+ * Create a node server and run the server.js bundle.
+ *
+ * @param options - Defined in {@link ServeOptions}.
+ */
+const serve = async ({ isHttps, port }: ServeOptions): Promise<void> => {
   const app = require(appDir).default;
   const server = await createServer({ app, isHttps });
   server.listen(port);
@@ -21,3 +35,5 @@ export default async ({
     }://localhost:${port}\n`
   );
 };
+
+export default serve;

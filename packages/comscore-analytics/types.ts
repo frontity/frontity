@@ -1,5 +1,5 @@
-import { ReactType } from "react";
-import { Action, Package } from "frontity/types";
+import React from "react";
+import { Action, MergePackages, Package } from "frontity/types";
 import Analytics, { Pageview } from "@frontity/analytics/types";
 
 /**
@@ -86,13 +86,17 @@ declare global {
  */
 interface ComscoreAnalytics extends Package {
   /**
+   * Package name.
+   */
+  name: "@frontity/comscore-analytics";
+  /**
    * Root elements exposed by this package.
    */
   roots: Analytics["roots"] & {
     /**
      * Comscore Analytics root element.
      */
-    comscoreAnalytics: ReactType;
+    comscoreAnalytics: React.ElementType;
   };
 
   /**
@@ -141,6 +145,6 @@ interface ComscoreAnalytics extends Package {
 /**
  * Package types used internally in ComscoreAnalytics.
  */
-export type Packages = ComscoreAnalytics & Analytics;
+export type Packages = MergePackages<ComscoreAnalytics, Analytics>;
 
 export default ComscoreAnalytics;

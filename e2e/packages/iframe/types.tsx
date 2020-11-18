@@ -1,13 +1,23 @@
 import { Package } from "frontity/types";
 
+/**
+ * Package to do e2e testing of Frontity's Iframe component.
+ */
 interface Iframe extends Package {
-  name: "iframe";
-  state: {};
-  actions: {};
+  /**
+   * Package name.
+   */
+  name: "e2e-iframe";
+
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
-    iframe: React.ReactType;
+    /**
+     * Iframe namespace.
+     */
+    iframe: React.ElementType;
   };
-  libraries: {};
 }
 
 export default Iframe;

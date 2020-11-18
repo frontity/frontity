@@ -3,7 +3,7 @@ import expect from "expect";
 describe("Image lazy-loading (with Intersection Observer)", () => {
   beforeEach(() => {
     cy.viewport(360, 640);
-    cy.visit("http://localhost:3001?name=image", {
+    cy.visit("http://localhost:3001?frontity_name=image", {
       onBeforeLoad(win) {
         // Remove the "loading" prop from the HTMLImageElement prototype
         Object.defineProperty(win.HTMLImageElement.prototype, "loading", {
@@ -56,7 +56,7 @@ describe("Image lazy-loading (with Intersection Observer)", () => {
 describe("Image lazy-loading (with native lazy-load)", () => {
   beforeEach(() => {
     cy.viewport(360, 640);
-    cy.visit("http://localhost:3001?name=image");
+    cy.visit("http://localhost:3001?frontity_name=image");
   });
 
   it("native lazy load should exist", () => {
