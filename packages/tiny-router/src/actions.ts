@@ -159,6 +159,11 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
       if (!location.searchParams.has(key))
         location.searchParams.append(key, value);
     });
+
+    // Set the correct status for the redirection.
+    // It could be a 301, 302, 307 or 308.
+    ctx.status = data.redirectionStatus;
+
     // Do the redirection.
     ctx.redirect(location.pathname + location.search + location.hash);
   } else if (isError(data)) {

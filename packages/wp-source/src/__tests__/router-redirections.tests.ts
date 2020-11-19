@@ -187,6 +187,7 @@ describe("redirections: 404", () => {
           "location": "/redirected-url/",
           "page": 1,
           "query": Object {},
+          "redirectionStatus": 301,
           "route": "/some-post/",
         },
       }
@@ -228,6 +229,7 @@ describe("redirections: 404", () => {
           "location": "/redirected-url/",
           "page": 1,
           "query": Object {},
+          "redirectionStatus": 302,
           "route": "/some-post/",
         },
       }
@@ -281,6 +283,7 @@ describe("redirections: 404", () => {
             "key": "value",
             "key2": "value2",
           },
+          "redirectionStatus": 301,
           "route": "/some-post/",
         },
       }
@@ -318,6 +321,7 @@ describe("redirections: RegExp and RegExp[]", () => {
           "location": "/redirected-url/",
           "page": 1,
           "query": Object {},
+          "redirectionStatus": 301,
           "route": "/some-post/",
         },
       }
@@ -375,6 +379,7 @@ describe("redirections: RegExp and RegExp[]", () => {
           "location": "/redirected-url/",
           "page": 1,
           "query": Object {},
+          "redirectionStatus": 301,
           "route": "/some-post/",
         },
       }
@@ -409,6 +414,7 @@ describe("redirections: RegExp and RegExp[]", () => {
           "location": "/redirected-url/",
           "page": 1,
           "query": Object {},
+          "redirectionStatus": 301,
           "route": "/some-post/",
         },
       }
@@ -444,6 +450,7 @@ describe("redirections: RegExp and RegExp[]", () => {
           "location": "/redirected-url/",
           "page": 1,
           "query": Object {},
+          "redirectionStatus": 301,
           "route": "/some-post/",
         },
       }

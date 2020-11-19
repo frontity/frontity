@@ -437,6 +437,14 @@ export interface RedirectionData extends Data {
    */
   location: string;
 
+  /**
+   * The HTTP status code of the response.
+   * Possible values are: `301`, `302`, `307` and `308`.
+   *
+   * @example 301
+   */
+  redirectionStatus: number;
+
   // HTTP status types.
   /* eslint-disable jsdoc/require-jsdoc */
   is301?: boolean;
