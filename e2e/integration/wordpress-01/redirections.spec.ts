@@ -146,4 +146,52 @@ describe("Redirections", () => {
     );
     cy.get("#post").should("exist");
   });
+
+  it("Should work with a 307 redirection on the server", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world-307?frontity_name=redirections"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
+
+  it("Should work with a 307 redirection on the client", () => {
+    cy.visit("http://localhost:3001?frontity_name=redirections");
+
+    cy.get("#307-redirection").click();
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
+
+  it("Should work with a 308 redirection on the server", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world-308?frontity_name=redirections"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
+
+  it("Should work with a 308 redirection on the client", () => {
+    cy.visit("http://localhost:3001?frontity_name=redirections");
+
+    cy.get("#308-redirection").click();
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
 });

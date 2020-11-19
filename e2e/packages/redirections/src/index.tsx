@@ -49,6 +49,18 @@ const Component: React.FC = () => {
           >
             302 redirection
           </button>
+          <button
+            id="307-redirection"
+            onClick={() => actions.router.set("/hello-world-307")}
+          >
+            307 redirection
+          </button>
+          <button
+            id="308-redirection"
+            onClick={() => actions.router.set("/hello-world-308")}
+          >
+            308 redirection
+          </button>
           Archive:
           {data.items.map(({ link, id }) => (
             <div key={id} data-test-id={id}>
