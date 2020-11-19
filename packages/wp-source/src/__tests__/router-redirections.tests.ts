@@ -66,7 +66,6 @@ beforeEach(() => {
         wpSource(),
         {
           state: {
-            router: {},
             source: {
               url: "https://localhost:8080",
             },
@@ -100,7 +99,7 @@ beforeEach(() => {
 
 describe("redirections: all", () => {
   it("Should handle a redirect with 'all'", async () => {
-    store.state.router.redirections = "all";
+    store.state.source.redirections = "all";
 
     await store.actions.source.fetch("/some-post/");
 
@@ -139,7 +138,7 @@ describe("redirections: 404", () => {
   });
 
   it("Should ignore the redirection if there is no error", async () => {
-    store.state.router.redirections = "404";
+    store.state.source.redirections = "404";
 
     // Restore the handler to the original implementation
     handler.func.mockRestore();
@@ -151,7 +150,7 @@ describe("redirections: 404", () => {
   });
 
   it("Should NOT redirect on an error that is not a 404", async () => {
-    store.state.router.redirections = "404";
+    store.state.source.redirections = "404";
 
     // Throw a 500 inside of the handler
     handler.func = jest.fn(() => {
@@ -165,7 +164,7 @@ describe("redirections: 404", () => {
   });
 
   it("Should redirect on 404", async () => {
-    store.state.router.redirections = "404";
+    store.state.source.redirections = "404";
 
     await store.actions.source.fetch("/some-post/");
 
@@ -195,7 +194,7 @@ describe("redirections: 404", () => {
   });
 
   it("Should redirect on 404 when the redirection is a 302 redirection", async () => {
-    store.state.router.redirections = "404";
+    store.state.source.redirections = "404";
 
     mockedFetch = jest.fn((_) =>
       Promise.resolve({
@@ -237,7 +236,7 @@ describe("redirections: 404", () => {
   });
 
   it("Should return a normal 404 error if fetching the redirection fails", async () => {
-    store.state.router.redirections = "404";
+    store.state.source.redirections = "404";
 
     // Fetching the redirection fails
     mockedFetch = jest.fn().mockRejectedValueOnce("Fetch Error");
@@ -265,7 +264,7 @@ describe("redirections: 404", () => {
   });
 
   it("Should handle redirections if the URL contains a query string", async () => {
-    store.state.router.redirections = "404";
+    store.state.source.redirections = "404";
 
     await store.actions.source.fetch("/some-post?key=value&key2=value2");
 
@@ -300,7 +299,7 @@ describe("redirections: RegExp and RegExp[]", () => {
   });
 
   it("Should fetch the redirection when the redirection is a single regex", async () => {
-    store.state.router.redirections = "RegExp:/some-(\\w*)";
+    store.state.source.redirections = "RegExp:/some-(\\w*)";
     await store.actions.source.fetch("/some-post");
 
     // the `fetch()` was called.
@@ -329,7 +328,7 @@ describe("redirections: RegExp and RegExp[]", () => {
   });
 
   it("Should just return a 404 if the redirection does not match the regex", async () => {
-    store.state.router.redirections = "RegExp:/some-other-post";
+    store.state.source.redirections = "RegExp:/some-other-post";
     await store.actions.source.fetch("/some-post");
 
     // the `fetch()` was NOT called
@@ -355,7 +354,7 @@ describe("redirections: RegExp and RegExp[]", () => {
   });
 
   it("Should fetch the redirection when the redirection is an array of regexes", async () => {
-    store.state.router.redirections = [
+    store.state.source.redirections = [
       "RegExp:/some-(.*)",
       "RegExp:/some-other-post",
     ];
@@ -387,7 +386,7 @@ describe("redirections: RegExp and RegExp[]", () => {
   });
 
   it(`Should fetch the redirection when the redirection is an array of regexes that includes a 404 AND the regex does NOT match the route`, async () => {
-    store.state.router.redirections = [
+    store.state.source.redirections = [
       "404",
       "RegExp:/some-other-post", // This regex does not match
     ];
@@ -422,7 +421,7 @@ describe("redirections: RegExp and RegExp[]", () => {
   });
 
   it(`Should fetch the redirection when the redirection is an array of regexes that includes a 404 AND the regex matches a route`, async () => {
-    store.state.router.redirections = [
+    store.state.source.redirections = [
       "404",
       "RegExp:/some-(\\w*)", // This regex DOES match
     ];

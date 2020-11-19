@@ -21,6 +21,7 @@ import {
   post,
   page,
   attachment,
+  redirection,
 } from "../../__tests__/mocks/data";
 
 const data: Record<string, Data> = {};
@@ -46,6 +47,7 @@ data.postType = postType;
 data.post = post;
 data.page = page;
 data.attachment = attachment;
+data.redirection = redirection;
 
 // Check that TermData and TaxonomyData are equivalent.
 const taxonomy: TaxonomyData = term;

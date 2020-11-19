@@ -8,7 +8,6 @@ const tinyRouter: TinyRouter = {
       link: "/",
       state: {},
       autoFetch: true,
-      redirections: "no",
     },
   },
   actions: {

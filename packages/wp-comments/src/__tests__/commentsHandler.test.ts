@@ -12,10 +12,7 @@ let store: InitializedStore<Packages>;
 let api: jest.Mocked<Api>;
 
 beforeEach(() => {
-  const packages: any = mergeDeepRight(
-    mergeDeepRight(clone(wpSource()), clone(wpComments)),
-    { state: { router: { redirections: "no" } } }
-  );
+  const packages: any = mergeDeepRight(clone(wpSource()), clone(wpComments));
   store = createStore<Packages>(packages);
   store.state.source.api = "https://test.frontity.org/wp-json";
   store.actions.source.init();

@@ -1,4 +1,4 @@
-import { Package } from "frontity/types";
+import { Action, Package } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -14,6 +14,21 @@ interface Redirections extends Package {
      * The Redirections namespace.
      */
     redirections: React.ElementType;
+  };
+
+  /**
+   * Actions exposed by this package.
+   */
+  actions: {
+    /**
+     * The Redirections namespace.
+     */
+    redirections: {
+      /**
+       * The init action called internally by frontity.
+       */
+      init: Action<Packages>;
+    };
   };
 }
 

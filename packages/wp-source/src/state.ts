@@ -102,6 +102,7 @@ const state: WpSource["state"]["source"] = {
       );
     return addFinalSlash(state.frontity.url);
   },
+  redirections: "no",
 };
 
 export default state;

@@ -71,7 +71,7 @@ const redirections: Redirections = {
       init: ({ state, libraries }) => {
         const { query } = libraries.source.parse(state.frontity.initialLink);
         if (query.redirections) {
-          state.router.redirections = query.redirections;
+          state.source.redirections = query.redirections;
         }
       },
     },

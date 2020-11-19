@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Action, Derived, Settings, State } from "frontity/types";
 import Source from "../../types";
 
@@ -21,6 +22,7 @@ const source1 = (libraries: Source["libraries"]): Source => {
         attachment: {},
         type: {},
         taxonomy: {},
+        redirections: "no",
       },
     },
     actions: {
@@ -74,6 +76,7 @@ const source2: MySource = {
       myOwnProp: "some value",
       type: {},
       taxonomy: {},
+      redirections: "no",
     },
   },
   actions: {
@@ -135,4 +138,7 @@ const settings4: Settings<MySource> = {
   ],
 };
 
-test("Types are fine!", () => {});
+// eslint-disable-next-line jest/expect-expect
+test("Types are fine!", () => {
+  // Do nothing here.
+});

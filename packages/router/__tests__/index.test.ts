@@ -9,7 +9,6 @@ const router: Router = {
         initial: "/some-path/",
         pages: [1, 2],
       },
-      redirections: "no",
     },
   },
   actions: {

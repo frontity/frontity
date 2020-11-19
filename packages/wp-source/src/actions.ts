@@ -79,7 +79,7 @@ const actions: WpSource["actions"]["source"] = {
 
       // These are different from the "redirections" above - this setting is
       // used for handling 30x redirections that can be stored in the WordPress database.
-      const routerRedirections = state.router?.redirections;
+      const routerRedirections = state.source.redirections;
 
       // The router redirections can be an array.
       if (Array.isArray(routerRedirections)) {
@@ -149,15 +149,15 @@ const actions: WpSource["actions"]["source"] = {
         // of an error.
         if (e.status === 404) {
           // If the route matched the redirection regex or
-          // state.router.redirections === 'all', then we have already started
+          // state.source.redirections === 'all', then we have already started
           // fetching the data, so just await it.
           let head = redirectionPromise && (await redirectionPromise);
 
           if (
             !head &&
-            (state.router?.redirections === "404" ||
-              (Array.isArray(state.router?.redirections) &&
-                state.router?.redirections.includes("404")))
+            (state.source.redirections === "404" ||
+              (Array.isArray(state.source.redirections) &&
+                state.source.redirections.includes("404")))
           ) {
             try {
               head = await fetch(state.source.url + link, { method: "HEAD" });

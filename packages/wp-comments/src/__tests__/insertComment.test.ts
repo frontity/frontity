@@ -15,16 +15,7 @@ let store: InitializedStore<Packages & Router>;
 let api: jest.Mocked<Api>;
 
 beforeEach(async () => {
-  const packages: any = mergeDeepRight(
-    mergeDeepRight(clone(wpSource()), clone(wpComments)),
-    {
-      state: {
-        router: {
-          redirections: "no",
-        },
-      },
-    }
-  );
+  const packages: any = mergeDeepRight(clone(wpSource()), clone(wpComments));
 
   store = createStore<Packages & Router>(packages);
   store.state.source.api = "https://test.frontity.org/wp-json";

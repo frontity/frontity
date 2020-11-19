@@ -375,19 +375,13 @@ const settings: Settings<
     },
     packages: [
       "e2e-redirections",
-      {
-        name: "@frontity/tiny-router",
-        state: {
-          router: {
-            redirections: "404",
-          },
-        },
-      },
+      "@frontity/tiny-router",
       {
         name: "@frontity/wp-source",
         state: {
           source: {
             url: "http://localhost:8080",
+            redirections: "404",
           },
         },
       },

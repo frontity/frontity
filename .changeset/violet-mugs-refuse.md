@@ -2,4 +2,4 @@
 "@frontity/source": minor
 ---
 
-Add the type for 3xx Redirections.
+Add the types for 3xx Redirections.

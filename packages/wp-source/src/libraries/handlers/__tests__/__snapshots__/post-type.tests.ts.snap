@@ -49,6 +49,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -108,6 +109,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -158,6 +160,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -208,6 +211,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -355,6 +359,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -426,6 +431,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -488,6 +494,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -560,6 +567,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -632,6 +640,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -716,6 +725,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -800,6 +810,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -917,6 +928,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1043,6 +1055,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1193,6 +1206,7 @@ Object {
   "postEndpoint": "multiple-post-type",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1331,6 +1345,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1469,6 +1484,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1606,6 +1622,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1668,6 +1685,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -1710,6 +1728,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",

@@ -21,9 +21,7 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/router": "^1.1.1",
     "@frontity/source": "^1.4.0",
-    "@frontity/tiny-router": "^1.2.2",
     "frontity": "^1.13.0",
     "normalizr": "^3.3.0",
     "path-to-regexp": "^3.0.0",
