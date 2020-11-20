@@ -2,7 +2,7 @@
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 
-describe("WP Source", () => {
+describe("WP Source errors", () => {
   before(() => {
     task("installPlugin", { name: "code-snippets" });
     task("loadDatabase", {
