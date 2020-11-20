@@ -195,12 +195,12 @@ describe("Redirections", () => {
     cy.get("#post").should("exist");
   });
 
-  it("Should ignore search params", () => {
+  it("Should work when we create a redirection using the 'Ignore and pass parameters to the target' option", () => {
     cy.visit(
       "http://localhost:3001/should-preserve-query?frontity_name=redirections&redirections=all"
     );
 
-    // Note that the query redirections=all is preserved!
+    // Note that the query redirections=all is preserved after the redirection!
     cy.location("href").should(
       "eq",
       "http://localhost:3001/hello-world-redirected/?redirections=all"
