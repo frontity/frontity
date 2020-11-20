@@ -110,7 +110,6 @@ const StyledPage = () => {
 
 const Root = connect(({ state }) => {
   const { pathname } = new URL(state.router.link, "http://localhost:3001");
-  console.log(pathname);
   if (pathname === "/background-blue") return <GlobalBackgroundBlue />;
   if (pathname === "/color-red") return <GlobalColorRed />;
   if (pathname === "/styled-css") return <StyledPage />;
