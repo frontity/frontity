@@ -17,8 +17,6 @@ const actions: WpSource["actions"]["source"] = {
     const [route, options] = params;
     const { source } = state;
 
-    const { handlers, redirections } = libraries.source;
-
     // Get route and route params.
     const link = normalize(route);
     const linkParams = parse(route);
@@ -73,16 +71,16 @@ const actions: WpSource["actions"]["source"] = {
     try {
       let { route } = linkParams;
       // Transform route if there is some redirection.
-      const redirection = getMatch(route, redirections);
+      const redirection = getMatch(route, libraries.source.redirections);
       if (redirection) route = redirection.func(redirection.params);
 
       // These are different from the "redirections" above - this setting is
       // used for handling 30x redirections that can be stored in the WordPress database.
-      const routerRedirections = state.source.redirections;
+      const { redirections } = state.source;
 
       // The router redirections can be an array.
-      if (Array.isArray(routerRedirections)) {
-        const patterns = routerRedirections
+      if (Array.isArray(redirections)) {
+        const patterns = redirections
           .filter((r) => r.startsWith("RegExp:"))
           .map((r) => r.replace(/^RegExp:/, ""));
 
@@ -92,11 +90,11 @@ const actions: WpSource["actions"]["source"] = {
           });
         }
         // Or it can be "all".
-      } else if (routerRedirections === "all") {
+      } else if (redirections === "all") {
         redirectionPromise = fetch(state.source.url + link, { method: "HEAD" });
-        // Or it can be just a regex.
-      } else if (routerRedirections?.startsWith("RegExp:")) {
-        const regex = routerRedirections.replace(/^RegExp:/, "");
+        // Or it can be just a regex or null/undefined (so we use the optional chaining)
+      } else if (redirections?.startsWith("RegExp:")) {
+        const regex = redirections.replace(/^RegExp:/, "");
         if (link.match(regex)) {
           redirectionPromise = fetch(state.source.url + link, {
             method: "HEAD",
@@ -105,7 +103,10 @@ const actions: WpSource["actions"]["source"] = {
       }
 
       // Get the handler for this route.
-      const handler = getMatch(`${route}${queryString}`, handlers);
+      const handler = getMatch(
+        `${route}${queryString}`,
+        libraries.source.handlers
+      );
 
       // Return a 404 error if no handler has matched.
       if (!handler)
