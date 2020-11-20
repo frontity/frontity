@@ -61,6 +61,12 @@ const Component: React.FC = () => {
           >
             308 redirection
           </button>
+          <button
+            id="should-preserve-query"
+            onClick={() => actions.router.set("/should-preserve-query")}
+          >
+            ignore and pass params to target
+          </button>
           Archive:
           {data.items.map(({ link, id }) => (
             <div key={id} data-test-id={id}>

@@ -168,10 +168,10 @@ const actions: WpSource["actions"]["source"] = {
           }
 
           if (head?.redirected) {
-            const { pathname, searchParams, hash } = new URL(head.url);
+            const { pathname, search, hash } = new URL(head.url);
 
             Object.assign(source.data[link], {
-              location: pathname + searchParams + hash,
+              location: pathname + search + hash,
               redirectionStatus: head.status,
               [`is${head.status}`]: true,
               isFetching: false,

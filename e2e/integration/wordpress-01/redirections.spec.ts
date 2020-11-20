@@ -15,7 +15,7 @@ describe("Redirections", () => {
     });
   });
 
-  it("Should should redirect when loading the page directly", () => {
+  it("Should redirect when loading the page directly", () => {
     cy.visit("http://localhost:3001/hello-world/?frontity_name=redirections");
 
     cy.location("href").should(
@@ -191,6 +191,19 @@ describe("Redirections", () => {
     cy.location("href").should(
       "eq",
       "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
+
+  it("Should ignore search params", () => {
+    cy.visit(
+      "http://localhost:3001/should-preserve-query?frontity_name=redirections&redirections=all"
+    );
+
+    // Note that the query redirections=all is preserved!
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/?redirections=all"
     );
     cy.get("#post").should("exist");
   });
