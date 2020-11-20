@@ -410,7 +410,6 @@ const settings: Settings<
           },
         },
       },
-      "@frontity/tiny-router",
     ],
   },
   {
