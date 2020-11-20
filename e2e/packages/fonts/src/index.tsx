@@ -158,10 +158,10 @@ const Empty: React.FC = () => (
 const Font: React.FC = connect(({ state }) => {
   const { pathname } = new URL(state.router.link, "http://localhost:3001");
   if (pathname === "/") return <All />;
-  if (pathname === "/woff-1/") return <Woff1 />;
-  if (pathname === "/woff-2/") return <Woff2 />;
-  if (pathname === "/ttf/") return <Ttf />;
-  if (pathname === "/empty/") return <Empty />;
+  if (pathname === "/woff-1") return <Woff1 />;
+  if (pathname === "/woff-2") return <Woff2 />;
+  if (pathname === "/ttf") return <Ttf />;
+  if (pathname === "/empty") return <Empty />;
 });
 
 const FontsPackage: Package = {

@@ -49,7 +49,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
 
   // If the data is a redirection, then we set the link to the location.
   // The redirections are stored in source.data just like any other data.
-  const data = state.source.get(link);
+  const data = state.source?.get(link);
   if (data && isRedirection(data)) {
     link = data.location;
   }
@@ -88,7 +88,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   // keep the browser history consistent.
   if (state.frontity.platform === "client") {
     observe(() => {
-      const data = state.source.get(state.router.link);
+      const data = state.source?.get(state.router.link);
       if (data && isRedirection(data)) {
         actions.router.set(data.location, { method: "replace" });
       }
