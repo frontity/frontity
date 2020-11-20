@@ -9,8 +9,7 @@
   ],
   "homepage": "https://frontity.org",
   "license": "Apache-2.0",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/frontity/frontity.git"
@@ -26,7 +25,8 @@
   "dependencies": {
     "@risingstack/react-easy-state": "7.0.0-alpha.1",
     "@nx-js/observer-util": "4.3.0-alpha.2",
-    "@frontity/error": "^0.1.1"
+    "@frontity/error": "^0.1.1",
+    "@frontity/types": "^1.6.0"
   },
   "devDependencies": {
     "react-test-renderer": "^16.13.1"
