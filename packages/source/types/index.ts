@@ -206,7 +206,7 @@ interface Source<T = null> extends Package {
        * to check if there exists a redirection.
        *
        * - "404" - Only send the additional request to the WordPress instance
-       * if the original request returned a 404.
+       * if the original request has returned a 404.
        *
        * - string - A string that contains a regex pattern. The string must
        *   start with `RegExp:`. This pattern will be matched against the
@@ -215,12 +215,21 @@ interface Source<T = null> extends Package {
        *   Note that the shorthand character classes will have to be escaped, so
        *   for example instead of `\d`, you will need to write `\\d`.
        *
+       * - string[] - An array of strings, which can contain the "404" value as
+       *   well as any number of strings starting with `"RegExp:/"` which
+       *   represent regular expressions. An additional request will be sent to
+       *   Wordpress to check for the redirection if any of the regular
+       *   expressions match the current route. If the array also contains a
+       *   `"404"`, an additional request will also be made if the original
+       *   request has returned a 404.
+       *
        * @example "no"
        * @example "all"
        * @example "404"
        * @example "RegExp:/some-post/(\\d*)"
        * @example "RegExp:/post-(\\w*)/(\\d*)"
-       *
+       * @example ["404", "RegExp:/some-post/", "RegExp:/another-post"]
+
        * @defaultValue "no"
        */
       redirections: string | string[];
