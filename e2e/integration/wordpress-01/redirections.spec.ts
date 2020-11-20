@@ -200,10 +200,22 @@ describe("Redirections", () => {
       "http://localhost:3001/should-preserve-query?frontity_name=redirections&redirections=all"
     );
 
-    // Note that the query redirections=all is preserved after the redirection!
+    // Note that the query redirections=all is preserved after the redirection
     cy.location("href").should(
       "eq",
       "http://localhost:3001/hello-world-redirected/?redirections=all"
+    );
+    cy.get("#post").should("exist");
+  });
+
+  it("Should work when we create a redirection which includes (matches) a query string in the original (source) URL", () => {
+    cy.visit(
+      "http://localhost:3001/match-query/?key=value&frontity_name=redirections"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/?key=value"
     );
     cy.get("#post").should("exist");
   });
