@@ -10,7 +10,6 @@ import {
   taxonomyHandler,
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
-import { stringify } from "query-string";
 import { ServerError, isError, isSearch } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
