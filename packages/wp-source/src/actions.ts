@@ -166,7 +166,6 @@ const actions: WpSource["actions"]["source"] = {
               // handling the 404 ServerError that was thrown previously.
             }
           }
-          console.log(head);
 
           if (head?.redirected) {
             const { pathname, search, hash } = new URL(head.url);
