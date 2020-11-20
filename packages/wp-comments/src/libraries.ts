@@ -42,7 +42,7 @@ export const commentsHandler: Handler = async ({
    *
    * @returns Object with the following properties:
    * - `response`: object of type {@link Response}.
-   * - `populated`: array of type {@link EntityData}.
+   * - `populated`: array of type {@link DataEntity}.
    */
   const fetchComments = async ({ postId, page }) => {
     // Fetch the first page of 100 comments.
@@ -52,7 +52,7 @@ export const commentsHandler: Handler = async ({
         post: postId,
         page,
         // Fetch as many comments as possible.
-        per_page: 100, // eslint-disable-line @typescript-eslint/camelcase
+        per_page: 100,
         ...state.source.params,
         // Do not get embedded entities.
         _embed: false,
@@ -114,6 +114,7 @@ export const commentsHandler: Handler = async ({
     items,
     total,
     totalPages,
-    areComments: true,
+    type: "comments",
+    isComments: true,
   });
 };

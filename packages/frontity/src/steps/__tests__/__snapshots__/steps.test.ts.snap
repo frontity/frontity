@@ -118,7 +118,7 @@ Array [
       \\"name\\": \\"@frontity/wp-source\\",
       \\"state\\": {
         \\"source\\": {
-          \\"api\\": \\"https://test.frontity.org/wp-json\\"
+          \\"url\\": \\"https://test.frontity.org\\"
         }
       }
     },
@@ -181,7 +181,7 @@ Array [
       \\"name\\": \\"@frontity/wp-source\\",
       \\"state\\": {
         \\"source\\": {
-          \\"api\\": \\"https://test.frontity.org/wp-json\\"
+          \\"url\\": \\"https://test.frontity.org\\"
         }
       }
     },
@@ -285,6 +285,10 @@ Array [
   \\"keywords\\": [
     \\"frontity\\"
   ],
+  \\"engines\\": {
+    \\"node\\": \\">=10.0.0\\",
+    \\"npm\\": \\">=6.0.0\\"
+  },
   \\"scripts\\": {
     \\"dev\\": \\"frontity dev\\",
     \\"build\\": \\"frontity build\\",
@@ -337,6 +341,10 @@ Array [
   \\"keywords\\": [
     \\"frontity\\"
   ],
+  \\"engines\\": {
+    \\"node\\": \\">=10.0.0\\",
+    \\"npm\\": \\">=6.0.0\\"
+  },
   \\"scripts\\": {
     \\"dev\\": \\"frontity dev\\",
     \\"build\\": \\"frontity build\\",

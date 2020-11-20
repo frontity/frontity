@@ -1,13 +1,23 @@
 import { Package } from "frontity/types";
 
+/**
+ * Package to do e2e testing of Frontity's Switch component.
+ */
 interface Switch extends Package {
-  name: "switch";
-  state: {};
-  actions: {};
+  /**
+   * Package name.
+   */
+  name: "e2e-switch";
+
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
-    switch: React.ReactType;
+    /**
+     * Switch namespace.
+     */
+    switch: React.ElementType;
   };
-  libraries: {};
 }
 
 export default Switch;

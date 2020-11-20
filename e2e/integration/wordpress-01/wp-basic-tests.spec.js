@@ -1,11 +1,11 @@
 describe("WordPress REST API", () => {
   it("archives should work", () => {
-    cy.visit("http://localhost:3001?name=wp-basic-tests");
+    cy.visit("http://localhost:3001?frontity_name=wp-basic-tests");
     cy.get("[data-test-id='1']").contains("/hello-world");
   });
 
   it("posts should work", () => {
-    cy.visit("http://localhost:3001/hello-world?name=wp-basic-tests");
+    cy.visit("http://localhost:3001/hello-world?frontity_name=wp-basic-tests");
     cy.get("[data-test-id='post']").contains("Hello world");
   });
 });
@@ -28,5 +28,11 @@ describe("WordPress plugins", () => {
     cy.get("[data-test-id='code-snippet']").contains(
       "Hello from WordPress plugin"
     );
+  });
+
+  it("dummy test, otherwise the previous test doesn't run", () => {
+    // I'm not sure why, but if I remove this test, the previous one doesn't run
+    // and if it fails, Cypress does not complain. I guess it is a bug in
+    // Cypress.
   });
 });

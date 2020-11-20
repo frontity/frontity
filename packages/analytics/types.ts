@@ -1,4 +1,4 @@
-import { Package, Action } from "frontity/types";
+import { Package, Action, MergePackages } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -176,6 +176,6 @@ interface Analytics extends Package {
 /**
  * Package types used internally by Analytics.
  */
-export type Packages = Analytics & Router & Source;
+export type Packages = MergePackages<Analytics, Router, Source>;
 
 export default Analytics;

@@ -1,13 +1,23 @@
 import { Package } from "frontity/types";
 
+/**
+ * Package to do e2e testing of Frontity's UseInView hook.
+ */
 interface UseInView extends Package {
-  name: "use-in-view";
-  state: {};
-  actions: {};
+  /**
+   * Package name.
+   */
+  name: "e2e-use-in-view";
+
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
-    useInView: React.ReactType;
+    /**
+     * UseInView namespace.
+     */
+    useInView: React.ElementType;
   };
-  libraries: {};
 }
 
 export default UseInView;

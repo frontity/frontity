@@ -2,7 +2,7 @@ import { State } from "frontity/types";
 import WpSource from "../../types";
 import { normalize } from "normalizr";
 import * as schemas from "./schemas";
-import { concatPath, decomposeRoute } from "./route-utils";
+import { concatLink, extractLinkParts } from "./route-utils";
 
 /**
  * Arguments passed to {@link transformLink}.
@@ -44,17 +44,17 @@ const transformLink = ({
   let { subdirectory } = state.source;
   if (options.subdirectory) subdirectory = options.subdirectory;
 
-  // get API subdirectory
+  // Get API subdirectory.
   const path = !state.source.isWpCom
-    ? decomposeRoute(state.source.api).pathname.replace(/\/wp-json\/?$/, "/")
+    ? extractLinkParts(state.source.api).pathname.replace(/\/wp-json\/?$/, "/")
     : "";
 
-  // remove API subdirectory
+  // Remove API subdirectory.
   let { link } = entity;
   if (path && link.startsWith(path)) link = link.replace(path, "/");
 
-  // add subdirectory if it exists
-  entity.link = subdirectory ? concatPath(subdirectory, link) : link;
+  // Add subdirectory if it exists.
+  entity.link = subdirectory ? concatLink(subdirectory, link) : link;
 };
 
 /**
@@ -85,7 +85,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
 }) => {
   // Normalize response
   const json = await response.json();
-  const isList = json instanceof Array;
+  const isList = Array.isArray(json);
   const { entities, result } = normalize(
     json,
     isList ? schemas.list : schemas.entity
@@ -105,6 +105,10 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         (data[entity.link] = {
           isReady: false,
           isFetching: false,
+          link: entity.link,
+          route: entity.link,
+          query: {},
+          page: 1,
         });
 
       let entityMap: any;

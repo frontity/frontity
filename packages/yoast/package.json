@@ -1,5 +1,36 @@
 {
   "name": "@frontity/yoast",
-  "description": "This package has been deprecated. Please use @frontity/head-tags instead.",
-  "version": "1.2.0"
+  "version": "2.0.1",
+  "description": "Integrate your Frontity site with Yoast SEO plugin.",
+  "homepage": "https://github.com/frontity/frontity",
+  "license": "Apache-2.0",
+  "keywords": [
+    "frontity",
+    "frontity-yoast",
+    "yoast",
+    "seo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "scripts": {
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
+  },
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
+  "dependencies": {
+    "frontity": "^1.13.0",
+    "@frontity/router": "^1.1.2",
+    "@frontity/source": "^1.4.0",
+    "@frontity/wp-source": "^1.10.0",
+    "@frontity/html2react": "^1.5.0",
+    "@frontity/head-tags": "^1.0.8"
+  },
+  "devDependencies": {
+    "@frontity/connect": "^1.1.4"
+  }
 }

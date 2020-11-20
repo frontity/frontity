@@ -1,4 +1,4 @@
-import { ReactType } from "react";
+import React from "react";
 import { Action } from "frontity/types";
 import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 
@@ -24,13 +24,18 @@ declare global {
  */
 interface GoogleTagManagerAnalytics extends Analytics {
   /**
+   * Package name.
+   */
+  name: "@frontity/google-tag-manager-analytics";
+
+  /**
    * Root elements exposed by this package.
    */
   roots: Analytics["roots"] & {
     /**
      * Google Tag Manager Analytics root element.
      */
-    googleTagManagerAnalytics: ReactType;
+    googleTagManagerAnalytics: React.ElementType;
   };
 
   /**

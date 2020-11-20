@@ -35,9 +35,21 @@ type Store = {
   actions?: Actions;
 };
 
+type Primitive = number | string | boolean | symbol | undefined | null;
+
+/**
+ * Represents the values that can be "serializable" in javascript.
+ */
+export type Serializable =
+  | Primitive
+  | (Primitive | Record<string, Primitive>)[]
+  | Record<string, Primitive>;
+
 type ResolveState<State> = {
   [P in keyof State]: State[P] extends (state: object) => any
     ? ReturnType<State[P]>
+    : State[P] extends Serializable | ((state: object) => any)
+    ? Exclude<State[P], Derived<any, any>>
     : ResolveState<State[P]>;
 };
 

@@ -1,6 +1,6 @@
 describe("Switch", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3001?name=switch");
+    cy.visit("http://localhost:3001?frontity_name=switch");
   });
 
   it("should render last component when no matching component is found", () => {

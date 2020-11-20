@@ -1,0 +1,878 @@
+exports[`Yoast Package > Post > should render the correct canonical URL #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/hello-world/"
+/>
+`;
+
+exports[`Yoast Package > Post > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > Post > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > Post > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="article" />
+`;
+
+exports[`Yoast Package > Post > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="Hello World From Yoast! - Test WP Site"
+/>
+`;
+
+exports[`Yoast Package > Post > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:description"
+  content="Meta tags are managed from WordPress by Yoast SEO plugin."
+/>
+`;
+
+exports[`Yoast Package > Post > should render the Open Graph tags #4`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://my.frontity.site/hello-world/"
+/>
+`;
+
+exports[`Yoast Package > Post > should render the Open Graph tags #5`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > Post > should render the Open Graph tags #6`] = `
+<meta
+  data-rh="true"
+  property="article:published_time"
+  content="2020-08-20T01:31:05+00:00"
+/>
+`;
+
+exports[`Yoast Package > Post > should render the Open Graph tags #7`] = `
+<meta
+  data-rh="true"
+  property="article:modified_time"
+  content="2020-08-31T13:42:07+00:00"
+/>
+`;
+
+exports[`Yoast Package > Post > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > Post > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "http://my.frontity.site/hello-world/#webpage",
+        "url": "http://my.frontity.site/hello-world/",
+        "name": "Hello World From Yoast! - Test WP Site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "datePublished": "2020-08-20T01:31:05+00:00",
+        "dateModified": "2020-08-31T13:42:07+00:00",
+        "author": {
+          "@id": "http://my.frontity.site/#/schema/person/9948b1443aa9e586af18d75cf4855438"
+        },
+        "description": "Meta tags are managed from WordPress by Yoast SEO plugin.",
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/hello-world/"]
+          }
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "http://my.frontity.site/#/schema/person/9948b1443aa9e586af18d75cf4855438",
+        "name": "admin",
+        "image": {
+          "@type": "ImageObject",
+          "@id": "http://my.frontity.site/#personlogo",
+          "inLanguage": "en-US",
+          "url": "http://2.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=96&d=mm&r=g",
+          "caption": "admin"
+        }
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > Page > should render the correct canonical URL #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/sample-page/"
+/>
+`;
+
+exports[`Yoast Package > Page > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > Page > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > Page > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="article" />
+`;
+
+exports[`Yoast Package > Page > should render the Open Graph tags #2`] = `
+<meta data-rh="true" property="og:title" content="Sample Page - Test WP Site" />
+`;
+
+exports[`Yoast Package > Page > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:description"
+  content="This is an example page. It’s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I’m a bike messenger […]"
+/>
+`;
+
+exports[`Yoast Package > Page > should render the Open Graph tags #4`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://my.frontity.site/sample-page/"
+/>
+`;
+
+exports[`Yoast Package > Page > should render the Open Graph tags #5`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > Page > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > Page > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "http://my.frontity.site/sample-page/#webpage",
+        "url": "http://my.frontity.site/sample-page/",
+        "name": "Sample Page - Test WP Site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "datePublished": "2020-08-20T01:31:05+00:00",
+        "dateModified": "2020-08-20T01:31:05+00:00",
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/sample-page/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > Category > should render the correct canonical URL #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/category/nature/"
+/>
+`;
+
+exports[`Yoast Package > Category > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > Category > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > Category > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="article" />
+`;
+
+exports[`Yoast Package > Category > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="Nature Archives - Test WP Site"
+/>
+`;
+
+exports[`Yoast Package > Category > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://my.frontity.site/category/nature/"
+/>
+`;
+
+exports[`Yoast Package > Category > should render the Open Graph tags #4`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > Category > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > Category > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/category/nature/#webpage",
+        "url": "http://my.frontity.site/category/nature/",
+        "name": "Nature Archives - Test WP Site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/category/nature/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > Tag > should render the correct canonical URL #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/tag/japan/"
+/>
+`;
+
+exports[`Yoast Package > Tag > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > Tag > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > Tag > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="article" />
+`;
+
+exports[`Yoast Package > Tag > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="Japan Archives - Test WP Site"
+/>
+`;
+
+exports[`Yoast Package > Tag > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://my.frontity.site/tag/japan/"
+/>
+`;
+
+exports[`Yoast Package > Tag > should render the Open Graph tags #4`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > Tag > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > Tag > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/tag/japan/#webpage",
+        "url": "http://my.frontity.site/tag/japan/",
+        "name": "Japan Archives - Test WP Site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/tag/japan/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > Author > should render the correct canonical URL #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/author/luisherranz/"
+/>
+`;
+
+exports[`Yoast Package > Author > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > Author > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > Author > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="profile" />
+`;
+
+exports[`Yoast Package > Author > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="luisherranz, Author at Test WP Site"
+/>
+`;
+
+exports[`Yoast Package > Author > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://my.frontity.site/author/luisherranz/"
+/>
+`;
+
+exports[`Yoast Package > Author > should render the Open Graph tags #4`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > Author > should render the Open Graph tags #5`] = `
+<meta
+  data-rh="true"
+  property="og:image"
+  content="https://2.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=500&amp;d=mm&amp;r=g"
+/>
+`;
+
+exports[`Yoast Package > Author > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > Author > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "http://my.frontity.site/author/luisherranz/#webpage",
+        "url": "http://my.frontity.site/author/luisherranz/",
+        "name": "luisherranz, Author at Test WP Site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/author/luisherranz/"]
+          }
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "http://my.frontity.site/#/schema/person/1f3ad884727a4dbe50779670489694a7",
+        "name": "luisherranz",
+        "image": {
+          "@type": "ImageObject",
+          "@id": "http://my.frontity.site/#personlogo",
+          "inLanguage": "en-US",
+          "url": "http://2.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
+          "caption": "luisherranz"
+        },
+        "mainEntityOfPage": {
+          "@id": "http://my.frontity.site/author/luisherranz/#webpage"
+        }
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > Homepage > should render the correct canonical URL #0`] = `
+<link data-rh="true" rel="canonical" href="http://my.frontity.site/" />
+`;
+
+exports[`Yoast Package > Homepage > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="website" />
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="Test WP Site - Just another WordPress site"
+/>
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:description"
+  content="Just another WordPress site"
+/>
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #4`] = `
+<meta data-rh="true" property="og:url" content="http://my.frontity.site/" />
+`;
+
+exports[`Yoast Package > Homepage > should render the Open Graph tags #5`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > Homepage > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/#webpage",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site - Just another WordPress site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "description": "Just another WordPress site",
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > CPT > should render the correct canonical URL #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/movie/the-terminator/"
+/>
+`;
+
+exports[`Yoast Package > CPT > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > CPT > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > CPT > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="article" />
+`;
+
+exports[`Yoast Package > CPT > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="The Terminator - Test WP Site"
+/>
+`;
+
+exports[`Yoast Package > CPT > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:description"
+  content="The Terminator&nbsp;is a 1984 American science fiction film directed by James Cameron. It stars Arnold Schwarzenegger as&nbsp;the Terminator, a cyborg assassin sent back in time from 2029 to 1984 to kill Sarah Connor (Linda Hamilton), whose son will one day become a savior against machines in a post-apocalyptic future."
+/>
+`;
+
+exports[`Yoast Package > CPT > should render the Open Graph tags #4`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://my.frontity.site/movie/the-terminator/"
+/>
+`;
+
+exports[`Yoast Package > CPT > should render the Open Graph tags #5`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > CPT > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > CPT > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "http://my.frontity.site/movie/the-terminator/#webpage",
+        "url": "http://my.frontity.site/movie/the-terminator/",
+        "name": "The Terminator - Test WP Site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "datePublished": "2020-01-09T19:07:38+00:00",
+        "dateModified": "2020-01-09T19:07:38+00:00",
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/movie/the-terminator/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the correct canonical URL #0`] = `
+<link data-rh="true" rel="canonical" href="http://my.frontity.site/movies/" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="website" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="Movies Archive - Test WP Site"
+/>
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://my.frontity.site/movies/"
+/>
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Open Graph tags #4`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/movies/#webpage",
+        "url": "http://my.frontity.site/movies/",
+        "name": "Movies Archive - Test WP Site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/movies/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the correct canonical URL #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/actor/linda-hamilton/"
+/>
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the robots tag #0`] = `
+<meta
+  data-rh="true"
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the Open Graph tags #0`] = `
+<meta data-rh="true" property="og:locale" content="en_US" />
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the Open Graph tags #1`] = `
+<meta data-rh="true" property="og:type" content="article" />
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the Open Graph tags #2`] = `
+<meta
+  data-rh="true"
+  property="og:title"
+  content="Linda Hamilton Archives - Test WP Site"
+/>
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the Open Graph tags #3`] = `
+<meta
+  data-rh="true"
+  property="og:url"
+  content="http://my.frontity.site/actor/linda-hamilton/"
+/>
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the Open Graph tags #4`] = `
+<meta data-rh="true" property="og:site_name" content="Test WP Site" />
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the Twitter tags #0`] = `
+<meta data-rh="true" name="twitter:card" content="summary_large_image" />
+`;
+
+exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": "http://my.frontity.site/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/actor/linda-hamilton/#webpage",
+        "url": "http://my.frontity.site/actor/linda-hamilton/",
+        "name": "Linda Hamilton Archives - Test WP Site",
+        "isPartOf": {
+          "@id": "http://my.frontity.site/#website"
+        },
+        "inLanguage": "en-US",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": ["http://my.frontity.site/actor/linda-hamilton/"]
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;

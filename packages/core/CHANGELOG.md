@@ -1,5 +1,42 @@
 # Change Log
 
+## 1.9.1
+
+### Patch Changes
+
+- [`e9f7b5c6`](https://github.com/frontity/frontity/commit/e9f7b5c6889fb6dfb68fb15baad77031ffd7c324) [#609](https://github.com/frontity/frontity/pull/609) Thanks [@cristianbote](https://github.com/cristianbote)! - The `serve` command was taking too much to spin the server. That was due to the build and dev scripts which are having side-effects by loading ts-node and other scripts.
+
+- Updated dependencies [[`d7b4b429`](https://github.com/frontity/frontity/commit/d7b4b429f1f23dfae74b9781ea1b1de00aed763c), [`b766e330`](https://github.com/frontity/frontity/commit/b766e330465b6a76d927eaddaa763a684dc1b228)]:
+  - @frontity/connect@1.1.4
+
+## 1.9.0
+
+### Minor Changes
+
+- [`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b) [#568](https://github.com/frontity/frontity/pull/568) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for auth headers: https://community.frontity.org/t/support-for-auth-header-in-source-packages/2678/12
+
+  - Use use the URL search param `frontity_name` instead of just `name` for frontity multisite.
+  - Remove all querystring parameters that start with `frontity_` from the page querystring and pass them (camelCased) to `state.frontity.options`.
+
+## 1.8.0
+
+### Minor Changes
+
+- [`2a1a1f35`](https://github.com/frontity/frontity/commit/2a1a1f35810337a18edc96c3da06ffd492152ed8) [#550](https://github.com/frontity/frontity/pull/550) Thanks [@luisherranz](https://github.com/luisherranz)! - Expose Webpack errors and warnings in the `npx frontity build` command.
+
+### Patch Changes
+
+- [`611f3e2a`](https://github.com/frontity/frontity/commit/611f3e2ac836033417e9921a44b52cdd2f07793f) [#541](https://github.com/frontity/frontity/pull/541) Thanks [@luisherranz](https://github.com/luisherranz)! - Deprecate the `--publicPath` CLI arg of the `npx frontity dev` and `npx frontity build` commands in favor of `--public-path` to be consistent with the rest of the arguments.
+
+  It also adds a log to those commands, along with the already existing `mode` and `target` logs.
+
+* [`f4f20007`](https://github.com/frontity/frontity/commit/f4f200074dd360fbf6b41dea63c89f9c6938c75d) [#450](https://github.com/frontity/frontity/pull/450) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Remove the unused `minimist` dependency and its types.
+
+- [`94a1c41c`](https://github.com/frontity/frontity/commit/94a1c41cc683675b70fd92e759eb14c7f6daca8a) [#547](https://github.com/frontity/frontity/pull/547) Thanks [@luisherranz](https://github.com/luisherranz)! - Relax `maxEntrypointSize` option of Webpack's performance to:
+
+  - 5Mbs for the server bundle.
+  - 500Kbs for the client bundles.
+
 ## 1.7.3
 
 ### Patch Changes

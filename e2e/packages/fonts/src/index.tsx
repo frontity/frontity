@@ -1,5 +1,10 @@
+/* eslint-disable */
+/*
+ * TSDocs will be added in this branch:
+ * https://github.com/frontity/frontity/tree/package-name
+ */
 import React from "react";
-import { Global, css, connect, styled, URL } from "frontity";
+import { Global, css, connect, styled } from "frontity";
 import Package from "../types";
 import aclonicaEot from "./fonts/aclonica-v10-latin-regular.eot";
 import aclonicaWoff from "./fonts/aclonica-v10-latin-regular.woff";
@@ -16,6 +21,11 @@ const Button = styled.button`
   margin: 20px 0;
 `;
 
+/**
+ * A React compontent that adds a lot of font formats.
+ *
+ * @returns React element.
+ */
 const All: React.FC = () => {
   const [global, setGlobal] = React.useState(false);
   return (
@@ -46,6 +56,11 @@ const All: React.FC = () => {
   );
 };
 
+/**
+ * A React compontent that adds the woff1 format.
+ *
+ * @returns React element.
+ */
 const Woff1: React.FC = () => {
   const [global, setGlobal] = React.useState(false);
   return (
@@ -71,6 +86,11 @@ const Woff1: React.FC = () => {
   );
 };
 
+/**
+ * A React compontent that adds the woff2 format.
+ *
+ * @returns React element.
+ */
 const Woff2: React.FC = () => {
   const [global, setGlobal] = React.useState(false);
   return (
@@ -96,6 +116,11 @@ const Woff2: React.FC = () => {
   );
 };
 
+/**
+ * A React compontent that adds the ttf format.
+ *
+ * @returns React element.
+ */
 const Ttf: React.FC = () => {
   const [global, setGlobal] = React.useState(false);
   return (
@@ -121,6 +146,11 @@ const Ttf: React.FC = () => {
   );
 };
 
+/**
+ * A simple react component that loads when fonts are not loaded.
+ *
+ * @returns React element.
+ */
 const Empty: React.FC = () => (
   <Div data-test-id="div-with-font">Fonts not loaded</Div>
 );
@@ -135,13 +165,10 @@ const Font: React.FC = connect(({ state }) => {
 });
 
 const FontsPackage: Package = {
-  name: "fonts",
-  state: {},
-  actions: {},
+  name: "e2e-fonts",
   roots: {
-    fonts: Font
+    fonts: Font,
   },
-  libraries: {}
 };
 
 export default FontsPackage;

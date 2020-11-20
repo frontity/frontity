@@ -1,73 +1,197 @@
-import { Package, Derived } from "frontity/types";
-import { InitializedStore } from "@frontity/connect";
+import { Package, Derived, MergePackages, Frontity } from "frontity/types";
 import Router from "@frontity/router/types";
 import Source, {
-  TaxonomyEntity,
+  TermEntity,
   PostEntity,
   AuthorEntity,
-  PostType,
+  TypeEntity,
 } from "@frontity/source/types";
 
 /**
- * Create a new type by merging two types.
- * The second type overrides those attributes that are present in the first one.
- * @param M First type.
- * @param N Second type.
- * @return Merged types.
+ * Object describing an HTML head tag.
+ *
+ * @example
+ * ```
+ * // <title>mburridge, Author at Frontity</title>
+ *
+ * {
+ *   "tag": "title",
+ *   "content": "mburridge, Author at Frontity"
+ * }
+ * ```
+ *
+ * @example
+ * ```
+ * // <meta name="robots" content="noindex, follow">
+ * {
+ *   "tag": "meta",
+ *   "attributes": {
+ *     "name": "robots",
+ *     "content": "noindex, follow"
+ *   }
+ * }
+ * ```
  */
-export type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
-
-export type HeadTag = {
+export interface HeadTag {
+  /**
+   * HTML tag name.
+   */
   tag: "meta" | "link" | "title" | "style" | "script" | "noscript" | "base";
+
+  /**
+   * HTML attributes for this tag.
+   */
   attributes?: Record<string, string>;
+
+  /**
+   * Text content inside this tag.
+   */
   content?: string;
-};
-export type HeadTags = HeadTag[];
+}
 
-export type WithHeadTags = {
-  head_tags?: HeadTags;
-};
+/**
+ * Object containing the `head_tags` property.
+ */
+export interface WithHeadTags {
+  /**
+   * Array of {@link HeadTag}.
+   */
+  head_tags?: HeadTag[];
+}
 
-export type PostEntityWithHeadTags = Merge<PostEntity, WithHeadTags>;
-export type PostTypeWithHeadTags = Merge<PostType, WithHeadTags>;
-export type AuthorEntityWithHeadTags = Merge<AuthorEntity, WithHeadTags>;
-export type TaxonomyWithHeadTags = Merge<TaxonomyEntity, WithHeadTags>;
-
+/**
+ * Integrate your Frontity site with REST API - Head Tags by Frontity.
+ */
 interface HeadTagsPackage extends Package {
+  /**
+   * Package name.
+   */
   name: "@frontity/head-tags";
+
+  /**
+   * Root components exposed by this package.
+   */
   roots: {
+    /**
+     * Head Tags root component.
+     */
     headTags: React.FC;
   };
+
+  /**
+   * State exposed by this package.
+   */
   state: {
+    /**
+     * Head Tags namespace.
+     */
     headTags: {
-      get: Derived<HeadTagsPackage, string, HeadTags>;
+      /**
+       * Return an array of head tags for the given link.
+       *
+       * @example state.headTags.get("/2016/the-beauties-of-gullfoss");
+       *
+       * @param link - Any link in your site.
+       * @returns An array of {@link HeadTag}, if the given link points to an
+       * entity with the `head_tags` field.
+       */
+      get: Derived<Packages, string, HeadTag[]>;
+
+      /**
+       * Define a set of properties to transform links present in the
+       * `head_tags` field in case you are using Frontity in decoupled mode.
+       *
+       * If you are using Frontity in embedded mode, this property must be set
+       * to `false`.
+       *
+       * @example
+       * ```
+       * {
+       *   ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
+       *   base: "https://wp.mysite.com"
+       * }
+       * ```
+       *
+       * @example false
+       */
       transformLinks:
         | {
+            /**
+             * RegExp in string format that defines a set of links that must
+             * not be transformed.
+             *
+             * @defaultValue
+             * ```
+             * "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
+             * ```
+             */
             ignore: string;
+
+            /**
+             * WordPress URL base that must be replaced by the Frontity URL
+             * base (specified in `state.frontity.url`). If this value is not
+             * set, it is computed from `state.source.api`.
+             */
             base?: string;
           }
         | false;
     };
-    frontity?: {
-      url: string;
+
+    /**
+     * Source namespace.
+     */
+    source?: {
+      /**
+       * True when the REST API belongs to a WordPress.com site.
+       */
+      isWpCom?: boolean;
+
+      /**
+       * The URL of the REST API.
+       *
+       * It can be from a self-hosted WordPress or from a WordPress.com site.
+       *
+       * @example "https://your-site.com/wp-json"
+       * @example "https://public-api.wordpress.com/wp/v2/sites/your-site.wordpress.com"
+       */
+      api: string;
+
+      /**
+       * Post entities by ID, extended with a `head_tags` property.
+       */
+      post: Record<string, PostEntity & WithHeadTags>;
+
+      /**
+       * Page entities by ID, extended with a `head_tags` property.
+       */
+      page: Record<string, PostEntity & WithHeadTags>;
+
+      /**
+       * Author entities by ID, extended with a `head_tags` property.
+       */
+      author: Record<string, AuthorEntity & WithHeadTags>;
+
+      /**
+       * Type entities by ID, extended with a `head_tags` property.
+       */
+      type: Record<string, TypeEntity & WithHeadTags>;
+
+      /**
+       * Category entities by ID, extended with a `head_tags` property.
+       */
+      category: Record<string, TermEntity & WithHeadTags>;
+
+      /**
+       * Tag entities by ID, extended with a `head_tags` property.
+       */
+      tag: Record<string, TermEntity & WithHeadTags>;
     };
-    source?: Merge<
-      Source["state"]["source"],
-      {
-        isWpCom?: boolean;
-        api: string;
-        post: Record<string, PostEntityWithHeadTags>;
-        page: Record<string, PostEntityWithHeadTags>;
-        author: Record<string, AuthorEntityWithHeadTags>;
-        type: Record<string, PostTypeWithHeadTags>;
-        category: Record<string, TaxonomyWithHeadTags>;
-        tag: Record<string, TaxonomyWithHeadTags>;
-      }
-    >;
-    router?: Router["state"]["router"];
   };
 }
 
-export type State = InitializedStore<HeadTagsPackage>["state"];
+/**
+ * The Head Tags package and its dependencies joined together.
+ */
+export type Packages = MergePackages<Frontity, Source, Router, HeadTagsPackage>;
 
 export default HeadTagsPackage;

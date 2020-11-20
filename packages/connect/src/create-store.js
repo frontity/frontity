@@ -1,4 +1,3 @@
-/* eslint-disable jsdoc/require-jsdoc */
 import { raw, proxyHandlers } from "@nx-js/observer-util";
 import { store } from "@risingstack/react-easy-state";
 
@@ -7,7 +6,7 @@ export const getSnapshot = (obj) => {
   if (typeof obj === "function") return;
   if (typeof obj !== "object" || obj === null) return obj;
   if (obj instanceof Date) return new Date(obj.getTime());
-  if (obj instanceof Array) {
+  if (Array.isArray(obj)) {
     return obj.reduce((arr, item, i) => {
       arr[i] = getSnapshot(item);
       return arr;

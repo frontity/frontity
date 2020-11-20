@@ -1,6 +1,6 @@
 describe("Google Ad Manager", () => {
   it("should load the GPT library", () => {
-    cy.visit("http://localhost:3001?name=google-ad-manager");
+    cy.visit("http://localhost:3001?frontity_name=google-ad-manager");
     cy.get(
       `script[src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"]`
     );
@@ -8,7 +8,7 @@ describe("Google Ad Manager", () => {
 
   it("should render GPT ad units from fills", () => {
     // Go to home.
-    cy.visit("http://localhost:3001?name=google-ad-manager");
+    cy.visit("http://localhost:3001?frontity_name=google-ad-manager");
 
     // Get ad unit from header.
     cy.get("#header-ad > div").should("have.descendants", "iframe");
@@ -31,7 +31,7 @@ describe("Google Ad Manager", () => {
 
   it("should work using GPT component directly from libraries", () => {
     // Go to home.
-    cy.visit("http://localhost:3001?name=google-ad-manager");
+    cy.visit("http://localhost:3001?frontity_name=google-ad-manager");
 
     // Go to "/post-with-gpt/".
     cy.get("button#change-link-gpt").click();
@@ -42,7 +42,7 @@ describe("Google Ad Manager", () => {
 
   it("should ad the link to the container ID if data is passed", () => {
     // Go to home.
-    cy.visit("http://localhost:3001?name=google-ad-manager");
+    cy.visit("http://localhost:3001?frontity_name=google-ad-manager");
 
     // Go to "/post/".
     cy.get("button#change-link").click();

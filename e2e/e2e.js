@@ -4,6 +4,7 @@ const waitOn = require("wait-on");
 const execa = require("execa");
 const cypress = require("cypress");
 const argv = require("minimist")(process.argv.slice(2));
+const { platform } = require("os");
 
 /**
  * Validates the CLI arguments and throws an error if a value is not correct.
@@ -36,9 +37,14 @@ prod = prod || false;
 cypressCommand = cypressCommand || "open";
 suite = suite || "all";
 
+// Flag to know if we have started Docker.
+let isDockerRunning = false;
+
 // Validate CLI args.
 validateArgs(target, { possibleValues: ["es5", "module", "both"] });
-validateArgs(browser, { possibleValues: ["firefox", "chrome", "edge"] });
+validateArgs(browser, {
+  possibleValues: ["firefox", "chrome", "edge", "electron"],
+});
 validateArgs(cypressCommand, { possibleValues: ["open", "run", "off"] });
 
 // We have to make sure that we are runnng inside of the e2e directory The
@@ -52,6 +58,13 @@ process.chdir(__dirname);
       // the docker-compose.yml file.
       process.env.WORDPRESS_VERSION = wpVersion;
 
+      // Set the Frontity server address. In Windows and Mac we use
+      // `host.docker.internal` and in Linux we use `172.17.0.1`.
+      process.env.FRONTITY_SERVER =
+        platform() === "darwin" || platform().startsWith("win")
+          ? "http://host.docker.internal:3001"
+          : "http://172.17.0.1:3001";
+
       // Stop all the containers and remove all the volumes that they use (the
       // `-v` option).
       await execa("docker-compose", ["down", "-v"], {
@@ -61,6 +74,9 @@ process.chdir(__dirname);
       // Run all the services defined in docker-compose.yml: wp, wpcli & mysql
       // (in the background via the -d flag).
       await execa("docker-compose", ["up", "-d"], { stdio: "inherit" });
+
+      // Set the flag. We will needed it later to stop the containers.
+      isDockerRunning = true;
 
       // Wait until WordPress is responsive.
       await waitOn({
@@ -73,7 +89,7 @@ process.chdir(__dirname);
       // instances for testing.
       await execa(
         "docker-compose",
-        ["run", "wp", "/bin/bash", "-c", "chmod -R 777 /var/www/html"],
+        ["run", "--rm", "wp", "/bin/bash", "-c", "chmod -R 777 /var/www/html"],
         { stdio: "inherit" }
       );
     }
@@ -125,8 +141,8 @@ process.chdir(__dirname);
     // CD back into the e2e directory.
     process.chdir("..");
 
-    // Workaround for a bug in Cypress, otherwise it fails with:
-    // electron: -max-http-header-size=1048576 is not allowed in NODE_OPTIONS.
+    // Workaround for a bug in Cypress, otherwise it fails with electron:
+    // -max-http-header-size=1048576 is not allowed in NODE_OPTIONS.
     // eslint-disable-next-line require-atomic-updates
     process.env.NODE_OPTIONS = "";
 
@@ -149,11 +165,28 @@ process.chdir(__dirname);
           });
         }
       }
-      // Exit the process once Cypress ends.
+
+      if (isDockerRunning) {
+        // Stop all the containers and remove all the volumes that they use (the
+        // `-v` option).
+        await execa("docker-compose", ["down", "-v"], {
+          stdio: "inherit",
+        });
+      }
+
+      // Exit the process to indicate that everything went fine.
       process.exit(0);
     }
   } catch (err) {
     console.error(err);
+
+    if (isDockerRunning) {
+      // Stop all the containers and remove all the volumes that they use (the
+      // `-v` option).
+      await execa("docker-compose", ["down", "-v"], {
+        stdio: "inherit",
+      });
+    }
 
     // We need to return the exit code so that the GitHub action returns a fail.
     process.exit(1);

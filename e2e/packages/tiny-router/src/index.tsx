@@ -1,14 +1,23 @@
 import React from "react";
-import Package from "../types";
+import TinyRouterTests, { Packages } from "../types";
 import { css, connect } from "frontity";
+import { Connect } from "frontity/types";
 
-const Root = connect(({ state, actions }) => {
+/**
+ * A React component that contains some routes and some buttons to toggle
+ * between them.
+ *
+ * @param props - The store injected by `connect`.
+ *
+ * @returns React element.
+ */
+const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
   return (
     <>
       <button
         data-button-id="switch-to-home"
         onClick={() => {
-          actions.router.set("/?name=tiny-router");
+          actions.router.set("/");
         }}
       >
         Home
@@ -68,9 +77,7 @@ const Root = connect(({ state, actions }) => {
         About (with state)
       </button>
 
-      {state.router.link === "/?name=tiny-router" && (
-        <div data-test-id="content">Home</div>
-      )}
+      {state.router.link === "/" && <div data-test-id="content">Home</div>}
 
       {state.router.link === "/about/" && (
         <div data-test-id="content">About</div>
@@ -104,16 +111,13 @@ const Root = connect(({ state, actions }) => {
       </div>
     </>
   );
-});
-
-const TinyRouterPackage: Package = {
-  name: "tiny-router",
-  state: {},
-  actions: {},
-  roots: {
-    tinyRouter: Root,
-  },
-  libraries: {},
 };
 
-export default TinyRouterPackage;
+const tinyRouterTests: TinyRouterTests = {
+  name: "e2e-tiny-router",
+  roots: {
+    tinyRouterTests: connect(Root),
+  },
+};
+
+export default tinyRouterTests;

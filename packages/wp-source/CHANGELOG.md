@@ -1,5 +1,97 @@
 # Change Log
 
+## 1.10.0
+
+### Minor Changes
+
+- [`3dfa3c48`](https://github.com/frontity/frontity/commit/3dfa3c4809d3b00528db8c1c8c530cf311901553) [#610](https://github.com/frontity/frontity/pull/610) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add the `state.source.url` setting to source according to
+  https://community.frontity.org/t/make-the-backend-url-a-global-setting/2381.
+  The types are in `@frontity/source` and the implementation is in
+  `@frontity/wp-source`.
+
+### Patch Changes
+
+- [`d7b4b429`](https://github.com/frontity/frontity/commit/d7b4b429f1f23dfae74b9781ea1b1de00aed763c) [#616](https://github.com/frontity/frontity/pull/616) Thanks [@luisherranz](https://github.com/luisherranz)! - Stop using `instanceof Array` in favor of `Array.isArray()`.
+
+* [`252c89d2`](https://github.com/frontity/frontity/commit/252c89d226b9575f8f30e9f102ed97de598061e6) [#616](https://github.com/frontity/frontity/pull/616) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix a couple of unnecessary rerenderings when transitioning from one data object to another.
+
+- [`362b02f1`](https://github.com/frontity/frontity/commit/362b02f1beb100ffb178a1d4e775e89b84b99ccc) [#449](https://github.com/frontity/frontity/pull/449) Thanks [@luisherranz](https://github.com/luisherranz)! - Adapt packages to changes in `@frontity/source`.
+
+* [`2c69da57`](https://github.com/frontity/frontity/commit/2c69da577ebd93d3335a2e50f8fb38c3eba1d7f7) [#606](https://github.com/frontity/frontity/pull/606) Thanks [@nandotess](https://github.com/nandotess)! - Make `libraries.source.normalize()` to lowercase the pathname of links. This fixes a bug when links with uppercase letters are visited.
+
+- [`3dfa3c48`](https://github.com/frontity/frontity/commit/3dfa3c4809d3b00528db8c1c8c530cf311901553) [#610](https://github.com/frontity/frontity/pull/610) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Update `state.source.api` to be a derived state.
+
+- Updated dependencies [[`362b02f1`](https://github.com/frontity/frontity/commit/362b02f1beb100ffb178a1d4e775e89b84b99ccc), [`362b02f1`](https://github.com/frontity/frontity/commit/362b02f1beb100ffb178a1d4e775e89b84b99ccc), [`362b02f1`](https://github.com/frontity/frontity/commit/362b02f1beb100ffb178a1d4e775e89b84b99ccc), [`3dfa3c48`](https://github.com/frontity/frontity/commit/3dfa3c4809d3b00528db8c1c8c530cf311901553), [`6b4bf82b`](https://github.com/frontity/frontity/commit/6b4bf82b5eee698f7ea8ea3b0bfd69a989caaba3), [`44f44e3f`](https://github.com/frontity/frontity/commit/44f44e3f2ba436236b65518ddac30cd4af57ea18), [`3dfa3c48`](https://github.com/frontity/frontity/commit/3dfa3c4809d3b00528db8c1c8c530cf311901553)]:
+  - @frontity/source@1.4.0
+  - frontity@1.13.0
+
+## 1.9.1
+
+### Patch Changes
+
+- [`81edef5d`](https://github.com/frontity/frontity/commit/81edef5d903a9583437bb498096985625a8d6597) [#599](https://github.com/frontity/frontity/pull/599) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix `data.isHome` when the `state.source.homepage` option is set.
+
+## 1.9.0
+
+### Minor Changes
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - New post type handlers for plain query permalinks:
+
+  - `/?p=ID` for posts and custom post types.
+  - `/?page_id=ID` for pages.
+
+* [`5553daf4`](https://github.com/frontity/frontity/commit/5553daf451e22747f62539c33dfe85566d723fe2) [#568](https://github.com/frontity/frontity/pull/568) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for adding auth headers to the source packages by setting `state.source.auth`. This will allow users to e.g. pass Basic Auth header in all requests. Feature Discussion: https://community.frontity.org/t/support-for-custom-headers-in-source-packages/2678
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Sort the link query alphabetically. For example, `?k1=v1&k2=v2` is now the same than `?k2=v2&k1=v1`.
+
+* [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Support the `preview=true` query in the PostType and PostTypeWithQuery handlers.
+
+  If that query is present, the handlers will do an additional request to get
+  the latest revision and they will substitute the `title`, `content` and
+  `excerpt` with the last one.
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Add `queryString` to the list of link params we get/set using
+  `libraries.source.parse` and `libraries.source.stringify`.
+
+* [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Support regular expression patterns to match queries in the URLs, like
+  "RegExp:(\\?|&)preview=true".
+
+### Patch Changes
+
+- [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396) [#564](https://github.com/frontity/frontity/pull/564) Thanks [@luisherranz](https://github.com/luisherranz)! - Do not set `isHome` to true `when` `isSearch` is `true`.
+
+* [`f57af435`](https://github.com/frontity/frontity/commit/f57af43594cbced7fb3a27cc0a10a978e7307355) [#579](https://github.com/frontity/frontity/pull/579) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix the issue where the `{ force: true }` option was not respected in the postType handler.
+
+* Updated dependencies [[`e2c193f2`](https://github.com/frontity/frontity/commit/e2c193f2ad8353886a8eb27ea74838383f6d2e4b), [`63fc4559`](https://github.com/frontity/frontity/commit/63fc45592f678bcc7503ea7fef01186a408a5396)]:
+  - frontity@1.12.0
+  - @frontity/source@1.3.1
+
+## 1.8.4
+
+### Patch Changes
+
+- [`b8d187b3`](https://github.com/frontity/frontity/commit/b8d187b3e8b8893f604727b66f88acef6e846a0c) [#571](https://github.com/frontity/frontity/pull/571) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Revert a change introduced in https://github.com/frontity/frontity/pull/542. Keep setting `query`, `link` and `route` on all entities (including non-URL entities) in source.data
+
+## 1.8.3
+
+### Patch Changes
+
+- [`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b) [#548](https://github.com/frontity/frontity/pull/548) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add a derived prop in `state.source` called `entity` that returns the entity pointed by a given link.
+
+* [`958fe49f`](https://github.com/frontity/frontity/commit/958fe49f043ca43ae2b1b982059c78e921785d71) [#542](https://github.com/frontity/frontity/pull/542) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for non-URL resources e.g. WordPress comments.
+
+* Updated dependencies [[`870e4ba5`](https://github.com/frontity/frontity/commit/870e4ba5ab6afd216d9f2c5f15383fb8028d471c), [`5eaf92cc`](https://github.com/frontity/frontity/commit/5eaf92cca957e4444c47db22d6c739a9d4c64f3b)]:
+  - @frontity/source@1.3.0
+
+## 1.8.2
+
+### Patch Changes
+
+- [`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af) [#566](https://github.com/frontity/frontity/pull/566) Thanks [@luisherranz](https://github.com/luisherranz)! - Do not import `URL` from `frontity` anymore.
+
+- Updated dependencies [[`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af)]:
+  - frontity@1.11.1
+
 ## 1.8.1
 
 ### Patch Changes

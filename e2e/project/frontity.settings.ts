@@ -1,6 +1,26 @@
 import { Settings } from "frontity/types";
 
-const settings: Settings = [
+import TinyRouter from "@frontity/tiny-router/types";
+import WpSource from "@frontity/wp-source/types";
+import GoogleTagManagerAnalytics from "@frontity/google-tag-manager-analytics/types";
+import ComscoreAnalytics from "@frontity/comscore-analytics/types";
+import GoogleAnalytics from "@frontity/google-analytics/types";
+import GoogleAdManager from "@frontity/google-ad-manager/types";
+import SmartAdserver from "@frontity/smart-adserver/types";
+import Yoast from "@frontity/yoast/types";
+import HeadTags from "@frontity/head-tags/types";
+
+const settings: Settings<
+  | TinyRouter
+  | WpSource
+  | GoogleTagManagerAnalytics
+  | ComscoreAnalytics
+  | GoogleAnalytics
+  | GoogleAdManager
+  | SmartAdserver
+  | Yoast
+  | HeadTags
+> = [
   {
     name: "head",
     packages: ["e2e-head"],
@@ -67,7 +87,7 @@ const settings: Settings = [
       },
       {
         name: "@frontity/wp-source",
-        state: { source: { api: "https://test.frontity.org/wp-json" } },
+        state: { source: { url: "https://test.frontity.org/" } },
       },
     ],
   },
@@ -129,6 +149,18 @@ const settings: Settings = [
     ],
   },
   {
+    name: "wp-comments",
+    packages: [
+      "e2e-wp-comments",
+      "@frontity/tiny-router",
+      "@frontity/wp-comments",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "http://localhost:8080/" } },
+      },
+    ],
+  },
+  {
     name: "google-ad-manager",
     packages: [
       "e2e-ads",
@@ -186,11 +218,179 @@ const settings: Settings = [
         name: "@frontity/wp-source",
         state: {
           source: {
-            api: "http://localhost:8080/wp-json",
+            url: "http://localhost:8080/",
           },
         },
       },
     ],
+  },
+  {
+    name: "smart-adserver",
+    packages: [
+      "e2e-smart-adserver",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/smart-adserver",
+        state: {
+          smartAdserver: {
+            networkId: "1445",
+            subdomain: "www",
+          },
+          fills: {
+            smartAdserver: {
+              headerAd: {
+                slot: "header",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+                props: {
+                  callType: "std",
+                  siteId: 78061,
+                  pageId: 884496,
+                  formatId: 33780,
+                  tagId: "hello",
+                },
+              },
+              bottomAd: {
+                slot: "bottom",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+                props: {
+                  callType: "std",
+                  siteId: 78061,
+                  pageId: 884496,
+                  formatId: 33780,
+                  minHeight: 100,
+                  tagId: "std-min-height",
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "yoast-package",
+    state: {
+      frontity: {
+        url: "http://my.frontity.site",
+      },
+    },
+    packages: [
+      "@frontity/tiny-router",
+      "@frontity/html2react",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            url: "http://localhost:8080/",
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+                archive: "/movies",
+              },
+            ],
+            taxonomies: [
+              {
+                taxonomy: "actor",
+                endpoint: "actors",
+                postTypeEndpoint: "movies",
+              },
+            ],
+          },
+        },
+      },
+      {
+        name: "@frontity/yoast",
+        state: {
+          yoast: {
+            renderTags: "server",
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "head-tags",
+    state: {
+      frontity: {
+        url: "http://my.frontity.site",
+      },
+    },
+    packages: [
+      "@frontity/tiny-router",
+      "@frontity/html2react",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            url: "http://localhost:8080/",
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+                archive: "/movies",
+              },
+            ],
+            taxonomies: [
+              {
+                taxonomy: "actor",
+                endpoint: "actors",
+                postTypeEndpoint: "movies",
+              },
+            ],
+            params: {
+              ["head_tags_skip_cache"]: "true",
+            },
+          },
+        },
+      },
+      {
+        name: "@frontity/head-tags",
+        state: {
+          headTags: {
+            transformLinks: {
+              base: "http://localhost:8080",
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "embedded-mode",
+    match: [process.env.FRONTITY_SERVER],
+    state: {
+      frontity: {
+        url: "http://localhost:8080",
+      },
+    },
+    packages: [
+      "e2e-preview",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            postTypes: [
+              {
+                type: "movie",
+                endpoint: "movies",
+              },
+            ],
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "render",
+    state: {
+      frontity: {
+        url: "https://domain.com",
+      },
+    },
+    packages: ["e2e-render", "@frontity/tiny-router", "@frontity/wp-source"],
   },
 ];
 

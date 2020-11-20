@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/no-unused-vars */
-import { Action, Settings } from "frontity/types";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Action, Derived, Settings, State } from "frontity/types";
 import Source from "../../types";
 
 // Source.
@@ -10,6 +10,8 @@ const source1 = (libraries: Source["libraries"]): Source => {
     state: {
       source: {
         get: ({ state }) => (link) => state.source.data[""],
+        entity: ({ state }) => <T>(link) => state.source.post[1] as T,
+        url: "https://test.frontity.org",
         data: {},
         category: {},
         tag: {},
@@ -42,7 +44,7 @@ interface MySource extends Source {
   state: {
     source: Source["state"]["source"] & {
       // And other props.
-      api: string;
+      api: Derived<MySource, string> | string;
       myOwnProp: string;
     };
   };
@@ -58,8 +60,10 @@ const source2: MySource = {
   name: "my-source-package",
   state: {
     source: {
-      api: "https://site.com/api",
+      url: ({ state }) => "https://test.frontity.org/",
+      api: ({ state }) => state.source.url,
       get: ({ state }) => (link) => state.source.data[""],
+      entity: ({ state }) => <T>(link) => state.source.post[1] as T,
       data: {},
       category: {},
       tag: {},
@@ -111,7 +115,20 @@ const settings3: Settings<MySource> = {
       name: "my-source-package",
       state: {
         source: {
-          api: "1",
+          api: "https://tes.frontity.org/wp-json",
+        },
+      },
+    },
+  ],
+};
+// -- Settings;
+const settings4: Settings<MySource> = {
+  packages: [
+    {
+      name: "my-source-package",
+      state: {
+        source: {
+          url: "https://tes.frontity.org",
         },
       },
     },

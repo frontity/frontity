@@ -8,15 +8,25 @@ import { mockResponse } from "./mocks/helpers";
 import attachment1 from "./mocks/post-type/attachment-1.json";
 import page1 from "./mocks/post-type/page-1.json";
 import post1 from "./mocks/post-type/post-1.json";
+import post1Revision from "./mocks/post-type/post-1-revision.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
-import { ServerError } from "@frontity/source";
+import { ServerError, isError, isPostType } from "@frontity/source";
+import { PostEntity } from "@frontity/source/types";
 
-let store: InitializedStore<WpSource>;
+interface WpSourceAndCpt extends WpSource {
+  state: WpSource["state"] & {
+    source: WpSource["state"]["source"] & {
+      cpt: Record<string, PostEntity>;
+    };
+  };
+}
+
+let store: InitializedStore<WpSourceAndCpt>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
-  store = createStore(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store = createStore<WpSourceAndCpt>(clone(wpSource()));
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -45,8 +55,9 @@ describe("postType", () => {
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
 
-    expect(store.state.source.data["/post-1/"].isError).toBe(true);
-    expect(store.state.source.data["/post-1/"]["is400"]).toBe(true);
+    const data = store.state.source.data["/post-1/"];
+    expect(isError(data)).toBe(true);
+    expect(isError(data) && data.is400).toBe(true);
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -113,6 +124,60 @@ describe("post", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1withType]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("applies the latest revision if it is a preview", async () => {
+    // Mock auth token
+    store.state.source.auth = "Bearer TOKEN";
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([post1]))
+      .mockResolvedValueOnce(mockResponse([post1Revision]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/?preview=true");
+    expect(store.state.source).toMatchSnapshot();
+
+    // Get updated props from the post that was fetched.
+    const { title, content, excerpt } = store.state.source.post[1];
+    expect({ title, content, excerpt }).toMatchInlineSnapshot(`
+      Object {
+        "content": Object {
+          "rendered": "Content from revision 11",
+        },
+        "excerpt": Object {
+          "rendered": "Excerpt from revision 11",
+        },
+        "title": Object {
+          "rendered": "Title from revision 11",
+        },
+      }
+    `);
+  });
+
+  test("populates an error if it is a preview with an invalid token", async () => {
+    // Mock auth token
+    store.state.source.auth = "Bearer INVALID";
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([post1]))
+      .mockRejectedValueOnce(new ServerError("Forbidden", 403, "Forbidden"));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/?preview=true");
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("ignores the preview parameter if there is no auth token", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([post1]))
+      .mockRejectedValueOnce(new ServerError("Forbidden", 403, "Forbidden"));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/?preview=true");
+    expect(api.get).toHaveBeenCalledTimes(1);
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -221,17 +286,32 @@ describe("attachment", () => {
   });
 
   test("overwrites the data when fetched with { force: true }", async () => {
-    // Mock Api responses
-    api.get = jest
-      .fn()
-      .mockResolvedValueOnce(mockResponse([post1]))
-      .mockResolvedValueOnce(mockResponse(attachment1));
+    api.get = jest.fn((_) => Promise.resolve(mockResponse([post1])));
 
     // Fetch entities
     await store.actions.source.fetch("/post-1");
+
+    // Restore the mock (just change the ID)
+    api.get = jest.fn((_) =>
+      Promise.resolve(mockResponse([{ ...post1, id: 2 }]))
+    );
+
+    // Fetch again
     await store.actions.source.fetch("/post-1", { force: true });
 
     expect(store.state.source).toMatchSnapshot();
+
+    // Should have the new ID now
+    const data = store.state.source.get("/post-1");
+    expect(isPostType(data) && data.id).toEqual(2);
+
+    // Delete the IDs because there are different
+    const firstPost = store.state.source.post[1];
+    const secondPost = store.state.source.post[2];
+    delete firstPost.id;
+    delete secondPost.id;
+
+    expect(firstPost).toMatchObject(secondPost);
   });
 
   test("Every unknown URL should return a 404 even if it's substring matches a path", async () => {
