@@ -1,7 +1,6 @@
 import { Action, State, Derived, Package } from "frontity/types";
 import Source, { DataEntity } from "@frontity/source/types";
 import { Api } from "./src/libraries";
-import Router from "@frontity/router/types";
 
 /**
  * A Frontity source package for the REST API of self-hosted WordPress and
