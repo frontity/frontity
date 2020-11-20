@@ -38,7 +38,14 @@ export interface Theme extends Package {
  * Merge of the types of all the namespaces required by the {@link Link}
  * component.
  */
-export type Packages = Source & Router & Theme;
+export type Packages = Source &
+  Router &
+  Theme & {
+    /**
+     * The optional match property. Needed to support multiple sites.
+     */
+    match?: RegExp[];
+  };
 
 /**
  * Props for React component {@link Link}.

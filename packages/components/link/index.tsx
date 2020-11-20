@@ -37,7 +37,7 @@ const Link: React.FC<LinkProps> = ({
   "aria-current": ariaCurrent,
   ...anchorProps
 }) => {
-  const { state, actions } = useConnect<Packages>();
+  const { state, actions, match } = useConnect<Packages>();
   const { ref: inViewRef, inView } = useInView({
     triggerOnce: true,
     rootMargin: "200px",
@@ -60,7 +60,7 @@ const Link: React.FC<LinkProps> = ({
   }
 
   const link = replaceSourceUrls
-    ? removeSourceUrl(rawLink, state.source.url)
+    ? removeSourceUrl(rawLink, state.source.url, match)
     : rawLink;
 
   const autoPrefetch = state.theme?.autoPrefetch;
