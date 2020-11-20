@@ -4,8 +4,9 @@ const task: taskTypes = cy.task;
 
 describe("WP Source", () => {
   before(() => {
-    task("installPlugin", {
-      name: "code-snippets",
+    task("installPlugin", { name: "code-snippets" });
+    task("loadDatabase", {
+      path: "./wp-data/wp-source/wp-source-errors.sql",
     });
   });
 
