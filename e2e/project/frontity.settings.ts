@@ -36,10 +36,6 @@ const settings: Settings<
         name: "@frontity/tiny-router",
         state: { router: { autoFetch: false } },
       },
-      {
-        name: "@frontity/wp-source",
-        state: { source: { url: "https://test.frontity.org/" } },
-      },
       "e2e-fonts",
     ],
   },
@@ -49,10 +45,6 @@ const settings: Settings<
       {
         name: "@frontity/tiny-router",
         state: { router: { autoFetch: false } },
-      },
-      {
-        name: "@frontity/wp-source",
-        state: { source: { url: "https://test.frontity.org/" } },
       },
       "e2e-emotion",
     ],

@@ -354,7 +354,7 @@ interface WpSource extends Source<Packages> {
         /**
          * The Frontity state.
          */
-        state: State<WpSource>;
+        state: State<Packages>;
 
         /**
          * The Response object.
@@ -452,7 +452,7 @@ interface WpSource extends Source<Packages> {
 /**
  * Packages used internally by wp-source.
  */
-export type Packages = WpSource & Package & Router;
+export type Packages = WpSource & Package;
 
 export default WpSource;
 
@@ -544,7 +544,7 @@ export interface Pattern<F extends (...args: any) => any> {
  *
  * @returns - Returns a promise that is resolved when the handler has finished.
  */
-export interface Handler<Pkg extends Source = WpSource & Router> {
+export interface Handler<Pkg extends Source = WpSource> {
   (args: {
     /**
      * The link that is being fetched.

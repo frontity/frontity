@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import * as frontity from "frontity";
-import Router from "@frontity/router/types";
 import merge from "deepmerge";
 import clone from "clone-deep";
 import { InitializedStore, createStore } from "@frontity/connect";
@@ -10,7 +9,7 @@ import { ServerError } from "@frontity/source";
 import { RedirectionData } from "@frontity/source/types/data";
 
 let handler: jest.Mocked<Pattern<Handler>>;
-let store: InitializedStore<WpSource & Router>;
+let store: InitializedStore<WpSource>;
 let mockedFetch: jest.MockedFunction<typeof fetch>;
 
 declare global {
@@ -60,7 +59,7 @@ beforeEach(() => {
   (frontity.fetch as typeof fetch) = mockedFetch;
 
   // Initialize the store
-  store = createStore<WpSource & Router>(
+  store = createStore<WpSource>(
     clone(
       merge(
         wpSource(),
