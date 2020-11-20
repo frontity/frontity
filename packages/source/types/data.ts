@@ -443,7 +443,7 @@ export interface RedirectionData extends Data {
    *
    * @example 301
    */
-  redirectionStatus: number;
+  redirectionStatus: 301 | 302 | 307 | 308;
 
   // HTTP status types.
   /* eslint-disable jsdoc/require-jsdoc */
