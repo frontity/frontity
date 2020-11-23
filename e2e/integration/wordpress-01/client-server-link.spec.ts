@@ -22,7 +22,7 @@ describe("Tiny Router", () => {
     cy.visit("http://localhost:8080/?utm=client&frontity_name=wp-basic-tests");
 
     // The "utm" parameter should be turned into "/?utm=SERVER" by the WordPress
-    // instance. The "frontity_name" parameter is removed by Frontity.
+    // instance.
     cy.window()
       .its("frontity")
       .its("state")
@@ -30,9 +30,7 @@ describe("Tiny Router", () => {
       .its("link")
       .should("equal", "/?utm=SERVER");
 
-    // The "frontity_name" parameter is removed by Frontity.
-    // TODO: currently, that parameter is preserved. Maybe it is not needed to
-    // remove it.
+    // The "utm" parameter should have not changed in the browser.
     cy.location()
       .its("search")
       .should("equal", "?utm=client&frontity_name=wp-basic-tests");
