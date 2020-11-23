@@ -87,7 +87,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     window.history.replaceState(
       { ...state.router.state },
       "",
-      state.router.link
+      location.pathname + location.search + location.hash
     );
     // Listen to changes in history.
     window.addEventListener("popstate", (event) => {
