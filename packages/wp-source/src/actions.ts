@@ -97,12 +97,11 @@ const actions: WpSource["actions"]["source"] = {
         source.data[link].route === normalize(state.source.subdirectory || "/");
 
       // Populate the data object.
-      source.data[link] = {
-        ...source.data[link],
+      Object.assign(source.data[link], {
         ...(isHome && { isHome: true }),
         isFetching: false,
         isReady: true,
-      };
+      });
     } catch (e) {
       // It's a server error (4xx or 5xx).
       if (e instanceof ServerError) {
