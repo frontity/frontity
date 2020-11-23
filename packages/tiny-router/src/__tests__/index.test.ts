@@ -192,6 +192,12 @@ describe("actions", () => {
 
       normalize.mockReturnValueOnce(link);
 
+      // Return an empty data object to mock a not-fetched link.
+      get.mockReturnValueOnce({
+        isReady: false,
+        isFetching: false,
+      });
+
       // checks that there is an event listener handleling `popstate`.
       window.dispatchEvent(
         new PopStateEvent("popstate", { state: { some: "different state" } })
@@ -199,6 +205,10 @@ describe("actions", () => {
 
       expect(store.state.router.link).toBe(link);
       expect(store.state.router.state).toEqual({ some: "different state" });
+
+      // The data object is not ready, so the `popstate` event listener should
+      // call `actions.source.fetch()`.
+      expect(fetch).toHaveBeenCalledWith(link);
     });
   });
 

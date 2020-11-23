@@ -59,7 +59,8 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     window.history.replaceState(options.state, "", link);
     if (state.router.autoFetch) actions.source?.fetch(link);
   } else if (options.method === "pop") {
-    if (state.router.autoFetch && !state.source?.get(link).isReady)
+    const data = state.source?.get(link);
+    if (state.router.autoFetch && !(data.isReady || data.isFetching))
       actions.source?.fetch(link);
   }
 
