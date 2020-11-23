@@ -58,6 +58,9 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   } else if (options.method === "replace") {
     window.history.replaceState(options.state, "", link);
     if (state.router.autoFetch) actions.source?.fetch(link);
+  } else if (options.method === "pop") {
+    if (state.router.autoFetch && !state.source?.get(link).isReady)
+      actions.source?.fetch(link);
   }
 
   // Finally, set the `state.router.link` property to the new value.
