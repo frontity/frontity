@@ -14,7 +14,7 @@ describe("WP Source errors", () => {
     it("should return a 200 status code", () => {
       cy.request("http://localhost:3001/?frontity_name=wp-source-errors")
         .its("status")
-        .should("be", 200);
+        .should("equal", 200);
     });
 
     it("should return a 404 status code", () => {
@@ -24,7 +24,7 @@ describe("WP Source errors", () => {
         failOnStatusCode: false,
       })
         .its("status")
-        .should("be", 404);
+        .should("equal", 404);
     });
 
     it("should return a 500 status code", () => {
@@ -34,7 +34,7 @@ describe("WP Source errors", () => {
         failOnStatusCode: false,
       })
         .its("status")
-        .should("be", 500);
+        .should("equal", 500);
     });
   });
 
