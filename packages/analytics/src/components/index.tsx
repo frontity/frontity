@@ -39,9 +39,10 @@ const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
       titleTemplate={!isReady ? "%s " : ""}
       onChangeClientState={({ title }) => {
         if (isReady && !isPageviewSent) {
+          const { pathname, search, hash } = window.location;
           // Send pageview.
           actions.analytics.pageview({
-            link: state.router.link,
+            link: pathname + search + hash,
             title,
           });
           // Mark pageview as sent.
