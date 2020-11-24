@@ -87,7 +87,15 @@ const analytics: Analytics = {
   state: {
     source: {
       data: {},
-      get: ({ state }) => (link) => state.source.data[link],
+      get: ({ state }) => (link) =>
+        state.source.data[link] || {
+          isFetching: false,
+          isReady: false,
+          link,
+          route: link,
+          page: 1,
+          query: {},
+        },
     },
     analytics: {
       pageviews: {
