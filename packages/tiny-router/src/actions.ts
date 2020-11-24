@@ -93,7 +93,7 @@ export const updateState: TinyRouter["actions"]["router"]["updateState"] = ({
   state,
 }) => (browserState: object) => {
   state.router.state = browserState;
-  window.history.replaceState(clone(browserState), "", state.router.link);
+  window.history.replaceState(clone(browserState), "");
 };
 
 export const init: TinyRouter["actions"]["router"]["init"] = ({
