@@ -79,9 +79,9 @@ beforeEach(() => {
     name: "always",
     priority: 10,
     pattern: "/(.*)",
-    func: jest.fn(async ({ route, state }) => {
+    func: jest.fn(async ({ link, state }) => {
       await Promise.resolve();
-      Object.assign(state.source.data[route], {
+      Object.assign(state.source.data[link], {
         type: "example",
         id: 1,
         isPostType: true,
