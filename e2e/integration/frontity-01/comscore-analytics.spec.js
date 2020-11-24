@@ -1,7 +1,7 @@
 describe("Comscore", () => {
   const pageviewHome = {
     title: "Homepage Title",
-    location: "http://localhost:3001/",
+    location: "http://localhost:3001/?frontity_name=comscore-analytics",
   };
 
   const pageviewSomePost = {
@@ -50,7 +50,9 @@ describe("Comscore", () => {
   });
 
   it("should load the Comscore library", () => {
-    cy.get(`script[src="https://sb.scorecardresearch.com/beacon.js"][async]`);
+    cy.get(
+      `script[src="https://sb.scorecardresearch.com/beacon.js"][async]`
+    ).should("exist");
   });
 
   it("should have sent the first pageview", () => {

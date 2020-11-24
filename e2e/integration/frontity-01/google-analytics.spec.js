@@ -11,7 +11,7 @@ const expectGaToHaveBeenCalledWith = (win, data) => {
 
 const pageviewHome = {
   title: "Homepage Title",
-  link: "/",
+  link: "/?frontity_name=google-analytics",
 };
 
 const pageviewSomePost = {
@@ -36,7 +36,7 @@ describe("Google Analytics", () => {
     // Make sure the <script> was created.
     cy.get(
       `script[src="https://www.google-analytics.com/analytics.js"][async]`
-    );
+    ).should("exist");
 
     // Make sure the Google Analytics library has loaded.
     cy.window().should("have.property", "ga");

@@ -1,7 +1,7 @@
 describe("Google Tag Manager", () => {
   const pageviewHome = {
     event: "pageview",
-    link: "/",
+    link: "/?frontity_name=google-tag-manager",
     title: "Homepage Title",
   };
 
@@ -23,7 +23,7 @@ describe("Google Tag Manager", () => {
   it("should load Google Tag Manager library", () => {
     cy.get(
       `script[src="https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXX-X"]`
-    );
+    ).should("exist");
   });
 
   it("should have sent the first pageview", () => {
