@@ -65,7 +65,11 @@ const actions: WpSource["actions"]["source"] = {
     // Make sure isFetching is true before starting the fetch.
     source.data[link].isFetching = true;
 
-    let redirectionPromise: Promise<Response>;
+    let redirectionResponse: Response;
+
+    // These are different from the "redirection" below - this setting is
+    // used for handling 30x redirections that can be stored in the WordPress database.
+    const { redirections } = state.source;
 
     // Get and execute the corresponding handler based on path.
     try {
@@ -74,32 +78,43 @@ const actions: WpSource["actions"]["source"] = {
       const redirection = getMatch(route, libraries.source.redirections);
       if (redirection) route = redirection.func(redirection.params);
 
-      // These are different from the "redirections" above - this setting is
-      // used for handling 30x redirections that can be stored in the WordPress database.
-      const { redirections } = state.source;
-
-      // The router redirections can be an array.
+      // The router redirections can be an array of (RegExp | "404")[].
       if (Array.isArray(redirections)) {
         const patterns = redirections
           .filter((r) => r.startsWith("RegExp:"))
           .map((r) => r.replace(/^RegExp:/, ""));
 
         if (patterns.some((r) => route.match(r))) {
-          redirectionPromise = fetch(state.source.url + link, {
+          redirectionResponse = await fetch(state.source.url + link, {
             method: "HEAD",
           });
         }
         // Or it can be "all".
       } else if (redirections === "all") {
-        redirectionPromise = fetch(state.source.url + link, { method: "HEAD" });
+        redirectionResponse = await fetch(state.source.url + link, {
+          method: "HEAD",
+        });
         // Or it can be just a regex or null/undefined (so we use the optional chaining)
       } else if (redirections?.startsWith("RegExp:")) {
         const regex = redirections.replace(/^RegExp:/, "");
         if (link.match(regex)) {
-          redirectionPromise = fetch(state.source.url + link, {
+          redirectionResponse = await fetch(state.source.url + link, {
             method: "HEAD",
           });
         }
+      }
+
+      if (redirectionResponse?.redirected) {
+        const { pathname, search, hash } = new URL(redirectionResponse.url);
+        Object.assign(source.data[link], {
+          location: pathname + search + hash,
+          redirectionStatus: redirectionResponse.status,
+          [`is${redirectionResponse.status}`]: true,
+          isFetching: false,
+          isReady: true,
+          isRedirection: true,
+        });
+        return;
       }
 
       // Get the handler for this route.
@@ -143,63 +158,56 @@ const actions: WpSource["actions"]["source"] = {
         isReady: true,
       });
     } catch (e) {
-      // It's a server error (4xx or 5xx).
-      if (e instanceof ServerError) {
-        // Check if the error is 4xx and we want to handle redirections in case
-        // of an error.
-        if (e.status === 404) {
-          // If the route matched the redirection regex or
-          // state.source.redirections === 'all', then we have already started
-          // fetching the data, so just await it.
-          let head = redirectionPromise && (await redirectionPromise);
-
-          if (
-            !head &&
-            (state.source.redirections === "404" ||
-              (Array.isArray(state.source.redirections) &&
-                state.source.redirections.includes("404")))
-          ) {
-            try {
-              head = await fetch(state.source.url + link, { method: "HEAD" });
-            } catch (e) {
-              // If there is no redirection, we ignore it and just continue
-              // handling the 404 ServerError that was thrown previously.
-            }
-          }
-
-          if (head?.redirected) {
-            const { pathname, search, hash } = new URL(head.url);
-
-            Object.assign(source.data[link], {
-              location: pathname + search + hash,
-              redirectionStatus: head.status,
-              [`is${head.status}`]: true,
-              isFetching: false,
-              isReady: true,
-              isRedirection: true,
-            });
-            return;
-          }
-        }
-
-        console.error(e);
-
-        const errorData: ErrorData = {
-          isError: true,
-          isReady: true,
-          isFetching: false,
-          [`is${e.status}`]: true,
-          errorStatus: e.status,
-          errorStatusText: e.statusText,
-          route: linkParams.route,
-          link,
-          query,
-          page,
-        };
-        source.data[link] = errorData;
-      } else {
+      // If it's NOT a server error (4xx or 5xx) we should throw
+      if (!(e instanceof ServerError)) {
         throw e;
       }
+
+      if (
+        e.status === 404 &&
+        (redirections === "404" ||
+          (Array.isArray(redirections) && redirections.includes("404")))
+      ) {
+        let redirection: Response;
+        try {
+          redirection = await fetch(state.source.url + link, {
+            method: "HEAD",
+          });
+        } catch (e) {
+          // If there is no redirection, we ignore it and just continue
+          // handling the 404 ServerError that was thrown previously.
+        }
+
+        if (redirection?.redirected) {
+          const { pathname, search, hash } = new URL(redirection.url);
+
+          Object.assign(source.data[link], {
+            location: pathname + search + hash,
+            redirectionStatus: redirection.status,
+            [`is${redirection.status}`]: true,
+            isFetching: false,
+            isReady: true,
+            isRedirection: true,
+          });
+          return;
+        }
+      }
+
+      console.error(e);
+
+      const errorData: ErrorData = {
+        isError: true,
+        isReady: true,
+        isFetching: false,
+        [`is${e.status}`]: true,
+        errorStatus: e.status,
+        errorStatusText: e.statusText,
+        route: linkParams.route,
+        link,
+        query,
+        page,
+      };
+      source.data[link] = errorData;
     }
   },
 
