@@ -105,22 +105,21 @@ describe("redirections: all", () => {
     expect(mockedFetch).toHaveBeenCalledTimes(1);
     expect(mockedFetch).toHaveBeenCalledWith(...fetchRedirectionParams);
 
-    expect(handler.func).toHaveBeenCalledTimes(1);
-    // Check that we have called the `fetch()` before calling the handler
-    expect(mockedFetch).toHaveBeenCalledBefore(handler.func);
+    expect(handler.func).not.toHaveBeenCalled();
 
     expect(store.state.source.data).toMatchInlineSnapshot(`
       Object {
         "/some-post/": Object {
-          "id": 1,
+          "is301": true,
           "isFetching": false,
-          "isPostType": true,
           "isReady": true,
+          "isRedirection": true,
           "link": "/some-post/",
+          "location": "/redirected-url",
           "page": 1,
           "query": Object {},
+          "redirectionStatus": 301,
           "route": "/some-post/",
-          "type": "example",
         },
       }
     `);
@@ -305,8 +304,7 @@ describe("redirections: RegExp and RegExp[]", () => {
     expect(mockedFetch).toHaveBeenCalledTimes(1);
     expect(mockedFetch).toHaveBeenCalledWith(...fetchRedirectionParams);
 
-    expect(handler.func).toHaveBeenCalledTimes(1);
-    expect(mockedFetch).toHaveBeenCalledBefore(handler.func);
+    expect(handler.func).not.toHaveBeenCalled();
 
     expect(store.state.source.data).toMatchInlineSnapshot(`
       Object {
@@ -363,8 +361,7 @@ describe("redirections: RegExp and RegExp[]", () => {
     expect(mockedFetch).toHaveBeenCalledTimes(1);
     expect(mockedFetch).toHaveBeenCalledWith(...fetchRedirectionParams);
 
-    expect(handler.func).toHaveBeenCalledTimes(1);
-    expect(mockedFetch).toHaveBeenCalledBefore(handler.func);
+    expect(handler.func).not.toHaveBeenCalled();
 
     expect(store.state.source.data).toMatchInlineSnapshot(`
       Object {
@@ -430,12 +427,7 @@ describe("redirections: RegExp and RegExp[]", () => {
     expect(mockedFetch).toHaveBeenCalledTimes(1);
     expect(mockedFetch).toHaveBeenCalledWith(...fetchRedirectionParams);
 
-    expect(handler.func).toHaveBeenCalledTimes(1);
-
-    // The fetch should have been called before the handler, so that we can
-    // start fetching the redirection early and can then re-use that promise
-    // when the handler throws a 404.
-    expect(mockedFetch).toHaveBeenCalledBefore(handler.func);
+    expect(handler.func).not.toHaveBeenCalled();
 
     expect(store.state.source.data).toMatchInlineSnapshot(`
       Object {
