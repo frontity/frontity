@@ -71,6 +71,9 @@ const actions: WpSource["actions"]["source"] = {
     // used for handling 30x redirections that can be stored in the WordPress database.
     const { redirections } = state.source;
 
+    // Remove the trailing slash before concatenating the link
+    const redirectionURL = state.source.url.replace(/\/$/, "") + link;
+
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
@@ -85,22 +88,16 @@ const actions: WpSource["actions"]["source"] = {
           .map((r) => r.replace(/^RegExp:/, ""));
 
         if (patterns.some((r) => route.match(r))) {
-          redirectionResponse = await fetch(state.source.url + link, {
-            method: "HEAD",
-          });
+          redirectionResponse = await fetch(redirectionURL, { method: "HEAD" });
         }
         // Or it can be "all".
       } else if (redirections === "all") {
-        redirectionResponse = await fetch(state.source.url + link, {
-          method: "HEAD",
-        });
+        redirectionResponse = await fetch(redirectionURL, { method: "HEAD" });
         // Or it can be just a regex or null/undefined (so we use the optional chaining)
       } else if (redirections?.startsWith("RegExp:")) {
         const regex = redirections.replace(/^RegExp:/, "");
         if (link.match(regex)) {
-          redirectionResponse = await fetch(state.source.url + link, {
-            method: "HEAD",
-          });
+          redirectionResponse = await fetch(redirectionURL, { method: "HEAD" });
         }
       }
 
@@ -170,9 +167,7 @@ const actions: WpSource["actions"]["source"] = {
       ) {
         let redirection: Response;
         try {
-          redirection = await fetch(state.source.url + link, {
-            method: "HEAD",
-          });
+          redirection = await fetch(redirectionURL, { method: "HEAD" });
         } catch (e) {
           // If there is no redirection, we ignore it and just continue
           // handling the 404 ServerError that was thrown previously.
