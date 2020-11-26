@@ -29,24 +29,7 @@
           "comment": "",
           "command": "click",
           "target": "css=[data-button-id=\"switch-to-about\"]",
-          "targets": [
-            [
-              "css=button:nth-child(2)",
-              "css:finder"
-            ],
-            [
-              "xpath=//div[@id='root']/button[2]",
-              "xpath:idRelative"
-            ],
-            [
-              "xpath=//button[2]",
-              "xpath:position"
-            ],
-            [
-              "xpath=//button[contains(.,'About (with trailing slash)')]",
-              "xpath:innerText"
-            ]
-          ],
+          "targets": [],
           "value": ""
         },
         {
@@ -72,6 +55,14 @@
           "target": "window.history.back()",
           "targets": [],
           "value": ""
+        },
+        {
+          "id": "9ac87612-2f51-4a5b-ad43-07d82b4eba65",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=[data-test-id=\"content\"]",
+          "targets": [],
+          "value": "Home"
         }
       ]
     },
@@ -86,6 +77,14 @@
           "target": "/?frontity_name=google-ad-manager",
           "targets": [],
           "value": ""
+        },
+        {
+          "id": "f2b8bbe4-8335-4877-aa5d-a6b2dc5ec53b",
+          "comment": "",
+          "command": "waitForElementPresent",
+          "target": "css=#header-ad>div>iframe",
+          "targets": [],
+          "value": "30000"
         },
         {
           "id": "d08c3657-aab9-497e-854f-5e54da7948eb",
@@ -160,6 +159,60 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "6341a75a-9956-478a-9c63-be7ece2b51c8",
+      "name": "loadable",
+      "commands": [
+        {
+          "id": "12bb43c1-d105-4c41-a470-ac8bedf980f6",
+          "comment": "",
+          "command": "open",
+          "target": "/?frontity_name=loadable",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "4b41367d-4df6-4914-ae64-63e1a72a861d",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=[data-test-id='dynamic-div']",
+          "targets": [],
+          "value": "I am the Dynamic1 component"
+        },
+        {
+          "id": "bea0620a-102a-4073-a301-8c88c462784e",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=[data-test-id='dynamic2-div']",
+          "targets": [],
+          "value": "I am the Dynamic2 component"
+        },
+        {
+          "id": "52f83c53-fc69-4708-b985-039d818c7d03",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=[data-test-id='toggle-div']",
+          "targets": [],
+          "value": "OFF"
+        },
+        {
+          "id": "8a6d80f1-3048-4e89-ad3d-8bc3b0eb9786",
+          "comment": "",
+          "command": "click",
+          "target": "css=[data-test-id='toggle-button']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "f74ebfaa-349b-4335-9953-0f6db59d8d00",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=[data-test-id='toggle-div']",
+          "targets": [],
+          "value": "ON"
+        }
+      ]
     }
   ],
   "suites": [
@@ -167,11 +220,12 @@
       "id": "1c986146-9566-45bb-b8dc-51d5aa5b6c33",
       "name": "Frontity",
       "persistSession": false,
-      "parallel": false,
+      "parallel": true,
       "timeout": 300,
       "tests": [
         "dc4b2f90-d592-476f-8c87-636fa3f4e55b",
-        "1183e2c5-08f9-480f-9f97-79d35d167b2d"
+        "1183e2c5-08f9-480f-9f97-79d35d167b2d",
+        "6341a75a-9956-478a-9c63-be7ece2b51c8"
       ]
     }
   ],
