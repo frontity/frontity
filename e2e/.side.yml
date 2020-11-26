@@ -1,0 +1,11 @@
+capabilities:
+  browserName: "Chrome"
+  browser_version: "49"
+  os: "Windows"
+  os_version: "10"
+  resolution: "1024x768"
+  name: "Frontity -  Chrome 49"
+  browserstack.debug: true
+  browserstack.console: "errors"
+  browserstack.networkLogs: true
+server: "https://frontity1:qrNKVFgfHEZpibcpSzJz@hub-cloud.browserstack.com/wd/hub"
