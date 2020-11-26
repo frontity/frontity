@@ -1,56 +1,9 @@
-import { initPlugin } from "cypress-plugin-snapshots/plugin";
-import execa from "execa";
-
-/**
- * Installs a WordPress plugin.
- * Oficial WP CLI docs: https://developer.wordpress.org/cli/commands/plugin/install/.
- *
- * @returns Null if successful. Throws an error otherwise.
- */
-interface InstallPlugin {
-  /**
-   * The name of the plugin.
-   */
-  name: string;
-  /**
-   * The version of the plugin.
-   */
-  version?: string;
-}
-
-/**
- * Update an option value using the WP CLI.
- * You use this task to update any option listed in:
- * https://developer.wordpress.org/cli/commands/option/list/.
- *
- * @returns Null if successful. Throws an error otherwise.
- */
-interface UpdateOption {
-  /**
-   * The name of the option.
-   */
-  name: string;
-  /**
-   * The value to set for the option.
-   */
-  value: any;
-}
-
-/**
- * Loads a new database from an SQL dump file.
- *
- * @returns Null if successful. Throws an error otherwise.
- */
-interface LoadDatabase {
-  /**
-   * The path where the database SQL file is located. Relative to
-   * the `e2e` folder.
-   */
-  path: string;
-}
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { initPlugin } = require("cypress-plugin-snapshots/plugin");
+const execa = require("execa");
 
 const tasks = {
-  installPlugin({ name, version }: InstallPlugin) {
+  installPlugin({ name, version }) {
     return (async () => {
       await execa.command(
         `docker-compose run --rm wpcli wp plugin install ${name}${
@@ -62,7 +15,7 @@ const tasks = {
     })();
   },
 
-  loadDatabase({ path }: LoadDatabase) {
+  loadDatabase({ path }) {
     return (async () => {
       await execa.command(
         `docker-compose exec -T db mysql -uroot -ppassword wordpress < ${path}`,
@@ -114,7 +67,7 @@ const tasks = {
     })();
   },
 
-  updateOption({ name, value }: UpdateOption) {
+  updateOption({ name, value }) {
     return (async () => {
       await execa(
         "docker-compose",
@@ -127,16 +80,6 @@ const tasks = {
     })();
   },
 };
-
-/**
- * The utility type which facilitates extracting the types for the
- * individual cypress tasks.
- */
-export type taskTypes = <T extends keyof typeof tasks>(
-  event: T,
-  arg?: Parameters<typeof tasks[T]>[0],
-  options?: Partial<Cypress.Loggable & Cypress.Timeoutable>
-) => Cypress.Chainable<any>;
 
 /**
  * The plugins export.
