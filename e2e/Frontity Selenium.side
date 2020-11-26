@@ -1,0 +1,182 @@
+{
+  "id": "7582f126-4df3-4e19-9a77-9cd36e691d00",
+  "version": "2.0",
+  "name": "Frontity",
+  "url": "https://frontity-e2e.vercel.app/",
+  "tests": [
+    {
+      "id": "dc4b2f90-d592-476f-8c87-636fa3f4e55b",
+      "name": "tiny-router",
+      "commands": [
+        {
+          "id": "14b54776-30b2-40ee-9439-efe9cb67ec53",
+          "comment": "",
+          "command": "open",
+          "target": "/?frontity_name=tiny-router",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "6649c0ce-2859-4298-a805-7c09fa005921",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=[data-test-id=\"content\"]",
+          "targets": [],
+          "value": "Home"
+        },
+        {
+          "id": "13b5d1de-ae12-4645-ba41-f49be28649ba",
+          "comment": "",
+          "command": "click",
+          "target": "css=[data-button-id=\"switch-to-about\"]",
+          "targets": [
+            [
+              "css=button:nth-child(2)",
+              "css:finder"
+            ],
+            [
+              "xpath=//div[@id='root']/button[2]",
+              "xpath:idRelative"
+            ],
+            [
+              "xpath=//button[2]",
+              "xpath:position"
+            ],
+            [
+              "xpath=//button[contains(.,'About (with trailing slash)')]",
+              "xpath:innerText"
+            ]
+          ],
+          "value": ""
+        },
+        {
+          "id": "6c47fb66-c952-4cad-9620-4ec226363c8f",
+          "comment": "",
+          "command": "executeScript",
+          "target": "return window.location.pathname",
+          "targets": [],
+          "value": "pathname"
+        },
+        {
+          "id": "2d7c0121-dd54-4b93-8bad-84408a5057e2",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=[data-test-id=\"content\"]",
+          "targets": [],
+          "value": "About"
+        },
+        {
+          "id": "0c299028-b431-401c-97a0-762628f99654",
+          "comment": "",
+          "command": "executeScript",
+          "target": "window.history.back()",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "1183e2c5-08f9-480f-9f97-79d35d167b2d",
+      "name": "google-ad-manager",
+      "commands": [
+        {
+          "id": "d9bdec6c-3376-4a57-a6ff-4baaaeb42d07",
+          "comment": "",
+          "command": "open",
+          "target": "/?frontity_name=google-ad-manager",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "d08c3657-aab9-497e-854f-5e54da7948eb",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=#header-ad>div>iframe",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "cb118d7d-efb7-4bc1-b4eb-987a090813d0",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=#footer-ad>div>iframe",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "63e37990-134d-498d-ba5c-c5f753f644ce",
+          "comment": "",
+          "command": "click",
+          "target": "css=button#change-link",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "1da9d292-f90d-4e39-b207-c56bf537582a",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=#header-ad_post>div>iframe",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "17bce925-cf26-4b94-bdf3-e7ca3f58f053",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=#footer-ad_post>div>iframe",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "d9312329-d837-4113-907c-71d84a077246",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=#content-ad_post>div>iframe",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "d71501cf-2645-472b-8def-5721a4ec14db",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=#content-ad_next-post>div>iframe",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c0ed385b-4357-4b64-ba8b-632ca10e49f6",
+          "comment": "",
+          "command": "click",
+          "target": "css=button#change-link-gpt",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "2d7a9a79-ec36-44ba-9517-55afcd89efd7",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=#post-with-gpt-ad>div>iframe",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "1c986146-9566-45bb-b8dc-51d5aa5b6c33",
+      "name": "Frontity",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "dc4b2f90-d592-476f-8c87-636fa3f4e55b",
+        "1183e2c5-08f9-480f-9f97-79d35d167b2d"
+      ]
+    }
+  ],
+  "urls": [
+    "https://frontity-e2e.vercel.app/"
+  ],
+  "plugins": []
+}
