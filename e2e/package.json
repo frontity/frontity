@@ -2,17 +2,29 @@
   "name": "e2e",
   "private": false,
   "scripts": {
-    "start": "./e2e.js",
-    "start:only-e2e": "./e2e.js --suite e2e"
+    "start": "node e2e.js",
+    "browserstack": "nodenv --exec 'browserstack-cypress run'",
+    "local:macos": "nodenv --exec './browserstack-local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\"'",
+    "local:macos:start": "nodenv --exec './browserstack-local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start'",
+    "local:macos:stop": "nodenv --exec './browserstack-local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop'",
+    "local:win": "nodenv --exec './browserstack-local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\"'",
+    "local:win:start": "nodenv --exec './browserstack-local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start'",
+    "local:win:stop": "nodenv --exec './browserstack-local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop'",
+    "local:linux": "nodenv --exec './browserstack-local/linux --key \"$BROWSERSTACK_ACCESS_KEY\"'",
+    "local:linux:start": "nodenv --exec './browserstack-local/linux --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start'",
+    "local:linux:stop": "nodenv --exec './browserstack-local/linux --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop'"
   },
   "devDependencies": {
     "@types/cypress": "^1.1.3",
     "@types/execa": "^2.0.0",
     "@types/wait-on": "^4.0.0",
+    "chromedriver": "^86.0.0",
     "cypress": "^5.0.0",
     "cypress-plugin-snapshots": "^1.4.3",
     "execa": "^4.0.3",
     "minimist": "^1.2.5",
+    "node-env-run": "^4.0.2",
+    "selenium-side-runner": "^3.17.0",
     "wait-on": "^5.1.0"
   }
 }
