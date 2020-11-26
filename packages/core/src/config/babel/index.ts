@@ -1,11 +1,8 @@
 import { TransformOptions } from "@babel/core";
+import { TargetsOptions } from "@babel/preset-env";
 import { Target, Mode, BabelConfigs } from "../../../types";
 
-const targets: {
-  module: {};
-  es5: {};
-  server: {};
-} = {
+const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
   /**
    * Browsers with `<script type="module"></script>` support. This is the list.
    * - `android >= 61`
@@ -19,8 +16,8 @@ const targets: {
    *  */
 
   module: { esmodules: true },
-  // Browsers with Proxy support, which is needed by Overmind.
-  // For older browsers (ie8-11) we support AMP fallback.
+  // Browsers with Proxy support, which is required by Frontity Connect.
+  // For older browsers (ie8-11) Frontity supports SSR/AMP fallback.
   es5: {
     browsers: [
       "and_chr >= 67",
@@ -30,7 +27,7 @@ const targets: {
       "not android <= 4.4.4",
       "chrome >= 49",
       "edge >= 12",
-      "firefox >= 18",
+      "firefox >= 40",
       "ios_saf >= 10",
       "not op_mini all",
       "op_mob >= 46",
@@ -56,6 +53,7 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
           corejs: target !== "server" && "3",
           // debug: target !== "server",
           modules: false,
+          bugfixes: true,
         },
       ],
       "@babel/preset-react",
