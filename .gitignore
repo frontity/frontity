@@ -14,3 +14,4 @@ analyze
 e2e/**/*(failed).png
 coverage
 .vercel
+e2e/log/*

@@ -1,0 +1,40 @@
+{
+  "auth": {
+    "username": "$BROWSERSTACK_USERNAME",
+    "access_key": "$BROWSERSTACK_ACCESS_KEY"
+  },
+  "browsers": [
+    {
+      "browser": "chrome",
+      "os": "Windows 10",
+      "versions": ["latest"]
+    },
+    {
+      "browser": "firefox",
+      "os": "Windows 10",
+      "versions": ["latest"]
+    }
+  ],
+  "run_settings": {
+    "cypress_config_file": "./cypress.json",
+    "project_name": "Frontity",
+    "build_name": "Test build",
+    "exclude": [],
+    "parallels": "2",
+    "specs": ["integration/frontity-*/*.spec.js"],
+    "npm_dependencies": {
+      "cypress-plugin-snapshots": "^1.4.3",
+      "execa": "^4.0.3",
+      "expect": "^26.4.2"
+    },
+    "package_config_options": {}
+  },
+  "env": {
+    "CYPRESS_VIDEO": true,
+    "CYPRESS_SCREENSHOT_ON_RUN_FAILURE": true
+  },
+  "connection_settings": {
+    "local": true
+  },
+  "disable_usage_reporting": false
+}
