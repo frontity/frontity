@@ -46,9 +46,11 @@ let isBrowserStackLocalRunning = false;
 
 // Validate CLI args.
 validateArgs(target, { possibleValues: ["es5", "module", "both"] });
-validateArgs(browser, { possibleValues: ["firefox", "chrome", "edge"] });
 validateArgs(cypressCommand, {
   possibleValues: ["open", "run", "off", "browserstack"],
+});
+validateArgs(browser, {
+  possibleValues: ["firefox", "chrome", "edge", "electron"],
 });
 
 // We have to make sure that we are runnng inside of the e2e directory The

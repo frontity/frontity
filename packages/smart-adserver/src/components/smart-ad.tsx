@@ -10,14 +10,17 @@ interface StylesParams {
    * CallType: "std" | "iframe".
    */
   callType: string;
+
   /**
    * Width of the ad. Used with callType 'iframe'.
    */
   width: number;
+
   /**
    * Height of the ad. Used with callType 'iframe'.
    */
   height: number;
+
   /**
    * Minimum height of the container for the ad. Used with callType 'std'.
    */

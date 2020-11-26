@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { initPlugin } = require("cypress-plugin-snapshots/plugin");
 const execa = require("execa");
 

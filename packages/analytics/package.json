@@ -1,6 +1,6 @@
 {
   "name": "@frontity/analytics",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Base types and actions to build analytics packages for Frontity",
   "main": "src/index.ts",
   "keywords": [
@@ -22,8 +22,8 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "@frontity/source": "^1.2.2",
-    "@frontity/router": "^1.1.1",
-    "frontity": "^1.10.0"
+    "@frontity/source": "^1.4.0",
+    "@frontity/router": "^1.1.2",
+    "frontity": "^1.13.0"
   }
 }
