@@ -45,7 +45,7 @@ beforeEach(() => {
   // Initialize the store
   store = createStore<WpSource>(clone(wpSource(), { clone: false }));
 
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store.state.source.url = "https://test.frontity.org/";
 
   // Add mock handler to the store
   store.libraries.source.handlers.push(handler);
