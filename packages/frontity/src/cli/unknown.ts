@@ -1,4 +1,4 @@
-import didYouMean from "didyoumean";
+import leven from "leven";
 import { CommanderStatic } from "commander";
 import chalk from "chalk";
 
@@ -12,7 +12,9 @@ const unknown = (command: string, program: CommanderStatic) => {
   console.log(chalk.red(`Unknown command: ${chalk.bold(command)}`));
 
   const availableCommands: string[] = program.commands.map((c) => c._name);
-  const suggestion: string | string[] = didYouMean(command, availableCommands);
+  const suggestion: string = availableCommands.find(
+    (c) => leven(c, command) < 3
+  );
 
   if (suggestion) {
     console.log(chalk.cyan(`Did you mean '${suggestion}'?`));
