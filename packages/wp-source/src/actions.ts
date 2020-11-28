@@ -1,8 +1,9 @@
-import { error, fetch } from "frontity";
+import { error } from "frontity";
 import WpSource from "../types";
 import { parse, normalize, concatLink } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
+import { fetchRedirection } from "./libraries/fetch-redirection";
 import {
   postTypeHandler,
   postTypeArchiveHandler,
@@ -11,6 +12,11 @@ import {
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
 import { ServerError, isError, isSearch } from "@frontity/source";
+
+/**
+ * A helper type which lets you get the type of a thing that is wrapped in a promise.
+ */
+type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
@@ -65,7 +71,7 @@ const actions: WpSource["actions"]["source"] = {
     // Make sure isFetching is true before starting the fetch.
     source.data[link].isFetching = true;
 
-    let redirectionResponse: Response;
+    let redirectionResult: Awaited<ReturnType<typeof fetchRedirection>>;
 
     // These are different from the "redirection" below - this setting is
     // used for handling 30x redirections that can be stored in the WordPress database.
@@ -88,25 +94,34 @@ const actions: WpSource["actions"]["source"] = {
           .map((r) => r.replace(/^RegExp:/, ""));
 
         if (patterns.some((r) => route.match(r))) {
-          redirectionResponse = await fetch(redirectionURL, { method: "HEAD" });
+          redirectionResult = await fetchRedirection(
+            redirectionURL,
+            state.frontity.platform
+          );
         }
         // Or it can be "all".
       } else if (redirections === "all") {
-        redirectionResponse = await fetch(redirectionURL, { method: "HEAD" });
+        redirectionResult = await fetchRedirection(
+          redirectionURL,
+          state.frontity.platform
+        );
         // Or it can be just a regex or null/undefined (so we use the optional chaining)
       } else if (redirections?.startsWith("RegExp:")) {
         const regex = redirections.replace(/^RegExp:/, "");
         if (link.match(regex)) {
-          redirectionResponse = await fetch(redirectionURL, { method: "HEAD" });
+          redirectionResult = await fetchRedirection(
+            redirectionURL,
+            state.frontity.platform
+          );
         }
       }
 
-      if (redirectionResponse?.redirected) {
-        const { pathname, search, hash } = new URL(redirectionResponse.url);
+      if (redirectionResult?.isRedirection) {
+        const { pathname, search, hash } = new URL(redirectionResult.location);
         Object.assign(source.data[link], {
           location: pathname + search + hash,
-          redirectionStatus: redirectionResponse.status,
-          [`is${redirectionResponse.status}`]: true,
+          redirectionStatus: redirectionResult.status,
+          [`is${redirectionResult.status}`]: true,
           isFetching: false,
           isReady: true,
           isRedirection: true,
@@ -165,16 +180,19 @@ const actions: WpSource["actions"]["source"] = {
         (redirections === "404" ||
           (Array.isArray(redirections) && redirections.includes("404")))
       ) {
-        let redirection: Response;
+        let redirection: Awaited<ReturnType<typeof fetchRedirection>>;
         try {
-          redirection = await fetch(redirectionURL, { method: "HEAD" });
+          redirection = await fetchRedirection(
+            redirectionURL,
+            state.frontity.platform
+          );
         } catch (e) {
           // If there is no redirection, we ignore it and just continue
           // handling the 404 ServerError that was thrown previously.
         }
 
-        if (redirection?.redirected) {
-          const { pathname, search, hash } = new URL(redirection.url);
+        if (redirection?.isRedirection) {
+          const { pathname, search, hash } = new URL(redirection.location);
 
           Object.assign(source.data[link], {
             location: pathname + search + hash,
