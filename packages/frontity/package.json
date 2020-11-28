@@ -65,7 +65,6 @@
   "devDependencies": {
     "@frontity/connect": "^1.1.4",
     "@frontity/core": "^1.9.1",
-    "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
     "@types/node": "^12.12.53",
