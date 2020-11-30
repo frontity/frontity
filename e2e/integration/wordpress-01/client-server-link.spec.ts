@@ -21,21 +21,21 @@ describe("Tiny Router", () => {
   it("should work if there's a link mismatch between the server and the client", () => {
     cy.visit("http://localhost:8080/?utm=client&frontity_name=wp-basic-tests");
 
-    // The "utm" parameter should be turned into "/?utm=SERVER" by the WordPress
-    // instance. The "frontity_name" parameter is removed by Frontity.
+    // This test only checks that the link has actually changed in the server.
+    cy.window()
+      .its("frontity")
+      .its("state")
+      .its("frontity")
+      .its("initialLink")
+      .should("equal", "/?utm=SERVER");
+
+    // The "utm" parameter should be respected.
     cy.window()
       .its("frontity")
       .its("state")
       .its("router")
       .its("link")
-      .should("equal", "/?utm=SERVER");
-
-    // The "frontity_name" parameter is removed by Frontity.
-    // TODO: currently, that parameter is preserved. Maybe it is not needed to
-    // remove it.
-    cy.location()
-      .its("search")
-      .should("equal", "?utm=client&frontity_name=wp-basic-tests");
+      .should("equal", "/?utm=client");
 
     // The home should render correctly.
     cy.get("[data-test-id='1']").should("contain.text", "/hello-world");
@@ -47,9 +47,14 @@ describe("Tiny Router", () => {
     // Go back to the home. It should render the home again.
     cy.go("back");
 
-    cy.location()
-      .its("search")
-      .should("equal", "?utm=client&frontity_name=wp-basic-tests");
+    cy.window()
+      .its("frontity")
+      .its("state")
+      .its("router")
+      .its("link")
+      .should("equal", "/?utm=client");
+
+    cy.location().its("search").should("equal", "?utm=client");
 
     cy.get("[data-test-id='1']").should("contain.text", "/hello-world");
   });
