@@ -115,8 +115,6 @@ describe.each`
       }),
     };
 
-    store.state.source.api = "https://test.frontity.org/wp-json";
-
     store.libraries.source.handlers.push(handler);
   });
 
