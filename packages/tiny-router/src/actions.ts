@@ -83,7 +83,11 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
         ? libraries.source.normalize(state.frontity.initialLink)
         : state.frontity.initialLink;
   } else {
-    // Remove Frontity options from the browser URL.
+    // The link stored in `state.router.link` may be wrong if the server changes
+    // it in some cases (see https://github.com/frontity/frontity/issues/623).
+    // For that reason, it is replaced with the current link in the browser.
+
+    // Get the browser URL and remove the Frontity options.
     const browserURL = new URL(location.href);
     Array.from(browserURL.searchParams.keys()).forEach((key) => {
       if (key.startsWith("frontity_")) browserURL.searchParams.delete(key);
@@ -97,9 +101,9 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     // Add the state to the browser history and replace the link.
     window.history.replaceState({ ...state.router.state }, "", link);
 
-    // Compare it with `initialLink`.
+    // If the link from the browser and the link from the server are different,
+    // point the first one to the same data object pointed by the second one.
     if (link !== state.frontity.initialLink) {
-      // Assign current link to the same data object pointed by `initialLink`.
       if (state.source) {
         state.source.data[link] = state.source.get(state.frontity.initialLink);
       }
