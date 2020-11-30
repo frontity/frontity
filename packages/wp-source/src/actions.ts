@@ -62,15 +62,6 @@ const actions: WpSource["actions"]["source"] = {
       data.isFetching = true;
     }
 
-    // Always set link, route, query & page
-    source.data[link].link = link;
-    source.data[link].route = linkParams.route;
-    source.data[link].query = query;
-    source.data[link].page = page;
-
-    // Make sure isFetching is true before starting the fetch.
-    source.data[link].isFetching = true;
-
     let redirectionResult: Awaited<ReturnType<typeof fetchRedirection>>;
 
     // Get and execute the corresponding handler based on path.
