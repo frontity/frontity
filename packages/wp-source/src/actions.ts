@@ -73,19 +73,19 @@ const actions: WpSource["actions"]["source"] = {
 
     let redirectionResult: Awaited<ReturnType<typeof fetchRedirection>>;
 
-    // These are different from the "redirection" below - this setting is
-    // used for handling 30x redirections that can be stored in the WordPress database.
-    const { redirections } = state.source;
-
-    // Remove the trailing slash before concatenating the link
-    const redirectionURL = state.source.url.replace(/\/$/, "") + link;
-
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
       // Transform route if there is some redirection.
       const redirection = getMatch(route, libraries.source.redirections);
       if (redirection) route = redirection.func(redirection.params);
+
+      // These are different from the "redirection" above - this setting is
+      // used for handling 30x redirections that can be stored in the WordPress database.
+      const { redirections } = state.source;
+
+      // Remove the trailing slash before concatenating the link
+      const redirectionURL = state.source.url.replace(/\/$/, "") + link;
 
       // The router redirections can be an array of (RegExp | "404")[].
       if (Array.isArray(redirections)) {
@@ -175,12 +175,14 @@ const actions: WpSource["actions"]["source"] = {
         throw e;
       }
 
+      const { redirections } = state.source;
       if (
         e.status === 404 &&
         (redirections === "404" ||
           (Array.isArray(redirections) && redirections.includes("404")))
       ) {
         let redirection: Awaited<ReturnType<typeof fetchRedirection>>;
+        const redirectionURL = state.source.url.replace(/\/$/, "") + link;
         try {
           redirection = await fetchRedirection(
             redirectionURL,
