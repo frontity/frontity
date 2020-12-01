@@ -83,18 +83,6 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   actions,
   libraries,
 }) => {
-  // Observe the current data object when we are in the client. If it is ever a
-  // redirection, replace the current link with the new one using "replace" to
-  // keep the browser history consistent.
-  if (state.frontity.platform === "client") {
-    observe(() => {
-      const data = state.source?.get(state.router.link);
-      if (data && isRedirection(data)) {
-        actions.router.set(data.location, { method: "replace" });
-      }
-    });
-  }
-
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
     state.router.link =
@@ -102,6 +90,20 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
         ? libraries.source.normalize(state.frontity.initialLink)
         : state.frontity.initialLink;
   } else {
+    // Observe the current data object. If it is ever a redirection, replace the
+    // current link with the new one.
+    observe(() => {
+      const data = state.source?.get(state.router.link);
+      if (data && isRedirection(data)) {
+        actions.router.set(data.location, {
+          // Use "replace" to keep browser history consistent.
+          method: "replace",
+          // Keep the same history.state that the old link had.
+          state: state.router.state,
+        });
+      }
+    });
+
     // Replace the current url with the same one but with state.
     window.history.replaceState(
       { ...state.router.state },
