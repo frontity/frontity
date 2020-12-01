@@ -147,6 +147,59 @@ const Ttf: React.FC = () => {
 };
 
 /**
+ * A React compontent that adds the eot format.
+ *
+ * @returns React element.
+ */
+const Eot: React.FC = () => (
+  <>
+    <Global
+      styles={css`
+        @font-face {
+          font-family: "Aclonica";
+          font-style: normal;
+          font-weight: 400;
+          src: url(${aclonicaEot});
+          src: local("Aclonica Regular"), local("Aclonica-Regular"),
+            url(${aclonicaEot + "?#iefix"}) format("embedded-opentype");
+        }
+      `}
+    />
+    <Div data-test-id="div-with-font">Aclonica Font with eot!</Div>
+  </>
+);
+
+/**
+ * A React compontent that adds the svg font format.
+ *
+ * @returns React element.
+ */
+const SvgFont: React.FC = () => {
+  const [global, setGlobal] = React.useState(false);
+  return (
+    <>
+      {global && (
+        <Global
+          styles={css`
+            @font-face {
+              font-family: "Aclonica";
+              font-style: normal;
+              font-weight: 400;
+              src: local("Aclonica Regular"), local("Aclonica-Regular"),
+                url(${aclonicaSvg + "#Aclonica"}) format("svg");
+            }
+          `}
+        />
+      )}
+      <Div data-test-id="div-with-font">Aclonica Font with svg fonts!</Div>
+      <Button data-test-id="toggle-button" onClick={() => setGlobal(!global)}>
+        Toggle Global
+      </Button>
+    </>
+  );
+};
+
+/**
  * A simple react component that loads when fonts are not loaded.
  *
  * @returns React element.
@@ -161,6 +214,8 @@ const Font: React.FC = connect(({ state }) => {
   if (pathname === "/woff-1") return <Woff1 />;
   if (pathname === "/woff-2") return <Woff2 />;
   if (pathname === "/ttf") return <Ttf />;
+  if (pathname === "/eot") return <Eot />;
+  if (pathname === "/svg-font") return <SvgFont />;
   if (pathname === "/empty") return <Empty />;
 });
 
