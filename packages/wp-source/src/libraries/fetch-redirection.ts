@@ -1,6 +1,31 @@
 import { fetch } from "frontity";
 
 /**
+ * Return object of the {@link fetchRedirection} function.
+ */
+interface FetchDirectionReturn {
+  /**
+   * The Fetch API response.
+   */
+  response: Response;
+
+  /**
+   * The HTTP status.
+   */
+  status: number;
+
+  /**
+   * The new link.
+   */
+  location: string;
+
+  /**
+   * Wheter this is a redirection or not.
+   */
+  isRedirection: boolean;
+}
+
+/**
  * A helper for fetching the 30x redirections.
  * Used to abstract the differences in fetching the redirections
  * between the client and the server.
@@ -8,15 +33,12 @@ import { fetch } from "frontity";
  * @param link - The URL from which the redirection should be fetched.
  * @param platform - Should be either "client" or "server".
  *
- * @returns An object containing:
- * - the Fetch API Response,
- * - HTTP status
- * - `isRedirection` boolean flag.
+ * @returns An object defined in {@link FetchDirectionReturn}.
  */
 export const fetchRedirection = async (
   link: string,
   platform: "client" | "server"
-) => {
+): Promise<FetchDirectionReturn> => {
   let response: Response;
   let isRedirection: boolean;
   let status: number;
@@ -42,7 +64,7 @@ export const fetchRedirection = async (
       method: "HEAD",
     });
     isRedirection = response.redirected || false;
-    status = 301; // Default value on the client
+    status = 301; // Default value on the client.
     location = response.url;
   }
 
