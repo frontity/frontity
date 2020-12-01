@@ -292,10 +292,10 @@ describe("state.source.url & state.source.api", () => {
     });
     expect(store.state.source.url).toBe("https://domain.wordpress.com/");
     expect(store.state.source.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/https://domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
     );
     expect(store.state.wpSource.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/https://domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
     );
     expect(store.state.source.isWpCom).toBe(true);
     expect(store.state.wpSource.isWpCom).toBe(true);
@@ -309,10 +309,10 @@ describe("state.source.url & state.source.api", () => {
     });
     expect(store.state.source.url).toBe("https://domain.wordpress.com/");
     expect(store.state.source.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/https://domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
     );
     expect(store.state.wpSource.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/https://domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
     );
     expect(store.state.source.isWpCom).toBe(true);
     expect(store.state.wpSource.isWpCom).toBe(true);
@@ -326,10 +326,10 @@ describe("state.source.url & state.source.api", () => {
     });
     expect(store.state.source.url).toBe("https://domain.wordpress.com");
     expect(store.state.source.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/https://domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
     );
     expect(store.state.wpSource.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/https://domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
     );
     expect(store.state.source.isWpCom).toBe(true);
     expect(store.state.wpSource.isWpCom).toBe(true);
@@ -343,10 +343,10 @@ describe("state.source.url & state.source.api", () => {
     });
     expect(store.state.source.url).toBe("https://domain.wordpress.com/");
     expect(store.state.source.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/https://domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
     );
     expect(store.state.wpSource.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/https://domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
     );
     expect(store.state.source.isWpCom).toBe(true);
     expect(store.state.wpSource.isWpCom).toBe(true);

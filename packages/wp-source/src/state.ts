@@ -72,10 +72,13 @@ const state: WpSource["state"]["source"] = {
   // overwritten in frontity.settings.js.
   api: ({ state }) => {
     // Check if it's a free WordPress.com site.
-    if (/^https:\/\/(\w+\.)?wordpress\.com/.test(state.source.url))
+    if (/^https:\/\/(\w+\.)?wordpress\.com/.test(state.source.url)) {
+      const url = new URL(state.source.url);
+      const hostname = url.hostname;
       return addFinalSlash(
-        `https://public-api.wordpress.com/wp/v2/sites/${state.source.url}`
+        `https://public-api.wordpress.com/wp/v2/sites/${hostname}`
       );
+    }
 
     return addFinalSlash(
       addFinalSlash(state.source.url) + state.wpSource.prefix.replace(/^\//, "")
