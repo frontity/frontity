@@ -1,6 +1,7 @@
 import { Action, Package } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
+import WpSource from "@frontity/wp-source/types";
 
 /**
  * Package to do e2e testing of 301 redirections stored in the Wordpress database.
@@ -35,6 +36,6 @@ interface Redirections extends Package {
 /**
  * All packages used internally by Redirections.
  */
-export type Packages = Redirections & Source & Router;
+export type Packages = Redirections & Source & Router & WpSource;
 
 export default Redirections;

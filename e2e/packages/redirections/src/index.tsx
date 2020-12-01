@@ -80,6 +80,19 @@ const Component: React.FC = () => {
   );
 };
 
+const redirectionData = {
+  isRedirection: true,
+  is301: true,
+  redirectionStatus: 301,
+  page: 1,
+  link: "/redirected-url/",
+  isFetching: false,
+  isReady: true,
+  query: {},
+  route: "/redirected-url/",
+  location: "/hello-world-redirected/",
+};
+
 const redirections: Redirections = {
   roots: {
     redirections: connect(Component),
@@ -91,6 +104,22 @@ const redirections: Redirections = {
         if (query.redirections) {
           state.source.redirections = query.redirections;
         }
+
+        const handler = {
+          pattern: "/urls-with-redirections/:slug",
+          func: ({ state, link }) => {
+            state.source.data[link] = redirectionData;
+          },
+        };
+
+        libraries.source.handlers.push(handler);
+      },
+    },
+  },
+  state: {
+    source: {
+      data: {
+        "/redirected-url/": redirectionData,
       },
     },
   },

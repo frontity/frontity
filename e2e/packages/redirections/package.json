@@ -6,6 +6,7 @@
   "dependencies": {
     "@frontity/source": "^1.2.2",
     "@frontity/router": "^1.1.1",
+    "@frontity/wp-source": "^1.10.0",
     "frontity": "^1.4.3"
   }
 }

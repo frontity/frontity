@@ -219,4 +219,28 @@ describe("Redirections", () => {
     );
     cy.get("#post").should("exist");
   });
+
+  it("Should work with redirections defined directly in the state on the server", () => {
+    cy.visit(
+      "http://localhost:3001/redirected-url/?frontity_name=redirections"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
+
+  it("Should work with redirections defined as custom handlers", () => {
+    cy.visit(
+      "http://localhost:3001/urls-with-redirections/test/?frontity_name=redirections"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+  });
 });
