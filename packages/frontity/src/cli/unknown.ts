@@ -13,7 +13,7 @@ const unknown = (command: string, program: CommanderStatic) => {
 
   const availableCommands: string[] = program.commands.map((c) => c._name);
   const suggestion: string = availableCommands.find(
-    (c) => leven(c, command) < 3
+    (c) => leven(c, command) < c.length * 0.4
   );
 
   if (suggestion) {
