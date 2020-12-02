@@ -1,3 +1,8 @@
+/* eslint-disable jsdoc/require-jsdoc */
+/**
+ * Disable TSDocs because we are going to remove this babel plugin once we
+ * update to Emotion 11.
+ */
 import * as BabelTypes from "@babel/types";
 import { Visitor, NodePath } from "@babel/traverse";
 
@@ -42,6 +47,12 @@ function isImportSpecifier(
   return specifier.type === "ImportSpecifier";
 }
 
+function isImportedIdentifier(
+  imported: BabelTypes.Identifier | BabelTypes.StringLiteral
+): imported is BabelTypes.Identifier {
+  return imported.type === "Identifier";
+}
+
 // The main plugin.
 export default (babel: Babel): { name: string; visitor: Visitor } => {
   const types = babel.types;
@@ -63,44 +74,48 @@ export default (babel: Babel): { name: string; visitor: Visitor } => {
               const memberImports = path.node.specifiers.filter(
                 isImportSpecifier
               );
+
               // 2. Check if any of them is one of the ones we have to substitute.
               const hasImports = memberImports
-                .map((memberImport) => memberImport.imported.name)
-                .filter((name) => allNames.includes(name))
+                .map((memberImport) => memberImport.imported)
+                .filter(isImportedIdentifier)
+                .filter((imported) => allNames.includes(imported.name))
                 .reduce(() => true, false);
 
               if (hasImports) {
                 memberImports.forEach((memberImport) => {
-                  const memberName = memberImport.imported.name;
+                  if (isImportedIdentifier(memberImport.imported)) {
+                    const memberName = memberImport.imported.name;
 
-                  if (defaultImports[memberName]) {
-                    // 3. For default imports, it needs to pass types.importDefaultSpecifier.
-                    transforms.push(
-                      types.importDeclaration(
-                        [
-                          types.importDefaultSpecifier(
-                            types.identifier(memberImport.local.name)
-                          ),
-                        ],
-                        types.stringLiteral(defaultImports[memberName])
-                      )
-                    );
-                  } else if (namedImports[memberName]) {
-                    // 4. For named imports, the member import is enough.
-                    transforms.push(
-                      types.importDeclaration(
-                        [memberImport],
-                        types.stringLiteral(namedImports[memberName])
-                      )
-                    );
-                  } else {
-                    // 5. The rest of the imports are just preserved under "frontity".
-                    transforms.push(
-                      types.importDeclaration(
-                        [memberImport],
-                        types.stringLiteral("frontity")
-                      )
-                    );
+                    if (defaultImports[memberName]) {
+                      // 3. For default imports, it needs to pass types.importDefaultSpecifier.
+                      transforms.push(
+                        types.importDeclaration(
+                          [
+                            types.importDefaultSpecifier(
+                              types.identifier(memberImport.local.name)
+                            ),
+                          ],
+                          types.stringLiteral(defaultImports[memberName])
+                        )
+                      );
+                    } else if (namedImports[memberName]) {
+                      // 4. For named imports, the member import is enough.
+                      transforms.push(
+                        types.importDeclaration(
+                          [memberImport],
+                          types.stringLiteral(namedImports[memberName])
+                        )
+                      );
+                    } else {
+                      // 5. The rest of the imports are just preserved under "frontity".
+                      transforms.push(
+                        types.importDeclaration(
+                          [memberImport],
+                          types.stringLiteral("frontity")
+                        )
+                      );
+                    }
                   }
                 });
               }
