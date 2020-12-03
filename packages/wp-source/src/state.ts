@@ -1,4 +1,4 @@
-import { warn, error } from "frontity";
+import { warn, error, isDerived } from "frontity";
 import WpSource from "../types";
 import { addFinalSlash, normalize, parse } from "./libraries/route-utils";
 import {
@@ -71,10 +71,16 @@ const state: WpSource["state"]["source"] = {
   // Keep backward compatibility when `state.source.api` is not
   // overwritten in frontity.settings.js.
   api: ({ state }) => {
-    // Check if it's a free WordPress.com site.
-    if (/^https:\/\/(\w+\.)?wordpress\.com/.test(state.source.url)) {
-      const url = new URL(state.source.url);
-      const hostname = url.hostname;
+    // Is it a WordPress.com site with a custom domain?
+    const isCustomWpCom =
+      !isDerived(state.wpSource, "isWpCom") && state.wpSource.isWpCom;
+    // Is it a free WordPress.com site using a subdomain.wordpress.com domain?
+    const isFreeWpCom = /^https:\/\/(\w+\.)?wordpress\.com/.test(
+      state.source.url
+    );
+
+    if (isCustomWpCom || isFreeWpCom) {
+      const { hostname } = new URL(state.source.url);
       return addFinalSlash(
         `https://public-api.wordpress.com/wp/v2/sites/${hostname}`
       );
