@@ -45,14 +45,23 @@ exports.config = {
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
   host: "hub.browserstack.com",
-  before: function (capabilities) {
+  before: (capabilities) => {
     driver = new Builder()
       .usingServer(browserstackURL)
       .withCapabilities(capabilities)
       .build();
     global.expect = driver;
   },
-  after: function () {
+  afterTest: async (test, context, result) => {
+    let { passed, error } = result;
+    !passed &&
+      (await driver.executeScript(
+        `browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "${
+          error.name + ": " + error.message.replace(/\n/g, "")
+        }"}}`
+      ));
+  },
+  after: () => {
     driver.quit();
   },
   framework: "mocha",
