@@ -28,3 +28,5 @@ export { default as URL } from "./utils/url";
 
 export { default as useFills } from "./utils/slot-and-fill/use-fills";
 export { default as Slot } from "./utils/slot-and-fill/slot";
+
+export { default as isDerived } from "./utils/is-derived";
