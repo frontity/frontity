@@ -27,6 +27,7 @@ beforeEach(() => {
       router: { ...tinyRouter.state.router },
       source: {
         get: () => get,
+        data: {},
       },
     },
     actions: {
