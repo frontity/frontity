@@ -1,6 +1,6 @@
 import { State } from "frontity/types";
-import WpSource from "../../types";
-import { concatLink, extractLinkParts } from "./route-utils";
+import { Packages } from "../../types";
+import { concatLink, addFinalSlash } from "./route-utils";
 
 /**
  * Arguments passed to {@link transformLink}.
@@ -19,7 +19,7 @@ interface TransformLinkParams {
   /**
    * Frontity state.
    */
-  state: State<WpSource>;
+  state: State<Packages>;
 
   /**
    * Optional property if `subdirectory` is not specified in the state. This
@@ -39,18 +39,17 @@ export const transformLink = ({
   state,
   ...options
 }: TransformLinkParams): void => {
-  let { subdirectory } = state.source;
-  if (options.subdirectory) subdirectory = options.subdirectory;
+  // Get the subdirectory for the final URL.
+  const subdirectory = addFinalSlash(
+    options.subdirectory ||
+      state.source.subdirectory ||
+      new URL(state.frontity.url).pathname
+  );
 
-  // Get API subdirectory.
-  const path = !state.source.isWpCom
-    ? extractLinkParts(state.source.api).pathname.replace(/\/wp-json\/?$/, "/")
-    : "";
+  // Get the WP URL and add a trailing slash, just in case this property was
+  // set without it.
+  const wpURL = addFinalSlash(state.source.url);
 
-  // Remove API subdirectory.
-  let { link } = entity;
-  if (path && link.startsWith(path)) link = link.replace(path, "/");
-
-  // Add subdirectory if it exists.
-  entity.link = subdirectory ? concatLink(subdirectory, link) : link;
+  // Remove the WP URL from the final link and add the final subdirectory.
+  entity.link = concatLink(subdirectory, entity.link.replace(wpURL, "/"));
 };
