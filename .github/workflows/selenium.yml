@@ -34,6 +34,9 @@ jobs:
       - name: "Building web application to be tested"
         run: npm install
 
+      - name: "Running Frontity project"
+        run: cd project && npx frontity build && npx frontity serve
+
       - name: "Running test on BrowserStack" # Invokes the actual test script that would run on BrowserStack browsers
         run: npx wdio selenium/conf/module.conf.js # See sample test script above
 
