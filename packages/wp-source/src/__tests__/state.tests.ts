@@ -475,6 +475,34 @@ describe("state.source.url", () => {
     expect(state.source.url).toBe("https://wp-domain.com/");
   });
 
+  it("should derive from state.wpSource.api (WP org and Business WP com, w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With a trailing slash.
+    state.wpSource.api = "https://wp-domain.com/subdir/wp-json/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+
+    // Without a trailing slash.
+    state.wpSource.api = "https://wp-domain.com/subdir/wp-json";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+  });
+
+  it("should derive from state.source.api (WP org and Business WP com, w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With a trailing slash.
+    state.source.api = "https://wp-domain.com/subdir/wp-json/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+
+    // Without a trailing slash.
+    state.source.api = "https://wp-domain.com/subdir/wp-json";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+  });
+
   it("should derive from state.wpSource.api and prefix (WP org and Business WP com)", () => {
     const { state } = initStore();
 
@@ -529,6 +557,62 @@ describe("state.source.url", () => {
     expect(state.source.url).toBe("https://wp-domain.com/");
     state.wpSource.prefix = "/api/";
     expect(state.source.url).toBe("https://wp-domain.com/");
+  });
+
+  it("should derive from state.wpSource.api and prefix (WP org and Business WP com, w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With a trailing slash and different combinations of `prefix`.
+    state.wpSource.api = "https://wp-domain.com/subdir/api/";
+    state.wpSource.prefix = "api";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "api/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "/api";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "/api/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+
+    // Without a trailing slash.
+    state.wpSource.api = "https://wp-domain.com/subdir/api";
+    state.wpSource.prefix = "api";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "api/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "/api";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "/api/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+  });
+
+  it("should derive from state.source.api and prefix (WP org and Business WP com, w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With a trailing slash and different combinations of `prefix`.
+    state.source.api = "https://wp-domain.com/subdir/api/";
+    state.wpSource.prefix = "api";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "api/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "/api";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "/api/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+
+    // Without a trailing slash.
+    state.source.api = "https://wp-domain.com/subdir/api";
+    state.wpSource.prefix = "api";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "api/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "/api";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
+    state.wpSource.prefix = "/api/";
+    expect(state.source.url).toBe("https://wp-domain.com/subdir/");
   });
 
   it("should derive from state.wpSource.api (Free, Personal and Premium WP com)", () => {
