@@ -31,7 +31,7 @@ jobs:
         run: npm install
 
       - name: "Running Frontity project"
-        run: cd e2e/project && npx frontity build && npx frontity serve
+        run: cd e2e/project && npx frontity build && npx frontity serve &
 
       - name: "Running test on BrowserStack" # Invokes the actual test script that would run on BrowserStack browsers
         run: cd e2e && npx wdio selenium/conf/module.conf.js # See sample test script above
