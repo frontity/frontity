@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Package } from "frontity/types";
+import { Frontity, MergePackages, Package } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -38,14 +38,8 @@ export interface Theme extends Package {
  * Merge of the types of all the namespaces required by the {@link Link}
  * component.
  */
-export type Packages = Source &
-  Router &
-  Theme & {
-    /**
-     * The optional match property. Needed to support multiple sites.
-     */
-    match?: RegExp[];
-  };
+// export type Packages = Source & Router & Theme;
+export type Packages = MergePackages<Frontity, Source, Router, Theme>;
 
 /**
  * Props for React component {@link Link}.

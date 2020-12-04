@@ -37,7 +37,9 @@ const Link: React.FC<LinkProps> = ({
   "aria-current": ariaCurrent,
   ...anchorProps
 }) => {
-  const { state, actions, match } = useConnect<Packages>();
+  const { state, actions } = useConnect<Packages>();
+  const { match } = state.frontity;
+
   const { ref: inViewRef, inView } = useInView({
     triggerOnce: true,
     rootMargin: "200px",

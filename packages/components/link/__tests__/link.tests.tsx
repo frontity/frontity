@@ -21,6 +21,7 @@ beforeEach(() => {
   window.scrollTo = jest.fn();
   store = createStore({
     state: {
+      frontity: {},
       theme: {
         autoPrefetch: "hover",
       },
@@ -287,11 +288,12 @@ describe("Link", () => {
   });
 
   test("it takes into account the `match` property before replacing internal links", () => {
-    const storeWithMatch = {
-      // should only match /blog links
-      match: ["https?:\\/\\/[^/]+\\/blog([^-\\w]|$)"],
-      ...store,
-    };
+    const storeWithMatch = { ...store };
+
+    // should only match /blog links
+    storeWithMatch.state.frontity.match = [
+      "https?:\\/\\/[^/]+\\/blog([^-\\w]|$)",
+    ];
 
     const linkThatDoesNotMatch = store.state.source.url + "/internal-link";
     const linkThatMatches = store.state.source.url + "/blog/blog-link";

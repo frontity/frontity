@@ -125,7 +125,7 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
 export const removeSourceUrl = (
   link: string,
   sourceUrl: string,
-  match?: RegExp[]
+  match?: string[]
 ) => {
   // if match is present we need to ensure the internal link matches the current site url pattern
   if (match && !match.some((regexp) => new RegExp(regexp).test(link))) {
