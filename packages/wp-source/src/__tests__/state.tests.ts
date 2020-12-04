@@ -119,81 +119,133 @@ describe("state.source.get", () => {
 });
 
 describe("state.wpSource.isWpCom (state.source.isWpCom)", () => {
-  const initStore = (data = {}) => {
-    const config = clone(merge(wpSource(), data));
+  const initStore = () => {
+    const config = clone(merge(wpSource(), { state: { frontity: {} } }));
     return createStore(config);
   };
 
   it("should be false (state.frontity.url, state.source.url not WP com subdomain)", () => {
-    const store = initStore({
-      state: {
-        frontity: { url: "https://final-domain.com/" },
-        source: { url: "https://wp-domain.com/" },
-      },
-    });
-    expect(store.state.wpSource.isWpCom).toBe(false);
-    expect(store.state.source.isWpCom).toBe(false);
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+    state.source.url = "https://wp-domain.com/";
+
+    expect(state.wpSource.isWpCom).toBe(false);
+    expect(state.source.isWpCom).toBe(false);
   });
 
   it("should be false (state.frontity.url, state.wpSource.api not WP com)", () => {
-    const store = initStore({
-      state: {
-        frontity: { url: "https://final-domain.com/" },
-        wpSource: { api: "https://wp-domain.com/wp-json/" },
-      },
-    });
-    expect(store.state.wpSource.isWpCom).toBe(false);
-    expect(store.state.source.isWpCom).toBe(false);
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With trailing slash.
+    state.wpSource.api = "https://wp-domain.com/wp-json/";
+    expect(state.wpSource.isWpCom).toBe(false);
+    expect(state.source.isWpCom).toBe(false);
+
+    // Without trailing slash.
+    state.wpSource.api = "https://wp-domain.com/wp-json";
+    expect(state.wpSource.isWpCom).toBe(false);
+    expect(state.source.isWpCom).toBe(false);
   });
 
   it("should be false (state.frontity.url, state.source.api not WP com)", () => {
-    const store = initStore({
-      state: {
-        frontity: { url: "https://final-domain.com/" },
-        source: { api: "https://wp-domain.com/wp-json/" },
-      },
-    });
-    expect(store.state.wpSource.isWpCom).toBe(false);
-    expect(store.state.source.isWpCom).toBe(false);
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With trailing slash.
+    state.source.api = "https://wp-domain.com/wp-json/";
+    expect(state.wpSource.isWpCom).toBe(false);
+    expect(state.source.isWpCom).toBe(false);
+
+    // Without trailing slash.
+    state.source.api = "https://wp-domain.com/wp-json";
+    expect(state.wpSource.isWpCom).toBe(false);
+    expect(state.source.isWpCom).toBe(false);
   });
 
   it("should be true (state.frontity.url, state.source.url is WP com subdomain)", () => {
-    const store = initStore({
-      state: {
-        frontity: { url: "https://final-domain.com/" },
-        source: { url: "https://sub.wordpress.com/" },
-      },
-    });
-    expect(store.state.wpSource.isWpCom).toBe(true);
-    expect(store.state.source.isWpCom).toBe(true);
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+    state.source.url = "https://sub.wordpress.com/";
+
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
   });
 
   it("should be true (state.frontity.url, state.wpSource.api is WP com)", () => {
-    const store = initStore({
-      state: {
-        frontity: { url: "https://final-domain.com/" },
-        wpSource: {
-          api:
-            "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com/",
-        },
-      },
-    });
-    expect(store.state.wpSource.isWpCom).toBe(true);
-    expect(store.state.source.isWpCom).toBe(true);
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With trailing slash.
+    state.wpSource.api =
+      "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com/";
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
+
+    // Without trailing slash.
+    state.wpSource.api =
+      "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
   });
 
   it("should be true (state.frontity.url, state.source.api is WP com)", () => {
-    const store = initStore({
-      state: {
-        frontity: { url: "https://final-domain.com/" },
-        source: {
-          api:
-            "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com/",
-        },
-      },
-    });
-    expect(store.state.wpSource.isWpCom).toBe(true);
-    expect(store.state.source.isWpCom).toBe(true);
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With trailing slash.
+    state.source.api =
+      "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com/";
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
+
+    // Without trailing slash.
+    state.source.api =
+      "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
+  });
+
+  it("should be true (state.frontity.url, state.wpSource.api is WP com, custom domain)", () => {
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With trailing slash.
+    state.wpSource.api =
+      "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com/";
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
+
+    // Without trailing slash.
+    state.wpSource.api =
+      "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
+  });
+
+  it("should be true (state.frontity.url, state.source.api is WP com, custom domain)", () => {
+    const { state } = initStore();
+
+    state.frontity.url = "https://final-domain.com/";
+
+    // With trailing slash.
+    state.source.api =
+      "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com/";
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
+
+    // Without trailing slash.
+    state.source.api =
+      "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
+    expect(state.wpSource.isWpCom).toBe(true);
+    expect(state.source.isWpCom).toBe(true);
   });
 });
 
