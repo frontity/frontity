@@ -156,6 +156,35 @@ describe("transformLink (w/o subdirectory)", () => {
 
     expect(entity.link).toBe("/some-link/");
   });
+
+  it("should work for WP org and Business WP com - configured by state.wpSource.api (w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+    state.wpSource.api = "https://wp-domain.com/subdir/wp-json/";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "https://wp-domain.com/subdir/some-link/" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/some-link/");
+  });
+
+  it("should work for WP org and Business WP com - configured by state.wpSource.api and custom prefix (w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+    state.wpSource.api = "https://wp-domain.com/subdir/api/";
+    state.wpSource.prefix = "/api";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "https://wp-domain.com/subdir/some-link/" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/some-link/");
+  });
 });
 
 describe("transformLink (w/ subdirectory)", () => {
@@ -304,6 +333,35 @@ describe("transformLink (w/ subdirectory)", () => {
 
     // Transform the link of an entity mock.
     const entity = { link: "https://wp-domain.com/some-link/" };
+    transformLink({ entity, state, subdirectory });
+
+    expect(entity.link).toBe("/subdir/some-link/");
+  });
+
+  it("should work for WP org and Business WP com - configured by state.wpSource.api (w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+    state.wpSource.api = "https://wp-domain.com/wp-subdir/wp-json/";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    transformLink({ entity, state, subdirectory });
+
+    expect(entity.link).toBe("/subdir/some-link/");
+  });
+
+  it("should work for WP org and Business WP com - configured by state.wpSource.api and custom prefix (w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+    state.wpSource.api = "https://wp-domain.com/wp-subdir/api/";
+    state.wpSource.prefix = "/api";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -468,6 +526,37 @@ describe("transformLink (state.source.subdirectory)", () => {
 
     expect(entity.link).toBe("/subdir/some-link/");
   });
+
+  it("should work for WP org and Business WP com - configured by state.wpSource.api (w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+    state.source.subdirectory = "/subdir";
+    state.wpSource.api = "https://wp-domain.com/wp-subdir/wp-json/";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/subdir/some-link/");
+  });
+
+  it("should work for WP org and Business WP com - configured by state.wpSource.api and custom prefix (w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+    state.source.subdirectory = "/subdir";
+    state.wpSource.api = "https://wp-domain.com/wp-subdir/api/";
+    state.wpSource.prefix = "/api";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/subdir/some-link/");
+  });
 });
 
 describe("transformLink (state.frontity.url w/ subdirectory)", () => {
@@ -614,6 +703,35 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
 
     // Transform the link of an entity mock.
     const entity = { link: "https://wp-domain.com/some-link/" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/subdir/some-link/");
+  });
+
+  it("should work for WP org and Business WP com - configured by state.wpSource.api (w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com/subdir";
+    state.wpSource.api = "https://wp-domain.com/wp-subdir/wp-json/";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/subdir/some-link/");
+  });
+
+  it("should work for WP org and Business WP com - configured by state.wpSource.api and custom prefix (w/ subdirectory)", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com/subdir";
+    state.wpSource.api = "https://wp-domain.com/wp-subdir/api/";
+    state.wpSource.prefix = "/api";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
