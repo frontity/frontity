@@ -91,7 +91,7 @@ const state: WpSource["state"]["source"] = {
     );
   },
   isWpCom: ({ state }) =>
-    state.source.api.startsWith(
+    state.wpSource.api.startsWith(
       "https://public-api.wordpress.com/wp/v2/sites/"
     ),
   subdirectory: "",
@@ -105,6 +105,25 @@ const state: WpSource["state"]["source"] = {
   postTypes: [],
   taxonomies: [],
   url: ({ state }) => {
+    // Extract the WordPress instance URL from the API URL.
+    if (!isDerived(state.wpSource, "api") || !isDerived(state.source, "api")) {
+      // Return the URL for WP.com instances.
+      if (state.wpSource.isWpCom)
+        return addFinalSlash(
+          state.wpSource.api.replace(
+            /public-api\.wordpress\.com\/wp\/v2\/sites\//,
+            ""
+          )
+        );
+
+      // Get the prefix and transform it to have only a slash at the beginning.
+      const prefix = state.wpSource.prefix
+        .replace(/^\/?/, "/")
+        .replace(/\/$/, "");
+
+      return addFinalSlash(state.wpSource.api.replace(prefix, ""));
+    }
+
     if (!state.frontity?.url)
       error(
         "Please set either `state.source.url` (or at least `state.frontity.url` if you are using Embedded mode) in your frontity.settings.js file."
