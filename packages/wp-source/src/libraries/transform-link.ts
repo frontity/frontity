@@ -43,7 +43,8 @@ export const transformLink = ({
   const subdirectory = addFinalSlash(
     options.subdirectory ||
       state.source.subdirectory ||
-      new URL(state.frontity.url).pathname
+      (state.frontity?.url && new URL(state.frontity.url).pathname) ||
+      ""
   );
 
   // Get the WP URL and add a trailing slash, just in case this property was
