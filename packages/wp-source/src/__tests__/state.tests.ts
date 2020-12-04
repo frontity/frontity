@@ -3,14 +3,14 @@ import clone from "clone-deep";
 import wpSource from "../";
 import merge from "deepmerge";
 
-const initStore = (data = {}) => {
-  const config = clone(wpSource());
-  // replace data by the one passed as argument
-  config.state.source.data = data;
-  return createStore(config);
-};
-
 describe("state.source.get", () => {
+  const initStore = (data = {}) => {
+    const config = clone(wpSource());
+    // replace data by the one passed as argument
+    config.state.source.data = data;
+    return createStore(config);
+  };
+
   test("returns an object with isReady/isFetching = false if not found", () => {
     const store = initStore();
     expect(store.state.source.get("/some-post/")).toEqual({
@@ -118,237 +118,289 @@ describe("state.source.get", () => {
   });
 });
 
-describe("state.source.url & state.source.api", () => {
+describe("state.wpSource.isWpCom (state.source.isWpCom)", () => {
   const initStore = (data = {}) => {
     const config = clone(merge(wpSource(), data));
     return createStore(config);
   };
 
-  test("Only setting the state.frontity.url", () => {
-    const store = initStore({
-      state: { frontity: { url: "http://domain.com" } },
-    });
-    expect(store.state.source.url).toBe("http://domain.com/");
-    expect(store.state.source.api).toBe("http://domain.com/wp-json/");
-    expect(store.state.wpSource.api).toBe("http://domain.com/wp-json/");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
-  });
-
-  test("state.frontity.url containing final slash", () => {
-    const store = initStore({
-      state: { frontity: { url: "http://domain.com/" } },
-    });
-    expect(store.state.source.api).toBe("http://domain.com/wp-json/");
-    expect(store.state.wpSource.api).toBe("http://domain.com/wp-json/");
-    expect(store.state.source.url).toBe("http://domain.com/");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
-  });
-
-  test("The correct prefix is being added", () => {
+  it("should be false (state.frontity.url, state.source.url not WP com subdomain)", () => {
     const store = initStore({
       state: {
-        frontity: { url: "http://domain.com/" },
-        wpSource: { prefix: "/api" },
+        frontity: { url: "https://final-domain.com/" },
+        source: { url: "https://wp-domain.com/" },
       },
     });
-    // Has the correct prefix
-    expect(store.state.source.api).toBe("http://domain.com/api/");
-    expect(store.state.wpSource.api).toBe("http://domain.com/api/");
-    expect(store.state.source.url).toBe("http://domain.com/");
-    expect(store.state.source.isWpCom).toBe(false);
     expect(store.state.wpSource.isWpCom).toBe(false);
+    expect(store.state.source.isWpCom).toBe(false);
   });
 
-  test("Only setting the state.source.url", () => {
+  it("should be false (state.frontity.url, state.wpSource.api not WP com)", () => {
     const store = initStore({
       state: {
-        source: { url: "http://backend.com/" },
+        frontity: { url: "https://final-domain.com/" },
+        wpSource: { api: "https://wp-domain.com/wp-json/" },
       },
     });
-    expect(store.state.source.url).toBe("http://backend.com/");
-    expect(store.state.source.api).toBe("http://backend.com/wp-json/");
-    expect(store.state.wpSource.api).toBe("http://backend.com/wp-json/");
-    expect(store.state.source.isWpCom).toBe(false);
     expect(store.state.wpSource.isWpCom).toBe(false);
+    expect(store.state.source.isWpCom).toBe(false);
   });
 
-  test("Only setting the state.source.url with a folder", () => {
+  it("should be false (state.frontity.url, state.source.api not WP com)", () => {
     const store = initStore({
       state: {
-        source: { url: "http://backend.com/folder" },
+        frontity: { url: "https://final-domain.com/" },
+        source: { api: "https://wp-domain.com/wp-json/" },
       },
     });
-    expect(store.state.source.url).toBe("http://backend.com/folder");
-    expect(store.state.source.api).toBe("http://backend.com/folder/wp-json/");
-    expect(store.state.wpSource.api).toBe("http://backend.com/folder/wp-json/");
-    expect(store.state.source.isWpCom).toBe(false);
     expect(store.state.wpSource.isWpCom).toBe(false);
+    expect(store.state.source.isWpCom).toBe(false);
   });
 
-  test("The correct prefix is being added to state.source.url", () => {
+  it("should be true (state.frontity.url, state.source.url is WP com subdomain)", () => {
     const store = initStore({
       state: {
-        source: { url: "http://backend.com/" },
-        wpSource: { prefix: "/api" },
+        frontity: { url: "https://final-domain.com/" },
+        source: { url: "https://sub.wordpress.com/" },
       },
     });
-    expect(store.state.source.url).toBe("http://backend.com/");
-    expect(store.state.source.api).toBe("http://backend.com/api/");
-    expect(store.state.wpSource.api).toBe("http://backend.com/api/");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
+    expect(store.state.wpSource.isWpCom).toBe(true);
+    expect(store.state.source.isWpCom).toBe(true);
   });
 
-  test("The correct prefix is being added to state.source.url without trailing slash", () => {
+  it("should be true (state.frontity.url, state.wpSource.api is WP com)", () => {
     const store = initStore({
       state: {
-        source: { url: "http://backend.com/" },
-        wpSource: { prefix: "/api/" },
-      },
-    });
-    expect(store.state.source.url).toBe("http://backend.com/");
-    expect(store.state.source.api).toBe("http://backend.com/api/");
-    expect(store.state.wpSource.api).toBe("http://backend.com/api/");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
-  });
-
-  test("The correct query prefix is being added to state.source.url", () => {
-    const store = initStore({
-      state: {
-        source: { url: "http://backend.com/" },
-        wpSource: { prefix: "?rest_route=/" },
-      },
-    });
-    // Has the correct prefix
-    expect(store.state.source.url).toBe("http://backend.com/");
-    expect(store.state.source.api).toBe("http://backend.com/?rest_route=/");
-    expect(store.state.wpSource.api).toBe("http://backend.com/?rest_route=/");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
-  });
-
-  test("The correct query prefix is being added to state.source.url with trailing slash", () => {
-    const store = initStore({
-      state: {
-        source: { url: "http://backend.com/" },
-        wpSource: { prefix: "?rest_route=/" },
-      },
-    });
-    // Has the correct prefix
-    expect(store.state.source.url).toBe("http://backend.com/");
-    expect(store.state.source.api).toBe("http://backend.com/?rest_route=/");
-    expect(store.state.wpSource.api).toBe("http://backend.com/?rest_route=/");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
-  });
-
-  test("You can set the source.url later", () => {
-    const store = initStore();
-    store.state.source.url = "http://backend.com/";
-    expect(store.state.source.url).toBe("http://backend.com/");
-    expect(store.state.source.api).toBe("http://backend.com/wp-json/");
-    expect(store.state.wpSource.api).toBe("http://backend.com/wp-json/");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
-  });
-
-  test("Only setting the state.source.api", () => {
-    const store = initStore({
-      state: {
-        frontity: { url: "http://domain.com" },
-        source: { api: "http://backend.com/wp-json" },
-      },
-    });
-    expect(store.state.source.api).toBe("http://backend.com/wp-json");
-    expect(store.state.wpSource.api).toBe("http://backend.com/wp-json");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
-  });
-
-  test("Setting both state.source.url and state.source.api", () => {
-    const store = initStore({
-      state: {
-        source: {
-          url: "http://backend.com",
-          api: "http://backend.com/wp-json/",
+        frontity: { url: "https://final-domain.com/" },
+        wpSource: {
+          api:
+            "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com/",
         },
       },
     });
-    expect(store.state.source.url).toBe("http://backend.com");
-    expect(store.state.source.api).toBe("http://backend.com/wp-json/");
-    expect(store.state.wpSource.api).toBe("http://backend.com/wp-json/");
-    expect(store.state.source.isWpCom).toBe(false);
-    expect(store.state.wpSource.isWpCom).toBe(false);
+    expect(store.state.wpSource.isWpCom).toBe(true);
+    expect(store.state.source.isWpCom).toBe(true);
   });
 
-  test("Only setting state.frontity.url to a WordPress.com domain", () => {
+  it("should be true (state.frontity.url, state.source.api is WP com)", () => {
     const store = initStore({
       state: {
-        frontity: { url: "https://domain.wordpress.com" },
+        frontity: { url: "https://final-domain.com/" },
+        source: {
+          api:
+            "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com/",
+        },
       },
     });
-    expect(store.state.source.url).toBe("https://domain.wordpress.com/");
-    expect(store.state.source.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
-    );
-    expect(store.state.wpSource.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
-    );
-    expect(store.state.source.isWpCom).toBe(true);
     expect(store.state.wpSource.isWpCom).toBe(true);
+    expect(store.state.source.isWpCom).toBe(true);
+  });
+});
+
+describe("state.wpSource.api (state.source.api)", () => {
+  const initStore = (data = {}) => {
+    const config = clone(merge(wpSource(), data));
+    return createStore(config);
+  };
+
+  it("should return a WP org and Business WP com API (state.frontity.url)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+      },
+    });
+    expect(store.state.wpSource.api).toBe("https://final-domain.com/wp-json/");
+    expect(store.state.source.api).toBe("https://final-domain.com/wp-json/");
   });
 
-  test("Only setting state.frontity.url to a WordPress.com domain with ending slash", () => {
+  it("should return a WP org and Business WP com API (state.source.url)", () => {
     const store = initStore({
       state: {
-        frontity: { url: "https://domain.wordpress.com/" },
+        frontity: { url: "https://final-domain.com/" },
+        source: { url: "https://wp-domain.com/" },
       },
     });
-    expect(store.state.source.url).toBe("https://domain.wordpress.com/");
-    expect(store.state.source.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
-    );
-    expect(store.state.wpSource.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
-    );
-    expect(store.state.source.isWpCom).toBe(true);
-    expect(store.state.wpSource.isWpCom).toBe(true);
+    expect(store.state.wpSource.api).toBe("https://wp-domain.com/wp-json/");
+    expect(store.state.source.api).toBe("https://wp-domain.com/wp-json/");
   });
 
-  test("Only setting state.source.url to a WordPress.com domain", () => {
+  it("should return a WP org and Business WP com API (state.frontity.url, prefix)", () => {
     const store = initStore({
       state: {
-        source: { url: "https://domain.wordpress.com" },
+        frontity: { url: "https://final-domain.com/" },
+        wpSource: { prefix: "/api" },
       },
     });
-    expect(store.state.source.url).toBe("https://domain.wordpress.com");
-    expect(store.state.source.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
-    );
-    expect(store.state.wpSource.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
-    );
-    expect(store.state.source.isWpCom).toBe(true);
-    expect(store.state.wpSource.isWpCom).toBe(true);
+    expect(store.state.wpSource.api).toBe("https://final-domain.com/api/");
+    expect(store.state.source.api).toBe("https://final-domain.com/api/");
   });
 
-  test("Only setting state.source.url to a WordPress.com domain with ending slash", () => {
+  it("should return a WP org and Business WP com API (state.source.url, prefix)", () => {
     const store = initStore({
       state: {
-        source: { url: "https://domain.wordpress.com/" },
+        frontity: { url: "https://final-domain.com/" },
+        source: { url: "https://wp-domain.com/" },
+        wpSource: { prefix: "/api" },
       },
     });
-    expect(store.state.source.url).toBe("https://domain.wordpress.com/");
-    expect(store.state.source.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
-    );
+    expect(store.state.wpSource.api).toBe("https://wp-domain.com/api/");
+    expect(store.state.source.api).toBe("https://wp-domain.com/api/");
+  });
+
+  it("should return a WP com API (state.frontity.url, state.wpSource.isWpCom)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        wpSource: { isWpCom: true },
+      },
+    });
     expect(store.state.wpSource.api).toBe(
-      "https://public-api.wordpress.com/wp/v2/sites/domain.wordpress.com/"
+      "https://public-api.wordpress.com/wp/v2/sites/final-domain.com/"
     );
-    expect(store.state.source.isWpCom).toBe(true);
-    expect(store.state.wpSource.isWpCom).toBe(true);
+    expect(store.state.source.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/final-domain.com/"
+    );
+  });
+
+  it("should return a WP com API (state.frontity.url, state.source.isWpCom)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        source: { isWpCom: true },
+      },
+    });
+    expect(store.state.wpSource.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/final-domain.com/"
+    );
+    expect(store.state.source.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/final-domain.com/"
+    );
+  });
+
+  it("should return a WP com API (state.source.url - Free WP com)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        source: { url: "https://sub.wordpress.com/" },
+      },
+    });
+    expect(store.state.wpSource.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com/"
+    );
+    expect(store.state.source.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com/"
+    );
+  });
+
+  it("should return a WP com API (state.source.url, state.wpSource.isWpCom)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        source: { url: "https://wp-domain.com/" },
+        wpSource: { isWpCom: true },
+      },
+    });
+    expect(store.state.wpSource.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com/"
+    );
+    expect(store.state.source.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com/"
+    );
+  });
+
+  it("should return a WP com API (state.source.url, state.source.isWpCom)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        source: { url: "https://wp-domain.com/", isWpCom: true },
+      },
+    });
+    expect(store.state.wpSource.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com/"
+    );
+    expect(store.state.source.api).toBe(
+      "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com/"
+    );
+  });
+});
+
+describe("state.source.url", () => {
+  const initStore = (data = {}) => {
+    const config = clone(merge(wpSource(), data));
+    return createStore(config);
+  };
+
+  it("should return state.frontity.url if no other props are set (embedded)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+      },
+    });
+    expect(store.state.source.url).toBe("https://final-domain.com/");
+  });
+
+  it("should derive from state.wpSource.api (WP org and Business WP com)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        wpSource: { api: "https://wp-domain.com/wp-json/" },
+      },
+    });
+    expect(store.state.source.url).toBe("https://wp-domain.com/");
+  });
+
+  it("should derive from state.source.api (WP org and Business WP com)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        source: { api: "https://wp-domain.com/wp-json/" },
+      },
+    });
+    expect(store.state.source.url).toBe("https://wp-domain.com/");
+  });
+
+  it("should derive from state.wpSource.api and prefix (WP org and Business WP com)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        wpSource: { api: "https://wp-domain.com/api/", prefix: "/api" },
+      },
+    });
+    expect(store.state.source.url).toBe("https://wp-domain.com/");
+  });
+
+  it("should derive from state.source.api and prefix (WP org and Business WP com)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        source: { api: "https://wp-domain.com/api/" },
+        wpSource: { prefix: "/api" },
+      },
+    });
+    expect(store.state.source.url).toBe("https://wp-domain.com/");
+  });
+
+  it("should derive from state.wpSource.api (Free, Personal and Premium WP com)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        wpSource: {
+          api: "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com/",
+        },
+      },
+    });
+    expect(store.state.source.url).toBe("https://wp-domain.com/");
+  });
+
+  it("should derive from state.source.api (Free, Personal and Premium WP com)", () => {
+    const store = initStore({
+      state: {
+        frontity: { url: "https://final-domain.com/" },
+        source: {
+          api: "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com/",
+        },
+      },
+    });
+    expect(store.state.source.url).toBe("https://wp-domain.com/");
   });
 });
