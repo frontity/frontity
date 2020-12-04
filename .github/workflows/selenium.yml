@@ -4,10 +4,6 @@ on:
     branches:
       - selenium-tests
 
-defaults:
-  run:
-    working-directory: e2e
-
 jobs:
   ubuntu-job:
     name: "BrowserStack Test on Ubuntu"
@@ -35,10 +31,10 @@ jobs:
         run: npm install
 
       - name: "Running Frontity project"
-        run: cd project && npx frontity build && npx frontity serve
+        run: cd e2e/project && npx frontity build && npx frontity serve
 
       - name: "Running test on BrowserStack" # Invokes the actual test script that would run on BrowserStack browsers
-        run: npx wdio selenium/conf/module.conf.js # See sample test script above
+        run: cd e2e && npx wdio selenium/conf/module.conf.js # See sample test script above
 
       - name: "BrowserStackLocal Stop" # Terminating the BrowserStackLocal tunnel connection
         uses: browserstack/github-actions/setup-local@master
