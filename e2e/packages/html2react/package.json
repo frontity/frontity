@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Package to do e2e testing of Frontity's Html2React package",
+  "scripts": {
+    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\""
+  },
   "dependencies": {
     "frontity": "^1.5.0",
     "@frontity/html2react": "^1.2.0"
