@@ -18,10 +18,8 @@ const lintStaged = require("lint-staged");
     await lintStaged({
       allowEmpty: true,
       config: {
-        "*.{js,jsx,ts,tsx}": [
+        "*.{js,jsx,ts,tsx}":
           'replace-in-files --regex="\\/\\*\\*\\s*\n" --replacement="\n/**\n"',
-          "git add",
-        ],
       },
     });
 
@@ -31,7 +29,7 @@ const lintStaged = require("lint-staged");
     await lintStaged({
       allowEmpty: true,
       config: {
-        "*.{js,jsx,ts,tsx}": ["prettier --write", "git add"],
+        "*.{js,jsx,ts,tsx}": "prettier --write",
       },
     });
 
@@ -41,7 +39,7 @@ const lintStaged = require("lint-staged");
     await lintStaged({
       allowEmpty: true,
       config: {
-        "*.{js,jsx,ts,tsx}": ["eslint --fix", "git add"],
+        "*.{js,jsx,ts,tsx}": "eslint --fix",
       },
     });
   } catch (e) {
