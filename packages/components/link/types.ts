@@ -38,7 +38,6 @@ export interface Theme extends Package {
  * Merge of the types of all the namespaces required by the {@link Link}
  * component.
  */
-// export type Packages = Source & Router & Theme;
 export type Packages = MergePackages<Frontity, Source, Router, Theme>;
 
 /**
