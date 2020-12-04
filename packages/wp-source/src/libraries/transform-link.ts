@@ -32,6 +32,9 @@ interface TransformLinkParams {
  * Utility used by {@link populate} to convert the `link` attribute that
  * entities have so they point to Frontity instead to WordPress.
  *
+ * NOTE: the entity passed as argument was normalized by the schemas so its
+ * `entity.link` property doesn't contain the domain name.
+ *
  * @param transformLinkParams - Object of type {@link TransformLinkParams}.
  */
 export const transformLink = ({
@@ -47,10 +50,10 @@ export const transformLink = ({
       ""
   );
 
-  // Get the WP URL and add a trailing slash, just in case this property was
-  // set without it.
-  const wpURL = addFinalSlash(state.source.url);
+  // Get the path from the WP URL and add a trailing slash, just in case this
+  // property was set without it.
+  const wpPath = addFinalSlash(new URL(state.source.url).pathname);
 
   // Remove the WP URL from the final link and add the final subdirectory.
-  entity.link = concatLink(subdirectory, entity.link.replace(wpURL, "/"));
+  entity.link = concatLink(subdirectory, entity.link.replace(wpPath, "/"));
 };

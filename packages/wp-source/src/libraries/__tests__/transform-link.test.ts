@@ -21,7 +21,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.frontity.url = "https://final-domain.com";
     state.source.url = "https://sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -35,7 +35,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.wpSource.api =
       "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -49,7 +49,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.source.api =
       "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -64,7 +64,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.wpSource.isWpCom = true;
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -79,7 +79,7 @@ describe("transformLink (w/o subdirectory)", () => {
       "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -94,7 +94,7 @@ describe("transformLink (w/o subdirectory)", () => {
       "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -108,7 +108,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.source.url = "https://wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -122,7 +122,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.source.url = "https://wp-domain.com/subdir";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/subdir/some-link/" };
+    const entity = { link: "/subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -136,7 +136,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.wpSource.api = "https://wp-domain.com/wp-json/";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -151,7 +151,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.wpSource.prefix = "/api";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -165,7 +165,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.wpSource.api = "https://wp-domain.com/subdir/wp-json/";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/subdir/some-link/" };
+    const entity = { link: "/subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -180,7 +180,7 @@ describe("transformLink (w/o subdirectory)", () => {
     state.wpSource.prefix = "/api";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/subdir/some-link/" };
+    const entity = { link: "/subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/some-link/");
@@ -202,7 +202,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.frontity.url = "https://final-domain.com";
     state.source.url = "https://sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -216,7 +216,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.wpSource.api =
       "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -230,7 +230,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.source.api =
       "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -245,7 +245,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.wpSource.isWpCom = true;
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -260,7 +260,7 @@ describe("transformLink (w/ subdirectory)", () => {
       "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -275,7 +275,7 @@ describe("transformLink (w/ subdirectory)", () => {
       "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -289,7 +289,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.source.url = "https://wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -303,7 +303,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.source.url = "https://wp-domain.com/subdir";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/subdir/some-link/" };
+    const entity = { link: "/subdir/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -317,7 +317,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.wpSource.api = "https://wp-domain.com/wp-json/";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -332,7 +332,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.wpSource.prefix = "/api";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -346,7 +346,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.wpSource.api = "https://wp-domain.com/wp-subdir/wp-json/";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    const entity = { link: "/wp-subdir/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -361,7 +361,7 @@ describe("transformLink (w/ subdirectory)", () => {
     state.wpSource.prefix = "/api";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    const entity = { link: "/wp-subdir/some-link/" };
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -382,7 +382,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.source.subdirectory = "/subdir";
     state.source.url = "https://sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -397,7 +397,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.wpSource.api =
       "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -412,7 +412,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.source.api =
       "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -428,7 +428,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.wpSource.isWpCom = true;
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -444,7 +444,7 @@ describe("transformLink (state.source.subdirectory)", () => {
       "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -460,7 +460,7 @@ describe("transformLink (state.source.subdirectory)", () => {
       "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -475,7 +475,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.source.url = "https://wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -490,7 +490,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.source.url = "https://wp-domain.com/subdir";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/subdir/some-link/" };
+    const entity = { link: "/subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -505,7 +505,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.wpSource.api = "https://wp-domain.com/wp-json/";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -521,7 +521,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.wpSource.prefix = "/api";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -536,7 +536,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.wpSource.api = "https://wp-domain.com/wp-subdir/wp-json/";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    const entity = { link: "/wp-subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -552,7 +552,7 @@ describe("transformLink (state.source.subdirectory)", () => {
     state.wpSource.prefix = "/api";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    const entity = { link: "/wp-subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -572,7 +572,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.frontity.url = "https://final-domain.com/subdir";
     state.source.url = "https://sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -586,7 +586,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.wpSource.api =
       "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -600,7 +600,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.source.api =
       "https://public-api.wordpress.com/wp/v2/sites/sub.wordpress.com";
 
-    const entity = { link: "https://sub.wordpress.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -615,7 +615,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.wpSource.isWpCom = true;
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -630,7 +630,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
       "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -645,7 +645,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
       "https://public-api.wordpress.com/wp/v2/sites/wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -659,7 +659,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.source.url = "https://wp-domain.com";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -673,7 +673,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.source.url = "https://wp-domain.com/subdir";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/subdir/some-link/" };
+    const entity = { link: "/subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -687,7 +687,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.wpSource.api = "https://wp-domain.com/wp-json/";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -702,7 +702,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.wpSource.prefix = "/api";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/some-link/" };
+    const entity = { link: "/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -716,7 +716,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.wpSource.api = "https://wp-domain.com/wp-subdir/wp-json/";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    const entity = { link: "/wp-subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
@@ -731,7 +731,7 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     state.wpSource.prefix = "/api";
 
     // Transform the link of an entity mock.
-    const entity = { link: "https://wp-domain.com/wp-subdir/some-link/" };
+    const entity = { link: "/wp-subdir/some-link/" };
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
