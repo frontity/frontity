@@ -32,5 +32,8 @@
     "selenium-side-runner": "^3.17.0",
     "wait-on": "^5.1.0",
     "wdio-chromedriver-service": "^6.0.4"
+  },
+  "dependencies": {
+    "browserstack-local": "^1.4.8"
   }
 }

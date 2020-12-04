@@ -12,9 +12,7 @@ describe("Frontity", function () {
     // Test name: tiny-router
     // Step # | name | target | value
     // 1 | open | /?frontity_name=tiny-router |
-    await driver.get(
-      "https://frontity-e2e.vercel.app//?frontity_name=tiny-router"
-    );
+    await driver.get("http://localhost:3000/?frontity_name=tiny-router");
     // 2 | assertText | css=[data-test-id="content"] | Home
     assert(
       (await driver
@@ -50,9 +48,7 @@ describe("Frontity", function () {
     // Test name: google-ad-manager
     // Step # | name | target | value
     // 1 | open | /?frontity_name=google-ad-manager |
-    await driver.get(
-      "https://frontity-e2e.vercel.app//?frontity_name=google-ad-manager"
-    );
+    await driver.get("http://localhost:3000/?frontity_name=google-ad-manager");
     // 2 | waitForElementPresent | css=#header-ad>div>iframe | 30000
     await driver.wait(
       until.elementLocated(By.css("#header-ad>div>iframe")),
@@ -116,9 +112,7 @@ describe("Frontity", function () {
     // Test name: loadable
     // Step # | name | target | value
     // 1 | open | /?frontity_name=loadable |
-    await driver.get(
-      "https://frontity-e2e.vercel.app//?frontity_name=loadable"
-    );
+    await driver.get("http://localhost:3000/?frontity_name=loadable");
     // 2 | assertText | css=[data-test-id='dynamic-div'] | I am the Dynamic1 component
     assert(
       (await driver
