@@ -1,9 +1,9 @@
 import getBabel from "../";
 
 test("Babel returns for development", () => {
-  expect(getBabel({ mode: "development" })).toMatchSnapshot();
+  expect(getBabel()).toMatchSnapshot();
 });
 
 test("Babel returns for production", () => {
-  expect(getBabel({ mode: "production" })).toMatchSnapshot();
+  expect(getBabel()).toMatchSnapshot();
 });

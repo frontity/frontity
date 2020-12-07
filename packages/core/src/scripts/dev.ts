@@ -119,7 +119,7 @@ export default async ({
   port,
   target,
   openBrowser = true,
-  publicPath,
+  publicPath = "/static/",
 }: DevOptions): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();

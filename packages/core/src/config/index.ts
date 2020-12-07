@@ -32,11 +32,7 @@ interface ConfigOptions {
  * @returns The configuration object for Webpack, Babel and Frontity. Each
  * configuration object contains the three targets: "module", "es5" and "server".
  */
-const config = ({
-  mode,
-  entryPoints,
-  publicPath = "/static/",
-}: ConfigOptions): Config => {
+const config = ({ mode, entryPoints, publicPath }: ConfigOptions): Config => {
   const frontity = getFrontity();
   const babel = getBabel();
   const webpack = getWebpack({

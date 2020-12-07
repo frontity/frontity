@@ -5,7 +5,7 @@ import babelLoader from "babel-loader/package.json";
 import { Target, BabelConfigs, Mode } from "../../../types";
 
 /**
- * The options of the {@link module} function.
+ * The options of the {@link moduleConf} function.
  */
 interface ModuleOptions {
   /**
@@ -33,7 +33,7 @@ interface ModuleOptions {
  *
  * @returns The configuration object for Webpack.
  */
-const module = ({
+const moduleConf = ({
   target,
   babel,
   mode,
@@ -113,4 +113,4 @@ const module = ({
   ],
 });
 
-export default module;
+export default moduleConf;
