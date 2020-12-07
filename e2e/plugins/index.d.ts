@@ -1,3 +1,6 @@
+// We use an index.d.ts file instead of an index.ts file because Browserstack
+// doesn't support TypeScript files yet.
+
 /**
  * The utility type which facilitates extracting the types for the
  * individual cypress tasks.
