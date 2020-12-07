@@ -27,7 +27,7 @@ interface EntryOptions {
 }
 
 /**
- * Generate the object for Webpack's performance configuration.
+ * Generate the object for Webpack's entry configuration.
  *
  * Official Webpack docs: https://webpack.js.org/configuration/entry-context/.
  *
