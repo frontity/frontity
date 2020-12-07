@@ -113,7 +113,8 @@ export default (): BabelConfigs => ({
 });
 
 /**
- * These are the polyfills added for "module":
+ * These are the polyfills that will be added for "module" if they are found in
+ * the code:
  *
  * `es.symbol.description { "android":"61", "chrome":"61", "edge":"16", "firefox":"60", "ios":"10.3", "opera":"48", "safari":"10.1", "samsung":"8.2" }`
  * `es.symbol.async-iterator { "android":"61", "chrome":"61", "edge":"16", "ios":"10.3", "opera":"48", "safari":"10.1" }`
@@ -183,7 +184,8 @@ export default (): BabelConfigs => ({
  */
 
 /**
- *  These are the polyfills added for "es5":
+ * These are the polyfills that will be added for "es5" if they are found in
+ * the code:
  *
  * `es.symbol { "edge":"12", "firefox":"18" }`
  * `es.symbol.description { "android":"67", "chrome":"49", "edge":"12", "firefox":"18", "ios":"10", "opera":"36", "safari":"10", "samsung":"5" }`
