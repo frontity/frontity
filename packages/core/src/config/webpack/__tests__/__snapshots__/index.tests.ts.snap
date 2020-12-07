@@ -7,12 +7,10 @@ Object {
     "entry": Object {
       "site-1": Array [
         "webpack-hot-middleware/client",
-        "babel-polyfill",
         "./build/bundling/entry-points/site-1/client.js",
       ],
       "site-2": Array [
         "webpack-hot-middleware/client",
-        "babel-polyfill",
         "./build/bundling/entry-points/site-1/client.js",
       ],
     },
@@ -25,6 +23,11 @@ Object {
     "module": Object {
       "rules": Array [
         Object {
+          "exclude": Array [
+            /\\\\bcore-js\\\\b/,
+            /\\\\bwebpack\\\\b/,
+            /\\\\bregenerator-runtime\\\\b/,
+          ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
             "loader": "babel-loader",
@@ -171,6 +174,11 @@ Object {
     "module": Object {
       "rules": Array [
         Object {
+          "exclude": Array [
+            /\\\\bcore-js\\\\b/,
+            /\\\\bwebpack\\\\b/,
+            /\\\\bregenerator-runtime\\\\b/,
+          ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
             "loader": "babel-loader",
@@ -304,6 +312,11 @@ Object {
     "module": Object {
       "rules": Array [
         Object {
+          "exclude": Array [
+            /\\\\bcore-js\\\\b/,
+            /\\\\bwebpack\\\\b/,
+            /\\\\bregenerator-runtime\\\\b/,
+          ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
             "loader": "babel-loader",
@@ -426,11 +439,9 @@ Object {
     "devtool": false,
     "entry": Object {
       "site-1": Array [
-        "babel-polyfill",
         "./build/bundling/entry-points/site-1/client.js",
       ],
       "site-2": Array [
-        "babel-polyfill",
         "./build/bundling/entry-points/site-1/client.js",
       ],
     },
@@ -443,6 +454,11 @@ Object {
     "module": Object {
       "rules": Array [
         Object {
+          "exclude": Array [
+            /\\\\bcore-js\\\\b/,
+            /\\\\bwebpack\\\\b/,
+            /\\\\bregenerator-runtime\\\\b/,
+          ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
             "loader": "babel-loader",
@@ -581,6 +597,11 @@ Object {
     "module": Object {
       "rules": Array [
         Object {
+          "exclude": Array [
+            /\\\\bcore-js\\\\b/,
+            /\\\\bwebpack\\\\b/,
+            /\\\\bregenerator-runtime\\\\b/,
+          ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
             "loader": "babel-loader",
@@ -708,6 +729,11 @@ Object {
     "module": Object {
       "rules": Array [
         Object {
+          "exclude": Array [
+            /\\\\bcore-js\\\\b/,
+            /\\\\bwebpack\\\\b/,
+            /\\\\bregenerator-runtime\\\\b/,
+          ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
             "loader": "babel-loader",
