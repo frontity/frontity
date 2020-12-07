@@ -1,6 +1,6 @@
 import { TransformOptions } from "@babel/core";
 import { TargetsOptions } from "@babel/preset-env";
-import { Target, Mode, BabelConfigs } from "../../../types";
+import { Target, BabelConfigs } from "../../../types";
 
 const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
   /**
@@ -14,10 +14,12 @@ const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
    * - `safari >= 10.1`
    * - `samsung >= 8.2`.
    *  */
-
   module: { esmodules: true },
-  // Browsers with Proxy support, which is required by Frontity Connect.
-  // For older browsers (ie8-11) Frontity supports SSR/AMP fallback.
+
+  /**
+   * Browsers with Proxy support, which is required by Frontity.
+   * Frontity supports SSR/AMP fallback for these old browsers.
+   */
   es5: {
     browsers: [
       "and_chr >= 67",
@@ -27,7 +29,7 @@ const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
       "not android <= 4.4.4",
       "chrome >= 49",
       "edge >= 12",
-      "firefox >= 40",
+      "firefox >= 18",
       "ios_saf >= 10",
       "not op_mini all",
       "op_mob >= 46",
@@ -36,70 +38,82 @@ const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
       "samsung >= 5",
     ],
   },
-  // Node version used by AWS Lambda.
-  server: { node: "8.10" },
+
+  /**
+   * Minimum Node version supported by Frontity.
+   */
+  server: { node: "10" },
 };
 
-export default ({ mode }: { mode: Mode }): BabelConfigs => {
-  const getConfig = (target: Target): TransformOptions => {
-    const presets = [
-      // Instead of using a TS transpiler, this removes the typescript code.
-      "@babel/preset-typescript",
-      [
-        "@babel/preset-env",
-        {
-          targets: targets[target],
-          useBuiltIns: target !== "server" && "usage",
-          corejs: target !== "server" && "3",
-          // debug: target !== "server",
-          modules: false,
-          bugfixes: true,
-        },
-      ],
-      "@babel/preset-react",
-      // Babel plugin for Emotion CSS property and other goodness.
-      "@emotion/babel-preset-css-prop",
-    ];
-    const plugins = [
-      //
-      "babel-plugin-frontity",
-      // Support for babel macros. See: https://community.frontity.org/t/tailwindcss-with-babel-macro-plugin-and-css-in-js/1040
-      "babel-plugin-macros",
-      // Support for dynamic imports: import("./my-file")
-      "@babel/plugin-syntax-dynamic-import",
-      // Needed for loadable-component SSR.
-      "@loadable/babel-plugin",
-      // Support for the rest spread: { ...obj }
-      "@babel/plugin-proposal-object-rest-spread",
-      // Support for the class props: class MyClass { myProp = 'hi there' }
-      "@babel/plugin-proposal-class-properties",
-      // Cherry-pick Lodash modules
-      "babel-plugin-lodash",
-      // Transform inline environment variables (for process.env.CWD)
-      [
-        "babel-plugin-transform-inline-environment-variables",
-        {
-          include: ["CWD"],
-        },
-      ],
-    ];
-    return {
-      compact: true,
-      sourceType: "unambiguous",
-      presets,
-      plugins,
-    };
-  };
-
+/**
+ * Generate the Babel configuration.
+ *
+ * @param target - The type of target: "module", "es5" or "server".
+ *
+ * @returns The Babel configuration object.
+ */
+const getConfig = (target: Target): TransformOptions => {
+  const presets = [
+    // Instead of using a TS transpiler, this removes the typescript code.
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        targets: targets[target],
+        useBuiltIns: "usage",
+        corejs: "3",
+        modules: false,
+        bugfixes: true,
+      },
+    ],
+    "@babel/preset-react",
+    // Babel plugin for Emotion CSS property and other goodness.
+    "@emotion/babel-preset-css-prop",
+  ];
+  const plugins = [
+    //
+    "babel-plugin-frontity",
+    // Support for babel macros. See: https://community.frontity.org/t/tailwindcss-with-babel-macro-plugin-and-css-in-js/1040
+    "babel-plugin-macros",
+    // Support for dynamic imports: import("./my-file")
+    "@babel/plugin-syntax-dynamic-import",
+    // Needed for loadable-component SSR.
+    "@loadable/babel-plugin",
+    // Support for the rest spread: { ...obj }
+    "@babel/plugin-proposal-object-rest-spread",
+    // Support for the class props: class MyClass { myProp = 'hi there' }
+    "@babel/plugin-proposal-class-properties",
+    // Cherry-pick Lodash modules
+    "babel-plugin-lodash",
+    // Transform inline environment variables (for process.env.CWD)
+    [
+      "babel-plugin-transform-inline-environment-variables",
+      {
+        include: ["CWD"],
+      },
+    ],
+  ];
   return {
-    module: getConfig("module"),
-    es5: getConfig("es5"),
-    server: getConfig("server"),
+    compact: true,
+    sourceType: "unambiguous",
+    presets,
+    plugins,
   };
 };
 
 /**
- * The polyfills added for "module" are these.
+ * The configuration objects of Babel, one for each type.
+ *
+ * @returns An object containing the three Babel configurations.
+ */
+export default (): BabelConfigs => ({
+  module: getConfig("module"),
+  es5: getConfig("es5"),
+  server: getConfig("server"),
+});
+
+/**
+ * These are the polyfills added for "module":
  *
  * `es.symbol.description { "android":"61", "chrome":"61", "edge":"16", "firefox":"60", "ios":"10.3", "opera":"48", "safari":"10.1", "samsung":"8.2" }`
  * `es.symbol.async-iterator { "android":"61", "chrome":"61", "edge":"16", "ios":"10.3", "opera":"48", "safari":"10.1" }`
@@ -166,7 +180,10 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
  * `web.url.to-json { "android":"61", "chrome":"61", "edge":"16", "ios":"10.3", "opera":"48", "safari":"10.1", "samsung":"8.2" }`
  * `web.url-search-params { "android":"61", "chrome":"61", "edge":"16", "ios":"10.3", "opera":"48", "safari":"10.1", "samsung":"8.2" }`.
  *
- * The polyfills added for "es5" are these.
+ */
+
+/**
+ *  These are the polyfills added for "es5":
  *
  * `es.symbol { "edge":"12", "firefox":"18" }`
  * `es.symbol.description { "android":"67", "chrome":"49", "edge":"12", "firefox":"18", "ios":"10", "opera":"36", "safari":"10", "samsung":"5" }`
