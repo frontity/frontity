@@ -1,4 +1,4 @@
-import getBabel from "../";
+import getBabel from "..";
 
 test("Babel returns for development", () => {
   expect(getBabel()).toMatchSnapshot();
