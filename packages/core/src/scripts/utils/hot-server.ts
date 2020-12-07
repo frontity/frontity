@@ -131,9 +131,9 @@ function webpackHotServerMiddleware(
 
   multiCompiler.hooks.done.tap("WebpackHotServerMiddleware", doneHandler);
 
-  return function (...args) {
+  return function () {
     // eslint-disable-next-line prefer-spread,prefer-rest-params
-    return createConnectHandler(error, serverRenderer).apply(null, args);
+    return createConnectHandler(error, serverRenderer).apply(null, arguments);
   };
 }
 
