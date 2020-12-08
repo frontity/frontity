@@ -2,9 +2,9 @@ import { Configuration } from "webpack";
 import { Mode } from "../../../types";
 
 /**
- * The options of the {@link entry} function.
+ * The options of the {@link devtools} function.
  */
-interface ModeOptions {
+interface DevToolsOptions {
   /**
    * The mode of the build: "development" or "production".
    */
@@ -12,15 +12,15 @@ interface ModeOptions {
 }
 
 /**
- * Generate the object for Webpack's mode configuration.
+ * Generate the object for Webpack's devtool configuration.
  *
- * Official Webpack docs: https://webpack.js.org/configuration/mode.
+ * Official Webpack docs: https://webpack.js.org/configuration/devtool.
  *
- * @param options - Defined in {@link ModeOptions}.
+ * @param options - Defined in {@link DevToolsOptions}.
  *
  * @returns The configuration object for Webpack.
  */
-const mode = ({ mode }: ModeOptions): Configuration["devtool"] =>
+const devtools = ({ mode }: DevToolsOptions): Configuration["devtool"] =>
   mode === "development" ? "eval-source-map" : false;
 
-export default mode;
+export default devtools;
