@@ -17,6 +17,7 @@ import resolve from "./resolve";
 import externals from "./externals";
 import plugins from "./plugins";
 import performance from "./performance";
+import stats from "./stats";
 
 /**
  * The options of the {@link webpack} function.
@@ -85,6 +86,7 @@ const getConfig = ({
   externals: externals({ target }),
   plugins: plugins({ target, mode, outDir: frontity.outDir }),
   performance: performance({ target }),
+  stats: stats({ mode }),
 });
 
 /**
