@@ -14,7 +14,7 @@ import packageJson from "../../package.json";
 
 // Sets the version and the description of the program.
 program
-  .version(packageJson.version)
+  .version(packageJson.version, "-v, --version")
   .usage("<command> [options]")
   .description("Frontity CLI");
 
