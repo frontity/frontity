@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "react-helmet-async": "1.0.7",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.14.0"
   }
 }
