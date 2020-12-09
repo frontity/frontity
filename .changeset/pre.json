@@ -28,7 +28,8 @@
     "@frontity/wp-source": "1.10.0",
     "@frontity/yoast": "2.0.0",
     "@frontity/google-tag-manager-analytics": "1.0.1",
-    "@frontity/wp-comments": "0.2.3"
+    "@frontity/wp-comments": "0.2.3",
+    "@frontity/smart-adserver": "1.0.1"
   },
   "changesets": [
     "eleven-adults-chew",
@@ -39,6 +40,7 @@
     "purple-suits-smoke",
     "sharp-rivers-train",
     "tough-peas-develop",
+    "tricky-swans-tan",
     "twelve-turtles-arrive"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-source",
-  "version": "1.10.0",
+  "version": "1.10.1-infinite-scroll-beta.0",
   "description": "A Frontity source package for the REST API of self-hosted and WordPress.com sites",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",

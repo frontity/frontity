@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.3.2-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Release a new beta version in the infinite scroll tag.
+
 ## 1.3.0-infinite-scroll-beta.0
 
 ### Minor Changes
@@ -12,6 +18,7 @@
   - @frontity/router@1.2.0-infinite-scroll-beta.0
   - frontity@1.8.1-infinite-scroll-beta.0
   - @frontity/source@1.2.2-infinite-scroll-beta.0
+
 ## 1.2.3
 
 ### Patch Changes

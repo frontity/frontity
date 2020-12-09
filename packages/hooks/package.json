@@ -1,6 +1,6 @@
 {
   "name": "@frontity/hooks",
-  "version": "2.1.0-infinite-scroll-beta.3",
+  "version": "2.1.0-infinite-scroll-beta.4",
   "description": "Collection of React hooks for Frontity",
   "keywords": [
     "frontity",
@@ -25,7 +25,7 @@
     "frontity": "^1.10.1",
     "react-intersection-observer": "^8.26.2",
     "@frontity/source": "^1.2.2",
-    "@frontity/wp-source": "^1.8.4-infinite-scroll-beta.0",
+    "@frontity/wp-source": "^1.10.1-infinite-scroll-beta.0",
     "@frontity/router": "^1.2.0-infinite-scroll-beta.0"
   }
 }

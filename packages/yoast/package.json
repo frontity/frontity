@@ -1,6 +1,6 @@
 {
   "name": "@frontity/yoast",
-  "version": "2.0.1",
+  "version": "2.0.2-infinite-scroll-beta.0",
   "description": "Integrate your Frontity site with Yoast SEO plugin.",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -26,7 +26,7 @@
     "frontity": "^1.13.0",
     "@frontity/router": "^1.2.1",
     "@frontity/source": "^1.4.0",
-    "@frontity/wp-source": "^1.10.0",
+    "@frontity/wp-source": "^1.10.1-infinite-scroll-beta.0",
     "@frontity/html2react": "^1.5.0",
     "@frontity/head-tags": "^1.0.8"
   },

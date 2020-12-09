@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.1.0-infinite-scroll-beta.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @frontity/wp-source@1.10.1-infinite-scroll-beta.0
+
 ## 2.1.0-infinite-scroll-beta.3
 
 ### Patch Changes
