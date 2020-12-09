@@ -1,6 +1,6 @@
 {
   "name": "@frontity/tiny-router",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A tiny router for Frontity projects",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
