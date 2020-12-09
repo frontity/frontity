@@ -185,6 +185,19 @@ describe("transformLink (w/o subdirectory)", () => {
 
     expect(entity.link).toBe("/some-link/");
   });
+
+  it("should not add a trailing slash for links with hash part", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "/some-link/#element-id" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/some-link/#element-id");
+  });
 });
 
 describe("transformLink (w/ subdirectory)", () => {
@@ -193,7 +206,7 @@ describe("transformLink (w/ subdirectory)", () => {
     return createStore<Packages>(config);
   };
 
-  const subdirectory = "/subdir";
+  const subdirectory = "subdir";
 
   it("should work for Free WP com - configured by state.source.url", () => {
     const { state } = initStore();
@@ -365,6 +378,19 @@ describe("transformLink (w/ subdirectory)", () => {
     transformLink({ entity, state, subdirectory });
 
     expect(entity.link).toBe("/subdir/some-link/");
+  });
+
+  it("should not add a trailing slash for links with hash part", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "/some-link/#element-id" };
+    transformLink({ entity, state, subdirectory });
+
+    expect(entity.link).toBe("/subdir/some-link/#element-id");
   });
 });
 
@@ -557,6 +583,20 @@ describe("transformLink (state.source.subdirectory)", () => {
 
     expect(entity.link).toBe("/subdir/some-link/");
   });
+
+  it("should not add a trailing slash for links with hash part", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com";
+    state.source.subdirectory = "/subdir";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "/some-link/#element-id" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/subdir/some-link/#element-id");
+  });
 });
 
 describe("transformLink (state.frontity.url w/ subdirectory)", () => {
@@ -735,5 +775,19 @@ describe("transformLink (state.frontity.url w/ subdirectory)", () => {
     transformLink({ entity, state });
 
     expect(entity.link).toBe("/subdir/some-link/");
+  });
+
+  it("should not add a trailing slash for links with hash part", () => {
+    const { state } = initStore();
+
+    // Define the options set by the user.
+    state.frontity.url = "https://final-domain.com/subdir";
+    state.source.url = "https://wp-domain.com/";
+
+    // Transform the link of an entity mock.
+    const entity = { link: "/some-link/#element-id" };
+    transformLink({ entity, state });
+
+    expect(entity.link).toBe("/subdir/some-link/#element-id");
   });
 });

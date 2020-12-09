@@ -1,6 +1,6 @@
 import { State } from "frontity/types";
 import { Packages } from "../../types";
-import { concatLink, addFinalSlash } from "./route-utils";
+import { addFinalSlash, addLeadingSlash } from "./route-utils";
 
 /**
  * Arguments passed to {@link transformLink}.
@@ -42,18 +42,21 @@ export const transformLink = ({
   state,
   ...options
 }: TransformLinkParams): void => {
-  // Get the subdirectory for the final URL.
-  const subdirectory = addFinalSlash(
-    options.subdirectory ||
-      state.source.subdirectory ||
-      (state.frontity?.url && new URL(state.frontity.url).pathname) ||
-      ""
+  // Get the subdirectory for the final URL, ensuring that there are a leading
+  // and a trailing slash (`/subdir/`).
+  const subdirectory = addLeadingSlash(
+    addFinalSlash(
+      options.subdirectory ||
+        state.source.subdirectory ||
+        (state.frontity?.url && new URL(state.frontity.url).pathname) ||
+        ""
+    )
   );
 
   // Get the path from the WP URL and add a trailing slash, just in case this
   // property was set without it.
   const wpPath = addFinalSlash(new URL(state.source.url).pathname);
 
-  // Remove the WP URL from the final link and add the final subdirectory.
-  entity.link = concatLink(subdirectory, entity.link.replace(wpPath, "/"));
+  // Remove the WP path from the final link and add the final subdirectory.
+  entity.link = entity.link.replace(wpPath, subdirectory);
 };
