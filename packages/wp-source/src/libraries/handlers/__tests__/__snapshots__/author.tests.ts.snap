@@ -1988,13 +1988,6 @@ Object {
           },
           "tag": "link",
         },
-        Object {
-          "attributes": Object {
-            "content": "wordpress-plugin",
-            "name": "onesignal",
-          },
-          "tag": "meta",
-        },
       ],
       "id": 56,
       "link": "/category/news/",
@@ -2230,13 +2223,6 @@ Object {
             "rel": "dns-prefetch",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "wordpress-plugin",
-            "name": "onesignal",
-          },
-          "tag": "meta",
         },
       ],
       "id": 57,
@@ -2474,13 +2460,6 @@ Object {
           },
           "tag": "link",
         },
-        Object {
-          "attributes": Object {
-            "content": "wordpress-plugin",
-            "name": "onesignal",
-          },
-          "tag": "meta",
-        },
       ],
       "id": 58,
       "link": "/category/voices-and-views/",
@@ -2717,13 +2696,6 @@ Object {
           },
           "tag": "link",
         },
-        Object {
-          "attributes": Object {
-            "content": "wordpress-plugin",
-            "name": "onesignal",
-          },
-          "tag": "meta",
-        },
       ],
       "id": 59,
       "link": "/category/lifestyle/",
@@ -2938,13 +2910,6 @@ Object {
             "rel": "dns-prefetch",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "wordpress-plugin",
-            "name": "onesignal",
-          },
-          "tag": "meta",
         },
       ],
       "id": 7,
@@ -5099,13 +5064,6 @@ Object {
             "rel": "dns-prefetch",
           },
           "tag": "link",
-        },
-        Object {
-          "attributes": Object {
-            "content": "wordpress-plugin",
-            "name": "onesignal",
-          },
-          "tag": "meta",
         },
       ],
       "name": "Posts",
