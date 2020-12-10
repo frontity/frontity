@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
 import memoize from "ramda/src/memoizeWith";
-import useInfiniteScroll, { IntersectionOptions } from "./use-infinite-scroll";
+import useInfiniteScroll, {
+  IntersectionOptions,
+  Packages,
+} from "./use-infinite-scroll";
 import WpSource from "@frontity/wp-source/types";
 import Router from "@frontity/router/types";
 
@@ -72,6 +75,7 @@ type UsePostTypeInfiniteScroll = (options?: {
      */
     Wrapper: React.FC;
   }[];
+
   /**
    * If it has reached the limit of posts and it should switch to manual mode.
    */
@@ -112,75 +116,81 @@ export const Wrapper = ({
    * Link of the post that will be rendered inside this wrapper.
    */
   link: string;
+
   /**
    * The intersection observer options for fetching.
    */
   fetchInViewOptions?: IntersectionOptions;
+
   /**
    * The intersection observer options for routing.
    */
   routeInViewOptions?: IntersectionOptions;
-}): React.FC =>
-  connect(
-    ({ children, className }) => {
-      const { state } = useConnect<WpSource & Router>();
+}): React.FC => {
+  /**
+   * The wrapper component.
+   *
+   * @param props - The component props.
+   * @returns A react element.
+   */
+  const Wrapper: React.FC = ({ children, className }) => {
+    const { state } = useConnect<Packages>();
 
-      // Values from browser state.
-      const links: string[] = state.router.state.infiniteScroll?.links || [
-        link,
-      ];
-      const limit: number = state.router.state.infiniteScroll?.limit;
-      const pages: string[] = state.router.state.infiniteScroll?.pages || [];
+    // Values from browser state.
+    const links: string[] = state.router.state.infiniteScroll?.links || [link];
+    const limit: number = state.router.state.infiniteScroll?.limit;
+    const pages: string[] = state.router.state.infiniteScroll?.pages || [];
 
-      // Aliases to needed state.
-      const current = state.source.get(link);
-      const first = links[0];
-      const items = pages.reduce((final, current, index) => {
-        const data = state.source.get(current);
-        if (data.isArchive && data.isReady) {
-          const items =
-            index !== 0
-              ? data.items.filter(({ link }) => link !== first)
-              : data.items;
-          final = final.concat(items);
-        }
-        return final;
-      }, []);
-      const currentIndex = items.findIndex(({ link }) => link === current.link);
-      const nextItem = items[currentIndex + 1];
+    // Aliases to needed state.
+    const current = state.source.get(link);
+    const first = links[0];
+    const items = pages.reduce((final, current, index) => {
+      const data = state.source.get(current);
+      if (data.isArchive && data.isReady) {
+        const items =
+          index !== 0
+            ? data.items.filter(({ link }) => link !== first)
+            : data.items;
+        final = final.concat(items);
+      }
+      return final;
+    }, []);
+    const currentIndex = items.findIndex(({ link }) => link === current.link);
+    const nextItem = items[currentIndex + 1];
 
-      // Infinite scroll booleans.
-      const hasReachedLimit = !!limit && links.length >= limit;
+    // Infinite scroll booleans.
+    const hasReachedLimit = !!limit && links.length >= limit;
 
-      const { supported, fetchRef, routeRef } = useInfiniteScroll({
-        currentLink: link,
-        nextLink: nextItem?.link,
-        fetchInViewOptions,
-        routeInViewOptions,
-      });
+    const { supported, fetchRef, routeRef } = useInfiniteScroll({
+      currentLink: link,
+      nextLink: nextItem?.link,
+      fetchInViewOptions,
+      routeInViewOptions,
+    });
 
-      if (!current.isReady || current.isError) return null;
-      if (!supported) return children;
+    if (!current.isReady || current.isError) return null;
+    if (!supported) return children;
 
-      const container = css`
-        position: relative;
-      `;
+    const container = css`
+      position: relative;
+    `;
 
-      const fetcher = css`
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-      `;
+    const fetcher = css`
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    `;
 
-      return (
-        <div css={container} ref={routeRef} className={className}>
-          {children}
-          {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
-        </div>
-      );
-    },
-    { injectProps: false }
-  );
+    return (
+      <div css={container} ref={routeRef} className={className}>
+        {children}
+        {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
+      </div>
+    );
+  };
+
+  return connect(Wrapper, { injectProps: false });
+};
 
 /**
  * A memoized {@link Wrapper} to generate Wrapper components only once.
@@ -199,6 +209,7 @@ const MemoizedWrapper = memoize(
        * The intersection observer options for fetching.
        */
       fetchInViewOptions: IntersectionOptions;
+
       /**
        * The intersection observer options for routing.
        */

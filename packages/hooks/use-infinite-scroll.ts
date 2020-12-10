@@ -108,7 +108,7 @@ type UseInfiniteScroll = (options: {
  * The type of those packages the {@link useInfiniteScroll} hook depends on,
  * merged together.
  */
-type Packages = MergePackages<
+export type Packages = MergePackages<
   Source,
   Router,
   {
@@ -121,7 +121,7 @@ type Packages = MergePackages<
        */
       router: {
         /**
-         * The Router state property.
+         * Property representing the browser history state.
          */
         state: Router["state"]["router"]["state"] & {
           /**
@@ -133,6 +133,10 @@ type Packages = MergePackages<
              * Array of visited links.
              */
             links: string[];
+
+            /**
+             *
+             */
           };
         };
       };
