@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useConnect } from "frontity";
 import useInView from "./use-in-view";
+import { MergePackages } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -104,12 +105,49 @@ type UseInfiniteScroll = (options: {
     };
 
 /**
+ * The type of those packages the {@link useInfiniteScroll} hook depends on,
+ * merged together.
+ */
+type Packages = MergePackages<
+  Source,
+  Router,
+  {
+    /**
+     * State exposed by packages.
+     */
+    state: {
+      /**
+       * Router namespace.
+       */
+      router: {
+        /**
+         * The Router state property.
+         */
+        state: Router["state"]["router"]["state"] & {
+          /**
+           * Properties added by the {@link useInfiniteScroll} to the Router
+           * state property.
+           */
+          infiniteScroll?: {
+            /**
+             * Array of visited links.
+             */
+            links: string[];
+          };
+        };
+      };
+    };
+  }
+>;
+
+/**
  * A hook to build other infinite scroll hooks.
  *
  * It is used by the higher abstracted hooks `useArchiveInfiniteScroll` and
  * `usePostTypeInfiniteScroll`.
  *
- * @param options - The options of the hook. Defined in {@link UseInfiniteScroll}.
+ * @param options - The options of the hook. Defined in
+ * {@link UseInfiniteScroll}.
  * @returns - An object with refs and booleans to use in your own hook. Defined
  * at {@link useArchiveInfiniteScroll}.
  */
@@ -124,28 +162,38 @@ const useInfiniteScroll: UseInfiniteScroll = ({
     rootMargin: "-80% 0% -19.9999% 0%",
   },
 }) => {
+  // Generate triggers for the `source.fetch` and `router.set` actions.
   const fetch = useInView(fetchInViewOptions);
   const route = useInView(routeInViewOptions);
 
-  if (!fetch.supported || !route.supported) return { supported: false };
+  // Check if `IntersectionObserver` is supported by the browser.
+  const isSupported = fetch.supported && route.supported;
 
-  const { state, actions } = useConnect<Source & Router>();
+  // Get state and actions from Frontity.
+  const { state, actions } = useConnect<Packages>();
 
+  // Get data objects for the current link and the next one.
   const current = state.source.get(currentLink);
   const next = nextLink ? state.source.get(nextLink) : null;
 
-  // Request the current route in case it's not ready
-  // and it's not fetching.
+  // Request the current route in case it's not ready and it's not fetching. If
+  // not supported, it does nothing.
   useEffect(() => {
-    if (!current.isReady && !current.isFetching)
+    if (isSupported && !current.isReady && !current.isFetching)
       actions.source.fetch(currentLink);
-  }, []);
+  }, [
+    isSupported,
+    current.isReady,
+    current.isFetching,
+    actions.source,
+    currentLink,
+  ]);
 
-  // Once the fetch waypoint is in view, fetch the next
-  // route content, if not available yet, and add the new route
-  // to the array of elements in the infinite scroll.
+  // Once the fetch waypoint is in view, fetch the next route content, if not
+  // available yet, and add the new route to the array of elements in the
+  // infinite scroll. Do nothing if it is not supported.
   useEffect(() => {
-    if (fetch.inView && nextLink) {
+    if (isSupported && fetch.inView && nextLink) {
       const links = state.router.state.infiniteScroll?.links
         ? [...state.router.state.infiniteScroll.links]
         : [currentLink];
@@ -166,27 +214,39 @@ const useInfiniteScroll: UseInfiniteScroll = ({
         },
       });
     }
-  }, [fetch.inView, nextLink]);
+  }, [
+    isSupported,
+    fetch.inView,
+    nextLink,
+    state.router.state,
+    currentLink,
+    next.isReady,
+    next.isFetching,
+    actions.router,
+    actions.source,
+  ]);
 
   // Once the route waypoint is in view, change the route to the
   // current element. This preserves the route state between changes
-  // to avoid rerendering.
+  // to avoid rerendering. Again, it does nothing if not supported.
   useEffect(() => {
-    if (route.inView && state.router.link !== currentLink) {
+    if (isSupported && route.inView && state.router.link !== currentLink) {
       actions.router.set(currentLink, {
         method: "replace",
         state: state.router.state,
       });
     }
-  }, [route.inView]);
+  }, [isSupported, route.inView, state.router, actions.router, currentLink]);
 
-  return {
-    supported: true,
-    routeRef: route.ref,
-    fetchRef: fetch.ref,
-    routeInView: route.inView,
-    fetchInView: fetch.inView,
-  };
+  return isSupported
+    ? {
+        supported: true,
+        routeRef: route.ref,
+        fetchRef: fetch.ref,
+        routeInView: route.inView,
+        fetchInView: fetch.inView,
+      }
+    : { supported: false };
 };
 
 export default useInfiniteScroll;
