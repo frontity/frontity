@@ -5,7 +5,7 @@
     "test": "lerna run test:ci --stream",
     "test:ci": "jest --clearCache && lerna run test:ci --stream",
     "codecov": "curl -s https://codecov.io/bash | bash -s",
-    "prepare": "lerna bootstrap --hoist",
+    "prepare": "lerna bootstrap --hoist --ignore-scripts && lerna run prepublish",
     "reinstall": "lerna clean --yes && npm run prepare"
   },
   "workspaces": [
