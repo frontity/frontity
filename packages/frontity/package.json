@@ -46,7 +46,6 @@
     "clipboardy": "^2.1.0",
     "commander": "^2.20.0",
     "detect-port-alt": "^1.1.6",
-    "didyoumean": "^1.2.1",
     "dotenv": "^8.2.0",
     "envinfo": "^7.3.1",
     "fs-extra": "^7.0.1",
@@ -54,6 +53,7 @@
     "he": "^1.2.0",
     "inquirer": "^6.3.1",
     "is-root": "^2.1.0",
+    "leven": "^3.1.0",
     "node-fetch": "^2.6.0",
     "ora": "^3.4.0",
     "ramda": "^0.26.1",
@@ -66,7 +66,6 @@
   "devDependencies": {
     "@frontity/connect": "^1.1.4",
     "@frontity/core": "^1.9.1",
-    "@types/didyoumean": "^1.2.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.0",
     "@types/node": "^12.12.53",
