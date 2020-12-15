@@ -47,7 +47,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -106,7 +112,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -156,7 +168,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -206,7 +224,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -353,7 +377,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -424,7 +454,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -486,7 +522,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -558,7 +600,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -630,7 +678,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -714,7 +768,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -798,7 +858,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -937,7 +1003,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -1063,7 +1135,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -1189,7 +1267,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -1339,7 +1423,13 @@ Object {
   },
   "post": Object {},
   "postEndpoint": "multiple-post-type",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -1477,7 +1567,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -1616,7 +1712,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -1754,7 +1856,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -1892,7 +2000,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -2029,7 +2143,13 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {
@@ -2091,7 +2211,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},
@@ -2133,7 +2259,13 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
   "postsPage": "",
   "subdirectory": "",
   "tag": Object {},

@@ -27,6 +27,13 @@ let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore<WpSourceAndCpt>(clone(wpSource()));
   store.state.source.url = "https://test.frontity.org";
+  store.state.source.postTypes = [
+    {
+      type: "custom_post_type",
+      endpoint: "custom_post_types",
+      archive: "/custom-post-type",
+    },
+  ];
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
