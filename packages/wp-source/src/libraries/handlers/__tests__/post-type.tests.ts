@@ -30,9 +30,9 @@ beforeEach(() => {
   store.state.source.url = "https://test.frontity.org";
   store.state.source.postTypes = [
     {
-      type: "custom_post_type",
-      endpoint: "custom_post_types",
-      archive: "/custom-post-type",
+      type: "cpt",
+      endpoint: "cpts",
+      archive: "/cpt",
     },
   ];
   store.actions.source.init();

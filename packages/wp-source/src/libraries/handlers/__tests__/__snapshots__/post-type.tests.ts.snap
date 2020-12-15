@@ -49,9 +49,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -114,9 +114,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -170,9 +170,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -226,9 +226,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -379,9 +379,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -456,9 +456,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -524,9 +524,21 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org",
+}
+`;
     },
   ],
   "postsPage": "",
@@ -610,9 +622,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -688,9 +700,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -766,9 +778,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -856,9 +868,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -946,9 +958,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -1091,9 +1103,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -1223,9 +1235,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -1355,9 +1367,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -1384,7 +1396,7 @@ exports[`post fetchs from a different endpoint with extra params 1`] = `
 Array [
   Array [
     Object {
-      "endpoint": "multiple-post-type",
+      "endpoint": "cpts",
       "params": Object {
         "_embed": true,
         "slug": "cpt-11",
@@ -1511,9 +1523,9 @@ Object {
   "postEndpoint": "multiple-post-type",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -1655,9 +1667,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -1800,9 +1812,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -1944,9 +1956,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -2088,9 +2100,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -2231,9 +2243,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -2299,9 +2311,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
@@ -2347,9 +2359,9 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [
     Object {
-      "archive": "/custom-post-type",
-      "endpoint": "custom_post_types",
-      "type": "custom_post_type",
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
     },
   ],
   "postsPage": "",
