@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.2.4
+
+### Patch Changes
+
+- [`a74704d0`](https://github.com/frontity/frontity/commit/a74704d06c910117e561d34771c006705e6d26c5) [#634](https://github.com/frontity/frontity/pull/634) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Prevent navigation errors when the initial location in the browser doesn't match `state.router.link`.
+
+  This could happen if Frontity is embedded in WordPress (see [embedded mode](https://github.com/frontity/frontity-embedded-proof-of-concept)) and the WordPress server modifies the URL when doing a request to the Frontity server.
+
 ## 1.2.3
 
 ### Patch Changes

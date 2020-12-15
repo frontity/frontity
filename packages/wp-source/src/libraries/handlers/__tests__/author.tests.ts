@@ -76,38 +76,42 @@ describe("author", () => {
   });
 
   test("overwrites the data when fetched with { force: true }", async () => {
-    // Add initial data to the store
-    await store.libraries.source.populate({
-      state: store.state,
-      response: mockResponse(author1),
-    });
-    await store.actions.source.fetch("/author/author-1/");
+    // Define the JSON response for the author with the name updated.
+    const updatedAuthor = { ...author1, name: "Author 2" };
+
+    // Do the same for the posts that were written by that author.
+    const updatedPosts = clone(author1Posts);
+    updatedPosts.forEach((post) => (post._embedded.author = [updatedAuthor]));
 
     // Mock Api responses
-    api.get = jest.fn((_) =>
-      Promise.resolve(
-        mockResponse(
-          {
-            ...author1,
-            name: "Author 2",
-          },
-          {
-            "X-WP-Total": "5",
-            "X-WP-TotalPages": "2",
-          }
-        )
+    api.get = jest
+      .fn()
+      // First `actions.source.fetch()` call.
+      .mockResolvedValueOnce(mockResponse(author1))
+      .mockResolvedValueOnce(
+        mockResponse(author1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
       )
-    );
+      // Second `actions.source.fetch()` call, with the author name updated.
+      .mockResolvedValueOnce(mockResponse(updatedAuthor))
+      .mockResolvedValueOnce(
+        mockResponse(updatedPosts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
+      );
 
+    // Fetch author posts for the first time.
+    await store.actions.source.fetch("/author/author-1/");
     expect(store.state.source.author["1"].name).toEqual("Author 1");
 
-    // Fetch entities with { force: true }
-    await store.actions.source.fetch("/author/author-1/", {
-      force: true,
-    });
+    // Fetch entities with { force: true }.
+    await store.actions.source.fetch("/author/author-1/", { force: true });
 
-    // Make sure that api.get() was called for each `source.fetch()`
-    expect(api.get).toHaveBeenCalledTimes(2);
+    // Make sure that api.get() was called twice for each `source.fetch()`.
+    expect(api.get).toHaveBeenCalledTimes(4);
 
     expect(store.state.source).toMatchSnapshot();
     expect(store.state.source.author["1"].name).toEqual("Author 2");
