@@ -5,9 +5,9 @@ on:
       - selenium-tests
 
 jobs:
-  init-frontity:
-    name: "Initialize Frontity repo"
-    runs-on: ubuntu-latest
+  selenium-job:
+    name: "BrowserStack Selenium Tests"
+    runs-on: ubuntu-latest # Can be self-hosted runner also
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -19,36 +19,29 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm ci
 
-  selenium-job:
-    name: "BrowserStack Selenium Tests"
-    needs: init-frontity
-    runs-on: ubuntu-latest # Can be self-hosted runner also
-    defaults:
-      run:
-        working-directory: e2e
-    steps:
       - name: "BrowserStack Env Setup" # Invokes the setup-env action
+        working-directory: e2e
         uses: browserstack/github-actions/setup-env@master
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
 
       - name: "BrowserStack Local Tunnel Setup" # Invokes the setup-local action
+        working-directory: e2e
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: start
           local-identifier: random
 
-      # The next 3 steps are for building the web application to be tested and starting the web server on the runner environment
-
-      - name: "Checkout the repository"
-        uses: actions/checkout@v2
+      # The next steps are for building the web application to be tested and starting the web server on the runner environment
 
       - name: "Building web application to be tested"
         run: npm install
+        working-directory: e2e
 
       - name: "Build Frontity project"
         run: npx frontity build
@@ -60,8 +53,10 @@ jobs:
 
       - name: "Running test on BrowserStack" # Invokes the actual test script that would run on BrowserStack browsers
         run: npx wdio selenium/conf/module.conf.js # See sample test script above
+        working-directory: e2e
 
       - name: "BrowserStackLocal Stop" # Terminating the BrowserStackLocal tunnel connection
+        working-directory: e2e
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: stop
