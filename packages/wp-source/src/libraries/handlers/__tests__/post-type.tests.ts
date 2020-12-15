@@ -7,6 +7,7 @@ import Api from "../../api";
 import { mockResponse } from "./mocks/helpers";
 import attachment1 from "./mocks/post-type/attachment-1.json";
 import page1 from "./mocks/post-type/page-1.json";
+import page1WithParent from "./mocks/post-type/page-1-with-parent.json";
 import post1 from "./mocks/post-type/post-1.json";
 import post1Revision from "./mocks/post-type/post-1-revision.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
@@ -237,6 +238,17 @@ describe("page", () => {
     // Fetch entities
     await store.actions.source.fetch("/page-1/?some=param");
     expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("can have a parent", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]))
+      .mockResolvedValueOnce(mockResponse([page1WithParent]));
+    // Fetch entities
+    await store.actions.source.fetch("/parent/page-1/");
     expect(store.state.source).toMatchSnapshot();
   });
 });

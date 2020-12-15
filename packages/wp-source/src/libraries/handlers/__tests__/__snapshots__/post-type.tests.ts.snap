@@ -540,6 +540,92 @@ Object {
 }
 `;
 
+exports[`page can have a parent 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json/",
+  "attachment": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/author/author-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/author/author-1/",
+    },
+    "/parent/page-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isPage": true,
+      "isPostType": true,
+      "isReady": true,
+      "link": "/parent/page-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/parent/page-1/",
+      "type": "page",
+    },
+  },
+  "entity": [Function],
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "up": Array [
+          Object {
+            "id": 2,
+            "link": "https://test.frontity.org/parent/",
+            "slug": "parent",
+          },
+        ],
+      },
+      "author": 1,
+      "featured_media": 1,
+      "id": 1,
+      "link": "/parent/page-1/",
+      "parent": 2,
+      "slug": "page-1",
+      "type": "page",
+    },
+  },
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [
+    Object {
+      "archive": "/custom-post-type",
+      "endpoint": "custom_post_types",
+      "type": "custom_post_type",
+    },
+  ],
+  "postsPage": "",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org",
+}
+`;
+
 exports[`page doesn't exist in source.page 1`] = `
 Object {
   "api": "https://test.frontity.org/wp-json/",
