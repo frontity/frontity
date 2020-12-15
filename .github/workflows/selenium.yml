@@ -5,10 +5,30 @@ on:
       - selenium-tests
 
 jobs:
-  ubuntu-job:
-    name: "BrowserStack Test on Ubuntu"
-    runs-on: ubuntu-latest # Can be self-hosted runner also
+  init-frontity:
+    name: "Initialize Frontity repo"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
+      - name: Setup npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
+
+  selenium-job:
+    name: "BrowserStack Selenium Tests"
+    needs: init-frontity
+    runs-on: ubuntu-latest # Can be self-hosted runner also
+    defaults:
+      run:
+        working-directory: e2e
     steps:
       - name: "BrowserStack Env Setup" # Invokes the setup-env action
         uses: browserstack/github-actions/setup-env@master
@@ -30,11 +50,16 @@ jobs:
       - name: "Building web application to be tested"
         run: npm install
 
-      - name: "Running Frontity project"
-        run: cd e2e/project && npx frontity build && npx frontity serve &
+      - name: "Build Frontity project"
+        run: npx frontity build
+        working-directory: e2e/project
+
+      - name: "Serve Frontity project"
+        run: npx frontity serve &
+        working-directory: e2e/project
 
       - name: "Running test on BrowserStack" # Invokes the actual test script that would run on BrowserStack browsers
-        run: cd e2e && npx wdio selenium/conf/module.conf.js # See sample test script above
+        run: npx wdio selenium/conf/module.conf.js # See sample test script above
 
       - name: "BrowserStackLocal Stop" # Terminating the BrowserStackLocal tunnel connection
         uses: browserstack/github-actions/setup-local@master
