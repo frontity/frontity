@@ -157,7 +157,7 @@ const actions: WpSource["actions"]["source"] = {
       handlers.push({
         name: type,
         priority: 10,
-        pattern: concatLink(type, "/:slug"),
+        pattern: concatLink(type, "/(.*)?/:slug"),
         func: postTypeHandler({ endpoints: [endpoint] }),
       });
       // Query permalink (mainly for drafts).
