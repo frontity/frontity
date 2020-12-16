@@ -12,6 +12,7 @@ import post1 from "./mocks/post-type/post-1.json";
 import post1Revision from "./mocks/post-type/post-1-revision.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
+import cpt11WithParent from "./mocks/post-type/cpt-11-with-parent.json";
 import { ServerError, isError, isPostType } from "@frontity/source";
 import { PostEntity } from "@frontity/source/types";
 
@@ -454,6 +455,22 @@ describe("custom post type", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
     // Fetch entities
     await store.actions.source.fetch("/cpt/cpt-11/?some=param");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with custom post types with parent pages", async () => {
+    // Add page to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(cpt11WithParent),
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11WithParent]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/parent/cpt-11/");
     expect(postTypeHandler).not.toHaveBeenCalled();
     expect(customPostTypeHandler).toHaveBeenCalled();
     expect(api.get).toHaveBeenCalledTimes(0);
