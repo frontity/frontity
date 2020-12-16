@@ -1,4 +1,5 @@
 import Package from "./package";
+import { MonoSettings } from "./settings";
 
 /**
  * All the properties exposed by the Frontity framework.
@@ -18,6 +19,13 @@ interface Frontity extends Package {
        * Populated automatically by Frontity.
        */
       name?: string;
+
+      /**
+       * The match properry.
+       *
+       * Populated automaticaly by frontity from settings.
+       */
+      match?: MonoSettings["match"];
 
       /**
        * The link that was requested in the server-side rendering.
