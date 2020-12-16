@@ -406,3 +406,57 @@ describe("attachment", () => {
     expect(store.state.source).toMatchSnapshot();
   });
 });
+
+describe("custom post type", () => {
+  test("doesn't exist in source.page", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11/");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("exists in source.page", async () => {
+    // Add page to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(cpt11),
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11/");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (doesn't exist in source.page)", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11/?some=param");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (exists in source.page)", async () => {
+    // Add page to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(cpt11),
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11/?some=param");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+});
