@@ -3,6 +3,15 @@ import { connect, styled } from "frontity";
 import Img from "@frontity/components/image";
 import SectionContainer from "../styles/section-container";
 
+/**
+ * The featured image/video of the post.
+ *
+ * @param props -
+ * - `state`: The Frontity state
+ * - `id`: The ID of the featured image/video.
+ * - `className`: Required in order to wrap the component with `styled()`.
+ * @returns React element.
+ */
 const FeaturedMedia = ({ state, id, className }) => {
   const media = state.source.attachment[id];
 
