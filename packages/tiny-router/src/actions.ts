@@ -99,7 +99,10 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
           // Use "replace" to keep browser history consistent.
           method: "replace",
           // Keep the same history.state that the old link had.
-          state: state.router.state,
+          // We have to stringfy and parse the object because
+          // window.history.replaceState() does not accept a Proxy as the first
+          // argument for state.
+          state: JSON.parse(JSON.stringify(state.router.state)),
         });
       }
     });
