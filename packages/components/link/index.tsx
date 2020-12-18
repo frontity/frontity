@@ -38,6 +38,8 @@ const Link: React.FC<LinkProps> = ({
   ...anchorProps
 }) => {
   const { state, actions } = useConnect<Packages>();
+  const { match } = state.frontity;
+
   const { ref: inViewRef, inView } = useInView({
     triggerOnce: true,
     rootMargin: "200px",
@@ -60,7 +62,7 @@ const Link: React.FC<LinkProps> = ({
   }
 
   const link = replaceSourceUrls
-    ? removeSourceUrl(rawLink, state.source.url)
+    ? removeSourceUrl(rawLink, state.source.url, match)
     : rawLink;
 
   const autoPrefetch = state.theme?.autoPrefetch;
