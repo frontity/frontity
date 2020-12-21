@@ -1,6 +1,7 @@
 import {
   Data,
   ErrorData,
+  Error404Data,
   ArchiveData,
   SearchData,
   TermData,
@@ -25,6 +26,16 @@ import {
  */
 export function isError(data: Data): data is ErrorData {
   return (data as ErrorData).isError === true;
+}
+
+/**
+ * Checks if a data object represents a 404 error.
+ *
+ * @param data - Object of type {@link Data}.
+ * @returns A boolean value with the result.
+ */
+export function is404(data: Data): data is Error404Data {
+  return (data as Error404Data).is404 === true;
 }
 
 /**

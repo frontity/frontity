@@ -132,6 +132,59 @@ export interface ErrorData extends Data {
   /* eslint-enable */
 }
 
+/**
+ * A link in Frontity that shows a 404 error.
+ *
+ * @example
+ * ```
+ * const data = {
+ *   link: "/not-a-post/",
+ *   route: "/not-a-post/",
+ *   page: 1,
+ *   query: {},
+ *   isFetching: false,
+ *   isReady: true,
+ *   isError: true,
+ *   is404: true,
+ *   errorStatus: 404,
+ *   errorStatusText: "Not Found",
+ * }
+ * ```
+ */
+export interface Error404Data extends Data {
+  /**
+   * Property specifying that the link is an error.
+   */
+  isError: true;
+
+  /**
+   * HTTP 404 error code.
+   */
+  errorStatus: 404;
+
+  /**
+   * HTTP error message.
+   *
+   * @example "Not Found"
+   */
+  errorStatusText: string;
+
+  /**
+   * Link is ready when data is an error.
+   */
+  isReady: true;
+
+  /**
+   * Link is not being fetched when data is an error.
+   */
+  isFetching: false;
+
+  /**
+   * The 404 conditional tag.
+   */
+  is404: true;
+}
+
 // ARCHIVES
 
 /**

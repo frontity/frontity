@@ -3,6 +3,7 @@ import {
   // Types.
   Data,
   ErrorData,
+  Error404Data,
   ArchiveData,
   TaxonomyData,
   TermData,
@@ -37,6 +38,7 @@ import {
   isPage,
   isAttachment,
   isHome,
+  is404,
 } from "../data";
 import {
   // Data instances.
@@ -71,6 +73,11 @@ describe("Data type guards", () => {
     if (isError(data)) {
       expectType<Data>(data);
       expectType<ErrorData>(data);
+    }
+
+    if (is404(data)) {
+      expectType<Data>(data);
+      expectType<Error404Data>(data);
     }
 
     if (isArchive(data)) {
