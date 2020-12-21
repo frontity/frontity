@@ -39,6 +39,8 @@ import {
   isAttachment,
   isHome,
   is404,
+  isReady,
+  isFetching,
 } from "../data";
 import {
   // Data instances.
@@ -70,6 +72,14 @@ describe("Data type guards", () => {
   test("Types are well defined", () => {
     const data: Data = onlyStatus;
 
+    if (isReady(data)) {
+      expectType<Data>(data);
+    }
+
+    if (isFetching(data)) {
+      expectType<Data>(data);
+    }
+
     if (isError(data)) {
       expectType<Data>(data);
       expectType<ErrorData>(data);
@@ -77,6 +87,7 @@ describe("Data type guards", () => {
 
     if (is404(data)) {
       expectType<Data>(data);
+      expectType<ErrorData>(data);
       expectType<Error404Data>(data);
     }
 

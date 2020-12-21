@@ -19,7 +19,7 @@ import {
 } from "../types/data";
 
 /**
- * Checks if a data object represents an error.
+ * Check if a data object represents an error.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -29,7 +29,7 @@ export function isError(data: Data): data is ErrorData {
 }
 
 /**
- * Checks if a data object represents a 404 error.
+ * Check if a data object represents a 404 error.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -39,7 +39,7 @@ export function is404(data: Data): data is Error404Data {
 }
 
 /**
- * Checks if a data object represents an archive.
+ * Check if a data object represents an archive.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -49,7 +49,7 @@ export function isArchive(data: Data): data is ArchiveData {
 }
 
 /**
- * Checks if a data object represents a search.
+ * Check if a data object represents a search.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -59,7 +59,7 @@ export function isSearch(data: Data): data is SearchData {
 }
 
 /**
- * Checks if a data object represents a taxonomy.
+ * Check if a data object represents a taxonomy.
  *
  * @deprecated Use {@link isTerm} instead.
  *
@@ -72,7 +72,7 @@ export function isTaxonomy(data: Data): data is TermData {
 }
 
 /**
- * Checks if a data object represents a taxonomy.
+ * Check if a data object represents a taxonomy.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -83,7 +83,7 @@ export function isTerm(data: Data): data is TermData {
 }
 
 /**
- * Checks if a data object represents a category.
+ * Check if a data object represents a category.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -93,7 +93,7 @@ export function isCategory(data: Data): data is CategoryData {
 }
 
 /**
- * Checks if a data object represents a tag.
+ * Check if a data object represents a tag.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -103,7 +103,7 @@ export function isTag(data: Data): data is TagData {
 }
 
 /**
- * Checks if a data object represents an author archive.
+ * Check if a data object represents an author archive.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -113,7 +113,7 @@ export function isAuthor(data: Data): data is AuthorData {
 }
 
 /**
- * Checks if a data object represents a date archive.
+ * Check if a data object represents a date archive.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -123,7 +123,7 @@ export function isDate(data: Data): data is DateData {
 }
 
 /**
- * Checks if a data object represents a post type archive.
+ * Check if a data object represents a post type archive.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -133,7 +133,7 @@ export function isPostTypeArchive(data: Data): data is PostTypeArchiveData {
 }
 
 /**
- * Checks if a data object represents a post archive.
+ * Check if a data object represents a post archive.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -143,7 +143,7 @@ export function isPostArchive(data: Data): data is PostArchiveData {
 }
 
 /**
- * Checks if a data object represents a post type entity.
+ * Check if a data object represents a post type entity.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -153,7 +153,7 @@ export function isPostType(data: Data): data is PostTypeData {
 }
 
 /**
- * Checks if a data object represents a post entity.
+ * Check if a data object represents a post entity.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -163,7 +163,7 @@ export function isPost(data: Data): data is PostData {
 }
 
 /**
- * Checks if a data object represents a page entity.
+ * Check if a data object represents a page entity.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -173,7 +173,7 @@ export function isPage(data: Data): data is PageData {
 }
 
 /**
- * Checks if a data object represents an attachment entity.
+ * Check if a data object represents an attachment entity.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -183,7 +183,7 @@ export function isAttachment(data: Data): data is AttachmentData {
 }
 
 /**
- * Checks if a data object represents the homepage.
+ * Check if a data object represents the homepage.
  *
  * @param data - Object of type {@link Data}.
  * @returns A boolean value with the result.
@@ -191,3 +191,19 @@ export function isAttachment(data: Data): data is AttachmentData {
 export function isHome(data: Data): data is HomeData {
   return (data as HomeData).isHome === true;
 }
+
+/**
+ * Check if a data object is ready.
+ *
+ * @param data - Object of type {@link Data}.
+ * @returns A boolean value with the result.
+ */
+export const isReady = (data: Data): boolean => data.isReady;
+
+/**
+ * Check if a data object is fetching.
+ *
+ * @param data - Object of type {@link Data}.
+ * @returns A boolean value with the result.
+ */
+export const isFetching = (data: Data): boolean => data.isFetching;
