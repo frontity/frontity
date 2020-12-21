@@ -13,9 +13,9 @@ exports.config = {
   user: userName,
   key: accessKey,
   updateJob: false,
-  specs: ["./selenium/tests/specs/*.js"],
+  specs: ["./selenium/tests/specs/*.spec.js"],
   exclude: [],
-  maxInstances: 10,
+  maxInstances: 1,
   commonCapabilities: {
     "browserstack.local": true,
     "browserstack.use_w3c": true,
