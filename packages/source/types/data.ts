@@ -438,6 +438,13 @@ export interface RedirectionData extends Data {
   location: string;
 
   /**
+   * A boolean flag which indicates whether a particular redirection is internal
+   * (meaning redirecting to the same domain as the the frontity application or
+   * the Wordpress instance) or external, meaning any other domain.
+   */
+  isExternal: boolean;
+
+  /**
    * The HTTP status code of the response.
    * Possible values are: `301`, `302`, `307` and `308`.
    *

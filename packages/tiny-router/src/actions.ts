@@ -95,6 +95,8 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     observe(() => {
       const data = state.source?.get(state.router.link);
       if (data && isRedirection(data)) {
+        // If the redirection is external, redirect to the full URL here
+
         actions.router.set(data.location, {
           // Use "replace" to keep browser history consistent.
           method: "replace",
@@ -180,6 +182,12 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
 
   // Check if the link has a redirection.
   if (data && isRedirection(data)) {
+    // If the redirection is external, just redirect to the full URL here.
+    if (data.isExternal) {
+      ctx.redirect(data.location);
+      return;
+    }
+
     // Recover all the missing query params from the original URL. This is
     // required because we remove the query params that start with `frontity_`.
     const location = new URL(data.location, "https://dummy-domain.com");

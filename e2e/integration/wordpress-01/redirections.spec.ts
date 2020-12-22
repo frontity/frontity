@@ -248,4 +248,12 @@ describe("Redirections", () => {
     );
     cy.get("#post").should("exist");
   });
+
+  it("Should redirect to an external domain on the server", () => {
+    cy.visit(
+      "http://localhost:3001/external-redirect/?frontity_name=redirections"
+    );
+
+    cy.location("href").should("eq", "https://frontity.org/");
+  });
 });

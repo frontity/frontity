@@ -189,8 +189,23 @@ const actions: WpSource["actions"]["source"] = {
         if (redirection?.isRedirection) {
           const { pathname, search, hash } = new URL(redirection.location);
 
+          let location: string;
+          let isExternal = false;
+
+          const host = new URL(redirection.location).host;
+          const sourceUrlHost = new URL(state.source.url).host;
+          const frontityUrlHost = new URL(state.frontity.url).host;
+
+          if (!(host === sourceUrlHost || host === frontityUrlHost)) {
+            location = redirection.location;
+            isExternal = true;
+          } else {
+            location = pathname + search + hash;
+          }
+
           Object.assign(source.data[link], {
-            location: pathname + search + hash,
+            location,
+            isExternal,
             redirectionStatus: redirection.status,
             [`is${redirection.status}`]: true,
             isFetching: false,
