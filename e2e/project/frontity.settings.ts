@@ -109,7 +109,6 @@ const settings: Settings<
   {
     name: "comscore-analytics",
     packages: [
-      "e2e-analytics",
       "@frontity/tiny-router",
       {
         name: "@frontity/comscore-analytics",
@@ -119,6 +118,7 @@ const settings: Settings<
           },
         },
       },
+      "e2e-analytics",
     ],
   },
   {
@@ -136,7 +136,6 @@ const settings: Settings<
   {
     name: "google-analytics",
     packages: [
-      "e2e-analytics",
       "@frontity/tiny-router",
       {
         name: "@frontity/google-analytics",
@@ -146,6 +145,7 @@ const settings: Settings<
           },
         },
       },
+      "e2e-analytics",
     ],
   },
   {
