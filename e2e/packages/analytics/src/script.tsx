@@ -23,18 +23,22 @@ const Script: React.FC = () => {
   `;
 
   const comscoreScript = `
-    window.oldComscoreBeacon = window.COMSCORE ? window.COMSCORE.beacon : function() {};
+    window.COMSCORE = window.COMSCORE || {};
+    window.oldComscoreBeacon = window.COMSCORE.beacon || function() {};
     window.comscoreCalls = [];
-    Object.defineProperty(window, "COMSCORE", {
+    Object.defineProperty(window.COMSCORE, "beacon", {
       get: function() {
-        return { beacon: function () {
-          console.log(c1);
-          window.comscoreCalls.push(arguments);
+        return function () {
+          window.comscoreCalls.push({ 
+            title: document.title,
+            link: window.location.href,
+            id: arguments[0].c2
+          });
           window.oldComscoreBeacon.apply(window.COMSCORE, arguments);
-        }};
+        };
       },
       set: function(value) {
-        window.oldComscoreBeacon = value.beacon;
+        window.oldComscoreBeacon = value;
       }
     });
 `;
