@@ -8,13 +8,13 @@ More info about this package can be found in the docs → https://docs.frontity.
 
 ## Install
 
-It is automatically installed when you create your Frontity project by doing
+It is automatically installed when you create your Frontity project by doing 
 
 ```sh
 npx frontity create [project-name]
 ```
 
-> More info on `npx frontity create` [here](https://docs.frontity.org/frontity-cli/create-commands#create)
+> More info on `npx frontity create` [here](https://docs.frontity.org/frontity-cli/create) 
 
 ## Usage
 
@@ -33,7 +33,7 @@ const Page = () => (
     />
     <OtherContent />
   </>
-);
+);  
 ```
 
 ## Feature Discussions
@@ -44,9 +44,9 @@ These are the ones related to this package: https://community.frontity.org/tags/
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages//CHANGELOG.md)
 
----
+***
 
 ### » Frontity Resources 🌎
 
@@ -54,12 +54,11 @@ Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.m
 
 We have a number of different channels at your disposal where you can find out more information about the project, join in discussions about it, and also get involved:
 
-- **📖 [Docs](https://docs.frontity.org/):** our primary documentation resource - this is the place to learn how to build amazing sites with Frontity.
-
-* **👨‍👩‍👧‍👦 [Community forum](https://community.frontity.org/):** join our forum and ask questions, share your knowledge, give us feedback and tell us how we're doing, and meet other cool Frontity people. We'd also love to know about what you're building with Frontity, so please do swing by the [forum](https://community.frontity.org/) and tell us about your projects.
-* **🐞 Contribute:** we use [GitHub](https://github.com/frontity/frontity) for bugs and pull requests. See our [Contributing](../../CONTRIBUTING.md/) section to find out how you can help develop Frontity, or improve this documentation.
-* **🗣 Social media**: interact with other Frontity users. Reach out to us on [Twitter](https://twitter.com/frontity). Mention us in your tweets about Frontity and what you're building by using **`@frontity`**.
-* 💌 **Newsletter:** do you want to receive the latest news about Frontity and find out as soon as there's an update to the framework? Subscribe to our [newsletter](https://frontity.org/newsletter/).
+- **📖  [Docs](https://docs.frontity.org/):** our primary documentation resource - this is the place to learn how to build amazing sites with Frontity.
+* **👨‍👩‍👧‍👦  [Community forum](https://community.frontity.org/):** join our forum and ask questions, share your knowledge, give us feedback and tell us how we're doing, and meet other cool Frontity people. We'd also love to know about what you're building with Frontity, so please do swing by the [forum](https://community.frontity.org/) and tell us about your projects.
+* **🐞  Contribute:** we use [GitHub](https://github.com/frontity/frontity) for bugs and pull requests. See our [Contributing](../contributing/) section to find out how you can help develop Frontity, or improve this documentation.
+* **🗣  Social media**: interact with other Frontity users. Reach out to us on [Twitter](https://twitter.com/frontity). Mention us in your tweets about Frontity and what you're building by using **`@frontity`**.
+* 💌  **Newsletter:** do you want to receive the latest news about Frontity and find out as soon as there's an update to the framework? Subscribe to our [newsletter](https://frontity.org/#newsletter).
 
 ### » Get involved 🤗
 
@@ -69,4 +68,4 @@ Got questions or feedback about Frontity? We'd love to hear from you in our [com
 
 Frontity also welcomes contributions. There are many ways to support the project! If you don't know where to start then this guide might help: [How to contribute?](https://docs.frontity.org/contributing/how-to-contribute).
 
-If you would like to start contributing to the code please open a pull request to address one of our [_good first issues_](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+If you would like to start contributing to the code please open a pull request to address one of our [*good first issues*](https://github.com/frontity/frontity/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
