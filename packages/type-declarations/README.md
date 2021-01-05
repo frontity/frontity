@@ -1,4 +1,4 @@
-# `@frontity/google-ad-manager`
+# `@frontity/type-declarations`
 
 ### » Open Source Community
 
