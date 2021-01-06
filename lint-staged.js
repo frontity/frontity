@@ -10,16 +10,36 @@ const lintStaged = require("lint-staged");
  */
 (async () => {
   try {
+    /**
+     * This script adds a linebreak before each TSDocs comment. Unnecessary
+     * linebreaks and double linebreaks will be removed by prettier in the next
+     * step.
+     */
     await lintStaged({
       allowEmpty: true,
       config: {
-        "*.{js,jsx,ts,tsx}": ["prettier --write", "git add"],
+        "*.{js,jsx,ts,tsx}":
+          'replace-in-files --regex="\\/\\*\\*\\s*\n" --replacement="\n/**\n"',
       },
     });
+
+    /**
+     * Prettier.
+     */
     await lintStaged({
       allowEmpty: true,
       config: {
-        "*.{js,jsx,ts,tsx}": ["eslint --fix", "git add"],
+        "*.{js,jsx,ts,tsx}": "prettier --write",
+      },
+    });
+
+    /**
+     * Eslint.
+     */
+    await lintStaged({
+      allowEmpty: true,
+      config: {
+        "*.{js,jsx,ts,tsx}": "eslint --fix",
       },
     });
   } catch (e) {

@@ -9,12 +9,13 @@ import author1 from "./mocks/author/author-1.json";
 import author1Posts from "./mocks/author/author-1-posts.json";
 import author1PostsPage2 from "./mocks/author/author-1-posts-page-2.json";
 import author1PostsCpt from "./mocks/author/author-1-posts-cpt.json";
+import { isSearch } from "@frontity/source";
 
 let store: InitializedStore<WpSource>;
 let api: jest.Mocked<Api>;
 beforeEach(() => {
   store = createStore<WpSource>(clone(wpSource()));
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store.state.source.url = "https://test.frontity.org";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
 });
@@ -63,45 +64,54 @@ describe("author", () => {
     expect(store.state.source).toMatchSnapshot();
     // Values history of isFetching and isReady
     expect(dataState).toEqual([
-      { isFetching: false, isReady: false }, // first values are from a different object
-      { isFetching: true, isReady: false }, // fetch starts
-      { isFetching: false, isReady: true }, // fetch ends
+      // First values are from a different object.
+      { isFetching: false, isReady: false },
+      // Fetch starts.
+      { isFetching: true, isReady: false },
+      // Intermediate values.
+      { isFetching: false, isReady: false },
+      // Fetch ends.
+      { isFetching: false, isReady: true },
     ]);
   });
 
   test("overwrites the data when fetched with { force: true }", async () => {
-    // Add iniital data to the store
-    await store.libraries.source.populate({
-      state: store.state,
-      response: mockResponse(author1),
-    });
-    await store.actions.source.fetch("/author/author-1/");
+    // Define the JSON response for the author with the name updated.
+    const updatedAuthor = { ...author1, name: "Author 2" };
+
+    // Do the same for the posts that were written by that author.
+    const updatedPosts = clone(author1Posts);
+    updatedPosts.forEach((post) => (post._embedded.author = [updatedAuthor]));
 
     // Mock Api responses
-    api.get = jest.fn((_) =>
-      Promise.resolve(
-        mockResponse(
-          {
-            ...author1,
-            name: "Author 2",
-          },
-          {
-            "X-WP-Total": "5",
-            "X-WP-TotalPages": "2",
-          }
-        )
+    api.get = jest
+      .fn()
+      // First `actions.source.fetch()` call.
+      .mockResolvedValueOnce(mockResponse(author1))
+      .mockResolvedValueOnce(
+        mockResponse(author1Posts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
       )
-    );
+      // Second `actions.source.fetch()` call, with the author name updated.
+      .mockResolvedValueOnce(mockResponse(updatedAuthor))
+      .mockResolvedValueOnce(
+        mockResponse(updatedPosts, {
+          "X-WP-Total": "5",
+          "X-WP-TotalPages": "2",
+        })
+      );
 
+    // Fetch author posts for the first time.
+    await store.actions.source.fetch("/author/author-1/");
     expect(store.state.source.author["1"].name).toEqual("Author 1");
 
-    // Fetch entities with { force: true }
-    await store.actions.source.fetch("/author/author-1/", {
-      force: true,
-    });
+    // Fetch entities with { force: true }.
+    await store.actions.source.fetch("/author/author-1/", { force: true });
 
-    // Make sure that api.get() was called for each `source.fetch()`
-    expect(api.get).toHaveBeenCalledTimes(2);
+    // Make sure that api.get() was called twice for each `source.fetch()`.
+    expect(api.get).toHaveBeenCalledTimes(4);
 
     expect(store.state.source).toMatchSnapshot();
     expect(store.state.source.author["1"].name).toEqual("Author 2");
@@ -204,12 +214,9 @@ describe("author", () => {
     // Fetch entities
     await store.actions.source.fetch("/author/author-1/?s=findAuthor");
 
-    expect(
-      store.state.source.data["/author/author-1/?s=findAuthor"].isSearch
-    ).toBe(true);
-    expect(
-      store.state.source.data["/author/author-1/?s=findAuthor"].searchQuery
-    ).toBe("findAuthor");
+    const data = store.state.source.data["/author/author-1/?s=findAuthor"];
+    expect(isSearch(data)).toBe(true);
+    expect(isSearch(data) && data.searchQuery).toBe("findAuthor");
     expect(store.state.source).toMatchSnapshot();
   });
 });

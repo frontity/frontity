@@ -7,11 +7,12 @@ const appDir = resolve(process.cwd(), "build/server.js");
 /**
  * Options for {@link serve}.
  */
-interface ServeOptions {
+export interface ServeOptions {
   /**
    * The port number to use.
    */
   port: number;
+
   /**
    * Whether to start the server with `https` using a local self-signed
    * certificate.

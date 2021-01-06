@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Package } from "frontity/types";
+import { Frontity, MergePackages, Package } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
@@ -38,7 +38,7 @@ export interface Theme extends Package {
  * Merge of the types of all the namespaces required by the {@link Link}
  * component.
  */
-export type Packages = Source & Router & Theme;
+export type Packages = MergePackages<Frontity, Source, Router, Theme>;
 
 /**
  * Props for React component {@link Link}.
@@ -85,6 +85,13 @@ export interface LinkProps {
    * https://www.w3.org/TR/wai-aria-1.1/#aria-current.
    */
   "aria-current"?: React.AriaAttributes["aria-current"];
+
+  /**
+   * Whther the link component should remove the WP URL or not.
+   *
+   * @defaultValue true
+   */
+  replaceSourceUrls?: boolean;
 
   /**
    * Represents any other prop that can be passed to Link.

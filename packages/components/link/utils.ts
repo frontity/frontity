@@ -97,7 +97,7 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
 
   /**
    * Removes the timeout to avoid executing the callback if the cursor is
-   * moved out of the element before `config.hoverDelay`
+   * moved out of the element before `config.hoverDelay`.
    */
   const mouseOutHandler = () => {
     clearTimeout(timeout);
@@ -110,4 +110,30 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
     el.removeEventListener("mouseover", mouseOverHandler);
     el.removeEventListener("mouseout", mouseOutHandler);
   };
+};
+
+/**
+ * Make the link relative if it belongs to the backend, to force client-side
+ * navigation.
+ *
+ * @param link - The link URL.
+ * @param sourceUrl - The Source URL. It usually comes from `state.source.url`.
+ * @param match - (Optional) array of RegExp that matches the URL.
+ *
+ * @returns The URL without the Source URL.
+ */
+export const removeSourceUrl = (
+  link: string,
+  sourceUrl: string,
+  match?: string[]
+) => {
+  // if match is present we need to ensure the internal link matches the current site url pattern
+  if (match && !match.some((regexp) => new RegExp(regexp).test(link))) {
+    return link;
+  }
+
+  const linkUrl = new URL(link, sourceUrl);
+  return linkUrl.hostname === new URL(sourceUrl).hostname
+    ? linkUrl.pathname + linkUrl.search + linkUrl.hash
+    : link;
 };

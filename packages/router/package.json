@@ -1,6 +1,6 @@
 {
   "name": "@frontity/router",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Types for the Frontity router namespace",
   "keywords": [
     "frontity",
@@ -16,10 +16,11 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
+    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\"",
     "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest"
   },
   "dependencies": {
-    "frontity": "^1.9.0"
+    "frontity": "^1.13.0"
   }
 }

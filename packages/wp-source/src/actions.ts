@@ -1,4 +1,4 @@
-import { error } from "frontity";
+import { error, batch } from "frontity";
 import WpSource from "../types";
 import { parse, normalize, concatLink } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
@@ -10,7 +10,7 @@ import {
   taxonomyHandler,
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
-import { ServerError } from "@frontity/source";
+import { ServerError, isError, isSearch } from "@frontity/source";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
@@ -24,48 +24,39 @@ const actions: WpSource["actions"]["source"] = {
     const linkParams = parse(route);
     const { query, page, queryString } = linkParams;
 
-    // Get current data object.
-    const data = source.data[link];
-
     // Get options.
     const force = options ? options.force : false;
 
-    if (!data) {
-      // If there is no data yet, just set the necessary flags.
-      source.data[link] = {
+    // Get current data object.
+    let data = source.data[link];
+
+    // Initialize `data` if it does not exist yet. Also, reinitialize it only in
+    // the case `data` is an error and `{ force: true }` is used.
+    if (!data || (force && isError(data))) {
+      data = source.data[link] = {
         isFetching: true,
         isReady: false,
+        route: linkParams.route,
+        link,
+        query,
+        page,
       };
-    } else if (force) {
-      // If we fetch with `{ force: true }`, then only set `isFetching` to true
-      // again.
+    } else {
+      // Reassign `route`, `link`, `query`, `page` to fix custom handlers that
+      // do not add them.
+      Object.assign(data, {
+        route: linkParams.route,
+        link,
+        query,
+        page,
+      });
+      // Stop fetching if data is ready or being fetched and `{ force: true }`
+      // is not used.
+      if (!force && (data.isReady || data.isFetching)) return;
+
+      // Reached this point, make sure `isFetching` is true.
       data.isFetching = true;
-
-      // This is a workaround in case that `data` has previously included an
-      // error.
-      if (data.isError) {
-        source.data[link] = {
-          isFetching: true,
-          isReady: false,
-        };
-      }
-    } else if ((data.isReady && !force) || data.isFetching || data.isError) {
-      // Always set link, route, query & page
-      data.link = link;
-      data.route = linkParams.route;
-      data.query = query;
-      data.page = page;
-      return;
     }
-
-    // Always set link, route, query & page
-    source.data[link].link = link;
-    source.data[link].route = linkParams.route;
-    source.data[link].query = query;
-    source.data[link].page = page;
-
-    // Make sure isFetching is true before starting the fetch.
-    source.data[link].isFetching = true;
 
     // Get and execute the corresponding handler based on path.
     try {
@@ -102,16 +93,17 @@ const actions: WpSource["actions"]["source"] = {
       // start with "RegExp:").
       const isHome =
         !handler.pattern.startsWith("RegExp:") &&
-        source.data[link].isSearch !== true &&
+        isSearch(source.data[link]) !== true &&
         source.data[link].route === normalize(state.source.subdirectory || "/");
 
       // Populate the data object.
-      source.data[link] = {
-        ...source.data[link],
-        ...(isHome && { isHome: true }),
-        isFetching: false,
-        isReady: true,
-      };
+      batch(() =>
+        Object.assign(source.data[link], {
+          ...(isHome && { isHome: true }),
+          isFetching: false,
+          isReady: true,
+        })
+      );
     } catch (e) {
       // It's a server error (4xx or 5xx).
       if (e instanceof ServerError) {
@@ -124,6 +116,10 @@ const actions: WpSource["actions"]["source"] = {
           [`is${e.status}`]: true,
           errorStatus: e.status,
           errorStatusText: e.statusText,
+          route: linkParams.route,
+          link,
+          query,
+          page,
         };
         source.data[link] = errorData;
       } else {
@@ -143,8 +139,8 @@ const actions: WpSource["actions"]["source"] = {
 
     libraries.source.api.init({ api, isWpCom });
 
-    // If the URL contains an auth token, then add it to the state.
-    // This is normally the case e.g, when accessing the post preview.
+    // If the URL contains an auth token, then add it to the state. This is
+    // normally the case e.g, when accessing the post preview.
     const auth = state.frontity?.options?.sourceAuth;
     const authFromEnv = process.env.FRONTITY_SOURCE_AUTH;
     if (auth || authFromEnv) {
@@ -163,7 +159,7 @@ const actions: WpSource["actions"]["source"] = {
       handlers.push({
         name: type,
         priority: 10,
-        pattern: concatLink(type, "/:slug"),
+        pattern: concatLink(type, "/(.*)?/:slug"),
         func: postTypeHandler({ endpoints: [endpoint] }),
       });
       // Query permalink (mainly for drafts).

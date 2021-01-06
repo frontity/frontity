@@ -3,7 +3,12 @@ import Script from "@frontity/components/script";
 import Package from "../types";
 
 /**
- * Render some `<Script>` components for testing purposes.
+ * A React component that loads two scripts, one from an external source, and
+ * another that contains some code.
+ *
+ * It also renders a third script whose code returns a value to check that this
+ * value is not returned in the `useEffect` hook, see [this
+ * bug](https://github.com/frontity/frontity/issues/592).
  *
  * @returns React element.
  */
@@ -42,6 +47,7 @@ const Component: React.FC = () => {
 };
 
 const ScriptPackage: Package = {
+  name: "e2e-script",
   roots: {
     script: Component,
   },

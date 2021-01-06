@@ -22,6 +22,7 @@ export const getTrackerName = (id: string) =>
   `tracker_${id.replace(/-/g, "_")}`;
 
 const googleAnalytics: GoogleAnalytics = {
+  name: "@frontity/google-analytics",
   roots: {
     ...analytics.roots,
     googleAnalytics: Root,

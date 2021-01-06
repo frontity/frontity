@@ -1,7 +1,7 @@
 import React, { MouseEvent, useEffect, useRef, useCallback } from "react";
 import { warn, connect, useConnect } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
-import { Queue, onHover } from "./utils";
+import { Queue, onHover, removeSourceUrl } from "./utils";
 import { Packages, LinkProps, NavigatorWithConnection } from "./types";
 
 const queue = new Queue();
@@ -27,16 +27,19 @@ const queue = new Queue();
  * @returns An HTML anchor element.
  */
 const Link: React.FC<LinkProps> = ({
-  link,
+  link: rawLink,
   children,
   onClick,
   target = "_self",
   scroll = true,
   prefetch = true,
+  replaceSourceUrls = true,
   "aria-current": ariaCurrent,
   ...anchorProps
 }) => {
   const { state, actions } = useConnect<Packages>();
+  const { match } = state.frontity;
+
   const { ref: inViewRef, inView } = useInView({
     triggerOnce: true,
     rootMargin: "200px",
@@ -54,9 +57,13 @@ const Link: React.FC<LinkProps> = ({
     [inViewRef]
   );
 
-  if (!link || typeof link !== "string") {
+  if (!rawLink || typeof rawLink !== "string") {
     warn("link prop is required and must be a string");
   }
+
+  const link = replaceSourceUrls
+    ? removeSourceUrl(rawLink, state.source.url, match)
+    : rawLink;
 
   const autoPrefetch = state.theme?.autoPrefetch;
   const isExternal = link.startsWith("http");
@@ -115,7 +122,16 @@ const Link: React.FC<LinkProps> = ({
     } else if (inView && autoPrefetch === "in-view") {
       maybePrefetch(link);
     }
-  }, [prefetch, link, ref, inView, autoPrefetch]);
+  }, [
+    prefetch,
+    link,
+    ref,
+    inView,
+    autoPrefetch,
+    actions.source,
+    isExternal,
+    state.source,
+  ]);
 
   /**
    * The event handler for the click event. It will try to do client-side

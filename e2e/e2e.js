@@ -42,7 +42,9 @@ let isDockerRunning = false;
 
 // Validate CLI args.
 validateArgs(target, { possibleValues: ["es5", "module", "both"] });
-validateArgs(browser, { possibleValues: ["firefox", "chrome", "edge"] });
+validateArgs(browser, {
+  possibleValues: ["firefox", "chrome", "edge", "electron"],
+});
 validateArgs(cypressCommand, { possibleValues: ["open", "run", "off"] });
 
 // We have to make sure that we are runnng inside of the e2e directory The

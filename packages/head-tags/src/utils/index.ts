@@ -1,6 +1,12 @@
 import { warn } from "frontity";
 import { State } from "frontity/types";
 import { Packages, HeadTag, WithHeadTags } from "../../types";
+import {
+  isPostType,
+  isTerm,
+  isAuthor,
+  isPostTypeArchive,
+} from "@frontity/source";
 
 // Attributes that could contain links.
 const possibleLink = ["href", "content"];
@@ -13,13 +19,22 @@ const possibleLink = ["href", "content"];
  * object property and the rest are defined in `args`.
  * @param args - The rest of the parameters of the function.
  */
-const deepTransform = (obj: object, func: Function, ...args: object[]) => {
+const deepTransform = <
+  Func extends (value: string, ...args: Args) => string,
+  Args extends any[]
+>(
+  obj: any,
+  func: Func,
+  ...args: Args
+): void => {
+  // Iterate over keys.
   for (const key in obj) {
-    if (typeof obj[key] === "string") {
-      obj[key] = func(obj[key], ...args);
-    } else if (typeof obj[key] === "object") {
-      deepTransform(obj[key], func, ...args);
-    }
+    // Get value.
+    const value = obj[key];
+    // Transform value if it is a string.
+    if (typeof value === "string") obj[key] = func(value, ...args);
+    // Iterate over props if it is an object.
+    else if (typeof value === "object") deepTransform(value, func, ...args);
   }
 };
 
@@ -98,14 +113,17 @@ interface TransformLinkOptions {
    * The link that will be changed.
    */
   link: string;
+
   /**
    * The old base (hostname and path) that will be changed by the `newBase`.
    */
   base: string;
+
   /**
    * The new base that will replace the old `base`.
    */
   newBase: string;
+
   /**
    * A Regexp (in string format) so that if the link matches the transform
    * doesn't happen.
@@ -132,9 +150,9 @@ export const transformLink = ({
 };
 
 /**
- * The options of the {@link useFrontityLinks} function.
+ * The options of the {@link transformHeadTags} function.
  */
-interface UseFrontityLinksOptions {
+interface TransformHeadTagsOptions {
   /**
    * The Frontity state.
    */
@@ -147,18 +165,18 @@ interface UseFrontityLinksOptions {
 }
 
 /**
- * It receives an array of head tags and depending on the settings defined in
- * the state modifies all the link found in the head tags that need
- * transformation.
+ * Return a copy of the given head tags, transforming all links found that
+ * should point to the Frontity server according to
+ * `state.source.transformLinks`.
  *
- * @param options - Defined in {@link UseFrontityLinksOptions}.
+ * @param options - Defined in {@link TransformHeadTagsOptions}.
  *
  * @returns The modified head tags array.
  */
-export const useFrontityLinks = ({
+export const transformHeadTags = ({
   state,
   headTags,
-}: UseFrontityLinksOptions) => {
+}: TransformHeadTagsOptions) => {
   /**
    * At this point we assume that `state.headTags.transformLinks` and
    * `state.frontity.url` are defined.
@@ -188,7 +206,7 @@ export const useFrontityLinks = ({
         attributes.type.endsWith("ld+json")
       ) {
         // Try to parse the tag content.
-        let json: object;
+        let json: any;
         try {
           json = JSON.parse(content);
         } catch (e) {
@@ -257,8 +275,26 @@ interface GetHeadTagsOptions {
  * found.
  */
 export const getHeadTags = ({ state, link }: GetHeadTagsOptions) => {
-  // Main entity pointed by the given link.
-  const entity: WithHeadTags = state.source.entity(link);
+  // Get the data object associated to link.
+  const data = state.source.get(link);
+
+  // Get the entity pointed by the given link.
+  let entity: WithHeadTags = null;
+
+  // Entities are stored in different places depending on their type.
+  if (isPostType(data)) {
+    const { type, id } = data;
+    entity = state.source[type][id];
+  } else if (isTerm(data)) {
+    const { taxonomy, id } = data;
+    entity = state.source[taxonomy][id];
+  } else if (isAuthor(data)) {
+    const { id } = data;
+    entity = state.source.author[id];
+  } else if (isPostTypeArchive(data)) {
+    const { type } = data;
+    entity = state.source.type[type];
+  }
 
   // Get the `head_tags` field from the entity.
   const headTags = entity?.head_tags;
@@ -278,5 +314,5 @@ export const getHeadTags = ({ state, link }: GetHeadTagsOptions) => {
   }
 
   // Transform links.
-  return useFrontityLinks({ state, headTags });
+  return transformHeadTags({ state, headTags });
 };

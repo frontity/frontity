@@ -1,3 +1,4 @@
+import { PostTypeData } from "@frontity/source/types/data";
 import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 
@@ -107,7 +108,7 @@ const postTypeWithQueryHandler = ({
     id,
     isPostType: true,
     [`is${capitalize(type)}`]: true,
-  });
+  }) as PostTypeData; // This ensures the resulting type is correct.
 };
 
 export default postTypeWithQueryHandler;

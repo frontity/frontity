@@ -21,10 +21,12 @@ beforeEach(() => {
   window.scrollTo = jest.fn();
   store = createStore({
     state: {
+      frontity: {},
       theme: {
         autoPrefetch: "hover",
       },
       source: {
+        url: "http://backendurl.com",
         get: () => get,
       },
     },
@@ -251,6 +253,80 @@ describe("Link", () => {
 
     expect(window.scrollTo).not.toHaveBeenCalled();
     expect(store.actions.router.set).not.toHaveBeenCalledWith(linkUrl);
+  });
+
+  test("it removes the source url from links", () => {
+    const linkUrl = store.state.source.url + "/internal-link";
+
+    act(() => {
+      render(
+        <Provider value={store}>
+          <Link link={linkUrl} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl} className="my-link-2" replaceSourceUrls={false}>
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.router, "set");
+
+    const anchor = document.querySelector("a.my-link");
+    const anchor2 = document.querySelector("a.my-link-2") as HTMLAnchorElement;
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor2.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(store.actions.router.set).toHaveBeenCalledWith("/internal-link");
+    expect(store.actions.router.set).toHaveBeenCalledTimes(1);
+    expect(anchor2.href).toEqual(linkUrl);
+  });
+
+  test("it takes into account the `match` property before replacing internal links", () => {
+    const storeWithMatch = { ...store };
+
+    // should only match /blog links
+    storeWithMatch.state.frontity.match = [
+      "https?:\\/\\/[^/]+\\/blog([^-\\w]|$)",
+    ];
+
+    const linkThatDoesNotMatch = store.state.source.url + "/internal-link";
+    const linkThatMatches = store.state.source.url + "/blog/blog-link";
+
+    act(() => {
+      render(
+        <Provider value={storeWithMatch}>
+          <Link link={linkThatDoesNotMatch} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkThatMatches} className="my-link-that-matches">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.router, "set");
+
+    const anchor = document.querySelector("a.my-link") as HTMLAnchorElement;
+    const anchor2 = document.querySelector("a.my-link-that-matches");
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor2.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(store.actions.router.set).toHaveBeenCalledWith("/blog/blog-link");
+    expect(store.actions.router.set).not.toHaveBeenCalledWith("/internal-link");
+    expect(store.actions.router.set).toHaveBeenCalledTimes(1);
+    // the link that does not match should remain the same
+    expect(anchor.href).toEqual(linkThatDoesNotMatch);
   });
 });
 

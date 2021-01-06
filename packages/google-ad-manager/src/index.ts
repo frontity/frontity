@@ -3,6 +3,7 @@ import Root from "./components";
 import GooglePublisherTag from "./components/google-publisher-tag";
 
 const googleAdManager: GoogleAdManager = {
+  name: "@frontity/google-ad-manager",
   roots: {
     googleAdManager: Root,
   },

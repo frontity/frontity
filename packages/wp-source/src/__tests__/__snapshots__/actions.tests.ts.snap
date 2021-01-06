@@ -152,7 +152,7 @@ Array [
   Object {
     "func": [MockFunction],
     "name": "cpt1",
-    "pattern": "/cpt1/:slug/",
+    "pattern": "/cpt1/(.*)?/:slug/",
     "priority": 10,
   },
   Object {
@@ -164,7 +164,7 @@ Array [
   Object {
     "func": [MockFunction],
     "name": "cpt2",
-    "pattern": "/cpt2/:slug/",
+    "pattern": "/cpt2/(.*)?/:slug/",
     "priority": 10,
   },
   Object {
@@ -486,11 +486,12 @@ Array [
 
 exports[`actions.source.init state.data['/some/route/'].isCategory should be removed when fetching with { force: true } 1`] = `
 Object {
+  "id": 7,
   "isArchive": true,
   "isCategory": true,
   "isFetching": false,
   "isReady": true,
-  "isTaxonomy": true,
+  "isTerm": true,
   "items": Array [],
   "link": "/some/route/",
   "page": 1,

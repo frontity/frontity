@@ -1,5 +1,6 @@
 import TinyRouter from "../types";
 import { warn } from "frontity";
+import { isError } from "@frontity/source";
 
 /**
  * Set the URL.
@@ -39,16 +40,15 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   actions,
   libraries,
 }) => (link, options = {}): void => {
-  // Normalizes link.
+  // Normalize the link.
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
 
-  // Sets state default value.
+  // Set state default value.
   if (!options.state) options.state = {};
 
-  state.router.link = link;
-  state.router.state = options.state;
-
+  // Trigger the fetch if `autoFetch` is true and update the window.history
+  // object.
   if (
     options.method === "push" ||
     (!options.method && state.frontity.platform === "client")
@@ -59,6 +59,10 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     window.history.replaceState(options.state, "", link);
     if (state.router.autoFetch) actions.source?.fetch(link);
   }
+
+  // Finally, set the `state.router.link` property to the new value.
+  state.router.link = link;
+  state.router.state = options.state;
 };
 
 /**
@@ -79,12 +83,35 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
         ? libraries.source.normalize(state.frontity.initialLink)
         : state.frontity.initialLink;
   } else {
-    // Replace the current url with the same one but with state.
-    window.history.replaceState(
-      { ...state.router.state },
-      "",
-      state.router.link
-    );
+    // The link stored in `state.router.link` may be wrong if the server changes
+    // it in some cases (see https://github.com/frontity/frontity/issues/623).
+    // For that reason, it is replaced with the current link in the browser.
+
+    // Get the browser URL and remove the Frontity options.
+    const browserURL = new URL(location.href);
+    Array.from(browserURL.searchParams.keys()).forEach((key) => {
+      if (key.startsWith("frontity_")) browserURL.searchParams.delete(key);
+    });
+
+    // Normalize it.
+    let link = browserURL.pathname + browserURL.search + browserURL.hash;
+    if (libraries.source && libraries.source.normalize)
+      link = libraries.source.normalize(link);
+
+    // Add the state to the browser history and replace the link.
+    window.history.replaceState({ ...state.router.state }, "", link);
+
+    // If the link from the browser and the link from the server are different,
+    // point the first one to the same data object pointed by the second one.
+    if (link !== state.frontity.initialLink) {
+      if (state.source) {
+        state.source.data[link] = state.source.get(state.frontity.initialLink);
+      }
+
+      // Update the value of `state.router.link`.
+      state.router.link = link;
+    }
+
     // Listen to changes in history.
     window.addEventListener("popstate", (event) => {
       if (event.state) {
@@ -115,7 +142,7 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     if (actions.source && actions.source.fetch) {
       await actions.source.fetch(state.router.link);
       const data = state.source.get(state.router.link);
-      if (data.isError) {
+      if (isError(data)) {
         ctx.status = data.errorStatus;
       }
     } else {

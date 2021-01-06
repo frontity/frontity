@@ -85,7 +85,7 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
 }) => {
   // Normalize response
   const json = await response.json();
-  const isList = json instanceof Array;
+  const isList = Array.isArray(json);
   const { entities, result } = normalize(
     json,
     isList ? schemas.list : schemas.entity
@@ -105,6 +105,10 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
         (data[entity.link] = {
           isReady: false,
           isFetching: false,
+          link: entity.link,
+          route: entity.link,
+          query: {},
+          page: 1,
         });
 
       let entityMap: any;
