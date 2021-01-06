@@ -58,7 +58,9 @@ interface CreatePackageOptions {
 
 /**
  * Ensures a valid namespace format is kept, based on the input value.
- * @param value Namespace value
+ *
+ * @param value - Namespace value.
+ * @returns The formated namespace.
  */
 const ensureValidNamespaceFormat = (value: string): string => {
   if (!isNamespaceValid(value)) {
