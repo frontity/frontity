@@ -16,6 +16,23 @@ export const isThemeNameValid = (name: string): boolean => {
   return nameConventionMatch.test(name);
 };
 
+export const isNamespaceValid = (name: string): boolean => {
+  // This one matches only words. Meaning, dashes, spaces, etc. are invalid
+  const rule = /^\w+$/g;
+  return rule.test(name);
+};
+
+export const toCamelCase = (name: string): string => {
+  // This one matches the dash separated values: my-namespace-is-cool
+  const rule = /-[a-z]/gi;
+
+  return name.replace(rule, (group) => {
+    // Here we're grabbing the dash plus the following letter
+    // and return the uppercased value of that letter.
+    return group[1].toUpperCase();
+  });
+};
+
 export const errorLogger = (error: Error, message?: string) => {
   console.error(
     chalk.bold.red("\nError: ") +
