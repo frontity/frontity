@@ -33,7 +33,7 @@ npm i @frontity/head-tags
 Once installed it should be included in your `frontity.settings.js`
 
 ```jsx
-module.exports = {
+export default {
   packages: ["@frontity/head-tags"],
 };
 ```
@@ -48,7 +48,7 @@ These are the ones related to this package: https://community.frontity.org/tags/
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/head-tags/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
 
 ---
 

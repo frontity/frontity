@@ -32,7 +32,7 @@ npm i @frontity/wp-source
 Once installed it should be included and configured in your `frontity.settings.js`
 
 ```jsx
-module.exports = {
+export default {
   packages: [
     "@frontity/mars-theme",
     "@frontity/tiny-router",
@@ -65,7 +65,7 @@ These are the ones related to this package: https://community.frontity.org/tags/
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/wp-source/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
 
 ---
 

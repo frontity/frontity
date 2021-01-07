@@ -1,5 +1,7 @@
 # `@frontity/type-declarations`
 
+This package is not meant to be installed individually. It contains some type declarations that are imported automatically in Frontity projects.
+
 ### » Open Source Community
 
 [![Community Forum Topics](https://img.shields.io/discourse/topics?color=blue&label=community%20forum&server=https%3A%2F%2Fcommunity.frontity.org%2F)](https://community.frontity.org/) [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity) ![Frontity Github Stars](https://img.shields.io/github/stars/frontity/frontity?style=social)

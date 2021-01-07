@@ -1,5 +1,7 @@
 # `@frontity/google-ad-manager`
 
+The Google Ad Manager package allows Frontity to integrate with Google Ad Manager, letting you add fills for ads in frontity.settings.js in order to make them appear in a specific slot.
+
 ### » Open Source Community
 
 [![Community Forum Topics](https://img.shields.io/discourse/topics?color=blue&label=community%20forum&server=https%3A%2F%2Fcommunity.frontity.org%2F)](https://community.frontity.org/) [![Twitter: frontity](https://img.shields.io/twitter/follow/frontity.svg?style=social)](https://twitter.com/frontity) ![Frontity Github Stars](https://img.shields.io/github/stars/frontity/frontity?style=social)

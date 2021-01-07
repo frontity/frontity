@@ -42,7 +42,7 @@ More info about how to use this package can be found in the [Feature Discussion]
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/wp-comments/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
 
 ---
 

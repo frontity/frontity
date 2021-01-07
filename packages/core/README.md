@@ -25,7 +25,7 @@ You'll find it as a dependency of your Frontity project after you create it by d
 npx frontity create [project-name]
 ```
 
-> [More info on `npx frontity create`](https://docs.frontity.org/frontity-cli/create)
+> [More info on `npx frontity create`](https://docs.frontity.org/frontity-cli/create-commands#create)
 
 ## Feature Discussions
 
@@ -35,7 +35,7 @@ These are the ones related to this package: https://community.frontity.org/tags/
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages/core/CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
 
 ---
 
