@@ -10,8 +10,6 @@ For previous versions of the Yoast SEO plugin (<14.0), use the
 [`@frontity/head-tags`](https://www.npmjs.com/package/@frontity/head-tags)
 package instead.
 
-Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/frontity-yoast).
-
 ## Table of contents
 
 <!-- toc -->
