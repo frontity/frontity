@@ -40,8 +40,6 @@ export default {
 };
 ```
 
-Full info about this package can be found in the [docs](https://docs.frontity.org/api-reference-1/frontity-yoast)
-
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
