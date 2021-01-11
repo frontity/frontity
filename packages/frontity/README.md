@@ -14,7 +14,7 @@ It is automatically installed when you create your Frontity project by doing
 npx frontity create [project-name]
 ```
 
-> More info on `npx frontity create` [here](https://docs.frontity.org/frontity-cli/create) 
+> More info on `npx frontity create` [here](https://docs.frontity.org/frontity-cli/create-commands#create) 
 
 ## Usage
 
@@ -44,7 +44,7 @@ These are the ones related to this package: https://community.frontity.org/tags/
 
 ## Changelog
 
-Have a look at the latest updates of this package in the [CHANGELOG](https://github.com/frontity/frontity/blob/dev/packages//CHANGELOG.md)
+Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
 
 ***
 
