@@ -54,7 +54,7 @@ jobs:
         with:
           start: "node e2e.js \
             --cypress off \
-            --suite all \
+            --suite frontity-01 \
             ${{ matrix.args }}"
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
