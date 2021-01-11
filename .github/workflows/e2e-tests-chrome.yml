@@ -1,6 +1,6 @@
 name: chrome e2e tests
 
-on: [pull_request]
+on: [push]
 
 jobs:
   e2e-tests:
