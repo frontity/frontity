@@ -396,6 +396,7 @@ export const redirection: RedirectionData = {
   route: "/example/",
   page: 1,
   isRedirection: true,
+  isExternal: false,
   location: "http://example.com/example",
   redirectionStatus: 301,
   is301: true,
