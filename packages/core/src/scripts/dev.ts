@@ -119,7 +119,7 @@ export default async ({
   port,
   target,
   openBrowser = true,
-  publicPath,
+  publicPath = "/static/",
 }: DevOptions): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
@@ -163,16 +163,6 @@ export default async ({
     webpackDevMiddleware(compiler, {
       publicPath: clientWebpack.output.publicPath,
       writeToDisk: true,
-      stats: {
-        all: false,
-        hash: false,
-        assets: true,
-        colors: true,
-        errors: true,
-        warnings: true,
-        errorDetails: true,
-        excludeAssets: /chunks\..*?\.json/,
-      },
     })
   );
   app.use(webpackHotMiddleware(compiler.compilers[0]));

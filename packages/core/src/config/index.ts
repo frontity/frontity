@@ -4,33 +4,35 @@ import getWebpack from "./webpack";
 import getFrontity from "./frontity";
 
 /**
- * Frontity config definition.
+ * The options of the {@link config} function.
  */
-interface FrontityConfig {
+interface ConfigOptions {
   /**
-   * Webpack mode.
+   * The mode of the build: "development" or "production".
    */
   mode: Mode;
 
   /**
-   * Entry points list.
+   * The paths of the entry points generated on the fly by Frontity in the
+   * `/build/bundling/entry-points folder`.
    */
   entryPoints: EntryPoints[];
 
   /**
-   * Public path.
+   * The public path of Webpack.
    */
   publicPath: string;
 }
 
 /**
- * This returns our FrontityConfig defaults. In the future,
- * we will add here logic to inject the frontity.config.js of each package.
+ * Generate the configuration objects for Webpack, Babel and Frontity.
  *
- * @param config - Configurations.
- * @returns Frontity configuration.
+ * @param options - Defined in {@link ConfigOptions}.
+ *
+ * @returns The configuration object for Webpack, Babel and Frontity. Each
+ * configuration object contains the three targets: "module", "es5" and "server".
  */
-export default ({ mode, entryPoints, publicPath }: FrontityConfig): Config => {
+const config = ({ mode, entryPoints, publicPath }: ConfigOptions): Config => {
   const frontity = getFrontity();
   const babel = getBabel();
   const webpack = getWebpack({
@@ -40,9 +42,12 @@ export default ({ mode, entryPoints, publicPath }: FrontityConfig): Config => {
     entryPoints,
     publicPath,
   });
+
   return {
     babel,
     webpack,
     frontity,
   };
 };
+
+export default config;
