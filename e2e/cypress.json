@@ -16,7 +16,7 @@
   "chromeWebSecurity": false,
   "baseUrl": "http://localhost:3001",
   "retries": {
-    "runMode": 3,
+    "runMode": 1,
     "openMode": 0
   }
 }
