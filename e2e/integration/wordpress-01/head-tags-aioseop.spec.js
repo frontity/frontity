@@ -1,6 +1,6 @@
 describe("Head Tags - All in One SEO Pack", () => {
   before(() => {
-    cy.task("installPlugin", { name: "all-in-one-seo-pack" });
+    cy.task("installPlugin", { name: "all-in-one-seo-pack", version: "3.7.1" });
     cy.task("installPlugin", { name: "rest-api-head-tags" });
     cy.task("installPlugin", { name: "custom-post-type-ui" });
     cy.task("loadDatabase", {
