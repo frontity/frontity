@@ -1,11 +1,42 @@
 import { TransformOptions } from "@babel/core";
-import { Target, Mode, BabelConfigs } from "../../../types";
+import { Target, BabelConfigs } from "../../../types";
 
-const targets: {
-  module: {};
-  es5: {};
-  server: {};
-} = {
+/**
+ * Targets object for passing configurations to a target.
+ */
+interface Targets {
+  /**
+   * The module configuration.
+   */
+  module: {
+    /**
+     * The esmodules flag.
+     */
+    esmodules: boolean;
+  };
+
+  /**
+   * ES5 configuration object.
+   */
+  es5: {
+    /**
+     * The browsers list.
+     */
+    browsers: Array<string>;
+  };
+
+  /**
+   * Server configuration.
+   */
+  server: {
+    /**
+     * Node version for the server.
+     */
+    node: string;
+  };
+}
+
+const targets: Targets = {
   // Browsers with <script type="module"></script> support. This is the list:
   // "edge": "16",
   // "firefox": "60",
@@ -39,7 +70,13 @@ const targets: {
   server: { node: "8.10" },
 };
 
-export default ({ mode }: { mode: Mode }): BabelConfigs => {
+export default (): BabelConfigs => {
+  /**
+   * Function to generate the babel config based on a target.
+   *
+   * @param target - The target name.
+   * @returns Returns the babel transformation.
+   */
   const getConfig = (target: Target): TransformOptions => {
     const presets = [
       // Instead of using a TS transpiler, this removes the typescript code.
@@ -53,7 +90,12 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
           modules: false,
         },
       ],
-      "@babel/preset-react",
+      [
+        "@babel/preset-react",
+        {
+          runtime: "automatic",
+        },
+      ],
       // Babel plugin for Emotion CSS property and other goodness.
       "@emotion/babel-preset-css-prop",
     ];
@@ -62,17 +104,17 @@ export default ({ mode }: { mode: Mode }): BabelConfigs => {
       "babel-plugin-frontity",
       // Support for babel macros. See: https://community.frontity.org/t/tailwindcss-with-babel-macro-plugin-and-css-in-js/1040
       "babel-plugin-macros",
-      // Support for dynamic imports: import("./my-file")
+      // Support for dynamic imports: import("./my-file").
       "@babel/plugin-syntax-dynamic-import",
-      // Needed for loadable-component SSR.
+      // Needed for loadable-component SSR..
       "@loadable/babel-plugin",
-      // Support for the rest spread: { ...obj }
+      // Support for the rest spread: { ...obj }.
       "@babel/plugin-proposal-object-rest-spread",
-      // Support for the class props: class MyClass { myProp = 'hi there' }
+      // Support for the class props: class MyClass { myProp = 'hi there' }.
       "@babel/plugin-proposal-class-properties",
-      // Cherry-pick Lodash modules
+      // Cherry-pick Lodash modules.
       "babel-plugin-lodash",
-      // Transform inline environment variables (for process.env.CWD)
+      // Transform inline environment variables (for process.env.CWD).
       [
         "babel-plugin-transform-inline-environment-variables",
         {
