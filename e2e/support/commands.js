@@ -1,4 +1,4 @@
-/* eslint-disable jest/valid-expect */
+/* eslint-disable jest/valid-expect, jest/no-standalone-expect */
 
 require("cypress-plugin-snapshots/commands");
 

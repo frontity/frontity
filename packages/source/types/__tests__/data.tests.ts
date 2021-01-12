@@ -54,7 +54,6 @@ const taxonomy: TaxonomyData = term;
 expectType<true>(taxonomy.isTaxonomy);
 expectType<true>(taxonomy.isTerm);
 
-// eslint-disable-next-line jest/expect-expect
 test("Types are fine!", () => {
   // Do nothing here.
 });

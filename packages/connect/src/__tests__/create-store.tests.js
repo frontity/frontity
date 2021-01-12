@@ -1,4 +1,3 @@
-/* eslint-disable require-atomic-updates */
 import { createStore, isObservable, getSnapshot } from "..";
 
 let config = {};
@@ -116,19 +115,17 @@ describe("createStore actions", () => {
     expect(store.state.nested1.prop5).toBe(6);
   });
 
-  it("should return a promise that can be awaited", (done) => {
+  it("should return a promise that can be awaited", () => {
     const store = createStore(config);
-    store.actions.action6().then(() => {
+    return store.actions.action6().then(() => {
       expect(store.state.prop1).toBe("action6");
-      done();
     });
   });
 
-  it("should return a promise that can be awaited even with params", (done) => {
+  it("should return a promise that can be awaited even with params", () => {
     const store = createStore(config);
-    store.actions.action7(7).then(() => {
+    return store.actions.action7(7).then(() => {
       expect(store.state.prop1).toBe(7);
-      done();
     });
   });
 
@@ -157,24 +154,30 @@ describe("createStore actions", () => {
 
   it("should catch an error thrown inside of an action", () => {
     const store = createStore(config);
+    let error = {};
 
     try {
       store.actions.action10();
       throw new Error("This line should never be reached");
     } catch (e) {
-      expect(e.message).toBe("action10 error");
+      error = e;
     }
+
+    expect(error.message).toBe("action11 error");
   });
 
   it("should catch an error thrown inside of an async action", async () => {
     const store = createStore(config);
+    let error = {};
 
     try {
       await store.actions.action11();
       throw new Error("This line should never be reached");
     } catch (e) {
-      expect(e.message).toBe("action11 error");
+      error = e;
     }
+
+    expect(error.message).toBe("action11 error");
   });
 });
 

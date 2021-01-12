@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { create, act } from "react-test-renderer";
 import * as error from "@frontity/error";
@@ -267,6 +266,7 @@ describe("useConnect", () => {
   });
 
   it("should log a warning if the component is not connected", () => {
+    // eslint-disable-next-line
     error.warn = jest.fn();
 
     const Comp = () => {

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable jest/no-conditional-expect */
 import * as frontity from "frontity";
 import merge from "deepmerge";
 import clone from "clone-deep";

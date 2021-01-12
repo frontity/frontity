@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { Action, Derived, Settings, State } from "frontity/types";
+import { Action, Derived, Settings } from "frontity/types";
 import Source from "../../types";
 
 // Source.
@@ -138,7 +136,6 @@ const settings4: Settings<MySource> = {
   ],
 };
 
-// eslint-disable-next-line jest/expect-expect
 test("Types are fine!", () => {
   // Do nothing here.
 });

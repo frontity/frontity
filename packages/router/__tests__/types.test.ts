@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Router from "../types";
 
 const router: Router = {
@@ -20,5 +19,4 @@ const router: Router = {
   },
 };
 
-// eslint-disable-next-line
 test("Types are fine!", () => {});

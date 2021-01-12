@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import { ResponseInit, Response as NodeResponse } from "node-fetch";
 import { mergeDeepRight } from "ramda";
 import { WpComment } from "../../../types";
