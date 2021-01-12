@@ -439,7 +439,7 @@ export interface RedirectionData extends Data {
 
   /**
    * A boolean flag which indicates whether a particular redirection is internal
-   * (meaning redirecting to the same domain as the the frontity application or
+   * (meaning redirecting to the same domain as the the Frontity application or
    * the Wordpress instance) or external, meaning any other domain.
    */
   isExternal: boolean;

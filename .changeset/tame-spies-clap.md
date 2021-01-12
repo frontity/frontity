@@ -10,12 +10,12 @@ Add support for 30x Redirections.
 
    - Each time a link is fetched.
    - When the API returns a 404.
-   - When the link belongs to a certain set of URLs (configured using regexp).
+   - When the link belongs to a certain set of URLs (configured using a regexp).
 
    This configuration is stored in `state.source.redirections`.
 
    The redirection information will be stored in `state.source.data` similar to what happens for 4xx and 5xx errors.
 
-2. Redirections can added to Frontity by populating `state.source.data` directly or using a handler.
+2. Redirections can be added to Frontity by populating `state.source.data` directly or using a handler.
 
-Feature Discussion: https://community.frontity.org/t/301-redirects-stored-in-wordpress-database/3032/12
+Feature Discussion: https://community.frontity.org/t/301-redirects-stored-in-wordpress-database/3032
