@@ -51,6 +51,7 @@ const state = ({ settings, url }: StateOptions) => {
   let state: Package["state"] = {
     frontity: {
       name: settings.name,
+      match: settings.match,
       mode: settings.mode,
       debug: false,
       platform: "server",

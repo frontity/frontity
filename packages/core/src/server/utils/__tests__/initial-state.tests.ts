@@ -3,6 +3,7 @@ import initialState from "../initial-state";
 const settings = {
   name: "site",
   mode: "html",
+  match: ["https://www.site-1.com"],
   state: {
     frontity: {
       url: "https://site.com",

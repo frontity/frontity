@@ -28,7 +28,7 @@
 >
 > Frontity will continue to be improved during the next months, and new features will be added progressively.
 >
-> Feel free to [subscribe to our newsletter](https://frontity.org/#newsletter) to **get notified of the latest framework updates and news**.
+> Feel free to [subscribe to our newsletter](https://frontity.org/newsletter) to **get notified of the latest framework updates and news**.
 >
 > <div align="center"><a href="https://docs.frontity.org/getting-started?utm_source=github-readme&utm_medium=get-started-link"><strong>GET STARTED!</strong></a></div>
 > <br />
