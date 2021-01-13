@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React from "react";
 import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
 import { Packages } from "../../types";
@@ -17,15 +17,15 @@ import { Packages } from "../../types";
  *
  * @returns Root element.
  */
-const Root: FC<Connect<Packages>> = ({ state, actions }) => {
+const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
   const { link } = state.router;
   const { isReady } = state.source.get(link);
 
   // Store if a pageview has been sent for this link.
-  const [isPageviewSent, setIsPageviewSent] = useState(false);
+  const [isPageviewSent, setIsPageviewSent] = React.useState(false);
 
   // Every time link changes, we reset the isPageviewSent value.
-  useEffect(() => {
+  React.useEffect(() => {
     setIsPageviewSent(false);
   }, [link]);
 
