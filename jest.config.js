@@ -4,7 +4,7 @@ process.env.TS_JEST_DISABLE_VER_CHECKER = true;
 module.exports = {
   transform: {
     "^.+\\.tsx?$": "ts-jest",
-    "^.+\\.jsx?$": ["babel-jest", { configFile: "../../jest.babel.js" }],
+    "^.+\\.jsx?$": ["babel-jest", { configFile: "../../jest.babel.config.js" }],
   },
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(j|t)sx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
