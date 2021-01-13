@@ -1,5 +1,5 @@
 // Removes the warning that we are using an unsupported version of TypeScript.
-process.env.TS_JEST_DISABLE_VER_CHECKER = false;
+process.env.TS_JEST_DISABLE_VER_CHECKER = true;
 
 module.exports = {
   transform: {
