@@ -63,7 +63,13 @@ export const createPackageJson = async (
   await writeFile(filePath, fileData);
 };
 
-// This function creates an `index.js` file.
+/**
+ * This function creates an `index.js` file.
+ * @param name - The name
+ * @param namespace - Namespace name
+ * @param projectPath - Project path
+ * @param packagePath - Package path
+ */
 export const createSrcIndexJs = async (
   name: string,
   namespace: string,
