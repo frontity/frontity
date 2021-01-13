@@ -5,7 +5,9 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import { fetchPackageVersion } from "../utils";
 
-// Options passed to the `create-package` function.
+/**
+ * Options passed to the `create-package` function.
+ */
 export type Options = {
   // Name of the package.
   name?: string;
