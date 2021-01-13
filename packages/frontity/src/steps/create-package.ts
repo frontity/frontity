@@ -32,10 +32,11 @@ export type Options = {
 
 /**
  * This function creates a `package.json` file.
- * @param name - The package name
- * @param namespace - Namespace
- * @param projectPath - Project path
- * @param packagePath - Package path
+ *
+ * @param name - The package name.
+ * @param namespace - Namespace.
+ * @param projectPath - Project path.
+ * @param packagePath - Package path.
  */
 export const createPackageJson = async (
   name: string,
@@ -65,10 +66,11 @@ export const createPackageJson = async (
 
 /**
  * This function creates an `index.js` file.
- * @param name - The name
- * @param namespace - Namespace name
- * @param projectPath - Project path
- * @param packagePath - Package path
+ *
+ * @param name - The name.
+ * @param namespace - Namespace name.
+ * @param projectPath - Project path.
+ * @param packagePath - Package path.
  */
 export const createSrcIndexJs = async (
   name: string,
@@ -103,8 +105,12 @@ export default {
   await writeFile(filePath, fileData);
 };
 
-// This function executes the `npm i` command to add the
-// created package
+/**
+ * This function executes the `npm i` command to add the created package.
+ *
+ * @param projectPath - Project path.
+ * @param packagePath - Package path.
+ */
 export const installPackage = async (
   projectPath: string,
   packagePath: string
