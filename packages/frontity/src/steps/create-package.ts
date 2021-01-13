@@ -30,7 +30,13 @@ export type Options = {
   packagePath?: string;
 };
 
-// This function creates a `package.json` file.
+/**
+ * This function creates a `package.json` file.
+ * @param name - The package name
+ * @param namespace - Namespace
+ * @param projectPath - Project path
+ * @param packagePath - Package path
+ */
 export const createPackageJson = async (
   name: string,
   namespace: string,
