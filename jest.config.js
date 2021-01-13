@@ -1,5 +1,11 @@
+// Removes the warning that we are using an unsupported version of TypeScript.
+process.env.TS_JEST_DISABLE_VER_CHECKER = false;
+
 module.exports = {
-  transform: { "^.+\\.(t|j)sx?$": "ts-jest" },
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.jsx?$": ["babel-jest", { configFile: "../../jest.babel.js" }],
+  },
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(j|t)sx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   testPathIgnorePatterns: ["/mocks/"],
