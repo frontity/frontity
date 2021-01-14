@@ -72,12 +72,27 @@ const getConfig = (target: Target): TransformOptions => {
         runtime: "automatic",
       },
     ],
-    // Babel plugin for Emotion CSS property and other goodness.
-    "@emotion/babel-preset-css-prop",
   ];
   const plugins = [
     //
-    "babel-plugin-frontity",
+    // "babel-plugin-frontity",
+    // Babel plugin for Emotion CSS property and other goodness.
+    // "@emotion/babel-plugin",
+    [
+      "@emotion/babel-plugin",
+      {
+        importMap: {
+          frontity: {
+            css: {
+              canonicalImport: ["@emotion/react", "css"],
+            },
+            styled: {
+              styledBaseImport: ["@emotion/styled", "default"],
+            },
+          },
+        },
+      },
+    ],
     // Support for babel macros. See: https://community.frontity.org/t/tailwindcss-with-babel-macro-plugin-and-css-in-js/1040
     "babel-plugin-macros",
     // Support for dynamic imports: import("./my-file")
