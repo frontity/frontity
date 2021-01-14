@@ -4,19 +4,47 @@ import babelCore from "@babel/core/package.json";
 import babelLoader from "babel-loader/package.json";
 import { Target, BabelConfigs, Mode } from "../../../types";
 
-export default ({
+/**
+ * The options of the {@link moduleConf} function.
+ */
+interface ModuleOptions {
+  /**
+   * The target of the build: "server", "es5" or "module".
+   */
+  target: Target;
+
+  /**
+   * The mode of the build: "development" or "production".
+   */
+  mode: Mode;
+
+  /**
+   * The configurations of Babel, generated in a previous step.
+   */
+  babel: BabelConfigs;
+}
+
+/**
+ * Generate the object for Webpack's entry configuration.
+ *
+ * Official Webpack docs: https://webpack.js.org/configuration/entry-context/.
+ *
+ * @param options - Defined in {@link EntryOptions}.
+ *
+ * @returns The configuration object for Webpack.
+ */
+const moduleConf = ({
   target,
   babel,
   mode,
-}: {
-  target: Target;
-  babel: BabelConfigs;
-  mode: Mode;
-}): Configuration["module"] => ({
+}: ModuleOptions): Configuration["module"] => ({
   rules: [
     {
       // Support for js, jsx, ts and tsx files.
       test: /\.(j|t)sx?$/,
+      // Do not try to transpile the files of webpack, core-js or the
+      // regenerator-runtime because they break if we do so.
+      exclude: [/\bcore-js\b/, /\bwebpack\b/, /\bregenerator-runtime\b/],
       use: {
         loader: "babel-loader",
         options: {
@@ -84,3 +112,5 @@ export default ({
     },
   ],
 });
+
+export default moduleConf;
