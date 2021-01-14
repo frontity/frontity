@@ -162,10 +162,11 @@ const actions: WpSource["actions"]["source"] = {
           isReady: true,
         })
       );
-    } catch (e) {
-      // If it's NOT a server error (4xx or 5xx) we should throw
-      if (!(e instanceof ServerError)) {
-        throw e;
+    } catch (error) {
+      // If it's NOT a server error (4xx or 5xx) it means it is an error in the
+      // code, so we should throw.
+      if (error.name !== "ServerError") {
+        throw error;
       }
 
       const { redirections } = state.source;
@@ -216,15 +217,15 @@ const actions: WpSource["actions"]["source"] = {
         }
       }
 
-      console.error(e);
+      console.error(error);
 
       const errorData: ErrorData = {
         isError: true,
         isReady: true,
         isFetching: false,
-        [`is${e.status}`]: true,
-        errorStatus: e.status,
-        errorStatusText: e.statusText,
+        [`is${error.status}`]: true,
+        errorStatus: error.status,
+        errorStatusText: error.statusText,
         route: linkParams.route,
         link,
         query,
