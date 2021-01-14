@@ -333,6 +333,7 @@ describe.each`
               Object {
                 "/some-post/": Object {
                   "is301": true,
+                  "isExternal": false,
                   "isFetching": false,
                   "isReady": true,
                   "isRedirection": true,
@@ -390,6 +391,7 @@ describe.each`
               Object {
                 "/some-post/": Object {
                   "is301": true,
+                  "isExternal: false,
                   "isFetching": false,
                   "isReady": true,
                   "isRedirection": true,
@@ -425,6 +427,7 @@ describe.each`
               Object {
                 "/some-post/": Object {
                   "is301": true,
+                  "isExternal: false,
                   "isFetching": false,
                   "isReady": true,
                   "isRedirection": true,
@@ -456,6 +459,7 @@ describe.each`
               Object {
                 "/some-post/": Object {
                   "is301": true,
+                  "isExternal: false,
                   "isFetching": false,
                   "isReady": true,
                   "isRedirection": true,
