@@ -31,7 +31,6 @@
   "devDependencies": {
     "@frontity/connect": "^1.1.4",
     "clone-deep": "^4.0.1",
-    "deepmerge": "^4.2.2",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   }
 }

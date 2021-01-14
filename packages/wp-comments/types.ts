@@ -80,7 +80,7 @@ export interface WpComment {
   /**
    * Meta fields.
    */
-  meta: [];
+  meta?: Record<string, unknown>;
 }
 
 /**
