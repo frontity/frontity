@@ -118,10 +118,20 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
  *
  * @param link - The link URL.
  * @param sourceUrl - The Source URL. It usually comes from `state.source.url`.
+ * @param match - (Optional) array of RegExp that matches the URL.
  *
  * @returns The URL without the Source URL.
  */
-export const removeSourceUrl = (link: string, sourceUrl: string) => {
+export const removeSourceUrl = (
+  link: string,
+  sourceUrl: string,
+  match?: string[]
+) => {
+  // if match is present we need to ensure the internal link matches the current site url pattern
+  if (match && !match.some((regexp) => new RegExp(regexp).test(link))) {
+    return link;
+  }
+
   const linkUrl = new URL(link, sourceUrl);
   return linkUrl.hostname === new URL(sourceUrl).hostname
     ? linkUrl.pathname + linkUrl.search + linkUrl.hash
