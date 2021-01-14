@@ -3,7 +3,6 @@ import WpSource from "../types";
 import { parse, normalize, concatLink } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
-import { fetchRedirection } from "./libraries/fetch-redirection";
 import {
   postTypeHandler,
   postTypeArchiveHandler,
@@ -12,11 +11,12 @@ import {
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
 import { ServerError, isError, isSearch } from "@frontity/source";
-
-/**
- * A helper type which lets you get the type of a thing that is wrapped in a promise.
- */
-type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
+import {
+  is404Redirection,
+  isEagerRedirection,
+  fetchRedirection,
+  getRedirectionData,
+} from "./utils";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
@@ -62,8 +62,6 @@ const actions: WpSource["actions"]["source"] = {
       data.isFetching = true;
     }
 
-    let redirectionResult: Awaited<ReturnType<typeof fetchRedirection>>;
-
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
@@ -78,46 +76,24 @@ const actions: WpSource["actions"]["source"] = {
       // Remove the trailing slash before concatenating the link
       const redirectionURL = state.source.url.replace(/\/$/, "") + link;
 
-      // The router redirections can be an array of (RegExp | "404")[].
-      if (Array.isArray(redirections)) {
-        const patterns = redirections
-          .filter((r) => r.startsWith("RegExp:"))
-          .map((r) => r.replace(/^RegExp:/, ""));
-
-        if (patterns.some((r) => route.match(r))) {
-          redirectionResult = await fetchRedirection(
-            redirectionURL,
-            state.frontity.platform
-          );
-        }
-        // Or it can be "all".
-      } else if (redirections === "all") {
-        redirectionResult = await fetchRedirection(
+      // Check if we need to check if it is a redirection before fetching the
+      // backend.
+      if (isEagerRedirection(redirections, link)) {
+        const redirectionResult = await fetchRedirection(
           redirectionURL,
           state.frontity.platform
         );
-        // Or it can be just a regex or null/undefined (so we use the optional chaining)
-      } else if (redirections?.startsWith("RegExp:")) {
-        const regex = redirections.replace(/^RegExp:/, "");
-        if (link.match(regex)) {
-          redirectionResult = await fetchRedirection(
-            redirectionURL,
-            state.frontity.platform
-          );
-        }
-      }
 
-      if (redirectionResult?.isRedirection) {
-        const { pathname, search, hash } = new URL(redirectionResult.location);
-        Object.assign(source.data[link], {
-          location: pathname + search + hash,
-          redirectionStatus: redirectionResult.status,
-          [`is${redirectionResult.status}`]: true,
-          isFetching: false,
-          isReady: true,
-          isRedirection: true,
-        });
-        return;
+        // If there is a redirection, populate the data object and finish here.
+        if (redirectionResult?.isRedirection) {
+          const redirectionData = getRedirectionData(
+            redirectionResult,
+            state.source.url,
+            state.frontity.url
+          );
+          batch(() => Object.assign(source.data[link], redirectionData));
+          return;
+        }
       }
 
       // Get the handler for this route.
@@ -154,7 +130,8 @@ const actions: WpSource["actions"]["source"] = {
         isSearch(source.data[link]) !== true &&
         source.data[link].route === normalize(state.source.subdirectory || "/");
 
-      // Populate the data object.
+      // Mark the data object as ready.
+      // TODO: We should remove data.isHome to the handlers in Source v2.
       batch(() =>
         Object.assign(source.data[link], {
           ...(isHome && { isHome: true }),
@@ -169,51 +146,26 @@ const actions: WpSource["actions"]["source"] = {
         throw error;
       }
 
-      const { redirections } = state.source;
-      if (
-        e.status === 404 &&
-        (redirections === "404" ||
-          (Array.isArray(redirections) && redirections.includes("404")))
-      ) {
-        let redirection: Awaited<ReturnType<typeof fetchRedirection>>;
+      if (error.status === 404 && is404Redirection(state.source.redirections)) {
         const redirectionURL = state.source.url.replace(/\/$/, "") + link;
         try {
-          redirection = await fetchRedirection(
+          const redirection = await fetchRedirection(
             redirectionURL,
             state.frontity.platform
           );
-        } catch (e) {
-          // If there is no redirection, we ignore it and just continue
-          // handling the 404 ServerError that was thrown previously.
-        }
-
-        if (redirection?.isRedirection) {
-          const { pathname, search, hash } = new URL(redirection.location);
-
-          let location: string;
-          let isExternal = false;
-
-          const host = new URL(redirection.location).host;
-          const sourceUrlHost = new URL(state.source.url).host;
-          const frontityUrlHost = new URL(state.frontity.url).host;
-
-          if (!(host === sourceUrlHost || host === frontityUrlHost)) {
-            location = redirection.location;
-            isExternal = true;
-          } else {
-            location = pathname + search + hash;
+          // If there is a redirection, populate the data object and finish here.
+          if (redirection?.isRedirection) {
+            const redirectionData = getRedirectionData(
+              redirection,
+              state.source.url,
+              state.frontity.url
+            );
+            batch(() => Object.assign(source.data[link], redirectionData));
+            return;
           }
-
-          Object.assign(source.data[link], {
-            location,
-            isExternal,
-            redirectionStatus: redirection.status,
-            [`is${redirection.status}`]: true,
-            isFetching: false,
-            isReady: true,
-            isRedirection: true,
-          });
-          return;
+        } catch (e) {
+          // If there is no redirection, we ignore it and just continue handling
+          // the 404 ServerError that was thrown previously.
         }
       }
 
