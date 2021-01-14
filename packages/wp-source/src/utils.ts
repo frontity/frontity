@@ -6,11 +6,6 @@ import { fetch } from "frontity";
  */
 export interface FetchDirectionReturn {
   /**
-   * The Fetch API response.
-   */
-  response: Response;
-
-  /**
    * The HTTP status.
    */
   status: 301 | 302 | 307 | 308;
@@ -34,42 +29,51 @@ export interface FetchDirectionReturn {
  * @param link - The URL from which the redirection should be fetched.
  * @param platform - Should be either "client" or "server".
  *
- * @returns An object defined in {@link FetchDirectionReturn}.
+ * @returns An object that contains information about the redirection, defined
+ * in {@link FetchDirectionReturn}, or nothing if there is no redirection.
  */
 export const fetchRedirection = async (
   link: string,
   platform: "client" | "server"
 ): Promise<FetchDirectionReturn> => {
-  let response: Response;
-  let isRedirection: boolean;
-  let status: 301 | 302 | 307 | 308;
-  let location: string;
-
-  // On the server we have to fetch with `redirect: manual` so that we can get
-  // the 30x status code of the redirection.
   if (platform === "server") {
-    response = await fetch(link, {
+    // On the server we have to fetch with `redirect: manual` so that we can
+    // check the status code of the redirection.
+    const response = await fetch(link, {
       method: "HEAD",
       redirect: "manual",
     });
-    isRedirection = /30[1278]/.test(response.status.toString());
-    status = response.status;
-    location = response.headers.get("location");
+
+    // On the server we check the status of the response.
+    if (
+      response.status === 301 ||
+      response.status === 302 ||
+      response.status === 307 ||
+      response.status === 308
+    )
+      return {
+        status: response.status,
+        location: response.headers.get("location"),
+        isRedirection: true,
+      };
   } else {
     // On the client it's not possible to get the actual status code of the
     // redirection if you use the `redirect: manual` option because of
-    // https://fetch.spec.whatwg.org/#atomic-http-redirect-handling
-    // The `redirect: manual` option on the client returns an "opaque response"
+    // https://fetch.spec.whatwg.org/#atomic-http-redirect-handling The
+    // `redirect: manual` option on the client returns an "opaque response"
     // object which always has the status of 0.
-    response = await fetch(link, {
+    const response = await fetch(link, {
       method: "HEAD",
     });
-    isRedirection = response.redirected || false;
-    status = 301; // Default value on the client.
-    location = response.url;
-  }
 
-  return { response, status, location, isRedirection };
+    // On the client we check the property `redirected`.
+    if (response.redirected)
+      return {
+        status: 301, // Default value on the client.
+        location: response.url,
+        isRedirection: true,
+      };
+  }
 };
 
 /**
@@ -121,8 +125,8 @@ export const is404Redirection = (redirections: string | string[]): boolean => {
 /**
  * Prepare the redirection data to populate a data object that is a redirection.
  *
- * @param redirection - The redirection object returned by the backend. Defined
- * in {@link FetchDirectionReturn}.
+ * @param location - The final url of the redirection.
+ * @param status - The status code of the redirection.
  * @param sourceUrl - The url of the backend, usually defined in
  * `state.source.url`.
  * @param frontityUrl - The url of the backend, usually defined in
@@ -132,22 +136,21 @@ export const is404Redirection = (redirections: string | string[]): boolean => {
  * RedirectionData}.
  */
 export const getRedirectionData = (
-  redirection: FetchDirectionReturn,
+  location: string,
+  status: 301 | 302 | 307 | 308,
   sourceUrl: string,
   frontityUrl: string
 ): Partial<RedirectionData> => {
-  const { pathname, search, hash, host } = new URL(redirection.location);
+  const { pathname, search, hash, host } = new URL(location);
   const sourceUrlHost = new URL(sourceUrl).host;
   const frontityUrlHost = new URL(frontityUrl).host;
-
   const isExternal = !(host === sourceUrlHost || host === frontityUrlHost);
-  const location = isExternal ? redirection.location : pathname + hash + search;
 
   return {
     isExternal,
-    location,
-    redirectionStatus: redirection.status,
-    [`is${redirection.status}`]: true,
+    location: isExternal ? location : pathname + hash + search,
+    redirectionStatus: status,
+    [`is${status}`]: true,
     isRedirection: true,
     isReady: true,
     isFetching: false,

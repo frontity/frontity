@@ -64,7 +64,7 @@ const clientFetchParams = [
 const clientResponse = {
   url: "https://wp.domain.com/redirected-url",
   redirected: true,
-  status: 301,
+  status: 200,
 };
 
 describe.each`
@@ -349,7 +349,7 @@ describe.each`
           `);
     });
 
-    it.only(`${platform}: Should match the redirection with pagination and queries`, async () => {
+    it(`${platform}: Should match the redirection with pagination and queries`, async () => {
       store.state.source.redirections = "RegExp:/some-(\\w*)";
       await store.actions.source.fetch("/some-post");
 
@@ -371,7 +371,7 @@ describe.each`
       expect(mockedFetch).toHaveBeenCalledTimes(2);
       expect(handler.func).toHaveBeenCalledTimes(1);
 
-      store.state.source.redirections = "[RegExp:(\\?|&)p=(\\d+)]";
+      store.state.source.redirections = ["RegExp:(\\?|&)p=(\\d+)"];
       await store.actions.source.fetch("/?p=123&preview=true");
 
       // The `fetch()` was called.

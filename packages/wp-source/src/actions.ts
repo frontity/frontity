@@ -79,15 +79,16 @@ const actions: WpSource["actions"]["source"] = {
       // Check if we need to check if it is a redirection before fetching the
       // backend.
       if (isEagerRedirection(redirections, link)) {
-        const redirectionResult = await fetchRedirection(
+        const redirection = await fetchRedirection(
           redirectionURL,
           state.frontity.platform
         );
 
         // If there is a redirection, populate the data object and finish here.
-        if (redirectionResult?.isRedirection) {
+        if (redirection?.isRedirection) {
           const redirectionData = getRedirectionData(
-            redirectionResult,
+            redirection.location,
+            redirection.status,
             state.source.url,
             state.frontity.url
           );
@@ -156,7 +157,8 @@ const actions: WpSource["actions"]["source"] = {
           // If there is a redirection, populate the data object and finish here.
           if (redirection?.isRedirection) {
             const redirectionData = getRedirectionData(
-              redirection,
+              redirection.location,
+              redirection.status,
               state.source.url,
               state.frontity.url
             );
