@@ -348,6 +348,42 @@ describe.each`
           `);
     });
 
+    it.only(`${platform}: Should match the redirection with pagination and queries`, async () => {
+      store.state.source.redirections = "RegExp:/some-(\\w*)";
+      await store.actions.source.fetch("/some-post");
+
+      // The `fetch()` was called.
+      expect(mockedFetch).toHaveBeenCalledTimes(1);
+      expect(handler.func).not.toHaveBeenCalled();
+
+      store.state.source.redirections =
+        "RegExp:\\/category\\/some-cat\\/page\\/[2,3]";
+      await store.actions.source.fetch("/category/some-cat/page/2");
+
+      // The `fetch()` was called.
+      expect(mockedFetch).toHaveBeenCalledTimes(2);
+      expect(handler.func).not.toHaveBeenCalled();
+
+      await store.actions.source.fetch("/category/some-cat/page/5");
+
+      // The `fetch()` was not called.
+      expect(mockedFetch).toHaveBeenCalledTimes(2);
+      expect(handler.func).toHaveBeenCalledTimes(1);
+
+      store.state.source.redirections = "[RegExp:(\\?|&)p=(\\d+)]";
+      await store.actions.source.fetch("/?p=123&preview=true");
+
+      // The `fetch()` was called.
+      expect(mockedFetch).toHaveBeenCalledTimes(3);
+      expect(handler.func).toHaveBeenCalledTimes(1);
+
+      await store.actions.source.fetch("/?page_id=123&preview=true");
+
+      // The `fetch()` was not called.
+      expect(mockedFetch).toHaveBeenCalledTimes(3);
+      expect(handler.func).toHaveBeenCalledTimes(2);
+    });
+
     it(`${platform}: Should just return a 404 if the redirection does not match the regex`, async () => {
       store.state.source.redirections = "RegExp:/some-other-post";
       await store.actions.source.fetch("/some-post");
