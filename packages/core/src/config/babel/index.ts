@@ -69,7 +69,10 @@ const getConfig = (target: Target): TransformOptions => {
     [
       "@babel/preset-react",
       {
+        // This one turns on the jsx-runtime
         runtime: "automatic",
+        // This option allows emotion to adopt the jsx-runtime and make
+        // the css prop work
         importSource: "@emotion/react",
       },
     ],
