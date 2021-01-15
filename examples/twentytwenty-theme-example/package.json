@@ -4,6 +4,7 @@
   "private": true,
   "description": "Example of a project using mars-theme.",
   "scripts": {
+    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\"",
     "dev": "frontity dev",
     "dev:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity dev",
     "build": "frontity build",

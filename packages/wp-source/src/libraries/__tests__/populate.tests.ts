@@ -2,15 +2,16 @@ import { createStore, InitializedStore } from "@frontity/connect";
 import { Response as NodeResponse } from "node-fetch";
 import clone from "clone-deep";
 import wpSource from "../../";
-import WpSource from "../../../types";
+import { Packages } from "../../../types";
 import populate from "../populate";
 import posts from "../handlers/__tests__/mocks/post-archive/posts.json";
 import postsSubdir from "../handlers/__tests__/mocks/post-archive/posts-subdir.json";
 import cpts from "../handlers/__tests__/mocks/cpt-archive/cpts.json";
 
-const initStore = (): InitializedStore<WpSource> => {
-  const config: WpSource = clone(wpSource());
+const initStore = (): InitializedStore<Packages> => {
+  const config: Packages = clone(wpSource());
   config.state.source.url = "https://test.frontity.org";
+  config.state.frontity = {};
   return createStore(config);
 };
 
@@ -100,7 +101,7 @@ describe("populate", () => {
 
   test("removes WP API path from links", async () => {
     const { state } = initStore();
-    state.source.api = "https://test.frontity.org/subdirectory/wp-json";
+    state.source.url = "https://test.frontity.org/subdirectory/";
 
     const response = mockResponse(postsSubdir);
     const result = await populate({ state, response });
@@ -111,11 +112,23 @@ describe("populate", () => {
 
   test("transforms links if subdirectory is specified", async () => {
     const { state } = initStore();
-    state.source.api = "https://test.frontity.org/subdirectory/wp-json";
+    state.source.url = "https://test.frontity.org/subdirectory/";
 
     const response = mockResponse(postsSubdir);
     const subdirectory = "/blog/";
     const result = await populate({ state, response, subdirectory });
+
+    expect(result).toMatchSnapshot();
+    expect(state.source).toMatchSnapshot();
+  });
+
+  test("transforms links if subdirectory is specified in `state.frontity.url`", async () => {
+    const { state } = initStore();
+    state.frontity.url = "https://final-domain.com/blog/";
+    state.source.url = "https://test.frontity.org/subdirectory/";
+
+    const response = mockResponse(postsSubdir);
+    const result = await populate({ state, response });
 
     expect(result).toMatchSnapshot();
     expect(state.source).toMatchSnapshot();

@@ -1,6 +1,6 @@
 import * as hash from "hash-it";
 import * as path from "path";
-import getWebpack from "../";
+import getWebpack from "..";
 
 jest.mock("path");
 const mockedPath = path as jest.Mocked<typeof path>;
@@ -49,6 +49,7 @@ test("Webpack returns for development", () => {
       babel: babel["development"],
       frontity,
       entryPoints,
+      publicPath: "/static",
     })
   ).toMatchSnapshot();
 });
@@ -60,6 +61,7 @@ test("Webpack returns for production", () => {
       babel: babel["production"],
       frontity,
       entryPoints,
+      publicPath: "/static",
     })
   ).toMatchSnapshot();
 });

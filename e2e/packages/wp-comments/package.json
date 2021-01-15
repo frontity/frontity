@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Package to run e2e tests of wp-comments",
+  "scripts": {
+    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\""
+  },
   "dependencies": {
     "frontity": "^1.4.3",
     "@frontity/wp-comments": "0.2.4-infinite-scroll-beta.0"

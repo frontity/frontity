@@ -77,7 +77,7 @@ https://docs.frontity.org/api-reference-1/frontity-html2react#create-your-own-pr
     if (!proc.test || !processor)
       error(
         `The processor ${
-          name || "(missing name)"
+          proc.name || "(missing name)"
         } needs both a "test" and a "processor" properties.`
       );
 

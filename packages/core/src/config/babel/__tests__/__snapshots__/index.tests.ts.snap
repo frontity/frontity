@@ -26,6 +26,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "bugfixes": true,
           "corejs": "3",
           "modules": false,
           "targets": Object {
@@ -46,12 +47,13 @@ Object {
               "samsung >= 5",
             ],
           },
-          "useBuiltIns": "entry",
+          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
       "@emotion/babel-preset-css-prop",
     ],
+    "sourceType": "unambiguous",
   },
   "module": Object {
     "compact": true,
@@ -77,17 +79,19 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "corejs": false,
+          "bugfixes": true,
+          "corejs": "3",
           "modules": false,
           "targets": Object {
             "esmodules": true,
           },
-          "useBuiltIns": false,
+          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
       "@emotion/babel-preset-css-prop",
     ],
+    "sourceType": "unambiguous",
   },
   "server": Object {
     "compact": true,
@@ -113,17 +117,19 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "corejs": false,
+          "bugfixes": true,
+          "corejs": "3",
           "modules": false,
           "targets": Object {
-            "node": "8.10",
+            "node": "10",
           },
-          "useBuiltIns": false,
+          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
       "@emotion/babel-preset-css-prop",
     ],
+    "sourceType": "unambiguous",
   },
 }
 `;
@@ -154,6 +160,7 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
+          "bugfixes": true,
           "corejs": "3",
           "modules": false,
           "targets": Object {
@@ -174,12 +181,13 @@ Object {
               "samsung >= 5",
             ],
           },
-          "useBuiltIns": "entry",
+          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
       "@emotion/babel-preset-css-prop",
     ],
+    "sourceType": "unambiguous",
   },
   "module": Object {
     "compact": true,
@@ -205,17 +213,19 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "corejs": false,
+          "bugfixes": true,
+          "corejs": "3",
           "modules": false,
           "targets": Object {
             "esmodules": true,
           },
-          "useBuiltIns": false,
+          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
       "@emotion/babel-preset-css-prop",
     ],
+    "sourceType": "unambiguous",
   },
   "server": Object {
     "compact": true,
@@ -241,17 +251,19 @@ Object {
       Array [
         "@babel/preset-env",
         Object {
-          "corejs": false,
+          "bugfixes": true,
+          "corejs": "3",
           "modules": false,
           "targets": Object {
-            "node": "8.10",
+            "node": "10",
           },
-          "useBuiltIns": false,
+          "useBuiltIns": "usage",
         },
       ],
       "@babel/preset-react",
       "@emotion/babel-preset-css-prop",
     ],
+    "sourceType": "unambiguous",
   },
 }
 `;
