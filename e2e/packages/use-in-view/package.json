@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "frontity": "^1.10.1",
-    "@frontity/hooks": "^2.1.0-infinite-scroll-beta.1"
+    "@frontity/hooks": "^2.1.0-infinite-scroll-beta.4"
   }
 }
