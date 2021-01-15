@@ -70,14 +70,13 @@ const getConfig = (target: Target): TransformOptions => {
       "@babel/preset-react",
       {
         runtime: "automatic",
+        importSource: "@emotion/react",
       },
     ],
   ];
   const plugins = [
     //
-    // "babel-plugin-frontity",
     // Babel plugin for Emotion CSS property and other goodness.
-    // "@emotion/babel-plugin",
     [
       "@emotion/babel-plugin",
       {
@@ -86,8 +85,15 @@ const getConfig = (target: Target): TransformOptions => {
             css: {
               canonicalImport: ["@emotion/react", "css"],
             },
+            // TODO: This is throwing at build time 🤔 I need to look into it more
+            // keyframes: {
+            //   canonicalImport: ["@emotion/react", "keyframes"],
+            // },
+            Global: {
+              canonicalImport: ["@emotion/react", "Global"],
+            },
             styled: {
-              styledBaseImport: ["@emotion/styled", "default"],
+              canonicalImport: ["@emotion/styled", "default"],
             },
           },
         },
