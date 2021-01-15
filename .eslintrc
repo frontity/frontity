@@ -113,7 +113,7 @@
         "jest/expect-expect": [
           "error",
           {
-            "assertFunctionNames": ["expect", "**.should"]
+            "assertFunctionNames": ["expect", "**.should", "**.toMatchSnapshot"]
           }
         ]
       }
