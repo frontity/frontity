@@ -19,7 +19,7 @@
   },
   "scripts": {
     "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\"",
-    "test:ci": "../../node_modules/.bin/jest --coverage -u",
+    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
