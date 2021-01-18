@@ -140,19 +140,14 @@ export const getRedirectionData = (
   status: 301 | 302 | 307 | 308,
   sourceUrl: string,
   frontityUrl: string
-): Partial<RedirectionData> => {
-  const { pathname, search, hash, host } = new URL(location);
-  const sourceUrlHost = new URL(sourceUrl).host;
-  const frontityUrlHost = new URL(frontityUrl).host;
-  const isExternal = !(host === sourceUrlHost || host === frontityUrlHost);
-
-  return {
-    isExternal,
-    location: isExternal ? location : pathname + hash + search,
-    redirectionStatus: status,
-    [`is${status}`]: true,
-    isRedirection: true,
-    isReady: true,
-    isFetching: false,
-  };
-};
+): Partial<RedirectionData> => ({
+  isExternal:
+    new URL(location).host !== new URL(sourceUrl).host &&
+    new URL(location).host !== new URL(frontityUrl).host,
+  location,
+  redirectionStatus: status,
+  [`is${status}`]: true,
+  isRedirection: true,
+  isReady: true,
+  isFetching: false,
+});
