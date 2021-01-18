@@ -83,7 +83,7 @@ describe.each`
     store.state.source.url = "https://wp.domain.com";
     store.state.frontity = {
       platform,
-      url: "https://www.domain.com",
+      url: "https://www.domain.com/",
     };
 
     handler = {
@@ -104,7 +104,7 @@ describe.each`
   });
 
   describe("redirections: all", () => {
-    it(`${platform}: Should handle a redirect with 'all`, async () => {
+    it(`${platform}: Should handle a redirect with 'all'`, async () => {
       store.state.source.redirections = "all";
 
       await store.actions.source.fetch("/some-post/");
@@ -123,7 +123,7 @@ describe.each`
                   "isReady": true,
                   "isRedirection": true,
                   "link": "/some-post/",
-                  "location": "/redirected-url",
+                  "location": "https://wp.domain.com/redirected-url",
                   "page": 1,
                   "query": Object {},
                   "redirectionStatus": 301,
@@ -190,7 +190,7 @@ describe.each`
                   "isReady": true,
                   "isRedirection": true,
                   "link": "/some-post/",
-                  "location": "/redirected-url",
+                  "location": "https://wp.domain.com/redirected-url",
                   "page": 1,
                   "query": Object {},
                   "redirectionStatus": 301,
@@ -209,12 +209,6 @@ describe.each`
             ...serverResponse,
             status: 302,
           } as unknown) as Response)
-        );
-      } else {
-        mockedFetch = jest.fn((_) =>
-          Promise.resolve({
-            ...clientResponse,
-          } as Response)
         );
       }
 
@@ -238,7 +232,7 @@ describe.each`
             "isReady": true,
             "isRedirection": true,
             "link": "/some-post/",
-            "location": "/redirected-url",
+            "location": "https://wp.domain.com/redirected-url",
             "page": 1,
             "query": Object {},
             "redirectionStatus": 30${platform === "server" ? "2" : "1"},
@@ -298,7 +292,7 @@ describe.each`
                   "isReady": true,
                   "isRedirection": true,
                   "link": "/some-post/?key=value&key2=value2",
-                  "location": "/redirected-url",
+                  "location": "https://wp.domain.com/redirected-url",
                   "page": 1,
                   "query": Object {
                     "key": "value",
@@ -339,7 +333,7 @@ describe.each`
                   "isReady": true,
                   "isRedirection": true,
                   "link": "/some-post/",
-                  "location": "/redirected-url",
+                  "location": "https://wp.domain.com/redirected-url",
                   "page": 1,
                   "query": Object {},
                   "redirectionStatus": 301,
@@ -433,7 +427,7 @@ describe.each`
                   "isReady": true,
                   "isRedirection": true,
                   "link": "/some-post/",
-                  "location": "/redirected-url",
+                  "location": "https://wp.domain.com/redirected-url",
                   "page": 1,
                   "query": Object {},
                   "redirectionStatus": 301,
@@ -469,7 +463,7 @@ describe.each`
                   "isReady": true,
                   "isRedirection": true,
                   "link": "/some-post/",
-                  "location": "/redirected-url",
+                  "location": "https://wp.domain.com/redirected-url",
                   "page": 1,
                   "query": Object {},
                   "redirectionStatus": 301,
@@ -501,7 +495,143 @@ describe.each`
                   "isReady": true,
                   "isRedirection": true,
                   "link": "/some-post/",
-                  "location": "/redirected-url",
+                  "location": "https://wp.domain.com/redirected-url",
+                  "page": 1,
+                  "query": Object {},
+                  "redirectionStatus": 301,
+                  "route": "/some-post/",
+                },
+              }
+          `);
+    });
+  });
+
+  describe("redirections: external", () => {
+    it(`${platform}: Should not mark the Frontity URLs as external redirections`, async () => {
+      store.state.source.redirections = "all";
+
+      if (platform === "server") {
+        mockedFetch = jest.fn((_) =>
+          Promise.resolve(({
+            status: 301,
+            headers: new Headers({
+              location: "https://www.domain.com/redirected-url",
+            }),
+          } as unknown) as Response)
+        );
+      } else {
+        mockedFetch = jest.fn((_) =>
+          Promise.resolve({
+            url: "https://www.domain.com/redirected-url",
+            redirected: true,
+            status: 200,
+          } as Response)
+        );
+      }
+
+      (frontity.fetch as typeof fetch) = mockedFetch;
+
+      await store.actions.source.fetch("/some-post/");
+
+      expect(store.state.source.data).toMatchInlineSnapshot(`
+              Object {
+                "/some-post/": Object {
+                  "is301": true,
+                  "isExternal": false,
+                  "isFetching": false,
+                  "isReady": true,
+                  "isRedirection": true,
+                  "link": "/some-post/",
+                  "location": "https://www.domain.com/redirected-url",
+                  "page": 1,
+                  "query": Object {},
+                  "redirectionStatus": 301,
+                  "route": "/some-post/",
+                },
+              }
+          `);
+    });
+
+    it(`${platform}: Should not mark backend URLs as external redirections`, async () => {
+      store.state.source.redirections = "all";
+
+      if (platform === "server") {
+        mockedFetch = jest.fn((_) =>
+          Promise.resolve(({
+            status: 301,
+            headers: new Headers({
+              location: "https://wp.domain.com/redirected-url",
+            }),
+          } as unknown) as Response)
+        );
+      } else {
+        mockedFetch = jest.fn((_) =>
+          Promise.resolve({
+            url: "https://wp.domain.com/redirected-url",
+            redirected: true,
+            status: 200,
+          } as Response)
+        );
+      }
+
+      (frontity.fetch as typeof fetch) = mockedFetch;
+
+      await store.actions.source.fetch("/some-post/");
+
+      expect(store.state.source.data).toMatchInlineSnapshot(`
+              Object {
+                "/some-post/": Object {
+                  "is301": true,
+                  "isExternal": false,
+                  "isFetching": false,
+                  "isReady": true,
+                  "isRedirection": true,
+                  "link": "/some-post/",
+                  "location": "https://wp.domain.com/redirected-url",
+                  "page": 1,
+                  "query": Object {},
+                  "redirectionStatus": 301,
+                  "route": "/some-post/",
+                },
+              }
+          `);
+    });
+    it(`${platform}: Should mark external redirections`, async () => {
+      store.state.source.redirections = "all";
+
+      if (platform === "server") {
+        mockedFetch = jest.fn((_) =>
+          Promise.resolve(({
+            status: 301,
+            headers: new Headers({
+              location: "https://external-domain.com/external-redirected-url",
+            }),
+          } as unknown) as Response)
+        );
+      } else {
+        mockedFetch = jest.fn((_) =>
+          Promise.resolve({
+            url: "https://external-domain.com/external-redirected-url",
+            redirected: true,
+            status: 200,
+          } as Response)
+        );
+      }
+
+      (frontity.fetch as typeof fetch) = mockedFetch;
+
+      await store.actions.source.fetch("/some-post/");
+
+      expect(store.state.source.data).toMatchInlineSnapshot(`
+              Object {
+                "/some-post/": Object {
+                  "is301": true,
+                  "isExternal": true,
+                  "isFetching": false,
+                  "isReady": true,
+                  "isRedirection": true,
+                  "link": "/some-post/",
+                  "location": "https://external-domain.com/external-redirected-url",
                   "page": 1,
                   "query": Object {},
                   "redirectionStatus": 301,
