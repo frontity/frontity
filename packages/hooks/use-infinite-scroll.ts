@@ -105,44 +105,31 @@ type UseInfiniteScroll = (options: {
     };
 
 /**
+ * Properties added by the {@link useInfiniteScroll} to the Router
+ * state property.
+ */
+export type InfiniteScrollRouterState = {
+  /**
+   * The infinite scroll map of props.
+   */
+  infiniteScroll: {
+    /**
+     * Array of visited links.
+     */
+    links: string[];
+  };
+
+  /**
+   * Any other prop.
+   */
+  [key: string]: unknown;
+};
+
+/**
  * The type of those packages the {@link useInfiniteScroll} hook depends on,
  * merged together.
  */
-export type Packages = MergePackages<
-  Source,
-  Router,
-  {
-    /**
-     * State exposed by packages.
-     */
-    state: {
-      /**
-       * Router namespace.
-       */
-      router: {
-        /**
-         * Property representing the browser history state.
-         */
-        state: Router["state"]["router"]["state"] & {
-          /**
-           * Properties added by the {@link useInfiniteScroll} to the Router
-           * state property.
-           */
-          infiniteScroll?: {
-            /**
-             * Array of visited links.
-             */
-            links: string[];
-
-            /**
-             *
-             */
-          };
-        };
-      };
-    };
-  }
->;
+export type Packages = MergePackages<Source, Router>;
 
 /**
  * A hook to build other infinite scroll hooks.
@@ -198,8 +185,11 @@ const useInfiniteScroll: UseInfiniteScroll = ({
   // infinite scroll. Do nothing if it is not supported.
   useEffect(() => {
     if (isSupported && fetch.inView && nextLink) {
-      const links = state.router.state.infiniteScroll?.links
-        ? [...state.router.state.infiniteScroll.links]
+      const { infiniteScroll } = state.router
+        .state as InfiniteScrollRouterState;
+
+      const links = infiniteScroll.links
+        ? [...infiniteScroll.links]
         : [currentLink];
 
       if (links.includes(nextLink)) return;
@@ -212,10 +202,7 @@ const useInfiniteScroll: UseInfiniteScroll = ({
 
       actions.router.updateState({
         ...state.router.state,
-        infiniteScroll: {
-          ...state.router.state.infiniteScroll,
-          links,
-        },
+        infiniteScroll: { ...infiniteScroll, links },
       });
     }
   }, [
