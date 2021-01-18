@@ -382,6 +382,353 @@ Array [
 ]
 `;
 
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) doesn't change links that don't point to WordPress pages 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "content": "https://test.frontity.org/wp-content/uploads/2019/12/img.jpg",
+      "property": "og:image",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "content": "https://test.frontity.org/wp-content/uploads/2019/12/img.jpg",
+      "name": "twitter:image",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "href": "//s.w.org",
+      "rel": "dns-prefetch",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/feed/",
+      "rel": "alternate",
+      "title": "frontity » Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/comments/feed/",
+      "rel": "alternate",
+      "title": "frontity » Comments Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/post-1/feed/",
+      "rel": "alternate",
+      "title": "frontity » Post 1 Comments Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/xmlrpc.php?rsd",
+      "rel": "EditURI",
+      "title": "RSD",
+      "type": "application/rsd+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/wp-includes/wlwmanifest.xml",
+      "rel": "wlwmanifest",
+      "type": "application/wlwmanifest+xml",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.org%2Fpost-1%2F",
+      "rel": "alternate",
+      "type": "application/json+oembed",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftest.frontity.org%2Fpost-1%2F&format=xml",
+      "rel": "alternate",
+      "type": "text/xml+oembed",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/xmlrpc.php",
+      "rel": "pingback",
+    },
+    "tag": "link",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) doesn't transform links if \`source.url\` and \`frontity.url\` are the same site 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) doesn't transform links if \`state.headTags.transformLinks\` = false 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://test.frontity.org/#website\\",\\"url\\":\\"https://test.frontity.org/\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) returns elements without attributes (title) 1`] = `
+Array [
+  Object {
+    "content": "Post 1 - Frontity",
+    "tag": "title",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) returns elements without content (meta tags) 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "content": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      "name": "robots",
+    },
+    "tag": "meta",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) shows a warning message if \`state.frontity.url\` is not defined 1`] = `
+Array [
+  Array [
+    "Property \`state.headTags.links.transform\` is defined but \`state.frontity.url\` is not. All links in <head> tags pointing to other site (e.g. WordPress) instead to the Frontity site won't be changed.
+Visit https://community.frontity.org for help! 🙂
+",
+  ],
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) shows a warning message if a <script type="ld+json"> could not be parsed 1`] = `
+Array [
+  Array [
+    "The following content of a <script type=\\"ld+json\\"> tag is not a valid JSON. Links in that tag will not be changed.
+
+{
+  \\"@context\\": \\"https://schema.org\\",
+  \\"@graph\\": [
+    {
+      \\"@type\\": \\"WebPage\\",
+      \\"@id\\": \\"https://test.frontity.org/wrong-title/#webpage\\",
+      \\"url\\": \\"https://test.frontity.org/wrong-title/\\",
+      \\"inLanguage\\": \\"en-US\\",
+      \\"name\\": \\"Wrong title with \\"quotes\\" - frontity\\",
+      \\"isPartOf\\": {
+        \\"@id\\": \\"https://test.frontity.org/#website\\"
+      }
+    }
+  ]
+}
+Visit https://community.frontity.org for help! 🙂
+",
+  ],
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) transform links inside ld+json data 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "class": "yoast-schema-graph yoast-schema-graph--main",
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\",\\"potentialAction\\":{\\"@type\\":\\"SearchAction\\",\\"target\\":\\"https://mars.frontity.org/?s={search_term_string}\\"}},{\\"@type\\":\\"ImageObject\\",\\"@id\\":\\"https://mars.frontity.org/post-1/#primaryimage\\",\\"url\\":\\"https://test.frontity.org/wp-content/uploads/2019/12/img.jpg\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) transform links using a custom \`base\` value 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) transform links using a custom \`ignore\` value 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "content": "https://mars.frontity.org/wp-content/uploads/2019/12/img.jpg",
+      "name": "twitter:image",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/do-not-change/me/",
+      "rel": "alternate",
+      "title": "frontity » Feed",
+      "type": "application/rss+xml",
+    },
+    "tag": "link",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) transforms links appropiately when Frontity is in a subdirectory 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://frontity.org/mars/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/subdir/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://frontity.org/mars/#website\\",\\"url\\":\\"https://frontity.org/mars/\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) transforms links appropiately when WP is in a subdirectory 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://test.frontity.org/subdir/wp-json/",
+      "rel": "https://api.w.org/",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "type": "application/ld+json",
+    },
+    "content": "{\\"@context\\":\\"https://schema.org\\",\\"@graph\\":[{\\"@type\\":\\"WebSite\\",\\"@id\\":\\"https://mars.frontity.org/#website\\",\\"url\\":\\"https://mars.frontity.org/\\"}]}",
+    "tag": "script",
+  },
+]
+`;
+
+exports[`state.headTags.get() (post entity, using \`state.source.url\`) transforms links that point to WordPress pages 1`] = `
+Array [
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/post-1/",
+      "rel": "canonical",
+    },
+    "tag": "link",
+  },
+  Object {
+    "attributes": Object {
+      "content": "https://mars.frontity.org/post-1/",
+      "property": "og:url",
+    },
+    "tag": "meta",
+  },
+  Object {
+    "attributes": Object {
+      "href": "https://mars.frontity.org/?p=1",
+      "rel": "shortlink",
+    },
+    "tag": "link",
+  },
+]
+`;
+
 exports[`state.headTags.get() (post type) works with post types 1`] = `
 Array [
   Object {
