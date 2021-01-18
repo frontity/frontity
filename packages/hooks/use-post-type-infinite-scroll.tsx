@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
 import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll, {
+  InfiniteScrollRouterState,
   IntersectionOptions,
   Packages,
 } from "./use-infinite-scroll";
 import WpSource from "@frontity/wp-source/types";
 import Router from "@frontity/router/types";
+import { isArchive, isError } from "@frontity/source";
 
 /**
  * The types of the {@link usePostTypeInfiniteScroll} hook.
@@ -128,25 +130,32 @@ export const Wrapper = ({
   routeInViewOptions?: IntersectionOptions;
 }): React.FC => {
   /**
-   * The wrapper component.
+   * The wrapper component returned by this hook.
    *
    * @param props - The component props.
    * @returns A react element.
    */
-  const Wrapper: React.FC = ({ children, className }) => {
+  const Wrapper: React.FC<{
+    /** React element passed as prop. */
+    children: React.ReactElement;
+    /** HTML class attribute. */
+    className: string;
+  }> = ({ children, className }) => {
     const { state } = useConnect<Packages>();
 
+    const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
+
     // Values from browser state.
-    const links: string[] = state.router.state.infiniteScroll?.links || [link];
-    const limit: number = state.router.state.infiniteScroll?.limit;
-    const pages: string[] = state.router.state.infiniteScroll?.pages || [];
+    const links: string[] = infiniteScroll.links || [link];
+    const limit: number = infiniteScroll.limit;
+    const pages: string[] = infiniteScroll.pages || [];
 
     // Aliases to needed state.
     const current = state.source.get(link);
     const first = links[0];
     const items = pages.reduce((final, current, index) => {
       const data = state.source.get(current);
-      if (data.isArchive && data.isReady) {
+      if (isArchive(data) && data.isReady) {
         const items =
           index !== 0
             ? data.items.filter(({ link }) => link !== first)
@@ -168,7 +177,7 @@ export const Wrapper = ({
       routeInViewOptions,
     });
 
-    if (!current.isReady || current.isError) return null;
+    if (!current.isReady || isError(current)) return null;
     if (!supported) return children;
 
     const container = css`
@@ -238,6 +247,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
   options = { ...defaultOptions, ...options };
 
   const { state, actions } = useConnect<WpSource & Router>();
+  const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
 
   // Values for browser state.
   const archive: string = (() => {
@@ -247,15 +257,15 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     }
 
     // If `archive` is already in the state, use it.
-    if (state.router.state.infiniteScroll?.archive) {
-      return state.router.state.infiniteScroll.archive;
+    if (infiniteScroll?.archive) {
+      return infiniteScroll.archive;
     }
 
     // If `state.router.previous` is an archive, use it.
     const previous = state.router.previous
       ? state.source.get(state.router.previous)
       : null;
-    if (previous?.isArchive) {
+    if (isArchive(previous)) {
       return previous.link;
     }
 
@@ -280,13 +290,16 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     // Return home as default.
     return "/";
   })();
-  const pages: string[] = state.router.state.infiniteScroll?.pages
-    ? [...state.router.state.infiniteScroll.pages]
+
+  const pages: string[] = infiniteScroll?.pages
+    ? [...infiniteScroll.pages]
     : [archive];
-  const links: string[] = state.router.state.infiniteScroll?.links
-    ? [...state.router.state.infiniteScroll.links]
+
+  const links: string[] = infiniteScroll?.links
+    ? [...infiniteScroll.links]
     : [state.router.link];
-  const limit = state.router.state.infiniteScroll?.limit || options.limit;
+
+  const limit = infiniteScroll?.limit || options.limit;
 
   // Initialize/update browser state.
   useEffect(() => {
@@ -302,16 +315,22 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
         limit,
       },
     });
+    // TODO: Remove this line.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
   // Aliases to needed state.
   const firstLink = links[0];
   const last = state.source.get(links[links.length - 1]);
   const lastPage = state.source.get(pages[pages.length - 1]);
-  const nextPage = lastPage.next ? state.source.get(lastPage.next) : null;
+  const nextPage =
+    isArchive(lastPage) && lastPage.next
+      ? state.source.get(lastPage.next)
+      : null;
+
   const items = pages.reduce((final, current, index) => {
     const data = state.source.get(current);
-    if (data.isArchive && data.isReady) {
+    if (isArchive(data) && data.isReady) {
       const items =
         index !== 0
           ? data.items.filter(({ link }) => link !== firstLink)
@@ -325,10 +344,11 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
   // Infinite scroll booleans.
   const isLastItem = items[items.length - 1]?.link === state.router.link;
   const hasReachedLimit = !!limit && links.length >= limit;
-  const thereIsNext = lastIndex < items.length - 1 || !!lastPage.next;
+  const thereIsNext =
+    lastIndex < items.length - 1 || (isArchive(lastPage) && !!lastPage.next);
   const isFetching =
     last.isFetching || (pages.length > 1 && lastPage.isFetching);
-  const isError = !!last.isError || !!lastPage.isError;
+  const isLastError = !!isError(last) || !!isError(lastPage);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   // Request archive if not present.
@@ -340,6 +360,8 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     if (!data.isReady && !data.isFetching) {
       actions.source.fetch(data.link);
     }
+    // TODO: Remove this line.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
   // Request next page on last item.
@@ -359,23 +381,25 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     if (!nextPage.isReady && !nextPage.isFetching) {
       actions.source.fetch(nextPage.link);
     }
+    // TODO: Remove this line.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active, state.router.link, items.length, hasReachedLimit]);
 
   /**
    * Function to fetch the next item disregarding the limit.
    */
   const fetchNext = async () => {
-    if (!options.active || (!thereIsNext && !isError)) return;
+    if (!options.active || (!thereIsNext && !isLastError)) return;
 
-    const links = state.router.state.infiniteScroll?.links
-      ? [...state.router.state.infiniteScroll.links]
+    const links = infiniteScroll?.links
+      ? [...infiniteScroll.links]
       : [state.router.link];
 
     // We need `nextItem` to be declared in local scope.
     let nextItem = items[lastIndex + 1];
 
-    if (isError) {
-      if (lastPage.isError)
+    if (isLastError) {
+      if (isError(lastPage))
         await actions.source.fetch(pages[pages.length - 1], { force: true });
     } else if (!nextItem) {
       if (!nextPage) return;
@@ -385,7 +409,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
       actions.router.updateState({
         ...state.router.state,
         infiniteScroll: {
-          ...state.router.state.infiniteScroll,
+          ...infiniteScroll,
           links,
           pages,
         },
@@ -397,7 +421,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
 
       const items = pages.reduce((final, current, index) => {
         const data = state.source.get(current);
-        if (data.isArchive && data.isReady) {
+        if (isArchive(data) && data.isReady) {
           const items =
             index !== 0
               ? data.items.filter(({ link }) => link !== firstLink)
@@ -410,8 +434,8 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
       nextItem = items[lastIndex + 1];
     }
 
-    if (isError) {
-      if (last.isError)
+    if (isLastError) {
+      if (isError(last))
         await actions.source.fetch(links[links.length - 1], { force: true });
     } else {
       if (links.includes(nextItem.link)) return;
@@ -440,9 +464,9 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     key: link,
     link: link,
     isLast:
-      (link === last.link && !!last.isReady && !last.isError) ||
+      (link === last.link && !!last.isReady && !isError(last)) ||
       (link === links[links.length - 2] && !last.isReady) ||
-      (link === links[links.length - 2] && !!last.isReady && !!last.isError),
+      (link === links[links.length - 2] && !!last.isReady && !!isError(last)),
     Wrapper: MemoizedWrapper(link, {
       fetchInViewOptions: options.fetchInViewOptions,
       routeInViewOptions: options.routeInViewOptions,
@@ -453,7 +477,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     posts,
     isLimit,
     isFetching,
-    isError,
+    isError: isLastError,
     fetchNext,
   };
 };

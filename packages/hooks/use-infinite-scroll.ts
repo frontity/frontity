@@ -117,6 +117,21 @@ export type InfiniteScrollRouterState = {
      * Array of visited links.
      */
     links: string[];
+
+    /**
+     * Number of elements that will be automatically fetched.
+     */
+    limit: number;
+
+    /**
+     * List of pages by link. TODO: check this type.
+     */
+    pages: string[];
+
+    /**
+     * Archive (used by `usePostTypeInfiniteScroll`).
+     */
+    archive?: string;
   };
 
   /**
