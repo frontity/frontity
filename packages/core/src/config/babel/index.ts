@@ -66,7 +66,12 @@ const getConfig = (target: Target): TransformOptions => {
         bugfixes: true,
       },
     ],
-    "@babel/preset-react",
+    [
+      "@babel/preset-react",
+      {
+        runtime: "automatic",
+      },
+    ],
     // Babel plugin for Emotion CSS property and other goodness.
     "@emotion/babel-preset-css-prop",
   ];
