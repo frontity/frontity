@@ -163,7 +163,7 @@ describe("createStore actions", () => {
       error = e;
     }
 
-    expect(error.message).toBe("action11 error");
+    expect(error.message).toBe("action10 error");
   });
 
   it("should catch an error thrown inside of an async action", async () => {
