@@ -88,7 +88,7 @@ const getConfig = (target: Target): TransformOptions => {
             css: {
               canonicalImport: ["@emotion/react", "css"],
             },
-            // TODO: This is throwing at build time 🤔 I need to look into it more
+            // TODO: Filled an issue on emotion side for this https://github.com/emotion-js/emotion/issues/2218
             // keyframes: {
             //   canonicalImport: ["@emotion/react", "keyframes"],
             // },
