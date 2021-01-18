@@ -15,7 +15,7 @@
     // Resolve JSON files.
     "resolveJsonModule": true,
     // Support for JSX.
-    "jsx": "react",
+    "jsx": "react-jsx",
     // Transpile JS as well.
     "allowJs": true
   },

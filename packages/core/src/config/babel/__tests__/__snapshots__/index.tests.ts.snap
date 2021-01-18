@@ -50,7 +50,12 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "runtime": "automatic",
+        },
+      ],
       "@emotion/babel-preset-css-prop",
     ],
     "sourceType": "unambiguous",
@@ -88,7 +93,12 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "runtime": "automatic",
+        },
+      ],
       "@emotion/babel-preset-css-prop",
     ],
     "sourceType": "unambiguous",
@@ -126,7 +136,12 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "runtime": "automatic",
+        },
+      ],
       "@emotion/babel-preset-css-prop",
     ],
     "sourceType": "unambiguous",
@@ -184,7 +199,12 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "runtime": "automatic",
+        },
+      ],
       "@emotion/babel-preset-css-prop",
     ],
     "sourceType": "unambiguous",
@@ -222,7 +242,12 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "runtime": "automatic",
+        },
+      ],
       "@emotion/babel-preset-css-prop",
     ],
     "sourceType": "unambiguous",
@@ -260,7 +285,12 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "runtime": "automatic",
+        },
+      ],
       "@emotion/babel-preset-css-prop",
     ],
     "sourceType": "unambiguous",
