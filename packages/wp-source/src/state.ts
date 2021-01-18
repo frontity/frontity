@@ -79,6 +79,7 @@ const state: WpSource["state"] = {
     params: {},
     postTypes: [],
     taxonomies: [],
+    redirections: "no",
 
     // Make `state.source.url` to derived from `state.wpSource.api` and
     // `state.wpSource.isWpCom` if they are defined explicitly
@@ -159,7 +160,6 @@ const state: WpSource["state"] = {
       ),
     prefix: "/wp-json",
   },
-  redirections: "no",
 };
 
 export default state;
