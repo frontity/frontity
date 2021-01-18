@@ -19,8 +19,8 @@ jobs:
             wp-version: latest
             args: ""
           - name: Previous WordPress Version
-            wp-version: 5.4
-            args: "--prod --wp-version 5.4"
+            wp-version: 5.5
+            args: "--prod --wp-version 5.5"
           - name: Relative Public Path
             wp-version: latest
             args: "--prod --public-path /custom/path/"

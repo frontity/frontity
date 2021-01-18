@@ -110,7 +110,12 @@
         "jsdoc/require-jsdoc": "off",
         "jsdoc/require-description": "off",
         "tsdoc/syntax": "off",
-        "jest/expect-expect": "error"
+        "jest/expect-expect": [
+          "error",
+          {
+            "assertFunctionNames": ["expect", "**.should", "**.toMatchSnapshot"]
+          }
+        ]
       }
     },
     // Overrides for Cypress test files.
