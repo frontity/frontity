@@ -16,6 +16,8 @@
     "resolveJsonModule": true,
     // Support for JSX.
     "jsx": "react-jsx",
+    // Support for emotion css prop with types
+    "jsxImportSource": "@emotion/react",
     // Transpile JS as well.
     "allowJs": true
   },
