@@ -33,20 +33,7 @@ describe("SmartAdserver", () => {
 
     expect(smartAd).toMatchInlineSnapshot(`
       <div
-        css={
-          Array [
-            Object {
-              "map": undefined,
-              "name": "ftr8hp",
-              "next": undefined,
-              "styles": "
-              min-height: 200px;
-            ",
-              "toString": [Function],
-            },
-            undefined,
-          ]
-        }
+        className="css-12102i0-SmartAd"
         id="test-smartad"
       />
     `);
