@@ -1,5 +1,7 @@
 import expect from "expect";
 
+const frontityModeDevelopment = Cypress.env("FRONTITY_MODE") !== "production";
+
 describe("Global", () => {
   it("should have a blue background, but not a red color", () => {
     cy.visit("http://localhost:3001/color-red?frontity_name=emotion");
@@ -55,13 +57,16 @@ describe("styled", () => {
     );
   });
 
-  it("should have a Styled class name (autoLabel)", () => {
-    cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
-    cy.get("[data-test-id='styled-div']").should((div) => {
-      const className = div[0].className;
-      expect(className).toContain("Styled");
+  // autoLabel works only for development
+  if (frontityModeDevelopment) {
+    it("should have a Styled class name (autoLabel)", () => {
+      cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
+      cy.get("[data-test-id='styled-div']").should((div) => {
+        const className = div[0].className;
+        expect(className).toContain("Styled");
+      });
     });
-  });
+  }
 });
 
 describe("css", () => {
@@ -94,8 +99,6 @@ describe("css", () => {
       "rgb(255, 0, 0)"
     );
   });
-
-  const frontityModeDevelopment = Cypress.env("FRONTITY_MODE") !== "production";
 
   // autoLabel works only for development
   if (frontityModeDevelopment) {
