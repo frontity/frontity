@@ -102,11 +102,10 @@ describe("css", () => {
       const frontityModeProduction =
         Cypress.env("FRONTITY_MODE") === "production";
 
-      if (frontityModeProduction) {
-        expect(className).not.toContain("CSS");
-      } else {
-        expect(className).toContain("CSS");
-      }
+      const fn = (val) =>
+        frontityModeProduction ? expect(val).not : expect(val);
+
+      fn(className).toContain("CSS");
     });
   });
 });
