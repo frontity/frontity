@@ -1,3 +1,5 @@
+import { NavigatorWithConnection } from "./types";
+
 /**
  * Configuration for the prefetcher behaviour.
  */
@@ -136,4 +138,40 @@ export const removeSourceUrl = (
   return linkUrl.hostname === new URL(sourceUrl).hostname
     ? linkUrl.pathname + linkUrl.search + linkUrl.hash
     : link;
+};
+
+/**
+ * Checks if the provided link is an external Url.
+ *
+ * @param link - The link Url.
+ *
+ * @returns True if the link is an external Url.
+ */
+export const isExternalUrl = (link: string) => {
+  return (
+    link.startsWith("http") ||
+    link.startsWith("mailto") ||
+    link.startsWith("tel") ||
+    link.startsWith("sms")
+  );
+};
+
+/**
+ * Checks whether the provided link should be fetched by the Link component.
+ *
+ * @param link - The link URL.
+ *
+ * @returns True if link should be fetched.
+ */
+export const shouldFetchLink = (link: string) => {
+  /**
+   * Checks if user is on slow connection or has enabled data saver.
+   */
+  const _navigator = window.navigator as NavigatorWithConnection;
+
+  const isSlowConnection =
+    _navigator?.connection?.saveData ||
+    (_navigator?.connection?.effectiveType || "").includes("2g");
+
+  return !isSlowConnection && !isExternalUrl(link);
 };
