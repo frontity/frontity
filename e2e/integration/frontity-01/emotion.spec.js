@@ -1,7 +1,5 @@
 import expect from "expect";
 
-const frontityModeDevelopment = Cypress.env("FRONTITY_MODE") !== "production";
-
 describe("Global", () => {
   it("should have a blue background, but not a red color", () => {
     cy.visit("http://localhost:3001/color-red?frontity_name=emotion");
@@ -57,16 +55,22 @@ describe("styled", () => {
     );
   });
 
-  // autoLabel works only for development
-  if (frontityModeDevelopment) {
-    it(`should have a Styled class name (autoLabel) (mode: ${frontityModeDevelopment})`, () => {
-      cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
-      cy.get("[data-test-id='styled-div']").should((div) => {
-        const className = div[0].className;
-        expect(className).toContain("Styled");
-      });
+  it("should have a Styled class name (autoLabel)", function () {
+    const frontityModeProduction =
+      Cypress.env("FRONTITY_MODE") === "production";
+
+    // If we are in production mode skip the test since
+    // the autoLabel works only in development
+    if (frontityModeProduction) {
+      this.skip();
+    }
+
+    cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
+    cy.get("[data-test-id='styled-div']").should((div) => {
+      const className = div[0].className;
+      expect(className).toContain("Styled");
     });
-  }
+  });
 });
 
 describe("css", () => {
@@ -100,14 +104,20 @@ describe("css", () => {
     );
   });
 
-  // autoLabel works only for development
-  if (frontityModeDevelopment) {
-    it(`should have a Styled class name (autoLabel) (mode: ${frontityModeDevelopment})`, () => {
-      cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
-      cy.get("[data-test-id='css-div']").should((div) => {
-        const className = div[0].className;
-        expect(className).toContain("CSS");
-      });
+  it("should have a Styled class name (autoLabel)", function () {
+    const frontityModeProduction =
+      Cypress.env("FRONTITY_MODE") === "production";
+
+    // If we are in production mode skip the test since
+    // the autoLabel works only in development
+    if (frontityModeProduction) {
+      this.skip();
+    }
+
+    cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
+    cy.get("[data-test-id='css-div']").should((div) => {
+      const className = div[0].className;
+      expect(className).toContain("CSS");
     });
-  }
+  });
 });
