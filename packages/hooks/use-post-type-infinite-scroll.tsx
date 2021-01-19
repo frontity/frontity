@@ -316,7 +316,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
         limit,
       },
     });
-    // TODO: Remove this line.
+    // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
@@ -361,7 +361,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     if (!data.isReady && !data.isFetching) {
       actions.source.fetch(data.link);
     }
-    // TODO: Remove this line.
+    // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
@@ -382,7 +382,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     if (!nextPage.isReady && !nextPage.isFetching) {
       actions.source.fetch(nextPage.link);
     }
-    // TODO: Remove this line.
+    // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active, state.router.link, items.length, hasReachedLimit]);
 
