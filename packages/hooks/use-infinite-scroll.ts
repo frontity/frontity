@@ -175,35 +175,42 @@ const useInfiniteScroll: UseInfiniteScroll = ({
   // Check if `IntersectionObserver` is supported by the browser.
   const isSupported = fetch.supported && route.supported;
 
-  // Get state and actions from Frontity.
-  const { state, actions } = useConnect<Packages>();
-
-  // Get data objects for the current link and the next one.
-  const current = state.source.get(currentLink);
-  const next = nextLink ? state.source.get(nextLink) : null;
+  // Get the store from Frontity. The `state` and `action` props are got later
+  // inside the `useEffect` callbacks because those hooks do not depend on any
+  // store prop.
+  const store = useConnect<Packages>();
 
   // Request the current route in case it's not ready and it's not fetching. If
   // not supported, it does nothing.
   useEffect(() => {
-    if (isSupported && !current.isReady && !current.isFetching)
+    if (!isSupported) return;
+
+    // Get the state and actions from Frontity.
+    const { state, actions } = store;
+
+    // Get the data object of the current link and fetch it if needed.
+    const current = state.source.get(currentLink);
+    if (!current.isReady && !current.isFetching)
       actions.source.fetch(currentLink);
-  }, [
-    isSupported,
-    current.isReady,
-    current.isFetching,
-    actions.source,
-    currentLink,
-  ]);
+  }, [currentLink, isSupported, store]);
 
   // Once the fetch waypoint is in view, fetch the next route content, if not
   // available yet, and add the new route to the array of elements in the
   // infinite scroll. Do nothing if it is not supported.
   useEffect(() => {
-    if (isSupported && fetch.inView && nextLink) {
+    if (!isSupported) return;
+
+    // Get the state and actions from Frontity.
+    const { state, actions } = store;
+
+    if (fetch.inView && nextLink) {
       const { infiniteScroll } = state.router
         .state as InfiniteScrollRouterState;
 
-      const links = infiniteScroll.links
+      // Get data object of the next link.
+      const next = state.source.get(nextLink);
+
+      const links = infiniteScroll?.links
         ? [...infiniteScroll.links]
         : [currentLink];
 
@@ -220,29 +227,23 @@ const useInfiniteScroll: UseInfiniteScroll = ({
         infiniteScroll: { ...infiniteScroll, links },
       });
     }
-  }, [
-    isSupported,
-    fetch.inView,
-    nextLink,
-    state.router.state,
-    currentLink,
-    next.isReady,
-    next.isFetching,
-    actions.router,
-    actions.source,
-  ]);
+  }, [isSupported, fetch.inView, nextLink, currentLink, store]);
 
   // Once the route waypoint is in view, change the route to the
   // current element. This preserves the route state between changes
   // to avoid rerendering. Again, it does nothing if not supported.
   useEffect(() => {
-    if (isSupported && route.inView && state.router.link !== currentLink) {
+    if (!isSupported) return;
+
+    const { state, actions } = store;
+
+    if (route.inView && state.router.link !== currentLink) {
       actions.router.set(currentLink, {
         method: "replace",
         state: state.router.state,
       });
     }
-  }, [isSupported, route.inView, state.router, actions.router, currentLink]);
+  }, [isSupported, route.inView, currentLink, store]);
 
   return isSupported
     ? {
