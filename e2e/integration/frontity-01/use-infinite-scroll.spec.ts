@@ -4,22 +4,19 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
-    cy.server();
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
-      response: "fixture:use-infinite-scroll/page-1.json",
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
+      fixture: "use-infinite-scroll/page-1.json",
       headers: {
-        "x-wp-total": 20,
-        "x-wp-totalpages": 2,
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
       },
       delay: 300,
     }).as("pageOne");
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
-      response: "fixture:use-infinite-scroll/page-2.json",
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
+      fixture: "use-infinite-scroll/page-2.json",
       headers: {
-        "x-wp-total": 20,
-        "x-wp-totalpages": 2,
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
       },
       delay: 300,
     }).as("pageTwo");
@@ -52,18 +49,15 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
-    cy.server();
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
-      response: "fixture:use-infinite-scroll/page-1.json",
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
+      fixture: "use-infinite-scroll/page-1.json",
       headers: {
-        "x-wp-total": 20,
-        "x-wp-totalpages": 2,
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
       },
       delay: 300,
     }).as("pageOne");
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
       status: 503,
       response: {},
       delay: 300,
@@ -95,12 +89,11 @@ describe("UseInfiniteScroll", () => {
     cy.get("[data-test='error']").should("exist").scrollIntoView();
     cy.location("href").should("eq", "http://localhost:3001/archive/");
 
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
-      response: "fixture:use-infinite-scroll/page-2.json",
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
+      fixture: "use-infinite-scroll/page-2.json",
       headers: {
-        "x-wp-total": 20,
-        "x-wp-totalpages": 2,
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
       },
       delay: 300,
     }).as("pageTwo");
@@ -120,25 +113,25 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
-    cy.server();
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
-      response: "fixture:use-infinite-scroll/page-1.json",
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
+      fixture: "use-infinite-scroll/page-1.json",
       headers: {
-        "x-wp-total": 20,
-        "x-wp-totalpages": 2,
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
       },
       delay: 300,
     }).as("pageOne");
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
-      response: "fixture:use-infinite-scroll/post-1.json",
-      headers: {
-        "x-wp-total": 1,
-        "x-wp-totalpages": 1,
-      },
-      delay: 300,
-    }).as("postOne");
+    cy.intercept(
+      "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
+      {
+        fixture: "use-infinite-scroll/post-1.json",
+        headers: {
+          "x-wp-total": "1",
+          "x-wp-totalpages": "1",
+        },
+        delay: 300,
+      }
+    ).as("postOne");
 
     // Changes url to `/post-type`.
     cy.get("[data-test='to-first-post']").should("exist").click();
@@ -163,27 +156,26 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
-    cy.server();
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-10",
-      response: "fixture:use-infinite-scroll/post-last.json",
+    cy.intercept(
+      "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-10",
+      {
+        fixture: "use-infinite-scroll/post-last.json",
+        headers: {
+          "x-wp-total": "1",
+          "x-wp-totalpages": "1",
+        },
+        delay: 300,
+      }
+    ).as("lastPost");
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
+      fixture: "use-infinite-scroll/page-1.json",
       headers: {
-        "x-wp-total": 1,
-        "x-wp-totalpages": 1,
-      },
-      delay: 300,
-    }).as("lastPost");
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
-      response: "fixture:use-infinite-scroll/page-1.json",
-      headers: {
-        "x-wp-total": 20,
-        "x-wp-totalpages": 2,
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
       },
       delay: 300,
     }).as("pageOne");
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
       status: 503,
       response: {},
       delay: 300,
@@ -214,12 +206,11 @@ describe("UseInfiniteScroll", () => {
     cy.get("[data-test='error']").should("exist").scrollIntoView();
     cy.location("href").should("eq", "http://localhost:3001/post-10/");
 
-    cy.route({
-      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
-      response: "fixture:use-infinite-scroll/page-2.json",
+    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
+      fixture: "use-infinite-scroll/page-2.json",
       headers: {
-        "x-wp-total": 20,
-        "x-wp-totalpages": 2,
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
       },
       delay: 300,
     }).as("pageTwo");
