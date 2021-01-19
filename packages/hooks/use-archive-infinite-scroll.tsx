@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
 import { useConnect, connect, css } from "frontity";
 import memoize from "ramda/src/memoizeWith";
-import useInfiniteScroll, { IntersectionOptions } from "./use-infinite-scroll";
+import useInfiniteScroll, {
+  IntersectionOptions,
+  InfiniteScrollRouterState,
+} from "./use-infinite-scroll";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
+import { isArchive, isError } from "@frontity/source";
 
 /**
  * The types of the {@link useArchiveInfiniteScroll} hook.
@@ -100,61 +104,76 @@ export const Wrapper = ({
    * Link of the post that will be rendered inside this wrapper.
    */
   link: string;
+
   /**
    * The intersection observer options for fetching.
    */
   fetchInViewOptions?: IntersectionOptions;
+
   /**
    * The intersection observer options for routing.
    */
   routeInViewOptions?: IntersectionOptions;
-}): React.FC =>
-  connect(
-    ({ children, className }) => {
-      const { state } = useConnect<Source & Router>();
+}): React.FC => {
+  /**
+   * The wrapper component returned by this hook.
+   *
+   * @param props - The component props.
+   * @returns A react element.
+   */
+  const Wrapper: React.FC<{
+    /** React element passed as prop. */
+    children: React.ReactElement;
+    /** HTML class attribute. */
+    className: string;
+  }> = ({ children, className }) => {
+    const { state } = useConnect<Source & Router>();
+    const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
 
-      // Values from browser state.
-      const links: string[] = state.router.state.infiniteScroll?.links || [
-        link,
-      ];
-      const limit: number = state.router.state.infiniteScroll?.limit;
+    // Values from browser state.
+    const links: string[] = infiniteScroll?.links || [link];
+    const limit: number = infiniteScroll?.limit;
 
-      // Shorcuts to needed state.
-      const current = state.source.get(link);
-      const next = current.next ? state.source.get(current.next) : null;
+    // Shorcuts to needed state.
+    const current = state.source.get(link);
+    const next =
+      isArchive(current) && current.next
+        ? state.source.get(current.next)
+        : null;
 
-      // Infinite scroll booleans.
-      const hasReachedLimit = !!limit && links.length >= limit;
+    // Infinite scroll booleans.
+    const hasReachedLimit = !!limit && links.length >= limit;
 
-      const { supported, fetchRef, routeRef } = useInfiniteScroll({
-        currentLink: link,
-        nextLink: next?.link,
-        fetchInViewOptions,
-        routeInViewOptions,
-      });
+    const { supported, fetchRef, routeRef } = useInfiniteScroll({
+      currentLink: link,
+      nextLink: next?.link,
+      fetchInViewOptions,
+      routeInViewOptions,
+    });
 
-      if (!current.isReady || current.isError) return null;
-      if (!supported) return children;
+    if (!current.isReady || isError(current)) return null;
+    if (!supported) return children;
 
-      const container = css`
-        position: relative;
-      `;
+    const container = css`
+      position: relative;
+    `;
 
-      const fetcher = css`
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-      `;
+    const fetcher = css`
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    `;
 
-      return (
-        <div css={container} ref={routeRef} className={className}>
-          {children}
-          {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
-        </div>
-      );
-    },
-    { injectProps: false }
-  );
+    return (
+      <div css={container} ref={routeRef} className={className}>
+        {children}
+        {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
+      </div>
+    );
+  };
+
+  return connect(Wrapper, { injectProps: false });
+};
 
 /**
  * A memoized {@link Wrapper} to generate Wrapper components only once.
@@ -173,6 +192,7 @@ const MemoizedWrapper = memoize(
        * The intersection observer options for fetching.
        */
       fetchInViewOptions: IntersectionOptions;
+
       /**
        * The intersection observer options for routing.
        */
@@ -201,13 +221,13 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
   options = { ...defaultOptions, ...options };
 
   const { state, actions } = useConnect<Source & Router>();
+  const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
 
   // Values from/for browser state.
-  const links: string[] = state.router.state.infiniteScroll?.links
-    ? [...state.router.state.infiniteScroll?.links]
+  const links: string[] = infiniteScroll?.links
+    ? [...infiniteScroll?.links]
     : [state.router.link];
-  const limit: number =
-    state.router.state.infiniteScroll?.limit || options.limit;
+  const limit: number = infiniteScroll?.limit || options.limit;
 
   // Initialize/update browser state.
   useEffect(() => {
@@ -218,9 +238,11 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
       infiniteScroll: {
         links,
         limit,
-        ...state.router.state.infiniteScroll,
+        ...infiniteScroll,
       },
     });
+    // TODO: Review and fix hook dependencies.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
   // Aliases to needed state.
@@ -228,9 +250,9 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
 
   // Infinite scroll booleans.
   const hasReachedLimit = !!limit && links.length >= limit;
-  const thereIsNext = !!last.next;
+  const thereIsNext = isArchive(last) && last.next;
   const isFetching = last.isFetching;
-  const isError = !!last.isError;
+  const isLastError = isError(last);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   /**
@@ -239,20 +261,20 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
   const fetchNext = async () => {
     if (
       !options.active ||
-      (!thereIsNext && !isError) ||
-      links.includes(last.next)
+      (!thereIsNext && !isLastError) ||
+      (isArchive(last) && links.includes(last.next))
     )
       return;
 
-    if (isError) {
+    if (isLastError) {
       await actions.source.fetch(links[links.length - 1], { force: true });
-    } else {
+    } else if (isArchive(last)) {
       links.push(last.next);
 
       actions.router.updateState({
         ...state.router.state,
         infiniteScroll: {
-          ...state.router.state.infiniteScroll,
+          ...infiniteScroll,
           links,
         },
       });
@@ -270,9 +292,9 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
     key: link,
     link: link,
     isLast:
-      (link === last.link && !!last.isReady && !last.isError) ||
+      (link === last.link && !!last.isReady && !isError(last)) ||
       (link === links[links.length - 2] && !last.isReady) ||
-      (link === links[links.length - 2] && !!last.isReady && !!last.isError),
+      (link === links[links.length - 2] && !!last.isReady && !!isError(last)),
     Wrapper: MemoizedWrapper(link, {
       fetchInViewOptions: options.fetchInViewOptions,
       routeInViewOptions: options.routeInViewOptions,
@@ -283,7 +305,7 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
     pages,
     isLimit,
     isFetching,
-    isError,
+    isError: isLastError,
     fetchNext,
   };
 };

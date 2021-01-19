@@ -346,6 +346,7 @@ describe("useArchiveInfiniteScroll", () => {
     sourceGet.mockReturnValueOnce({
       link: "/",
       next: "/page/2/",
+      isArchive: true,
       isReady: true,
       isFetching: false,
     });
@@ -394,6 +395,7 @@ describe("useArchiveInfiniteScroll", () => {
     sourceGet.mockReturnValueOnce({
       link: "/page/2/",
       next: "/page/3/",
+      isArchive: true,
       isReady: false,
       isFetching: true,
     });
@@ -487,6 +489,7 @@ describe("useArchiveInfiniteScroll", () => {
     sourceGet.mockReturnValueOnce({
       link: "/",
       next: "/page/2/",
+      isArchive: true,
       isReady: true,
       isFetching: false,
     });
@@ -585,6 +588,7 @@ describe("useArchiveInfiniteScroll", () => {
     sourceGet.mockReturnValueOnce({
       link: "/",
       next: "/page/2/",
+      isArchive: true,
       isReady: true,
       isFetching: false,
     });
@@ -635,6 +639,7 @@ describe("useArchiveInfiniteScroll", () => {
     sourceGet.mockReturnValueOnce({
       link: "/",
       next: "/page/2/",
+      isArchive: true,
       isReady: true,
       isFetching: false,
     });
@@ -684,6 +689,7 @@ describe("useArchiveInfiniteScroll", () => {
     sourceGet.mockReturnValueOnce({
       link: "/",
       next: "/page/2/",
+      isArchive: true,
       isReady: true,
       isFetching: false,
     });
@@ -778,6 +784,7 @@ describe("useArchiveInfiniteScroll", () => {
     sourceGet.mockReturnValueOnce({
       link: "/",
       next: "/page/2/",
+      isArchive: true,
       isReady: true,
       isFetching: false,
     });
@@ -822,6 +829,7 @@ describe("useArchiveInfiniteScroll", () => {
     sourceGet.mockReturnValueOnce({
       link: "/page-one/",
       next: "/page-two/",
+      isArchive: true,
       isReady: true,
       isFetching: false,
     });
@@ -1038,6 +1046,7 @@ describe("Wrapper", () => {
     sourceGet
       .mockReturnValueOnce({
         next: "/page/2/",
+        isArchive: true,
         isReady: true,
       })
       .mockReturnValueOnce({
