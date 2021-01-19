@@ -95,17 +95,16 @@ describe("css", () => {
     );
   });
 
-  it("should have a Styled class name (autoLabel)", () => {
-    cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
-    cy.get("[data-test-id='css-div']").should((div) => {
-      const className = div[0].className;
-      const frontityModeProduction =
-        Cypress.env("FRONTITY_MODE") === "production";
+  const frontityModeDevelopment = Cypress.env("FRONTITY_MODE") !== "production";
 
-      const fn = (val) =>
-        frontityModeProduction ? expect(val).not : expect(val);
-
-      fn(className).toContain("CSS");
+  // autoLabel works only for development
+  if (frontityModeDevelopment) {
+    it("should have a Styled class name (autoLabel)", () => {
+      cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
+      cy.get("[data-test-id='css-div']").should((div) => {
+        const className = div[0].className;
+        expect(className).toContain("CSS");
+      });
     });
-  });
+  }
 });
