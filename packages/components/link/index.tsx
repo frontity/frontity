@@ -1,4 +1,5 @@
-import React, { MouseEvent, useEffect, useRef, useCallback } from "react";
+import { MouseEvent, useEffect, useRef, useCallback } from "react";
+import * as React from "react";
 import { warn, connect, useConnect } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
 import { Queue, onHover, removeSourceUrl } from "./utils";

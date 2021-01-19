@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/display-name, @typescript-eslint/camelcase */
 
-import React from "react";
 import mergePackages from "../merge-packages";
 
 class MyLib {

@@ -1,5 +1,4 @@
 import { connect, styled } from "frontity";
-import React from "react";
 import { SearchIcon } from "../icons";
 import {
   BaseToggle,

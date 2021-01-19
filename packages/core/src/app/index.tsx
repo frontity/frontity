@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Provider as ConnectProvider } from "@frontity/connect";
 import { Package } from "@frontity/types";
 import { HelmetProvider, FilledContext } from "react-helmet-async";

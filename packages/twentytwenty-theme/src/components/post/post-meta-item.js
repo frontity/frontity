@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "frontity";
 import Link from "../link";
 import ScreenReaderText from "../styles/screen-reader";

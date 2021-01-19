@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 import { create, act } from "react-test-renderer";
 import { createStore, connect } from "../../..";
 import { Provider } from "@frontity/connect";

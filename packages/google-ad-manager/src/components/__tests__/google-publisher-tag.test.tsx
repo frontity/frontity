@@ -1,4 +1,3 @@
-import React from "react";
 import TestRenderer from "react-test-renderer";
 import GooglePublisherTag from "../google-publisher-tag";
 

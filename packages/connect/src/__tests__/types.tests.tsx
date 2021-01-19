@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
+import * as React from "react";
 import connect, { createStore, Action, Derived, Connect } from "..";
 
 const delay = () => new Promise((resolve) => setTimeout(resolve, 100));

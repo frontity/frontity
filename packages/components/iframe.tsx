@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import React from "react";
+import * as React from "react";
 import { connect, Head } from "frontity";
 import { Connect, Package } from "frontity/types";
 import useInView from "@frontity/hooks/use-in-view";

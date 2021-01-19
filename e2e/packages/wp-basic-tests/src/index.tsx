@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { useConnect, connect } from "frontity";
 import Link from "@frontity/components/link";
 import { isPostType, isArchive } from "@frontity/source";
