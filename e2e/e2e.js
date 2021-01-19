@@ -148,18 +148,23 @@ process.chdir(__dirname);
 
     // Run Cypress if the `cypressCommnand` is not "off".
     if (cypressCommand !== "off") {
+      const FRONTITY_MODE = prod ? "production" : "development";
+
       if (cypressCommand === "open") {
-        await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
+        await cypress.open({
+          env: { WORDPRESS_VERSION: wpVersion, FRONTITY_MODE },
+          browser,
+        });
       } else if (cypressCommand === "run") {
         if (suite === "all") {
           await cypress.run({
-            env: { WORDPRESS_VERSION: wpVersion },
+            env: { WORDPRESS_VERSION: wpVersion, FRONTITY_MODE },
             spec: `./integration/**/*.spec.js`,
             browser,
           });
         } else {
           await cypress.run({
-            env: { WORDPRESS_VERSION: wpVersion },
+            env: { WORDPRESS_VERSION: wpVersion, FRONTITY_MODE },
             browser,
             spec: `./integration/${suite}/**/*.spec.js`,
           });

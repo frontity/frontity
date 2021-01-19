@@ -99,7 +99,14 @@ describe("css", () => {
     cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
     cy.get("[data-test-id='css-div']").should((div) => {
       const className = div[0].className;
-      expect(className).toContain("CSS");
+      const frontityModeProduction =
+        Cypress.env("FRONTITY_MODE") === "production";
+
+      if (frontityModeProduction) {
+        expect(className).not.toContain("CSS");
+      } else {
+        expect(className).toContain("CSS");
+      }
     });
   });
 });
