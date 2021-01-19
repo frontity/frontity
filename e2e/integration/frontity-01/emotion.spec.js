@@ -1,7 +1,5 @@
 import expect from "expect";
 
-const frontityModeDevelopment = Cypress.env("FRONTITY_MODE") !== "production";
-
 describe("Global", () => {
   it("should have a blue background, but not a red color", () => {
     cy.visit("http://localhost:3001/color-red?frontity_name=emotion");
@@ -57,6 +55,8 @@ describe("styled", () => {
     );
   });
 
+  const frontityModeDevelopment = Cypress.env("FRONTITY_MODE") !== "production";
+
   // autoLabel works only for development
   if (frontityModeDevelopment) {
     it("should have a Styled class name (autoLabel)", () => {
@@ -99,6 +99,8 @@ describe("css", () => {
       "rgb(255, 0, 0)"
     );
   });
+
+  const frontityModeDevelopment = Cypress.env("FRONTITY_MODE") !== "production";
 
   // autoLabel works only for development
   if (frontityModeDevelopment) {
