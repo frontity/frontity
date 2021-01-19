@@ -1,10 +1,7 @@
 describe("UseInfiniteScroll", () => {
   it("useArchiveInfiniteScroll should load next page", () => {
-    cy.visit("http://localhost:3001/?name=use-infinite-scroll");
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/?name=use-infinite-scroll"
-    );
+    cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
     cy.server();
@@ -51,11 +48,8 @@ describe("UseInfiniteScroll", () => {
   });
 
   it("useArchiveInfiniteScroll should return `isError` true", () => {
-    cy.visit("http://localhost:3001/?name=use-infinite-scroll");
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/?name=use-infinite-scroll"
-    );
+    cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
     cy.server();
@@ -122,11 +116,8 @@ describe("UseInfiniteScroll", () => {
   });
 
   it("usePostTypeInfiniteScroll should load next post", () => {
-    cy.visit("http://localhost:3001/?name=use-infinite-scroll");
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/?name=use-infinite-scroll"
-    );
+    cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
     cy.server();
@@ -168,11 +159,8 @@ describe("UseInfiniteScroll", () => {
   });
 
   it("usePostTypeInfiniteScroll should return `isError` true", () => {
-    cy.visit("http://localhost:3001/?name=use-infinite-scroll");
-    cy.location("href").should(
-      "eq",
-      "http://localhost:3001/?name=use-infinite-scroll"
-    );
+    cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
     cy.server();
