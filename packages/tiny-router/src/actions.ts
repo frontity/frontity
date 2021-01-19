@@ -51,7 +51,19 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   // The redirections are stored in source.data just like any other data.
   const data = state.source?.get(link);
   if (data && isRedirection(data)) {
-    link = data.location;
+    if (data.isExternal) {
+      window.location.replace(data.location);
+    } else {
+      // If the link is internal, we have to discard the domain.
+      const { pathname, hash, search } = new URL(
+        data.location,
+        "https://dummy-domain.com"
+      );
+      // If there is a link normalize, we have to use it.
+      if (libraries.source && libraries.source.normalize)
+        link = libraries.source.normalize(pathname + hash + search);
+      else link = pathname + hash + search;
+    }
   }
 
   // Trigger the fetch if `autoFetch` is true and update the window.history
@@ -95,17 +107,21 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     observe(() => {
       const data = state.source?.get(state.router.link);
       if (data && isRedirection(data)) {
-        // If the redirection is external, redirect to the full URL here
-
-        actions.router.set(data.location, {
-          // Use "replace" to keep browser history consistent.
-          method: "replace",
-          // Keep the same history.state that the old link had.
-          // We have to stringfy and parse the object because
-          // window.history.replaceState() does not accept a Proxy as the first
-          // argument for state.
-          state: JSON.parse(JSON.stringify(state.router.state)),
-        });
+        // If the redirection is external, redirect to the full URL.
+        if (data.isExternal) {
+          window.location.replace(data.location);
+        } else {
+          // If the redirection is internal, use actions.router.set to switch
+          // to the new redirection.
+          actions.router.set(data.location, {
+            // Use "replace" to keep browser history consistent.
+            method: "replace",
+            // Keep the same history.state that the old link had. We have to
+            // stringfy and parse the object because window.history.replaceState()
+            // does not accept a Proxy.
+            state: JSON.parse(JSON.stringify(state.router.state)),
+          });
+        }
       }
     });
 
@@ -196,8 +212,8 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
         location.searchParams.append(key, value);
     });
 
-    // Set the correct status for the redirection.
-    // It could be a 301, 302, 307 or 308.
+    // Set the correct status for the redirection. It could be a 301, 302, 307
+    // or 308.
     ctx.status = data.redirectionStatus;
 
     // Do the redirection.
