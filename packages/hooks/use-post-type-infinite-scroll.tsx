@@ -146,9 +146,9 @@ export const Wrapper = ({
     const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
 
     // Values from browser state.
-    const links: string[] = infiniteScroll.links || [link];
-    const limit: number = infiniteScroll.limit;
-    const pages: string[] = infiniteScroll.pages || [];
+    const links: string[] = infiniteScroll?.links || [link];
+    const limit: number = infiniteScroll?.limit;
+    const pages: string[] = infiniteScroll?.pages || [];
 
     // Aliases to needed state.
     const current = state.source.get(link);
@@ -265,7 +265,8 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     const previous = state.router.previous
       ? state.source.get(state.router.previous)
       : null;
-    if (isArchive(previous)) {
+
+    if (previous && isArchive(previous)) {
       return previous.link;
     }
 
