@@ -39,25 +39,6 @@ const deepTransform = <
 };
 
 /**
- * Extracts the WordPress URL from `state.source.api`.
- *
- * @param api - The api field, normally `state.source.api`.
- * @param isWpCom - If it's WP.com or not.
- *
- * @returns A URL object with the WordPress base URL.
- */
-export const getWpUrl = (api: string, isWpCom: boolean): URL => {
-  const apiUrl = new URL(api);
-  if (isWpCom) {
-    const { pathname } = apiUrl;
-    return new URL(pathname.replace(/^\/wp\/v2\/sites\//, "https://"));
-  }
-  // Get API subdirectory.
-  const apiSubdir = apiUrl.pathname.replace(/\/wp-json\/?$/, "/");
-  return new URL(apiSubdir, apiUrl);
-};
-
-/**
  * Checks if the link should be transformed to the Frontity URL or left as it
  * is, usually the WordPress URL.
  *
@@ -91,18 +72,6 @@ const getNewLink = (link: string, base: string, newBase: string) => {
     "/"
   );
   return `${newBase.replace(/\/?$/, "")}${finalPathname}${search}${hash}`;
-};
-
-/**
- * A function that extracts the WordPress URL from `state.source.api`.
- *
- * @param state - The Frontity state.
- *
- * @returns The WordPress URL, without the prefix (usually `/wp-json`).
- */
-const getBaseFromSource = (state: State<Packages>): string => {
-  const { api, isWpCom } = state.source;
-  return getWpUrl(api, isWpCom).href;
 };
 
 /**
@@ -184,7 +153,8 @@ export const transformHeadTags = ({
   if (!state.headTags.transformLinks || !state.frontity.url) return headTags;
 
   // Prefix of links to change.
-  const base = state.headTags.transformLinks.base || getBaseFromSource(state);
+  const base =
+    state.headTags.transformLinks.base || state.source.url.replace(/\/?$/, "/");
   const ignore = state.headTags.transformLinks.ignore;
 
   // The site URL.

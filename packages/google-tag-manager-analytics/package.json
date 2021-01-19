@@ -30,8 +30,8 @@
     "frontity": "^1.13.0"
   },
   "devDependencies": {
-    "@types/react-test-renderer": "^16.9.3",
-    "react-test-renderer": "^16.13.1",
-    "react-helmet-async": "1.0.4"
+    "@types/react-test-renderer": "^17.0.0",
+    "react-test-renderer": "^17.0.1",
+    "react-helmet-async": "1.0.7"
   }
 }

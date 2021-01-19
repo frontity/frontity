@@ -28,6 +28,6 @@
     "@frontity/error": "^0.1.1"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^17.0.1"
   }
 }
