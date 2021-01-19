@@ -51,6 +51,11 @@ validateArgs(cypressCommand, { possibleValues: ["open", "run", "off"] });
 // script assumes that files are relative to this location.
 process.chdir(__dirname);
 
+// Set the FRONTITY_MODE for the tests to rely on.
+// Setting it as a CYPRESS_ env variables makes it work
+// regardless of using cypress UI or github action
+process.env["CYPRESS_FRONTITY_MODE"] = prod ? "production" : "development";
+
 (async () => {
   try {
     if (suite === "all" || suite.startsWith("wordpress")) {
@@ -148,23 +153,21 @@ process.chdir(__dirname);
 
     // Run Cypress if the `cypressCommnand` is not "off".
     if (cypressCommand !== "off") {
-      const FRONTITY_MODE = prod ? "production" : "development";
-
       if (cypressCommand === "open") {
         await cypress.open({
-          env: { WORDPRESS_VERSION: wpVersion, FRONTITY_MODE },
+          env: { WORDPRESS_VERSION: wpVersion },
           browser,
         });
       } else if (cypressCommand === "run") {
         if (suite === "all") {
           await cypress.run({
-            env: { WORDPRESS_VERSION: wpVersion, FRONTITY_MODE },
+            env: { WORDPRESS_VERSION: wpVersion },
             spec: `./integration/**/*.spec.js`,
             browser,
           });
         } else {
           await cypress.run({
-            env: { WORDPRESS_VERSION: wpVersion, FRONTITY_MODE },
+            env: { WORDPRESS_VERSION: wpVersion },
             browser,
             spec: `./integration/${suite}/**/*.spec.js`,
           });
