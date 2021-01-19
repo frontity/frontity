@@ -148,3 +148,9 @@ Default: `chrome`
 The tests suite to run. `all` will run all the suites. Each suite represents a different folder in the `e2e/integrations` folder. For example `--suite wordpress-01` will only run the specs found in the `e2e/integrations/wordpress-01` folder.
 
 Default: `all`.
+
+### `--inspect`: boolean
+
+If present, it will start the Frontity dev server using `node --inspect`.
+
+Default: `false`.

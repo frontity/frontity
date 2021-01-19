@@ -27,6 +27,7 @@ let {
   cypress: cypressCommand,
   suite,
   "public-path": publicPath,
+  inspect,
 } = argv;
 
 // Sane defaults for local development.
@@ -36,6 +37,7 @@ browser = browser || "chrome";
 prod = prod || false;
 cypressCommand = cypressCommand || "open";
 suite = suite || "all";
+inspect = inspect || false;
 
 // Flag to know if we have started Docker.
 let isDockerRunning = false;
@@ -116,8 +118,16 @@ process.chdir(__dirname);
         stdio: "inherit",
       });
     } else {
-      let args = ["frontity", "dev", "--port", "3001", "--dont-open-browser"];
-
+      let args = inspect
+        ? [
+            "--inspect",
+            "./node_modules/.bin/frontity",
+            "dev",
+            "--port",
+            "3001",
+            "--dont-open-browser",
+          ]
+        : ["frontity", "dev", "--port", "3001", "--dont-open-browser"];
       // Only if publicPath was passed as a CLI argument, add it to the final
       // command.
       if (publicPath) {
@@ -130,7 +140,7 @@ process.chdir(__dirname);
       }
 
       // Dev.
-      execa("npx", args, {
+      execa(inspect ? "node" : "npx", args, {
         stdio: "inherit",
       });
     }
