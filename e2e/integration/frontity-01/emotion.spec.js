@@ -56,7 +56,8 @@ describe("styled", () => {
   });
 
   it("should have a Styled class name (autoLabel)", function () {
-    const frontityModeProduction = Cypress.env("FRONTITY_MODE");
+    const frontityModeProduction =
+      Cypress.env("FRONTITY_MODE") !== "development";
 
     // If we are in production mode skip the test since
     // the autoLabel works only in development
@@ -104,7 +105,8 @@ describe("css", () => {
   });
 
   it("should have a Styled class name (autoLabel)", function () {
-    const frontityModeProduction = Cypress.env("FRONTITY_MODE");
+    const frontityModeProduction =
+      Cypress.env("FRONTITY_MODE") !== "development";
 
     // If we are in production mode skip the test since
     // the autoLabel works only in development

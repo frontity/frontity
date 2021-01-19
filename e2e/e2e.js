@@ -54,7 +54,8 @@ process.chdir(__dirname);
 // Set the FRONTITY_MODE for the tests to rely on.
 // Setting it as a CYPRESS_ env variables makes it work
 // regardless of using cypress UI or github action
-process.env["CYPRESS_FRONTITY_MODE"] = prod ? "production" : "development";
+process.env["CYPRESS_FRONTITY_MODE"] =
+  process.env["CYPRESS_FRONTITY_MODE"] || (prod ? "production" : "development");
 
 (async () => {
   try {
