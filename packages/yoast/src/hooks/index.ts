@@ -1,6 +1,5 @@
 import React from "react";
 import { decode, useConnect } from "frontity";
-import { getWpUrl } from "@frontity/head-tags/src/utils";
 import { transformAllLinks } from "../utils";
 import { Packages, WithYoastHead } from "../../types";
 import {
@@ -70,7 +69,7 @@ export const useYoastHead = (link: string): UseYoastHeadResult => {
   if (state.yoast.transformLinks) {
     ignore = state.yoast.transformLinks.ignore;
     base =
-      state.yoast.transformLinks.base || getWpUrl(state.source.api, false).href;
+      state.yoast.transformLinks.base || state.source.url.replace(/\/?$/, "/");
     newBase = state.frontity.url;
   }
 
