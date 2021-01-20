@@ -2,16 +2,22 @@
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 
-Cypress.config({
-  experimentalFetchPolyfill: false,
-} as any);
-
 describe("Redirections", () => {
   before(() => {
     task("installPlugin", { name: "redirection" });
     task("loadDatabase", {
       path: "./wp-data/301-redirections/dump.sql",
     });
+    task("runCommand", {
+      command:
+        "npx forever start ./node_modules/.bin/http-server --cors -p 8181 --proxy http://localhost:8080 -d false",
+    });
+  });
+
+  after(() => {
+    task("resetDatabase");
+    task("removeAllPlugins");
+    task("runCommand", { command: "npx forever stopall" });
   });
 
   it("Should redirect when loading the page directly", () => {
@@ -328,7 +334,11 @@ describe("Redirections", () => {
       "http://localhost:3001/external-redirect/?frontity_name=redirections"
     );
 
-    cy.location("href").should("eq", "https://frontity.org/");
+    cy.location("href").should(
+      "eq",
+      "http://localhost:8181/hello-world-redirected/"
+    );
+    cy.get("h1").should("contain.text", "Hello world!");
   });
 
   it("Should redirect to an external domain on the client", () => {
@@ -336,6 +346,10 @@ describe("Redirections", () => {
 
     cy.get("#external-redirection").click();
 
-    cy.location("href").should("eq", "https://frontity.org/");
+    cy.location("href").should(
+      "eq",
+      "http://localhost:8181/hello-world-redirected/"
+    );
+    cy.get("h1").should("contain.text", "Hello world!");
   });
 });
