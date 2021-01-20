@@ -13,20 +13,42 @@ describe("Yoast Package", () => {
     cy.task("removeAllPlugins");
   });
 
+  const cypressRequestAndParse = (link) => {
+    return cy
+      .request(`http://localhost:3001${link}?frontity_name=yoast-package`)
+      .then((response) => parseHTML(response.body));
+  };
+
   /**
-   * Visit the specified link with a request and returned the parsed, static, dom.
-   *
-   * @param link - The link of the page.
-   * @returns Returns the parsed response from the request.
+   * The DOMparser.
    */
-  const visitLinkAndParseDom = async (link) => {
-    const req = await cy.request(
-      `http://localhost:3001${link}?frontity_name=yoast-package`
+  const parser = new DOMParser();
+  const portal = document.createElement("iframe");
+  document.body.appendChild(portal);
+
+  const apendChildrenTo = (children, target) => {
+    // Clear out the previous content
+    target.innerHTML = "";
+
+    // Append each elment
+    children.forEach((element) => {
+      target.appendChild(element);
+    });
+  };
+
+  const parseHTML = (text) => {
+    const doc = parser.parseFromString(text, "text/html");
+
+    apendChildrenTo(
+      Array.from(doc.head.childNodes),
+      portal.contentDocument.head
+    );
+    apendChildrenTo(
+      Array.from(doc.body.childNodes),
+      portal.contentDocument.body
     );
 
-    const parser = new DOMParser();
-
-    return parser.parseFromString(req.body, "text/html");
+    return portal.contentDocument;
   };
 
   /**
@@ -36,12 +58,10 @@ describe("Yoast Package", () => {
    * @param title - The page title for the given link.
    */
   const checkTitle = (link, title) => {
-    /* eslint-disable-next-line cypress/no-async-tests */
-    it("should render the correct title", async () => {
-      const dom = await visitLinkAndParseDom(link);
-      const el = dom.querySelector("title");
-
-      cy.get(el).should("contain", title);
+    it("should render the correct title", () => {
+      cypressRequestAndParse(link).then((html) => {
+        cy.get(html.querySelector("title")).should("contain", title);
+      });
     });
   };
 
@@ -57,49 +77,48 @@ describe("Yoast Package", () => {
    * @param link - The link to execute the request against.
    */
   const checkMetaTags = (link) => {
-    /* eslint-disable-next-line cypress/no-async-tests */
-    it("should render the correct canonical URL", async () => {
-      const dom = await visitLinkAndParseDom(link);
-      const val = dom.querySelector('link[rel="canonical"]');
-      cy.get(val).toMatchSnapshot();
+    it("should render the correct canonical URL", () => {
+      cypressRequestAndParse(link).then((html) => {
+        cy.get(html.querySelector('link[rel="canonical"]')).toMatchSnapshot();
+      });
     });
 
-    /* eslint-disable-next-line cypress/no-async-tests */
-    it("should render the robots tag", async () => {
-      const dom = await visitLinkAndParseDom(link);
-      cy.get(dom.querySelector('meta[name="robots"]')).toMatchSnapshot();
+    it("should render the robots tag", () => {
+      cypressRequestAndParse(link).then((html) => {
+        cy.get(html.querySelector('meta[name="robots"]')).toMatchSnapshot();
+      });
     });
 
-    /* eslint-disable-next-line cypress/no-async-tests */
-    it("should render the Open Graph tags", async () => {
-      const dom = await visitLinkAndParseDom(link);
-      cy.get(
-        dom.querySelectorAll(
-          `
+    it("should render the Open Graph tags", () => {
+      cypressRequestAndParse(link).then((html) => {
+        cy.get(
+          html.querySelectorAll(
+            `
           meta[property^="og:"],
           meta[property^="article:"],
           meta[property^="profile:"]
         `
-        )
-      ).each((meta) => {
-        cy.wrap(meta).toMatchSnapshot();
+          )
+        ).each((meta) => {
+          cy.wrap(meta).toMatchSnapshot();
+        });
       });
     });
 
-    /* eslint-disable-next-line cypress/no-async-tests */
-    it("should render the Twitter tags", async () => {
-      const dom = await visitLinkAndParseDom(link);
-      cy.get(dom.querySelector('meta[name^="twitter:"]')).each((meta) => {
-        cy.wrap(meta).toMatchSnapshot();
+    it("should render the Twitter tags", () => {
+      cypressRequestAndParse(link).then((html) => {
+        cy.get(html.querySelector('meta[name^="twitter:"]')).each((meta) => {
+          cy.wrap(meta).toMatchSnapshot();
+        });
       });
     });
 
-    /* eslint-disable-next-line cypress/no-async-tests */
-    it("should render the schema tag", async () => {
-      const dom = await visitLinkAndParseDom(link);
-      cy.get(
-        dom.querySelector('script[type="application/ld+json"]')
-      ).toMatchSnapshot();
+    it("should render the schema tag", () => {
+      cypressRequestAndParse(link).then((html) => {
+        cy.get(
+          html.querySelector('script[type="application/ld+json"]')
+        ).toMatchSnapshot();
+      });
     });
   };
 
