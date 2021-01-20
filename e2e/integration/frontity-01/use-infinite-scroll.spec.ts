@@ -10,7 +10,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delay: 300,
+      delayMs: 300,
     }).as("pageOne");
     cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
       fixture: "use-infinite-scroll/page-2.json",
@@ -18,7 +18,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delay: 300,
+      delayMs: 300,
     }).as("pageTwo");
 
     // Changes url to `/archive`.
@@ -44,7 +44,7 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/archive/");
   });
 
-  it("useArchiveInfiniteScroll should return `isError` true", () => {
+  it.only("useArchiveInfiniteScroll should return `isError` true", () => {
     cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/");
 
@@ -55,12 +55,12 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delay: 300,
+      delayMs: 300,
     }).as("pageOne");
     cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
-      status: 503,
-      response: {},
-      delay: 300,
+      statusCode: 503,
+      body: {},
+      delayMs: 300,
     }).as("pageTwo");
 
     // Changes url to `/archive`.
@@ -95,7 +95,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delay: 300,
+      delayMs: 300,
     }).as("pageTwo");
 
     // Try one more time.
@@ -119,7 +119,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delay: 300,
+      delayMs: 300,
     }).as("pageOne");
     cy.intercept(
       "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
@@ -129,7 +129,7 @@ describe("UseInfiniteScroll", () => {
           "x-wp-total": "1",
           "x-wp-totalpages": "1",
         },
-        delay: 300,
+        delayMs: 300,
       }
     ).as("postOne");
 
@@ -164,7 +164,7 @@ describe("UseInfiniteScroll", () => {
           "x-wp-total": "1",
           "x-wp-totalpages": "1",
         },
-        delay: 300,
+        delayMs: 300,
       }
     ).as("lastPost");
     cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
@@ -173,12 +173,12 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delay: 300,
+      delayMs: 300,
     }).as("pageOne");
     cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
-      status: 503,
-      response: {},
-      delay: 300,
+      statusCode: 503,
+      body: {},
+      delayMs: 300,
     }).as("pageTwo");
 
     // Changes url to `/post-type`.
@@ -212,7 +212,7 @@ describe("UseInfiniteScroll", () => {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delay: 300,
+      delayMs: 300,
     }).as("pageTwo");
 
     // Try one more time.
