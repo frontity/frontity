@@ -325,6 +325,11 @@ describe("Redirections", () => {
   });
 
   it("Should redirect to an external domain on the server", () => {
+    task("runCommand", {
+      command:
+        "npx forever start ./node_modules/.bin/http-server --cors -p 8181 --proxy http://localhost:8080 -d false",
+    });
+
     cy.visit(
       "http://localhost:3001/external-redirect/?frontity_name=redirections"
     );
@@ -334,6 +339,8 @@ describe("Redirections", () => {
       "http://localhost:8181/hello-world-redirected/"
     );
     cy.get("h1").should("contain.text", "Hello world!");
+
+    task("runCommand", { command: "npx forever stopall" });
   });
 
   it("Should redirect to an external domain that has CORS on the client", () => {
@@ -341,6 +348,7 @@ describe("Redirections", () => {
       command:
         "npx forever start ./node_modules/.bin/http-server --cors -p 8181 --proxy http://localhost:8080 -d false",
     });
+
     cy.visit("http://localhost:3001/?frontity_name=redirections");
 
     cy.get("#external-redirection").click();
