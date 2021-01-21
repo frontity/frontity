@@ -148,12 +148,12 @@ export const removeSourceUrl = (
  * @returns True if the link is an external Url.
  */
 export const isExternalUrl = (link: string) => {
-  return (
-    link.startsWith("http") ||
-    link.startsWith("mailto") ||
-    link.startsWith("tel") ||
-    link.startsWith("sms")
-  );
+  try {
+    new URL(link);
+    return true;
+  } catch (e) {
+    return false;
+  }
 };
 
 /**
