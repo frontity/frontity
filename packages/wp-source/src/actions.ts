@@ -15,7 +15,6 @@ import {
   is404Redirection,
   isEagerRedirection,
   fetchRedirection,
-  getRedirectionData,
 } from "./utils";
 
 const actions: WpSource["actions"]["source"] = {
@@ -69,11 +68,10 @@ const actions: WpSource["actions"]["source"] = {
       const redirection = getMatch(route, libraries.source.redirections);
       if (redirection) route = redirection.func(redirection.params);
 
-      // Check if we need to check if it is a redirection before fetching the
-      // backend.
+      // Check if we need to check if it is a 30X redirection before fetching
+      // the backend.
       if (isEagerRedirection(state.source.redirections, link)) {
         const redirection = await fetchRedirection({ link, state });
-
         // If there is a redirection, populate the data object and finish here.
         if (redirection?.isRedirection) {
           batch(() => Object.assign(source.data[link], redirection));
@@ -131,18 +129,13 @@ const actions: WpSource["actions"]["source"] = {
         throw error;
       }
 
+      // Check it there is a 301 redirection stored in the backend.
       if (error.status === 404 && is404Redirection(state.source.redirections)) {
-        try {
-          const redirection = await fetchRedirection({ link, state });
-
-          // If there is a redirection, populate the data object and finish here.
-          if (redirection?.isRedirection) {
-            batch(() => Object.assign(source.data[link], redirection));
-            return;
-          }
-        } catch (e) {
-          // If there is no redirection, we ignore it and just continue handling
-          // the 404 ServerError that was thrown previously.
+        const redirection = await fetchRedirection({ link, state });
+        // If there is a redirection, populate the data object and finish here.
+        if (redirection?.isRedirection) {
+          batch(() => Object.assign(source.data[link], redirection));
+          return;
         }
       }
 
