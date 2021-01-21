@@ -596,6 +596,7 @@ describe.each`
               }
           `);
     });
+
     it(`${platform}: Should mark external redirections`, async () => {
       store.state.source.redirections = "all";
 
@@ -639,6 +640,61 @@ describe.each`
                 },
               }
           `);
+    });
+
+    it(`${platform}: Should mark redirections as external if they fail due to CORS`, async () => {
+      store.state.source.redirections = "all";
+
+      if (platform === "server") {
+        mockedFetch = jest.fn((_) =>
+          Promise.resolve(({
+            status: 301,
+            headers: new Headers({
+              location: "https://external-domain.com/external-redirected-url",
+            }),
+          } as unknown) as Response)
+        );
+      } else {
+        mockedFetch = jest
+          .fn()
+          // Fetching the redirection fails first due to CORS.
+          .mockRejectedValueOnce("Fetch Error")
+          // Then the next fetch done with `redirect: manual` returns the
+          // opaqueredirect value.
+          .mockResolvedValueOnce({
+            url: "https://wp.domain.com/some-post/",
+            type: "opaqueredirect",
+            status: 0,
+          });
+      }
+
+      (frontity.fetch as typeof fetch) = mockedFetch;
+
+      await store.actions.source.fetch("/some-post/");
+
+      const snapshot = `
+      Object {
+        "/some-post/": Object {
+          "is301": true,
+          "isExternal": true,
+          "isFetching": false,
+          "isReady": true,
+          "isRedirection": true,
+          "link": "/some-post/",
+          "location": ${
+            platform === "server"
+              ? '"https://external-domain.com/external-redirected-url"'
+              : '"https://wp.domain.com/some-post/"'
+          },
+          "page": 1,
+          "query": Object {},
+          "redirectionStatus": 301,
+          "route": "/some-post/",
+        },
+      }
+    `;
+
+      expect(store.state.source.data).toMatchInlineSnapshot(snapshot);
     });
   });
 });
