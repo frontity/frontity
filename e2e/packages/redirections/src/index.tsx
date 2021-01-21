@@ -37,10 +37,12 @@ const LinkCounter = connect(() => {
  */
 const windowReplaceLocationWrapper = `
   window.replaceLocationCalls = [];
+  window.followReplaceLocation = false;
   Object.defineProperty(window, "replaceLocation", {
     get: function () {
       return function (link) {
         window.replaceLocationCalls.push(link);
+        if (window.followReplaceLocation) window.location.replace(link);
       };
     },
     set: function () {},

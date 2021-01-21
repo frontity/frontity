@@ -356,7 +356,7 @@ describe("Redirections", () => {
   it("Should redirect to an external domain that doesn't have CORS on the client", () => {
     task("runCommand", {
       command:
-        "npx forever start ./node_modules/.bin/http-server -p 8181 --proxy http://localhost:8080 -d false",
+        "npx forever start ./node_modules/.bin/http-server -p 8181 --proxy http://localhost:3001 -d false",
     });
     cy.visit("http://localhost:3001/?frontity_name=redirections");
 
@@ -365,7 +365,7 @@ describe("Redirections", () => {
     cy.window()
       .its("replaceLocationCalls")
       .its(0)
-      .should("eq", "http://localhost:8080/external-redirection");
+      .should("eq", "http://localhost:8080/external-redirect/");
 
     task("runCommand", { command: "npx forever stopall" });
   });
