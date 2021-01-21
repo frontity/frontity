@@ -69,30 +69,14 @@ const actions: WpSource["actions"]["source"] = {
       const redirection = getMatch(route, libraries.source.redirections);
       if (redirection) route = redirection.func(redirection.params);
 
-      // These are different from the "redirection" above - this setting is
-      // used for handling 30x redirections that can be stored in the WordPress database.
-      const { redirections } = state.source;
-
-      // Remove the trailing slash before concatenating the link
-      const redirectionURL = state.source.url.replace(/\/$/, "") + link;
-
       // Check if we need to check if it is a redirection before fetching the
       // backend.
-      if (isEagerRedirection(redirections, link)) {
-        const redirection = await fetchRedirection(
-          redirectionURL,
-          state.frontity.platform
-        );
+      if (isEagerRedirection(state.source.redirections, link)) {
+        const redirection = await fetchRedirection({ link, state });
 
         // If there is a redirection, populate the data object and finish here.
         if (redirection?.isRedirection) {
-          const redirectionData = getRedirectionData(
-            redirection.location,
-            redirection.status,
-            state.source.url,
-            state.frontity.url
-          );
-          batch(() => Object.assign(source.data[link], redirectionData));
+          batch(() => Object.assign(source.data[link], redirection));
           return;
         }
       }
@@ -148,21 +132,12 @@ const actions: WpSource["actions"]["source"] = {
       }
 
       if (error.status === 404 && is404Redirection(state.source.redirections)) {
-        const redirectionURL = state.source.url.replace(/\/$/, "") + link;
         try {
-          const redirection = await fetchRedirection(
-            redirectionURL,
-            state.frontity.platform
-          );
+          const redirection = await fetchRedirection({ link, state });
+
           // If there is a redirection, populate the data object and finish here.
           if (redirection?.isRedirection) {
-            const redirectionData = getRedirectionData(
-              redirection.location,
-              redirection.status,
-              state.source.url,
-              state.frontity.url
-            );
-            batch(() => Object.assign(source.data[link], redirectionData));
+            batch(() => Object.assign(source.data[link], redirection));
             return;
           }
         } catch (e) {
@@ -170,8 +145,6 @@ const actions: WpSource["actions"]["source"] = {
           // the 404 ServerError that was thrown previously.
         }
       }
-
-      console.error(error);
 
       const errorData: ErrorData = {
         isError: true,

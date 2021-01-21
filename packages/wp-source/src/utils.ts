@@ -1,10 +1,27 @@
 import { RedirectionData } from "@frontity/source/types";
 import { fetch } from "frontity";
+import { State } from "frontity/types";
+import { Packages } from "../types";
 
 /**
- * Return object of the {@link fetchRedirection} function.
+ * The options for the {@link fetchRedirection} function.
  */
-export interface FetchDirectionReturn {
+interface FetchRedirectionOptions {
+  /**
+   * The original link that we need to check for redirections.
+   */
+  link: string;
+
+  /**
+   * The Frontity state.
+   */
+  state: State<Packages>;
+}
+
+/**
+ * The options of the {@link getRedirectionData} function.
+ */
+interface GetRedirectionDataOptions {
   /**
    * The HTTP status.
    */
@@ -16,9 +33,14 @@ export interface FetchDirectionReturn {
   location: string;
 
   /**
-   * Wheter this is a redirection or not.
+   * The Frontity URL.
    */
-  isRedirection: boolean;
+  frontityUrl: string;
+
+  /**
+   * The source backend URL.
+   */
+  sourceUrl: string;
 }
 
 /**
@@ -27,19 +49,23 @@ export interface FetchDirectionReturn {
  * between the client and the server.
  *
  * @param link - The URL from which the redirection should be fetched.
- * @param platform - Should be either "client" or "server".
+ * @param state - The state of Frontity.
  *
- * @returns An object that contains information about the redirection, defined
- * in {@link FetchDirectionReturn}, or nothing if there is no redirection.
+ * @returns A promise that resolves in a partial redirection data that can be
+ * used to populate an `state.source.data` object or null if there's no
+ * redirection.
  */
-export const fetchRedirection = async (
-  link: string,
-  platform: "client" | "server"
-): Promise<FetchDirectionReturn> => {
-  if (platform === "server") {
+export const fetchRedirection = async ({
+  link,
+  state,
+}: FetchRedirectionOptions): Promise<Partial<RedirectionData>> => {
+  // Remove the trailing slash before concatenating the link
+  const redirectionURL = state.source.url.replace(/\/$/, "") + link;
+
+  if (state.frontity.platform === "server") {
     // On the server we have to fetch with `redirect: manual` so that we can
     // check the status code of the redirection.
-    const response = await fetch(link, {
+    const response = await fetch(redirectionURL, {
       method: "HEAD",
       redirect: "manual",
     });
@@ -50,30 +76,63 @@ export const fetchRedirection = async (
       response.status === 302 ||
       response.status === 307 ||
       response.status === 308
-    )
-      return {
+    ) {
+      return getRedirectionData({
         status: response.status,
         location: response.headers.get("location"),
-        isRedirection: true,
-      };
+        frontityUrl: state.frontity.url,
+        sourceUrl: state.source.url,
+      });
+    }
   } else {
-    // On the client it's not possible to get the actual status code of the
+    // On the client it is not possible to get the actual status code of the
     // redirection if you use the `redirect: manual` option because of
-    // https://fetch.spec.whatwg.org/#atomic-http-redirect-handling The
+    // https://fetch.spec.whatwg.org/#atomic-http-redirect-handling. The
     // `redirect: manual` option on the client returns an "opaque response"
-    // object which always has the status of 0.
-    const response = await fetch(link, {
-      method: "HEAD",
-    });
+    // object which always has the status of 0 and doesn't contain the final
+    // URL.
 
-    // On the client we check the property `redirected`.
-    if (response.redirected)
-      return {
-        status: 301, // Default value on the client.
-        location: response.url,
-        isRedirection: true,
-      };
+    // First, try to do a normal fetch. If CORS is setup it will succeed and we
+    // will know if it is a redirection or not.
+    try {
+      const response = await fetch(redirectionURL, {
+        method: "HEAD",
+      });
+
+      // We check the property `redirected`. We don't know the status because
+      // it returns 200, so we always use 301.
+      if (response.redirected)
+        return getRedirectionData({
+          status: 301,
+          location: response.url,
+          frontityUrl: state.frontity.url,
+          sourceUrl: state.source.url,
+        });
+    } catch (error) {
+      // If the fetch fails, we fallback to using `redirect: manual` to see at
+      // least if there is a redirect or not. If it is, we don't know the final
+      // URL but we will store it as external.
+      const response = await fetch(redirectionURL, {
+        method: "HEAD",
+        redirect: "manual",
+      });
+
+      if (response.type === "opaqueredirect") {
+        // If there is a redirection, we don't know to which URL, but we can
+        // mark is as external, so if the client needs to go to the URL it can
+        // do a SSR'ed request and at least it would work.
+        const redirectionData = getRedirectionData({
+          status: 301,
+          location: redirectionURL,
+          frontityUrl: state.frontity.url,
+          sourceUrl: state.source.url,
+        });
+        redirectionData.isExternal = true;
+        return redirectionData;
+      }
+    }
   }
+  return null;
 };
 
 /**
@@ -135,12 +194,12 @@ export const is404Redirection = (redirections: string | string[]): boolean => {
  * @returns A data object to populate the state, defined in {@link
  * RedirectionData}.
  */
-export const getRedirectionData = (
-  location: string,
-  status: 301 | 302 | 307 | 308,
-  sourceUrl: string,
-  frontityUrl: string
-): Partial<RedirectionData> => ({
+export const getRedirectionData = ({
+  location,
+  status,
+  sourceUrl,
+  frontityUrl,
+}: GetRedirectionDataOptions): Partial<RedirectionData> => ({
   isExternal:
     new URL(location).host !== new URL(sourceUrl).host &&
     new URL(location).host !== new URL(frontityUrl).host,
