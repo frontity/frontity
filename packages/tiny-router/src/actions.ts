@@ -44,8 +44,9 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
 
-  // Set state default value.
-  if (!options.state) options.state = {};
+  // Clone the state that we are going to use for `window.history` because it
+  // cannot contain proxies.
+  options.state = JSON.parse(JSON.stringify(options.state || {}));
 
   // If the data is a redirection, then we set the link to the location.
   // The redirections are stored in source.data just like any other data.
@@ -124,7 +125,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
             // Keep the same history.state that the old link had. We have to
             // stringfy and parse the object because window.history.replaceState()
             // does not accept a Proxy.
-            state: JSON.parse(JSON.stringify(state.router.state)),
+            state: state.router.state,
           });
         }
       }
@@ -146,7 +147,11 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       link = libraries.source.normalize(link);
 
     // Add the state to the browser history and replace the link.
-    window.history.replaceState({ ...state.router.state }, "", link);
+    window.history.replaceState(
+      JSON.parse(JSON.stringify(state.router.state)), // Clone it to avoid proxies.
+      "",
+      link
+    );
 
     // If the link from the browser and the link from the server are different,
     // point the first one to the same data object pointed by the second one.
