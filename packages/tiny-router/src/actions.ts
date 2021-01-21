@@ -52,7 +52,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   const data = state.source?.get(link);
   if (data && isRedirection(data)) {
     if (data.isExternal) {
-      window.location.replace(data.location);
+      window.replaceLocation(data.location);
     } else {
       // If the link is internal, we have to discard the domain.
       const { pathname, hash, search } = new URL(
@@ -102,6 +102,11 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
         ? libraries.source.normalize(state.frontity.initialLink)
         : state.frontity.initialLink;
   } else {
+    // Wrap `window.replace.location` so we can mock it in the e2e tests.
+    // This is required because `window.location` is protected by the browser
+    // and can't be modified.
+    window.replaceLocation = window.replaceLocation || window.location.replace;
+
     // Observe the current data object. If it is ever a redirection, replace the
     // current link with the new one.
     observe(() => {
@@ -109,7 +114,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       if (data && isRedirection(data)) {
         // If the redirection is external, redirect to the full URL.
         if (data.isExternal) {
-          window.location.replace(data.location);
+          window.replaceLocation(data.location);
         } else {
           // If the redirection is internal, use actions.router.set to switch
           // to the new redirection.

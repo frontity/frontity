@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useConnect, connect } from "frontity";
+import { useConnect, connect, Head } from "frontity";
 import Redirections, { Packages } from "../types";
 import { isArchive, isPostType, isPost, isError } from "@frontity/source";
 import { RedirectionData } from "@frontity/source/types";
@@ -31,6 +31,23 @@ const LinkCounter = connect(() => {
 });
 
 /**
+ * We use this wrapper around window.replaceLocation to mock it and be able to
+ * know when the client should have navigated to an external page. Cypress
+ * doesn't support changing the origin in the middle of the tests.
+ */
+const windowReplaceLocationWrapper = `
+  window.replaceLocationCalls = [];
+  Object.defineProperty(window, "replaceLocation", {
+    get: function () {
+      return function (link) {
+        window.replaceLocationCalls.push(link);
+      };
+    },
+    set: function () {},
+  });
+`;
+
+/**
  * The root component of the package. It's like a mini-theme to know if we are
  * getting data correctly from WordPress.
  *
@@ -42,6 +59,10 @@ const Component: React.FC = () => {
 
   return (
     <>
+      <Head>
+        <script>{windowReplaceLocationWrapper}</script>
+      </Head>
+
       <LinkCounter />
 
       <button id="open-post" onClick={() => actions.router.set("/hello-world")}>

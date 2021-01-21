@@ -8,16 +8,11 @@ describe("Redirections", () => {
     task("loadDatabase", {
       path: "./wp-data/301-redirections/dump.sql",
     });
-    task("runCommand", {
-      command:
-        "npx forever start ./node_modules/.bin/http-server --cors -p 8181 --proxy http://localhost:8080 -d false",
-    });
   });
 
   after(() => {
     task("resetDatabase");
     task("removeAllPlugins");
-    task("runCommand", { command: "npx forever stopall" });
   });
 
   it("Should redirect when loading the page directly", () => {
@@ -341,15 +336,37 @@ describe("Redirections", () => {
     cy.get("h1").should("contain.text", "Hello world!");
   });
 
-  it("Should redirect to an external domain on the client", () => {
+  it("Should redirect to an external domain that has CORS on the client", () => {
+    task("runCommand", {
+      command:
+        "npx forever start ./node_modules/.bin/http-server --cors -p 8181 --proxy http://localhost:8080 -d false",
+    });
     cy.visit("http://localhost:3001/?frontity_name=redirections");
 
     cy.get("#external-redirection").click();
 
-    cy.location("href").should(
-      "eq",
-      "http://localhost:8181/hello-world-redirected/"
-    );
-    cy.get("h1").should("contain.text", "Hello world!");
+    cy.window()
+      .its("replaceLocationCalls")
+      .its(0)
+      .should("eq", "http://localhost:8181/hello-world-redirected/");
+
+    task("runCommand", { command: "npx forever stopall" });
+  });
+
+  it("Should redirect to an external domain that doesn't have CORS on the client", () => {
+    task("runCommand", {
+      command:
+        "npx forever start ./node_modules/.bin/http-server -p 8181 --proxy http://localhost:8080 -d false",
+    });
+    cy.visit("http://localhost:3001/?frontity_name=redirections");
+
+    cy.get("#external-redirection").click();
+
+    cy.window()
+      .its("replaceLocationCalls")
+      .its(0)
+      .should("eq", "http://localhost:8080/external-redirection");
+
+    task("runCommand", { command: "npx forever stopall" });
   });
 });
