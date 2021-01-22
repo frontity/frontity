@@ -1,5 +1,5 @@
 import TinyRouter from "../types";
-import { warn, observe } from "frontity";
+import { warn, observe, batch } from "frontity";
 import { isError, isRedirection } from "@frontity/source";
 
 /**
@@ -46,12 +46,12 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
 
   // Clone the state that we are going to use for `window.history` because it
   // cannot contain proxies.
-  options.state = JSON.parse(JSON.stringify(options.state || {}));
+  const historyState = JSON.parse(JSON.stringify(options.state || {}));
 
   // If the data is a redirection, then we set the link to the location.
   // The redirections are stored in source.data just like any other data.
   const data = state.source?.get(link);
-  if (data && isRedirection(data)) {
+  if (data && data.isReady && isRedirection(data)) {
     if (data.isExternal) {
       window.replaceLocation(data.location);
     } else {
@@ -67,29 +67,28 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
     }
   }
 
-  // Trigger the fetch if `autoFetch` is true and update the window.history
-  // object.
-  if (
-    options.method === "push" ||
-    (!options.method && state.frontity.platform === "client")
-  ) {
-    window.history.pushState(options.state, "", link);
-    if (state.router.autoFetch) actions.source?.fetch(link);
-  } else if (options.method === "replace") {
-    window.history.replaceState(options.state, "", link);
+  // If we are in the client, update `window.history` and fetch the link.
+  if (state.frontity.platform === "client") {
+    if (!options.method || options.method === "push")
+      window.history.pushState(historyState, "", link);
+    else if (options.method === "replace")
+      window.history.replaceState(historyState, "", link);
+
+    // If `autoFetch` is on, do the fetch.
     if (state.router.autoFetch) actions.source?.fetch(link);
   }
 
   // Finally, set the `state.router.link` property to the new value.
-  state.router.link = link;
-  state.router.state = options.state;
+  batch(() => {
+    state.router.link = link;
+    state.router.state = historyState;
+  });
 };
 
 /**
- * Implementation of the `init()` Frontity action as used by the tiny-router.
+ * Initilization of the router.
  *
- * @param params - The params passed to every action in frontity: `state`,
- * `actions`, `library`.
+ * @param store - The Frontity store.
  */
 export const init: TinyRouter["actions"]["router"]["init"] = ({
   state,
@@ -143,12 +142,11 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 
     // Normalize it.
     let link = browserURL.pathname + browserURL.search + browserURL.hash;
-    if (libraries.source && libraries.source.normalize)
-      link = libraries.source.normalize(link);
+    if (libraries.source?.normalize) link = libraries.source.normalize(link);
 
     // Add the state to the browser history and replace the link.
     window.history.replaceState(
-      JSON.parse(JSON.stringify(state.router.state)), // Clone it to avoid proxies.
+      JSON.parse(JSON.stringify(state.router.state)),
       "",
       link
     );
@@ -203,6 +201,7 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     return;
   }
 
+  // Fetch the current link.
   await actions.source.fetch(state.router.link);
   const data = state.source.get(state.router.link);
 
@@ -210,6 +209,7 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
   if (data && isRedirection(data)) {
     // If the redirection is external, just redirect to the full URL here.
     if (data.isExternal) {
+      ctx.status = data.redirectionStatus;
       ctx.redirect(data.location);
       return;
     }
@@ -226,13 +226,20 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     // or 308.
     ctx.status = data.redirectionStatus;
 
-    // Do the redirection.
-    ctx.redirect(location.pathname + location.search + location.hash);
-  } else if (isError(data)) {
+    // 30X redirections need the be absolute, so we add the Frontity URL.
+    const redirectionURL =
+      state.frontity.url.replace(/\/$/, "") +
+      location.pathname +
+      location.hash +
+      location.search;
+
+    ctx.redirect(redirectionURL);
+    return;
+  }
+
+  if (isError(data)) {
     // If there was an error, return the proper status.
-    const data = state.source.get(state.router.link);
-    if (isError(data)) {
-      ctx.status = data.errorStatus;
-    }
+    ctx.status = data.errorStatus;
+    return;
   }
 };
