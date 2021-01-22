@@ -17,8 +17,9 @@ describe("Head Tags - WP SEO 0.13", () => {
 
   /**
    * Generates the full url to be loaded and tested.
-   * @param link - The pathname to wich the test should navigate
-   * @returns The full url
+   *
+   * @param link - The pathname to wich the test should navigate.
+   * @returns The full url.
    */
   const fullURL = (link) =>
     `http://localhost:3001${link}?frontity_name=head-tags`;
@@ -39,6 +40,7 @@ describe("Head Tags - WP SEO 0.13", () => {
 
   /**
    * Ensure that the canonical link has been rendered.
+   *
    * @param link - The given link.
    */
   const checkCanonical = (link) => {
@@ -51,6 +53,7 @@ describe("Head Tags - WP SEO 0.13", () => {
 
   /**
    * Ensure that the ld+json schema has been rendered.
+   *
    * @param link - The given link.
    */
   const checkCustomTag = (link) => {
