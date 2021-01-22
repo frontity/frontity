@@ -32,8 +32,8 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   const checkTitle = (link, title) => {
     it("should render the correct title", () => {
-      cy.visitSSR(fullURL(link), "title").then((el) => {
-        cy.get(el).should("contain", title);
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get("title").should("contain", title);
       });
     });
   };
@@ -45,8 +45,8 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   const checkCanonical = (link) => {
     it("should render the correct canonical link", () => {
-      cy.visitSSR(fullURL(link), 'link[rel="canonical"]').then((el) => {
-        cy.get(el).toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('link[rel="canonical"]').toMatchSnapshot();
       });
     });
   };
@@ -58,8 +58,8 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   const checkCustomTag = (link) => {
     it("should render a custom tag", () => {
-      cy.visitSSR(fullURL(link), 'meta[name="custom-tag"]').then((el) => {
-        cy.get(el).toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('meta[name="custom-tag"]').toMatchSnapshot();
       });
     });
   };

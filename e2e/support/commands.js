@@ -53,8 +53,6 @@ Cypress.Commands.overwrite("visit", (visit, url, options = {}) => {
  * The DOMparser.
  */
 const parser = new DOMParser();
-const portal = document.createElement("iframe");
-document.body.appendChild(portal);
 
 /**
  * Appends children nodes to the target.
@@ -68,7 +66,10 @@ const apendChildrenTo = (children, target) => {
 
   // Append each elment
   children.forEach((element) => {
-    target.appendChild(element);
+    // Do not append `<script>` tags with `src` defined
+    if (element.tagName !== "script" || element.hasAttribute("src")) {
+      target.appendChild(element);
+    }
   });
 };
 
@@ -80,16 +81,15 @@ const apendChildrenTo = (children, target) => {
  */
 const parseHTML = (text) => {
   const doc = parser.parseFromString(text, "text/html");
+  const parentDocument = cy.state("window").parent.document;
+  const iframe = parentDocument.querySelector(".iframes-container iframe");
 
-  apendChildrenTo(Array.from(doc.head.childNodes), portal.contentDocument.head);
-  apendChildrenTo(Array.from(doc.body.childNodes), portal.contentDocument.body);
+  apendChildrenTo(Array.from(doc.head.childNodes), iframe.contentDocument.head);
+  apendChildrenTo(Array.from(doc.body.childNodes), iframe.contentDocument.body);
 
-  return portal.contentDocument;
+  return iframe.contentDocument;
 };
 
-Cypress.Commands.add("visitSSR", (url, selector) => {
-  return cy
-    .request(url)
-    .then((response) => parseHTML(response.body))
-    .then((html) => html.querySelector(selector));
+Cypress.Commands.add("visitSSR", (url) => {
+  return cy.request(url).then((response) => parseHTML(response.body));
 });

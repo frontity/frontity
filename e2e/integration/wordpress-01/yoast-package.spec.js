@@ -30,8 +30,8 @@ describe("Yoast Package", () => {
    */
   const checkTitle = (link, title) => {
     it("should render the correct title", () => {
-      cy.visitSSR(fullURL(link), "title").then((el) => {
-        cy.get(el).should("contain", title);
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get("title").should("contain", title);
       });
     });
   };
@@ -49,42 +49,39 @@ describe("Yoast Package", () => {
    */
   const checkMetaTags = (link) => {
     it("should render the correct canonical URL", () => {
-      cy.visitSSR(fullURL(link), 'link[rel="canonical"]').then((el) => {
-        cy.get(el).toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('link[rel="canonical"]').toMatchSnapshot();
       });
     });
 
     it("should render the robots tag", () => {
-      cy.visitSSR(fullURL(link), 'meta[name="robots"]').then((el) => {
-        cy.get(el).toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('meta[name="robots"]').toMatchSnapshot();
       });
     });
 
     it("should render the Open Graph tags", () => {
-      cy.visitSSR(
-        fullURL(link),
-        `meta[property^="og:"],meta[property^="article:"],meta[property^="profile:"]`
-      ).then((el) => {
-        cy.get(el).each((meta) => {
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get(
+          `meta[property^="og:"],meta[property^="article:"],meta[property^="profile:"]`
+        ).each((meta) => {
           cy.wrap(meta).toMatchSnapshot();
         });
       });
     });
 
     it("should render the Twitter tags", () => {
-      cy.visitSSR(fullURL(link), 'meta[name^="twitter:"]').then((el) => {
-        cy.get(el).each((meta) => {
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('meta[name^="twitter:"]').each((meta) => {
           cy.wrap(meta).toMatchSnapshot();
         });
       });
     });
 
     it("should render the schema tag", () => {
-      cy.visitSSR(fullURL(link), 'script[type="application/ld+json"]').then(
-        (el) => {
-          cy.get(el).toMatchSnapshot();
-        }
-      );
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('script[type="application/ld+json"]').toMatchSnapshot();
+      });
     });
   };
 
