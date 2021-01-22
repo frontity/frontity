@@ -13,43 +13,14 @@ describe("Yoast Package", () => {
     cy.task("removeAllPlugins");
   });
 
-  const cypressRequestAndParse = (link) => {
-    return cy
-      .request(`http://localhost:3001${link}?frontity_name=yoast-package`)
-      .then((response) => parseHTML(response.body));
-  };
-
   /**
-   * The DOMparser.
+   * Generates the full url to be loaded and tested.
+   *
+   * @param link - The pathname to wich the test should navigate.
+   * @returns The full url.
    */
-  const parser = new DOMParser();
-  const portal = document.createElement("iframe");
-  document.body.appendChild(portal);
-
-  const apendChildrenTo = (children, target) => {
-    // Clear out the previous content
-    target.innerHTML = "";
-
-    // Append each elment
-    children.forEach((element) => {
-      target.appendChild(element);
-    });
-  };
-
-  const parseHTML = (text) => {
-    const doc = parser.parseFromString(text, "text/html");
-
-    apendChildrenTo(
-      Array.from(doc.head.childNodes),
-      portal.contentDocument.head
-    );
-    apendChildrenTo(
-      Array.from(doc.body.childNodes),
-      portal.contentDocument.body
-    );
-
-    return portal.contentDocument;
-  };
+  const fullURL = (link) =>
+    `http://localhost:3001${link}?frontity_name=yoast-package`;
 
   /**
    * Check the title for the current page is the given one.
@@ -59,8 +30,8 @@ describe("Yoast Package", () => {
    */
   const checkTitle = (link, title) => {
     it("should render the correct title", () => {
-      cypressRequestAndParse(link).then((html) => {
-        cy.get(html.querySelector("title")).should("contain", title);
+      cy.visitSSR(fullURL(link), "title").then((el) => {
+        cy.get(el).should("contain", title);
       });
     });
   };
@@ -78,47 +49,42 @@ describe("Yoast Package", () => {
    */
   const checkMetaTags = (link) => {
     it("should render the correct canonical URL", () => {
-      cypressRequestAndParse(link).then((html) => {
-        cy.get(html.querySelector('link[rel="canonical"]')).toMatchSnapshot();
+      cy.visitSSR(fullURL(link), 'link[rel="canonical"]').then((el) => {
+        cy.get(el).toMatchSnapshot();
       });
     });
 
     it("should render the robots tag", () => {
-      cypressRequestAndParse(link).then((html) => {
-        cy.get(html.querySelector('meta[name="robots"]')).toMatchSnapshot();
+      cy.visitSSR(fullURL(link), 'meta[name="robots"]').then((el) => {
+        cy.get(el).toMatchSnapshot();
       });
     });
 
     it("should render the Open Graph tags", () => {
-      cypressRequestAndParse(link).then((html) => {
-        cy.get(
-          html.querySelectorAll(
-            `
-          meta[property^="og:"],
-          meta[property^="article:"],
-          meta[property^="profile:"]
-        `
-          )
-        ).each((meta) => {
+      cy.visitSSR(
+        fullURL(link),
+        `meta[property^="og:"],meta[property^="article:"],meta[property^="profile:"]`
+      ).then((el) => {
+        cy.get(el).each((meta) => {
           cy.wrap(meta).toMatchSnapshot();
         });
       });
     });
 
     it("should render the Twitter tags", () => {
-      cypressRequestAndParse(link).then((html) => {
-        cy.get(html.querySelector('meta[name^="twitter:"]')).each((meta) => {
+      cy.visitSSR(fullURL(link), 'meta[name^="twitter:"]').then((el) => {
+        cy.get(el).each((meta) => {
           cy.wrap(meta).toMatchSnapshot();
         });
       });
     });
 
     it("should render the schema tag", () => {
-      cypressRequestAndParse(link).then((html) => {
-        cy.get(
-          html.querySelector('script[type="application/ld+json"]')
-        ).toMatchSnapshot();
-      });
+      cy.visitSSR(fullURL(link), 'script[type="application/ld+json"]').then(
+        (el) => {
+          cy.get(el).toMatchSnapshot();
+        }
+      );
     });
   };
 

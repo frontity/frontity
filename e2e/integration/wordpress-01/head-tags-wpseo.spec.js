@@ -16,42 +16,49 @@ describe("Head Tags - WP SEO 0.13", () => {
   });
 
   /**
+   * Generates the full url to be loaded and tested.
+   * @param link - The pathname to wich the test should navigate
+   * @returns The full url
+   */
+  const fullURL = (link) =>
+    `http://localhost:3001${link}?frontity_name=head-tags`;
+
+  /**
    * Check the title for the current page is the given one.
    *
+   * @param link - The given link.
    * @param title - The page title for the given link.
    */
-  const checkTitle = (title) => {
+  const checkTitle = (link, title) => {
     it("should render the correct title", () => {
-      cy.get("title").should("contain", title);
+      cy.visitSSR(fullURL(link), "title").then((el) => {
+        cy.get(el).should("contain", title);
+      });
     });
   };
 
   /**
    * Ensure that the canonical link has been rendered.
+   * @param link - The given link.
    */
-  const checkCanonical = () => {
+  const checkCanonical = (link) => {
     it("should render the correct canonical link", () => {
-      cy.get('link[rel="canonical"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link), 'link[rel="canonical"]').then((el) => {
+        cy.get(el).toMatchSnapshot();
+      });
     });
   };
 
   /**
    * Ensure that the ld+json schema has been rendered.
+   * @param link - The given link.
    */
-  const checkCustomTag = () => {
+  const checkCustomTag = (link) => {
     it("should render a custom tag", () => {
-      cy.get('meta[name="custom-tag"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link), 'meta[name="custom-tag"]').then((el) => {
+        cy.get(el).toMatchSnapshot();
+      });
     });
-  };
-
-  /**
-   * Visit the specified link with scripts disabled.
-   *
-   * @param link - The link of the page.
-   * @param options - Visit options.
-   */
-  const visitLink = (link, options) => {
-    cy.visit(`http://localhost:3001${link}?frontity_name=head-tags`, options);
   };
 
   /**
@@ -72,10 +79,9 @@ describe("Head Tags - WP SEO 0.13", () => {
     const link = "/hello-world/";
     const title = "Post: Hello world! ~ Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkCustomTag(link);
   });
 
   /**
@@ -85,10 +91,9 @@ describe("Head Tags - WP SEO 0.13", () => {
     const link = "/sample-page/";
     const title = "Page: Sample Page ~ Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkCustomTag(link);
   });
 
   /**
@@ -98,14 +103,12 @@ describe("Head Tags - WP SEO 0.13", () => {
     const link = "/category/nature/";
     const title = "Nature archives ~ Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-
     /**
      * We don't check the canonical for any archive because it is not included
      * by the WordPress theme when the WP SEO plugin is used.
      */
-    checkTitle(title);
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCustomTag(link);
   });
 
   /**
@@ -115,14 +118,12 @@ describe("Head Tags - WP SEO 0.13", () => {
     const link = "/tag/japan/";
     const title = "Japan archives ~ Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-
     /**
      * We don't check the canonical for any archive because it is not included
      * by the WordPress theme when the WP SEO plugin is used.
      */
-    checkTitle(title);
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCustomTag(link);
   });
 
   /**
@@ -132,14 +133,12 @@ describe("Head Tags - WP SEO 0.13", () => {
     const link = "/author/luisherranz";
     const title = "luisherranz, author at Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-
     /**
      * We don't check the canonical for any archive because it is not included
      * by the WordPress theme when the WP SEO plugin is used.
      */
-    checkTitle(title);
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCustomTag(link);
   });
 
   /**
@@ -149,14 +148,12 @@ describe("Head Tags - WP SEO 0.13", () => {
     const link = "/";
     const title = "Test WP Site ~ Just another WordPress site";
 
-    before(() => visitLink(link, { script: false }));
-
     /**
      * We don't check the canonical for any archive because it is not included
      * by the WordPress theme when the WP SEO plugin is used.
      */
-    checkTitle(title);
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCustomTag(link);
   });
 
   /**
@@ -166,10 +163,9 @@ describe("Head Tags - WP SEO 0.13", () => {
     const link = "/movie/the-terminator/";
     const title = "Movie: The Terminator ~ Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkCustomTag(link);
   });
 
   /**
@@ -179,14 +175,12 @@ describe("Head Tags - WP SEO 0.13", () => {
     const title = "Movies archive ~ Test WP Site";
     const link = "/movies/";
 
-    before(() => visitLink(link, { script: false }));
-
     /**
      * We don't check the canonical for any archive because it is not included
      * by the WordPress theme when the WP SEO plugin is used.
      */
-    checkTitle(title);
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCustomTag(link);
   });
 
   /**
@@ -196,14 +190,12 @@ describe("Head Tags - WP SEO 0.13", () => {
     const link = "/actor/linda-hamilton/";
     const title = "Linda Hamilton archives ~ Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-
     /**
      * We don't check the canonical for any archive because it is not included
      * by the WordPress theme when the WP SEO plugin is used.
      */
-    checkTitle(title);
-    checkCustomTag();
+    checkTitle(link, title);
+    checkCustomTag(link);
   });
 
   /**
@@ -211,7 +203,8 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("Title tag", () => {
     it("should be correct while navigating", () => {
-      visitLink("/");
+      cy.visit(fullURL("/"));
+
       cy.get("title").should(
         "contain",
         "Test WP Site ~ Just another WordPress site"

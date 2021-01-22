@@ -14,13 +14,25 @@ describe("Head Tags - Yoast 13.5", () => {
   });
 
   /**
+   * Generates the full url to be loaded and tested.
+   *
+   * @param link - The pathname to wich the test should navigate.
+   * @returns The full url.
+   */
+  const fullURL = (link) =>
+    `http://localhost:3001${link}?frontity_name=head-tags`;
+
+  /**
    * Check the title for the current page is the given one.
    *
+   * @param link - The given link.
    * @param title - The page title for the given link.
    */
-  const checkTitle = (title) => {
+  const checkTitle = (link, title) => {
     it("should render the correct title", () => {
-      cy.get("title").should("contain", title);
+      cy.visitSSR(fullURL(link), "title").then((el) => {
+        cy.get(el).should("contain", title);
+      });
     });
   };
 
@@ -30,50 +42,54 @@ describe("Head Tags - Yoast 13.5", () => {
    * This way, snapshots are generated with a meaningful name and are easy to
    * read and check by a human being.
    *
+   * @param link - The given link.
    * @remarks The <title> tag is not tested using snapshots. That's because the
    * plugin we are using to generate snapshots gives an error when trying to
    * generate a snapshot for that tag (it also doesn't work well with strings).
    */
-  const checkMetaTags = () => {
+  const checkMetaTags = (link) => {
     it("should render the correct canonical URL", () => {
-      cy.get('link[rel="canonical"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link), 'link[rel="canonical"]').then((el) => {
+        cy.get(el).toMatchSnapshot();
+      });
     });
 
     it("should render the robots tag", () => {
-      cy.get('meta[name="robots"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link), 'meta[name="robots"]').then((el) => {
+        cy.get(el).toMatchSnapshot();
+      });
     });
 
     it("should render the Open Graph tags", () => {
-      cy.get(
+      cy.visitSSR(
+        fullURL(link),
         `
-          meta[property^="og:"],
-          meta[property^="article:"],
-          meta[property^="profile:"]
-        `
-      ).each((meta) => {
-        cy.wrap(meta).toMatchSnapshot();
+      meta[property^="og:"],
+      meta[property^="article:"],
+      meta[property^="profile:"]
+      `
+      ).then((el) => {
+        cy.get(el).each((meta) => {
+          cy.wrap(meta).toMatchSnapshot();
+        });
       });
     });
 
     it("should render the Twitter tags", () => {
-      cy.get('meta[name^="twitter:"]').each((meta) => {
-        cy.wrap(meta).toMatchSnapshot();
+      cy.visitSSR(fullURL(link), 'meta[name^="twitter:"]').then((el) => {
+        cy.get(el).each((meta) => {
+          cy.wrap(meta).toMatchSnapshot();
+        });
       });
     });
 
     it("should render the schema tag", () => {
-      cy.get('script[type="application/ld+json"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link), 'script[type="application/ld+json"]').then(
+        (el) => {
+          cy.get(el).toMatchSnapshot();
+        }
+      );
     });
-  };
-
-  /**
-   * Visit the specified link with scripts disabled.
-   *
-   * @param link - The link of the page.
-   * @param options - Visit options.
-   */
-  const visitLink = (link, options) => {
-    cy.visit(`http://localhost:3001${link}?frontity_name=head-tags`, options);
   };
 
   /**
@@ -94,9 +110,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const link = "/hello-world/";
     const title = "Hello World From Yoast! - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -106,9 +121,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const link = "/sample-page/";
     const title = "Sample Page - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -118,9 +132,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const link = "/category/nature/";
     const title = "Nature Archives - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -130,9 +143,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const link = "/tag/japan/";
     const title = "Japan Archives - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -142,9 +154,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const link = "/author/luisherranz";
     const title = "luisherranz, Author at Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -154,9 +165,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const link = "/";
     const title = "Test WP Site - Just another WordPress site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -166,9 +176,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const link = "/movie/the-terminator/";
     const title = "The Terminator - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -178,9 +187,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const title = "Movies Archive - Test WP Site";
     const link = "/movies/";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -190,9 +198,8 @@ describe("Head Tags - Yoast 13.5", () => {
     const link = "/actor/linda-hamilton/";
     const title = "Linda Hamilton Archives - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -200,7 +207,8 @@ describe("Head Tags - Yoast 13.5", () => {
    */
   describe("Title tag", () => {
     it("should be correct while navigating", () => {
-      visitLink("/");
+      cy.visit(fullURL("/"));
+
       cy.get("title").should(
         "contain",
         "Test WP Site - Just another WordPress site"
