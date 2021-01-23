@@ -3,4 +3,12 @@ module.exports = {
     ["@babel/preset-env", { targets: { node: "current" } }],
     ["@babel/preset-react", { runtime: "automatic" }],
   ],
+  plugins: [
+    [
+      "@emotion/babel-plugin",
+      {
+        autoLabel: "never",
+      },
+    ],
+  ],
 };
