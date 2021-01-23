@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { initPlugin } from "cypress-plugin-snapshots/plugin";
 import execa from "execa";
 
