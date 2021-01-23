@@ -1,6 +1,21 @@
-import TinyRouter from "../types";
+import TinyRouter, { Packages } from "../types";
 import { warn, observe, batch } from "frontity";
 import { isError, isRedirection } from "@frontity/source";
+import { Derived } from "frontity/types";
+import { Data } from "@frontity/source/types";
+
+/**
+ * This is an experimental function to be able to resolve the types of derived
+ * state (Derived type) and Actions (Action type). It is not complete and only
+ * works for this case, but it is something that if proven useful could be
+ * exposed in "frontity/types".
+ *
+ * @param derivedOrAction - The definition of the action.
+ * @returns The same value in JavaScript, but the resolved value in TypeScript.
+ */
+const resolved = <T extends (...args: any) => any>(
+  derivedOrAction: T
+): ReturnType<T> => derivedOrAction as any;
 
 /**
  * Set the URL.
@@ -153,9 +168,20 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 
     // If the link from the browser and the link from the server are different,
     // point the first one to the same data object pointed by the second one.
+    // This is a fix to solve this issue https://github.com/frontity/frontity/issues/623
+    // and we should remove it once we have Frontity Hooks/Filters.
+    // It is based on some tips of this talk: https://www.youtube.com/watch?v=wNsKJMSqtAk
     if (link !== state.frontity.initialLink) {
       if (state.source) {
-        state.source.data[link] = state.source.get(state.frontity.initialLink);
+        /**
+         * Derived state pointing to the initial data object.
+         *
+         * @param store - The Frontity store.
+         * @returns The initial data object.
+         */
+        const initialDataObject: Derived<Packages, Data> = ({ state }) =>
+          state.source.get(state.frontity.initialLink);
+        state.source.data[link] = resolved(initialDataObject);
       }
 
       // Update the value of `state.router.link`.
