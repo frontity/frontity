@@ -8,7 +8,8 @@ import { Data } from "@frontity/source/types";
  * This is an experimental function to be able to resolve the types of derived
  * state (Derived type) and Actions (Action type). It is not complete and only
  * works for this case, but it is something that if proven useful could be
- * exposed in "frontity/types".
+ * exposed in "frontity/types". It is based on some tips of this talk:
+ * https://www.youtube.com/watch?v=wNsKJMSqtAk.
  *
  * @param derivedOrAction - The definition of the action.
  * @returns The same value in JavaScript, but the resolved value in TypeScript.
@@ -148,8 +149,9 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     // The link stored in `state.router.link` may be wrong if the server changes
     // it in some cases (see https://github.com/frontity/frontity/issues/623).
     // For that reason, it is replaced with the current link in the browser.
+    // We should remove it once we have Frontity Hooks/Filters.
 
-    // Get the browser URL and remove the Frontity options.
+    // Get the browser URL to remove the Frontity options.
     const browserURL = new URL(location.href);
     Array.from(browserURL.searchParams.keys()).forEach((key) => {
       if (key.startsWith("frontity_")) browserURL.searchParams.delete(key);
@@ -166,11 +168,6 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       link
     );
 
-    // If the link from the browser and the link from the server are different,
-    // point the first one to the same data object pointed by the second one.
-    // This is a fix to solve this issue https://github.com/frontity/frontity/issues/623
-    // and we should remove it once we have Frontity Hooks/Filters.
-    // It is based on some tips of this talk: https://www.youtube.com/watch?v=wNsKJMSqtAk
     if (link !== state.frontity.initialLink) {
       if (state.source) {
         /**
