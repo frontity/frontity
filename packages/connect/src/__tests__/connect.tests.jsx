@@ -266,7 +266,7 @@ describe("useConnect", () => {
   });
 
   it("should log a warning if the component is not connected", () => {
-    // eslint-disable-next-line
+    // eslint-disable-next-line no-import-assign
     error.warn = jest.fn();
 
     const Comp = () => {
