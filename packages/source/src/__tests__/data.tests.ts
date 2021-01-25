@@ -21,7 +21,7 @@ import {
   RedirectionData,
 } from "../../types/data";
 import {
-  // Guards.
+  // Type Guards.
   isError,
   isArchive,
   isSearch,
