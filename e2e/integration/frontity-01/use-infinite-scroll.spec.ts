@@ -1,24 +1,37 @@
+// Add the experimental fetch polyfill only for these tests. The new
+// `cy.intercept` API doesn't allow to change the response of a given URL once
+// it has been set, so we need to still use `cy.server` and `cy.router` here for
+// some tests.
+//
+// See https://github.com/cypress-io/cypress/issues/9302.
+Cypress.config({
+  experimentalFetchPolyfill: true,
+} as any);
+
 describe("UseInfiniteScroll", () => {
   it("useArchiveInfiniteScroll should load next page", () => {
     cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
-      fixture: "use-infinite-scroll/page-1.json",
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
-        "x-wp-total": "20",
-        "x-wp-totalpages": "2",
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
       },
-      delayMs: 300,
+      delay: 300,
     }).as("pageOne");
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
-      fixture: "use-infinite-scroll/page-2.json",
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
-        "x-wp-total": "20",
-        "x-wp-totalpages": "2",
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
       },
-      delayMs: 300,
+      delay: 300,
     }).as("pageTwo");
 
     // Changes url to `/archive`.
@@ -44,23 +57,25 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/archive/");
   });
 
-  it.only("useArchiveInfiniteScroll should return `isError` true", () => {
+  it("useArchiveInfiniteScroll should return `isError` true", () => {
     cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/");
 
-    // Stubs calls to REST API.
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
-      fixture: "use-infinite-scroll/page-1.json",
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
-        "x-wp-total": "20",
-        "x-wp-totalpages": "2",
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
       },
-      delayMs: 300,
+      delay: 300,
     }).as("pageOne");
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
-      statusCode: 503,
-      body: {},
-      delayMs: 300,
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      status: 503,
+      response: {},
+      delay: 300,
     }).as("pageTwo");
 
     // Changes url to `/archive`.
@@ -89,13 +104,14 @@ describe("UseInfiniteScroll", () => {
     cy.get("[data-test='error']").should("exist").scrollIntoView();
     cy.location("href").should("eq", "http://localhost:3001/archive/");
 
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
-      fixture: "use-infinite-scroll/page-2.json",
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
-        "x-wp-total": "20",
-        "x-wp-totalpages": "2",
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
       },
-      delayMs: 300,
+      delay: 300,
     }).as("pageTwo");
 
     // Try one more time.
@@ -113,25 +129,25 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
-      fixture: "use-infinite-scroll/page-1.json",
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
-        "x-wp-total": "20",
-        "x-wp-totalpages": "2",
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
       },
-      delayMs: 300,
+      delay: 300,
     }).as("pageOne");
-    cy.intercept(
-      "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
-      {
-        fixture: "use-infinite-scroll/post-1.json",
-        headers: {
-          "x-wp-total": "1",
-          "x-wp-totalpages": "1",
-        },
-        delayMs: 300,
-      }
-    ).as("postOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
+      response: "fixture:use-infinite-scroll/post-1.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("postOne");
 
     // Changes url to `/post-type`.
     cy.get("[data-test='to-first-post']").should("exist").click();
@@ -156,29 +172,30 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/");
 
     // Stubs calls to REST API.
-    cy.intercept(
-      "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-10",
-      {
-        fixture: "use-infinite-scroll/post-last.json",
-        headers: {
-          "x-wp-total": "1",
-          "x-wp-totalpages": "1",
-        },
-        delayMs: 300,
-      }
-    ).as("lastPost");
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1", {
-      fixture: "use-infinite-scroll/page-1.json",
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-10",
+      response: "fixture:use-infinite-scroll/post-last.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("lastPost");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
       headers: {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delayMs: 300,
+      delay: 300,
     }).as("pageOne");
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
-      statusCode: 503,
-      body: {},
-      delayMs: 300,
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      status: 503,
+      response: {},
+      delay: 300,
     }).as("pageTwo");
 
     // Changes url to `/post-type`.
@@ -206,13 +223,14 @@ describe("UseInfiniteScroll", () => {
     cy.get("[data-test='error']").should("exist").scrollIntoView();
     cy.location("href").should("eq", "http://localhost:3001/post-10/");
 
-    cy.intercept("https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2", {
-      fixture: "use-infinite-scroll/page-2.json",
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
       headers: {
         "x-wp-total": "20",
         "x-wp-totalpages": "2",
       },
-      delayMs: 300,
+      delay: 300,
     }).as("pageTwo");
 
     // Try one more time.
