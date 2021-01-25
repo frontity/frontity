@@ -1,7 +1,7 @@
 describe("Head Tags - WP SEO 0.13", () => {
   before(() => {
     cy.task("installPlugin", {
-      name: "https://github.com/alleyinteractive/wp-seo/archive/v0.13.0.zip",
+      name: "https://github.com/alleyinteractive/wp-seo/archive/master.zip",
     });
     cy.task("installPlugin", { name: "rest-api-head-tags" });
     cy.task("installPlugin", { name: "custom-post-type-ui" });
