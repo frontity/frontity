@@ -36,8 +36,8 @@
     "@frontity/core": "^1.9.1"
   },
   "dependencies": {
-    "@emotion/core": "^10.1.1",
-    "@emotion/styled": "^10.0.27",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
     "@frontity/error": "^0.1.1",
     "@frontity/type-declarations": "^1.1.0",
     "@frontity/types": "^1.6.0",

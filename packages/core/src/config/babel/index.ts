@@ -69,15 +69,39 @@ const getConfig = (target: Target): TransformOptions => {
     [
       "@babel/preset-react",
       {
+        // This one turns on the jsx-runtime
         runtime: "automatic",
+        // This option allows emotion to adopt the jsx-runtime and make
+        // the css prop work
+        importSource: "@emotion/react",
       },
     ],
-    // Babel plugin for Emotion CSS property and other goodness.
-    "@emotion/babel-preset-css-prop",
   ];
   const plugins = [
     //
-    "babel-plugin-frontity",
+    // Babel plugin for Emotion CSS property and other goodness.
+    [
+      "@emotion/babel-plugin",
+      {
+        importMap: {
+          frontity: {
+            css: {
+              canonicalImport: ["@emotion/react", "css"],
+            },
+            // TODO: Filled an issue on emotion side for this https://github.com/emotion-js/emotion/issues/2218
+            // keyframes: {
+            //   canonicalImport: ["@emotion/react", "keyframes"],
+            // },
+            Global: {
+              canonicalImport: ["@emotion/react", "Global"],
+            },
+            styled: {
+              canonicalImport: ["@emotion/styled", "default"],
+            },
+          },
+        },
+      },
+    ],
     // Support for babel macros. See: https://community.frontity.org/t/tailwindcss-with-babel-macro-plugin-and-css-in-js/1040
     "babel-plugin-macros",
     // Support for dynamic imports: import("./my-file")
