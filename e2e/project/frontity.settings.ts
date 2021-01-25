@@ -384,6 +384,27 @@ const settings: Settings<
     ],
   },
   {
+    name: "redirections",
+    state: {
+      frontity: {
+        url: "http://localhost:3001",
+      },
+    },
+    packages: [
+      "e2e-redirections",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            url: "http://localhost:8080",
+            redirections: "404",
+          },
+        },
+      },
+    ],
+  },
+  {
     name: "embedded-mode",
     match: [process.env.FRONTITY_SERVER],
     state: {

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Action, Derived, Settings, State } from "frontity/types";
+import { Action, Derived, Settings } from "frontity/types";
 import Source from "../../types";
 
 // Source.
@@ -21,6 +20,7 @@ const source1 = (libraries: Source["libraries"]): Source => {
         attachment: {},
         type: {},
         taxonomy: {},
+        redirections: "no",
       },
     },
     actions: {
@@ -74,6 +74,7 @@ const source2: MySource = {
       myOwnProp: "some value",
       type: {},
       taxonomy: {},
+      redirections: "no",
     },
   },
   actions: {
@@ -135,4 +136,6 @@ const settings4: Settings<MySource> = {
   ],
 };
 
-test("Types are fine!", () => {});
+test("Types are fine!", () => {
+  // Do nothing here.
+});

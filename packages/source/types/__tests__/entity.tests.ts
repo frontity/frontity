@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   PostEntity,
   AuthorEntity,
@@ -400,7 +399,6 @@ const postType: TypeEntity = {
   },
 };
 
-// eslint-disable-next-line jest/expect-expect
 test("Types are fine!", () => {
   // Do nothing here.
 });
