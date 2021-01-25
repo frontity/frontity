@@ -154,3 +154,14 @@ Default: `all`.
 If present, it will start the Frontity dev server using `node --inspect`.
 
 Default: `false`.
+
+### `--spec`: string
+
+The tests spec to run. This should be the file name spec. For example if you want to run a single spec file, you should pass the name without the `.spec.js` suffix, like so:
+
+```sh
+# This will run only the script.spec.js file in the `./integrations` folder
+node e2e.js --spec script
+```
+
+Default: `null`.
