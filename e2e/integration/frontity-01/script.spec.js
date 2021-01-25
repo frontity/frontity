@@ -17,14 +17,11 @@ describe("Script", () => {
   });
 
   it("should access code from the external script", () => {
-    let isMoment;
-    cy.window()
-      .then((win) => {
-        isMoment = win.moment()._isAMomentObject;
-      })
-      .then(() => {
-        expect(isMoment).toBe(true);
-      });
+    // This wait here is making up for async load times for `moment`
+    cy.wait(100);
+    cy.window().then((win) => {
+      expect(win.moment()._isAMomentObject).toBe(true);
+    });
   });
 
   it("should load inline script", () => {
