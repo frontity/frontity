@@ -14,13 +14,25 @@ describe("Yoast Package", () => {
   });
 
   /**
+   * Generates the full url to be loaded and tested.
+   *
+   * @param link - The pathname to wich the test should navigate.
+   * @returns The full url.
+   */
+  const fullURL = (link) =>
+    `http://localhost:3001${link}?frontity_name=yoast-package`;
+
+  /**
    * Check the title for the current page is the given one.
    *
+   * @param link - The given link to execute the request.
    * @param title - The page title for the given link.
    */
-  const checkTitle = (title) => {
+  const checkTitle = (link, title) => {
     it("should render the correct title", () => {
-      cy.get("title").should("contain", title);
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get("title").should("contain", title);
+      });
     });
   };
 
@@ -33,50 +45,44 @@ describe("Yoast Package", () => {
    * @remarks The <title> tag is not tested using snapshots. That's because the
    * plugin we are using to generate snapshots gives an error when trying to
    * generate a snapshot for that tag (it also doesn't work well with strings).
+   * @param link - The link to execute the request against.
    */
-  const checkMetaTags = () => {
+  const checkMetaTags = (link) => {
     it("should render the correct canonical URL", () => {
-      cy.get('link[rel="canonical"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('link[rel="canonical"]').toMatchSnapshot();
+      });
     });
 
     it("should render the robots tag", () => {
-      cy.get('meta[name="robots"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('meta[name="robots"]').toMatchSnapshot();
+      });
     });
 
     it("should render the Open Graph tags", () => {
-      cy.get(
-        `
-          meta[property^="og:"],
-          meta[property^="article:"],
-          meta[property^="profile:"]
-        `
-      ).each((meta) => {
-        cy.wrap(meta).toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get(
+          `meta[property^="og:"],meta[property^="article:"],meta[property^="profile:"]`
+        ).each((meta) => {
+          cy.wrap(meta).toMatchSnapshot();
+        });
       });
     });
 
     it("should render the Twitter tags", () => {
-      cy.get('meta[name^="twitter:"]').each((meta) => {
-        cy.wrap(meta).toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('meta[name^="twitter:"]').each((meta) => {
+          cy.wrap(meta).toMatchSnapshot();
+        });
       });
     });
 
     it("should render the schema tag", () => {
-      cy.get('script[type="application/ld+json"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('script[type="application/ld+json"]').toMatchSnapshot();
+      });
     });
-  };
-
-  /**
-   * Visit the specified link with scripts disabled.
-   *
-   * @param link - The link of the page.
-   * @param options - Visit options.
-   */
-  const visitLink = (link, options) => {
-    cy.visit(
-      `http://localhost:3001${link}?frontity_name=yoast-package`,
-      options
-    );
   };
 
   /**
@@ -97,9 +103,8 @@ describe("Yoast Package", () => {
     const link = "/hello-world/";
     const title = "Hello World From Yoast! - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -109,9 +114,8 @@ describe("Yoast Package", () => {
     const link = "/sample-page/";
     const title = "Sample Page - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -121,9 +125,8 @@ describe("Yoast Package", () => {
     const link = "/category/nature/";
     const title = "Nature Archives - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -133,9 +136,8 @@ describe("Yoast Package", () => {
     const link = "/tag/japan/";
     const title = "Japan Archives - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -145,9 +147,8 @@ describe("Yoast Package", () => {
     const link = "/author/luisherranz";
     const title = "luisherranz, Author at Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -157,9 +158,8 @@ describe("Yoast Package", () => {
     const link = "/";
     const title = "Test WP Site - Just another WordPress site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -169,9 +169,8 @@ describe("Yoast Package", () => {
     const link = "/movie/the-terminator/";
     const title = "The Terminator - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -181,9 +180,8 @@ describe("Yoast Package", () => {
     const title = "Movies Archive - Test WP Site";
     const link = "/movies/";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -193,9 +191,8 @@ describe("Yoast Package", () => {
     const link = "/actor/linda-hamilton/";
     const title = "Linda Hamilton Archives - Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkMetaTags();
+    checkTitle(link, title);
+    checkMetaTags(link);
   });
 
   /**
@@ -203,7 +200,9 @@ describe("Yoast Package", () => {
    */
   describe("Title tag", () => {
     it("should be correct while navigating", () => {
-      visitLink("/");
+      // Navigate to the root
+      cy.visit(`http://localhost:3001/?frontity_name=yoast-package`);
+
       cy.get("title").should(
         "contain",
         "Test WP Site - Just another WordPress site"
