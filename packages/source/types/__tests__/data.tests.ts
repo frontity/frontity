@@ -54,6 +54,4 @@ const taxonomy: TaxonomyData = term;
 expectType<true>(taxonomy.isTaxonomy);
 expectType<true>(taxonomy.isTerm);
 
-test("Types are fine!", () => {
-  // Do nothing here.
-});
+test("Types are fine!", () => {});

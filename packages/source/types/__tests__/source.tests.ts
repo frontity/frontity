@@ -136,6 +136,4 @@ const settings4: Settings<MySource> = {
   ],
 };
 
-test("Types are fine!", () => {
-  // Do nothing here.
-});
+test("Types are fine!", () => {});
