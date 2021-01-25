@@ -170,7 +170,7 @@ process.env["CYPRESS_FRONTITY_MODE"] =
             env: { WORDPRESS_VERSION: wpVersion },
             browser,
             spec: spec
-              ? `./integration/**/**/${spec}.spec.js`
+              ? `./integration/**/${spec}.spec.js`
               : `./integration/${suite}/**/*.spec.js`,
           });
         }
