@@ -12,6 +12,7 @@
     "cypress": "^6.2.1",
     "cypress-plugin-snapshots": "^1.4.3",
     "execa": "^4.0.3",
+    "expect": "^26.6.2",
     "minimist": "^1.2.5",
     "wait-on": "^5.2.1"
   }

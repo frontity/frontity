@@ -1,4 +1,4 @@
-/* eslint-disable jest/valid-expect */
+import expect from "expect";
 
 describe("Script", () => {
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe("Script", () => {
       .its("moment")
       .should("exist")
       .then((moment) => {
-        expect(moment()._isAMomentObject).to.equal(true);
+        expect(moment()._isAMomentObject).toBe(true);
       });
   });
 
@@ -34,7 +34,6 @@ describe("Script", () => {
    * This one was added to check this bug was solved:
    * https://github.com/frontity/frontity/issues/592.
    */
-  // eslint-disable-next-line jest/expect-expect
   it("should not fail when scripts are unmounted", () => {
     cy.get("[data-test-id='unmount-script']").click();
   });
