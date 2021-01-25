@@ -147,8 +147,7 @@ const tasks = {
   },
 
   /**
-   * Start a server that proxies requests from WordPress, but with a different
-   * URL.
+   * Run a command in the CLI of the machine running the tests.
    *
    * @param options - Defined in {@link RunCommandOptions}.
    *
