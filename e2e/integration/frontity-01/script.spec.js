@@ -16,13 +16,11 @@ describe("Script", () => {
   });
 
   it("should access code from the external script", () => {
-    let isMoment;
     cy.window()
-      .then((win) => {
-        isMoment = win.moment()._isAMomentObject;
-      })
-      .then(() => {
-        expect(isMoment).toBe(true);
+      .its("moment")
+      .should("exist")
+      .then((moment) => {
+        expect(moment()._isAMomentObject).toBe(true);
       });
   });
 

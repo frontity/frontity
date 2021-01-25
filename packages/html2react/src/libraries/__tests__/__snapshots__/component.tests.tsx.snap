@@ -12,16 +12,7 @@ Array [
      for testing purposes.
   </p>,
   <div
-    className="hello"
-    css={
-      Object {
-        "map": undefined,
-        "name": "12gt2kf",
-        "next": undefined,
-        "styles": "width: 180px;",
-        "toString": [Function],
-      }
-    }
+    className="hello css-12gt2kf"
   >
     <img
       src="http://example.com/img.jpg"

@@ -14,18 +14,7 @@ describe("GooglePublisherTag", () => {
 
     expect(gpt).toMatchInlineSnapshot(`
       <div
-        css={
-          Object {
-            "map": undefined,
-            "name": "w9ytu2",
-            "next": undefined,
-            "styles": "
-              min-width: 320px;
-              min-height: 100px;
-            ",
-            "toString": [Function],
-          }
-        }
+        className="css-w9ytu2"
         id="gpt-id-123"
       />
     `);
@@ -43,18 +32,7 @@ describe("GooglePublisherTag", () => {
 
     expect(gpt).toMatchInlineSnapshot(`
       <div
-        css={
-          Object {
-            "map": undefined,
-            "name": "w9ytu2",
-            "next": undefined,
-            "styles": "
-              min-width: 320px;
-              min-height: 100px;
-            ",
-            "toString": [Function],
-          }
-        }
+        className="css-w9ytu2"
         id="gpt-id-123_2020_08_post-with-long-link"
       />
     `);
@@ -74,18 +52,7 @@ describe("GooglePublisherTag", () => {
 
     expect(gpt).toMatchInlineSnapshot(`
       <div
-        css={
-          Object {
-            "map": undefined,
-            "name": "xhftkh",
-            "next": undefined,
-            "styles": "
-              min-width: 300px;
-              min-height: 100px;
-            ",
-            "toString": [Function],
-          }
-        }
+        className="css-xhftkh"
         id="gpt-id-123"
       />
     `);

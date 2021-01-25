@@ -328,6 +328,55 @@ describe("Link", () => {
     // the link that does not match should remain the same
     expect(anchor.href).toEqual(linkThatDoesNotMatch);
   });
+
+  test("it does not fetch tel:, sms: and mailto: links", () => {
+    const onClick = jest.fn();
+
+    act(() => {
+      render(
+        <Provider value={store}>
+          <Link
+            link="mailto:email@domain.com"
+            className="my-link"
+            onClick={onClick}
+          >
+            This is a link
+          </Link>
+          <Link
+            link="tel:1-562-867-5309"
+            className="my-link-2"
+            onClick={onClick}
+          >
+            This is a link
+          </Link>
+          <Link
+            link="sms:+18664504185&body=Hi%2520there"
+            className="my-link-3"
+            onClick={onClick}
+          >
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.router, "set");
+
+    const anchor = document.querySelector("a.my-link");
+    const anchor2 = document.querySelector("a.my-link-2");
+    const anchor3 = document.querySelector("a.my-link-3");
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor2.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor3.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(onClick).not.toHaveBeenCalled();
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    expect(store.actions.router.set).not.toHaveBeenCalled();
+  });
 });
 
 describe("Link prefetching", () => {
