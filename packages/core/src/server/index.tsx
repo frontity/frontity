@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore, require-atomic-updates */
+/* eslint-disable @typescript-eslint/ban-ts-comment, require-atomic-updates */
 import Koa from "koa";
 import { get } from "koa-route";
 import serve from "koa-static";
@@ -62,7 +62,20 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
         "/static";
 
     // Serve the static files.
-    return mount(publicPath, serve("build/static"))(ctx, next);
+    return mount(
+      publicPath,
+      serve("build/static", {
+        setHeaders(res) {
+          // 'Cache-Control' needs to be Capitalized, otherwise, koa-static will overwrite it
+          // see: https://github.com/koajs/send/blob/527048b6280d1c1f50b554317a248cc2d8151be8/index.js#L145
+          res.setHeader(
+            "Cache-Control",
+            "max-age=31536000,s-maxage=31536000,immutable"
+          );
+          res.setHeader("Access-Control-Allow-Origin", "*");
+        },
+      })
+    )(ctx, next);
   });
 
   // Serve robots.txt from root or default if it doesn't exists.
