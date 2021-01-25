@@ -1,5 +1,5 @@
 /* eslint-disable jest/valid-expect-in-promise */
-import expect from "expect";
+// import expect from "expect";
 
 describe("Script", () => {
   beforeEach(() => {
@@ -17,11 +17,12 @@ describe("Script", () => {
   });
 
   it("should access code from the external script", () => {
-    // This wait here is making up for async load times for `moment`
-    cy.wait(100);
-    cy.window().then((win) => {
-      expect(win.moment()._isAMomentObject).toBe(true);
-    });
+    cy.window()
+      .its("moment")
+      .should("exist")
+      .then((moment) => {
+        expect(moment()._isAMomentObject).toBe(true);
+      });
   });
 
   it("should load inline script", () => {
@@ -34,6 +35,7 @@ describe("Script", () => {
    * This one was added to check this bug was solved:
    * https://github.com/frontity/frontity/issues/592.
    */
+  // eslint-disable-next-line jest/expect-expect
   it("should not fail when scripts are unmounted", () => {
     cy.get("[data-test-id='unmount-script']").click();
   });
