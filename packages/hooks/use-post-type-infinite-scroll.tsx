@@ -292,10 +292,12 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     return "/";
   })();
 
+  // List of links for the different archive pages.
   const pages: string[] = infiniteScroll?.pages
     ? [...infiniteScroll.pages]
     : [archive];
 
+  // List of links for the posts contained in the archive pages.
   const links: string[] = infiniteScroll?.links
     ? [...infiniteScroll.links]
     : [state.router.link];
@@ -349,7 +351,7 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
     lastIndex < items.length - 1 || (isArchive(lastPage) && !!lastPage.next);
   const isFetching =
     last.isFetching || (pages.length > 1 && lastPage.isFetching);
-  const isLastError = !!isError(last) || !!isError(lastPage);
+  const isLastError = isError(last) || isError(lastPage);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
   // Request archive if not present.
@@ -360,6 +362,10 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
 
     if (!data.isReady && !data.isFetching) {
       actions.source.fetch(data.link);
+    }
+
+    if (isError(data)) {
+      actions.source.fetch(data.link, { force: true });
     }
     // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
