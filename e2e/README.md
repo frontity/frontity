@@ -148,3 +148,20 @@ Default: `chrome`
 The tests suite to run. `all` will run all the suites. Each suite represents a different folder in the `e2e/integrations` folder. For example `--suite wordpress-01` will only run the specs found in the `e2e/integrations/wordpress-01` folder.
 
 Default: `all`.
+
+### `--inspect`: boolean
+
+If present, it will start the Frontity dev server using `node --inspect`.
+
+Default: `false`.
+
+### `--spec`: string
+
+The tests spec to run. This should be the file name spec. For example if you want to run a single spec file, you should pass the name without the `.spec.js` suffix, like so:
+
+```sh
+# This will run only the script.spec.js file in the `./integrations` folder
+node e2e.js --spec script
+```
+
+Default: `null`.

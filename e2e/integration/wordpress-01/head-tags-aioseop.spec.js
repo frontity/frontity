@@ -14,42 +14,52 @@ describe("Head Tags - All in One SEO Pack", () => {
   });
 
   /**
+   * Generates the full url to be loaded and tested.
+   *
+   * @param link - The pathname to wich the test should navigate.
+   * @returns The full url.
+   */
+  const fullURL = (link) =>
+    `http://localhost:3001${link}?frontity_name=head-tags`;
+
+  /**
    * Check the title for the current page is the given one.
    *
+   * @param link - The given link.
    * @param title - The page title for the given link.
    */
-  const checkTitle = (title) => {
+  const checkTitle = (link, title) => {
     it("should render the correct title", () => {
-      cy.get("title").should("contain", title);
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get("title").should("contain", title);
+      });
     });
   };
 
   /**
    * Ensure that the canonical link has been rendered.
+   *
+   * @param link - The given link.
    */
-  const checkCanonical = () => {
+  const checkCanonical = (link) => {
     it("should render the correct canonical link", () => {
-      cy.get('link[rel="canonical"]').toMatchSnapshot();
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('link[rel="canonical"]').toMatchSnapshot();
+      });
     });
   };
 
   /**
    * Ensure that the ld+json schema has been rendered.
-   */
-  const checkSchema = () => {
-    it("should render the schema tag", () => {
-      cy.get('script[type="application/ld+json"]').toMatchSnapshot();
-    });
-  };
-
-  /**
-   * Visit the specified link with scripts disabled.
    *
-   * @param link - The link of the page.
-   * @param options - Visit options.
+   * @param link - The given link.
    */
-  const visitLink = (link, options) => {
-    cy.visit(`http://localhost:3001${link}?frontity_name=head-tags`, options);
+  const checkSchema = (link) => {
+    it("should render the schema tag", () => {
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('script[type="application/ld+json"]').toMatchSnapshot();
+      });
+    });
   };
 
   /**
@@ -70,9 +80,8 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/hello-world/";
     const title = "Hello world! | Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
+    checkTitle(link, title);
+    checkCanonical(link);
 
     /**
      * The `checkSchema()` call was replaced here by a check that the schema
@@ -84,7 +93,9 @@ describe("Head Tags - All in One SEO Pack", () => {
      * - 5.5 : `"commentsCount": 1,`.
      */
     it("should render the schema tag", () => {
-      cy.get('script[type="application/ld+json"]').should("not.be.empty");
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('script[type="application/ld+json"]').should("not.be.empty");
+      });
     });
   });
 
@@ -95,10 +106,9 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/sample-page/";
     const title = "Sample Page | Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkSchema();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -108,10 +118,9 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/category/nature/";
     const title = "Nature | Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkSchema();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -121,10 +130,9 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/tag/japan/";
     const title = "Japan | Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkSchema();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -134,15 +142,13 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/author/luisherranz";
     const title = "luisherranz | Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-
     /**
      * We don't check the schema here because it is not included by the
      * _REST API - Head Tags_ plugin when used along with _All in One SEO Pack_,
      * because it is not generated correctly for authors.
      */
-    checkTitle(title);
-    checkCanonical();
+    checkTitle(link, title);
+    checkCanonical(link);
   });
 
   /**
@@ -152,10 +158,9 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/";
     const title = "Test WP Site | Just another WordPress site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkSchema();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -165,10 +170,9 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/movie/the-terminator/";
     const title = "The Terminator | Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkSchema();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -178,10 +182,9 @@ describe("Head Tags - All in One SEO Pack", () => {
     const title = "Movies | Test WP Site";
     const link = "/movies/";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkSchema();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -191,10 +194,9 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/actor/linda-hamilton/";
     const title = "Linda Hamilton | Test WP Site";
 
-    before(() => visitLink(link, { script: false }));
-    checkTitle(title);
-    checkCanonical();
-    checkSchema();
+    checkTitle(link, title);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -202,7 +204,8 @@ describe("Head Tags - All in One SEO Pack", () => {
    */
   describe("Title tag", () => {
     it("should be correct while navigating", () => {
-      visitLink("/");
+      cy.visit(fullURL("/"));
+
       cy.get("title").should(
         "contain",
         "Test WP Site | Just another WordPress site"
