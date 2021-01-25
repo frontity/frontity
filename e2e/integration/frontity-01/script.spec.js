@@ -1,5 +1,4 @@
-/* eslint-disable jest/valid-expect-in-promise */
-// import expect from "expect";
+/* eslint-disable jest/valid-expect */
 
 describe("Script", () => {
   beforeEach(() => {
@@ -21,7 +20,7 @@ describe("Script", () => {
       .its("moment")
       .should("exist")
       .then((moment) => {
-        expect(moment()._isAMomentObject).toBe(true);
+        expect(moment()._isAMomentObject).to.equal(true);
       });
   });
 
