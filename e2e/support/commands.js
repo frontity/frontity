@@ -1,4 +1,4 @@
-/* eslint-disable jest/valid-expect */
+/* eslint-disable jest/valid-expect,jest/no-standalone-expect */
 
 require("cypress-plugin-snapshots/commands");
 
@@ -47,4 +47,49 @@ Cypress.Commands.overwrite("visit", (visit, url, options = {}) => {
     iframe.removeAttribute("sandbox");
   }
   return visit(url, options);
+});
+
+/**
+ * The DOMparser.
+ */
+const parser = new DOMParser();
+
+/**
+ * Appends children nodes to the target.
+ *
+ * @param children - A list of DOM nodes.
+ * @param target - The target to append the children to.
+ */
+const apendChildrenTo = (children, target) => {
+  // Clear out the previous content
+  target.innerHTML = "";
+
+  // Append each elment
+  children.forEach((element) => {
+    // Do not append `<script>` tags with `src` defined
+    if (element.tagName !== "script" || element.hasAttribute("src")) {
+      target.appendChild(element);
+    }
+  });
+};
+
+/**
+ * Parses the given text as html and returns an attached to the dom, node reference.
+ *
+ * @param text - The text value to pe parsed into html.
+ * @returns The document element resulted.
+ */
+const parseHTML = (text) => {
+  const doc = parser.parseFromString(text, "text/html");
+  const parentDocument = cy.state("window").parent.document;
+  const iframe = parentDocument.querySelector(".iframes-container iframe");
+
+  apendChildrenTo(Array.from(doc.head.childNodes), iframe.contentDocument.head);
+  apendChildrenTo(Array.from(doc.body.childNodes), iframe.contentDocument.body);
+
+  return iframe.contentDocument;
+};
+
+Cypress.Commands.add("visitSSR", (url) => {
+  return cy.request(url).then((response) => parseHTML(response.body));
 });
