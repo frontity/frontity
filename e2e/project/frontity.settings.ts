@@ -61,10 +61,7 @@ const settings: Settings<
     name: "wp-source-errors",
     packages: [
       "e2e-wp-source-errors",
-      {
-        name: "@frontity/wp-source",
-        state: { source: { url: "https://test.frontity.org/" } },
-      },
+      "@frontity/wp-source",
       "@frontity/tiny-router",
     ],
   },
