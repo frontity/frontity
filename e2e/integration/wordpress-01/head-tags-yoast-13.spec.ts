@@ -1,16 +1,19 @@
+import type { taskTypes } from "../../plugins";
+const task: taskTypes = cy.task;
+
 describe("Head Tags - Yoast 13.5", () => {
   before(() => {
-    cy.task("installPlugin", { name: "wordpress-seo", version: "13.5" });
-    cy.task("installPlugin", { name: "rest-api-head-tags" });
-    cy.task("installPlugin", { name: "custom-post-type-ui" });
-    cy.task("loadDatabase", {
+    task("installPlugin", { name: "wordpress-seo", version: "13.5" });
+    task("installPlugin", { name: "rest-api-head-tags" });
+    task("installPlugin", { name: "custom-post-type-ui" });
+    task("loadDatabase", {
       path: "./wp-data/head-tags/yoast-13.5.sql",
     });
   });
 
   after(() => {
-    cy.task("resetDatabase");
-    cy.task("removeAllPlugins");
+    task("resetDatabase");
+    task("removeAllPlugins");
   });
 
   /**

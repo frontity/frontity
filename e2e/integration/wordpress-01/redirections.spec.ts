@@ -1,4 +1,3 @@
-// This allows us to get TypeScript Intellisense and autocompletion.
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 

@@ -1,3 +1,6 @@
+import type { taskTypes } from "../../plugins";
+const task: taskTypes = cy.task;
+
 describe("WordPress REST API", () => {
   it("archives should work", () => {
     cy.visit("http://localhost:3001?frontity_name=wp-basic-tests");
@@ -12,15 +15,15 @@ describe("WordPress REST API", () => {
 
 describe("WordPress plugins", () => {
   before(() => {
-    cy.task("installPlugin", { name: "code-snippets" });
-    cy.task("loadDatabase", {
+    task("installPlugin", { name: "code-snippets" });
+    task("loadDatabase", {
       path: "./wp-data/wp-basic-tests/code-snippets.sql",
     });
   });
 
   after(() => {
-    cy.task("resetDatabase");
-    cy.task("removeAllPlugins");
+    task("resetDatabase");
+    task("removeAllPlugins");
   });
 
   it("should have a text injected by the Code Snippets plugin", () => {
@@ -28,11 +31,5 @@ describe("WordPress plugins", () => {
     cy.get("[data-test-id='code-snippet']").contains(
       "Hello from WordPress plugin"
     );
-  });
-
-  it("dummy test, otherwise the previous test doesn't run", () => {
-    // I'm not sure why, but if I remove this test, the previous one doesn't run
-    // and if it fails, Cypress does not complain. I guess it is a bug in
-    // Cypress.
   });
 });
