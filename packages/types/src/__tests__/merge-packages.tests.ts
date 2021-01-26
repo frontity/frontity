@@ -62,7 +62,6 @@ interface Package3 extends Package {
  */
 type Packages = MergePackages<Package1, Package2, Package3>;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const packages: Package1 = {
   name: "package-1",
   state: {

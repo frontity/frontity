@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 import * as React from "react";
 import { Head, connect } from "frontity";
 import { Connect } from "frontity/types";

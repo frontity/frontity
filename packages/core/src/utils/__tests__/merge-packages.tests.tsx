@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable react/display-name, @typescript-eslint/camelcase */
-
 import mergePackages from "../merge-packages";
 
 class MyLib {
@@ -17,12 +14,17 @@ const state = {
   },
 };
 
+const Namespace1 = () => <div>namespace1</div>;
+const Namespace2 = () => <div>namespace2</div>;
+const Namespace3 = () => <div>namespace3</div>;
+const Namespace4 = () => <div>namespace4</div>;
+
 const packages = {
   package_1_html: {
     name: "package1",
     roots: {
-      namespace1: () => <div>namespace1</div>,
-      namespace2: () => <div>namespace2</div>,
+      namespace1: Namespace1,
+      namespace2: Namespace2,
     },
     state: {
       frontity: {
@@ -38,14 +40,16 @@ const packages = {
     },
     actions: {
       namespace1: {
-        action1: () => {},
+        action1: () => {
+          // Logic.
+        },
       },
     },
   },
   package_2_html: {
     name: "package2",
     roots: {
-      namespace3: () => <div>namespace3</div>,
+      namespace3: Namespace3,
     },
     state: {
       namespace1: {
@@ -58,7 +62,9 @@ const packages = {
     },
     actions: {
       namespace1: {
-        action2: () => () => {},
+        action2: () => () => {
+          // Logic.
+        },
       },
     },
     libraries: {
@@ -71,7 +77,7 @@ const packages = {
   package_3_html: () => ({
     name: "package3",
     roots: {
-      namespace4: () => <div>namespace4</div>,
+      namespace4: Namespace4,
     },
     state: {
       namespace4: {

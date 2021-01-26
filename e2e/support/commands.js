@@ -1,5 +1,4 @@
 /* eslint-disable jest/valid-expect,jest/no-standalone-expect */
-
 require("cypress-plugin-snapshots/commands");
 
 Cypress.Commands.add("isInViewport", { prevSubject: true }, (subject) => {

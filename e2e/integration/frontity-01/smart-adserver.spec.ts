@@ -1,7 +1,7 @@
 /**
  * Disable temporary these tests until the ad calls return content.
  */
-describe.skip("Smart Adserver", () => {
+describe("Smart Adserver", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3001?frontity_name=smart-adserver");
   });

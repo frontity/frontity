@@ -422,3 +422,41 @@ export interface HomeData extends Data {
    */
   isHome: true;
 }
+
+/**
+ * Redirection data.
+ */
+export interface RedirectionData extends Data {
+  /**
+   * Identify a redirection.
+   */
+  isRedirection: true;
+
+  /**
+   * The URL that the redirection points to.
+   */
+  location: string;
+
+  /**
+   * A boolean flag which indicates whether a particular redirection is internal
+   * (meaning redirecting to the same domain as the the Frontity application or
+   * the Wordpress instance) or external, meaning any other domain.
+   */
+  isExternal: boolean;
+
+  /**
+   * The HTTP status code of the response.
+   * Possible values are: `301`, `302`, `307` and `308`.
+   *
+   * @example 301
+   */
+  redirectionStatus: 301 | 302 | 307 | 308;
+
+  // HTTP status types.
+  /* eslint-disable jsdoc/require-jsdoc */
+  is301?: boolean;
+  is302?: boolean;
+  is307?: boolean;
+  is308?: boolean;
+  /* eslint-enable */
+}

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment, require-atomic-updates */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Koa from "koa";
 import { get } from "koa-route";
 import serve from "koa-static";
@@ -143,6 +143,13 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
         if (beforeSSR) return beforeSSR({ ctx });
       })
     );
+
+    // The beforeSSR actions for source packages (e.g. wp-source) can set a
+    // redirection by calling `ctx.redirect()`. In that case, the `Location`
+    // HTTP header will already be set and we can just return early.
+    if ([301, 302, 307, 308].includes(ctx.status) && ctx.get("Location")) {
+      return;
+    }
 
     // Pass a context to HelmetProvider which will hold our state specific to
     // each request.
