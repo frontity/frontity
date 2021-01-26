@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { connect, useConnect, useFills } from "frontity";
 import SlotAndFill from "../types";
 

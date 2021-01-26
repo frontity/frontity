@@ -1,4 +1,3 @@
-import React from "react";
 import { create, act } from "react-test-renderer";
 import connect, { Provider, createStore, batch } from "..";
 

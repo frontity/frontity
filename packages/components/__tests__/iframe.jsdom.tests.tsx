@@ -1,9 +1,9 @@
 /* eslint-disable no-global-assign */
+
 /**
  * @jest-environment jsdom
  */
 
-import React from "react";
 import TestRenderer from "react-test-renderer";
 import useInView from "@frontity/hooks/use-in-view";
 import Iframe from "../iframe";

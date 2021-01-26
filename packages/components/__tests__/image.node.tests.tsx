@@ -2,7 +2,6 @@
  * @jest-environment node
  */
 
-import React from "react";
 import TestRenderer from "react-test-renderer";
 import { HelmetProvider } from "frontity";
 import { FilledContext } from "react-helmet-async";

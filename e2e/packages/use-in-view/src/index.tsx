@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import useInView from "@frontity/hooks/use-in-view";
 import UseInView from "../types";
 
