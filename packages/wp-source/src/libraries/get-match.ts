@@ -66,7 +66,7 @@ interface Source {
   link?: string;
 
   /**
-   * The link without the query part. Also known as the pathname.
+   * The link without the query and pagination part.
    */
   route?: string;
 }
