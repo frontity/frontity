@@ -6,7 +6,6 @@ describe("Tiny Router", () => {
     // Go first to the main URL to avoid a restart when the WordPress site is
     // visited (baseUrl is different here).
     cy.visit("http://localhost:8080");
-    task("removeAllPlugins");
     task("installPlugin", { name: "code-snippets" });
     task("installPlugin", {
       name:
@@ -15,6 +14,11 @@ describe("Tiny Router", () => {
     task("loadDatabase", {
       path: "./wp-data/tiny-router/client-server-mismatch.sql",
     });
+  });
+
+  after(() => {
+    task("resetDatabase");
+    task("removeAllPlugins");
   });
 
   it("should work if there's a link mismatch between the server and the client", () => {
