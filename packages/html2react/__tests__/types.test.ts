@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { expectType } from "frontity/types/helpers";
 import { Processor, Node, Element, Text, Comment } from "../types";
 
