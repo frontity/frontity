@@ -295,10 +295,12 @@ const useArchiveInfiniteScroll: UseArchiveInfiniteScroll = (options = {}) => {
       (link === last.link && !!last.isReady && !isError(last)) ||
       (link === links[links.length - 2] && !last.isReady) ||
       (link === links[links.length - 2] && !!last.isReady && !!isError(last)),
-    Wrapper: MemoizedWrapper(link, {
-      fetchInViewOptions: options.fetchInViewOptions,
-      routeInViewOptions: options.routeInViewOptions,
-    }),
+    Wrapper: options.active
+      ? MemoizedWrapper(link, {
+          fetchInViewOptions: options.fetchInViewOptions,
+          routeInViewOptions: options.routeInViewOptions,
+        })
+      : ({ children }) => <div>{children}</div>,
   }));
 
   return {
