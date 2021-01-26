@@ -8,8 +8,8 @@ Cypress.config({
   experimentalFetchPolyfill: true,
 } as any);
 
-describe("UseInfiniteScroll", () => {
-  it("useArchiveInfiniteScroll should load next page", () => {
+describe("useArchiveInfiniteScroll", () => {
+  it("should load next page", () => {
     cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/");
 
@@ -57,7 +57,7 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/archive/");
   });
 
-  it("useArchiveInfiniteScroll should return `isError` true", () => {
+  it("should return `isError` true", () => {
     cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/");
 
@@ -124,7 +124,67 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/archive/page/2/");
   });
 
-  it("usePostTypeInfiniteScroll should load next post", () => {
+  it("should do nothing if deactivated", () => {
+    cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/");
+
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+      delay: 300,
+    }).as("pageTwo");
+
+    // Deactivates the infinite scroll hooks.
+    cy.get("[data-test=toggle-infinite-scroll]").should("exist").click();
+
+    // Changes url to `/archive`.
+    cy.get("[data-test='to-archive']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/archive/");
+    cy.wait("@pageOne");
+    cy.get("[data-test='archive']").should("exist");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+
+    cy.window().then((win: any) =>
+      cy.spy(win.frontity.actions.source, "fetch")
+    );
+
+    // Scrolls to bottom, the next page should not be fetched. We wait here a
+    // short period of time just to be sure the request for the next page was
+    // not made.
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.scrollTo("bottom").wait(300);
+
+    cy.window()
+      .then((win: any) => win.frontity.actions.source.fetch)
+      .should("not.have.been.called");
+
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-2']").should("not.exist");
+    cy.location("href").should("eq", "http://localhost:3001/archive/");
+  });
+
+  it("should fetch pages until the limit is reached");
+  it("should fetch pages until the last one is fetched");
+  it("should keep fetched pages when going back");
+});
+
+describe("usePostTypeInfiniteScroll", () => {
+  it("should load next post", () => {
     cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/");
 
@@ -167,7 +227,7 @@ describe("UseInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/post-1/");
   });
 
-  it("usePostTypeInfiniteScroll should return `isError` true", () => {
+  it("should return `isError` true", () => {
     cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/");
 
