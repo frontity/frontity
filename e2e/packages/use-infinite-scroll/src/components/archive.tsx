@@ -2,6 +2,7 @@ import React from "react";
 import { css, connect, useConnect } from "frontity";
 import useArchiveInfiniteScroll from "@frontity/hooks/use-archive-infinite-scroll";
 import { Packages } from "../../types";
+import { isArchive } from "@frontity/source";
 
 /**
  * Component to render archives.
@@ -13,6 +14,7 @@ const Archive: React.FC = () => {
   const current = state.source.get(state.router.link);
 
   const { pages, isFetching, isError, fetchNext } = useArchiveInfiniteScroll({
+    active: state.theme.isInfiniteScrollEnabled,
     fetchInViewOptions: {
       root: document as any,
       rootMargin: "400px 0px",
@@ -41,7 +43,7 @@ const Archive: React.FC = () => {
         const data = state.source.get(link);
         return (
           <Wrapper key={key}>
-            {data.isArchive ? (
+            {isArchive(data) ? (
               <div css={div} data-test={`page-${page}`}>
                 Page {page}
                 <ul>

@@ -41,6 +41,14 @@ const Root: React.FC = connect(
               >
                 To Last Post
               </button>
+              <button
+                data-test="toggle-infinite-scroll"
+                onClick={() => {
+                  actions.theme.toggleInfiniteScroll();
+                }}
+              >
+                Toggle Infinite Scroll
+              </button>
             </>
           )}
       </>
@@ -51,9 +59,17 @@ const Root: React.FC = connect(
 
 const pkg: UseInfiniteScroll = {
   name: "use-infinite-scroll",
-  state: {},
+  state: {
+    theme: {
+      isInfiniteScrollEnabled: true,
+    },
+  },
   actions: {
     theme: {
+      toggleInfiniteScroll({ state }) {
+        state.theme.isInfiniteScrollEnabled = !state.theme
+          .isInfiniteScrollEnabled;
+      },
       init({ libraries }) {
         Object.values(handlers).forEach((handler) => {
           libraries.source.handlers.push(handler);

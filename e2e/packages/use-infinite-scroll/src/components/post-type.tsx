@@ -2,6 +2,7 @@ import React from "react";
 import { css, connect, useConnect } from "frontity";
 import usePostTypeInfiniteScroll from "@frontity/hooks/use-post-type-infinite-scroll";
 import { Packages } from "../../types";
+import { isPostType } from "@frontity/source";
 
 /**
  * Component to render post types.
@@ -13,6 +14,7 @@ const PostType: React.FC = () => {
   const current = state.source.get(state.router.link);
 
   const { posts, isFetching, isError, fetchNext } = usePostTypeInfiniteScroll({
+    active: state.theme.isInfiniteScrollEnabled,
     fetchInViewOptions: {
       root: document as any,
       rootMargin: "400px 0px",
@@ -37,14 +39,14 @@ const PostType: React.FC = () => {
   return (
     <div data-test="post-type">
       {posts.map(({ Wrapper, key, link }) => {
-        const { id } = state.source.get(link);
-        return (
+        const data = state.source.get(link);
+        return isPostType(data) ? (
           <Wrapper key={key}>
-            <div css={div} data-test={`post-${id}`}>
-              Post {id}
+            <div css={div} data-test={`post-${data.id}`}>
+              Post {data.id}
             </div>
           </Wrapper>
-        );
+        ) : null;
       })}
       {isFetching && <div data-test="fetching">Fetching</div>}
       {isError && (
