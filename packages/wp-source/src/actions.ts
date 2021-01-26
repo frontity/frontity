@@ -62,7 +62,7 @@ const actions: WpSource["actions"]["source"] = {
     try {
       let { route } = linkParams;
       // Transform route if there is some redirection.
-      const redirection = getMatch(route, redirections);
+      const redirection = getMatch({ route, link }, redirections);
       if (redirection) route = redirection.func(redirection.params);
 
       // Get the handler for this route.

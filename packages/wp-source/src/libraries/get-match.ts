@@ -63,13 +63,18 @@ interface Source {
   /**
    * The full link with `queryString`.
    */
-  link: string;
+  link?: string;
 
   /**
    * The link without the query part. Also known as the pathname.
    */
-  route: string;
+  route?: string;
 }
+
+/**
+ * The regular expression flag.
+ */
+const REGULAR_EXPRESSION = "RegExp:";
 
 /**
  * Match a link with a list of handler/redirection objects.
@@ -84,22 +89,25 @@ export const getMatch = <
   Func extends (...args: any) => any,
   Patt extends Pattern<Func>
 >(
-  source: Source | string,
+  source: Source,
   list: Patt[]
 ): GetMatchReturn<Func, Patt> | null => {
   const result = list
     .sort(({ priority: p1 }, { priority: p2 }) => p1 - p2)
     .map(({ name, priority, pattern, func }) => {
+      let url: string;
       const keys = [];
-      const url =
-        typeof source === "string"
-          ? source
-          : pattern.startsWith("RegExp:")
-          ? source.link
-          : source.route;
-      const regexp = pattern.startsWith("RegExp:")
-        ? new RegExp(pattern.replace("RegExp:", ""))
-        : pathToRegexp(pattern, keys, { endsWith: "?" });
+
+      // Otherwise, we need to pick the value based on the pattern
+      if (pattern.startsWith(REGULAR_EXPRESSION)) {
+        url = source.link;
+      } else {
+        url = source.route;
+      }
+
+      const regexp = pattern.startsWith(REGULAR_EXPRESSION)
+        ? new RegExp(pattern.replace(REGULAR_EXPRESSION, ""))
+        : pathToRegexp(pattern, keys);
       return { name, priority, pattern, regexp, keys, url, func };
     })
     .find(({ regexp, url }) => regexp.test(url));
@@ -107,7 +115,7 @@ export const getMatch = <
   return result
     ? {
         func: result.func,
-        params: result.pattern.startsWith("RegExp:")
+        params: result.pattern.startsWith(REGULAR_EXPRESSION)
           ? result.regexp.exec(result.url).groups
           : extractParameters(result.url, result.regexp, result.keys),
         name: result.name,
