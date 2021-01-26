@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Global, css, connect, styled } from "frontity";
 import Package from "../types";
 import aclonicaEot from "./fonts/aclonica-v10-latin-regular.eot";

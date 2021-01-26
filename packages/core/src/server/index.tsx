@@ -3,7 +3,6 @@ import Koa from "koa";
 import { get } from "koa-route";
 import serve from "koa-static";
 import mount from "koa-mount";
-import React from "react";
 import htmlescape from "htmlescape";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { FilledContext } from "react-helmet-async";

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Head, connect, css } from "frontity";
 import { Connect } from "frontity/types";
 import GoogleTagManagerAnalytics from "../../types";

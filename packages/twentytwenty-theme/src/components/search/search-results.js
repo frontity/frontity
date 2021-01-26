@@ -1,4 +1,3 @@
-import React from "react";
 import { connect, styled } from "frontity";
 import Archive from "../archive";
 import ArchiveHeader from "../archive/archive-header";
