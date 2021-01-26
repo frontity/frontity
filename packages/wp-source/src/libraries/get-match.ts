@@ -57,9 +57,24 @@ interface GetMatchReturn<
 }
 
 /**
+ * The `source` object that contains a link and a route.
+ */
+interface Source {
+  /**
+   * The full link with `queryString`.
+   */
+  link: string;
+
+  /**
+   * The link without the query part. Also known as the pathname.
+   */
+  route: string;
+}
+
+/**
  * Match a link with a list of handler/redirection objects.
  *
- * @param link - The link to be matched.
+ * @param source - The source to be matched.
  * @param list - The list of handler/redirection objects.
  *
  * @returns An object containing the matched handler/redirection. Defined in
@@ -69,26 +84,32 @@ export const getMatch = <
   Func extends (...args: any) => any,
   Patt extends Pattern<Func>
 >(
-  link: string,
+  source: Source | string,
   list: Patt[]
 ): GetMatchReturn<Func, Patt> | null => {
   const result = list
     .sort(({ priority: p1 }, { priority: p2 }) => p1 - p2)
     .map(({ name, priority, pattern, func }) => {
       const keys = [];
+      const url =
+        typeof source === "string"
+          ? source
+          : pattern.startsWith("RegExp:")
+          ? source.link
+          : source.route;
       const regexp = pattern.startsWith("RegExp:")
         ? new RegExp(pattern.replace("RegExp:", ""))
         : pathToRegexp(pattern, keys, { endsWith: "?" });
-      return { name, priority, pattern, regexp, keys, func };
+      return { name, priority, pattern, regexp, keys, url, func };
     })
-    .find(({ regexp }) => regexp.test(link));
+    .find(({ regexp, url }) => regexp.test(url));
 
   return result
     ? {
         func: result.func,
         params: result.pattern.startsWith("RegExp:")
-          ? result.regexp.exec(link).groups
-          : extractParameters(link, result.regexp, result.keys),
+          ? result.regexp.exec(result.url).groups
+          : extractParameters(result.url, result.regexp, result.keys),
         name: result.name,
         pattern: result.pattern,
       }

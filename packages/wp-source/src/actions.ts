@@ -22,7 +22,7 @@ const actions: WpSource["actions"]["source"] = {
     // Get route and route params.
     const link = normalize(route);
     const linkParams = parse(route);
-    const { query, page, queryString } = linkParams;
+    const { query, page } = linkParams;
 
     // Get options.
     const force = options ? options.force : false;
@@ -66,7 +66,7 @@ const actions: WpSource["actions"]["source"] = {
       if (redirection) route = redirection.func(redirection.params);
 
       // Get the handler for this route.
-      const handler = getMatch(`${route}${queryString}`, handlers);
+      const handler = getMatch({ route, link }, handlers);
 
       // Return a 404 error if no handler has matched.
       if (!handler)
