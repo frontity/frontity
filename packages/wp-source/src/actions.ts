@@ -11,13 +11,16 @@ import {
 } from "./libraries/handlers";
 import { ErrorData } from "@frontity/source/types/data";
 import { ServerError, isError, isSearch } from "@frontity/source";
+import {
+  is404Redirection,
+  isEagerRedirection,
+  fetchRedirection,
+} from "./utils";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
     const [route, options] = params;
     const { source } = state;
-
-    const { handlers, redirections } = libraries.source;
 
     // Get route and route params.
     const link = normalize(route);
@@ -62,11 +65,22 @@ const actions: WpSource["actions"]["source"] = {
     try {
       let { route } = linkParams;
       // Transform route if there is some redirection.
-      const redirection = getMatch({ route, link }, redirections);
+      const redirection = getMatch({ route, link }, libraries.source.redirections);
       if (redirection) route = redirection.func(redirection.params);
 
+      // Check if we need to check if it is a 30X redirection before fetching
+      // the backend.
+      if (isEagerRedirection(state.source.redirections, link)) {
+        const redirection = await fetchRedirection({ link, state });
+        // If there is a redirection, populate the data object and finish here.
+        if (redirection?.isRedirection) {
+          batch(() => Object.assign(source.data[link], redirection));
+          return;
+        }
+      }
+
       // Get the handler for this route.
-      const handler = getMatch({ route, link }, handlers);
+      const handler = getMatch({ route, link }, libraries.source.handlers);
 
       // Return a 404 error if no handler has matched.
       if (!handler)
@@ -96,7 +110,8 @@ const actions: WpSource["actions"]["source"] = {
         isSearch(source.data[link]) !== true &&
         source.data[link].route === normalize(state.source.subdirectory || "/");
 
-      // Populate the data object.
+      // Mark the data object as ready.
+      // TODO: We should remove data.isHome to the handlers in Source v2.
       batch(() =>
         Object.assign(source.data[link], {
           ...(isHome && { isHome: true }),
@@ -104,27 +119,36 @@ const actions: WpSource["actions"]["source"] = {
           isReady: true,
         })
       );
-    } catch (e) {
-      // It's a server error (4xx or 5xx).
-      if (e instanceof ServerError) {
-        console.error(e);
-
-        const errorData: ErrorData = {
-          isError: true,
-          isReady: true,
-          isFetching: false,
-          [`is${e.status}`]: true,
-          errorStatus: e.status,
-          errorStatusText: e.statusText,
-          route: linkParams.route,
-          link,
-          query,
-          page,
-        };
-        source.data[link] = errorData;
-      } else {
-        throw e;
+    } catch (error) {
+      // If it's NOT a server error (4xx or 5xx) it means it is an error in the
+      // code, so we should throw.
+      if (error.name !== "ServerError") {
+        throw error;
       }
+
+      // Check it there is a 301 redirection stored in the backend.
+      if (error.status === 404 && is404Redirection(state.source.redirections)) {
+        const redirection = await fetchRedirection({ link, state });
+        // If there is a redirection, populate the data object and finish here.
+        if (redirection?.isRedirection) {
+          batch(() => Object.assign(source.data[link], redirection));
+          return;
+        }
+      }
+
+      const errorData: ErrorData = {
+        isError: true,
+        isReady: true,
+        isFetching: false,
+        [`is${error.status}`]: true,
+        errorStatus: error.status,
+        errorStatusText: error.statusText,
+        route: linkParams.route,
+        link,
+        query,
+        page,
+      };
+      source.data[link] = errorData;
     }
   },
 

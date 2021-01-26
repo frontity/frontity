@@ -195,6 +195,47 @@ interface Source<T = null> extends Package {
        * The entities have the shape returned by the WP REST API.
        */
       taxonomy: Record<string, TaxonomyEntity>;
+
+      /**
+       * How to handle the 301 redirections that can be stored in the WordPress
+       * database e.g. Via a Redirection plugin:
+       * https://wordpress.org/plugins/redirection/.
+       * 
+       * - "no" - Does not handle them at all.
+       * 
+       * - "all" - Always make an additional request to the WordPress instance
+       * to check if there exists a redirection.
+       * 
+       * - "404" - Only send the additional request to the WordPress instance if
+       * the original request has returned a 404.
+       * 
+       * - string - A string that contains a regex pattern. The string must
+       * start with `RegExp:`. This pattern will be matched against the current
+       * route and if matched, frontity will make an additional request to the
+       * WordPress instance to check if there exists a redirection. Note that
+       * the shorthand character classes will have to be escaped, so for example
+       * instead of `\d`, you will need to write `\\d`.
+       * 
+       * - string[] - An array of strings, which can contain the "404" value as
+       * well as any number of strings starting with `"RegExp:"` which
+       * represent regular expressions. An additional request will be sent to
+       * Wordpress to check for the redirection if any of the regular
+       * expressions match the current route. If the array also contains a
+       * `"404"`, an additional request will also be made if the original
+       * request has returned a 404.
+       * 
+       * TODO: Add support for pattern strings, like "/category/:slug".
+       *
+       * @example "no"
+       * @example "all"
+       * @example "404"
+       * @example "RegExp:/some-post/(\\d*)"
+       * @example "RegExp:/post-(\\w*)/(\\d*)"
+       * @example ["404", "RegExp:/some-post/", "RegExp:/another-post"]
+
+       * @defaultValue "no"
+       */
+      redirections: string | string[];
     };
   };
 

@@ -124,7 +124,19 @@
     {
       "files": ["**/integration/**/*.spec.{js,ts}"],
       "rules": {
-        "jest/valid-expect-in-promise": "off"
+        "jest/valid-expect-in-promise": "off",
+        "jest/expect-expect": "off"
+      }
+    },
+    {
+      "files": [
+        "**/__tests__/*types*{js,ts,jsx,tsx}",
+        "**/types/**/__tests__/*.{js,ts,jsx,tsx}"
+      ],
+      "rules": {
+        "jest/expect-expect": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off"
       }
     }
   ]

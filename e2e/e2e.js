@@ -27,6 +27,8 @@ let {
   cypress: cypressCommand,
   suite,
   "public-path": publicPath,
+  inspect,
+  spec,
 } = argv;
 
 // Sane defaults for local development.
@@ -36,6 +38,8 @@ browser = browser || "chrome";
 prod = prod || false;
 cypressCommand = cypressCommand || "open";
 suite = suite || "all";
+inspect = inspect || false;
+spec = spec || null;
 
 // Flag to know if we have started Docker.
 let isDockerRunning = false;
@@ -122,8 +126,16 @@ process.env["CYPRESS_FRONTITY_MODE"] =
         stdio: "inherit",
       });
     } else {
-      let args = ["frontity", "dev", "--port", "3001", "--dont-open-browser"];
-
+      let args = inspect
+        ? [
+            "--inspect",
+            "./node_modules/.bin/frontity",
+            "dev",
+            "--port",
+            "3001",
+            "--dont-open-browser",
+          ]
+        : ["frontity", "dev", "--port", "3001", "--dont-open-browser"];
       // Only if publicPath was passed as a CLI argument, add it to the final
       // command.
       if (publicPath) {
@@ -136,7 +148,7 @@ process.env["CYPRESS_FRONTITY_MODE"] =
       }
 
       // Dev.
-      execa("npx", args, {
+      execa(inspect ? "node" : "npx", args, {
         stdio: "inherit",
       });
     }
@@ -155,12 +167,9 @@ process.env["CYPRESS_FRONTITY_MODE"] =
     // Run Cypress if the `cypressCommnand` is not "off".
     if (cypressCommand !== "off") {
       if (cypressCommand === "open") {
-        await cypress.open({
-          env: { WORDPRESS_VERSION: wpVersion },
-          browser,
-        });
+        await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
       } else if (cypressCommand === "run") {
-        if (suite === "all") {
+        if (!spec && suite === "all") {
           await cypress.run({
             env: { WORDPRESS_VERSION: wpVersion },
             spec: `./integration/**/*.spec.js`,
@@ -170,7 +179,9 @@ process.env["CYPRESS_FRONTITY_MODE"] =
           await cypress.run({
             env: { WORDPRESS_VERSION: wpVersion },
             browser,
-            spec: `./integration/${suite}/**/*.spec.js`,
+            spec: spec
+              ? `./integration/**/${spec}.spec.js`
+              : `./integration/${suite}/**/*.spec.js`,
           });
         }
       }
