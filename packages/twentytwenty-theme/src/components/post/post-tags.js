@@ -1,5 +1,5 @@
 import { connect, decode } from "frontity";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { TagIcon } from "../icons";
 import Link from "../link";
 import { PostMetaList, PostMetaWrapper } from "./post-meta";

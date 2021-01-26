@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { create, act } from "react-test-renderer";
 import * as error from "@frontity/error";
 import connect, { Provider, createStore, useConnect } from "..";

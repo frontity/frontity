@@ -1,4 +1,3 @@
-import React from "react";
 import { connect, styled } from "frontity";
 import Img from "@frontity/components/image";
 import SectionContainer from "../styles/section-container";

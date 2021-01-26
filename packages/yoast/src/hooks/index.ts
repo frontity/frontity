@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 import { decode, useConnect } from "frontity";
 import { transformAllLinks } from "../utils";
 import { Packages, WithYoastHead } from "../../types";
@@ -74,7 +74,7 @@ export const useYoastHead = (link: string): UseYoastHeadResult => {
   }
 
   // Return a memoized object depending on the previously generated values.
-  return React.useMemo(() => {
+  return useMemo(() => {
     /**
      * Extract the title string from the `yoast_head` field and return it if
      * found.
