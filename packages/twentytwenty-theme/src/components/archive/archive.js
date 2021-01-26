@@ -1,5 +1,5 @@
 import { connect, decode } from "frontity";
-import React, { Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import Article from "../post/post-item";
 import ArchiveHeader from "./archive-header";
 import Pagination from "./archive-pagination";

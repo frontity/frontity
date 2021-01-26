@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { connect, error, warn } from "frontity";
 import { Connect, State } from "frontity/types";
 import parse from "./parse";

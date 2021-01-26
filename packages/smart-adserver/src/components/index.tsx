@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import * as React from "react";
 import { Head, connect, warn } from "frontity";
 import { Connect } from "frontity/types";
 import SmartAdserver from "../../types";

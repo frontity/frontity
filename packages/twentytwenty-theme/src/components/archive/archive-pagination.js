@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { connect, styled, css } from "frontity";
 import Link from "../link";
 
