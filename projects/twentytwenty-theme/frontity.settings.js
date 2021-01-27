@@ -1,5 +1,5 @@
 export default {
-  name: "twentytwenty-theme-example",
+  name: "twentytwenty-theme",
   state: {
     frontity: {
       url: "https://twentytwenty.frontity.org",
