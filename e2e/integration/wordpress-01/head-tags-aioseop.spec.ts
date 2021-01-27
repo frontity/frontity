@@ -1,18 +1,19 @@
-describe("Head Tags - WP SEO 0.13", () => {
+import type { taskTypes } from "../../plugins";
+const task: taskTypes = cy.task;
+
+describe("Head Tags - All in One SEO Pack", () => {
   before(() => {
-    cy.task("installPlugin", {
-      name: "https://github.com/alleyinteractive/wp-seo/archive/master.zip",
-    });
-    cy.task("installPlugin", { name: "rest-api-head-tags" });
-    cy.task("installPlugin", { name: "custom-post-type-ui" });
-    cy.task("loadDatabase", {
-      path: "./wp-data/head-tags/wpseo.sql",
+    task("installPlugin", { name: "all-in-one-seo-pack", version: "3.7.1" });
+    task("installPlugin", { name: "rest-api-head-tags" });
+    task("installPlugin", { name: "custom-post-type-ui" });
+    task("loadDatabase", {
+      path: "./wp-data/head-tags/aioseop.sql",
     });
   });
 
   after(() => {
-    cy.task("resetDatabase");
-    cy.task("removeAllPlugins");
+    task("resetDatabase");
+    task("removeAllPlugins");
   });
 
   /**
@@ -56,10 +57,10 @@ describe("Head Tags - WP SEO 0.13", () => {
    *
    * @param link - The given link.
    */
-  const checkCustomTag = (link) => {
-    it("should render a custom tag", () => {
+  const checkSchema = (link) => {
+    it("should render the schema tag", () => {
       cy.visitSSR(fullURL(link)).then(() => {
-        cy.get('meta[name="custom-tag"]').toMatchSnapshot();
+        cy.get('script[type="application/ld+json"]').toMatchSnapshot();
       });
     });
   };
@@ -80,11 +81,25 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("Post", () => {
     const link = "/hello-world/";
-    const title = "Post: Hello world! ~ Test WP Site";
+    const title = "Hello world! | Test WP Site";
 
     checkTitle(link, title);
     checkCanonical(link);
-    checkCustomTag(link);
+
+    /**
+     * The `checkSchema()` call was replaced here by a check that the schema
+     * tag simply exists and it is not empty.
+     *
+     * The reason for this is that the tag content is not the same for different
+     * versions of WordPress:
+     * - 5.4 : `"commentsCount": "1",`.
+     * - 5.5 : `"commentsCount": 1,`.
+     */
+    it("should render the schema tag", () => {
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('script[type="application/ld+json"]').should("not.be.empty");
+      });
+    });
   });
 
   /**
@@ -92,11 +107,11 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("Page", () => {
     const link = "/sample-page/";
-    const title = "Page: Sample Page ~ Test WP Site";
+    const title = "Sample Page | Test WP Site";
 
     checkTitle(link, title);
     checkCanonical(link);
-    checkCustomTag(link);
+    checkSchema(link);
   });
 
   /**
@@ -104,14 +119,11 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("Category", () => {
     const link = "/category/nature/";
-    const title = "Nature archives ~ Test WP Site";
+    const title = "Nature | Test WP Site";
 
-    /**
-     * We don't check the canonical for any archive because it is not included
-     * by the WordPress theme when the WP SEO plugin is used.
-     */
     checkTitle(link, title);
-    checkCustomTag(link);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -119,14 +131,11 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("Tag", () => {
     const link = "/tag/japan/";
-    const title = "Japan archives ~ Test WP Site";
+    const title = "Japan | Test WP Site";
 
-    /**
-     * We don't check the canonical for any archive because it is not included
-     * by the WordPress theme when the WP SEO plugin is used.
-     */
     checkTitle(link, title);
-    checkCustomTag(link);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -134,14 +143,15 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("Author", () => {
     const link = "/author/luisherranz";
-    const title = "luisherranz, author at Test WP Site";
+    const title = "luisherranz | Test WP Site";
 
     /**
-     * We don't check the canonical for any archive because it is not included
-     * by the WordPress theme when the WP SEO plugin is used.
+     * We don't check the schema here because it is not included by the
+     * _REST API - Head Tags_ plugin when used along with _All in One SEO Pack_,
+     * because it is not generated correctly for authors.
      */
     checkTitle(link, title);
-    checkCustomTag(link);
+    checkCanonical(link);
   });
 
   /**
@@ -149,14 +159,11 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("Homepage", () => {
     const link = "/";
-    const title = "Test WP Site ~ Just another WordPress site";
+    const title = "Test WP Site | Just another WordPress site";
 
-    /**
-     * We don't check the canonical for any archive because it is not included
-     * by the WordPress theme when the WP SEO plugin is used.
-     */
     checkTitle(link, title);
-    checkCustomTag(link);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -164,26 +171,23 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("CPT", () => {
     const link = "/movie/the-terminator/";
-    const title = "Movie: The Terminator ~ Test WP Site";
+    const title = "The Terminator | Test WP Site";
 
     checkTitle(link, title);
     checkCanonical(link);
-    checkCustomTag(link);
+    checkSchema(link);
   });
 
   /**
    * Tests for archive of custom post types.
    */
   describe("CPT (archive)", () => {
-    const title = "Movies archive ~ Test WP Site";
+    const title = "Movies | Test WP Site";
     const link = "/movies/";
 
-    /**
-     * We don't check the canonical for any archive because it is not included
-     * by the WordPress theme when the WP SEO plugin is used.
-     */
     checkTitle(link, title);
-    checkCustomTag(link);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -191,14 +195,11 @@ describe("Head Tags - WP SEO 0.13", () => {
    */
   describe("Custom Taxonomy", () => {
     const link = "/actor/linda-hamilton/";
-    const title = "Linda Hamilton archives ~ Test WP Site";
+    const title = "Linda Hamilton | Test WP Site";
 
-    /**
-     * We don't check the canonical for any archive because it is not included
-     * by the WordPress theme when the WP SEO plugin is used.
-     */
     checkTitle(link, title);
-    checkCustomTag(link);
+    checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -210,35 +211,32 @@ describe("Head Tags - WP SEO 0.13", () => {
 
       cy.get("title").should(
         "contain",
-        "Test WP Site ~ Just another WordPress site"
+        "Test WP Site | Just another WordPress site"
       );
 
       routerSet("/hello-world/");
-      cy.get("title").should("contain", "Post: Hello world! ~ Test WP Site");
+      cy.get("title").should("contain", "Hello world! | Test WP Site");
 
       routerSet("/sample-page/");
-      cy.get("title").should("contain", "Page: Sample Page ~ Test WP Site");
+      cy.get("title").should("contain", "Sample Page | Test WP Site");
 
       routerSet("/category/nature/");
-      cy.get("title").should("contain", "Nature archives ~ Test WP Site");
+      cy.get("title").should("contain", "Nature | Test WP Site");
 
       routerSet("/tag/japan/");
-      cy.get("title").should("contain", "Japan archives ~ Test WP Site");
+      cy.get("title").should("contain", "Japan | Test WP Site");
 
       routerSet("/author/luisherranz");
-      cy.get("title").should("contain", "luisherranz, author at Test WP Site");
+      cy.get("title").should("contain", "luisherranz | Test WP Site");
 
       routerSet("/movie/the-terminator/");
-      cy.get("title").should("contain", "Movie: The Terminator ~ Test WP Site");
+      cy.get("title").should("contain", "The Terminator | Test WP Site");
 
       routerSet("/movies/");
-      cy.get("title").should("contain", "Movies archive ~ Test WP Site");
+      cy.get("title").should("contain", "Movies | Test WP Site");
 
       routerSet("/actor/linda-hamilton/");
-      cy.get("title").should(
-        "contain",
-        "Linda Hamilton archives ~ Test WP Site"
-      );
+      cy.get("title").should("contain", "Linda Hamilton | Test WP Site");
     });
   });
 });

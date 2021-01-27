@@ -1,4 +1,3 @@
-// This allows us to get TypeScript Intellisense and autocompletion.
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 
@@ -16,6 +15,10 @@ describe("wp-comments", () => {
     task("installPlugin", {
       name: "code-snippets",
     });
+  });
+
+  after(() => {
+    task("removeAllPlugins");
   });
 
   /**
@@ -86,6 +89,10 @@ describe("wp-comments", () => {
       cy.visit("http://localhost:3001?frontity_name=wp-comments");
     });
 
+    afterEach(() => {
+      task("resetDatabase");
+    });
+
     it("Should return an error when sending a comment for a non-existing post ID", () => {
       cy.get("#comment-wrong-id").click();
 
@@ -124,12 +131,19 @@ describe("wp-comments", () => {
   });
 
   describe("Without the snippet added", () => {
-    it("Should not allow the user to comment and return an error", () => {
+    beforeEach(() => {
       // Load the database version without the following snippet:
       /// add_filter( 'rest_allow_anonymous_comments', '__return_true' );
       task("loadDatabase", {
         path: "./wp-data/wp-comments/no-code-snippets.sql",
       });
+    });
+
+    afterEach(() => {
+      task("resetDatabase");
+    });
+
+    it("Should not allow the user to comment and return an error", () => {
       cy.visit("http://localhost:3001?frontity_name=wp-comments");
 
       cy.get("#comment-ok").click();
@@ -153,10 +167,14 @@ describe("wp-comments", () => {
       task("loadDatabase", {
         path: "./wp-data/wp-comments/code-snippets.sql",
       });
-      cy.visit("http://localhost:3001?frontity_name=wp-comments");
+    });
+
+    afterEach(() => {
+      task("resetDatabase");
     });
 
     it("Should return an error when sending a comment without an email", () => {
+      cy.visit("http://localhost:3001?frontity_name=wp-comments");
       cy.get("#comment-no-email").click();
 
       commentForm(1).shouldHavePropertyWithValue("isError", true);
@@ -173,6 +191,7 @@ describe("wp-comments", () => {
         value: 0,
       });
 
+      cy.visit("http://localhost:3001?frontity_name=wp-comments");
       cy.get("#comment-no-email").click();
 
       commentForm(1).shouldHavePropertyWithValue("isSubmitting", false);
@@ -190,6 +209,7 @@ describe("wp-comments", () => {
         value: 1,
       });
 
+      cy.visit("http://localhost:3001?frontity_name=wp-comments");
       cy.get("#comment-ok").click();
 
       commentForm(1).shouldHavePropertyWithValue("isError", true);
@@ -204,6 +224,8 @@ describe("wp-comments", () => {
     });
 
     it(`Should post a sub-comment correctly`, () => {
+      cy.visit("http://localhost:3001?frontity_name=wp-comments");
+
       // fetch the existing (one) comment and wait till it's ready in state
       cy.get("#fetch-comments").click();
       data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
@@ -225,6 +247,8 @@ describe("wp-comments", () => {
     });
 
     it(`Should submit a form with an error and then submit correctly`, () => {
+      cy.visit("http://localhost:3001?frontity_name=wp-comments");
+
       // fetch the existing (one) comment and wait tills it's ready in state
       cy.get("#fetch-comments").click();
       data(`@comments/1/`).shouldHavePropertyWithValue("isReady", true);
