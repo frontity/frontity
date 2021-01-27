@@ -23,6 +23,11 @@ interface UseInfiniteScroll extends Package {
        * Flag that indicates if infinite hooks are enabled.
        */
       isInfiniteScrollEnabled: boolean;
+
+      /**
+       * Value indicating how may pages should be fetched automatically.
+       */
+      infiniteScrollLimit: number;
     };
   };
 
@@ -38,6 +43,11 @@ interface UseInfiniteScroll extends Package {
        * Enable or disable infinite scroll hooks.
        */
       toggleInfiniteScroll: Action<Packages>;
+
+      /**
+       * Enable or disable infinite scroll hooks.
+       */
+      limitInfiniteScroll: Action<Packages, number>;
 
       /**
        * Initializes the theme package.

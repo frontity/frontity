@@ -166,6 +166,10 @@ describe("useArchiveInfiniteScroll", () => {
     // Scrolls to bottom, the next page should not be fetched. We wait here a
     // short period of time just to be sure the request for the next page was
     // not made.
+
+    // The request (if made) is made asynchronously right after the bottom
+    // element is visible, so it's not important the amount of time.
+
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.scrollTo("bottom").wait(300);
 
@@ -178,7 +182,92 @@ describe("useArchiveInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/archive/");
   });
 
-  it("should fetch pages until the limit is reached");
+  it.only("should fetch pages until the limit is reached", () => {
+    cy.visit("http://localhost:3001/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/");
+
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": 21,
+        "x-wp-totalpages": 3,
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
+      headers: {
+        "x-wp-total": 21,
+        "x-wp-totalpages": 3,
+      },
+      delay: 300,
+    }).as("pageTwo");
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=3",
+      response: "fixture:use-infinite-scroll/page-3.json",
+      headers: {
+        "x-wp-total": 21,
+        "x-wp-totalpages": 3,
+      },
+      delay: 300,
+    }).as("pageThree");
+
+    // Set the infinite scroll limit to two pages.
+    cy.get("[data-test=limit-infinite-scroll]").should("exist").click();
+
+    // Changes url to `/archive`.
+    cy.get("[data-test='to-archive']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/archive/");
+    cy.wait("@pageOne");
+    cy.get("[data-test='archive']").should("exist");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+
+    // Scrolls to bottom to fetch next page.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='fetching']").should("exist");
+    cy.get("[data-test='page-2']").should("not.exist");
+    cy.wait("@pageTwo");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-2']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/archive/page/2/");
+
+    cy.window().then((win: any) =>
+      cy.spy(win.frontity.actions.source, "fetch")
+    );
+
+    // Scrolls to bottom, the next page should not be fetched. We wait here a
+    // short period of time just to be sure the request for the next page was
+    // not made.
+
+    // The request (if made) is made asynchronously right after the bottom
+    // element is visible, so it's not important the amount of time.
+
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.scrollTo("bottom").wait(300);
+
+    cy.window()
+      .then((win: any) => win.frontity.actions.source.fetch)
+      .should("not.have.been.called");
+
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-3']").should("not.exist");
+    cy.location("href").should("eq", "http://localhost:3001/archive/page/2/");
+
+    // Fetching it manually after the limit is reached should work as expected.
+    cy.get("[data-test='fetch']").should("exist").click();
+    cy.get("[data-test='fetching']").should("exist");
+    cy.get("[data-test='page-3']").should("not.exist");
+    cy.wait("@pageThree");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-3']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/archive/page/3/");
+  });
+
   it("should fetch pages until the last one is fetched");
   it("should keep fetched pages when going back");
 });

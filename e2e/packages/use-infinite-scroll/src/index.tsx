@@ -49,6 +49,14 @@ const Root: React.FC = connect(
               >
                 Toggle Infinite Scroll
               </button>
+              <button
+                data-test="limit-infinite-scroll"
+                onClick={() => {
+                  actions.theme.limitInfiniteScroll(2);
+                }}
+              >
+                Set Limit
+              </button>
             </>
           )}
       </>
@@ -62,6 +70,7 @@ const pkg: UseInfiniteScroll = {
   state: {
     theme: {
       isInfiniteScrollEnabled: true,
+      infiniteScrollLimit: Infinity,
     },
   },
   actions: {
@@ -69,6 +78,9 @@ const pkg: UseInfiniteScroll = {
       toggleInfiniteScroll({ state }) {
         state.theme.isInfiniteScrollEnabled = !state.theme
           .isInfiniteScrollEnabled;
+      },
+      limitInfiniteScroll: ({ state }) => (value) => {
+        state.theme.infiniteScrollLimit = value;
       },
       init({ libraries }) {
         Object.values(handlers).forEach((handler) => {

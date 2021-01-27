@@ -13,8 +13,15 @@ const Archive: React.FC = () => {
   const { state, libraries } = useConnect<Packages>();
   const current = state.source.get(state.router.link);
 
-  const { pages, isFetching, isError, fetchNext } = useArchiveInfiniteScroll({
+  const {
+    pages,
+    isFetching,
+    isError,
+    isLimit,
+    fetchNext,
+  } = useArchiveInfiniteScroll({
     active: state.theme.isInfiniteScrollEnabled,
+    limit: state.theme.infiniteScrollLimit,
     fetchInViewOptions: {
       root: document as any,
       rootMargin: "400px 0px",
@@ -57,7 +64,7 @@ const Archive: React.FC = () => {
         );
       })}
       {isFetching && <div data-test="fetching">Fetching</div>}
-      {isError && (
+      {(isError || isLimit) && (
         <div data-test="error" css={fetchDiv}>
           <button data-test="fetch" onClick={fetchNext}>
             Fetch Next
