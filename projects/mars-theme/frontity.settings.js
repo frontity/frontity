@@ -1,5 +1,5 @@
 const settings = {
-  name: "mars-theme-example",
+  name: "mars-theme",
   state: {
     frontity: {
       url: "https://mars.frontity.org",
