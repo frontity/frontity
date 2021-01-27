@@ -42,4 +42,8 @@ describe("Head", () => {
   it("should be able to add inline CSS", () => {
     cy.get("body").should("have.css", "background-color");
   });
+
+  it("should generate the emotion style tag", () => {
+    cy.get("head style[data-emotion]").should("exist");
+  });
 });

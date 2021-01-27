@@ -121,3 +121,16 @@ describe("css", () => {
     });
   });
 });
+
+describe("critical css", () => {
+  it("should extract the critical css", () => {
+    cy.visitSSR("http://localhost:3001/styled-css?frontity_name=emotion").then(
+      () => {
+        cy.get("head style[data-emotion]").should("exist");
+
+        // Frontity is the cache key
+        cy.get("head style[data-emotion]").should("contain", "frontity");
+      }
+    );
+  });
+});
