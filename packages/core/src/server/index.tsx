@@ -10,6 +10,9 @@ import { getSettings } from "@frontity/file-settings";
 import { Context, Package } from "@frontity/types";
 import { getSnapshot } from "@frontity/connect";
 import { ChunkExtractor } from "@loadable/server";
+import { CacheProvider } from "@emotion/react";
+import createEmotionServer from "@emotion/server/create-instance";
+import createCache from "@emotion/cache";
 import getTemplate from "./templates";
 import {
   getStats,
@@ -123,8 +126,6 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
     // Get the correct template or html if none is found.
     const template = getTemplate({ mode: settings.mode });
 
-    // Init variables.
-    let html = "";
     const frontity: FrontityTags = {};
 
     // Create the store.
@@ -155,7 +156,24 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
     // each request.
     const helmetContext = {} as FilledContext;
 
-    const Component = <App store={store} helmetContext={helmetContext} />;
+    /**
+     * Output.
+     */
+    const output = {
+      html: "",
+      css: "",
+      ids: [],
+    };
+
+    const emotionCacheKey = "frontity";
+    const emotionCache = createCache({ key: emotionCacheKey });
+    const { extractCritical } = createEmotionServer(emotionCache);
+
+    const Component = (
+      <CacheProvider value={emotionCache}>
+        <App store={store} helmetContext={helmetContext} />
+      </CacheProvider>
+    );
 
     // If there's no client stats or there is no client entrypoint for the site
     // we want to load, we don't extract scripts.
@@ -166,7 +184,14 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
         entrypoints: [settings.name],
       });
       const jsx = extractor.collectChunks(Component);
-      html = renderToString(jsx);
+
+      // Assign the new values from `extractCritical`
+      Object.assign(output, extractCritical(renderToString(jsx)));
+
+      // Define the emotion style tag
+      frontity.style = `<style data-emotion="${emotionCacheKey} ${output.ids.join(
+        " "
+      )}">${output.css}</style>`;
 
       // Run afterSSR actions. It runs at this point because we want to run it
       // before taking the state snapshot. This gives the user a chance to
@@ -203,7 +228,7 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
     } else {
       // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
       // because no hydratation will happen in the client.
-      html = renderToStaticMarkup(Component);
+      output.html = renderToStaticMarkup(Component);
 
       // Run afterSSR actions.
       Object.values(store.actions).forEach(({ afterSSR }) => {
@@ -215,7 +240,7 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
     const head = getHeadTags(helmetContext.helmet);
 
     // Write the template to body.
-    ctx.body = template({ html, frontity, head });
+    ctx.body = template({ html: output.html, frontity, head });
     next();
   });
 

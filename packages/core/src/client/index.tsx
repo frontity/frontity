@@ -1,8 +1,12 @@
 import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import { getSnapshot } from "@frontity/connect";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 import App from "../app";
 import createStore from "./store";
+
+const emotionCache = createCache({ key: "frontity" });
 
 export default async ({ packages }) => {
   if (typeof window !== "undefined" && window["Proxy"]) {
@@ -39,7 +43,12 @@ export default async ({ packages }) => {
       }
 
       loadableReady(() => {
-        hydrate(<App store={store} />, window.document.getElementById("root"));
+        hydrate(
+          <CacheProvider value={emotionCache}>
+            <App store={store} />
+          </CacheProvider>,
+          window.document.getElementById("root")
+        );
 
         // Switch to CSR mode.
         store.state.frontity.rendering = "csr";
