@@ -1,8 +1,8 @@
 {
-  "name": "example-mars-theme-ts",
+  "name": "mars-theme-project",
   "version": "1.0.0",
   "private": true,
-  "description": "Example of a project using mars-theme but using a `frontity.settings.ts` file (TypeScript)",
+  "description": "A simple Frontity project using mars-theme for testing purposes",
   "scripts": {
     "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\"",
     "dev": "frontity dev",
@@ -10,7 +10,9 @@
     "build": "frontity build",
     "build:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity build",
     "serve": "frontity serve",
-    "serve:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity serve"
+    "serve:inspect": "node --inspect -r ts-node/register/transpile-only ./node_modules/.bin/frontity serve",
+    "now": "npx frontity build && npx now --confirm --token $NOW_TOKEN",
+    "now:alias": "npx now alias --token $NOW_TOKEN set mars-theme-example.now.sh mars-theme-$COMMIT_SHA.now.sh"
   },
   "license": "Apache-2.0",
   "dependencies": {

@@ -1,16 +1,25 @@
+import { ResolvePackages } from "../../../packages/types/src/utils";
+import Router from "../../../packages/router/types";
+import type { taskTypes } from "../../plugins";
+const task: taskTypes = cy.task;
+
+type WindowWithFrontity = Cypress.AUTWindow & {
+  frontity: ResolvePackages<Router>;
+};
+
 describe("Head Tags - Yoast 13.5", () => {
   before(() => {
-    cy.task("installPlugin", { name: "wordpress-seo", version: "13.5" });
-    cy.task("installPlugin", { name: "rest-api-head-tags" });
-    cy.task("installPlugin", { name: "custom-post-type-ui" });
-    cy.task("loadDatabase", {
+    task("installPlugin", { name: "wordpress-seo", version: "13.5" });
+    task("installPlugin", { name: "rest-api-head-tags" });
+    task("installPlugin", { name: "custom-post-type-ui" });
+    task("loadDatabase", {
       path: "./wp-data/head-tags/yoast-13.5.sql",
     });
   });
 
   after(() => {
-    cy.task("resetDatabase");
-    cy.task("removeAllPlugins");
+    task("resetDatabase");
+    task("removeAllPlugins");
   });
 
   /**
@@ -19,7 +28,7 @@ describe("Head Tags - Yoast 13.5", () => {
    * @param link - The pathname to wich the test should navigate.
    * @returns The full url.
    */
-  const fullURL = (link) =>
+  const fullURL = (link: string) =>
     `http://localhost:3001${link}?frontity_name=head-tags`;
 
   /**
@@ -28,7 +37,7 @@ describe("Head Tags - Yoast 13.5", () => {
    * @param link - The given link.
    * @param title - The page title for the given link.
    */
-  const checkTitle = (link, title) => {
+  const checkTitle = (link: string, title: string) => {
     it("should render the correct title", () => {
       cy.visitSSR(fullURL(link)).then(() => {
         cy.get("title").should("contain", title);
@@ -47,7 +56,7 @@ describe("Head Tags - Yoast 13.5", () => {
    * plugin we are using to generate snapshots gives an error when trying to
    * generate a snapshot for that tag (it also doesn't work well with strings).
    */
-  const checkMetaTags = (link) => {
+  const checkMetaTags = (link: string) => {
     it("should render the correct canonical URL", () => {
       cy.visitSSR(fullURL(link)).then(() => {
         cy.get('link[rel="canonical"]').toMatchSnapshot();
@@ -94,8 +103,8 @@ describe("Head Tags - Yoast 13.5", () => {
    *
    * @param link - The link of the page.
    */
-  const routerSet = (link) => {
-    cy.window().then((win) => {
+  const routerSet = (link: string) => {
+    cy.window().then((win: WindowWithFrontity) => {
       win.frontity.actions.router.set(link);
     });
   };

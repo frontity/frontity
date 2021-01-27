@@ -1,16 +1,25 @@
+import { ResolvePackages } from "../../../packages/types/src/utils";
+import Router from "../../../packages/router/types";
+import type { taskTypes } from "../../plugins";
+const task: taskTypes = cy.task;
+
+type WindowWithFrontity = Cypress.AUTWindow & {
+  frontity: ResolvePackages<Router>;
+};
+
 describe("Head Tags - All in One SEO Pack", () => {
   before(() => {
-    cy.task("installPlugin", { name: "all-in-one-seo-pack", version: "3.7.1" });
-    cy.task("installPlugin", { name: "rest-api-head-tags" });
-    cy.task("installPlugin", { name: "custom-post-type-ui" });
-    cy.task("loadDatabase", {
+    task("installPlugin", { name: "all-in-one-seo-pack", version: "3.7.1" });
+    task("installPlugin", { name: "rest-api-head-tags" });
+    task("installPlugin", { name: "custom-post-type-ui" });
+    task("loadDatabase", {
       path: "./wp-data/head-tags/aioseop.sql",
     });
   });
 
   after(() => {
-    cy.task("resetDatabase");
-    cy.task("removeAllPlugins");
+    task("resetDatabase");
+    task("removeAllPlugins");
   });
 
   /**
@@ -19,7 +28,7 @@ describe("Head Tags - All in One SEO Pack", () => {
    * @param link - The pathname to wich the test should navigate.
    * @returns The full url.
    */
-  const fullURL = (link) =>
+  const fullURL = (link: string) =>
     `http://localhost:3001${link}?frontity_name=head-tags`;
 
   /**
@@ -28,7 +37,7 @@ describe("Head Tags - All in One SEO Pack", () => {
    * @param link - The given link.
    * @param title - The page title for the given link.
    */
-  const checkTitle = (link, title) => {
+  const checkTitle = (link: string, title: string) => {
     it("should render the correct title", () => {
       cy.visitSSR(fullURL(link)).then(() => {
         cy.get("title").should("contain", title);
@@ -41,7 +50,7 @@ describe("Head Tags - All in One SEO Pack", () => {
    *
    * @param link - The given link.
    */
-  const checkCanonical = (link) => {
+  const checkCanonical = (link: string) => {
     it("should render the correct canonical link", () => {
       cy.visitSSR(fullURL(link)).then(() => {
         cy.get('link[rel="canonical"]').toMatchSnapshot();
@@ -54,7 +63,7 @@ describe("Head Tags - All in One SEO Pack", () => {
    *
    * @param link - The given link.
    */
-  const checkSchema = (link) => {
+  const checkSchema = (link: string) => {
     it("should render the schema tag", () => {
       cy.visitSSR(fullURL(link)).then(() => {
         cy.get('script[type="application/ld+json"]').toMatchSnapshot();
@@ -67,8 +76,8 @@ describe("Head Tags - All in One SEO Pack", () => {
    *
    * @param link - The link of the page.
    */
-  const routerSet = (link) => {
-    cy.window().then((win) => {
+  const routerSet = (link: string) => {
+    cy.window().then((win: WindowWithFrontity) => {
       win.frontity.actions.router.set(link);
     });
   };

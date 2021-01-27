@@ -3,7 +3,7 @@ import WpSource from "@frontity/wp-source/types";
 import MarsTheme from "@frontity/mars-theme/types";
 
 const settings: Settings<WpSource | MarsTheme> = {
-  name: "mars-theme-example",
+  name: "mars-theme",
   state: {
     frontity: {
       url: "https://mars.frontity.org",
