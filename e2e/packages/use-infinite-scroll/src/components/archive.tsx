@@ -10,7 +10,7 @@ import { isArchive } from "@frontity/source";
  * @returns A React node.
  */
 const Archive: React.FC = () => {
-  const { state, libraries } = useConnect<Packages>();
+  const { state, actions, libraries } = useConnect<Packages>();
   const current = state.source.get(state.router.link);
 
   const {
@@ -45,22 +45,37 @@ const Archive: React.FC = () => {
 
   return (
     <div data-test="archive">
-      {pages.map(({ Wrapper, key, link }) => {
+      {pages.map(({ Wrapper, key, link, isLast }) => {
         const { page } = libraries.source.parse(link);
         const data = state.source.get(link);
         return (
-          <Wrapper key={key}>
-            {isArchive(data) ? (
-              <div css={div} data-test={`page-${page}`}>
-                Page {page}
-                <ul>
-                  {data.items.map((item) => (
-                    <li key={item.id}>{item.link}</li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </Wrapper>
+          <>
+            <Wrapper key={key}>
+              {isArchive(data) ? (
+                <div css={div} data-test={`page-${page}`}>
+                  Page {page}
+                  <ul>
+                    {data.items.map((item) => (
+                      <li key={item.id}>
+                        <a
+                          data-test={`post-${item.id}-link`}
+                          href={item.link}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            actions.router.set(item.link);
+                            actions.source.fetch(item.link);
+                          }}
+                        >
+                          {item.link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </Wrapper>
+            {isLast && <div data-test="last">You reached the end!</div>}
+          </>
         );
       })}
       {isFetching && <div data-test="fetching">Fetching</div>}
