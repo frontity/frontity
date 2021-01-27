@@ -1,8 +1,15 @@
-import React, { MouseEvent, useEffect, useRef, useCallback } from "react";
+import { MouseEvent, useEffect, useRef, useCallback } from "react";
+import * as React from "react";
 import { warn, connect, useConnect } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
-import { Queue, onHover, removeSourceUrl } from "./utils";
-import { Packages, LinkProps, NavigatorWithConnection } from "./types";
+import {
+  Queue,
+  onHover,
+  removeSourceUrl,
+  shouldFetchLink,
+  isExternalUrl,
+} from "./utils";
+import { Packages, LinkProps } from "./types";
 
 const queue = new Queue();
 
@@ -38,6 +45,8 @@ const Link: React.FC<LinkProps> = ({
   ...anchorProps
 }) => {
   const { state, actions } = useConnect<Packages>();
+  const { match } = state.frontity;
+
   const { ref: inViewRef, inView } = useInView({
     triggerOnce: true,
     rootMargin: "200px",
@@ -60,23 +69,14 @@ const Link: React.FC<LinkProps> = ({
   }
 
   const link = replaceSourceUrls
-    ? removeSourceUrl(rawLink, state.source.url)
+    ? removeSourceUrl(rawLink, state.source.url, match)
     : rawLink;
 
   const autoPrefetch = state.theme?.autoPrefetch;
-  const isExternal = link.startsWith("http");
+  const isExternal = isExternalUrl(link);
 
   useEffect(() => {
-    /**
-     * Checks if user is on slow connection or has enabled data saver.
-     */
-    const _navigator = window.navigator as NavigatorWithConnection;
-
-    const isSlowConnection =
-      _navigator?.connection?.saveData ||
-      (_navigator?.connection?.effectiveType || "").includes("2g");
-
-    if (!prefetch || !link || isSlowConnection || isExternal) {
+    if (!prefetch || !link || !shouldFetchLink(link)) {
       return;
     }
 

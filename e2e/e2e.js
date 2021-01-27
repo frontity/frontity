@@ -27,6 +27,8 @@ let {
   cypress: cypressCommand,
   suite,
   "public-path": publicPath,
+  inspect,
+  spec,
 } = argv;
 
 // Sane defaults for local development.
@@ -36,6 +38,8 @@ browser = browser || "chrome";
 prod = prod || false;
 cypressCommand = cypressCommand || "open";
 suite = suite || "all";
+inspect = inspect || false;
+spec = spec || null;
 
 // Flag to know if we have started Docker.
 let isDockerRunning = false;
@@ -50,6 +54,12 @@ validateArgs(cypressCommand, { possibleValues: ["open", "run", "off"] });
 // We have to make sure that we are runnng inside of the e2e directory The
 // script assumes that files are relative to this location.
 process.chdir(__dirname);
+
+// Set the FRONTITY_MODE for the tests to rely on.
+// Setting it as a CYPRESS_ env variables makes it work
+// regardless of using cypress UI or github action
+process.env["CYPRESS_FRONTITY_MODE"] =
+  process.env["CYPRESS_FRONTITY_MODE"] || (prod ? "production" : "development");
 
 (async () => {
   try {
@@ -116,8 +126,16 @@ process.chdir(__dirname);
         stdio: "inherit",
       });
     } else {
-      let args = ["frontity", "dev", "--port", "3001", "--dont-open-browser"];
-
+      let args = inspect
+        ? [
+            "--inspect",
+            "./node_modules/.bin/frontity",
+            "dev",
+            "--port",
+            "3001",
+            "--dont-open-browser",
+          ]
+        : ["frontity", "dev", "--port", "3001", "--dont-open-browser"];
       // Only if publicPath was passed as a CLI argument, add it to the final
       // command.
       if (publicPath) {
@@ -130,7 +148,7 @@ process.chdir(__dirname);
       }
 
       // Dev.
-      execa("npx", args, {
+      execa(inspect ? "node" : "npx", args, {
         stdio: "inherit",
       });
     }
@@ -151,7 +169,7 @@ process.chdir(__dirname);
       if (cypressCommand === "open") {
         await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
       } else if (cypressCommand === "run") {
-        if (suite === "all") {
+        if (!spec && suite === "all") {
           await cypress.run({
             env: { WORDPRESS_VERSION: wpVersion },
             spec: `./integration/**/*.spec.js`,
@@ -161,7 +179,9 @@ process.chdir(__dirname);
           await cypress.run({
             env: { WORDPRESS_VERSION: wpVersion },
             browser,
-            spec: `./integration/${suite}/**/*.spec.js`,
+            spec: spec
+              ? `./integration/**/${spec}.spec.js`
+              : `./integration/${suite}/**/*.spec.js`,
           });
         }
       }

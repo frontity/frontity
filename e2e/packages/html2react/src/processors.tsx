@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { css } from "frontity";
 import { Processor, Node } from "@frontity/html2react/types";
 import Html2ReactTests from "../types";
@@ -15,7 +15,7 @@ export const testProcessor: Processor<
       `;
     }
     return node;
-  }
+  },
 };
 
 export const oldProcessor: Processor = ({
@@ -28,12 +28,12 @@ export const oldProcessor: Processor = ({
       node.children = [
         {
           type: "text",
-          content: root ? "Yes" : "No"
-        }
+          content: root ? "Yes" : "No",
+        },
       ];
     }
     return node;
-  }
+  },
 } as unknown) as Processor;
 
 export default [testProcessor, oldProcessor];

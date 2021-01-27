@@ -1,4 +1,3 @@
-import React from "react";
 import TestRenderer from "react-test-renderer";
 import SmartAd from "../smart-ad";
 import SmartAdserver from "../../../types";
@@ -33,20 +32,7 @@ describe("SmartAdserver", () => {
 
     expect(smartAd).toMatchInlineSnapshot(`
       <div
-        css={
-          Array [
-            Object {
-              "map": undefined,
-              "name": "ftr8hp",
-              "next": undefined,
-              "styles": "
-              min-height: 200px;
-            ",
-              "toString": [Function],
-            },
-            undefined,
-          ]
-        }
+        className="css-i4g53b"
         id="test-smartad"
       />
     `);

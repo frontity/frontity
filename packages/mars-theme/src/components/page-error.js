@@ -1,4 +1,3 @@
-import React from "react";
 import { styled, connect } from "frontity";
 
 const description404 = (

@@ -8,15 +8,13 @@
   "video": false,
   "screenshotOnRunFailure": false,
   "trashAssetsBeforeRuns": false,
-  "experimentalFetchPolyfill": true,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "projectId": "ed7hed",
   "defaultCommandTimeout": 10000,
   "taskTimeout": 60000,
-  "chromeWebSecurity": false,
   "baseUrl": "http://localhost:3001",
   "retries": {
-    "runMode": 3,
+    "runMode": 1,
     "openMode": 0
   }
 }

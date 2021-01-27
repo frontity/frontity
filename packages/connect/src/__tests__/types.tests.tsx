@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
-import connect, { createStore, Action, Derived, Connect } from "..";
+/* eslint-disable @typescript-eslint/no-unused-vars, jest/expect-expect */
+import * as React from "react";
+import connect, { useConnect, createStore, Action, Derived, Connect } from "..";
 
 const delay = () => new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -145,4 +145,25 @@ test("Connected components only require own props", () => {
 
 test("connect can receive `inpectProps` option", () => {
   connect(Component, { injectProps: false });
+});
+
+test("useConnect returns the proper types", () => {
+  const Component = () => {
+    const { state, actions, extra } = useConnect<Config>();
+
+    const prop1: number = state.prop1;
+    const prop2: number = state.nested1.prop2;
+    const prop3: number = state.nested1.prop3;
+    const prop4: number = state.nested1.prop4(1);
+    const prop5: number = state.nested1.prop5;
+    const prop6: number = extra.prop6;
+
+    actions.action1();
+    actions.nested1.action2();
+    actions.nested2.nested3.action3();
+    actions.nested2.nested3.action4();
+    actions.nested2.nested3.action5(1);
+
+    return <div>My useConnect component</div>;
+  };
 });

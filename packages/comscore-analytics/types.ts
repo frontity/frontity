@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Action, MergePackages, Package } from "frontity/types";
 import Analytics, { Pageview } from "@frontity/analytics/types";
 
@@ -89,6 +89,7 @@ interface ComscoreAnalytics extends Package {
    * Package name.
    */
   name: "@frontity/comscore-analytics";
+
   /**
    * Root elements exposed by this package.
    */

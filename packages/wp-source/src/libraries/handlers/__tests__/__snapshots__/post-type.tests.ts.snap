@@ -47,8 +47,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -106,8 +113,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -156,8 +170,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -206,8 +227,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -353,8 +381,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -424,8 +459,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -486,8 +528,805 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org",
+}
+`;
+
+exports[`custom post type doesn't exist in source.page 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json/",
+  "attachment": Object {
+    "12": Object {
+      "author": 1,
+      "id": 12,
+      "link": "/cpt/cpt-11/attachment-cpt-11/",
+      "slug": "attachment-cpt-11",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "cpt": Object {
+    "11": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          12,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 12,
+      "id": 11,
+      "link": "/cpt/cpt-11/",
+      "slug": "cpt-11",
+      "tags": Array [
+        1,
+      ],
+      "type": "cpt",
+    },
+  },
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/author/author-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/author/author-1/",
+    },
+    "/cpt/cpt-11/": Object {
+      "id": 11,
+      "isCpt": true,
+      "isFetching": false,
+      "isPostType": true,
+      "isReady": true,
+      "link": "/cpt/cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/cpt-11/",
+      "type": "cpt",
+    },
+    "/cpt/cpt-11/attachment-cpt-11/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/cpt/cpt-11/attachment-cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/cpt-11/attachment-cpt-11/",
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/tag/tag-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/tag/tag-1/",
+      "taxonomy": "tag",
+    },
+  },
+  "entity": [Function],
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
+  "postsPage": "",
+  "redirections": "no",
+  "subdirectory": "",
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org",
+}
+`;
+
+exports[`custom post type exists in source.page 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json/",
+  "attachment": Object {
+    "12": Object {
+      "author": 1,
+      "id": 12,
+      "link": "/cpt/cpt-11/attachment-cpt-11/",
+      "slug": "attachment-cpt-11",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "cpt": Object {
+    "11": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          12,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 12,
+      "id": 11,
+      "link": "/cpt/cpt-11/",
+      "slug": "cpt-11",
+      "tags": Array [
+        1,
+      ],
+      "type": "cpt",
+    },
+  },
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/author/author-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/author/author-1/",
+    },
+    "/cpt/cpt-11/": Object {
+      "id": 11,
+      "isCpt": true,
+      "isFetching": false,
+      "isPostType": true,
+      "isReady": true,
+      "link": "/cpt/cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/cpt-11/",
+      "type": "cpt",
+    },
+    "/cpt/cpt-11/attachment-cpt-11/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/cpt/cpt-11/attachment-cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/cpt-11/attachment-cpt-11/",
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/tag/tag-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/tag/tag-1/",
+      "taxonomy": "tag",
+    },
+  },
+  "entity": [Function],
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
+  "postsPage": "",
+  "redirections": "no",
+  "subdirectory": "",
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org",
+}
+`;
+
+exports[`custom post type works with custom post types with parent pages 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json/",
+  "attachment": Object {
+    "12": Object {
+      "author": 1,
+      "id": 12,
+      "link": "/cpt/parent/cpt-11/attachment-cpt-11/",
+      "slug": "attachment-cpt-11",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "cpt": Object {
+    "11": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "up": Array [
+          Object {
+            "id": 2,
+            "link": "https://test.frontity.org/cpt/parent",
+            "slug": "parent",
+            "type": "cpt",
+          },
+        ],
+        "wp:featuredmedia": Array [
+          12,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 12,
+      "id": 11,
+      "link": "/cpt/parent/cpt-11/",
+      "parent": 2,
+      "slug": "cpt-11",
+      "tags": Array [
+        1,
+      ],
+      "type": "cpt",
+    },
+  },
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/author/author-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/author/author-1/",
+    },
+    "/cpt/parent/cpt-11/": Object {
+      "id": 11,
+      "isCpt": true,
+      "isFetching": false,
+      "isPostType": true,
+      "isReady": true,
+      "link": "/cpt/parent/cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/parent/cpt-11/",
+      "type": "cpt",
+    },
+    "/cpt/parent/cpt-11/attachment-cpt-11/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/cpt/parent/cpt-11/attachment-cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/parent/cpt-11/attachment-cpt-11/",
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/tag/tag-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/tag/tag-1/",
+      "taxonomy": "tag",
+    },
+  },
+  "entity": [Function],
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
+  "postsPage": "",
+  "redirections": "no",
+  "subdirectory": "",
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org",
+}
+`;
+
+exports[`custom post type works with query params (doesn't exist in source.page) 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json/",
+  "attachment": Object {
+    "12": Object {
+      "author": 1,
+      "id": 12,
+      "link": "/cpt/cpt-11/attachment-cpt-11/",
+      "slug": "attachment-cpt-11",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "cpt": Object {
+    "11": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          12,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 12,
+      "id": 11,
+      "link": "/cpt/cpt-11/",
+      "slug": "cpt-11",
+      "tags": Array [
+        1,
+      ],
+      "type": "cpt",
+    },
+  },
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/author/author-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/author/author-1/",
+    },
+    "/cpt/cpt-11/": Object {
+      "id": 11,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/cpt/cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/cpt-11/",
+      "type": "cpt",
+    },
+    "/cpt/cpt-11/?some=param": Object {
+      "id": 11,
+      "isCpt": true,
+      "isFetching": false,
+      "isPostType": true,
+      "isReady": true,
+      "link": "/cpt/cpt-11/?some=param",
+      "page": 1,
+      "query": Object {
+        "some": "param",
+      },
+      "route": "/cpt/cpt-11/",
+      "type": "cpt",
+    },
+    "/cpt/cpt-11/attachment-cpt-11/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/cpt/cpt-11/attachment-cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/cpt-11/attachment-cpt-11/",
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/tag/tag-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/tag/tag-1/",
+      "taxonomy": "tag",
+    },
+  },
+  "entity": [Function],
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
+  "postsPage": "",
+  "redirections": "no",
+  "subdirectory": "",
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org",
+}
+`;
+
+exports[`custom post type works with query params (exists in source.page) 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json/",
+  "attachment": Object {
+    "12": Object {
+      "author": 1,
+      "id": 12,
+      "link": "/cpt/cpt-11/attachment-cpt-11/",
+      "slug": "attachment-cpt-11",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "cpt": Object {
+    "11": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          12,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 12,
+      "id": 11,
+      "link": "/cpt/cpt-11/",
+      "slug": "cpt-11",
+      "tags": Array [
+        1,
+      ],
+      "type": "cpt",
+    },
+  },
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/author/author-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/author/author-1/",
+    },
+    "/cpt/cpt-11/": Object {
+      "id": 11,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/cpt/cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/cpt-11/",
+      "type": "cpt",
+    },
+    "/cpt/cpt-11/?some=param": Object {
+      "id": 11,
+      "isCpt": true,
+      "isFetching": false,
+      "isPostType": true,
+      "isReady": true,
+      "link": "/cpt/cpt-11/?some=param",
+      "page": 1,
+      "query": Object {
+        "some": "param",
+      },
+      "route": "/cpt/cpt-11/",
+      "type": "cpt",
+    },
+    "/cpt/cpt-11/attachment-cpt-11/": Object {
+      "id": 12,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/cpt/cpt-11/attachment-cpt-11/",
+      "page": 1,
+      "query": Object {},
+      "route": "/cpt/cpt-11/attachment-cpt-11/",
+      "type": "attachment",
+    },
+    "/tag/tag-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/tag/tag-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/tag/tag-1/",
+      "taxonomy": "tag",
+    },
+  },
+  "entity": [Function],
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
+  "postsPage": "",
+  "redirections": "no",
+  "subdirectory": "",
+  "tag": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/tag/tag-1/",
+      "parent": 0,
+      "slug": "tag-1",
+      "taxonomy": "tag",
+    },
+  },
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org",
+}
+`;
+
+exports[`page can have a parent 1`] = `
+Object {
+  "api": "https://test.frontity.org/wp-json/",
+  "attachment": Object {},
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "authorBase": "",
+  "category": Object {},
+  "categoryBase": "",
+  "data": Object {
+    "/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/author/author-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/author/author-1/",
+    },
+    "/parent/page-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isPage": true,
+      "isPostType": true,
+      "isReady": true,
+      "link": "/parent/page-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/parent/page-1/",
+      "type": "page",
+    },
+  },
+  "entity": [Function],
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "up": Array [
+          Object {
+            "id": 2,
+            "link": "https://test.frontity.org/parent/",
+            "slug": "parent",
+          },
+        ],
+      },
+      "author": 1,
+      "featured_media": 1,
+      "id": 1,
+      "link": "/parent/page-1/",
+      "parent": 2,
+      "slug": "page-1",
+      "type": "page",
+    },
+  },
+  "params": Object {},
+  "post": Object {},
+  "postEndpoint": "posts",
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
+  "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -558,8 +1397,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -630,8 +1476,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -714,8 +1567,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -798,8 +1658,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -937,8 +1804,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1063,8 +1937,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1189,8 +2070,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1214,7 +2102,7 @@ exports[`post fetchs from a different endpoint with extra params 1`] = `
 Array [
   Array [
     Object {
-      "endpoint": "multiple-post-type",
+      "endpoint": "cpts",
       "params": Object {
         "_embed": true,
         "slug": "cpt-11",
@@ -1339,8 +2227,15 @@ Object {
   },
   "post": Object {},
   "postEndpoint": "multiple-post-type",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1477,8 +2372,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1616,8 +2518,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1754,8 +2663,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -1892,8 +2808,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -2029,8 +2952,15 @@ Object {
     },
   },
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {
     "1": Object {
@@ -2091,8 +3021,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -2133,8 +3070,15 @@ Object {
   "params": Object {},
   "post": Object {},
   "postEndpoint": "posts",
-  "postTypes": Array [],
+  "postTypes": Array [
+    Object {
+      "archive": "/cpt",
+      "endpoint": "cpts",
+      "type": "cpt",
+    },
+  ],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",

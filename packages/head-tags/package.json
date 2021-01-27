@@ -16,6 +16,7 @@
     "url": "https://github.com/frontity/frontity.git"
   },
   "scripts": {
+    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\"",
     "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
@@ -30,6 +31,8 @@
   },
   "devDependencies": {
     "@frontity/connect": "^1.1.4",
-    "@frontity/wp-source": "^1.10.0"
+    "@frontity/wp-source": "^1.10.0",
+    "clone-deep": "^4.0.1",
+    "deepmerge": "^4.2.2"
   }
 }

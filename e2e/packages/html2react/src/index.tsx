@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { connect } from "frontity";
 import { Connect } from "frontity/types";
 import Html2ReactTests, { Packages } from "../types";

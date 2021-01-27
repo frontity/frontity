@@ -14,6 +14,7 @@
     "url": "https://github.com/frontity/frontity.git"
   },
   "scripts": {
+    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\"",
     "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
@@ -25,7 +26,7 @@
     "frontity": "^1.13.0"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.13.1",
+    "react-test-renderer": "^17.0.1",
     "@frontity/connect": "^1.1.4"
   }
 }

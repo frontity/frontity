@@ -5,15 +5,41 @@ import { Target, Mode, EntryPoints } from "../../../types";
 // Get the root path of the directory where the script was started.
 const rootPath = process.cwd();
 
-export default ({
+/**
+ * The options of the {@link entry} function.
+ */
+interface EntryOptions {
+  /**
+   * The target of the build: "server", "es5" or "module".
+   */
+  target: Target;
+
+  /**
+   * The mode of the build: "development" or "production".
+   */
+  mode: Mode;
+
+  /**
+   * The paths of the entry points generated on the fly by Frontity in the
+   * `/build/bundling/entry-points folder`.
+   */
+  entryPoints: EntryPoints[];
+}
+
+/**
+ * Generate the object for Webpack's entry configuration.
+ *
+ * Official Webpack docs: https://webpack.js.org/configuration/entry-context/.
+ *
+ * @param options - Defined in {@link EntryOptions}.
+ *
+ * @returns The configuration object for Webpack.
+ */
+const entry = ({
   target,
   mode,
   entryPoints,
-}: {
-  target: Target;
-  mode: Mode;
-  entryPoints: EntryPoints[];
-}): Configuration["entry"] => {
+}: EntryOptions): Configuration["entry"] => {
   let config: Configuration["entry"] = {};
 
   if (target === "server") {
@@ -29,11 +55,10 @@ export default ({
         if (mode === "development")
           config[name].push("webpack-hot-middleware/client");
 
-        // Add babel polyfill for the es5 packages (regeneratorRuntime and so on).
-        if (target === "es5") config[name].push("babel-polyfill");
-
         config[name].push(resolve(rootPath, path));
       });
   }
   return config;
 };
+
+export default entry;

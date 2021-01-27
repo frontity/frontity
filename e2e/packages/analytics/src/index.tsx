@@ -1,9 +1,4 @@
-/* eslint-disable */
-/*
- * TSDocs will be added in this branch:
- * https://github.com/frontity/frontity/tree/package-name
- */
-import React from "react";
+import * as React from "react";
 import { Head, connect } from "frontity";
 import { Connect } from "frontity/types";
 import Analytics, { Packages } from "../types";

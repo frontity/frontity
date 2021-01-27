@@ -1,4 +1,3 @@
-// This allows us to get TypeScript Intellisense and autocompletion.
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 
@@ -7,6 +6,10 @@ describe("Special characters in the URL", () => {
     task("loadDatabase", {
       path: "./wp-data/post-with-special-characters/dump.sql",
     });
+  });
+
+  after(() => {
+    task("resetDatabase");
   });
 
   it("Should load the post", () => {

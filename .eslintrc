@@ -12,6 +12,8 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "error", // Checks effect dependencies
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "import/named": "off",
     "jsdoc/check-examples": "error",
@@ -113,7 +115,7 @@
         "jest/expect-expect": [
           "error",
           {
-            "assertFunctionNames": ["expect", "**.should"]
+            "assertFunctionNames": ["expect", "cy.**"]
           }
         ]
       }
@@ -122,7 +124,19 @@
     {
       "files": ["**/integration/**/*.spec.{js,ts}"],
       "rules": {
-        "jest/valid-expect-in-promise": "off"
+        "jest/valid-expect-in-promise": "off",
+        "jest/expect-expect": "off"
+      }
+    },
+    {
+      "files": [
+        "**/__tests__/*types*{js,ts,jsx,tsx}",
+        "**/types/**/__tests__/*.{js,ts,jsx,tsx}"
+      ],
+      "rules": {
+        "jest/expect-expect": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off"
       }
     }
   ]

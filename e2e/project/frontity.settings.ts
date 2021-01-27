@@ -233,34 +233,59 @@ const settings: Settings<
         name: "@frontity/smart-adserver",
         state: {
           smartAdserver: {
-            networkId: "1445",
-            subdomain: "www",
+            networkId: "256",
+            subdomain: "www3",
           },
           fills: {
             smartAdserver: {
-              headerAd: {
+              image728x90: {
                 slot: "header",
                 library: "smartAdserver.SmartAd",
                 priority: 5,
                 props: {
                   callType: "std",
-                  siteId: 78061,
-                  pageId: 884496,
-                  formatId: 33780,
+                  siteId: 383739,
+                  pageId: 1326721,
+                  formatId: 6467,
                   tagId: "hello",
                 },
               },
-              bottomAd: {
+              html300x100: {
                 slot: "bottom",
                 library: "smartAdserver.SmartAd",
                 priority: 5,
                 props: {
                   callType: "std",
-                  siteId: 78061,
-                  pageId: 884496,
-                  formatId: 33780,
-                  minHeight: 100,
+                  siteId: 383739,
+                  pageId: 1326721,
+                  formatId: 8025,
                   tagId: "std-min-height",
+                  minHeight: 100,
+                },
+              },
+              // These two are assigned to a slot that doesn't exist, so they
+              // won't be rendered.
+              image300x250: {
+                slot: "nonexistent",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+                props: {
+                  callType: "std",
+                  siteId: 383739,
+                  pageId: 1326721,
+                  formatId: 19809,
+                  tagId: "std-image",
+                },
+              },
+              html300x600: {
+                slot: "nonexistent",
+                library: "smartAdserver.SmartAd",
+                priority: 5,
+                props: {
+                  callType: "std",
+                  siteId: 383739,
+                  pageId: 1326721,
+                  formatId: 58374,
                 },
               },
             },
@@ -353,6 +378,27 @@ const settings: Settings<
             transformLinks: {
               base: "http://localhost:8080",
             },
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "redirections",
+    state: {
+      frontity: {
+        url: "http://localhost:3001",
+      },
+    },
+    packages: [
+      "e2e-redirections",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/wp-source",
+        state: {
+          source: {
+            url: "http://localhost:8080",
+            redirections: "404",
           },
         },
       },
