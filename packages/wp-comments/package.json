@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-comments",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Add integration for WordPress native comments",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -22,13 +22,13 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/wp-source": "^1.10.0",
-    "@frontity/source": "^1.4.0",
-    "frontity": "^1.13.0"
+    "@frontity/wp-source": "^1.11.0",
+    "@frontity/source": "^1.5.0",
+    "frontity": "^1.14.0"
   },
   "devDependencies": {
-    "@frontity/connect": "^1.1.4",
-    "@frontity/error": "^0.1.1",
+    "@frontity/connect": "^1.2.0",
+    "@frontity/error": "^0.1.2",
     "clone-deep": "^4.0.1"
   }
 }

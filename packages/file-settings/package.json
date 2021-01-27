@@ -1,6 +1,6 @@
 {
   "name": "@frontity/file-settings",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "A settings package for Frontity that uses a frontity.settings.js file.",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "ramda": "^0.27.1"
   },
   "devDependencies": {
-    "@frontity/types": "^1.4.1",
+    "@frontity/types": "^1.7.0",
     "@types/ramda": "^0.27.32"
   }
 }
