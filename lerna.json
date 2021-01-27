@@ -1,4 +1,10 @@
 {
-  "packages": ["packages/*", "examples/*", "examples/**/packages/*", "e2e/project", "e2e/packages/*"],
+  "packages": [
+    "packages/*",
+    "projects/*",
+    "projects/**/packages/*",
+    "e2e/project",
+    "e2e/packages/*"
+  ],
   "version": "independent"
 }
