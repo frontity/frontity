@@ -9,9 +9,7 @@
   "dependencies": {
     "@frontity/source": "^1.2.0",
     "@frontity/router": "^1.0.19",
-    "frontity": "^1.4.3"
-  },
-  "devDependencies": {
+    "frontity": "^1.4.3",
     "@frontity/google-ad-manager": "^0.2.0"
   }
 }
