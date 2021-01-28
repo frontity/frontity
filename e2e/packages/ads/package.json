@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "description": "Package to do e2e testing of Frontity's ad libraries",
-  "scripts": {
-    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\""
-  },
   "dependencies": {
     "@frontity/source": "^1.2.0",
     "@frontity/router": "^1.0.19",
