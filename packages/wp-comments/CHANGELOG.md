@@ -1,5 +1,16 @@
 # @frontity/wp-comments
 
+## 0.2.6
+
+### Patch Changes
+
+- [`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf) [#683](https://github.com/frontity/frontity/pull/683) Thanks [@cristianbote](https://github.com/cristianbote)! - Reverts the preinstall hook added for development workflows.
+
+- Updated dependencies [[`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf)]:
+  - frontity@1.14.1
+  - @frontity/source@1.5.1
+  - @frontity/wp-source@1.11.1
+
 ## 0.2.5
 
 ### Patch Changes
