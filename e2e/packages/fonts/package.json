@@ -3,9 +3,6 @@
   "version": "1.0.2",
   "private": true,
   "description": "Package to do e2e testing for fonts",
-  "scripts": {
-    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\""
-  },
   "dependencies": {
     "frontity": "^1.4.3"
   }
