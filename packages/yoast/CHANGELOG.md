@@ -1,5 +1,39 @@
 # @frontity/yoast
 
+## 2.1.1
+
+### Patch Changes
+
+- [`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf) [#683](https://github.com/frontity/frontity/pull/683) Thanks [@cristianbote](https://github.com/cristianbote)! - Reverts the preinstall hook added for development workflows.
+
+- Updated dependencies [[`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf)]:
+  - frontity@1.14.1
+  - @frontity/head-tags@1.1.1
+  - @frontity/html2react@1.6.1
+  - @frontity/router@1.1.4
+  - @frontity/source@1.5.1
+  - @frontity/wp-source@1.11.1
+
+## 2.1.0
+
+### Minor Changes
+
+- [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7) [#670](https://github.com/frontity/frontity/pull/670) Thanks [@nicholasio](https://github.com/nicholasio)! - Update react imports in all packages (including themes) to removed unnecessary React Imports
+
+### Patch Changes
+
+- [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433) [#655](https://github.com/frontity/frontity/pull/655) Thanks [@mburridge](https://github.com/mburridge)! - Fix broken links in README files.
+
+* [`7c2fa5cc`](https://github.com/frontity/frontity/commit/7c2fa5cc47a42de8ba0a331045186e3009427cd8) [#635](https://github.com/frontity/frontity/pull/635) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Refactor some packages to use `state.source.url` instead of `state.source.api` to get the backend URL.
+
+* Updated dependencies [[`681caef1`](https://github.com/frontity/frontity/commit/681caef16c1660152e13c62afd0740071e968428), [`a5520f56`](https://github.com/frontity/frontity/commit/a5520f5605cfda2323e0c9ea4a553658a021fd15), [`01880c34`](https://github.com/frontity/frontity/commit/01880c34c111f55c23169adb7365ea9262e6cca8), [`367700eb`](https://github.com/frontity/frontity/commit/367700ebcad8dd6b87728c526de63a9c19f2df32), [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7), [`898cde32`](https://github.com/frontity/frontity/commit/898cde32b78992807fa0c7ffb76cd32c5545a6ad), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433), [`09f07484`](https://github.com/frontity/frontity/commit/09f07484c920e99d46290986d7a64b8f3c20e53c), [`e4221d4b`](https://github.com/frontity/frontity/commit/e4221d4b451268b5c951197a08b4021d50394c1b), [`0ca83cd5`](https://github.com/frontity/frontity/commit/0ca83cd5c068c4a0b759a277c8d819cdbc5c88db), [`9346f560`](https://github.com/frontity/frontity/commit/9346f560c4806483b914aa3fb7a37e373f48f712), [`cf35baa5`](https://github.com/frontity/frontity/commit/cf35baa5f14f93e8c814cb8bc850f53ee60af547), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433), [`c5b0b8f7`](https://github.com/frontity/frontity/commit/c5b0b8f7e5ebfdf02f40ded7d7347a1d28039c2d), [`7c2fa5cc`](https://github.com/frontity/frontity/commit/7c2fa5cc47a42de8ba0a331045186e3009427cd8), [`4f4b7f81`](https://github.com/frontity/frontity/commit/4f4b7f81d8eacb19e3d06eba72dcc199f556d7e4), [`d38040d3`](https://github.com/frontity/frontity/commit/d38040d3986d3d1cdf3af45eafe7d9a868920d02)]:
+  - @frontity/wp-source@1.11.0
+  - frontity@1.14.0
+  - @frontity/html2react@1.6.0
+  - @frontity/head-tags@1.1.0
+  - @frontity/source@1.5.0
+  - @frontity/router@1.1.3
+
 ## 2.0.1
 
 ### Patch Changes

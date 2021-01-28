@@ -25,7 +25,7 @@ const actions: WpSource["actions"]["source"] = {
     // Get route and route params.
     const link = normalize(route);
     const linkParams = parse(route);
-    const { query, page, queryString } = linkParams;
+    const { query, page } = linkParams;
 
     // Get options.
     const force = options ? options.force : false;
@@ -65,7 +65,10 @@ const actions: WpSource["actions"]["source"] = {
     try {
       let { route } = linkParams;
       // Transform route if there is some redirection.
-      const redirection = getMatch(route, libraries.source.redirections);
+      const redirection = getMatch(
+        { route, link },
+        libraries.source.redirections
+      );
       if (redirection) route = redirection.func(redirection.params);
 
       // Check if we need to check if it is a 30X redirection before fetching
@@ -80,10 +83,7 @@ const actions: WpSource["actions"]["source"] = {
       }
 
       // Get the handler for this route.
-      const handler = getMatch(
-        `${route}${queryString}`,
-        libraries.source.handlers
-      );
+      const handler = getMatch({ route, link }, libraries.source.handlers);
 
       // Return a 404 error if no handler has matched.
       if (!handler)

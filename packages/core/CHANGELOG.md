@@ -1,5 +1,57 @@
 # Change Log
 
+## 1.10.1
+
+### Patch Changes
+
+- [`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf) [#683](https://github.com/frontity/frontity/pull/683) Thanks [@cristianbote](https://github.com/cristianbote)! - Reverts the preinstall hook added for development workflows.
+
+- Updated dependencies [[`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf)]:
+  - @frontity/connect@1.2.1
+  - @frontity/file-settings@1.1.8
+
+## 1.10.0
+
+### Minor Changes
+
+- [`01880c34`](https://github.com/frontity/frontity/commit/01880c34c111f55c23169adb7365ea9262e6cca8) [#666](https://github.com/frontity/frontity/pull/666) Thanks [@cristianbote](https://github.com/cristianbote)! - Adopt the new version of emotion 11. That means using the emotion deidcated babel plugin for rewriting the imports, generating source-maps and enable auto labels.
+
+* [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7) [#670](https://github.com/frontity/frontity/pull/670) Thanks [@nicholasio](https://github.com/nicholasio)! - Update react imports in all packages (including themes) to removed unnecessary React Imports
+
+- [`0b5fff74`](https://github.com/frontity/frontity/commit/0b5fff74b2b04fbf3ebb6c70acb6f39fb8149340) [#672](https://github.com/frontity/frontity/pull/672) Thanks [@cristianbote](https://github.com/cristianbote)! - Add the CORS header and Cache-Control for static files. This will apply only to the files inside the static build folder.
+
+* [`d7fe1f50`](https://github.com/frontity/frontity/commit/d7fe1f507f7ab8d5b4db54a45fc38d37e1022b0e) [#661](https://github.com/frontity/frontity/pull/661) Thanks [@cristianbote](https://github.com/cristianbote)! - Updated React to version 17. This is a major version update that contains and paves the way for the newly added features. Also introduces jsx-runtime. Here's the community link https://community.frontity.org/t/update-to-react-17-and-emotion-11/3225.
+
+- [`cf35baa5`](https://github.com/frontity/frontity/commit/cf35baa5f14f93e8c814cb8bc850f53ee60af547) [#601](https://github.com/frontity/frontity/pull/601) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add support for 30x Redirections.
+
+  1. Redirections can be stored in the backend server, which will be checked according to different configurations:
+
+     - Each time a link is fetched.
+     - When the API returns a 404.
+     - When the link belongs to a certain set of URLs (configured using a regexp).
+
+     This configuration is stored in `state.source.redirections`.
+
+     The redirection information will be stored in `state.source.data` similar to what happens for 4xx and 5xx errors.
+
+  2. Redirections can be added to Frontity by populating `state.source.data` directly or using a handler.
+
+  Feature Discussion: https://community.frontity.org/t/301-redirects-stored-in-wordpress-database/3032
+
+### Patch Changes
+
+- [`e4221d4b`](https://github.com/frontity/frontity/commit/e4221d4b451268b5c951197a08b4021d50394c1b) [#640](https://github.com/frontity/frontity/pull/640) Thanks [@luisherranz](https://github.com/luisherranz)! - Update `babel-preset-env` to the latest version and switch to `core-js` v3.
+
+* [`e4221d4b`](https://github.com/frontity/frontity/commit/e4221d4b451268b5c951197a08b4021d50394c1b) [#640](https://github.com/frontity/frontity/pull/640) Thanks [@luisherranz](https://github.com/luisherranz)! - Update dependencies. Some of them to major versions because they dropped support for Node 8, which Frontity doesn't support either anymore.
+
+- [`2de4a3a1`](https://github.com/frontity/frontity/commit/2de4a3a1a17f410c2e8480789aa3c54354a5ffc7) [#674](https://github.com/frontity/frontity/pull/674) Thanks [@luisherranz](https://github.com/luisherranz)! - Update `webpack-dev-middleware` to v4.1 make sure people don't see a bug in the console output.
+
+* [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433) [#655](https://github.com/frontity/frontity/pull/655) Thanks [@mburridge](https://github.com/mburridge)! - Fix broken links in README files.
+
+* Updated dependencies [[`01880c34`](https://github.com/frontity/frontity/commit/01880c34c111f55c23169adb7365ea9262e6cca8), [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433)]:
+  - @frontity/connect@1.2.0
+  - @frontity/file-settings@1.1.7
+
 ## 1.9.1
 
 ### Patch Changes

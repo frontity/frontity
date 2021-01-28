@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "1.9.1",
+  "version": "1.10.1",
   "description": "The core package of the Frontity framework.",
   "keywords": [
     "frontity",
@@ -18,7 +18,6 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\"",
     "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
@@ -41,8 +40,8 @@
     "@emotion/babel-plugin": "^11.1.2",
     "@emotion/react": "^11.1.4",
     "@emotion/server": "^11.0.0",
-    "@frontity/connect": "^1.1.4",
-    "@frontity/file-settings": "^1.1.6",
+    "@frontity/connect": "^1.2.1",
+    "@frontity/file-settings": "^1.1.8",
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.0",
@@ -83,7 +82,7 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
-    "@frontity/types": "^1.6.0",
+    "@frontity/types": "^1.7.1",
     "@types/babel-core": "^6.25.6",
     "@types/babel__preset-env": "^7.9.1",
     "@types/cross-spawn": "^6.0.2",

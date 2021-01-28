@@ -263,8 +263,8 @@ describe("actions.source.init", () => {
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
     // Test that the redirection works.
-    const link = "/wp-cat/travel/";
-    const redirect = getMatch(link, store.libraries.source.redirections);
+    const route = "/wp-cat/travel/";
+    const redirect = getMatch({ route }, store.libraries.source.redirections);
     expect(redirect).toBeTruthy();
     expect(redirect.func(redirect.params)).toBe("/category/travel/");
   });
@@ -274,8 +274,8 @@ describe("actions.source.init", () => {
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
     // Test that the redirection works.
-    const link = "/wp-tag/paris/";
-    const redirect = getMatch(link, store.libraries.source.redirections);
+    const route = "/wp-tag/paris/";
+    const redirect = getMatch({ route }, store.libraries.source.redirections);
     expect(redirect).toBeTruthy();
     expect(redirect.func(redirect.params)).toBe("/tag/paris/");
   });
@@ -285,8 +285,8 @@ describe("actions.source.init", () => {
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
     // Test that the redirection works.
-    const link = "/blog/author/admin/";
-    const redirect = getMatch(link, store.libraries.source.redirections);
+    const route = "/blog/author/admin/";
+    const redirect = getMatch({ route }, store.libraries.source.redirections);
     expect(redirect).toBeTruthy();
     expect(redirect.func(redirect.params)).toBe("/author/admin/");
   });

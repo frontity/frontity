@@ -1,6 +1,6 @@
 {
   "name": "@frontity/google-ad-manager",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "description": "Integrate your Frontity site with Google Ad Manager",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -17,7 +17,6 @@
     "url": "https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\"",
     "test:ci": "../../node_modules/.bin/jest --ci --coverage",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
@@ -27,7 +26,7 @@
   },
   "dependencies": {
     "@types/doubleclick-gpt": "^2019041801.0.2",
-    "frontity": "^1.13.0"
+    "frontity": "^1.14.1"
   },
   "devDependencies": {
     "@types/react-test-renderer": "^17.0.0",
