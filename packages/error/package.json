@@ -1,6 +1,6 @@
 {
   "name": "@frontity/error",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Frontity errors and warnings",
   "keywords": [
     "frontity"

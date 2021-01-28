@@ -1,6 +1,6 @@
 {
   "name": "@frontity/connect",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The state manager of Frontity. Similar to MobX but much more lightweight because it's based on ES6 proxies.",
   "keywords": [
     "frontity",
@@ -24,7 +24,7 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "@frontity/error": "^0.1.2"
+    "@frontity/error": "^0.1.3"
   },
   "devDependencies": {
     "react-test-renderer": "^17.0.1"
