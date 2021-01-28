@@ -12,6 +12,6 @@
     "frontity": "^1.4.3"
   },
   "devDependencies": {
-    "@frontity/google-ad-manager": "^0.1.0"
+    "@frontity/google-ad-manager": "^0.2.0"
   }
 }

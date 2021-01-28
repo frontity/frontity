@@ -1,5 +1,11 @@
 # @frontity/error
 
+## 0.1.2
+
+### Patch Changes
+
+- [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433) [#655](https://github.com/frontity/frontity/pull/655) Thanks [@mburridge](https://github.com/mburridge)! - Fix broken links in README files.
+
 ## 0.1.1
 
 ### Patch Changes
