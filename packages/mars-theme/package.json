@@ -1,6 +1,6 @@
 {
   "name": "@frontity/mars-theme",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "description": "A starter theme for Frontity",
   "keywords": [
     "frontity",
@@ -16,8 +16,8 @@
     "url": "https://community.frontity.org"
   },
   "dependencies": {
-    "@frontity/components": "^1.6.0",
-    "@frontity/html2react": "^1.5.0",
-    "frontity": "^1.13.0"
+    "@frontity/components": "^1.7.0",
+    "@frontity/html2react": "^1.6.0",
+    "frontity": "^1.14.0"
   }
 }

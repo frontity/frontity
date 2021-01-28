@@ -1,6 +1,6 @@
 {
   "name": "@frontity/components",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Collection of React components for Frontity",
   "keywords": [
     "frontity"
@@ -25,9 +25,9 @@
     "react-test-renderer": "^17.0.1"
   },
   "dependencies": {
-    "frontity": "^1.13.0",
-    "@frontity/hooks": "^2.0.2",
-    "@frontity/source": "^1.4.0",
-    "@frontity/router": "^1.1.2"
+    "frontity": "^1.14.0",
+    "@frontity/hooks": "^2.1.0",
+    "@frontity/source": "^1.5.0",
+    "@frontity/router": "^1.1.3"
   }
 }

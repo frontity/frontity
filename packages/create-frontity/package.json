@@ -1,6 +1,6 @@
 {
   "name": "create-frontity",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Frontity package to use npm init instead of npx",
   "keywords": [
     "frontity"
@@ -26,6 +26,6 @@
     "start": "node src/index.js"
   },
   "dependencies": {
-    "frontity": "^1.9.0"
+    "frontity": "^1.14.0"
   }
 }

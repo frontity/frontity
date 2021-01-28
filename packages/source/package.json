@@ -1,6 +1,6 @@
 {
   "name": "@frontity/source",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Types for the Frontity source namespace",
   "main": "src/index.ts",
   "keywords": [
@@ -22,6 +22,6 @@
     "test": "../../node_modules/.bin/jest --clearCache && ../../node_modules/.bin/jest --watch"
   },
   "dependencies": {
-    "frontity": "^1.13.0"
+    "frontity": "^1.14.0"
   }
 }

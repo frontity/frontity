@@ -1,5 +1,34 @@
 # Change Log
 
+## 1.14.0
+
+### Minor Changes
+
+- [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7) [#670](https://github.com/frontity/frontity/pull/670) Thanks [@nicholasio](https://github.com/nicholasio)! - Update react imports in all packages (including themes) to removed unnecessary React Imports
+
+* [`9346f560`](https://github.com/frontity/frontity/commit/9346f560c4806483b914aa3fb7a37e373f48f712) [#635](https://github.com/frontity/frontity/pull/635) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add `isDerived` util, a function to know if a property from the state is a "derived" property or not ([Feature discussion](https://community.frontity.org/t/isderived-util/3493)).
+
+- [`c5b0b8f7`](https://github.com/frontity/frontity/commit/c5b0b8f7e5ebfdf02f40ded7d7347a1d28039c2d) [#643](https://github.com/frontity/frontity/pull/643) Thanks [@luisherranz](https://github.com/luisherranz)! - Expose `@frontity/connect`'s `unobserve` in `frontity`.
+
+### Patch Changes
+
+- [`a5520f56`](https://github.com/frontity/frontity/commit/a5520f5605cfda2323e0c9ea4a553658a021fd15) [#632](https://github.com/frontity/frontity/pull/632) Thanks [@jamesgeorge007](https://github.com/jamesgeorge007)! - Replaced [didyoumean](https://www.npmjs.com/package/didyoumean) with [leven](https://www.npmjs.com/package/leven).
+
+* [`01880c34`](https://github.com/frontity/frontity/commit/01880c34c111f55c23169adb7365ea9262e6cca8) [#666](https://github.com/frontity/frontity/pull/666) Thanks [@cristianbote](https://github.com/cristianbote)! - Adopt the new version of emotion 11. That means using the emotion deidcated babel plugin for rewriting the imports, generating source-maps and enable auto labels.
+
+- [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433) [#655](https://github.com/frontity/frontity/pull/655) Thanks [@mburridge](https://github.com/mburridge)! - Add or update 'Open Source Community' section in README files.
+
+* [`09f07484`](https://github.com/frontity/frontity/commit/09f07484c920e99d46290986d7a64b8f3c20e53c) [#656](https://github.com/frontity/frontity/pull/656) Thanks [@cristianbote](https://github.com/cristianbote)! - The `namespace` provided in the create-package command should have a valid format, otherwise the generated `index.js` will be invalid.
+
+- [`e4221d4b`](https://github.com/frontity/frontity/commit/e4221d4b451268b5c951197a08b4021d50394c1b) [#640](https://github.com/frontity/frontity/pull/640) Thanks [@luisherranz](https://github.com/luisherranz)! - Update dependencies. Some of them to major versions because they dropped support for Node 8, which Frontity doesn't support either anymore.
+
+* [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433) [#655](https://github.com/frontity/frontity/pull/655) Thanks [@mburridge](https://github.com/mburridge)! - Fix broken links in README files.
+
+* Updated dependencies [[`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433)]:
+  - @frontity/types@1.7.0
+  - @frontity/type-declarations@1.1.1
+  - @frontity/error@0.1.2
+
 ## 1.13.0
 
 ### Minor Changes
