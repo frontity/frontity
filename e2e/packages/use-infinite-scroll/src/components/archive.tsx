@@ -49,33 +49,31 @@ const Archive: React.FC = () => {
         const { page } = libraries.source.parse(link);
         const data = state.source.get(link);
         return (
-          <>
-            <Wrapper key={key}>
-              {isArchive(data) ? (
-                <div css={div} data-test={`page-${page}`}>
-                  Page {page}
-                  <ul>
-                    {data.items.map((item) => (
-                      <li key={item.id}>
-                        <a
-                          data-test={`post-${item.id}-link`}
-                          href={item.link}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            actions.router.set(item.link);
-                            actions.source.fetch(item.link);
-                          }}
-                        >
-                          {item.link}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-            </Wrapper>
+          <Wrapper key={key}>
+            {isArchive(data) ? (
+              <div css={div} data-test={`page-${page}`}>
+                Page {page}
+                <ul>
+                  {data.items.map((item) => (
+                    <li key={item.id}>
+                      <a
+                        data-test={`post-${item.id}-link`}
+                        href={item.link}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          actions.router.set(item.link);
+                          actions.source.fetch(item.link);
+                        }}
+                      >
+                        {item.link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             {isLast && <div data-test="last">You reached the end!</div>}
-          </>
+          </Wrapper>
         );
       })}
       {isFetching && <div data-test="fetching">Fetching</div>}
