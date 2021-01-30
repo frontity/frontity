@@ -454,11 +454,30 @@ describe("actions.source.init", () => {
     });
 
     const data = store.state.source.get("/some/route/");
-
     expect(data).toMatchSnapshot();
 
     expect(isError(data)).toBe(false);
     expect((data as any).errorStatus).toBeUndefined();
     expect((data as any).errorStatusText).toBeUndefined();
+  });
+
+  test("Fetching data for /amp", async () => {
+    await store.actions.source.fetch("/some-post/amp");
+
+    const data = store.state.source.get("/some-post/");
+
+    expect(data).toMatchInlineSnapshot(`
+      Object {
+        "id": 1,
+        "isFetching": false,
+        "isPostType": true,
+        "isReady": true,
+        "link": "/some-post/",
+        "page": 1,
+        "query": Object {},
+        "route": "/some-post/amp/",
+        "type": "example",
+      }
+    `);
   });
 });
