@@ -38,23 +38,21 @@ export type FrontityTags = {
 };
 
 export type HeadTags = {
-  link: string;
-  base: string;
   bodyAttributes: string;
   htmlAttributes: string;
-  meta: string;
-  noscript: string;
-  script: string;
-  style: string;
-  title: string;
+  head: string[];
 };
 
 export type Template = ({
   html,
-  frontity,
+  scripts,
   head,
+  htmlAttributes,
+  bodyAttributes,
 }: {
   html: string;
-  frontity: FrontityTags;
-  head: HeadTags;
+  scripts: [];
+  head: [];
+  htmlAttributes?: string;
+  bodyAttributes?: string;
 }) => string;

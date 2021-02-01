@@ -33,13 +33,29 @@ export default async ({ packages }) => {
       if (!window["frontity"]) {
         await Promise.all(
           Object.values(store.actions).map(({ beforeCSR }) => {
-            if (beforeCSR) return beforeCSR();
+            if (beforeCSR) return beforeCSR({ libraries: store.libraries });
           })
         );
       }
 
       loadableReady(() => {
-        hydrate(<App store={store} />, window.document.getElementById("root"));
+        let FrontityApp = () => <App store={store} />;
+
+        // If there's a user supplied `App` component
+        // we should use that to render the the main App.
+        if (store.libraries.frontity.App) {
+          // Get a reference to the user defined `App`.
+          const UserDefinedApp = store.libraries.frontity.App;
+
+          // Keep a reference of the initially defined `App`.
+          const InitialApp = FrontityApp;
+
+          // Define the new `FrontityApp` to be rendered and pass
+          // along the initial reference.
+          FrontityApp = () => <UserDefinedApp App={InitialApp} />;
+        }
+
+        hydrate(<FrontityApp />, window.document.getElementById("root"));
 
         // Switch to CSR mode.
         store.state.frontity.rendering = "csr";

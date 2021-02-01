@@ -26,7 +26,9 @@ export default ({
     roots: {},
     state: {},
     actions: {},
-    libraries: {},
+    libraries: {
+      frontity: {},
+    },
   };
   state.frontity.packages.forEach((name) => {
     const variable = getVariable(name, state.frontity.mode);
