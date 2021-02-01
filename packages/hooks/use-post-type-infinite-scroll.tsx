@@ -277,16 +277,22 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
 
     // If subdirectory (and postsPage) exist, return them.
     if (state.source.subdirectory) {
-      const subdirectory = state.source.subdirectory.replace(/^\/?|\/?$/g, "/");
+      const subdirectory = state.source.subdirectory
+        .replace(/^\/?/, "/")
+        .replace(/\/?$/, "/");
 
-      if (state.source.postsPage) return subdirectory + state.source.postsPage;
+      if (state.source.postsPage)
+        return (
+          subdirectory.replace(/\/?$/, "") +
+          state.source.postsPage.replace(/^\/?/, "/").replace(/\/?$/, "/")
+        );
 
       return subdirectory;
     }
 
     // If postsPage exists, return it.
     if (state.source.postsPage)
-      return state.source.postsPage.replace(/^\/?|\/?$/g, "/");
+      return state.source.postsPage.replace(/^\/?/, "/").replace(/\/?$/, "/");
 
     // Return home as default.
     return "/";
@@ -364,9 +370,6 @@ const usePostTypeInfiniteScroll: UsePostTypeInfiniteScroll = (options = {}) => {
       actions.source.fetch(data.link);
     }
 
-    if (isError(data)) {
-      actions.source.fetch(data.link, { force: true });
-    }
     // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
