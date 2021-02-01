@@ -13,8 +13,16 @@ const PostType: React.FC = () => {
   const { state } = useConnect<Packages>();
   const current = state.source.get(state.router.link);
 
-  const { posts, isFetching, isError, fetchNext } = usePostTypeInfiniteScroll({
+  const {
+    posts,
+    isFetching,
+    isError,
+    isLimit,
+    fetchNext,
+  } = usePostTypeInfiniteScroll({
     active: state.theme.isInfiniteScrollEnabled,
+    limit: state.theme.infiniteScrollLimit,
+    archive: state.theme.infiniteScrollArchive,
     fetchInViewOptions: {
       root: document as any,
       rootMargin: "400px 0px",
@@ -49,7 +57,7 @@ const PostType: React.FC = () => {
         ) : null;
       })}
       {isFetching && <div data-test="fetching">Fetching</div>}
-      {isError && (
+      {(isError || isLimit) && (
         <div data-test="error" css={fetchDiv}>
           <button data-test="fetch" onClick={fetchNext}>
             Fetch Next

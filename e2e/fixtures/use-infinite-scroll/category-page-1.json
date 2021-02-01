@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "type": "post",
+    "link": "https://test.frontity.org/post-1"
+  },
+  {
+    "id": 7,
+    "type": "post",
+    "link": "https://test.frontity.org/post-7"
+  }
+]

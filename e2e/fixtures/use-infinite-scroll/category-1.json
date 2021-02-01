@@ -1,0 +1,11 @@
+{
+  "id": 1,
+  "count": 2,
+  "description": "",
+  "link": "https://test.frontity.org/category/one/",
+  "name": "One",
+  "slug": "one",
+  "taxonomy": "category",
+  "parent": 0,
+  "meta": []
+}

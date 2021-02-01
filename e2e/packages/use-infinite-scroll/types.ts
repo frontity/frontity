@@ -1,4 +1,10 @@
-import { Package, Action, ServerAction, MergePackages } from "frontity/types";
+import {
+  Frontity,
+  Package,
+  Action,
+  ServerAction,
+  MergePackages,
+} from "frontity/types";
 import TinyRouter from "@frontity/tiny-router/types";
 import WpSource from "@frontity/wp-source/types";
 
@@ -28,6 +34,11 @@ interface UseInfiniteScroll extends Package {
        * Value indicating how may pages should be fetched automatically.
        */
       infiniteScrollLimit: number;
+
+      /**
+       * The link of the archive from which the posts are fetched.
+       */
+      infiniteScrollArchive: string;
     };
   };
 
@@ -48,6 +59,11 @@ interface UseInfiniteScroll extends Package {
        * Enable or disable infinite scroll hooks.
        */
       limitInfiniteScroll: Action<Packages, number>;
+
+      /**
+       * Specify the archive from which the posts are fetched.
+       */
+      setInfiniteScrollArchive: Action<Packages, string>;
 
       /**
        * Initializes the theme package.
@@ -75,6 +91,11 @@ interface UseInfiniteScroll extends Package {
 /**
  * All packages used internnally by UseInfiniteScroll.
  */
-export type Packages = MergePackages<UseInfiniteScroll, TinyRouter, WpSource>;
+export type Packages = MergePackages<
+  Frontity,
+  TinyRouter,
+  WpSource,
+  UseInfiniteScroll
+>;
 
 export default UseInfiniteScroll;
