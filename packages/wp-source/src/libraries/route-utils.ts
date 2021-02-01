@@ -185,19 +185,13 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  * Normalize a link, making sure that multiple links that should point to
  * the same canonical link are processed as a single one.
  *
- * It also strips out the "/amp" from the link, which is used on AMP pages.
- * TODO: This behaviour should be moved to a Frontity hook in source v2.
- *
  * @example `/some-post -> /some-post/`
- * @example `/some-post/amp -> /some-post/`
  *
  * @param link - The link to be normalized.
  *
  * @returns The normalized link.
  */
-export const normalize = (link: string): string => {
-  const linkWithoutAmp = link.replace(/\/amp$/, "");
-  return paramsToLink(linkToParams(linkWithoutAmp));
-};
+export const normalize = (link: string): string =>
+  paramsToLink(linkToParams(link));
 
 export default { parse, stringify, normalize };
