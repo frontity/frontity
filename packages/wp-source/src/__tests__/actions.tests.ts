@@ -461,7 +461,7 @@ describe("actions.source.init", () => {
     expect((data as any).errorStatusText).toBeUndefined();
   });
 
-  test.only("Fetching data for /amp", async () => {
+  test("Fetching data for /amp", async () => {
     await store.actions.source.init();
     await store.actions.source.fetch("/some-post/amp");
     const data = store.state.source.get("/some-post/amp");
@@ -481,7 +481,7 @@ describe("actions.source.init", () => {
     `);
   });
 
-  test.only("Should not fetch data if the 'amp' is a category", async () => {
+  test("Should not fetch data if the 'amp' is a category", async () => {
     await store.actions.source.init();
     await store.actions.source.fetch("/category/amp");
     const data = store.state.source.get("/category/amp");
