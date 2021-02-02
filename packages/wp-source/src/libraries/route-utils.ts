@@ -1,5 +1,6 @@
 import { LinkParams } from "@frontity/source/types";
 import WpSource from "../../types";
+import pathToRegexp from "path-to-regexp";
 
 /**
  * Add the final slash to a link. It does nothing if the link already has a
@@ -196,8 +197,12 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  * @returns The normalized link.
  */
 export const normalize = (link: string): string => {
-  const linkWithoutAmp = link.replace(/\/amp$/, "");
-  return paramsToLink(linkToParams(linkWithoutAmp));
+  const regex = pathToRegexp("/(category|tag|author)/amp");
+
+  if (!link.match(regex)) {
+    link = link.replace(/\/amp$/, "");
+  }
+  return paramsToLink(linkToParams(link));
 };
 
 export default { parse, stringify, normalize };

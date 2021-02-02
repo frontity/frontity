@@ -461,10 +461,10 @@ describe("actions.source.init", () => {
     expect((data as any).errorStatusText).toBeUndefined();
   });
 
-  test("Fetching data for /amp", async () => {
+  test.only("Fetching data for /amp", async () => {
+    await store.actions.source.init();
     await store.actions.source.fetch("/some-post/amp");
-
-    const data = store.state.source.get("/some-post/");
+    const data = store.state.source.get("/some-post/amp");
 
     expect(data).toMatchInlineSnapshot(`
       Object {
@@ -476,6 +476,26 @@ describe("actions.source.init", () => {
         "page": 1,
         "query": Object {},
         "route": "/some-post/amp/",
+        "type": "example",
+      }
+    `);
+  });
+
+  test.only("Should not fetch data if the 'amp' is a category", async () => {
+    await store.actions.source.init();
+    await store.actions.source.fetch("/category/amp");
+    const data = store.state.source.get("/category/amp");
+
+    expect(data).toMatchInlineSnapshot(`
+      Object {
+        "id": 1,
+        "isFetching": false,
+        "isPostType": true,
+        "isReady": true,
+        "link": "/category/amp/",
+        "page": 1,
+        "query": Object {},
+        "route": "/category/amp/",
         "type": "example",
       }
     `);
