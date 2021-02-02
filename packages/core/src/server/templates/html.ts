@@ -1,5 +1,12 @@
 import { Template } from "../../../types";
 
+/**
+ * The template function to return the html.
+ *
+ * @param options - The options to compile the template with.
+ *
+ * @returns The compiled html with the options.
+ */
 const template: Template = ({
   html,
   scripts,

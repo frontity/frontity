@@ -2,9 +2,22 @@ import { Package } from "@frontity/types";
 import deepmerge from "deepmerge";
 import getVariable from "./get-variable";
 
+/**
+ * A package function.
+ *
+ * @returns The package settings.
+ */
 type PackageFunction = () => Package;
 
-// Callback that replaces arrays (to be used by deepmerge).
+/**
+ *
+ * Overwrites the merge config for deep merge.
+ *
+ * @param _ - The target array which is ignored.
+ * @param sourceArray - The Array to be returned.
+ *
+ * @returns The source array.
+ */
 const overwriteMerge: deepmerge.Options["arrayMerge"] = (_, sourceArray) => {
   return sourceArray;
 };
@@ -16,10 +29,21 @@ export default ({
   state,
   overwriteArrays = false,
 }: {
+  /**
+   * The packages interface to be used.
+   */
   packages: {
     [name: string]: Package | PackageFunction;
   };
+
+  /**
+   * The state entry.
+   */
   state: Package["state"];
+
+  /**
+   * The flag for overwritting the arrays.
+   */
   overwriteArrays?: boolean;
 }): Package => {
   let config: Package = {

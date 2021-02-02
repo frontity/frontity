@@ -7,6 +7,8 @@ import createStore from "../store";
  * Setup the settings and defines the state store.
  *
  * @param packages - The frontity packages.
+ *
+ * @returns The middleware function.
  */
 export const settingsAndStore = (packages) => async (
   ctx: Context,

@@ -9,7 +9,10 @@ import getHeadTags from "../utils/head";
 /**
  * Defines the module stats for the current request.
  *
- * @param ctx - Koa context
+ * @param ctx - Koa context.
+ * @param next - The next method.
+ *
+ * @returns The awaited next method.
  */
 export const serverSideRendering = async (
   ctx: Context,
@@ -64,6 +67,7 @@ export const serverSideRendering = async (
     // If we have both module and es5, do the type="module" dance:
     // https://jakearchibald.com/2017/es-modules-in-browsers/
     //
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore – Ignore Typescript until we have a proper public API:
     // https://github.com/smooth-code/loadable-components/pull/239#issuecomment-482501467
     const customExtractor = extractor as Extractor;

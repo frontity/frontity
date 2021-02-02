@@ -5,7 +5,10 @@ import getTemplate from "../templates";
 /**
  * Defines the module stats for the current request.
  *
- * @param ctx - Koa context
+ * @param ctx - Koa context.
+ * @param next - The next method.
+ *
+ * @returns The awaited next mehtod.
  */
 export const template = async (
   ctx: Context,

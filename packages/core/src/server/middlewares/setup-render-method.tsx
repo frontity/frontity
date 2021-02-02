@@ -5,7 +5,8 @@ import { renderToStaticMarkup, renderToString } from "react-dom/server";
 /**
  * The default serializer. Handles the case where there are no entrypoints.
  *
- * @param args
+ * @param args - The arguments to be used for this pass.
+ *
  * @returns The function to serialize with.
  */
 const serialize = ({ collectChunks, hasEntryPoint }: any) => (jsx: any) => {
@@ -16,6 +17,13 @@ const serialize = ({ collectChunks, hasEntryPoint }: any) => (jsx: any) => {
   return renderToString(collectChunks(jsx));
 };
 
+/**
+ * The render method for a given React App.
+ *
+ * @param args - The arguments to be used for render.
+ *
+ * @returns The serialized App.
+ */
 const render = ({ App, ...args }) => {
   return serialize(args)(<App />);
 };
@@ -23,7 +31,10 @@ const render = ({ App, ...args }) => {
 /**
  * Defines the module stats for the current request.
  *
- * @param ctx - Koa context
+ * @param ctx - Koa context.
+ * @param next - The next method.
+ *
+ * @returns The awaited next.
  */
 export const setupRenderMethod = async (
   ctx: Context,

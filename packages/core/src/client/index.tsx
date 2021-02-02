@@ -3,6 +3,7 @@ import { loadableReady } from "@loadable/component";
 import { getSnapshot } from "@frontity/connect";
 import App from "../app";
 import createStore from "./store";
+import { FC } from "react";
 
 export default async ({ packages }) => {
   if (typeof window !== "undefined" && window["Proxy"]) {
@@ -39,7 +40,12 @@ export default async ({ packages }) => {
       }
 
       loadableReady(() => {
-        let FrontityApp = () => <App store={store} />;
+        /**
+         * The FrontityApp functional component.
+         *
+         * @returns A functional component.
+         */
+        let FrontityApp: FC = () => <App store={store} />;
 
         // If there's a user supplied `App` component
         // we should use that to render the the main App.
@@ -50,9 +56,14 @@ export default async ({ packages }) => {
           // Keep a reference of the initially defined `App`.
           const InitialApp = FrontityApp;
 
-          // Define the new `FrontityApp` to be rendered and pass
-          // along the initial reference.
-          FrontityApp = () => <UserDefinedApp App={InitialApp} />;
+          /**
+           * The wrapped FrontityApp component.
+           *
+           * @returns The functional component to be rendered.
+           */
+          FrontityApp = function WrappedFrontityApp() {
+            return <UserDefinedApp App={InitialApp} />;
+          };
         }
 
         hydrate(<FrontityApp />, window.document.getElementById("root"));

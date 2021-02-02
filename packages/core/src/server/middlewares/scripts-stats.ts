@@ -5,7 +5,10 @@ import { Context } from "@frontity/types";
 /**
  * Defines the module stats for the current request.
  *
- * @param ctx - Koa context
+ * @param ctx - Koa context.
+ * @param next - The next method.
+ *
+ * @returns The awaited next method.
  */
 export const scriptsStats = async (
   ctx: Context,
