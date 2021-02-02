@@ -9,6 +9,7 @@ Object {
     },
   },
   "libraries": Object {
+    "frontity": Object {},
     "namespace3": Object {
       "lib1": "lib1",
       "lib2": MyLib {},
