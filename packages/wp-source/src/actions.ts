@@ -65,7 +65,10 @@ const actions: WpSource["actions"]["source"] = {
     try {
       let { route } = linkParams;
       // Transform route if there is some redirection.
-      const redirection = getMatch({ route, link }, libraries.source.redirections);
+      const redirection = getMatch(
+        { route, link },
+        libraries.source.redirections
+      );
       if (redirection) route = redirection.func(redirection.params);
 
       // Check if we need to check if it is a 30X redirection before fetching
