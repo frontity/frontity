@@ -22,5 +22,5 @@
     "allowJs": true
   },
   "exclude": ["**/node_modules/*", "**/dist/*", "**/build/*", "e2e/e2e.js"],
-  "include": ["packages", "projects", "e2e"]
+  "include": ["packages", "projects"]
 }
