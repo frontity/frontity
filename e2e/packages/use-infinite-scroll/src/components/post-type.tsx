@@ -46,13 +46,14 @@ const PostType: React.FC = () => {
 
   return (
     <div data-test="post-type">
-      {posts.map(({ Wrapper, key, link }) => {
+      {posts.map(({ Wrapper, key, link, isLast }) => {
         const data = state.source.get(link);
         return isPostType(data) ? (
           <Wrapper key={key}>
             <div css={div} data-test={`post-${data.id}`}>
               Post {data.id}
             </div>
+            {isLast && <div data-test="last">You reached the end!</div>}
           </Wrapper>
         ) : null;
       })}

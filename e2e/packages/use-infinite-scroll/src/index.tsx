@@ -1,92 +1,86 @@
 import React from "react";
-import { connect, useConnect } from "frontity";
+import { connect, useConnect, css } from "frontity";
 import { isArchive, isPostType } from "@frontity/source";
 import Archive from "./components/archive";
 import PostType from "./components/post-type";
 import * as handlers from "./handlers";
 import UseInfiniteScroll, { Packages } from "../types";
+import { buildLink } from "./utils";
 
 const Root: React.FC = connect(
   () => {
     const { state, actions } = useConnect<Packages>();
     const data = state.source.get(state.router.link);
+    const subdir = state.source.subdirectory;
+
+    /**
+     * Styles for the buttons container. This makes the buttons to be always
+     * visible, so Cypress doesn't change the scroll position when clicking any
+     * of them.
+     */
+    const buttons = css`
+      position: fixed;
+      z-index: 10;
+      right: 0;
+    `;
+
+    /**
+     * Return a function to fetch and go to the specified link. It also prepends
+     * `state.source.subdirectory` if needed.
+     *
+     * @param link - Link to visit.
+     * @returns A function.
+     */
+    const goTo = (link: string) => () => {
+      const finalLink = buildLink(subdir, link);
+      window.scrollTo(0, 0);
+      actions.router.set(finalLink);
+      actions.source.fetch(finalLink);
+    };
 
     return (
       <>
-        {(isArchive(data) && <Archive />) ||
-          (isPostType(data) && <PostType />) ||
-          ("isTest" in data && (
-            <>
-              <button
-                data-test="to-archive"
-                onClick={() => {
-                  actions.router.set("/");
-                  actions.source.fetch("/");
-                }}
-              >
-                To Archive
-              </button>
-              <button
-                data-test="to-category-one"
-                onClick={() => {
-                  actions.router.set("/category/one");
-                  actions.source.fetch("/category/one");
-                }}
-              >
-                To Archive
-              </button>
-              <button
-                data-test="to-first-post"
-                onClick={() => {
-                  actions.router.set("/post-1");
-                  actions.source.fetch("/post-1");
-                }}
-              >
-                To First Post
-              </button>
-              <button
-                data-test="to-last-post"
-                onClick={() => {
-                  actions.router.set("/post-10");
-                  actions.source.fetch("/post-10");
-                }}
-              >
-                To Last Post
-              </button>
-              <button
-                data-test="toggle-infinite-scroll"
-                onClick={() => {
-                  actions.theme.toggleInfiniteScroll();
-                }}
-              >
-                Toggle Infinite Scroll
-              </button>
-              <button
-                data-test="limit-infinite-scroll"
-                onClick={() => {
-                  actions.theme.limitInfiniteScroll(2);
-                }}
-              >
-                Set Limit
-              </button>
-              <button
-                data-test="set-archive"
-                onClick={() => {
-                  actions.theme.setInfiniteScrollArchive("/category/one");
-                }}
-              >
-                Set Archive Source
-              </button>
-              <button
-                data-test="set-posts-page"
-                onClick={() => {
-                  actions.theme.setInfiniteScrollArchive("/blog");
-                }}
-              >
-                Set Posts Page
-              </button>
-            </>
-          ))}
+        <div css={buttons}>
+          <button data-test="to-archive" onClick={goTo("/")}>
+            To Archive
+          </button>
+          <button data-test="to-category-one" onClick={goTo("/category/one")}>
+            To Category One
+          </button>
+          <button data-test="to-first-post" onClick={goTo("/post-1")}>
+            To First Post
+          </button>
+          <button data-test="to-last-post" onClick={goTo("/post-10")}>
+            To Last Post
+          </button>
+          <button
+            data-test="toggle-infinite-scroll"
+            onClick={() => {
+              actions.theme.toggleInfiniteScroll();
+            }}
+          >
+            Toggle Infinite Scroll
+          </button>
+          <button
+            data-test="limit-infinite-scroll"
+            onClick={() => {
+              actions.theme.limitInfiniteScroll(2);
+            }}
+          >
+            Set Limit
+          </button>
+          <button
+            data-test="set-archive"
+            onClick={() => {
+              actions.theme.setInfiniteScrollArchive(
+                buildLink(subdir, "/category/one")
+              );
+            }}
+          >
+            Set Archive Source
+          </button>
+        </div>
+        {(isArchive(data) && <Archive />) || (isPostType(data) && <PostType />)}
       </>
     );
   },
@@ -120,7 +114,9 @@ const pkg: UseInfiniteScroll = {
         });
 
         // Get some `state.source` options from Frontity options.
-        state.source.postsPage = state.frontity.options.postsPage;
+        const { postsPage, subdirectory } = state.frontity.options;
+        if (postsPage) state.source.postsPage = postsPage;
+        if (subdirectory) state.source.subdirectory = subdirectory;
       },
       beforeSSR({ state, actions }) {
         return async () => {
