@@ -1,13 +1,10 @@
-import { Next } from "koa";
 import { scriptsStats } from "../scripts-stats";
-
-const fakeNext: Next = async () => {
-  await Promise.resolve();
-};
+import { createKoaContext } from "./__utilities__/create-koa-context";
+import { fakeNext } from "./__utilities__/fake-next";
 
 describe("scriptStats", () => {
   it("should define the stats on context", async () => {
-    const ctx: any = { state: {} };
+    const ctx: any = createKoaContext();
 
     await scriptsStats(ctx, fakeNext);
 

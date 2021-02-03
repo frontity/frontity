@@ -8,7 +8,7 @@ module.exports = {
   },
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(j|t)sx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
-  testPathIgnorePatterns: ["/mocks/"],
+  testPathIgnorePatterns: ["/mocks/", "/__utilities__/"],
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
     "!**/node_modules/**",

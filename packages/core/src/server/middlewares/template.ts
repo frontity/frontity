@@ -25,7 +25,7 @@ const html: Template = ({
       </head>
       <body ${bodyAttributes || ""}>
         <div id="root">${html}</div>
-        ${scripts.join("\n") || ""}
+        ${scripts ? scripts.join("\n") : ""}
       </body>
     </html>`;
 

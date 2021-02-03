@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`setupRenderMethod custom render should call the render with a defaultRenderer 1`] = `
+Array [
+  "collectChunks",
+  "App",
+  "hasEntryPoint",
+  "defaultRenderer",
+]
+`;
+
+exports[`setupRenderMethod custom render should wrap the user defined render 1`] = `
+"(args) => {
+            return store.libraries.frontity.render(Object.assign(Object.assign({}, args), { defaultRenderer: serialize(args) }));
+        }"
+`;
+
+exports[`setupRenderMethod should define a default render 1`] = `
+"(_a) => {
+    var { App } = _a, args = __rest(_a, [\\"App\\"]);
+    return serialize(args)(jsx_runtime_1.jsx(App, {}, void 0));
+}"
+`;

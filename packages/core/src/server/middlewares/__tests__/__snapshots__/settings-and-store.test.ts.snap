@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`settingsAndStore should define settins and store 1`] = `
+Object {
+  "actions": Array [],
+  "libraries": Array [],
+}
+`;
+
+exports[`settingsAndStore should define settins and store 2`] = `[Function]`;

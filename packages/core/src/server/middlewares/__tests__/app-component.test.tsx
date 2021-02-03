@@ -1,27 +1,10 @@
-import { Next } from "koa";
 import { appComponent } from "../app-component";
-
-const createStore = (extended = {}) => ({
-  libraries: {
-    frontity: {
-      ...extended,
-    },
-  },
-});
-
-const createContext = (extended?: any) => ({
-  state: {
-    store: createStore(extended),
-  },
-});
-
-const fakeNext: Next = async () => {
-  await Promise.resolve();
-};
+import { createKoaContext } from "./__utilities__/create-koa-context";
+import { fakeNext } from "./__utilities__/fake-next";
 
 describe("appComponent middleware", () => {
   it("should define a App on context", async () => {
-    const ctx: any = createContext();
+    const ctx: any = createKoaContext();
 
     // Call the middleware.
     await appComponent(ctx, fakeNext);
@@ -31,7 +14,7 @@ describe("appComponent middleware", () => {
   });
 
   it("should be able to overwrite the default App", async () => {
-    const ctx: any = createContext({
+    const ctx: any = createKoaContext({
       App: () => {
         return null;
       },
