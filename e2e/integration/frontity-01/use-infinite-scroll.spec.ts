@@ -723,7 +723,7 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/post-11/");
   });
 
-  it.skip("should keep rendered posts when going back and forward", () => {
+  it("should keep rendered posts when going back and forward", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/test/");
 
@@ -773,29 +773,29 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.get("[data-test='page-1']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
 
-    // // Then, go back.
-    // cy.go("back");
-    // cy.get("[data-test='archive']").should("not.exist");
-    // cy.get("[data-test='post-1']").should("exist");
-    // cy.get("[data-test='post-2']").should("exist");
-    // cy.get("[data-test='post-3']").should("exist").should("be.visible");
-    // cy.location("href").should("eq", "http://localhost:3001/post-3/");
+    // Then, go back.
+    cy.go("back");
+    cy.get("[data-test='archive']").should("not.exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("exist");
+    cy.get("[data-test='post-3']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/post-3/");
 
-    // // Go back again.
-    // cy.go("back");
-    // cy.get("[data-test='post-10']").should("not.exist");
-    // cy.get("[data-test='post-1']").should("not.exist");
-    // cy.get("[data-test='post-2']").should("not.exist");
-    // cy.get("[data-test='post-3']").should("not.exist").should("be.visible");
-    // cy.location("href").should("eq", "http://localhost:3001/test/");
+    // Go back again.
+    cy.go("back");
+    cy.get("[data-test='archive']").should("not.exist");
+    cy.get("[data-test='post-1']").should("not.exist");
+    cy.get("[data-test='post-2']").should("not.exist");
+    cy.get("[data-test='post-3']").should("not.exist");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
 
-    // // Go forward this time.
-    // cy.go("forward");
-    // cy.get("[data-test='post-10']").should("not.exist");
-    // cy.get("[data-test='post-1']").should("exist");
-    // cy.get("[data-test='post-2']").should("exist");
-    // cy.get("[data-test='post-3']").should("exist").should("be.visible");
-    // cy.location("href").should("eq", "http://localhost:3001/post-3/");
+    // Go forward this time.
+    cy.go("forward");
+    cy.get("[data-test='archive']").should("not.exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("exist");
+    cy.get("[data-test='post-3']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/post-3/");
   });
 
   it("should render posts from the previous archive", () => {

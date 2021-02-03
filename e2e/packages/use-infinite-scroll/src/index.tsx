@@ -33,9 +33,9 @@ const Root: React.FC = connect(
      */
     const goTo = (link: string) => () => {
       const finalLink = buildLink(subdir, link);
-      window.scrollTo(0, 0);
       actions.router.set(finalLink);
       actions.source.fetch(finalLink);
+      window.scrollTo(0, 0);
     };
 
     return (
