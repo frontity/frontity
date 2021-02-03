@@ -1,6 +1,5 @@
 import { LinkParams } from "@frontity/source/types";
 import WpSource from "../../types";
-import pathToRegexp from "path-to-regexp";
 
 /**
  * Add the final slash to a link. It does nothing if the link already has a
