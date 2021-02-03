@@ -362,6 +362,12 @@ exports[`actions.source.init should add redirect for categories if 'categoryBase
 Array [
   Object {
     "func": [Function],
+    "name": "amp",
+    "pattern": ":link(.*)/amp",
+    "priority": 1,
+  },
+  Object {
+    "func": [Function],
     "name": "category base",
     "pattern": "/wp-cat/:subpath+/",
     "priority": 10,
@@ -377,6 +383,12 @@ Array [
 
 exports[`actions.source.init should add redirect for tags if 'authorBase' is set 1`] = `
 Array [
+  Object {
+    "func": [Function],
+    "name": "amp",
+    "pattern": ":link(.*)/amp",
+    "priority": 1,
+  },
   Object {
     "func": [Function],
     "name": "author base",
@@ -396,6 +408,12 @@ exports[`actions.source.init should add redirect for tags if 'tagBase' is set 1`
 Array [
   Object {
     "func": [Function],
+    "name": "amp",
+    "pattern": ":link(.*)/amp",
+    "priority": 1,
+  },
+  Object {
+    "func": [Function],
     "name": "tag base",
     "pattern": "/wp-tag/:subpath+/",
     "priority": 10,
@@ -413,6 +431,12 @@ exports[`actions.source.init should add redirect for the specified homepage 1`] 
 Array [
   Object {
     "func": [Function],
+    "name": "amp",
+    "pattern": ":link(.*)/amp",
+    "priority": 1,
+  },
+  Object {
+    "func": [Function],
     "name": "homepage",
     "pattern": "/",
     "priority": 10,
@@ -424,6 +448,12 @@ exports[`actions.source.init should add redirect for the specified posts page 1`
 Array [
   Object {
     "func": [Function],
+    "name": "amp",
+    "pattern": ":link(.*)/amp",
+    "priority": 1,
+  },
+  Object {
+    "func": [Function],
     "name": "posts page",
     "pattern": "/all-posts/",
     "priority": 10,
@@ -433,6 +463,12 @@ Array [
 
 exports[`actions.source.init should add redirect if 'subirectory' is present 1`] = `
 Array [
+  Object {
+    "func": [Function],
+    "name": "amp",
+    "pattern": ":link(.*)/amp",
+    "priority": 1,
+  },
   Object {
     "func": [Function],
     "name": "homepage",

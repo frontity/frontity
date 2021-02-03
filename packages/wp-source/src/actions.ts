@@ -16,6 +16,7 @@ import {
   isEagerRedirection,
   fetchRedirection,
 } from "./utils";
+import pathToRegexp from "path-to-regexp";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
@@ -231,6 +232,55 @@ const actions: WpSource["actions"]["source"] = {
       tagBase,
       authorBase,
     } = state.source;
+
+    // The redirection for AMP
+    redirections.push({
+      name: "amp",
+      priority: 1,
+      pattern: ":link(.*)/amp",
+      func: ({ link: linkWithoutAMP }) => {
+        /**
+         * Match stuff.
+         *
+         * @param path - Path.
+         * @param link - Link.
+         *
+         * @returns If there is a match.
+         */
+        const match = (path: string, link: string) =>
+          pathToRegexp(path).test(link);
+
+        const fullLink = `${linkWithoutAMP}/amp`;
+
+        // `/amp` page
+        if (fullLink === "/amp") return fullLink;
+
+        // category
+        let pattern = concatLink(subdirectory, categoryBase);
+        if (match(pattern, linkWithoutAMP)) return fullLink;
+        if (match("/category/(.*)?/:slug", fullLink)) return fullLink;
+
+        // author
+        pattern = concatLink(subdirectory, authorBase);
+        if (match(pattern, linkWithoutAMP)) return fullLink;
+        if (match("/author/:slug", fullLink)) return fullLink;
+
+        // tag
+        pattern = concatLink(subdirectory, tagBase);
+        if (match(pattern, linkWithoutAMP)) return fullLink;
+        if (match("/tag/:slug", fullLink)) return fullLink;
+
+        // handle custom post types
+        if (state.source.postTypes.some(({ type }) => type === "amp")) {
+          return fullLink;
+        }
+
+        // handle custom taxonomies
+        // TODO: ...
+
+        return linkWithoutAMP;
+      },
+    });
 
     if (homepage) {
       const pattern = concatLink(subdirectory);

@@ -461,43 +461,85 @@ describe("actions.source.init", () => {
     expect((data as any).errorStatusText).toBeUndefined();
   });
 
-  test("Fetching data for /amp", async () => {
-    await store.actions.source.init();
-    await store.actions.source.fetch("/some-post/amp");
-    const data = store.state.source.get("/some-post/amp");
+  describe("AMP tests", () => {
+    let handler;
+    beforeEach(async () => {
+      handler = jest.fn(async ({ link, state }) => {
+        await Promise.resolve();
+        Object.assign(state.source.data[link], {
+          type: "example",
+          id: 1,
+          isFetching: false,
+          isReady: true,
+        });
+      });
 
-    expect(data).toMatchInlineSnapshot(`
-      Object {
-        "id": 1,
-        "isFetching": false,
-        "isPostType": true,
-        "isReady": true,
-        "link": "/some-post/",
-        "page": 1,
-        "query": Object {},
-        "route": "/some-post/amp/",
-        "type": "example",
-      }
-    `);
-  });
+      await store.actions.source.init();
+    });
 
-  test("Should not fetch data if the 'amp' is a category", async () => {
-    await store.actions.source.init();
-    await store.actions.source.fetch("/category/amp");
-    const data = store.state.source.get("/category/amp");
+    test("Fetching data for /some-post/amp/", async () => {
+      store.libraries.source.handlers = [
+        {
+          name: "post",
+          priority: 30,
+          pattern: "/(.*)?/:slug",
+          func: handler,
+        },
+      ];
 
-    expect(data).toMatchInlineSnapshot(`
-      Object {
-        "id": 1,
-        "isFetching": false,
-        "isPostType": true,
-        "isReady": true,
-        "link": "/category/amp/",
-        "page": 1,
-        "query": Object {},
-        "route": "/category/amp/",
-        "type": "example",
-      }
-    `);
+      await store.actions.source.fetch("/some-post/amp");
+      const data = store.state.source.get("/some-post/amp");
+
+      expect(handler).toHaveBeenCalledTimes(1);
+
+      // The slug should be just 'some-post' because we had to remove the
+      // `/amp` suffix in this case.
+      expect(handler.mock.calls[0]).toMatchObject([
+        { params: { slug: "some-post" } },
+      ]);
+      expect(data).toMatchInlineSnapshot(`
+        Object {
+          "id": 1,
+          "isFetching": false,
+          "isReady": true,
+          "link": "/some-post/amp/",
+          "page": 1,
+          "query": Object {},
+          "route": "/some-post/amp/",
+          "type": "example",
+        }
+      `);
+    });
+
+    test("Should call the tag handler if 'amp' is a tag", async () => {
+      store.libraries.source.handlers = [
+        {
+          name: "tag",
+          priority: 20,
+          pattern: "/tag/:slug",
+          func: handler,
+        },
+      ];
+
+      await store.actions.source.fetch("/tag/amp/");
+      const data = store.state.source.get("/some-post/amp");
+
+      expect(handler).toHaveBeenCalledTimes(1);
+
+      // The slug should be just 'amp' because we have tag called 'amp'.
+      expect(handler.mock.calls[0]).toMatchObject([
+        { params: { slug: "amp" } },
+      ]);
+      expect(data).toMatchInlineSnapshot(`
+        Object {
+          "isFetching": false,
+          "isReady": false,
+          "link": "/some-post/amp/",
+          "page": 1,
+          "query": Object {},
+          "route": "/some-post/amp/",
+        }
+      `);
+    });
   });
 });
