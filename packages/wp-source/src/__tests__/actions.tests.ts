@@ -460,44 +460,45 @@ describe("actions.source.init", () => {
     expect((data as any).errorStatus).toBeUndefined();
     expect((data as any).errorStatusText).toBeUndefined();
   });
+});
 
-  describe("AMP tests", () => {
-    let handler;
-    beforeEach(async () => {
-      handler = jest.fn(async ({ link, state }) => {
-        await Promise.resolve();
-        Object.assign(state.source.data[link], {
-          type: "example",
-          id: 1,
-          isFetching: false,
-          isReady: true,
-        });
+describe("AMP tests", () => {
+  let handler;
+  beforeEach(async () => {
+    handler = jest.fn(async ({ link, state }) => {
+      await Promise.resolve();
+      Object.assign(state.source.data[link], {
+        type: "example",
+        id: 1,
+        isFetching: false,
+        isReady: true,
       });
-
-      await store.actions.source.init();
     });
 
-    test("Fetching data for /some-post/amp/", async () => {
-      store.libraries.source.handlers = [
-        {
-          name: "post",
-          priority: 30,
-          pattern: "/(.*)?/:slug",
-          func: handler,
-        },
-      ];
+    await store.actions.source.init();
+  });
 
-      await store.actions.source.fetch("/some-post/amp");
-      const data = store.state.source.get("/some-post/amp");
+  test("Fetching data for /some-post/amp/", async () => {
+    store.libraries.source.handlers = [
+      {
+        name: "post",
+        priority: 30,
+        pattern: "/(.*)?/:slug",
+        func: handler,
+      },
+    ];
 
-      expect(handler).toHaveBeenCalledTimes(1);
+    await store.actions.source.fetch("/some-post/amp");
+    const data = store.state.source.get("/some-post/amp");
 
-      // The slug should be just 'some-post' because we had to remove the
-      // `/amp` suffix in this case.
-      expect(handler.mock.calls[0]).toMatchObject([
-        { params: { slug: "some-post" } },
-      ]);
-      expect(data).toMatchInlineSnapshot(`
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    // The slug should be just 'some-post' because we had to remove the
+    // `/amp` suffix in this case.
+    expect(handler.mock.calls[0]).toMatchObject([
+      { params: { slug: "some-post" } },
+    ]);
+    expect(data).toMatchInlineSnapshot(`
         Object {
           "id": 1,
           "isFetching": false,
@@ -509,28 +510,26 @@ describe("actions.source.init", () => {
           "type": "example",
         }
       `);
-    });
+  });
 
-    test("Should call the tag handler if 'amp' is a tag", async () => {
-      store.libraries.source.handlers = [
-        {
-          name: "tag",
-          priority: 20,
-          pattern: "/tag/:slug",
-          func: handler,
-        },
-      ];
+  test("Should call the tag handler if 'amp' is a tag", async () => {
+    store.libraries.source.handlers = [
+      {
+        name: "tag",
+        priority: 20,
+        pattern: "/tag/:slug",
+        func: handler,
+      },
+    ];
 
-      await store.actions.source.fetch("/tag/amp/");
-      const data = store.state.source.get("/some-post/amp");
+    await store.actions.source.fetch("/tag/amp/");
+    const data = store.state.source.get("/some-post/amp");
 
-      expect(handler).toHaveBeenCalledTimes(1);
+    expect(handler).toHaveBeenCalledTimes(1);
 
-      // The slug should be just 'amp' because we have tag called 'amp'.
-      expect(handler.mock.calls[0]).toMatchObject([
-        { params: { slug: "amp" } },
-      ]);
-      expect(data).toMatchInlineSnapshot(`
+    // The slug should be just 'amp' because we have tag called 'amp'.
+    expect(handler.mock.calls[0]).toMatchObject([{ params: { slug: "amp" } }]);
+    expect(data).toMatchInlineSnapshot(`
         Object {
           "isFetching": false,
           "isReady": false,
@@ -540,6 +539,5 @@ describe("actions.source.init", () => {
           "route": "/some-post/amp/",
         }
       `);
-    });
   });
 });
