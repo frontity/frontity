@@ -363,7 +363,7 @@ Array [
   Object {
     "func": [Function],
     "name": "amp",
-    "pattern": ":link(.*)/amp",
+    "pattern": ":linkWithoutAMP(.*)/amp",
     "priority": 1,
   },
   Object {
@@ -386,7 +386,7 @@ Array [
   Object {
     "func": [Function],
     "name": "amp",
-    "pattern": ":link(.*)/amp",
+    "pattern": ":linkWithoutAMP(.*)/amp",
     "priority": 1,
   },
   Object {
@@ -409,7 +409,7 @@ Array [
   Object {
     "func": [Function],
     "name": "amp",
-    "pattern": ":link(.*)/amp",
+    "pattern": ":linkWithoutAMP(.*)/amp",
     "priority": 1,
   },
   Object {
@@ -432,7 +432,7 @@ Array [
   Object {
     "func": [Function],
     "name": "amp",
-    "pattern": ":link(.*)/amp",
+    "pattern": ":linkWithoutAMP(.*)/amp",
     "priority": 1,
   },
   Object {
@@ -449,7 +449,7 @@ Array [
   Object {
     "func": [Function],
     "name": "amp",
-    "pattern": ":link(.*)/amp",
+    "pattern": ":linkWithoutAMP(.*)/amp",
     "priority": 1,
   },
   Object {
@@ -466,7 +466,7 @@ Array [
   Object {
     "func": [Function],
     "name": "amp",
-    "pattern": ":link(.*)/amp",
+    "pattern": ":linkWithoutAMP(.*)/amp",
     "priority": 1,
   },
   Object {
