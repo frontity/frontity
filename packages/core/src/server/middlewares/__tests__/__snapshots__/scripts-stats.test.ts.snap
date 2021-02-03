@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scriptStats should define the stats on context 1`] = `
+Object {
+  "es5Stats": false,
+  "moduleStats": false,
+}
+`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`appComponent middleware should be able to overwrite the default App 1`] = `
+"function UserDefinedFrontityApp() {
+            return jsx_runtime_1.jsx(UserDefinedApp, { App: FrontityApp }, void 0);
+        }"
+`;
+
+exports[`appComponent middleware should define a App on context 1`] = `
+"function FrontityApp() {
+        return jsx_runtime_1.jsx(app_1.default, { store: store, helmetContext: ctx.state.helmetContext }, void 0);
+    }"
+`;
