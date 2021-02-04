@@ -2,6 +2,20 @@ import Router from "@frontity/router/types";
 import Source from "@frontity/source/types";
 import { Frontity, Action, MergePackages, ServerAction } from "frontity/types";
 
+declare global {
+  /**
+   * Extended window.
+   */
+  interface Window {
+    /**
+     * Wrap `window.replace.location` so we can mock it in the e2e tests.
+     * This is required because `window.location` is protected by the browser
+     * and can't be modified.
+     */
+    replaceLocation: (link: string) => void;
+  }
+}
+
 /**
  * A tiny router for Frontity projects.
  */

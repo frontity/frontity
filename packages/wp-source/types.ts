@@ -1,4 +1,4 @@
-import { Action, State, Derived, Package } from "frontity/types";
+import { Action, State, Derived, Package, Frontity } from "frontity/types";
 import Source, { DataEntity } from "@frontity/source/types";
 import { Api } from "./src/libraries";
 
@@ -451,7 +451,7 @@ interface WpSource extends Source<Packages> {
 /**
  * Packages used internally by wp-source.
  */
-export type Packages = WpSource & Package;
+export type Packages = WpSource & Frontity;
 
 export default WpSource;
 

@@ -5,7 +5,33 @@ Object {
   "es5": Object {
     "compact": true,
     "plugins": Array [
-      "babel-plugin-frontity",
+      Array [
+        "@emotion/babel-plugin",
+        Object {
+          "importMap": Object {
+            "frontity": Object {
+              "Global": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "Global",
+                ],
+              },
+              "css": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "css",
+                ],
+              },
+              "styled": Object {
+                "canonicalImport": Array [
+                  "@emotion/styled",
+                  "default",
+                ],
+              },
+            },
+          },
+        },
+      ],
       "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
@@ -50,15 +76,46 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
-      "@emotion/babel-preset-css-prop",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "importSource": "@emotion/react",
+          "runtime": "automatic",
+        },
+      ],
     ],
     "sourceType": "unambiguous",
   },
   "module": Object {
     "compact": true,
     "plugins": Array [
-      "babel-plugin-frontity",
+      Array [
+        "@emotion/babel-plugin",
+        Object {
+          "importMap": Object {
+            "frontity": Object {
+              "Global": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "Global",
+                ],
+              },
+              "css": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "css",
+                ],
+              },
+              "styled": Object {
+                "canonicalImport": Array [
+                  "@emotion/styled",
+                  "default",
+                ],
+              },
+            },
+          },
+        },
+      ],
       "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
@@ -88,15 +145,46 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
-      "@emotion/babel-preset-css-prop",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "importSource": "@emotion/react",
+          "runtime": "automatic",
+        },
+      ],
     ],
     "sourceType": "unambiguous",
   },
   "server": Object {
     "compact": true,
     "plugins": Array [
-      "babel-plugin-frontity",
+      Array [
+        "@emotion/babel-plugin",
+        Object {
+          "importMap": Object {
+            "frontity": Object {
+              "Global": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "Global",
+                ],
+              },
+              "css": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "css",
+                ],
+              },
+              "styled": Object {
+                "canonicalImport": Array [
+                  "@emotion/styled",
+                  "default",
+                ],
+              },
+            },
+          },
+        },
+      ],
       "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
@@ -126,8 +214,13 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
-      "@emotion/babel-preset-css-prop",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "importSource": "@emotion/react",
+          "runtime": "automatic",
+        },
+      ],
     ],
     "sourceType": "unambiguous",
   },
@@ -139,7 +232,33 @@ Object {
   "es5": Object {
     "compact": true,
     "plugins": Array [
-      "babel-plugin-frontity",
+      Array [
+        "@emotion/babel-plugin",
+        Object {
+          "importMap": Object {
+            "frontity": Object {
+              "Global": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "Global",
+                ],
+              },
+              "css": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "css",
+                ],
+              },
+              "styled": Object {
+                "canonicalImport": Array [
+                  "@emotion/styled",
+                  "default",
+                ],
+              },
+            },
+          },
+        },
+      ],
       "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
@@ -184,15 +303,46 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
-      "@emotion/babel-preset-css-prop",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "importSource": "@emotion/react",
+          "runtime": "automatic",
+        },
+      ],
     ],
     "sourceType": "unambiguous",
   },
   "module": Object {
     "compact": true,
     "plugins": Array [
-      "babel-plugin-frontity",
+      Array [
+        "@emotion/babel-plugin",
+        Object {
+          "importMap": Object {
+            "frontity": Object {
+              "Global": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "Global",
+                ],
+              },
+              "css": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "css",
+                ],
+              },
+              "styled": Object {
+                "canonicalImport": Array [
+                  "@emotion/styled",
+                  "default",
+                ],
+              },
+            },
+          },
+        },
+      ],
       "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
@@ -222,15 +372,46 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
-      "@emotion/babel-preset-css-prop",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "importSource": "@emotion/react",
+          "runtime": "automatic",
+        },
+      ],
     ],
     "sourceType": "unambiguous",
   },
   "server": Object {
     "compact": true,
     "plugins": Array [
-      "babel-plugin-frontity",
+      Array [
+        "@emotion/babel-plugin",
+        Object {
+          "importMap": Object {
+            "frontity": Object {
+              "Global": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "Global",
+                ],
+              },
+              "css": Object {
+                "canonicalImport": Array [
+                  "@emotion/react",
+                  "css",
+                ],
+              },
+              "styled": Object {
+                "canonicalImport": Array [
+                  "@emotion/styled",
+                  "default",
+                ],
+              },
+            },
+          },
+        },
+      ],
       "babel-plugin-macros",
       "@babel/plugin-syntax-dynamic-import",
       "@loadable/babel-plugin",
@@ -260,8 +441,13 @@ Object {
           "useBuiltIns": "usage",
         },
       ],
-      "@babel/preset-react",
-      "@emotion/babel-preset-css-prop",
+      Array [
+        "@babel/preset-react",
+        Object {
+          "importSource": "@emotion/react",
+          "runtime": "automatic",
+        },
+      ],
     ],
     "sourceType": "unambiguous",
   },
