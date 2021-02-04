@@ -267,7 +267,7 @@ const actions: WpSource["actions"]["source"] = {
         const fullLink = concatLink(linkWithoutAMP, "/amp");
 
         // `/amp` page
-        if (linkWithoutAMP === "/") return fullLink;
+        if (fullLink === "/amp/") return fullLink;
 
         // category
         let pattern = concatLink(subdirectory, categoryBase);
