@@ -1,7 +1,5 @@
-import { warn, error, observe, batch } from "frontity";
-import { SetOptions } from "@frontity/router/types";
-import clone from "ramda/src/clone";
 import TinyRouter, { Packages } from "../types";
+import { warn, error, observe, batch } from "frontity";
 import { isError, isRedirection } from "@frontity/source";
 import { Derived } from "frontity/types";
 import { Data } from "@frontity/source/types";
@@ -62,13 +60,12 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
 
-  // If the link hasn't changed or we are not on the client, do nothing.
-  if (state.router.link !== link && state.frontity.platform === "client")
-    return;
+  // If the link hasn't changed, do nothing.
+  if (state.router.link === link) return;
 
   // Clone the state that we are going to use for `window.history` because it
   // cannot contain proxies.
-  const browserState = JSON.parse(JSON.stringify(options.state || {}));
+  const historyState = JSON.parse(JSON.stringify(options.state || {}));
 
   // If the data is a redirection, then we set the link to the location.
   // The redirections are stored in source.data just like any other data.
@@ -78,55 +75,57 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
       window.replaceLocation(data.location);
     } else {
       // If the link is internal, we have to discard the domain.
-      const { pathname, hash, search } = new URL(
+      const { pathname, search, hash } = new URL(
         data.location,
         "https://dummy-domain.com"
       );
       // If there is a link normalize, we have to use it.
       if (libraries.source && libraries.source.normalize)
-        link = libraries.source.normalize(pathname + hash + search);
-      else link = pathname + hash + search;
+        link = libraries.source.normalize(pathname + search + hash);
+      else link = pathname + search + hash;
     }
   }
 
   // If we are in the client, update `window.history` and fetch the link.
   if (state.frontity.platform === "client") {
     if (!options.method || options.method === "push")
-      window.history.pushState(browserState, "", link);
+      window.history.pushState(historyState, "", link);
     else if (options.method === "replace")
-      window.history.replaceState(browserState, "", link);
-
-    // If `autoFetch` is on, do the fetch.
-    if (state.router.autoFetch) actions.source?.fetch(link);
-
-    if (options.method === "push") {
-      // Update history.
-      window.history.pushState(clone(options.state), "", link);
-    } else if (options.method === "replace") {
-      // Update history.
-      window.history.replaceState(clone(options.state), "", link);
-    } else if (options.method !== "pop") {
+      window.history.replaceState(historyState, "", link);
+    else if (options.method !== "pop") {
       // Throw an error if another method is used. We support "pop" internally
       // for popstate events.
       error(
         `The method ${options.method} is not supported by actions.router.set.`
       );
     }
+
+    // If `autoFetch` is on, do the fetch.
+    if (state.router.autoFetch) actions.source?.fetch(link);
   }
 
   // Finally, set the `state.router.link` property to the new value.
   batch(() => {
     state.router.previous = state.router.link;
     state.router.link = link;
-    state.router.state = browserState;
+    state.router.state = historyState;
   });
 };
 
+/**
+ * Replace the value of `state.router.state` with the give object.
+ *
+ * This implementation also executes a `window.history.replaceState()` with that
+ * object.
+ *
+ * @param historyState - The history state object.
+ * @returns Void.
+ */
 export const updateState: TinyRouter["actions"]["router"]["updateState"] = ({
   state,
-}) => (browserState: object) => {
-  state.router.state = browserState;
-  window.history.replaceState(clone(browserState), "");
+}) => (historyState: Record<string, unknown>) => {
+  state.router.state = historyState;
+  window.history.replaceState(JSON.parse(JSON.stringify(historyState)), "");
 };
 
 /**
@@ -281,8 +280,8 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     const redirectionURL =
       state.frontity.url.replace(/\/$/, "") +
       location.pathname +
-      location.hash +
-      location.search;
+      location.search +
+      location.hash;
 
     ctx.redirect(redirectionURL);
     return;
