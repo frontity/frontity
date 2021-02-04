@@ -1,4 +1,9 @@
-import * as React from "react";
+/* eslint-disable */
+/*
+ * TSDocs will be added in this branch:
+ * https://github.com/frontity/frontity/tree/package-name
+ */
+import React from "react";
 import { Slot, connect } from "frontity";
 import { Connect } from "frontity/types";
 import TestAds, { Packages } from "../types";
@@ -158,9 +163,6 @@ const testAds: TestAds = {
         const { data } = state.source;
         if (!data[link]) {
           data[link] = {
-            route: link,
-            page: 1,
-            query: {},
             link,
             isFetching: true,
             isReady: false,

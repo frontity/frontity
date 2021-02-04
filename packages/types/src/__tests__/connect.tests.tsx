@@ -1,4 +1,5 @@
-import * as React from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
+import React from "react";
 import Connect, { ConnectFunction } from "../connect";
 import { FilterInjectedProps } from "../utils";
 import { Action, AsyncAction } from "../action";

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { connect, Slot } from "frontity";
 import SmartAdserver, { Packages } from "../types";
 import { Connect } from "frontity/types";

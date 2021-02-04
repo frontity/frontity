@@ -67,13 +67,6 @@ interface Router<T = null> extends Package {
       set:
         | Action<T extends null ? Router : T, string>
         | Action<T extends null ? Router : T, string, SetOptions>;
-
-      /**
-       * Take a browser state object as an argument and executes a
-       * window.history.replaceState() with that object and the current url.
-       *
-       * @param state - The state object.
-       */
       updateState: Action<T extends null ? Router : T, unknown>;
     };
   };

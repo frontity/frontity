@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import connect, { useConnect } from "@frontity/connect";
 import { Connect, Package } from "../../../types";
 import useFills from "./use-fills";

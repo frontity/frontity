@@ -1,4 +1,5 @@
 import { styled, css } from "frontity";
+import React from "react";
 
 // Base styling for all toggle buttons
 export const BaseToggle = styled.button`

@@ -5,39 +5,19 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import { fetchPackageVersion } from "../utils";
 
-/**
- * Options passed to the `create-package` function.
- */
+// Options passed to the `create-package` function.
 export type Options = {
-  /**
-   * Name of the package.
-   */
+  // Name of the package.
   name?: string;
-
-  /**
-   * Namespace of the package.
-   */
+  // Namespace of the package.
   namespace?: string;
-
-  /**
-   * Path of the Frontity project.
-   */
+  // Path of the Frontity project.
   projectPath?: string;
-
-  /**
-   * Path where the package should be created (relative to `projectPath`).
-   */
+  // Path where the package should be created (relative to `projectPath`).
   packagePath?: string;
 };
 
-/**
- * This function creates a `package.json` file.
- *
- * @param name - The package name.
- * @param namespace - Namespace.
- * @param projectPath - Project path.
- * @param packagePath - Package path.
- */
+// This function creates a `package.json` file.
 export const createPackageJson = async (
   name: string,
   namespace: string,
@@ -64,14 +44,7 @@ export const createPackageJson = async (
   await writeFile(filePath, fileData);
 };
 
-/**
- * This function creates an `index.js` file.
- *
- * @param name - The name.
- * @param namespace - Namespace name.
- * @param projectPath - Project path.
- * @param packagePath - Package path.
- */
+// This function creates an `index.js` file.
 export const createSrcIndexJs = async (
   name: string,
   namespace: string,
@@ -105,12 +78,8 @@ export default {
   await writeFile(filePath, fileData);
 };
 
-/**
- * This function executes the `npm i` command to add the created package.
- *
- * @param projectPath - Project path.
- * @param packagePath - Package path.
- */
+// This function executes the `npm i` command to add the
+// created package
 export const installPackage = async (
   projectPath: string,
   packagePath: string

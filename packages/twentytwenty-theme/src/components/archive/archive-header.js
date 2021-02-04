@@ -1,4 +1,5 @@
 import { styled } from "frontity";
+import React from "react";
 import SectionContainer from "../styles/section-container";
 
 const Header = ({ label, children, labelColor }) => {

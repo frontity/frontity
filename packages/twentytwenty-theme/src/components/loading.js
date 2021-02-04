@@ -1,3 +1,4 @@
+import React from "react";
 import { styled, connect, keyframes, css } from "frontity";
 
 const addAlpha = (hex, alpha) => {

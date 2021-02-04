@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import * as React from "react";
+import React from "react";
 import { Head, connect } from "frontity";
 import { Connect, Package } from "frontity/types";
 import useInView from "@frontity/hooks/use-in-view";

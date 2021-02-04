@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import TinyRouterTests, { Packages } from "../types";
 import { css, connect } from "frontity";
 import { Connect } from "frontity/types";

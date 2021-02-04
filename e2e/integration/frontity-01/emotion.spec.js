@@ -55,16 +55,7 @@ describe("styled", () => {
     );
   });
 
-  it("should have a Styled class name (autoLabel)", function () {
-    const frontityModeProduction =
-      Cypress.env("FRONTITY_MODE") !== "development";
-
-    // If we are in production mode skip the test since
-    // the autoLabel works only in development
-    if (frontityModeProduction) {
-      this.skip();
-    }
-
+  it("should have a Styled class name (autoLabel)", () => {
     cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
     cy.get("[data-test-id='styled-div']").should((div) => {
       const className = div[0].className;
@@ -104,16 +95,7 @@ describe("css", () => {
     );
   });
 
-  it("should have a Styled class name (autoLabel)", function () {
-    const frontityModeProduction =
-      Cypress.env("FRONTITY_MODE") !== "development";
-
-    // If we are in production mode skip the test since
-    // the autoLabel works only in development
-    if (frontityModeProduction) {
-      this.skip();
-    }
-
+  it("should have a Styled class name (autoLabel)", () => {
     cy.visit("http://localhost:3001/styled-css?frontity_name=emotion");
     cy.get("[data-test-id='css-div']").should((div) => {
       const className = div[0].className;

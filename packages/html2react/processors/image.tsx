@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-import * as React from "react";
+import React, { ReactNode } from "react";
 import { styled } from "frontity";
 import Image, { Props as ImageProps } from "@frontity/components/image";
 import { Processor, Element } from "../types";

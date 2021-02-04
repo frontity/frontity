@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { connect, Head } from "frontity";
 import { Connect } from "frontity/types";
 import { Packages } from "../../types";

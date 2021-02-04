@@ -1,4 +1,5 @@
 import { connect } from "frontity";
+import React from "react";
 import { ToggleIcon } from "../icons";
 import {
   LabeledIcon,

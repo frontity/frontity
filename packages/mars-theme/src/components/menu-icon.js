@@ -1,3 +1,5 @@
+import React from "react";
+
 export const HamburgerIcon = ({ size, color }) => {
   return (
     <svg

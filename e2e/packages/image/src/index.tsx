@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Global, css, styled } from "frontity";
 import Image from "@frontity/components/image";
 import Package from "../types";

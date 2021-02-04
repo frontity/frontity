@@ -1,5 +1,5 @@
 import { Package, Fill } from "frontity/types";
-import * as React from "react";
+import React from "react";
 
 declare global {
   /**
@@ -78,7 +78,6 @@ interface GoogleAdManager extends Package {
    * Package name.
    */
   name: "@frontity/google-ad-manager";
-
   /**
    * Root elements exposed by this package.
    */

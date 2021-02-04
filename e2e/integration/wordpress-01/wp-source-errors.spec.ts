@@ -1,3 +1,4 @@
+// This allows us to get TypeScript Intellisense and autocompletion.
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;
 
@@ -7,11 +8,6 @@ describe("WP Source errors", () => {
     task("loadDatabase", {
       path: "./wp-data/wp-source/wp-source-errors.sql",
     });
-  });
-
-  after(() => {
-    task("resetDatabase");
-    task("removeAllPlugins");
   });
 
   describe("Status codes", () => {

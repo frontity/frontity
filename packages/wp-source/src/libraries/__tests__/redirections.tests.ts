@@ -39,9 +39,9 @@ const redirections: {
   },
 ];
 
-const redirect = (route, redirections) => {
-  const match = getMatch({ route }, redirections);
-  if (!match) return route;
+const redirect = (path, redirections) => {
+  const match = getMatch(path, redirections);
+  if (!match) return path;
   return match.func(match.params);
 };
 

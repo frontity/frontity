@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 const Static: React.FC = () => {
   return <div>I am the Static component</div>;

@@ -15,7 +15,6 @@ import {
   PageData,
   AttachmentData,
   HomeData,
-  RedirectionData,
 } from "../types/data";
 
 /**
@@ -180,14 +179,4 @@ export function isAttachment(data: Data): data is AttachmentData {
  */
 export function isHome(data: Data): data is HomeData {
   return (data as HomeData).isHome === true;
-}
-
-/**
- * Checks if a data object represents a redirection.
- *
- * @param data - Object of type {@link Data}.
- * @returns A boolean value with the result.
- */
-export function isRedirection(data: Data): data is RedirectionData {
-  return (data as RedirectionData).isRedirection === true;
 }

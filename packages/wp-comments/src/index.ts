@@ -212,7 +212,7 @@ const wpComments: WpComments = {
           const { id, type } = comment;
 
           // Add the comment entity.
-          state.source.comment[id] = comment;
+          state.source.comment[id] = comment; // eslint-disable-line require-atomic-updates
 
           const commentData = state.source.data[`@comments/${postId}/`];
 

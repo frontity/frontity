@@ -16,16 +16,19 @@ exports[`GoogleTagManager works with a single container id 1`] = `
 
 exports[`GoogleTagManager works with a single container id 2`] = `
 <noscript>
-  <style
-    dangerouslySetInnerHTML={
+  <iframe
+    css={
       Object {
-        "__html": ".css-llz5b9-GtmCode{display:none;visibility:hidden;}",
+        "map": undefined,
+        "name": "8s6lqv",
+        "next": undefined,
+        "styles": "
+          display: none;
+          visibility: hidden;
+        ",
+        "toString": [Function],
       }
     }
-    data-emotion="css llz5b9-GtmCode"
-  />
-  <iframe
-    className="css-llz5b9-GtmCode"
     height="0"
     src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
     title="GTM-XXXXXXX"
@@ -47,16 +50,19 @@ exports[`GoogleTagManager works with multiple container ids 1`] = `
 exports[`GoogleTagManager works with multiple container ids 2`] = `
 Array [
   <noscript>
-    <style
-      dangerouslySetInnerHTML={
+    <iframe
+      css={
         Object {
-          "__html": ".css-llz5b9-GtmCode{display:none;visibility:hidden;}",
+          "map": undefined,
+          "name": "8s6lqv",
+          "next": undefined,
+          "styles": "
+          display: none;
+          visibility: hidden;
+        ",
+          "toString": [Function],
         }
       }
-      data-emotion="css llz5b9-GtmCode"
-    />
-    <iframe
-      className="css-llz5b9-GtmCode"
       height="0"
       src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
       title="GTM-XXXXXXX"
@@ -64,16 +70,19 @@ Array [
     />
   </noscript>,
   <noscript>
-    <style
-      dangerouslySetInnerHTML={
+    <iframe
+      css={
         Object {
-          "__html": ".css-llz5b9-GtmCode{display:none;visibility:hidden;}",
+          "map": undefined,
+          "name": "8s6lqv",
+          "next": undefined,
+          "styles": "
+          display: none;
+          visibility: hidden;
+        ",
+          "toString": [Function],
         }
       }
-      data-emotion="css llz5b9-GtmCode"
-    />
-    <iframe
-      className="css-llz5b9-GtmCode"
       height="0"
       src="https://www.googletagmanager.com/ns.html?id=GTM-YYYYYYY"
       title="GTM-YYYYYYY"

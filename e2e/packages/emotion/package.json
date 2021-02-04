@@ -3,6 +3,9 @@
   "version": "1.0.2",
   "private": true,
   "description": "Package to do e2e testing of Frontity's internal Emotion library",
+  "scripts": {
+    "preinstall": "node -e \"console.error('Please run \\'npm install\\' in the root.\\n'); process.exit(1);\""
+  },
   "dependencies": {
     "frontity": "^1.10.1"
   }

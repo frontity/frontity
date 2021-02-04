@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import get from "get-value";
 import { useConnect, warn, styled } from "../..";
 import { Fill as StateFill, Package } from "../../../types";

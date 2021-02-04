@@ -1,3 +1,4 @@
+import React from "react";
 import { styled, keyframes, css } from "frontity";
 
 const scale = keyframes`
@@ -20,7 +21,7 @@ const Loading = () => (
 
 export default Loading;
 
-const bar = (index) => css`
+const bar = index => css`
   background-color: rgba(12, 17, 43, 0.3);
   width: 4px;
   height: 24px;

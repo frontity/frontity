@@ -1,5 +1,5 @@
 import { Package, State } from "frontity/types";
-import * as React from "react";
+import React from "react";
 import { SerializedStyles } from "@emotion/core";
 
 /**

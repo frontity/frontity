@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Head, connect } from "frontity";
 import { Connect } from "frontity/types";
 import ComscoreAnalytics from "../../types";

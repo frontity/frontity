@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { Global, css, connect, styled } from "frontity";
 import Package from "../types";
 
@@ -8,7 +8,7 @@ import Package from "../types";
  * @returns React element.
  */
 const GlobalBackgroundBlue = () => {
-  const [global, setGlobal] = useState(false);
+  const [global, setGlobal] = React.useState(false);
   return (
     <>
       {global && (
@@ -34,7 +34,7 @@ const GlobalBackgroundBlue = () => {
  * @returns React element.
  */
 const GlobalColorRed = () => {
-  const [global, setGlobal] = useState(false);
+  const [global, setGlobal] = React.useState(false);
   return (
     <>
       {global && (
@@ -94,7 +94,7 @@ const CSS = ({ children, color }) => (
  * @returns React element.
  */
 const StyledPage = () => {
-  const [isBlue, setIsBlue] = useState(false);
+  const [isBlue, setIsBlue] = React.useState(false);
   return (
     <>
       <Styled color={isBlue && "blue"} data-test-id="styled-div">

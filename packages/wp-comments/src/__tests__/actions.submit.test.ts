@@ -108,7 +108,6 @@ describe("actions.comments.submit", () => {
       state: {
         source: {
           api: "https://test.frontity.org/wp-json/",
-          url: "https://test.frontity.org/",
         },
         comments: {
           forms: {
@@ -195,7 +194,6 @@ describe("actions.comments.submit", () => {
       state: {
         source: {
           api: "https://test.frontity.org/wp-json/",
-          url: "https://test.frontity.org/",
         },
       },
     });
@@ -249,7 +247,6 @@ describe("actions.comments.submit", () => {
       state: {
         source: {
           api: "https://test.frontity.org/wp-json/",
-          url: "https://test.frontity.org/",
         },
       },
     });
@@ -303,7 +300,6 @@ describe("actions.comments.submit", () => {
       state: {
         source: {
           api: "https://test.frontity.org/wp-json/",
-          url: "https://test.frontity.org/",
         },
       },
     });
@@ -357,7 +353,6 @@ describe("actions.comments.submit", () => {
       state: {
         source: {
           api: "https://test.frontity.org/wp-json/",
-          url: "https://test.frontity.org/",
         },
       },
     });
@@ -467,7 +462,7 @@ describe("actions.comments.submit", () => {
     // Mock packages with the API specified and some form.
     const packages: any = mergeDeepRight(clone(wpSource()), clone(wpComments));
     const store = createStore<Packages>(packages);
-    store.state.source.url = "https://test.frontity.org/";
+    store.state.source.api = "https://test.frontity.org/wp-json";
     store.actions.source.init();
 
     type Api = Packages["libraries"]["source"]["api"];
@@ -575,7 +570,6 @@ describe("actions.comments.submit", () => {
       state: {
         source: {
           api: "https://test.frontity.org/wp-json/",
-          url: "https://test.frontity.org/",
         },
       },
     });
@@ -622,7 +616,6 @@ describe("actions.comments.submit", () => {
       state: {
         source: {
           api: "https://test.frontity.org/wp-json/",
-          url: "https://test.frontity.org/",
         },
         comments: {
           forms: {
@@ -694,7 +687,6 @@ describe("actions.comments.submit", () => {
       state: {
         source: {
           api: "https://test.frontity.org/wp-json/",
-          url: "https://test.frontity.org/",
         },
         comments: {
           forms: {

@@ -1,3 +1,4 @@
+import React from "react";
 import { render } from "@testing-library/react";
 import { createStore } from "@frontity/connect";
 import { Html2React } from "../../src/libraries/component";

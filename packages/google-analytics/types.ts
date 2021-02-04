@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Action, MergePackages, Package } from "frontity/types";
 import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 
@@ -99,7 +99,6 @@ interface GoogleAnalytics extends Package {
    * Package name.
    */
   name: "@frontity/google-analytics";
-
   /**
    * Root elements exposed by this package.
    */

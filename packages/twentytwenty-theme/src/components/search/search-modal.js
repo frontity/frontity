@@ -1,5 +1,5 @@
 import { styled, connect, Global, css } from "frontity";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useTransition, animated } from "react-spring";
 
 import { CloseIcon } from "../icons";

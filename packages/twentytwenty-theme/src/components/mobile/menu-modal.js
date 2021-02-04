@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { styled, connect, Global } from "frontity";
 import Link from "../link";
 import { CloseNavToggle } from "../navigation/nav-toggle";

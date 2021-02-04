@@ -18,10 +18,9 @@ import {
   AttachmentData,
   SearchData,
   HomeData,
-  RedirectionData,
 } from "../../types/data";
 import {
-  // Type Guards.
+  // Guards.
   isError,
   isArchive,
   isSearch,
@@ -38,7 +37,6 @@ import {
   isPage,
   isAttachment,
   isHome,
-  isRedirection,
 } from "../data";
 import {
   // Data instances.
@@ -63,7 +61,6 @@ import {
   page,
   attachment,
   oldTaxonomy,
-  redirection,
 } from "../../__tests__/mocks/data";
 
 describe("Data type guards", () => {
@@ -181,11 +178,6 @@ describe("Data type guards", () => {
       expectType<PostTypeData>(data);
       expectType<AttachmentData>(data);
     }
-
-    if (isRedirection(data)) {
-      expectType<Data>(data);
-      expectType<RedirectionData>(data);
-    }
   });
 
   test("`isError` should only recognize error data", () => {
@@ -215,8 +207,6 @@ describe("Data type guards", () => {
     expect(isError(post)).toBe(false);
     expect(isError(page)).toBe(false);
     expect(isError(attachment)).toBe(false);
-    // Redirection Type
-    expect(isError(redirection)).toBe(false);
   });
 
   test("`isArchive` should recognize archive data", () => {
@@ -246,8 +236,6 @@ describe("Data type guards", () => {
     expect(isArchive(post)).toBe(false);
     expect(isArchive(page)).toBe(false);
     expect(isArchive(attachment)).toBe(false);
-    // Redirection Type
-    expect(isArchive(redirection)).toBe(false);
   });
 
   test("`isTerm` should recognize term data", () => {
@@ -279,8 +267,6 @@ describe("Data type guards", () => {
     expect(isTerm(post)).toBe(false);
     expect(isTerm(page)).toBe(false);
     expect(isTerm(attachment)).toBe(false);
-    // Redirection Type
-    expect(isTerm(redirection)).toBe(false);
   });
 
   test("`isTaxonomy` (deprecated) should recognize term data", () => {
@@ -312,8 +298,6 @@ describe("Data type guards", () => {
     expect(isTaxonomy(post)).toBe(false);
     expect(isTaxonomy(page)).toBe(false);
     expect(isTaxonomy(attachment)).toBe(false);
-    // Redirection Type
-    expect(isTaxonomy(redirection)).toBe(false);
   });
 
   test("`isCategory` should recognize category data", () => {
@@ -345,8 +329,6 @@ describe("Data type guards", () => {
     expect(isCategory(post)).toBe(false);
     expect(isCategory(page)).toBe(false);
     expect(isCategory(attachment)).toBe(false);
-    // Redirection Type
-    expect(isCategory(redirection)).toBe(false);
   });
 
   test("`isTag` should recognize tag data", () => {
@@ -378,8 +360,6 @@ describe("Data type guards", () => {
     expect(isTag(post)).toBe(false);
     expect(isTag(page)).toBe(false);
     expect(isTag(attachment)).toBe(false);
-    // Redirection Type
-    expect(isTag(redirection)).toBe(false);
   });
 
   test("`isAuthor` should recognize author data", () => {
@@ -411,8 +391,6 @@ describe("Data type guards", () => {
     expect(isAuthor(post)).toBe(false);
     expect(isAuthor(page)).toBe(false);
     expect(isAuthor(attachment)).toBe(false);
-    // Redirection Type
-    expect(isAuthor(redirection)).toBe(false);
   });
 
   test("`isPostTypeArchive` should recognize post type archive data", () => {
@@ -444,8 +422,6 @@ describe("Data type guards", () => {
     expect(isPostTypeArchive(post)).toBe(false);
     expect(isPostTypeArchive(page)).toBe(false);
     expect(isPostTypeArchive(attachment)).toBe(false);
-    // Redirection Type
-    expect(isPostTypeArchive(redirection)).toBe(false);
   });
 
   test("`isPostArchive` should recognize post archive data", () => {
@@ -477,8 +453,6 @@ describe("Data type guards", () => {
     expect(isPostArchive(post)).toBe(false);
     expect(isPostArchive(page)).toBe(false);
     expect(isPostArchive(attachment)).toBe(false);
-    // Redirection Type
-    expect(isPostArchive(redirection)).toBe(false);
   });
 
   test("`isDate` should recognize date archive data", () => {
@@ -510,8 +484,6 @@ describe("Data type guards", () => {
     expect(isDate(post)).toBe(false);
     expect(isDate(page)).toBe(false);
     expect(isDate(attachment)).toBe(false);
-    // Redirection Type
-    expect(isDate(redirection)).toBe(false);
   });
 
   test("`isSearch` should recognize search data", () => {
@@ -543,8 +515,6 @@ describe("Data type guards", () => {
     expect(isSearch(post)).toBe(false);
     expect(isSearch(page)).toBe(false);
     expect(isSearch(attachment)).toBe(false);
-    // Redirection Type
-    expect(isSearch(redirection)).toBe(false);
   });
 
   test("`isPostType` should recognize post type data", () => {
@@ -576,8 +546,6 @@ describe("Data type guards", () => {
     expect(isPostType(post)).toBe(true);
     expect(isPostType(page)).toBe(true);
     expect(isPostType(attachment)).toBe(true);
-    // Redirection Type
-    expect(isPostType(redirection)).toBe(false);
   });
 
   test("`isPost` should recognize post data", () => {
@@ -609,9 +577,6 @@ describe("Data type guards", () => {
     expect(isPost(post)).toBe(true);
     expect(isPost(page)).toBe(false);
     expect(isPost(attachment)).toBe(false);
-
-    // Redirection Type
-    expect(isPost(redirection)).toBe(false);
   });
 
   test("`isPage` should recognize page data", () => {
@@ -643,8 +608,6 @@ describe("Data type guards", () => {
     expect(isPage(post)).toBe(false);
     expect(isPage(page)).toBe(true);
     expect(isPage(attachment)).toBe(false);
-    // Redirection Type
-    expect(isPage(redirection)).toBe(false);
   });
 
   test("`isAttachment` should recognize attachment data", () => {
@@ -676,8 +639,6 @@ describe("Data type guards", () => {
     expect(isAttachment(post)).toBe(false);
     expect(isAttachment(page)).toBe(false);
     expect(isAttachment(attachment)).toBe(true);
-    // Redirection Type
-    expect(isAttachment(redirection)).toBe(false);
   });
 
   test("`isHome` should recognize the home data", () => {
@@ -709,41 +670,5 @@ describe("Data type guards", () => {
     expect(isHome(post)).toBe(false);
     expect(isHome(page)).toBe(false);
     expect(isHome(attachment)).toBe(false);
-    // Redirection Type
-    expect(isHome(redirection)).toBe(false);
-  });
-
-  test("`isRedirection` should recognize the redirection data", () => {
-    expect(isRedirection(onlyStatus)).toBe(false);
-    // Error.
-    expect(isRedirection(notFound)).toBe(false);
-    // Terms.
-    expect(isRedirection(term)).toBe(false);
-    expect(isRedirection(termWithSearchData)).toBe(false);
-    expect(isRedirection(category)).toBe(false);
-    expect(isRedirection(categoryWithSearchData)).toBe(false);
-    expect(isRedirection(tag)).toBe(false);
-    expect(isRedirection(tagWithSearchData)).toBe(false);
-    // Deprecated Taxonomy
-    expect(isRedirection(oldTaxonomy)).toBe(false);
-    // Author
-    expect(isRedirection(author)).toBe(false);
-    expect(isRedirection(authorWithSearchData)).toBe(false);
-    // Post Type archive
-    expect(isRedirection(postTypeArchive)).toBe(false);
-    expect(isRedirection(postTypeArchiveWithSearchData)).toBe(false);
-    expect(isRedirection(postArchive)).toBe(false);
-    expect(isRedirection(postArchiveWithSearchData)).toBe(false);
-    // Date Archive
-    expect(isRedirection(dateArchive)).toBe(false);
-    expect(isRedirection(dateArchiveWithSearchData)).toBe(false);
-    // Post Types.
-    expect(isRedirection(postType)).toBe(false);
-    expect(isRedirection(post)).toBe(false);
-    expect(isRedirection(page)).toBe(false);
-    expect(isRedirection(attachment)).toBe(false);
-    expect(isRedirection(attachment)).toBe(false);
-    // Redirection Type
-    expect(isRedirection(redirection)).toBe(true);
   });
 });

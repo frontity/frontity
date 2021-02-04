@@ -1,3 +1,4 @@
+import React from "react";
 import { connect, styled } from "frontity";
 import Image from "@frontity/components/image";
 

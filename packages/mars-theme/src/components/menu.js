@@ -1,3 +1,4 @@
+import React from "react";
 import { styled, connect, Global } from "frontity";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";

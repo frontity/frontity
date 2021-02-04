@@ -1,3 +1,4 @@
+import React from "react";
 import { render } from "@testing-library/react";
 import Html2React from "../../src/libraries/component";
 import image from "../image";

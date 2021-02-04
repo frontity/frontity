@@ -1,3 +1,4 @@
+import React from "react";
 import { connect, styled } from "frontity";
 import Link from "../link";
 import FeaturedMedia from "./featured-media";
@@ -22,7 +23,6 @@ const PostItem = ({
 }) => {
   // Get all categories
   const allCategories = state.source.category;
-
   /**
    * The item's categories is an array of each category id
    * So, we'll look up the details of each category in allCategories
@@ -32,7 +32,6 @@ const PostItem = ({
 
   // Get all tags
   const allTags = state.source.tag;
-
   /**
    * The item's categories is an array of each tag id
    * So, we'll look up the details of each tag in allTags

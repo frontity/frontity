@@ -35,10 +35,8 @@ tsNode.register({
     esModuleInterop: true,
     // Resolve JSON files.
     resolveJsonModule: true,
-    // Support for JSX runtime.
-    jsx: "react-jsx",
-    // Support for emotion css prop with types
-    jsxImportSource: "@emotion/react",
+    // Support for JSX.
+    jsx: "react",
     // Transpile JS as well.
     allowJs: true,
   },

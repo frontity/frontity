@@ -1,5 +1,5 @@
 import { connect, styled } from "frontity";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import ScreenReaderText from "../styles/screen-reader";
 import Button from "../styles/button";
 import Input from "../styles/input";
