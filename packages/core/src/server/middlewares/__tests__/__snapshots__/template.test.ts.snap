@@ -16,27 +16,7 @@ exports[`template custom template should be able to call defaultTemplate 1`] = `
     </html>"
 `;
 
-exports[`template custom template should define a custom template 1`] = `
-"(args) => {
-            return store.libraries.frontity.template(Object.assign(Object.assign({}, args), { defaultTemplate }));
-        }"
-`;
-
-exports[`template should define a default template 1`] = `
-"({ html, scripts, head, htmlAttributes, bodyAttributes, }) => \`<!doctype html>
-    <html \${htmlAttributes || \\"\\"}>
-      <head>
-        <meta charset=\\"utf-8\\">
-        <meta name=\\"generator\\" content=\\"Frontity\\">
-        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\">
-        \${head ? head.join(\\"\\\\n\\") : \\"\\"}
-      </head>
-      <body \${bodyAttributes || \\"\\"}>
-        <div id=\\"root\\">\${html}</div>
-        \${scripts ? scripts.join(\\"\\\\n\\") : \\"\\"}
-      </body>
-    </html>\`"
-`;
+exports[`template custom template should define a custom template 1`] = `"template()"`;
 
 exports[`template the default template should accept head, scripts and attributes 1`] = `
 "<!doctype html>

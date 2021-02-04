@@ -15,7 +15,7 @@ describe("setupRenderMethod", () => {
 
     await setupRenderMethod(ctx, fakeNext);
 
-    expect(ctx.state.render.toString()).toMatchSnapshot();
+    expect(ctx.state.render).toBeDefined();
   });
 
   it("should call the collect chunks if we have entry points", async () => {
@@ -44,15 +44,17 @@ describe("setupRenderMethod", () => {
 
   describe("custom render", () => {
     it("should wrap the user defined render", async () => {
+      function customRender() {
+        return "custom";
+      }
+
       const ctx: any = createKoaContext({
-        render: function customRender() {
-          return null;
-        },
+        render: customRender,
       });
 
       await setupRenderMethod(ctx, fakeNext);
 
-      expect(ctx.state.render.toString()).toMatchSnapshot();
+      expect(ctx.state.render({})).toEqual("custom");
     });
 
     it("should call the render with a defaultRenderer", async () => {

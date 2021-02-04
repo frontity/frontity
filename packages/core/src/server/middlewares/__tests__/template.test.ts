@@ -8,7 +8,7 @@ describe("template", () => {
 
     await template(ctx, fakeNext);
 
-    expect(ctx.state.template.toString()).toMatchSnapshot();
+    expect(ctx.state.template).toBeDefined();
   });
 
   it("the default template should accept head, scripts and attributes", async () => {
@@ -29,14 +29,14 @@ describe("template", () => {
   describe("custom template", () => {
     it("should define a custom template", async () => {
       const ctx: any = createKoaContext({
-        template: jest.fn(),
+        template: jest.fn().mockReturnValue("template()"),
       });
 
       // Call the middlware.
       await template(ctx, fakeNext);
 
       // The new template method should be redefined.
-      expect(ctx.state.template.toString()).toMatchSnapshot();
+      expect(ctx.state.template()).toMatchSnapshot();
     });
 
     it("should be able to call defaultTemplate", async () => {
