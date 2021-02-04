@@ -18,8 +18,8 @@ const spiedReplaceState = jest.spyOn(window.history, "replaceState");
 
 beforeEach(() => {
   normalize = jest.fn().mockImplementation((link) => {
-    const { pathname, hash, search } = new URL(link, "https://dummy.com");
-    return pathname + hash + search;
+    const { pathname, search, hash } = new URL(link, "https://dummy.com");
+    return pathname + search + hash;
   });
   fetch = jest.fn();
   get = jest.fn().mockReturnValue({ isReady: false, isFetching: false });
@@ -54,8 +54,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  spiedPushState.mockClear();
-  spiedReplaceState.mockClear();
   jest.clearAllMocks();
 });
 
@@ -79,7 +77,7 @@ describe("actions", () => {
       store.actions.router.set(link);
 
       expect(normalize).toHaveBeenCalledWith(link);
-      expect(store.state.router.link).toBe(link);
+      expect(store.state.router.link).toBe("/some-post/page/3/?some=query");
       expect(spiedPushState).toHaveBeenCalledTimes(1);
     });
 
@@ -146,8 +144,6 @@ describe("actions", () => {
       const options: SetOptions = {
         method: "push",
       };
-
-      jest.spyOn(window.history, "pushState");
 
       store.actions.router.set(link, options);
       expect(spiedPushState).toHaveBeenCalledTimes(1);
@@ -271,7 +267,7 @@ describe("actions", () => {
       expect(store.state.router.link).toBe(link);
       expect(store.state.router.state).toEqual(nextState);
       expect(spiedReplaceState).toHaveBeenCalledTimes(1);
-      expect(spiedReplaceState).toHaveBeenCalledWith(nextState, "", link);
+      expect(spiedReplaceState).toHaveBeenCalledWith(nextState, "");
     });
   });
 
@@ -293,11 +289,9 @@ describe("actions", () => {
       const store = createStore(config);
       store.state.router.state = { some: "state" };
 
-      jest.spyOn(window.history, "replaceState");
-
       store.actions.router.init();
 
-      expect(window.history.replaceState).toHaveBeenCalledTimes(1);
+      expect(spiedReplaceState).toHaveBeenCalledTimes(1);
       expect(window.history.state).toEqual(store.state.router.state);
     });
 
@@ -309,7 +303,7 @@ describe("actions", () => {
       const pathname = "/about-us/";
       const search = "?id=3&search=value";
       const hash = "#element";
-      const link = pathname + hash + search;
+      const link = pathname + search + hash;
 
       const oldLocation = window.location;
       delete window.location;
@@ -430,7 +424,7 @@ describe("actions", () => {
         isRedirection: true,
         redirectionStatus: 123,
         isExternal: false,
-        location: "https://backend.com/final-url/#hash?query=value",
+        location: "https://backend.com/final-url/?query=value#hash",
       });
       const store = createStore(config);
       store.state.frontity.url = "https://domain.com";
@@ -438,7 +432,7 @@ describe("actions", () => {
       await store.actions.router.beforeSSR({ ctx: ctx as Context });
 
       expect(ctx.redirect).toHaveBeenCalledWith(
-        "https://domain.com/final-url/#hash?query=value"
+        "https://domain.com/final-url/?query=value#hash"
       );
       expect(ctx.status).toBe(123);
     });
@@ -453,14 +447,14 @@ describe("actions", () => {
         isRedirection: true,
         redirectionStatus: 123,
         isExternal: true,
-        location: "https://external.com/final-url/#hash?query=value",
+        location: "https://external.com/final-url/?query=value#hash",
       });
       const store = createStore(config);
 
       await store.actions.router.beforeSSR({ ctx: ctx as Context });
 
       expect(ctx.redirect).toHaveBeenCalledWith(
-        "https://external.com/final-url/#hash?query=value"
+        "https://external.com/final-url/?query=value#hash"
       );
       expect(ctx.status).toBe(123);
     });
