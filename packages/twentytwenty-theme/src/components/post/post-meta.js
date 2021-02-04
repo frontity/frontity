@@ -1,5 +1,4 @@
 import { styled, connect, decode } from "frontity";
-import React from "react";
 import PostMetaItem from "./post-meta-item";
 import { UserIcon, CalendarIcon } from "../icons";
 

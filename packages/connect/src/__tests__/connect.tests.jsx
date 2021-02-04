@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React from "react";
+import * as React from "react";
 import { create, act } from "react-test-renderer";
 import * as error from "@frontity/error";
 import connect, { Provider, createStore, useConnect } from "..";
@@ -267,6 +266,7 @@ describe("useConnect", () => {
   });
 
   it("should log a warning if the component is not connected", () => {
+    // eslint-disable-next-line no-import-assign
     error.warn = jest.fn();
 
     const Comp = () => {

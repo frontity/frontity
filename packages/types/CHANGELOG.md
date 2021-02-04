@@ -1,10 +1,21 @@
 # Change Log
 
-## 1.4.1-infinite-scroll-beta.0
+## 1.7.1
 
 ### Patch Changes
 
-- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Fixes types for `connect()` with the new options parameter.
+- [`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf) [#683](https://github.com/frontity/frontity/pull/683) Thanks [@cristianbote](https://github.com/cristianbote)! - Reverts the preinstall hook added for development workflows.
+
+## 1.7.0
+
+### Minor Changes
+
+- [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7) [#670](https://github.com/frontity/frontity/pull/670) Thanks [@nicholasio](https://github.com/nicholasio)! - Update react imports in all packages (including themes) to removed unnecessary React Imports
+
+### Patch Changes
+
+- [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433) [#655](https://github.com/frontity/frontity/pull/655) Thanks [@mburridge](https://github.com/mburridge)! - Fix broken links in README files.
+
 ## 1.6.0
 
 ### Minor Changes
@@ -44,6 +55,12 @@
 ### Patch Changes
 
 - [`ee9f2616`](https://github.com/frontity/frontity/commit/ee9f26165e1f965d3234b4cf9588966e3ab36ec7) [#478](https://github.com/frontity/frontity/pull/478) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md package created
+
+## 1.4.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Fixes types for `connect()` with the new options parameter.
 
 ## 1.4.0
 

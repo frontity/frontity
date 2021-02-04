@@ -1,16 +1,30 @@
 # @frontity/comscore-analytics
 
-## 0.1.1-infinite-scroll-beta.0
+## 1.2.1
 
 ### Patch Changes
 
-- Updated dependencies []:
-  - frontity@1.8.1-infinite-scroll-beta.0
-  - @frontity/analytics@1.1.1-infinite-scroll-beta.0
+- [`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf) [#683](https://github.com/frontity/frontity/pull/683) Thanks [@cristianbote](https://github.com/cristianbote)! - Reverts the preinstall hook added for development workflows.
 
-## 0.1.0
+- Updated dependencies [[`b41175d0`](https://github.com/frontity/frontity/commit/b41175d0f5df9ca95fc449ca1a0eca6649f1bccf)]:
+  - @frontity/analytics@1.3.1
+  - frontity@1.14.1
+
+## 1.2.0
 
 ### Minor Changes
+
+- [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7) [#670](https://github.com/frontity/frontity/pull/670) Thanks [@nicholasio](https://github.com/nicholasio)! - Update react imports in all packages (including themes) to removed unnecessary React Imports
+
+### Patch Changes
+
+- [`01880c34`](https://github.com/frontity/frontity/commit/01880c34c111f55c23169adb7365ea9262e6cca8) [#666](https://github.com/frontity/frontity/pull/666) Thanks [@cristianbote](https://github.com/cristianbote)! - Adopt the new version of emotion 11. That means using the emotion deidcated babel plugin for rewriting the imports, generating source-maps and enable auto labels.
+
+* [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433) [#655](https://github.com/frontity/frontity/pull/655) Thanks [@mburridge](https://github.com/mburridge)! - Fix broken links in README files.
+
+* Updated dependencies [[`a5520f56`](https://github.com/frontity/frontity/commit/a5520f5605cfda2323e0c9ea4a553658a021fd15), [`01880c34`](https://github.com/frontity/frontity/commit/01880c34c111f55c23169adb7365ea9262e6cca8), [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433), [`09f07484`](https://github.com/frontity/frontity/commit/09f07484c920e99d46290986d7a64b8f3c20e53c), [`e4221d4b`](https://github.com/frontity/frontity/commit/e4221d4b451268b5c951197a08b4021d50394c1b), [`9346f560`](https://github.com/frontity/frontity/commit/9346f560c4806483b914aa3fb7a37e373f48f712), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433), [`c5b0b8f7`](https://github.com/frontity/frontity/commit/c5b0b8f7e5ebfdf02f40ded7d7347a1d28039c2d)]:
+  - frontity@1.14.0
+  - @frontity/analytics@1.3.0
 
 ## 1.1.1
 
@@ -54,6 +68,14 @@
 - Updated dependencies [[`3e2c355a`](https://github.com/frontity/frontity/commit/3e2c355a7530a2cda7ad74e0410389690ea57012), [`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`4879e0e7`](https://github.com/frontity/frontity/commit/4879e0e7b9069c0fe2a93e02281704683616ae17), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b)]:
   - @frontity/analytics@1.1.1
   - frontity@1.9.0
+
+## 0.1.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/analytics@1.1.1-infinite-scroll-beta.0
 
 ## 0.1.0
 

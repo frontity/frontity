@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { css, connect } from "frontity";
 import { Connect } from "frontity/types";
 import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
@@ -12,10 +12,9 @@ import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
  *
  * @returns React element.
  */
-const GooglePublisherTag: React.FC<Connect<
-  GoogleAdManager,
-  GooglePublisherTagProps
->> = ({ unit, size, id, targeting = {}, data }) => {
+const GooglePublisherTag: React.FC<
+  Connect<GoogleAdManager, GooglePublisherTagProps>
+> = ({ unit, size, id, targeting = {}, data }) => {
   /**
    * Append link to the `id` if `data` is specified.
    *
