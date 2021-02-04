@@ -41,6 +41,11 @@ interface Router<T = null> extends Package {
        * @example "/some-page/" // You are on a page, path is /some-page/.
        */
       link: string;
+
+      /**
+       * Variable that points to the previous link in the Frontity site. This
+       * value changes everytime `state.router.link` receives a new value.
+       */
       previous?: string;
 
       /**
@@ -67,7 +72,13 @@ interface Router<T = null> extends Package {
       set:
         | Action<T extends null ? Router : T, string>
         | Action<T extends null ? Router : T, string, SetOptions>;
-      updateState: Action<T extends null ? Router : T, unknown>;
+
+      /**
+       * Replace the value of `state.router.state` with the give object.
+       *
+       * @param historyState - History state.
+       */
+      updateState: Action<T extends null ? Router : T, Record<string, unknown>>;
     };
   };
 }
