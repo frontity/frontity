@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.3.2
+
+### Patch Changes
+
+- [`6cd501b1`](https://github.com/frontity/frontity/commit/6cd501b117a053dc67f2ab2be5f696ce6b8259b8) [#688](https://github.com/frontity/frontity/pull/688) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Pass the correct context to replaceLocation to prevent and Illegal invocation in external redirects from client side navigation.
+
 ## 1.3.1
 
 ### Patch Changes
