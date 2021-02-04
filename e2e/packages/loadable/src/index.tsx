@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Package from "../types";
 import { loadable } from "frontity";
 import Dynamic2 from "./dynamic-2";

@@ -1,6 +1,6 @@
 import { Head } from "frontity";
 import { Connect } from "frontity/types";
-import React from "react";
+import * as React from "react";
 import GoogleAdManager from "../../types";
 
 /**

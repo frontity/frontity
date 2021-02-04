@@ -1,5 +1,5 @@
 import { styled, connect } from "frontity";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import FeaturedMedia from "./featured-media";
 import {
   EntryContent,
@@ -28,6 +28,7 @@ const Post = ({ state, actions, libraries }) => {
 
   // Get all categories
   const allCategories = state.source.category;
+
   /**
    * The item's categories is an array of each category id
    * So, we'll look up the details of each category in allCategories
@@ -37,6 +38,7 @@ const Post = ({ state, actions, libraries }) => {
 
   // Get all tags
   const allTags = state.source.tag;
+
   /**
    * The item's categories is an array of each tag id
    * So, we'll look up the details of each tag in allTags

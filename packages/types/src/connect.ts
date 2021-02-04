@@ -11,10 +11,10 @@ import { ComponentProps, FunctionComponent, ComponentClass } from "react";
 import Package from "./package";
 import { ResolveState, ResolveActions, FilterInjectedProps } from "./utils";
 
-export type Connect<Pkg extends Package, Props extends object = {}> = Omit<
-  Pkg,
-  "state" | "actions" | "name" | "roots" | "fills"
-> & {
+export type Connect<
+  Pkg extends Package,
+  Props = Record<string, unknown>
+> = Omit<Pkg, "state" | "actions" | "name" | "roots" | "fills"> & {
   state: ResolveState<Pkg["state"]>;
   actions: ResolveActions<Pkg["actions"]>;
 } & Props;

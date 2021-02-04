@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Switch from "@frontity/components/switch";
 import Package from "../types";
 

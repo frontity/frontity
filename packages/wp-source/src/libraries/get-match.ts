@@ -57,9 +57,29 @@ interface GetMatchReturn<
 }
 
 /**
+ * The `source` object that contains a link and a route.
+ */
+interface Source {
+  /**
+   * The full link with `queryString`.
+   */
+  link?: string;
+
+  /**
+   * The link without the query and pagination part.
+   */
+  route?: string;
+}
+
+/**
+ * The regular expression flag.
+ */
+const REGULAR_EXPRESSION = "RegExp:";
+
+/**
  * Match a link with a list of handler/redirection objects.
  *
- * @param link - The link to be matched.
+ * @param source - The source to be matched.
  * @param list - The list of handler/redirection objects.
  *
  * @returns An object containing the matched handler/redirection. Defined in
@@ -69,26 +89,35 @@ export const getMatch = <
   Func extends (...args: any) => any,
   Patt extends Pattern<Func>
 >(
-  link: string,
+  source: Source,
   list: Patt[]
 ): GetMatchReturn<Func, Patt> | null => {
   const result = list
     .sort(({ priority: p1 }, { priority: p2 }) => p1 - p2)
     .map(({ name, priority, pattern, func }) => {
+      let url: string;
       const keys = [];
-      const regexp = pattern.startsWith("RegExp:")
-        ? new RegExp(pattern.replace("RegExp:", ""))
-        : pathToRegexp(pattern, keys, { endsWith: "?" });
-      return { name, priority, pattern, regexp, keys, func };
+
+      // Otherwise, we need to pick the value based on the pattern
+      if (pattern.startsWith(REGULAR_EXPRESSION)) {
+        url = source.link;
+      } else {
+        url = source.route;
+      }
+
+      const regexp = pattern.startsWith(REGULAR_EXPRESSION)
+        ? new RegExp(pattern.replace(REGULAR_EXPRESSION, ""))
+        : pathToRegexp(pattern, keys);
+      return { name, priority, pattern, regexp, keys, url, func };
     })
-    .find(({ regexp }) => regexp.test(link));
+    .find(({ regexp, url }) => regexp.test(url));
 
   return result
     ? {
         func: result.func,
-        params: result.pattern.startsWith("RegExp:")
-          ? result.regexp.exec(link).groups
-          : extractParameters(link, result.regexp, result.keys),
+        params: result.pattern.startsWith(REGULAR_EXPRESSION)
+          ? result.regexp.exec(result.url).groups
+          : extractParameters(result.url, result.regexp, result.keys),
         name: result.name,
         pattern: result.pattern,
       }

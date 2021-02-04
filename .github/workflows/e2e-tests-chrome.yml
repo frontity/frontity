@@ -18,6 +18,7 @@ jobs:
           - name: Development
             wp-version: latest
             args: ""
+            mode: "development"
           - name: Previous WordPress Version
             wp-version: 5.5
             args: "--prod --wp-version 5.5"
@@ -51,6 +52,7 @@ jobs:
           # We need to specify the WordPress version here as well so that
           # it's available inside of the cypress GH action container
           WORDPRESS_VERSION: ${{ matrix.wp-version }}
+          CYPRESS_FRONTITY_MODE: ${{ matrix.mode }} || "production"
         with:
           start: "node e2e.js \
             --cypress off \
