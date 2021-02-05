@@ -64,13 +64,13 @@ describe("AMP tests", () => {
     `);
   });
 
+  // This should definitely call the postArchive handler
   test("Should call the post handler if 'amp' is a post", async () => {
     await store.actions.source.init();
     await store.actions.source.fetch("/amp");
 
     expect(handlerMocks.postType).toHaveBeenCalledTimes(1);
 
-    // The slug should be `amp` because we are intentionally
     expect(handlerMocks.postType.mock.calls[0][0].params)
       .toMatchInlineSnapshot(`
       Object {

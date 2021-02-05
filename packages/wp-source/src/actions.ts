@@ -247,65 +247,6 @@ const actions: WpSource["actions"]["source"] = {
       authorBase,
     } = state.source;
 
-    // The redirection for AMP
-    redirections.push({
-      name: "amp",
-      priority: 1,
-      pattern: ":linkWithoutAMP(.*)/amp",
-      func: ({ linkWithoutAMP }) => {
-        /**
-         * Match stuff.
-         *
-         * @param path - Path.
-         * @param link - Link.
-         *
-         * @returns If there is a match.
-         */
-        const match = (path: string, link: string) =>
-          pathToRegexp(path).test(link);
-
-        const fullLink = concatLink(linkWithoutAMP, "/amp");
-
-        // `/amp` page
-        if (fullLink === "/amp/") return fullLink;
-
-        // category
-        let pattern = concatLink(subdirectory, categoryBase);
-        if (match(pattern, linkWithoutAMP)) return fullLink;
-        if (match("/category/(.*)?/:slug", fullLink)) return fullLink;
-
-        // author
-        pattern = concatLink(subdirectory, authorBase);
-        if (match(pattern, linkWithoutAMP)) return fullLink;
-        if (match("/author/:slug", fullLink)) return fullLink;
-
-        // tag
-        pattern = concatLink(subdirectory, tagBase);
-        if (match(pattern, linkWithoutAMP)) return fullLink;
-        if (match("/tag/:slug", fullLink)) return fullLink;
-
-        const { taxonomies, postTypes } = state.source;
-
-        // handle custom post types
-        if (
-          postTypes.some(({ type }) => type === "amp") &&
-          match("/amp/(.*)?/:slug/", fullLink)
-        ) {
-          return fullLink;
-        }
-
-        // handle custom taxonomies
-        if (
-          taxonomies.some(({ taxonomy }) => taxonomy === "amp") &&
-          match("/amp/(.*)?/:slug/", fullLink)
-        ) {
-          return fullLink;
-        }
-
-        return linkWithoutAMP;
-      },
-    });
-
     if (homepage) {
       const pattern = concatLink(subdirectory);
       redirections.push({
