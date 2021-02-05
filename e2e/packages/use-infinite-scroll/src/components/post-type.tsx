@@ -1,6 +1,6 @@
 import React from "react";
 import { css, connect, useConnect } from "frontity";
-import usePostTypeInfiniteScroll from "@frontity/hooks/use-post-type-infinite-scroll";
+import { usePostTypeInfiniteScroll } from "@frontity/hooks";
 import { Packages } from "../../types";
 import { isPostType } from "@frontity/source";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { css, connect, useConnect } from "frontity";
-import useArchiveInfiniteScroll from "@frontity/hooks/use-archive-infinite-scroll";
+import { useArchiveInfiniteScroll } from "@frontity/hooks";
 import { Packages } from "../../types";
 import { isArchive } from "@frontity/source";
 
