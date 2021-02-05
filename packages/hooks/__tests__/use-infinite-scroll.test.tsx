@@ -149,7 +149,7 @@ describe("useInfiniteScroll", () => {
 
   test("should fetch the current link if not ready/fetching on mount", () => {
     mockedUseInView.mockReturnValue({
-      ref: () => {},
+      ref: jest.fn(),
       inView: false,
       supported: true,
     });
@@ -175,12 +175,12 @@ describe("useInfiniteScroll", () => {
   test("should not fetch if `nextLink` is undefined", () => {
     mockedUseInView
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: true,
         supported: true,
       })
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       });
@@ -207,12 +207,12 @@ describe("useInfiniteScroll", () => {
   test("should fetch `nextLink` and update browser state if first reference is in view", () => {
     mockedUseInView
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: true,
         supported: true,
       })
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       });
@@ -255,12 +255,12 @@ describe("useInfiniteScroll", () => {
   test("should not fetch `nextLink` nor update browser state if `nextLink` is already in links", () => {
     mockedUseInView
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: true,
         supported: true,
       })
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       });
@@ -301,12 +301,12 @@ describe("useInfiniteScroll", () => {
   test("should not fetch `nextLink` if it's already fetching", () => {
     mockedUseInView
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: true,
         supported: true,
       })
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       });
@@ -351,12 +351,12 @@ describe("useInfiniteScroll", () => {
   test("should not fetch `nextLink` if it's already ready", () => {
     mockedUseInView
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: true,
         supported: true,
       })
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       });
@@ -398,12 +398,12 @@ describe("useInfiniteScroll", () => {
   test("should change route if second reference is in view", () => {
     mockedUseInView
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       })
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: true,
         supported: true,
       });
@@ -449,12 +449,12 @@ describe("useInfiniteScroll", () => {
   test("should not change route if `currentLink` is equal to the current url", () => {
     mockedUseInView
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       })
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: true,
         supported: true,
       });
@@ -492,12 +492,12 @@ describe("useInfiniteScroll", () => {
   test("should return the right object if `IntersectionObserver` is supported", () => {
     mockedUseInView
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       })
       .mockReturnValueOnce({
-        ref: () => {},
+        ref: jest.fn(),
         inView: false,
         supported: true,
       });
