@@ -53,7 +53,7 @@ Object {
         "@babel/preset-env",
         Object {
           "bugfixes": true,
-          "corejs": "3",
+          "corejs": "3.8",
           "modules": false,
           "targets": Object {
             "browsers": Array [
@@ -73,7 +73,7 @@ Object {
               "samsung >= 5",
             ],
           },
-          "useBuiltIns": "usage",
+          "useBuiltIns": "entry",
         },
       ],
       Array [
@@ -137,12 +137,12 @@ Object {
         "@babel/preset-env",
         Object {
           "bugfixes": true,
-          "corejs": "3",
+          "corejs": "3.8",
           "modules": false,
           "targets": Object {
             "esmodules": true,
           },
-          "useBuiltIns": "usage",
+          "useBuiltIns": "entry",
         },
       ],
       Array [
@@ -206,12 +206,12 @@ Object {
         "@babel/preset-env",
         Object {
           "bugfixes": true,
-          "corejs": "3",
+          "corejs": "3.8",
           "modules": false,
           "targets": Object {
             "node": "10",
           },
-          "useBuiltIns": "usage",
+          "useBuiltIns": "entry",
         },
       ],
       Array [
@@ -280,7 +280,7 @@ Object {
         "@babel/preset-env",
         Object {
           "bugfixes": true,
-          "corejs": "3",
+          "corejs": "3.8",
           "modules": false,
           "targets": Object {
             "browsers": Array [
@@ -300,7 +300,7 @@ Object {
               "samsung >= 5",
             ],
           },
-          "useBuiltIns": "usage",
+          "useBuiltIns": "entry",
         },
       ],
       Array [
@@ -364,12 +364,12 @@ Object {
         "@babel/preset-env",
         Object {
           "bugfixes": true,
-          "corejs": "3",
+          "corejs": "3.8",
           "modules": false,
           "targets": Object {
             "esmodules": true,
           },
-          "useBuiltIns": "usage",
+          "useBuiltIns": "entry",
         },
       ],
       Array [
@@ -433,12 +433,12 @@ Object {
         "@babel/preset-env",
         Object {
           "bugfixes": true,
-          "corejs": "3",
+          "corejs": "3.8",
           "modules": false,
           "targets": Object {
             "node": "10",
           },
-          "useBuiltIns": "usage",
+          "useBuiltIns": "entry",
         },
       ],
       Array [

@@ -60,8 +60,8 @@ const getConfig = (target: Target): TransformOptions => {
       "@babel/preset-env",
       {
         targets: targets[target],
-        useBuiltIns: "usage",
-        corejs: "3",
+        useBuiltIns: "entry",
+        corejs: "3.8",
         modules: false,
         bugfixes: true,
       },
