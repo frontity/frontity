@@ -2,6 +2,9 @@ import { Middleware, Next } from "koa";
 import { Context } from "@frontity/types";
 import { getSettings } from "@frontity/file-settings";
 import createStore from "../store";
+import { appComponent } from "./capabilities/app-component";
+import { renderMethod } from "./capabilities/render-method";
+import { template } from "./capabilities/template";
 
 /**
  * Setup the settings and defines the state store.
@@ -26,6 +29,15 @@ export const settingsAndStore = (packages) => async (
     packages,
     url: ctx.URL,
   }));
+
+  // Apply the capabilities to the store.libraries.frontity namespce.
+  appComponent(store, ctx);
+
+  // Setup the render method.
+  renderMethod(store);
+
+  // Define the default template.
+  template(store);
 
   // Run init actions.
   await Promise.all(

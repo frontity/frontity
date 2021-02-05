@@ -41,20 +41,34 @@ export default {
   actions: {
     customRender: {
       beforeSSR({ libraries: { frontity } }) {
+        // Hold a reference to the previous App.
+        const App = frontity.App;
+
         // Wrap the theme with a component
-        frontity.App = ThemeWrapped;
+        frontity.App = function CustomApp() {
+          return <ThemeWrapped App={App} />;
+        };
+
+        // Hold a reference to the previous render.
+        const previousRender = frontity.render;
 
         // Define a custom render method
-        frontity.render = ({ App, defaultRenderer }) => {
+        frontity.render = ({ App, ...rest }) => {
           // This is a simple simualtion of 'server bound values'
           // that are included in the client.
           const seed = Math.random();
 
-          const html = defaultRenderer(
-            <SeedProvider value={{ seed }}>
-              <App />
-            </SeedProvider>
-          );
+          // Call previousRender
+          const html = previousRender({
+            ...rest,
+            App: function App() {
+              return (
+                <SeedProvider value={{ seed }}>
+                  <App />
+                </SeedProvider>
+              );
+            },
+          });
 
           return {
             html,
@@ -62,15 +76,18 @@ export default {
           };
         };
 
+        // Hold a reference to the previous template.
+        const previousTemplate = frontity.template;
+
         // Define a custom template method
-        frontity.template = ({ defaultTemplate, result, ...rest }) => {
+        frontity.template = ({ result, ...rest }) => {
           const { html, seed } = result;
 
           rest.head.push('<link rel="custom" value="render" />');
           rest.head.push(`<link rel="seed" value="${seed}" />`);
           rest.scripts.push('<script id="custom-render-script"></script>');
 
-          return defaultTemplate({ ...rest, html });
+          return previousTemplate({ ...rest, html });
         };
       },
 
@@ -80,8 +97,11 @@ export default {
           .querySelector("link[rel=seed]")
           .getAttribute("value");
 
+        // Hold a reference to the previous App.
+        const App = frontity.App;
+
         // And wrap with the provider the App.
-        frontity.App = function AppWithSeed({ App }) {
+        frontity.App = function AppWithSeed() {
           return (
             <SeedProvider value={{ seed }}>
               <ThemeWrapped App={App} />

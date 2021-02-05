@@ -30,6 +30,7 @@ const createPredefinedContext = ({
   stats = {},
   render = null,
   template = null,
+  App = null,
 } = {}) => ({
   state: {
     stats: {
@@ -43,10 +44,15 @@ const createPredefinedContext = ({
     store: {
       actions: [],
       state: { FRONTITY_TEST: true },
+      libraries: {
+        frontity: {
+          render: render || jest.fn().mockReturnValue("render()"),
+          template: template || jest.fn().mockReturnValue("template()"),
+          App: App || `<App />`,
+        },
+      },
     },
     helmetContext: { helmet: {} },
-    render: render || jest.fn().mockReturnValue("render()"),
-    template: template || jest.fn().mockReturnValue("template()"),
   },
 });
 

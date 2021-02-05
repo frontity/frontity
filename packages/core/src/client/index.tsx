@@ -3,7 +3,6 @@ import { loadableReady } from "@loadable/component";
 import { getSnapshot } from "@frontity/connect";
 import App from "../app";
 import createStore from "./store";
-import { FC } from "react";
 
 export default async ({ packages }) => {
   if (typeof window !== "undefined" && window["Proxy"]) {
@@ -23,6 +22,10 @@ export default async ({ packages }) => {
         packages,
       });
 
+      store.libraries.frontity.App = function FrontityApp() {
+        return <App store={store} />;
+      };
+
       // Run init actions.
       await Promise.all(
         Object.values(store.actions).map(({ init }) => {
@@ -40,33 +43,9 @@ export default async ({ packages }) => {
       }
 
       loadableReady(() => {
-        /**
-         * The FrontityApp functional component.
-         *
-         * @returns A functional component.
-         */
-        let FrontityApp: FC = () => <App store={store} />;
+        const MainApp = store.libraries.frontity.App;
 
-        // If there's a user supplied `App` component
-        // we should use that to render the the main App.
-        if (store.libraries.frontity.App) {
-          // Get a reference to the user defined `App`.
-          const UserDefinedApp = store.libraries.frontity.App;
-
-          // Keep a reference of the initially defined `App`.
-          const InitialApp = FrontityApp;
-
-          /**
-           * The wrapped FrontityApp component.
-           *
-           * @returns The functional component to be rendered.
-           */
-          FrontityApp = function WrappedFrontityApp() {
-            return <UserDefinedApp App={InitialApp} />;
-          };
-        }
-
-        hydrate(<FrontityApp />, window.document.getElementById("root"));
+        hydrate(<MainApp />, window.document.getElementById("root"));
 
         // Switch to CSR mode.
         store.state.frontity.rendering = "csr";

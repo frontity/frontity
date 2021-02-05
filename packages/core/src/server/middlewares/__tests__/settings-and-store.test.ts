@@ -10,7 +10,9 @@ jest.mock("@frontity/file-settings", () => ({
 jest.mock("../../store", () =>
   jest.fn().mockReturnValue({
     actions: [],
-    libraries: [],
+    libraries: {
+      frontity: {},
+    },
   })
 );
 

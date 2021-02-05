@@ -19,14 +19,10 @@ export const serverSideRendering = async (
   next: Next
 ): Promise<Middleware> => {
   // Get settings, template, store and stats.
-  const {
-    settings,
-    store,
-    template,
-    helmetContext,
-    render,
-    stats: scriptStats,
-  } = ctx.state;
+  const { settings, store, helmetContext, stats: scriptStats } = ctx.state;
+
+  // Get the defined render, template and App.
+  const { render, template, App } = store.libraries.frontity;
 
   // Get module and es5 chunks stats.
   const { moduleStats, es5Stats } = scriptStats;
@@ -54,6 +50,7 @@ export const serverSideRendering = async (
     // Call the render function with the wrapped App.
     output.result = render({
       ...ctx.state,
+      App,
       collectChunks: extractor.collectChunks,
       hasEntryPoint: true,
     });
@@ -92,7 +89,7 @@ export const serverSideRendering = async (
   } else {
     // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
     // because no hydratation will happen in the client.
-    output.result = render(ctx.state);
+    output.result = render({ App });
   }
 
   // Run afterSSR actions. It runs at this point because we want to run it

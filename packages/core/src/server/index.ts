@@ -8,9 +8,6 @@ import { exists } from "fs";
 import { promisify } from "util";
 import { scriptsStats } from "./middlewares/scripts-stats";
 import { settingsAndStore } from "./middlewares/settings-and-store";
-import { template } from "./middlewares/template";
-import { setupRenderMethod } from "./middlewares/setup-render-method";
-import { appComponent } from "./middlewares/app-component";
 import { serverSideRendering } from "./middlewares/server-side-rendering";
 
 /**
@@ -97,15 +94,6 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
 
   // Setup the settings and store.
   app.use(settingsAndStore(packages));
-
-  // Use the template.
-  app.use(template);
-
-  // Use the App.
-  app.use(appComponent);
-
-  // Define the render method.
-  app.use(setupRenderMethod);
 
   // Sever Side Rendering with the defined
   // template and render method.
