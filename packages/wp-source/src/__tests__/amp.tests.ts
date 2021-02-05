@@ -88,8 +88,8 @@ describe("AMP tests", () => {
     expect(handlerMocks.postType.mock.calls[0][0].params)
       .toMatchInlineSnapshot(`
       Object {
-        "0": undefined,
-        "slug": "some-post",
+        "0": "some-post",
+        "slug": "amp",
       }
     `);
   });

@@ -454,6 +454,7 @@ describe("actions.source.init", () => {
     });
 
     const data = store.state.source.get("/some/route/");
+
     expect(data).toMatchSnapshot();
 
     expect(isError(data)).toBe(false);
