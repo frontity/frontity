@@ -2,10 +2,10 @@ import React from "react";
 import { render } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { useConnect } from "frontity";
-import useInView from "../use-in-view";
-import * as useInfiniteScroll from "../use-infinite-scroll";
+import useInView from "../../use-in-view";
+import * as useInfiniteScroll from "../../use-infinite-scroll";
 
-jest.mock("../use-in-view", () => ({
+jest.mock("../../use-in-view", () => ({
   __esModule: true,
   default: jest.fn(),
 }));

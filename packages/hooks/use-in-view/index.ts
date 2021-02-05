@@ -1,22 +1,5 @@
 import { useInView, IntersectionOptions } from "react-intersection-observer";
-
-/**
- * Object returned by {@link useInView} hook.
- */
-interface UseInViewResponse {
-  /**
-   * React reference object pointing to the DOM element.
-   */
-  ref: (node?: Element | null) => void;
-  /**
-   * Boolean indicating if the element is visible.
-   */
-  inView: boolean;
-  /**
-   * Boolean indicating if [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) is supported.
-   */
-  supported: boolean;
-}
+import { UseInViewResponse } from "./types";
 
 /**
  * React hook that tracks when an element enters or leaves the viewport. It also checks if `IntersectionObserver` is supported by the browser.

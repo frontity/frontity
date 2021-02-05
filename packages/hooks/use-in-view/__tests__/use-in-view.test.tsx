@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
-import * as useInView from "../use-in-view";
+import * as useInView from "../";
 
 let container: HTMLDivElement;
 

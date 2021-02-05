@@ -3,10 +3,10 @@ import React from "react";
 import { render } from "react-dom";
 import { act, Simulate } from "react-dom/test-utils";
 import { useConnect } from "frontity";
-import useInfiniteScroll from "../use-infinite-scroll";
-import * as useArchiveInfiniteScroll from "../use-archive-infinite-scroll";
+import useInfiniteScroll from "../../use-infinite-scroll";
+import * as useArchiveInfiniteScroll from "../";
 
-jest.mock("../use-infinite-scroll", () => ({
+jest.mock("../../use-infinite-scroll", () => ({
   __esModule: true,
   default: jest.fn(),
 }));
@@ -895,7 +895,9 @@ describe("useArchiveInfiniteScroll", () => {
 
 describe("Wrapper", () => {
   test("should return children if IntersectionObserver is not supported", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
+      link: "/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -927,7 +929,9 @@ describe("Wrapper", () => {
   });
 
   test("should return null if the current element is not ready", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
+      link: "/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -959,7 +963,9 @@ describe("Wrapper", () => {
   });
 
   test("should return children inside a wrapper", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
+      link: "/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -995,7 +1001,9 @@ describe("Wrapper", () => {
   });
 
   test("should return children and fetcher inside a wrapper", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
+      link: "/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
@@ -1031,7 +1039,9 @@ describe("Wrapper", () => {
   });
 
   test("should call `useInfiniteScroll` with `currentLink` and `nextLink`", () => {
-    const Wrapper = useArchiveInfiniteScroll.Wrapper({ link: "/" }) as any;
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
+      link: "/",
+    }) as any;
 
     mockedUseConnect.mockReturnValueOnce({
       state: {
