@@ -61,6 +61,8 @@ const GooglePublisherTag: React.FC<
           window.googletag.destroySlots([slot.current]);
         });
     };
+    // Run this hook only when the component is mounted.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /*
