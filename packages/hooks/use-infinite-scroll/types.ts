@@ -108,7 +108,7 @@ export type UseInfiniteScrollOutput =
     };
 
 /**
- * Properties added by the {@link useInfiniteScroll} to the Router
+ * Properties added by the {@link useInfiniteScroll} hook to the Router
  * state property.
  */
 export type InfiniteScrollRouterState = {
@@ -127,7 +127,7 @@ export type InfiniteScrollRouterState = {
     limit: number;
 
     /**
-     * List of pages by link. TODO: check this type.
+     * List of pages by link.
      */
     pages: string[];
 

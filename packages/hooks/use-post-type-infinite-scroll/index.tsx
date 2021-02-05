@@ -226,7 +226,6 @@ const usePostTypeInfiniteScroll = (
         limit,
       },
     });
-    // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
@@ -272,7 +271,6 @@ const usePostTypeInfiniteScroll = (
       actions.source.fetch(data.link);
     }
 
-    // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
@@ -293,7 +291,6 @@ const usePostTypeInfiniteScroll = (
     if (!nextPage.isReady && !nextPage.isFetching) {
       actions.source.fetch(nextPage.link);
     }
-    // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active, state.router.link, items.length, hasReachedLimit]);
 

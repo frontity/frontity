@@ -156,7 +156,6 @@ const useArchiveInfiniteScroll = (
         ...infiniteScroll,
       },
     });
-    // TODO: Review and fix hook dependencies.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
