@@ -16,7 +16,6 @@ import {
   isEagerRedirection,
   fetchRedirection,
 } from "./utils";
-import pathToRegexp from "path-to-regexp";
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
