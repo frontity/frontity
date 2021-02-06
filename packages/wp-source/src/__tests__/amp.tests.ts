@@ -9,88 +9,111 @@ let store: InitializedStore<WpSource>;
 
 // Create mock for handler generators
 const handlerMocks = handlers as jest.Mocked<typeof handlers>;
-handlerMocks.author.mockResolvedValue(null);
-handlerMocks.tag.mockResolvedValue(null);
-handlerMocks.category.mockResolvedValue(null);
+handlerMocks.postArchive.mockResolvedValue(null);
 handlerMocks.postType.mockResolvedValue(null);
 
 describe("AMP tests", () => {
   beforeEach(() => {
     // Reset mocks
-    handlerMocks.author.mockClear();
-    handlerMocks.tag.mockClear();
-    handlerMocks.category.mockClear();
+    handlerMocks.postArchive.mockClear();
     handlerMocks.postType.mockClear();
 
     store = createStore<WpSource>(clone(wpSource(), { clone: false }));
     store.state.source.url = "https://test.frontity.org/";
   });
 
-  test("Should call the author handler if 'amp' is an author", async () => {
+  test("`/author/amp` is not supported", async () => {
     await store.actions.source.init();
     await store.actions.source.fetch("/author/amp");
+    const data = store.state.source.get("/author/amp");
 
-    expect(handlerMocks.author).toHaveBeenCalledTimes(1);
-    expect(handlerMocks.author.mock.calls[0][0].params).toMatchInlineSnapshot(`
-      Object {
-        "slug": "amp",
-      }
-    `);
+    // We don't support using "amp" as a term, so this link is
+    // not correct, but we will fix this in source V2.0
+    expect(data.link).toBe("/author/");
   });
 
-  test("Should call the tag handler if 'amp' is a tag", async () => {
+  test("`/tag/amp` is not supported", async () => {
     await store.actions.source.init();
     await store.actions.source.fetch("/tag/amp");
+    const data = store.state.source.get("/tag/amp");
 
-    expect(handlerMocks.tag).toHaveBeenCalledTimes(1);
-    expect(handlerMocks.tag.mock.calls[0][0].params).toMatchInlineSnapshot(`
+    // We don't support using "amp" as a term, so this link is
+    // not correct, but we will fix this in source V2.0
+    expect(data.link).toBe("/tag/");
+    expect(data).toMatchInlineSnapshot(`
       Object {
-        "slug": "amp",
+        "isFetching": false,
+        "isReady": true,
+        "link": "/tag/",
+        "page": 1,
+        "query": Object {},
+        "route": "/tag/amp/",
       }
     `);
   });
 
-  test("Should call the category handler if 'amp' is a category", async () => {
+  test("`/category/amp` is not supported", async () => {
     await store.actions.source.init();
     await store.actions.source.fetch("/category/amp");
 
-    expect(handlerMocks.category).toHaveBeenCalledTimes(1);
-    expect(handlerMocks.category.mock.calls[0][0].params)
-      .toMatchInlineSnapshot(`
+    const data = store.state.source.get("/category/amp");
+
+    // We don't support using "amp" as a term, so this link is
+    // not correct, but we will fix this in source V2.0
+    expect(data.link).toBe("/category/");
+    expect(data).toMatchInlineSnapshot(`
       Object {
-        "0": undefined,
-        "slug": "amp",
+        "isFetching": false,
+        "isReady": true,
+        "link": "/category/",
+        "page": 1,
+        "query": Object {},
+        "route": "/category/amp/",
       }
     `);
   });
 
-  // This should definitely call the postArchive handler
-  test("Should call the post handler if 'amp' is a post", async () => {
-    await store.actions.source.init();
-    await store.actions.source.fetch("/amp");
-
-    expect(handlerMocks.postType).toHaveBeenCalledTimes(1);
-
-    expect(handlerMocks.postType.mock.calls[0][0].params)
-      .toMatchInlineSnapshot(`
-      Object {
-        "0": undefined,
-        "slug": "amp",
-      }
-    `);
-  });
-
-  test("Should call the post handler if 'amp' is a post 2", async () => {
+  test("`/some-post/amp` is not supported", async () => {
     await store.actions.source.init();
     await store.actions.source.fetch("/some-post/amp");
+    const data = store.state.source.get("/some-post/amp");
 
-    expect(handlerMocks.postType).toHaveBeenCalledTimes(1);
-    expect(handlerMocks.postType.mock.calls[0][0].params)
-      .toMatchInlineSnapshot(`
+    // We don't support using "amp" as a term, so this link is
+    // not correct, but we will fix this in source V2.0
+    expect(data.link).toBe("/some-post/");
+    expect(data).toMatchInlineSnapshot(`
       Object {
-        "0": "some-post",
-        "slug": "amp",
+        "isFetching": false,
+        "isReady": true,
+        "link": "/some-post/",
+        "page": 1,
+        "query": Object {},
+        "route": "/some-post/amp/",
       }
     `);
+  });
+
+  test("`/amp` should fetch the home page", async () => {
+    await store.actions.source.init();
+    await store.actions.source.fetch("/amp");
+    const data = store.state.source.get("/amp");
+
+    expect(data.link).toBe("/amp/");
+    expect(data).toMatchInlineSnapshot(`
+      Object {
+        "isFetching": false,
+        "isReady": true,
+        "link": "/amp/",
+        "page": 1,
+        "query": Object {},
+        "route": "/amp/",
+      }
+    `);
+
+    // Even thought the link is `/amp`, the postArchive handler should be called
+    expect(handlerMocks.postArchive).toHaveBeenCalledTimes(1);
+    expect(
+      handlerMocks.postArchive.mock.calls[0][0].params
+    ).toMatchInlineSnapshot(`Object {}`);
   });
 });

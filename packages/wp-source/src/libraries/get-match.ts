@@ -1,5 +1,6 @@
 import { Pattern } from "../../types";
 import pathToRegexp, { Key } from "path-to-regexp";
+import { normalize } from "./route-utils";
 
 /**
  * Extract the parameters of the `path-to-regexp` pattern from the link.
@@ -98,11 +99,15 @@ export const getMatch = <
       let url: string;
       const keys = [];
 
+      // AMP
+      const route = source.route.replace(/\/amp\/?($|\?|#)/, "/");
+      const link = normalize(source.route);
+
       // Otherwise, we need to pick the value based on the pattern
       if (pattern.startsWith(REGULAR_EXPRESSION)) {
-        url = source.link;
+        url = link;
       } else {
-        url = source.route;
+        url = route;
       }
 
       const regexp = pattern.startsWith(REGULAR_EXPRESSION)
