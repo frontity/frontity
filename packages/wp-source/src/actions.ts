@@ -64,23 +64,11 @@ const actions: WpSource["actions"]["source"] = {
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
-      // Transform route if there is some redirection.
       const redirection = getMatch(
         { route, link },
         libraries.source.redirections
       );
-
-      // Create a variable that holds the value of the link that we will later
-      // pass to the `getMatch()` function. If there is a redirection, we update
-      // the value of `route`, so we'll have to later derive the link again
-      // based on the "new" (redirected) route.
-      let linkForHandler = link;
-      if (redirection) {
-        route = redirection.func(redirection.params);
-
-        // Derive the link from the "redirected" route.
-        linkForHandler = normalize(route);
-      }
+      if (redirection) route = redirection.func(redirection.params);
 
       // Check if we need to check if it is a 30X redirection before fetching
       // the backend.
@@ -94,10 +82,7 @@ const actions: WpSource["actions"]["source"] = {
       }
 
       // Get the handler for this route.
-      const handler = getMatch(
-        { route, link: linkForHandler },
-        libraries.source.handlers
-      );
+      const handler = getMatch({ route, link }, libraries.source.handlers);
 
       // Return a 404 error if no handler has matched.
       if (!handler)
