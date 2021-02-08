@@ -98,19 +98,19 @@ describe("AMP tests", () => {
     await store.actions.source.fetch("/amp");
     const data = store.state.source.get("/amp");
 
-    expect(data.link).toBe("/amp/");
+    expect(data.link).toBe("/");
     expect(data).toMatchInlineSnapshot(`
       Object {
         "isFetching": false,
         "isReady": true,
-        "link": "/amp/",
+        "link": "/",
         "page": 1,
         "query": Object {},
         "route": "/amp/",
       }
     `);
 
-    // Even thought the link is `/amp`, the postArchive handler should be called
+    // The handler for the home page should be called
     expect(handlerMocks.postArchive).toHaveBeenCalledTimes(1);
     expect(
       handlerMocks.postArchive.mock.calls[0][0].params
