@@ -191,9 +191,7 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  *
  * @returns The normalized link.
  */
-export const normalize = (link: string): string => {
-  link = link.replace(/\/amp\/?($|\?|#)/, "");
-  return paramsToLink(linkToParams(link));
-};
+export const normalize = (link: string): string =>
+  paramsToLink(linkToParams(link));
 
 export default { parse, stringify, normalize };
