@@ -104,6 +104,9 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   // Return Frontity favicon for favicon.ico.
   app.use(get("/favicon.ico", serve("./")));
 
+  // Serve ads.txt from root
+  app.use(get("/ads.txt", serve("./")));
+
   // Frontity server rendering.
   app.use(async (ctx, next) => {
     // Get module chunk stats.
