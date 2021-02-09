@@ -7,7 +7,7 @@
   "commit": false,
   "linked": [],
   "access": "public",
-  "baseBranch": "infinite-scroll-beta",
+  "baseBranch": "dev",
   "updateInternalDependencies": "patch",
   "ignore": [],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
