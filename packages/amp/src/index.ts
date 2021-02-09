@@ -10,10 +10,8 @@ import AMP from "../types";
 export const removeAmp = (link: string): string =>
   link.replace(/\/amp\/?($|\?|#)/, "/");
 
-/**
- *
- */
 const Amp: AMP = {
+  name: "@frontity/amp",
   actions: {
     amp: {
       init: ({ libraries }) => {
