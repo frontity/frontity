@@ -1,6 +1,6 @@
 import { warn, error, isDerived } from "frontity";
 import WpSource from "../types";
-import { addFinalSlash, normalize, parse } from "./libraries/route-utils";
+import { addFinalSlash } from "./libraries/route-utils";
 import {
   isPostType,
   isTerm,
@@ -10,7 +10,8 @@ import {
 
 const state: WpSource["state"] = {
   source: {
-    get: ({ state }) => (link) => {
+    get: ({ state, libraries }) => (link) => {
+      const { normalize, parse } = libraries.source;
       const normalizedLink = normalize(link);
       const data = state.source.data[normalizedLink];
       if (data) {

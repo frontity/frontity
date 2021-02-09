@@ -1,6 +1,6 @@
 import { error, batch } from "frontity";
 import WpSource from "../types";
-import { parse, normalize, concatLink } from "./libraries/route-utils";
+import { concatLink } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
 import {
@@ -21,6 +21,10 @@ const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
     const [route, options] = params;
     const { source } = state;
+
+    // Get the normalize and parse from libraries instead of importing them.
+    // This way they can be e.g. overriden at runtime by another package
+    const { normalize, parse } = libraries.source;
 
     // Get route and route params.
     const link = normalize(route);
@@ -64,10 +68,12 @@ const actions: WpSource["actions"]["source"] = {
     // Get and execute the corresponding handler based on path.
     try {
       let { route } = linkParams;
+      // Transform route if there is some redirection.
       const redirection = getMatch(
         { route, link },
         libraries.source.redirections
       );
+
       if (redirection) route = redirection.func(redirection.params);
 
       // Check if we need to check if it is a 30X redirection before fetching
