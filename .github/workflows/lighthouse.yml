@@ -27,18 +27,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check if it should deploy to production
-        id: deploy
-        if: github.ref == 'refs/heads/master'
-        run: echo "::set-output name=args::--prod"
-
-      - name: Deploy to now
-        run: npx lerna run now --parallel -- -- ${{ steps.deploy.outputs.args }}
+      - name: Deploy to vercel
+        run: npx lerna run vercel --parallel
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
 
       - name: Create alias for this deploy
-        run: npx lerna run now:alias --parallel
+        run: npx lerna run vercel:alias --parallel
         env:
           COMMIT_SHA: ${{ github.sha }}
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
@@ -59,10 +54,10 @@ jobs:
           configPath: ./.github/workflows/lighthouserc.json
           budgetPath: ./.github/workflows/budget.json
           urls: |
-            https://mars-theme-$COMMIT_SHA.now.sh/
-            https://mars-theme-$COMMIT_SHA.now.sh/2016/the-beauties-of-gullfoss/
-            https://twentytwenty-theme-$COMMIT_SHA.now.sh/
-            https://twentytwenty-theme-$COMMIT_SHA.now.sh/2016/shinjuku-gyoen-national-garden/
+            https://mars-theme-$COMMIT_SHA.vercel.app/
+            https://mars-theme-$COMMIT_SHA.vercel.app/2016/the-beauties-of-gullfoss/
+            https://twentytwenty-theme-$COMMIT_SHA.vercel.app/
+            https://twentytwenty-theme-$COMMIT_SHA.vercel.app/2016/shinjuku-gyoen-national-garden/
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           COMMIT_SHA: ${{ github.sha }}
