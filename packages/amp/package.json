@@ -1,6 +1,6 @@
 {
   "name": "@frontity/amp",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "The Frontity package for AMP",
   "main": "src/index.ts",
   "keywords": [
