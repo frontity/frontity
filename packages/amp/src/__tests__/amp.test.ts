@@ -56,6 +56,10 @@ describe("AMP tests", () => {
     // The implementation of normalize() from the AMP package.
     const { normalize: normalizeAmp } = store.libraries.source;
 
+    // Test that the implementation of normalize() from the amp package is not
+    // the same as the default one.
+    expect(normalize).not.toBe(normalizeAmp);
+
     expect(normalize("/")).toEqual(normalizeAmp("/"));
     expect(normalize("/some-post/")).toEqual(normalizeAmp("/some-post/"));
     expect(normalize("/some-page/")).toEqual(normalizeAmp("/some-page/"));
@@ -91,6 +95,10 @@ describe("AMP tests", () => {
     // The implementation of parse() from the AMP package.
     const { parse: parseAmp } = store.libraries.source;
 
+    // Test that the implementation of parse() from the amp package is not
+    // the same as the default one.
+    expect(parse).not.toBe(parseAmp);
+
     expect(parse("/")).toEqual(parseAmp("/"));
     expect(parse("/some-post/")).toEqual(parseAmp("/some-post/"));
     expect(parse("/some-page/")).toEqual(parseAmp("/some-page/"));
@@ -119,6 +127,10 @@ describe("AMP tests", () => {
 
     // The implementation of stringify() from the AMP package.
     const { stringify: stringifyAmp } = store.libraries.source;
+
+    // Test that the implementation of stringify() from the amp package is not
+    // the same as the default one.
+    expect(stringify).not.toBe(stringifyAmp);
 
     let linkParams: any = { path: "/some/path" };
     expect(stringify(linkParams)).toEqual(stringifyAmp(linkParams));
