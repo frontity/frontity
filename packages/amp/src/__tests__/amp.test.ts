@@ -11,7 +11,7 @@ describe("AMP tests", () => {
   beforeEach(() => {
     // Initialize the store
     store = createStore<MergePackages<WpSource, AMP>>(
-      clone({ ...wpSource(), ...Amp }, { clone: false })
+      clone({ ...wpSource(), ...Amp })
     );
     store.state.source.url = "https://test.frontity.org/";
   });
