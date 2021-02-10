@@ -19,16 +19,16 @@ import {
 
 const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
-    const [route, options] = params;
+    const [resource, options] = params;
     const { source } = state;
 
     // Get the normalize and parse from libraries instead of importing them.
     // This way they can be e.g. overriden at runtime by another package
     const { normalize, parse } = libraries.source;
 
-    // Get route and route params.
-    const link = normalize(route);
-    const linkParams = parse(route);
+    // Get link and link params.
+    const link = normalize(resource);
+    const linkParams = parse(resource);
     const { query, page } = linkParams;
 
     // Get options.
