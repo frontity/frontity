@@ -1,4 +1,5 @@
 import AMP from "../types";
+import processors from "./processors";
 
 /**
  * Remove a final `/amp` from a link.
@@ -15,6 +16,9 @@ const Amp: AMP = {
   actions: {
     amp: {
       init: ({ libraries }) => {
+        // Add the AMP processors
+        libraries.html2react.processors.concat(processors);
+
         const { parse, stringify } = libraries.source;
 
         // Wrap libraries.source.parse.

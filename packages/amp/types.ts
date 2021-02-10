@@ -1,5 +1,6 @@
 import { Package, Action, MergePackages } from "frontity/types";
 import WpSource from "@frontity/wp-source/types";
+import Html2React from "@frontity/html2react/types";
 
 /**
  * The types of the AMP Frontity package.
@@ -33,6 +34,6 @@ interface AMP extends Package {
 /**
  * Packages used internally by the AMP package.
  */
-export type Packages = MergePackages<AMP, WpSource>;
+export type Packages = MergePackages<AMP, WpSource, Html2React>;
 
 export default AMP;
