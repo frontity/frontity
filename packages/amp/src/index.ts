@@ -18,7 +18,7 @@ const Amp: AMP = {
         const { parse, stringify } = libraries.source;
 
         // Wrap libraries.source.parse.
-        libraries.source.parse = ({ link }) => {
+        libraries.source.parse = (link) => {
           const { route, path, ...rest } = parse(link);
           return {
             route: removeAmp(route),
@@ -39,7 +39,7 @@ const Amp: AMP = {
 
         // Wrap libraries.source.normalize.
         libraries.source.normalize = (link) =>
-          libraries.source.parse(libraries.source.stringify(link));
+          libraries.source.stringify(libraries.source.parse(link));
       },
     },
   },

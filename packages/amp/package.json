@@ -24,5 +24,9 @@
   "dependencies": {
     "@frontity/wp-source": "^1.11.1",
     "frontity": "^1.14.1"
+  },
+  "devDependencies": {
+    "@frontity/connect": "^1.2.1",
+    "clone-deep": "^4.0.1"
   }
 }
