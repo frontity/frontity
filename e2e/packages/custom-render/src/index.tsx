@@ -40,20 +40,20 @@ export default {
   },
   actions: {
     customRender: {
-      beforeSSR({ libraries: { frontity } }) {
+      beforeSSR({ libraries }) {
         // Hold a reference to the previous App.
-        const App = frontity.App;
+        const PreviousApp = libraries.frontity.App;
 
         // Wrap the theme with a component
-        frontity.App = function CustomApp() {
-          return <ThemeWrapped App={App} />;
+        libraries.frontity.App = function CustomApp() {
+          return <ThemeWrapped App={PreviousApp} />;
         };
 
         // Hold a reference to the previous render.
-        const previousRender = frontity.render;
+        const previousRender = libraries.frontity.render;
 
         // Define a custom render method
-        frontity.render = ({ App, ...rest }) => {
+        libraries.frontity.render = ({ App, ...rest }) => {
           // This is a simple simualtion of 'server bound values'
           // that are included in the client.
           const seed = Math.random();
@@ -61,7 +61,7 @@ export default {
           // Call previousRender
           const html = previousRender({
             ...rest,
-            App: function App() {
+            App: function RenderApp() {
               return (
                 <SeedProvider value={{ seed }}>
                   <App />
@@ -77,10 +77,11 @@ export default {
         };
 
         // Hold a reference to the previous template.
-        const previousTemplate = frontity.template;
+        const previousTemplate = libraries.frontity.template;
+        // console.log("previousTemplate", { frontity });
 
         // Define a custom template method
-        frontity.template = ({ result, ...rest }) => {
+        libraries.frontity.template = ({ result, ...rest }) => {
           const { html, seed } = result;
 
           rest.head.push('<link rel="custom" value="render" />');
@@ -91,20 +92,18 @@ export default {
         };
       },
 
-      beforeCSR({ libraries: { frontity } }) {
+      beforeCSR({ libraries }) {
         // On the client we need to 'read' the server sent value.
         const seed = document
           .querySelector("link[rel=seed]")
           .getAttribute("value");
-
         // Hold a reference to the previous App.
-        const App = frontity.App;
-
+        const PreviousApp = libraries.frontity.App;
         // And wrap with the provider the App.
-        frontity.App = function AppWithSeed() {
+        libraries.frontity.App = function AppWithSeed() {
           return (
             <SeedProvider value={{ seed }}>
-              <ThemeWrapped App={App} />
+              <ThemeWrapped App={PreviousApp} />
             </SeedProvider>
           );
         };
