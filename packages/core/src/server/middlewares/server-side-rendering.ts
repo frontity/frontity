@@ -49,10 +49,8 @@ export const serverSideRendering = async (
 
     // Call the render function with the wrapped App.
     output.result = render({
-      ...ctx.state,
       App,
-      collectChunks: extractor.collectChunks,
-      hasEntryPoint: true,
+      collectChunks: extractor.collectChunks.bind(extractor),
     });
 
     // Get the linkTags. Crossorigin needed for type="module".

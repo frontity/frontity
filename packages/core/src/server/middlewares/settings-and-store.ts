@@ -31,13 +31,13 @@ export const settingsAndStore = (packages) => async (
   }));
 
   // Apply the capabilities to the store.libraries.frontity namespce.
-  appComponent(store, ctx);
+  appComponent(store.libraries.frontity, ctx);
 
   // Setup the render method.
-  renderMethod(store);
+  renderMethod(store.libraries.frontity);
 
   // Define the default template.
-  template(store);
+  template(store.libraries.frontity);
 
   // Run init actions.
   await Promise.all(

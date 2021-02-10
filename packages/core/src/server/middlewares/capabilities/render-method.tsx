@@ -1,15 +1,16 @@
 import { renderToStaticMarkup, renderToString } from "react-dom/server";
 
 /**
- * The default serializer. Handles the case where there are no entrypoints.
+ * The render method for a given React App.
  *
- * @param args - The arguments to be used for this pass.
+ * @param args - The arguments to be used for render.
  *
- * @returns The function to serialize with.
+ * @returns The serialized App.
  */
-const serialize = ({ collectChunks, hasEntryPoint }: any) => (jsx: any) => {
-  console.log("JSX", jsx);
-  if (!hasEntryPoint) {
+const render = ({ collectChunks, App }) => {
+  const jsx = <App />;
+
+  if (!collectChunks) {
     return renderToStaticMarkup(jsx);
   }
 
@@ -17,22 +18,10 @@ const serialize = ({ collectChunks, hasEntryPoint }: any) => (jsx: any) => {
 };
 
 /**
- * The render method for a given React App.
- *
- * @param args - The arguments to be used for render.
- *
- * @returns The serialized App.
- */
-const render = ({ App, ...args }) => {
-  console.log("render", App);
-  return serialize(args)(<App />);
-};
-
-/**
  * Defines the default render method.
  *
- * @param store - The store object.
+ * @param namespace - The namespace object.
  */
-export const renderMethod = (store) => {
-  store.libraries.frontity.render = render;
+export const renderMethod = (namespace) => {
+  namespace.render = render;
 };

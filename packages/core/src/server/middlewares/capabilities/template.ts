@@ -30,9 +30,9 @@ const html: Template = ({
 /**
  * Defines the default template method.
  *
- * @param store - The store object.
+ * @param namespace - The namespace object.
  */
-export const template = (store) => {
+export const template = (namespace) => {
   // Define the new template method.
-  store.libraries.frontity.template = html;
+  namespace.template = html;
 };

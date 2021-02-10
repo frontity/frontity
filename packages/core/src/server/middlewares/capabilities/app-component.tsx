@@ -4,14 +4,16 @@ import App from "../../../app";
 /**
  * Defines the App to be used for rendering.
  *
- * @param store - The store.
+ * @param namespace - The namespace object.
  * @param ctx - Koa context.
  */
-export const appComponent = (store, ctx) => {
+export const appComponent = (namespace, ctx) => {
   ctx.state.helmetContext = {} as FilledContext;
 
   // Set the App.
-  store.libraries.frontity.App = function FrontityApp() {
-    return <App store={store} helmetContext={ctx.state.helmetContext} />;
+  namespace.App = function FrontityApp() {
+    return (
+      <App store={ctx.state.store} helmetContext={ctx.state.helmetContext} />
+    );
   };
 };
