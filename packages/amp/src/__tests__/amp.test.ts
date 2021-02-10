@@ -21,7 +21,7 @@ describe("AMP tests", () => {
     const { normalize } = store.libraries.source;
 
     expect(normalize("/amp")).toBe("/");
-    expect(normalize("/some-post/amp/")).toBe("/some-post/");
+    expect(normalize("/posts/amp/")).toBe("/posts/");
     expect(normalize("/some-page/amp/")).toBe("/some-page/");
     expect(normalize("/parent/some-page/amp/")).toBe("/parent/some-page/");
     expect(normalize("/category/some/amp/")).toBe("/category/some/");
