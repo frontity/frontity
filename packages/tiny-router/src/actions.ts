@@ -121,7 +121,8 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     // Wrap `window.replace.location` so we can mock it in the e2e tests.
     // This is required because `window.location` is protected by the browser
     // and can't be modified.
-    window.replaceLocation = window.replaceLocation || window.location.replace;
+    window.replaceLocation =
+      window.replaceLocation || window.location.replace.bind(window.location);
 
     // Observe the current data object. If it is ever a redirection, replace the
     // current link with the new one.
