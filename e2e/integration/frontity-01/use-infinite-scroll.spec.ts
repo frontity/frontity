@@ -1323,7 +1323,7 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/subdir/post-1/");
   });
 
-  it.only("should work with redirections", () => {
+  it("should work with redirections", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/test/");
 
@@ -1368,10 +1368,24 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.get("[data-test='fetching']").should("not.exist");
 
     // Scrolls to bottom to fetch next post. The following post should be
-    // redirected from `/another-post` to `/redirected-post`.
+    // redirected from `/another-post` (post-2) to `/redirected-post` (post-3).
     cy.scrollTo("bottom");
     cy.wait("@redirectedPost");
+    cy.get("[data-test='post-2']").should("not.exist");
     cy.get("[data-test='post-3']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/redirected-post/");
+
+    // Changes url to `/`.
+    cy.get("[data-test='to-archive']").should("exist").click();
+    cy.get("[data-test='archive']").should("exist");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.location("href").should("eq", "http://localhost:3001/");
+
+    // Then, go back. The redirected page should be visible.
+    cy.go("back");
+    cy.get("[data-test='post-2']").should("not.exist");
+    cy.get("[data-test='post-3']").should("exist").should("be.visible");
     cy.location("href").should("eq", "http://localhost:3001/redirected-post/");
   });
 });
