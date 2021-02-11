@@ -1,5 +1,6 @@
 import { createStore, InitializedStore } from "@frontity/connect";
 import clone from "clone-deep";
+import merge from "deepmerge";
 import wpSource from "@frontity/wp-source/src";
 import { Packages } from "../../types";
 import Amp from "..";
@@ -8,7 +9,7 @@ let store: InitializedStore<Packages>;
 describe("AMP tests", () => {
   beforeEach(() => {
     // Initialize the store
-    store = createStore<Packages>(clone({ ...wpSource(), ...Amp }));
+    store = createStore<Packages>(merge(clone(wpSource()), clone(Amp)));
     store.state.source.url = "https://test.frontity.org/";
   });
 

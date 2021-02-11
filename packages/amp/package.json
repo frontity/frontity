@@ -28,6 +28,7 @@
   "devDependencies": {
     "@frontity/connect": "^1.2.1",
     "@frontity/wp-source": "^1.11.1",
-    "clone-deep": "^4.0.1"
+    "clone-deep": "^4.0.1",
+    "deepmerge": "^4.2.2"
   }
 }
