@@ -13,7 +13,7 @@ let store: InitializedStore<WpSource>;
 
 beforeEach(() => {
   // Initialize the store
-  store = createStore<WpSource>(clone(wpSource(), { clone: false }));
+  store = createStore<WpSource>(clone(wpSource()));
   store.state.source.url = "https://test.frontity.org/";
 
   getMatchMock.getMatch.mockClear();
@@ -34,11 +34,12 @@ test("Correct handler should have been called after an internal redirection", as
 
   await store.actions.source.fetch("/test");
 
+  // The redirection func should have been called just once to get the new route
   expect(redirection.func).toHaveBeenCalledTimes(1);
-  expect(getMatchMock.getMatch).toHaveBeenCalledTimes(2);
 
   // The first call is matching the redirections
   // The second call is matching the handler
+  expect(getMatchMock.getMatch).toHaveBeenCalledTimes(2);
   expect(getMatchMock.getMatch.mock.calls).toMatchInlineSnapshot(`
     Array [
       Array [
