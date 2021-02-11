@@ -29,9 +29,8 @@ test("Correct handler should have been called after an internal redirection", as
   };
 
   // We have to mock the return value of getMatch for the FIRST invocation
-  // because it's used in
+  // in actions.source.fetch()
   getMatchMock.getMatch.mockReturnValueOnce(redirection);
-  store.libraries.source.redirections.push(redirection);
 
   await store.actions.source.fetch("/test");
 
@@ -47,27 +46,7 @@ test("Correct handler should have been called after an internal redirection", as
           "link": "/test/",
           "route": "/test/",
         },
-        Array [
-          Object {
-            "func": [MockFunction] {
-              "calls": Array [
-                Array [
-                  Object {},
-                ],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": "/redirected",
-                },
-              ],
-            },
-            "name": "redirection",
-            "params": Object {},
-            "pattern": "/test",
-            "priority": 1,
-          },
-        ],
+        Array [],
       ],
       Array [
         Object {
