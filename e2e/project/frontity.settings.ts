@@ -26,6 +26,18 @@ const settings: Settings<
     packages: ["e2e-head"],
   },
   {
+    name: "amp",
+    packages: [
+      "e2e-amp",
+      "@frontity/amp",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "http://localhost:8080/" } },
+      },
+    ],
+  },
+  {
     name: "image",
     packages: ["e2e-image"],
   },

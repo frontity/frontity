@@ -1,0 +1,15 @@
+{
+  "name": "e2e-amp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do e2e testing of Frontity's amp package",
+  "dependencies": {
+    "@frontity/amp": "^0.0.1",
+    "@frontity/html2react": "^1.6.1",
+    "@frontity/router": "^1.1.4",
+    "@frontity/source": "^1.5.1",
+    "@frontity/tiny-router": "^1.3.2",
+    "@frontity/wp-source": "^1.11.1",
+    "frontity": "^1.4.3"
+  }
+}
