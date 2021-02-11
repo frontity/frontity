@@ -1,5 +1,5 @@
 import { Package, Action, MergePackages } from "frontity/types";
-import WpSource from "@frontity/wp-source/types";
+import Source from "@frontity/source/types";
 
 /**
  * The types of the AMP Frontity package.
@@ -33,6 +33,6 @@ interface AMP extends Package {
 /**
  * Packages used internally by the AMP package.
  */
-export type Packages = MergePackages<AMP, WpSource>;
+export type Packages = MergePackages<AMP, Source>;
 
 export default AMP;
