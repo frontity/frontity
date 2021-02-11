@@ -1322,4 +1322,56 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.scrollTo("top");
     cy.location("href").should("eq", "http://localhost:3001/subdir/post-1/");
   });
+
+  it.only("should work with redirections", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
+
+    // Stubs calls to REST API.
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1-with-redirections.json",
+      headers: {
+        "x-wp-total": 2,
+        "x-wp-totalpages": 1,
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=some-post",
+      response: "fixture:use-infinite-scroll/some-post.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("somePost");
+    cy.route({
+      url:
+        "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=redirected-post",
+      response: "fixture:use-infinite-scroll/redirected-post.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("redirectedPost");
+
+    // Changes url to `/some-post`.
+    cy.get("[data-test='to-some-post']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/some-post/");
+    cy.wait("@somePost");
+    cy.wait("@pageOne");
+    cy.get("[data-test='post-type']").should("exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+
+    // Scrolls to bottom to fetch next post. The following post should be
+    // redirected from `/another-post` to `/redirected-post`.
+    cy.scrollTo("bottom");
+    cy.wait("@redirectedPost");
+    cy.get("[data-test='post-3']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/redirected-post/");
+  });
 });

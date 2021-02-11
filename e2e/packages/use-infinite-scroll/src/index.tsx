@@ -53,6 +53,9 @@ const Root: React.FC = connect(
           <button data-test="to-last-post" onClick={goTo("/post-10")}>
             To Last Post
           </button>
+          <button data-test="to-some-post" onClick={goTo("/some-post")}>
+            To Some Post
+          </button>
           <button
             data-test="toggle-infinite-scroll"
             onClick={() => {
