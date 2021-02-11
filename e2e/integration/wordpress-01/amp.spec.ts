@@ -25,6 +25,23 @@ describe("AMP", () => {
         amphtmlValidator.getInstance().then((validator) => {
           const result = validator.validateString(response.body);
 
+          if (result.status !== "PASS") {
+            for (let i = 0; i < result.errors.length; i++) {
+              const error = result.errors[i];
+              let msg =
+                "line " +
+                error.line +
+                ", col " +
+                error.col +
+                ": " +
+                error.message;
+              if (error.specUrl !== null) {
+                msg += " (see " + error.specUrl + ")";
+              }
+              cy.log(msg);
+            }
+          }
+
           expect(result.status).to.equal("PASS");
         });
       }
