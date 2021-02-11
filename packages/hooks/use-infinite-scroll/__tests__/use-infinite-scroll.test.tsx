@@ -232,10 +232,12 @@ describe("useInfiniteScroll", () => {
       .mockReturnValueOnce({
         isReady: true,
         isFetching: false,
+        link: "/",
       })
       .mockReturnValueOnce({
         isReady: false,
         isFetching: false,
+        link: "/page/2/",
       });
 
     act(() => {
@@ -270,7 +272,7 @@ describe("useInfiniteScroll", () => {
         source: { get: sourceGet },
         router: {
           state: {
-            infiniteScroll: { links: ["/post-3/", "/past-1/", "/post-2/"] },
+            infiniteScroll: { links: ["/post-3/", "/post-1/", "/post-2/"] },
           },
         },
       },
@@ -284,10 +286,12 @@ describe("useInfiniteScroll", () => {
       .mockReturnValueOnce({
         isReady: true,
         isFetching: false,
+        link: "/post-2/",
       })
       .mockReturnValueOnce({
         isReady: false,
         isFetching: false,
+        link: "/post-3/",
       });
 
     act(() => {
@@ -331,10 +335,12 @@ describe("useInfiniteScroll", () => {
       .mockReturnValueOnce({
         isReady: true,
         isFetching: false,
+        link: "/",
       })
       .mockReturnValueOnce({
         isReady: false,
         isFetching: true,
+        link: "/page/2/",
       });
 
     act(() => {
@@ -378,10 +384,12 @@ describe("useInfiniteScroll", () => {
       .mockReturnValueOnce({
         isReady: true,
         isFetching: false,
+        link: "/",
       })
       .mockReturnValueOnce({
         isReady: true,
         isFetching: false,
+        link: "/page/2/",
       });
 
     act(() => {

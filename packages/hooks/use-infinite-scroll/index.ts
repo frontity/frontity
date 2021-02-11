@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useConnect } from "frontity";
 import useInView from "../use-in-view";
+import { isRedirection } from "@frontity/source";
 import {
   UseInfiniteScrollOptions,
   UseInfiniteScrollOutput,
   InfiniteScrollRouterState,
   Packages,
 } from "./types";
+import { Data } from "@frontity/source/types";
 
 /**
  * A hook to build other infinite scroll hooks.
@@ -42,19 +44,36 @@ const useInfiniteScroll = ({
   // store prop.
   const store = useConnect<Packages>();
 
+  // Declare the data objects needed, all of them initialized as `null`.
+  let current: Data = null;
+  let next: Data = null;
+  let nextRedirected: Data = null;
+
+  // Get the data objects from the Frontity store. If `intersectionObserver` is
+  // not supported, all of them will remain as `null`.
+  if (isSupported) {
+    current = store.state.source.get(currentLink);
+
+    if (nextLink) {
+      next = store.state.source.get(nextLink);
+
+      if (isRedirection(next) && !next.isExternal)
+        nextRedirected = store.state.source.get(next.location);
+    }
+  }
+
   // Request the current route in case it's not ready and it's not fetching. If
   // not supported, it does nothing.
   useEffect(() => {
     if (!isSupported) return;
 
     // Get the state and actions from Frontity.
-    const { state, actions } = store;
+    const { actions } = store;
 
     // Get the data object of the current link and fetch it if needed.
-    const current = state.source.get(currentLink);
     if (!current.isReady && !current.isFetching)
       actions.source.fetch(currentLink);
-  }, [currentLink, isSupported, store]);
+  }, [currentLink, isSupported, current, store]);
 
   // Once the fetch waypoint is in view, fetch the next route content, if not
   // available yet, and add the new route to the array of elements in the
@@ -66,30 +85,50 @@ const useInfiniteScroll = ({
     const { state, actions } = store;
 
     if (fetch.inView && nextLink) {
+      // Get the `infiniteScroll` props from the history state.
       const { infiniteScroll } = state.router
         .state as InfiniteScrollRouterState;
 
-      // Get data object of the next link.
-      const next = state.source.get(nextLink);
-
-      const links = infiniteScroll?.links
+      // Get the list of links from the history state or initializes it.
+      let links = infiniteScroll?.links
         ? [...infiniteScroll.links]
         : [currentLink];
 
-      if (links.includes(nextLink)) return;
-
-      if (!next.isReady && !next.isFetching) {
-        actions.source.fetch(nextLink);
+      // If there is a redirection, remove the old link from `links`.
+      if (nextRedirected) {
+        links = links.filter((link) => link !== next.link);
       }
 
-      links.push(nextLink);
+      // Get the data object that should be handled.
+      const nextData = nextRedirected || next;
 
+      // Do nothing if the link is already in the list. That means it was
+      // handled before.
+      if (links.includes(nextData.link)) return;
+
+      // Fetch the link if it wasn't fetched before.
+      if (!nextData.isReady && !nextData.isFetching) {
+        actions.source.fetch(nextData.link);
+      }
+
+      // Add the link to the list.
+      links.push(nextData.link);
+
+      // Update the browser's history state with the new link.
       actions.router.updateState({
         ...state.router.state,
         infiniteScroll: { ...infiniteScroll, links },
       });
     }
-  }, [isSupported, fetch.inView, nextLink, currentLink, store]);
+  }, [
+    isSupported,
+    fetch.inView,
+    currentLink,
+    nextLink,
+    next,
+    nextRedirected,
+    store,
+  ]);
 
   // Once the route waypoint is in view, change the route to the
   // current element. This preserves the route state between changes
