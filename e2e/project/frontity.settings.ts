@@ -30,6 +30,7 @@ const settings: Settings<
     packages: [
       "e2e-amp",
       "@frontity/amp",
+      "@frontity/html2react",
       "@frontity/tiny-router",
       {
         name: "@frontity/wp-source",
