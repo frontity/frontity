@@ -1,4 +1,11 @@
+// @ts-ignore
 import { raw, proxyHandlers } from "@nx-js/observer-util";
+import { Package } from "@frontity/types";
+import {
+  ResolveActions,
+  ResolvePackages,
+  ResolveState,
+} from "@frontity/types/src/utils";
 import { store } from "@risingstack/react-easy-state";
 
 export const getSnapshot = (obj) => {
@@ -21,35 +28,50 @@ export const getSnapshot = (obj) => {
   }
 };
 
-const convertToAction = (fn, instance) => (...args) => {
+const convertToAction = (
+  fn: (instance: Package) => unknown,
+  instance: Package
+) => (...args: unknown[]): void | Promise<void> => {
   const first = fn(instance);
   if (first instanceof Promise) {
-    return new Promise((resolve, reject) =>
+    return new Promise<void>((resolve, reject) =>
       first.then(() => resolve()).catch((err) => reject(err))
     );
   }
   if (typeof first === "function") {
     const second = first(...args);
     if (second instanceof Promise) {
-      return new Promise((resolve, reject) =>
+      return new Promise<void>((resolve, reject) =>
         second.then(() => resolve()).catch((err) => reject(err))
       );
     }
   }
 };
 
-const convertedActions = (obj, instance) => {
-  if (typeof obj === "function") return convertToAction(obj, instance);
-  else if (obj instanceof Object) {
+const convertedActions = <T extends Package["actions"], P extends Package>(
+  obj: T,
+  instance: P
+): ResolveActions<T> => {
+  // if (typeof obj === "function") return convertToAction(obj, instance);
+  if (obj instanceof Object) {
     return Object.keys(obj).reduce((newObj, key) => {
       newObj[key] = convertedActions(obj[key], instance);
       return newObj;
-    }, {});
+    }, {} as ResolveActions<T>);
   }
 };
 
-export const createStore = (config) => {
-  const observableState = store(config.state, {
+/**
+ * Create an Frontity Connect store.
+ *
+ * @param config - The plain store object.
+ * @returns The initialized store.
+ */
+export const createStore = <T extends Package>(
+  config: T
+): ResolvePackages<T> => {
+  // @ts-ignore
+  const observableState: ResolveState<T["state"]> = store(config.state, {
     proxyHandlers: {
       get: (target, key, receiver) => {
         const result = proxyHandlers.get(target, key, receiver);

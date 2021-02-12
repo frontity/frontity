@@ -37,7 +37,7 @@ export type ResolveState<State extends Package["state"]> = {
 /**
  * Resolve actions to its final form.
  */
-export type ResolveActions<Actions extends Package["state"]> = {
+export type ResolveActions<Actions extends Package["actions"]> = {
   [P in keyof Actions]: Actions[P] extends ({
     state,
     actions,
