@@ -20,6 +20,6 @@ interface Render extends Package {
 /**
  * All packages used internally by the Render package.
  */
-export type Packages = Render & Router & Source;
+export type Packages = MergePackages<Render, Router, Source>;
 
 export default Render;
