@@ -22,7 +22,7 @@ describe("Custom Render", () => {
       .invoke("attr", "value")
       .then((seed) => {
         // The input field should have the server value.
-        cy.get("linput[name=seed").should("have.attr", "value", seed);
+        cy.get("input[name=seed").should("have.attr", "value", seed);
       });
   });
 });
