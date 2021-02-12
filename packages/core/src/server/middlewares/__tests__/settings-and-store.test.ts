@@ -17,7 +17,7 @@ jest.mock("../../store", () =>
 );
 
 describe("settingsAndStore", () => {
-  it("should define settins and store", async () => {
+  it("should define settings and store", async () => {
     const packages: any = {};
     const ctx: any = { state: {}, href: "/", query: { frontity_name: "test" } };
 

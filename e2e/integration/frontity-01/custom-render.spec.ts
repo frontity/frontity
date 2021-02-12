@@ -9,9 +9,7 @@ describe("Custom Render", () => {
     cy.visit("http://localhost:3001/?frontity_name=custom-render");
 
     // Custom head tag.
-    cy.get("link[rel=custom]")
-      .invoke("attr", "value")
-      .should("equal", "render");
+    cy.get("link[rel=custom]").should("have.attr", "value", "render");
 
     // Custom script tag.
     cy.get("script#custom-render-script").should("exist");
@@ -24,9 +22,7 @@ describe("Custom Render", () => {
       .invoke("attr", "value")
       .then((seed) => {
         // The input field should have the server value.
-        cy.get("input[name=seed]")
-          .invoke("attr", "value")
-          .should("equal", seed);
+        cy.get("linput[name=seed").should("have.attr", "value", seed);
       });
   });
 });

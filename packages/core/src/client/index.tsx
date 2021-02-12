@@ -37,7 +37,7 @@ export default async ({ packages }) => {
       if (!window["frontity"]) {
         await Promise.all(
           Object.values(store.actions).map(({ beforeCSR }) => {
-            if (beforeCSR) return beforeCSR({ libraries: store.libraries });
+            if (beforeCSR) return beforeCSR();
           })
         );
       }

@@ -49,7 +49,7 @@ export const settingsAndStore = (packages) => async (
   // Run beforeSSR actions.
   await Promise.all(
     Object.values(store.actions).map(({ beforeSSR }) => {
-      if (beforeSSR) return beforeSSR({ ctx, libraries: store.libraries });
+      if (beforeSSR) return beforeSSR({ ctx });
     })
   );
 
