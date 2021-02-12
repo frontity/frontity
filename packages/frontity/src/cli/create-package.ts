@@ -7,7 +7,9 @@ import {
   errorLogger,
   isFrontityProjectRoot,
   isThemeNameValid,
+  isNamespaceValid,
   log,
+  toCamelCase,
 } from "../utils";
 import { Options } from "../steps/create-package";
 
@@ -53,6 +55,26 @@ interface CreatePackageOptions {
    */
   prompt?: boolean;
 }
+
+/**
+ * Ensures a valid namespace format is kept, based on the input value.
+ *
+ * @param value - Namespace value.
+ * @returns The formated namespace.
+ */
+const ensureValidNamespaceFormat = (value: string): string => {
+  if (!isNamespaceValid(value)) {
+    const parsedNamespace = toCamelCase(value);
+    log(
+      chalk.yellow(
+        `The provided namespace value, "${value}", contains invalid characters. It'll be converted to a valid format: "${parsedNamespace}"`
+      )
+    );
+    return parsedNamespace;
+  }
+
+  return value;
+};
 
 /**
  * The create CLI command, usually run with `npx frontity create-package`.
@@ -109,7 +131,7 @@ const createPackage = async ({
 
   if (namespace) {
     // Namespace was passed as arg or env variable.
-    options.namespace = namespace;
+    options.namespace = ensureValidNamespaceFormat(namespace);
   } else if (promptUser) {
     // Namespace was missing, but we can prompt.
     const questions: Question[] = [
@@ -121,7 +143,7 @@ const createPackage = async ({
       },
     ];
     const answers = await prompt(questions);
-    options.namespace = answers.namespace;
+    options.namespace = ensureValidNamespaceFormat(answers.namespace);
   } else {
     // Add the default option.
     options.namespace = "theme";

@@ -7,10 +7,12 @@ import Api from "../../api";
 import { mockResponse } from "./mocks/helpers";
 import attachment1 from "./mocks/post-type/attachment-1.json";
 import page1 from "./mocks/post-type/page-1.json";
+import page1WithParent from "./mocks/post-type/page-1-with-parent.json";
 import post1 from "./mocks/post-type/post-1.json";
 import post1Revision from "./mocks/post-type/post-1-revision.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
 import cpt11 from "./mocks/post-type/cpt-11.json";
+import cpt11WithParent from "./mocks/post-type/cpt-11-with-parent.json";
 import { ServerError, isError, isPostType } from "@frontity/source";
 import { PostEntity } from "@frontity/source/types";
 
@@ -24,11 +26,33 @@ interface WpSourceAndCpt extends WpSource {
 
 let store: InitializedStore<WpSourceAndCpt>;
 let api: jest.Mocked<Api>;
+let postTypeHandler: jest.SpyInstance;
+let customPostTypeHandler: jest.SpyInstance;
+
 beforeEach(() => {
   store = createStore<WpSourceAndCpt>(clone(wpSource()));
   store.state.source.url = "https://test.frontity.org";
+  store.state.source.postTypes = [
+    {
+      type: "cpt",
+      endpoint: "cpts",
+      archive: "/cpt",
+    },
+  ];
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
+  postTypeHandler = jest.spyOn(
+    store.libraries.source.handlers.find(
+      (handler) => handler.name === "post type"
+    ),
+    "func"
+  );
+  customPostTypeHandler = jest.spyOn(
+    store.libraries.source.handlers.find((handler) => handler.name === "cpt"),
+    "func"
+  );
+  postTypeHandler.mockClear();
+  customPostTypeHandler.mockClear();
 });
 
 describe("postType", () => {
@@ -69,6 +93,7 @@ describe("post", () => {
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
     expect(store.state.source).toMatchSnapshot();
+    expect(postTypeHandler).toHaveBeenCalled();
   });
 
   test("exists in source.post", async () => {
@@ -81,6 +106,7 @@ describe("post", () => {
     api.get = jest.fn();
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(api.get).not.toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
@@ -93,6 +119,8 @@ describe("post", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
     // Fetch entities
     await store.actions.source.fetch("/cpt/cpt-11");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
     expect(api.get.mock.calls).toMatchSnapshot();
     expect(store.state.source).toMatchSnapshot();
   });
@@ -103,6 +131,7 @@ describe("post", () => {
     // Fetch entities
     await store.actions.source.fetch("/post-1/?some=param");
     expect(store.state.source).toMatchSnapshot();
+    expect(postTypeHandler).toHaveBeenCalled();
   });
 
   test("works with query params (exists in source.post)", async () => {
@@ -115,6 +144,7 @@ describe("post", () => {
     api.get = jest.fn();
     // Fetch entities
     await store.actions.source.fetch("/post-1/?some=param");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(api.get).not.toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
@@ -124,6 +154,7 @@ describe("post", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1withType]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 
@@ -137,6 +168,7 @@ describe("post", () => {
       .mockResolvedValueOnce(mockResponse([post1Revision]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/?preview=true");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
 
     // Get updated props from the post that was fetched.
@@ -191,6 +223,7 @@ describe("page", () => {
       .mockResolvedValueOnce(mockResponse([page1]));
     // Fetch entities
     await store.actions.source.fetch("/page-1/");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 
@@ -204,6 +237,7 @@ describe("page", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/page-1/");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(api.get).toHaveBeenCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
@@ -216,6 +250,7 @@ describe("page", () => {
       .mockResolvedValueOnce(mockResponse([page1]));
     // Fetch entities
     await store.actions.source.fetch("/page-1/?some=param");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 
@@ -229,7 +264,20 @@ describe("page", () => {
     api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/page-1/?some=param");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("can have a parent", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([]))
+      .mockResolvedValueOnce(mockResponse([page1WithParent]));
+    // Fetch entities
+    await store.actions.source.fetch("/parent/page-1/");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 });
@@ -243,6 +291,7 @@ describe("attachment", () => {
       .mockResolvedValueOnce(mockResponse([attachment1]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/attachment-1/");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 
@@ -256,6 +305,7 @@ describe("attachment", () => {
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/attachment-1/");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(api.get).toHaveBeenCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
@@ -268,6 +318,7 @@ describe("attachment", () => {
       .mockResolvedValueOnce(mockResponse([attachment1]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/attachment-1/?some=param");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 
@@ -281,6 +332,7 @@ describe("attachment", () => {
     api.get = jest.fn().mockResolvedValue(mockResponse([]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/attachment-1/?some=param");
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(api.get).toHaveBeenCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
@@ -299,6 +351,7 @@ describe("attachment", () => {
     // Fetch again
     await store.actions.source.fetch("/post-1", { force: true });
 
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
 
     // Should have the new ID now
@@ -330,6 +383,7 @@ describe("attachment", () => {
 
     await store.actions.source.fetch("/undefined/post-1/");
 
+    expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });
 
@@ -349,6 +403,77 @@ describe("attachment", () => {
 
     await store.actions.source.fetch("/does/not/exist/");
 
+    expect(postTypeHandler).toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+});
+
+describe("custom post type", () => {
+  test("doesn't exist in source.page", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11/");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("exists in source.page", async () => {
+    // Add page to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(cpt11),
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11/");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (doesn't exist in source.page)", async () => {
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11/?some=param");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with query params (exists in source.page)", async () => {
+    // Add page to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(cpt11),
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/cpt-11/?some=param");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(api.get).toHaveBeenCalledTimes(0);
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("works with custom post types with parent pages", async () => {
+    // Add page to the store
+    await store.libraries.source.populate({
+      state: store.state,
+      response: mockResponse(cpt11WithParent),
+    });
+    // Mock Api responses
+    api.get = jest.fn().mockResolvedValueOnce(mockResponse([cpt11WithParent]));
+    // Fetch entities
+    await store.actions.source.fetch("/cpt/parent/cpt-11/");
+    expect(postTypeHandler).not.toHaveBeenCalled();
+    expect(customPostTypeHandler).toHaveBeenCalled();
+    expect(api.get).toHaveBeenCalledTimes(0);
     expect(store.state.source).toMatchSnapshot();
   });
 });

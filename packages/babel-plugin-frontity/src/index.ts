@@ -1,3 +1,9 @@
+/* eslint-disable jsdoc/require-jsdoc */
+
+/**
+ * Disable TSDocs because we are going to remove this babel plugin once we
+ * update to Emotion 11.
+ */
 import * as BabelTypes from "@babel/types";
 import { Visitor, NodePath } from "@babel/traverse";
 

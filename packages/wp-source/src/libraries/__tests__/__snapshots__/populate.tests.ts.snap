@@ -189,6 +189,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -432,6 +433,7 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
@@ -464,7 +466,7 @@ Array [
 
 exports[`populate removes WP API path from links 2`] = `
 Object {
-  "api": "https://test.frontity.org/subdirectory/wp-json",
+  "api": "https://test.frontity.org/subdirectory/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -675,13 +677,14 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "https://test.frontity.org",
+  "url": "https://test.frontity.org/subdirectory/",
 }
 `;
 
@@ -707,7 +710,7 @@ Array [
 
 exports[`populate transforms links if subdirectory is specified 2`] = `
 Object {
-  "api": "https://test.frontity.org/subdirectory/wp-json",
+  "api": "https://test.frontity.org/subdirectory/wp-json/",
   "attachment": Object {
     "1": Object {
       "author": 1,
@@ -918,12 +921,257 @@ Object {
   "postEndpoint": "posts",
   "postTypes": Array [],
   "postsPage": "",
+  "redirections": "no",
   "subdirectory": "",
   "tag": Object {},
   "tagBase": "",
   "taxonomies": Array [],
   "taxonomy": Object {},
   "type": Object {},
-  "url": "https://test.frontity.org",
+  "url": "https://test.frontity.org/subdirectory/",
+}
+`;
+
+exports[`populate transforms links if subdirectory is specified in \`state.frontity.url\` 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "link": "/blog/post-1/",
+    "type": "post",
+  },
+  Object {
+    "id": 2,
+    "link": "/blog/post-2/",
+    "type": "post",
+  },
+  Object {
+    "id": 3,
+    "link": "/blog/post-3/",
+    "type": "post",
+  },
+]
+`;
+
+exports[`populate transforms links if subdirectory is specified in \`state.frontity.url\` 2`] = `
+Object {
+  "api": "https://test.frontity.org/subdirectory/wp-json/",
+  "attachment": Object {
+    "1": Object {
+      "author": 1,
+      "id": 1,
+      "link": "/blog/post-1/attachment-1/",
+      "slug": "attachment-1",
+      "type": "attachment",
+    },
+    "2": Object {
+      "author": 1,
+      "id": 2,
+      "link": "/blog/post-2/attachment-2/",
+      "slug": "attachment-2",
+      "type": "attachment",
+    },
+    "3": Object {
+      "author": 1,
+      "id": 3,
+      "link": "/blog/post-3/attachment-3/",
+      "slug": "attachment-3",
+      "type": "attachment",
+    },
+  },
+  "author": Object {
+    "1": Object {
+      "id": 1,
+      "link": "/blog/author/author-1/",
+      "name": "Author 1",
+      "slug": "author-1",
+    },
+  },
+  "authorBase": "",
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/blog/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
+  "categoryBase": "",
+  "data": Object {
+    "/blog/author/author-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/blog/author/author-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/blog/author/author-1/",
+    },
+    "/blog/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/blog/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/blog/category/cat-1/",
+      "taxonomy": "category",
+    },
+    "/blog/post-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/blog/post-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/blog/post-1/",
+      "type": "post",
+    },
+    "/blog/post-1/attachment-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/blog/post-1/attachment-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/blog/post-1/attachment-1/",
+      "type": "attachment",
+    },
+    "/blog/post-2/": Object {
+      "id": 2,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/blog/post-2/",
+      "page": 1,
+      "query": Object {},
+      "route": "/blog/post-2/",
+      "type": "post",
+    },
+    "/blog/post-2/attachment-2/": Object {
+      "id": 2,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/blog/post-2/attachment-2/",
+      "page": 1,
+      "query": Object {},
+      "route": "/blog/post-2/attachment-2/",
+      "type": "attachment",
+    },
+    "/blog/post-3/": Object {
+      "id": 3,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/blog/post-3/",
+      "page": 1,
+      "query": Object {},
+      "route": "/blog/post-3/",
+      "type": "post",
+    },
+    "/blog/post-3/attachment-3/": Object {
+      "id": 3,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/blog/post-3/attachment-3/",
+      "page": 1,
+      "query": Object {},
+      "route": "/blog/post-3/attachment-3/",
+      "type": "attachment",
+    },
+  },
+  "entity": [Function],
+  "get": [Function],
+  "homepage": "",
+  "isWpCom": false,
+  "page": Object {},
+  "params": Object {},
+  "post": Object {
+    "1": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          1,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 1,
+      "id": 1,
+      "link": "/blog/post-1/",
+      "slug": "post-1",
+      "tags": Array [],
+      "type": "post",
+    },
+    "2": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          2,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 2,
+      "id": 2,
+      "link": "/blog/post-2/",
+      "slug": "post-2",
+      "tags": Array [],
+      "type": "post",
+    },
+    "3": Object {
+      "_embedded": Object {
+        "author": Array [
+          1,
+        ],
+        "wp:featuredmedia": Array [
+          3,
+        ],
+        "wp:term": Array [
+          Array [
+            1,
+          ],
+        ],
+      },
+      "author": 1,
+      "categories": Array [
+        1,
+      ],
+      "featured_media": 3,
+      "id": 3,
+      "link": "/blog/post-3/",
+      "slug": "post-3",
+      "tags": Array [],
+      "type": "post",
+    },
+  },
+  "postEndpoint": "posts",
+  "postTypes": Array [],
+  "postsPage": "",
+  "redirections": "no",
+  "subdirectory": "",
+  "tag": Object {},
+  "tagBase": "",
+  "taxonomies": Array [],
+  "taxonomy": Object {},
+  "type": Object {},
+  "url": "https://test.frontity.org/subdirectory/",
 }
 `;

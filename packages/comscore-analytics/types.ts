@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Action, MergePackages, Package } from "frontity/types";
 import Analytics, { Pageview } from "@frontity/analytics/types";
 

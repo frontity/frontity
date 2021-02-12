@@ -1,3 +1,5 @@
+import { NavigatorWithConnection } from "./types";
+
 /**
  * Configuration for the prefetcher behaviour.
  */
@@ -118,12 +120,58 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
  *
  * @param link - The link URL.
  * @param sourceUrl - The Source URL. It usually comes from `state.source.url`.
+ * @param match - (Optional) array of RegExp that matches the URL.
  *
  * @returns The URL without the Source URL.
  */
-export const removeSourceUrl = (link: string, sourceUrl: string) => {
+export const removeSourceUrl = (
+  link: string,
+  sourceUrl: string,
+  match?: string[]
+) => {
+  // if match is present we need to ensure the internal link matches the current site url pattern
+  if (match && !match.some((regexp) => new RegExp(regexp).test(link))) {
+    return link;
+  }
+
   const linkUrl = new URL(link, sourceUrl);
   return linkUrl.hostname === new URL(sourceUrl).hostname
     ? linkUrl.pathname + linkUrl.search + linkUrl.hash
     : link;
+};
+
+/**
+ * Checks if the provided link is an external Url.
+ *
+ * @param link - The link Url.
+ *
+ * @returns True if the link is an external Url.
+ */
+export const isExternalUrl = (link: string) => {
+  try {
+    new URL(link);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+/**
+ * Checks whether the provided link should be fetched by the Link component.
+ *
+ * @param link - The link URL.
+ *
+ * @returns True if link should be fetched.
+ */
+export const shouldFetchLink = (link: string) => {
+  /**
+   * Checks if user is on slow connection or has enabled data saver.
+   */
+  const _navigator = window.navigator as NavigatorWithConnection;
+
+  const isSlowConnection =
+    _navigator?.connection?.saveData ||
+    (_navigator?.connection?.effectiveType || "").includes("2g");
+
+  return !isSlowConnection && !isExternalUrl(link);
 };

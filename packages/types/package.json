@@ -1,6 +1,6 @@
 {
   "name": "@frontity/types",
-  "version": "1.6.0",
+  "version": "1.7.1",
   "description": "Types for the different Frontity APIs",
   "main": "src/index.ts",
   "keywords": [
@@ -23,6 +23,6 @@
   },
   "dependencies": {
     "ts-essentials": "^6.0.0",
-    "@types/koa": "^2.11.2"
+    "@types/koa": "^2.11.6"
   }
 }

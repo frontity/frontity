@@ -243,7 +243,7 @@ export interface PageEntity extends PostTypeEntity {
 /**
  * Interface for entities from the /wp/v2/media endpoint.
  */
-export interface AttachmentEntity extends Entity {
+export interface AttachmentEntity extends PostTypeEntity {
   /**
    * Type of Post for the object.
    */

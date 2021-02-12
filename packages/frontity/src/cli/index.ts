@@ -1,9 +1,6 @@
 #! /usr/bin/env node
-
-require("dotenv").config();
-
+import "./dotenv";
 import program from "commander";
-
 import { default as create } from "./create";
 import { default as createPackage } from "./create-package";
 import { default as dev } from "./dev";
@@ -17,7 +14,7 @@ import packageJson from "../../package.json";
 
 // Sets the version and the description of the program.
 program
-  .version(packageJson.version)
+  .version(packageJson.version, "-v, --version")
   .usage("<command> [options]")
   .description("Frontity CLI");
 
@@ -98,4 +95,4 @@ program.on("command:*", ([command]: string[]) => unknown(command, program));
 // Parses the arguments and adds them to the `command` object.
 program.parse(process.argv);
 
-if (!program.args.length) program.help();
+if (program.rawArgs.length < 3) program.help();

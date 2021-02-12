@@ -1,11 +1,12 @@
 import { connect, warn } from "frontity";
 import { Package } from "frontity/types";
-import React, {
+import {
   isValidElement,
   ReactNodeArray,
   ReactElement,
   createElement,
 } from "react";
+import * as React from "react";
 
 interface SwitchChild {
   when?: boolean;

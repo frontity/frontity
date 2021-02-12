@@ -5,6 +5,9 @@ Object {
   "frontity": Object {
     "debug": false,
     "initialLink": "/post",
+    "match": Array [
+      "https://www.site-1.com",
+    ],
     "menu1": Array [
       "item1",
       "item2",

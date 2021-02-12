@@ -8,11 +8,7 @@ import {
   downloadFavicon,
   revertProgress,
 } from "../";
-import {
-  createPackageJson as createPackageJsonForPackage,
-  createSrcIndexJs,
-  installPackage,
-} from "../create-package";
+import { createPackageJson as createPackageJsonForPackage } from "../create-package";
 
 import * as utils from "../../utils";
 import * as fsExtra from "fs-extra";
@@ -28,12 +24,23 @@ jest.mock("node-fetch");
 jest.mock("child_process");
 jest.mock("tar");
 
+// Manually define the overload that we are mocking because TypeScript is not
+// able to know which one we are using when we use `.mockResolvedValue`.
+type Readdir = (
+  path: fsExtra.PathLike,
+  options?:
+    | { encoding: BufferEncoding | null; withFileTypes?: false }
+    | BufferEncoding
+    | null
+) => Promise<string[]>;
+
 const mockedUtils = utils as jest.Mocked<typeof utils>;
 const mockedFsExtra = fsExtra as jest.Mocked<typeof fsExtra>;
 const mockedFetch = fetch as jest.Mocked<typeof fetch>;
 const mockedPath = path as jest.Mocked<typeof path>;
 const mockedChildProcess = childProcess as jest.Mocked<typeof childProcess>;
 const mockedTar = tar as jest.Mocked<typeof tar>;
+const mockedReaddir: jest.MockedFunction<Readdir> = fsExtra.readdir as any;
 
 beforeEach(() => {
   mockedPath.resolve.mockImplementation((...dirs) =>
@@ -90,7 +97,7 @@ describe("normalizeOptions", () => {
 describe("ensureProjectDir", () => {
   beforeEach(() => {
     mockedFsExtra.ensureDir.mockReset();
-    mockedFsExtra.readdir.mockReset();
+    mockedReaddir.mockReset();
     mockedFsExtra.pathExists.mockReset();
   });
 
@@ -101,12 +108,12 @@ describe("ensureProjectDir", () => {
     expect(dirExisted).toBe(false);
     expect(mockedFsExtra.pathExists.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
-    expect(mockedFsExtra.readdir).not.toHaveBeenCalled();
+    expect(mockedReaddir).not.toHaveBeenCalled();
   });
 
   test("works when passing an existent path with an empty repo", async () => {
     const path = "/path/to/project";
-    mockedFsExtra.readdir.mockResolvedValue([
+    mockedReaddir.mockResolvedValue([
       "README.md",
       ".git",
       ".gitignore",
@@ -116,14 +123,14 @@ describe("ensureProjectDir", () => {
     const dirExisted = await ensureProjectDir(path);
     expect(dirExisted).toBe(true);
     expect(mockedFsExtra.pathExists.mock.calls).toMatchSnapshot();
-    expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
+    expect(mockedReaddir.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.ensureDir).not.toHaveBeenCalled();
   });
 
   test("throws when passing an non-empty path", async () => {
     const path = "/path/to/project";
     mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
-    mockedFsExtra.readdir.mockResolvedValue(["file-that-should-not-exist"]);
+    mockedReaddir.mockResolvedValue(["file-that-should-not-exist"]);
     await expect(ensureProjectDir(path)).rejects.toThrow(
       "The directory passed to `create` function is not empty"
     );
@@ -200,12 +207,16 @@ describe("cloneStarterTheme", () => {
     );
     mockedFsExtra.ensureDir.mockReset();
     mockedUtils.isThemeNameValid.mockReset();
-    mockedFsExtra.readdir.mockReset();
-    mockedFsExtra.readdir.mockResolvedValueOnce(["file.tgz"]);
+    mockedReaddir.mockReset();
+    mockedReaddir.mockResolvedValueOnce(["file.tgz"]);
     mockedFsExtra.remove.mockReset();
     mockedChildProcess.exec.mockReset();
     (mockedChildProcess as any).exec.mockImplementation(
-      (_command: string, _options: object, resolve: Function) => {
+      (
+        _command: string,
+        _options: Record<string, unknown>,
+        resolve: (...args: any) => any
+      ) => {
         resolve();
       }
     );
@@ -222,7 +233,7 @@ describe("cloneStarterTheme", () => {
     expect(mockedFsExtra.ensureDir.mock.calls).toMatchSnapshot();
     expect(mockedUtils.isThemeNameValid.mock.calls).toMatchSnapshot();
     expect(mockedChildProcess.exec.mock.calls).toMatchSnapshot();
-    expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
+    expect(mockedReaddir.mock.calls).toMatchSnapshot();
     expect(mockedTar.extract.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.remove.mock.calls).toMatchSnapshot();
   });
@@ -265,7 +276,11 @@ describe("installDependencies", () => {
   beforeEach(() => {
     mockedChildProcess.exec.mockReset();
     (mockedChildProcess as any).exec.mockImplementation(
-      (_command: string, _options: object, resolve: Function) => {
+      (
+        _command: string,
+        _options: Record<string, unknown>,
+        resolve: (...args: any) => any
+      ) => {
         resolve();
       }
     );
@@ -281,7 +296,7 @@ describe("installDependencies", () => {
 
 describe("revertProgress", () => {
   beforeEach(() => {
-    mockedFsExtra.readdir.mockReset();
+    mockedReaddir.mockReset();
     mockedFsExtra.remove.mockReset();
   });
 
@@ -289,7 +304,7 @@ describe("revertProgress", () => {
     const dirExisted = true;
     const path = "/path/to/project";
 
-    mockedFsExtra.readdir.mockResolvedValue([
+    mockedReaddir.mockResolvedValue([
       "frontity.settings.js",
       "package.json",
       "packages",
@@ -298,7 +313,7 @@ describe("revertProgress", () => {
       "package-lock.json",
     ]);
     await revertProgress(dirExisted, path);
-    expect(mockedFsExtra.readdir.mock.calls).toMatchSnapshot();
+    expect(mockedReaddir.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.remove.mock.calls).toMatchSnapshot();
   });
 
