@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`settingsAndStore should define settins and store 1`] = `
+exports[`settingsAndStore should define settings and store 1`] = `
 Object {
   "actions": Array [],
   "libraries": Object {
@@ -13,4 +13,4 @@ Object {
 }
 `;
 
-exports[`settingsAndStore should define settins and store 2`] = `[Function]`;
+exports[`settingsAndStore should define settings and store 2`] = `[Function]`;
