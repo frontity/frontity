@@ -113,5 +113,5 @@ export const installPackage = async (
   projectPath: string,
   packagePath: string
 ) => {
-  await promisify(exec)(`npm install ${packagePath}`, { cwd: projectPath });
+  await promisify(exec)(`npm install ./${packagePath}`, { cwd: projectPath });
 };

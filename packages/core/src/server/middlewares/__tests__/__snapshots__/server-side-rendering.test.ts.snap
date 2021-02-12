@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`serverSideRendering should render with the given render and template 1`] = `
+"
+                    <template>
+                        <div>App</div>
+                        htmlAttributes=[helment-attr=\\"html\\"]
+                        bodyAttributes=[helment-attr=\\"body\\"]
+                        <head>
+                            <link rel=\\"helmet-link\\" />
+<link rel=\\"chunk-extractor-link\\" />
+                        </head>
+                        <scripts>
+                            <script id=\\"__FRONTITY_CONNECT_STATE__\\" type=\\"application/json\\">{\\"FRONTITY_TEST\\":true}</script>
+<script get-both-scripts></script>
+                        </scripts>
+                    </template>
+                "
+`;

@@ -22,15 +22,35 @@ npm i @frontity/amp
 
 ## Usage
 
-You can should install the package and add it to your `frontity.settings.js` file:
+You should add the package to your `frontity.settings.js` file.
+
+Usually, you will want to have a "main site" which doesn't use this package and renders the normal React application and an "amp site" that returns the AMP version of the pages.
+
+The AMP site should have a `match` property which will indicate which are the AMP URLs. Some examples are:
+
+- A subdomain: `"match": "amp\\.domain\\.com"`
+- A query: `"match": "(\\?|&)amp=true"`
+- An ending path: `"match": "\\/amp\\/?($|\\?|#)"`
+
+You can read more about setting up multiple sites [in our docs](https://docs.frontity.org/learning-frontity/settings#multiple-sites).
 
 ```js
-export default {
-  packages: [
-    "@frontity/amp",
-    // ...your other packages
-  ],
-};
+export default [
+  {
+    name: "main-site",
+    packages: [
+      // ...your normal packages
+    ],
+  },
+  {
+    name: "amp-site",
+    match: "...",
+    packages: [
+      "@frontity/amp",
+      // ...your other packages
+    ],
+  },
+];
 ```
 
 ## Feature Discussions
