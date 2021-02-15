@@ -1,6 +1,11 @@
 import AMP from "../types";
 
 /**
+ * Emotion cache key.
+ */
+export const CACHE_KEY = "css-amp";
+
+/**
  * Remove a final `/amp` from a link.
  *
  * @param link - The link to be processed.
