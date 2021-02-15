@@ -1323,7 +1323,7 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/subdir/post-1/");
   });
 
-  it("should work with redirections", () => {
+  it("should ignore redirected links", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/test/");
 
@@ -1333,7 +1333,7 @@ describe("usePostTypeInfiniteScroll", () => {
       url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
       response: "fixture:use-infinite-scroll/page-1-with-redirections.json",
       headers: {
-        "x-wp-total": 2,
+        "x-wp-total": 4,
         "x-wp-totalpages": 1,
       },
       delay: 300,
@@ -1347,16 +1347,6 @@ describe("usePostTypeInfiniteScroll", () => {
       },
       delay: 300,
     }).as("somePost");
-    cy.route({
-      url:
-        "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=redirected-post",
-      response: "fixture:use-infinite-scroll/redirected-post.json",
-      headers: {
-        "x-wp-total": "1",
-        "x-wp-totalpages": "1",
-      },
-      delay: 300,
-    }).as("redirectedPost");
 
     // Changes url to `/some-post`.
     cy.get("[data-test='to-some-post']").should("exist").click();
@@ -1367,13 +1357,14 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.get("[data-test='post-1']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
 
-    // Scrolls to bottom to fetch next post. The following post should be
-    // redirected from `/another-post` (post-2) to `/redirected-post` (post-3).
+    // Scrolls to bottom to fetch next post. As redirections are ignored, the
+    // next rendered post should be the post 4 (last-post).
     cy.scrollTo("bottom");
-    cy.wait("@redirectedPost");
-    cy.get("[data-test='post-2']").should("not.exist");
-    cy.get("[data-test='post-3']").should("exist").scrollIntoView();
-    cy.location("href").should("eq", "http://localhost:3001/redirected-post/");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("not.exist"); // Internal redirect.
+    cy.get("[data-test='post-3']").should("not.exist"); // External redirect.
+    cy.get("[data-test='post-4']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/last-post/");
 
     // Changes url to `/`.
     cy.get("[data-test='to-archive']").should("exist").click();
@@ -1382,10 +1373,13 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.get("[data-test='fetching']").should("not.exist");
     cy.location("href").should("eq", "http://localhost:3001/");
 
-    // Then, go back. The redirected page should be visible.
+    // Then, go back. The last post should be visible.
     cy.go("back");
+
+    cy.get("[data-test='post-1']").should("exist");
     cy.get("[data-test='post-2']").should("not.exist");
-    cy.get("[data-test='post-3']").should("exist").should("be.visible");
-    cy.location("href").should("eq", "http://localhost:3001/redirected-post/");
+    cy.get("[data-test='post-3']").should("not.exist");
+    cy.get("[data-test='post-4']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/last-post/");
   });
 });
