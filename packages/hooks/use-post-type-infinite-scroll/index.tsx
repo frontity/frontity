@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
+import { State } from "frontity/types";
 import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll from "../use-infinite-scroll";
 import WpSource from "@frontity/wp-source/types";
 import Router from "@frontity/router/types";
-import { isArchive, isError } from "@frontity/source";
+import { isArchive, isError, isRedirection } from "@frontity/source";
 import {
   InfiniteScrollRouterState,
   IntersectionOptions,
@@ -15,6 +16,42 @@ import {
   UsePostTypeInfiniteScrollOutput,
   WrapperGeneratorParams,
 } from "./types";
+
+/**
+ * Get links from pages, removing all redirected links.
+ *
+ * @param pages - List of links pointing to archive pages.
+ * @param firstLink - Link that should be removed.
+ * @param state - Frontity state.
+ * @returns A list of links containing the posts, with redirections resolved.
+ */
+const getLinksFromPages = (
+  pages: string[],
+  firstLink: string,
+  state: State<Packages>
+): string[] => {
+  // Get the data object of all pages.
+  const pagesData = pages
+    .map((link) => state.source.get(link))
+    .filter((data) => isArchive(data) && data.isReady);
+
+  // Get all the post links from the pages.
+  const rawLinks = pagesData.reduce((allLinks, data, index) => {
+    // Add items from this data object if it's an archive.
+    if (isArchive(data)) {
+      let dataLinks = data.items.map(({ link }) => link);
+      if (index > 0) dataLinks = dataLinks.filter((link) => link !== firstLink);
+      allLinks = allLinks.concat(dataLinks);
+    }
+    return allLinks;
+  }, [] as string[]);
+
+  // Remove links that point to redirections.
+  return rawLinks
+    .map((link) => state.source.get(link))
+    .filter((data) => !isRedirection(data))
+    .map(({ link }) => link);
+};
 
 /**
  * A function that generates Wrapper components.
@@ -52,27 +89,19 @@ export const wrapperGenerator = ({
 
     // Aliases to needed state.
     const current = state.source.get(link);
-    const first = links[0];
-    const items = pages.reduce((final, current, index) => {
-      const data = state.source.get(current);
-      if (isArchive(data) && data.isReady) {
-        const items =
-          index !== 0
-            ? data.items.filter(({ link }) => link !== first)
-            : data.items;
-        final = final.concat(items);
-      }
-      return final;
-    }, []);
-    const currentIndex = items.findIndex(({ link }) => link === current.link);
-    const nextItem = items[currentIndex + 1];
+    const firstLink = links[0];
+
+    const sourceLinks = getLinksFromPages(pages, firstLink, state);
+    const currentIndex = sourceLinks.indexOf(link);
+    const nextLink = sourceLinks[currentIndex + 1];
 
     // Infinite scroll booleans.
     const hasReachedLimit = !!limit && links.length >= limit;
 
     const { supported, fetchRef, routeRef } = useInfiniteScroll({
       currentLink: link,
-      nextLink: nextItem?.link,
+      // nextLink: nextItem?.link,
+      nextLink: nextLink,
       fetchInViewOptions,
       routeInViewOptions,
     });
@@ -238,26 +267,25 @@ const usePostTypeInfiniteScroll = (
       ? state.source.get(lastPage.next)
       : null;
 
-  const items = pages.reduce((final, current, index) => {
-    const data = state.source.get(current);
-    if (isArchive(data) && data.isReady) {
-      const items =
-        index !== 0
-          ? data.items.filter(({ link }) => link !== firstLink)
-          : data.items;
-      final = final.concat(items);
-    }
-    return final;
-  }, []);
-  const lastIndex = items.findIndex(({ link }) => link === last.link);
+  const sourceLinks = getLinksFromPages(pages, firstLink, state);
+
+  const lastIndex = sourceLinks.indexOf(last.link);
+  const [lastLink] = sourceLinks.slice(-1);
+
+  const currentIndex = sourceLinks.indexOf(last.link);
+  const nextLink = sourceLinks[currentIndex + 1];
+  const next = nextLink ? state.source.get(nextLink) : null;
 
   // Infinite scroll booleans.
-  const isLastItem = items[items.length - 1]?.link === state.router.link;
+  const isLastItem = lastLink === state.router.link;
   const hasReachedLimit = !!limit && links.length >= limit;
   const thereIsNext =
-    lastIndex < items.length - 1 || (isArchive(lastPage) && !!lastPage.next);
+    lastIndex < sourceLinks.length - 1 ||
+    (isArchive(lastPage) && !!lastPage.next);
   const isFetching =
-    last.isFetching || (pages.length > 1 && lastPage.isFetching);
+    last.isFetching ||
+    !!next?.isFetching ||
+    (pages.length > 1 && lastPage.isFetching);
   const isLastError = isError(last) || isError(lastPage);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
@@ -292,7 +320,7 @@ const usePostTypeInfiniteScroll = (
       actions.source.fetch(nextPage.link);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options.active, state.router.link, items.length, hasReachedLimit]);
+  }, [options.active, state.router.link, sourceLinks.length, hasReachedLimit]);
 
   /**
    * Function to fetch the next item disregarding the limit.
@@ -305,12 +333,12 @@ const usePostTypeInfiniteScroll = (
       : [state.router.link];
 
     // We need `nextItem` to be declared in local scope.
-    let nextItem = items[lastIndex + 1];
+    let nextLink = sourceLinks[lastIndex + 1];
 
     if (isLastError) {
       if (isError(lastPage))
         await actions.source.fetch(pages[pages.length - 1], { force: true });
-    } else if (!nextItem) {
+    } else if (!nextLink) {
       if (!nextPage) return;
 
       pages.push(nextPage.link);
@@ -328,28 +356,18 @@ const usePostTypeInfiniteScroll = (
         await actions.source.fetch(nextPage.link);
       }
 
-      const items = pages.reduce((final, current, index) => {
-        const data = state.source.get(current);
-        if (isArchive(data) && data.isReady) {
-          const items =
-            index !== 0
-              ? data.items.filter(({ link }) => link !== firstLink)
-              : data.items;
-          final = final.concat(items);
-        }
-        return final;
-      }, []);
+      const sourceLinks = getLinksFromPages(pages, firstLink, state);
 
-      nextItem = items[lastIndex + 1];
+      nextLink = sourceLinks[lastIndex + 1];
     }
 
     if (isLastError) {
       if (isError(last))
         await actions.source.fetch(links[links.length - 1], { force: true });
     } else {
-      if (links.includes(nextItem.link)) return;
+      if (links.includes(nextLink)) return;
 
-      links.push(nextItem.link);
+      links.push(nextLink);
 
       actions.router.updateState({
         ...state.router.state,
@@ -360,10 +378,10 @@ const usePostTypeInfiniteScroll = (
         },
       });
 
-      const next = state.source.get(nextItem.link);
+      const next = state.source.get(nextLink);
 
       if (!next.isReady && !next.isFetching) {
-        await actions.source.fetch(nextItem.link);
+        await actions.source.fetch(nextLink);
       }
     }
   };
