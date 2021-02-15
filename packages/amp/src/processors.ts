@@ -3,6 +3,7 @@ import { Processor, Element } from "@frontity/html2react/types";
 const image: Processor<Element> = {
   test: ({ node }) => node.component === "img",
   processor: ({ node }) => {
+    node.component = "amp-img";
     return node;
   },
 };

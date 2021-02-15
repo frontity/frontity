@@ -29,7 +29,9 @@
   },
   "devDependencies": {
     "@frontity/connect": "^1.2.1",
-    "@frontity/wp-source": "^1.11.1",
+    "@testing-library/react": "^11.2.5",
+    "@types/amphtml-validator": "^1.0.1",
+    "amphtml-validator": "^1.0.34",
     "clone-deep": "^4.0.1",
     "deepmerge": "^4.2.2"
   }
