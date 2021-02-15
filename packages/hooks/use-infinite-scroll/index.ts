@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useConnect } from "frontity";
 import useInView from "../use-in-view";
-import { isRedirection } from "@frontity/source";
 import {
   UseInfiniteScrollOptions,
   UseInfiniteScrollOutput,
@@ -47,7 +46,7 @@ const useInfiniteScroll = ({
   // Declare the data objects needed, all of them initialized as `null`.
   let current: Data = null;
   let next: Data = null;
-  let nextRedirected: Data = null;
+  let isNextReady = false;
 
   // Get the data objects from the Frontity store. If `intersectionObserver` is
   // not supported, all of them will remain as `null`.
@@ -56,9 +55,7 @@ const useInfiniteScroll = ({
 
     if (nextLink) {
       next = store.state.source.get(nextLink);
-
-      if (isRedirection(next) && !next.isExternal)
-        nextRedirected = store.state.source.get(next.location);
+      isNextReady = next.isReady;
     }
   }
 
@@ -90,29 +87,21 @@ const useInfiniteScroll = ({
         .state as InfiniteScrollRouterState;
 
       // Get the list of links from the history state or initializes it.
-      let links = infiniteScroll?.links
+      const links = infiniteScroll?.links
         ? [...infiniteScroll.links]
         : [currentLink];
 
-      // If there is a redirection, remove the old link from `links`.
-      if (nextRedirected) {
-        links = links.filter((link) => link !== next.link);
-      }
-
-      // Get the data object that should be handled.
-      const nextData = nextRedirected || next;
-
       // Do nothing if the link is already in the list. That means it was
       // handled before.
-      if (links.includes(nextData.link)) return;
+      if (links.includes(next.link)) return;
 
       // Fetch the link if it wasn't fetched before.
-      if (!nextData.isReady && !nextData.isFetching) {
-        actions.source.fetch(nextData.link);
+      if (!next.isReady && !next.isFetching) {
+        actions.source.fetch(next.link);
       }
 
-      // Add the link to the list.
-      links.push(nextData.link);
+      // Add the link to the list once it's ready.
+      if (isNextReady) links.push(next.link);
 
       // Update the browser's history state with the new link.
       actions.router.updateState({
@@ -126,7 +115,7 @@ const useInfiniteScroll = ({
     currentLink,
     nextLink,
     next,
-    nextRedirected,
+    isNextReady,
     store,
   ]);
 

@@ -204,7 +204,7 @@ describe("useInfiniteScroll", () => {
     expect(sourceFetch).not.toHaveBeenCalled();
   });
 
-  test("should fetch `nextLink` and update browser state if first reference is in view", () => {
+  test("should fetch `nextLink` if first reference is in view", () => {
     mockedUseInView
       .mockReturnValueOnce({
         ref: jest.fn(),
@@ -248,6 +248,56 @@ describe("useInfiniteScroll", () => {
     expect(sourceGet).toHaveBeenNthCalledWith(1, "/");
     expect(sourceGet).toHaveBeenNthCalledWith(2, "/page/2/");
     expect(sourceFetch).toHaveBeenCalledWith("/page/2/");
+    expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
+      infiniteScroll: { links: ["/"] },
+    });
+  });
+
+  test("should update browser state if first reference is in view and it's ready", () => {
+    mockedUseInView
+      .mockReturnValueOnce({
+        ref: jest.fn(),
+        inView: true,
+        supported: true,
+      })
+      .mockReturnValueOnce({
+        ref: jest.fn(),
+        inView: false,
+        supported: true,
+      });
+
+    mockedUseConnect.mockReturnValue({
+      state: {
+        source: { get: sourceGet },
+        router: { state: { someOtherPackage: {} } },
+      },
+      actions: {
+        source: { fetch: sourceFetch },
+        router: { updateState: routerUpdateState },
+      },
+    } as any);
+
+    sourceGet
+      .mockReturnValueOnce({
+        isReady: true,
+        isFetching: false,
+        link: "/",
+      })
+      .mockReturnValueOnce({
+        isReady: true,
+        isFetching: false,
+        link: "/page/2/",
+      });
+
+    act(() => {
+      render(<App currentLink="/" nextLink="/page/2/" />, container);
+    });
+
+    expect(sourceGet).toHaveBeenCalledTimes(2);
+    expect(sourceGet).toHaveBeenNthCalledWith(1, "/");
+    expect(sourceGet).toHaveBeenNthCalledWith(2, "/page/2/");
+    // expect(sourceFetch).toHaveBeenCalledWith("/page/2/");
     expect(routerUpdateState).toHaveBeenCalledWith({
       someOtherPackage: {},
       infiniteScroll: { links: ["/", "/page/2/"] },
@@ -350,7 +400,7 @@ describe("useInfiniteScroll", () => {
     expect(sourceFetch).not.toHaveBeenCalled();
     expect(routerUpdateState).toHaveBeenCalledWith({
       someOtherPackage: {},
-      infiniteScroll: { links: ["/", "/page/2/"] },
+      infiniteScroll: { links: ["/"] },
     });
   });
 
