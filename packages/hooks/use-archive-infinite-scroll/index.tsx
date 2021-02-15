@@ -161,11 +161,13 @@ const useArchiveInfiniteScroll = (
 
   // Aliases to needed state.
   const last = state.source.get(links[links.length - 1]);
+  const next =
+    isArchive(last) && last.next ? state.source.get(last.next) : null;
 
   // Infinite scroll booleans.
   const hasReachedLimit = !!limit && links.length >= limit;
   const thereIsNext = isArchive(last) && last.next;
-  const isFetching = last.isFetching;
+  const isFetching = last.isFetching || !!next?.isFetching;
   const isLastError = isError(last);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
