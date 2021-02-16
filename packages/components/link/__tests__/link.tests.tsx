@@ -1,4 +1,3 @@
-import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { create } from "react-test-renderer";
@@ -21,6 +20,7 @@ beforeEach(() => {
   window.scrollTo = jest.fn();
   store = createStore({
     state: {
+      frontity: {},
       theme: {
         autoPrefetch: "hover",
       },
@@ -284,6 +284,97 @@ describe("Link", () => {
     expect(store.actions.router.set).toHaveBeenCalledWith("/internal-link");
     expect(store.actions.router.set).toHaveBeenCalledTimes(1);
     expect(anchor2.href).toEqual(linkUrl);
+  });
+
+  test("it takes into account the `match` property before replacing internal links", () => {
+    const storeWithMatch = { ...store };
+
+    // should only match /blog links
+    storeWithMatch.state.frontity.match = [
+      "https?:\\/\\/[^/]+\\/blog([^-\\w]|$)",
+    ];
+
+    const linkThatDoesNotMatch = store.state.source.url + "/internal-link";
+    const linkThatMatches = store.state.source.url + "/blog/blog-link";
+
+    act(() => {
+      render(
+        <Provider value={storeWithMatch}>
+          <Link link={linkThatDoesNotMatch} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkThatMatches} className="my-link-that-matches">
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.router, "set");
+
+    const anchor = document.querySelector("a.my-link") as HTMLAnchorElement;
+    const anchor2 = document.querySelector("a.my-link-that-matches");
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor2.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(store.actions.router.set).toHaveBeenCalledWith("/blog/blog-link");
+    expect(store.actions.router.set).not.toHaveBeenCalledWith("/internal-link");
+    expect(store.actions.router.set).toHaveBeenCalledTimes(1);
+    // the link that does not match should remain the same
+    expect(anchor.href).toEqual(linkThatDoesNotMatch);
+  });
+
+  test("it does not fetch tel:, sms: and mailto: links", () => {
+    const onClick = jest.fn();
+
+    act(() => {
+      render(
+        <Provider value={store}>
+          <Link
+            link="mailto:email@domain.com"
+            className="my-link"
+            onClick={onClick}
+          >
+            This is a link
+          </Link>
+          <Link
+            link="tel:1-562-867-5309"
+            className="my-link-2"
+            onClick={onClick}
+          >
+            This is a link
+          </Link>
+          <Link
+            link="sms:+18664504185&body=Hi%2520there"
+            className="my-link-3"
+            onClick={onClick}
+          >
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.router, "set");
+
+    const anchor = document.querySelector("a.my-link");
+    const anchor2 = document.querySelector("a.my-link-2");
+    const anchor3 = document.querySelector("a.my-link-3");
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor2.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor3.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(onClick).not.toHaveBeenCalled();
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    expect(store.actions.router.set).not.toHaveBeenCalled();
   });
 });
 

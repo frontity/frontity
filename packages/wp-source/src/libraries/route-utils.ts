@@ -13,6 +13,17 @@ export const addFinalSlash = (link: string): string =>
   link.replace(/\/?$/, "/");
 
 /**
+ * Add the first slash to a link. It does nothing if the link already has a
+ * leading slash.
+ *
+ * @param link - The link to be processed.
+ *
+ * @returns The same link but with the leading slash.
+ */
+export const addLeadingSlash = (link: string): string =>
+  link.replace(/^\/?/, "/");
+
+/**
  * Turn a query string into a query object.
  *
  * @param queryString - The query, in string format.
@@ -138,12 +149,12 @@ const paramsToLink = ({
   hash = "",
 }: LinkParams): string => {
   // Use route if present, otherwise use path.
-  path = route || path;
+  route = route || path;
 
-  // Correct the path.
-  path = addFinalSlash(path);
+  // Correct the route.
+  route = addFinalSlash(route);
 
-  const pathAndPage = page > 1 ? `${path}page/${page}/` : path;
+  const pathAndPage = page > 1 ? `${route}page/${page}/` : route;
   const queryString = objToQuery(query);
 
   return `${pathAndPage.toLowerCase()}${queryString}${hash}`;

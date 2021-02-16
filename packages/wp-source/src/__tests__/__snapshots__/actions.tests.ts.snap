@@ -152,7 +152,7 @@ Array [
   Object {
     "func": [MockFunction],
     "name": "cpt1",
-    "pattern": "/cpt1/:slug/",
+    "pattern": "/cpt1/(.*)?/:slug/",
     "priority": 10,
   },
   Object {
@@ -164,7 +164,7 @@ Array [
   Object {
     "func": [MockFunction],
     "name": "cpt2",
-    "pattern": "/cpt2/:slug/",
+    "pattern": "/cpt2/(.*)?/:slug/",
     "priority": 10,
   },
   Object {

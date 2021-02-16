@@ -1,0 +1,34 @@
+{
+  "name": "@frontity/amp",
+  "version": "0.0.1",
+  "description": "The Frontity package for AMP",
+  "main": "src/index.ts",
+  "keywords": [
+    "frontity",
+    "frontity-amp"
+  ],
+  "homepage": "https://frontity.org",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
+  },
+  "bugs": {
+    "url": "https://community.frontity.org"
+  },
+  "scripts": {
+    "test:ci": "../../node_modules/.bin/jest --passWithNoTests --ci --coverage",
+    "test": "../../node_modules/.bin/jest --watch",
+    "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
+  },
+  "dependencies": {
+    "@frontity/source": "^1.5.1",
+    "frontity": "^1.14.1"
+  },
+  "devDependencies": {
+    "@frontity/connect": "^1.2.1",
+    "@frontity/wp-source": "^1.11.1",
+    "clone-deep": "^4.0.1",
+    "deepmerge": "^4.2.2"
+  }
+}

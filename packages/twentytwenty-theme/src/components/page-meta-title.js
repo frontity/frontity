@@ -1,4 +1,3 @@
-import React from "react";
 import { Head, connect, decode } from "frontity";
 
 const Title = ({ state }) => {

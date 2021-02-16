@@ -174,10 +174,6 @@ describe("route utils - parse", () => {
 });
 
 describe("route utils - stringify", () => {
-  //
-
-  // Those tests can be removed when we deprecate the `path`
-  // parameter in favour of the `route` parameter
   describe("using only the `path` parameter", () => {
     test("from params (fixes path)", () => {
       expect(stringify({ path: "/some/path" })).toBe("/some/path/");
@@ -334,5 +330,20 @@ describe("route utils - normalize", () => {
 
   test("from name (page)", () => {
     expect(normalize("custom-list/page/2/")).toBe("custom-list/page/2/");
+  });
+
+  test("final `/amp` path is not removed by default", () => {
+    expect(normalize("/amp")).toBe("/amp/");
+    expect(normalize("/category/amp/")).toBe("/category/amp/");
+    expect(normalize("/tag/amp/")).toBe("/tag/amp/");
+    expect(normalize("/taxonomy/amp/")).toBe("/taxonomy/amp/");
+    expect(normalize("/posts/amp/")).toBe("/posts/amp/");
+    expect(normalize("/parent/some-page/amp/")).toBe("/parent/some-page/amp/");
+    expect(normalize("/amp/?a=1&b=1#some-hash")).toBe(
+      "/amp/?a=1&b=1#some-hash"
+    );
+    expect(normalize("/amp/page/3/?a=1&b=1#some-hash")).toBe(
+      "/amp/page/3/?a=1&b=1#some-hash"
+    );
   });
 });

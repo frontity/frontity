@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Static from "../static";
 
 const Dynamic2: React.FC = () => {

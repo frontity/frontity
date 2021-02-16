@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { css, connect } from "frontity";
 import { Connect } from "frontity/types";
 import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";

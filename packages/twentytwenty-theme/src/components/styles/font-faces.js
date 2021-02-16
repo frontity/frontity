@@ -1,4 +1,3 @@
-import React from "react";
 import { Global, css, connect } from "frontity";
 import InterMedium from "../../fonts/inter/Inter-Medium.woff2";
 import InterBold from "../../fonts/inter/Inter-Bold.woff2";

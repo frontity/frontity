@@ -35,8 +35,10 @@ tsNode.register({
     esModuleInterop: true,
     // Resolve JSON files.
     resolveJsonModule: true,
-    // Support for JSX.
-    jsx: "react",
+    // Support for JSX runtime.
+    jsx: "react-jsx",
+    // Support for emotion css prop with types
+    jsxImportSource: "@emotion/react",
     // Transpile JS as well.
     allowJs: true,
   },
@@ -119,7 +121,7 @@ export default async ({
   port,
   target,
   openBrowser = true,
-  publicPath,
+  publicPath = "/static/",
 }: DevOptions): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
@@ -163,16 +165,6 @@ export default async ({
     webpackDevMiddleware(compiler, {
       publicPath: clientWebpack.output.publicPath,
       writeToDisk: true,
-      stats: {
-        all: false,
-        hash: false,
-        assets: true,
-        colors: true,
-        errors: true,
-        warnings: true,
-        errorDetails: true,
-        excludeAssets: /chunks\..*?\.json/,
-      },
     })
   );
   app.use(webpackHotMiddleware(compiler.compilers[0]));

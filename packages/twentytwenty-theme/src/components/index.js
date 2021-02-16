@@ -1,6 +1,5 @@
 import { connect, Global, Head, styled } from "frontity";
 import Switch from "@frontity/components/switch";
-import React from "react";
 import Footer from "./footer";
 import globalStyles from "./styles/global-styles";
 import FontFaces from "./styles/font-faces";

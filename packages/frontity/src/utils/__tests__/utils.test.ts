@@ -1,4 +1,9 @@
-import { isPackageNameValid, fetchPackageVersion } from "../";
+import {
+  isPackageNameValid,
+  fetchPackageVersion,
+  isNamespaceValid,
+  toCamelCase,
+} from "../";
 import * as fetch from "node-fetch";
 
 describe("isPackageNameValid", () => {
@@ -91,6 +96,32 @@ describe("fetchPackageVersion", () => {
     await expect(fetchPackageVersion("non-existent")).rejects.toThrow();
     expect(mockedFetch).toHaveBeenCalledWith(
       "https://registry.npmjs.com/non-existent"
+    );
+  });
+});
+
+describe("Namespace", () => {
+  test("isNamespaceValid", () => {
+    expect(isNamespaceValid("namespace")).toBe(true);
+    expect(isNamespaceValid("namespaceCamelCasedItsFine")).toBe(true);
+    expect(isNamespaceValid("namespace-dash-separated")).toBe(false);
+    expect(isNamespaceValid("namespace-Dash-Separated-with-UpperCased")).toBe(
+      false
+    );
+  });
+  test("toCamelCase", () => {
+    // These should not get transformed since they do not contain invalid chars
+    expect(toCamelCase("namespace")).toBe("namespace");
+    expect(toCamelCase("namespaceCamelCasedItsFine")).toBe(
+      "namespaceCamelCasedItsFine"
+    );
+
+    // The next two should be converted to camelCase
+    expect(toCamelCase("namespace-dash-separated")).toBe(
+      "namespaceDashSeparated"
+    );
+    expect(toCamelCase("namespace-Dash-Separated-with-UpperCased")).toBe(
+      "namespaceDashSeparatedWithUpperCased"
     );
   });
 });
