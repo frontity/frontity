@@ -32,4 +32,11 @@ describe("AMP client hydration tests", () => {
 
     expect(store.libraries.frontity.App).not.toEqual(previousApp);
   });
+
+  test("The `App` uses the CacheProvider", () => {
+    store.actions.amp.beforeCSR();
+    const contents = store.libraries.frontity.App();
+
+    expect(contents).toMatchSnapshot();
+  });
 });

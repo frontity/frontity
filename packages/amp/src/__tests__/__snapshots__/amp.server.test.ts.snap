@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AMP server tests The \`render\` method uses the CacheProvider 1`] = `
+Object {
+  "App": [Function],
+}
+`;
+
+exports[`AMP server tests The \`render\` method uses the CacheProvider 2`] = `
+<Context.Provider
+  value={
+    Object {
+      "insert": [Function],
+      "inserted": Object {},
+      "key": "css-amp",
+      "nonce": undefined,
+      "registered": Object {},
+      "sheet": StyleSheet {
+        "_insertTag": [Function],
+        "before": null,
+        "container": <head />,
+        "ctr": 0,
+        "isSpeedy": false,
+        "key": "css-amp",
+        "nonce": undefined,
+        "prepend": undefined,
+        "tags": Array [],
+      },
+    }
+  }
+>
+  <mockConstructor />
+</Context.Provider>
+`;
+
+exports[`AMP server tests The \`template\` method uses the previous result 1`] = `
+Object {
+  "head": Array [
+    "<style data-emotion=\\"css-amp id1\\">css</style>",
+  ],
+  "html": "html",
+  "scripts": Array [],
+}
+`;

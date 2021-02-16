@@ -39,6 +39,16 @@ interface FrontityTemplate {
    * The html value. Usually this holds the `result` contents.
    */
   html: any;
+
+  /**
+   * The body attributes.
+   */
+  bodyAttributes?: string;
+
+  /**
+   * The html attributes.
+   */
+  htmlAttributes?: string;
 }
 
 /**

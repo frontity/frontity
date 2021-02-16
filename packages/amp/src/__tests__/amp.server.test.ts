@@ -3,6 +3,10 @@ import clone from "clone-deep";
 import { Packages } from "../../types";
 import Amp from "../server";
 
+jest.mock("@emotion/server/create-instance", () => () => ({
+  extractCritical: jest.fn().mockImplementation((args) => args),
+}));
+
 describe("AMP server tests", () => {
   let store: InitializedStore<Packages>;
 
@@ -19,9 +23,9 @@ describe("AMP server tests", () => {
         stringify: jest.fn(),
       },
       frontity: {
-        App: jest.fn(),
-        render: jest.fn(),
-        template: jest.fn(),
+        App: jest.fn().mockImplementation((args) => args),
+        render: jest.fn().mockImplementation((args) => args),
+        template: jest.fn().mockImplementation((args) => args),
       },
     };
   });
@@ -34,5 +38,41 @@ describe("AMP server tests", () => {
 
     expect(store.libraries.frontity.render).not.toEqual(previousRender);
     expect(store.libraries.frontity.template).not.toEqual(previousTemplate);
+  });
+
+  test("The `render` method uses the CacheProvider", () => {
+    const previousRender = store.libraries.frontity.render;
+
+    // Call the beforeSSR action.
+    store.actions.amp.beforeSSR();
+
+    const render = store.libraries.frontity.render;
+    const result = render({ App: store.libraries.frontity.App });
+
+    expect(result).toMatchSnapshot();
+    expect(previousRender).toBeCalled();
+
+    // Expect the App contents to be overwritten with the cache provider.
+    const contents = result.App();
+    expect(contents).toMatchSnapshot();
+  });
+
+  test("The `template` method uses the previous result", () => {
+    const previousTemplate = store.libraries.frontity.template;
+
+    // Call the beforeSSR action.
+    store.actions.amp.beforeSSR();
+
+    const template = store.libraries.frontity.template;
+
+    expect(
+      template({
+        result: { html: "html", css: "css", ids: ["id1"] },
+        head: [],
+        html: "initial",
+        scripts: [],
+      })
+    ).toMatchSnapshot();
+    expect(previousTemplate).toBeCalled();
   });
 });
