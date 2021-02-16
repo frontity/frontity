@@ -1,6 +1,6 @@
 import { error, batch } from "frontity";
 import WpSource from "../types";
-import { concatLink } from "./libraries/route-utils";
+import { addFinalSlash, concatLink } from "./libraries/route-utils";
 import { wpOrg, wpCom } from "./libraries/patterns";
 import { getMatch } from "./libraries/get-match";
 import {
@@ -29,7 +29,7 @@ const actions: WpSource["actions"]["source"] = {
     // Get link and link params.
     const link = normalize(resource);
     const linkParams = parse(resource);
-    const { query, page } = linkParams;
+    const { query, page, hash } = linkParams;
 
     // Get options.
     const force = options ? options.force : false;
@@ -83,9 +83,9 @@ const actions: WpSource["actions"]["source"] = {
         route = redirection.func(redirection.params);
 
         // Derive the link from the "redirected" route.
-        // We have to add the route and page back by calling `stringify()`
+        // We have to add the route, page, query and hash back by calling `stringify()`
         // because they might have been removed by the redirection.
-        linkForHandler = stringify({ route, page, query });
+        linkForHandler = addFinalSlash(stringify({ route, page, query, hash }));
       }
 
       // Check if we need to check if it is a 30X redirection before fetching
