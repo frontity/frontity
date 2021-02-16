@@ -186,6 +186,16 @@ const tasks = {
 };
 
 /**
+ * The utility type which facilitates extracting the types for the
+ * individual cypress tasks.
+ */
+export type taskTypes = <T extends keyof typeof tasks>(
+  event: T,
+  arg?: Parameters<typeof tasks[T]>[0],
+  options?: Partial<Cypress.Loggable & Cypress.Timeoutable>
+) => Cypress.Chainable<any>;
+
+/**
  * The plugins export.
  *
  * @param on - The callback from Cypress.
