@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
-import { State } from "frontity/types";
 import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll from "../use-infinite-scroll";
 import WpSource from "@frontity/wp-source/types";
 import Router from "@frontity/router/types";
-import { isArchive, isError, isRedirection } from "@frontity/source";
+import { isArchive, isError } from "@frontity/source";
+import { getLinksFromPages } from "./utils";
 import {
   InfiniteScrollRouterState,
   IntersectionOptions,
@@ -16,42 +16,6 @@ import {
   UsePostTypeInfiniteScrollOutput,
   WrapperGeneratorParams,
 } from "./types";
-
-/**
- * Get links from pages, removing all redirected links.
- *
- * @param pages - List of links pointing to archive pages.
- * @param firstLink - Link that should be removed.
- * @param state - Frontity state.
- * @returns A list of links containing the posts, with redirections resolved.
- */
-const getLinksFromPages = (
-  pages: string[],
-  firstLink: string,
-  state: State<Packages>
-): string[] => {
-  // Get the data object of all pages.
-  const pagesData = pages
-    .map((link) => state.source.get(link))
-    .filter((data) => isArchive(data) && data.isReady);
-
-  // Get all the post links from the pages.
-  const rawLinks = pagesData.reduce((allLinks, data, index) => {
-    // Add items from this data object if it's an archive.
-    if (isArchive(data)) {
-      let dataLinks = data.items.map(({ link }) => link);
-      if (index > 0) dataLinks = dataLinks.filter((link) => link !== firstLink);
-      allLinks = allLinks.concat(dataLinks);
-    }
-    return allLinks;
-  }, [] as string[]);
-
-  // Remove links that point to redirections.
-  return rawLinks
-    .map((link) => state.source.get(link))
-    .filter((data) => !isRedirection(data))
-    .map(({ link }) => link);
-};
 
 /**
  * A function that generates Wrapper components.
@@ -91,7 +55,7 @@ export const wrapperGenerator = ({
     const current = state.source.get(link);
     const firstLink = links[0];
 
-    const sourceLinks = getLinksFromPages(pages, firstLink, state);
+    const sourceLinks = getLinksFromPages({ pages, firstLink, state });
     const currentIndex = sourceLinks.indexOf(link);
     const nextLink = sourceLinks[currentIndex + 1];
 
@@ -267,7 +231,7 @@ const usePostTypeInfiniteScroll = (
       ? state.source.get(lastPage.next)
       : null;
 
-  const sourceLinks = getLinksFromPages(pages, firstLink, state);
+  const sourceLinks = getLinksFromPages({ pages, firstLink, state });
 
   const lastIndex = sourceLinks.indexOf(last.link);
   const [lastLink] = sourceLinks.slice(-1);
@@ -356,7 +320,7 @@ const usePostTypeInfiniteScroll = (
         await actions.source.fetch(nextPage.link);
       }
 
-      const sourceLinks = getLinksFromPages(pages, firstLink, state);
+      const sourceLinks = getLinksFromPages({ pages, firstLink, state });
 
       nextLink = sourceLinks[lastIndex + 1];
     }
