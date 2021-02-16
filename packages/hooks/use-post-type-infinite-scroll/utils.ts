@@ -16,7 +16,7 @@ type GetLinksFromPagesParams = {
   /**
    * The first link showed by the infinite scroll hook. The link is removed from
    * the second and subsequent pages if it's not included in the first one, in
-   * order to avoid showing it twice.
+   * order to avoid duplicated links.
    *
    * @example "/blog/first-post/"
    */

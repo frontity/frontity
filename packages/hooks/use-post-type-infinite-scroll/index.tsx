@@ -55,17 +55,16 @@ export const wrapperGenerator = ({
     const current = state.source.get(link);
     const firstLink = links[0];
 
-    const sourceLinks = getLinksFromPages({ pages, firstLink, state });
-    const currentIndex = sourceLinks.indexOf(link);
-    const nextLink = sourceLinks[currentIndex + 1];
+    const itemLinks = getLinksFromPages({ pages, firstLink, state });
+    const currentIndex = itemLinks.indexOf(link);
+    const nextLink = itemLinks[currentIndex + 1];
 
     // Infinite scroll booleans.
     const hasReachedLimit = !!limit && links.length >= limit;
 
     const { supported, fetchRef, routeRef } = useInfiniteScroll({
       currentLink: link,
-      // nextLink: nextItem?.link,
-      nextLink: nextLink,
+      nextLink,
       fetchInViewOptions,
       routeInViewOptions,
     });
@@ -222,34 +221,34 @@ const usePostTypeInfiniteScroll = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.active]);
 
-  // Aliases to needed state.
-  const firstLink = links[0];
-  const last = state.source.get(links[links.length - 1]);
+  // Data objects of the last archive page fetched and the next one.
   const lastPage = state.source.get(pages[pages.length - 1]);
   const nextPage =
     isArchive(lastPage) && lastPage.next
       ? state.source.get(lastPage.next)
       : null;
 
-  const sourceLinks = getLinksFromPages({ pages, firstLink, state });
+  // The first link that appears at the top of the infinite scroll.
+  const firstLink = links[0];
 
-  const lastIndex = sourceLinks.indexOf(last.link);
-  const [lastLink] = sourceLinks.slice(-1);
+  // Data object of the last entity rendered by the infinite scroll hook.
+  const last = state.source.get(links[links.length - 1]);
 
-  const currentIndex = sourceLinks.indexOf(last.link);
-  const nextLink = sourceLinks[currentIndex + 1];
+  // Get the list of all item links from the archive pages and obtain the data
+  // object of the next entity from there.
+  const itemLinks = getLinksFromPages({ pages, firstLink, state });
+  const lastIndex = itemLinks.indexOf(last.link);
+  const nextLink = itemLinks[lastIndex + 1];
   const next = nextLink ? state.source.get(nextLink) : null;
 
-  // Infinite scroll booleans.
-  const isLastItem = lastLink === state.router.link;
+  // Compute the infinite scroll booleans returned by this hook.
+  const isLastItem = itemLinks[itemLinks.length - 1] === state.router.link;
   const hasReachedLimit = !!limit && links.length >= limit;
   const thereIsNext =
-    lastIndex < sourceLinks.length - 1 ||
+    lastIndex < itemLinks.length - 1 ||
     (isArchive(lastPage) && !!lastPage.next);
   const isFetching =
-    last.isFetching ||
-    !!next?.isFetching ||
-    (pages.length > 1 && lastPage.isFetching);
+    !!next?.isFetching || (pages.length > 1 && lastPage.isFetching);
   const isLastError = isError(last) || isError(lastPage);
   const isLimit = hasReachedLimit && thereIsNext && !isFetching;
 
@@ -284,7 +283,7 @@ const usePostTypeInfiniteScroll = (
       actions.source.fetch(nextPage.link);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options.active, state.router.link, sourceLinks.length, hasReachedLimit]);
+  }, [options.active, state.router.link, itemLinks.length, hasReachedLimit]);
 
   /**
    * Function to fetch the next item disregarding the limit.
@@ -297,7 +296,7 @@ const usePostTypeInfiniteScroll = (
       : [state.router.link];
 
     // We need `nextItem` to be declared in local scope.
-    let nextLink = sourceLinks[lastIndex + 1];
+    let nextLink = itemLinks[lastIndex + 1];
 
     if (isLastError) {
       if (isError(lastPage))
@@ -320,9 +319,9 @@ const usePostTypeInfiniteScroll = (
         await actions.source.fetch(nextPage.link);
       }
 
-      const sourceLinks = getLinksFromPages({ pages, firstLink, state });
+      const itemLinks = getLinksFromPages({ pages, firstLink, state });
 
-      nextLink = sourceLinks[lastIndex + 1];
+      nextLink = itemLinks[lastIndex + 1];
     }
 
     if (isLastError) {
