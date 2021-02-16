@@ -8,7 +8,7 @@ import Package from "../types";
  * @returns React element.
  */
 const GlobalBackgroundBlue = () => {
-  const [global, setGlobal] = React.useState(false);
+  const [global, setGlobal] = React.useState(true);
   return (
     <>
       {global && (
@@ -34,7 +34,7 @@ const GlobalBackgroundBlue = () => {
  * @returns React element.
  */
 const GlobalColorRed = () => {
-  const [global, setGlobal] = React.useState(false);
+  const [global, setGlobal] = React.useState(true);
   return (
     <>
       {global && (
