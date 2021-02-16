@@ -8,7 +8,6 @@ const settings = {
     },
   },
   packages: [
-    "@frontity/amp",
     "@frontity/tiny-router",
     "@frontity/html2react",
     {
