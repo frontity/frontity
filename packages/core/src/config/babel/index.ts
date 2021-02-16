@@ -1,6 +1,6 @@
 import { TransformOptions } from "@babel/core";
 import { TargetsOptions } from "@babel/preset-env";
-import { Target, Mode, BabelConfigs } from "../../../types";
+import { Target, BabelConfigs } from "../../../types";
 
 const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
   /**

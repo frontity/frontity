@@ -29,9 +29,6 @@
     "copy-files": "copyfiles -u 1 \"src/**/*.applescript\" dist/src"
   },
   "dependencies": {
-    "@emotion/babel-preset-css-prop": "^10.0.9",
-    "@emotion/core": "^10.0.22",
-    "babel-plugin-frontity": "^1.0.2",
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
