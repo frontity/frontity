@@ -3,7 +3,7 @@
   "private": false,
   "scripts": {
     "start": "node e2e.js",
-    "browserstack": "nodenv --exec 'browserstack-cypress run'",
+    "browserstack": "nodenv --exec 'browserstack-cypress run --sync'",
     "local:macos": "nodenv --exec './browserstack-local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\"'",
     "local:macos:start": "nodenv --exec './browserstack-local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start'",
     "local:macos:stop": "nodenv --exec './browserstack-local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop'",
