@@ -21,7 +21,7 @@ import {
  * @param options - The link for the page that the Wrapper belongs to
  * and the intersection observer options for fetching and routing.
  *
- * @returns A React component that should be used to wrap the post.
+ * @returns A React component that should be used to wrap the page.
  */
 export const wrapperGenerator = ({
   link,
