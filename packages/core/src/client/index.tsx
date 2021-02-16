@@ -22,6 +22,10 @@ export default async ({ packages }) => {
         packages,
       });
 
+      store.libraries.frontity.App = function FrontityApp() {
+        return <App store={store} />;
+      };
+
       // Run init actions.
       await Promise.all(
         Object.values(store.actions).map(({ init }) => {
@@ -39,7 +43,9 @@ export default async ({ packages }) => {
       }
 
       loadableReady(() => {
-        hydrate(<App store={store} />, window.document.getElementById("root"));
+        const MainApp = store.libraries.frontity.App;
+
+        hydrate(<MainApp />, window.document.getElementById("root"));
 
         // Switch to CSR mode.
         store.state.frontity.rendering = "csr";

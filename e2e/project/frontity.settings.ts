@@ -438,6 +438,10 @@ const settings: Settings<
     },
     packages: ["e2e-render", "@frontity/tiny-router", "@frontity/wp-source"],
   },
+  {
+    name: "custom-render",
+    packages: ["e2e-custom-render"],
+  },
 ];
 
 export default settings;

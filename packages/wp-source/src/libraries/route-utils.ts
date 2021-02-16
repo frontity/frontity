@@ -149,12 +149,12 @@ const paramsToLink = ({
   hash = "",
 }: LinkParams): string => {
   // Use route if present, otherwise use path.
-  path = route || path;
+  route = route || path;
 
-  // Correct the path.
-  path = addFinalSlash(path);
+  // Correct the route.
+  route = addFinalSlash(route);
 
-  const pathAndPage = page > 1 ? `${path}page/${page}/` : path;
+  const pathAndPage = page > 1 ? `${route}page/${page}/` : route;
   const queryString = objToQuery(query);
 
   return `${pathAndPage.toLowerCase()}${queryString}${hash}`;
