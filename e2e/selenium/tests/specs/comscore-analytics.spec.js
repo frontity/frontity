@@ -5,10 +5,19 @@ const assert = require("assert");
 describe("comscore-analytics", function () {
   this.timeout(600000);
   let vars;
-  let ImageBackup;
   beforeEach(async function () {
     vars = {};
   });
+  const pageviewHome = {
+    title: "Homepage Title",
+    link: "http://localhost:3000/",
+  };
+
+  const pageviewSomePost = {
+    title: "Some Post Title",
+    link: "http://localhost:3000/some-post/",
+  };
+
   it("comscore-analytics", async function () {
     // 1. Should load the script
     await driver.get("http://localhost:3000/?frontity_name=comscore-analytics");
@@ -17,6 +26,47 @@ describe("comscore-analytics", function () {
       await driver.executeScript(
         "return document.querySelector('script[src=\"https://sb.scorecardresearch.com/beacon.js\"][async]')"
       )
+    );
+
+    // 2. Should have sent the first pageview
+    assert.deepEqual(
+      await driver.executeScript("return window.comscoreCalls[0]"),
+      { id: "111111", ...pageviewHome }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.comscoreCalls[1]"),
+      { id: "222222", ...pageviewHome }
+    );
+
+    // 3. Should send a pageview if the page changes
+    await driver.findElement(By.id("change-link")).click();
+    assert.deepEqual(
+      await driver.executeScript("return window.comscoreCalls[2]"),
+      { id: "111111", ...pageviewSomePost }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.comscoreCalls[3]"),
+      { id: "222222", ...pageviewSomePost }
+    );
+
+    // 4. Should send pageviews when going back and forward
+    await driver.executeScript("return window.history.back()");
+    assert.deepEqual(
+      await driver.executeScript("return window.comscoreCalls[4]"),
+      { id: "111111", ...pageviewHome }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.comscoreCalls[5]"),
+      { id: "222222", ...pageviewHome }
+    );
+    await driver.executeScript("return window.history.forward()");
+    assert.deepEqual(
+      await driver.executeScript("return window.comscoreCalls[6]"),
+      { id: "111111", ...pageviewSomePost }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.comscoreCalls[7]"),
+      { id: "222222", ...pageviewSomePost }
     );
   });
 });
