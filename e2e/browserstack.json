@@ -17,6 +17,7 @@
   ],
   "run_settings": {
     "cypress_config_file": "./cypress.json",
+    "cypress_version": "6",
     "project_name": "Frontity",
     "build_name": "Test build",
     "exclude": [],
