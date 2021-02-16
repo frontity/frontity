@@ -24,7 +24,7 @@ const actions: WpSource["actions"]["source"] = {
 
     // Get the normalize and parse from libraries instead of importing them.
     // This way they can be e.g. overriden at runtime by another package
-    const { normalize, parse } = libraries.source;
+    const { normalize, parse, stringify } = libraries.source;
 
     // Get link and link params.
     const link = normalize(resource);
@@ -83,7 +83,9 @@ const actions: WpSource["actions"]["source"] = {
         route = redirection.func(redirection.params);
 
         // Derive the link from the "redirected" route.
-        linkForHandler = normalize(route);
+        // We have to add the route and page back by calling `stringify()`
+        // because they might have been removed by the redirection.
+        linkForHandler = stringify({ route, page, query });
       }
 
       // Check if we need to check if it is a 30X redirection before fetching
