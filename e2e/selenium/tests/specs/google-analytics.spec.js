@@ -8,6 +8,15 @@ describe("google-analytics", function () {
   beforeEach(async function () {
     vars = {};
   });
+  const pageviewHome = {
+    title: "Homepage Title",
+    link: "/",
+  };
+
+  const pageviewSomePost = {
+    title: "Some Post Title",
+    link: "/some-post/",
+  };
 
   it("google-analytics", async function () {
     // 1. Should load the Google Analytics library
@@ -22,78 +31,101 @@ describe("google-analytics", function () {
     assert(await driver.executeScript("return window.ga"));
 
     // 2. Should have sent the first pageview
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-XXXXXX-X'].hitcount"
-      ),
-      1
-    );
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-YYYYYY-Y'].hitcount"
-      ),
-      1
-    );
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[0]"), [
+      "tracker_UA_XXXXXX_X.send",
+      {
+        hitType: "pageview",
+        page: pageviewHome.link,
+        title: pageviewHome.title,
+      },
+    ]);
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[1]"), [
+      "tracker_UA_YYYYYY_Y.send",
+      {
+        hitType: "pageview",
+        page: pageviewHome.link,
+        title: pageviewHome.title,
+      },
+    ]);
 
     // 3. Should send a pageview if the page changes
     await driver.findElement(By.id("change-link")).click();
-    // WE SHOULD CHECK HERE IF THE SENT ARGUMENTS ARE CORRECT BUT I DON'T KNOW HOW
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-XXXXXX-X'].hitcount"
-      ),
-      2
-    );
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-YYYYYY-Y'].hitcount"
-      ),
-      2
-    );
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[2]"), [
+      "tracker_UA_XXXXXX_X.send",
+      {
+        hitType: "pageview",
+        page: pageviewSomePost.link,
+        title: pageviewSomePost.title,
+      },
+    ]);
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[3]"), [
+      "tracker_UA_YYYYYY_Y.send",
+      {
+        hitType: "pageview",
+        page: pageviewSomePost.link,
+        title: pageviewSomePost.title,
+      },
+    ]);
 
     // 4. Should send pageviews when going back and forward
-    //    WE SHOULD CHECK HERE IF THE SENT ARGUMENTS ARE CORRECT BUT I DON'T
-    //    KNOW HOW
     await driver.executeScript("return window.history.back()");
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-XXXXXX-X'].hitcount"
-      ),
-      3
-    );
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-YYYYYY-Y'].hitcount"
-      ),
-      3
-    );
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[4]"), [
+      "tracker_UA_XXXXXX_X.send",
+      {
+        hitType: "pageview",
+        page: pageviewHome.link,
+        title: pageviewHome.title,
+      },
+    ]);
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[5]"), [
+      "tracker_UA_YYYYYY_Y.send",
+      {
+        hitType: "pageview",
+        page: pageviewHome.link,
+        title: pageviewHome.title,
+      },
+    ]);
     await driver.executeScript("return window.history.forward()");
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-XXXXXX-X'].hitcount"
-      ),
-      4
-    );
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-YYYYYY-Y'].hitcount"
-      ),
-      4
-    );
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[6]"), [
+      "tracker_UA_XXXXXX_X.send",
+      {
+        hitType: "pageview",
+        page: pageviewSomePost.link,
+        title: pageviewSomePost.title,
+      },
+    ]);
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[7]"), [
+      "tracker_UA_YYYYYY_Y.send",
+      {
+        hitType: "pageview",
+        page: pageviewSomePost.link,
+        title: pageviewSomePost.title,
+      },
+    ]);
 
     // 5. Should send events
     await driver.findElement(By.id("send-event")).click();
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-XXXXXX-X'].hitcount"
-      ),
-      5
-    );
-    assert.equal(
-      await driver.executeScript(
-        "return window.gaData['UA-YYYYYY-Y'].hitcount"
-      ),
-      5
-    );
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[8]"), [
+      "tracker_UA_XXXXXX_X.send",
+      {
+        hitType: "event",
+        eventAction: "some event",
+        content: "some content",
+        eventCategory: undefined,
+        eventLabel: undefined,
+        eventValue: undefined,
+      },
+    ]);
+    assert.deepEqual(await driver.executeScript("return window.gaCalls[9]"), [
+      "tracker_UA_YYYYYY_Y.send",
+      {
+        hitType: "event",
+        eventAction: "some event",
+        content: "some content",
+        eventCategory: undefined,
+        eventLabel: undefined,
+        eventValue: undefined,
+      },
+    ]);
   });
 });
