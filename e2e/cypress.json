@@ -1,7 +1,7 @@
 {
   "integrationFolder": "integration",
   "fixturesFolder": "fixtures",
-  "pluginsFile": "plugins/index.js",
+  "pluginsFile": "plugins/index.ts",
   "screenshotsFolder": "screenshots",
   "supportFile": "support/index.js",
   "videosFolder": "videos",
