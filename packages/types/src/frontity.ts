@@ -2,6 +2,46 @@ import Package from "./package";
 import { MonoSettings } from "./settings";
 
 /**
+ * The frontity render method interface.
+ */
+interface FrontityRender {
+  /**
+   * The `App` reference that will need to be passed to renderToString.
+   */
+  App: Frontity["libraries"]["frontity"]["App"];
+
+  /**
+   * The `chunkCollector` function that will collect the chunks.
+   */
+  chunkCollector?: (jsx: unknown[]) => any;
+}
+
+/**
+ * The frontity template method interface.
+ */
+interface FrontityTemplate {
+  /**
+   * This is the result output from `render()`.
+   */
+  result?: any;
+
+  /**
+   * The list of head tags.
+   */
+  head: string[];
+
+  /**
+   * The list of scripts that will be appended to the body.
+   */
+  scripts: string[];
+
+  /**
+   * The html value. Usually this holds the `result` contents.
+   */
+  html: any;
+}
+
+/**
  * All the properties exposed by the Frontity framework.
  */
 interface Frontity extends Package {
@@ -110,6 +150,32 @@ interface Frontity extends Package {
        * Populated by the user in `frontity.settings.js`.
        */
       url?: string;
+    };
+  };
+
+  /**
+   * The `frontity` inner libraries namespace.
+   */
+  libraries: {
+    /**
+     * The reserved frontity namespace.
+     */
+    frontity: {
+      /**
+       * The `App` component that `frontity` will use to render.
+       */
+      App: (...params: unknown[]) => any;
+
+      /**
+       * The `render` method that `frontity` will use to render on the server.
+       */
+      render: (params: FrontityRender) => any;
+
+      /**
+       * The `template` method that `frontity` will use to compose
+       * the template on the server.
+       */
+      template: (params: FrontityTemplate) => string;
     };
   };
 }

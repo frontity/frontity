@@ -19,6 +19,7 @@ describe("AMP server tests", () => {
         stringify: jest.fn(),
       },
       frontity: {
+        App: jest.fn(),
         render: jest.fn(),
         template: jest.fn(),
       },

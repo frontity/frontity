@@ -1,6 +1,7 @@
 import { CacheProvider } from "frontity";
 import createCache from "@emotion/cache";
 import config, { CACHE_KEY } from "./config";
+import AMP from "../types";
 
 export default {
   ...config,
@@ -8,7 +9,7 @@ export default {
     amp: {
       ...config.actions.amp,
       beforeCSR({ libraries }) {
-        // Grab a copy of the previous render method.
+        // Grab a copy of the previous value of `App`.
         const PreviousApp = libraries.frontity.App;
         const cache = createCache({ key: CACHE_KEY });
 
@@ -23,4 +24,4 @@ export default {
       },
     },
   },
-};
+} as AMP;

@@ -20,6 +20,8 @@ describe("AMP client hydration tests", () => {
       },
       frontity: {
         App: jest.fn(),
+        render: jest.fn(),
+        template: jest.fn(),
       },
     };
   });

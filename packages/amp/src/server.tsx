@@ -2,6 +2,7 @@ import { CacheProvider } from "frontity";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import config, { CACHE_KEY } from "./config";
+import AMP from "../types";
 
 export default {
   ...config,
@@ -53,4 +54,4 @@ export default {
       },
     },
   },
-};
+} as AMP;

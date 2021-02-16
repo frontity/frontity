@@ -1,4 +1,4 @@
-import { Package, Action, MergePackages } from "frontity/types";
+import { Package, Action, MergePackages, Frontity } from "frontity/types";
 import Source from "@frontity/source/types";
 
 /**
@@ -52,6 +52,6 @@ interface AMP extends Package {
 /**
  * Packages used internally by the AMP package.
  */
-export type Packages = MergePackages<AMP, Source>;
+export type Packages = MergePackages<AMP, Source, Frontity>;
 
 export default AMP;
