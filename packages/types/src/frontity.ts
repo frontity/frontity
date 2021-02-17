@@ -11,9 +11,9 @@ interface FrontityRender {
   App: Frontity["libraries"]["frontity"]["App"];
 
   /**
-   * The `chunkCollector` function that will collect the chunks.
+   * The `collectChunks` function that will collect the chunks.
    */
-  chunkCollector?: (jsx: unknown[]) => any;
+  collectChunks?: (jsx: unknown) => any;
 }
 
 /**

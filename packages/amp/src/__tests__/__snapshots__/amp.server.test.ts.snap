@@ -1,12 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AMP server tests The \`render\` method uses the CacheProvider 1`] = `
-Object {
-  "App": [Function],
-}
-`;
-
-exports[`AMP server tests The \`render\` method uses the CacheProvider 2`] = `
 <Context.Provider
   value={
     Object {
@@ -34,11 +28,19 @@ exports[`AMP server tests The \`render\` method uses the CacheProvider 2`] = `
 `;
 
 exports[`AMP server tests The \`template\` method uses the previous result 1`] = `
-Object {
-  "head": Array [
-    "<style data-emotion=\\"css-amp id1\\">css</style>",
-  ],
-  "html": "html",
-  "scripts": Array [],
-}
+"
+    <!doctype html>
+    <html amp null>
+      <head>
+        <meta charset=\\"utf-8\\">
+        <script async src=\\"https://cdn.ampproject.org/v0.js\\"></script>
+        <meta name=\\"viewport\\" content=\\"width=device-width\\">
+        <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+        <style amp-custom data-emotion=\\"css-amp id1\\">css</style>
+      </head>
+      <body null>
+        html
+      </body>
+    </html>
+    "
 `;
