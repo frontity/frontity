@@ -1,4 +1,4 @@
-import { Package, Action, MergePackages } from "frontity/types";
+import { Package, Action, MergePackages, Frontity } from "frontity/types";
 import Html2React from "@frontity/html2react/types";
 import Source from "@frontity/source/types";
 
@@ -34,6 +34,6 @@ interface AMP extends Package {
 /**
  * Packages used internally by the AMP package.
  */
-export type Packages = MergePackages<AMP, Source, Html2React>;
+export type Packages = MergePackages<AMP, Source, Html2React, Frontity>;
 
 export default AMP;

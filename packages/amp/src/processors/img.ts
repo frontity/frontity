@@ -1,13 +1,10 @@
 import { Processor, Element } from "@frontity/html2react/types";
+import { Packages } from "../../types";
 
-const image: Processor<Element> = {
+export const image: Processor<Element, Packages> = {
   test: ({ node }) => node.component === "img",
   processor: ({ node }) => {
     node.component = "amp-img";
     return node;
   },
 };
-
-const processors = [image];
-
-export default processors;
