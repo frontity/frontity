@@ -20,10 +20,9 @@ export const settingsAndStore = (packages) => async (
   // Get the settings name from the query. In the case the `name` option is an
   // array, the last value is used.
   const nameOption = ctx.query.frontity_name;
-  const name =
-    typeof nameOption === "string"
-      ? nameOption
-      : nameOption[nameOption.length - 1];
+  const name = Array.isArray(nameOption)
+    ? nameOption[nameOption.length - 1]
+    : nameOption;
 
   // Get settings.
   const settings = (ctx.state.settings = await getSettings({
