@@ -1,3 +1,4 @@
-import { image } from "./img";
+import { img } from "./img";
+import { iframe } from "./iframe";
 
-export default [image];
+export default [img, iframe];
