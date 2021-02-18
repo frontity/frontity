@@ -1,4 +1,19 @@
 /**
+ * Props for {@link ampTemplate}.
+ */
+interface AmpTemplateProps {
+  /**
+   * The content that will be injected in the <body/> of the AMP template.
+   */
+  body?: string;
+
+  /**
+   * The content that will be injected in the <head/> of the AMP template.
+   */
+  head?: string;
+}
+
+/**
  *
  * A template containing the bare minimum AMP HTML which
  * passes the https://validator.ampproject.org/.
@@ -7,7 +22,7 @@
  *
  * @returns A valid AMP HTML string.
  */
-const ampTemplate = ({ content }) => `
+const ampTemplate = ({ body = "", head = "" }: AmpTemplateProps) => `
 <!--
      This is the minimum valid AMP HTML document. Type away
      here and the AMP Validator will re-check your document on the fly.
@@ -77,9 +92,10 @@ const ampTemplate = ({ content }) => `
       </style></noscript
     >
     <script async src="https://cdn.ampproject.org/v0.js"></script>
+    ${head}
   </head>
   <body>
-    ${content}
+    ${body}
   </body>
 </html>
 `;
