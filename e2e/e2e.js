@@ -172,7 +172,7 @@ process.env["CYPRESS_FRONTITY_MODE"] =
         if (!spec && suite === "all") {
           await cypress.run({
             env: { WORDPRESS_VERSION: wpVersion },
-            spec: `./integration/**/*.spec.{j,t}s`,
+            spec: `./integration/**/*.spec.js`,
             browser,
           });
         } else {
@@ -180,8 +180,8 @@ process.env["CYPRESS_FRONTITY_MODE"] =
             env: { WORDPRESS_VERSION: wpVersion },
             browser,
             spec: spec
-              ? `./integration/**/${spec}.spec.{j,t}s`
-              : `./integration/${suite}/**/*.spec.{j,t}s`,
+              ? `./integration/**/${spec}.spec.js`
+              : `./integration/${suite}/**/*.spec.js`,
           });
         }
       }
