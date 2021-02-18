@@ -28,7 +28,47 @@ const globalStyles = css`
   }
 `;
 
-const Box = styled.div((props) => [
+/**
+ * The colors.
+ */
+type Colors = "blue-1" | "blue-2" | "dark-1" | "dark-2" | "light-1";
+
+/**
+ * The custom styled Box.
+ */
+interface BoxProps {
+  /**
+   * Padding value.
+   */
+  p?: number;
+
+  /**
+   * Margin value.
+   */
+  m?: number;
+
+  /**
+   * Background color.
+   */
+  bg?: Colors;
+
+  /**
+   * The text color.
+   */
+  color?: Colors;
+
+  /**
+   * The font size.
+   */
+  size?: number;
+
+  /**
+   * The border radius.
+   */
+  r?: number;
+}
+
+const Box = styled.div<BoxProps>((props) => [
   {
     display: "flex",
     flexDirection: "column",
@@ -45,7 +85,7 @@ const Box = styled.div((props) => [
 
 const Text = styled(Box)({
   lineHeight: "1.5",
-});
+}).withComponent("p");
 
 /**
  * The theme root component.
@@ -65,7 +105,7 @@ const Theme = () => {
           Section title about AMP
         </Text>
         <Box p={0.5} />
-        <Text as="p">
+        <Text>
           The content in the body, so far, is pretty straightforward. But
           there’s a lot of additional code in the head of the page that might
           not be immediately obvious. Let’s deconstruct the required mark-up.
@@ -85,7 +125,7 @@ const Theme = () => {
           New article is here
         </Text>
         <Box p={0.5} />
-        <Text as="p">Not that much content I could find to fill in here.</Text>
+        <Text>Not that much content I could find to fill in here.</Text>
         <Box p={0.5} />
         <Text r={0.25} color={"blue-1"}>
           &raquo; Don’t read more

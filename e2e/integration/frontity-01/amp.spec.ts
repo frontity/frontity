@@ -8,15 +8,13 @@ const assertTemplate = () => {
 
 describe("AMP", () => {
   it("should render the template from the server", () => {
-    cy.visitSSR("http://localhost:3001/?frontity_name=custom-render").then(
-      () => {
-        assertTemplate();
-      }
-    );
+    cy.visitSSR("http://localhost:3001/?frontity_name=amp").then(() => {
+      assertTemplate();
+    });
   });
 
   it("should render the template correctly", () => {
-    cy.visit("http://localhost:3001/?frontity_name=custom-render");
+    cy.visit("http://localhost:3001/?frontity_name=amp");
 
     assertTemplate();
   });
