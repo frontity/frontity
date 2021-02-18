@@ -133,7 +133,9 @@ const useArchiveInfiniteScroll = (
   const { state, actions } = useConnect<Packages>();
   const { infiniteScroll } = state.router.state;
 
-  // Values from/for browser state.
+  // Values from/for browser state. If we have already added links to the
+  // browser state, we use those. If not, we start with the initial link. The
+  // same for the limit.
   const links: string[] = infiniteScroll?.links
     ? [...infiniteScroll?.links]
     : [state.router.link];
@@ -171,13 +173,21 @@ const useArchiveInfiniteScroll = (
    */
   const fetchNext = async () => {
     if (
+      // Don't fetch if this hook is not active anymore.
       !options.active ||
+      // Don't fetch if there is no next link and the last one was not an error.
+      // This is because we use the same function to refetch the last link if
+      // there was an error.
       (!thereIsNext && !isLastError) ||
+      // Don't fetch if the next item is already included in the links. This
+      // means it has been already fetched or it won't be there.
       (isArchive(last) && links.includes(last.next))
     )
       return;
 
     if (isLastError) {
+      // If the last link returned an error, we use this function to repeat the
+      // fetch.
       await actions.source.fetch(links[links.length - 1], { force: true });
     } else if (isArchive(last)) {
       links.push(last.next);
