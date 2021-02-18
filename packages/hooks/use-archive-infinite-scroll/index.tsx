@@ -2,13 +2,8 @@ import React, { useEffect } from "react";
 import { useConnect, connect, css } from "frontity";
 import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll from "../use-infinite-scroll";
-import Source from "@frontity/source/types";
-import Router from "@frontity/router/types";
 import { isArchive, isError } from "@frontity/source";
-import {
-  IntersectionOptions,
-  InfiniteScrollRouterState,
-} from "../use-infinite-scroll/types";
+import { IntersectionOptions, Packages } from "../use-infinite-scroll/types";
 import {
   UseArchiveInfiniteScrollOptions,
   UseArchiveInfiniteScrollOutput,
@@ -40,8 +35,8 @@ export const wrapperGenerator = ({
     /** HTML class attribute. */
     className: string;
   }> = ({ children, className }) => {
-    const { state } = useConnect<Source & Router>();
-    const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
+    const { state } = useConnect<Packages>();
+    const { infiniteScroll } = state.router.state;
 
     // Values from browser state.
     const links: string[] = infiniteScroll?.links || [link];
@@ -124,10 +119,10 @@ const MemoizedWrapper = memoize(
  *
  * @param options - Options for the hook, like the number of pages it should
  * load autoamtically or if it's active or not. Defined in {@link
- * UseArchiveInfiniteScroll}.
+ * UseArchiveInfiniteScrollOptions}.
  *
  * @returns - An array of pages and other useful booleans. Defined in {@link
- * UseArchiveInfiniteScroll}.
+ * UseArchiveInfiniteScrollOutput}.
  */
 const useArchiveInfiniteScroll = (
   options: UseArchiveInfiniteScrollOptions = {}
@@ -135,8 +130,8 @@ const useArchiveInfiniteScroll = (
   const defaultOptions = { active: true };
   options = { ...defaultOptions, ...options };
 
-  const { state, actions } = useConnect<Source & Router>();
-  const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
+  const { state, actions } = useConnect<Packages>();
+  const { infiniteScroll } = state.router.state;
 
   // Values from/for browser state.
   const links: string[] = infiniteScroll?.links

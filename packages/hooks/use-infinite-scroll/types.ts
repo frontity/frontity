@@ -1,6 +1,6 @@
 import useInView from "../use-in-view";
-import { MergePackages } from "frontity/types";
-import Source from "@frontity/source/types";
+import { MergePackages, Package } from "frontity/types";
+import WpSource from "@frontity/wp-source/types";
 import Router from "@frontity/router/types";
 
 /**
@@ -113,38 +113,59 @@ export type UseInfiniteScrollOutput =
  */
 export type InfiniteScrollRouterState = {
   /**
-   * The infinite scroll map of props.
+   * Array of visited links.
    */
-  infiniteScroll: {
-    /**
-     * Array of visited links.
-     */
-    links: string[];
-
-    /**
-     * Number of elements that will be automatically fetched.
-     */
-    limit: number;
-
-    /**
-     * List of pages by link.
-     */
-    pages: string[];
-
-    /**
-     * Archive (used by `usePostTypeInfiniteScroll`).
-     */
-    archive?: string;
-  };
+  links: string[];
 
   /**
-   * Any other prop.
+   * Number of elements that will be automatically fetched.
    */
-  [key: string]: unknown;
+  limit: number;
+
+  /**
+   * List of pages by link.
+   */
+  pages: string[];
+
+  /**
+   * Archive (used by `usePostTypeInfiniteScroll`).
+   */
+  archive?: string;
 };
+
+/**
+ * The additional types required by the infinite scroll hooks.
+ */
+interface Hooks extends Package {
+  /**
+   * The state that should be exposed by the Source packages.
+   */
+  state: {
+    /**
+     * Router namespace.
+     */
+    router: {
+      /**
+       * Object saved in `window.history.state`.
+       */
+      state: {
+        /**
+         * Properties added by the {@link useInfiniteScroll} hook to the Router
+         * state property.
+         */
+        infiniteScroll: InfiniteScrollRouterState;
+
+        /**
+         * Any other prop.
+         */
+        [key: string]: unknown;
+      };
+    };
+  };
+}
 
 /**
  * The type of those packages the {@link useInfiniteScroll} hook depends on,
  * merged together.
  */
-export type Packages = MergePackages<Source, Router>;
+export type Packages = MergePackages<WpSource, Router, Hooks>;

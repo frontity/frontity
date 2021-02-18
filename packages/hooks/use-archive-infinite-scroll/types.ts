@@ -15,6 +15,8 @@ export type UseArchiveInfiniteScrollOptions = {
    * useful in situations where users want to share the same component for
    * different types of Archives, but avoid doing infinite scroll in some of
    * them.
+   *
+   * @defaultValue true
    */
   active?: boolean;
 

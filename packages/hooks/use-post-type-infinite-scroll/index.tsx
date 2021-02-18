@@ -2,15 +2,9 @@ import React, { useEffect } from "react";
 import { connect, css, useConnect } from "frontity";
 import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll from "../use-infinite-scroll";
-import WpSource from "@frontity/wp-source/types";
-import Router from "@frontity/router/types";
 import { isArchive, isError } from "@frontity/source";
 import { getLinksFromPages } from "./utils";
-import {
-  InfiniteScrollRouterState,
-  IntersectionOptions,
-  Packages,
-} from "../use-infinite-scroll/types";
+import { IntersectionOptions, Packages } from "../use-infinite-scroll/types";
 import {
   UsePostTypeInfiniteScrollOptions,
   UsePostTypeInfiniteScrollOutput,
@@ -44,7 +38,7 @@ export const wrapperGenerator = ({
   }> = ({ children, className }) => {
     const { state } = useConnect<Packages>();
 
-    const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
+    const { infiniteScroll } = state.router.state;
 
     // Values from browser state.
     const links: string[] = infiniteScroll?.links || [link];
@@ -140,8 +134,8 @@ const usePostTypeInfiniteScroll = (
   const defaultOptions = { active: true };
   options = { ...defaultOptions, ...options };
 
-  const { state, actions } = useConnect<WpSource & Router>();
-  const { infiniteScroll } = state.router.state as InfiniteScrollRouterState;
+  const { state, actions } = useConnect<Packages>();
+  const { infiniteScroll } = state.router.state;
 
   // Values for browser state.
   const archive: string = (() => {
