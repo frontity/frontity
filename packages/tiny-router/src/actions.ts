@@ -124,8 +124,11 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
 export const updateState: TinyRouter["actions"]["router"]["updateState"] = ({
   state,
 }) => (historyState: Record<string, unknown>) => {
-  state.router.state = historyState;
-  window.history.replaceState(JSON.parse(JSON.stringify(historyState)), "");
+  // Clone the state to make sure we don't leak proxies.
+  const cloned = JSON.parse(JSON.stringify(historyState));
+
+  state.router.state = cloned;
+  window.history.replaceState(cloned, "");
 };
 
 /**
