@@ -49,7 +49,11 @@ export const wrapperGenerator = ({
     const current = state.source.get(link);
     const firstLink = links[0];
 
-    const itemLinks = getLinksFromPages({ pages, firstLink, state });
+    const itemLinks = getLinksFromPages({
+      pages,
+      firstLink,
+      sourceGet: state.source.get,
+    });
     const currentIndex = itemLinks.indexOf(link);
     const nextLink = itemLinks[currentIndex + 1];
 
@@ -153,7 +157,6 @@ const usePostTypeInfiniteScroll = (
     const previous = state.router.previous
       ? state.source.get(state.router.previous)
       : null;
-
     if (previous && isArchive(previous)) {
       return previous.link;
     }
@@ -230,7 +233,11 @@ const usePostTypeInfiniteScroll = (
 
   // Get the list of all item links from the archive pages and obtain the data
   // object of the next entity from there.
-  const itemLinks = getLinksFromPages({ pages, firstLink, state });
+  const itemLinks = getLinksFromPages({
+    pages,
+    firstLink,
+    sourceGet: state.source.get,
+  });
   const lastIndex = itemLinks.indexOf(last.link);
   const nextLink = itemLinks[lastIndex + 1];
   const next = nextLink ? state.source.get(nextLink) : null;
@@ -313,7 +320,11 @@ const usePostTypeInfiniteScroll = (
         await actions.source.fetch(nextPage.link);
       }
 
-      const itemLinks = getLinksFromPages({ pages, firstLink, state });
+      const itemLinks = getLinksFromPages({
+        pages,
+        firstLink,
+        sourceGet: state.source.get,
+      });
 
       nextLink = itemLinks[lastIndex + 1];
     }

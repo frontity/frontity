@@ -1,6 +1,6 @@
 import { isArchive, isRedirection } from "@frontity/source";
+import Source from "@frontity/source/types";
 import { State } from "frontity/types";
-import { Packages } from "../use-infinite-scroll/types";
 
 /**
  * Arguments passed to {@link getLinksFromPages}.
@@ -23,9 +23,9 @@ type GetLinksFromPagesParams = {
   firstLink: string;
 
   /**
-   * The Frontity state object.
+   * The `state.source.get` state from Source.
    */
-  state: State<Packages>;
+  sourceGet: State<Source>["source"]["get"];
 };
 
 /**
@@ -37,15 +37,15 @@ type GetLinksFromPagesParams = {
 export const getLinksFromPages = ({
   pages,
   firstLink,
-  state,
+  sourceGet,
 }: GetLinksFromPagesParams): string[] => {
   // Get the data object of all ready pages.
   const pagesData = pages
-    .map((link) => state.source.get(link))
+    .map((link) => sourceGet(link))
     .filter((data) => isArchive(data) && data.isReady);
 
   // Get all the post links from the pages.
-  const rawLinks = pagesData.reduce((allLinks, data, index) => {
+  const rawLinks = pagesData.reduce<string[]>((allLinks, data, index) => {
     if (isArchive(data)) {
       let dataLinks = data.items.map(({ link }) => link);
       // Filter out `firstLink` if the archive page is not the first one.
@@ -53,11 +53,11 @@ export const getLinksFromPages = ({
       allLinks = allLinks.concat(dataLinks);
     }
     return allLinks;
-  }, [] as string[]);
+  }, []);
 
   // Remove links that point to redirections.
   return rawLinks
-    .map((link) => state.source.get(link))
+    .map((link) => sourceGet(link))
     .filter((data) => !isRedirection(data))
     .map(({ link }) => link);
 };
