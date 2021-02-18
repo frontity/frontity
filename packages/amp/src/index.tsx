@@ -25,31 +25,33 @@ export default {
   actions: {
     amp: {
       init: ({ libraries }) => {
-        const { parse, stringify } = libraries.source;
+        if (libraries.source) {
+          const { parse, stringify } = libraries.source;
 
-        // Wrap libraries.source.parse.
-        libraries.source.parse = (link) => {
-          const { route, path, ...rest } = parse(link);
-          return {
-            route: removeAmp(route),
-            path: removeAmp(path),
-            ...rest,
+          // Wrap libraries.source.parse.
+          libraries.source.parse = (link) => {
+            const { route, path, ...rest } = parse(link);
+            return {
+              route: removeAmp(route),
+              path: removeAmp(path),
+              ...rest,
+            };
           };
-        };
 
-        // Wrap libraries.source.stringify.
-        libraries.source.stringify = ({ route, path, ...rest }) => {
-          const routeOrPath = route || path || "/";
-          return stringify({
-            route: removeAmp(routeOrPath),
-            path: removeAmp(routeOrPath),
-            ...rest,
-          });
-        };
+          // Wrap libraries.source.stringify.
+          libraries.source.stringify = ({ route, path, ...rest }) => {
+            const routeOrPath = route || path || "/";
+            return stringify({
+              route: removeAmp(routeOrPath),
+              path: removeAmp(routeOrPath),
+              ...rest,
+            });
+          };
 
-        // Wrap libraries.source.normalize.
-        libraries.source.normalize = (link) =>
-          libraries.source.stringify(libraries.source.parse(link));
+          // Wrap libraries.source.normalize.
+          libraries.source.normalize = (link) =>
+            libraries.source.stringify(libraries.source.parse(link));
+        }
       },
       beforeSSR({ libraries }) {
         // Define the emotion css extraction one.
@@ -72,19 +74,15 @@ export default {
 
         // Define the emotion style tag with the render result.
         libraries.frontity.template = ({ result, ...rest }) => {
-          const { html, ids, css } = result;
+          const { html, css } = result;
 
           // Cleanup the head of scripts, but leave only the `amp-` based ones.
           rest.head = rest.head.filter((tag) => {
             return /<?script.+?amp-/g.test(tag);
           });
 
-          // Push the emotion style tag.
-          rest.head.push(
-            `<style amp-custom data-emotion="${CACHE_KEY} ${ids.join(
-              " "
-            )}">${css}</style>`
-          );
+          // Push the custom css style tag.
+          rest.head.push(`<style amp-custom>${css}</style>`);
 
           // No scripts allowed.
           rest.scripts = [];
