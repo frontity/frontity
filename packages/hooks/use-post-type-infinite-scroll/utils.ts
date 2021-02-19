@@ -14,11 +14,11 @@ type GetLinksFromPagesParams = {
   pages: string[];
 
   /**
-   * The first link showed by the infinite scroll hook. The link is removed from
-   * the second and subsequent pages if it's not included in the first one, in
-   * order to avoid duplicated links.
+   * The first link showed by the infinite scroll hook. If the link is not
+   * included in the first page, it is returned the first one, in order to show
+   * recent links after it.
    *
-   * @example "/blog/first-post/"
+   * @example "/blog/some-post/"
    */
   firstLink: string;
 
@@ -29,7 +29,8 @@ type GetLinksFromPagesParams = {
 };
 
 /**
- * Get all the item links from the given pages, removing redirections.
+ * Get all the item links from the given pages, removing redirections and
+ * duplicated ones.
  *
  * @param params - Object of type {@link GetLinksFromPagesParams}.
  * @returns List of item links.
