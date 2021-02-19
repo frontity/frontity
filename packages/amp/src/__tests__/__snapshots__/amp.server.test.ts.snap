@@ -30,7 +30,7 @@ exports[`AMP server tests The \`render\` method uses the CacheProvider 1`] = `
 exports[`AMP server tests The \`template\` method uses the previous result 1`] = `
 "
     <!doctype html>
-    <html amp null>
+    <html amp  lang=\\"en\\">
       <head>
         <meta charset=\\"utf-8\\">
         <script async src=\\"https://cdn.ampproject.org/v0.js\\"></script>
@@ -38,7 +38,7 @@ exports[`AMP server tests The \`template\` method uses the previous result 1`] =
         <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
         <style amp-custom>css</style>
       </head>
-      <body null>
+      <body >
         html
       </body>
     </html>

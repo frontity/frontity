@@ -13,7 +13,7 @@ export default function template({
 }) {
   return `
     <!doctype html>
-    <html amp ${htmlAttributes}>
+    <html amp ${htmlAttributes || ""} lang="en">
       <head>
         <meta charset="utf-8">
         <script async src="https://cdn.ampproject.org/v0.js"></script>
@@ -21,7 +21,7 @@ export default function template({
         <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
         ${head ? head.join("\n") : ""}
       </head>
-      <body ${bodyAttributes}>
+      <body ${bodyAttributes || ""}>
         ${html}
       </body>
     </html>
