@@ -73,23 +73,20 @@ export default {
         };
 
         // Define the emotion style tag with the render result.
-        libraries.frontity.template = ({ result, ...rest }) => {
-          const { html, css } = result;
+        libraries.frontity.template = ({ result, head, ...rest }) => {
+          const { css } = result;
 
           // Cleanup the head of scripts, but leave only the `amp-` based ones.
-          rest.head = rest.head.filter((tag) => {
+          head = head.filter((tag) => {
             return /<?script.+?amp-/g.test(tag);
           });
 
           // Push the custom css style tag.
-          rest.head.push(`<style amp-custom>${css}</style>`);
-
-          // No scripts allowed.
-          rest.scripts = [];
+          head.push(`<style amp-custom>${css}</style>`);
 
           return ampTemplate({
             ...rest,
-            html,
+            head,
           });
         };
       },

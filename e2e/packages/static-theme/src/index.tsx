@@ -68,7 +68,11 @@ interface BoxProps {
   r?: number;
 }
 
-const Box = styled.div<BoxProps>((props) => [
+const Box = styled("div", {
+  shouldForwardProp(prop: string) {
+    return ["p", "m", "bg", "color", "size", "r", "as"].indexOf(prop) === -1;
+  },
+})<BoxProps>((props) => [
   {
     display: "flex",
     flexDirection: "column",
