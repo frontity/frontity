@@ -61,12 +61,57 @@ Full info about this theme can be found in the [docs](https://docs.frontity.org/
 
 The file structure of this theme is:
 
-TREE
+.
+├── CHANGELOG.md
+├── package.json
+├── README.md
+├── src
+│  ├── components
+│  │  ├── featured-media.js
+│  │  ├── header.js
+│  │  ├── index.js
+│  │  ├── link.js
+│  │  ├── list
+│  │  │  ├── index.js
+│  │  │  ├── list-item.js
+│  │  │  ├── list.js
+│  │  │  └── pagination.js
+│  │  ├── loading.js
+│  │  ├── menu-icon.js
+│  │  ├── menu-modal.js
+│  │  ├── menu.js
+│  │  ├── nav.js
+│  │  ├── page-error.js
+│  │  ├── post.js
+│  │  └── title.js
+│  └── index.js
+└── types.ts
+
+| Path           | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| _`./types.ts`_ | Typescript interface for MarsTheme settings. Useful for typescrtiup |
+
+## Feature Discussions
+
+[**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
+
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/mars-theme
+
+## Changelog
+
+Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
+
+---
+
+## Open Source Community
+
+### Channels
 
 
-| File | Path | Description |
-|------|---------|----------|
-| _`types.ts`_    |  string | The URL that will replace the current one. _`link` is short for permalink_. <br/> Examples: | 
+
+| Path | Description |
+|---------|----------|
+| _`./types.ts`_ | Typescript interface for MarsTheme settings. Useful for typescrtiup | 
 
 
 
