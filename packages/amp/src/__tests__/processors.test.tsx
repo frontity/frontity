@@ -1,13 +1,16 @@
 import Html2React from "@frontity/html2react/src/libraries/component";
 import { HelmetProvider } from "frontity";
 import { amp, toBeValidAmpHtml } from "./__utilities__/amp-validator";
-import { FilledContext } from "react-helmet-async";
+import { FilledContext, HelmetData } from "react-helmet-async";
 
 import processors from "../processors";
 import { render } from "@testing-library/react";
 
 expect.extend({ toBeValidAmpHtml });
 HelmetProvider.canUseDOM = false;
+
+const replaceHeadAttributes = (head: HelmetData) =>
+  head.script.toString().replace(/async=("|')?true("|')?/, "async");
 
 test("Validate amp-img", async () => {
   const { container } = render(
@@ -46,11 +49,6 @@ test("Validate amp-iframe", async () => {
     `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-iframe\\" src=\\"https://cdn.ampproject.org/v0/amp-iframe-0.1.js\\"></script>"`
   );
 
-  // We replace the `async="true"` with just `async`
-  const headScipt = head.script
-    .toString()
-    .replace(/async=("|')?true("|')?/, "async");
-
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-iframe
       height="300"
@@ -59,5 +57,61 @@ test("Validate amp-iframe", async () => {
     />
   `);
 
-  expect(await amp(container.innerHTML, headScipt)).toBeValidAmpHtml();
+  // We replace the `async="true"` with just `async`
+  const headScript = replaceHeadAttributes(head);
+  expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
+});
+
+test("Validate amp-video", async () => {
+  const helmetContext = {};
+
+  const { container } = render(
+    <HelmetProvider context={helmetContext}>
+      <Html2React
+        html="<video width='250' height='150' src='video.mp4'></video>"
+        processors={processors}
+      />
+    </HelmetProvider>
+  );
+
+  const head = (helmetContext as FilledContext).helmet;
+
+  expect(head.script.toString()).toMatchInlineSnapshot(
+    `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-video\\" src=\\"https://cdn.ampproject.org/v0/amp-video-0.1.js\\"></script>"`
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <amp-video
+      height="150"
+      src="video.mp4"
+      width="250"
+    />
+  `);
+
+  // We replace the `async="true"` with just `async`
+  const headScript = replaceHeadAttributes(head);
+  expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
+});
+
+test("Adding 2 iframes should result in adding only 1 amp-iframe AMP script in the <head />", async () => {
+  const helmetContext = {};
+
+  const { container } = render(
+    <HelmetProvider context={helmetContext}>
+      <Html2React
+        html="<iframe src='a.html' width='5' height='5'/><iframe src='a.html' width='5' height='5'/>"
+        processors={processors}
+      />
+    </HelmetProvider>
+  );
+
+  const head = (helmetContext as FilledContext).helmet;
+
+  expect(head.script.toString()).toMatchInlineSnapshot(
+    `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-iframe\\" src=\\"https://cdn.ampproject.org/v0/amp-iframe-0.1.js\\"></script>"`
+  );
+
+  // We replace the `async="true"` with just `async`
+  const headScript = replaceHeadAttributes(head);
+  expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
 });

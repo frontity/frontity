@@ -10,7 +10,7 @@ import { Head } from "frontity";
  *
  * @returns A react component.
  */
-const AMPiframe = (props: any) => {
+const AmpIframe = (props: any) => {
   return (
     <>
       <Head>
@@ -28,7 +28,7 @@ const AMPiframe = (props: any) => {
 export const iframe: Processor<Element, Packages> = {
   test: ({ node }) => node.type === "element" && node.component === "iframe",
   processor: ({ node }) => {
-    node.component = AMPiframe;
+    node.component = AmpIframe;
     return node;
   },
 };
