@@ -4,7 +4,6 @@ import useInView from "../use-in-view";
 import {
   UseInfiniteScrollOptions,
   UseInfiniteScrollOutput,
-  InfiniteScrollRouterState,
   Packages,
 } from "./types";
 import { Data } from "@frontity/source/types";
@@ -83,8 +82,7 @@ const useInfiniteScroll = ({
 
     if (fetch.inView && nextLink) {
       // Get the `infiniteScroll` props from the history state.
-      const { infiniteScroll } = state.router
-        .state as InfiniteScrollRouterState;
+      const { infiniteScroll } = state.router.state;
 
       // Get the list of links from the history state or initializes it.
       const links = infiniteScroll?.links
