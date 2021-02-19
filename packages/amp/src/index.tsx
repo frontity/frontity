@@ -74,7 +74,7 @@ export default {
 
         // Define the emotion style tag with the render result.
         libraries.frontity.template = ({ result, head, ...rest }) => {
-          const { css } = result;
+          const { css, html } = result;
 
           // Cleanup the head of scripts, but leave only the `amp-` based ones.
           head = head.filter((tag) => {
@@ -87,6 +87,7 @@ export default {
           return ampTemplate({
             ...rest,
             head,
+            html,
           });
         };
       },
