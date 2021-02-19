@@ -46,6 +46,11 @@ test("Validate amp-iframe", async () => {
     `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-iframe\\" src=\\"https://cdn.ampproject.org/v0/amp-iframe-0.1.js\\"></script>"`
   );
 
+  // We replace the `async="true"` with just `async`
+  const headScipt = head.script
+    .toString()
+    .replace(/async=("|')?true("|')?/, "async");
+
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-iframe
       height="300"
@@ -54,7 +59,5 @@ test("Validate amp-iframe", async () => {
     />
   `);
 
-  expect(
-    await amp(container.innerHTML, head.script.toString())
-  ).toBeValidAmpHtml();
+  expect(await amp(container.innerHTML, headScipt)).toBeValidAmpHtml();
 });
