@@ -11,12 +11,17 @@ HelmetProvider.canUseDOM = false;
 
 test("Validate amp-img", async () => {
   const { container } = render(
-    <Html2React html="<img src='test.img'></img>" processors={processors} />
+    <Html2React
+      html="<img src='test.img' width='300' height='300'></img>"
+      processors={processors}
+    />
   );
 
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-img
+      height="300"
       src="test.img"
+      width="300"
     />
   `);
 
@@ -28,7 +33,10 @@ test("Validate amp-iframe", async () => {
 
   const { container } = render(
     <HelmetProvider context={helmetContext}>
-      <Html2React html="<iframe src='test.html' />" processors={processors} />
+      <Html2React
+        html="<iframe src='test.html' width='300' height='300'/>"
+        processors={processors}
+      />
     </HelmetProvider>
   );
 
@@ -40,9 +48,13 @@ test("Validate amp-iframe", async () => {
 
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-iframe
+      height="300"
       src="test.html"
+      width="300"
     />
   `);
 
-  expect(await amp(container.innerHTML)).toBeValidAmpHtml();
+  expect(
+    await amp(container.innerHTML, head.script.toString())
+  ).toBeValidAmpHtml();
 });

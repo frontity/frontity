@@ -10,7 +10,7 @@ import { Head } from "frontity";
  *
  * @returns A react component.
  */
-const AMPiframe = (props) => {
+const AMPiframe = (props: any) => {
   return (
     <>
       <Head>
