@@ -14,6 +14,7 @@ Full info about this theme can be found in the [docs](https://docs.frontity.org/
 
 - [Install](#install)
 - [Usage](#usage)
+- [Theme Anatomy](#anatomy)
 - [Feature Discussions](#feature-discussions)
 - [Changelog](#changelog)
 - [Open Source Community](#open-source-community)
@@ -55,6 +56,20 @@ The theme options can be specified in the `state.theme` property.
 ```
 
 Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-mars-theme)
+
+## Theme Anatomy
+
+The file structure of this theme is:
+
+TREE
+
+
+| File | Path | Description |
+|------|---------|----------|
+| _`types.ts`_    |  string | The URL that will replace the current one. _`link` is short for permalink_. <br/> Examples: | 
+
+
+
 
 ## Feature Discussions
 
