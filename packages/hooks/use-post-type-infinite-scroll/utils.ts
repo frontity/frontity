@@ -54,7 +54,7 @@ export const getLinksFromPages = ({
     rawLinks.add(firstLink);
 
   // Get all the post links from the pages. As `rawLinks` is a `Set`, any
-  // duplicated link is removed. Also, the insertion order is preserved.
+  // duplicated link is not included. Also, the insertion order is preserved.
   pagesData.forEach((data) => {
     data.items.forEach(({ link }) => rawLinks.add(link));
   });
