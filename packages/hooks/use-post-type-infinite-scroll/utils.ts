@@ -42,22 +42,22 @@ export const getLinksFromPages = ({
   // Get the data object of all ready pages.
   const pagesData = pages
     .map((link) => sourceGet(link))
-    .filter((data) => isArchive(data) && data.isReady);
+    .filter((data) => data.isReady)
+    .filter(isArchive);
 
-  // Get all the post links from the pages.
-  const rawLinks = pagesData.reduce<string[]>((allLinks, data, index) => {
-    if (isArchive(data)) {
-      let dataLinks = data.items.map(({ link }) => link);
-      // Filter out `firstLink` if the archive page is not the first one.
-      if (index > 0) dataLinks = dataLinks.filter((link) => link !== firstLink);
-      allLinks = allLinks.concat(dataLinks);
-    }
-    return allLinks;
-  }, []);
+  // Initializes an empty set of links.
+  const rawLinks = new Set<string>();
+
+  // If the first page doesn't contain `firstLink`, add it first.
+  if (!pagesData[0]?.items.find(({ link }) => link === firstLink))
+    rawLinks.add(firstLink);
+
+  // Get all the post links from the pages. As `rawLinks` is a `Set`, any
+  // duplicated link is removed. Also, the insertion order is preserved.
+  pagesData.forEach((data) => {
+    data.items.forEach(({ link }) => rawLinks.add(link));
+  });
 
   // Remove links that point to redirections.
-  return rawLinks
-    .map((link) => sourceGet(link))
-    .filter((data) => !isRedirection(data))
-    .map(({ link }) => link);
+  return [...rawLinks].filter((link) => !isRedirection(sourceGet(link)));
 };
