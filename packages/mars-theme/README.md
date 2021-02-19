@@ -61,6 +61,7 @@ Full info about this theme can be found in the [docs](https://docs.frontity.org/
 
 The file structure of this theme is:
 
+```
 .
 ├── CHANGELOG.md
 ├── package.json
@@ -86,6 +87,7 @@ The file structure of this theme is:
 │  │  └── title.js
 │  └── index.js
 └── types.ts
+```
 
 | Path           | Description                                                         |
 | -------------- | ------------------------------------------------------------------- |
