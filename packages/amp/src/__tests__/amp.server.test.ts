@@ -1,10 +1,14 @@
 import { createStore, InitializedStore } from "@frontity/connect";
 import clone from "clone-deep";
 import { Packages } from "../../types";
-import Amp from "../server";
+import Amp from "..";
 
 jest.mock("@emotion/server/create-instance", () => () => ({
   extractCritical: jest.fn().mockImplementation((args) => args),
+}));
+
+jest.mock("react-dom/server", () => ({
+  renderToStaticMarkup: jest.fn().mockImplementation((args) => args),
 }));
 
 describe("AMP server tests", () => {
@@ -42,19 +46,20 @@ describe("AMP server tests", () => {
 
   test("The `render` method uses the CacheProvider", () => {
     const previousRender = store.libraries.frontity.render;
+    const collectChunks = jest.fn().mockImplementation((args) => args);
 
     // Call the beforeSSR action.
     store.actions.amp.beforeSSR();
 
     const render = store.libraries.frontity.render;
-    const result = render({ App: store.libraries.frontity.App });
+    const result = render({ App: store.libraries.frontity.App, collectChunks });
 
     expect(result).toMatchSnapshot();
-    expect(previousRender).toBeCalled();
 
-    // Expect the App contents to be overwritten with the cache provider.
-    const contents = result.App();
-    expect(contents).toMatchSnapshot();
+    expect(collectChunks).toBeCalled();
+
+    // Previous render method should not be called.
+    expect(previousRender).not.toBeCalled();
   });
 
   test("The `template` method uses the previous result", () => {
@@ -73,6 +78,8 @@ describe("AMP server tests", () => {
         scripts: [],
       })
     ).toMatchSnapshot();
-    expect(previousTemplate).toBeCalled();
+
+    // The previous template should not be called. Total control of template.
+    expect(previousTemplate).not.toBeCalled();
   });
 });

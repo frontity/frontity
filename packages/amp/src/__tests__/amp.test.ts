@@ -3,7 +3,7 @@ import clone from "clone-deep";
 import merge from "deepmerge";
 import wpSource from "@frontity/wp-source/src";
 import { Packages } from "../../types";
-import Amp from "../config";
+import Amp from "..";
 
 let store: InitializedStore<Packages>;
 describe("AMP tests", () => {
