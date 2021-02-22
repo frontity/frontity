@@ -1382,4 +1382,204 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.get("[data-test='post-4']").should("exist").should("be.visible");
     cy.location("href").should("eq", "http://localhost:3001/last-post/");
   });
+
+  it("should change the archive when visiting a new one", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
+
+    // Stubs calls to REST API.
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/categories?slug=one",
+      response: "fixture:use-infinite-scroll/category-1.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("categoryOne");
+    cy.route({
+      url: "/wp-json/wp/v2/posts?_embed=true&categories=1&page=1",
+      response: "fixture:use-infinite-scroll/page-2.json",
+      headers: {
+        "x-wp-total": "2",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("categoryPageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
+      response: "fixture:use-infinite-scroll/post-1.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("postOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-11",
+      response: "fixture:use-infinite-scroll/post-11.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("postEleven");
+
+    // Changes url to `/post-1`.
+    cy.get("[data-test='to-first-post']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/post-1/");
+    cy.wait("@postOne");
+    cy.wait("@pageOne");
+    cy.get("[data-test='post-type']").should("exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+
+    // Scrolls to bottom to fetch next post. It should be "/post-2"
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-2/");
+
+    // Changes url to `/category/one`.
+    cy.get("[data-test='to-category-one']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/category/one/");
+    cy.wait("@categoryPageOne");
+
+    // Go to the first post of the category.
+    cy.get("[data-test='post-11-link'").should("exist").click();
+    cy.get("[data-test='post-type']").should("exist");
+    cy.get("[data-test='post-11']").should("exist");
+    cy.location("href").should("eq", "http://localhost:3001/post-11/");
+
+    // Scrolls to bottom to fetch next post. It should be "/post-12"
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-11']").should("exist");
+    cy.get("[data-test='post-12']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-12/");
+
+    // Then, go back two times, "/post-2" should be visible.
+    cy.go(-2);
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/post-2/");
+
+    // Get the next post, it should be "/post-3"
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("exist");
+    cy.get("[data-test='post-3']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-3/");
+  });
+
+  it("should keep the archive while scrolling", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
+
+    // Stubs calls to REST API.
+
+    // Main archive ("/")
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
+      headers: {
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
+      },
+      delay: 300,
+    }).as("pageTwo");
+
+    // Category one ("/category/one")
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
+      response: "fixture:use-infinite-scroll/post-last.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("postOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/categories?slug=one",
+      response: "fixture:use-infinite-scroll/category-1.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("categoryOne");
+    cy.route({
+      url: "/wp-json/wp/v2/posts?_embed=true&categories=1&page=1",
+      response: "fixture:use-infinite-scroll/category-page-1.json",
+      headers: {
+        "x-wp-total": "2",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("categoryPageOne");
+
+    // Changes url to "/".
+    cy.get("[data-test='to-archive']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/");
+    cy.wait("@pageOne");
+
+    // Go to the penultimate post of the first page.
+    cy.get("[data-test='post-9-link'").should("exist").click();
+    cy.get("[data-test='post-type']").should("exist");
+    cy.get("[data-test='post-9']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.location("href").should("eq", "http://localhost:3001/post-9/");
+
+    // Change the source archive to "/category/one".
+    cy.get("[data-test='set-archive'").should("exist").click();
+
+    // Changes url to "/".
+    cy.get("[data-test='to-archive']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/");
+
+    // Go to  "/post-1".
+    cy.get("[data-test='post-1-link'").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/post-1/");
+
+    // The next one should be the post 7.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-7']").should("exist").scrollIntoView();
+    cy.get("[data-test='post-type']").should("exist");
+    cy.location("href").should("eq", "http://localhost:3001/post-7/");
+
+    // Go back to "/post-9".
+    cy.go(-2);
+    cy.get("[data-test='post-type']").should("exist");
+    cy.get("[data-test='post-9']").should("exist");
+    cy.location("href").should("eq", "http://localhost:3001/post-9/");
+
+    // Scroll down. The next one should be the post 10.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-10']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-10/");
+
+    // Scroll down again. The next one should be the post 11 (from "/").
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-11']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-11/");
+  });
 });
