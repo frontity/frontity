@@ -22,7 +22,7 @@ export const serverSideRendering = async (
   const { settings, store, helmetContext, stats: scriptStats } = ctx.state;
 
   // Get the defined render, template and App.
-  const { render, template, App } = store.libraries.frontity;
+  const { render, template, App, head, scripts } = store.libraries.frontity;
 
   // Get module and es5 chunks stats.
   const { moduleStats, es5Stats } = scriptStats;
@@ -34,8 +34,8 @@ export const serverSideRendering = async (
   // Init variables.
   const output = {
     result: "",
-    head: [],
-    scripts: [],
+    head,
+    scripts,
   };
 
   // If there's no client stats or there is no client entrypoint for the site
@@ -102,6 +102,7 @@ export const serverSideRendering = async (
   // Get static head strings.
   const { head: helmetHead, ...rest } = getHeadTags(helmetContext.helmet);
 
+  // Concat the helemet head tags with the already defined head.
   output.head = helmetHead.concat(output.head);
 
   // Write the template to body.
