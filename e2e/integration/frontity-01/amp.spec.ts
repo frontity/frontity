@@ -2,7 +2,7 @@ const assertTemplate = () => {
   cy.get("html").should("have.attr", "amp");
   cy.get("style[amp-boilerplate]").should("exist");
   cy.get("style[amp-custom]").should("exist");
-  cy.get("style[amp-custom]").should("exist");
+  cy.get("style").should("have.length", 2);
   cy.get("body script").should("not.exist");
 };
 
