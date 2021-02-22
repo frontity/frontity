@@ -1,4 +1,5 @@
 /* eslint-disable jsdoc/require-jsdoc */
+
 /**
  * Disable TSDocs because we are going to remove this babel plugin once we
  * update to Emotion 11.

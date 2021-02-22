@@ -1,0 +1,26 @@
+{
+  "id": 1,
+  "slug": "page-1",
+  "type": "page",
+  "link": "https://test.frontity.org/parent/page-1/",
+  "author": 1,
+  "parent": 2,
+  "featured_media": 1,
+  "_embedded": {
+    "author": [
+      {
+        "id": 1,
+        "name": "Author 1",
+        "link": "https://test.frontity.org/author/author-1/",
+        "slug": "author-1"
+      }
+    ],
+    "up": [
+      {
+        "id": 2,
+        "link": "https://test.frontity.org/parent/",
+        "slug": "parent"
+      }
+    ]
+  }
+}

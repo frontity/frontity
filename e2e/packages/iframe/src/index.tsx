@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Iframe from "@frontity/components/iframe";
 import Package from "../types";
 import { styled } from "frontity";

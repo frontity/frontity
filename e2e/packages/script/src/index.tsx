@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Script from "@frontity/components/script";
 import Package from "../types";
 

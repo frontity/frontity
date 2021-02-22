@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import { ResponseInit, Response as NodeResponse } from "node-fetch";
 import { mergeDeepRight } from "ramda";
 import { WpComment } from "../../../types";
@@ -27,7 +25,7 @@ export const mockResponse = (body, init?: ResponseInit): Response =>
  */
 export const fromEntries = (
   entries: IterableIterator<[string, any]>
-): object => {
+): Record<string, unknown> => {
   const result = {};
   for (const [key, value] of entries) result[key] = value;
   return result;
@@ -60,7 +58,7 @@ export const mockComment = (props: Partial<WpComment>): WpComment => {
     status: "approved",
     type: "comment",
     author_avatar_urls: {},
-    meta: [],
+    meta: {},
   };
 
   // Create comment mergin base and props.

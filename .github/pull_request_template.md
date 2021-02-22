@@ -47,7 +47,6 @@ merge of your pull request!
 - [ ] TypeScript tests
 - [ ] Update starter themes
 - [ ] Update other packages
-- [ ] Open an issue for this feature in the [docs repo](https://github.com/frontity/docs/wiki/Code-Releases)
 - [ ] Update community discussions
 - [ ] Add a changeset (with link to its [Feature Discussion](https://community.frontity.org/c/33) if it exists)
 

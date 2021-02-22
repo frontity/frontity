@@ -7,17 +7,18 @@ import { mockResponse, mockComment } from "./mocks/helpers";
 import wpComments, { insertComment } from "../";
 import { Packages } from "../../types";
 import { populate } from "@frontity/wp-source/src/libraries";
+import Router from "../../../router/types";
 
 type Api = Packages["libraries"]["source"]["api"];
 
-let store: InitializedStore<Packages>;
+let store: InitializedStore<Packages & Router>;
 let api: jest.Mocked<Api>;
 
 beforeEach(async () => {
   const packages: any = mergeDeepRight(clone(wpSource()), clone(wpComments));
 
-  store = createStore<Packages>(packages);
-  store.state.source.api = "https://test.frontity.org/wp-json";
+  store = createStore<Packages & Router>(packages);
+  store.state.source.url = "https://test.frontity.org/";
   store.actions.source.init();
   api = store.libraries.source.api as jest.Mocked<Api>;
   api.get = jest.fn();

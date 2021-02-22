@@ -1,6 +1,6 @@
 import "@frontity/type-declarations";
 
-export { css, Global, keyframes } from "@emotion/core";
+export { css, Global, keyframes, CacheProvider } from "@emotion/react";
 export { default as styled } from "@emotion/styled";
 export { Helmet as Head, HelmetProvider } from "react-helmet-async";
 export { default as loadable } from "@loadable/component";
@@ -28,3 +28,5 @@ export { default as URL } from "./utils/url";
 
 export { default as useFills } from "./utils/slot-and-fill/use-fills";
 export { default as Slot } from "./utils/slot-and-fill/slot";
+
+export { default as isDerived } from "./utils/is-derived";

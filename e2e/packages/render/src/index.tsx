@@ -1,4 +1,3 @@
-import React from "react";
 import Render, { Packages } from "../types";
 import { connect, useConnect } from "frontity";
 import { isPost, isPostArchive } from "@frontity/source";

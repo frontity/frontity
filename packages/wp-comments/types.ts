@@ -80,7 +80,7 @@ export interface WpComment {
   /**
    * Meta fields.
    */
-  meta: [];
+  meta?: Record<string, unknown>;
 }
 
 /**
@@ -264,6 +264,7 @@ interface WpComments extends Package {
    * Package name.
    */
   name: "@frontity/wp-comments";
+
   /**
    * The state exposed by this package.
    */
