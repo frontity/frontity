@@ -27,7 +27,6 @@ test("Validate amp-img", async () => {
       width="300"
     />
   `);
-
   expect(await amp(container.innerHTML)).toBeValidAmpHtml();
 });
 
@@ -48,7 +47,6 @@ test("Validate amp-iframe", async () => {
   expect(head.script.toString()).toMatchInlineSnapshot(
     `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-iframe\\" src=\\"https://cdn.ampproject.org/v0/amp-iframe-0.1.js\\"></script>"`
   );
-
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-iframe
       height="300"
@@ -79,7 +77,6 @@ test("Validate amp-video", async () => {
   expect(head.script.toString()).toMatchInlineSnapshot(
     `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-video\\" src=\\"https://cdn.ampproject.org/v0/amp-video-0.1.js\\"></script>"`
   );
-
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-video
       height="150"
@@ -91,6 +88,71 @@ test("Validate amp-video", async () => {
   // We replace the `async="true"` with just `async`
   const headScript = replaceHeadAttributes(head);
   expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
+});
+
+test("Validate amp-audio", async () => {
+  const helmetContext = {};
+
+  const { container } = render(
+    <HelmetProvider context={helmetContext}>
+      <Html2React
+        html="<audio src='audio.mp3'></video>"
+        processors={processors}
+      />
+    </HelmetProvider>
+  );
+
+  const head = (helmetContext as FilledContext).helmet;
+
+  expect(head.script.toString()).toMatchInlineSnapshot(
+    `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-audio\\" src=\\"https://cdn.ampproject.org/v0/amp-audio-0.1.js\\"></script>"`
+  );
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <amp-audio
+      src="audio.mp3"
+    />
+  `);
+
+  // We replace the `async="true"` with just `async`
+  const headScript = replaceHeadAttributes(head);
+  expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
+});
+
+test("<script /> elements should be removed", async () => {
+  const { container } = render(
+    <Html2React
+      html="<div><script src='test.js'></script></div>"
+      processors={processors}
+    />
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`<div />`);
+  expect(await amp(container.innerHTML)).toBeValidAmpHtml();
+});
+
+test("Elements with prohibited class names should be removed", async () => {
+  const { container } = render(
+    <Html2React
+      html="
+      <div>
+        <div class='other -amp-test this-amp-is-allowed'></div>
+        <div class='other i-amp-test -this-i-amp-is-also-allowed'></div>
+      </div>"
+      processors={processors}
+    />
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <div>
+      <div
+        class="other this-amp-is-allowed"
+      />
+      <div
+        class="other -this-i-amp-is-also-allowed"
+      />
+    </div>
+  `);
+  expect(await amp(container.innerHTML)).toBeValidAmpHtml();
 });
 
 test("Adding 2 iframes should result in adding only 1 amp-iframe AMP script in the <head />", async () => {
