@@ -155,6 +155,31 @@ test("Elements with prohibited class names should be removed", async () => {
   expect(await amp(container.innerHTML)).toBeValidAmpHtml();
 });
 
+test("Elements with prohibited ID values should be removed", async () => {
+  const { container } = render(
+    <Html2React
+      html="
+      <div>
+        <div id='-amp-test' class='test1'></div>
+        <div id='i-amp-test' class='test2'></div>
+      </div>"
+      processors={processors}
+    />
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <div>
+      <div
+        class="test1"
+      />
+      <div
+        class="test2"
+      />
+    </div>
+  `);
+  expect(await amp(container.innerHTML)).toBeValidAmpHtml();
+});
+
 test("Adding 2 iframes should result in adding only 1 amp-iframe AMP script in the <head />", async () => {
   const helmetContext = {};
 

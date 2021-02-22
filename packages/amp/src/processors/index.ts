@@ -4,6 +4,7 @@ import { video } from "./video";
 import { audio } from "./audio";
 import { removeProhibitedTags } from "./removeProhibitedTags";
 import { removeProhibitedClassNames } from "./removeProhibitedClassNames";
+import { removeProhibitedIds } from "./removeProhibitedIds";
 
 export default [
   img,
@@ -12,4 +13,5 @@ export default [
   audio,
   removeProhibitedTags,
   removeProhibitedClassNames,
+  removeProhibitedIds,
 ];
