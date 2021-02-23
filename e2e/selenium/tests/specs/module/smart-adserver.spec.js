@@ -1,7 +1,7 @@
-const { By, until } = require("selenium-webdriver");
+const { By } = require("selenium-webdriver");
 const assert = require("assert");
 
-describe("google-ad-manager", function () {
+describe("smart-adserver", function () {
   this.timeout(600000);
   beforeEach(async function () {
     await driver.get("http://localhost:3000/?frontity_name=smart-adserver");
@@ -37,6 +37,7 @@ describe("google-ad-manager", function () {
 
   it("should unmount correctly and show the other ad in the other page", async function () {
     await driver.findElement(By.css("button#change-page")).click();
+    await driver.manage().setTimeouts({ implicit: 5000 });
     assert((await driver.findElements(By.css("#other-page-ad>img"))).length);
   });
 });
