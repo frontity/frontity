@@ -13,7 +13,7 @@ exports.config = {
   user: userName,
   key: accessKey,
   updateJob: false,
-  specs: ["./selenium/tests/specs/*.spec.js"],
+  specs: ["./selenium/tests/specs/module/*.spec.js"],
   exclude: [],
   maxInstances: 1,
   commonCapabilities: {
