@@ -1,4 +1,3 @@
-const { By } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("Global", function () {
