@@ -10,7 +10,7 @@ describe("Global", function () {
     );
     assert.equal(
       await driver.executeScript(
-        'return window.getComputedStyle(document.querySelector("body"))["background-color"]'
+        'return window.getComputedStyle(document.querySelector("body"))["backgroundColor"]'
       ),
       "rgb(0, 0, 255)"
     );
@@ -23,14 +23,14 @@ describe("Global", function () {
     await driver.findElement(By.css('[data-test-id="toggle-button"]')).click();
     assert.notEqual(
       await driver.executeScript(
-        'return window.getComputedStyle(document.querySelector("body"))["background-color"]'
+        'return window.getComputedStyle(document.querySelector("body"))["backgroundColor"]'
       ),
       "rgb(0, 0, 255)"
     );
     await driver.findElement(By.css('[data-test-id="toggle-button"]')).click();
     assert.equal(
       await driver.executeScript(
-        'return window.getComputedStyle(document.querySelector("body"))["background-color"]'
+        'return window.getComputedStyle(document.querySelector("body"))["backgroundColor"]'
       ),
       "rgb(0, 0, 255)"
     );
@@ -43,7 +43,7 @@ describe("Global", function () {
     await driver.get("http://localhost:3000/color-red?frontity_name=emotion");
     assert.notEqual(
       await driver.executeScript(
-        'return window.getComputedStyle(document.querySelector("body"))["background-color"]'
+        'return window.getComputedStyle(document.querySelector("body"))["backgroundColor"]'
       ),
       "rgb(0, 0, 255)"
     );
