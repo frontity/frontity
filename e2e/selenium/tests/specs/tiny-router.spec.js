@@ -126,4 +126,75 @@ describe("tiny-router", function () {
         .getText()) == "Home"
     );
   });
+
+  it("should recover state when moving back and forward in history", async function () {
+    assert.equal(
+      await driver.executeScript("return window.location.href"),
+      "http://localhost:3000/"
+    );
+    await driver
+      .findElement(By.css('button[data-button-id="switch-using-state"]'))
+      .click();
+
+    assert.equal(
+      await driver.executeScript("return window.location.href"),
+      "http://localhost:3000/about/"
+    );
+    assert(
+      (await driver
+        .findElement(By.css('[data-test-id="content"]'))
+        .getText()) == "About"
+    );
+    assert(
+      (await driver
+        .findElement(By.css('[data-test-id="has-state"]'))
+        .getText()) == "Router has state!"
+    );
+    await driver.executeScript("return window.history.back()");
+    assert.equal(
+      await driver.executeScript("return window.location.href"),
+      "http://localhost:3000/"
+    );
+    assert(
+      (await driver
+        .findElement(By.css('[data-test-id="content"]'))
+        .getText()) == "Home"
+    );
+    await driver.executeScript("return window.history.forward()");
+    assert.equal(
+      await driver.executeScript("return window.location.href"),
+      "http://localhost:3000/about/"
+    );
+    assert(
+      (await driver
+        .findElement(By.css('[data-test-id="content"]'))
+        .getText()) == "About"
+    );
+    assert(
+      (await driver
+        .findElement(By.css('[data-test-id="has-state"]'))
+        .getText()) == "Router has state!"
+    );
+  });
+
+  it("should work if link doesn't have a trailing forward slash", async function () {
+    assert.equal(
+      await driver.executeScript("return window.location.href"),
+      "http://localhost:3000/"
+    );
+    await driver
+      .findElement(
+        By.css('button[data-button-id="switch-to-about-no-trailing"]')
+      )
+      .click();
+    assert.equal(
+      await driver.executeScript("return window.location.href"),
+      "http://localhost:3000/about/"
+    );
+    assert(
+      (await driver
+        .findElement(By.css('[data-test-id="content"]'))
+        .getText()) == "About"
+    );
+  });
 });
