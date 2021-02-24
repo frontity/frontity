@@ -77,6 +77,26 @@ const parseHTML = (body: Cypress.Response["body"]): Document => {
     ".iframes-container iframe"
   );
 
+  // Apply the root(html) attributes as well
+  const iframeRoot = iframe.contentDocument.querySelector("html");
+  const iframeRootAttributes = iframeRoot.getAttributeNames();
+  const docRoot = doc.querySelector("html");
+  const docRootAttributes = docRoot.getAttributeNames();
+
+  // Remove old attributes first.
+  if (iframeRootAttributes.length) {
+    iframeRootAttributes.forEach((name) => {
+      iframeRoot.removeAttribute(name);
+    });
+  }
+
+  // Apply the new incoming attributes.
+  if (docRootAttributes.length) {
+    docRootAttributes.forEach((name) => {
+      iframeRoot.setAttribute(name, docRoot.getAttribute(name));
+    });
+  }
+
   apendChildrenTo(Array.from(doc.head.childNodes), iframe.contentDocument.head);
   apendChildrenTo(Array.from(doc.body.childNodes), iframe.contentDocument.body);
 

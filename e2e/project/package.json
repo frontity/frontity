@@ -14,6 +14,7 @@
   "dependencies": {
     "@frontity/amp": "^0.0.1",
     "@frontity/analytics": "^1.1.0",
+    "@frontity/amp": "^0.0.1",
     "@frontity/comscore-analytics": "^1.0.0",
     "@frontity/core": "^1.5.0",
     "@frontity/google-ad-manager": "^0.2.0",
@@ -49,6 +50,7 @@
     "e2e-smart-adserver": "^1.0.0",
     "e2e-redirections": "^1.0.0",
     "e2e-custom-render": "^1.0.0",
+    "e2e-static-theme": "^1.0.0",
     "frontity": "^1.5.2"
   }
 }

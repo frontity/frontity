@@ -27,6 +27,25 @@ interface AMP extends Package {
        * framework.
        */
       init: Action<Packages>;
+
+      /**
+       * An internal action that defines a custom render and template.
+       *
+       * @remarks
+       * This action is not meant to be run by the user, but by the Frontity
+       * framework.
+       */
+      beforeSSR?: Action<Packages>;
+
+      /**
+       * An internal action that defines a new App component to hydrate the
+       * css cache.
+       *
+       * @remarks
+       * This action is not meant to be run by the user, but by the Frontity
+       * framework.
+       */
+      beforeCSR?: Action<Packages>;
     };
   };
 }

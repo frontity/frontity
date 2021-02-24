@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "@frontity/html2react": "^1.6.1",
+    "@emotion/server": "^11.0.0",
+    "@emotion/cache": "11.1.3",
     "@frontity/source": "^1.5.1",
     "@frontity/wp-source": "^1.11.1",
     "frontity": "^1.14.1"
