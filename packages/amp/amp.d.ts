@@ -32,6 +32,11 @@ declare namespace JSX {
      * The amp-audio component.
      */
     "amp-audio": any;
+
+    /**
+     * The amp-twitter-component.
+     */
+    "amp-twitter": any;
   }
 }
 

@@ -180,6 +180,13 @@ test("Elements with prohibited ID values should be removed", async () => {
   expect(await amp(container.innerHTML)).toBeValidAmpHtml();
 });
 
+test("Validate amp-twitter", async () => {
+  const { container } = render(<Html2React html="" processors={processors} />);
+
+  expect(container.firstChild).toMatchInlineSnapshot(`null`);
+  expect(await amp(container.innerHTML)).toBeValidAmpHtml();
+});
+
 test("Adding 2 iframes should result in adding only 1 amp-iframe AMP script in the <head />", async () => {
   const helmetContext = {};
 
