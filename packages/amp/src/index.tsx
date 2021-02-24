@@ -4,6 +4,7 @@ import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import ampTemplate from "./template";
 import AMP from "../types";
+import processors from "./processors";
 
 /**
  * Emotion cache key.
@@ -25,6 +26,9 @@ export default {
   actions: {
     amp: {
       init: ({ libraries }) => {
+        // Add the AMP processors
+        libraries.html2react.processors.concat(processors);
+
         if (libraries.source) {
           const { parse, stringify } = libraries.source;
 
