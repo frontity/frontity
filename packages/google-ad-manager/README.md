@@ -8,7 +8,7 @@ The Google Ad Manager package enables Frontity to integrate with Google Ad Manag
 - [Settings](#settings)
   - [Object properties](#object-properties)
     - [The `props` property](#the-props-property)
-- [How to use](#how-to-use)
+- [Usage](#usage)
 - [Feature Discussions](#feature-discussions)
 - [Changelog](#changelog)
 - [Open Source Community](#open-source-community)
@@ -71,7 +71,7 @@ An object with props that will be passed to the `<Slot>` component.
 | `targeting` | array  | no       | One or more keys, each with one or more associated values. _[more info](https://developers.google.com/publisher-tag/guides/key-value-targeting)_.                                                        |
 | `data`      | array  | no       | Other data that you want to pass to the Slot.                                                                                                                                                            |
 
-## How to use
+## Usage
 
 The recommended usage of this component is as detailed above using the Slot and Fill pattern. The configuration of the fill(s) is done in the `state.fills.googleAdManager` namespace in `frontity.settings.js`.
 
@@ -91,6 +91,8 @@ const Component = ({ libraries }) => {
 
 Export connect(Component);
 ```
+
+> Read more about how to use the google-ad-manager package in the [docs](https://api.frontity.org/frontity-packages/features-packages/google-ad-manager.md)
 
 ---
 
