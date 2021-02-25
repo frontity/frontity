@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useConnect } from "frontity";
 import useInView from "../use-in-view";
@@ -7,6 +8,7 @@ import {
   Packages,
 } from "./types";
 import { Data } from "@frontity/source/types";
+
 
 /**
  * A hook to build other infinite scroll hooks.
@@ -37,10 +39,7 @@ const useInfiniteScroll = ({
   // Check if `IntersectionObserver` is supported by the browser.
   const isSupported = fetch.supported && route.supported;
 
-  // Get the store from Frontity. The `state` and `action` props are got later
-  // inside the `useEffect` callbacks because those hooks do not depend on any
-  // store prop.
-  const store = useConnect<Packages>();
+  const { state, actions } = useConnect<Packages>();
 
   // Declare the data objects needed, all of them initialized as `null`.
   let current: Data = null;
@@ -50,35 +49,29 @@ const useInfiniteScroll = ({
   // Get the data objects from the Frontity store. If `intersectionObserver` is
   // not supported, all of them will remain as `null`.
   if (isSupported) {
-    current = store.state.source.get(currentLink);
+    current = state.source.get(currentLink);
 
     if (nextLink) {
-      next = store.state.source.get(nextLink);
+      next = state.source.get(nextLink);
       isNextReady = next.isReady;
     }
   }
 
-  // Request the current route in case it's not ready and it's not fetching. If
+  // Fetch the current link in case it's not ready and it's not fetching. If
   // not supported, it does nothing.
   useEffect(() => {
     if (!isSupported) return;
 
-    // Get the state and actions from Frontity.
-    const { actions } = store;
-
     // Get the data object of the current link and fetch it if needed.
     if (!current.isReady && !current.isFetching)
       actions.source.fetch(currentLink);
-  }, [currentLink, isSupported, current, store]);
+  }, [currentLink, current]);
 
   // Once the fetch waypoint is in view, fetch the next route content, if not
-  // available yet, and add the new route to the array of elements in the
+  // available yet, and add the new link to the array of elements in the
   // infinite scroll. Do nothing if it is not supported.
   useEffect(() => {
     if (!isSupported) return;
-
-    // Get the state and actions from Frontity.
-    const { state, actions } = store;
 
     if (fetch.inView && nextLink) {
       // Get the `infiniteScroll` props from the history state.
@@ -107,15 +100,8 @@ const useInfiniteScroll = ({
         infiniteScroll: { ...infiniteScroll, links },
       });
     }
-  }, [
-    isSupported,
-    fetch.inView,
-    currentLink,
-    nextLink,
-    next,
-    isNextReady,
-    store,
-  ]);
+    }
+  }, [fetch.inView, currentLink, nextLink, next, isNextReady]);
 
   // Once the route waypoint is in view, change the route to the
   // current element. This preserves the route state between changes
@@ -123,15 +109,13 @@ const useInfiniteScroll = ({
   useEffect(() => {
     if (!isSupported) return;
 
-    const { state, actions } = store;
-
     if (route.inView && state.router.link !== currentLink) {
       actions.router.set(currentLink, {
         method: "replace",
         state: state.router.state,
       });
     }
-  }, [isSupported, route.inView, currentLink, store]);
+  }, [route.inView, currentLink]);
 
   return isSupported
     ? {
