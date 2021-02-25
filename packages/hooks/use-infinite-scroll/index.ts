@@ -9,7 +9,6 @@ import {
 } from "./types";
 import { Data } from "@frontity/source/types";
 
-
 /**
  * A hook to build other infinite scroll hooks.
  *
@@ -92,14 +91,16 @@ const useInfiniteScroll = ({
       }
 
       // Add the link to the list once it's ready.
-      if (isNextReady) links.push(next.link);
+      if (isNextReady) {
+        links.push(next.link);
 
-      // Update the browser's history state with the new link.
-      actions.router.updateState({
-        ...state.router.state,
-        infiniteScroll: { ...infiniteScroll, links },
-      });
-    }
+        // Update the browser's history state with the new link once it is
+        // ready.
+        actions.router.updateState({
+          ...state.router.state,
+          infiniteScroll: { ...infiniteScroll, links },
+        });
+      }
     }
   }, [fetch.inView, currentLink, nextLink, next, isNextReady]);
 

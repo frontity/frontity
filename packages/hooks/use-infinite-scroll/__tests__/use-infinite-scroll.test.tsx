@@ -42,6 +42,10 @@ const routerUpdateState = jest.fn();
 beforeEach(() => {
   container = document.createElement("div");
   document.body.appendChild(container);
+  mockedUseConnect.mockReturnValue({
+    state: { source: { get: sourceGet } },
+    actions: { source: { fetch: sourceFetch } },
+  });
 });
 
 afterEach(() => {
@@ -154,11 +158,6 @@ describe("useInfiniteScroll", () => {
       supported: true,
     });
 
-    mockedUseConnect.mockReturnValue({
-      state: { source: { get: sourceGet } },
-      actions: { source: { fetch: sourceFetch } },
-    } as any);
-
     sourceGet.mockReturnValue({
       isReady: false,
       isFetching: false,
@@ -184,11 +183,6 @@ describe("useInfiniteScroll", () => {
         inView: false,
         supported: true,
       });
-
-    mockedUseConnect.mockReturnValue({
-      state: { source: { get: sourceGet } },
-      actions: { source: { fetch: sourceFetch } },
-    } as any);
 
     sourceGet.mockReturnValue({
       isReady: true,
@@ -248,10 +242,7 @@ describe("useInfiniteScroll", () => {
     expect(sourceGet).toHaveBeenNthCalledWith(1, "/");
     expect(sourceGet).toHaveBeenNthCalledWith(2, "/page/2/");
     expect(sourceFetch).toHaveBeenCalledWith("/page/2/");
-    expect(routerUpdateState).toHaveBeenCalledWith({
-      someOtherPackage: {},
-      infiniteScroll: { links: ["/"] },
-    });
+    expect(routerUpdateState).not.toHaveBeenCalledWith();
   });
 
   test("should update browser state if first reference is in view and it's ready", () => {
@@ -398,10 +389,7 @@ describe("useInfiniteScroll", () => {
     });
 
     expect(sourceFetch).not.toHaveBeenCalled();
-    expect(routerUpdateState).toHaveBeenCalledWith({
-      someOtherPackage: {},
-      infiniteScroll: { links: ["/"] },
-    });
+    expect(routerUpdateState).not.toHaveBeenCalled();
   });
 
   test("should not fetch `nextLink` if it's already ready", () => {
