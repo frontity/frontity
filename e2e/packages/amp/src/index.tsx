@@ -29,11 +29,6 @@ const AmpPackage: Package = {
   roots: {
     amp: Theme,
   },
-  libraries: {
-    html2react: {
-      processors: [],
-    },
-  },
 };
 
 export default AmpPackage;
