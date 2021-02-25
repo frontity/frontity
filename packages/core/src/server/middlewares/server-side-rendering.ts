@@ -102,7 +102,7 @@ export const serverSideRendering = async (
   // Get static head strings.
   const { head: helmetHead, ...rest } = getHeadTags(helmetContext.helmet);
 
-  // Concat the helemet head tags with the already defined head.
+  // Concat the helmet head tags with the already defined head.
   output.head = helmetHead.concat(output.head);
 
   // Write the template to body.

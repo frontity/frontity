@@ -76,7 +76,9 @@ export default {
         libraries.frontity.template = ({ result, head, ...rest }) => {
           const { css, html } = result;
 
-          // Cleanup the head of scripts, but leave only the `amp-` based ones.
+          // Cleanup the head of scripts, but leave only the `amp-` based ones
+          // because they are created by the AMP runtime or allowed to be added
+          // by the user if containing the `amp-custom` attribute.
           const { tags, extraCss } = head.reduce(
             (out, tag) => {
               const isCss = /<style.*?>([\s\S]+?)<\/style>/gm.exec(tag);
