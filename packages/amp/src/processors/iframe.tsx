@@ -26,6 +26,7 @@ const AmpIframe = (props: any) => {
 };
 
 export const iframe: Processor<Element, Packages> = {
+  name: "amp-iframe",
   test: ({ node }) => node.type === "element" && node.component === "iframe",
   processor: ({ node }) => {
     node.component = AmpIframe;

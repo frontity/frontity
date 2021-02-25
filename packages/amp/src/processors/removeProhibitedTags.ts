@@ -2,6 +2,7 @@ import { Processor, Element } from "@frontity/html2react/types";
 import { Packages } from "../../types";
 
 export const removeProhibitedTags: Processor<Element, Packages> = {
+  name: "amp: removeProhibitedTags",
   test: ({ node }) =>
     node.type === "element" &&
     (node.component === "style" ||

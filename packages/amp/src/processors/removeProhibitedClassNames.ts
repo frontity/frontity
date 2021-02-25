@@ -2,6 +2,7 @@ import { Processor, Element } from "@frontity/html2react/types";
 import { Packages } from "../../types";
 
 export const removeProhibitedClassNames: Processor<Element, Packages> = {
+  name: "amp: removeProhibitedClassNames",
   test: ({ node }) =>
     node.type === "element" &&
     (node.props?.className?.split(" ").some((clz) => clz.startsWith("-amp")) ||

@@ -26,6 +26,7 @@ const AMPVideo = (props: any) => {
 };
 
 export const video: Processor<Element, Packages> = {
+  name: "amp-video",
   test: ({ node }) => node.type === "element" && node.component === "video",
   processor: ({ node }) => {
     node.component = AMPVideo;
