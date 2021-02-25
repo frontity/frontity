@@ -207,7 +207,6 @@ const usePostTypeInfiniteScroll = (
   // Initialize/update browser state.
   useEffect(() => {
     if (!options.active) return;
-    if (isInitialized) return;
 
     actions.router.updateState({
       ...state.router.state,
