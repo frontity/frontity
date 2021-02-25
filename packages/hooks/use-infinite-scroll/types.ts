@@ -13,6 +13,28 @@ import Router from "@frontity/router/types";
 export type IntersectionOptions = Parameters<typeof useInView>[0];
 
 /**
+ * Generate the <Wrapper> component for a specific link.
+ */
+export interface WrapperGenerator {
+  (params: {
+    /**
+     * Link of the post that will be rendered inside this wrapper.
+     */
+    link: string;
+
+    /**
+     * The intersection observer options for fetching.
+     */
+    fetchInViewOptions?: IntersectionOptions;
+
+    /**
+     * The intersection observer options for routing.
+     */
+    routeInViewOptions?: IntersectionOptions;
+  }): React.FC;
+}
+
+/**
  * Options of the {@link useInfiniteScroll} hook.
  */
 export type UseInfiniteScrollOptions = {

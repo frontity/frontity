@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { useConnect, connect, css } from "frontity";
-import memoize from "ramda/src/memoizeWith";
 import useInfiniteScroll from "../use-infinite-scroll";
+import { generateMemoizedWrapper } from "../use-infinite-scroll/utils";
 import { isArchive, isError } from "@frontity/source";
-import { IntersectionOptions, Packages } from "../use-infinite-scroll/types";
+import { Packages, WrapperGenerator } from "../use-infinite-scroll/types";
 import {
   UseArchiveInfiniteScrollOptions,
   UseArchiveInfiniteScrollOutput,
-  WrapperGeneratorParams,
 } from "./types";
 
 /**
@@ -18,11 +17,11 @@ import {
  *
  * @returns A React component that should be used to wrap the page.
  */
-export const wrapperGenerator = ({
+export const wrapperGenerator: WrapperGenerator = ({
   link,
   fetchInViewOptions,
   routeInViewOptions,
-}: WrapperGeneratorParams): React.FC => {
+}) => {
   /**
    * The wrapper component returned by this hook.
    *
@@ -84,35 +83,9 @@ export const wrapperGenerator = ({
 };
 
 /**
- * A memoized {@link Wrapper} to generate Wrapper components only once.
- *
- * @param link - The link for the page that the Wrapper belongs to.
- * @param options - The intersection observer options for fetching and routing.
- *
- * @returns A React component that should be used to wrap the page.
+ * The memoized <Wrapper> component.
  */
-const MemoizedWrapper = memoize(
-  (link) => link,
-  (
-    link: string,
-    options: {
-      /**
-       * The intersection observer options for fetching.
-       */
-      fetchInViewOptions: IntersectionOptions;
-
-      /**
-       * The intersection observer options for routing.
-       */
-      routeInViewOptions: IntersectionOptions;
-    }
-  ) =>
-    wrapperGenerator({
-      link,
-      fetchInViewOptions: options.fetchInViewOptions,
-      routeInViewOptions: options.routeInViewOptions,
-    })
-);
+const MemoizedWrapper = generateMemoizedWrapper(wrapperGenerator);
 
 /**
  * A hook used to add infinite scroll to any Frontity archive.

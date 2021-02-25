@@ -84,23 +84,3 @@ export type UseArchiveInfiniteScrollOutput = {
    */
   fetchNext: () => Promise<void>;
 };
-
-/**
- * Params recevied by the {@link WrapperGenerator} function.
- */
-export type WrapperGeneratorParams = {
-  /**
-   * Link of the post that will be rendered inside this wrapper.
-   */
-  link: string;
-
-  /**
-   * The intersection observer options for fetching.
-   */
-  fetchInViewOptions?: IntersectionOptions;
-
-  /**
-   * The intersection observer options for routing.
-   */
-  routeInViewOptions?: IntersectionOptions;
-};
