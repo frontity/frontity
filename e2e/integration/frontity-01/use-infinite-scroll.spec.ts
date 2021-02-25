@@ -1582,4 +1582,62 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.get("[data-test='post-11']").should("exist").scrollIntoView();
     cy.location("href").should("eq", "http://localhost:3001/post-11/");
   });
+
+  it("should create a new infinite scroll context when going directly to a ready post", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
+
+    // Stubs calls to REST API.
+
+    // Main archive ("/")
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
+      response: "fixture:use-infinite-scroll/post-1.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("postOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": "20",
+        "x-wp-totalpages": "2",
+      },
+      delay: 300,
+    }).as("pageOne");
+
+    // Changes url to `/post-1`.
+    cy.get("[data-test='to-first-post']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/post-1/");
+    cy.wait("@postOne");
+    cy.wait("@pageOne");
+    cy.get("[data-test='post-type']").should("exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+
+    // Scrolls to bottom to fetch next post. It should be "/post-2".
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-2/");
+
+    // Go directly to "/post-7".
+    cy.get("[data-test='to-post-7']").should("exist").click();
+    cy.get("[data-test='post-1']").should("not.exist");
+    cy.get("[data-test='post-2']").should("not.exist");
+    cy.get("[data-test='post-7']").should("exist");
+    cy.location("href").should("eq", "http://localhost:3001/post-7/");
+
+    // Scrolls to bottom to fetch next post. It should be "/post-8".
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-1']").should("not.exist");
+    cy.get("[data-test='post-2']").should("not.exist");
+    cy.get("[data-test='post-7']").should("exist");
+    cy.get("[data-test='post-8']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-8/");
+  });
 });

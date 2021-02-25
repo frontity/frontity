@@ -6,6 +6,7 @@ import PostType from "./components/post-type";
 import * as handlers from "./handlers";
 import UseInfiniteScroll, { Packages } from "../types";
 import { buildLink } from "./utils";
+import { PostData } from "@frontity/source/types";
 
 const Root: React.FC = connect(
   () => {
@@ -56,6 +57,9 @@ const Root: React.FC = connect(
           <button data-test="to-some-post" onClick={goTo("/some-post")}>
             To Some Post
           </button>
+          <button data-test="to-post-7" onClick={goTo("/post-7")}>
+            To Post 7
+          </button>
           <button
             data-test="toggle-infinite-scroll"
             onClick={() => {
@@ -90,6 +94,19 @@ const Root: React.FC = connect(
   { injectProps: false }
 );
 
+const postReady: PostData = {
+  isFetching: false,
+  isReady: true,
+  isPostType: true,
+  isPost: true,
+  id: 7,
+  type: "post",
+  link: "/post-7/",
+  route: "/post-7/",
+  page: 1,
+  query: {},
+};
+
 const pkg: UseInfiniteScroll = {
   name: "use-infinite-scroll",
   state: {
@@ -97,6 +114,19 @@ const pkg: UseInfiniteScroll = {
       isInfiniteScrollEnabled: true,
       infiniteScrollLimit: Infinity,
       infiniteScrollArchive: undefined,
+    },
+    source: {
+      data: {
+        "/post-7/": postReady,
+      },
+      post: {
+        7: {
+          type: "post",
+          id: 7,
+          link: "/post-7/",
+          slug: "post-7",
+        },
+      },
     },
   },
   actions: {

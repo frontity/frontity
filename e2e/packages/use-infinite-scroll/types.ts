@@ -7,6 +7,7 @@ import {
 } from "frontity/types";
 import TinyRouter from "@frontity/tiny-router/types";
 import WpSource from "@frontity/wp-source/types";
+import Source from "@frontity/source/types";
 
 /**
  * Package to do e2e testing of Frontity's infinite scroll hooks.
@@ -39,6 +40,21 @@ interface UseInfiniteScroll extends Package {
        * The link of the archive from which the posts are fetched.
        */
       infiniteScrollArchive: string;
+    };
+
+    /**
+     * Source namespace.
+     */
+    source: {
+      /**
+       * Map of data objects.
+       */
+      data: Source["state"]["source"]["data"];
+
+      /**
+       * Map of post entities.
+       */
+      post: Source["state"]["source"]["post"];
     };
   };
 

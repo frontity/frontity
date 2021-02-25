@@ -201,9 +201,13 @@ const usePostTypeInfiniteScroll = (
 
   const limit = infiniteScroll?.limit || options.limit;
 
+  // Boolean to trigger the initialization effect.
+  const isInitialized = !!infiniteScroll;
+
   // Initialize/update browser state.
   useEffect(() => {
     if (!options.active) return;
+    if (isInitialized) return;
 
     actions.router.updateState({
       ...state.router.state,
@@ -216,7 +220,7 @@ const usePostTypeInfiniteScroll = (
       },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options.active]);
+  }, [options.active, isInitialized]);
 
   // Data objects of the last archive page fetched and the next one.
   const lastPage = state.source.get(pages[pages.length - 1]);
