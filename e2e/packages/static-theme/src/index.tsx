@@ -121,8 +121,8 @@ const Theme = () => {
           features, use the HTTPS protocol.
         </Text>
         <Box p={0.5} />
-        <Text r={0.25} color={"blue-1"}>
-          » Read more
+        <Text className="blink" r={0.25} color={"blue-1"}>
+          &raquo; Read more
         </Text>
         <Box p={1} />
         <Text size={1.25} as="h2" color="blue-1">
@@ -142,5 +142,27 @@ const Theme = () => {
 export default {
   roots: {
     static: Theme,
+  },
+  actions: {
+    static: {
+      beforeSSR({ libraries }) {
+        libraries.frontity.head.push(`
+          <style>
+            .blink {
+              animation: blink 500ms linear infinite;
+            }
+
+            @keyframes blink {
+              from {
+                opacity: 1;
+              }
+              to {
+                opacity: 0;
+              }
+            }
+          </style>
+        `);
+      },
+    },
   },
 };
