@@ -444,9 +444,12 @@ const settings: Settings<
   },
   {
     name: "amp",
+    packages: ["@frontity/amp", "e2e-static-theme"],
+  },
+  {
+    name: "amp-wordpress",
     packages: [
       "@frontity/amp",
-      "e2e-static-theme",
       "e2e-amp",
       "@frontity/html2react",
       "@frontity/tiny-router",
