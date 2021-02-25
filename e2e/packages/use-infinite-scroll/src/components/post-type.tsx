@@ -59,7 +59,10 @@ const PostType: React.FC = () => {
       })}
       {isFetching && <div data-test="fetching">Fetching</div>}
       {(isError || isLimit) && (
-        <div data-test="error" css={fetchDiv}>
+        <div
+          data-test={(isError && "error") || (isLimit && "limit")}
+          css={fetchDiv}
+        >
           <button data-test="fetch" onClick={fetchNext}>
             Fetch Next
           </button>
