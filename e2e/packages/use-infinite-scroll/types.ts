@@ -55,6 +55,11 @@ interface UseInfiniteScroll extends Package {
        * Map of post entities.
        */
       post: Source["state"]["source"]["post"];
+
+      /**
+       * Map of category entities.
+       */
+      category: Source["state"]["source"]["category"];
     };
   };
 

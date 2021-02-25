@@ -6,7 +6,7 @@ import PostType from "./components/post-type";
 import * as handlers from "./handlers";
 import UseInfiniteScroll, { Packages } from "../types";
 import { buildLink } from "./utils";
-import { PostData } from "@frontity/source/types";
+import { PostData, TermData } from "@frontity/source/types";
 
 const Root: React.FC = connect(
   () => {
@@ -23,6 +23,7 @@ const Root: React.FC = connect(
       position: fixed;
       z-index: 10;
       right: 0;
+      text-align: right;
     `;
 
     /**
@@ -47,6 +48,9 @@ const Root: React.FC = connect(
           </button>
           <button data-test="to-category-one" onClick={goTo("/category/one")}>
             To Category One
+          </button>
+          <button data-test="to-category-two" onClick={goTo("/category/two")}>
+            To Category Two
           </button>
           <button data-test="to-first-post" onClick={goTo("/post-1")}>
             To First Post
@@ -94,6 +98,9 @@ const Root: React.FC = connect(
   { injectProps: false }
 );
 
+/**
+ * PostData object prepopulated for some test cases.
+ */
 const postReady: PostData = {
   isFetching: false,
   isReady: true,
@@ -107,6 +114,35 @@ const postReady: PostData = {
   query: {},
 };
 
+/**
+ * TermData object prepopulated for some test cases.
+ */
+const categoryReady: TermData = {
+  isFetching: false,
+  isReady: true,
+  isArchive: true,
+  isTerm: true,
+  id: 2,
+  taxonomy: "category",
+  link: "/category/two/",
+  route: "/category/two/",
+  page: 1,
+  query: {},
+  next: "/category/two/page/2/",
+  items: [
+    { type: "post", id: 1, link: "post-1" },
+    { type: "post", id: 2, link: "post-2" },
+    { type: "post", id: 3, link: "post-3" },
+    { type: "post", id: 4, link: "post-4" },
+    { type: "post", id: 5, link: "post-5" },
+    { type: "post", id: 6, link: "post-6" },
+    { type: "post", id: 7, link: "post-7" },
+    { type: "post", id: 8, link: "post-8" },
+    { type: "post", id: 9, link: "post-9" },
+    { type: "post", id: 10, link: "post-10" },
+  ],
+};
+
 const pkg: UseInfiniteScroll = {
   name: "use-infinite-scroll",
   state: {
@@ -118,6 +154,7 @@ const pkg: UseInfiniteScroll = {
     source: {
       data: {
         "/post-7/": postReady,
+        "/category/two/": categoryReady,
       },
       post: {
         7: {
@@ -125,6 +162,14 @@ const pkg: UseInfiniteScroll = {
           id: 7,
           link: "/post-7/",
           slug: "post-7",
+        },
+      },
+      category: {
+        2: {
+          taxonomy: "category",
+          id: 2,
+          link: "/category/two/",
+          slug: "two",
         },
       },
     },

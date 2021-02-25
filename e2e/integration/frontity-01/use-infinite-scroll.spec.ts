@@ -443,6 +443,83 @@ describe("useArchiveInfiniteScroll", () => {
     cy.get("[data-test='page-3']").should("exist").should("be.visible");
     cy.location("href").should("eq", "http://localhost:3001/page/3/");
   });
+
+  it("should create a new infinite scroll context when going directly to a ready archive", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
+
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+      delay: 300,
+    }).as("pageTwo");
+    cy.server();
+    cy.route({
+      url:
+        "https://domain.com/wp-json/wp/v2/posts?_embed=true&categories=2&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+      delay: 300,
+    }).as("categoryPageTwo");
+
+    // Changes url to `/`.
+    cy.get("[data-test='to-archive']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/");
+    cy.wait("@pageOne");
+    cy.get("[data-test='archive']").should("exist");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+
+    // // Scrolls to bottom to fetch next page.
+    // cy.scrollTo("bottom");
+    // cy.get("[data-test='fetching']").should("exist");
+    // cy.get("[data-test='page-2']").should("not.exist");
+    // cy.wait("@pageTwo");
+    // cy.get("[data-test='fetching']").should("not.exist");
+    // cy.get("[data-test='page-2']").should("exist").scrollIntoView();
+    // cy.location("href").should("eq", "http://localhost:3001/page/2/");
+
+    // // Go directly to "/category/two/"
+    // cy.get("[data-test='to-category-two']").should("exist").click();
+    // cy.get("[data-test='fetching']").should("not.exist");
+    // cy.get("[data-test='page-1']").should("exist");
+    // cy.location("href").should("eq", "http://localhost:3001/category/two/");
+
+    // // Scrolls to bottom to fetch next page.
+    // cy.scrollTo("bottom");
+    // cy.get("[data-test='fetching']").should("exist");
+    // cy.get("[data-test='page-2']").should("not.exist");
+    // cy.wait("@categoryPageTwo");
+    // cy.get("[data-test='fetching']").should("not.exist");
+    // cy.get("[data-test='page-2']").should("exist").scrollIntoView();
+    // cy.location("href").should(
+    //   "eq",
+    //   "http://localhost:3001/category/two/page/2/"
+    // );
+
+    // // Go back, the link should point to "/page/2/"
+    // cy.go("back");
+    // cy.get("[data-test='fetching']").should("not.exist");
+    // cy.get("[data-test='page-2']").should("exist").should("be.visible");
+    // cy.location("href").should("eq", "http://localhost:3001/page/2/");
+  });
 });
 
 describe("usePostTypeInfiniteScroll", () => {
