@@ -1,10 +1,29 @@
 import { styled, keyframes, css } from "frontity";
 
+/* 
+  Definition of CSS animation using the "keyframes" method
+  available from "frontity" package
+  https://api.frontity.org/frontity-packages/core-package/frontity#keyframes
+  https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+*/
+
 const scale = keyframes`
   0% {transform: scaley(1.0)}
   50% {transform: scaley(0.4)}
   100% {transform: scaley(1.0)}
 `;
+        
+/**
+  * The <Loading> component shows a spinner
+  * This <Loading> is expected to be display while data.isFetching === true
+  *
+  * @example
+  * 
+  * <Switch>
+  *   <Loading when={data.isFetching} />
+  * ...
+  * </Switch>
+ */
 
 const Loading = () => (
   <Container>

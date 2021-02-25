@@ -7,10 +7,13 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 
-/**
- * Theme is the root React component of our theme. The one we will export
- * in roots.
- */
+
+ /**
+  * <Theme> is the root React component of our theme. The one we will export in roots.
+  * @param  props
+  * @param  props.state - Frontity state
+  */
+
 const Theme = ({ state }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
