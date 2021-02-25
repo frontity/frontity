@@ -117,7 +117,8 @@
           {
             "assertFunctionNames": ["expect", "cy.**"]
           }
-        ]
+        ],
+        "jest/valid-expect": "off"
       }
     },
     // Overrides for Cypress test files.
