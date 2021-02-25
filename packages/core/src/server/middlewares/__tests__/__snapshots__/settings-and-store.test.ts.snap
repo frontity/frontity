@@ -6,7 +6,9 @@ Object {
   "libraries": Object {
     "frontity": Object {
       "App": [Function],
+      "head": Array [],
       "render": [Function],
+      "scripts": Array [],
       "template": [Function],
     },
   },

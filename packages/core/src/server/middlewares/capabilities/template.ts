@@ -33,6 +33,16 @@ const html: Template = ({
  * @param namespace - The namespace object.
  */
 export const template = (namespace) => {
+  /**
+   * Define a set of head tags that will be used to compose the template.
+   */
+  namespace.head = [];
+
+  /**
+   * A set of scripts tags to be included in the body script.
+   */
+  namespace.scripts = [];
+
   // Define the new template method.
   namespace.template = html;
 };
