@@ -82,7 +82,9 @@ export default {
 
           // Cleanup the head of scripts, but leave only the `amp-` based ones.
           head = head.filter((tag) => {
-            return /<?script.+?amp-/g.test(tag);
+            if (/<?script.+?>/g.test(tag)) {
+              return /<?script.+?amp-/g.test(tag);
+            }
           });
 
           // Push the custom css style tag.
