@@ -294,6 +294,8 @@ const usePostTypeInfiniteScroll = (
    * Function to fetch the next item disregarding the limit.
    */
   const fetchNext = async () => {
+    // Don't fetch if hook is not active or there are no next page or there
+    // was not an error in the last fetch.
     if (!options.active || (!thereIsNext && !isLastError)) return;
 
     const links = infiniteScroll?.links
@@ -301,12 +303,15 @@ const usePostTypeInfiniteScroll = (
       : [state.router.link];
 
     // We need `nextItem` to be declared in local scope.
-    let nextLink = itemLinks[lastIndex + 1];
+    let nextItem = itemLinks[lastIndex + 1];
 
+    // Start the fetch of the next page and await until it has finished.
     if (isLastError) {
+      // If there was an error, force a fetch of the last page.
       if (isError(lastPage))
         await actions.source.fetch(pages[pages.length - 1], { force: true });
-    } else if (!nextLink) {
+    } else if (!nextItem) {
+      // If there is no next page, do nothing.
       if (!nextPage) return;
 
       pages.push(nextPage.link);
@@ -320,26 +325,33 @@ const usePostTypeInfiniteScroll = (
         },
       });
 
+      // If next page is not already ready or fetching, fetch and wait until it
+      // finishes.
       if (!nextPage.isReady && !nextPage.isFetching) {
         await actions.source.fetch(nextPage.link);
       }
 
+      // Once it has finished, get the new list of items.
       const itemLinks = getLinksFromPages({
         pages,
         firstLink,
         sourceGet: state.source.get,
       });
 
-      nextLink = itemLinks[lastIndex + 1];
+      // Update the next item.
+      nextItem = itemLinks[lastIndex + 1];
     }
 
+    // Start the fetch of the next item and wait until it has finished.
     if (isLastError) {
       if (isError(last))
+        // If there was an error, force a fetch of the last item.
         await actions.source.fetch(links[links.length - 1], { force: true });
     } else {
-      if (links.includes(nextLink)) return;
+      // If the nextItem is not in the links, do nothing.
+      if (links.includes(nextItem)) return;
 
-      links.push(nextLink);
+      links.push(nextItem);
 
       actions.router.updateState({
         ...state.router.state,
@@ -350,10 +362,12 @@ const usePostTypeInfiniteScroll = (
         },
       });
 
-      const next = state.source.get(nextLink);
+      const next = state.source.get(nextItem);
 
+      // If next item is not already ready or fetching, fetch and wait until it
+      // finishes.
       if (!next.isReady && !next.isFetching) {
-        await actions.source.fetch(nextLink);
+        await actions.source.fetch(nextItem);
       }
     }
   };
