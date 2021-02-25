@@ -79,7 +79,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       isReady: false,
       isFetching: false,
@@ -119,7 +119,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/3/",
       isReady: false,
       isFetching: false,
@@ -155,7 +155,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       isReady: false,
       isFetching: false,
@@ -191,7 +191,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       isReady: false,
       isFetching: false,
@@ -225,7 +225,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/3/",
       isReady: true,
       isFetching: false,
@@ -284,7 +284,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/3/",
       isReady: false,
       isFetching: false,
@@ -343,7 +343,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
       isArchive: true,
@@ -392,7 +392,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/2/",
       next: "/page/3/",
       isArchive: true,
@@ -443,7 +443,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       isReady: true,
       isFetching: false,
@@ -486,7 +486,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
       isArchive: true,
@@ -535,7 +535,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       isReady: true,
       isError: true,
       isFetching: false,
@@ -585,7 +585,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
       isArchive: true,
@@ -599,7 +599,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     routerUpdateState.mockClear();
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/2/",
       isReady: false,
       isFetching: false,
@@ -636,7 +636,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
       isArchive: true,
@@ -650,7 +650,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     routerUpdateState.mockClear();
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/2/",
       isReady: true,
       isFetching: false,
@@ -686,7 +686,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
       isArchive: true,
@@ -700,7 +700,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     routerUpdateState.mockClear();
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/2/",
       isReady: false,
       isFetching: true,
@@ -736,7 +736,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       isReady: true,
       isFetching: false,
@@ -748,7 +748,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     routerUpdateState.mockClear();
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/2/",
       isReady: false,
       isFetching: false,
@@ -781,7 +781,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
       isArchive: true,
@@ -795,7 +795,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     routerUpdateState.mockClear();
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page/2/",
       isReady: false,
       isFetching: false,
@@ -826,7 +826,7 @@ describe("useArchiveInfiniteScroll", () => {
       },
     } as any);
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page-one/",
       next: "/page-two/",
       isArchive: true,
@@ -840,7 +840,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     routerUpdateState.mockClear();
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       link: "/page-two/",
       isReady: false,
       isFetching: false,
@@ -899,7 +899,7 @@ describe("Wrapper", () => {
       link: "/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: {
           get: sourceGet,
@@ -909,7 +909,7 @@ describe("Wrapper", () => {
       actions: {},
     });
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       isReady: true,
     });
 
@@ -933,7 +933,7 @@ describe("Wrapper", () => {
       link: "/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: {
           get: sourceGet,
@@ -943,7 +943,7 @@ describe("Wrapper", () => {
       actions: {},
     });
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       isReady: false,
     });
 
@@ -967,7 +967,7 @@ describe("Wrapper", () => {
       link: "/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: {
           get: sourceGet,
@@ -977,7 +977,7 @@ describe("Wrapper", () => {
       actions: {},
     });
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       isReady: true,
     });
 
@@ -1005,7 +1005,7 @@ describe("Wrapper", () => {
       link: "/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: {
           get: sourceGet,
@@ -1015,7 +1015,7 @@ describe("Wrapper", () => {
       actions: {},
     });
 
-    sourceGet.mockReturnValueOnce({
+    sourceGet.mockReturnValue({
       isReady: true,
     });
 
@@ -1043,7 +1043,7 @@ describe("Wrapper", () => {
       link: "/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: {
           get: sourceGet,
@@ -1053,16 +1053,26 @@ describe("Wrapper", () => {
       actions: {},
     });
 
+    const firstData = {
+      next: "/page/2/",
+      isArchive: true,
+      isReady: true,
+    };
+    const secondData = {
+      link: "/page/2/",
+      isReady: false,
+    };
+
     sourceGet
-      .mockReturnValueOnce({
-        next: "/page/2/",
-        isArchive: true,
-        isReady: true,
-      })
-      .mockReturnValueOnce({
-        link: "/page/2/",
-        isReady: false,
-      });
+      // The first state.source.get() of the ArchiveWrapper, which needs it to
+      // check if there is a next page.
+      .mockReturnValueOnce(firstData)
+      // The second state.source.get() of the ArchiveWrapper, which needs it to
+      // get the link of the next page.
+      .mockReturnValueOnce(secondData)
+      // The state.source.get() of the Wrapper, which needs it to see if the
+      // current link is ready or is an error.
+      .mockReturnValueOnce(firstData);
 
     mockedUseInfiniteScroll.mockReturnValue({
       supported: true,

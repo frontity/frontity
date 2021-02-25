@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { connect, css, useConnect } from "frontity";
-import useInfiniteScroll from "../use-infinite-scroll";
-import { generateMemoizedWrapper } from "../use-infinite-scroll/utils";
+import { connect, useConnect } from "frontity";
+import { generateMemoizedWrapper, Wrapper } from "../use-infinite-scroll/utils";
 import { isArchive, isError } from "@frontity/source";
 import { getLinksFromPages } from "./utils";
 import { Packages, WrapperGenerator } from "../use-infinite-scroll/types";
@@ -11,7 +10,7 @@ import {
 } from "./types";
 
 /**
- * A function that generates Wrapper components.
+ * Generate a Wrapper component.
  *
  * @param options - The link for the page that the Wrapper belongs to
  * and the intersection observer options for fetching and routing.
@@ -29,14 +28,13 @@ export const wrapperGenerator: WrapperGenerator = ({
    * @param props - The component props.
    * @returns A react element.
    */
-  const Wrapper: React.FC<{
+  const PostTypeWrapper: React.FC<{
     /** React element passed as prop. */
     children: React.ReactElement;
     /** HTML class attribute. */
     className: string;
   }> = ({ children, className }) => {
     const { state } = useConnect<Packages>();
-
     const { infiniteScroll } = state.router.state;
 
     // Values from browser state.
@@ -44,50 +42,26 @@ export const wrapperGenerator: WrapperGenerator = ({
     const limit: number = infiniteScroll?.limit;
     const pages: string[] = infiniteScroll?.pages || [];
 
-    // Aliases to needed state.
-    const current = state.source.get(link);
-    const firstLink = links[0];
-
     const itemLinks = getLinksFromPages({
       pages,
-      firstLink,
+      firstLink: links[0],
       sourceGet: state.source.get,
     });
-    const currentIndex = itemLinks.indexOf(link);
-    const nextLink = itemLinks[currentIndex + 1];
 
-    // Infinite scroll booleans.
-    const hasReachedLimit = !!limit && links.length >= limit;
-
-    const { supported, fetchRef, routeRef } = useInfiniteScroll({
-      currentLink: link,
-      nextLink,
+    const props = {
+      link,
+      nextLink: itemLinks[itemLinks.indexOf(link) + 1],
+      className,
+      children,
       fetchInViewOptions,
       routeInViewOptions,
-    });
+      hasReachedLimit: !!limit && links.length >= limit,
+    };
 
-    if (!current.isReady || isError(current)) return null;
-    if (!supported) return children;
-
-    const container = css`
-      position: relative;
-    `;
-
-    const fetcher = css`
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-    `;
-
-    return (
-      <div css={container} ref={routeRef} className={className}>
-        {children}
-        {!hasReachedLimit && <div css={fetcher} ref={fetchRef} />}
-      </div>
-    );
+    return <Wrapper {...props} />;
   };
 
-  return connect(Wrapper, { injectProps: false });
+  return connect(PostTypeWrapper, { injectProps: false });
 };
 
 /**

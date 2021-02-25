@@ -5,13 +5,13 @@ exports[`Wrapper should return children and fetcher inside a wrapper 1`] = `
   id="container"
 >
   <div
-    class="css-5tl93u-Wrapper"
+    class="css-0"
   >
     <div
       id="children"
     />
     <div
-      class="css-5tl93u-Wrapper"
+      class="css-0"
     />
   </div>
 </div>
@@ -38,7 +38,7 @@ exports[`Wrapper should return only children inside the wrapper if limit reached
   id="container"
 >
   <div
-    class="css-5tl93u-Wrapper"
+    class="css-0"
   >
     <div
       id="children"

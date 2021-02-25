@@ -35,6 +35,32 @@ export interface WrapperGenerator {
 }
 
 /**
+ * The props of the <Wrapper> component.
+ */
+export interface WrapperProps {
+  /** React element passed as prop. */
+  children: React.ReactElement;
+
+  /** HTML class attribute. */
+  className: string;
+
+  /** The link for that page/post. */
+  link: string;
+
+  /** The link of the next page/post. */
+  nextLink?: string;
+
+  /** The intersection observer options for fetching. */
+  fetchInViewOptions?: IntersectionOptions;
+
+  /** The intersection observer options for routing. */
+  routeInViewOptions?: IntersectionOptions;
+
+  /** Whether the infinite scroll has reached the limit or not. */
+  hasReachedLimit: boolean;
+}
+
+/**
  * Options of the {@link useInfiniteScroll} hook.
  */
 export type UseInfiniteScrollOptions = {

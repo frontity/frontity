@@ -64,7 +64,7 @@ afterEach(() => {
 
 describe("usePostTypeInfiniteScroll", () => {
   test("should update the browser state on mount (whithout existing state)", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: { link: "/post-one/", state: {} },
@@ -96,7 +96,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should update the browser state on mount (with existing state)", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -141,7 +141,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should update the browser state with `limit` options", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -177,7 +177,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should update the browser state with `archive` set to the value in `options.archive`", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -220,7 +220,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should update the browser state with `archive` set to the value already in state", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -263,7 +263,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should update the browser state with `archive` set to the value in `state.router.previous` if that's an archive", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -303,7 +303,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test('should update the browser state with `archive` set to "/" if the value in `state.router.previous` is not an archive', () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -339,7 +339,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should update the browser state with `archive` set to the value in `options.fallback`", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -374,7 +374,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test('should update the browser state with `archive` set to "/"', () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -409,7 +409,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not update the browser state if `options.active` is false", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -437,7 +437,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should request the archive if not ready and not fetching", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -468,7 +468,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not request the archive if `options.active` is false", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -497,7 +497,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not request the archive if it's ready", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -528,7 +528,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not request the archive if it's fetching", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -559,7 +559,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should request next page on last item", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -607,7 +607,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not request next page on last item if `options.active` is false", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -647,7 +647,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not request next page on last item if there isn't next page", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -685,7 +685,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not request next page on last item if has reached limit", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -725,7 +725,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not request next page if it's not on last item", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -767,7 +767,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not fetch next page if ready", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -814,7 +814,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should not fetch next page if fetching", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -861,7 +861,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return the right object", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -919,7 +919,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return `isLast` true for second last link if last link is not ready", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -977,7 +977,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return `isLimit` true if has reached limit and there is next item and is not fetching", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1040,7 +1040,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return `isLimit` false and `isFetching` true if next item is fetching", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1103,7 +1103,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return `isLimit` false and `isFetching` true if next page is fetching", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1161,7 +1161,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return `isLimit` false if there isn't a next item", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1220,7 +1220,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return `isLimit` false if limit hasn't been reached", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1273,7 +1273,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return `isError` true when current post is unavailable", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1352,7 +1352,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("should return `isError` true when current page is unavailable", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1414,7 +1414,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should fetch next item", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1470,7 +1470,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should fetch next page and next item", async () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1557,7 +1557,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should not fetch next page if it's ready", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1608,7 +1608,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should not fetch next page if it's fetching", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1673,7 +1673,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should not fetch next item if it's ready or fetching", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1735,7 +1735,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should do nothing if `options.active` is false", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1782,7 +1782,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should do nothing if there isn't a next item and there isn't a next page", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1826,7 +1826,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should do nothing if next item is already in links", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1873,7 +1873,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should request the last page if `isError` is true", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1931,7 +1931,7 @@ describe("usePostTypeInfiniteScroll", () => {
   });
 
   test("`fetchNext` should request the last post if `isError` is true", () => {
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
@@ -1995,7 +1995,7 @@ describe("Wrapper", () => {
       link: "/post-one/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: { state: {} },
@@ -2032,7 +2032,7 @@ describe("Wrapper", () => {
       link: "/post-one/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: { state: {} },
@@ -2073,7 +2073,7 @@ describe("Wrapper", () => {
       link: "/post-one/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: { state: {} },
@@ -2114,7 +2114,7 @@ describe("Wrapper", () => {
       link: "/post-one/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: { state: { infiniteScroll: { limit: 1 } } },
@@ -2129,7 +2129,7 @@ describe("Wrapper", () => {
       items: link === "/" ? [{ link: "/post-one/" }] : undefined,
     }));
 
-    mockedUseInfiniteScroll.mockReturnValueOnce({
+    mockedUseInfiniteScroll.mockReturnValue({
       supported: true,
       fetchRef: () => {},
       routeRef: () => {},
@@ -2155,7 +2155,7 @@ describe("Wrapper", () => {
       link: "/post-one/",
     }) as any;
 
-    mockedUseConnect.mockReturnValueOnce({
+    mockedUseConnect.mockReturnValue({
       state: {
         source: { get: sourceGet },
         router: {
