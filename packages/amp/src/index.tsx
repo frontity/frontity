@@ -80,19 +80,39 @@ export default {
         libraries.frontity.template = ({ result, head, ...rest }) => {
           const { css, html } = result;
 
-          // Cleanup the head of scripts, but leave only the `amp-` based ones.
-          head = head.filter((tag) => {
-            if (/<?script.+?>/g.test(tag)) {
-              return /<?script.+?amp-/g.test(tag);
-            }
-          });
+          // Cleanup the head of scripts, but leave only the `amp-` based ones
+          // because they are created by the AMP runtime or allowed to be added
+          // by the user if containing the `amp-custom` attribute.
+          const { tags, extraCss } = head.reduce(
+            (out, tag) => {
+              const isCss = /<style.*?>([\s\S]+?)<\/style>/gm.exec(tag);
+
+              // Collect the css if there is any.
+              if (isCss) {
+                out.extraCss += isCss[1];
+              }
+              // Else capture all the script and link with as="script" tags.
+              else if (/<?script/g.test(tag)) {
+                // And if they contain the `amp-` specific markers keep them.
+                if (/<?script.+?amp-/g.test(tag)) {
+                  out.tags.push(tag);
+                }
+              } else {
+                // By default push the rest
+                out.tags.push(tag);
+              }
+
+              return out;
+            },
+            { tags: [], extraCss: "" }
+          );
 
           // Push the custom css style tag.
-          head.push(`<style amp-custom>${css}</style>`);
+          tags.push(`<style amp-custom>${extraCss}${css}</style>`);
 
           return ampTemplate({
             ...rest,
-            head,
+            head: tags,
             html,
           });
         };

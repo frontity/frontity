@@ -186,6 +186,16 @@ interface Frontity extends Package {
        * the template on the server.
        */
       template: (params: FrontityTemplate) => string;
+
+      /**
+       * List of tags to be included in the head section.
+       */
+      head: string[];
+
+      /**
+       * List of script tags to be included in the body section.
+       */
+      scripts: string[];
     };
   };
 }

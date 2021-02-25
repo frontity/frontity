@@ -76,6 +76,11 @@ export default {
           };
         };
 
+        libraries.frontity.head.push(`<link rel="head" value="custom" />`);
+        libraries.frontity.scripts.push(
+          `<script id="pushed">document.body.className = "pushed";</script>`
+        );
+
         // Hold a reference to the previous template.
         const previousTemplate = libraries.frontity.template;
         // console.log("previousTemplate", { frontity });
