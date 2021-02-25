@@ -6,6 +6,25 @@ describe("getLinksFromPages", () => {
     sourceGet.mockReset();
   });
 
+  it("should work with no links", () => {
+    const pages = ["/"];
+    const firstLink = "/post-1";
+    sourceGet
+      .mockReturnValueOnce({
+        isArchive: true,
+        isReady: true,
+        items: [],
+      })
+      .mockImplementation((link) => ({ link }));
+
+    expect(getLinksFromPages({ pages, firstLink, sourceGet }))
+      .toMatchInlineSnapshot(`
+      Array [
+        "/post-1",
+      ]
+    `);
+  });
+
   it("should work with one link", () => {
     const pages = ["/"];
     const firstLink = "/post-1";
