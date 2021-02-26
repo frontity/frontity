@@ -10,22 +10,20 @@ import { Head } from "frontity";
  *
  * @returns A react component.
  */
-const AMPAudio = (props: any) => {
-  return (
-    <>
-      <Head>
-        <script
-          // We have to explicitly pass undefined, otherwise the attribute is
-          // passed to the DOM like async="true" and AMP does not allow that.
-          async={undefined}
-          custom-element="amp-audio"
-          src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"
-        />
-      </Head>
-      <amp-audio {...props} />
-    </>
-  );
-};
+const AMPAudio = (props: any) => (
+  <>
+    <Head>
+      <script
+        // We have to explicitly pass undefined, otherwise the attribute is
+        // passed to the DOM like async="true" and AMP does not allow that.
+        async={undefined}
+        custom-element="amp-audio"
+        src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"
+      />
+    </Head>
+    <amp-audio {...props} />
+  </>
+);
 
 export const audio: Processor<Element, Packages> = {
   name: "amp-audio",
