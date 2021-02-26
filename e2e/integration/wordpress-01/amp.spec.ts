@@ -32,7 +32,7 @@ describe("AMP", () => {
   //   task("removeAllPlugins");
   // });
 
-  it("test amp-img", () => {
+  it("test amp", () => {
     cy.request(
       "GET",
       "http://localhost:3001/hello-world/?frontity_name=amp-wordpress"
@@ -40,7 +40,12 @@ describe("AMP", () => {
       cy.wrap(amphtmlValidator.getInstance()).then((validator: Validator) => {
         const result = validateAMP(validator, response);
         cy.wrap(result.status).should("equal", "PASS");
+
+        // amp-img
         cy.get("amp-img > img").should("exist");
+
+        // amp-audio
+        cy.get("amp-audio > audio").should("exist");
       });
     });
   });
