@@ -487,38 +487,38 @@ describe("useArchiveInfiniteScroll", () => {
     cy.get("[data-test='page-1']").should("exist");
     cy.get("[data-test='fetching']").should("not.exist");
 
-    // // Scrolls to bottom to fetch next page.
-    // cy.scrollTo("bottom");
-    // cy.get("[data-test='fetching']").should("exist");
-    // cy.get("[data-test='page-2']").should("not.exist");
-    // cy.wait("@pageTwo");
-    // cy.get("[data-test='fetching']").should("not.exist");
-    // cy.get("[data-test='page-2']").should("exist").scrollIntoView();
-    // cy.location("href").should("eq", "http://localhost:3001/page/2/");
+    // Scrolls to bottom to fetch next page.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='fetching']").should("exist");
+    cy.get("[data-test='page-2']").should("not.exist");
+    cy.wait("@pageTwo");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-2']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/page/2/");
 
-    // // Go directly to "/category/two/"
-    // cy.get("[data-test='to-category-two']").should("exist").click();
-    // cy.get("[data-test='fetching']").should("not.exist");
-    // cy.get("[data-test='page-1']").should("exist");
-    // cy.location("href").should("eq", "http://localhost:3001/category/two/");
+    // Go directly to "/category/two/"
+    cy.get("[data-test='to-category-two']").should("exist").click();
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.location("href").should("eq", "http://localhost:3001/category/two/");
 
-    // // Scrolls to bottom to fetch next page.
-    // cy.scrollTo("bottom");
-    // cy.get("[data-test='fetching']").should("exist");
-    // cy.get("[data-test='page-2']").should("not.exist");
-    // cy.wait("@categoryPageTwo");
-    // cy.get("[data-test='fetching']").should("not.exist");
-    // cy.get("[data-test='page-2']").should("exist").scrollIntoView();
-    // cy.location("href").should(
-    //   "eq",
-    //   "http://localhost:3001/category/two/page/2/"
-    // );
+    // Scrolls to bottom to fetch next page.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='fetching']").should("exist");
+    cy.get("[data-test='page-2']").should("not.exist");
+    cy.wait("@categoryPageTwo");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-2']").should("exist").scrollIntoView();
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/category/two/page/2/"
+    );
 
-    // // Go back, the link should point to "/page/2/"
-    // cy.go("back");
-    // cy.get("[data-test='fetching']").should("not.exist");
-    // cy.get("[data-test='page-2']").should("exist").should("be.visible");
-    // cy.location("href").should("eq", "http://localhost:3001/page/2/");
+    // Go back, the link should point to "/page/2/"
+    cy.go("back");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-2']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/page/2/");
   });
 });
 
