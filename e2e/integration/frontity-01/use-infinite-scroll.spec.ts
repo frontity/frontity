@@ -642,7 +642,7 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/post-11/");
   });
 
-  it("should do nothing if deactivated", () => {
+  it("should not fetch next page if deactivated", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/test/");
 
@@ -689,6 +689,55 @@ describe("usePostTypeInfiniteScroll", () => {
     // The next post should not be rendered.
     cy.get("[data-test='post-11']").should("not.exist");
     cy.location("href").should("eq", "http://localhost:3001/post-10/");
+  });
+
+  it("should not show or fetch next post if deactivated", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
+
+    // Stubs calls to REST API.
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
+      response: "fixture:use-infinite-scroll/post-1.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("firstPost");
+
+    // Deactivate the infinite scroll hooks.
+    cy.get("[data-test=toggle-infinite-scroll]").should("exist").click();
+
+    // Go to post last post of page 1.
+    cy.get("[data-test='to-first-post'").should("exist").click();
+
+    cy.location("href").should("eq", "http://localhost:3001/post-1/");
+    cy.wait("@firstPost");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+
+    // Spy on `actions.source.fetch` and then scroll down.
+    spyOnFetch();
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.scrollTo("bottom").wait(300);
+
+    // The next page should not be requested.
+    getFetchSpy().should("have.not.been.called");
+    cy.get("[data-test='fetching']").should("not.exist");
+    // The next post should not be rendered.
+    cy.get("[data-test='post-2']").should("not.exist");
+    cy.location("href").should("eq", "http://localhost:3001/post-1/");
   });
 
   it("should render posts until the limit is reached", () => {
