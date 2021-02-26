@@ -1,4 +1,7 @@
-import { IntersectionOptions } from "../use-infinite-scroll/types";
+import {
+  IntersectionOptions,
+  WrapperProps,
+} from "../use-infinite-scroll/types";
 
 /**
  * Options received by the {@link usePostTypeInfiniteScroll} hook.
@@ -70,7 +73,7 @@ export type UsePostTypeInfiniteScrollOutput = {
     /**
      * The Wrapper component that should wrap the real `Post` component.
      */
-    Wrapper: React.FC;
+    Wrapper: React.FC<WrapperProps>;
   }[];
 
   /**

@@ -1,4 +1,7 @@
-import { IntersectionOptions } from "../use-infinite-scroll/types";
+import {
+  IntersectionOptions,
+  WrapperProps,
+} from "../use-infinite-scroll/types";
 
 /**
  * Options received by the {@link useArchiveInfiniteScroll} hook.
@@ -59,7 +62,7 @@ export type UseArchiveInfiniteScrollOutput = {
     /**
      * The Wrapper component that should wrap the real `Archive` component.
      */
-    Wrapper: React.FC;
+    Wrapper: React.FC<WrapperProps>;
   }[];
 
   /**

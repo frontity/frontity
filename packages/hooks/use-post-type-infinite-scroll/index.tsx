@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
 import { connect, useConnect } from "frontity";
-import { generateMemoizedWrapper, Wrapper } from "../use-infinite-scroll/utils";
 import { isArchive, isError } from "@frontity/source";
+import {
+  generateMemoizedWrapper,
+  InternalWrapper,
+} from "../use-infinite-scroll/utils";
 import { getLinksFromPages } from "./utils";
-import { Packages, WrapperGenerator } from "../use-infinite-scroll/types";
+import {
+  Packages,
+  WrapperGenerator,
+  WrapperProps,
+} from "../use-infinite-scroll/types";
 import {
   UsePostTypeInfiniteScrollOptions,
   UsePostTypeInfiniteScrollOutput,
@@ -28,12 +35,7 @@ export const wrapperGenerator: WrapperGenerator = ({
    * @param props - The component props.
    * @returns A react element.
    */
-  const PostTypeWrapper: React.FC<{
-    /** React element passed as prop. */
-    children: React.ReactElement;
-    /** HTML class attribute. */
-    className: string;
-  }> = ({ children, className }) => {
+  const PostTypeWrapper: React.FC<WrapperProps> = ({ children, className }) => {
     const { state } = useConnect<Packages>();
     const { infiniteScroll } = state.router.state;
 
@@ -58,7 +60,7 @@ export const wrapperGenerator: WrapperGenerator = ({
       hasReachedLimit: !!limit && links.length >= limit,
     };
 
-    return <Wrapper {...props} />;
+    return <InternalWrapper {...props} />;
   };
 
   return connect(PostTypeWrapper, { injectProps: false });

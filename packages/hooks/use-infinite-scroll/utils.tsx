@@ -6,7 +6,7 @@ import {
   IntersectionOptions,
   Packages,
   WrapperGenerator,
-  WrapperProps,
+  InternalWrapperProps,
 } from "./types";
 
 /**
@@ -41,7 +41,11 @@ export const generateMemoizedWrapper = (wrapperGenerator: WrapperGenerator) =>
       })
   );
 
-export const Wrapper: React.FC<WrapperProps> = connect(
+/**
+ * Component used inside `<Wrapper>` components to reuse some shared logic. It's
+ * the one that uses the `useInfiniteScroll` hook.
+ */
+export const InternalWrapper: React.FC<InternalWrapperProps> = connect(
   ({
     children,
     className,

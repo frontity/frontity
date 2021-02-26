@@ -31,15 +31,30 @@ export interface WrapperGenerator {
      * The intersection observer options for routing.
      */
     routeInViewOptions?: IntersectionOptions;
-  }): React.FC;
+  }): React.FC<WrapperProps>;
 }
 
 /**
  * The props of the <Wrapper> component.
  */
 export interface WrapperProps {
+  /** Element key, tipically the link of the page/post being wrapped. */
+  key: React.Key;
+
   /** React element passed as prop. */
-  children: React.ReactElement;
+  children: React.ReactNode;
+
+  /** HTML class attribute. */
+  className?: string;
+}
+
+/**
+ * The props of the <InternalWrapper> component, used internally by <Wrapper>
+ * components.
+ */
+export interface InternalWrapperProps {
+  /** React element passed as prop. */
+  children: React.ReactNode;
 
   /** HTML class attribute. */
   className: string;
