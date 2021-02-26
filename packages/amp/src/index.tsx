@@ -27,7 +27,7 @@ export default {
     amp: {
       init: ({ libraries }) => {
         // Add the AMP processors
-        libraries.html2react.processors.concat(processors);
+        libraries.html2react.processors.push(...processors);
 
         if (libraries.source) {
           const { parse, stringify } = libraries.source;

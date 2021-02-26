@@ -1,6 +1,6 @@
 import * as React from "react";
 import Package from "../types";
-import { connect } from "frontity";
+import { connect, Head } from "frontity";
 
 /**
  * A React component to render the test AMP theme.
@@ -13,14 +13,23 @@ const Theme = connect(({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
 
   return (
-    <div id="test">
-      <h2>
-        <Html2React html={post.title.rendered} />
-      </h2>
-      <div>
-        <Html2React html={post.content.rendered} />
+    <>
+      <Head>
+        {/* AMP needs a link in head with rel="canonical" */}
+        <link
+          rel="canonical"
+          href="http://localhost:3001/hello-world/?frontity_name=amp-wordpress"
+        />
+      </Head>
+      <div id="test">
+        <h2>
+          <Html2React html={post.title.rendered} />
+        </h2>
+        <div>
+          <Html2React html={post.content.rendered} />
+        </div>
       </div>
-    </div>
+    </>
   );
 });
 
