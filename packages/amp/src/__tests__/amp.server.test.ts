@@ -30,6 +30,8 @@ describe("AMP server tests", () => {
         App: jest.fn().mockImplementation((args) => args),
         render: jest.fn().mockImplementation((args) => args),
         template: jest.fn().mockImplementation((args) => args),
+        head: [],
+        scripts: [],
       },
     };
   });
