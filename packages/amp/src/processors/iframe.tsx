@@ -32,6 +32,13 @@ export const iframe: Processor<Element, Packages> = {
   test: ({ node }) => node.type === "element" && node.component === "iframe",
   processor: ({ node }) => {
     node.component = AmpIframe;
+
+    // AMP requires that the iframe is loaded over HTTPS
+    const httpRegexp = /^http:\/\//;
+    if (node.props.src.match(httpRegexp)) {
+      node.props.src = node.props.src.replace(httpRegexp, "https://");
+    }
+
     return node;
   },
 };
