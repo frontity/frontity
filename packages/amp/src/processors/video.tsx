@@ -15,7 +15,9 @@ const AMPVideo = (props: any) => {
     <>
       <Head>
         <script
-          async
+          // We have to explicitly pass undefined, otherwise the attribute is
+          // passed to the DOM like async="true" and AMP does not allow that.
+          async={undefined}
           custom-element="amp-video"
           src="https://cdn.ampproject.org/v0/amp-video-0.1.js"
         />
@@ -30,6 +32,12 @@ export const video: Processor<Element, Packages> = {
   test: ({ node }) => node.type === "element" && node.component === "video",
   processor: ({ node }) => {
     node.component = AMPVideo;
+
+    // AMP requires that the file is loaded over HTTPS
+    const httpRegexp = /^http:\/\//;
+    if (node.props.src.match(httpRegexp)) {
+      node.props.src = node.props.src.replace(httpRegexp, "https://");
+    }
     return node;
   },
 };

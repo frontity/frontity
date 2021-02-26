@@ -15,7 +15,9 @@ const AmpIframe = (props: any) => {
     <>
       <Head>
         <script
-          async
+          // We have to explicitly pass undefined, otherwise the attribute is
+          // passed to the DOM like async="true" and AMP does not allow that.
+          async={undefined}
           custom-element="amp-iframe"
           src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
         />
