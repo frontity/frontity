@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import clone from "clone-deep";
 import { act } from "react-dom/test-utils";
 import { useConnect } from "frontity";
 import useInView from "../../use-in-view";
@@ -39,13 +40,26 @@ const sourceFetch = jest.fn();
 const routerSet = jest.fn();
 const routerUpdateState = jest.fn();
 
+const browserState: { [key: string]: unknown; infiniteScroll?: unknown } = {
+  someOtherPackage: {},
+};
+const initialStore = {
+  state: {
+    source: { get: sourceGet },
+    router: { link: "/", state: browserState },
+  },
+  actions: {
+    source: { fetch: sourceFetch },
+    router: { set: routerSet, updateState: routerUpdateState },
+  },
+};
+let store = initialStore;
+
 beforeEach(() => {
+  store = clone(initialStore);
   container = document.createElement("div");
   document.body.appendChild(container);
-  mockedUseConnect.mockReturnValue({
-    state: { source: { get: sourceGet } },
-    actions: { source: { fetch: sourceFetch } },
-  });
+  mockedUseConnect.mockReturnValue(store);
 });
 
 afterEach(() => {
@@ -211,17 +225,6 @@ describe("useInfiniteScroll", () => {
         supported: true,
       });
 
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: { get: sourceGet },
-        router: { state: { someOtherPackage: {} } },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet
       .mockReturnValueOnce({
         isReady: true,
@@ -242,7 +245,10 @@ describe("useInfiniteScroll", () => {
     expect(sourceGet).toHaveBeenNthCalledWith(1, "/");
     expect(sourceGet).toHaveBeenNthCalledWith(2, "/page/2/");
     expect(sourceFetch).toHaveBeenCalledWith("/page/2/");
-    expect(routerUpdateState).not.toHaveBeenCalledWith();
+    expect(routerUpdateState).toHaveBeenCalledWith({
+      infiniteScroll: { links: ["/"] },
+      someOtherPackage: {},
+    });
   });
 
   test("should update browser state if first reference is in view and it's ready", () => {
@@ -257,17 +263,6 @@ describe("useInfiniteScroll", () => {
         inView: false,
         supported: true,
       });
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: { get: sourceGet },
-        router: { state: { someOtherPackage: {} } },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
 
     sourceGet
       .mockReturnValueOnce({
@@ -288,7 +283,6 @@ describe("useInfiniteScroll", () => {
     expect(sourceGet).toHaveBeenCalledTimes(2);
     expect(sourceGet).toHaveBeenNthCalledWith(1, "/");
     expect(sourceGet).toHaveBeenNthCalledWith(2, "/page/2/");
-    // expect(sourceFetch).toHaveBeenCalledWith("/page/2/");
     expect(routerUpdateState).toHaveBeenCalledWith({
       someOtherPackage: {},
       infiniteScroll: { links: ["/", "/page/2/"] },
@@ -296,6 +290,10 @@ describe("useInfiniteScroll", () => {
   });
 
   test("should not fetch `nextLink` nor update browser state if `nextLink` is already in links", () => {
+    store.state.router.state.infiniteScroll = {
+      links: ["/post-3/", "/post-1/", "/post-2/"],
+    };
+
     mockedUseInView
       .mockReturnValueOnce({
         ref: jest.fn(),
@@ -307,21 +305,6 @@ describe("useInfiniteScroll", () => {
         inView: false,
         supported: true,
       });
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: { get: sourceGet },
-        router: {
-          state: {
-            infiniteScroll: { links: ["/post-3/", "/post-1/", "/post-2/"] },
-          },
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
 
     sourceGet
       .mockReturnValueOnce({
@@ -356,22 +339,6 @@ describe("useInfiniteScroll", () => {
         supported: true,
       });
 
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: { get: sourceGet },
-        router: {
-          state: {
-            someOtherPackage: {},
-            infiniteScroll: { links: ["/"] },
-          },
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet
       .mockReturnValueOnce({
         isReady: true,
@@ -389,10 +356,15 @@ describe("useInfiniteScroll", () => {
     });
 
     expect(sourceFetch).not.toHaveBeenCalled();
-    expect(routerUpdateState).not.toHaveBeenCalled();
+    expect(routerUpdateState).toHaveBeenCalledWith({
+      infiniteScroll: { links: ["/"] },
+      someOtherPackage: {},
+    });
   });
 
   test("should not fetch `nextLink` if it's already ready", () => {
+    store.state.router.state.infiniteScroll = { links: ["/"] };
+
     mockedUseInView
       .mockReturnValueOnce({
         ref: jest.fn(),
@@ -404,19 +376,6 @@ describe("useInfiniteScroll", () => {
         inView: false,
         supported: true,
       });
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: { get: sourceGet },
-        router: {
-          state: { someOtherPackage: {}, infiniteScroll: { links: ["/"] } },
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
 
     sourceGet
       .mockReturnValueOnce({
@@ -442,6 +401,9 @@ describe("useInfiniteScroll", () => {
   });
 
   test("should change route if second reference is in view", () => {
+    store.state.router.link = "/page/2/";
+    store.state.router.state.infiniteScroll = { links: ["/", "/page/2/"] };
+
     mockedUseInView
       .mockReturnValueOnce({
         ref: jest.fn(),
@@ -453,20 +415,6 @@ describe("useInfiniteScroll", () => {
         inView: true,
         supported: true,
       });
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: { get: sourceGet },
-        router: {
-          link: "/page/2/",
-          state: {
-            someOtherPackage: {},
-            infiniteScroll: { links: ["/", "/page/2/"] },
-          },
-        },
-      },
-      actions: { router: { set: routerSet } },
-    } as any);
 
     sourceGet
       .mockReturnValueOnce({
@@ -493,6 +441,9 @@ describe("useInfiniteScroll", () => {
   });
 
   test("should not change route if `currentLink` is equal to the current url", () => {
+    store.state.router.link = "/";
+    store.state.router.state.infiniteScroll = { links: ["/", "/page/2/"] };
+
     mockedUseInView
       .mockReturnValueOnce({
         ref: jest.fn(),
@@ -504,19 +455,6 @@ describe("useInfiniteScroll", () => {
         inView: true,
         supported: true,
       });
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: { get: sourceGet },
-        router: {
-          link: "/",
-          state: {
-            infiniteScroll: { links: ["/", "/page/2/"] },
-          },
-        },
-      },
-      actions: { router: { set: routerSet } },
-    } as any);
 
     sourceGet
       .mockReturnValueOnce({
@@ -547,14 +485,6 @@ describe("useInfiniteScroll", () => {
         inView: false,
         supported: true,
       });
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: { get: sourceGet },
-        router: { link: "/", state: {} },
-      },
-      actions: { router: { set: routerSet } },
-    } as any);
 
     sourceGet
       .mockReturnValueOnce({

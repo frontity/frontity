@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react";
 import { render } from "react-dom";
+import clone from "clone-deep";
 import { act, Simulate } from "react-dom/test-utils";
 import { useConnect } from "frontity";
 import useInfiniteScroll from "../../use-infinite-scroll";
@@ -45,10 +45,32 @@ const sourceGet = jest.fn();
 const sourceFetch = jest.fn();
 const routerUpdateState = jest.fn();
 
+const browserState: { [key: string]: unknown; infiniteScroll?: unknown } = {
+  someOtherPackage: {},
+};
+const initialStore = {
+  state: {
+    router: {
+      link: "/",
+      state: browserState,
+    },
+    source: {
+      get: sourceGet,
+    },
+  },
+  actions: {
+    source: { fetch: sourceFetch },
+    router: { updateState: routerUpdateState },
+  },
+};
+let store = initialStore;
+
 beforeEach(() => {
+  store = clone(initialStore);
   container = document.createElement("div");
   container.id = "container";
   document.body.appendChild(container);
+  mockedUseConnect.mockReturnValue(store);
 });
 
 afterEach(() => {
@@ -64,21 +86,6 @@ afterEach(() => {
 
 describe("useArchiveInfiniteScroll", () => {
   test("should update the browser state on mount (without existing state)", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       isReady: false,
@@ -92,6 +99,7 @@ describe("useArchiveInfiniteScroll", () => {
     expect(spiedUseArchiveInfiniteScroll).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
       infiniteScroll: {
         links: ["/"],
       },
@@ -99,25 +107,10 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should update the browser state on mount (with existing state)", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {
-            infiniteScroll: {
-              limit: 2,
-              links: ["/", "/page/2/", "/page/3/"],
-            },
-          },
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.state.infiniteScroll = {
+      limit: 2,
+      links: ["/", "/page/2/", "/page/3/"],
+    };
 
     sourceGet.mockReturnValue({
       link: "/page/3/",
@@ -132,6 +125,7 @@ describe("useArchiveInfiniteScroll", () => {
     expect(spiedUseArchiveInfiniteScroll).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
       infiniteScroll: {
         limit: 2,
         links: ["/", "/page/2/", "/page/3/"],
@@ -140,21 +134,6 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should update the browser state on mount (with options)", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       isReady: false,
@@ -168,6 +147,7 @@ describe("useArchiveInfiniteScroll", () => {
     expect(spiedUseArchiveInfiniteScroll).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
       infiniteScroll: {
         limit: 3,
         links: ["/"],
@@ -176,21 +156,6 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should not update the browser state if `options.active` is false", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       isReady: false,
@@ -206,24 +171,10 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should return the right object", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/page/2/",
-          state: {
-            infiniteScroll: {
-              links: ["/", "/page/2/", "/page/3/"],
-            },
-          },
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.link = "/page/2/";
+    store.state.router.state.infiniteScroll = {
+      links: ["/", "/page/2/", "/page/3/"],
+    };
 
     sourceGet.mockReturnValue({
       link: "/page/3/",
@@ -265,24 +216,10 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should return `isLast` false when the last page is not ready", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/page/2/",
-          state: {
-            infiniteScroll: {
-              links: ["/", "/page/2/", "/page/3/"],
-            },
-          },
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.link = "/page/2/";
+    store.state.router.state.infiniteScroll = {
+      links: ["/", "/page/2/", "/page/3/"],
+    };
 
     sourceGet.mockReturnValue({
       link: "/page/3/",
@@ -324,24 +261,7 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should return `isLimit` true when limit has been reached, there is next page, and it's not being fetched", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {
-            infiniteScroll: {
-              links: ["/"],
-            },
-          },
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.state.infiniteScroll = { links: ["/"] };
 
     sourceGet.mockReturnValue({
       link: "/",
@@ -373,24 +293,7 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should return `isLimit` false and `isFetching` true when limit has been reached, there is next page but is already being fetched", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {
-            infiniteScroll: {
-              links: ["/", "/page/2/"],
-            },
-          },
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.state.infiniteScroll = { links: ["/", "/page/2/"] };
 
     sourceGet.mockReturnValue({
       link: "/page/2/",
@@ -428,21 +331,6 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should return `isLimit` false when limit has been reached but there isn't a next page", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       isReady: true,
@@ -471,21 +359,6 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should return `isLimit` false when the limit has not been reached", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
@@ -516,24 +389,7 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("should return `isError` true when current page is unavailable", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {
-            infiniteScroll: {
-              links: ["/", "/page/2/"],
-            },
-          },
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.state.infiniteScroll = { links: ["/", "/page/2/"] };
 
     sourceGet.mockReturnValue({
       isReady: true,
@@ -569,22 +425,6 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("`fetchNext` should fetch next page if it's not ready and not fetching", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
@@ -611,6 +451,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     expect(routerUpdateState).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
       infiniteScroll: {
         links: ["/", "/page/2/"],
       },
@@ -620,22 +461,6 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("`fetchNext` should not fetch next page if it's ready", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
@@ -662,6 +487,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     expect(routerUpdateState).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
       infiniteScroll: {
         links: ["/", "/page/2/"],
       },
@@ -670,22 +496,6 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("`fetchNext` should not fetch next page if it's fetching", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       next: "/page/2/",
@@ -712,6 +522,7 @@ describe("useArchiveInfiniteScroll", () => {
 
     expect(routerUpdateState).toHaveBeenCalledTimes(1);
     expect(routerUpdateState).toHaveBeenCalledWith({
+      someOtherPackage: {},
       infiniteScroll: {
         links: ["/", "/page/2/"],
       },
@@ -720,22 +531,6 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("`fetchNext` should do nothing if there isn't next page", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
-
     sourceGet.mockReturnValue({
       link: "/",
       isReady: true,
@@ -763,23 +558,9 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("`fetchNext` should do nothing if the next page is already in the links", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/",
-          state: {
-            infiniteScroll: { links: ["/page/2/", "/"] },
-          },
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.state.infiniteScroll = {
+      links: ["/page/2/", "/"],
+    };
 
     sourceGet.mockReturnValue({
       link: "/",
@@ -810,21 +591,7 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("`fetchNext` should do nothing if `options.active` is false", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/page-one/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.link = "/page-one/";
 
     sourceGet.mockReturnValue({
       link: "/page-one/",
@@ -855,21 +622,7 @@ describe("useArchiveInfiniteScroll", () => {
   });
 
   test("`fetchNext` should request the last page if `isError` is true", () => {
-    mockedUseConnect.mockReturnValue({
-      state: {
-        router: {
-          link: "/page-one/",
-          state: {},
-        },
-        source: {
-          get: sourceGet,
-        },
-      },
-      actions: {
-        source: { fetch: sourceFetch },
-        router: { updateState: routerUpdateState },
-      },
-    } as any);
+    store.state.router.link = "/page-one/";
 
     sourceGet.mockReturnValue({
       isReady: true,
@@ -895,19 +648,7 @@ describe("useArchiveInfiniteScroll", () => {
 
 describe("Wrapper", () => {
   test("should return children if IntersectionObserver is not supported", () => {
-    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
-      link: "/",
-    }) as any;
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: {
-          get: sourceGet,
-        },
-        router: { state: {} },
-      },
-      actions: {},
-    });
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({ link: "/" });
 
     sourceGet.mockReturnValue({
       isReady: true,
@@ -917,7 +658,7 @@ describe("Wrapper", () => {
 
     act(() => {
       render(
-        <Wrapper>
+        <Wrapper key="fake-key">
           <div id="children" />
         </Wrapper>,
         container
@@ -929,19 +670,7 @@ describe("Wrapper", () => {
   });
 
   test("should return null if the current element is not ready", () => {
-    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
-      link: "/",
-    }) as any;
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: {
-          get: sourceGet,
-        },
-        router: { state: {} },
-      },
-      actions: {},
-    });
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({ link: "/" });
 
     sourceGet.mockReturnValue({
       isReady: false,
@@ -951,7 +680,7 @@ describe("Wrapper", () => {
 
     act(() => {
       render(
-        <Wrapper>
+        <Wrapper key="fake-key">
           <div id="children" />
         </Wrapper>,
         container
@@ -963,33 +692,20 @@ describe("Wrapper", () => {
   });
 
   test("should return children inside a wrapper", () => {
-    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
-      link: "/",
-    }) as any;
+    store.state.router.state.infiniteScroll = { limit: 1 };
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({ link: "/" });
 
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: {
-          get: sourceGet,
-        },
-        router: { state: { infiniteScroll: { limit: 1 } } },
-      },
-      actions: {},
-    });
-
-    sourceGet.mockReturnValue({
-      isReady: true,
-    });
+    sourceGet.mockReturnValue({ isReady: true });
 
     mockedUseInfiniteScroll.mockReturnValue({
       supported: true,
-      fetchRef: () => {},
-      routeRef: () => {},
+      fetchRef: jest.fn(),
+      routeRef: jest.fn(),
     } as any);
 
     act(() => {
       render(
-        <Wrapper>
+        <Wrapper key="fake-key">
           <div id="children" />
         </Wrapper>,
         container
@@ -1001,33 +717,19 @@ describe("Wrapper", () => {
   });
 
   test("should return children and fetcher inside a wrapper", () => {
-    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
-      link: "/",
-    }) as any;
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({ link: "/" });
 
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: {
-          get: sourceGet,
-        },
-        router: { state: {} },
-      },
-      actions: {},
-    });
-
-    sourceGet.mockReturnValue({
-      isReady: true,
-    });
+    sourceGet.mockReturnValue({ isReady: true });
 
     mockedUseInfiniteScroll.mockReturnValue({
       supported: true,
-      fetchRef: () => {},
-      routeRef: () => {},
+      fetchRef: jest.fn(),
+      routeRef: jest.fn(),
     } as any);
 
     act(() => {
       render(
-        <Wrapper>
+        <Wrapper key="fake-key">
           <div id="children" />
         </Wrapper>,
         container
@@ -1039,19 +741,7 @@ describe("Wrapper", () => {
   });
 
   test("should call `useInfiniteScroll` with `currentLink` and `nextLink`", () => {
-    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({
-      link: "/",
-    }) as any;
-
-    mockedUseConnect.mockReturnValue({
-      state: {
-        source: {
-          get: sourceGet,
-        },
-        router: { state: {} },
-      },
-      actions: {},
-    });
+    const Wrapper = useArchiveInfiniteScroll.wrapperGenerator({ link: "/" });
 
     const firstData = {
       next: "/page/2/",
@@ -1070,19 +760,19 @@ describe("Wrapper", () => {
       // The second state.source.get() of the ArchiveWrapper, which needs it to
       // get the link of the next page.
       .mockReturnValueOnce(secondData)
-      // The state.source.get() of the Wrapper, which needs it to see if the
-      // current link is ready or is an error.
+      // The state.source.get() of the InternalWrapper, which needs it to see if
+      // the current link is ready or is an error.
       .mockReturnValueOnce(firstData);
 
     mockedUseInfiniteScroll.mockReturnValue({
       supported: true,
-      fetchRef: () => {},
-      routeRef: () => {},
+      fetchRef: jest.fn(),
+      routeRef: jest.fn(),
     } as any);
 
     act(() => {
       render(
-        <Wrapper>
+        <Wrapper key="fake-key">
           <div id="children" />
         </Wrapper>,
         container
