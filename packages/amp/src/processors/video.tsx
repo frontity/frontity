@@ -22,7 +22,7 @@ const AMPVideo = (props: any) => {
           src="https://cdn.ampproject.org/v0/amp-video-0.1.js"
         />
       </Head>
-      <amp-video {...props} />
+      <amp-video {...props} layout="responsive" controls={undefined} />
     </>
   );
 };
@@ -38,6 +38,15 @@ export const video: Processor<Element, Packages> = {
     if (node.props.src.match(httpRegexp)) {
       node.props.src = node.props.src.replace(httpRegexp, "https://");
     }
+
+    // For now we hardcode the width and height until we find a better solution.
+    //
+    // When used together with layout="responsive", it does not mean that the
+    // video will have a specific height & width but rather that it will scale
+    // responsively preserving the aspect ratio between the height and width.
+    node.props.height = 120;
+    node.props.width = 240;
+
     return node;
   },
 };

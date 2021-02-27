@@ -1,30 +1,11 @@
 import type { taskTypes } from "../../plugins";
-import amphtmlValidator, { Validator } from "amphtml-validator";
-
 const task: taskTypes = cy.task;
-
-const validateAMP = (validator: Validator, response) => {
-  const result = { ...validator.validateString(response.body), msg: "" };
-
-  result.errors.forEach((error) => {
-    const msg = `line ${error.line}, col ${error.col}: ${error.message}`;
-    if (error.specUrl !== null) {
-      result.msg += `${msg} (see ${error.specUrl})`;
-    }
-    result.msg += "\n\n";
-  });
-
-  if (result.msg !== "") throw new Error(result.msg);
-
-  return result;
-};
 
 describe("AMP", () => {
   before(() => {
     task("loadDatabase", {
       path: "./wp-data/amp/data.sql",
     });
-    cy.visit("http://localhost:3001/hello-world/?frontity_name=amp-wordpress");
   });
 
   // after(() => {
@@ -32,21 +13,43 @@ describe("AMP", () => {
   //   task("removeAllPlugins");
   // });
 
-  it("test amp", () => {
-    cy.request(
-      "GET",
-      "http://localhost:3001/hello-world/?frontity_name=amp-wordpress"
-    ).then((response) => {
-      cy.wrap(amphtmlValidator.getInstance()).then((validator: Validator) => {
-        const result = validateAMP(validator, response);
-        cy.wrap(result.status).should("equal", "PASS");
+  it("amp-img", () => {
+    const url = "http://localhost:3001/amp-img/?frontity_name=amp-wordpress";
 
-        // amp-img
-        cy.get("amp-img > img").should("exist");
+    cy.validateAMP(url);
+    cy.visit(url);
+    cy.get("amp-img > img").should("exist");
+  });
 
-        // amp-audio
-        cy.get("amp-audio > audio").should("exist");
-      });
+  it("amp-audio", () => {
+    const url = "http://localhost:3001/amp-audio/?frontity_name=amp-wordpress";
+
+    cy.validateAMP(url);
+    cy.visit(url);
+    cy.get("amp-audio > audio").should((els) => {
+      const audio = els[0] as HTMLAudioElement;
+      audio.play();
+
+      // You can play the audio element
+      expect(audio.duration > 0 && !audio.paused && !audio.muted).to.eq(true);
+
+      audio.pause();
+    });
+  });
+
+  it("amp-video", () => {
+    const url = "http://localhost:3001/amp-video/?frontity_name=amp-wordpress";
+
+    cy.validateAMP(url);
+    cy.visit(url);
+    cy.get("amp-video > video").should((els) => {
+      const video = els[0] as HTMLVideoElement;
+      video.play();
+
+      // You can play the video element
+      expect(video.duration > 0 && !video.paused && !video.muted).to.eq(true);
+
+      video.pause();
     });
   });
 });

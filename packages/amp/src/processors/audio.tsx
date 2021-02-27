@@ -21,7 +21,7 @@ const AMPAudio = (props: any) => (
         src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"
       />
     </Head>
-    <amp-audio {...props} />
+    <amp-audio {...props} controls={undefined} />
   </>
 );
 

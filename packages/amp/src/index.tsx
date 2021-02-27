@@ -27,7 +27,8 @@ export default {
     amp: {
       init: ({ libraries }) => {
         // Add the AMP processors
-        libraries.html2react.processors.push(...processors);
+        // Should we throw a warning if html2React is not present ?
+        libraries?.html2react?.processors?.push(...processors);
 
         if (libraries.source) {
           const { parse, stringify } = libraries.source;
