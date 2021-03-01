@@ -4,10 +4,9 @@ const assert = require("assert");
 describe("Global", function () {
   this.timeout(600000);
   it("should have a blue background, but not a red color", async function () {
-    await driver.get("http://localhost:3000/color-red?frontity_name=emotion");
-    await driver.get(
-      "http://localhost:3000/background-blue?frontity_name=emotion"
-    );
+    console.log(baseUrl);
+    await driver.get(baseUrl + "/color-red?frontity_name=emotion");
+    await driver.get(baseUrl + "/background-blue?frontity_name=emotion");
     assert.equal(
       await driver.executeScript(
         'return window.getComputedStyle(document.querySelector("body"))["backgroundColor"]'
@@ -37,10 +36,8 @@ describe("Global", function () {
   });
 
   it("should have a red color, but not a blue background", async function () {
-    await driver.get(
-      "http://localhost:3000/background-blue?frontity_name=emotion"
-    );
-    await driver.get("http://localhost:3000/color-red?frontity_name=emotion");
+    await driver.get(baseUrl + "/background-blue?frontity_name=emotion");
+    await driver.get(baseUrl + "/color-red?frontity_name=emotion");
     assert.notEqual(
       await driver.executeScript(
         'return window.getComputedStyle(document.querySelector("body"))["backgroundColor"]'
@@ -73,7 +70,7 @@ describe("Global", function () {
 describe("styled", function () {
   this.timeout(600000);
   it("should have a red color", async function () {
-    await driver.get("http://localhost:3000/styled-css?frontity_name=emotion");
+    await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
     assert.equal(
       await driver.executeScript(
         'return window.getComputedStyle(document.querySelector("[data-test-id=\'styled-div\']"))["color"]'
@@ -83,7 +80,7 @@ describe("styled", function () {
   });
 
   it("should toggle the color", async function () {
-    await driver.get("http://localhost:3000/styled-css?frontity_name=emotion");
+    await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
     await driver.findElement(By.css('[data-test-id="toggle-button"]')).click();
     assert.equal(
       await driver.executeScript(
@@ -101,7 +98,7 @@ describe("styled", function () {
   });
 
   it("should have a Styled class name (autoLabel)", async function () {
-    await driver.get("http://localhost:3000/styled-css?frontity_name=emotion");
+    await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
     assert(
       await driver.executeScript(
         'return document.querySelector("[data-test-id=\'styled-div\']").className.includes("Styled")'
@@ -113,7 +110,7 @@ describe("styled", function () {
 describe("css", function () {
   this.timeout(600000);
   it("should have a red color", async function () {
-    await driver.get("http://localhost:3000/styled-css?frontity_name=emotion");
+    await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
     assert.equal(
       await driver.executeScript(
         'return window.getComputedStyle(document.querySelector("[data-test-id=\'css-div\']"))["color"]'
@@ -123,7 +120,7 @@ describe("css", function () {
   });
 
   it("should toggle the color", async function () {
-    await driver.get("http://localhost:3000/styled-css?frontity_name=emotion");
+    await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
     await driver.findElement(By.css('[data-test-id="toggle-button"]')).click();
     assert.equal(
       await driver.executeScript(
@@ -141,7 +138,7 @@ describe("css", function () {
   });
 
   it("should have a Styled class name (autoLabel)", async function () {
-    await driver.get("http://localhost:3000/styled-css?frontity_name=emotion");
+    await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
     assert(
       await driver.executeScript(
         'return document.querySelector("[data-test-id=\'css-div\']").className.includes("CSS")'
