@@ -66,7 +66,7 @@
     "@frontity/connect": "^1.2.1",
     "@frontity/core": "^1.10.1",
     "@types/didyoumean": "^1.2.0",
-    "@types/fs-extra": "9.0.7",
+    "@types/fs-extra": "^9.0.4",
     "@types/inquirer": "^7.3.1",
     "@types/node": "^12.19.8",
     "@types/node-fetch": "^2.5.7",
