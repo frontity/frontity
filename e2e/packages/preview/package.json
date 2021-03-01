@@ -4,7 +4,7 @@
   "private": true,
   "description": "Package to do e2e testing of Frontity's Preview",
   "dependencies": {
-    "frontity": "^1.4.3",
-    "@frontity/source": "^1.3.0"
+    "frontity": "^1.14.1",
+    "@frontity/source": "^1.5.1"
   }
 }

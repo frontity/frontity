@@ -22,6 +22,13 @@
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "react-intersection-observer": "^8.26.2"
+    "frontity": "^1.14.1",
+    "react-intersection-observer": "^8.26.2",
+    "@frontity/source": "^1.5.1",
+    "@frontity/wp-source": "^1.11.1",
+    "@frontity/router": "^1.2.1"
+  },
+  "devDependencies": {
+    "clone-deep": "^4.0.1"
   }
 }
