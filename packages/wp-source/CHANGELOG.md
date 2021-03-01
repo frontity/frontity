@@ -46,6 +46,12 @@
   - frontity@1.14.0
   - @frontity/source@1.5.0
 
+## 1.10.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Release a new beta version in the infinite scroll tag.
+
 ## 1.10.0
 
 ### Minor Changes
@@ -118,6 +124,12 @@
 
 - [`b8d187b3`](https://github.com/frontity/frontity/commit/b8d187b3e8b8893f604727b66f88acef6e846a0c) [#571](https://github.com/frontity/frontity/pull/571) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Revert a change introduced in https://github.com/frontity/frontity/pull/542. Keep setting `query`, `link` and `route` on all entities (including non-URL entities) in source.data
 
+## 1.8.4-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Release stable changes on the beta branch.
+
 ## 1.8.3
 
 ### Patch Changes
@@ -137,6 +149,12 @@
 
 - Updated dependencies [[`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af)]:
   - frontity@1.11.1
+
+## 1.8.2-infinite-scroll-beta.0
+
+### Patch Changes
+
+- [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Fix an array check by using `Array.isArray` instead of `instanceof Array`.
 
 ## 1.8.1
 
@@ -160,6 +178,14 @@
 - Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b), [`3f61f711`](https://github.com/frontity/frontity/commit/3f61f71197d33b478427d1b74882c31258861e92)]:
   - frontity@1.9.0
   - @frontity/source@1.2.2
+
+## 1.7.2-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/source@1.2.2-infinite-scroll-beta.0
 
 ## 1.7.1
 

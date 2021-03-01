@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "type": "post",
+    "link": "https://test.frontity.org/some-post"
+  },
+  {
+    "id": 2,
+    "type": "post",
+    "link": "https://test.frontity.org/another-post"
+  },
+  {
+    "id": 3,
+    "type": "post",
+    "link": "https://test.frontity.org/external-link"
+  },
+  {
+    "id": 4,
+    "type": "post",
+    "link": "https://test.frontity.org/last-post"
+  }
+]

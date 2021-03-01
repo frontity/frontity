@@ -6,6 +6,12 @@
 
 - [`6cd501b1`](https://github.com/frontity/frontity/commit/6cd501b117a053dc67f2ab2be5f696ce6b8259b8) [#688](https://github.com/frontity/frontity/pull/688) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Pass the correct context to replaceLocation to prevent and Illegal invocation in external redirects from client side navigation.
 
+## 1.3.2-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Release a new beta version in the infinite scroll tag.
+
 ## 1.3.1
 
 ### Patch Changes
@@ -36,6 +42,19 @@
   2. Redirections can be added to Frontity by populating `state.source.data` directly or using a handler.
 
   Feature Discussion: https://community.frontity.org/t/301-redirects-stored-in-wordpress-database/3032
+
+## 1.3.0-infinite-scroll-beta.0
+
+### Minor Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Implements actions.router.updateState() which takes a browser state object as an argument and executes a window.history.replaceState() with that object and the current url.
+
+### Patch Changes
+
+- Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b)]:
+  - @frontity/router@1.2.0-infinite-scroll-beta.0
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/source@1.2.2-infinite-scroll-beta.0
 
 ### Patch Changes
 

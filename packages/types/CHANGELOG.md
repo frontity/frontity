@@ -56,6 +56,12 @@
 
 - [`ee9f2616`](https://github.com/frontity/frontity/commit/ee9f26165e1f965d3234b4cf9588966e3ab36ec7) [#478](https://github.com/frontity/frontity/pull/478) Thanks [@juanmaguitar](https://github.com/juanmaguitar)! - README.md package created
 
+## 1.4.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Fixes types for `connect()` with the new options parameter.
+
 ## 1.4.0
 
 ### Minor Changes

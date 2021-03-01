@@ -1,5 +1,5 @@
 import TinyRouter from "../types";
-import { set, init, beforeSSR } from "./actions";
+import { set, init, updateState, beforeSSR } from "./actions";
 
 const tinyRouter: TinyRouter = {
   name: "@frontity/tiny-router",
@@ -14,6 +14,7 @@ const tinyRouter: TinyRouter = {
     router: {
       init,
       set,
+      updateState,
       beforeSSR,
     },
   },

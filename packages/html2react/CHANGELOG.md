@@ -52,6 +52,14 @@
 
 - [`c062b39c`](https://github.com/frontity/frontity/commit/c062b39c9091ba40edc56e00a8c92cdd542ad9a5) [#530](https://github.com/frontity/frontity/pull/530) Thanks [@orballo](https://github.com/orballo)! - Fixes html2react parser support for some SVG attributes that contain dashes and colons
 
+## 1.3.4-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/components@1.3.3-infinite-scroll-beta.0
+
 ## 1.3.4
 
 ### Patch Changes

@@ -128,6 +128,13 @@
   - @frontity/error@0.1.1
   - @frontity/types@1.4.1
 
+## 1.8.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b)]:
+  - @frontity/types@1.4.1-infinite-scroll-beta.0
+
 ## 1.8.0
 
 ### Minor Changes
