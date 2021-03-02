@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.7.2
+
+### Patch Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Fixes types for `connect()` with the new options parameter.
+
+* [`f7152d38`](https://github.com/frontity/frontity/commit/f7152d38daf802d2369e17ad48b4473b489d81e8) [#722](https://github.com/frontity/frontity/pull/722) Thanks [@cristianbote](https://github.com/cristianbote)! - Add a dedicated AMP template for the @frontity/amp package, that strips away the scripts and keeps the critical css into a custom style tag
+
+- [`63effecb`](https://github.com/frontity/frontity/commit/63effecba99ff861510cfaf3ee0877f544ae6db0) [#725](https://github.com/frontity/frontity/pull/725) Thanks [@cristianbote](https://github.com/cristianbote)! - Expose head and scripts API on frontity namespace for ease of defining custom tags for the html document.
+
+* [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3) [#720](https://github.com/frontity/frontity/pull/720) Thanks [@cristianbote](https://github.com/cristianbote)! - Include the types for render, template and App.
+
 ## 1.7.1
 
 ### Patch Changes

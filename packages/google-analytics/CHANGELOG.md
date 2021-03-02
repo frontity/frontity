@@ -1,5 +1,16 @@
 # @frontity/google-analytics
 
+## 2.0.0
+
+### Major Changes
+
+- [`879b4647`](https://github.com/frontity/frontity/commit/879b4647c2b8677a5392b8beff4e8c3bc9f54097) [#733](https://github.com/frontity/frontity/pull/733) Thanks [@cristianbote](https://github.com/cristianbote)! - Update @frontity/google-analytics to be compatible with GA4.
+
+### Patch Changes
+
+- Updated dependencies [[`7c3f0769`](https://github.com/frontity/frontity/commit/7c3f076999d243de4f7dee631f40d2e71d47337d), [`49020718`](https://github.com/frontity/frontity/commit/49020718c569de081391c114a5684d092fd9769d), [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3), [`7992fb85`](https://github.com/frontity/frontity/commit/7992fb854ec563b0781f375ebcdd2d83f5a6a562)]:
+  - frontity@1.14.2
+
 ## 1.4.1
 
 ### Patch Changes
