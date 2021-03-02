@@ -79,6 +79,15 @@ declare global {
      */
     _comscore: Array<ComscoreTagParams>;
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    /** JSX Intrinsic Elements. */
+    interface IntrinsicElements {
+      /** The `amp-analytics` element. */
+      "amp-analytics": any;
+    }
+  }
 }
 
 /**
