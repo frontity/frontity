@@ -1,5 +1,21 @@
 # Change Log
 
+## 1.11.0
+
+### Minor Changes
+
+- [`3673a228`](https://github.com/frontity/frontity/commit/3673a228c1940f60c1a8ac9e67634a153a373df6) [#687](https://github.com/frontity/frontity/pull/687) Thanks [@cristianbote](https://github.com/cristianbote)! - Expose the render, template and App methods to override the built-in default with user-defined ones.
+
+### Patch Changes
+
+- [`49c0429c`](https://github.com/frontity/frontity/commit/49c0429c3663c5c15e924e1f4724524b647bbfa2) [#729](https://github.com/frontity/frontity/pull/729) Thanks [@cristianbote](https://github.com/cristianbote)! - Downgrade webpack-dev-middleware@3.7.2 which is the last known version that was not slow.
+
+* [`d6421f08`](https://github.com/frontity/frontity/commit/d6421f0859b7e60d1510ae128c290670bab1fc03) [#721](https://github.com/frontity/frontity/pull/721) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Handle the case where the query param `frontity_name` is an array of strings.
+
+- [`63effecb`](https://github.com/frontity/frontity/commit/63effecba99ff861510cfaf3ee0877f544ae6db0) [#725](https://github.com/frontity/frontity/pull/725) Thanks [@cristianbote](https://github.com/cristianbote)! - Expose head and scripts API on frontity namespace for ease of defining custom tags for the html document.
+
+* [`2f7169cb`](https://github.com/frontity/frontity/commit/2f7169cb961ace5196fb6b7067f1f851e43acf2e) [#720](https://github.com/frontity/frontity/pull/720) Thanks [@cristianbote](https://github.com/cristianbote)! - Export CacheProvider from @frontity/core and use it to extract critical css into a custom style tag, needed for the @frontity/amp package.
+
 ## 1.10.1
 
 ### Patch Changes
