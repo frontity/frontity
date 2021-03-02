@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`settingsAndStore should define settings and store 1`] = `
+Object {
+  "actions": Array [],
+  "libraries": Object {
+    "frontity": Object {
+      "App": [Function],
+      "head": Array [],
+      "render": [Function],
+      "scripts": Array [],
+      "template": [Function],
+    },
+  },
+}
+`;
+
+exports[`settingsAndStore should define settings and store 2`] = `[Function]`;

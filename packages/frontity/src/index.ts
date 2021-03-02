@@ -1,6 +1,6 @@
 import "@frontity/type-declarations";
 
-export { css, Global, keyframes } from "@emotion/react";
+export { css, Global, keyframes, CacheProvider } from "@emotion/react";
 export { default as styled } from "@emotion/styled";
 export { Helmet as Head, HelmetProvider } from "react-helmet-async";
 export { default as loadable } from "@loadable/component";

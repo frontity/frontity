@@ -1,5 +1,5 @@
 import TinyRouter, { Packages } from "../types";
-import { warn, observe, batch } from "frontity";
+import { warn, error, observe, batch } from "frontity";
 import { isError, isRedirection } from "@frontity/source";
 import { Derived } from "frontity/types";
 import { Data } from "@frontity/source/types";
@@ -60,6 +60,9 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   if (libraries.source && libraries.source.normalize)
     link = libraries.source.normalize(link);
 
+  // If the link hasn't changed, do nothing.
+  if (state.router.link === link) return;
+
   // Clone the state that we are going to use for `window.history` because it
   // cannot contain proxies.
   const historyState = JSON.parse(JSON.stringify(options.state || {}));
@@ -72,14 +75,14 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
       window.replaceLocation(data.location);
     } else {
       // If the link is internal, we have to discard the domain.
-      const { pathname, hash, search } = new URL(
+      const { pathname, search, hash } = new URL(
         data.location,
         "https://dummy-domain.com"
       );
       // If there is a link normalize, we have to use it.
       if (libraries.source && libraries.source.normalize)
-        link = libraries.source.normalize(pathname + hash + search);
-      else link = pathname + hash + search;
+        link = libraries.source.normalize(pathname + search + hash);
+      else link = pathname + search + hash;
     }
   }
 
@@ -89,6 +92,13 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
       window.history.pushState(historyState, "", link);
     else if (options.method === "replace")
       window.history.replaceState(historyState, "", link);
+    else if (options.method !== "pop") {
+      // Throw an error if another method is used. We support "pop" internally
+      // for popstate events.
+      error(
+        `The method ${options.method} is not supported by actions.router.set.`
+      );
+    }
 
     // If `autoFetch` is on, do the fetch.
     if (state.router.autoFetch) actions.source?.fetch(link);
@@ -96,9 +106,29 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
 
   // Finally, set the `state.router.link` property to the new value.
   batch(() => {
+    state.router.previous = state.router.link;
     state.router.link = link;
     state.router.state = historyState;
   });
+};
+
+/**
+ * Replace the value of `state.router.state` with the give object.
+ *
+ * This implementation also executes a `window.history.replaceState()` with that
+ * object.
+ *
+ * @param historyState - The history state object.
+ * @returns Void.
+ */
+export const updateState: TinyRouter["actions"]["router"]["updateState"] = ({
+  state,
+}) => (historyState: Record<string, unknown>) => {
+  // Clone the state to make sure we don't leak proxies.
+  const cloned = JSON.parse(JSON.stringify(historyState));
+
+  state.router.state = cloned;
+  window.history.replaceState(cloned, "");
 };
 
 /**
@@ -113,10 +143,9 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 }) => {
   if (state.frontity.platform === "server") {
     // Populate the router info with the initial path and page.
-    state.router.link =
-      libraries.source && libraries.source.normalize
-        ? libraries.source.normalize(state.frontity.initialLink)
-        : state.frontity.initialLink;
+    state.router.link = libraries.source?.normalize
+      ? libraries.source.normalize(state.frontity.initialLink)
+      : state.frontity.initialLink;
   } else {
     // Wrap `window.replace.location` so we can mock it in the e2e tests.
     // This is required because `window.location` is protected by the browser
@@ -254,8 +283,8 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     const redirectionURL =
       state.frontity.url.replace(/\/$/, "") +
       location.pathname +
-      location.hash +
-      location.search;
+      location.search +
+      location.hash;
 
     ctx.redirect(redirectionURL);
     return;

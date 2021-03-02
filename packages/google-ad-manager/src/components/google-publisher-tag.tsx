@@ -12,10 +12,9 @@ import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
  *
  * @returns React element.
  */
-const GooglePublisherTag: React.FC<Connect<
-  GoogleAdManager,
-  GooglePublisherTagProps
->> = ({ unit, size, id, targeting = {}, data }) => {
+const GooglePublisherTag: React.FC<
+  Connect<GoogleAdManager, GooglePublisherTagProps>
+> = ({ unit, size, id, targeting = {}, data }) => {
   /**
    * Append link to the `id` if `data` is specified.
    *
@@ -62,6 +61,8 @@ const GooglePublisherTag: React.FC<Connect<
           window.googletag.destroySlots([slot.current]);
         });
     };
+    // Run this hook only when the component is mounted.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /*

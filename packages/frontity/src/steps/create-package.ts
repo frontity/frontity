@@ -79,9 +79,7 @@ export const createSrcIndexJs = async (
   packagePath: string
 ) => {
   const filePath = resolvePath(projectPath, packagePath, "src/index.js");
-  const fileData = `import React from "react";
-
-const Root = () => {
+  const fileData = `const Root = () => {
   return (
     <>
       You can edit your package in:
@@ -115,5 +113,5 @@ export const installPackage = async (
   projectPath: string,
   packagePath: string
 ) => {
-  await promisify(exec)(`npm install ${packagePath}`, { cwd: projectPath });
+  await promisify(exec)(`npm install ./${packagePath}`, { cwd: projectPath });
 };

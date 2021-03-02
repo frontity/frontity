@@ -35,6 +35,20 @@
   - frontity@1.13.0
   - @frontity/wp-source@1.10.0
 
+## 0.2.4-infinite-scroll-beta.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @frontity/wp-source@1.10.1-infinite-scroll-beta.0
+
+## 0.2.4-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @frontity/wp-source@1.8.4-infinite-scroll-beta.0
+
 ## 0.2.3
 
 ### Patch Changes

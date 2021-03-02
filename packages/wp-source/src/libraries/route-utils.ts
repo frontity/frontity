@@ -1,4 +1,3 @@
-import { LinkParams } from "@frontity/source/types";
 import WpSource from "../../types";
 
 /**
@@ -116,7 +115,7 @@ export const extractLinkParts = (link: string): ExtractLinkPartsReturn => {
  *
  * @returns The link params, defined by {@link LinkParams}.
  */
-const linkToParams = (link: string): LinkParams => {
+export const parse: WpSource["libraries"]["source"]["parse"] = (link) => {
   const { pathname, queryString, hash } = extractLinkParts(link);
   const [, path, page] = /^(.*)page\/(\d+)\/?(\?.*)?$/.exec(pathname) || [
     null,
@@ -141,45 +140,24 @@ const linkToParams = (link: string): LinkParams => {
  *
  * @returns The link, in string format.
  */
-const paramsToLink = ({
+export const stringify: WpSource["libraries"]["source"]["stringify"] = ({
   path = "/",
   route,
   page = 1,
   query = {},
   hash = "",
-}: LinkParams): string => {
+}) => {
   // Use route if present, otherwise use path.
-  path = route || path;
+  route = route || path;
 
-  // Correct the path.
-  path = addFinalSlash(path);
+  // Correct the route.
+  route = addFinalSlash(route);
 
-  const pathAndPage = page > 1 ? `${path}page/${page}/` : path;
+  const pathAndPage = page > 1 ? `${route}page/${page}/` : route;
   const queryString = objToQuery(query);
 
   return `${pathAndPage.toLowerCase()}${queryString}${hash}`;
 };
-
-/**
- * Extract the different Frontity link params.
- *
- * @param link - The link.
- *
- * @returns The link params, defined by {@link LinkParams}.
- */
-export const parse: WpSource["libraries"]["source"]["parse"] = (link) =>
-  linkToParams(link);
-
-/**
- * Turn a set of Frontity link params into a string link.
- *
- * @param linkParams - The link params, defined by {@link LinkParams}.
- *
- * @returns The link, in string format.
- */
-export const stringify: WpSource["libraries"]["source"]["stringify"] = (
-  linkParams
-) => paramsToLink(linkParams);
 
 /**
  * Normalize a link, making sure that multiple links that should point to
@@ -191,7 +169,6 @@ export const stringify: WpSource["libraries"]["source"]["stringify"] = (
  *
  * @returns The normalized link.
  */
-export const normalize = (link: string): string =>
-  paramsToLink(linkToParams(link));
+export const normalize = (link: string): string => stringify(parse(link));
 
 export default { parse, stringify, normalize };

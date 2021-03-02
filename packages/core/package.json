@@ -77,7 +77,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-bundle-analyzer": "^4.2.0",
-    "webpack-dev-middleware": "^4.1.0",
+    "webpack-dev-middleware": "^3.7.3",
     "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
@@ -95,7 +95,7 @@
     "@types/loadable__component": "^5.13.1",
     "@types/loadable__server": "^5.12.3",
     "@types/lodash": "^4.14.165",
-    "@types/node": "^12.19.8",
+    "@types/node": "^14.14.31",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
