@@ -5,6 +5,7 @@ import { audio } from "./audio";
 import { removeProhibitedTags } from "./removeProhibitedTags";
 import { removeProhibitedClassNames } from "./removeProhibitedClassNames";
 import { removeProhibitedIds } from "./removeProhibitedIds";
+import { twitter } from "./twitter";
 
 export default [
   img,
@@ -14,4 +15,5 @@ export default [
   removeProhibitedTags,
   removeProhibitedClassNames,
   removeProhibitedIds,
+  twitter,
 ];

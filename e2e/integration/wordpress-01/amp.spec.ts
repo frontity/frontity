@@ -52,4 +52,14 @@ describe("AMP", () => {
       video.pause();
     });
   });
+
+  it("amp-twitter", () => {
+    const url =
+      "http://localhost:3001/amp-twitter/?frontity_name=amp-wordpress";
+
+    cy.validateAMP(url);
+    cy.visit(url);
+
+    cy.get("amp-twitter > iframe").should("exist");
+  });
 });
