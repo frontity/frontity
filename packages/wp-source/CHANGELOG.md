@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.11.2
+
+### Patch Changes
+
+- [`7e701d57`](https://github.com/frontity/frontity/commit/7e701d577c916e675557d0d93413176bb96166d7) [#717](https://github.com/frontity/frontity/pull/717) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Update the value of `link` in actions.fetch if there's an internal redirection.
+
+* [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Fix an array check by using `Array.isArray` instead of `instanceof Array`.
+
+- [`804f19fe`](https://github.com/frontity/frontity/commit/804f19fe323d7555172a9eef0f81681e0d2d11cd) [#686](https://github.com/frontity/frontity/pull/686) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Change how `libraries.source.normalize|parse|stringify` used inside of actions.source.fetch(). From now on, they are not imported from their module but received from the `libraries` parameter of `actions.source.fetch`.
+
+- Updated dependencies [[`7c3f0769`](https://github.com/frontity/frontity/commit/7c3f076999d243de4f7dee631f40d2e71d47337d), [`49020718`](https://github.com/frontity/frontity/commit/49020718c569de081391c114a5684d092fd9769d), [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3), [`7992fb85`](https://github.com/frontity/frontity/commit/7992fb854ec563b0781f375ebcdd2d83f5a6a562)]:
+  - frontity@1.14.2
+
 ## 1.11.1
 
 ### Patch Changes
