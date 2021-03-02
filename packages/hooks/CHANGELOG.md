@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Implements the brand new and long-awaited infinite scroll hooks collection, featuring `useArchiveInfiniteScroll`, `usePostTypeInfiniteScroll` and `useInfiniteScroll`. [Feature Discussion](https://community.frontity.org/t/infinite-scroll-hooks/2055)
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo) and [@DAreRodz](https://github.com/DAreRodz) for the amazing work! - Implements the brand new and long-awaited infinite scroll hooks collection, featuring `useArchiveInfiniteScroll`, `usePostTypeInfiniteScroll` and `useInfiniteScroll`. [Feature Discussion](https://community.frontity.org/t/infinite-scroll-hooks/2055)
 
 * [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Adds `isError` boolean to infinite scroll hooks will be `true` when either the last post or the last page has failed to fetch.
 
