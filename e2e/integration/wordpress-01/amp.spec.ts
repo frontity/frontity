@@ -13,6 +13,15 @@ describe("AMP", () => {
   //   task("removeAllPlugins");
   // });
 
+  it("amp-iframe", () => {
+    const url = "http://localhost:3001/amp-iframe/?frontity_name=amp-wordpress";
+
+    cy.validateAMP(url);
+    cy.visit(url);
+
+    cy.get("amp-iframe").should("exist");
+  });
+
   it("amp-img", () => {
     const url = "http://localhost:3001/amp-img/?frontity_name=amp-wordpress";
 

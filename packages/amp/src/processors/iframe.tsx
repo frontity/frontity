@@ -22,7 +22,17 @@ const AmpIframe = (props: any) => {
           src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
         />
       </Head>
-      <amp-iframe {...props} />
+      <amp-iframe
+        title={props.title || ""}
+        src={props.src}
+        layout="fixed-height"
+        height={parseInt(props.height, 10) || 150}
+        sandbox="allow-scripts allow-same-origin"
+        resizable={undefined}
+        {...props}
+      >
+        <div className="lazy-iframe placeholder" />
+      </amp-iframe>
     </>
   );
 };
