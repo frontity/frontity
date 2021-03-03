@@ -1,5 +1,4 @@
 import { fetch } from "frontity";
-import { stringify } from "query-string";
 import { ServerError } from "@frontity/source";
 
 /**
@@ -9,7 +8,7 @@ interface Init {
   /**
    * The URL of the WordPress REST API.
    */
-  api: string;
+  url: string;
 
   /**
    * Whether the REST API belongs to a site hosted on wordpress.com.
@@ -46,7 +45,7 @@ interface Get {
   /**
    * Optionally override the value of Api.api.
    */
-  api?: string;
+  url?: string;
 
   /**
    * Optionally override the value of Api.isWpCom.
@@ -59,6 +58,11 @@ interface Get {
    * This can be e.g. A Basic Authentication string or a Bearer token.
    */
   auth?: string;
+
+  /**
+   * The link of the related URL of this fetch.
+   */
+  link?: string;
 }
 
 /**
@@ -66,7 +70,7 @@ interface Get {
  * API.
  */
 class Api {
-  api = "";
+  url = "";
   isWpCom = false;
 
   /**
@@ -75,8 +79,8 @@ class Api {
    * @param this - The instance of the {@link Api}.
    * @param params - Defined in {@link Init}.
    */
-  init(this: Api, { api, isWpCom = false }: Init) {
-    this.api = api;
+  init(this: Api, { url, isWpCom = false }: Init) {
+    this.url = url;
     this.isWpCom = isWpCom;
   }
 
@@ -91,33 +95,40 @@ class Api {
    */
   get(
     this: Api,
-    { endpoint, params, api = this.api, isWpCom = this.isWpCom, auth }: Get
+    {
+      endpoint,
+      params,
+      url = this.url,
+      isWpCom = this.isWpCom,
+      auth,
+      link,
+    }: Get
   ): Promise<Response> {
     // Ensure there is a final slash
-    const baseUrl = api.replace(/\/?$/, "/");
+    const { pathname } = new URL(link, "http://domain.com");
 
     // Add the REST path depending on whether it should start with "/wp/v2" or
     // not
     const requestUrl =
       isWpCom || endpoint.startsWith("/")
-        ? `${baseUrl}${endpoint.replace(/^\//, "")}`
-        : `${baseUrl}wp/v2/${endpoint}`;
+        ? new URL(`${url}${endpoint.replace(/^\//, "")}`)
+        : new URL(`${url}${pathname}?rest_route=/wp/v2/${endpoint}`);
 
-    // Add query parameters
-    const query = stringify(params, { arrayFormat: "bracket", encode: false });
+    Object.keys(params).forEach((key) => {
+      if (params[key]) requestUrl.searchParams.set(key, params[key]);
+    });
+
     // If `auth` was passed, add it to the headers
     const headers = auth ? { Authorization: auth } : {};
 
     // Send request
-    return fetch(`${requestUrl}${query && "?"}${query}`, { headers }).then(
-      (response: Response) => {
-        if (!response.ok) {
-          const { status, statusText } = response;
-          throw new ServerError(statusText, status, statusText);
-        }
-        return response;
+    return fetch(requestUrl.href, { headers }).then((response: Response) => {
+      if (!response.ok) {
+        const { status, statusText } = response;
+        throw new ServerError(statusText, status, statusText);
       }
-    );
+      return response;
+    });
   }
 
   /**

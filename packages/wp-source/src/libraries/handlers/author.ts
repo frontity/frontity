@@ -39,7 +39,11 @@ const authorHandler: Handler = async ({
   let { id }: Partial<AuthorData> = state.source.get(route);
   if (!id || force) {
     // Request author from WP
-    const response = await api.get({ endpoint: "users", params: { slug } });
+    const response = await api.get({
+      link,
+      endpoint: "users",
+      params: { slug },
+    });
     const [entity] = await populate({ response, state, force: true });
     if (!entity)
       throw new ServerError(
@@ -51,6 +55,7 @@ const authorHandler: Handler = async ({
 
   // 2. Fetch the specified page.
   const response = await api.get({
+    link,
     endpoint: state.source.postEndpoint,
     params: {
       author: id,

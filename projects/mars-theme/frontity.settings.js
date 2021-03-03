@@ -14,12 +14,11 @@ const settings = {
       name: "@frontity/mars-theme",
       state: {
         theme: {
+          autoPrefetch: "no",
           menu: [
             ["Home", "/"],
-            ["Nature", "/category/nature/"],
-            ["Travel", "/category/travel/"],
-            ["Japan", "/tag/japan/"],
-            ["About Us", "/about-us/"],
+            ["Et Laudantium", "/category/et-laudantium/"],
+            ["Laborum", "/category/laborum/"],
           ],
           featured: {
             showOnList: true,
@@ -32,7 +31,7 @@ const settings = {
       name: "@frontity/wp-source",
       state: {
         source: {
-          url: "https://test.frontity.org",
+          url: "http://embedded.local",
         },
       },
     },

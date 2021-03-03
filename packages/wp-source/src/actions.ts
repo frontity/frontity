@@ -176,15 +176,15 @@ const actions: WpSource["actions"]["source"] = {
   },
 
   init: ({ state, libraries }) => {
-    const { api, isWpCom } = state.source;
+    const { url, isWpCom } = state.source;
 
     try {
-      new URL(api);
+      new URL(url);
     } catch (e) {
-      error("Add the URL of your WordPress REST API in state.source.api.");
+      error("Add the URL of your WordPress in state.source.url.");
     }
 
-    libraries.source.api.init({ api, isWpCom });
+    libraries.source.api.init({ url, isWpCom });
 
     // If the URL contains an auth token, then add it to the state. This is
     // normally the case e.g, when accessing the post preview.

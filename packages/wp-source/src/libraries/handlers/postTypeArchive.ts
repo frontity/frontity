@@ -69,6 +69,7 @@ const postTypeArchiveHandler = ({
 
   // 1. fetch the specified page
   const response = await api.get({
+    link,
     endpoint: endpoint === "posts" ? state.source.postEndpoint : endpoint,
     params: {
       search: query.s,

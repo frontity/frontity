@@ -87,6 +87,7 @@ const taxonomyHandler = ({
     const { slug } = params;
     // Request entity from WP
     const response = await api.get({
+      link,
       endpoint,
       params: {
         slug,
@@ -107,6 +108,7 @@ const taxonomyHandler = ({
 
   // 2. fetch the specified page
   const response = await api.get({
+    link,
     endpoint: postTypeEndpoint || state.source.postEndpoint,
     params: {
       [endpoint]: id,

@@ -68,6 +68,7 @@ const postTypeHandler = ({
     let isMismatched = false;
     for (const endpoint of finalEndpoints) {
       const response = await libraries.source.api.get({
+        link,
         endpoint,
         params: { slug, _embed: true, ...state.source.params },
       });
