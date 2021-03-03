@@ -62,4 +62,14 @@ describe("AMP", () => {
 
     cy.get("amp-twitter > iframe").should("exist");
   });
+
+  it("amp-youtube", () => {
+    const url =
+      "http://localhost:3001/amp-youtube/?frontity_name=amp-wordpress";
+
+    cy.validateAMP(url);
+    cy.visit(url);
+
+    cy.get("amp-youtube > iframe").should("exist");
+  });
 });

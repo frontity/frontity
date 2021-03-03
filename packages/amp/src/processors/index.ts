@@ -6,6 +6,7 @@ import { removeProhibitedTags } from "./removeProhibitedTags";
 import { removeProhibitedClassNames } from "./removeProhibitedClassNames";
 import { removeProhibitedIds } from "./removeProhibitedIds";
 import { twitter } from "./twitter";
+import { youtube } from "./youtube";
 
 export default [
   img,
@@ -16,4 +17,5 @@ export default [
   removeProhibitedClassNames,
   removeProhibitedIds,
   twitter,
+  youtube,
 ];
