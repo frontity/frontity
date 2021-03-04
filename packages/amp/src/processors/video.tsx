@@ -24,7 +24,7 @@ const AMPVideo = (props: any) => {
       </Head>
       {/* If we set controls={undefined} in order to satisfy the AMP validator, 
           the controls do not actually show up in the DOM */}
-      <amp-video {...props} layout="responsive" controls />
+      <amp-video {...props} layout="responsive" />
     </>
   );
 };
