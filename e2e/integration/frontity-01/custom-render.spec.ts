@@ -25,4 +25,16 @@ describe("Custom Render", () => {
         cy.get("input[name=seed").should("have.attr", "value", seed);
       });
   });
+
+  it("should have the tags pushed via head and scripts API", () => {
+    cy.visit("http://localhost:3001/?frontity_name=custom-render");
+
+    cy.get("link[rel=head]").should("have.attr", "value", "custom");
+
+    // Script tag pushed via `.scripts.push()` API.
+    cy.get("script#pushed").should("exist");
+
+    // This asserts that the custom script executed as well.
+    cy.get("body").should("have.attr", "class", "pushed");
+  });
 });

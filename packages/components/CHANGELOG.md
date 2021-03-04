@@ -104,6 +104,14 @@
   - @frontity/hooks@2.0.2
   - frontity@1.9.0
 
+## 1.3.3-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b)]:
+  - @frontity/hooks@2.1.0-infinite-scroll-beta.0
+  - frontity@1.8.1-infinite-scroll-beta.0
+
 ## 1.3.2
 
 ### Patch Changes

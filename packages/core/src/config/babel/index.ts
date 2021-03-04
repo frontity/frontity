@@ -98,6 +98,10 @@ const getConfig = (target: Target): TransformOptions => {
             styled: {
               canonicalImport: ["@emotion/styled", "default"],
             },
+            // TODO: This is the same case as `keyframes`. Not supported for now.
+            // CacheProvider: {
+            //   canonicalImport: ["@emotion/react", "CacheProvider"],
+            // },
           },
         },
       },

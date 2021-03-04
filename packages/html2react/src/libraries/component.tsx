@@ -199,10 +199,9 @@ export const handleNodes = ({
  * @param props - Component props (see {@link ComponentProps}).
  * @returns The `html` prop converted into React elements.
  */
-export const Html2React: React.FC<Connect<
-  Html2ReactPackage,
-  ComponentProps
->> = ({ html, processors, state, libraries }) => {
+export const Html2React: React.FC<
+  Connect<Html2ReactPackage, ComponentProps>
+> = ({ html, processors, state, libraries }) => {
   // Sort passed processors or the default ones stored in `libraries`.
   const sorted = (processors || libraries.html2react.processors).sort(
     (a, b) => (a.priority || 10) - (b.priority || 10)

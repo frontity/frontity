@@ -4,9 +4,9 @@
   "private": true,
   "description": "Package to do e2e testing of Frontity's analytics library",
   "dependencies": {
-    "@frontity/analytics": "^1.2.0",
-    "@frontity/source": "^1.2.0",
-    "@frontity/router": "^1.0.19",
-    "frontity": "^1.4.3"
+    "@frontity/analytics": "^1.3.1",
+    "@frontity/source": "^1.5.1",
+    "@frontity/router": "^1.2.1",
+    "frontity": "^1.14.1"
   }
 }
