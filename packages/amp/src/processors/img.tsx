@@ -7,6 +7,7 @@ type ImgElement = Element & {
   props: {
     class: string;
     loading: boolean;
+    layout: string;
   };
 };
 
@@ -24,6 +25,9 @@ export const img: Processor<ImgElement, Packages> = {
 
     // amp-img does not support nor need that prop.
     delete node.props.loading;
+
+    // Explicitly set layout
+    node.props.layout = "responsive";
 
     node.component = "amp-img";
 

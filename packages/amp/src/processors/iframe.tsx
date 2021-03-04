@@ -3,6 +3,26 @@ import { Packages } from "../../types";
 import { Head } from "frontity";
 
 /**
+ * Props for the {@link AMPIframe} component.
+ */
+interface IFrameProps {
+  /**
+   * Title for the iframe.
+   */
+  title: string;
+
+  /**
+   * Src of the iframe element.
+   */
+  src: string;
+
+  /**
+   * Height of the iframe. Typically should be set in the WordPress content.
+   */
+  height: string;
+}
+
+/**
  * The component that renders an amp-iframe component in place of a regular
  * iframe and adds the required AMP script for amp-iframe in the head.
  *
@@ -10,7 +30,7 @@ import { Head } from "frontity";
  *
  * @returns A react component.
  */
-const AmpIframe = (props: any) => {
+const AMPIframe: React.FC<IFrameProps> = ({ title, src, height, ...rest }) => {
   return (
     <>
       <Head>
@@ -23,16 +43,12 @@ const AmpIframe = (props: any) => {
         />
       </Head>
       <amp-iframe
-        title={props.title || ""}
-        src={props.src}
+        {...rest}
+        title={title || ""}
+        src={src}
         layout="fixed-height"
-        height={parseInt(props.height, 10) || 150}
-        sandbox="allow-scripts allow-same-origin"
-        resizable={undefined}
-        {...props}
-      >
-        <div className="lazy-iframe placeholder" />
-      </amp-iframe>
+        height={parseInt(height, 10) || 150} // This is mimicking the browser default of 150px
+      />
     </>
   );
 };
@@ -41,7 +57,7 @@ export const iframe: Processor<Element, Packages> = {
   name: "amp-iframe",
   test: ({ node }) => node.type === "element" && node.component === "iframe",
   processor: ({ node }) => {
-    node.component = AmpIframe;
+    node.component = AMPIframe;
 
     // AMP requires that the iframe is loaded over HTTPS
     const httpRegexp = /^http:\/\//;

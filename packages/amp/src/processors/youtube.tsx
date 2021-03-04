@@ -71,7 +71,7 @@ const AMPYoutube: React.FC<AMPYoutubeProps> = ({
 
 export const youtube: Processor<Element, Packages> = {
   name: "amp-youtube",
-  priority: 9,
+  priority: 9, // because it should run before the iframe processor
   test: ({ node }) =>
     node.component === "iframe" &&
     (/youtube.com/.test(node.props.src) ||
