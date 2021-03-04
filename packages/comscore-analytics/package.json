@@ -26,7 +26,7 @@
     "frontity": "^1.14.1"
   },
   "devDependencies": {
-    "react-helmet-async": "1.0.7",
+    "react-helmet-async": "^1.0.9",
     "react-test-renderer": "^17.0.1"
   }
 }
