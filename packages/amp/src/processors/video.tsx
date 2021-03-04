@@ -22,8 +22,6 @@ const AMPVideo = (props: any) => {
           src="https://cdn.ampproject.org/v0/amp-video-0.1.js"
         />
       </Head>
-      {/* If we set controls={undefined} in order to satisfy the AMP validator, 
-          the controls do not actually show up in the DOM */}
       <amp-video {...props} layout="responsive" />
     </>
   );
