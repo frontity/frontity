@@ -69,7 +69,7 @@
     "raw-loader": "^4.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet-async": "^1.0.8",
+    "react-helmet-async": "^1.0.9",
     "regenerator-runtime": "^0.13.7",
     "require-from-string": "^2.0.2",
     "symlink-dir": "4.1.0",
