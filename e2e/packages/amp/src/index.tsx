@@ -1,6 +1,11 @@
 import * as React from "react";
 import Package from "../types";
-import { connect, Head } from "frontity";
+import { connect, Head, styled } from "frontity";
+
+const Container = styled.main`
+  margin: 0 auto;
+  max-width: 58rem;
+`;
 
 /**
  * A React component to render the test AMP theme.
@@ -13,7 +18,7 @@ const Theme = connect(({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
 
   return (
-    <>
+    <Container>
       <Head>
         {/* AMP needs a link in head with rel="canonical" */}
         <link
@@ -29,7 +34,7 @@ const Theme = connect(({ state, libraries }) => {
           <Html2React html={post.content.rendered} />
         </div>
       </div>
-    </>
+    </Container>
   );
 });
 
