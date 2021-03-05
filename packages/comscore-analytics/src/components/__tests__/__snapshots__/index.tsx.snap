@@ -4,16 +4,7 @@ exports[`Comscore Analytics Component (AMP) should not render if no tracking IDs
 
 exports[`Comscore Analytics Component (AMP) should not render if no tracking IDs are specified 2`] = `null`;
 
-exports[`Comscore Analytics Component (AMP) should render a script for a single tracking ID 1`] = `
-Array [
-  <script
-    async={true}
-    custom-element="amp-analytics"
-    data-rh={true}
-    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
-  />,
-]
-`;
+exports[`Comscore Analytics Component (AMP) should render a script for a single tracking ID 1`] = `Array []`;
 
 exports[`Comscore Analytics Component (AMP) should render a script for a single tracking ID 2`] = `
 <amp-analytics
@@ -30,16 +21,7 @@ exports[`Comscore Analytics Component (AMP) should render a script for a single 
 </amp-analytics>
 `;
 
-exports[`Comscore Analytics Component (AMP) should render script for all tracking IDs 1`] = `
-Array [
-  <script
-    async={true}
-    custom-element="amp-analytics"
-    data-rh={true}
-    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
-  />,
-]
-`;
+exports[`Comscore Analytics Component (AMP) should render script for all tracking IDs 1`] = `Array []`;
 
 exports[`Comscore Analytics Component (AMP) should render script for all tracking IDs 2`] = `
 Array [

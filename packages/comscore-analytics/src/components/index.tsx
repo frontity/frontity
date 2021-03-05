@@ -47,29 +47,19 @@ const ComscoreHead: React.FC<ComscoreProps> = ({ id }) => (
  * @returns React element.
  */
 const ComscoreAmp: React.FC<ComscoreProps> = ({ id }) => (
-  <>
-    {/* Render the AMP library for analytics tags. */}
-    <Head>
-      <script
-        async
-        custom-element="amp-analytics"
-        src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
-      />
-    </Head>
-    {/* Render the `amp-analytics` tag for the tracking ID. */}
-    <amp-analytics type="comscore" key={id}>
-      <script
-        type="application/json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            vars: {
-              c2: id,
-            },
-          }),
-        }}
-      />
-    </amp-analytics>
-  </>
+  // Render the `amp-analytics` tag for the tracking ID.
+  <amp-analytics type="comscore" key={id}>
+    <script
+      type="application/json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          vars: {
+            c2: id,
+          },
+        }),
+      }}
+    />
+  </amp-analytics>
 );
 
 /**
