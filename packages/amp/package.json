@@ -26,8 +26,8 @@
     "@emotion/cache": "11.1.3",
     "@frontity/html2react": "^1.6.1",
     "@frontity/source": "^1.5.1",
-    "@frontity/wp-source": "^1.11.1",
-    "frontity": "^1.14.1"
+    "@frontity/wp-source": "^1.11.2",
+    "frontity": "^1.14.2"
   },
   "devDependencies": {
     "@frontity/connect": "^1.2.1",
