@@ -7,6 +7,9 @@ import processors from "../processors";
 import { render } from "@testing-library/react";
 
 expect.extend({ toBeValidAmpHtml });
+
+// Need to set that flag when testing with jest
+// https://github.com/staylor/react-helmet-async#usage-in-jest
 HelmetProvider.canUseDOM = false;
 
 const replaceHeadAttributes = (head: HelmetData) =>

@@ -22,7 +22,7 @@ const AMPVideo = (props: any) => {
           src="https://cdn.ampproject.org/v0/amp-video-0.1.js"
         />
       </Head>
-      <amp-video {...props} layout="responsive" />
+      <amp-video {...props} />
     </>
   );
 };

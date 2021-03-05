@@ -1,12 +1,27 @@
-/* eslint-disable jsdoc/require-jsdoc */
-
 import { Processor, Element } from "@frontity/html2react/types";
 import { Packages } from "../../types";
 
+/**
+ * Props for the image element as processed by {@link img}.
+ */
 type ImgElement = Element & {
+  /**
+   * Props.
+   */
   props: {
+    /**
+     * CSS classes.
+     */
     class: string;
+
+    /**
+     * Loading prop that normally is set on the img component by WordPress.
+     */
     loading: boolean;
+
+    /**
+     * Layout - refers to AMP layout parameter.
+     */
     layout: string;
   };
 };
