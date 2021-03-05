@@ -10,7 +10,7 @@ declare global {
     /**
      * Google Analytics command queue function.
      */
-    ga: (...args: any) => any;
+    gtag: (...args: any) => any;
   }
 }
 

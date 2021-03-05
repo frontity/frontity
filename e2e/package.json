@@ -2,8 +2,7 @@
   "name": "e2e",
   "private": false,
   "scripts": {
-    "start": "./e2e.js",
-    "start:only-e2e": "./e2e.js --suite e2e"
+    "start": "./e2e.js"
   },
   "devDependencies": {
     "@types/amphtml-validator": "^1.0.1",

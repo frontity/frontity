@@ -1,5 +1,20 @@
 # Change Log
 
+## 1.14.2
+
+### Patch Changes
+
+- [`7c3f0769`](https://github.com/frontity/frontity/commit/7c3f076999d243de4f7dee631f40d2e71d47337d) [#734](https://github.com/frontity/frontity/pull/734) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Change CLI webhook to point to n8n instead of Integromat.
+
+* [`49020718`](https://github.com/frontity/frontity/commit/49020718c569de081391c114a5684d092fd9769d) [#702](https://github.com/frontity/frontity/pull/702) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix the `create-package` command to work with npm 7
+
+- [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3) [#720](https://github.com/frontity/frontity/pull/720) Thanks [@cristianbote](https://github.com/cristianbote)! - Include the types for render, template and App.
+
+* [`7992fb85`](https://github.com/frontity/frontity/commit/7992fb854ec563b0781f375ebcdd2d83f5a6a562) [#692](https://github.com/frontity/frontity/pull/692) Thanks [@luisherranz](https://github.com/luisherranz)! - Remove React import from `npx frontity create-package` command.
+
+* Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b), [`f7152d38`](https://github.com/frontity/frontity/commit/f7152d38daf802d2369e17ad48b4473b489d81e8), [`63effecb`](https://github.com/frontity/frontity/commit/63effecba99ff861510cfaf3ee0877f544ae6db0), [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3)]:
+  - @frontity/types@1.7.2
+
 ## 1.14.1
 
 ### Patch Changes
@@ -127,6 +142,13 @@
 - Updated dependencies [[`fb67272b`](https://github.com/frontity/frontity/commit/fb67272bd8a3dfff00868af394484ec09f1e0785), [`ee9f2616`](https://github.com/frontity/frontity/commit/ee9f26165e1f965d3234b4cf9588966e3ab36ec7)]:
   - @frontity/error@0.1.1
   - @frontity/types@1.4.1
+
+## 1.8.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b)]:
+  - @frontity/types@1.4.1-infinite-scroll-beta.0
 
 ## 1.8.0
 

@@ -3,24 +3,6 @@ import analytics from "@frontity/analytics";
 import GoogleAnalytics from "../types";
 import Root from "./components";
 
-/**
- * Generates a name for the tracking ID passed as argument.
- *
- * This function is used by the Google Analytics root component and actions to
- * initialize and send pageviews and events to each tracking ID separately.
- *
- * @example
- * ```
- * getTrackerName("UA-01234567-89") // => "tracker_UA_01234567_89".
- * ```
- *
- * @param id - Tracking ID.
- *
- * @returns A name for the given tracking ID.
- */
-export const getTrackerName = (id: string) =>
-  `tracker_${id.replace(/-/g, "_")}`;
-
 const googleAnalytics: GoogleAnalytics = {
   name: "@frontity/google-analytics",
   roots: {
@@ -41,11 +23,11 @@ const googleAnalytics: GoogleAnalytics = {
           );
 
         // Send the pageview to the trackers.
-        ids.forEach((id) =>
-          window.ga(`${getTrackerName(id)}.send`, {
-            hitType: "pageview",
-            page: link,
-            title,
+        ids.forEach((id: string) =>
+          window.gtag("event", "page_view", {
+            send_to: id,
+            page_title: title,
+            page_location: link,
           })
         );
       },
@@ -59,19 +41,17 @@ const googleAnalytics: GoogleAnalytics = {
             "Trying to send an event to Google Analytics but neither `trackingId` nor `trackingIds` are specified inside `state.googleAnalytics`."
           );
 
-        ids
-          .map((id) => getTrackerName(id))
-          .forEach((trackerName) => {
-            const { category, label, value, ...rest } = payload;
-            window.ga(`${trackerName}.send`, {
-              hitType: "event",
-              eventAction: name,
-              eventCategory: category,
-              eventLabel: label,
-              eventValue: value,
-              ...rest,
-            });
+        ids.forEach((id: any) => {
+          const { category, label, value, ...rest } = payload;
+
+          window.gtag("event", name, {
+            send_to: id,
+            event_category: category,
+            event_label: label,
+            value,
+            ...rest,
           });
+        });
       },
     },
   },

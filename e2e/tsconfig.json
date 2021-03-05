@@ -1,13 +1,12 @@
 {
+  "extends": "../tsconfig",
+  // Options recommended by Cypress.
+  // https://docs.cypress.io/guides/tooling/typescript-support.html#Configure-tsconfig-json
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
-    "lib": ["es2015", "dom"],
-    "types": ["cypress"],
-    "checkJs": true,
-    "allowJs": true,
-    "noEmit": true,
-    "esModuleInterop": true
+    "lib": ["es5", "dom"],
+    "types": ["cypress"]
   },
-  "include": ["**/*.ts"]
+  // Include TypeScript React files as well.
+  "include": ["**/*.tsx", "**/*.ts"]
 }

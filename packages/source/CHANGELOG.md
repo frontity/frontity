@@ -81,6 +81,13 @@
 - Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b)]:
   - frontity@1.9.0
 
+## 1.2.2-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+
 ## 1.2.1
 
 ### Patch Changes
