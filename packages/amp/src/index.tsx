@@ -28,7 +28,7 @@ export default {
       init: ({ libraries }) => {
         if (!libraries.html2react) {
           warn(
-            `To use the @frontity/amp package you should first install the @frontity/html2react package. 
+            `To use the @frontity/amp package you should first install the @frontity/html2react package and add it to your frontity.settings.js file. 
             Try running: npm i @frontity/html2react in your project or go to https://api.frontity.org/frontity-packages/features-packages/html2react for more information.`
           );
         }

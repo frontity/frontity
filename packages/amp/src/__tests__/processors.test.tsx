@@ -23,6 +23,7 @@ test("Validate amp-img", async () => {
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-img
       height="300"
+      layout="responsive"
       src="test.img"
       width="300"
     />
@@ -36,7 +37,7 @@ test("Validate amp-iframe", async () => {
   const { container } = render(
     <HelmetProvider context={helmetContext}>
       <Html2React
-        html="<iframe src='test.html' width='300' height='300'/>"
+        html="<iframe src='test.html' width='auto' height='300'/>"
         processors={processors}
       />
     </HelmetProvider>
@@ -45,13 +46,15 @@ test("Validate amp-iframe", async () => {
   const head = (helmetContext as FilledContext).helmet;
 
   expect(head.script.toString()).toMatchInlineSnapshot(
-    `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-iframe\\" src=\\"https://cdn.ampproject.org/v0/amp-iframe-0.1.js\\"></script>"`
+    `"<script data-rh=\\"true\\" async custom-element=\\"amp-iframe\\" src=\\"https://cdn.ampproject.org/v0/amp-iframe-0.1.js\\"></script>"`
   );
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-iframe
       height="300"
+      layout="fixed-height"
       src="test.html"
-      width="300"
+      title=""
+      width="auto"
     />
   `);
 
@@ -75,11 +78,12 @@ test("Validate amp-video", async () => {
   const head = (helmetContext as FilledContext).helmet;
 
   expect(head.script.toString()).toMatchInlineSnapshot(
-    `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-video\\" src=\\"https://cdn.ampproject.org/v0/amp-video-0.1.js\\"></script>"`
+    `"<script data-rh=\\"true\\" async custom-element=\\"amp-video\\" src=\\"https://cdn.ampproject.org/v0/amp-video-0.1.js\\"></script>"`
   );
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-video
-      height="150"
+      height="250"
+      layout="responsive"
       src="video.mp4"
       width="250"
     />
@@ -105,10 +109,11 @@ test("Validate amp-audio", async () => {
   const head = (helmetContext as FilledContext).helmet;
 
   expect(head.script.toString()).toMatchInlineSnapshot(
-    `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-audio\\" src=\\"https://cdn.ampproject.org/v0/amp-audio-0.1.js\\"></script>"`
+    `"<script data-rh=\\"true\\" async custom-element=\\"amp-audio\\" src=\\"https://cdn.ampproject.org/v0/amp-audio-0.1.js\\"></script>"`
   );
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-audio
+      controls="true"
       src="audio.mp3"
     />
   `);
@@ -193,7 +198,7 @@ test("Adding 2 iframes should result in adding only 1 amp-iframe AMP script in t
   const { container } = render(
     <HelmetProvider context={helmetContext}>
       <Html2React
-        html="<iframe src='a.html' width='5' height='5'/><iframe src='a.html' width='5' height='5'/>"
+        html="<iframe src='a.html' width='auto' height='5'/><iframe src='a.html' width='auto' height='5'/>"
         processors={processors}
       />
     </HelmetProvider>
@@ -202,7 +207,7 @@ test("Adding 2 iframes should result in adding only 1 amp-iframe AMP script in t
   const head = (helmetContext as FilledContext).helmet;
 
   expect(head.script.toString()).toMatchInlineSnapshot(
-    `"<script data-rh=\\"true\\" async=\\"true\\" custom-element=\\"amp-iframe\\" src=\\"https://cdn.ampproject.org/v0/amp-iframe-0.1.js\\"></script>"`
+    `"<script data-rh=\\"true\\" async custom-element=\\"amp-iframe\\" src=\\"https://cdn.ampproject.org/v0/amp-iframe-0.1.js\\"></script>"`
   );
 
   // We replace the `async="true"` with just `async`

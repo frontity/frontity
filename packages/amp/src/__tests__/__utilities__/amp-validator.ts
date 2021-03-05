@@ -74,9 +74,8 @@ const formatErrors = (errors: Array<ValidationError>) => {
 /**
  * Check if an HTML string conforms to the AMP specification.
  *
- * @param body - A string to be injected in the <body/> of the AMP template.
- * @param head - A string to be injected in the <head/> of the AMP template.
- *
+ * @param head - A string to be injected in the <head> of the AMP template.
+ * @param body - A string to be injected in the <body> of the AMP template.
  * @returns An object describing the validation result.
  */
 export const amp = async (body = "", head = "") => {
