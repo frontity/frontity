@@ -40,6 +40,8 @@ export default {
 };
 ```
 
+> Comprehensive information about how to use the @frontity/yoast package can be found in the [docs](https://api.frontity.org/frontity-packages/features-packages/yoast.md).
+
 ## Feature Discussions
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
