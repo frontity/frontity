@@ -1,4 +1,4 @@
-import { CacheProvider } from "frontity";
+import { CacheProvider, warn } from "frontity";
 import { renderToStaticMarkup } from "react-dom/server";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
@@ -26,8 +26,13 @@ export default {
   actions: {
     amp: {
       init: ({ libraries }) => {
+        if (!libraries.html2react) {
+          warn(
+            `To use the @frontity/amp package you should first install the @frontity/html2react package. 
+            Try running: npm i @frontity/html2react in your project or go to https://api.frontity.org/frontity-packages/features-packages/html2react for more information.`
+          );
+        }
         // Add the AMP processors
-        // Should we throw a warning if html2React is not present ?
         libraries?.html2react?.processors?.push(...processors);
 
         if (libraries.source) {
