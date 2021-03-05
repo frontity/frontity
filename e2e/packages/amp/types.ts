@@ -3,7 +3,7 @@ import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
 /**
- * Package to do e2e testing of Frontity's analytics library.
+ * Package to do e2e testing of Frontity's AMP package.
  */
 interface TestAmp extends Package {
   /**
@@ -23,7 +23,7 @@ interface TestAmp extends Package {
 }
 
 /**
- * All packages used internally by TestAnalytics.
+ * All packages used internally by TestAmp.
  */
 export type Packages = MergePackages<TestAmp, Router, Source>;
 

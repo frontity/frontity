@@ -1,7 +1,7 @@
 /**
  * The namespace which overrides the built-in JSX namespace. It's necessary in
  * order to use AMP components with typescript. Otherwise, TS will complain
- * because it does not recognize the AMP components.
+ * because it does not recognize the AMP components as valid HTML elements.
  *
  * @remarks
  * For more information see:
