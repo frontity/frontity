@@ -4,7 +4,7 @@
   "private": true,
   "description": "Package to do e2e testing of Frontity's amp package",
   "dependencies": {
-    "@frontity/amp": "^0.0.1",
+    "@frontity/amp": "^0.0.2",
     "@frontity/html2react": "^1.6.1",
     "@frontity/router": "^1.1.4",
     "@frontity/source": "^1.5.1",
