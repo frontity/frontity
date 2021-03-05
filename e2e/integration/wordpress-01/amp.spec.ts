@@ -8,10 +8,9 @@ describe("AMP", () => {
     });
   });
 
-  // after(() => {
-  //   task("resetDatabase");
-  //   task("removeAllPlugins");
-  // });
+  after(() => {
+    task("resetDatabase");
+  });
 
   it("amp-iframe", () => {
     const url = "http://localhost:3001/amp-iframe/?frontity_name=amp-wordpress";
