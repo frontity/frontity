@@ -460,6 +460,20 @@ const settings: Settings<
     name: "amp",
     packages: ["@frontity/amp", "e2e-static-theme"],
   },
+  {
+    name: "amp-comscore-analytics",
+    packages: [
+      "@frontity/amp",
+      {
+        name: "@frontity/comscore-analytics",
+        state: {
+          comscoreAnalytics: {
+            trackingIds: ["111111", "222222"],
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
