@@ -12,8 +12,7 @@ expect.extend({ toBeValidAmpHtml });
 // https://github.com/staylor/react-helmet-async#usage-in-jest
 HelmetProvider.canUseDOM = false;
 
-const replaceHeadAttributes = (head: HelmetData) =>
-  head.script.toString().replace(/async=("|')?true("|')?/, "async");
+const replaceHeadAttributes = (head: HelmetData) => head.script.toString();
 
 test("Validate amp-img", async () => {
   const { container } = render(
