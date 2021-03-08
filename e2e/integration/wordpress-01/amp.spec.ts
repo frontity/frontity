@@ -20,7 +20,11 @@ describe("AMP", () => {
     cy.validateAMP(url);
     cy.visit(url);
 
-    cy.get("amp-iframe").should("exist");
+    cy.get("amp-iframe").should(
+      "have.attr",
+      "src",
+      "https://mars.frontity.org"
+    );
   });
 
   it("amp-img", () => {
@@ -28,7 +32,9 @@ describe("AMP", () => {
 
     cy.validateAMP(url);
     cy.visit(url);
-    cy.get("amp-img > img").should("exist");
+    cy.get("amp-img > img")
+      .should("have.attr", "src")
+      .and("contain", "ciudad_perdida");
   });
 
   it("amp-audio", () => {
@@ -84,6 +90,8 @@ describe("AMP", () => {
     cy.validateAMP(url);
     cy.visit(url);
 
-    cy.get("amp-youtube > iframe").should("exist");
+    cy.get("amp-youtube > iframe")
+      .should("have.attr", "src")
+      .and("contain", "https://www.youtube.com/embed/dQw4w9WgXcQ");
   });
 });
