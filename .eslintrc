@@ -125,8 +125,7 @@
       "files": ["**/integration/**/*.spec.{js,ts}"],
       "rules": {
         "jest/valid-expect-in-promise": "off",
-        "jest/expect-expect": "off",
-        "jest/valid-expect": "off"
+        "jest/expect-expect": "off"
       }
     },
     {

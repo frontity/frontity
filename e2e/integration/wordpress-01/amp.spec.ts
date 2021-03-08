@@ -1,4 +1,6 @@
+import expect from "expect";
 import type { taskTypes } from "../../plugins";
+
 const task: taskTypes = cy.task;
 
 describe("AMP", () => {
@@ -39,7 +41,7 @@ describe("AMP", () => {
       audio.play();
 
       // You can play the audio element
-      expect(audio.duration > 0 && !audio.paused && !audio.muted).to.eq(true);
+      expect(audio.duration > 0 && !audio.paused && !audio.muted).toBe(true);
 
       audio.pause();
     });
@@ -59,7 +61,7 @@ describe("AMP", () => {
       video.play();
 
       // You can play the video element
-      expect(video.duration > 0 && !video.paused && !video.muted).to.eq(true);
+      expect(video.duration > 0 && !video.paused && !video.muted).toBe(true);
 
       video.pause();
     });
