@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import TestRenderer from "react-test-renderer";
 import Component from "../component";
 import parse from "../parse";

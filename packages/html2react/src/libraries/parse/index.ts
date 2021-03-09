@@ -118,9 +118,11 @@ const parse = (html: string): Node[] =>
 
 /**
  * Checks if a component is a Custom Component.
+ * This is function is a copy of:
+ * https://github.com/facebook/react/blob/c954efa70f44a44be9c33c60c57f87bea6f40a10/packages/react-dom/src/shared/isCustomComponent.js.
  *
  * @param tagName - The name of the tag.
- * @param props - Props.
+ * @param props - Props that are passed to that component.
  *
  * @returns True or false.
  */
