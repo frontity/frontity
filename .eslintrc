@@ -115,7 +115,7 @@
         "jest/expect-expect": [
           "error",
           {
-            "assertFunctionNames": ["expect", "cy.**"]
+            "assertFunctionNames": ["expect", "cy.**", "assert.**", "assert"]
           }
         ]
       }
