@@ -4,7 +4,6 @@ const assert = require("assert");
 describe("Global", function () {
   this.timeout(600000);
   it("should have a blue background, but not a red color", async function () {
-    console.log(baseUrl);
     await driver.get(baseUrl + "/color-red?frontity_name=emotion");
     await driver.get(baseUrl + "/background-blue?frontity_name=emotion");
     assert.equal(

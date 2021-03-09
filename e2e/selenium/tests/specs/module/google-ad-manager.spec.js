@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("google-ad-manager", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=google-ad-manager");
+    await driver.get(baseUrl + "/?frontity_name=google-ad-manager");
     await driver.wait(
       until.elementLocated(By.css("#header-ad>div>iframe")),
       30000

@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("google-tag-manager-analytics", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=google-tag-manager");
+    await driver.get(baseUrl + "/?frontity_name=google-tag-manager");
   });
 
   const pageviewHome = {

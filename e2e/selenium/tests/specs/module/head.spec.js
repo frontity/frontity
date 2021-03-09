@@ -3,7 +3,7 @@ const assert = require("assert");
 describe("head", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?site=head");
+    await driver.get(baseUrl + "/?site=head");
   });
 
   it("should have a title", async function () {

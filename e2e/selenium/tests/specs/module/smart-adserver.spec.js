@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("smart-adserver", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=smart-adserver");
+    await driver.get(baseUrl + "/?frontity_name=smart-adserver");
     await driver.manage().setTimeouts({ implicit: 5000 });
   });
 

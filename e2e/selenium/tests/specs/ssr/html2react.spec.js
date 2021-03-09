@@ -3,7 +3,7 @@ const assert = require("assert");
 describe("html2react", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000?frontity_name=html2react");
+    await driver.get(baseUrl + "/?frontity_name=html2react");
   });
 
   it("should pass state to processors", async function () {

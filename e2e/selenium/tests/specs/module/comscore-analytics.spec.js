@@ -5,17 +5,17 @@ const assert = require("assert");
 describe("comscore-analytics", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=comscore-analytics");
+    await driver.get(baseUrl + "/?frontity_name=comscore-analytics");
   });
 
   const pageviewHome = {
     title: "Homepage Title",
-    link: "http://localhost:3000/",
+    link: baseUrl + "/",
   };
 
   const pageviewSomePost = {
     title: "Some Post Title",
-    link: "http://localhost:3000/some-post/",
+    link: baseUrl + "/some-post/",
   };
 
   it("should load the Comscore library", async function () {

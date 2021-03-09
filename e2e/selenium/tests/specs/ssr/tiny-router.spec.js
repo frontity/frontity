@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("tiny-router", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=tiny-router");
+    await driver.get(baseUrl + "/?frontity_name=tiny-router");
   });
 
   it("should show render contents in home", async function () {

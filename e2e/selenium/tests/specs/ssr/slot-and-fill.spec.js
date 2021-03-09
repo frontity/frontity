@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("slot-and-fill", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=slot-and-fill");
+    await driver.get(baseUrl + "/?frontity_name=slot-and-fill");
   });
 
   it("should show empty slots and SSR", async function () {

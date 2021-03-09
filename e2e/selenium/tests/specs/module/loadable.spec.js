@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("loadable", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=loadable");
+    await driver.get(baseUrl + "/?frontity_name=loadable");
   });
   it("should be able to render elements from dynamic components", async function () {
     assert(

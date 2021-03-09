@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("google-analytics", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=google-analytics");
+    await driver.get(baseUrl + "/?frontity_name=google-analytics");
   });
 
   const pageviewHome = {

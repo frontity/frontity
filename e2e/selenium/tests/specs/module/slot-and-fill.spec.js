@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("slot-and-fill", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=slot-and-fill");
+    await driver.get(baseUrl + "/?frontity_name=slot-and-fill");
   });
 
   it("should show empty slots", async function () {
@@ -46,8 +46,11 @@ describe("slot-and-fill", function () {
     await driver.findElement(By.id("addFill1")).click();
     await driver.findElement(By.id("addFill2")).click();
     assert.equal(
-      await driver.findElement(By.id("useFills-slot1")).getText(),
-      "I am Fill2\nI am Fill1"
+      (await driver.findElement(By.id("useFills-slot1")).getText()).replace(
+        "\n",
+        ""
+      ),
+      "I am Fill2I am Fill1"
     );
   });
 

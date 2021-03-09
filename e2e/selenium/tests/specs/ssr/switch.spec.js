@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("switch", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=switch");
+    await driver.get(baseUrl + "/?frontity_name=switch");
   });
 
   it("should render last component when no matching component is found", async function () {

@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("script", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=script");
+    await driver.get(baseUrl + "/?frontity_name=script");
   });
 
   it("should load a external script from src url", async function () {

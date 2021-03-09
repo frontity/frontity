@@ -6,7 +6,7 @@ describe("use-in-view", function () {
   let vars;
   beforeEach(function () {
     vars = {
-      url: "http://localhost:3000/?frontity_name=use-in-view",
+      url: baseUrl + "/?frontity_name=use-in-view",
     };
   });
 

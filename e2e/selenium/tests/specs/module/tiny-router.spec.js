@@ -4,27 +4,27 @@ const assert = require("assert");
 describe("tiny-router", function () {
   this.timeout(600000);
   beforeEach(async function () {
-    await driver.get("http://localhost:3000/?frontity_name=tiny-router");
+    await driver.get(baseUrl + "/?frontity_name=tiny-router");
   });
 
   it("should show render contents in home", async function () {
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
   });
 
   it("should switch route when using set", async function () {
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     await driver
       .findElement(By.css('[data-button-id="switch-to-about"]'))
       .click();
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/about/"
+      await driver.executeScript("return window.location.pathname"),
+      "/about/"
     );
     assert(
       (await driver
@@ -33,8 +33,8 @@ describe("tiny-router", function () {
     );
     await driver.executeScript("return window.history.back()");
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     assert(
       (await driver
@@ -45,15 +45,15 @@ describe("tiny-router", function () {
 
   it("should switch route when using set with `push`", async function () {
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     await driver
       .findElement(By.css('[data-button-id="switch-using-push"]'))
       .click();
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/about/"
+      await driver.executeScript("return window.location.pathname"),
+      "/about/"
     );
     assert(
       (await driver
@@ -64,15 +64,15 @@ describe("tiny-router", function () {
 
   it("should switch route when using set with `replace`", async function () {
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     await driver
       .findElement(By.css('[data-button-id="switch-using-replace"]'))
       .click();
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/about/"
+      await driver.executeScript("return window.location.pathname"),
+      "/about/"
     );
     assert(
       (await driver
@@ -83,8 +83,8 @@ describe("tiny-router", function () {
 
   it("should replace history entry when using set with `replace`", async function () {
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     assert(
       (await driver
@@ -95,8 +95,8 @@ describe("tiny-router", function () {
       .findElement(By.css('[data-button-id="switch-using-push"]'))
       .click();
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/about/"
+      await driver.executeScript("return window.location.pathname"),
+      "/about/"
     );
     assert(
       (await driver
@@ -107,8 +107,8 @@ describe("tiny-router", function () {
       .findElement(By.css('[data-button-id="switch-to-privacy-using-replace"]'))
       .click();
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/privacy/"
+      await driver.executeScript("return window.location.pathname"),
+      "/privacy/"
     );
     assert(
       (await driver
@@ -117,8 +117,8 @@ describe("tiny-router", function () {
     );
     await driver.executeScript("return window.history.back()");
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     assert(
       (await driver
@@ -129,16 +129,16 @@ describe("tiny-router", function () {
 
   it("should recover state when moving back and forward in history", async function () {
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     await driver
       .findElement(By.css('button[data-button-id="switch-using-state"]'))
       .click();
 
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/about/"
+      await driver.executeScript("return window.location.pathname"),
+      "/about/"
     );
     assert(
       (await driver
@@ -152,8 +152,8 @@ describe("tiny-router", function () {
     );
     await driver.executeScript("return window.history.back()");
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     assert(
       (await driver
@@ -162,8 +162,8 @@ describe("tiny-router", function () {
     );
     await driver.executeScript("return window.history.forward()");
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/about/"
+      await driver.executeScript("return window.location.pathname"),
+      "/about/"
     );
     assert(
       (await driver
@@ -179,8 +179,8 @@ describe("tiny-router", function () {
 
   it("should work if link doesn't have a trailing forward slash", async function () {
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/"
+      await driver.executeScript("return window.location.pathname"),
+      "/"
     );
     await driver
       .findElement(
@@ -188,8 +188,8 @@ describe("tiny-router", function () {
       )
       .click();
     assert.equal(
-      await driver.executeScript("return window.location.href"),
-      "http://localhost:3000/about/"
+      await driver.executeScript("return window.location.pathname"),
+      "/about/"
     );
     assert(
       (await driver
