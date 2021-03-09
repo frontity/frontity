@@ -78,7 +78,14 @@ const stop = async () => {
     // Stop BrowserStackLoca.
     await execa(
       "./browserstack-local/macOS",
-      ["--key", process.env.BROWSERSTACK_ACCESS_KEY, "--daemon", "stop"],
+      [
+        "--key",
+        process.env.BROWSERSTACK_ACCESS_KEY,
+        "--daemon",
+        "stop",
+        "--local-identifier",
+        "LocalDevelopmentMachine",
+      ],
       {
         stdio: "inherit",
       }
@@ -128,9 +135,18 @@ const browserStackStatus = async (buildId) => {
 process.env["CYPRESS_FRONTITY_MODE"] =
   process.env["CYPRESS_FRONTITY_MODE"] || (prod ? "production" : "development");
 
+// Don't run WordPress if:
+// --wp-version is "off".
+// --cypressCommand is "browserstack" (it is not needed).
+// --suite is not "all" and doesn't start with "wordpress".
+const dontRunWordPress =
+  wpVersion === "off" ||
+  cypressCommand === "browserstack" ||
+  (suite !== "all" && !suite.startsWith("wordpress"));
+
 (async () => {
   try {
-    if (suite === "all" || suite.startsWith("wordpress")) {
+    if (!dontRunWordPress) {
       // Set the WordPress version as an environment variable to be consumed by
       // the docker-compose.yml file.
       process.env.WORDPRESS_VERSION = wpVersion;
@@ -203,6 +219,7 @@ process.env["CYPRESS_FRONTITY_MODE"] =
             "--dont-open-browser",
           ]
         : ["frontity", "dev", "--port", "3001", "--dont-open-browser"];
+
       // Only if publicPath was passed as a CLI argument, add it to the final
       // command.
       if (publicPath) {
@@ -241,33 +258,30 @@ process.env["CYPRESS_FRONTITY_MODE"] =
       // Start Browserstack local.
       console.log("\nStarting BrowserStack Local...");
 
+      const localArgs = [
+        "--key",
+        process.env.BROWSERSTACK_ACCESS_KEY,
+        "--daemon",
+        "start",
+        "--local-identifier",
+        "LocalDevelopmentMachine",
+      ];
+
       switch (platform()) {
         case "darwin":
-          await execa(
-            "./browserstack-local/macOS",
-            ["--key", process.env.BROWSERSTACK_ACCESS_KEY, "--daemon", "start"],
-            {
-              stdio: "inherit",
-            }
-          );
+          await execa("./browserstack-local/macOS", localArgs, {
+            stdio: "inherit",
+          });
           break;
         case "win32":
-          await execa(
-            "./browserstack-local/win.exe",
-            ["--key", process.env.BROWSERSTACK_ACCESS_KEY, "--daemon", "start"],
-            {
-              stdio: "inherit",
-            }
-          );
+          await execa("./browserstack-local/win.exe", localArgs, {
+            stdio: "inherit",
+          });
           break;
         default:
-          await execa(
-            "./browserstack-local/linux",
-            ["--key", process.env.BROWSERSTACK_ACCESS_KEY, "--daemon", "start"],
-            {
-              stdio: "inherit",
-            }
-          );
+          await execa("./browserstack-local/linux", localArgs, {
+            stdio: "inherit",
+          });
           break;
       }
 
@@ -275,7 +289,15 @@ process.env["CYPRESS_FRONTITY_MODE"] =
 
       // Launch the cloud tests.
       console.log("\nSending the tests to BrowserStack...");
-      await execa("npx", ["browserstack-cypress", "run"], { stdio: "inherit" });
+      const bsArgs = ["browserstack-cypress", "run", "--sync"];
+      if (spec)
+        bsArgs.push(
+          "--specs",
+          `integration/frontity-*/**/${spec}.spec.js,integration/frontity-*/**/${spec}.spec.ts`
+        );
+      await execa("npx", bsArgs, {
+        stdio: "inherit",
+      });
 
       // Get info for this build.
       const buildResults = await readFile("log/build_results.txt", "utf-8");
@@ -286,22 +308,24 @@ process.env["CYPRESS_FRONTITY_MODE"] =
         buildResults
       ).groups;
       console.log(
-        `\nTests started. You can take a look at the dashboard here: ${buildUrl}`
+        `\nTests finished. You can take a look at the dashboard here: ${buildUrl}`
       );
 
       // Wait until the tests finish.
       let status = "running";
       while (status === "running") {
-        console.log("Test are running, please wait...");
+        console.log("Waiting for the report...");
         await sleep(10);
         status = await browserStackStatus(buildId);
       }
-      console.log(`\nTests have finished! Final status is: ${status}`);
+      console.log(`\nFinal status is: ${status}`);
 
       // Stop the processes that we started.
       await stop();
-      // Exit the process to indicate that everything went fine.
-      process.exit(0);
+
+      // If the tests succeed, exit the process with 0. If they didn't exit the
+      // process with 1.
+      status === "done" ? process.exit(0) : process.exit(1);
     } else if (cypressCommand !== "off") {
       // Run Cypress if the `cypressCommnand` is not "off".
       if (cypressCommand === "open") {

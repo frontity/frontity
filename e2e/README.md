@@ -117,6 +117,12 @@ The defaults correspond to the most common configuration when working locally, s
 
 The WordPress version that will be used in the Docker container. For example, `--wp-version 5.5`.
 
+WordPress won't load in these situations:
+
+- `--wp-version` is `off`.
+- `--cypress` is `browserstack`.
+- `--suite` is not `all` or it doesn't start with `wordpress`.
+
 Default: `latest`
 
 ### `--prod`: boolean
@@ -131,9 +137,11 @@ The Frontity `target` that will be used.
 
 Default: `both`
 
-### `--cypress`: "open" | "run" | "off"
+### `--cypress`: "open" | "run" | "browserstack" | "off"
 
-Whether to run Cypress or not, and if it does, whether to run it in "open" mode or "run" mode.
+Whether to run Cypress or not, and if it does, whether to run it in "open" mode, "run" mode, or on the BrowserStack cloud.
+
+_The BrowserStack cloud requires the setup of a `.env` file with the username and access key. Please check the `.env-example` file._
 
 Default: `open`
 
@@ -163,5 +171,7 @@ The tests spec to run. This should be the file name spec. For example if you wan
 # This will run only the script.spec.js file in the `./integrations` folder
 node e2e.js --spec script
 ```
+
+_It doesn't affect if Cypress is run in `"open"` mode._
 
 Default: `null`.
