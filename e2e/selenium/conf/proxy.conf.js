@@ -18,6 +18,7 @@ exports.config = {
   maxInstances: 1,
   commonCapabilities: {
     "browserstack.local": true,
+    "browserstack.localIdentifier": "SeleniumLocalhost",
     "browserstack.use_w3c": true,
     "bstack:options": {
       buildName: "Proxy-tests",
@@ -97,6 +98,11 @@ exports.config = {
       .withCapabilities(capabilities)
       .build();
     global.expect = driver;
+  },
+  beforeSession: (config, capabilities, specs) => {
+    capabilities.browserName === "iPhone"
+      ? (global.baseUrl = "http://bs-local.com:3000")
+      : (global.baseUrl = "http://localhost:3000");
   },
   afterTest: async (test, context, result) => {
     let { passed, error } = result;

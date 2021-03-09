@@ -20,6 +20,7 @@ exports.config = {
   maxInstances: 1,
   commonCapabilities: {
     "browserstack.local": true,
+    "browserstack.localIdentifier": "SeleniumLocalhost",
     "browserstack.use_w3c": true,
     "bstack:options": {
       buildName: "Module-tests",
