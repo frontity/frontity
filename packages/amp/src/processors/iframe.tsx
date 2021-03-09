@@ -1,6 +1,6 @@
 import { Processor, Element } from "@frontity/html2react/types";
 import { Packages } from "../../types";
-import { Head } from "frontity";
+import { Head, warn } from "frontity";
 
 /**
  * Props for the {@link AMPIframe} component.
@@ -63,6 +63,11 @@ export const iframe: Processor<Element, Packages> = {
     const httpRegexp = /^http:\/\//;
     if (node.props.src.match(httpRegexp)) {
       node.props.src = node.props.src.replace(httpRegexp, "https://");
+
+      warn(
+        `An iframe element with src of ${node.props.src} was found but AMP requires resources to be loaded over HTTPS.\n
+Frontity will update the src attribute to point to the HTTPS version but you need to ensure that the asset is available over HTTPS.`
+      );
     }
 
     return node;
