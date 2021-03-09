@@ -46,4 +46,27 @@ describe("Component", () => {
     expect(libraries.html2react.processors[2].name).toBe("priority-15");
     expect(result).toMatchSnapshot();
   });
+
+  test("Should not pass classname to web components", () => {
+    const libraries = {
+      html2react: {
+        parse,
+        processors: [],
+      },
+    };
+    const Html2React = Component as any;
+
+    const html = `<my-custom-component style="height: auto;">`;
+
+    const result = TestRenderer.create(
+      <Html2React html={html} libraries={libraries} />
+    );
+
+    // Should not pass className to the custom component
+    expect(result.toJSON()).toMatchInlineSnapshot(`
+      <my-custom-component
+        className="css-197ooa7"
+      />
+    `);
+  });
 });
