@@ -32,8 +32,6 @@ export default {
             Try running: npm i @frontity/html2react in your project or go to https://api.frontity.org/frontity-packages/features-packages/html2react for more information.`
           );
         }
-        // Add the AMP processors
-        libraries?.html2react?.processors?.push(...processors);
 
         if (libraries.source) {
           const { parse, stringify } = libraries.source;
@@ -123,6 +121,11 @@ export default {
           });
         };
       },
+    },
+  },
+  libraries: {
+    html2react: {
+      processors: [processors],
     },
   },
 } as AMP;
