@@ -65,7 +65,7 @@ describe("Component", () => {
     // Should not pass className to the custom component
     expect(result.toJSON()).toMatchInlineSnapshot(`
       <my-custom-component
-        className="css-197ooa7"
+        class="css-197ooa7"
       />
     `);
   });
