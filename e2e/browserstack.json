@@ -5,8 +5,13 @@
   },
   "browsers": [
     {
+      "browser": "chrome",
+      "os": "Windows 10",
+      "versions": ["latest"]
+    },
+    {
       "browser": "firefox",
-      "os": "OS X Big Sur",
+      "os": "Windows 10",
       "versions": ["latest"]
     },
     {
@@ -16,12 +21,11 @@
     }
   ],
   "run_settings": {
-    "cypress_config_file": "./cypress.browserstack.json",
+    "cypress_config_file": "cypress.browserstack.json",
     "cypress_version": "6",
-    "project_name": "Frontity",
-    "build_name": "Test build",
-    "exclude": [],
-    "parallels": "5",
+    "project_name": "frontity/frontity",
+    "build_name": "Pull Requests",
+    "parallels": "3",
     "specs": [
       "integration/frontity-*/**/*.spec.js",
       "integration/frontity-*/**/*.spec.ts"
@@ -31,8 +35,7 @@
       "expect": "^26.6.2",
       "typescript": "^4.2.3",
       "execa": "^4.0.3"
-    },
-    "callback_url": "https://n8n.frontity.org/webhook/14dfcaa7-89e5-4dde-9cfe-3d8f278d04bc"
+    }
   },
   "connection_settings": {
     "local": true,

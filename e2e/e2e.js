@@ -45,12 +45,18 @@ cypressCommand = cypressCommand || "open";
 suite = suite || "all";
 inspect = inspect || false;
 spec = spec || null;
-browserstackConfig = browserstackConfig || "default";
+browserstackConfig = browserstackConfig || "./browserstack.json";
 browserstackLocal = browserstackLocal || true;
 
 // Flag to know if we have started Docker or BrowserStack Local.
 let isDockerRunning = false;
 let isBrowserStackLocalRunning = false;
+const browserStackLocalBinary =
+  platform() === "darwin"
+    ? "macOS"
+    : platform() === "win32"
+    ? "win.exe"
+    : "linux";
 
 // Validate CLI args.
 validateArgs(target, { possibleValues: ["es5", "module", "both"] });
@@ -60,8 +66,6 @@ validateArgs(cypressCommand, {
 validateArgs(browser, {
   possibleValues: ["firefox", "chrome", "edge", "electron"],
 });
-validateArgs(browserstackConfig, { possibleValues: ["default", "all"] });
-validateArgs(browserstackLocal, { possibleValues: [true, false] });
 
 // We have to make sure that we are runnng inside of the e2e directory The
 // script assumes that files are relative to this location.
@@ -83,7 +87,7 @@ const stop = async () => {
   if (isBrowserStackLocalRunning) {
     // Stop BrowserStackLoca.
     await execa(
-      "./browserstack-local/macOS",
+      `./browserstack-local/${browserStackLocalBinary}`,
       [
         "--key",
         process.env.BROWSERSTACK_ACCESS_KEY,
@@ -261,7 +265,7 @@ const dontRunWordPress =
           "The $BROWSERSTACK_ACCESS_KEY env variable is required. Please create one. You can use the .env file."
         );
 
-      if (browserstackLocal) {
+      if (browserstackLocal === true) {
         // Start Browserstack local.
         console.log("\nStarting BrowserStack Local...\n");
 
@@ -272,29 +276,13 @@ const dontRunWordPress =
           "start",
           "--local-identifier",
           "Cypress",
-          "--config-file",
-          browserstackConfig === "all"
-            ? "./browserstack/browserstack.all-browsers.json"
-            : "./browserstack/browserstack.json",
         ];
 
-        switch (platform()) {
-          case "darwin":
-            await execa("./browserstack/local/macOS", localArgs, {
-              stdio: "inherit",
-            });
-            break;
-          case "win32":
-            await execa("./browserstack/local/win.exe", localArgs, {
-              stdio: "inherit",
-            });
-            break;
-          default:
-            await execa("./browserstack/local/linux", localArgs, {
-              stdio: "inherit",
-            });
-            break;
-        }
+        await execa(
+          `./browserstack-local/${browserStackLocalBinary}`,
+          localArgs,
+          { stdio: "inherit" }
+        );
 
         isBrowserStackLocalRunning = true;
       }
@@ -302,7 +290,13 @@ const dontRunWordPress =
       console.log("\nSending the tests to BrowserStack...\n");
 
       try {
-        const bsArgs = ["browserstack-cypress", "run", "--sync"];
+        const bsArgs = [
+          "browserstack-cypress",
+          "run",
+          "--sync",
+          "--config-file",
+          browserstackConfig,
+        ];
         if (spec)
           bsArgs.push(
             "--specs",
