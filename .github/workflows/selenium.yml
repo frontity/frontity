@@ -4,6 +4,9 @@ on:
     branches:
       - selenium-tests
 
+env:
+  COMMIT_SHA: ${{ github.sha }}
+
 jobs:
   selenium-job:
     name: "BrowserStack Selenium Tests"
@@ -29,16 +32,12 @@ jobs:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           build-name: github-$COMMIT_SHA
-          env:
-            COMMIT_SHA: ${{ github.sha }}
 
       - name: "BrowserStack Local Tunnel Setup" # Invokes the setup-local action
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: start
           local-identifier: SeleniumGitHub-$COMMIT_SHA
-        env:
-          COMMIT_SHA: ${{ github.sha }}
 
       # The next steps are for building the web application to be tested and starting the web server on the runner environment
 
