@@ -31,7 +31,7 @@ export const commonConfig = {
       .build();
     global.expect = driver;
   },
-  beforeSession: (config, capabilities, specs) => {
+  beforeSession: (config, capabilities) => {
     capabilities.browserName === "iPhone"
       ? (global.baseUrl = "http://bs-local.com:3000")
       : (global.baseUrl = "http://localhost:3000");

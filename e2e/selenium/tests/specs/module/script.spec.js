@@ -35,5 +35,9 @@ describe("script", function () {
 
   it("should not fail when scripts are unmounted", async function () {
     await driver.findElement(By.css('[data-test-id="unmount-script"]')).click();
+    assert.equal(
+      await driver.findElement(By.css('[data-test-id="target"]')).getText(),
+      "OFF"
+    );
   });
 });

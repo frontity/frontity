@@ -151,7 +151,7 @@
         ]
       },
       "globals": {
-        "driver": "readonly",
+        "driver": "writable",
         "baseUrl": "writable"
       }
     }
