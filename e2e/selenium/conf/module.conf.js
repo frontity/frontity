@@ -11,9 +11,11 @@ exports.config = {
     "browserstack.localIdentifier": "SeleniumLocalhost",
     "browserstack.use_w3c": true,
     "bstack:options": {
-      buildName: process.env.BROWSERSTACK_BUILD_NAME
-        ? process.env.BROWSERSTACK_BUILD_NAME
-        : "Selenium-module-localhost" + new Date().toISOString(),
+      buildName:
+        "Selenium-module- " +
+        (process.env.BROWSERSTACK_BUILD_NAME
+          ? process.env.BROWSERSTACK_BUILD_NAME
+          : "localhost" + new Date().toISOString()),
       debug: true,
     },
   },
