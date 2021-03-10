@@ -269,17 +269,17 @@ const dontRunWordPress =
 
       switch (platform()) {
         case "darwin":
-          await execa("./browserstack-local/macOS", localArgs, {
+          await execa("./browserstack/local/macOS", localArgs, {
             stdio: "inherit",
           });
           break;
         case "win32":
-          await execa("./browserstack-local/win.exe", localArgs, {
+          await execa("./browserstack/local/win.exe", localArgs, {
             stdio: "inherit",
           });
           break;
         default:
-          await execa("./browserstack-local/linux", localArgs, {
+          await execa("./browserstack/local/linux", localArgs, {
             stdio: "inherit",
           });
           break;
