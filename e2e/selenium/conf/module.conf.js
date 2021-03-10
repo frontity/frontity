@@ -5,7 +5,7 @@ const { ...rest } = commonConfig;
 exports.config = {
   ...rest,
   specs: ["./selenium/tests/specs/module/head.spec.js"],
-  exclude: [],
+  exclude: ["./selenium/tests/specs/module/smart-adserver.spec.js"],
   commonCapabilities: {
     "browserstack.local": true,
     "browserstack.localIdentifier": process.env.BROWSERSTACK_LOCAL_IDENTIFIER
