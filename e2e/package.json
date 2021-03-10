@@ -2,7 +2,7 @@
   "name": "e2e",
   "private": false,
   "scripts": {
-    "start": "node e2e.js",
+    "start": "./e2e.js",
     "browserstack": "nodenv --exec 'browserstack-cypress run'",
     "local:macos": "nodenv --exec './browserstack-local/macOS --local-identifier SeleniumLocalhost --key \"$BROWSERSTACK_ACCESS_KEY\"'",
     "local:macos:start": "nodenv --exec './browserstack-local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start'",

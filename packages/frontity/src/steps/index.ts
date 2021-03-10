@@ -312,12 +312,15 @@ export const subscribe = async (email: string) => {
   if (!isEmailValid(email))
     throw new Error("Email not valid. Please enter a valid email.");
 
-  return fetch("https://hook.integromat.com/gm0b502jo5acuhzko7gszx0kd9r52ofi", {
-    method: "POST",
-    body: JSON.stringify({
-      event: "frontity-subscribe",
-      email: email.toLowerCase(),
-    }),
-    headers: { "Content-Type": "application/json" },
-  });
+  return fetch(
+    "https://n8n.frontity.org/webhook/62923334-59a4-484c-a9c2-632814b94225",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        event: "frontity-subscribe",
+        email: email.toLowerCase(),
+      }),
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 };

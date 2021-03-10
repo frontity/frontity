@@ -1,5 +1,27 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Implements actions.router.updateState() which takes a browser state object as an argument and executes a window.history.replaceState() with that object and the current url.
+
+### Patch Changes
+
+- Updated dependencies [[`7c3f0769`](https://github.com/frontity/frontity/commit/7c3f076999d243de4f7dee631f40d2e71d47337d), [`49020718`](https://github.com/frontity/frontity/commit/49020718c569de081391c114a5684d092fd9769d), [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3), [`7992fb85`](https://github.com/frontity/frontity/commit/7992fb854ec563b0781f375ebcdd2d83f5a6a562)]:
+  - frontity@1.14.2
+
+## 1.2.0-infinite-scroll-beta.0
+
+### Minor Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Implements actions.router.updateState() which takes a browser state object as an argument and executes a window.history.replaceState() with that object and the current url.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+
 ## 1.1.4
 
 ### Patch Changes

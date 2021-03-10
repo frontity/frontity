@@ -15,6 +15,9 @@ const router: Router = {
       set: (state) => (link, options) => {
         /* do something */
       },
+      updateState: (state) => (browserState) => {
+        /* do something */
+      },
     },
   },
 };

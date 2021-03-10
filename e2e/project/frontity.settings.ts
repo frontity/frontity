@@ -130,6 +130,20 @@ const settings: Settings<
     packages: ["e2e-slot-and-fill"],
   },
   {
+    name: "use-infinite-scroll",
+    packages: [
+      "e2e-use-infinite-scroll",
+      {
+        name: "@frontity/tiny-router",
+        state: { router: { autoFetch: false } },
+      },
+      {
+        name: "@frontity/wp-source",
+        state: { source: { api: "https://domain.com/wp-json" } },
+      },
+    ],
+  },
+  {
     name: "analytics",
     packages: ["e2e-analytics", "@frontity/tiny-router", "@frontity/analytics"],
   },
@@ -445,6 +459,20 @@ const settings: Settings<
   {
     name: "amp",
     packages: ["@frontity/amp", "e2e-static-theme"],
+  },
+  {
+    name: "amp-comscore-analytics",
+    packages: [
+      "@frontity/amp",
+      {
+        name: "@frontity/comscore-analytics",
+        state: {
+          comscoreAnalytics: {
+            trackingIds: ["111111", "222222"],
+          },
+        },
+      },
+    ],
   },
 ];
 

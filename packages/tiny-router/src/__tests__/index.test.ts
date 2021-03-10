@@ -13,10 +13,13 @@ let get: jest.Mock;
 
 const createStore = (config) => frontity.createStore<Packages>(config);
 
+const spiedPushState = jest.spyOn(window.history, "pushState");
+const spiedReplaceState = jest.spyOn(window.history, "replaceState");
+
 beforeEach(() => {
   normalize = jest.fn().mockImplementation((link) => {
-    const { pathname, hash, search } = new URL(link, "https://dummy.com");
-    return pathname + hash + search;
+    const { pathname, search, hash } = new URL(link, "https://dummy.com");
+    return pathname + search + hash;
   });
   fetch = jest.fn();
   get = jest.fn().mockReturnValue({ isReady: false, isFetching: false });
@@ -25,7 +28,7 @@ beforeEach(() => {
     name: "@frontity/tiny-router",
     state: {
       frontity: {
-        platform: "server",
+        platform: "client",
         initialLink: "/initial/link/",
       },
       router: { ...tinyRouter.state.router },
@@ -63,6 +66,7 @@ describe("actions", () => {
       store.actions.router.set(link);
 
       expect(normalize).toHaveBeenCalledWith(link);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
       expect(store.state.router.link).toBe(link);
     });
 
@@ -74,11 +78,24 @@ describe("actions", () => {
 
       expect(normalize).toHaveBeenCalledWith(link);
       expect(store.state.router.link).toBe("/some-post/page/3/?some=query");
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
+    });
+
+    it("should not create new history entry if link is the same", () => {
+      const store = createStore(config);
+
+      const link = "/some-post/";
+
+      store.actions.router.set(link);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
+
+      store.actions.router.set(link);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
     });
 
     it("should populate latest link, method and state", () => {
       const store = createStore(config);
-      const link = "/some-post/";
+      const link = "/some-post/page/3/?some=query";
       const options: SetOptions = {
         method: "replace",
         state: {
@@ -93,6 +110,32 @@ describe("actions", () => {
       expect(store.state.router.state).toEqual(options.state);
     });
 
+    it("should populate previous link if current link and next link are different", () => {
+      const store = createStore(config);
+
+      const current = "/";
+      const next = "/page/2/";
+
+      store.state.router.link = current;
+
+      store.actions.router.set(next);
+      expect(store.state.router.link).toBe(next);
+      expect(store.state.router.previous).toBe(current);
+    });
+
+    it("should not populate previous link if current link and next link are the same", () => {
+      const store = createStore(config);
+
+      const current = "/page/2/";
+      const next = "/page/2/";
+
+      store.state.router.link = current;
+
+      store.actions.router.set(next);
+      expect(store.state.router.link).toBe(next);
+      expect(store.state.router.previous).toBeUndefined();
+    });
+
     it("should follow the `options.method` in the client", () => {
       const store = createStore(config);
       store.state.frontity.platform = "client";
@@ -102,16 +145,14 @@ describe("actions", () => {
         method: "push",
       };
 
-      jest.spyOn(window.history, "pushState");
-
       store.actions.router.set(link, options);
-      expect(window.history.pushState).toHaveBeenCalledTimes(1);
+      expect(spiedPushState).toHaveBeenCalledTimes(1);
 
+      const link2 = "/other-post/";
       options.method = "replace";
-      jest.spyOn(window.history, "replaceState");
 
-      store.actions.router.set(link, options);
-      expect(window.history.replaceState).toHaveBeenCalledTimes(1);
+      store.actions.router.set(link2, options);
+      expect(spiedReplaceState).toHaveBeenCalledTimes(1);
     });
 
     it("should clone the history state and store it in `window.history`", () => {
@@ -204,9 +245,36 @@ describe("actions", () => {
     });
   });
 
+  describe("updateState", () => {
+    test("should replace the current browser state with the new state", () => {
+      const store = createStore(config);
+      const currentState = {
+        links: ["/"],
+      };
+
+      const link = store.state.router.link;
+      store.state.router.state = currentState;
+
+      const nextState = {
+        links: ["/", "/page/2/"],
+      };
+
+      expect(store.state.router.link).toBe(link);
+      expect(store.state.router.state).toEqual(currentState);
+
+      store.actions.router.updateState(nextState);
+
+      expect(store.state.router.link).toBe(link);
+      expect(store.state.router.state).toEqual(nextState);
+      expect(spiedReplaceState).toHaveBeenCalledTimes(1);
+      expect(spiedReplaceState).toHaveBeenCalledWith(nextState, "");
+    });
+  });
+
   describe("init", () => {
     it("should populate the initial link", () => {
       const store = createStore(config);
+      store.state.frontity.platform = "server";
 
       store.actions.router.init();
 
@@ -221,11 +289,9 @@ describe("actions", () => {
       const store = createStore(config);
       store.state.router.state = { some: "state" };
 
-      jest.spyOn(window.history, "replaceState");
-
       store.actions.router.init();
 
-      expect(window.history.replaceState).toHaveBeenCalledTimes(1);
+      expect(spiedReplaceState).toHaveBeenCalledTimes(1);
       expect(window.history.state).toEqual(store.state.router.state);
     });
 
@@ -237,7 +303,7 @@ describe("actions", () => {
       const pathname = "/about-us/";
       const search = "?id=3&search=value";
       const hash = "#element";
-      const link = pathname + hash + search;
+      const link = pathname + search + hash;
 
       const oldLocation = window.location;
       delete window.location;
@@ -325,8 +391,11 @@ describe("actions", () => {
     it("should fetch if autoFetch is enabled", () => {
       const ctx = {} as Context;
       get.mockReturnValue({});
+
       const store = createStore(config);
+      store.state.frontity.platform = "server";
       store.libraries.source = undefined;
+
       store.actions.router.init();
       store.actions.router.beforeSSR({ ctx });
 
@@ -339,6 +408,7 @@ describe("actions", () => {
       get.mockReturnValue({ isError: true, errorStatus: 123 });
 
       const store = createStore(config);
+
       await store.actions.router.beforeSSR({ ctx });
 
       expect(ctx.status).toBe(123);
@@ -354,7 +424,7 @@ describe("actions", () => {
         isRedirection: true,
         redirectionStatus: 123,
         isExternal: false,
-        location: "https://backend.com/final-url/#hash?query=value",
+        location: "https://backend.com/final-url/?query=value#hash",
       });
       const store = createStore(config);
       store.state.frontity.url = "https://domain.com";
@@ -362,7 +432,7 @@ describe("actions", () => {
       await store.actions.router.beforeSSR({ ctx: ctx as Context });
 
       expect(ctx.redirect).toHaveBeenCalledWith(
-        "https://domain.com/final-url/#hash?query=value"
+        "https://domain.com/final-url/?query=value#hash"
       );
       expect(ctx.status).toBe(123);
     });
@@ -377,14 +447,14 @@ describe("actions", () => {
         isRedirection: true,
         redirectionStatus: 123,
         isExternal: true,
-        location: "https://external.com/final-url/#hash?query=value",
+        location: "https://external.com/final-url/?query=value#hash",
       });
       const store = createStore(config);
 
       await store.actions.router.beforeSSR({ ctx: ctx as Context });
 
       expect(ctx.redirect).toHaveBeenCalledWith(
-        "https://external.com/final-url/#hash?query=value"
+        "https://external.com/final-url/?query=value#hash"
       );
       expect(ctx.status).toBe(123);
     });
