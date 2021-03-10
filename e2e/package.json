@@ -3,16 +3,15 @@
   "private": false,
   "scripts": {
     "start": "node e2e.js",
-    "browserstack": "nodenv --exec 'browserstack-cypress run --sync'",
-    "local:macos": "nodenv --exec './browserstack/local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --local-identifier LocalDevelopmentMachine'",
-    "local:macos:start": "nodenv --exec './browserstack/local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start --local-identifier LocalDevelopmentMachine'",
-    "local:macos:stop": "nodenv --exec './browserstack/local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop --local-identifier LocalDevelopmentMachine'",
-    "local:win": "nodenv --exec './browserstack/local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\" --local-identifier LocalDevelopmentMachine'",
-    "local:win:start": "nodenv --exec './browserstack/local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start --local-identifier LocalDevelopmentMachine'",
-    "local:win:stop": "nodenv --exec './browserstack/local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop --local-identifier LocalDevelopmentMachine'",
-    "local:linux": "nodenv --exec './browserstack/local/linux --key \"$BROWSERSTACK_ACCESS_KEY\" --local-identifier LocalDevelopmentMachine'",
-    "local:linux:start": "nodenv --exec './browserstack/local/linux --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start --local-identifier LocalDevelopmentMachine'",
-    "local:linux:stop": "nodenv --exec './browserstack/local/linux --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop --local-identifier LocalDevelopmentMachine'"
+    "local:macos": "nodenv --exec './browserstack/local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --local-identifier Cypress'",
+    "local:macos:start": "nodenv --exec './browserstack/local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start --local-identifier Cypress'",
+    "local:macos:stop": "nodenv --exec './browserstack/local/macOS --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop --local-identifier Cypress'",
+    "local:win": "nodenv --exec './browserstack/local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\" --local-identifier Cypress'",
+    "local:win:start": "nodenv --exec './browserstack/local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start --local-identifier Cypress'",
+    "local:win:stop": "nodenv --exec './browserstack/local/win.exe --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop --local-identifier Cypress'",
+    "local:linux": "nodenv --exec './browserstack/local/linux --key \"$BROWSERSTACK_ACCESS_KEY\" --local-identifier Cypress'",
+    "local:linux:start": "nodenv --exec './browserstack/local/linux --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon start --local-identifier Cypress'",
+    "local:linux:stop": "nodenv --exec './browserstack/local/linux --key \"$BROWSERSTACK_ACCESS_KEY\" --daemon stop --local-identifier Cypress'"
   },
   "devDependencies": {
     "@types/cypress": "^1.1.3",

@@ -5,18 +5,23 @@
   },
   "browsers": [
     {
-      "browser": "chrome",
+      "browser": "firefox",
+      "os": "OS X Big Sur",
+      "versions": ["latest"]
+    },
+    {
+      "browser": "edge",
       "os": "Windows 10",
       "versions": ["latest"]
     }
   ],
   "run_settings": {
-    "cypress_config_file": "./cypress.json",
+    "cypress_config_file": "./cypress.browserstack.json",
     "cypress_version": "6",
     "project_name": "Frontity",
     "build_name": "Test build",
     "exclude": [],
-    "parallels": "2",
+    "parallels": "5",
     "specs": [
       "integration/frontity-*/**/*.spec.js",
       "integration/frontity-*/**/*.spec.ts"
@@ -29,13 +34,9 @@
     },
     "callback_url": "https://n8n.frontity.org/webhook/14dfcaa7-89e5-4dde-9cfe-3d8f278d04bc"
   },
-  "env": {
-    "CYPRESS_VIDEO": true,
-    "CYPRESS_SCREENSHOT_ON_RUN_FAILURE": true
-  },
   "connection_settings": {
     "local": true,
-    "local_identifier": "LocalDevelopmentMachine"
+    "local_identifier": "Cypress"
   },
   "disable_usage_reporting": false
 }

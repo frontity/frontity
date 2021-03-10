@@ -32,6 +32,8 @@ let {
   "public-path": publicPath,
   inspect,
   spec,
+  "browserstack-config": browserstackConfig,
+  "browserstack-local": browserstackLocal,
 } = argv;
 
 // Sane defaults for local development.
@@ -43,6 +45,8 @@ cypressCommand = cypressCommand || "open";
 suite = suite || "all";
 inspect = inspect || false;
 spec = spec || null;
+browserstackConfig = browserstackConfig || "default";
+browserstackLocal = browserstackLocal || true;
 
 // Flag to know if we have started Docker or BrowserStack Local.
 let isDockerRunning = false;
@@ -56,6 +60,8 @@ validateArgs(cypressCommand, {
 validateArgs(browser, {
   possibleValues: ["firefox", "chrome", "edge", "electron"],
 });
+validateArgs(browserstackConfig, { possibleValues: ["default", "all"] });
+validateArgs(browserstackLocal, { possibleValues: [true, false] });
 
 // We have to make sure that we are runnng inside of the e2e directory The
 // script assumes that files are relative to this location.
@@ -84,7 +90,7 @@ const stop = async () => {
         "--daemon",
         "stop",
         "--local-identifier",
-        "LocalDevelopmentMachine",
+        "Cypress",
       ],
       {
         stdio: "inherit",
@@ -255,38 +261,43 @@ const dontRunWordPress =
           "The $BROWSERSTACK_ACCESS_KEY env variable is required. Please create one. You can use the .env file."
         );
 
-      // Start Browserstack local.
-      console.log("\nStarting BrowserStack Local...");
+      if (browserstackLocal) {
+        // Start Browserstack local.
+        console.log("\nStarting BrowserStack Local...\n");
 
-      const localArgs = [
-        "--key",
-        process.env.BROWSERSTACK_ACCESS_KEY,
-        "--daemon",
-        "start",
-        "--local-identifier",
-        "LocalDevelopmentMachine",
-      ];
+        const localArgs = [
+          "--key",
+          process.env.BROWSERSTACK_ACCESS_KEY,
+          "--daemon",
+          "start",
+          "--local-identifier",
+          "Cypress",
+          "--config-file",
+          browserstackConfig === "all"
+            ? "./browserstack/browserstack.all-browsers.json"
+            : "./browserstack/browserstack.json",
+        ];
 
-      switch (platform()) {
-        case "darwin":
-          await execa("./browserstack/local/macOS", localArgs, {
-            stdio: "inherit",
-          });
-          break;
-        case "win32":
-          await execa("./browserstack/local/win.exe", localArgs, {
-            stdio: "inherit",
-          });
-          break;
-        default:
-          await execa("./browserstack/local/linux", localArgs, {
-            stdio: "inherit",
-          });
-          break;
+        switch (platform()) {
+          case "darwin":
+            await execa("./browserstack/local/macOS", localArgs, {
+              stdio: "inherit",
+            });
+            break;
+          case "win32":
+            await execa("./browserstack/local/win.exe", localArgs, {
+              stdio: "inherit",
+            });
+            break;
+          default:
+            await execa("./browserstack/local/linux", localArgs, {
+              stdio: "inherit",
+            });
+            break;
+        }
+
+        isBrowserStackLocalRunning = true;
       }
-
-      isBrowserStackLocalRunning = true;
-
       // Launch the cloud tests.
       console.log("\nSending the tests to BrowserStack...\n");
 
@@ -320,11 +331,11 @@ const dontRunWordPress =
       // Wait until the tests finish.
       let status = "running";
       while (status === "running") {
-        console.log("Waiting for the report...");
+        console.log("\nWaiting for the report...");
         await sleep(10);
         status = await browserStackStatus(buildId);
       }
-      console.log(`\nFinal status is: ${status}`);
+      console.log(`\nFinal status is: ${status}\n`);
 
       // Stop the processes that we started.
       await stop();

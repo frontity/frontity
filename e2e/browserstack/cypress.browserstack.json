@@ -1,0 +1,18 @@
+{
+  "integrationFolder": "integration",
+  "fixturesFolder": "fixtures",
+  "pluginsFile": false,
+  "screenshotsFolder": "screenshots",
+  "supportFile": "support/index.js",
+  "videosFolder": "videos",
+  "video": true,
+  "screenshotOnRunFailure": true,
+  "trashAssetsBeforeRuns": false,
+  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+  "defaultCommandTimeout": 10000,
+  "baseUrl": "http://localhost:3001",
+  "retries": {
+    "runMode": 3,
+    "openMode": 0
+  }
+}
