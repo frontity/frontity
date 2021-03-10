@@ -1,11 +1,13 @@
 import * as React from "react";
 import { connect, error, warn } from "frontity";
+import { ClassNames } from "@emotion/react";
 import { Connect, State } from "frontity/types";
 import parse from "./parse";
 import Html2ReactPackage, {
   ComponentProps,
   Processor,
   Node,
+  Element,
 } from "../../types";
 
 /**
@@ -138,6 +140,39 @@ interface HandleNodeParams extends Payload {
 }
 
 /**
+ * Checks if a component is a Custom Component.
+ * This is function is a copy of:
+ * https://github.com/facebook/react/blob/c954efa70f44a44be9c33c60c57f87bea6f40a10/packages/react-dom/src/shared/isCustomComponent.js.
+ *
+ * @param tagName - The name of the tag.
+ * @param props - Props that are passed to that component.
+ *
+ * @returns True or false.
+ */
+function isCustomComponent(tagName: string, props: Element["props"]) {
+  if (tagName.indexOf("-") === -1) {
+    return typeof props.is === "string";
+  }
+  switch (tagName) {
+    // These are reserved SVG and MathML elements.
+    // We don't mind this whitelist too much because we expect it to never grow.
+    // The alternative is to track the namespace in a few places which is convoluted.
+    // https://w3c.github.io/webcomponents/spec/custom/#custom-elements-core-concepts
+    case "annotation-xml":
+    case "color-profile":
+    case "font-face":
+    case "font-face-src":
+    case "font-face-uri":
+    case "font-face-format":
+    case "font-face-name":
+    case "missing-glyph":
+      return false;
+    default:
+      return true;
+  }
+}
+
+/**
  * Process a node and its children and return them converted to React elements.
  *
  * @param handleNodeParams - Object of type {@link HandleNodeParams}.
@@ -152,7 +187,45 @@ const handleNode = ({
   if (applyProcessors({ node, ...payload })) return null;
   if (node.type === "comment") return null;
   if (node.type === "text") return node.content;
-  if (node.type === "element")
+  if (node.type === "element") {
+    // Populate either className or class, depending
+    // if the component is a custom component.
+    if (
+      // If the component is not a string, it could not be a custom component,
+      // only a React component.
+      typeof node.component === "string" &&
+      isCustomComponent(node.component, node.props)
+    ) {
+      return (
+        <ClassNames>
+          {({ css, cx }) => {
+            // Get the
+            const emotionClass =
+              node.props?.css?.styles && css(node.props.css.styles);
+            delete node.props.css;
+
+            const { className, ...props } = node.props;
+            const classes = cx(className, emotionClass);
+
+            return (
+              <node.component
+                {...{
+                  key: index,
+                  // Only pass the `class` prop if `classes` is truthy (empty
+                  // string does not count)
+                  ...(classes && { class: classes }),
+                  ...props,
+                }}
+              >
+                {node.children
+                  ? handleNodes({ nodes: node.children, ...payload })
+                  : null}
+              </node.component>
+            );
+          }}
+        </ClassNames>
+      );
+    }
     return (
       <node.component {...{ key: index, ...node.props }}>
         {node.children
@@ -160,6 +233,7 @@ const handleNode = ({
           : null}
       </node.component>
     );
+  }
 };
 
 /**

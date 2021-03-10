@@ -1,5 +1,4 @@
 import { css, decode } from "frontity";
-import { css as cssFunc } from "@emotion/css";
 import { parse as himalaya } from "himalaya";
 import { Element, Node } from "../../../types";
 import htmlAttributes from "./attributes/html.json";
@@ -35,23 +34,15 @@ const adaptNode = (himalayaNode: HimalayaNode, parent?: Element): Node => {
           if (typeof value === "string") value = decode(value);
 
           // mapping from HTML attribute names to react names:  // https://github.com/facebook/react/blob/58b8797b7372c9296e65e08ce8297e4a394b7972/packages/react-dom/src/shared/DOMProperty.js#L241-L244
-          if (
-            key === "class" &&
-            !isCustomComponent(himalayaNode.tagName, props)
-          ) {
+          if (key === "class") {
             props.className = value;
           } else if (key === "for") {
             props.htmlFor = value;
           } else if (/^data-/.test(key)) {
             props[key] = value;
           } else if (key === "style") {
-            if (isCustomComponent(himalayaNode.tagName, props)) {
-              (props as any).class = cssFunc(value);
-              delete props.className;
-            } else {
-              // Add inline styles to the component with `emotion`.
-              props.css = css(value);
-            }
+            // Add inline styles to the component with `emotion`.
+            props.css = css(value);
           } else if (!/^on/.test(key)) {
             const camelCaseKey =
               attributesMap[key.replace(/[-:]/, "").toLowerCase()];
@@ -115,38 +106,5 @@ const parse = (html: string): Node[] =>
     if (adapted) tree.push(adapted);
     return tree;
   }, []);
-
-/**
- * Checks if a component is a Custom Component.
- * This is function is a copy of:
- * https://github.com/facebook/react/blob/c954efa70f44a44be9c33c60c57f87bea6f40a10/packages/react-dom/src/shared/isCustomComponent.js.
- *
- * @param tagName - The name of the tag.
- * @param props - Props that are passed to that component.
- *
- * @returns True or false.
- */
-function isCustomComponent(tagName: string, props: Element["props"]) {
-  if (tagName.indexOf("-") === -1) {
-    return typeof props.is === "string";
-  }
-  switch (tagName) {
-    // These are reserved SVG and MathML elements.
-    // We don't mind this whitelist too much because we expect it to never grow.
-    // The alternative is to track the namespace in a few places which is convoluted.
-    // https://w3c.github.io/webcomponents/spec/custom/#custom-elements-core-concepts
-    case "annotation-xml":
-    case "color-profile":
-    case "font-face":
-    case "font-face-src":
-    case "font-face-uri":
-    case "font-face-format":
-    case "font-face-name":
-    case "missing-glyph":
-      return false;
-    default:
-      return true;
-  }
-}
 
 export default parse;
