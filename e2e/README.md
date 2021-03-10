@@ -175,3 +175,23 @@ node e2e.js --spec script
 _It doesn't affect if Cypress is run in `"open"` mode._
 
 Default: `null`.
+
+### `--browserstack-config`: string
+
+The BrowserStack configuration file. For example:
+
+```sh
+node e2e.js --browserstack-config browserstack.custom.json
+```
+
+Default: `browserstack.json`.
+
+### `--browserstack-local`: boolean
+
+If BrowserStack Local should run or not. To turn it off, use:
+
+```sh
+node e2e.js --browserstack-local false
+```
+
+Default: `true`.
