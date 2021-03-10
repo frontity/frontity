@@ -334,9 +334,8 @@ const dontRunWordPress =
       // Stop the processes that we started.
       await stop();
 
-      // If the tests succeed, exit the process with 0. If they didn't exit the
-      // process with 1.
-      status === "done" ? process.exit(0) : process.exit(1);
+      // If the tests failed, set the exit code to 1 to indicate failure.
+      if (status === "failed") process.exitCode = 1;
     } else if (cypressCommand !== "off") {
       // Run Cypress if the `cypressCommnand` is not "off".
       if (cypressCommand === "open") {
@@ -361,15 +360,13 @@ const dontRunWordPress =
 
       // Stop the processes that we started.
       await stop();
-      // Exit the process to indicate that everything went fine.
-      process.exit(0);
     }
   } catch (err) {
     console.error(err);
     // Stop the processes that we started.
     await stop();
     // We need to return the exit code so that the GitHub action returns a fail.
-    process.exit(1);
+    process.exitCode = 1;
   }
 })();
 
@@ -378,5 +375,4 @@ process.on("SIGINT", async () => {
   console.log("\n\nStopping the processes that we started, please wait.");
   // Stop the processes that we started.
   await stop();
-  process.exit();
 });
