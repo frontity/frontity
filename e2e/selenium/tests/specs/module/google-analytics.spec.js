@@ -21,113 +21,111 @@ describe("google-analytics", function () {
     // Make sure the <script> was created.
     assert(
       await driver.executeScript(
-        "return document.querySelector('script[src=\"https://www.google-analytics.com/analytics.js\"][async]')"
+        "return document.querySelector('script[src=\"https://www.googletagmanager.com/gtag/js?id=UA-XXXXXX-X\"][async]')"
       )
     );
     // Make sure the Google Analytics library has loaded.
-    assert(await driver.executeScript("return window.ga"));
+    assert(await driver.executeScript("return window.gtag"));
   });
 
   it("should have sent the first pageview", async function () {
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[0]"), [
-      "tracker_UA_XXXXXX_X.send",
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[0][2]"),
       {
-        hitType: "pageview",
-        page: pageviewHome.link,
-        title: pageviewHome.title,
-      },
-    ]);
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[1]"), [
-      "tracker_UA_YYYYYY_Y.send",
+        page_location: pageviewHome.link,
+        page_title: pageviewHome.title,
+        send_to: "UA-XXXXXX-X",
+      }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[1][2]"),
       {
-        hitType: "pageview",
-        page: pageviewHome.link,
-        title: pageviewHome.title,
-      },
-    ]);
+        page_location: pageviewHome.link,
+        page_title: pageviewHome.title,
+        send_to: "UA-YYYYYY-Y",
+      }
+    );
   });
 
   it("should send a pageview if the page changes", async function () {
     await driver.findElement(By.id("change-link")).click();
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[2]"), [
-      "tracker_UA_XXXXXX_X.send",
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[2][2]"),
       {
-        hitType: "pageview",
-        page: pageviewSomePost.link,
-        title: pageviewSomePost.title,
-      },
-    ]);
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[3]"), [
-      "tracker_UA_YYYYYY_Y.send",
+        page_location: pageviewSomePost.link,
+        page_title: pageviewSomePost.title,
+        send_to: "UA-XXXXXX-X",
+      }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[3][2]"),
       {
-        hitType: "pageview",
-        page: pageviewSomePost.link,
-        title: pageviewSomePost.title,
-      },
-    ]);
+        page_location: pageviewSomePost.link,
+        page_title: pageviewSomePost.title,
+        send_to: "UA-YYYYYY-Y",
+      }
+    );
   });
 
   it("should send pageviews when going back or forward", async function () {
     await driver.findElement(By.id("change-link")).click();
     await driver.executeScript("return window.history.back()");
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[4]"), [
-      "tracker_UA_XXXXXX_X.send",
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[4][2]"),
       {
-        hitType: "pageview",
-        page: pageviewHome.link,
-        title: pageviewHome.title,
-      },
-    ]);
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[5]"), [
-      "tracker_UA_YYYYYY_Y.send",
+        page_location: pageviewHome.link,
+        page_title: pageviewHome.title,
+        send_to: "UA-XXXXXX-X",
+      }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[5][2]"),
       {
-        hitType: "pageview",
-        page: pageviewHome.link,
-        title: pageviewHome.title,
-      },
-    ]);
+        page_location: pageviewHome.link,
+        page_title: pageviewHome.title,
+        send_to: "UA-YYYYYY-Y",
+      }
+    );
     await driver.executeScript("return window.history.forward()");
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[6]"), [
-      "tracker_UA_XXXXXX_X.send",
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[6][2]"),
       {
-        hitType: "pageview",
-        page: pageviewSomePost.link,
-        title: pageviewSomePost.title,
-      },
-    ]);
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[7]"), [
-      "tracker_UA_YYYYYY_Y.send",
+        page_location: pageviewSomePost.link,
+        page_title: pageviewSomePost.title,
+        send_to: "UA-XXXXXX-X",
+      }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[7][2]"),
       {
-        hitType: "pageview",
-        page: pageviewSomePost.link,
-        title: pageviewSomePost.title,
-      },
-    ]);
+        page_location: pageviewSomePost.link,
+        page_title: pageviewSomePost.title,
+        send_to: "UA-YYYYYY-Y",
+      }
+    );
   });
 
   it("should send events", async function () {
     await driver.findElement(By.id("send-event")).click();
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[2]"), [
-      "tracker_UA_XXXXXX_X.send",
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[2][2]"),
       {
-        hitType: "event",
-        eventAction: "some event",
         content: "some content",
-        eventCategory: undefined,
-        eventLabel: undefined,
-        eventValue: undefined,
-      },
-    ]);
-    assert.deepEqual(await driver.executeScript("return window.gaCalls[3]"), [
-      "tracker_UA_YYYYYY_Y.send",
+        event_category: undefined,
+        event_label: undefined,
+        send_to: "UA-XXXXXX-X",
+        value: undefined,
+      }
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[3][2]"),
       {
-        hitType: "event",
-        eventAction: "some event",
         content: "some content",
-        eventCategory: undefined,
-        eventLabel: undefined,
-        eventValue: undefined,
-      },
-    ]);
+        event_category: undefined,
+        event_label: undefined,
+        send_to: "UA-YYYYYY-Y",
+        value: undefined,
+      }
+    );
   });
 });

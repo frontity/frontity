@@ -13,9 +13,9 @@ const Script: React.FC = () => {
   const { name } = state.frontity;
 
   const googleAnalyticsScript = `
-      window.oldGa = window.ga || function() {};
+      window.oldGa = window.gtag || function() {};
       window.gaCalls = [];
-      Object.defineProperty(window, "ga", {
+      Object.defineProperty(window, "gtag", {
         get: function() {
           return function () {
             window.gaCalls.push(arguments);

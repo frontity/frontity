@@ -4,7 +4,7 @@ const { ...rest } = commonConfig;
 
 exports.config = {
   ...rest,
-  specs: ["./selenium/tests/specs/module/head.spec.js"],
+  specs: ["./selenium/tests/specs/module/google-analytics.spec.js"],
   exclude: ["./selenium/tests/specs/module/smart-adserver.spec.js"],
   commonCapabilities: {
     "browserstack.local": true,
@@ -29,12 +29,12 @@ exports.config = {
       real_mobile: "true",
       browserName: "iPhone",
     },
-    {
-      os: "OS X",
-      os_version: "Catalina",
-      browserName: "Safari",
-      browser_version: "13.1",
-    },
+    // {
+    //   os: "OS X",
+    //   os_version: "Catalina",
+    //   browserName: "Safari",
+    //   browser_version: "13.1",
+    // },
     // {
     //   os: "OS X",
     //   os_version: "Sierra",
@@ -48,12 +48,12 @@ exports.config = {
     //   real_mobile: true,
     //   browserName: "Android",
     // },
-    // {
-    //   os: "Windows",
-    //   os_version: "10",
-    //   browserName: "Chrome",
-    //   browser_version: "latest-beta",
-    // },
+    {
+      os: "Windows",
+      os_version: "10",
+      browserName: "Chrome",
+      browser_version: "latest-beta",
+    },
     // {
     //   os: "Windows",
     //   os_version: "7",
