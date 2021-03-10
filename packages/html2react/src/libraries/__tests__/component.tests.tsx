@@ -147,4 +147,18 @@ describe("Component", () => {
       </my-custom-component>
     `);
   });
+
+  test("When you pass a className prop, it overwrites the class prop", () => {
+    const html = `<div class="test" className="classname"></div>`;
+
+    const result = TestRenderer.create(
+      <Html2React html={html} libraries={libraries} />
+    );
+
+    expect(result.toJSON()).toMatchInlineSnapshot(`
+      <div
+        className="classname"
+      />
+    `);
+  });
 });
