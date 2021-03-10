@@ -101,4 +101,50 @@ describe("Component", () => {
       />
     `);
   });
+
+  test("Should handle children correctly", () => {
+    const html = `
+    <my-custom-component>
+      <div> test </div> 
+      <div> test 2 </div> 
+    </my-custom-component>`;
+
+    const result = TestRenderer.create(
+      <Html2React html={html} libraries={libraries} />
+    );
+
+    expect(result.toJSON()).toMatchInlineSnapshot(`
+      <my-custom-component>
+        <div>
+           test 
+        </div>
+        <div>
+           test 2 
+        </div>
+      </my-custom-component>
+    `);
+  });
+
+  test("Should handle nested custom components correctly", () => {
+    const html = `
+    <my-custom-component class="test" style="color: red;">
+      <my-nested-custom-component>
+    </my-custom-component>`;
+
+    const result = TestRenderer.create(
+      <Html2React html={html} libraries={libraries} />
+    );
+
+    expect(result.toJSON()).toMatchInlineSnapshot(`
+      .emotion-0 {
+        color: red;
+      }
+
+      <my-custom-component
+        class="test emotion-0"
+      >
+        <my-nested-custom-component />
+      </my-custom-component>
+    `);
+  });
 });
