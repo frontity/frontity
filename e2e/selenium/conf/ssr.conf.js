@@ -11,7 +11,9 @@ exports.config = {
     "browserstack.localIdentifier": "SeleniumLocalhost",
     "browserstack.use_w3c": true,
     "bstack:options": {
-      buildName: "SSR-tests",
+      buildName: process.env.BROWSERSTACK_BUILD_NAME
+        ? process.env.BROWSERSTACK_BUILD_NAME
+        : "Selenium-ssr-localhost" + new Date().toISOString(),
       debug: true,
     },
   },
