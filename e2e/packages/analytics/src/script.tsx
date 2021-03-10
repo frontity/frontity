@@ -2,6 +2,11 @@ import React from "react";
 import { Head, connect, useConnect } from "frontity";
 import { Packages } from "../types";
 
+/**
+ * React component that returns the corresponding analytics script depending on the site.
+ *
+ * @returns React element.
+ */
 const Script: React.FC = () => {
   const { state } = useConnect<Packages>();
   const { name } = state.frontity;

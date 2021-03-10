@@ -16,7 +16,13 @@ interface TestAnalytics extends Package {
    * State exposed by this package.
    */
   state: {
+    /**
+     * Frontity namespace.
+     */
     frontity: {
+      /**
+       * Name of the current Frontity site.
+       */
       name: Frontity["state"]["frontity"]["name"];
     };
 
