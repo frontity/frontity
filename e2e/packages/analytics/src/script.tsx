@@ -3,7 +3,8 @@ import { Head, connect, useConnect } from "frontity";
 import { Packages } from "../types";
 
 /**
- * React component that returns the corresponding analytics script depending on the site.
+ * React component that returns the corresponding analytics script depending on
+ * the site.
  *
  * @returns React element.
  */
