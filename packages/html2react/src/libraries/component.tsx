@@ -188,8 +188,6 @@ const handleNode = ({
   if (node.type === "comment") return null;
   if (node.type === "text") return node.content;
   if (node.type === "element") {
-    // Populate either className or class, depending
-    // if the component is a custom component.
     if (
       // If the component is not a string, it could not be a custom component,
       // only a React component.
@@ -199,19 +197,24 @@ const handleNode = ({
       return (
         <ClassNames>
           {({ css, cx }) => {
-            // Get the
+            // Get the serialized styles if they exist (the CSS as a string)
             const emotionClass =
               node.props?.css?.styles && css(node.props.css.styles);
+
+            // We have to delete the css so that the emotion babel plugin does
+            // not generate any className for us.
             delete node.props.css;
 
             const { className, ...props } = node.props;
+
+            // Concatenate the class names
             const classes = cx(className, emotionClass);
 
             return (
               <node.component
                 {...{
                   key: index,
-                  // Only pass the `class` prop if `classes` is truthy (empty
+                  // Only pass the `class` prop if `classes` is truthy (e.g. empty
                   // string does not count)
                   ...(classes && { class: classes }),
                   ...props,
