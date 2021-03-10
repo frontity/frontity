@@ -8,7 +8,9 @@ exports.config = {
   exclude: ["./selenium/tests/specs/module/use-in-view.spec.js"],
   commonCapabilities: {
     "browserstack.local": true,
-    "browserstack.localIdentifier": "SeleniumLocalhost",
+    "browserstack.localIdentifier": process.env.BROWSERSTACK_LOCAL_IDENTIFIER
+      ? process.env.BROWSERSTACK_LOCAL_IDENTIFIER
+      : "SeleniumLocalhost",
     "browserstack.use_w3c": true,
     "bstack:options": {
       buildName:
