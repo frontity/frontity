@@ -76,6 +76,7 @@ process.chdir(__dirname);
  */
 const stop = async () => {
   if (isDockerRunning) {
+    console.log("\n\nStopping Docker.");
     // Stop all the containers and remove all the volumes that they use (the
     // `-v` option).
     await execa("docker-compose", ["down", "-v"], {
@@ -85,7 +86,8 @@ const stop = async () => {
   }
 
   if (isBrowserStackLocalRunning) {
-    // Stop BrowserStackLoca.
+    console.log("\n\nStopping BrowserStack Local.");
+
     await execa(
       `./browserstack-local/${browserStackLocalBinary}`,
       [
@@ -331,9 +333,6 @@ const dontRunWordPress =
       }
       console.log(`\nFinal status is: ${status}\n`);
 
-      // Stop the processes that we started.
-      await stop();
-
       // If the tests failed, set the exit code to 1 to indicate failure.
       if (status === "failed") process.exitCode = 1;
     } else if (cypressCommand !== "off") {
@@ -357,22 +356,24 @@ const dontRunWordPress =
           });
         }
       }
-
-      // Stop the processes that we started.
-      await stop();
     }
   } catch (err) {
     console.error(err);
-    // Stop the processes that we started.
-    await stop();
+
     // We need to return the exit code so that the GitHub action returns a fail.
     process.exitCode = 1;
   }
+
+  // Stop the processes that we started.
+  await stop();
+
+  // Finally exit. We need to do this because Frontity is still running.
+  process.exit();
 })();
 
 // Capture CTRL+C.
 process.on("SIGINT", async () => {
-  console.log("\n\nStopping the processes that we started, please wait.");
   // Stop the processes that we started.
   await stop();
+  process.exit();
 });
