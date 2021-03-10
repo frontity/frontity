@@ -288,16 +288,22 @@ const dontRunWordPress =
       isBrowserStackLocalRunning = true;
 
       // Launch the cloud tests.
-      console.log("\nSending the tests to BrowserStack...");
-      const bsArgs = ["browserstack-cypress", "run", "--sync"];
-      if (spec)
-        bsArgs.push(
-          "--specs",
-          `integration/frontity-*/**/${spec}.spec.js,integration/frontity-*/**/${spec}.spec.ts`
-        );
-      await execa("npx", bsArgs, {
-        stdio: "inherit",
-      });
+      console.log("\nSending the tests to BrowserStack...\n");
+
+      try {
+        const bsArgs = ["browserstack-cypress", "run", "--sync"];
+        if (spec)
+          bsArgs.push(
+            "--specs",
+            `integration/frontity-*/**/${spec}.spec.js,integration/frontity-*/**/${spec}.spec.ts`
+          );
+        await execa("npx", bsArgs, {
+          stdio: "inherit",
+        });
+      } catch (e) {
+        // Capture error from browserstack-cypress to be able to log the result
+        // in the console.
+      }
 
       // Get info for this build.
       const buildResults = await readFile("log/build_results.txt", "utf-8");
