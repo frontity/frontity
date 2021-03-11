@@ -4,9 +4,8 @@ import { img as imgProcessor } from "./img";
 import type { ImgElement } from "./img";
 
 export const picture: Processor<ImgElement, Packages> = {
-  name: "picture",
+  name: "amp: replace picture with amp-img",
   test: ({ node }) =>
-    node.type === "element" &&
     node.component === "picture" &&
     Boolean(node.children.find((node: Element) => node.component === "img")),
   processor: ({ node, ...rest }) => {
