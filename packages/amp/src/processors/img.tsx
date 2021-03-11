@@ -28,7 +28,7 @@ type ImgElement = Element & {
 
 export const img: Processor<ImgElement, Packages> = {
   name: "amp-img",
-  test: ({ node }) => node.type === "element" && node.component === "img",
+  test: ({ node }) => node.component === "img",
   processor: ({ node }) => {
     // Because amp-* component are custom components, we have to pass the
     // class as `class` and not as `className`:

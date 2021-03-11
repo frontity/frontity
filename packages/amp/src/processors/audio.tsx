@@ -27,7 +27,7 @@ const AMPAudio = (props: any) => (
 
 export const audio: Processor<Element, Packages> = {
   name: "amp-audio",
-  test: ({ node }) => node.type === "element" && node.component === "audio",
+  test: ({ node }) => node.component === "audio",
   processor: ({ node }) => {
     node.component = AMPAudio;
 

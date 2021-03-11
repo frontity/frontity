@@ -4,9 +4,8 @@ import { Packages } from "../../types";
 export const removeProhibitedClassNames: Processor<Element, Packages> = {
   name: "amp: removeProhibitedClassNames",
   test: ({ node }) =>
-    node.type === "element" &&
-    (node.props?.className?.split(" ").some((clz) => clz.startsWith("-amp")) ||
-      node.props?.className?.split(" ").some((clz) => clz.startsWith("i-amp"))),
+    node.props?.className?.split(" ").some((clz) => clz.startsWith("-amp")) ||
+    node.props?.className?.split(" ").some((clz) => clz.startsWith("i-amp")),
   processor: ({ node }) => {
     node.props.className = node.props.className
       .split(" ")

@@ -98,9 +98,8 @@ interface TwitterElement extends Element {
 
 export const twitter: Processor<TwitterElement, Packages> = {
   test: ({ node }) =>
-    node.type === "element" &&
-    (node.props?.className?.split(" ").includes("twitter-tweet") ||
-      node.props?.className?.split(" ").includes("twitter-video")),
+    node.props?.className?.split(" ").includes("twitter-tweet") ||
+    node.props?.className?.split(" ").includes("twitter-video"),
   processor: ({ node }) => {
     node.component = AMPTwitter;
     node.props.tweetId = getTweetId(node.children);

@@ -55,7 +55,7 @@ const AMPIframe: React.FC<IFrameProps> = ({ title, src, height, ...rest }) => {
 
 export const iframe: Processor<Element, Packages> = {
   name: "amp-iframe",
-  test: ({ node }) => node.type === "element" && node.component === "iframe",
+  test: ({ node }) => node.component === "iframe",
   processor: ({ node }) => {
     node.component = AMPIframe;
 
