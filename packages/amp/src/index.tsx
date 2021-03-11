@@ -128,7 +128,7 @@ const amp: AMP = {
   },
   libraries: {
     html2react: {
-      processors: [processors],
+      processors,
     },
   },
 } as AMP;

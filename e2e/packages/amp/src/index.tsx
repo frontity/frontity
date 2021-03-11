@@ -1,4 +1,3 @@
-import * as React from "react";
 import Package from "../types";
 import { connect, Head, styled } from "frontity";
 
