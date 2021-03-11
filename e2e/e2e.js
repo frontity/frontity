@@ -380,5 +380,8 @@ const dontRunWordPress =
 process.on("SIGINT", async () => {
   // Stop the processes that we started.
   await stop();
+
+  console.log("\nHave a good day!");
+
   process.exit();
 });
