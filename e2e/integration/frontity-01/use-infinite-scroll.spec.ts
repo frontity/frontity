@@ -1,3 +1,5 @@
+/* eslint-disable jest/valid-describe */
+
 // Add the experimental fetch polyfill only for these tests. The new
 // `cy.intercept` API doesn't allow to change the response of a given URL once
 // it has been set, so we need to still use `cy.server` and `cy.router` here for
@@ -28,7 +30,7 @@ const spyOnFetch = () =>
 const getFetchSpy = () =>
   cy.window().then((w: any) => w.frontity.actions.source.fetch);
 
-describe("useArchiveInfiniteScroll", () => {
+describe("useArchiveInfiniteScroll", { browser: "!firefox" }, () => {
   it("should load next page", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/test/");
@@ -358,95 +360,91 @@ describe("useArchiveInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/page/3/");
   });
 
-  it(
-    "should keep fetched pages when going back and forward",
-    { browser: "!firefox" },
-    () => {
-      cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
-      cy.location("href").should("eq", "http://localhost:3001/test/");
+  it("should keep fetched pages when going back and forward", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
 
-      cy.server();
-      cy.route({
-        url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
-        response: "fixture:use-infinite-scroll/page-1.json",
-        headers: {
-          "x-wp-total": 21,
-          "x-wp-totalpages": 3,
-        },
-        delay: 300,
-      }).as("pageOne");
-      cy.route({
-        url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
-        response: "fixture:use-infinite-scroll/page-2.json",
-        headers: {
-          "x-wp-total": 21,
-          "x-wp-totalpages": 3,
-        },
-        delay: 300,
-      }).as("pageTwo");
-      cy.server();
-      cy.route({
-        url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=3",
-        response: "fixture:use-infinite-scroll/page-3.json",
-        headers: {
-          "x-wp-total": 21,
-          "x-wp-totalpages": 3,
-        },
-        delay: 300,
-      }).as("pageThree");
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": 21,
+        "x-wp-totalpages": 3,
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=2",
+      response: "fixture:use-infinite-scroll/page-2.json",
+      headers: {
+        "x-wp-total": 21,
+        "x-wp-totalpages": 3,
+      },
+      delay: 300,
+    }).as("pageTwo");
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=3",
+      response: "fixture:use-infinite-scroll/page-3.json",
+      headers: {
+        "x-wp-total": 21,
+        "x-wp-totalpages": 3,
+      },
+      delay: 300,
+    }).as("pageThree");
 
-      // Changes url to `/`.
-      cy.get("[data-test='to-archive']").should("exist").click();
-      cy.location("href").should("eq", "http://localhost:3001/");
-      cy.wait("@pageOne");
-      cy.get("[data-test='archive']").should("exist");
-      cy.get("[data-test='page-1']").should("exist");
-      cy.get("[data-test='fetching']").should("not.exist");
+    // Changes url to `/`.
+    cy.get("[data-test='to-archive']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/");
+    cy.wait("@pageOne");
+    cy.get("[data-test='archive']").should("exist");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
 
-      // Scrolls to bottom to fetch next page.
-      cy.scrollTo("bottom");
-      cy.get("[data-test='fetching']").should("exist");
-      cy.get("[data-test='page-2']").should("not.exist");
-      cy.wait("@pageTwo");
-      cy.get("[data-test='fetching']").should("not.exist");
-      cy.get("[data-test='page-2']").should("exist").scrollIntoView();
-      cy.location("href").should("eq", "http://localhost:3001/page/2/");
+    // Scrolls to bottom to fetch next page.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='fetching']").should("exist");
+    cy.get("[data-test='page-2']").should("not.exist");
+    cy.wait("@pageTwo");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-2']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/page/2/");
 
-      // Scrolls to bottom to fetch last page.
-      cy.scrollTo("bottom");
-      cy.get("[data-test='fetching']").should("exist");
-      cy.get("[data-test='page-3']").should("not.exist");
-      cy.wait("@pageThree");
-      cy.get("[data-test='fetching']").should("not.exist");
-      cy.get("[data-test='page-3']").should("exist").scrollIntoView();
-      cy.location("href").should("eq", "http://localhost:3001/page/3/");
+    // Scrolls to bottom to fetch last page.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='fetching']").should("exist");
+    cy.get("[data-test='page-3']").should("not.exist");
+    cy.wait("@pageThree");
+    cy.get("[data-test='fetching']").should("not.exist");
+    cy.get("[data-test='page-3']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/page/3/");
 
-      // Go to a post.
-      cy.get("[data-test='post-21-link']").should("exist").click();
-      cy.get("[data-test='post-21']").should("exist");
+    // Go to a post.
+    cy.get("[data-test='post-21-link']").should("exist").click();
+    cy.get("[data-test='post-21']").should("exist");
 
-      // Then, go back.
-      cy.go("back");
-      cy.get("[data-test='page-1']").should("exist");
-      cy.get("[data-test='page-2']").should("exist");
-      cy.get("[data-test='page-3']").should("exist").should("be.visible");
-      cy.location("href").should("eq", "http://localhost:3001/page/3/");
+    // Then, go back.
+    cy.go("back");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.get("[data-test='page-2']").should("exist");
+    cy.get("[data-test='page-3']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/page/3/");
 
-      // Go back again.
-      cy.go("back");
-      cy.get("[data-test='page-1']").should("not.exist");
-      cy.get("[data-test='page-2']").should("not.exist");
-      cy.get("[data-test='page-3']").should("not.exist");
-      cy.location("href").should("eq", "http://localhost:3001/test/");
+    // Go back again.
+    cy.go("back");
+    cy.get("[data-test='page-1']").should("not.exist");
+    cy.get("[data-test='page-2']").should("not.exist");
+    cy.get("[data-test='page-3']").should("not.exist");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
 
-      // Go forward this time.
-      cy.go("forward");
-      cy.get("[data-test='page-1']").should("exist");
-      cy.get("[data-test='page-2']").should("exist");
-      cy.get("[data-test='page-3']").should("exist").should("be.visible");
-      cy.location("href").should("eq", "http://localhost:3001/page/3/");
-    }
-  );
+    // Go forward this time.
+    cy.go("forward");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.get("[data-test='page-2']").should("exist");
+    cy.get("[data-test='page-3']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/page/3/");
+  });
 
   it("should create a new infinite scroll context when going directly to a ready archive", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
@@ -526,7 +524,7 @@ describe("useArchiveInfiniteScroll", () => {
   });
 });
 
-describe("usePostTypeInfiniteScroll", () => {
+describe("usePostTypeInfiniteScroll", { browser: "!firefox" }, () => {
   it("should load next post", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/test/");
@@ -853,84 +851,80 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/post-11/");
   });
 
-  it(
-    "should keep rendered posts when going back and forward",
-    { browser: "!firefox" },
-    () => {
-      cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
-      cy.location("href").should("eq", "http://localhost:3001/test/");
+  it("should keep rendered posts when going back and forward", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
 
-      // Stubs calls to REST API.
-      cy.server();
-      cy.route({
-        url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
-        response: "fixture:use-infinite-scroll/page-1.json",
-        headers: {
-          "x-wp-total": 20,
-          "x-wp-totalpages": 2,
-        },
-        delay: 300,
-      }).as("pageOne");
-      cy.route({
-        url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
-        response: "fixture:use-infinite-scroll/post-1.json",
-        headers: {
-          "x-wp-total": "1",
-          "x-wp-totalpages": "1",
-        },
-        delay: 300,
-      }).as("postOne");
+    // Stubs calls to REST API.
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
+      response: "fixture:use-infinite-scroll/post-1.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("postOne");
 
-      // Changes url to `/post-type`.
-      cy.get("[data-test='to-first-post']").should("exist").click();
-      cy.location("href").should("eq", "http://localhost:3001/post-1/");
-      cy.wait("@postOne");
-      cy.get("[data-test='post-type']").should("exist");
-      cy.get("[data-test='post-1']").should("exist");
-      cy.get("[data-test='fetching']").should("not.exist");
+    // Changes url to `/post-type`.
+    cy.get("[data-test='to-first-post']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/post-1/");
+    cy.wait("@postOne");
+    cy.get("[data-test='post-type']").should("exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
 
-      // Scrolls to bottom to fetch next post.
-      cy.scrollTo("bottom");
-      cy.get("[data-test='post-2']").should("exist").scrollIntoView();
-      cy.location("href").should("eq", "http://localhost:3001/post-2/");
+    // Scrolls to bottom to fetch next post.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-2']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-2/");
 
-      // Scrolls to bottom to fetch next post.
-      cy.scrollTo("bottom");
-      cy.get("[data-test='post-3']").should("exist").scrollIntoView();
-      cy.location("href").should("eq", "http://localhost:3001/post-3/");
+    // Scrolls to bottom to fetch next post.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-3']").should("exist").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-3/");
 
-      // Go directly to the posts page.
-      cy.get("[data-test='to-archive']").should("exist").click();
-      cy.location("href").should("eq", "http://localhost:3001/");
-      cy.get("[data-test='archive']").should("exist");
-      cy.get("[data-test='page-1']").should("exist");
-      cy.get("[data-test='fetching']").should("not.exist");
+    // Go directly to the posts page.
+    cy.get("[data-test='to-archive']").should("exist").click();
+    cy.location("href").should("eq", "http://localhost:3001/");
+    cy.get("[data-test='archive']").should("exist");
+    cy.get("[data-test='page-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
 
-      // Then, go back.
-      cy.go("back");
-      cy.get("[data-test='archive']").should("not.exist");
-      cy.get("[data-test='post-1']").should("exist");
-      cy.get("[data-test='post-2']").should("exist");
-      cy.get("[data-test='post-3']").should("exist").should("be.visible");
-      cy.location("href").should("eq", "http://localhost:3001/post-3/");
+    // Then, go back.
+    cy.go("back");
+    cy.get("[data-test='archive']").should("not.exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("exist");
+    cy.get("[data-test='post-3']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/post-3/");
 
-      // Go back again.
-      cy.go("back");
-      cy.get("[data-test='archive']").should("not.exist");
-      cy.get("[data-test='post-1']").should("not.exist");
-      cy.get("[data-test='post-2']").should("not.exist");
-      cy.get("[data-test='post-3']").should("not.exist");
-      cy.location("href").should("eq", "http://localhost:3001/test/");
+    // Go back again.
+    cy.go("back");
+    cy.get("[data-test='archive']").should("not.exist");
+    cy.get("[data-test='post-1']").should("not.exist");
+    cy.get("[data-test='post-2']").should("not.exist");
+    cy.get("[data-test='post-3']").should("not.exist");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
 
-      // Go forward this time.
-      cy.go("forward");
-      cy.get("[data-test='archive']").should("not.exist");
-      cy.get("[data-test='post-1']").should("exist");
-      cy.get("[data-test='post-2']").should("exist");
-      cy.get("[data-test='post-3']").should("exist").should("be.visible");
-      cy.location("href").should("eq", "http://localhost:3001/post-3/");
-    }
-  );
+    // Go forward this time.
+    cy.go("forward");
+    cy.get("[data-test='archive']").should("not.exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='post-2']").should("exist");
+    cy.get("[data-test='post-3']").should("exist").should("be.visible");
+    cy.location("href").should("eq", "http://localhost:3001/post-3/");
+  });
 
   it("should render posts from the previous archive", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
@@ -1457,7 +1451,7 @@ describe("usePostTypeInfiniteScroll", () => {
     cy.location("href").should("eq", "http://localhost:3001/subdir/post-1/");
   });
 
-  it("should ignore redirected links", { browser: "!firefox" }, () => {
+  it("should ignore redirected links", () => {
     cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
     cy.location("href").should("eq", "http://localhost:3001/test/");
 
