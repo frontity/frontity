@@ -1,9 +1,9 @@
-name: chrome e2e tests
+name: e2e gh actions
 
 on: [pull_request]
 
 jobs:
-  e2e-tests:
+  e2e-gh-actions:
     runs-on: ubuntu-16.04
 
     strategy:
