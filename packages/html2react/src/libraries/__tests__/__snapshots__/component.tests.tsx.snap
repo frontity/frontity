@@ -11,8 +11,12 @@ Array [
     </span>
      for testing purposes.
   </p>,
-  <div
-    className="hello css-12gt2kf"
+  .emotion-0 {
+  width: 180px;
+}
+
+<div
+    className="hello emotion-0"
   >
     <img
       src="http://example.com/img.jpg"

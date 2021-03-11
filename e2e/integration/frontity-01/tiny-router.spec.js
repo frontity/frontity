@@ -126,6 +126,24 @@ describe("Tiny Router", () => {
       .should("have.text", "About");
   });
 
+  it("should work if initial link doesn't have a trailing slash", () => {
+    // Visit directly a not normalized link.
+    cy.visit("http://localhost:3001/about?frontity_name=tiny-router");
+
+    // The link should be normalized.
+    cy.location("href").should("eq", "http://localhost:3001/about/");
+    cy.get('[data-test-id="content"]')
+      .should("exist")
+      .should("have.text", "About");
+
+    // Other links should work as expected (Frontity hasn't stopped working).
+    cy.get('button[data-button-id="switch-to-home"]').click();
+    cy.location("href").should("eq", "http://localhost:3001/");
+    cy.get('[data-test-id="content"]')
+      .should("exist")
+      .should("have.text", "Home");
+  });
+
   it("should scroll to the element when a hash link is clicked", () => {
     cy.location("href").should("eq", "http://localhost:3001/");
     cy.get('div[id="hash-element"]').isNotInViewport();
