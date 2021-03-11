@@ -76,7 +76,7 @@ process.chdir(__dirname);
  */
 const stop = async () => {
   if (isWordPressRunning) {
-    console.log("\nStopping Docker.");
+    console.log("\nStopping WordPress Containers.");
 
     // Stop all the containers and remove all the volumes that they use (the
     // `-v` option).
@@ -177,18 +177,19 @@ const dontRunWordPress =
 
       // Stop all the containers and remove all the volumes that they use (the
       // `-v` option).
-      await execa("docker-compose", ["down", "-v"], {
-        stdio: "inherit",
-      });
+      console.log("\nStopping previous WordPress containers.");
+      await execa("docker-compose", ["down", "-v"]);
 
       // Run all the services defined in docker-compose.yml: wp, wpcli & mysql
       // (in the background via the -d flag).
+      console.log("\nStarting WordPress containers.\n");
       await execa("docker-compose", ["up", "-d"], { stdio: "inherit" });
 
       // Set the flag. We will needed it later to stop the containers.
       isWordPressRunning = true;
 
       // Wait until WordPress is responsive.
+      console.log("\nWaiting until WordPress is up and running.\n");
       await waitOn({
         resources: ["http-get://localhost:8080"],
         log: true,
@@ -206,6 +207,8 @@ const dontRunWordPress =
 
     // CD into the project directory.
     process.chdir("./project");
+
+    console.log("\nStarting Frontity project.");
 
     if (prod) {
       let args = ["frontity", "build", "--target", target];
@@ -345,26 +348,25 @@ const dontRunWordPress =
 
       // If the tests failed, set the exit code to 1 to indicate failure.
       if (status === "failed") process.exitCode = 1;
-    } else if (cypressCommand !== "off") {
-      // Run Cypress if the `cypressCommnand` is not "off".
-      if (cypressCommand === "open") {
-        await cypress.open({ env: { WORDPRESS_VERSION: wp }, browser });
-      } else if (cypressCommand === "run") {
-        if (!spec && suite === "all") {
-          await cypress.run({
-            env: { WORDPRESS_VERSION: wp },
-            spec: `./integration/**/*.spec.+(j|t)s`,
-            browser,
-          });
-        } else {
-          await cypress.run({
-            env: { WORDPRESS_VERSION: wp },
-            browser,
-            spec: spec
-              ? `./integration/**/${spec}.spec.+(j|t)s`
-              : `./integration/${suite}/**/*.spec.+(j|t)s`,
-          });
-        }
+    } else if (cypressCommand === "open") {
+      // Run Cypress in open mode (for local development).
+      await cypress.open({ env: { WORDPRESS_VERSION: wp }, browser });
+    } else if (cypressCommand === "run") {
+      // Run Cypress in run mode.
+      if (!spec && suite === "all") {
+        await cypress.run({
+          env: { WORDPRESS_VERSION: wp },
+          spec: `./integration/**/*.spec.+(j|t)s`,
+          browser,
+        });
+      } else {
+        await cypress.run({
+          env: { WORDPRESS_VERSION: wp },
+          browser,
+          spec: spec
+            ? `./integration/**/${spec}.spec.+(j|t)s`
+            : `./integration/${suite}/**/*.spec.+(j|t)s`,
+        });
       }
     }
   } catch (err) {
@@ -374,11 +376,13 @@ const dontRunWordPress =
     process.exitCode = 1;
   }
 
-  // Stop the processes that we started.
-  await stop();
-
-  // Finally exit. We need to do this because Frontity is still running.
-  process.exit();
+  // If cypress has finished running, we stop the services and exit. We keep
+  // both WordPress and Frontity running if Cypress was run by an external
+  // entity, like for example a GH action.
+  if (cypressCommand !== "off") {
+    await stop();
+    process.exit();
+  }
 })();
 
 // Capture CTRL+C.

@@ -54,10 +54,7 @@ jobs:
           WORDPRESS_VERSION: ${{ matrix.wp }}
           CYPRESS_FRONTITY_MODE: ${{ matrix.mode }} || "production"
         with:
-          start: "node e2e.js \
-            --cypress off \
-            --suite all \
-            ${{ matrix.args }}"
+          start: "node e2e.js --cypress off ${{ matrix.args }}"
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
           browser: chrome
