@@ -151,6 +151,16 @@ const dontRunWordPress =
 (async () => {
   try {
     if (!dontRunWordPress) {
+      // Check if Docker is running.
+      try {
+        await execa("docker", ["info"]);
+      } catch (e) {
+        console.log(
+          "Docker is not running. Please start it or use `--wp-version off`."
+        );
+        return;
+      }
+
       // Set the WordPress version as an environment variable to be consumed by
       // the docker-compose.yml file.
       process.env.WORDPRESS_VERSION = wpVersion;
