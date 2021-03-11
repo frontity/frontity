@@ -203,6 +203,8 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       link
     );
 
+    // We have to compare the `initalLink` with `browserLink` because we have
+    // normalized the `link` at this point and `initialLink` is not normalized.
     if (browserLink !== state.frontity.initialLink) {
       if (state.source) {
         /**
