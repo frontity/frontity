@@ -1,5 +1,10 @@
-import Package from "../types";
+import Package, { Packages } from "../types";
 import { connect, Head, styled } from "frontity";
+import { Connect } from "frontity/types";
+
+import image from "@frontity/html2react/processors/image";
+import link from "@frontity/html2react/processors/link";
+import iframe from "@frontity/html2react/processors/iframe";
 
 const Container = styled.main`
   margin: 0 auto;
@@ -11,7 +16,7 @@ const Container = styled.main`
  *
  * @returns React element.
  */
-const Theme = connect(({ state, libraries }) => {
+const Theme: React.FC<Connect<Packages>> = connect(({ state, libraries }) => {
   const data = state.source.get(state.router.link);
   const post = state.source[data.type][data.id];
   const Html2React = libraries.html2react.Component;
@@ -41,6 +46,13 @@ const AmpPackage: Package = {
   name: "e2e-amp",
   roots: {
     amp: Theme,
+  },
+  libraries: {
+    html2react: {
+      // We include all the other processors from html2react because we need to
+      // check that there is no conflict betwen them an the AMP processors.
+      processors: [image, iframe, link],
+    },
   },
 };
 
