@@ -121,7 +121,7 @@ By default, it will run the tests in the latest versions of Chrome, Firefox and 
 
 You can create your own `browserstack.json` file and use `--browserstack-config my-browserstack.json` to use it.
 
-By default it will run BrowserStack Local with "Cypress" as the local identifier, but you can turn it off by using `--browserstack-local off`.
+By default it will run BrowserStack Local with "Cypress-Local" as the local identifier, but you can turn it off by using `--browserstack-local off`.
 
 ### `--wp`: string
 
@@ -214,4 +214,4 @@ If you don't want to start BrowserStack Local, use:
 node e2e.js --cypress browserstack --browserstack-local off
 ```
 
-Default: `Cypress`.
+Default: `Cypress-Local`.

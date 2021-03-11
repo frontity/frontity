@@ -46,7 +46,7 @@ suite = suite || "all";
 inspect = inspect || false;
 spec = spec || null;
 browserstackConfig = browserstackConfig || "./browserstack.json";
-browserstackLocal = browserstackLocal || "Cypress";
+browserstackLocal = browserstackLocal || "Cypress-Local";
 
 // Flag to know if we have started Docker or BrowserStack Local.
 let isWordPressRunning = false;

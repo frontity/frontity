@@ -7,17 +7,17 @@
     {
       "browser": "chrome",
       "os": "Windows 10",
-      "versions": ["latest, 66"]
+      "versions": ["latest", "66"]
     },
     {
       "browser": "firefox",
       "os": "Windows 10",
-      "versions": ["latest, 60"]
+      "versions": ["latest", "60"]
     },
     {
       "browser": "edge",
       "os": "Windows 10",
-      "versions": ["latest, 80"]
+      "versions": ["latest", "80"]
     },
     {
       "browser": "chrome",
@@ -70,6 +70,6 @@
   },
   "connection_settings": {
     "local": true,
-    "local_identifier": "Cypress"
+    "local_identifier": "Cypress-Local"
   }
 }

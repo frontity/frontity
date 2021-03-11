@@ -39,6 +39,6 @@
   },
   "connection_settings": {
     "local": true,
-    "local_identifier": "Cypress"
+    "local_identifier": "Cypress-Local"
   }
 }
