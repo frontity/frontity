@@ -6,7 +6,6 @@ export const removeProhibitedTags: Processor<Element, Packages> = {
   test: ({ node }) =>
     node.component === "style" ||
     node.component === "script" ||
-    node.component === "picture" ||
     node.component === "frame" ||
     node.component === "frameset" ||
     node.component === "object" ||

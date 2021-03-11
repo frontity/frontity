@@ -7,9 +7,11 @@ import { removeProhibitedClassNames } from "./removeProhibitedClassNames";
 import { removeProhibitedIds } from "./removeProhibitedIds";
 import { twitter } from "./twitter";
 import { youtube } from "./youtube";
+import { picture } from "./picture";
 
 export default [
   img,
+  picture,
   iframe,
   video,
   audio,

@@ -216,3 +216,29 @@ test("Adding 2 iframes should result in adding only 1 amp-iframe AMP script in t
   const headScript = replaceHeadAttributes(head);
   expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
 });
+
+test("picture element should be replaced with an img", async () => {
+  const { container } = render(
+    <Html2React
+      html='
+        <picture>
+          <source media="(min-width:650px)" srcset="img_pink_flowers.jpg" />
+          <source media="(min-width:465px)" srcset="img_white_flower.jpg" />
+          <img src="img_orange_flowers.jpg" alt="Flowers" style="width:auto;" width="300" height="100" />
+        </picture>'
+      processors={processors}
+    />
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <amp-img
+      alt="Flowers"
+      class="css-68zbsl"
+      height="100"
+      layout="responsive"
+      src="img_orange_flowers.jpg"
+      width="300"
+    />
+  `);
+  expect(await amp(container.innerHTML)).toBeValidAmpHtml();
+});

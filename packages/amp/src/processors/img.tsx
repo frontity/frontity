@@ -4,7 +4,7 @@ import { Packages } from "../../types";
 /**
  * Props for the image element as processed by {@link img}.
  */
-type ImgElement = Element & {
+export type ImgElement = Element & {
   /**
    * Props.
    */
