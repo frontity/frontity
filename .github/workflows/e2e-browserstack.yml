@@ -33,7 +33,7 @@ jobs:
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: PR ${{ github.event.number}}
+          build-name: "Latest Browsers (PR #${{ github.event.number}})"
 
       - name: Start BrowserStackLocal
         uses: browserstack/github-actions/setup-local@master

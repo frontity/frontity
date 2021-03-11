@@ -5,14 +5,49 @@
   },
   "browsers": [
     {
+      "browser": "chrome",
+      "os": "Windows 10",
+      "versions": ["latest, 66"]
+    },
+    {
+      "browser": "firefox",
+      "os": "Windows 10",
+      "versions": ["latest, 60"]
+    },
+    {
+      "browser": "edge",
+      "os": "Windows 10",
+      "versions": ["latest, 80"]
+    },
+    {
+      "browser": "chrome",
+      "os": "OS X Big Sur",
+      "versions": ["latest"]
+    },
+    {
       "browser": "firefox",
       "os": "OS X Big Sur",
       "versions": ["latest"]
     },
     {
       "browser": "edge",
-      "os": "Windows 10",
+      "os": "OS X Big Sur",
       "versions": ["latest"]
+    },
+    {
+      "browser": "chrome",
+      "os": "OS X Mojave",
+      "versions": ["66"]
+    },
+    {
+      "browser": "firefox",
+      "os": "OS X Mojave",
+      "versions": ["60"]
+    },
+    {
+      "browser": "edge",
+      "os": "OS X Mojave",
+      "versions": ["80"]
     }
   ],
   "run_settings": {
