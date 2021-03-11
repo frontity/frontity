@@ -113,6 +113,16 @@ The `node e2e.js` script is a CLI that supports multiple arguments for running t
 
 The defaults correspond to the most common configuration when working locally, so running just `node e2e.js` will be enough to start working locally most of the time.
 
+## Running the tests in BrowserStack
+
+BrowserStack can be used to run the tests in the cloud. If you want to do that, create a `.env` file with your BrowserStack username and access key, and then use `node e2e.js --cypress browserstack` to start.
+
+By default, it will run the tests in the latest versions of Chrome, Firefox and Edge in Windows 10.
+
+You can create your own `browserstack.json` file and use `--browserstack-config my-browserstack.json` to use it.
+
+By default it will run BrowserStack Local with "Cypress" as the local identifier, but you can turn it off by using `--browserstack-local off`.
+
 ### `--wp`: string
 
 The WordPress version that will be used in the Docker container. For example, `--wp 5.5`.
