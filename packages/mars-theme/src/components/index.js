@@ -7,9 +7,10 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 
-
  /**
-  * <Theme> is the root React component of our theme. The one we will export in roots.
+  * <Theme> is the root React component of our theme. 
+  * This component is the one we will export in roots.
+  * The `<Switch>` component used here load different components based on the type of route/link
   * @param  props
   * @param  props.state - Frontity state
   */
@@ -52,6 +53,7 @@ const Theme = ({ state }) => {
 
 export default connect(Theme);
 
+// Global styles to be used with the <Global> component
 const globalStyles = css`
   body {
     margin: 0;
@@ -65,6 +67,7 @@ const globalStyles = css`
   }
 `;
 
+// <HeadContainer> styled component
 const HeadContainer = styled.div`
   display: flex;
   align-items: center;
@@ -72,6 +75,7 @@ const HeadContainer = styled.div`
   background-color: #1f38c5;
 `;
 
+// <Main> styled component 
 const Main = styled.div`
   display: flex;
   justify-content: center;
