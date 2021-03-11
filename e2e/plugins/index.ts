@@ -73,12 +73,16 @@ const tasks = {
    */
   installPlugin({ name, version }: InstallPluginOptions) {
     return (async () => {
-      await execa.command(
-        `docker-compose run --rm wpcli wp plugin install ${name}${
-          version ? ` --version=${version}` : ""
-        }`,
-        { stdio: "inherit" }
-      );
+      try {
+        await execa.command(
+          `docker-compose run --rm wpcli wp plugin install ${name}${
+            version ? ` --version=${version}` : ""
+          }`,
+          { stdio: "inherit" }
+        );
+      } catch (e) {
+        console.error(e);
+      }
       return null;
     })();
   },

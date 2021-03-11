@@ -4,6 +4,9 @@ on: [pull_request]
 
 jobs:
   e2e-tests:
+    env:
+      ACTIONS_RUNNER_DEBUG: true
+
     runs-on: ubuntu-16.04
 
     strategy:
@@ -47,7 +50,7 @@ jobs:
           CI: true
 
       - name: Run e2e tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2.9.1
         env:
           # We need to specify the WordPress version here as well so that
           # it's available inside of the cypress GH action container
