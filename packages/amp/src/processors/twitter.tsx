@@ -97,6 +97,7 @@ interface TwitterElement extends Element {
 }
 
 export const twitter: Processor<TwitterElement, Packages> = {
+  name: "amp-twitter",
   test: ({ node }) =>
     node.props?.className?.split(" ").includes("twitter-tweet") ||
     node.props?.className?.split(" ").includes("twitter-video"),
