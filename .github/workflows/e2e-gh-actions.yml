@@ -53,6 +53,7 @@ jobs:
           # it's available inside of the cypress GH action container
           WORDPRESS_VERSION: ${{ matrix.wp }}
           CYPRESS_FRONTITY_MODE: ${{ matrix.mode }} || "production"
+          FRONTITY_SERVER: http://172.17.0.1:3001
         with:
           start: "node e2e.js --cypress off ${{ matrix.args }}"
           wait-on: "http://localhost:3001"
