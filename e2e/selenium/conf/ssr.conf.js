@@ -6,18 +6,17 @@ exports.config = {
   ...rest,
   specs: ["./selenium/tests/specs/ssr/*.spec.js"],
   exclude: [],
+  maxInstances: 1,
   commonCapabilities: {
     "browserstack.local": true,
-    "browserstack.localIdentifier": process.env.BROWSERSTACK_LOCAL_IDENTIFIER
-      ? process.env.BROWSERSTACK_LOCAL_IDENTIFIER
-      : "SeleniumLocalhost",
+    "browserstack.localIdentifier":
+      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
     "browserstack.use_w3c": true,
     "bstack:options": {
       buildName:
         "Selenium-ssr- " +
-        (process.env.BROWSERSTACK_BUILD_NAME
-          ? process.env.BROWSERSTACK_BUILD_NAME
-          : "localhost-" + new Date().toISOString()),
+        (process.env.BROWSERSTACK_BUILD_NAME ||
+          "localhost-" + new Date().toISOString()),
       debug: true,
     },
   },

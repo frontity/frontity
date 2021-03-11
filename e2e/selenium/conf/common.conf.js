@@ -15,7 +15,7 @@ export const commonConfig = {
   user: userName,
   key: accessKey,
   updateJob: false,
-  maxInstances: 1,
+  maxInstancesPerCapability: 1,
   logLevel: "warn",
   coloredLogs: true,
   screenshotPath: "./errorShots/",
@@ -23,6 +23,7 @@ export const commonConfig = {
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
+  specFileRetries: 3,
   host: "hub.browserstack.com",
   before: (capabilities) => {
     driver = new Builder()

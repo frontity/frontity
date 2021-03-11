@@ -4,20 +4,19 @@ const { ...rest } = commonConfig;
 
 exports.config = {
   ...rest,
-  specs: ["./selenium/tests/specs/module/google-analytics.spec.js"],
+  specs: ["./selenium/tests/specs/module/*.spec.js"],
   exclude: ["./selenium/tests/specs/module/smart-adserver.spec.js"],
+  maxInstances: 2,
   commonCapabilities: {
     "browserstack.local": true,
-    "browserstack.localIdentifier": process.env.BROWSERSTACK_LOCAL_IDENTIFIER
-      ? process.env.BROWSERSTACK_LOCAL_IDENTIFIER
-      : "SeleniumLocalhost",
+    "browserstack.localIdentifier":
+      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
     "browserstack.use_w3c": true,
     "bstack:options": {
       buildName:
         "Selenium-module- " +
-        (process.env.BROWSERSTACK_BUILD_NAME
-          ? process.env.BROWSERSTACK_BUILD_NAME
-          : "localhost-" + new Date().toISOString()),
+        (process.env.BROWSERSTACK_BUILD_NAME ||
+          "localhost-" + new Date().toISOString()),
       debug: true,
     },
   },
@@ -29,25 +28,25 @@ exports.config = {
       real_mobile: "true",
       browserName: "iPhone",
     },
-    // {
-    //   os: "OS X",
-    //   os_version: "Catalina",
-    //   browserName: "Safari",
-    //   browser_version: "13.1",
-    // },
-    // {
-    //   os: "OS X",
-    //   os_version: "Sierra",
-    //   browserName: "Safari",
-    //   browser_version: "10.1",
-    // },
-    // //Chrome - Bigger than 61
-    // {
-    //   device: "Google Pixel 4",
-    //   os_version: "11.0",
-    //   real_mobile: true,
-    //   browserName: "Android",
-    // },
+    {
+      os: "OS X",
+      os_version: "Catalina",
+      browserName: "Safari",
+      browser_version: "13.1",
+    },
+    {
+      os: "OS X",
+      os_version: "Sierra",
+      browserName: "Safari",
+      browser_version: "10.1",
+    },
+    //Chrome - Bigger than 61
+    {
+      device: "Google Pixel 4",
+      os_version: "11.0",
+      real_mobile: true,
+      browserName: "Android",
+    },
     {
       os: "Windows",
       os_version: "10",

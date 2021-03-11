@@ -9,18 +9,17 @@ exports.config = {
     "./selenium/tests/specs/module/use-in-view.spec.js",
     "./selenium/tests/specs/module/smart-adserver.spec.js",
   ],
+  maxInstances: 1,
   commonCapabilities: {
     "browserstack.local": true,
-    "browserstack.localIdentifier": process.env.BROWSERSTACK_LOCAL_IDENTIFIER
-      ? process.env.BROWSERSTACK_LOCAL_IDENTIFIER
-      : "SeleniumLocalhost",
+    "browserstack.localIdentifier":
+      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
     "browserstack.use_w3c": true,
     "bstack:options": {
       buildName:
         "Selenium-proxy- " +
-        (process.env.BROWSERSTACK_BUILD_NAME
-          ? process.env.BROWSERSTACK_BUILD_NAME
-          : "localhost-" + new Date().toISOString()),
+        (process.env.BROWSERSTACK_BUILD_NAME ||
+          "localhost-" + new Date().toISOString()),
       debug: true,
     },
   },
