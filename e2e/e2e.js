@@ -143,7 +143,7 @@ process.env["CYPRESS_FRONTITY_MODE"] =
   process.env["CYPRESS_FRONTITY_MODE"] || (prod ? "production" : "development");
 
 // Don't run WordPress if:
-// --wp-version is "off".
+// --wp is "off".
 // --cypressCommand is "browserstack" (it is not needed).
 // --suite is not "all" and doesn't start with "wordpress".
 const dontRunWordPress =
@@ -159,7 +159,7 @@ const dontRunWordPress =
         await execa("docker", ["info"]);
       } catch (e) {
         console.log(
-          "Docker is not running. Please start it or use `--wp-version off`."
+          "Docker is not running. Please start it or use `--wp off`."
         );
         return;
       }
