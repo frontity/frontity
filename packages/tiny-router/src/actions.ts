@@ -187,9 +187,14 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       if (key.startsWith("frontity_")) browserURL.searchParams.delete(key);
     });
 
+    // Get the browser link.
+    const browserLink =
+      browserURL.pathname + browserURL.search + browserURL.hash;
+
     // Normalize it.
-    let link = browserURL.pathname + browserURL.search + browserURL.hash;
-    if (libraries.source?.normalize) link = libraries.source.normalize(link);
+    const link = libraries.source?.normalize
+      ? libraries.source.normalize(browserLink)
+      : browserLink;
 
     // Add the state to the browser history and replace the link.
     window.history.replaceState(
@@ -198,7 +203,9 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       link
     );
 
-    if (link !== state.frontity.initialLink) {
+    // We have to compare the `initalLink` with `browserLink` because we have
+    // normalized the `link` at this point and `initialLink` is not normalized.
+    if (browserLink !== state.frontity.initialLink) {
       if (state.source) {
         /**
          * Derived state pointing to the initial data object.
