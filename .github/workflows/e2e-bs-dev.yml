@@ -46,7 +46,7 @@ jobs:
           local-identifier: Cypress-GH-Action
 
       - name: Start Frontity and run tests
-        run: cd e2e && node e2e.js --cypress browserstack --browserstack-local off --browserstack-config browserstack.json --spec amp
+        run: cd e2e && node e2e.js --cypress browserstack --browserstack-local off --browserstack-config browserstack.all-browsers.json
         env:
           BROWSERSTACK_LOCAL_IDENTIFIER: Cypress-GH-Action
 
