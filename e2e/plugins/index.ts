@@ -1,6 +1,6 @@
-/* eslint-disable import/no-unresolved, @typescript-eslint/no-var-requires  */
-const { initPlugin } = require("cypress-plugin-snapshots/plugin");
-const execa = require("execa");
+/* eslint-disable import/no-unresolved  */
+import { initPlugin } from "cypress-plugin-snapshots/plugin";
+import execa from "execa";
 
 /**
  * The options of the {@link tasks.installPlugin} task.
