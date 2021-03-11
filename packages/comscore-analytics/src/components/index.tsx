@@ -4,9 +4,9 @@ import { Connect } from "frontity/types";
 import ComscoreAnalytics from "../../types";
 
 /**
- * Props used by {@link ComscoreHead}.
+ * Props used by {@link ComscoreHead} and {@link ComscoreAmp}.
  */
-interface ComscoreHeadProps {
+interface ComscoreProps {
   /**
    * Comscore tracking ID.
    */
@@ -21,17 +21,45 @@ interface ComscoreHeadProps {
  * <ComscoreHead id={trackingId} />
  * ```
  *
- * @param props - Object of type {@link ComscoreHeadProps}.
+ * @param props - Object of type {@link ComscoreProps}.
  *
  * @returns React element.
  */
-const ComscoreHead: React.FC<ComscoreHeadProps> = ({ id }) => (
+const ComscoreHead: React.FC<ComscoreProps> = ({ id }) => (
   <Head>
     <noscript>
       {`<img alt="comscore" src="https://sb.scorecardresearch.com/p?c1=2&c2=${id}&cv=2.0&cj=1" />`}
     </noscript>
     <script async src="https://sb.scorecardresearch.com/beacon.js" />
   </Head>
+);
+
+/**
+ * Render the `amp-analytics` tag for the given tracking ID.
+ *
+ * @example
+ * ```
+ * <ComscoreAmp id={trackingId} />
+ * ```
+ *
+ * @param props - Object of type {@link ComscoreProps}.
+ *
+ * @returns React element.
+ */
+const ComscoreAmp: React.FC<ComscoreProps> = ({ id }) => (
+  // Render the `amp-analytics` tag for the tracking ID.
+  <amp-analytics type="comscore" key={id}>
+    <script
+      type="application/json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          vars: {
+            c2: id,
+          },
+        }),
+      }}
+    />
+  </amp-analytics>
 );
 
 /**
@@ -51,14 +79,18 @@ const ComscoreHead: React.FC<ComscoreHeadProps> = ({ id }) => (
  * @returns Root element.
  */
 export const Root: React.FC<Connect<ComscoreAnalytics>> = ({ state }) => {
-  // Get Tracking ids from state.
+  // Get Tracking IDs from state.
   const { trackingIds, trackingId } = state.comscoreAnalytics;
   const ids = trackingIds || (trackingId && [trackingId]) || [];
+
+  // Get the appropriate tag depending on whether the `@frontity/amp` package is
+  // installed or not.
+  const ComscoreTag = "amp" in state ? ComscoreAmp : ComscoreHead;
 
   return (
     <>
       {ids.map((id) => (
-        <ComscoreHead id={id} key={id} />
+        <ComscoreTag id={id} key={id} />
       ))}
     </>
   );

@@ -21,8 +21,11 @@ const CACHE_KEY = "css-amp";
 export const removeAmp = (link: string): string =>
   link.replace(/\/amp\/?($|\?|#)/, "/");
 
-export default {
+const amp: AMP = {
   name: "@frontity/amp",
+  state: {
+    amp: {},
+  },
   actions: {
     amp: {
       init: ({ libraries }) => {
@@ -129,3 +132,5 @@ export default {
     },
   },
 } as AMP;
+
+export default amp;
