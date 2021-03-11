@@ -6,7 +6,7 @@ on:
 
 jobs:
   selenium-job:
-    name: "BrowserStack Selenium Tests"
+    name: "BrowserStack Selenium Module Tests"
     runs-on: ubuntu-latest # Can be self-hosted runner also
     steps:
       - name: Checkout
