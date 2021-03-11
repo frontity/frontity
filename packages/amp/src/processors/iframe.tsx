@@ -53,8 +53,24 @@ const AMPIframe: React.FC<IFrameProps> = ({ title, src, height, ...rest }) => {
   );
 };
 
-export const iframe: Processor<Element, Packages> = {
+/**
+ * Interface for the iframe element that is processed by the AMP image processor.
+ */
+interface IFrameElement extends Element {
+  /**
+   * Props.
+   */
+  props: Element["props"] & {
+    /**
+     * An iframe can have a `loading` attribute e.g. To indicate lazy loading.
+     */
+    loading: string;
+  };
+}
+
+export const iframe: Processor<IFrameElement, Packages> = {
   name: "amp-iframe",
+  priority: 9, // because it should run before the iframe processor from html2react
   test: ({ node }) => node.component === "iframe",
   processor: ({ node }) => {
     node.component = AMPIframe;
@@ -64,6 +80,8 @@ export const iframe: Processor<Element, Packages> = {
     if (node.props.src.match(httpRegexp)) {
       node.props.src = node.props.src.replace(httpRegexp, "https://");
     }
+
+    delete node.props.loading;
 
     return node;
   },

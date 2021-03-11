@@ -28,6 +28,7 @@ export type ImgElement = Element & {
 
 export const img: Processor<ImgElement, Packages> = {
   name: "amp-img",
+  priority: 9, // because it should run before the image processor from html2react
   test: ({ node }) => node.component === "img",
   processor: ({ node }) => {
     // Because amp-* component are custom components, we have to pass the

@@ -98,6 +98,7 @@ interface TwitterElement extends Element {
 
 export const twitter: Processor<TwitterElement, Packages> = {
   name: "amp-twitter",
+  priority: 8, // because it should run before the iframe processor and the amp-iframe processor
   test: ({ node }) =>
     node.props?.className?.split(" ").includes("twitter-tweet") ||
     node.props?.className?.split(" ").includes("twitter-video"),
