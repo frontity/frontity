@@ -1,6 +1,10 @@
-name: e2e browserstack
+name: e2e browserstack (dev)
 
-on: [pull_request]
+on:
+  push:
+    branches:
+      - dev
+      - browserstack-cypress
 
 jobs:
   e2e-browserstack:
@@ -33,7 +37,7 @@ jobs:
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: "Latest Browsers (PR #${{ github.event.number}})"
+          build-name: All Browsers - Dev
 
       - name: Start BrowserStackLocal
         uses: browserstack/github-actions/setup-local@master
@@ -42,7 +46,7 @@ jobs:
           local-identifier: Cypress
 
       - name: Start Frontity and run tests
-        run: cd e2e && node e2e.js --cypress browserstack --browserstack-local off
+        run: cd e2e && node e2e.js --cypress browserstack --browserstack-local off --browserstack-config browserstack.all-browsers.json
 
       - name: Stop BrowserStackLocal
         uses: browserstack/github-actions/setup-local@master
