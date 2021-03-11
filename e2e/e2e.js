@@ -79,29 +79,21 @@ const stop = async () => {
     console.log("\n\nStopping Docker.");
     // Stop all the containers and remove all the volumes that they use (the
     // `-v` option).
-    await execa("docker-compose", ["down", "-v"], {
-      stdio: "inherit",
-    });
+    await execa("docker-compose", ["down", "-v"]);
     isDockerRunning = false;
   }
 
   if (isBrowserStackLocalRunning) {
     console.log("\n\nStopping BrowserStack Local.");
 
-    await execa(
-      `./browserstack-local/${browserStackLocalBinary}`,
-      [
-        "--key",
-        process.env.BROWSERSTACK_ACCESS_KEY,
-        "--daemon",
-        "stop",
-        "--local-identifier",
-        "Cypress",
-      ],
-      {
-        stdio: "inherit",
-      }
-    );
+    await execa(`./browserstack-local/${browserStackLocalBinary}`, [
+      "--key",
+      process.env.BROWSERSTACK_ACCESS_KEY,
+      "--daemon",
+      "stop",
+      "--local-identifier",
+      "Cypress",
+    ]);
     isBrowserStackLocalRunning = false;
   }
 };
