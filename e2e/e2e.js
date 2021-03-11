@@ -304,11 +304,16 @@ const dontRunWordPress =
           "--config-file",
           browserstackConfig,
         ];
+
         if (spec)
           bsArgs.push(
             "--specs",
             `integration/frontity-*/**/${spec}.spec.js,integration/frontity-*/**/${spec}.spec.ts`
           );
+
+        if (process.env.BROWSERSTACK_BUILD_NAME)
+          bsArgs.push("--build-name", process.env.BROWSERSTACK_BUILD_NAME);
+
         await execa("npx", bsArgs, {
           stdio: "inherit",
         });
