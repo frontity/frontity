@@ -23,7 +23,7 @@ function validateArgs(arg, { possibleValues }) {
 }
 
 let {
-  "wp-version": wpVersion,
+  wp,
   target,
   browser,
   prod,
@@ -37,7 +37,7 @@ let {
 } = argv;
 
 // Sane defaults for local development.
-wpVersion = wpVersion || "latest";
+wp = wp || "latest";
 target = target || "both";
 browser = browser || "chrome";
 prod = prod || false;
@@ -147,7 +147,7 @@ process.env["CYPRESS_FRONTITY_MODE"] =
 // --cypressCommand is "browserstack" (it is not needed).
 // --suite is not "all" and doesn't start with "wordpress".
 const dontRunWordPress =
-  wpVersion === "off" ||
+  wp === "off" ||
   cypressCommand === "browserstack" ||
   (suite !== "all" && !suite.startsWith("wordpress"));
 
@@ -166,7 +166,7 @@ const dontRunWordPress =
 
       // Set the WordPress version as an environment variable to be consumed by
       // the docker-compose.yml file.
-      process.env.WORDPRESS_VERSION = wpVersion;
+      process.env.WORDPRESS_VERSION = wp;
 
       // Set the Frontity server address. In Windows and Mac we use
       // `host.docker.internal` and in Linux we use `172.17.0.1`.
@@ -343,17 +343,17 @@ const dontRunWordPress =
     } else if (cypressCommand !== "off") {
       // Run Cypress if the `cypressCommnand` is not "off".
       if (cypressCommand === "open") {
-        await cypress.open({ env: { WORDPRESS_VERSION: wpVersion }, browser });
+        await cypress.open({ env: { WORDPRESS_VERSION: wp }, browser });
       } else if (cypressCommand === "run") {
         if (!spec && suite === "all") {
           await cypress.run({
-            env: { WORDPRESS_VERSION: wpVersion },
+            env: { WORDPRESS_VERSION: wp },
             spec: `./integration/**/*.spec.+(j|t)s`,
             browser,
           });
         } else {
           await cypress.run({
-            env: { WORDPRESS_VERSION: wpVersion },
+            env: { WORDPRESS_VERSION: wp },
             browser,
             spec: spec
               ? `./integration/**/${spec}.spec.+(j|t)s`

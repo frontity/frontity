@@ -113,13 +113,15 @@ The `node e2e.js` script is a CLI that supports multiple arguments for running t
 
 The defaults correspond to the most common configuration when working locally, so running just `node e2e.js` will be enough to start working locally most of the time.
 
-### `--wp-version`: string
+### `--wp`: string
 
-The WordPress version that will be used in the Docker container. For example, `--wp-version 5.5`.
+The WordPress version that will be used in the Docker container. For example, `--wp 5.5`.
+
+You can use `off` to prevent WordPress from running.
 
 WordPress won't load in these situations:
 
-- `--wp-version` is `off`.
+- `--wp` is `off`.
 - `--cypress` is `browserstack`.
 - `--suite` is not `all` or it doesn't start with `wordpress`.
 
