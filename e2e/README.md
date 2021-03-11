@@ -186,12 +186,20 @@ node e2e.js --browserstack-config browserstack.custom.json
 
 Default: `browserstack.json`.
 
-### `--browserstack-local`: boolean
+### `--browserstack-local`: string
 
-If BrowserStack Local should run or not. To turn it off, use:
+The local identifier of the BrowserStack Local connection.
+
+BrowserStack Local only runs if `--cypress` is `browserstack`. For example:
 
 ```sh
-node e2e.js --browserstack-local false
+node e2e.js --cypress browserstack --browserstack-local MyLocalMachine
 ```
 
-Default: `true`.
+If you don't want to start BrowserStack Local, use:
+
+```sh
+node e2e.js --cypress browserstack --browserstack-local off
+```
+
+Default: `Cypress`.

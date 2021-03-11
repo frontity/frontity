@@ -46,10 +46,10 @@ suite = suite || "all";
 inspect = inspect || false;
 spec = spec || null;
 browserstackConfig = browserstackConfig || "./browserstack.json";
-browserstackLocal = browserstackLocal || true;
+browserstackLocal = browserstackLocal || "Cypress";
 
 // Flag to know if we have started Docker or BrowserStack Local.
-let isDockerRunning = false;
+let isWordPressRunning = false;
 let isBrowserStackLocalRunning = false;
 const browserStackLocalBinary =
   platform() === "darwin"
@@ -75,16 +75,18 @@ process.chdir(__dirname);
  * Stops the processes that are still running.
  */
 const stop = async () => {
-  if (isDockerRunning) {
-    console.log("\n\nStopping Docker.");
+  if (isWordPressRunning) {
+    console.log("\nStopping Docker.");
+
     // Stop all the containers and remove all the volumes that they use (the
     // `-v` option).
     await execa("docker-compose", ["down", "-v"]);
-    isDockerRunning = false;
+
+    isWordPressRunning = false;
   }
 
   if (isBrowserStackLocalRunning) {
-    console.log("\n\nStopping BrowserStack Local.");
+    console.log("\nStopping BrowserStack Local.");
 
     await execa(`./browserstack-local/${browserStackLocalBinary}`, [
       "--key",
@@ -92,8 +94,9 @@ const stop = async () => {
       "--daemon",
       "stop",
       "--local-identifier",
-      "Cypress",
+      browserstackLocal,
     ]);
+
     isBrowserStackLocalRunning = false;
   }
 };
@@ -183,7 +186,7 @@ const dontRunWordPress =
       await execa("docker-compose", ["up", "-d"], { stdio: "inherit" });
 
       // Set the flag. We will needed it later to stop the containers.
-      isDockerRunning = true;
+      isWordPressRunning = true;
 
       // Wait until WordPress is responsive.
       await waitOn({
@@ -269,7 +272,7 @@ const dontRunWordPress =
           "The $BROWSERSTACK_ACCESS_KEY env variable is required. Please create one. You can use the .env file."
         );
 
-      if (browserstackLocal === true) {
+      if (browserstackLocal !== "off") {
         // Start Browserstack local.
         console.log("\nStarting BrowserStack Local...\n");
 
@@ -279,7 +282,7 @@ const dontRunWordPress =
           "--daemon",
           "start",
           "--local-identifier",
-          "Cypress",
+          browserstackLocal,
         ];
 
         await execa(
@@ -333,7 +336,7 @@ const dontRunWordPress =
         await sleep(10);
         status = await browserStackStatus(buildId);
       }
-      console.log(`\nFinal status is: ${status}\n`);
+      console.log(`\nFinal status is: ${status}`);
 
       // If the tests failed, set the exit code to 1 to indicate failure.
       if (status === "failed") process.exitCode = 1;
