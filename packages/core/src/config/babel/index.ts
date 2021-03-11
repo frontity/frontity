@@ -29,7 +29,7 @@ const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
       "not android <= 4.4.4",
       "chrome >= 49",
       "edge >= 12",
-      "firefox >= 40",
+      "firefox >= 18",
       "ios_saf >= 10",
       "not op_mini all",
       "op_mob >= 46",
