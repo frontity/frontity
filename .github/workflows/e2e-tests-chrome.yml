@@ -4,9 +4,6 @@ on: [pull_request]
 
 jobs:
   e2e-tests:
-    env:
-      ACTIONS_RUNNER_DEBUG: true
-
     runs-on: ubuntu-16.04
 
     strategy:

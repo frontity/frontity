@@ -10,7 +10,7 @@
     "@types/execa": "^2.0.0",
     "@types/wait-on": "^4.0.0",
     "amphtml-validator": "^1.0.34",
-    "cypress": "^6.2.1",
+    "cypress": "^6.6.0",
     "cypress-plugin-snapshots": "^1.4.3",
     "execa": "^4.0.3",
     "expect": "^26.6.2",
