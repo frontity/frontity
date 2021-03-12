@@ -304,6 +304,8 @@ const dontRunWordPress =
           "browserstack-cypress",
           "run",
           "--sync",
+          "--parallels",
+          "1",
           "--config-file",
           browserstackConfig,
         ];
