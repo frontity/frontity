@@ -131,6 +131,6 @@ const amp: AMP = {
       processors,
     },
   },
-} as AMP;
+};
 
 export default amp;
