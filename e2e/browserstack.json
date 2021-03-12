@@ -5,11 +5,6 @@
   },
   "browsers": [
     {
-      "browser": "chrome",
-      "os": "Windows 10",
-      "versions": ["latest"]
-    },
-    {
       "browser": "firefox",
       "os": "Windows 10",
       "versions": ["latest"]

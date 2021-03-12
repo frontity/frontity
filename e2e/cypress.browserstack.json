@@ -11,8 +11,5 @@
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "defaultCommandTimeout": 10000,
   "baseUrl": "http://localhost:3001",
-  "retries": {
-    "runMode": 3,
-    "openMode": 0
-  }
+  "retries": 3
 }
