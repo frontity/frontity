@@ -39,15 +39,14 @@ jobs:
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: start
-          local-identifier: Cypress-GH-Action
+          local-identifier: Cypress-GH-PR-${{ github.sha }}
 
       - name: Start Frontity and run tests
         run: cd e2e && node e2e.js --cypress browserstack --browserstack-local off
         env:
-          BROWSERSTACK_LOCAL_IDENTIFIER: Cypress-GH-Action
+          BROWSERSTACK_LOCAL_IDENTIFIER: Cypress-GH-PR-${{ github.sha }}
 
       - name: Stop BrowserStackLocal
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: stop
-          local-identifier: Cypress

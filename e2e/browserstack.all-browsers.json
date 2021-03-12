@@ -54,7 +54,7 @@
     "cypress_config_file": "cypress.browserstack.json",
     "cypress_version": "6",
     "project_name": "frontity/frontity",
-    "build_name": "All Browsers",
+    "build_name": "All Browsers - Local",
     "parallels": "1",
     "specs": [
       "integration/frontity-*/**/*.spec.js",
