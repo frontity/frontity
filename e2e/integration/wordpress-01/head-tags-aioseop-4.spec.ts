@@ -1,26 +1,26 @@
 import { ResolvePackages } from "../../../packages/types/src/utils";
 import Router from "../../../packages/router/types";
-import type { taskTypes } from "../../plugins";
-const task: taskTypes = cy.task;
+// import type { taskTypes } from "../../plugins";
+// const task: taskTypes = cy.task;
 
 type WindowWithFrontity = Cypress.AUTWindow & {
   frontity: ResolvePackages<Router>;
 };
 
-describe("Head Tags - All in One SEO Pack", () => {
-  before(() => {
-    task("installPlugin", { name: "all-in-one-seo-pack", version: "3.7.1" });
-    task("installPlugin", { name: "rest-api-head-tags" });
-    task("installPlugin", { name: "custom-post-type-ui" });
-    task("loadDatabase", {
-      path: "./wp-data/head-tags/aioseop.sql",
-    });
-  });
+describe.skip("Head Tags - All in One SEO Pack ^4.0.16", () => {
+  // before(() => {
+  //   task("installPlugin", { name: "all-in-one-seo-pack", version: "3.7.1" });
+  //   task("installPlugin", { name: "rest-api-head-tags" });
+  //   task("installPlugin", { name: "custom-post-type-ui" });
+  //   task("loadDatabase", {
+  //     path: "./wp-data/head-tags/aioseop.sql",
+  //   });
+  // });
 
-  after(() => {
-    task("resetDatabase");
-    task("removeAllPlugins");
-  });
+  // after(() => {
+  //   task("resetDatabase");
+  //   task("removeAllPlugins");
+  // });
 
   /**
    * Generates the full url to be loaded and tested.
@@ -72,6 +72,42 @@ describe("Head Tags - All in One SEO Pack", () => {
   };
 
   /**
+   * Ensure that the Open Graph meta tags have been rendered.
+   *
+   * @param link - The given link.
+   */
+  const checkOpenGraphTags = (link: string) => {
+    it("should render the Open Graph tags", () => {
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get(
+          `
+        meta[property^="og:"],
+        meta[property^="article:"],
+        meta[property^="profile:"]
+        `
+        ).each((meta) => {
+          cy.wrap(meta).toMatchSnapshot();
+        });
+      });
+    });
+  };
+
+  /**
+   * Ensure that the Twitter meta tags have been rendered.
+   *
+   * @param link - The given link.
+   */
+  const checkTwitterTags = (link: string) => {
+    it("should render the Twitter tags", () => {
+      cy.visitSSR(fullURL(link)).then(() => {
+        cy.get('meta[property^="twitter:"]').each((meta) => {
+          cy.wrap(meta).toMatchSnapshot();
+        });
+      });
+    });
+  };
+
+  /**
    * Change the router value in Frontity.
    *
    * @param link - The link of the page.
@@ -91,21 +127,9 @@ describe("Head Tags - All in One SEO Pack", () => {
 
     checkTitle(link, title);
     checkCanonical(link);
-
-    /**
-     * The `checkSchema()` call was replaced here by a check that the schema
-     * tag simply exists and it is not empty.
-     *
-     * The reason for this is that the tag content is not the same for different
-     * versions of WordPress:
-     * - 5.4 : `"commentsCount": "1",`.
-     * - 5.5 : `"commentsCount": 1,`.
-     */
-    it("should render the schema tag", () => {
-      cy.visitSSR(fullURL(link)).then(() => {
-        cy.get('script[type="application/ld+json"]').should("not.be.empty");
-      });
-    });
+    checkOpenGraphTags(link);
+    checkTwitterTags(link);
+    checkSchema(link);
   });
 
   /**
@@ -117,6 +141,8 @@ describe("Head Tags - All in One SEO Pack", () => {
 
     checkTitle(link, title);
     checkCanonical(link);
+    checkOpenGraphTags(link);
+    checkTwitterTags(link);
     checkSchema(link);
   });
 
@@ -151,13 +177,9 @@ describe("Head Tags - All in One SEO Pack", () => {
     const link = "/author/luisherranz";
     const title = "luisherranz | Test WP Site";
 
-    /**
-     * We don't check the schema here because it is not included by the
-     * _REST API - Head Tags_ plugin when used along with _All in One SEO Pack_,
-     * because it is not generated correctly for authors.
-     */
     checkTitle(link, title);
     checkCanonical(link);
+    checkSchema(link);
   });
 
   /**
@@ -169,6 +191,8 @@ describe("Head Tags - All in One SEO Pack", () => {
 
     checkTitle(link, title);
     checkCanonical(link);
+    checkOpenGraphTags(link);
+    checkTwitterTags(link);
     checkSchema(link);
   });
 
@@ -181,6 +205,8 @@ describe("Head Tags - All in One SEO Pack", () => {
 
     checkTitle(link, title);
     checkCanonical(link);
+    checkOpenGraphTags(link);
+    checkTwitterTags(link);
     checkSchema(link);
   });
 
@@ -197,7 +223,7 @@ describe("Head Tags - All in One SEO Pack", () => {
   });
 
   /**
-   * Tests for archive of custom post types.
+   * Tests for custom taxonomies.
    */
   describe("Custom Taxonomy", () => {
     const link = "/actor/linda-hamilton/";
