@@ -41,7 +41,7 @@ services:
       - db
 
   wpcli:
-    image: wordpress:cli-2.3
+    image: wordpress:cli
     volumes:
       # Needs to share a volume with the `wp` service so that the CLI can run
       # the commands.
