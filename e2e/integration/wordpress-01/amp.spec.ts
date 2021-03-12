@@ -10,9 +10,9 @@ describe("AMP", () => {
     });
   });
 
-  after(() => {
-    task("resetDatabase");
-  });
+  // after(() => {
+  //   task("resetDatabase");
+  // });
 
   it("amp-iframe", () => {
     const url = "http://localhost:3001/amp-iframe/?frontity_name=amp-wordpress";
@@ -93,5 +93,16 @@ describe("AMP", () => {
     cy.get("amp-youtube > iframe")
       .should("have.attr", "src")
       .and("contain", "https://www.youtube.com/embed/dQw4w9WgXcQ");
+  });
+
+  it("picture tag should render correctly", () => {
+    const url = "http://localhost:3001/picture/?frontity_name=amp-wordpress";
+
+    cy.validateAMP(url);
+    cy.visit(url);
+
+    cy.get("amp-img > img")
+      .should("have.attr", "src")
+      .and("contain", "ciudad_perdida");
   });
 });

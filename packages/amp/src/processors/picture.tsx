@@ -5,6 +5,7 @@ import type { ImgElement } from "./img";
 
 export const picture: Processor<ImgElement, Packages> = {
   name: "amp: replace picture with amp-img",
+  priority: 8, // We should run this processor before the amp-img processor.
   test: ({ node }) =>
     node.component === "picture" &&
     Boolean(node.children.find((node: Element) => node.component === "img")),
