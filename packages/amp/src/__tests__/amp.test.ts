@@ -4,12 +4,15 @@ import merge from "deepmerge";
 import wpSource from "@frontity/wp-source/src";
 import { Packages } from "../../types";
 import Amp from "..";
+import html2react from "@frontity/html2react/src";
 
 let store: InitializedStore<Packages>;
 describe("AMP tests", () => {
   beforeEach(() => {
     // Initialize the store
-    store = createStore<Packages>(merge(clone(wpSource()), clone(Amp)));
+    store = createStore<Packages>(
+      merge(merge(clone(wpSource()), html2react), Amp)
+    );
     store.state.source.url = "https://test.frontity.org/";
   });
 
