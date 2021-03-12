@@ -3,6 +3,7 @@ import { Packages } from "../../types";
 
 export const removeProhibitedTags: Processor<Element, Packages> = {
   name: "amp: removeProhibitedTags",
+  priority: 20,
   test: ({ node }) =>
     node.component === "style" ||
     node.component === "script" ||
