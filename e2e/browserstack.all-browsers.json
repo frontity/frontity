@@ -7,17 +7,17 @@
     {
       "browser": "chrome",
       "os": "Windows 10",
-      "versions": ["latest", "66"]
+      "versions": ["66"]
     },
     {
       "browser": "firefox",
       "os": "Windows 10",
-      "versions": ["latest", "60"]
+      "versions": ["60"]
     },
     {
       "browser": "edge",
       "os": "Windows 10",
-      "versions": ["latest", "80"]
+      "versions": ["80"]
     },
     {
       "browser": "chrome",
