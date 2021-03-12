@@ -31,14 +31,6 @@ export const img: Processor<ImgElement, Packages> = {
   priority: 9, // because it should run before the image processor from html2react
   test: ({ node }) => node.component === "img",
   processor: ({ node }) => {
-    // Because amp-* component are custom components, we have to pass the
-    // class as `class` and not as `className`:
-    // https://reactjs.org/docs/web-components.html#using-web-components-in-react
-    node.props.class = node.props?.className;
-
-    // We can now safely remove the className prop.
-    delete node.props.className;
-
     // amp-img does not support nor need that prop.
     delete node.props.loading;
 
