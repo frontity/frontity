@@ -1,5 +1,33 @@
 # @frontity/amp
 
+## 0.1.0
+
+### Minor Changes
+
+- [`00009580`](https://github.com/frontity/frontity/commit/0000958068747ec9cebd02610b4927254bb19e77) [#718](https://github.com/frontity/frontity/pull/718) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add the first version of html2react processors that are necessary for the AMP
+  package. The processors created include:
+
+  1. Processors to substitute an element `x` with its AMP `amp-x` equivalent:
+
+  - iframe
+  - img
+  - audio
+  - video
+
+  2. Processors for embeds:
+
+  - youtube
+  - twitter
+
+  3. Processors that remove some HTML tags and/or it's HTML tag attributes & properties
+     that are disallowed in an AMP page
+
+### Patch Changes
+
+- Updated dependencies [[`4a179f5d`](https://github.com/frontity/frontity/commit/4a179f5d57cbb8c0008779e84db2b28b4017addf), [`c326111a`](https://github.com/frontity/frontity/commit/c326111a387c89c7227ffe104bc9e3670e7ca273)]:
+  - frontity@1.14.3
+  - @frontity/html2react@1.6.2
+
 ## 0.0.2
 
 ### Patch Changes
