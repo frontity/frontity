@@ -12,8 +12,6 @@ var browserstackURL =
 var baseUrl = "http://localhost:3000";
 
 export const commonConfig = {
-  user: userName,
-  key: accessKey,
   updateJob: false,
   maxInstancesPerCapability: 1,
   logLevel: "warn",
@@ -24,13 +22,11 @@ export const commonConfig = {
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
   specFileRetries: 3,
-  host: "hub.browserstack.com",
   before: (capabilities) => {
-    driver = new Builder()
+    global.driver = new Builder()
       .usingServer(browserstackURL)
       .withCapabilities(capabilities)
       .build();
-    global.expect = driver;
   },
   beforeSession: (config, capabilities) => {
     capabilities.browserName === "iPhone"
