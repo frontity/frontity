@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.14.3
+
+### Patch Changes
+
+- [`4a179f5d`](https://github.com/frontity/frontity/commit/4a179f5d57cbb8c0008779e84db2b28b4017addf) [#738](https://github.com/frontity/frontity/pull/738) Thanks [@luisherranz](https://github.com/luisherranz)! - Update `react-helmet-async` dependency to solve a npm warning.
+
 ## 1.14.2
 
 ### Patch Changes
