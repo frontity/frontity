@@ -1,4 +1,4 @@
-name: "BrowserStack Selenium Tests"
+name: "BrowserStack Selenium SSR Tests"
 on:
   push:
     branches:
