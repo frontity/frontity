@@ -20,7 +20,7 @@ exports.config = {
         "Selenium-proxy- " +
         (process.env.BROWSERSTACK_BUILD_NAME ||
           "localhost-" + new Date().toISOString()),
-      debug: true,
+      video: false,
     },
   },
   capabilities: [

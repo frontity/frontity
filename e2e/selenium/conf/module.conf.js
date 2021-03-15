@@ -17,7 +17,7 @@ exports.config = {
         "Selenium-module- " +
         (process.env.BROWSERSTACK_BUILD_NAME ||
           "localhost-" + new Date().toISOString()),
-      debug: true,
+      video: false,
     },
   },
   capabilities: [
