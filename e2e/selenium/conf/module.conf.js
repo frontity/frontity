@@ -1,52 +1,48 @@
 import { commonConfig } from "./common.conf.js";
-
 const { ...rest } = commonConfig;
 
 exports.config = {
   ...rest,
-  specs: ["./selenium/tests/specs/module/*.spec.js"],
+  specs: ["./selenium/tests/specs/module/analytics.spec.js"],
   exclude: ["./selenium/tests/specs/module/smart-adserver.spec.js"],
-  maxInstances: 2,
+  maxInstances: 1,
   commonCapabilities: {
+    build:
+      "Selenium-module-" +
+      (process.env.BROWSERSTACK_BUILD_NAME ||
+        "localhost-" + new Date().toISOString()),
+    "browserstack.video": false,
     "browserstack.local": true,
     "browserstack.localIdentifier":
       process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
-    "browserstack.use_w3c": true,
-    "bstack:options": {
-      buildName:
-        "Selenium-module- " +
-        (process.env.BROWSERSTACK_BUILD_NAME ||
-          "localhost-" + new Date().toISOString()),
-      video: false,
-    },
   },
   capabilities: [
     //Safari - Bigger than 10.1
-    {
-      device: "iPhone 12",
-      os_version: "14",
-      real_mobile: "true",
-      browserName: "iPhone",
-    },
-    {
-      os: "OS X",
-      os_version: "Catalina",
-      browserName: "Safari",
-      browser_version: "13.1",
-    },
-    {
-      os: "OS X",
-      os_version: "Sierra",
-      browserName: "Safari",
-      browser_version: "10.1",
-    },
-    //Chrome - Bigger than 61
-    {
-      device: "Google Pixel 4",
-      os_version: "11.0",
-      real_mobile: true,
-      browserName: "Android",
-    },
+    // {
+    //   browserName: "iPhone",
+    //   device: "iPhone 12",
+    //   os_version: "14",
+    //   real_mobile: "true",
+    // },
+    // {
+    //   os: "OS X",
+    //   os_version: "Catalina",
+    //   browserName: "Safari",
+    //   browser_version: "13.1",
+    // },
+    // {
+    //   os: "OS X",
+    //   os_version: "Sierra",
+    //   browserName: "Safari",
+    //   browser_version: "10.1",
+    // },
+    // //Chrome - Bigger than 61
+    // {
+    //   device: "Google Pixel 4",
+    //   os_version: "11.0",
+    //   real_mobile: true,
+    //   browserName: "Android",
+    // },
     {
       os: "Windows",
       os_version: "10",
@@ -123,7 +119,9 @@ exports.config = {
     // },
   ],
 };
+
 // Code to support common capabilities
 exports.config.capabilities.forEach(function (caps) {
-  Object.assign(caps, exports.config.commonCapabilities);
+  for (var i in exports.config.commonCapabilities)
+    caps[i] = caps[i] || exports.config.commonCapabilities[i];
 });

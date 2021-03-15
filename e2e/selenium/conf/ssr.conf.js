@@ -11,14 +11,11 @@ exports.config = {
     "browserstack.local": true,
     "browserstack.localIdentifier":
       process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
-    "browserstack.use_w3c": true,
-    "bstack:options": {
-      buildName:
-        "Selenium-ssr- " +
-        (process.env.BROWSERSTACK_BUILD_NAME ||
-          "localhost-" + new Date().toISOString()),
-      video: false,
-    },
+    "browserstack.video": false,
+    build:
+      "Selenium-ssr- " +
+      (process.env.BROWSERSTACK_BUILD_NAME ||
+        "localhost-" + new Date().toISOString()),
   },
   capabilities: [
     //Safari - Smaller than 9.1

@@ -11,17 +11,14 @@ exports.config = {
   ],
   maxInstances: 1,
   commonCapabilities: {
+    build:
+      "Selenium-proxy- " +
+      (process.env.BROWSERSTACK_BUILD_NAME ||
+        "localhost-" + new Date().toISOString()),
     "browserstack.local": true,
+    "browserstack.video": false,
     "browserstack.localIdentifier":
       process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
-    "browserstack.use_w3c": true,
-    "bstack:options": {
-      buildName:
-        "Selenium-proxy- " +
-        (process.env.BROWSERSTACK_BUILD_NAME ||
-          "localhost-" + new Date().toISOString()),
-      video: false,
-    },
   },
   capabilities: [
     //Chrome - Between 49 and 60
