@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Head, connect, css } from "frontity";
+import { Head, Slot, connect, css } from "frontity";
 import { Connect } from "frontity/types";
 import GoogleTagManagerAnalytics from "../../types";
 
@@ -60,6 +60,27 @@ const GtmCode: React.FC<GtmCodeProps> = ({ containerId }) => (
 );
 
 /**
+ * Render the `amp-analytics` tag for the given container ID.
+ *
+ * @example
+ * ```
+ * <GtmCodeAmp containerId={containerId} />
+ * ```
+ *
+ * @param props - Object of type {@link GtmCodeProps}.
+ *
+ * @returns React element.
+ */
+const GtmCodeAmp: React.FC<GtmCodeProps> = ({ containerId }) => (
+  <amp-analytics
+    config={`https://www.googletagmanager.com/amp.json?id=${containerId};Tag Manager.url=SOURCE_URL`}
+    data-credentials="include"
+  >
+    <Slot name="Google Tag Manager Analytics - Inside <amp-analytics>" />
+  </amp-analytics>
+);
+
+/**
  * Root component of the Comscore Analytics package.
  *
  * It renders the Comscore script library for each Comscore tracking ID defined
@@ -78,10 +99,15 @@ export const Root: React.FC<Connect<GoogleTagManagerAnalytics>> = ({
 }) => {
   const { containerId, containerIds } = state.googleTagManagerAnalytics;
   const ids = containerIds || (containerId && [containerId]) || [];
+
+  // Get the appropriate tag depending on whether the `@frontity/amp` package is
+  // installed or not.
+  const GtmTag = "amp" in state ? GtmCodeAmp : GtmCode;
+
   return (
     <>
       {ids.map((id) => (
-        <GtmCode key={id} containerId={id} />
+        <GtmTag key={id} containerId={id} />
       ))}
     </>
   );
