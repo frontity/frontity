@@ -23,12 +23,10 @@ const Archive: React.FC = () => {
     active: state.theme.isInfiniteScrollEnabled,
     limit: state.theme.infiniteScrollLimit,
     fetchInViewOptions: {
-      root: document as any,
       rootMargin: "400px 0px",
       triggerOnce: true,
     },
     routeInViewOptions: {
-      root: document as any,
       rootMargin: "-80% 0% -19.9999% 0%",
     },
   });
@@ -88,4 +86,4 @@ const Archive: React.FC = () => {
   );
 };
 
-export default connect(Archive, { injectProps: false });
+export default connect(Archive);
