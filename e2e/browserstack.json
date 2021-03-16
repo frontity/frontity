@@ -21,6 +21,7 @@
     "project_name": "frontity/frontity",
     "build_name": "Latest Browsers - Local",
     "parallels": "1",
+    "exclude": ["wp-data/**/*"],
     "specs": [
       "integration/frontity-*/**/*.spec.js",
       "integration/frontity-*/**/*.spec.ts"
