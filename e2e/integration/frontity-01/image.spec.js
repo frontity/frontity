@@ -59,26 +59,34 @@ describe("Image lazy-loading (with native lazy-load)", () => {
     cy.visit("http://localhost:3001?frontity_name=image");
   });
 
-  it("native lazy load should exist", () => {
-    return cy
-      .window()
-      .its("HTMLImageElement")
-      .then((htmlImageElement) => {
-        expect("loading" in htmlImageElement.prototype).toBe(true);
-      });
-  });
+  const { family, majorVersion } = Cypress.browser;
 
-  it("should render an image without loading if it doesn't have height", () => {
-    cy.scrollTo("topLeft");
-    cy.get("img:not([height])").should("not.have.attr", "loading");
-    cy.get("img:not([height])").should("not.be.visible");
-    cy.get("img:not([height])")
-      .scrollIntoView({ duration: 300 })
-      .should("be.visible");
-  });
+  // Only run these tests if the browser supports native lazy loading.
+  if (
+    (family === "chromium" && majorVersion > 77) ||
+    (family === "firefox" && majorVersion > 75)
+  ) {
+    it("native lazy load should exist", () => {
+      return cy
+        .window()
+        .its("HTMLImageElement")
+        .then((htmlImageElement) => {
+          expect("loading" in htmlImageElement.prototype).toBe(true);
+        });
+    });
 
-  it("should render an image with loading=lazy if it has a height", () => {
-    cy.scrollTo("topLeft");
-    cy.get("img[height]").should("have.attr", "loading", "lazy");
-  });
+    it("should render an image without loading if it doesn't have height", () => {
+      cy.scrollTo("topLeft");
+      cy.get("img:not([height])").should("not.have.attr", "loading");
+      cy.get("img:not([height])").should("not.be.visible");
+      cy.get("img:not([height])")
+        .scrollIntoView({ duration: 300 })
+        .should("be.visible");
+    });
+
+    it("should render an image with loading=lazy if it has a height", () => {
+      cy.scrollTo("topLeft");
+      cy.get("img[height]").should("have.attr", "loading", "lazy");
+    });
+  }
 });
