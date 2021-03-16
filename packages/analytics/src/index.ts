@@ -1,4 +1,5 @@
 import Root from "./components";
+import AmpConfig from "./components/amp-config";
 import Analytics from "../types";
 
 const analytics: Analytics = {
@@ -32,6 +33,11 @@ const analytics: Analytics = {
           }
         );
       },
+    },
+  },
+  libraries: {
+    fills: {
+      analytics: { AmpConfig },
     },
   },
 };

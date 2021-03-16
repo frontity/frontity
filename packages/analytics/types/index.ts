@@ -1,6 +1,7 @@
 import { Package, Action, MergePackages } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
+import { AmpConfigProps } from "./amp";
 
 /**
  * Include `amp-analytics` to the `JSX.IntrinsicElements` interface.
@@ -183,6 +184,30 @@ interface Analytics extends Package {
        * ```
        */
       events: Record<string, boolean>;
+    };
+  };
+
+  /**
+   * Libraries exposed by this package.
+   */
+  libraries: {
+    /**
+     * Fills namespace.
+     */
+    fills: {
+      /**
+       * Analytics namespace.
+       */
+      analytics: {
+        /**
+         * Render a `<script type="application/json">` containing the
+         * configuration for an `<amp-analytics>` tag.
+         *
+         * @param props - Object of type {@link AmpConfigProps}.
+         * @returns React element.
+         */
+        AmpConfig: React.FC<AmpConfigProps>;
+      };
     };
   };
 }
