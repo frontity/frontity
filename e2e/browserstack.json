@@ -30,7 +30,8 @@
       "cypress-plugin-snapshots": "^1.4.3",
       "expect": "^26.6.2",
       "typescript": "^4.2.3",
-      "execa": "^4.0.3"
+      "execa": "^4.0.3",
+      "amphtml-validator": "^1.0.1"
     }
   },
   "connection_settings": {
