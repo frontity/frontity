@@ -12,6 +12,8 @@ var browserstackURL =
 var baseUrl = "http://localhost:3000";
 
 export const commonConfig = {
+  user: userName,
+  key: accessKey,
   updateJob: false,
   maxInstancesPerCapability: 1,
   logLevel: "warn",
