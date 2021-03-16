@@ -1,5 +1,5 @@
-/* eslint-disable jest/valid-expect,jest/no-standalone-expect */
-import amphtmlValidator, { Validator } from "amphtml-validator";
+/* eslint-disable @typescript-eslint/no-var-requires, jest/valid-expect, jest/no-standalone-expect */
+const { default: amphtmlValidator, Validator } = require("amphtml-validator");
 require("cypress-plugin-snapshots/commands");
 
 /**
@@ -115,14 +115,18 @@ Cypress.Commands.add(
 );
 
 /**
- *  Get the HTML from a link with cy.request() and validate it using amphtml-validator.
+ *  Get the HTML from a link with cy.request() and validate it using
+ *  amphtml-validator.
  *
  * @param validator - Instance of amphtmlValidator.getInstance().
  * @param response - Instance of Cypress.Response as returned by cy.request().
  *
  * @returns A Result object containing validation result and the errors.
  */
-const validateAMP = (validator: Validator, response: Cypress.Response) => {
+const validateAMP = (
+  validator: typeof Validator,
+  response: Cypress.Response
+) => {
   const result = { ...validator.validateString(response.body), msg: "" };
 
   result.errors.forEach((error) => {
@@ -144,7 +148,7 @@ Cypress.Commands.add(
     return cy.request("GET", url).then((response) => {
       return cy
         .wrap(amphtmlValidator.getInstance())
-        .then((validator: Validator) => {
+        .then((validator: typeof Validator) => {
           const result = validateAMP(validator, response);
 
           cy.wrap(result.status).should("equal", "PASS");
