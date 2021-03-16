@@ -4,30 +4,24 @@ on: [pull_request]
 
 jobs:
   e2e-gh-actions:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         include:
           - name: Default
+            args: "--prod"
+          - name: ES5 Bundle
+            args: "--prod --target es5"
+          - name: Development
+            mode: development
+          - name: Previous WordPress Version
             wp: 5.6
             args: "--prod --wp 5.6"
-          - name: ES5 Bundle
-            wp: 5.6
-            args: "--prod --target es5 --wp 5.6"
-          - name: Development
-            wp: 5.6
-            args: "--wp 5.6"
-            mode: "development"
-          - name: Previous WordPress Version
-            wp: 5.5
-            args: "--prod --wp 5.5"
           - name: Relative Public Path
-            wp: 5.6
-            args: "--prod --public-path /custom/path/ --wp 5.6"
+            args: "--prod --public-path /custom/path/"
           - name: Absolute Public Path
-            wp: 5.6
-            args: "--prod --public-path http://localhost:3001/custom/path/ --wp 5.6"
+            args: "--prod --public-path http://localhost:3001/custom/path/"
 
     steps:
       - name: Checkout
@@ -51,7 +45,7 @@ jobs:
         env:
           # We need to specify the WordPress version here as well so that
           # it's available inside of the cypress GH action container
-          WORDPRESS_VERSION: ${{ matrix.wp }}
+          WORDPRESS_VERSION: ${{ matrix.wp }} || "latest"
           CYPRESS_FRONTITY_MODE: ${{ matrix.mode }} || "production"
           FRONTITY_SERVER: http://172.17.0.1:3001
         with:
