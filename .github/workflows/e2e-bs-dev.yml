@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - browserstack-cypress
 
 jobs:
   e2e-browserstack:
