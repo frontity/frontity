@@ -7,19 +7,24 @@ describe("Native iframe lazy-load", { browser: "!firefox" }, () => {
     cy.visit("http://localhost:3001?frontity_name=iframe");
   });
 
-  it("native lazy-load should exist", () => {
-    return cy
-      .window()
-      .its("HTMLIFrameElement")
-      .then((HTMLIframeElement) => {
-        expect("loading" in HTMLIframeElement.prototype).toBe(true);
-      });
-  });
+  if (
+    Cypress.browser.family === "chromium" &&
+    Cypress.browser.majorVersion > 77
+  ) {
+    it("native lazy-load should exist", () => {
+      return cy
+        .window()
+        .its("HTMLIFrameElement")
+        .then((HTMLIframeElement) => {
+          expect("loading" in HTMLIframeElement.prototype).toBe(true);
+        });
+    });
 
-  it("should render an iframe with a loading attribute and 'lazy' as value", () => {
-    cy.scrollTo("topLeft");
-    cy.get("iframe").should("have.attr", "loading", "lazy");
-  });
+    it("should render an iframe with a loading attribute and 'lazy' as value", () => {
+      cy.scrollTo("topLeft");
+      cy.get("iframe").should("have.attr", "loading", "lazy");
+    });
+  }
 });
 
 describe("Iframe lazy-load with Intersection Observer", () => {
