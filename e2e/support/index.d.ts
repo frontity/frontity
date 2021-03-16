@@ -20,6 +20,13 @@ declare namespace Cypress {
     visitSSR(url: string): Chainable<Document>;
 
     /**
+     * Get the HTML from a link with cy.request and validate it using amphtml-validator.
+     *
+     * @param url - The url to get the HTML from.
+     */
+    validateAMP(url: string): Chainable;
+
+    /**
      * Expose custom types for cy.state().
      */
     state: State;

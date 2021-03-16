@@ -33,6 +33,10 @@ describe("AMP server tests", () => {
         head: [],
         scripts: [],
       },
+      html2react: {
+        processors: [],
+        Component: jest.fn(),
+      },
     };
   });
 
