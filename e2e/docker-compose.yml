@@ -26,7 +26,7 @@ services:
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_USER: test
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_AUTH_KEY: wordpress-auth-key
       WORDPRESS_AUTH_SALT: wordpress-auth-salt
@@ -34,6 +34,7 @@ services:
       # machine, which is accessible on the IP address `172.17.0.1` in linux or
       # using `host.docker.internal` in Mac and Windows.
       FRONTITY_SERVER: ${FRONTITY_SERVER}
+      WORDPRESS_DEBUG: 1
 
     depends_on:
       - db
@@ -68,7 +69,9 @@ services:
       - ./wp-data:/docker-entrypoint-initdb.d
     environment:
       MYSQL_DATABASE: wordpress
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: test
+      MYSQL_PASSWORD: password
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
 
 volumes:
   wp_data:
