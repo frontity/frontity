@@ -212,9 +212,9 @@ export interface Form {
   /**
    * The validation errors that can be returned by the WordPress REST API.
    */
-  errors: {
-    [K in keyof Fields]?: string;
-  };
+  // errors: {
+  //   [K in keyof Fields]?: string;
+  // };
 }
 
 /**
