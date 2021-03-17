@@ -21,6 +21,13 @@ exports.config = {
       process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
   },
   capabilities: [
+    //Safari 10.1
+    {
+      os: "OS X",
+      os_version: "Sierra",
+      browserName: "Safari",
+      browser_version: "10.1",
+    },
     //Chrome - Between 49 and 60
     {
       os: "Windows",

@@ -3,7 +3,7 @@ const { ...rest } = commonConfig;
 
 exports.config = {
   ...rest,
-  specs: ["./selenium/tests/specs/module/emotion.spec.js"],
+  specs: ["./selenium/tests/specs/module/*.spec.js"],
   exclude: ["./selenium/tests/specs/module/smart-adserver.spec.js"],
   maxInstances: 1,
   commonCapabilities: {
@@ -32,9 +32,9 @@ exports.config = {
     },
     {
       os: "OS X",
-      os_version: "Sierra",
+      os_version: "High Sierra",
       browserName: "Safari",
-      browser_version: "10.1",
+      browser_version: "11.1",
     },
     //Chrome - Bigger than 61
     {

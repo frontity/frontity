@@ -4,7 +4,7 @@ const { ...rest } = commonConfig;
 
 exports.config = {
   ...rest,
-  specs: ["./selenium/tests/specs/ssr/emotion.spec.js"],
+  specs: ["./selenium/tests/specs/ssr/*.spec.js"],
   exclude: [],
   maxInstances: 1,
   commonCapabilities: {
@@ -46,7 +46,7 @@ exports.config = {
     },
     {
       os: "OS X",
-      os_version: "Catalina",
+      os_version: "Mojave",
       browserName: "Chrome",
       browser_version: "48.0",
     },
