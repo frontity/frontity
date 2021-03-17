@@ -35,9 +35,12 @@ exports.config = {
       os_version: "High Sierra",
       browserName: "Safari",
       browser_version: "11.1",
-      //We have to exclude this because interSectionObserver is not supported
+      //We have to exclude use-in-view because interSectionObserver is not supported
       //until Safari 12.1
-      exclude: ["./selenium/tests/specs/module/use-in-view.spec.js"],
+      exclude: [
+        "./selenium/tests/specs/module/use-in-view.spec.js",
+        "./selenium/tests/specs/module/smart-adserver.spec.js",
+      ],
     },
     //Chrome - Bigger than 61
     {
