@@ -63,8 +63,8 @@ describe("Image lazy-loading (with native lazy-load)", () => {
 
   // Only run these tests if the browser supports native lazy loading.
   if (
-    (family === "chromium" && majorVersion > 77) ||
-    (family === "firefox" && majorVersion > 75)
+    (family === "chromium" && majorVersion >= 77) ||
+    (family === "firefox" && majorVersion >= 75)
   ) {
     it("native lazy load should exist", () => {
       return cy

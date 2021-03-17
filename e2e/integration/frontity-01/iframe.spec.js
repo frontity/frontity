@@ -9,7 +9,7 @@ describe("Native iframe lazy-load", { browser: "!firefox" }, () => {
 
   if (
     Cypress.browser.family === "chromium" &&
-    Cypress.browser.majorVersion > 77
+    Cypress.browser.majorVersion >= 77
   ) {
     it("native lazy-load should exist", () => {
       return cy
