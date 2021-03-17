@@ -2,7 +2,6 @@ const { By } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("Global", function () {
-  this.timeout(600000);
   it("should have a blue background, but not a red color", async function () {
     await driver.get(baseUrl + "/color-red?frontity_name=emotion");
     await driver.get(baseUrl + "/background-blue?frontity_name=emotion");
@@ -67,7 +66,6 @@ describe("Global", function () {
 });
 
 describe("styled", function () {
-  this.timeout(600000);
   it("should have a red color", async function () {
     await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
     assert.equal(
@@ -98,7 +96,6 @@ describe("styled", function () {
 });
 
 describe("css", function () {
-  this.timeout(600000);
   it("should have a red color", async function () {
     await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
     assert.equal(

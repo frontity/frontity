@@ -1,7 +1,6 @@
 const assert = require("assert");
 
 describe("head", function () {
-  this.timeout(600000);
   beforeEach(async function () {
     await driver.get(baseUrl + "/?site=head");
   });

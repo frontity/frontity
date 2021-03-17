@@ -2,7 +2,6 @@ const { By } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("google-analytics", function () {
-  this.timeout(600000);
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=google-analytics");
     await driver.manage().setTimeouts({ implicit: 5000 });

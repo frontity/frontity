@@ -3,7 +3,6 @@ const { By } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("comscore-analytics", function () {
-  this.timeout(600000);
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=comscore-analytics");
   });

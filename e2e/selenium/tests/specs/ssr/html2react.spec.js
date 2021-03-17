@@ -1,7 +1,6 @@
 const assert = require("assert");
 
 describe("html2react", function () {
-  this.timeout(600000);
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=html2react");
   });

@@ -2,7 +2,6 @@ const { By } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("use-in-view", function () {
-  this.timeout(600000);
   let vars;
   beforeEach(function () {
     vars = {

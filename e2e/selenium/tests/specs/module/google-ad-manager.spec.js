@@ -2,7 +2,6 @@ const { By, until } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("google-ad-manager", function () {
-  this.timeout(600000);
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=google-ad-manager");
     await driver.wait(
