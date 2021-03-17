@@ -203,6 +203,31 @@ interface Analytics extends Package {
          * Render a `<script type="application/json">` containing the
          * configuration for an `<amp-analytics>` tag.
          *
+         * The main idea is to use this library in a Fill (see [Slot & Fill
+         * pattern](https://docs.frontity.org/learning-frontity/roots#fills)) to
+         * place the `<script>` tag in the Slots that analytics packages add
+         * inside the `<amp-analytics>` tag.
+         *
+         * @example
+         * ```ts
+         * state: {
+         *   fills: {
+         *     myPackage: {
+         *       ampAnalyticsFill: {
+         *         slot: "Some Analytics - Inside <amp-analytics>",
+         *         library: "analytics.AmpConfig",
+         *         props: {
+         *           config: {
+         *             vars: { ... },
+         *             triggers: { ... },
+         *           },
+         *         },
+         *       },
+         *     },
+         *   },
+         * }
+         * ```
+         *
          * @param props - Object of type {@link AmpConfigProps}.
          * @returns React element.
          */
