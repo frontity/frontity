@@ -48,15 +48,6 @@ describe("styled", function () {
       "rgb(255, 0, 0)"
     );
   });
-
-  it("should have a Styled class name (autoLabel)", async function () {
-    await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
-    assert(
-      (await driver.executeScript(
-        'return document.querySelector("[data-test-id=\'styled-div\']").className.indexOf("Styled")'
-      )) > 0
-    );
-  });
 });
 
 describe("css", function () {
@@ -68,15 +59,6 @@ describe("css", function () {
         'return window.getComputedStyle(document.querySelector("[data-test-id=\'css-div\']"))["color"]'
       ),
       "rgb(255, 0, 0)"
-    );
-  });
-
-  it("should have a Styled class name (autoLabel)", async function () {
-    await driver.get(baseUrl + "/styled-css?frontity_name=emotion");
-    assert(
-      (await driver.executeScript(
-        'return document.querySelector("[data-test-id=\'css-div\']").className.indexOf("CSS")'
-      )) > 0
     );
   });
 });

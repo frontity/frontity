@@ -4,7 +4,7 @@ const { ...rest } = commonConfig;
 
 exports.config = {
   ...rest,
-  specs: ["./selenium/tests/specs/ssr/*.spec.js"],
+  specs: ["./selenium/tests/specs/ssr/emotion.spec.js"],
   exclude: [],
   maxInstances: 1,
   commonCapabilities: {

@@ -3,7 +3,7 @@ const { ...rest } = commonConfig;
 
 exports.config = {
   ...rest,
-  specs: ["./selenium/tests/specs/module/*.spec.js"],
+  specs: ["./selenium/tests/specs/module/emotion.spec.js"],
   exclude: ["./selenium/tests/specs/module/smart-adserver.spec.js"],
   maxInstances: 1,
   commonCapabilities: {
