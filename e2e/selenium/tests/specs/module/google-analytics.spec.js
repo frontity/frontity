@@ -5,6 +5,7 @@ describe("google-analytics", function () {
   this.timeout(600000);
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=google-analytics");
+    await driver.manage().setTimeouts({ implicit: 5000 });
   });
 
   const pageviewHome = {
@@ -24,8 +25,6 @@ describe("google-analytics", function () {
         "return document.querySelector('script[src=\"https://www.googletagmanager.com/gtag/js?id=UA-XXXXXX-X\"][async]')"
       )
     );
-    // Make sure the Google Analytics library has loaded.
-    assert(await driver.executeScript("return window.gtag"));
   });
 
   it("should have sent the first pageview", async function () {
@@ -108,24 +107,20 @@ describe("google-analytics", function () {
   it("should send events", async function () {
     await driver.findElement(By.id("send-event")).click();
     assert.deepEqual(
-      await driver.executeScript("return window.gaCalls[2][2]"),
-      {
-        content: "some content",
-        event_category: undefined,
-        event_label: undefined,
-        send_to: "UA-XXXXXX-X",
-        value: undefined,
-      }
+      await driver.executeScript("return window.gaCalls[2][2]['content']"),
+      "some content"
     );
     assert.deepEqual(
-      await driver.executeScript("return window.gaCalls[3][2]"),
-      {
-        content: "some content",
-        event_category: undefined,
-        event_label: undefined,
-        send_to: "UA-YYYYYY-Y",
-        value: undefined,
-      }
+      await driver.executeScript("return window.gaCalls[2][2]['send_to']"),
+      "UA-XXXXXX-X"
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[3][2]['content']"),
+      "some content"
+    );
+    assert.deepEqual(
+      await driver.executeScript("return window.gaCalls[3][2]['send_to']"),
+      "UA-YYYYYY-Y"
     );
   });
 });
