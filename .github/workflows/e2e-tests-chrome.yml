@@ -10,24 +10,24 @@ jobs:
       matrix:
         include:
           - name: Default
-            wp-version: latest
-            args: "--prod"
-          - name: ES5 Bundle
-            wp-version: latest
-            args: "--prod --target es5"
-          - name: Development
-            wp-version: latest
-            args: ""
-            mode: "development"
-          - name: Previous WordPress Version
             wp-version: 5.6
             args: "--prod --wp-version 5.6"
+          - name: ES5 Bundle
+            wp-version: 5.6
+            args: "--prod --target es5 --wp-version 5.6"
+          - name: Development
+            wp-version: 5.6
+            args: "--wp-version 5.6"
+            mode: "development"
+          - name: Previous WordPress Version
+            wp-version: 5.5
+            args: "--prod --wp-version 5.5"
           - name: Relative Public Path
-            wp-version: latest
-            args: "--prod --public-path /custom/path/"
+            wp-version: 5.6
+            args: "--prod --public-path /custom/path/ --wp-version 5.6"
           - name: Absolute Public Path
-            wp-version: latest
-            args: "--prod --public-path http://localhost:3001/custom/path/"
+            wp-version: 5.6
+            args: "--prod --public-path http://localhost:3001/custom/path/ --wp-version 5.6"
 
     steps:
       - name: Checkout
