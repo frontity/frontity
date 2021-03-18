@@ -23,10 +23,12 @@ const Archive: React.FC = () => {
     active: state.theme.isInfiniteScrollEnabled,
     limit: state.theme.infiniteScrollLimit,
     fetchInViewOptions: {
+      root: document,
       rootMargin: "400px 0px",
       triggerOnce: true,
     },
     routeInViewOptions: {
+      root: document,
       rootMargin: "-80% 0% -19.9999% 0%",
     },
   });
