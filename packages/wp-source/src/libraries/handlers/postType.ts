@@ -66,12 +66,32 @@ const postTypeHandler = ({
     // 1.2 iterate over finalEndpoints array
     let isHandled = false;
     let isMismatched = false;
-    for (const endpoint of finalEndpoints) {
-      const response = await libraries.source.api.get({
+
+    /**
+     * @param promises
+     */
+    // eslint-disable-next-line no-inner-declarations
+    async function* getData(promises: Promise<any>[]) {
+      const map = new Map(
+        promises.map((p, i) => [i, p.then((res) => [i, res])])
+      );
+      while (map.size) {
+        const [key, result] = await Promise.race(map.values());
+        yield result;
+        map.delete(key);
+      }
+    }
+
+    const promises = finalEndpoints.map((endpoint) =>
+      libraries.source.api.get({
         endpoint,
         params: { slug, _embed: true, ...state.source.params },
-      });
+      })
+    );
 
+    const data = getData(promises);
+
+    for await (const response of data) {
       const populated = await libraries.source.populate({
         response,
         state,
@@ -82,10 +102,11 @@ const postTypeHandler = ({
       if (populated.length > 0) {
         // We have to check if the link property in the data that we
         // populated is the same as the current route.
+
         if (populated[0].link === route) {
           isHandled = true;
           isMismatched = false;
-          matchedEndpoint = endpoint;
+          matchedEndpoint = populated[0].type;
           break;
         } else {
           isMismatched = true;
