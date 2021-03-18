@@ -12,4 +12,7 @@ analyze
 **/package-lock.json
 .now
 e2e/**/*(failed).png
+.vercel
+e2e/log/*
+e2e/results/*
 coverage
