@@ -1,18 +1,10 @@
 import expect from "expect";
 
-describe("Native iframe lazy-load", () => {
+// eslint-disable-next-line jest/valid-describe
+describe("Native iframe lazy-load", { browser: "!firefox" }, () => {
   beforeEach(() => {
     cy.viewport(360, 640);
     cy.visit("http://localhost:3001?frontity_name=iframe");
-  });
-
-  it("native lazy-load should exist", () => {
-    return cy
-      .window()
-      .its("HTMLIFrameElement")
-      .then((HTMLIframeElement) => {
-        expect("loading" in HTMLIframeElement.prototype).toBe(true);
-      });
   });
 
   it("should render an iframe with a loading attribute and 'lazy' as value", () => {

@@ -11,7 +11,6 @@ interface TestAds extends Package {
    * Package name.
    */
   name: "e2e-ads";
-
   /**
    * State exposed by this package.
    */
@@ -31,7 +30,6 @@ interface TestAds extends Package {
       get: Source["state"]["source"]["get"];
     };
   };
-
   /**
    * Actions exposed by this package.
    */
@@ -46,7 +44,6 @@ interface TestAds extends Package {
       fetch: Source["actions"]["source"]["fetch"];
     };
   };
-
   /**
    * Root components exposed by this package.
    */

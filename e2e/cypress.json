@@ -9,7 +9,6 @@
   "screenshotOnRunFailure": false,
   "trashAssetsBeforeRuns": false,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
-  "projectId": "ed7hed",
   "defaultCommandTimeout": 10000,
   "taskTimeout": 60000,
   "baseUrl": "http://localhost:3001",
