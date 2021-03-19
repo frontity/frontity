@@ -49,6 +49,7 @@ services:
     links:
       - mysql:db
     entrypoint: wp
+    command: "--info"
     depends_on:
       - db
       - wp
