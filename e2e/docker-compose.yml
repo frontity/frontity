@@ -47,7 +47,7 @@ services:
       # the commands.
       - wp_data:/var/www/html
     links:
-      - db:mysql
+      - db
     depends_on:
       - db
       - wp
