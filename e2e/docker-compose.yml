@@ -47,9 +47,7 @@ services:
       # the commands.
       - wp_data:/var/www/html
     links:
-      - mysql:db
-    entrypoint: wp
-    command: "--info"
+      - db:mysql
     depends_on:
       - db
       - wp
