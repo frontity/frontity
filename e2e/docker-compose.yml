@@ -46,6 +46,9 @@ services:
       # Needs to share a volume with the `wp` service so that the CLI can run
       # the commands.
       - wp_data:/var/www/html
+    links:
+      - mysql:db
+    entrypoint: wp
     depends_on:
       - db
       - wp
