@@ -9,11 +9,6 @@ describe("Redirections", () => {
     });
   });
 
-  after(() => {
-    task("resetDatabase");
-    task("removeAllPlugins");
-  });
-
   it("Should redirect when loading the page directly", () => {
     cy.visit("http://localhost:3001/hello-world/?frontity_name=redirections");
 
@@ -376,4 +371,16 @@ describe("Redirections", () => {
 
     task("runCommand", { command: "npx forever stopall" });
   });
+
+  // it("Should handle self-redirections gracefully", () => {
+  //   cy.visit("http://localhost:3001/self-redirect/?frontity_name=redirections");
+
+  //   cy.location("href").should(
+  //     "eq",
+  //     "http://localhost:3001/self-redirect/"
+  //   );
+
+  //   cy.get("#post").should("exist");
+  //   cy.get("#link-counter").should("contain.text", "1");
+  // });
 });
