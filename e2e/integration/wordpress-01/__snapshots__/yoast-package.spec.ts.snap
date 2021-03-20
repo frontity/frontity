@@ -104,11 +104,40 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
           "@id": "http://my.frontity.site/#/schema/person/9948b1443aa9e586af18d75cf4855438"
         },
         "description": "Meta tags are managed from WordPress by Yoast SEO plugin.",
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/hello-world/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/hello-world/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/hello-world/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/hello-world/",
+              "url": "http://my.frontity.site/hello-world/",
+              "name": "Hello world!"
+            }
           }
         ]
       },
@@ -212,11 +241,40 @@ exports[`Yoast Package > Page > should render the schema tag #0`] = `
         },
         "datePublished": "2020-08-20T01:31:05+00:00",
         "dateModified": "2020-08-20T01:31:05+00:00",
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/sample-page/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/sample-page/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/sample-page/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/sample-page/",
+              "url": "http://my.frontity.site/sample-page/",
+              "name": "Sample Page"
+            }
           }
         ]
       }
@@ -301,11 +359,40 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
         "isPartOf": {
           "@id": "http://my.frontity.site/#website"
         },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/category/nature/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/category/nature/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/category/nature/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/category/nature/",
+              "url": "http://my.frontity.site/category/nature/",
+              "name": "Nature"
+            }
           }
         ]
       }
@@ -390,11 +477,40 @@ exports[`Yoast Package > Tag > should render the schema tag #0`] = `
         "isPartOf": {
           "@id": "http://my.frontity.site/#website"
         },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/tag/japan/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/tag/japan/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/tag/japan/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/tag/japan/",
+              "url": "http://my.frontity.site/tag/japan/",
+              "name": "Japan"
+            }
           }
         ]
       }
@@ -487,11 +603,40 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
         "isPartOf": {
           "@id": "http://my.frontity.site/#website"
         },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/author/luisherranz/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/author/luisherranz/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/author/luisherranz/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/author/luisherranz/",
+              "url": "http://my.frontity.site/author/luisherranz/",
+              "name": "Archives for luisherranz"
+            }
           }
         ]
       },
@@ -592,11 +737,40 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
           "@id": "http://my.frontity.site/#website"
         },
         "description": "Just another WordPress site",
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
           }
         ]
       }
@@ -691,11 +865,50 @@ exports[`Yoast Package > CPT > should render the schema tag #0`] = `
         },
         "datePublished": "2020-01-09T19:07:38+00:00",
         "dateModified": "2020-01-09T19:07:38+00:00",
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/movie/the-terminator/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/movie/the-terminator/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/movie/the-terminator/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/movies/",
+              "url": "http://my.frontity.site/movies/",
+              "name": "Movies"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/movie/the-terminator/",
+              "url": "http://my.frontity.site/movie/the-terminator/",
+              "name": "The Terminator"
+            }
           }
         ]
       }
@@ -776,11 +989,40 @@ exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
         "isPartOf": {
           "@id": "http://my.frontity.site/#website"
         },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/movies/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/movies/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/movies/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/movies/",
+              "url": "http://my.frontity.site/movies/",
+              "name": "Movies"
+            }
           }
         ]
       }
@@ -865,11 +1107,40 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
         "isPartOf": {
           "@id": "http://my.frontity.site/#website"
         },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/actor/linda-hamilton/#breadcrumb"
+        },
         "inLanguage": "en-US",
         "potentialAction": [
           {
             "@type": "ReadAction",
             "target": ["http://my.frontity.site/actor/linda-hamilton/"]
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/actor/linda-hamilton/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/actor/linda-hamilton/",
+              "url": "http://my.frontity.site/actor/linda-hamilton/",
+              "name": "Linda Hamilton"
+            }
           }
         ]
       }
