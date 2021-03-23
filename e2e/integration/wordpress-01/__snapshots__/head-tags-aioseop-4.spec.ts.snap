@@ -1,4 +1,4 @@
-exports[`Head Tags - All in One SEO Pack > Post > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -6,7 +6,7 @@ exports[`Head Tags - All in One SEO Pack > Post > should render the correct cano
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph tags #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Open Graph tags #0`] = `
 <meta
   data-rh="true"
   property="og:site_name"
@@ -14,11 +14,11 @@ exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph tags #1`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Open Graph tags #1`] = `
 <meta data-rh="true" property="og:type" content="article" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph tags #2`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Open Graph tags #2`] = `
 <meta
   data-rh="true"
   property="og:title"
@@ -26,7 +26,7 @@ exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph tags #3`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Open Graph tags #3`] = `
 <meta
   data-rh="true"
   property="og:url"
@@ -34,7 +34,7 @@ exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph tags #4`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Open Graph tags #4`] = `
 <meta
   data-rh="true"
   property="article:published_time"
@@ -42,7 +42,7 @@ exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph tags #5`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Open Graph tags #5`] = `
 <meta
   data-rh="true"
   property="article:modified_time"
@@ -50,7 +50,23 @@ exports[`Head Tags - All in One SEO Pack > Post > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the schema tag #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Twitter tags #0`] = `
+<meta data-rh="true" property="twitter:card" content="summary" />
+`;
+
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Twitter tags #1`] = `
+<meta data-rh="true" property="twitter:domain" content="localhost" />
+`;
+
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the Twitter tags #2`] = `
+<meta
+  data-rh="true"
+  property="twitter:title"
+  content="Hello world! | Test WP Site"
+/>
+`;
+
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Post > should render the schema tag #0`] = `
 <script data-rh="true" type="application/ld+json" class="aioseo-schema">
   {
     "@context": "https://schema.org",
@@ -148,7 +164,7 @@ exports[`Head Tags - All in One SEO Pack > Post > should render the schema tag #
 </script>
 `;
 
-exports[`Head Tags - All in One SEO Pack > Page > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -156,7 +172,7 @@ exports[`Head Tags - All in One SEO Pack > Page > should render the correct cano
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph tags #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Open Graph tags #0`] = `
 <meta
   data-rh="true"
   property="og:site_name"
@@ -164,15 +180,15 @@ exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph tags #1`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Open Graph tags #1`] = `
 <meta data-rh="true" property="og:type" content="article" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph tags #2`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Open Graph tags #2`] = `
 <meta data-rh="true" property="og:title" content="Sample Page | Test WP Site" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph tags #3`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Open Graph tags #3`] = `
 <meta
   data-rh="true"
   property="og:url"
@@ -180,7 +196,7 @@ exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph tags #4`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Open Graph tags #4`] = `
 <meta
   data-rh="true"
   property="article:published_time"
@@ -188,7 +204,7 @@ exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph tags #5`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Open Graph tags #5`] = `
 <meta
   data-rh="true"
   property="article:modified_time"
@@ -196,31 +212,15 @@ exports[`Head Tags - All in One SEO Pack > Page > should render the Open Graph t
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Twitter tags #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Twitter tags #0`] = `
 <meta data-rh="true" property="twitter:card" content="summary" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Twitter tags #1`] = `
-<meta data-rh="true" property="twitter:domain" content="aioseo-e2e.local" />
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Twitter tags #1`] = `
+<meta data-rh="true" property="twitter:domain" content="localhost" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Post > should render the Twitter tags #2`] = `
-<meta
-  data-rh="true"
-  property="twitter:title"
-  content="Hello world! | Test WP Site"
-/>
-`;
-
-exports[`Head Tags - All in One SEO Pack > Page > should render the Twitter tags #0`] = `
-<meta data-rh="true" property="twitter:card" content="summary" />
-`;
-
-exports[`Head Tags - All in One SEO Pack > Page > should render the Twitter tags #1`] = `
-<meta data-rh="true" property="twitter:domain" content="aioseo-e2e.local" />
-`;
-
-exports[`Head Tags - All in One SEO Pack > Page > should render the Twitter tags #2`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the Twitter tags #2`] = `
 <meta
   data-rh="true"
   property="twitter:title"
@@ -228,7 +228,7 @@ exports[`Head Tags - All in One SEO Pack > Page > should render the Twitter tags
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Page > should render the schema tag #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Page > should render the schema tag #0`] = `
 <script data-rh="true" type="application/ld+json" class="aioseo-schema">
   {
     "@context": "https://schema.org",
@@ -294,7 +294,7 @@ exports[`Head Tags - All in One SEO Pack > Page > should render the schema tag #
 </script>
 `;
 
-exports[`Head Tags - All in One SEO Pack > Category > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Category > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -302,7 +302,7 @@ exports[`Head Tags - All in One SEO Pack > Category > should render the correct 
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Category > should render the schema tag #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Category > should render the schema tag #0`] = `
 <script data-rh="true" type="application/ld+json" class="aioseo-schema">
   {
     "@context": "https://schema.org",
@@ -366,7 +366,7 @@ exports[`Head Tags - All in One SEO Pack > Category > should render the schema t
 </script>
 `;
 
-exports[`Head Tags - All in One SEO Pack > Tag > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Tag > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -374,7 +374,7 @@ exports[`Head Tags - All in One SEO Pack > Tag > should render the correct canon
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Tag > should render the schema tag #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Tag > should render the schema tag #0`] = `
 <script data-rh="true" type="application/ld+json" class="aioseo-schema">
   {
     "@context": "https://schema.org",
@@ -438,7 +438,7 @@ exports[`Head Tags - All in One SEO Pack > Tag > should render the schema tag #0
 </script>
 `;
 
-exports[`Head Tags - All in One SEO Pack > Author > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Author > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -446,11 +446,75 @@ exports[`Head Tags - All in One SEO Pack > Author > should render the correct ca
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Author > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseo-schema">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "publisher": { "@id": "http://my.frontity.site/#organization" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "http://my.frontity.site/#organization",
+        "name": "Test WP Site",
+        "url": "http://my.frontity.site/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/author/luisherranz/#breadcrumblist",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "@id": "http://my.frontity.site/#listItem",
+            "position": "1",
+            "item": {
+              "@id": "http://my.frontity.site/#item",
+              "name": "Home",
+              "description": "Just another WordPress site",
+              "url": "http://my.frontity.site/"
+            },
+            "nextItem": "http://my.frontity.site/author/luisherranz/#listItem"
+          },
+          {
+            "@type": "ListItem",
+            "@id": "http://my.frontity.site/author/luisherranz/#listItem",
+            "position": "2",
+            "item": {
+              "@id": "http://my.frontity.site/author/luisherranz/#item",
+              "name": "luisherranz",
+              "url": "http://my.frontity.site/author/luisherranz/"
+            },
+            "previousItem": "http://my.frontity.site/#listItem"
+          }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/author/luisherranz/#collectionpage",
+        "url": "http://my.frontity.site/author/luisherranz/",
+        "name": "luisherranz | Test WP Site",
+        "inLanguage": "en-US",
+        "isPartOf": { "@id": "http://my.frontity.site/#website" },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/author/luisherranz/#breadcrumblist"
+        }
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the correct canonical link #0`] = `
 <link data-rh="true" rel="canonical" href="http://my.frontity.site/" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Open Graph tags #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Open Graph tags #0`] = `
 <meta
   data-rh="true"
   property="og:site_name"
@@ -458,11 +522,11 @@ exports[`Head Tags - All in One SEO Pack > Homepage > should render the Open Gra
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Open Graph tags #1`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Open Graph tags #1`] = `
 <meta data-rh="true" property="og:type" content="website" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Open Graph tags #2`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Open Graph tags #2`] = `
 <meta
   data-rh="true"
   property="og:title"
@@ -470,7 +534,7 @@ exports[`Head Tags - All in One SEO Pack > Homepage > should render the Open Gra
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Open Graph tags #3`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Open Graph tags #3`] = `
 <meta
   data-rh="true"
   property="og:description"
@@ -478,19 +542,19 @@ exports[`Head Tags - All in One SEO Pack > Homepage > should render the Open Gra
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Open Graph tags #4`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Open Graph tags #4`] = `
 <meta data-rh="true" property="og:url" content="http://my.frontity.site/" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Twitter tags #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Twitter tags #0`] = `
 <meta data-rh="true" property="twitter:card" content="summary" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Twitter tags #1`] = `
-<meta data-rh="true" property="twitter:domain" content="aioseo-e2e.local" />
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Twitter tags #1`] = `
+<meta data-rh="true" property="twitter:domain" content="localhost" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Twitter tags #2`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Twitter tags #2`] = `
 <meta
   data-rh="true"
   property="twitter:title"
@@ -498,7 +562,7 @@ exports[`Head Tags - All in One SEO Pack > Homepage > should render the Twitter 
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the Twitter tags #3`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the Twitter tags #3`] = `
 <meta
   data-rh="true"
   property="twitter:description"
@@ -506,7 +570,7 @@ exports[`Head Tags - All in One SEO Pack > Homepage > should render the Twitter 
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Homepage > should render the schema tag #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Homepage > should render the schema tag #0`] = `
 <script data-rh="true" type="application/ld+json" class="aioseo-schema">
   {
     "@context": "https://schema.org",
@@ -563,7 +627,7 @@ exports[`Head Tags - All in One SEO Pack > Homepage > should render the schema t
 </script>
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -571,7 +635,7 @@ exports[`Head Tags - All in One SEO Pack > CPT > should render the correct canon
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph tags #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Open Graph tags #0`] = `
 <meta
   data-rh="true"
   property="og:site_name"
@@ -579,11 +643,11 @@ exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph ta
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph tags #1`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Open Graph tags #1`] = `
 <meta data-rh="true" property="og:type" content="article" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph tags #2`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Open Graph tags #2`] = `
 <meta
   data-rh="true"
   property="og:title"
@@ -591,7 +655,7 @@ exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph ta
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph tags #3`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Open Graph tags #3`] = `
 <meta
   data-rh="true"
   property="og:url"
@@ -599,7 +663,7 @@ exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph ta
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph tags #4`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Open Graph tags #4`] = `
 <meta
   data-rh="true"
   property="article:published_time"
@@ -607,7 +671,7 @@ exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph ta
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph tags #5`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Open Graph tags #5`] = `
 <meta
   data-rh="true"
   property="article:modified_time"
@@ -615,15 +679,15 @@ exports[`Head Tags - All in One SEO Pack > CPT > should render the Open Graph ta
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Twitter tags #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Twitter tags #0`] = `
 <meta data-rh="true" property="twitter:card" content="summary" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Twitter tags #1`] = `
-<meta data-rh="true" property="twitter:domain" content="aioseo-e2e.local" />
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Twitter tags #1`] = `
+<meta data-rh="true" property="twitter:domain" content="localhost" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the Twitter tags #2`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the Twitter tags #2`] = `
 <meta
   data-rh="true"
   property="twitter:title"
@@ -631,7 +695,7 @@ exports[`Head Tags - All in One SEO Pack > CPT > should render the Twitter tags 
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT > should render the schema tag #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT > should render the schema tag #0`] = `
 <script data-rh="true" type="application/ld+json" class="aioseo-schema">
   {
     "@context": "https://schema.org",
@@ -713,11 +777,11 @@ exports[`Head Tags - All in One SEO Pack > CPT > should render the schema tag #0
 </script>
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT (archive) > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT (archive) > should render the correct canonical link #0`] = `
 <link data-rh="true" rel="canonical" href="http://my.frontity.site/movies/" />
 `;
 
-exports[`Head Tags - All in One SEO Pack > CPT (archive) > should render the schema tag #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > CPT (archive) > should render the schema tag #0`] = `
 <script data-rh="true" type="application/ld+json" class="aioseo-schema">
   {
     "@context": "https://schema.org",
@@ -781,7 +845,7 @@ exports[`Head Tags - All in One SEO Pack > CPT (archive) > should render the sch
 </script>
 `;
 
-exports[`Head Tags - All in One SEO Pack > Custom Taxonomy > should render the correct canonical link #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Custom Taxonomy > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -789,7 +853,7 @@ exports[`Head Tags - All in One SEO Pack > Custom Taxonomy > should render the c
 />
 `;
 
-exports[`Head Tags - All in One SEO Pack > Custom Taxonomy > should render the schema tag #0`] = `
+exports[`Head Tags - All in One SEO Pack ^4.0.16 > Custom Taxonomy > should render the schema tag #0`] = `
 <script data-rh="true" type="application/ld+json" class="aioseo-schema">
   {
     "@context": "https://schema.org",
@@ -846,69 +910,6 @@ exports[`Head Tags - All in One SEO Pack > Custom Taxonomy > should render the s
         "isPartOf": { "@id": "http://my.frontity.site/#website" },
         "breadcrumb": {
           "@id": "http://my.frontity.site/actor/linda-hamilton/#breadcrumblist"
-        }
-      }
-    ]
-  }
-</script>
-`;
-
-exports[`Head Tags - All in One SEO Pack > Author > should render the schema tag #0`] = `
-<script data-rh="true" type="application/ld+json" class="aioseo-schema">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "publisher": { "@id": "http://my.frontity.site/#organization" }
-      },
-      {
-        "@type": "Organization",
-        "@id": "http://my.frontity.site/#organization",
-        "name": "Test WP Site",
-        "url": "http://my.frontity.site/"
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "http://my.frontity.site/author/luisherranz/#breadcrumblist",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "@id": "http://my.frontity.site/#listItem",
-            "position": "1",
-            "item": {
-              "@id": "http://my.frontity.site/#item",
-              "name": "Home",
-              "description": "Just another WordPress site",
-              "url": "http://my.frontity.site/"
-            },
-            "nextItem": "http://my.frontity.site/author/luisherranz/#listItem"
-          },
-          {
-            "@type": "ListItem",
-            "@id": "http://my.frontity.site/author/luisherranz/#listItem",
-            "position": "2",
-            "item": {
-              "@id": "http://my.frontity.site/author/luisherranz/#item",
-              "url": "http://my.frontity.site/author/luisherranz/"
-            },
-            "previousItem": "http://my.frontity.site/#listItem"
-          }
-        ]
-      },
-      {
-        "@type": "CollectionPage",
-        "@id": "http://my.frontity.site/author/luisherranz/#collectionpage",
-        "url": "http://my.frontity.site/author/luisherranz/",
-        "name": "luisherranz | Test WP Site",
-        "inLanguage": "en-US",
-        "isPartOf": { "@id": "http://my.frontity.site/#website" },
-        "breadcrumb": {
-          "@id": "http://my.frontity.site/author/luisherranz/#breadcrumblist"
         }
       }
     ]

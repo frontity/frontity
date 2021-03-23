@@ -1,26 +1,26 @@
 import { ResolvePackages } from "../../../packages/types/src/utils";
 import Router from "../../../packages/router/types";
-// import type { taskTypes } from "../../plugins";
-// const task: taskTypes = cy.task;
+import type { taskTypes } from "../../plugins";
+const task: taskTypes = cy.task;
 
 type WindowWithFrontity = Cypress.AUTWindow & {
   frontity: ResolvePackages<Router>;
 };
 
-describe.skip("Head Tags - All in One SEO Pack ^4.0.16", () => {
-  // before(() => {
-  //   task("installPlugin", { name: "all-in-one-seo-pack", version: "3.7.1" });
-  //   task("installPlugin", { name: "rest-api-head-tags" });
-  //   task("installPlugin", { name: "custom-post-type-ui" });
-  //   task("loadDatabase", {
-  //     path: "./wp-data/head-tags/aioseop.sql",
-  //   });
-  // });
+describe("Head Tags - All in One SEO Pack ^4.0.16", () => {
+  before(() => {
+    task("installPlugin", { name: "all-in-one-seo-pack" });
+    task("installPlugin", { name: "rest-api-head-tags" });
+    task("installPlugin", { name: "custom-post-type-ui" });
+    task("loadDatabase", {
+      path: "./wp-data/head-tags/aioseop-4.sql",
+    });
+  });
 
-  // after(() => {
-  //   task("resetDatabase");
-  //   task("removeAllPlugins");
-  // });
+  after(() => {
+    task("resetDatabase");
+    task("removeAllPlugins");
+  });
 
   /**
    * Generates the full url to be loaded and tested.
