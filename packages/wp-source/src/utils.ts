@@ -214,3 +214,49 @@ export const getRedirectionData = ({
   isReady: true,
   isFetching: false,
 });
+
+/**
+ * Check if link is same as location.
+ *
+ * @param link - The link.
+ * @param redirection - The RedirectionData object for this link.
+ * @returns True or false.
+ */
+export const shouldBail = (
+  link: string,
+  redirection: Partial<RedirectionData>
+): boolean => {
+  console.log("link", link);
+  console.log("redirection", redirection.location);
+
+  const linkURL = new URL(link);
+  const locationURL = new URL(redirection.location);
+
+  const linkPart = linkURL.host + linkURL.pathname;
+  const locationPart = locationURL.host + locationURL.pathname;
+
+  const linkParams = linkURL.searchParams;
+  const locationParams = locationURL.searchParams;
+
+  linkParams.sort();
+  locationParams.sort();
+
+  Array.from(linkParams.keys()).forEach((key) => {
+    if (key.startsWith("frontity_")) linkParams.delete(key);
+  });
+  Array.from(locationParams.keys()).forEach((key) => {
+    if (key.startsWith("frontity_")) locationParams.delete(key);
+  });
+
+  console.log(
+    linkPart === locationPart &&
+      linkParams === locationParams &&
+      !redirection.isExternal
+  );
+
+  return (
+    linkPart === locationPart &&
+    linkParams === locationParams &&
+    !redirection.isExternal
+  );
+};

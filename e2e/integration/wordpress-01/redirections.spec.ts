@@ -372,15 +372,13 @@ describe("Redirections", () => {
     task("runCommand", { command: "npx forever stopall" });
   });
 
-  // it("Should handle self-redirections gracefully", () => {
-  //   cy.visit("http://localhost:3001/self-redirect/?frontity_name=redirections");
+  it.only("Should handle self-redirections gracefully", () => {
+    cy.visit(
+      "http://localhost:3001/self-redirect-404/?frontity_name=redirections&redirections=404",
+      { failOnStatusCode: false }
+    );
 
-  //   cy.location("href").should(
-  //     "eq",
-  //     "http://localhost:3001/self-redirect/"
-  //   );
-
-  //   cy.get("#post").should("exist");
-  //   cy.get("#link-counter").should("contain.text", "1");
-  // });
+    cy.get("#404").should("exist");
+    cy.get("#link-counter").should("contain.text", "1");
+  });
 });
