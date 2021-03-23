@@ -1,8 +1,8 @@
 describe("Source Auth", () => {
   it("Should remove the auth token from the client", () => {
     cy.visit(
-      // We load the 'render' project but it doesn't matter as we're only
-      // interested in window.frontity
+      // We load the 'render' site but it doesn't matter as we're only
+      // interested in window.frontity which is present in every site
       "http://localhost:3001/?frontity_name=render&frontity_source_auth=test"
     );
 
