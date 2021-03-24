@@ -111,7 +111,7 @@ export const serverSideRendering = async (
     // because no hydratation will happen in the client.
 
     // Run afterSSR actions.
-    runAfterSSRActions(store, ctx);
+    await runAfterSSRActions(store, ctx);
 
     output.result = render({ App });
   }
