@@ -1,0 +1,494 @@
+exports[`Head Tags - All in One SEO Pack > Post > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/hello-world/"
+/>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Post > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseop-schema">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "http://my.frontity.site/#organization",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "publisher": { "@id": "http://my.frontity.site/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "http://my.frontity.site/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "http://my.frontity.site/hello-world/#webpage",
+        "url": "http://my.frontity.site/hello-world/",
+        "inLanguage": "en-US",
+        "name": "Hello world!",
+        "isPartOf": { "@id": "http://my.frontity.site/#website" },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/hello-world/#breadcrumblist"
+        },
+        "datePublished": "2020-08-20T01:31:05+00:00",
+        "dateModified": "2020-08-31T13:42:07+00:00"
+      },
+      {
+        "@type": "Article",
+        "@id": "http://my.frontity.site/hello-world/#article",
+        "isPartOf": { "@id": "http://my.frontity.site/hello-world/#webpage" },
+        "author": { "@id": "http://my.frontity.site/author/admin/#author" },
+        "headline": "Hello world!",
+        "datePublished": "2020-08-20T01:31:05+00:00",
+        "dateModified": "2020-08-31T13:42:07+00:00",
+        "commentCount": 1,
+        "mainEntityOfPage": {
+          "@id": "http://my.frontity.site/hello-world/#webpage"
+        },
+        "publisher": { "@id": "http://my.frontity.site/#organization" },
+        "articleSection": "Uncategorized"
+      },
+      {
+        "@type": "Person",
+        "@id": "http://my.frontity.site/author/admin/#author",
+        "name": "admin",
+        "sameAs": [],
+        "image": {
+          "@type": "ImageObject",
+          "@id": "http://my.frontity.site/#personlogo",
+          "url": "http://2.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=96&d=mm&r=g",
+          "width": 96,
+          "height": 96,
+          "caption": "admin"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/hello-world/#breadcrumblist",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Test WP Site"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/hello-world/",
+              "url": "http://my.frontity.site/hello-world/",
+              "name": "Hello world!"
+            }
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Page > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/sample-page/"
+/>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Page > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseop-schema">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "http://my.frontity.site/#organization",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "publisher": { "@id": "http://my.frontity.site/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "http://my.frontity.site/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "http://my.frontity.site/sample-page/#webpage",
+        "url": "http://my.frontity.site/sample-page/",
+        "inLanguage": "en-US",
+        "name": "Sample Page",
+        "isPartOf": { "@id": "http://my.frontity.site/#website" },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/sample-page/#breadcrumblist"
+        },
+        "datePublished": "2020-08-20T01:31:05+00:00",
+        "dateModified": "2020-08-20T01:31:05+00:00"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/sample-page/#breadcrumblist",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Test WP Site"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/sample-page/",
+              "url": "http://my.frontity.site/sample-page/",
+              "name": "Sample Page"
+            }
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Category > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/category/nature/"
+/>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Category > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseop-schema">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "http://my.frontity.site/#organization",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "publisher": { "@id": "http://my.frontity.site/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "http://my.frontity.site/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/category/nature/#collectionpage",
+        "url": "http://my.frontity.site/category/nature/",
+        "inLanguage": "en-US",
+        "name": "Nature",
+        "isPartOf": { "@id": "http://my.frontity.site/#website" },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/category/nature/#breadcrumblist"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/category/nature/#breadcrumblist",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Test WP Site"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/category/nature/",
+              "url": "http://my.frontity.site/category/nature/",
+              "name": "Nature"
+            }
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Tag > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/tag/japan/"
+/>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Tag > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseop-schema">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "http://my.frontity.site/#organization",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "publisher": { "@id": "http://my.frontity.site/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "http://my.frontity.site/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/tag/japan/#collectionpage",
+        "url": "http://my.frontity.site/tag/japan/",
+        "inLanguage": "en-US",
+        "name": "Japan",
+        "isPartOf": { "@id": "http://my.frontity.site/#website" },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/tag/japan/#breadcrumblist"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/tag/japan/#breadcrumblist",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Test WP Site"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/tag/japan/",
+              "url": "http://my.frontity.site/tag/japan/",
+              "name": "Japan"
+            }
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Author > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/author/luisherranz/"
+/>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Homepage > should render the correct canonical link #0`] = `
+<link data-rh="true" rel="canonical" href="http://my.frontity.site/" />
+`;
+
+exports[`Head Tags - All in One SEO Pack > Homepage > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseop-schema">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "http://my.frontity.site/#organization",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "publisher": { "@id": "http://my.frontity.site/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "http://my.frontity.site/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "http://my.frontity.site/#webpage",
+        "url": "http://my.frontity.site/",
+        "inLanguage": "en-US",
+        "name": "Test WP Site",
+        "isPartOf": { "@id": "http://my.frontity.site/#website" },
+        "breadcrumb": { "@id": "http://my.frontity.site/#breadcrumblist" },
+        "description": "Just another WordPress site",
+        "about": { "@id": "http://my.frontity.site/#organization" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/#breadcrumblist",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Test WP Site"
+            }
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Head Tags - All in One SEO Pack > CPT > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/movie/the-terminator/"
+/>
+`;
+
+exports[`Head Tags - All in One SEO Pack > CPT > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseop-schema">
+  {}
+</script>
+`;
+
+exports[`Head Tags - All in One SEO Pack > CPT (archive) > should render the correct canonical link #0`] = `
+<link data-rh="true" rel="canonical" href="http://my.frontity.site/movies/" />
+`;
+
+exports[`Head Tags - All in One SEO Pack > CPT (archive) > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseop-schema">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "http://my.frontity.site/#organization",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "publisher": { "@id": "http://my.frontity.site/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "http://my.frontity.site/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "http://my.frontity.site/movies/#collectionpage",
+        "url": "http://my.frontity.site/movies/",
+        "inLanguage": "en-US",
+        "name": "Movies",
+        "isPartOf": { "@id": "http://my.frontity.site/#website" },
+        "breadcrumb": {
+          "@id": "http://my.frontity.site/movies/#breadcrumblist"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "http://my.frontity.site/movies/#breadcrumblist",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/",
+              "url": "http://my.frontity.site/",
+              "name": "Test WP Site"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": "http://my.frontity.site/movies/",
+              "url": "http://my.frontity.site/movies/",
+              "name": "Movies"
+            }
+          }
+        ]
+      }
+    ]
+  }
+</script>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Custom Taxonomy > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/actor/linda-hamilton/"
+/>
+`;
+
+exports[`Head Tags - All in One SEO Pack > Custom Taxonomy > should render the schema tag #0`] = `
+<script data-rh="true" type="application/ld+json" class="aioseop-schema">
+  {}
+</script>
+`;

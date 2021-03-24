@@ -59,15 +59,6 @@ describe("Image lazy-loading (with native lazy-load)", () => {
     cy.visit("http://localhost:3001?frontity_name=image");
   });
 
-  it("native lazy load should exist", () => {
-    return cy
-      .window()
-      .its("HTMLImageElement")
-      .then((htmlImageElement) => {
-        expect("loading" in htmlImageElement.prototype).toBe(true);
-      });
-  });
-
   it("should render an image without loading if it doesn't have height", () => {
     cy.scrollTo("topLeft");
     cy.get("img:not([height])").should("not.have.attr", "loading");

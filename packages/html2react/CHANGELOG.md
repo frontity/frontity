@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.6.2
+
+### Patch Changes
+
+- [`c326111a`](https://github.com/frontity/frontity/commit/c326111a387c89c7227ffe104bc9e3670e7ca273) [#741](https://github.com/frontity/frontity/pull/741) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix a bug causing Custom Components processed with Html2React to pass a `className` prop to DOM nodes.
+
+- Updated dependencies [[`4a179f5d`](https://github.com/frontity/frontity/commit/4a179f5d57cbb8c0008779e84db2b28b4017addf)]:
+  - frontity@1.14.3
+
 ## 1.6.1
 
 ### Patch Changes

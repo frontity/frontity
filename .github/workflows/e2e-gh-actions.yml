@@ -1,0 +1,82 @@
+name: e2e gh actions
+
+on: [pull_request]
+
+jobs:
+  e2e-gh-actions:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - name: Default
+            wp: 5.7
+            mode: "production"
+            args: "--prod --wp 5.7"
+          - name: ES5 Bundle
+            wp: 5.7
+            mode: "production"
+            args: "--prod --target es5 --wp 5.7"
+          - name: Development
+            wp: 5.7
+            mode: "development"
+            args: "--wp 5.7"
+          - name: Previous WordPress Version
+            wp: 5.6
+            mode: "production"
+            args: "--prod --wp 5.6"
+          - name: Relative Public Path
+            wp: 5.7
+            mode: "production"
+            args: "--prod --public-path /custom/path/ --wp 5.7"
+          - name: Absolute Public Path
+            wp: 5.7
+            mode: "production"
+            args: "--prod --public-path http://localhost:3001/custom/path/ --wp 5.7"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies (root)
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v2.9.1
+        env:
+          # We need to specify the WordPress version here as well so that
+          # it's available inside of the cypress GH action container
+          WORDPRESS_VERSION: ${{ matrix.wp }}
+          CYPRESS_FRONTITY_MODE: ${{ matrix.mode }}
+          FRONTITY_SERVER: http://172.17.0.1:3001
+        with:
+          start: "node e2e.js --cypress off ${{ matrix.args }}"
+          wait-on: "http://localhost:3001"
+          wait-on-timeout: 600
+          browser: chrome
+          working-directory: e2e
+          config: video=true,screenshotOnRunFailure=true
+
+      - name: Upload screenshots on failure
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: e2e/screenshots
+
+      - name: Upload videos
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: e2e/videos

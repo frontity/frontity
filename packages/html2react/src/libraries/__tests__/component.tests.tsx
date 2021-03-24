@@ -102,9 +102,9 @@ describe("Component", () => {
     `);
   });
 
-  test("Should handle children correctly", () => {
+  test("Should handle children and multiple props correctly", () => {
     const html = `
-    <my-custom-component>
+    <my-custom-component prop1="test" class="test class" id="1">
       <div> test </div> 
       <div> test 2 </div> 
     </my-custom-component>`;
@@ -114,7 +114,11 @@ describe("Component", () => {
     );
 
     expect(result.toJSON()).toMatchInlineSnapshot(`
-      <my-custom-component>
+      <my-custom-component
+        class="test class"
+        id="1"
+        prop1="test"
+      >
         <div>
            test 
         </div>
