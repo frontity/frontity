@@ -19,7 +19,7 @@ declare global {
  * Visit https://amp.dev/documentation/components/amp-analytics/#configuration-data-objects
  * for more information on how to define this kind of objects.
  */
-export interface AmpConfigProps {
+export interface AmpConfig {
   /**
    * Absolute URL that defines the origin for requests.
    */

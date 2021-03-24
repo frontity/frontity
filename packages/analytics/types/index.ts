@@ -1,7 +1,7 @@
 import { Package, Action, MergePackages } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
-import { AmpConfigProps } from "./amp";
+export { AmpConfig } from "./amp";
 
 /**
  * Include `amp-analytics` to the `JSX.IntrinsicElements` interface.
@@ -184,55 +184,6 @@ interface Analytics extends Package {
        * ```
        */
       events: Record<string, boolean>;
-    };
-  };
-
-  /**
-   * Libraries exposed by this package.
-   */
-  libraries: {
-    /**
-     * Fills namespace.
-     */
-    fills: {
-      /**
-       * Analytics namespace.
-       */
-      analytics: {
-        /**
-         * Render a `<script type="application/json">` containing the
-         * configuration for an `<amp-analytics>` tag.
-         *
-         * The main idea is to use this library in a Fill (see [Slot & Fill
-         * pattern](https://docs.frontity.org/learning-frontity/roots#fills)) to
-         * place the `<script>` tag in the Slots that analytics packages add
-         * inside the `<amp-analytics>` tag.
-         *
-         * @example
-         * ```ts
-         * state: {
-         *   fills: {
-         *     myPackage: {
-         *       ampAnalyticsFill: {
-         *         slot: "Some Analytics - Inside <amp-analytics>",
-         *         library: "analytics.AmpConfig",
-         *         props: {
-         *           config: {
-         *             vars: { ... },
-         *             triggers: { ... },
-         *           },
-         *         },
-         *       },
-         *     },
-         *   },
-         * }
-         * ```
-         *
-         * @param props - Object of type {@link AmpConfigProps}.
-         * @returns React element.
-         */
-        AmpConfig: React.FC<AmpConfigProps>;
-      };
     };
   };
 }
