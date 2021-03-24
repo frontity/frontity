@@ -63,12 +63,6 @@ describe("Yoast Package", () => {
       });
     });
 
-    it("should render the robots tag", () => {
-      cy.visitSSR(fullURL(link)).then(() => {
-        cy.get('meta[name="robots"]').toMatchSnapshot();
-      });
-    });
-
     it("should render the Open Graph tags", () => {
       cy.visitSSR(fullURL(link)).then(() => {
         cy.get(
