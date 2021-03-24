@@ -5,15 +5,11 @@
   "screenshotsFolder": "screenshots",
   "supportFile": "support/index.js",
   "videosFolder": "videos",
-  "video": false,
-  "screenshotOnRunFailure": false,
+  "video": true,
+  "screenshotOnRunFailure": true,
   "trashAssetsBeforeRuns": false,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "defaultCommandTimeout": 10000,
-  "taskTimeout": 60000,
   "baseUrl": "http://localhost:3001",
-  "retries": {
-    "runMode": 3,
-    "openMode": 0
-  }
+  "retries": 3
 }

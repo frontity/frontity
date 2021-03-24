@@ -85,7 +85,6 @@ describe("actions.comments.submit", () => {
         "errorCode": "",
         "errorMessage": "",
         "errorStatusCode": null,
-        "errors": Object {},
         "fields": Object {
           "authorEmail": "frontibotito@frontity.org",
           "authorName": "Frontibotito",
@@ -174,7 +173,6 @@ describe("actions.comments.submit", () => {
         "errorCode": "",
         "errorMessage": "",
         "errorStatusCode": null,
-        "errors": Object {},
         "fields": Object {
           "authorEmail": "frontibotito@frontity.org",
           "authorName": "Frontibotito",
@@ -558,7 +556,6 @@ describe("actions.comments.submit", () => {
         "errorCode": "",
         "errorMessage": "",
         "errorStatusCode": null,
-        "errors": Object {},
         "fields": Object {
           "content": "",
         },

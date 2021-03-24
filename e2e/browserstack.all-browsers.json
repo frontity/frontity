@@ -1,0 +1,77 @@
+{
+  "auth": {
+    "username": "$BROWSERSTACK_USERNAME",
+    "access_key": "$BROWSERSTACK_ACCESS_KEY"
+  },
+  "browsers": [
+    {
+      "browser": "chrome",
+      "os": "Windows 10",
+      "versions": ["66"]
+    },
+    {
+      "browser": "firefox",
+      "os": "Windows 10",
+      "versions": ["60"]
+    },
+    {
+      "browser": "edge",
+      "os": "Windows 10",
+      "versions": ["80"]
+    },
+    {
+      "browser": "chrome",
+      "os": "OS X Big Sur",
+      "versions": ["latest"]
+    },
+    {
+      "browser": "firefox",
+      "os": "OS X Big Sur",
+      "versions": ["latest"]
+    },
+    {
+      "browser": "edge",
+      "os": "OS X Big Sur",
+      "versions": ["latest"]
+    },
+    {
+      "browser": "chrome",
+      "os": "OS X Mojave",
+      "versions": ["66"]
+    },
+    {
+      "browser": "firefox",
+      "os": "OS X Mojave",
+      "versions": ["60"]
+    },
+    {
+      "browser": "edge",
+      "os": "OS X Mojave",
+      "versions": ["80"]
+    }
+  ],
+  "run_settings": {
+    "cypress_config_file": "cypress.browserstack.json",
+    "cypress_version": "6",
+    "project_name": "frontity/frontity",
+    "build_name": "All Browsers - Local",
+    "parallels": "1",
+    "exclude": ["wp-data/**/*"],
+    "specs": [
+      "integration/frontity-*/**/*.spec.js",
+      "integration/frontity-*/**/*.spec.ts"
+    ],
+    "npm_dependencies": {
+      "cypress-plugin-snapshots": "^1.4.3",
+      "expect": "^26.6.2",
+      "typescript": "^4.2.3",
+      "execa": "^4.0.3",
+      "amphtml-validator": "^1.0.1"
+    },
+    "callback_url": "https://n8n.frontity.org/webhook/14dfcaa7-89e5-4dde-9cfe-3d8f278d04bc"
+  },
+  "connection_settings": {
+    "local": true,
+    "local_identifier": "Cypress-Local"
+  }
+}
