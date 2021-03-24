@@ -162,12 +162,12 @@ describe("Component", () => {
     // Should have a `class`
     expect(result.toJSON()).toMatchInlineSnapshot(`
       <div
-        className="className"
+        className="test"
       />
     `);
 
     expect(result.toJSON()).toMatchObject({
-      props: { class: "test" },
+      props: { className: "test" },
     });
   });
 });
