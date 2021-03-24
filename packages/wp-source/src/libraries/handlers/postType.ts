@@ -92,7 +92,6 @@ const postTypeHandler = ({
       if (populated.length > 0) {
         // We have to check if the link property in the data that we
         // populated is the same as the current route.
-
         if (populated[0].link === route) {
           isHandled = true;
           isMismatched = false;
