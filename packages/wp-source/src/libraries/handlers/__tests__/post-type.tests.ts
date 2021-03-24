@@ -86,7 +86,7 @@ describe("postType", () => {
   });
 });
 
-describe.only("post", () => {
+describe("post", () => {
   test("doesn't exist in source.post", async () => {
     // Mock Api responses
     api.get = jest.fn().mockResolvedValue(mockResponse([post1]));
@@ -225,8 +225,9 @@ describe("page", () => {
     // Mock Api responses
     api.get = jest
       .fn()
-      .mockResolvedValueOnce(mockResponse([]))
-      .mockResolvedValueOnce(mockResponse([page1]));
+      .mockResolvedValueOnce(mockResponse([])) // post
+      .mockResolvedValueOnce(mockResponse([page1])) // page
+      .mockResolvedValueOnce(mockResponse([])); // media
     // Fetch entities
     await store.actions.source.fetch("/page-1/");
     expect(postTypeHandler).toHaveBeenCalled();
@@ -252,8 +253,9 @@ describe("page", () => {
     // Mock Api responses
     api.get = jest
       .fn()
-      .mockResolvedValueOnce(mockResponse([]))
-      .mockResolvedValueOnce(mockResponse([page1]));
+      .mockResolvedValueOnce(mockResponse([])) // post
+      .mockResolvedValueOnce(mockResponse([page1])) // page
+      .mockResolvedValueOnce(mockResponse([])); // media
     // Fetch entities
     await store.actions.source.fetch("/page-1/?some=param");
     expect(postTypeHandler).toHaveBeenCalled();
@@ -279,8 +281,9 @@ describe("page", () => {
     // Mock Api responses
     api.get = jest
       .fn()
-      .mockResolvedValueOnce(mockResponse([]))
-      .mockResolvedValueOnce(mockResponse([page1WithParent]));
+      .mockResolvedValueOnce(mockResponse([])) // post
+      .mockResolvedValueOnce(mockResponse([page1WithParent])) // page
+      .mockResolvedValueOnce(mockResponse([])); // media
     // Fetch entities
     await store.actions.source.fetch("/parent/page-1/");
     expect(postTypeHandler).toHaveBeenCalled();
@@ -293,6 +296,7 @@ describe("attachment", () => {
     // Mock Api responses
     api.get = jest
       .fn()
+      .mockResolvedValueOnce(mockResponse([]))
       .mockResolvedValueOnce(mockResponse([]))
       .mockResolvedValueOnce(mockResponse([attachment1]));
     // Fetch entities
@@ -320,6 +324,7 @@ describe("attachment", () => {
     // Mock Api responses
     api.get = jest
       .fn()
+      .mockResolvedValueOnce(mockResponse([]))
       .mockResolvedValueOnce(mockResponse([]))
       .mockResolvedValueOnce(mockResponse([attachment1]));
     // Fetch entities
