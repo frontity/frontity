@@ -7,19 +7,19 @@ const delayPromise = (ms: number, val?: unknown) =>
 
 describe("generateAsyncQueue", () => {
   test("should order promises correctly", async () => {
-    const promises = [
-      delayPromise(10, "first"),
-      delayPromise(500, "third"),
-      delayPromise(11, "second"),
-      delayPromise(501, "fourth"),
+    const promises: [string, Promise<unknown>][] = [
+      ["test", delayPromise(10, "first")],
+      ["test", delayPromise(500, "third")],
+      ["test", delayPromise(11, "second")],
+      ["test", delayPromise(501, "fourth")],
     ];
 
     const generator = generateAsyncQueue(promises);
 
-    expect((await generator.next()).value).toBe("first");
-    expect((await generator.next()).value).toBe("second");
-    expect((await generator.next()).value).toBe("third");
-    expect((await generator.next()).value).toBe("fourth");
+    expect((await generator.next()).value).toEqual(["test", "first"]);
+    expect((await generator.next()).value).toEqual(["test", "second"]);
+    expect((await generator.next()).value).toEqual(["test", "third"]);
+    expect((await generator.next()).value).toEqual(["test", "fourth"]);
 
     const lastValue = await generator.next();
     expect(lastValue.value).toBe(undefined);
@@ -27,15 +27,15 @@ describe("generateAsyncQueue", () => {
   });
 
   test("should handle rejections with simple try...catch", async () => {
-    const promises = [
-      delayPromise(10, "first"),
-      delayPromise(500, "second"),
-      delayPromise(11),
+    const promises: [string, Promise<unknown>][] = [
+      ["test", delayPromise(10, "first")],
+      ["test", delayPromise(11)],
+      ["test", delayPromise(500, "second")], // this should never be reached
     ];
 
     const generator = generateAsyncQueue(promises);
 
-    expect((await generator.next()).value).toBe("first");
+    expect((await generator.next()).value).toEqual(["test", "first"]);
 
     try {
       await generator.next();

@@ -68,14 +68,20 @@ const postTypeHandler = ({
     let isHandled = false;
     let isMismatched = false;
 
-    const promises = finalEndpoints.map((endpoint) =>
+    const promisesAndEndpoints: [
+      string,
+      Promise<Response>
+    ][] = finalEndpoints.map((endpoint) => [
+      endpoint,
       libraries.source.api.get({
         endpoint,
         params: { slug, _embed: true, ...state.source.params },
-      })
-    );
+      }),
+    ]);
 
-    for await (const response of generateAsyncQueue(promises)) {
+    for await (const [endpoint, response] of generateAsyncQueue(
+      promisesAndEndpoints
+    )) {
       const populated = await libraries.source.populate({
         response,
         state,
@@ -90,7 +96,7 @@ const postTypeHandler = ({
         if (populated[0].link === route) {
           isHandled = true;
           isMismatched = false;
-          matchedEndpoint = populated[0].type;
+          matchedEndpoint = endpoint;
           break;
         } else {
           isMismatched = true;
