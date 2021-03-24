@@ -208,13 +208,6 @@ export interface Form {
    * The HTTP status code that might have been received from the WordPress REST API.
    */
   errorStatusCode?: number;
-
-  /**
-   * The validation errors that can be returned by the WordPress REST API.
-   */
-  errors: {
-    [K in keyof Fields]?: string;
-  };
 }
 
 /**
