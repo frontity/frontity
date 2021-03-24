@@ -2,6 +2,7 @@ import { Handler } from "../../../types";
 import capitalize from "./utils/capitalize";
 import { ServerError } from "@frontity/source";
 import { PostTypeData } from "@frontity/source/types/data";
+import generateAsyncQueue from "./utils/generate-async-queue";
 
 /**
  * The parameters for {@link postTypeHandler}.
@@ -67,21 +68,6 @@ const postTypeHandler = ({
     let isHandled = false;
     let isMismatched = false;
 
-    /**
-     * @param promises
-     */
-    // eslint-disable-next-line no-inner-declarations
-    async function* getData(promises: Promise<any>[]) {
-      const map = new Map(
-        promises.map((p, i) => [i, p.then((res) => [i, res])])
-      );
-      while (map.size) {
-        const [key, result] = await Promise.race(map.values());
-        yield result;
-        map.delete(key);
-      }
-    }
-
     const promises = finalEndpoints.map((endpoint) =>
       libraries.source.api.get({
         endpoint,
@@ -89,9 +75,7 @@ const postTypeHandler = ({
       })
     );
 
-    const data = getData(promises);
-
-    for await (const response of data) {
+    for await (const response of generateAsyncQueue(promises)) {
       const populated = await libraries.source.populate({
         response,
         state,
