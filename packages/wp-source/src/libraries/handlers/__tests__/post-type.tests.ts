@@ -86,10 +86,10 @@ describe("postType", () => {
   });
 });
 
-describe("post", () => {
+describe.only("post", () => {
   test("doesn't exist in source.post", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1]));
+    api.get = jest.fn().mockResolvedValue(mockResponse([post1]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
     expect(store.state.source).toMatchSnapshot();
@@ -127,7 +127,7 @@ describe("post", () => {
 
   test("works with query params (doesn't exist in source.post)", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1]));
+    api.get = jest.fn().mockResolvedValue(mockResponse([post1]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/?some=param");
     expect(store.state.source).toMatchSnapshot();
@@ -151,7 +151,7 @@ describe("post", () => {
 
   test("works with types embedded", async () => {
     // Mock Api responses
-    api.get = jest.fn().mockResolvedValueOnce(mockResponse([post1withType]));
+    api.get = jest.fn().mockResolvedValue(mockResponse([post1withType]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/");
     expect(postTypeHandler).toHaveBeenCalled();
@@ -164,7 +164,9 @@ describe("post", () => {
     // Mock Api responses
     api.get = jest
       .fn()
-      .mockResolvedValueOnce(mockResponse([post1]))
+      .mockResolvedValueOnce(mockResponse([post1])) // post
+      .mockResolvedValueOnce(mockResponse([])) // page
+      .mockResolvedValueOnce(mockResponse([])) // media
       .mockResolvedValueOnce(mockResponse([post1Revision]));
     // Fetch entities
     await store.actions.source.fetch("/post-1/?preview=true");
@@ -195,6 +197,8 @@ describe("post", () => {
     api.get = jest
       .fn()
       .mockResolvedValueOnce(mockResponse([post1]))
+      .mockResolvedValueOnce(mockResponse([]))
+      .mockResolvedValueOnce(mockResponse([]))
       .mockRejectedValueOnce(new ServerError("Forbidden", 403, "Forbidden"));
     // Fetch entities
     await store.actions.source.fetch("/post-1/?preview=true");
@@ -206,10 +210,12 @@ describe("post", () => {
     api.get = jest
       .fn()
       .mockResolvedValueOnce(mockResponse([post1]))
+      .mockResolvedValueOnce(mockResponse([]))
+      .mockResolvedValueOnce(mockResponse([]))
       .mockRejectedValueOnce(new ServerError("Forbidden", 403, "Forbidden"));
     // Fetch entities
     await store.actions.source.fetch("/post-1/?preview=true");
-    expect(api.get).toHaveBeenCalledTimes(1);
+    expect(api.get).toHaveBeenCalledTimes(3); // one time each for post, page & media
     expect(store.state.source).toMatchSnapshot();
   });
 });
