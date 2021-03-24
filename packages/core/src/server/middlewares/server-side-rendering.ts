@@ -87,7 +87,7 @@ export const serverSideRendering = async (
     // Run afterSSR actions. It runs at this point because we want to run it
     // before taking the state snapshot. This gives the user a chance to
     // modify the state before sending it to the client
-    runAfterSSRActions(store, ctx);
+    await runAfterSSRActions(store, ctx);
 
     // Add mutations to our scripts.
     output.scripts.push(
