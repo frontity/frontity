@@ -1,4 +1,4 @@
-exports[`Head Tags - WP SEO 0.13 > Post > should render the correct canonical link #0`] = `
+exports[`Head Tags - WP SEO > Post > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -6,7 +6,7 @@ exports[`Head Tags - WP SEO 0.13 > Post > should render the correct canonical li
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > Post > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > Post > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
@@ -14,7 +14,7 @@ exports[`Head Tags - WP SEO 0.13 > Post > should render a custom tag #0`] = `
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > Page > should render the correct canonical link #0`] = `
+exports[`Head Tags - WP SEO > Page > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -22,7 +22,7 @@ exports[`Head Tags - WP SEO 0.13 > Page > should render the correct canonical li
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > Page > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > Page > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
@@ -30,7 +30,7 @@ exports[`Head Tags - WP SEO 0.13 > Page > should render a custom tag #0`] = `
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > Category > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > Category > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
@@ -38,7 +38,7 @@ exports[`Head Tags - WP SEO 0.13 > Category > should render a custom tag #0`] = 
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > Tag > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > Tag > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
@@ -46,7 +46,7 @@ exports[`Head Tags - WP SEO 0.13 > Tag > should render a custom tag #0`] = `
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > Author > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > Author > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
@@ -54,7 +54,7 @@ exports[`Head Tags - WP SEO 0.13 > Author > should render a custom tag #0`] = `
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > Homepage > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > Homepage > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
@@ -62,7 +62,7 @@ exports[`Head Tags - WP SEO 0.13 > Homepage > should render a custom tag #0`] = 
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > CPT > should render the correct canonical link #0`] = `
+exports[`Head Tags - WP SEO > CPT > should render the correct canonical link #0`] = `
 <link
   data-rh="true"
   rel="canonical"
@@ -70,7 +70,7 @@ exports[`Head Tags - WP SEO 0.13 > CPT > should render the correct canonical lin
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > CPT > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > CPT > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
@@ -78,7 +78,7 @@ exports[`Head Tags - WP SEO 0.13 > CPT > should render a custom tag #0`] = `
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > CPT (archive) > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > CPT (archive) > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
@@ -86,7 +86,7 @@ exports[`Head Tags - WP SEO 0.13 > CPT (archive) > should render a custom tag #0
 />
 `;
 
-exports[`Head Tags - WP SEO 0.13 > Custom Taxonomy > should render a custom tag #0`] = `
+exports[`Head Tags - WP SEO > Custom Taxonomy > should render a custom tag #0`] = `
 <meta
   data-rh="true"
   name="custom-tag"
