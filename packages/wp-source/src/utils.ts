@@ -226,9 +226,6 @@ export const shouldBail = (
   link: string,
   redirection: Partial<RedirectionData>
 ): boolean => {
-  console.log("link", link);
-  console.log("redirection", redirection.location);
-
   const linkURL = new URL(link);
   const locationURL = new URL(redirection.location);
 
@@ -248,15 +245,9 @@ export const shouldBail = (
     if (key.startsWith("frontity_")) locationParams.delete(key);
   });
 
-  console.log(
-    linkPart === locationPart &&
-      linkParams === locationParams &&
-      !redirection.isExternal
-  );
-
   return (
     linkPart === locationPart &&
-    linkParams === locationParams &&
+    linkParams.toString() === locationParams.toString() &&
     !redirection.isExternal
   );
 };

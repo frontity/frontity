@@ -155,8 +155,8 @@ const actions: WpSource["actions"]["source"] = {
         const redirection = await fetchRedirection({ link, state });
         // If there is a redirection, populate the data object and finish here.
         if (
-          !shouldBail(state.frontity.url + link, redirection) &&
-          redirection?.isRedirection
+          redirection?.isRedirection &&
+          !shouldBail(state.frontity.url + link, redirection)
         ) {
           batch(() => Object.assign(source.data[link], redirection));
           return;
