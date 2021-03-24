@@ -1,5 +1,17 @@
 # @frontity/comscore-analytics
 
+## 1.3.0
+
+### Minor Changes
+
+- [`52640dfc`](https://github.com/frontity/frontity/commit/52640dfcfa51a7845329645d8b38e4cdd852b1ea) [#737](https://github.com/frontity/frontity/pull/737) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Make the ComScore analytics package AMP-aware.
+
+### Patch Changes
+
+- Updated dependencies [[`4a179f5d`](https://github.com/frontity/frontity/commit/4a179f5d57cbb8c0008779e84db2b28b4017addf), [`52640dfc`](https://github.com/frontity/frontity/commit/52640dfcfa51a7845329645d8b38e4cdd852b1ea)]:
+  - frontity@1.14.3
+  - @frontity/analytics@1.4.0
+
 ## 1.2.1
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.4.1
+
+### Patch Changes
+
+- [`d25c49db`](https://github.com/frontity/frontity/commit/d25c49db326392d69e20d71634687201cfa6d59a) [#745](https://github.com/frontity/frontity/pull/745) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix a bug which caused infinite loop when visiting any link without the final trailing slash in the URL.
+
+- Updated dependencies [[`4a179f5d`](https://github.com/frontity/frontity/commit/4a179f5d57cbb8c0008779e84db2b28b4017addf)]:
+  - frontity@1.14.3
+
 ## 1.4.0
 
 ### Minor Changes

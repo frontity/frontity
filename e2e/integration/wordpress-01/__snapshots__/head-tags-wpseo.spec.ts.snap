@@ -1,0 +1,95 @@
+exports[`Head Tags - WP SEO > Post > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/hello-world/"
+/>
+`;
+
+exports[`Head Tags - WP SEO > Post > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;
+
+exports[`Head Tags - WP SEO > Page > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/sample-page/"
+/>
+`;
+
+exports[`Head Tags - WP SEO > Page > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;
+
+exports[`Head Tags - WP SEO > Category > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;
+
+exports[`Head Tags - WP SEO > Tag > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;
+
+exports[`Head Tags - WP SEO > Author > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;
+
+exports[`Head Tags - WP SEO > Homepage > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;
+
+exports[`Head Tags - WP SEO > CPT > should render the correct canonical link #0`] = `
+<link
+  data-rh="true"
+  rel="canonical"
+  href="http://my.frontity.site/movie/the-terminator/"
+/>
+`;
+
+exports[`Head Tags - WP SEO > CPT > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;
+
+exports[`Head Tags - WP SEO > CPT (archive) > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;
+
+exports[`Head Tags - WP SEO > Custom Taxonomy > should render a custom tag #0`] = `
+<meta
+  data-rh="true"
+  name="custom-tag"
+  content="A custom meta tag for testing purposes."
+/>
+`;

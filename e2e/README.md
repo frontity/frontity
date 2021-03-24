@@ -113,9 +113,27 @@ The `node e2e.js` script is a CLI that supports multiple arguments for running t
 
 The defaults correspond to the most common configuration when working locally, so running just `node e2e.js` will be enough to start working locally most of the time.
 
-### `--wp-version`: string
+## Running the tests in BrowserStack
 
-The WordPress version that will be used in the Docker container. For example, `--wp-version 5.5`.
+BrowserStack can be used to run the tests in the cloud. If you want to do that, create a `.env` file with your BrowserStack username and access key, and then use `node e2e.js --cypress browserstack` to start.
+
+By default, it will run the tests in the latest versions of Chrome, Firefox and Edge in Windows 10.
+
+You can create your own `browserstack.json` file and use `--browserstack-config my-browserstack.json` to use it.
+
+By default it will run BrowserStack Local with "Cypress-Local" as the local identifier, but you can turn it off by using `--browserstack-local off`.
+
+### `--wp`: string
+
+The WordPress version that will be used in the Docker container. For example, `--wp 5.5`.
+
+You can use `off` to prevent WordPress from running.
+
+WordPress won't load in these situations:
+
+- `--wp` is `off`.
+- `--cypress` is `browserstack`.
+- `--suite` is not `all` or it doesn't start with `wordpress`.
 
 Default: `latest`
 
@@ -131,9 +149,11 @@ The Frontity `target` that will be used.
 
 Default: `both`
 
-### `--cypress`: "open" | "run" | "off"
+### `--cypress`: "open" | "run" | "browserstack" | "off"
 
-Whether to run Cypress or not, and if it does, whether to run it in "open" mode or "run" mode.
+Whether to run Cypress or not, and if it does, whether to run it in "open" mode, "run" mode, or on the BrowserStack cloud.
+
+_The BrowserStack cloud requires the setup of a `.env` file with the username and access key. Please check the `.env-example` file._
 
 Default: `open`
 
@@ -164,4 +184,34 @@ The tests spec to run. This should be the file name spec. For example if you wan
 node e2e.js --spec script
 ```
 
+_It doesn't affect if Cypress is run in `"open"` mode._
+
 Default: `null`.
+
+### `--browserstack-config`: string
+
+The BrowserStack configuration file. For example:
+
+```sh
+node e2e.js --browserstack-config browserstack.custom.json
+```
+
+Default: `browserstack.json`.
+
+### `--browserstack-local`: string
+
+The local identifier of the BrowserStack Local connection.
+
+BrowserStack Local only runs if `--cypress` is `browserstack`. For example:
+
+```sh
+node e2e.js --cypress browserstack --browserstack-local MyLocalMachine
+```
+
+If you don't want to start BrowserStack Local, use:
+
+```sh
+node e2e.js --cypress browserstack --browserstack-local off
+```
+
+Default: `Cypress-Local`.
