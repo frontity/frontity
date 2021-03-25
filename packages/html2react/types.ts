@@ -28,6 +28,11 @@ interface Html2React extends Package {
        * Convert an HTML string into React elements (see {@link Component}).
        */
       Component: Component;
+
+      /**
+       * Function that returns a JSON structure from an HTML string.
+       */
+      parse: (html: string) => Node[];
     };
   };
 }

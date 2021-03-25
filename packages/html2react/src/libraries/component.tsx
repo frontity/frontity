@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect, error, warn } from "frontity";
 import { Connect, State } from "frontity/types";
-import parse from "./parse";
 import Html2ReactPackage, {
   ComponentProps,
   Processor,
@@ -310,7 +309,7 @@ export const Html2React: React.FC<
    */
   if (!processors) libraries.html2react.processors = sorted;
 
-  const root = parse(html);
+  const root = libraries.html2react.parse(html);
 
   return handleNodes({
     nodes: root,
