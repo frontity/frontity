@@ -5,8 +5,8 @@ result in your issue being closed.
 
 <!--
 Please make sure you're familiar with and follow the instructions in the
-contributing guidelines found in the
-https://docs.frontity.org/contributing/code-contributions.
+contributing guidelines found here: 
+https://docs.frontity.org/contributing/code-contribution-guide
 -->
 
 <!--
