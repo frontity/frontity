@@ -372,7 +372,9 @@ describe("Redirections", () => {
     task("runCommand", { command: "npx forever stopall" });
   });
 
-  it.only("Should handle self-redirections gracefully", () => {
+  it.only("Should handle self-redirections gracefully when redirections=404", () => {
+    // For this test we explicitly DO NOT create a post for /self-redirect-404/
+    // so that this request triggers a 404
     cy.visit(
       "http://localhost:3001/self-redirect-404/?frontity_name=redirections&redirections=404",
       { failOnStatusCode: false }
@@ -380,5 +382,34 @@ describe("Redirections", () => {
 
     cy.get("#404").should("exist");
     cy.get("#link-counter").should("contain.text", "1");
+  });
+
+  it.only("Should handle self-redirections gracefully when redirections=all", () => {
+    cy.visit(
+      "http://localhost:3001/self-redirect-all/?frontity_name=redirections&redirections=all"
+    );
+
+    cy.get("#post").should("exist");
+    cy.get("#link-counter").should("contain.text", "1");
+  });
+
+  it.only('Should just redirect if the path is "the same" but the host is external (redirection is external)', () => {
+    cy.visit(
+      "http://localhost:3001/external-self-redirect/?frontity_name=redirections&redirections=all",
+      { failOnStatusCode: false }
+    );
+
+    // We are testing against an external domain but the example.com domain is
+    // provided by IANA https://www.iana.org/domains/reserved so it should
+    // remain there for as long as the internet exists :)
+    //
+    // Testing against a local proxy in this example is not viable becuse we'd
+    // end up in an infinite loop again
+    cy.location("href").should(
+      "eq",
+      "https://example.com/external-self-redirect/"
+    );
+
+    cy.get("h1").should("contain.text", "Example Domain");
   });
 });
