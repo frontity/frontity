@@ -372,7 +372,7 @@ describe("Redirections", () => {
     task("runCommand", { command: "npx forever stopall" });
   });
 
-  it.only("Should handle self-redirections gracefully when redirections=404", () => {
+  it("Should handle self-redirections gracefully when redirections=404", () => {
     // For this test we explicitly DO NOT create a post for /self-redirect-404/
     // so that this request triggers a 404
     cy.visit(
@@ -384,7 +384,7 @@ describe("Redirections", () => {
     cy.get("#link-counter").should("contain.text", "1");
   });
 
-  it.only("Should handle self-redirections gracefully when redirections=all", () => {
+  it("Should handle self-redirections gracefully when redirections=all", () => {
     cy.visit(
       "http://localhost:3001/self-redirect-all/?frontity_name=redirections&redirections=all"
     );
@@ -393,7 +393,7 @@ describe("Redirections", () => {
     cy.get("#link-counter").should("contain.text", "1");
   });
 
-  it.only('Should just redirect if the path is "the same" but the host is external (redirection is external)', () => {
+  it('Should just redirect if the path is "the same" but the host is external (redirection is external)', () => {
     cy.visit(
       "http://localhost:3001/external-self-redirect/?frontity_name=redirections&redirections=all",
       { failOnStatusCode: false }
