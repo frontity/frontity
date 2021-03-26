@@ -1,5 +1,18 @@
 # @frontity/analytics
 
+## 1.4.0
+
+### Minor Changes
+
+- [`52640dfc`](https://github.com/frontity/frontity/commit/52640dfcfa51a7845329645d8b38e4cdd852b1ea) [#737](https://github.com/frontity/frontity/pull/737) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Make the analytics library AMP-aware, rendering the
+  [`amp-analytics`](https://amp.dev/documentation/components/amp-analytics/)
+  script so it's included for the Frontity analytics packages.
+
+### Patch Changes
+
+- Updated dependencies [[`4a179f5d`](https://github.com/frontity/frontity/commit/4a179f5d57cbb8c0008779e84db2b28b4017addf)]:
+  - frontity@1.14.3
+
 ## 1.3.1
 
 ### Patch Changes
@@ -70,6 +83,14 @@
   - frontity@1.9.0
   - @frontity/source@1.2.2
   - @frontity/router@1.1.1
+
+## 1.1.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/source@1.2.2-infinite-scroll-beta.0
 
 ## 1.1.0
 

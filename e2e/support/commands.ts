@@ -1,4 +1,5 @@
 /* eslint-disable jest/valid-expect,jest/no-standalone-expect */
+import amphtmlValidator, { Validator } from "amphtml-validator";
 require("cypress-plugin-snapshots/commands");
 
 /**
@@ -77,6 +78,26 @@ const parseHTML = (body: Cypress.Response["body"]): Document => {
     ".iframes-container iframe"
   );
 
+  // Apply the root(html) attributes as well
+  const iframeRoot = iframe.contentDocument.querySelector("html");
+  const iframeRootAttributes = iframeRoot.getAttributeNames();
+  const docRoot = doc.querySelector("html");
+  const docRootAttributes = docRoot.getAttributeNames();
+
+  // Remove old attributes first.
+  if (iframeRootAttributes.length) {
+    iframeRootAttributes.forEach((name) => {
+      iframeRoot.removeAttribute(name);
+    });
+  }
+
+  // Apply the new incoming attributes.
+  if (docRootAttributes.length) {
+    docRootAttributes.forEach((name) => {
+      iframeRoot.setAttribute(name, docRoot.getAttribute(name));
+    });
+  }
+
   apendChildrenTo(Array.from(doc.head.childNodes), iframe.contentDocument.head);
   apendChildrenTo(Array.from(doc.body.childNodes), iframe.contentDocument.body);
 
@@ -90,5 +111,44 @@ Cypress.Commands.add(
   "visitSSR",
   (url: string): Cypress.Chainable<Document> => {
     return cy.request(url).then((response) => parseHTML(response.body));
+  }
+);
+
+/**
+ *  Get the HTML from a link with cy.request() and validate it using amphtml-validator.
+ *
+ * @param validator - Instance of amphtmlValidator.getInstance().
+ * @param response - Instance of Cypress.Response as returned by cy.request().
+ *
+ * @returns A Result object containing validation result and the errors.
+ */
+const validateAMP = (validator: Validator, response: Cypress.Response) => {
+  const result = { ...validator.validateString(response.body), msg: "" };
+
+  result.errors.forEach((error) => {
+    const msg = `line ${error.line}, col ${error.col}: ${error.message}`;
+    if (error.specUrl !== null) {
+      result.msg += `${msg} (see ${error.specUrl})`;
+    }
+    result.msg += "\n\n";
+  });
+
+  if (result.msg !== "") throw new Error(result.msg);
+
+  return result;
+};
+
+Cypress.Commands.add(
+  "validateAMP",
+  (url: string): Cypress.Chainable => {
+    return cy.request("GET", url).then((response) => {
+      return cy
+        .wrap(amphtmlValidator.getInstance())
+        .then((validator: Validator) => {
+          const result = validateAMP(validator, response);
+
+          cy.wrap(result.status).should("equal", "PASS");
+        });
+    });
   }
 );

@@ -1,4 +1,5 @@
-import { Package, Action, MergePackages } from "frontity/types";
+import { Package, Action, MergePackages, Frontity } from "frontity/types";
+import Html2React from "@frontity/html2react/types";
 import Source from "@frontity/source/types";
 
 /**
@@ -26,6 +27,25 @@ interface AMP extends Package {
        * framework.
        */
       init: Action<Packages>;
+
+      /**
+       * An internal action that defines a custom render and template.
+       *
+       * @remarks
+       * This action is not meant to be run by the user, but by the Frontity
+       * framework.
+       */
+      beforeSSR?: Action<Packages>;
+
+      /**
+       * An internal action that defines a new App component to hydrate the
+       * css cache.
+       *
+       * @remarks
+       * This action is not meant to be run by the user, but by the Frontity
+       * framework.
+       */
+      beforeCSR?: Action<Packages>;
     };
   };
 }
@@ -33,6 +53,6 @@ interface AMP extends Package {
 /**
  * Packages used internally by the AMP package.
  */
-export type Packages = MergePackages<AMP, Source>;
+export type Packages = MergePackages<AMP, Source, Html2React, Frontity>;
 
 export default AMP;

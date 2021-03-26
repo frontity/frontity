@@ -130,6 +130,20 @@ const settings: Settings<
     packages: ["e2e-slot-and-fill"],
   },
   {
+    name: "use-infinite-scroll",
+    packages: [
+      "e2e-use-infinite-scroll",
+      {
+        name: "@frontity/tiny-router",
+        state: { router: { autoFetch: false } },
+      },
+      {
+        name: "@frontity/wp-source",
+        state: { source: { api: "https://domain.com/wp-json" } },
+      },
+    ],
+  },
+  {
     name: "analytics",
     packages: ["e2e-analytics", "@frontity/tiny-router", "@frontity/analytics"],
   },
@@ -441,6 +455,37 @@ const settings: Settings<
   {
     name: "custom-render",
     packages: ["e2e-custom-render"],
+  },
+  {
+    name: "amp",
+    packages: ["@frontity/amp", "e2e-static-theme"],
+  },
+  {
+    name: "amp-wordpress",
+    packages: [
+      "@frontity/amp",
+      "e2e-amp",
+      "@frontity/html2react",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "http://localhost:8080/" } },
+      },
+    ],
+  },
+  {
+    name: "amp-comscore-analytics",
+    packages: [
+      "@frontity/amp",
+      {
+        name: "@frontity/comscore-analytics",
+        state: {
+          comscoreAnalytics: {
+            trackingIds: ["111111", "222222"],
+          },
+        },
+      },
+    ],
   },
 ];
 

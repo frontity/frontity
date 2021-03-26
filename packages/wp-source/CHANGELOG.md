@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.11.2
+
+### Patch Changes
+
+- [`7e701d57`](https://github.com/frontity/frontity/commit/7e701d577c916e675557d0d93413176bb96166d7) [#717](https://github.com/frontity/frontity/pull/717) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Update the value of `link` in actions.fetch if there's an internal redirection.
+
+* [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Fix an array check by using `Array.isArray` instead of `instanceof Array`.
+
+- [`804f19fe`](https://github.com/frontity/frontity/commit/804f19fe323d7555172a9eef0f81681e0d2d11cd) [#686](https://github.com/frontity/frontity/pull/686) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Change how `libraries.source.normalize|parse|stringify` used inside of actions.source.fetch(). From now on, they are not imported from their module but received from the `libraries` parameter of `actions.source.fetch`.
+
+- Updated dependencies [[`7c3f0769`](https://github.com/frontity/frontity/commit/7c3f076999d243de4f7dee631f40d2e71d47337d), [`49020718`](https://github.com/frontity/frontity/commit/49020718c569de081391c114a5684d092fd9769d), [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3), [`7992fb85`](https://github.com/frontity/frontity/commit/7992fb854ec563b0781f375ebcdd2d83f5a6a562)]:
+  - frontity@1.14.2
+
 ## 1.11.1
 
 ### Patch Changes
@@ -45,6 +58,12 @@
 - Updated dependencies [[`a5520f56`](https://github.com/frontity/frontity/commit/a5520f5605cfda2323e0c9ea4a553658a021fd15), [`01880c34`](https://github.com/frontity/frontity/commit/01880c34c111f55c23169adb7365ea9262e6cca8), [`3ced7fdf`](https://github.com/frontity/frontity/commit/3ced7fdfd93004c210bb47692ffae265874828e7), [`898cde32`](https://github.com/frontity/frontity/commit/898cde32b78992807fa0c7ffb76cd32c5545a6ad), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433), [`09f07484`](https://github.com/frontity/frontity/commit/09f07484c920e99d46290986d7a64b8f3c20e53c), [`e4221d4b`](https://github.com/frontity/frontity/commit/e4221d4b451268b5c951197a08b4021d50394c1b), [`9346f560`](https://github.com/frontity/frontity/commit/9346f560c4806483b914aa3fb7a37e373f48f712), [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433), [`c5b0b8f7`](https://github.com/frontity/frontity/commit/c5b0b8f7e5ebfdf02f40ded7d7347a1d28039c2d), [`4f4b7f81`](https://github.com/frontity/frontity/commit/4f4b7f81d8eacb19e3d06eba72dcc199f556d7e4)]:
   - frontity@1.14.0
   - @frontity/source@1.5.0
+
+## 1.10.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Release a new beta version in the infinite scroll tag.
 
 ## 1.10.0
 
@@ -118,6 +137,12 @@
 
 - [`b8d187b3`](https://github.com/frontity/frontity/commit/b8d187b3e8b8893f604727b66f88acef6e846a0c) [#571](https://github.com/frontity/frontity/pull/571) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Revert a change introduced in https://github.com/frontity/frontity/pull/542. Keep setting `query`, `link` and `route` on all entities (including non-URL entities) in source.data
 
+## 1.8.4-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Release stable changes on the beta branch.
+
 ## 1.8.3
 
 ### Patch Changes
@@ -137,6 +162,12 @@
 
 - Updated dependencies [[`10a3a977`](https://github.com/frontity/frontity/commit/10a3a9779b594e39618b4cd24d5f48f42ecc54af)]:
   - frontity@1.11.1
+
+## 1.8.2-infinite-scroll-beta.0
+
+### Patch Changes
+
+- [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Fix an array check by using `Array.isArray` instead of `instanceof Array`.
 
 ## 1.8.1
 
@@ -160,6 +191,14 @@
 - Updated dependencies [[`ba13f70a`](https://github.com/frontity/frontity/commit/ba13f70ae2a4360ca21c77aed1c920c02e9d45b8), [`62fce1e5`](https://github.com/frontity/frontity/commit/62fce1e5c117faeb5902dc0ddae3b13d95cd925b), [`3f61f711`](https://github.com/frontity/frontity/commit/3f61f71197d33b478427d1b74882c31258861e92)]:
   - frontity@1.9.0
   - @frontity/source@1.2.2
+
+## 1.7.2-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/source@1.2.2-infinite-scroll-beta.0
 
 ## 1.7.1
 

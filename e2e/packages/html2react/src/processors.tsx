@@ -1,12 +1,8 @@
-import * as React from "react";
 import { css } from "frontity";
-import { Processor, Node } from "@frontity/html2react/types";
+import { Processor, Node, Element } from "@frontity/html2react/types";
 import Html2ReactTests from "../types";
 
-export const testProcessor: Processor<
-  React.HTMLProps<HTMLParagraphElement>,
-  Html2ReactTests
-> = {
+export const testProcessor: Processor<Element, Html2ReactTests> = {
   test: ({ node }) => node.type === "element" && node.component === "p",
   processor: ({ node, state }) => {
     if (node.type === "element") {

@@ -49,6 +49,8 @@ const createPredefinedContext = ({
           render: render || jest.fn().mockReturnValue("render()"),
           template: template || jest.fn().mockReturnValue("template()"),
           App: App || `<App />`,
+          head: [],
+          scripts: [],
         },
       },
     },

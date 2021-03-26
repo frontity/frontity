@@ -1,6 +1,6 @@
 import { Package, State } from "frontity/types";
 import * as React from "react";
-import { SerializedStyles } from "@emotion/core";
+import { SerializedStyles } from "@emotion/react";
 
 /**
  * HTML to React converter for Frontity.
