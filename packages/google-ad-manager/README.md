@@ -26,7 +26,7 @@ The recommended usage of this component is using the Slot and Fill pattern. The 
 
 However, the Ad component is exposed in libraries and so you can get the `GooglePublisherTag` component from libraries and render it in any place.
 
-> More information about how to use the google-ad-manager package can be found in the [docs](https://api.frontity.org/frontity-packages/features-packages/google-ad-manager.md).
+> More information about how to use the google-ad-manager package can be found in the [docs](https://api.frontity.org/frontity-packages/features-packages/google-ad-manager).
 
 ---
 
