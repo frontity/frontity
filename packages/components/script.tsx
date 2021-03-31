@@ -47,7 +47,7 @@ interface ScriptProps {
  * - `src`: Specifies the URI of an external script.
  * - `code`: Script code in string format (overrides the `src` prop).
  * - `id`: The `id` attribute of any HTML element.
- * - `props`: Any other `prop` passed to the Script will be added to the script.
+ * - `props`: Any other `prop` passed to the Script will be added to the internal <script> tag.
  *
  * @returns React element.
  */
@@ -65,7 +65,7 @@ const Script: React.FC<ScriptProps> = ({ src, code, id, ...props }) => {
       // Add the ID if specified.
       if (id) script.id = id;
 
-      // Add any other props to the.
+      // Add any other props to the internal <script> tag.
       for (let key of Object.keys(props)) {
         script[key] = props[key];
       }
