@@ -47,10 +47,11 @@ interface ScriptProps {
  * - `src`: Specifies the URI of an external script.
  * - `code`: Script code in string format (overrides the `src` prop).
  * - `id`: The `id` attribute of any HTML element.
+ * - `props`: Any other `prop` passed to the Script will be added to the script.
  *
  * @returns React element.
  */
-const Script: React.FC<ScriptProps> = ({ src, code, id }) => {
+const Script: React.FC<ScriptProps> = ({ src, code, id, ...props }) => {
   useEffect(() => {
     if (code) {
       // Just evaluate the code if passed.
@@ -63,6 +64,11 @@ const Script: React.FC<ScriptProps> = ({ src, code, id }) => {
 
       // Add the ID if specified.
       if (id) script.id = id;
+
+      // Add any other props to the.
+      for (let key of Object.keys(props)) {
+        script[key] = props[key];
+      }
 
       // Append the script at the end of `<body>`.
       window.document.body.appendChild(script);
