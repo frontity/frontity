@@ -132,6 +132,33 @@ describe.each`
               }
           `);
     });
+
+    it(`${platform}: Should skip the redirection for 'all' in embedded mode`, async () => {
+      store.state.frontity.options = store.state.frontity.options || {};
+      store.state.frontity.options.embedded = "true";
+      store.state.source.redirections = "all";
+
+      await store.actions.source.fetch("/some-post/");
+
+      expect(mockedFetch).toHaveBeenCalledTimes(0);
+      expect(handler.func).toHaveBeenCalled();
+
+      expect(store.state.source.data).toMatchInlineSnapshot(`
+              Object {
+                "/some-post/": Object {
+                  "id": 1,
+                  "isFetching": false,
+                  "isPostType": true,
+                  "isReady": true,
+                  "link": "/some-post/",
+                  "page": 1,
+                  "query": Object {},
+                  "route": "/some-post/",
+                  "type": "example",
+                },
+              }
+          `);
+    });
   });
 
   describe("redirections: 404", () => {

@@ -23,7 +23,7 @@ const actions: WpSource["actions"]["source"] = {
     const [resource, options] = params;
     const { source } = state;
     // `embedded` flag.
-    const isEmbedded = state.frontity.options.embedded;
+    const isEmbedded = state.frontity?.options?.embedded || false;
 
     // Get the normalize and parse from libraries instead of importing them.
     // This way they can be e.g. overriden at runtime by another package
