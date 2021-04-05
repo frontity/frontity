@@ -1,4 +1,4 @@
-import { Package } from "frontity/types";
+import { MergePackages, Package } from "frontity/types";
 import Router from "@frontity/router/types";
 import Source from "@frontity/source/types";
 

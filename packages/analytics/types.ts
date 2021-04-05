@@ -3,6 +3,20 @@ import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
 
 /**
+ * Include `amp-analytics` to the `JSX.IntrinsicElements` interface.
+ */
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    /** JSX Intrinsic Elements. */
+    interface IntrinsicElements {
+      /** The `amp-analytics` element. */
+      "amp-analytics": any;
+    }
+  }
+}
+
+/**
  * Pageview payload passed to analytics `pageview` actions.
  */
 export interface Pageview {

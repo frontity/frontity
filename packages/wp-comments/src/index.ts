@@ -154,7 +154,6 @@ const wpComments: WpComments = {
         form.errorCode = "";
         form.isSubmitting = true;
         form.isSubmitted = false;
-        form.errors = {};
         form.errorStatusCode = null;
 
         const body = new URLSearchParams();
@@ -280,7 +279,6 @@ const wpComments: WpComments = {
             isSubmitting: false,
             isSubmitted: false,
             isError: false,
-            errors: {},
             errorMessage: "",
             errorCode: "",
             errorStatusCode: null,

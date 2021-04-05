@@ -60,7 +60,7 @@ But in WordPress 4.7 the [**WP API**](https://developer.wordpress.org/rest-api/)
 
 > _An API is a protocol to retrieve content from an external service._
 
-Thanks to the **WP API**, developers are not longer limited to the **PHP rendering engine**. They can retrieve their WordPress content and use it wherever they want. A new world of possibilities started.
+Thanks to the **WP API**, developers are no longer limited to the **PHP rendering engine**. They can retrieve their WordPress content and use it wherever they want. A new world of possibilities started.
 
 One of those possibilities is to create WordPress themes using React. That's where **Frontity** comes into play.
 

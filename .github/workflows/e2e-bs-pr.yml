@@ -1,0 +1,52 @@
+name: e2e browserstack
+
+on: [pull_request]
+
+jobs:
+  e2e-browserstack:
+    runs-on: ubuntu-16.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies (root)
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Install dependencies (e2e)
+        run: cd e2e && npm ci
+        env:
+          CI: true
+
+      - name: BrowserStack Env Setup
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          build-name: "Latest Browsers - PR #${{ github.event.number}}"
+
+      - name: Start BrowserStackLocal
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: start
+          local-identifier: Cypress-GH-PR-${{ github.sha }}
+
+      - name: Start Frontity and run tests
+        run: cd e2e && node e2e.js --cypress browserstack --browserstack-local off
+        env:
+          BROWSERSTACK_LOCAL_IDENTIFIER: Cypress-GH-PR-${{ github.sha }}
+
+      - name: Stop BrowserStackLocal
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: stop

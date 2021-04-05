@@ -1,5 +1,26 @@
 # Change Log
 
+## 2.2.0
+
+### Minor Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo) and [@DAreRodz](https://github.com/DAreRodz) for the amazing work! - Implements the brand new and long-awaited infinite scroll hooks collection, featuring `useArchiveInfiniteScroll`, `usePostTypeInfiniteScroll` and `useInfiniteScroll`. [Feature Discussion](https://community.frontity.org/t/infinite-scroll-hooks/2055)
+
+* [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Adds `isError` boolean to infinite scroll hooks will be `true` when either the last post or the last page has failed to fetch.
+
+### Patch Changes
+
+- [`9bdf948b`](https://github.com/frontity/frontity/commit/9bdf948bda7e5352762ccf220ecb1f41c911d6dc) [#476](https://github.com/frontity/frontity/pull/476) Thanks [@orballo](https://github.com/orballo)! - Fixes a bug on the `usePostTypeInfiniteScroll` where the archive is not requested if we are loading the post type from SSR.
+
+* [`c702ab9f`](https://github.com/frontity/frontity/commit/c702ab9f350d9a1b217b5f51e9469f3e5c92b53e) [#575](https://github.com/frontity/frontity/pull/575) Thanks [@orballo](https://github.com/orballo)! - Use `state.source.subdirectory` and `state.source.postsPage` to get the link of the post archive in `usePostTypeInfiniteScroll`.
+
+- [`464aa87f`](https://github.com/frontity/frontity/commit/464aa87f49e57f493bb1b2725f0c8e0e4ce7d31d) [#575](https://github.com/frontity/frontity/pull/575) Thanks [@orballo](https://github.com/orballo)! - Fix `isLast` value when last post returned `isError`.
+
+- Updated dependencies [[`7e701d57`](https://github.com/frontity/frontity/commit/7e701d577c916e675557d0d93413176bb96166d7), [`7c3f0769`](https://github.com/frontity/frontity/commit/7c3f076999d243de4f7dee631f40d2e71d47337d), [`49020718`](https://github.com/frontity/frontity/commit/49020718c569de081391c114a5684d092fd9769d), [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b), [`804f19fe`](https://github.com/frontity/frontity/commit/804f19fe323d7555172a9eef0f81681e0d2d11cd), [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b), [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3), [`7992fb85`](https://github.com/frontity/frontity/commit/7992fb854ec563b0781f375ebcdd2d83f5a6a562)]:
+  - @frontity/wp-source@1.11.2
+  - frontity@1.14.2
+  - @frontity/router@1.3.0
+
 ## 2.1.1
 
 ### Patch Changes
@@ -15,6 +36,46 @@
 ### Patch Changes
 
 - [`5f329dab`](https://github.com/frontity/frontity/commit/5f329dabe9d67d0b3664938865491674ef798433) [#655](https://github.com/frontity/frontity/pull/655) Thanks [@mburridge](https://github.com/mburridge)! - Fix broken links in README files.
+
+## 2.1.0-infinite-scroll-beta.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @frontity/wp-source@1.10.1-infinite-scroll-beta.0
+
+## 2.1.0-infinite-scroll-beta.3
+
+### Patch Changes
+
+- [`c702ab9f`](https://github.com/frontity/frontity/commit/c702ab9f350d9a1b217b5f51e9469f3e5c92b53e) [#575](https://github.com/frontity/frontity/pull/575) Thanks [@orballo](https://github.com/orballo)! - Use `state.source.subdirectory` and `state.source.postsPage` to get the link of the post archive in `usePostTypeInfiniteScroll`.
+
+* [`464aa87f`](https://github.com/frontity/frontity/commit/464aa87f49e57f493bb1b2725f0c8e0e4ce7d31d) [#575](https://github.com/frontity/frontity/pull/575) Thanks [@orballo](https://github.com/orballo)! - Fix `isLast` value when last post returned `isError`.
+
+## 2.1.0-infinite-scroll-beta.2
+
+### Minor Changes
+
+- [`32c03d58`](https://github.com/frontity/frontity/commit/32c03d58fd40889e98997a8715704b58c994c34b) [#533](https://github.com/frontity/frontity/pull/533) Thanks [@orballo](https://github.com/orballo)! - Adds `isError` boolean to infinite scroll hooks will be `true` when either the last post or the last page has failed to fetch.
+
+## 2.1.0-infinite-scroll-beta.1
+
+### Patch Changes
+
+- [`9bdf948b`](https://github.com/frontity/frontity/commit/9bdf948bda7e5352762ccf220ecb1f41c911d6dc) [#476](https://github.com/frontity/frontity/pull/476) Thanks [@orballo](https://github.com/orballo)! - Fixes a bug on the `usePostTypeInfiniteScroll` where the archive is not requested if we are loading the post type from SSR.
+
+## 2.1.0-infinite-scroll-beta.0
+
+### Minor Changes
+
+- [`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b) [#429](https://github.com/frontity/frontity/pull/429) Thanks [@orballo](https://github.com/orballo)! - Implements the brand new and long-awaited infinite scroll hooks collection, featuring `useArchiveInfiniteScroll`, `usePostTypeInfiniteScroll` and `useInfiniteScroll`.
+
+### Patch Changes
+
+- Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b)]:
+  - @frontity/router@1.2.0-infinite-scroll-beta.0
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/source@1.2.2-infinite-scroll-beta.0
 
 ## 2.0.2
 

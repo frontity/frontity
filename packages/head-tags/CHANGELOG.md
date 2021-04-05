@@ -76,6 +76,15 @@
   - @frontity/source@1.2.2
   - @frontity/router@1.1.1
 
+## 1.0.4-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`31102365`](https://github.com/frontity/frontity/commit/311023655594f7bb6f8bc1332e79ecc333e0571b)]:
+  - @frontity/router@1.2.0-infinite-scroll-beta.0
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/source@1.2.2-infinite-scroll-beta.0
+
 ## 1.0.3
 
 ### Patch Changes

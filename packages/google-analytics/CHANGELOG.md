@@ -1,5 +1,16 @@
 # @frontity/google-analytics
 
+## 2.0.0
+
+### Major Changes
+
+- [`879b4647`](https://github.com/frontity/frontity/commit/879b4647c2b8677a5392b8beff4e8c3bc9f54097) [#733](https://github.com/frontity/frontity/pull/733) Thanks [@cristianbote](https://github.com/cristianbote)! - Update @frontity/google-analytics to be compatible with GA4.
+
+### Patch Changes
+
+- Updated dependencies [[`7c3f0769`](https://github.com/frontity/frontity/commit/7c3f076999d243de4f7dee631f40d2e71d47337d), [`49020718`](https://github.com/frontity/frontity/commit/49020718c569de081391c114a5684d092fd9769d), [`15e8f1d8`](https://github.com/frontity/frontity/commit/15e8f1d8cf66394d20034370df171a0c19ad51d3), [`7992fb85`](https://github.com/frontity/frontity/commit/7992fb854ec563b0781f375ebcdd2d83f5a6a562)]:
+  - frontity@1.14.2
+
 ## 1.4.1
 
 ### Patch Changes
@@ -58,6 +69,14 @@
 - Updated dependencies [[`322d22ec`](https://github.com/frontity/frontity/commit/322d22ecb825d510296243736a79e4208023477f), [`f5bf7b1c`](https://github.com/frontity/frontity/commit/f5bf7b1cee2850445fe5304e1b39e20e786e9377), [`2fb73fc7`](https://github.com/frontity/frontity/commit/2fb73fc798653803a21f9e9bd7f21355f7675e55)]:
   - frontity@1.10.0
   - @frontity/analytics@1.2.0
+
+## 1.1.1-infinite-scroll-beta.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - frontity@1.8.1-infinite-scroll-beta.0
+  - @frontity/analytics@1.1.1-infinite-scroll-beta.0
 
 ## 1.1.0
 

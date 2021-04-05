@@ -1,13 +1,21 @@
 {
+  // This part is a copy of `../tsconfig.json`. We cannot use extends because
+  // this file is sent to BrowserStack, which doesn't have access to the root
+  // folder.
   "compilerOptions": {
-    "target": "es5",
+    "moduleResolution": "node",
     "module": "commonjs",
-    "lib": ["es2015", "dom"],
-    "types": ["cypress"],
-    "checkJs": true,
-    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "noEmit": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "allowJs": true,
+    // This part overwrites the root config.
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress"]
   },
-  "include": ["**/*.ts"]
+  "exclude": ["**/node_modules/*", "**/build/*"]
 }
