@@ -66,8 +66,23 @@ const Script: React.FC<ScriptProps> = ({ src, code, id, ...props }) => {
       if (id) script.id = id;
 
       // Add any other props to the internal <script> tag.
-      for (let key of Object.keys(props)) {
-        script[key] = props[key];
+      for (let key in props) {
+
+        const value = props[key];
+
+        // If this is an event handler, lowercase the key
+        if (/^on/g.test(key)) {
+          key = key.toLowerCase();
+        }
+
+        // If the current key exists in the `dom` interface
+        // we can assign the value.
+        if (key in script) {
+          script[key] = value;
+        } else if (typeof value !== 'function' && typeof value !== 'object') {
+          // Otherwise treat it as an attribute if this is not a function or an object.
+          script.setAttribute(key, value);
+        }
       }
 
       // Append the script at the end of `<body>`.
