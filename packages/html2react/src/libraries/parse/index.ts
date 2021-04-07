@@ -43,7 +43,7 @@ const adaptNode = (himalayaNode: HimalayaNode, parent?: Element): Node => {
           } else if (key === "style") {
             // Add inline styles to the component with `emotion`.
             props.css = css(value);
-          } else if (!/^on/.test(key)) {
+          } else if (!/^on/.test(key) && key !== "className") {
             const camelCaseKey =
               attributesMap[key.replace(/[-:]/, "").toLowerCase()];
             // Map keys with no value to `true` booleans.
