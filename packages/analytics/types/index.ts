@@ -1,7 +1,7 @@
 import { Package, Action, MergePackages } from "frontity/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
-export { AmpConfig } from "./amp";
+export * from "./amp";
 
 /**
  * Include `amp-analytics` to the `JSX.IntrinsicElements` interface.
