@@ -487,6 +487,25 @@ const settings: Settings<
       },
     ],
   },
+  {
+    name: "amp-google-tag-manager-analytics",
+    packages: [
+      "@frontity/amp",
+      {
+        name: "@frontity/google-tag-manager-analytics",
+        state: {
+          googleTagManagerAnalytics: {
+            containerIds: ["GTM-XXXXXX-X", "GTM-YYYYYY-Y"],
+            ampConfig: {
+              vars: {
+                someProp: "someValue",
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
