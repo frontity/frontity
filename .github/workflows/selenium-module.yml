@@ -35,7 +35,7 @@ jobs:
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: start
-          local-identifier: SeleniumModule-${{ github.sha }}
+          local-identifier: Selenium-Module-GH-Dev-${{ github.sha }}
 
       # The next steps are for building the web application to be tested and starting the web server on the runner environment
 

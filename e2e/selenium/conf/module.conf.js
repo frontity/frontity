@@ -14,7 +14,7 @@ exports.config = {
     "browserstack.video": false,
     "browserstack.local": true,
     "browserstack.localIdentifier":
-      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
+      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "Selenium-Module-Local",
   },
   capabilities: [
     //Safari - Bigger than 10.1

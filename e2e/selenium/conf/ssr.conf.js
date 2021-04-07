@@ -10,7 +10,7 @@ exports.config = {
   commonCapabilities: {
     "browserstack.local": true,
     "browserstack.localIdentifier":
-      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
+      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "Selenium-SSR-Local",
     "browserstack.video": false,
     build:
       "Selenium SSR Browsers - Dev: " +
