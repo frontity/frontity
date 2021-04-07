@@ -1,10 +1,27 @@
 import { Middleware, Next } from "koa";
-import { Context } from "@frontity/types";
+import { Context, Package } from "@frontity/types";
 import htmlescape from "htmlescape";
-import { getSnapshot } from "@frontity/connect";
+import { getSnapshot, InitializedStore } from "@frontity/connect";
 import { ChunkExtractor } from "@loadable/server";
 import { getBothScriptTags, hasEntryPoint } from "../utils/stats";
 import getHeadTags from "../utils/head";
+
+/**
+ * Helper to abstract the running of afterSSR actions.
+ *
+ * @param store - The Frontity state store.
+ * @param ctx - The Koa context.
+ */
+async function runAfterSSRActions(
+  store: InitializedStore<Package>,
+  ctx: Context
+) {
+  await Promise.all(
+    Object.values(store.actions).map(({ afterSSR }) => {
+      if (afterSSR) return afterSSR({ ctx });
+    })
+  );
+}
 
 /**
  * Defines the module stats for the current request.
@@ -67,6 +84,11 @@ export const serverSideRendering = async (
     // https://github.com/smooth-code/loadable-components/pull/239#issuecomment-482501467
     const customExtractor = extractor as Extractor;
 
+    // Run afterSSR actions. It runs at this point because we want to run it
+    // before taking the state snapshot. This gives the user a chance to
+    // modify the state before sending it to the client
+    await runAfterSSRActions(store, ctx);
+
     // Add mutations to our scripts.
     output.scripts.push(
       `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${htmlescape(
@@ -87,17 +109,12 @@ export const serverSideRendering = async (
   } else {
     // No client chunks: no scripts. Just do SSR. Use renderToStaticMarkup
     // because no hydratation will happen in the client.
+
+    // Run afterSSR actions.
+    await runAfterSSRActions(store, ctx);
+
     output.result = render({ App });
   }
-
-  // Run afterSSR actions. It runs at this point because we want to run it
-  // before taking the state snapshot. This gives the user a chance to
-  // modify the state before sending it to the client
-  await Promise.all(
-    Object.values(store.actions).map(({ afterSSR }) => {
-      if (afterSSR) return afterSSR({ ctx });
-    })
-  );
 
   // Get static head strings.
   const { head: helmetHead, ...rest } = getHeadTags(helmetContext.helmet);

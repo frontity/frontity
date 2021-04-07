@@ -15,6 +15,7 @@ import {
   is404Redirection,
   isEagerRedirection,
   fetchRedirection,
+  shouldBailRedirecting,
 } from "./utils";
 
 const actions: WpSource["actions"]["source"] = {
@@ -93,7 +94,10 @@ const actions: WpSource["actions"]["source"] = {
       if (isEagerRedirection(state.source.redirections, link)) {
         const redirection = await fetchRedirection({ link, state });
         // If there is a redirection, populate the data object and finish here.
-        if (redirection?.isRedirection) {
+        if (
+          redirection?.isRedirection &&
+          !shouldBailRedirecting(state.frontity.url + link, redirection)
+        ) {
           batch(() => Object.assign(source.data[link], redirection));
           return;
         }
@@ -153,7 +157,10 @@ const actions: WpSource["actions"]["source"] = {
       if (error.status === 404 && is404Redirection(state.source.redirections)) {
         const redirection = await fetchRedirection({ link, state });
         // If there is a redirection, populate the data object and finish here.
-        if (redirection?.isRedirection) {
+        if (
+          redirection?.isRedirection &&
+          !shouldBailRedirecting(state.frontity.url + link, redirection)
+        ) {
           batch(() => Object.assign(source.data[link], redirection));
           return;
         }
