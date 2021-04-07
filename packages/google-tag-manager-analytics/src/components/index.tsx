@@ -89,7 +89,12 @@ const GtmCodeAmp: React.FC<GtmCodeAmpProps> = connect(
       data-credentials="include"
     >
       {ampConfig && (
-        <script type="application/json">{JSON.stringify(ampConfig)}</script>
+        <script
+          type="application/json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(ampConfig),
+          }}
+        />
       )}
     </amp-analytics>
   )

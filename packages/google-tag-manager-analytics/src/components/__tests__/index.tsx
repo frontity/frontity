@@ -245,15 +245,47 @@ describe("GoogleTagManager (AMP)", () => {
         data-credentials="include"
       >
         <script
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "{\\"vars\\":{\\"someProp\\":\\"someValue\\"}}",
+            }
+          }
           type="application/json"
-        >
-          {"vars":{"someProp":"someValue"}}
-        </script>
+        />
       </amp-analytics>
     `);
   });
 
   test("works with multiple container ids", () => {
+    // Instantiate the Frontity state, adding two container IDs and mocking the
+    // `amp` package.
+    const state = getState();
+    state.amp = {};
+    state.googleTagManagerAnalytics.containerIds = [
+      "GTM-XXXXXXX",
+      "GTM-YYYYYYY",
+    ];
+
+    // Render the GTM's root component.
+    const { rendered } = renderGTM(state);
+
+    // Two `<amp-analytics>` tags should have been rendered, one for each given
+    // container ID.
+    expect(rendered).toMatchInlineSnapshot(`
+      Array [
+        <amp-analytics
+          config="https://www.googletagmanager.com/amp.json?id=GTM-XXXXXXX;Tag Manager.url=SOURCE_URL"
+          data-credentials="include"
+        />,
+        <amp-analytics
+          config="https://www.googletagmanager.com/amp.json?id=GTM-YYYYYYY;Tag Manager.url=SOURCE_URL"
+          data-credentials="include"
+        />,
+      ]
+    `);
+  });
+
+  test("works with multiple container ids and config", () => {
     // Instantiate the Frontity state, adding two container IDs, mocking the
     // `amp` package and adding a config object for the `amp-analytics` tags.
     const state = getState();
@@ -280,50 +312,27 @@ describe("GoogleTagManager (AMP)", () => {
           data-credentials="include"
         >
           <script
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "{\\"vars\\":{\\"someProp\\":\\"someValue\\"}}",
+              }
+            }
             type="application/json"
-          >
-            {"vars":{"someProp":"someValue"}}
-          </script>
+          />
         </amp-analytics>,
         <amp-analytics
           config="https://www.googletagmanager.com/amp.json?id=GTM-YYYYYYY;Tag Manager.url=SOURCE_URL"
           data-credentials="include"
         >
           <script
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "{\\"vars\\":{\\"someProp\\":\\"someValue\\"}}",
+              }
+            }
             type="application/json"
-          >
-            {"vars":{"someProp":"someValue"}}
-          </script>
+          />
         </amp-analytics>,
-      ]
-    `);
-  });
-
-  test("works with multiple container ids and config", () => {
-    // Instantiate the Frontity state, adding two container IDs and mocking the
-    // `amp` package.
-    const state = getState();
-    state.amp = {};
-    state.googleTagManagerAnalytics.containerIds = [
-      "GTM-XXXXXXX",
-      "GTM-YYYYYYY",
-    ];
-
-    // Render the GTM's root component.
-    const { rendered } = renderGTM(state);
-
-    // Two `<amp-analytics>` tags should have been rendered, one for each given
-    // container ID.
-    expect(rendered).toMatchInlineSnapshot(`
-      Array [
-        <amp-analytics
-          config="https://www.googletagmanager.com/amp.json?id=GTM-XXXXXXX;Tag Manager.url=SOURCE_URL"
-          data-credentials="include"
-        />,
-        <amp-analytics
-          config="https://www.googletagmanager.com/amp.json?id=GTM-YYYYYYY;Tag Manager.url=SOURCE_URL"
-          data-credentials="include"
-        />,
       ]
     `);
   });
