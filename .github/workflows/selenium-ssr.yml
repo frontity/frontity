@@ -1,8 +1,9 @@
 name: "BrowserStack Selenium SSR Tests"
+
 on:
-  push:
-    branches:
-      - selenium-tests
+  workflow_run:
+    workflows: ["e2e browserstack"]
+    types: [completed]
 
 jobs:
   selenium-job:
