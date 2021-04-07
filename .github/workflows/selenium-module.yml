@@ -2,8 +2,10 @@ name: "BrowserStack Selenium Module Tests"
 
 on:
   workflow_run:
-    workflows: ["e2e browserstack"]
-    types: [completed]
+    workflows: ["lighthouse"]
+    types:
+      - completed
+      - requested
 
 jobs:
   selenium-job:
@@ -12,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
 
       - name: Setup npm cache
         uses: actions/cache@v1
