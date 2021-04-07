@@ -13,9 +13,9 @@ exports.config = {
       process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "SeleniumLocalhost",
     "browserstack.video": false,
     build:
-      "Selenium-ssr- " +
+      "Selenium SSR Browsers - Dev: " +
       (process.env.BROWSERSTACK_BUILD_NAME ||
-        "localhost-" + new Date().toISOString()),
+        "Localhost " + new Date().toISOString()),
   },
   capabilities: [
     //Safari - Smaller than 9.1

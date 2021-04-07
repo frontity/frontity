@@ -12,9 +12,9 @@ exports.config = {
   maxInstances: 1,
   commonCapabilities: {
     build:
-      "Selenium-proxy- " +
+      "Selenium Module Browsers - Dev: " +
       (process.env.BROWSERSTACK_BUILD_NAME ||
-        "localhost-" + new Date().toISOString()),
+        "Localhost " + new Date().toISOString()),
     "browserstack.local": true,
     "browserstack.video": false,
     "browserstack.localIdentifier":
