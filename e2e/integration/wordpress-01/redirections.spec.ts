@@ -62,19 +62,6 @@ describe("Redirections", () => {
     cy.get("#link-counter").should("contain.text", "3");
   });
 
-  it("Should not redirect when navigating on the client in embedded mode", () => {
-    cy.visit(
-      "http://localhost:3001?frontity_name=redirections&frontity_embedded=true"
-    );
-
-    // Go to the "redirected" page.
-    cy.get("#open-post").click();
-
-    cy.location("href").should("eq", "http://localhost:3001/hello-world/");
-    cy.get("#post").should("not.exist");
-    cy.get("#link-counter").should("contain.text", "2");
-  });
-
   it("The back and forward button should work fine when navigating", () => {
     cy.visit("http://localhost:3001?frontity_name=redirections");
 
@@ -390,18 +377,6 @@ describe("Redirections", () => {
     // so that this request triggers a 404
     cy.visit(
       "http://localhost:3001/self-redirect-404/?frontity_name=redirections&redirections=404",
-      { failOnStatusCode: false }
-    );
-
-    cy.get("#404").should("exist");
-    cy.get("#link-counter").should("contain.text", "1");
-  });
-
-  it("Should handle self-redirections gracefully when redirections=404 in embedded mode", () => {
-    // For this test we explicitly DO NOT create a post for /self-redirect-404/
-    // so that this request triggers a 404
-    cy.visit(
-      "http://localhost:3001/self-redirect-404/?frontity_name=redirections&frontity_embedded=true&redirections=404",
       { failOnStatusCode: false }
     );
 
