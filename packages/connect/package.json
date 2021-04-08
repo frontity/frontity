@@ -23,8 +23,8 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "@risingstack/react-easy-state": "7.0.0-alpha.1",
-    "@nx-js/observer-util": "4.3.0-alpha.2",
+    "@frontity/react-easy-state": "7.0.0-beta.0",
+    "@frontity/observer-util": "4.3.0-beta.0",
     "@frontity/error": "^0.1.1",
     "@frontity/types": "^1.6.0"
   },
