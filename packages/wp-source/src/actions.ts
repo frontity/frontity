@@ -25,7 +25,7 @@ const actions: WpSource["actions"]["source"] = {
     // Should skip redirection for embedded mode on the server only.
     const shouldSkipRedirection =
       (state.frontity?.options?.embedded &&
-        state.frontity?.rendering === "ssr") ||
+        state.frontity?.platform === "server") ||
       false;
 
     // Get the normalize and parse from libraries instead of importing them.
