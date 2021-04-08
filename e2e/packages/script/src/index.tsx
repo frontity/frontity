@@ -41,6 +41,14 @@ const Component: React.FC = () => {
           });
         `}
       />
+      <Script
+        id="with-props"
+        randomProp="random"
+        otherRandomProp="otherRandom"
+        className="someClassName"
+        data-value="3"
+        src="https://unpkg.com/moment@2.24.0/min/moment.min.js"
+      />
       {isScriptActive && <Script code={"2 + 2"} />}
     </>
   );
