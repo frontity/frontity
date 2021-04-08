@@ -38,6 +38,16 @@ interface ScriptProps {
    * ```
    */
   id?: string;
+
+  /**
+   * Any other `prop`
+   *
+   * @example
+   * ```
+   * <Script className='className' data-value='3' />
+   * ```
+   */
+  [propName: string]: any;
 }
 
 /**
@@ -67,7 +77,6 @@ const Script: React.FC<ScriptProps> = ({ src, code, id, ...props }) => {
 
       // Add any other props to the internal <script> tag.
       for (let key in props) {
-
         const value = props[key];
 
         // If this is an event handler, lowercase the key
@@ -79,7 +88,7 @@ const Script: React.FC<ScriptProps> = ({ src, code, id, ...props }) => {
         // we can assign the value.
         if (key in script) {
           script[key] = value;
-        } else if (typeof value !== 'function' && typeof value !== 'object') {
+        } else if (typeof value !== "function" && typeof value !== "object") {
           // Otherwise treat it as an attribute if this is not a function or an object.
           script.setAttribute(key, value);
         }

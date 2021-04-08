@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Script should work with className 1`] = `null`;
+
+exports[`Script should work with data attributes 1`] = `null`;
+
+exports[`Script should work with onLoad prop 1`] = `null`;
+
+exports[`Script should work with some random prop 1`] = `null`;
