@@ -74,6 +74,10 @@ program
     "--public-path <path>",
     'set the public path for static assets. Default path is "/static/".'
   )
+  .option(
+    "--analyze",
+    'Create HTML files for bundle analyzing, available at "/build/analyze/"'
+  )
   .description("Builds the project for production.")
   .action(build);
 
