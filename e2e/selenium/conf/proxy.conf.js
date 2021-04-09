@@ -18,7 +18,7 @@ exports.config = {
     "browserstack.local": true,
     "browserstack.video": false,
     "browserstack.localIdentifier":
-      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "Selenium-Proxy-Local",
+      process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "Selenium-Local",
   },
   capabilities: [
     //Safari 10.1
