@@ -57,8 +57,6 @@ export const connect = (Comp, options) => {
        * and passes it to the Component.
        */
       class ConnectedComponent extends Component {
-        static contextType = context;
-
         /**
          * The render method of this React Class.
          *
@@ -70,6 +68,7 @@ export const connect = (Comp, options) => {
           return <Comp {...props} />;
         }
       }
+      ConnectedComponent.contextType = context;
       return view(ConnectedComponent);
     }
     return view(Comp);
