@@ -25,6 +25,12 @@ const defaultOptions = {
   injectProps: true,
 };
 
+/**
+ * Check if a React component is stateless or not.
+ *
+ * @param Comp - The component that can be stateless or not.
+ * @returns A boolean indicating whether the componnt is stateless.
+ */
 const isStateless = (Comp) =>
   !(Comp.prototype && Comp.prototype.isReactComponent);
 
@@ -75,6 +81,11 @@ export const connect = (Comp, options) => {
   }
 };
 
+/**
+ * React hook that returns the Frontity store in connected components.
+ *
+ * @returns The Frontity store (state, actions, libraries...).
+ */
 export const useConnect = () => {
   if (!isConnected)
     warn(
