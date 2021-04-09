@@ -33,7 +33,7 @@ exports.config = {
       os: "Windows",
       os_version: "10",
       browserName: "Chrome",
-      browser_version: "54.0",
+      browser_version: "60.0",
     },
     {
       os: "Windows",
@@ -43,7 +43,7 @@ exports.config = {
     },
     {
       os: "OS X",
-      os_version: "Catalina",
+      os_version: "Mojave",
       browserName: "Chrome",
       browser_version: "60.0",
     },
@@ -64,7 +64,7 @@ exports.config = {
       os: "Windows",
       os_version: "XP",
       browserName: "Firefox",
-      browser_version: "18.0",
+      browser_version: "34.0",
     },
     {
       os: "OS X",
@@ -76,7 +76,7 @@ exports.config = {
       os: "OS X",
       os_version: "Snow Leopard",
       browserName: "Firefox",
-      browser_version: "18.0",
+      browser_version: "34.0",
     },
     // Edge - Between 12 and 15
     {
