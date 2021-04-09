@@ -65,8 +65,6 @@ interface DevOptions {
  * command.
  *
  * @param options - Object of type {@link DevOptions}.
- *
- * @returns Void.
  */
 const devCommand = async ({
   production = false,
