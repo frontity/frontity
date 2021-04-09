@@ -33,6 +33,25 @@ test("Validate amp-img", async () => {
   expect(await amp(container.innerHTML)).toBeValidAmpHtml();
 });
 
+test("Validate amp-img when height or width are a number", async () => {
+  const { container } = render(
+    <Html2React
+      html="<img src='test.img' width=300 height=300></img>"
+      processors={processors}
+    />
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <amp-img
+      height="300"
+      layout="responsive"
+      src="test.img"
+      width="300"
+    />
+  `);
+  expect(await amp(container.innerHTML)).toBeValidAmpHtml();
+});
+
 test("Validate amp-iframe", async () => {
   const helmetContext = {};
 
@@ -54,6 +73,7 @@ test("Validate amp-iframe", async () => {
     <amp-iframe
       height="300"
       layout="fixed-height"
+      sandbox="allow-scripts allow-same-origin "
       src="test.html"
       title=""
       width="auto"
