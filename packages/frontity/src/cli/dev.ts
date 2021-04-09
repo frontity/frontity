@@ -98,6 +98,16 @@ interface DevOptions {
    * @defaultValue false
    */
   dontOpenBrowser?: boolean;
+
+  /**
+   * If active, it creates HTML files for bundle analyzing inside the
+   * /build/analyze/ folder.
+   *
+   * It can be also configured using the `FRONTITY_DEV_ANALYZE` env variable.
+   *
+   * @defaultValue false
+   */
+  analyze?: boolean;
 }
 
 /**
@@ -115,6 +125,7 @@ const dev = async ({
   production = !!process.env.FRONTITY_DEV_PRODUCTION,
   publicPath = process.env.FRONTITY_DEV_PUBLIC_PATH || "/static/",
   dontOpenBrowser = !!process.env.FRONTITY_DEV_DONT_OPEN_BROWSER,
+  analyze = !!process.env.FRONTITY_DEV_ANALYZE,
 }: DevOptions) => {
   // Check `target` parameter.
   if (target && target !== "es5" && target !== "module") {
@@ -138,6 +149,7 @@ const dev = async ({
     https,
     publicPath,
     dontOpenBrowser,
+    analyze,
   });
 };
 
