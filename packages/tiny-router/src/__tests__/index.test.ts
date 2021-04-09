@@ -431,9 +431,7 @@ describe("actions", () => {
 
       await store.actions.router.beforeSSR({ ctx: ctx as Context });
 
-      expect(ctx.redirect).toHaveBeenCalledWith(
-        "https://domain.com/final-url/?query=value#hash"
-      );
+      expect(ctx.redirect).toHaveBeenCalledWith("/final-url/?query=value#hash");
       expect(ctx.status).toBe(123);
     });
 
