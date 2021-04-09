@@ -95,7 +95,7 @@ interface DevOptions {
    * It can be also configured using the `FRONTITY_DEV_DONT_OPEN_BROWSER` env
    * variable.
    *
-   * @defaultValue true
+   * @defaultValue false
    */
   dontOpenBrowser?: boolean;
 }
