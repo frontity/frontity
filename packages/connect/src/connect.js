@@ -1,13 +1,11 @@
-import React, { createContext, useContext } from "react";
-import { view } from "@risingstack/react-easy-state";
+import { createContext, useContext, Component } from "react";
+import { view } from "@frontity/react-easy-state";
 import { warn } from "@frontity/error";
-import { Package } from "@frontity/types";
-import { ResolveActions, ResolveState } from "@frontity/types/src/utils";
 
 /**
  * A React context that stores the store of Frontity Connect.
  */
-const context = createContext<Package>({});
+const context = createContext({});
 
 /**
  * The Provider of the store context, to be used in the root of the React
@@ -27,28 +25,25 @@ const defaultOptions = {
   injectProps: true,
 };
 
-function isStateless(
-  comp: React.ComponentType
-): comp is React.FunctionComponent {
-  return comp.prototype && comp.prototype.isReactComponent;
-}
+const isStateless = (Comp) =>
+  !(Comp.prototype && Comp.prototype.isReactComponent);
 
 /**
  * Connects a React component with the Frontity connect store.
  *
- * @param Component - The React component to be connected.
+ * @param Comp - The React component to be connected.
  * @param options - TO BE LINKED WHEN WE SWITCH TO TYPESCRIPT.
  *
  * @returns The same Component, but with the store included in the props.
  */
-export const connect = (Component: React.ComponentType, options) => {
+export const connect = (Comp, options) => {
   options = options ? { ...defaultOptions, ...options } : defaultOptions;
 
-  if (isStateless(Component)) {
+  if (isStateless(Comp)) {
     return view((props) => {
       const { state, actions, libraries } = useContext(context);
       isConnected = true;
-      const rendered = Component({
+      const rendered = Comp({
         ...props,
         ...(options.injectProps ? { state, actions, libraries } : {}),
       });
@@ -72,22 +67,16 @@ export const connect = (Component: React.ComponentType, options) => {
         render() {
           const { state, actions, libraries } = this.context;
           const props = { ...this.props, state, actions, libraries };
-          return <Component {...props} />;
+          return <Comp {...props} />;
         }
       }
       return view(ConnectedComponent);
     }
-    return view(Component);
+    return view(Comp);
   }
 };
 
-export const useConnect = <P extends Package>(): Omit<
-  P,
-  "state" | "actions"
-> & {
-  state: ResolveState<P["state"]>;
-  actions: ResolveActions<P["actions"]>;
-} => {
+export const useConnect = () => {
   if (!isConnected)
     warn(
       "Warning: useConnect() is being used in a non connected component, " +

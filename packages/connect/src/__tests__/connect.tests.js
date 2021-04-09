@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { create, act } from "react-test-renderer";
 import * as error from "@frontity/error";
 import connect, { Provider, createStore, useConnect } from "..";
@@ -275,14 +275,14 @@ describe("useConnect", () => {
     };
     const ConnectedComp = connect(Comp);
 
-    act(() =>
+    act(() => {
       create(
         <Provider value={store}>
           <Comp />
           <ConnectedComp />
         </Provider>
-      )
-    );
+      );
+    });
 
     expect(error.warn).toHaveBeenCalledTimes(1);
   });
