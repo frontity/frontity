@@ -31,16 +31,6 @@ interface VideoProps {
    * Corresponds to the `muted` property of the `<video>` element.
    */
   muted: string;
-
-  /**
-   * Corresponds to the `autoPictureInPicture` property of the `<video>` element.
-   */
-  autoPictureInPicture: string;
-
-  /**
-   * Corresponds to the `playsInline` property of the `<video>` element.
-   */
-  playsInline: string;
 }
 
 /**
@@ -57,8 +47,6 @@ const AMPVideo: React.FC<VideoProps> = ({
   loop,
   controls,
   muted,
-  autoPictureInPicture,
-  playsInline,
   ...props
 }) => {
   return (
@@ -74,17 +62,16 @@ const AMPVideo: React.FC<VideoProps> = ({
       </Head>
       <amp-video
         class={className}
-        // If the attribute's value is truthy, we set it to undefined so that
-        // the attribute appears as a boolean without a value, like: <video loop>
-        {...(autoPlay ? { autoPlay: undefined } : undefined)}
-        {...(controls ? { controls: undefined } : undefined)}
-        {...(loop ? { controls: undefined } : undefined)}
-        {...(muted ? { muted: undefined } : undefined)}
-        {...(playsInline ? { playsInline: undefined } : undefined)}
-        {...(autoPictureInPicture
-          ? { autoPictureInPicture: undefined }
-          : undefined)}
+        // If the attribute's value is truthy, we set it to "" so that
+        // the attribute appears as a boolean without a value, like: <video
+        // loop>
+        // This is required per AMP validation rules
+        // https://stackoverflow.com/a/50996065/2638310
         {...props}
+        {...(autoPlay ? { autoPlay: "" } : undefined)}
+        {...(controls ? { controls: "" } : undefined)}
+        {...(loop ? { loop: "" } : undefined)}
+        {...(muted ? { muted: "" } : undefined)}
       />
     </>
   );
