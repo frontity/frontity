@@ -72,7 +72,11 @@ const AMPIframe: React.FC<IFrameProps> = ({
         title={title || ""}
         src={src}
         layout="fixed-height"
-        {...(allowFullScreen ? { allowFullScreen: undefined } : undefined)}
+        // If the attribute's value is truthy, we set it to "" so that
+        // the attribute appears as a boolean without a value, like: <video loop>
+        // This is required per AMP validation rules
+        // https://stackoverflow.com/a/50996065/2638310
+        {...(allowFullScreen ? { allowFullScreen: "" } : undefined)}
         sandbox={`allow-scripts allow-same-origin ${sandbox ? sandbox : ""}`}
         width="auto" // has to be set to auto if used with fixed-height layout
         height={parseInt(height, 10) || 150} // This is mimicking the browser default of 150px

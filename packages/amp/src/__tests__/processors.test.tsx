@@ -85,13 +85,45 @@ test("Validate amp-iframe", async () => {
   expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
 });
 
+test("amp-iframe should concatenate the sandbox properties", async () => {
+  const helmetContext = {};
+
+  const { container } = render(
+    <HelmetProvider context={helmetContext}>
+      <Html2React
+        html="<iframe sandbox='allow-scripts allow-popups' src='test.html' width='auto' height='300'/>"
+        processors={processors}
+      />
+    </HelmetProvider>
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <amp-iframe
+      height="300"
+      layout="fixed-height"
+      sandbox="allow-scripts allow-same-origin allow-scripts allow-popups"
+      src="test.html"
+      title=""
+      width="auto"
+    />
+  `);
+});
+
 test("Validate amp-video", async () => {
   const helmetContext = {};
 
   const { container } = render(
     <HelmetProvider context={helmetContext}>
       <Html2React
-        html="<video width='250' height='150' src='video.mp4'></video>"
+        html="<video 
+          width='250' 
+          height='150' 
+          src='video.mp4'  
+          autoplay
+          loop
+          controls
+          muted
+        ></video>"
         processors={processors}
       />
     </HelmetProvider>
@@ -104,8 +136,12 @@ test("Validate amp-video", async () => {
   );
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-video
+      autoplay=""
+      controls=""
       height="250"
       layout="responsive"
+      loop=""
+      muted=""
       src="video.mp4"
       width="250"
     />
@@ -135,7 +171,6 @@ test("Validate amp-audio", async () => {
   );
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-audio
-      controls="true"
       src="audio.mp3"
     />
   `);
