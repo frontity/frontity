@@ -45,6 +45,8 @@ const GooglePublisherTag: React.FC<
       Object.entries(targeting).forEach(([key, value]) =>
         slot.current.setTargeting(key, value)
       );
+      // Collapse empty ad slots
+      slot.current.setCollapseEmptyDiv(true);
 
       // Enables all GPT services.
       window.googletag.enableServices();
