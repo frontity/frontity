@@ -143,6 +143,7 @@ export default async ({
   await webpackAsync(config.webpack.server);
   console.log();
 
-  // Remove the bundling folder after the build if --analyze was not used.
-  if (analyze === false) await remove(join(outDir, "bundling"));
+  // Remove the bundling folder after the build in production because
+  // it is not needed anymore.
+  if (mode === "production") await remove(join(outDir, "bundling"));
 };
