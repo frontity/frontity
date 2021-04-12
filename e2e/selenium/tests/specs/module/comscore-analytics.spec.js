@@ -5,6 +5,7 @@ const assert = require("assert");
 describe("comscore-analytics", function () {
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=comscore-analytics");
+    await driver.manage().setTimeouts({ implicit: 5000 });
   });
 
   const pageviewHome = {
@@ -38,6 +39,7 @@ describe("comscore-analytics", function () {
 
   it("should send a pageview if the page changes", async function () {
     await driver.findElement(By.id("change-link")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript("return window.comscoreCalls[2]"),
       { id: "111111", ...pageviewSomePost }
@@ -50,7 +52,9 @@ describe("comscore-analytics", function () {
 
   it("should send pageviews when going back or forward", async function () {
     await driver.findElement(By.id("change-link")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     await driver.executeScript("return window.history.back()");
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript("return window.comscoreCalls[4]"),
       { id: "111111", ...pageviewHome }

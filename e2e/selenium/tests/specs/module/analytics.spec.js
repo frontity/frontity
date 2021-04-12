@@ -5,6 +5,7 @@ const assert = require("assert");
 describe("analytics", function () {
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=analytics");
+    await driver.manage().setTimeouts({ implicit: 5000 });
   });
 
   const pageviewHome = {
@@ -38,6 +39,7 @@ describe("analytics", function () {
 
   it("should send a pageview if the page changes", async function () {
     await driver.findElement(By.id("change-link")).click();
+    await driver.manage().setTimeouts({ implicit: 3000 });
     assert.deepEqual(
       await driver.executeScript(
         "return window.frontity.state.testAnalytics.pageviews[1]"
@@ -48,8 +50,11 @@ describe("analytics", function () {
 
   it("should send a pageview if the page changes and title is the same", async function () {
     await driver.findElement(By.id("change-link")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     await driver.findElement(By.id("change-link-post-2")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     await driver.executeScript("return window.history.back()");
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript(
         "return window.frontity.state.testAnalytics.pageviews[1]"
@@ -72,6 +77,7 @@ describe("analytics", function () {
 
   it("should send pageviews when going back or forward", async function () {
     await driver.findElement(By.id("change-link")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     await driver.executeScript("return window.history.back()");
     assert.deepEqual(
       await driver.executeScript(
@@ -81,6 +87,7 @@ describe("analytics", function () {
     );
 
     await driver.executeScript("return window.history.forward()");
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript(
         "return window.frontity.state.testAnalytics.pageviews[3]"
@@ -93,6 +100,7 @@ describe("analytics", function () {
     await driver.findElement(By.id("send-event")).click();
     await driver.findElement(By.id("send-event")).click();
     await driver.findElement(By.id("send-event")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript(
         "return window.frontity.state.testAnalytics.events[0]"

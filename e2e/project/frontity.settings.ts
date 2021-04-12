@@ -42,11 +42,15 @@ const settings: Settings<
   {
     name: "emotion",
     packages: [
+      "e2e-emotion",
       {
         name: "@frontity/tiny-router",
         state: { router: { autoFetch: false } },
       },
-      "e2e-emotion",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
+      },
     ],
   },
   {
@@ -71,7 +75,13 @@ const settings: Settings<
   },
   {
     name: "switch",
-    packages: ["e2e-switch"],
+    packages: [
+      "e2e-switch",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
+      },
+    ],
   },
   {
     name: "html2react",
@@ -104,6 +114,10 @@ const settings: Settings<
           },
         },
       },
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
+      },
     ],
   },
   {
@@ -119,6 +133,10 @@ const settings: Settings<
         },
       },
       "e2e-analytics",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
+      },
     ],
   },
   {
@@ -127,7 +145,13 @@ const settings: Settings<
   },
   {
     name: "slot-and-fill",
-    packages: ["e2e-slot-and-fill"],
+    packages: [
+      "e2e-slot-and-fill",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
+      },
+    ],
   },
   {
     name: "use-infinite-scroll",
@@ -145,7 +169,15 @@ const settings: Settings<
   },
   {
     name: "analytics",
-    packages: ["e2e-analytics", "@frontity/tiny-router", "@frontity/analytics"],
+    packages: [
+      "e2e-analytics",
+      "@frontity/tiny-router",
+      "@frontity/analytics",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
+      },
+    ],
   },
   {
     name: "google-analytics",
@@ -160,6 +192,10 @@ const settings: Settings<
         },
       },
       "e2e-analytics",
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
+      },
     ],
   },
   {
@@ -220,6 +256,10 @@ const settings: Settings<
             },
           },
         },
+      },
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "https://test.frontity.org/" } },
       },
     ],
   },

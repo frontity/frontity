@@ -47,6 +47,7 @@ describe("google-analytics", function () {
 
   it("should send a pageview if the page changes", async function () {
     await driver.findElement(By.id("change-link")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript("return window.gaCalls[2][2]"),
       {
@@ -67,7 +68,9 @@ describe("google-analytics", function () {
 
   it("should send pageviews when going back or forward", async function () {
     await driver.findElement(By.id("change-link")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     await driver.executeScript("return window.history.back()");
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript("return window.gaCalls[4][2]"),
       {
@@ -85,6 +88,7 @@ describe("google-analytics", function () {
       }
     );
     await driver.executeScript("return window.history.forward()");
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript("return window.gaCalls[6][2]"),
       {
@@ -105,6 +109,7 @@ describe("google-analytics", function () {
 
   it("should send events", async function () {
     await driver.findElement(By.id("send-event")).click();
+    await driver.manage().setTimeouts({ implicit: 2000 });
     assert.deepEqual(
       await driver.executeScript("return window.gaCalls[2][2]['content']"),
       "some content"
