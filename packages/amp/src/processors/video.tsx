@@ -85,7 +85,7 @@ export const video: Processor<Element, Packages> = {
 
     // AMP requires that the file is loaded over HTTPS
     const httpRegexp = /^http:\/\//;
-    if (node.props.src.match(httpRegexp)) {
+    if (node.props?.src?.match(httpRegexp)) {
       node.props.src = node.props.src.replace(httpRegexp, "https://");
     }
 
