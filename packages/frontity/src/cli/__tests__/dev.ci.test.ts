@@ -32,6 +32,7 @@ describe("dev", () => {
     process.env.FRONTITY_DEV_PRODUCTION = "true";
     process.env.FRONTITY_DEV_PUBLIC_PATH = "/public/path";
     process.env.FRONTITY_DEV_DONT_OPEN_BROWSER = "true";
+    process.env.FRONTITY_DEV_ANALYZE = "true";
 
     await dev({});
     expect(mockedDev.default.mock.calls).toMatchSnapshot();
@@ -44,6 +45,7 @@ describe("dev", () => {
     process.env.FRONTITY_DEV_PRODUCTION = "true";
     process.env.FRONTITY_DEV_PUBLIC_PATH = "/public/path";
     process.env.FRONTITY_DEV_DONT_OPEN_BROWSER = "true";
+    process.env.FRONTITY_DEV_ANALYZE = "true";
 
     await dev({
       target: "module",
@@ -52,6 +54,7 @@ describe("dev", () => {
       production: false,
       publicPath: "/static",
       dontOpenBrowser: false,
+      analyze: false,
     });
     expect(mockedDev.default.mock.calls).toMatchSnapshot();
   });
