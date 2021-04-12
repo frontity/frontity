@@ -217,6 +217,12 @@ describe.each`
     it(`${platform}: Should redirect on 404`, async () => {
       store.state.source.redirections = "404";
 
+      // On embedded mode, on the client side, there should not be
+      // any difference in handling the redirections.
+      if (platform === "client") {
+        setEmbeddedModeTrue(store);
+      }
+
       await store.actions.source.fetch("/some-post/");
 
       // The `fetch()` was called.
@@ -244,6 +250,42 @@ describe.each`
               }
           `);
     });
+
+    // On the server, the embedded mode should NOT handle the redirections
+    // to avoid the infinite loading loop.
+    // On embedded mode redirections are handled by the host which embeds frontity.
+    // More specifically Wordpress.
+    if (platform === "server") {
+      it(`${platform}: Should not redirect on 404 on embedded mode`, async () => {
+        store.state.source.redirections = "404";
+
+        // Set the embedded mode
+        setEmbeddedModeTrue(store);
+
+        await store.actions.source.fetch("/some-post/");
+
+        // The `fetch()` was called.
+        expect(mockedFetch).toHaveBeenCalledTimes(0);
+        expect(handler.func).toHaveBeenCalledTimes(1);
+
+        expect(store.state.source.data).toMatchInlineSnapshot(`
+                Object {
+                  "/some-post/": Object {
+                    "errorStatus": 404,
+                    "errorStatusText": "There was an error",
+                    "is404": true,
+                    "isError": true,
+                    "isFetching": false,
+                    "isReady": true,
+                    "link": "/some-post/",
+                    "page": 1,
+                    "query": Object {},
+                    "route": "/some-post/",
+                  },
+                }
+            `);
+      });
+    }
 
     it(`${platform}: Should redirect on 404 when the redirection is a 302 redirection`, async () => {
       store.state.source.redirections = "404";
