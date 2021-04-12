@@ -29,6 +29,7 @@ describe("build", () => {
     process.env.FRONTITY_BUILD_TARGET = "es5";
     process.env.FRONTITY_BUILD_DEVELOPMENT = "true";
     process.env.FRONTITY_BUILD_PUBLIC_PATH = "/public/path";
+    process.env.FRONTITY_BUILD_ANALYZE = "true";
 
     await build({});
     expect(mockedDev.default.mock.calls).toMatchSnapshot();
@@ -38,11 +39,13 @@ describe("build", () => {
     process.env.FRONTITY_BUILD_TARGET = "es5";
     process.env.FRONTITY_BUILD_DEVELOPMENT = "true";
     process.env.FRONTITY_BUILD_PUBLIC_PATH = "/public/path";
+    process.env.FRONTITY_BUILD_ANALYZE = "true";
 
     await build({
       target: "module",
       development: false,
       publicPath: "/static",
+      analyze: false,
     });
     expect(mockedDev.default.mock.calls).toMatchSnapshot();
   });
