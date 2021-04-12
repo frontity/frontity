@@ -1,9 +1,9 @@
 name: "BrowserStack Selenium Proxy"
 
 on:
-  push:
-    branches:
-      - selenium-tests
+  workflow_run:
+    workflows: ["BrowserStack Selenium Module"]
+    types: [completed]
 
 jobs:
   selenium-job:
