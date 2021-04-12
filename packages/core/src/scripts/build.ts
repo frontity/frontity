@@ -79,6 +79,14 @@ export interface BuildOptions {
    * @defaultValue "/static/"
    */
   publicPath: string;
+
+  /**
+   * Indicate if the Bundle Analyzer plugin should be included in the Webpack
+   * configuration, in order to generate HTML files for bundle analyzing.
+   *
+   * @defaultValue false
+   */
+  analyze?: boolean;
 }
 
 /**
@@ -93,6 +101,7 @@ export default async ({
   mode = "production",
   target = "both",
   publicPath = "/static/",
+  analyze = false,
 }: BuildOptions): Promise<void> => {
   console.log();
   console.log(`  - mode: ${mode}`);
@@ -114,7 +123,7 @@ export default async ({
   const entryPoints = await generateEntryPoints({ sites, outDir, mode });
 
   // Get FrontityConfig for Webpack.
-  const config = getConfig({ mode, entryPoints, publicPath });
+  const config = getConfig({ mode, entryPoints, publicPath, analyze });
 
   // Build and wait until webpack finished the clients first.
   // We need to do this because the server bundle needs to import
