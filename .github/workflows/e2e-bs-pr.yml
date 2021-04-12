@@ -4,8 +4,8 @@ on: [pull_request]
 
 jobs:
   e2e-browserstack:
-    if: github.repository_owner == 'frontity'
     runs-on: ubuntu-16.04
+    if: github.repository_owner == 'frontity'
 
     steps:
       - name: Checkout
