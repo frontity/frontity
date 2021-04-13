@@ -4,6 +4,7 @@ exports[`build gets the correct default values when it receives an empty object 
 Array [
   Array [
     Object {
+      "analyze": false,
       "mode": "production",
       "publicPath": "/static/",
       "target": "both",

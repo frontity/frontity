@@ -22,6 +22,13 @@ interface ConfigOptions {
    * The public path of Webpack.
    */
   publicPath: string;
+
+  /**
+   * Flag indicating if the Bundle Analyzer plugin should be included.
+   *
+   * @defaultValue false
+   */
+  analyze?: boolean;
 }
 
 /**
@@ -32,7 +39,12 @@ interface ConfigOptions {
  * @returns The configuration object for Webpack, Babel and Frontity. Each
  * configuration object contains the three targets: "module", "es5" and "server".
  */
-const config = ({ mode, entryPoints, publicPath }: ConfigOptions): Config => {
+const config = ({
+  mode,
+  entryPoints,
+  publicPath,
+  analyze = false,
+}: ConfigOptions): Config => {
   const frontity = getFrontity();
   const babel = getBabel();
   const webpack = getWebpack({
@@ -41,6 +53,7 @@ const config = ({ mode, entryPoints, publicPath }: ConfigOptions): Config => {
     frontity,
     entryPoints,
     publicPath,
+    analyze,
   });
 
   return {
