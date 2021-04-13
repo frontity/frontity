@@ -1,9 +1,10 @@
-const { By } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("script", function () {
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=script");
+    await driver.wait(until.elementLocated(By.id("from-src")), 5000);
   });
 
   it("should load a external script from src url", async function () {

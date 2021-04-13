@@ -37,7 +37,9 @@ export const commonConfig = {
   },
   afterTest: async (test, context, result) => {
     let { passed, error } = result;
+
     !passed &&
+      test._retries == test._currentRetry &&
       (await driver.executeScript(
         `browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "${
           error.name + ": " + error.message.replace(/\n/g, "")
@@ -51,5 +53,6 @@ export const commonConfig = {
   mochaOpts: {
     ui: "bdd",
     timeout: 60000,
+    retries: 3,
   },
 };
