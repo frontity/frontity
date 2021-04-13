@@ -78,7 +78,7 @@ export interface GooglePublisherTagProps {
    *
    * @defaultValue false
    */
-  collapseEmptyDiv: boolean;
+  collapseEmptyDiv?: boolean;
 }
 
 /**
