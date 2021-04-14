@@ -86,11 +86,13 @@ export const ensureProjectDir = async (path: string): Promise<boolean> => {
  * @param name - The name of the project.
  * @param theme - The theme that will be cloned and installed locally.
  * @param path - The path where the file will be created.
+ * @param typescript - Indicates if the typescript flag is active.
  */
 export const createPackageJson = async (
   name: string,
   theme: string,
-  path: string
+  path: string,
+  typescript: boolean
 ) => {
   const packages = [
     "frontity",
@@ -136,6 +138,26 @@ export const createPackageJson = async (
     prettier: {},
     dependencies,
   };
+
+  // If the typescript flag is active, add the needed devDependencies.
+  if (typescript) {
+    const devPackages = ["@types/react", "@types/node-fetch"];
+    const devDependencies = (
+      await Promise.all(
+        devPackages.map(async (pkg) => {
+          // Get the version of each package.
+          const version = await fetchPackageVersion(pkg);
+          return [pkg, `^${version}`];
+        })
+      )
+    ).reduce((final, current) => {
+      // Reduce the packages into a dependecies object.
+      final[current[0]] = current[1];
+      return final;
+    }, {});
+    packageJson.devDependencies = devDependencies;
+  }
+
   const filePath = resolvePath(path, "package.json");
   const fileData = `${JSON.stringify(packageJson, null, 2)}${EOL}`;
   await writeFile(filePath, fileData);

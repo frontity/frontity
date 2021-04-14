@@ -68,7 +68,7 @@ export default (options?: CreateCommandOptions) =>
         await step;
 
         // Creates `package.json`.
-        step = createPackageJson(name, theme, path);
+        step = createPackageJson(name, theme, path, typescript);
         emit("message", `Creating ${chalk.yellow("package.json")}.`, step);
         await step;
 

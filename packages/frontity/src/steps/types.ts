@@ -106,4 +106,11 @@ export type PackageJson = {
   dependencies: {
     [key: string]: string;
   };
+
+  /**
+   * The development dependencies of the Frontity project.
+   */
+  devDependencies?: {
+    [key: string]: string;
+  };
 };
