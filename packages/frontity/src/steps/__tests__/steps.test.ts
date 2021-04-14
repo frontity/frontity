@@ -3,6 +3,7 @@ import {
   ensureProjectDir,
   createPackageJson,
   createFrontitySettings,
+  createTsConfig,
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
@@ -190,6 +191,22 @@ describe("createFrontitySettings", () => {
     const theme = "@frontity/mars-theme";
 
     await createFrontitySettings(extension, name, path, theme);
+    expect(mockedFsExtra.readFile).toHaveBeenCalled();
+    expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
+  });
+});
+
+describe("createTsConfig", () => {
+  beforeEach(() => {
+    mockedFsExtra.readFile.mockReset();
+    mockedFsExtra.readFile.mockResolvedValueOnce("$tsconfig$" as any);
+    mockedFsExtra.writeFile.mockReset();
+  });
+
+  test('works as expected"', async () => {
+    const path = "/path/to/project";
+
+    await createTsConfig(path);
     expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });

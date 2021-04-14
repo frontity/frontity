@@ -233,37 +233,14 @@ export const createFrontitySettings = async (
  * @param path - The path where the file will be created.
  */
 export const createTsConfig = async (path: string) => {
-  const tsConfig = {
-    compilerOptions: {
-      // Target latest version of ECMAScript.
-      target: "es2017",
-      // Search under node_modules for non-relative imports.
-      moduleResolution: "node",
-      // commonjs modules.
-      module: "commonjs",
-      // Allow default imports from modules with no default export.
-      allowSyntheticDefaultImports: true,
-      // Don't emit; allow Babel to transform files.
-      noEmit: true,
-      // Import non-ES modules as default imports.
-      esModuleInterop: true,
-      // Resolve JSON files.
-      resolveJsonModule: true,
-      // Support for JSX runtime.
-      jsx: "react-jsx",
-      // Support for emotion css prop with types
-      jsxImportSource: "@emotion/react",
-      // Transpile JS as well.
-      allowJs: true,
-      // Allows using the css prop in JSX components.
-      types: ["@emotion/react/types/css-prop"],
-    },
-    include: ["packages/**/*"],
-  };
-
+  const fileTemplate = await readFile(
+    resolvePath(__dirname, "../../templates/tsconfig.json"),
+    {
+      encoding: "utf8",
+    }
+  );
   const filePath = resolvePath(path, "tsconfig.json");
-  const fileData = `${JSON.stringify(tsConfig, null, 2)}${EOL}`;
-  await writeFile(filePath, fileData);
+  await writeFile(filePath, fileTemplate);
 };
 
 /**

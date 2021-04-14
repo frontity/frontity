@@ -14,6 +14,7 @@ describe("create", () => {
     mockedSteps.ensureProjectDir.mockReset();
     mockedSteps.createPackageJson.mockReset();
     mockedSteps.createFrontitySettings.mockReset();
+    mockedSteps.createTsConfig.mockReset();
     mockedSteps.cloneStarterTheme.mockReset();
     mockedSteps.installDependencies.mockReset();
     mockedSteps.revertProgress.mockReset();
@@ -72,6 +73,7 @@ describe("create", () => {
       options.path,
       "@frontity/mars-theme"
     );
+    expect(mockedSteps.createTsConfig).toHaveBeenCalledWith(options.path);
   });
 
   test("calls removeProgress on error with dirExisted=true", async () => {
