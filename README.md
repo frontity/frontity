@@ -139,7 +139,3 @@ Frontity is licensed under the terms of the [Apache 2.0](https://github.com/fron
 ---
 
 Do you miss any important information? Check out [our docs](https://docs.frontity.org/getting-started) or [let us know](https://community.frontity.org/c/framework-development/docs-and-tutorials).
-
----
-
-External fork check.
