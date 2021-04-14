@@ -7,6 +7,7 @@ import {
   createPackageJson,
   createReadme,
   createFrontitySettings,
+  createTsConfig,
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
@@ -42,7 +43,7 @@ export default (options?: CreateCommandOptions) =>
       let step: Promise<any>;
       let dirExisted: boolean;
 
-      // 1. Parses and validates options.
+      // Parses and validates options.
       const {
         name,
         theme,
@@ -56,22 +57,22 @@ export default (options?: CreateCommandOptions) =>
       });
 
       try {
-        // 2. Ensures that the project dir exists and is empty.
+        // Ensures that the project dir exists and is empty.
         step = ensureProjectDir(path);
         emit("message", `Ensuring ${chalk.yellow(path)} directory.`, step);
         dirExisted = await step;
 
-        // 3. Creates `README.md`
+        // Creates `README.md`
         step = createReadme(name, path);
         emit("message", `Creating ${chalk.yellow("README.md")}.`, step);
         await step;
 
-        // 3. Creates `package.json`.
+        // Creates `package.json`.
         step = createPackageJson(name, theme, path);
         emit("message", `Creating ${chalk.yellow("package.json")}.`, step);
         await step;
 
-        // 4. Creates `frontity.settings`.
+        // Creates `frontity.settings`.
         const extension = typescript ? "ts" : "js";
         step = createFrontitySettings(extension, name, path, theme);
         emit(
@@ -81,17 +82,24 @@ export default (options?: CreateCommandOptions) =>
         );
         await step;
 
-        // 5. Clones the theme inside `packages`.
+        // Creates `tsconfig.json`.
+        if (typescript) {
+          step = createTsConfig(path);
+          emit("message", `Creating ${chalk.yellow("tsconfig.json")}.`, step);
+          await step;
+        }
+
+        // Clones the theme inside `packages`.
         step = cloneStarterTheme(theme, path);
         emit("message", `Cloning ${chalk.green(theme)}.`, step);
         await step;
 
-        // 6. Installs dependencies.
+        // Installs dependencies.
         step = installDependencies(path);
         emit("message", `Installing dependencies.`, step);
         await step;
 
-        // 7. Download favicon.
+        // Download favicon.
         step = downloadFavicon(path);
         emit("message", `Downloading ${chalk.yellow("favicon.ico")}.`, step);
         await step;
