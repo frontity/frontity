@@ -48,6 +48,7 @@ const Component: React.FC = () => {
         className="someClassName"
         data-value="3"
         src="https://unpkg.com/moment@2.24.0/min/moment.min.js"
+        onLoad={() => console.log("script loaded")}
       />
       {isScriptActive && <Script code={"2 + 2"} />}
     </>

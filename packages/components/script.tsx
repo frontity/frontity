@@ -4,7 +4,7 @@ import * as React from "react";
 /**
  * Props passed to the {@link Script} component.
  */
-interface ScriptProps {
+interface ScriptProps extends React.HTMLProps<HTMLScriptElement> {
   /**
    * Specifies the URI of an external script. Same as the `src` attribute of the
    * HTML <script> element.
@@ -40,7 +40,7 @@ interface ScriptProps {
   id?: string;
 
   /**
-   * Any other `prop`
+   * Any other `prop`.
    *
    * @example
    * ```
@@ -101,6 +101,8 @@ const Script: React.FC<ScriptProps> = ({ src, code, id, ...props }) => {
         if (script) window.document.body.removeChild(script);
       };
     }
+    // Scripts shouldn't be loaded nor executed more than once.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;
