@@ -72,6 +72,15 @@ const convertedActions = (actions, store) => {
 };
 
 /**
+ * A list of internal JavaScript symbols that should be skipped.
+ */
+const wellKnownSymbols = new Set(
+  Object.getOwnPropertyNames(Symbol)
+    .map((key) => Symbol[key])
+    .filter((value) => typeof value === "symbol")
+);
+
+/**
  * Create an Frontity Connect store.
  *
  * @param config - The plain store object.
@@ -82,6 +91,15 @@ export const createStore = (config) => {
     proxyHandlers: {
       get: (target, key, receiver) => {
         const result = proxyHandlers.get(target, key, receiver);
+
+        // Do not try to run derived functions for internal JS symbols and
+        // utils.
+        if (
+          (typeof key === "symbol" && wellKnownSymbols.has(key)) ||
+          key === "constructor"
+        ) {
+          return result;
+        }
 
         // If it's a function, return the result of that function run with the
         // root state.
