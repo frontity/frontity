@@ -40,6 +40,18 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
   });
 
+  it("should allow to pass state directly without Provider", () => {
+    const Comp = ({ state }) => <div>{state.namespace.prop1}</div>;
+    const Connected = connect(Comp);
+    const props = { state: { namespace: { prop1: "1" } } };
+    const app = create(<Connected {...props} />);
+    expect(app).toMatchInlineSnapshot(`
+      <div>
+        1
+      </div>
+    `);
+  });
+
   it("should pass state to class components", () => {
     class Comp extends React.Component {
       render() {
