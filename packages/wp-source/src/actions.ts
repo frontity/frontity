@@ -22,6 +22,11 @@ const actions: WpSource["actions"]["source"] = {
   fetch: ({ state, libraries }) => async (...params) => {
     const [resource, options] = params;
     const { source } = state;
+    // Should skip redirection for embedded mode on the server only.
+    const shouldSkipRedirection =
+      (state.frontity?.options?.embedded &&
+        state.frontity?.platform === "server") ||
+      false;
 
     // Get the normalize and parse from libraries instead of importing them.
     // This way they can be e.g. overriden at runtime by another package
@@ -91,7 +96,10 @@ const actions: WpSource["actions"]["source"] = {
 
       // Check if we need to check if it is a 30X redirection before fetching
       // the backend.
-      if (isEagerRedirection(state.source.redirections, link)) {
+      if (
+        !shouldSkipRedirection &&
+        isEagerRedirection(state.source.redirections, link)
+      ) {
         const redirection = await fetchRedirection({ link, state });
         // If there is a redirection, populate the data object and finish here.
         if (
@@ -154,7 +162,11 @@ const actions: WpSource["actions"]["source"] = {
       }
 
       // Check it there is a 301 redirection stored in the backend.
-      if (error.status === 404 && is404Redirection(state.source.redirections)) {
+      if (
+        error.status === 404 &&
+        !shouldSkipRedirection &&
+        is404Redirection(state.source.redirections)
+      ) {
         const redirection = await fetchRedirection({ link, state });
         // If there is a redirection, populate the data object and finish here.
         if (
