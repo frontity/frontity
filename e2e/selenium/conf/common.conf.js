@@ -24,13 +24,14 @@ export const commonConfig = {
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
   specFileRetries: 3,
-  before: (capabilities) => {
+  before: (capabilities, specs) => {
+    capabilities.name = (specs && specs[0].split("/").pop()) || undefined;
     global.driver = new Builder()
       .usingServer(browserstackURL)
       .withCapabilities(capabilities)
       .build();
   },
-  beforeSession: (config, capabilities) => {
+  beforeSession: (config, capabilities, specs) => {
     capabilities.browserName === "iPhone"
       ? (global.baseUrl = "http://bs-local.com:3000")
       : (global.baseUrl = "http://localhost:3000");
@@ -46,6 +47,7 @@ export const commonConfig = {
         }"}}`
       ));
   },
+  afterSession: () => {},
   after: () => {
     driver.quit();
   },
