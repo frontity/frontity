@@ -32,7 +32,7 @@ describe("SmartAdserver", () => {
 
     expect(smartAd).toMatchInlineSnapshot(`
       <div
-        className="css-i4g53b"
+        className="css-12102i0-SmartAd"
         id="test-smartad"
       />
     `);
