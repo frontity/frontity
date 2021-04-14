@@ -205,7 +205,8 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 
     // We have to compare the `initalLink` with `browserLink` because we have
     // normalized the `link` at this point and `initialLink` is not normalized.
-    if (browserLink !== state.frontity.initialLink) {
+    // Skip on HMR.
+    if (browserLink !== state.frontity.initialLink && !state.frontity.hmr) {
       if (state.source) {
         /**
          * Derived state pointing to the initial data object.
