@@ -13,14 +13,18 @@ export default async ({ packages }) => {
         "State for Frontity Connect hydratation not found. If you need help please visit https://community.frontity.org."
       );
     } else {
+      const isHMR = !!window["frontity"];
       // Get a merged object with roots, fills, state, actions...
       const store = createStore({
         // Use initial state from server only if we are not in a HMR reload.
-        state: window["frontity"]
+        state: isHMR
           ? getSnapshot(window["frontity"].state)
           : JSON.parse(stateElement.innerHTML),
         packages,
       });
+
+      // If we are in a HMR refresh, set the flag.
+      if (isHMR) store.state.frontity.hmr = true;
 
       store.libraries.frontity.App = function FrontityApp() {
         return <App store={store} />;
