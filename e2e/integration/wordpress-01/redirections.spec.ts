@@ -20,6 +20,19 @@ describe("Redirections", () => {
     cy.get("#link-counter").should("contain.text", "1");
   });
 
+  it("Should redirect to the requested domain, not to `state.frontity.url`", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world/?frontity_name=redirections&frontity_url=http://my.frontity.site"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+    cy.get("#link-counter").should("contain.text", "1");
+  });
+
   it("Should not redirect server side when in embedded mode", () => {
     cy.visit(
       "http://localhost:3001/hello-world/?frontity_name=redirections&frontity_embedded=true",
