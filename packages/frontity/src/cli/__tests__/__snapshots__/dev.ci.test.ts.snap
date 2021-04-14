@@ -20,6 +20,7 @@ exports[`dev should get values from ENV variables 1`] = `
 Array [
   Array [
     Object {
+      "analyze": true,
       "dontOpenBrowser": true,
       "https": true,
       "port": 3001,
@@ -35,6 +36,7 @@ exports[`dev should ignore ENV variables for passed arguments 1`] = `
 Array [
   Array [
     Object {
+      "analyze": false,
       "dontOpenBrowser": false,
       "https": false,
       "port": 4000,
@@ -50,6 +52,7 @@ exports[`dev should receive default values 1`] = `
 Array [
   Array [
     Object {
+      "analyze": false,
       "dontOpenBrowser": false,
       "https": false,
       "port": 3000,

@@ -48,6 +48,11 @@ interface WebpackOptions {
    * The config of Frontity, generated in the previous step.
    */
   frontity: FrontityConfig;
+
+  /**
+   * Flag indicating if the Bundle Analyzer plugin should be included.
+   */
+  analyze?: boolean;
 }
 
 /**
@@ -74,6 +79,7 @@ const getConfig = ({
   babel,
   publicPath,
   frontity,
+  analyze,
 }: ConfigOptions): Configuration => ({
   mode,
   name: name({ target }),
@@ -84,7 +90,7 @@ const getConfig = ({
   module: modules({ target, babel, mode }),
   resolve: resolve(),
   externals: externals({ target }),
-  plugins: plugins({ target, mode, outDir: frontity.outDir }),
+  plugins: plugins({ target, mode, outDir: frontity.outDir, analyze }),
   performance: performance({ target }),
   stats: stats({ mode }),
 });

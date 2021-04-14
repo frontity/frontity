@@ -55,6 +55,16 @@ interface BuildOptions {
    * @defaultValue "/static/"
    */
   publicPath?: string;
+
+  /**
+   * If active, it creates HTML files for bundle analyzing inside the
+   * /build/analyze/ folder.
+   *
+   * It can be also configured using the `FRONTITY_BUILD_ANALYZE` env variable.
+   *
+   * @defaultValue false
+   */
+  analyze?: boolean;
 }
 
 /**
@@ -69,6 +79,7 @@ const build = async ({
   target = process.env.FRONTITY_BUILD_TARGET || "both",
   development = !!process.env.FRONTITY_BUILD_DEVELOPMENT,
   publicPath = process.env.FRONTITY_BUILD_PUBLIC_PATH || "/static/",
+  analyze = !!process.env.FRONTITY_BUILD_ANALYZE,
 }: BuildOptions) => {
   // Check `target` parameter.
   if (target && target !== "es5" && target !== "module" && target !== "both") {
@@ -84,6 +95,7 @@ const build = async ({
     target: target as "es5" | "module" | "both",
     development,
     publicPath,
+    analyze,
   });
 };
 
