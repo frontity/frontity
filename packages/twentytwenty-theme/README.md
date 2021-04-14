@@ -4,7 +4,7 @@
 
 The WordPress Twenty Twenty starter theme for Frontity
 
-Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-twentytwenty-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-twentytwenty-theme)
 
 ![](https://raw.githubusercontent.com/frontity/api-reference/master/docs-api/.gitbook/assets/screenshot-homepage-view-twentytwenty-frontity-theme.png)
 
@@ -64,7 +64,7 @@ The theme options can be specified in the `state.theme` property.
 },
 ```
 
-Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-twentytwenty-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-twentytwenty-theme)
 
 ## Feature Discussions
 
