@@ -1,6 +1,16 @@
-import { createContext, useContext, Component } from "react";
-import { view } from "@frontity/react-easy-state";
+import {
+  useState,
+  useEffect,
+  useMemo,
+  memo,
+  useRef,
+  createContext,
+  useContext,
+} from "react";
 import { warn } from "@frontity/error";
+import { observe, unobserve } from "@frontity/observer-util";
+
+const COMPONENT = Symbol("owner component");
 
 /**
  * A React context that stores the store of Frontity Connect.
@@ -22,64 +32,201 @@ let isConnected = false;
  * The default options of connect.
  */
 const defaultOptions = {
+  /**
+   * Define if `connect` should inject the store props in the component, or only
+   * make it reactive. Useful when the store is accessed via `useConnect` and
+   * the props are passed down an HTML node.
+   */
   injectProps: true,
 };
 
 /**
- * Check if a React component is stateless or not.
- *
- * @param Comp - The component that can be stateless or not.
- * @returns A boolean indicating whether the componnt is stateless.
- */
-const isStateless = (Comp) =>
-  !(Comp.prototype && Comp.prototype.isReactComponent);
-
-/**
- * Connects a React component with the Frontity connect store.
+ * Connect a React component with the Frontity connect store and make it
+ * reactive to its changes.
  *
  * @param Comp - The React component to be connected.
- * @param options - TO BE LINKED WHEN WE SWITCH TO TYPESCRIPT.
+ * @param options - The connect options, defined in {@link defaultOptions}.
  *
- * @returns The same Component, but with the store included in the props.
+ * @returns The same Component, but reactive and with the store included in the
+ * props.
  */
-export const connect = (Comp, options) => {
+export function connect(Comp, options) {
+  const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
   options = options ? { ...defaultOptions, ...options } : defaultOptions;
 
-  if (isStateless(Comp)) {
-    return view((props) => {
+  let ReactiveComp;
+
+  if (isStatelessComp) {
+    // Use a hook based reactive wrapper.
+    ReactiveComp = (props) => {
+      // Dummy setState to update the component.
+      const [, setState] = useState();
+
+      // Use a ref to store the reaction because we want to do some annotations.
+      const reaction = useRef();
+
+      // Create a memoized reactive wrapper of the original component (render)
+      // at the very first run of the component function.
+      const render = useMemo(
+        () => {
+          reaction.current = observe(Comp, {
+            scheduler: () => {
+              // Trigger a new rerender if the component has already been
+              // mounted.
+              if (reaction.current.mounted) setState({});
+              // Annotate it as "changed" if the component has not been mounted
+              // yet.
+              else reaction.current.changedBeforeMounted = true;
+            },
+            lazy: true,
+          });
+
+          // Initilalize a flag to know if the component was finally mounted.
+          reaction.current.mounted = false;
+
+          // Initilalize a flag to know if the was reaction was invalidated
+          // before the component was mounted.
+          reaction.current.changedBeforeMounted = false;
+
+          return reaction.current;
+        },
+
+        // Adding the original Comp here is necessary to make HMR work. It does
+        // not affect behavior otherwise.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [Comp]
+      );
+
+      useEffect(() => {
+        // Mark the component as mounted.
+        reaction.current.mounted = true;
+
+        // If there was a change before the component was mounted, trigger a
+        // new rerender.
+        if (reaction.current.changedBeforeMounted) setState({});
+
+        // Cleanup the reactive connections when the component is unmounted.
+        return () => unobserve(reaction.current);
+      }, []);
+
+      // Extract the Frontity store from the context.
       const { state, actions, libraries } = useContext(context);
+
+      // The isConnected flag is used to warn users that try to use `useConnect`
+      // in a non-connected component.
       isConnected = true;
-      const rendered = Comp({
-        ...props,
-        ...(options.injectProps ? { state, actions, libraries } : {}),
-      });
-      isConnected = false;
-      return rendered;
-    });
-  } else {
-    if (options.injectProps) {
-      /**
-       * A wrapper for the Component that extracts the store from the context
-       * and passes it to the Component.
-       */
-      class ConnectedComponent extends Component {
-        /**
-         * The render method of this React Class.
-         *
-         * @returns The same Component but with the store injected as props.
-         */
-        render() {
-          const { state, actions, libraries } = this.context;
-          const props = { ...this.props, state, actions, libraries };
-          return <Comp {...props} />;
-        }
+      try {
+        // Run the reactive render instead of the original one and inject the
+        // props if necessary.
+        return render({
+          ...props,
+          ...(options.injectProps && state && { state }),
+          ...(options.injectProps && actions && { actions }),
+          ...(options.injectProps && libraries && { libraries }),
+        });
+      } finally {
+        isConnected = false;
       }
-      ConnectedComponent.contextType = context;
-      return view(ConnectedComponent);
+    };
+  } else {
+    /**
+     * Wrap the component to extract the store from the context and pass it
+     * down to the final component. Also, make the render method reactive.
+     */
+    class ReactiveClassComp extends Comp {
+      /**
+       * Initilize the wrapper.
+       *
+       * @param props - The props passed to the original component.
+       * @param context - The React context.
+       */
+      constructor(props, context) {
+        super(props, context);
+
+        // Create some state to be able to rerender the component later.
+        this.state = this.state || {};
+        this.state[COMPONENT] = this;
+
+        // Make the render method reactive.
+        this.render = observe(this.render, {
+          scheduler: () => this.setState({}),
+          lazy: true,
+        });
+      }
+
+      /**
+       * The render method of this React Class.
+       *
+       * @returns The same Component but with the store injected as props.
+       */
+      render() {
+        const { state, actions, libraries } = this.context;
+        const props = { ...this.props, state, actions, libraries };
+        return <Comp {...props} />;
+      }
+
+      /**
+       * React should trigger updates on prop changes, while  handles
+       * store changes.
+       *
+       * @param nextProps - The props of the next render.
+       * @param nextState - The state of the next render.
+       * @returns Whether the component should rerender or not.
+       */
+      shouldComponentUpdate(nextProps, nextState) {
+        const { props, state } = this;
+
+        // Respect the case when the user defines a shouldComponentUpdate.
+        if (super.shouldComponentUpdate) {
+          return super.shouldComponentUpdate(nextProps, nextState);
+        }
+
+        // Return true if it is a reactive render or the state changes.
+        if (state !== nextState) {
+          return true;
+        }
+
+        // The component should also update if any of its props shallowly
+        // changed value.
+        const keys = Object.keys(props);
+        const nextKeys = Object.keys(nextProps);
+        return (
+          nextKeys.length !== keys.length ||
+          nextKeys.some((key) => props[key] !== nextProps[key])
+        );
+      }
+
+      /**
+       * Remove the reaction when the component is unmounted.
+       */
+      componentWillUnmount() {
+        // Call user defined componentWillUnmount.
+        if (super.componentWillUnmount) {
+          super.componentWillUnmount();
+        }
+        // Clean up memory used.
+        unobserve(this.render);
+      }
     }
-    return view(Comp);
+
+    // Attach the context and pass the compnent up.
+    ReactiveClassComp.contextType = context;
+    ReactiveComp = ReactiveClassComp;
   }
-};
+
+  // Make sure we display the correct name.
+  ReactiveComp.displayName = Comp.displayName || Comp.name;
+
+  // static props are inherited by class components,
+  // but have to be copied for function components
+  if (isStatelessComp) {
+    Object.keys(Comp).forEach((key) => {
+      ReactiveComp[key] = Comp[key];
+    });
+  }
+
+  return isStatelessComp ? memo(ReactiveComp) : ReactiveComp;
+}
 
 /**
  * React hook that returns the Frontity store in connected components.
