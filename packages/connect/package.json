@@ -24,8 +24,8 @@
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },
   "dependencies": {
-    "@frontity/react-easy-state": "7.0.0",
-    "@frontity/observer-util": "4.3.0",
+    "@frontity/react-easy-state": "^7.0.0",
+    "@frontity/observer-util": "^4.3.0",
     "@frontity/error": "^0.1.1",
     "@frontity/types": "^1.6.0"
   },
