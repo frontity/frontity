@@ -41,7 +41,9 @@ const sites = [
 beforeEach(() => {
   mockedFsExtra.writeFile.mockReset();
   mockedFsExtra.ensureDir.mockReset();
-  mockedFsExtra.ensureDir.mockImplementation(() => {});
+  mockedFsExtra.ensureDir.mockImplementation(() => {
+    // Silence.
+  });
   mockedFsExtra.pathExists.mockReset();
   mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
   mockedEntryExists.default.mockImplementation((path) => {
@@ -98,7 +100,7 @@ describe("generateClientEntryPoints", () => {
   });
 
   test("should write HMR code if in development", async () => {
-    const bundles = await generateClientEntryPoints({
+    await generateClientEntryPoints({
       sites: site,
       outDir: "/build",
       mode: "development",
@@ -249,7 +251,7 @@ describe("entryPoint", () => {
   });
 
   test("should not return path when none exist", async () => {
-    mockedEntryExists.default.mockImplementation((path) => {
+    mockedEntryExists.default.mockImplementation(() => {
       return Promise.resolve(false);
     });
     const entry = await entryPoint({
