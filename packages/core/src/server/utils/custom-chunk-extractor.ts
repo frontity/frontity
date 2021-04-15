@@ -11,10 +11,7 @@ export class CustomChunkExtractor extends ChunkExtractor {
    * @returns A list of assets.
    */
   getPreAssets() {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const assets = (ChunkExtractor as Function).prototype.getPreAssets.call(
-      this
-    );
+    const assets = super.getPreAssets();
     return assets.map((asset) => {
       if (asset.filename.indexOf(".module.") !== -1) {
         asset.linkType = "modulepreload";
