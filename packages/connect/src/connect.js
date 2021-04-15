@@ -51,12 +51,12 @@ const defaultOptions = {
  * props.
  */
 export function connect(Comp, options) {
-  const isStatelessComp = !(Comp.prototype && Comp.prototype.isReactComponent);
+  const isFunctionalComp = !(Comp.prototype && Comp.prototype.isReactComponent);
   options = options ? { ...defaultOptions, ...options } : defaultOptions;
 
   let ReactiveComp;
 
-  if (isStatelessComp) {
+  if (isFunctionalComp) {
     // Use a hook based reactive wrapper.
     ReactiveComp = (props) => {
       // Dummy setState to update the component.
@@ -217,15 +217,15 @@ export function connect(Comp, options) {
   // Make sure we display the correct name.
   ReactiveComp.displayName = Comp.displayName || Comp.name;
 
-  // static props are inherited by class components,
-  // but have to be copied for function components
-  if (isStatelessComp) {
+  // Static props are inherited by class components, but have to be copied for
+  // function components.
+  if (isFunctionalComp) {
     Object.keys(Comp).forEach((key) => {
       ReactiveComp[key] = Comp[key];
     });
   }
 
-  return isStatelessComp ? memo(ReactiveComp) : ReactiveComp;
+  return isFunctionalComp ? memo(ReactiveComp) : ReactiveComp;
 }
 
 /**
