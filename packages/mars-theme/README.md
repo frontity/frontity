@@ -4,9 +4,9 @@
 
 A starter theme for Frontity
 
-Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-mars-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
 
-![](https://raw.githubusercontent.com/frontity/gitbook-docs/master/docs/.gitbook/assets/screenshot-mars-theme-demo.png)
+![](https://raw.githubusercontent.com/frontity/api-reference/master/docs-api/.gitbook/assets/screenshot-mars-theme-demo%20(1).png)
 
 ## Table of contents
 
@@ -55,7 +55,7 @@ The theme options can be specified in the `state.theme` property.
 },
 ```
 
-Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-mars-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
 
 ## Theme Anatomy
 
@@ -113,7 +113,7 @@ Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.m
 
 | Path | Description |
 |---------|----------|
-| _`./types.ts`_ | Typescript interface for MarsTheme settings. Useful for typescrtiup | 
+| _`./types.ts`_ | Typescript interface for MarsTheme settings. Useful for typescrtiup |
 
 
 
