@@ -40,6 +40,10 @@ const useInfiniteScroll = ({
 
   const { state, actions } = useConnect<Packages>();
 
+  // Get the current router link. It will be used later to check if the link
+  // should be updated in case the route's `useInView` hook kicks in.
+  const routerLink = state.router.link;
+
   // Declare the data objects needed, all of them initialized as `null`.
   let current: Data = null;
   let next: Data = null;
@@ -107,13 +111,13 @@ const useInfiniteScroll = ({
   useEffect(() => {
     if (!isSupported) return;
 
-    if (route.inView && state.router.link !== currentLink) {
+    if (route.inView && routerLink !== currentLink) {
       actions.router.set(currentLink, {
         method: "replace",
         state: state.router.state,
       });
     }
-  }, [route.inView, currentLink]);
+  }, [route.inView, routerLink, currentLink]);
 
   return isSupported
     ? {
