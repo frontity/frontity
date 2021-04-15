@@ -30,6 +30,17 @@ describe("Script", () => {
     cy.get("[data-test-id='target']").should("have.text", "ON");
   });
 
+  it("should pass down other props and data attributes", () => {
+    cy.get("[id='with-props']")
+      .should("have.attr", "randomProp", "random")
+      .should("have.attr", "otherRandomProp", "otherRandom")
+      .should("have.attr", "class", "someClassName")
+      .should("have.attr", "data-value", "3")
+      .within(([$script]) => {
+        expect(typeof $script.onload).toBe("function");
+      });
+  });
+
   /**
    * This one was added to check this bug was solved:
    * https://github.com/frontity/frontity/issues/592.

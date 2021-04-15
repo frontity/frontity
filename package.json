@@ -8,9 +8,6 @@
     "prepare": "lerna bootstrap --hoist",
     "reinstall": "lerna clean --yes && npm run prepare"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",

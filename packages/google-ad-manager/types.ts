@@ -68,6 +68,17 @@ export interface GooglePublisherTagProps {
    * rendered by a slot.
    */
   data?: any;
+
+  /**
+   * A value passed as the first parameter to slot.setCollapseEmptyDiv(collapseEmptyDiv).
+   *
+   * @remarks
+   * More details in:
+   * https://developers.google.com/publisher-tag/reference#googletag.Slot_setCollapseEmptyDiv
+   *
+   * @defaultValue false
+   */
+  collapseEmptyDiv?: boolean;
 }
 
 /**
