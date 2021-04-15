@@ -273,6 +273,25 @@ export const downloadFavicon = async (path: string) => {
 };
 
 /**
+ * Creates a .gitignore file and initializes git.
+ *
+ * @param path - The path where git should be initialized.
+ */
+export const initializeGit = async (path: string) => {
+  const fileTemplate = await readFile(
+    resolvePath(__dirname, "../../templates/gitignore-template"),
+    {
+      encoding: "utf8",
+    }
+  );
+  const filePath = resolvePath(path, ".gitignore");
+  await writeFile(filePath, fileTemplate);
+  await promisify(exec)("git init", { cwd: path });
+  await promisify(exec)("git add .", { cwd: path });
+  await promisify(exec)('git commit -m "initial commit"', { cwd: path });
+};
+
+/**
  * Remove the files and directories created with `frontity create` in case there
  * was a problem and we need to revert everything.
  *

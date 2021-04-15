@@ -20,6 +20,11 @@ export type CreateCommandOptions = {
   typescript?: boolean;
 
   /**
+   * Support for Git.
+   */
+  git?: boolean;
+
+  /**
    * Frontity packages that need to be installed.
    */
   packages?: string[];

@@ -10,12 +10,14 @@ import {
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
+  initializeGit,
   revertProgress,
 } from "../steps";
 
 const defaultOptions: CreateCommandOptions = {
   path: process.cwd(),
   typescript: false,
+  git: false,
   packages: [],
   theme: "@frontity/mars-theme",
 };
@@ -48,6 +50,7 @@ export default (options?: CreateCommandOptions) =>
         theme,
         path,
         typescript,
+        git,
       }: CreateCommandOptions = normalizeOptions(defaultOptions, options);
 
       process.on("SIGINT", async () => {
@@ -95,6 +98,12 @@ export default (options?: CreateCommandOptions) =>
         step = downloadFavicon(path);
         emit("message", `Downloading ${chalk.yellow("favicon.ico")}.`, step);
         await step;
+
+        if (git) {
+          step = initializeGit(path);
+          emit("message", `Initializing git.`, step);
+          await step;
+        }
       } catch (error) {
         if (typeof dirExisted !== "undefined")
           await revertProgress(dirExisted, path);

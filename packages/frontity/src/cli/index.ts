@@ -25,6 +25,7 @@ program
   .command("create [name]")
   .option("--theme <theme>", "The theme to use")
   .option("--typescript", "Adds support for TypeScript")
+  .option("--git", "Initializes git repository")
   .option("--use-cwd", "Generates the project in the current directory.")
   .option("--no-prompt", "Skips prompting the user for options")
   .description("Creates a new Frontity project.")
