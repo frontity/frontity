@@ -24,11 +24,15 @@ describe("CLI create", () => {
     mockedUtils.errorLogger = jest.fn((error) => {
       throw error;
     });
+
+    delete process.env.FRONTITY_CREATE_TYPESCRIPT;
+    delete process.env.FRONTITY_CREATE_GIT;
   });
 
   const options = {
     name: undefined,
     typescript: undefined,
+    git: undefined,
     useCwd: undefined,
     theme: undefined,
     prompt: true,
@@ -79,6 +83,7 @@ describe("CLI create", () => {
       name: "test-project",
       theme: "test-theme",
       typescript: false,
+      git: false,
       path: resolve(process.cwd(), name),
     });
   });
@@ -103,6 +108,32 @@ describe("CLI create", () => {
       name: name,
       theme: "test-theme",
       typescript,
+      git: false,
+      path: resolve(process.cwd(), name),
+    });
+  });
+
+  test("frontity create 'test-project' --git", async () => {
+    mockedInquirer.prompt
+      .mockResolvedValueOnce({
+        theme: "test-theme",
+      })
+      .mockResolvedValueOnce("Y");
+
+    const name = "test-project";
+    const git = true;
+
+    await create({ ...options, name, git });
+
+    const params = mockedCreateCmd.default.mock.calls[0][0];
+    // omit path because it can vary depending on environment
+    expect(omit(params, "path")).toMatchSnapshot();
+
+    expect(mockedCreateCmd.default).toHaveBeenCalledWith({
+      name: name,
+      theme: "test-theme",
+      typescript: false,
+      git,
       path: resolve(process.cwd(), name),
     });
   });
@@ -129,6 +160,7 @@ describe("CLI create", () => {
       name,
       theme: "@frontity/mars-theme",
       typescript: false,
+      git: false,
       path: resolve(process.cwd(), name),
     });
   });
@@ -147,6 +179,26 @@ describe("CLI create", () => {
       name,
       theme: "@frontity/mars-theme",
       typescript: true,
+      git: false,
+      path: resolve(process.cwd(), name),
+    });
+  });
+
+  test("FRONTITY_CREATE_GIT='true'; frontity create 'test-project' --no-prompt", async () => {
+    const name = "test-project";
+    process.env.FRONTITY_CREATE_GIT = "true";
+
+    await create({ ...options, name, prompt: false });
+
+    const params = mockedCreateCmd.default.mock.calls[0][0];
+    // omit path because it can vary depending on environment
+    expect(omit(params, "path")).toMatchSnapshot();
+
+    expect(mockedCreateCmd.default).toHaveBeenCalledWith({
+      name,
+      theme: "@frontity/mars-theme",
+      git: true,
+      typescript: false,
       path: resolve(process.cwd(), name),
     });
   });
@@ -165,7 +217,8 @@ describe("CLI create", () => {
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name,
       theme,
-      typescript: true,
+      typescript: false,
+      git: false,
       path: resolve(process.cwd(), name),
     });
   });
