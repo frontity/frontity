@@ -1,11 +1,11 @@
-import React from "react";
+import { Component } from "react";
 import { create, act } from "react-test-renderer";
 import * as error from "@frontity/error";
 import connect, { Provider, createStore, useConnect } from "..";
 
 let store;
 
-const Component = () => <div>component from library</div>;
+const Comp = () => <div>component from library</div>;
 
 beforeEach(() => {
   store = createStore({
@@ -23,7 +23,7 @@ beforeEach(() => {
       },
     },
     libraries: {
-      Component,
+      Comp,
     },
   });
 });
@@ -53,7 +53,7 @@ describe("connect", () => {
   });
 
   it("should pass state to class components", () => {
-    class Comp extends React.Component {
+    class Comp extends Component {
       render() {
         return <div>{this.props.state.prop1}</div>;
       }
@@ -151,10 +151,10 @@ describe("connect", () => {
 
   it("should pass other props passed to store", () => {
     const Comp = ({ libraries }) => {
-      const Component = libraries.Component;
+      const Comp = libraries.Comp;
       return (
         <div>
-          <Component />
+          <Comp />
         </div>
       );
     };
@@ -267,7 +267,7 @@ describe("useConnect", () => {
   it("should pass libraries", () => {
     const Comp = connect(() => {
       const { libraries } = useConnect();
-      return <libraries.Component />;
+      return <libraries.Comp />;
     });
     const app = create(
       <Provider value={store}>
