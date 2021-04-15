@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, jest/expect-expect */
 import connect, { useConnect, createStore } from "..";
 import {
   Action,
