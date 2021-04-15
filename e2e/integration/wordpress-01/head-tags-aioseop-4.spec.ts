@@ -7,7 +7,7 @@ type WindowWithFrontity = Cypress.AUTWindow & {
   frontity: ResolvePackages<Router>;
 };
 
-describe("Head Tags - All in One SEO Pack ^4.0.16", () => {
+describe.skip("Head Tags - All in One SEO Pack ^4.0.16", () => {
   before(() => {
     task("installPlugin", { name: "all-in-one-seo-pack" });
     task("installPlugin", { name: "rest-api-head-tags" });

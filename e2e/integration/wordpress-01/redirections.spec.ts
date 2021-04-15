@@ -20,6 +20,46 @@ describe("Redirections", () => {
     cy.get("#link-counter").should("contain.text", "1");
   });
 
+  it("Should redirect to the requested domain, not to `state.frontity.url`", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world/?frontity_name=redirections&frontity_url=http://my.frontity.site"
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+    cy.get("#link-counter").should("contain.text", "1");
+  });
+
+  it("Should not redirect server side when in embedded mode", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world/?frontity_name=redirections&frontity_embedded=true",
+      { failOnStatusCode: false }
+    );
+
+    cy.location("href").should("eq", "http://localhost:3001/hello-world/");
+    cy.get("#post").should("not.exist");
+    cy.get("#404").should("exist");
+    cy.get("#link-counter").should("contain.text", "1");
+  });
+
+  it("Should not redirect server side when in embedded mode for 404", () => {
+    cy.visit(
+      "http://localhost:3001/hello-world/?frontity_name=redirections&frontity_embedded=true&redirections=404",
+      { failOnStatusCode: false }
+    );
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world/?redirections=404"
+    );
+    cy.get("#post").should("not.exist");
+    cy.get("#404").should("exist");
+    cy.get("#link-counter").should("contain.text", "1");
+  });
+
   it("Should handle query params in a redirection", () => {
     cy.visit(
       "http://localhost:3001/hello-world/?frontity_name=redirections&redirections=all"
@@ -50,6 +90,38 @@ describe("Redirections", () => {
 
   it("Should redirect when navigating on the client", () => {
     cy.visit("http://localhost:3001?frontity_name=redirections");
+
+    // Go to the "redirected" page.
+    cy.get("#open-post").click();
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+    cy.get("#link-counter").should("contain.text", "3");
+  });
+
+  it("Should redirect when navigating on the client in embedded mode", () => {
+    cy.visit(
+      "http://localhost:3001?frontity_name=redirections&frontity_embedded=true"
+    );
+
+    // Go to the "redirected" page.
+    cy.get("#open-post").click();
+
+    cy.location("href").should(
+      "eq",
+      "http://localhost:3001/hello-world-redirected/"
+    );
+    cy.get("#post").should("exist");
+    cy.get("#link-counter").should("contain.text", "3");
+  });
+
+  it("Should redirect 404s when navigating on the client in embedded mode", () => {
+    cy.visit(
+      "http://localhost:3001?frontity_name=redirections&frontity_embedded=true&redirections=404"
+    );
 
     // Go to the "redirected" page.
     cy.get("#open-post").click();

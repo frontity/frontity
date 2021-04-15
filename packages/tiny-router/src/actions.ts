@@ -286,12 +286,9 @@ export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
     // or 308.
     ctx.status = data.redirectionStatus;
 
-    // 30X redirections need the be absolute, so we add the Frontity URL.
-    const redirectionURL =
-      state.frontity.url.replace(/\/$/, "") +
-      location.pathname +
-      location.search +
-      location.hash;
+    // 30X redirections can be relative so adding the Frontity URL is not
+    // needed - see https://tools.ietf.org/html/rfc7231#page-68.
+    const redirectionURL = location.pathname + location.search + location.hash;
 
     ctx.redirect(redirectionURL);
     return;

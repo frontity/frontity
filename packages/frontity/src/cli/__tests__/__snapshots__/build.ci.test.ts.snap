@@ -12,6 +12,7 @@ exports[`build should get values from ENV variables 1`] = `
 Array [
   Array [
     Object {
+      "analyze": true,
       "development": true,
       "publicPath": "/public/path",
       "target": "es5",
@@ -24,6 +25,7 @@ exports[`build should ignore ENV variables for passed arguments 1`] = `
 Array [
   Array [
     Object {
+      "analyze": false,
       "development": false,
       "publicPath": "/static",
       "target": "module",
@@ -36,6 +38,7 @@ exports[`build should receive default values 1`] = `
 Array [
   Array [
     Object {
+      "analyze": false,
       "development": false,
       "publicPath": "/static/",
       "target": "both",

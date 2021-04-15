@@ -81,3 +81,18 @@ test("Webpack changes the public path if specified", () => {
   expect(module.output.publicPath).toBe(publicPath);
   expect(server.output.publicPath).toBe(publicPath);
 });
+
+test("Webpack includes the Bundle Analyzer plugin if specified", () => {
+  const { es5, module, server } = getWebpack({
+    mode: "production",
+    babel: babel["production"],
+    frontity,
+    entryPoints,
+    publicPath: "/static",
+    analyze: true,
+  });
+
+  expect(es5.plugins).toMatchSnapshot();
+  expect(module.plugins).toMatchSnapshot();
+  expect(server.plugins).toMatchSnapshot();
+});
