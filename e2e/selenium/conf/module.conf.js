@@ -17,7 +17,7 @@ exports.config = {
       process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "Selenium-Local",
   },
   capabilities: [
-    //Safari - Bigger than 10.1
+    // Safari - Bigger than 10.1
     {
       browserName: "iPhone",
       device: "iPhone 12",
@@ -35,14 +35,14 @@ exports.config = {
       os_version: "High Sierra",
       browserName: "Safari",
       browser_version: "11.1",
-      //We have to exclude use-in-view because interSectionObserver is not supported
-      //until Safari 12.1
+      // We have to exclude use-in-view because interSectionObserver is not supported
+      // until Safari 12.1
       exclude: [
         "./selenium/tests/specs/module/use-in-view.spec.js",
         "./selenium/tests/specs/module/smart-adserver.spec.js",
       ],
     },
-    //Chrome - Bigger than 61
+    // Chrome - Bigger than 61
     {
       device: "Google Pixel 4",
       os_version: "11.0",
@@ -73,7 +73,7 @@ exports.config = {
       browserName: "Chrome",
       browser_version: "61.0",
     },
-    // //Firefox - Bigger than 60
+    // Firefox - Bigger than 60
     {
       os: "Windows",
       os_version: "10",
@@ -98,7 +98,7 @@ exports.config = {
       browserName: "Firefox",
       browser_version: "60.0",
     },
-    // //Edge - Bigger than 16
+    // Edge - Bigger than 16
     {
       os: "Windows",
       os_version: "10",

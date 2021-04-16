@@ -21,13 +21,6 @@ exports.config = {
       process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "Selenium-Local",
   },
   capabilities: [
-    // Safari 10.1
-    {
-      os: "OS X",
-      os_version: "Sierra",
-      browserName: "Safari",
-      browser_version: "10.1",
-    },
     // Chrome - Between 49 and 60
     {
       os: "Windows",
@@ -64,7 +57,7 @@ exports.config = {
       os: "Windows",
       os_version: "XP",
       browserName: "Firefox",
-      browser_version: "34.0",
+      browser_version: "40.0",
     },
     {
       os: "OS X",
@@ -76,7 +69,7 @@ exports.config = {
       os: "OS X",
       os_version: "Snow Leopard",
       browserName: "Firefox",
-      browser_version: "34.0",
+      browser_version: "40.0",
     },
     // Edge - Between 12 and 15
     {
@@ -84,14 +77,6 @@ exports.config = {
       os_version: "10",
       browserName: "Edge",
       browser_version: "15.0",
-      // BrowserStack Automate tool fails for these tests in Edge 15.0 but they
-      // are working on the Live tool.
-      exclude: [
-        "./selenium/tests/specs/module/analytics.spec.js",
-        "./selenium/tests/specs/module/comscore-analytics.spec.js",
-        "./selenium/tests/specs/module/google-analytics.spec.js",
-        "./selenium/tests/specs/module/google-tag-manager-analytics.spec.js",
-      ],
     },
   ],
 };

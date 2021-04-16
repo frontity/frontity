@@ -18,7 +18,7 @@ exports.config = {
         "Localhost " + new Date().toISOString()),
   },
   capabilities: [
-    //Safari - Smaller than 9.1
+    // Safari - Smaller than 9.1
     {
       os: "OS X",
       os_version: "El Capitan",
@@ -31,7 +31,7 @@ exports.config = {
       browserName: "Safari",
       browser_version: "5.1",
     },
-    //Chrome - Smaller than 48
+    // Chrome - Smaller than 48
     {
       os: "Windows",
       os_version: "10",
@@ -56,7 +56,7 @@ exports.config = {
       browserName: "Chrome",
       browser_version: "14.0",
     },
-    //Firefox - Smaller than 17
+    // Firefox - Smaller than 17
     {
       os: "Windows",
       os_version: "8.1",
@@ -81,7 +81,7 @@ exports.config = {
       browserName: "Firefox",
       browser_version: "4.0",
     },
-    //Internet Explorer - IE9 - IE11
+    // Internet Explorer - IE9 - IE11
     {
       os: "Windows",
       os_version: "10",
