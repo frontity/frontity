@@ -286,6 +286,76 @@ describe("Link", () => {
     expect(anchor2.href).toEqual(linkUrl);
   });
 
+  test("it removes the source url from links if WordPress is multisite", () => {
+    store.state.source.url = "http://backend.url/subsite/";
+
+    const linkUrl = store.state.source.url + "internal-link";
+
+    act(() => {
+      render(
+        <Provider value={store}>
+          <Link link={linkUrl} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl} className="my-link-2" replaceSourceUrls={false}>
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.router, "set");
+
+    const anchor = document.querySelector("a.my-link");
+    const anchor2 = document.querySelector("a.my-link-2") as HTMLAnchorElement;
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor2.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(store.actions.router.set).toHaveBeenCalledWith("/internal-link");
+    expect(store.actions.router.set).toHaveBeenCalledTimes(1);
+    expect(anchor2.href).toEqual(linkUrl);
+  });
+
+  test("it prepends the `subdirectory` prop if set", () => {
+    store.state.source.subdirectory = "/blog";
+
+    const linkUrl = store.state.source.url + "/internal-link";
+
+    act(() => {
+      render(
+        <Provider value={store}>
+          <Link link={linkUrl} className="my-link">
+            This is a link
+          </Link>
+          <Link link={linkUrl} className="my-link-2" replaceSourceUrls={false}>
+            This is a link
+          </Link>
+        </Provider>,
+        container
+      );
+    });
+
+    jest.spyOn(store.actions.router, "set");
+
+    const anchor = document.querySelector("a.my-link");
+    const anchor2 = document.querySelector("a.my-link-2") as HTMLAnchorElement;
+
+    act(() => {
+      anchor.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      anchor2.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(store.actions.router.set).toHaveBeenCalledWith(
+      "/blog/internal-link"
+    );
+    expect(store.actions.router.set).toHaveBeenCalledTimes(1);
+    expect(anchor2.href).toEqual(linkUrl);
+  });
+
   test("it takes into account the `match` property before replacing internal links", () => {
     const storeWithMatch = { ...store };
 
