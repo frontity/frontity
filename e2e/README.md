@@ -117,6 +117,8 @@ The defaults correspond to the most common configuration when working locally, s
 
 BrowserStack can be used to run the tests in the cloud. If you want to do that, create a `.env` file with your BrowserStack username and access key, and then use `node e2e.js --cypress browserstack` to start.
 
+> 💡 Credentials can be found in the BrowserStack [Automate Dashboard](https://automate.browserstack.com/dashboard/v2), under the "ACCESS KEY" dropdown of the top bar.
+
 By default, it will run the tests in the latest versions of Chrome, Firefox and Edge in Windows 10.
 
 You can create your own `browserstack.json` file and use `--browserstack-config my-browserstack.json` to use it.
