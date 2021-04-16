@@ -9,6 +9,7 @@ interface Preview extends Package {
    * Package name.
    */
   name: "e2e-preview";
+
   /**
    * Root components exposed by this package.
    */

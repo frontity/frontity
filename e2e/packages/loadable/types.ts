@@ -8,6 +8,7 @@ interface Loadable extends Package {
    * Package name.
    */
   name: "e2e-loadable";
+
   /**
    * Root components exposed by this package.
    */
