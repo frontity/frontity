@@ -16,6 +16,7 @@ describe("create", () => {
     mockedSteps.createFrontitySettings.mockReset();
     mockedSteps.cloneStarterTheme.mockReset();
     mockedSteps.installDependencies.mockReset();
+    mockedSteps.initializeGit.mockReset();
     mockedSteps.revertProgress.mockReset();
   });
 
@@ -72,6 +73,20 @@ describe("create", () => {
       options.path,
       "@frontity/mars-theme"
     );
+  });
+
+  test("works correctly when `options.git` is true", async () => {
+    const { normalizeOptions } = jest.requireActual("../../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
+    const options = {
+      name: "random-name",
+      path: "/path/to/project",
+      git: true,
+    };
+
+    await create(options);
+    expect(mockedSteps.initializeGit).toHaveBeenCalledWith(options.path);
   });
 
   test("calls removeProgress on error with dirExisted=true", async () => {

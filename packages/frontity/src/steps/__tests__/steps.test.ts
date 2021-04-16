@@ -6,6 +6,7 @@ import {
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
+  initializeGit,
   revertProgress,
 } from "../";
 import { createPackageJson as createPackageJsonForPackage } from "../create-package";
@@ -290,6 +291,33 @@ describe("installDependencies", () => {
     const path = "/path/to/project";
 
     await installDependencies(path);
+    expect(mockedChildProcess.exec.mock.calls).toMatchSnapshot();
+  });
+});
+
+describe("initializeGit", () => {
+  beforeEach(() => {
+    mockedFsExtra.readFile.mockReset();
+    mockedFsExtra.readFile.mockResolvedValueOnce("$git$" as any);
+    mockedFsExtra.writeFile.mockReset();
+    mockedChildProcess.exec.mockReset();
+    (mockedChildProcess as any).exec.mockImplementation(
+      (
+        _command: string,
+        _options: Record<string, unknown>,
+        resolve: (...args: any) => any
+      ) => {
+        resolve();
+      }
+    );
+  });
+
+  test("works as expected", async () => {
+    const path = "/path/to/project";
+
+    await initializeGit(path);
+    expect(mockedFsExtra.readFile).toHaveBeenCalled();
+    expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
     expect(mockedChildProcess.exec.mock.calls).toMatchSnapshot();
   });
 });
