@@ -1,10 +1,13 @@
-const { By } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("google-ad-manager", function () {
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=google-ad-manager");
-    await driver.manage().setTimeouts({ implicit: 5000 });
+    await driver.wait(
+      until.elementLocated(By.css("#header-ad>div>iframe")),
+      5000
+    );
   });
 
   it("should load the GPT library", async function () {

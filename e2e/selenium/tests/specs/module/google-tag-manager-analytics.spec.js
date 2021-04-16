@@ -1,10 +1,10 @@
-const { By } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("google-tag-manager-analytics", function () {
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=google-tag-manager");
-    await driver.manage().setTimeouts({ implicit: 5000 });
+    await driver.wait(until.titleIs("Homepage Title"), 5000);
   });
 
   const pageviewHome = {
@@ -41,7 +41,7 @@ describe("google-tag-manager-analytics", function () {
 
   it("should send a pageview if the page changes", async function () {
     await driver.findElement(By.id("change-link")).click();
-    await driver.manage().setTimeouts({ implicit: 2000 });
+    await driver.wait(until.titleIs("Some Post Title"), 5000);
     assert.deepEqual(
       await driver.executeScript("return window.dataLayer[2]"),
       pageviewSomePost
@@ -50,14 +50,15 @@ describe("google-tag-manager-analytics", function () {
 
   it("should send pageviews when going back or forward", async function () {
     await driver.findElement(By.id("change-link")).click();
-    await driver.manage().setTimeouts({ implicit: 2000 });
+    await driver.wait(until.titleIs("Some Post Title"), 5000);
     await driver.executeScript("return window.history.back()");
-    await driver.manage().setTimeouts({ implicit: 2000 });
+    await driver.wait(until.titleIs("Homepage Title"), 5000);
     assert.deepEqual(
       await driver.executeScript("return window.dataLayer[3]"),
       pageviewHome
     );
     await driver.executeScript("return window.history.forward()");
+    await driver.wait(until.titleIs("Some Post Title"), 5000);
     assert.deepEqual(
       await driver.executeScript("return window.dataLayer[4]"),
       pageviewSomePost
