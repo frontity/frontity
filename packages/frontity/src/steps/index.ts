@@ -86,11 +86,13 @@ export const ensureProjectDir = async (path: string): Promise<boolean> => {
  * @param name - The name of the project.
  * @param theme - The theme that will be cloned and installed locally.
  * @param path - The path where the file will be created.
+ * @param typescript - Indicates if the typescript flag is active.
  */
 export const createPackageJson = async (
   name: string,
   theme: string,
-  path: string
+  path: string,
+  typescript: boolean
 ) => {
   const packages = [
     "frontity",
@@ -136,6 +138,26 @@ export const createPackageJson = async (
     prettier: {},
     dependencies,
   };
+
+  // If the typescript flag is active, add the needed devDependencies.
+  if (typescript) {
+    const devPackages = ["@types/react", "@types/node-fetch"];
+    const devDependencies = (
+      await Promise.all(
+        devPackages.map(async (pkg) => {
+          // Get the version of each package.
+          const version = await fetchPackageVersion(pkg);
+          return [pkg, `^${version}`];
+        })
+      )
+    ).reduce((final, current) => {
+      // Reduce the packages into a dependecies object.
+      final[current[0]] = current[1];
+      return final;
+    }, {});
+    packageJson.devDependencies = devDependencies;
+  }
+
   const filePath = resolvePath(path, "package.json");
   const fileData = `${JSON.stringify(packageJson, null, 2)}${EOL}`;
   await writeFile(filePath, fileData);
@@ -225,6 +247,22 @@ export const createFrontitySettings = async (
     if (key === "settings") return JSON.stringify(frontitySettings, null, 2);
   });
   await writeFile(filePath, fileData);
+};
+
+/**
+ * Create a `tsconfig.json` file.
+ *
+ * @param path - The path where the file will be created.
+ */
+export const createTsConfig = async (path: string) => {
+  const fileTemplate = await readFile(
+    resolvePath(__dirname, "../../templates/tsconfig.json"),
+    {
+      encoding: "utf8",
+    }
+  );
+  const filePath = resolvePath(path, "tsconfig.json");
+  await writeFile(filePath, fileTemplate);
 };
 
 /**

@@ -78,5 +78,5 @@ export default Package;
  * An object containing Frontity actions, or other objects containing actions.
  */
 interface Actions {
-  [key: string]: (...args: any) => any | Actions;
+  [key: string]: (...args: unknown[]) => unknown | Actions;
 }
