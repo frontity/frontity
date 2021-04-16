@@ -81,10 +81,10 @@ export function connect(Comp, options) {
             lazy: true,
           });
 
-          // Initilalize a flag to know if the component was finally mounted.
+          // Initialize a flag to know if the component was finally mounted.
           reaction.current.mounted = false;
 
-          // Initilalize a flag to know if the was reaction was invalidated
+          // Initialize a flag to know if the was reaction was invalidated
           // before the component was mounted.
           reaction.current.changedBeforeMounted = false;
 
@@ -135,7 +135,7 @@ export function connect(Comp, options) {
      */
     class ReactiveClassComp extends Comp {
       /**
-       * Initilize the wrapper.
+       * Initialize the wrapper.
        *
        * @param props - The props passed to the original component.
        * @param context - The React context.
