@@ -103,12 +103,19 @@ export type PackageJson = {
   /**
    * The prettier configuration acording to the Frontity coding standards.
    */
-  prettier: object;
+  prettier: Record<string, unknown>;
 
   /**
    * The dependencies of the Frontity project.
    */
   dependencies: {
+    [key: string]: string;
+  };
+
+  /**
+   * The development dependencies of the Frontity project.
+   */
+  devDependencies?: {
     [key: string]: string;
   };
 };

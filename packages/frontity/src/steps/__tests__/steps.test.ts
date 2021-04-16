@@ -3,6 +3,7 @@ import {
   ensureProjectDir,
   createPackageJson,
   createFrontitySettings,
+  createTsConfig,
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
@@ -149,8 +150,9 @@ describe("createPackageJson", () => {
     const name = "random-name";
     const theme = "@frontity/mars-theme";
     const path = "/path/to/project";
+    const typescript = false;
 
-    await createPackageJson(name, theme, path);
+    await createPackageJson(name, theme, path, typescript);
     expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
@@ -159,8 +161,20 @@ describe("createPackageJson", () => {
     const name = "random-name";
     const theme = "random-theme";
     const path = "/path/to/project";
+    const typescript = false;
 
-    await createPackageJson(name, theme, path);
+    await createPackageJson(name, theme, path, typescript);
+    expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
+    expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
+  });
+
+  test('works when "typescript" is true', async () => {
+    const name = "random-name";
+    const theme = "random-theme";
+    const path = "/path/to/project";
+    const typescript = true;
+
+    await createPackageJson(name, theme, path, typescript);
     expect(mockedUtils.fetchPackageVersion.mock.calls).toMatchSnapshot();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });
@@ -191,6 +205,22 @@ describe("createFrontitySettings", () => {
     const theme = "@frontity/mars-theme";
 
     await createFrontitySettings(extension, name, path, theme);
+    expect(mockedFsExtra.readFile).toHaveBeenCalled();
+    expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
+  });
+});
+
+describe("createTsConfig", () => {
+  beforeEach(() => {
+    mockedFsExtra.readFile.mockReset();
+    mockedFsExtra.readFile.mockResolvedValueOnce("$tsconfig$" as any);
+    mockedFsExtra.writeFile.mockReset();
+  });
+
+  test('works as expected"', async () => {
+    const path = "/path/to/project";
+
+    await createTsConfig(path);
     expect(mockedFsExtra.readFile).toHaveBeenCalled();
     expect(mockedFsExtra.writeFile.mock.calls).toMatchSnapshot();
   });

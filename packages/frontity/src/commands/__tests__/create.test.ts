@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-try-expect, jest/no-conditional-expect */
 import create from "../create";
 import * as steps from "../../steps";
 
@@ -14,6 +15,7 @@ describe("create", () => {
     mockedSteps.ensureProjectDir.mockReset();
     mockedSteps.createPackageJson.mockReset();
     mockedSteps.createFrontitySettings.mockReset();
+    mockedSteps.createTsConfig.mockReset();
     mockedSteps.cloneStarterTheme.mockReset();
     mockedSteps.installDependencies.mockReset();
     mockedSteps.initializeGit.mockReset();
@@ -25,6 +27,7 @@ describe("create", () => {
       name: "random-name",
       path: "/path/to/project",
       theme: "@frontity/mars-theme",
+      typescript: false,
     };
     await create(options);
     expect(mockedSteps.normalizeOptions.mock.calls[0][1]).toMatchSnapshot();
@@ -43,11 +46,18 @@ describe("create", () => {
     const options = {
       name: "random-name",
       path: "/path/to/project",
+      theme: "@frontity/mars-theme",
       typescript: false,
     };
 
     await create(options);
 
+    expect(mockedSteps.createPackageJson).toHaveBeenCalledWith(
+      options.name,
+      options.theme,
+      options.path,
+      options.typescript
+    );
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
       "js",
       options.name,
@@ -64,15 +74,25 @@ describe("create", () => {
     const options = {
       name: "random-name",
       path: "/path/to/project",
+      theme: "@frontity/mars-theme",
       typescript: true,
     };
+
     await create(options);
+
+    expect(mockedSteps.createPackageJson).toHaveBeenCalledWith(
+      options.name,
+      options.theme,
+      options.path,
+      options.typescript
+    );
     expect(mockedSteps.createFrontitySettings).toHaveBeenCalledWith(
       "ts",
       options.name,
       options.path,
       "@frontity/mars-theme"
     );
+    expect(mockedSteps.createTsConfig).toHaveBeenCalledWith(options.path);
   });
 
   test("works correctly when `options.git` is true", async () => {
