@@ -13,7 +13,7 @@ describe("GooglePublisherTag", () => {
 
     expect(gpt).toMatchInlineSnapshot(`
       <div
-        className="css-w9ytu2"
+        className="css-urmuyr-GooglePublisherTag"
         id="gpt-id-123"
       />
     `);
@@ -31,7 +31,7 @@ describe("GooglePublisherTag", () => {
 
     expect(gpt).toMatchInlineSnapshot(`
       <div
-        className="css-w9ytu2"
+        className="css-urmuyr-GooglePublisherTag"
         id="gpt-id-123_2020_08_post-with-long-link"
       />
     `);
@@ -51,7 +51,7 @@ describe("GooglePublisherTag", () => {
 
     expect(gpt).toMatchInlineSnapshot(`
       <div
-        className="css-xhftkh"
+        className="css-1o73ait-GooglePublisherTag"
         id="gpt-id-123"
       />
     `);

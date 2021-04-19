@@ -7,24 +7,26 @@
  * `react-easy-state` and `@nx-js/observer-util` already have types themselves.
  */
 
+import { ProviderExoticComponent, ProviderProps } from "react";
+
 interface Scheduler {
-  add: Function;
-  delete: Function;
+  add: (...args: any) => any;
+  delete: (...args: any) => any;
 }
 
 interface ObserveOptions {
-  scheduler?: Scheduler | Function;
-  debugger?: Function;
+  scheduler?: Scheduler | ((...args: any) => any);
+  debugger?: (...args: any) => any;
   lazy?: boolean;
 }
 
 interface ActionsRecursive<T> {
-  [key: string]: T | Function;
+  [key: string]: T | ((...args: any) => any);
 }
 type Actions = ActionsRecursive<Actions>;
 
 type Store = {
-  state?: object;
+  state?: Record<string, unknown>;
   actions?: Actions;
 };
 
@@ -39,9 +41,9 @@ export type Serializable =
   | Record<string, Primitive>;
 
 type ResolveState<State> = {
-  [P in keyof State]: State[P] extends (state: object) => any
+  [P in keyof State]: State[P] extends (state: Record<string, unknown>) => any
     ? ReturnType<State[P]>
-    : State[P] extends Serializable | ((state: object) => any)
+    : State[P] extends Serializable | ((state: Record<string, unknown>) => any)
     ? Exclude<State[P], Derived<any, any>>
     : ResolveState<State[P]>;
 };
@@ -88,10 +90,10 @@ export type Derived<St extends Store, InputOrOutput, Output = null> = [
       state: ResolveState<St["state"]>;
     }) => (input: InputOrOutput) => Output;
 
-export type Connect<St extends Store, Props extends object = {}> = Omit<
-  St,
-  "state" | "actions"
-> & {
+export type Connect<
+  St extends Store,
+  Props extends Record<string, unknown> = Record<string, unknown>
+> = Omit<St, "state" | "actions"> & {
   state: ResolveState<St["state"]>;
   actions: ResolveActions<St["actions"]>;
 } & Props;
@@ -104,20 +106,22 @@ export type UseConnect<Package extends Store> = Omit<
   actions: ResolveActions<Package["actions"]>;
 };
 
-export function observable<Observable extends object>(
+export function observable<Observable extends Record<string, unknown>>(
   obj?: Observable
 ): Observable;
 
-export function isObservable(obj: object): boolean;
+export function isObservable(obj: Record<string, unknown>): boolean;
 
-export function raw<Observable extends object>(obj: Observable): Observable;
+export function raw<Observable extends Record<string, unknown>>(
+  obj: Observable
+): Observable;
 
-export function observe<Reaction extends Function>(
+export function observe<Reaction extends (...args: any) => any>(
   func: Reaction,
   options?: ObserveOptions
 ): Reaction;
 
-export function unobserve(func: Function): void;
+export function unobserve(func: (...args: any) => any): void;
 
 export function batch<T = any>(
   fn: (...args: any[]) => T,
@@ -133,7 +137,9 @@ export type InitializedStore<St extends Store = Store> = Omit<
   actions: ResolveActions<St["actions"]>;
 };
 
-export function getSnapshot(state: object): object;
+export function getSnapshot(
+  state: Record<string, unknown>
+): Record<string, unknown>;
 
 export function createStore<St extends Store>(store: St): InitializedStore<St>;
 
@@ -141,12 +147,12 @@ export type ConnectOptions = {
   injectProps?: boolean;
 };
 
-declare function connect<Props extends object>(
+declare function connect<Props extends Record<string, unknown>>(
   Component: React.ComponentType<Props>,
   options?: ConnectOptions
 ): React.FunctionComponent<FilterInjectedProps<Props>>;
 
-export const Provider: React.ProviderExoticComponent<React.ProviderProps<any>>;
+export const Provider: ProviderExoticComponent<ProviderProps<any>>;
 
 export function useConnect<Package extends Store>(): UseConnect<Package>;
 
