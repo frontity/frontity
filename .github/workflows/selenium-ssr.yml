@@ -2,7 +2,7 @@ name: "BrowserStack Selenium SSR"
 
 on:
   workflow_run:
-    workflows: ["e2e browserstack (dev)"]
+    workflows: ["BrowserStack Selenium Proxy"]
     types: [completed]
 
 jobs:
