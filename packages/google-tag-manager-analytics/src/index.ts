@@ -31,9 +31,6 @@ const googleTagManagerAnalytics: GoogleTagManagerAnalytics = {
     },
     googleTagManagerAnalytics: {},
   },
-  libraries: {
-    ...analytics.libraries,
-  },
 };
 
 export default googleTagManagerAnalytics;
