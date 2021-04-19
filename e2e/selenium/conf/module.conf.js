@@ -8,9 +8,9 @@ exports.config = {
   maxInstances: 1,
   commonCapabilities: {
     build:
-      "Selenium Module Browsers - Dev: " +
+      "Selenium Module Browsers - " +
       (process.env.BROWSERSTACK_BUILD_NAME ||
-        "Localhost " + new Date().toISOString()),
+        "Localhost - " + new Date().toISOString()),
     "browserstack.video": false,
     "browserstack.local": true,
     "browserstack.localIdentifier":
