@@ -1,5 +1,10 @@
-export { observe, unobserve } from "./observer";
-export { observable, isObservable, raw } from "./observable";
+export {
+  observe,
+  unobserve,
+  observable,
+  isObservable,
+  raw,
+} from "@frontity/observer-util";
 export { createStore, getSnapshot } from "./create-store";
 export { connect as default, Provider, useConnect } from "./connect";
-export { batch } from "./scheduler";
+export { batch } from "@frontity/react-easy-state";

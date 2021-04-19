@@ -9,6 +9,7 @@ interface TinyRouterTests extends Package {
    * Package name.
    */
   name: "e2e-tiny-router";
+
   /**
    * State exposed by this package.
    */

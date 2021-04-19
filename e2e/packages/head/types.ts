@@ -8,6 +8,7 @@ interface Head extends Package {
    * Package name.
    */
   name: "e2e-head";
+
   /**
    * Root components exposed by this package.
    */

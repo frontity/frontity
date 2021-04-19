@@ -1,10 +1,13 @@
-/* eslint-disable */
-/*
- * TSDocs will be added in the `migrate-to-react-easy-state` PR:
- * https://github.com/frontity/frontity/pull/415
- */
-import { observable, raw } from "./observable";
+import { raw, proxyHandlers } from "@frontity/observer-util";
+import { store } from "@frontity/react-easy-state";
 
+/**
+ * Extracts an snapshot from the current state that can be serialized and sent
+ * to the client.
+ *
+ * @param obj - The state object.
+ * @returns The same object, but cloned and serializable.
+ */
 export const getSnapshot = (obj) => {
   obj = raw(obj);
   if (typeof obj === "function") return;
@@ -25,8 +28,16 @@ export const getSnapshot = (obj) => {
   }
 };
 
-const convertToAction = (fn, instance) => (...args) => {
-  const first = fn(instance);
+/**
+ * Convert a Frontity action definition in a final Frontity action that can be
+ * consumed by other actions or React components.
+ *
+ * @param action - The action.
+ * @param store - The store.
+ * @returns The action ready to be used with the injected store.
+ */
+const convertToAction = (action, store) => (...args) => {
+  const first = action(store);
   if (first instanceof Promise) {
     return new Promise((resolve, reject) =>
       first.then(() => resolve()).catch((err) => reject(err))
@@ -42,24 +53,70 @@ const convertToAction = (fn, instance) => (...args) => {
   }
 };
 
-const convertedActions = (obj, instance) => {
-  if (typeof obj === "function") return convertToAction(obj, instance);
-  else if (obj instanceof Object) {
-    return Object.keys(obj).reduce((newObj, key) => {
-      newObj[key] = convertedActions(obj[key], instance);
+/**
+ * Convert an object of actions in the final Frontity `actions` object that can
+ * be consumed by other actions or React components.
+ *
+ * @param actions - The object containing all the actions.
+ * @param store - The store.
+ * @returns The same object but will all the actions connected to the store.
+ */
+const convertedActions = (actions, store) => {
+  if (typeof actions === "function") return convertToAction(actions, store);
+  if (actions instanceof Object) {
+    return Object.keys(actions).reduce((newObj, key) => {
+      newObj[key] = convertedActions(actions[key], store);
       return newObj;
     }, {});
   }
 };
 
-export const createStore = (store) => {
-  const observableState = observable(store.state);
+/**
+ * A list of internal JavaScript symbols that should be skipped.
+ */
+const wellKnownSymbols = new Set(
+  Object.getOwnPropertyNames(Symbol)
+    .map((key) => Symbol[key])
+    .filter((value) => typeof value === "symbol")
+);
+
+/**
+ * Create an Frontity Connect store.
+ *
+ * @param config - The plain store object.
+ * @returns The initialized store.
+ */
+export const createStore = (config) => {
+  const observableState = store(config.state, {
+    proxyHandlers: {
+      get: (target, key, receiver) => {
+        const result = proxyHandlers.get(target, key, receiver);
+
+        // Do not try to run derived functions for internal JS symbols and
+        // utils.
+        if (
+          (typeof key === "symbol" && wellKnownSymbols.has(key)) ||
+          key === "constructor"
+        ) {
+          return result;
+        }
+
+        // If it's a function, return the result of that function run with the
+        // root state.
+        if (!Array.isArray(target) && typeof result === "function") {
+          return result({ state: observableState });
+        }
+
+        return result;
+      },
+    },
+  });
   const instance = {
-    ...store,
+    ...config,
     state: observableState,
     actions: {},
   };
-  const newActions = convertedActions(store.actions, instance);
+  const newActions = convertedActions(config.actions, instance);
   Object.assign(instance.actions, newActions);
   return instance;
 };
