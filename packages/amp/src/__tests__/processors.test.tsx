@@ -158,7 +158,7 @@ test("Validate amp-audio", async () => {
   const { container } = render(
     <HelmetProvider context={helmetContext}>
       <Html2React
-        html="<audio src='audio.mp3'></video>"
+        html="<audio src='audio.mp3'></audio>"
         processors={processors}
       />
     </HelmetProvider>
@@ -178,6 +178,109 @@ test("Validate amp-audio", async () => {
   // We replace the `async="true"` with just `async`
   const headScript = replaceHeadAttributes(head);
   expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
+});
+
+test("amp-audio with child elements", async () => {
+  const helmetContext = {};
+
+  const { container } = render(
+    <HelmetProvider context={helmetContext}>
+      <Html2React
+        html="<audio controls>
+          <source src='http://frontity.com/audio.mp3'></source>
+          <div placeholder=''> this is a placeholder </div>
+          <div placeholder=''> this placeholder should be removed </div>
+          <p fallback=''> and this is a fallback </p>
+          <p fallback=''> this is a fallback should be removed</p>
+          <div> this element should be removed </div>
+        </audio>"
+        processors={processors}
+      />
+    </HelmetProvider>
+  );
+
+  const head = (helmetContext as FilledContext).helmet;
+
+  expect(head.script.toString()).toMatchInlineSnapshot(
+    `"<script data-rh=\\"true\\" async custom-element=\\"amp-audio\\" src=\\"https://cdn.ampproject.org/v0/amp-audio-0.1.js\\"></script>"`
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <amp-audio
+      controls=""
+    >
+      <source
+        src="https://frontity.com/audio.mp3"
+      />
+      <div
+        placeholder=""
+      >
+         this is a placeholder 
+      </div>
+      <p
+        fallback=""
+      >
+         and this is a fallback 
+      </p>
+    </amp-audio>
+  `);
+});
+
+test("amp-video with child elements", async () => {
+  const helmetContext = {};
+
+  const { container } = render(
+    <HelmetProvider context={helmetContext}>
+      <Html2React
+        html="<video controls>
+          <source src='http://frontity.com/video.mp4'></source>
+          <track src='http://frontity.com/video1.mp4'></source>
+          <track src='http://frontity.com/video2.mp4'></source>
+          <div placeholder=''> this is a placeholder </div>
+          <div placeholder=''> this placeholder should be removed </div>
+          <p fallback=''> and this is a fallback </p>
+          <p fallback=''> this is a fallback should be removed</p>
+          <div> this element should be removed </div>
+        </video>"
+        processors={processors}
+      />
+    </HelmetProvider>
+  );
+
+  const head = (helmetContext as FilledContext).helmet;
+
+  expect(head.script.toString()).toMatchInlineSnapshot(
+    `"<script data-rh=\\"true\\" async custom-element=\\"amp-video\\" src=\\"https://cdn.ampproject.org/v0/amp-video-0.1.js\\"></script>"`
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <amp-video
+      controls=""
+      height="9"
+      layout="responsive"
+      width="16"
+    >
+      <source
+        src="https://frontity.com/video.mp4"
+      />
+      <track
+        src="https://frontity.com/video1.mp4"
+      />
+      <track
+        src="https://frontity.com/video2.mp4"
+      />
+      <div
+        placeholder=""
+      >
+         this is a placeholder 
+      </div>
+      <p
+        fallback=""
+      >
+         and this is a fallback 
+      </p>
+    </amp-video>
+  `);
 });
 
 test("<script /> elements should be removed", async () => {

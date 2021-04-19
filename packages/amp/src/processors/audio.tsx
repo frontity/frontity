@@ -1,6 +1,7 @@
 import { Processor, Element } from "@frontity/html2react/types";
 import { Packages } from "../../types";
 import { Head } from "frontity";
+import { httpToHttps } from "../utils";
 
 /**
  * Props for the {@link AMPAudio} component.
@@ -47,6 +48,7 @@ const AMPAudio: React.FC<AudioProps> = ({
   controls,
   loop,
   muted,
+  children,
   ...props
 }) => (
   <>
@@ -60,12 +62,15 @@ const AMPAudio: React.FC<AudioProps> = ({
       />
     </Head>
     <amp-audio
+      class={className}
       {...props}
       {...(autoPlay ? { autoPlay: "" } : undefined)}
       {...(controls ? { controls: "" } : undefined)}
       {...(loop ? { loop: "" } : undefined)}
       {...(muted ? { muted: "" } : undefined)}
-    />
+    >
+      {children}
+    </amp-audio>
   </>
 );
 
@@ -76,10 +81,36 @@ export const audio: Processor<Element, Packages> = {
     node.component = AMPAudio;
 
     // AMP requires that the file is loaded over HTTPS
-    const httpRegexp = /^http:\/\//;
-    if (node.props?.src?.match(httpRegexp)) {
-      node.props.src = node.props.src.replace(httpRegexp, "https://");
-    }
+    node = httpToHttps(node);
+
+    // Create an array that will hold all the child elements of this
+    // audio element. We start by adding all child `source` elements (if they
+    // exist)
+    let children = node.children.filter(
+      (child: Element) => child.component === "source"
+    );
+
+    // Change http:// to https:// in the child `source` elements
+    children = children.map(httpToHttps);
+
+    // Find the first child that has a `placeholder` prop and if it exists add
+    // it to the array of children. We only add the first one because there
+    // can only be one placeholder element.
+    const placeholder = node.children.find((child: Element) =>
+      Object.keys(child.props).includes("placeholder")
+    );
+    placeholder && children.push(placeholder);
+
+    // Find the first child that has a `fallback` prop and if it exists add
+    // it to the array of children. We only add the first one because there
+    // can only be one fallback element.
+    const fallback = node.children.find((child: Element) =>
+      Object.keys(child.props).includes("fallback")
+    );
+    // And if it exists, add it to the array of children
+    fallback && children.push(fallback);
+
+    node.children = children;
 
     return node;
   },
