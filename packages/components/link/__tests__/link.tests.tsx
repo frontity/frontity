@@ -320,8 +320,8 @@ describe("Link", () => {
     expect(anchor2.href).toEqual(linkUrl);
   });
 
-  test("it prepends the `subdirectory` prop if set", () => {
-    store.state.source.subdirectory = "/blog";
+  test("it prepends the `state.frontity.url` pathname", () => {
+    store.state.frontity.url = "https://frontityurl.com/blog";
 
     const linkUrl = store.state.source.url + "/internal-link";
 
