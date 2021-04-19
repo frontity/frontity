@@ -8,6 +8,7 @@ interface UseInView extends Package {
    * Package name.
    */
   name: "e2e-use-in-view";
+
   /**
    * Root components exposed by this package.
    */

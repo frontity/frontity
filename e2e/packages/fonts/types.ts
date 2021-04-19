@@ -8,6 +8,7 @@ interface Fonts extends Package {
    * Package name.
    */
   name: "e2e-fonts";
+
   /**
    * Root components exposed by this package.
    */

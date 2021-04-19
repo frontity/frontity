@@ -9,6 +9,7 @@ interface Html2ReactTests extends Package {
    * Package name.
    */
   name: "e2e-html2react";
+
   /**
    * State exposed by this package.
    */

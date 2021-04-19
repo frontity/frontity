@@ -11,6 +11,7 @@ interface TestAnalytics extends Package {
    * Package name.
    */
   name: "e2e-analytics";
+
   /**
    * State exposed by this package.
    */
@@ -57,6 +58,7 @@ interface TestAnalytics extends Package {
       testEvent: Event;
     };
   };
+
   /**
    * Actions exposed by this package.
    */
