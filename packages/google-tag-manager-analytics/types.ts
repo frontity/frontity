@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Action } from "frontity/types";
+import { Action, Frontity, MergePackages } from "frontity/types";
 import Analytics, {
   Pageview,
   Event,
@@ -149,3 +149,8 @@ interface GoogleTagManagerAnalytics extends Analytics {
 }
 
 export default GoogleTagManagerAnalytics;
+
+/**
+ * Packages used internally by google-tag-manager-analytics.
+ */
+export type Packages = MergePackages<Frontity, GoogleTagManagerAnalytics>;

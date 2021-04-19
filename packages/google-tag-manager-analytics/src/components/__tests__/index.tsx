@@ -4,20 +4,13 @@
 
 import TestRenderer from "react-test-renderer";
 import { HelmetProvider } from "frontity";
-import { State, MergePackages } from "frontity/types";
+import { State } from "frontity/types";
 import { FilledContext } from "react-helmet-async";
 import { Root as GoogleTagManager } from "..";
-import GoogleTagManagerPkg from "../../../types";
-
-interface AmpPackageMock {
-  state: {
-    amp?: any;
-  };
-}
-
-type Packages = MergePackages<GoogleTagManagerPkg, AmpPackageMock>;
+import { Packages } from "../../../types";
 
 const getState = (): State<Packages> => ({
+  frontity: {},
   analytics: {
     pageviews: { googleTagManagerAnalytics: true },
     events: {},
@@ -36,7 +29,7 @@ const renderGTM = (state: State<Packages>) => {
   const helmetContext = {};
   const rendered = TestRenderer.create(
     <HelmetProvider context={helmetContext}>
-      <GoogleTagManager state={state} actions={null} />
+      <GoogleTagManager state={state} actions={null} libraries={null} />
     </HelmetProvider>
   ).toJSON();
   const head = (helmetContext as FilledContext).helmet;
@@ -203,10 +196,9 @@ describe("GoogleTagManager", () => {
 
 describe("GoogleTagManager (AMP)", () => {
   test("works with a single container id", () => {
-    // Instantiate the Frontity state, adding a container ID and mocking the
-    // `amp` package.
+    // Instantiate the Frontity state, adding a container ID.
     const state = getState();
-    state.amp = {};
+    state.frontity.mode = "amp";
     state.googleTagManagerAnalytics.containerId = "GTM-XXXXXXX";
 
     // Render the GTM's root component.
@@ -223,10 +215,10 @@ describe("GoogleTagManager (AMP)", () => {
   });
 
   test("works with a single container id and config", () => {
-    // Instantiate the Frontity state, adding a container ID, mocking the `amp`
-    // package and adding a configuration object for the `amp-analytics` tag.
+    // Instantiate the Frontity state, adding a container ID and a configuration
+    // object for the `amp-analytics` tag.
     const state = getState();
-    state.amp = {};
+    state.frontity.mode = "amp";
     state.googleTagManagerAnalytics.containerId = "GTM-XXXXXXX";
     state.googleTagManagerAnalytics.ampConfig = {
       vars: {
@@ -257,10 +249,9 @@ describe("GoogleTagManager (AMP)", () => {
   });
 
   test("works with multiple container ids", () => {
-    // Instantiate the Frontity state, adding two container IDs and mocking the
-    // `amp` package.
+    // Instantiate the Frontity state, adding two container IDs.
     const state = getState();
-    state.amp = {};
+    state.frontity.mode = "amp";
     state.googleTagManagerAnalytics.containerIds = [
       "GTM-XXXXXXX",
       "GTM-YYYYYYY",
@@ -286,10 +277,10 @@ describe("GoogleTagManager (AMP)", () => {
   });
 
   test("works with multiple container ids and config", () => {
-    // Instantiate the Frontity state, adding two container IDs, mocking the
-    // `amp` package and adding a config object for the `amp-analytics` tags.
+    // Instantiate the Frontity state, adding two container IDs and a config
+    // object for the `amp-analytics` tags.
     const state = getState();
-    state.amp = {};
+    state.frontity.mode = "amp";
     state.googleTagManagerAnalytics.containerIds = [
       "GTM-XXXXXXX",
       "GTM-YYYYYYY",
@@ -340,7 +331,7 @@ describe("GoogleTagManager (AMP)", () => {
   test("doesn't add anything if there's no container ids", () => {
     // Instantiate the Frontity state mocking the `amp` package.
     const state = getState();
-    state.amp = {};
+    state.frontity.mode = "amp";
 
     // Render the GTM's root component.
     const { rendered, head } = renderGTM(state);

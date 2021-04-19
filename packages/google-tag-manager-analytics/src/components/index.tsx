@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Head, connect, css } from "frontity";
 import { Connect } from "frontity/types";
-import GoogleTagManagerAnalytics from "../../types";
+import { Packages } from "../../types";
 import { AmpConfig } from "@frontity/analytics/types";
 
 /**
@@ -101,10 +101,9 @@ const GtmCodeAmp: React.FC<GtmCodeAmpProps> = connect(
 );
 
 /**
- * Root component of the Comscore Analytics package.
+ * Root component of the Google Tag Manager Analytics package.
  *
- * It renders the Comscore script library for each Comscore tracking ID defined
- * in the state.
+ * It renders the GTM script library for each container ID defined in the state.
  *
  * @remarks
  * This component is automatically rendered by Frontity and it's not meant to be
@@ -114,9 +113,7 @@ const GtmCodeAmp: React.FC<GtmCodeAmpProps> = connect(
  *
  * @returns Root element.
  */
-export const Root: React.FC<Connect<GoogleTagManagerAnalytics>> = ({
-  state,
-}) => {
+export const Root: React.FC<Connect<Packages>> = ({ state }) => {
   const {
     containerId,
     containerIds,
@@ -129,7 +126,7 @@ export const Root: React.FC<Connect<GoogleTagManagerAnalytics>> = ({
       {ids.map((id) =>
         // Render the appropriate tag depending on whether the `@frontity/amp`
         // package is installed or not.
-        "amp" in state ? (
+        state.frontity.mode === "amp" ? (
           <GtmCodeAmp key={id} containerId={id} ampConfig={ampConfig} />
         ) : (
           <GtmCode key={id} containerId={id} />
