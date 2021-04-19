@@ -67,17 +67,12 @@ const packages: Package1 = {
   state: {
     namespace1: {
       prop1: "prop1",
-      prop2: ({ state, actions, libraries }) => {
+      prop2: ({ state, libraries }) => {
         // Test merged state.
         expectType<string>(state.namespace1.prop1);
         expectType<string>(state.namespace1.prop2);
         expectType<boolean>(state.namespace2.prop3);
         expectType<(str: string) => boolean>(state.namespace3.prop4);
-
-        // Test merged actions.
-        expectType<() => void>(actions.namespace1.action1);
-        expectType<(str: string) => void>(actions.namespace2.action2);
-        expectType<(str: string) => Promise<void>>(actions.namespace2.action3);
 
         // Test merged libraries
         expectType<() => void>(libraries.namespace1.library1);
