@@ -41,7 +41,9 @@ const sites = [
 beforeEach(() => {
   mockedFsExtra.writeFile.mockReset();
   mockedFsExtra.ensureDir.mockReset();
-  mockedFsExtra.ensureDir.mockImplementation(() => {});
+  mockedFsExtra.ensureDir.mockImplementation(() => {
+    // Silence.
+  });
   mockedFsExtra.pathExists.mockReset();
   mockedFsExtra.pathExists.mockImplementation(() => Promise.resolve(true));
   mockedEntryExists.default.mockImplementation((path) => {
@@ -98,7 +100,7 @@ describe("generateClientEntryPoints", () => {
   });
 
   test("should write HMR code if in development", async () => {
-    const bundles = await generateClientEntryPoints({
+    await generateClientEntryPoints({
       sites: site,
       outDir: "/build",
       mode: "development",
@@ -249,7 +251,7 @@ describe("entryPoint", () => {
   });
 
   test("should not return path when none exist", async () => {
-    mockedEntryExists.default.mockImplementation((path) => {
+    mockedEntryExists.default.mockImplementation(() => {
       return Promise.resolve(false);
     });
     const entry = await entryPoint({
@@ -326,25 +328,22 @@ describe("entryPoint", () => {
   test("should return only the type in amp mode when it exists", async () => {
     mockedEntryExists.default.mockImplementation((path) => {
       if (path === "@org/pkg/src/index") return Promise.resolve(".ts");
-      if (path === "@org/pkg/src/inline") return Promise.resolve(".ts");
       if (path === "@org/pkg/src/client") return Promise.resolve(".ts");
       if (path === "@org/pkg/src/amp") return Promise.resolve(".ts");
       if (path === "@org/pkg/src/amp/client") return Promise.resolve(".ts");
-      if (path === "@org/pkg/src/amp/inline") return Promise.resolve(".ts");
       return Promise.resolve(false);
     });
     const entry = await entryPoint({
       name: "@org/pkg",
       mode: "amp",
-      type: "inline",
+      type: "client",
     });
-    await expect(entry).toBe("@org/pkg/src/amp/inline");
+    await expect(entry).toBe("@org/pkg/src/amp/client");
   });
 
   test("should return the type in amp mode when default exists", async () => {
     mockedEntryExists.default.mockImplementation((path) => {
       if (path === "@org/pkg/src/index") return Promise.resolve(".ts");
-      if (path === "@org/pkg/src/inline") return Promise.resolve(".ts");
       if (path === "@org/pkg/src/client") return Promise.resolve(".ts");
       if (path === "@org/pkg/src/amp") return Promise.resolve(".ts");
       if (path === "@org/pkg/src/amp/client") return Promise.resolve(".ts");
@@ -353,9 +352,9 @@ describe("entryPoint", () => {
     const entry = await entryPoint({
       name: "@org/pkg",
       mode: "amp",
-      type: "inline",
+      type: "client",
     });
-    await expect(entry).toBe("@org/pkg/src/inline");
+    await expect(entry).toBe("@org/pkg/src/amp/client");
   });
 
   test("should not return the type in amp mode when it doesn't exist", async () => {
@@ -369,9 +368,9 @@ describe("entryPoint", () => {
     const entry = await entryPoint({
       name: "@org/pkg",
       mode: "amp",
-      type: "inline",
+      type: "server",
     });
-    await expect(entry).toBe("");
+    await expect(entry).toBe("@org/pkg/src/amp");
   });
 
   test("should return no-mode client in default mode", async () => {

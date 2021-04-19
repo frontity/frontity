@@ -102,9 +102,12 @@ export const createStore = (config) => {
         }
 
         // If it's a function, return the result of that function run with the
-        // root state.
+        // root state and libraries.
         if (!Array.isArray(target) && typeof result === "function") {
-          return result({ state: observableState });
+          return result({
+            state: observableState,
+            libraries: config.libraries,
+          });
         }
 
         return result;
