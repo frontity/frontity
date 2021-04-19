@@ -1,6 +1,7 @@
 import { createStore, isObservable, getSnapshot } from "..";
 
 let config = {};
+let store = null;
 
 const delay = () => new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -63,11 +64,12 @@ beforeEach(() => {
       },
     },
   };
+
+  store = createStore(config);
 });
 
 describe("createStore", () => {
   it("should return state and actions", () => {
-    const store = createStore(config);
     expect(store.state.prop1).toBe(1);
     expect(typeof store.actions.action1).toBe("function");
     expect(typeof store.actions.nested1.action2).toBe("function");
@@ -75,42 +77,47 @@ describe("createStore", () => {
   });
 
   it("should return observable state", () => {
-    const store = createStore(config);
     expect(isObservable(store.state)).toBe(true);
   });
 
   it("should return unobservable actions", () => {
-    const store = createStore(config);
     expect(isObservable(store.actions)).toBe(false);
   });
 
   it("should include arbitrary properties", () => {
-    const store = createStore({ ...config, something: "else" });
+    store = createStore({ ...config, something: "else" });
     expect(store.something).toBe("else");
+  });
+
+  it("should create two different stores", () => {
+    const store1 = createStore({
+      state: { prop1: 1, prop2: ({ state }) => state.prop1 * 2 },
+    });
+    const store2 = createStore({
+      state: { prop1: 2, prop2: ({ state }) => state.prop1 * 2 },
+    });
+    expect(store1.state.prop2).toBe(2);
+    expect(store2.state.prop2).toBe(4);
   });
 });
 
 describe("createStore actions", () => {
   it("should be able to mutate state", () => {
-    const store = createStore(config);
     store.actions.action1();
     expect(store.state.prop1).toBe("action1");
   });
 
   it("should be able to access derived state", () => {
-    const store = createStore(config);
     store.actions.nested2.nested3.action3();
     expect(store.state.nested1.prop5).toBe(3);
   });
 
   it("should be able to access derived state functions", () => {
-    const store = createStore(config);
     store.actions.nested2.nested3.action4();
     expect(store.state.nested1.prop5).toBe(5);
   });
 
   it("should accept parameters", async () => {
-    const store = createStore(config);
     store.actions.nested2.nested3.action5(3);
     expect(store.state.nested1.prop5).toBe(6);
   });
@@ -130,24 +137,20 @@ describe("createStore actions", () => {
   });
 
   it("should run other actions", () => {
-    const store = createStore(config);
     store.actions.action8();
     expect(store.state.prop1).toBe("action1");
   });
 
   it("should be able to wait for other actions", async () => {
-    const store = createStore(config);
     await store.actions.action9();
     expect(store.state.prop1).toBe("3 1");
   });
 
   it("should not return anything", () => {
-    const store = createStore(config);
     expect(store.actions.nested1.action2()).toBe(undefined);
   });
 
   it("should not return anything even with promises", async () => {
-    const store = createStore(config);
     const res = await store.actions.action6();
     expect(res).toBe(undefined);
   });
@@ -183,7 +186,6 @@ describe("createStore actions", () => {
 
 describe("createStore getSnapshot", () => {
   it("should be able retrieve a serializable snapshot", () => {
-    const store = createStore(config);
     expect(getSnapshot(store.state)).toMatchSnapshot();
     store.actions.nested2.nested3.action5(3);
     expect(getSnapshot(store.state)).toMatchSnapshot();

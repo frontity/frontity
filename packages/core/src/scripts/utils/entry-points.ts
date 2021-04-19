@@ -6,23 +6,148 @@ import { EntryPoints, Mode } from "../../../types";
 import getVariable from "../../utils/get-variable";
 import entryExists from "./entry-exists";
 
-type Package = {
+/**
+ * The name and location of a Frontity package.
+ */
+interface Package {
+  /**
+   * The name of the package.
+   *
+   * @example `@frontity/wp-source`
+   */
   name: string;
+
+  /**
+   * The mode of that package.
+   *
+   * @example "amp"
+   *
+   * @defaultValue "default"
+   */
   mode: string;
-  path: string;
-};
 
-type Type = "client" | "server" | "inline";
+  /**
+   * The path on the filesystem for that package.
+   */
+  path?: string;
+}
 
+/**
+ * The type of bundle that needs to be generated.
+ */
+type Type = "client" | "server";
+
+/**
+ * The options of the {@link entryPoint} function.
+ */
+interface EntryPointOptions extends Package {
+  /**
+   * The type of bundle that needs to be generated.
+   */
+  type: Type;
+}
+
+/**
+ * The options of the {@link checkForPackages} helper.
+ */
+interface CheckForPackagesOptions {
+  /**
+   * The list of sites included in the settings.
+   */
+  sites: Site[];
+}
+
+/**
+ * The options of the {@link getPackagesList} helper.
+ */
+interface GetPackagesListOptions {
+  /**
+   * The list of sites included in the settings.
+   */
+  sites: Site[];
+
+  /**
+   * The type of bundle that needs to be generated.
+   */
+  type: Type;
+}
+
+/**
+ * The options of the {@link generateImportsTemplate} helper.
+ */
+interface GenerateImportsTemplateOptions {
+  /**
+   * The list of packages of that site.
+   */
+  packages: Package[];
+
+  /**
+   * The type of bundle that needs to be generated.
+   */
+  type: Type;
+}
+
+/**
+ * The options of the {@link generateHotModuleTemplate} helper.
+ */
+interface GenerateHotModuleTemplateOptions {
+  /**
+   * The list of packages of that site.
+   */
+  packages: Package[];
+
+  /**
+   * The template parts that have been generated previously.
+   */
+  template: string;
+}
+
+/**
+ * The options of the {@link generateServerEntryPoint} helper.
+ */
+interface GenerateServerEntryPointOptions {
+  /**
+   * The list of sites included in the settings.
+   */
+  sites: Site[];
+
+  /**
+   * The output directory where the bundle will be generated.
+   */
+  outDir: string;
+}
+
+/**
+ * The options of the {@link generateClientEntryPoints} helper.
+ */
+interface GenerateEntryPointsOptions {
+  /**
+   * The list of sites included in the settings.
+   */
+  sites: Site[];
+
+  /**
+   * The output directory where the bundle will be generated.
+   */
+  outDir: string;
+
+  /**
+   * The mode used for the site.
+   */
+  mode: Mode;
+}
+
+/**
+ * Resolve the path of a package.
+ *
+ * @param options - Defined in {@link EntryPointOptions}.
+ * @returns The path of the package.
+ */
 export const entryPoint = async ({
   name,
   mode,
   type,
-}: {
-  name: string;
-  mode: string;
-  type: Type;
-}): Promise<string> => {
+}: EntryPointOptions): Promise<string> => {
   let extension: string | false = false;
   if (mode !== "default") {
     // Check first inside the mode and in the type.
@@ -60,8 +185,15 @@ export const entryPoint = async ({
   return "";
 };
 
-// Throw if any of the packages is not installed.
-export const checkForPackages = async ({ sites }: { sites: Site[] }) => {
+/**
+ * Throw an error if any of the packages defined in the settings is not
+ * installed.
+ *
+ * @param options - Defined in {@link CheckForPackagesOptions}.
+ */
+export const checkForPackages = async ({
+  sites,
+}: CheckForPackagesOptions): Promise<void> => {
   // Turn the list into an array of package names.
   const packages = uniq(flatten(sites.map((site) => site.packages)));
   await Promise.all(
@@ -79,14 +211,17 @@ export const checkForPackages = async ({ sites }: { sites: Site[] }) => {
   );
 };
 
-// Turn a list of sites into a list of packages that can be used to create the templates.
+/**
+ * Turn a list of sites into a list of packages that can be used to create the
+ * templates.
+ *
+ * @param options - Defined in {@link GetPackagesListOptions}.
+ * @returns The list of packages for each site.
+ */
 const getPackagesList = async ({
   sites,
   type,
-}: {
-  sites: Site[];
-  type: Type;
-}): Promise<Package[]> => {
+}: GetPackagesListOptions): Promise<Package[]> => {
   // Get a flat array of unique packages and its modes.
   const packages = uniqBy(
     flatten(
@@ -109,13 +244,16 @@ const getPackagesList = async ({
   ).filter(({ path }) => path !== "");
 };
 
+/**
+ * Generate the template part that contains the imports section.
+ *
+ * @param options - Defined in {@link GenerateImportsTemplateOptions}.
+ * @returns The template part.
+ */
 const generateImportsTemplate = ({
   packages,
   type,
-}: {
-  packages: Package[];
-  type: Type;
-}): string => {
+}: GenerateImportsTemplateOptions): string => {
   let template = `import ${type} from "@frontity/core/src/${type}";\n`;
   // Create the "import" part of the file.
   packages.forEach(
@@ -132,13 +270,16 @@ const generateImportsTemplate = ({
   return template;
 };
 
+/**
+ * Generate the template part that contains the HMR section.
+ *
+ * @param options - Defined in {@link GenerateHotModuleTemplateOptions}.
+ * @returns The template part.
+ */
 const generateHotModuleTemplate = ({
   packages,
   template,
-}: {
-  packages: Package[];
-  template: string;
-}): string => {
+}: GenerateHotModuleTemplateOptions): string => {
   template += `if (module["hot"]) {
   module["hot"].accept(
     [
@@ -160,18 +301,22 @@ const generateHotModuleTemplate = ({
   packages.forEach(
     ({ name, mode }) => (template += `        ${getVariable(name, mode)},\n`)
   );
-  template += "      };\n      client({ packages });\n    }\n  );\n}";
+  template +=
+    "      };\n      client({ packages, isHmr: true });\n    }\n  );\n}";
   return template;
 };
 
-// Create an entry-point file for the server and return the bundle name and path.
+/**
+ * Create an entry-point file for the server and return the bundle name and
+ * path.
+ *
+ * @param options - Defined in {@link GenerateServerEntryPointOptions}.
+ * @returns The name and path of the final server bundle.
+ */
 export const generateServerEntryPoint = async ({
   sites,
   outDir,
-}: {
-  sites: Site[];
-  outDir: string;
-}): Promise<EntryPoints> => {
+}: GenerateServerEntryPointOptions): Promise<EntryPoints> => {
   const packages = await getPackagesList({ sites, type: "server" });
   const template = generateImportsTemplate({ packages, type: "server" });
   // Write the file and return the bundle.
@@ -180,16 +325,18 @@ export const generateServerEntryPoint = async ({
   return { name: "server", path };
 };
 
-// Create entry-point files for the client and return all the bundle names and pathes.
+/**
+ * Create entry-point files for the client and return all the bundle names and
+ * pathes.
+ *
+ * @param options - Defined in {@link GenerateEntryPointsOptions}.
+ * @returns The name and path of the final client bundles.
+ */
 export const generateClientEntryPoints = async ({
   sites,
   outDir,
   mode,
-}: {
-  sites: Site[];
-  outDir: string;
-  mode: Mode;
-}): Promise<EntryPoints[]> => {
+}: GenerateEntryPointsOptions): Promise<EntryPoints[]> => {
   return (
     await Promise.all(
       // Iterate over the sites
@@ -218,15 +365,17 @@ export const generateClientEntryPoints = async ({
   ).filter((bundle) => bundle);
 };
 
-export default async ({
+/**
+ * Create entry-point files and return all the bundle names and pathes.
+ *
+ * @param options - Defined in {@link GenerateEntryPointsOptions}.
+ * @returns The name and path of the final bundles.
+ */
+const generateEntryPoints = async ({
   sites,
   outDir,
   mode,
-}: {
-  sites: Site[];
-  outDir: string;
-  mode: Mode;
-}) => {
+}: GenerateEntryPointsOptions): Promise<EntryPoints[]> => {
   // Check if all the packages are installed.
   await checkForPackages({ sites });
 
@@ -240,3 +389,5 @@ export default async ({
 
   return [...clientEntryPoints, serverEntryPoints];
 };
+
+export default generateEntryPoints;

@@ -22,6 +22,7 @@ interface YoastPackage extends Package {
    * Package name.
    */
   name: "@frontity/yoast";
+
   /**
    * Root components exported by this package.
    */

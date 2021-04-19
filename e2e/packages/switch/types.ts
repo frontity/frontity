@@ -8,6 +8,7 @@ interface Switch extends Package {
    * Package name.
    */
   name: "e2e-switch";
+
   /**
    * Root components exposed by this package.
    */

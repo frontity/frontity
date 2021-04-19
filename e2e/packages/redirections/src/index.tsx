@@ -169,6 +169,10 @@ const redirections: Redirections = {
           state.source.redirections = query.redirections;
         }
 
+        if (state.frontity.options.url) {
+          state.frontity.url = state.frontity.options.url;
+        }
+
         const handler = {
           pattern: "/urls-with-redirections/:slug",
           func: async ({ state, link }) => {
