@@ -52,6 +52,21 @@ test("Validate amp-img when height or width are a number", async () => {
   expect(await amp(container.innerHTML)).toBeValidAmpHtml();
 });
 
+test("Validate amp-img when height and width are missing", async () => {
+  const { container } = render(
+    <Html2React html="<img src='test.img'></img>" processors={processors} />
+  );
+
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <amp-img
+      class="css-1fbfwfl"
+      layout="fill"
+      src="test.img"
+    />
+  `);
+  expect(await amp(container.innerHTML)).toBeValidAmpHtml();
+});
+
 test("Validate amp-iframe", async () => {
   const helmetContext = {};
 
