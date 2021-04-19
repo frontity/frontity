@@ -11,6 +11,9 @@ var browserstackURL =
   "@hub-cloud.browserstack.com/wd/hub";
 var baseUrl = "http://localhost:3000";
 
+// The properties defined here are needed for the webdriver configuration. We
+// can find all the supported properties and their explanation in its official
+// site: https://webdriver.io/docs/configurationfile/
 export const commonConfig = {
   user: userName,
   key: accessKey,
@@ -31,7 +34,7 @@ export const commonConfig = {
       .withCapabilities(capabilities)
       .build();
   },
-  beforeSession: (config, capabilities, specs) => {
+  beforeSession: (config, capabilities) => {
     capabilities.browserName === "iPhone"
       ? (global.baseUrl = "http://bs-local.com:3000")
       : (global.baseUrl = "http://localhost:3000");

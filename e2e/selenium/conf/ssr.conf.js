@@ -13,7 +13,7 @@ exports.config = {
       process.env.BROWSERSTACK_LOCAL_IDENTIFIER || "Selenium-Local",
     "browserstack.video": false,
     build:
-      "Selenium SSR Browsers - : " +
+      "Selenium SSR Browsers - " +
       (process.env.BROWSERSTACK_BUILD_NAME ||
         "Localhost - " + new Date().toISOString()),
   },
