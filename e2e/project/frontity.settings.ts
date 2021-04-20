@@ -475,11 +475,7 @@ const settings: Settings<
   },
   {
     name: "amp-comscore-analytics",
-    state: {
-      frontity: {
-        mode: "amp",
-      },
-    },
+    mode: "amp",
     packages: [
       "@frontity/amp",
       {
@@ -494,11 +490,7 @@ const settings: Settings<
   },
   {
     name: "amp-google-tag-manager-analytics",
-    state: {
-      frontity: {
-        mode: "amp",
-      },
-    },
+    mode: "amp",
     packages: [
       "@frontity/amp",
       {
