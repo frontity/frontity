@@ -1,9 +1,9 @@
 name: "BrowserStack Selenium SSR"
 
 on:
-  workflow_run:
-    workflows: ["BrowserStack Selenium Proxy"]
-    types: [completed]
+  push:
+    branches:
+      - selenium-tests
 
 jobs:
   selenium-job:
