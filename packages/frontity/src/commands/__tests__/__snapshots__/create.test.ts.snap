@@ -5,6 +5,7 @@ Object {
   "name": "random-name",
   "path": "/path/to/project",
   "theme": "@frontity/mars-theme",
+  "typescript": false,
 }
 `;
 
@@ -22,6 +23,7 @@ Array [
     "random-name",
     "@frontity/mars-theme",
     "/path/to/project",
+    false,
   ],
 ]
 `;

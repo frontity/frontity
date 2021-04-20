@@ -5,6 +5,7 @@ on: [pull_request]
 jobs:
   e2e-browserstack:
     runs-on: ubuntu-16.04
+    if: github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
       - name: Checkout
