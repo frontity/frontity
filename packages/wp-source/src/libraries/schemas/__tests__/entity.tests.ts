@@ -23,8 +23,8 @@ test("Convert post using entity", () => {
   const { entities } = normalize(post60, entity);
   expect(entities.postEntity[60]).toMatchSnapshot();
   expect(entities.attachmentEntity[62]).toMatchSnapshot();
-  expect(entities.taxonomyEntity[3]).toMatchSnapshot();
-  expect(entities.taxonomyEntity[10]).toMatchSnapshot();
+  expect(entities.categoryEntity[3]).toMatchSnapshot();
+  expect(entities.tagEntity[10]).toMatchSnapshot();
   expect(entities.authorEntity[4]).toMatchSnapshot();
   expect(entities.taxonomyEntity.post).toMatchSnapshot();
   expect(entities.commentEntity[5]).toMatchSnapshot();
@@ -32,12 +32,12 @@ test("Convert post using entity", () => {
 
 test("Convert a category using entity", () => {
   const { entities } = normalize(category7, entity);
-  expect(entities.taxonomyEntity[7]).toMatchSnapshot();
+  expect(entities.categoryEntity[7]).toMatchSnapshot();
 });
 
 test("Convert a tag using entity", () => {
   const { entities } = normalize(tag10, entity);
-  expect(entities.taxonomyEntity[10]).toMatchSnapshot();
+  expect(entities.tagEntity[10]).toMatchSnapshot();
 });
 
 test("Convert a author using entity", () => {

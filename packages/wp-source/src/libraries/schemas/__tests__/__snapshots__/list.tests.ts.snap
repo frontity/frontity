@@ -141,7 +141,7 @@ You can find her on Twitter as @r_martinezduque.",
 
 exports[`Convert a category list 1`] = `
 Object {
-  "taxonomyEntity": Object {
+  "categoryEntity": Object {
     "4": Object {
       "_links": Object {
         "about": Array [
@@ -1888,7 +1888,7 @@ You can find her on Twitter as @r_martinezduque.",
 
 exports[`Convert a tag list 1`] = `
 Object {
-  "taxonomyEntity": Object {
+  "tagEntity": Object {
     "18": Object {
       "_links": Object {
         "about": Array [
@@ -3031,6 +3031,203 @@ You can find her on Twitter as @r_martinezduque.",
       "url": "",
     },
   },
+  "categoryEntity": Object {
+    "3": Object {
+      "_links": Object {
+        "about": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
+          },
+        ],
+        "curies": Array [
+          Object {
+            "href": "https://api.w.org/{rel}",
+            "name": "wp",
+            "templated": true,
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories/3",
+          },
+        ],
+        "wp:post_type": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=3",
+          },
+        ],
+      },
+      "id": 3,
+      "link": "/wp-cat/photography/",
+      "name": "Photography",
+      "slug": "photography",
+      "taxonomy": "category",
+      "yoast_meta": Object {
+        "title": "Photography Archives - Demo Worona",
+      },
+    },
+    "4": Object {
+      "_links": Object {
+        "about": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
+          },
+        ],
+        "curies": Array [
+          Object {
+            "href": "https://api.w.org/{rel}",
+            "name": "wp",
+            "templated": true,
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories/4",
+          },
+        ],
+        "wp:post_type": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=4",
+          },
+        ],
+      },
+      "id": 4,
+      "link": "/wp-cat/cities/",
+      "name": "Cities",
+      "slug": "cities",
+      "taxonomy": "category",
+      "yoast_meta": Object {
+        "title": "Cities Archives - Demo Worona",
+      },
+    },
+    "6": Object {
+      "_links": Object {
+        "about": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
+          },
+        ],
+        "curies": Array [
+          Object {
+            "href": "https://api.w.org/{rel}",
+            "name": "wp",
+            "templated": true,
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories/6",
+          },
+        ],
+        "wp:post_type": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=6",
+          },
+        ],
+      },
+      "id": 6,
+      "link": "/wp-cat/culture/",
+      "name": "Culture",
+      "slug": "culture",
+      "taxonomy": "category",
+      "yoast_meta": Object {
+        "title": "Culture Archives - Demo Worona",
+      },
+    },
+    "7": Object {
+      "_links": Object {
+        "about": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
+          },
+        ],
+        "curies": Array [
+          Object {
+            "href": "https://api.w.org/{rel}",
+            "name": "wp",
+            "templated": true,
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories/7",
+          },
+        ],
+        "wp:post_type": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=7",
+          },
+        ],
+      },
+      "id": 7,
+      "link": "/wp-cat/nature/",
+      "name": "Nature",
+      "slug": "nature",
+      "taxonomy": "category",
+      "yoast_meta": Object {
+        "title": "Nature Archives - Demo Worona",
+      },
+    },
+    "8": Object {
+      "_links": Object {
+        "about": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
+          },
+        ],
+        "collection": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
+          },
+        ],
+        "curies": Array [
+          Object {
+            "href": "https://api.w.org/{rel}",
+            "name": "wp",
+            "templated": true,
+          },
+        ],
+        "self": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/categories/8",
+          },
+        ],
+        "wp:post_type": Array [
+          Object {
+            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=8",
+          },
+        ],
+      },
+      "id": 8,
+      "link": "/wp-cat/travel/",
+      "name": "Travel",
+      "slug": "travel",
+      "taxonomy": "category",
+      "yoast_meta": Object {
+        "title": "Travel Archives - Demo Worona",
+      },
+    },
+  },
   "postEntity": Object {
     "33": Object {
       "_embedded": Object {
@@ -3042,17 +3239,38 @@ You can find her on Twitter as @r_martinezduque.",
         ],
         "wp:term": Array [
           Array [
-            6,
-            7,
-            8,
+            Object {
+              "id": 6,
+              "schema": "categoryEntity",
+            },
+            Object {
+              "id": 7,
+              "schema": "categoryEntity",
+            },
+            Object {
+              "id": 8,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            34,
-            35,
-            36,
+            Object {
+              "id": 34,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 35,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 36,
+              "schema": "tagEntity",
+            },
           ],
           Array [
-            "post",
+            Object {
+              "id": "post",
+              "schema": "taxonomyEntity",
+            },
           ],
         ],
       },
@@ -3190,16 +3408,34 @@ You can find her on Twitter as @r_martinezduque.",
         ],
         "wp:term": Array [
           Array [
-            7,
-            3,
+            Object {
+              "id": 7,
+              "schema": "categoryEntity",
+            },
+            Object {
+              "id": 3,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            32,
-            31,
-            33,
+            Object {
+              "id": 32,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 31,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 33,
+              "schema": "tagEntity",
+            },
           ],
           Array [
-            "post",
+            Object {
+              "id": "post",
+              "schema": "taxonomyEntity",
+            },
           ],
         ],
       },
@@ -3335,17 +3571,38 @@ You can find her on Twitter as @r_martinezduque.",
         ],
         "wp:term": Array [
           Array [
-            4,
-            7,
+            Object {
+              "id": 4,
+              "schema": "categoryEntity",
+            },
+            Object {
+              "id": 7,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            30,
-            29,
-            23,
-            28,
+            Object {
+              "id": 30,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 29,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 23,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 28,
+              "schema": "tagEntity",
+            },
           ],
           Array [
-            "post",
+            Object {
+              "id": "post",
+              "schema": "taxonomyEntity",
+            },
           ],
         ],
       },
@@ -3485,17 +3742,38 @@ You can find her on Twitter as @r_martinezduque.",
         ],
         "wp:term": Array [
           Array [
-            7,
-            3,
-            8,
+            Object {
+              "id": 7,
+              "schema": "categoryEntity",
+            },
+            Object {
+              "id": 3,
+              "schema": "categoryEntity",
+            },
+            Object {
+              "id": 8,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            18,
-            19,
-            13,
+            Object {
+              "id": 18,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 19,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 13,
+              "schema": "tagEntity",
+            },
           ],
           Array [
-            "post",
+            Object {
+              "id": "post",
+              "schema": "taxonomyEntity",
+            },
           ],
         ],
       },
@@ -3635,16 +3913,34 @@ You can find her on Twitter as @r_martinezduque.",
         ],
         "wp:term": Array [
           Array [
-            7,
-            3,
+            Object {
+              "id": 7,
+              "schema": "categoryEntity",
+            },
+            Object {
+              "id": 3,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            15,
-            16,
-            14,
+            Object {
+              "id": 15,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 16,
+              "schema": "tagEntity",
+            },
+            Object {
+              "id": 14,
+              "schema": "tagEntity",
+            },
           ],
           Array [
-            "post",
+            Object {
+              "id": "post",
+              "schema": "taxonomyEntity",
+            },
           ],
         ],
       },
@@ -3776,7 +4072,7 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
       },
     },
   },
-  "taxonomyEntity": Object {
+  "tagEntity": Object {
     "13": Object {
       "_links": Object {
         "about": Array [
@@ -4128,45 +4424,6 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         "title": "Indonesia Archives - Demo Worona",
       },
     },
-    "3": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories/3",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=3",
-          },
-        ],
-      },
-      "id": 3,
-      "link": "/wp-cat/photography/",
-      "name": "Photography",
-      "slug": "photography",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "Photography Archives - Demo Worona",
-      },
-    },
     "30": Object {
       "_links": Object {
         "about": Array [
@@ -4440,162 +4697,8 @@ Tags: <a href=\\"https://demo.worona.org/tag/japan\\">Japan</a>, <a href=\\"http
         "title": "United Arab Emirates Archives - Demo Worona",
       },
     },
-    "4": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories/4",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=4",
-          },
-        ],
-      },
-      "id": 4,
-      "link": "/wp-cat/cities/",
-      "name": "Cities",
-      "slug": "cities",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "Cities Archives - Demo Worona",
-      },
-    },
-    "6": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories/6",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=6",
-          },
-        ],
-      },
-      "id": 6,
-      "link": "/wp-cat/culture/",
-      "name": "Culture",
-      "slug": "culture",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "Culture Archives - Demo Worona",
-      },
-    },
-    "7": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories/7",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=7",
-          },
-        ],
-      },
-      "id": 7,
-      "link": "/wp-cat/nature/",
-      "name": "Nature",
-      "slug": "nature",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "Nature Archives - Demo Worona",
-      },
-    },
-    "8": Object {
-      "_links": Object {
-        "about": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/taxonomies/category",
-          },
-        ],
-        "collection": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories",
-          },
-        ],
-        "curies": Array [
-          Object {
-            "href": "https://api.w.org/{rel}",
-            "name": "wp",
-            "templated": true,
-          },
-        ],
-        "self": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/categories/8",
-          },
-        ],
-        "wp:post_type": Array [
-          Object {
-            "href": "https://demo.worona.org/wp-json/wp/v2/posts?categories=8",
-          },
-        ],
-      },
-      "id": 8,
-      "link": "/wp-cat/travel/",
-      "name": "Travel",
-      "slug": "travel",
-      "taxonomy": "category",
-      "yoast_meta": Object {
-        "title": "Travel Archives - Demo Worona",
-      },
-    },
+  },
+  "taxonomyEntity": Object {
     "post": Object {
       "count": 15,
       "id": "post",
