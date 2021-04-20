@@ -18,6 +18,11 @@ interface Package1 extends Package {
       };
     };
   };
+  libraries: {
+    namespace1: {
+      func1: (s: string) => string;
+    };
+  };
 }
 
 const package1: Package1 = {
@@ -25,8 +30,10 @@ const package1: Package1 = {
     namespace1: {
       prop1: "prop1",
       prop2: 2,
-      // Check that prop3 is a string (and not a function).
-      prop3: ({ state }) => state.namespace1.prop3,
+      // Check that prop3 is a string (and not a function). Also, check that
+      // derived state can access libraries.
+      prop3: ({ state, libraries }) =>
+        libraries.namespace1.func1(state.namespace1.prop3),
       // Check that prop4 returns a number (and not a function).
       prop4: ({ state }) => (str) => state.namespace1.nested1.prop5(str),
       unionDerivedProp1: ({ state }) => state.namespace1.unionDerivedProp1,
@@ -39,6 +46,11 @@ const package1: Package1 = {
           prop6: ({ state }) => state.namespace1.prop1.toLowerCase(),
         },
       },
+    },
+  },
+  libraries: {
+    namespace1: {
+      func1: (s) => s.trim(),
     },
   },
 };
