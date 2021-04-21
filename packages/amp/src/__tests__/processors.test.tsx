@@ -100,7 +100,7 @@ test("Validate amp-iframe", async () => {
   expect(await amp(container.innerHTML, headScript)).toBeValidAmpHtml();
 });
 
-test("amp-iframe should concatenate the sandbox properties", async () => {
+test("amp-iframe should concatenate the sandbox properties", () => {
   const helmetContext = {};
 
   const { container } = render(
@@ -414,4 +414,102 @@ test("picture element should be replaced with an img", async () => {
     />
   `);
   expect(await amp(container.innerHTML)).toBeValidAmpHtml();
+});
+
+describe("Transform http to https and warn about it", () => {
+  const consoleWarn = jest.spyOn(global.console, "warn");
+
+  beforeEach(() => {
+    consoleWarn.mockReset();
+  });
+
+  test("amp-iframe", () => {
+    const helmetContext = {};
+
+    const { container } = render(
+      <HelmetProvider context={helmetContext}>
+        <Html2React
+          html="<iframe src='http://frontity.org/test.html' width='auto' height='300'/>"
+          processors={processors}
+        />
+      </HelmetProvider>
+    );
+
+    expect(
+      container.firstElementChild.getAttribute("src").startsWith("https://")
+    ).toBe(true);
+
+    expect(consoleWarn).toHaveBeenCalledTimes(1);
+    expect(consoleWarn.mock.calls[0][0]).toMatchInlineSnapshot(`
+      "<AMPIframe> element with src of https://frontity.org/test.html was found but AMP requires resources to be loaded over HTTPS.
+
+      Frontity will update the src attribute to point to the HTTPS version but you need to ensure that the asset is available over HTTPS.
+      Visit https://community.frontity.org for help! 🙂
+      "
+    `);
+  });
+
+  test("amp-audio", () => {
+    const helmetContext = {};
+    const consoleWarn = jest.spyOn(global.console, "warn");
+
+    const { container } = render(
+      <HelmetProvider context={helmetContext}>
+        <Html2React
+          html="<audio src='http://frontity.org/audio.mp3'></audio>"
+          processors={processors}
+        />
+      </HelmetProvider>
+    );
+
+    expect(
+      container
+        .getElementsByTagName("amp-audio")[0]
+        .getAttribute("src")
+        .startsWith("https://")
+    ).toBe(true);
+
+    expect(consoleWarn).toHaveBeenCalledTimes(1);
+    expect(consoleWarn.mock.calls[0][0]).toMatchInlineSnapshot(`
+      "<AMPAudio> element with src of https://frontity.org/audio.mp3 was found but AMP requires resources to be loaded over HTTPS.
+
+      Frontity will update the src attribute to point to the HTTPS version but you need to ensure that the asset is available over HTTPS.
+      Visit https://community.frontity.org for help! 🙂
+      "
+    `);
+  });
+
+  test("amp-video", () => {
+    const helmetContext = {};
+    const consoleWarn = jest.spyOn(global.console, "warn");
+
+    const { container } = render(
+      <HelmetProvider context={helmetContext}>
+        <Html2React
+          html="<video 
+          width='250' 
+          height='150' 
+          src='http://frontity.org/video.mp4'  
+        ></video>"
+          processors={processors}
+        />
+      </HelmetProvider>
+    );
+
+    expect(
+      container
+        .getElementsByTagName("amp-video")[0]
+        .getAttribute("src")
+        .startsWith("https://")
+    ).toBe(true);
+
+    expect(consoleWarn).toHaveBeenCalledTimes(1);
+    expect(consoleWarn.mock.calls[0][0]).toMatchInlineSnapshot(`
+      "<AMPVideo> element with src of https://frontity.org/video.mp4 was found but AMP requires resources to be loaded over HTTPS.
+
+      Frontity will update the src attribute to point to the HTTPS version but you need to ensure that the asset is available over HTTPS.
+      Visit https://community.frontity.org for help! 🙂
+      "
+    `);
+  });
 });

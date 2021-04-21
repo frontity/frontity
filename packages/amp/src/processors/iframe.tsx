@@ -1,6 +1,7 @@
 import { Processor, Element } from "@frontity/html2react/types";
 import { Packages } from "../../types";
 import { Head } from "frontity";
+import { httpToHttps } from "../utils";
 
 /**
  * Props for the {@link AMPIframe} component.
@@ -108,10 +109,7 @@ export const iframe: Processor<IFrameElement, Packages> = {
     node.component = AMPIframe;
 
     // AMP requires that the iframe is loaded over HTTPS
-    const httpRegexp = /^http:\/\//;
-    if (node.props.src.match(httpRegexp)) {
-      node.props.src = node.props.src.replace(httpRegexp, "https://");
-    }
+    node = httpToHttps(node) as IFrameElement;
 
     delete node.props.loading;
 
