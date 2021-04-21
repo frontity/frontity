@@ -441,7 +441,7 @@ describe("Transform http to https and warn about it", () => {
 
     expect(consoleWarn).toHaveBeenCalledTimes(1);
     expect(consoleWarn.mock.calls[0][0]).toMatchInlineSnapshot(`
-      "<AMPIframe> element with src of https://frontity.org/test.html was found but AMP requires resources to be loaded over HTTPS.
+      "An element with src of https://frontity.org/test.html was found but AMP requires resources to be loaded over HTTPS.
 
       Frontity will update the src attribute to point to the HTTPS version but you need to ensure that the asset is available over HTTPS.
       Visit https://community.frontity.org for help! 🙂
@@ -471,7 +471,7 @@ describe("Transform http to https and warn about it", () => {
 
     expect(consoleWarn).toHaveBeenCalledTimes(1);
     expect(consoleWarn.mock.calls[0][0]).toMatchInlineSnapshot(`
-      "<AMPAudio> element with src of https://frontity.org/audio.mp3 was found but AMP requires resources to be loaded over HTTPS.
+      "An element with src of https://frontity.org/audio.mp3 was found but AMP requires resources to be loaded over HTTPS.
 
       Frontity will update the src attribute to point to the HTTPS version but you need to ensure that the asset is available over HTTPS.
       Visit https://community.frontity.org for help! 🙂
@@ -505,7 +505,7 @@ describe("Transform http to https and warn about it", () => {
 
     expect(consoleWarn).toHaveBeenCalledTimes(1);
     expect(consoleWarn.mock.calls[0][0]).toMatchInlineSnapshot(`
-      "<AMPVideo> element with src of https://frontity.org/video.mp4 was found but AMP requires resources to be loaded over HTTPS.
+      "An element with src of https://frontity.org/video.mp4 was found but AMP requires resources to be loaded over HTTPS.
 
       Frontity will update the src attribute to point to the HTTPS version but you need to ensure that the asset is available over HTTPS.
       Visit https://community.frontity.org for help! 🙂
