@@ -69,7 +69,12 @@ const Link: React.FC<LinkProps> = ({
   }
 
   const link = replaceSourceUrls
-    ? removeSourceUrl(rawLink, state.source.url, match)
+    ? removeSourceUrl({
+        link: rawLink,
+        sourceUrl: state.source.url,
+        frontityUrl: state.frontity.url,
+        match,
+      })
     : rawLink;
 
   const autoPrefetch = state.theme?.autoPrefetch;
