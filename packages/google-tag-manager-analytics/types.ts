@@ -1,6 +1,10 @@
 import * as React from "react";
-import { Action } from "frontity/types";
-import Analytics, { Pageview, Event } from "@frontity/analytics/types";
+import { Action, Frontity, MergePackages } from "frontity/types";
+import Analytics, {
+  Pageview,
+  Event,
+  AmpConfig,
+} from "@frontity/analytics/types";
 
 declare global {
   /**
@@ -55,6 +59,16 @@ interface GoogleTagManagerAnalytics extends Analytics {
        * List of container IDs associated to a Google Tag Manager account.
        */
       containerIds?: string[];
+
+      /**
+       * JSON configuration object to include inside the `<amp-analytics>` tags,
+       * useful to add variables to the GTM data layer. Note that this props is
+       * only used when the `@frontity/amp` package is installed.
+       *
+       * See https://support.google.com/tagmanager/answer/9205783#variables for
+       * more info about how to define variables for GTM.
+       */
+      ampConfig?: AmpConfig;
     };
   };
 
@@ -135,3 +149,8 @@ interface GoogleTagManagerAnalytics extends Analytics {
 }
 
 export default GoogleTagManagerAnalytics;
+
+/**
+ * Packages used internally by google-tag-manager-analytics.
+ */
+export type Packages = MergePackages<Frontity, GoogleTagManagerAnalytics>;
