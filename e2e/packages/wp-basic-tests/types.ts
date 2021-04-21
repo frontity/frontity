@@ -10,6 +10,7 @@ interface WpBasicTests extends Package {
    * Package name.
    */
   name: "e2e-wp-basic-tests";
+
   /**
    * Roots exposed by this package.
    */

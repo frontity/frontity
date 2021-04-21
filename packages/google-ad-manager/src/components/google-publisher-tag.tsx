@@ -14,7 +14,7 @@ import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
  */
 const GooglePublisherTag: React.FC<
   Connect<GoogleAdManager, GooglePublisherTagProps>
-> = ({ unit, size, id, targeting = {}, data }) => {
+> = ({ unit, size, id, targeting = {}, data, collapseEmptyDiv = false }) => {
   /**
    * Append link to the `id` if `data` is specified.
    *
@@ -45,6 +45,8 @@ const GooglePublisherTag: React.FC<
       Object.entries(targeting).forEach(([key, value]) =>
         slot.current.setTargeting(key, value)
       );
+      // Collapse empty ad slots if
+      slot.current.setCollapseEmptyDiv(collapseEmptyDiv);
 
       // Enables all GPT services.
       window.googletag.enableServices();

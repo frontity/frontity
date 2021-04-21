@@ -42,6 +42,12 @@ expect.extend({
   },
 });
 
+const setEmbeddedModeTrue = (store) => {
+  // Ensure that all the namespaces are available first
+  store.state.frontity.options = store.state.frontity.options || {};
+  store.state.frontity.options.embedded = "true";
+};
+
 const serverFetchParams = [
   "https://wp.domain.com/some-post/",
   {
@@ -107,6 +113,12 @@ describe.each`
     it(`${platform}: Should handle a redirect with 'all'`, async () => {
       store.state.source.redirections = "all";
 
+      // On embedded mode, on the client side, there should not be
+      // any difference in handling the redirections.
+      if (platform === "client") {
+        setEmbeddedModeTrue(store);
+      }
+
       await store.actions.source.fetch("/some-post/");
 
       expect(mockedFetch).toHaveBeenCalledTimes(1);
@@ -132,6 +144,39 @@ describe.each`
               }
           `);
     });
+
+    // On the server, the embedded mode should NOT handle the redirections
+    // to avoid the infinite loading loop.
+    // On embedded mode redirections are handled by the host which embeds frontity.
+    // More specifically Wordpress.
+    if (platform === "server") {
+      it(`${platform}: Should not handle a redirections with 'all' for embedded mode`, async () => {
+        store.state.source.redirections = "all";
+
+        setEmbeddedModeTrue(store);
+
+        await store.actions.source.fetch("/some-post/");
+
+        expect(mockedFetch).toHaveBeenCalledTimes(0);
+        expect(handler.func).toHaveBeenCalled();
+
+        expect(store.state.source.data).toMatchInlineSnapshot(`
+                Object {
+                  "/some-post/": Object {
+                    "id": 1,
+                    "isFetching": false,
+                    "isPostType": true,
+                    "isReady": true,
+                    "link": "/some-post/",
+                    "page": 1,
+                    "query": Object {},
+                    "route": "/some-post/",
+                    "type": "example",
+                  },
+                }
+            `);
+      });
+    }
   });
 
   describe("redirections: 404", () => {
@@ -172,6 +217,12 @@ describe.each`
     it(`${platform}: Should redirect on 404`, async () => {
       store.state.source.redirections = "404";
 
+      // On embedded mode, on the client side, there should not be
+      // any difference in handling the redirections.
+      if (platform === "client") {
+        setEmbeddedModeTrue(store);
+      }
+
       await store.actions.source.fetch("/some-post/");
 
       // The `fetch()` was called.
@@ -199,6 +250,42 @@ describe.each`
               }
           `);
     });
+
+    // On the server, the embedded mode should NOT handle the redirections
+    // to avoid the infinite loading loop.
+    // On embedded mode redirections are handled by the host which embeds frontity.
+    // More specifically Wordpress.
+    if (platform === "server") {
+      it(`${platform}: Should not redirect on 404 on embedded mode`, async () => {
+        store.state.source.redirections = "404";
+
+        // Set the embedded mode
+        setEmbeddedModeTrue(store);
+
+        await store.actions.source.fetch("/some-post/");
+
+        // The `fetch()` was called.
+        expect(mockedFetch).toHaveBeenCalledTimes(0);
+        expect(handler.func).toHaveBeenCalledTimes(1);
+
+        expect(store.state.source.data).toMatchInlineSnapshot(`
+                Object {
+                  "/some-post/": Object {
+                    "errorStatus": 404,
+                    "errorStatusText": "There was an error",
+                    "is404": true,
+                    "isError": true,
+                    "isFetching": false,
+                    "isReady": true,
+                    "link": "/some-post/",
+                    "page": 1,
+                    "query": Object {},
+                    "route": "/some-post/",
+                  },
+                }
+            `);
+      });
+    }
 
     it(`${platform}: Should redirect on 404 when the redirection is a 302 redirection`, async () => {
       store.state.source.redirections = "404";

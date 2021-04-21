@@ -106,6 +106,14 @@ export interface DevOptions {
    * @defaultValue "/static/"
    */
   publicPath: string;
+
+  /**
+   * Indicate if the Bundle Analyzer plugin should be included in the Webpack
+   * configuration, in order to generate HTML files for bundle analyzing.
+   *
+   * @defaultValue false
+   */
+  analyze?: boolean;
 }
 
 /**
@@ -122,6 +130,7 @@ export default async ({
   target,
   openBrowser = true,
   publicPath = "/static/",
+  analyze,
 }: DevOptions): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
@@ -150,7 +159,7 @@ export default async ({
   });
 
   // Get config for webpack, babel and frontity.
-  const config = getConfig({ mode, entryPoints, publicPath });
+  const config = getConfig({ mode, entryPoints, publicPath, analyze });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import

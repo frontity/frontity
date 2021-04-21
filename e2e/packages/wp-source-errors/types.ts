@@ -9,6 +9,7 @@ interface WpSourceErrors extends Package {
    * Package name.
    */
   name: "e2e-wp-source-errors";
+
   /**
    * Actions exposed by this package.
    */

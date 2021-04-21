@@ -9,28 +9,66 @@ import {
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Target, Mode } from "../../../types";
 
-export default ({
+/**
+ * The options for the {@link plugins} function.
+ */
+interface PluginsOptions {
+  /**
+   * The target of the build: "server", "es5" or "module".
+   */
+  target: Target;
+
+  /**
+   * The mode of the build: "development" or "production".
+   */
+  mode: Mode;
+
+  /**
+   * The output directory.
+   */
+  outDir: string;
+
+  /**
+   * Flag indicating if the Bundle Analyzer plugin should be included.
+   */
+  analyze: boolean;
+}
+
+/**
+ * Generate the object for Webpack's plugins configuration.
+ *
+ * Official Webpack docs: https://webpack.js.org/configuration/plugins/.
+ *
+ * @param options - Object of type {@link PluginsOptions}.
+ *
+ * @returns The configuration object for Webpack.
+ */
+const plugins = ({
   target,
   mode,
   outDir,
-}: {
-  target: Target;
-  mode: Mode;
-  outDir: string;
-}): Configuration["plugins"] => {
-  const config: Configuration["plugins"] = [
-    // Create HTML files for bundle analyzing.
-    new BundleAnalyzerPlugin({
-      analyzerMode: "static",
-      reportFilename: `${
-        target !== "server" ? `../` : ""
-      }analyze/${target}-${mode}.html`,
-      openAnalyzer: false,
-      logLevel: "silent",
-    }),
+  analyze,
+}: PluginsOptions): Configuration["plugins"] => {
+  const config: Configuration["plugins"] = [];
+
+  // Create HTML files for bundle analyzing.
+  if (analyze)
+    config.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        reportFilename: `${
+          target !== "server" ? `../` : ""
+        }analyze/${target}-${mode}.html`,
+        openAnalyzer: false,
+        logLevel: "silent",
+      })
+    );
+
+  // Ignore some files and folders.
+  config.push(
     new WatchIgnorePlugin([new RegExp(outDir)]),
-    new IgnorePlugin(/^encoding$/),
-  ];
+    new IgnorePlugin(/^encoding$/)
+  );
 
   // Support HMR in development. Only needed in client.
   if (target !== "server" && mode === "development")
@@ -49,3 +87,5 @@ export default ({
     config.push(new optimize.LimitChunkCountPlugin({ maxChunks: 1 }));
   return config;
 };
+
+export default plugins;

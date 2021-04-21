@@ -1,5 +1,152 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Webpack includes the Bundle Analyzer plugin if specified 1`] = `
+Array [
+  BundleAnalyzerPlugin {
+    "logger": Logger {
+      "activeLevels": Set {
+        "silent",
+      },
+    },
+    "opts": Object {
+      "analyzerHost": "127.0.0.1",
+      "analyzerMode": "static",
+      "analyzerPort": 8888,
+      "defaultSizes": "parsed",
+      "excludeAssets": null,
+      "generateStatsFile": false,
+      "logLevel": "silent",
+      "openAnalyzer": false,
+      "reportFilename": "../analyze/es5-production.html",
+      "reportTitle": [Function],
+      "startAnalyzer": true,
+      "statsFilename": "stats.json",
+      "statsOptions": null,
+    },
+    "server": null,
+  },
+  WatchIgnorePlugin {
+    "paths": Array [
+      /build/,
+    ],
+  },
+  IgnorePlugin {
+    "checkIgnore": [Function],
+    "options": Object {
+      "contextRegExp": undefined,
+      "resourceRegExp": /\\^encoding\\$/,
+    },
+  },
+  LoadablePlugin {
+    "compiler": null,
+    "handleEmit": [Function],
+    "opts": Object {
+      "filename": "../bundling/chunks.es5.json",
+      "outputAsset": true,
+      "path": undefined,
+      "writeToDisk": undefined,
+    },
+    "writeAssetsFile": [Function],
+  },
+]
+`;
+
+exports[`Webpack includes the Bundle Analyzer plugin if specified 2`] = `
+Array [
+  BundleAnalyzerPlugin {
+    "logger": Logger {
+      "activeLevels": Set {
+        "silent",
+      },
+    },
+    "opts": Object {
+      "analyzerHost": "127.0.0.1",
+      "analyzerMode": "static",
+      "analyzerPort": 8888,
+      "defaultSizes": "parsed",
+      "excludeAssets": null,
+      "generateStatsFile": false,
+      "logLevel": "silent",
+      "openAnalyzer": false,
+      "reportFilename": "../analyze/module-production.html",
+      "reportTitle": [Function],
+      "startAnalyzer": true,
+      "statsFilename": "stats.json",
+      "statsOptions": null,
+    },
+    "server": null,
+  },
+  WatchIgnorePlugin {
+    "paths": Array [
+      /build/,
+    ],
+  },
+  IgnorePlugin {
+    "checkIgnore": [Function],
+    "options": Object {
+      "contextRegExp": undefined,
+      "resourceRegExp": /\\^encoding\\$/,
+    },
+  },
+  LoadablePlugin {
+    "compiler": null,
+    "handleEmit": [Function],
+    "opts": Object {
+      "filename": "../bundling/chunks.module.json",
+      "outputAsset": true,
+      "path": undefined,
+      "writeToDisk": undefined,
+    },
+    "writeAssetsFile": [Function],
+  },
+]
+`;
+
+exports[`Webpack includes the Bundle Analyzer plugin if specified 3`] = `
+Array [
+  BundleAnalyzerPlugin {
+    "logger": Logger {
+      "activeLevels": Set {
+        "silent",
+      },
+    },
+    "opts": Object {
+      "analyzerHost": "127.0.0.1",
+      "analyzerMode": "static",
+      "analyzerPort": 8888,
+      "defaultSizes": "parsed",
+      "excludeAssets": null,
+      "generateStatsFile": false,
+      "logLevel": "silent",
+      "openAnalyzer": false,
+      "reportFilename": "analyze/server-production.html",
+      "reportTitle": [Function],
+      "startAnalyzer": true,
+      "statsFilename": "stats.json",
+      "statsOptions": null,
+    },
+    "server": null,
+  },
+  WatchIgnorePlugin {
+    "paths": Array [
+      /build/,
+    ],
+  },
+  IgnorePlugin {
+    "checkIgnore": [Function],
+    "options": Object {
+      "contextRegExp": undefined,
+      "resourceRegExp": /\\^encoding\\$/,
+    },
+  },
+  LimitChunkCountPlugin {
+    "options": Object {
+      "maxChunks": 1,
+    },
+  },
+]
+`;
+
 exports[`Webpack returns for development 1`] = `
 Object {
   "es5": Object {
@@ -85,29 +232,6 @@ Object {
       "maxEntrypointSize": 500000,
     },
     "plugins": Array [
-      BundleAnalyzerPlugin {
-        "logger": Logger {
-          "activeLevels": Set {
-            "silent",
-          },
-        },
-        "opts": Object {
-          "analyzerHost": "127.0.0.1",
-          "analyzerMode": "static",
-          "analyzerPort": 8888,
-          "defaultSizes": "parsed",
-          "excludeAssets": null,
-          "generateStatsFile": false,
-          "logLevel": "silent",
-          "openAnalyzer": false,
-          "reportFilename": "../analyze/es5-development.html",
-          "reportTitle": [Function],
-          "startAnalyzer": true,
-          "statsFilename": "stats.json",
-          "statsOptions": null,
-        },
-        "server": null,
-      },
       WatchIgnorePlugin {
         "paths": Array [
           /build/,
@@ -246,29 +370,6 @@ Object {
       "maxEntrypointSize": 500000,
     },
     "plugins": Array [
-      BundleAnalyzerPlugin {
-        "logger": Logger {
-          "activeLevels": Set {
-            "silent",
-          },
-        },
-        "opts": Object {
-          "analyzerHost": "127.0.0.1",
-          "analyzerMode": "static",
-          "analyzerPort": 8888,
-          "defaultSizes": "parsed",
-          "excludeAssets": null,
-          "generateStatsFile": false,
-          "logLevel": "silent",
-          "openAnalyzer": false,
-          "reportFilename": "../analyze/module-development.html",
-          "reportTitle": [Function],
-          "startAnalyzer": true,
-          "statsFilename": "stats.json",
-          "statsOptions": null,
-        },
-        "server": null,
-      },
       WatchIgnorePlugin {
         "paths": Array [
           /build/,
@@ -394,29 +495,6 @@ Object {
       "maxEntrypointSize": 5000000,
     },
     "plugins": Array [
-      BundleAnalyzerPlugin {
-        "logger": Logger {
-          "activeLevels": Set {
-            "silent",
-          },
-        },
-        "opts": Object {
-          "analyzerHost": "127.0.0.1",
-          "analyzerMode": "static",
-          "analyzerPort": 8888,
-          "defaultSizes": "parsed",
-          "excludeAssets": null,
-          "generateStatsFile": false,
-          "logLevel": "silent",
-          "openAnalyzer": false,
-          "reportFilename": "analyze/server-development.html",
-          "reportTitle": [Function],
-          "startAnalyzer": true,
-          "statsFilename": "stats.json",
-          "statsOptions": null,
-        },
-        "server": null,
-      },
       WatchIgnorePlugin {
         "paths": Array [
           /build/,
@@ -546,29 +624,6 @@ Object {
       "maxEntrypointSize": 500000,
     },
     "plugins": Array [
-      BundleAnalyzerPlugin {
-        "logger": Logger {
-          "activeLevels": Set {
-            "silent",
-          },
-        },
-        "opts": Object {
-          "analyzerHost": "127.0.0.1",
-          "analyzerMode": "static",
-          "analyzerPort": 8888,
-          "defaultSizes": "parsed",
-          "excludeAssets": null,
-          "generateStatsFile": false,
-          "logLevel": "silent",
-          "openAnalyzer": false,
-          "reportFilename": "../analyze/es5-production.html",
-          "reportTitle": [Function],
-          "startAnalyzer": true,
-          "statsFilename": "stats.json",
-          "statsOptions": null,
-        },
-        "server": null,
-      },
       WatchIgnorePlugin {
         "paths": Array [
           /build/,
@@ -690,29 +745,6 @@ Object {
       "maxEntrypointSize": 500000,
     },
     "plugins": Array [
-      BundleAnalyzerPlugin {
-        "logger": Logger {
-          "activeLevels": Set {
-            "silent",
-          },
-        },
-        "opts": Object {
-          "analyzerHost": "127.0.0.1",
-          "analyzerMode": "static",
-          "analyzerPort": 8888,
-          "defaultSizes": "parsed",
-          "excludeAssets": null,
-          "generateStatsFile": false,
-          "logLevel": "silent",
-          "openAnalyzer": false,
-          "reportFilename": "../analyze/module-production.html",
-          "reportTitle": [Function],
-          "startAnalyzer": true,
-          "statsFilename": "stats.json",
-          "statsOptions": null,
-        },
-        "server": null,
-      },
       WatchIgnorePlugin {
         "paths": Array [
           /build/,
@@ -823,29 +855,6 @@ Object {
       "maxEntrypointSize": 5000000,
     },
     "plugins": Array [
-      BundleAnalyzerPlugin {
-        "logger": Logger {
-          "activeLevels": Set {
-            "silent",
-          },
-        },
-        "opts": Object {
-          "analyzerHost": "127.0.0.1",
-          "analyzerMode": "static",
-          "analyzerPort": 8888,
-          "defaultSizes": "parsed",
-          "excludeAssets": null,
-          "generateStatsFile": false,
-          "logLevel": "silent",
-          "openAnalyzer": false,
-          "reportFilename": "analyze/server-production.html",
-          "reportTitle": [Function],
-          "startAnalyzer": true,
-          "statsFilename": "stats.json",
-          "statsOptions": null,
-        },
-        "server": null,
-      },
       WatchIgnorePlugin {
         "paths": Array [
           /build/,
