@@ -15,13 +15,7 @@ export const httpToHttps = (node: Element) => {
   if (node.props?.src?.match(httpRegexp)) {
     node.props.src = node.props.src.replace(httpRegexp, "https://");
     warn(
-      `<${
-        typeof node.component === "function"
-          ? node.component.displayName || node.component.name
-          : node.component
-      }> element with src of ${
-        node.props.src
-      } was found but AMP requires resources to be loaded over HTTPS.\n
+      `An element with src of ${node.props.src} was found but AMP requires resources to be loaded over HTTPS.\n
 Frontity will update the src attribute to point to the HTTPS version but you need to ensure that the asset is available over HTTPS.`
     );
     return node;
