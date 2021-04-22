@@ -138,6 +138,22 @@
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/no-empty-function": "off"
       }
+    },
+    // Overrides for Selenium files
+    {
+      "files": ["**/selenium/**"],
+      "rules": {
+        "jest/expect-expect": [
+          "error",
+          {
+            "assertFunctionNames": ["assert.**", "assert"]
+          }
+        ]
+      },
+      "globals": {
+        "driver": "writable",
+        "baseUrl": "writable"
+      }
     }
   ]
 }
