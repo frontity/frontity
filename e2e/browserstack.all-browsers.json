@@ -12,7 +12,7 @@
     {
       "browser": "firefox",
       "os": "Windows 10",
-      "versions": ["60"]
+      "versions": ["70"]
     },
     {
       "browser": "edge",
@@ -42,7 +42,7 @@
     {
       "browser": "firefox",
       "os": "OS X Mojave",
-      "versions": ["60"]
+      "versions": ["70"]
     },
     {
       "browser": "edge",
