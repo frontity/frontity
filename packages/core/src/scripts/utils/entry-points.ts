@@ -327,7 +327,7 @@ export const generateServerEntryPoint = async ({
 
 /**
  * Create entry-point files for the client and return all the bundle names and
- * pathes.
+ * paths.
  *
  * @param options - Defined in {@link GenerateEntryPointsOptions}.
  * @returns The name and path of the final client bundles.
@@ -366,7 +366,7 @@ export const generateClientEntryPoints = async ({
 };
 
 /**
- * Create entry-point files and return all the bundle names and pathes.
+ * Create entry-point files and return all the bundle names and paths.
  *
  * @param options - Defined in {@link GenerateEntryPointsOptions}.
  * @returns The name and path of the final bundles.

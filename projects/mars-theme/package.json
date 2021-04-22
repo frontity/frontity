@@ -20,6 +20,7 @@
     "@frontity/mars-theme": "^1.5.0",
     "@frontity/tiny-router": "^1.3.2",
     "@frontity/wp-source": "^1.11.1",
-    "frontity": "^1.14.1"
+    "frontity": "^1.14.1",
+    "with-preact": "./packages/with-preact"
   }
 }

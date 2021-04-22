@@ -8,6 +8,7 @@ const settings = {
     },
   },
   packages: [
+    "with-preact",
     "@frontity/tiny-router",
     "@frontity/html2react",
     {
