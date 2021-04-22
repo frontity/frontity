@@ -47,16 +47,32 @@ describe("AMP", () => {
 
       audio.pause();
     });
+
+    // The placeholder & fallback for the second audio element should exist
+    cy.get("#audio-2 amp-audio div[placeholder]").should("exist");
+    cy.get("#audio-2 amp-audio div[fallback]").should("exist");
+
+    // Second audio element that we've created in WP on the same page
+    cy.get("#audio-2 amp-audio > audio").should((els) => {
+      const audio = els[0] as HTMLAudioElement;
+      audio.play();
+
+      // You can play the audio element
+      expect(audio.duration > 0 && !audio.paused && !audio.muted).toBe(true);
+
+      audio.pause();
+    });
+
+    // The src has to be served over HTTPS
+    cy.get("#audio-2 amp-audio > audio > source")
+      .should("have.attr", "src")
+      .and("contain", "https://");
   });
 
   it("amp-video", () => {
     const url = "http://localhost:3001/amp-video/?frontity_name=amp-wordpress";
 
-    // The controls parameter cannot have value "true" according to the spec
-    // even though it renders an amp-video element correctly so we have to
-    // comment this out:
-    // cy.validateAMP(url);
-
+    cy.validateAMP(url);
     cy.visit(url);
     cy.get("amp-video > video").should((els) => {
       const video = els[0] as HTMLVideoElement;
@@ -67,6 +83,26 @@ describe("AMP", () => {
 
       video.pause();
     });
+
+    // The placeholder & fallback for the second video element should exist
+    cy.get("#video-2 amp-video div[placeholder]").should("exist");
+    cy.get("#video-2 amp-video div[fallback]").should("exist");
+
+    // Second video element that we've created in WP on the same page
+    cy.get("#video-2 amp-video > video").should((els) => {
+      const video = els[0] as HTMLVideoElement;
+      video.play();
+
+      // You can play the video element
+      expect(video.duration > 0 && !video.paused && !video.muted).toBe(true);
+
+      video.pause();
+    });
+
+    // The src has to be served over HTTPS
+    cy.get("#video-2 amp-video > video > source")
+      .should("have.attr", "src")
+      .and("contain", "https://");
   });
 
   it("amp-twitter", () => {
