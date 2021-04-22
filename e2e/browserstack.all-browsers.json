@@ -56,7 +56,7 @@
     "project_name": "frontity/frontity",
     "build_name": "All Browsers - Local",
     "parallels": "1",
-    "exclude": ["wp-data/**/*"],
+    "exclude": ["wp-data/**/*", "project/**/*"],
     "specs": [
       "integration/frontity-*/**/*.spec.js",
       "integration/frontity-*/**/*.spec.ts"
