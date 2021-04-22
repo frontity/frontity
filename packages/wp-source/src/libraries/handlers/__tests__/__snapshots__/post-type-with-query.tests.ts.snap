@@ -21,7 +21,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "cpt": Object {
     "11": Object {
@@ -34,10 +43,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -79,6 +94,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/cpt/cpt-11/": Object {
       "id": 11,
@@ -167,7 +192,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "cpt": Object {
     "11": Object {
@@ -180,10 +214,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -225,6 +265,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/cpt/cpt-11/": Object {
       "id": 11,
@@ -655,7 +705,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/?p=1": Object {
@@ -680,6 +739,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/post-1/": Object {
       "id": 1,
@@ -729,10 +798,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -794,7 +869,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/?p=1": Object {
@@ -819,6 +903,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/post-1/": Object {
       "id": 1,
@@ -868,10 +962,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -980,7 +1080,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/?p=1": Object {
@@ -1005,6 +1114,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/post-1/": Object {
       "id": 1,
@@ -1054,10 +1173,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1119,7 +1244,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/?p=1&some=param": Object {
@@ -1145,6 +1279,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/post-1/": Object {
       "id": 1,
@@ -1194,10 +1338,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1259,7 +1409,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/?p=1&some=param": Object {
@@ -1285,6 +1444,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/post-1/": Object {
       "id": 1,
@@ -1334,10 +1503,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1399,7 +1574,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/?p=1": Object {
@@ -1424,6 +1608,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/post-1/": Object {
       "id": 1,
@@ -1484,10 +1678,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1560,7 +1760,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/?a=v2&p=1&z=v1": Object {
@@ -1587,6 +1796,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/post-1/": Object {
       "id": 1,
@@ -1636,10 +1855,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1701,7 +1926,16 @@ Object {
     },
   },
   "authorBase": "",
-  "category": Object {},
+  "category": Object {
+    "1": Object {
+      "count": 5,
+      "id": 1,
+      "link": "/category/cat-1/",
+      "parent": 0,
+      "slug": "cat-1",
+      "taxonomy": "category",
+    },
+  },
   "categoryBase": "",
   "data": Object {
     "/?a=v2&p=1&z=v1": Object {
@@ -1728,6 +1962,16 @@ Object {
       "page": 1,
       "query": Object {},
       "route": "/author/author-1/",
+    },
+    "/category/cat-1/": Object {
+      "id": 1,
+      "isFetching": false,
+      "isReady": false,
+      "link": "/category/cat-1/",
+      "page": 1,
+      "query": Object {},
+      "route": "/category/cat-1/",
+      "taxonomy": "category",
     },
     "/post-1/": Object {
       "id": 1,
@@ -1777,10 +2021,16 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
