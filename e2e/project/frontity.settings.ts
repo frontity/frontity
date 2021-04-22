@@ -475,6 +475,7 @@ const settings: Settings<
   },
   {
     name: "amp-comscore-analytics",
+    mode: "amp",
     packages: [
       "@frontity/amp",
       {
@@ -482,6 +483,26 @@ const settings: Settings<
         state: {
           comscoreAnalytics: {
             trackingIds: ["111111", "222222"],
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "amp-google-tag-manager-analytics",
+    mode: "amp",
+    packages: [
+      "@frontity/amp",
+      {
+        name: "@frontity/google-tag-manager-analytics",
+        state: {
+          googleTagManagerAnalytics: {
+            containerIds: ["GTM-XXXXXX-X", "GTM-YYYYYY-Y"],
+            ampConfig: {
+              vars: {
+                someProp: "someValue",
+              },
+            },
           },
         },
       },
