@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.event.repo.name == github.repository
+    if: github.event.repository.full_name == github.repository
 
     steps:
       - name: Checkout
