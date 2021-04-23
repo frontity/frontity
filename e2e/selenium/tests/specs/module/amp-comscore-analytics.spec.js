@@ -1,8 +1,17 @@
+const { until } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("amp", function () {
   beforeEach(async function () {
     await driver.get(baseUrl + "/?frontity_name=amp-comscore-analytics");
+    await driver.wait(
+      until.elementLocated(
+        By.css(
+          'script[src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"]'
+        )
+      ),
+      5000
+    );
   });
 
   it("should render the tags for the tracking IDs", async function () {
