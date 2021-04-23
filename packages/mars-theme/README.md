@@ -4,7 +4,7 @@
 
 A starter theme for Frontity
 
-Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-mars-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
 
 ![](https://frontity.org/wp-content/uploads/2021/04/screenshot-mars-theme-demo.png)
 
@@ -55,7 +55,7 @@ The theme options can be specified in the `state.theme` property.
 },
 ```
 
-Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-mars-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
 
 ## Theme Anatomy
 

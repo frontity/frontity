@@ -8,6 +8,7 @@ interface SlotAndFill extends Package {
    * Package name.
    */
   name: "e2e-slot-and-fill";
+
   /**
    * Actions exposed by this package.
    */

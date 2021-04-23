@@ -29,7 +29,7 @@ if (module[\\"hot\\"]) {
         package1_default,
         package2_default,
       };
-      client({ packages });
+      client({ packages, isHmr: true });
     }
   );
 }"

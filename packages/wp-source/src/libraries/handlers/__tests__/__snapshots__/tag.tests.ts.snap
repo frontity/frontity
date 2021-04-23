@@ -159,7 +159,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -184,7 +187,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -209,7 +215,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -438,7 +447,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -581,7 +593,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -606,7 +621,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -816,7 +834,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -841,7 +862,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -866,7 +890,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1147,7 +1174,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1172,7 +1202,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1384,7 +1417,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1409,7 +1445,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1434,7 +1473,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1615,7 +1657,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
@@ -1640,7 +1685,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "tagEntity",
+            },
           ],
         ],
       },
