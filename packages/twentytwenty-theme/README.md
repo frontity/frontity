@@ -6,7 +6,7 @@ The WordPress Twenty Twenty starter theme for Frontity
 
 Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-twentytwenty-theme)
 
-![](https://raw.githubusercontent.com/frontity/api-reference/master/docs-api/.gitbook/assets/screenshot-homepage-view-twentytwenty-frontity-theme.png)
+![](https://frontity.org/wp-content/uploads/2021/04/theme-frontity-starter.png)
 
 ## Table of contents
 
