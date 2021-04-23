@@ -35,7 +35,6 @@ describe("errorHandling", () => {
     });
     await request(app.callback()).get("/");
     expect(ctx.body).toBe("Something bad happened");
-    expect(ctx.status).toBe(500);
     expect(ctx.response.get("X-Frontity-Dev")).toBe("true");
   });
 
