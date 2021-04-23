@@ -1,8 +1,6 @@
 import { Middleware, Next } from "koa";
 import { Context } from "@frontity/types";
 
-const _DEV_ = process.env.NODE_ENV !== "production";
-
 /**
  * Catch and print errors and add a header in development.
  *
@@ -15,6 +13,8 @@ export const errorHandling = async (
   ctx: Context,
   next: Next
 ): Promise<Middleware> => {
+  const _DEV_ = process.env.NODE_ENV !== "production";
+
   try {
     if (_DEV_) ctx.set("X-Frontity-Dev", "true");
     return await next();
