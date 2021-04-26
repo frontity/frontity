@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.5.1
+
+### Patch Changes
+
+- [`888060c1`](https://github.com/frontity/frontity/commit/888060c11a0f458abe3a6e4b794733d3a49eb716) [#789](https://github.com/frontity/frontity/pull/789) Thanks [@mburridge](https://github.com/mburridge)! - Fixes broken links in README.md
+
+- Updated dependencies [[`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`944d5888`](https://github.com/frontity/frontity/commit/944d5888b8884585a39485002b896b4f9beaaab3), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225), [`f227d135`](https://github.com/frontity/frontity/commit/f227d1351234c0d458e0280a6a2f13a959ed576f)]:
+  - frontity@1.15.0
+  - @frontity/components@1.7.2
+
 ## 1.5.0
 
 ### Minor Changes

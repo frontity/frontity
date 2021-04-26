@@ -1,5 +1,15 @@
 # Change Log
 
+## 2.2.1
+
+### Patch Changes
+
+- [`f65f7ca0`](https://github.com/frontity/frontity/commit/f65f7ca0d54b958bd5ec2681d5a2943854f9471a) [#785](https://github.com/frontity/frontity/pull/785) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Prevent a possible race condition in `useInfiniteScroll`. It could happen when a link changes `state.router.link` right before the `useEffect` callback that manages the route runs.
+
+- Updated dependencies [[`eb41d982`](https://github.com/frontity/frontity/commit/eb41d982552c8f542437cbedaee4335d23b7a483), [`876256d8`](https://github.com/frontity/frontity/commit/876256d8b923508a94b1bfc1818045edc0f1b613), [`4f12c5ee`](https://github.com/frontity/frontity/commit/4f12c5ee37f3cd3cc4df963d7285e2bc458a4cb9), [`8083bd0a`](https://github.com/frontity/frontity/commit/8083bd0a07c8d61ece4f669bd8088912b91a4ab2), [`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225)]:
+  - @frontity/wp-source@1.11.3
+  - frontity@1.15.0
+
 ## 2.2.0
 
 ### Minor Changes
