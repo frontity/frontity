@@ -160,6 +160,11 @@ interface Frontity extends Package {
        * Populated by the user in `frontity.settings.js`.
        */
       url?: string;
+
+      /**
+       * True in development mode, when doing a refresh with HMR.
+       */
+      hmr?: boolean;
     };
   };
 

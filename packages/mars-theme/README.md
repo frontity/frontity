@@ -4,9 +4,9 @@
 
 A starter theme for Frontity
 
-Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-mars-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
 
-![](https://raw.githubusercontent.com/frontity/gitbook-docs/master/docs/.gitbook/assets/screenshot-mars-theme-demo.png)
+![](https://frontity.org/wp-content/uploads/2021/04/screenshot-mars-theme-demo.png)
 
 ## Table of contents
 
@@ -14,6 +14,7 @@ Full info about this theme can be found in the [docs](https://docs.frontity.org/
 
 - [Install](#install)
 - [Usage](#usage)
+- [Theme Anatomy](#anatomy)
 - [Feature Discussions](#feature-discussions)
 - [Changelog](#changelog)
 - [Open Source Community](#open-source-community)
@@ -54,7 +55,68 @@ The theme options can be specified in the `state.theme` property.
 },
 ```
 
-Full info about this theme can be found in the [docs](https://docs.frontity.org/frontity-themes/frontity-mars-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
+
+## Theme Anatomy
+
+The file structure of this theme is:
+
+```
+.
+├── CHANGELOG.md
+├── package.json
+├── README.md
+├── src
+│  ├── components
+│  │  ├── featured-media.js
+│  │  ├── header.js
+│  │  ├── index.js
+│  │  ├── link.js
+│  │  ├── list
+│  │  │  ├── index.js
+│  │  │  ├── list-item.js
+│  │  │  ├── list.js
+│  │  │  └── pagination.js
+│  │  ├── loading.js
+│  │  ├── menu-icon.js
+│  │  ├── menu-modal.js
+│  │  ├── menu.js
+│  │  ├── nav.js
+│  │  ├── page-error.js
+│  │  ├── post.js
+│  │  └── title.js
+│  └── index.js
+└── types.ts
+```
+
+| Path           | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| _`./types.ts`_ | Typescript interface for MarsTheme settings. Useful for typescrtiup |
+
+## Feature Discussions
+
+[**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
+
+These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/mars-theme
+
+## Changelog
+
+Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
+
+---
+
+## Open Source Community
+
+### Channels
+
+
+
+| Path | Description |
+|---------|----------|
+| _`./types.ts`_ | Typescript interface for MarsTheme settings. Useful for typescrtiup |
+
+
+
 
 ## Feature Discussions
 

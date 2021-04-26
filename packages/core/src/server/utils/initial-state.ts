@@ -51,6 +51,7 @@ const state = ({ settings, url }: StateOptions) => {
       debug: false,
       platform: "server",
       rendering: "ssr",
+      hmr: false,
       initialLink: `${url.pathname}${search}${url.hash}`,
       options,
       packages: settings.packages.map((pkg) => pkg.name),

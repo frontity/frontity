@@ -101,7 +101,7 @@ const amp: AMP = {
               // Else capture all the script and link with as="script" tags.
               else if (/<?script/g.test(tag)) {
                 // And if they contain the `amp-` specific markers keep them.
-                if (/<?script.+?amp-/g.test(tag)) {
+                if (/<?script.+?="amp-/g.test(tag)) {
                   out.tags.push(tag);
                 }
               } else {

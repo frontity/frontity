@@ -574,17 +574,38 @@ Object {
     ],
     "wp:term": Array [
       Array [
-        3,
-        8,
+        Object {
+          "id": 3,
+          "schema": "categoryEntity",
+        },
+        Object {
+          "id": 8,
+          "schema": "categoryEntity",
+        },
       ],
       Array [
-        10,
-        9,
-        13,
-        11,
+        Object {
+          "id": 10,
+          "schema": "tagEntity",
+        },
+        Object {
+          "id": 9,
+          "schema": "tagEntity",
+        },
+        Object {
+          "id": 13,
+          "schema": "tagEntity",
+        },
+        Object {
+          "id": 11,
+          "schema": "tagEntity",
+        },
       ],
       Array [
-        "post",
+        Object {
+          "id": "post",
+          "schema": "taxonomyEntity",
+        },
       ],
     ],
   },

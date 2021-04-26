@@ -113,9 +113,29 @@ The `node e2e.js` script is a CLI that supports multiple arguments for running t
 
 The defaults correspond to the most common configuration when working locally, so running just `node e2e.js` will be enough to start working locally most of the time.
 
-### `--wp-version`: string
+## Running the Cypress tests in BrowserStack
 
-The WordPress version that will be used in the Docker container. For example, `--wp-version 5.5`.
+BrowserStack can be used to run the tests in the cloud. If you want to do that, create a `.env` file with your BrowserStack username and access key, and then use `node e2e.js --cypress browserstack` to start.
+
+> 💡 Credentials can be found in the BrowserStack [Automate Dashboard](https://automate.browserstack.com/dashboard/v2), under the "ACCESS KEY" dropdown of the top bar.
+
+By default, it will run the tests in the latest versions of Chrome, Firefox and Edge in Windows 10.
+
+You can create your own `browserstack.json` file and use `--browserstack-config my-browserstack.json` to use it.
+
+By default it will run BrowserStack Local with "Cypress-Local" as the local identifier, but you can turn it off by using `--browserstack-local off`.
+
+### `--wp`: string
+
+The WordPress version that will be used in the Docker container. For example, `--wp 5.5`.
+
+You can use `off` to prevent WordPress from running.
+
+WordPress won't load in these situations:
+
+- `--wp` is `off`.
+- `--cypress` is `browserstack`.
+- `--suite` is not `all` or it doesn't start with `wordpress`.
 
 Default: `latest`
 
@@ -131,9 +151,11 @@ The Frontity `target` that will be used.
 
 Default: `both`
 
-### `--cypress`: "open" | "run" | "off"
+### `--cypress`: "open" | "run" | "browserstack" | "off"
 
-Whether to run Cypress or not, and if it does, whether to run it in "open" mode or "run" mode.
+Whether to run Cypress or not, and if it does, whether to run it in "open" mode, "run" mode, or on the BrowserStack cloud.
+
+_The BrowserStack cloud requires the setup of a `.env` file with the username and access key. Please check the `.env-example` file._
 
 Default: `open`
 
@@ -164,4 +186,71 @@ The tests spec to run. This should be the file name spec. For example if you wan
 node e2e.js --spec script
 ```
 
+_It doesn't affect if Cypress is run in `"open"` mode._
+
 Default: `null`.
+
+### `--browserstack-config`: string
+
+The BrowserStack configuration file. For example:
+
+```sh
+node e2e.js --browserstack-config browserstack.custom.json
+```
+
+Default: `browserstack.json`.
+
+### `--browserstack-local`: string
+
+The local identifier of the BrowserStack Local connection.
+
+BrowserStack Local only runs if `--cypress` is `browserstack`. For example:
+
+```sh
+node e2e.js --cypress browserstack --browserstack-local MyLocalMachine
+```
+
+If you don't want to start BrowserStack Local, use:
+
+```sh
+node e2e.js --cypress browserstack --browserstack-local off
+```
+
+Default: `Cypress-Local`.
+
+## Running the Selenium tests in BrowserStack
+
+Cypress tests work great, but it is only possible to test Frontity in certain
+browsers using BrowserStack. In order to ensure that the framework works in older
+browsers as well, we replicate most of them in Selenium.
+
+There are different ways of using [Selenium in
+BrowserStack](https://www.browserstack.com/selenium), but in this case, we will
+only use [Selenium Webdriver](https://www.browserstack.com/selenium#selenium-web-driver), their recommended way to automate tests.
+
+The specs are divided in three main groups:
+
+- Browsers that support [module](https://caniuse.com/?search=module).
+- Browsers that support [proxy](https://caniuse.com/?search=proxy).
+- Browsers that doesn't support proxy, where we want to ensure that Frontity
+  works in SSR.
+
+These tests will run in the `dev` branch the same way the Cypress ones do, but it's possible
+to run them locally as well. It's possible to run the default config files, with
+the combinations of browsers and operative systems already defined, or create
+a custom config file if needed. These are the steps:
+
+1. Start the e2e project locally by running `npx frontity build && npx frontity serve`. Note that running `npx frontity dev` could cause issues in old
+   browsers.
+
+1. Start BrowserStack Local by running `npm run local:macos` (or the OS you are
+   using)
+
+1. Run the configuration file using `npx wdio :config-file-path`. For
+   example, to run the default module config file the command should be `npx wdio selenium/conf/module.conf.js`.
+
+The properties in these files are defined based on [WebDriver configuration
+file](https://webdriver.io/docs/configurationfile/).
+
+This workflow will trigger the specs defined, and the results could be seen both
+in the console and BrowserStack Automate tool.

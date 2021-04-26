@@ -1,4 +1,4 @@
-import { NavigatorWithConnection } from "./types";
+import { NavigatorWithConnection, RemoveSourceUrlParams } from "./types";
 
 /**
  * Configuration for the prefetcher behaviour.
@@ -118,26 +118,43 @@ export const onHover = (el: HTMLAnchorElement, cb: () => void) => {
  * Make the link relative if it belongs to the backend, to force client-side
  * navigation.
  *
- * @param link - The link URL.
- * @param sourceUrl - The Source URL. It usually comes from `state.source.url`.
- * @param match - (Optional) array of RegExp that matches the URL.
+ * @param params - Object of type {@link RemoveSourceUrlParams}.
  *
  * @returns The URL without the Source URL.
  */
-export const removeSourceUrl = (
-  link: string,
-  sourceUrl: string,
-  match?: string[]
-) => {
+export const removeSourceUrl = ({
+  link,
+  sourceUrl,
+  frontityUrl = "/",
+  match,
+}: RemoveSourceUrlParams) => {
   // if match is present we need to ensure the internal link matches the current site url pattern
   if (match && !match.some((regexp) => new RegExp(regexp).test(link))) {
     return link;
   }
 
+  // Ensure `sourceUrl` and `frontityUrl` always include a trailing slash. All
+  // the logic below is based on those variables fulfilling that condition.
+  sourceUrl = sourceUrl.replace(/\/?$/, "/");
+  frontityUrl = frontityUrl.replace(/\/?$/, "/");
+
+  const { host: sourceHost, pathname: sourcePath } = new URL(sourceUrl);
+  const { pathname: frontityPath } = new URL(frontityUrl, sourceUrl);
+
   const linkUrl = new URL(link, sourceUrl);
-  return linkUrl.hostname === new URL(sourceUrl).hostname
-    ? linkUrl.pathname + linkUrl.search + linkUrl.hash
-    : link;
+
+  // Compare just the host and the pathname. This way we ignore the protocol if
+  // it doesn't match.
+  if (linkUrl.host === sourceHost && linkUrl.pathname.startsWith(sourcePath)) {
+    return (
+      linkUrl.pathname.replace(sourcePath, frontityPath) +
+      linkUrl.search +
+      linkUrl.hash
+    );
+  }
+
+  // Do not change the link for other cases.
+  return link;
 };
 
 /**

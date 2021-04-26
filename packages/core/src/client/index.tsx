@@ -3,8 +3,30 @@ import { loadableReady } from "@loadable/component";
 import { getSnapshot } from "@frontity/connect";
 import App from "../app";
 import createStore from "./store";
+import { Package } from "@frontity/types";
 
-export default async ({ packages }) => {
+/**
+ * The options of the client function.
+ */
+interface ClientOptions {
+  /**
+   * Map of packages for the site that is being loaded.
+   */
+  packages: Record<string, Package>;
+
+  /**
+   * True in development mode when doing a refresh with HMR.
+   */
+  isHmr?: boolean;
+}
+
+/**
+ * The entry funciton for the client application. It handles the bootstrap and
+ * hydration of Frontity in the client.
+ *
+ * @param options - Defined in {@link ClientOptions}.
+ */
+const client = async ({ packages, isHmr = false }: ClientOptions) => {
   if (typeof window !== "undefined" && window["Proxy"]) {
     // Hydrate Connect state.
     const stateElement = document.getElementById("__FRONTITY_CONNECT_STATE__");
@@ -16,11 +38,14 @@ export default async ({ packages }) => {
       // Get a merged object with roots, fills, state, actions...
       const store = createStore({
         // Use initial state from server only if we are not in a HMR reload.
-        state: window["frontity"]
+        state: isHmr
           ? getSnapshot(window["frontity"].state)
           : JSON.parse(stateElement.innerHTML),
         packages,
       });
+
+      // If we are in a HMR refresh, set the flag.
+      if (isHmr) store.state.frontity.hmr = true;
 
       store.libraries.frontity.App = function FrontityApp() {
         return <App store={store} />;
@@ -67,3 +92,5 @@ export default async ({ packages }) => {
     );
   }
 };
+
+export default client;

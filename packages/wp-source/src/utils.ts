@@ -214,3 +214,43 @@ export const getRedirectionData = ({
   isReady: true,
   isFetching: false,
 });
+
+/**
+ * The function was created to provide a bail out in case that the links could
+ * create an infinite redirection loop.
+ *
+ * This could happen if Frontity and Wordpress are on different domain and
+ * the 3xx redirects again to the same link.
+ *
+ * @param link - The current link.
+ * @param redirection - The RedirectionData object for this link.
+ * @returns True or false.
+ */
+export const shouldBailRedirecting = (
+  link: string,
+  redirection: Partial<RedirectionData>
+): boolean => {
+  const linkURL = new URL(link);
+  const locationURL = new URL(redirection.location);
+
+  const linkParams = linkURL.searchParams;
+  const locationParams = locationURL.searchParams;
+
+  // We need to remove the Frontity Options before comparing
+  // the search params. The `link` already has the Frontity Options stripped out
+  // by the core package.
+  Array.from(locationParams.keys()).forEach((key) => {
+    if (key.startsWith("frontity_")) locationParams.delete(key);
+  });
+
+  // We are going to stringify the params later in order to compare them so
+  // we have to sort them first.
+  linkParams.sort();
+  locationParams.sort();
+
+  return (
+    linkURL.pathname === locationURL.pathname &&
+    linkParams.toString() === locationParams.toString() &&
+    !redirection.isExternal
+  );
+};

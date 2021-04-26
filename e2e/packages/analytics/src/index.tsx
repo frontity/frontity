@@ -2,6 +2,7 @@ import * as React from "react";
 import { Head, connect } from "frontity";
 import { Connect } from "frontity/types";
 import Analytics, { Packages } from "../types";
+import Script from "./script";
 
 /**
  * Simple component that mocks the homepage.
@@ -46,6 +47,7 @@ const Theme: React.FC<Connect<Packages>> = ({ state, actions }) => {
 
   return (
     <>
+      <Script />
       {/* Render homepage or post */}
       {pathname === "/" && <Homepage />}
       {/* Same component to test the case when the title doesn't change*/}

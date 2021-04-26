@@ -7,8 +7,9 @@ on:
 jobs:
   tasks:
     runs-on: ubuntu-latest
+    if: github.event.repository.full_name == github.repository
+
     steps:
       - uses: kentaro-m/task-completed-checker-action@v0.1.0
-        if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
