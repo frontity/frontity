@@ -1,5 +1,14 @@
 # @frontity/analytics
 
+## 1.4.1
+
+### Patch Changes
+
+- [`4aea44d8`](https://github.com/frontity/frontity/commit/4aea44d88e3834cc01cdbb00813843209e6f0f33) [#766](https://github.com/frontity/frontity/pull/766) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Export new types related to AMP: `AmpConfig`, `AmpRequest` and `AmpTrigger`.
+
+- Updated dependencies [[`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225)]:
+  - frontity@1.15.0
+
 ## 1.4.0
 
 ### Minor Changes

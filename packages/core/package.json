@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "1.11.1",
+  "version": "1.12.0",
   "description": "The core package of the Frontity framework.",
   "keywords": [
     "frontity",
@@ -39,7 +39,7 @@
     "@babel/runtime": "^7.12.5",
     "@emotion/babel-plugin": "^11.1.2",
     "@emotion/react": "^11.1.4",
-    "@frontity/connect": "^1.2.1",
+    "@frontity/connect": "^1.3.0",
     "@frontity/file-settings": "^1.1.8",
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "^5.14.1",
@@ -81,7 +81,7 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
-    "@frontity/types": "^1.7.2",
+    "@frontity/types": "^1.8.0",
     "@types/babel-core": "^6.25.6",
     "@types/babel__preset-env": "^7.9.1",
     "@types/cross-spawn": "^6.0.2",
