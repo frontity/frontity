@@ -1,5 +1,18 @@
 # @frontity/google-ad-manager
 
+## 1.0.0
+
+### Major Changes
+
+- [`4aee489a`](https://github.com/frontity/frontity/commit/4aee489a313b4c44fa7f2430b028fbcc1318b7e6) [#790](https://github.com/frontity/frontity/pull/790) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Release first stable version of @frontity/wp-comments and @frontity/google-ad-manager packages.
+
+### Patch Changes
+
+- [`5ede2b97`](https://github.com/frontity/frontity/commit/5ede2b977763f7a316bfa3b7659918e8489895eb) [#778](https://github.com/frontity/frontity/pull/778) Thanks [@VinuRaj](https://github.com/VinuRaj)! - The `GooglePublisherTag` component now accepts an optional `collapseEmptyDiv` prop
+  which if `true` will collapse ad slots that are not filled by Google Publisher Tag.
+- Updated dependencies [[`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225)]:
+  - frontity@1.15.0
+
 ## 0.2.1
 
 ### Patch Changes
