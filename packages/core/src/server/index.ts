@@ -9,6 +9,7 @@ import { promisify } from "util";
 import { scriptsStats } from "./middlewares/scripts-stats";
 import { settingsAndStore } from "./middlewares/settings-and-store";
 import { serverSideRendering } from "./middlewares/server-side-rendering";
+import { errorHandling } from "./middlewares/error-handling";
 
 /**
  * Options for {@link server}.
@@ -34,7 +35,11 @@ interface ServerOptions {
 const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   const app = new Koa();
 
-  // The module stats middleware
+  // Catch and print errors in development. This must be the first middlware
+  // because does a try/catch of the rest.
+  app.use(errorHandling);
+
+  // The module stats middleware.
   app.use(scriptsStats);
 
   // Serve static files.
