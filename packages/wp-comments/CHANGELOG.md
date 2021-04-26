@@ -1,5 +1,19 @@
 # @frontity/wp-comments
 
+## 1.0.0
+
+### Major Changes
+
+- [`4aee489a`](https://github.com/frontity/frontity/commit/4aee489a313b4c44fa7f2430b028fbcc1318b7e6) [#790](https://github.com/frontity/frontity/pull/790) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Release first stable version of @frontity/wp-comments and @frontity/google-ad-manager packages.
+
+### Patch Changes
+
+- [`fd8d5917`](https://github.com/frontity/frontity/commit/fd8d5917adc4538c91b98c505d6a1be2afc533b3) [#755](https://github.com/frontity/frontity/pull/755) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Remove the `form.errors` property because it is not currently used and was included unnecessarily in the first version of the package.
+
+- Updated dependencies [[`eb41d982`](https://github.com/frontity/frontity/commit/eb41d982552c8f542437cbedaee4335d23b7a483), [`876256d8`](https://github.com/frontity/frontity/commit/876256d8b923508a94b1bfc1818045edc0f1b613), [`4f12c5ee`](https://github.com/frontity/frontity/commit/4f12c5ee37f3cd3cc4df963d7285e2bc458a4cb9), [`8083bd0a`](https://github.com/frontity/frontity/commit/8083bd0a07c8d61ece4f669bd8088912b91a4ab2), [`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225)]:
+  - @frontity/wp-source@1.11.3
+  - frontity@1.15.0
+
 ## 0.2.6
 
 ### Patch Changes
