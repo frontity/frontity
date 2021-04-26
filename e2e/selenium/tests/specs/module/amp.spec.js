@@ -1,4 +1,4 @@
-const { until } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 const assert = require("assert");
 
 describe("amp", function () {
