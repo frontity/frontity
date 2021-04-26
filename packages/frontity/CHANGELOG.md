@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.15.0
+
+### Minor Changes
+
+- [`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee) [#774](https://github.com/frontity/frontity/pull/774) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add an `--analyze` option to the `dev` and `build` commands. The flag should be explicitly set in order to generate HTML files for bundle analysis.
+
+### Patch Changes
+
+- [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225) [#786](https://github.com/frontity/frontity/pull/786) Thanks [@orballo](https://github.com/orballo)! - Modifies the `frontity create` command so it generates a `tsconfig.json` file and adds dev dependencies to `package.json`. Feature discussion: https://community.frontity.org/t/full-typescript-support-in-frontity-create/880
+
+- Updated dependencies [[`641a1cf0`](https://github.com/frontity/frontity/commit/641a1cf00a02f78076e23b7918027d7219c08f58), [`86b2eff9`](https://github.com/frontity/frontity/commit/86b2eff993aac3e9360946a0c190e239b6f93abf)]:
+  - @frontity/types@1.8.0
+
 ## 1.14.3
 
 ### Patch Changes

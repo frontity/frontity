@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.8.0
+
+### Minor Changes
+
+- [`86b2eff9`](https://github.com/frontity/frontity/commit/86b2eff993aac3e9360946a0c190e239b6f93abf) [#783](https://github.com/frontity/frontity/pull/783) Thanks [@luisherranz](https://github.com/luisherranz)! - Add an HMR flag to the Frontity state (`state.frontity.hmr`) that indicates if the code is run on an HMR refresh or not.
+
+### Patch Changes
+
+- [`641a1cf0`](https://github.com/frontity/frontity/commit/641a1cf00a02f78076e23b7918027d7219c08f58) [#791](https://github.com/frontity/frontity/pull/791) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Modify derived props so they receive `state` and `libraries` as arguments. Also, fix the `Derived` type definition.
+
 ## 1.7.2
 
 ### Patch Changes

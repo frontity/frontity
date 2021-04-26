@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- [`7111b3ce`](https://github.com/frontity/frontity/commit/7111b3cee7065816a885629cac93967f705d0969) [#415](https://github.com/frontity/frontity/pull/415) Thanks [@luisherranz](https://github.com/luisherranz)! - Migrate `@frontity/connect` to be a thin layer on top of `react-easy-state`. This means that in the future, taking advantage of the bug fixes and other improvements from `react-easy-state` will be much easier.
+
+### Patch Changes
+
+- [`641a1cf0`](https://github.com/frontity/frontity/commit/641a1cf00a02f78076e23b7918027d7219c08f58) [#791](https://github.com/frontity/frontity/pull/791) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Modify derived props so they receive `state` and `libraries` as arguments. Also, fix the `Derived` type definition.
+
+- Updated dependencies [[`641a1cf0`](https://github.com/frontity/frontity/commit/641a1cf00a02f78076e23b7918027d7219c08f58), [`86b2eff9`](https://github.com/frontity/frontity/commit/86b2eff993aac3e9360946a0c190e239b6f93abf)]:
+  - @frontity/types@1.8.0
+
 ## 1.2.1
 
 ### Patch Changes
