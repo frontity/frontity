@@ -71,13 +71,6 @@ exports.config = {
       browserName: "Firefox",
       browser_version: "42.0",
     },
-    // Edge - Between 12 and 15
-    {
-      os: "Windows",
-      os_version: "10",
-      browserName: "Edge",
-      browser_version: "15.0",
-    },
   ],
 };
 // Code to support common capabilities

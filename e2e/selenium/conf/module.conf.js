@@ -109,7 +109,7 @@ exports.config = {
       os: "Windows",
       os_version: "10",
       browserName: "Edge",
-      browser_version: "16.0",
+      browser_version: "18.0",
     },
     {
       os: "OS X",

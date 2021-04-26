@@ -81,6 +81,13 @@ exports.config = {
       browserName: "Firefox",
       browser_version: "4.0",
     },
+    // Edge - Between 12 and 15
+    {
+      os: "Windows",
+      os_version: "10",
+      browserName: "Edge",
+      browser_version: "15.0",
+    },
     // Internet Explorer - IE9 - IE11
     {
       os: "Windows",
