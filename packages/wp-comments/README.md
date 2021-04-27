@@ -4,10 +4,6 @@
 
 Comments package that adds integration for WordPress native comments.
 
-> ## Beta version
->
-> Please, bear in mind that this package is currently in beta version. It is not fully documented yet and its implementation may change with the final release.
-
 ## Install
 
 ```sh

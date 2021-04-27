@@ -14,6 +14,10 @@ beforeEach(() => {
         prop3: ({ state }) => state.prop1 + state.nested1.prop2,
         prop4: ({ state }) => (num) => state.nested1.prop3 + num,
         prop5: 0,
+        prop6: ({ state, libraries }) => {
+          const { prop3, prop4 } = state.nested1;
+          return libraries.nested1.sum(prop3, prop4(0));
+        },
       },
     },
     actions: {
@@ -63,6 +67,11 @@ beforeEach(() => {
         throw new Error("action11 error");
       },
     },
+    libraries: {
+      nested1: {
+        sum: (...args) => args.reduce((a, b) => a + b, 0),
+      },
+    },
   };
 
   store = createStore(config);
@@ -98,6 +107,10 @@ describe("createStore", () => {
     });
     expect(store1.state.prop2).toBe(2);
     expect(store2.state.prop2).toBe(4);
+  });
+
+  it("should inject `libraries` to derived properties", () => {
+    expect(store.state.nested1.prop6).toBe(6);
   });
 });
 

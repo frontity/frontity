@@ -61,7 +61,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "taxonomyEntity",
+            },
           ],
         ],
       },
@@ -89,7 +92,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "taxonomyEntity",
+            },
           ],
         ],
       },
@@ -364,7 +370,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -389,7 +398,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -414,7 +426,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -608,7 +623,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -633,7 +651,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -658,7 +679,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -852,7 +876,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -877,7 +904,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -902,7 +932,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -1096,7 +1129,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -1121,7 +1157,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
@@ -1146,7 +1185,10 @@ Object {
         ],
         "wp:term": Array [
           Array [
-            1,
+            Object {
+              "id": 1,
+              "schema": "categoryEntity",
+            },
           ],
         ],
       },
