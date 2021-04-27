@@ -72,7 +72,11 @@ const populate: WpSource["libraries"]["source"]["populate"] = async ({
           type: entity.type,
           id: entity.id,
         });
-      } else if (schema === "taxonomyEntity") {
+      } else if (
+        schema === "categoryEntity" ||
+        schema === "tagEntity" ||
+        schema === "taxonomyEntity"
+      ) {
         if (!state.source[entity.taxonomy]) state.source[entity.taxonomy] = {};
         entityMap = state.source[entity.taxonomy];
         entityKey = entity.id;

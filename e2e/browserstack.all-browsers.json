@@ -12,7 +12,7 @@
     {
       "browser": "firefox",
       "os": "Windows 10",
-      "versions": ["60"]
+      "versions": ["70"]
     },
     {
       "browser": "edge",
@@ -42,7 +42,7 @@
     {
       "browser": "firefox",
       "os": "OS X Mojave",
-      "versions": ["60"]
+      "versions": ["70"]
     },
     {
       "browser": "edge",
@@ -56,7 +56,7 @@
     "project_name": "frontity/frontity",
     "build_name": "All Browsers - Local",
     "parallels": "1",
-    "exclude": ["wp-data/**/*"],
+    "exclude": ["wp-data/**/*", "project/**/*"],
     "specs": [
       "integration/frontity-*/**/*.spec.js",
       "integration/frontity-*/**/*.spec.ts"

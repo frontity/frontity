@@ -2,9 +2,9 @@ import { Middleware, Next } from "koa";
 import { Context, Package } from "@frontity/types";
 import htmlescape from "htmlescape";
 import { getSnapshot, InitializedStore } from "@frontity/connect";
-import { ChunkExtractor } from "@loadable/server";
 import { getBothScriptTags, hasEntryPoint } from "../utils/stats";
 import getHeadTags from "../utils/head";
+import { CustomChunkExtractor } from "../utils/custom-chunk-extractor";
 
 /**
  * Helper to abstract the running of afterSSR actions.
@@ -59,7 +59,7 @@ export const serverSideRendering = async (
   // we want to load, we don't extract scripts.
   if (stats && hasEntryPoint({ stats, site: settings.name })) {
     // Run renderToString with ChunkExtractor to get the html.
-    const extractor = new ChunkExtractor({
+    const extractor = new CustomChunkExtractor({
       stats,
       entrypoints: [settings.name],
     });

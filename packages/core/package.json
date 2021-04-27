@@ -1,6 +1,6 @@
 {
   "name": "@frontity/core",
-  "version": "1.11.1",
+  "version": "1.12.0",
   "description": "The core package of the Frontity framework.",
   "keywords": [
     "frontity",
@@ -39,7 +39,7 @@
     "@babel/runtime": "^7.12.5",
     "@emotion/babel-plugin": "^11.1.2",
     "@emotion/react": "^11.1.4",
-    "@frontity/connect": "^1.2.1",
+    "@frontity/connect": "^1.3.0",
     "@frontity/file-settings": "^1.1.8",
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "^5.14.1",
@@ -81,7 +81,7 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
-    "@frontity/types": "^1.7.2",
+    "@frontity/types": "^1.8.0",
     "@types/babel-core": "^6.25.6",
     "@types/babel__preset-env": "^7.9.1",
     "@types/cross-spawn": "^6.0.2",
@@ -93,17 +93,19 @@
     "@types/koa-route": "^3.2.4",
     "@types/koa-static": "^4.0.1",
     "@types/loadable__component": "^5.13.1",
-    "@types/loadable__server": "^5.12.3",
+    "@types/loadable__server": "^5.12.5",
     "@types/lodash": "^4.14.165",
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
+    "@types/supertest": "^2.0.11",
     "@types/webpack": "^4.41.25",
     "@types/webpack-bundle-analyzer": "^3.9.0",
     "@types/webpack-dev-middleware": "^3.7.2",
     "@types/webpack-env": "^1.16.0",
     "@types/webpack-hot-middleware": "^2.25.3",
+    "supertest": "^6.1.3",
     "copyfiles": "^2.4.1"
   }
 }

@@ -77,6 +77,13 @@ const Root: React.FC<Connect<Packages>> = ({ state, actions }) => {
         About (with state)
       </button>
 
+      <a
+        data-link-id="switch-using-relative-link"
+        href="/about/?frontity_name=tiny-router"
+      >
+        Relative link for SSR
+      </a>
+
       {state.router.link === "/" && <div data-test-id="content">Home</div>}
 
       {state.router.link === "/about/" && (

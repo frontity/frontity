@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Action, MergePackages, Package } from "frontity/types";
+import { Action, MergePackages, Package, Frontity } from "frontity/types";
 import Analytics, { Pageview } from "@frontity/analytics/types";
 
 /**
@@ -146,6 +146,6 @@ interface ComscoreAnalytics extends Package {
 /**
  * Package types used internally in ComscoreAnalytics.
  */
-export type Packages = MergePackages<ComscoreAnalytics, Analytics>;
+export type Packages = MergePackages<Frontity, ComscoreAnalytics, Analytics>;
 
 export default ComscoreAnalytics;

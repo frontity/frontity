@@ -6,7 +6,7 @@ A starter theme for Frontity
 
 Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
 
-![](https://raw.githubusercontent.com/frontity/api-reference/master/docs-api/.gitbook/assets/screenshot-mars-theme-demo%20(1).png)
+![](https://frontity.org/wp-content/uploads/2021/04/screenshot-mars-theme-demo.png)
 
 ## Table of contents
 

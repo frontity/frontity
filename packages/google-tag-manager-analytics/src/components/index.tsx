@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Head, connect, css } from "frontity";
 import { Connect } from "frontity/types";
-import GoogleTagManagerAnalytics from "../../types";
+import { Packages } from "../../types";
+import { AmpConfig } from "@frontity/analytics/types";
 
 /**
  * Props used by {@link GtmCode}.
@@ -11,6 +12,16 @@ interface GtmCodeProps {
    * GTM container ID.
    */
   containerId: string;
+}
+
+/**
+ * Props used by {@link GtmCodeAmp}.
+ */
+interface GtmCodeAmpProps extends GtmCodeProps {
+  /**
+   * AMP-analytics configuration object.
+   */
+  ampConfig?: AmpConfig;
 }
 
 /**
@@ -60,10 +71,39 @@ const GtmCode: React.FC<GtmCodeProps> = ({ containerId }) => (
 );
 
 /**
- * Root component of the Comscore Analytics package.
+ * Render the `amp-analytics` tag for the given container ID.
  *
- * It renders the Comscore script library for each Comscore tracking ID defined
- * in the state.
+ * @example
+ * ```
+ * <GtmCodeAmp containerId={containerId} />
+ * ```
+ *
+ * @param props - Object of type {@link GtmCodeProps}.
+ *
+ * @returns React element.
+ */
+const GtmCodeAmp: React.FC<GtmCodeAmpProps> = connect(
+  ({ containerId, ampConfig }) => (
+    <amp-analytics
+      config={`https://www.googletagmanager.com/amp.json?id=${containerId};Tag Manager.url=SOURCE_URL`}
+      data-credentials="include"
+    >
+      {ampConfig && (
+        <script
+          type="application/json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(ampConfig),
+          }}
+        />
+      )}
+    </amp-analytics>
+  )
+);
+
+/**
+ * Root component of the Google Tag Manager Analytics package.
+ *
+ * It renders the GTM script library for each container ID defined in the state.
  *
  * @remarks
  * This component is automatically rendered by Frontity and it's not meant to be
@@ -73,16 +113,25 @@ const GtmCode: React.FC<GtmCodeProps> = ({ containerId }) => (
  *
  * @returns Root element.
  */
-export const Root: React.FC<Connect<GoogleTagManagerAnalytics>> = ({
-  state,
-}) => {
-  const { containerId, containerIds } = state.googleTagManagerAnalytics;
+export const Root: React.FC<Connect<Packages>> = ({ state }) => {
+  const {
+    containerId,
+    containerIds,
+    ampConfig,
+  } = state.googleTagManagerAnalytics;
   const ids = containerIds || (containerId && [containerId]) || [];
+
   return (
     <>
-      {ids.map((id) => (
-        <GtmCode key={id} containerId={id} />
-      ))}
+      {ids.map((id) =>
+        // Render the appropriate tag depending on whether the `@frontity/amp`
+        // package is installed or not.
+        state.frontity.mode === "amp" ? (
+          <GtmCodeAmp key={id} containerId={id} ampConfig={ampConfig} />
+        ) : (
+          <GtmCode key={id} containerId={id} />
+        )
+      )}
     </>
   );
 };

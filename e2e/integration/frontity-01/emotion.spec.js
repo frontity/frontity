@@ -2,23 +2,23 @@ describe("Global", () => {
   it("should have a blue background, but not a red color", () => {
     cy.visit("/color-red?frontity_name=emotion");
     cy.visit("/background-blue?frontity_name=emotion");
-    cy.get("body").should("not.have.css", "background-color", "rgb(0, 0, 255)");
+    cy.get("body").should("have.css", "background-color", "rgb(0, 0, 255)");
     cy.get("body").should("not.have.css", "color", "rgb(255, 0, 0)");
     cy.get("[data-test-id='toggle-button']").click();
-    cy.get("body").should("have.css", "background-color", "rgb(0, 0, 255)");
-    cy.get("[data-test-id='toggle-button']").click();
     cy.get("body").should("not.have.css", "background-color", "rgb(0, 0, 255)");
+    cy.get("[data-test-id='toggle-button']").click();
+    cy.get("body").should("have.css", "background-color", "rgb(0, 0, 255)");
   });
 
   it("should have a red color, but not a blue background", () => {
     cy.visit("/background-blue?frontity_name=emotion");
     cy.visit("/color-red?frontity_name=emotion");
     cy.get("body").should("not.have.css", "background-color", "rgb(0, 0, 255)");
-    cy.get("body").should("not.have.css", "color", "rgb(255, 0, 0)");
-    cy.get("[data-test-id='toggle-button']").click();
     cy.get("body").should("have.css", "color", "rgb(255, 0, 0)");
     cy.get("[data-test-id='toggle-button']").click();
     cy.get("body").should("not.have.css", "color", "rgb(255, 0, 0)");
+    cy.get("[data-test-id='toggle-button']").click();
+    cy.get("body").should("have.css", "color", "rgb(255, 0, 0)");
   });
 });
 

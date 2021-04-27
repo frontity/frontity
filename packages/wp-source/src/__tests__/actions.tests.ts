@@ -250,6 +250,36 @@ describe("actions.source.init", () => {
     store.state.source.homepage = "/about-us/";
     await store.actions.source.init();
     expect(store.libraries.source.redirections).toMatchSnapshot();
+
+    // The redirection returns `homepage` as the new `route` if the link doesn't
+    // contain a search param (`?s=search+term`).
+    const linksWithoutSearch = [
+      "/",
+      "/?some=param",
+      "/#hashtag",
+      "/?some=param#hashtag",
+    ];
+
+    linksWithoutSearch.forEach((link) => {
+      const redirect = getMatch({ link }, store.libraries.source.redirections);
+      expect(redirect).toBeTruthy();
+      expect(redirect.func(redirect.params)).toBe("/about-us/");
+    });
+
+    // The redirection should not match if the link contains a search param.
+    const linksWithSearch = [
+      "/?s=search+term",
+      "/?s=search+term&some=param",
+      "/?some=param&s=search+term",
+      "/?s=search+term#hashtag",
+      "/?s=search+term&some=param#hashtag",
+      "/?some=param&s=search+term#hashtag",
+    ];
+
+    linksWithSearch.forEach((link) => {
+      const redirect = getMatch({ link }, store.libraries.source.redirections);
+      expect(redirect).toBeFalsy();
+    });
   });
 
   test("should add redirect for the specified posts page", async () => {
