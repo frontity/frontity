@@ -274,7 +274,7 @@ const actions: WpSource["actions"]["source"] = {
     if (homepage) {
       const pattern = `RegExp:^${concatLink(
         subdirectory
-      )}(?!(\\?([^&#]+&)*s=))`;
+      )}(?!(\\?([^&#]+&)*s=))$`;
 
       redirections.push({
         name: "homepage",
