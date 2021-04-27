@@ -29,6 +29,37 @@ type GetLinksFromPagesParams = {
 };
 
 /**
+ * Get pathname of a link.
+ *
+ * @param link - The link.
+ * @returns A pathname.
+ */
+const getPathname = (link: string) =>
+  new URL(link.replace(/\/?$/, "/"), "https://example.com").pathname;
+
+/**
+ * Extension of the regular Set object implementing an addLink method.
+ */
+class LinkSet extends Set<string> {
+  /**
+   * Add a link to the set.
+   *
+   * Does a brute force O(n) search of all links in the set comparing them by
+   * pathname before adding the new link.
+   *
+   * @param link - The string.
+   * @returns - The string.
+   */
+  addLink(link: string) {
+    if (![...this].some((item) => getPathname(item) === getPathname(link))) {
+      this.add(link);
+    }
+
+    return this;
+  }
+}
+
+/**
  * Get all the item links from the given pages, removing redirections and
  * duplicated ones.
  *
@@ -47,16 +78,16 @@ export const getLinksFromPages = ({
     .filter(isArchive);
 
   // Initializes an empty set of links.
-  const rawLinks = new Set<string>();
+  const rawLinks = new LinkSet();
 
   // If the first page doesn't contain `firstLink`, add it first.
   if (!pagesData[0]?.items.find(({ link }) => link === firstLink))
-    rawLinks.add(firstLink);
+    rawLinks.addLink(firstLink);
 
   // Get all the post links from the pages. As `rawLinks` is a `Set`, any
   // duplicated link is not included. Also, the insertion order is preserved.
   pagesData.forEach((data) => {
-    data.items.forEach(({ link }) => rawLinks.add(link));
+    data.items.forEach(({ link }) => rawLinks.addLink(link));
   });
 
   // Remove links that point to redirections.
