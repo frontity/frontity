@@ -272,9 +272,32 @@ const actions: WpSource["actions"]["source"] = {
     } = state.source;
 
     if (homepage) {
-      const pattern = `RegExp:^${concatLink(
-        subdirectory
-      )}(?!(\\?([^&#]+&)*s=))$`;
+      const regex =
+        // prettier-ignore
+        // This regex is using negative lookahead. It means that the whole regex
+        // matches if the group using the negative lookahead DOES NOT match.
+        "(?!" +         // negative lookahead       
+          "(" +           // group    
+            "\\?" +         // match "?" literally
+            "(" +           // group     
+              "[^&#]+" +      // match any character that is not `&` or `#` 1 or more times 
+              "&" +           // match `&` literally
+            ")*" +          // match the group zero or more times
+            "s=[^&#]*" +    // match a search query param (e.g. `s=something`)
+          ")" +           // end group
+        ")" +           // end negative lookahead
+        "(" +           // group 
+          "\\?" +         // match "?" literally
+          "([^#]+)*" +    // match the query string part of the URL zero or more times
+        ")?" +          // match the group zero or one times
+        "(#.*)?" +      // match the hash part of the URL 
+        "$"; // match line end
+
+      const pattern = `RegExp:^${concatLink(subdirectory)}${regex}`;
+
+      // For those who are able to read that sort of thing the full pattern is:
+      // RegExp:^/(?!(\?([^&#]+&)*s=[^&#]*))(\?([^#]+)*)?(#.*)?$
+      // (It has to be double-escaped in the string form above though)
 
       redirections.push({
         name: "homepage",
