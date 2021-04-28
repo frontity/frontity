@@ -420,6 +420,29 @@ Array [
 ]
 `;
 
+exports[`actions.source.init should add redirect for the specified homepage and subdirectory 1`] = `
+Array [
+  Object {
+    "func": [Function],
+    "name": "homepage",
+    "pattern": "RegExp:^/subdir/(?!(\\\\?([^&#]+&)*s=[^&#]*))(\\\\?([^#]+)*)?(#.*)?$",
+    "priority": 10,
+  },
+  Object {
+    "func": [Function],
+    "name": "subdirectory",
+    "pattern": "/subdir/:subpath*/",
+    "priority": 10,
+  },
+  Object {
+    "func": [Function],
+    "name": "subdirectory (reverse)",
+    "pattern": "/(.*)",
+    "priority": 10,
+  },
+]
+`;
+
 exports[`actions.source.init should add redirect for the specified posts page 1`] = `
 Array [
   Object {
