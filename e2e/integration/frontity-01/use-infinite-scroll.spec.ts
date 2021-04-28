@@ -1778,4 +1778,54 @@ if (
       cy.location("href").should("eq", "http://localhost:3001/post-8/");
     });
   });
+
+  it("should render posts from the posts page if the link includes a query string", () => {
+    cy.visit("http://localhost:3001/test/?frontity_name=use-infinite-scroll");
+    cy.location("href").should("eq", "http://localhost:3001/test/");
+
+    // Stubs calls to REST API.
+    cy.server();
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&page=1",
+      response: "fixture:use-infinite-scroll/page-1.json",
+      headers: {
+        "x-wp-total": 20,
+        "x-wp-totalpages": 2,
+      },
+      delay: 300,
+    }).as("pageOne");
+    cy.route({
+      url: "https://domain.com/wp-json/wp/v2/posts?_embed=true&slug=post-1",
+      response: "fixture:use-infinite-scroll/post-1.json",
+      headers: {
+        "x-wp-total": "1",
+        "x-wp-totalpages": "1",
+      },
+      delay: 300,
+    }).as("postOne");
+
+    spyOnFetch();
+
+    // Changes url to `/post-type`.
+    cy.get("[data-test='to-post-1-with-query']").click();
+
+    // This post has a query string in the link
+    cy.location("href").should("eq", "http://localhost:3001/post-1/?q=123/");
+    cy.wait("@postOne");
+    cy.get("[data-test='post-type']").should("exist");
+    cy.get("[data-test='post-1']").should("exist");
+    cy.get("[data-test='fetching']").should("not.exist");
+
+    getFetchSpy().should("have.been.calledWith", "/");
+
+    // Scrolls to bottom to fetch next post.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-2']").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-2/");
+
+    // Scrolls to bottom to fetch next post.
+    cy.scrollTo("bottom");
+    cy.get("[data-test='post-3']").scrollIntoView();
+    cy.location("href").should("eq", "http://localhost:3001/post-3/");
+  });
 }

@@ -1,4 +1,4 @@
-import { Package, Action, MergePackages } from "frontity/types";
+import { Package, Action, MergePackages, Frontity } from "frontity/types";
 import Analytics, { Pageview, Event } from "@frontity/analytics/types";
 import Source from "@frontity/source/types";
 import Router from "@frontity/router/types";
@@ -16,6 +16,16 @@ interface TestAnalytics extends Package {
    * State exposed by this package.
    */
   state: {
+    /**
+     * Frontity namespace.
+     */
+    frontity: {
+      /**
+       * Name of the current Frontity site.
+       */
+      name: Frontity["state"]["frontity"]["name"];
+    };
+
     /**
      * Source namespace.
      */

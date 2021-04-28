@@ -1,5 +1,19 @@
 # @frontity/google-tag-manager
 
+## 1.3.0
+
+### Minor Changes
+
+- [`4aea44d8`](https://github.com/frontity/frontity/commit/4aea44d88e3834cc01cdbb00813843209e6f0f33) [#766](https://github.com/frontity/frontity/pull/766) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Make the @frontity/google-tag-manager-analytics package "AMP-aware". This means
+  it would render an `<amp-analytics>` tag for each container ID provided, along
+  with the given configuration.
+
+### Patch Changes
+
+- Updated dependencies [[`4aea44d8`](https://github.com/frontity/frontity/commit/4aea44d88e3834cc01cdbb00813843209e6f0f33), [`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225)]:
+  - @frontity/analytics@1.4.1
+  - frontity@1.15.0
+
 ## 1.2.1
 
 ### Patch Changes
