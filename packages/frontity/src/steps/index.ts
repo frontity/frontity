@@ -326,7 +326,7 @@ export const initializeGit = async (path: string) => {
   await writeFile(filePath, fileTemplate);
   await promisify(exec)("git init", { cwd: path });
   await promisify(exec)("git add .", { cwd: path });
-  await promisify(exec)('git commit -m "Initialized with Frontity', {
+  await promisify(exec)('git commit -m "Initialized with Frontity"', {
     cwd: path,
   });
 };
