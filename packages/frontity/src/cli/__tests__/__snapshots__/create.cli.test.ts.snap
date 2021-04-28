@@ -2,17 +2,17 @@
 
 exports[`CLI create FRONTITY_CREATE__NAME='test-project'; frontity create --no-prompt 1`] = `
 Object {
-  "git": false,
   "name": "test-project",
+  "noGit": false,
   "theme": "@frontity/mars-theme",
   "typescript": false,
 }
 `;
 
-exports[`CLI create FRONTITY_CREATE_GIT='true'; frontity create 'test-project' --no-prompt 1`] = `
+exports[`CLI create FRONTITY_CREATE_NO_GIT='true'; frontity create 'test-project' --no-prompt 1`] = `
 Object {
-  "git": true,
   "name": "test-project",
+  "noGit": true,
   "theme": "@frontity/mars-theme",
   "typescript": false,
 }
@@ -20,17 +20,17 @@ Object {
 
 exports[`CLI create FRONTITY_CREATE_TYPESCRIPT='true'; frontity create 'test-project' --no-prompt 1`] = `
 Object {
-  "git": false,
   "name": "test-project",
+  "noGit": false,
   "theme": "@frontity/mars-theme",
   "typescript": true,
 }
 `;
 
-exports[`CLI create frontity create 'test-project' --git 1`] = `
+exports[`CLI create frontity create 'test-project' --no-git 1`] = `
 Object {
-  "git": true,
   "name": "test-project",
+  "noGit": true,
   "theme": "test-theme",
   "typescript": false,
 }
@@ -38,8 +38,8 @@ Object {
 
 exports[`CLI create frontity create 'test-project' --theme 'test-theme' 1`] = `
 Object {
-  "git": false,
   "name": "test-project",
+  "noGit": false,
   "theme": "test-theme",
   "typescript": false,
 }
@@ -47,8 +47,8 @@ Object {
 
 exports[`CLI create frontity create 'test-project' --typescript 1`] = `
 Object {
-  "git": false,
   "name": "test-project",
+  "noGit": false,
   "theme": "test-theme",
   "typescript": true,
 }
@@ -56,8 +56,8 @@ Object {
 
 exports[`CLI create frontity create 'test-project' 1`] = `
 Object {
-  "git": false,
   "name": "test-project",
+  "noGit": false,
   "theme": "test-theme",
   "typescript": false,
 }

@@ -26,13 +26,13 @@ describe("CLI create", () => {
     });
 
     delete process.env.FRONTITY_CREATE_TYPESCRIPT;
-    delete process.env.FRONTITY_CREATE_GIT;
+    delete process.env.FRONTITY_CREATE_NO_GIT;
   });
 
   const options = {
     name: undefined,
     typescript: undefined,
-    git: undefined,
+    noGit: undefined,
     useCwd: undefined,
     theme: undefined,
     prompt: true,
@@ -83,7 +83,7 @@ describe("CLI create", () => {
       name: "test-project",
       theme: "test-theme",
       typescript: false,
-      git: false,
+      noGit: false,
       path: resolve(process.cwd(), name),
     });
   });
@@ -108,12 +108,12 @@ describe("CLI create", () => {
       name: name,
       theme: "test-theme",
       typescript,
-      git: false,
+      noGit: false,
       path: resolve(process.cwd(), name),
     });
   });
 
-  test("frontity create 'test-project' --git", async () => {
+  test("frontity create 'test-project' --no-git", async () => {
     mockedInquirer.prompt
       .mockResolvedValueOnce({
         theme: "test-theme",
@@ -121,9 +121,9 @@ describe("CLI create", () => {
       .mockResolvedValueOnce("Y");
 
     const name = "test-project";
-    const git = true;
+    const noGit = true;
 
-    await create({ ...options, name, git });
+    await create({ ...options, name, noGit });
 
     const params = mockedCreateCmd.default.mock.calls[0][0];
     // omit path because it can vary depending on environment
@@ -133,17 +133,15 @@ describe("CLI create", () => {
       name: name,
       theme: "test-theme",
       typescript: false,
-      git,
+      noGit: true,
       path: resolve(process.cwd(), name),
     });
   });
 
   test("frontity create --no-prompt", async () => {
-    try {
-      await create({ ...options, typescript: true, prompt: false });
-    } catch (err) {
-      expect(err.message).toBe("You need to provide the name for the project.");
-    }
+    await expect(
+      create({ ...options, typescript: true, prompt: false })
+    ).rejects.toThrow("You need to provide the name for the project.");
   });
 
   test("FRONTITY_CREATE__NAME='test-project'; frontity create --no-prompt", async () => {
@@ -160,7 +158,7 @@ describe("CLI create", () => {
       name,
       theme: "@frontity/mars-theme",
       typescript: false,
-      git: false,
+      noGit: false,
       path: resolve(process.cwd(), name),
     });
   });
@@ -179,14 +177,14 @@ describe("CLI create", () => {
       name,
       theme: "@frontity/mars-theme",
       typescript: true,
-      git: false,
+      noGit: false,
       path: resolve(process.cwd(), name),
     });
   });
 
-  test("FRONTITY_CREATE_GIT='true'; frontity create 'test-project' --no-prompt", async () => {
+  test("FRONTITY_CREATE_NO_GIT='true'; frontity create 'test-project' --no-prompt", async () => {
     const name = "test-project";
-    process.env.FRONTITY_CREATE_GIT = "true";
+    process.env.FRONTITY_CREATE_NO_GIT = "true";
 
     await create({ ...options, name, prompt: false });
 
@@ -197,7 +195,7 @@ describe("CLI create", () => {
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name,
       theme: "@frontity/mars-theme",
-      git: true,
+      noGit: true,
       typescript: false,
       path: resolve(process.cwd(), name),
     });
@@ -218,7 +216,7 @@ describe("CLI create", () => {
       name,
       theme,
       typescript: false,
-      git: false,
+      noGit: false,
       path: resolve(process.cwd(), name),
     });
   });

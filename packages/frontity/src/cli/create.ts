@@ -50,14 +50,14 @@ interface CreateOptions {
   typescript?: boolean;
 
   /**
-   * Whether to bootstrap the project with a git repository.
+   * Whether to skip creating a git repository for a new project.
    *
-   * It can be also configured using the `FRONTITY_CREATE_GIT` env
+   * It can be also configured using the `FRONTITY_CREATE_NO_GIT` env
    * variable.
    *
    * @defaultValue false
    */
-  git?: boolean;
+  noGit?: boolean;
 
   /**
    * Whether to create the files inside the current working directory instead
@@ -91,14 +91,14 @@ const create = async ({
   name,
   theme,
   typescript,
-  git,
+  noGit,
   useCwd,
   prompt: promptUser,
 }: CreateOptions) => {
   name = name || process.env.FRONTITY_CREATE_NAME;
   theme = theme || process.env.FRONTITY_CREATE_THEME;
   typescript = typescript || !!process.env.FRONTITY_CREATE_TYPESCRIPT;
-  git = git || !!process.env.FRONTITY_CREATE_GIT;
+  noGit = noGit || !!process.env.FRONTITY_CREATE_NO_GIT;
   useCwd = useCwd || !!process.env.FRONTITY_CREATE_USE_CWD;
 
   const options: CreateCommandOptions = {};
@@ -154,7 +154,7 @@ const create = async ({
   }
 
   options.typescript = typescript;
-  options.git = git;
+  options.noGit = noGit;
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
 
   try {

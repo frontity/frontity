@@ -18,7 +18,7 @@ import {
 const defaultOptions: CreateCommandOptions = {
   path: process.cwd(),
   typescript: false,
-  git: false,
+  noGit: false,
   packages: [],
   theme: "@frontity/mars-theme",
 };
@@ -51,7 +51,7 @@ export default (options?: CreateCommandOptions) =>
         theme,
         path,
         typescript,
-        git,
+        noGit,
       }: CreateCommandOptions = normalizeOptions(defaultOptions, options);
 
       process.on("SIGINT", async () => {
@@ -107,7 +107,7 @@ export default (options?: CreateCommandOptions) =>
         emit("message", `Downloading ${chalk.yellow("favicon.ico")}.`, step);
         await step;
 
-        if (git) {
+        if (!noGit) {
           step = initializeGit(path);
           emit("message", `Initializing git.`, step);
           await step;

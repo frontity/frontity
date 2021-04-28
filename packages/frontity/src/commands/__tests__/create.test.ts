@@ -36,6 +36,7 @@ describe("create", () => {
     expect(mockedSteps.createFrontitySettings.mock.calls).toMatchSnapshot();
     expect(mockedSteps.cloneStarterTheme.mock.calls).toMatchSnapshot();
     expect(mockedSteps.installDependencies.mock.calls).toMatchSnapshot();
+    expect(mockedSteps.initializeGit.mock.calls).toMatchSnapshot();
   });
 
   test("works correctly when `options.typescript` is false", async () => {
@@ -95,14 +96,27 @@ describe("create", () => {
     expect(mockedSteps.createTsConfig).toHaveBeenCalledWith(options.path);
   });
 
-  test("works correctly when `options.git` is true", async () => {
+  test("works correctly when `options.noGit` is true", async () => {
     const { normalizeOptions } = jest.requireActual("../../steps");
     mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
 
     const options = {
       name: "random-name",
       path: "/path/to/project",
-      git: true,
+      noGit: true,
+    };
+
+    await create(options);
+    expect(mockedSteps.initializeGit).not.toHaveBeenCalled();
+  });
+
+  test("initializeGit is called with the path of the project", async () => {
+    const { normalizeOptions } = jest.requireActual("../../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
+    const options = {
+      name: "random-name",
+      path: "/path/to/project",
     };
 
     await create(options);

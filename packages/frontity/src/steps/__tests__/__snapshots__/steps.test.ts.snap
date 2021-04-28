@@ -514,7 +514,7 @@ Array [
     [Function],
   ],
   Array [
-    "git commit -m \\"initial commit\\"",
+    "git commit -m \\"Initialized with Frontity",
     Object {
       "cwd": "/path/to/project",
     },
