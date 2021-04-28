@@ -65,6 +65,12 @@ const Root: React.FC = connect(
             To Post 7
           </button>
           <button
+            data-test="to-post-1-with-query"
+            onClick={goTo("/post-1?q=123")}
+          >
+            To Post 1 with query
+          </button>
+          <button
             data-test="toggle-infinite-scroll"
             onClick={() => {
               actions.theme.toggleInfiniteScroll();

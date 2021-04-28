@@ -125,3 +125,28 @@ export interface NavigatorWithConnection extends Navigator {
     effectiveType: "2g" | "3g" | "4g" | "slow-2g";
   };
 }
+
+/**
+ * Parameters for the {@link removeSourceUrl} utility.
+ */
+export interface RemoveSourceUrlParams {
+  /**
+   *  The link URL.
+   */
+  link: string;
+
+  /**
+   * The Source URL. It usually comes from `state.source.url`.
+   */
+  sourceUrl: string;
+
+  /**
+   * The Frontity URL. It usually comes from `state.frontity.url`.
+   */
+  frontityUrl?: string;
+
+  /**
+   * Array of RegExp that matches the URL.
+   */
+  match?: string[];
+}

@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.7.2
+
+### Patch Changes
+
+- [`944d5888`](https://github.com/frontity/frontity/commit/944d5888b8884585a39485002b896b4f9beaaab3) [#770](https://github.com/frontity/frontity/pull/770) Thanks [@Koli14](https://github.com/Koli14)! - Fix the `<Script>` component to allow more attributes and event handlers.
+
+* [`f227d135`](https://github.com/frontity/frontity/commit/f227d1351234c0d458e0280a6a2f13a959ed576f) [#792](https://github.com/frontity/frontity/pull/792) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix the `<Link>` component when `state.source.url` or `state.frontity.url` contains a pathname, returning the correct final link.
+
+* Updated dependencies [[`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`f65f7ca0`](https://github.com/frontity/frontity/commit/f65f7ca0d54b958bd5ec2681d5a2943854f9471a), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225)]:
+  - frontity@1.15.0
+  - @frontity/hooks@2.2.1
+
 ## 1.7.1
 
 ### Patch Changes

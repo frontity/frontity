@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Head, connect } from "frontity";
 import { Connect } from "frontity/types";
-import ComscoreAnalytics from "../../types";
+import { Packages } from "../../types";
 
 /**
  * Props used by {@link ComscoreHead} and {@link ComscoreAmp}.
@@ -78,14 +78,15 @@ const ComscoreAmp: React.FC<ComscoreProps> = ({ id }) => (
  *
  * @returns Root element.
  */
-export const Root: React.FC<Connect<ComscoreAnalytics>> = ({ state }) => {
+export const Root: React.FC<Connect<Packages>> = ({ state }) => {
   // Get Tracking IDs from state.
   const { trackingIds, trackingId } = state.comscoreAnalytics;
   const ids = trackingIds || (trackingId && [trackingId]) || [];
 
   // Get the appropriate tag depending on whether the `@frontity/amp` package is
   // installed or not.
-  const ComscoreTag = "amp" in state ? ComscoreAmp : ComscoreHead;
+  const ComscoreTag =
+    state.frontity.mode === "amp" ? ComscoreAmp : ComscoreHead;
 
   return (
     <>
