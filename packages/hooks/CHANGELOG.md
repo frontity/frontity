@@ -1,5 +1,14 @@
 # Change Log
 
+## 2.2.2
+
+### Patch Changes
+
+- [`c4d7ef9f`](https://github.com/frontity/frontity/commit/c4d7ef9fd75d0080c7a3fe55761f349a09cafb72) [#804](https://github.com/frontity/frontity/pull/804) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Prevent inifinite scroll from loading the same post twice if the post's link contains a query string.
+
+- Updated dependencies [[`df7d6c42`](https://github.com/frontity/frontity/commit/df7d6c4225d833a53159f1b3d1f90bb7e6d63655)]:
+  - @frontity/wp-source@1.11.4
+
 ## 2.2.1
 
 ### Patch Changes
