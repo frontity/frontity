@@ -274,17 +274,17 @@ export const verboseRegExp = (
 ) => {
   // Concatenate input and arguments.
   const source = input.raw.reduce(
-    (source, input, index) =>
-      source.concat(input, String.raw`${args[index] || ""}`),
+    (output, input, index) => output.concat(input, args[index] || ""),
     ""
   );
 
-  // These expressions are removed from the input:
-  // 1. (?<!\\)\s           -> whitespace not preceded by `\`
-  // 2. [/][/].*            -> Single-line comments
-  // 3. [/][*][\s\S]*[*][/] -> Multi-line comments
-  const regexp = /(?<!\\)\s|[/][/].*|[/][*][\s\S]*[*][/]/g;
-  const result = source.replace(regexp, "");
+  const result = source
+    // These expressions are removed from the input:
+    // 1. [/][/].*            -> Single-line comments
+    // 2. [/][*][\s\S]*[*][/] -> Multi-line comments
+    .replace(/[/][/].*|[/][*][\s\S]*[*][/]/g, "")
+    // Escaped whitespaces are preserved, all others removed.
+    .replace(/(?:\\(\s))?\s*/g, "$1");
 
   return result;
 };
