@@ -414,7 +414,7 @@ Array [
   Object {
     "func": [Function],
     "name": "homepage",
-    "pattern": "RegExp:^/(?!(\\\\?([^&#]+&)*s=[^&#]*))(\\\\?([^#]+)*)?(#.*)?$",
+    "pattern": "RegExp:^/($|#|\\\\?(?!([^&#]+&)*s=))",
     "priority": 10,
   },
 ]
@@ -425,7 +425,7 @@ Array [
   Object {
     "func": [Function],
     "name": "homepage",
-    "pattern": "RegExp:^/subdir/(?!(\\\\?([^&#]+&)*s=[^&#]*))(\\\\?([^#]+)*)?(#.*)?$",
+    "pattern": "RegExp:^/subdir/($|#|\\\\?(?!([^&#]+&)*s=))",
     "priority": 10,
   },
   Object {
@@ -459,7 +459,7 @@ Array [
   Object {
     "func": [Function],
     "name": "homepage",
-    "pattern": "RegExp:^/blog/(?!(\\\\?([^&#]+&)*s=[^&#]*))(\\\\?([^#]+)*)?(#.*)?$",
+    "pattern": "RegExp:^/blog/($|#|\\\\?(?!([^&#]+&)*s=))",
     "priority": 10,
   },
   Object {
