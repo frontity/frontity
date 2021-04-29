@@ -254,3 +254,37 @@ export const shouldBailRedirecting = (
     !redirection.isExternal
   );
 };
+
+/**
+ * Write verbose RegExp strings. It supports:
+ * - Expressions in multiple lines.
+ * - Single-line and multiple-line comments.
+ * - Interpolation.
+ *
+ * @remarks Purely based on
+ * https://keleshev.com/verbose-regular-expressions-in-javascript
+ *
+ * @param input - Input.
+ * @param args - Interpolated args.
+ * @returns Regexp in string format.
+ */
+export const verboseRegExp = (
+  input: TemplateStringsArray,
+  ...args: string[]
+) => {
+  // Concatenate input and arguments.
+  const source = input.raw.reduce(
+    (source, input, index) =>
+      source.concat(input, String.raw`${args[index] || ""}`),
+    ""
+  );
+
+  // These expressions are removed from the input:
+  // 1. (?<!\\)\s           -> whitespace not preceded by `\`
+  // 2. [/][/].*            -> Single-line comments
+  // 3. [/][*][\s\S]*[*][/] -> Multi-line comments
+  const regexp = /(?<!\\)\s|[/][/].*|[/][*][\s\S]*[*][/]/g;
+  const result = source.replace(regexp, "");
+
+  return result;
+};

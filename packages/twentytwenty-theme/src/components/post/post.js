@@ -7,21 +7,37 @@ import {
   PostHeader,
   PostInner,
   PostTitle,
+  PostCaption,
   SectionContainer,
 } from "./post-item";
 import PostCategories from "./post-categories";
 import PostMeta from "./post-meta";
 import PostTags from "./post-tags";
 
+/**
+ * The Post component that the TwentyTwenty theme uses for rendering any kind of
+ * "post type" (posts, pages, attachments, etc.).
+ *
+ * It doesn't receive any prop but the Frontity store, which it receives from
+ * {@link connect}. The current Frontity state is used to know which post type
+ * should be rendered.
+ *
+ * @param props - The Frontity store (state, actions, and libraries).
+ *
+ * @example
+ * ```js
+ * <Switch>
+ *   <Post when={data.isPostType} />
+ * </Switch>
+ * ```
+ *
+ * @returns The {@link Post} element rendered.
+ */
 const Post = ({ state, actions, libraries }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
   // Get the data of the post.
   const post = state.source[data.type][data.id];
-  // Get the data of the author.
-  // const author = state.source.author[post.author];
-  // Get a human readable date.
-  // const date = new Date(post.date);
 
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
@@ -30,8 +46,8 @@ const Post = ({ state, actions, libraries }) => {
   const allCategories = state.source.category;
 
   /**
-   * The item's categories is an array of each category id
-   * So, we'll look up the details of each category in allCategories
+   * The item's categories is an array of each category id. So, we'll look up
+   * the details of each category in allCategories.
    */
   const categories =
     post.categories && post.categories.map((catId) => allCategories[catId]);
@@ -40,8 +56,8 @@ const Post = ({ state, actions, libraries }) => {
   const allTags = state.source.tag;
 
   /**
-   * The item's categories is an array of each tag id
-   * So, we'll look up the details of each tag in allTags
+   * The item's categories is an array of each tag id. So, we'll look up the
+   * details of each tag in allTags.
    */
   const tags = post.tags && post.tags.map((tagId) => allTags[tagId]);
 
@@ -52,7 +68,7 @@ const Post = ({ state, actions, libraries }) => {
    */
   useEffect(() => {
     actions.source.fetch("/");
-  }, []);
+  }, [actions.source]);
 
   // Load the post, but only if the data is ready.
   return data.isReady ? (
@@ -61,13 +77,17 @@ const Post = ({ state, actions, libraries }) => {
         <SectionContainer>
           {/* If the post has categories, render the categories */}
           {post.categories && <PostCategories categories={categories} />}
-
           <PostTitle
             as="h1"
             className="heading-size-1"
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
           />
-
+          {/* If the post has a caption (like attachments), render it */}
+          {post.caption && (
+            <PostCaption
+              dangerouslySetInnerHTML={{ __html: post.caption.rendered }}
+            />
+          )}
           {/* The post's metadata like author, publish date, and comments */}
           <PostMeta item={post} />
         </SectionContainer>
@@ -81,7 +101,16 @@ const Post = ({ state, actions, libraries }) => {
         <FeaturedImage id={post.featured_media} isSinglePost={true} />
       )}
 
-      {/* If the post has an excerpt (short summary text), we render it */}
+      {/* If the post has a description (like attachments), we render it */}
+      {post.description && (
+        <PostInner size="thin">
+          <EntryContent
+            dangerouslySetInnerHTML={{ __html: post.description.rendered }}
+          />
+        </PostInner>
+      )}
+
+      {/* If the post has content, we render it */}
       {post.content && (
         <PostInner size="thin">
           <EntryContent>
