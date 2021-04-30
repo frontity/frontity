@@ -266,7 +266,8 @@ describe("actions.source.init", () => {
       expect(redirect.func(redirect.params)).toBe("/about-us/");
     });
 
-    // The redirection should not match if the link contains a search param.
+    // The redirection should not match if the link contains a search param or
+    // it's not the homepage.
     const linksWithSearch = [
       "/?s=search+term",
       "/?s=search+term&some=param",
@@ -274,11 +275,61 @@ describe("actions.source.init", () => {
       "/?s=search+term#hashtag",
       "/?s=search+term&some=param#hashtag",
       "/?some=param&s=search+term#hashtag",
+      "/post-1/",
+      "/post-1/?some=param",
+      "/post-1/#hashtag",
+      "/post-1/?some=param#hashtag",
     ];
 
     linksWithSearch.forEach((link) => {
       const redirect = getMatch({ link }, store.libraries.source.redirections);
-      expect(redirect).toBeFalsy();
+      expect(redirect && link).toBeFalsy();
+    });
+  });
+
+  test("should add redirect for the specified homepage and subdirectory", async () => {
+    store.state.source.homepage = "/about-us/";
+    store.state.source.subdirectory = "/subdir/";
+    await store.actions.source.init();
+    expect(store.libraries.source.redirections).toMatchSnapshot();
+
+    // The redirection returns `homepage` as the new `route` if the link doesn't
+    // contain a search param (`?s=search+term`).
+    const linksWithoutSearch = [
+      "/subdir/",
+      "/subdir/?some=param",
+      "/subdir/#hashtag",
+      "/subdir/?some=param#hashtag",
+    ];
+
+    linksWithoutSearch.forEach((link) => {
+      const redirect = getMatch({ link }, store.libraries.source.redirections);
+      expect(redirect).toBeTruthy();
+      expect(redirect.func(redirect.params)).toBe("/about-us/");
+    });
+
+    // The redirection should not match if the link contains a search param or
+    // it's not the homepage.
+    const linksWithSearch = [
+      "/subdir/?s=search+term",
+      "/subdir/?s=search+term&some=param",
+      "/subdir/?some=param&s=search+term",
+      "/subdir/?s=search+term#hashtag",
+      "/subdir/?s=search+term&some=param#hashtag",
+      "/subdir/?some=param&s=search+term#hashtag",
+      "/subdir/post-1/",
+      "/subdir/post-1/?some=param",
+      "/subdir/post-1/#hashtag",
+      "/subdir/post-1/?some=param#hashtag",
+      "/",
+      "/?some=param",
+      "/#hashtag",
+      "/?some=param#hashtag",
+    ];
+
+    linksWithSearch.forEach((link) => {
+      const redirect = getMatch({ link }, store.libraries.source.redirections);
+      expect(redirect && link).toBeFalsy();
     });
   });
 
