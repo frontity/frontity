@@ -1,12 +1,12 @@
 {
   "name": "e2e-ads",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Package to do e2e testing of Frontity's ad libraries",
   "dependencies": {
     "@frontity/source": "^1.5.1",
     "@frontity/router": "^1.2.1",
-    "frontity": "^1.14.1",
-    "@frontity/google-ad-manager": "^0.2.1"
+    "frontity": "^1.15.0",
+    "@frontity/google-ad-manager": "^1.0.0"
   }
 }

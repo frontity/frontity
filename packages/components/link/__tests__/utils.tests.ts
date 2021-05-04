@@ -3,90 +3,140 @@ import { isExternalUrl, removeSourceUrl } from "../utils";
 describe("removeSourceUrl", () => {
   it("removes source url", () => {
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/post-name-1",
-        "https://backendurl.com"
-      )
+      removeSourceUrl({
+        link: "http://backendurl.com/post-name-1",
+        sourceUrl: "https://backendurl.com",
+      })
     ).toEqual("/post-name-1");
 
     expect(
-      removeSourceUrl(
-        "https://backendurl.com/post-name-1/",
-        "http://backendurl.com"
-      )
+      removeSourceUrl({
+        link: "https://backendurl.com/post-name-1/",
+        sourceUrl: "http://backendurl.com",
+      })
     ).toEqual("/post-name-1/");
 
     expect(
-      removeSourceUrl(
-        "https://backendurl.com/post-name-1",
-        "https://backendurl.com"
-      )
+      removeSourceUrl({
+        link: "https://backendurl.com/post-name-1",
+        sourceUrl: "https://backendurl.com",
+      })
     ).toEqual("/post-name-1");
 
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/post-name-1",
-        "https://backendurl.com/"
-      )
+      removeSourceUrl({
+        link: "http://backendurl.com/post-name-1",
+        sourceUrl: "https://backendurl.com/",
+      })
     ).toEqual("/post-name-1");
 
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/post-name-1?a=1&b=3&d=3",
-        "https://backendurl.com/"
-      )
+      removeSourceUrl({
+        link: "http://backendurl.com/post-name-1?a=1&b=3&d=3",
+        sourceUrl: "https://backendurl.com/",
+      })
     ).toEqual("/post-name-1?a=1&b=3&d=3");
 
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/post-name-1#id",
-        "https://backendurl.com/"
-      )
+      removeSourceUrl({
+        link: "http://backendurl.com/post-name-1#id",
+        sourceUrl: "https://backendurl.com/",
+      })
     ).toEqual("/post-name-1#id");
   });
 
   it("removes source url when the backend url contains a folder", () => {
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/folder/post-name-1",
-        "https://backendurl.com/folder"
-      )
-    ).toEqual("/folder/post-name-1");
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1",
+        sourceUrl: "https://backendurl.com/folder",
+      })
+    ).toEqual("/post-name-1");
 
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/folder/post-name-1/",
-        "https://backendurl.com/folder"
-      )
-    ).toEqual("/folder/post-name-1/");
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1/",
+        sourceUrl: "https://backendurl.com/folder",
+      })
+    ).toEqual("/post-name-1/");
 
     expect(
-      removeSourceUrl(
-        "https://backendurl.com/folder/post-name-1",
-        "https://backendurl.com/folder"
-      )
-    ).toEqual("/folder/post-name-1");
+      removeSourceUrl({
+        link: "https://backendurl.com/folder/post-name-1",
+        sourceUrl: "https://backendurl.com/folder",
+      })
+    ).toEqual("/post-name-1");
 
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/folder/post-name-1",
-        "https://backendurl.com/folder/"
-      )
-    ).toEqual("/folder/post-name-1");
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1",
+        sourceUrl: "https://backendurl.com/folder/",
+      })
+    ).toEqual("/post-name-1");
 
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/folder/post-name-1?a=1&b=3&d=3",
-        "https://backendurl.com/folder"
-      )
-    ).toEqual("/folder/post-name-1?a=1&b=3&d=3");
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1?a=1&b=3&d=3",
+        sourceUrl: "https://backendurl.com/folder",
+      })
+    ).toEqual("/post-name-1?a=1&b=3&d=3");
 
     expect(
-      removeSourceUrl(
-        "http://backendurl.com/folder/post-name-1#id",
-        "https://backendurl.com/folder/"
-      )
-    ).toEqual("/folder/post-name-1#id");
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1#id",
+        sourceUrl: "https://backendurl.com/folder/",
+      })
+    ).toEqual("/post-name-1#id");
+  });
+
+  it("adds subdirectory if frontity url contains it", () => {
+    expect(
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1",
+        sourceUrl: "https://backendurl.com/folder",
+        frontityUrl: "https://frontityurl.com/subdir/",
+      })
+    ).toEqual("/subdir/post-name-1");
+
+    expect(
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1/",
+        sourceUrl: "https://backendurl.com/folder",
+        frontityUrl: "http://frontityurl.com/subdir/",
+      })
+    ).toEqual("/subdir/post-name-1/");
+
+    expect(
+      removeSourceUrl({
+        link: "https://backendurl.com/folder/post-name-1",
+        sourceUrl: "https://backendurl.com/folder",
+        frontityUrl: "https://frontityurl.com/subdir",
+      })
+    ).toEqual("/subdir/post-name-1");
+
+    expect(
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1",
+        sourceUrl: "https://backendurl.com/folder/",
+        frontityUrl: "http://frontityurl.com/subdir",
+      })
+    ).toEqual("/subdir/post-name-1");
+
+    expect(
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1?a=1&b=3&d=3",
+        sourceUrl: "https://backendurl.com/folder",
+        frontityUrl: "https://frontityurl.com/subdir/",
+      })
+    ).toEqual("/subdir/post-name-1?a=1&b=3&d=3");
+
+    expect(
+      removeSourceUrl({
+        link: "http://backendurl.com/folder/post-name-1#id",
+        sourceUrl: "https://backendurl.com/folder/",
+        frontityUrl: "http://frontityurl.com/subdir/",
+      })
+    ).toEqual("/subdir/post-name-1#id");
   });
 });
 

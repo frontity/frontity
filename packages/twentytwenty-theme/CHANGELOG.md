@@ -1,5 +1,23 @@
 # @frontity/twentytwenty-theme
 
+## 1.3.2
+
+### Patch Changes
+
+- [`33b28ac9`](https://github.com/frontity/frontity/commit/33b28ac93f7120f41aa6d4cc3377114536b79faf) [#799](https://github.com/frontity/frontity/pull/799) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix the `Post` component to render attachment pages properly.
+
+* [`bbcfff7c`](https://github.com/frontity/frontity/commit/bbcfff7c86999762f9b988190d161aa6c3c14343) [#797](https://github.com/frontity/frontity/pull/797) Thanks [@mburridge](https://github.com/mburridge)! - Updates image links in theme README.md files
+
+## 1.3.1
+
+### Patch Changes
+
+- [`8ade4db1`](https://github.com/frontity/frontity/commit/8ade4db16b0513a699d38ac2d8965dd7b63db8c3) [#784](https://github.com/frontity/frontity/pull/784) Thanks [@mburridge](https://github.com/mburridge)! - Fix broken links in Readme.
+
+- Updated dependencies [[`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`944d5888`](https://github.com/frontity/frontity/commit/944d5888b8884585a39485002b896b4f9beaaab3), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225), [`f227d135`](https://github.com/frontity/frontity/commit/f227d1351234c0d458e0280a6a2f13a959ed576f)]:
+  - frontity@1.15.0
+  - @frontity/components@1.7.2
+
 ## 1.3.0
 
 ### Minor Changes
