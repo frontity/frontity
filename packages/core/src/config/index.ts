@@ -29,7 +29,39 @@ interface ConfigOptions {
    * @defaultValue false
    */
   analyze?: boolean;
+
+  /**
+   * Extra configurations used to extend the current configurations.
+   */
+  extraConfigurations?: Record<string, []>;
 }
+
+/**
+ * Runs through the source targets and calls the entries configurations
+ * with the current target configuration, target name and mode.
+ *
+ * @param source - The source of the configuration targets.
+ * @param entries - The entries for the current target.
+ * @param mode - The current running mode.
+ */
+const runForEachTarget = (source, entries, mode) => {
+  // If there are entries to be ran.
+  if (entries && entries.length) {
+    // Iterate for each target inside the source.
+    for (const target in source) {
+      // And run through each entry configuration.
+      entries.forEach((configuration) => {
+        // And call the configuration function with the current
+        // config, target and mode.
+        configuration({
+          config: source[target],
+          target,
+          mode,
+        });
+      });
+    }
+  }
+};
 
 /**
  * Generate the configuration objects for Webpack, Babel and Frontity.
@@ -44,9 +76,14 @@ const config = ({
   entryPoints,
   publicPath,
   analyze = false,
+  extraConfigurations = { babel: [], webpack: [] },
 }: ConfigOptions): Config => {
   const frontity = getFrontity();
   const babel = getBabel();
+
+  // Runs the extra configurations for babel, if any.
+  runForEachTarget(babel, extraConfigurations.babel, mode);
+
   const webpack = getWebpack({
     mode,
     babel,
@@ -55,6 +92,9 @@ const config = ({
     publicPath,
     analyze,
   });
+
+  // Runs the extra webpack configuration, if any.
+  runForEachTarget(webpack, extraConfigurations.webpack, mode);
 
   return {
     babel,

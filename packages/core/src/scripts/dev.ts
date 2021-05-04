@@ -58,7 +58,7 @@ import { Mode } from "../../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
 import createSymlinks from "./utils/create-symlinks";
-import { applyConfigurationFromPackages } from "./utils/apply-configuration";
+import { readConfigurationsFromConfigFiles } from "./utils/read-configuration";
 
 /**
  * The options of the dev command.
@@ -159,16 +159,17 @@ export default async ({
     publicPath,
   });
 
+  // Read the extra configurations from files.
+  const extraConfigurations = await readConfigurationsFromConfigFiles(sites);
+
   // Get config for webpack, babel and frontity.
   const config = getConfig({
     mode,
     entryPoints,
     publicPath,
     analyze,
+    extraConfigurations,
   });
-
-  // At this point we can apply the configuration from packages if exists.
-  applyConfigurationFromPackages({ sites, configs: config.webpack, mode });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import

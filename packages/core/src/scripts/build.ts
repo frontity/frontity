@@ -54,7 +54,7 @@ import getFrontity from "../config/frontity";
 import { Mode } from "../../types";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
-import { applyConfigurationFromPackages } from "./utils/apply-configuration";
+import { readConfigurationsFromConfigFiles } from "./utils/read-configuration";
 
 /**
  * The options of the build command.
@@ -123,11 +123,17 @@ export default async ({
   // Generate the bundles. One for the server, one for each client site.
   const entryPoints = await generateEntryPoints({ sites, outDir, mode });
 
-  // Get FrontityConfig for Webpack.
-  const config = getConfig({ mode, entryPoints, publicPath, analyze });
+  // Read the extra configurations from files.
+  const extraConfigurations = await readConfigurationsFromConfigFiles(sites);
 
-  // At this point we can apply the configuration from packages if exists.
-  applyConfigurationFromPackages({ sites, configs: config.webpack, mode });
+  // Get FrontityConfig for Webpack.
+  const config = getConfig({
+    mode,
+    entryPoints,
+    publicPath,
+    analyze,
+    extraConfigurations,
+  });
 
   // Build and wait until webpack finished the clients first.
   // We need to do this because the server bundle needs to import

@@ -1,3 +1,4 @@
+import { Site } from "@frontity/file-settings/types";
 import { pathExists } from "fs-extra";
 import { uniq } from "lodash";
 
@@ -27,32 +28,36 @@ const packageHasConfig = async (name) => {
 /**
  * This function applies the configuration from packages.
  *
- * @param args - The sites, mode and configs.
+ * @param sites - The sites.
+ * @returns A dictionary split by the exported configuration function.
  */
-export const applyConfigurationFromPackages = async ({
-  sites,
-  mode,
-  configs,
-}) => {
+export const readConfigurationsFromConfigFiles = async (
+  sites: Site[]
+): Promise<Record<string, []>> => {
   const packages = uniq(
     sites.reduce((out, site) => {
       return out.concat(site.packages);
     }, [])
   );
 
-  for (const target in configs) {
-    packages.forEach(async (name) => {
-      const hasConfig = await packageHasConfig(name);
+  return packages.reduce(async (out, name) => {
+    const hasConfig = await packageHasConfig(name);
 
-      if (hasConfig) {
-        const packageConfig = (
-          await import(createPath(name, "frontity.config"))
-        ).default;
+    if (hasConfig) {
+      const packageConfig = await import(createPath(name, "frontity.config"));
 
-        if (packageConfig) {
-          packageConfig({ config: configs[target], target, mode });
+      if (packageConfig) {
+        // For each configuration exported
+        for (const config in packageConfig) {
+          out[config] = out[config] || [];
+
+          // Push the current configuration function into the
+          // config dictionary
+          out[config].push(packageConfig[config]);
         }
       }
-    });
-  }
+    }
+
+    return out;
+  }, {});
 };
