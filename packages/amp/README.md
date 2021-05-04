@@ -57,7 +57,7 @@ export default [
 
 [**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
 
-These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/analytics
+These are the ones related to this package: https://community.frontity.org/t/amp-package/388
 
 ## Changelog
 
