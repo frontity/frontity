@@ -222,4 +222,27 @@ export const EntryContent = styled.div`
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
       Helvetica, sans-serif;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 3.5rem auto 2rem;
+  }
+
+  @media (min-width: 700px) {
+    h1,
+    h2,
+    h3 {
+      margin: 6rem auto 3rem;
+    }
+
+    h4,
+    h5,
+    h6 {
+      margin: 4.5rem auto 2.5rem;
+    }
+  }
 `;
