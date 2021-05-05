@@ -488,41 +488,6 @@ Array [
 ]
 `;
 
-exports[`initializeGit works as expected 1`] = `
-Array [
-  Array [
-    "/path/to/project/.gitignore",
-    "$git$",
-  ],
-]
-`;
-
-exports[`initializeGit works as expected 2`] = `
-Array [
-  Array [
-    "git init",
-    Object {
-      "cwd": "/path/to/project",
-    },
-    [Function],
-  ],
-  Array [
-    "git add .",
-    Object {
-      "cwd": "/path/to/project",
-    },
-    [Function],
-  ],
-  Array [
-    "git commit -m \\"Initialized with Frontity\\"",
-    Object {
-      "cwd": "/path/to/project",
-    },
-    [Function],
-  ],
-]
-`;
-
 exports[`installDependencies works as expected 1`] = `
 Array [
   Array [

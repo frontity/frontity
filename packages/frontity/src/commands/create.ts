@@ -13,7 +13,9 @@ import {
   downloadFavicon,
   initializeGit,
   revertProgress,
+  createGitignore,
 } from "../steps";
+import { hasGit, isInGitRepository } from "../utils";
 
 const defaultOptions: CreateCommandOptions = {
   path: process.cwd(),
@@ -107,10 +109,25 @@ export default (options?: CreateCommandOptions) =>
         emit("message", `Downloading ${chalk.yellow("favicon.ico")}.`, step);
         await step;
 
-        if (!noGit) {
-          step = initializeGit(path);
-          emit("message", `Initializing git.`, step);
-          await step;
+        // Run this step if `noGit` is false and if git is installed on user's machine
+        if (!noGit && hasGit()) {
+          const gitignoreCleanup = await createGitignore(path);
+          if (isInGitRepository()) {
+            emit(
+              "message",
+              "Already in a git repository. Skipping initialization of a new git repo.",
+              step
+            );
+          } else {
+            step = initializeGit(path);
+            emit("message", `Initializing git repo.`, step);
+            try {
+              await step;
+            } catch (e) {
+              await gitignoreCleanup();
+              emit("message", `Git initialization failed. Skipping...`, step);
+            }
+          }
         }
       } catch (error) {
         if (typeof dirExisted !== "undefined")
