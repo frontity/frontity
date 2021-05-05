@@ -25,6 +25,7 @@
     "dev": "ts-node src/cli/index.ts",
     "ts": "ts-node",
     "test": "../../node_modules/.bin/jest --watch",
+    "test:e2e": "../../node_modules/.bin/jest --runTestsByPath __tests__/index.ts",
     "test:ci": "../../node_modules/.bin/jest --colors --ci --coverage",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand",
     "build": "tsc --project ./tsconfig.build.json && cp -a templates dist/templates",
@@ -75,6 +76,7 @@
     "@types/shelljs": "^0.8.8",
     "@types/stack-trace": "^0.0.29",
     "@types/tar": "^4.0.4",
+    "execa": "^5.0.0",
     "lodash.omit": "^4.5.0",
     "react-test-renderer": "^17.0.1",
     "ts-node": "^9.1.1"
