@@ -209,4 +209,20 @@ export const EntryContent = styled.div`
     margin: 2em 0;
     max-width: 100%;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  cite,
+  figcaption,
+  table,
+  address,
+  .wp-caption-text,
+  .wp-block-file {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+      Helvetica, sans-serif;
+  }
 `;
