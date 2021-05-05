@@ -58,7 +58,7 @@ const PostItem = ({
 
           {/* The clickable heading for the post */}
           <PostLink link={item.link}>
-            <PostTitle
+            <PostItemTitle
               className="heading-size-1"
               dangerouslySetInnerHTML={{ __html: item.title.rendered }}
             />
@@ -141,11 +141,15 @@ export const SectionContainer = styled.div`
   }
 `;
 
-export const PostTitle = styled.h1`
+export const PostItemTitle = styled.h2`
   margin: 0;
   @media (min-width: 700px) {
-    font-size: 6.4rem !important;
+    font-size: 6.4rem;
   }
+`;
+
+export const PostTitle = styled.h1`
+  margin: 0;
 `;
 
 export const PostCaption = styled(SectionContainer)`
@@ -208,5 +212,44 @@ export const EntryContent = styled.div`
   figure {
     margin: 2em 0;
     max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  cite,
+  figcaption,
+  table,
+  address,
+  .wp-caption-text,
+  .wp-block-file {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+      Helvetica, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 3.5rem auto 2rem;
+  }
+
+  @media (min-width: 700px) {
+    h1,
+    h2,
+    h3 {
+      margin: 6rem auto 3rem;
+    }
+
+    h4,
+    h5,
+    h6 {
+      margin: 4.5rem auto 2.5rem;
+    }
   }
 `;
