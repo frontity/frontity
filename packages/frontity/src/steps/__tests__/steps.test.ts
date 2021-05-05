@@ -7,7 +7,6 @@ import {
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
-  initializeGit,
   revertProgress,
 } from "../";
 import { createPackageJson as createPackageJsonForPackage } from "../create-package";
