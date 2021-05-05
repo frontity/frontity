@@ -1,7 +1,16 @@
+/* eslint-disable no-irregular-whitespace */
 import execa from "execa";
 
+// We need to set a high timeout because building the docker container and
+// running `frontity create` takes a long time.
 jest.setTimeout(120000);
 
+/**
+ * A helper function to test containers.
+ *
+ * @param callback - The callback function.
+ * @returns - A function ready to be passed to a jest test.
+ */
 const testContainer = (callback: (containerId: string) => any) => async () => {
   let containerId: string;
   try {
@@ -47,8 +56,48 @@ test(
       }
     );
 
-    const output = runCommand("tree test-frontity-app", containerId);
-    expect(output).toMatchInlineSnapshot();
+    let output = await runCommand("ls -a", containerId);
+    expect(output).toMatchInlineSnapshot(`
+      ".
+      ..
+      frontity-1.15.0.tgz
+      node_modules
+      package-lock.json
+      package.json
+      test-frontity-app"
+    `);
+
+    output = await runCommand("tree test-frontity-app/packages/", containerId);
+    expect(output).toMatchInlineSnapshot(`
+      "test-frontity-app/packages/
+      └── mars-theme
+          ├── CHANGELOG.md
+          ├── README.md
+          ├── package.json
+          ├── src
+          │   ├── components
+          │   │   ├── featured-media.js
+          │   │   ├── header.js
+          │   │   ├── index.js
+          │   │   ├── link.js
+          │   │   ├── list
+          │   │   │   ├── index.js
+          │   │   │   ├── list-item.js
+          │   │   │   ├── list.js
+          │   │   │   └── pagination.js
+          │   │   ├── loading.js
+          │   │   ├── menu-icon.js
+          │   │   ├── menu-modal.js
+          │   │   ├── menu.js
+          │   │   ├── nav.js
+          │   │   ├── page-error.js
+          │   │   ├── post.js
+          │   │   └── title.js
+          │   └── index.js
+          └── types.ts
+
+      4 directories, 21 files"
+    `);
   })
 );
 
@@ -77,8 +126,9 @@ const startContainer = async () => {
  * @returns Stdout returned from the command.
  */
 const runCommand = async (cmd: string, containerId: string) => {
-  const { stdout } = execa.commandSync(
-    `docker exec -i ${containerId} sh -c "${cmd}"`,
+  const { stdout } = await execa(
+    "docker",
+    ["exec", "-i", containerId, "sh", "-c", cmd],
     {
       stdio: "pipe",
     }
