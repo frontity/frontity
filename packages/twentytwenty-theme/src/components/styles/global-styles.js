@@ -234,6 +234,67 @@ const elementBase = (colors) => css`
   }
 `;
 
+const elementBase700 = css`
+  @media (min-width: 700px) {
+    h1,
+    .heading-size-1,
+    h2,
+    .heading-size-2,
+    h3,
+    .heading-size-3 {
+      margin: 6rem auto 3rem;
+    }
+
+    h4,
+    .heading-size-4,
+    h5,
+    .heading-size-5,
+    h6,
+    .heading-size-6 {
+      margin: 4.5rem auto 2.5rem;
+    }
+
+    h1,
+    .heading-size-1 {
+      font-size: 6.4rem;
+    }
+
+    h2,
+    .heading-size-2 {
+      font-size: 4.8rem;
+    }
+
+    h3,
+    .heading-size-3 {
+      font-size: 4rem;
+    }
+
+    h4,
+    .heading-size-4 {
+      font-size: 3.2rem;
+    }
+
+    h5,
+    .heading-size-5 {
+      font-size: 2.4rem;
+    }
+
+    h6,
+    .heading-size-6 {
+      font-size: 1.8rem;
+    }
+  }
+`;
+
+const elementBase1220 = css`
+  @media (min-width: 1220px) {
+    h1,
+    .heading-size-1 {
+      font-size: 8.4rem;
+    }
+  }
+`;
+
 const listStyle = css`
   ul,
   ol {
@@ -461,6 +522,8 @@ const globalStyle = (colors) =>
     documentSetup(colors),
     accessibilitySettings,
     elementBase(colors),
+    elementBase700,
+    elementBase1220,
     listStyle,
     quoteStyle(colors),
     codeStyle(colors),
