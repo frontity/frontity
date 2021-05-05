@@ -58,7 +58,7 @@ const PostItem = ({
 
           {/* The clickable heading for the post */}
           <PostLink link={item.link}>
-            <PostTitle
+            <PostItemTitle
               className="heading-size-1"
               dangerouslySetInnerHTML={{ __html: item.title.rendered }}
             />
@@ -138,6 +138,13 @@ export const SectionContainer = styled.div`
 
   @media (min-width: 700px) {
     width: calc(100% - 8rem);
+  }
+`;
+
+export const PostItemTitle = styled.h2`
+  margin: 0;
+  @media (min-width: 700px) {
+    font-size: 6.4rem;
   }
 `;
 
