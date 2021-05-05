@@ -143,9 +143,6 @@ export const SectionContainer = styled.div`
 
 export const PostTitle = styled.h1`
   margin: 0;
-  @media (min-width: 700px) {
-    font-size: 6.4rem !important;
-  }
 `;
 
 export const PostCaption = styled(SectionContainer)`
