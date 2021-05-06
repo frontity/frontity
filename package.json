@@ -4,6 +4,7 @@
   "scripts": {
     "test": "lerna run test:ci --stream",
     "test:ci": "jest --clearCache && lerna run test:ci --stream",
+    "test:e2e-cli": "cd packages/frontity/ && jest --testRegex /packages/frontity/e2e/*",
     "codecov": "curl -s https://codecov.io/bash | bash -s",
     "prepare": "lerna bootstrap --hoist",
     "reinstall": "lerna clean --yes && npm run prepare"
