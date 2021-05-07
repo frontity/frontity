@@ -1,6 +1,6 @@
 /* eslint-disable no-irregular-whitespace, jest/no-conditional-expect */
 
-import { readFile } from "fs-extra";
+import { readdir, readFile } from "fs-extra";
 import { resolve as resolvePath } from "path";
 import execa from "execa";
 
@@ -8,42 +8,17 @@ import execa from "execa";
 // running `frontity create` takes a long time.
 jest.setTimeout(180000);
 
-/**
- * A helper to run CLI commands.
- *
- * @param cmd - The command to run.
- * @returns The stdout of the command.
- */
-const runCommand = async (cmd: string) => {
-  const { stdout } = await execa.command(cmd, {
-    stdio: "pipe",
-  });
-  return stdout;
-};
-
 test("in a container with git installed and configured & when a git repo already exists", async () => {
   await execa.command(
     `node dist/src/cli/index.js create --no-prompt --theme @frontity/mars-theme test-frontity-app`,
     { stdio: "inherit" }
   );
 
-  let output: string;
-  if (process.platform === "win32") {
-    output = await runCommand("dir /a:hd test-frontity-app");
-  } else {
-    output = await runCommand("ls -a test-frontity-app");
-  }
-  expect(output).toMatch(/\.gitignore(.*\s)*frontity\.settings\.js/);
-
-  let command: string;
-  if (process.platform === "win32") {
-    command = "type test-frontity-app/.gitignore";
-  } else {
-    command = "cat test-frontity-app/.gitignore";
-  }
+  const output = await readdir("test-frontity-app");
+  expect(output).toMatchInlineSnapshot();
 
   // The .gitignore should be the same as the template file.
-  const gitignore = await runCommand(command);
+  const gitignore = await readFile("test-frontity-app/.gitignore", "utf8");
   expect(gitignore).toEqual(
     await readFile(resolvePath(__dirname, "../templates/gitignore-template"), {
       encoding: "utf8",
