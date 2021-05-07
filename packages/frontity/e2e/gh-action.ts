@@ -1,6 +1,4 @@
-/* eslint-disable no-irregular-whitespace, jest/no-conditional-expect */
-
-import { readdir, readFile } from "fs-extra";
+import { readdir, readFile, remove } from "fs-extra";
 import { resolve as resolvePath } from "path";
 import execa from "execa";
 
@@ -15,7 +13,18 @@ test("in a container with git installed and configured & when a git repo already
   );
 
   const output = await readdir("test-frontity-app");
-  expect(output).toMatchInlineSnapshot();
+  expect(output).toMatchInlineSnapshot(`
+    Array [
+      ".gitignore",
+      "README.md",
+      "favicon.ico",
+      "frontity.settings.js",
+      "node_modules",
+      "package-lock.json",
+      "package.json",
+      "packages",
+    ]
+  `);
 
   // The .gitignore should be the same as the template file.
   const gitignore = await readFile("test-frontity-app/.gitignore", "utf8");
@@ -24,4 +33,6 @@ test("in a container with git installed and configured & when a git repo already
       encoding: "utf8",
     })
   );
+
+  await remove("test-frontity-app");
 });
