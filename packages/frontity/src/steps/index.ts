@@ -326,10 +326,10 @@ export const initializeGit = async (path: string) => {
     });
   } catch (e) {
     // If there is any issue we want to revert to "pre-git" state
-    await remove(".git");
+    await remove(resolvePath(path, ".git"));
 
     // Rethrow the error so that it can be caught by the `create` command.
-    throw new Error("Failed to initialize the git repo");
+    throw e;
   }
 };
 

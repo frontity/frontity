@@ -1,50 +1,12 @@
 /* eslint-disable no-irregular-whitespace */
 import execa from "execa";
+import { readFile } from "fs-extra";
+import { resolve as resolvePath } from "path";
+import { testContainer } from "./utils";
 
 // We need to set a high timeout because building the docker container and
 // running `frontity create` takes a long time.
 jest.setTimeout(180000);
-
-/**
- * Options for the {@link testContainer} function.
- */
-interface TestContainerCallbackOptions {
-  /**
-   * The ID of the docker container.
-   */
-  containerId: string;
-
-  /**
-   * The function used to actually run the command inside the container.
-   */
-  runCommand: (
-    cmd: string,
-    options?: Record<string, any>
-  ) => ReturnType<typeof runCommand>;
-}
-
-/**
- * A helper function to test containers.
- *
- * @param callback - The callback function.
- * @returns - A function ready to be passed to a jest test.
- */
-const testContainer = (
-  callback: (callback: TestContainerCallbackOptions) => any
-) => async () => {
-  let containerId: string;
-  try {
-    containerId = await startContainer();
-    await callback({
-      containerId,
-      runCommand: (cmd, options) => runCommand(cmd, containerId, options),
-    });
-  } finally {
-    await execa.command(`docker rm --force ${containerId}`, {
-      stdio: "ignore",
-    });
-  }
-};
 
 beforeAll(async () => {
   // Remove the built output
@@ -90,41 +52,12 @@ test.concurrent(
       `);
 
     output = await runCommand("tree test-frontity-app/packages/");
-    expect(output).toMatchInlineSnapshot(`
-              "test-frontity-app/packages/
-              └── mars-theme
-                  ├── CHANGELOG.md
-                  ├── README.md
-                  ├── package.json
-                  ├── src
-                  │   ├── components
-                  │   │   ├── featured-media.js
-                  │   │   ├── header.js
-                  │   │   ├── index.js
-                  │   │   ├── link.js
-                  │   │   ├── list
-                  │   │   │   ├── index.js
-                  │   │   │   ├── list-item.js
-                  │   │   │   ├── list.js
-                  │   │   │   └── pagination.js
-                  │   │   ├── loading.js
-                  │   │   ├── menu-icon.js
-                  │   │   ├── menu-modal.js
-                  │   │   ├── menu.js
-                  │   │   ├── nav.js
-                  │   │   ├── page-error.js
-                  │   │   ├── post.js
-                  │   │   └── title.js
-                  │   └── index.js
-                  └── types.ts
-
-              4 directories, 21 files"
-          `);
+    expect(output).toMatchSnapshot();
   })
 );
 
 test.concurrent(
-  "in container with git installed",
+  "in container with git installed but git settings are missing",
   testContainer(async ({ runCommand }) => {
     await runCommand("apk add git");
     await runCommand(
@@ -132,11 +65,12 @@ test.concurrent(
       { stdio: "inherit" }
     );
 
-    const output = await runCommand("ls -a test-frontity-app");
+    let output = await runCommand("ls -a test-frontity-app");
+
+    // .git is missing because user needs to set author and email in git config
     expect(output).toMatchInlineSnapshot(`
       ".
       ..
-      .git
       README.md
       favicon.ico
       frontity.settings.js
@@ -145,48 +79,127 @@ test.concurrent(
       package.json
       packages"
     `);
+
+    output = await runCommand("tree test-frontity-app/packages/");
+    expect(output).toMatchSnapshot();
   })
 );
 
-/**
- * Start a container and return its ID.
- *
- * @returns The ID of the container.
- */
-async function startContainer() {
-  // start the container
-  const { stdout: containerId } = await execa.command(
-    "docker run --rm -i -d frontity-cli node",
-    {
-      stdio: "pipe",
-    }
-  );
-  return containerId;
-}
+test.concurrent(
+  "in a container with git installed and configured",
+  testContainer(async ({ runCommand }) => {
+    await runCommand("apk add git");
+    await runCommand('git config --global user.email "user@frontity.com"');
+    await runCommand('git config --global user.name "Test User"');
 
-/**
- * Run an arbitrary command in a container.
- *
- * @param cmd - The command to execute.
- * @param containerId - The ID of the container.
- * @param options - The `options` option of child_process.
- * @returns Stdout returned from the command.
- */
-async function runCommand(
-  cmd: string,
-  containerId: string,
-  options?: {
-    /**
-     * Stdio option of child_process.exec.
-     */
-    stdio?: ["ignore", "pipe", "inherit"];
-  }
-) {
-  const { stdout } = await execa(
-    "docker",
-    ["exec", "-i", containerId, "sh", "-c", cmd],
-    options
-  );
+    await runCommand(
+      `node_modules/.bin/frontity create --no-prompt --theme @frontity/mars-theme test-frontity-app`,
+      { stdio: "inherit" }
+    );
 
-  return stdout;
-}
+    let output = await runCommand("ls -a test-frontity-app");
+    expect(output).toMatchInlineSnapshot(`
+      ".
+      ..
+      .git
+      .gitignore
+      README.md
+      favicon.ico
+      frontity.settings.js
+      node_modules
+      package-lock.json
+      package.json
+      packages"
+    `);
+
+    output = await runCommand("tree test-frontity-app/packages/");
+    expect(output).toMatchSnapshot();
+  })
+);
+
+test.concurrent(
+  "in a container with git installed and configured & when a git repo already exists",
+  testContainer(async ({ runCommand }) => {
+    await runCommand("apk add git");
+    await runCommand('git config --global user.email "user@frontity.com"');
+    await runCommand('git config --global user.name "Test User"');
+    await runCommand("git init test-frontity-app");
+
+    await runCommand(
+      `node_modules/.bin/frontity create --no-prompt --theme @frontity/mars-theme test-frontity-app`,
+      { stdio: "inherit" }
+    );
+
+    let output = await runCommand("ls -a test-frontity-app");
+    expect(output).toMatchInlineSnapshot(`
+      ".
+      ..
+      .git
+      .gitignore
+      README.md
+      favicon.ico
+      frontity.settings.js
+      node_modules
+      package-lock.json
+      package.json
+      packages"
+    `);
+
+    // The .gitignore should be the same as the template file
+    const gitignore = await runCommand("cat test-frontity-app/.gitignore");
+    expect(gitignore).toEqual(
+      await readFile(
+        resolvePath(__dirname, "../templates/gitignore-template"),
+        {
+          encoding: "utf8",
+        }
+      )
+    );
+
+    output = await runCommand("tree test-frontity-app/packages/");
+    expect(output).toMatchSnapshot();
+  })
+);
+
+test.concurrent(
+  "in a container with git installed and configured & when a git repo and .gitignore already exist",
+  testContainer(async ({ runCommand }) => {
+    await runCommand("apk add git");
+    await runCommand('git config --global user.email "user@frontity.com"');
+    await runCommand('git config --global user.name "Test User"');
+    await runCommand("git init test-frontity-app");
+    await runCommand('echo "test" > test-frontity-app/.gitignore');
+
+    await runCommand(
+      `node_modules/.bin/frontity create --no-prompt --theme @frontity/mars-theme test-frontity-app`,
+      { stdio: "inherit" }
+    );
+
+    let output = await runCommand("ls -a test-frontity-app");
+    expect(output).toMatchInlineSnapshot(`
+      ".
+      ..
+      .git
+      .gitignore
+      README.md
+      favicon.ico
+      frontity.settings.js
+      node_modules
+      package-lock.json
+      package.json
+      packages"
+    `);
+
+    output = await runCommand("cat test-frontity-app/.gitignore");
+
+    // The first line should be `test`
+    expect(output).toMatchInlineSnapshot(`
+      "test
+      node_modules
+      build"
+    `);
+
+    output = await runCommand("tree test-frontity-app/packages/");
+    expect(output).toMatchSnapshot();
+  })
+);
