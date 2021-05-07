@@ -39,8 +39,10 @@ export const readConfigurationsFromConfigFiles = async (
       return out.concat(site.packages);
     }, [])
   );
+  const dictionary = {};
 
-  return packages.reduce(async (out, name) => {
+  for (const i in packages) {
+    const name = packages[i];
     const hasConfig = await packageHasConfig(name);
 
     if (hasConfig) {
@@ -49,15 +51,15 @@ export const readConfigurationsFromConfigFiles = async (
       if (packageConfig) {
         // For each configuration exported
         for (const config in packageConfig) {
-          out[config] = out[config] || [];
+          dictionary[config] = dictionary[config] || [];
 
           // Push the current configuration function into the
           // config dictionary
-          out[config].push(packageConfig[config]);
+          dictionary[config].push(packageConfig[config]);
         }
       }
     }
+  }
 
-    return out;
-  }, {});
+  return dictionary;
 };

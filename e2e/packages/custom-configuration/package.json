@@ -1,0 +1,9 @@
+{
+  "name": "e2e-custom-configuration",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do e2e testing of Frontity's rendering",
+  "dependencies": {
+    "frontity": "^1.14.1"
+  }
+}
