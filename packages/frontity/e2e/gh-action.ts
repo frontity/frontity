@@ -33,7 +33,7 @@ test("in a container with git installed and configured & when a git repo already
   } else {
     output = await runCommand("ls -a test-frontity-app");
   }
-  expect(output).toMatch(/\.gitignore.*frontity\.settings\.js/);
+  expect(output).toMatch(/\.gitignore(.*\s)*frontity\.settings\.js/);
 
   let command: string;
   if (process.platform === "win32") {
