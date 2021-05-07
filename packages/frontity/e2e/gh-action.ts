@@ -28,14 +28,12 @@ test("in a container with git installed and configured & when a git repo already
   );
 
   let output: string;
-
   if (process.platform === "win32") {
     output = await runCommand("dir /a:hd test-frontity-app");
-    expect(output).toMatchInlineSnapshot();
   } else {
     output = await runCommand("ls -a test-frontity-app");
-    expect(output).toMatchInlineSnapshot();
   }
+  expect(output).toMatch(/\.gitignore.*frontity\.settings\.js/);
 
   let command: string;
   if (process.platform === "win32") {
