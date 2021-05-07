@@ -23,7 +23,7 @@ const runCommand = async (cmd: string) => {
 
 test("in a container with git installed and configured & when a git repo already exists", async () => {
   await execa(
-    `node dist/src/cli/index.js create --no-prompt --theme @frontity/mars-theme test-frontity-app`,
+    `npx ts-node src/cli/index.ts create --no-prompt --theme @frontity/mars-theme test-frontity-app`,
     { stdio: "inherit" }
   );
 
