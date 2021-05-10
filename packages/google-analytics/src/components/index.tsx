@@ -74,7 +74,7 @@ const GtagAmp: React.FC<GtagAmpProps> = ({ ids, ampConfig }) => {
   };
 
   // Merge it with `ampConfig` to add other vars and triggers.
-  const finalAmpConfig = merge(idsConfig, ampConfig);
+  const finalAmpConfig = merge(idsConfig, ampConfig || {});
 
   // Return the AMP tag with its configuration.
   return (
