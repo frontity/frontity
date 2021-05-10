@@ -67,6 +67,18 @@ jobs:
         env:
           CI: true
 
+      - name: Run npm build
+        run: |
+          rm -rf build
+          npm run build
+
+      - name: Run npm pack
+        id: npm_pack
+        run: echo "::set-output name=ARTIFACT_NAME::$(npm pack)"
+
+      - name: Build the docker container
+        run: docker build -t frontity-cli --build-arg ARTIFACT_NAME=${{ steps.npm_pack.outputs.ARTIFACT_NAME }}
+
       - name: Run e2e tests for the CLI
         run: npm run test:e2e-cli
         env:
