@@ -1,6 +1,10 @@
 import * as React from "react";
-import { Action, MergePackages, Package } from "frontity/types";
-import Analytics, { Pageview, Event } from "@frontity/analytics/types";
+import { Action, MergePackages, Package, Frontity } from "frontity/types";
+import Analytics, {
+  Pageview,
+  Event,
+  AmpConfig,
+} from "@frontity/analytics/types";
 
 declare global {
   /**
@@ -127,6 +131,16 @@ interface GoogleAnalytics extends Package {
        * List of tracking IDs associated to a Google Analytics account.
        */
       trackingIds?: string[];
+
+      /**
+       * JSON configuration object to include inside the `<amp-analytics>` tags,
+       * useful to add variables to the GTM data layer. Note that this props is
+       * only used when the `@frontity/amp` package is installed.
+       *
+       * See https://support.google.com/tagmanager/answer/9205783#variables for
+       * more info about how to define variables for GTM.
+       */
+      ampConfig?: AmpConfig;
     };
   };
 
@@ -183,6 +197,6 @@ interface GoogleAnalytics extends Package {
 /**
  * Package types used internally by GoogleAnalytics.
  */
-export type Packages = MergePackages<GoogleAnalytics, Analytics>;
+export type Packages = MergePackages<Frontity, GoogleAnalytics, Analytics>;
 
 export default GoogleAnalytics;
