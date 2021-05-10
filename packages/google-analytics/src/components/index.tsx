@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Head, connect } from "frontity";
+import { Head, connect, warn } from "frontity";
 import merge from "deepmerge";
 import { Connect } from "frontity/types";
-import { AmpConfig } from "@frontity/analytics/types";
-import { Packages } from "../../types";
+import { Packages, GoogleAnalyticsAmpConfig } from "../../types";
 
 /**
  * Props received by {@link Gtag} component.
@@ -22,7 +21,7 @@ interface GtagAmpProps extends GtagProps {
   /**
    * Amp config object.
    */
-  ampConfig: AmpConfig;
+  ampConfig: GoogleAnalyticsAmpConfig;
 }
 
 /**
@@ -56,25 +55,36 @@ ${ids.map((id) => `gtag('config', '${id}');`).join("\n")}
  * @returns React element.
  */
 const GtagAmp: React.FC<GtagAmpProps> = ({ ids, ampConfig }) => {
-  // Do not render anything if `ids` is empty.
-  if (ids.length === 0) return null;
-
   // Generate an initial configuration object with the given tracking IDs.
-  const idsConfig = {
-    vars: {
-      // This property points to the first ID of the array.
-      gtag_id: ids[0],
+  const idsConfig =
+    ids.length > 0
+      ? {
+          vars: {
+            // This property points to the first ID of the array.
+            gtag_id: ids[0],
 
-      // Here, we generate an object with all the IDs passed as prop.
-      config: ids.reduce((config, id) => {
-        config[id] = { groups: "default" };
-        return config;
-      }, {}),
-    },
-  };
+            // Here, the default config for each ID is generated.
+            config: ids.reduce((config, id) => {
+              config[id] = { groups: "default" };
+              return config;
+            }, {}),
+          },
+        }
+      : {};
 
   // Merge it with `ampConfig` to add other vars and triggers.
   const finalAmpConfig = merge(idsConfig, ampConfig || {});
+
+  // At this point we should have at least a tracking ID defined. If not, show
+  // a warning message and render nothing.
+  const { gtag_id, config } = finalAmpConfig?.vars || {};
+  if (!(gtag_id && config && config[gtag_id])) {
+    warn(
+      "No tracking ID was found neither in `state.google.analytics.trackingId` nor in `state.google.analytics.ampConfig`. The `<amp-analytics>` tag will not be rendered."
+    );
+
+    return null;
+  }
 
   // Return the AMP tag with its configuration.
   return (

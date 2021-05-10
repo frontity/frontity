@@ -96,6 +96,26 @@ interface GoogleAnalyticsEvent extends Event {
 }
 
 /**
+ * AMP config with GoogleAnalytics-specific variables.
+ */
+export interface GoogleAnalyticsAmpConfig extends AmpConfig {
+  /**
+   * AmpConfig vars.
+   */
+  vars?: AmpConfig["vars"] & {
+    /**
+     * Primary GTAG ID.
+     */
+    gtag_id?: string;
+
+    /**
+     * Object containing all tracking IDs and their configuration.
+     */
+    config?: Record<string, unknown>;
+  };
+}
+
+/**
  * Analytics package to use Google Analytics with Frontity.
  */
 interface GoogleAnalytics extends Package {
@@ -140,7 +160,7 @@ interface GoogleAnalytics extends Package {
        * See https://support.google.com/tagmanager/answer/9205783#variables for
        * more info about how to define variables for GTM.
        */
-      ampConfig?: AmpConfig;
+      ampConfig?: GoogleAnalyticsAmpConfig;
     };
   };
 
