@@ -9,8 +9,6 @@ import { testContainer } from "./utils";
 jest.setTimeout(180000);
 
 beforeAll(async () => {
-  if (process.env.CI) return;
-
   // Remove the built output
   await execa.command("rm -rf build", { stdio: "inherit" });
 
