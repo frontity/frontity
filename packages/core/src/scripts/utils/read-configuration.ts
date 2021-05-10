@@ -46,7 +46,9 @@ export const readConfigurationsFromConfigFiles = async (
     const hasConfig = await packageHasConfig(name);
 
     if (hasConfig) {
-      const packageConfig = await import(`${process.env.CWD}/node_modules/${name}/frontity.config`);
+      const packageConfig = await import(
+        `${process.env.CWD}/node_modules/${name}/frontity.config`
+      );
 
       if (packageConfig) {
         // For each configuration exported
