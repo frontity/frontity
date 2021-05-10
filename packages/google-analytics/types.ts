@@ -104,7 +104,7 @@ export interface GoogleAnalyticsAmpConfig extends AmpConfig {
    */
   vars?: AmpConfig["vars"] & {
     /**
-     * Primary GTAG ID.
+     * Primary tracking ID.
      */
     gtag_id?: string;
 
@@ -154,11 +154,12 @@ interface GoogleAnalytics extends Package {
 
       /**
        * JSON configuration object to include inside the `<amp-analytics>` tags,
-       * useful to add variables to the GTM data layer. Note that this props is
-       * only used when the `@frontity/amp` package is installed.
+       * useful to add variables and triggers. Note that this props is only used
+       * when the `@frontity/amp` package is installed.
        *
-       * See https://support.google.com/tagmanager/answer/9205783#variables for
-       * more info about how to define variables for GTM.
+       * See
+       * https://developers.google.com/analytics/devguides/collection/amp-analytics/
+       * for more info about how to define this config object.
        */
       ampConfig?: GoogleAnalyticsAmpConfig;
     };
