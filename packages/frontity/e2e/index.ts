@@ -24,7 +24,7 @@ beforeAll(async () => {
 
   // Build the "base" docker container that contains our CLI
   await execa.command(
-    `docker build -t frontity-cli --build-arg ARTIFACT_NAME=${artifactName} .`,
+    `docker build -t frontity-cli --build-arg ARTIFACT_NAME="${artifactName}" .`,
     {
       stdio: "inherit",
     }
