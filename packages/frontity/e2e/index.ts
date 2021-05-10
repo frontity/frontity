@@ -9,6 +9,8 @@ import { testContainer } from "./utils";
 jest.setTimeout(180000);
 
 beforeAll(async () => {
+  if (process.env.CI) return;
+
   // Remove the built output
   await execa.command("rm -rf build", { stdio: "inherit" });
 
@@ -21,8 +23,16 @@ beforeAll(async () => {
   });
 
   // Build the "base" docker container that contains our CLI
-  await execa.command(
-    `docker build -t frontity-cli --build-arg ARTIFACT_NAME=${artifactName} .`,
+  await execa(
+    "docker",
+    [
+      "build",
+      "-t",
+      "frontity-cli",
+      "--build-arg",
+      `ARTIFACT_NAME=${artifactName}`,
+      ".",
+    ],
     {
       stdio: "ignore",
     }
