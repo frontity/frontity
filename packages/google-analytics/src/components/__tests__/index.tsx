@@ -7,9 +7,10 @@ import { HelmetProvider } from "frontity";
 import { State } from "frontity/types";
 import { FilledContext } from "react-helmet-async";
 import { Root as GoogleAnalytics } from "..";
-import GoogleAnalyticsPkg from "../../../types";
+import { Packages } from "../../../types";
 
-const getState = (): State<GoogleAnalyticsPkg> => ({
+const getState = (): State<Packages> => ({
+  frontity: {},
   analytics: {
     pageviews: { googleAnalytics: true },
     events: {},
@@ -26,7 +27,7 @@ describe("GoogleAnalytics", () => {
     const helmetContext = {};
     TestRenderer.create(
       <HelmetProvider context={helmetContext}>
-        <GoogleAnalytics state={state} actions={null} />
+        <GoogleAnalytics state={state} actions={null} libraries={null} />
       </HelmetProvider>
     ).toJSON();
     const head = (helmetContext as FilledContext).helmet;
@@ -42,7 +43,7 @@ describe("GoogleAnalytics", () => {
     const helmetContext = {};
     TestRenderer.create(
       <HelmetProvider context={helmetContext}>
-        <GoogleAnalytics state={state} actions={null} />
+        <GoogleAnalytics state={state} actions={null} libraries={null} />
       </HelmetProvider>
     ).toJSON();
     const head = (helmetContext as FilledContext).helmet;
@@ -56,7 +57,7 @@ describe("GoogleAnalytics", () => {
     const helmetContext = {};
     TestRenderer.create(
       <HelmetProvider context={helmetContext}>
-        <GoogleAnalytics state={state} actions={null} />
+        <GoogleAnalytics state={state} actions={null} libraries={null} />
       </HelmetProvider>
     ).toJSON();
     const head = (helmetContext as FilledContext).helmet;
