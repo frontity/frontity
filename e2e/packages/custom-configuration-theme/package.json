@@ -1,0 +1,10 @@
+{
+  "name": "e2e-custom-configuration-theme",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Package to do e2e testing of custom Webpack configurations",
+  "dependencies": {
+    "@frontity/components": "^1.7.1",
+    "frontity": "^1.14.1"
+  }
+}
