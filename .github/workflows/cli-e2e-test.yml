@@ -34,7 +34,7 @@ jobs:
           CI: true
 
       - name: Run e2e tests for the CLI
-        run: npm run test:e2e-cli-gh-action
+        run: npm run test:e2e-cli
         env:
           CI: true
 
@@ -72,7 +72,7 @@ jobs:
         run: docker build -t frontity-cli .
 
       - name: Run e2e tests for the CLI
-        run: npm run test:e2e-cli
+        run: npm run test:e2e-cli-full
         working-directory: ./packages/frontity
         env:
           CI: true

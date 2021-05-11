@@ -4,7 +4,6 @@
   "scripts": {
     "test": "lerna run test:ci --stream",
     "test:ci": "jest --clearCache && lerna run test:ci --stream",
-    "test:e2e-cli-gh-action": "cd packages/frontity/ && jest --testRegex /packages/frontity/e2e/gh-action.ts",
     "prepare": "lerna bootstrap --hoist",
     "reinstall": "lerna clean --yes && npm run prepare"
   },

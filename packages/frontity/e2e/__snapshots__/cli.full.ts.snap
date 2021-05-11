@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`in container without git 4`] = `
+exports[` 3`] = `
 "test-frontity-app/packages/
 └── mars-theme
     ├── CHANGELOG.md
@@ -31,7 +31,7 @@ exports[`in container without git 4`] = `
 4 directories, 21 files"
 `;
 
-exports[`in container without git 5`] = `
+exports[` 5`] = `
 "test-frontity-app/packages/
 └── mars-theme
     ├── CHANGELOG.md
@@ -62,7 +62,7 @@ exports[`in container without git 5`] = `
 4 directories, 21 files"
 `;
 
-exports[`in container without git 7`] = `
+exports[` 7`] = `
 "test-frontity-app/packages/
 └── mars-theme
     ├── CHANGELOG.md
@@ -93,7 +93,7 @@ exports[`in container without git 7`] = `
 4 directories, 21 files"
 `;
 
-exports[`in container without git 9`] = `
+exports[` 9`] = `
 "test-frontity-app/packages/
 └── mars-theme
     ├── CHANGELOG.md
@@ -124,7 +124,7 @@ exports[`in container without git 9`] = `
 4 directories, 21 files"
 `;
 
-exports[`in container without git 11`] = `
+exports[` 11`] = `
 "test-frontity-app/packages/
 └── mars-theme
     ├── CHANGELOG.md
