@@ -1,6 +1,6 @@
 import { resolve } from "path";
-import { Configuration } from "webpack";
-import { Target, Mode, EntryPoints } from "../../../types";
+import { EntryPoints } from "../../../types";
+import { Target, Mode, WebpackConfig } from "@frontity/types/config";
 
 // Get the root path of the directory where the script was started.
 const rootPath = process.cwd();
@@ -39,8 +39,8 @@ const entry = ({
   target,
   mode,
   entryPoints,
-}: EntryOptions): Configuration["entry"] => {
-  let config: Configuration["entry"] = {};
+}: EntryOptions): WebpackConfig["entry"] => {
+  let config: WebpackConfig["entry"] = {};
 
   if (target === "server") {
     const { path } = entryPoints.find((bundle) => bundle.name === "server");

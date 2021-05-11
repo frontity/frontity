@@ -23,6 +23,7 @@
   "dependencies": {
     "@frontity/wp-source": "^1.11.3",
     "@frontity/source": "^1.5.1",
+    "@frontity/types": "^1.8.0",
     "frontity": "^1.15.0"
   },
   "devDependencies": {

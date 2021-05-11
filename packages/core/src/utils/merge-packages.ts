@@ -57,10 +57,14 @@ export default ({
   state.frontity.packages.forEach((name) => {
     const variable = getVariable(name, state.frontity.mode);
     const module = packages[variable];
-    const pkg = typeof module === "function" ? module() : module;
-    config = deepmerge(config, pkg, {
-      clone: false,
-    });
+
+    // If module exist extend the base config.
+    if (module) {
+      const pkg = typeof module === "function" ? module() : module;
+      config = deepmerge(config, pkg, {
+        clone: false,
+      });
+    }
   });
   // Save debug, which is the only value we want to retain.
   const debug = !!config.state?.frontity?.debug;

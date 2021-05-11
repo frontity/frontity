@@ -1,8 +1,8 @@
 import hash from "hash-it";
-import { Configuration } from "webpack";
 import babelCore from "@babel/core/package.json";
 import babelLoader from "babel-loader/package.json";
-import { Target, BabelConfigs, Mode } from "../../../types";
+import { BabelConfigs } from "../../../types";
+import { Target, Mode, WebpackConfig } from "@frontity/types/config";
 
 /**
  * The options of the {@link moduleConf} function.
@@ -37,7 +37,7 @@ const moduleConf = ({
   target,
   babel,
   mode,
-}: ModuleOptions): Configuration["module"] => ({
+}: ModuleOptions): WebpackConfig["module"] => ({
   rules: [
     {
       // Support for js, jsx, ts and tsx files.
