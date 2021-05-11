@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import Html2React from "../../src/libraries/component";
-import gutenbergSlot from "../gutenberg-slot";
+import gutenbergSlot from "../slot-block";
 
 jest.mock("frontity", () => ({
   Slot: jest.fn(({ name }) => <slot name={name}>mocked slot</slot>),
@@ -9,7 +9,7 @@ jest.mock("frontity", () => ({
   warn: jest.fn(),
 }));
 
-describe("Gutenberg Slot Processor", () => {
+describe("Slot Block processor", () => {
   it("should process an slot created with Gutenberg", () => {
     const { container } = render(
       <Html2React
