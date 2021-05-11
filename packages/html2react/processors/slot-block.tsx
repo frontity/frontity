@@ -2,9 +2,9 @@ import { Slot, warn } from "frontity";
 import { Processor, Element } from "../types";
 
 /**
- * Type for the Element processed by the {@link gutenbergSlot} processor.
+ * The element processed by the {@link slotBlock} processor.
  */
-interface GutenbergSlotElement extends Element {
+interface SlotBlockElement extends Element {
   /**
    * Props.
    */
@@ -21,14 +21,14 @@ interface GutenbergSlotElement extends Element {
   };
 }
 
-const gutenbergSlot: Processor<GutenbergSlotElement> = {
-  name: "gutenberg slot",
+const slotBlock: Processor<SlotBlockElement> = {
+  name: "slot block",
   test: ({ node }) =>
     node.props?.className?.includes("wp-block-frontity-frontity-slot"),
   processor: ({ node }) => {
     // If name is not defined, do not render the Slot.
     if (!node.props["data-frontity-slot-name"]) {
-      warn("We found a Gutenberg Slot, but it doesn't have a name.");
+      warn("We found a Slot block, but it doesn't have a name.");
       node.component = () => null;
       return node;
     }
@@ -39,4 +39,4 @@ const gutenbergSlot: Processor<GutenbergSlotElement> = {
   },
 };
 
-export default gutenbergSlot;
+export default slotBlock;
