@@ -2,7 +2,7 @@ import Package from "../package";
 import { Action, AsyncAction } from "../action";
 import Derived from "../derived";
 import MergePackages from "../merge-packages";
-import { expectType } from "../../helpers";
+import { expectType } from "../helpers";
 
 /**
  * Package using the types of `Package1`, `Package2` and `Package3` for derived

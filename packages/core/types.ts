@@ -1,34 +1,27 @@
-import { TransformOptions } from "@babel/core";
-import { Configuration } from "webpack";
-
-/**
- * The Frontity modes.
- */
-export type Mode = "development" | "production";
-
-/**
- * The bundle targets.
- */
-export type Target = "module" | "es5" | "server";
+import {
+  BabelConfig,
+  WebpackConfig,
+  FrontityConfig,
+} from "@frontity/types/config";
 
 /**
  * Interface for babel configs.
  */
 export interface BabelConfigs {
   /**
-   * The transform options for module entry.
+   * The Babel configuration for module entry.
    */
-  module: TransformOptions;
+  module: BabelConfig;
 
   /**
-   * The transform options for ecmascript5 entry.
+   * The Babel configuration for ecmascript5 entry.
    */
-  es5: TransformOptions;
+  es5: BabelConfig;
 
   /**
-   * The transform options for server entry.
+   * The Babel configuration for server entry.
    */
-  server: TransformOptions;
+  server: BabelConfig;
 }
 
 /**
@@ -36,29 +29,19 @@ export interface BabelConfigs {
  */
 export interface WebpackConfigs {
   /**
-   * The module entry configuration.
+   * The module Webpack configuration.
    */
-  module: Configuration;
+  module: WebpackConfig;
 
   /**
-   * The ecmascript5 entry configuration.
+   * The ecmascript5 Webpack configuration.
    */
-  es5: Configuration;
+  es5: WebpackConfig;
 
   /**
-   * The server entry configuration.
+   * The server Webpack configuration.
    */
-  server: Configuration;
-}
-
-/**
- * Frontity configs.
- */
-export interface FrontityConfig {
-  /**
-   * The output directory.
-   */
-  outDir: string;
+  server: WebpackConfig;
 }
 
 /**

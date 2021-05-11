@@ -1,5 +1,4 @@
-import { Configuration } from "webpack";
-import { Target } from "../../../types";
+import { Target, WebpackConfig } from "@frontity/types/config";
 
 /**
  * The options of the {@link performance} function.
@@ -22,7 +21,7 @@ interface PerformanceOptions {
  */
 const performance = ({
   target,
-}: PerformanceOptions): Configuration["performance"] => ({
+}: PerformanceOptions): WebpackConfig["performance"] => ({
   ...(target === "server"
     ? {
         // Max size recommended for the server bundle: 5Mbs.

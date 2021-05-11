@@ -54,10 +54,11 @@ import HotServer from "./utils/hot-server";
 import generateEntryPoints from "./utils/entry-points";
 import getConfig from "../config";
 import getFrontity from "../config/frontity";
-import { Mode } from "../../types";
+import { Mode } from "@frontity/types/config";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
 import createSymlinks from "./utils/create-symlinks";
+import { readConfigurationsFromConfigFiles } from "./utils/read-configuration";
 
 /**
  * The options of the dev command.
@@ -158,8 +159,17 @@ export default async ({
     publicPath,
   });
 
+  // Read the extra configurations from files.
+  const extraConfigurations = await readConfigurationsFromConfigFiles(sites);
+
   // Get config for webpack, babel and frontity.
-  const config = getConfig({ mode, entryPoints, publicPath, analyze });
+  const config = getConfig({
+    mode,
+    entryPoints,
+    publicPath,
+    analyze,
+    extraConfigurations,
+  });
 
   // Build and wait until webpack finished the client first.
   // We need to do this because the server bundle needs to import
