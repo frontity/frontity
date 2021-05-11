@@ -1,5 +1,28 @@
 # Change Log
 
+## 1.13.0
+
+### Minor Changes
+
+- [`8d6dbd5e`](https://github.com/frontity/frontity/commit/8d6dbd5e9c2a1703c26786f05e56c50555debe37) [#798](https://github.com/frontity/frontity/pull/798) Thanks [@luisherranz](https://github.com/luisherranz)! - Send a `X-Frontity-Dev` header when Frontity is run in development mode. Useful to know what type of error should be shown in the Embedded mode plugin.
+
+## 1.12.0
+
+### Minor Changes
+
+- [`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee) [#774](https://github.com/frontity/frontity/pull/774) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add an `--analyze` option to the `dev` and `build` commands. The flag should be explicitly set in order to generate HTML files for bundle analysis.
+
+* [`86b2eff9`](https://github.com/frontity/frontity/commit/86b2eff993aac3e9360946a0c190e239b6f93abf) [#783](https://github.com/frontity/frontity/pull/783) Thanks [@luisherranz](https://github.com/luisherranz)! - Add an HMR flag to the Frontity state (`state.frontity.hmr`) that indicates if the code is run on an HMR refresh or not.
+
+### Patch Changes
+
+- [`aaa85073`](https://github.com/frontity/frontity/commit/aaa850731dc4b9defa51618f09a1ebf3427ce83b) [#764](https://github.com/frontity/frontity/pull/764) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Move the call of the afterSSR() actions to before taking the state snapshot. This way any `afterSSR()` action still has an option to modify the snapshot before sending it to the client. This is important for security as we delete the state.source.auth token in that action in wp-source.
+
+* [`89de8177`](https://github.com/frontity/frontity/commit/89de81770279d353f330298f82fe3abc718b5c52) [#777](https://github.com/frontity/frontity/pull/777) Thanks [@cristianbote](https://github.com/cristianbote)! - Due to a recent warning in Chrome for missusing preload instead of modulepreload for module files we need to replace the loadable linkType for assets that have to be preloaded as modules instead.
+
+* Updated dependencies [[`7111b3ce`](https://github.com/frontity/frontity/commit/7111b3cee7065816a885629cac93967f705d0969), [`641a1cf0`](https://github.com/frontity/frontity/commit/641a1cf00a02f78076e23b7918027d7219c08f58)]:
+  - @frontity/connect@1.3.0
+
 ## 1.11.1
 
 ### Patch Changes

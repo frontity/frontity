@@ -2,4 +2,4 @@
 "@frontity/twentytwenty-theme": patch
 ---
 
-Fix broken links in Readme.
+Fix some heading fonts and sizes.

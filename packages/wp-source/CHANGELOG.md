@@ -1,5 +1,30 @@
 # Change Log
 
+## 1.11.4
+
+### Patch Changes
+
+- [`3108535b`](https://github.com/frontity/frontity/commit/3108535b47030e6a693562076d6d9a6b0c53d59a) [#810](https://github.com/frontity/frontity/pull/810) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Remove a negative lookbehind in the `verboseRegExp` function.
+
+* [`df7d6c42`](https://github.com/frontity/frontity/commit/df7d6c4225d833a53159f1b3d1f90bb7e6d63655) [#806](https://github.com/frontity/frontity/pull/806) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix an incorrect regular expression which matches the link with internal redirections when a `homepage` is defined in `state.source`.
+
+## 1.11.3
+
+### Patch Changes
+
+- [`eb41d982`](https://github.com/frontity/frontity/commit/eb41d982552c8f542437cbedaee4335d23b7a483) [#771](https://github.com/frontity/frontity/pull/771) Thanks [@cristianbote](https://github.com/cristianbote)! - Bail out of redirection if frontity is running into embedded mode.
+
+* [`876256d8`](https://github.com/frontity/frontity/commit/876256d8b923508a94b1bfc1818045edc0f1b613) [#767](https://github.com/frontity/frontity/pull/767) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix a bug which caused an infinite loop if the 3xx redirection was "internal"
+  (meaning redirecting to the WP or Frontity domain) and the `location` of the
+  redirection matched the link as discussed in https://community.frontity.org/t/301-redirects-stored-in-wordpress-database/3032/28.
+
+- [`4f12c5ee`](https://github.com/frontity/frontity/commit/4f12c5ee37f3cd3cc4df963d7285e2bc458a4cb9) [#793](https://github.com/frontity/frontity/pull/793) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix the pattern of the internal redirection when `state.source.homepage` is defined, making links with a search param (`?s=some+term`) to keep using the post archive handler.
+
+* [`8083bd0a`](https://github.com/frontity/frontity/commit/8083bd0a07c8d61ece4f669bd8088912b91a4ab2) [#795](https://github.com/frontity/frontity/pull/795) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Add different schemas for categories and tags to avoid ID collisions inside `libraries.source.populate()`.
+
+* Updated dependencies [[`62e60216`](https://github.com/frontity/frontity/commit/62e60216198111626d82566507f7f208323ffeee), [`77e0a286`](https://github.com/frontity/frontity/commit/77e0a286ceb8274efb6a473c01c8f60d78b70225)]:
+  - frontity@1.15.0
+
 ## 1.11.2
 
 ### Patch Changes
