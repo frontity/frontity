@@ -4,6 +4,7 @@ ARG ARTIFACT_NAME
 WORKDIR /home/frontity-cli
 
 RUN apk add tree
-RUN mkdir -p /home/frontity-cli
-COPY ${ARTIFACT_NAME} /home/frontity-cli
-RUN npm install ${ARTIFACT_NAME} --production
+
+COPY dist /home/frontity-cli/dist/
+
+RUN cd ./dist && npm install --ignore-scripts
