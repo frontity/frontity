@@ -1,11 +1,5 @@
-import {
-  Mode,
-  Config,
-  EntryPoints,
-  FrontityConfig,
-  BabelConfigs,
-  WebpackConfigs,
-} from "../../types";
+import { Config, EntryPoints, BabelConfigs, WebpackConfigs } from "../../types";
+import { Mode, FrontityConfig } from "@frontity/types/config";
 import getBabel from "./babel";
 import getWebpack from "./webpack";
 import getFrontity from "./frontity";

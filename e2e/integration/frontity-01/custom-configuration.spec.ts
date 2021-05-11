@@ -11,6 +11,6 @@ describe("Custom Configuration", () => {
     cy.get("h1#one").should("not.exist");
     cy.get("h1").should("exist").should("have.text", "Default");
     cy.get("button#set-to-1").click();
-    cy.get("h1#one").should("exist").should("have.text", "One");
+    cy.get("h1#one").should("exist").should("have.text", "@@111@@");
   });
 });

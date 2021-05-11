@@ -51,7 +51,7 @@ import { getAllSites } from "@frontity/file-settings";
 import generateEntryPoints from "./utils/entry-points";
 import getConfig from "../config";
 import getFrontity from "../config/frontity";
-import { Mode } from "../../types";
+import { Mode } from "@frontity/types/config";
 import cleanBuildFolders from "./utils/clean-build-folders";
 import { webpackAsync } from "./utils/webpack";
 import { readConfigurationsFromConfigFiles } from "./utils/read-configuration";

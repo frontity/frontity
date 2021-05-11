@@ -1,12 +1,10 @@
-import { Configuration } from "webpack";
+import { WebpackConfigs, BabelConfigs, EntryPoints } from "../../../types";
 import {
-  Target,
   Mode,
-  WebpackConfigs,
-  BabelConfigs,
-  EntryPoints,
+  Target,
+  WebpackConfig,
   FrontityConfig,
-} from "../../../types";
+} from "@frontity/types/config";
 import name from "./name";
 import targets from "./targets";
 import devtool from "./devtool";
@@ -80,7 +78,7 @@ const getConfig = ({
   publicPath,
   frontity,
   analyze,
-}: ConfigOptions): Configuration => ({
+}: ConfigOptions): WebpackConfig => ({
   mode,
   name: name({ target }),
   target: targets({ target }),

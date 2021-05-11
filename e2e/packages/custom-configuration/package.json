@@ -4,6 +4,8 @@
   "private": true,
   "description": "Package to do e2e testing of Frontity's rendering",
   "dependencies": {
-    "frontity": "^1.14.1"
+    "frontity": "^1.14.1",
+    "@frontity/types": "^1.8.0",
+    "babel-plugin-search-and-replace": "^1.1.0"
   }
 }

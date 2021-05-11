@@ -19,7 +19,7 @@ interface SwitchChildProps {
  *
  * @returns React element.
  */
-const CustomOne: React.FC<SwitchChildProps> = () => <h1 id="one">One</h1>;
+const CustomOne: React.FC<SwitchChildProps> = () => <h1 id="one">##One##</h1>;
 
 /**
  * A React component that acts like the children of a Switch.
