@@ -80,7 +80,7 @@ jobs:
 
       - name: Build the docker container
         working-directory: ./packages/frontity
-        run: docker build -t frontity-cli --build-arg ARTIFACT_NAME="${{ steps.npm_pack.outputs.ARTIFACT_NAME }}"
+        run: docker build -t frontity-cli --build-arg ARTIFACT_NAME="${{steps.npm_pack.outputs.ARTIFACT_NAME }}" .
 
       - name: Run e2e tests for the CLI
         run: npm run test:e2e-cli
