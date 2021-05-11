@@ -34,6 +34,7 @@ jobs:
           CI: true
 
       - name: Run e2e tests for the CLI
+        working-directory: ./packages/frontity
         run: npm run test:e2e-cli
         env:
           CI: true

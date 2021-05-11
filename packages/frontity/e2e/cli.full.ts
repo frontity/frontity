@@ -44,7 +44,36 @@ test.concurrent(
       `);
 
     output = await runCommand("tree test-frontity-app/packages/");
-    expect(output).toMatchSnapshot();
+    expect(output).toMatchInlineSnapshot(`
+      "test-frontity-app/packages/
+      └── mars-theme
+          ├── CHANGELOG.md
+          ├── README.md
+          ├── package.json
+          ├── src
+          │   ├── components
+          │   │   ├── featured-media.js
+          │   │   ├── header.js
+          │   │   ├── index.js
+          │   │   ├── link.js
+          │   │   ├── list
+          │   │   │   ├── index.js
+          │   │   │   ├── list-item.js
+          │   │   │   ├── list.js
+          │   │   │   └── pagination.js
+          │   │   ├── loading.js
+          │   │   ├── menu-icon.js
+          │   │   ├── menu-modal.js
+          │   │   ├── menu.js
+          │   │   ├── nav.js
+          │   │   ├── page-error.js
+          │   │   ├── post.js
+          │   │   └── title.js
+          │   └── index.js
+          └── types.ts
+
+      4 directories, 21 files"
+    `);
   })
 );
 
@@ -73,7 +102,36 @@ test.concurrent(
     `);
 
     output = await runCommand("tree test-frontity-app/packages/");
-    expect(output).toMatchSnapshot();
+    expect(output).toMatchInlineSnapshot(`
+      "test-frontity-app/packages/
+      └── mars-theme
+          ├── CHANGELOG.md
+          ├── README.md
+          ├── package.json
+          ├── src
+          │   ├── components
+          │   │   ├── featured-media.js
+          │   │   ├── header.js
+          │   │   ├── index.js
+          │   │   ├── link.js
+          │   │   ├── list
+          │   │   │   ├── index.js
+          │   │   │   ├── list-item.js
+          │   │   │   ├── list.js
+          │   │   │   └── pagination.js
+          │   │   ├── loading.js
+          │   │   ├── menu-icon.js
+          │   │   ├── menu-modal.js
+          │   │   ├── menu.js
+          │   │   ├── nav.js
+          │   │   ├── page-error.js
+          │   │   ├── post.js
+          │   │   └── title.js
+          │   └── index.js
+          └── types.ts
+
+      4 directories, 21 files"
+    `);
   })
 );
 
@@ -105,7 +163,36 @@ test.concurrent(
     `);
 
     output = await runCommand("tree test-frontity-app/packages/");
-    expect(output).toMatchSnapshot();
+    expect(output).toMatchInlineSnapshot(`
+      "test-frontity-app/packages/
+      └── mars-theme
+          ├── CHANGELOG.md
+          ├── README.md
+          ├── package.json
+          ├── src
+          │   ├── components
+          │   │   ├── featured-media.js
+          │   │   ├── header.js
+          │   │   ├── index.js
+          │   │   ├── link.js
+          │   │   ├── list
+          │   │   │   ├── index.js
+          │   │   │   ├── list-item.js
+          │   │   │   ├── list.js
+          │   │   │   └── pagination.js
+          │   │   ├── loading.js
+          │   │   ├── menu-icon.js
+          │   │   ├── menu-modal.js
+          │   │   ├── menu.js
+          │   │   ├── nav.js
+          │   │   ├── page-error.js
+          │   │   ├── post.js
+          │   │   └── title.js
+          │   └── index.js
+          └── types.ts
+
+      4 directories, 21 files"
+    `);
   })
 );
 
@@ -149,7 +236,36 @@ test.concurrent(
     );
 
     output = await runCommand("tree test-frontity-app/packages/");
-    expect(output).toMatchSnapshot();
+    expect(output).toMatchInlineSnapshot(`
+      "test-frontity-app/packages/
+      └── mars-theme
+          ├── CHANGELOG.md
+          ├── README.md
+          ├── package.json
+          ├── src
+          │   ├── components
+          │   │   ├── featured-media.js
+          │   │   ├── header.js
+          │   │   ├── index.js
+          │   │   ├── link.js
+          │   │   ├── list
+          │   │   │   ├── index.js
+          │   │   │   ├── list-item.js
+          │   │   │   ├── list.js
+          │   │   │   └── pagination.js
+          │   │   ├── loading.js
+          │   │   ├── menu-icon.js
+          │   │   ├── menu-modal.js
+          │   │   ├── menu.js
+          │   │   ├── nav.js
+          │   │   ├── page-error.js
+          │   │   ├── post.js
+          │   │   └── title.js
+          │   └── index.js
+          └── types.ts
+
+      4 directories, 21 files"
+    `);
   })
 );
 
@@ -160,6 +276,8 @@ test.concurrent(
     await runCommand('git config --global user.email "user@frontity.com"');
     await runCommand('git config --global user.name "Test User"');
     await runCommand("git init test-frontity-app");
+
+    // Create the .gitignore
     await runCommand('echo "test" > test-frontity-app/.gitignore');
 
     await runCommand(
@@ -184,7 +302,8 @@ test.concurrent(
 
     output = await runCommand("cat test-frontity-app/.gitignore");
 
-    // The first line should be `test`
+    // The first line should be `test` because it was the "original" content of
+    // the .gitignore file we created in the beginning of this test
     expect(output).toMatchInlineSnapshot(`
       "test
       node_modules
@@ -192,6 +311,35 @@ test.concurrent(
     `);
 
     output = await runCommand("tree test-frontity-app/packages/");
-    expect(output).toMatchSnapshot();
+    expect(output).toMatchInlineSnapshot(`
+      "test-frontity-app/packages/
+      └── mars-theme
+          ├── CHANGELOG.md
+          ├── README.md
+          ├── package.json
+          ├── src
+          │   ├── components
+          │   │   ├── featured-media.js
+          │   │   ├── header.js
+          │   │   ├── index.js
+          │   │   ├── link.js
+          │   │   ├── list
+          │   │   │   ├── index.js
+          │   │   │   ├── list-item.js
+          │   │   │   ├── list.js
+          │   │   │   └── pagination.js
+          │   │   ├── loading.js
+          │   │   ├── menu-icon.js
+          │   │   ├── menu-modal.js
+          │   │   ├── menu.js
+          │   │   ├── nav.js
+          │   │   ├── page-error.js
+          │   │   ├── post.js
+          │   │   └── title.js
+          │   └── index.js
+          └── types.ts
+
+      4 directories, 21 files"
+    `);
   })
 );
