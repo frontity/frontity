@@ -8,7 +8,7 @@ import WpComments, {
   WpComment,
 } from "../types";
 import { Data } from "@frontity/source/types";
-import { ResolveState } from "../../types/src/utils";
+import { ResolveState } from "@frontity/types/utils";
 
 /**
  * Recursively walk the comment tree and insert the new comment in the

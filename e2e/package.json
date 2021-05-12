@@ -24,9 +24,9 @@
     "@wdio/mocha-framework": "^7.1.2",
     "@wdio/spec-reporter": "^7.1.1",
     "@wdio/sync": "^7.1.1",
-    "chromedriver": "^89.0.0",
     "amphtml-validator": "^1.0.34",
     "browserstack-cypress-cli": "^1.7.1",
+    "chromedriver": "^89.0.0",
     "cypress": "^6.7.1",
     "cypress-plugin-snapshots": "^1.4.3",
     "execa": "^4.0.3",
@@ -34,10 +34,10 @@
     "forever": "^3.0.4",
     "http-server": "^0.12.3",
     "minimist": "^1.2.5",
-    "node-fetch": "^2.6.1",
-    "wait-on": "^5.2.1",
     "node-env-run": "^4.0.2",
+    "node-fetch": "^2.6.1",
     "selenium-side-runner": "^3.17.0",
+    "wait-on": "^5.2.1",
     "wdio-chromedriver-service": "^7.0.0"
   },
   "dependencies": {

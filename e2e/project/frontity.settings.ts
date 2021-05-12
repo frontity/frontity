@@ -457,6 +457,10 @@ const settings: Settings<
     packages: ["e2e-custom-render"],
   },
   {
+    name: "custom-configuration",
+    packages: ["e2e-custom-configuration", "e2e-custom-configuration-theme"],
+  },
+  {
     name: "amp",
     packages: ["@frontity/amp", "e2e-static-theme"],
   },

@@ -1,5 +1,4 @@
-import { Configuration } from "webpack";
-import { Mode } from "../../../types";
+import { Mode, WebpackConfig } from "@frontity/types/config";
 
 /**
  * The options of the {@link devtools} function.
@@ -20,7 +19,7 @@ interface DevToolsOptions {
  *
  * @returns The configuration object for Webpack.
  */
-const devtools = ({ mode }: DevToolsOptions): Configuration["devtool"] =>
+const devtools = ({ mode }: DevToolsOptions): WebpackConfig["devtool"] =>
   mode === "development" ? "eval-source-map" : false;
 
 export default devtools;
