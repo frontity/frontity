@@ -64,7 +64,7 @@ jobs:
 
       - name: Build the docker container
         working-directory: ./packages/frontity
-        run: docker build --build-arg alpine-version="${{ matrix.alpine-version }}" -t frontity-cli .
+        run: docker build --build-arg ALPINE_VERSION="${{ matrix.alpine-version }}" -t frontity-cli .
 
       - name: Run e2e tests for the CLI
         run: npm run test:e2e-cli-full
