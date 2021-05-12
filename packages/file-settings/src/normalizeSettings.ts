@@ -1,26 +1,44 @@
 import merge from "ramda/src/mergeDeepRight";
 import validateSettings from "./validateSettings";
 import { NormalizedSettings } from "../types";
-import Settings, {
-  MultiSettings,
-  MonoSettings,
-} from "@frontity/types/src/settings";
+import { Settings } from "@frontity/types";
+import { MultiSettings, MonoSettings } from "@frontity/types/settings";
 
+/**
+ * The default settings of a site.
+ */
 const defaultSettings = {
   name: "default",
   mode: "default",
   state: {},
 };
 
+/**
+ * The default state of a package.
+ */
 const defaultPackage: {
+  /**
+   * Whether the package is active or not.
+   */
   active: boolean;
-  state: object;
+
+  /**
+   * The state that is merged when the package is active.
+   */
+  state: Record<string, unknown>;
 } = {
   active: true,
   state: {},
 };
 
-// This function merges the imported settings with the default settings.
+/**
+ * Merge the imported settings with the default settings.
+ *
+ * @param options - The settings. Usually defined in the `frontity.settings.js`
+ * file.
+ *
+ * @returns The settings, after being merged with the defaults.
+ */
 const mergeSettings = ({
   packages,
   ...settings
@@ -39,16 +57,21 @@ const mergeSettings = ({
   ),
 });
 
-// This function normalizes the imported settings.
+/**
+ * Normalize the imported settings.
+ *
+ * @param settings - The settings of the Frontity project. Usually defined in
+ * the `frontity.settings.js` file.
+ *
+ * @returns The normalized settings.
+ */
 const normalizeSettings = (settings: Settings): NormalizedSettings[] => {
-  // TODO
-  // Default settings and validator from packages
-  // should be imported and used with each package.
-
   // Validate settings before the merge.
   validateSettings(settings);
+
   // Merge mono settings.
   if (!Array.isArray(settings)) return [mergeSettings(settings)];
+
   // Merge multi settings.
   return settings.map((s) => mergeSettings(s));
 };

@@ -1,5 +1,4 @@
-import { Configuration } from "webpack";
-import { Mode } from "../../../types";
+import { Mode, WebpackConfig } from "@frontity/types/config";
 
 /**
  * The options of the {@link stats} function.
@@ -20,7 +19,7 @@ interface StatsOptions {
  *
  * @returns The configuration object for Webpack.
  */
-const stats = ({ mode }: StatsOptions): Configuration["stats"] =>
+const stats = ({ mode }: StatsOptions): WebpackConfig["stats"] =>
   mode === "development"
     ? {
         all: false,
