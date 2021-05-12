@@ -17,7 +17,7 @@ beforeAll(async () => {
   // Compile the TS source to JS
   await execa.command("npm run build", { stdio: "inherit" });
 
-  // Build the "base" docker container that contains our CLI
+  // Build the "base" docker image that contains our CLI
   await execa.command(`docker build -t frontity-cli .`, {
     stdio: "inherit",
   });
