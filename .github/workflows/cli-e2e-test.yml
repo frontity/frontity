@@ -43,16 +43,11 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        alpine-version: [10-alpine, alpine]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - name: Setup npm cache
         uses: actions/cache@v2
@@ -69,7 +64,7 @@ jobs:
 
       - name: Build the docker container
         working-directory: ./packages/frontity
-        run: docker build -t frontity-cli .
+        run: docker build --build-arg alpine-version="${{ matrix.alpine-version }}" -t frontity-cli .
 
       - name: Run e2e tests for the CLI
         run: npm run test:e2e-cli-full

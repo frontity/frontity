@@ -1,4 +1,6 @@
-FROM node:alpine
+ARG alpine-version=alpine
+
+FROM node:$alpine-version
 
 # Set the working directory for all subsequent RUN / COPY commands.
 # The frontity-cli will be created by docker automatically.
