@@ -1,5 +1,14 @@
 # @frontity/twentytwenty-theme
 
+## 1.3.3
+
+### Patch Changes
+
+- [`25d73283`](https://github.com/frontity/frontity/commit/25d73283527eb3a97b376a7da2b3fe0ee5a4dd43) [#813](https://github.com/frontity/frontity/pull/813) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Fix some heading fonts and sizes.
+
+- Updated dependencies [[`2b356a95`](https://github.com/frontity/frontity/commit/2b356a95940a2aaf39a2a32bc23ef10c9100bc07)]:
+  - @frontity/html2react@1.7.0
+
 ## 1.3.2
 
 ### Patch Changes

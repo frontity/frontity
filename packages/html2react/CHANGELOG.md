@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.0
+
+### Minor Changes
+
+- [`2b356a95`](https://github.com/frontity/frontity/commit/2b356a95940a2aaf39a2a32bc23ef10c9100bc07) [#815](https://github.com/frontity/frontity/pull/815) Thanks [@luisherranz](https://github.com/luisherranz)! - Export a Slot Block processor that turns blocks created with the [Frontity Slot Block](https://github.com/frontity/frontity-slot-block) plugin in real `<Slot>` components.
+
 ## 1.6.2
 
 ### Patch Changes
