@@ -2,6 +2,10 @@ import { readdir, readFile, remove } from "fs-extra";
 import { resolve as resolvePath } from "path";
 import execa from "execa";
 
+// We need to set a high timeout because running `frontity create` takes a long
+// time.
+jest.setTimeout(180000);
+
 describe("npx frontity create", () => {
   it("should create the initial files", async () => {
     try {
