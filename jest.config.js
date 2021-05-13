@@ -6,7 +6,7 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest",
     "^.+\\.jsx?$": ["babel-jest", { configFile: "../../jest.babel.config.js" }],
   },
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(j|t)sx?$",
+  testRegex: "__tests__\\/.*\\.tests?\\.[jt]sx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   testPathIgnorePatterns: ["/mocks/", "/__utilities__/"],
   collectCoverageFrom: [
