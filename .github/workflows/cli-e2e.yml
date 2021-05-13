@@ -1,9 +1,9 @@
-name: CLI e2e tests
+name: cli e2e
 
 on: [pull_request]
 
 jobs:
-  cli-e2e-tests:
+  cli-e2e-filesystem:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -34,11 +34,12 @@ jobs:
           CI: true
 
       - name: Run e2e tests for the CLI
-        run: npm run test:e2e-cli
+        run: npm run test:cli-e2e:filesystem
+        working-directory: ./packages/frontity
         env:
           CI: true
 
-  cli-e2e-tests-full-suite:
+  cli-e2e-docker:
     runs-on: ubuntu-latest
 
     strategy:
@@ -67,7 +68,7 @@ jobs:
         run: docker build --build-arg ALPINE_VERSION="${{ matrix.alpine-version }}" -t frontity-cli .
 
       - name: Run e2e tests for the CLI
-        run: npm run test:e2e-cli-full
+        run: npm run test:cli-e2e:docker
         working-directory: ./packages/frontity
         env:
           CI: true

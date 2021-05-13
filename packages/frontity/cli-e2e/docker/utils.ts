@@ -1,5 +1,22 @@
 import execa from "execa";
-import { TestContainerCallbackOptions } from "../types";
+
+/**
+ * Options for the {@link testContainer} function.
+ */
+export interface TestContainerCallbackOptions {
+  /**
+   * The ID of the docker container.
+   */
+  containerId: string;
+
+  /**
+   * The function used to actually run the command inside the container.
+   */
+  runCommand: (
+    cmd: string,
+    options?: Record<string, any>
+  ) => ReturnType<typeof runCommand>;
+}
 
 /**
  * Start a container and return its ID.
@@ -50,9 +67,9 @@ export async function runCommand(
  * @param callback - The callback function.
  * @returns - A function ready to be passed to a jest test.
  */
-export const testContainer = (
+export const testContainer = async (
   callback: (callback: TestContainerCallbackOptions) => any
-) => async () => {
+) => {
   let containerId: string;
   try {
     containerId = await startContainer();
