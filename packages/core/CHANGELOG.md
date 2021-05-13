@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.14.0
+
+### Minor Changes
+
+- [`e7997268`](https://github.com/frontity/frontity/commit/e7997268bc7dd076daeca04951bbb1bc7e778183) [#812](https://github.com/frontity/frontity/pull/812) Thanks [@cristianbote](https://github.com/cristianbote)! - Introduce the possibility to customize Webpack, Babel, and the build directory with a `frontity.config.js` file.
+
 ## 1.13.0
 
 ### Minor Changes
