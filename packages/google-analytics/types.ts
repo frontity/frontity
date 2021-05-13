@@ -1,6 +1,10 @@
 import * as React from "react";
-import { Action, MergePackages, Package } from "frontity/types";
-import Analytics, { Pageview, Event } from "@frontity/analytics/types";
+import { Action, MergePackages, Package, Frontity } from "frontity/types";
+import Analytics, {
+  Pageview,
+  Event,
+  AmpConfig,
+} from "@frontity/analytics/types";
 
 declare global {
   /**
@@ -92,6 +96,26 @@ interface GoogleAnalyticsEvent extends Event {
 }
 
 /**
+ * AMP config with GoogleAnalytics-specific variables.
+ */
+export interface GoogleAnalyticsAmpConfig extends AmpConfig {
+  /**
+   * AmpConfig vars.
+   */
+  vars?: AmpConfig["vars"] & {
+    /**
+     * Primary tracking ID.
+     */
+    gtag_id?: string;
+
+    /**
+     * Object containing all tracking IDs and their configuration.
+     */
+    config?: Record<string, unknown>;
+  };
+}
+
+/**
  * Analytics package to use Google Analytics with Frontity.
  */
 interface GoogleAnalytics extends Package {
@@ -127,6 +151,17 @@ interface GoogleAnalytics extends Package {
        * List of tracking IDs associated to a Google Analytics account.
        */
       trackingIds?: string[];
+
+      /**
+       * JSON configuration object to include inside the `<amp-analytics>` tags,
+       * useful to add variables and triggers. Note that this props is only used
+       * when the `@frontity/amp` package is installed.
+       *
+       * See
+       * https://developers.google.com/analytics/devguides/collection/amp-analytics/
+       * for more info about how to define this config object.
+       */
+      ampConfig?: GoogleAnalyticsAmpConfig;
     };
   };
 
@@ -183,6 +218,6 @@ interface GoogleAnalytics extends Package {
 /**
  * Package types used internally by GoogleAnalytics.
  */
-export type Packages = MergePackages<GoogleAnalytics, Analytics>;
+export type Packages = MergePackages<Frontity, GoogleAnalytics, Analytics>;
 
 export default GoogleAnalytics;
