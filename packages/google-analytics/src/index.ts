@@ -61,7 +61,9 @@ const googleAnalytics: GoogleAnalytics = {
       pageviews: { googleAnalytics: true },
       events: { googleAnalytics: true },
     },
-    googleAnalytics: {},
+    googleAnalytics: {
+      ampConfig: {},
+    },
   },
 };
 
