@@ -9,6 +9,7 @@ import GoogleAdManager from "@frontity/google-ad-manager/types";
 import SmartAdserver from "@frontity/smart-adserver/types";
 import Yoast from "@frontity/yoast/types";
 import HeadTags from "@frontity/head-tags/types";
+import MarsTheme from "@frontity/mars-theme/types";
 
 const settings: Settings<
   | TinyRouter
@@ -20,6 +21,7 @@ const settings: Settings<
   | SmartAdserver
   | Yoast
   | HeadTags
+  | MarsTheme
 > = [
   {
     name: "head",
@@ -509,6 +511,37 @@ const settings: Settings<
             },
           },
         },
+      },
+    ],
+  },
+  {
+    name: "amp-mars-theme",
+    mode: "amp",
+    packages: [
+      "@frontity/amp",
+      "@frontity/tiny-router",
+      "@frontity/html2react",
+      {
+        name: "@frontity/mars-theme",
+        state: {
+          theme: {
+            menu: [
+              ["Home", "/"],
+              ["Nature", "/category/nature/"],
+              ["Travel", "/category/travel/"],
+              ["Japan", "/tag/japan/"],
+              ["About Us", "/about-us/"],
+            ],
+            featured: {
+              showOnList: true,
+              showOnPost: true,
+            },
+          },
+        },
+      },
+      {
+        name: "@frontity/wp-source",
+        state: { source: { url: "http://localhost:8080/" } },
       },
     ],
   },
