@@ -1,14 +1,22 @@
 {
   "name": "@frontity/with-preact",
   "version": "1.0.0",
-  "description": "## Table of contents",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "The frontity package used to alias react to preact",
+  "homepage": "https://github.com/frontity/frontity",
+  "license": "Apache-2.0",
+  "keywords": [
+    "frontity",
+    "frontity-with-preact",
+    "frontity-preact",
+    "preact"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/frontity.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontity/frontity/issues"
+  },
   "dependencies": {
       "preact": "^10.5.13",
       "preact-render-to-string": "^5.1.19"
