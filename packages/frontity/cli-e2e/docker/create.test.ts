@@ -1,12 +1,7 @@
-/* eslint-disable no-irregular-whitespace */
 import execa from "execa";
 import { readFile } from "fs-extra";
 import { resolve as resolvePath } from "path";
 import { testContainer } from "./utils";
-
-// We need to set a high timeout because building the docker container and
-// running `frontity create` takes a long time.
-jest.setTimeout(180000);
 
 beforeAll(async () => {
   if (process.env.CI) return;

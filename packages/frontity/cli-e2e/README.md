@@ -19,7 +19,7 @@ container so they can create and destroy files without affecting the host's file
 In order to test cross-platform compatibility, we also run some "basic" tests
 which use the _filesystem_ (hence the name) of the machine on which the tests are
 run. Those tests can be run locally, but are really meant for GitHub Actions, where we
-can test that they run successfully on Linux, Windows and MacOS. See the [workflow
+can test that they run successfully on Linux, Windows and macOS. See the [workflow
 file](/.github/workflows/cli-e2e.yml) for more details.
 
 ## Requirements
@@ -49,11 +49,6 @@ E.g. when creating new `docker` tests you will probably want to use the
 `testContainer` function from [`./utils.ts`](/packages/frontity/cli-e2e/docker/utils.ts), which is meant to facilitate creating
 the test cases with `jest` by starting a new container before the test run and
 removing it after the test completes.
-
-#### Timeouts
-
-It's recommended to use `jest.setTimeout()` in your test files and set it to a value large
-enough so that `jest` does not time out before the CLI command has finished running.
 
 #### Writing tests that can be run both on CI and locally
 
