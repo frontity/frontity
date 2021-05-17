@@ -16,7 +16,6 @@ import {
   isEagerRedirection,
   fetchRedirection,
   shouldBailRedirecting,
-  verboseRegExp,
 } from "./utils";
 
 const actions: WpSource["actions"]["source"] = {
@@ -274,21 +273,28 @@ const actions: WpSource["actions"]["source"] = {
 
     if (homepage) {
       const homePath = concatLink(subdirectory);
-      const regExp = verboseRegExp`
-        ^                // Beginning of line.
-        ${homePath}      // Path to the homepage.
-        (                // Must be followed by:
-          $|             // 1. End of line or...
-          #|             // 2. Hashtag or...
-          \?             // 3. Query...
-          (?!            //    not containing
-            ([^&#]+&)*   //    ...any parameter (0..n)
-            s=           //    ...and the search param (s=)
-          )
-        )
-      `;
 
-      const pattern = `RegExp:${regExp}`;
+      /**
+       * RegExp that matches the home path when it doesn't contain `s` param,
+       * preventing search pages to be handled by `postTypeHandler`.
+       *
+       * @remarks Code explanation:
+       *
+       * ```
+       * ^                // Beginning of line.
+       * ${homePath}      // Path to the homepage.
+       * (                // Must be followed by:
+       *   $|             // 1. End of line or...
+       *   #|             // 2. Hashtag or...
+       *   \?             // 3. Query...
+       *   (?!            //    not containing
+       *     ([^&#]+&)*   //    ...any parameter (0..n)
+       *     s=           //    ...and the search param (s=)
+       *   )
+       * )
+       * ```
+       */
+      const pattern = `RegExp:^${homePath}($|#|\\?(?!([^&#]+&)*s=))`;
 
       redirections.push({
         name: "homepage",
