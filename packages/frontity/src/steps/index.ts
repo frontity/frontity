@@ -1,6 +1,6 @@
 import { EOL } from "os";
 import { resolve as resolvePath } from "path";
-import { exec } from "child_process";
+import { execSync, exec } from "child_process";
 import { promisify } from "util";
 import {
   ensureDir,
@@ -10,6 +10,7 @@ import {
   createWriteStream,
   remove,
   pathExists,
+  appendFileSync,
 } from "fs-extra";
 import { extract } from "tar";
 import fetch from "node-fetch";
@@ -308,6 +309,70 @@ export const downloadFavicon = async (path: string) => {
   const fileStream = createWriteStream(resolvePath(path, "favicon.ico"));
   response.body.pipe(fileStream);
   await new Promise((resolve) => fileStream.on("finish", resolve));
+};
+
+/**
+ * Initializes a new git repository.
+ *
+ * @param path - The path where git should be initialized.
+ */
+export const initializeGit = async (path: string) => {
+  try {
+    execSync("git init", { cwd: path, stdio: "ignore" });
+    execSync("git add .", { cwd: path, stdio: "ignore" });
+    execSync('git commit -m "Initialized with Frontity"', {
+      cwd: path,
+      stdio: "ignore",
+    });
+  } catch (e) {
+    // If there is any issue we want to revert to "pre-git" state
+    await remove(resolvePath(path, ".git"));
+
+    // Rethrow the error so that it can be caught by the `create` command.
+    throw e;
+  }
+};
+
+/**
+ * Creates a .gitignore file.
+ *
+ * @param path - The path where .gitignore file should be created.
+ * @returns - A promise which resolves with a cleanup function which
+ * should be called if any subsequent step fails.
+ */
+export const createGitignore = async (path: string) => {
+  const fileTemplate = await readFile(
+    resolvePath(__dirname, "../../templates/gitignore-template"),
+    {
+      encoding: "utf8",
+    }
+  );
+
+  const gitignorePath = resolvePath(path, ".gitignore");
+  const gitignoreExists = await pathExists(gitignorePath);
+
+  if (gitignoreExists) {
+    // Keep the existing .gitignore in memory in case we need to revert to it later.
+    const backupGitignore = await readFile(gitignorePath, {
+      encoding: "utf8",
+    });
+
+    // Append if there's already a `.gitignore` file
+    appendFileSync(gitignorePath, "node_modules\nbuild");
+
+    // Return a "cleanup" function
+    return async () => {
+      await writeFile(gitignorePath, backupGitignore);
+    };
+  } else {
+    await writeFile(gitignorePath, fileTemplate);
+
+    // Return a "cleanup" function
+    return async () => {
+      // Remove the .gitignore file
+      await remove(gitignorePath);
+    };
+  }
 };
 
 /**
