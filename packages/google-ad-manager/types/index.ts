@@ -1,5 +1,6 @@
 import { Package, Fill } from "frontity/types";
 import * as React from "react";
+export * from "./amp";
 
 declare global {
   /**
