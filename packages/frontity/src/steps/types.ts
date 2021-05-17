@@ -20,6 +20,11 @@ export type CreateCommandOptions = {
   typescript?: boolean;
 
   /**
+   * Skip creating a git repository for a new project.
+   */
+  noGit?: boolean;
+
+  /**
    * Frontity packages that need to be installed.
    */
   packages?: string[];
