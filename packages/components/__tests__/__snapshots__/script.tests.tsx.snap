@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Script should execute the code 1`] = `null`;
+
+exports[`Script should not render a script tag without code or src 1`] = `null`;
+
+exports[`Script should not render the passed children with src 1`] = `null`;
+
+exports[`Script should remove the script tag at unmount 1`] = `null`;
+
+exports[`Script should render a script tag with src 1`] = `null`;
