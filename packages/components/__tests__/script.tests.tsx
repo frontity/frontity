@@ -8,17 +8,16 @@ describe("Script", () => {
       root = create(<Script id="script-1">{"let index = 0;"}</Script>);
     });
 
+    // This is `null`. This is here to make sure the virtual dom tree does not return anything.
     expect(root.toJSON()).toMatchSnapshot();
     expect(document.body.querySelector("#script-1")).toBeNull();
   });
 
   test("should render a script tag with src", () => {
-    let root;
     act(() => {
-      root = create(<Script id="script-2" src="source" />);
+      create(<Script id="script-2" src="source" />);
     });
 
-    expect(root.toJSON()).toMatchSnapshot();
     expect(document.body.querySelector("#script-2")).toMatchInlineSnapshot(`
       <script
         id="script-2"
@@ -28,9 +27,8 @@ describe("Script", () => {
   });
 
   test("should not render the passed children with src", () => {
-    let root;
     act(() => {
-      root = create(
+      create(
         <Script
           id="script-3"
           src="source-with-children"
@@ -38,7 +36,6 @@ describe("Script", () => {
       );
     });
 
-    expect(root.toJSON()).toMatchSnapshot();
     expect(document.body.querySelector("#script-3")).toMatchInlineSnapshot(`
       <script
         id="script-3"
@@ -48,12 +45,10 @@ describe("Script", () => {
   });
 
   test("should execute the code", () => {
-    let root;
     act(() => {
-      root = create(<Script id="script-4" code="global.__i__ = Infinity;" />);
+      create(<Script id="script-4" code="global.__i__ = Infinity;" />);
     });
 
-    expect(root.toJSON()).toMatchSnapshot();
     expect(document.body.querySelector("#script-4")).toBeNull();
     expect(global["__i__"]).toEqual(Infinity);
   });
@@ -64,7 +59,6 @@ describe("Script", () => {
       root = create(<Script id="script-5" src="source-for-unmount" />);
     });
 
-    expect(root.toJSON()).toMatchSnapshot();
     expect(document.body.querySelector("#script-5")).toMatchInlineSnapshot(`
       <script
         id="script-5"
