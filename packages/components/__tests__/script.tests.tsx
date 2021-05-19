@@ -8,8 +8,8 @@ describe("Script", () => {
       root = create(<Script id="script-1">{"let index = 0;"}</Script>);
     });
 
-    // This is `null`. This is here to make sure the virtual dom tree does not return anything.
-    expect(root.toJSON()).toMatchSnapshot();
+    // This is here to make sure the virtual dom tree does not return anything.
+    expect(root.toJSON()).toMatchInlineSnapshot(`null`);
     expect(document.body.querySelector("#script-1")).toBeNull();
   });
 
