@@ -1,5 +1,11 @@
-import { Package, Fill } from "frontity/types";
-import * as React from "react";
+import {
+  Package,
+  Fill,
+  Frontity,
+  MergePackages,
+  LoadableComponent,
+} from "frontity/types";
+import { AmpAdProps } from "./amp";
 export * from "./amp";
 
 declare global {
@@ -92,17 +98,6 @@ interface GoogleAdManager extends Package {
   name: "@frontity/google-ad-manager";
 
   /**
-   * Root elements exposed by this package.
-   */
-  roots: {
-    /**
-     * Google Ad Manager root element.
-     * It simply adds the Google Publisher Tag library.
-     */
-    googleAdManager: React.FC;
-  };
-
-  /**
    * The state exposed by this package.
    */
   state: {
@@ -173,10 +168,23 @@ interface GoogleAdManager extends Package {
          *
          * @returns A React element with the ad.
          */
-        GooglePublisherTag: React.FC<GooglePublisherTagProps>;
+        GooglePublisherTag: LoadableComponent<GooglePublisherTagProps>;
+
+        /**
+         * AMP ad tag for Google Ad Manager.
+         *
+         * @param props - Props of type {@link AmpAdProps}.
+         * @returns Loadable component that representing a <amp-ad> tag.
+         */
+        AmpAd: LoadableComponent<AmpAdProps>;
       };
     };
   };
 }
+
+/**
+ * Package types used internally by GoogleAdManager.
+ */
+export type Packages = MergePackages<Frontity, GoogleAdManager>;
 
 export default GoogleAdManager;
