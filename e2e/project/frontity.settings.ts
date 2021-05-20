@@ -517,6 +517,11 @@ const settings: Settings<
   {
     name: "amp-mars-theme",
     mode: "amp",
+    state: {
+      frontity: {
+        url: "https://localhost:3001/",
+      },
+    },
     packages: [
       "@frontity/amp",
       "@frontity/tiny-router",
