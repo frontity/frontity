@@ -21,7 +21,7 @@ describe("npx frontity create", () => {
           "package.json",
           "packages",
         ]
-      `);
+        `);
     } finally {
       await remove("test-frontity-app");
     }
