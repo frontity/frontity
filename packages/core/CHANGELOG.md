@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.14.0
+
+### Minor Changes
+
+- [`e7997268`](https://github.com/frontity/frontity/commit/e7997268bc7dd076daeca04951bbb1bc7e778183) [#812](https://github.com/frontity/frontity/pull/812) Thanks [@cristianbote](https://github.com/cristianbote)! - Introduce the possibility to customize Webpack, Babel, and the build directory with a `frontity.config.js` file.
+
+## 1.13.0
+
+### Minor Changes
+
+- [`8d6dbd5e`](https://github.com/frontity/frontity/commit/8d6dbd5e9c2a1703c26786f05e56c50555debe37) [#798](https://github.com/frontity/frontity/pull/798) Thanks [@luisherranz](https://github.com/luisherranz)! - Send a `X-Frontity-Dev` header when Frontity is run in development mode. Useful to know what type of error should be shown in the Embedded mode plugin.
+
 ## 1.12.0
 
 ### Minor Changes

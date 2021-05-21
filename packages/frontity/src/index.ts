@@ -7,7 +7,7 @@ export { default as loadable } from "@loadable/component";
 export { observe, unobserve, batch, useConnect } from "@frontity/connect";
 export { error, warn } from "@frontity/error";
 
-import { ConnectFunction, CreateStore } from "@frontity/types/src/connect";
+import { ConnectFunction, CreateStore } from "@frontity/types/connect";
 import originalConnect, {
   createStore as originalCreateStore,
 } from "@frontity/connect";

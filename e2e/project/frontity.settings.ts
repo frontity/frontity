@@ -457,6 +457,10 @@ const settings: Settings<
     packages: ["e2e-custom-render"],
   },
   {
+    name: "custom-configuration",
+    packages: ["e2e-custom-configuration", "e2e-custom-configuration-theme"],
+  },
+  {
     name: "amp",
     packages: ["@frontity/amp", "e2e-static-theme"],
   },
@@ -501,6 +505,36 @@ const settings: Settings<
             ampConfig: {
               vars: {
                 someProp: "someValue",
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
+    name: "amp-google-analytics",
+    mode: "amp",
+    packages: [
+      "@frontity/amp",
+      {
+        name: "@frontity/google-analytics",
+        state: {
+          googleAnalytics: {
+            trackingIds: ["UA-XXXXXXXX-X", "UA-YYYYYYYY-Y"],
+            ampConfig: {
+              vars: {
+                someProp: "someValue",
+              },
+              triggers: {
+                button: {
+                  selector: "#the-button",
+                  on: "click",
+                  vars: {
+                    event_name: "login",
+                    method: "Google",
+                  },
+                },
               },
             },
           },

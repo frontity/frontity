@@ -7,7 +7,7 @@ import {
   IgnorePlugin,
 } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import { Target, Mode } from "../../../types";
+import { Target, Mode } from "@frontity/types/config";
 
 /**
  * The options for the {@link plugins} function.

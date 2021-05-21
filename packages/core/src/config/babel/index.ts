@@ -1,6 +1,6 @@
-import { TransformOptions } from "@babel/core";
 import { TargetsOptions } from "@babel/preset-env";
-import { Target, BabelConfigs } from "../../../types";
+import { Target, BabelConfig } from "@frontity/types/config";
+import { BabelConfigs } from "../../../types";
 
 const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
   /**
@@ -52,7 +52,7 @@ const targets: Record<"module" | "es5" | "server", TargetsOptions> = {
  *
  * @returns The Babel configuration object.
  */
-const getConfig = (target: Target): TransformOptions => {
+const getConfig = (target: Target): BabelConfig => {
   const presets = [
     // Instead of using a TS transpiler, this removes the typescript code.
     "@babel/preset-typescript",

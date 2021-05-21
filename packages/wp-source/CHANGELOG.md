@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.11.4
+
+### Patch Changes
+
+- [`3108535b`](https://github.com/frontity/frontity/commit/3108535b47030e6a693562076d6d9a6b0c53d59a) [#810](https://github.com/frontity/frontity/pull/810) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Remove a negative lookbehind in the `verboseRegExp` function.
+
+* [`df7d6c42`](https://github.com/frontity/frontity/commit/df7d6c4225d833a53159f1b3d1f90bb7e6d63655) [#806](https://github.com/frontity/frontity/pull/806) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Fix an incorrect regular expression which matches the link with internal redirections when a `homepage` is defined in `state.source`.
+
 ## 1.11.3
 
 ### Patch Changes

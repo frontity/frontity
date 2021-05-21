@@ -59,6 +59,15 @@ const cssReset = css`
   }
 `;
 
+/**
+ * Styles for Document Setup.
+ *
+ * See `1. Document Setup` at
+ * https://themes.trac.wordpress.org/browser/twentytwenty/1.7/style.css.
+ *
+ * @param colors - Object with color definitions, from `state.theme.colors`.
+ * @returns Serialized style.
+ */
 const documentSetup = (colors) => css`
   html {
     font-size: 62.5%; /* 1rem = 10px */
@@ -98,6 +107,15 @@ const accessibilitySettings = css`
   }
 `;
 
+/**
+ * Styles for Element Base.
+ *
+ * See `2. Element Base` at
+ * https://themes.trac.wordpress.org/browser/twentytwenty/1.7/style.css.
+ *
+ * @param colors - Object with color definitions, from `state.theme.colors`.
+ * @returns Serialized style.
+ */
 const elementBase = (colors) => css`
   main {
     display: block;
@@ -234,6 +252,67 @@ const elementBase = (colors) => css`
   }
 `;
 
+const elementBase700 = css`
+  @media (min-width: 700px) {
+    h1,
+    .heading-size-1,
+    h2,
+    .heading-size-2,
+    h3,
+    .heading-size-3 {
+      margin: 6rem auto 3rem;
+    }
+
+    h4,
+    .heading-size-4,
+    h5,
+    .heading-size-5,
+    h6,
+    .heading-size-6 {
+      margin: 4.5rem auto 2.5rem;
+    }
+
+    h1,
+    .heading-size-1 {
+      font-size: 6.4rem;
+    }
+
+    h2,
+    .heading-size-2 {
+      font-size: 4.8rem;
+    }
+
+    h3,
+    .heading-size-3 {
+      font-size: 4rem;
+    }
+
+    h4,
+    .heading-size-4 {
+      font-size: 3.2rem;
+    }
+
+    h5,
+    .heading-size-5 {
+      font-size: 2.4rem;
+    }
+
+    h6,
+    .heading-size-6 {
+      font-size: 1.8rem;
+    }
+  }
+`;
+
+const elementBase1220 = css`
+  @media (min-width: 1220px) {
+    h1,
+    .heading-size-1 {
+      font-size: 8.4rem;
+    }
+  }
+`;
+
 const listStyle = css`
   ul,
   ol {
@@ -303,6 +382,15 @@ const listStyle = css`
   }
 `;
 
+/**
+ * Styles for blockquotes.
+ *
+ * See `2. Element Base / Quotes` at
+ * https://themes.trac.wordpress.org/browser/twentytwenty/1.7/style.css.
+ *
+ * @param colors - Object with color definitions, from `state.theme.colors`.
+ * @returns Serialized style.
+ */
 const quoteStyle = (colors) => css`
   blockquote {
     border-color: ${colors.primary};
@@ -336,6 +424,15 @@ const quoteStyle = (colors) => css`
   }
 `;
 
+/**
+ * Styles for code elements.
+ *
+ * See `2. Element Base / Code` at
+ * https://themes.trac.wordpress.org/browser/twentytwenty/1.7/style.css.
+ *
+ * @param colors - Object with color definitions, from `state.theme.colors`.
+ * @returns Serialized style.
+ */
 const codeStyle = (colors) => css`
   code,
   kbd,
@@ -368,6 +465,15 @@ const codeStyle = (colors) => css`
   }
 `;
 
+/**
+ * Styles for media elements.
+ *
+ * See `2. Element Base / Media` at
+ * https://themes.trac.wordpress.org/browser/twentytwenty/1.7/style.css.
+ *
+ * @param colors - Object with color definitions, from `state.theme.colors`.
+ * @returns Serialized style.
+ */
 const mediaStyle = (colors) => css`
   figure {
     display: block;
@@ -408,6 +514,15 @@ const mediaStyle = (colors) => css`
   }
 `;
 
+/**
+ * Styles for tables.
+ *
+ * See `2. Element Base / Tables` at
+ * https://themes.trac.wordpress.org/browser/twentytwenty/1.7/style.css.
+ *
+ * @param colors - Object with color definitions, from `state.theme.colors`.
+ * @returns Serialized style.
+ */
 const tableStyles = (colors) => css`
   table {
     border: 0.1rem solid ${colors.gray.light};
@@ -455,12 +570,20 @@ const tableStyles = (colors) => css`
   }
 `;
 
+/**
+ * Global styles for the TwentyTwenty theme.
+ *
+ * @param colors - Object with color definitions, from `state.theme.colors`.
+ * @returns Serialized style.
+ */
 const globalStyle = (colors) =>
   css([
     cssReset,
     documentSetup(colors),
     accessibilitySettings,
     elementBase(colors),
+    elementBase700,
+    elementBase1220,
     listStyle,
     quoteStyle(colors),
     codeStyle(colors),

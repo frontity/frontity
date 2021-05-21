@@ -1,5 +1,11 @@
 # @frontity/google-analytics
 
+## 2.1.0
+
+### Minor Changes
+
+- [`3973d77f`](https://github.com/frontity/frontity/commit/3973d77fe57f7b63ff71994d5628434bc14b9697) [#814](https://github.com/frontity/frontity/pull/814) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Make the @frontity/google-analytics package "AMP-aware". This means it would render an `<amp-analytics>` tag for the tracking IDs provided, along with the given configuration.
+
 ## 2.0.0
 
 ### Major Changes

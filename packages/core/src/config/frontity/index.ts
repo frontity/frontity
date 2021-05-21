@@ -1,5 +1,12 @@
-import { FrontityConfig } from "../../../types";
+import { FrontityConfig } from "@frontity/types/config";
 
-export default (): FrontityConfig => ({
+/**
+ * Create the Frontity configuration.
+ *
+ * @returns The Frontity config object.
+ */
+const config = (): FrontityConfig => ({
   outDir: "build",
 });
+
+export default config;
