@@ -95,12 +95,12 @@ interface Frontity extends Package {
       options?: Record<string, string>;
 
       /**
-       * The mode of this site.
+       * Used to distinguish between`"html"` (default) or `"amp"` modes. `"amp"`
+       * is referring to Google AMP: https://amp.dev.
        *
-       * @deprecated This parameter is deprecated. It could be used to choose to
-       * render Frontity to `html` or `amp`.
+       * @defaultValue `"html"`
        */
-      mode?: string;
+      mode?: "html" | "amp";
 
       /**
        * Debug mode.
