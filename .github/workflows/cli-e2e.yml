@@ -34,7 +34,7 @@ jobs:
           CI: true
 
       - name: Run e2e tests for the CLI
-        run: npm run test:cli-e2e:filesystem
+        run: npm run test:cli-e2e:filesystem:ci
         working-directory: ./packages/frontity
         env:
           CI: true
@@ -68,7 +68,7 @@ jobs:
         run: docker build --build-arg ALPINE_VERSION="${{ matrix.alpine-version }}" -t frontity-cli .
 
       - name: Run e2e tests for the CLI
-        run: npm run test:cli-e2e:docker
+        run: npm run test:cli-e2e:docker:ci
         working-directory: ./packages/frontity
         env:
           CI: true
