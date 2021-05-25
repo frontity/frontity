@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.16.0
+
+### Minor Changes
+
+- [`4d652ea2`](https://github.com/frontity/frontity/commit/4d652ea27ff70a05fff089a2f6ca3c5c72c2974c) [#788](https://github.com/frontity/frontity/pull/788) Thanks [@orballo](https://github.com/orballo)! - Initialize a git repository in the project folder when starting a new project with
+  `frontity create`. Additionally, add a `--no-git` option to the CLI which skips
+  the initialization.
+
 ## 1.15.0
 
 ### Minor Changes
