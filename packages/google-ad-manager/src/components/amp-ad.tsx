@@ -51,7 +51,7 @@ const AmpAd: React.FC<AmpAdProps> = ({
       width={width}
       height={height}
       layout={layout}
-      json={json}
+      json={JSON.stringify(json)}
       {...getDataProps(otherProps)}
     />
   </>
