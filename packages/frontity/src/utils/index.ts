@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import fetch from "node-fetch";
+import { execSync } from "child_process";
 import { readdir as readDir } from "fs-extra";
 
 /**
@@ -113,5 +114,33 @@ export const fetchPackageVersion = async (pkg: string): Promise<string> => {
 export const log = (msg?: any, ...optionalParams: any[]) => {
   if (process.env.NODE_ENV !== "test") {
     console.log(msg, ...optionalParams);
+  }
+};
+
+/**
+ * Checks if the current directory is a git repo.
+ *
+ * @returns True if the current directory is a git repo, false otherwise.
+ */
+export const isInGitRepository = () => {
+  try {
+    execSync("git rev-parse --is-inside-work-tree", { stdio: "ignore" });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+/**
+ * Checks if git is installed on the current machine.
+ *
+ * @returns True if the git command exists, false otherwise.
+ */
+export const hasGit = () => {
+  try {
+    execSync("git --version", { stdio: "ignore" });
+    return true;
+  } catch (e) {
+    return false;
   }
 };

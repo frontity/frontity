@@ -18,15 +18,15 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test:ci": "../../node_modules/.bin/jest --ci",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand",
     "dev:inspect": "node --inspect-brk -r ts-node/register src/scripts/dev.ts",
     "serve:inspect": "node --inspect-brk -r ts-node/register src/scripts/serve.ts",
-    "build": "tsc --project ./tsconfig.build.json && npm run copy-files",
+    "build": "tsc --project ./tsconfig.build.json && npm run copyfiles",
     "build:watch": "../../node_modules/.bin/tsc --project ./tsconfig.build.json --watch",
     "prepublish": "npm run build",
-    "copy-files": "copyfiles -u 1 \"src/**/*.applescript\" dist/src"
+    "copyfiles": "copyfiles -u 1 \"src/**/*.applescript\" dist/src"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
