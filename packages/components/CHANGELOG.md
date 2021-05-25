@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.7.3
+
+### Patch Changes
+
+- [`a5e08a36`](https://github.com/frontity/frontity/commit/a5e08a368c51f87346944fa63f8b968516ce4701) [#823](https://github.com/frontity/frontity/pull/823) Thanks [@cristianbote](https://github.com/cristianbote)! - Script component should not define the children prop when using the src attribute.
+
+- Updated dependencies [[`4d652ea2`](https://github.com/frontity/frontity/commit/4d652ea27ff70a05fff089a2f6ca3c5c72c2974c)]:
+  - frontity@1.16.0
+
 ## 1.7.2
 
 ### Patch Changes
