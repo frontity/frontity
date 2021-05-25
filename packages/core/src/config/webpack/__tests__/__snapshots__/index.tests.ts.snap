@@ -173,9 +173,9 @@ Object {
       "rules": Array [
         Object {
           "exclude": Array [
-            /\\\\bcore-js\\\\b/,
-            /\\\\bwebpack\\\\b/,
-            /\\\\bregenerator-runtime\\\\b/,
+            /\\\\/core-js\\(\\$\\|\\\\/\\)/,
+            /\\\\/webpack\\(\\$\\|\\\\/\\)/,
+            /\\\\/regenerator-runtime\\(\\$\\|\\\\/\\)/,
           ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
@@ -312,9 +312,9 @@ Object {
       "rules": Array [
         Object {
           "exclude": Array [
-            /\\\\bcore-js\\\\b/,
-            /\\\\bwebpack\\\\b/,
-            /\\\\bregenerator-runtime\\\\b/,
+            /\\\\/core-js\\(\\$\\|\\\\/\\)/,
+            /\\\\/webpack\\(\\$\\|\\\\/\\)/,
+            /\\\\/regenerator-runtime\\(\\$\\|\\\\/\\)/,
           ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
@@ -438,9 +438,9 @@ Object {
       "rules": Array [
         Object {
           "exclude": Array [
-            /\\\\bcore-js\\\\b/,
-            /\\\\bwebpack\\\\b/,
-            /\\\\bregenerator-runtime\\\\b/,
+            /\\\\/core-js\\(\\$\\|\\\\/\\)/,
+            /\\\\/webpack\\(\\$\\|\\\\/\\)/,
+            /\\\\/regenerator-runtime\\(\\$\\|\\\\/\\)/,
           ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
@@ -567,9 +567,9 @@ Object {
       "rules": Array [
         Object {
           "exclude": Array [
-            /\\\\bcore-js\\\\b/,
-            /\\\\bwebpack\\\\b/,
-            /\\\\bregenerator-runtime\\\\b/,
+            /\\\\/core-js\\(\\$\\|\\\\/\\)/,
+            /\\\\/webpack\\(\\$\\|\\\\/\\)/,
+            /\\\\/regenerator-runtime\\(\\$\\|\\\\/\\)/,
           ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
@@ -689,9 +689,9 @@ Object {
       "rules": Array [
         Object {
           "exclude": Array [
-            /\\\\bcore-js\\\\b/,
-            /\\\\bwebpack\\\\b/,
-            /\\\\bregenerator-runtime\\\\b/,
+            /\\\\/core-js\\(\\$\\|\\\\/\\)/,
+            /\\\\/webpack\\(\\$\\|\\\\/\\)/,
+            /\\\\/regenerator-runtime\\(\\$\\|\\\\/\\)/,
           ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
@@ -800,9 +800,9 @@ Object {
       "rules": Array [
         Object {
           "exclude": Array [
-            /\\\\bcore-js\\\\b/,
-            /\\\\bwebpack\\\\b/,
-            /\\\\bregenerator-runtime\\\\b/,
+            /\\\\/core-js\\(\\$\\|\\\\/\\)/,
+            /\\\\/webpack\\(\\$\\|\\\\/\\)/,
+            /\\\\/regenerator-runtime\\(\\$\\|\\\\/\\)/,
           ],
           "test": /\\\\\\.\\(j\\|t\\)sx\\?\\$/,
           "use": Object {
