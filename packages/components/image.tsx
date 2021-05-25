@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect, useConnect } from "frontity";
-import { Frontity } from "frontity/types";
+import { Frontity, Connect } from "frontity/types";
 
 /**
  * Props for the {@link Image} component.
@@ -25,17 +25,18 @@ export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
  * @param props - Defined in {@link ImageProps}.
  * @returns A React component.
  */
-const Image: React.FC<ImageProps> = ({
+const Image: React.FC<Connect<Frontity, ImageProps>> = ({
   loading = "lazy",
   className,
   alt,
+  // state,
   ...props
 }) => {
-  const { state } = useConnect<Frontity>();
+  // const { state } = useConnect<Frontity>();
 
-  if (state.frontity.mode === "amp") {
-    if (state.frontity.mode === "amp") return <amp-img {...props} />;
-  }
+  // if (state.frontity.mode === "amp") {
+  //   return <amp-img {...props} />;
+  // }
 
   return (
     <img
