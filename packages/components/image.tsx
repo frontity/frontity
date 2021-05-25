@@ -29,14 +29,13 @@ const Image: React.FC<Connect<Frontity, ImageProps>> = ({
   loading = "lazy",
   className,
   alt,
-  // state,
   ...props
 }) => {
-  // const { state } = useConnect<Frontity>();
+  const { state } = useConnect<Frontity>();
 
-  // if (state.frontity.mode === "amp") {
-  //   return <amp-img {...props} />;
-  // }
+  if (state.frontity.mode === "amp") {
+    return <amp-img {...props} />;
+  }
 
   return (
     <img
@@ -48,4 +47,4 @@ const Image: React.FC<Connect<Frontity, ImageProps>> = ({
   );
 };
 
-export default connect(Image);
+export default connect(Image, { injectProps: false });
