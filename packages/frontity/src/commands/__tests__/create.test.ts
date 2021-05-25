@@ -1,10 +1,14 @@
 /* eslint-disable jest/no-try-expect, jest/no-conditional-expect */
 import create from "../create";
 import * as steps from "../../steps";
+import * as utils from "../../utils";
 
 jest.mock("../../steps");
 
 const mockedSteps = steps as jest.Mocked<typeof steps>;
+
+const mockedHasGit = jest.spyOn(utils, "hasGit");
+const mockedIsInGitRepository = jest.spyOn(utils, "isInGitRepository");
 
 describe("create", () => {
   beforeEach(() => {
@@ -18,7 +22,12 @@ describe("create", () => {
     mockedSteps.createTsConfig.mockReset();
     mockedSteps.cloneStarterTheme.mockReset();
     mockedSteps.installDependencies.mockReset();
+    mockedSteps.initializeGit.mockReset();
+    mockedSteps.createGitignore.mockReset();
     mockedSteps.revertProgress.mockReset();
+
+    mockedHasGit.mockReset().mockReturnValue(true);
+    mockedIsInGitRepository.mockReset().mockReturnValue(false);
   });
 
   test("goes through all steps", async () => {
@@ -35,6 +44,8 @@ describe("create", () => {
     expect(mockedSteps.createFrontitySettings.mock.calls).toMatchSnapshot();
     expect(mockedSteps.cloneStarterTheme.mock.calls).toMatchSnapshot();
     expect(mockedSteps.installDependencies.mock.calls).toMatchSnapshot();
+    expect(mockedSteps.createGitignore.mock.calls).toMatchSnapshot();
+    expect(mockedSteps.initializeGit.mock.calls).toMatchSnapshot();
   });
 
   test("works correctly when `options.typescript` is false", async () => {
@@ -92,6 +103,67 @@ describe("create", () => {
       "@frontity/mars-theme"
     );
     expect(mockedSteps.createTsConfig).toHaveBeenCalledWith(options.path);
+  });
+
+  test("works correctly when `options.noGit` is true", async () => {
+    const { normalizeOptions } = jest.requireActual("../../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
+    const options = {
+      name: "random-name",
+      path: "/path/to/project",
+      noGit: true,
+    };
+
+    await create(options);
+    expect(mockedSteps.initializeGit).not.toHaveBeenCalled();
+  });
+
+  test("initializeGit is called with the path of the project", async () => {
+    const { normalizeOptions } = jest.requireActual("../../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
+    const options = {
+      name: "random-name",
+      path: "/path/to/project",
+    };
+
+    await create(options);
+    expect(mockedSteps.initializeGit).toHaveBeenCalledWith(options.path);
+  });
+
+  test("initializeGit is NOT called if git is not installed", async () => {
+    mockedHasGit.mockReturnValue(false);
+
+    const { normalizeOptions } = jest.requireActual("../../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
+    const options = {
+      name: "random-name",
+      path: "/path/to/project",
+    };
+
+    await create(options);
+    expect(mockedSteps.initializeGit).not.toHaveBeenCalled();
+    expect(mockedSteps.createGitignore).not.toHaveBeenCalled();
+  });
+
+  test("works correctly if we are in a git repository", async () => {
+    mockedIsInGitRepository.mockReturnValue(true);
+
+    const { normalizeOptions } = jest.requireActual("../../steps");
+    mockedSteps.normalizeOptions.mockImplementation(normalizeOptions);
+
+    const options = {
+      name: "random-name",
+      path: "/path/to/project",
+    };
+
+    await create(options);
+
+    // If we are already in a git repo, we don't want to call initializeGit
+    expect(mockedSteps.initializeGit).not.toHaveBeenCalled();
+    expect(mockedSteps.createGitignore).toHaveBeenCalledWith(options.path);
   });
 
   test("calls removeProgress on error with dirExisted=true", async () => {

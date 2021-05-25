@@ -87,7 +87,9 @@ const Script: React.FC<ScriptProps> = ({ src, code, id, ...props }) => {
         // If the current key exists in the `dom` interface
         // we can assign the value.
         if (key in script) {
-          script[key] = value;
+          if (key !== "children") {
+            script[key] = value;
+          }
         } else if (typeof value !== "function" && typeof value !== "object") {
           // Otherwise treat it as an attribute if this is not a function or an object.
           script.setAttribute(key, value);
