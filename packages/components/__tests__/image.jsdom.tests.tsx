@@ -12,7 +12,7 @@ jest.mock("@frontity/hooks/use-in-view", () => ({
   default: jest.fn(),
 }));
 
-// Mock the only useConnect in the 'frontity' module
+// Mock only useConnect in the 'frontity' module
 jest.mock("frontity", () => ({
   ...jest.requireActual("frontity"),
   useConnect: () => ({
