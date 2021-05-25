@@ -32,11 +32,6 @@ const settings: Settings<
   {
     name: "amp-image",
     mode: "amp",
-    state: {
-      frontity: {
-        mode: "amp",
-      },
-    },
     packages: ["@frontity/amp", "e2e-image"],
   },
   {
