@@ -25,6 +25,15 @@ interface ModuleOptions {
 }
 
 /**
+ * The regular expressions used to exclude packages from transpilation.
+ */
+export const exclude = [
+  /\/core-js($|\/)/,
+  /\/webpack($|\/)/,
+  /\/regenerator-runtime($|\/)/,
+];
+
+/**
  * Generate the object for Webpack's entry configuration.
  *
  * Official Webpack docs: https://webpack.js.org/configuration/entry-context/.
@@ -44,7 +53,7 @@ const moduleConf = ({
       test: /\.(j|t)sx?$/,
       // Do not try to transpile the files of webpack, core-js or the
       // regenerator-runtime because they break if we do so.
-      exclude: [/\bcore-js\b/, /\bwebpack\b/, /\bregenerator-runtime\b/],
+      exclude,
       use: {
         loader: "babel-loader",
         options: {
