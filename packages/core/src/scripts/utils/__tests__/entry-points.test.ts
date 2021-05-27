@@ -28,7 +28,7 @@ const sites = [
   },
   {
     name: "site-amp",
-    mode: "amp",
+    mode: "amp" as const,
     packages: ["package1", "package3"],
   },
   {
