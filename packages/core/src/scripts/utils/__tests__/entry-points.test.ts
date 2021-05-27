@@ -16,14 +16,14 @@ const mockedEntryExists = entryExists as jest.Mocked<typeof entryExists>;
 const site = [
   {
     name: "site-1",
-    mode: "default",
+    mode: "default" as const,
     packages: ["package1", "package2"],
   },
 ];
 const sites = [
   {
     name: "site-html",
-    mode: "default",
+    mode: "default" as const,
     packages: ["package1", "package2", "package2"],
   },
   {
@@ -33,7 +33,7 @@ const sites = [
   },
   {
     name: "site-2",
-    mode: "default",
+    mode: "default" as const,
     packages: ["package1"],
   },
 ];

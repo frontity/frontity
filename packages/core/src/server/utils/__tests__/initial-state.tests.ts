@@ -2,7 +2,7 @@ import initialState from "../initial-state";
 
 const settings = {
   name: "site",
-  mode: "default",
+  mode: "default" as const,
   match: ["https://www.site-1.com"],
   state: {
     frontity: {
