@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "frontity";
-import Image, { ImageProps } from "@frontity/components/image";
+import Image, { Props as ImageProps } from "@frontity/components/image";
 import { Processor, Element } from "../types";
 
 /**
