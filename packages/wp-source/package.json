@@ -1,6 +1,6 @@
 {
   "name": "@frontity/wp-source",
-  "version": "1.11.4",
+  "version": "1.11.5",
   "description": "A Frontity source package for the REST API of self-hosted and WordPress.com sites",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -13,7 +13,7 @@
     "url": "https://github.com/frontity/frontity.git"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test:ci": "../../node_modules/.bin/jest --ci",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@frontity/source": "^1.5.1",
-    "frontity": "^1.15.0",
+    "frontity": "^1.16.0",
     "normalizr": "^3.3.0",
     "path-to-regexp": "^3.0.0",
     "query-string": "^6.8.3"

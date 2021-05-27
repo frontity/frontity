@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.11.5
+
+### Patch Changes
+
+- [`0abc237f`](https://github.com/frontity/frontity/commit/0abc237f5ebd740b3fbef5f7a91431a712b0a434) [#819](https://github.com/frontity/frontity/pull/819) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Remove the internal utility `verboseRegExp` as comment for verbose regexp were leaking into the bundle without being deleted. Verbose regexps are documented now with TSDocs.
+
+- Updated dependencies [[`4d652ea2`](https://github.com/frontity/frontity/commit/4d652ea27ff70a05fff089a2f6ca3c5c72c2974c)]:
+  - frontity@1.16.0
+
 ## 1.11.4
 
 ### Patch Changes

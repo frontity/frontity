@@ -1,6 +1,6 @@
 {
   "name": "frontity",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "description": "Frontity cli and entry point to other packages",
   "keywords": [
     "frontity",
@@ -25,10 +25,12 @@
     "dev": "ts-node src/cli/index.ts",
     "ts": "ts-node",
     "test": "jest --watch",
-    "test:ci": "jest --colors --ci --coverage",
+    "test:ci": "jest --colors --ci",
     "test:inspect": "node --inspect node_modules/bin/jest --watch --no-cache --runInBand",
     "test:cli-e2e:filesystem": "jest --testMatch \"**/cli-e2e/filesystem/**/*.test?(s).[jt]s?(x)\" --runInBand --testTimeout=180000",
+    "test:cli-e2e:filesystem:ci": "jest --testMatch \"**/cli-e2e/filesystem/**/*.test?(s).[jt]s?(x)\" --runInBand --testTimeout=180000 --ci",
     "test:cli-e2e:docker": "jest --testMatch \"**/cli-e2e/docker/**/*.test?(s).[jt]s?(x)\" --testTimeout=180000",
+    "test:cli-e2e:docker:ci": "jest --testMatch \"**/cli-e2e/docker/**/*.test?(s).[jt]s?(x)\" --testTimeout=180000 --ci",
     "build": "tsc --project ./tsconfig.build.json && npm run copyfiles",
     "copyfiles": "copyfiles templates/* dist",
     "build:watch": "tsc --project ./tsconfig.build.json --watch",

@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.14.1
+
+### Patch Changes
+
+- [`6c27804f`](https://github.com/frontity/frontity/commit/6c27804f096ded67b3926afc9b974fcbb548c978) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix a problem that prevented Frontity packages containing "webpack" in the name from being transpiled.
+
 ## 1.14.0
 
 ### Minor Changes
