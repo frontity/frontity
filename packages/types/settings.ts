@@ -62,7 +62,7 @@ export interface MonoSettings<Pkg extends Package = Package> {
    * @deprecated This parameter is deprecated. It could be used to choose to
    * render Frontity to `html` or `amp`.
    */
-  mode?: string;
+  mode?: "default" | "amp";
 
   /**
    * Global settings.

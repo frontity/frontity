@@ -64,7 +64,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading: "lazy" as "lazy",
+      loading: "lazy" as const,
       height: 300,
       state: { frontity: { rendering: "ssr" } },
     };
@@ -88,7 +88,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading: "lazy" as "lazy",
+      loading: "lazy" as const,
       height: 300,
       state: { frontity: { rendering: "csr" } },
     };
@@ -112,7 +112,7 @@ describe("Image", () => {
       srcSet:
         "https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w",
       className: "fake-class-name",
-      loading: "lazy" as "lazy",
+      loading: "lazy" as const,
     };
 
     const result = TestRenderer.create(<Image {...props} />);

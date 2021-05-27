@@ -17,7 +17,7 @@ const settings2: Settings = [
 // 3. Settings with minimal base settings, name and mode.
 const settings3: Settings = {
   name: "site",
-  mode: "html",
+  mode: "default",
   state: {
     url: "https://mysite.com",
   },
@@ -27,7 +27,7 @@ const settings3: Settings = {
 // 4. Settings with full base settings.
 const settings4: Settings = {
   name: "site",
-  mode: "html",
+  mode: "default",
   state: {
     frontity: {
       url: "https://mysite.com",

@@ -9,7 +9,7 @@ import { MultiSettings, MonoSettings } from "@frontity/types/settings";
  */
 const defaultSettings = {
   name: "default",
-  mode: "default",
+  mode: "default" as const,
   state: {},
 };
 
