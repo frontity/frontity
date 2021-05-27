@@ -60,6 +60,9 @@ export interface MonoSettings<Pkg extends Package = Package> {
    * The mode of this site.
    *
    * Used to choose to render regular HTML (default) or AMP-compatible HTML.
+   * `"amp"` is referring to Google AMP: https://amp.dev.
+   *
+   * @defaultValue `"default"`
    */
   mode?: "default" | "amp";
 
