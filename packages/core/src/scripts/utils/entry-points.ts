@@ -25,7 +25,7 @@ interface Package {
    *
    * @defaultValue "default"
    */
-  mode: string;
+  mode: "default" | "amp";
 
   /**
    * The path on the filesystem for that package.
