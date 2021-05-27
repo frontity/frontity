@@ -1,9 +1,9 @@
 import normalizeSettings from "../normalizeSettings";
 import * as validateSettings from "../validateSettings";
-import mockedMonoSettings from "./mocks/normalizeSettings/monoSettings.json";
-import mockedMultiSettings from "./mocks/normalizeSettings/multiSettings.json";
-import expectedMono from "./mocks/normalizeSettings/expectedMono.json";
-import expectedMulti from "./mocks/normalizeSettings/expectedMulti.json";
+import mockedMonoSettings from "./mocks/normalizeSettings/monoSettings";
+import mockedMultiSettings from "./mocks/normalizeSettings/multiSettings";
+import expectedMono from "./mocks/normalizeSettings/expectedMono";
+import expectedMulti from "./mocks/normalizeSettings/expectedMulti";
 
 jest.mock("../validateSettings");
 

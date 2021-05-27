@@ -1,10 +1,10 @@
 import getSettings from "../getSettings";
 import * as importSettings from "../importSettings";
-import mockedMonoSettings from "./mocks/getSettings/monoSettings.json";
-import mockedSettingsWithLengthOne from "./mocks/getSettings/settingsWithLengthOne.json";
-import mockedSettingsWithNames from "./mocks/getSettings/settingsWithNames.json";
-import mockedSettingsWithOneMatch from "./mocks/getSettings/settingsWithOneMatch.json";
-import mockedSettingsWithMatches from "./mocks/getSettings/settingsWithMatches.json";
+import mockedMonoSettings from "./mocks/getSettings/monoSettings";
+import mockedSettingsWithLengthOne from "./mocks/getSettings/settingsWithLengthOne";
+import mockedSettingsWithNames from "./mocks/getSettings/settingsWithNames";
+import mockedSettingsWithOneMatch from "./mocks/getSettings/settingsWithOneMatch";
+import mockedSettingsWithMatches from "./mocks/getSettings/settingsWithMatches";
 
 jest.mock("../importSettings");
 

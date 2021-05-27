@@ -1,8 +1,8 @@
 import getAllSites from "../getAllSites";
 import * as importSettings from "../importSettings";
-import mockedMonoSettings from "./mocks/getAllSites/monoSettings.json";
-import mockedMultiSettings from "./mocks/getAllSites/multiSettings.json";
-import mockedDeactivatedPackage from "./mocks/getAllSites/deactivatedPackage.json";
+import mockedMonoSettings from "./mocks/getAllSites/monoSettings";
+import mockedMultiSettings from "./mocks/getAllSites/multiSettings";
+import mockedDeactivatedPackage from "./mocks/getAllSites/deactivatedPackage";
 
 jest.mock("../importSettings");
 
