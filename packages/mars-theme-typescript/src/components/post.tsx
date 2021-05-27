@@ -1,8 +1,11 @@
 import { useEffect } from "react";
-import { connect, styled } from "frontity";
-import Link from "./link";
+import { connect, useConnect, styled } from "frontity";
 import List from "./list";
+import { isPost } from "@frontity/source";
+import { Packages } from "../../types";
 import FeaturedMedia from "./featured-media";
+import { PostEntity, PostTypeData } from "@frontity/source/types";
+
 
 /**
  * The Post component that Mars uses to render any kind of "post type", like
@@ -23,20 +26,20 @@ import FeaturedMedia from "./featured-media";
  *
  * @returns The {@link Post} element rendered.
  */
-const Post = ({ state, actions, libraries }) => {
+const Post: React.FC<{ data: PostTypeData }> = ({ data }) => {
+  const { state, actions, libraries } = useConnect<Packages>();{
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
   // Get the data of the post.
-  const post = state.source[data.type][data.id];
+  const post: PostEntity = state.source[data.type][data.id];
   // Get the data of the author.
   const author = state.source.author[post.author];
-  // Get a human readable date.
-  const date = new Date(post.date);
 
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
 
-  /**
+  
+/**
    * Once the post has loaded in the DOM, prefetch both the
    * home posts and the list component so if the user visits
    * the home page, everything is ready and it loads instantly.
@@ -52,8 +55,8 @@ const Post = ({ state, actions, libraries }) => {
       <div>
         <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
 
-        {/* Hide author and date on pages */}
-        {!data.isPage && (
+        {/* Only display author and date on posts */}
+        {isPost(data) && (
           <div>
             {author && (
               <StyledLink link={author.link}>
@@ -64,7 +67,7 @@ const Post = ({ state, actions, libraries }) => {
             )}
             <DateWrapper>
               {" "}
-              on <b>{date.toDateString()}</b>
+              on <b>{new Date(post.date).toDateString()}</b>
             </DateWrapper>
           </div>
         )}
@@ -83,10 +86,9 @@ const Post = ({ state, actions, libraries }) => {
         // Render the content using the Html2React component so the HTML is
         // processed by the processors we included in the
         // libraries.html2react.processors array.
-        <Content>
-          <Html2React html={post.content.rendered} />
-        </Content>
-      )}
+      <Content>
+        <Html2React html={post.content?.rendered} />
+      </Content>
     </Container>
   ) : null;
 };
@@ -121,6 +123,7 @@ const DateWrapper = styled.p`
   font-size: 0.9em;
   display: inline;
 `;
+
 
 /**
  * This component is the parent of the `content.rendered` HTML. We can use nested

@@ -1,18 +1,21 @@
-import { Global, css, connect, styled, Head } from "frontity";
+import { Global, css, connect, styled, Head, useConnect } from "frontity";
 import Switch from "@frontity/components/switch";
+import { isArchive, isPostType, isError } from "@frontity/source";
 import Header from "./header";
 import List from "./list";
 import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
+import { Packages } from "../../types";
+
 
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
  */
-const Theme = ({ state }) => {
-  // Get information about the current URL.
+const Theme = () => {
+  const { state } = useConnect<Packages>();
   const data = state.source.get(state.router.link);
 
   return (
@@ -38,9 +41,9 @@ const Theme = ({ state }) => {
       <Main>
         <Switch>
           <Loading when={data.isFetching} />
-          <List when={data.isArchive} />
-          <Post when={data.isPostType} />
-          <PageError when={data.isError} />
+          <List when={isArchive(data)} data={isArchive(data) && data} />
+          <Post when={isPostType(data)} data={isPostType(data) && data} />
+          <PageError when={isError(data)} data={isError(data) && data} />
         </Switch>
       </Main>
     </>

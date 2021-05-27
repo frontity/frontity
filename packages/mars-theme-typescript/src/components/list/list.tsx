@@ -1,15 +1,17 @@
-import { connect, styled, decode } from "frontity";
+import { connect, styled, decode, useConnect } from "frontity";
 import Item from "./list-item";
 import Pagination from "./pagination";
+import { Packages } from "../../../types";
+import { isTerm, isAuthor } from "@frontity/source";
+import { ArchiveData } from "@frontity/source/types";
 
-const List = ({ state }) => {
-  // Get the data of the current list.
-  const data = state.source.get(state.router.link);
+const List: React.FC<{ data: ArchiveData }> = ({ data }) => {
+  const { state } = useConnect<Packages>();
 
   return (
     <Container>
-      {/* If the list is a taxonomy, we render a title. */}
-      {data.isTaxonomy && (
+      {/* If the list is a term, we render a title. */}
+      {isTerm(data) && (
         <Header>
           {data.taxonomy}:{" "}
           <b>{decode(state.source[data.taxonomy][data.id].name)}</b>
@@ -17,7 +19,7 @@ const List = ({ state }) => {
       )}
 
       {/* If the list is for a specific author, we render a title. */}
-      {data.isAuthor && (
+      {isAuthor(data) && (
         <Header>
           Author: <b>{decode(state.source.author[data.id].name)}</b>
         </Header>

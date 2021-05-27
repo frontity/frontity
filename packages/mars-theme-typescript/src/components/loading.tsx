@@ -6,7 +6,7 @@ const scale = keyframes`
   100% {transform: scaley(1.0)}
 `;
 
-const Loading = () => (
+const Loading: React.FC<{ when?: boolean }> = () => (
   <Container>
     <div>
       <div css={bar(1)} />
@@ -20,7 +20,7 @@ const Loading = () => (
 
 export default Loading;
 
-const bar = (index) => css`
+const bar = (index: number) => css`
   background-color: rgba(12, 17, 43, 0.3);
   width: 4px;
   height: 24px;

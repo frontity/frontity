@@ -1,7 +1,14 @@
-import { connect, styled } from "frontity";
 import Image from "@frontity/components/image";
+import { connect, styled, useConnect } from "frontity";
+import { Packages } from "../../types";
 
-const FeaturedMedia = ({ state, id }) => {
+interface MediaSizes {
+  source_url: string;
+  width: number;
+}
+
+const FeaturedMedia: React.FC<{ id: number }> = ({ id }) => {
+  const { state } = useConnect<Packages>();
   const media = state.source.attachment[id];
 
   if (!media) return null;
@@ -9,7 +16,7 @@ const FeaturedMedia = ({ state, id }) => {
   const srcset =
     Object.values(media.media_details.sizes)
       // Get the url and width of each size.
-      .map((item) => [item.source_url, item.width])
+      .map((item: MediaSizes) => [item.source_url, item.width])
       // Recude them to a string with the format required by `srcset`.
       .reduce(
         (final, current, index, array) =>
@@ -22,7 +29,7 @@ const FeaturedMedia = ({ state, id }) => {
   return (
     <Container>
       <StyledImage
-        alt={media.title.rendered}
+        alt={media.title?.rendered}
         src={media.source_url}
         srcSet={srcset}
       />

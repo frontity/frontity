@@ -1,4 +1,6 @@
-export const HamburgerIcon = ({ size, color }) => {
+type Icons = React.FC<{ size: string; color: string }>;
+
+export const HamburgerIcon: Icons = ({ size, color }) => {
   return (
     <svg
       height={size}
@@ -17,7 +19,7 @@ export const HamburgerIcon = ({ size, color }) => {
   );
 };
 
-export const CloseIcon = ({ size, color }) => {
+export const CloseIcon: Icons = ({ size, color }) => {
   return (
     <svg
       height={size}

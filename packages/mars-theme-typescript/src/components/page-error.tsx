@@ -1,4 +1,5 @@
-import { styled, connect } from "frontity";
+import { styled } from "frontity";
+import { ErrorData } from "@frontity/source/types";
 
 const description404 = (
   <>
@@ -18,9 +19,7 @@ const description = (
 );
 
 // The 404 page component
-const Page404 = ({ state }) => {
-  const data = state.source.get(state.router.link);
-
+const Page404: React.FC<{ data: ErrorData }> = ({ data }) => {
   const title = "Oops! Something went wrong";
   const title404 = "Oops! 404";
 
@@ -32,7 +31,7 @@ const Page404 = ({ state }) => {
   );
 };
 
-export default connect(Page404);
+export default Page404;
 
 const Container = styled.div`
   width: 800px;

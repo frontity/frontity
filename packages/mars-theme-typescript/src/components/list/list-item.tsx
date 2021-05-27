@@ -1,6 +1,13 @@
-import { connect, styled } from "frontity";
+import { connect, styled, useConnect } from "frontity";
+import { PostEntity } from "source/types";
 import Link from "../link";
 import FeaturedMedia from "../featured-media";
+import { Packages } from "../../../types";
+
+interface ItemProps {
+  item: PostEntity;
+}
+
 
 /**
  * Item Component
@@ -10,7 +17,8 @@ import FeaturedMedia from "../featured-media";
  * - Author: name of author and published date
  * - FeaturedMedia: the featured image/video of the post
  */
-const Item = ({ state, item }) => {
+const Item: React.FC<ItemProps> = ({ item }) => {
+  const { state } = useConnect<Packages>();
   const author = state.source.author[item.author];
   const date = new Date(item.date);
 

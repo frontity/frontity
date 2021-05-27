@@ -1,8 +1,10 @@
-import { styled, connect, Global } from "frontity";
+import { styled, connect, Global, useConnect } from "frontity";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
+import { Packages } from "../../types";
 
-function MobileMenu({ state, actions }) {
+const MobileMenu = () => {
+  const { state, actions } = useConnect<Packages>();
   const { isMobileMenuOpen } = state.theme;
   return (
     <>
@@ -22,7 +24,7 @@ function MobileMenu({ state, actions }) {
       {isMobileMenuOpen && <MenuModal />}
     </>
   );
-}
+};
 
 const MenuToggle = styled.button`
   position: absolute;

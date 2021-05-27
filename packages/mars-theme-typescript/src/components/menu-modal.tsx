@@ -1,14 +1,16 @@
-import { styled, connect } from "frontity";
+import { styled, connect, useConnect } from "frontity";
 import Link from "./link";
+import { Packages } from "../../types";
 
-const MenuModal = ({ state }) => {
+const MenuModal = () => {
+  const { state } = useConnect<Packages>();
   const { menu } = state.theme;
   const isThereLinks = menu != null && menu.length > 0;
 
   return (
     <>
       <MenuOverlay />
-      <MenuContent as="nav">
+      <MenuContent>
         {isThereLinks &&
           menu.map(([name, link]) => (
             <MenuLink
@@ -35,7 +37,7 @@ const MenuOverlay = styled.div`
   left: 0;
 `;
 
-const MenuContent = styled.div`
+const MenuContent = styled.nav`
   z-index: 3;
 `;
 
