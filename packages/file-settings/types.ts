@@ -56,7 +56,7 @@ type Multi = Base & {
 };
 
 /**
- * Represents normalized site settings.
+ * Represents normalized single site settings.
  */
 type Normalized<T> = Base & {
   /**
