@@ -1,5 +1,5 @@
 ---
-"@frontity/with-preact": minor
+"@frontity/with-preact": patch
 ---
 
-with-preact is not usually transpiled when is part of the node_modules so the config file should be defined as commonjs
+Use `commonjs` in the `frontity.config.js` file until we add support for modules.
