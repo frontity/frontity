@@ -9,7 +9,7 @@ class MyLib {
 const state = {
   frontity: {
     debug: false,
-    mode: "default" as const,
+    mode: "default",
     packages: ["package-1", "package-2", "package-3"],
   },
 };
