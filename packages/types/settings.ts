@@ -64,7 +64,7 @@ export interface MonoSettings<Pkg extends Package = Package> {
    *
    * @defaultValue `"default"`
    */
-  mode?: "default" | "amp";
+  mode?: string;
 
   /**
    * Global settings.

@@ -12,7 +12,7 @@ type Base = {
    *
    * Used to choose to render regular HTML (default) or AMP-compatible HTML.
    */
-  mode?: "default" | "amp";
+  mode?: string;
 
   /**
    * Global state.
@@ -62,7 +62,7 @@ type Normalized<T> = Base & {
   /**
    * Mode of the site.
    */
-  mode: "default" | "amp";
+  mode: string;
 
   /**
    * Site state.
@@ -92,7 +92,7 @@ export type Site = {
   /**
    * The mode of this site.
    */
-  mode: "default" | "amp";
+  mode: string;
 
   /**
    * Site packages.

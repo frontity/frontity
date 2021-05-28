@@ -100,7 +100,7 @@ interface Frontity extends Package {
        *
        * @defaultValue `"default"`
        */
-      mode?: "default" | "amp";
+      mode?: string;
 
       /**
        * Debug mode.

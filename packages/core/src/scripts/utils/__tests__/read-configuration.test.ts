@@ -16,7 +16,7 @@ describe("Read configurations", () => {
     const sites = [
       {
         name: "one",
-        mode: "default" as const,
+        mode: "default",
         packages: ["foo", "bar"],
       },
     ];
