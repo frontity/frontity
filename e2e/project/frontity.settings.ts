@@ -542,6 +542,49 @@ const settings: Settings<
       },
     ],
   },
+  {
+    name: "amp-google-ad-manager",
+    mode: "amp",
+    packages: [
+      "@frontity/amp",
+      "e2e-ads",
+      "@frontity/tiny-router",
+      {
+        name: "@frontity/google-ad-manager",
+        state: {
+          fills: {
+            googleAdManager: {
+              headerAd: {
+                slot: "header",
+                library: "googleAdManager.AmpAd",
+                priority: 5,
+                props: {
+                  id: "header",
+                  slot: "/4595/nfl.test.open",
+                  width: 300,
+                  height: 250,
+                },
+              },
+              footerAd: {
+                slot: "footer",
+                library: "googleAdManager.AmpAd",
+                priority: 5,
+                props: {
+                  slot: "/4595/nfl.test.open",
+                  width: 300,
+                  height: 600,
+                  overrideWidth: 300,
+                  overrideHeight: 250,
+                  multiSize: "300x600, 300x250",
+                  multiSizeValidation: false,
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export default settings;
