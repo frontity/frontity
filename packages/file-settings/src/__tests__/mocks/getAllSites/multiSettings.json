@@ -1,0 +1,36 @@
+[
+  {
+    "name": "settings-default",
+    "mode": "default",
+    "state": {},
+    "packages": [
+      {
+        "name": "@frontity/theme-default",
+        "active": true,
+        "state": {}
+      },
+      {
+        "name": "@frontity/wp-source-default",
+        "active": true,
+        "state": {}
+      }
+    ]
+  },
+  {
+    "name": "settings-amp",
+    "mode": "amp",
+    "state": {},
+    "packages": [
+      {
+        "name": "@frontity/theme-amp",
+        "active": true,
+        "state": {}
+      },
+      {
+        "name": "@frontity/wp-source-amp",
+        "active": true,
+        "state": {}
+      }
+    ]
+  }
+]

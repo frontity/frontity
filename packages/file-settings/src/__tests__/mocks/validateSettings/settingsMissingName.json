@@ -1,0 +1,21 @@
+[
+  {
+    "name": "multi-settings-default",
+    "packages": [
+      "@frontity/theme-default",
+      {
+        "name": "@frontity/wp-source"
+      }
+    ]
+  },
+  {
+    "mode": "amp",
+    "packages": [
+      "@frontity/theme-amp",
+      {
+        "name": "@frontity/wp-source",
+        "active": false
+      }
+    ]
+  }
+]

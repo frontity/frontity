@@ -1,9 +1,9 @@
 import validateSettings from "../validateSettings";
-import mockedSettingsMissingName from "./mocks/validateSettings/settingsMissingName";
-import mockedSettingsRepeatedName from "./mocks/validateSettings/settingsRepeatedName";
-import mockedPackageMissingName from "./mocks/validateSettings/packageMissingName";
-import mockedPackageRepeatedName from "./mocks/validateSettings/packageRepeatedName";
-import mockedMonoSettings from "./mocks/normalizeSettings/monoSettings";
+import mockedSettingsMissingName from "./mocks/validateSettings/settingsMissingName.json";
+import mockedSettingsRepeatedName from "./mocks/validateSettings/settingsRepeatedName.json";
+import mockedPackageMissingName from "./mocks/validateSettings/packageMissingName.json";
+import mockedPackageRepeatedName from "./mocks/validateSettings/packageRepeatedName.json";
+import mockedMonoSettings from "./mocks/normalizeSettings/monoSettings.json";
 
 describe("validateSettings", () => {
   test("should throw if some multi settings is missing its name", () => {

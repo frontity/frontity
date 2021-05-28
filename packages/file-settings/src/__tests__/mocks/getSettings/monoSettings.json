@@ -1,0 +1,14 @@
+[
+  {
+    "name": "mono-settings",
+    "mode": "default",
+    "state": {},
+    "packages": [
+      {
+        "name": "@frontity/theme",
+        "active": true,
+        "state": {}
+      }
+    ]
+  }
+]

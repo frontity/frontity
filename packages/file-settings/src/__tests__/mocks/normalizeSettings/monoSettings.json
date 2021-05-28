@@ -1,0 +1,13 @@
+[
+  {
+    "name": "mono-settings",
+    "mode": "amp",
+    "state": {},
+    "packages": [
+      "@frontity/theme",
+      {
+        "name": "@frontity/wp-source"
+      }
+    ]
+  }
+]
