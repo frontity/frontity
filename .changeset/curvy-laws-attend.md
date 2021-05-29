@@ -1,7 +1,6 @@
 ---
-"@frontity/components": patch
 "@frontity/core": patch
 "@frontity/file-settings": patch
 ---
 
-Update any references to an `"html"` frontity `mode` with `"default"` mode.
+Minor refactoring of the types and removing unused TS types.
