@@ -95,10 +95,11 @@ interface Frontity extends Package {
       options?: Record<string, string>;
 
       /**
-       * Used to choose to render regular HTML (default) or AMP-compatible HTML.
-       * `"amp"` is referring to Google AMP: https://amp.dev.
+       * The mode of this site.
        *
-       * @defaultValue `"default"`
+       * @example "amp"
+       *
+       * @defaultValue "default"
        */
       mode?: string;
 

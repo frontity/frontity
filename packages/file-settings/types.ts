@@ -10,7 +10,9 @@ type Base = {
   /**
    * The mode of this site.
    *
-   * Used to choose to render regular HTML (default) or AMP-compatible HTML.
+   * @example "amp"
+   *
+   * @defaultValue "default"
    */
   mode?: string;
 
