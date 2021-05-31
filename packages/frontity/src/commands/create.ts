@@ -11,12 +11,16 @@ import {
   cloneStarterTheme,
   installDependencies,
   downloadFavicon,
+  initializeGit,
   revertProgress,
+  createGitignore,
 } from "../steps";
+import { hasGit, isInGitRepository } from "../utils";
 
 const defaultOptions: CreateCommandOptions = {
   path: process.cwd(),
   typescript: false,
+  noGit: false,
   packages: [],
   theme: "@frontity/mars-theme",
 };
@@ -44,12 +48,8 @@ export default (options?: CreateCommandOptions) =>
       let dirExisted: boolean;
 
       // Parses and validates options.
-      const {
-        name,
-        theme,
-        path,
-        typescript,
-      }: CreateCommandOptions = normalizeOptions(defaultOptions, options);
+      const { name, theme, path, typescript, noGit }: CreateCommandOptions =
+        normalizeOptions(defaultOptions, options);
 
       process.on("SIGINT", async () => {
         if (typeof dirExisted !== "undefined")
@@ -103,6 +103,27 @@ export default (options?: CreateCommandOptions) =>
         step = downloadFavicon(path);
         emit("message", `Downloading ${chalk.yellow("favicon.ico")}.`, step);
         await step;
+
+        // Run this step if `noGit` is false and if git is installed on user's machine
+        if (!noGit && hasGit()) {
+          const gitignoreCleanup = await createGitignore(path);
+          if (isInGitRepository()) {
+            emit(
+              "message",
+              "Already in a git repository. Skipping initialization of a new git repo.",
+              step
+            );
+          } else {
+            step = initializeGit(path);
+            emit("message", `Initializing git repo.`, step);
+            try {
+              await step;
+            } catch (e) {
+              await gitignoreCleanup();
+              emit("message", `Git initialization failed. Skipping...`, step);
+            }
+          }
+        }
       } catch (error) {
         if (typeof dirExisted !== "undefined")
           await revertProgress(dirExisted, path);

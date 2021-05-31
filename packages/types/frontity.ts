@@ -98,7 +98,9 @@ interface Frontity extends Package {
        * Used to distinguish between`"html"` (default) or `"amp"` modes. `"amp"`
        * is referring to Google AMP: https://amp.dev.
        *
-       * @defaultValue `"html"`
+       * @example "amp"
+       *
+       * @defaultValue "default"
        */
       mode?: "html" | "amp";
 

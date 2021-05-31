@@ -1,5 +1,4 @@
 import WpSource from "../../types";
-import { verboseRegExp } from "../utils";
 
 /**
  * Add the final slash to a link. It does nothing if the link already has a
@@ -90,37 +89,36 @@ interface ExtractLinkPartsReturn {
 }
 
 /**
- * Regexp used inside {@link extractLinkParts} to get link parts.
+ * RegExp used inside {@link extractLinkParts} for parsing links into parts.
+ * It's not directly replaceable with {@link URL}.
  *
- * @remarks It's not directly replaceable with {@link URL}.
+ * @remarks Code explanation:
+ *
+ * ```
+ * ^              // Beginning of line
+ *
+ * (?:            // Protocol (optional)
+ *   (?:[^:/?#]+) // Any character other than ':', '/', '?', '#'
+ *   :            // ':' character
+ * )?
+ *
+ * (?:            // Host (optional)
+ *   \/\/         // The double-slash that follows the protocol
+ *   (?:[^/?#]*)  // Hostname and port
+ * )?
+ *                // Pathname
+ * ([^?#]*)       // 1st capturing group
+ *
+ * (?:            // Search (optional)
+ *   \?           // [?] character
+ *   ([^#]*)      // 2nd capturing group (note: the [?] is not included)
+ * )?
+ *                // Hash (optional)
+ * (#.*)?         // 3rd capturing group
+ * ```
  */
-const extractLinkRegExp = new RegExp(verboseRegExp`
-  ^
-  // Protocol (optional)
-  (?:
-    (?:
-      [^:/?#]+  // Any character other than [:/?#]
-    ):          // [:] character
-  )?
-
-  // Host (optional)
-  (?:
-    \/\/        // The double-slash that follows the protocol
-    (?:[^/?#]*) // Hostname and port
-  )?
-
-  // Pathname
-  ([^?#]*)      // 1st capturing group
-
-  // Search (optional)
-  (?:
-    \?          // [?] character
-    ([^#]*)     // 2nd capturing group (note: the [?] is not included)
-  )?
-
-  // Hash (optional)
-  (#.*)?        // 3rd capturing group
-`);
+const extractLinkRegExp =
+  /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)(?:\?([^#]*))?(#.*)?/;
 
 /**
  * Extract the different link parts: pathname, query and hash.
@@ -136,17 +134,21 @@ export const extractLinkParts = (link: string): ExtractLinkPartsReturn => {
 };
 
 /**
- * Regexp used inside {@link parse} to extract the path and page number.
+ * RegExp used inside {@link parse} to extract the path and page number.
+ *
+ * @remarks Code explanation:
+ *
+ * ```
+ * ^       // Beginning of line
+ * (.*)    // Pathname (1st capturing group)
+ * page\/  // The "page/" string
+ * (\d+)   // Page number (2nd capturing group)
+ * \/?     // Optional "/"
+ * (\?.*)? // Optional query string
+ * $       // End of line
+ * ```
  */
-const pageNumberRegexp = new RegExp(verboseRegExp`
-  ^       // Beginning of line
-  (.*)    // Pathname (1st capturing group)
-  page\/  // The "page/" string
-  (\d+)   // Page number (2nd capturing group)
-  \/?     // Optional "/"
-  (\?.*)? // Optional query string
-  $       // End of line
-`);
+const pageNumberRegexp = /^(.*)page\/(\d+)\/?(\?.*)?$/;
 
 /**
  * Extract the different Frontity link params.

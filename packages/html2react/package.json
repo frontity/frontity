@@ -1,6 +1,6 @@
 {
   "name": "@frontity/html2react",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "HTML to React converter for Frontity",
   "keywords": [
     "frontity",
@@ -16,7 +16,7 @@
     "url": "https://community.frontity.org"
   },
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest --ci --coverage",
+    "test:ci": "../../node_modules/.bin/jest --ci",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/.bin/jest --watch --no-cache --runInBand"
   },

@@ -1,5 +1,5 @@
 import pluginTester from "babel-plugin-tester";
-import frontityPlugin from "../";
+import frontityPlugin from "..";
 
 pluginTester({
   title: "Unrelated imports",

@@ -57,10 +57,24 @@ export interface MonoSettings<Pkg extends Package = Package> {
   match?: string[];
 
   /**
-   * The mode of this site.
+   * The mode of this site. It is used to select the entry point when importing
+   * a package.
    *
-   * @deprecated This parameter is deprecated. It could be used to choose to
-   * render Frontity to `html` or `amp`.
+   * - The "default" mode means the normal `src/index` entry point.
+   * - A non-default mode will try to find a file that matches the mode. For
+   * example, the "amp" mode searches for `src/amp` or `src/amp/index`.
+   *
+   * @remarks
+   * - If a package doesn't have a specific entry point for the mode, it
+   * fallbacks to the default entry point.
+   * - Before checking for `src/${mode}/index`, it tries with
+   * `src/${mode}/client` or `src/${mode}/server` (like the default mode).
+   * - The value of the mode is copied to `state.frontity.mode`, so it can also
+   * be used by packages that want to do different things for different modes.
+   *
+   * @example "amp"
+   *
+   * @defaultValue "default"
    */
   mode?: string;
 

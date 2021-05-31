@@ -56,4 +56,20 @@ Array [
 ]
 `;
 
+exports[`create goes through all steps 7`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
+exports[`create goes through all steps 8`] = `
+Array [
+  Array [
+    "/path/to/project",
+  ],
+]
+`;
+
 exports[`create uses the emitter passed to log messages 1`] = `Array []`;

@@ -32,6 +32,11 @@ const settings: Settings<
     packages: ["e2e-image"],
   },
   {
+    name: "amp-image",
+    mode: "amp",
+    packages: ["@frontity/amp", "e2e-image"],
+  },
+  {
     name: "fonts",
     packages: [
       {
@@ -547,6 +552,36 @@ const settings: Settings<
       {
         name: "@frontity/wp-source",
         state: { source: { url: "http://localhost:8080/" } },
+      },
+    ],
+  },
+  {
+    name: "amp-google-analytics",
+    mode: "amp",
+    packages: [
+      "@frontity/amp",
+      {
+        name: "@frontity/google-analytics",
+        state: {
+          googleAnalytics: {
+            trackingIds: ["UA-XXXXXXXX-X", "UA-YYYYYYYY-Y"],
+            ampConfig: {
+              vars: {
+                someProp: "someValue",
+              },
+              triggers: {
+                button: {
+                  selector: "#the-button",
+                  on: "click",
+                  vars: {
+                    event_name: "login",
+                    method: "Google",
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     ],
   },

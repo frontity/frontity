@@ -1,4 +1,4 @@
-describe("Comscore AMP", () => {
+describe("Google Tag Manager AMP", () => {
   it("should render the tags for the tracking IDs", () => {
     cy.visitSSR(
       "http://localhost:3001/?frontity_name=amp-google-tag-manager-analytics"

@@ -17,7 +17,7 @@
   },
   "sideEffects": false,
   "scripts": {
-    "test:ci": "../../node_modules/.bin/jest --passWithNoTests --ci --coverage",
+    "test:ci": "../../node_modules/.bin/jest --passWithNoTests --ci",
     "test": "../../node_modules/.bin/jest --watch",
     "test:inspect": "node --inspect ../../node_modules/jest/bin/jest.js --watch --no-cache --runInBand"
   },
