@@ -1,3 +1,4 @@
+import ignore from "./utils/ts-node-ignore";
 import * as tsNode from "ts-node";
 
 /**
@@ -20,7 +21,7 @@ import * as tsNode from "ts-node";
  */
 tsNode.register({
   transpileOnly: true,
-  ignore: [],
+  ignore,
   compilerOptions: {
     // Target latest version of ECMAScript.
     target: "es2017",
