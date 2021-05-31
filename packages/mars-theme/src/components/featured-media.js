@@ -1,6 +1,15 @@
-import { connect, styled } from "frontity";
+import { connect, styled, css } from "frontity";
 import Image from "@frontity/components/image";
 
+/**
+ * The Component that renders a featured media, typically an image. The featured
+ * media can represent an individual Post, Page, or Custom Post Type.
+ *
+ * @param props - The state injected by {@link connect } and the ID of the
+ * featured media.
+ *
+ * @returns A react component.
+ */
 const FeaturedMedia = ({ state, id }) => {
   const media = state.source.attachment[id];
 
