@@ -20,6 +20,7 @@ import * as tsNode from "ts-node";
  */
 tsNode.register({
   transpileOnly: true,
+  ignore: [],
   compilerOptions: {
     // Target latest version of ECMAScript.
     target: "es2017",
