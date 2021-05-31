@@ -20,7 +20,7 @@ const FeaturedMedia = ({ state, id }) => {
       ) || null;
 
   return (
-    <Container>
+    <Container isAmp={state.frontity.mode === "amp"}>
       <StyledImage
         alt={media.title.rendered}
         src={media.source_url}
@@ -35,6 +35,11 @@ export default connect(FeaturedMedia);
 const Container = styled.div`
   margin-top: 16px;
   height: 300px;
+  ${({ isAmp }) =>
+    isAmp &&
+    css`
+      position: relative;
+    `};
 `;
 
 const StyledImage = styled(Image)`
