@@ -1,48 +1,103 @@
+/**
+ * Abstract base type used to make the {@link Multi} and {@link Normalized} types.
+ */
 type Base = {
+  /**
+   * Field to distinguish between different sites.
+   */
   match?: string[];
+
+  /**
+   * The mode of this site.
+   *
+   * @example "amp"
+   *
+   * @defaultValue "default"
+   */
   mode?: string;
-  state?: object;
+
+  /**
+   * Global state.
+   */
+  state?: Record<string, unknown>;
 };
 
+/**
+ * The base type of a Frontity package.
+ */
 export type Package = {
+  /**
+   * Package name.
+   */
   name: string;
+
+  /**
+   * Whether the package should be active or not.
+   */
   active?: boolean;
-  state?: object;
+
+  /**
+   * Package state.
+   */
+  state?: Record<string, unknown>;
 };
 
-export type NormalizedPackage = Package & {
-  active: boolean; // Default: true
-  state: object; // Default: {}
-};
+/**
+ * Package that has been normalized.
+ */
+type NormalizedPackage = Required<Package>;
 
-type Mono = Base & {
-  name?: string;
-};
-
+/**
+ * Multi-site package.
+ */
 type Multi = Base & {
+  /**
+   * Site name.
+   */
   name: string;
 };
 
-type Imported<T> = Base & {
-  packages: (string | T)[];
-};
-
+/**
+ * Represents normalized single site settings.
+ */
 type Normalized<T> = Base & {
-  mode: string; // Default: html
-  state: object; // Default: {}
+  /**
+   * Mode of the site.
+   */
+  mode: string;
+
+  /**
+   * Site state.
+   */
+  state: Record<string, unknown>; // Default: {}
+
+  /**
+   * Packages of the site.
+   */
   packages: T[];
 };
 
-export type MonoSettings<T = Package> = Imported<T> & Mono;
-
-export type MultiSettings<T = Package> = Imported<T> & Multi;
-
-export type Settings<T = Package> = MonoSettings<T> | MultiSettings<T>[];
-
+/**
+ * Normalized site settings.
+ */
 export type NormalizedSettings<T = NormalizedPackage> = Normalized<T> & Multi;
 
+/**
+ * A Frontity site.
+ */
 export type Site = {
+  /**
+   * Site name.
+   */
   name: string;
+
+  /**
+   * The mode of this site.
+   */
   mode: string;
+
+  /**
+   * Site packages.
+   */
   packages: string[];
 };
