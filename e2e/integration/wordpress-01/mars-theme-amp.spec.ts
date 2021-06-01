@@ -15,12 +15,12 @@ describe("mars-theme with AMP", () => {
     cy.validateAMP(url);
     cy.visit(url);
 
-    cy.get("section > article").should("have.length", 10);
+    cy.get("section > article").should("have.length", 2);
   });
 
   it("individual post page", () => {
     const url =
-      "http://localhost:3001/block-image/?frontity_name=amp-mars-theme";
+      "http://localhost:3001/the-white-heron/?frontity_name=amp-mars-theme";
 
     cy.validateAMP(url);
     cy.visit(url);
