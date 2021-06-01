@@ -9,7 +9,7 @@ class MyLib {
 const state = {
   frontity: {
     debug: false,
-    mode: "html",
+    mode: "default",
     packages: ["package-1", "package-2", "package-3"],
   },
 };
@@ -20,7 +20,7 @@ const Namespace3 = () => <div>namespace3</div>;
 const Namespace4 = () => <div>namespace4</div>;
 
 const packages = {
-  package_1_html: {
+  package_1_default: {
     name: "package1",
     roots: {
       namespace1: Namespace1,
@@ -46,7 +46,7 @@ const packages = {
       },
     },
   },
-  package_2_html: {
+  package_2_default: {
     name: "package2",
     roots: {
       namespace3: Namespace3,
@@ -74,7 +74,7 @@ const packages = {
       },
     },
   },
-  package_3_html: () => ({
+  package_3_default: () => ({
     name: "package3",
     roots: {
       namespace4: Namespace4,
@@ -106,7 +106,7 @@ describe("mergePackages", () => {
   it("should deep clone state", () => {
     const merged = mergePackages({ packages, state });
     expect(state.frontity).not.toBe(merged.state.frontity);
-    expect(packages.package_2_html.state.namespace3).not.toBe(
+    expect(packages.package_2_default.state.namespace3).not.toBe(
       merged.state.namespace3
     );
   });
@@ -124,7 +124,7 @@ describe("mergePackages", () => {
   it("should deep clone state if the 'overwriteArrays' option is true", () => {
     const merged = mergePackages({ packages, state, overwriteArrays: true });
     expect(state.frontity).not.toBe(merged.state.frontity);
-    expect(packages.package_2_html.state.namespace3).not.toBe(
+    expect(packages.package_2_default.state.namespace3).not.toBe(
       merged.state.namespace3
     );
   });
