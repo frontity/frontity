@@ -8,4 +8,4 @@
  * things that people import in their frontity.settings or frontity.config
  * files.  Once Webpack runs, all the files are transpiled.
  */
-export default ["node_modules\\/(?!.*(frontity|\\.ts$))"];
+export default ["node_modules(\\/|\\\\)(?!.*(frontity|\\.ts$))"];
