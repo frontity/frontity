@@ -31,13 +31,7 @@ describe("ts-node ignores", () => {
   });
 
   it("should not ignore frontity settings", () => {
-    const paths = [
-      "frontity.settings.js",
-      "frontity.settings.ts",
-      "index.js",
-      "some-package/index.js",
-      "@org/some-package/index.js",
-    ];
+    const paths = ["frontity.settings.js", "frontity.settings.ts"];
     for (const path of paths) {
       expect(ignoreRegExp.test(path)).toBe(false);
       expect(ignoreRegExp.test(path.replace(/\//g, "\\"))).toBe(false);
@@ -75,8 +69,6 @@ describe("ts-node ignores", () => {
     const paths = [
       "node_modules/@frontity/some-package/index.js",
       "@frontity/some-package/index.js",
-      "node_modules/@frontity/some-package/index.ts",
-      "@frontity/some-package/index.ts",
     ];
     for (const path of paths) {
       expect(ignoreRegExp.test(path)).toBe(false);
@@ -88,8 +80,6 @@ describe("ts-node ignores", () => {
     const paths = [
       "node_modules/@org/some-frontity-package/index.js",
       "node_modules/some-frontity-package/index.js",
-      "node_modules/@org/some-frontity-package/index.ts",
-      "node_modules/some-frontity-package/index.ts",
     ];
     for (const path of paths) {
       expect(ignoreRegExp.test(path)).toBe(false);
