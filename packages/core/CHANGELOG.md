@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.14.2
+
+### Patch Changes
+
+- [`a154a9cb`](https://github.com/frontity/frontity/commit/a154a9cb7093ab0199c01f28b6363f93427abb17) [#840](https://github.com/frontity/frontity/pull/840) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix Webpack/TS-Node excludes not working on Windows.
+
+* [`63154b4f`](https://github.com/frontity/frontity/commit/63154b4fb16095ccf22e4862c6d91c9c6157af67) [#837](https://github.com/frontity/frontity/pull/837) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix transpilation of `frontity.config.js` files in external packages.
+
 ## 1.14.1
 
 ### Patch Changes

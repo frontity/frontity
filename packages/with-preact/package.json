@@ -1,6 +1,6 @@
 {
   "name": "@frontity/with-preact",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The frontity package used to alias react to preact",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -18,7 +18,7 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-      "preact": "^10.5.13",
-      "preact-render-to-string": "^5.1.19"
+    "preact": "^10.5.13",
+    "preact-render-to-string": "^5.1.19"
   }
 }
