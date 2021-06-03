@@ -30,6 +30,11 @@ const settings: Settings<
     packages: ["e2e-image"],
   },
   {
+    name: "amp-image",
+    mode: "amp",
+    packages: ["@frontity/amp", "e2e-image"],
+  },
+  {
     name: "fonts",
     packages: [
       {
