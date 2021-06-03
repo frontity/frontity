@@ -1,6 +1,6 @@
 {
   "name": "@frontity/with-preact",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "The frontity package used to alias react to preact",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
