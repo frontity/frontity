@@ -14,7 +14,7 @@ Object {
       "item2",
       "item3",
     ],
-    "mode": "html",
+    "mode": "default",
     "name": "site",
     "options": Object {},
     "packages": Array [

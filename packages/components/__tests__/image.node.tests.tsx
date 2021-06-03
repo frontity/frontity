@@ -3,9 +3,19 @@
  */
 
 import TestRenderer from "react-test-renderer";
-import { HelmetProvider } from "frontity";
-import { FilledContext } from "react-helmet-async";
 import Image from "../image";
+
+// Mock only useConnect in the 'frontity' module
+jest.mock("frontity", () => ({
+  ...jest.requireActual("frontity"),
+  useConnect: () => ({
+    state: {
+      frontity: {
+        mode: "html",
+      },
+    },
+  }),
+}));
 
 describe("Image", () => {
   test('It\'s a normal image if loading === "eager"', () => {
@@ -20,8 +30,15 @@ describe("Image", () => {
     };
 
     const image = TestRenderer.create(<Image {...props} />).toJSON();
-
-    expect(image).toMatchSnapshot();
+    expect(image).toMatchInlineSnapshot(`
+      <img
+        alt="Some fake alt text"
+        className="frontity-lazy-image fake-class-name"
+        loading="eager"
+        src="https://fake-src.com/fake-image.jpg"
+        srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+      />
+    `);
   });
 
   test("works on server (without height)", () => {
@@ -33,17 +50,16 @@ describe("Image", () => {
       className: "fake-class-name",
     };
 
-    const helmetContext = {} as FilledContext;
-    const image = TestRenderer.create(
-      <HelmetProvider context={helmetContext}>
-        <Image {...props} />
-      </HelmetProvider>
-    ).toJSON();
-    const head = helmetContext.helmet;
-
-    expect(image).toMatchSnapshot();
-    expect(head.script.toString()).toMatchSnapshot();
-    expect(head.noscript.toString()).toMatchSnapshot();
+    const image = TestRenderer.create(<Image {...props} />).toJSON();
+    expect(image).toMatchInlineSnapshot(`
+      <img
+        alt="Some fake alt text"
+        className="frontity-lazy-image fake-class-name"
+        loading="lazy"
+        src="https://fake-src.com/fake-image.jpg"
+        srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+      />
+    `);
   });
 
   test("works on server (with height)", () => {
@@ -56,16 +72,16 @@ describe("Image", () => {
       height: 300,
     };
 
-    const helmetContext = {} as FilledContext;
-    const image = TestRenderer.create(
-      <HelmetProvider context={helmetContext}>
-        <Image {...props} />
-      </HelmetProvider>
-    ).toJSON();
-    const head = helmetContext.helmet;
-
-    expect(image).toMatchSnapshot();
-    expect(head.script.toString()).toMatchSnapshot();
-    expect(head.noscript.toString()).toMatchSnapshot();
+    const image = TestRenderer.create(<Image {...props} />).toJSON();
+    expect(image).toMatchInlineSnapshot(`
+      <img
+        alt="Some fake alt text"
+        className="frontity-lazy-image fake-class-name"
+        height={300}
+        loading="lazy"
+        src="https://fake-src.com/fake-image.jpg"
+        srcSet="https://fake-src.com/fake-image.jpg?w=300 300w, https://fake-src.com/fake-image.jpg?w=150 150w"
+      />
+    `);
   });
 });

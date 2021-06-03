@@ -27,7 +27,7 @@ Object {
   "state": Object {
     "frontity": Object {
       "debug": true,
-      "mode": "html",
+      "mode": "default",
       "packages": Array [
         "package-1",
         "package-2",

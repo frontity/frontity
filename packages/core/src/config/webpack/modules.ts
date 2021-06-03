@@ -28,9 +28,9 @@ interface ModuleOptions {
  * The regular expressions used to exclude packages from transpilation.
  */
 export const exclude = [
-  /\/core-js($|\/)/,
-  /\/webpack($|\/)/,
-  /\/regenerator-runtime($|\/)/,
+  /(\/|\\)core-js($|(\/|\\))/,
+  /(\/|\\)webpack($|(\/|\\))/,
+  /(\/|\\)regenerator-runtime($|(\/|\\))/,
 ];
 
 /**

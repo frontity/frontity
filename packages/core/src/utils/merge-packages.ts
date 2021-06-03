@@ -22,13 +22,10 @@ const overwriteMerge: deepmerge.Options["arrayMerge"] = (_, sourceArray) => {
   return sourceArray;
 };
 
-// Merge all packages together in a single config that can be passed
-// to createStore.
-export default ({
-  packages,
-  state,
-  overwriteArrays = false,
-}: {
+/**
+ * Type for parameters of the {@link mergePackages} function.
+ */
+interface MergePackages {
   /**
    * The packages interface to be used.
    */
@@ -45,7 +42,21 @@ export default ({
    * The flag for overwritting the arrays.
    */
   overwriteArrays?: boolean;
-}): Package => {
+}
+
+/**
+ * Merge all packages together in a single config that can be passed
+ * to createStore.
+ *
+ * @param params - Defined in {@link MergePackages}.
+ *
+ * @returns A Frontity package that can be passed to the {@link createStore} function.
+ */
+const mergePackages = ({
+  packages,
+  state,
+  overwriteArrays = false,
+}: MergePackages): Package => {
   let config: Package = {
     roots: {},
     state: {},
@@ -81,3 +92,5 @@ export default ({
 
   return config;
 };
+
+export default mergePackages;
