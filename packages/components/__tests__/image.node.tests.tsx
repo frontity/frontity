@@ -4,10 +4,11 @@
 
 import TestRenderer from "react-test-renderer";
 import Image from "../image";
+import * as frontity from "frontity";
 
 // Mock only useConnect in the 'frontity' module
 jest.mock("frontity", () => ({
-  ...jest.requireActual("frontity"),
+  ...jest.requireActual<typeof frontity>("frontity"),
   useConnect: () => ({
     state: {
       frontity: {
