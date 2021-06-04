@@ -18,7 +18,7 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-      "preact": "^10.5.13",
-      "preact-render-to-string": "^5.1.19"
+    "preact": "^10.5.13",
+    "preact-render-to-string": "^5.1.19"
   }
 }
