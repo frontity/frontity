@@ -55,7 +55,7 @@
     "deepmerge": "^4.2.2",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
-    "fs-extra": "^9.0.1",
+    "fs-extra": "^10.0.0",
     "hash-it": "^4.0.5",
     "htmlescape": "^1.1.1",
     "koa": "^2.13.0",
