@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.14.2
+
+### Patch Changes
+
+- [`a154a9cb`](https://github.com/frontity/frontity/commit/a154a9cb7093ab0199c01f28b6363f93427abb17) [#840](https://github.com/frontity/frontity/pull/840) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix Webpack/TS-Node excludes not working on Windows.
+
+* [`63154b4f`](https://github.com/frontity/frontity/commit/63154b4fb16095ccf22e4862c6d91c9c6157af67) [#837](https://github.com/frontity/frontity/pull/837) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix transpilation of `frontity.config.js` files in external packages.
+
+- [`31cf53f0`](https://github.com/frontity/frontity/commit/31cf53f02128b19995ea3eed6f6f75ef936210a5) [#843](https://github.com/frontity/frontity/pull/843) Thanks [@DAreRodz](https://github.com/DAreRodz)! - Refactor `createSymlinks` to use a custom implementation of `fs-extra`'s `readFile` function.
+
 ## 1.14.1
 
 ### Patch Changes
