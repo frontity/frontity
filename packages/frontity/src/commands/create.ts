@@ -48,8 +48,13 @@ export default (options?: CreateCommandOptions) =>
       let dirExisted: boolean;
 
       // Parses and validates options.
-      const { name, theme, path, typescript, noGit }: CreateCommandOptions =
-        normalizeOptions(defaultOptions, options);
+      const {
+        name,
+        theme,
+        path,
+        typescript,
+        noGit,
+      }: CreateCommandOptions = normalizeOptions(defaultOptions, options);
 
       process.on("SIGINT", async () => {
         if (typeof dirExisted !== "undefined")
