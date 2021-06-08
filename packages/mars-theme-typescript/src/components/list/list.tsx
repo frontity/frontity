@@ -5,7 +5,12 @@ import { Packages } from "../../../types";
 import { isTerm, isAuthor } from "@frontity/source";
 import { ArchiveData } from "@frontity/source/types";
 
-const List: React.FC<{ data: ArchiveData }> = ({ data }) => {
+interface ListProps {
+  data: ArchiveData;
+  when?: boolean;
+}
+
+const List: React.FC<ListProps> = ({ data }) => {
   const { state } = useConnect<Packages>();
 
   return (

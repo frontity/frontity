@@ -12,16 +12,16 @@ import FeaturedMedia from "./featured-media";
 import { PostTypeEntity, PostTypeData } from "@frontity/source/types";
 
 /**
- *
+ * Properties received by the `Post` component.
  */
 interface PostProps {
   /**
-   *
+   * Data element representing a URL in your frontity site.
    */
   data: PostTypeData;
 
   /**
-   *
+   * Whether to render this component.
    */
   when?: boolean;
 }
@@ -45,7 +45,7 @@ interface PostProps {
  *
  * @returns The {@link Post} element rendered.
  */
-const Post: React.FC<PostProps> = ({ data }) => {
+const Post = ({ data }: PostProps): JSX.Element => {
   const { state, actions, libraries } = useConnect<Packages>();
   // Get the data of the post.
   const post: PostTypeEntity = state.source[data.type][data.id];

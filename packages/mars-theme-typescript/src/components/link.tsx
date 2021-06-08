@@ -1,7 +1,7 @@
 import { connect, useConnect } from "frontity";
 import Link from "@frontity/components/link";
 import { Packages } from "../../types";
-
+import { LinkProps } from "@frontity/components/link/types";
 
 /**
  * The MarsLink component, which is a wrapper on top of the {@link Link}
@@ -18,11 +18,10 @@ import { Packages } from "../../types";
  *
  * @returns A {@link Link} component, which returns an HTML anchor element.
  */
-const MarsLink = ({ children, ...props }) => {
+const MarsLink = ({ children, ...props }: LinkProps): JSX.Element => {
   const { state, actions } = useConnect<Packages>();
 
-  
-/**
+  /**
    * A handler that closes the mobile menu when a link is clicked.
    */
   const onClick = () => {

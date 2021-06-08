@@ -2,13 +2,12 @@ import { connect, styled, useConnect } from "frontity";
 import Link from "./link";
 import { Packages } from "../../types";
 
-
 /**
  * Navigation Component
  *
  * It renders the navigation links
  */
-const Nav = () => {
+const Nav = (): JSX.Element => {
   const { state } = useConnect<Packages>();
 
   return (
