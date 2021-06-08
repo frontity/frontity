@@ -1,11 +1,30 @@
 import { useEffect } from "react";
 import { connect, useConnect, styled } from "frontity";
+import Link from "./link";
 import List from "./list";
-import { isPost } from "@frontity/source";
+import {
+  isAttachmentEntity,
+  isPageEntity,
+  isPostEntity,
+} from "@frontity/source";
 import { Packages } from "../../types";
 import FeaturedMedia from "./featured-media";
-import { PostEntity, PostTypeData } from "@frontity/source/types";
+import { PostTypeEntity, PostTypeData } from "@frontity/source/types";
 
+/**
+ *
+ */
+interface PostProps {
+  /**
+   *
+   */
+  data: PostTypeData;
+
+  /**
+   *
+   */
+  when?: boolean;
+}
 
 /**
  * The Post component that Mars uses to render any kind of "post type", like
@@ -26,20 +45,17 @@ import { PostEntity, PostTypeData } from "@frontity/source/types";
  *
  * @returns The {@link Post} element rendered.
  */
-const Post: React.FC<{ data: PostTypeData }> = ({ data }) => {
-  const { state, actions, libraries } = useConnect<Packages>();{
-  // Get information about the current URL.
-  const data = state.source.get(state.router.link);
+const Post: React.FC<PostProps> = ({ data }) => {
+  const { state, actions, libraries } = useConnect<Packages>();
   // Get the data of the post.
-  const post: PostEntity = state.source[data.type][data.id];
+  const post: PostTypeEntity = state.source[data.type][data.id];
   // Get the data of the author.
   const author = state.source.author[post.author];
 
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
 
-  
-/**
+  /**
    * Once the post has loaded in the DOM, prefetch both the
    * home posts and the list component so if the user visits
    * the home page, everything is ready and it loads instantly.
@@ -56,7 +72,7 @@ const Post: React.FC<{ data: PostTypeData }> = ({ data }) => {
         <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
 
         {/* Only display author and date on posts */}
-        {isPost(data) && (
+        {isPostEntity(post) && (
           <div>
             {author && (
               <StyledLink link={author.link}>
@@ -74,21 +90,25 @@ const Post: React.FC<{ data: PostTypeData }> = ({ data }) => {
       </div>
 
       {/* Look at the settings to see if we should include the featured image */}
-      {state.theme.featured.showOnPost && (
-        <FeaturedMedia id={post.featured_media} />
-      )}
+      {state.theme.featured.showOnPost &&
+        (isPostEntity(post) || isPageEntity(post)) && (
+          <FeaturedMedia id={post.featured_media} />
+        )}
 
-      {data.isAttachment ? (
+      {isAttachmentEntity(post) && (
         // If the post is an attachment, just render the description property,
         // which already contains the thumbnail.
-        <div dangerouslySetInnerHTML={{ __html: post.description.rendered }} />
-      ) : (
+        <div dangerouslySetInnerHTML={{ __html: post.description?.rendered }} />
+      )}
+
+      {(isPostEntity(post) || isPageEntity(post)) && (
         // Render the content using the Html2React component so the HTML is
         // processed by the processors we included in the
         // libraries.html2react.processors array.
-      <Content>
-        <Html2React html={post.content?.rendered} />
-      </Content>
+        <Content>
+          <Html2React html={post.content?.rendered} />
+        </Content>
+      )}
     </Container>
   ) : null;
 };
@@ -123,7 +143,6 @@ const DateWrapper = styled.p`
   font-size: 0.9em;
   display: inline;
 `;
-
 
 /**
  * This component is the parent of the `content.rendered` HTML. We can use nested
