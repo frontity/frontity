@@ -10,7 +10,7 @@ type WindowWithFrontity = Cypress.AUTWindow & {
 describe("Head Tags - WP SEO", () => {
   before(() => {
     task("installPlugin", {
-      name: "https://github.com/alleyinteractive/wp-seo/archive/master.zip",
+      name: "https://github.com/alleyinteractive/wp-seo/archive/main.zip",
     });
     task("installPlugin", { name: "rest-api-head-tags" });
     task("installPlugin", { name: "custom-post-type-ui" });

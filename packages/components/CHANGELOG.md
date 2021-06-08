@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.8.0
+
+### Minor Changes
+
+- [`2f988427`](https://github.com/frontity/frontity/commit/2f9884270490d1a67c3ba6f061831b24ae4cc038) [#826](https://github.com/frontity/frontity/pull/826) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Make the Image component from `@frontity/components` AMP-aware and remove the Intersection Observer fallback which used to lazily load images in the absence of native lazy loading.
+
 ## 1.7.3
 
 ### Patch Changes
