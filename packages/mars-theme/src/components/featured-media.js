@@ -34,6 +34,8 @@ const FeaturedMedia = ({ state, id }) => {
         alt={media.title.rendered}
         src={media.source_url}
         srcSet={srcset}
+        width={media?.media_details?.width}
+        height={media?.media_details?.height}
       />
     </Container>
   );
