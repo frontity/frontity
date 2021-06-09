@@ -25,9 +25,6 @@ const Theme = ({ state }) => {
       <Title />
       <Head>
         <meta name="description" content={state.frontity.description} />
-        {state.frontity.mode === "amp" && (
-          <link rel="canonical" href={state.frontity.url + data.link} />
-        )}
         <html lang="en" />
       </Head>
 

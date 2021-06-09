@@ -1,8 +1,16 @@
+import expect from "expect";
+import amphtmlValidator, { Validator } from "amphtml-validator";
+
 import type { taskTypes } from "../../plugins";
 
 const task: taskTypes = cy.task;
 
 describe("mars-theme with AMP", () => {
+  let validator: Validator;
+  before(async () => {
+    validator = await amphtmlValidator.getInstance();
+  });
+
   before(() => {
     task("loadDatabase", {
       path: "./wp-data/amp-mars-theme/data.sql",
@@ -12,9 +20,15 @@ describe("mars-theme with AMP", () => {
   it("front page", () => {
     const url = "http://localhost:3001/?frontity_name=amp-mars-theme";
 
-    cy.validateAMP(url);
-    cy.visit(url);
+    cy.request("GET", url).then((response) => {
+      const result = validator.validateString(response.body);
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0].message).toBe(
+        "The mandatory tag 'link rel=canonical' is missing or incorrect."
+      );
+    });
 
+    cy.visit(url);
     cy.get("section > article").should("have.length", 2);
   });
 
@@ -22,7 +36,14 @@ describe("mars-theme with AMP", () => {
     const url =
       "http://localhost:3001/the-white-heron/?frontity_name=amp-mars-theme";
 
-    cy.validateAMP(url);
+    cy.request("GET", url).then((response) => {
+      const result = validator.validateString(response.body);
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0].message).toBe(
+        "The mandatory tag 'link rel=canonical' is missing or incorrect."
+      );
+    });
+
     cy.visit(url);
 
     cy.get("figure.wp-block-image > amp-img").should("have.descendants", "img");
