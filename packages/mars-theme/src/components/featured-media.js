@@ -44,11 +44,7 @@ export default connect(FeaturedMedia);
 const Container = styled.div`
   margin-top: 16px;
   height: 300px;
-  ${({ isAmp }) =>
-    isAmp &&
-    css`
-      position: relative;
-    `};
+  ${({ isAmp }) => isAmp && "position: relative;"};
 `;
 
 const StyledImage = styled(Image)`
