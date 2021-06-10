@@ -2,12 +2,38 @@ import Image from "@frontity/components/image";
 import { connect, styled, useConnect } from "frontity";
 import { Packages } from "../../types";
 
+/**
+ * Object defining a media URL for a specific with.
+ */
 interface MediaSizes {
+  /**
+   * Source URL of the media.
+   */
   source_url: string;
+
+  /**
+   * Width for this media.
+   */
   width: number;
 }
 
-const FeaturedMedia: React.FC<{ id: number }> = ({ id }) => {
+/**
+ * Props of the {@link FeaturedMedia} component.
+ */
+interface FeaturedMediaProps {
+  /**
+   * ID of the attachment entity.
+   */
+  id: number;
+}
+
+/**
+ * Show the specified attachment entity as the featured media of a post.
+ *
+ * @param props - Object of type {@link FeaturedMediaProps}.
+ * @returns The featured media.
+ */
+const FeaturedMedia = ({ id }: FeaturedMediaProps): JSX.Element => {
   const { state } = useConnect<Packages>();
   const media = state.source.attachment[id];
 

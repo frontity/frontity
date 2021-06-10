@@ -9,10 +9,11 @@ import Title from "./title";
 import PageError from "./page-error";
 import { Packages } from "../../types";
 
-
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
+ *
+ * @returns Main theme component.
  */
 const Theme = () => {
   const { state } = useConnect<Packages>();

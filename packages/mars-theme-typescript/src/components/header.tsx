@@ -4,6 +4,11 @@ import Nav from "./nav";
 import MobileMenu from "./menu";
 import { Packages } from "../../types";
 
+/**
+ * The header of the site, showing the title and description, and the nav bar.
+ *
+ * @returns The header element.
+ */
 const Header = () => {
   const { state } = useConnect<Packages>();
   return (
