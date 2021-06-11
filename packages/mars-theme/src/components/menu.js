@@ -11,7 +11,8 @@ import MenuModal from "./menu-modal";
  * @returns A React component.
  */
 function MobileMenu({ state, actions }) {
-  const { isMobileMenuOpen } = state.theme;
+  const { menu, isMobileMenuOpen } = state.theme;
+  if (menu?.length === 0) return null;
 
   return state.frontity.mode === "amp" ? (
     <>

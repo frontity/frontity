@@ -535,6 +535,10 @@ const settings: Settings<
         name: "@frontity/mars-theme",
         state: {
           theme: {
+            menu: [
+              ["The White Heron", "/the-white-heron"],
+              ["The Lost City", "/hello-world"],
+            ],
             featured: {
               showOnList: true,
               showOnPost: true,
