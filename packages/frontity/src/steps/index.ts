@@ -22,7 +22,14 @@ import {
 } from "../utils";
 import { CreateCommandOptions, PackageJson } from "./types";
 
-const allowedExistingContent = ["readme.md", "license", ".git", ".gitignore"];
+const allowedExistingContent = [
+  "readme.md",
+  "license",
+  ".git",
+  ".gitignore",
+  ".ds_store",
+];
+
 const faviconUrl = "https://favicon.frontity.org/";
 
 /**

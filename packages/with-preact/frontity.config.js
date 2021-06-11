@@ -3,7 +3,7 @@
  *
  * @param param - The passed params.
  */
-module.exports.webpack = ({ config }) => {
+export const webpack = ({ config }) => {
   config.resolve.alias["react"] = "preact/compat";
   config.resolve.alias["react-dom"] = "preact/compat";
 };
