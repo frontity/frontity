@@ -1,10 +1,46 @@
-import { styled, connect, Global } from "frontity";
+import { styled, connect, Global, Head } from "frontity";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
 
+/**
+ * The menu that should be displayed on mobile devices displaying links to
+ * various categories and pages. This component contains mostly logic and
+ * renders the {@link MenuModal} component.
+ *
+ * @param props - The state and actions injected by Frontity.
+ * @returns A React component.
+ */
 function MobileMenu({ state, actions }) {
   const { isMobileMenuOpen } = state.theme;
-  return (
+
+  return state.frontity.mode === "amp" ? (
+    <>
+      <Head>
+        <script
+          async
+          custom-element="amp-bind"
+          src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
+        ></script>
+      </Head>
+
+      <MenuToggle>
+        <HamburgerIcon
+          color="white"
+          size="24px"
+          data-amp-bind-hidden="isMenuOpen"
+          on="tap:AMP.setState({ isMenuOpen: true })"
+        />
+        <CloseIcon
+          color="white"
+          size="20px"
+          data-amp-bind-hidden="!isMenuOpen"
+          on="tap:AMP.setState({ isMenuOpen: false })"
+          hidden
+        />
+      </MenuToggle>
+      <MenuModal data-amp-bind-hidden="!isMenuOpen" hidden />
+    </>
+  ) : (
     <>
       <MenuToggle onClick={actions.theme.toggleMobileMenu}>
         {isMobileMenuOpen ? (
