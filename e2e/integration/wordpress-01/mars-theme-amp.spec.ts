@@ -20,6 +20,9 @@ describe("mars-theme with AMP", () => {
   it("front page", () => {
     const url = "http://localhost:3001/?frontity_name=amp-mars-theme";
 
+    // The validator should only throw ONE error for missing rel=canonical link.
+    // This is because it's the reponsibility of the user to create the
+    // <link rel="canonical" /> tag.
     cy.request("GET", url).then((response) => {
       const result = validator.validateString(response.body);
       expect(result.errors).toHaveLength(1);
@@ -36,6 +39,9 @@ describe("mars-theme with AMP", () => {
     const url =
       "http://localhost:3001/the-white-heron/?frontity_name=amp-mars-theme";
 
+    // The validator should only throw ONE error for missing rel=canonical link.
+    // This is because it's the reponsibility of the user to create the
+    // <link rel="canonical" /> tag.
     cy.request("GET", url).then((response) => {
       const result = validator.validateString(response.body);
       expect(result.errors).toHaveLength(1);
