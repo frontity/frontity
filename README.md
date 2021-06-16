@@ -1,5 +1,3 @@
-# New Document
-
 <br>
 <div align="center">
   <a href="https://frontity.org/">
