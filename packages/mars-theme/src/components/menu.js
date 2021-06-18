@@ -18,7 +18,7 @@ function MobileMenu({ state, actions }) {
     <>
       <Head>
         <script
-          async
+          async={undefined}
           custom-element="amp-bind"
           src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
         ></script>
@@ -28,12 +28,16 @@ function MobileMenu({ state, actions }) {
         <HamburgerIcon
           color="white"
           size="24px"
+          role="button"
+          tabindex="0"
           data-amp-bind-hidden="isMenuOpen"
           on="tap:AMP.setState({ isMenuOpen: true })"
         />
         <CloseIcon
           color="white"
           size="20px"
+          role="button"
+          tabindex="0"
           data-amp-bind-hidden="!isMenuOpen"
           on="tap:AMP.setState({ isMenuOpen: false })"
           hidden
