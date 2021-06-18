@@ -4,6 +4,7 @@ import { isError, isRedirection } from "@frontity/source";
 import { Derived } from "frontity/types";
 import { Data } from "@frontity/source/types";
 
+
 /**
  * This is an experimental function to be able to resolve the types of derived
  * state (Derived type) and Actions (Action type). It is not complete and only
@@ -17,6 +18,7 @@ import { Data } from "@frontity/source/types";
 const resolved = <T extends (...args: any) => any>(
   derivedOrAction: T
 ): ReturnType<T> => derivedOrAction as any;
+
 
 /**
  * Set the URL.
@@ -112,6 +114,7 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
   });
 };
 
+
 /**
  * Replace the value of `state.router.state` with the give object.
  *
@@ -130,6 +133,7 @@ export const updateState: TinyRouter["actions"]["router"]["updateState"] = ({
   state.router.state = cloned;
   window.history.replaceState(cloned, "");
 };
+
 
 /**
  * Initilization of the router.
@@ -196,19 +200,13 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       ? libraries.source.normalize(browserLink)
       : browserLink;
 
-    // Add the state to the browser history and replace the link.
-    window.history.replaceState(
-      JSON.parse(JSON.stringify(state.router.state)),
-      "",
-      link
-    );
-
     // We have to compare the `initalLink` with `browserLink` because we have
     // normalized the `link` at this point and `initialLink` is not normalized.
     // Skip on HMR.
     if (browserLink !== state.frontity.initialLink && !state.frontity.hmr) {
       if (state.source) {
-        /**
+        
+/**
          * Derived state pointing to the initial data object.
          *
          * @param store - The Frontity store.
@@ -223,6 +221,13 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       state.router.link = link;
     }
 
+    // Add the state to the browser history and replace the link.
+    window.history.replaceState(
+      JSON.parse(JSON.stringify(state.router.state)),
+      "",
+      link
+    );
+
     // Listen to changes in history.
     window.addEventListener("popstate", (event) => {
       if (event.state) {
@@ -236,6 +241,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     });
   }
 };
+
 
 /**
  * Implementation of the `beforeSSR()` Frontity action as used by the
