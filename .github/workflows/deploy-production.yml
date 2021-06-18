@@ -3,7 +3,7 @@ name: deploy production
 on:
   push:
     branches:
-      - fix-prod-deploy
+      - master
 
 jobs:
   deploy:
