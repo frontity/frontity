@@ -17,7 +17,7 @@ export const storeMiddlewares =
     const store: Package = ctx.state.store;
 
     // Iterate over all the middlewares that packages expose.
-    Object.values(store.server).forEach((namespace) => {
+    Object.values(store.server || {}).forEach((namespace) => {
       Object.values(namespace).forEach((middleware) => {
         // Register the middleware.
         app.use((ctx, next) => {
