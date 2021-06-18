@@ -4,7 +4,6 @@ import { isError, isRedirection } from "@frontity/source";
 import { Derived } from "frontity/types";
 import { Data } from "@frontity/source/types";
 
-
 /**
  * This is an experimental function to be able to resolve the types of derived
  * state (Derived type) and Actions (Action type). It is not complete and only
@@ -18,7 +17,6 @@ import { Data } from "@frontity/source/types";
 const resolved = <T extends (...args: any) => any>(
   derivedOrAction: T
 ): ReturnType<T> => derivedOrAction as any;
-
 
 /**
  * Set the URL.
@@ -53,67 +51,64 @@ const resolved = <T extends (...args: any) => any>(
  * ```
  * @returns Void.
  */
-export const set: TinyRouter["actions"]["router"]["set"] = ({
-  state,
-  actions,
-  libraries,
-}) => (link, options = {}): void => {
-  // Normalize the link.
-  if (libraries.source && libraries.source.normalize)
-    link = libraries.source.normalize(link);
+export const set: TinyRouter["actions"]["router"]["set"] =
+  ({ state, actions, libraries }) =>
+  (link, options = {}): void => {
+    // Normalize the link.
+    if (libraries.source && libraries.source.normalize)
+      link = libraries.source.normalize(link);
 
-  // If the link hasn't changed, do nothing.
-  if (state.router.link === link) return;
+    // If the link hasn't changed, do nothing.
+    if (state.router.link === link) return;
 
-  // Clone the state that we are going to use for `window.history` because it
-  // cannot contain proxies.
-  const historyState = JSON.parse(JSON.stringify(options.state || {}));
+    // Clone the state that we are going to use for `window.history` because it
+    // cannot contain proxies.
+    const historyState = JSON.parse(JSON.stringify(options.state || {}));
 
-  // If the data is a redirection, then we set the link to the location.
-  // The redirections are stored in source.data just like any other data.
-  const data = state.source?.get(link);
-  if (data && data.isReady && isRedirection(data)) {
-    if (data.isExternal) {
-      window.replaceLocation(data.location);
-    } else {
-      // If the link is internal, we have to discard the domain.
-      const { pathname, search, hash } = new URL(
-        data.location,
-        "https://dummy-domain.com"
-      );
-      // If there is a link normalize, we have to use it.
-      if (libraries.source && libraries.source.normalize)
-        link = libraries.source.normalize(pathname + search + hash);
-      else link = pathname + search + hash;
-    }
-  }
-
-  // If we are in the client, update `window.history` and fetch the link.
-  if (state.frontity.platform === "client") {
-    if (!options.method || options.method === "push")
-      window.history.pushState(historyState, "", link);
-    else if (options.method === "replace")
-      window.history.replaceState(historyState, "", link);
-    else if (options.method !== "pop") {
-      // Throw an error if another method is used. We support "pop" internally
-      // for popstate events.
-      error(
-        `The method ${options.method} is not supported by actions.router.set.`
-      );
+    // If the data is a redirection, then we set the link to the location.
+    // The redirections are stored in source.data just like any other data.
+    const data = state.source?.get(link);
+    if (data && data.isReady && isRedirection(data)) {
+      if (data.isExternal) {
+        window.replaceLocation(data.location);
+      } else {
+        // If the link is internal, we have to discard the domain.
+        const { pathname, search, hash } = new URL(
+          data.location,
+          "https://dummy-domain.com"
+        );
+        // If there is a link normalize, we have to use it.
+        if (libraries.source && libraries.source.normalize)
+          link = libraries.source.normalize(pathname + search + hash);
+        else link = pathname + search + hash;
+      }
     }
 
-    // If `autoFetch` is on, do the fetch.
-    if (state.router.autoFetch) actions.source?.fetch(link);
-  }
+    // If we are in the client, update `window.history` and fetch the link.
+    if (state.frontity.platform === "client") {
+      if (!options.method || options.method === "push")
+        window.history.pushState(historyState, "", link);
+      else if (options.method === "replace")
+        window.history.replaceState(historyState, "", link);
+      else if (options.method !== "pop") {
+        // Throw an error if another method is used. We support "pop" internally
+        // for popstate events.
+        error(
+          `The method ${options.method} is not supported by actions.router.set.`
+        );
+      }
 
-  // Finally, set the `state.router.link` property to the new value.
-  batch(() => {
-    state.router.previous = state.router.link;
-    state.router.link = link;
-    state.router.state = historyState;
-  });
-};
+      // If `autoFetch` is on, do the fetch.
+      if (state.router.autoFetch) actions.source?.fetch(link);
+    }
 
+    // Finally, set the `state.router.link` property to the new value.
+    batch(() => {
+      state.router.previous = state.router.link;
+      state.router.link = link;
+      state.router.state = historyState;
+    });
+  };
 
 /**
  * Replace the value of `state.router.state` with the give object.
@@ -124,16 +119,15 @@ export const set: TinyRouter["actions"]["router"]["set"] = ({
  * @param historyState - The history state object.
  * @returns Void.
  */
-export const updateState: TinyRouter["actions"]["router"]["updateState"] = ({
-  state,
-}) => (historyState: Record<string, unknown>) => {
-  // Clone the state to make sure we don't leak proxies.
-  const cloned = JSON.parse(JSON.stringify(historyState));
+export const updateState: TinyRouter["actions"]["router"]["updateState"] =
+  ({ state }) =>
+  (historyState: Record<string, unknown>) => {
+    // Clone the state to make sure we don't leak proxies.
+    const cloned = JSON.parse(JSON.stringify(historyState));
 
-  state.router.state = cloned;
-  window.history.replaceState(cloned, "");
-};
-
+    state.router.state = cloned;
+    window.history.replaceState(cloned, "");
+  };
 
 /**
  * Initilization of the router.
@@ -205,8 +199,7 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
     // Skip on HMR.
     if (browserLink !== state.frontity.initialLink && !state.frontity.hmr) {
       if (state.source) {
-        
-/**
+        /**
          * Derived state pointing to the initial data object.
          *
          * @param store - The Frontity store.
@@ -242,7 +235,6 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
   }
 };
 
-
 /**
  * Implementation of the `beforeSSR()` Frontity action as used by the
  * tiny-router.
@@ -251,59 +243,61 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
  *
  * @returns Void.
  */
-export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] = ({
-  state,
-  actions,
-}) => async ({ ctx }) => {
-  // If autoFetch is disabled, there is nothing to do.
-  if (!state.router.autoFetch) {
-    return;
-  }
-
-  // Because Frontity is a modular framework, it could happen that a source
-  // package like `@frontity/wp-source` has not been installed but the user is
-  // trying to use autoFetch option, which requires it.
-  if (!actions.source || !actions.source.fetch || !state.source.get) {
-    warn("You are trying to use autoFetch but no source package is installed.");
-    return;
-  }
-
-  // Fetch the current link.
-  await actions.source.fetch(state.router.link);
-  const data = state.source.get(state.router.link);
-
-  // Check if the link has a redirection.
-  if (data && isRedirection(data)) {
-    // If the redirection is external, just redirect to the full URL here.
-    if (data.isExternal) {
-      ctx.status = data.redirectionStatus;
-      ctx.redirect(data.location);
+export const beforeSSR: TinyRouter["actions"]["router"]["beforeSSR"] =
+  ({ state, actions }) =>
+  async ({ ctx }) => {
+    // If autoFetch is disabled, there is nothing to do.
+    if (!state.router.autoFetch) {
       return;
     }
 
-    // Recover all the missing query params from the original URL. This is
-    // required because we remove the query params that start with `frontity_`.
-    const location = new URL(data.location, "https://dummy-domain.com");
-    ctx.URL.searchParams.forEach((value, key) => {
-      if (!location.searchParams.has(key))
-        location.searchParams.append(key, value);
-    });
+    // Because Frontity is a modular framework, it could happen that a source
+    // package like `@frontity/wp-source` has not been installed but the user is
+    // trying to use autoFetch option, which requires it.
+    if (!actions.source || !actions.source.fetch || !state.source.get) {
+      warn(
+        "You are trying to use autoFetch but no source package is installed."
+      );
+      return;
+    }
 
-    // Set the correct status for the redirection. It could be a 301, 302, 307
-    // or 308.
-    ctx.status = data.redirectionStatus;
+    // Fetch the current link.
+    await actions.source.fetch(state.router.link);
+    const data = state.source.get(state.router.link);
 
-    // 30X redirections can be relative so adding the Frontity URL is not
-    // needed - see https://tools.ietf.org/html/rfc7231#page-68.
-    const redirectionURL = location.pathname + location.search + location.hash;
+    // Check if the link has a redirection.
+    if (data && isRedirection(data)) {
+      // If the redirection is external, just redirect to the full URL here.
+      if (data.isExternal) {
+        ctx.status = data.redirectionStatus;
+        ctx.redirect(data.location);
+        return;
+      }
 
-    ctx.redirect(redirectionURL);
-    return;
-  }
+      // Recover all the missing query params from the original URL. This is
+      // required because we remove the query params that start with `frontity_`.
+      const location = new URL(data.location, "https://dummy-domain.com");
+      ctx.URL.searchParams.forEach((value, key) => {
+        if (!location.searchParams.has(key))
+          location.searchParams.append(key, value);
+      });
 
-  if (isError(data)) {
-    // If there was an error, return the proper status.
-    ctx.status = data.errorStatus;
-    return;
-  }
-};
+      // Set the correct status for the redirection. It could be a 301, 302, 307
+      // or 308.
+      ctx.status = data.redirectionStatus;
+
+      // 30X redirections can be relative so adding the Frontity URL is not
+      // needed - see https://tools.ietf.org/html/rfc7231#page-68.
+      const redirectionURL =
+        location.pathname + location.search + location.hash;
+
+      ctx.redirect(redirectionURL);
+      return;
+    }
+
+    if (isError(data)) {
+      // If there was an error, return the proper status.
+      ctx.status = data.errorStatus;
+      return;
+    }
+  };
