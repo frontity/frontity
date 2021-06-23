@@ -23,6 +23,7 @@
   "scripts": {
     "start": "node dist/src/cli/index.js",
     "dev": "ts-node src/cli/index.ts",
+    "dev:inspect": "node --inspect -r ts-node/register src/cli/index.ts",
     "ts": "ts-node",
     "test": "jest --watch",
     "test:ci": "jest --colors --ci",
