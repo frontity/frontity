@@ -203,8 +203,20 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
 
     // We have to compare the `initalLink` with `browserLink` because we have
     // normalized the `link` at this point and `initialLink` is not normalized.
-    // Skip on HMR.
-    if (browserLink !== state.frontity.initialLink && !state.frontity.hmr) {
+    // We also need to sort it because some CDNs return the same response for
+    // URLs with same queries in different order.
+    // Finally, we need to skip this on HMR.
+    const browserLinkUrl = new URL(browserLink, "https://dummy.com");
+    browserLinkUrl.searchParams.sort();
+    const search = browserLinkUrl.searchParams.toString()
+      ? `?${browserLinkUrl.searchParams.toString()}`
+      : "";
+    const sortedBrowserLink = `${browserLinkUrl.pathname}${search}${browserLinkUrl.hash}`;
+
+    if (
+      sortedBrowserLink !== state.frontity.initialLink &&
+      !state.frontity.hmr
+    ) {
       if (state.source) {
         /**
          * Derived state pointing to the initial data object.
