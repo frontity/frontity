@@ -26,6 +26,6 @@ jobs:
         run: npm ci
 
       - name: Deploy to now
-        run: npx lerna run now --parallel -- -- --prod
+        run: npx lerna run vercel --parallel -- -- --prod
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
