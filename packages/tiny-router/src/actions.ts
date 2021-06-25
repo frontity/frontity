@@ -194,6 +194,13 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       ? libraries.source.normalize(browserLink)
       : browserLink;
 
+    // Add the state to the browser history and replace the link.
+    window.history.replaceState(
+      JSON.parse(JSON.stringify(state.router.state)),
+      "",
+      link
+    );
+
     // We have to compare the `initalLink` with `browserLink` because we have
     // normalized the `link` at this point and `initialLink` is not normalized.
     // Skip on HMR.
@@ -213,13 +220,6 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       // Update the value of `state.router.link`.
       state.router.link = link;
     }
-
-    // Add the state to the browser history and replace the link.
-    window.history.replaceState(
-      JSON.parse(JSON.stringify(state.router.state)),
-      "",
-      link
-    );
 
     // Listen to changes in history.
     window.addEventListener("popstate", (event) => {
