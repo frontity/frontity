@@ -3,21 +3,6 @@ import { connect, styled, useConnect } from "frontity";
 import { Packages } from "../../types";
 
 /**
- * Object defining a media URL for a specific with.
- */
-interface MediaSizes {
-  /**
-   * Source URL of the media.
-   */
-  source_url: string;
-
-  /**
-   * Width for this media.
-   */
-  width: number;
-}
-
-/**
  * Props of the {@link FeaturedMedia} component.
  */
 interface FeaturedMediaProps {
@@ -28,10 +13,23 @@ interface FeaturedMediaProps {
 }
 
 /**
- * Show the specified attachment entity as the featured media of a post.
+ * Props of the {@link Container} component.
+ */
+interface ContainerProps {
+  /**
+   * Flag indicating if the component is rendered in AMP mode.
+   */
+  isAmp: boolean;
+}
+
+/**
+ * The Component that renders a featured media, typically an image. The featured
+ * media can represent an individual Post, Page, or Custom Post Type.
  *
- * @param props - Object of type {@link FeaturedMediaProps}.
- * @returns The featured media.
+ * @param props - The state injected by {@link connect } and the ID of the
+ * featured media.
+ *
+ * @returns A react component.
  */
 const FeaturedMedia = ({ id }: FeaturedMediaProps): JSX.Element => {
   const { state } = useConnect<Packages>();
@@ -42,7 +40,7 @@ const FeaturedMedia = ({ id }: FeaturedMediaProps): JSX.Element => {
   const srcset =
     Object.values(media.media_details.sizes)
       // Get the url and width of each size.
-      .map((item: MediaSizes) => [item.source_url, item.width])
+      .map((item) => [item.source_url, item.width])
       // Recude them to a string with the format required by `srcset`.
       .reduce(
         (final, current, index, array) =>
@@ -53,11 +51,13 @@ const FeaturedMedia = ({ id }: FeaturedMediaProps): JSX.Element => {
       ) || null;
 
   return (
-    <Container>
+    <Container isAmp={state.frontity.mode === "amp"}>
       <StyledImage
-        alt={media.title?.rendered}
+        alt={media.title.rendered}
         src={media.source_url}
         srcSet={srcset}
+        width={media?.media_details?.width}
+        height={media?.media_details?.height}
       />
     </Container>
   );
@@ -65,9 +65,10 @@ const FeaturedMedia = ({ id }: FeaturedMediaProps): JSX.Element => {
 
 export default connect(FeaturedMedia);
 
-const Container = styled.div`
+const Container = styled.div<ContainerProps>`
   margin-top: 16px;
   height: 300px;
+  ${({ isAmp }) => isAmp && "position: relative;"};
 `;
 
 const StyledImage = styled(Image)`

@@ -13,7 +13,7 @@ import { Packages } from "../../types";
  * Theme is the root React component of our theme. The one we will export
  * in roots.
  *
- * @returns Main theme component.
+ * @returns The top-level react component representing the theme.
  */
 const Theme = () => {
   const { state } = useConnect<Packages>();
