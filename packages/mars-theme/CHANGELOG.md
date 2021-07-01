@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.6.0
+
+### Minor Changes
+
+- [`facd9b2e`](https://github.com/frontity/frontity/commit/facd9b2e682effaa9d023378f7798afcaa18b615) [#825](https://github.com/frontity/frontity/pull/825) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Make the mars-theme "AMP-aware" and clean up the theme to pass the AMP html-validator checks.
+
+### Patch Changes
+
+- Updated dependencies [[`ba161a58`](https://github.com/frontity/frontity/commit/ba161a58ca6759c1209f926af28f8b3aba141476)]:
+  - frontity@1.16.1
+
 ## 1.5.2
 
 ### Patch Changes

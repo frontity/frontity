@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.16.1
+
+### Patch Changes
+
+- [`ba161a58`](https://github.com/frontity/frontity/commit/ba161a58ca6759c1209f926af28f8b3aba141476) [#841](https://github.com/frontity/frontity/pull/841) Thanks [@michalczaplinski](https://github.com/michalczaplinski)! - Add the `.DS_Store` files to the list of files that a directory where you want to run `npx frontity create` can contain.
+
 ## 1.16.0
 
 ### Minor Changes
