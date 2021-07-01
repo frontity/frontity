@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.4.3
+
+### Patch Changes
+
+- [`e5ca6cd7`](https://github.com/frontity/frontity/commit/e5ca6cd7d1c3562c04ff6371fb895be1a3558cff) [#850](https://github.com/frontity/frontity/pull/850) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix problem with CDNs that return the same HTML response for URLs with same queries in different order.
+
+- Updated dependencies [[`ba161a58`](https://github.com/frontity/frontity/commit/ba161a58ca6759c1209f926af28f8b3aba141476)]:
+  - frontity@1.16.1
+
 ## 1.4.2
 
 ### Patch Changes
