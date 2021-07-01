@@ -311,32 +311,35 @@ export interface AttachmentEntity extends PostTypeEntity {
     /**
      * The different sizes that WordPress created for this attachment.
      */
-    sizes: {
-      /**
-       * The filename of this size.
-       */
-      file: string;
+    sizes: Record<
+      string,
+      {
+        /**
+         * The filename of this size.
+         */
+        file: string;
 
-      /**
-       * The width of this size.
-       */
-      width: number;
+        /**
+         * The width of this size.
+         */
+        width: number;
 
-      /**
-       * The height of this size.
-       */
-      height: number;
+        /**
+         * The height of this size.
+         */
+        height: number;
 
-      /**
-       * The mime-type of this size.
-       */
-      "mime-type": string;
+        /**
+         * The mime-type of this size.
+         */
+        "mime-type": string;
 
-      /**
-       * The complete URL of this size.
-       */
-      source_url: string;
-    }[];
+        /**
+         * The complete URL of this size.
+         */
+        source_url: string;
+      }
+    >;
   };
 
   /**
