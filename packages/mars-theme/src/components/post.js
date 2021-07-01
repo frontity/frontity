@@ -146,8 +146,7 @@ const Content = styled.div`
 
   figure {
     margin: 24px auto;
-    /* next line overrides an inline style of the figure element. */
-    width: 100% !important;
+    width: 100%;
 
     figcaption {
       font-size: 0.7em;
