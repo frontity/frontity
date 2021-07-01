@@ -332,7 +332,7 @@ export interface AttachmentEntity extends PostTypeEntity {
         /**
          * The mime-type of this size.
          */
-        "mime-type": string;
+        mime_type: string;
 
         /**
          * The complete URL of this size.
