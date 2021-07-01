@@ -3,9 +3,9 @@ import Link from "./link";
 import { Packages } from "../../types";
 
 /**
- * Navigation Component
+ * The navigation component. It renders the navigation links.
  *
- * It renders the navigation links
+ * @returns The `<nav>` tag with the menu.
  */
 const Nav = (): JSX.Element => {
   const { state } = useConnect<Packages>();

@@ -4,23 +4,30 @@ import Link from "../link";
 import { Packages } from "../../../types";
 import { ArchiveData } from "@frontity/source/types";
 
+/**
+ * Props received by the {@link Pagination} component.
+ */
+interface PaginationProps {
+  /**
+   * Data object representing an archive link.
+   */
+  data: ArchiveData;
+}
 
 /**
- * Pagination Component
+ * Render a pagination component, used to allow the user to navigate between a
+ * list of posts.
  *
- * It's used to allow the user to paginate between a list of posts.
- *
- * The `state`, `actions`, `libraries` props are provided by the global context,
- * when we wrap this component in `connect(...)`
+ * @param props - Object of type {@link PaginationProps}.
+ * @returns Pagination component.
  */
-const Pagination = () => {
-  const { state, actions } = useConnect<Packages>();
-  const data: ArchiveData = state.source.get(state.router.link);
+const Pagination = ({ data }: PaginationProps): JSX.Element => {
+  const { actions } = useConnect<Packages>();
 
   // Pre-fetch the the next page if it hasn't been fetched yet.
   useEffect(() => {
     if (data.next) actions.source.fetch(data.next);
-  }, []);
+  }, [actions.source, data.next]);
 
   return (
     <div>
@@ -43,11 +50,6 @@ const Pagination = () => {
   );
 };
 
-
-/**
- * Connect Pagination to global context to give it access to
- * `state`, `actions`, `libraries` via props
- */
 export default connect(Pagination);
 
 const Text = styled.em`

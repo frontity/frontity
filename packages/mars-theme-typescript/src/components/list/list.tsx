@@ -5,12 +5,30 @@ import { Packages } from "../../../types";
 import { isTerm, isAuthor } from "@frontity/source";
 import { ArchiveData } from "@frontity/source/types";
 
+/**
+ * Props received by the {@link List} component.
+ */
 interface ListProps {
+  /**
+   * Data object representing an archive link.
+   */
   data: ArchiveData;
+
+  /**
+   * Flag used by Frontity's {@link Switch} component to decide whether this
+   * this component should be rendered.
+   */
   when?: boolean;
 }
 
-const List: React.FC<ListProps> = ({ data }) => {
+/**
+ * Component that renders the list of posts that belongs to the specified
+ * archive page, passed as an {@link ArchiveData} object.
+ *
+ * @param props - Object of type {@link ListProps}.
+ * @returns React component.
+ */
+const List = ({ data }: ListProps): JSX.Element => {
   const { state } = useConnect<Packages>();
 
   return (
@@ -36,7 +54,7 @@ const List: React.FC<ListProps> = ({ data }) => {
         // Render one Item component for each one.
         return <Item key={item.id} item={item} />;
       })}
-      <Pagination />
+      <Pagination data={data} />
     </Container>
   );
 };

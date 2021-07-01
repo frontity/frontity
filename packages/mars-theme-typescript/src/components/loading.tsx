@@ -1,12 +1,28 @@
 import { styled, keyframes, css } from "frontity";
 
+/**
+ * The props of the {@link Loading} component.
+ */
+interface LoadingProps {
+  /**
+   * When this component should be loaded. Used by the `<Switch>` component.
+   */
+  when?: boolean;
+}
+
 const scale = keyframes`
   0% {transform: scaley(1.0)}
   50% {transform: scaley(0.4)}
   100% {transform: scaley(1.0)}
 `;
 
-const Loading: React.FC<{ when?: boolean }> = () => (
+/**
+ * Shows a loader. Useful to indicate the user that something is loading.
+ *
+ * @param _props - Defined in {@link LoadingProps}.
+ * @returns The loading animation.
+ */
+const Loading = (_props: LoadingProps): JSX.Element => (
   <Container>
     <div>
       <div css={bar(1)} />
@@ -20,6 +36,12 @@ const Loading: React.FC<{ when?: boolean }> = () => (
 
 export default Loading;
 
+/**
+ * Returns the CSS required for each of the bars.
+ *
+ * @param index - The position of the bar.
+ * @returns A css style.
+ */
 const bar = (index: number) => css`
   background-color: rgba(12, 17, 43, 0.3);
   width: 4px;

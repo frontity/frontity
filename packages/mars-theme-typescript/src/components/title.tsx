@@ -2,6 +2,12 @@ import { Head, connect, decode, useConnect } from "frontity";
 import { isTerm, isAuthor, isPostType, isError } from "@frontity/source";
 import { Packages } from "../../types";
 
+/**
+ * Populate the `<title>` tag with different titles, based on the type of
+ * page rendered.
+ *
+ * @returns The `<title>` tag.
+ */
 const Title = () => {
   const { state } = useConnect<Packages>();
   // Get data about the current URL.
