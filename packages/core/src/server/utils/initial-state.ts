@@ -30,10 +30,14 @@ interface StateOptions {
 const state = ({ settings, url }: StateOptions) => {
   const options = {};
 
+  const searchParams = new URLSearchParams(url.search);
+
+  // Sort the query params.
+  searchParams.sort();
+
   // Get all the params in the query string that start with "frontity_", add
   // them to `state.frontity.options` using camel case for the key and delete
   // them from the search. Avoid modifying the original `ctx.URL`.
-  const searchParams = new URLSearchParams(url.search);
   url.searchParams.forEach((value, key) => {
     if (key.startsWith("frontity_")) {
       const camelKey = snakeToCamel(key.replace("frontity_", ""));
