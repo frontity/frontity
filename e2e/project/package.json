@@ -21,6 +21,7 @@
     "@frontity/google-tag-manager-analytics": "^1.3.0",
     "@frontity/head-tags": "^1.1.1",
     "@frontity/html2react": "^1.6.1",
+    "@frontity/mars-theme": "^1.5.1",
     "@frontity/smart-adserver": "^1.1.1",
     "@frontity/tiny-router": "^1.4.2",
     "@frontity/wp-comments": "^1.0.0",

@@ -10,6 +10,10 @@ import PageError from "./page-error";
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
+ *
+ * @param props - The props injected by Frontity's {@link connect} HOC.
+ *
+ * @returns The top-level react component representing the theme.
  */
 const Theme = ({ state }) => {
   // Get information about the current URL.

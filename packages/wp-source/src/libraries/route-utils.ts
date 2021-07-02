@@ -117,7 +117,8 @@ interface ExtractLinkPartsReturn {
  * (#.*)?         // 3rd capturing group
  * ```
  */
-const extractLinkRegExp = /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)(?:\?([^#]*))?(#.*)?/;
+const extractLinkRegExp =
+  /^(?:(?:[^:/?#]+):)?(?:\/\/(?:[^/?#]*))?([^?#]*)(?:\?([^#]*))?(#.*)?/;
 
 /**
  * Extract the different link parts: pathname, query and hash.
