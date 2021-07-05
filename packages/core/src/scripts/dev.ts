@@ -117,6 +117,11 @@ export interface DevOptions {
    * @defaultValue false
    */
   analyze?: boolean;
+
+  /**
+   * The name of the site you want to start.
+   */
+  siteName?: string;
 }
 
 /**
@@ -134,6 +139,7 @@ export default async ({
   openBrowser = true,
   publicPath = "/static/",
   analyze,
+  siteName,
 }: DevOptions): Promise<void> => {
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
@@ -146,7 +152,20 @@ export default async ({
   await cleanBuildFolders({ outDir });
 
   // Get all sites configured in frontity.settings.js with their packages.
-  const sites = await getAllSites();
+  let sites = await getAllSites();
+
+  // If there's no siteName and we have more than one site configuration.
+  if (!siteName && sites.length > 1) {
+    throw { sites };
+  }
+
+  // Filter out the sites based on the siteName and only if we have more than one.
+  if (sites.length > 1) {
+    sites = sites.filter((site) => site.name === siteName);
+  } else {
+    // If we only have one configuration
+    siteName = sites[0].name;
+  }
 
   // Generate the bundles. One for the server, one for each client site.
   const entryPoints = await generateEntryPoints({ sites, outDir, mode });
@@ -159,6 +178,7 @@ export default async ({
     target,
     openBrowser,
     publicPath,
+    siteName,
   });
 
   // Read the extra configurations from files.
