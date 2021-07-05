@@ -8,8 +8,7 @@ describe("Tiny Router", () => {
     cy.visit("http://localhost:8080");
     task("installPlugin", { name: "code-snippets" });
     task("installPlugin", {
-      name:
-        "https://github.com/frontity/frontity-embedded-proof-of-concept/archive/master.zip",
+      name: "https://github.com/frontity/frontity-embedded/archive/master.zip",
     });
     task("loadDatabase", {
       path: "./wp-data/tiny-router/client-server-mismatch.sql",
@@ -60,5 +59,12 @@ describe("Tiny Router", () => {
     cy.location().its("search").should("equal", "?utm=client");
 
     cy.get("[data-test-id='1']").should("contain.text", "/hello-world");
+  });
+
+  it("should work when the URL rendered is different than the URL returned", () => {
+    cy.visit("http://localhost:8080/?b=1&a=2&frontity_name=wp-basic-tests");
+
+    // Check that Frontity has loaded.
+    cy.window().its("frontity").should("not.be.undefined");
   });
 });
