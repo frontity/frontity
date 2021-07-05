@@ -1,5 +1,5 @@
 import * as React from "react";
-import { css, connect } from "frontity";
+import { css, connect, Head } from "frontity";
 import { Connect } from "frontity/types";
 import GoogleAdManager, { GooglePublisherTagProps, Size } from "../../types";
 
@@ -81,13 +81,21 @@ const GooglePublisherTag: React.FC<
 
   // Render the ad container.
   return (
-    <div
-      id={id}
-      css={css`
-        min-width: ${minWidth}px;
-        min-height: ${minHeight}px;
-      `}
-    />
+    <>
+      <Head>
+        <script
+          src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+          async
+        />
+      </Head>
+      <div
+        id={id}
+        css={css`
+          min-width: ${minWidth}px;
+          min-height: ${minHeight}px;
+        `}
+      />
+    </>
   );
 };
 

@@ -1,12 +1,14 @@
 import GoogleAdManager from "../types";
-import Root from "./components";
-import GooglePublisherTag from "./components/google-publisher-tag";
+import { loadable } from "frontity";
+
+const GooglePublisherTag = loadable(
+  () => import("./components/google-publisher-tag")
+);
+
+const AmpAd = loadable(() => import("./components/amp-ad"));
 
 const googleAdManager: GoogleAdManager = {
   name: "@frontity/google-ad-manager",
-  roots: {
-    googleAdManager: Root,
-  },
   state: {
     fills: {
       googleAdManager: {},
@@ -16,6 +18,7 @@ const googleAdManager: GoogleAdManager = {
     fills: {
       googleAdManager: {
         GooglePublisherTag,
+        AmpAd,
       },
     },
   },
