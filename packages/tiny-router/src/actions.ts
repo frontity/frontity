@@ -213,8 +213,15 @@ export const init: TinyRouter["actions"]["router"]["init"] = ({
       : "";
     const sortedBrowserLink = `${browserLinkUrl.pathname}${search}${browserLinkUrl.hash}`;
 
+    // Also compare the normalized `initialLink` with the normalized
+    // `browserLink` to avoid creating an infinite loop.
+    const normalizedInitialLink = libraries.source?.normalize
+      ? libraries.source.normalize(state.frontity.initialLink)
+      : state.frontity.initialLink;
+
     if (
       sortedBrowserLink !== state.frontity.initialLink &&
+      link !== normalizedInitialLink &&
       !state.frontity.hmr
     ) {
       if (state.source) {
