@@ -67,4 +67,11 @@ describe("Tiny Router", () => {
     // Check that Frontity has loaded.
     cy.window().its("frontity").should("not.be.undefined");
   });
+
+  it("should work when the URL rendered is different than the URL returned and the normalized link is different than the server link", () => {
+    cy.visit("http://localhost:8080/hello-world/?frontity_name=wp-basic-tests");
+
+    // Check that Frontity has loaded.
+    cy.window().its("frontity").should("not.be.undefined");
+  });
 });
