@@ -25,7 +25,6 @@ const Header = () => {
   );
 };
 
-// Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header);
 
 const Container = styled.div`

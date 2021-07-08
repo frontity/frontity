@@ -63,7 +63,6 @@ const MenuLink = styled(Link)`
   &[aria-current="page"] {
     color: yellow;
     font-weight: bold;
-    /* border-bottom: 4px solid yellow; */
   }
 `;
 

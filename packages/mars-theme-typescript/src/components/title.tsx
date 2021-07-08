@@ -8,7 +8,7 @@ import { Packages } from "../../types";
  *
  * @returns The `<title>` tag.
  */
-const Title = () => {
+const Title = (): JSX.Element => {
   const { state } = useConnect<Packages>();
   // Get data about the current URL.
   const data = state.source.get(state.router.link);

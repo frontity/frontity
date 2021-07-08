@@ -85,21 +85,6 @@ interface MarsThemeTypeScript extends Package {
       closeMobileMenu: Action<Packages>;
     };
   };
-
-  /**
-   * The libraries exposed by this package.
-   */
-  libraries: {
-    /**
-     * The Html2React namespace.
-     */
-    html2react: {
-      /**
-       * The Html2React processors.
-       */
-      processors: Html2React["libraries"]["html2react"]["processors"];
-    };
-  };
 }
 
 export default MarsThemeTypeScript;
@@ -108,9 +93,9 @@ export default MarsThemeTypeScript;
  * Packages required by `MarsThemeTypeScript`.
  */
 export type Packages = MergePackages<
+  Frontity,
   Router,
   Source,
   Html2React,
-  MarsThemeTypeScript,
-  Frontity
+  MarsThemeTypeScript
 >;
