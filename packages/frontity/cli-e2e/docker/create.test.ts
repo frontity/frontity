@@ -22,7 +22,7 @@ afterAll(async () => {
 
 describe("npx frontity create", () => {
   describe("typescript", () => {
-    it.only("should create a new typescript project cloning @frontity/mars-theme-typescript", () =>
+    it("should create a new typescript project cloning @frontity/mars-theme-typescript", () =>
       testContainer(async ({ runCommand }) => {
         await runCommand(
           `node dist/src/cli/index.js create --no-prompt test-frontity-app --typescript`
