@@ -89,34 +89,9 @@ The file structure of this theme is:
 └── types.ts
 ```
 
-| Path           | Description                                                         |
-| -------------- | ------------------------------------------------------------------- |
-| _`./types.ts`_ | Typescript interface for MarsTheme settings. Useful for typescrtiup |
-
-## Feature Discussions
-
-[**Feature Discussions**](https://community.frontity.org/c/feature-discussions/33) about Frontity are public. You can join the discussions, vote for those you're interested in or create new ones.
-
-These are the ones related to this package: https://community.frontity.org/tags/c/feature-discussions/33/mars-theme
-
-## Changelog
-
-Have a look at the latest updates of this package in the [CHANGELOG](CHANGELOG.md)
-
----
-
-## Open Source Community
-
-### Channels
-
-
-
-| Path | Description |
-|---------|----------|
-| _`./types.ts`_ | Typescript interface for MarsTheme settings. Useful for typescrtiup |
-
-
-
+| Path           | Description                                  |
+| -------------- | -------------------------------------------- |
+| _`./types.ts`_ | Typescript interface for MarsTheme settings. |
 
 ## Feature Discussions
 
