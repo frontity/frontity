@@ -89,11 +89,7 @@ describe("CLI create", () => {
   });
 
   test("frontity create 'test-project' --typescript", async () => {
-    mockedInquirer.prompt
-      .mockResolvedValueOnce({
-        theme: "test-theme",
-      })
-      .mockResolvedValueOnce("Y");
+    mockedInquirer.prompt.mockResolvedValueOnce("Y");
 
     const name = "test-project";
     const typescript = true;
@@ -106,7 +102,7 @@ describe("CLI create", () => {
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name: name,
-      theme: "test-theme",
+      theme: "@frontity/mars-theme-typescript",
       typescript,
       noGit: false,
       path: resolve(process.cwd(), name),
@@ -175,7 +171,7 @@ describe("CLI create", () => {
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name,
-      theme: "@frontity/mars-theme",
+      theme: "@frontity/mars-theme-typescript",
       typescript: true,
       noGit: false,
       path: resolve(process.cwd(), name),
