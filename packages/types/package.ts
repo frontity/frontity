@@ -1,4 +1,5 @@
 import Fill from "./fill";
+import Middleware from "./middleware";
 
 /**
  * Types of a Frontity package.
@@ -68,6 +69,15 @@ export interface Package {
      */
     [namespace: string]: {
       [library: string]: any;
+    };
+  };
+
+  /**
+   * The server middlewares exposed by this package.
+   */
+  server?: {
+    [namespace: string]: {
+      [middleware: string]: Middleware;
     };
   };
 }
