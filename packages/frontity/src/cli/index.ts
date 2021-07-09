@@ -9,6 +9,7 @@ import { default as serve } from "./serve";
 import { default as subscribe } from "./subscribe";
 import { default as unknown } from "./unknown";
 import { default as info } from "./info";
+import { default as update } from "./update";
 
 import packageJson from "../../package.json";
 
@@ -98,6 +99,13 @@ program
   .command("info")
   .description("Get environment information for debugging and issue reporting.")
   .action(info);
+
+program
+  .command("update")
+  .description(
+    "Update the dependencies of the Frontity project and its local packages."
+  )
+  .action(update);
 
 program.on("command:*", ([command]: string[]) => unknown(command, program));
 
