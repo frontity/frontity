@@ -1,6 +1,6 @@
 import { Settings } from "frontity/types";
 import WpSource from "@frontity/wp-source/types";
-import MarsTheme from "@frontity/mars-theme/types";
+import MarsTheme from "@frontity/mars-theme-typescript/types";
 
 const settings: Settings<WpSource | MarsTheme> = {
   name: "mars-theme",
@@ -15,7 +15,7 @@ const settings: Settings<WpSource | MarsTheme> = {
     "@frontity/tiny-router",
     "@frontity/html2react",
     {
-      name: "@frontity/mars-theme",
+      name: "@frontity/mars-theme-typescript",
       state: {
         theme: {
           menu: [

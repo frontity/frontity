@@ -1,5 +1,6 @@
 import { styled, connect, useConnect } from "frontity";
 import Link from "./link";
+import { Packages } from "../../types";
 
 /**
  * The modal containing the mobile menu items.
@@ -8,7 +9,7 @@ import Link from "./link";
  * @returns A React component.
  */
 const MenuModal = ({ ...props }) => {
-  const { state } = useConnect();
+  const { state } = useConnect<Packages>();
   const { menu } = state.theme;
   const isThereLinks = menu?.length > 0;
 
