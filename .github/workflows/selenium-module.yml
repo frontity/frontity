@@ -1,9 +1,9 @@
 name: "BrowserStack Selenium Module"
 
 on:
-  workflow_run:
-    workflows: ["e2e browserstack (dev)"]
-    types: [completed]
+  push:
+    branches:
+      - selenium-fix
 
 jobs:
   selenium-job:
