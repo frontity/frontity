@@ -56,6 +56,11 @@ interface DevOptions {
    * @defaultValue `false`
    */
   analyze?: boolean;
+
+  /**
+   * The name of the site you want to run.
+   */
+  siteName?: string;
 }
 
 /**
@@ -74,6 +79,7 @@ const devCommand = async ({
   dontOpenBrowser = false,
   publicPath = "/static/",
   analyze = false,
+  siteName,
 }: DevOptions) => {
   // Try getting the `dev` function from `@frontity/core`.
   let dev: (...options: any[]) => Promise<void>;
@@ -101,6 +107,7 @@ const devCommand = async ({
     openBrowser: !dontOpenBrowser,
     publicPath,
     analyze,
+    siteName,
   };
 
   try {
@@ -110,6 +117,10 @@ const devCommand = async ({
     }
     await dev({ ...options, port });
   } catch (error) {
+    if (error.sites) {
+      throw error;
+    }
+
     errorLogger(error);
   }
 };

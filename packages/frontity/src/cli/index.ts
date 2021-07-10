@@ -60,6 +60,7 @@ program
     "--analyze",
     'Create HTML files for bundle analyzing, available at "/build/analyze/"'
   )
+  .option("--site-name <siteName>", "The name of the site you want to start.")
   .description("Starts a server in development mode.")
   .action(dev);
 

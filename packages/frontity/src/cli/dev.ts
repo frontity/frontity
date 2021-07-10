@@ -1,4 +1,5 @@
 import devCommand from "../commands/dev";
+import { prompt } from "inquirer";
 import { errorLogger } from "../utils";
 
 /**
@@ -108,6 +109,11 @@ interface DevOptions {
    * @defaultValue false
    */
   analyze?: boolean;
+
+  /**
+   * The name of the configuration to run.
+   */
+  siteName?: string;
 }
 
 /**
@@ -126,6 +132,7 @@ const dev = async ({
   publicPath = process.env.FRONTITY_DEV_PUBLIC_PATH || "/static/",
   dontOpenBrowser = !!process.env.FRONTITY_DEV_DONT_OPEN_BROWSER,
   analyze = !!process.env.FRONTITY_DEV_ANALYZE,
+  siteName = process.env.FRONTITY_DEV_SITE_NAME,
 }: DevOptions) => {
   // Check `target` parameter.
   if (target && target !== "es5" && target !== "module") {
@@ -141,16 +148,51 @@ const dev = async ({
     errorLogger(new Error(`The port number specified is not valid: ${port}.`));
   }
 
-  // Execute `dev` command.
-  devCommand({
-    target: target as "es5" | "module",
-    port: parseInt(port, 10),
-    production,
-    https,
-    publicPath,
-    dontOpenBrowser,
-    analyze,
-  });
+  /**
+   * The make function for command.
+   *
+   * @param args - The custom valued args.
+   * @returns Nothing.
+   */
+  const make = async ({ name }) =>
+    await devCommand({
+      target: target as "es5" | "module",
+      port: parseInt(port, 10),
+      production,
+      https,
+      publicPath,
+      dontOpenBrowser,
+      analyze,
+      siteName: name,
+    });
+
+  /**
+   * The main program.
+   *
+   * @param args - The custom value args to pass.
+   */
+  const main = async ({ name }) => {
+    try {
+      await make({ name });
+    } catch (e) {
+      const sites = e.sites.map((site) => site.name);
+      const options = [
+        {
+          type: "list",
+          name: "siteName",
+          message:
+            "No '--site-name' parameter passed to the dev command. Please select one:",
+          choices: sites,
+          default: sites[0],
+        },
+      ];
+      const results = await prompt(options);
+
+      main({ name: results.siteName });
+    }
+  };
+
+  await main({ name: siteName });
 };
 
 export default dev;
