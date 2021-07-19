@@ -1,10 +1,10 @@
-# `@frontity/mars-theme`
+# `@frontity/mars-theme-typescript`
 
-[![Version](https://img.shields.io/npm/v/@frontity/mars-theme.svg)](https://www.npmjs.com/package/@frontity/mars-theme) [![npm](https://img.shields.io/npm/dw/@frontity/mars-theme)](https://www.npmjs.com/package/@frontity/mars-theme) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@frontity/mars-theme-typescript.svg)](https://www.npmjs.com/package/@frontity/mars-theme-typescript) [![npm](https://img.shields.io/npm/dw/@frontity/mars-theme-typescript)](https://www.npmjs.com/package/@frontity/mars-theme-typescript) [![License: Apache--2.0](https://img.shields.io/badge/license-Apache%202-lightgrey)](https://github.com/frontity/frontity/blob/master/LICENSE)
 
-A starter theme for Frontity
+A starter theme made with Typescript for Frontity
 
-Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
+Full info about this theme can be found in the docs.
 
 ![](https://frontity.org/wp-content/uploads/2021/04/screenshot-mars-theme-demo.png)
 
@@ -26,36 +26,66 @@ Full info about this theme can be found in the [docs](https://api.frontity.org/f
 ## Install
 
 ```sh
-npm i @frontity/mars-theme
+npm i @frontity/mars-theme-typescript
 ```
 
 ## Usage
 
-Once installed it should be included in your `frontity.settings.js`.
+Once installed it should be included in your `frontity.settings.ts`.
 The theme options can be specified in the `state.theme` property.
 
-```javascript
-{
-  name: "@frontity/mars-theme",
+We can import the types of the different packages and use `Settings` to add them.
+
+```typescript
+import { Settings } from "frontity/types";
+import WpSource from "@frontity/wp-source/types";
+import MarsTheme from "@frontity/mars-theme-typescript/types";
+
+const settings: Settings<MarsTheme | WpSource> = {
+  name: "mars-theme",
   state: {
-    theme: {
-      menu: [
-        ["Home", "/"],
-        ["Nature", "/category/nature/"],
-        ["Travel", "/category/travel/"],
-        ["Japan", "/tag/japan/"],
-        ["About Us", "/about-us/"]
-      ],
-      featured: {
-        showOnList: true,
-        showOnPost: true
-      }
-    }
-  }
-},
+    frontity: {
+      url: "https://mars.frontity.org",
+      title: "Test Frontity Blog",
+      description: "Useful content for Frontity development",
+    },
+  },
+  packages: [
+    "@frontity/tiny-router",
+    "@frontity/html2react",
+    {
+      name: "@frontity/mars-theme-typescript",
+      state: {
+        theme: {
+          menu: [
+            ["Home", "/"],
+            ["Nature", "/category/nature/"],
+            ["Travel", "/category/travel/"],
+            ["Japan", "/tag/japan/"],
+            ["About Us", "/about-us/"],
+          ],
+          featured: {
+            showOnList: true,
+            showOnPost: true,
+          },
+        },
+      },
+    },
+    {
+      name: "@frontity/wp-source",
+      state: {
+        source: {
+          url: "https://test.frontity.org",
+        },
+      },
+    },
+  ],
+};
+
+export default settings;
 ```
 
-Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme)
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme-typescript)
 
 ## Theme Anatomy
 
@@ -68,24 +98,24 @@ The file structure of this theme is:
 ├── README.md
 ├── src
 │  ├── components
-│  │  ├── featured-media.js
-│  │  ├── header.js
-│  │  ├── index.js
-│  │  ├── link.js
+│  │  ├── featured-media.tsx
+│  │  ├── header.tsx
+│  │  ├── index.tsx
+│  │  ├── link.tsx
 │  │  ├── list
-│  │  │  ├── index.js
-│  │  │  ├── list-item.js
-│  │  │  ├── list.js
-│  │  │  └── pagination.js
-│  │  ├── loading.js
-│  │  ├── menu-icon.js
-│  │  ├── menu-modal.js
-│  │  ├── menu.js
-│  │  ├── nav.js
-│  │  ├── page-error.js
-│  │  ├── post.js
-│  │  └── title.js
-│  └── index.js
+│  │  │  ├── index.tsx
+│  │  │  ├── list-item.tsx
+│  │  │  ├── list.tsx
+│  │  │  └── pagination.tsx
+│  │  ├── loading.tsx
+│  │  ├── menu-icon.tsx
+│  │  ├── menu-modal.tsx
+│  │  ├── menu.tsx
+│  │  ├── nav.tsx
+│  │  ├── page-error.tsx
+│  │  ├── post.tsx
+│  │  └── title.tsx
+│  └── index.ts
 └── types.ts
 ```
 

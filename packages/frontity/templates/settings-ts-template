@@ -1,5 +1,7 @@
 import { Settings } from "frontity/types";
+import WpSource from "@frontity/wp-source/types";
+import Theme from "$theme$/types";
 
-const settings: Settings = $settings$;
+const settings: Settings<Theme | WpSource> = $settings$;
 
 export default settings;
