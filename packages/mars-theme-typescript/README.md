@@ -4,7 +4,7 @@
 
 A starter theme made with Typescript for Frontity
 
-Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme-typescript)
+Full info about this theme can be found in the docs.
 
 ![](https://frontity.org/wp-content/uploads/2021/04/screenshot-mars-theme-demo.png)
 
