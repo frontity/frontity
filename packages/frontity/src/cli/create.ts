@@ -126,6 +126,8 @@ const create = async ({
   // Theme was passed as arg or env variable.
   if (theme) {
     options.theme = theme;
+  } else if (typescript) {
+    options.theme = "@frontity/mars-theme-typescript";
   } else if (promptUser) {
     // Theme was missing, but we can prompt.
     const questions: ListQuestion[] = [

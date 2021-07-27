@@ -253,6 +253,7 @@ export const createFrontitySettings = async (
   const filePath = resolvePath(path, `frontity.settings.${extension}`);
   const fileData = fileTemplate.replace(/\$([\w-]+)\$/g, (_match, key) => {
     if (key === "settings") return JSON.stringify(frontitySettings, null, 2);
+    if (key === "theme") return theme;
   });
   await writeFile(filePath, fileData);
 };

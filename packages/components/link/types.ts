@@ -87,11 +87,16 @@ export interface LinkProps {
   "aria-current"?: React.AriaAttributes["aria-current"];
 
   /**
-   * Whther the link component should remove the WP URL or not.
+   * Whether the link component should remove the WP URL or not.
    *
    * @defaultValue true
    */
   replaceSourceUrls?: boolean;
+
+  /**
+   * The children elements.
+   */
+  children: JSX.Element[] | JSX.Element;
 
   /**
    * Represents any other prop that can be passed to Link.

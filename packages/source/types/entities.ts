@@ -287,7 +287,60 @@ export interface AttachmentEntity extends PostTypeEntity {
   /**
    * Details about the media file, specific to its type.
    */
-  media_details?: Record<string, unknown>;
+  media_details?: {
+    /**
+     * The width of the attachment.
+     */
+    width: number;
+
+    /**
+     * The height of the attachment.
+     */
+    height: number;
+
+    /**
+     * The file path relative to `wp-content/uploads`.
+     */
+    file: string;
+
+    /**
+     * The metadata of the attachment.
+     */
+    image_meta: Record<string, unknown>;
+
+    /**
+     * The different sizes that WordPress created for this attachment.
+     */
+    sizes: Record<
+      string,
+      {
+        /**
+         * The filename of this size.
+         */
+        file: string;
+
+        /**
+         * The width of this size.
+         */
+        width: number;
+
+        /**
+         * The height of this size.
+         */
+        height: number;
+
+        /**
+         * The mime-type of this size.
+         */
+        mime_type: string;
+
+        /**
+         * The complete URL of this size.
+         */
+        source_url: string;
+      }
+    >;
+  };
 
   /**
    * The ID for the associated post of the attachment.
