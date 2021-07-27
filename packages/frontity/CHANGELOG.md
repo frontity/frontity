@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.17.0
+
+### Minor Changes
+
+- [`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8) [#836](https://github.com/frontity/frontity/pull/836) Thanks [@luisherranz](https://github.com/luisherranz)! - Clone the new `@frontity/mars-theme-typescript` package when running `npx frontity create` with the `--typescript` option.
+
 ## 1.16.1
 
 ### Patch Changes
