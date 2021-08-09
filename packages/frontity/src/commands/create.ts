@@ -23,6 +23,7 @@ const defaultOptions: CreateCommandOptions = {
   noGit: false,
   packages: [],
   theme: "@frontity/mars-theme",
+  noFavicon: false,
 };
 
 /**
@@ -48,8 +49,14 @@ export default (options?: CreateCommandOptions) =>
       let dirExisted: boolean;
 
       // Parses and validates options.
-      const { name, theme, path, typescript, noGit }: CreateCommandOptions =
-        normalizeOptions(defaultOptions, options);
+      const {
+        name,
+        theme,
+        path,
+        typescript,
+        noGit,
+        noFavicon,
+      }: CreateCommandOptions = normalizeOptions(defaultOptions, options);
 
       process.on("SIGINT", async () => {
         if (typeof dirExisted !== "undefined")
@@ -99,10 +106,13 @@ export default (options?: CreateCommandOptions) =>
         emit("message", `Installing dependencies.`, step);
         await step;
 
-        // Download favicon.
-        step = downloadFavicon(path);
-        emit("message", `Downloading ${chalk.yellow("favicon.ico")}.`, step);
-        await step;
+        // Run this step if `noFavicon` is false
+        if (!noFavicon) {
+          // Download favicon.
+          step = downloadFavicon(path);
+          emit("message", `Downloading ${chalk.yellow("favicon.ico")}.`, step);
+          await step;
+        }
 
         // Run this step if `noGit` is false and if git is installed on user's machine
         if (!noGit && hasGit()) {

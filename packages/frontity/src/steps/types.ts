@@ -33,6 +33,11 @@ export type CreateCommandOptions = {
    * Frontity starter theme to clone.
    */
   theme?: string;
+
+  /**
+   * Skip favicon download.
+   */
+  noFavicon?: boolean;
 };
 
 /**
