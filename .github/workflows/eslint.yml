@@ -33,7 +33,7 @@ jobs:
         env:
           CI: true
           
-      - name: Delete expired artifacts
+      - name: Delete expired artifacts 
         uses: LKP-RnD/purge-expired-artifacts-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
