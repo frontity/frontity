@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-global-assign */
 
@@ -15,6 +16,7 @@ jest.mock("@frontity/hooks/use-in-view", () => ({
 
 // Mock only useConnect in the 'frontity' module
 jest.mock("frontity", () => ({
+  // @ts-ignore
   ...jest.requireActual("frontity"),
   useConnect: () => ({
     state: {
