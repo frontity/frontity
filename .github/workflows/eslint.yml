@@ -32,6 +32,13 @@ jobs:
         run: npm ci
         env:
           CI: true
+          
+      # - name: Delete expired artifacts
+      #   uses: LKP-RnD/purge-expired-artifacts-action@v4
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     repo_to_purge: "frontity/frontity"
+      #     dry_run: "false"
 
       - name: Run Eslint
         uses: bradennapier/eslint-plus-action@v3.4.2
