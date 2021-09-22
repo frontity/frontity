@@ -4,7 +4,7 @@
 
 A starter theme made with Typescript for Frontity
 
-Full info about this theme can be found in the docs.
+Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme).
 
 ![](https://frontity.org/wp-content/uploads/2021/04/screenshot-mars-theme-demo.png)
 
@@ -85,7 +85,7 @@ const settings: Settings<MarsTheme | WpSource> = {
 export default settings;
 ```
 
-Full info about this theme can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme-typescript)
+Full info about `mars-theme` can be found in the [docs](https://api.frontity.org/frontity-themes/frontity-mars-theme).
 
 ## Theme Anatomy
 
