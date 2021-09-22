@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.11.6
+
+### Patch Changes
+
+- [`e0f290c8`](https://github.com/frontity/frontity/commit/e0f290c86859fc83e1a50c0f3d0240c1c762a1b4) [#866](https://github.com/frontity/frontity/pull/866) Thanks [@nicholasio](https://github.com/nicholasio)! - Fix a bug where frontity could not fetch a page or child page with the same slug as the parent/child.
+
+* [`e84cca77`](https://github.com/frontity/frontity/commit/e84cca770384fc16ee4575a24e8ef82fd103e8ea) [#870](https://github.com/frontity/frontity/pull/870) Thanks [@luisherranz](https://github.com/luisherranz)! - Pin `node-fetch` version until they solve [the import problem](https://github.com/node-fetch/node-fetch/pull/1303) introduced in v2.6.3. Thanks to @robrecord for the catch.
+
+* Updated dependencies [[`e84cca77`](https://github.com/frontity/frontity/commit/e84cca770384fc16ee4575a24e8ef82fd103e8ea)]:
+  - frontity@1.17.1
+
 ## 1.11.5
 
 ### Patch Changes
