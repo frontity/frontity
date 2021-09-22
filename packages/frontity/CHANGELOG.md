@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.17.1
+
+### Patch Changes
+
+- [`e84cca77`](https://github.com/frontity/frontity/commit/e84cca770384fc16ee4575a24e8ef82fd103e8ea) [#870](https://github.com/frontity/frontity/pull/870) Thanks [@luisherranz](https://github.com/luisherranz)! - Pin `node-fetch` version until they solve [the import problem](https://github.com/node-fetch/node-fetch/pull/1303) introduced in v2.6.3. Thanks to @robrecord for the catch.
+
 ## 1.17.0
 
 ### Minor Changes
