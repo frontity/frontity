@@ -67,7 +67,8 @@ const plugins = ({
   // Ignore some files and folders.
   config.push(
     new WatchIgnorePlugin([new RegExp(outDir)]),
-    new IgnorePlugin(/^encoding$/)
+    new IgnorePlugin(/^encoding$/),
+    new IgnorePlugin(/canvas|jsdom/, /konva/)
   );
 
   // Support HMR in development. Only needed in client.
