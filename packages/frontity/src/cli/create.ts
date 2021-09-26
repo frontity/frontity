@@ -60,6 +60,16 @@ interface CreateOptions {
   noGit?: boolean;
 
   /**
+   * Whether to skip downloading the favicon for a new project.
+   *
+   * It can be also configured using the `FRONTITY_CREATE_NO_FAVICON` env
+   * variable.
+   *
+   * @defaultValue false
+   */
+  noFavicon?: boolean;
+
+  /**
    * Whether to create the files inside the current working directory instead
    * of a new folder.
    *
@@ -91,6 +101,7 @@ const create = async ({
   name,
   theme,
   typescript,
+  noFavicon,
   noGit,
   useCwd,
   prompt: promptUser,
@@ -100,6 +111,7 @@ const create = async ({
   typescript = typescript || !!process.env.FRONTITY_CREATE_TYPESCRIPT;
   noGit = noGit || !!process.env.FRONTITY_CREATE_NO_GIT;
   useCwd = useCwd || !!process.env.FRONTITY_CREATE_USE_CWD;
+  noFavicon = noFavicon || !!process.env.FRONTITY_CREATE_NO_FAVICON;
 
   const options: CreateCommandOptions = {};
 
@@ -156,6 +168,7 @@ const create = async ({
   }
 
   options.typescript = typescript;
+  options.noFavicon = noFavicon;
   options.noGit = noGit;
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
 
