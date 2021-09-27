@@ -32,6 +32,7 @@ describe("CLI create", () => {
   const options = {
     name: undefined,
     typescript: undefined,
+    noFavicon: undefined,
     noGit: undefined,
     useCwd: undefined,
     theme: undefined,
@@ -83,6 +84,7 @@ describe("CLI create", () => {
       name: "test-project",
       theme: "test-theme",
       typescript: false,
+      noFavicon: false,
       noGit: false,
       path: resolve(process.cwd(), name),
     });
@@ -104,6 +106,7 @@ describe("CLI create", () => {
       name: name,
       theme: "@frontity/mars-theme-typescript",
       typescript,
+      noFavicon: false,
       noGit: false,
       path: resolve(process.cwd(), name),
     });
@@ -129,6 +132,7 @@ describe("CLI create", () => {
       name: name,
       theme: "test-theme",
       typescript: false,
+      noFavicon: false,
       noGit: true,
       path: resolve(process.cwd(), name),
     });
@@ -154,6 +158,7 @@ describe("CLI create", () => {
       name,
       theme: "@frontity/mars-theme",
       typescript: false,
+      noFavicon: false,
       noGit: false,
       path: resolve(process.cwd(), name),
     });
@@ -173,6 +178,7 @@ describe("CLI create", () => {
       name,
       theme: "@frontity/mars-theme-typescript",
       typescript: true,
+      noFavicon: false,
       noGit: false,
       path: resolve(process.cwd(), name),
     });
@@ -191,6 +197,7 @@ describe("CLI create", () => {
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name,
       theme: "@frontity/mars-theme",
+      noFavicon: false,
       noGit: true,
       typescript: false,
       path: resolve(process.cwd(), name),
@@ -212,6 +219,53 @@ describe("CLI create", () => {
       name,
       theme,
       typescript: false,
+      noFavicon: false,
+      noGit: false,
+      path: resolve(process.cwd(), name),
+    });
+  });
+
+  test("FRONTITY_CREATE_NO_FAVICON='true'; frontity create 'test-project' --no-prompt", async () => {
+    const name = "test-project";
+    process.env.FRONTITY_CREATE_NO_FAVICON = "true";
+
+    await create({ ...options, name, prompt: false });
+
+    const params = mockedCreateCmd.default.mock.calls[0][0];
+    // omit path because it can vary depending on environment
+    expect(omit(params, "path")).toMatchSnapshot();
+
+    expect(mockedCreateCmd.default).toHaveBeenCalledWith({
+      name,
+      theme: "@frontity/mars-theme",
+      noFavicon: true,
+      noGit: false,
+      typescript: false,
+      path: resolve(process.cwd(), name),
+    });
+  });
+
+  test("frontity create 'test-project' --no-favicon", async () => {
+    mockedInquirer.prompt
+      .mockResolvedValueOnce({
+        theme: "test-theme",
+      })
+      .mockResolvedValueOnce("Y");
+
+    const name = "test-project";
+    const noFavicon = true;
+
+    await create({ ...options, name, noFavicon });
+
+    const params = mockedCreateCmd.default.mock.calls[0][0];
+    // omit path because it can vary depending on environment
+    expect(omit(params, "path")).toMatchSnapshot();
+
+    expect(mockedCreateCmd.default).toHaveBeenCalledWith({
+      name: name,
+      theme: "test-theme",
+      typescript: false,
+      noFavicon: true,
       noGit: false,
       path: resolve(process.cwd(), name),
     });

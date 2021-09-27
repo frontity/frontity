@@ -308,7 +308,7 @@ export const installDependencies = async (path: string) => {
 };
 
 /**
- * Downlaod the favicon file.
+ * Download the favicon file.
  *
  * @param path - The path where the favicon should be downloaded.
  */
