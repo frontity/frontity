@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { create } from "react-test-renderer";
@@ -547,6 +548,7 @@ describe("Link prefetching", () => {
     get.mockReturnValue({ isReady: false, isFetching: false });
     jest.spyOn(store.actions.source, "fetch");
     // simulate save data mode
+    // @ts-ignore
     (navigator as Navigator & { connection }).connection = { saveData: true };
     act(() => {
       render(
@@ -562,6 +564,7 @@ describe("Link prefetching", () => {
     expect(store.actions.source.fetch).toHaveBeenCalledTimes(0);
     expect(store.actions.source.fetch).not.toHaveBeenCalledWith(linkUrl1);
 
+    // @ts-ignore
     (navigator as Navigator & { connection }).connection = { saveData: false };
   });
 
