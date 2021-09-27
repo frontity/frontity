@@ -27,6 +27,29 @@ describe("npx frontity create", () => {
     }
   });
 
+  it("should not download favicon if option is given", async () => {
+    try {
+      await execa.command(
+        `ts-node src/cli/index.ts create --no-prompt --no-favicon --theme @frontity/mars-theme test-frontity-app`,
+        { stdio: "inherit" }
+      );
+
+      expect(await readdir("test-frontity-app")).toMatchInlineSnapshot(`
+        Array [
+          ".gitignore",
+          "README.md",
+          "frontity.settings.js",
+          "node_modules",
+          "package-lock.json",
+          "package.json",
+          "packages",
+        ]
+        `);
+    } finally {
+      await remove("test-frontity-app");
+    }
+  });
+
   it("should add a .gitignore file even if inside a git repo", async () => {
     try {
       await execa.command(
