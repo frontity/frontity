@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.5.2
+
+### Patch Changes
+
+- [`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8) [#836](https://github.com/frontity/frontity/pull/836) Thanks [@luisherranz](https://github.com/luisherranz)! - Improve the type definition of `media_details` in the `AttachmentEntity` type.
+
+- Updated dependencies [[`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8)]:
+  - frontity@1.17.0
+
 ## 1.5.1
 
 ### Patch Changes

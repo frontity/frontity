@@ -35,7 +35,7 @@
     "http-server": "^0.12.3",
     "minimist": "^1.2.5",
     "node-env-run": "^4.0.2",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "2.6.2",
     "selenium-side-runner": "^3.17.0",
     "wait-on": "^5.2.1",
     "wdio-chromedriver-service": "^7.0.0"

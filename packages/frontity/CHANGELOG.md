@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.17.1
+
+### Patch Changes
+
+- [`e84cca77`](https://github.com/frontity/frontity/commit/e84cca770384fc16ee4575a24e8ef82fd103e8ea) [#870](https://github.com/frontity/frontity/pull/870) Thanks [@luisherranz](https://github.com/luisherranz)! - Pin `node-fetch` version until they solve [the import problem](https://github.com/node-fetch/node-fetch/pull/1303) introduced in v2.6.3. Thanks to @robrecord for the catch.
+
+## 1.17.0
+
+### Minor Changes
+
+- [`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8) [#836](https://github.com/frontity/frontity/pull/836) Thanks [@luisherranz](https://github.com/luisherranz)! - Clone the new `@frontity/mars-theme-typescript` package when running `npx frontity create` with the `--typescript` option.
+
 ## 1.16.1
 
 ### Patch Changes

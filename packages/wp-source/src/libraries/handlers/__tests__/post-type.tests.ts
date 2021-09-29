@@ -8,6 +8,7 @@ import { mockResponse } from "./mocks/helpers";
 import attachment1 from "./mocks/post-type/attachment-1.json";
 import page1 from "./mocks/post-type/page-1.json";
 import page1WithParent from "./mocks/post-type/page-1-with-parent.json";
+import childPageWithParentSameSlug from "./mocks/post-type/child-page-with-parent-same-slug.json";
 import post1 from "./mocks/post-type/post-1.json";
 import post1Revision from "./mocks/post-type/post-1-revision.json";
 import post1withType from "./mocks/post-type/post-1-with-type.json";
@@ -277,6 +278,28 @@ describe("page", () => {
       .mockResolvedValueOnce(mockResponse([page1WithParent]));
     // Fetch entities
     await store.actions.source.fetch("/parent/page-1/");
+    expect(postTypeHandler).toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
+  test("can have a parent with the same slug", async () => {
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse(childPageWithParentSameSlug));
+
+    await store.actions.source.fetch("/parent/page-1/");
+    const childData = store.state.source.data["/parent/page-1/"];
+    expect(childData.isReady).toBe(true);
+
+    // at this point both /parent/page-1 and /page-1 should already be in state.
+    const parentData = store.state.source.data["/page-1/"];
+    expect(parentData.link).toBe("/page-1/");
+
+    // however it's not "ready" yet.
+    await store.actions.source.fetch("/page-1/");
+    expect(parentData.isReady).toBe(true);
+
     expect(postTypeHandler).toHaveBeenCalled();
     expect(store.state.source).toMatchSnapshot();
   });

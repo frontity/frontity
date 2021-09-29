@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 /**
  * @jest-environment node
  */
@@ -7,6 +9,7 @@ import Image from "../image";
 
 // Mock only useConnect in the 'frontity' module
 jest.mock("frontity", () => ({
+  // @ts-ignore
   ...jest.requireActual("frontity"),
   useConnect: () => ({
     state: {

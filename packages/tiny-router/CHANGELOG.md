@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.4.4
+
+### Patch Changes
+
+- [`d10a0dfe`](https://github.com/frontity/frontity/commit/d10a0dfed70c7721be79f48ac0cb5b7e6e75141f) [#858](https://github.com/frontity/frontity/pull/858) Thanks [@luisherranz](https://github.com/luisherranz)! - Yet another small fix for the browser/server link patch.
+
+- Updated dependencies [[`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8), [`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8)]:
+  - frontity@1.17.0
+  - @frontity/source@1.5.2
+
 ## 1.4.3
 
 ### Patch Changes

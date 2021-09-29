@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.6.1
+
+### Patch Changes
+
+- [`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8) [#836](https://github.com/frontity/frontity/pull/836) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix some duplicate fields in the README.
+
+- Updated dependencies [[`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8), [`f87b062d`](https://github.com/frontity/frontity/commit/f87b062d8c65088b3c245c3c2ae4ca82cecd00a8)]:
+  - frontity@1.17.0
+  - @frontity/components@1.8.1
+
 ## 1.6.0
 
 ### Minor Changes

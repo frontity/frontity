@@ -184,7 +184,7 @@ export const shouldFetchLink = (link: string) => {
   /**
    * Checks if user is on slow connection or has enabled data saver.
    */
-  const _navigator = window.navigator as NavigatorWithConnection;
+  const _navigator = window.navigator as unknown as NavigatorWithConnection;
 
   const isSlowConnection =
     _navigator?.connection?.saveData ||
