@@ -27,6 +27,7 @@
     "frontity": "^1.17.0",
     "@frontity/hooks": "^2.2.1",
     "@frontity/source": "^1.5.2",
-    "@frontity/router": "^1.2.1"
+    "@frontity/router": "^1.2.1",
+    "@frontity/connect": "^1.3.0"
   }
 }
