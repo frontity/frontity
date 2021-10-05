@@ -39,117 +39,111 @@ interface PostTypeHandlerParams {
  * This function will be invoked by the frontity framework when calling `source.fetch()` for
  * a specific entity.
  */
-const postTypeHandler = ({
-  endpoints,
-}: PostTypeHandlerParams): Handler => async ({
-  link,
-  params,
-  state,
-  libraries,
-  force,
-}) => {
-  // Name of the endpoint that returned an entity.
-  // Used later in case this fetch is for a preview.
-  let matchedEndpoint = "";
+const postTypeHandler =
+  ({ endpoints }: PostTypeHandlerParams): Handler =>
+  async ({ link, params, state, libraries, force }) => {
+    // Name of the endpoint that returned an entity.
+    // Used later in case this fetch is for a preview.
+    let matchedEndpoint = "";
 
-  // 1. search id in state or get the entity from WP REST API
-  const { route, query } = libraries.source.parse(link);
-  const routeData: Partial<PostTypeData> = state.source.get(route);
-  if (!routeData.id || force) {
-    const { slug } = params;
+    // 1. search id in state or get the entity from WP REST API
+    const { route, query } = libraries.source.parse(link);
+    const routeData: Partial<PostTypeData> = state.source.get(route);
+    if (!routeData.id || force) {
+      const { slug } = params;
 
-    // 1.1 transform "posts" endpoint to state.source.postEndpoint
-    const finalEndpoints = endpoints.map((endpoint) =>
-      endpoint === "posts" ? state.source.postEndpoint : endpoint
-    );
+      // 1.1 transform "posts" endpoint to state.source.postEndpoint
+      const finalEndpoints = endpoints.map((endpoint) =>
+        endpoint === "posts" ? state.source.postEndpoint : endpoint
+      );
 
-    // 1.2 iterate over finalEndpoints array
-    let isHandled = false;
-    let isMismatched = false;
-    for (const endpoint of finalEndpoints) {
-      const response = await libraries.source.api.get({
-        endpoint,
-        params: { slug, _embed: true, ...state.source.params },
-      });
+      // 1.2 iterate over finalEndpoints array
+      let isHandled = false;
+      let isMismatched = false;
+      for (const endpoint of finalEndpoints) {
+        const response = await libraries.source.api.get({
+          endpoint,
+          params: { slug, _embed: true, ...state.source.params },
+        });
 
-      const populated = await libraries.source.populate({
-        response,
-        state,
-        force,
-      });
+        const populated = await libraries.source.populate({
+          response,
+          state,
+          force,
+        });
 
-      // exit loop if this endpoint returns an entity!
-      if (populated.length > 0) {
-        // We have to check if the link property in the data that we
-        // populated is the same as the current route.
-        if (populated.some((post) => post.link === route)) {
-          isHandled = true;
-          isMismatched = false;
-          matchedEndpoint = endpoint;
-          break;
-        } else {
-          isMismatched = true;
+        // exit loop if this endpoint returns an entity!
+        if (populated.length > 0) {
+          // We have to check if the link property in the data that we
+          // populated is the same as the current route.
+          if (populated.some((post) => post.link === route)) {
+            isHandled = true;
+            isMismatched = false;
+            matchedEndpoint = endpoint;
+            break;
+          } else {
+            isMismatched = true;
+          }
         }
       }
+
+      if (isMismatched) {
+        throw new ServerError(
+          `You have tried to access content at route: ${route} but it does not exist`,
+          404
+        );
+      }
+
+      // 1.3 if no entity has found, throw an error
+      if (!isHandled)
+        throw new ServerError(
+          `post type from endpoints "${endpoints}" with slug "${slug}" not found`,
+          404
+        );
     }
 
-    if (isMismatched) {
-      throw new ServerError(
-        `You have tried to access content at route: ${route} but it does not exist`,
-        404
-      );
+    // 2. get `type` and `id` from route data and assign props to data
+    const { type, id }: Partial<PostTypeData> = state.source.get(route);
+    const data = state.source.get(link);
+    Object.assign(data, {
+      type,
+      link: link,
+      query,
+      id,
+      isPostType: true,
+      [`is${capitalize(type)}`]: true,
+    }) as PostTypeData; // This ensures the resulting type is correct.
+
+    // Overwrite properties if the request is a preview.
+    if (query.preview && state.source.auth) {
+      // Get entity from the state.
+      const entity = state.source[type][id];
+
+      // Fetch the latest revision using the token.
+      const response = await libraries.source.api.get({
+        endpoint: `${matchedEndpoint}/${id}/revisions`,
+        params: { ...state.source.params, per_page: 1 },
+        auth: state.source.auth,
+      });
+
+      // Get modified props from revision.
+      const revision = await response.json();
+      if (revision.code) {
+        console.log(revision);
+        throw new ServerError(revision.message, revision.data.status);
+      }
+
+      const [json] = revision;
+
+      if (json.parent === id) {
+        const { title, content, excerpt } = json;
+        // Merge props with entity.
+        Object.assign(entity, { title, content, excerpt });
+      } else {
+        // Error response.
+        console.warn(json);
+      }
     }
-
-    // 1.3 if no entity has found, throw an error
-    if (!isHandled)
-      throw new ServerError(
-        `post type from endpoints "${endpoints}" with slug "${slug}" not found`,
-        404
-      );
-  }
-
-  // 2. get `type` and `id` from route data and assign props to data
-  const { type, id }: Partial<PostTypeData> = state.source.get(route);
-  const data = state.source.get(link);
-  Object.assign(data, {
-    type,
-    link: link,
-    query,
-    id,
-    isPostType: true,
-    [`is${capitalize(type)}`]: true,
-  }) as PostTypeData; // This ensures the resulting type is correct.
-
-  // Overwrite properties if the request is a preview.
-  if (query.preview && state.source.auth) {
-    // Get entity from the state.
-    const entity = state.source[type][id];
-
-    // Fetch the latest revision using the token.
-    const response = await libraries.source.api.get({
-      endpoint: `${matchedEndpoint}/${id}/revisions?per_page=1`,
-      params: state.source.params,
-      auth: state.source.auth,
-    });
-
-    // Get modified props from revision.
-    const revision = await response.json();
-    if (revision.code) {
-      console.log(revision);
-      throw new ServerError(revision.message, revision.data.status);
-    }
-
-    const [json] = revision;
-
-    if (json.parent === id) {
-      const { title, content, excerpt } = json;
-      // Merge props with entity.
-      Object.assign(entity, { title, content, excerpt });
-    } else {
-      // Error response.
-      console.warn(json);
-    }
-  }
-};
+  };
 
 export default postTypeHandler;
