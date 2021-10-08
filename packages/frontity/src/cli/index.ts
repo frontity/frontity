@@ -20,7 +20,7 @@ program
 
 // Registers a `create` command that takes an optional
 // parameter called `name`. It also accepts the following
-// options: --typescript, --use-cwd.
+// options: --typescript, --use-cwd, --no-favicon.
 program
   .command("create [name]")
   .option("--theme <theme>", "The theme to use")

@@ -23,7 +23,7 @@ const defaultOptions: CreateCommandOptions = {
   noGit: false,
   packages: [],
   theme: "@frontity/mars-theme",
-  noFavicon: false,
+  favicon: true,
 };
 
 /**
@@ -55,7 +55,7 @@ export default (options?: CreateCommandOptions) =>
         path,
         typescript,
         noGit,
-        noFavicon,
+        favicon,
       }: CreateCommandOptions = normalizeOptions(defaultOptions, options);
 
       process.on("SIGINT", async () => {
@@ -106,8 +106,8 @@ export default (options?: CreateCommandOptions) =>
         emit("message", `Installing dependencies.`, step);
         await step;
 
-        // Run this step if `noFavicon` is false
-        if (!noFavicon) {
+        // Run this step if `favicon` is true
+        if (favicon) {
           // Download favicon.
           step = downloadFavicon(path);
           emit("message", `Downloading ${chalk.yellow("favicon.ico")}.`, step);

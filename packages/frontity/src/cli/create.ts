@@ -67,7 +67,7 @@ interface CreateOptions {
    *
    * @defaultValue false
    */
-  noFavicon?: boolean;
+  favicon?: boolean;
 
   /**
    * Whether to create the files inside the current working directory instead
@@ -101,7 +101,7 @@ const create = async ({
   name,
   theme,
   typescript,
-  noFavicon,
+  favicon,
   noGit,
   useCwd,
   prompt: promptUser,
@@ -111,7 +111,7 @@ const create = async ({
   typescript = typescript || !!process.env.FRONTITY_CREATE_TYPESCRIPT;
   noGit = noGit || !!process.env.FRONTITY_CREATE_NO_GIT;
   useCwd = useCwd || !!process.env.FRONTITY_CREATE_USE_CWD;
-  noFavicon = noFavicon || !!process.env.FRONTITY_CREATE_NO_FAVICON;
+  favicon = favicon || !!process.env.FRONTITY_CREATE_FAVICON;
 
   const options: CreateCommandOptions = {};
 
@@ -168,7 +168,7 @@ const create = async ({
   }
 
   options.typescript = typescript;
-  options.noFavicon = noFavicon;
+  options.favicon = favicon;
   options.noGit = noGit;
   options.path = useCwd ? process.cwd() : resolve(process.cwd(), options.name);
 

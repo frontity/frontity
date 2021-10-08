@@ -37,7 +37,7 @@ export type CreateCommandOptions = {
   /**
    * Skip favicon download.
    */
-  noFavicon?: boolean;
+  favicon?: boolean;
 };
 
 /**
