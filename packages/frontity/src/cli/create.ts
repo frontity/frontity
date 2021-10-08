@@ -65,7 +65,7 @@ interface CreateOptions {
    * It can be also configured using the `FRONTITY_CREATE_NO_FAVICON` env
    * variable.
    *
-   * @defaultValue false
+   * @defaultValue true
    */
   favicon?: boolean;
 
@@ -111,7 +111,7 @@ const create = async ({
   typescript = typescript || !!process.env.FRONTITY_CREATE_TYPESCRIPT;
   noGit = noGit || !!process.env.FRONTITY_CREATE_NO_GIT;
   useCwd = useCwd || !!process.env.FRONTITY_CREATE_USE_CWD;
-  favicon = favicon || !!process.env.FRONTITY_CREATE_FAVICON;
+  favicon = favicon || !process.env.FRONTITY_CREATE_FAVICON;
 
   const options: CreateCommandOptions = {};
 

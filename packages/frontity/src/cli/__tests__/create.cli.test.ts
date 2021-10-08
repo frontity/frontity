@@ -245,13 +245,7 @@ describe("CLI create", () => {
     });
   });
 
-  test("frontity create 'test-project' --no-favicon", async () => {
-    mockedInquirer.prompt
-      .mockResolvedValueOnce({
-        theme: "test-theme",
-      })
-      .mockResolvedValueOnce("Y");
-
+  test("frontity create 'test-project' --no-favicon --no-prompt", async () => {
     const name = "test-project";
     const favicon = false;
 
@@ -263,7 +257,7 @@ describe("CLI create", () => {
 
     expect(mockedCreateCmd.default).toHaveBeenCalledWith({
       name: name,
-      theme: "test-theme",
+      theme: "@frontity/mars-theme",
       typescript: false,
       favicon: false,
       noGit: false,
