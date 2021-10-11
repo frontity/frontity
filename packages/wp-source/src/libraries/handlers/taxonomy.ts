@@ -90,6 +90,7 @@ const taxonomyHandler = ({
       endpoint,
       params: {
         slug,
+        ...state.source.params,
       },
     });
     const [entity] = await populate({
