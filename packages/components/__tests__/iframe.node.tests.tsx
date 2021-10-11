@@ -61,4 +61,26 @@ describe("Iframe", () => {
     expect(head.script.toString()).toMatchSnapshot();
     expect(head.noscript.toString()).toMatchSnapshot();
   });
+
+  test("props are preserved", () => {
+    const props = {
+      title: "Some fake alt text",
+      src: "https://fake-src.com",
+      className: "fake-class-name",
+      height: 300,
+      id: "iframe-id",
+    };
+
+    const helmetContext = {} as FilledContext;
+    const iframe = TestRenderer.create(
+      <HelmetProvider context={helmetContext}>
+        <Iframe {...props} />
+      </HelmetProvider>
+    ).toJSON();
+    const head = helmetContext.helmet;
+
+    expect(iframe).toMatchSnapshot();
+    expect(head.script.toString()).toMatchSnapshot();
+    expect(head.noscript.toString()).toMatchSnapshot();
+  });
 });
