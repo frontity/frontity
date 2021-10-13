@@ -317,6 +317,10 @@ Array [
       "endpoint": "users",
       "params": Object {
         "slug": "author-1",
+        "type": Array [
+          "post",
+          "cpt",
+        ],
       },
     },
   ],
