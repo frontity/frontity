@@ -9,8 +9,13 @@ import Link from "./link";
 const Nav = ({ state }) => (
   <NavContainer>
     {state.theme.menu.map(([name, link]) => {
-      // Check if the link matched the current page url
-      const isCurrentPage = state.router.link === link;
+      // Gets the page number
+      let pageNumber = state.router.link.replace(/\D/g, "");
+
+      // Check if the link matched the current page url, removing page + number from this
+      const isCurrentPage =
+        state.router.link.replace("page/" + pageNumber + "/", "") === link;
+
       return (
         <NavItem key={name}>
           {/* If link url is the current page, add `aria-current` for a11y */}
