@@ -9,12 +9,9 @@ import Link from "./link";
 const Nav = ({ state }) => (
   <NavContainer>
     {state.theme.menu.map(([name, link]) => {
-      // Gets the page number
-      let pageNumber = state.router.link.replace(/\D/g, "");
-
-      // Check if the link matched the current page url, removing page + number from this
-      const isCurrentPage =
-        state.router.link.replace("page/" + pageNumber + "/", "") === link;
+      // Check if the link matched the current page url
+      const data = state.source.get(state.router.link);
+      const isCurrentPage = data.route === link;
 
       return (
         <NavItem key={name}>
