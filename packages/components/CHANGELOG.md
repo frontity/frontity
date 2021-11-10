@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.8.2
+
+### Patch Changes
+
+- [`379a4476`](https://github.com/frontity/frontity/commit/379a44761423b4e47466359bbfe598615a869dcb) [#877](https://github.com/frontity/frontity/pull/877) Thanks [@nicholasio](https://github.com/nicholasio)! - Don't strip out the original iframe props [#877](https://github.com/frontity/frontity/pull/877)
+
 ## 1.8.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.11.7
+
+### Patch Changes
+
+- [`f7afe02e`](https://github.com/frontity/frontity/commit/f7afe02eefd23dd5b1e1cb145aca6bc79d238505) [#878](https://github.com/frontity/frontity/pull/878) Thanks [@nicholasio](https://github.com/nicholasio)! - Fix a bug where post previews of published posts would break if `state.source.params.per_page` is manually set.
+
+* [`64a52a03`](https://github.com/frontity/frontity/commit/64a52a0335979e9bb31bea97773b4053f6c5d69a) [#880](https://github.com/frontity/frontity/pull/880) Thanks [@markusilmer](https://github.com/markusilmer)! - Add source params to taxonomy and author api calls [#864](https://github.com/frontity/frontity/pull/864)
+
 ## 1.11.6
 
 ### Patch Changes
