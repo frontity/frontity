@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.6.2
+
+### Patch Changes
+
+- [`ae9b39db`](https://github.com/frontity/frontity/commit/ae9b39db6ff23efc26ed242598e72eb95b4c326f) [#882](https://github.com/frontity/frontity/pull/882) Thanks [@nicholasio](https://github.com/nicholasio)! - Fix to maintain the active nav item for pages
+
+- Updated dependencies [[`379a4476`](https://github.com/frontity/frontity/commit/379a44761423b4e47466359bbfe598615a869dcb)]:
+  - @frontity/components@1.8.2
+
 ## 1.6.1
 
 ### Patch Changes
