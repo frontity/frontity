@@ -127,8 +127,8 @@ const postTypeHandler = ({
 
     // Fetch the latest revision using the token.
     const response = await libraries.source.api.get({
-      endpoint: `${matchedEndpoint}/${id}/revisions?per_page=1`,
-      params: state.source.params,
+      endpoint: `${matchedEndpoint}/${id}/revisions`,
+      params: { ...state.source.params, per_page: 1 },
       auth: state.source.auth,
     });
 
