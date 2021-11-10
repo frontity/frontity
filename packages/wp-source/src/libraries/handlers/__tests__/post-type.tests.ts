@@ -189,6 +189,26 @@ describe("post", () => {
     `);
   });
 
+  test("previews works even when per_page is manually set", async () => {
+    // Mock auth token
+    store.state.source.auth = "Bearer TOKEN";
+    store.state.source.params.per_page = 3;
+    // Mock Api responses
+    api.get = jest
+      .fn()
+      .mockResolvedValueOnce(mockResponse([post1]))
+      .mockResolvedValueOnce(mockResponse([post1Revision]));
+    // Fetch entities
+    await store.actions.source.fetch("/post-1/?preview=true");
+    expect(api.get).toHaveBeenNthCalledWith(2, {
+      auth: "Bearer TOKEN",
+      endpoint: "posts/1/revisions",
+      params: { per_page: 1 },
+    });
+    expect(postTypeHandler).toHaveBeenCalled();
+    expect(store.state.source).toMatchSnapshot();
+  });
+
   test("populates an error if it is a preview with an invalid token", async () => {
     // Mock auth token
     store.state.source.auth = "Bearer INVALID";

@@ -10,7 +10,7 @@ There is a detailed guide about how to contribute coding at our docs: [Code Cont
 
 1. Fork this [repository](https://github.com/frontity/frontity) and clone your fork.
 2. Run ```npm install``` in the root folder.
-3. Run ```cd examples/mars-theme-example/``` to go to the example directory.
+3. Run ```cd projects/mars-theme/``` to go to the projects directory.
 4. Run ```npx frontity dev``` to start Frontity with mars-theme on [localhost:3000](http://localhost:3000/).
 5. Make any changes you consider to the packages.
 >***WARNING: After adding/removing dependencies to a package, go back to the root and do ```npm install``` again.***

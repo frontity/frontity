@@ -10,7 +10,9 @@ const Nav = ({ state }) => (
   <NavContainer>
     {state.theme.menu.map(([name, link]) => {
       // Check if the link matched the current page url
-      const isCurrentPage = state.router.link === link;
+      const data = state.source.get(state.router.link);
+      const isCurrentPage = data.route === link;
+
       return (
         <NavItem key={name}>
           {/* If link url is the current page, add `aria-current` for a11y */}

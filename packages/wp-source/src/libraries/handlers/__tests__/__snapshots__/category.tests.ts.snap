@@ -623,6 +623,10 @@ Array [
       "endpoint": "categories",
       "params": Object {
         "slug": "cat-1",
+        "type": Array [
+          "post",
+          "cpt",
+        ],
       },
     },
   ],

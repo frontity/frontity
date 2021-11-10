@@ -1,4 +1,6 @@
 /* eslint-disable no-global-assign */
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { Provider, createStore } from "@frontity/connect";
 
 /**
  * @jest-environment jsdom
@@ -52,6 +54,12 @@ describe("Iframe", () => {
   test("works with native lazy load and component did not mount", () => {
     (HTMLIFrameElement as any).prototype.loading = true;
 
+    const store = createStore({
+      state: {
+        frontity: { rendering: "ssr" },
+      },
+    });
+
     mockedUseInView.mockReturnValue({
       ref: () => {},
       inView: false,
@@ -62,18 +70,27 @@ describe("Iframe", () => {
       title: "Iframe title",
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
-      loading: "lazy" as "lazy",
+      loading: "lazy" as const,
       height: 300,
-      state: { frontity: { rendering: "ssr" } },
     };
 
-    const result = TestRenderer.create(<Iframe {...props} />);
+    const result = TestRenderer.create(
+      <Provider value={store}>
+        <Iframe {...props} />
+      </Provider>
+    );
     expect(result.toJSON()).toMatchSnapshot();
   });
 
   test("works with native lazy load and component did mount", () => {
     (HTMLIFrameElement as any).prototype.loading = true;
 
+    const store = createStore({
+      state: {
+        frontity: { rendering: "csr" },
+      },
+    });
+
     mockedUseInView.mockReturnValue({
       ref: () => {},
       inView: false,
@@ -84,18 +101,27 @@ describe("Iframe", () => {
       title: "Iframe title",
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
-      loading: "lazy" as "lazy",
+      loading: "lazy" as const,
       height: 300,
-      state: { frontity: { rendering: "csr" } },
     };
 
-    const result = TestRenderer.create(<Iframe {...props} />);
+    const result = TestRenderer.create(
+      <Provider value={store}>
+        <Iframe {...props} />
+      </Provider>
+    );
     expect(result.toJSON()).toMatchSnapshot();
   });
 
   test("works with `IntersectionObserver` if `height` prop is not specified", () => {
     (HTMLIFrameElement as any).prototype.loading = true;
 
+    const store = createStore({
+      state: {
+        frontity: { rendering: "csr" },
+      },
+    });
+
     mockedUseInView.mockReturnValue({
       ref: () => {},
       inView: false,
@@ -106,15 +132,24 @@ describe("Iframe", () => {
       title: "Iframe title",
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
-      loading: "lazy" as "lazy",
-      state: { frontity: { rendering: "csr" } },
+      loading: "lazy" as const,
     };
 
-    const result = TestRenderer.create(<Iframe {...props} />);
+    const result = TestRenderer.create(
+      <Provider value={store}>
+        <Iframe {...props} />
+      </Provider>
+    );
     expect(result.toJSON()).toMatchSnapshot();
   });
 
   test("works with `IntersectionObserver` and is out of view", () => {
+    const store = createStore({
+      state: {
+        frontity: { rendering: "csr" },
+      },
+    });
+
     mockedUseInView.mockReturnValue({
       ref: () => {},
       inView: false,
@@ -126,21 +161,29 @@ describe("Iframe", () => {
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
       height: 300,
-      state: { frontity: { rendering: "csr" } },
     };
 
-    const result = TestRenderer.create(<Iframe {...props} />);
+    const result = TestRenderer.create(
+      <Provider value={store}>
+        <Iframe {...props} />
+      </Provider>
+    );
     expect(result.toJSON()).toMatchSnapshot();
   });
 
   test("works without `IntersectionObserver` and component did mount", () => {
+    const store = createStore({
+      state: {
+        frontity: { rendering: "csr" },
+      },
+    });
+
     const props = {
       title: "Iframe title",
       src: "https://iframe-src.com/iframe",
       className: "fake-class-name",
-      loading: "lazy" as "lazy",
+      loading: "lazy" as const,
       height: 300,
-      state: { frontity: { rendering: "csr" } },
     };
 
     mockedUseInView.mockReturnValue({
@@ -149,7 +192,11 @@ describe("Iframe", () => {
       supported: false,
     });
 
-    const iframe = TestRenderer.create(<Iframe {...props} />).toJSON();
+    const iframe = TestRenderer.create(
+      <Provider value={store}>
+        <Iframe {...props} />
+      </Provider>
+    ).toJSON();
     expect(iframe).toMatchSnapshot();
   });
 });
