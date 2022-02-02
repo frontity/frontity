@@ -112,6 +112,9 @@ export default async ({
   console.log(`  - public-path: ${publicPath}`);
   console.log();
 
+  // Setting up the env variable to consume in initial state.
+  process.env.FRONTITY_INTERNAL_PUBLIC_PATH = publicPath || "/static";
+
   // Get config from frontity.config.js files.
   const frontityConfig = getFrontity();
   const { outDir } = frontityConfig;

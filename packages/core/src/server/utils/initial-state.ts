@@ -28,7 +28,9 @@ interface StateOptions {
  * @returns The Frontity state object.
  */
 const state = ({ settings, url }: StateOptions) => {
-  const options = {};
+  const options = {
+    publicPath: process.env.FRONTITY_INTERNAL_PUBLIC_PATH || "/static",
+  };
 
   const searchParams = new URLSearchParams(url.search);
 
