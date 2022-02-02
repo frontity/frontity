@@ -1,5 +1,3 @@
-import e from "express";
-import { expectEntities } from "../../../../../amp/node_modules/@frontity/wp-source/src/libraries/handlers/__tests__/mocks/helpers";
 import initialState from "../initial-state";
 
 const settings = {
