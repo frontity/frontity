@@ -62,6 +62,7 @@ export const serverSideRendering = async (
     const extractor = new CustomChunkExtractor({
       stats,
       entrypoints: [settings.name],
+      publicPath: ctx.state.store.state.frontity.options.publicPath,
     });
 
     // Call the render function with the wrapped App.
@@ -94,6 +95,16 @@ export const serverSideRendering = async (
       `<script id="__FRONTITY_CONNECT_STATE__" type="application/json">${htmlescape(
         getSnapshot(store.state)
       )}</script>`
+    );
+
+    // Add public path variable adding a trailing slash (needed to concat the path with the file name).
+    output.scripts.push(
+      `<script id="__FRONTITY_PUBLIC_PATH__" type="text/javascript">
+        window["__FRONTITY_PUBLIC_PATH__"] = "${ctx.state.store.state.frontity.options.publicPath.replace(
+          /\/?$/,
+          "/"
+        )}";
+      </script>`
     );
 
     // Push the body scripts.
