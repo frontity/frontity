@@ -9,6 +9,7 @@ const settings = {
       url: "https://site.com",
       prop1: "prop1",
       menu1: ["item1"],
+      options: {},
     },
   },
   packages: [
@@ -87,6 +88,21 @@ describe("initialState", () => {
   it("should return a server platform on the server", () => {
     const url = new URL("https://site.com/page/2?some=query#some-hash");
     expect(initialState({ settings, url }).frontity.platform).toBe("server");
+  });
+
+  it("should set `frontity.options.publicPath` using the value from `frontity.settings`", async () => {
+    const url = new URL("https://site.com/post");
+
+    settings.state.frontity.options = { publicPath: "/custom-settings-path" };
+
+    expect(initialState({ settings, url }).frontity.options)
+      .toMatchInlineSnapshot(`
+      Object {
+        "publicPath": "/custom-settings-path",
+      }
+    `);
+
+    settings.state.frontity.options = {};
   });
 
   it("should set the frontity.options correctly", () => {
