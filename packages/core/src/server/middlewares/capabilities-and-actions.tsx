@@ -4,6 +4,14 @@ import { appComponent } from "./capabilities/app-component";
 import { renderMethod } from "./capabilities/render-method";
 import { template } from "./capabilities/template";
 
+/**
+ * Setup capabilities and execute server side actions.
+ *
+ * @param ctx
+ * @param next
+ *
+ * @returns The middleware function.
+ */
 export const capabilitiesAndActions = async (
   ctx: Context,
   next: Next
