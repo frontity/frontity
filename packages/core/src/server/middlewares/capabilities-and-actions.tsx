@@ -7,8 +7,8 @@ import { template } from "./capabilities/template";
 /**
  * Setup capabilities and execute server side actions.
  *
- * @param ctx
- * @param next
+ * @param ctx - The request context.
+ * @param next - The middleware function.
  *
  * @returns The middleware function.
  */
