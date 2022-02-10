@@ -48,17 +48,10 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
 
   // Serve static files.
   app.use(async (ctx, next) => {
-    const { moduleStats, es5Stats } = ctx.state.stats;
-    const stats = moduleStats || es5Stats;
-
-    const fullPublicPath =
-      ctx.state.store.state.frontity.options.publicPath || stats?.publicPath;
-
-    const publicPath = fullPublicPath
-      ? // Remove domain from publicPath.
-        fullPublicPath.replace(/^(?:https?:)?\/\/([^/])+/, "")
-      : // Use the value by default.
-        "/static";
+    const publicPath = ctx.state.store.state.frontity.options.publicPath.replace(
+      /^(?:https?:)?\/\/([^/])+/,
+      ""
+    );
 
     // Serve the static files.
     return mount(
