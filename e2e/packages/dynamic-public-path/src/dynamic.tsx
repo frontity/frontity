@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+/**
+ * A React component that renders a dynamic component.
+ *
+ * @returns React element.
+ */
 const Dynamic: React.FC = () => {
   const [toggle, setToggle] = useState(false);
   return (
