@@ -582,6 +582,30 @@ const settings: Settings<
       },
     ],
   },
+  {
+    name: "dynamic-public-path",
+    match: ["/dynamic-public-path/"],
+    state: {
+      frontity: {
+        options: {
+          publicPath: "/dynamic-public-path/custom-static",
+        },
+      },
+    },
+    packages: ["e2e-dynamic-public-path"],
+  },
+  {
+    name: "dynamic-public-path-2",
+    match: ["/dynamic-public-path-2/"],
+    state: {
+      frontity: {
+        options: {
+          publicPath: "/custom-static",
+        },
+      },
+    },
+    packages: ["e2e-dynamic-public-path"],
+  },
 ];
 
 export default settings;
