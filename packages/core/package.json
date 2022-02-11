@@ -95,7 +95,7 @@
     "@types/loadable__component": "^5.13.1",
     "@types/loadable__server": "^5.12.5",
     "@types/lodash": "^4.14.165",
-    "@types/node": "^14.14.31",
+    "@types/node": "^16.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
