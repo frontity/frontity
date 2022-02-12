@@ -33,11 +33,6 @@ interface WebpackOptions {
   entryPoints: EntryPoints[];
 
   /**
-   * The public path of Webpack.
-   */
-  publicPath: string;
-
-  /**
    * The config of Babel, generated in the previous step.
    */
   babel: BabelConfigs;
@@ -75,7 +70,6 @@ const getConfig = ({
   mode,
   entryPoints,
   babel,
-  publicPath,
   frontity,
   analyze,
 }: ConfigOptions): WebpackConfig => ({
@@ -84,7 +78,7 @@ const getConfig = ({
   target: targets({ target }),
   devtool: devtool({ mode }),
   entry: entry({ target, mode, entryPoints }),
-  output: output({ target, mode, outDir: frontity.outDir, publicPath }),
+  output: output({ target, mode, outDir: frontity.outDir }),
   module: modules({ target, babel, mode }),
   resolve: resolve(),
   externals: externals({ target }),
