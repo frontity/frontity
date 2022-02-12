@@ -135,7 +135,6 @@ export default async ({
   const config = getConfig({
     mode,
     entryPoints,
-    publicPath,
     analyze,
     extraConfigurations,
   });
