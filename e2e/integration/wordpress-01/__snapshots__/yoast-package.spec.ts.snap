@@ -84,7 +84,10 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -122,22 +125,13 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/hello-world/",
-              "url": "http://my.frontity.site/hello-world/",
-              "name": "Hello world!"
-            }
+            "name": "Hello world!"
           }
         ]
       },
@@ -150,9 +144,11 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
           "@id": "http://my.frontity.site/#personlogo",
           "inLanguage": "en-US",
           "url": "http://2.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=96&d=mm&r=g",
+          "contentUrl": "http://2.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=96&d=mm&r=g",
           "caption": "admin"
         },
-        "sameAs": ["http://localhost:8080"]
+        "sameAs": ["http://localhost:8080"],
+        "url": "http://my.frontity.site/author/admin/"
       }
     ]
   }
@@ -225,7 +221,10 @@ exports[`Yoast Package > Page > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -259,22 +258,13 @@ exports[`Yoast Package > Page > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/sample-page/",
-              "url": "http://my.frontity.site/sample-page/",
-              "name": "Sample Page"
-            }
+            "name": "Sample Page"
           }
         ]
       }
@@ -345,7 +335,10 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -377,22 +370,13 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/category/nature/",
-              "url": "http://my.frontity.site/category/nature/",
-              "name": "Nature"
-            }
+            "name": "Nature"
           }
         ]
       }
@@ -463,7 +447,10 @@ exports[`Yoast Package > Tag > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -495,22 +482,13 @@ exports[`Yoast Package > Tag > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/tag/japan/",
-              "url": "http://my.frontity.site/tag/japan/",
-              "name": "Japan"
-            }
+            "name": "Japan"
           }
         ]
       }
@@ -589,7 +567,10 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -621,22 +602,13 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/author/luisherranz/",
-              "url": "http://my.frontity.site/author/luisherranz/",
-              "name": "Archives for luisherranz"
-            }
+            "name": "Archives for luisherranz"
           }
         ]
       },
@@ -649,6 +621,7 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
           "@id": "http://my.frontity.site/#personlogo",
           "inLanguage": "en-US",
           "url": "http://2.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
+          "contentUrl": "http://2.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
           "caption": "luisherranz"
         },
         "mainEntityOfPage": {
@@ -681,11 +654,7 @@ exports[`Yoast Package > Homepage > should render the Open Graph tags #1`] = `
 `;
 
 exports[`Yoast Package > Homepage > should render the Open Graph tags #2`] = `
-<meta
-  data-rh="true"
-  property="og:title"
-  content="Test WP Site - Just another WordPress site"
-/>
+<meta data-rh="true" property="og:title" content="Test WP Site" />
 `;
 
 exports[`Yoast Package > Homepage > should render the Open Graph tags #3`] = `
@@ -722,7 +691,10 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -755,22 +727,13 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home"
           }
         ]
       }
@@ -849,7 +812,10 @@ exports[`Yoast Package > CPT > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -883,32 +849,19 @@ exports[`Yoast Package > CPT > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/movies/",
-              "url": "http://my.frontity.site/movies/",
-              "name": "Movies"
-            }
+            "name": "Movies",
+            "item": "http://my.frontity.site/movies/"
           },
           {
             "@type": "ListItem",
             "position": 3,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/movie/the-terminator/",
-              "url": "http://my.frontity.site/movie/the-terminator/",
-              "name": "The Terminator"
-            }
+            "name": "The Terminator"
           }
         ]
       }
@@ -975,7 +928,10 @@ exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -1007,22 +963,13 @@ exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/movies/",
-              "url": "http://my.frontity.site/movies/",
-              "name": "Movies"
-            }
+            "name": "Movies"
           }
         ]
       }
@@ -1093,7 +1040,10 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
         "potentialAction": [
           {
             "@type": "SearchAction",
-            "target": "http://my.frontity.site/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         ],
@@ -1125,22 +1075,13 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
           {
             "@type": "ListItem",
             "position": 1,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/",
-              "url": "http://my.frontity.site/",
-              "name": "Home"
-            }
+            "name": "Home",
+            "item": "http://my.frontity.site/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "item": {
-              "@type": "WebPage",
-              "@id": "http://my.frontity.site/actor/linda-hamilton/",
-              "url": "http://my.frontity.site/actor/linda-hamilton/",
-              "name": "Linda Hamilton"
-            }
+            "name": "Linda Hamilton"
           }
         ]
       }
