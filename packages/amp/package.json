@@ -33,7 +33,7 @@
     "@frontity/connect": "^1.3.0",
     "@testing-library/react": "^11.2.5",
     "@types/amphtml-validator": "^1.0.1",
-    "amphtml-validator": "^1.0.34",
+    "amphtml-validator": "^1.0.35",
     "clone-deep": "^4.0.1",
     "deepmerge": "^4.2.2",
     "diffable-html": "^4.0.0",

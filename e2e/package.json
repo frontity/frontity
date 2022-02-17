@@ -24,7 +24,7 @@
     "@wdio/mocha-framework": "^7.1.2",
     "@wdio/spec-reporter": "^7.1.1",
     "@wdio/sync": "^7.1.1",
-    "amphtml-validator": "^1.0.34",
+    "amphtml-validator": "^1.0.35",
     "browserstack-cypress-cli": "^1.7.1",
     "chromedriver": "^89.0.0",
     "cypress": "^6.7.1",
