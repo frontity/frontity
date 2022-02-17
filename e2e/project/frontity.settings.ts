@@ -600,7 +600,7 @@ const settings: Settings<
     state: {
       frontity: {
         options: {
-          publicPath: "/custom-static",
+          publicPath: "/dynamic-public-path-2/custom-static",
         },
       },
     },
