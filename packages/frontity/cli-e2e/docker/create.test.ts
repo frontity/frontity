@@ -51,17 +51,6 @@ describe("npx frontity create", () => {
   });
 
   describe("git", () => {
-    it("should not add git if git is not installed", () =>
-      testContainer(async ({ runCommand }) => {
-        await runCommand(
-          `node dist/src/cli/index.js create --no-prompt --theme @frontity/mars-theme test-frontity-app`
-        );
-
-        const output = await runCommand("ls -a test-frontity-app");
-        expect(output).toEqual(expect.not.stringMatching(/\.git$/m));
-        expect(output).toEqual(expect.not.stringMatching(/\.gitignore$/m));
-      }));
-
     it("should not add git if git is installed but git settings are missing", () =>
       testContainer(async ({ runCommand }) => {
         await runCommand("apk add git");
@@ -72,6 +61,17 @@ describe("npx frontity create", () => {
 
         const output = await runCommand("ls -a test-frontity-app");
 
+        expect(output).toEqual(expect.not.stringMatching(/\.git$/m));
+        expect(output).toEqual(expect.not.stringMatching(/\.gitignore$/m));
+      }));
+
+    it("should not add git if git is not installed", () =>
+      testContainer(async ({ runCommand }) => {
+        await runCommand(
+          `node dist/src/cli/index.js create --no-prompt --theme @frontity/mars-theme test-frontity-app`
+        );
+
+        const output = await runCommand("ls -a test-frontity-app");
         expect(output).toEqual(expect.not.stringMatching(/\.git$/m));
         expect(output).toEqual(expect.not.stringMatching(/\.gitignore$/m));
       }));
