@@ -38,6 +38,6 @@
     "deepmerge": "^4.2.2",
     "diffable-html": "^4.0.0",
     "jest-matcher-utils": "^26.6.2",
-    "react-helmet-async": "^1.0.9"
+    "react-helmet-async": "1.0.9"
   }
 }

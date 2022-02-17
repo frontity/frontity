@@ -61,7 +61,7 @@
     "node-fetch": "2.6.2",
     "ora": "^5.1.0",
     "ramda": "^0.27.1",
-    "react-helmet-async": "^1.0.9",
+    "react-helmet-async": "1.0.9",
     "simple-entity-decode": "^0.0.3",
     "tar": "^6.0.5",
     "typed-emitter": "^1.3.1",
