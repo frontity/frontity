@@ -51,6 +51,11 @@ jobs:
         env:
           CI: true
 
+      - name: Install dependencies (e2e)
+        run: cd e2e && npm ci
+        env:
+          CI: true
+
       - name: Run e2e tests
         uses: cypress-io/github-action@v2.9.7
         env:
@@ -60,7 +65,7 @@ jobs:
           CYPRESS_FRONTITY_MODE: ${{ matrix.mode }}
           FRONTITY_SERVER: http://172.17.0.1:3001
         with:
-          start: "npx cypress install && node e2e.js --cypress off ${{ matrix.args }}"
+          start: "node e2e.js --cypress off ${{ matrix.args }}"
           wait-on: "http://localhost:3001"
           wait-on-timeout: 600
           browser: chrome
