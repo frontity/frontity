@@ -56,6 +56,9 @@ jobs:
         env:
           CI: true
 
+      - name: Install Cypress manually
+        run: cd e2e && npx cypress install
+
       - name: Run e2e tests
         uses: cypress-io/github-action@v2.9.7
         env:
