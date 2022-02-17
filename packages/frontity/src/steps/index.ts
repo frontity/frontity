@@ -30,7 +30,7 @@ const allowedExistingContent = [
   ".ds_store",
 ];
 
-const faviconUrl = "https://favicon.frontity.org/";
+const faviconUrl = "https://favicon.frontity.org/favicon.ico";
 
 /**
  * This function normalizes and validates options.
