@@ -43,7 +43,14 @@ const createPredefinedContext = ({
     },
     store: {
       actions: [],
-      state: { FRONTITY_TEST: true },
+      state: {
+        FRONTITY_TEST: true,
+        frontity: {
+          options: {
+            publicPath: "/static",
+          },
+        },
+      },
       libraries: {
         frontity: {
           render: render || jest.fn().mockReturnValue("render()"),

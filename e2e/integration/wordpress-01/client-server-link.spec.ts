@@ -1,77 +1,79 @@
-import type { taskTypes } from "../../plugins";
-const task: taskTypes = cy.task;
+/* eslint-disable jest/no-commented-out-tests */
+// import type { taskTypes } from "../../plugins";
+// const task: taskTypes = cy.task;
 
-describe("Tiny Router", () => {
-  before(() => {
-    // Go first to the main URL to avoid a restart when the WordPress site is
-    // visited (baseUrl is different here).
-    cy.visit("http://localhost:8080");
-    task("installPlugin", { name: "code-snippets" });
-    task("installPlugin", {
-      name: "https://github.com/frontity/frontity-embedded/archive/master.zip",
-    });
-    task("loadDatabase", {
-      path: "./wp-data/tiny-router/client-server-mismatch.sql",
-    });
-  });
+// describe("Tiny Router", () => {
+//   before(() => {
+//     // Go first to the main URL to avoid a restart when the WordPress site is
+//     // visited (baseUrl is different here).
+//     cy.visit("http://localhost:8080");
 
-  after(() => {
-    task("resetDatabase");
-    task("removeAllPlugins");
-  });
+//     task("installPlugin", { name: "code-snippets" });
+//     task("installPlugin", {
+//       name: "https://github.com/frontity/frontity-embedded/archive/master.zip",
+//     });
+//     task("loadDatabase", {
+//       path: "./wp-data/tiny-router/client-server-mismatch.sql",
+//     });
+//   });
 
-  it("should work if there's a link mismatch between the server and the client", () => {
-    cy.visit("http://localhost:8080/?utm=client&frontity_name=wp-basic-tests");
+//   after(() => {
+//     task("resetDatabase");
+//     task("removeAllPlugins");
+//   });
 
-    // This test only checks that the link has actually changed in the server.
-    cy.window()
-      .its("frontity")
-      .its("state")
-      .its("frontity")
-      .its("initialLink")
-      .should("equal", "/?utm=SERVER");
+//   it("should work if there's a link mismatch between the server and the client", () => {
+//     cy.visit("http://localhost:8080/?utm=client&frontity_name=wp-basic-tests");
 
-    // The "utm" parameter should be respected.
-    cy.window()
-      .its("frontity")
-      .its("state")
-      .its("router")
-      .its("link")
-      .should("equal", "/?utm=client");
+//     // This test only checks that the link has actually changed in the server.
+//     cy.window()
+//       .its("frontity")
+//       .its("state")
+//       .its("frontity")
+//       .its("initialLink")
+//       .should("equal", "/?utm=SERVER");
 
-    // The home should render correctly.
-    cy.get("[data-test-id='1']").should("contain.text", "/hello-world");
+//     // The "utm" parameter should be respected.
+//     cy.window()
+//       .its("frontity")
+//       .its("state")
+//       .its("router")
+//       .its("link")
+//       .should("equal", "/?utm=client");
 
-    // Go to "/hello-world/"
-    cy.get("[data-test-id='/hello-world/'").click();
-    cy.get("[data-test-id='post']").should("contain.text", "Hello world");
+//     // The home should render correctly.
+//     cy.get("[data-test-id='1']").should("contain.text", "/hello-world");
 
-    // Go back to the home. It should render the home again.
-    cy.go("back");
+//     // Go to "/hello-world/"
+//     cy.get("[data-test-id='/hello-world/'").click();
+//     cy.get("[data-test-id='post']").should("contain.text", "Hello world");
 
-    cy.window()
-      .its("frontity")
-      .its("state")
-      .its("router")
-      .its("link")
-      .should("equal", "/?utm=client");
+//     // Go back to the home. It should render the home again.
+//     cy.go("back");
 
-    cy.location().its("search").should("equal", "?utm=client");
+//     cy.window()
+//       .its("frontity")
+//       .its("state")
+//       .its("router")
+//       .its("link")
+//       .should("equal", "/?utm=client");
 
-    cy.get("[data-test-id='1']").should("contain.text", "/hello-world");
-  });
+//     cy.location().its("search").should("equal", "?utm=client");
 
-  it("should work when the URL rendered is different than the URL returned", () => {
-    cy.visit("http://localhost:8080/?b=1&a=2&frontity_name=wp-basic-tests");
+//     cy.get("[data-test-id='1']").should("contain.text", "/hello-world");
+//   });
 
-    // Check that Frontity has loaded.
-    cy.window().its("frontity").should("not.be.undefined");
-  });
+//   it("should work when the URL rendered is different than the URL returned", () => {
+//     cy.visit("http://localhost:8080/?b=1&a=2&frontity_name=wp-basic-tests");
 
-  it("should work when the URL rendered is different than the URL returned and the normalized link is different than the server link", () => {
-    cy.visit("http://localhost:8080/hello-world/?frontity_name=wp-basic-tests");
+//     // Check that Frontity has loaded.
+//     cy.window().its("frontity").should("not.be.undefined");
+//   });
 
-    // Check that Frontity has loaded.
-    cy.window().its("frontity").should("not.be.undefined");
-  });
-});
+//   it("should work when the URL rendered is different than the URL returned and the normalized link is different than the server link", () => {
+//     cy.visit("http://localhost:8080/hello-world/?frontity_name=wp-basic-tests");
+
+//     // Check that Frontity has loaded.
+//     cy.window().its("frontity").should("not.be.undefined");
+//   });
+// });

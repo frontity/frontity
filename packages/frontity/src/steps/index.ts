@@ -30,7 +30,8 @@ const allowedExistingContent = [
   ".ds_store",
 ];
 
-const faviconUrl = "https://favicon.frontity.org/";
+const faviconUrl =
+  "https://frontity.org/wp-content/plugins/frontity-favicon/favicon.ico";
 
 /**
  * This function normalizes and validates options.

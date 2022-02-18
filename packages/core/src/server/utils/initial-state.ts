@@ -28,7 +28,10 @@ interface StateOptions {
  * @returns The Frontity state object.
  */
 const state = ({ settings, url }: StateOptions) => {
-  const options = {};
+  const defaultOptions = {
+    publicPath: process.env.FRONTITY_INTERNAL_PUBLIC_PATH || "/static",
+  };
+  const urlQueryOptions = {};
 
   const searchParams = new URLSearchParams(url.search);
 
@@ -41,7 +44,7 @@ const state = ({ settings, url }: StateOptions) => {
   url.searchParams.forEach((value, key) => {
     if (key.startsWith("frontity_")) {
       const camelKey = snakeToCamel(key.replace("frontity_", ""));
-      options[camelKey] = value;
+      urlQueryOptions[camelKey] = value;
       searchParams.delete(key);
     }
   });
@@ -57,13 +60,13 @@ const state = ({ settings, url }: StateOptions) => {
       rendering: "ssr",
       hmr: false,
       initialLink: `${url.pathname}${search}${url.hash}`,
-      options,
+      options: defaultOptions,
       packages: settings.packages.map((pkg) => pkg.name),
     },
   };
 
   // Merge the initial state with the general state of settings.
-  state = deepmerge(settings.state, state, {
+  state = deepmerge(state, settings.state, {
     clone: false,
   });
 
@@ -72,6 +75,11 @@ const state = ({ settings, url }: StateOptions) => {
     state = deepmerge(state, pkg.state, {
       clone: false,
     });
+  });
+
+  // Merge the options with url query options.
+  state.frontity.options = deepmerge(state.frontity.options, urlQueryOptions, {
+    clone: false,
   });
 
   return state;

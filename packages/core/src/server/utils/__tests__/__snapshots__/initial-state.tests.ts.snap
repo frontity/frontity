@@ -16,7 +16,9 @@ Object {
     ],
     "mode": "default",
     "name": "site",
-    "options": Object {},
+    "options": Object {
+      "publicPath": "/static",
+    },
     "packages": Array [
       "package1",
       "package2",

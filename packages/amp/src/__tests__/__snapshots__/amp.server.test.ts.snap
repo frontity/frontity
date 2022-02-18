@@ -14,6 +14,7 @@ exports[`AMP server tests The \`render\` method uses the CacheProvider 1`] = `
         "before": null,
         "container": <head />,
         "ctr": 0,
+        "insertionPoint": undefined,
         "isSpeedy": false,
         "key": "css-amp",
         "nonce": undefined,
