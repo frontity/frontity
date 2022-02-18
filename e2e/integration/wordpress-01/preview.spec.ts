@@ -5,6 +5,8 @@ describe("Preview plugin", () => {
   before(() => {
     // Go first to the main URL to avoid a restart when the WordPress site is
     // visited (baseUrl is different here).
+    cy.visit("http://localhost:8080");
+
     task("installPlugin", { name: "custom-post-type-ui" });
     task("installPlugin", {
       name: "https://github.com/frontity/frontity-embedded/archive/master.zip",
@@ -12,7 +14,6 @@ describe("Preview plugin", () => {
     task("loadDatabase", {
       path: "./wp-data/preview.sql",
     });
-    cy.visit("http://localhost:8080");
   });
 
   after(() => {
