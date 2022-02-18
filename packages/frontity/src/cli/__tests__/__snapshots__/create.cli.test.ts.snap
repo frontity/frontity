@@ -95,21 +95,5 @@ Array [
       },
     ],
   ],
-  Array [
-    Array [
-      Object {
-        "default": false,
-        "message": "Do you want to receive framework updates by email?",
-        "name": "subscribe",
-        "type": "confirm",
-      },
-      Object {
-        "message": "Please, enter your email:",
-        "name": "email",
-        "type": "input",
-        "when": [Function],
-      },
-    ],
-  ],
 ]
 `;
