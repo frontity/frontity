@@ -59,7 +59,7 @@ test("Validate amp-img when height and width are missing", async () => {
 
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-img
-      class="css-1fbfwfl"
+      class="css-1aa2jcx-Html2React"
       layout="fill"
       src="test.img"
     />
@@ -406,7 +406,7 @@ test("picture element should be replaced with an img", async () => {
   expect(container.firstChild).toMatchInlineSnapshot(`
     <amp-img
       alt="Flowers"
-      class="css-68zbsl"
+      class="css-1gbrod6-Html2React"
       height="100"
       layout="responsive"
       src="img_orange_flowers.jpg"

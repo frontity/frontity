@@ -8,23 +8,23 @@ The e2e tests allow you to run tests using a real browser. They start both a Fro
 
 - [Installation](#installation)
 - [Usage](#usage)
-  * [Running the tests](#running-the-tests)
-  * [Adding new tests](#adding-new-tests)
-  * [Installing WordPress plugins](#installing-wordpress-plugins)
-  * [Configuring WordPress Database](#configuring-wordpress-database)
-  * [Uploading files to WordPress](#uploading-files-to-wordpress)
+  - [Running the tests](#running-the-tests)
+  - [Adding new tests](#adding-new-tests)
+  - [Installing WordPress plugins](#installing-wordpress-plugins)
+  - [Configuring WordPress Database](#configuring-wordpress-database)
+  - [Uploading files to WordPress](#uploading-files-to-wordpress)
 - [CLI](#cli)
 - [Running the Cypress tests in BrowserStack](#running-the-cypress-tests-in-browserstack)
-  * [`--wp`: string](#-wp-string)
-  * [`--prod`: boolean](#-prod-boolean)
-  * [`--target`: "es5" | "module" | "both"](#-target-es5-module-both)
-  * [`--cypress`: "open" | "run" | "browserstack" | "off"](#-cypress-open-run-browserstack-off)
-  * [`--browser`: "chrome" | "firefox" | "edge"](#-browser-chrome-firefox-edge)
-  * [`--suite`: "all" | string](#-suite-all-string)
-  * [`--inspect`: boolean](#-inspect-boolean)
-  * [`--spec`: string](#-spec-string)
-  * [`--browserstack-config`: string](#-browserstack-config-string)
-  * [`--browserstack-local`: string](#-browserstack-local-string)
+  - [`--wp`: string](#-wp-string)
+  - [`--prod`: boolean](#-prod-boolean)
+  - [`--target`: "es5" | "module" | "both"](#-target-es5-module-both)
+  - [`--cypress`: "open" | "run" | "browserstack" | "off"](#-cypress-open-run-browserstack-off)
+  - [`--browser`: "chrome" | "firefox" | "edge"](#-browser-chrome-firefox-edge)
+  - [`--suite`: "all" | string](#-suite-all-string)
+  - [`--inspect`: boolean](#-inspect-boolean)
+  - [`--spec`: string](#-spec-string)
+  - [`--browserstack-config`: string](#-browserstack-config-string)
+  - [`--browserstack-local`: string](#-browserstack-local-string)
 - [Running the Selenium tests in BrowserStack](#running-the-selenium-tests-in-browserstack)
 
 <!-- tocstop -->
@@ -33,6 +33,7 @@ The e2e tests allow you to run tests using a real browser. They start both a Fro
 
 - Install Docker on your computer.
 - Install the dependencies of the e2e tests: `cd e2e && npm install`.
+- Install Cypress with `npx cypress install`
 
 ## Usage
 
