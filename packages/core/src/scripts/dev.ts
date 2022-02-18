@@ -168,7 +168,6 @@ export default async ({
   const config = getConfig({
     mode,
     entryPoints,
-    publicPath,
     analyze,
     extraConfigurations,
   });
@@ -184,7 +183,6 @@ export default async ({
   const compiler = webpack([clientWebpack, config.webpack.server]);
   app.use(
     webpackDevMiddleware(compiler, {
-      publicPath: clientWebpack.output.publicPath,
       writeToDisk: true,
     })
   );

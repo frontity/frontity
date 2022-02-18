@@ -8,6 +8,7 @@ import { exists } from "fs";
 import { promisify } from "util";
 import { scriptsStats } from "./middlewares/scripts-stats";
 import { settingsAndStore } from "./middlewares/settings-and-store";
+import { capabilitiesAndActions } from "./middlewares/capabilities-and-actions";
 import { serverSideRendering } from "./middlewares/server-side-rendering";
 import { errorHandling } from "./middlewares/error-handling";
 
@@ -42,16 +43,15 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   // The module stats middleware.
   app.use(scriptsStats);
 
+  // Setup the settings and store.
+  app.use(settingsAndStore(packages));
+
   // Serve static files.
   app.use(async (ctx, next) => {
-    const { moduleStats, es5Stats } = ctx.state.stats;
-    const stats = moduleStats || es5Stats;
-
-    const publicPath = stats
-      ? // Remove domain from publicPath.
-        stats.publicPath.replace(/^(?:https?:)?\/\/([^/])+/, "")
-      : // Use the value by default.
-        "/static";
+    const publicPath = ctx.state.store.state.frontity.options.publicPath.replace(
+      /^(?:https?:)?\/\/([^/])+/,
+      ""
+    );
 
     // Serve the static files.
     return mount(
@@ -97,8 +97,8 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   // Return Frontity favicon for favicon.ico.
   app.use(get("/favicon.ico", serve("./")));
 
-  // Setup the settings and store.
-  app.use(settingsAndStore(packages));
+  // Add capabilities and run actions.
+  app.use(capabilitiesAndActions);
 
   // Sever Side Rendering with the defined
   // template and render method.

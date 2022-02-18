@@ -20,11 +20,6 @@ interface ConfigOptions {
   entryPoints: EntryPoints[];
 
   /**
-   * The public path of Webpack.
-   */
-  publicPath: string;
-
-  /**
    * Flag indicating if the Bundle Analyzer plugin should be included.
    *
    * @defaultValue false
@@ -128,7 +123,6 @@ const runForEachTarget = (
 const config = ({
   mode,
   entryPoints,
-  publicPath,
   analyze = false,
   extraConfigurations = { babel: [], webpack: [], frontity: [] },
 }: ConfigOptions): Config => {
@@ -147,7 +141,6 @@ const config = ({
     babel,
     frontity,
     entryPoints,
-    publicPath,
     analyze,
   });
 

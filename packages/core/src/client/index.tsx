@@ -1,3 +1,4 @@
+import "./public-path";
 import { hydrate } from "react-dom";
 import { loadableReady } from "@loadable/component";
 import { getSnapshot } from "@frontity/connect";

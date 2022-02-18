@@ -114,11 +114,6 @@ interface OutputOptions {
    * The output directory.
    */
   outDir: string;
-
-  /**
-   * The public path.
-   */
-  publicPath: string;
 }
 
 /**
@@ -134,12 +129,9 @@ const output = ({
   target,
   mode,
   outDir,
-  publicPath,
 }: OutputOptions): WebpackConfig["output"] => ({
   filename: filenames[target][mode],
   path: resolve(rootPath, outDir, paths[target]),
-  // Ensure there is a trailing slash in the public path.
-  publicPath: publicPath.replace(/\/?$/, "/"),
   ...(target !== "server" && { chunkFilename: chunkFilenames[target][mode] }),
   // Node still needs CJS.
   ...(target === "server" && { libraryTarget: "commonjs2" }),
