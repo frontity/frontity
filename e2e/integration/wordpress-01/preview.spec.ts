@@ -1,5 +1,6 @@
-import type { taskTypes } from "../../plugins";
-const task: taskTypes = cy.task;
+/* eslint-disable jest/no-commented-out-tests */
+// import type { taskTypes } from "../../plugins";
+// const task: taskTypes = cy.task;
 
 // describe("Preview plugin", () => {
 //   before(() => {
@@ -22,6 +23,7 @@ const task: taskTypes = cy.task;
 //   });
 
 //
+
 /**
 //    * Tests for preview while logged in.
 //    */

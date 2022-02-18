@@ -1,5 +1,6 @@
-import type { taskTypes } from "../../plugins";
-const task: taskTypes = cy.task;
+/* eslint-disable jest/no-commented-out-tests */
+// import type { taskTypes } from "../../plugins";
+// const task: taskTypes = cy.task;
 
 // describe("Tiny Router", () => {
 //   before(() => {
