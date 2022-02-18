@@ -25,8 +25,8 @@
 //
 
 /**
-//    * Tests for preview while logged in.
-//    */
+ * Tests for preview while logged in.
+ */
 //   describe("Logged in WordPress", () => {
 //     beforeEach(() => {
 //       cy.visit("http://localhost:8080/wp-login.php");
