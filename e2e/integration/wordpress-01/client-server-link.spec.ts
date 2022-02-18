@@ -16,8 +16,8 @@ describe("Tiny Router", () => {
   });
 
   after(() => {
-    // task("resetDatabase");
-    // task("removeAllPlugins");
+    task("resetDatabase");
+    task("removeAllPlugins");
   });
 
   it("should work if there's a link mismatch between the server and the client", () => {
