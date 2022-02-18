@@ -31,7 +31,7 @@ const allowedExistingContent = [
 ];
 
 const faviconUrl =
-  "https://raw.githubusercontent.com/frontity/frontity/bf97cfc5f7cc0c6a378ad3c15d0b9c6361cacf5f/packages/frontity/favicon.ico";
+  "https://frontity.org/wp-content/plugins/frontity-favicon/favicon.ico";
 
 /**
  * This function normalizes and validates options.
