@@ -50,7 +50,7 @@ describe("CLI create", () => {
 
     await create(options);
 
-    expect(mockedInquirer.prompt).toHaveBeenCalledTimes(3);
+    expect(mockedInquirer.prompt).toHaveBeenCalledTimes(2);
     expect(mockedInquirer.prompt.mock.calls[0][0]).toMatchObject([
       { message: "Enter a name for the project:" },
     ]);
@@ -58,10 +58,10 @@ describe("CLI create", () => {
       { message: "Pick a starter theme to clone:" },
     ]);
 
-    expect(mockedInquirer.prompt.mock.calls[2][0]).toMatchObject([
-      { message: "Do you want to receive framework updates by email?" },
-      { message: "Please, enter your email:" },
-    ]);
+    // expect(mockedInquirer.prompt.mock.calls[2][0]).toMatchObject([
+    //   { message: "Do you want to receive framework updates by email?" },
+    //   { message: "Please, enter your email:" },
+    // ]);
     expect(mockedInquirer.prompt.mock.calls).toMatchSnapshot();
   });
 

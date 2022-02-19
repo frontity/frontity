@@ -1,7 +1,13 @@
 import { EventPromised } from "../utils/eventPromised";
 import { subscribe } from "../steps";
 
-// TODO:  make param an object
+/**
+ * Subscribe to Frontity newsletter.
+ *
+ * @param email - The email to be subscribed.
+ * @param emit - The eventEmitter to send messages.
+ * @param reject - The promise reject method in case something goes wrong.
+ */
 const subscribeCommand = async (
   email: string,
   emit: (event: string, ...value: any[]) => void,
@@ -9,7 +15,7 @@ const subscribeCommand = async (
 ) => {
   try {
     emit("message", "Subscribing to frontity");
-    await subscribe(email);
+    await subscribe();
   } catch (error) {
     reject(error);
   }

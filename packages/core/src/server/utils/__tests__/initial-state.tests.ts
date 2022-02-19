@@ -9,6 +9,7 @@ const settings = {
       url: "https://site.com",
       prop1: "prop1",
       menu1: ["item1"],
+      options: {},
     },
   },
   packages: [
@@ -89,9 +90,26 @@ describe("initialState", () => {
     expect(initialState({ settings, url }).frontity.platform).toBe("server");
   });
 
+  it("should set `frontity.options.publicPath` using the value from `frontity.settings`", async () => {
+    const url = new URL("https://site.com/post");
+
+    settings.state.frontity.options = { publicPath: "/custom-settings-path" };
+
+    expect(initialState({ settings, url }).frontity.options)
+      .toMatchInlineSnapshot(`
+      Object {
+        "publicPath": "/custom-settings-path",
+      }
+    `);
+
+    settings.state.frontity.options = {};
+  });
+
   it("should set the frontity.options correctly", () => {
+    process.env.FRONTITY_INTERNAL_PUBLIC_PATH = "/custom-env-path";
+
     const url = new URL(
-      "https://site.com/page/2?frontity_name=some-site&frontity_source_auth=some-token"
+      "https://site.com/page/2?frontity_name=some-site&frontity_source_auth=some-token&frontity_public_path=/custom-query-path"
     );
 
     // The frontity_name & frontity_source_auth should be present in the options
@@ -99,9 +117,27 @@ describe("initialState", () => {
       .toMatchInlineSnapshot(`
       Object {
         "name": "some-site",
+        "publicPath": "/custom-query-path",
         "sourceAuth": "some-token",
       }
     `);
+
+    delete process.env.FRONTITY_INTERNAL_PUBLIC_PATH;
+  });
+
+  it("should set `frontity.options.publicPath` using the env variable `FRONTITY_INTERNAL_PUBLIC_PATH`", () => {
+    process.env.FRONTITY_INTERNAL_PUBLIC_PATH = "/custom-env-path";
+
+    const url = new URL("https://site.com/post");
+
+    expect(initialState({ settings, url }).frontity.options)
+      .toMatchInlineSnapshot(`
+      Object {
+        "publicPath": "/custom-env-path",
+      }
+    `);
+
+    delete process.env.FRONTITY_INTERNAL_PUBLIC_PATH;
   });
 
   it("should remove frontity_name & frontity_source_auth from the initialLink", () => {

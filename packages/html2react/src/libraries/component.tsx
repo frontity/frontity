@@ -279,7 +279,7 @@ export const handleNodes = ({
   nodes,
   ...payload
 }: HandleNodesParams): React.ReactNode => {
-  const handled = nodes.reduce((final: React.ReactNodeArray, node, index) => {
+  const handled = nodes.reduce((final: React.ReactNode[], node, index) => {
     const handledNode = handleNode({ node, index, ...payload });
     if (handledNode) final.push(handledNode);
     return final;

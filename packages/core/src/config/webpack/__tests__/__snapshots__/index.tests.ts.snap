@@ -227,7 +227,6 @@ Object {
       "chunkFilename": "[name].es5.js",
       "filename": "[name].es5.js",
       "path": "build/static",
-      "publicPath": "/static/",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -366,7 +365,6 @@ Object {
       "chunkFilename": "[name].module.js",
       "filename": "[name].module.js",
       "path": "build/static",
-      "publicPath": "/static/",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -492,7 +490,6 @@ Object {
       "filename": "server.js",
       "libraryTarget": "commonjs2",
       "path": "build/",
-      "publicPath": "/static/",
     },
     "performance": Object {
       "maxAssetSize": 5000000,
@@ -621,7 +618,6 @@ Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
       "filename": "[name].es5.[chunkhash].js",
       "path": "build/static",
-      "publicPath": "/static/",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -743,7 +739,6 @@ Object {
       "chunkFilename": "[name].module.[chunkhash].js",
       "filename": "[name].module.[chunkhash].js",
       "path": "build/static",
-      "publicPath": "/static/",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -854,7 +849,6 @@ Object {
       "filename": "server.js",
       "libraryTarget": "commonjs2",
       "path": "build/",
-      "publicPath": "/static/",
     },
     "performance": Object {
       "maxAssetSize": 5000000,

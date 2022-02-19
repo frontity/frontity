@@ -3,7 +3,6 @@ import ora from "ora";
 import chalk from "chalk";
 import { prompt, Question, ListQuestion } from "inquirer";
 import createCommand from "../commands/create";
-import { subscribe } from "../steps";
 import { errorLogger, log } from "../utils";
 import { CreateCommandOptions } from "../steps/types";
 
@@ -170,41 +169,6 @@ const create = async ({
     await emitter;
 
     log(chalk.bold("\nFrontity project created.\n"));
-
-    if (promptUser) {
-      const subscribeQuestions: Question[] = [
-        {
-          name: "subscribe",
-          type: "confirm",
-          message: "Do you want to receive framework updates by email?",
-          default: false,
-        },
-        {
-          name: "email",
-          type: "input",
-          message: "Please, enter your email:",
-          when: (answers) => answers.subscribe,
-        },
-      ];
-      const answers = await prompt(subscribeQuestions);
-
-      if (answers.subscribe) {
-        emitter.on("subscribe", (message, action) => {
-          if (action) ora.promise(action, message);
-          else log(message);
-        });
-
-        await subscribe(answers.email);
-
-        log("\nThanks for subscribing! 😃");
-      } else {
-        log(
-          `\nOk, that's fine! 😉\nYou can subscribe at any point with ${chalk.bold.green(
-            "npx frontity subscribe <email>"
-          )}.`
-        );
-      }
-    }
 
     log(
       `\nRun ${chalk.bold.green(

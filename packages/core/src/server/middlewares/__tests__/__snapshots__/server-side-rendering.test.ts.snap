@@ -11,7 +11,10 @@ exports[`serverSideRendering should render with the given render and template 1`
 <link rel=\\"chunk-extractor-link\\" />
                         </head>
                         <scripts>
-                            <script id=\\"__FRONTITY_CONNECT_STATE__\\" type=\\"application/json\\">{\\"FRONTITY_TEST\\":true}</script>
+                            <script id=\\"__FRONTITY_CONNECT_STATE__\\" type=\\"application/json\\">{\\"FRONTITY_TEST\\":true,\\"frontity\\":{\\"options\\":{\\"publicPath\\":\\"/static\\"}}}</script>
+<script id=\\"__FRONTITY_PUBLIC_PATH__\\" type=\\"text/javascript\\">
+        window[\\"__FRONTITY_PUBLIC_PATH__\\"] = \\"/static/\\";
+      </script>
 <script get-both-scripts></script>
                         </scripts>
                     </template>

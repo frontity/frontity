@@ -443,7 +443,7 @@ Array [
 exports[`downloadFavicon works as expected 1`] = `
 Array [
   Array [
-    "https://favicon.frontity.org/",
+    "https://frontity.org/wp-content/plugins/frontity-favicon/favicon.ico",
   ],
 ]
 `;

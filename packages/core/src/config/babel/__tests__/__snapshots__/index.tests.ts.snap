@@ -43,6 +43,7 @@ Object {
         Object {
           "include": Array [
             "CWD",
+            "FRONTITY_INTERNAL_PUBLIC_PATH",
           ],
         },
       ],
@@ -127,6 +128,7 @@ Object {
         Object {
           "include": Array [
             "CWD",
+            "FRONTITY_INTERNAL_PUBLIC_PATH",
           ],
         },
       ],
@@ -196,6 +198,7 @@ Object {
         Object {
           "include": Array [
             "CWD",
+            "FRONTITY_INTERNAL_PUBLIC_PATH",
           ],
         },
       ],
@@ -270,6 +273,7 @@ Object {
         Object {
           "include": Array [
             "CWD",
+            "FRONTITY_INTERNAL_PUBLIC_PATH",
           ],
         },
       ],
@@ -354,6 +358,7 @@ Object {
         Object {
           "include": Array [
             "CWD",
+            "FRONTITY_INTERNAL_PUBLIC_PATH",
           ],
         },
       ],
@@ -423,6 +428,7 @@ Object {
         Object {
           "include": Array [
             "CWD",
+            "FRONTITY_INTERNAL_PUBLIC_PATH",
           ],
         },
       ],

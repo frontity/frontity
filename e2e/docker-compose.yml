@@ -58,7 +58,7 @@ services:
       WORDPRESS_DB_PASSWORD: password
 
   db:
-    image: mysql:latest
+    image: mariadb:latest
     command:
       [
         "--default_authentication_plugin=mysql_native_password",

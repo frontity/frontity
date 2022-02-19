@@ -968,3 +968,39 @@ exports[`Head Tags - Yoast 13.5 > Custom Taxonomy > should render the schema tag
   }
 </script>
 `;
+
+exports[`Head Tags - Yoast 13.5 > Post > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
+
+exports[`Head Tags - Yoast 13.5 > Page > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
+
+exports[`Head Tags - Yoast 13.5 > Category > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
+
+exports[`Head Tags - Yoast 13.5 > Tag > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
+
+exports[`Head Tags - Yoast 13.5 > Author > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
+
+exports[`Head Tags - Yoast 13.5 > Homepage > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
+
+exports[`Head Tags - Yoast 13.5 > CPT > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
+
+exports[`Head Tags - Yoast 13.5 > CPT (archive) > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
+
+exports[`Head Tags - Yoast 13.5 > Custom Taxonomy > should render the robots tag #1`] = `
+[ {}, {} ]
+`;
