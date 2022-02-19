@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.17.2
+
+### Patch Changes
+
+- [`6aff8e84`](https://github.com/frontity/frontity/commit/6aff8e84527906a031c400a52d4e55c3de66f50c) [#893](https://github.com/frontity/frontity/pull/893) Thanks [@luisherranz](https://github.com/luisherranz)! - Move favicon from Vercel hosting to WordPress.com hosting to avoid connectivity problems.
+
+* [`4a1081e0`](https://github.com/frontity/frontity/commit/4a1081e0b20f9bf0c765036a1e766373b134ae9f) [#892](https://github.com/frontity/frontity/pull/892) Thanks [@SantosGuillamot](https://github.com/SantosGuillamot)! - Disable newsletter from the CLI.
+
 ## 1.17.1
 
 ### Patch Changes
