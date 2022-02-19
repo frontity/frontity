@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.15.0
+
+### Minor Changes
+
+- [`d67e74a7`](https://github.com/frontity/frontity/commit/d67e74a764b39a9c48203ae4d7dff140dbe120dc) [#890](https://github.com/frontity/frontity/pull/890) Thanks [@orballo](https://github.com/orballo)! - Add support for dynamic `publicPath` configuration via `state.frontity.options.publicPath` (in `frontity.settings.js`) or the `?frontity_public_path=/your-path` query option.
+
 ## 1.14.3
 
 ### Patch Changes
