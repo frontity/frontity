@@ -410,8 +410,8 @@ export const revertProgress = async (dirExisted: boolean, path: string) => {
  *
  * @returns True or false depending if the email is valid.
  */
-const isEmailValid = (email: string): boolean =>
-  /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i.test(email);
+// const isEmailValid = (email: string): boolean =>
+//   /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i.test(email);
 
 /**
  * Subscribe an email to the newsletter service.
@@ -420,19 +420,6 @@ const isEmailValid = (email: string): boolean =>
  *
  * @returns The response of the subscription.
  */
-export const subscribe = async (email: string) => {
-  if (!isEmailValid(email))
-    throw new Error("Email not valid. Please enter a valid email.");
-
-  return fetch(
-    "https://n8n.frontity.org/webhook/62923334-59a4-484c-a9c2-632814b94225",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        event: "frontity-subscribe",
-        email: email.toLowerCase(),
-      }),
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+export const subscribe = async () => {
+  throw new Error("Frontity newsletter is currently disabled");
 };
