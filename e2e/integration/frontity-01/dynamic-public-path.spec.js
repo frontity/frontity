@@ -14,11 +14,9 @@ describe("Dynamic Public Path", () => {
     });
 
     it("should be able to render other static assets", () => {
-      cy.get("[data-test-id='image']").should(
-        "have.attr",
-        "src",
-        "/dynamic-public-path/custom-static/images/image.png"
-      );
+      cy.get("[data-test-id='image']")
+        .should("have.attr", "src")
+        .and("contain", "/dynamic-public-path/custom-static/images/");
       cy.get("[data-test-id='image']")
         .should("be.visible")
         .and(($img) => {
@@ -48,11 +46,12 @@ describe("Dynamic Public Path", () => {
     });
 
     it("should be able to render other static assets", () => {
-      cy.get("[data-test-id='image']").should(
-        "have.attr",
-        "src",
-        "http://localhost:3001/dynamic-public-path/custom-static/images/image.png"
-      );
+      cy.get("[data-test-id='image']")
+        .should("have.attr", "src")
+        .and(
+          "contain",
+          "http://localhost:3001/dynamic-public-path/custom-static/images/"
+        );
       cy.get("[data-test-id='image']")
         .should("be.visible")
         .and(($img) => {
