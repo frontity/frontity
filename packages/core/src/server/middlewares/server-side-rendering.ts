@@ -133,8 +133,11 @@ export const serverSideRendering = async (
   // Concat the helmet head tags with the already defined head.
   output.head = helmetHead.concat(output.head);
 
-  // Write the template to body.
-  ctx.body = template({ ...output, ...rest, html: output.result });
+  // Write the template to body replacing the public path.
+  ctx.body = template({ ...output, ...rest, html: output.result }).replace(
+    "__webpack_public_path__",
+    ctx.state.store.state.frontity.options.publicPath.replace(/(\/?)$/, "/")
+  );
 
   return await next();
 };
