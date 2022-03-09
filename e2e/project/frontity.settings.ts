@@ -197,7 +197,7 @@ const settings: Settings<
                 priority: 5,
                 props: {
                   id: "header-ad",
-                  unit: "/4595/nfl.test.open",
+                  unit: "/6355419/Travel/Europe/France/Paris",
                   size: [300, 250],
                 },
               },
@@ -207,7 +207,7 @@ const settings: Settings<
                 priority: 5,
                 props: {
                   id: "content-ad",
-                  unit: "/4595/nfl.test.open",
+                  unit: "/6355419/Travel/Europe/France/Paris",
                   size: [300, 250],
                 },
               },
@@ -217,7 +217,7 @@ const settings: Settings<
                 priority: 5,
                 props: {
                   id: "footer-ad",
-                  unit: "/4595/nfl.test.open",
+                  unit: "/6355419/Travel/Europe/France/Paris",
                   size: [
                     [300, 250],
                     [300, 600],
