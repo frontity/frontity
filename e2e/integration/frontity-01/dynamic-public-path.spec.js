@@ -1,3 +1,5 @@
+import expect from "expect";
+
 describe("Dynamic Public Path", () => {
   describe("Frontity Settings", () => {
     beforeEach(() => {
@@ -9,6 +11,19 @@ describe("Dynamic Public Path", () => {
         "have.text",
         "I am the Dynamic component"
       );
+    });
+
+    it("should be able to render other static assets", () => {
+      cy.get("[data-test-id='image']").should(
+        "have.attr",
+        "src",
+        "/dynamic-public-path/custom-static/images/image.png"
+      );
+      cy.get("[data-test-id='image']")
+        .should("be.visible")
+        .and(($img) => {
+          expect($img[0].naturalWidth).toBeGreaterThan(0);
+        });
     });
 
     it("should be able to use javascript from dynamic components", () => {
@@ -30,6 +45,19 @@ describe("Dynamic Public Path", () => {
         "have.text",
         "I am the Dynamic component"
       );
+    });
+
+    it("should be able to render other static assets", () => {
+      cy.get("[data-test-id='image']").should(
+        "have.attr",
+        "src",
+        "http://localhost:3001/dynamic-public-path/custom-static/images/image.png"
+      );
+      cy.get("[data-test-id='image']")
+        .should("be.visible")
+        .and(($img) => {
+          expect($img[0].naturalWidth).toBeGreaterThan(0);
+        });
     });
 
     it("should be able to use javascript from dynamic components", () => {

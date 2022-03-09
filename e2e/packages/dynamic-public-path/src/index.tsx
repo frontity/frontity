@@ -1,4 +1,5 @@
 import Package from "../types";
+import image from "./image.png";
 import { loadable } from "frontity";
 
 const Dynamic = loadable(() => import("./dynamic"));
@@ -10,6 +11,7 @@ const Dynamic = loadable(() => import("./dynamic"));
  */
 const Root: React.FC = () => (
   <>
+    <img alt="test" data-test-id="image" src={image} />
     <Dynamic />
   </>
 );
