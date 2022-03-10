@@ -14,10 +14,18 @@ describe("Dynamic Public Path", () => {
     });
 
     it("should be able to render other static assets", () => {
-      cy.get("[data-test-id='image']")
+      cy.get("[data-test-id='image-1']")
         .should("have.attr", "src")
         .and("contain", "/dynamic-public-path/custom-static/images/");
-      cy.get("[data-test-id='image']")
+      cy.get("[data-test-id='image-1']")
+        .should("be.visible")
+        .and(($img) => {
+          expect($img[0].naturalWidth).toBeGreaterThan(0);
+        });
+      cy.get("[data-test-id='image-2']")
+        .should("have.attr", "src")
+        .and("contain", "/dynamic-public-path/custom-static/images/");
+      cy.get("[data-test-id='image-2']")
         .should("be.visible")
         .and(($img) => {
           expect($img[0].naturalWidth).toBeGreaterThan(0);
@@ -46,13 +54,24 @@ describe("Dynamic Public Path", () => {
     });
 
     it("should be able to render other static assets", () => {
-      cy.get("[data-test-id='image']")
+      cy.get("[data-test-id='image-1']")
         .should("have.attr", "src")
         .and(
           "contain",
           "http://localhost:3001/dynamic-public-path/custom-static/images/"
         );
-      cy.get("[data-test-id='image']")
+      cy.get("[data-test-id='image-1']")
+        .should("be.visible")
+        .and(($img) => {
+          expect($img[0].naturalWidth).toBeGreaterThan(0);
+        });
+      cy.get("[data-test-id='image-2']")
+        .should("have.attr", "src")
+        .and(
+          "contain",
+          "http://localhost:3001/dynamic-public-path/custom-static/images/"
+        );
+      cy.get("[data-test-id='image-2']")
         .should("be.visible")
         .and(($img) => {
           expect($img[0].naturalWidth).toBeGreaterThan(0);

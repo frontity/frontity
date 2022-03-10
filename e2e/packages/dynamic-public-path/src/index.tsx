@@ -11,7 +11,7 @@ const Dynamic = loadable(() => import("./dynamic"));
  */
 const Root: React.FC = () => (
   <>
-    <img alt="test" data-test-id="image" src={image} />
+    <img alt="test" data-test-id="image-1" src={image} />
     <Dynamic />
   </>
 );
