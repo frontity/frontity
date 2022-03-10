@@ -12,6 +12,7 @@ import { settingsAndStore } from "./middlewares/settings-and-store";
 import { capabilitiesAndActions } from "./middlewares/capabilities-and-actions";
 import { serverSideRendering } from "./middlewares/server-side-rendering";
 import { errorHandling } from "./middlewares/error-handling";
+import { storeMiddlewares } from "./middlewares/store-middlewares";
 
 /**
  * Options for {@link server}.
@@ -100,6 +101,9 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
 
   // Add capabilities and run actions.
   app.use(capabilitiesAndActions);
+
+  // Add the server middlewares exposed by packages.
+  app.use(storeMiddlewares(app));
 
   // Sever Side Rendering with the defined
   // template and render method.
