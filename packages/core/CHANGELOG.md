@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.15.1
+
+### Patch Changes
+
+- [`8bc33732`](https://github.com/frontity/frontity/commit/8bc33732beb036506de57a9288d330274b2f84d2) [#909](https://github.com/frontity/frontity/pull/909) Thanks [@luisherranz](https://github.com/luisherranz)! - Fix public path of assets (fonts, images...) during server-side rendering.
+
 ## 1.15.0
 
 ### Minor Changes
