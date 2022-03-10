@@ -135,7 +135,7 @@ export const serverSideRendering = async (
 
   // Write the template to body replacing the public path.
   ctx.body = template({ ...output, ...rest, html: output.result }).replace(
-    "__webpack_public_path__",
+    /__webpack_public_path__/g,
     ctx.state.store.state.frontity.options.publicPath.replace(/(\/?)$/, "/")
   );
 
