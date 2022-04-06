@@ -70,6 +70,13 @@ export interface Package {
       [library: string]: any;
     };
   };
+
+  /**
+   * The server middleware exposed by this package.
+   */
+  server?: {
+    [namespace: string]: ServerMiddleware;
+  };
 }
 
 export default Package;
@@ -79,4 +86,11 @@ export default Package;
  */
 interface Actions {
   [key: string]: (...args: unknown[]) => unknown | Actions;
+}
+
+/**
+ * An object containing server middleware functions.
+ */
+interface ServerMiddleware {
+  [key: string]: (...args: unknown[]) => unknown;
 }
