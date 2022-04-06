@@ -34,7 +34,10 @@ interface ServerOptions {
  * @returns A Frontity server which is a request handler callback for node's
  * native http/http2 server.
  */
-const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
+const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => (
+  req,
+  res
+) => {
   const app = new Koa();
 
   // Catch and print errors in development. This must be the first middlware
@@ -105,7 +108,7 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => {
   // template and render method.
   app.use(serverSideRendering);
 
-  return app.callback();
+  return app.callback()(req, res);
 };
 
 export default server;
