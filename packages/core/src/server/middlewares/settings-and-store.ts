@@ -34,5 +34,11 @@ export const settingsAndStore = (packages) => async (
     url: ctx.URL,
   });
 
+  // Populate the context for custom middleware.
+  Object.assign(ctx, {
+    ctx: { ...ctx },
+    ...ctx.state.store,
+  });
+
   return await next();
 };

@@ -1,4 +1,5 @@
 import Fill from "./fill";
+import type { Middleware } from "koa";
 
 /**
  * Types of a Frontity package.
@@ -92,5 +93,5 @@ interface Actions {
  * An object containing server middleware functions.
  */
 interface ServerMiddleware {
-  [key: string]: (...args: unknown[]) => unknown;
+  [key: string]: Middleware;
 }

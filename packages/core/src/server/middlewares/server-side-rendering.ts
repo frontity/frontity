@@ -36,7 +36,7 @@ export const serverSideRendering = async (
   next: Next
 ): Promise<Middleware> => {
   // Get settings, template, store and stats.
-  const { settings, store, helmetContext, stats: scriptStats } = ctx.state;
+  const { settings, store, helmetContext, stats: scriptStats } = ctx.ctx.state;
 
   // Get the defined render, template and App.
   const { render, template, App, head, scripts } = store.libraries.frontity;
@@ -62,7 +62,7 @@ export const serverSideRendering = async (
     const extractor = new CustomChunkExtractor({
       stats,
       entrypoints: [settings.name],
-      publicPath: ctx.state.store.state.frontity.options.publicPath,
+      publicPath: store.state.frontity.options.publicPath,
     });
 
     // Call the render function with the wrapped App.
@@ -88,7 +88,7 @@ export const serverSideRendering = async (
     // Run afterSSR actions. It runs at this point because we want to run it
     // before taking the state snapshot. This gives the user a chance to
     // modify the state before sending it to the client
-    await runAfterSSRActions(store, ctx);
+    await runAfterSSRActions(store, ctx.ctx);
 
     // Add mutations to our scripts.
     output.scripts.push(
@@ -100,7 +100,7 @@ export const serverSideRendering = async (
     // Add public path variable adding a trailing slash (needed to concat the path with the file name).
     output.scripts.push(
       `<script id="__FRONTITY_PUBLIC_PATH__" type="text/javascript">
-        window["__FRONTITY_PUBLIC_PATH__"] = "${ctx.state.store.state.frontity.options.publicPath.replace(
+        window["__FRONTITY_PUBLIC_PATH__"] = "${store.state.frontity.options.publicPath.replace(
           /\/?$/,
           "/"
         )}";
@@ -122,7 +122,7 @@ export const serverSideRendering = async (
     // because no hydratation will happen in the client.
 
     // Run afterSSR actions.
-    await runAfterSSRActions(store, ctx);
+    await runAfterSSRActions(store, ctx.ctx);
 
     output.result = render({ App });
   }
@@ -134,9 +134,9 @@ export const serverSideRendering = async (
   output.head = helmetHead.concat(output.head);
 
   // Write the template to body replacing the public path.
-  ctx.body = template({ ...output, ...rest, html: output.result }).replace(
+  ctx.ctx.body = template({ ...output, ...rest, html: output.result }).replace(
     /__webpack_public_path__/g,
-    ctx.state.store.state.frontity.options.publicPath.replace(/(\/?)$/, "/")
+    store.state.frontity.options.publicPath.replace(/(\/?)$/, "/")
   );
 
   return await next();
