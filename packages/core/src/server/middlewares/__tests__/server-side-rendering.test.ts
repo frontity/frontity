@@ -32,7 +32,7 @@ const createPredefinedContext = ({
   template = null,
   App = null,
 } = {}) => ({
-  state: {
+  frontity: {
     stats: {
       moduleStats: false,
       es5Stats: false,
