@@ -8,6 +8,6 @@ describe("scriptStats", () => {
 
     await scriptsStats(ctx, fakeNext);
 
-    expect(ctx.state.stats).toMatchSnapshot();
+    expect(ctx.frontity.stats).toMatchSnapshot();
   });
 });

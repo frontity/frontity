@@ -24,6 +24,7 @@ Object {
     "namespace3": [Function],
     "namespace4": [Function],
   },
+  "server": Object {},
   "state": Object {
     "frontity": Object {
       "debug": true,
