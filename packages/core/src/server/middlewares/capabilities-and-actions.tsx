@@ -17,35 +17,32 @@ export const capabilitiesAndActions = async (
   next: Next
 ): Promise<Middleware> => {
   // Apply the capabilities to the store.libraries.frontity namespce.
-  appComponent(ctx.ctx.state.store.libraries.frontity, ctx.ctx);
+  appComponent(ctx.frontity.store.libraries.frontity, ctx);
 
   // Setup the render method.
-  renderMethod(ctx.ctx.state.store.libraries.frontity);
+  renderMethod(ctx.frontity.store.libraries.frontity);
 
   // Define the default template.
-  template(ctx.ctx.state.store.libraries.frontity);
+  template(ctx.frontity.store.libraries.frontity);
 
   // Run init actions.
   await Promise.all(
-    Object.values(ctx.ctx.state.store.actions).map(({ init }) => {
-      if (init) return init();
+    Object.values(ctx.frontity.store.actions).map(({ init }) => {
+      if (init) return init(ctx);
     })
   );
 
   // Run beforeSSR actions.
   await Promise.all(
-    Object.values(ctx.ctx.state.store.actions).map(({ beforeSSR }) => {
-      if (beforeSSR) return beforeSSR({ ctx: ctx.ctx });
+    Object.values(ctx.frontity.store.actions).map(({ beforeSSR }) => {
+      if (beforeSSR) return beforeSSR(ctx);
     })
   );
 
   // The beforeSSR actions for source packages (e.g. wp-source) can set a
   // redirection by calling `ctx.redirect()`. In that case, the `Location`
   // HTTP header will already be set and we can just return early.
-  if (
-    [301, 302, 307, 308].includes(ctx.ctx.status) &&
-    ctx.ctx.get("Location")
-  ) {
+  if ([301, 302, 307, 308].includes(ctx.status) && ctx.get("Location")) {
     return;
   }
 

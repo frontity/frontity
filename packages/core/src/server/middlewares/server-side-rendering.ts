@@ -18,7 +18,7 @@ async function runAfterSSRActions(
 ) {
   await Promise.all(
     Object.values(store.actions).map(({ afterSSR }) => {
-      if (afterSSR) return afterSSR({ ctx });
+      if (afterSSR) return afterSSR(ctx);
     })
   );
 }
@@ -36,7 +36,7 @@ export const serverSideRendering = async (
   next: Next
 ): Promise<Middleware> => {
   // Get settings, template, store and stats.
-  const { settings, store, helmetContext, stats: scriptStats } = ctx.ctx.state;
+  const { settings, store, helmetContext, stats: scriptStats } = ctx.frontity;
 
   // Get the defined render, template and App.
   const { render, template, App, head, scripts } = store.libraries.frontity;
@@ -88,7 +88,7 @@ export const serverSideRendering = async (
     // Run afterSSR actions. It runs at this point because we want to run it
     // before taking the state snapshot. This gives the user a chance to
     // modify the state before sending it to the client
-    await runAfterSSRActions(store, ctx.ctx);
+    await runAfterSSRActions(store, ctx);
 
     // Add mutations to our scripts.
     output.scripts.push(
@@ -122,7 +122,7 @@ export const serverSideRendering = async (
     // because no hydratation will happen in the client.
 
     // Run afterSSR actions.
-    await runAfterSSRActions(store, ctx.ctx);
+    await runAfterSSRActions(store, ctx);
 
     output.result = render({ App });
   }

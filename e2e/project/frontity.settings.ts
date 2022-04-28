@@ -608,6 +608,11 @@ const settings: Settings<
   },
   {
     name: "server-extensibility",
+    state: {
+      frontity: {
+        url: "https://frontity.server.extensibility",
+      },
+    },
     packages: ["e2e-server-extensibility"],
   },
 ];

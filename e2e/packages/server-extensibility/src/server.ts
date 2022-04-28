@@ -9,11 +9,29 @@ const serverExtensibility: ServerExtensibility = {
   },
   server: {
     serverExtensibility: {
-      robotsTxt: get("/custom-robots.txt", ({ ctx }) => {
+      robotsTxtOne: get("/robots-one.txt", ({ ctx }) => {
         const robotsTxt =
           "User-agent: *\nAllow: /\nSitemap: http://www.example.com/sitemap.xml";
         ctx.type = "text/plain";
         ctx.body = robotsTxt;
+      }),
+      robotsTxtTwo: get("/robots-two.txt", (ctx) => {
+        const robotsTxt =
+          "User-agent: *\nAllow: /\nSitemap: http://www.example.com/sitemap.xml";
+        ctx.type = "text/plain";
+        ctx.body = robotsTxt;
+      }),
+      addFrontityHeaderOne: ({ ctx, next }) => {
+        ctx.set("X-Frontity-Test-One", "One");
+        return next();
+      },
+      addFrontityHeaderTwo: (ctx, next) => {
+        ctx.set("X-Frontity-Test-Two", "Two");
+        return next();
+      },
+      accessFrontityState: get("/state", ({ ctx, state }) => {
+        ctx.type = "text/plain";
+        ctx.body = state.frontity.url;
       }),
     },
   },

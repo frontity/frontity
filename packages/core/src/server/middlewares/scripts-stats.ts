@@ -20,8 +20,10 @@ export const scriptsStats = async (
     getStats({ target: "es5" }),
   ]);
 
+  if (!ctx.frontity) ctx.frontity = {};
+
   // Define a helper ctx property to be available for the rest of the middlewares.
-  ctx.state.stats = { moduleStats, es5Stats };
+  ctx.frontity.stats = { moduleStats, es5Stats };
 
   return await next();
 };

@@ -4,7 +4,7 @@ import Koa from "koa";
 import { get } from "koa-route";
 import serve from "koa-static";
 import mount from "koa-mount";
-import type { Middleware } from "koa";
+import type { Middleware, Next } from "koa";
 import type { Context, Package } from "@frontity/types";
 import { exists } from "fs";
 import { promisify } from "util";
@@ -68,7 +68,7 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => (
      * @param fn - Middleware.
      * @returns - Middleware with next added to ctx.
      */
-    const wrapper = (fn) => (ctx, next) => {
+    const wrapper = (fn: Middleware) => (ctx: Context, next: Next) => {
       ctx.next = next;
       return fn(ctx, next);
     };
