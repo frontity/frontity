@@ -35,10 +35,7 @@ export const settingsAndStore = (packages) => async (
   });
 
   // Populate the context for custom middleware.
-  Object.assign(ctx, {
-    ctx: ctx,
-    ...ctx.frontity.store,
-  });
+  Object.assign(ctx, { ctx }, ctx.frontity.store);
 
   return await next();
 };

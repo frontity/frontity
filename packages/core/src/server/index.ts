@@ -8,6 +8,7 @@ import type { Middleware, Next } from "koa";
 import type { Context, Package } from "@frontity/types";
 import { exists } from "fs";
 import { promisify } from "util";
+import { init } from "./middlewares/init";
 import { scriptsStats } from "./middlewares/scripts-stats";
 import { settingsAndStore } from "./middlewares/settings-and-store";
 import { capabilitiesAndActions } from "./middlewares/capabilities-and-actions";
@@ -25,6 +26,17 @@ interface ServerOptions {
     [moduleName: string]: Package;
   };
 }
+
+/**
+ * Middleware wrapper to add next to ctx.
+ *
+ * @param fn - Middleware.
+ * @returns - Middleware with next added to ctx.
+ */
+const wrapper = (fn: Middleware) => (ctx: Context, next: Next) => {
+  ctx.next = next;
+  return fn(ctx, next);
+};
 
 /**
  * Create the Frontity server.
@@ -45,6 +57,9 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => (
   // because does a try/catch of the rest.
   app.use(errorHandling);
 
+  // Initialize context.
+  app.use(init);
+
   // The module stats middleware.
   app.use(scriptsStats);
 
@@ -53,25 +68,15 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => (
 
   app.use((ctx, next) => {
     // Collect custom middleware.
-    const middleware: Middleware[] = ((server: Package["server"]) => {
-      return Object.values(server).reduce((final: Middleware[], value) => {
-        Object.values(value).forEach((middleware) => {
-          final.push(middleware);
+    const middleware: Middleware[] = Object.values(ctx.server).reduce(
+      (final: Middleware[], value) => {
+        Object.values(value).forEach((m: Middleware) => {
+          final.push(m);
         });
         return final;
-      }, []);
-    })(ctx.server);
-
-    /**
-     * Middleware wrapper to add next to ctx.
-     *
-     * @param fn - Middleware.
-     * @returns - Middleware with next added to ctx.
-     */
-    const wrapper = (fn: Middleware) => (ctx: Context, next: Next) => {
-      ctx.next = next;
-      return fn(ctx, next);
-    };
+      },
+      []
+    );
 
     // Populate custom middleware.
     middleware.forEach((m) => app.use(wrapper(m)));
