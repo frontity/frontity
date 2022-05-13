@@ -2,6 +2,9 @@ import Settings from "../settings";
 import Package from "../package";
 import { Action, AsyncAction } from "../action";
 import Derived from "../derived";
+import { Server, AsyncServer } from "../server";
+
+// import { Package, Action, Derived, Server } from "frontity/types";
 
 // Custom package extending from Package.
 interface Package1 extends Package {
@@ -31,6 +34,12 @@ interface Package1 extends Package {
   libraries: {
     namespace1: {
       library1: () => void;
+    };
+  };
+  server: {
+    namespace1: {
+      server1: Server<Package1>;
+      server2: AsyncServer<Package1>;
     };
   };
 }
@@ -67,6 +76,15 @@ const package1: Package1 = {
   libraries: {
     namespace1: {
       library1: () => {},
+    },
+  },
+  server: {
+    namespace1: {
+      server1: ({ ctx, next, state, actions, libraries, server }, next2) => {},
+      server2: async (
+        { ctx, next, state, actions, libraries, server },
+        next2
+      ) => {},
     },
   },
 };

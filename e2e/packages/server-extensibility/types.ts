@@ -1,4 +1,4 @@
-import { Package } from "frontity/types";
+import { Server, AsyncServer, Package } from "frontity/types";
 
 /**
  * Package to do e2e testing of Frontity's Lodable component.
@@ -17,6 +17,20 @@ interface ServerExtensibility extends Package {
      * ServerExtensibility namespace.
      */
     serverExtensibility: React.ElementType;
+  };
+
+  /**
+   * Server middleware.
+   */
+  server: {
+    /**
+     * ServerExtensibility namespace.
+     */
+    serverExtensibility: {
+      [key: string]:
+        | Server<ServerExtensibility>
+        | AsyncServer<ServerExtensibility>;
+    };
   };
 }
 

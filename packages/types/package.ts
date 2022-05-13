@@ -1,5 +1,4 @@
 import Fill from "./fill";
-import type { Middleware } from "koa";
 
 /**
  * Types of a Frontity package.
@@ -76,22 +75,32 @@ export interface Package {
    * The server middleware exposed by this package.
    */
   server?: {
-    [namespace: string]: ServerMiddleware;
+    [namespace: string]: Servers;
   };
 }
 
 export default Package;
 
 /**
+ * Generic function for actions and server.
+ */
+type Funct = (...args: unknown[]) => unknown;
+
+/**
+ * Generic async function for actions and server.
+ */
+type AsyncFunct = (...args: unknown[]) => Promise<unknown>;
+
+/**
  * An object containing Frontity actions, or other objects containing actions.
  */
 interface Actions {
-  [key: string]: (...args: unknown[]) => unknown | Actions;
+  [key: string]: Funct | AsyncFunct | Actions;
 }
 
 /**
  * An object containing server middleware functions.
  */
-interface ServerMiddleware {
-  [key: string]: Middleware;
+interface Servers {
+  [key: string]: Funct | AsyncFunct | Servers;
 }
