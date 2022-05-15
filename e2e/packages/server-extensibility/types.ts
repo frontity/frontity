@@ -22,7 +22,7 @@ interface ServerExtensibility extends Package {
   /**
    * Server middleware.
    */
-  server: {
+  server?: {
     /**
      * ServerExtensibility namespace.
      */
