@@ -4,8 +4,14 @@ import Koa from "koa";
 import { get } from "koa-route";
 import serve from "koa-static";
 import mount from "koa-mount";
-import type { Middleware, Next } from "koa";
-import type { Context, Package } from "@frontity/types";
+import type { Next } from "koa";
+import type {
+  Context,
+  Package,
+  Server,
+  AsyncServer,
+  FrontityContext,
+} from "@frontity/types";
 import { exists } from "fs";
 import { promisify } from "util";
 import { init } from "./middlewares/init";
@@ -28,12 +34,20 @@ interface ServerOptions {
 }
 
 /**
+ * Custom server middleware types.
+ */
+type ServerMiddleware = Server<Package> | AsyncServer<Package>;
+
+/**
  * Middleware wrapper to add next to ctx.
  *
  * @param fn - Middleware.
  * @returns - Middleware with next added to ctx.
  */
-const wrapper = (fn: Middleware) => (ctx: Context, next: Next) => {
+const wrapper = (fn: ServerMiddleware) => (
+  ctx: FrontityContext<Package>,
+  next: Next
+) => {
   ctx.next = next;
   return fn(ctx, next);
 };
@@ -66,17 +80,14 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => (
   // Setup the settings and store.
   app.use(settingsAndStore(packages));
 
-  app.use((ctx, next) => {
+  app.use(((ctx, next) => {
     // Collect custom middleware.
-    const middleware: Middleware[] = Object.values(ctx.server).reduce(
-      (final: Middleware[], value) => {
-        Object.values(value).forEach((m: Middleware) => {
-          final.push(m);
-        });
-        return final;
-      },
-      []
-    );
+    const middleware = Object.values(ctx.server).reduce((final, value) => {
+      Object.values(value).forEach((m: ServerMiddleware) => {
+        final.push(m);
+      });
+      return final;
+    }, [] as ServerMiddleware[]);
 
     // Populate custom middleware.
     middleware.forEach((m) => app.use(wrapper(m)));
@@ -140,7 +151,7 @@ const server = ({ packages }: ServerOptions): ReturnType<Koa["callback"]> => (
     app.use(serverSideRendering);
 
     return next();
-  });
+  }) as ServerMiddleware);
 
   return app.callback()(req, res);
 };
