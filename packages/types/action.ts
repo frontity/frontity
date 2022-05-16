@@ -1,7 +1,6 @@
 import Package from "./package";
 import { ResolvePackages } from "./utils";
 import { Context } from "./server";
-import Koa from "koa";
 
 /**
  * Tricky utility for defining list of arguments (up to ten arguments).
