@@ -4,8 +4,6 @@ import { Action, AsyncAction } from "../action";
 import Derived from "../derived";
 import { Server, AsyncServer } from "../server";
 
-// import { Package, Action, Derived, Server } from "frontity/types";
-
 // Custom package extending from Package.
 interface Package1 extends Package {
   name: "package-1";
