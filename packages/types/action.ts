@@ -1,5 +1,6 @@
 import Package from "./package";
 import { ResolvePackages } from "./utils";
+import { Context } from "./server";
 import Koa from "koa";
 
 /**
@@ -137,27 +138,9 @@ export type AsyncAction<
     ) => Promise<void>;
 
 /**
- * The context of a Koa application.
- */
-export type Context = Koa.ParameterizedContext<
-  Koa.DefaultState,
-  Koa.DefaultContext
->;
-
-/**
- * Parameter for {@link ServerAction}.
- */
-interface ServerActionParam {
-  /**
-   * Koa context.
-   */
-  ctx: Context;
-}
-
-/**
  * Type definition for Frontity server actions, like `beforeSSR` or `afterSSR`.
  *
  * @typeparam Packages - The definition of all the packages that a Frontity
  * package is aware of.
  */
-export type ServerAction<Packages> = AsyncAction<Packages, ServerActionParam>;
+export type ServerAction<Packages> = AsyncAction<Packages, Context<Packages>>;

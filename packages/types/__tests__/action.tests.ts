@@ -1,4 +1,4 @@
-import { Action, AsyncAction } from "../action";
+import { Action, AsyncAction, ServerAction } from "../action";
 import Package from "../package";
 import Derived from "../derived";
 
@@ -30,6 +30,7 @@ interface Package1 extends Package {
       action4: AsyncAction<Package1, number>;
       action5: Action<Package1, number, string, number, string, number, string>;
       action6: Action<Package, number> | Action<Package, number, string>;
+      action7: ServerAction<Package>;
     };
   };
   libraries: {
@@ -138,6 +139,11 @@ const package1: Package1 = {
       action6: ({ state }) => (num, str) => {
         state.namespace1.prop2 = num;
         state.namespace1.prop1 = str;
+      },
+      action7: ({ state }) => async ({ ctx, state: state2 }) => {
+        const num: number = state.namespace1.prop2;
+        const num2: number = state2.namespace1.prop2;
+        const num3: number = ctx.state.namepsace1.prop2;
       },
     },
   },

@@ -5,13 +5,7 @@ import { get } from "koa-route";
 import serve from "koa-static";
 import mount from "koa-mount";
 import type { Next } from "koa";
-import type {
-  Context,
-  Package,
-  Server,
-  AsyncServer,
-  FrontityContext,
-} from "@frontity/types";
+import type { Package, Server, AsyncServer, Context } from "@frontity/types";
 import { exists } from "fs";
 import { promisify } from "util";
 import { init } from "./middlewares/init";
@@ -44,10 +38,7 @@ type ServerMiddleware = Server<Package> | AsyncServer<Package>;
  * @param fn - Middleware.
  * @returns - Middleware with next added to ctx.
  */
-const wrapper = (fn: ServerMiddleware) => (
-  ctx: FrontityContext<Package>,
-  next: Next
-) => {
+const wrapper = (fn: ServerMiddleware) => (ctx: Context, next: Next) => {
   ctx.next = next;
   return fn(ctx, next);
 };

@@ -5,7 +5,7 @@ import Package from "./package";
 /**
  * Frontity context for Koa middleware.
  */
-export interface FrontityContext<Packages extends Package>
+export interface Context<Packages extends Package = Package>
   extends ParameterizedContext {
   /**
    * Frontity namespace for custom properties.
@@ -35,7 +35,7 @@ export interface FrontityContext<Packages extends Package>
   /**
    * Extended Koa context.
    */
-  ctx: FrontityContext<Packages>;
+  ctx: Context<Packages>;
 
   /**
    * Koa Next function.
@@ -48,7 +48,7 @@ export interface FrontityContext<Packages extends Package>
  */
 export type Server<Packages extends Package> = Middleware<
   ResolveState<Packages["state"]>,
-  FrontityContext<Packages>
+  Context<Packages>
 >;
 
 /**
