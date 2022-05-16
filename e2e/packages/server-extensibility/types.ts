@@ -1,7 +1,7 @@
 import { Server, AsyncServer, Package } from "frontity/types";
 
 /**
- * Package to do e2e testing of Frontity's Lodable component.
+ * Package to do e2e testing of Frontity's server extensibility.
  */
 interface ServerExtensibility extends Package {
   /**
@@ -27,9 +27,35 @@ interface ServerExtensibility extends Package {
      * ServerExtensibility namespace.
      */
     serverExtensibility: {
-      [key: string]:
-        | Server<ServerExtensibility>
-        | AsyncServer<ServerExtensibility>;
+      /**
+       * Server middleware.
+       */
+      robotsTxtOne: Server<ServerExtensibility>;
+
+      /**
+       * Server middleware.
+       */
+      robotsTxtTwo: Server<ServerExtensibility>;
+
+      /**
+       * Server middleware.
+       */
+      addFrontityHeaderOne: Server<ServerExtensibility>;
+
+      /**
+       * Server middleware.
+       */
+      addFrontityHeaderTwo: Server<ServerExtensibility>;
+
+      /**
+       * Server middleware.
+       */
+      addFrontityHeaderThree: AsyncServer<ServerExtensibility>;
+
+      /**
+       * Server middleware.
+       */
+      accessFrontityState: Server<ServerExtensibility>;
     };
   };
 }

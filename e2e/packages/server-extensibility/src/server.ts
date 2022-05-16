@@ -30,6 +30,14 @@ const serverExtensibility: ServerExtensibility = {
         ctx.set("X-Frontity-Test-Two", "Two");
         return next();
       },
+      addFrontityHeaderThree: async (ctx, next) => {
+        const promise = new Promise((resolve) => {
+          setTimeout(resolve, 1000);
+        });
+        await promise;
+        ctx.set("X-Frontity-Test-Three", "Three");
+        return next();
+      },
       accessFrontityState: get("/state", (({ ctx, state }) => {
         ctx.type = "text/plain";
         ctx.body = state.frontity.url;

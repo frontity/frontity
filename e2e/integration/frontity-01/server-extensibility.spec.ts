@@ -32,6 +32,7 @@ describe("Server Extensibility", () => {
       .then((headers) => {
         assert.equal(headers["x-frontity-test-one"], "One");
         assert.equal(headers["x-frontity-test-two"], "Two");
+        assert.equal(headers["x-frontity-test-three"], "Three");
       });
   });
 
