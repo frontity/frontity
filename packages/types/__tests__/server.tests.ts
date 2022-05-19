@@ -1,4 +1,5 @@
-import { Action, AsyncAction, ServerAction } from "../action";
+import { Action, AsyncAction } from "../action";
+import { Server, AsyncServer } from "../server";
 import Package from "../package";
 import Derived from "../derived";
 
@@ -30,12 +31,21 @@ interface Package1 extends Package {
       action4: AsyncAction<Package1, number>;
       action5: Action<Package1, number, string, number, string, number, string>;
       action6: Action<Package, number> | Action<Package, number, string>;
-      action7: ServerAction<Package>;
     };
   };
   libraries: {
     namespace1: {
       lib1: string;
+    };
+  };
+  server: {
+    namespace1: {
+      server1: Server<Package1>;
+      server2: AsyncServer<Package1>;
+    };
+    namespace2: {
+      server3: Server<Package1>;
+      server4: AsyncServer<Package1>;
     };
   };
 }
@@ -61,7 +71,34 @@ const package1: Package1 = {
   actions: {
     namespace1: {
       // Action without params.
-      action1: ({ state, actions, libraries }) => {
+      action1: () => {},
+      // Async Action without params.
+      action2: async () => {},
+    },
+    namespace2: {
+      // Action with params.
+      action3: () => (str) => {},
+      // Async Action with params.
+      action4: () => async (num) => {},
+      // Action with mutilple parameters.
+      action5: () => (num1, str1, num2, str2, num3, str3) => {},
+      // Action with optional parameters.
+      action6: () => (num, str) => {},
+    },
+  },
+  libraries: {
+    namespace1: {
+      lib1: "lib1",
+    },
+  },
+  server: {
+    namespace1: {
+      server1: ({ ctx, state, actions, libraries, server, next }, next2) => {
+        // Can access and modify Koa ctx.
+        const status: number = ctx.status;
+        ctx.status = 418;
+
+        // Can modify state.
         state.namespace1.prop1 = "newProp";
         state.namespace1.prop2 = 3;
 
@@ -98,58 +135,24 @@ const package1: Package1 = {
         // Check that actions with optional parameters work.
         actions.namespace2.action6(1);
         actions.namespace2.action6(1, "2");
+
+        // Check that other server middleware is accessible.
+        server.namespace1.server2(ctx, next);
+        server.namespace1.server2({ ...ctx, ctx, next: next2 }, next);
+        server.namespace2.server3(ctx, next);
       },
-      // Async Action without params.
-      action2: async ({ state, actions }) => {
-        state.namespace1.prop1 = "newProp";
-        await Promise.resolve();
-        const str1: string = state.namespace1.prop3;
-        await Promise.resolve();
-        const num1: number = state.namespace1.prop4("123");
-        actions.namespace2.action3("123");
-        await actions.namespace1.action2();
-        await actions.namespace2.action4(123);
+      server2: async ({ ctx, server, next }, next2) => {
+        // Check that can await next.
+        await next();
+        await next2();
+
+        // Check that can await other middleware.
+        await server.namespace2.server4(ctx, next);
       },
     },
     namespace2: {
-      // Action with params.
-      action3: ({ state }) => (str) => {
-        state.namespace1.prop1 = str;
-        const str1: string = state.namespace1.prop3 + str;
-        const num1: number = state.namespace1.prop4(str);
-      },
-      // Async Action with params.
-      action4: ({ state }) => async (num) => {
-        state.namespace1.prop2 = num;
-        await Promise.resolve();
-        const num1: number = state.namespace1.prop4("123") + num;
-        await Promise.resolve();
-        const num2: number = state.namespace1.nested1.prop5("123") + num;
-      },
-      // Action with mutilple parameters.
-      action5: ({ state, actions }) => (num1, str1, num2, str2, num3, str3) => {
-        state.namespace1.prop2 = num1;
-        state.namespace1.prop1 = str1;
-        state.namespace1.prop2 = num2;
-        state.namespace1.prop1 = str2;
-        state.namespace1.prop2 = num3;
-        state.namespace1.prop1 = str3;
-      },
-      // Action with optional parameters.
-      action6: ({ state }) => (num, str) => {
-        state.namespace1.prop2 = num;
-        state.namespace1.prop1 = str;
-      },
-      action7: ({ state }) => async ({ ctx, state: state2 }) => {
-        const num: number = state.namespace1.prop2;
-        const num2: number = state2.namespace1.prop2;
-        const num3: number = ctx.state.namepsace1.prop2;
-      },
-    },
-  },
-  libraries: {
-    namespace1: {
-      lib1: "lib1",
+      server3: () => {},
+      server4: async () => {},
     },
   },
 };
