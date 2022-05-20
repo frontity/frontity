@@ -20,7 +20,11 @@ jest.mock("../../store", () =>
 describe("settingsAndStore", () => {
   it("should define settings and store", async () => {
     const packages: any = {};
-    const ctx: any = { state: {}, href: "/", query: { frontity_name: "test" } };
+    const ctx: any = {
+      frontity: {},
+      href: "/",
+      query: { frontity_name: "test" },
+    };
 
     // Create the middleware
     const middleware = settingsAndStore(packages);
@@ -28,14 +32,14 @@ describe("settingsAndStore", () => {
     // Call the middleware
     await middleware(ctx, fakeNext);
 
-    expect(ctx.state.store).toMatchSnapshot();
-    expect(ctx.state.settings).toMatchSnapshot();
+    expect(ctx.frontity.store).toMatchSnapshot();
+    expect(ctx.frontity.settings).toMatchSnapshot();
   });
 
   it("should use the last name if `frontity_name` is a list", async () => {
     const packages: any = {};
     const ctx: any = {
-      state: {},
+      frontity: {},
       href: "/",
       query: {
         frontity_name: ["first-name", "last-name"],

@@ -1,6 +1,6 @@
 import Package from "./package";
 import { ResolvePackages } from "./utils";
-import Koa from "koa";
+import { Context } from "./server";
 
 /**
  * Tricky utility for defining list of arguments (up to ten arguments).
@@ -137,27 +137,9 @@ export type AsyncAction<
     ) => Promise<void>;
 
 /**
- * The context of a Koa application.
- */
-export type Context = Koa.ParameterizedContext<
-  Koa.DefaultState,
-  Koa.DefaultContext
->;
-
-/**
- * Parameter for {@link ServerAction}.
- */
-interface ServerActionParam {
-  /**
-   * Koa context.
-   */
-  ctx: Context;
-}
-
-/**
  * Type definition for Frontity server actions, like `beforeSSR` or `afterSSR`.
  *
  * @typeparam Packages - The definition of all the packages that a Frontity
  * package is aware of.
  */
-export type ServerAction<Packages> = AsyncAction<Packages, ServerActionParam>;
+export type ServerAction<Packages> = AsyncAction<Packages, Context<Packages>>;

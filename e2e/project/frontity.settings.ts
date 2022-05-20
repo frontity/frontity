@@ -606,6 +606,15 @@ const settings: Settings<
     },
     packages: ["e2e-dynamic-public-path"],
   },
+  {
+    name: "server-extensibility",
+    state: {
+      frontity: {
+        url: "https://frontity.server.extensibility",
+      },
+    },
+    packages: ["e2e-server-extensibility"],
+  },
 ];
 
 export default settings;
