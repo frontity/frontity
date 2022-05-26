@@ -5,6 +5,8 @@ import { getSnapshot } from "@frontity/connect";
 import App from "../app";
 import createStore from "./store";
 import { Package } from "@frontity/types";
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
 
 /**
  * The options of the client function.
@@ -49,7 +51,16 @@ const client = async ({ packages, isHmr = false }: ClientOptions) => {
       if (isHmr) store.state.frontity.hmr = true;
 
       store.libraries.frontity.App = function FrontityApp() {
-        return <App store={store} />;
+        const key = "frontity";
+        const cache = createCache({
+          key,
+        });
+
+        return (
+          <CacheProvider value={cache}>
+            <App store={store} />
+          </CacheProvider>
+        );
       };
 
       // Run init actions.

@@ -115,6 +115,11 @@ export type Template = ({
   html: string;
 
   /**
+   * The styles string.
+   */
+  styles: string;
+
+  /**
    * A list of scripts to be appended.
    */
   scripts: [];
