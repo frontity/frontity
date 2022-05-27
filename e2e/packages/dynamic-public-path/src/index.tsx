@@ -9,14 +9,23 @@ const Dynamic = loadable(() => import("./dynamic"));
  *
  * @returns React element.
  */
-const Root: React.FC = () => (
-  <>
-    <img alt="test" data-test-id="image-1" src={image} />
-    <Div />
-    <Dynamic />
-  </>
-);
+const Root: React.FC = () => {
+  const Div = styled.div`
+    background-image: url(${image});
+    height: 200px;
+    width: 200px;
+  `;
 
+  console.log("Div:", Div);
+
+  return (
+    <>
+      <img alt="test" data-test-id="image-1" src={image} />
+      <Div />
+      <Dynamic />
+    </>
+  );
+};
 const DynamicPublicPathPackage: Package = {
   name: "e2e-dynamic-public-path",
   roots: {
@@ -25,7 +34,3 @@ const DynamicPublicPathPackage: Package = {
 };
 
 export default DynamicPublicPathPackage;
-
-const Div = styled.div`
-  background-image: url(${image});
-`;
