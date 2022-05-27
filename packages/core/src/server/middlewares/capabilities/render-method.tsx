@@ -13,49 +13,47 @@ import hashStyles from "@emotion/hash";
  * @returns The serialized App.
  */
 const render = ({ collectChunks, App, publicPath }) => {
-  const key = "frontity";
-
   const namesBefore = [];
   const namesAfter = [];
+
+  const key = "frontity";
   const cache = createCache({
     key,
     stylisPlugins: [
       prefixer as any,
       (element) => {
         if (element.type === "rule") {
-          const stylesBefore = element.children
-            .map((child) => child.value)
-            .join(";");
-          const stylesAfter = element.children
-            .map((child) => {
-              child.value = child.value.replace(
-                /__webpack_public_path__/g,
-                publicPath
-              );
-              return child.value;
-            })
-            .join(";");
-          const nameBefore = hashStyles(stylesBefore);
-          const nameAfter = hashStyles(stylesAfter);
-          console.log("name:", nameBefore, nameAfter);
+          if (
+            element.children.find((child) =>
+              /__webpack_public_path__/.test(child.value)
+            )
+          ) {
+            const stylesBefore = element.children
+              .map((child) => child.value)
+              .join();
+            const stylesAfter = element.children
+              .map((child) => {
+                child.value = child.value.replace(
+                  /__webpack_public_path__/g,
+                  publicPath
+                );
+                return child.value;
+              })
+              .join();
+            const nameBefore = hashStyles(stylesBefore);
+            const nameAfter = hashStyles(stylesAfter);
+            console.log("name:", nameBefore, nameAfter);
 
-          element.value = element.value.replace(nameBefore, nameAfter);
-          element.props = element.props.map((prop) =>
-            prop.replace(nameBefore, nameAfter)
-          );
+            element.value = element.value.replace(nameBefore, nameAfter);
+            element.props = element.props.map((prop) =>
+              prop.replace(nameBefore, nameAfter)
+            );
 
-          namesBefore.push(nameBefore);
-          namesAfter.push(nameAfter);
+            namesBefore.push(nameBefore);
+            namesAfter.push(nameAfter);
+          }
+          console.log("element:", element);
         }
-        console.log("element:", element);
-        // element.value = element.value.replace(
-        //   /__webpack_public_path__/g,
-        //   publicPath
-        // );
-        // element.return = element.return.replace(
-        //   /__webpack_public_path__/g,
-        //   publicPath
-        // );
       },
     ],
   });
