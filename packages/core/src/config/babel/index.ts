@@ -122,11 +122,7 @@ const getConfig = (target: Target): BabelConfig => {
     [
       "babel-plugin-transform-inline-environment-variables",
       {
-        include: [
-          "CWD",
-          "FRONTITY_INTERNAL_PUBLIC_PATH",
-          "FRONTITY_SOURCE_AUTH",
-        ],
+        include: ["CWD", "FRONTITY_INTERNAL_PUBLIC_PATH"],
       },
     ],
   ];
