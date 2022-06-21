@@ -33,7 +33,6 @@ Array [
   IgnorePlugin {
     "checkIgnore": [Function],
     "options": Object {
-      "contextRegExp": undefined,
       "resourceRegExp": /\\^encoding\\$/,
     },
   },
@@ -85,7 +84,6 @@ Array [
   IgnorePlugin {
     "checkIgnore": [Function],
     "options": Object {
-      "contextRegExp": undefined,
       "resourceRegExp": /\\^encoding\\$/,
     },
   },
@@ -137,7 +135,6 @@ Array [
   IgnorePlugin {
     "checkIgnore": [Function],
     "options": Object {
-      "contextRegExp": undefined,
       "resourceRegExp": /\\^encoding\\$/,
     },
   },
@@ -241,15 +238,11 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
       HotModuleReplacementPlugin {
-        "fullBuildTimeout": 200,
-        "multiStep": undefined,
         "options": Object {},
-        "requestTimeout": 10000,
       },
       LoadablePlugin {
         "compiler": null,
@@ -379,15 +372,11 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
       HotModuleReplacementPlugin {
-        "fullBuildTimeout": 200,
-        "multiStep": undefined,
         "options": Object {},
-        "requestTimeout": 10000,
       },
       LoadablePlugin {
         "compiler": null,
@@ -504,7 +493,6 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
@@ -632,7 +620,6 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
@@ -753,7 +740,6 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
@@ -863,7 +849,6 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
