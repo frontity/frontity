@@ -269,6 +269,9 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "stream": "/Users/orballo/Code/frontity/node_modules/stream-browserify/index.js",
+      },
     },
     "stats": Object {
       "all": false,
@@ -403,6 +406,9 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "stream": "/Users/orballo/Code/frontity/node_modules/stream-browserify/index.js",
+      },
     },
     "stats": Object {
       "all": false,
@@ -514,6 +520,9 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "stream": "/Users/orballo/Code/frontity/node_modules/stream-browserify/index.js",
+      },
     },
     "stats": Object {
       "all": false,
@@ -648,6 +657,9 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "stream": "/Users/orballo/Code/frontity/node_modules/stream-browserify/index.js",
+      },
     },
     "stats": false,
     "target": "web",
@@ -768,6 +780,9 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "stream": "/Users/orballo/Code/frontity/node_modules/stream-browserify/index.js",
+      },
     },
     "stats": false,
     "target": "web",
@@ -870,6 +885,9 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "stream": "/Users/orballo/Code/frontity/node_modules/stream-browserify/index.js",
+      },
     },
     "stats": false,
     "target": "node",
