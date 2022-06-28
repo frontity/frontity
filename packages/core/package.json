@@ -72,6 +72,7 @@
     "react-helmet-async": "1.0.9",
     "regenerator-runtime": "^0.13.7",
     "require-from-string": "^2.0.2",
+    "stream-browserify": "^3.0.0",
     "symlink-dir": "4.1.0",
     "ts-node": "^9.1.1",
     "url-loader": "^4.1.1",

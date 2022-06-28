@@ -22,6 +22,9 @@ const resolve = (): WebpackConfig["resolve"] => ({
     // Avoid dynamic imports with Koa require.
     "any-promise": "promise-monofill",
   },
+  fallback: {
+    stream: require.resolve("stream-browserify"),
+  },
 });
 
 export default resolve;
