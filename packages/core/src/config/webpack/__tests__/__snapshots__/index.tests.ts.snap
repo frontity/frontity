@@ -220,11 +220,15 @@ Object {
       ],
     },
     "name": "client",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "chunkFilename": "[name].es5.js",
       "filename": "[name].es5.js",
       "path": "build/static",
-      "publicPath": "",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -380,11 +384,15 @@ Object {
       ],
     },
     "name": "client",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "chunkFilename": "[name].module.js",
       "filename": "[name].module.js",
       "path": "build/static",
-      "publicPath": "",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -527,11 +535,15 @@ Object {
       ],
     },
     "name": "server",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "filename": "server.js",
       "libraryTarget": "commonjs2",
       "path": "build/",
-      "publicPath": "",
     },
     "performance": Object {
       "maxAssetSize": 5000000,
@@ -680,11 +692,15 @@ Object {
       ],
     },
     "name": "client",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
       "filename": "[name].es5.[chunkhash].js",
       "path": "build/static",
-      "publicPath": "",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -826,11 +842,15 @@ Object {
       ],
     },
     "name": "client",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "chunkFilename": "[name].module.[chunkhash].js",
       "filename": "[name].module.[chunkhash].js",
       "path": "build/static",
-      "publicPath": "",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -961,11 +981,15 @@ Object {
       ],
     },
     "name": "server",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "filename": "server.js",
       "libraryTarget": "commonjs2",
       "path": "build/",
-      "publicPath": "",
     },
     "performance": Object {
       "maxAssetSize": 5000000,
