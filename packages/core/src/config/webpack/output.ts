@@ -132,7 +132,7 @@ const output = ({
 }: OutputOptions): WebpackConfig["output"] => ({
   filename: filenames[target][mode],
   path: resolve(rootPath, outDir, paths[target]),
-  publicPath: "auto",
+  publicPath: "",
   ...(target !== "server" && { chunkFilename: chunkFilenames[target][mode] }),
   // Node still needs CJS.
   ...(target === "server" && { libraryTarget: "commonjs2" }),
