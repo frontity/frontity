@@ -1,3 +1,11 @@
+## 📣 Frontity Framework is not actively maintained! 
+
+> Frontity Framework is **not** under active development anymore. Pull requests and issues are not being actively reviewed. For more details, please see the [blog post](https://frontity.org/blog/frontity-is-joining-automattic/).
+>
+> If are interested in becoming a maintainer and continuing the development of the framework please do get in touch with one of the developers!
+
+<br>
+
 <br>
 <div align="center">
   <a href="https://frontity.org/">
