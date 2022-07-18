@@ -68,13 +68,46 @@ const authorHandler: Handler = async ({
   });
 
   // 3. Populate response.
-  const items = await populate({ response, state, force });
-  if (page > 1 && items.length === 0)
-    throw new ServerError(`author "${slug}" doesn't have page ${page}`, 404);
+  let items = await populate({ response, state, force });
 
   // 4. Get posts and pages count.
-  const total = getTotal(response, items.length);
-  const totalPages = getTotalPages(response, 0);
+  let total = getTotal(response, items.length);
+  let totalPages = getTotalPages(response, 0);
+
+  // 5. Fetch the rest of the pages.
+  await Promise.all(
+    state.source.postTypes.map((postType) => {
+      // 1. Fetch the the specified page.
+      api
+        .get({
+          endpoint: postType.endpoint,
+          params: {
+            author: id,
+            search: query.s,
+            page,
+            _embed: true,
+            ...state.source.params,
+          },
+        })
+        // 2. Populate response.
+        .then((response) => populate({ response, state, force }))
+        .then((cptItems) => {
+          // 3. Push items to the main array.
+          items = [...items, ...cptItems];
+
+          // 4. Get posts and pages count.
+          const cptTotal = getTotal(response, cptItems.length);
+          const cptTotalPages = getTotalPages(response, 0);
+
+          // 5. Update total and totalPages.
+          total += cptTotal;
+          totalPages += cptTotalPages;
+        });
+    })
+  );
+
+  if (page > 1 && items.length === 0)
+    throw new ServerError(`author "${slug}" doesn't have page ${page}`, 404);
 
   // returns true if next page exists
   const hasNewerPosts = page < totalPages;
