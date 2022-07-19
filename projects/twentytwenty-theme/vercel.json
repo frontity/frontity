@@ -4,15 +4,15 @@
   "builds": [
     {
       "src": "build/static/**/*",
-      "use": "@now/static"
+      "use": "@vercel/static"
     },
     {
       "src": "favicon.ico",
-      "use": "@now/static"
+      "use": "@vercel/static"
     },
     {
       "src": "build/server.js",
-      "use": "@now/node"
+      "use": "@vercel/node"
     }
   ],
   "routes": [
