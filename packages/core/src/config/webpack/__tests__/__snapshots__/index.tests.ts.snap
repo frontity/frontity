@@ -33,7 +33,6 @@ Array [
   IgnorePlugin {
     "checkIgnore": [Function],
     "options": Object {
-      "contextRegExp": undefined,
       "resourceRegExp": /\\^encoding\\$/,
     },
   },
@@ -85,7 +84,6 @@ Array [
   IgnorePlugin {
     "checkIgnore": [Function],
     "options": Object {
-      "contextRegExp": undefined,
       "resourceRegExp": /\\^encoding\\$/,
     },
   },
@@ -137,7 +135,6 @@ Array [
   IgnorePlugin {
     "checkIgnore": [Function],
     "options": Object {
-      "contextRegExp": undefined,
       "resourceRegExp": /\\^encoding\\$/,
     },
   },
@@ -223,10 +220,16 @@ Object {
       ],
     },
     "name": "client",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "chunkFilename": "[name].es5.js",
       "filename": "[name].es5.js",
       "path": "build/static",
+      "publicPath": "/static",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -241,15 +244,11 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
       HotModuleReplacementPlugin {
-        "fullBuildTimeout": 200,
-        "multiStep": undefined,
         "options": Object {},
-        "requestTimeout": 10000,
       },
       LoadablePlugin {
         "compiler": null,
@@ -276,6 +275,31 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "assert": "assert",
+        "buffer": "buffer",
+        "console": "console-browserify/index.js",
+        "constants": "constants-browserify/constants.json",
+        "crypto": "crypto-browserify/index.js",
+        "domain": "domain-browser/source/index.js",
+        "events": "events",
+        "http": "stream-http/index.js",
+        "https": "https-browserify/index.js",
+        "os": "os-browserify/browser.js",
+        "path": "path-browserify/index.js",
+        "process": "process/browser.js",
+        "punycode": "punycode",
+        "querystring": "querystring-es3/index.js",
+        "stream": "stream-browserify/index.js",
+        "string_decoder": "string_decoder",
+        "sys": "util",
+        "timers": "timers-browserify/main.js",
+        "tty": "tty-browserify/index.js",
+        "url": "url",
+        "util": "util",
+        "vm": "vm-browserify/index.js",
+        "zlib": "browserify-zlib/lib/index.js",
+      },
     },
     "stats": Object {
       "all": false,
@@ -361,10 +385,16 @@ Object {
       ],
     },
     "name": "client",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "chunkFilename": "[name].module.js",
       "filename": "[name].module.js",
       "path": "build/static",
+      "publicPath": "/static",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -379,15 +409,11 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
       HotModuleReplacementPlugin {
-        "fullBuildTimeout": 200,
-        "multiStep": undefined,
         "options": Object {},
-        "requestTimeout": 10000,
       },
       LoadablePlugin {
         "compiler": null,
@@ -414,6 +440,31 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "assert": "assert",
+        "buffer": "buffer",
+        "console": "console-browserify/index.js",
+        "constants": "constants-browserify/constants.json",
+        "crypto": "crypto-browserify/index.js",
+        "domain": "domain-browser/source/index.js",
+        "events": "events",
+        "http": "stream-http/index.js",
+        "https": "https-browserify/index.js",
+        "os": "os-browserify/browser.js",
+        "path": "path-browserify/index.js",
+        "process": "process/browser.js",
+        "punycode": "punycode",
+        "querystring": "querystring-es3/index.js",
+        "stream": "stream-browserify/index.js",
+        "string_decoder": "string_decoder",
+        "sys": "util",
+        "timers": "timers-browserify/main.js",
+        "tty": "tty-browserify/index.js",
+        "url": "url",
+        "util": "util",
+        "vm": "vm-browserify/index.js",
+        "zlib": "browserify-zlib/lib/index.js",
+      },
     },
     "stats": Object {
       "all": false,
@@ -486,10 +537,16 @@ Object {
       ],
     },
     "name": "server",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "filename": "server.js",
       "libraryTarget": "commonjs2",
       "path": "build/",
+      "publicPath": "/static",
     },
     "performance": Object {
       "maxAssetSize": 5000000,
@@ -504,7 +561,6 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
@@ -526,6 +582,31 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "assert": "assert",
+        "buffer": "buffer",
+        "console": "console-browserify/index.js",
+        "constants": "constants-browserify/constants.json",
+        "crypto": "crypto-browserify/index.js",
+        "domain": "domain-browser/source/index.js",
+        "events": "events",
+        "http": "stream-http/index.js",
+        "https": "https-browserify/index.js",
+        "os": "os-browserify/browser.js",
+        "path": "path-browserify/index.js",
+        "process": "process/browser.js",
+        "punycode": "punycode",
+        "querystring": "querystring-es3/index.js",
+        "stream": "stream-browserify/index.js",
+        "string_decoder": "string_decoder",
+        "sys": "util",
+        "timers": "timers-browserify/main.js",
+        "tty": "tty-browserify/index.js",
+        "url": "url",
+        "util": "util",
+        "vm": "vm-browserify/index.js",
+        "zlib": "browserify-zlib/lib/index.js",
+      },
     },
     "stats": Object {
       "all": false,
@@ -614,10 +695,16 @@ Object {
       ],
     },
     "name": "client",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "chunkFilename": "[name].es5.[chunkhash].js",
       "filename": "[name].es5.[chunkhash].js",
       "path": "build/static",
+      "publicPath": "/static",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -632,7 +719,6 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
@@ -661,6 +747,31 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "assert": "assert",
+        "buffer": "buffer",
+        "console": "console-browserify/index.js",
+        "constants": "constants-browserify/constants.json",
+        "crypto": "crypto-browserify/index.js",
+        "domain": "domain-browser/source/index.js",
+        "events": "events",
+        "http": "stream-http/index.js",
+        "https": "https-browserify/index.js",
+        "os": "os-browserify/browser.js",
+        "path": "path-browserify/index.js",
+        "process": "process/browser.js",
+        "punycode": "punycode",
+        "querystring": "querystring-es3/index.js",
+        "stream": "stream-browserify/index.js",
+        "string_decoder": "string_decoder",
+        "sys": "util",
+        "timers": "timers-browserify/main.js",
+        "tty": "tty-browserify/index.js",
+        "url": "url",
+        "util": "util",
+        "vm": "vm-browserify/index.js",
+        "zlib": "browserify-zlib/lib/index.js",
+      },
     },
     "stats": false,
     "target": "web",
@@ -735,10 +846,16 @@ Object {
       ],
     },
     "name": "client",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "chunkFilename": "[name].module.[chunkhash].js",
       "filename": "[name].module.[chunkhash].js",
       "path": "build/static",
+      "publicPath": "/static",
     },
     "performance": Object {
       "maxAssetSize": 500000,
@@ -753,7 +870,6 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
@@ -782,6 +898,31 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "assert": "assert",
+        "buffer": "buffer",
+        "console": "console-browserify/index.js",
+        "constants": "constants-browserify/constants.json",
+        "crypto": "crypto-browserify/index.js",
+        "domain": "domain-browser/source/index.js",
+        "events": "events",
+        "http": "stream-http/index.js",
+        "https": "https-browserify/index.js",
+        "os": "os-browserify/browser.js",
+        "path": "path-browserify/index.js",
+        "process": "process/browser.js",
+        "punycode": "punycode",
+        "querystring": "querystring-es3/index.js",
+        "stream": "stream-browserify/index.js",
+        "string_decoder": "string_decoder",
+        "sys": "util",
+        "timers": "timers-browserify/main.js",
+        "tty": "tty-browserify/index.js",
+        "url": "url",
+        "util": "util",
+        "vm": "vm-browserify/index.js",
+        "zlib": "browserify-zlib/lib/index.js",
+      },
     },
     "stats": false,
     "target": "web",
@@ -845,10 +986,16 @@ Object {
       ],
     },
     "name": "server",
+    "optimization": Object {
+      "splitChunks": Object {
+        "name": [Function],
+      },
+    },
     "output": Object {
       "filename": "server.js",
       "libraryTarget": "commonjs2",
       "path": "build/",
+      "publicPath": "/static",
     },
     "performance": Object {
       "maxAssetSize": 5000000,
@@ -863,7 +1010,6 @@ Object {
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
           "resourceRegExp": /\\^encoding\\$/,
         },
       },
@@ -885,6 +1031,31 @@ Object {
         ".ts",
         ".tsx",
       ],
+      "fallback": Object {
+        "assert": "assert",
+        "buffer": "buffer",
+        "console": "console-browserify/index.js",
+        "constants": "constants-browserify/constants.json",
+        "crypto": "crypto-browserify/index.js",
+        "domain": "domain-browser/source/index.js",
+        "events": "events",
+        "http": "stream-http/index.js",
+        "https": "https-browserify/index.js",
+        "os": "os-browserify/browser.js",
+        "path": "path-browserify/index.js",
+        "process": "process/browser.js",
+        "punycode": "punycode",
+        "querystring": "querystring-es3/index.js",
+        "stream": "stream-browserify/index.js",
+        "string_decoder": "string_decoder",
+        "sys": "util",
+        "timers": "timers-browserify/main.js",
+        "tty": "tty-browserify/index.js",
+        "url": "url",
+        "util": "util",
+        "vm": "vm-browserify/index.js",
+        "zlib": "browserify-zlib/lib/index.js",
+      },
     },
     "stats": false,
     "target": "node",
