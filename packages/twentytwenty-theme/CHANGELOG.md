@@ -1,5 +1,14 @@
 # @frontity/twentytwenty-theme
 
+## 1.3.4-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`1ad352c7`](https://github.com/frontity/frontity/commit/1ad352c7a5c3df7eaff8bf0b15441d0bd27ff3be)]:
+  - frontity@2.0.0-beta.0
+  - @frontity/components@1.8.3-beta.0
+  - @frontity/html2react@1.7.1-beta.0
+
 ## 1.3.3
 
 ### Patch Changes

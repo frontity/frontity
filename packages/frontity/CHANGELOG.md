@@ -1,5 +1,17 @@
 # Change Log
 
+## 2.0.0-beta.0
+
+### Major Changes
+
+- [`1ad352c7`](https://github.com/frontity/frontity/commit/1ad352c7a5c3df7eaff8bf0b15441d0bd27ff3be) [#925](https://github.com/frontity/frontity/pull/925) Thanks [@orballo](https://github.com/orballo)! - Upgrade to Webpack 5
+
+### Patch Changes
+
+- Updated dependencies [[`1ad352c7`](https://github.com/frontity/frontity/commit/1ad352c7a5c3df7eaff8bf0b15441d0bd27ff3be)]:
+  - @frontity/core@2.0.0-beta.0
+  - @frontity/types@1.10.1-beta.0
+
 ## 1.17.2
 
 ### Patch Changes

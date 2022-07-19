@@ -1,6 +1,6 @@
 {
   "name": "@frontity/comscore-analytics",
-  "version": "1.3.0",
+  "version": "1.3.1-beta.0",
   "description": "Comscore Analytics package for Frontity",
   "homepage": "https://github.com/frontity/frontity",
   "license": "Apache-2.0",
@@ -23,8 +23,8 @@
     "url": "https://github.com/frontity/frontity/issues"
   },
   "dependencies": {
-    "@frontity/analytics": "^1.4.0",
-    "frontity": "^1.14.3"
+    "@frontity/analytics": "^1.4.2-beta.0",
+    "frontity": "^2.0.0-beta.0"
   },
   "devDependencies": {
     "react-helmet-async": "1.0.9",

@@ -1,11 +1,11 @@
 {
   "name": "e2e-wp-source-errors",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.0",
   "private": true,
   "description": "Package to do e2e testing of Frontity's wp-source errors",
   "dependencies": {
-    "frontity": "^1.14.1",
-    "@frontity/source": "^1.5.1",
-    "@frontity/wp-source": "^1.11.1"
+    "frontity": "^2.0.0-beta.0",
+    "@frontity/source": "^1.5.3-beta.0",
+    "@frontity/wp-source": "^1.11.8-beta.0"
   }
 }

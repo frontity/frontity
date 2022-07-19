@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.3.1-beta.0
+
+### Patch Changes
+
+- Updated dependencies [[`1ad352c7`](https://github.com/frontity/frontity/commit/1ad352c7a5c3df7eaff8bf0b15441d0bd27ff3be)]:
+  - @frontity/types@1.10.1-beta.0
+
 ## 1.3.0
 
 ### Minor Changes
