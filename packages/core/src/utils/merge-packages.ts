@@ -64,6 +64,7 @@ const mergePackages = ({
     libraries: {
       frontity: {},
     },
+    server: {},
   };
   state.frontity.packages.forEach((name) => {
     const variable = getVariable(name, state.frontity.mode);

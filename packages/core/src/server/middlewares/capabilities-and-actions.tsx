@@ -17,25 +17,25 @@ export const capabilitiesAndActions = async (
   next: Next
 ): Promise<Middleware> => {
   // Apply the capabilities to the store.libraries.frontity namespce.
-  appComponent(ctx.state.store.libraries.frontity, ctx);
+  appComponent(ctx.frontity.store.libraries.frontity, ctx);
 
   // Setup the render method.
-  renderMethod(ctx.state.store.libraries.frontity);
+  renderMethod(ctx.frontity.store.libraries.frontity);
 
   // Define the default template.
-  template(ctx.state.store.libraries.frontity);
+  template(ctx.frontity.store.libraries.frontity);
 
   // Run init actions.
   await Promise.all(
-    Object.values(ctx.state.store.actions).map(({ init }) => {
-      if (init) return init();
+    Object.values(ctx.frontity.store.actions).map(({ init }) => {
+      if (init) return init(ctx);
     })
   );
 
   // Run beforeSSR actions.
   await Promise.all(
-    Object.values(ctx.state.store.actions).map(({ beforeSSR }) => {
-      if (beforeSSR) return beforeSSR({ ctx });
+    Object.values(ctx.frontity.store.actions).map(({ beforeSSR }) => {
+      if (beforeSSR) return beforeSSR(ctx);
     })
   );
 

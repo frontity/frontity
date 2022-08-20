@@ -46,6 +46,7 @@
     "e2e-redirections": "^1.0.0",
     "e2e-render": "^1.0.0",
     "e2e-script": "^1.0.0",
+    "e2e-server-extensibility": "^1.0.0",
     "e2e-slot-and-fill": "^1.0.0",
     "e2e-smart-adserver": "^1.0.0",
     "e2e-static-theme": "^1.0.0",

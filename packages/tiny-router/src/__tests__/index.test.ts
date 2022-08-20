@@ -375,12 +375,12 @@ describe("actions", () => {
 
   describe("beforeSSR", () => {
     it("should warn if autoFetch is enabled but there is no source pkg", () => {
-      const ctx = {} as Context;
+      const ctx = {} as Context<Packages>;
       get.mockReturnValue({});
       const frontityWarn = jest.spyOn(frontityError, "warn");
       const store = createStore(config);
       store.actions.source = undefined;
-      store.actions.router.beforeSSR({ ctx });
+      store.actions.router.beforeSSR(ctx);
 
       expect(frontityWarn).toHaveBeenCalledTimes(1);
       expect(frontityWarn).toHaveBeenCalledWith(
@@ -389,7 +389,7 @@ describe("actions", () => {
     });
 
     it("should fetch if autoFetch is enabled", () => {
-      const ctx = {} as Context;
+      const ctx = {} as Context<Packages>;
       get.mockReturnValue({});
 
       const store = createStore(config);
@@ -397,28 +397,30 @@ describe("actions", () => {
       store.libraries.source = undefined;
 
       store.actions.router.init();
-      store.actions.router.beforeSSR({ ctx });
+      store.actions.router.beforeSSR(ctx);
 
       expect(fetch).toHaveBeenCalledTimes(1);
       expect(fetch).toHaveBeenCalledWith("/initial/link/");
     });
 
     it("should change the context status if there is an error", async () => {
-      const ctx = {} as Context;
+      const ctx = { ctx: {} } as Context<Packages>;
       get.mockReturnValue({ isError: true, errorStatus: 123 });
 
       const store = createStore(config);
 
-      await store.actions.router.beforeSSR({ ctx });
+      await store.actions.router.beforeSSR(ctx);
 
-      expect(ctx.status).toBe(123);
+      expect(ctx.ctx.status).toBe(123);
     });
 
     it("should change the context status if there is an internal redirection", async () => {
-      const ctx: Partial<Context> = {
-        URL: new URL("https://localhost/"),
-        redirect: jest.fn(),
-      };
+      const ctx = ({
+        ctx: {
+          URL: new URL("https://localhost/"),
+          redirect: jest.fn(),
+        },
+      } as unknown) as Context<Packages>;
       get.mockReturnValue({
         isReady: true,
         isRedirection: true,
@@ -429,17 +431,21 @@ describe("actions", () => {
       const store = createStore(config);
       store.state.frontity.url = "https://domain.com";
 
-      await store.actions.router.beforeSSR({ ctx: ctx as Context });
+      await store.actions.router.beforeSSR(ctx);
 
-      expect(ctx.redirect).toHaveBeenCalledWith("/final-url/?query=value#hash");
-      expect(ctx.status).toBe(123);
+      expect(ctx.ctx.redirect).toHaveBeenCalledWith(
+        "/final-url/?query=value#hash"
+      );
+      expect(ctx.ctx.status).toBe(123);
     });
 
     it("should change the context status if there is an external redirection", async () => {
-      const ctx: Partial<Context> = {
-        URL: new URL("https://localhost/"),
-        redirect: jest.fn(),
-      };
+      const ctx = ({
+        ctx: {
+          URL: new URL("https://localhost/"),
+          redirect: jest.fn(),
+        },
+      } as unknown) as Context<Packages>;
       get.mockReturnValue({
         isReady: true,
         isRedirection: true,
@@ -449,12 +455,12 @@ describe("actions", () => {
       });
       const store = createStore(config);
 
-      await store.actions.router.beforeSSR({ ctx: ctx as Context });
+      await store.actions.router.beforeSSR(ctx);
 
-      expect(ctx.redirect).toHaveBeenCalledWith(
+      expect(ctx.ctx.redirect).toHaveBeenCalledWith(
         "https://external.com/final-url/?query=value#hash"
       );
-      expect(ctx.status).toBe(123);
+      expect(ctx.ctx.status).toBe(123);
     });
   });
 });

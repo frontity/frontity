@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.10.0
+
+### Minor Changes
+
+- [`0981b14b`](https://github.com/frontity/frontity/commit/0981b14b4a86380122ba717896f33b23fde55b88) [#916](https://github.com/frontity/frontity/pull/916) Thanks [@orballo](https://github.com/orballo)! - Adds server extensibility to Frontity packages.
+
 ## 1.9.0
 
 ### Minor Changes

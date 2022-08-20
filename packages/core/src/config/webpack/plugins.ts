@@ -66,8 +66,8 @@ const plugins = ({
 
   // Ignore some files and folders.
   config.push(
-    new WatchIgnorePlugin([new RegExp(outDir)]),
-    new IgnorePlugin(/^encoding$/)
+    new WatchIgnorePlugin({ paths: [new RegExp(outDir)] }),
+    new IgnorePlugin({ resourceRegExp: /^encoding$/ })
   );
 
   // Support HMR in development. Only needed in client.

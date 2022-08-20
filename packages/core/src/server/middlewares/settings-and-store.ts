@@ -22,17 +22,20 @@ export const settingsAndStore = (packages) => async (
     : nameOption;
 
   // Get settings.
-  ctx.state.settings = await getSettings({
+  ctx.frontity.settings = await getSettings({
     url: ctx.href,
     name,
   });
 
   // Create the store.
-  ctx.state.store = createStore({
-    settings: ctx.state.settings,
+  ctx.frontity.store = createStore({
+    settings: ctx.frontity.settings,
     packages,
     url: ctx.URL,
   });
+
+  // Populate the context for custom middleware.
+  Object.assign(ctx, { ctx }, ctx.frontity.store);
 
   return await next();
 };

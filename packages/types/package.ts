@@ -70,13 +70,37 @@ export interface Package {
       [library: string]: any;
     };
   };
+
+  /**
+   * The server middleware exposed by this package.
+   */
+  server?: {
+    [namespace: string]: Servers;
+  };
 }
 
 export default Package;
 
 /**
+ * Generic function for actions and server.
+ */
+type Funct = (...args: unknown[]) => unknown;
+
+/**
+ * Generic async function for actions and server.
+ */
+type AsyncFunct = (...args: unknown[]) => Promise<unknown>;
+
+/**
  * An object containing Frontity actions, or other objects containing actions.
  */
 interface Actions {
-  [key: string]: (...args: unknown[]) => unknown | Actions;
+  [key: string]: Funct | AsyncFunct | Actions;
+}
+
+/**
+ * An object containing server middleware functions.
+ */
+interface Servers {
+  [key: string]: Funct | AsyncFunct | Servers;
 }

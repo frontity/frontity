@@ -8,12 +8,15 @@ import App from "../../../app";
  * @param ctx - Koa context.
  */
 export const appComponent = (namespace, ctx) => {
-  ctx.state.helmetContext = {} as FilledContext;
+  ctx.frontity.helmetContext = {} as FilledContext;
 
   // Set the App.
   namespace.App = function FrontityApp() {
     return (
-      <App store={ctx.state.store} helmetContext={ctx.state.helmetContext} />
+      <App
+        store={ctx.frontity.store}
+        helmetContext={ctx.frontity.helmetContext}
+      />
     );
   };
 };

@@ -5,6 +5,7 @@ import {
   WebpackConfig,
   FrontityConfig,
 } from "@frontity/types/config";
+import { Chunk } from "webpack";
 import name from "./name";
 import targets from "./targets";
 import devtool from "./devtool";
@@ -85,6 +86,14 @@ const getConfig = ({
   plugins: plugins({ target, mode, outDir: frontity.outDir, analyze }),
   performance: performance({ target }),
   stats: stats({ mode }),
+  optimization: {
+    splitChunks: {
+      name: (_: any, chunks: Chunk[]) => {
+        const allChunksNames = chunks.map((chunk) => chunk.name).join("-");
+        return allChunksNames;
+      },
+    },
+  },
 });
 
 /**
