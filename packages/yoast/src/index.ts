@@ -8,7 +8,7 @@ const yoastPackage: YoastPackage = {
     yoast: {
       renderTags: "both",
       transformLinks: {
-        ignore: "^(wp-(json|admin|content|includes))|feed|comments|xmlrpc",
+        ignore: "^((wp-(json|admin|content|includes))|feed|comments|xmlrpc)",
       },
     },
   },
