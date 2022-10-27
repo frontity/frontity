@@ -20,11 +20,13 @@ export const webpackAsync = (
 
       const info = stats.toJson();
       // Compilation errors, like missing modules, syntax errors, etc.
-      if (stats.hasErrors()) return reject(new Error(info.errors.join("\n\n")));
+      if (stats.hasErrors()) return reject(new Error(info.errors));
 
       // Compilation warnings, like dynamic modules, performance issues, etc.
-      if (stats.hasWarnings())
-        console.warn(`\n${chalk.yellow(info.warnings.join("\n\n"))}\n`);
+      console.log(stats.toString({
+        chunks: false,
+        colors: true,
+      }));
 
       // Compilation was successful.
       return resolve(compiler);
