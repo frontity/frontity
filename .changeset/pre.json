@@ -67,6 +67,7 @@
     "twentytwenty-theme-project": "1.0.0"
   },
   "changesets": [
-    "beige-days-breathe"
+    "beige-days-breathe",
+    "perfect-keys-try"
   ]
 }
