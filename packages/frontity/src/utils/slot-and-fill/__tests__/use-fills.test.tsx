@@ -319,7 +319,7 @@ describe("useFills", () => {
     expect(toJson(app)).toMatchSnapshot();
   });
 
-  it("should re-render the fill when updating the props", () => {
+  it("should re-render the fill when updating the props", async () => {
     const Comp = connect(() => {
       const fills = useFills("slot 1");
 
@@ -338,7 +338,7 @@ describe("useFills", () => {
       </Provider>
     );
 
-    act(() => {
+    await act(() => {
       store.actions.fillActions.setNumber(43);
     });
 

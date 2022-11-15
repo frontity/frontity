@@ -1,4 +1,4 @@
-import TestRenderer from "react-test-renderer";
+import TestRenderer, { act } from "react-test-renderer";
 import SmartAd from "../smart-ad";
 import SmartAdserver from "../../../types";
 import { State } from "frontity/types";
@@ -14,21 +14,24 @@ describe("SmartAdserver", () => {
     },
   });
 
-  test("Should render the SmartAd component", () => {
+  test("Should render the SmartAd component", async () => {
     const state = getState();
 
-    const smartAd = TestRenderer.create(
-      <ConnectProvider value={{ state }}>
-        <SmartAd
-          callType="std"
-          siteId={1}
-          pageId={1}
-          formatId={1}
-          tagId="test-smartad"
-          minHeight={200}
-        />
-      </ConnectProvider>
-    ).toJSON();
+    let smartAd: any;
+    await act(() => {
+      smartAd = TestRenderer.create(
+        <ConnectProvider value={{ state }}>
+          <SmartAd
+            callType="std"
+            siteId={1}
+            pageId={1}
+            formatId={1}
+            tagId="test-smartad"
+            minHeight={200}
+          />
+        </ConnectProvider>
+      );
+    });
 
     expect(smartAd).toMatchInlineSnapshot(`
       <div

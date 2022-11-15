@@ -89,7 +89,7 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
   });
 
-  it("should pass actions and react to changes", () => {
+  it("should pass actions and react to changes", async () => {
     const Comp1 = ({ actions }) => (
       <button onClick={actions.action1}>change prop1</button>
     );
@@ -105,11 +105,11 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
     const rootInstance = app.root;
     const button = rootInstance.findByType("button");
-    act(() => button.props.onClick());
+    await act(() => button.props.onClick());
     expect(app).toMatchSnapshot();
   });
 
-  it("should pass actions and react to derived changes", () => {
+  it("should pass actions and react to derived changes", async () => {
     const Comp1 = ({ actions }) => (
       <button onClick={actions.action1}>change prop1</button>
     );
@@ -125,11 +125,11 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
     const rootInstance = app.root;
     const button = rootInstance.findByType("button");
-    act(() => button.props.onClick());
+    await act(() => button.props.onClick());
     expect(app).toMatchSnapshot();
   });
 
-  it("should pass actions with params and react to changes", () => {
+  it("should pass actions with params and react to changes", async () => {
     const Comp1 = ({ actions }) => (
       <button onClick={() => actions.action2(4)}>change prop1</button>
     );
@@ -145,7 +145,7 @@ describe("connect", () => {
     expect(app).toMatchSnapshot();
     const rootInstance = app.root;
     const button = rootInstance.findByType("button");
-    act(() => button.props.onClick());
+    await act(() => button.props.onClick());
     expect(app).toMatchSnapshot();
   });
 
@@ -234,7 +234,7 @@ describe("useConnect", () => {
     expect(app).toMatchSnapshot();
   });
 
-  it("should pass actions and actions with params", () => {
+  it("should pass actions and actions with params", async () => {
     const Comp = connect(() => {
       const { state, actions } = useConnect();
       return (
@@ -257,10 +257,10 @@ describe("useConnect", () => {
     expect(app).toMatchSnapshot();
     const rootInstance = app.root;
     const button1 = rootInstance.findByProps({ id: "no-params" });
-    act(() => button1.props.onClick());
+    await act(() => button1.props.onClick());
     expect(app).toMatchSnapshot();
     const button2 = rootInstance.findByProps({ id: "with-params" });
-    act(() => button2.props.onClick());
+    await act(() => button2.props.onClick());
     expect(app).toMatchSnapshot();
   });
 
