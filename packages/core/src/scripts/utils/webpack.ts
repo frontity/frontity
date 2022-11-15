@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import webpack from "webpack";
 
 /**
