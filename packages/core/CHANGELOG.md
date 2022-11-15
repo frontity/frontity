@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.0.0-beta.1
+
+### Patch Changes
+
+- [`74a8a4c2`](https://github.com/frontity/frontity/commit/74a8a4c279308fdcc2d5cdca2f5dd45242270b5f) [#934](https://github.com/frontity/frontity/pull/934) Thanks [@tobeycodes](https://github.com/tobeycodes)! - Fix [object Object] when running build
+
 ## 2.0.0-beta.0
 
 ### Major Changes
