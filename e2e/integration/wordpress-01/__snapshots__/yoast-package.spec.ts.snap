@@ -76,26 +76,8 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "WebPage",
-        "@id": "http://my.frontity.site/hello-world/#webpage",
+        "@id": "http://my.frontity.site/hello-world/",
         "url": "http://my.frontity.site/hello-world/",
         "name": "Hello World From Yoast! - Test WP Site",
         "isPartOf": {
@@ -136,13 +118,31 @@ exports[`Yoast Package > Post > should render the schema tag #0`] = `
         ]
       },
       {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
         "@type": "Person",
         "@id": "http://my.frontity.site/#/schema/person/9948b1443aa9e586af18d75cf4855438",
         "name": "admin",
         "image": {
           "@type": "ImageObject",
-          "@id": "http://my.frontity.site/#personlogo",
           "inLanguage": "en-US",
+          "@id": "http://my.frontity.site/#/schema/person/image/",
           "url": "http://2.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=96&d=mm&r=g",
           "contentUrl": "http://2.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=96&d=mm&r=g",
           "caption": "admin"
@@ -213,26 +213,8 @@ exports[`Yoast Package > Page > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "WebPage",
-        "@id": "http://my.frontity.site/sample-page/#webpage",
+        "@id": "http://my.frontity.site/sample-page/",
         "url": "http://my.frontity.site/sample-page/",
         "name": "Sample Page - Test WP Site",
         "isPartOf": {
@@ -267,6 +249,24 @@ exports[`Yoast Package > Page > should render the schema tag #0`] = `
             "name": "Sample Page"
           }
         ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -327,26 +327,8 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "CollectionPage",
-        "@id": "http://my.frontity.site/category/nature/#webpage",
+        "@id": "http://my.frontity.site/category/nature/",
         "url": "http://my.frontity.site/category/nature/",
         "name": "Nature Archives - Test WP Site",
         "isPartOf": {
@@ -355,13 +337,7 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
         "breadcrumb": {
           "@id": "http://my.frontity.site/category/nature/#breadcrumb"
         },
-        "inLanguage": "en-US",
-        "potentialAction": [
-          {
-            "@type": "ReadAction",
-            "target": ["http://my.frontity.site/category/nature/"]
-          }
-        ]
+        "inLanguage": "en-US"
       },
       {
         "@type": "BreadcrumbList",
@@ -379,6 +355,24 @@ exports[`Yoast Package > Category > should render the schema tag #0`] = `
             "name": "Nature"
           }
         ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -439,26 +433,8 @@ exports[`Yoast Package > Tag > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "CollectionPage",
-        "@id": "http://my.frontity.site/tag/japan/#webpage",
+        "@id": "http://my.frontity.site/tag/japan/",
         "url": "http://my.frontity.site/tag/japan/",
         "name": "Japan Archives - Test WP Site",
         "isPartOf": {
@@ -467,13 +443,7 @@ exports[`Yoast Package > Tag > should render the schema tag #0`] = `
         "breadcrumb": {
           "@id": "http://my.frontity.site/tag/japan/#breadcrumb"
         },
-        "inLanguage": "en-US",
-        "potentialAction": [
-          {
-            "@type": "ReadAction",
-            "target": ["http://my.frontity.site/tag/japan/"]
-          }
-        ]
+        "inLanguage": "en-US"
       },
       {
         "@type": "BreadcrumbList",
@@ -491,6 +461,24 @@ exports[`Yoast Package > Tag > should render the schema tag #0`] = `
             "name": "Japan"
           }
         ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -559,26 +547,8 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "ProfilePage",
-        "@id": "http://my.frontity.site/author/luisherranz/#webpage",
+        "@id": "http://my.frontity.site/author/luisherranz/",
         "url": "http://my.frontity.site/author/luisherranz/",
         "name": "luisherranz, Author at Test WP Site",
         "isPartOf": {
@@ -613,19 +583,37 @@ exports[`Yoast Package > Author > should render the schema tag #0`] = `
         ]
       },
       {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
+      },
+      {
         "@type": "Person",
         "@id": "http://my.frontity.site/#/schema/person/1f3ad884727a4dbe50779670489694a7",
         "name": "luisherranz",
         "image": {
           "@type": "ImageObject",
-          "@id": "http://my.frontity.site/#personlogo",
           "inLanguage": "en-US",
+          "@id": "http://my.frontity.site/#/schema/person/image/",
           "url": "http://2.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
           "contentUrl": "http://2.gravatar.com/avatar/b152cf91c60efeb06fe88df71957a7cb?s=96&d=mm&r=g",
           "caption": "luisherranz"
         },
         "mainEntityOfPage": {
-          "@id": "http://my.frontity.site/author/luisherranz/#webpage"
+          "@id": "http://my.frontity.site/author/luisherranz/"
         }
       }
     ]
@@ -683,26 +671,8 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "CollectionPage",
-        "@id": "http://my.frontity.site/#webpage",
+        "@id": "http://my.frontity.site/",
         "url": "http://my.frontity.site/",
         "name": "Test WP Site - Just another WordPress site",
         "isPartOf": {
@@ -712,13 +682,7 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
         "breadcrumb": {
           "@id": "http://my.frontity.site/#breadcrumb"
         },
-        "inLanguage": "en-US",
-        "potentialAction": [
-          {
-            "@type": "ReadAction",
-            "target": ["http://my.frontity.site/"]
-          }
-        ]
+        "inLanguage": "en-US"
       },
       {
         "@type": "BreadcrumbList",
@@ -736,6 +700,24 @@ exports[`Yoast Package > Homepage > should render the schema tag #0`] = `
             "name": "Home"
           }
         ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -804,26 +786,8 @@ exports[`Yoast Package > CPT > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "WebPage",
-        "@id": "http://my.frontity.site/movie/the-terminator/#webpage",
+        "@id": "http://my.frontity.site/movie/the-terminator/",
         "url": "http://my.frontity.site/movie/the-terminator/",
         "name": "The Terminator - Test WP Site",
         "isPartOf": {
@@ -864,6 +828,24 @@ exports[`Yoast Package > CPT > should render the schema tag #0`] = `
             "name": "The Terminator"
           }
         ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -920,26 +902,8 @@ exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "CollectionPage",
-        "@id": "http://my.frontity.site/movies/#webpage",
+        "@id": "http://my.frontity.site/movies/",
         "url": "http://my.frontity.site/movies/",
         "name": "Movies Archive - Test WP Site",
         "isPartOf": {
@@ -948,13 +912,7 @@ exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
         "breadcrumb": {
           "@id": "http://my.frontity.site/movies/#breadcrumb"
         },
-        "inLanguage": "en-US",
-        "potentialAction": [
-          {
-            "@type": "ReadAction",
-            "target": ["http://my.frontity.site/movies/"]
-          }
-        ]
+        "inLanguage": "en-US"
       },
       {
         "@type": "BreadcrumbList",
@@ -972,6 +930,24 @@ exports[`Yoast Package > CPT (archive) > should render the schema tag #0`] = `
             "name": "Movies"
           }
         ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -1032,26 +1008,8 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "@id": "http://my.frontity.site/#website",
-        "url": "http://my.frontity.site/",
-        "name": "Test WP Site",
-        "description": "Just another WordPress site",
-        "potentialAction": [
-          {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        ],
-        "inLanguage": "en-US"
-      },
-      {
         "@type": "CollectionPage",
-        "@id": "http://my.frontity.site/actor/linda-hamilton/#webpage",
+        "@id": "http://my.frontity.site/actor/linda-hamilton/",
         "url": "http://my.frontity.site/actor/linda-hamilton/",
         "name": "Linda Hamilton Archives - Test WP Site",
         "isPartOf": {
@@ -1060,13 +1018,7 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
         "breadcrumb": {
           "@id": "http://my.frontity.site/actor/linda-hamilton/#breadcrumb"
         },
-        "inLanguage": "en-US",
-        "potentialAction": [
-          {
-            "@type": "ReadAction",
-            "target": ["http://my.frontity.site/actor/linda-hamilton/"]
-          }
-        ]
+        "inLanguage": "en-US"
       },
       {
         "@type": "BreadcrumbList",
@@ -1084,6 +1036,24 @@ exports[`Yoast Package > Custom Taxonomy > should render the schema tag #0`] = `
             "name": "Linda Hamilton"
           }
         ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "http://my.frontity.site/#website",
+        "url": "http://my.frontity.site/",
+        "name": "Test WP Site",
+        "description": "Just another WordPress site",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "http://my.frontity.site/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ],
+        "inLanguage": "en-US"
       }
     ]
   }
