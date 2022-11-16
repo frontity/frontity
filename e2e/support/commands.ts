@@ -143,7 +143,11 @@ Cypress.Commands.add(
   (url: string): Cypress.Chainable => {
     return cy.request("GET", url).then((response) => {
       return cy
-        .wrap(amphtmlValidator.getInstance())
+        .wrap(
+          amphtmlValidator.getInstance(
+            "https://cdn.ampproject.org/v0/validator.20211101.deprecated.js"
+          )
+        )
         .then((validator: Validator) => {
           const result = validateAMP(validator, response);
 
