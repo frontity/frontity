@@ -78,6 +78,8 @@ const SmartAd: React.FC<SmartAdProps> = ({
   }
 
   useEffect(() => {
+    window.sas = window.sas || { cmd: [] };
+
     // If true, it means that `setup()` of the SmartAdserver has been called.
     if (isLoaded) {
       window.sas.cmd.push(function () {

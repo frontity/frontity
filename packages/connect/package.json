@@ -30,6 +30,6 @@
     "@frontity/types": "^1.10.1-beta.0"
   },
   "devDependencies": {
-    "react-test-renderer": "^17.0.1"
+    "react-test-renderer": "^18.2.0"
   }
 }

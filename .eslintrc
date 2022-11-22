@@ -13,6 +13,12 @@
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "error", // Checks effect dependencies
     "react/jsx-uses-react": "off",
+    "react/no-unknown-property": [
+      "error",
+      {
+        "ignore": ["css"]
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "import/named": "off",

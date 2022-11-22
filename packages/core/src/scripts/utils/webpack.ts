@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import webpack from "webpack";
 
 /**
@@ -20,13 +19,20 @@ export const webpackAsync = (
 
       const info = stats.toJson();
       // Compilation errors, like missing modules, syntax errors, etc.
-      if (stats.hasErrors()) return reject(new Error(info.errors));
+      if (stats.hasErrors()) {
+        info.errors.forEach((error) => {
+          console.error(error);
+          reject(error);
+        });
+      }
 
       // Compilation warnings, like dynamic modules, performance issues, etc.
-      console.log(stats.toString({
-        chunks: false,
-        colors: true,
-      }));
+      console.log(
+        stats.toString({
+          chunks: false,
+          colors: true,
+        })
+      );
 
       // Compilation was successful.
       return resolve(compiler);

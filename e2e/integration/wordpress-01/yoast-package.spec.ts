@@ -1,4 +1,4 @@
-import { ResolvePackages } from "../../../packages/types/src/utils";
+import { ResolvePackages } from "../../../packages/types/utils";
 import Router from "../../../packages/router/types";
 import type { taskTypes } from "../../plugins";
 const task: taskTypes = cy.task;

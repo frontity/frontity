@@ -1,5 +1,5 @@
 import "./public-path";
-import { hydrate } from "react-dom";
+import { hydrateRoot } from "react-dom/client";
 import { loadableReady } from "@loadable/component";
 import { getSnapshot } from "@frontity/connect";
 import App from "../app";
@@ -71,7 +71,8 @@ const client = async ({ packages, isHmr = false }: ClientOptions) => {
       loadableReady(() => {
         const MainApp = store.libraries.frontity.App;
 
-        hydrate(<MainApp />, window.document.getElementById("root"));
+        const container = document.getElementById("root");
+        hydrateRoot(container, <MainApp />);
 
         // Switch to CSR mode.
         store.state.frontity.rendering = "csr";

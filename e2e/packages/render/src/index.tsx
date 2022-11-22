@@ -13,7 +13,11 @@ const Counter = connect(() => {
   state.source.get(state.router.link);
 
   // Add 1 to the counter each time this component rerenders.
-  counter += 1;
+  if (typeof window !== "undefined") {
+    counter += 1;
+  } else {
+    counter = 1;
+  }
 
   return (
     <>

@@ -29,7 +29,7 @@
     "frontity": "^2.0.0-beta.0"
   },
   "devDependencies": {
-    "@types/react-test-renderer": "^17.0.0",
-    "react-test-renderer": "^17.0.1"
+    "@types/react-test-renderer": "^18.0.0",
+    "react-test-renderer": "^18.2.0"
   }
 }

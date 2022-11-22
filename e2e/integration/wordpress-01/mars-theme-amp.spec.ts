@@ -8,7 +8,9 @@ const task: taskTypes = cy.task;
 describe("mars-theme with AMP", () => {
   let validator: Validator;
   before(async () => {
-    validator = await amphtmlValidator.getInstance();
+    validator = await amphtmlValidator.getInstance(
+      "https://cdn.ampproject.org/v0/validator.20211101.deprecated.js"
+    );
   });
 
   before(() => {

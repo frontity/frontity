@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect, useConnect } from "frontity";
 import useInView from "@frontity/hooks/use-in-view";
 import UseInView from "../types";
 
@@ -12,10 +13,21 @@ if (typeof window !== "undefined") {
  *
  * @returns React element.
  */
-const Root: React.FC = () => {
+const Root: React.FC = connect(() => {
+  const { state } = useConnect<UseInView>();
   const { supported } = useInView();
-  return <div id="supported">supported: {supported.toString()}</div>;
-};
+
+  const params = new URLSearchParams(state.frontity.initialLink.slice(1));
+
+  return (
+    <div id="supported">
+      supported:{" "}
+      {typeof window !== "undefined" || !params.has("removeIO")
+        ? supported.toString()
+        : "false"}
+    </div>
+  );
+});
 
 const pkg: UseInView = {
   name: "e2e-use-in-view",

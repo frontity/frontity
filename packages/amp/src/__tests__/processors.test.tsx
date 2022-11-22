@@ -1,7 +1,7 @@
 import Html2React from "@frontity/html2react/src/libraries/component";
 import { HelmetProvider } from "frontity";
 import { amp, toBeValidAmpHtml } from "./__utilities__/amp-validator";
-import { FilledContext, HelmetData } from "react-helmet-async";
+import { FilledContext, HelmetServerState } from "react-helmet-async";
 
 import processors from "../processors";
 import { render } from "@testing-library/react";
@@ -12,7 +12,8 @@ expect.extend({ toBeValidAmpHtml });
 // https://github.com/staylor/react-helmet-async#usage-in-jest
 HelmetProvider.canUseDOM = false;
 
-const replaceHeadAttributes = (head: HelmetData) => head.script.toString();
+const replaceHeadAttributes = (head: HelmetServerState) =>
+  head.script.toString();
 
 test("Validate amp-img", async () => {
   const { container } = render(
