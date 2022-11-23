@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.0.0-beta.2
+
+### Major Changes
+
+- [`1737470f`](https://github.com/frontity/frontity/commit/1737470f0fe91f1079b4425c5782f5181dcf83e5) [#932](https://github.com/frontity/frontity/pull/932) Thanks [@luisherranz](https://github.com/luisherranz) and [@orballo](https://github.com/orballo)! - Update to React 18.
+
 ## 2.0.0-beta.1
 
 ### Patch Changes
