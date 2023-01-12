@@ -41,6 +41,16 @@ const defaultOptions = {
 };
 
 /**
+ * Flag to know if there's been a change before the component was mounted.
+ */
+const changedBeforeMounted = new WeakMap();
+
+/**
+ * Flag to know when a component has been mounted.
+ */
+const mounted = new WeakMap();
+
+/**
  * Connect a React component with the Frontity connect store and make it
  * reactive to its changes.
  *
@@ -73,20 +83,20 @@ export function connect(Comp, options) {
             scheduler: () => {
               // Trigger a new rerender if the component has already been
               // mounted.
-              if (reaction.current.mounted) setState({});
+              if (mounted.get(reaction.current)) setState({});
               // Annotate it as "changed" if the component has not been mounted
               // yet.
-              else reaction.current.changedBeforeMounted = true;
+              else changedBeforeMounted.set(reaction.current, true);
             },
             lazy: true,
           });
 
           // Initialize a flag to know if the component was finally mounted.
-          reaction.current.mounted = false;
+          mounted.set(reaction.current, false);
 
           // Initialize a flag to know if the was reaction was invalidated
           // before the component was mounted.
-          reaction.current.changedBeforeMounted = false;
+          changedBeforeMounted.set(reaction.current, false);
 
           return reaction.current;
         },
@@ -99,11 +109,11 @@ export function connect(Comp, options) {
 
       useEffect(() => {
         // Mark the component as mounted.
-        reaction.current.mounted = true;
+        mounted.set(reaction.current, true);
 
         // If there was a change before the component was mounted, trigger a
         // new rerender.
-        if (reaction.current.changedBeforeMounted) setState({});
+        if (changedBeforeMounted.get(reaction.current)) setState({});
 
         // Cleanup the reactive connections when the component is unmounted.
         return () => unobserve(reaction.current);
