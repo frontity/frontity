@@ -1,6 +1,8 @@
 ## 📣 Frontity Framework is not actively maintained! 
 
 > Frontity Framework is **not** under active development anymore. Pull requests and issues are not being actively reviewed. For more details, please see the [blog post](https://frontity.org/blog/frontity-is-joining-automattic/).
+> 
+> The team is now working on [**the WordPress Interactivity API**](https://make.wordpress.org/core/2023/03/30/proposal-the-interactivity-api-a-better-developer-experience-in-building-interactive-blocks/). This will unblock the same UX Frontity framework enabled but directly in WordPress Core, fully compatible with the new Site Editor.
 >
 > If you are **interested in becoming a maintainer and continuing the development of the framework** please do get in touch with one of the developers or let us know in [this community thread](https://community.frontity.org/t/frontity-framework-is-looking-for-maintainers/6178).
 
