@@ -19,6 +19,7 @@ export default async ({
   target,
   openBrowser = true,
   publicPath = "/static",
+  siteName,
 }: DevOptions): Promise<{
   /**
    * The app created by Express, ready to be used by webpack-dev-middleware.
@@ -60,7 +61,7 @@ export default async ({
   // Start listening.
   server.listen(port, () => {
     console.log(
-      `\n\nSERVER STARTED -- Listening @ ${url}\n  - mode: ${mode}\n  - target: ${target}\n  - public-path: ${publicPath}\n\n`
+      `\n\nSERVER STARTED -- Listening @ ${url}\n  - mode: ${mode}\n  - target: ${target}\n  - public-path: ${publicPath}\n  - site-name: ${siteName}\n\n`
     );
   });
 

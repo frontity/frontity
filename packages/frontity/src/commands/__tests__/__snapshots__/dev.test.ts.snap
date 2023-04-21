@@ -10,6 +10,7 @@ Array [
       "openBrowser": true,
       "port": 3000,
       "publicPath": "/static/",
+      "siteName": undefined,
       "target": "module",
     },
   ],
