@@ -51,6 +51,7 @@ export const serverSideRendering = async (
   // Init variables.
   const output = {
     result: "",
+    styles: "",
     head,
     scripts,
   };
@@ -66,10 +67,16 @@ export const serverSideRendering = async (
     });
 
     // Call the render function with the wrapped App.
-    output.result = render({
+    const rendered = render({
       App,
       collectChunks: extractor.collectChunks.bind(extractor),
+      publicPath: ctx.state.store.state.frontity.options.publicPath.replace(
+        /(\/?)$/,
+        "/"
+      ),
     });
+
+    Object.assign(output, rendered);
 
     // Get the linkTags. Crossorigin needed for type="module".
     const crossorigin = moduleStats && es5Stats ? { crossorigin: "" } : {};
@@ -124,7 +131,15 @@ export const serverSideRendering = async (
     // Run afterSSR actions.
     await runAfterSSRActions(store, ctx);
 
-    output.result = render({ App });
+    const rendered = render({
+      App,
+      publicPath: ctx.state.store.state.frontity.options.publicPath.replace(
+        /(\/?)$/,
+        "/"
+      ),
+    });
+
+    Object.assign(output, rendered);
   }
 
   // Get static head strings.

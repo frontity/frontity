@@ -9,6 +9,7 @@ import { Template } from "../../../../types";
  */
 const html: Template = ({
   html,
+  styles,
   scripts,
   head,
   htmlAttributes,
@@ -20,6 +21,7 @@ const html: Template = ({
         <meta name="generator" content="Frontity">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         ${head ? head.join("\n") : ""}
+        ${styles}
       </head>
       <body ${bodyAttributes || ""}>
         <div id="root">${html}</div>

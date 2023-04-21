@@ -24,7 +24,6 @@
   "dependencies": {
     "ts-essentials": "^6.0.0",
     "@types/babel-core": "^6.25.6",
-    "@types/webpack": "^4.41.25",
     "@types/koa": "^2.11.6"
   }
 }

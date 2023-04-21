@@ -1,6 +1,7 @@
 import * as hash from "hash-it";
 import * as path from "path";
 import getWebpack from "..";
+import type { WebpackConfigs } from "../../../../types";
 
 jest.mock("path");
 const mockedPath = path as jest.Mocked<typeof path>;
@@ -42,26 +43,43 @@ const entryPoints = [
   },
 ];
 
+const removeAbsolutePath = (path: string) =>
+  path.replace(/^.*\/node_modules\//, "");
+
+const mapFallbacks = (configs: WebpackConfigs) => {
+  Object.keys(configs).forEach((mode: "module" | "es5" | "server") => {
+    Object.entries(configs[mode].resolve.fallback).forEach(([key, value]) => {
+      configs[mode].resolve.fallback[key] = removeAbsolutePath(value);
+    });
+  });
+
+  return configs;
+};
+
 test("Webpack returns for development", () => {
-  expect(
-    getWebpack({
-      mode: "development",
-      babel: babel["development"],
-      frontity,
-      entryPoints,
-    })
-  ).toMatchSnapshot();
+  let configs = getWebpack({
+    mode: "development",
+    babel: babel["development"],
+    frontity,
+    entryPoints,
+  });
+
+  configs = mapFallbacks(configs);
+
+  expect(configs).toMatchSnapshot();
 });
 
 test("Webpack returns for production", () => {
-  expect(
-    getWebpack({
-      mode: "production",
-      babel: babel["production"],
-      frontity,
-      entryPoints,
-    })
-  ).toMatchSnapshot();
+  let configs = getWebpack({
+    mode: "production",
+    babel: babel["production"],
+    frontity,
+    entryPoints,
+  });
+
+  configs = mapFallbacks(configs);
+
+  expect(configs).toMatchSnapshot();
 });
 
 test("Webpack includes the Bundle Analyzer plugin if specified", () => {
